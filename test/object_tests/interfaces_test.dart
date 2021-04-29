@@ -51,8 +51,8 @@ void main() {
     expect(ifop2.methods[0].isAbstract, isTrue);
     expect(ifop2.methods[0].isVirtual, isTrue);
 
-    expect(ifop2.methods[0].returnType.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(ifop2.methods[0].returnType.typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(ifop2.methods[0].returnType.typeIdentifier.name,
         equals('Windows.Win32.Com.HRESULT'));
     expect(ifop2.methods[0].name, equals('SetOperationFlags2'));
@@ -60,8 +60,8 @@ void main() {
     expect(ifop2.methods[0].parameters.length, equals(1));
     expect(ifop2.methods[0].parameters[0].isInParam, isTrue);
 
-    expect(ifop2.methods[0].parameters[0].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(ifop2.methods[0].parameters[0].typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(ifop2.methods[0].parameters[0].typeIdentifier.name,
         equals('Windows.Win32.Shell.FILE_OPERATION_FLAGS2'));
     expect(ifop2.methods[0].parameters[0].name, equals('operationFlags2'));

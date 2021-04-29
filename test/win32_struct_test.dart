@@ -14,24 +14,23 @@ void main() {
   test('Struct primitive field has expected name and type', () {
     final xform = scope.findTypeDef('Windows.Win32.Gdi.XFORM')!;
     expect(xform.fields.first.name, equals('eM11'));
-    expect(xform.fields.first.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_R4));
+    expect(xform.fields.first.typeIdentifier.baseType, equals(BaseType.Float));
   });
 
   test('Struct valuetype field has expected name and type', () {
     final procInfo =
         scope.findTypeDef('Windows.Win32.SystemServices.PROCESS_INFORMATION')!;
     expect(procInfo.fields.first.name, equals('hProcess'));
-    expect(procInfo.fields.first.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(procInfo.fields.first.typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(procInfo.fields.first.typeIdentifier.name, endsWith('HANDLE'));
   });
 
   test('Struct array field has expected name and type', () {
     final procInfo = scope.findTypeDef('Windows.Win32.Gdi.BITMAPINFO')!;
     expect(procInfo.fields.last.name, equals('bmiColors'));
-    expect(procInfo.fields.last.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_ARRAY));
+    expect(procInfo.fields.last.typeIdentifier.baseType,
+        equals(BaseType.ArrayTypeModifier));
     expect(
         procInfo.fields.last.typeIdentifier.typeArg?.name, endsWith('RGBQUAD'));
   });
@@ -39,10 +38,10 @@ void main() {
   test('Struct array field has expected name and type 2', () {
     final procInfo = scope.findTypeDef('Windows.Win32.Gdi.DESIGNVECTOR')!;
     expect(procInfo.fields.last.name, equals('dvValues'));
-    expect(procInfo.fields.last.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(procInfo.fields.last.typeIdentifier.typeArg?.corType,
-        equals(CorElementType.ELEMENT_TYPE_I4));
+    expect(procInfo.fields.last.typeIdentifier.baseType,
+        equals(BaseType.ArrayTypeModifier));
+    expect(procInfo.fields.last.typeIdentifier.typeArg?.baseType,
+        equals(BaseType.Int32));
     expect(procInfo.fields.last.typeIdentifier.arrayDimensions, equals([16]));
   });
 
@@ -51,10 +50,10 @@ void main() {
         scope.findTypeDef('Windows.Win32.Monitor.PHYSICAL_MONITOR')!;
     final szPhysicalMonitorDescription = procInfo.fields[1];
 
-    expect(szPhysicalMonitorDescription.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(szPhysicalMonitorDescription.typeIdentifier.typeArg?.corType,
-        equals(CorElementType.ELEMENT_TYPE_CHAR));
+    expect(szPhysicalMonitorDescription.typeIdentifier.baseType,
+        equals(BaseType.ArrayTypeModifier));
+    expect(szPhysicalMonitorDescription.typeIdentifier.typeArg?.baseType,
+        equals(BaseType.Char));
   });
 
   test('Small struct array fields have the correct dimensions', () {

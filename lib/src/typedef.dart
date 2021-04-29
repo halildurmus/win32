@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'classlayout.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'event.dart';
 import 'field.dart';
 import 'method.dart';
@@ -20,7 +20,6 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils/exception.dart';
-import 'utils/string.dart';
 import 'utils/typetuple.dart';
 
 enum TypeVisibility {
@@ -80,7 +79,7 @@ class TypeDef extends TokenObject
 
   /// Instantiate a typedef from a TypeDef token.
   factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
-    final szTypeDef = stralloc(MAX_STRING_SIZE);
+    final szTypeDef = wsalloc(MAX_STRING_SIZE);
     final pchTypeDef = calloc<ULONG>();
     final pdwTypeDefFlags = calloc<DWORD>();
     final ptkExtends = calloc<mdToken>();
@@ -111,7 +110,7 @@ class TypeDef extends TokenObject
   /// metadata file, from which the TypeDef can be found and returned.
   factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
     final ptkResolutionScope = calloc<mdToken>();
-    final szName = stralloc(MAX_STRING_SIZE);
+    final szName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
 
     try {

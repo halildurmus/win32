@@ -4,12 +4,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-import 'utils/string.dart';
 
 /// An event.
 class Event extends TokenObject with CustomAttributesMixin {
@@ -39,7 +38,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   /// Creates an event object from its given token.
   factory Event.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
-    final szEvent = stralloc(MAX_STRING_SIZE);
+    final szEvent = wsalloc(MAX_STRING_SIZE);
     final pchEvent = calloc<ULONG>();
     final pdwEventFlags = calloc<DWORD>();
     final ptkEventType = calloc<mdToken>();

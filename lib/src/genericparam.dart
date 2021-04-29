@@ -4,7 +4,8 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
+import 'enums.dart';
 import 'genericparamconstraint.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
@@ -12,7 +13,6 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
-import 'utils/string.dart';
 
 enum Variance { nonvariant, covariant, contravariant }
 
@@ -54,7 +54,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     final pdwParamFlags = calloc<DWORD>();
     final ptOwner = calloc<mdToken>();
     final reserved = calloc<DWORD>();
-    final wzName = stralloc(MAX_STRING_SIZE);
+    final wzName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
 
     try {

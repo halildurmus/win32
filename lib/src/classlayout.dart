@@ -4,7 +4,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'scope.dart';
 
 class FieldOffset {

@@ -4,11 +4,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'utils/exception.dart';
-import 'utils/string.dart';
 
 enum StringMarshalConvention { notSpecified, ansi, unicode, auto }
 
@@ -31,10 +30,10 @@ class PinvokeMap extends TokenObject {
 
   factory PinvokeMap.fromToken(Scope scope, int token) {
     final pdwMappingFlags = calloc<DWORD>();
-    final szImportName = stralloc(MAX_STRING_SIZE);
+    final szImportName = wsalloc(MAX_STRING_SIZE);
     final pchImportName = calloc<ULONG>();
     final ptkImportDLL = calloc<mdModuleRef>();
-    final szModuleName = stralloc(MAX_STRING_SIZE);
+    final szModuleName = wsalloc(MAX_STRING_SIZE);
     final pchModuleName = calloc<ULONG>();
 
     try {

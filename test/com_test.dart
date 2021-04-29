@@ -63,12 +63,12 @@ void main() {
       final param = getName.parameters.first;
 
       expect(param.name, equals('pszNetworkName'));
-      expect(param.typeIdentifier.corType,
-          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(
+          param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
       expect(param.typeIdentifier.typeArg, isNotNull);
       expect(param.typeIdentifier.typeArg?.name, endsWith('BSTR'));
-      expect(param.typeIdentifier.typeArg?.corType,
-          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+      expect(param.typeIdentifier.typeArg?.baseType,
+          equals(BaseType.ValueTypeModifier));
     });
 
     test('COM method strings are represented accurately', () {
@@ -76,8 +76,7 @@ void main() {
       final param = setName.parameters.first;
 
       expect(param.name, equals('szNetworkNewName'));
-      expect(param.typeIdentifier.corType,
-          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+      expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
       expect(param.typeIdentifier.name, endsWith('BSTR'));
       expect(param.typeIdentifier.typeArg, isNull);
     });
@@ -87,8 +86,8 @@ void main() {
       final param = getNetworkId.parameters.first;
 
       expect(param.name, equals('pgdGuidNetworkId'));
-      expect(param.typeIdentifier.corType,
-          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(
+          param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
       expect(param.typeIdentifier.typeArg, isNotNull);
       expect(param.typeIdentifier.typeArg?.name, endsWith('Guid'));
     });
@@ -103,11 +102,10 @@ void main() {
       final param = isConnected.parameters.first;
 
       expect(param.name, equals('pbIsConnected'));
-      expect(param.typeIdentifier.corType,
-          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(
+          param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
       expect(param.typeIdentifier.typeArg, isNotNull);
-      expect(param.typeIdentifier.typeArg?.corType,
-          equals(CorElementType.ELEMENT_TYPE_I2));
+      expect(param.typeIdentifier.typeArg?.baseType, equals(BaseType.Int16));
     });
   });
 
@@ -123,8 +121,7 @@ void main() {
     expect(param.name, equals('options'));
     expect(param.typeIdentifier.name,
         equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
-    expect(param.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
     expect(param.typeIdentifier.type?.parent?.name, equals('System.Enum'));
     expect(param.typeIdentifier.typeArg, isNull);
     expect(scope.enums.firstWhere((p) => p.name == param.typeIdentifier.name),

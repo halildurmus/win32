@@ -8,41 +8,12 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
-import 'constants.dart';
+import 'com/constants.dart';
+import 'enums.dart';
 import 'scope.dart';
 import 'utils/exception.dart';
 
 const MAX_STRING_SIZE = 256;
-
-/// The type of object represented by a given token.
-enum TokenType {
-  Module,
-  TypeRef,
-  TypeDef,
-  FieldDef,
-  MethodDef,
-  ParamDef,
-  InterfaceImpl,
-  MemberRef,
-  CustomAttribute,
-  Permission,
-  Signature,
-  Event,
-  Property,
-  ModuleRef,
-  TypeSpec,
-  Assembly,
-  AssemblyRef,
-  File,
-  ExportedType,
-  ManifestResource,
-  GenericParam,
-  MethodSpec,
-  GenericParamConstraint,
-  String,
-  Name,
-  BaseType
-}
 
 /// The base object for metadata objects.
 ///
@@ -69,7 +40,7 @@ abstract class TokenObject {
   ///
   /// This should return true for most objects, but as noted in
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding,
-  /// some types are markers that shoudl never be resolved. For example, WinRT
+  /// some types are markers that should never be resolved. For example, WinRT
   /// uses the CLR `System.Guid` type as a marker, but it should not be resolved
   /// to the .NET type system.
   bool get isResolvedToken => reader.IsValidToken(token) == TRUE;

@@ -1,4 +1,4 @@
-import 'constants.dart';
+import 'com/constants.dart';
 
 /// Code type of contained code.
 enum CodeType { IL, native, optIL, runtime }

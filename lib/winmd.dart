@@ -14,8 +14,8 @@ library winmd;
 
 export 'src/base.dart';
 export 'src/classlayout.dart';
-export 'src/constants.dart';
 export 'src/customattribute.dart';
+export 'src/enums.dart';
 export 'src/event.dart';
 export 'src/field.dart';
 export 'src/genericparam.dart';

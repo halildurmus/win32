@@ -14,7 +14,6 @@ import 'pekind.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
-import 'utils/string.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
@@ -30,7 +29,7 @@ class Scope {
   final _typedefs = <TypeDef>[];
 
   Scope(this.reader) {
-    final szName = stralloc(MAX_STRING_SIZE);
+    final szName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
     final pmvid = calloc<GUID>();
     try {
@@ -129,7 +128,7 @@ class Scope {
     final phEnum = calloc<HCORENUM>();
     final rgStrings = calloc<mdString>();
     final pcStrings = calloc<ULONG>();
-    final szString = stralloc(MAX_STRING_SIZE);
+    final szString = wsalloc(MAX_STRING_SIZE);
     final pchString = calloc<ULONG>();
 
     try {
@@ -170,7 +169,7 @@ class Scope {
   PEKind get executableKind => PEKind(reader);
 
   String get versionNumber {
-    final pwzBuf = stralloc(MAX_STRING_SIZE);
+    final pwzBuf = wsalloc(MAX_STRING_SIZE);
     final pccBufSize = calloc<DWORD>();
     try {
       final hr = reader.GetVersionString(pwzBuf, MAX_STRING_SIZE, pccBufSize);

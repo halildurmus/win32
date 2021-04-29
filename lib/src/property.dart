@@ -9,14 +9,13 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils/string.dart';
 import 'utils/typetuple.dart';
 
 /// A property object.
@@ -51,7 +50,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   /// Creates a property object from its given token.
   factory Property.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
-    final szProperty = stralloc(MAX_STRING_SIZE);
+    final szProperty = wsalloc(MAX_STRING_SIZE);
     final pchProperty = calloc<ULONG>();
     final pdwPropFlags = calloc<DWORD>();
     final ppvSigBlob = calloc<PCCOR_SIGNATURE>();

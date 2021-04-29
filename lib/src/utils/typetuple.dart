@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import '../constants.dart';
+import '../com/constants.dart';
 import '../scope.dart';
 import '../typedef.dart';
 import '../typeidentifier.dart';

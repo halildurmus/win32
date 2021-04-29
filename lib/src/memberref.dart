@@ -11,7 +11,6 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
-import 'utils/string.dart';
 
 class MemberRef extends TokenObject {
   final String name;
@@ -23,7 +22,7 @@ class MemberRef extends TokenObject {
   /// Creates a module object from its given token.
   factory MemberRef.fromToken(Scope scope, int token) {
     final ptk = calloc<mdToken>();
-    final szMember = stralloc(MAX_STRING_SIZE);
+    final szMember = wsalloc(MAX_STRING_SIZE);
     final pchMember = calloc<ULONG>();
     final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
     final pcbSigBlob = calloc<ULONG>();

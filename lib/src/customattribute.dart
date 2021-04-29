@@ -13,7 +13,6 @@ import 'memberref.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-// import 'utils/string.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {

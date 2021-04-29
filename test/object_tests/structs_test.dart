@@ -30,18 +30,15 @@ void main() {
 
     expect(accel.fields.length, equals(3));
     expect(accel.fields[0].name, equals('fVirt'));
-    expect(accel.fields[0].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_U1));
+    expect(accel.fields[0].typeIdentifier.baseType, equals(BaseType.Uint8));
     expect(accel.fields[0].fieldAccess, equals(FieldAccess.public));
 
     expect(accel.fields[1].name, equals('key'));
-    expect(accel.fields[1].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_U2));
+    expect(accel.fields[1].typeIdentifier.baseType, equals(BaseType.Uint16));
     expect(accel.fields[1].fieldAccess, equals(FieldAccess.public));
 
     expect(accel.fields[2].name, equals('cmd'));
-    expect(accel.fields[2].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_U2));
+    expect(accel.fields[2].typeIdentifier.baseType, equals(BaseType.Uint16));
     expect(accel.fields[2].fieldAccess, equals(FieldAccess.public));
   });
 }

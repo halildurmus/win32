@@ -10,7 +10,6 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
-import 'utils/string.dart';
 
 class ModuleRef extends TokenObject with CustomAttributesMixin {
   final String name;
@@ -19,7 +18,7 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
 
   /// Creates a module object from its given token.
   factory ModuleRef.fromToken(Scope scope, int token) {
-    final szName = stralloc(MAX_STRING_SIZE);
+    final szName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
 
     try {

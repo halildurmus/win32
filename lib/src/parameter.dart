@@ -9,13 +9,12 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
-import 'utils/string.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
@@ -35,7 +34,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   factory Parameter.fromToken(Scope scope, int token) {
     final ptkMethodDef = calloc<mdMethodDef>();
     final pulSequence = calloc<ULONG>();
-    final szName = stralloc(MAX_STRING_SIZE);
+    final szName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
     final pdwAttr = calloc<DWORD>();
     final pdwCPlusTypeFlag = calloc<DWORD>();

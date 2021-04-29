@@ -90,8 +90,8 @@ void main() {
     expect(iai.methods[0].vTableLayout, equals(VtableLayout.newSlot));
     expect(iai.methods[0].isAbstract, isTrue);
     expect(iai.methods[0].isVirtual, isTrue);
-    expect(iai.methods[0].returnType.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_U4));
+    expect(iai.methods[0].returnType.typeIdentifier.baseType,
+        equals(BaseType.Uint32));
     expect(iai.methods[0].name, equals('get_Id'));
     expect(iai.methods[0].implFeatures.codeType, equals(CodeType.runtime));
     expect(iai.methods[0].implFeatures.isManaged, isTrue);
@@ -99,8 +99,8 @@ void main() {
     expect(iai.properties.length, equals(3));
     expect(iai.properties[0].typeIdentifier.name,
         equals('Windows.Foundation.HResult'));
-    expect(iai.properties[0].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(iai.properties[0].typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(iai.properties[0].name, equals('ErrorCode'));
     expect(iai.properties[0].hasGetter, isTrue);
     expect(iai.properties[0].getterMethod?.name, equals('get_ErrorCode'));

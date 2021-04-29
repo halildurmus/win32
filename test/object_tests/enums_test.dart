@@ -31,30 +31,29 @@ void main() {
     expect(hand.fields[0].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[0].isSpecialName, isTrue);
     expect(hand.fields[0].isRTSpecialName, isTrue);
-    expect(hand.fields[0].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_I4));
+    expect(hand.fields[0].typeIdentifier.baseType, equals(BaseType.Int32));
     expect(hand.fields[0].name, equals('value__'));
 
     expect(hand.fields[1].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[1].isStatic, isTrue);
     expect(hand.fields[1].isLiteral, isTrue);
-    expect(hand.fields[1].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(hand.fields[1].typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(hand.fields[1].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.HANDEDNESS'));
     expect(hand.fields[1].name, equals('HANDEDNESS_LEFT'));
-    expect(hand.fields[1].fieldType, equals(CorElementType.ELEMENT_TYPE_I4));
+    expect(hand.fields[1].fieldType, equals(BaseType.Int32));
     expect(hand.fields[1].value, equals(0));
 
     expect(hand.fields[2].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[2].isStatic, isTrue);
     expect(hand.fields[2].isLiteral, isTrue);
-    expect(hand.fields[2].typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(hand.fields[2].typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
     expect(hand.fields[2].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.HANDEDNESS'));
     expect(hand.fields[2].name, equals('HANDEDNESS_RIGHT'));
-    expect(hand.fields[2].fieldType, equals(CorElementType.ELEMENT_TYPE_I4));
+    expect(hand.fields[2].fieldType, equals(BaseType.Int32));
     expect(hand.fields[2].value, equals(1));
   });
 }

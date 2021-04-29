@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
 import 'methodimpls.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
@@ -21,7 +21,6 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils/exception.dart';
-import 'utils/string.dart';
 import 'utils/typetuple.dart';
 
 enum MemberAccess {
@@ -61,7 +60,7 @@ class Method extends TokenObject
   /// Creates a method object from its given token.
   factory Method.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
-    final szMethod = stralloc(MAX_STRING_SIZE);
+    final szMethod = wsalloc(MAX_STRING_SIZE);
     final pchMethod = calloc<ULONG>();
     final pdwAttr = calloc<DWORD>();
     final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
@@ -183,7 +182,7 @@ class Method extends TokenObject
 
   ModuleRef get module {
     final pdwMappingFlags = calloc<DWORD>();
-    final szImportName = stralloc(MAX_STRING_SIZE);
+    final szImportName = wsalloc(MAX_STRING_SIZE);
     final pchImportName = calloc<ULONG>();
     final ptkImportDLL = calloc<mdModuleRef>();
     try {

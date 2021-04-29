@@ -2,48 +2,189 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// Constant values that go with the underlying COM definitions. These should not
+// need to be exported to external package consumers, since they should be
+// converted to a more friendly equivalent, either as a property or enum on the
+// object.
+
 // COM error returned when a Find* method returns no results
+import '../utils/exception.dart';
+
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
 enum CorElementType {
+  /// Used internally.
   ELEMENT_TYPE_END,
+
+  /// A void type.
   ELEMENT_TYPE_VOID,
+
+  /// A Boolean type.
   ELEMENT_TYPE_BOOLEAN,
+
+  /// A character type.
   ELEMENT_TYPE_CHAR,
+
+  /// A signed 1-byte integer.
   ELEMENT_TYPE_I1,
+
+  /// An unsigned 1-byte integer.
   ELEMENT_TYPE_U1,
+
+  /// A signed 2-byte integer.
   ELEMENT_TYPE_I2,
+
+  /// An unsigned 2-byte integer.
   ELEMENT_TYPE_U2,
+
+  /// A signed 4-byte integer.
   ELEMENT_TYPE_I4,
+
+  /// An unsigned 4-byte integer.
   ELEMENT_TYPE_U4,
+
+  /// A signed 8-byte integer.
   ELEMENT_TYPE_I8,
+
+  /// An unsigned 8-byte integer.
   ELEMENT_TYPE_U8,
+
+  /// A 4-byte floating point.
   ELEMENT_TYPE_R4,
+
+  /// An 8-byte floating point.
   ELEMENT_TYPE_R8,
+
+  /// A System.String type.
   ELEMENT_TYPE_STRING,
+
+  /// A pointer type modifier.
   ELEMENT_TYPE_PTR,
+
+  /// A reference type modifier.
   ELEMENT_TYPE_BYREF,
+
+  /// A value type modifier.
   ELEMENT_TYPE_VALUETYPE,
+
+  /// A class type modifier.
   ELEMENT_TYPE_CLASS,
+
+  /// A class variable type modifier.
   ELEMENT_TYPE_VAR,
+
+  /// A multi-dimensional array type modifier.
   ELEMENT_TYPE_ARRAY,
+
+  /// A type modifier for generic types.
   ELEMENT_TYPE_GENERICINST,
+
+  /// A typed reference.
   ELEMENT_TYPE_TYPEDBYREF,
+
+  ELEMENT_TYPE_0x17,
+
+  /// Size of a native integer.
   ELEMENT_TYPE_I,
+
+  /// Size of an unsigned native integer.
   ELEMENT_TYPE_U,
+
+  ELEMENT_TYPE_0x1A,
+
+  /// A pointer to a function.
   ELEMENT_TYPE_FNPTR,
+
+  /// A System.Object type.
   ELEMENT_TYPE_OBJECT,
+
+  /// A single-dimensional, zero lower-bound array type modifier.
   ELEMENT_TYPE_SZARRAY,
+
+  /// A method variable type modifier.
   ELEMENT_TYPE_MVAR,
+
+  /// A C language required modifier.
   ELEMENT_TYPE_CMOD_REQD,
+
+  /// A C language optional modifier.
   ELEMENT_TYPE_CMOD_OPT,
-  ELEMENT_TYPE_INTERNAL,
-  ELEMENT_TYPE_MAX,
-  ELEMENT_TYPE_MODIFIER,
+
+  /// A type modifier that is a sentinel for a list of a variable number of
+  /// parameters.
   ELEMENT_TYPE_SENTINEL,
-  ELEMENT_TYPE_PINNED
+}
+
+CorElementType parseCorElementType(int corElementTypeValue) {
+  switch (corElementTypeValue) {
+    case 0x1:
+      return CorElementType.ELEMENT_TYPE_VOID;
+    case 0x2:
+      return CorElementType.ELEMENT_TYPE_BOOLEAN;
+    case 0x3:
+      return CorElementType.ELEMENT_TYPE_CHAR;
+    case 0x4:
+      return CorElementType.ELEMENT_TYPE_I1;
+    case 0x5:
+      return CorElementType.ELEMENT_TYPE_U1;
+    case 0x6:
+      return CorElementType.ELEMENT_TYPE_I2;
+    case 0x7:
+      return CorElementType.ELEMENT_TYPE_U2;
+    case 0x8:
+      return CorElementType.ELEMENT_TYPE_I4;
+    case 0x9:
+      return CorElementType.ELEMENT_TYPE_U4;
+    case 0xa:
+      return CorElementType.ELEMENT_TYPE_I8;
+    case 0xb:
+      return CorElementType.ELEMENT_TYPE_U8;
+    case 0xc:
+      return CorElementType.ELEMENT_TYPE_R4;
+    case 0xd:
+      return CorElementType.ELEMENT_TYPE_R8;
+    case 0xe:
+      return CorElementType.ELEMENT_TYPE_STRING;
+    case 0xf:
+      return CorElementType.ELEMENT_TYPE_PTR;
+    case 0x10:
+      return CorElementType.ELEMENT_TYPE_BYREF;
+    case 0x11:
+      return CorElementType.ELEMENT_TYPE_VALUETYPE;
+    case 0x12:
+      return CorElementType.ELEMENT_TYPE_CLASS;
+    case 0x13:
+      return CorElementType.ELEMENT_TYPE_VAR;
+    case 0x14:
+      return CorElementType.ELEMENT_TYPE_ARRAY;
+    case 0x15:
+      return CorElementType.ELEMENT_TYPE_GENERICINST;
+    case 0x16:
+      return CorElementType.ELEMENT_TYPE_TYPEDBYREF;
+    case 0x18:
+      return CorElementType.ELEMENT_TYPE_I;
+    case 0x19:
+      return CorElementType.ELEMENT_TYPE_U;
+    case 0x1B:
+      return CorElementType.ELEMENT_TYPE_FNPTR;
+    case 0x1C:
+      return CorElementType.ELEMENT_TYPE_OBJECT;
+    case 0x1D:
+      return CorElementType.ELEMENT_TYPE_SZARRAY;
+    case 0x1E:
+      return CorElementType.ELEMENT_TYPE_MVAR;
+    case 0x1F:
+      return CorElementType.ELEMENT_TYPE_CMOD_REQD;
+    case 0x20:
+      return CorElementType.ELEMENT_TYPE_CMOD_OPT;
+    case 0x41:
+      return CorElementType.ELEMENT_TYPE_SENTINEL;
+    default:
+      throw WinmdException(
+          'Unrecognized or internal type $corElementTypeValue');
+  }
 }
 
 /// Contains values that describe the metadata of an event.

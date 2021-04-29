@@ -9,14 +9,14 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'constants.dart';
+import 'com/constants.dart';
+import 'enums.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'pinvokemap.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils/string.dart';
 import 'utils/typetuple.dart';
 
 enum FieldAccess {
@@ -30,7 +30,7 @@ enum FieldAccess {
 }
 
 class Field extends TokenObject with CustomAttributesMixin {
-  final CorElementType fieldType;
+  final BaseType fieldType;
   final String name;
   final Uint8List signatureBlob;
   final TypeIdentifier typeIdentifier;
@@ -46,7 +46,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   /// Creates a field object from its given token.
   factory Field.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
-    final szField = stralloc(MAX_STRING_SIZE);
+    final szField = wsalloc(MAX_STRING_SIZE);
     final pchField = calloc<ULONG>();
     final pdwAttr = calloc<DWORD>();
     final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
@@ -87,7 +87,7 @@ class Field extends TokenObject with CustomAttributesMixin {
             fieldName,
             ppValue.value != nullptr ? ppValue.value.value : 0,
             typeTuple.typeIdentifier,
-            CorElementType.values[cPlusTypeFlag],
+            parseCorElementType(cPlusTypeFlag).baseType,
             pdwAttr.value,
             signature);
       } else {
