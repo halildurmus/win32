@@ -1,4 +1,4 @@
-## 1.0.0-pre.11
+## 1.0.0-pre.12
 
 - Update to Dart 2.13, which includes new FFI support for packed structs, type
   aliases and arrays.
@@ -12,6 +12,7 @@
   better fit for win32, since it will evolve with the generated output.
 - Add support for events, properties, and delegates.
 - Expose scope in TokenObject.
+- Clearer abstraction between underlying COM calls and external API.
 - Update to latest win32metadata `.winmd` file.
 - Support generic parameters and generic parameter constraints.
 - Add support for GetPEKind and GetUserVersionString.
