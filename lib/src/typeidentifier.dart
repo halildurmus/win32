@@ -13,9 +13,7 @@ class TypeIdentifier {
   List<int>? arrayDimensions;
 
   /// Underlying base type represented by this class.
-  CorElementType corType;
-
-  BaseType get baseType => corType.baseType;
+  BaseType baseType;
 
   // The value identifying the generic parameter sequence, if there is one.
   //
@@ -27,10 +25,11 @@ class TypeIdentifier {
   /// The name of the type (for example, `Windows.Storage.IStorageFile` or
   /// `LPWSTR`), if it is not a primitive type.
   ///
-  /// For a type like [CorElementType.ELEMENT_TYPE_I1], this is empty.
+  /// For a type like [BaseType.Int8], this is empty.
   String name;
 
-  /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
+  /// The class or interface, if the type is (for example)
+  /// [BaseType.ClassTypeModifier].
   TypeDef? type;
 
   /// Any arguments (for example, the `Uint16` in a `Pointer<Uint16>`).
@@ -40,11 +39,11 @@ class TypeIdentifier {
   /// `MYSTRUCT`).
   TypeIdentifier? typeArg;
 
-  TypeIdentifier(this.corType, [this.name = '', this.type]);
+  TypeIdentifier(this.baseType, [this.name = '', this.type]);
 
   factory TypeIdentifier.fromValue(int corElementTypeValue) =>
       TypeIdentifier(parseCorElementType(corElementTypeValue));
 
   @override
-  String toString() => corType.toString().split('.').last;
+  String toString() => baseType.toString().split('.').last;
 }

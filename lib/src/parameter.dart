@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/constants.dart';
+import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
@@ -83,15 +84,8 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           Scope scope, int methodToken, TypeIdentifier runtimeType) =>
       Parameter(scope, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
 
-  factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
-      scope,
-      0,
-      methodToken,
-      0,
-      0,
-      TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID),
-      '',
-      Uint8List(0));
+  factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(scope,
+      0, methodToken, 0, 0, TypeIdentifier(BaseType.Void), '', Uint8List(0));
 
   @override
   String toString() => name;

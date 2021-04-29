@@ -7,180 +7,189 @@
 // converted to a more friendly equivalent, either as a property or enum on the
 // object.
 
-// COM error returned when a Find* method returns no results
+import '../enums.dart';
 import '../utils/exception.dart';
 
+/// COM error returned when a Find* method returns no results
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
-enum CorElementType {
+class CorElementType {
   /// Used internally.
-  ELEMENT_TYPE_END,
+  static const ELEMENT_TYPE_END = 0x0;
 
   /// A void type.
-  ELEMENT_TYPE_VOID,
+  static const ELEMENT_TYPE_VOID = 0x1;
 
   /// A Boolean type.
-  ELEMENT_TYPE_BOOLEAN,
+  static const ELEMENT_TYPE_BOOLEAN = 0x2;
 
   /// A character type.
-  ELEMENT_TYPE_CHAR,
+  static const ELEMENT_TYPE_CHAR = 0x3;
 
   /// A signed 1-byte integer.
-  ELEMENT_TYPE_I1,
+  static const ELEMENT_TYPE_I1 = 0x4;
 
   /// An unsigned 1-byte integer.
-  ELEMENT_TYPE_U1,
+  static const ELEMENT_TYPE_U1 = 0x5;
 
   /// A signed 2-byte integer.
-  ELEMENT_TYPE_I2,
+  static const ELEMENT_TYPE_I2 = 0x6;
 
   /// An unsigned 2-byte integer.
-  ELEMENT_TYPE_U2,
+  static const ELEMENT_TYPE_U2 = 0x7;
 
   /// A signed 4-byte integer.
-  ELEMENT_TYPE_I4,
+  static const ELEMENT_TYPE_I4 = 0x8;
 
   /// An unsigned 4-byte integer.
-  ELEMENT_TYPE_U4,
+  static const ELEMENT_TYPE_U4 = 0x9;
 
   /// A signed 8-byte integer.
-  ELEMENT_TYPE_I8,
+  static const ELEMENT_TYPE_I8 = 0xa;
 
   /// An unsigned 8-byte integer.
-  ELEMENT_TYPE_U8,
+  static const ELEMENT_TYPE_U8 = 0xb;
 
   /// A 4-byte floating point.
-  ELEMENT_TYPE_R4,
+  static const ELEMENT_TYPE_R4 = 0xc;
 
   /// An 8-byte floating point.
-  ELEMENT_TYPE_R8,
+  static const ELEMENT_TYPE_R8 = 0xd;
 
   /// A System.String type.
-  ELEMENT_TYPE_STRING,
+  static const ELEMENT_TYPE_STRING = 0xe;
 
   /// A pointer type modifier.
-  ELEMENT_TYPE_PTR,
+  static const ELEMENT_TYPE_PTR = 0xf;
 
   /// A reference type modifier.
-  ELEMENT_TYPE_BYREF,
+  static const ELEMENT_TYPE_BYREF = 0x10;
 
   /// A value type modifier.
-  ELEMENT_TYPE_VALUETYPE,
+  static const ELEMENT_TYPE_VALUETYPE = 0x11;
 
   /// A class type modifier.
-  ELEMENT_TYPE_CLASS,
+  static const ELEMENT_TYPE_CLASS = 0x12;
 
   /// A class variable type modifier.
-  ELEMENT_TYPE_VAR,
+  static const ELEMENT_TYPE_VAR = 0x13;
 
   /// A multi-dimensional array type modifier.
-  ELEMENT_TYPE_ARRAY,
+  static const ELEMENT_TYPE_ARRAY = 0x14;
 
   /// A type modifier for generic types.
-  ELEMENT_TYPE_GENERICINST,
+  static const ELEMENT_TYPE_GENERICINST = 0x15;
 
   /// A typed reference.
-  ELEMENT_TYPE_TYPEDBYREF,
-
-  ELEMENT_TYPE_0x17,
+  static const ELEMENT_TYPE_TYPEDBYREF = 0x16;
 
   /// Size of a native integer.
-  ELEMENT_TYPE_I,
+  static const ELEMENT_TYPE_I = 0x18;
 
   /// Size of an unsigned native integer.
-  ELEMENT_TYPE_U,
-
-  ELEMENT_TYPE_0x1A,
+  static const ELEMENT_TYPE_U = 0x19;
 
   /// A pointer to a function.
-  ELEMENT_TYPE_FNPTR,
+  static const ELEMENT_TYPE_FNPTR = 0x1B;
 
   /// A System.Object type.
-  ELEMENT_TYPE_OBJECT,
+  static const ELEMENT_TYPE_OBJECT = 0x1C;
 
   /// A single-dimensional, zero lower-bound array type modifier.
-  ELEMENT_TYPE_SZARRAY,
+  static const ELEMENT_TYPE_SZARRAY = 0x1D;
 
   /// A method variable type modifier.
-  ELEMENT_TYPE_MVAR,
+  static const ELEMENT_TYPE_MVAR = 0x1e;
 
   /// A C language required modifier.
-  ELEMENT_TYPE_CMOD_REQD,
+  static const ELEMENT_TYPE_CMOD_REQD = 0x1F;
 
   /// A C language optional modifier.
-  ELEMENT_TYPE_CMOD_OPT,
+  static const ELEMENT_TYPE_CMOD_OPT = 0x20;
+
+  /// Used internally.
+  static const ELEMENT_TYPE_INTERNAL = 0x21;
+
+  /// An invalid type.
+  static const ELEMENT_TYPE_MAX = 0x22;
+
+  /// Used internally.
+  static const ELEMENT_TYPE_MODIFIER = 0x40;
 
   /// A type modifier that is a sentinel for a list of a variable number of
   /// parameters.
-  ELEMENT_TYPE_SENTINEL,
+  static const ELEMENT_TYPE_SENTINEL = 0x01 | ELEMENT_TYPE_MODIFIER;
+
+  /// Used internally.
+  static const ELEMENT_TYPE_PINNED = 0x05 | ELEMENT_TYPE_MODIFIER;
 }
 
-CorElementType parseCorElementType(int corElementTypeValue) {
+BaseType parseCorElementType(int corElementTypeValue) {
   switch (corElementTypeValue) {
-    case 0x1:
-      return CorElementType.ELEMENT_TYPE_VOID;
-    case 0x2:
-      return CorElementType.ELEMENT_TYPE_BOOLEAN;
-    case 0x3:
-      return CorElementType.ELEMENT_TYPE_CHAR;
-    case 0x4:
-      return CorElementType.ELEMENT_TYPE_I1;
-    case 0x5:
-      return CorElementType.ELEMENT_TYPE_U1;
-    case 0x6:
-      return CorElementType.ELEMENT_TYPE_I2;
-    case 0x7:
-      return CorElementType.ELEMENT_TYPE_U2;
-    case 0x8:
-      return CorElementType.ELEMENT_TYPE_I4;
-    case 0x9:
-      return CorElementType.ELEMENT_TYPE_U4;
-    case 0xa:
-      return CorElementType.ELEMENT_TYPE_I8;
-    case 0xb:
-      return CorElementType.ELEMENT_TYPE_U8;
-    case 0xc:
-      return CorElementType.ELEMENT_TYPE_R4;
-    case 0xd:
-      return CorElementType.ELEMENT_TYPE_R8;
-    case 0xe:
-      return CorElementType.ELEMENT_TYPE_STRING;
-    case 0xf:
-      return CorElementType.ELEMENT_TYPE_PTR;
-    case 0x10:
-      return CorElementType.ELEMENT_TYPE_BYREF;
-    case 0x11:
-      return CorElementType.ELEMENT_TYPE_VALUETYPE;
-    case 0x12:
-      return CorElementType.ELEMENT_TYPE_CLASS;
-    case 0x13:
-      return CorElementType.ELEMENT_TYPE_VAR;
-    case 0x14:
-      return CorElementType.ELEMENT_TYPE_ARRAY;
-    case 0x15:
-      return CorElementType.ELEMENT_TYPE_GENERICINST;
-    case 0x16:
-      return CorElementType.ELEMENT_TYPE_TYPEDBYREF;
-    case 0x18:
-      return CorElementType.ELEMENT_TYPE_I;
-    case 0x19:
-      return CorElementType.ELEMENT_TYPE_U;
-    case 0x1B:
-      return CorElementType.ELEMENT_TYPE_FNPTR;
-    case 0x1C:
-      return CorElementType.ELEMENT_TYPE_OBJECT;
-    case 0x1D:
-      return CorElementType.ELEMENT_TYPE_SZARRAY;
-    case 0x1E:
-      return CorElementType.ELEMENT_TYPE_MVAR;
-    case 0x1F:
-      return CorElementType.ELEMENT_TYPE_CMOD_REQD;
-    case 0x20:
-      return CorElementType.ELEMENT_TYPE_CMOD_OPT;
-    case 0x41:
-      return CorElementType.ELEMENT_TYPE_SENTINEL;
+    case CorElementType.ELEMENT_TYPE_VOID:
+      return BaseType.Void;
+    case CorElementType.ELEMENT_TYPE_BOOLEAN:
+      return BaseType.Boolean;
+    case CorElementType.ELEMENT_TYPE_CHAR:
+      return BaseType.Char;
+    case CorElementType.ELEMENT_TYPE_I1:
+      return BaseType.Int8;
+    case CorElementType.ELEMENT_TYPE_U1:
+      return BaseType.Uint8;
+    case CorElementType.ELEMENT_TYPE_I2:
+      return BaseType.Int16;
+    case CorElementType.ELEMENT_TYPE_U2:
+      return BaseType.Uint16;
+    case CorElementType.ELEMENT_TYPE_I4:
+      return BaseType.Int32;
+    case CorElementType.ELEMENT_TYPE_U4:
+      return BaseType.Uint32;
+    case CorElementType.ELEMENT_TYPE_I8:
+      return BaseType.Int64;
+    case CorElementType.ELEMENT_TYPE_U8:
+      return BaseType.Uint64;
+    case CorElementType.ELEMENT_TYPE_R4:
+      return BaseType.Float;
+    case CorElementType.ELEMENT_TYPE_R8:
+      return BaseType.Double;
+    case CorElementType.ELEMENT_TYPE_STRING:
+      return BaseType.String;
+    case CorElementType.ELEMENT_TYPE_PTR:
+      return BaseType.PointerTypeModifier;
+    case CorElementType.ELEMENT_TYPE_BYREF:
+      return BaseType.ReferenceTypeModifier;
+    case CorElementType.ELEMENT_TYPE_VALUETYPE:
+      return BaseType.ValueTypeModifier;
+    case CorElementType.ELEMENT_TYPE_CLASS:
+      return BaseType.ClassTypeModifier;
+    case CorElementType.ELEMENT_TYPE_VAR:
+      return BaseType.ClassVariableTypeModifier;
+    case CorElementType.ELEMENT_TYPE_ARRAY:
+      return BaseType.ArrayTypeModifier;
+    case CorElementType.ELEMENT_TYPE_GENERICINST:
+      return BaseType.GenericTypeModifier;
+    case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
+      return BaseType.TypedReference;
+    case CorElementType.ELEMENT_TYPE_I:
+      return BaseType.IntPtr;
+    case CorElementType.ELEMENT_TYPE_U:
+      return BaseType.UintPtr;
+    case CorElementType.ELEMENT_TYPE_FNPTR:
+      return BaseType.FunctionPointer;
+    case CorElementType.ELEMENT_TYPE_OBJECT:
+      return BaseType.Object;
+    case CorElementType.ELEMENT_TYPE_SZARRAY:
+      return BaseType.SimpleArray;
+    case CorElementType.ELEMENT_TYPE_MVAR:
+      return BaseType.MethodVariableTypeModifier;
+    case CorElementType.ELEMENT_TYPE_CMOD_REQD:
+      return BaseType.CLanguageRequiredModifier;
+    case CorElementType.ELEMENT_TYPE_CMOD_OPT:
+      return BaseType.CLanguageOptionalModifier;
+    case CorElementType.ELEMENT_TYPE_SENTINEL:
+      return BaseType.Sentinel;
     default:
       throw WinmdException(
           'Unrecognized or internal type $corElementTypeValue');

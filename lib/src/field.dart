@@ -72,7 +72,6 @@ class Field extends TokenObject with CustomAttributesMixin {
 
       if (SUCCEEDED(hr)) {
         final fieldName = szField.toDartString();
-        final cPlusTypeFlag = pdwCPlusTypeFlag.value;
 
         // The first entry of the signature is its FieldAttribute (compare
         // against the CorFieldAttr enumeration), and then follows a type
@@ -87,7 +86,7 @@ class Field extends TokenObject with CustomAttributesMixin {
             fieldName,
             ppValue.value != nullptr ? ppValue.value.value : 0,
             typeTuple.typeIdentifier,
-            parseCorElementType(cPlusTypeFlag).baseType,
+            parseCorElementType(pdwCPlusTypeFlag.value),
             pdwAttr.value,
             signature);
       } else {

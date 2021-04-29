@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import '../com/constants.dart';
+import '../enums.dart';
 import '../scope.dart';
 import '../typedef.dart';
 import '../typeidentifier.dart';
@@ -28,9 +29,9 @@ class TypeTuple {
     final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 
-    switch (runtimeType.corType) {
-      case CorElementType.ELEMENT_TYPE_VALUETYPE:
-      case CorElementType.ELEMENT_TYPE_CLASS:
+    switch (runtimeType.baseType) {
+      case BaseType.ValueTypeModifier:
+      case BaseType.ClassTypeModifier:
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));
         final token = _unencodeDefRefSpecToken(uncompressed.data);
@@ -41,14 +42,14 @@ class TypeTuple {
         runtimeType.type = tokenAsType;
         break;
 
-      case CorElementType.ELEMENT_TYPE_BYREF:
+      case BaseType.ReferenceTypeModifier:
         if (signatureBlob[1] == 0x1D) {
           // array
-          runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
+          runtimeType.baseType = BaseType.ArrayTypeModifier;
         }
         break;
 
-      case CorElementType.ELEMENT_TYPE_PTR:
+      case BaseType.PointerTypeModifier:
         final ptrTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         dataLength = 1 + ptrTuple.offsetLength;
@@ -56,7 +57,7 @@ class TypeTuple {
         // flattenTypeArgs(runtimeType);
         break;
 
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
+      case BaseType.GenericTypeModifier:
         final classTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         runtimeType.name = classTuple.typeIdentifier.name;
@@ -75,7 +76,7 @@ class TypeTuple {
         }
         break;
 
-      case CorElementType.ELEMENT_TYPE_ARRAY:
+      case BaseType.ArrayTypeModifier:
         // Format is [Type ArrayShape] (see §II.23.2.13)
         final arrayTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
@@ -93,8 +94,8 @@ class TypeTuple {
         runtimeType.arrayDimensions = dimensionUpperBounds;
         break;
 
-      case CorElementType.ELEMENT_TYPE_VAR:
-      case CorElementType.ELEMENT_TYPE_MVAR:
+      case BaseType.ClassVariableTypeModifier:
+      case BaseType.MethodVariableTypeModifier:
         // Element is a generic parameter of a type or a method
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));

@@ -1,8 +1,5 @@
 // Enumerations used for returning or storing data.
 
-import 'com/constants.dart';
-import 'utils/exception.dart';
-
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
 enum BaseType {
@@ -99,77 +96,6 @@ enum BaseType {
   /// A type modifier that is a sentinel for a list of a variable number of
   /// parameters.
   Sentinel,
-}
-
-extension CorElementTypeConverter on CorElementType {
-  BaseType get baseType {
-    switch (this) {
-      case CorElementType.ELEMENT_TYPE_VOID:
-        return BaseType.Void;
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return BaseType.Boolean;
-      case CorElementType.ELEMENT_TYPE_CHAR:
-        return BaseType.Char;
-      case CorElementType.ELEMENT_TYPE_I1:
-        return BaseType.Int8;
-      case CorElementType.ELEMENT_TYPE_U1:
-        return BaseType.Uint8;
-      case CorElementType.ELEMENT_TYPE_I2:
-        return BaseType.Int16;
-      case CorElementType.ELEMENT_TYPE_U2:
-        return BaseType.Uint16;
-      case CorElementType.ELEMENT_TYPE_I4:
-        return BaseType.Int32;
-      case CorElementType.ELEMENT_TYPE_U4:
-        return BaseType.Uint32;
-      case CorElementType.ELEMENT_TYPE_I8:
-        return BaseType.Int64;
-      case CorElementType.ELEMENT_TYPE_U8:
-        return BaseType.Uint64;
-      case CorElementType.ELEMENT_TYPE_R4:
-        return BaseType.Float;
-      case CorElementType.ELEMENT_TYPE_R8:
-        return BaseType.Double;
-      case CorElementType.ELEMENT_TYPE_STRING:
-        return BaseType.String;
-      case CorElementType.ELEMENT_TYPE_PTR:
-        return BaseType.PointerTypeModifier;
-      case CorElementType.ELEMENT_TYPE_BYREF:
-        return BaseType.ReferenceTypeModifier;
-      case CorElementType.ELEMENT_TYPE_VALUETYPE:
-        return BaseType.ValueTypeModifier;
-      case CorElementType.ELEMENT_TYPE_CLASS:
-        return BaseType.ClassTypeModifier;
-      case CorElementType.ELEMENT_TYPE_VAR:
-        return BaseType.ClassVariableTypeModifier;
-      case CorElementType.ELEMENT_TYPE_ARRAY:
-        return BaseType.ArrayTypeModifier;
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
-        return BaseType.GenericTypeModifier;
-      case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
-        return BaseType.TypedReference;
-      case CorElementType.ELEMENT_TYPE_I:
-        return BaseType.IntPtr;
-      case CorElementType.ELEMENT_TYPE_U:
-        return BaseType.UintPtr;
-      case CorElementType.ELEMENT_TYPE_FNPTR:
-        return BaseType.FunctionPointer;
-      case CorElementType.ELEMENT_TYPE_OBJECT:
-        return BaseType.Object;
-      case CorElementType.ELEMENT_TYPE_SZARRAY:
-        return BaseType.SimpleArray;
-      case CorElementType.ELEMENT_TYPE_MVAR:
-        return BaseType.MethodVariableTypeModifier;
-      case CorElementType.ELEMENT_TYPE_CMOD_REQD:
-        return BaseType.CLanguageRequiredModifier;
-      case CorElementType.ELEMENT_TYPE_CMOD_OPT:
-        return BaseType.CLanguageOptionalModifier;
-      case CorElementType.ELEMENT_TYPE_SENTINEL:
-        return BaseType.Sentinel;
-      default:
-        throw WinmdException('Unrecognized internal type ${toString()}');
-    }
-  }
 }
 
 /// The type of object represented by a given token.

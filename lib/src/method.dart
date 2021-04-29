@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/constants.dart';
+import 'enums.dart';
 import 'methodimpls.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
@@ -298,8 +299,7 @@ class Method extends TokenObject
           TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
-      if (runtimeType.typeIdentifier.corType ==
-          CorElementType.ELEMENT_TYPE_ARRAY) {
+      if (runtimeType.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
         blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
         paramsIndex++; //we've added two parameters here
       } else {
@@ -337,15 +337,15 @@ class Method extends TokenObject
     final typeTuple = TypeTuple.fromSignature(sublist.sublist(2), scope);
 
     parameters[paramsIndex].name = '__valueSize';
-    parameters[paramsIndex].typeIdentifier.corType =
-        CorElementType.ELEMENT_TYPE_PTR;
+    parameters[paramsIndex].typeIdentifier.baseType =
+        BaseType.PointerTypeModifier;
     parameters[paramsIndex].typeIdentifier.typeArg =
-        TypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
+        TypeIdentifier(BaseType.Uint32);
 
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
     parameters[paramsIndex + 1].name = 'value';
-    parameters[paramsIndex + 1].typeIdentifier.corType =
-        CorElementType.ELEMENT_TYPE_PTR;
+    parameters[paramsIndex + 1].typeIdentifier.baseType =
+        BaseType.PointerTypeModifier;
     parameters[paramsIndex + 1].typeIdentifier.typeArg =
         typeTuple.typeIdentifier;
 

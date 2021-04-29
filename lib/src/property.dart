@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/constants.dart';
+import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
@@ -20,7 +21,7 @@ import 'utils/typetuple.dart';
 
 /// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
-  final CorElementType corType;
+  final BaseType baseType;
   final Uint8List defaultValue;
   final String name;
   final Uint32List otherMethodTokens;
@@ -40,7 +41,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       this._attributes,
       this.signatureBlob,
       this.typeIdentifier,
-      this.corType,
+      this.baseType,
       this.defaultValue,
       this._setterToken,
       this._getterToken,
@@ -102,7 +103,7 @@ class Property extends TokenObject with CustomAttributesMixin {
             pdwPropFlags.value,
             signature,
             typeTuple.typeIdentifier,
-            CorElementType.values[pdwCPlusTypeFlag.value],
+            parseCorElementType(pdwCPlusTypeFlag.value),
             defaultValue,
             ptkSetter.value,
             ptkGetter.value,
