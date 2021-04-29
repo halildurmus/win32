@@ -604,6 +604,12 @@ void main() {
               Pointer<Uint32> lpBinaryType)>('GetBinaryTypeW');
       expect(GetBinaryType, isA<Function>());
     });
+    test('Can instantiate GetCommandLine', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommandLine = kernel32.lookupFunction<Pointer<Utf16> Function(),
+          Pointer<Utf16> Function()>('GetCommandLineW');
+      expect(GetCommandLine, isA<Function>());
+    });
     test('Can instantiate GetComputerName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetComputerName = kernel32.lookupFunction<
@@ -1291,6 +1297,12 @@ void main() {
           IntPtr Function(IntPtr hModule, IntPtr hResInfo),
           int Function(int hModule, int hResInfo)>('LoadResource');
       expect(LoadResource, isA<Function>());
+    });
+    test('Can instantiate LocalFree', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final LocalFree = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+          int Function(int hMem)>('LocalFree');
+      expect(LocalFree, isA<Function>());
     });
     test('Can instantiate LockResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -6061,6 +6073,147 @@ void main() {
     });
   });
 
+  group('Test shell32 functions', () {
+    test('Can instantiate CommandLineToArgvW', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final CommandLineToArgvW = shell32.lookupFunction<
+          Pointer<Pointer<Utf16>> Function(
+              Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs),
+          Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
+              Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
+      expect(CommandLineToArgvW, isA<Function>());
+    });
+    test('Can instantiate FindExecutable', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final FindExecutable = shell32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
+              Pointer<Utf16> lpResult),
+          int Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
+              Pointer<Utf16> lpResult)>('FindExecutableW');
+      expect(FindExecutable, isA<Function>());
+    });
+    test('Can instantiate SHCreateItemFromParsingName', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHCreateItemFromParsingName = shell32.lookupFunction<
+          Int32 Function(Pointer<Utf16> pszPath, Pointer pbc,
+              Pointer<GUID> riid, Pointer<Pointer> ppv),
+          int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+              Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
+      expect(SHCreateItemFromParsingName, isA<Function>());
+    });
+    test('Can instantiate Shell_NotifyIcon', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final Shell_NotifyIcon = shell32.lookupFunction<
+          Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
+          int Function(int dwMessage,
+              Pointer<NOTIFYICONDATA> lpData)>('Shell_NotifyIconW');
+      expect(Shell_NotifyIcon, isA<Function>());
+    });
+    test('Can instantiate ShellAbout', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ShellAbout = shell32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
+              Pointer<Utf16> szOtherStuff, IntPtr hIcon),
+          int Function(int hWnd, Pointer<Utf16> szApp,
+              Pointer<Utf16> szOtherStuff, int hIcon)>('ShellAboutW');
+      expect(ShellAbout, isA<Function>());
+    });
+    test('Can instantiate ShellExecute', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ShellExecute = shell32.lookupFunction<
+          IntPtr Function(
+              IntPtr hwnd,
+              Pointer<Utf16> lpOperation,
+              Pointer<Utf16> lpFile,
+              Pointer<Utf16> lpParameters,
+              Pointer<Utf16> lpDirectory,
+              Int32 nShowCmd),
+          int Function(
+              int hwnd,
+              Pointer<Utf16> lpOperation,
+              Pointer<Utf16> lpFile,
+              Pointer<Utf16> lpParameters,
+              Pointer<Utf16> lpDirectory,
+              int nShowCmd)>('ShellExecuteW');
+      expect(ShellExecute, isA<Function>());
+    });
+    test('Can instantiate ShellExecuteEx', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ShellExecuteEx = shell32.lookupFunction<
+          Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
+          int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
+      expect(ShellExecuteEx, isA<Function>());
+    });
+    test('Can instantiate SHEmptyRecycleBin', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHEmptyRecycleBin = shell32.lookupFunction<
+          Int32 Function(
+              IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
+          int Function(int hwnd, Pointer<Utf16> pszRootPath,
+              int dwFlags)>('SHEmptyRecycleBinW');
+      expect(SHEmptyRecycleBin, isA<Function>());
+    });
+    test('Can instantiate SHGetDesktopFolder', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetDesktopFolder = shell32.lookupFunction<
+          Int32 Function(Pointer<Pointer> ppshf),
+          int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
+      expect(SHGetDesktopFolder, isA<Function>());
+    });
+    test('Can instantiate SHGetDiskFreeSpaceEx', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetDiskFreeSpaceEx = shell32.lookupFunction<
+              Int32 Function(
+                  Pointer<Utf16> pszDirectoryName,
+                  Pointer<Uint64> pulFreeBytesAvailableToCaller,
+                  Pointer<Uint64> pulTotalNumberOfBytes,
+                  Pointer<Uint64> pulTotalNumberOfFreeBytes),
+              int Function(
+                  Pointer<Utf16> pszDirectoryName,
+                  Pointer<Uint64> pulFreeBytesAvailableToCaller,
+                  Pointer<Uint64> pulTotalNumberOfBytes,
+                  Pointer<Uint64> pulTotalNumberOfFreeBytes)>(
+          'SHGetDiskFreeSpaceExW');
+      expect(SHGetDiskFreeSpaceEx, isA<Function>());
+    });
+    test('Can instantiate SHGetDriveMedia', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetDriveMedia = shell32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
+          int Function(Pointer<Utf16> pszDrive,
+              Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
+      expect(SHGetDriveMedia, isA<Function>());
+    });
+    test('Can instantiate SHGetFolderPath', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetFolderPath = shell32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Int32 csidl, IntPtr hToken,
+              Uint32 dwFlags, Pointer<Utf16> pszPath),
+          int Function(int hwnd, int csidl, int hToken, int dwFlags,
+              Pointer<Utf16> pszPath)>('SHGetFolderPathW');
+      expect(SHGetFolderPath, isA<Function>());
+    });
+    test('Can instantiate SHGetKnownFolderPath', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetKnownFolderPath = shell32.lookupFunction<
+          Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
+              Pointer<Pointer<Utf16>> ppszPath),
+          int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
+              Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
+      expect(SHGetKnownFolderPath, isA<Function>());
+    });
+    test('Can instantiate SHQueryRecycleBin', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHQueryRecycleBin = shell32.lookupFunction<
+          Int32 Function(Pointer<Utf16> pszRootPath,
+              Pointer<SHQUERYRBINFO> pSHQueryRBInfo),
+          int Function(Pointer<Utf16> pszRootPath,
+              Pointer<SHQUERYRBINFO> pSHQueryRBInfo)>('SHQueryRecycleBinW');
+      expect(SHQueryRecycleBin, isA<Function>());
+    });
+  });
+
   group('Test kernelbase functions', () {
     if (windowsBuildNumber >= 10240) {
       test('Can instantiate CompareObjectHandles', () {
@@ -7131,138 +7284,6 @@ void main() {
           int Function(
               Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
       expect(InitCommonControlsEx, isA<Function>());
-    });
-  });
-
-  group('Test shell32 functions', () {
-    test('Can instantiate FindExecutable', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final FindExecutable = shell32.lookupFunction<
-          IntPtr Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
-              Pointer<Utf16> lpResult),
-          int Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
-              Pointer<Utf16> lpResult)>('FindExecutableW');
-      expect(FindExecutable, isA<Function>());
-    });
-    test('Can instantiate SHCreateItemFromParsingName', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHCreateItemFromParsingName = shell32.lookupFunction<
-          Int32 Function(Pointer<Utf16> pszPath, Pointer pbc,
-              Pointer<GUID> riid, Pointer<Pointer> ppv),
-          int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-              Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
-      expect(SHCreateItemFromParsingName, isA<Function>());
-    });
-    test('Can instantiate Shell_NotifyIcon', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final Shell_NotifyIcon = shell32.lookupFunction<
-          Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
-          int Function(int dwMessage,
-              Pointer<NOTIFYICONDATA> lpData)>('Shell_NotifyIconW');
-      expect(Shell_NotifyIcon, isA<Function>());
-    });
-    test('Can instantiate ShellAbout', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final ShellAbout = shell32.lookupFunction<
-          Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
-              Pointer<Utf16> szOtherStuff, IntPtr hIcon),
-          int Function(int hWnd, Pointer<Utf16> szApp,
-              Pointer<Utf16> szOtherStuff, int hIcon)>('ShellAboutW');
-      expect(ShellAbout, isA<Function>());
-    });
-    test('Can instantiate ShellExecute', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final ShellExecute = shell32.lookupFunction<
-          IntPtr Function(
-              IntPtr hwnd,
-              Pointer<Utf16> lpOperation,
-              Pointer<Utf16> lpFile,
-              Pointer<Utf16> lpParameters,
-              Pointer<Utf16> lpDirectory,
-              Int32 nShowCmd),
-          int Function(
-              int hwnd,
-              Pointer<Utf16> lpOperation,
-              Pointer<Utf16> lpFile,
-              Pointer<Utf16> lpParameters,
-              Pointer<Utf16> lpDirectory,
-              int nShowCmd)>('ShellExecuteW');
-      expect(ShellExecute, isA<Function>());
-    });
-    test('Can instantiate ShellExecuteEx', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final ShellExecuteEx = shell32.lookupFunction<
-          Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
-          int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
-      expect(ShellExecuteEx, isA<Function>());
-    });
-    test('Can instantiate SHEmptyRecycleBin', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHEmptyRecycleBin = shell32.lookupFunction<
-          Int32 Function(
-              IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
-          int Function(int hwnd, Pointer<Utf16> pszRootPath,
-              int dwFlags)>('SHEmptyRecycleBinW');
-      expect(SHEmptyRecycleBin, isA<Function>());
-    });
-    test('Can instantiate SHGetDesktopFolder', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHGetDesktopFolder = shell32.lookupFunction<
-          Int32 Function(Pointer<Pointer> ppshf),
-          int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
-      expect(SHGetDesktopFolder, isA<Function>());
-    });
-    test('Can instantiate SHGetDiskFreeSpaceEx', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHGetDiskFreeSpaceEx = shell32.lookupFunction<
-              Int32 Function(
-                  Pointer<Utf16> pszDirectoryName,
-                  Pointer<Uint64> pulFreeBytesAvailableToCaller,
-                  Pointer<Uint64> pulTotalNumberOfBytes,
-                  Pointer<Uint64> pulTotalNumberOfFreeBytes),
-              int Function(
-                  Pointer<Utf16> pszDirectoryName,
-                  Pointer<Uint64> pulFreeBytesAvailableToCaller,
-                  Pointer<Uint64> pulTotalNumberOfBytes,
-                  Pointer<Uint64> pulTotalNumberOfFreeBytes)>(
-          'SHGetDiskFreeSpaceExW');
-      expect(SHGetDiskFreeSpaceEx, isA<Function>());
-    });
-    test('Can instantiate SHGetDriveMedia', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHGetDriveMedia = shell32.lookupFunction<
-          Int32 Function(
-              Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
-          int Function(Pointer<Utf16> pszDrive,
-              Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
-      expect(SHGetDriveMedia, isA<Function>());
-    });
-    test('Can instantiate SHGetFolderPath', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHGetFolderPath = shell32.lookupFunction<
-          Int32 Function(IntPtr hwnd, Int32 csidl, IntPtr hToken,
-              Uint32 dwFlags, Pointer<Utf16> pszPath),
-          int Function(int hwnd, int csidl, int hToken, int dwFlags,
-              Pointer<Utf16> pszPath)>('SHGetFolderPathW');
-      expect(SHGetFolderPath, isA<Function>());
-    });
-    test('Can instantiate SHGetKnownFolderPath', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHGetKnownFolderPath = shell32.lookupFunction<
-          Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
-              Pointer<Pointer<Utf16>> ppszPath),
-          int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
-              Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
-      expect(SHGetKnownFolderPath, isA<Function>());
-    });
-    test('Can instantiate SHQueryRecycleBin', () {
-      final shell32 = DynamicLibrary.open('shell32.dll');
-      final SHQueryRecycleBin = shell32.lookupFunction<
-          Int32 Function(Pointer<Utf16> pszRootPath,
-              Pointer<SHQUERYRBINFO> pSHQueryRBInfo),
-          int Function(Pointer<Utf16> pszRootPath,
-              Pointer<SHQUERYRBINFO> pSHQueryRBInfo)>('SHQueryRecycleBinW');
-      expect(SHQueryRecycleBin, isA<Function>());
     });
   });
 

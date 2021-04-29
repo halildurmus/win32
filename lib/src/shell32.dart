@@ -19,6 +19,25 @@ import 'structs.g.dart';
 
 final _shell32 = DynamicLibrary.open('shell32.dll');
 
+/// Retrieves the command-line string for the current process.
+///
+/// ```c
+/// LPWSTR * CommandLineToArgvW(
+///   LPCWSTR lpCmdLine,
+///   int     *pNumArgs
+/// );
+/// ```
+/// {@category shell32}
+Pointer<Pointer<Utf16>> CommandLineToArgvW(
+    Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs) {
+  final _CommandLineToArgvW = _shell32.lookupFunction<
+      Pointer<Pointer<Utf16>> Function(
+          Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs),
+      Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
+          Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
+  return _CommandLineToArgvW(lpCmdLine, pNumArgs);
+}
+
 /// Retrieves the name of and handle to the executable (.exe) file
 /// associated with a specific document file.
 ///

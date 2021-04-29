@@ -10,8 +10,6 @@ import 'dart:math' show min, max;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final hInstance = GetModuleHandle(nullptr);
-
 final abc = [
   'anteater',
   'bear',
@@ -270,9 +268,10 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void main() {
-  // Register the window class.
+void main() => initApp(winMain);
 
+void winMain(int hInstance, List<String> args, int nShowCmd) {
+  // Register the window class.
   final className = TEXT('Scrollbar Sample');
 
   final wc = calloc<WNDCLASS>()
@@ -308,7 +307,7 @@ void main() {
     throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
+  ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
   // Run the message loop.

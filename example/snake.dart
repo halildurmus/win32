@@ -17,9 +17,6 @@ import 'dart:math' show Random;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Win32-specific vars
-final hInstance = GetModuleHandle(nullptr);
-
 late int hWnd;
 const IDT_TIMER1 = 1;
 const IDT_TIMER2 = 2;
@@ -548,7 +545,9 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return result;
 }
 
-void main() {
+void main() => initApp(winMain);
+
+void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
 
   final className = TEXT('WinSnakeWindowClass');

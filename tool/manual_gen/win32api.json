@@ -457,6 +457,11 @@
         "dllLibrary": "ole32",
         "comment": "Registers security and sets the default security values for the process."
     },
+    "CommandLineToArgvW": {
+        "prototype": "LPWSTR * CommandLineToArgvW(\n  LPCWSTR lpCmdLine,\n  int     *pNumArgs\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves the command-line string for the current process."
+    },
     "CompareObjectHandles": {
         "prototype": "BOOL CompareObjectHandles(\n  HANDLE hFirstObjectHandle,\n  HANDLE hSecondObjectHandle\n);",
         "dllLibrary": "kernelbase",
@@ -1227,6 +1232,11 @@
         "prototype": "BOOL GetClipCursor(\n  LPRECT lpRect\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the screen coordinates of the rectangular area to which the cursor is confined."
+    },
+    "GetCommandLine": {
+        "prototype": "LPWSTR GetCommandLineW();",
+        "dllLibrary": "kernel32",
+        "comment": "Parses a Unicode command line string and returns an array of pointers to the command line arguments, along with a count of such arguments, in a way that is similar to the standard C run-time argv and argc values."
     },
     "GetComputerName": {
         "prototype": "BOOL GetComputerNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD nSize\n);",
@@ -2454,6 +2464,11 @@
         "prototype": "int LoadStringW(\n  HINSTANCE hInstance,\n  UINT      uID,\n  LPWSTR    lpBuffer,\n  int       cchBufferMax\n);",
         "dllLibrary": "user32",
         "comment": "Loads a string resource from the executable file associated with a specified module and either copies the string into a buffer with a terminating null character or returns a read-only pointer to the string resource itself."
+    },
+    "LocalFree": {
+        "prototype": "HLOCAL LocalFree(\n  _Frees_ptr_opt_ HLOCAL hMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Frees the specified local memory object and invalidates its handle."
     },
     "LockResource": {
         "prototype": "LPVOID LockResource(\n  HGLOBAL hResData\n);",

@@ -796,6 +796,67 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
 // -----------------------------------------------------------------------------
+// StartupInfo flags
+// -----------------------------------------------------------------------------
+
+/// The wShowWindow member contains additional information.
+const STARTF_USESHOWWINDOW = 0x00000001;
+
+/// The dwXSize and dwYSize members contain additional information.
+const STARTF_USESIZE = 0x00000002;
+
+/// The dwX and dwY members contain additional information.
+const STARTF_USEPOSITION = 0x00000004;
+
+/// The dwXCountChars and dwYCountChars members contain additional information.
+const STARTF_USECOUNTCHARS = 0x00000008;
+
+/// The dwFillAttribute member contains additional information.
+const STARTF_USEFILLATTRIBUTE = 0x00000010;
+
+/// Indicates that the process should be run in full-screen mode, rather than in
+/// windowed mode. This flag is only valid for console applications running on
+/// an x86 computer.
+const STARTF_RUNFULLSCREEN = 0x00000020;
+
+/// Indicates that the cursor is in feedback mode for two seconds after
+/// CreateProcess is called. The Working in Background cursor is displayed (see
+/// the Pointers tab in the Mouse control panel utility).
+const STARTF_FORCEONFEEDBACK = 0x00000040;
+
+/// Indicates that the feedback cursor is forced off while the process is
+/// starting. The Normal Select cursor is displayed.
+const STARTF_FORCEOFFFEEDBACK = 0x00000080;
+
+/// The hStdInput, hStdOutput, and hStdError members contain additional
+/// information.
+const STARTF_USESTDHANDLES = 0x00000100;
+
+/// The hStdInput member contains additional information.
+const STARTF_USEHOTKEY = 0x00000200;
+
+/// The lpTitle member contains the path of the shortcut file (.lnk) that the
+/// user invoked to start this process. This is typically set by the shell when
+/// a .lnk file pointing to the launched application is invoked. Most
+/// applications will not need to set this value.
+const STARTF_TITLEISLINKNAME = 0x00000800;
+
+/// The lpTitle member contains an AppUserModelID. This identifier controls how
+/// the taskbar and Start menu present the application, and enables it to be
+/// associated with the correct shortcuts and Jump Lists. Generally,
+/// applications will use the SetCurrentProcessExplicitAppUserModelID and
+/// GetCurrentProcessExplicitAppUserModelID functions instead of setting this
+/// flag.
+const STARTF_TITLEISAPPID = 0x00001000;
+
+/// Indicates that any windows created by the process cannot be pinned on the
+/// taskbar.
+const STARTF_PREVENTPINNING = 0x00002000;
+
+/// The command line came from an untrusted source.
+const STARTF_UNTRUSTEDSOURCE = 0x00008000;
+
+// -----------------------------------------------------------------------------
 // WindowStyle constants
 // -----------------------------------------------------------------------------
 

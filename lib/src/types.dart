@@ -29,6 +29,7 @@ typedef DWORD_PTR = ULONG_PTR;
 typedef FLOAT = Float;
 typedef HANDLE = IntPtr;
 typedef HCALL = DWORD;
+typedef HINSTANCE = IntPtr;
 typedef HRESULT = LONG;
 typedef HSTRING = IntPtr;
 typedef INT = Int32;

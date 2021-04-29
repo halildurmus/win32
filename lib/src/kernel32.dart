@@ -1302,6 +1302,20 @@ int GetBinaryType(
   return _GetBinaryType(lpApplicationName, lpBinaryType);
 }
 
+/// Parses a Unicode command line string and returns an array of pointers
+/// to the command line arguments, along with a count of such arguments, in
+/// a way that is similar to the standard C run-time argv and argc values.
+///
+/// ```c
+/// LPWSTR GetCommandLineW();
+/// ```
+/// {@category kernel32}
+Pointer<Utf16> GetCommandLine() {
+  final _GetCommandLine = _kernel32.lookupFunction<Pointer<Utf16> Function(),
+      Pointer<Utf16> Function()>('GetCommandLineW');
+  return _GetCommandLine();
+}
+
 /// Retrieves the NetBIOS name of the local computer. This name is
 /// established at system startup, when the system reads it from the
 /// registry.
@@ -2790,6 +2804,20 @@ int LoadResource(int hModule, int hResInfo) {
       IntPtr Function(IntPtr hModule, IntPtr hResInfo),
       int Function(int hModule, int hResInfo)>('LoadResource');
   return _LoadResource(hModule, hResInfo);
+}
+
+/// Frees the specified local memory object and invalidates its handle.
+///
+/// ```c
+/// HLOCAL LocalFree(
+///   _Frees_ptr_opt_ HLOCAL hMem
+/// );
+/// ```
+/// {@category kernel32}
+int LocalFree(int hMem) {
+  final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+      int Function(int hMem)>('LocalFree');
+  return _LocalFree(hMem);
 }
 
 /// Retrieves a pointer to the specified resource in memory.

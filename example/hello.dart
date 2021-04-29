@@ -9,8 +9,6 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-final hInstance = GetModuleHandle(nullptr);
-
 int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
@@ -36,7 +34,12 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-void main() {
+// An optional approach to launching a GUI app that lets you use a more
+// traditional WinMain entry point, rather than having to manually retrieve the
+// hInstance and nShowCmd parameters.
+void main() => initApp(winMain);
+
+void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
   final className = TEXT('Sample Window Class');
   final wc = calloc<WNDCLASS>()
@@ -74,7 +77,7 @@ void main() {
     throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
+  ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
   // Run the message loop.
