@@ -1787,6 +1787,11 @@
         "dllLibrary": "kernel32",
         "comment": "Returns the number of active heaps and retrieves handles to all of the active heaps for the calling process."
     },
+    "GetProcessId": {
+        "prototype": "DWORD GetProcessId(\n  HANDLE Process\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the process identifier of the specified process."
+    },
     "GetProcessWindowStation": {
         "prototype": "HWINSTA GetProcessWindowStation();",
         "dllLibrary": "user32",
@@ -1826,6 +1831,11 @@
         "prototype": "HWND GetShellWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the Shell's desktop window."
+    },
+    "GetStartupInfo": {
+        "prototype": "void GetStartupInfoW(\n  LPSTARTUPINFOW lpStartupInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the contents of the STARTUPINFO structure that was specified when the calling process was created."
     },
     "GetStdHandle": {
         "prototype": "HANDLE WINAPI GetStdHandle(\n  _In_ DWORD nStdHandle\n);",
@@ -1904,6 +1914,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current local date and time."
     },
+    "GetSystemTimes": {
+        "prototype": "BOOL GetSystemTimes(\n  PFILETIME lpIdleTime,\n  PFILETIME lpKernelTime,\n  PFILETIME lpUserTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves system timing information. On a multiprocessor system, the values returned are the sum of the designated times across all processors."
+    },
     "GetTabbedTextExtent": {
         "prototype": "DWORD GetTabbedTextExtentW(\n  HDC       hdc,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions\n);",
         "dllLibrary": "user32",
@@ -1936,10 +1951,20 @@
         "comment": "Retrieves the DPI_HOSTING_BEHAVIOR from the current thread.",
         "minimumWindowsVersion": "WIN10_RS4"
     },
+    "GetThreadId": {
+        "prototype": "DWORD GetThreadId(\n  HANDLE Thread\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the thread identifier of the specified thread."
+    },
     "GetThreadLocale": {
         "prototype": "LCID GetThreadLocale();",
         "dllLibrary": "kernel32",
         "comment": "Returns the locale identifier of the current locale for the calling thread."
+    },
+    "GetThreadTimes": {
+        "prototype": "BOOL GetThreadTimes(\n  HANDLE     hThread,\n  LPFILETIME lpCreationTime,\n  LPFILETIME lpExitTime,\n  LPFILETIME lpKernelTime,\n  LPFILETIME lpUserTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves timing information for the specified thread."
     },
     "GetThreadUILanguage": {
         "prototype": "LANGID GetThreadUILanguage();",

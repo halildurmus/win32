@@ -885,6 +885,13 @@ void main() {
               Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
       expect(GetProcessHeaps, isA<Function>());
     });
+    test('Can instantiate GetProcessId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessId = kernel32.lookupFunction<
+          Uint32 Function(IntPtr Process),
+          int Function(int Process)>('GetProcessId');
+      expect(GetProcessId, isA<Function>());
+    });
     test('Can instantiate GetProcessWorkingSetSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProcessWorkingSetSize = kernel32.lookupFunction<
@@ -915,6 +922,13 @@ void main() {
               int dwSpMinorVersion,
               Pointer<Uint32> pdwReturnedProductType)>('GetProductInfo');
       expect(GetProductInfo, isA<Function>());
+    });
+    test('Can instantiate GetStartupInfo', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetStartupInfo = kernel32.lookupFunction<
+          Void Function(Pointer<STARTUPINFO> lpStartupInfo),
+          void Function(Pointer<STARTUPINFO> lpStartupInfo)>('GetStartupInfoW');
+      expect(GetStartupInfo, isA<Function>());
     });
     test('Can instantiate GetStdHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -968,6 +982,17 @@ void main() {
           void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
       expect(GetSystemTime, isA<Function>());
     });
+    test('Can instantiate GetSystemTimes', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemTimes = kernel32.lookupFunction<
+          Int32 Function(Pointer<FILETIME> lpIdleTime,
+              Pointer<FILETIME> lpKernelTime, Pointer<FILETIME> lpUserTime),
+          int Function(
+              Pointer<FILETIME> lpIdleTime,
+              Pointer<FILETIME> lpKernelTime,
+              Pointer<FILETIME> lpUserTime)>('GetSystemTimes');
+      expect(GetSystemTimes, isA<Function>());
+    });
     test('Can instantiate GetTempPath', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetTempPath = kernel32.lookupFunction<
@@ -976,11 +1001,35 @@ void main() {
               int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
       expect(GetTempPath, isA<Function>());
     });
+    test('Can instantiate GetThreadId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetThreadId = kernel32.lookupFunction<
+          Uint32 Function(IntPtr Thread),
+          int Function(int Thread)>('GetThreadId');
+      expect(GetThreadId, isA<Function>());
+    });
     test('Can instantiate GetThreadLocale', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetThreadLocale = kernel32
           .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
       expect(GetThreadLocale, isA<Function>());
+    });
+    test('Can instantiate GetThreadTimes', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetThreadTimes = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hThread,
+              Pointer<FILETIME> lpCreationTime,
+              Pointer<FILETIME> lpExitTime,
+              Pointer<FILETIME> lpKernelTime,
+              Pointer<FILETIME> lpUserTime),
+          int Function(
+              int hThread,
+              Pointer<FILETIME> lpCreationTime,
+              Pointer<FILETIME> lpExitTime,
+              Pointer<FILETIME> lpKernelTime,
+              Pointer<FILETIME> lpUserTime)>('GetThreadTimes');
+      expect(GetThreadTimes, isA<Function>());
     });
     test('Can instantiate GetThreadUILanguage', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
