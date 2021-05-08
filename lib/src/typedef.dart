@@ -187,33 +187,42 @@ class TypeDef extends TokenObject
     }
   }
 
-  /// Is the type a class?
+  /// Returns true if the type is a class.
   bool get isClass =>
       _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
 
-  /// Is the type an interface?
+  /// Returns trus if the type is an interface.
   bool get isInterface =>
       _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
 
+  /// Returns true if this type may not be directly instantiated.
   bool get isAbstract =>
       _attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
 
+  /// Returns true if this type may not have derived types.
   bool get isSealed =>
       _attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
 
+  /// Returns true if the name of the item may have special significance to
+  /// tools other than the CLI.
   bool get isSpecialName =>
       _attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
 
+  /// Returns true if the type is imported.
   bool get isImported =>
       _attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
 
+  /// Returns true if the fields of the type are to be serialized into a data
+  /// stream.
   bool get isSerializable =>
       _attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
 
+  /// Returns true if the type is a Windows Runtime type.
   bool get isWindowsRuntime =>
       _attributes & CorTypeAttr.tdWindowsRuntime ==
       CorTypeAttr.tdWindowsRuntime;
 
+  /// Returns true if the name of the item has special significance to the CLI.
   bool get isRTSpecialName =>
       _attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
 
@@ -232,14 +241,17 @@ class TypeDef extends TokenObject
     }
   }
 
+  /// Returns true if the CLI need not initialize the type before a static
+  /// method is called.
   bool get isBeforeFieldInit =>
       _attributes & CorTypeAttr.tdBeforeFieldInit ==
       CorTypeAttr.tdBeforeFieldInit;
 
+  /// Returns true if the type is exported, and a type forwarder.
   bool get isForwarder =>
       _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
 
-  /// Is the type a delegate?
+  /// Returns true if the type is a delegate.
   bool get isDelegate => parent?.name == 'System.MulticastDelegate';
 
   /// Retrieve class layout information.

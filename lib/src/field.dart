@@ -29,6 +29,9 @@ enum FieldAccess {
   public
 }
 
+/// A field.
+///
+/// Fields are typed memory locations that store the data of a program.
 class Field extends TokenObject with CustomAttributesMixin {
   final BaseType fieldType;
   final String name;

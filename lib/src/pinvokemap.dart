@@ -9,14 +9,20 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'utils/exception.dart';
 
+/// Convention for marshalling P/Invoke function strings.
 enum StringMarshalConvention { notSpecified, ansi, unicode, auto }
 
+/// Convention for mapping Unicode characters in P/Invoke calls.
 enum BestFit { useAssem, enabled, disabled }
 
+/// Convention for how the interop marshaler should respond to an unmappable
+/// character.
 enum ThrowOnUnmappableChar { useAssem, enabled, disabled }
 
+/// Platform calling convention.
 enum CallingConvention { winApi, cdecl, stdcall, thiscall, fastcall }
 
+/// A P/Invoke method representation.
 class PinvokeMap extends TokenObject {
   final int importDllToken;
   final String importName;

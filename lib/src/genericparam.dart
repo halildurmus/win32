@@ -37,6 +37,10 @@ class SpecialConstraints {
       CorGenericParamAttr.gpDefaultConstructorConstraint;
 }
 
+/// A generic parameter.
+///
+/// Generic parameters belong to [Method]s or [TypeDef]s and contain
+/// [GenericParamConstraint]s.
 class GenericParam extends TokenObject with CustomAttributesMixin {
   final String name;
   final int sequence;

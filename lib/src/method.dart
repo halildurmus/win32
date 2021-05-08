@@ -36,6 +36,7 @@ enum MemberAccess {
 
 enum VtableLayout { reuseSlot, newSlot }
 
+/// A method.
 class Method extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
   int implFlags;

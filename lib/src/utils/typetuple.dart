@@ -7,6 +7,7 @@ import '../typedef.dart';
 import '../typeidentifier.dart';
 import 'blob.dart';
 
+/// An intermediate representation of a segment of a signature.
 class TypeTuple {
   /// Returns the second item of the tuple
   final int offsetLength;

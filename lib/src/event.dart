@@ -11,6 +11,11 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 
 /// An event.
+///
+/// Events are way to associated a collection of methods defined on a given
+/// class. There are two required methods (`add_` and `remove_`), plus an
+/// optional one (`raise_`). Events are described in §II.22.13 of the ECMA-335
+/// spec.
 class Event extends TokenObject with CustomAttributesMixin {
   final int addOnToken;
   final int eventType;

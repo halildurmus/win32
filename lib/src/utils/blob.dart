@@ -1,8 +1,10 @@
 import 'exception.dart';
 
-// The Blob heap is compressed, with an algorithm described in §II.23.2 of the
-// ECMA spec. The maximum encodable unsigned integer is 29 bits long,
-// 0x1FFFFFFF.
+/// A utility class for uncompressing data from the metadata blob heap.
+///
+/// The Blob heap is compressed, with an algorithm described in §II.23.2 of the
+/// ECMA spec. The maximum encodable unsigned integer is 29 bits long,
+/// 0x1FFFFFFF.
 class UncompressedData {
   int data;
   int dataLength;

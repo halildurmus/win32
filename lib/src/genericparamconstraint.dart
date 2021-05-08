@@ -10,6 +10,12 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 
+/// A generic parameter constraint.
+///
+/// Each generic parameter can be constrained to derive from zero or one
+/// classes, or to implement zero or more interfaces. This class implements a
+/// single constraint. Generic constraints are described in §II.22.21 of the
+/// ECMA-335 spec.
 class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
   final int _constraintType;
   final int _parentToken;
