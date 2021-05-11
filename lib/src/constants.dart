@@ -104,8 +104,8 @@ const CLSCTX_LOCAL_SERVER = 0x4;
 /// manages objects of this class is run on a different computer.
 const CLSCTX_REMOTE_SERVER = 0x10;
 
-/// The combination of [CLSCTX_INPROC_SERVER], [CLSCTX_INPROC_HANDLER],
-/// [CLSCTX_LOCAL_SERVER], and [CLSCTX_REMOTE_SERVER].
+/// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
+/// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
 const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
