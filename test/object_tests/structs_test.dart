@@ -5,7 +5,7 @@ import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a class representation.
 void main() {
-  // .class public sequential ansi sealed beforefieldinit Windows.Win32.WindowsAndMessaging.ACCEL
+  // .class public sequential ansi sealed beforefieldinit Windows.Win32.UI.WindowsAndMessaging.ACCEL
   // 	extends [netstandard]System.ValueType
   // {
   // 	// Fields
@@ -13,10 +13,11 @@ void main() {
   // 	.field public uint16 key
   // 	.field public uint16 cmd
   //
-  // } // end of class Windows.Win32.WindowsAndMessaging.ACCEL
-  test('Windows.Win32.WindowsAndMessaging.ACCEL', () {
+  // } // end of class Windows.Win32.UI.WindowsAndMessaging.ACCEL
+  test('Windows.Win32.UI.WindowsAndMessaging.ACCEL', () {
     final scope = MetadataStore.getWin32Scope();
-    final accel = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.ACCEL')!;
+    final accel =
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.ACCEL')!;
 
     expect(accel.isClass, isTrue);
     expect(accel.typeVisibility, equals(TypeVisibility.public));
@@ -25,7 +26,7 @@ void main() {
     expect(accel.isSealed, isTrue);
     expect(accel.isBeforeFieldInit, isTrue);
 
-    expect(accel.name, equals('Windows.Win32.WindowsAndMessaging.ACCEL'));
+    expect(accel.name, equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL'));
     expect(accel.parent?.name, equals('System.ValueType'));
 
     expect(accel.fields.length, equals(3));

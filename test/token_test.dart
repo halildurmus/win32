@@ -17,7 +17,8 @@ void main() {
 
   test('ValueType', () {
     final scope = MetadataStore.getWin32Scope();
-    final accel = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.ACCEL')!;
+    final accel =
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.ACCEL')!;
     expect(accel.isResolvedToken, isTrue);
     expect(accel.parent?.name, equals('System.ValueType'));
     expect(accel.parent?.isResolvedToken, isFalse);

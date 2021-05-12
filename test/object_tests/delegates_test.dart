@@ -5,36 +5,37 @@ import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a delegate object
 void main() {
-  // .class public auto auto sealed beforefieldinit Windows.Win32.WindowsAndMessaging.WNDPROC
-  // 	extends [netstandard]System.MulticastDelegate
+  // .class public auto auto sealed beforefieldinit Windows.Win32.UI.WindowsAndMessaging.WNDPROC
+  //   extends [netstandard]System.MulticastDelegate
   // {
-  // 	.custom instance void [netstandard]System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute::.ctor(valuetype [netstandard]System.Runtime.InteropServices.CallingConvention) = (
-  // 		01 00 01 00 00 00 00 00
-  // 	)
-  // 	// Methods
-  // 	.method public hidebysig specialname rtspecialname
-  // 		instance void .ctor (
-  // 			object 'object',
-  // 			native int 'method'
-  // 		) runtime managed
-  // 	{
-  // 	} // end of method WNDPROC::.ctor
+  //   .custom instance void [netstandard]System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute::.ctor(valuetype [netstandard]System.Runtime.InteropServices.CallingConvention) = (
+  //     01 00 01 00 00 00 00 00
+  //   )
+  //   // Methods
+  //   .method public hidebysig specialname rtspecialname
+  //     instance void .ctor (
+  //       object 'object',
+  //       native int 'method'
+  //     ) runtime managed
+  //   {
+  //   } // end of method WNDPROC::.ctor
 
-  // 	.method public hidebysig newslot virtual
-  // 		instance valuetype Windows.Win32.SystemServices.LRESULT Invoke (
-  // 			[in] valuetype Windows.Win32.WindowsAndMessaging.HWND param0,
-  // 			[in] uint32 param1,
-  // 			[in] valuetype Windows.Win32.WindowsAndMessaging.WPARAM param2,
-  // 			[in] valuetype Windows.Win32.WindowsAndMessaging.LPARAM param3
-  // 		) runtime managed
-  // 	{
-  // 	} // end of method WNDPROC::Invoke
+  //   .method public hidebysig newslot virtual
+  //     instance valuetype [Windows.Win32.winmd]Windows.Win32.System.SystemServices.LRESULT Invoke (
+  //       [in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.HWND param0,
+  //       [in] uint32 param1,
+  //       [in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.WPARAM param2,
+  //       [in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.LPARAM param3
+  //     ) runtime managed
+  //   {
+  //   } // end of method WNDPROC::Invoke
 
-  // } // end of class Windows.Win32.WindowsAndMessaging.WNDPROC
-  test('Windows.Win32.WindowsAndMessaging.WNDPROC', () {
+  // } // end of class Windows.Win32.UI.WindowsAndMessaging.WNDPROC
+
+  test('Windows.Win32.UI.WindowsAndMessaging.WNDPROC', () {
     final scope = MetadataStore.getWin32Scope();
     final wndProc =
-        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.WNDPROC')!;
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.WNDPROC')!;
 
     expect(wndProc.isClass, isTrue);
     expect(wndProc.typeVisibility, equals(TypeVisibility.public));
@@ -42,7 +43,8 @@ void main() {
     expect(wndProc.stringFormat, equals(StringFormat.auto));
     expect(wndProc.isSealed, isTrue);
     expect(wndProc.isBeforeFieldInit, isTrue);
-    expect(wndProc.name, equals('Windows.Win32.WindowsAndMessaging.WNDPROC'));
+    expect(
+        wndProc.name, equals('Windows.Win32.UI.WindowsAndMessaging.WNDPROC'));
     expect(wndProc.parent?.name, equals('System.MulticastDelegate'));
 
     expect(wndProc.customAttributes.length, equals(1));
@@ -85,7 +87,7 @@ void main() {
     expect(wndProc.methods[1].isVirtual, isTrue);
 
     expect(wndProc.methods[1].returnType.typeIdentifier.name,
-        equals('Windows.Win32.SystemServices.LRESULT'));
+        equals('Windows.Win32.System.SystemServices.LRESULT'));
     expect(wndProc.methods[1].name, equals('Invoke'));
     expect(wndProc.methods[1].parameters.length, equals(4));
 
@@ -94,7 +96,7 @@ void main() {
     expect(wndProc.methods[1].parameters[0].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.name,
-        equals('Windows.Win32.WindowsAndMessaging.HWND'));
+        equals('Windows.Win32.UI.WindowsAndMessaging.HWND'));
 
     expect(wndProc.methods[1].parameters[1].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[1].name, equals('param1'));
@@ -106,14 +108,14 @@ void main() {
     expect(wndProc.methods[1].parameters[2].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.name,
-        equals('Windows.Win32.WindowsAndMessaging.WPARAM'));
+        equals('Windows.Win32.UI.WindowsAndMessaging.WPARAM'));
 
     expect(wndProc.methods[1].parameters[3].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[3].name, equals('param3'));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
-        equals('Windows.Win32.WindowsAndMessaging.LPARAM'));
+        equals('Windows.Win32.UI.WindowsAndMessaging.LPARAM'));
     expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.runtime));
     expect(wndProc.methods[1].implFeatures.isManaged, isTrue);
   });

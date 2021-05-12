@@ -7,20 +7,20 @@ import 'package:winmd/winmd.dart';
 /// Exhaustively test a method representation.
 void main() {
   // .method public hidebysig static pinvokeimpl("USER32" nomangle lasterr winapi)
-  // 	valuetype Windows.Win32.SystemServices.BOOL AdjustWindowRect (
-  // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.DisplayDevices.RECT* lpRect,
+  // 	valuetype [Windows.Win32.winmd]Windows.Win32.System.SystemServices.BOOL AdjustWindowRect (
+  // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.UI.DisplayDevices.RECT* lpRect,
   // 		[in] uint32 dwStyle,
-  // 		[in] valuetype Windows.Win32.SystemServices.BOOL bMenu
+  // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.System.SystemServices.BOOL bMenu
   // 	) cil managed preservesig
   // {
   // 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.SupportedOSPlatformAttribute::.ctor(string) = (
   // 		01 00 0a 77 69 6e 64 6f 77 73 35 2e 30 00 00
   // 	)
   // } // end of method Apis::AdjustWindowRect
-  test('Windows.Win32.WindowsAndMessaging.Apis.AdjustWindowRect', () {
+  test('Windows.Win32.UI.WindowsAndMessaging.Apis.AdjustWindowRect', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
-        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
     final awr = typedef.findMethod('AdjustWindowRect')!;
 
     expect(awr.memberAccess, equals(MemberAccess.public));
@@ -34,7 +34,7 @@ void main() {
     expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.winApi));
 
     expect(awr.returnType.typeIdentifier.name,
-        equals('Windows.Win32.SystemServices.BOOL'));
+        equals('Windows.Win32.System.SystemServices.BOOL'));
     expect(awr.name, equals('AdjustWindowRect'));
 
     expect(awr.parameters.length, equals(3));
@@ -46,7 +46,7 @@ void main() {
         equals(BaseType.PointerTypeModifier));
     expect(awr.parameters[0].typeIdentifier.typeArg, isNotNull);
     expect(awr.parameters[0].typeIdentifier.typeArg?.name,
-        equals('Windows.Win32.DisplayDevices.RECT'));
+        equals('Windows.Win32.UI.DisplayDevices.RECT'));
 
     expect(awr.parameters[1].isInParam, isTrue);
     expect(awr.parameters[1].name, equals('dwStyle'));
@@ -57,7 +57,7 @@ void main() {
     expect(awr.parameters[2].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(awr.parameters[2].typeIdentifier.name,
-        equals('Windows.Win32.SystemServices.BOOL'));
+        equals('Windows.Win32.System.SystemServices.BOOL'));
 
     expect(awr.implFeatures.codeType, equals(CodeType.IL));
     expect(awr.implFeatures.isManaged, isTrue);

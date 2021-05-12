@@ -13,52 +13,65 @@ void main() {
   });
 
   test('Can find a COM interface in winmd by name', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
 
     expect(iNetwork.isResolvedToken, isTrue);
   });
 
   group('INetwork tests', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
-
     test('Can search for a COM interface in winmd', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       expect(iNetwork.isInterface, isTrue);
       expect(iNetwork.isResolvedToken, isTrue);
     });
 
     test('INetwork inherits from IDispatch', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       expect(iNetwork.interfaces.first.name, endsWith('IDispatch'));
     });
 
     test('Interface has expected number of methods', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       expect(iNetwork.methods.length, equals(13));
     });
 
     test('Interface has the right IID', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       expect(iNetwork.guid, equals('{DCB00002-570F-4A9B-8D69-199FDBA5723B}'));
     });
 
     test('COM methods are named correctly', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final getName = iNetwork.methods.first;
 
       expect(getName.name, equals('GetName'));
     });
 
     test('COM methods have right number of parameters', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final getName = iNetwork.methods.first;
 
       expect(getName.parameters.length, equals(1));
     });
 
     test('COM methods return HRESULTs', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final getName = iNetwork.methods.first;
 
       expect(getName.returnType.typeIdentifier.name, endsWith('HRESULT'));
     });
 
     test('COM method string pointers are represented accurately', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final getName = iNetwork.methods.first;
       final param = getName.parameters.first;
 
@@ -72,6 +85,8 @@ void main() {
     });
 
     test('COM method strings are represented accurately', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final setName = iNetwork.methods[1];
       final param = setName.parameters.first;
 
@@ -82,6 +97,8 @@ void main() {
     });
 
     test('GUIDs are represented accurately', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
       final param = getNetworkId.parameters.first;
 
@@ -93,11 +110,15 @@ void main() {
     });
 
     test('Properties are true for isGetProperty', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
       expect(isConnected.isGetProperty, equals(true));
     });
 
     test('Properties are represented accurately', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
       final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
       final param = isConnected.parameters.first;
 
@@ -112,15 +133,15 @@ void main() {
   test(
       'IApplicationActivationManager.ActivateApplication '
       'recognizes ACTIVATEOPTIONS as an enum', () {
-    final iApplicationActivationManager =
-        scope.findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
+    final iApplicationActivationManager = scope
+        .findTypeDef('Windows.Win32.UI.Shell.IApplicationActivationManager')!;
     final activateApplication =
         iApplicationActivationManager.findMethod('ActivateApplication')!;
     final param = activateApplication.parameters[2];
 
     expect(param.name, equals('options'));
     expect(param.typeIdentifier.name,
-        equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
+        equals('Windows.Win32.UI.Shell.ACTIVATEOPTIONS'));
     expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
     expect(param.typeIdentifier.type?.parent?.name, equals('System.Enum'));
     expect(param.typeIdentifier.typeArg, isNull);
