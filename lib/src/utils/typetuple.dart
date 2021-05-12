@@ -124,6 +124,7 @@ class TypeTuple {
   @override
   String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
 
+  /// Decodes a single `TypeDef` / `TypeRef` / `TypeSpec` token.
   static int _unencodeDefRefSpecToken(int encoded) {
     final token = encoded >> 2;
 

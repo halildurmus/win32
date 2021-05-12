@@ -7,6 +7,7 @@ import 'base.dart';
 import 'com/constants.dart';
 import 'scope.dart';
 
+/// A tuple of a field and its byte offset within a parent struct.
 class FieldOffset {
   final int fieldToken;
   final int offset;

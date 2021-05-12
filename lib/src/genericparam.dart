@@ -14,8 +14,10 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
 
+/// Indicates the kind of variance for a delegate / interface generic parameter.
 enum Variance { nonvariant, covariant, contravariant }
 
+/// Identifies special constraints on a generic parameter.
 class SpecialConstraints {
   final int _attributes;
 
@@ -102,6 +104,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     throw WinmdException('Unrecognized parent token.');
   }
 
+  /// Returns the parameter variance.
   Variance get variance {
     switch (_attributes & CorGenericParamAttr.gpVarianceMask) {
       case CorGenericParamAttr.gpNonVariant:
@@ -115,6 +118,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     }
   }
 
+  /// Returns a list of the constraints on the generic parameter.
   List<GenericParamConstraint> get constraints {
     if (_constraints.isEmpty) {
       final phEnum = calloc<HCORENUM>();
@@ -141,6 +145,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     return _constraints;
   }
 
+  /// Returns special constraints that exist on a generic parameter.
   SpecialConstraints get specialConstraints => SpecialConstraints(
       _attributes & CorGenericParamAttr.gpSpecialConstraintMask);
 }

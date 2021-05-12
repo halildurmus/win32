@@ -9,6 +9,7 @@ import '../type_aliases.dart';
 
 /// Represents an object that contains generic parameters.
 mixin GenericParamsMixin on TokenObject {
+  /// Returns a list of generic parameters on this object.
   List<GenericParam> get genericParams {
     final params = <GenericParam>[];
 

@@ -17,6 +17,7 @@ const IMAGE_FILE_MACHINE_AMD64 = 0x8664;
 
 enum ImageType { i386, ia64, amd64 }
 
+/// A representation of the assembly file's portable executable format.
 class PEKind {
   late final int _machine;
   late final int _peKind;

@@ -1,4 +1,4 @@
-## 1.0.0-pre.12
+## 1.0.0-pre.13
 
 - Update to Dart 2.13, which includes new FFI support for packed structs, type
   aliases and arrays.

@@ -162,6 +162,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   bool get hasFieldRVA =>
       _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
 
+  /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 }
 

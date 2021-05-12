@@ -12,6 +12,11 @@ import 'base.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 
+/// A member reference.
+///
+/// This class is used to declare a reference to a field or method which is
+/// defined in another module or assembly. It represents either a `MethodRef` or
+/// a `FieldRef`.
 class MemberRef extends TokenObject {
   final String name;
   final Uint8List signatureBlob;

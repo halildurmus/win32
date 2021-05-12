@@ -175,13 +175,16 @@ class Method extends TokenObject
   bool get isRTSpecialName =>
       _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
+  /// Returns the P/Invoke mapping representation for this object.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 
   MethodImplementationFeatures get implFeatures =>
       MethodImplementationFeatures(implFlags);
 
+  /// Returns true if the method is a property getter or setter.
   bool get isProperty => isGetProperty | isSetProperty;
 
+  /// Returns the module that contains the method.
   ModuleRef get module {
     final pdwMappingFlags = calloc<DWORD>();
     final szImportName = wsalloc(MAX_STRING_SIZE);
@@ -203,6 +206,7 @@ class Method extends TokenObject
     }
   }
 
+  /// Returns true if the method contains generic parameters.
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
