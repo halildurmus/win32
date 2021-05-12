@@ -10,8 +10,8 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
 
   test('COM method strings are projected to Dart accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final setName = iNetwork.methods[1];
     final param = setName.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -20,8 +20,8 @@ void main() {
   });
 
   test('COM method string pointers are projected to Dart accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final getName = iNetwork.methods.first;
     final param = getName.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -30,8 +30,8 @@ void main() {
   });
 
   test('GUIDs are projected accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
     final param = getNetworkId.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -41,8 +41,8 @@ void main() {
   });
 
   test('Enums like NLM_NETWORK_CATEGORY are projected accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final setCategory = iNetwork.findMethod('SetCategory')!;
     final param = setCategory.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -52,8 +52,8 @@ void main() {
   });
 
   test('Pointers to enums are projected accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final getCategory = iNetwork.findMethod('GetCategory')!;
     final param = getCategory.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -63,8 +63,8 @@ void main() {
   });
 
   test('Pointers to interfaces are projected accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final getNetworkConnections = iNetwork.findMethod('GetNetworkConnections')!;
     final param = getNetworkConnections.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -74,8 +74,8 @@ void main() {
   });
 
   test('Properties are projected accurately', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+    final iNetwork = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
     final param = isConnected.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
@@ -85,22 +85,28 @@ void main() {
   });
 
   group('Projection of INetwork', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
-
     test('Correct number of projected methods', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       expect(projection.methods.length, equals(13));
     });
 
     test('Correct number of parameters in a test method', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       expect(projection.methods.first.parameters.length, equals(1));
     });
 
     test('Property can be found in projection', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       final isConnected = projection.methods
@@ -109,6 +115,9 @@ void main() {
     });
 
     test('isConnectedToInternet property is a property', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       final isConnected = projection.methods
@@ -117,6 +126,9 @@ void main() {
     });
 
     test('isConnectedToInternet property return is HRESULT', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       final isConnected = projection.methods
@@ -126,6 +138,9 @@ void main() {
     });
 
     test('isConnectedToInternet property parameter is VARIANT_BOOL', () {
+      final iNetwork = scope
+          .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+
       final projection = ClassProjector(iNetwork).projection;
 
       final isConnected = projection.methods
@@ -138,7 +153,7 @@ void main() {
 
   test('IEnumNetworkConnections.NewEnum projects a Pointer', () {
     final iEnumNetworkConnections = scope.findTypeDef(
-        'Windows.Win32.NetworkListManager.IEnumNetworkConnections')!;
+        'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections')!;
     final projection = ClassProjector(iEnumNetworkConnections).projection;
     final newEnum = projection.methods
         .firstWhere((method) => (method.name == 'get__NewEnum'));
@@ -150,8 +165,8 @@ void main() {
   test(
       'IApplicationActivationManager.ActivateApplication '
       'projects ACTIVATEOPTIONS as an enum', () {
-    final iApplicationActivationManager =
-        scope.findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
+    final iApplicationActivationManager = scope
+        .findTypeDef('Windows.Win32.UI.Shell.IApplicationActivationManager')!;
     final activateApplication =
         iApplicationActivationManager.findMethod('ActivateApplication')!;
     final param = activateApplication.parameters[2];
@@ -161,16 +176,15 @@ void main() {
     expect(projector.nativeType, equals('Uint32'));
     expect(projector.dartType, equals('int'));
   });
-
-  test('Unidentified COM interfaces should be represented as Pointers', () {
+  test('COM interfaces should be represented as Pointers', () {
     final iSpellChecker =
-        scope.findTypeDef('Windows.Win32.Intl.ISpellCheckerFactory')!;
+        scope.findTypeDef('Windows.Win32.Globalization.ISpellCheckerFactory')!;
     final createSpellChecker = iSpellChecker.findMethod('CreateSpellChecker')!;
     final type = createSpellChecker
         .parameters.last.typeIdentifier; // ISpellChecker **value
     final typeProjection = TypeProjector(type);
 
-    expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
-    expect(typeProjection.dartType, equals('Pointer<Pointer>'));
+    expect(typeProjection.nativeType, equals('Pointer<ISpellChecker>'));
+    expect(typeProjection.dartType, equals('Pointer<ISpellChecker>'));
   });
 }

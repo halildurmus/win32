@@ -21,7 +21,8 @@ void main() {
   });
 
   test('COM golden', () {
-    const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
+    const typeToGenerate =
+        'Windows.Win32.Networking.NetworkListManager.INetwork';
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef(typeToGenerate)!;
 

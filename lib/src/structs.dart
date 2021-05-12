@@ -835,6 +835,8 @@ class GUID extends Struct {
   }
 }
 
+Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
+
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;

@@ -78,7 +78,10 @@ int generateStructs(Win32API win32) {
 
   for (final struct in win32.structs.keys) {
     final win32struct = win32.structs[struct]!;
-    final typedef = scope.findTypeDef(win32struct.namespace)!;
+    final typedef = scope.findTypeDef(win32struct.namespace);
+    if (typedef == null) {
+      throw Exception('$struct missing');
+    }
 
     writer.writeStringSync(wrapCommentText(win32struct.comment));
 
