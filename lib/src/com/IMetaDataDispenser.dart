@@ -31,8 +31,9 @@ typedef _OpenScopeOnMemory_Dart = int Function(
     Pointer<GUID> riid,
     Pointer<Pointer> ppIUnk);
 
+/// Provides methods to create a new metadata scope, or open an existing one.
+///
 /// {@category Interface}
-/// {@category com}
 class IMetaDataDispenser extends IUnknown {
   // vtable begins at 3, ends at 5
 

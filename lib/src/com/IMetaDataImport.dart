@@ -784,8 +784,11 @@ typedef _IsGlobal_Native = Int32 Function(
 typedef _IsGlobal_Dart = int Function(
     Pointer obj, int tk, Pointer<Int32> pbIsGlobal);
 
+/// Provides methods for importing and manipulating existing metadata from a
+/// portable executable (PE) file or other source, such as a type library or a
+/// stand-alone, run-time metadata binary.
+///
 /// {@category Interface}
-/// {@category com}
 class IMetaDataImport extends IUnknown {
   // vtable begins at 3, ends at 64
 

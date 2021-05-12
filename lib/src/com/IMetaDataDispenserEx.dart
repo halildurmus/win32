@@ -77,8 +77,10 @@ typedef _FindAssemblyModule_Dart = int Function(
     int cchName,
     Pointer<Uint32> pcName);
 
+/// Extends the [IMetaDataDispenser] interface to provide the capability to
+/// control how the metadata APIs operate on the current metadata scope.
+///
 /// {@category Interface}
-/// {@category com}
 class IMetaDataDispenserEx extends IMetaDataDispenser {
   // vtable begins at 6, ends at 11
 

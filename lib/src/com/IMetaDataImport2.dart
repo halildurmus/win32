@@ -106,8 +106,10 @@ typedef _EnumMethodSpecs_Dart = int Function(
     int cMax,
     Pointer<Uint32> pcMethodSpecs);
 
+/// Extends the [IMetaDataImport] interface to provide the capability of working
+/// with generic types.
+///
 /// {@category Interface}
-/// {@category com}
 class IMetaDataImport2 extends com.IMetaDataImport {
   // vtable begins at 65, ends at 72
 
