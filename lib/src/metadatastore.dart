@@ -12,6 +12,7 @@ import 'package:win32/win32.dart';
 
 import 'com/IMetaDataDispenser.dart';
 import 'com/IMetaDataImport2.dart';
+import 'com/constants.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
@@ -31,17 +32,25 @@ class MetadataStore {
   static void initialize() {
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<COMObject>();
+    final CLSID_CorMetaDataDispenser =
+        convertToCLSID(CorMetaDataDispenser.CLSID);
+    final IID_IMetaDataDispenser = convertToIID(IMetaDataDispenser.IID);
 
-    final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
-        convertToIID(IID_IMetaDataDispenser), dispenserObject.cast());
+    try {
+      final hr = MetaDataGetDispenser(CLSID_CorMetaDataDispenser,
+          IID_IMetaDataDispenser, dispenserObject.cast());
 
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+
+      dispenser = IMetaDataDispenser(dispenserObject);
+
+      isInitialized = true;
+    } finally {
+      free(CLSID_CorMetaDataDispenser);
+      free(IID_IMetaDataDispenser);
     }
-
-    dispenser = IMetaDataDispenser(dispenserObject);
-
-    isInitialized = true;
   }
 
   /// Return the scope that contains the Win32 metadata.
@@ -83,10 +92,11 @@ class MetadataStore {
     } else {
       final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<COMObject>();
+      final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
 
       try {
-        final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(IID_IMetaDataImport2), pReader.cast());
+        final hr = dispenser.OpenScope(
+            szFile, CorOpenFlags.ofRead, IID_IMetaDataImport2, pReader.cast());
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
@@ -96,6 +106,7 @@ class MetadataStore {
         }
       } finally {
         free(szFile);
+        free(IID_IMetaDataImport2);
       }
     }
   }

@@ -5,8 +5,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-const IID_IMetaDataImport = '{7DAC8207-D3AE-4C75-9B67-92801A497D44}';
-
 typedef _CloseEnum_Native = Int32 Function(Pointer obj, IntPtr hEnum);
 typedef _CloseEnum_Dart = int Function(Pointer obj, int hEnum);
 
@@ -791,6 +789,8 @@ typedef _IsGlobal_Dart = int Function(
 /// {@category Interface}
 class IMetaDataImport extends IUnknown {
   // vtable begins at 3, ends at 64
+
+  static const IID = '{7DAC8207-D3AE-4C75-9B67-92801A497D44}';
 
   IMetaDataImport(Pointer<COMObject> ptr) : super(ptr);
 

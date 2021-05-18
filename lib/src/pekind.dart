@@ -11,9 +11,9 @@ import 'com/IMetaDataImport2.dart';
 import 'com/constants.dart';
 import 'utils/exception.dart';
 
-const IMAGE_FILE_MACHINE_I386 = 0x014C;
-const IMAGE_FILE_MACHINE_IA64 = 0x0200;
-const IMAGE_FILE_MACHINE_AMD64 = 0x8664;
+const _IMAGE_FILE_MACHINE_I386 = 0x014C;
+const _IMAGE_FILE_MACHINE_IA64 = 0x0200;
+const _IMAGE_FILE_MACHINE_AMD64 = 0x8664;
 
 enum ImageType { i386, ia64, amd64 }
 
@@ -69,11 +69,11 @@ class PEKind {
   /// module.
   ImageType get imageType {
     switch (_machine) {
-      case IMAGE_FILE_MACHINE_I386:
+      case _IMAGE_FILE_MACHINE_I386:
         return ImageType.i386;
-      case IMAGE_FILE_MACHINE_IA64:
+      case _IMAGE_FILE_MACHINE_IA64:
         return ImageType.ia64;
-      case IMAGE_FILE_MACHINE_AMD64:
+      case _IMAGE_FILE_MACHINE_AMD64:
         return ImageType.amd64;
       default:
         throw WinmdException('Unrecognized image type.');

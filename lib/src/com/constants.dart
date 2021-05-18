@@ -10,6 +10,10 @@
 import '../enums.dart';
 import '../utils/exception.dart';
 
+class CorMetaDataDispenser {
+  static const CLSID = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
+}
+
 /// COM error returned when a Find* method returns no results
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 

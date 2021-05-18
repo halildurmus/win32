@@ -1,7 +1,21 @@
 import 'com/constants.dart';
 
 /// Code type of contained code.
-enum CodeType { IL, native, optIL, runtime }
+enum CodeType {
+  /// Specifies that the method implementation is Microsoft intermediate
+  /// language (MSIL).
+  IL,
+
+  /// Specifies that the method implementation is native.
+  native,
+
+  /// Specifies that the method implementation is OPTIL.
+  optIL,
+
+  /// Specifies that the method implementation is provided by the common
+  /// language runtime.
+  runtime
+}
 
 /// Contains values that describe method implementation features.
 class MethodImplementationFeatures {

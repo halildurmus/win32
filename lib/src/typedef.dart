@@ -23,19 +23,56 @@ import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
 enum TypeVisibility {
+  /// Specifies that the type is not in public scope.
   notPublic,
+
+  /// Specifies that the type is in public scope.
   public,
+
+  /// Specifies that the type is nested with public visibility.
   nestedPublic,
+
+  /// Specifies that the type is nested with private visibility.
   nestedPrivate,
+
+  /// Specifies that the type is nested with family visibility.
   nestedFamily,
+
+  /// Specifies that the type is nested with assembly visibility.
   nestedAssembly,
+
+  /// Specifies that the type is nested with family and assembly visibility.
   nestedFamilyAndAssembly,
+
+  /// Specifies that the type is nested with family or assembly visibility.
   nestedFamilyOrAssembly
 }
 
-enum TypeLayout { auto, sequential, explicit }
+enum TypeLayout {
+  /// Specifies that the fields of this type are laid out automatically.
+  auto,
 
-enum StringFormat { ansi, unicode, auto, custom }
+  /// Specifies that the fields of this type are laid out sequentially.
+  sequential,
+
+  /// Specifies that field layout is supplied explicitly.
+  explicit
+}
+
+enum StringFormat {
+  /// Specifies that this type interprets an LPTSTR as ANSI.
+  ansi,
+
+  /// Specifies that this type interprets an LPTSTR as Unicode.
+  unicode,
+
+  /// Specifies that this type interprets an LPTSTR automatically.
+  auto,
+
+  /// Specifies that the type has a non-standard encoding, as specified by
+  /// CustomFormatMask.
+  custom
+}
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject

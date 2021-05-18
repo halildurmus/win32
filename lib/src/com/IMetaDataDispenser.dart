@@ -4,8 +4,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-const IID_IMetaDataDispenser = '{809C652E-7396-11D2-9771-00A0C9B4D50C}';
-
 typedef _DefineScope_Native = Int32 Function(Pointer obj, Pointer<GUID> rclsid,
     Uint32 dwCreateFlags, Pointer<GUID> riid, Pointer<Pointer> ppIUnk);
 typedef _DefineScope_Dart = int Function(Pointer obj, Pointer<GUID> rclsid,
@@ -36,6 +34,8 @@ typedef _OpenScopeOnMemory_Dart = int Function(
 /// {@category Interface}
 class IMetaDataDispenser extends IUnknown {
   // vtable begins at 3, ends at 5
+
+  static const IID = '{809C652E-7396-11D2-9771-00A0C9B4D50C}';
 
   IMetaDataDispenser(Pointer<COMObject> ptr) : super(ptr);
 

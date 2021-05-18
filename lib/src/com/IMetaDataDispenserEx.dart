@@ -7,8 +7,6 @@ import 'package:win32/win32.dart';
 
 import 'IMetaDataDispenser.dart';
 
-const IID_IMetaDataDispenserEx = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
-
 typedef _SetOption_Native = Int32 Function(
     Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT> pValue);
 typedef _SetOption_Dart = int Function(
@@ -83,6 +81,8 @@ typedef _FindAssemblyModule_Dart = int Function(
 /// {@category Interface}
 class IMetaDataDispenserEx extends IMetaDataDispenser {
   // vtable begins at 6, ends at 11
+
+  static const IID = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
 
   IMetaDataDispenserEx(Pointer<COMObject> ptr) : super(ptr);
 

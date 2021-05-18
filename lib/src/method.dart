@@ -24,17 +24,41 @@ import 'typeidentifier.dart';
 import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
+/// Specifies member access.
 enum MemberAccess {
+  /// Specifies that the member cannot be referenced.
   privateScope,
+
+  /// Specifies that the member is accessible only by the parent type.
   private,
+
+  /// Specifies that the member is accessible by subtypes only in this assembly.
   familyAndAssembly,
+
+  /// Specifies that the member is accessibly by anyone in the assembly.
   assembly,
+
+  /// Specifies that the member is accessible only by type and subtypes.
   family,
+
+  /// Specifies that the member is accessible by derived classes and by other
+  /// types in its assembly.
   familyOrAssembly,
+
+  /// Specifies that the member is accessible by all types with access to the
+  /// scope.
   public
 }
 
-enum VtableLayout { reuseSlot, newSlot }
+/// Specifies virtual table layout.
+enum VtableLayout {
+  /// Specifies that the slot used for this method in the virtual table be
+  /// reused. This is the default.
+  reuseSlot,
+
+  /// Specifies that the method always gets a new slot in the virtual table.
+  newSlot
+}
 
 /// A method.
 class Method extends TokenObject
@@ -106,6 +130,7 @@ class Method extends TokenObject
   @override
   String toString() => name;
 
+  /// The method's parent type.
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
   /// Returns information about the method's visibility / accessibility to other
@@ -178,6 +203,7 @@ class Method extends TokenObject
   /// Returns the P/Invoke mapping representation for this object.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 
+  /// Implementation features for the method.
   MethodImplementationFeatures get implFeatures =>
       MethodImplementationFeatures(implFlags);
 

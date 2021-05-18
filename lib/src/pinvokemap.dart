@@ -10,17 +10,77 @@ import 'type_aliases.dart';
 import 'utils/exception.dart';
 
 /// Convention for marshalling P/Invoke function strings.
-enum StringMarshalConvention { notSpecified, ansi, unicode, auto }
+enum StringMarshalConvention {
+  /// Reserved.
+  notSpecified,
+
+  /// Marshal strings as multiple-byte character strings.
+  ansi,
+
+  /// Marshal strings as Unicode 2-byte characters.
+  unicode,
+
+  /// Automatically marshal strings appropriately for the target operating
+  /// system. The default is Unicode on Windows NT, Windows 2000, Windows XP,
+  /// and the Windows Server 2003 family; the default is ANSI on Windows 98 and
+  /// Windows Me.
+  auto
+}
 
 /// Convention for mapping Unicode characters in P/Invoke calls.
-enum BestFit { useAssem, enabled, disabled }
+enum BestFit {
+  /// Reserved.
+  useAssem,
+
+  /// Perform best-fit mapping of Unicode characters that lack an exact match in
+  /// the ANSI character set.
+  enabled,
+
+  /// Do not perform best-fit mapping of Unicode characters. In this case, all
+  /// unmappable characters will be replaced by a ‘?’.
+  disabled
+}
 
 /// Convention for how the interop marshaler should respond to an unmappable
 /// character.
-enum ThrowOnUnmappableChar { useAssem, enabled, disabled }
+enum ThrowOnUnmappableChar {
+  /// Reserved.
+  useAssem,
+
+  /// Throw an exception when the interop marshaler encounters an unmappable
+  /// character.
+  enabled,
+
+  /// Do not throw an exception when the interop marshaler encounters an
+  /// unmappable character.
+  disabled
+}
 
 /// Platform calling convention.
-enum CallingConvention { winApi, cdecl, stdcall, thiscall, fastcall }
+enum CallingConvention {
+  /// Use the default platform calling convention. For example, on Windows the
+  /// default is StdCall and on Windows CE .NET it is Cdecl.
+  winApi,
+
+  /// Use the Cdecl calling convention. In this case, the caller cleans the
+  /// stack. This enables calling functions with varargs (that is, functions
+  /// that accept a variable number of parameters).
+  cdecl,
+
+  /// Use the StdCall calling convention. In this case, the callee cleans the
+  /// stack. This is the default convention for calling unmanaged functions with
+  /// platform invoke.
+  stdcall,
+
+  /// Use the ThisCall calling convention. In this case, the first parameter is
+  /// the this pointer and is stored in register ECX. Other parameters are
+  /// pushed on the stack. The ThisCall calling convention is used to call
+  /// methods on classes exported from an unmanaged DLL.
+  thiscall,
+
+  /// Reserved.
+  fastcall
+}
 
 /// A P/Invoke method representation.
 class PinvokeMap extends TokenObject {

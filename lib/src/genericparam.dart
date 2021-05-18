@@ -15,7 +15,16 @@ import 'typedef.dart';
 import 'utils/exception.dart';
 
 /// Indicates the kind of variance for a delegate / interface generic parameter.
-enum Variance { nonvariant, covariant, contravariant }
+enum Variance {
+  /// Indicates the absence of variance.
+  nonvariant,
+
+  /// Indicates covariance.
+  covariant,
+
+  /// Indicates contravariance.
+  contravariant
+}
 
 /// Identifies special constraints on a generic parameter.
 class SpecialConstraints {
@@ -23,17 +32,23 @@ class SpecialConstraints {
 
   const SpecialConstraints(this._attributes);
 
+  /// Indicates that no constraint applies to the Type parameter.
   bool get noConstraints =>
       _attributes == CorGenericParamAttr.gpNoSpecialConstraint;
 
+  /// Indicates that the Type parameter must be a reference type.
   bool get referenceType =>
       _attributes & CorGenericParamAttr.gpReferenceTypeConstraint ==
       CorGenericParamAttr.gpReferenceTypeConstraint;
 
+  /// Indicates that the Type parameter must be a value type that cannot be a
+  /// null value.
   bool get notNullable =>
       _attributes & CorGenericParamAttr.gpNotNullableValueTypeConstraint ==
       CorGenericParamAttr.gpNotNullableValueTypeConstraint;
 
+  /// Indicates that the Type parameter must have a default public constructor
+  /// that takes no parameters.
   bool get defaultConstructor =>
       _attributes & CorGenericParamAttr.gpDefaultConstructorConstraint ==
       CorGenericParamAttr.gpDefaultConstructorConstraint;

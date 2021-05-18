@@ -5,9 +5,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'IMetaDataImport.dart' as com;
-
-const IID_IMetaDataImport2 = '{FCE5EFA0-8BBA-4f8E-A036-8F2022B08466}';
+import 'IMetaDataImport.dart';
 
 typedef _EnumGenericParams_Native = Int32 Function(
     Pointer obj,
@@ -110,8 +108,10 @@ typedef _EnumMethodSpecs_Dart = int Function(
 /// with generic types.
 ///
 /// {@category Interface}
-class IMetaDataImport2 extends com.IMetaDataImport {
+class IMetaDataImport2 extends IMetaDataImport {
   // vtable begins at 65, ends at 72
+
+  static const IID = '{FCE5EFA0-8BBA-4f8E-A036-8F2022B08466}';
 
   IMetaDataImport2(Pointer<COMObject> ptr) : super(ptr);
 
