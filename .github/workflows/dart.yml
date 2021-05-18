@@ -19,7 +19,7 @@ jobs:
         # sure that tests don't fail on a non-supported platform).
         os: [windows-latest, windows-2016, ubuntu-latest]
 
-        sdk: [beta, dev, main]
+        sdk: [beta]
         # sdk: [stable, dev, main]
 
         # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
