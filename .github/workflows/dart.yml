@@ -16,8 +16,11 @@ jobs:
 
       matrix:
         os: [windows-latest, windows-2016]
-        # sdk: [stable, dev]
-        sdk: [beta, dev, main]
+        # Stable is not yet at 2.13.0. Dev has a regression being tracked at 
+        # https://github.com/dart-lang/sdk/issues/46004
+        #
+        # sdk: [stable, beta, dev]
+        sdk: [beta]
 
     steps:
       - name: Fetch sources
