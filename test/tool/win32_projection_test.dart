@@ -189,8 +189,10 @@ void main() {
   });
 
   test('Pointer<Enum> params are represented correctly', () {
-    final typedef = scope.findTypeDef('Windows.Win32.System.Pipes.Apis')!;
-    final api = typedef.findMethod('GetNamedPipeInfo')!;
+    final typedef = scope.findTypeDef('Windows.Win32.System.Pipes.Apis');
+    expect(typedef, isNotNull);
+
+    final api = typedef!.findMethod('GetNamedPipeInfo')!;
     final type = api.parameters[1].typeIdentifier;
     final typeProjection = TypeProjector(type);
 
