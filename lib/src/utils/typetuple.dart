@@ -55,7 +55,6 @@ class TypeTuple {
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         dataLength = 1 + ptrTuple.offsetLength;
         runtimeType.typeArg = ptrTuple.typeIdentifier;
-        // flattenTypeArgs(runtimeType);
         break;
 
       case BaseType.GenericTypeModifier:
