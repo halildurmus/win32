@@ -166,7 +166,9 @@ class TypeDef extends TokenObject
 
         // If it's the same scope, just look it up based on the returned name.
         if (scope.moduleToken == resolutionScopeToken) {
-          return scope.findTypeDef(typeName)!;
+          return scope.findTypeDef(typeName) ??
+              // anonymous union won't resolve
+              TypeDef(scope, 0, typeName);
         }
 
         // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
