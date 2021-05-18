@@ -45,9 +45,9 @@ void main() {
   // https://github.com/microsoft/win32metadata
   final scope = MetadataStore.getWin32Scope();
 
-  // Find a namesapce
+  // Find a namespace
   final namespace =
-      scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+      scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods

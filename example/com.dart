@@ -6,7 +6,7 @@
 
 import 'package:winmd/winmd.dart';
 
-const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
+const typeToGenerate = 'Windows.Win32.Networking.NetworkListManager.INetwork';
 
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
