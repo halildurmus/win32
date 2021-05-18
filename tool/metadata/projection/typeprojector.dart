@@ -6,7 +6,11 @@ import 'package:winmd/winmd.dart';
 
 import 'win32_typemap.dart';
 
-const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
+const Map<String, String> specialTypes = {
+  'System.Guid': 'GUID',
+  'Windows.Win32.System.SystemServices.LARGE_INTEGER': 'Int64',
+  'Windows.Win32.System.SystemServices.ULARGE_INTEGER': 'Uint64',
+};
 
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeProjector {
