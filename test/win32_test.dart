@@ -407,8 +407,7 @@ void main() {
 
   test('Pointers to enumerations are typed appropriately in functions', () {
     final scope = MetadataStore.getWin32Scope();
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.SystemServices.Apis')!;
+    final typedef = scope.findTypeDef('Windows.Win32.System.Pipes.Apis')!;
     final api = typedef.findMethod('GetNamedPipeInfo')!;
     final param = api.parameters[1];
 
