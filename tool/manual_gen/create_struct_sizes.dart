@@ -37,6 +37,7 @@ void main()
     printf("  const structSizeXX = {\\n");
 
     // Manually generated structs
+    printf("  'APPX_PACKAGE_SETTINGS': %zu,\\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'BLUETOOTH_ADDRESS': %zu,\\n", sizeof(BLUETOOTH_ADDRESS));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\\n", sizeof(BLUETOOTH_PIN_INFO));
