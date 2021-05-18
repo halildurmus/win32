@@ -11,10 +11,6 @@
         "namespace": "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW",
         "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
     },
-    "APPX_PACKAGE_SETTINGS": {
-        "namespace": "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS",
-        "comment": "Represents package settings used to create a package."
-    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.System.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."

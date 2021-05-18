@@ -16,4 +16,8 @@ dev_dependencies:
   path: ^1.8.0
   pedantic: ^1.11.0
   test: ^1.17.2
-  winmd: ^1.0.0-pre.14
+  winmd: ^1.0.0
+
+dependency_overrides:
+  winmd:
+    path: ../winmd

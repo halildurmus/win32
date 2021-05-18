@@ -837,6 +837,15 @@ class GUID extends Struct {
 
 Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
 
+/// Represents package settings used to create a package.
+///
+/// {@category Struct}
+class APPX_PACKAGE_SETTINGS extends Struct {
+  @Int32()
+  external int forceZip32;
+  external Pointer hashMethod;
+}
+
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;

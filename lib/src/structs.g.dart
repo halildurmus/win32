@@ -102,15 +102,6 @@ class ACTCTX extends Struct {
   external int hModule;
 }
 
-/// Represents package settings used to create a package.
-///
-/// {@category Struct}
-class APPX_PACKAGE_SETTINGS extends Struct {
-  @Int32()
-  external int forceZip32;
-  external Pointer hashMethod;
-}
-
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}

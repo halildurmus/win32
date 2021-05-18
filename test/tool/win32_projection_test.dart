@@ -287,4 +287,15 @@ void main() {
     expect(param.name, equals('Buffer'));
     expect(TypeProjector(param.typeIdentifier).nativeType, equals('Pointer'));
   });
+
+  test('BluetoothRemoveDevice', () {
+    final typedef = scope.findTypeDef('Windows.Win32.Devices.Bluetooth.Apis')!;
+    final api = typedef.findMethod('BluetoothRemoveDevice')!;
+    final param = api.parameters.first;
+    expect(param.name, equals('pAddress'));
+    final projector = TypeProjector(param.typeIdentifier);
+
+    expect(projector.nativeType, equals('Pointer<BLUETOOTH_ADDRESS>'));
+    expect(projector.dartType, equals('Pointer<BLUETOOTH_ADDRESS>'));
+  });
 }
