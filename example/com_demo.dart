@@ -56,8 +56,12 @@ void main() {
     refCount = modalWindow.Release();
     print('refCount is now $refCount\n');
 
+    fileDialog.Release();
+
     // Call QueryInterface() to get the IFileDialog interface again
     hr = modalWindow.QueryInterface(pIID_IFileDialog, ppIFD2.cast());
+    modalWindow.Release();
+
     final fileDialog2 = IFileDialog(ppIFD2);
     print('fileDialog2.ptr is ${fileDialog2.ptr.address.toHexString(64)}');
 
@@ -76,6 +80,8 @@ void main() {
         throw WindowsException(hr);
       }
     }
+
+    fileDialog2.Release();
 
     // Uninitialize COM now that we're done with it.
     CoUninitialize();
