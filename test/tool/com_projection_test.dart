@@ -184,7 +184,7 @@ void main() {
         .parameters.last.typeIdentifier; // ISpellChecker **value
     final typeProjection = TypeProjector(type);
 
-    expect(typeProjection.nativeType, equals('Pointer<ISpellChecker>'));
-    expect(typeProjection.dartType, equals('Pointer<ISpellChecker>'));
+    expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
+    expect(typeProjection.dartType, equals('Pointer<Pointer>'));
   });
 }

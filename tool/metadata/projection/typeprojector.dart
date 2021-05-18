@@ -234,6 +234,7 @@ class TypeProjector {
       // WinRT type
       return 'Pointer';
     }
+
     // Something failed. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
     return '__${typeIdentifier.name}__';
