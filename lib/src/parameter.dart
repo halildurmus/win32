@@ -31,7 +31,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       this._attributes, this.typeIdentifier, this.name, this.signatureBlob)
       : super(scope, token);
 
-  /// Creates a parameter object from its given token.
+  /// Creates a parameter object from a provided token.
   factory Parameter.fromToken(Scope scope, int token) {
     final ptkMethodDef = calloc<mdMethodDef>();
     final pulSequence = calloc<ULONG>();
@@ -80,10 +80,12 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     }
   }
 
+  /// Creates a parameter object from a provided type identifier.
   factory Parameter.fromTypeIdentifier(
           Scope scope, int methodToken, TypeIdentifier runtimeType) =>
       Parameter(scope, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
 
+  /// Creates a void parameter object.
   factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(scope,
       0, methodToken, 0, 0, TypeIdentifier(BaseType.Void), '', Uint8List(0));
 

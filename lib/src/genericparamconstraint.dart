@@ -24,6 +24,7 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       Scope scope, int token, this._parentToken, this._constraintType)
       : super(scope, token);
 
+  /// Creates a generic parameter constraint object from a provided token.
   factory GenericParamConstraint.fromToken(Scope scope, int token) {
     final ptGenericParam = calloc<mdGenericParam>();
     final ptkConstraintType = calloc<mdToken>();

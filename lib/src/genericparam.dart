@@ -55,6 +55,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       this._parentToken, this.name)
       : super(scope, token);
 
+  /// Creates a generic parameter object from a provided token.
   factory GenericParam.fromToken(Scope scope, int token) {
     final pulParamSeq = calloc<ULONG>();
     final pdwParamFlags = calloc<DWORD>();

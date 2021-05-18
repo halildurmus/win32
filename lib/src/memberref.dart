@@ -24,7 +24,7 @@ class MemberRef extends TokenObject {
   const MemberRef(Scope scope, int token, this.name, this.signatureBlob)
       : super(scope, token);
 
-  /// Creates a module object from its given token.
+  /// Creates a module object from a provided token.
   factory MemberRef.fromToken(Scope scope, int token) {
     final ptk = calloc<mdToken>();
     final szMember = wsalloc(MAX_STRING_SIZE);

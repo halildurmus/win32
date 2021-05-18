@@ -5,6 +5,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/constants.dart';
+import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
@@ -17,15 +18,15 @@ import 'typedef.dart';
 /// optional one (`raise_`). Events are described in §II.22.13 of the ECMA-335
 /// spec.
 class Event extends TokenObject with CustomAttributesMixin {
-  final int addOnToken;
   final int eventType;
-  final int fireToken;
   final String name;
   final List<int> otherMethodTokens;
-  final int removeOnToken;
 
+  final int _addOnToken;
   final int _attributes;
+  final int _fireToken;
   final int _parentToken;
+  final int _removeOnToken;
 
   Event(
       Scope scope,
@@ -34,13 +35,13 @@ class Event extends TokenObject with CustomAttributesMixin {
       this.name,
       this._attributes,
       this.eventType,
-      this.addOnToken,
-      this.removeOnToken,
-      this.fireToken,
+      this._addOnToken,
+      this._removeOnToken,
+      this._fireToken,
       this.otherMethodTokens)
       : super(scope, token);
 
-  /// Creates an event object from its given token.
+  /// Creates an event object from a provided token.
   factory Event.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szEvent = wsalloc(MAX_STRING_SIZE);
@@ -102,6 +103,21 @@ class Event extends TokenObject with CustomAttributesMixin {
   @override
   String toString() => name;
 
+  /// Returns the add method for the event.
+  Method? get addMethod => reader.IsValidToken(_addOnToken) == TRUE
+      ? Method.fromToken(scope, _addOnToken)
+      : null;
+
+  /// Returns the remove method for the event.
+  Method? get removeMethod => reader.IsValidToken(_removeOnToken) == TRUE
+      ? Method.fromToken(scope, _removeOnToken)
+      : null;
+
+  /// Returns the raise method for the event.
+  Method? get raiseMethod => reader.IsValidToken(_fireToken) == TRUE
+      ? Method.fromToken(scope, _fireToken)
+      : null;
+
   /// Returns the [TypeDef] representing the class that declares the event.
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
@@ -109,7 +125,8 @@ class Event extends TokenObject with CustomAttributesMixin {
   bool get isSpecialName =>
       _attributes & CorEventAttr.evSpecialName == CorEventAttr.evSpecialName;
 
-  /// Returns true if the common language runtime should check the encoding of the event name.
+  /// Returns true if the common language runtime should check the encoding of
+  /// the event name.
   bool get isRTSpecialName =>
       _attributes & CorEventAttr.evRTSpecialName ==
       CorEventAttr.evRTSpecialName;

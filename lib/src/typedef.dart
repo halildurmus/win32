@@ -63,7 +63,7 @@ class TypeDef extends TokenObject
       this.typeSpec])
       : super(scope, token);
 
-  /// Creates a typedef object from its given token.
+  /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
     switch (token & 0xFF000000) {
       case CorTokenType.mdtTypeRef:

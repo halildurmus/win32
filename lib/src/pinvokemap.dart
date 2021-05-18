@@ -34,6 +34,7 @@ class PinvokeMap extends TokenObject {
       this.importDllToken, this.moduleName)
       : super(scope, token);
 
+  /// Creates a P/Invoke method representation object from a provided token.
   factory PinvokeMap.fromToken(Scope scope, int token) {
     final pdwMappingFlags = calloc<DWORD>();
     final szImportName = wsalloc(MAX_STRING_SIZE);

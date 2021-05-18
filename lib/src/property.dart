@@ -48,7 +48,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       this.otherMethodTokens)
       : super(scope, token);
 
-  /// Creates a property object from its given token.
+  /// Creates a property object from a provided token.
   factory Property.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
     final szProperty = wsalloc(MAX_STRING_SIZE);

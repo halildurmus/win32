@@ -25,7 +25,7 @@ class CustomAttribute extends TokenObject {
       this.attributeType, this.signatureBlob)
       : super(scope, token);
 
-  /// Creates a custom attribute object from its given token.
+  /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) {
     final ptkObj = calloc<mdToken>();
     final ptkType = calloc<mdToken>();

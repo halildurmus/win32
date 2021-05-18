@@ -46,7 +46,7 @@ class Field extends TokenObject with CustomAttributesMixin {
       this.typeIdentifier, this.fieldType, this._attributes, this.signatureBlob)
       : super(scope, token);
 
-  /// Creates a field object from its given token.
+  /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
     final szField = wsalloc(MAX_STRING_SIZE);

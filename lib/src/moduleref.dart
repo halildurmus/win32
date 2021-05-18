@@ -17,7 +17,7 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
 
   ModuleRef(Scope scope, int token, this.name) : super(scope, token);
 
-  /// Creates a module object from its given token.
+  /// Creates a module object from a provided token.
   factory ModuleRef.fromToken(Scope scope, int token) {
     final szName = wsalloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();

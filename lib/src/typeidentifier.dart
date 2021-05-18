@@ -41,6 +41,7 @@ class TypeIdentifier {
 
   TypeIdentifier(this.baseType, [this.name = '', this.type]);
 
+  /// Creates a type identifier object matching a specific element type value.
   factory TypeIdentifier.fromValue(int corElementTypeValue) =>
       TypeIdentifier(parseCorElementType(corElementTypeValue));
 

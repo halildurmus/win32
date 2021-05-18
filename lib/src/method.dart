@@ -59,7 +59,7 @@ class Method extends TokenObject
     _parseSignatureBlob();
   }
 
-  /// Creates a method object from its given token.
+  /// Creates a method object from a provided token.
   factory Method.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szMethod = wsalloc(MAX_STRING_SIZE);
