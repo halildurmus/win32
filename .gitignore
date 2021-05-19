@@ -17,9 +17,6 @@ build/
 *.pdb
 *.exe.config
 
-# ...but keep one sample executable around
-!example/bin/hello.exe
-
 # This file varies from machine to machine
 .vscode/c_cpp_properties.json
 
