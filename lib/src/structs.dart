@@ -248,7 +248,15 @@ class VARIANT extends Struct {
   external int wReserved2;
   @Uint16()
   external int wReserved3;
+  @Uint64()
+  external int _data;
+  @IntPtr()
+  external int _data2;
+}
 
+// TODO: move back to class when https://github.com/dart-lang/sdk/issues/46004
+// is fixed.
+extension VARIANT_Extension on VARIANT {
   // LONGLONG -> __int64 -> Int64
   int get llVal => _data;
   set llVal(int val) => _data = val;
@@ -338,11 +346,6 @@ class VARIANT extends Struct {
   // UINT -> unsigned int -> Uint32
   int get uintVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
   set uintVal(int val) => _data = val << 32;
-
-  @Uint64()
-  external int _data;
-  @IntPtr()
-  external int _data2;
 }
 
 // typedef struct tagTYPEDESC {
@@ -360,11 +363,16 @@ class VARIANT extends Struct {
 /// {@category Struct}
 class TYPEDESC extends Struct {
   external Pointer lptdesc;
-  Pointer get lpadesc => lptdesc;
-  int get hreftype => lptdesc.cast<Uint32>().value;
 
   @Uint16()
   external int vt;
+}
+
+// TODO: move back to class when https://github.com/dart-lang/sdk/issues/46004
+// is fixed.
+extension TYPEDESC_Extension on TYPEDESC {
+  Pointer get lpadesc => lptdesc;
+  int get hreftype => lptdesc.cast<Uint32>().value;
 }
 
 // typedef struct tagELEMDESC {
