@@ -55,7 +55,7 @@ void main() {
     expect(ifop2.methods[0].returnType.typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(ifop2.methods[0].returnType.typeIdentifier.name,
-        equals('Windows.Win32.System.Com.HRESULT'));
+        equals('Windows.Win32.Foundation.HRESULT'));
     expect(ifop2.methods[0].name, equals('SetOperationFlags2'));
 
     expect(ifop2.methods[0].parameters.length, equals(1));

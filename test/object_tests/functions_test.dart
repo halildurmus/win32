@@ -34,7 +34,7 @@ void main() {
     expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.winApi));
 
     expect(awr.returnType.typeIdentifier.name,
-        equals('Windows.Win32.System.SystemServices.BOOL'));
+        equals('Windows.Win32.Foundation.BOOL'));
     expect(awr.name, equals('AdjustWindowRect'));
 
     expect(awr.parameters.length, equals(3));
@@ -46,7 +46,7 @@ void main() {
         equals(BaseType.PointerTypeModifier));
     expect(awr.parameters[0].typeIdentifier.typeArg, isNotNull);
     expect(awr.parameters[0].typeIdentifier.typeArg?.name,
-        equals('Windows.Win32.UI.DisplayDevices.RECT'));
+        equals('Windows.Win32.Foundation.RECT'));
 
     expect(awr.parameters[1].isInParam, isTrue);
     expect(awr.parameters[1].name, equals('dwStyle'));
@@ -57,7 +57,7 @@ void main() {
     expect(awr.parameters[2].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(awr.parameters[2].typeIdentifier.name,
-        equals('Windows.Win32.System.SystemServices.BOOL'));
+        equals('Windows.Win32.Foundation.BOOL'));
 
     expect(awr.implFeatures.codeType, equals(CodeType.IL));
     expect(awr.implFeatures.isManaged, isTrue);

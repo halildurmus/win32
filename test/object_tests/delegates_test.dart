@@ -87,7 +87,7 @@ void main() {
     expect(wndProc.methods[1].isVirtual, isTrue);
 
     expect(wndProc.methods[1].returnType.typeIdentifier.name,
-        equals('Windows.Win32.System.SystemServices.LRESULT'));
+        equals('Windows.Win32.Foundation.LRESULT'));
     expect(wndProc.methods[1].name, equals('Invoke'));
     expect(wndProc.methods[1].parameters.length, equals(4));
 
@@ -96,7 +96,7 @@ void main() {
     expect(wndProc.methods[1].parameters[0].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.name,
-        equals('Windows.Win32.UI.WindowsAndMessaging.HWND'));
+        equals('Windows.Win32.Foundation.HWND'));
 
     expect(wndProc.methods[1].parameters[1].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[1].name, equals('param1'));
@@ -108,14 +108,14 @@ void main() {
     expect(wndProc.methods[1].parameters[2].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.name,
-        equals('Windows.Win32.UI.WindowsAndMessaging.WPARAM'));
+        equals('Windows.Win32.Foundation.WPARAM'));
 
     expect(wndProc.methods[1].parameters[3].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[3].name, equals('param3'));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.baseType,
         equals(BaseType.ValueTypeModifier));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
-        equals('Windows.Win32.UI.WindowsAndMessaging.LPARAM'));
+        equals('Windows.Win32.Foundation.LPARAM'));
     expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.runtime));
     expect(wndProc.methods[1].implFeatures.isManaged, isTrue);
   });

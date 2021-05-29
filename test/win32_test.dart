@@ -200,8 +200,7 @@ void main() {
         equals(BaseType.PointerTypeModifier));
 
     expect(api.parameters.first.typeIdentifier.typeArg, isNotNull);
-    expect(api.parameters.first.typeIdentifier.typeArg?.name,
-        equals('Windows.Win32.UI.DisplayDevices.RECT'));
+    expect(api.parameters.first.typeIdentifier.typeArg?.name, endsWith('RECT'));
   });
 
   test('DWORD typedefs like COLORREF have the correct param type', () {
@@ -266,8 +265,7 @@ void main() {
 
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
     final scope = MetadataStore.getWin32Scope();
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.SystemServices.Apis')!;
+    final typedef = scope.findTypeDef('Windows.Win32.System.Power.Apis')!;
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
     final param = api.parameters.first;
 
@@ -301,7 +299,8 @@ void main() {
 
   test('Double pointer is interpreted correctly', () {
     final scope = MetadataStore.getWin32Scope();
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis')!;
     final api = typedef.findMethod('CredReadW')!;
     final param = api.parameters.last;
 
@@ -316,7 +315,7 @@ void main() {
   test('HRESULT return values are generated correctly', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
-        scope.findTypeDef('Windows.Win32.System.WindowsProgramming.Apis')!;
+        scope.findTypeDef('Windows.Win32.System.SystemInformation.Apis')!;
     final api = typedef.findMethod('GetIntegratedDisplaySize')!;
     final returnType = api.returnType;
 
