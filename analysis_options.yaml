@@ -1,4 +1,4 @@
-include: package:pedantic/analysis_options.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   strong-mode:
@@ -21,3 +21,11 @@ linter:
     sort_unnamed_constructors_first: true
     unnecessary_lambdas: true
     unnecessary_null_aware_assignments: true
+
+    # We name Win32 constants for consistency with Win32, not Dart
+    constant_identifier_names: false
+    non_constant_identifier_names: false
+    camel_case_types: false
+
+    # COM interop classes are named for their contents
+    file_names: false
