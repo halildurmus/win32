@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Update to latest win32metadata `.winmd` file.
+- Switch to linter package
+
 ## 1.0.0
 
 - Update to Dart 2.13, which includes new FFI support for packed structs, type
