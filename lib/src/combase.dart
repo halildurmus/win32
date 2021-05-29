@@ -20,11 +20,7 @@ import 'utils.dart';
 /// {@category com}
 class COMObject extends Struct {
   external Pointer<Pointer<IntPtr>> lpVtbl;
-}
 
-extension COMObjectExtension on COMObject {
-  // This could be a property of COMObject itself, but has temporarily been
-  // moved because of https://github.com/dart-lang/sdk/issues/46004.
   Pointer<IntPtr> get vtable => lpVtbl.value;
 }
 
