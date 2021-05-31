@@ -118,6 +118,93 @@ int BeginUpdateResource(
   return _BeginUpdateResource(pFileName, bDeleteExistingResources);
 }
 
+/// Fills a specified DCB structure with values specified in a
+/// device-control string. The device-control string uses the syntax of the
+/// mode command.
+///
+/// ```c
+/// BOOL BuildCommDCBW(
+///   LPCWSTR lpDef,
+///   LPDCB   lpDCB
+/// );
+/// ```
+/// {@category kernel32}
+int BuildCommDCB(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB) {
+  final _BuildCommDCB = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB),
+      int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB)>('BuildCommDCBW');
+  return _BuildCommDCB(lpDef, lpDCB);
+}
+
+/// Translates a device-definition string into appropriate device-control
+/// block codes and places them into a device control block. The function
+/// can also set up time-out values, including the possibility of no
+/// time-outs, for a device; the function's behavior in this regard depends
+/// on the contents of the device-definition string.
+///
+/// ```c
+/// BOOL BuildCommDCBAndTimeoutsW(
+///   LPCWSTR        lpDef,
+///   LPDCB          lpDCB,
+///   LPCOMMTIMEOUTS lpCommTimeouts
+/// );
+/// ```
+/// {@category kernel32}
+int BuildCommDCBAndTimeouts(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
+    Pointer<COMMTIMEOUTS> lpCommTimeouts) {
+  final _BuildCommDCBAndTimeouts = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
+          Pointer<COMMTIMEOUTS> lpCommTimeouts),
+      int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
+          Pointer<COMMTIMEOUTS> lpCommTimeouts)>('BuildCommDCBAndTimeoutsW');
+  return _BuildCommDCBAndTimeouts(lpDef, lpDCB, lpCommTimeouts);
+}
+
+/// Connects to a message-type pipe (and waits if an instance of the pipe
+/// is not available), writes to and reads from the pipe, and then closes
+/// the pipe.
+///
+/// ```c
+/// BOOL CallNamedPipeW(
+///   LPCWSTR lpNamedPipeName,
+///   LPVOID  lpInBuffer,
+///   DWORD   nInBufferSize,
+///   LPVOID  lpOutBuffer,
+///   DWORD   nOutBufferSize,
+///   LPDWORD lpBytesRead,
+///   DWORD   nTimeOut
+/// );
+/// ```
+/// {@category kernel32}
+int CallNamedPipe(
+    Pointer<Utf16> lpNamedPipeName,
+    Pointer lpInBuffer,
+    int nInBufferSize,
+    Pointer lpOutBuffer,
+    int nOutBufferSize,
+    Pointer<Uint32> lpBytesRead,
+    int nTimeOut) {
+  final _CallNamedPipe = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpNamedPipeName,
+          Pointer lpInBuffer,
+          Uint32 nInBufferSize,
+          Pointer lpOutBuffer,
+          Uint32 nOutBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          Uint32 nTimeOut),
+      int Function(
+          Pointer<Utf16> lpNamedPipeName,
+          Pointer lpInBuffer,
+          int nInBufferSize,
+          Pointer lpOutBuffer,
+          int nOutBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          int nTimeOut)>('CallNamedPipeW');
+  return _CallNamedPipe(lpNamedPipeName, lpInBuffer, nInBufferSize, lpOutBuffer,
+      nOutBufferSize, lpBytesRead, nTimeOut);
+}
+
 /// Determines whether the specified process is being debugged.
 ///
 /// ```c
@@ -133,6 +220,44 @@ int CheckRemoteDebuggerPresent(int hProcess, Pointer<Int32> pbDebuggerPresent) {
       int Function(int hProcess,
           Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
   return _CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent);
+}
+
+/// Restores character transmission for a specified communications device
+/// and places the transmission line in a nonbreak state.
+///
+/// ```c
+/// BOOL ClearCommBreak(
+///   HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int ClearCommBreak(int hFile) {
+  final _ClearCommBreak = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+      int Function(int hFile)>('ClearCommBreak');
+  return _ClearCommBreak(hFile);
+}
+
+/// Retrieves information about a communications error and reports the
+/// current status of a communications device. The function is called when
+/// a communications error occurs, and it clears the device's error flag to
+/// enable additional input and output (I/O) operations.
+///
+/// ```c
+/// BOOL ClearCommError(
+///   HANDLE    hFile,
+///   LPDWORD   lpErrors,
+///   LPCOMSTAT lpStat
+/// );
+/// ```
+/// {@category kernel32}
+int ClearCommError(
+    int hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat) {
+  final _ClearCommError = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat),
+      int Function(int hFile, Pointer<Uint32> lpErrors,
+          Pointer<COMSTAT> lpStat)>('ClearCommError');
+  return _ClearCommError(hFile, lpErrors, lpStat);
 }
 
 /// Closes an open object handle.
@@ -161,6 +286,26 @@ void ClosePseudoConsole(int hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
       Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
+}
+
+/// Displays a driver-supplied configuration dialog box.
+///
+/// ```c
+/// BOOL CommConfigDialogW(
+///   LPCWSTR      lpszName,
+///   HWND         hWnd,
+///   LPCOMMCONFIG lpCC
+/// );
+/// ```
+/// {@category kernel32}
+int CommConfigDialog(
+    Pointer<Utf16> lpszName, int hWnd, Pointer<COMMCONFIG> lpCC) {
+  final _CommConfigDialog = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpszName, IntPtr hWnd, Pointer<COMMCONFIG> lpCC),
+      int Function(Pointer<Utf16> lpszName, int hWnd,
+          Pointer<COMMCONFIG> lpCC)>('CommConfigDialogW');
+  return _CommConfigDialog(lpszName, hWnd, lpCC);
 }
 
 /// Enables a named pipe server process to wait for a client process to
@@ -814,6 +959,23 @@ int EnumResourceTypes(int hModule,
   return _EnumResourceTypes(hModule, lpEnumFunc, lParam);
 }
 
+/// Directs the specified communications device to perform an extended
+/// function.
+///
+/// ```c
+/// BOOL EscapeCommFunction(
+///   HANDLE hFile,
+///   DWORD  dwFunc
+/// );
+/// ```
+/// {@category kernel32}
+int EscapeCommFunction(int hFile, int dwFunc) {
+  final _EscapeCommFunction = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Uint32 dwFunc),
+      int Function(int hFile, int dwFunc)>('EscapeCommFunction');
+  return _EscapeCommFunction(hFile, dwFunc);
+}
+
 /// Ends the calling process and all its threads.
 ///
 /// ```c
@@ -1316,6 +1478,113 @@ Pointer<Utf16> GetCommandLine() {
   return _GetCommandLine();
 }
 
+/// Retrieves the current configuration of a communications device.
+///
+/// ```c
+/// BOOL GetCommConfig(
+///   HANDLE       hCommDev,
+///   LPCOMMCONFIG lpCC,
+///   LPDWORD      lpdwSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommConfig(
+    int hCommDev, Pointer<COMMCONFIG> lpCC, Pointer<Uint32> lpdwSize) {
+  final _GetCommConfig = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Pointer<Uint32> lpdwSize),
+      int Function(int hCommDev, Pointer<COMMCONFIG> lpCC,
+          Pointer<Uint32> lpdwSize)>('GetCommConfig');
+  return _GetCommConfig(hCommDev, lpCC, lpdwSize);
+}
+
+/// Retrieves the value of the event mask for a specified communications
+/// device.
+///
+/// ```c
+/// BOOL GetCommMask(
+///   HANDLE  hFile,
+///   LPDWORD lpEvtMask
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommMask(int hFile, Pointer<Uint32> lpEvtMask) {
+  final _GetCommMask = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask),
+      int Function(int hFile, Pointer<Uint32> lpEvtMask)>('GetCommMask');
+  return _GetCommMask(hFile, lpEvtMask);
+}
+
+/// Retrieves the modem control-register values.
+///
+/// ```c
+/// BOOL GetCommModemStatus(
+///   HANDLE  hFile,
+///   LPDWORD lpModemStat
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommModemStatus(int hFile, Pointer<Uint32> lpModemStat) {
+  final _GetCommModemStatus = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<Uint32> lpModemStat),
+      int Function(
+          int hFile, Pointer<Uint32> lpModemStat)>('GetCommModemStatus');
+  return _GetCommModemStatus(hFile, lpModemStat);
+}
+
+/// Retrieves information about the communications properties for a
+/// specified communications device.
+///
+/// ```c
+/// BOOL GetCommProperties(
+///   HANDLE     hFile,
+///   LPCOMMPROP lpCommProp
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommProperties(int hFile, Pointer<COMMPROP> lpCommProp) {
+  final _GetCommProperties = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<COMMPROP> lpCommProp),
+      int Function(
+          int hFile, Pointer<COMMPROP> lpCommProp)>('GetCommProperties');
+  return _GetCommProperties(hFile, lpCommProp);
+}
+
+/// Retrieves the current control settings for a specified communications
+/// device.
+///
+/// ```c
+/// BOOL GetCommState(
+///   HANDLE hFile,
+///   LPDCB  lpDCB
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommState(int hFile, Pointer<DCB> lpDCB) {
+  final _GetCommState = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
+      int Function(int hFile, Pointer<DCB> lpDCB)>('GetCommState');
+  return _GetCommState(hFile, lpDCB);
+}
+
+/// Retrieves the time-out parameters for all read and write operations on
+/// a specified communications device.
+///
+/// ```c
+/// BOOL GetCommTimeouts(
+///   HANDLE         hFile,
+///   LPCOMMTIMEOUTS lpCommTimeouts
+/// );
+/// ```
+/// {@category kernel32}
+int GetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) {
+  final _GetCommTimeouts = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
+      int Function(
+          int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)>('GetCommTimeouts');
+  return _GetCommTimeouts(hFile, lpCommTimeouts);
+}
+
 /// Retrieves the NetBIOS name of the local computer. This name is
 /// established at system startup, when the system reads it from the
 /// registry.
@@ -1502,6 +1771,27 @@ int GetCurrentThread() {
   final _GetCurrentThread = _kernel32
       .lookupFunction<IntPtr Function(), int Function()>('GetCurrentThread');
   return _GetCurrentThread();
+}
+
+/// Retrieves the default configuration for the specified communications
+/// device.
+///
+/// ```c
+/// BOOL GetDefaultCommConfigW(
+///   LPCWSTR      lpszName,
+///   LPCOMMCONFIG lpCC,
+///   LPDWORD      lpdwSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetDefaultCommConfig(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+    Pointer<Uint32> lpdwSize) {
+  final _GetDefaultCommConfig = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+          Pointer<Uint32> lpdwSize),
+      int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+          Pointer<Uint32> lpdwSize)>('GetDefaultCommConfigW');
+  return _GetDefaultCommConfig(lpszName, lpCC, lpdwSize);
 }
 
 /// Retrieves the application-specific portion of the search path used to
@@ -1767,6 +2057,27 @@ int GetModuleHandle(Pointer<Utf16> lpModuleName) {
   return _GetModuleHandle(lpModuleName);
 }
 
+/// Retrieves the client computer name for the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeClientComputerNameW(
+///   HANDLE Pipe,
+///   LPWSTR ClientComputerName,
+///   ULONG  ClientComputerNameLength
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeClientComputerName(
+    int Pipe, Pointer<Utf16> ClientComputerName, int ClientComputerNameLength) {
+  final _GetNamedPipeClientComputerName = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Pipe, Pointer<Utf16> ClientComputerName,
+          Uint32 ClientComputerNameLength),
+      int Function(int Pipe, Pointer<Utf16> ClientComputerName,
+          int ClientComputerNameLength)>('GetNamedPipeClientComputerNameW');
+  return _GetNamedPipeClientComputerName(
+      Pipe, ClientComputerName, ClientComputerNameLength);
+}
+
 /// Retrieves the client process identifier for the specified named pipe.
 ///
 /// ```c
@@ -1799,6 +2110,50 @@ int GetNamedPipeClientSessionId(int Pipe, Pointer<Uint32> ClientSessionId) {
       int Function(int Pipe,
           Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
   return _GetNamedPipeClientSessionId(Pipe, ClientSessionId);
+}
+
+/// Retrieves information about a specified named pipe. The information
+/// returned can vary during the lifetime of an instance of the named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeHandleStateW(
+///   HANDLE  hNamedPipe,
+///   LPDWORD lpState,
+///   LPDWORD lpCurInstances,
+///   LPDWORD lpMaxCollectionCount,
+///   LPDWORD lpCollectDataTimeout,
+///   LPWSTR  lpUserName,
+///   DWORD   nMaxUserNameSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeHandleState(
+    int hNamedPipe,
+    Pointer<Uint32> lpState,
+    Pointer<Uint32> lpCurInstances,
+    Pointer<Uint32> lpMaxCollectionCount,
+    Pointer<Uint32> lpCollectDataTimeout,
+    Pointer<Utf16> lpUserName,
+    int nMaxUserNameSize) {
+  final _GetNamedPipeHandleState = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hNamedPipe,
+          Pointer<Uint32> lpState,
+          Pointer<Uint32> lpCurInstances,
+          Pointer<Uint32> lpMaxCollectionCount,
+          Pointer<Uint32> lpCollectDataTimeout,
+          Pointer<Utf16> lpUserName,
+          Uint32 nMaxUserNameSize),
+      int Function(
+          int hNamedPipe,
+          Pointer<Uint32> lpState,
+          Pointer<Uint32> lpCurInstances,
+          Pointer<Uint32> lpMaxCollectionCount,
+          Pointer<Uint32> lpCollectDataTimeout,
+          Pointer<Utf16> lpUserName,
+          int nMaxUserNameSize)>('GetNamedPipeHandleStateW');
+  return _GetNamedPipeHandleState(hNamedPipe, lpState, lpCurInstances,
+      lpMaxCollectionCount, lpCollectDataTimeout, lpUserName, nMaxUserNameSize);
 }
 
 /// Retrieves information about the specified named pipe.
@@ -2736,6 +3091,19 @@ int IsNativeVhdBoot(Pointer<Int32> NativeVhdBoot) {
   return _IsNativeVhdBoot(NativeVhdBoot);
 }
 
+/// Determines the current state of the computer.
+///
+/// ```c
+/// BOOL IsSystemResumeAutomatic();
+/// ```
+/// {@category kernel32}
+int IsSystemResumeAutomatic() {
+  final _IsSystemResumeAutomatic =
+      _kernel32.lookupFunction<Int32 Function(), int Function()>(
+          'IsSystemResumeAutomatic');
+  return _IsSystemResumeAutomatic();
+}
+
 /// Determines if the specified locale name is valid for a locale that is
 /// installed or supported on the operating system.
 ///
@@ -2950,6 +3318,24 @@ int PeekNamedPipe(
           Pointer<Uint32> lpBytesLeftThisMessage)>('PeekNamedPipe');
   return _PeekNamedPipe(hNamedPipe, lpBuffer, nBufferSize, lpBytesRead,
       lpTotalBytesAvail, lpBytesLeftThisMessage);
+}
+
+/// Discards all characters from the output or input buffer of a specified
+/// communications resource. It can also terminate pending read or write
+/// operations on the resource.
+///
+/// ```c
+/// BOOL PurgeComm(
+///   HANDLE hFile,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int PurgeComm(int hFile, int dwFlags) {
+  final _PurgeComm = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Uint32 dwFlags),
+      int Function(int hFile, int dwFlags)>('PurgeComm');
+  return _PurgeComm(hFile, dwFlags);
 }
 
 /// Retrieves information about MS-DOS device names. The function can
@@ -3206,6 +3592,93 @@ int ScrollConsoleScreenBuffer(
       lpClipRectangle, dwDestinationOrigin, lpFill);
 }
 
+/// Suspends character transmission for a specified communications device
+/// and places the transmission line in a break state until the
+/// ClearCommBreak function is called.
+///
+/// ```c
+/// BOOL SetCommBreak(
+///   HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int SetCommBreak(int hFile) {
+  final _SetCommBreak = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+      int Function(int hFile)>('SetCommBreak');
+  return _SetCommBreak(hFile);
+}
+
+/// Sets the current configuration of a communications device.
+///
+/// ```c
+/// BOOL SetCommConfig(
+///   HANDLE       hCommDev,
+///   LPCOMMCONFIG lpCC,
+///   DWORD        dwSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetCommConfig(int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize) {
+  final _SetCommConfig = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
+      int Function(
+          int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize)>('SetCommConfig');
+  return _SetCommConfig(hCommDev, lpCC, dwSize);
+}
+
+/// Specifies a set of events to be monitored for a communications device.
+///
+/// ```c
+/// BOOL SetCommMask(
+///   HANDLE hFile,
+///   DWORD  dwEvtMask
+/// );
+/// ```
+/// {@category kernel32}
+int SetCommMask(int hFile, int dwEvtMask) {
+  final _SetCommMask = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Uint32 dwEvtMask),
+      int Function(int hFile, int dwEvtMask)>('SetCommMask');
+  return _SetCommMask(hFile, dwEvtMask);
+}
+
+/// Configures a communications device according to the specifications in a
+/// device-control block (a DCB structure). The function reinitializes all
+/// hardware and control settings, but it does not empty output or input
+/// queues.
+///
+/// ```c
+/// BOOL SetCommState(
+///   HANDLE hFile,
+///   LPDCB  lpDCB
+/// );
+/// ```
+/// {@category kernel32}
+int SetCommState(int hFile, Pointer<DCB> lpDCB) {
+  final _SetCommState = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
+      int Function(int hFile, Pointer<DCB> lpDCB)>('SetCommState');
+  return _SetCommState(hFile, lpDCB);
+}
+
+/// Sets the time-out parameters for all read and write operations on a
+/// specified communications device.
+///
+/// ```c
+/// BOOL SetCommTimeouts(
+///   HANDLE         hFile,
+///   LPCOMMTIMEOUTS lpCommTimeouts
+/// );
+/// ```
+/// {@category kernel32}
+int SetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) {
+  final _SetCommTimeouts = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
+      int Function(
+          int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)>('SetCommTimeouts');
+  return _SetCommTimeouts(hFile, lpCommTimeouts);
+}
+
 /// Adds or removes an application-defined HandlerRoutine function from the
 /// list of handler functions for the calling process.
 ///
@@ -3355,6 +3828,26 @@ int SetCurrentDirectory(Pointer<Utf16> lpPathName) {
       Int32 Function(Pointer<Utf16> lpPathName),
       int Function(Pointer<Utf16> lpPathName)>('SetCurrentDirectoryW');
   return _SetCurrentDirectory(lpPathName);
+}
+
+/// Sets the default configuration for a communications device.
+///
+/// ```c
+/// BOOL SetDefaultCommConfigW(
+///   LPCWSTR      lpszName,
+///   LPCOMMCONFIG lpCC,
+///   DWORD        dwSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetDefaultCommConfig(
+    Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, int dwSize) {
+  final _SetDefaultCommConfig = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
+      int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+          int dwSize)>('SetDefaultCommConfigW');
+  return _SetDefaultCommConfig(lpszName, lpCC, dwSize);
 }
 
 /// Moves the file pointer of the specified file.
@@ -3625,6 +4118,24 @@ int SetThreadUILanguage(int LangId) {
   return _SetThreadUILanguage(LangId);
 }
 
+/// Initializes the communications parameters for a specified
+/// communications device.
+///
+/// ```c
+/// BOOL SetupComm(
+///   HANDLE hFile,
+///   DWORD  dwInQueue,
+///   DWORD  dwOutQueue
+/// );
+/// ```
+/// {@category kernel32}
+int SetupComm(int hFile, int dwInQueue, int dwOutQueue) {
+  final _SetupComm = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Uint32 dwInQueue, Uint32 dwOutQueue),
+      int Function(int hFile, int dwInQueue, int dwOutQueue)>('SetupComm');
+  return _SetupComm(hFile, dwInQueue, dwOutQueue);
+}
+
 /// Sets the label of a file system volume.
 ///
 /// ```c
@@ -3713,6 +4224,23 @@ int TransactNamedPipe(
           Pointer<OVERLAPPED> lpOverlapped)>('TransactNamedPipe');
   return _TransactNamedPipe(hNamedPipe, lpInBuffer, nInBufferSize, lpOutBuffer,
       nOutBufferSize, lpBytesRead, lpOverlapped);
+}
+
+/// Transmits a specified character ahead of any pending data in the output
+/// buffer of the specified communications device.
+///
+/// ```c
+/// BOOL TransmitCommChar(
+///   HANDLE hFile,
+///   char   cChar
+/// );
+/// ```
+/// {@category kernel32}
+int TransmitCommChar(int hFile, int cChar) {
+  final _TransmitCommChar = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Uint8 cChar),
+      int Function(int hFile, int cChar)>('TransmitCommChar');
+  return _TransmitCommChar(hFile, cChar);
 }
 
 /// Updates the specified attribute in a list of attributes for process and
@@ -3842,6 +4370,28 @@ int VirtualFree(Pointer lpAddress, int dwSize, int dwFreeType) {
       int Function(
           Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
   return _VirtualFree(lpAddress, dwSize, dwFreeType);
+}
+
+/// Waits for an event to occur for a specified communications device. The
+/// set of events that are monitored by this function is contained in the
+/// event mask associated with the device handle.
+///
+/// ```c
+/// BOOL WaitCommEvent(
+///   HANDLE       hFile,
+///   LPDWORD      lpEvtMask,
+///   LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int WaitCommEvent(
+    int hFile, Pointer<Uint32> lpEvtMask, Pointer<OVERLAPPED> lpOverlapped) {
+  final _WaitCommEvent = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask,
+          Pointer<OVERLAPPED> lpOverlapped),
+      int Function(int hFile, Pointer<Uint32> lpEvtMask,
+          Pointer<OVERLAPPED> lpOverlapped)>('WaitCommEvent');
+  return _WaitCommEvent(hFile, lpEvtMask, lpOverlapped);
 }
 
 /// Waits until the specified object is in the signaled state or the

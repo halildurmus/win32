@@ -484,6 +484,24 @@ class COMMCONFIG extends Struct {
   }
 }
 
+/// Contains the time-out parameters for a communications device. The
+/// parameters determine the behavior of ReadFile, WriteFile, ReadFileEx,
+/// and WriteFileEx operations on the device.
+///
+/// {@category Struct}
+class COMMTIMEOUTS extends Struct {
+  @Uint32()
+  external int ReadIntervalTimeout;
+  @Uint32()
+  external int ReadTotalTimeoutMultiplier;
+  @Uint32()
+  external int ReadTotalTimeoutConstant;
+  @Uint32()
+  external int WriteTotalTimeoutMultiplier;
+  @Uint32()
+  external int WriteTotalTimeoutConstant;
+}
+
 /// Contains information about a communications device. This structure is
 /// filled by the ClearCommError function.
 ///

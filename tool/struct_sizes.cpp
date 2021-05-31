@@ -77,6 +77,7 @@ void main()
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("  'COMMCONFIG': %zu,\n", sizeof(COMMCONFIG));
+    printf("  'COMMTIMEOUTS': %zu,\n", sizeof(COMMTIMEOUTS));
     printf("  'COMSTAT': %zu,\n", sizeof(COMSTAT));
     printf("  'CONSOLE_CURSOR_INFO': %zu,\n", sizeof(CONSOLE_CURSOR_INFO));
     printf("  'CONSOLE_SCREEN_BUFFER_INFO': %zu,\n", sizeof(CONSOLE_SCREEN_BUFFER_INFO));

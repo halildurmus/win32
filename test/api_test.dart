@@ -64,6 +64,45 @@ void main() {
               int bDeleteExistingResources)>('BeginUpdateResourceW');
       expect(BeginUpdateResource, isA<Function>());
     });
+    test('Can instantiate BuildCommDCB', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final BuildCommDCB = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB),
+          int Function(
+              Pointer<Utf16> lpDef, Pointer<DCB> lpDCB)>('BuildCommDCBW');
+      expect(BuildCommDCB, isA<Function>());
+    });
+    test('Can instantiate BuildCommDCBAndTimeouts', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final BuildCommDCBAndTimeouts = kernel32.lookupFunction<
+              Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
+                  Pointer<COMMTIMEOUTS> lpCommTimeouts),
+              int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
+                  Pointer<COMMTIMEOUTS> lpCommTimeouts)>(
+          'BuildCommDCBAndTimeoutsW');
+      expect(BuildCommDCBAndTimeouts, isA<Function>());
+    });
+    test('Can instantiate CallNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CallNamedPipe = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpNamedPipeName,
+              Pointer lpInBuffer,
+              Uint32 nInBufferSize,
+              Pointer lpOutBuffer,
+              Uint32 nOutBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              Uint32 nTimeOut),
+          int Function(
+              Pointer<Utf16> lpNamedPipeName,
+              Pointer lpInBuffer,
+              int nInBufferSize,
+              Pointer lpOutBuffer,
+              int nOutBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              int nTimeOut)>('CallNamedPipeW');
+      expect(CallNamedPipe, isA<Function>());
+    });
     test('Can instantiate CheckRemoteDebuggerPresent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CheckRemoteDebuggerPresent = kernel32.lookupFunction<
@@ -71,6 +110,22 @@ void main() {
           int Function(int hProcess,
               Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
       expect(CheckRemoteDebuggerPresent, isA<Function>());
+    });
+    test('Can instantiate ClearCommBreak', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ClearCommBreak = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile),
+          int Function(int hFile)>('ClearCommBreak');
+      expect(ClearCommBreak, isA<Function>());
+    });
+    test('Can instantiate ClearCommError', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ClearCommError = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat),
+          int Function(int hFile, Pointer<Uint32> lpErrors,
+              Pointer<COMSTAT> lpStat)>('ClearCommError');
+      expect(ClearCommError, isA<Function>());
     });
     test('Can instantiate CloseHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -88,6 +143,15 @@ void main() {
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate CommConfigDialog', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CommConfigDialog = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpszName, IntPtr hWnd, Pointer<COMMCONFIG> lpCC),
+          int Function(Pointer<Utf16> lpszName, int hWnd,
+              Pointer<COMMCONFIG> lpCC)>('CommConfigDialogW');
+      expect(CommConfigDialog, isA<Function>());
+    });
     test('Can instantiate ConnectNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final ConnectNamedPipe = kernel32.lookupFunction<
@@ -381,6 +445,13 @@ void main() {
               int lParam)>('EnumResourceTypesW');
       expect(EnumResourceTypes, isA<Function>());
     });
+    test('Can instantiate EscapeCommFunction', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final EscapeCommFunction = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Uint32 dwFunc),
+          int Function(int hFile, int dwFunc)>('EscapeCommFunction');
+      expect(EscapeCommFunction, isA<Function>());
+    });
     test('Can instantiate ExitProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final ExitProcess = kernel32.lookupFunction<
@@ -610,6 +681,53 @@ void main() {
           Pointer<Utf16> Function()>('GetCommandLineW');
       expect(GetCommandLine, isA<Function>());
     });
+    test('Can instantiate GetCommConfig', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommConfig = kernel32.lookupFunction<
+          Int32 Function(IntPtr hCommDev, Pointer<COMMCONFIG> lpCC,
+              Pointer<Uint32> lpdwSize),
+          int Function(int hCommDev, Pointer<COMMCONFIG> lpCC,
+              Pointer<Uint32> lpdwSize)>('GetCommConfig');
+      expect(GetCommConfig, isA<Function>());
+    });
+    test('Can instantiate GetCommMask', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommMask = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask),
+          int Function(int hFile, Pointer<Uint32> lpEvtMask)>('GetCommMask');
+      expect(GetCommMask, isA<Function>());
+    });
+    test('Can instantiate GetCommModemStatus', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommModemStatus = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<Uint32> lpModemStat),
+          int Function(
+              int hFile, Pointer<Uint32> lpModemStat)>('GetCommModemStatus');
+      expect(GetCommModemStatus, isA<Function>());
+    });
+    test('Can instantiate GetCommProperties', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommProperties = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<COMMPROP> lpCommProp),
+          int Function(
+              int hFile, Pointer<COMMPROP> lpCommProp)>('GetCommProperties');
+      expect(GetCommProperties, isA<Function>());
+    });
+    test('Can instantiate GetCommState', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommState = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
+          int Function(int hFile, Pointer<DCB> lpDCB)>('GetCommState');
+      expect(GetCommState, isA<Function>());
+    });
+    test('Can instantiate GetCommTimeouts', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCommTimeouts = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
+          int Function(int hFile,
+              Pointer<COMMTIMEOUTS> lpCommTimeouts)>('GetCommTimeouts');
+      expect(GetCommTimeouts, isA<Function>());
+    });
     test('Can instantiate GetComputerName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetComputerName = kernel32.lookupFunction<
@@ -701,6 +819,15 @@ void main() {
           kernel32.lookupFunction<IntPtr Function(), int Function()>(
               'GetCurrentThread');
       expect(GetCurrentThread, isA<Function>());
+    });
+    test('Can instantiate GetDefaultCommConfig', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetDefaultCommConfig = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+              Pointer<Uint32> lpdwSize),
+          int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+              Pointer<Uint32> lpdwSize)>('GetDefaultCommConfigW');
+      expect(GetDefaultCommConfig, isA<Function>());
     });
     test('Can instantiate GetDllDirectory', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -820,6 +947,15 @@ void main() {
           int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
       expect(GetModuleHandle, isA<Function>());
     });
+    test('Can instantiate GetNamedPipeClientComputerName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNamedPipeClientComputerName = kernel32.lookupFunction<
+          Int32 Function(IntPtr Pipe, Pointer<Utf16> ClientComputerName,
+              Uint32 ClientComputerNameLength),
+          int Function(int Pipe, Pointer<Utf16> ClientComputerName,
+              int ClientComputerNameLength)>('GetNamedPipeClientComputerNameW');
+      expect(GetNamedPipeClientComputerName, isA<Function>());
+    });
     test('Can instantiate GetNamedPipeClientProcessId', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetNamedPipeClientProcessId = kernel32.lookupFunction<
@@ -835,6 +971,27 @@ void main() {
           int Function(int Pipe,
               Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
       expect(GetNamedPipeClientSessionId, isA<Function>());
+    });
+    test('Can instantiate GetNamedPipeHandleState', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNamedPipeHandleState = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hNamedPipe,
+              Pointer<Uint32> lpState,
+              Pointer<Uint32> lpCurInstances,
+              Pointer<Uint32> lpMaxCollectionCount,
+              Pointer<Uint32> lpCollectDataTimeout,
+              Pointer<Utf16> lpUserName,
+              Uint32 nMaxUserNameSize),
+          int Function(
+              int hNamedPipe,
+              Pointer<Uint32> lpState,
+              Pointer<Uint32> lpCurInstances,
+              Pointer<Uint32> lpMaxCollectionCount,
+              Pointer<Uint32> lpCollectDataTimeout,
+              Pointer<Utf16> lpUserName,
+              int nMaxUserNameSize)>('GetNamedPipeHandleStateW');
+      expect(GetNamedPipeHandleState, isA<Function>());
     });
     test('Can instantiate GetNamedPipeInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1266,6 +1423,13 @@ void main() {
           int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
       expect(IsNativeVhdBoot, isA<Function>());
     });
+    test('Can instantiate IsSystemResumeAutomatic', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final IsSystemResumeAutomatic =
+          kernel32.lookupFunction<Int32 Function(), int Function()>(
+              'IsSystemResumeAutomatic');
+      expect(IsSystemResumeAutomatic, isA<Function>());
+    });
     test('Can instantiate IsValidLocaleName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final IsValidLocaleName = kernel32.lookupFunction<
@@ -1370,6 +1534,13 @@ void main() {
               Pointer<Uint32> lpTotalBytesAvail,
               Pointer<Uint32> lpBytesLeftThisMessage)>('PeekNamedPipe');
       expect(PeekNamedPipe, isA<Function>());
+    });
+    test('Can instantiate PurgeComm', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final PurgeComm = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Uint32 dwFlags),
+          int Function(int hFile, int dwFlags)>('PurgeComm');
+      expect(PurgeComm, isA<Function>());
     });
     test('Can instantiate QueryDosDevice', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1496,6 +1667,43 @@ void main() {
               Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBufferW');
       expect(ScrollConsoleScreenBuffer, isA<Function>());
     });
+    test('Can instantiate SetCommBreak', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCommBreak = kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+          int Function(int hFile)>('SetCommBreak');
+      expect(SetCommBreak, isA<Function>());
+    });
+    test('Can instantiate SetCommConfig', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCommConfig = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
+          int Function(int hCommDev, Pointer<COMMCONFIG> lpCC,
+              int dwSize)>('SetCommConfig');
+      expect(SetCommConfig, isA<Function>());
+    });
+    test('Can instantiate SetCommMask', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCommMask = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Uint32 dwEvtMask),
+          int Function(int hFile, int dwEvtMask)>('SetCommMask');
+      expect(SetCommMask, isA<Function>());
+    });
+    test('Can instantiate SetCommState', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCommState = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
+          int Function(int hFile, Pointer<DCB> lpDCB)>('SetCommState');
+      expect(SetCommState, isA<Function>());
+    });
+    test('Can instantiate SetCommTimeouts', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCommTimeouts = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
+          int Function(int hFile,
+              Pointer<COMMTIMEOUTS> lpCommTimeouts)>('SetCommTimeouts');
+      expect(SetCommTimeouts, isA<Function>());
+    });
     test('Can instantiate SetConsoleCtrlHandler', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetConsoleCtrlHandler = kernel32.lookupFunction<
@@ -1563,6 +1771,15 @@ void main() {
           Int32 Function(Pointer<Utf16> lpPathName),
           int Function(Pointer<Utf16> lpPathName)>('SetCurrentDirectoryW');
       expect(SetCurrentDirectory, isA<Function>());
+    });
+    test('Can instantiate SetDefaultCommConfig', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetDefaultCommConfig = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
+          int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
+              int dwSize)>('SetDefaultCommConfigW');
+      expect(SetDefaultCommConfig, isA<Function>());
     });
     test('Can instantiate SetFilePointer', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1687,6 +1904,13 @@ void main() {
           int Function(int LangId)>('SetThreadUILanguage');
       expect(SetThreadUILanguage, isA<Function>());
     });
+    test('Can instantiate SetupComm', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetupComm = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Uint32 dwInQueue, Uint32 dwOutQueue),
+          int Function(int hFile, int dwInQueue, int dwOutQueue)>('SetupComm');
+      expect(SetupComm, isA<Function>());
+    });
     test('Can instantiate SetVolumeLabel', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetVolumeLabel = kernel32.lookupFunction<
@@ -1730,6 +1954,13 @@ void main() {
               Pointer<Uint32> lpBytesRead,
               Pointer<OVERLAPPED> lpOverlapped)>('TransactNamedPipe');
       expect(TransactNamedPipe, isA<Function>());
+    });
+    test('Can instantiate TransmitCommChar', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final TransmitCommChar = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Uint8 cChar),
+          int Function(int hFile, int cChar)>('TransmitCommChar');
+      expect(TransmitCommChar, isA<Function>());
     });
     test('Can instantiate UpdateProcThreadAttribute', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1795,6 +2026,15 @@ void main() {
           int Function(
               Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
       expect(VirtualFree, isA<Function>());
+    });
+    test('Can instantiate WaitCommEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final WaitCommEvent = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask,
+              Pointer<OVERLAPPED> lpOverlapped),
+          int Function(int hFile, Pointer<Uint32> lpEvtMask,
+              Pointer<OVERLAPPED> lpOverlapped)>('WaitCommEvent');
+      expect(WaitCommEvent, isA<Function>());
     });
     test('Can instantiate WaitForSingleObject', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -6226,6 +6466,17 @@ void main() {
         expect(CompareObjectHandles, isA<Function>());
       });
     }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate GetCommPorts', () {
+        final kernelbase = DynamicLibrary.open('kernelbase.dll');
+        final GetCommPorts = kernelbase.lookupFunction<
+            Uint32 Function(Pointer<Uint32> lpPortNumbers,
+                Uint32 uPortNumbersCount, Pointer<Uint32> puPortNumbersFound),
+            int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
+                Pointer<Uint32> puPortNumbersFound)>('GetCommPorts');
+        expect(GetCommPorts, isA<Function>());
+      });
+    }
     if (windowsBuildNumber >= 10240) {
       test('Can instantiate GetIntegratedDisplaySize', () {
         final kernelbase = DynamicLibrary.open('kernelbase.dll');
@@ -6234,6 +6485,17 @@ void main() {
             int Function(
                 Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
         expect(GetIntegratedDisplaySize, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate OpenCommPort', () {
+        final kernelbase = DynamicLibrary.open('kernelbase.dll');
+        final OpenCommPort = kernelbase.lookupFunction<
+            IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
+                Uint32 dwFlagsAndAttributes),
+            int Function(int uPortNumber, int dwDesiredAccess,
+                int dwFlagsAndAttributes)>('OpenCommPort');
+        expect(OpenCommPort, isA<Function>());
       });
     }
   });

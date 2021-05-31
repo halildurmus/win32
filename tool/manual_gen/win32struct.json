@@ -83,6 +83,10 @@
         "namespace": "Windows.Win32.Devices.Communication.COMMCONFIG",
         "comment": "Contains information about the configuration state of a communications device."
     },
+    "COMMTIMEOUTS": {
+        "namespace": "Windows.Win32.Devices.Communication.COMMTIMEOUTS",
+        "comment": "Contains the time-out parameters for a communications device. The parameters determine the behavior of ReadFile, WriteFile, ReadFileEx, and WriteFileEx operations on the device."
+    },
     "COMSTAT": {
         "namespace": "Windows.Win32.Devices.Communication.COMSTAT",
         "comment": "Contains information about a communications device. This structure is filled by the ClearCommError function."

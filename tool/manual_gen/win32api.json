@@ -261,6 +261,16 @@
         "dllLibrary": "user32",
         "comment": "Sends a message to the specified recipients. The recipients can be applications, installable drivers, network drivers, system-level device drivers, or any combination of these system components."
     },
+    "BuildCommDCB": {
+        "prototype": "BOOL BuildCommDCBW(\n  LPCWSTR lpDef,\n  LPDCB   lpDCB\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Fills a specified DCB structure with values specified in a device-control string. The device-control string uses the syntax of the mode command."
+    },
+    "BuildCommDCBAndTimeouts": {
+        "prototype": "BOOL BuildCommDCBAndTimeoutsW(\n  LPCWSTR        lpDef,\n  LPDCB          lpDCB,\n  LPCOMMTIMEOUTS lpCommTimeouts\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Translates a device-definition string into appropriate device-control block codes and places them into a device control block. The function can also set up time-out values, including the possibility of no time-outs, for a device; the function's behavior in this regard depends on the contents of the device-definition string."
+    },
     "CalculatePopupWindowPosition": {
         "prototype": "BOOL CalculatePopupWindowPosition(\n  const POINT *anchorPoint,\n  const SIZE  *windowSize,\n  UINT        flags,\n  RECT        *excludeRect,\n  RECT        *popupWindowPosition\n);",
         "dllLibrary": "user32",
@@ -270,6 +280,11 @@
         "prototype": "BOOL CallMsgFilterW(\n  LPMSG lpMsg,\n  int   nCode\n);",
         "dllLibrary": "user32",
         "comment": "Passes the specified message and hook code to the hook procedures associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined callback function that examines and, optionally, modifies messages for a dialog box, message box, menu, or scroll bar."
+    },
+    "CallNamedPipe": {
+        "prototype": "BOOL CallNamedPipeW(\n  LPCWSTR lpNamedPipeName,\n  LPVOID  lpInBuffer,\n  DWORD   nInBufferSize,\n  LPVOID  lpOutBuffer,\n  DWORD   nOutBufferSize,\n  LPDWORD lpBytesRead,\n  DWORD   nTimeOut\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Connects to a message-type pipe (and waits if an instance of the pipe is not available), writes to and reads from the pipe, and then closes the pipe."
     },
     "CallNextHookEx": {
         "prototype": "LRESULT CallNextHookEx(\n  HHOOK  hhk,\n  int    nCode,\n  WPARAM wParam,\n  LPARAM lParam\n);",
@@ -360,6 +375,16 @@
         "prototype": "BOOL Chord(\n  HDC hdc,\n  int x1,\n  int y1,\n  int x2,\n  int y2,\n  int x3,\n  int y3,\n  int x4,\n  int y4\n);",
         "dllLibrary": "gdi32",
         "comment": "The Chord function draws a chord (a region bounded by the intersection of an ellipse and a line segment, called a secant). The chord is outlined by using the current pen and filled by using the current brush."
+    },
+    "ClearCommBreak": {
+        "prototype": "BOOL ClearCommBreak(\n  HANDLE hFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Restores character transmission for a specified communications device and places the transmission line in a nonbreak state."
+    },
+    "ClearCommError": {
+        "prototype": "BOOL ClearCommError(\n  HANDLE    hFile,\n  LPDWORD   lpErrors,\n  LPCOMSTAT lpStat\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about a communications error and reports the current status of a communications device. The function is called when a communications error occurs, and it clears the device's error flag to enable additional input and output (I/O) operations."
     },
     "ClientToScreen": {
         "prototype": "BOOL ClientToScreen(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
@@ -461,6 +486,11 @@
         "prototype": "LPWSTR * CommandLineToArgvW(\n  LPCWSTR lpCmdLine,\n  int     *pNumArgs\n);",
         "dllLibrary": "shell32",
         "comment": "Retrieves the command-line string for the current process."
+    },
+    "CommConfigDialog": {
+        "prototype": "BOOL CommConfigDialogW(\n  LPCWSTR      lpszName,\n  HWND         hWnd,\n  LPCOMMCONFIG lpCC\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Displays a driver-supplied configuration dialog box."
     },
     "CompareObjectHandles": {
         "prototype": "BOOL CompareObjectHandles(\n  HANDLE hFirstObjectHandle,\n  HANDLE hSecondObjectHandle\n);",
@@ -976,6 +1006,11 @@
         "dllLibrary": "user32",
         "comment": "The EqualRect function determines whether the two specified rectangles are equal by comparing the coordinates of their upper-left and lower-right corners."
     },
+    "EscapeCommFunction": {
+        "prototype": "BOOL EscapeCommFunction(\n  HANDLE hFile,\n  DWORD  dwFunc\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Directs the specified communications device to perform an extended function."
+    },
     "ExcludeUpdateRgn": {
         "prototype": "int ExcludeUpdateRgn(\n  HDC  hDC,\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1238,6 +1273,43 @@
         "dllLibrary": "kernel32",
         "comment": "Parses a Unicode command line string and returns an array of pointers to the command line arguments, along with a count of such arguments, in a way that is similar to the standard C run-time argv and argc values."
     },
+    "GetCommConfig": {
+        "prototype": "BOOL GetCommConfig(\n  HANDLE       hCommDev,\n  LPCOMMCONFIG lpCC,\n  LPDWORD      lpdwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current configuration of a communications device."
+    },
+    "GetCommMask": {
+        "prototype": "BOOL GetCommMask(\n  HANDLE  hFile,\n  LPDWORD lpEvtMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the value of the event mask for a specified communications device."
+    },
+    "GetCommModemStatus": {
+        "prototype": "BOOL GetCommModemStatus(\n  HANDLE  hFile,\n  LPDWORD lpModemStat\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the modem control-register values."
+    },
+    "GetCommPorts": {
+        "prototype": "ULONG GetCommPorts(\n  PULONG lpPortNumbers,\n  ULONG  uPortNumbersCount,\n  PULONG puPortNumbersFound\n);",
+        "dllLibrary": "kernelbase",
+        "comment": "Gets an array that contains the well-formed COM ports.",
+        "category": "kernel32",
+        "minimumWindowsVersion": "WIN10_RS4"
+    },
+    "GetCommProperties": {
+        "prototype": "BOOL GetCommProperties(\n  HANDLE     hFile,\n  LPCOMMPROP lpCommProp\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the communications properties for a specified communications device."
+    },
+    "GetCommState": {
+        "prototype": "BOOL GetCommState(\n  HANDLE hFile,\n  LPDCB  lpDCB\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current control settings for a specified communications device."
+    },
+    "GetCommTimeouts": {
+        "prototype": "BOOL GetCommTimeouts(\n  HANDLE         hFile,\n  LPCOMMTIMEOUTS lpCommTimeouts\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the time-out parameters for all read and write operations on a specified communications device."
+    },
     "GetComputerName": {
         "prototype": "BOOL GetComputerNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD nSize\n);",
         "dllLibrary": "kernel32",
@@ -1317,6 +1389,11 @@
         "prototype": "HDC GetDCEx(\n  HWND  hWnd,\n  HRGN  hrgnClip,\n  DWORD flags\n);",
         "dllLibrary": "user32",
         "comment": "The GetDCEx function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI."
+    },
+    "GetDefaultCommConfig": {
+        "prototype": "BOOL GetDefaultCommConfigW(\n  LPCWSTR      lpszName,\n  LPCOMMCONFIG lpCC,\n  LPDWORD      lpdwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the default configuration for the specified communications device."
     },
     "GetDesktopWindow": {
         "prototype": "HWND GetDesktopWindow();",
@@ -1696,6 +1773,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a history of up to 64 previous coordinates of the mouse or pen."
     },
+    "GetNamedPipeClientComputerName": {
+        "prototype": "BOOL GetNamedPipeClientComputerNameW(\n  HANDLE Pipe,\n  LPWSTR ClientComputerName,\n  ULONG  ClientComputerNameLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the client computer name for the specified named pipe."
+    },
     "GetNamedPipeClientProcessId": {
         "prototype": "BOOL GetNamedPipeClientProcessId(\n  HANDLE Pipe,\n  PULONG ClientProcessId\n);",
         "dllLibrary": "kernel32",
@@ -1705,6 +1787,11 @@
         "prototype": "BOOL GetNamedPipeClientSessionId(\n  HANDLE Pipe,\n  PULONG ClientSessionId\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the client process identifier for the specified named pipe."
+    },
+    "GetNamedPipeHandleState": {
+        "prototype": "BOOL GetNamedPipeHandleStateW(\n  HANDLE  hNamedPipe,\n  LPDWORD lpState,\n  LPDWORD lpCurInstances,\n  LPDWORD lpMaxCollectionCount,\n  LPDWORD lpCollectDataTimeout,\n  LPWSTR  lpUserName,\n  DWORD   nMaxUserNameSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about a specified named pipe. The information returned can vary during the lifetime of an instance of the named pipe."
     },
     "GetNamedPipeInfo": {
         "prototype": "BOOL GetNamedPipeInfo(\n  HANDLE  hNamedPipe,\n  LPDWORD lpFlags,\n  LPDWORD lpOutBufferSize,\n  LPDWORD lpInBufferSize,\n  LPDWORD lpMaxInstances);",
@@ -2353,6 +2440,11 @@
         "dllLibrary": "user32",
         "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
     },
+    "IsSystemResumeAutomatic": {
+        "prototype": "BOOL IsSystemResumeAutomatic();",
+        "dllLibrary": "kernel32",
+        "comment": "Determines the current state of the computer."
+    },
     "IsTouchWindow": {
         "prototype": "BOOL IsTouchWindow(\n  HWND   hwnd,\n  PULONG pulFlags\n);",
         "dllLibrary": "user32",
@@ -2798,6 +2890,13 @@
         "dllLibrary": "user32",
         "comment": "Opens the clipboard for examination and prevents other applications from modifying the clipboard content."
     },
+    "OpenCommPort": {
+        "prototype": "HANDLE OpenCommPort(\n  ULONG uPortNumber,\n  DWORD dwDesiredAccess,\n  DWORD dwFlagsAndAttributes\n);",
+        "dllLibrary": "kernelbase",
+        "comment": "Attempts to open a communication device.",
+        "category": "kernel32",
+        "minimumWindowsVersion": "WIN10_RS4"
+    },
     "OpenDesktop": {
         "prototype": "HDESK OpenDesktopW(\n  LPCWSTR     lpszDesktop,\n  DWORD       dwFlags,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
         "dllLibrary": "user32",
@@ -2965,6 +3064,11 @@
         "prototype": "BOOL PtInRegion(\n  HRGN hrgn,\n  int  x,\n  int  y\n);",
         "dllLibrary": "gdi32",
         "comment": "The PtInRegion function determines whether the specified point is inside the specified region."
+    },
+    "PurgeComm": {
+        "prototype": "BOOL PurgeComm(\n  HANDLE hFile,\n  DWORD  dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Discards all characters from the output or input buffer of a specified communications resource. It can also terminate pending read or write operations on the resource."
     },
     "QueryDosDevice": {
         "prototype": "DWORD QueryDosDeviceW(\n  LPCWSTR lpDeviceName,\n  LPWSTR  lpTargetPath,\n  DWORD   ucchMax\n);",
@@ -3489,6 +3593,31 @@
         "dllLibrary": "user32",
         "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay."
     },
+    "SetCommBreak": {
+        "prototype": "BOOL SetCommBreak(\n  HANDLE hFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends character transmission for a specified communications device and places the transmission line in a break state until the ClearCommBreak function is called."
+    },
+    "SetCommConfig": {
+        "prototype": "BOOL SetCommConfig(\n  HANDLE       hCommDev,\n  LPCOMMCONFIG lpCC,\n  DWORD        dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the current configuration of a communications device."
+    },
+    "SetCommMask": {
+        "prototype": "BOOL SetCommMask(\n  HANDLE hFile,\n  DWORD  dwEvtMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Specifies a set of events to be monitored for a communications device."
+    },
+    "SetCommState": {
+        "prototype": "BOOL SetCommState(\n  HANDLE hFile,\n  LPDCB  lpDCB\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Configures a communications device according to the specifications in a device-control block (a DCB structure). The function reinitializes all hardware and control settings, but it does not empty output or input queues."
+    },
+    "SetCommTimeouts": {
+        "prototype": "BOOL SetCommTimeouts(\n  HANDLE         hFile,\n  LPCOMMTIMEOUTS lpCommTimeouts\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the time-out parameters for all read and write operations on a specified communications device."
+    },
     "SetConsoleCtrlHandler": {
         "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
         "dllLibrary": "kernel32",
@@ -3538,6 +3667,11 @@
         "prototype": "BOOL SetCursorPos(\n  int X,\n  int Y\n);",
         "dllLibrary": "user32",
         "comment": "Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent ClipCursor function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle."
+    },
+    "SetDefaultCommConfig": {
+        "prototype": "BOOL SetDefaultCommConfigW(\n  LPCWSTR      lpszName,\n  LPCOMMCONFIG lpCC,\n  DWORD        dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the default configuration for a communications device."
     },
     "SetDialogControlDpiChangeBehavior": {
         "prototype": "BOOL SetDialogControlDpiChangeBehavior(\n  HWND                                hWnd,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values\n);",
@@ -3815,6 +3949,11 @@
         "prototype": "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);",
         "dllLibrary": "user32",
         "comment": "Creates a timer with the specified time-out value."
+    },
+    "SetupComm": {
+        "prototype": "BOOL SetupComm(\n  HANDLE hFile,\n  DWORD  dwInQueue,\n  DWORD  dwOutQueue\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Initializes the communications parameters for a specified communications device."
     },
     "SetUserObjectInformation": {
         "prototype": "BOOL SetUserObjectInformationW(\n  HANDLE hObj,\n  int    nIndex,\n  PVOID  pvInfo,\n  DWORD  nLength\n);",
@@ -4226,6 +4365,11 @@
         "dllLibrary": "user32",
         "comment": "Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function."
     },
+    "TransmitCommChar": {
+        "prototype": "BOOL TransmitCommChar(\n  HANDLE hFile,\n  char   cChar\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Transmits a specified character ahead of any pending data in the output buffer of the specified communications device."
+    },
     "UnDecorateSymbolName": {
         "prototype": "DWORD IMAGEAPI UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
         "dllLibrary": "dbghelp",
@@ -4360,6 +4504,11 @@
         "prototype": "SHORT VkKeyScanExW(\n  WCHAR ch,\n  HKL   dwhkl\n);",
         "dllLibrary": "user32",
         "comment": "Translates a character to the corresponding virtual-key code and shift state. The function translates the character using the input language and physical keyboard layout identified by the input locale identifier."
+    },
+    "WaitCommEvent": {
+        "prototype": "BOOL WaitCommEvent(\n  HANDLE       hFile,\n  LPDWORD      lpEvtMask,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Waits for an event to occur for a specified communications device. The set of events that are monitored by this function is contained in the event mask associated with the device handle."
     },
     "WaitForInputIdle": {
         "prototype": "DWORD WaitForInputIdle(\n  HANDLE hProcess,\n  DWORD  dwMilliseconds\n);",
