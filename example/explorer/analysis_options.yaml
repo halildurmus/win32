@@ -1,19 +1,22 @@
-include: package:pedantic/analysis_options.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-
-  # Until fix rolls into Dart
-  errors:
-    non_constant_type_argument_warning: ignore
+  errors: 
+    todo: ignore
     
 linter:
   rules:
     # Some additional lints we want to enforce
+    directives_ordering: true
     omit_local_variable_types: true
     prefer_expression_function_bodies: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
+    sort_unnamed_constructors_first: true
     unnecessary_lambdas: true
+    unnecessary_null_aware_assignments: true
