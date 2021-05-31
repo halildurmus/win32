@@ -79,6 +79,14 @@
         "namespace": "Windows.Win32.UI.Shell.COMDLG_FILTERSPEC",
         "comment": "Used generically to filter elements."
     },
+    "COMMCONFIG": {
+        "namespace": "Windows.Win32.Devices.Communication.COMMCONFIG",
+        "comment": "Contains information about the configuration state of a communications device."
+    },
+    "COMSTAT": {
+        "namespace": "Windows.Win32.Devices.Communication.COMSTAT",
+        "comment": "Contains information about a communications device. This structure is filled by the ClearCommError function."
+    },
     "CONSOLE_CURSOR_INFO": {
         "namespace": "Windows.Win32.System.Console.CONSOLE_CURSOR_INFO",
         "comment": "Contains information about the console cursor."
@@ -110,6 +118,10 @@
     "CURSORINFO": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO",
         "comment": "Contains global cursor information."
+    },
+    "DCB": {
+        "namespace": "Windows.Win32.Devices.Communication.DCB",
+        "comment": "Defines the control setting for a serial communications device."
     },
     "DESIGNVECTOR": {
         "namespace": "Windows.Win32.Graphics.Gdi.DESIGNVECTOR",
@@ -286,6 +298,14 @@
     "MINMAXINFO": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.MINMAXINFO",
         "comment": "Contains information about a window's maximized size and position and its minimum and maximum tracking size."
+    },
+    "MODEMDEVCAPS": {
+        "namespace": "Windows.Win32.Devices.Communication.MODEMDEVCAPS",
+        "comment": "Contains information about the capabilities of a modem."
+    },
+    "MODEMSETTINGS": {
+        "namespace": "Windows.Win32.Devices.Communication.MODEMSETTINGS",
+        "comment": "Contains information about a modem's configuration."
     },
     "MODLOAD_DATA": {
         "namespace": "Windows.Win32.System.Diagnostics.Debug.MODLOAD_DATA",

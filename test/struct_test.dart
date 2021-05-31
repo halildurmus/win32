@@ -15,6 +15,13 @@ import 'package:win32/win32.dart';
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;
+  test('Struct APPX_PACKAGE_SETTINGS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<APPX_PACKAGE_SETTINGS>(), equals(16));
+    } else {
+      expect(sizeOf<APPX_PACKAGE_SETTINGS>(), equals(8));
+    }
+  });
   test('Struct BLUETOOTH_ADDRESS is the right size', () {
     expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
   });
@@ -129,13 +136,6 @@ void main() {
       expect(sizeOf<ACTCTX>(), equals(32));
     }
   });
-  test('Struct APPX_PACKAGE_SETTINGS is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<APPX_PACKAGE_SETTINGS>(), equals(16));
-    } else {
-      expect(sizeOf<APPX_PACKAGE_SETTINGS>(), equals(8));
-    }
-  });
   test('Struct BIND_OPTS is the right size', () {
     expect(sizeOf<BIND_OPTS>(), equals(16));
   });
@@ -211,6 +211,15 @@ void main() {
       expect(sizeOf<COMDLG_FILTERSPEC>(), equals(8));
     }
   });
+  test('Struct COMMCONFIG is the right size', () {
+    expect(sizeOf<COMMCONFIG>(), equals(52));
+  });
+  test('Struct COMMPROP is the right size', () {
+    expect(sizeOf<COMMPROP>(), equals(64));
+  });
+  test('Struct COMSTAT is the right size', () {
+    expect(sizeOf<COMSTAT>(), equals(12));
+  });
   test('Struct CONSOLE_CURSOR_INFO is the right size', () {
     expect(sizeOf<CONSOLE_CURSOR_INFO>(), equals(8));
   });
@@ -250,6 +259,9 @@ void main() {
     } else {
       expect(sizeOf<CURSORINFO>(), equals(20));
     }
+  });
+  test('Struct DCB is the right size', () {
+    expect(sizeOf<DCB>(), equals(28));
   });
   test('Struct DESIGNVECTOR is the right size', () {
     expect(sizeOf<DESIGNVECTOR>(), equals(72));
@@ -466,6 +478,12 @@ void main() {
   });
   test('Struct MINMAXINFO is the right size', () {
     expect(sizeOf<MINMAXINFO>(), equals(40));
+  });
+  test('Struct MODEMDEVCAPS is the right size', () {
+    expect(sizeOf<MODEMDEVCAPS>(), equals(80));
+  });
+  test('Struct MODEMSETTINGS is the right size', () {
+    expect(sizeOf<MODEMSETTINGS>(), equals(48));
   });
   test('Struct MODLOAD_DATA is the right size', () {
     if (is64bitOS) {

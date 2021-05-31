@@ -38,6 +38,7 @@ void main()
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
+    printf("  'COMMPROP': %zu,\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\n", sizeof(GUID));
@@ -75,6 +76,8 @@ void main()
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
+    printf("  'COMMCONFIG': %zu,\n", sizeof(COMMCONFIG));
+    printf("  'COMSTAT': %zu,\n", sizeof(COMSTAT));
     printf("  'CONSOLE_CURSOR_INFO': %zu,\n", sizeof(CONSOLE_CURSOR_INFO));
     printf("  'CONSOLE_SCREEN_BUFFER_INFO': %zu,\n", sizeof(CONSOLE_SCREEN_BUFFER_INFO));
     printf("  'CONSOLE_SELECTION_INFO': %zu,\n", sizeof(CONSOLE_SELECTION_INFO));
@@ -83,6 +86,7 @@ void main()
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
+    printf("  'DCB': %zu,\n", sizeof(DCB));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
@@ -127,6 +131,8 @@ void main()
     printf("  'MIDIPROPTIMEDIV': %zu,\n", sizeof(MIDIPROPTIMEDIV));
     printf("  'MIDISTRMBUFFVER': %zu,\n", sizeof(MIDISTRMBUFFVER));
     printf("  'MINMAXINFO': %zu,\n", sizeof(MINMAXINFO));
+    printf("  'MODEMDEVCAPS': %zu,\n", sizeof(MODEMDEVCAPS));
+    printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
