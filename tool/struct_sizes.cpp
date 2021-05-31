@@ -163,6 +163,7 @@ void main()
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
+    printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
     printf("  'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));
     printf("  'SIZE': %zu,\n", sizeof(SIZE));

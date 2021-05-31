@@ -427,6 +427,10 @@
         "namespace": "Windows.Win32.Security.SECURITY_DESCRIPTOR",
         "comment": "The SECURITY_DESCRIPTOR structure contains the security information associated with an object. Applications use this structure to set and query an object's security status."
     },
+    "SHELL_ITEM_RESOURCE": {
+        "namespace": "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE",
+        "comment": "Defines Shell item resource."
+    },
     "SHITEMID": {
         "namespace": "Windows.Win32.UI.Shell.SHITEMID",
         "comment": "Defines an item identifier."

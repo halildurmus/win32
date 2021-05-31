@@ -68,6 +68,7 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IApplicationActivationManager',
   'Windows.Win32.UI.Shell.IDesktopWallpaper',
   'Windows.Win32.UI.Shell.IEnumIDList',
+  'Windows.Win32.UI.Shell.IEnumResources',
   'Windows.Win32.UI.Shell.IFileDialog',
   'Windows.Win32.UI.Shell.IFileDialog2',
   'Windows.Win32.UI.Shell.IFileDialogCustomize',
@@ -82,6 +83,11 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IShellItem2',
   'Windows.Win32.UI.Shell.IShellItemArray',
   'Windows.Win32.UI.Shell.IShellItemFilter',
+  'Windows.Win32.UI.Shell.IShellItemResources',
+  'Windows.Win32.UI.Shell.IShellLinkDataList',
+  'Windows.Win32.UI.Shell.IShellLinkDual',
+  'Windows.Win32.UI.Shell.IShellLinkW',
+  'Windows.Win32.UI.Shell.IShellService',
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
 

@@ -2239,6 +2239,30 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Dacl;
 }
 
+/// Defines Shell item resource.
+///
+/// {@category Struct}
+class SHELL_ITEM_RESOURCE extends Struct {
+  external GUID guidType;
+  @Array(260)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Defines an item identifier.
 ///
 /// {@category Struct}

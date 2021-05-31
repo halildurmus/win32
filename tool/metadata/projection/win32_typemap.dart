@@ -111,6 +111,7 @@ const win32TypeMap = <String, String>{
   'IEnumMoniker': 'Pointer',
   'IEnumNetworkConnections': 'Pointer',
   'IEnumNetworks': 'Pointer',
+  'IEnumResources': 'Pointer',
   'IEnumShellItems': 'Pointer',
   'IEnumSpellingError': 'Pointer',
   'IEnumString': 'Pointer',
