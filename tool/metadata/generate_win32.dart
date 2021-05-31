@@ -157,12 +157,13 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 }
 
 void main(List<String> args) {
+  final options = args.length != 1 ? '--all' : args.last;
   final optionAPIs =
-      (args.last != '--tests-only') && (args.last != '--structs-only');
+      (options != '--tests-only') && (options != '--structs-only');
   final optionTests =
-      (args.last != '--apis-only') && (args.last != '--structs-only');
+      (options != '--apis-only') && (options != '--structs-only');
   final optionStructs =
-      (args.last != '--apis-only') && (args.last != '--tests-only');
+      (options != '--apis-only') && (options != '--tests-only');
 
   final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((type) => type.name.endsWith('Apis'));
