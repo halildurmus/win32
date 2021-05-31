@@ -160,7 +160,9 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((type) => type.name.endsWith('Apis'));
 
-  apis.forEach((api) => methods.addAll(api.methods));
+  for (final api in apis) {
+    methods.addAll(api.methods);
+  }
   print('${methods.length} APIs collected');
 
   final win32 = Win32API(

@@ -12,7 +12,7 @@ bool isAppContainer() {
     final hProcess = GetCurrentProcess();
     if (OpenProcessToken(hProcess, TOKEN_READ, phToken) == FALSE) {
       OutputDebugString(
-          "Error: Couldn\'t open the process token\n".toNativeUtf16());
+          "Error: Couldn't open the process token\n".toNativeUtf16());
     }
 
     if (GetTokenInformation(
