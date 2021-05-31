@@ -59,7 +59,8 @@ void main() {
   });
 
   test('Pointer<Pointer<T>>', () {
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis')!;
     final api = typedef.findMethod('CredReadW')!;
     final type = api.parameters.last.typeIdentifier; // PCREDENTIALW *
     final typeProjection = TypeProjector(type);
@@ -110,7 +111,8 @@ void main() {
   });
 
   test('Double pointer is projected correctly', () {
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis')!;
     final api = typedef.findMethod('CredReadW')!;
     final type = api.parameters.last.typeIdentifier;
     final typeProjection = TypeProjector(type);
@@ -201,7 +203,8 @@ void main() {
   });
 
   test('Void returns are represented correctly', () {
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis')!;
     final api = typedef.findMethod('CredFree')!;
     final type = api.returnType.typeIdentifier;
     final typeProjection = TypeProjector(type);
@@ -216,8 +219,7 @@ void main() {
     final returnType = api.returnType.typeIdentifier;
 
     expect(returnType.baseType, equals(BaseType.ValueTypeModifier));
-    expect(
-        returnType.name, equals('Windows.Win32.System.SystemServices.HANDLE'));
+    expect(returnType.name, equals('Windows.Win32.Foundation.HANDLE'));
 
     final valueTypedef = scope.findTypeDef(returnType.name)!;
     expect(valueTypedef.fields.first.typeIdentifier.baseType,
@@ -281,7 +283,8 @@ void main() {
   });
 
   test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.Security.Credentials.Apis')!;
     final api = typedef.findMethod('CredFree')!;
     final param = api.parameters.first;
     expect(param.name, equals('Buffer'));
