@@ -100,11 +100,11 @@
         "comment": "Defines the initialization parameters passed to the window procedure of an application. These members are identical to the parameters of the CreateWindowEx function."
     },
     "CREDENTIAL": {
-        "namespace": "Windows.Win32.Security.CREDENTIALW",
+        "namespace": "Windows.Win32.Security.Credentials.CREDENTIALW",
         "comment": "The CREDENTIAL structure contains an individual credential."
     },
     "CREDENTIAL_ATTRIBUTE": {
-        "namespace": "Windows.Win32.Security.CREDENTIAL_ATTRIBUTEW",
+        "namespace": "Windows.Win32.Security.Credentials.CREDENTIAL_ATTRIBUTEW",
         "comment": "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute."
     },
     "CURSORINFO": {
@@ -148,7 +148,7 @@
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
     },
     "FILETIME": {
-        "namespace": "Windows.Win32.System.WindowsProgramming.FILETIME",
+        "namespace": "Windows.Win32.Foundation.FILETIME",
         "comment": "Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
     },
     "FINDREPLACE": {
@@ -320,11 +320,11 @@
         "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "OSVERSIONINFO": {
-        "namespace": "Windows.Win32.System.WindowsProgramming.OSVERSIONINFOW",
+        "namespace": "Windows.Win32.System.SystemInformation.OSVERSIONINFOW",
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and descriptive text about the operating system. This structure is used with the GetVersionEx function."
     },
     "OSVERSIONINFOEXW": {
-        "namespace": "Windows.Win32.System.WindowsProgramming.OSVERSIONINFOEXW",
+        "namespace": "Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW",
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions."
     },
     "PAINTSTRUCT": {
@@ -348,11 +348,11 @@
         "comment": "Contains a handle and text description corresponding to a physical monitor."
     },
     "POINT": {
-        "namespace": "Windows.Win32.UI.DisplayDevices.POINT",
+        "namespace": "Windows.Win32.Foundation.POINT",
         "comment": "The POINT structure defines the x- and y-coordinates of a point."
     },
     "POINTS": {
-        "namespace": "Windows.Win32.UI.DisplayDevices.POINTS",
+        "namespace": "Windows.Win32.Foundation.POINTS",
         "comment": "The POINTS structure defines the x- and y-coordinates of a point."
     },
     "POLYTEXT": {
@@ -360,7 +360,7 @@
         "comment": "The POLYTEXT structure describes how the PolyTextOut function should draw a string of text."
     },
     "POWERBROADCAST_SETTING": {
-        "namespace": "Windows.Win32.System.SystemServices.POWERBROADCAST_SETTING",
+        "namespace": "Windows.Win32.System.Power.POWERBROADCAST_SETTING",
         "comment": "Sent with a power setting event and contains data about the specific change."
     },
     "PROCESS_INFORMATION": {
@@ -372,7 +372,7 @@
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
     "RECT": {
-        "namespace": "Windows.Win32.UI.DisplayDevices.RECT",
+        "namespace": "Windows.Win32.Foundation.RECT",
         "comment": "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners."
     },
     "RGBQUAD": {
@@ -396,7 +396,7 @@
         "comment": "The SCROLLINFO structure contains scroll bar parameters to be set by the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the GetScrollInfo function (or SBM_GETSCROLLINFO message)"
     },
     "SECURITY_ATTRIBUTES": {
-        "namespace": "Windows.Win32.System.SystemServices.SECURITY_ATTRIBUTES",
+        "namespace": "Windows.Win32.Security.SECURITY_ATTRIBUTES",
         "comment": "The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.\n\nThis structure provides security settings for objects created by various functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx."
     },
     "SECURITY_DESCRIPTOR": {
@@ -412,7 +412,7 @@
         "comment": "Contains the size and item count information retrieved by the SHQueryRecycleBin function."
     },
     "SIZE": {
-        "namespace": "Windows.Win32.UI.DisplayDevices.SIZE",
+        "namespace": "Windows.Win32.Foundation.SIZE",
         "comment": "The SIZE structure defines the width and height of a rectangle."
     },
     "SMALL_RECT": {
@@ -440,15 +440,15 @@
         "comment": "Contains symbol information."
     },
     "SYSTEM_BATTERY_STATE": {
-        "namespace": "Windows.Win32.System.SystemServices.SYSTEM_BATTERY_STATE",
+        "namespace": "Windows.Win32.System.Power.SYSTEM_BATTERY_STATE",
         "comment": "Contains information about the current state of the system battery."
     },
     "SYSTEM_POWER_STATUS": {
-        "namespace": "Windows.Win32.System.SystemServices.SYSTEM_POWER_STATUS",
+        "namespace": "Windows.Win32.System.Power.SYSTEM_POWER_STATUS",
         "comment": "Contains information about the power status of the system."
     },
     "SYSTEMTIME": {
-        "namespace": "Windows.Win32.System.WindowsProgramming.SYSTEMTIME",
+        "namespace": "Windows.Win32.Foundation.SYSTEMTIME",
         "comment": "Specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called."
     },
     "TASKDIALOG_BUTTON": {
@@ -492,7 +492,7 @@
         "comment": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure."
     },
     "VS_FIXEDFILEINFO": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.VS_FIXEDFILEINFO",
+        "namespace": "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO",
         "comment": "Contains version information for a file. This information is language and code page independent."
     },
     "WAVEFORMATEX": {
