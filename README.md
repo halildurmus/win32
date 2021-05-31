@@ -112,6 +112,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
 | `notepad\`         | Lightweight replica of the Windows notepad applet         |
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
+| `pipe.dart`        | Shows use of named pipes for interprocess communication   |
 | `play_sound.dart`  | Plays a WAV file through the Windows PlaySound API        |
 | `screenshot.dart`  | Takes a screenshot of the current desktop                 |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
