@@ -1,3 +1,8 @@
+## 2.1.2
+
+- Add serial port comms APIs
+- Add additional shell COM APIs
+
 ## 2.1.1
 
 - Work around FFI regression in Dart master and dev builds.
