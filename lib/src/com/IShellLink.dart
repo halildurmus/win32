@@ -1,4 +1,4 @@
-// IShellLinkW.dart
+// IShellLink.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -20,7 +20,10 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IShellLinkW = '{000214F9-0000-0000-C000-000000000046}';
+const CLSID_ShellLink = '{00021401-0000-0000-C000-000000000046}';
+
+/// @nodoc
+const IID_IShellLink = '{000214F9-0000-0000-C000-000000000046}';
 
 typedef _GetPath_Native = Int32 Function(Pointer obj, Pointer<Utf16> pszFile,
     Int32 cch, Pointer<WIN32_FIND_DATA> pfd, Uint32 fFlags);
@@ -103,10 +106,10 @@ typedef _SetPath_Dart = int Function(Pointer obj, Pointer<Utf16> pszFile);
 
 /// {@category Interface}
 /// {@category com}
-class IShellLinkW extends IUnknown {
+class IShellLink extends IUnknown {
   // vtable begins at 3, ends at 20
 
-  IShellLinkW(Pointer<COMObject> ptr) : super(ptr);
+  IShellLink(Pointer<COMObject> ptr) : super(ptr);
 
   int GetPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>
@@ -203,4 +206,26 @@ class IShellLinkW extends IUnknown {
       Pointer<NativeFunction<_SetPath_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(20).value)
           .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, pszFile);
+}
+
+/// {@category com}
+class ShellLink extends IShellLink {
+  ShellLink(Pointer<COMObject> ptr) : super(ptr);
+
+  factory ShellLink.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellLink);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IShellLink);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return ShellLink(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
 }

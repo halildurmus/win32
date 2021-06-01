@@ -93,6 +93,22 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
 
+/// Take a fully-qualified interface name (e.g.
+/// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding classname
+/// (e.g. `Windows.Win32.UI.Shell.ShellLink`).
+String classNameForInterfaceName(String interfaceName) {
+  final interfaceNameAsList = interfaceName.split('.');
+
+  // Strip off the 'I' from the last component
+  final fullyQualifiedClassName =
+      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
+            ..add(interfaceNameAsList.last.substring(1)))
+          .join('.');
+
+  // If class has a 'W' suffix, erase it.
+  return removeUnicodeSuffix(fullyQualifiedClassName);
+}
+
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
 
@@ -109,12 +125,8 @@ void main(List<String> args) {
 
     if (mdTypeDef == null) throw Exception("Can't find $type");
 
-    final typeNameAsList = type.split('.');
-    final fullyQualifiedClassName =
-        (typeNameAsList.sublist(0, typeNameAsList.length - 1)
-              ..add(typeNameAsList.last.substring(1)))
-            .join('.');
-    final clsid = scope.findTypeDef(fullyQualifiedClassName)?.guid ?? '';
+    final clsid =
+        scope.findTypeDef(classNameForInterfaceName(type))?.guid ?? '';
 
     final parentInterface = mdTypeDef.interfaces.isNotEmpty
         ? mdTypeDef.interfaces.first.name.split('.').last
@@ -126,11 +138,11 @@ void main(List<String> args) {
       ..sourceType = SourceType.com
       ..generateClass = clsid.isNotEmpty
       ..clsid = clsid
-      ..className = type.split('.').last.substring(1);
+      ..className = removeUnicodeSuffix(type.split('.').last.substring(1));
 
     final dartClass = TypePrinter.printProjection(projection);
 
-    final classOutputFilename = type.split('.').last;
+    final classOutputFilename = removeUnicodeSuffix(type.split('.').last);
     final outputFile =
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
@@ -139,9 +151,8 @@ void main(List<String> args) {
 
     final dartTests = TypePrinter.printTests(projection);
 
-    final testOutputFilename = type.split('.').last;
     final testFile = File(
-        '${testDirectory.uri.toFilePath()}${testOutputFilename}_test.dart');
+        '${testDirectory.uri.toFilePath()}${classOutputFilename}_test.dart');
 
     print('Writing:    ${testFile.path}');
     testFile.writeAsStringSync(dartTests);

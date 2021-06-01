@@ -204,7 +204,7 @@ export 'src/com/IShellItemFilter.dart';
 export 'src/com/IShellItemResources.dart';
 export 'src/com/IShellLinkDataList.dart';
 export 'src/com/IShellLinkDual.dart';
-export 'src/com/IShellLinkW.dart';
+export 'src/com/IShellLink.dart';
 export 'src/com/IShellService.dart';
 export 'src/com/ISpellChecker.dart';
 export 'src/com/ISpellCheckerChangedEventHandler.dart';
