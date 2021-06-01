@@ -50,7 +50,7 @@ class ClientCommand extends Command<void> {
       }
 
       stdout.writeln('Reading data from pipe...');
-      final result = ReadFile(pipe, lpBuffer, 127, lpNumBytesRead, nullptr);
+      final result = ReadFile(pipe, lpBuffer, 128, lpNumBytesRead, nullptr);
       if (result == NULL) {
         stderr.writeln('Failed to read data from the pipe.');
       } else {
@@ -116,7 +116,7 @@ class ServerCommand extends Command<void> {
 }
 
 void main(List<String> args) {
-  CommandRunner<dynamic>('pipe', 'A demonstration of Win32 named pipes.')
+  CommandRunner<void>('pipe', 'A demonstration of Win32 named pipes.')
     ..addCommand(ClientCommand())
     ..addCommand(ServerCommand())
     ..run(args);
