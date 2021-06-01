@@ -241,27 +241,6 @@ const THAI_CHARSET = 222;
 const EASTEUROPE_CHARSET = 238;
 const RUSSIAN_CHARSET = 204;
 
-// Scrollbar constants
-const SB_HORZ = 0;
-const SB_VERT = 1;
-const SB_CTL = 2;
-const SB_BOTH = 3;
-const SB_LINEUP = 0;
-const SB_LINELEFT = 0;
-const SB_LINEDOWN = 1;
-const SB_LINERIGHT = 1;
-const SB_PAGEUP = 2;
-const SB_PAGELEFT = 2;
-const SB_PAGEDOWN = 3;
-const SB_PAGERIGHT = 3;
-const SB_THUMBPOSITION = 4;
-const SB_THUMBTRACK = 5;
-const SB_TOP = 6;
-const SB_LEFT = 6;
-const SB_BOTTOM = 7;
-const SB_RIGHT = 7;
-const SB_ENDSCROLL = 8;
-
 // Common Dialog window strings
 const LBSELCHSTRING = 'commdlg_LBSelChangedNotify';
 const SHAREVISTRING = 'commdlg_ShareViolation';
@@ -1897,33 +1876,3 @@ const MCIERR_FILE_WRITE = MCIERR_BASE + 93;
 const MCIERR_NO_IDENTITY = MCIERR_BASE + 94;
 const MCIERR_CUSTOM_DRIVER_BASE = MCIERR_BASE + 256;
 const MIDI_MAPPER = -1;
-
-const PBS_SMOOTH = 0x01;
-const PBS_VERTICAL = 0x04;
-const PBM_SETRANGE = WM_USER + 1;
-const PBM_SETPOS = WM_USER + 2;
-const PBM_DELTAPOS = WM_USER + 3;
-const PBM_SETSTEP = WM_USER + 4;
-const PBM_STEPIT = WM_USER + 5;
-const PBM_SETRANGE32 = WM_USER + 6;
-const PBM_GETRANGE = WM_USER + 7;
-const PBM_GETPOS = WM_USER + 8;
-const PBM_SETBARCOLOR = WM_USER + 9;
-const PBM_SETBKCOLOR = CCM_SETBKCOLOR;
-const PBS_MARQUEE = 0x08;
-const PBM_SETMARQUEE = WM_USER + 10;
-const PBS_SMOOTHREVERSE = 0x10;
-const PBM_GETSTEP = WM_USER + 13;
-const PBM_GETBKCOLOR = WM_USER + 14;
-const PBM_GETBARCOLOR = WM_USER + 15;
-const PBM_SETSTATE = WM_USER + 16;
-const PBM_GETSTATE = WM_USER + 17;
-const PBST_NORMAL = 0x0001;
-const PBST_ERROR = 0x0002;
-const PBST_PAUSED = 0x0003;
-
-const CCM_FIRST = 0x2000;
-const CCM_LAST = CCM_FIRST + 0x200;
-const CCM_SETBKCOLOR = CCM_FIRST + 1;
-
-const STILL_ACTIVE = 259;

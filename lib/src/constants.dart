@@ -564,7 +564,6 @@ const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
 const ES_SYSTEM_REQUIRED = 0x00000001;
 
 /// Forces the display to be on by resetting the display idle timer.
-
 const ES_DISPLAY_REQUIRED = 0x00000002;
 
 /// This value is not supported. If ES_USER_PRESENT is combined with other
@@ -579,6 +578,9 @@ const ES_AWAYMODE_REQUIRED = 0x00000040;
 /// the next call that uses ES_CONTINUOUS and one of the other state flags is
 /// cleared.
 const ES_CONTINUOUS = 0x80000000;
+
+/// The thread is still active.
+const STILL_ACTIVE = 259;
 
 // -----------------------------------------------------------------------------
 // Named pipe flags
@@ -3341,6 +3343,159 @@ const SM_CONVERTIBLESLATEMODE = 0x2003;
 /// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
 /// otherwise.
 const SM_SYSTEMDOCKED = 0x2004;
+
+// -----------------------------------------------------------------------------
+// Scrollbar constants
+// -----------------------------------------------------------------------------
+
+/// Apply to the window's standard horizontal scroll bar.
+const SB_HORZ = 0;
+
+/// Apply to the window's standard vertical scroll bar.
+const SB_VERT = 1;
+
+/// Apply to a scroll bar control.
+const SB_CTL = 2;
+
+/// Apply to the window's standard horizontal and vertical scroll bars.
+const SB_BOTH = 3;
+
+/// Scrolls one line up.
+const SB_LINEUP = 0;
+
+/// Scrolls left by one unit.
+const SB_LINELEFT = 0;
+
+/// Scrolls one line down.
+const SB_LINEDOWN = 1;
+
+/// Scrolls right by one unit.
+const SB_LINERIGHT = 1;
+
+/// Scrolls one page up.
+const SB_PAGEUP = 2;
+
+/// Scrolls left by the width of the window.
+const SB_PAGELEFT = 2;
+
+/// Scrolls one page down.
+const SB_PAGEDOWN = 3;
+
+/// Scrolls right by the width of the window.
+const SB_PAGERIGHT = 3;
+
+/// The user has dragged the scroll box (thumb) and released the mouse button.
+const SB_THUMBPOSITION = 4;
+
+/// The user is dragging the scroll box. This message is sent repeatedly until
+/// the user releases the mouse button.
+const SB_THUMBTRACK = 5;
+
+/// Scrolls to the upper left.
+const SB_TOP = 6;
+
+/// Scrolls to the upper left.
+const SB_LEFT = 6;
+
+/// Scrolls to the lower right.
+const SB_BOTTOM = 7;
+
+/// Scrolls to the lower right.
+const SB_RIGHT = 7;
+
+/// Ends scroll.
+const SB_ENDSCROLL = 8;
+
+// -----------------------------------------------------------------------------
+// Progress Bar styles
+// -----------------------------------------------------------------------------
+
+/// The progress bar displays progress status in a smooth scrolling bar instead
+/// of the default segmented bar.
+const PBS_SMOOTH = 0x01;
+
+/// The progress bar displays progress status vertically, from bottom to top.
+const PBS_VERTICAL = 0x04;
+
+/// Sets the minimum and maximum values for a progress bar and redraws the bar
+/// to reflect the new range.
+const PBM_SETRANGE = WM_USER + 1;
+
+/// Sets the current position for a progress bar and redraws the bar to reflect
+/// the new position.
+const PBM_SETPOS = WM_USER + 2;
+
+/// Advances the current position of a progress bar by a specified increment and
+/// redraws the bar to reflect the new position.
+const PBM_DELTAPOS = WM_USER + 3;
+
+/// Specifies the step increment for a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_SETSTEP = WM_USER + 4;
+
+/// Advances the current position for a progress bar by the step increment and
+/// redraws the bar to reflect the new position. An application sets the step
+/// increment by sending the PBM_SETSTEP message.
+const PBM_STEPIT = WM_USER + 5;
+
+/// Sets the minimum and maximum values for a progress bar to 32-bit values, and
+/// redraws the bar to reflect the new range
+const PBM_SETRANGE32 = WM_USER + 6;
+
+/// Retrieves information about the current high and low limits of a given
+/// progress bar control.
+const PBM_GETRANGE = WM_USER + 7;
+
+/// Retrieves the current position of the progress bar.
+const PBM_GETPOS = WM_USER + 8;
+
+/// Sets the color of the progress indicator bar in the progress bar control.
+const PBM_SETBARCOLOR = WM_USER + 9;
+
+/// Sets the background color in the progress bar.
+const PBM_SETBKCOLOR = 0x2001;
+
+/// The progress indicator does not grow in size but instead moves repeatedly
+/// along the length of the bar, indicating activity without specifying what
+/// proportion of the progress is complete.
+const PBS_MARQUEE = 0x08;
+
+/// Sets the progress bar to marquee mode. This causes the progress bar to move
+/// like a marquee.
+const PBM_SETMARQUEE = WM_USER + 10;
+
+/// Determines the animation behavior that the progress bar should use when
+/// moving backward (from a higher value to a lower value). If this is set, then
+/// a "smooth" transition will occur, otherwise the control will "jump" to the
+/// lower value.
+const PBS_SMOOTHREVERSE = 0x10;
+
+/// Retrieves the step increment from a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_GETSTEP = WM_USER + 13;
+
+/// Gets the background color of the progress bar.
+const PBM_GETBKCOLOR = WM_USER + 14;
+
+/// Gets the color of the progress bar.
+const PBM_GETBARCOLOR = WM_USER + 15;
+
+/// Sets the state of the progress bar.
+const PBM_SETSTATE = WM_USER + 16;
+
+/// Gets the state of the progress bar.
+const PBM_GETSTATE = WM_USER + 17;
+
+/// In progress.
+const PBST_NORMAL = 0x0001;
+
+/// Error.
+const PBST_ERROR = 0x0002;
+
+/// Paused.
+const PBST_PAUSED = 0x0003;
 
 // -----------------------------------------------------------------------------
 // Clipboard Format constants
