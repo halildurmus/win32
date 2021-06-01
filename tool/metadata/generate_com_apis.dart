@@ -49,6 +49,8 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.System.Com.IEnumString',
   'Windows.Win32.System.Com.IMoniker',
   'Windows.Win32.System.Com.IPersist',
+  'Windows.Win32.System.Com.IPersistFile',
+  'Windows.Win32.System.Com.IPersistMemory',
   'Windows.Win32.System.Com.IPersistStream',
   'Windows.Win32.System.Com.IProvideClassInfo',
   'Windows.Win32.System.Com.IRunningObjectTable',

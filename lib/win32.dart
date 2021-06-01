@@ -189,6 +189,8 @@ export 'src/com/INetworkConnection.dart';
 export 'src/com/INetworkListManager.dart';
 export 'src/com/INetworkListManagerEvents.dart';
 export 'src/com/IPersist.dart';
+export 'src/com/IPersistFile.dart';
+export 'src/com/IPersistMemory.dart';
 export 'src/com/IPersistStream.dart';
 export 'src/com/IPropertyValue.dart';
 export 'src/com/IProvideClassInfo.dart';
