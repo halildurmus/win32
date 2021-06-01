@@ -1,3 +1,8 @@
+## 2.1.3
+
+- Fix bug in shell COM APIs.
+- Add examples for shortcut creation and named pipes.
+
 ## 2.1.2
 
 - Add serial port comms APIs

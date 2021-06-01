@@ -117,6 +117,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `screenshot.dart`  | Takes a screenshot of the current desktop                 |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
+| `shortcut.dart`    | Demonstrates creating a Windows shell link.               |
 | `snake.dart`       | Snake game using various GDI features                     |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
 | `taskdialog.dart`  | Demonstrates using modern task dialog boxes               |
