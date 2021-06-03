@@ -3,6 +3,8 @@
 // C++ implementation can be found here:
 // https://docs.microsoft.com/en-us/windows/win32/devio/configuring-a-communications-resource
 
+// This sample assumes that you have a working COM serial port.
+
 import 'dart:ffi';
 import 'dart:io';
 
