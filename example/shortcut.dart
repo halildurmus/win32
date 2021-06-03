@@ -6,31 +6,29 @@ import 'package:args/args.dart';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void createShortcut(String path, String pathLink, String description) {
+void createShortcut(String path, String pathLink, String? description) {
   final shellLink = ShellLink.createInstance();
   final lpPath = path.toNativeUtf16();
   final lpPathLink = pathLink.toNativeUtf16();
-  final lpDescription = description.toNativeUtf16();
+  final lpDescription = description?.toNativeUtf16() ?? nullptr;
   final ptrIID_IPersistFile = convertToCLSID(IID_IPersistFile);
   final ppf = calloc<COMObject>();
 
   try {
     shellLink.SetPath(lpPath);
-    shellLink.SetDescription(lpDescription);
+    if (description != null) shellLink.SetDescription(lpDescription);
 
     final hr = shellLink.QueryInterface(ptrIID_IPersistFile, ppf.cast());
     if (SUCCEEDED(hr)) {
       final persistFile = IPersistFile(ppf);
       persistFile.Save(lpPathLink, TRUE);
       persistFile.Release();
-      free(persistFile.ptr);
     }
     shellLink.Release();
   } finally {
-    free(shellLink.ptr);
     free(lpPath);
     free(lpPathLink);
-    free(lpDescription);
+    if (lpDescription != nullptr) free(lpDescription);
     free(ptrIID_IPersistFile);
     free(ppf);
   }
@@ -42,7 +40,7 @@ void main(List<String> args) {
         abbr: 'p',
         mandatory: true,
         help:
-            r'Absolute or relative path for which to create a shortcut (e.g. c:\test.txt).')
+            r'Absolute path for which to create a shortcut (e.g. c:\test.txt).')
     ..addOption('shortcut',
         abbr: 's',
         mandatory: true,
@@ -54,7 +52,7 @@ void main(List<String> args) {
     final results = parser.parse(args);
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     createShortcut(results['path'] as String, results['shortcut'] as String,
-        results['description'] as String);
+        results['description'] as String?);
     CoUninitialize();
   } on FormatException {
     print('Creates a Windows shortcut to a given file.\n');
