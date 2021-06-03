@@ -734,6 +734,107 @@ const HANDLE_FLAG_INHERIT = 0x00000001;
 const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
 
 // -----------------------------------------------------------------------------
+// Serial port flags
+// -----------------------------------------------------------------------------
+
+/// No parity.
+const NOPARITY = 0;
+
+/// Odd parity.
+const ODDPARITY = 1;
+
+/// Even parity.
+const EVENPARITY = 2;
+
+/// Mark parity.
+const MARKPARITY = 3;
+
+/// Space parity.
+const SPACEPARITY = 4;
+
+/// 1 stop bit.
+const ONESTOPBIT = 0;
+
+/// 1.5 stop bits.
+const ONE5STOPBITS = 1;
+
+/// 2 stop bits.
+const TWOSTOPBITS = 2;
+
+/// 110 bps.
+const CBR_110 = 110;
+
+/// 300 bps.
+const CBR_300 = 300;
+
+/// 600 bps.
+const CBR_600 = 600;
+
+/// 1200 bps.
+const CBR_1200 = 1200;
+
+/// 2400 bps.
+const CBR_2400 = 2400;
+
+/// 4800 bps.
+const CBR_4800 = 4800;
+
+/// 9600 bps.
+const CBR_9600 = 9600;
+
+/// 14400 bps.
+const CBR_14400 = 14400;
+
+/// 19200 bps.
+const CBR_19200 = 19200;
+
+/// 38400 bps.
+const CBR_38400 = 38400;
+
+/// 56000 bps.
+const CBR_56000 = 56000;
+
+/// 57600 bps.
+const CBR_57600 = 57600;
+
+/// 115200 bps.
+const CBR_115200 = 115200;
+
+/// 128000 bps.
+const CBR_128000 = 128000;
+
+/// 256000 bps.
+const CBR_256000 = 256000;
+
+/// Disables the DTR line when the device is opened and leaves it disabled.
+const DTR_CONTROL_DISABLE = 0x00;
+
+/// Enables the DTR line when the device is opened and leaves it on.
+const DTR_CONTROL_ENABLE = 0x01;
+
+/// Enables DTR handshaking. If handshaking is enabled, it is an error for the
+/// application to adjust the line by using the EscapeCommFunction function.
+const DTR_CONTROL_HANDSHAKE = 0x02;
+
+/// Disables the RTS line when the device is opened and leaves it disabled.
+const RTS_CONTROL_DISABLE = 0x00;
+
+/// Enables the RTS line when the device is opened and leaves it on.
+const RTS_CONTROL_ENABLE = 0x01;
+
+/// Enables RTS handshaking. The driver raises the RTS line when the
+/// "type-ahead" (input) buffer is less than one-half full and lowers the RTS
+/// line when the buffer is more than three-quarters full. If handshaking is
+/// enabled, it is an error for the application to adjust the line by using the
+/// EscapeCommFunction function.
+const RTS_CONTROL_HANDSHAKE = 0x02;
+
+/// Specifies that the RTS line will be high if bytes are available for
+/// transmission. After all buffered bytes have been sent, the RTS line will be
+/// low.
+const RTS_CONTROL_TOGGLE = 0x03;
+
+// -----------------------------------------------------------------------------
 // Get Binary Type flags
 // -----------------------------------------------------------------------------
 

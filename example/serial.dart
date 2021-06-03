@@ -1,3 +1,8 @@
+// Dart implementation of the Win32 sample of configuring a comms resource.
+
+// C++ implementation can be found here:
+// https://docs.microsoft.com/en-us/windows/win32/devio/configuring-a-communications-resource
+
 import 'dart:ffi';
 import 'dart:io';
 
@@ -18,7 +23,7 @@ void main() {
         nullptr, OPEN_EXISTING, 0, NULL);
 
     if (hCom == INVALID_HANDLE_VALUE) {
-      print('Invalid handle');
+      print('Invalid handle.');
       exit(1);
     }
 
@@ -32,10 +37,10 @@ void main() {
     PrintCommState(dcb.ref);
 
     dcb
-      ..ref.BaudRate = 57600
+      ..ref.BaudRate = CBR_57600
       ..ref.ByteSize = 8
-      ..ref.Parity = 0
-      ..ref.StopBits = 0;
+      ..ref.Parity = NOPARITY
+      ..ref.StopBits = ONESTOPBIT;
 
     fSuccess = SetCommState(hCom, dcb);
     if (fSuccess == 0) {
