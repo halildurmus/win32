@@ -10,8 +10,8 @@ the form of an ECMA-335 specification file, generated from this repo:
 The metadata is extracted and parsed using the separate winmd package:
   <https://pub.dev/packages/winmd>
 
-The `.winmd` file supplied in the `tool\metadata` directory is used to generate the
-APIs.
+The `.winmd` file supplied in the `tool\metadata` directory is used to generate
+the APIs.
 
 Not every API is projected.
 
