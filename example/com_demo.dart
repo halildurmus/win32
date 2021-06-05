@@ -44,10 +44,8 @@ void main() {
     refCount = fileDialog.Release();
     print('refCount is now $refCount\n');
 
-    // Call QueryInterface() to get the IModalWindow interface
-    hr = fileDialog.QueryInterface(pIID_IModalWindow, ppMW.cast());
-    if (FAILED(hr)) throw WindowsException(hr);
-    final modalWindow = IModalWindow(ppMW);
+    // // Call QueryInterface() to get the IModalWindow interface
+    final modalWindow = IModalWindow(fileDialog.toInterface(IID_IModalWindow));
 
     // final modalWindow =
     //     IModalWindow(IModalWindow(ppMW)..toInterface(IID_IModalWindow));

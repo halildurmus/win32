@@ -36,10 +36,6 @@ typedef _Release_Dart = int Function(Pointer obj);
 /// {@category com}
 class COMObject extends Struct {
   // vtable begins at 0, ends at 2
-  /// A representation of a generic COM object. All Dart COM objects inherit from
-  /// this class.
-  ///
-  /// {@category com}
 
   external Pointer<Pointer<IntPtr>> lpVtbl;
 
