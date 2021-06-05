@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
 

@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_IKnownFolder = '{3AA7AF7E-9B36-420C-A8E3-F77D4674A488}';
 

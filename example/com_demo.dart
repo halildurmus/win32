@@ -48,6 +48,10 @@ void main() {
     hr = fileDialog.QueryInterface(pIID_IModalWindow, ppMW.cast());
     if (FAILED(hr)) throw WindowsException(hr);
     final modalWindow = IModalWindow(ppMW);
+
+    // final modalWindow =
+    //     IModalWindow(IModalWindow(ppMW)..toInterface(IID_IModalWindow));
+
     print('modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
 
     // Call AddRef() and Release(), which are inherited from IUnknown

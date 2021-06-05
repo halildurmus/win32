@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_IShellService = '{5836FB00-8187-11CF-A12B-00AA004AE837}';
 

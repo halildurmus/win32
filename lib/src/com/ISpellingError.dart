@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
 

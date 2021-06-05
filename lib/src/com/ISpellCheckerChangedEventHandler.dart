@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_ISpellCheckerChangedEventHandler =
     '{0B83A5B0-792F-4EAB-9799-ACF52C5ED08A}';

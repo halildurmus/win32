@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const CLSID_ApplicationActivationManager =
     '{45BA127D-10A8-46EA-8AB7-56EA9078943C}';

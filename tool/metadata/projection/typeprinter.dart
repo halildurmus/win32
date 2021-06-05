@@ -43,7 +43,7 @@ import '../winrt/winrt_constants.dart';
 ''');
     }
 
-    if (type.inherits != '') {
+    if (type.inherits != '' && type.inherits != 'IUnknown') {
       buffer.writeln("import '${type.inherits}.dart';");
     }
     return buffer.toString();

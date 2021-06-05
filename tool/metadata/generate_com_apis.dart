@@ -54,7 +54,6 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.System.Com.IPersistStream',
   'Windows.Win32.System.Com.IProvideClassInfo',
   'Windows.Win32.System.Com.IRunningObjectTable',
-  'Windows.Win32.System.Com.IUnknown',
   'Windows.Win32.System.Com.IUri',
   'Windows.Win32.System.OleAutomation.IDispatch',
   'Windows.Win32.System.OleAutomation.IEnumVARIANT',

@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_IAppxManifestOSPackageDependency =
     '{154995EE-54A6-4F14-AC97-D8CF0519644B}';

@@ -17,8 +17,6 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
-
 /// @nodoc
 const IID_IFileDialogCustomize = '{E6FDD21A-163F-4975-9C8C-A69F1BA37034}';
 
