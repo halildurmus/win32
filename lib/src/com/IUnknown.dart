@@ -1,18 +1,16 @@
 // IUnknown.dart
 
-// ignore_for_file: unused_import
+// This class is generated manually, since it includes additional helper
+// functions that are only for the base COM object.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../ole32.dart';
 import '../structs.dart';
-import '../structs.g.dart';
 import '../utils.dart';
 
 /// @nodoc
@@ -31,8 +29,8 @@ typedef _Release_Dart = int Function(Pointer obj);
 
 /// {@category Interface}
 /// {@category com}
-
 class IUnknown {
+  // vtable begins at 0, ends at 2
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);

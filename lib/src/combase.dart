@@ -21,8 +21,6 @@ import 'utils.dart';
 /// {@category Interface}
 /// {@category com}
 class COMObject extends Struct {
-  // vtable begins at 0, ends at 2
-
   external Pointer<Pointer<IntPtr>> lpVtbl;
 
   Pointer<IntPtr> get vtable => lpVtbl.value;
