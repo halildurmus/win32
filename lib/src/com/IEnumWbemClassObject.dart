@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IEnumWbemClassObject = '{027947E1-D731-11CE-A357-000000000001}';
 

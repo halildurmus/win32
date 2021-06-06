@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IInspectable = '{AF86E2E0-B12D-4C6A-9C5A-D7AA65101E90}';
 

@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IAppxManifestApplication = '{5DA89BF4-3773-46BE-B650-7E744863B7E8}';
 

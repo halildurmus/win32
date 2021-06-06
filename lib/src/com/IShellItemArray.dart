@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IShellItemArray = '{B63EA76D-1F85-456F-A19C-48159EFA858B}';
 

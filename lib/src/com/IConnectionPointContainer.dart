@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
 

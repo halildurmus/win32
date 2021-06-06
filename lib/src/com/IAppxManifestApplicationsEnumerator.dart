@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IAppxManifestApplicationsEnumerator =
     '{9EB8A55A-F04B-4D0D-808D-686185D4847A}';

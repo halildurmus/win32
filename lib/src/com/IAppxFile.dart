@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const IID_IAppxFile = '{91DF827B-94FD-468F-827B-57F41B2F6F2E}';
 

@@ -17,6 +17,8 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
+import 'IUnknown.dart';
+
 /// @nodoc
 const CLSID_WbemLocator = '{4590F811-1D3A-11D0-891F-00AA004B2E24}';
 

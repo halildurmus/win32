@@ -40,6 +40,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
+import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
