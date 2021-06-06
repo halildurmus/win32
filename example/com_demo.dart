@@ -2,79 +2,69 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Opens the File Open dialog box and shows results
+// Demonstrates COM object creation and casting from Dart
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void main() {
-  int hr, refCount;
+/// Return the current reference count.
+int refCount(IUnknown unk) {
+  // Call AddRef() and Release(), which are inherited from IUnknown. Both return
+  // the refcount after the operation, so by adding a reference and immediately
+  // removing it, we can get the original refcount.
 
-  final pCLSID_FileOpenDialog = GUIDFromString(CLSID_FileOpenDialog);
-  final pIID_IFileDialog = GUIDFromString(IID_IFileDialog);
-  final pIID_IModalWindow = GUIDFromString(IID_IModalWindow);
+  unk.AddRef();
+  final refCount = unk.Release();
+
+  return refCount;
+}
+
+void main() {
   final pTitle = TEXT('Dart Open File Dialog');
 
-  final ppIFD = calloc<COMObject>();
-  final ppMW = calloc<COMObject>();
-  final ppIFD2 = calloc<COMObject>();
+  // Initialize COM
+  var hr = CoInitializeEx(
+      nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+  if (FAILED(hr)) throw WindowsException(hr);
+
+  // Create an instance of the FileOpenDialog class w/ IFileDialog interface
+  final fileDialog2 = IFileDialog2(
+      COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
+  print('Created fileDialog2.\n'
+      'fileDialog2.ptr is  ${fileDialog2.ptr.address.toHexString(64)}');
 
   try {
-    // Initialize COM
-    hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    print('refCount is now ${refCount(fileDialog2)}\n');
+
+    // Use IFileDialog2.SetTitle, which is inherited from IFileDialog
+    hr = fileDialog2.SetTitle(pTitle);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    // Create an instance of the FileOpenDialog class w/ IFileDialog interface
-    hr = CoCreateInstance(pCLSID_FileOpenDialog, nullptr, CLSCTX_ALL,
-        pIID_IFileDialog, ppIFD.cast());
-    if (FAILED(hr)) throw WindowsException(hr);
-    final fileDialog = IFileOpenDialog(ppIFD);
-    print('fileDialog.ptr is  ${fileDialog.ptr.address.toHexString(64)}');
+    // Get the IModalWindow interface, just to demonstrate it.
+    final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+    print('Get IModalWindow interface.\n'
+        'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
+    print('refCount is now ${refCount(modalWindow)}\n');
 
-    // Use IFileDialog.SetTitle
-    hr = fileDialog.SetTitle(pTitle);
-    if (FAILED(hr)) throw WindowsException(hr);
+    fileDialog2.Release();
+    print('Release fileDialog2.\n'
+        'refCount is now ${refCount(modalWindow)}\n');
 
-    // Call AddRef() and Release(), which are inherited from IUnknown
-    refCount = fileDialog.AddRef();
-    print('refCount is now $refCount');
-    refCount = fileDialog.Release();
-    print('refCount is now $refCount\n');
+    // Now get the IFileOpenDialog interface.
+    final fileOpenDialog =
+        IFileOpenDialog(modalWindow.toInterface(IID_IFileOpenDialog));
 
-    // // Call QueryInterface() to get the IModalWindow interface
-    final modalWindow = IModalWindow(fileDialog.toInterface(IID_IModalWindow));
+    print('Get IFileOpenDialog interface.\n'
+        'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');
+    print('refCount is now ${refCount(fileOpenDialog)}\n');
 
-    // final modalWindow =
-    //     IModalWindow(IModalWindow(ppMW)..toInterface(IID_IModalWindow));
-
-    print('modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
-
-    // Call AddRef() and Release(), which are inherited from IUnknown
-    refCount = modalWindow.AddRef();
-    print('refCount is now $refCount');
-    refCount = modalWindow.Release();
-    print('refCount is now $refCount\n');
-
-    fileDialog.Release();
-
-    // Call QueryInterface() to get the IFileDialog interface again
-    hr = modalWindow.QueryInterface(pIID_IFileDialog, ppIFD2.cast());
     modalWindow.Release();
+    print('Release modalWindow.\n'
+        'refCount is now ${refCount(fileOpenDialog)}\n');
 
-    final fileDialog2 = IFileDialog(ppIFD2);
-    print('fileDialog2.ptr is ${fileDialog2.ptr.address.toHexString(64)}');
-
-    // Call AddRef() and Release(), which are inherited from IUnknown
-    refCount = fileDialog2.AddRef();
-    print('refCount is now $refCount');
-    refCount = fileDialog2.Release();
-    print('refCount is now $refCount\n');
-
-    // Use IFileDialog.Show, which is inherited from IModalWindow
-    hr = fileDialog2.Show(NULL);
+    // Use IFileOpenDialog.Show, which is inherited from IModalWindow
+    hr = fileOpenDialog.Show(NULL);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         print('Dialog cancelled.');
@@ -83,20 +73,15 @@ void main() {
       }
     }
 
-    fileDialog2.Release();
+    fileOpenDialog.Release();
+    print('Released fileOpenDialog.\n');
 
     // Uninitialize COM now that we're done with it.
     CoUninitialize();
   } finally {
     // Clear things up
-    free(pCLSID_FileOpenDialog);
-    free(pIID_IFileDialog);
-    free(pIID_IModalWindow);
-
+    free(fileDialog2.ptr);
     free(pTitle);
-    free(ppIFD);
-    free(ppMW);
-    free(ppIFD2);
+    print('All done!');
   }
-  print('All done!');
 }

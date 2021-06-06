@@ -9,6 +9,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 // import 'com/IUnknown.dart';
+import 'constants.dart';
 import 'exceptions.dart';
 import 'macros.dart';
 import 'ole32.dart';
@@ -40,6 +41,28 @@ class COMObject extends Struct {
   external Pointer<Pointer<IntPtr>> lpVtbl;
 
   Pointer<IntPtr> get vtable => lpVtbl.value;
+
+  /// Create an instance of a COM object using its class identifier, cast to the
+  /// specified interface.
+  ///
+  /// The caller is responsible for disposing of the memory of this object when
+  /// it's finished with.
+  static Pointer<COMObject> createFromID(String clsid, String iid) {
+    final pClsid = convertToCLSID(clsid);
+    final pIid = convertToIID(iid);
+    final pObj = calloc<COMObject>();
+
+    try {
+      final hr =
+          CoCreateInstance(pClsid, nullptr, CLSCTX_ALL, pIid, pObj.cast());
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return pObj;
+    } finally {
+      free(pClsid);
+      free(pIid);
+    }
+  }
 }
 
 class IUnknown {
