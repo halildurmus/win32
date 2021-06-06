@@ -6244,17 +6244,56 @@ void main() {
               int dwCapabilities)>('CoSetProxyBlanket');
       expect(CoSetProxyBlanket, isA<Function>());
     });
+    test('Can instantiate CoTaskMemAlloc', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoTaskMemAlloc = ole32.lookupFunction<Pointer Function(IntPtr cb),
+          Pointer Function(int cb)>('CoTaskMemAlloc');
+      expect(CoTaskMemAlloc, isA<Function>());
+    });
     test('Can instantiate CoTaskMemFree', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoTaskMemFree = ole32.lookupFunction<Void Function(Pointer pv),
           void Function(Pointer pv)>('CoTaskMemFree');
       expect(CoTaskMemFree, isA<Function>());
     });
+    test('Can instantiate CoTaskMemRealloc', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoTaskMemRealloc = ole32.lookupFunction<
+          Pointer Function(Pointer pv, IntPtr cb),
+          Pointer Function(Pointer pv, int cb)>('CoTaskMemRealloc');
+      expect(CoTaskMemRealloc, isA<Function>());
+    });
     test('Can instantiate CoUninitialize', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoUninitialize = ole32
           .lookupFunction<Void Function(), void Function()>('CoUninitialize');
       expect(CoUninitialize, isA<Function>());
+    });
+    test('Can instantiate CoWaitForMultipleHandles', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoWaitForMultipleHandles = ole32.lookupFunction<
+          Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
+              Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
+          int Function(
+              int dwFlags,
+              int dwTimeout,
+              int cHandles,
+              Pointer<IntPtr> pHandles,
+              Pointer<Uint32> lpdwindex)>('CoWaitForMultipleHandles');
+      expect(CoWaitForMultipleHandles, isA<Function>());
+    });
+    test('Can instantiate CoWaitForMultipleObjects', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoWaitForMultipleObjects = ole32.lookupFunction<
+          Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
+              Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
+          int Function(
+              int dwFlags,
+              int dwTimeout,
+              int cHandles,
+              Pointer<IntPtr> pHandles,
+              Pointer<Uint32> lpdwindex)>('CoWaitForMultipleObjects');
+      expect(CoWaitForMultipleObjects, isA<Function>());
     });
     test('Can instantiate IIDFromString', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
