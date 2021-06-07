@@ -97,9 +97,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_LanguageTag_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_get_LanguageTag_Native>>>()
+          .value
           .asFunction<_get_LanguageTag_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -152,9 +155,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_OptionIds_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_OptionIds_Native>>>()
+          .value
           .asFunction<_get_OptionIds_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -168,9 +174,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(11)
+          .cast<Pointer<NativeFunction<_get_Id_Native>>>()
+          .value
           .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -184,9 +193,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_LocalizedName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<Pointer<NativeFunction<_get_LocalizedName_Native>>>()
+          .value
           .asFunction<_get_LocalizedName_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

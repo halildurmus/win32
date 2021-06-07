@@ -84,9 +84,12 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_ViewMode_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_get_ViewMode_Native>>>()
+          .value
           .asFunction<_get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -108,11 +111,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_SettingsIdentifier_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(8).value)
-                  .asFunction<_get_SettingsIdentifier_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_get_SettingsIdentifier_Native>>>()
+              .value
+              .asFunction<_get_SettingsIdentifier_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -135,12 +140,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<
-                      NativeFunction<
-                          _get_SuggestedStartLocation_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_get_SuggestedStartLocation_Dart>()(
-          ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_SuggestedStartLocation_Native>>>()
+          .value
+          .asFunction<
+              _get_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -164,11 +170,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_CommitButtonText_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(12).value)
-                  .asFunction<_get_CommitButtonText_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(12)
+              .cast<Pointer<NativeFunction<_get_CommitButtonText_Native>>>()
+              .value
+              .asFunction<_get_CommitButtonText_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -191,11 +199,12 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_FileTypeFilter_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(14).value)
-                  .asFunction<_get_FileTypeFilter_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<Pointer<NativeFunction<_get_FileTypeFilter_Native>>>()
+          .value
+          .asFunction<_get_FileTypeFilter_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

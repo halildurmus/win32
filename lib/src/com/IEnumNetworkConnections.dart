@@ -53,9 +53,12 @@ class IEnumNetworkConnections extends IDispatch {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_get__NewEnum_Native>>>()
+          .value
           .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

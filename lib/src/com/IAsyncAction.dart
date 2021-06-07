@@ -53,9 +53,12 @@ class IAsyncAction extends IAsyncInfo {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Completed_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<Pointer<NativeFunction<_get_Completed_Native>>>()
+          .value
           .asFunction<_get_Completed_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

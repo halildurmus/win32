@@ -82,9 +82,12 @@ class IGamepadStatics extends IInspectable {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Gamepads_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_Gamepads_Native>>>()
+          .value
           .asFunction<_get_Gamepads_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

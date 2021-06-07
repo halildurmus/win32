@@ -51,11 +51,13 @@ class ISpellCheckerFactory extends IUnknown {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_SupportedLanguages_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(3).value)
-                  .asFunction<_get_SupportedLanguages_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_get_SupportedLanguages_Native>>>()
+              .value
+              .asFunction<_get_SupportedLanguages_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

@@ -196,9 +196,12 @@ class IPropertyValue extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Type_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_get_Type_Native>>>()
+          .value
           .asFunction<_get_Type_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -212,11 +215,12 @@ class IPropertyValue extends IInspectable {
     final retValuePtr = calloc< /* Boolean */ Uint8>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(7).value)
-                  .asFunction<_get_IsNumericScalar_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_get_IsNumericScalar_Native>>>()
+          .value
+          .asFunction<_get_IsNumericScalar_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

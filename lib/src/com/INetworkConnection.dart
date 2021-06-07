@@ -74,12 +74,13 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = Pointer<
-                      NativeFunction<
-                          _get_IsConnectedToInternet_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_get_IsConnectedToInternet_Dart>()(
-          ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>>()
+          .value
+          .asFunction<
+              _get_IsConnectedToInternet_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -93,9 +94,12 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<Pointer<NativeFunction<_get_IsConnected_Native>>>()
+          .value
           .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

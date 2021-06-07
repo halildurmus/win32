@@ -203,9 +203,12 @@ import '../winrt/winrt_constants.dart';
       final retValuePtr = calloc<${method.parameters.first.nativeType}>();
       
       try {
-        final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt($vtableIndex).value)
-           .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        final hr = ptr.ref.lpVtbl.value
+          .elementAt($vtableIndex)
+          .cast<Pointer<NativeFunction<_${method.name}_Native>>>()
+          .value
+          .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          
         if (FAILED(hr)) throw WindowsException(hr);
 
         final retValue = retValuePtr.value;
