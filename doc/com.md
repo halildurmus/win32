@@ -4,17 +4,17 @@ Windows APIs that use the COM invocation model.
 
 Since the Win32 package primarily focuses on providing a lightweight wrapper for
 the underlying Windows API primitives, you can use the same API calls as
-described in Microsoft documentation to create an manipulate objects. However,
-since this introduces a certain amount of boilerplate and non-idiomatic Dart
-code, the library also provides some helper functions that reduce the labor
-compared to a pure C-style calling convention.
+described in Microsoft documentation to create an manipulate objects (e.g.
+`CoCreateInstance` and `IUnknown->QueryInterface`). However, since this
+introduces a certain amount of boilerplate and non-idiomatic Dart code, the
+library also provides some helper functions that reduce the labor compared to a
+pure C-style calling convention.
 
 ### Initializing the COM library
 
-Before you call any COM functions, you must first initialize the COM library by
-calling the `CoInitializeEx` function. Details of the threading models are
-outside the scope of this document, but typically you should write something
-like:
+Before you call any COM functions, first initialize the COM library by calling
+the `CoInitializeEx` function. Details of the threading models are outside the
+scope of this document, but typically you should write something like:
 
 ```dart
 final hr = CoInitializeEx(
@@ -83,9 +83,9 @@ if (SUCCEEDED(hr)) {
 }
 ```
 
-Failures are reported as `HRESULT` values (e.g. `E_ACCESSDENIED`); occasionally
-these are just the `HRESULT` equivalent of an underlying Win32 error code, as in
-the case where a user cancels a common dialog box:
+Failures are reported as `HRESULT` values (e.g. `E_ACCESSDENIED`). Sometimes a
+Win32 error code is converted to an `HRESULT`, as in the case where a user
+cancels a common dialog box:
 
 ```dart
 final hr = fileOpenDialog.Show(NULL);
@@ -96,8 +96,7 @@ if (FAILED(hr) && hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
 
 ### Releasing COM objects
 
-When you have finished using a COM interface, you can release it and decrement
-its reference count by calling the `Release` method:
+When you have finished using a COM interface, you should release it with the `Release` method:
 
 ```dart
 fileOpenDialog.Release(); // Release the interface
@@ -109,7 +108,7 @@ that the object is released even if an exception is thrown.
 
 ### Unloading COM support
 
-When you have finished with the COM library, you should uninitialize it with the
+When you have finished using COM, you should uninitialize it with the
 following call:
 
 ```dart
