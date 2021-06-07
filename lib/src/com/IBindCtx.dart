@@ -73,54 +73,65 @@ class IBindCtx extends IUnknown {
 
   IBindCtx(Pointer<COMObject> ptr) : super(ptr);
 
-  int RegisterObjectBound(Pointer punk) =>
-      Pointer<NativeFunction<_RegisterObjectBound_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_RegisterObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
+  int RegisterObjectBound(Pointer punk) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_RegisterObjectBound_Native>>>()
+      .value
+      .asFunction<_RegisterObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
 
-  int RevokeObjectBound(Pointer punk) =>
-      Pointer<NativeFunction<_RevokeObjectBound_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_RevokeObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
+  int RevokeObjectBound(Pointer punk) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_RevokeObjectBound_Native>>>()
+      .value
+      .asFunction<_RevokeObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
 
-  int ReleaseBoundObjects() =>
-      Pointer<NativeFunction<_ReleaseBoundObjects_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_ReleaseBoundObjects_Dart>()(ptr.ref.lpVtbl);
+  int ReleaseBoundObjects() => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_ReleaseBoundObjects_Native>>>()
+      .value
+      .asFunction<_ReleaseBoundObjects_Dart>()(ptr.ref.lpVtbl);
 
-  int SetBindOptions(Pointer<BIND_OPTS> pbindopts) =>
-      Pointer<NativeFunction<_SetBindOptions_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_SetBindOptions_Dart>()(ptr.ref.lpVtbl, pbindopts);
+  int SetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_SetBindOptions_Native>>>()
+      .value
+      .asFunction<_SetBindOptions_Dart>()(ptr.ref.lpVtbl, pbindopts);
 
-  int GetBindOptions(Pointer<BIND_OPTS> pbindopts) =>
-      Pointer<NativeFunction<_GetBindOptions_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetBindOptions_Dart>()(ptr.ref.lpVtbl, pbindopts);
+  int GetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetBindOptions_Native>>>()
+      .value
+      .asFunction<_GetBindOptions_Dart>()(ptr.ref.lpVtbl, pbindopts);
 
-  int GetRunningObjectTable(Pointer<Pointer> pprot) =>
-      Pointer<NativeFunction<_GetRunningObjectTable_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_GetRunningObjectTable_Dart>()(ptr.ref.lpVtbl, pprot);
+  int GetRunningObjectTable(Pointer<Pointer> pprot) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_GetRunningObjectTable_Native>>>()
+      .value
+      .asFunction<_GetRunningObjectTable_Dart>()(ptr.ref.lpVtbl, pprot);
 
-  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer punk) =>
-      Pointer<NativeFunction<_RegisterObjectParam_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_RegisterObjectParam_Dart>()(
-          ptr.ref.lpVtbl, pszKey, punk);
+  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer punk) => ptr
+      .ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_RegisterObjectParam_Native>>>()
+      .value
+      .asFunction<_RegisterObjectParam_Dart>()(ptr.ref.lpVtbl, pszKey, punk);
 
   int GetObjectParam(Pointer<Utf16> pszKey, Pointer<Pointer> ppunk) =>
-      Pointer<NativeFunction<_GetObjectParam_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_GetObjectParam_Native>>>()
+          .value
           .asFunction<_GetObjectParam_Dart>()(ptr.ref.lpVtbl, pszKey, ppunk);
 
-  int EnumObjectParam(Pointer<Pointer> ppenum) =>
-      Pointer<NativeFunction<_EnumObjectParam_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_EnumObjectParam_Dart>()(ptr.ref.lpVtbl, ppenum);
+  int EnumObjectParam(Pointer<Pointer> ppenum) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_EnumObjectParam_Native>>>()
+      .value
+      .asFunction<_EnumObjectParam_Dart>()(ptr.ref.lpVtbl, ppenum);
 
-  int RevokeObjectParam(Pointer<Utf16> pszKey) =>
-      Pointer<NativeFunction<_RevokeObjectParam_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_RevokeObjectParam_Dart>()(ptr.ref.lpVtbl, pszKey);
+  int RevokeObjectParam(Pointer<Utf16> pszKey) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_RevokeObjectParam_Native>>>()
+      .value
+      .asFunction<_RevokeObjectParam_Dart>()(ptr.ref.lpVtbl, pszKey);
 }

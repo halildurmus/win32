@@ -40,12 +40,16 @@ class IAppxManifestProperties extends IUnknown {
   IAppxManifestProperties(Pointer<COMObject> ptr) : super(ptr);
 
   int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) =>
-      Pointer<NativeFunction<_GetBoolValue_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetBoolValue_Native>>>()
+          .value
           .asFunction<_GetBoolValue_Dart>()(ptr.ref.lpVtbl, name, value);
 
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) =>
-      Pointer<NativeFunction<_GetStringValue_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_GetStringValue_Native>>>()
+          .value
           .asFunction<_GetStringValue_Dart>()(ptr.ref.lpVtbl, name, value);
 }

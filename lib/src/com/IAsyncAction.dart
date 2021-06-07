@@ -65,7 +65,9 @@ class IAsyncAction extends IAsyncInfo {
     }
   }
 
-  int GetResults() => Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(13).value)
+  int GetResults() => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetResults_Native>>>()
+      .value
       .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl);
 }

@@ -95,53 +95,69 @@ class IKnownFolderManager extends IUnknown {
 
   IKnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
-  int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) =>
-      Pointer<NativeFunction<_FolderIdFromCsidl_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_FolderIdFromCsidl_Dart>()(ptr.ref.lpVtbl, nCsidl, pfid);
+  int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_FolderIdFromCsidl_Native>>>()
+      .value
+      .asFunction<_FolderIdFromCsidl_Dart>()(ptr.ref.lpVtbl, nCsidl, pfid);
 
   int FolderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) =>
-      Pointer<NativeFunction<_FolderIdToCsidl_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_FolderIdToCsidl_Native>>>()
+          .value
           .asFunction<_FolderIdToCsidl_Dart>()(ptr.ref.lpVtbl, rfid, pnCsidl);
 
   int GetFolderIds(Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount) =>
-      Pointer<NativeFunction<_GetFolderIds_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_GetFolderIds_Native>>>()
+          .value
           .asFunction<_GetFolderIds_Dart>()(ptr.ref.lpVtbl, ppKFId, pCount);
 
   int GetFolder(Pointer<GUID> rfid, Pointer<Pointer> ppkf) =>
-      Pointer<NativeFunction<_GetFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_GetFolder_Native>>>()
+          .value
           .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, rfid, ppkf);
 
   int GetFolderByName(Pointer<Utf16> pszCanonicalName, Pointer<Pointer> ppkf) =>
-      Pointer<NativeFunction<_GetFolderByName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<Pointer<NativeFunction<_GetFolderByName_Native>>>()
+              .value
               .asFunction<_GetFolderByName_Dart>()(
           ptr.ref.lpVtbl, pszCanonicalName, ppkf);
 
   int RegisterFolder(
           Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
-      Pointer<NativeFunction<_RegisterFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_RegisterFolder_Native>>>()
+          .value
           .asFunction<_RegisterFolder_Dart>()(ptr.ref.lpVtbl, rfid, pKFD);
 
-  int UnregisterFolder(Pointer<GUID> rfid) =>
-      Pointer<NativeFunction<_UnregisterFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_UnregisterFolder_Dart>()(ptr.ref.lpVtbl, rfid);
+  int UnregisterFolder(Pointer<GUID> rfid) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_UnregisterFolder_Native>>>()
+      .value
+      .asFunction<_UnregisterFolder_Dart>()(ptr.ref.lpVtbl, rfid);
 
   int FindFolderFromPath(
           Pointer<Utf16> pszPath, int mode, Pointer<Pointer> ppkf) =>
-      Pointer<NativeFunction<_FindFolderFromPath_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_FindFolderFromPath_Native>>>()
+              .value
               .asFunction<_FindFolderFromPath_Dart>()(
           ptr.ref.lpVtbl, pszPath, mode, ppkf);
 
   int FindFolderFromIDList(Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf) =>
-      Pointer<NativeFunction<_FindFolderFromIDList_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(11)
+          .cast<Pointer<NativeFunction<_FindFolderFromIDList_Native>>>()
+          .value
           .asFunction<_FindFolderFromIDList_Dart>()(ptr.ref.lpVtbl, pidl, ppkf);
 
   int Redirect(
@@ -152,8 +168,10 @@ class IKnownFolderManager extends IUnknown {
           int cFolders,
           Pointer<GUID> pExclusion,
           Pointer<Pointer<Utf16>> ppszError) =>
-      Pointer<NativeFunction<_Redirect_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(12).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(12)
+              .cast<Pointer<NativeFunction<_Redirect_Native>>>()
+              .value
               .asFunction<_Redirect_Dart>()(ptr.ref.lpVtbl, rfid, hwnd, flags,
           pszTargetPath, cFolders, pExclusion, ppszError);
 }

@@ -74,50 +74,61 @@ class IAppxManifestReader extends IUnknown {
 
   IAppxManifestReader(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetPackageId(Pointer<Pointer> packageId) =>
-      Pointer<NativeFunction<_GetPackageId_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetPackageId_Dart>()(ptr.ref.lpVtbl, packageId);
+  int GetPackageId(Pointer<Pointer> packageId) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetPackageId_Native>>>()
+      .value
+      .asFunction<_GetPackageId_Dart>()(ptr.ref.lpVtbl, packageId);
 
-  int GetProperties(Pointer<Pointer> packageProperties) =>
-      Pointer<NativeFunction<_GetProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, packageProperties);
+  int GetProperties(Pointer<Pointer> packageProperties) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetProperties_Native>>>()
+      .value
+      .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, packageProperties);
 
-  int GetPackageDependencies(Pointer<Pointer> dependencies) =>
-      Pointer<NativeFunction<_GetPackageDependencies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
-              .asFunction<_GetPackageDependencies_Dart>()(
-          ptr.ref.lpVtbl, dependencies);
+  int GetPackageDependencies(Pointer<Pointer> dependencies) => ptr
+      .ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetPackageDependencies_Native>>>()
+      .value
+      .asFunction<_GetPackageDependencies_Dart>()(ptr.ref.lpVtbl, dependencies);
 
-  int GetCapabilities(Pointer<Uint32> capabilities) =>
-      Pointer<NativeFunction<_GetCapabilities_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetCapabilities_Dart>()(ptr.ref.lpVtbl, capabilities);
+  int GetCapabilities(Pointer<Uint32> capabilities) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetCapabilities_Native>>>()
+      .value
+      .asFunction<_GetCapabilities_Dart>()(ptr.ref.lpVtbl, capabilities);
 
-  int GetResources(Pointer<Pointer> resources) =>
-      Pointer<NativeFunction<_GetResources_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetResources_Dart>()(ptr.ref.lpVtbl, resources);
+  int GetResources(Pointer<Pointer> resources) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetResources_Native>>>()
+      .value
+      .asFunction<_GetResources_Dart>()(ptr.ref.lpVtbl, resources);
 
   int GetDeviceCapabilities(Pointer<Pointer> deviceCapabilities) =>
-      Pointer<NativeFunction<_GetDeviceCapabilities_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_GetDeviceCapabilities_Native>>>()
+              .value
               .asFunction<_GetDeviceCapabilities_Dart>()(
           ptr.ref.lpVtbl, deviceCapabilities);
 
   int GetPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) =>
-      Pointer<NativeFunction<_GetPrerequisite_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<Pointer<NativeFunction<_GetPrerequisite_Native>>>()
+          .value
           .asFunction<_GetPrerequisite_Dart>()(ptr.ref.lpVtbl, name, value);
 
-  int GetApplications(Pointer<Pointer> applications) =>
-      Pointer<NativeFunction<_GetApplications_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetApplications_Dart>()(ptr.ref.lpVtbl, applications);
+  int GetApplications(Pointer<Pointer> applications) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_GetApplications_Native>>>()
+      .value
+      .asFunction<_GetApplications_Dart>()(ptr.ref.lpVtbl, applications);
 
-  int GetStream(Pointer<Pointer> manifestStream) =>
-      Pointer<NativeFunction<_GetStream_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetStream_Dart>()(ptr.ref.lpVtbl, manifestStream);
+  int GetStream(Pointer<Pointer> manifestStream) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_GetStream_Native>>>()
+      .value
+      .asFunction<_GetStream_Dart>()(ptr.ref.lpVtbl, manifestStream);
 }

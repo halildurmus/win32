@@ -62,8 +62,10 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strAuthority,
           Pointer pCtx,
           Pointer<Pointer> ppNamespace) =>
-      Pointer<NativeFunction<_ConnectServer_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_ConnectServer_Native>>>()
+              .value
               .asFunction<_ConnectServer_Dart>()(
           ptr.ref.lpVtbl,
           strNetworkResource,

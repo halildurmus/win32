@@ -33,8 +33,9 @@ class IProvideClassInfo extends IUnknown {
 
   IProvideClassInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassInfo(Pointer<Pointer> ppTI) =>
-      Pointer<NativeFunction<_GetClassInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetClassInfo_Dart>()(ptr.ref.lpVtbl, ppTI);
+  int GetClassInfo(Pointer<Pointer> ppTI) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetClassInfo_Native>>>()
+      .value
+      .asFunction<_GetClassInfo_Dart>()(ptr.ref.lpVtbl, ppTI);
 }

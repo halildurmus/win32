@@ -53,30 +53,37 @@ class IFileSaveDialog extends IFileDialog {
 
   IFileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetSaveAsItem(Pointer psi) =>
-      Pointer<NativeFunction<_SetSaveAsItem_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_SetSaveAsItem_Dart>()(ptr.ref.lpVtbl, psi);
+  int SetSaveAsItem(Pointer psi) => ptr.ref.lpVtbl.value
+      .elementAt(27)
+      .cast<Pointer<NativeFunction<_SetSaveAsItem_Native>>>()
+      .value
+      .asFunction<_SetSaveAsItem_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int SetProperties(Pointer pStore) =>
-      Pointer<NativeFunction<_SetProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_SetProperties_Dart>()(ptr.ref.lpVtbl, pStore);
+  int SetProperties(Pointer pStore) => ptr.ref.lpVtbl.value
+      .elementAt(28)
+      .cast<Pointer<NativeFunction<_SetProperties_Native>>>()
+      .value
+      .asFunction<_SetProperties_Dart>()(ptr.ref.lpVtbl, pStore);
 
   int SetCollectedProperties(Pointer pList, int fAppendDefault) =>
-      Pointer<NativeFunction<_SetCollectedProperties_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(29).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(29)
+              .cast<Pointer<NativeFunction<_SetCollectedProperties_Native>>>()
+              .value
               .asFunction<_SetCollectedProperties_Dart>()(
           ptr.ref.lpVtbl, pList, fAppendDefault);
 
-  int GetProperties(Pointer<Pointer> ppStore) =>
-      Pointer<NativeFunction<_GetProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(30).value)
-          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, ppStore);
+  int GetProperties(Pointer<Pointer> ppStore) => ptr.ref.lpVtbl.value
+      .elementAt(30)
+      .cast<Pointer<NativeFunction<_GetProperties_Native>>>()
+      .value
+      .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, ppStore);
 
   int ApplyProperties(Pointer psi, Pointer pStore, int hwnd, Pointer pSink) =>
-      Pointer<NativeFunction<_ApplyProperties_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(31).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(31)
+              .cast<Pointer<NativeFunction<_ApplyProperties_Native>>>()
+              .value
               .asFunction<_ApplyProperties_Dart>()(
           ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
 }

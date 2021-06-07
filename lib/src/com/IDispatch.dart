@@ -75,21 +75,25 @@ class IDispatch extends IUnknown {
 
   IDispatch(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetTypeInfoCount(Pointer<Uint32> pctinfo) =>
-      Pointer<NativeFunction<_GetTypeInfoCount_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
+  int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetTypeInfoCount_Native>>>()
+      .value
+      .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
 
-  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer> ppTInfo) =>
-      Pointer<NativeFunction<_GetTypeInfo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_GetTypeInfo_Dart>()(
-          ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
+  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer> ppTInfo) => ptr
+      .ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetTypeInfo_Native>>>()
+      .value
+      .asFunction<_GetTypeInfo_Dart>()(ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
   int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
           int cNames, int lcid, Pointer<Int32> rgDispId) =>
-      Pointer<NativeFunction<_GetIDsOfNames_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_GetIDsOfNames_Native>>>()
+              .value
               .asFunction<_GetIDsOfNames_Dart>()(
           ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId);
 
@@ -102,8 +106,10 @@ class IDispatch extends IUnknown {
           Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
-      Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<Pointer<NativeFunction<_Invoke_Native>>>()
+              .value
               .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, dispIdMember, riid,
           lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
 }

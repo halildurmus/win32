@@ -168,13 +168,12 @@ import '../winrt/winrt_constants.dart';
         buffer.write(', ');
       }
     }
-    buffer.writeln(') =>');
-    buffer.write(
-        '    Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(\n');
-    buffer.write(
-        '                ptr.ref.vtable.elementAt($vtableIndex).value)\n');
-    buffer.write('            .asFunction<_${method.name}_Dart>()(\n');
-    buffer.write('         ptr.ref.lpVtbl');
+    buffer.write(') => ptr.ref.lpVtbl.value');
+    buffer.write('''
+      .elementAt($vtableIndex)
+      .cast<Pointer<NativeFunction<_${method.name}_Native>>>()
+      .value
+      .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl''');
     if (method.parameters.isNotEmpty) {
       buffer.write(', ');
     }

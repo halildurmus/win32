@@ -32,7 +32,9 @@ class IModalWindow extends IUnknown {
 
   IModalWindow(Pointer<COMObject> ptr) : super(ptr);
 
-  int Show(int hwndOwner) => Pointer<NativeFunction<_Show_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(3).value)
+  int Show(int hwndOwner) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_Show_Native>>>()
+      .value
       .asFunction<_Show_Dart>()(ptr.ref.lpVtbl, hwndOwner);
 }

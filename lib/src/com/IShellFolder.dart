@@ -132,48 +132,62 @@ class IShellFolder extends IUnknown {
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<ITEMIDLIST>> ppidl,
           Pointer<Uint32> pdwAttributes) =>
-      Pointer<NativeFunction<_ParseDisplayName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_ParseDisplayName_Native>>>()
+              .value
               .asFunction<_ParseDisplayName_Dart>()(ptr.ref.lpVtbl, hwnd, pbc,
           pszDisplayName, pchEaten, ppidl, pdwAttributes);
 
   int EnumObjects(int hwnd, int grfFlags, Pointer<Pointer> ppenumIDList) =>
-      Pointer<NativeFunction<_EnumObjects_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_EnumObjects_Native>>>()
+              .value
               .asFunction<_EnumObjects_Dart>()(
           ptr.ref.lpVtbl, hwnd, grfFlags, ppenumIDList);
 
   int BindToObject(Pointer<ITEMIDLIST> pidl, Pointer pbc, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_BindToObject_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_BindToObject_Native>>>()
+              .value
               .asFunction<_BindToObject_Dart>()(
           ptr.ref.lpVtbl, pidl, pbc, riid, ppv);
 
   int BindToStorage(Pointer<ITEMIDLIST> pidl, Pointer pbc, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_BindToStorage_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<Pointer<NativeFunction<_BindToStorage_Native>>>()
+              .value
               .asFunction<_BindToStorage_Dart>()(
           ptr.ref.lpVtbl, pidl, pbc, riid, ppv);
 
   int CompareIDs(
           int lParam, Pointer<ITEMIDLIST> pidl1, Pointer<ITEMIDLIST> pidl2) =>
-      Pointer<NativeFunction<_CompareIDs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_CompareIDs_Native>>>()
+          .value
           .asFunction<_CompareIDs_Dart>()(ptr.ref.lpVtbl, lParam, pidl1, pidl2);
 
   int CreateViewObject(
           int hwndOwner, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_CreateViewObject_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_CreateViewObject_Native>>>()
+              .value
               .asFunction<_CreateViewObject_Dart>()(
           ptr.ref.lpVtbl, hwndOwner, riid, ppv);
 
   int GetAttributesOf(int cidl, Pointer<Pointer<ITEMIDLIST>> apidl,
           Pointer<Uint32> rgfInOut) =>
-      Pointer<NativeFunction<_GetAttributesOf_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<Pointer<NativeFunction<_GetAttributesOf_Native>>>()
+              .value
               .asFunction<_GetAttributesOf_Dart>()(
           ptr.ref.lpVtbl, cidl, apidl, rgfInOut);
 
@@ -184,22 +198,28 @@ class IShellFolder extends IUnknown {
           Pointer<GUID> riid,
           Pointer<Uint32> rgfReserved,
           Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_GetUIObjectOf_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_GetUIObjectOf_Native>>>()
+              .value
               .asFunction<_GetUIObjectOf_Dart>()(
           ptr.ref.lpVtbl, hwndOwner, cidl, apidl, riid, rgfReserved, ppv);
 
   int GetDisplayNameOf(
           Pointer<ITEMIDLIST> pidl, int uFlags, Pointer<STRRET> pName) =>
-      Pointer<NativeFunction<_GetDisplayNameOf_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_GetDisplayNameOf_Native>>>()
+              .value
               .asFunction<_GetDisplayNameOf_Dart>()(
           ptr.ref.lpVtbl, pidl, uFlags, pName);
 
   int SetNameOf(int hwnd, Pointer<ITEMIDLIST> pidl, Pointer<Utf16> pszName,
           int uFlags, Pointer<Pointer<ITEMIDLIST>> ppidlOut) =>
-      Pointer<NativeFunction<_SetNameOf_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(12).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(12)
+              .cast<Pointer<NativeFunction<_SetNameOf_Native>>>()
+              .value
               .asFunction<_SetNameOf_Dart>()(
           ptr.ref.lpVtbl, hwnd, pidl, pszName, uFlags, ppidlOut);
 }

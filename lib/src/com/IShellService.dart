@@ -32,8 +32,9 @@ class IShellService extends IUnknown {
 
   IShellService(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetOwner(Pointer punkOwner) =>
-      Pointer<NativeFunction<_SetOwner_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_SetOwner_Dart>()(ptr.ref.lpVtbl, punkOwner);
+  int SetOwner(Pointer punkOwner) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_SetOwner_Native>>>()
+      .value
+      .asFunction<_SetOwner_Dart>()(ptr.ref.lpVtbl, punkOwner);
 }

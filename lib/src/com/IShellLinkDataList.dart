@@ -47,29 +47,34 @@ class IShellLinkDataList extends IUnknown {
 
   IShellLinkDataList(Pointer<COMObject> ptr) : super(ptr);
 
-  int AddDataBlock(Pointer pDataBlock) =>
-      Pointer<NativeFunction<_AddDataBlock_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_AddDataBlock_Dart>()(ptr.ref.lpVtbl, pDataBlock);
+  int AddDataBlock(Pointer pDataBlock) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_AddDataBlock_Native>>>()
+      .value
+      .asFunction<_AddDataBlock_Dart>()(ptr.ref.lpVtbl, pDataBlock);
 
-  int CopyDataBlock(int dwSig, Pointer<Pointer> ppDataBlock) =>
-      Pointer<NativeFunction<_CopyDataBlock_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_CopyDataBlock_Dart>()(
-          ptr.ref.lpVtbl, dwSig, ppDataBlock);
+  int CopyDataBlock(int dwSig, Pointer<Pointer> ppDataBlock) => ptr
+      .ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_CopyDataBlock_Native>>>()
+      .value
+      .asFunction<_CopyDataBlock_Dart>()(ptr.ref.lpVtbl, dwSig, ppDataBlock);
 
-  int RemoveDataBlock(int dwSig) =>
-      Pointer<NativeFunction<_RemoveDataBlock_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_RemoveDataBlock_Dart>()(ptr.ref.lpVtbl, dwSig);
+  int RemoveDataBlock(int dwSig) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_RemoveDataBlock_Native>>>()
+      .value
+      .asFunction<_RemoveDataBlock_Dart>()(ptr.ref.lpVtbl, dwSig);
 
-  int GetFlags(Pointer<Uint32> pdwFlags) =>
-      Pointer<NativeFunction<_GetFlags_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetFlags_Dart>()(ptr.ref.lpVtbl, pdwFlags);
+  int GetFlags(Pointer<Uint32> pdwFlags) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetFlags_Native>>>()
+      .value
+      .asFunction<_GetFlags_Dart>()(ptr.ref.lpVtbl, pdwFlags);
 
-  int SetFlags(int dwFlags) =>
-      Pointer<NativeFunction<_SetFlags_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_SetFlags_Dart>()(ptr.ref.lpVtbl, dwFlags);
+  int SetFlags(int dwFlags) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_SetFlags_Native>>>()
+      .value
+      .asFunction<_SetFlags_Dart>()(ptr.ref.lpVtbl, dwFlags);
 }

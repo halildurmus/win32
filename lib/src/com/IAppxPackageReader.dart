@@ -54,28 +54,34 @@ class IAppxPackageReader extends IUnknown {
 
   IAppxPackageReader(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetBlockMap(Pointer<Pointer> blockMapReader) =>
-      Pointer<NativeFunction<_GetBlockMap_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetBlockMap_Dart>()(ptr.ref.lpVtbl, blockMapReader);
+  int GetBlockMap(Pointer<Pointer> blockMapReader) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetBlockMap_Native>>>()
+      .value
+      .asFunction<_GetBlockMap_Dart>()(ptr.ref.lpVtbl, blockMapReader);
 
-  int GetFootprintFile(int type, Pointer<Pointer> file) =>
-      Pointer<NativeFunction<_GetFootprintFile_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetFootprintFile_Dart>()(ptr.ref.lpVtbl, type, file);
+  int GetFootprintFile(int type, Pointer<Pointer> file) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetFootprintFile_Native>>>()
+      .value
+      .asFunction<_GetFootprintFile_Dart>()(ptr.ref.lpVtbl, type, file);
 
   int GetPayloadFile(Pointer<Utf16> fileName, Pointer<Pointer> file) =>
-      Pointer<NativeFunction<_GetPayloadFile_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_GetPayloadFile_Native>>>()
+          .value
           .asFunction<_GetPayloadFile_Dart>()(ptr.ref.lpVtbl, fileName, file);
 
-  int GetPayloadFiles(Pointer<Pointer> filesEnumerator) =>
-      Pointer<NativeFunction<_GetPayloadFiles_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetPayloadFiles_Dart>()(ptr.ref.lpVtbl, filesEnumerator);
+  int GetPayloadFiles(Pointer<Pointer> filesEnumerator) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetPayloadFiles_Native>>>()
+      .value
+      .asFunction<_GetPayloadFiles_Dart>()(ptr.ref.lpVtbl, filesEnumerator);
 
-  int GetManifest(Pointer<Pointer> manifestReader) =>
-      Pointer<NativeFunction<_GetManifest_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetManifest_Dart>()(ptr.ref.lpVtbl, manifestReader);
+  int GetManifest(Pointer<Pointer> manifestReader) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetManifest_Native>>>()
+      .value
+      .asFunction<_GetManifest_Dart>()(ptr.ref.lpVtbl, manifestReader);
 }

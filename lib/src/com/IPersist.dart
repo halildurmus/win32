@@ -33,8 +33,9 @@ class IPersist extends IUnknown {
 
   IPersist(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassID(Pointer<GUID> pClassID) =>
-      Pointer<NativeFunction<_GetClassID_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetClassID_Dart>()(ptr.ref.lpVtbl, pClassID);
+  int GetClassID(Pointer<GUID> pClassID) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetClassID_Native>>>()
+      .value
+      .asFunction<_GetClassID_Dart>()(ptr.ref.lpVtbl, pClassID);
 }

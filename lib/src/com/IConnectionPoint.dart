@@ -52,29 +52,35 @@ class IConnectionPoint extends IUnknown {
 
   IConnectionPoint(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetConnectionInterface(Pointer<GUID> pIID) =>
-      Pointer<NativeFunction<_GetConnectionInterface_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetConnectionInterface_Dart>()(ptr.ref.lpVtbl, pIID);
+  int GetConnectionInterface(Pointer<GUID> pIID) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetConnectionInterface_Native>>>()
+      .value
+      .asFunction<_GetConnectionInterface_Dart>()(ptr.ref.lpVtbl, pIID);
 
-  int GetConnectionPointContainer(Pointer<Pointer> ppCPC) =>
-      Pointer<NativeFunction<_GetConnectionPointContainer_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_GetConnectionPointContainer_Dart>()(
-          ptr.ref.lpVtbl, ppCPC);
+  int GetConnectionPointContainer(Pointer<Pointer> ppCPC) => ptr
+      .ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetConnectionPointContainer_Native>>>()
+      .value
+      .asFunction<_GetConnectionPointContainer_Dart>()(ptr.ref.lpVtbl, ppCPC);
 
   int Advise(Pointer pUnkSink, Pointer<Uint32> pdwCookie) =>
-      Pointer<NativeFunction<_Advise_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_Advise_Native>>>()
+          .value
           .asFunction<_Advise_Dart>()(ptr.ref.lpVtbl, pUnkSink, pdwCookie);
 
-  int Unadvise(int dwCookie) =>
-      Pointer<NativeFunction<_Unadvise_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Unadvise_Dart>()(ptr.ref.lpVtbl, dwCookie);
+  int Unadvise(int dwCookie) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Unadvise_Native>>>()
+      .value
+      .asFunction<_Unadvise_Dart>()(ptr.ref.lpVtbl, dwCookie);
 
-  int EnumConnections(Pointer<Pointer> ppEnum) =>
-      Pointer<NativeFunction<_EnumConnections_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_EnumConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
+  int EnumConnections(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_EnumConnections_Native>>>()
+      .value
+      .asFunction<_EnumConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
 }

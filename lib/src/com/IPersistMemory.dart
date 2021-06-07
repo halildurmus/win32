@@ -47,26 +47,33 @@ class IPersistMemory extends IPersist {
 
   IPersistMemory(Pointer<COMObject> ptr) : super(ptr);
 
-  int IsDirty() => Pointer<NativeFunction<_IsDirty_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(4).value)
+  int IsDirty() => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_IsDirty_Native>>>()
+      .value
       .asFunction<_IsDirty_Dart>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer pMem, int cbSize) =>
-      Pointer<NativeFunction<_Load_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pMem, cbSize);
+  int Load(Pointer pMem, int cbSize) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_Load_Native>>>()
+      .value
+      .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pMem, cbSize);
 
-  int Save(Pointer pMem, int fClearDirty, int cbSize) =>
-      Pointer<NativeFunction<_Save_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
+  int Save(Pointer pMem, int fClearDirty, int cbSize) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Save_Native>>>()
+      .value
+      .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
 
-  int GetSizeMax(Pointer<Uint32> pCbSize) =>
-      Pointer<NativeFunction<_GetSizeMax_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetSizeMax_Dart>()(ptr.ref.lpVtbl, pCbSize);
+  int GetSizeMax(Pointer<Uint32> pCbSize) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetSizeMax_Native>>>()
+      .value
+      .asFunction<_GetSizeMax_Dart>()(ptr.ref.lpVtbl, pCbSize);
 
-  int InitNew() => Pointer<NativeFunction<_InitNew_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(8).value)
+  int InitNew() => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_InitNew_Native>>>()
+      .value
       .asFunction<_InitNew_Dart>()(ptr.ref.lpVtbl);
 }

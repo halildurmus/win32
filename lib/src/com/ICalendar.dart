@@ -438,17 +438,22 @@ class ICalendar extends IInspectable {
 
   ICalendar(Pointer<COMObject> ptr) : super(ptr);
 
-  int Clone(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_Clone_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, result);
+  int Clone(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Clone_Native>>>()
+      .value
+      .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, result);
 
-  int SetToMin() => Pointer<NativeFunction<_SetToMin_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(7).value)
+  int SetToMin() => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_SetToMin_Native>>>()
+      .value
       .asFunction<_SetToMin_Dart>()(ptr.ref.lpVtbl);
 
-  int SetToMax() => Pointer<NativeFunction<_SetToMax_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(8).value)
+  int SetToMax() => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_SetToMax_Native>>>()
+      .value
       .asFunction<_SetToMax_Dart>()(ptr.ref.lpVtbl);
 
   int get Languages {
@@ -491,38 +496,46 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int GetCalendarSystem(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_GetCalendarSystem_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetCalendarSystem_Dart>()(ptr.ref.lpVtbl, result);
+  int GetCalendarSystem(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_GetCalendarSystem_Native>>>()
+      .value
+      .asFunction<_GetCalendarSystem_Dart>()(ptr.ref.lpVtbl, result);
 
-  int ChangeCalendarSystem(int value) =>
-      Pointer<NativeFunction<_ChangeCalendarSystem_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_ChangeCalendarSystem_Dart>()(ptr.ref.lpVtbl, value);
+  int ChangeCalendarSystem(int value) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_ChangeCalendarSystem_Native>>>()
+      .value
+      .asFunction<_ChangeCalendarSystem_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetClock(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_GetClock_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetClock_Dart>()(ptr.ref.lpVtbl, result);
+  int GetClock(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_GetClock_Native>>>()
+      .value
+      .asFunction<_GetClock_Dart>()(ptr.ref.lpVtbl, result);
 
-  int ChangeClock(int value) =>
-      Pointer<NativeFunction<_ChangeClock_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_ChangeClock_Dart>()(ptr.ref.lpVtbl, value);
+  int ChangeClock(int value) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_ChangeClock_Native>>>()
+      .value
+      .asFunction<_ChangeClock_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetDateTime(Pointer<Uint32> result) =>
-      Pointer<NativeFunction<_GetDateTime_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_GetDateTime_Dart>()(ptr.ref.lpVtbl, result);
+  int GetDateTime(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+      .elementAt(16)
+      .cast<Pointer<NativeFunction<_GetDateTime_Native>>>()
+      .value
+      .asFunction<_GetDateTime_Dart>()(ptr.ref.lpVtbl, result);
 
-  int SetDateTime(int value) =>
-      Pointer<NativeFunction<_SetDateTime_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_SetDateTime_Dart>()(ptr.ref.lpVtbl, value);
+  int SetDateTime(int value) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_SetDateTime_Native>>>()
+      .value
+      .asFunction<_SetDateTime_Dart>()(ptr.ref.lpVtbl, value);
 
-  int SetToNow() => Pointer<NativeFunction<_SetToNow_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(18).value)
+  int SetToNow() => ptr.ref.lpVtbl.value
+      .elementAt(18)
+      .cast<Pointer<NativeFunction<_SetToNow_Native>>>()
+      .value
       .asFunction<_SetToNow_Dart>()(ptr.ref.lpVtbl);
 
   int get FirstEra {
@@ -597,18 +610,23 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddEras(int eras) => Pointer<NativeFunction<_AddEras_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(24).value)
+  int AddEras(int eras) => ptr.ref.lpVtbl.value
+      .elementAt(24)
+      .cast<Pointer<NativeFunction<_AddEras_Native>>>()
+      .value
       .asFunction<_AddEras_Dart>()(ptr.ref.lpVtbl, eras);
 
-  int EraAsFullString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_EraAsFullString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(25).value)
-          .asFunction<_EraAsFullString_Dart>()(ptr.ref.lpVtbl, result);
+  int EraAsFullString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(25)
+      .cast<Pointer<NativeFunction<_EraAsFullString_Native>>>()
+      .value
+      .asFunction<_EraAsFullString_Dart>()(ptr.ref.lpVtbl, result);
 
   int EraAsString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_EraAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(26).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(26)
+          .cast<Pointer<NativeFunction<_EraAsString_Native>>>()
+          .value
           .asFunction<_EraAsString_Dart>()(ptr.ref.lpVtbl, idealLength, result);
 
   int get FirstYearInThisEra {
@@ -690,25 +708,31 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddYears(int years) =>
-      Pointer<NativeFunction<_AddYears_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(32).value)
-          .asFunction<_AddYears_Dart>()(ptr.ref.lpVtbl, years);
+  int AddYears(int years) => ptr.ref.lpVtbl.value
+      .elementAt(32)
+      .cast<Pointer<NativeFunction<_AddYears_Native>>>()
+      .value
+      .asFunction<_AddYears_Dart>()(ptr.ref.lpVtbl, years);
 
-  int YearAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_YearAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(33).value)
-          .asFunction<_YearAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int YearAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(33)
+      .cast<Pointer<NativeFunction<_YearAsString_Native>>>()
+      .value
+      .asFunction<_YearAsString_Dart>()(ptr.ref.lpVtbl, result);
 
   int YearAsTruncatedString(int remainingDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_YearAsTruncatedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(34).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(34)
+              .cast<Pointer<NativeFunction<_YearAsTruncatedString_Native>>>()
+              .value
               .asFunction<_YearAsTruncatedString_Dart>()(
           ptr.ref.lpVtbl, remainingDigits, result);
 
   int YearAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_YearAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(35).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(35)
+              .cast<Pointer<NativeFunction<_YearAsPaddedString_Native>>>()
+              .value
               .asFunction<_YearAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
@@ -791,48 +815,58 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddMonths(int months) =>
-      Pointer<NativeFunction<_AddMonths_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(41).value)
-          .asFunction<_AddMonths_Dart>()(ptr.ref.lpVtbl, months);
+  int AddMonths(int months) => ptr.ref.lpVtbl.value
+      .elementAt(41)
+      .cast<Pointer<NativeFunction<_AddMonths_Native>>>()
+      .value
+      .asFunction<_AddMonths_Dart>()(ptr.ref.lpVtbl, months);
 
-  int MonthAsFullString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsFullString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(42).value)
-          .asFunction<_MonthAsFullString_Dart>()(ptr.ref.lpVtbl, result);
+  int MonthAsFullString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(42)
+      .cast<Pointer<NativeFunction<_MonthAsFullString_Native>>>()
+      .value
+      .asFunction<_MonthAsFullString_Dart>()(ptr.ref.lpVtbl, result);
 
-  int MonthAsString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(43).value)
-              .asFunction<_MonthAsString_Dart>()(
-          ptr.ref.lpVtbl, idealLength, result);
+  int MonthAsString(int idealLength, Pointer<IntPtr> result) => ptr
+      .ref.lpVtbl.value
+      .elementAt(43)
+      .cast<Pointer<NativeFunction<_MonthAsString_Native>>>()
+      .value
+      .asFunction<_MonthAsString_Dart>()(ptr.ref.lpVtbl, idealLength, result);
 
-  int MonthAsFullSoloString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsFullSoloString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(44).value)
-          .asFunction<_MonthAsFullSoloString_Dart>()(ptr.ref.lpVtbl, result);
+  int MonthAsFullSoloString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(44)
+      .cast<Pointer<NativeFunction<_MonthAsFullSoloString_Native>>>()
+      .value
+      .asFunction<_MonthAsFullSoloString_Dart>()(ptr.ref.lpVtbl, result);
 
   int MonthAsSoloString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsSoloString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(45).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(45)
+              .cast<Pointer<NativeFunction<_MonthAsSoloString_Native>>>()
+              .value
               .asFunction<_MonthAsSoloString_Dart>()(
           ptr.ref.lpVtbl, idealLength, result);
 
-  int MonthAsNumericString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsNumericString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(46).value)
-          .asFunction<_MonthAsNumericString_Dart>()(ptr.ref.lpVtbl, result);
+  int MonthAsNumericString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(46)
+      .cast<Pointer<NativeFunction<_MonthAsNumericString_Native>>>()
+      .value
+      .asFunction<_MonthAsNumericString_Dart>()(ptr.ref.lpVtbl, result);
 
-  int MonthAsPaddedNumericString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MonthAsPaddedNumericString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(47).value)
-              .asFunction<_MonthAsPaddedNumericString_Dart>()(
-          ptr.ref.lpVtbl, minDigits, result);
+  int MonthAsPaddedNumericString(int minDigits, Pointer<IntPtr> result) => ptr
+          .ref.lpVtbl.value
+          .elementAt(47)
+          .cast<Pointer<NativeFunction<_MonthAsPaddedNumericString_Native>>>()
+          .value
+          .asFunction<_MonthAsPaddedNumericString_Dart>()(
+      ptr.ref.lpVtbl, minDigits, result);
 
-  int AddWeeks(int weeks) =>
-      Pointer<NativeFunction<_AddWeeks_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(48).value)
-          .asFunction<_AddWeeks_Dart>()(ptr.ref.lpVtbl, weeks);
+  int AddWeeks(int weeks) => ptr.ref.lpVtbl.value
+      .elementAt(48)
+      .cast<Pointer<NativeFunction<_AddWeeks_Native>>>()
+      .value
+      .asFunction<_AddWeeks_Dart>()(ptr.ref.lpVtbl, weeks);
 
   int get FirstDayInThisMonth {
     final retValuePtr = calloc<Int32>();
@@ -913,20 +947,24 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddDays(int days) => Pointer<NativeFunction<_AddDays_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(54).value)
+  int AddDays(int days) => ptr.ref.lpVtbl.value
+      .elementAt(54)
+      .cast<Pointer<NativeFunction<_AddDays_Native>>>()
+      .value
       .asFunction<_AddDays_Dart>()(ptr.ref.lpVtbl, days);
 
-  int DayAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(55).value)
-          .asFunction<_DayAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int DayAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(55)
+      .cast<Pointer<NativeFunction<_DayAsString_Native>>>()
+      .value
+      .asFunction<_DayAsString_Dart>()(ptr.ref.lpVtbl, result);
 
-  int DayAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(56).value)
-              .asFunction<_DayAsPaddedString_Dart>()(
-          ptr.ref.lpVtbl, minDigits, result);
+  int DayAsPaddedString(int minDigits, Pointer<IntPtr> result) => ptr
+      .ref.lpVtbl.value
+      .elementAt(56)
+      .cast<Pointer<NativeFunction<_DayAsPaddedString_Native>>>()
+      .value
+      .asFunction<_DayAsPaddedString_Dart>()(ptr.ref.lpVtbl, minDigits, result);
 
   int get DayOfWeek {
     final retValuePtr = calloc<Uint32>();
@@ -944,26 +982,31 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int DayOfWeekAsFullString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayOfWeekAsFullString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(58).value)
-          .asFunction<_DayOfWeekAsFullString_Dart>()(ptr.ref.lpVtbl, result);
+  int DayOfWeekAsFullString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(58)
+      .cast<Pointer<NativeFunction<_DayOfWeekAsFullString_Native>>>()
+      .value
+      .asFunction<_DayOfWeekAsFullString_Dart>()(ptr.ref.lpVtbl, result);
 
   int DayOfWeekAsString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayOfWeekAsString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(59).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(59)
+              .cast<Pointer<NativeFunction<_DayOfWeekAsString_Native>>>()
+              .value
               .asFunction<_DayOfWeekAsString_Dart>()(
           ptr.ref.lpVtbl, idealLength, result);
 
-  int DayOfWeekAsFullSoloString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayOfWeekAsFullSoloString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(60).value)
-              .asFunction<_DayOfWeekAsFullSoloString_Dart>()(
-          ptr.ref.lpVtbl, result);
+  int DayOfWeekAsFullSoloString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(60)
+      .cast<Pointer<NativeFunction<_DayOfWeekAsFullSoloString_Native>>>()
+      .value
+      .asFunction<_DayOfWeekAsFullSoloString_Dart>()(ptr.ref.lpVtbl, result);
 
   int DayOfWeekAsSoloString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_DayOfWeekAsSoloString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(61).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(61)
+              .cast<Pointer<NativeFunction<_DayOfWeekAsSoloString_Native>>>()
+              .value
               .asFunction<_DayOfWeekAsSoloString_Dart>()(
           ptr.ref.lpVtbl, idealLength, result);
 
@@ -1046,21 +1089,24 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddPeriods(int periods) =>
-      Pointer<NativeFunction<_AddPeriods_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(67).value)
-          .asFunction<_AddPeriods_Dart>()(ptr.ref.lpVtbl, periods);
+  int AddPeriods(int periods) => ptr.ref.lpVtbl.value
+      .elementAt(67)
+      .cast<Pointer<NativeFunction<_AddPeriods_Native>>>()
+      .value
+      .asFunction<_AddPeriods_Dart>()(ptr.ref.lpVtbl, periods);
 
-  int PeriodAsFullString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_PeriodAsFullString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(68).value)
-          .asFunction<_PeriodAsFullString_Dart>()(ptr.ref.lpVtbl, result);
+  int PeriodAsFullString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(68)
+      .cast<Pointer<NativeFunction<_PeriodAsFullString_Native>>>()
+      .value
+      .asFunction<_PeriodAsFullString_Dart>()(ptr.ref.lpVtbl, result);
 
-  int PeriodAsString(int idealLength, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_PeriodAsString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(69).value)
-              .asFunction<_PeriodAsString_Dart>()(
-          ptr.ref.lpVtbl, idealLength, result);
+  int PeriodAsString(int idealLength, Pointer<IntPtr> result) => ptr
+      .ref.lpVtbl.value
+      .elementAt(69)
+      .cast<Pointer<NativeFunction<_PeriodAsString_Native>>>()
+      .value
+      .asFunction<_PeriodAsString_Dart>()(ptr.ref.lpVtbl, idealLength, result);
 
   int get FirstHourInThisPeriod {
     final retValuePtr = calloc<Int32>();
@@ -1142,19 +1188,23 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddHours(int hours) =>
-      Pointer<NativeFunction<_AddHours_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(75).value)
-          .asFunction<_AddHours_Dart>()(ptr.ref.lpVtbl, hours);
+  int AddHours(int hours) => ptr.ref.lpVtbl.value
+      .elementAt(75)
+      .cast<Pointer<NativeFunction<_AddHours_Native>>>()
+      .value
+      .asFunction<_AddHours_Dart>()(ptr.ref.lpVtbl, hours);
 
-  int HourAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_HourAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(76).value)
-          .asFunction<_HourAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int HourAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(76)
+      .cast<Pointer<NativeFunction<_HourAsString_Native>>>()
+      .value
+      .asFunction<_HourAsString_Dart>()(ptr.ref.lpVtbl, result);
 
   int HourAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_HourAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(77).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(77)
+              .cast<Pointer<NativeFunction<_HourAsPaddedString_Native>>>()
+              .value
               .asFunction<_HourAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
@@ -1182,19 +1232,23 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddMinutes(int minutes) =>
-      Pointer<NativeFunction<_AddMinutes_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(80).value)
-          .asFunction<_AddMinutes_Dart>()(ptr.ref.lpVtbl, minutes);
+  int AddMinutes(int minutes) => ptr.ref.lpVtbl.value
+      .elementAt(80)
+      .cast<Pointer<NativeFunction<_AddMinutes_Native>>>()
+      .value
+      .asFunction<_AddMinutes_Dart>()(ptr.ref.lpVtbl, minutes);
 
-  int MinuteAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MinuteAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(81).value)
-          .asFunction<_MinuteAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int MinuteAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(81)
+      .cast<Pointer<NativeFunction<_MinuteAsString_Native>>>()
+      .value
+      .asFunction<_MinuteAsString_Dart>()(ptr.ref.lpVtbl, result);
 
   int MinuteAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_MinuteAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(82).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(82)
+              .cast<Pointer<NativeFunction<_MinuteAsPaddedString_Native>>>()
+              .value
               .asFunction<_MinuteAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
@@ -1222,19 +1276,23 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddSeconds(int seconds) =>
-      Pointer<NativeFunction<_AddSeconds_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(85).value)
-          .asFunction<_AddSeconds_Dart>()(ptr.ref.lpVtbl, seconds);
+  int AddSeconds(int seconds) => ptr.ref.lpVtbl.value
+      .elementAt(85)
+      .cast<Pointer<NativeFunction<_AddSeconds_Native>>>()
+      .value
+      .asFunction<_AddSeconds_Dart>()(ptr.ref.lpVtbl, seconds);
 
-  int SecondAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_SecondAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(86).value)
-          .asFunction<_SecondAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int SecondAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(86)
+      .cast<Pointer<NativeFunction<_SecondAsString_Native>>>()
+      .value
+      .asFunction<_SecondAsString_Dart>()(ptr.ref.lpVtbl, result);
 
   int SecondAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_SecondAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(87).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(87)
+              .cast<Pointer<NativeFunction<_SecondAsPaddedString_Native>>>()
+              .value
               .asFunction<_SecondAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
@@ -1262,36 +1320,43 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int AddNanoseconds(int nanoseconds) =>
-      Pointer<NativeFunction<_AddNanoseconds_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(90).value)
-          .asFunction<_AddNanoseconds_Dart>()(ptr.ref.lpVtbl, nanoseconds);
+  int AddNanoseconds(int nanoseconds) => ptr.ref.lpVtbl.value
+      .elementAt(90)
+      .cast<Pointer<NativeFunction<_AddNanoseconds_Native>>>()
+      .value
+      .asFunction<_AddNanoseconds_Dart>()(ptr.ref.lpVtbl, nanoseconds);
 
-  int NanosecondAsString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_NanosecondAsString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(91).value)
-          .asFunction<_NanosecondAsString_Dart>()(ptr.ref.lpVtbl, result);
+  int NanosecondAsString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(91)
+      .cast<Pointer<NativeFunction<_NanosecondAsString_Native>>>()
+      .value
+      .asFunction<_NanosecondAsString_Dart>()(ptr.ref.lpVtbl, result);
 
   int NanosecondAsPaddedString(int minDigits, Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_NanosecondAsPaddedString_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(92).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(92)
+              .cast<Pointer<NativeFunction<_NanosecondAsPaddedString_Native>>>()
+              .value
               .asFunction<_NanosecondAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
-  int Compare(Pointer other, Pointer<Int32> result) =>
-      Pointer<NativeFunction<_Compare_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(93).value)
-          .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, other, result);
+  int Compare(Pointer other, Pointer<Int32> result) => ptr.ref.lpVtbl.value
+      .elementAt(93)
+      .cast<Pointer<NativeFunction<_Compare_Native>>>()
+      .value
+      .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, other, result);
 
-  int CompareDateTime(int other, Pointer<Int32> result) =>
-      Pointer<NativeFunction<_CompareDateTime_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(94).value)
-          .asFunction<_CompareDateTime_Dart>()(ptr.ref.lpVtbl, other, result);
+  int CompareDateTime(int other, Pointer<Int32> result) => ptr.ref.lpVtbl.value
+      .elementAt(94)
+      .cast<Pointer<NativeFunction<_CompareDateTime_Native>>>()
+      .value
+      .asFunction<_CompareDateTime_Dart>()(ptr.ref.lpVtbl, other, result);
 
-  int CopyTo(Pointer other) =>
-      Pointer<NativeFunction<_CopyTo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(95).value)
-          .asFunction<_CopyTo_Dart>()(ptr.ref.lpVtbl, other);
+  int CopyTo(Pointer other) => ptr.ref.lpVtbl.value
+      .elementAt(95)
+      .cast<Pointer<NativeFunction<_CopyTo_Native>>>()
+      .value
+      .asFunction<_CopyTo_Dart>()(ptr.ref.lpVtbl, other);
 
   int get FirstMinuteInThisHour {
     final retValuePtr = calloc<Int32>();

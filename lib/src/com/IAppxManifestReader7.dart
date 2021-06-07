@@ -45,20 +45,26 @@ class IAppxManifestReader7 extends IUnknown {
   IAppxManifestReader7(Pointer<COMObject> ptr) : super(ptr);
 
   int GetDriverDependencies(Pointer<Pointer> driverDependencies) =>
-      Pointer<NativeFunction<_GetDriverDependencies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_GetDriverDependencies_Native>>>()
+              .value
               .asFunction<_GetDriverDependencies_Dart>()(
           ptr.ref.lpVtbl, driverDependencies);
 
   int GetOSPackageDependencies(Pointer<Pointer> osPackageDependencies) =>
-      Pointer<NativeFunction<_GetOSPackageDependencies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetOSPackageDependencies_Native>>>()
+              .value
               .asFunction<_GetOSPackageDependencies_Dart>()(
           ptr.ref.lpVtbl, osPackageDependencies);
 
-  int GetHostRuntimeDependencies(Pointer<Pointer> hostRuntimeDependencies) =>
-      Pointer<NativeFunction<_GetHostRuntimeDependencies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
-              .asFunction<_GetHostRuntimeDependencies_Dart>()(
-          ptr.ref.lpVtbl, hostRuntimeDependencies);
+  int GetHostRuntimeDependencies(Pointer<Pointer> hostRuntimeDependencies) => ptr
+          .ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_GetHostRuntimeDependencies_Native>>>()
+          .value
+          .asFunction<_GetHostRuntimeDependencies_Dart>()(
+      ptr.ref.lpVtbl, hostRuntimeDependencies);
 }

@@ -205,13 +205,15 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  int PickSingleFileAsync(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_PickSingleFileAsync_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
+  int PickSingleFileAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_PickSingleFileAsync_Native>>>()
+      .value
+      .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
 
-  int PickMultipleFilesAsync(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
+  int PickMultipleFilesAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(16)
+      .cast<Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>>()
+      .value
+      .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
 }

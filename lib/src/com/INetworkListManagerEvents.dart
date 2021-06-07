@@ -34,9 +34,9 @@ class INetworkListManagerEvents extends IUnknown {
 
   INetworkListManagerEvents(Pointer<COMObject> ptr) : super(ptr);
 
-  int ConnectivityChanged(int newConnectivity) =>
-      Pointer<NativeFunction<_ConnectivityChanged_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_ConnectivityChanged_Dart>()(
-          ptr.ref.lpVtbl, newConnectivity);
+  int ConnectivityChanged(int newConnectivity) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_ConnectivityChanged_Native>>>()
+      .value
+      .asFunction<_ConnectivityChanged_Dart>()(ptr.ref.lpVtbl, newConnectivity);
 }

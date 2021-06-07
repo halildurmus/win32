@@ -48,29 +48,36 @@ class IEnumWbemClassObject extends IUnknown {
 
   IEnumWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
 
-  int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(3).value)
+  int Reset() => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_Reset_Native>>>()
+      .value
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
   int Next(int lTimeout, int uCount, Pointer<Pointer> apObjects,
           Pointer<Uint32> puReturned) =>
-      Pointer<NativeFunction<_Next_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_Next_Native>>>()
+              .value
               .asFunction<_Next_Dart>()(
           ptr.ref.lpVtbl, lTimeout, uCount, apObjects, puReturned);
 
-  int NextAsync(int uCount, Pointer pSink) =>
-      Pointer<NativeFunction<_NextAsync_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_NextAsync_Dart>()(ptr.ref.lpVtbl, uCount, pSink);
+  int NextAsync(int uCount, Pointer pSink) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_NextAsync_Native>>>()
+      .value
+      .asFunction<_NextAsync_Dart>()(ptr.ref.lpVtbl, uCount, pSink);
 
-  int Clone(Pointer<Pointer> ppEnum) =>
-      Pointer<NativeFunction<_Clone_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum);
+  int Clone(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Clone_Native>>>()
+      .value
+      .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum);
 
-  int Skip(int lTimeout, int nCount) =>
-      Pointer<NativeFunction<_Skip_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, lTimeout, nCount);
+  int Skip(int lTimeout, int nCount) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_Skip_Native>>>()
+      .value
+      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, lTimeout, nCount);
 }

@@ -118,118 +118,144 @@ class IFileDialog extends IModalWindow {
   IFileDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int SetFileTypes(int cFileTypes, Pointer<COMDLG_FILTERSPEC> rgFilterSpec) =>
-      Pointer<NativeFunction<_SetFileTypes_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_SetFileTypes_Native>>>()
+              .value
               .asFunction<_SetFileTypes_Dart>()(
           ptr.ref.lpVtbl, cFileTypes, rgFilterSpec);
 
-  int SetFileTypeIndex(int iFileType) =>
-      Pointer<NativeFunction<_SetFileTypeIndex_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_SetFileTypeIndex_Dart>()(ptr.ref.lpVtbl, iFileType);
+  int SetFileTypeIndex(int iFileType) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_SetFileTypeIndex_Native>>>()
+      .value
+      .asFunction<_SetFileTypeIndex_Dart>()(ptr.ref.lpVtbl, iFileType);
 
-  int GetFileTypeIndex(Pointer<Uint32> piFileType) =>
-      Pointer<NativeFunction<_GetFileTypeIndex_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetFileTypeIndex_Dart>()(ptr.ref.lpVtbl, piFileType);
+  int GetFileTypeIndex(Pointer<Uint32> piFileType) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetFileTypeIndex_Native>>>()
+      .value
+      .asFunction<_GetFileTypeIndex_Dart>()(ptr.ref.lpVtbl, piFileType);
 
-  int Advise(Pointer pfde, Pointer<Uint32> pdwCookie) =>
-      Pointer<NativeFunction<_Advise_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_Advise_Dart>()(ptr.ref.lpVtbl, pfde, pdwCookie);
+  int Advise(Pointer pfde, Pointer<Uint32> pdwCookie) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_Advise_Native>>>()
+      .value
+      .asFunction<_Advise_Dart>()(ptr.ref.lpVtbl, pfde, pdwCookie);
 
-  int Unadvise(int dwCookie) =>
-      Pointer<NativeFunction<_Unadvise_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_Unadvise_Dart>()(ptr.ref.lpVtbl, dwCookie);
+  int Unadvise(int dwCookie) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_Unadvise_Native>>>()
+      .value
+      .asFunction<_Unadvise_Dart>()(ptr.ref.lpVtbl, dwCookie);
 
-  int SetOptions(int fos) =>
-      Pointer<NativeFunction<_SetOptions_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_SetOptions_Dart>()(ptr.ref.lpVtbl, fos);
+  int SetOptions(int fos) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_SetOptions_Native>>>()
+      .value
+      .asFunction<_SetOptions_Dart>()(ptr.ref.lpVtbl, fos);
 
-  int GetOptions(Pointer<Uint32> pfos) =>
-      Pointer<NativeFunction<_GetOptions_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetOptions_Dart>()(ptr.ref.lpVtbl, pfos);
+  int GetOptions(Pointer<Uint32> pfos) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_GetOptions_Native>>>()
+      .value
+      .asFunction<_GetOptions_Dart>()(ptr.ref.lpVtbl, pfos);
 
-  int SetDefaultFolder(Pointer psi) =>
-      Pointer<NativeFunction<_SetDefaultFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_SetDefaultFolder_Dart>()(ptr.ref.lpVtbl, psi);
+  int SetDefaultFolder(Pointer psi) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_SetDefaultFolder_Native>>>()
+      .value
+      .asFunction<_SetDefaultFolder_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int SetFolder(Pointer psi) =>
-      Pointer<NativeFunction<_SetFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_SetFolder_Dart>()(ptr.ref.lpVtbl, psi);
+  int SetFolder(Pointer psi) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_SetFolder_Native>>>()
+      .value
+      .asFunction<_SetFolder_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int GetFolder(Pointer<Pointer> ppsi) =>
-      Pointer<NativeFunction<_GetFolder_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, ppsi);
+  int GetFolder(Pointer<Pointer> ppsi) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetFolder_Native>>>()
+      .value
+      .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, ppsi);
 
-  int GetCurrentSelection(Pointer<Pointer> ppsi) =>
-      Pointer<NativeFunction<_GetCurrentSelection_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetCurrentSelection_Dart>()(ptr.ref.lpVtbl, ppsi);
+  int GetCurrentSelection(Pointer<Pointer> ppsi) => ptr.ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_GetCurrentSelection_Native>>>()
+      .value
+      .asFunction<_GetCurrentSelection_Dart>()(ptr.ref.lpVtbl, ppsi);
 
-  int SetFileName(Pointer<Utf16> pszName) =>
-      Pointer<NativeFunction<_SetFileName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_SetFileName_Dart>()(ptr.ref.lpVtbl, pszName);
+  int SetFileName(Pointer<Utf16> pszName) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_SetFileName_Native>>>()
+      .value
+      .asFunction<_SetFileName_Dart>()(ptr.ref.lpVtbl, pszName);
 
-  int GetFileName(Pointer<Pointer<Utf16>> pszName) =>
-      Pointer<NativeFunction<_GetFileName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_GetFileName_Dart>()(ptr.ref.lpVtbl, pszName);
+  int GetFileName(Pointer<Pointer<Utf16>> pszName) => ptr.ref.lpVtbl.value
+      .elementAt(16)
+      .cast<Pointer<NativeFunction<_GetFileName_Native>>>()
+      .value
+      .asFunction<_GetFileName_Dart>()(ptr.ref.lpVtbl, pszName);
 
-  int SetTitle(Pointer<Utf16> pszTitle) =>
-      Pointer<NativeFunction<_SetTitle_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_SetTitle_Dart>()(ptr.ref.lpVtbl, pszTitle);
+  int SetTitle(Pointer<Utf16> pszTitle) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_SetTitle_Native>>>()
+      .value
+      .asFunction<_SetTitle_Dart>()(ptr.ref.lpVtbl, pszTitle);
 
-  int SetOkButtonLabel(Pointer<Utf16> pszText) =>
-      Pointer<NativeFunction<_SetOkButtonLabel_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(18).value)
-          .asFunction<_SetOkButtonLabel_Dart>()(ptr.ref.lpVtbl, pszText);
+  int SetOkButtonLabel(Pointer<Utf16> pszText) => ptr.ref.lpVtbl.value
+      .elementAt(18)
+      .cast<Pointer<NativeFunction<_SetOkButtonLabel_Native>>>()
+      .value
+      .asFunction<_SetOkButtonLabel_Dart>()(ptr.ref.lpVtbl, pszText);
 
-  int SetFileNameLabel(Pointer<Utf16> pszLabel) =>
-      Pointer<NativeFunction<_SetFileNameLabel_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_SetFileNameLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
+  int SetFileNameLabel(Pointer<Utf16> pszLabel) => ptr.ref.lpVtbl.value
+      .elementAt(19)
+      .cast<Pointer<NativeFunction<_SetFileNameLabel_Native>>>()
+      .value
+      .asFunction<_SetFileNameLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
 
-  int GetResult(Pointer<Pointer> ppsi) =>
-      Pointer<NativeFunction<_GetResult_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
-          .asFunction<_GetResult_Dart>()(ptr.ref.lpVtbl, ppsi);
+  int GetResult(Pointer<Pointer> ppsi) => ptr.ref.lpVtbl.value
+      .elementAt(20)
+      .cast<Pointer<NativeFunction<_GetResult_Native>>>()
+      .value
+      .asFunction<_GetResult_Dart>()(ptr.ref.lpVtbl, ppsi);
 
-  int AddPlace(Pointer psi, int fdap) =>
-      Pointer<NativeFunction<_AddPlace_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_AddPlace_Dart>()(ptr.ref.lpVtbl, psi, fdap);
+  int AddPlace(Pointer psi, int fdap) => ptr.ref.lpVtbl.value
+      .elementAt(21)
+      .cast<Pointer<NativeFunction<_AddPlace_Native>>>()
+      .value
+      .asFunction<_AddPlace_Dart>()(ptr.ref.lpVtbl, psi, fdap);
 
   int SetDefaultExtension(Pointer<Utf16> pszDefaultExtension) =>
-      Pointer<NativeFunction<_SetDefaultExtension_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(22).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(22)
+              .cast<Pointer<NativeFunction<_SetDefaultExtension_Native>>>()
+              .value
               .asFunction<_SetDefaultExtension_Dart>()(
           ptr.ref.lpVtbl, pszDefaultExtension);
 
-  int Close(int hr) => Pointer<NativeFunction<_Close_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(23).value)
+  int Close(int hr) => ptr.ref.lpVtbl.value
+      .elementAt(23)
+      .cast<Pointer<NativeFunction<_Close_Native>>>()
+      .value
       .asFunction<_Close_Dart>()(ptr.ref.lpVtbl, hr);
 
-  int SetClientGuid(Pointer<GUID> guid) =>
-      Pointer<NativeFunction<_SetClientGuid_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(24).value)
-          .asFunction<_SetClientGuid_Dart>()(ptr.ref.lpVtbl, guid);
+  int SetClientGuid(Pointer<GUID> guid) => ptr.ref.lpVtbl.value
+      .elementAt(24)
+      .cast<Pointer<NativeFunction<_SetClientGuid_Native>>>()
+      .value
+      .asFunction<_SetClientGuid_Dart>()(ptr.ref.lpVtbl, guid);
 
-  int ClearClientData() =>
-      Pointer<NativeFunction<_ClearClientData_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(25).value)
-          .asFunction<_ClearClientData_Dart>()(ptr.ref.lpVtbl);
+  int ClearClientData() => ptr.ref.lpVtbl.value
+      .elementAt(25)
+      .cast<Pointer<NativeFunction<_ClearClientData_Native>>>()
+      .value
+      .asFunction<_ClearClientData_Dart>()(ptr.ref.lpVtbl);
 
-  int SetFilter(Pointer pFilter) =>
-      Pointer<NativeFunction<_SetFilter_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(26).value)
-          .asFunction<_SetFilter_Dart>()(ptr.ref.lpVtbl, pFilter);
+  int SetFilter(Pointer pFilter) => ptr.ref.lpVtbl.value
+      .elementAt(26)
+      .cast<Pointer<NativeFunction<_SetFilter_Native>>>()
+      .value
+      .asFunction<_SetFilter_Dart>()(ptr.ref.lpVtbl, pFilter);
 }

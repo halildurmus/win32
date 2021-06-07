@@ -75,27 +75,32 @@ class INetworkListManager extends IDispatch {
 
   INetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetworks(int Flags, Pointer<Pointer> ppEnumNetwork) =>
-      Pointer<NativeFunction<_GetNetworks_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
-              .asFunction<_GetNetworks_Dart>()(
-          ptr.ref.lpVtbl, Flags, ppEnumNetwork);
+  int GetNetworks(int Flags, Pointer<Pointer> ppEnumNetwork) => ptr
+      .ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetNetworks_Native>>>()
+      .value
+      .asFunction<_GetNetworks_Dart>()(ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
-  int GetNetwork(GUID gdNetworkId, Pointer<Pointer> ppNetwork) =>
-      Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_GetNetwork_Dart>()(
-          ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
+  int GetNetwork(GUID gdNetworkId, Pointer<Pointer> ppNetwork) => ptr
+      .ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_GetNetwork_Native>>>()
+      .value
+      .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
-  int GetNetworkConnections(Pointer<Pointer> ppEnum) =>
-      Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_GetNetworkConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
+  int GetNetworkConnections(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_GetNetworkConnections_Native>>>()
+      .value
+      .asFunction<_GetNetworkConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
 
   int GetNetworkConnection(
           GUID gdNetworkConnectionId, Pointer<Pointer> ppNetworkConnection) =>
-      Pointer<NativeFunction<_GetNetworkConnection_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_GetNetworkConnection_Native>>>()
+              .value
               .asFunction<_GetNetworkConnection_Dart>()(
           ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
 
@@ -134,22 +139,26 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Uint32> pConnectivity) =>
-      Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
+  int GetConnectivity(Pointer<Uint32> pConnectivity) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetConnectivity_Native>>>()
+      .value
+      .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
   int SetSimulatedProfileInfo(
           Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
-      Pointer<NativeFunction<_SetSimulatedProfileInfo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(14)
+              .cast<Pointer<NativeFunction<_SetSimulatedProfileInfo_Native>>>()
+              .value
               .asFunction<_SetSimulatedProfileInfo_Dart>()(
           ptr.ref.lpVtbl, pSimulatedInfo);
 
-  int ClearSimulatedProfileInfo() =>
-      Pointer<NativeFunction<_ClearSimulatedProfileInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl);
+  int ClearSimulatedProfileInfo() => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_ClearSimulatedProfileInfo_Native>>>()
+      .value
+      .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl);
 }
 
 /// {@category com}

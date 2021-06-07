@@ -241,22 +241,28 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int Resolve(int fFlags) =>
-      Pointer<NativeFunction<_Resolve_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, fFlags);
+  int Resolve(int fFlags) => ptr.ref.lpVtbl.value
+      .elementAt(19)
+      .cast<Pointer<NativeFunction<_Resolve_Native>>>()
+      .value
+      .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, fFlags);
 
   int GetIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
-      Pointer<NativeFunction<_GetIconLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(20)
+          .cast<Pointer<NativeFunction<_GetIconLocation_Native>>>()
+          .value
           .asFunction<_GetIconLocation_Dart>()(ptr.ref.lpVtbl, pbs, piIcon);
 
-  int SetIconLocation(Pointer<Utf16> bs, int iIcon) =>
-      Pointer<NativeFunction<_SetIconLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_SetIconLocation_Dart>()(ptr.ref.lpVtbl, bs, iIcon);
+  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.lpVtbl.value
+      .elementAt(21)
+      .cast<Pointer<NativeFunction<_SetIconLocation_Native>>>()
+      .value
+      .asFunction<_SetIconLocation_Dart>()(ptr.ref.lpVtbl, bs, iIcon);
 
-  int Save(VARIANT vWhere) => Pointer<NativeFunction<_Save_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(22).value)
+  int Save(VARIANT vWhere) => ptr.ref.lpVtbl.value
+      .elementAt(22)
+      .cast<Pointer<NativeFunction<_Save_Native>>>()
+      .value
       .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, vWhere);
 }

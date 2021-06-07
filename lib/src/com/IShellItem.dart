@@ -57,31 +57,39 @@ class IShellItem extends IUnknown {
 
   int BindToHandler(Pointer pbc, Pointer<GUID> bhid, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_BindToHandler_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_BindToHandler_Native>>>()
+              .value
               .asFunction<_BindToHandler_Dart>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<Pointer> ppsi) =>
-      Pointer<NativeFunction<_GetParent_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetParent_Dart>()(ptr.ref.lpVtbl, ppsi);
+  int GetParent(Pointer<Pointer> ppsi) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetParent_Native>>>()
+      .value
+      .asFunction<_GetParent_Dart>()(ptr.ref.lpVtbl, ppsi);
 
-  int GetDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) =>
-      Pointer<NativeFunction<_GetDisplayName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
-              .asFunction<_GetDisplayName_Dart>()(
-          ptr.ref.lpVtbl, sigdnName, ppszName);
+  int GetDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
+      .ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetDisplayName_Native>>>()
+      .value
+      .asFunction<_GetDisplayName_Dart>()(ptr.ref.lpVtbl, sigdnName, ppszName);
 
   int GetAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-      Pointer<NativeFunction<_GetAttributes_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<Pointer<NativeFunction<_GetAttributes_Native>>>()
+              .value
               .asFunction<_GetAttributes_Dart>()(
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
   int Compare(Pointer psi, int hint, Pointer<Int32> piOrder) =>
-      Pointer<NativeFunction<_Compare_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_Compare_Native>>>()
+          .value
           .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, psi, hint, piOrder);
 }
 

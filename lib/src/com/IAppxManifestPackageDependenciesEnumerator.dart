@@ -44,18 +44,21 @@ class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
   IAppxManifestPackageDependenciesEnumerator(Pointer<COMObject> ptr)
       : super(ptr);
 
-  int GetCurrent(Pointer<Pointer> dependency) =>
-      Pointer<NativeFunction<_GetCurrent_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetCurrent_Dart>()(ptr.ref.lpVtbl, dependency);
+  int GetCurrent(Pointer<Pointer> dependency) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetCurrent_Native>>>()
+      .value
+      .asFunction<_GetCurrent_Dart>()(ptr.ref.lpVtbl, dependency);
 
-  int GetHasCurrent(Pointer<Int32> hasCurrent) =>
-      Pointer<NativeFunction<_GetHasCurrent_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetHasCurrent_Dart>()(ptr.ref.lpVtbl, hasCurrent);
+  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetHasCurrent_Native>>>()
+      .value
+      .asFunction<_GetHasCurrent_Dart>()(ptr.ref.lpVtbl, hasCurrent);
 
-  int MoveNext(Pointer<Int32> hasNext) =>
-      Pointer<NativeFunction<_MoveNext_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_MoveNext_Dart>()(ptr.ref.lpVtbl, hasNext);
+  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_MoveNext_Native>>>()
+      .value
+      .asFunction<_MoveNext_Dart>()(ptr.ref.lpVtbl, hasNext);
 }

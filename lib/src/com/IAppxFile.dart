@@ -52,28 +52,35 @@ class IAppxFile extends IUnknown {
   IAppxFile(Pointer<COMObject> ptr) : super(ptr);
 
   int GetCompressionOption(Pointer<Uint32> compressionOption) =>
-      Pointer<NativeFunction<_GetCompressionOption_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_GetCompressionOption_Native>>>()
+              .value
               .asFunction<_GetCompressionOption_Dart>()(
           ptr.ref.lpVtbl, compressionOption);
 
   int GetContentType(Pointer<Pointer<Utf16>> contentType) =>
-      Pointer<NativeFunction<_GetContentType_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_GetContentType_Native>>>()
+          .value
           .asFunction<_GetContentType_Dart>()(ptr.ref.lpVtbl, contentType);
 
-  int GetName(Pointer<Pointer<Utf16>> fileName) =>
-      Pointer<NativeFunction<_GetName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, fileName);
+  int GetName(Pointer<Pointer<Utf16>> fileName) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetName_Native>>>()
+      .value
+      .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, fileName);
 
-  int GetSize(Pointer<Uint64> size) =>
-      Pointer<NativeFunction<_GetSize_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetSize_Dart>()(ptr.ref.lpVtbl, size);
+  int GetSize(Pointer<Uint64> size) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetSize_Native>>>()
+      .value
+      .asFunction<_GetSize_Dart>()(ptr.ref.lpVtbl, size);
 
-  int GetStream(Pointer<Pointer> stream) =>
-      Pointer<NativeFunction<_GetStream_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetStream_Dart>()(ptr.ref.lpVtbl, stream);
+  int GetStream(Pointer<Pointer> stream) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetStream_Native>>>()
+      .value
+      .asFunction<_GetStream_Dart>()(ptr.ref.lpVtbl, stream);
 }

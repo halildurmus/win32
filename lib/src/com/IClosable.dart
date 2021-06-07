@@ -34,7 +34,9 @@ class IClosable extends IInspectable {
 
   IClosable(Pointer<COMObject> ptr) : super(ptr);
 
-  int Close() => Pointer<NativeFunction<_Close_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(6).value)
+  int Close() => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Close_Native>>>()
+      .value
       .asFunction<_Close_Dart>()(ptr.ref.lpVtbl);
 }

@@ -64,10 +64,11 @@ class INetworkConnection extends IDispatch {
 
   INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetwork(Pointer<Pointer> ppNetwork) =>
-      Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
+  int GetNetwork(Pointer<Pointer> ppNetwork) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetNetwork_Native>>>()
+      .value
+      .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
 
   int get IsConnectedToInternet {
     final retValuePtr = calloc<Int16>();
@@ -104,23 +105,27 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Uint32> pConnectivity) =>
-      Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
+  int GetConnectivity(Pointer<Uint32> pConnectivity) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_GetConnectivity_Native>>>()
+      .value
+      .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
-  int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
-      Pointer<NativeFunction<_GetConnectionId_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId);
+  int GetConnectionId(Pointer<GUID> pgdConnectionId) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_GetConnectionId_Native>>>()
+      .value
+      .asFunction<_GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId);
 
-  int GetAdapterId(Pointer<GUID> pgdAdapterId) =>
-      Pointer<NativeFunction<_GetAdapterId_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
+  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_GetAdapterId_Native>>>()
+      .value
+      .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
 
-  int GetDomainType(Pointer<Uint32> pDomainType) =>
-      Pointer<NativeFunction<_GetDomainType_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType);
+  int GetDomainType(Pointer<Uint32> pDomainType) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetDomainType_Native>>>()
+      .value
+      .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType);
 }

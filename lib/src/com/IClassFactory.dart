@@ -39,13 +39,16 @@ class IClassFactory extends IUnknown {
 
   int CreateInstance(
           Pointer pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
-      Pointer<NativeFunction<_CreateInstance_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_CreateInstance_Native>>>()
+              .value
               .asFunction<_CreateInstance_Dart>()(
           ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
-  int LockServer(int fLock) =>
-      Pointer<NativeFunction<_LockServer_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_LockServer_Dart>()(ptr.ref.lpVtbl, fLock);
+  int LockServer(int fLock) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_LockServer_Native>>>()
+      .value
+      .asFunction<_LockServer_Dart>()(ptr.ref.lpVtbl, fLock);
 }

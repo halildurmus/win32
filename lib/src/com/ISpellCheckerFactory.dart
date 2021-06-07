@@ -66,13 +66,17 @@ class ISpellCheckerFactory extends IUnknown {
   }
 
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
-      Pointer<NativeFunction<_IsSupported_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_IsSupported_Native>>>()
+          .value
           .asFunction<_IsSupported_Dart>()(ptr.ref.lpVtbl, languageTag, value);
 
   int CreateSpellChecker(Pointer<Utf16> languageTag, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_CreateSpellChecker_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_CreateSpellChecker_Native>>>()
+              .value
               .asFunction<_CreateSpellChecker_Dart>()(
           ptr.ref.lpVtbl, languageTag, value);
 }

@@ -95,11 +95,15 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  int Cancel() => Pointer<NativeFunction<_Cancel_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(9).value)
+  int Cancel() => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_Cancel_Native>>>()
+      .value
       .asFunction<_Cancel_Dart>()(ptr.ref.lpVtbl);
 
-  int Close() => Pointer<NativeFunction<_Close_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(10).value)
+  int Close() => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_Close_Native>>>()
+      .value
       .asFunction<_Close_Dart>()(ptr.ref.lpVtbl);
 }
