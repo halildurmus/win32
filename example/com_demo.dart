@@ -33,55 +33,54 @@ void main() {
       COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileDialog2));
   print('Created fileDialog2.\n'
       'fileDialog2.ptr is  ${fileDialog2.ptr.address.toHexString(64)}');
+  print('refCount is now ${refCount(fileDialog2)}\n');
 
-  try {
-    print('refCount is now ${refCount(fileDialog2)}\n');
+  // Use IFileDialog2.SetTitle, which is inherited from IFileDialog
+  hr = fileDialog2.SetTitle(pTitle);
+  if (FAILED(hr)) throw WindowsException(hr);
 
-    // Use IFileDialog2.SetTitle, which is inherited from IFileDialog
-    hr = fileDialog2.SetTitle(pTitle);
-    if (FAILED(hr)) throw WindowsException(hr);
+  // Get the IModalWindow interface, just to demonstrate it.
+  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+  print('Get IModalWindow interface.\n'
+      'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
+  print('refCount is now ${refCount(modalWindow)}\n');
 
-    // Get the IModalWindow interface, just to demonstrate it.
-    final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
-    print('Get IModalWindow interface.\n'
-        'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
-    print('refCount is now ${refCount(modalWindow)}\n');
+  fileDialog2.Release();
+  free(fileDialog2.ptr);
+  print('Release fileDialog2.\n'
+      'refCount is now ${refCount(modalWindow)}\n');
 
-    fileDialog2.Release();
-    print('Release fileDialog2.\n'
-        'refCount is now ${refCount(modalWindow)}\n');
+  // Now get the IFileOpenDialog interface.
+  final fileOpenDialog =
+      IFileOpenDialog(modalWindow.toInterface(IID_IFileOpenDialog));
 
-    // Now get the IFileOpenDialog interface.
-    final fileOpenDialog =
-        IFileOpenDialog(modalWindow.toInterface(IID_IFileOpenDialog));
+  print('Get IFileOpenDialog interface.\n'
+      'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');
+  print('refCount is now ${refCount(fileOpenDialog)}\n');
 
-    print('Get IFileOpenDialog interface.\n'
-        'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');
-    print('refCount is now ${refCount(fileOpenDialog)}\n');
+  modalWindow.Release();
+  free(modalWindow.ptr);
+  print('Release modalWindow.\n'
+      'refCount is now ${refCount(fileOpenDialog)}\n');
 
-    modalWindow.Release();
-    print('Release modalWindow.\n'
-        'refCount is now ${refCount(fileOpenDialog)}\n');
-
-    // Use IFileOpenDialog.Show, which is inherited from IModalWindow
-    hr = fileOpenDialog.Show(NULL);
-    if (FAILED(hr)) {
-      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
-        print('Dialog cancelled.');
-      } else {
-        throw WindowsException(hr);
-      }
+  // Use IFileOpenDialog.Show, which is inherited from IModalWindow
+  hr = fileOpenDialog.Show(NULL);
+  if (FAILED(hr)) {
+    if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+      print('Dialog cancelled.');
+    } else {
+      throw WindowsException(hr);
     }
-
-    fileOpenDialog.Release();
-    print('Released fileOpenDialog.\n');
-
-    // Uninitialize COM now that we're done with it.
-    CoUninitialize();
-  } finally {
-    // Clear things up
-    free(fileDialog2.ptr);
-    free(pTitle);
-    print('All done!');
   }
+
+  fileOpenDialog.Release();
+  free(fileOpenDialog.ptr);
+  print('Released fileOpenDialog.\n');
+
+  // Uninitialize COM now that we're done with it.
+  CoUninitialize();
+
+  // Clear up
+  free(pTitle);
+  print('All done!');
 }
