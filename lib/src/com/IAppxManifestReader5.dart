@@ -34,9 +34,11 @@ class IAppxManifestReader5 extends IUnknown {
 
   IAppxManifestReader5(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetMainPackageDependencies(Pointer<Pointer> mainPackageDependencies) =>
-      Pointer<NativeFunction<_GetMainPackageDependencies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_GetMainPackageDependencies_Dart>()(
-          ptr.ref.lpVtbl, mainPackageDependencies);
+  int GetMainPackageDependencies(Pointer<Pointer> mainPackageDependencies) => ptr
+          .ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetMainPackageDependencies_Native>>>()
+          .value
+          .asFunction<_GetMainPackageDependencies_Dart>()(
+      ptr.ref.lpVtbl, mainPackageDependencies);
 }

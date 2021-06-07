@@ -50,9 +50,12 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_StartIndex_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_get_StartIndex_Native>>>()
+          .value
           .asFunction<_get_StartIndex_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -66,9 +69,12 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Length_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_get_Length_Native>>>()
+          .value
           .asFunction<_get_Length_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -82,11 +88,13 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_CorrectiveAction_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(5).value)
-                  .asFunction<_get_CorrectiveAction_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_get_CorrectiveAction_Native>>>()
+              .value
+              .asFunction<_get_CorrectiveAction_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -100,9 +108,12 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Replacement_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_get_Replacement_Native>>>()
+          .value
           .asFunction<_get_Replacement_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;

@@ -68,45 +68,55 @@ class IAppxManifestPackageId extends IUnknown {
 
   IAppxManifestPackageId(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) =>
-      Pointer<NativeFunction<_GetName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
+  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetName_Native>>>()
+      .value
+      .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
 
-  int GetArchitecture(Pointer<Uint32> architecture) =>
-      Pointer<NativeFunction<_GetArchitecture_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetArchitecture_Dart>()(ptr.ref.lpVtbl, architecture);
+  int GetArchitecture(Pointer<Uint32> architecture) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetArchitecture_Native>>>()
+      .value
+      .asFunction<_GetArchitecture_Dart>()(ptr.ref.lpVtbl, architecture);
 
-  int GetPublisher(Pointer<Pointer<Utf16>> publisher) =>
-      Pointer<NativeFunction<_GetPublisher_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetPublisher_Dart>()(ptr.ref.lpVtbl, publisher);
+  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetPublisher_Native>>>()
+      .value
+      .asFunction<_GetPublisher_Dart>()(ptr.ref.lpVtbl, publisher);
 
-  int GetVersion(Pointer<Uint64> packageVersion) =>
-      Pointer<NativeFunction<_GetVersion_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetVersion_Dart>()(ptr.ref.lpVtbl, packageVersion);
+  int GetVersion(Pointer<Uint64> packageVersion) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetVersion_Native>>>()
+      .value
+      .asFunction<_GetVersion_Dart>()(ptr.ref.lpVtbl, packageVersion);
 
-  int GetResourceId(Pointer<Pointer<Utf16>> resourceId) =>
-      Pointer<NativeFunction<_GetResourceId_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetResourceId_Dart>()(ptr.ref.lpVtbl, resourceId);
+  int GetResourceId(Pointer<Pointer<Utf16>> resourceId) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetResourceId_Native>>>()
+      .value
+      .asFunction<_GetResourceId_Dart>()(ptr.ref.lpVtbl, resourceId);
 
   int ComparePublisher(Pointer<Utf16> other, Pointer<Int32> isSame) =>
-      Pointer<NativeFunction<_ComparePublisher_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_ComparePublisher_Native>>>()
+          .value
           .asFunction<_ComparePublisher_Dart>()(ptr.ref.lpVtbl, other, isSame);
 
-  int GetPackageFullName(Pointer<Pointer<Utf16>> packageFullName) =>
-      Pointer<NativeFunction<_GetPackageFullName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_GetPackageFullName_Dart>()(
-          ptr.ref.lpVtbl, packageFullName);
+  int GetPackageFullName(Pointer<Pointer<Utf16>> packageFullName) => ptr
+      .ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_GetPackageFullName_Native>>>()
+      .value
+      .asFunction<_GetPackageFullName_Dart>()(ptr.ref.lpVtbl, packageFullName);
 
   int GetPackageFamilyName(Pointer<Pointer<Utf16>> packageFamilyName) =>
-      Pointer<NativeFunction<_GetPackageFamilyName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_GetPackageFamilyName_Native>>>()
+              .value
               .asFunction<_GetPackageFamilyName_Dart>()(
           ptr.ref.lpVtbl, packageFamilyName);
 }

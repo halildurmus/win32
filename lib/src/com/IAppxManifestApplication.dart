@@ -40,13 +40,16 @@ class IAppxManifestApplication extends IUnknown {
   IAppxManifestApplication(Pointer<COMObject> ptr) : super(ptr);
 
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) =>
-      Pointer<NativeFunction<_GetStringValue_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetStringValue_Native>>>()
+          .value
           .asFunction<_GetStringValue_Dart>()(ptr.ref.lpVtbl, name, value);
 
-  int GetAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) =>
-      Pointer<NativeFunction<_GetAppUserModelId_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_GetAppUserModelId_Dart>()(
-          ptr.ref.lpVtbl, appUserModelId);
+  int GetAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
+      .ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetAppUserModelId_Native>>>()
+      .value
+      .asFunction<_GetAppUserModelId_Dart>()(ptr.ref.lpVtbl, appUserModelId);
 }

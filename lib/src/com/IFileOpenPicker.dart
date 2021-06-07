@@ -84,9 +84,12 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_ViewMode_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_get_ViewMode_Native>>>()
+          .value
           .asFunction<_get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -97,8 +100,10 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set ViewMode(int value) {
-    final hr = Pointer<NativeFunction<_put_ViewMode_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(7).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(7)
+        .cast<Pointer<NativeFunction<_put_ViewMode_Native>>>()
+        .value
         .asFunction<_put_ViewMode_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -108,11 +113,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_SettingsIdentifier_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(8).value)
-                  .asFunction<_get_SettingsIdentifier_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_get_SettingsIdentifier_Native>>>()
+              .value
+              .asFunction<_get_SettingsIdentifier_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -123,10 +130,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set SettingsIdentifier(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_SettingsIdentifier_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(9).value)
-            .asFunction<_put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(9)
+        .cast<Pointer<NativeFunction<_put_SettingsIdentifier_Native>>>()
+        .value
+        .asFunction<_put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -135,12 +143,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = Pointer<
-                      NativeFunction<
-                          _get_SuggestedStartLocation_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_get_SuggestedStartLocation_Dart>()(
-          ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_SuggestedStartLocation_Native>>>()
+          .value
+          .asFunction<
+              _get_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -151,11 +160,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set SuggestedStartLocation(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_SuggestedStartLocation_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(11).value)
-                .asFunction<_put_SuggestedStartLocation_Dart>()(
-            ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<Pointer<NativeFunction<_put_SuggestedStartLocation_Native>>>()
+        .value
+        .asFunction<_put_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -164,11 +173,13 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_CommitButtonText_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(12).value)
-                  .asFunction<_get_CommitButtonText_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(12)
+              .cast<Pointer<NativeFunction<_get_CommitButtonText_Native>>>()
+              .value
+              .asFunction<_get_CommitButtonText_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -179,10 +190,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set CommitButtonText(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_CommitButtonText_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(13).value)
-            .asFunction<_put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(13)
+        .cast<Pointer<NativeFunction<_put_CommitButtonText_Native>>>()
+        .value
+        .asFunction<_put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -191,11 +203,12 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<IntPtr>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_FileTypeFilter_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(14).value)
-                  .asFunction<_get_FileTypeFilter_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<Pointer<NativeFunction<_get_FileTypeFilter_Native>>>()
+          .value
+          .asFunction<_get_FileTypeFilter_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -205,13 +218,15 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  int PickSingleFileAsync(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_PickSingleFileAsync_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
+  int PickSingleFileAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_PickSingleFileAsync_Native>>>()
+      .value
+      .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
 
-  int PickMultipleFilesAsync(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
+  int PickMultipleFilesAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(16)
+      .cast<Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>>()
+      .value
+      .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
 }

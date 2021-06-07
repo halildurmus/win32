@@ -47,24 +47,32 @@ class IVirtualDesktopManager extends IUnknown {
 
   IVirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
 
-  int IsWindowOnCurrentVirtualDesktop(
-          int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
-      Pointer<
-                      NativeFunction<
-                          _IsWindowOnCurrentVirtualDesktop_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_IsWindowOnCurrentVirtualDesktop_Dart>()(
-          ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
+  int
+      IsWindowOnCurrentVirtualDesktop(
+              int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
+          ptr.ref.lpVtbl.value
+                  .elementAt(3)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              _IsWindowOnCurrentVirtualDesktop_Native>>>()
+                  .value
+                  .asFunction<_IsWindowOnCurrentVirtualDesktop_Dart>()(
+              ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
 
   int GetWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
-      Pointer<NativeFunction<_GetWindowDesktopId_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetWindowDesktopId_Native>>>()
+              .value
               .asFunction<_GetWindowDesktopId_Dart>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 
   int MoveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) =>
-      Pointer<NativeFunction<_MoveWindowToDesktop_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_MoveWindowToDesktop_Native>>>()
+              .value
               .asFunction<_MoveWindowToDesktop_Dart>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 }

@@ -32,8 +32,9 @@ class IEnumSpellingError extends IUnknown {
 
   IEnumSpellingError(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_Next_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, value);
+  int Next(Pointer<Pointer> value) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_Next_Native>>>()
+      .value
+      .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, value);
 }

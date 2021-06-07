@@ -35,8 +35,10 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
   IAppxManifestReader4(Pointer<COMObject> ptr) : super(ptr);
 
   int GetOptionalPackageInfo(Pointer<Pointer> optionalPackageInfo) =>
-      Pointer<NativeFunction<_GetOptionalPackageInfo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(15)
+              .cast<Pointer<NativeFunction<_GetOptionalPackageInfo_Native>>>()
+              .value
               .asFunction<_GetOptionalPackageInfo_Dart>()(
           ptr.ref.lpVtbl, optionalPackageInfo);
 }

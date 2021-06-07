@@ -38,13 +38,15 @@ class IAppxManifestOSPackageDependency extends IUnknown {
 
   IAppxManifestOSPackageDependency(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) =>
-      Pointer<NativeFunction<_GetName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
+  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetName_Native>>>()
+      .value
+      .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
 
-  int GetVersion(Pointer<Uint64> version) =>
-      Pointer<NativeFunction<_GetVersion_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetVersion_Dart>()(ptr.ref.lpVtbl, version);
+  int GetVersion(Pointer<Uint64> version) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetVersion_Native>>>()
+      .value
+      .asFunction<_GetVersion_Dart>()(ptr.ref.lpVtbl, version);
 }

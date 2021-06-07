@@ -165,49 +165,63 @@ class ITypeInfo extends IUnknown {
 
   ITypeInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) =>
-      Pointer<NativeFunction<_GetTypeAttr_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetTypeAttr_Dart>()(ptr.ref.lpVtbl, ppTypeAttr);
+  int GetTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetTypeAttr_Native>>>()
+      .value
+      .asFunction<_GetTypeAttr_Dart>()(ptr.ref.lpVtbl, ppTypeAttr);
 
-  int GetTypeComp(Pointer<Pointer> ppTComp) =>
-      Pointer<NativeFunction<_GetTypeComp_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetTypeComp_Dart>()(ptr.ref.lpVtbl, ppTComp);
+  int GetTypeComp(Pointer<Pointer> ppTComp) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetTypeComp_Native>>>()
+      .value
+      .asFunction<_GetTypeComp_Dart>()(ptr.ref.lpVtbl, ppTComp);
 
   int GetFuncDesc(int index, Pointer<Pointer<FUNCDESC>> ppFuncDesc) =>
-      Pointer<NativeFunction<_GetFuncDesc_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_GetFuncDesc_Native>>>()
+          .value
           .asFunction<_GetFuncDesc_Dart>()(ptr.ref.lpVtbl, index, ppFuncDesc);
 
   int GetVarDesc(int index, Pointer<Pointer<VARDESC>> ppVarDesc) =>
-      Pointer<NativeFunction<_GetVarDesc_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_GetVarDesc_Native>>>()
+          .value
           .asFunction<_GetVarDesc_Dart>()(ptr.ref.lpVtbl, index, ppVarDesc);
 
   int GetNames(int memid, Pointer<Pointer<Utf16>> rgBstrNames, int cMaxNames,
           Pointer<Uint32> pcNames) =>
-      Pointer<NativeFunction<_GetNames_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<Pointer<NativeFunction<_GetNames_Native>>>()
+              .value
               .asFunction<_GetNames_Dart>()(
           ptr.ref.lpVtbl, memid, rgBstrNames, cMaxNames, pcNames);
 
   int GetRefTypeOfImplType(int index, Pointer<Uint32> pRefType) =>
-      Pointer<NativeFunction<_GetRefTypeOfImplType_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_GetRefTypeOfImplType_Native>>>()
+              .value
               .asFunction<_GetRefTypeOfImplType_Dart>()(
           ptr.ref.lpVtbl, index, pRefType);
 
   int GetImplTypeFlags(int index, Pointer<Int32> pImplTypeFlags) =>
-      Pointer<NativeFunction<_GetImplTypeFlags_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<Pointer<NativeFunction<_GetImplTypeFlags_Native>>>()
+              .value
               .asFunction<_GetImplTypeFlags_Dart>()(
           ptr.ref.lpVtbl, index, pImplTypeFlags);
 
   int GetIDsOfNames(Pointer<Pointer<Utf16>> rgszNames, int cNames,
           Pointer<Int32> pMemId) =>
-      Pointer<NativeFunction<_GetIDsOfNames_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_GetIDsOfNames_Native>>>()
+              .value
               .asFunction<_GetIDsOfNames_Dart>()(
           ptr.ref.lpVtbl, rgszNames, cNames, pMemId);
 
@@ -219,8 +233,10 @@ class ITypeInfo extends IUnknown {
           Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
-      Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_Invoke_Native>>>()
+              .value
               .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, pvInstance, memid,
           wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
 
@@ -230,60 +246,75 @@ class ITypeInfo extends IUnknown {
           Pointer<Pointer<Utf16>> pBstrDocString,
           Pointer<Uint32> pdwHelpContext,
           Pointer<Pointer<Utf16>> pBstrHelpFile) =>
-      Pointer<NativeFunction<_GetDocumentation_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(12).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(12)
+              .cast<Pointer<NativeFunction<_GetDocumentation_Native>>>()
+              .value
               .asFunction<_GetDocumentation_Dart>()(ptr.ref.lpVtbl, memid,
           pBstrName, pBstrDocString, pdwHelpContext, pBstrHelpFile);
 
   int GetDllEntry(int memid, int invKind, Pointer<Pointer<Utf16>> pBstrDllName,
           Pointer<Pointer<Utf16>> pBstrName, Pointer<Uint16> pwOrdinal) =>
-      Pointer<NativeFunction<_GetDllEntry_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(13).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(13)
+              .cast<Pointer<NativeFunction<_GetDllEntry_Native>>>()
+              .value
               .asFunction<_GetDllEntry_Dart>()(
           ptr.ref.lpVtbl, memid, invKind, pBstrDllName, pBstrName, pwOrdinal);
 
-  int GetRefTypeInfo(int hRefType, Pointer<Pointer> ppTInfo) =>
-      Pointer<NativeFunction<_GetRefTypeInfo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
-              .asFunction<_GetRefTypeInfo_Dart>()(
-          ptr.ref.lpVtbl, hRefType, ppTInfo);
+  int GetRefTypeInfo(int hRefType, Pointer<Pointer> ppTInfo) => ptr
+      .ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_GetRefTypeInfo_Native>>>()
+      .value
+      .asFunction<_GetRefTypeInfo_Dart>()(ptr.ref.lpVtbl, hRefType, ppTInfo);
 
-  int AddressOfMember(int memid, int invKind, Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_AddressOfMember_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
-              .asFunction<_AddressOfMember_Dart>()(
-          ptr.ref.lpVtbl, memid, invKind, ppv);
+  int AddressOfMember(int memid, int invKind, Pointer<Pointer> ppv) => ptr
+      .ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_AddressOfMember_Native>>>()
+      .value
+      .asFunction<_AddressOfMember_Dart>()(ptr.ref.lpVtbl, memid, invKind, ppv);
 
   int CreateInstance(
           Pointer pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObj) =>
-      Pointer<NativeFunction<_CreateInstance_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(16)
+              .cast<Pointer<NativeFunction<_CreateInstance_Native>>>()
+              .value
               .asFunction<_CreateInstance_Dart>()(
           ptr.ref.lpVtbl, pUnkOuter, riid, ppvObj);
 
   int GetMops(int memid, Pointer<Pointer<Utf16>> pBstrMops) =>
-      Pointer<NativeFunction<_GetMops_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(17)
+          .cast<Pointer<NativeFunction<_GetMops_Native>>>()
+          .value
           .asFunction<_GetMops_Dart>()(ptr.ref.lpVtbl, memid, pBstrMops);
 
   int GetContainingTypeLib(Pointer<Pointer> ppTLib, Pointer<Uint32> pIndex) =>
-      Pointer<NativeFunction<_GetContainingTypeLib_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(18).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(18)
+              .cast<Pointer<NativeFunction<_GetContainingTypeLib_Native>>>()
+              .value
               .asFunction<_GetContainingTypeLib_Dart>()(
           ptr.ref.lpVtbl, ppTLib, pIndex);
 
-  void ReleaseTypeAttr(Pointer<TYPEATTR> pTypeAttr) =>
-      Pointer<NativeFunction<_ReleaseTypeAttr_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_ReleaseTypeAttr_Dart>()(ptr.ref.lpVtbl, pTypeAttr);
+  void ReleaseTypeAttr(Pointer<TYPEATTR> pTypeAttr) => ptr.ref.lpVtbl.value
+      .elementAt(19)
+      .cast<Pointer<NativeFunction<_ReleaseTypeAttr_Native>>>()
+      .value
+      .asFunction<_ReleaseTypeAttr_Dart>()(ptr.ref.lpVtbl, pTypeAttr);
 
-  void ReleaseFuncDesc(Pointer<FUNCDESC> pFuncDesc) =>
-      Pointer<NativeFunction<_ReleaseFuncDesc_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
-          .asFunction<_ReleaseFuncDesc_Dart>()(ptr.ref.lpVtbl, pFuncDesc);
+  void ReleaseFuncDesc(Pointer<FUNCDESC> pFuncDesc) => ptr.ref.lpVtbl.value
+      .elementAt(20)
+      .cast<Pointer<NativeFunction<_ReleaseFuncDesc_Native>>>()
+      .value
+      .asFunction<_ReleaseFuncDesc_Dart>()(ptr.ref.lpVtbl, pFuncDesc);
 
-  void ReleaseVarDesc(Pointer<VARDESC> pVarDesc) =>
-      Pointer<NativeFunction<_ReleaseVarDesc_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_ReleaseVarDesc_Dart>()(ptr.ref.lpVtbl, pVarDesc);
+  void ReleaseVarDesc(Pointer<VARDESC> pVarDesc) => ptr.ref.lpVtbl.value
+      .elementAt(21)
+      .cast<Pointer<NativeFunction<_ReleaseVarDesc_Native>>>()
+      .value
+      .asFunction<_ReleaseVarDesc_Dart>()(ptr.ref.lpVtbl, pVarDesc);
 }

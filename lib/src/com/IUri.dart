@@ -151,134 +151,166 @@ class IUri extends IUnknown {
 
   int GetPropertyBSTR(
           int uriProp, Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags) =>
-      Pointer<NativeFunction<_GetPropertyBSTR_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_GetPropertyBSTR_Native>>>()
+              .value
               .asFunction<_GetPropertyBSTR_Dart>()(
           ptr.ref.lpVtbl, uriProp, pbstrProperty, dwFlags);
 
   int GetPropertyLength(
           int uriProp, Pointer<Uint32> pcchProperty, int dwFlags) =>
-      Pointer<NativeFunction<_GetPropertyLength_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetPropertyLength_Native>>>()
+              .value
               .asFunction<_GetPropertyLength_Dart>()(
           ptr.ref.lpVtbl, uriProp, pcchProperty, dwFlags);
 
   int GetPropertyDWORD(int uriProp, Pointer<Uint32> pdwProperty, int dwFlags) =>
-      Pointer<NativeFunction<_GetPropertyDWORD_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_GetPropertyDWORD_Native>>>()
+              .value
               .asFunction<_GetPropertyDWORD_Dart>()(
           ptr.ref.lpVtbl, uriProp, pdwProperty, dwFlags);
 
-  int HasProperty(int uriProp, Pointer<Int32> pfHasProperty) =>
-      Pointer<NativeFunction<_HasProperty_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
-              .asFunction<_HasProperty_Dart>()(
-          ptr.ref.lpVtbl, uriProp, pfHasProperty);
+  int HasProperty(int uriProp, Pointer<Int32> pfHasProperty) => ptr
+      .ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_HasProperty_Native>>>()
+      .value
+      .asFunction<_HasProperty_Dart>()(ptr.ref.lpVtbl, uriProp, pfHasProperty);
 
   int GetAbsoluteUri(Pointer<Pointer<Utf16>> pbstrAbsoluteUri) =>
-      Pointer<NativeFunction<_GetAbsoluteUri_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_GetAbsoluteUri_Native>>>()
+          .value
           .asFunction<_GetAbsoluteUri_Dart>()(ptr.ref.lpVtbl, pbstrAbsoluteUri);
 
   int GetAuthority(Pointer<Pointer<Utf16>> pbstrAuthority) =>
-      Pointer<NativeFunction<_GetAuthority_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_GetAuthority_Native>>>()
+          .value
           .asFunction<_GetAuthority_Dart>()(ptr.ref.lpVtbl, pbstrAuthority);
 
-  int GetDisplayUri(Pointer<Pointer<Utf16>> pbstrDisplayString) =>
-      Pointer<NativeFunction<_GetDisplayUri_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_GetDisplayUri_Dart>()(
-          ptr.ref.lpVtbl, pbstrDisplayString);
+  int GetDisplayUri(Pointer<Pointer<Utf16>> pbstrDisplayString) => ptr
+      .ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_GetDisplayUri_Native>>>()
+      .value
+      .asFunction<_GetDisplayUri_Dart>()(ptr.ref.lpVtbl, pbstrDisplayString);
 
-  int GetDomain(Pointer<Pointer<Utf16>> pbstrDomain) =>
-      Pointer<NativeFunction<_GetDomain_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetDomain_Dart>()(ptr.ref.lpVtbl, pbstrDomain);
+  int GetDomain(Pointer<Pointer<Utf16>> pbstrDomain) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_GetDomain_Native>>>()
+      .value
+      .asFunction<_GetDomain_Dart>()(ptr.ref.lpVtbl, pbstrDomain);
 
   int GetExtension(Pointer<Pointer<Utf16>> pbstrExtension) =>
-      Pointer<NativeFunction<_GetExtension_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(11)
+          .cast<Pointer<NativeFunction<_GetExtension_Native>>>()
+          .value
           .asFunction<_GetExtension_Dart>()(ptr.ref.lpVtbl, pbstrExtension);
 
-  int GetFragment(Pointer<Pointer<Utf16>> pbstrFragment) =>
-      Pointer<NativeFunction<_GetFragment_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetFragment_Dart>()(ptr.ref.lpVtbl, pbstrFragment);
+  int GetFragment(Pointer<Pointer<Utf16>> pbstrFragment) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_GetFragment_Native>>>()
+      .value
+      .asFunction<_GetFragment_Dart>()(ptr.ref.lpVtbl, pbstrFragment);
 
-  int GetHost(Pointer<Pointer<Utf16>> pbstrHost) =>
-      Pointer<NativeFunction<_GetHost_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetHost_Dart>()(ptr.ref.lpVtbl, pbstrHost);
+  int GetHost(Pointer<Pointer<Utf16>> pbstrHost) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetHost_Native>>>()
+      .value
+      .asFunction<_GetHost_Dart>()(ptr.ref.lpVtbl, pbstrHost);
 
-  int GetPassword(Pointer<Pointer<Utf16>> pbstrPassword) =>
-      Pointer<NativeFunction<_GetPassword_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetPassword_Dart>()(ptr.ref.lpVtbl, pbstrPassword);
+  int GetPassword(Pointer<Pointer<Utf16>> pbstrPassword) => ptr.ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_GetPassword_Native>>>()
+      .value
+      .asFunction<_GetPassword_Dart>()(ptr.ref.lpVtbl, pbstrPassword);
 
-  int GetPath(Pointer<Pointer<Utf16>> pbstrPath) =>
-      Pointer<NativeFunction<_GetPath_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_GetPath_Dart>()(ptr.ref.lpVtbl, pbstrPath);
+  int GetPath(Pointer<Pointer<Utf16>> pbstrPath) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_GetPath_Native>>>()
+      .value
+      .asFunction<_GetPath_Dart>()(ptr.ref.lpVtbl, pbstrPath);
 
-  int GetPathAndQuery(Pointer<Pointer<Utf16>> pbstrPathAndQuery) =>
-      Pointer<NativeFunction<_GetPathAndQuery_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
-              .asFunction<_GetPathAndQuery_Dart>()(
-          ptr.ref.lpVtbl, pbstrPathAndQuery);
+  int GetPathAndQuery(Pointer<Pointer<Utf16>> pbstrPathAndQuery) => ptr
+      .ref.lpVtbl.value
+      .elementAt(16)
+      .cast<Pointer<NativeFunction<_GetPathAndQuery_Native>>>()
+      .value
+      .asFunction<_GetPathAndQuery_Dart>()(ptr.ref.lpVtbl, pbstrPathAndQuery);
 
-  int GetQuery(Pointer<Pointer<Utf16>> pbstrQuery) =>
-      Pointer<NativeFunction<_GetQuery_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_GetQuery_Dart>()(ptr.ref.lpVtbl, pbstrQuery);
+  int GetQuery(Pointer<Pointer<Utf16>> pbstrQuery) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_GetQuery_Native>>>()
+      .value
+      .asFunction<_GetQuery_Dart>()(ptr.ref.lpVtbl, pbstrQuery);
 
-  int GetRawUri(Pointer<Pointer<Utf16>> pbstrRawUri) =>
-      Pointer<NativeFunction<_GetRawUri_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(18).value)
-          .asFunction<_GetRawUri_Dart>()(ptr.ref.lpVtbl, pbstrRawUri);
+  int GetRawUri(Pointer<Pointer<Utf16>> pbstrRawUri) => ptr.ref.lpVtbl.value
+      .elementAt(18)
+      .cast<Pointer<NativeFunction<_GetRawUri_Native>>>()
+      .value
+      .asFunction<_GetRawUri_Dart>()(ptr.ref.lpVtbl, pbstrRawUri);
 
   int GetSchemeName(Pointer<Pointer<Utf16>> pbstrSchemeName) =>
-      Pointer<NativeFunction<_GetSchemeName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(19)
+          .cast<Pointer<NativeFunction<_GetSchemeName_Native>>>()
+          .value
           .asFunction<_GetSchemeName_Dart>()(ptr.ref.lpVtbl, pbstrSchemeName);
 
-  int GetUserInfo(Pointer<Pointer<Utf16>> pbstrUserInfo) =>
-      Pointer<NativeFunction<_GetUserInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
-          .asFunction<_GetUserInfo_Dart>()(ptr.ref.lpVtbl, pbstrUserInfo);
+  int GetUserInfo(Pointer<Pointer<Utf16>> pbstrUserInfo) => ptr.ref.lpVtbl.value
+      .elementAt(20)
+      .cast<Pointer<NativeFunction<_GetUserInfo_Native>>>()
+      .value
+      .asFunction<_GetUserInfo_Dart>()(ptr.ref.lpVtbl, pbstrUserInfo);
 
-  int GetUserName(Pointer<Pointer<Utf16>> pbstrUserName) =>
-      Pointer<NativeFunction<_GetUserName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_GetUserName_Dart>()(ptr.ref.lpVtbl, pbstrUserName);
+  int GetUserName(Pointer<Pointer<Utf16>> pbstrUserName) => ptr.ref.lpVtbl.value
+      .elementAt(21)
+      .cast<Pointer<NativeFunction<_GetUserName_Native>>>()
+      .value
+      .asFunction<_GetUserName_Dart>()(ptr.ref.lpVtbl, pbstrUserName);
 
-  int GetHostType(Pointer<Uint32> pdwHostType) =>
-      Pointer<NativeFunction<_GetHostType_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(22).value)
-          .asFunction<_GetHostType_Dart>()(ptr.ref.lpVtbl, pdwHostType);
+  int GetHostType(Pointer<Uint32> pdwHostType) => ptr.ref.lpVtbl.value
+      .elementAt(22)
+      .cast<Pointer<NativeFunction<_GetHostType_Native>>>()
+      .value
+      .asFunction<_GetHostType_Dart>()(ptr.ref.lpVtbl, pdwHostType);
 
-  int GetPort(Pointer<Uint32> pdwPort) =>
-      Pointer<NativeFunction<_GetPort_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(23).value)
-          .asFunction<_GetPort_Dart>()(ptr.ref.lpVtbl, pdwPort);
+  int GetPort(Pointer<Uint32> pdwPort) => ptr.ref.lpVtbl.value
+      .elementAt(23)
+      .cast<Pointer<NativeFunction<_GetPort_Native>>>()
+      .value
+      .asFunction<_GetPort_Dart>()(ptr.ref.lpVtbl, pdwPort);
 
-  int GetScheme(Pointer<Uint32> pdwScheme) =>
-      Pointer<NativeFunction<_GetScheme_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(24).value)
-          .asFunction<_GetScheme_Dart>()(ptr.ref.lpVtbl, pdwScheme);
+  int GetScheme(Pointer<Uint32> pdwScheme) => ptr.ref.lpVtbl.value
+      .elementAt(24)
+      .cast<Pointer<NativeFunction<_GetScheme_Native>>>()
+      .value
+      .asFunction<_GetScheme_Dart>()(ptr.ref.lpVtbl, pdwScheme);
 
-  int GetZone(Pointer<Uint32> pdwZone) =>
-      Pointer<NativeFunction<_GetZone_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(25).value)
-          .asFunction<_GetZone_Dart>()(ptr.ref.lpVtbl, pdwZone);
+  int GetZone(Pointer<Uint32> pdwZone) => ptr.ref.lpVtbl.value
+      .elementAt(25)
+      .cast<Pointer<NativeFunction<_GetZone_Native>>>()
+      .value
+      .asFunction<_GetZone_Dart>()(ptr.ref.lpVtbl, pdwZone);
 
-  int GetProperties(Pointer<Uint32> pdwFlags) =>
-      Pointer<NativeFunction<_GetProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(26).value)
-          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, pdwFlags);
+  int GetProperties(Pointer<Uint32> pdwFlags) => ptr.ref.lpVtbl.value
+      .elementAt(26)
+      .cast<Pointer<NativeFunction<_GetProperties_Native>>>()
+      .value
+      .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, pdwFlags);
 
-  int IsEqual(Pointer pUri, Pointer<Int32> pfEqual) =>
-      Pointer<NativeFunction<_IsEqual_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pUri, pfEqual);
+  int IsEqual(Pointer pUri, Pointer<Int32> pfEqual) => ptr.ref.lpVtbl.value
+      .elementAt(27)
+      .cast<Pointer<NativeFunction<_IsEqual_Native>>>()
+      .value
+      .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pUri, pfEqual);
 }

@@ -51,11 +51,13 @@ class ISpellCheckerFactory extends IUnknown {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_SupportedLanguages_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(3).value)
-                  .asFunction<_get_SupportedLanguages_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_get_SupportedLanguages_Native>>>()
+              .value
+              .asFunction<_get_SupportedLanguages_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -66,13 +68,17 @@ class ISpellCheckerFactory extends IUnknown {
   }
 
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
-      Pointer<NativeFunction<_IsSupported_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_IsSupported_Native>>>()
+          .value
           .asFunction<_IsSupported_Dart>()(ptr.ref.lpVtbl, languageTag, value);
 
   int CreateSpellChecker(Pointer<Utf16> languageTag, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_CreateSpellChecker_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_CreateSpellChecker_Native>>>()
+              .value
               .asFunction<_CreateSpellChecker_Dart>()(
           ptr.ref.lpVtbl, languageTag, value);
 }

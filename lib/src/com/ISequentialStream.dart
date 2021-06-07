@@ -39,13 +39,16 @@ class ISequentialStream extends IUnknown {
 
   ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
-  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) =>
-      Pointer<NativeFunction<_Read_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_Read_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
+  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_Read_Native>>>()
+      .value
+      .asFunction<_Read_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
   int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
-      Pointer<NativeFunction<_Write_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_Write_Native>>>()
+          .value
           .asFunction<_Write_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
 }

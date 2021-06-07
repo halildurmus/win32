@@ -40,13 +40,15 @@ class IUserDataPathsStatics extends IInspectable {
 
   IUserDataPathsStatics(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetForUser(Pointer user, Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_GetForUser_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetForUser_Dart>()(ptr.ref.lpVtbl, user, result);
+  int GetForUser(Pointer user, Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetForUser_Native>>>()
+      .value
+      .asFunction<_GetForUser_Dart>()(ptr.ref.lpVtbl, user, result);
 
-  int GetDefault(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_GetDefault_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetDefault_Dart>()(ptr.ref.lpVtbl, result);
+  int GetDefault(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetDefault_Native>>>()
+      .value
+      .asFunction<_GetDefault_Dart>()(ptr.ref.lpVtbl, result);
 }

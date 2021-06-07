@@ -98,9 +98,12 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Path_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_get_Path_Native>>>()
+          .value
           .asFunction<_get_Path_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -111,8 +114,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Path(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Path_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(8).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(8)
+        .cast<Pointer<NativeFunction<_put_Path_Native>>>()
+        .value
         .asFunction<_put_Path_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -122,9 +127,12 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Description_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<Pointer<NativeFunction<_get_Description_Native>>>()
+          .value
           .asFunction<_get_Description_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -135,8 +143,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Description(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Description_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(10).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(10)
+        .cast<Pointer<NativeFunction<_put_Description_Native>>>()
+        .value
         .asFunction<_put_Description_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -146,11 +156,13 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr =
-          Pointer<NativeFunction<_get_WorkingDirectory_Native>>.fromAddress(
-                      ptr.ref.vtable.elementAt(11).value)
-                  .asFunction<_get_WorkingDirectory_Dart>()(
-              ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_get_WorkingDirectory_Native>>>()
+              .value
+              .asFunction<_get_WorkingDirectory_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -161,10 +173,11 @@ class IShellLinkDual extends IDispatch {
   }
 
   set WorkingDirectory(Pointer<Utf16> value) {
-    final hr =
-        Pointer<NativeFunction<_put_WorkingDirectory_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(12).value)
-            .asFunction<_put_WorkingDirectory_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(12)
+        .cast<Pointer<NativeFunction<_put_WorkingDirectory_Native>>>()
+        .value
+        .asFunction<_put_WorkingDirectory_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -173,9 +186,12 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Arguments_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(13)
+          .cast<Pointer<NativeFunction<_get_Arguments_Native>>>()
+          .value
           .asFunction<_get_Arguments_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -186,8 +202,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Arguments(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Arguments_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(14).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(14)
+        .cast<Pointer<NativeFunction<_put_Arguments_Native>>>()
+        .value
         .asFunction<_put_Arguments_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -197,9 +215,12 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Hotkey_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(15)
+          .cast<Pointer<NativeFunction<_get_Hotkey_Native>>>()
+          .value
           .asFunction<_get_Hotkey_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -210,8 +231,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Hotkey(int value) {
-    final hr = Pointer<NativeFunction<_put_Hotkey_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(16).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(16)
+        .cast<Pointer<NativeFunction<_put_Hotkey_Native>>>()
+        .value
         .asFunction<_put_Hotkey_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -221,9 +244,12 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_ShowCommand_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(17)
+          .cast<Pointer<NativeFunction<_get_ShowCommand_Native>>>()
+          .value
           .asFunction<_get_ShowCommand_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -234,29 +260,37 @@ class IShellLinkDual extends IDispatch {
   }
 
   set ShowCommand(int value) {
-    final hr = Pointer<NativeFunction<_put_ShowCommand_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(18).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(18)
+        .cast<Pointer<NativeFunction<_put_ShowCommand_Native>>>()
+        .value
         .asFunction<_put_ShowCommand_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int Resolve(int fFlags) =>
-      Pointer<NativeFunction<_Resolve_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, fFlags);
+  int Resolve(int fFlags) => ptr.ref.lpVtbl.value
+      .elementAt(19)
+      .cast<Pointer<NativeFunction<_Resolve_Native>>>()
+      .value
+      .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, fFlags);
 
   int GetIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
-      Pointer<NativeFunction<_GetIconLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(20)
+          .cast<Pointer<NativeFunction<_GetIconLocation_Native>>>()
+          .value
           .asFunction<_GetIconLocation_Dart>()(ptr.ref.lpVtbl, pbs, piIcon);
 
-  int SetIconLocation(Pointer<Utf16> bs, int iIcon) =>
-      Pointer<NativeFunction<_SetIconLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_SetIconLocation_Dart>()(ptr.ref.lpVtbl, bs, iIcon);
+  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.lpVtbl.value
+      .elementAt(21)
+      .cast<Pointer<NativeFunction<_SetIconLocation_Native>>>()
+      .value
+      .asFunction<_SetIconLocation_Dart>()(ptr.ref.lpVtbl, bs, iIcon);
 
-  int Save(VARIANT vWhere) => Pointer<NativeFunction<_Save_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(22).value)
+  int Save(VARIANT vWhere) => ptr.ref.lpVtbl.value
+      .elementAt(22)
+      .cast<Pointer<NativeFunction<_Save_Native>>>()
+      .value
       .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, vWhere);
 }

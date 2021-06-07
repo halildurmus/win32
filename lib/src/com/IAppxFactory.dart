@@ -73,38 +73,47 @@ class IAppxFactory extends IUnknown {
           Pointer outputStream,
           Pointer<APPX_PACKAGE_SETTINGS> settings,
           Pointer<Pointer> packageWriter) =>
-      Pointer<NativeFunction<_CreatePackageWriter_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_CreatePackageWriter_Native>>>()
+              .value
               .asFunction<_CreatePackageWriter_Dart>()(
           ptr.ref.lpVtbl, outputStream, settings, packageWriter);
 
   int CreatePackageReader(
           Pointer inputStream, Pointer<Pointer> packageReader) =>
-      Pointer<NativeFunction<_CreatePackageReader_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_CreatePackageReader_Native>>>()
+              .value
               .asFunction<_CreatePackageReader_Dart>()(
           ptr.ref.lpVtbl, inputStream, packageReader);
 
   int CreateManifestReader(
           Pointer inputStream, Pointer<Pointer> manifestReader) =>
-      Pointer<NativeFunction<_CreateManifestReader_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_CreateManifestReader_Native>>>()
+              .value
               .asFunction<_CreateManifestReader_Dart>()(
           ptr.ref.lpVtbl, inputStream, manifestReader);
 
   int CreateBlockMapReader(
           Pointer inputStream, Pointer<Pointer> blockMapReader) =>
-      Pointer<NativeFunction<_CreateBlockMapReader_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<Pointer<NativeFunction<_CreateBlockMapReader_Native>>>()
+              .value
               .asFunction<_CreateBlockMapReader_Dart>()(
           ptr.ref.lpVtbl, inputStream, blockMapReader);
 
   int CreateValidatedBlockMapReader(Pointer blockMapStream,
           Pointer<Utf16> signatureFileName, Pointer<Pointer> blockMapReader) =>
-      Pointer<
-                      NativeFunction<
-                          _CreateValidatedBlockMapReader_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<
+                  Pointer<NativeFunction<_CreateValidatedBlockMapReader_Native>>>()
+              .value
               .asFunction<_CreateValidatedBlockMapReader_Dart>()(
           ptr.ref.lpVtbl, blockMapStream, signatureFileName, blockMapReader);
 }

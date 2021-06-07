@@ -43,8 +43,10 @@ class IAsyncOperation<TResult> extends IAsyncInfo {
   IAsyncOperation(Pointer<COMObject> ptr) : super(ptr);
 
   set Completed(Pointer value) {
-    final hr = Pointer<NativeFunction<_put_Completed_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(11).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<Pointer<NativeFunction<_put_Completed_Native>>>()
+        .value
         .asFunction<_put_Completed_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -54,9 +56,12 @@ class IAsyncOperation<TResult> extends IAsyncInfo {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Completed_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<Pointer<NativeFunction<_get_Completed_Native>>>()
+          .value
           .asFunction<_get_Completed_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -66,8 +71,9 @@ class IAsyncOperation<TResult> extends IAsyncInfo {
     }
   }
 
-  int GetResults(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, result);
+  int GetResults(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetResults_Native>>>()
+      .value
+      .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, result);
 }

@@ -37,13 +37,15 @@ class IFileDialog2 extends IFileDialog {
 
   IFileDialog2(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) =>
-      Pointer<NativeFunction<_SetCancelButtonLabel_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_SetCancelButtonLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
+  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.lpVtbl.value
+      .elementAt(27)
+      .cast<Pointer<NativeFunction<_SetCancelButtonLabel_Native>>>()
+      .value
+      .asFunction<_SetCancelButtonLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
 
-  int SetNavigationRoot(Pointer psi) =>
-      Pointer<NativeFunction<_SetNavigationRoot_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_SetNavigationRoot_Dart>()(ptr.ref.lpVtbl, psi);
+  int SetNavigationRoot(Pointer psi) => ptr.ref.lpVtbl.value
+      .elementAt(28)
+      .cast<Pointer<NativeFunction<_SetNavigationRoot_Native>>>()
+      .value
+      .asFunction<_SetNavigationRoot_Dart>()(ptr.ref.lpVtbl, psi);
 }

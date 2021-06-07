@@ -33,8 +33,9 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
 
   ISpellCheckerChangedEventHandler(Pointer<COMObject> ptr) : super(ptr);
 
-  int Invoke(Pointer sender) =>
-      Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, sender);
+  int Invoke(Pointer sender) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_Invoke_Native>>>()
+      .value
+      .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, sender);
 }

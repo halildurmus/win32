@@ -44,18 +44,21 @@ class IAppxManifestPackageDependency extends IUnknown {
 
   IAppxManifestPackageDependency(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) =>
-      Pointer<NativeFunction<_GetName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
+  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetName_Native>>>()
+      .value
+      .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
 
-  int GetPublisher(Pointer<Pointer<Utf16>> publisher) =>
-      Pointer<NativeFunction<_GetPublisher_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetPublisher_Dart>()(ptr.ref.lpVtbl, publisher);
+  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetPublisher_Native>>>()
+      .value
+      .asFunction<_GetPublisher_Dart>()(ptr.ref.lpVtbl, publisher);
 
-  int GetMinVersion(Pointer<Uint64> minVersion) =>
-      Pointer<NativeFunction<_GetMinVersion_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetMinVersion_Dart>()(ptr.ref.lpVtbl, minVersion);
+  int GetMinVersion(Pointer<Uint64> minVersion) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetMinVersion_Native>>>()
+      .value
+      .asFunction<_GetMinVersion_Dart>()(ptr.ref.lpVtbl, minVersion);
 }

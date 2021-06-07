@@ -113,99 +113,121 @@ class IShellLink extends IUnknown {
 
   int GetPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>
-      Pointer<NativeFunction<_GetPath_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_GetPath_Native>>>()
+              .value
               .asFunction<_GetPath_Dart>()(
           ptr.ref.lpVtbl, pszFile, cch, pfd, fFlags);
 
-  int GetIDList(Pointer<Pointer<ITEMIDLIST>> ppidl) =>
-      Pointer<NativeFunction<_GetIDList_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, ppidl);
+  int GetIDList(Pointer<Pointer<ITEMIDLIST>> ppidl) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetIDList_Native>>>()
+      .value
+      .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, ppidl);
 
-  int SetIDList(Pointer<ITEMIDLIST> pidl) =>
-      Pointer<NativeFunction<_SetIDList_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_SetIDList_Dart>()(ptr.ref.lpVtbl, pidl);
+  int SetIDList(Pointer<ITEMIDLIST> pidl) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_SetIDList_Native>>>()
+      .value
+      .asFunction<_SetIDList_Dart>()(ptr.ref.lpVtbl, pidl);
 
-  int GetDescription(Pointer<Utf16> pszName, int cch) =>
-      Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pszName, cch);
+  int GetDescription(Pointer<Utf16> pszName, int cch) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetDescription_Native>>>()
+      .value
+      .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pszName, cch);
 
-  int SetDescription(Pointer<Utf16> pszName) =>
-      Pointer<NativeFunction<_SetDescription_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_SetDescription_Dart>()(ptr.ref.lpVtbl, pszName);
+  int SetDescription(Pointer<Utf16> pszName) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_SetDescription_Native>>>()
+      .value
+      .asFunction<_SetDescription_Dart>()(ptr.ref.lpVtbl, pszName);
 
   int GetWorkingDirectory(Pointer<Utf16> pszDir, int cch) =>
-      Pointer<NativeFunction<_GetWorkingDirectory_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_GetWorkingDirectory_Native>>>()
+          .value
           .asFunction<_GetWorkingDirectory_Dart>()(ptr.ref.lpVtbl, pszDir, cch);
 
-  int SetWorkingDirectory(Pointer<Utf16> pszDir) =>
-      Pointer<NativeFunction<_SetWorkingDirectory_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_SetWorkingDirectory_Dart>()(ptr.ref.lpVtbl, pszDir);
+  int SetWorkingDirectory(Pointer<Utf16> pszDir) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_SetWorkingDirectory_Native>>>()
+      .value
+      .asFunction<_SetWorkingDirectory_Dart>()(ptr.ref.lpVtbl, pszDir);
 
-  int GetArguments(Pointer<Utf16> pszArgs, int cch) =>
-      Pointer<NativeFunction<_GetArguments_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetArguments_Dart>()(ptr.ref.lpVtbl, pszArgs, cch);
+  int GetArguments(Pointer<Utf16> pszArgs, int cch) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_GetArguments_Native>>>()
+      .value
+      .asFunction<_GetArguments_Dart>()(ptr.ref.lpVtbl, pszArgs, cch);
 
-  int SetArguments(Pointer<Utf16> pszArgs) =>
-      Pointer<NativeFunction<_SetArguments_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_SetArguments_Dart>()(ptr.ref.lpVtbl, pszArgs);
+  int SetArguments(Pointer<Utf16> pszArgs) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_SetArguments_Native>>>()
+      .value
+      .asFunction<_SetArguments_Dart>()(ptr.ref.lpVtbl, pszArgs);
 
-  int GetHotkey(Pointer<Uint16> pwHotkey) =>
-      Pointer<NativeFunction<_GetHotkey_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetHotkey_Dart>()(ptr.ref.lpVtbl, pwHotkey);
+  int GetHotkey(Pointer<Uint16> pwHotkey) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_GetHotkey_Native>>>()
+      .value
+      .asFunction<_GetHotkey_Dart>()(ptr.ref.lpVtbl, pwHotkey);
 
-  int SetHotkey(int wHotkey) =>
-      Pointer<NativeFunction<_SetHotkey_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_SetHotkey_Dart>()(ptr.ref.lpVtbl, wHotkey);
+  int SetHotkey(int wHotkey) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_SetHotkey_Native>>>()
+      .value
+      .asFunction<_SetHotkey_Dart>()(ptr.ref.lpVtbl, wHotkey);
 
-  int GetShowCmd(Pointer<Int32> piShowCmd) =>
-      Pointer<NativeFunction<_GetShowCmd_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetShowCmd_Dart>()(ptr.ref.lpVtbl, piShowCmd);
+  int GetShowCmd(Pointer<Int32> piShowCmd) => ptr.ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_GetShowCmd_Native>>>()
+      .value
+      .asFunction<_GetShowCmd_Dart>()(ptr.ref.lpVtbl, piShowCmd);
 
-  int SetShowCmd(int iShowCmd) =>
-      Pointer<NativeFunction<_SetShowCmd_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_SetShowCmd_Dart>()(ptr.ref.lpVtbl, iShowCmd);
+  int SetShowCmd(int iShowCmd) => ptr.ref.lpVtbl.value
+      .elementAt(15)
+      .cast<Pointer<NativeFunction<_SetShowCmd_Native>>>()
+      .value
+      .asFunction<_SetShowCmd_Dart>()(ptr.ref.lpVtbl, iShowCmd);
 
   int GetIconLocation(
           Pointer<Utf16> pszIconPath, int cch, Pointer<Int32> piIcon) =>
-      Pointer<NativeFunction<_GetIconLocation_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(16)
+              .cast<Pointer<NativeFunction<_GetIconLocation_Native>>>()
+              .value
               .asFunction<_GetIconLocation_Dart>()(
           ptr.ref.lpVtbl, pszIconPath, cch, piIcon);
 
-  int SetIconLocation(Pointer<Utf16> pszIconPath, int iIcon) =>
-      Pointer<NativeFunction<_SetIconLocation_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(17).value)
-              .asFunction<_SetIconLocation_Dart>()(
-          ptr.ref.lpVtbl, pszIconPath, iIcon);
+  int SetIconLocation(Pointer<Utf16> pszIconPath, int iIcon) => ptr
+      .ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_SetIconLocation_Native>>>()
+      .value
+      .asFunction<_SetIconLocation_Dart>()(ptr.ref.lpVtbl, pszIconPath, iIcon);
 
   int SetRelativePath(Pointer<Utf16> pszPathRel, int dwReserved) =>
-      Pointer<NativeFunction<_SetRelativePath_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(18).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(18)
+              .cast<Pointer<NativeFunction<_SetRelativePath_Native>>>()
+              .value
               .asFunction<_SetRelativePath_Dart>()(
           ptr.ref.lpVtbl, pszPathRel, dwReserved);
 
-  int Resolve(int hwnd, int fFlags) =>
-      Pointer<NativeFunction<_Resolve_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, hwnd, fFlags);
+  int Resolve(int hwnd, int fFlags) => ptr.ref.lpVtbl.value
+      .elementAt(19)
+      .cast<Pointer<NativeFunction<_Resolve_Native>>>()
+      .value
+      .asFunction<_Resolve_Dart>()(ptr.ref.lpVtbl, hwnd, fFlags);
 
-  int SetPath(Pointer<Utf16> pszFile) =>
-      Pointer<NativeFunction<_SetPath_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
-          .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, pszFile);
+  int SetPath(Pointer<Utf16> pszFile) => ptr.ref.lpVtbl.value
+      .elementAt(20)
+      .cast<Pointer<NativeFunction<_SetPath_Native>>>()
+      .value
+      .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, pszFile);
 }
 
 /// {@category com}

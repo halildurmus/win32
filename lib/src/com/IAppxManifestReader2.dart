@@ -34,8 +34,9 @@ class IAppxManifestReader2 extends IAppxManifestReader {
 
   IAppxManifestReader2(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetQualifiedResources(Pointer<Pointer> resources) =>
-      Pointer<NativeFunction<_GetQualifiedResources_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetQualifiedResources_Dart>()(ptr.ref.lpVtbl, resources);
+  int GetQualifiedResources(Pointer<Pointer> resources) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_GetQualifiedResources_Native>>>()
+      .value
+      .asFunction<_GetQualifiedResources_Dart>()(ptr.ref.lpVtbl, resources);
 }

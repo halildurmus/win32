@@ -39,20 +39,24 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
 
   IAppxManifestReader3(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetCapabilitiesByCapabilityClass(
-          int capabilityClass, Pointer<Pointer> capabilities) =>
-      Pointer<
-                  NativeFunction<
-                      _GetCapabilitiesByCapabilityClass_Native>>.fromAddress(ptr
-                  .ref.vtable
+  int
+      GetCapabilitiesByCapabilityClass(
+              int capabilityClass, Pointer<Pointer> capabilities) =>
+          ptr.ref.lpVtbl.value
                   .elementAt(13)
-                  .value)
-              .asFunction<_GetCapabilitiesByCapabilityClass_Dart>()(
-          ptr.ref.lpVtbl, capabilityClass, capabilities);
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              _GetCapabilitiesByCapabilityClass_Native>>>()
+                  .value
+                  .asFunction<_GetCapabilitiesByCapabilityClass_Dart>()(
+              ptr.ref.lpVtbl, capabilityClass, capabilities);
 
   int GetTargetDeviceFamilies(Pointer<Pointer> targetDeviceFamilies) =>
-      Pointer<NativeFunction<_GetTargetDeviceFamilies_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(14)
+              .cast<Pointer<NativeFunction<_GetTargetDeviceFamilies_Native>>>()
+              .value
               .asFunction<_GetTargetDeviceFamilies_Dart>()(
           ptr.ref.lpVtbl, targetDeviceFamilies);
 }

@@ -52,27 +52,33 @@ class IPersistFile extends IPersist {
 
   IPersistFile(Pointer<COMObject> ptr) : super(ptr);
 
-  int IsDirty() => Pointer<NativeFunction<_IsDirty_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(4).value)
+  int IsDirty() => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_IsDirty_Native>>>()
+      .value
       .asFunction<_IsDirty_Dart>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer<Utf16> pszFileName, int dwMode) =>
-      Pointer<NativeFunction<_Load_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pszFileName, dwMode);
+  int Load(Pointer<Utf16> pszFileName, int dwMode) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_Load_Native>>>()
+      .value
+      .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pszFileName, dwMode);
 
-  int Save(Pointer<Utf16> pszFileName, int fRemember) =>
-      Pointer<NativeFunction<_Save_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pszFileName, fRemember);
+  int Save(Pointer<Utf16> pszFileName, int fRemember) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Save_Native>>>()
+      .value
+      .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pszFileName, fRemember);
 
-  int SaveCompleted(Pointer<Utf16> pszFileName) =>
-      Pointer<NativeFunction<_SaveCompleted_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_SaveCompleted_Dart>()(ptr.ref.lpVtbl, pszFileName);
+  int SaveCompleted(Pointer<Utf16> pszFileName) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_SaveCompleted_Native>>>()
+      .value
+      .asFunction<_SaveCompleted_Dart>()(ptr.ref.lpVtbl, pszFileName);
 
-  int GetCurFile(Pointer<Pointer<Utf16>> ppszFileName) =>
-      Pointer<NativeFunction<_GetCurFile_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_GetCurFile_Dart>()(ptr.ref.lpVtbl, ppszFileName);
+  int GetCurFile(Pointer<Pointer<Utf16>> ppszFileName) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_GetCurFile_Native>>>()
+      .value
+      .asFunction<_GetCurFile_Dart>()(ptr.ref.lpVtbl, ppszFileName);
 }

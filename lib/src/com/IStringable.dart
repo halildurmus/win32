@@ -34,8 +34,9 @@ class IStringable extends IInspectable {
 
   IStringable(Pointer<COMObject> ptr) : super(ptr);
 
-  int ToString(Pointer<IntPtr> result) =>
-      Pointer<NativeFunction<_ToString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_ToString_Dart>()(ptr.ref.lpVtbl, result);
+  int ToString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_ToString_Native>>>()
+      .value
+      .asFunction<_ToString_Dart>()(ptr.ref.lpVtbl, result);
 }

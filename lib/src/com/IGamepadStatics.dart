@@ -53,33 +53,41 @@ class IGamepadStatics extends IInspectable {
   IGamepadStatics(Pointer<COMObject> ptr) : super(ptr);
 
   int add_GamepadAdded(Pointer value, Pointer<Uint32> result) =>
-      Pointer<NativeFunction<_add_GamepadAdded_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<Pointer<NativeFunction<_add_GamepadAdded_Native>>>()
+          .value
           .asFunction<_add_GamepadAdded_Dart>()(ptr.ref.lpVtbl, value, result);
 
-  int remove_GamepadAdded(int token) =>
-      Pointer<NativeFunction<_remove_GamepadAdded_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_remove_GamepadAdded_Dart>()(ptr.ref.lpVtbl, token);
+  int remove_GamepadAdded(int token) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_remove_GamepadAdded_Native>>>()
+      .value
+      .asFunction<_remove_GamepadAdded_Dart>()(ptr.ref.lpVtbl, token);
 
-  int add_GamepadRemoved(Pointer value, Pointer<Uint32> result) =>
-      Pointer<NativeFunction<_add_GamepadRemoved_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_add_GamepadRemoved_Dart>()(
-          ptr.ref.lpVtbl, value, result);
+  int add_GamepadRemoved(Pointer value, Pointer<Uint32> result) => ptr
+      .ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_add_GamepadRemoved_Native>>>()
+      .value
+      .asFunction<_add_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, value, result);
 
-  int remove_GamepadRemoved(int token) =>
-      Pointer<NativeFunction<_remove_GamepadRemoved_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_remove_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, token);
+  int remove_GamepadRemoved(int token) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_remove_GamepadRemoved_Native>>>()
+      .value
+      .asFunction<_remove_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, token);
 
   Pointer get Gamepads {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Gamepads_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_Gamepads_Native>>>()
+          .value
           .asFunction<_get_Gamepads_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
