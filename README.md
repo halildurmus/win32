@@ -81,6 +81,12 @@ This can be compiled into a standalone Win32 executable by running:
 dart compile exe example\hello.dart -o example\bin\hello.exe
 ```
 
+For more information on working with the Win32 library from Dart, consult the
+documentation, in particular the sections on [string
+manipulation](https://pub.dev/documentation/win32/latest/win32/win32-library.html)
+and [COM
+objects](https://pub.dev/documentation/win32/latest/topics/com-topic.html).
+
 ## Samples
 
 ### Dart samples
