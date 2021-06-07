@@ -208,7 +208,7 @@ import '../winrt/winrt_constants.dart';
           .cast<Pointer<NativeFunction<_${method.name}_Native>>>()
           .value
           .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-          
+
         if (FAILED(hr)) throw WindowsException(hr);
 
         final retValue = retValuePtr.value;
@@ -226,9 +226,11 @@ import '../winrt/winrt_constants.dart';
 
     buffer.writeln('''
   set ${method.name.substring(4)}(${method.parameters.first.dartType} value) {
-    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt($vtableIndex).value)
-        .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+          .elementAt($vtableIndex)
+          .cast<Pointer<NativeFunction<_${method.name}_Native>>>()
+          .value
+          .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

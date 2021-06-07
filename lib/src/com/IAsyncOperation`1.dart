@@ -43,8 +43,10 @@ class IAsyncOperation<TResult> extends IAsyncInfo {
   IAsyncOperation(Pointer<COMObject> ptr) : super(ptr);
 
   set Completed(Pointer value) {
-    final hr = Pointer<NativeFunction<_put_Completed_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(11).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<Pointer<NativeFunction<_put_Completed_Native>>>()
+        .value
         .asFunction<_put_Completed_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);

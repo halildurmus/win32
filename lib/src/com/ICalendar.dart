@@ -495,8 +495,10 @@ class ICalendar extends IInspectable {
   }
 
   set NumeralSystem(int value) {
-    final hr = Pointer<NativeFunction<_put_NumeralSystem_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(11).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<Pointer<NativeFunction<_put_NumeralSystem_Native>>>()
+        .value
         .asFunction<_put_NumeralSystem_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -621,8 +623,10 @@ class ICalendar extends IInspectable {
   }
 
   set Era(int value) {
-    final hr = Pointer<NativeFunction<_put_Era_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(23).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(23)
+        .cast<Pointer<NativeFunction<_put_Era_Native>>>()
+        .value
         .asFunction<_put_Era_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -727,8 +731,10 @@ class ICalendar extends IInspectable {
   }
 
   set Year(int value) {
-    final hr = Pointer<NativeFunction<_put_Year_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(31).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(31)
+        .cast<Pointer<NativeFunction<_put_Year_Native>>>()
+        .value
         .asFunction<_put_Year_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -842,8 +848,10 @@ class ICalendar extends IInspectable {
   }
 
   set Month(int value) {
-    final hr = Pointer<NativeFunction<_put_Month_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(40).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(40)
+        .cast<Pointer<NativeFunction<_put_Month_Native>>>()
+        .value
         .asFunction<_put_Month_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -982,8 +990,10 @@ class ICalendar extends IInspectable {
   }
 
   set Day(int value) {
-    final hr = Pointer<NativeFunction<_put_Day_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(53).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(53)
+        .cast<Pointer<NativeFunction<_put_Day_Native>>>()
+        .value
         .asFunction<_put_Day_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -1135,8 +1145,10 @@ class ICalendar extends IInspectable {
   }
 
   set Period(int value) {
-    final hr = Pointer<NativeFunction<_put_Period_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(66).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(66)
+        .cast<Pointer<NativeFunction<_put_Period_Native>>>()
+        .value
         .asFunction<_put_Period_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -1242,8 +1254,10 @@ class ICalendar extends IInspectable {
   }
 
   set Hour(int value) {
-    final hr = Pointer<NativeFunction<_put_Hour_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(74).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(74)
+        .cast<Pointer<NativeFunction<_put_Hour_Native>>>()
+        .value
         .asFunction<_put_Hour_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -1289,8 +1303,10 @@ class ICalendar extends IInspectable {
   }
 
   set Minute(int value) {
-    final hr = Pointer<NativeFunction<_put_Minute_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(79).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(79)
+        .cast<Pointer<NativeFunction<_put_Minute_Native>>>()
+        .value
         .asFunction<_put_Minute_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -1336,8 +1352,10 @@ class ICalendar extends IInspectable {
   }
 
   set Second(int value) {
-    final hr = Pointer<NativeFunction<_put_Second_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(84).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(84)
+        .cast<Pointer<NativeFunction<_put_Second_Native>>>()
+        .value
         .asFunction<_put_Second_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -1383,8 +1401,10 @@ class ICalendar extends IInspectable {
   }
 
   set Nanosecond(int value) {
-    final hr = Pointer<NativeFunction<_put_Nanosecond_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(89).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(89)
+        .cast<Pointer<NativeFunction<_put_Nanosecond_Native>>>()
+        .value
         .asFunction<_put_Nanosecond_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);

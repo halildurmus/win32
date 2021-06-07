@@ -114,8 +114,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Path(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Path_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(8).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(8)
+        .cast<Pointer<NativeFunction<_put_Path_Native>>>()
+        .value
         .asFunction<_put_Path_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -141,8 +143,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Description(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Description_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(10).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(10)
+        .cast<Pointer<NativeFunction<_put_Description_Native>>>()
+        .value
         .asFunction<_put_Description_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -169,10 +173,11 @@ class IShellLinkDual extends IDispatch {
   }
 
   set WorkingDirectory(Pointer<Utf16> value) {
-    final hr =
-        Pointer<NativeFunction<_put_WorkingDirectory_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(12).value)
-            .asFunction<_put_WorkingDirectory_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(12)
+        .cast<Pointer<NativeFunction<_put_WorkingDirectory_Native>>>()
+        .value
+        .asFunction<_put_WorkingDirectory_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -197,8 +202,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Arguments(Pointer<Utf16> value) {
-    final hr = Pointer<NativeFunction<_put_Arguments_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(14).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(14)
+        .cast<Pointer<NativeFunction<_put_Arguments_Native>>>()
+        .value
         .asFunction<_put_Arguments_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -224,8 +231,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Hotkey(int value) {
-    final hr = Pointer<NativeFunction<_put_Hotkey_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(16).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(16)
+        .cast<Pointer<NativeFunction<_put_Hotkey_Native>>>()
+        .value
         .asFunction<_put_Hotkey_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -251,8 +260,10 @@ class IShellLinkDual extends IDispatch {
   }
 
   set ShowCommand(int value) {
-    final hr = Pointer<NativeFunction<_put_ShowCommand_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(18).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(18)
+        .cast<Pointer<NativeFunction<_put_ShowCommand_Native>>>()
+        .value
         .asFunction<_put_ShowCommand_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);

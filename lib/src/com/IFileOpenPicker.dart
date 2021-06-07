@@ -100,8 +100,10 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set ViewMode(int value) {
-    final hr = Pointer<NativeFunction<_put_ViewMode_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(7).value)
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(7)
+        .cast<Pointer<NativeFunction<_put_ViewMode_Native>>>()
+        .value
         .asFunction<_put_ViewMode_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -128,10 +130,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set SettingsIdentifier(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_SettingsIdentifier_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(9).value)
-            .asFunction<_put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(9)
+        .cast<Pointer<NativeFunction<_put_SettingsIdentifier_Native>>>()
+        .value
+        .asFunction<_put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -157,11 +160,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set SuggestedStartLocation(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_SuggestedStartLocation_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(11).value)
-                .asFunction<_put_SuggestedStartLocation_Dart>()(
-            ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<Pointer<NativeFunction<_put_SuggestedStartLocation_Native>>>()
+        .value
+        .asFunction<_put_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -187,10 +190,11 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set CommitButtonText(int value) {
-    final hr =
-        Pointer<NativeFunction<_put_CommitButtonText_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(13).value)
-            .asFunction<_put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(13)
+        .cast<Pointer<NativeFunction<_put_CommitButtonText_Native>>>()
+        .value
+        .asFunction<_put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
