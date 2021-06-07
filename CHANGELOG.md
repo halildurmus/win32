@@ -1,3 +1,7 @@
+## 2.1.4
+
+- Add helper functions for COM along with extra documentation.
+
 ## 2.1.3
 
 - Fix bug in shell COM APIs.

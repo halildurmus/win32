@@ -534,10 +534,20 @@
         "dllLibrary": "ole32",
         "comment": "Sets the authentication information that will be used to make calls on the specified proxy. This is a helper function for IClientSecurity::SetBlanket."
     },
+    "CoTaskMemAlloc": {
+        "prototype": "LPVOID CoTaskMemAlloc(\n  SIZE_T cb\n);",
+        "dllLibrary": "ole32",
+        "comment": "Allocates a block of task memory in the same way that IMalloc::Alloc does."
+    },
     "CoTaskMemFree": {
         "prototype": "void CoTaskMemFree(\n  _Frees_ptr_opt_ LPVOID pv\n);",
         "dllLibrary": "ole32",
         "comment": "Frees a block of task memory previously allocated through a call to the CoTaskMemAlloc or CoTaskMemRealloc function."
+    },
+    "CoTaskMemRealloc": {
+        "prototype": "LPVOID CoTaskMemRealloc(\n  LPVOID pv,\n  SIZE_T cb\n);",
+        "dllLibrary": "ole32",
+        "comment": "Changes the size of a previously allocated block of task memory."
     },
     "CoUninitialize": {
         "prototype": "void CoUninitialize();",
@@ -548,6 +558,16 @@
         "prototype": "int CountClipboardFormats();",
         "dllLibrary": "user32",
         "comment": "Retrieves the number of different data formats currently on the clipboard."
+    },
+    "CoWaitForMultipleHandles": {
+        "prototype": "HRESULT CoWaitForMultipleHandles(\n  DWORD    dwFlags,\n  DWORD    dwTimeout,\n  ULONG    cHandles,\n  LPHANDLE pHandles,\n  LPDWORD  lpdwindex\n);",
+        "dllLibrary": "ole32",
+        "comment": "Waits for specified handles to be signaled or for a specified timeout period to elapse."
+    },
+    "CoWaitForMultipleObjects": {
+        "prototype": "HRESULT CoWaitForMultipleObjects(\n  DWORD        dwFlags,\n  DWORD        dwTimeout,\n  ULONG        cHandles,\n  const HANDLE *pHandles,\n  LPDWORD      lpdwindex\n);",
+        "dllLibrary": "ole32",
+        "comment": "A replacement for CoWaitForMultipleHandles. This replacement API hides the options for CoWaitForMultipleHandles that are not supported in ASTA."
     },
     "CreateAcceleratorTable": {
         "prototype": "HACCEL CreateAcceleratorTableW(\n  LPACCEL paccel,\n  int     cAccel\n);",
