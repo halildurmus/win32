@@ -22,5 +22,6 @@ const winmdGenerated = [
   'shell32',
   'user32',
   'version',
-  'winmm'
+  'winmm',
+  'winscard'
 ];

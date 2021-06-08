@@ -35,6 +35,10 @@
         "namespace": "Windows.Win32.Graphics.Gdi.BLENDFUNCTION",
         "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
     },
+    "SCARD_IO_REQUEST": {
+        "namespace": "Windows.Win32.Security.Credentials.SCARD_IO_REQUEST",
+        "comment": "The SCARD_IO_REQUEST structure begins a protocol control information structure. Any protocol-specific information then immediately follows this structure. The entire length of the structure must be aligned with the underlying hardware architecture word size. For example, in Win32 the length of any PCI information must be a multiple of four bytes so that it aligns on a 32-bit boundary."
+    },
     "BLUETOOTH_DEVICE_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO",
         "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
