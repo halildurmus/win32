@@ -2289,6 +2289,21 @@ class SCARD_ATRMASK extends Struct {
   external Array<Uint8> rgbMask;
 }
 
+/// The SCARD_IO_REQUEST structure begins a protocol control information
+/// structure. Any protocol-specific information then immediately follows
+/// this structure. The entire length of the structure must be aligned with
+/// the underlying hardware architecture word size. For example, in Win32
+/// the length of any PCI information must be a multiple of four bytes so
+/// that it aligns on a 32-bit boundary.
+///
+/// {@category Struct}
+class SCARD_IO_REQUEST extends Struct {
+  @Uint32()
+  external int dwProtocol;
+  @Uint32()
+  external int cbPciLength;
+}
+
 /// The SCARD_READERSTATE structure is used by functions for tracking smart
 /// cards within readers.
 ///

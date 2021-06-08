@@ -3720,8 +3720,9 @@
     },
     "SCardUIDlgSelectCard": {
         "prototype": "LONG SCardUIDlgSelectCardW(\n  LPOPENCARDNAMEW_EX unnamedParam1\n);",
-        "dllLibrary": "winscard",
-        "comment": "The SCardUIDlgSelectCard function displays the smart card Select Card dialog box."
+        "dllLibrary": "scarddlg",
+        "comment": "The SCardUIDlgSelectCard function displays the smart card Select Card dialog box.",
+        "category": "winscard"
     },
     "SCardWriteCache": {
         "prototype": "LONG SCardWriteCacheW(\n  SCARDCONTEXT hContext,\n  UUID         *CardIdentifier,\n  DWORD        FreshnessCounter,\n  LPWSTR       LookupName,\n  PBYTE        Data,\n  DWORD        DataLen\n);",
