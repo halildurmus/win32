@@ -163,6 +163,7 @@ void main()
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
     printf("  'SAFEARRAYBOUND': %zu,\n", sizeof(SAFEARRAYBOUND));
     printf("  'SCARD_ATRMASK': %zu,\n", sizeof(SCARD_ATRMASK));
+    printf("  'SCARD_IO_REQUEST': %zu,\n", sizeof(SCARD_IO_REQUEST));
     printf("  'SCARD_READERSTATE': %zu,\n", sizeof(SCARD_READERSTATEW));
     printf("  'SCROLLBARINFO': %zu,\n", sizeof(SCROLLBARINFO));
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
