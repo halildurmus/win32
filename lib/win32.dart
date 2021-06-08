@@ -98,6 +98,7 @@ export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
 export 'src/extensions/set_string.dart';
+export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
