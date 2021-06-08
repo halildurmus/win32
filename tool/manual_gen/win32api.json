@@ -3563,15 +3563,15 @@
         "dllLibrary": "winscard",
         "comment": "The SCardForgetCardType function removes an introduced smart card from the smart card subsystem."
     },
-    "SCardForgetReaderGroup": {
-        "prototype": "LONG SCardForgetReaderGroupW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szGroupName\n);",
-        "dllLibrary": "winscard",
-        "comment": "The SCardForgetReaderGroup function removes a previously introduced smart card reader group from the smart card subsystem. Although this function automatically clears all readers from the group, it does not affect the existence of the individual readers in the database."
-    },
     "SCardForgetReader": {
         "prototype": "LONG SCardForgetReaderW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName\n);",
         "dllLibrary": "winscard",
         "comment": "The SCardForgetReader function removes a previously introduced reader from control by the smart card subsystem. It is removed from the smart card database, including from any reader group that it may have been added to."
+    },
+    "SCardForgetReaderGroup": {
+        "prototype": "LONG SCardForgetReaderGroupW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szGroupName\n);",
+        "dllLibrary": "winscard",
+        "comment": "The SCardForgetReaderGroup function removes a previously introduced smart card reader group from the smart card subsystem. Although this function automatically clears all readers from the group, it does not affect the existence of the individual readers in the database."
     },
     "SCardFreeMemory": {
         "prototype": "LONG SCardFreeMemory(\n  SCARDCONTEXT hContext,\n  LPCVOID      pvMem\n);",
@@ -3623,15 +3623,15 @@
         "dllLibrary": "winscard",
         "comment": "The SCardIntroduceCardType function introduces a smart card to the smart card subsystem (for the active user) by adding it to the smart card database."
     },
-    "SCardIntroduceReaderGroup": {
-        "prototype": "LONG SCardIntroduceReaderGroupW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szGroupName\n);",
-        "dllLibrary": "winscard",
-        "comment": "The SCardIntroduceReaderGroup function introduces a reader group to the smart card subsystem. However, the reader group is not created until the group is specified when adding a reader to the smart card database."
-    },
     "SCardIntroduceReader": {
         "prototype": "LONG SCardIntroduceReaderW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPCWSTR      szDeviceName\n);",
         "dllLibrary": "winscard",
         "comment": "The SCardIntroduceReader function introduces a new name for an existing smart card reader."
+    },
+    "SCardIntroduceReaderGroup": {
+        "prototype": "LONG SCardIntroduceReaderGroupW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szGroupName\n);",
+        "dllLibrary": "winscard",
+        "comment": "The SCardIntroduceReaderGroup function introduces a reader group to the smart card subsystem. However, the reader group is not created until the group is specified when adding a reader to the smart card database."
     },
     "SCardIsValidContext": {
         "prototype": "LONG SCardIsValidContext(\n  SCARDCONTEXT hContext\n);",
@@ -3663,15 +3663,15 @@
         "dllLibrary": "winscard",
         "comment": "The SCardListReadersWithDeviceInstanceId function gets the list of readers that have provided a device instance identifier. This function does not affect the state of the reader."
     },
-    "SCardLocateCardsByATR": {
-        "prototype": "LONG SCardLocateCardsByATRW(\n  SCARDCONTEXT         hContext,\n  LPSCARD_ATRMASK      rgAtrMasks,\n  DWORD                cAtrs,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
-        "dllLibrary": "winscard",
-        "comment": "The SCardLocateCardsByATR function searches the readers listed in the rgReaderStates parameter for a card with a name that matches one of the card names contained in one of the SCARD_ATRMASK structures specified by the rgAtrMasks parameter."
-    },
     "SCardLocateCards": {
         "prototype": "LONG SCardLocateCardsW(\n  SCARDCONTEXT         hContext,\n  LPCWSTR              mszCards,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
         "dllLibrary": "winscard",
         "comment": "The SCardLocateCards function searches the readers listed in the rgReaderStates parameter for a card with an ATR string that matches one of the card names specified in mszCards, returning immediately with the result."
+    },
+    "SCardLocateCardsByATR": {
+        "prototype": "LONG SCardLocateCardsByATRW(\n  SCARDCONTEXT         hContext,\n  LPSCARD_ATRMASK      rgAtrMasks,\n  DWORD                cAtrs,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
+        "dllLibrary": "winscard",
+        "comment": "The SCardLocateCardsByATR function searches the readers listed in the rgReaderStates parameter for a card with a name that matches one of the card names contained in one of the SCARD_ATRMASK structures specified by the rgAtrMasks parameter."
     },
     "SCardReadCache": {
         "prototype": "LONG SCardReadCacheW(\n  SCARDCONTEXT hContext,\n  UUID         *CardIdentifier,\n  DWORD        FreshnessCounter,\n  LPWSTR       LookupName,\n  PBYTE        Data,\n  DWORD        *DataLen\n);",
