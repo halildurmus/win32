@@ -1,3 +1,7 @@
+## 2.1.5
+
+- Add smart card reader support.
+
 ## 2.1.4
 
 - Add helper functions for COM along with extra documentation.
