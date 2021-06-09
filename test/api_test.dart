@@ -8254,6 +8254,522 @@ void main() {
 
   group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {});
 
+  group('Test winscard functions', () {
+    test('Can instantiate SCardAccessStartedEvent', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardAccessStartedEvent =
+          winscard.lookupFunction<IntPtr Function(), int Function()>(
+              'SCardAccessStartedEvent');
+      expect(SCardAccessStartedEvent, isA<Function>());
+    });
+    test('Can instantiate SCardAddReaderToGroup', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardAddReaderToGroup = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szGroupName),
+          int Function(int hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szGroupName)>('SCardAddReaderToGroupW');
+      expect(SCardAddReaderToGroup, isA<Function>());
+    });
+    test('Can instantiate SCardAudit', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardAudit = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Uint32 dwEvent),
+          int Function(int hContext, int dwEvent)>('SCardAudit');
+      expect(SCardAudit, isA<Function>());
+    });
+    test('Can instantiate SCardBeginTransaction', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardBeginTransaction = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard),
+          int Function(int hCard)>('SCardBeginTransaction');
+      expect(SCardBeginTransaction, isA<Function>());
+    });
+    test('Can instantiate SCardCancel', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardCancel = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext),
+          int Function(int hContext)>('SCardCancel');
+      expect(SCardCancel, isA<Function>());
+    });
+    test('Can instantiate SCardConnect', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardConnect = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<Utf16> szReader,
+              Uint32 dwShareMode,
+              Uint32 dwPreferredProtocols,
+              Pointer<IntPtr> phCard,
+              Pointer<Uint32> pdwActiveProtocol),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szReader,
+              int dwShareMode,
+              int dwPreferredProtocols,
+              Pointer<IntPtr> phCard,
+              Pointer<Uint32> pdwActiveProtocol)>('SCardConnectW');
+      expect(SCardConnect, isA<Function>());
+    });
+    test('Can instantiate SCardControl', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardControl = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hCard,
+              Uint32 dwControlCode,
+              Pointer lpInBuffer,
+              Uint32 cbInBufferSize,
+              Pointer lpOutBuffer,
+              Uint32 cbOutBufferSize,
+              Pointer<Uint32> lpBytesReturned),
+          int Function(
+              int hCard,
+              int dwControlCode,
+              Pointer lpInBuffer,
+              int cbInBufferSize,
+              Pointer lpOutBuffer,
+              int cbOutBufferSize,
+              Pointer<Uint32> lpBytesReturned)>('SCardControl');
+      expect(SCardControl, isA<Function>());
+    });
+    test('Can instantiate SCardDisconnect', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardDisconnect = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard, Uint32 dwDisposition),
+          int Function(int hCard, int dwDisposition)>('SCardDisconnect');
+      expect(SCardDisconnect, isA<Function>());
+    });
+    test('Can instantiate SCardEndTransaction', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardEndTransaction = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard, Uint32 dwDisposition),
+          int Function(int hCard, int dwDisposition)>('SCardEndTransaction');
+      expect(SCardEndTransaction, isA<Function>());
+    });
+    test('Can instantiate SCardEstablishContext', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardEstablishContext = winscard.lookupFunction<
+          Int32 Function(Uint32 dwScope, Pointer pvReserved1,
+              Pointer pvReserved2, Pointer<IntPtr> phContext),
+          int Function(int dwScope, Pointer pvReserved1, Pointer pvReserved2,
+              Pointer<IntPtr> phContext)>('SCardEstablishContext');
+      expect(SCardEstablishContext, isA<Function>());
+    });
+    test('Can instantiate SCardForgetCardType', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardForgetCardType = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName),
+          int Function(
+              int hContext, Pointer<Utf16> szCardName)>('SCardForgetCardTypeW');
+      expect(SCardForgetCardType, isA<Function>());
+    });
+    test('Can instantiate SCardForgetReader', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardForgetReader = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName),
+          int Function(
+              int hContext, Pointer<Utf16> szReaderName)>('SCardForgetReaderW');
+      expect(SCardForgetReader, isA<Function>());
+    });
+    test('Can instantiate SCardForgetReaderGroup', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardForgetReaderGroup = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
+          int Function(int hContext,
+              Pointer<Utf16> szGroupName)>('SCardForgetReaderGroupW');
+      expect(SCardForgetReaderGroup, isA<Function>());
+    });
+    test('Can instantiate SCardFreeMemory', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardFreeMemory = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer pvMem),
+          int Function(int hContext, Pointer pvMem)>('SCardFreeMemory');
+      expect(SCardFreeMemory, isA<Function>());
+    });
+    test('Can instantiate SCardGetAttrib', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetAttrib = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr,
+              Pointer<Uint32> pcbAttrLen),
+          int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
+              Pointer<Uint32> pcbAttrLen)>('SCardGetAttrib');
+      expect(SCardGetAttrib, isA<Function>());
+    });
+    test('Can instantiate SCardGetCardTypeProviderName', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetCardTypeProviderName = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<Utf16> szCardName,
+              Uint32 dwProviderId,
+              Pointer<Utf16> szProvider,
+              Pointer<Uint32> pcchProvider),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szCardName,
+              int dwProviderId,
+              Pointer<Utf16> szProvider,
+              Pointer<Uint32> pcchProvider)>('SCardGetCardTypeProviderNameW');
+      expect(SCardGetCardTypeProviderName, isA<Function>());
+    });
+    test('Can instantiate SCardGetDeviceTypeId', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetDeviceTypeId = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+              Pointer<Uint32> pdwDeviceTypeId),
+          int Function(int hContext, Pointer<Utf16> szReaderName,
+              Pointer<Uint32> pdwDeviceTypeId)>('SCardGetDeviceTypeIdW');
+      expect(SCardGetDeviceTypeId, isA<Function>());
+    });
+    test('Can instantiate SCardGetProviderId', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetProviderId = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szCard,
+              Pointer<GUID> pguidProviderId),
+          int Function(int hContext, Pointer<Utf16> szCard,
+              Pointer<GUID> pguidProviderId)>('SCardGetProviderIdW');
+      expect(SCardGetProviderId, isA<Function>());
+    });
+    test('Can instantiate SCardGetReaderDeviceInstanceId', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetReaderDeviceInstanceId = winscard.lookupFunction<
+              Int32 Function(
+                  IntPtr hContext,
+                  Pointer<Utf16> szReaderName,
+                  Pointer<Utf16> szDeviceInstanceId,
+                  Pointer<Uint32> pcchDeviceInstanceId),
+              int Function(
+                  int hContext,
+                  Pointer<Utf16> szReaderName,
+                  Pointer<Utf16> szDeviceInstanceId,
+                  Pointer<Uint32> pcchDeviceInstanceId)>(
+          'SCardGetReaderDeviceInstanceIdW');
+      expect(SCardGetReaderDeviceInstanceId, isA<Function>());
+    });
+    test('Can instantiate SCardGetReaderIcon', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetReaderIcon = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+              Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szReaderName,
+              Pointer<Uint8> pbIcon,
+              Pointer<Uint32> pcbIcon)>('SCardGetReaderIconW');
+      expect(SCardGetReaderIcon, isA<Function>());
+    });
+    test('Can instantiate SCardGetStatusChange', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetStatusChange = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Uint32 dwTimeout,
+              Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
+          int Function(
+              int hContext,
+              int dwTimeout,
+              Pointer<SCARD_READERSTATE> rgReaderStates,
+              int cReaders)>('SCardGetStatusChangeW');
+      expect(SCardGetStatusChange, isA<Function>());
+    });
+    test('Can instantiate SCardGetTransmitCount', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardGetTransmitCount = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard, Pointer<Uint32> pcTransmitCount),
+          int Function(int hCard,
+              Pointer<Uint32> pcTransmitCount)>('SCardGetTransmitCount');
+      expect(SCardGetTransmitCount, isA<Function>());
+    });
+    test('Can instantiate SCardIntroduceCardType', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardIntroduceCardType = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<Utf16> szCardName,
+              Pointer<GUID> pguidPrimaryProvider,
+              Pointer<GUID> rgguidInterfaces,
+              Uint32 dwInterfaceCount,
+              Pointer<Uint8> pbAtr,
+              Pointer<Uint8> pbAtrMask,
+              Uint32 cbAtrLen),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szCardName,
+              Pointer<GUID> pguidPrimaryProvider,
+              Pointer<GUID> rgguidInterfaces,
+              int dwInterfaceCount,
+              Pointer<Uint8> pbAtr,
+              Pointer<Uint8> pbAtrMask,
+              int cbAtrLen)>('SCardIntroduceCardTypeW');
+      expect(SCardIntroduceCardType, isA<Function>());
+    });
+    test('Can instantiate SCardIntroduceReader', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardIntroduceReader = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szDeviceName),
+          int Function(int hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szDeviceName)>('SCardIntroduceReaderW');
+      expect(SCardIntroduceReader, isA<Function>());
+    });
+    test('Can instantiate SCardIntroduceReaderGroup', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardIntroduceReaderGroup = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
+          int Function(int hContext,
+              Pointer<Utf16> szGroupName)>('SCardIntroduceReaderGroupW');
+      expect(SCardIntroduceReaderGroup, isA<Function>());
+    });
+    test('Can instantiate SCardIsValidContext', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardIsValidContext = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext),
+          int Function(int hContext)>('SCardIsValidContext');
+      expect(SCardIsValidContext, isA<Function>());
+    });
+    test('Can instantiate SCardListCards', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardListCards = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<Uint8> pbAtr,
+              Pointer<GUID> rgquidInterfaces,
+              Uint32 cguidInterfaceCount,
+              Pointer<Utf16> mszCards,
+              Pointer<Uint32> pcchCards),
+          int Function(
+              int hContext,
+              Pointer<Uint8> pbAtr,
+              Pointer<GUID> rgquidInterfaces,
+              int cguidInterfaceCount,
+              Pointer<Utf16> mszCards,
+              Pointer<Uint32> pcchCards)>('SCardListCardsW');
+      expect(SCardListCards, isA<Function>());
+    });
+    test('Can instantiate SCardListInterfaces', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardListInterfaces = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szCard,
+              Pointer<GUID> pguidInterfaces, Pointer<Uint32> pcguidInterfaces),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szCard,
+              Pointer<GUID> pguidInterfaces,
+              Pointer<Uint32> pcguidInterfaces)>('SCardListInterfacesW');
+      expect(SCardListInterfaces, isA<Function>());
+    });
+    test('Can instantiate SCardListReaderGroups', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardListReaderGroups = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> mszGroups,
+              Pointer<Uint32> pcchGroups),
+          int Function(int hContext, Pointer<Utf16> mszGroups,
+              Pointer<Uint32> pcchGroups)>('SCardListReaderGroupsW');
+      expect(SCardListReaderGroups, isA<Function>());
+    });
+    test('Can instantiate SCardListReaders', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardListReaders = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> mszGroups,
+              Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
+          int Function(
+              int hContext,
+              Pointer<Utf16> mszGroups,
+              Pointer<Utf16> mszReaders,
+              Pointer<Uint32> pcchReaders)>('SCardListReadersW');
+      expect(SCardListReaders, isA<Function>());
+    });
+    test('Can instantiate SCardListReadersWithDeviceInstanceId', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardListReadersWithDeviceInstanceId = winscard.lookupFunction<
+              Int32 Function(IntPtr hContext, Pointer<Utf16> szDeviceInstanceId,
+                  Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
+              int Function(int hContext, Pointer<Utf16> szDeviceInstanceId,
+                  Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders)>(
+          'SCardListReadersWithDeviceInstanceIdW');
+      expect(SCardListReadersWithDeviceInstanceId, isA<Function>());
+    });
+    test('Can instantiate SCardLocateCards', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardLocateCards = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> mszCards,
+              Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
+          int Function(
+              int hContext,
+              Pointer<Utf16> mszCards,
+              Pointer<SCARD_READERSTATE> rgReaderStates,
+              int cReaders)>('SCardLocateCardsW');
+      expect(SCardLocateCards, isA<Function>());
+    });
+    test('Can instantiate SCardLocateCardsByATR', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardLocateCardsByATR = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<SCARD_ATRMASK> rgAtrMasks,
+              Uint32 cAtrs,
+              Pointer<SCARD_READERSTATE> rgReaderStates,
+              Uint32 cReaders),
+          int Function(
+              int hContext,
+              Pointer<SCARD_ATRMASK> rgAtrMasks,
+              int cAtrs,
+              Pointer<SCARD_READERSTATE> rgReaderStates,
+              int cReaders)>('SCardLocateCardsByATRW');
+      expect(SCardLocateCardsByATR, isA<Function>());
+    });
+    test('Can instantiate SCardReadCache', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardReadCache = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<GUID> CardIdentifier,
+              Uint32 FreshnessCounter,
+              Pointer<Utf16> LookupName,
+              Pointer<Uint8> Data,
+              Pointer<Uint32> DataLen),
+          int Function(
+              int hContext,
+              Pointer<GUID> CardIdentifier,
+              int FreshnessCounter,
+              Pointer<Utf16> LookupName,
+              Pointer<Uint8> Data,
+              Pointer<Uint32> DataLen)>('SCardReadCacheW');
+      expect(SCardReadCache, isA<Function>());
+    });
+    test('Can instantiate SCardReconnect', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardReconnect = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hCard,
+              Uint32 dwShareMode,
+              Uint32 dwPreferredProtocols,
+              Uint32 dwInitialization,
+              Pointer<Uint32> pdwActiveProtocol),
+          int Function(
+              int hCard,
+              int dwShareMode,
+              int dwPreferredProtocols,
+              int dwInitialization,
+              Pointer<Uint32> pdwActiveProtocol)>('SCardReconnect');
+      expect(SCardReconnect, isA<Function>());
+    });
+    test('Can instantiate SCardReleaseContext', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardReleaseContext = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext),
+          int Function(int hContext)>('SCardReleaseContext');
+      expect(SCardReleaseContext, isA<Function>());
+    });
+    test('Can instantiate SCardReleaseStartedEvent', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardReleaseStartedEvent =
+          winscard.lookupFunction<Void Function(), void Function()>(
+              'SCardReleaseStartedEvent');
+      expect(SCardReleaseStartedEvent, isA<Function>());
+    });
+    test('Can instantiate SCardRemoveReaderFromGroup', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardRemoveReaderFromGroup = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szGroupName),
+          int Function(int hContext, Pointer<Utf16> szReaderName,
+              Pointer<Utf16> szGroupName)>('SCardRemoveReaderFromGroupW');
+      expect(SCardRemoveReaderFromGroup, isA<Function>());
+    });
+    test('Can instantiate SCardSetAttrib', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardSetAttrib = winscard.lookupFunction<
+          Int32 Function(IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr,
+              Uint32 cbAttrLen),
+          int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
+              int cbAttrLen)>('SCardSetAttrib');
+      expect(SCardSetAttrib, isA<Function>());
+    });
+    test('Can instantiate SCardSetCardTypeProviderName', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardSetCardTypeProviderName = winscard.lookupFunction<
+          Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName,
+              Uint32 dwProviderId, Pointer<Utf16> szProvider),
+          int Function(
+              int hContext,
+              Pointer<Utf16> szCardName,
+              int dwProviderId,
+              Pointer<Utf16> szProvider)>('SCardSetCardTypeProviderNameW');
+      expect(SCardSetCardTypeProviderName, isA<Function>());
+    });
+    test('Can instantiate SCardStatus', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardStatus = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hCard,
+              Pointer<Utf16> mszReaderNames,
+              Pointer<Uint32> pcchReaderLen,
+              Pointer<Uint32> pdwState,
+              Pointer<Uint32> pdwProtocol,
+              Pointer<Uint8> pbAtr,
+              Pointer<Uint32> pcbAtrLen),
+          int Function(
+              int hCard,
+              Pointer<Utf16> mszReaderNames,
+              Pointer<Uint32> pcchReaderLen,
+              Pointer<Uint32> pdwState,
+              Pointer<Uint32> pdwProtocol,
+              Pointer<Uint8> pbAtr,
+              Pointer<Uint32> pcbAtrLen)>('SCardStatusW');
+      expect(SCardStatus, isA<Function>());
+    });
+    test('Can instantiate SCardTransmit', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardTransmit = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hCard,
+              Pointer<SCARD_IO_REQUEST> pioSendPci,
+              Pointer<Uint8> pbSendBuffer,
+              Uint32 cbSendLength,
+              Pointer<SCARD_IO_REQUEST> pioRecvPci,
+              Pointer<Uint8> pbRecvBuffer,
+              Pointer<Uint32> pcbRecvLength),
+          int Function(
+              int hCard,
+              Pointer<SCARD_IO_REQUEST> pioSendPci,
+              Pointer<Uint8> pbSendBuffer,
+              int cbSendLength,
+              Pointer<SCARD_IO_REQUEST> pioRecvPci,
+              Pointer<Uint8> pbRecvBuffer,
+              Pointer<Uint32> pcbRecvLength)>('SCardTransmit');
+      expect(SCardTransmit, isA<Function>());
+    });
+    test('Can instantiate SCardWriteCache', () {
+      final winscard = DynamicLibrary.open('winscard.dll');
+      final SCardWriteCache = winscard.lookupFunction<
+          Int32 Function(
+              IntPtr hContext,
+              Pointer<GUID> CardIdentifier,
+              Uint32 FreshnessCounter,
+              Pointer<Utf16> LookupName,
+              Pointer<Uint8> Data,
+              Uint32 DataLen),
+          int Function(
+              int hContext,
+              Pointer<GUID> CardIdentifier,
+              int FreshnessCounter,
+              Pointer<Utf16> LookupName,
+              Pointer<Uint8> Data,
+              int DataLen)>('SCardWriteCacheW');
+      expect(SCardWriteCache, isA<Function>());
+    });
+  });
+
+  group('Test scarddlg functions', () {
+    test('Can instantiate SCardUIDlgSelectCard', () {
+      final scarddlg = DynamicLibrary.open('scarddlg.dll');
+      final SCardUIDlgSelectCard = scarddlg.lookupFunction<
+          Int32 Function(Pointer<OPENCARDNAME_EX> param0),
+          int Function(
+              Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');
+      expect(SCardUIDlgSelectCard, isA<Function>());
+    });
+  });
+
   group('Test dbghelp functions', () {
     test('Can instantiate SymCleanup', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');

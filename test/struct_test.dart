@@ -34,6 +34,9 @@ void main() {
   test('Struct CHAR_INFO is the right size', () {
     expect(sizeOf<CHAR_INFO>(), equals(4));
   });
+  test('Struct COMMPROP is the right size', () {
+    expect(sizeOf<COMMPROP>(), equals(64));
+  });
   test('Struct COR_FIELD_OFFSET is the right size', () {
     expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
   });
@@ -214,8 +217,8 @@ void main() {
   test('Struct COMMCONFIG is the right size', () {
     expect(sizeOf<COMMCONFIG>(), equals(52));
   });
-  test('Struct COMMPROP is the right size', () {
-    expect(sizeOf<COMMPROP>(), equals(64));
+  test('Struct COMMTIMEOUTS is the right size', () {
+    expect(sizeOf<COMMTIMEOUTS>(), equals(20));
   });
   test('Struct COMSTAT is the right size', () {
     expect(sizeOf<COMSTAT>(), equals(12));
@@ -518,6 +521,27 @@ void main() {
   test('Struct NONCLIENTMETRICS is the right size', () {
     expect(sizeOf<NONCLIENTMETRICS>(), equals(504));
   });
+  test('Struct OPENCARD_SEARCH_CRITERIA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OPENCARD_SEARCH_CRITERIA>(), equals(96));
+    } else {
+      expect(sizeOf<OPENCARD_SEARCH_CRITERIA>(), equals(52));
+    }
+  });
+  test('Struct OPENCARDNAME is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OPENCARDNAME>(), equals(176));
+    } else {
+      expect(sizeOf<OPENCARDNAME>(), equals(92));
+    }
+  });
+  test('Struct OPENCARDNAME_EX is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OPENCARDNAME_EX>(), equals(128));
+    } else {
+      expect(sizeOf<OPENCARDNAME_EX>(), equals(72));
+    }
+  });
   test('Struct OPENFILENAME is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<OPENFILENAME>(), equals(152));
@@ -604,6 +628,19 @@ void main() {
   test('Struct SAFEARRAYBOUND is the right size', () {
     expect(sizeOf<SAFEARRAYBOUND>(), equals(8));
   });
+  test('Struct SCARD_ATRMASK is the right size', () {
+    expect(sizeOf<SCARD_ATRMASK>(), equals(76));
+  });
+  test('Struct SCARD_IO_REQUEST is the right size', () {
+    expect(sizeOf<SCARD_IO_REQUEST>(), equals(8));
+  });
+  test('Struct SCARD_READERSTATE is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SCARD_READERSTATE>(), equals(64));
+    } else {
+      expect(sizeOf<SCARD_READERSTATE>(), equals(56));
+    }
+  });
   test('Struct SCROLLBARINFO is the right size', () {
     expect(sizeOf<SCROLLBARINFO>(), equals(60));
   });
@@ -623,6 +660,9 @@ void main() {
     } else {
       expect(sizeOf<SECURITY_DESCRIPTOR>(), equals(20));
     }
+  });
+  test('Struct SHELL_ITEM_RESOURCE is the right size', () {
+    expect(sizeOf<SHELL_ITEM_RESOURCE>(), equals(536));
   });
   test('Struct SHITEMID is the right size', () {
     expect(sizeOf<SHITEMID>(), equals(3));

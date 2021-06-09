@@ -1822,6 +1822,117 @@ class NONCLIENTMETRICS extends Struct {
   external int iPaddedBorderWidth;
 }
 
+/// The OPENCARD_SEARCH_CRITERIA structure is used by the
+/// SCardUIDlgSelectCard function in order to recognize cards that meet the
+/// requirements set forth by the caller. You can, however, call
+/// SCardUIDlgSelectCard without using this structure.
+///
+/// {@category Struct}
+class OPENCARD_SEARCH_CRITERIA extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32()
+  external int nMaxGroupNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32()
+  external int cguidInterfaces;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32()
+  external int nMaxCardNames;
+  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+}
+
+/// The OPENCARDNAME structure contains the information that the
+/// GetOpenCardName function uses to initialize a smart card Select Card
+/// dialog box. Calling SCardUIDlgSelectCard with OPENCARDNAME_EX is
+/// recommended over calling GetOpenCardName with OPENCARDNAME.
+/// OPENCARDNAME is provided for backward compatibility.
+///
+/// {@category Struct}
+class OPENCARDNAME extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hSCardContext;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32()
+  external int nMaxGroupNames;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32()
+  external int nMaxCardNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32()
+  external int cguidInterfaces;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32()
+  external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32()
+  external int nMaxCard;
+  external Pointer<Utf16> lpstrTitle;
+  @Uint32()
+  external int dwFlags;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+  @Uint32()
+  external int dwActiveProtocol;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+  @IntPtr()
+  external int hCardHandle;
+}
+
+/// The OPENCARDNAME_EX structure contains the information that the
+/// SCardUIDlgSelectCard function uses to initialize a smart card Select
+/// Card dialog box.
+///
+/// {@category Struct}
+class OPENCARDNAME_EX extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  @IntPtr()
+  external int hSCardContext;
+  @IntPtr()
+  external int hwndOwner;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<Utf16> lpstrTitle;
+  external Pointer<Utf16> lpstrSearchDesc;
+  @IntPtr()
+  external int hIcon;
+  external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32()
+  external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32()
+  external int nMaxCard;
+  @Uint32()
+  external int dwActiveProtocol;
+  @IntPtr()
+  external int hCardHandle;
+}
+
 /// Contains information that the GetOpenFileName and GetSaveFileName
 /// functions use to initialize an Open or Save As dialog box. After the
 /// user closes the dialog box, the system returns information about the
@@ -2163,6 +2274,51 @@ class SAFEARRAYBOUND extends Struct {
   external int cElements;
   @Int32()
   external int lLbound;
+}
+
+/// The SCARD_ATRMASK structure is used by the SCardLocateCardsByATR
+/// function to locate cards.
+///
+/// {@category Struct}
+class SCARD_ATRMASK extends Struct {
+  @Uint32()
+  external int cbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
+  @Array(36)
+  external Array<Uint8> rgbMask;
+}
+
+/// The SCARD_IO_REQUEST structure begins a protocol control information
+/// structure. Any protocol-specific information then immediately follows
+/// this structure. The entire length of the structure must be aligned with
+/// the underlying hardware architecture word size. For example, in Win32
+/// the length of any PCI information must be a multiple of four bytes so
+/// that it aligns on a 32-bit boundary.
+///
+/// {@category Struct}
+class SCARD_IO_REQUEST extends Struct {
+  @Uint32()
+  external int dwProtocol;
+  @Uint32()
+  external int cbPciLength;
+}
+
+/// The SCARD_READERSTATE structure is used by functions for tracking smart
+/// cards within readers.
+///
+/// {@category Struct}
+class SCARD_READERSTATE extends Struct {
+  external Pointer<Utf16> szReader;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwCurrentState;
+  @Uint32()
+  external int dwEventState;
+  @Uint32()
+  external int cbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
 }
 
 /// The SCROLLBARINFO structure contains scroll bar information.

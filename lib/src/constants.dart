@@ -7044,3 +7044,127 @@ class TOKEN_INFORMATION_CLASS {
   static const TokenIsSandboxed = 47;
   static const TokenOriginatingProcessTrustLevel = 48;
 }
+
+// -----------------------------------------------------------------------------
+// Smartcard constants
+// -----------------------------------------------------------------------------
+
+/// A smart card holder verification (CHV) attempt failed.
+const SCARD_AUDIT_CHV_FAILURE = 0x0;
+
+/// A smart card holder verification (CHV) attempt succeeded.
+const SCARD_AUDIT_CHV_SUCCESS = 0x1;
+
+/// No transmission protocol is active.
+const SCARD_PROTOCOL_UNDEFINED = 0x00000000;
+
+/// The ISO 7816/3 T=0 protocol is in use.
+const SCARD_PROTOCOL_T0 = 0x00000001;
+
+/// The ISO 7816/3 T=1 protocol is in use.
+const SCARD_PROTOCOL_T1 = 0x00000002;
+
+/// The Raw Transfer protocol is in use.
+const SCARD_PROTOCOL_RAW = 0x00010000;
+
+/// Bitwise OR combination of both of the two International Standards
+/// Organization (IS0) transmission protocols SCARD_PROTOCOL_T0 and
+/// SCARD_PROTOCOL_T1.
+const SCARD_PROTOCOL_Tx = (SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1);
+
+/// Use the implicit protocol of the card with standard parameters.
+const SCARD_PROTOCOL_DEFAULT = 0x80000000;
+
+/// Use the best possible communication parameters.
+const SCARD_PROTOCOL_OPTIMAL = 0x00000000;
+
+/// Remove power from the smart card.
+const SCARD_POWER_DOWN = 0;
+
+/// Power down the smart card and power it up again.
+const SCARD_COLD_RESET = 1;
+
+/// Reset the smart card without removing power.
+const SCARD_WARM_RESET = 2;
+
+/// The reader driver has no information concerning the current state of the
+/// reader.
+const SCARD_UNKNOWN = 0;
+
+/// There is no card in the reader.
+const SCARD_ABSENT = 1;
+
+/// There is a card in the reader, but it has not been moved into position for
+/// use.
+const SCARD_PRESENT = 2;
+
+/// There is a card in the reader in position for use. The card is not powered.
+const SCARD_SWALLOWED = 3;
+
+/// Power is being provided to the card, but the reader driver is unaware of the
+/// mode of the card.
+const SCARD_POWERED = 4;
+
+/// The card has been reset and is awaiting PTS negotiation.
+const SCARD_NEGOTIABLE = 5;
+
+/// The card has been reset and specific communication protocols have been
+/// established.
+const SCARD_SPECIFIC = 6;
+
+/// This application is not willing to share the card with other applications.
+const SCARD_SHARE_EXCLUSIVE = 1;
+
+/// This application is willing to share the card with other applications.
+const SCARD_SHARE_SHARED = 2;
+
+/// This application is allocating the reader for its private use, and will be
+/// controlling it directly. No other applications are allowed access to it.
+const SCARD_SHARE_DIRECT = 3;
+
+/// Don't do anything special on close.
+const SCARD_LEAVE_CARD = 0;
+
+/// Reset the card on close.
+const SCARD_RESET_CARD = 1;
+
+/// Power down the card on close.
+const SCARD_UNPOWER_CARD = 2;
+
+/// Eject the card on close.
+const SCARD_EJECT_CARD = 3;
+
+/// Database operations are performed within the domain of the user.
+const SCARD_SCOPE_USER = 0;
+
+/// Database operations are performed within the domain of the current terminal.
+const SCARD_SCOPE_TERMINAL = 1;
+
+/// Database operations are performed within the domain of the system. The
+/// calling application must have appropriate access permissions for any
+/// database actions.
+const SCARD_SCOPE_SYSTEM = 2;
+
+/// The function retrieves the name of the smart card's primary service provider as a GUID string.
+const SCARD_PROVIDER_PRIMARY = 1;
+
+/// The function retrieves the name of the cryptographic service provider.
+const SCARD_PROVIDER_CSP = 2;
+
+/// The function retrieves the name of the smart card key storage provider (KSP).
+const SCARD_PROVIDER_KSP = 3;
+
+/// The function retrieves the name of the card module.
+const SCARD_PROVIDER_CARD_MODULE = 0x80000001;
+
+/// Selects the smart card if only one smart card meets the criteria, or returns
+/// information about the user's selection if more than one smart card meets the
+/// criteria.
+const SC_DLG_MINIMAL_UI = 0x01;
+
+/// Selects the first available card.
+const SC_DLG_NO_UI = 0x02;
+
+/// Connects to the card selected by the user from the smart card Select Card
+/// dialog box.
+const SC_DLG_FORCE_UI = 0x04;

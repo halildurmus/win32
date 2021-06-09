@@ -141,6 +141,9 @@ void main()
     printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
     printf("  'NONCLIENTMETRICS': %zu,\n", sizeof(NONCLIENTMETRICSW));
+    printf("  'OPENCARD_SEARCH_CRITERIA': %zu,\n", sizeof(OPENCARD_SEARCH_CRITERIAW));
+    printf("  'OPENCARDNAME': %zu,\n", sizeof(OPENCARDNAMEW));
+    printf("  'OPENCARDNAME_EX': %zu,\n", sizeof(OPENCARDNAME_EXW));
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAMEW));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("  'OSVERSIONINFOEXW': %zu,\n", sizeof(OSVERSIONINFOEXW));
@@ -159,6 +162,9 @@ void main()
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
     printf("  'SAFEARRAYBOUND': %zu,\n", sizeof(SAFEARRAYBOUND));
+    printf("  'SCARD_ATRMASK': %zu,\n", sizeof(SCARD_ATRMASK));
+    printf("  'SCARD_IO_REQUEST': %zu,\n", sizeof(SCARD_IO_REQUEST));
+    printf("  'SCARD_READERSTATE': %zu,\n", sizeof(SCARD_READERSTATEW));
     printf("  'SCROLLBARINFO': %zu,\n", sizeof(SCROLLBARINFO));
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));

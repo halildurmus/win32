@@ -122,8 +122,7 @@ void main() {
   });
 
   test('OLECHAR is represented correctly', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.OleAutomation.Apis')!;
+    final typedef = scope.findTypeDef('Windows.Win32.Foundation.Apis')!;
     final api = typedef.findMethod('SysAllocString')!;
     final type = api.parameters.first.typeIdentifier; // OLECHAR *
     final typeProjection = TypeProjector(type);

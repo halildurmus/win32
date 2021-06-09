@@ -339,6 +339,18 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW",
         "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
     },
+    "OPENCARD_SEARCH_CRITERIA": {
+        "namespace": "Windows.Win32.Security.Credentials.OPENCARD_SEARCH_CRITERIAW",
+        "comment": "The OPENCARD_SEARCH_CRITERIA structure is used by the SCardUIDlgSelectCard function in order to recognize cards that meet the requirements set forth by the caller. You can, however, call SCardUIDlgSelectCard without using this structure."
+    },
+    "OPENCARDNAME": {
+        "namespace": "Windows.Win32.Security.Credentials.OPENCARDNAMEW",
+        "comment": "The OPENCARDNAME structure contains the information that the GetOpenCardName function uses to initialize a smart card Select Card dialog box. Calling SCardUIDlgSelectCard with OPENCARDNAME_EX is recommended over calling GetOpenCardName with OPENCARDNAME. OPENCARDNAME is provided for backward compatibility."
+    },
+    "OPENCARDNAME_EX": {
+        "namespace": "Windows.Win32.Security.Credentials.OPENCARDNAME_EXW",
+        "comment": "The OPENCARDNAME_EX structure contains the information that the SCardUIDlgSelectCard function uses to initialize a smart card Select Card dialog box."
+    },
     "OPENFILENAME": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.OPENFILENAMEW",
         "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -410,6 +422,18 @@
     "SAFEARRAYBOUND": {
         "namespace": "Windows.Win32.System.OleAutomation.SAFEARRAYBOUND",
         "comment": "Represents the bounds of one dimension of the array."
+    },
+    "SCARD_ATRMASK": {
+        "namespace": "Windows.Win32.Security.Credentials.SCARD_ATRMASK",
+        "comment": "The SCARD_ATRMASK structure is used by the SCardLocateCardsByATR function to locate cards."
+    },
+    "SCARD_IO_REQUEST": {
+        "namespace": "Windows.Win32.Security.Credentials.SCARD_IO_REQUEST",
+        "comment": "The SCARD_IO_REQUEST structure begins a protocol control information structure. Any protocol-specific information then immediately follows this structure. The entire length of the structure must be aligned with the underlying hardware architecture word size. For example, in Win32 the length of any PCI information must be a multiple of four bytes so that it aligns on a 32-bit boundary."
+    },
+    "SCARD_READERSTATE": {
+        "namespace": "Windows.Win32.Security.Credentials.SCARD_READERSTATEW",
+        "comment": "The SCARD_READERSTATE structure is used by functions for tracking smart cards within readers."
     },
     "SCROLLBARINFO": {
         "namespace": "Windows.Win32.UI.Controls.SCROLLBARINFO",

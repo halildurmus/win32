@@ -120,3 +120,16 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 /// window.
 typedef WindowProc = IntPtr Function(
     IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
+
+/// Application-defined callback function that provides special verification
+/// for smart card searches.
+typedef OpenCardCheckProc = Int32 Function(IntPtr, IntPtr, Pointer);
+
+/// Application-defined callback function that allows callers to perform
+/// additional processing to connect to the smart card.
+typedef OpenCardConnProc = IntPtr Function(
+    IntPtr, Pointer<Utf16>, Pointer<Utf16>, Pointer);
+
+/// Application-defined callback function that can be used for disconnecting
+/// smart cards.
+typedef OpenCardDisconnProc = Void Function(IntPtr, IntPtr, Pointer);
