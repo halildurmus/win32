@@ -143,6 +143,7 @@ const FCONTROL = 0x08;
 const FALT = 0x10;
 const LF_FACESIZE = 32;
 const LF_FULLFACESIZE = 64;
+const HWND_DESKTOP = 0;
 
 // -----------------------------------------------------------------------------
 // System-wide parameters
@@ -586,6 +587,27 @@ class PROC_THREAD_ATTRIBUTE_NUM {
   static const ProcThreadAttributeDesktopAppPolicy = 18;
   static const ProcThreadAttributePseudoConsole = 22;
 }
+
+// Common Control send messages
+const UDM_SETRANGE = (WM_USER + 101);
+const UDM_GETRANGE = (WM_USER + 102);
+const UDM_SETPOS = (WM_USER + 103);
+const UDM_GETPOS = (WM_USER + 104);
+const UDM_SETBUDDY = (WM_USER + 105);
+const UDM_GETBUDDY = (WM_USER + 106);
+const UDM_SETACCEL = (WM_USER + 107);
+const UDM_GETACCEL = (WM_USER + 108);
+const UDM_SETBASE = (WM_USER + 109);
+const UDM_GETBASE = (WM_USER + 110);
+const UDM_SETRANGE32 = (WM_USER + 111);
+const UDM_GETRANGE32 = (WM_USER + 112);
+const UDM_SETUNICODEFORMAT = CCM_SETUNICODEFORMAT;
+const UDM_GETUNICODEFORMAT = CCM_GETUNICODEFORMAT;
+const UDM_SETPOS32 = (WM_USER + 113);
+const UDM_GETPOS32 = (WM_USER + 114);
+const CCM_FIRST = 0x2000;
+const CCM_SETUNICODEFORMAT = (CCM_FIRST + 5);
+const CCM_GETUNICODEFORMAT = (CCM_FIRST + 6);
 
 // Process dwCreationFlags info
 const DEBUG_PROCESS = 0x00000001;

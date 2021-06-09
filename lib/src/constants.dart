@@ -3508,6 +3508,49 @@ const SB_RIGHT = 7;
 const SB_ENDSCROLL = 8;
 
 // -----------------------------------------------------------------------------
+// Up/Down Control styles
+// -----------------------------------------------------------------------------
+
+/// Causes the position to "wrap" if it is incremented or decremented beyond the
+/// ending or beginning of the range.
+const UDS_WRAP = 0x0001;
+
+/// Causes the up-down control to set the text of the buddy window (using the
+/// WM_SETTEXT message) when the position changes. The text consists of the
+/// position formatted as a decimal or hexadecimal string.
+const UDS_SETBUDDYINT = 0x0002;
+
+/// Positions the up-down control next to the right edge of the buddy window.
+/// The width of the buddy window is decreased to accommodate the width of the
+/// up-down control.
+const UDS_ALIGNRIGHT = 0x0004;
+
+/// Positions the up-down control next to the left edge of the buddy window. The
+/// buddy window is moved to the right, and its width is decreased to
+/// accommodate the width of the up-down control.
+const UDS_ALIGNLEFT = 0x0008;
+
+/// Automatically selects the previous window in the z-order as the up-down
+/// control's buddy window.
+const UDS_AUTOBUDDY = 0x0010;
+
+/// Causes the up-down control to increment and decrement the position when the
+/// UP ARROW and DOWN ARROW keys are pressed.
+const UDS_ARROWKEYS = 0x0020;
+
+/// Causes the up-down control's arrows to point left and right instead of up
+/// and down.
+const UDS_HORZ = 0x0040;
+
+/// Does not insert a thousands separator between every three decimal digits.
+const UDS_NOTHOUSANDS = 0x0080;
+
+/// Causes the control to exhibit "hot tracking" behavior. That is, it
+/// highlights the UP ARROW and DOWN ARROW on the control as the pointer passes
+/// over them.
+const UDS_HOTTRACK = 0x0100;
+
+// -----------------------------------------------------------------------------
 // Progress Bar styles
 // -----------------------------------------------------------------------------
 
