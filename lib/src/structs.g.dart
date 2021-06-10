@@ -730,6 +730,33 @@ class DIBSECTION extends Struct {
   external int dsOffset;
 }
 
+/// Describes the geometry of disk devices and media.
+///
+/// {@category Struct}
+class DISK_GEOMETRY extends Struct {
+  @Int64()
+  external int Cylinders;
+  @Uint32()
+  external int MediaType;
+  @Uint32()
+  external int TracksPerCylinder;
+  @Uint32()
+  external int SectorsPerTrack;
+  @Uint32()
+  external int BytesPerSector;
+}
+
+/// Describes the extended geometry of disk devices and media.
+///
+/// {@category Struct}
+class DISK_GEOMETRY_EX extends Struct {
+  external DISK_GEOMETRY Geometry;
+  @Int64()
+  external int DiskSize;
+  @Array(1)
+  external Array<Uint8> Data;
+}
+
 /// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}

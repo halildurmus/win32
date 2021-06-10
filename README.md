@@ -105,6 +105,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
+| `diskinfo.dart`    | Use `DeviceIoControl()` for direct device operations      |
 | `dump.dart`        | Use debugger libraries to print DLL exported functions    |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `filever.dart`     | Getting file version information from the file resource   |
@@ -119,7 +120,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `notepad\`         | Lightweight replica of the Windows notepad applet         |
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `pipe.dart`        | Shows use of named pipes for interprocess communication   |
-| `play_sound.dart`  | Plays a WAV file through the Windows PlaySound API        |
+| `play_sound.dart`  | Plays a WAV file through the Windows `PlaySound` API      |
 | `screenshot.dart`  | Takes a screenshot of the current desktop                 |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |

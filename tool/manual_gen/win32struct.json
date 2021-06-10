@@ -139,6 +139,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.DIBSECTION",
         "comment": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function."
     },
+    "DISK_GEOMETRY": {
+        "namespace": "Windows.Win32.Storage.FileSystem.DISK_GEOMETRY",
+        "comment": "Describes the geometry of disk devices and media."
+    },
+    "DISK_GEOMETRY_EX": {
+        "namespace": "Windows.Win32.Storage.FileSystem.DISK_GEOMETRY_EX",
+        "comment": "Describes the extended geometry of disk devices and media."
+    },
     "DISPPARAMS": {
         "namespace": "Windows.Win32.System.OleAutomation.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."

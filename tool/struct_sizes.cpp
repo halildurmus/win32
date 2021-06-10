@@ -91,6 +91,8 @@ void main()
     printf("  'DCB': %zu,\n", sizeof(DCB));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
+    printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
+    printf("  'DISK_GEOMETRY_EX': %zu,\n", sizeof(DISK_GEOMETRY_EX));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
     printf("  'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
     printf("  'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));
