@@ -71,6 +71,7 @@ void main()
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BSMINFO': %zu,\n", sizeof(BSMINFO));
+    printf("  'BY_HANDLE_FILE_INFORMATION': %zu,\n", sizeof(BY_HANDLE_FILE_INFORMATION));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
@@ -147,6 +148,7 @@ void main()
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAMEW));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("  'OSVERSIONINFOEXW': %zu,\n", sizeof(OSVERSIONINFOEXW));
+    printf("  'OVERLAPPED_ENTRY': %zu,\n", sizeof(OVERLAPPED_ENTRY));
     printf("  'PAINTSTRUCT': %zu,\n", sizeof(PAINTSTRUCT));
     printf("  'PALETTEENTRY': %zu,\n", sizeof(PALETTEENTRY));
     printf("  'PARAMDESC': %zu,\n", sizeof(PARAMDESC));

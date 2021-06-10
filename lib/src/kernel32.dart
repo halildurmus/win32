@@ -205,6 +205,56 @@ int CallNamedPipe(
       nOutBufferSize, lpBytesRead, nTimeOut);
 }
 
+/// Cancels all pending input and output (I/O) operations that are issued
+/// by the calling thread for the specified file. The function does not
+/// cancel I/O operations that other threads issue for a file handle.
+///
+/// ```c
+/// BOOL CancelIo(
+///   HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int CancelIo(int hFile) {
+  final _CancelIo = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+      int Function(int hFile)>('CancelIo');
+  return _CancelIo(hFile);
+}
+
+/// Marks any outstanding I/O operations for the specified file handle. The
+/// function only cancels I/O operations in the current process, regardless
+/// of which thread created the I/O operation.
+///
+/// ```c
+/// BOOL CancelIoEx(
+///   HANDLE       hFile,
+///   LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int CancelIoEx(int hFile, Pointer<OVERLAPPED> lpOverlapped) {
+  final _CancelIoEx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<OVERLAPPED> lpOverlapped),
+      int Function(int hFile, Pointer<OVERLAPPED> lpOverlapped)>('CancelIoEx');
+  return _CancelIoEx(hFile, lpOverlapped);
+}
+
+/// Marks pending synchronous I/O operations that are issued by the
+/// specified thread as canceled.
+///
+/// ```c
+/// BOOL CancelSynchronousIo(
+/// HANDLE hThread
+/// );
+/// ```
+/// {@category kernel32}
+int CancelSynchronousIo(int hThread) {
+  final _CancelSynchronousIo = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hThread),
+      int Function(int hThread)>('CancelSynchronousIo');
+  return _CancelSynchronousIo(hThread);
+}
+
 /// Determines whether the specified process is being debugged.
 ///
 /// ```c
@@ -472,6 +522,34 @@ int CreateFile(
       hTemplateFile);
 }
 
+/// Creates an input/output (I/O) completion port and associates it with a
+/// specified file handle, or creates an I/O completion port that is not
+/// yet associated with a file handle, allowing association at a later
+/// time.
+///
+/// ```c
+/// HANDLE CreateIoCompletionPort(
+///   HANDLE    FileHandle,
+///   HANDLE    ExistingCompletionPort,
+///   ULONG_PTR CompletionKey,
+///   DWORD     NumberOfConcurrentThreads
+/// );
+/// ```
+/// {@category kernel32}
+int CreateIoCompletionPort(int FileHandle, int ExistingCompletionPort,
+    int CompletionKey, int NumberOfConcurrentThreads) {
+  final _CreateIoCompletionPort = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr FileHandle, IntPtr ExistingCompletionPort,
+          IntPtr CompletionKey, Uint32 NumberOfConcurrentThreads),
+      int Function(
+          int FileHandle,
+          int ExistingCompletionPort,
+          int CompletionKey,
+          int NumberOfConcurrentThreads)>('CreateIoCompletionPort');
+  return _CreateIoCompletionPort(FileHandle, ExistingCompletionPort,
+      CompletionKey, NumberOfConcurrentThreads);
+}
+
 /// Creates an instance of a named pipe and returns a handle for subsequent
 /// pipe operations. A named pipe server process uses this function either
 /// to create the first instance of a specific named pipe and establish its
@@ -710,6 +788,54 @@ int DeleteFile(Pointer<Utf16> lpFileName) {
       Int32 Function(Pointer<Utf16> lpFileName),
       int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
   return _DeleteFile(lpFileName);
+}
+
+/// Sends a control code directly to a specified device driver, causing the
+/// corresponding device to perform the corresponding operation.
+///
+/// ```c
+/// BOOL DeviceIoControl(
+///   HANDLE       hDevice,
+///   DWORD        dwIoControlCode,
+///   LPVOID       lpInBuffer,
+///   DWORD        nInBufferSize,
+///   LPVOID       lpOutBuffer,
+///   DWORD        nOutBufferSize,
+///   LPDWORD      lpBytesReturned,
+///   LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int DeviceIoControl(
+    int hDevice,
+    int dwIoControlCode,
+    Pointer lpInBuffer,
+    int nInBufferSize,
+    Pointer lpOutBuffer,
+    int nOutBufferSize,
+    Pointer<Uint32> lpBytesReturned,
+    Pointer<OVERLAPPED> lpOverlapped) {
+  final _DeviceIoControl = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hDevice,
+          Uint32 dwIoControlCode,
+          Pointer lpInBuffer,
+          Uint32 nInBufferSize,
+          Pointer lpOutBuffer,
+          Uint32 nOutBufferSize,
+          Pointer<Uint32> lpBytesReturned,
+          Pointer<OVERLAPPED> lpOverlapped),
+      int Function(
+          int hDevice,
+          int dwIoControlCode,
+          Pointer lpInBuffer,
+          int nInBufferSize,
+          Pointer lpOutBuffer,
+          int nOutBufferSize,
+          Pointer<Uint32> lpBytesReturned,
+          Pointer<OVERLAPPED> lpOverlapped)>('DeviceIoControl');
+  return _DeviceIoControl(hDevice, dwIoControlCode, lpInBuffer, nInBufferSize,
+      lpOutBuffer, nOutBufferSize, lpBytesReturned, lpOverlapped);
 }
 
 /// Disconnects the server end of a named pipe instance from a client
@@ -1585,6 +1711,30 @@ int GetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) {
   return _GetCommTimeouts(hFile, lpCommTimeouts);
 }
 
+/// Retrieves the actual number of bytes of disk storage used to store a
+/// specified file. If the file is located on a volume that supports
+/// compression and the file is compressed, the value obtained is the
+/// compressed size of the specified file. If the file is located on a
+/// volume that supports sparse files and the file is a sparse file, the
+/// value obtained is the sparse size of the specified file.
+///
+/// ```c
+/// DWORD GetCompressedFileSizeW(
+///   LPCWSTR lpFileName,
+///   LPDWORD lpFileSizeHigh
+/// );
+/// ```
+/// {@category kernel32}
+int GetCompressedFileSize(
+    Pointer<Utf16> lpFileName, Pointer<Uint32> lpFileSizeHigh) {
+  final _GetCompressedFileSize = _kernel32.lookupFunction<
+      Uint32 Function(
+          Pointer<Utf16> lpFileName, Pointer<Uint32> lpFileSizeHigh),
+      int Function(Pointer<Utf16> lpFileName,
+          Pointer<Uint32> lpFileSizeHigh)>('GetCompressedFileSizeW');
+  return _GetCompressedFileSize(lpFileName, lpFileSizeHigh);
+}
+
 /// Retrieves the NetBIOS name of the local computer. This name is
 /// established at system startup, when the system reads it from the
 /// registry.
@@ -1794,6 +1944,42 @@ int GetDefaultCommConfig(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
   return _GetDefaultCommConfig(lpszName, lpCC, lpdwSize);
 }
 
+/// Retrieves information about the specified disk, including the amount of
+/// free space on the disk.
+///
+/// ```c
+/// BOOL GetDiskFreeSpaceW(
+///   LPCWSTR lpRootPathName,
+///   LPDWORD lpSectorsPerCluster,
+///   LPDWORD lpBytesPerSector,
+///   LPDWORD lpNumberOfFreeClusters,
+///   LPDWORD lpTotalNumberOfClusters
+/// );
+/// ```
+/// {@category kernel32}
+int GetDiskFreeSpace(
+    Pointer<Utf16> lpRootPathName,
+    Pointer<Uint32> lpSectorsPerCluster,
+    Pointer<Uint32> lpBytesPerSector,
+    Pointer<Uint32> lpNumberOfFreeClusters,
+    Pointer<Uint32> lpTotalNumberOfClusters) {
+  final _GetDiskFreeSpace = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpRootPathName,
+          Pointer<Uint32> lpSectorsPerCluster,
+          Pointer<Uint32> lpBytesPerSector,
+          Pointer<Uint32> lpNumberOfFreeClusters,
+          Pointer<Uint32> lpTotalNumberOfClusters),
+      int Function(
+          Pointer<Utf16> lpRootPathName,
+          Pointer<Uint32> lpSectorsPerCluster,
+          Pointer<Uint32> lpBytesPerSector,
+          Pointer<Uint32> lpNumberOfFreeClusters,
+          Pointer<Uint32> lpTotalNumberOfClusters)>('GetDiskFreeSpaceW');
+  return _GetDiskFreeSpace(lpRootPathName, lpSectorsPerCluster,
+      lpBytesPerSector, lpNumberOfFreeClusters, lpTotalNumberOfClusters);
+}
+
 /// Retrieves the application-specific portion of the search path used to
 /// locate DLLs for the application.
 ///
@@ -1812,6 +1998,22 @@ int GetDllDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) {
   return _GetDllDirectory(nBufferLength, lpBuffer);
 }
 
+/// Determines whether a disk drive is a removable, fixed, CD-ROM, RAM
+/// disk, or network drive.
+///
+/// ```c
+/// UINT GetDriveTypeW(
+///   LPCWSTR lpRootPathName
+/// );
+/// ```
+/// {@category kernel32}
+int GetDriveType(Pointer<Utf16> lpRootPathName) {
+  final _GetDriveType = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpRootPathName),
+      int Function(Pointer<Utf16> lpRootPathName)>('GetDriveTypeW');
+  return _GetDriveType(lpRootPathName);
+}
+
 /// Retrieves the termination status of the specified process.
 ///
 /// ```c
@@ -1826,6 +2028,21 @@ int GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) {
       int Function(
           int hProcess, Pointer<Uint32> lpExitCode)>('GetExitCodeProcess');
   return _GetExitCodeProcess(hProcess, lpExitCode);
+}
+
+/// Retrieves file system attributes for a specified file or directory.
+///
+/// ```c
+/// DWORD GetFileAttributesW(
+///   LPCWSTR lpFileName
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileAttributes(Pointer<Utf16> lpFileName) {
+  final _GetFileAttributes = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpFileName),
+      int Function(Pointer<Utf16> lpFileName)>('GetFileAttributesW');
+  return _GetFileAttributes(lpFileName);
 }
 
 /// Retrieves attributes for a specified file or directory.
@@ -1846,6 +2063,119 @@ int GetFileAttributesEx(
       int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
           Pointer lpFileInformation)>('GetFileAttributesExW');
   return _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
+}
+
+/// Retrieves file information for the specified file.
+///
+/// ```c
+/// BOOL GetFileInformationByHandle(
+///   HANDLE                       hFile,
+///   LPBY_HANDLE_FILE_INFORMATION lpFileInformation
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileInformationByHandle(
+    int hFile, Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation) {
+  final _GetFileInformationByHandle = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hFile, Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation),
+      int Function(
+          int hFile,
+          Pointer<BY_HANDLE_FILE_INFORMATION>
+              lpFileInformation)>('GetFileInformationByHandle');
+  return _GetFileInformationByHandle(hFile, lpFileInformation);
+}
+
+/// Retrieves the size of the specified file, in bytes. It is recommended
+/// that you use GetFileSizeEx.
+///
+/// ```c
+/// DWORD GetFileSize(
+///   HANDLE  hFile,
+///   LPDWORD lpFileSizeHigh
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileSize(int hFile, Pointer<Uint32> lpFileSizeHigh) {
+  final _GetFileSize = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hFile, Pointer<Uint32> lpFileSizeHigh),
+      int Function(int hFile, Pointer<Uint32> lpFileSizeHigh)>('GetFileSize');
+  return _GetFileSize(hFile, lpFileSizeHigh);
+}
+
+/// Retrieves the size of the specified file.
+///
+/// ```c
+/// BOOL GetFileSizeEx(
+///   HANDLE         hFile,
+///   PLARGE_INTEGER lpFileSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileSizeEx(int hFile, Pointer<Int64> lpFileSize) {
+  final _GetFileSizeEx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<Int64> lpFileSize),
+      int Function(int hFile, Pointer<Int64> lpFileSize)>('GetFileSizeEx');
+  return _GetFileSizeEx(hFile, lpFileSize);
+}
+
+/// Retrieves the file type of the specified file.
+///
+/// ```c
+/// DWORD GetFileType(
+///   HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileType(int hFile) {
+  final _GetFileType = _kernel32.lookupFunction<Uint32 Function(IntPtr hFile),
+      int Function(int hFile)>('GetFileType');
+  return _GetFileType(hFile);
+}
+
+/// Retrieves the final path for the specified file.
+///
+/// ```c
+/// DWORD GetFinalPathNameByHandleW(
+///   HANDLE hFile,
+///   LPWSTR lpszFilePath,
+///   DWORD  cchFilePath,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int GetFinalPathNameByHandle(
+    int hFile, Pointer<Utf16> lpszFilePath, int cchFilePath, int dwFlags) {
+  final _GetFinalPathNameByHandle = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hFile, Pointer<Utf16> lpszFilePath,
+          Uint32 cchFilePath, Uint32 dwFlags),
+      int Function(int hFile, Pointer<Utf16> lpszFilePath, int cchFilePath,
+          int dwFlags)>('GetFinalPathNameByHandleW');
+  return _GetFinalPathNameByHandle(hFile, lpszFilePath, cchFilePath, dwFlags);
+}
+
+/// Retrieves the full path and file name of the specified file.
+///
+/// ```c
+/// DWORD GetFullPathNameW(
+///   LPCWSTR lpFileName,
+///   DWORD   nBufferLength,
+///   LPWSTR  lpBuffer,
+///   LPWSTR  *lpFilePart
+/// );
+/// ```
+/// {@category kernel32}
+int GetFullPathName(Pointer<Utf16> lpFileName, int nBufferLength,
+    Pointer<Utf16> lpBuffer, Pointer<Pointer<Utf16>> lpFilePart) {
+  final _GetFullPathName = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpFileName, Uint32 nBufferLength,
+          Pointer<Utf16> lpBuffer, Pointer<Pointer<Utf16>> lpFilePart),
+      int Function(
+          Pointer<Utf16> lpFileName,
+          int nBufferLength,
+          Pointer<Utf16> lpBuffer,
+          Pointer<Pointer<Utf16>> lpFilePart)>('GetFullPathNameW');
+  return _GetFullPathName(lpFileName, nBufferLength, lpBuffer, lpFilePart);
 }
 
 /// Retrieves certain properties of an object handle.
@@ -1929,6 +2259,18 @@ void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) {
       Void Function(Pointer<SYSTEMTIME> lpSystemTime),
       void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
   return _GetLocalTime(lpSystemTime);
+}
+
+/// Retrieves a bitmask representing the currently available disk drives.
+///
+/// ```c
+/// DWORD GetLogicalDrives();
+/// ```
+/// {@category kernel32}
+int GetLogicalDrives() {
+  final _GetLogicalDrives = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetLogicalDrives');
+  return _GetLogicalDrives();
 }
 
 /// Fills a buffer with strings that specify valid drives in the system.
@@ -2209,6 +2551,70 @@ void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) {
   return _GetNativeSystemInfo(lpSystemInfo);
 }
 
+/// Retrieves the results of an overlapped operation on the specified file,
+/// named pipe, or communications device. To specify a timeout interval or
+/// wait on an alertable thread, use GetOverlappedResultEx.
+///
+/// ```c
+/// BOOL GetOverlappedResult(
+///   HANDLE       hFile,
+///   LPOVERLAPPED lpOverlapped,
+///   LPDWORD      lpNumberOfBytesTransferred,
+///   BOOL         bWait
+/// );
+/// ```
+/// {@category kernel32}
+int GetOverlappedResult(int hFile, Pointer<OVERLAPPED> lpOverlapped,
+    Pointer<Uint32> lpNumberOfBytesTransferred, int bWait) {
+  final _GetOverlappedResult = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<OVERLAPPED> lpOverlapped,
+          Pointer<Uint32> lpNumberOfBytesTransferred, Int32 bWait),
+      int Function(
+          int hFile,
+          Pointer<OVERLAPPED> lpOverlapped,
+          Pointer<Uint32> lpNumberOfBytesTransferred,
+          int bWait)>('GetOverlappedResult');
+  return _GetOverlappedResult(
+      hFile, lpOverlapped, lpNumberOfBytesTransferred, bWait);
+}
+
+/// Retrieves the results of an overlapped operation on the specified file,
+/// named pipe, or communications device within the specified time-out
+/// interval. The calling thread can perform an alertable wait.
+///
+/// ```c
+/// BOOL GetOverlappedResultEx(
+///   HANDLE       hFile,
+///   LPOVERLAPPED lpOverlapped,
+///   LPDWORD      lpNumberOfBytesTransferred,
+///   DWORD        dwMilliseconds,
+///   BOOL         bAlertable
+/// );
+/// ```
+/// {@category kernel32}
+int GetOverlappedResultEx(
+    int hFile,
+    Pointer<OVERLAPPED> lpOverlapped,
+    Pointer<Uint32> lpNumberOfBytesTransferred,
+    int dwMilliseconds,
+    int bAlertable) {
+  final _GetOverlappedResultEx = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hFile,
+          Pointer<OVERLAPPED> lpOverlapped,
+          Pointer<Uint32> lpNumberOfBytesTransferred,
+          Uint32 dwMilliseconds,
+          Int32 bAlertable),
+      int Function(
+          int hFile,
+          Pointer<OVERLAPPED> lpOverlapped,
+          Pointer<Uint32> lpNumberOfBytesTransferred,
+          int dwMilliseconds,
+          int bAlertable)>('GetOverlappedResultEx');
+  return _GetOverlappedResultEx(hFile, lpOverlapped, lpNumberOfBytesTransferred,
+      dwMilliseconds, bAlertable);
+}
+
 /// Retrieves the amount of RAM that is physically installed on the
 /// computer.
 ///
@@ -2348,6 +2754,85 @@ int GetProductInfo(
           Pointer<Uint32> pdwReturnedProductType)>('GetProductInfo');
   return _GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion,
       dwSpMinorVersion, pdwReturnedProductType);
+}
+
+/// Attempts to dequeue an I/O completion packet from the specified I/O
+/// completion port. If there is no completion packet queued, the function
+/// waits for a pending I/O operation associated with the completion port
+/// to complete.
+///
+/// ```c
+/// BOOL GetQueuedCompletionStatus(
+///   HANDLE       CompletionPort,
+///   LPDWORD      lpNumberOfBytesTransferred,
+///   PULONG_PTR   lpCompletionKey,
+///   LPOVERLAPPED *lpOverlapped,
+///   DWORD        dwMilliseconds
+/// );
+/// ```
+/// {@category kernel32}
+int GetQueuedCompletionStatus(
+    int CompletionPort,
+    Pointer<Uint32> lpNumberOfBytesTransferred,
+    Pointer<IntPtr> lpCompletionKey,
+    Pointer<Pointer<OVERLAPPED>> lpOverlapped,
+    int dwMilliseconds) {
+  final _GetQueuedCompletionStatus = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr CompletionPort,
+          Pointer<Uint32> lpNumberOfBytesTransferred,
+          Pointer<IntPtr> lpCompletionKey,
+          Pointer<Pointer<OVERLAPPED>> lpOverlapped,
+          Uint32 dwMilliseconds),
+      int Function(
+          int CompletionPort,
+          Pointer<Uint32> lpNumberOfBytesTransferred,
+          Pointer<IntPtr> lpCompletionKey,
+          Pointer<Pointer<OVERLAPPED>> lpOverlapped,
+          int dwMilliseconds)>('GetQueuedCompletionStatus');
+  return _GetQueuedCompletionStatus(CompletionPort, lpNumberOfBytesTransferred,
+      lpCompletionKey, lpOverlapped, dwMilliseconds);
+}
+
+/// Retrieves multiple completion port entries simultaneously. It waits for
+/// pending I/O operations that are associated with the specified
+/// completion port to complete.
+///
+/// ```c
+/// BOOL GetQueuedCompletionStatusEx(
+///   HANDLE             CompletionPort,
+///   LPOVERLAPPED_ENTRY lpCompletionPortEntries,
+///   ULONG              ulCount,
+///   PULONG             ulNumEntriesRemoved,
+///   DWORD              dwMilliseconds,
+///   BOOL               fAlertable
+/// );
+/// ```
+/// {@category kernel32}
+int GetQueuedCompletionStatusEx(
+    int CompletionPort,
+    Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
+    int ulCount,
+    Pointer<Uint32> ulNumEntriesRemoved,
+    int dwMilliseconds,
+    int fAlertable) {
+  final _GetQueuedCompletionStatusEx = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr CompletionPort,
+          Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
+          Uint32 ulCount,
+          Pointer<Uint32> ulNumEntriesRemoved,
+          Uint32 dwMilliseconds,
+          Int32 fAlertable),
+      int Function(
+          int CompletionPort,
+          Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
+          int ulCount,
+          Pointer<Uint32> ulNumEntriesRemoved,
+          int dwMilliseconds,
+          int fAlertable)>('GetQueuedCompletionStatusEx');
+  return _GetQueuedCompletionStatusEx(CompletionPort, lpCompletionPortEntries,
+      ulCount, ulNumEntriesRemoved, dwMilliseconds, fAlertable);
 }
 
 /// Retrieves the contents of the STARTUPINFO structure that was specified
@@ -3318,6 +3803,34 @@ int PeekNamedPipe(
           Pointer<Uint32> lpBytesLeftThisMessage)>('PeekNamedPipe');
   return _PeekNamedPipe(hNamedPipe, lpBuffer, nBufferSize, lpBytesRead,
       lpTotalBytesAvail, lpBytesLeftThisMessage);
+}
+
+/// Posts an I/O completion packet to an I/O completion port.
+///
+/// ```c
+/// BOOL PostQueuedCompletionStatus(
+///   HANDLE       CompletionPort,
+///   DWORD        dwNumberOfBytesTransferred,
+///   ULONG_PTR    dwCompletionKey,
+///   LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int PostQueuedCompletionStatus(
+    int CompletionPort,
+    int dwNumberOfBytesTransferred,
+    int dwCompletionKey,
+    Pointer<OVERLAPPED> lpOverlapped) {
+  final _PostQueuedCompletionStatus = _kernel32.lookupFunction<
+      Int32 Function(IntPtr CompletionPort, Uint32 dwNumberOfBytesTransferred,
+          IntPtr dwCompletionKey, Pointer<OVERLAPPED> lpOverlapped),
+      int Function(
+          int CompletionPort,
+          int dwNumberOfBytesTransferred,
+          int dwCompletionKey,
+          Pointer<OVERLAPPED> lpOverlapped)>('PostQueuedCompletionStatus');
+  return _PostQueuedCompletionStatus(CompletionPort, dwNumberOfBytesTransferred,
+      dwCompletionKey, lpOverlapped);
 }
 
 /// Discards all characters from the output or input buffer of a specified

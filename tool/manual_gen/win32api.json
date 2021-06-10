@@ -306,6 +306,21 @@
         "dllLibrary": "gdi32",
         "comment": "The CancelDC function cancels any pending operation on the specified device context (DC)."
     },
+    "CancelIo": {
+        "prototype": "BOOL CancelIo(\n  HANDLE hFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Cancels all pending input and output (I/O) operations that are issued by the calling thread for the specified file. The function does not cancel I/O operations that other threads issue for a file handle."
+    },
+    "CancelIoEx": {
+        "prototype": "BOOL CancelIoEx(\n  HANDLE       hFile,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Marks any outstanding I/O operations for the specified file handle. The function only cancels I/O operations in the current process, regardless of which thread created the I/O operation."
+    },
+    "CancelSynchronousIo": {
+        "prototype": "BOOL CancelSynchronousIo(\nHANDLE hThread\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Marks pending synchronous I/O operations that are issued by the specified thread as canceled."
+    },
     "CascadeWindows": {
         "prototype": "WORD CascadeWindows(\n  HWND       hwndParent,\n  UINT       wHow,\n  const RECT *lpRect,\n  UINT       cKids,\n  const HWND *lpKids\n);",
         "dllLibrary": "user32",
@@ -654,6 +669,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateHatchBrush function creates a logical brush that has the specified hatch pattern and color."
     },
+    "CreateIoCompletionPort": {
+        "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates an input/output (I/O) completion port and associates it with a specified file handle, or creates an I/O completion port that is not yet associated with a file handle, allowing association at a later time."
+    },
     "CreateMDIWindow": {
         "prototype": "HWND CreateMDIWindowW(\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HINSTANCE hInstance,\n  LPARAM    lParam\n);",
         "dllLibrary": "user32",
@@ -814,6 +834,11 @@
         "prototype": "BOOL DestroyWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Destroys the specified window. The function sends WM_DESTROY and WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus from it. The function also destroys the window's menu, flushes the thread message queue, destroys timers, removes clipboard ownership, and breaks the clipboard viewer chain (if the window is at the top of the viewer chain)."
+    },
+    "DeviceIoControl": {
+        "prototype": "BOOL DeviceIoControl(\n  HANDLE       hDevice,\n  DWORD        dwIoControlCode,\n  LPVOID       lpInBuffer,\n  DWORD        nInBufferSize,\n  LPVOID       lpOutBuffer,\n  DWORD        nOutBufferSize,\n  LPDWORD      lpBytesReturned,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sends a control code directly to a specified device driver, causing the corresponding device to perform the corresponding operation."
     },
     "DialogBoxIndirectParam": {
         "prototype": "INT_PTR DialogBoxIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW hDialogTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
@@ -1330,6 +1355,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the time-out parameters for all read and write operations on a specified communications device."
     },
+    "GetCompressedFileSize": {
+        "prototype": "DWORD GetCompressedFileSizeW(\n  LPCWSTR lpFileName,\n  LPDWORD lpFileSizeHigh\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the actual number of bytes of disk storage used to store a specified file. If the file is located on a volume that supports compression and the file is compressed, the value obtained is the compressed size of the specified file. If the file is located on a volume that supports sparse files and the file is a sparse file, the value obtained is the sparse size of the specified file."
+    },
     "GetComputerName": {
         "prototype": "BOOL GetComputerNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD nSize\n);",
         "dllLibrary": "kernel32",
@@ -1442,6 +1472,11 @@
         "dllLibrary": "gdi32",
         "comment": "The GetDIBits function retrieves the bits of the specified compatible bitmap and copies them into a buffer as a DIB using the specified format."
     },
+    "GetDiskFreeSpace": {
+        "prototype": "BOOL GetDiskFreeSpaceW(\n  LPCWSTR lpRootPathName,\n  LPDWORD lpSectorsPerCluster,\n  LPDWORD lpBytesPerSector,\n  LPDWORD lpNumberOfFreeClusters,\n  LPDWORD lpTotalNumberOfClusters\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the specified disk, including the amount of free space on the disk."
+    },
     "GetDisplayAutoRotationPreferences": {
         "prototype": "BOOL GetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE *pOrientation\n);",
         "dllLibrary": "user32",
@@ -1496,6 +1531,11 @@
         "comment": "Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This enables you to determine the DPI of a thread without needed to examine a window created within that thread.",
         "minimumWindowsVersion": "WIN10_RS4"
     },
+    "GetDriveType": {
+        "prototype": "UINT GetDriveTypeW(\n  LPCWSTR lpRootPathName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or network drive."
+    },
     "GetEnvironmentVariable": {
         "prototype": "DWORD GetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPTSTR  lpBuffer,\n  DWORD   nSize\n);",
         "dllLibrary": "kernel32",
@@ -1506,10 +1546,35 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the termination status of the specified process."
     },
+    "GetFileAttributes": {
+        "prototype": "DWORD GetFileAttributesW(\n  LPCWSTR lpFileName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves file system attributes for a specified file or directory."
+    },
     "GetFileAttributesEx": {
         "prototype": "BOOL GetFileAttributesExW(\n  LPCWSTR                lpFileName,\n  GET_FILEEX_INFO_LEVELS fInfoLevelId,\n  LPVOID                 lpFileInformation\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves attributes for a specified file or directory."
+    },
+    "GetFileInformationByHandle": {
+        "prototype": "BOOL GetFileInformationByHandle(\n  HANDLE                       hFile,\n  LPBY_HANDLE_FILE_INFORMATION lpFileInformation\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves file information for the specified file."
+    },
+    "GetFileSize": {
+        "prototype": "DWORD GetFileSize(\n  HANDLE  hFile,\n  LPDWORD lpFileSizeHigh\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the size of the specified file, in bytes. It is recommended that you use GetFileSizeEx."
+    },
+    "GetFileSizeEx": {
+        "prototype": "BOOL GetFileSizeEx(\n  HANDLE         hFile,\n  PLARGE_INTEGER lpFileSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the size of the specified file."
+    },
+    "GetFileType": {
+        "prototype": "DWORD GetFileType(\n  HANDLE hFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the file type of the specified file."
     },
     "GetFileVersionInfo": {
         "prototype": "BOOL GetFileVersionInfoW(\n  LPCWSTR lptstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
@@ -1531,6 +1596,11 @@
         "dllLibrary": "version",
         "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSizeEx returns the size, in bytes, of that information."
     },
+    "GetFinalPathNameByHandle": {
+        "prototype": "DWORD GetFinalPathNameByHandleW(\n  HANDLE hFile,\n  LPWSTR lpszFilePath,\n  DWORD  cchFilePath,\n  DWORD  dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the final path for the specified file."
+    },
     "GetFocus": {
         "prototype": "HWND GetFocus();",
         "dllLibrary": "user32",
@@ -1540,6 +1610,11 @@
         "prototype": "HWND GetForegroundWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
+    },
+    "GetFullPathName": {
+        "prototype": "DWORD GetFullPathNameW(\n  LPCWSTR lpFileName,\n  DWORD   nBufferLength,\n  LPWSTR  lpBuffer,\n  LPWSTR  *lpFilePart\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the full path and file name of the specified file."
     },
     "GetGestureConfig": {
         "prototype": "BOOL GetGestureConfig(\n  HWND           hwnd,\n  DWORD          dwReserved,\n  DWORD          dwFlags,\n  PUINT          pcIDs,\n  PGESTURECONFIG pGestureConfig,\n  UINT           cbSize\n);",
@@ -1647,6 +1722,11 @@
         "prototype": "void GetLocalTime(\n  LPSYSTEMTIME lpSystemTime\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current local date and time."
+    },
+    "GetLogicalDrives": {
+        "prototype": "DWORD GetLogicalDrives();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a bitmask representing the currently available disk drives."
     },
     "GetLogicalDriveStrings": {
         "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
@@ -1858,6 +1938,16 @@
         "dllLibrary": "comdlg32",
         "comment": "Creates an Open dialog box that lets the user specify the drive, directory, and the name of a file or set of files to be opened."
     },
+    "GetOverlappedResult": {
+        "prototype": "BOOL GetOverlappedResult(\n  HANDLE       hFile,\n  LPOVERLAPPED lpOverlapped,\n  LPDWORD      lpNumberOfBytesTransferred,\n  BOOL         bWait\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device. To specify a timeout interval or wait on an alertable thread, use GetOverlappedResultEx."
+    },
+    "GetOverlappedResultEx": {
+        "prototype": "BOOL GetOverlappedResultEx(\n  HANDLE       hFile,\n  LPOVERLAPPED lpOverlapped,\n  LPDWORD      lpNumberOfBytesTransferred,\n  DWORD        dwMilliseconds,\n  BOOL         bAlertable\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device within the specified time-out interval. The calling thread can perform an alertable wait."
+    },
     "GetParent": {
         "prototype": "HWND GetParent(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1928,6 +2018,16 @@
         "prototype": "HANDLE GetPropW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a data handle from the property list of the specified window. The character string identifies the handle to be retrieved. The string and handle must have been added to the property list by a previous call to the SetProp function."
+    },
+    "GetQueuedCompletionStatus": {
+        "prototype": "BOOL GetQueuedCompletionStatus(\n  HANDLE       CompletionPort,\n  LPDWORD      lpNumberOfBytesTransferred,\n  PULONG_PTR   lpCompletionKey,\n  LPOVERLAPPED *lpOverlapped,\n  DWORD        dwMilliseconds\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Attempts to dequeue an I/O completion packet from the specified I/O completion port. If there is no completion packet queued, the function waits for a pending I/O operation associated with the completion port to complete."
+    },
+    "GetQueuedCompletionStatusEx": {
+        "prototype": "BOOL GetQueuedCompletionStatusEx(\n  HANDLE             CompletionPort,\n  LPOVERLAPPED_ENTRY lpCompletionPortEntries,\n  ULONG              ulCount,\n  PULONG             ulNumEntriesRemoved,\n  DWORD              dwMilliseconds,\n  BOOL               fAlertable\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves multiple completion port entries simultaneously. It waits for pending I/O operations that are associated with the specified completion port to complete."
     },
     "GetSaveFileName": {
         "prototype": "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
@@ -3054,6 +3154,11 @@
         "prototype": "BOOL PostMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
         "comment": "Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message."
+    },
+    "PostQueuedCompletionStatus": {
+        "prototype": "BOOL PostQueuedCompletionStatus(\n  HANDLE       CompletionPort,\n  DWORD        dwNumberOfBytesTransferred,\n  ULONG_PTR    dwCompletionKey,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Posts an I/O completion packet to an I/O completion port."
     },
     "PostQuitMessage": {
         "prototype": "void PostQuitMessage(\n  int nExitCode\n);",

@@ -336,6 +336,30 @@ class BSMINFO extends Struct {
   external LUID luid;
 }
 
+/// Contains information that the GetFileInformationByHandle function
+/// retrieves.
+///
+/// {@category Struct}
+class BY_HANDLE_FILE_INFORMATION extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+  external FILETIME ftCreationTime;
+  external FILETIME ftLastAccessTime;
+  external FILETIME ftLastWriteTime;
+  @Uint32()
+  external int dwVolumeSerialNumber;
+  @Uint32()
+  external int nFileSizeHigh;
+  @Uint32()
+  external int nFileSizeLow;
+  @Uint32()
+  external int nNumberOfLinks;
+  @Uint32()
+  external int nFileIndexHigh;
+  @Uint32()
+  external int nFileIndexLow;
+}
+
 /// Contains extended result information obtained by calling the
 /// ChangeWindowMessageFilterEx function.
 ///
@@ -2060,6 +2084,20 @@ class OSVERSIONINFOEXW extends Struct {
   external int wProductType;
   @Uint8()
   external int wReserved;
+}
+
+/// Contains the information returned by a call to the
+/// GetQueuedCompletionStatusEx function.
+///
+/// {@category Struct}
+class OVERLAPPED_ENTRY extends Struct {
+  @IntPtr()
+  external int lpCompletionKey;
+  external Pointer<OVERLAPPED> lpOverlapped;
+  @IntPtr()
+  external int Internal;
+  @Uint32()
+  external int dwNumberOfBytesTransferred;
 }
 
 /// The PAINTSTRUCT structure contains information for an application. This

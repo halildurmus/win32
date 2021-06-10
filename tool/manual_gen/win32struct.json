@@ -59,6 +59,10 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.BSMINFO",
         "comment": "Contains information about a window that denied a request from BroadcastSystemMessageEx."
     },
+    "BY_HANDLE_FILE_INFORMATION": {
+        "namespace": "Windows.Win32.Storage.FileSystem.BY_HANDLE_FILE_INFORMATION",
+        "comment": "Contains information that the GetFileInformationByHandle function retrieves."
+    },
     "CHANGEFILTERSTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHANGEFILTERSTRUCT",
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
@@ -362,6 +366,10 @@
     "OSVERSIONINFOEXW": {
         "namespace": "Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW",
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions."
+    },
+    "OVERLAPPED_ENTRY": {
+        "namespace": "Windows.Win32.Storage.FileSystem.OVERLAPPED_ENTRY",
+        "comment": "Contains the information returned by a call to the GetQueuedCompletionStatusEx function."
     },
     "PAINTSTRUCT": {
         "namespace": "Windows.Win32.Graphics.Gdi.PAINTSTRUCT",

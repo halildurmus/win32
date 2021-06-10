@@ -555,6 +555,13 @@ void main() {
   test('Struct OSVERSIONINFOEXW is the right size', () {
     expect(sizeOf<OSVERSIONINFOEXW>(), equals(284));
   });
+  test('Struct OVERLAPPED_ENTRY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OVERLAPPED_ENTRY>(), equals(32));
+    } else {
+      expect(sizeOf<OVERLAPPED_ENTRY>(), equals(16));
+    }
+  });
   test('Struct PAINTSTRUCT is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PAINTSTRUCT>(), equals(72));
