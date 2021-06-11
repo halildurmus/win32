@@ -226,4 +226,5 @@ export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemContext.dart';
 export 'src/com/IWbemLocator.dart';
 export 'src/com/IWbemServices.dart';
+export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';

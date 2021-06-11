@@ -1,13 +1,13 @@
 // IToastNotification.dart
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
 // ignore_for_file: unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api-ms-win-core-winrt-l1-1-0.dart';
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
@@ -16,13 +16,13 @@ import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
 import '../winrt/winrt_constants.dart';
+import '../winrt/winrt_helpers.dart';
 
 import 'IInspectable.dart';
+import 'IToastNotificationFactory.dart';
 
-/// @nodoc
-const IID_IToastNotification = '{997E2675-059E-4E60-8B06-1760917C8B80}';
+const _className = 'Windows.UI.Notifications.ToastNotification';
 
 typedef _get_Content_Native = Int32 Function(
     Pointer obj, Pointer<Pointer> value);
@@ -62,10 +62,10 @@ typedef _remove_Failed_Dart = int Function(Pointer obj, int token);
 
 /// {@category Interface}
 /// {@category winrt}
-class IToastNotification extends IInspectable {
+class ToastNotification extends IInspectable {
   // vtable begins at 6, ends at 14
 
-  IToastNotification(Pointer<COMObject> ptr) : super(ptr);
+  ToastNotification(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer get Content {
     final retValuePtr = calloc<Pointer>();
@@ -153,4 +153,34 @@ class IToastNotification extends IInspectable {
       .cast<Pointer<NativeFunction<_remove_Failed_Native>>>()
       .value
       .asFunction<_remove_Failed_Dart>()(ptr.ref.lpVtbl, token);
+
+  static ToastNotification Create(Pointer content) {
+    final hClassName = convertToHString(_className);
+
+    final pIID = calloc<GUID>()..ref.setGUID(IID_IToastNotificationFactory);
+    final activationFactory = calloc<COMObject>();
+    final toastNotification = calloc<COMObject>();
+
+    try {
+      var hr = RoGetActivationFactory(
+          hClassName.value, pIID, activationFactory.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      final toastNotificationFactory =
+          IToastNotificationFactory(activationFactory);
+      hr = toastNotificationFactory.CreateToastNotification(
+          content, toastNotification.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      return ToastNotification(toastNotification);
+    } finally {
+      WindowsDeleteString(hClassName.value);
+      free(hClassName);
+      free(pIID);
+      free(activationFactory);
+      free(toastNotification);
+    }
+  }
 }

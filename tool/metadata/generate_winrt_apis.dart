@@ -28,7 +28,6 @@ final typesToGenerate = [
   'Windows.Storage.IUserDataPathsStatics',
   'Windows.Gaming.Input.IGamepadStatics',
   // 'Windows.Gaming.Input.IGamepadStatics2'
-  'Windows.UI.Notifications.IToastNotification',
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
 ];
