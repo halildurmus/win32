@@ -183,6 +183,7 @@ export 'src/com/IFileOpenDialog.dart';
 export 'src/com/IFileOpenPicker.dart';
 export 'src/com/IFileSaveDialog.dart';
 export 'src/com/IInspectable.dart';
+export 'src/com/IIterable`1.dart';
 export 'src/com/IKnownFolder.dart';
 export 'src/com/IKnownFolderManager.dart';
 export 'src/com/IModalWindow.dart';
