@@ -66,6 +66,19 @@ Pointer<IntPtr> convertToHString(String string) {
   }
 }
 
+class HString {
+  Pointer<HSTRING> _hString;
+
+  HString(String str): _hString = convertToHString(str);
+
+  void dispose() {
+    WindowsDeleteString(_hString.value);
+    free(_hString);
+  }
+
+  int get value => _hString.value;
+}
+
 /// Creates a WinRT object.
 ///
 /// ```dart

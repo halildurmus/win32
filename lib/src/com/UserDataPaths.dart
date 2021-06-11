@@ -440,7 +440,7 @@ class UserDataPaths extends IInspectable {
   }
 
   static UserDataPaths GetDefault() {
-    final hClassName = convertToHString(_className);
+    final hClassName = HString(_className);
 
     final pIID = calloc<GUID>()..ref.setGUID(IID_IUserDataPathsStatics);
     final activationFactory = calloc<COMObject>();
@@ -459,8 +459,7 @@ class UserDataPaths extends IInspectable {
       }
       return UserDataPaths(userDataDefaults);
     } finally {
-      WindowsDeleteString(hClassName.value);
-      free(hClassName);
+      hClassName.dispose();
       free(pIID);
       free(activationFactory);
       free(userDataDefaults);
