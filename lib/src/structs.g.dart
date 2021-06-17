@@ -2284,6 +2284,18 @@ class PROPERTYKEY extends Struct {
   external int pid;
 }
 
+/// The PROPSPEC structure is used by many of the methods of
+/// IPropertyStorage to specify a property either by its property
+/// identifier (ID) or the associated string name.
+///
+/// {@category Struct}
+class PROPSPEC extends Struct {
+  @Uint32()
+  external int ulKind;
+  @Uint32()
+  external int Anonymous;
+}
+
 /// The RECT structure defines a rectangle by the coordinates of its
 /// upper-left and lower-right corners.
 ///
@@ -2584,6 +2596,21 @@ class STARTUPINFO extends Struct {
   external int hStdOutput;
   @IntPtr()
   external int hStdError;
+}
+
+/// The STATPROPSETSTG structure contains information about a property set.
+///
+/// {@category Struct}
+class STATPROPSETSTG extends Struct {
+  external GUID fmtid;
+  external GUID clsid;
+  @Uint32()
+  external int grfFlags;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32()
+  external int dwOSVersion;
 }
 
 /// The STATSTG structure contains statistical data about an open storage,

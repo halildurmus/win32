@@ -162,6 +162,7 @@ void main()
     printf("  'POWERBROADCAST_SETTING': %zu,\n", sizeof(POWERBROADCAST_SETTING));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
+    printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
@@ -180,6 +181,7 @@ void main()
     printf("  'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
+    printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));

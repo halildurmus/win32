@@ -619,6 +619,13 @@ void main() {
   test('Struct PROPERTYKEY is the right size', () {
     expect(sizeOf<PROPERTYKEY>(), equals(20));
   });
+  test('Struct PROPSPEC is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROPSPEC>(), equals(16));
+    } else {
+      expect(sizeOf<PROPSPEC>(), equals(8));
+    }
+  });
   test('Struct RECT is the right size', () {
     expect(sizeOf<RECT>(), equals(16));
   });
@@ -700,6 +707,9 @@ void main() {
     } else {
       expect(sizeOf<STARTUPINFO>(), equals(68));
     }
+  });
+  test('Struct STATPROPSETSTG is the right size', () {
+    expect(sizeOf<STATPROPSETSTG>(), equals(64));
   });
   test('Struct STATSTG is the right size', () {
     if (is64bitOS) {
