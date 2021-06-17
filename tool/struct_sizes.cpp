@@ -182,6 +182,7 @@ void main()
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
+    printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));

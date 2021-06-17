@@ -708,6 +708,13 @@ void main() {
       expect(sizeOf<STARTUPINFO>(), equals(68));
     }
   });
+  test('Struct STATPROPSTG is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<STATPROPSTG>(), equals(16));
+    } else {
+      expect(sizeOf<STATPROPSTG>(), equals(12));
+    }
+  });
   test('Struct STATPROPSETSTG is the right size', () {
     expect(sizeOf<STATPROPSETSTG>(), equals(64));
   });

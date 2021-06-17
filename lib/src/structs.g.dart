@@ -2601,6 +2601,23 @@ class STATPROPSETSTG extends Struct {
   external int dwOSVersion;
 }
 
+/// The STATPROPSTG structure contains data about a single property in a
+/// property set. This data is the property ID and type tag, and the
+/// optional string name that may be associated with the property.
+///
+/// {@category Struct}
+class STATPROPSTG extends Struct {
+  external GUID fmtid;
+  external GUID clsid;
+  @Uint32()
+  external int grfFlags;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32()
+  external int dwOSVersion;
+}
+
 /// The STATSTG structure contains statistical data about an open storage,
 /// stream, or byte-array object. This structure is used in the
 /// IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
