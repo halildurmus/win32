@@ -77,6 +77,13 @@ void main() {
       expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(28));
     }
   });
+  test('Struct PROPSPEC is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROPSPEC>(), equals(16));
+    } else {
+      expect(sizeOf<PROPSPEC>(), equals(8));
+    }
+  });
   test('Struct PROPVARIANT is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PROPVARIANT>(), equals(24));
@@ -618,13 +625,6 @@ void main() {
   });
   test('Struct PROPERTYKEY is the right size', () {
     expect(sizeOf<PROPERTYKEY>(), equals(20));
-  });
-  test('Struct PROPSPEC is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<PROPSPEC>(), equals(16));
-    } else {
-      expect(sizeOf<PROPSPEC>(), equals(8));
-    }
   });
   test('Struct RECT is the right size', () {
     expect(sizeOf<RECT>(), equals(16));

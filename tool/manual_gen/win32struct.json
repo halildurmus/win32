@@ -423,10 +423,6 @@
         "namespace": "Windows.Win32.System.PropertiesSystem.PROPERTYKEY",
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
-    "PROPSPEC": {
-        "namespace": "Windows.Win32.Storage.StructuredStorage.PROPSPEC",
-        "comment": "The PROPSPEC structure is used by many of the methods of IPropertyStorage to specify a property either by its property identifier (ID) or the associated string name."
-    },
     "RECT": {
         "namespace": "Windows.Win32.Foundation.RECT",
         "comment": "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners."
