@@ -1,3 +1,8 @@
+## 1.0.4
+
+- Treat HSTRING as an int, rather than as a `Pointer<IntPtr>`, for consistency
+  with other handle types.
+
 ## 1.0.3
 
 - Fix bug with parsing generic type definitions (thanks, @sunbreak)

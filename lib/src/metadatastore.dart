@@ -117,25 +117,24 @@ class MetadataStore {
     File path;
 
     final hstrTypeName = convertToHString(typeName);
-    final hstrMetaDataFilePath = calloc<IntPtr>();
+    final hstrMetaDataFilePath = calloc<HSTRING>();
     final spMetaDataImport = calloc<Pointer>();
     final typeDef = calloc<mdTypeDef>();
 
     try {
       // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
       // third-party types) in an app that is not a Windows Store app.
-      final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
-          hstrMetaDataFilePath, spMetaDataImport, typeDef);
+      final hr = RoGetMetaDataFile(hstrTypeName, nullptr, hstrMetaDataFilePath,
+          spMetaDataImport, typeDef);
       if (SUCCEEDED(hr)) {
-        path = File(convertFromHString(hstrMetaDataFilePath));
+        path = File(convertFromHString(hstrMetaDataFilePath.value));
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      WindowsDeleteString(hstrTypeName.value);
+      WindowsDeleteString(hstrTypeName);
       WindowsDeleteString(hstrMetaDataFilePath.value);
 
-      free(hstrTypeName);
       free(hstrMetaDataFilePath);
     }
 
@@ -160,7 +159,7 @@ class MetadataStore {
       // Assume it's a Windows Runtime type
       final hstrTypeName = convertToHString(typeName);
 
-      final hstrMetaDataFilePath = calloc<IntPtr>();
+      final hstrMetaDataFilePath = calloc<HSTRING>();
       final spMetaDataImport = calloc<Pointer>();
       final typeDef = calloc<mdTypeDef>();
 
@@ -168,19 +167,18 @@ class MetadataStore {
         // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
         // used for classes that are part of the Windows Runtime itself (i.e. not
         // third-party types).
-        final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+        final hr = RoGetMetaDataFile(hstrTypeName, nullptr,
             hstrMetaDataFilePath, spMetaDataImport, typeDef);
         if (SUCCEEDED(hr)) {
-          final filePath = convertFromHString(hstrMetaDataFilePath);
+          final filePath = convertFromHString(hstrMetaDataFilePath.value);
           return getScopeForFile(File(filePath));
         } else {
           throw WindowsException(hr);
         }
       } finally {
-        WindowsDeleteString(hstrTypeName.value);
+        WindowsDeleteString(hstrTypeName);
         WindowsDeleteString(hstrMetaDataFilePath.value);
 
-        free(hstrTypeName);
         free(hstrMetaDataFilePath);
       }
     }
