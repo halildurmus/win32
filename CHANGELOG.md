@@ -1,3 +1,10 @@
+## 2.2.0
+
+- Fixes convertToHString to return an int, since `HSTRING`s are handles. This is
+  a breaking change for any apps that use WinRT APIs, but given the limited
+  availability of WinRT classes that fall into this category, updating only the
+  minor version.
+
 ## 2.1.5
 
 - Add smart card reader support.
