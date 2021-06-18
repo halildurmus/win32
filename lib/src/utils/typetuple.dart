@@ -100,7 +100,7 @@ class TypeTuple {
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));
         runtimeType.genericParameterSequence = uncompressed.data;
-        dataLength = 1;
+        dataLength = 2; // modifier + seq
         runtimeType.name = runtimeType.toString();
         break;
 

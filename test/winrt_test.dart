@@ -118,6 +118,22 @@ void main() {
         equals('Windows.UI.Xaml.Controls.Primitives.ButtonBase'));
   });
 
+  test('Generic return type <T> can be parsed', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.IVectorView`1');
+
+    final method = winTypeDef?.methods.first;
+    expect(method?.returnType.typeIdentifier.baseType,
+        equals(BaseType.ClassVariableTypeModifier));
+  });
+
+  test('Generic class can be parsed', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.IVectorView`1');
+
+    expect(winTypeDef?.methods.length, greaterThanOrEqualTo(4));
+  });
+
   test('Find interfaces returns sane results with IDictionary<string, object>',
       () {
     final winTypeDef = MetadataStore.getMetadataForType(
