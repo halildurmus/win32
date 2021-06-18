@@ -1,5 +1,6 @@
 ## 1.0.3
 
+- Fix bug with parsing generic type definitions (thanks, @sunbreak)
 - Update to latest win32metadata `.winmd` file.
 
 ## 1.0.2
