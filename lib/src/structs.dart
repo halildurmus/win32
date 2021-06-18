@@ -1220,6 +1220,18 @@ class MMTIME extends Struct {
   set midi(_midi value) => ms = value.songptrpos;
 }
 
+/// The PROPSPEC structure is used by many of the methods of
+/// IPropertyStorage to specify a property either by its property
+/// identifier (ID) or the associated string name.
+///
+/// {@category Struct}
+class PROPSPEC extends Struct {
+  @Uint32()
+  external int ulKind;
+
+  external Pointer<Uint16> lpwstr;
+}
+
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.

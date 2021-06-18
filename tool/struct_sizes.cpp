@@ -47,6 +47,7 @@ void main()
     printf("  'NOTIFYICONDATA': %zu,\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
+    printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
@@ -180,6 +181,8 @@ void main()
     printf("  'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
+    printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
+    printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));
