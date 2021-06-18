@@ -500,7 +500,7 @@
         "comment": "The STATPROPSETSTG structure contains information about a property set."
     },
     "STATPROPSTG": {
-        "namespace": "Windows.Win32.Storage.StructuredStorage.STATPROPSETSTG",
+        "namespace": "Windows.Win32.Storage.StructuredStorage.STATPROPSTG",
         "comment": "The STATPROPSTG structure contains data about a single property in a property set. This data is the property ID and type tag, and the optional string name that may be associated with the property."
     },
     "STATSTG": {

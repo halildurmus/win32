@@ -2607,15 +2607,11 @@ class STATPROPSETSTG extends Struct {
 ///
 /// {@category Struct}
 class STATPROPSTG extends Struct {
-  external GUID fmtid;
-  external GUID clsid;
+  external Pointer<Utf16> lpwstrName;
   @Uint32()
-  external int grfFlags;
-  external FILETIME mtime;
-  external FILETIME ctime;
-  external FILETIME atime;
-  @Uint32()
-  external int dwOSVersion;
+  external int propid;
+  @Uint16()
+  external int vt;
 }
 
 /// The STATSTG structure contains statistical data about an open storage,
