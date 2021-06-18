@@ -2586,6 +2586,34 @@ class STARTUPINFO extends Struct {
   external int hStdError;
 }
 
+/// The STATPROPSETSTG structure contains information about a property set.
+///
+/// {@category Struct}
+class STATPROPSETSTG extends Struct {
+  external GUID fmtid;
+  external GUID clsid;
+  @Uint32()
+  external int grfFlags;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32()
+  external int dwOSVersion;
+}
+
+/// The STATPROPSTG structure contains data about a single property in a
+/// property set. This data is the property ID and type tag, and the
+/// optional string name that may be associated with the property.
+///
+/// {@category Struct}
+class STATPROPSTG extends Struct {
+  external Pointer<Utf16> lpwstrName;
+  @Uint32()
+  external int propid;
+  @Uint16()
+  external int vt;
+}
+
 /// The STATSTG structure contains statistical data about an open storage,
 /// stream, or byte-array object. This structure is used in the
 /// IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
