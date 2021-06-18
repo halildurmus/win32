@@ -6,11 +6,11 @@ import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a method representation.
 void main() {
-  // .method public hidebysig static pinvokeimpl("USER32" nomangle lasterr winapi)
-  // 	valuetype [Windows.Win32.winmd]Windows.Win32.System.SystemServices.BOOL AdjustWindowRect (
-  // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.UI.DisplayDevices.RECT* lpRect,
-  // 		[in] uint32 dwStyle,
-  // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.System.SystemServices.BOOL bMenu
+  // .method /* 06000EB4 */ public hidebysig static pinvokeimpl("USER32" nomangle lasterr winapi)
+  // 	valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.BOOL AdjustWindowRect (
+  // 		[in] [out] valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.RECT* lpRect,
+  // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE dwStyle,
+  // 		[in] valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.BOOL bMenu
   // 	) cil managed preservesig
   // {
   // 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.SupportedOSPlatformAttribute::.ctor(string) = (
@@ -50,7 +50,10 @@ void main() {
 
     expect(awr.parameters[1].isInParam, isTrue);
     expect(awr.parameters[1].name, equals('dwStyle'));
-    expect(awr.parameters[1].typeIdentifier.baseType, equals(BaseType.Uint32));
+    expect(awr.parameters[1].typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
+    expect(awr.parameters[1].typeIdentifier.name,
+        equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE'));
 
     expect(awr.parameters[2].isInParam, isTrue);
     expect(awr.parameters[2].name, equals('bMenu'));

@@ -73,7 +73,7 @@ void main() {
     expect(methods[75].isSpecialName, isFalse);
   });
 
-  test('Interface correctly identifies what it inherits', () {
+  test('Interface correctly identifies what it implements', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
 
@@ -82,7 +82,7 @@ void main() {
     expect(interfaces.first.name, equals('Windows.Foundation.IAsyncInfo'));
   });
 
-  test('Interface with multiple inheritance identifies all parent interfaces',
+  test('Class that implements multiple interfaces correctly identifies them',
       () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.UI.Xaml.Controls.Button')!;
@@ -94,6 +94,28 @@ void main() {
     expect(interfaceNames, contains('Windows.UI.Xaml.Controls.IButton'));
     expect(
         interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
+  });
+
+  test('Class that implements multiple interfaces correctly identifies them',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.UI.Xaml.Controls.Button')!;
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(2));
+
+    final interfaceNames = interfaces.map((element) => element.name);
+    expect(interfaceNames, contains('Windows.UI.Xaml.Controls.IButton'));
+    expect(
+        interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
+  });
+
+  test('Class correctly reports its parent', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.UI.Xaml.Controls.Button');
+
+    expect(winTypeDef?.parent?.name,
+        equals('Windows.UI.Xaml.Controls.Primitives.ButtonBase'));
   });
 
   test('Find interfaces returns sane results with IDictionary<string, object>',
