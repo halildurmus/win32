@@ -118,6 +118,13 @@ void main() {
         equals('Windows.UI.Xaml.Controls.Primitives.ButtonBase'));
   });
 
+  test('Generic class can be parsed', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.IVectorView`1');
+
+    expect(winTypeDef?.methods.length, greaterThan(200));
+  });
+
   test('Find interfaces returns sane results with IDictionary<string, object>',
       () {
     final winTypeDef = MetadataStore.getMetadataForType(
