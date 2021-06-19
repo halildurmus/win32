@@ -31,6 +31,8 @@ const header = '''
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
+#include <winsock.h>
+#include <ws2def.h>
 
 void main()
 {

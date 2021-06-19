@@ -14,12 +14,12 @@ dartdoc:
       markdown: doc/gdi32.md
     "kernel32":
       markdown: doc/kernel32.md
-    "kernelbase":
-      markdown: doc/kernelbase.md
     "ole32":
       markdown: doc/ole32.md
     "oleaut32":
       markdown: doc/oleaut32.md
+    "winsock":
+      markdown: doc/winsock.md
     "powrprof":
       markdown: doc/powrprof.md
     "psapi":
@@ -53,7 +53,7 @@ dartdoc:
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "shcore", "psapi", "version", "advapi32", "kernelbase", "bthprops", "powrprof", "winscard", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "shcore", "psapi", "version", "advapi32", "winsock", "bthprops", "powrprof", "winscard", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:

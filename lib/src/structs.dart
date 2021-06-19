@@ -178,6 +178,14 @@ class DEVMODE extends Struct {
   external int dmPanningHeight;
 }
 
+/// The IN_ADDR structure represents an IPv4 Internet address.
+///
+/// {@category Struct}
+class IN_ADDR extends Struct {
+  @Array(4)
+  external Array<Uint8> s_b;
+}
+
 /// Contains information about a heap element. The HeapWalk function uses a
 /// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
 ///

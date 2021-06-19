@@ -20,12 +20,15 @@ class Win32Prototype {
   final Method _method;
   final String _lib;
 
+  // Sanitize any Dart keywords in parameter names.
+  String sanitize(String input) => input == 'in' ? 'in_' : input;
+
   String get nativePrototype =>
       '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).nativeType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartPrototype =>
@@ -33,7 +36,7 @@ class Win32Prototype {
 
   String get dartParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).dartType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).dartType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartFfiMapping =>
@@ -44,7 +47,7 @@ class Win32Prototype {
       '    $dartPrototype\n'
       "  >('${_method.name}');\n"
       '  return _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
+      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
       ';\n'
       '}\n';
 

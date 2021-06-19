@@ -27,6 +27,8 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
+#include <winsock.h>
+#include <ws2def.h>
 
 void main()
 {
@@ -60,6 +62,7 @@ void main()
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
+    printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -101,6 +104,7 @@ void main()
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
+    printf("  'fd_set': %zu,\n", sizeof(fd_set));
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACEW));
     printf("  'FUNCDESC': %zu,\n", sizeof(FUNCDESC));
@@ -108,6 +112,7 @@ void main()
     printf("  'GESTUREINFO': %zu,\n", sizeof(GESTUREINFO));
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
+    printf("  'hostent': %zu,\n", sizeof(hostent));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
@@ -163,6 +168,7 @@ void main()
     printf("  'POWERBROADCAST_SETTING': %zu,\n", sizeof(POWERBROADCAST_SETTING));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
+    printf("  'protoent': %zu,\n", sizeof(protoent));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
@@ -174,11 +180,13 @@ void main()
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
+    printf("  'servent': %zu,\n", sizeof(servent));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
     printf("  'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));
     printf("  'SIZE': %zu,\n", sizeof(SIZE));
     printf("  'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
+    printf("  'SOCKADDR': %zu,\n", sizeof(SOCKADDR));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
@@ -191,6 +199,7 @@ void main()
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("  'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRICW));
+    printf("  'timeval': %zu,\n", sizeof(timeval));
     printf("  'TITLEBARINFO': %zu,\n", sizeof(TITLEBARINFO));
     printf("  'TITLEBARINFOEX': %zu,\n", sizeof(TITLEBARINFOEX));
     printf("  'TOKEN_APPCONTAINER_INFORMATION': %zu,\n", sizeof(TOKEN_APPCONTAINER_INFORMATION));

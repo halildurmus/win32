@@ -1,4 +1,11 @@
 {
+    "accept": {
+        "prototype": "SOCKET WSAAPI accept(\n  SOCKET   s,\n  sockaddr *addr,\n  int      *addrlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The accept function permits an incoming connection attempt on a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "ActivateActCtx": {
         "prototype": "BOOL ActivateActCtx(\n  HANDLE    hActCtx,\n  ULONG_PTR *lpCookie\n);",
         "dllLibrary": "kernel32",
@@ -135,6 +142,13 @@
         "prototype": "HANDLE BeginUpdateResourceW(\n  LPCWSTR pFileName,\n  BOOL    bDeleteExistingResources\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves a handle that can be used by the UpdateResource function to add, delete, or replace resources in a binary module."
+    },
+    "bind": {
+        "prototype": "int WSAAPI bind(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The bind function associates a local address with a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "BitBlt": {
         "prototype": "BOOL BitBlt(\n  HDC   hdc,\n  int   x,\n  int   y,\n  int   cx,\n  int   cy,\n  HDC   hdcSrc,\n  int   x1,\n  int   y1,\n  DWORD rop\n);",
@@ -437,6 +451,13 @@
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
+    "closesocket": {
+        "prototype": "int WSAAPI closesocket(\n  SOCKET s\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The closesocket function closes an existing socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "CloseTouchInputHandle": {
         "prototype": "BOOL CloseTouchInputHandle(\n  HTOUCHINPUT hTouchInput\n);",
         "dllLibrary": "user32",
@@ -513,6 +534,13 @@
         "comment": "Compares two object handles to determine if they refer to the same underlying kernel object.",
         "category": "kernel32",
         "minimumWindowsVersion": "WIN10_TH1"
+    },
+    "connect": {
+        "prototype": "int WSAAPI connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The connect function establishes a connection to a specified socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "ConnectNamedPipe": {
         "prototype": "BOOL ConnectNamedPipe(\n  HANDLE       hNamedPipe,\n  LPOVERLAPPED lpOverlapped);",
@@ -1227,6 +1255,13 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the window handle to the active window attached to the calling thread's message queue."
     },
+    "GetAddrInfoW": {
+        "prototype": "INT WSAAPI GetAddrInfoW(\n  PCWSTR          pNodeName,\n  PCWSTR          pServiceName,\n  const ADDRINFOW *pHints,\n  PADDRINFOW      *ppResult\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The GetAddrInfoW function provides protocol-independent translation from a Unicode host name to an address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetAncestor": {
         "prototype": "HWND GetAncestor(\n  HWND hwnd,\n  UINT gaFlags\n);",
         "dllLibrary": "user32",
@@ -1636,6 +1671,27 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves certain properties of an object handle."
     },
+    "gethostbyaddr": {
+        "prototype": "hostent *WSAAPI gethostbyaddr(\n   const char *addr,\n   int        len,\n   int        type\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostbyaddr function retrieves the host information corresponding to a network address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "gethostbyname": {
+        "prototype": "hostent *WSAAPI gethostbyname(\n  const char *name\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostbyname function retrieves host information corresponding to a host name from a host database.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "gethostname": {
+        "prototype": "int WSAAPI gethostname(\n  char *name,\n  int  namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostname function retrieves the standard host name for the local computer.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetIconInfo": {
         "prototype": "BOOL GetIconInfo(\n  HICON     hIcon,\n  PICONINFO piconinfo\n);",
         "dllLibrary": "user32",
@@ -1898,6 +1954,13 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the specified named pipe."
     },
+    "getnameinfo": {
+        "prototype": "INT WSAAPI getnameinfo(\n  const SOCKADDR *pSockaddr,\n  socklen_t      SockaddrLength,\n  PCHAR          pNodeBuffer,\n  DWORD          NodeBufferSize,\n  PCHAR          pServiceBuffer,\n  DWORD          ServiceBufferSize,\n  INT            Flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getnameinfo function provides protocol-independent name resolution from an address to an ANSI host name and from a port number to the ANSI service name.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetNativeSystemInfo": {
         "prototype": "void GetNativeSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);",
         "dllLibrary": "kernel32",
@@ -1952,6 +2015,13 @@
         "prototype": "HWND GetParent(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the specified window's parent or owner."
+    },
+    "getpeername": {
+        "prototype": "int getpeername(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getpeername function retrieves the address of the peer to which a socket is connected.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
@@ -2019,6 +2089,20 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a data handle from the property list of the specified window. The character string identifies the handle to be retrieved. The string and handle must have been added to the property list by a previous call to the SetProp function."
     },
+    "getprotobyname": {
+        "prototype": "protoent *WSAAPI getprotobyname(\n  const char *name\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getprotobyname function retrieves the protocol information corresponding to a protocol name.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getprotobynumber": {
+        "prototype": "protoent *WSAAPI getprotobynumber(\n  int number\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getprotobynumber function retrieves protocol information corresponding to a protocol number.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetQueuedCompletionStatus": {
         "prototype": "BOOL GetQueuedCompletionStatus(\n  HANDLE       CompletionPort,\n  LPDWORD      lpNumberOfBytesTransferred,\n  PULONG_PTR   lpCompletionKey,\n  LPOVERLAPPED *lpOverlapped,\n  DWORD        dwMilliseconds\n);",
         "dllLibrary": "kernel32",
@@ -2044,10 +2128,38 @@
         "dllLibrary": "user32",
         "comment": "The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb)."
     },
+    "getservbyname": {
+        "prototype": "servent *WSAAPI getservbyname(\n  const char *name,\n  const char *proto\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getservbyname function retrieves service information corresponding to a service name and protocol.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getservbyport": {
+        "prototype": "servent *WSAAPI getservbyport(\n  int        port,\n  const char *proto\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getservbyport function retrieves service information corresponding to a port and protocol.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetShellWindow": {
         "prototype": "HWND GetShellWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the Shell's desktop window."
+    },
+    "getsockname": {
+        "prototype": "int getsockname(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getsockname function retrieves the local name for a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getsockopt": {
+        "prototype": "int WSAAPI getsockopt(\n  SOCKET s,\n  int    level,\n  int    optname,\n  char   *optval,\n  int    *optlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getsockopt function retrieves a socket option.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetStartupInfo": {
         "prototype": "void GetStartupInfoW(\n  LPSTARTUPINFOW lpStartupInfo\n);",
@@ -2430,10 +2542,38 @@
         "dllLibrary": "user32",
         "comment": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point."
     },
+    "htonl": {
+        "prototype": "u_long htonl(\n  u_long hostlong\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The htonl function converts a u_long from host to TCP/IP network byte order (which is big-endian).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "htons": {
+        "prototype": "u_short htons(\n  u_short hostshort\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The htons function converts a u_short from host to TCP/IP network byte order (which is big-endian).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "IIDFromString": {
         "prototype": "HRESULT IIDFromString(\n  LPCOLESTR lpsz,\n  LPIID     lpiid\n);",
         "dllLibrary": "ole32",
         "comment": "Converts a string generated by the StringFromIID function back into the original interface identifier (IID)."
+    },
+    "inet_addr": {
+        "prototype": "unsigned long inet_addr(\n  const char *cp\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The inet_addr function converts a string containing an IPv4 dotted-decimal address into a proper address for the IN_ADDR structure.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "inet_ntoa": {
+        "prototype": "char * inet_ntoa(\n  in_addr in\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The inet_ntoa function converts an (Ipv4) Internet network address into an ASCII string in Internet standard dotted-decimal format.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "InflateRect": {
         "prototype": "BOOL InflateRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
@@ -2494,6 +2634,13 @@
         "prototype": "BOOL InvertRect(\n  HDC        hDC,\n  const RECT *lprc\n);",
         "dllLibrary": "user32",
         "comment": "The InvertRect function inverts a rectangle in a window by performing a logical NOT operation on the color values for each pixel in the rectangle's interior."
+    },
+    "ioctlsocket": {
+        "prototype": "int WSAAPI ioctlsocket(\n  SOCKET s,\n  long   cmd,\n  u_long *argp\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ioctlsocket function controls the I/O mode of a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "IsChild": {
         "prototype": "BOOL IsChild(\n  HWND hWndParent,\n  HWND hWnd\n);",
@@ -2626,6 +2773,13 @@
         "prototype": "BOOL LineTo(\n  HDC hdc,\n  int x,\n  int y\n);",
         "dllLibrary": "gdi32",
         "comment": "The LineTo function draws a line from the current position up to, but not including, the specified point."
+    },
+    "listen": {
+        "prototype": "int WSAAPI listen(\n  SOCKET s,\n  int    backlog\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The listen function places a socket in a state in which it is listening for an incoming connection.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "LoadAccelerators": {
         "prototype": "HACCEL LoadAcceleratorsW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpTableName\n);",
@@ -2990,6 +3144,20 @@
         "dllLibrary": "user32",
         "comment": "Signals the system that a predefined event occurred. If any client applications have registered a hook function for the event, the system calls the client's hook function."
     },
+    "ntohl": {
+        "prototype": "u_long ntohl(\n  u_long netlong\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ntohl function converts a u_long from TCP/IP network order to host byte order (which is little-endian on Intel processors).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "ntohs": {
+        "prototype": "u_short ntohs(\n  u_short netshort\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ntohs function converts a u_short from TCP/IP network byte order to host byte order (which is little-endian on Intel processors).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "OffsetRect": {
         "prototype": "BOOL OffsetRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
         "dllLibrary": "user32",
@@ -3234,6 +3402,20 @@
         "prototype": "BOOL RectInRegion(\n  HRGN       hrgn,\n  const RECT *lprect\n);",
         "dllLibrary": "gdi32",
         "comment": "The RectInRegion function determines whether any part of the specified rectangle is within the boundaries of a region."
+    },
+    "recv": {
+        "prototype": "int WSAAPI recv(\n  SOCKET s,\n  char   *buf,\n  int    len,\n  int    flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The recv function receives data from a connected socket or a bound connectionless socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "recvfrom": {
+        "prototype": "int WSAAPI recvfrom(\n  SOCKET   s,\n  char     *buf,\n  int      len,\n  int      flags,\n  sockaddr *from,\n  int      *fromlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The recvfrom function receives a datagram, and stores the source address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "RedrawWindow": {
         "prototype": "BOOL RedrawWindow(\n  HWND       hWnd,\n  const RECT *lprcUpdate,\n  HRGN       hrgnUpdate,\n  UINT       flags\n);",
@@ -3859,10 +4041,24 @@
         "dllLibrary": "user32",
         "comment": "The ScrollWindowEx function scrolls the contents of the specified window's client area."
     },
+    "select": {
+        "prototype": "int WSAAPI select(\n  int           nfds,\n  fd_set        *readfds,\n  fd_set        *writefds,\n  fd_set        *exceptfds,\n  const timeval *timeout\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The select function determines the status of one or more sockets, waiting if necessary, to perform synchronous I/O.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "SelectObject": {
         "prototype": "HGDIOBJ SelectObject(\n  HDC     hdc,\n  HGDIOBJ h\n);",
         "dllLibrary": "gdi32",
         "comment": "The SelectObject function selects an object into the specified device context (DC). The new object replaces the previous object of the same type."
+    },
+    "send": {
+        "prototype": "int WSAAPI send(\n  SOCKET     s,\n  const char *buf,\n  int        len,\n  int        flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The send function sends data on a connected socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "SendDlgItemMessage": {
         "prototype": "LRESULT SendDlgItemMessageW(\n  HWND   hDlg,\n  int    nIDDlgItem,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
@@ -3893,6 +4089,13 @@
         "prototype": "BOOL SendNotifyMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
         "comment": "Sends the specified message to a window or windows. If the window was created by the calling thread, SendNotifyMessage calls the window procedure for the window and does not return until the window procedure has processed the message. If the window was created by a different thread, SendNotifyMessage passes the message to the window procedure and returns immediately; it does not wait for the window procedure to finish processing the message."
+    },
+    "sendto": {
+        "prototype": "int WSAAPI sendto(\n  SOCKET         s,\n  const char     *buf,\n  int            len,\n  int            flags,\n  const sockaddr *to,\n  int            tolen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The sendto function sends data to a specific destination.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "SetActiveWindow": {
         "prototype": "HWND SetActiveWindow(\n  HWND hWnd\n);",
@@ -4441,10 +4644,24 @@
         "dllLibrary": "shell32",
         "comment": "Retrieves the size of the Recycle Bin and the number of items in it, for a specified drive."
     },
+    "shutdown": {
+        "prototype": "int WSAAPI shutdown(\n  SOCKET s,\n  int    how\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The shutdown function disables sends or receives on a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "Sleep": {
         "prototype": "void Sleep(\n  DWORD dwMilliseconds\n);",
         "dllLibrary": "kernel32",
         "comment": "Suspends the execution of the current thread until the time-out interval elapses."
+    },
+    "socket": {
+        "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The socket function creates a socket that is bound to a specific transport service provider.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "SoundSentry": {
         "prototype": "BOOL SoundSentry();",

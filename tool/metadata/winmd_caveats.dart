@@ -24,5 +24,6 @@ const winmdGenerated = [
   'user32',
   'version',
   'winmm',
-  'winscard'
+  'winscard',
+  'ws2_32',
 ];
