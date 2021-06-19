@@ -4991,6 +4991,20 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the window that contains the specified point."
     },
+    "WindowsCompareStringOrdinal": {
+        "prototype": "HRESULT WindowsCompareStringOrdinal(\n  HSTRING string1,\n  HSTRING string2,\n  INT32   *result\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Compares two specified HSTRING objects and returns an integer that indicates their relative position in a sort order.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsConcatString": {
+        "prototype": "HRESULT WindowsConcatString(\n  HSTRING string1,\n  HSTRING string2,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Concatenates two specified strings.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
     "WindowsCreateString": {
         "prototype": "HRESULT WindowsCreateString(\n  PCNZWCH sourceString,\n  UINT32  length,\n  HSTRING *string\n);",
         "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
