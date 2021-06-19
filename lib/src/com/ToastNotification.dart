@@ -162,8 +162,8 @@ class ToastNotification extends IInspectable {
     final toastNotification = calloc<COMObject>();
 
     try {
-      var hr = RoGetActivationFactory(
-          hClassName.value, pIID, activationFactory.cast());
+      var hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
@@ -176,8 +176,7 @@ class ToastNotification extends IInspectable {
       }
       return ToastNotification(toastNotification);
     } finally {
-      WindowsDeleteString(hClassName.value);
-      free(hClassName);
+      WindowsDeleteString(hClassName);
       free(pIID);
       free(activationFactory);
       free(toastNotification);
