@@ -20,6 +20,47 @@ import 'structs.g.dart';
 final _api_ms_win_core_winrt_string_l1_1_0 =
     DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
 
+/// Compares two specified HSTRING objects and returns an integer that
+/// indicates their relative position in a sort order.
+///
+/// ```c
+/// HRESULT WindowsCompareStringOrdinal(
+///   HSTRING string1,
+///   HSTRING string2,
+///   INT32   *result
+/// );
+/// ```
+/// {@category winrt}
+int WindowsCompareStringOrdinal(
+    int string1, int string2, Pointer<Int32> result) {
+  final _WindowsCompareStringOrdinal =
+      _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+          Int32 Function(IntPtr string1, IntPtr string2, Pointer<Int32> result),
+          int Function(int string1, int string2,
+              Pointer<Int32> result)>('WindowsCompareStringOrdinal');
+  return _WindowsCompareStringOrdinal(string1, string2, result);
+}
+
+/// Concatenates two specified strings.
+///
+/// ```c
+/// HRESULT WindowsConcatString(
+///   HSTRING string1,
+///   HSTRING string2,
+///   HSTRING *newString
+/// );
+/// ```
+/// {@category winrt}
+int WindowsConcatString(int string1, int string2, Pointer<IntPtr> newString) {
+  final _WindowsConcatString =
+      _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+          Int32 Function(
+              IntPtr string1, IntPtr string2, Pointer<IntPtr> newString),
+          int Function(int string1, int string2,
+              Pointer<IntPtr> newString)>('WindowsConcatString');
+  return _WindowsConcatString(string1, string2, newString);
+}
+
 /// Creates a new HSTRING based on the specified source string.
 ///
 /// ```c

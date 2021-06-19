@@ -1,7 +1,5 @@
 @TestOn('windows')
 
-import 'dart:ffi';
-
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
@@ -89,8 +87,7 @@ void main() {
           final string2 = convertFromHString(hstring);
           expect(string, equals(string2));
 
-          WindowsDeleteString(hstring.value);
-          free(hstring);
+          WindowsDeleteString(hstring);
         }
       });
       test('String to HSTRING conversion -- more complex', () {
@@ -105,8 +102,7 @@ Some accented text: Résumé
           final string2 = convertFromHString(hstring);
           expect(string, equals(string2));
 
-          WindowsDeleteString(hstring.value);
-          free(hstring);
+          WindowsDeleteString(hstring);
         }
       });
     });

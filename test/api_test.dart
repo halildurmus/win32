@@ -9169,6 +9169,32 @@ void main() {
 
   group('Test api-ms-win-core-winrt-string-l1-1-0 functions', () {
     if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsCompareStringOrdinal', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsCompareStringOrdinal =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(
+                    IntPtr string1, IntPtr string2, Pointer<Int32> result),
+                int Function(int string1, int string2,
+                    Pointer<Int32> result)>('WindowsCompareStringOrdinal');
+        expect(WindowsCompareStringOrdinal, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsConcatString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsConcatString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(
+                    IntPtr string1, IntPtr string2, Pointer<IntPtr> newString),
+                int Function(int string1, int string2,
+                    Pointer<IntPtr> newString)>('WindowsConcatString');
+        expect(WindowsConcatString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
       test('Can instantiate WindowsCreateString', () {
         final api_ms_win_core_winrt_string_l1_1_0 =
             DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');

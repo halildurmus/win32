@@ -51,6 +51,7 @@ void main()
     printf("  'NOTIFYICONDATA': %zu,\\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));
+    printf("  'PROPSPEC': %zu,\\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));

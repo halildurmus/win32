@@ -419,8 +419,8 @@ class UserDataPaths extends IInspectable {
     final userDataDefaults = calloc<COMObject>();
 
     try {
-      var hr = RoGetActivationFactory(
-          hClassName.value, pIID, activationFactory.cast());
+      var hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
@@ -431,8 +431,7 @@ class UserDataPaths extends IInspectable {
       }
       return UserDataPaths(userDataDefaults);
     } finally {
-      WindowsDeleteString(hClassName.value);
-      free(hClassName);
+      WindowsDeleteString(hClassName);
       free(pIID);
       free(activationFactory);
       free(userDataDefaults);
@@ -447,8 +446,8 @@ class UserDataPaths extends IInspectable {
     final userDataDefaults = calloc<COMObject>();
 
     try {
-      var hr = RoGetActivationFactory(
-          hClassName.value, pIID, activationFactory.cast());
+      var hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
@@ -459,8 +458,7 @@ class UserDataPaths extends IInspectable {
       }
       return UserDataPaths(userDataDefaults);
     } finally {
-      WindowsDeleteString(hClassName.value);
-      free(hClassName);
+      WindowsDeleteString(hClassName);
       free(pIID);
       free(activationFactory);
       free(userDataDefaults);

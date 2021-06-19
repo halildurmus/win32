@@ -31,11 +31,11 @@ void winrtUninitialize() => RoUninitialize();
 
 /// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
 /// {@category winrt}
-String convertFromHString(Pointer<IntPtr> hstring) {
+String convertFromHString(int hstring) {
   final stringLength = calloc<UINT32>();
 
   try {
-    final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
+    final stringPtr = WindowsGetStringRawBuffer(hstring, stringLength);
     final dartString = stringPtr.toDartString();
 
     return dartString;
@@ -45,12 +45,15 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 }
 
 /// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
-/// returning a pointer to the `HSTRING`.
+/// returning an integer handle.
 ///
 /// The caller is responsible for deleting the `HSTRING` when it is no longer
-/// used, through a call to `WindowsDeleteString()`.
+/// used, through a call to `WindowsDeleteString(HSTRING hstr)`, which
+/// decrements the reference count of that string. If the reference count
+/// reaches 0, the Windows Runtime deallocates the buffer.
+///
 /// {@category winrt}
-Pointer<IntPtr> convertToHString(String string) {
+int convertToHString(String string) {
   final hString = calloc<HSTRING>();
   final stringPtr = string.toNativeUtf16();
   // Create a HSTRING representing the object
@@ -59,7 +62,7 @@ Pointer<IntPtr> convertToHString(String string) {
     if (FAILED(hr)) {
       throw WindowsException(hr);
     } else {
-      return hString;
+      return hString.value;
     }
   } finally {
     free(stringPtr);
