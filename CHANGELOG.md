@@ -4,6 +4,7 @@
   a breaking change for any apps that use WinRT APIs, but given the limited
   availability of WinRT classes that fall into this category, updating only the
   minor version.
+- Add low-level Device IO and structured storage APIs and diskinfo.dart sample.
 
 ## 2.1.5
 
