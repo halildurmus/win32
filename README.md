@@ -121,6 +121,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `pipe.dart`        | Shows use of named pipes for interprocess communication   |
 | `play_sound.dart`  | Plays a WAV file through the Windows `PlaySound` API      |
+| `registry.dart`    | Demonstrates querying the registry for values             |
 | `screenshot.dart`  | Takes a screenshot of the current desktop                 |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
@@ -130,6 +131,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
 | `taskdialog.dart`  | Demonstrates using modern task dialog boxes               |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
+| `vt.dart`          | Shows virtual terminal sequences                          |
 | `wallpaper.dart`   | Shows what wallpaper and background color are set         |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `winmd.dart`       | Interrogate Windows Runtime types                         |
