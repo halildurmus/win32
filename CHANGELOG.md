@@ -1,3 +1,7 @@
+## 2.2.1
+
+- Add initial support for the Windows Socket library (winsock2).
+
 ## 2.2.0
 
 - Fixes convertToHString to return an int, since `HSTRING`s are handles. This is
