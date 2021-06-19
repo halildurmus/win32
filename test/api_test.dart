@@ -9005,6 +9005,16 @@ void main() {
     });
   });
 
+  group('Test ws2_32 functions', () {
+    test('Can instantiate socket', () {
+      final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+      final socket = ws2_32.lookupFunction<
+          IntPtr Function(Int32 af, Int32 type, Int32 protocol),
+          int Function(int af, int type, int protocol)>('socket');
+      expect(socket, isA<Function>());
+    });
+  });
+
   group('Test dbghelp functions', () {
     test('Can instantiate SymCleanup', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');

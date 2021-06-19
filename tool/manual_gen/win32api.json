@@ -4446,6 +4446,12 @@
         "dllLibrary": "kernel32",
         "comment": "Suspends the execution of the current thread until the time-out interval elapses."
     },
+    "socket": {
+        "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The socket function creates a socket that is bound to a specific transport service provider.",
+        "category": "winsock"
+    },
     "SoundSentry": {
         "prototype": "BOOL SoundSentry();",
         "dllLibrary": "user32",
