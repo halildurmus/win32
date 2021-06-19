@@ -102,6 +102,26 @@ class ACTCTX extends Struct {
   external int hModule;
 }
 
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class addrinfo extends Struct {
+  @Int32()
+  external int ai_flags;
+  @Int32()
+  external int ai_family;
+  @Int32()
+  external int ai_socktype;
+  @Int32()
+  external int ai_protocol;
+  @IntPtr()
+  external int ai_addrlen;
+  external Pointer<Utf16> ai_canonname;
+  external Pointer<SOCKADDR> ai_addr;
+  external Pointer<addrinfo> ai_next;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
@@ -929,6 +949,19 @@ class EXCEPINFO extends Struct {
   external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
   @Int32()
   external int scode;
+}
+
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for
+/// readability using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class fd_set extends Struct {
+  @Uint32()
+  external int fd_count;
+  @Array(64)
+  external Array<IntPtr> fd_array;
 }
 
 /// Contains a 64-bit value representing the number of 100-nanosecond
@@ -2533,6 +2566,16 @@ class SMALL_RECT extends Struct {
   external int Bottom;
 }
 
+/// The SOCKADDR structure stores socket address information.
+///
+/// {@category Struct}
+class SOCKADDR extends Struct {
+  @Uint16()
+  external int sa_family;
+  @Array(14)
+  external Array<Uint8> sa_data;
+}
+
 /// Identifies an authentication service that a server is willing to use to
 /// communicate to a client.
 ///
@@ -2831,6 +2874,18 @@ class TEXTMETRIC extends Struct {
   external int tmPitchAndFamily;
   @Uint8()
   external int tmCharSet;
+}
+
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class timeval extends Struct {
+  @Int32()
+  external int tv_sec;
+  @Int32()
+  external int tv_usec;
 }
 
 /// Contains title bar information.

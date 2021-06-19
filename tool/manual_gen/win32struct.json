@@ -11,6 +11,10 @@
         "namespace": "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW",
         "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
     },
+    "addrinfo": {
+        "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
+        "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
+    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.System.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
@@ -174,6 +178,10 @@
     "EXCEPINFO": {
         "namespace": "Windows.Win32.System.OleAutomation.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
+    },
+    "fd_set": {
+        "namespace": "Windows.Win32.Networking.WinSock.fd_set",
+        "comment": "The fd_set structure is used by various Windows Sockets functions and service providers, such as the select function, to place sockets into a set for various purposes, such as testing a given socket for readability using the readfds parameter of the select function."
     },
     "FILETIME": {
         "namespace": "Windows.Win32.Foundation.FILETIME",
@@ -487,6 +495,10 @@
         "namespace": "Windows.Win32.System.Console.SMALL_RECT",
         "comment": "Defines the coordinates of the upper left and lower right corners of a rectangle."
     },
+    "SOCKADDR": {
+        "namespace": "Windows.Win32.Networking.WinSock.SOCKADDR",
+        "comment": "The SOCKADDR structure stores socket address information."
+    },
     "SOLE_AUTHENTICATION_SERVICE": {
         "namespace": "Windows.Win32.System.Com.SOLE_AUTHENTICATION_SERVICE",
         "comment": "Identifies an authentication service that a server is willing to use to communicate to a client."
@@ -534,6 +546,10 @@
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Graphics.Gdi.TEXTMETRICW",
         "comment": "The TEXTMETRIC structure contains basic information about a physical font. All sizes are specified in logical units; that is, they depend on the current mapping mode of the display context."
+    },
+    "timeval": {
+        "namespace": "Windows.Win32.Networking.WinSock.timeval",
+        "comment": "The timeval structure is used to specify a time interval. It is associated with the Berkeley Software Distribution (BSD) Time.h header file."
     },
     "TITLEBARINFO": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.TITLEBARINFO",

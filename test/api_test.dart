@@ -14,11 +14,200 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
 
 import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
+  group('Test ws2_32 functions', () {
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate accept', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final accept = ws2_32.lookupFunction<
+            IntPtr Function(
+                IntPtr s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen),
+            int Function(int s, Pointer<SOCKADDR> addr,
+                Pointer<Int32> addrlen)>('accept');
+        expect(accept, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate bind', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final bind = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
+            int Function(int s, Pointer<SOCKADDR> name, int namelen)>('bind');
+        expect(bind, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate closesocket', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final closesocket = ws2_32.lookupFunction<Int32 Function(IntPtr s),
+            int Function(int s)>('closesocket');
+        expect(closesocket, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate connection', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final connection = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
+            int Function(
+                int s, Pointer<SOCKADDR> name, int namelen)>('connect');
+        expect(connection, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate GetAddrInfoW', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final GetAddrInfoW = ws2_32.lookupFunction<
+            Int32 Function(
+                Pointer<Utf16> pNodeName,
+                Pointer<Utf16> pServiceName,
+                Pointer<addrinfo> pHints,
+                Pointer<Pointer<addrinfo>> ppResult),
+            int Function(
+                Pointer<Utf16> pNodeName,
+                Pointer<Utf16> pServiceName,
+                Pointer<addrinfo> pHints,
+                Pointer<Pointer<addrinfo>> ppResult)>('GetAddrInfoW');
+        expect(GetAddrInfoW, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getnameinfo', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getnameinfo = ws2_32.lookupFunction<
+            Int32 Function(
+                Pointer<SOCKADDR> pSockaddr,
+                Int32 SockaddrLength,
+                Pointer<Utf8> pNodeBuffer,
+                Uint32 NodeBufferSize,
+                Pointer<Utf8> pServiceBuffer,
+                Uint32 ServiceBufferSize,
+                Int32 Flags),
+            int Function(
+                Pointer<SOCKADDR> pSockaddr,
+                int SockaddrLength,
+                Pointer<Utf8> pNodeBuffer,
+                int NodeBufferSize,
+                Pointer<Utf8> pServiceBuffer,
+                int ServiceBufferSize,
+                int Flags)>('getnameinfo');
+        expect(getnameinfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getsockopt', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getsockopt = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Int32 level, Int32 optname,
+                Pointer<Utf8> optval, Pointer<Int32> optlen),
+            int Function(int s, int level, int optname, Pointer<Utf8> optval,
+                Pointer<Int32> optlen)>('getsockopt');
+        expect(getsockopt, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate ioctlsocket', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final ioctlsocket = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Int32 cmd, Pointer<Uint32> argp),
+            int Function(int s, int cmd, Pointer<Uint32> argp)>('ioctlsocket');
+        expect(ioctlsocket, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate listen', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final listen = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Int32 backlog),
+            int Function(int s, int backlog)>('listen');
+        expect(listen, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate recv', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final recv = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
+            int Function(int s, Pointer<Utf8> buf, int len, int flags)>('recv');
+        expect(recv, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate recvfrom', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final recvfrom = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags,
+                Pointer<SOCKADDR> from, Pointer<Int32> fromlen),
+            int Function(int s, Pointer<Utf8> buf, int len, int flags,
+                Pointer<SOCKADDR> from, Pointer<Int32> fromlen)>('recvfrom');
+        expect(recvfrom, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate select', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final select = ws2_32.lookupFunction<
+            Int32 Function(
+                Int32 nfds,
+                Pointer<fd_set> readfds,
+                Pointer<fd_set> writefds,
+                Pointer<fd_set> exceptfds,
+                Pointer<timeval> timeout),
+            int Function(
+                int nfds,
+                Pointer<fd_set> readfds,
+                Pointer<fd_set> writefds,
+                Pointer<fd_set> exceptfds,
+                Pointer<timeval> timeout)>('select');
+        expect(select, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate send', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final send = ws2_32.lookupFunction<
+            Int32 Function(
+                IntPtr s, Pointer<Utf8> buf, Int32 len, Uint32 flags),
+            int Function(int s, Pointer<Utf8> buf, int len, int flags)>('send');
+        expect(send, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate sendto', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final sendto = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags,
+                Pointer<SOCKADDR> to, Int32 tolen),
+            int Function(int s, Pointer<Utf8> buf, int len, int flags,
+                Pointer<SOCKADDR> to, int tolen)>('sendto');
+        expect(sendto, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate shutdown', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final shutdown = ws2_32.lookupFunction<
+            Int32 Function(IntPtr s, Int32 how),
+            int Function(int s, int how)>('shutdown');
+        expect(shutdown, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate socket', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final socket = ws2_32.lookupFunction<
+            IntPtr Function(Int32 af, Int32 type, Int32 protocol),
+            int Function(int af, int type, int protocol)>('socket');
+        expect(socket, isA<Function>());
+      });
+    }
+  });
+
   group('Test kernel32 functions', () {
     test('Can instantiate ActivateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -9002,16 +9191,6 @@ void main() {
           int Function(
               Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');
       expect(SCardUIDlgSelectCard, isA<Function>());
-    });
-  });
-
-  group('Test ws2_32 functions', () {
-    test('Can instantiate socket', () {
-      final ws2_32 = DynamicLibrary.open('ws2_32.dll');
-      final socket = ws2_32.lookupFunction<
-          IntPtr Function(Int32 af, Int32 type, Int32 protocol),
-          int Function(int af, int type, int protocol)>('socket');
-      expect(socket, isA<Function>());
     });
   });
 
