@@ -4446,11 +4446,117 @@
         "dllLibrary": "kernel32",
         "comment": "Suspends the execution of the current thread until the time-out interval elapses."
     },
+    "accept": {
+        "prototype": "SOCKET WSAAPI accept(\n  SOCKET   s,\n  sockaddr *addr,\n  int      *addrlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The accept function permits an incoming connection attempt on a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "bind": {
+        "prototype": "int WSAAPI bind(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The bind function associates a local address with a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "closesocket": {
+        "prototype": "int WSAAPI closesocket(\n  SOCKET s\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The closesocket function closes an existing socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "connection": {
+        "prototype": "int WSAAPI connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The connect function establishes a connection to a specified socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getnameinfo": {
+        "prototype": "INT WSAAPI getnameinfo(\n  const SOCKADDR *pSockaddr,\n  socklen_t      SockaddrLength,\n  PCHAR          pNodeBuffer,\n  DWORD          NodeBufferSize,\n  PCHAR          pServiceBuffer,\n  DWORD          ServiceBufferSize,\n  INT            Flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getnameinfo function provides protocol-independent name resolution from an address to an ANSI host name and from a port number to the ANSI service name.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "GetAddrInfoW": {
+        "prototype": "INT WSAAPI GetAddrInfoW(\n  PCWSTR          pNodeName,\n  PCWSTR          pServiceName,\n  const ADDRINFOW *pHints,\n  PADDRINFOW      *ppResult\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The GetAddrInfoW function provides protocol-independent translation from a Unicode host name to an address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getsockopt": {
+        "prototype": "int WSAAPI getsockopt(\n  SOCKET s,\n  int    level,\n  int    optname,\n  char   *optval,\n  int    *optlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getsockopt function retrieves a socket option.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "listen": {
+        "prototype": "int WSAAPI listen(\n  SOCKET s,\n  int    backlog\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The listen function places a socket in a state in which it is listening for an incoming connection.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "ioctlsocket": {
+        "prototype": "int WSAAPI ioctlsocket(\n  SOCKET s,\n  long   cmd,\n  u_long *argp\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ioctlsocket function controls the I/O mode of a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "shutdown": {
+        "prototype": "int WSAAPI shutdown(\n  SOCKET s,\n  int    how\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The shutdown function disables sends or receives on a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "recv": {
+        "prototype": "int WSAAPI recv(\n  SOCKET s,\n  char   *buf,\n  int    len,\n  int    flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The recv function receives data from a connected socket or a bound connectionless socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "recvfrom": {
+        "prototype": "int WSAAPI recvfrom(\n  SOCKET   s,\n  char     *buf,\n  int      len,\n  int      flags,\n  sockaddr *from,\n  int      *fromlen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The recvfrom function receives a datagram, and stores the source address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "select": {
+        "prototype": "int WSAAPI select(\n  int           nfds,\n  fd_set        *readfds,\n  fd_set        *writefds,\n  fd_set        *exceptfds,\n  const timeval *timeout\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The select function determines the status of one or more sockets, waiting if necessary, to perform synchronous I/O.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "send": {
+        "prototype": "int WSAAPI send(\n  SOCKET     s,\n  const char *buf,\n  int        len,\n  int        flags\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The send function sends data on a connected socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "sendto": {
+        "prototype": "int WSAAPI sendto(\n  SOCKET         s,\n  const char     *buf,\n  int            len,\n  int            flags,\n  const sockaddr *to,\n  int            tolen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The sendto function sends data to a specific destination.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "socket": {
         "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",
         "dllLibrary": "ws2_32",
         "comment": "The socket function creates a socket that is bound to a specific transport service provider.",
-        "category": "winsock"
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "SoundSentry": {
         "prototype": "BOOL SoundSentry();",
