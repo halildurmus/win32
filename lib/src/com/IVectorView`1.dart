@@ -30,15 +30,15 @@ typedef _GetAt_Dart = int Function(
 typedef _get_Size_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
 typedef _get_Size_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _IndexOf_Native = Int32 Function(Pointer obj, Pointer value, ____ index,
+typedef _IndexOf_Native = Int32 Function(Pointer obj, Pointer value, Pointer<Uint32> index,
     Pointer< /* Boolean */ Uint8> result);
-typedef _IndexOf_Dart = int Function(Pointer obj, Pointer value, ____ index,
+typedef _IndexOf_Dart = int Function(Pointer obj, Pointer value, Pointer<Uint32> index,
     Pointer< /* Boolean */ Uint8> result);
 
 typedef _GetMany_Native = Int32 Function(
-    Pointer obj, Uint32 startIndex, ____ items, Pointer<Uint32> result);
+    Pointer obj, Uint32 startIndex, Pointer<Pointer> items, Pointer<Uint32> result);
 typedef _GetMany_Dart = int Function(
-    Pointer obj, int startIndex, ____ items, Pointer<Uint32> result);
+    Pointer obj, int startIndex, Pointer<Pointer> items, Pointer<Uint32> result);
 
 /// {@category Interface}
 /// {@category winrt}
@@ -75,14 +75,14 @@ class IVectorView<T> {
   }
 
   int IndexOf(
-          Pointer value, ____ index, Pointer< /* Boolean */ Uint8> result) =>
+          Pointer value, Pointer<Uint32> index, Pointer< /* Boolean */ Uint8> result) =>
       ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<Pointer<NativeFunction<_IndexOf_Native>>>()
           .value
           .asFunction<_IndexOf_Dart>()(ptr.ref.lpVtbl, value, index, result);
 
-  int GetMany(int startIndex, ____ items, Pointer<Uint32> result) => ptr
+  int GetMany(int startIndex, Pointer<Pointer> items, Pointer<Uint32> result) => ptr
       .ref.lpVtbl.value
       .elementAt(9)
       .cast<Pointer<NativeFunction<_GetMany_Native>>>()
