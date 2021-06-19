@@ -50,13 +50,13 @@ void main() {
       });
     }
     if (windowsBuildNumber >= 9600) {
-      test('Can instantiate connection', () {
+      test('Can instantiate connect', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
-        final connection = ws2_32.lookupFunction<
+        final connect = ws2_32.lookupFunction<
             Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
             int Function(
                 int s, Pointer<SOCKADDR> name, int namelen)>('connect');
-        expect(connection, isA<Function>());
+        expect(connect, isA<Function>());
       });
     }
     if (windowsBuildNumber >= 9600) {
@@ -74,6 +74,35 @@ void main() {
                 Pointer<addrinfo> pHints,
                 Pointer<Pointer<addrinfo>> ppResult)>('GetAddrInfoW');
         expect(GetAddrInfoW, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate gethostbyaddr', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final gethostbyaddr = ws2_32.lookupFunction<
+            Pointer<hostent> Function(
+                Pointer<Utf8> addr, Int32 len, Int32 type),
+            Pointer<hostent> Function(
+                Pointer<Utf8> addr, int len, int type)>('gethostbyaddr');
+        expect(gethostbyaddr, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate gethostbyname', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final gethostbyname = ws2_32.lookupFunction<
+            Pointer<hostent> Function(Pointer<Utf8> name),
+            Pointer<hostent> Function(Pointer<Utf8> name)>('gethostbyname');
+        expect(gethostbyname, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate gethostname', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final gethostname = ws2_32.lookupFunction<
+            Int32 Function(Pointer<Utf8> name, Int32 namelen),
+            int Function(Pointer<Utf8> name, int namelen)>('gethostname');
+        expect(gethostname, isA<Function>());
       });
     }
     if (windowsBuildNumber >= 9600) {
@@ -100,6 +129,66 @@ void main() {
       });
     }
     if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getpeername', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getpeername = ws2_32.lookupFunction<
+            Int32 Function(
+                IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
+            int Function(int s, Pointer<SOCKADDR> name,
+                Pointer<Int32> namelen)>('getpeername');
+        expect(getpeername, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getprotobyname', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getprotobyname = ws2_32.lookupFunction<
+            Pointer<protoent> Function(Pointer<Utf8> name),
+            Pointer<protoent> Function(Pointer<Utf8> name)>('getprotobyname');
+        expect(getprotobyname, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getprotobynumber', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getprotobynumber = ws2_32.lookupFunction<
+            Pointer<protoent> Function(Int32 number),
+            Pointer<protoent> Function(int number)>('getprotobynumber');
+        expect(getprotobynumber, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getservbyname', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getservbyname = ws2_32.lookupFunction<
+            Pointer<servent> Function(Pointer<Utf8> name, Pointer<Utf8> proto),
+            Pointer<servent> Function(
+                Pointer<Utf8> name, Pointer<Utf8> proto)>('getservbyname');
+        expect(getservbyname, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getservbyport', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getservbyport = ws2_32.lookupFunction<
+            Pointer<servent> Function(Int32 port, Pointer<Utf8> proto),
+            Pointer<servent> Function(
+                int port, Pointer<Utf8> proto)>('getservbyport');
+        expect(getservbyport, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate getsockname', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final getsockname = ws2_32.lookupFunction<
+            Int32 Function(
+                IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
+            int Function(int s, Pointer<SOCKADDR> name,
+                Pointer<Int32> namelen)>('getsockname');
+        expect(getsockname, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
       test('Can instantiate getsockopt', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
         final getsockopt = ws2_32.lookupFunction<
@@ -108,6 +197,40 @@ void main() {
             int Function(int s, int level, int optname, Pointer<Utf8> optval,
                 Pointer<Int32> optlen)>('getsockopt');
         expect(getsockopt, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate htonl', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final htonl = ws2_32.lookupFunction<Uint32 Function(Uint32 hostlong),
+            int Function(int hostlong)>('htonl');
+        expect(htonl, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate htons', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final htons = ws2_32.lookupFunction<Uint16 Function(Uint16 hostshort),
+            int Function(int hostshort)>('htons');
+        expect(htons, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate inet_addr', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final inet_addr = ws2_32.lookupFunction<
+            Uint32 Function(Pointer<Utf8> cp),
+            int Function(Pointer<Utf8> cp)>('inet_addr');
+        expect(inet_addr, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate inet_ntoa', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final inet_ntoa = ws2_32.lookupFunction<
+            Pointer<Utf8> Function(IN_ADDR in_),
+            Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
+        expect(inet_ntoa, isA<Function>());
       });
     }
     if (windowsBuildNumber >= 9600) {
@@ -126,6 +249,22 @@ void main() {
             Int32 Function(IntPtr s, Int32 backlog),
             int Function(int s, int backlog)>('listen');
         expect(listen, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate ntohl', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final ntohl = ws2_32.lookupFunction<Uint32 Function(Uint32 netlong),
+            int Function(int netlong)>('ntohl');
+        expect(ntohl, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate ntohs', () {
+        final ws2_32 = DynamicLibrary.open('ws2_32.dll');
+        final ntohs = ws2_32.lookupFunction<Uint16 Function(Uint16 netshort),
+            int Function(int netshort)>('ntohs');
+        expect(ntohs, isA<Function>());
       });
     }
     if (windowsBuildNumber >= 9600) {

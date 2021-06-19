@@ -28,6 +28,7 @@
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
 #include <winsock.h>
+#include <ws2def.h>
 
 void main()
 {
@@ -61,7 +62,7 @@ void main()
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
-    printf("  'addrinfo': %zu,\n", sizeof(ADDRINFOW));
+    printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));

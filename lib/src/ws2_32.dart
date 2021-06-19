@@ -79,11 +79,11 @@ int closesocket(int s) {
 /// );
 /// ```
 /// {@category winsock}
-int connection(int s, Pointer<SOCKADDR> name, int namelen) {
-  final _connection = _ws2_32.lookupFunction<
+int connect(int s, Pointer<SOCKADDR> name, int namelen) {
+  final _connect = _ws2_32.lookupFunction<
       Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
       int Function(int s, Pointer<SOCKADDR> name, int namelen)>('connect');
-  return _connection(s, name, namelen);
+  return _connect(s, name, namelen);
 }
 
 /// The GetAddrInfoW function provides protocol-independent translation
@@ -109,6 +109,58 @@ int GetAddrInfoW(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
           Pointer<addrinfo> pHints,
           Pointer<Pointer<addrinfo>> ppResult)>('GetAddrInfoW');
   return _GetAddrInfoW(pNodeName, pServiceName, pHints, ppResult);
+}
+
+/// The gethostbyaddr function retrieves the host information corresponding
+/// to a network address.
+///
+/// ```c
+/// hostent *WSAAPI gethostbyaddr(
+///    const char *addr,
+///    int        len,
+///    int        type
+/// );
+/// ```
+/// {@category winsock}
+Pointer<hostent> gethostbyaddr(Pointer<Utf8> addr, int len, int type) {
+  final _gethostbyaddr = _ws2_32.lookupFunction<
+      Pointer<hostent> Function(Pointer<Utf8> addr, Int32 len, Int32 type),
+      Pointer<hostent> Function(
+          Pointer<Utf8> addr, int len, int type)>('gethostbyaddr');
+  return _gethostbyaddr(addr, len, type);
+}
+
+/// The gethostbyname function retrieves host information corresponding to
+/// a host name from a host database.
+///
+/// ```c
+/// hostent *WSAAPI gethostbyname(
+///   const char *name
+/// );
+/// ```
+/// {@category winsock}
+Pointer<hostent> gethostbyname(Pointer<Utf8> name) {
+  final _gethostbyname = _ws2_32.lookupFunction<
+      Pointer<hostent> Function(Pointer<Utf8> name),
+      Pointer<hostent> Function(Pointer<Utf8> name)>('gethostbyname');
+  return _gethostbyname(name);
+}
+
+/// The gethostname function retrieves the standard host name for the local
+/// computer.
+///
+/// ```c
+/// int WSAAPI gethostname(
+///   char *name,
+///   int  namelen
+/// );
+/// ```
+/// {@category winsock}
+int gethostname(Pointer<Utf8> name, int namelen) {
+  final _gethostname = _ws2_32.lookupFunction<
+      Int32 Function(Pointer<Utf8> name, Int32 namelen),
+      int Function(Pointer<Utf8> name, int namelen)>('gethostname');
+  return _gethostname(name, namelen);
 }
 
 /// The getnameinfo function provides protocol-independent name resolution
@@ -156,6 +208,111 @@ int getnameinfo(
       pServiceBuffer, ServiceBufferSize, Flags);
 }
 
+/// The getpeername function retrieves the address of the peer to which a
+/// socket is connected.
+///
+/// ```c
+/// int getpeername(
+///   SOCKET   s,
+///   sockaddr *name,
+///   int      *namelen
+/// );
+/// ```
+/// {@category winsock}
+int getpeername(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) {
+  final _getpeername = _ws2_32.lookupFunction<
+      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
+      int Function(int s, Pointer<SOCKADDR> name,
+          Pointer<Int32> namelen)>('getpeername');
+  return _getpeername(s, name, namelen);
+}
+
+/// The getprotobyname function retrieves the protocol information
+/// corresponding to a protocol name.
+///
+/// ```c
+/// protoent *WSAAPI getprotobyname(
+///   const char *name
+/// );
+/// ```
+/// {@category winsock}
+Pointer<protoent> getprotobyname(Pointer<Utf8> name) {
+  final _getprotobyname = _ws2_32.lookupFunction<
+      Pointer<protoent> Function(Pointer<Utf8> name),
+      Pointer<protoent> Function(Pointer<Utf8> name)>('getprotobyname');
+  return _getprotobyname(name);
+}
+
+/// The getprotobynumber function retrieves protocol information
+/// corresponding to a protocol number.
+///
+/// ```c
+/// protoent *WSAAPI getprotobynumber(
+///   int number
+/// );
+/// ```
+/// {@category winsock}
+Pointer<protoent> getprotobynumber(int number) {
+  final _getprotobynumber = _ws2_32.lookupFunction<
+      Pointer<protoent> Function(Int32 number),
+      Pointer<protoent> Function(int number)>('getprotobynumber');
+  return _getprotobynumber(number);
+}
+
+/// The getservbyname function retrieves service information corresponding
+/// to a service name and protocol.
+///
+/// ```c
+/// servent *WSAAPI getservbyname(
+///   const char *name,
+///   const char *proto
+/// );
+/// ```
+/// {@category winsock}
+Pointer<servent> getservbyname(Pointer<Utf8> name, Pointer<Utf8> proto) {
+  final _getservbyname = _ws2_32.lookupFunction<
+      Pointer<servent> Function(Pointer<Utf8> name, Pointer<Utf8> proto),
+      Pointer<servent> Function(
+          Pointer<Utf8> name, Pointer<Utf8> proto)>('getservbyname');
+  return _getservbyname(name, proto);
+}
+
+/// The getservbyport function retrieves service information corresponding
+/// to a port and protocol.
+///
+/// ```c
+/// servent *WSAAPI getservbyport(
+///   int        port,
+///   const char *proto
+/// );
+/// ```
+/// {@category winsock}
+Pointer<servent> getservbyport(int port, Pointer<Utf8> proto) {
+  final _getservbyport = _ws2_32.lookupFunction<
+      Pointer<servent> Function(Int32 port, Pointer<Utf8> proto),
+      Pointer<servent> Function(
+          int port, Pointer<Utf8> proto)>('getservbyport');
+  return _getservbyport(port, proto);
+}
+
+/// The getsockname function retrieves the local name for a socket.
+///
+/// ```c
+/// int getsockname(
+///   SOCKET   s,
+///   sockaddr *name,
+///   int      *namelen
+/// );
+/// ```
+/// {@category winsock}
+int getsockname(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) {
+  final _getsockname = _ws2_32.lookupFunction<
+      Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
+      int Function(int s, Pointer<SOCKADDR> name,
+          Pointer<Int32> namelen)>('getsockname');
+  return _getsockname(s, name, namelen);
+}
+
 /// The getsockopt function retrieves a socket option.
 ///
 /// ```c
@@ -176,6 +333,66 @@ int getsockopt(int s, int level, int optname, Pointer<Utf8> optval,
       int Function(int s, int level, int optname, Pointer<Utf8> optval,
           Pointer<Int32> optlen)>('getsockopt');
   return _getsockopt(s, level, optname, optval, optlen);
+}
+
+/// The htonl function converts a u_long from host to TCP/IP network byte
+/// order (which is big-endian).
+///
+/// ```c
+/// u_long htonl(
+///   u_long hostlong
+/// );
+/// ```
+/// {@category winsock}
+int htonl(int hostlong) {
+  final _htonl = _ws2_32.lookupFunction<Uint32 Function(Uint32 hostlong),
+      int Function(int hostlong)>('htonl');
+  return _htonl(hostlong);
+}
+
+/// The htons function converts a u_short from host to TCP/IP network byte
+/// order (which is big-endian).
+///
+/// ```c
+/// u_short htons(
+///   u_short hostshort
+/// );
+/// ```
+/// {@category winsock}
+int htons(int hostshort) {
+  final _htons = _ws2_32.lookupFunction<Uint16 Function(Uint16 hostshort),
+      int Function(int hostshort)>('htons');
+  return _htons(hostshort);
+}
+
+/// The inet_addr function converts a string containing an IPv4
+/// dotted-decimal address into a proper address for the IN_ADDR structure.
+///
+/// ```c
+/// unsigned long inet_addr(
+///   const char *cp
+/// );
+/// ```
+/// {@category winsock}
+int inet_addr(Pointer<Utf8> cp) {
+  final _inet_addr = _ws2_32.lookupFunction<Uint32 Function(Pointer<Utf8> cp),
+      int Function(Pointer<Utf8> cp)>('inet_addr');
+  return _inet_addr(cp);
+}
+
+/// The inet_ntoa function converts an (Ipv4) Internet network address into
+/// an ASCII string in Internet standard dotted-decimal format.
+///
+/// ```c
+/// char * inet_ntoa(
+///   in_addr in
+/// );
+/// ```
+/// {@category winsock}
+Pointer<Utf8> inet_ntoa(IN_ADDR in_) {
+  final _inet_ntoa = _ws2_32.lookupFunction<Pointer<Utf8> Function(IN_ADDR in_),
+      Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
+  return _inet_ntoa(in_);
 }
 
 /// The ioctlsocket function controls the I/O mode of a socket.
@@ -210,6 +427,36 @@ int listen(int s, int backlog) {
       Int32 Function(IntPtr s, Int32 backlog),
       int Function(int s, int backlog)>('listen');
   return _listen(s, backlog);
+}
+
+/// The ntohl function converts a u_long from TCP/IP network order to host
+/// byte order (which is little-endian on Intel processors).
+///
+/// ```c
+/// u_long ntohl(
+///   u_long netlong
+/// );
+/// ```
+/// {@category winsock}
+int ntohl(int netlong) {
+  final _ntohl = _ws2_32.lookupFunction<Uint32 Function(Uint32 netlong),
+      int Function(int netlong)>('ntohl');
+  return _ntohl(netlong);
+}
+
+/// The ntohs function converts a u_short from TCP/IP network byte order to
+/// host byte order (which is little-endian on Intel processors).
+///
+/// ```c
+/// u_short ntohs(
+///   u_short netshort
+/// );
+/// ```
+/// {@category winsock}
+int ntohs(int netshort) {
+  final _ntohs = _ws2_32.lookupFunction<Uint16 Function(Uint16 netshort),
+      int Function(int netshort)>('ntohs');
+  return _ntohs(netshort);
 }
 
 /// The recv function receives data from a connected socket or a bound
