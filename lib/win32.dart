@@ -88,7 +88,7 @@ export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
-export 'src/structs.dart';
+export 'src/structs.dart' hide IN_ADDR;
 export 'src/structs.g.dart' hide addrinfo, fd_set, SOCKADDR, timeval;
 export 'src/utils.dart';
 

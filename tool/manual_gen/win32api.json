@@ -535,7 +535,7 @@
         "category": "kernel32",
         "minimumWindowsVersion": "WIN10_TH1"
     },
-    "connection": {
+    "connect": {
         "prototype": "int WSAAPI connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The connect function establishes a connection to a specified socket.",
@@ -1671,6 +1671,27 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves certain properties of an object handle."
     },
+    "gethostbyaddr": {
+        "prototype": "hostent *WSAAPI gethostbyaddr(\n   const char *addr,\n   int        len,\n   int        type\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostbyaddr function retrieves the host information corresponding to a network address.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "gethostbyname": {
+        "prototype": "hostent *WSAAPI gethostbyname(\n  const char *name\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostbyname function retrieves host information corresponding to a host name from a host database.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "gethostname": {
+        "prototype": "int WSAAPI gethostname(\n  char *name,\n  int  namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The gethostname function retrieves the standard host name for the local computer.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetIconInfo": {
         "prototype": "BOOL GetIconInfo(\n  HICON     hIcon,\n  PICONINFO piconinfo\n);",
         "dllLibrary": "user32",
@@ -1995,6 +2016,13 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the specified window's parent or owner."
     },
+    "getpeername": {
+        "prototype": "int getpeername(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getpeername function retrieves the address of the peer to which a socket is connected.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
@@ -2061,6 +2089,20 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a data handle from the property list of the specified window. The character string identifies the handle to be retrieved. The string and handle must have been added to the property list by a previous call to the SetProp function."
     },
+    "getprotobyname": {
+        "prototype": "protoent *WSAAPI getprotobyname(\n  const char *name\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getprotobyname function retrieves the protocol information corresponding to a protocol name.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getprotobynumber": {
+        "prototype": "protoent *WSAAPI getprotobynumber(\n  int number\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getprotobynumber function retrieves protocol information corresponding to a protocol number.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetQueuedCompletionStatus": {
         "prototype": "BOOL GetQueuedCompletionStatus(\n  HANDLE       CompletionPort,\n  LPDWORD      lpNumberOfBytesTransferred,\n  PULONG_PTR   lpCompletionKey,\n  LPOVERLAPPED *lpOverlapped,\n  DWORD        dwMilliseconds\n);",
         "dllLibrary": "kernel32",
@@ -2086,10 +2128,31 @@
         "dllLibrary": "user32",
         "comment": "The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb)."
     },
+    "getservbyname": {
+        "prototype": "servent *WSAAPI getservbyname(\n  const char *name,\n  const char *proto\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getservbyname function retrieves service information corresponding to a service name and protocol.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "getservbyport": {
+        "prototype": "servent *WSAAPI getservbyport(\n  int        port,\n  const char *proto\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getservbyport function retrieves service information corresponding to a port and protocol.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "GetShellWindow": {
         "prototype": "HWND GetShellWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the Shell's desktop window."
+    },
+    "getsockname": {
+        "prototype": "int getsockname(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The getsockname function retrieves the local name for a socket.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "getsockopt": {
         "prototype": "int WSAAPI getsockopt(\n  SOCKET s,\n  int    level,\n  int    optname,\n  char   *optval,\n  int    *optlen\n);",
@@ -2479,10 +2542,38 @@
         "dllLibrary": "user32",
         "comment": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point."
     },
+    "htonl": {
+        "prototype": "u_long htonl(\n  u_long hostlong\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The htonl function converts a u_long from host to TCP/IP network byte order (which is big-endian).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "htons": {
+        "prototype": "u_short htons(\n  u_short hostshort\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The htons function converts a u_short from host to TCP/IP network byte order (which is big-endian).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
     "IIDFromString": {
         "prototype": "HRESULT IIDFromString(\n  LPCOLESTR lpsz,\n  LPIID     lpiid\n);",
         "dllLibrary": "ole32",
         "comment": "Converts a string generated by the StringFromIID function back into the original interface identifier (IID)."
+    },
+    "inet_addr": {
+        "prototype": "unsigned long inet_addr(\n  const char *cp\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The inet_addr function converts a string containing an IPv4 dotted-decimal address into a proper address for the IN_ADDR structure.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "inet_ntoa": {
+        "prototype": "char * inet_ntoa(\n  in_addr in\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The inet_ntoa function converts an (Ipv4) Internet network address into an ASCII string in Internet standard dotted-decimal format.",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "InflateRect": {
         "prototype": "BOOL InflateRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
@@ -3052,6 +3143,20 @@
         "prototype": "void NotifyWinEvent(\n  DWORD event,\n  HWND  hwnd,\n  LONG  idObject,\n  LONG  idChild\n);",
         "dllLibrary": "user32",
         "comment": "Signals the system that a predefined event occurred. If any client applications have registered a hook function for the event, the system calls the client's hook function."
+    },
+    "ntohl": {
+        "prototype": "u_long ntohl(\n  u_long netlong\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ntohl function converts a u_long from TCP/IP network order to host byte order (which is little-endian on Intel processors).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
+    },
+    "ntohs": {
+        "prototype": "u_short ntohs(\n  u_short netshort\n);",
+        "dllLibrary": "ws2_32",
+        "comment": "The ntohs function converts a u_short from TCP/IP network byte order to host byte order (which is little-endian on Intel processors).",
+        "category": "winsock",
+        "minimumWindowsVersion": "WIN81"
     },
     "OffsetRect": {
         "prototype": "BOOL OffsetRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",

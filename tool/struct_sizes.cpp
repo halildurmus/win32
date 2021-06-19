@@ -27,6 +27,7 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
+#include <winsock.h>
 
 void main()
 {
@@ -60,7 +61,7 @@ void main()
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
-    printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'addrinfo': %zu,\n", sizeof(ADDRINFOW));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -110,6 +111,7 @@ void main()
     printf("  'GESTUREINFO': %zu,\n", sizeof(GESTUREINFO));
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
+    printf("  'hostent': %zu,\n", sizeof(hostent));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
@@ -165,6 +167,7 @@ void main()
     printf("  'POWERBROADCAST_SETTING': %zu,\n", sizeof(POWERBROADCAST_SETTING));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
+    printf("  'protoent': %zu,\n", sizeof(protoent));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
@@ -176,6 +179,7 @@ void main()
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
+    printf("  'servent': %zu,\n", sizeof(servent));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
     printf("  'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));

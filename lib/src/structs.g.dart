@@ -1104,6 +1104,25 @@ class GUITHREADINFO extends Struct {
   external RECT rcCaret;
 }
 
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free
+/// any of its components. Furthermore, only one copy of the hostent
+/// structure is allocated per thread, and an application should therefore
+/// copy any information that it needs before issuing any other Windows
+/// Sockets API calls.
+///
+/// {@category Struct}
+class hostent extends Struct {
+  external Pointer<Utf8> h_name;
+  external Pointer<Pointer<Int8>> h_aliases;
+  @Int16()
+  external int h_addrtype;
+  @Int16()
+  external int h_length;
+  external Pointer<Pointer<Int8>> h_addr_list;
+}
+
 /// Contains information about an icon or a cursor.
 ///
 /// {@category Struct}
@@ -2317,6 +2336,21 @@ class PROPERTYKEY extends Struct {
   external int pid;
 }
 
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class protoent extends Struct {
+  external Pointer<Utf8> p_name;
+  external Pointer<Pointer<Int8>> p_aliases;
+  @Int16()
+  external int p_proto;
+}
+
 /// The RECT structure defines a rectangle by the coordinates of its
 /// upper-left and lower-right corners.
 ///
@@ -2491,6 +2525,18 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer Group;
   external Pointer<ACL> Sacl;
   external Pointer<ACL> Dacl;
+}
+
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class servent extends Struct {
+  external Pointer<Utf8> s_name;
+  external Pointer<Pointer<Int8>> s_aliases;
+  external Pointer<Utf8> s_proto;
+  @Int16()
+  external int s_port;
 }
 
 /// Defines Shell item resource.
