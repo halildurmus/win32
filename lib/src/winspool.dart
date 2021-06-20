@@ -423,6 +423,57 @@ int EnumPrinterKey(int hPrinter, Pointer<Utf16> pKeyName,
   return _EnumPrinterKey(hPrinter, pKeyName, pSubkey, cbSubkey, pcbSubkey);
 }
 
+/// The FindFirstPrinterChangeNotification function creates a change
+/// notification object and returns a handle to the object. You can then
+/// use this handle in a call to one of the wait functions to monitor
+/// changes to the printer or print server.
+///
+/// ```c
+/// HANDLE FindFirstPrinterChangeNotification(
+///   _In_     HANDLE hPrinter,
+///            DWORD  fdwFilter,
+///            DWORD  fdwOptions,
+///   _In_opt_ LPVOID pPrinterNotifyOptions
+/// );
+/// ```
+/// {@category winspool}
+int FindFirstPrinterChangeNotification(int hPrinter, int fdwFilter,
+    int fdwOptions, Pointer pPrinterNotifyOptions) {
+  final _FindFirstPrinterChangeNotification = _winspool.lookupFunction<
+      IntPtr Function(IntPtr hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
+          Pointer pPrinterNotifyOptions),
+      int Function(int hPrinter, int fdwFilter, int fdwOptions,
+          Pointer pPrinterNotifyOptions)>('FindFirstPrinterChangeNotification');
+  return _FindFirstPrinterChangeNotification(
+      hPrinter, fdwFilter, fdwOptions, pPrinterNotifyOptions);
+}
+
+/// The FindNextPrinterChangeNotification function retrieves information
+/// about the most recent change notification for a change notification
+/// object associated with a printer or print server. Call this function
+/// when a wait operation on the change notification object is satisfied.
+///
+/// ```c
+/// BOOL FindNextPrinterChangeNotification(
+///   _In_      HANDLE hChange,
+///   _Out_opt_ PDWORD pdwChange,
+///   _In_opt_  LPVOID pPrinterNotifyOptions,
+///   _Out_opt_ LPVOID *ppPrinterNotifyInfo
+/// );
+/// ```
+/// {@category winspool}
+int FindNextPrinterChangeNotification(int hChange, Pointer<Uint32> pdwChange,
+    Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo) {
+  final _FindNextPrinterChangeNotification = _winspool.lookupFunction<
+          Int32 Function(IntPtr hChange, Pointer<Uint32> pdwChange,
+              Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo),
+          int Function(int hChange, Pointer<Uint32> pdwChange,
+              Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo)>(
+      'FindNextPrinterChangeNotification');
+  return _FindNextPrinterChangeNotification(
+      hChange, pdwChange, pvReserved, ppPrinterNotifyInfo);
+}
+
 /// The FlushPrinter function sends a buffer to the printer in order to
 /// clear it from a transient state.
 ///
@@ -444,6 +495,23 @@ int FlushPrinter(int hPrinter, Pointer pBuf, int cbBuf,
       int Function(int hPrinter, Pointer pBuf, int cbBuf,
           Pointer<Uint32> pcWritten, int cSleep)>('FlushPrinter');
   return _FlushPrinter(hPrinter, pBuf, cbBuf, pcWritten, cSleep);
+}
+
+/// The FreePrinterNotifyInfo function frees a system-allocated buffer
+/// created by the FindNextPrinterChangeNotification function.
+///
+/// ```c
+/// BOOL FreePrinterNotifyInfo(
+///   _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo
+/// );
+/// ```
+/// {@category winspool}
+int FreePrinterNotifyInfo(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo) {
+  final _FreePrinterNotifyInfo = _winspool.lookupFunction<
+          Int32 Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo),
+          int Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo)>(
+      'FreePrinterNotifyInfo');
+  return _FreePrinterNotifyInfo(pPrinterNotifyInfo);
 }
 
 /// The GetDefaultPrinter function retrieves the printer name of the

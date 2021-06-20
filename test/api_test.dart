@@ -63,37 +63,6 @@ void main() {
           int Function(int hChange)>('FindClosePrinterChangeNotification');
       expect(FindClosePrinterChangeNotification, isA<Function>());
     });
-    test('Can instantiate FindFirstPrinterChangeNotification', () {
-      final spoolss = DynamicLibrary.open('spoolss.dll');
-      final FindFirstPrinterChangeNotification = spoolss.lookupFunction<
-          IntPtr Function(IntPtr hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
-              Pointer pPrinterNotifyOptions),
-          int Function(
-              int hPrinter,
-              int fdwFilter,
-              int fdwOptions,
-              Pointer
-                  pPrinterNotifyOptions)>('FindFirstPrinterChangeNotification');
-      expect(FindFirstPrinterChangeNotification, isA<Function>());
-    });
-    test('Can instantiate FindNextPrinterChangeNotification', () {
-      final spoolss = DynamicLibrary.open('spoolss.dll');
-      final FindNextPrinterChangeNotification = spoolss.lookupFunction<
-              Int32 Function(IntPtr hChange, Pointer<Uint32> pdwChange,
-                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo),
-              int Function(int hChange, Pointer<Uint32> pdwChange,
-                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo)>(
-          'FindNextPrinterChangeNotification');
-      expect(FindNextPrinterChangeNotification, isA<Function>());
-    });
-    test('Can instantiate FreePrinterNotifyInfo', () {
-      final spoolss = DynamicLibrary.open('spoolss.dll');
-      final FreePrinterNotifyInfo = spoolss.lookupFunction<
-              Int32 Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo),
-              int Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo)>(
-          'FreePrinterNotifyInfo');
-      expect(FreePrinterNotifyInfo, isA<Function>());
-    });
     test('Can instantiate OpenPrinter2', () {
       final spoolss = DynamicLibrary.open('spoolss.dll');
       final OpenPrinter2 = spoolss.lookupFunction<
@@ -6749,6 +6718,29 @@ void main() {
               Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
       expect(EnumPrinterKey, isA<Function>());
     });
+    test('Can instantiate FindFirstPrinterChangeNotification', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FindFirstPrinterChangeNotification = winspool.lookupFunction<
+          IntPtr Function(IntPtr hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
+              Pointer pPrinterNotifyOptions),
+          int Function(
+              int hPrinter,
+              int fdwFilter,
+              int fdwOptions,
+              Pointer
+                  pPrinterNotifyOptions)>('FindFirstPrinterChangeNotification');
+      expect(FindFirstPrinterChangeNotification, isA<Function>());
+    });
+    test('Can instantiate FindNextPrinterChangeNotification', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FindNextPrinterChangeNotification = winspool.lookupFunction<
+              Int32 Function(IntPtr hChange, Pointer<Uint32> pdwChange,
+                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo),
+              int Function(int hChange, Pointer<Uint32> pdwChange,
+                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo)>(
+          'FindNextPrinterChangeNotification');
+      expect(FindNextPrinterChangeNotification, isA<Function>());
+    });
     test('Can instantiate FlushPrinter', () {
       final winspool = DynamicLibrary.open('winspool.drv');
       final FlushPrinter = winspool.lookupFunction<
@@ -6757,6 +6749,14 @@ void main() {
           int Function(int hPrinter, Pointer pBuf, int cbBuf,
               Pointer<Uint32> pcWritten, int cSleep)>('FlushPrinter');
       expect(FlushPrinter, isA<Function>());
+    });
+    test('Can instantiate FreePrinterNotifyInfo', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FreePrinterNotifyInfo = winspool.lookupFunction<
+              Int32 Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo),
+              int Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo)>(
+          'FreePrinterNotifyInfo');
+      expect(FreePrinterNotifyInfo, isA<Function>());
     });
     test('Can instantiate GetDefaultPrinter', () {
       final winspool = DynamicLibrary.open('winspool.drv');
