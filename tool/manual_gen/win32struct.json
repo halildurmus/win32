@@ -1,4 +1,48 @@
 {
+    "ADDJOB_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.ADDJOB_INFO_1W",
+        "comment": "The ADDJOB_INFO_1 structure identifies a print job as well as the directory and file in which an application can store that job."
+    },
+    "JOB_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
+        "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
+    },
+    "PRINTER_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_1W",
+        "comment": "The PRINTER_INFO_1 structure specifies general printer information."
+    },
+    "PRINTER_INFO_2": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_2W",
+        "comment": "The PRINTER_INFO_2 structure specifies detailed printer information."
+    },
+    "PRINTER_INFO_3": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_3",
+        "comment": "The PRINTER_INFO_3 structure specifies printer security information."
+    },
+    "PRINTER_INFO_4": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_4W",
+        "comment": "The PRINTER_INFO_4 structure specifies general printer information. The structure can be used to retrieve minimal printer information on a call to EnumPrinters. Such a call is a fast and easy way to retrieve the names and attributes of all locally installed printers on a system and all remote printer connections that a user has established."
+    },
+    "PRINTER_INFO_5": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_5W",
+        "comment": "The PRINTER_INFO_5 structure specifies detailed printer information."
+    },
+    "PRINTER_INFO_6": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_6",
+        "comment": "The PRINTER_INFO_6 specifies the status value of a printer."
+    },
+    "PRINTER_OPTIONS": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_OPTIONS",
+        "comment": "Represents printer options."
+    },
+    "PORT_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.PORT_INFO_1W",
+        "comment": "The PORT_INFO_1 structure identifies a supported printer port."
+    },
+    "PORT_INFO_2": {
+        "namespace": "Windows.Win32.Graphics.Printing.PORT_INFO_2W",
+        "comment": "The PORT_INFO_2 structure identifies a supported printer port."
+    },
     "ACCEL": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.ACCEL",
         "comment": "Defines an accelerator key used in an accelerator table."
