@@ -11,6 +11,10 @@
         "namespace": "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW",
         "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
     },
+    "ADDJOB_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.ADDJOB_INFO_1W",
+        "comment": "The ADDJOB_INFO_1 structure identifies a print job as well as the directory and file in which an application can store that job."
+    },
     "addrinfo": {
         "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
         "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
@@ -167,6 +171,10 @@
         "namespace": "Windows.Win32.UI.Shell.DLLVERSIONINFO",
         "comment": "Receives DLL-specific version information. It is used with the DllGetVersion function."
     },
+    "DOC_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.DOC_INFO_1W",
+        "comment": "The DOC_INFO_1 structure describes a document that will be printed."
+    },
     "DRAWTEXTPARAMS": {
         "namespace": "Windows.Win32.Graphics.Gdi.DRAWTEXTPARAMS",
         "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
@@ -234,6 +242,10 @@
     "ITEMIDLIST": {
         "namespace": "Windows.Win32.UI.Shell.ITEMIDLIST",
         "comment": "Contains a list of item identifiers."
+    },
+    "JOB_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
+        "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
     },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION",
@@ -423,9 +435,61 @@
         "namespace": "Windows.Win32.Graphics.Gdi.POLYTEXTW",
         "comment": "The POLYTEXT structure describes how the PolyTextOut function should draw a string of text."
     },
+    "PORT_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.PORT_INFO_1W",
+        "comment": "The PORT_INFO_1 structure identifies a supported printer port."
+    },
+    "PORT_INFO_2": {
+        "namespace": "Windows.Win32.Graphics.Printing.PORT_INFO_2W",
+        "comment": "The PORT_INFO_2 structure identifies a supported printer port."
+    },
     "POWERBROADCAST_SETTING": {
         "namespace": "Windows.Win32.System.Power.POWERBROADCAST_SETTING",
         "comment": "Sent with a power setting event and contains data about the specific change."
+    },
+    "PRINT_EXECUTION_DATA": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINT_EXECUTION_DATA",
+        "comment": "Contains the execution context of the printer driver that calls GetPrintExecutionData."
+    },
+    "PRINTER_DEFAULTS": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_DEFAULTSW",
+        "comment": "The PRINTER_DEFAULTS structure specifies the default data type, environment, initialization data, and access rights for a printer."
+    },
+    "PRINTER_INFO_1": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_1W",
+        "comment": "The PRINTER_INFO_1 structure specifies general printer information."
+    },
+    "PRINTER_INFO_2": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_2W",
+        "comment": "The PRINTER_INFO_2 structure specifies detailed printer information."
+    },
+    "PRINTER_INFO_3": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_3",
+        "comment": "The PRINTER_INFO_3 structure specifies printer security information."
+    },
+    "PRINTER_INFO_4": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_4W",
+        "comment": "The PRINTER_INFO_4 structure specifies general printer information. The structure can be used to retrieve minimal printer information on a call to EnumPrinters. Such a call is a fast and easy way to retrieve the names and attributes of all locally installed printers on a system and all remote printer connections that a user has established."
+    },
+    "PRINTER_INFO_5": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_5W",
+        "comment": "The PRINTER_INFO_5 structure specifies detailed printer information."
+    },
+    "PRINTER_INFO_6": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_INFO_6",
+        "comment": "The PRINTER_INFO_6 specifies the status value of a printer."
+    },
+    "PRINTER_NOTIFY_INFO": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_NOTIFY_INFO",
+        "comment": "The PRINTER_NOTIFY_INFO structure contains printer information returned by the FindNextPrinterChangeNotification function. The function returns this information after a wait operation on a printer change notification object has been satisfied."
+    },
+    "PRINTER_NOTIFY_INFO_DATA": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_NOTIFY_INFO_DATA",
+        "comment": "The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer information field and provides the current data for that field."
+    },
+    "PRINTER_OPTIONS": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW",
+        "comment": "Represents printer options."
     },
     "PROCESS_INFORMATION": {
         "namespace": "Windows.Win32.System.Threading.PROCESS_INFORMATION",

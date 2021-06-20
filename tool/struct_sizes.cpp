@@ -62,6 +62,7 @@ void main()
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
+    printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
     printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
@@ -101,6 +102,7 @@ void main()
     printf("  'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
     printf("  'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));
     printf("  'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
+    printf("  'DOC_INFO_1': %zu,\n", sizeof(DOC_INFO_1W));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
@@ -118,6 +120,7 @@ void main()
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
+    printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
     printf("  'LOGBRUSH': %zu,\n", sizeof(LOGBRUSH));
@@ -165,7 +168,20 @@ void main()
     printf("  'POINT': %zu,\n", sizeof(POINT));
     printf("  'POINTS': %zu,\n", sizeof(POINTS));
     printf("  'POLYTEXT': %zu,\n", sizeof(POLYTEXTW));
+    printf("  'PORT_INFO_1': %zu,\n", sizeof(PORT_INFO_1W));
+    printf("  'PORT_INFO_2': %zu,\n", sizeof(PORT_INFO_2W));
     printf("  'POWERBROADCAST_SETTING': %zu,\n", sizeof(POWERBROADCAST_SETTING));
+    printf("  'PRINT_EXECUTION_DATA': %zu,\n", sizeof(PRINT_EXECUTION_DATA));
+    printf("  'PRINTER_DEFAULTS': %zu,\n", sizeof(PRINTER_DEFAULTSW));
+    printf("  'PRINTER_INFO_1': %zu,\n", sizeof(PRINTER_INFO_1W));
+    printf("  'PRINTER_INFO_2': %zu,\n", sizeof(PRINTER_INFO_2W));
+    printf("  'PRINTER_INFO_3': %zu,\n", sizeof(PRINTER_INFO_3));
+    printf("  'PRINTER_INFO_4': %zu,\n", sizeof(PRINTER_INFO_4W));
+    printf("  'PRINTER_INFO_5': %zu,\n", sizeof(PRINTER_INFO_5W));
+    printf("  'PRINTER_INFO_6': %zu,\n", sizeof(PRINTER_INFO_6));
+    printf("  'PRINTER_NOTIFY_INFO': %zu,\n", sizeof(PRINTER_NOTIFY_INFO));
+    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
+    printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'protoent': %zu,\n", sizeof(protoent));

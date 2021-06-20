@@ -91,6 +91,21 @@ bool methodMatches(String methodName, List<String> rawPrototype) {
   return prototype.contains(methodNameToFind);
 }
 
+/// Qualify the DLL with an extension.
+///
+/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
+/// couple of exceptions. We hardcode them here, since there are so few.
+String libraryFromDllName(String dllName) {
+  switch (dllName) {
+    case 'bthprops':
+      return 'bthprops.cpl';
+    case 'winspool':
+      return 'winspool.drv';
+    default:
+      return '$dllName.dll';
+  }
+}
+
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
@@ -135,7 +150,7 @@ import 'combase.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
-final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
+final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
 ''');
 
     // Subset of functions that belong to the library we're projecting.

@@ -124,11 +124,13 @@ export 'src/rometadata.dart';
 export 'src/scarddlg.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
+export 'src/spoolss.dart';
 export 'src/types.dart';
 export 'src/user32.dart';
 export 'src/version.dart';
 export 'src/winmm.dart';
 export 'src/winscard.dart';
+export 'src/winspool.dart';
 
 export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';

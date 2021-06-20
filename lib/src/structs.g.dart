@@ -102,6 +102,16 @@ class ACTCTX extends Struct {
   external int hModule;
 }
 
+/// The ADDJOB_INFO_1 structure identifies a print job as well as the
+/// directory and file in which an application can store that job.
+///
+/// {@category Struct}
+class ADDJOB_INFO_1 extends Struct {
+  external Pointer<Utf16> Path;
+  @Uint32()
+  external int JobId;
+}
+
 /// The addrinfoW structure is used by the GetAddrInfoW function to hold
 /// host address information.
 ///
@@ -854,6 +864,15 @@ class DLLVERSIONINFO extends Struct {
   external int dwPlatformID;
 }
 
+/// The DOC_INFO_1 structure describes a document that will be printed.
+///
+/// {@category Struct}
+class DOC_INFO_1 extends Struct {
+  external Pointer<Utf16> pDocName;
+  external Pointer<Utf16> pOutputFile;
+  external Pointer<Utf16> pDatatype;
+}
+
 /// The DRAWTEXTPARAMS structure contains extended formatting options for
 /// the DrawTextEx function.
 ///
@@ -1222,6 +1241,34 @@ class INITCOMMONCONTROLSEX extends Struct {
 /// {@category Struct}
 class ITEMIDLIST extends Struct {
   external SHITEMID mkid;
+}
+
+/// The JOB_INFO_1 structure specifies print-job information such as the
+/// job-identifier value, the name of the printer for which the job is
+/// spooled, the name of the machine that created the print job, the name
+/// of the user that owns the print job, and so on.
+///
+/// {@category Struct}
+class JOB_INFO_1 extends Struct {
+  @Uint32()
+  external int JobId;
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pMachineName;
+  external Pointer<Utf16> pUserName;
+  external Pointer<Utf16> pDocument;
+  external Pointer<Utf16> pDatatype;
+  external Pointer<Utf16> pStatus;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int Priority;
+  @Uint32()
+  external int Position;
+  @Uint32()
+  external int TotalPages;
+  @Uint32()
+  external int PagesPrinted;
+  external SYSTEMTIME Submitted;
 }
 
 /// Defines the specifics of a known folder.
@@ -2298,6 +2345,26 @@ class POLYTEXT extends Struct {
   external Pointer<Int32> pdx;
 }
 
+/// The PORT_INFO_1 structure identifies a supported printer port.
+///
+/// {@category Struct}
+class PORT_INFO_1 extends Struct {
+  external Pointer<Utf16> pName;
+}
+
+/// The PORT_INFO_2 structure identifies a supported printer port.
+///
+/// {@category Struct}
+class PORT_INFO_2 extends Struct {
+  external Pointer<Utf16> pPortName;
+  external Pointer<Utf16> pMonitorName;
+  external Pointer<Utf16> pDescription;
+  @Uint32()
+  external int fPortType;
+  @Uint32()
+  external int Reserved;
+}
+
 /// Sent with a power setting event and contains data about the specific
 /// change.
 ///
@@ -2308,6 +2375,161 @@ class POWERBROADCAST_SETTING extends Struct {
   external int DataLength;
   @Array(1)
   external Array<Uint8> Data;
+}
+
+/// Contains the execution context of the printer driver that calls
+/// GetPrintExecutionData.
+///
+/// {@category Struct}
+class PRINT_EXECUTION_DATA extends Struct {
+  @Uint32()
+  external int context;
+  @Uint32()
+  external int clientAppPID;
+}
+
+/// The PRINTER_DEFAULTS structure specifies the default data type,
+/// environment, initialization data, and access rights for a printer.
+///
+/// {@category Struct}
+class PRINTER_DEFAULTS extends Struct {
+  external Pointer<Utf16> pDatatype;
+  external Pointer<DEVMODE> pDevMode;
+  @Uint32()
+  external int DesiredAccess;
+}
+
+/// The PRINTER_INFO_1 structure specifies general printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_1 extends Struct {
+  @Uint32()
+  external int Flags;
+  external Pointer<Utf16> pDescription;
+  external Pointer<Utf16> pName;
+  external Pointer<Utf16> pComment;
+}
+
+/// The PRINTER_INFO_2 structure specifies detailed printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_2 extends Struct {
+  external Pointer<Utf16> pServerName;
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pShareName;
+  external Pointer<Utf16> pPortName;
+  external Pointer<Utf16> pDriverName;
+  external Pointer<Utf16> pComment;
+  external Pointer<Utf16> pLocation;
+  external Pointer<DEVMODE> pDevMode;
+  external Pointer<Utf16> pSepFile;
+  external Pointer<Utf16> pPrintProcessor;
+  external Pointer<Utf16> pDatatype;
+  external Pointer<Utf16> pParameters;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+  @Uint32()
+  external int Attributes;
+  @Uint32()
+  external int Priority;
+  @Uint32()
+  external int DefaultPriority;
+  @Uint32()
+  external int StartTime;
+  @Uint32()
+  external int UntilTime;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int cJobs;
+  @Uint32()
+  external int AveragePPM;
+}
+
+/// The PRINTER_INFO_3 structure specifies printer security information.
+///
+/// {@category Struct}
+class PRINTER_INFO_3 extends Struct {
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+}
+
+/// The PRINTER_INFO_4 structure specifies general printer information. The
+/// structure can be used to retrieve minimal printer information on a call
+/// to EnumPrinters. Such a call is a fast and easy way to retrieve the
+/// names and attributes of all locally installed printers on a system and
+/// all remote printer connections that a user has established.
+///
+/// {@category Struct}
+class PRINTER_INFO_4 extends Struct {
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pServerName;
+  @Uint32()
+  external int Attributes;
+}
+
+/// The PRINTER_INFO_5 structure specifies detailed printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_5 extends Struct {
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pPortName;
+  @Uint32()
+  external int Attributes;
+  @Uint32()
+  external int DeviceNotSelectedTimeout;
+  @Uint32()
+  external int TransmissionRetryTimeout;
+}
+
+/// The PRINTER_INFO_6 specifies the status value of a printer.
+///
+/// {@category Struct}
+class PRINTER_INFO_6 extends Struct {
+  @Uint32()
+  external int dwStatus;
+}
+
+/// The PRINTER_NOTIFY_INFO structure contains printer information returned
+/// by the FindNextPrinterChangeNotification function. The function returns
+/// this information after a wait operation on a printer change
+/// notification object has been satisfied.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO extends Struct {
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Count;
+  @Array(1)
+  external Array<PRINTER_NOTIFY_INFO_DATA> aData;
+}
+
+/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
+/// information field and provides the current data for that field.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  @Uint16()
+  external int Type;
+  @Uint16()
+  external int Field;
+  @Uint32()
+  external int Reserved;
+  @Uint32()
+  external int Id;
+  @Uint32()
+  external int NotifyData;
+}
+
+/// Represents printer options.
+///
+/// {@category Struct}
+class PRINTER_OPTIONS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
 }
 
 /// Contains information about a newly created process and its primary
