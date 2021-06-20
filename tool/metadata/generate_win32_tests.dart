@@ -82,7 +82,7 @@ void main() {
 
       final test = '''
       test('Can instantiate $function', () {
-        final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
+        final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
         final $function = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(${prototype.nativeParams}),
           $returnDartType Function(${prototype.dartParams})>

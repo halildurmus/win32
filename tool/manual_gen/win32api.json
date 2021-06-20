@@ -2,329 +2,9 @@
     "AbortPrinter": {
         "prototype": "BOOL AbortPrinter(\n  _In_ HANDLE hPrinter\n);",
         "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The AbortPrinter function deletes a printer's spool file if the printer is configured for spooling."
+        "comment": "The AbortPrinter function deletes a printer's spool file if the printer is configured for spooling.",
+        "category": "winspool"
     },
-    "AddForm": {
-        "prototype": "BOOL AddForm(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pForm\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The AddForm function adds a form to the list of available forms that can be selected for the specified printer."
-    },
-    "AddJob": {
-        "prototype": "BOOL AddJob(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The AddJob function adds a print job to the list of print jobs that can be scheduled by the print spooler. The function retrieves the name of the file you can use to store the job."
-    },
-    "AddPrinter": {
-        "prototype": "HANDLE AddPrinter(\n  _In_ LPTSTR *pName,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter\n);",
-        "dllLibrary": "winspool",
-        "comment": "The AddPrinter function adds a printer to the list of supported printers for a specified server."
-    },
-    "AddPrinterConnection": {
-        "prototype": "BOOL AddPrinterConnection(\n  _In_ LPTSTR pName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The AddPrinterConnection function adds a connection to the specified printer for the current user."
-    },
-    "AddPrinterConnection2": {
-        "prototype": "BOOL AddPrinterConnection2(\n  _In_ HWND    hWnd,\n  _In_ LPCTSTR pszName,\n       DWORD   dwLevel,\n  _In_ PVOID   pConnectionInfo\n);",
-        "dllLibrary": "winspool",
-        "comment": "Adds a connection to the specified printer for the current user and specifies connection details."
-    },
-    "AdvancedDocumentProperties": {
-        "prototype": "LONG AdvancedDocumentProperties(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput\n);",
-        "dllLibrary": "winspool",
-        "comment": "The AdvancedDocumentProperties function displays a printer-configuration dialog box for the specified printer, allowing the user to configure that printer."
-    },
-    "BindPTProviderThunk": {
-        "prototype": "HRESULT BindPTProviderThunk(\n  _In_  LPTSTR      pszPrinterName,\n  _In_  INT         maxVersion,\n  _In_  INT         prefVersion,\n  _Out_ HPTPROVIDER *phProvider,\n  _Out_ INT         *usedVersion\n);",
-        "dllLibrary": "prntvpt",
-        "category": "winspool",
-        "comment": "Opens an instance of a print ticket provider."
-    },
-    "ClosePrinter": {
-        "prototype": "BOOL ClosePrinter(\n  _In_ HANDLE hPrinter\n  );",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The ClosePrinter function closes the specified printer object."
-    },
-    "CloseSpoolFileHandle": {
-        "prototype": "BOOL CloseSpoolFileHandle(\n  _In_ HANDLE hPrinter,\n  _In_ HANDLE hSpoolFile\n);",
-        "dllLibrary": "winspool",
-        "comment": "The CloseSpoolFileHandle function closes a handle to a spool file associated with the print job currently submitted by the application."
-    },
-    "CommitSpoolData": {
-        "prototype": "HANDLE CommitSpoolData(\n  _In_ HANDLE hPrinter,\n  _In_ HANDLE hSpoolFile,\n       DWORD  cbCommit\n);",
-        "dllLibrary": "winspool",
-        "comment": "The CommitSpoolData function notifies the print spooler that a specified amount of data has been written to a specified spool file and is ready to be rendered."
-    },
-    "ConfigurePort": {
-        "prototype": "BOOL ConfigurePortW(\n  _In_ LPTSTR pName,\n  _In_ HWND   hWnd,\n  _In_ LPTSTR pPortName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The ConfigurePort function displays the port-configuration dialog box for a port on the specified server."
-    },
-    "ConnectToPrinterDlg": {
-        "prototype": "HANDLE ConnectToPrinterDlg(\n  _In_ HWND  hwnd,\n  _In_ DWORD Flags\n);",
-        "dllLibrary": "winspool",
-        "comment": "The ConnectToPrinterDlg function displays a dialog box that lets users browse and connect to printers on a network. If the user selects a printer, the function attempts to create a connection to it; if a suitable driver is not installed on the server, the user is given the option of creating a printer locally."
-    },
-    "DeleteForm": {
-        "prototype": "BOOL DeleteFormW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pFormName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DeleteForm function removes a form name from the list of supported forms."
-    },
-    "DeletePrinter": {
-        "prototype": "BOOL DeletePrinter(\n  _Inout_ HANDLE hPrinter\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The DeletePrinter function deletes the specified printer object."
-    },
-    "DeletePrinterConnection": {
-        "prototype": "BOOL DeletePrinterConnectionW(\n  _In_ LPTSTR pName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DeletePrinterConnection function deletes a connection to a printer that was established by a call to AddPrinterConnection or ConnectToPrinterDlg."
-    },
-    "DeletePrinterData": {
-        "prototype": "DWORD DeletePrinterDataW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pValueName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DeletePrinterData function deletes specified configuration data for a printer. A printer's configuration data consists of a set of named and typed values. The DeletePrinterData function deletes one of these values, specified by its value name."
-    },
-    "DeletePrinterDataEx": {
-        "prototype": "DWORD DeletePrinterDataExW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName,\n  _In_ LPCTSTR pValueName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DeletePrinterDataEx function deletes a specified value from the configuration data for a printer. A printer's configuration data consists of a set of named and typed values stored in a hierarchy of registry keys. The function deletes a specified value under a specified key."
-    },
-    "DeletePrinterKey": {
-        "prototype": "DWORD DeletePrinterKeyW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DeletePrinterKey function deletes a specified key and all its subkeys for a specified printer."
-    },
-    "DocumentEvent": {
-        "prototype": "HRESULT DocumentEventW(\n  _In_  HANDLE hPrinter,\n  _In_  HDC    hdc,\n        INT    iEsc,\n        ULONG  cbIn,\n  _In_  PVOID  pvIn,\n        ULONG  cbOut,\n  _Out_ PVOID  pvOut\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DocumentEvent function is an event handler for events associated with printing a document."
-    },
-    "DocumentProperties": {
-        "prototype": "LONG DocumentPropertiesW(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput,\n  _In_  DWORD    fMode\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DocumentProperties function retrieves or modifies printer initialization information or displays a printer-configuration property sheet for the specified printer."
-    },
-    "EndDocPrinter": {
-        "prototype": "BOOL EndDocPrinter(\n  _In_ HANDLE hPrinter\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The EndDocPrinter function ends a print job for the specified printer."
-    },
-    "EndPagePrinter": {
-        "prototype": "BOOL EndPagePrinter(\n  _In_ HANDLE hPrinter\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The EndPagePrinter function notifies the print spooler that the application is at the end of a page in a print job."
-    },
-    "EnumForms": {
-        "prototype": "BOOL EnumFormsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumForms function enumerates the forms supported by the specified printer."
-    },
-    "EnumJobs": {
-        "prototype": "BOOL EnumJobsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   FirstJob,\n  _In_  DWORD   NoJobs,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumJobs function retrieves information about a specified set of print jobs for a specified printer."
-    },
-    "EnumPrinterData": {
-        "prototype": "DWORD EnumPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   dwIndex,\n  _Out_ LPTSTR  pValueName,\n  _In_  DWORD   cbValueName,\n  _Out_ LPDWORD pcbValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbData,\n  _Out_ LPDWORD pcbData\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumPrinterData function enumerates configuration data for a specified printer."
-    },
-    "EnumPrinterDataEx": {
-        "prototype": "DWORD EnumPrinterDataExW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _Out_ LPBYTE  pEnumValues,\n  _In_  DWORD   cbEnumValues,\n  _Out_ LPDWORD pcbEnumValues,\n  _Out_ LPDWORD pnEnumValues\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumPrinterDataEx function enumerates all value names and data for a specified printer and key."
-    },
-    "EnumPrinterKey": {
-        "prototype": "DWORD EnumPrinterKeyW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _Out_ LPTSTR  pSubkey,\n  _In_  DWORD   cbSubkey,\n  _Out_ LPDWORD pcbSubkey\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumPrinterKey function enumerates the subkeys of a specified key for a specified printer."
-    },
-    "EnumPrintersW": {
-        "prototype": "BOOL EnumPrinters(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
-        "dllLibrary": "winspool",
-        "comment": "The EnumPrinters function enumerates available printers, print servers, domains, or print providers."
-    },
-    "FindClosePrinterChangeNotification": {
-        "prototype": "BOOL FindClosePrinterChangeNotification(\n  _In_ HANDLE hChange\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The FindClosePrinterChangeNotification function closes a change notification object created by calling the FindFirstPrinterChangeNotification function. The printer or print server associated with the change notification object will no longer be monitored by that object."
-    },
-    "FindFirstPrinterChangeNotification": {
-        "prototype": "HANDLE FindFirstPrinterChangeNotification(\n  _In_     HANDLE hPrinter,\n           DWORD  fdwFilter,\n           DWORD  fdwOptions,\n  _In_opt_ LPVOID pPrinterNotifyOptions\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server."
-    },
-    "FindNextPrinterChangeNotification": {
-        "prototype": "BOOL FindNextPrinterChangeNotification(\n  _In_      HANDLE hChange,\n  _Out_opt_ PDWORD pdwChange,\n  _In_opt_  LPVOID pPrinterNotifyOptions,\n  _Out_opt_ LPVOID *ppPrinterNotifyInfo\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied."
-    },
-    "FlushPrinter": {
-        "prototype": "BOOL FlushPrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten,\n  _In_  DWORD   cSleep\n);",
-        "dllLibrary": "winspool",
-        "comment": "The FlushPrinter function sends a buffer to the printer in order to clear it from a transient state."
-    },
-    "FreePrinterNotifyInfo": {
-        "prototype": "BOOL FreePrinterNotifyInfo(\n  _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The FreePrinterNotifyInfo function frees a system-allocated buffer created by the FindNextPrinterChangeNotification function."
-    },
-    "GetDefaultPrinter": {
-        "prototype": "BOOL GetDefaultPrinterW(\n  _In_    LPTSTR  pszBuffer,\n  _Inout_ LPDWORD pcchBuffer\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetDefaultPrinter function retrieves the printer name of the default printer for the current user on the local computer."
-    },
-    "GetForm": {
-        "prototype": "BOOL GetForm(\n  _In_  HANDLE  hPrinter,\n  _In_  LPTSTR  pFormName,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetForm function retrieves information about a specified form."
-    },
-    "GetJob": {
-        "prototype": "BOOL GetJobW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   JobId,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetJob function retrieves information about a specified print job."
-    },
-    "GetPrintCapabilitiesThunk2": {
-        "prototype": "HRESULT GetPrintCapabilitiesThunk2(\n  _In_      HPTPROVIDER hProvider,\n  _In_      BYTE        *pPrintTicket,\n  _In_      INT         cbPrintTicket,\n  _Out_     BYTE        **ppbPrintCapabilities,\n  _Out_     INT         *pcbPrintCapabilitiesLength,\n  _Out_opt_ BSTR        *pbstrErrorMessage\n);",
-        "dllLibrary": "prntvpt",
-        "category": "winspool",
-        "comment": "Retrieves the printer's capabilities formatted in compliance with the XML Print Schema."
-    },
-    "GetPrinter": {
-        "prototype": "BOOL GetPrinterW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pPrinter,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetPrinter function retrieves information about a specified printer."
-    },
-    "GetPrinterData": {
-        "prototype": "DWORD GetPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPTSTR  pValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   nSize,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetPrinterData function retrieves configuration data for the specified printer or print server."
-    },
-    "GetPrinterDataEx": {
-        "prototype": "DWORD GetPrinterDataExW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _In_  LPCTSTR pValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   nSize,\n  _Out_ LPDWORD pcbNeeded\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetPrinterDataEx function retrieves configuration data for the specified printer or print server. GetPrinterDataEx can retrieve values that the SetPrinterData function stored. In addition, GetPrinterDataEx can retrieve values that the SetPrinterDataEx function stored under a specified key."
-    },
-    "GetPrintExecutionData": {
-        "prototype": "BOOL WINAPI GetPrintExecutionData(\n  _Out_ PRINT_EXECUTION_DATA *pData\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetPrintExecutionData retrieves the current print context."
-    },
-    "GetSpoolFileHandle": {
-        "prototype": "HANDLE GetSpoolFileHandleW(\n  _In_ HANDLE hPrinter\n);",
-        "dllLibrary": "winspool",
-        "comment": "The GetSpoolFileHandle function retrieves a handle for the spool file associated with the job currently submitted by the application."
-    },
-    "IsValidDevmode": {
-        "prototype": "BOOL IsValidDevmodeW(\n_In_ PDEVMODE pDevmode,\n       size_t   DevmodeSize\n);",
-        "dllLibrary": "winspool",
-        "comment": "The IsValidDevmode function verifies that the contents of a DEVMODE structure are valid."
-    },
-    "OpenPrinter": {
-        "prototype": "BOOL OpenPrinterW(\n  _In_  LPTSTR             pPrinterName,\n  _Out_ LPHANDLE           phPrinter,\n  _In_  LPPRINTER_DEFAULTS pDefault\n);",
-        "dllLibrary": "winspool",
-        "comment": "The OpenPrinter function retrieves a handle to the specified printer or print server or other types of handles in the print subsystem."
-    },
-    "OpenPrinter2": {
-        "prototype": "BOOL OpenPrinter2W(\n  _In_  LPCTSTR            pPrinterName,\n  _Out_ LPHANDLE           phPrinter,\n  _In_  LPPRINTER_DEFAULTS pDefault,\n  _In_  PPRINTER_OPTIONS   pOptions\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "Retrieves a handle to the specified printer, print server, or other types of handles in the print subsystem, while setting some of the printer options."
-    },
-    "PrinterProperties": {
-        "prototype": "BOOL PrinterProperties(\n  _In_ HWND   hWnd,\n  _In_ HANDLE hPrinter\n);",
-        "dllLibrary": "winspool",
-        "comment": "The PrinterProperties function displays a printer-properties property sheet for the specified printer."
-    },
-    "ReadPrinter": {
-        "prototype": "BOOL ReadPrinter(\n  _In_  HANDLE  hPrinter,\n  _Out_ LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pNoBytesRead\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The ReadPrinter function retrieves data from the specified printer."
-    },
-    "ReportJobProcessingProgress": {
-        "prototype": "HRESULT ReportJobProcessingProgress(\n  _In_ HANDLE                printerHandle,\n  _In_ ULONG                 jobId,\n       EPrintXPSJobOperation jobOperation,\n       EPrintXPSJobProgress  jobProgress\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "Reports to the Print Spooler service whether an XPS print job is in the spooling or the rendering phase and what part of the processing is currently underway."
-    },
-    "ResetPrinter": {
-        "prototype": "BOOL ResetPrinterW(\n  _In_ HANDLE             hPrinter,\n  _In_ LPPRINTER_DEFAULTS pDefault\n);",
-        "dllLibrary": "winspool",
-        "comment": "The ResetPrinter function specifies the data type and device mode values to be used for printing documents submitted by the StartDocPrinter function. These values can be overridden by using the SetJob function after document printing has started."
-    },
-    "ScheduleJob": {
-        "prototype": "BOOL ScheduleJob(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  dwJobID\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The ScheduleJob function requests that the print spooler schedule a specified print job for printing."
-    },
-    "SetDefaultPrinter": {
-        "prototype": "BOOL SetDefaultPrinterW(\n  _In_ LPCTSTR pszPrinter\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetDefaultPrinter function sets the printer name of the default printer for the current user on the local computer."
-    },
-    "SetForm": {
-        "prototype": "BOOL SetFormW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pFormName,\n  _In_ DWORD  Level,\n  _In_ LPTSTR pForm\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetForm function sets the form information for the specified printer."
-    },
-    "SetJob": {
-        "prototype": "BOOL SetJobW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  JobId,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pJob,\n  _In_ DWORD  Command\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetJob function pauses, resumes, cancels, or restarts a print job on a specified printer. You can also use the SetJob function to set print job parameters, such as the print job priority and the document name."
-    },
-    "SetPort": {
-        "prototype": "BOOL SetPortW(\n  _In_ LPTSTR pName,\n  _In_ LPTSTR pPortName,\n  _In_ DWORD  dwLevel,\n  _In_ LPBYTE pPortInfo\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetPort function sets the status associated with a printer port."
-    },
-    "SetPrinter": {
-        "prototype": "BOOL SetPrinterW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter,\n  _In_ DWORD  Command\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetPrinter function sets the data for a specified printer or sets the state of the specified printer by pausing printing, resuming printing, or clearing all print jobs."
-    },
-    "SetPrinterData": {
-        "prototype": "DWORD SetPrinterDataW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pValueName,\n  _In_ DWORD  Type,\n  _In_ LPBYTE pData,\n  _In_ DWORD  cbData\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetPrinterData function sets the configuration data for a printer or print server."
-    },
-    "SetPrinterDataEx": {
-        "prototype": "DWORD SetPrinterDataExW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName,\n  _In_ LPCTSTR pValueName,\n  _In_ DWORD   Type,\n  _In_ LPBYTE  pData,\n  _In_ DWORD   cbData\n);",
-        "dllLibrary": "winspool",
-        "comment": "The SetPrinterDataEx function sets the configuration data for a printer or print server. The function stores the configuration data under the printer's registry key."
-    },
-    "StartDocPrinter": {
-        "prototype": "DWORD StartDocPrinterW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pDocInfo\n);",
-        "dllLibrary": "winspool",
-        "comment": "The StartDocPrinter function notifies the print spooler that a document is to be spooled for printing."
-    },
-    "StartPagePrinter": {
-        "prototype": "BOOL StartPagePrinter(\n  _In_ HANDLE hPrinter\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The StartPagePrinter function notifies the spooler that a page is about to be printed on the specified printer."
-    },
-    "WritePrinter": {
-        "prototype": "BOOL WritePrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten\n);",
-        "dllLibrary": "spoolss",
-        "category": "winspool",
-        "comment": "The WritePrinter function notifies the print spooler that data should be written to the specified printer."
-    },
-
-
-
     "accept": {
         "prototype": "SOCKET WSAAPI accept(\n  SOCKET   s,\n  sockaddr *addr,\n  int      *addrlen\n);",
         "dllLibrary": "ws2_32",
@@ -357,6 +37,32 @@
         "dllLibrary": "gdi32",
         "comment": "The AddFontResourceEx function adds the font resource from the specified file to the system. Fonts added with the AddFontResourceEx function can be marked as private and not enumerable."
     },
+    "AddForm": {
+        "prototype": "BOOL AddForm(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pForm\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The AddForm function adds a form to the list of available forms that can be selected for the specified printer.",
+        "category": "winspool"
+    },
+    "AddJob": {
+        "prototype": "BOOL AddJob(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The AddJob function adds a print job to the list of print jobs that can be scheduled by the print spooler. The function retrieves the name of the file you can use to store the job."
+    },
+    "AddPrinter": {
+        "prototype": "HANDLE AddPrinter(\n  _In_ LPTSTR *pName,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter\n);",
+        "dllLibrary": "winspool",
+        "comment": "The AddPrinter function adds a printer to the list of supported printers for a specified server."
+    },
+    "AddPrinterConnection": {
+        "prototype": "BOOL AddPrinterConnection(\n  _In_ LPTSTR pName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The AddPrinterConnection function adds a connection to the specified printer for the current user."
+    },
+    "AddPrinterConnection2": {
+        "prototype": "BOOL AddPrinterConnection2(\n  _In_ HWND    hWnd,\n  _In_ LPCTSTR pszName,\n       DWORD   dwLevel,\n  _In_ PVOID   pConnectionInfo\n);",
+        "dllLibrary": "winspool",
+        "comment": "Adds a connection to the specified printer for the current user and specifies connection details."
+    },
     "AddRefActCtx": {
         "prototype": "void AddRefActCtx(\n  HANDLE hActCtx\n);",
         "dllLibrary": "kernel32",
@@ -377,6 +83,11 @@
         "dllLibrary": "user32",
         "comment": "Calculates the required size of the window rectangle, based on the desired size of the client rectangle and the provided DPI. This window rectangle can then be passed to the CreateWindowEx function to create a window with a client area of the desired size.",
         "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "AdvancedDocumentProperties": {
+        "prototype": "LONG AdvancedDocumentProperties(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput\n);",
+        "dllLibrary": "winspool",
+        "comment": "The AdvancedDocumentProperties function displays a printer-configuration dialog box for the specified printer, allowing the user to configure that printer."
     },
     "AllocConsole": {
         "prototype": "BOOL WINAPI AllocConsole(void);",
@@ -475,6 +186,12 @@
         "comment": "The bind function associates a local address with a socket.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "BindPTProviderThunk": {
+        "prototype": "HRESULT BindPTProviderThunk(\n  _In_  LPTSTR      pszPrinterName,\n  _In_  INT         maxVersion,\n  _In_  INT         prefVersion,\n  _Out_ HPTPROVIDER *phProvider,\n  _Out_ INT         *usedVersion\n);",
+        "dllLibrary": "prntvpt",
+        "comment": "Opens an instance of a print ticket provider.",
+        "category": "winspool"
     },
     "BitBlt": {
         "prototype": "BOOL BitBlt(\n  HDC   hdc,\n  int   x,\n  int   y,\n  int   cx,\n  int   cy,\n  HDC   hdcSrc,\n  int   x1,\n  int   y1,\n  DWORD rop\n);",
@@ -771,6 +488,12 @@
         "dllLibrary": "kernel32",
         "comment": "Closes an open object handle."
     },
+    "ClosePrinter": {
+        "prototype": "BOOL ClosePrinter(\n  _In_ HANDLE hPrinter\n  );",
+        "dllLibrary": "spoolss",
+        "comment": "The ClosePrinter function closes the specified printer object.",
+        "category": "winspool"
+    },
     "ClosePseudoConsole": {
         "prototype": "void WINAPI ClosePseudoConsole(\n  _In_ HPCON hPC\n);",
         "dllLibrary": "kernel32",
@@ -783,6 +506,11 @@
         "comment": "The closesocket function closes an existing socket.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "CloseSpoolFileHandle": {
+        "prototype": "BOOL CloseSpoolFileHandle(\n  _In_ HANDLE hPrinter,\n  _In_ HANDLE hSpoolFile\n);",
+        "dllLibrary": "winspool",
+        "comment": "The CloseSpoolFileHandle function closes a handle to a spool file associated with the print job currently submitted by the application."
     },
     "CloseTouchInputHandle": {
         "prototype": "BOOL CloseTouchInputHandle(\n  HTOUCHINPUT hTouchInput\n);",
@@ -854,12 +582,22 @@
         "dllLibrary": "kernel32",
         "comment": "Displays a driver-supplied configuration dialog box."
     },
+    "CommitSpoolData": {
+        "prototype": "HANDLE CommitSpoolData(\n  _In_ HANDLE hPrinter,\n  _In_ HANDLE hSpoolFile,\n       DWORD  cbCommit\n);",
+        "dllLibrary": "winspool",
+        "comment": "The CommitSpoolData function notifies the print spooler that a specified amount of data has been written to a specified spool file and is ready to be rendered."
+    },
     "CompareObjectHandles": {
         "prototype": "BOOL CompareObjectHandles(\n  HANDLE hFirstObjectHandle,\n  HANDLE hSecondObjectHandle\n);",
         "dllLibrary": "kernelbase",
         "comment": "Compares two object handles to determine if they refer to the same underlying kernel object.",
         "category": "kernel32",
         "minimumWindowsVersion": "WIN10_TH1"
+    },
+    "ConfigurePort": {
+        "prototype": "BOOL ConfigurePortW(\n  _In_ LPTSTR pName,\n  _In_ HWND   hWnd,\n  _In_ LPTSTR pPortName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The ConfigurePort function displays the port-configuration dialog box for a port on the specified server."
     },
     "connect": {
         "prototype": "int WSAAPI connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
@@ -872,6 +610,11 @@
         "prototype": "BOOL ConnectNamedPipe(\n  HANDLE       hNamedPipe,\n  LPOVERLAPPED lpOverlapped);",
         "dllLibrary": "kernel32",
         "comment": "Enables a named pipe server process to wait for a client process to connect to an instance of a named pipe. A client process connects by calling either the CreateFile or CallNamedPipe function."
+    },
+    "ConnectToPrinterDlg": {
+        "prototype": "HANDLE ConnectToPrinterDlg(\n  _In_ HWND  hwnd,\n  _In_ DWORD Flags\n);",
+        "dllLibrary": "winspool",
+        "comment": "The ConnectToPrinterDlg function displays a dialog box that lets users browse and connect to printers on a network. If the user selects a printer, the function attempts to create a connection to it; if a suitable driver is not installed on the server, the user is given the option of creating a printer locally."
     },
     "ContinueDebugEvent": {
         "prototype": "BOOL ContinueDebugEvent(\n  DWORD dwProcessId,\n  DWORD dwThreadId,\n  DWORD dwContinueStatus\n);",
@@ -1149,6 +892,11 @@
         "dllLibrary": "kernel32",
         "comment": "Deletes an existing file."
     },
+    "DeleteForm": {
+        "prototype": "BOOL DeleteFormW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pFormName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DeleteForm function removes a form name from the list of supported forms."
+    },
     "DeleteMenu": {
         "prototype": "BOOL DeleteMenu(\n  HMENU hMenu,\n  UINT  uPosition,\n  UINT  uFlags\n);",
         "dllLibrary": "user32",
@@ -1158,6 +906,32 @@
         "prototype": "BOOL DeleteObject(\n  HGDIOBJ ho\n);",
         "dllLibrary": "gdi32",
         "comment": "The DeleteObject function deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid."
+    },
+    "DeletePrinter": {
+        "prototype": "BOOL DeletePrinter(\n  _Inout_ HANDLE hPrinter\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The DeletePrinter function deletes the specified printer object.",
+        "category": "winspool"
+    },
+    "DeletePrinterConnection": {
+        "prototype": "BOOL DeletePrinterConnectionW(\n  _In_ LPTSTR pName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DeletePrinterConnection function deletes a connection to a printer that was established by a call to AddPrinterConnection or ConnectToPrinterDlg."
+    },
+    "DeletePrinterData": {
+        "prototype": "DWORD DeletePrinterDataW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pValueName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DeletePrinterData function deletes specified configuration data for a printer. A printer's configuration data consists of a set of named and typed values. The DeletePrinterData function deletes one of these values, specified by its value name."
+    },
+    "DeletePrinterDataEx": {
+        "prototype": "DWORD DeletePrinterDataExW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName,\n  _In_ LPCTSTR pValueName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DeletePrinterDataEx function deletes a specified value from the configuration data for a printer. A printer's configuration data consists of a set of named and typed values stored in a hierarchy of registry keys. The function deletes a specified value under a specified key."
+    },
+    "DeletePrinterKey": {
+        "prototype": "DWORD DeletePrinterKeyW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DeletePrinterKey function deletes a specified key and all its subkeys for a specified printer."
     },
     "DestroyCursor": {
         "prototype": "BOOL DestroyCursor(\n  HCURSOR hCursor\n);",
@@ -1218,6 +992,16 @@
         "prototype": "BOOL DnsHostnameToComputerNameW(\n  LPCWSTR Hostname,\n  LPWSTR  ComputerName,\n  LPDWORD nSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Converts a DNS-style host name to a NetBIOS-style computer name."
+    },
+    "DocumentEvent": {
+        "prototype": "HRESULT DocumentEventW(\n  _In_  HANDLE hPrinter,\n  _In_  HDC    hdc,\n        INT    iEsc,\n        ULONG  cbIn,\n  _In_  PVOID  pvIn,\n        ULONG  cbOut,\n  _Out_ PVOID  pvOut\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DocumentEvent function is an event handler for events associated with printing a document."
+    },
+    "DocumentProperties": {
+        "prototype": "LONG DocumentPropertiesW(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput,\n  _In_  DWORD    fMode\n);",
+        "dllLibrary": "winspool",
+        "comment": "The DocumentProperties function retrieves or modifies printer initialization information or displays a printer-configuration property sheet for the specified printer."
     },
     "DosDateTimeToFileTime": {
         "prototype": "BOOL DosDateTimeToFileTime(\n  WORD       wFatDate,\n  WORD       wFatTime,\n  LPFILETIME lpFileTime\n);",
@@ -1315,10 +1099,22 @@
         "dllLibrary": "user32",
         "comment": "Destroys a modal dialog box, causing the system to end any processing for the dialog box."
     },
+    "EndDocPrinter": {
+        "prototype": "BOOL EndDocPrinter(\n  _In_ HANDLE hPrinter\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The EndDocPrinter function ends a print job for the specified printer.",
+        "category": "winspool"
+    },
     "EndMenu": {
         "prototype": "BOOL EndMenu();",
         "dllLibrary": "user32",
         "comment": "Ends the calling thread's active menu."
+    },
+    "EndPagePrinter": {
+        "prototype": "BOOL EndPagePrinter(\n  _In_ HANDLE hPrinter\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The EndPagePrinter function notifies the print spooler that the application is at the end of a page in a print job.",
+        "category": "winspool"
     },
     "EndPaint": {
         "prototype": "BOOL EndPaint(\n  HWND              hWnd,\n  const PAINTSTRUCT *lpPaint\n);",
@@ -1364,6 +1160,36 @@
         "prototype": "int EnumFontFamiliesExW(\n  HDC           hdc,\n  LPLOGFONTW    lpLogfont,\n  FONTENUMPROCW lpProc,\n  LPARAM        lParam,\n  DWORD         dwFlags\n);",
         "dllLibrary": "gdi32",
         "comment": "The EnumFontFamiliesEx function enumerates all uniquely-named fonts in the system that match the font characteristics specified by the LOGFONT structure. EnumFontFamiliesEx enumerates fonts based on typeface name, character set, or both."
+    },
+    "EnumForms": {
+        "prototype": "BOOL EnumFormsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumForms function enumerates the forms supported by the specified printer."
+    },
+    "EnumJobs": {
+        "prototype": "BOOL EnumJobsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   FirstJob,\n  _In_  DWORD   NoJobs,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumJobs function retrieves information about a specified set of print jobs for a specified printer."
+    },
+    "EnumPrinterData": {
+        "prototype": "DWORD EnumPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   dwIndex,\n  _Out_ LPTSTR  pValueName,\n  _In_  DWORD   cbValueName,\n  _Out_ LPDWORD pcbValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbData,\n  _Out_ LPDWORD pcbData\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumPrinterData function enumerates configuration data for a specified printer."
+    },
+    "EnumPrinterDataEx": {
+        "prototype": "DWORD EnumPrinterDataExW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _Out_ LPBYTE  pEnumValues,\n  _In_  DWORD   cbEnumValues,\n  _Out_ LPDWORD pcbEnumValues,\n  _Out_ LPDWORD pnEnumValues\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumPrinterDataEx function enumerates all value names and data for a specified printer and key."
+    },
+    "EnumPrinterKey": {
+        "prototype": "DWORD EnumPrinterKeyW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _Out_ LPTSTR  pSubkey,\n  _In_  DWORD   cbSubkey,\n  _Out_ LPDWORD pcbSubkey\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumPrinterKey function enumerates the subkeys of a specified key for a specified printer."
+    },
+    "EnumPrintersW": {
+        "prototype": "BOOL EnumPrinters(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
+        "dllLibrary": "winspool",
+        "comment": "The EnumPrinters function enumerates available printers, print servers, domains, or print providers."
     },
     "EnumProcesses": {
         "prototype": "BOOL K32EnumProcesses(\n  DWORD   *lpidProcess,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
@@ -1465,6 +1291,12 @@
         "dllLibrary": "kernel32",
         "comment": "Stops change notification handle monitoring."
     },
+    "FindClosePrinterChangeNotification": {
+        "prototype": "BOOL FindClosePrinterChangeNotification(\n  _In_ HANDLE hChange\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The FindClosePrinterChangeNotification function closes a change notification object created by calling the FindFirstPrinterChangeNotification function. The printer or print server associated with the change notification object will no longer be monitored by that object.",
+        "category": "winspool"
+    },
     "FindExecutable": {
         "prototype": "HINSTANCE FindExecutableW(\n  LPCWSTR lpFile,\n  LPCWSTR lpDirectory,\n  LPWSTR  lpResult\n);",
         "dllLibrary": "shell32",
@@ -1480,6 +1312,12 @@
         "dllLibrary": "kernel32",
         "comment": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)."
     },
+    "FindFirstPrinterChangeNotification": {
+        "prototype": "HANDLE FindFirstPrinterChangeNotification(\n  _In_     HANDLE hPrinter,\n           DWORD  fdwFilter,\n           DWORD  fdwOptions,\n  _In_opt_ LPVOID pPrinterNotifyOptions\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server.",
+        "category": "winspool"
+    },
     "FindFirstVolume": {
         "prototype": "HANDLE FindFirstVolumeW(\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
         "dllLibrary": "kernel32",
@@ -1494,6 +1332,12 @@
         "prototype": "BOOL FindNextFileW(\n  HANDLE             hFindFile,\n  LPWIN32_FIND_DATAW lpFindFileData\n);",
         "dllLibrary": "kernel32",
         "comment": "Continues a file search from a previous call to the FindFirstFile, FindFirstFileEx, or FindFirstFileTransacted functions."
+    },
+    "FindNextPrinterChangeNotification": {
+        "prototype": "BOOL FindNextPrinterChangeNotification(\n  _In_      HANDLE hChange,\n  _Out_opt_ PDWORD pdwChange,\n  _In_opt_  LPVOID pPrinterNotifyOptions,\n  _Out_opt_ LPVOID *ppPrinterNotifyInfo\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied.",
+        "category": "winspool"
     },
     "FindNextVolume": {
         "prototype": "BOOL FindNextVolumeW(\n  HANDLE hFindVolume,\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -1541,6 +1385,11 @@
         "dllLibrary": "kernel32",
         "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
     },
+    "FlushPrinter": {
+        "prototype": "BOOL FlushPrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten,\n  _In_  DWORD   cSleep\n);",
+        "dllLibrary": "winspool",
+        "comment": "The FlushPrinter function sends a buffer to the printer in order to clear it from a transient state."
+    },
     "FormatMessage": {
         "prototype": "DWORD FormatMessageW(\n  DWORD   dwFlags,\n  LPCVOID lpSource,\n  DWORD   dwMessageId,\n  DWORD   dwLanguageId,\n  LPWSTR  lpBuffer,\n  DWORD   nSize,\n  va_list *Arguments\n);",
         "dllLibrary": "kernel32",
@@ -1560,6 +1409,12 @@
         "prototype": "BOOL FreeLibrary(\n  HMODULE hLibModule\n);",
         "dllLibrary": "kernel32",
         "comment": "Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid."
+    },
+    "FreePrinterNotifyInfo": {
+        "prototype": "BOOL FreePrinterNotifyInfo(\n  _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The FreePrinterNotifyInfo function frees a system-allocated buffer created by the FindNextPrinterChangeNotification function.",
+        "category": "winspool"
     },
     "GetActiveObject": {
         "prototype": "HRESULT GetActiveObject(\n  REFCLSID rclsid,\n  void     *pvReserved,\n  IUnknown **ppunk\n);",
@@ -1806,6 +1661,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the default configuration for the specified communications device."
     },
+    "GetDefaultPrinter": {
+        "prototype": "BOOL GetDefaultPrinterW(\n  _In_    LPTSTR  pszBuffer,\n  _Inout_ LPDWORD pcchBuffer\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetDefaultPrinter function retrieves the printer name of the default printer for the current user on the local computer."
+    },
     "GetDesktopWindow": {
         "prototype": "HWND GetDesktopWindow();",
         "dllLibrary": "user32",
@@ -1972,6 +1832,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
     },
+    "GetForm": {
+        "prototype": "BOOL GetForm(\n  _In_  HANDLE  hPrinter,\n  _In_  LPTSTR  pFormName,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetForm function retrieves information about a specified form."
+    },
     "GetFullPathName": {
         "prototype": "DWORD GetFullPathNameW(\n  LPCWSTR lpFileName,\n  DWORD   nBufferLength,\n  LPWSTR  lpBuffer,\n  LPWSTR  *lpFilePart\n);",
         "dllLibrary": "kernel32",
@@ -2039,6 +1904,11 @@
         "comment": "Retrieves the best estimate of the diagonal size of the built-in screen, in inches.",
         "category": "kernel32",
         "minimumWindowsVersion": "WIN10_TH1"
+    },
+    "GetJob": {
+        "prototype": "BOOL GetJobW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   JobId,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetJob function retrieves information about a specified print job."
     },
     "GetKeyboardLayout": {
         "prototype": "HKL GetKeyboardLayout(\n  DWORD idThread\n);",
@@ -2364,6 +2234,32 @@
         "dllLibrary": "dxva2",
         "comment": "Retrieves the physical monitors associated with an HMONITOR monitor handle."
     },
+    "GetPrintCapabilitiesThunk2": {
+        "prototype": "HRESULT GetPrintCapabilitiesThunk2(\n  _In_      HPTPROVIDER hProvider,\n  _In_      BYTE        *pPrintTicket,\n  _In_      INT         cbPrintTicket,\n  _Out_     BYTE        **ppbPrintCapabilities,\n  _Out_     INT         *pcbPrintCapabilitiesLength,\n  _Out_opt_ BSTR        *pbstrErrorMessage\n);",
+        "dllLibrary": "prntvpt",
+        "comment": "Retrieves the printer's capabilities formatted in compliance with the XML Print Schema.",
+        "category": "winspool"
+    },
+    "GetPrinter": {
+        "prototype": "BOOL GetPrinterW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pPrinter,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetPrinter function retrieves information about a specified printer."
+    },
+    "GetPrinterData": {
+        "prototype": "DWORD GetPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPTSTR  pValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   nSize,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetPrinterData function retrieves configuration data for the specified printer or print server."
+    },
+    "GetPrinterDataEx": {
+        "prototype": "DWORD GetPrinterDataExW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPCTSTR pKeyName,\n  _In_  LPCTSTR pValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   nSize,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetPrinterDataEx function retrieves configuration data for the specified printer or print server. GetPrinterDataEx can retrieve values that the SetPrinterData function stored. In addition, GetPrinterDataEx can retrieve values that the SetPrinterDataEx function stored under a specified key."
+    },
+    "GetPrintExecutionData": {
+        "prototype": "BOOL WINAPI GetPrintExecutionData(\n  _Out_ PRINT_EXECUTION_DATA *pData\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetPrintExecutionData retrieves the current print context."
+    },
     "GetPriorityClipboardFormat": {
         "prototype": "int GetPriorityClipboardFormat(\n  UINT *paFormatPriorityList,\n  int  cFormats\n);",
         "dllLibrary": "user32",
@@ -2486,6 +2382,11 @@
         "comment": "The getsockopt function retrieves a socket option.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "GetSpoolFileHandle": {
+        "prototype": "HANDLE GetSpoolFileHandleW(\n  _In_ HANDLE hPrinter\n);",
+        "dllLibrary": "winspool",
+        "comment": "The GetSpoolFileHandle function retrieves a handle for the spool file associated with the job currently submitted by the application."
     },
     "GetStartupInfo": {
         "prototype": "void GetStartupInfoW(\n  LPSTARTUPINFOW lpStartupInfo\n);",
@@ -3043,6 +2944,11 @@
         "dllLibrary": "user32",
         "comment": "Checks whether a specified window is touch-capable and, optionally, retrieves the modifier flags set for the window's touch capability."
     },
+    "IsValidDevmode": {
+        "prototype": "BOOL IsValidDevmodeW(\n_In_ PDEVMODE pDevmode,\n       size_t   DevmodeSize\n);",
+        "dllLibrary": "winspool",
+        "comment": "The IsValidDevmode function verifies that the contents of a DEVMODE structure are valid."
+    },
     "IsValidDpiAwarenessContext": {
         "prototype": "BOOL IsValidDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value);",
         "dllLibrary": "user32",
@@ -3526,6 +3432,17 @@
         "dllLibrary": "user32",
         "comment": "Opens the desktop that receives user input."
     },
+    "OpenPrinter": {
+        "prototype": "BOOL OpenPrinterW(\n  _In_  LPTSTR             pPrinterName,\n  _Out_ LPHANDLE           phPrinter,\n  _In_  LPPRINTER_DEFAULTS pDefault\n);",
+        "dllLibrary": "winspool",
+        "comment": "The OpenPrinter function retrieves a handle to the specified printer or print server or other types of handles in the print subsystem."
+    },
+    "OpenPrinter2": {
+        "prototype": "BOOL OpenPrinter2W(\n  _In_  LPCTSTR            pPrinterName,\n  _Out_ LPHANDLE           phPrinter,\n  _In_  LPPRINTER_DEFAULTS pDefault,\n  _In_  PPRINTER_OPTIONS   pOptions\n);",
+        "dllLibrary": "spoolss",
+        "comment": "Retrieves a handle to the specified printer, print server, or other types of handles in the print subsystem, while setting some of the printer options.",
+        "category": "winspool"
+    },
     "OpenProcess": {
         "prototype": "HANDLE OpenProcess(\n  DWORD dwDesiredAccess,\n  BOOL  bInheritHandle,\n  DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
@@ -3664,6 +3581,11 @@
         "dllLibrary": "user32",
         "comment": "Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message."
     },
+    "PrinterProperties": {
+        "prototype": "BOOL PrinterProperties(\n  _In_ HWND   hWnd,\n  _In_ HANDLE hPrinter\n);",
+        "dllLibrary": "winspool",
+        "comment": "The PrinterProperties function displays a printer-properties property sheet for the specified printer."
+    },
     "PrintWindow": {
         "prototype": "BOOL PrintWindow(\n  HWND hwnd,\n  HDC  hdcBlt,\n  UINT nFlags\n);",
         "dllLibrary": "user32",
@@ -3713,6 +3635,12 @@
         "prototype": "BOOL ReadFile(\n  HANDLE       hFile,\n  LPVOID       lpBuffer,\n  DWORD        nNumberOfBytesToRead,\n  LPDWORD      lpNumberOfBytesRead,\n  LPOVERLAPPED lpOverlapped\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from the specified file or input/output (I/O) device. Reads occur at the position specified by the file pointer if supported by the device."
+    },
+    "ReadPrinter": {
+        "prototype": "BOOL ReadPrinter(\n  _In_  HANDLE  hPrinter,\n  _Out_ LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pNoBytesRead\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The ReadPrinter function retrieves data from the specified printer.",
+        "category": "winspool"
     },
     "ReadProcessMemory": {
         "prototype": "BOOL ReadProcessMemory(\n  HANDLE  hProcess,\n  LPCVOID lpBaseAddress,\n  LPVOID  lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesRead\n);",
@@ -4058,6 +3986,17 @@
         "dllLibrary": "user32",
         "comment": "Replies to a message sent from another thread by the SendMessage function."
     },
+    "ReportJobProcessingProgress": {
+        "prototype": "HRESULT ReportJobProcessingProgress(\n  _In_ HANDLE                printerHandle,\n  _In_ ULONG                 jobId,\n       EPrintXPSJobOperation jobOperation,\n       EPrintXPSJobProgress  jobProgress\n);",
+        "dllLibrary": "spoolss",
+        "comment": "Reports to the Print Spooler service whether an XPS print job is in the spooling or the rendering phase and what part of the processing is currently underway.",
+        "category": "winspool"
+    },
+    "ResetPrinter": {
+        "prototype": "BOOL ResetPrinterW(\n  _In_ HANDLE             hPrinter,\n  _In_ LPPRINTER_DEFAULTS pDefault\n);",
+        "dllLibrary": "winspool",
+        "comment": "The ResetPrinter function specifies the data type and device mode values to be used for printing documents submitted by the StartDocPrinter function. These values can be overridden by using the SetJob function after document printing has started."
+    },
     "ResizePseudoConsole": {
         "prototype": "HRESULT WINAPI ResizePseudoConsole(\n  _In_ HPCON hPC ,\n  _In_ COORD size\n);",
         "dllLibrary": "kernel32",
@@ -4342,6 +4281,12 @@
         "dllLibrary": "winscard",
         "comment": "The SCardWriteCache function writes a name-value pair from a smart card to the global cache maintained by the Smart Card Resource Manager."
     },
+    "ScheduleJob": {
+        "prototype": "BOOL ScheduleJob(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  dwJobID\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The ScheduleJob function requests that the print spooler schedule a specified print job for printing.",
+        "category": "winspool"
+    },
     "ScreenToClient": {
         "prototype": "BOOL ScreenToClient(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
@@ -4548,6 +4493,11 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the default configuration for a communications device."
     },
+    "SetDefaultPrinter": {
+        "prototype": "BOOL SetDefaultPrinterW(\n  _In_ LPCTSTR pszPrinter\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetDefaultPrinter function sets the printer name of the default printer for the current user on the local computer."
+    },
     "SetDialogControlDpiChangeBehavior": {
         "prototype": "BOOL SetDialogControlDpiChangeBehavior(\n  HWND                                hWnd,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values\n);",
         "dllLibrary": "user32",
@@ -4620,6 +4570,11 @@
         "dllLibrary": "user32",
         "comment": "Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads."
     },
+    "SetForm": {
+        "prototype": "BOOL SetFormW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pFormName,\n  _In_ DWORD  Level,\n  _In_ LPTSTR pForm\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetForm function sets the form information for the specified printer."
+    },
     "SetGestureConfig": {
         "prototype": "BOOL SetGestureConfig(\n  HWND           hwnd,\n  DWORD          dwReserved,\n  UINT           cIDs,\n  PGESTURECONFIG pGestureConfig,\n  UINT           cbSize\n);",
         "dllLibrary": "user32",
@@ -4629,6 +4584,11 @@
         "prototype": "BOOL SetHandleInformation(\n  HANDLE hObject,\n  DWORD  dwMask,\n  DWORD  dwFlags\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets certain properties of an object handle."
+    },
+    "SetJob": {
+        "prototype": "BOOL SetJobW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  JobId,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pJob,\n  _In_ DWORD  Command\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetJob function pauses, resumes, cancels, or restarts a print job on a specified printer. You can also use the SetJob function to set print job parameters, such as the print job priority and the document name."
     },
     "SetKeyboardState": {
         "prototype": "BOOL SetKeyboardState(\n  LPBYTE lpKeyState\n);",
@@ -4714,6 +4674,26 @@
         "prototype": "COLORREF SetPixel(\n  HDC      hdc,\n  int      x,\n  int      y,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetPixel function sets the pixel at the specified coordinates to the specified color."
+    },
+    "SetPort": {
+        "prototype": "BOOL SetPortW(\n  _In_ LPTSTR pName,\n  _In_ LPTSTR pPortName,\n  _In_ DWORD  dwLevel,\n  _In_ LPBYTE pPortInfo\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetPort function sets the status associated with a printer port."
+    },
+    "SetPrinter": {
+        "prototype": "BOOL SetPrinterW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter,\n  _In_ DWORD  Command\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetPrinter function sets the data for a specified printer or sets the state of the specified printer by pausing printing, resuming printing, or clearing all print jobs."
+    },
+    "SetPrinterData": {
+        "prototype": "DWORD SetPrinterDataW(\n  _In_ HANDLE hPrinter,\n  _In_ LPTSTR pValueName,\n  _In_ DWORD  Type,\n  _In_ LPBYTE pData,\n  _In_ DWORD  cbData\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetPrinterData function sets the configuration data for a printer or print server."
+    },
+    "SetPrinterDataEx": {
+        "prototype": "DWORD SetPrinterDataExW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName,\n  _In_ LPCTSTR pValueName,\n  _In_ DWORD   Type,\n  _In_ LPBYTE  pData,\n  _In_ DWORD   cbData\n);",
+        "dllLibrary": "winspool",
+        "comment": "The SetPrinterDataEx function sets the configuration data for a printer or print server. The function stores the configuration data under the printer's registry key."
     },
     "SetProcessAffinityMask": {
         "prototype": "BOOL SetProcessAffinityMask(\n  HANDLE    hProcess,\n  DWORD_PTR dwProcessAffinityMask\n);",
@@ -4993,6 +4973,17 @@
         "prototype": "BOOL SoundSentry();",
         "dllLibrary": "user32",
         "comment": "Triggers a visual signal to indicate that a sound is playing."
+    },
+    "StartDocPrinter": {
+        "prototype": "DWORD StartDocPrinterW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pDocInfo\n);",
+        "dllLibrary": "winspool",
+        "comment": "The StartDocPrinter function notifies the print spooler that a document is to be spooled for printing."
+    },
+    "StartPagePrinter": {
+        "prototype": "BOOL StartPagePrinter(\n  _In_ HANDLE hPrinter\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The StartPagePrinter function notifies the spooler that a page is about to be printed on the specified printer.",
+        "category": "winspool"
     },
     "StretchBlt": {
         "prototype": "BOOL StretchBlt(\n  HDC   hdcDest,\n  int   xDest,\n  int   yDest,\n  int   wDest,\n  int   hDest,\n  HDC   hdcSrc,\n  int   xSrc,\n  int   ySrc,\n  int   wSrc,\n  int   hSrc,\n  DWORD rop\n);",
@@ -5667,6 +5658,12 @@
         "prototype": "BOOL WriteFile(\n  HANDLE       hFile,\n  LPCVOID      lpBuffer,\n  DWORD        nNumberOfBytesToWrite,\n  LPDWORD      lpNumberOfBytesWritten,\n  LPOVERLAPPED lpOverlapped\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to the specified file or input/output (I/O) device."
+    },
+    "WritePrinter": {
+        "prototype": "BOOL WritePrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten\n);",
+        "dllLibrary": "spoolss",
+        "comment": "The WritePrinter function notifies the print spooler that data should be written to the specified printer.",
+        "category": "winspool"
     },
     "WriteProcessMemory": {
         "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
