@@ -27,8 +27,7 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock.h>
-#include <ws2def.h>
+#include <winsock2.h>
 
 void main()
 {

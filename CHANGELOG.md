@@ -1,3 +1,7 @@
+## 2.2.2
+
+- Add Windows Spooler library support.
+
 ## 2.2.1
 
 - Add initial support for the Windows Socket library (winsock2).
