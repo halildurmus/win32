@@ -21,9 +21,11 @@ const winmdGenerated = [
   'scarddlg',
   'shcore',
   'shell32',
+  'spoolss',
   'user32',
   'version',
   'winmm',
   'winscard',
+  'winspool',
   'ws2_32',
 ];

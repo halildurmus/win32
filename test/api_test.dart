@@ -20,6 +20,107 @@ import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
+  group('Test spoolss functions', () {
+    test('Can instantiate AbortPrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final AbortPrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('AbortPrinter');
+      expect(AbortPrinter, isA<Function>());
+    });
+    test('Can instantiate ClosePrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final ClosePrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('ClosePrinter');
+      expect(ClosePrinter, isA<Function>());
+    });
+    test('Can instantiate DeletePrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final DeletePrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('DeletePrinter');
+      expect(DeletePrinter, isA<Function>());
+    });
+    test('Can instantiate EndDocPrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final EndDocPrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('EndDocPrinter');
+      expect(EndDocPrinter, isA<Function>());
+    });
+    test('Can instantiate EndPagePrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final EndPagePrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('EndPagePrinter');
+      expect(EndPagePrinter, isA<Function>());
+    });
+    test('Can instantiate FindClosePrinterChangeNotification', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final FindClosePrinterChangeNotification = spoolss.lookupFunction<
+          Int32 Function(IntPtr hChange),
+          int Function(int hChange)>('FindClosePrinterChangeNotification');
+      expect(FindClosePrinterChangeNotification, isA<Function>());
+    });
+    test('Can instantiate OpenPrinter2', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final OpenPrinter2 = spoolss.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> pPrinterName,
+              Pointer<IntPtr> phPrinter,
+              Pointer<PRINTER_DEFAULTS> pDefault,
+              Pointer<PRINTER_OPTIONS> pOptions),
+          int Function(
+              Pointer<Utf16> pPrinterName,
+              Pointer<IntPtr> phPrinter,
+              Pointer<PRINTER_DEFAULTS> pDefault,
+              Pointer<PRINTER_OPTIONS> pOptions)>('OpenPrinter2W');
+      expect(OpenPrinter2, isA<Function>());
+    });
+    test('Can instantiate ReadPrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final ReadPrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+              Pointer<Uint32> pNoBytesRead),
+          int Function(int hPrinter, Pointer pBuf, int cbBuf,
+              Pointer<Uint32> pNoBytesRead)>('ReadPrinter');
+      expect(ReadPrinter, isA<Function>());
+    });
+    test('Can instantiate ReportJobProcessingProgress', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final ReportJobProcessingProgress = spoolss.lookupFunction<
+          Int32 Function(IntPtr printerHandle, Uint32 jobId,
+              Uint32 jobOperation, Uint32 jobProgress),
+          int Function(int printerHandle, int jobId, int jobOperation,
+              int jobProgress)>('ReportJobProcessingProgress');
+      expect(ReportJobProcessingProgress, isA<Function>());
+    });
+    test('Can instantiate ScheduleJob', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final ScheduleJob = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 JobId),
+          int Function(int hPrinter, int JobId)>('ScheduleJob');
+      expect(ScheduleJob, isA<Function>());
+    });
+    test('Can instantiate StartPagePrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final StartPagePrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('StartPagePrinter');
+      expect(StartPagePrinter, isA<Function>());
+    });
+    test('Can instantiate WritePrinter', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final WritePrinter = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+              Pointer<Uint32> pcWritten),
+          int Function(int hPrinter, Pointer pBuf, int cbBuf,
+              Pointer<Uint32> pcWritten)>('WritePrinter');
+      expect(WritePrinter, isA<Function>());
+    });
+  });
+
   group('Test ws2_32 functions', () {
     if (windowsBuildNumber >= 9600) {
       test('Can instantiate accept', () {
@@ -6421,6 +6522,427 @@ void main() {
           int Function(int hdc, int x, int y, Pointer<Utf16> lpString,
               int c)>('TextOutW');
       expect(TextOut, isA<Function>());
+    });
+  });
+
+  group('Test winspool functions', () {
+    test('Can instantiate CloseSpoolFileHandle', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final CloseSpoolFileHandle = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, IntPtr hSpoolFile),
+          int Function(int hPrinter, int hSpoolFile)>('CloseSpoolFileHandle');
+      expect(CloseSpoolFileHandle, isA<Function>());
+    });
+    test('Can instantiate CommitSpoolData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final CommitSpoolData = winspool.lookupFunction<
+          IntPtr Function(IntPtr hPrinter, IntPtr hSpoolFile, Uint32 cbCommit),
+          int Function(
+              int hPrinter, int hSpoolFile, int cbCommit)>('CommitSpoolData');
+      expect(CommitSpoolData, isA<Function>());
+    });
+    test('Can instantiate ConfigurePort', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final ConfigurePort = winspool.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> pName, IntPtr hWnd, Pointer<Utf16> pPortName),
+          int Function(Pointer<Utf16> pName, int hWnd,
+              Pointer<Utf16> pPortName)>('ConfigurePortW');
+      expect(ConfigurePort, isA<Function>());
+    });
+    test('Can instantiate ConnectToPrinterDlg', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final ConnectToPrinterDlg = winspool.lookupFunction<
+          IntPtr Function(IntPtr hwnd, Uint32 Flags),
+          int Function(int hwnd, int Flags)>('ConnectToPrinterDlg');
+      expect(ConnectToPrinterDlg, isA<Function>());
+    });
+    test('Can instantiate DeleteForm', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DeleteForm = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName),
+          int Function(int hPrinter, Pointer<Utf16> pFormName)>('DeleteFormW');
+      expect(DeleteForm, isA<Function>());
+    });
+    test('Can instantiate DeletePrinterConnection', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DeletePrinterConnection = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pName),
+          int Function(Pointer<Utf16> pName)>('DeletePrinterConnectionW');
+      expect(DeletePrinterConnection, isA<Function>());
+    });
+    test('Can instantiate DeletePrinterData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DeletePrinterData = winspool.lookupFunction<
+          Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pValueName),
+          int Function(
+              int hPrinter, Pointer<Utf16> pValueName)>('DeletePrinterDataW');
+      expect(DeletePrinterData, isA<Function>());
+    });
+    test('Can instantiate DeletePrinterDataEx', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DeletePrinterDataEx = winspool.lookupFunction<
+          Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName),
+          int Function(int hPrinter, Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName)>('DeletePrinterDataExW');
+      expect(DeletePrinterDataEx, isA<Function>());
+    });
+    test('Can instantiate DeletePrinterKey', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DeletePrinterKey = winspool.lookupFunction<
+          Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pKeyName),
+          int Function(
+              int hPrinter, Pointer<Utf16> pKeyName)>('DeletePrinterKeyW');
+      expect(DeletePrinterKey, isA<Function>());
+    });
+    test('Can instantiate DocumentProperties', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final DocumentProperties = winspool.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd,
+              IntPtr hPrinter,
+              Pointer<Utf16> pDeviceName,
+              Pointer<DEVMODE> pDevModeOutput,
+              Pointer<DEVMODE> pDevModeInput,
+              Uint32 fMode),
+          int Function(
+              int hWnd,
+              int hPrinter,
+              Pointer<Utf16> pDeviceName,
+              Pointer<DEVMODE> pDevModeOutput,
+              Pointer<DEVMODE> pDevModeInput,
+              int fMode)>('DocumentPropertiesW');
+      expect(DocumentProperties, isA<Function>());
+    });
+    test('Can instantiate EnumForms', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumForms = winspool.lookupFunction<
+          Int32 Function(
+              IntPtr hPrinter,
+              Uint32 Level,
+              Pointer<Uint8> pForm,
+              Uint32 cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned),
+          int Function(
+              int hPrinter,
+              int Level,
+              Pointer<Uint8> pForm,
+              int cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned)>('EnumFormsW');
+      expect(EnumForms, isA<Function>());
+    });
+    test('Can instantiate EnumJobs', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumJobs = winspool.lookupFunction<
+          Int32 Function(
+              IntPtr hPrinter,
+              Uint32 FirstJob,
+              Uint32 NoJobs,
+              Uint32 Level,
+              Pointer<Uint8> pJob,
+              Uint32 cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned),
+          int Function(
+              int hPrinter,
+              int FirstJob,
+              int NoJobs,
+              int Level,
+              Pointer<Uint8> pJob,
+              int cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned)>('EnumJobsW');
+      expect(EnumJobs, isA<Function>());
+    });
+    test('Can instantiate EnumPrinterData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumPrinterData = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Uint32 dwIndex,
+              Pointer<Utf16> pValueName,
+              Uint32 cbValueName,
+              Pointer<Uint32> pcbValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              Uint32 cbData,
+              Pointer<Uint32> pcbData),
+          int Function(
+              int hPrinter,
+              int dwIndex,
+              Pointer<Utf16> pValueName,
+              int cbValueName,
+              Pointer<Uint32> pcbValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              int cbData,
+              Pointer<Uint32> pcbData)>('EnumPrinterDataW');
+      expect(EnumPrinterData, isA<Function>());
+    });
+    test('Can instantiate EnumPrinterDataEx', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumPrinterDataEx = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Uint8> pEnumValues,
+              Uint32 cbEnumValues,
+              Pointer<Uint32> pcbEnumValues,
+              Pointer<Uint32> pnEnumValues),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Uint8> pEnumValues,
+              int cbEnumValues,
+              Pointer<Uint32> pcbEnumValues,
+              Pointer<Uint32> pnEnumValues)>('EnumPrinterDataExW');
+      expect(EnumPrinterDataEx, isA<Function>());
+    });
+    test('Can instantiate EnumPrinterKey', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumPrinterKey = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pSubkey,
+              Uint32 cbSubkey,
+              Pointer<Uint32> pcbSubkey),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pSubkey,
+              int cbSubkey,
+              Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
+      expect(EnumPrinterKey, isA<Function>());
+    });
+    test('Can instantiate FindFirstPrinterChangeNotification', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FindFirstPrinterChangeNotification = winspool.lookupFunction<
+          IntPtr Function(IntPtr hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
+              Pointer pPrinterNotifyOptions),
+          int Function(
+              int hPrinter,
+              int fdwFilter,
+              int fdwOptions,
+              Pointer
+                  pPrinterNotifyOptions)>('FindFirstPrinterChangeNotification');
+      expect(FindFirstPrinterChangeNotification, isA<Function>());
+    });
+    test('Can instantiate FindNextPrinterChangeNotification', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FindNextPrinterChangeNotification = winspool.lookupFunction<
+              Int32 Function(IntPtr hChange, Pointer<Uint32> pdwChange,
+                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo),
+              int Function(int hChange, Pointer<Uint32> pdwChange,
+                  Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo)>(
+          'FindNextPrinterChangeNotification');
+      expect(FindNextPrinterChangeNotification, isA<Function>());
+    });
+    test('Can instantiate FlushPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FlushPrinter = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+              Pointer<Uint32> pcWritten, Uint32 cSleep),
+          int Function(int hPrinter, Pointer pBuf, int cbBuf,
+              Pointer<Uint32> pcWritten, int cSleep)>('FlushPrinter');
+      expect(FlushPrinter, isA<Function>());
+    });
+    test('Can instantiate FreePrinterNotifyInfo', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final FreePrinterNotifyInfo = winspool.lookupFunction<
+              Int32 Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo),
+              int Function(Pointer<PRINTER_NOTIFY_INFO> pPrinterNotifyInfo)>(
+          'FreePrinterNotifyInfo');
+      expect(FreePrinterNotifyInfo, isA<Function>());
+    });
+    test('Can instantiate GetDefaultPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetDefaultPrinter = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pszBuffer, Pointer<Uint32> pcchBuffer),
+          int Function(Pointer<Utf16> pszBuffer,
+              Pointer<Uint32> pcchBuffer)>('GetDefaultPrinterW');
+      expect(GetDefaultPrinter, isA<Function>());
+    });
+    test('Can instantiate GetJob', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetJob = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 JobId, Uint32 Level,
+              Pointer<Uint8> pJob, Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
+          int Function(int hPrinter, int JobId, int Level, Pointer<Uint8> pJob,
+              int cbBuf, Pointer<Uint32> pcbNeeded)>('GetJobW');
+      expect(GetJob, isA<Function>());
+    });
+    test('Can instantiate GetPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetPrinter = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pPrinter,
+              Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
+          int Function(int hPrinter, int Level, Pointer<Uint8> pPrinter,
+              int cbBuf, Pointer<Uint32> pcbNeeded)>('GetPrinterW');
+      expect(GetPrinter, isA<Function>());
+    });
+    test('Can instantiate GetPrinterData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetPrinterData = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              Uint32 nSize,
+              Pointer<Uint32> pcbNeeded),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              int nSize,
+              Pointer<Uint32> pcbNeeded)>('GetPrinterDataW');
+      expect(GetPrinterData, isA<Function>());
+    });
+    test('Can instantiate GetPrinterDataEx', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetPrinterDataEx = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              Uint32 nSize,
+              Pointer<Uint32> pcbNeeded),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName,
+              Pointer<Uint32> pType,
+              Pointer<Uint8> pData,
+              int nSize,
+              Pointer<Uint32> pcbNeeded)>('GetPrinterDataExW');
+      expect(GetPrinterDataEx, isA<Function>());
+    });
+    test('Can instantiate GetPrintExecutionData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetPrintExecutionData = winspool.lookupFunction<
+          Int32 Function(Pointer<PRINT_EXECUTION_DATA> pData),
+          int Function(
+              Pointer<PRINT_EXECUTION_DATA> pData)>('GetPrintExecutionData');
+      expect(GetPrintExecutionData, isA<Function>());
+    });
+    test('Can instantiate IsValidDevmode', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final IsValidDevmode = winspool.lookupFunction<
+          Int32 Function(Pointer<DEVMODE> pDevmode, IntPtr DevmodeSize),
+          int Function(
+              Pointer<DEVMODE> pDevmode, int DevmodeSize)>('IsValidDevmodeW');
+      expect(IsValidDevmode, isA<Function>());
+    });
+    test('Can instantiate OpenPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final OpenPrinter = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+              Pointer<PRINTER_DEFAULTS> pDefault),
+          int Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+              Pointer<PRINTER_DEFAULTS> pDefault)>('OpenPrinterW');
+      expect(OpenPrinter, isA<Function>());
+    });
+    test('Can instantiate PrinterProperties', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final PrinterProperties = winspool.lookupFunction<
+          Int32 Function(IntPtr hWnd, IntPtr hPrinter),
+          int Function(int hWnd, int hPrinter)>('PrinterProperties');
+      expect(PrinterProperties, isA<Function>());
+    });
+    test('Can instantiate ResetPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final ResetPrinter = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer<PRINTER_DEFAULTS> pDefault),
+          int Function(int hPrinter,
+              Pointer<PRINTER_DEFAULTS> pDefault)>('ResetPrinterW');
+      expect(ResetPrinter, isA<Function>());
+    });
+    test('Can instantiate SetDefaultPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetDefaultPrinter = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pszPrinter),
+          int Function(Pointer<Utf16> pszPrinter)>('SetDefaultPrinterW');
+      expect(SetDefaultPrinter, isA<Function>());
+    });
+    test('Can instantiate SetForm', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetForm = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName,
+              Uint32 Level, Pointer<Uint8> pForm),
+          int Function(int hPrinter, Pointer<Utf16> pFormName, int Level,
+              Pointer<Uint8> pForm)>('SetFormW');
+      expect(SetForm, isA<Function>());
+    });
+    test('Can instantiate SetJob', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetJob = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 JobId, Uint32 Level,
+              Pointer<Uint8> pJob, Uint32 Command),
+          int Function(int hPrinter, int JobId, int Level, Pointer<Uint8> pJob,
+              int Command)>('SetJobW');
+      expect(SetJob, isA<Function>());
+    });
+    test('Can instantiate SetPort', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetPort = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pName, Pointer<Utf16> pPortName,
+              Uint32 dwLevel, Pointer<Uint8> pPortInfo),
+          int Function(Pointer<Utf16> pName, Pointer<Utf16> pPortName,
+              int dwLevel, Pointer<Uint8> pPortInfo)>('SetPortW');
+      expect(SetPort, isA<Function>());
+    });
+    test('Can instantiate SetPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetPrinter = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pPrinter,
+              Uint32 Command),
+          int Function(int hPrinter, int Level, Pointer<Uint8> pPrinter,
+              int Command)>('SetPrinterW');
+      expect(SetPrinter, isA<Function>());
+    });
+    test('Can instantiate SetPrinterData', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetPrinterData = winspool.lookupFunction<
+          Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pValueName,
+              Uint32 Type, Pointer<Uint8> pData, Uint32 cbData),
+          int Function(int hPrinter, Pointer<Utf16> pValueName, int Type,
+              Pointer<Uint8> pData, int cbData)>('SetPrinterDataW');
+      expect(SetPrinterData, isA<Function>());
+    });
+    test('Can instantiate SetPrinterDataEx', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final SetPrinterDataEx = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName,
+              Uint32 Type,
+              Pointer<Uint8> pData,
+              Uint32 cbData),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pKeyName,
+              Pointer<Utf16> pValueName,
+              int Type,
+              Pointer<Uint8> pData,
+              int cbData)>('SetPrinterDataExW');
+      expect(SetPrinterDataEx, isA<Function>());
+    });
+    test('Can instantiate StartDocPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final StartDocPrinter = winspool.lookupFunction<
+          Uint32 Function(
+              IntPtr hPrinter, Uint32 Level, Pointer<DOC_INFO_1> pDocInfo),
+          int Function(int hPrinter, int Level,
+              Pointer<DOC_INFO_1> pDocInfo)>('StartDocPrinterW');
+      expect(StartDocPrinter, isA<Function>());
     });
   });
 
