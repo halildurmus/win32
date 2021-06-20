@@ -17,7 +17,6 @@ const winmdGenerated = [
   'ole32',
   'oleaut32',
   'powrprof',
-  'prntvpt',
   'rometadata',
   'scarddlg',
   'shcore',

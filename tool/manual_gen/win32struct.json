@@ -11,10 +11,6 @@
         "namespace": "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW",
         "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
     },
-    "PRINT_EXECUTION_DATA": {
-        "namespace": "Windows.Win32.Graphics.Printing.PRINT_EXECUTION_DATA",
-        "comment": "Contains the execution context of the printer driver that calls GetPrintExecutionData."
-    },
     "ADDJOB_INFO_1": {
         "namespace": "Windows.Win32.Graphics.Printing.ADDJOB_INFO_1W",
         "comment": "The ADDJOB_INFO_1 structure identifies a print job as well as the directory and file in which an application can store that job."
@@ -450,6 +446,10 @@
     "POWERBROADCAST_SETTING": {
         "namespace": "Windows.Win32.System.Power.POWERBROADCAST_SETTING",
         "comment": "Sent with a power setting event and contains data about the specific change."
+    },
+    "PRINT_EXECUTION_DATA": {
+        "namespace": "Windows.Win32.Graphics.Printing.PRINT_EXECUTION_DATA",
+        "comment": "Contains the execution context of the printer driver that calls GetPrintExecutionData."
     },
     "PRINTER_DEFAULTS": {
         "namespace": "Windows.Win32.Graphics.Printing.PRINTER_DEFAULTSW",

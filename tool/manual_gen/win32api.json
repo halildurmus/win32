@@ -187,12 +187,6 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
-    "BindPTProviderThunk": {
-        "prototype": "HRESULT BindPTProviderThunk(\n  _In_  LPTSTR      pszPrinterName,\n  _In_  INT         maxVersion,\n  _In_  INT         prefVersion,\n  _Out_ HPTPROVIDER *phProvider,\n  _Out_ INT         *usedVersion\n);",
-        "dllLibrary": "prntvpt",
-        "comment": "Opens an instance of a print ticket provider.",
-        "category": "winspool"
-    },
     "BitBlt": {
         "prototype": "BOOL BitBlt(\n  HDC   hdc,\n  int   x,\n  int   y,\n  int   cx,\n  int   cy,\n  HDC   hdcSrc,\n  int   x1,\n  int   y1,\n  DWORD rop\n);",
         "dllLibrary": "gdi32",
@@ -1314,9 +1308,8 @@
     },
     "FindFirstPrinterChangeNotification": {
         "prototype": "HANDLE FindFirstPrinterChangeNotification(\n  _In_     HANDLE hPrinter,\n           DWORD  fdwFilter,\n           DWORD  fdwOptions,\n  _In_opt_ LPVOID pPrinterNotifyOptions\n);",
-        "dllLibrary": "spoolss",
-        "comment": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server.",
-        "category": "winspool"
+        "dllLibrary": "winspool",
+        "comment": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server."
     },
     "FindFirstVolume": {
         "prototype": "HANDLE FindFirstVolumeW(\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -1335,9 +1328,8 @@
     },
     "FindNextPrinterChangeNotification": {
         "prototype": "BOOL FindNextPrinterChangeNotification(\n  _In_      HANDLE hChange,\n  _Out_opt_ PDWORD pdwChange,\n  _In_opt_  LPVOID pPrinterNotifyOptions,\n  _Out_opt_ LPVOID *ppPrinterNotifyInfo\n);",
-        "dllLibrary": "spoolss",
-        "comment": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied.",
-        "category": "winspool"
+        "dllLibrary": "winspool",
+        "comment": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied."
     },
     "FindNextVolume": {
         "prototype": "BOOL FindNextVolumeW(\n  HANDLE hFindVolume,\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -1412,9 +1404,8 @@
     },
     "FreePrinterNotifyInfo": {
         "prototype": "BOOL FreePrinterNotifyInfo(\n  _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo\n);",
-        "dllLibrary": "spoolss",
-        "comment": "The FreePrinterNotifyInfo function frees a system-allocated buffer created by the FindNextPrinterChangeNotification function.",
-        "category": "winspool"
+        "dllLibrary": "winspool",
+        "comment": "The FreePrinterNotifyInfo function frees a system-allocated buffer created by the FindNextPrinterChangeNotification function."
     },
     "GetActiveObject": {
         "prototype": "HRESULT GetActiveObject(\n  REFCLSID rclsid,\n  void     *pvReserved,\n  IUnknown **ppunk\n);",
@@ -2233,12 +2224,6 @@
         "prototype": "_BOOL GetPhysicalMonitorsFromHMONITOR(\n  HMONITOR           hMonitor,\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);",
         "dllLibrary": "dxva2",
         "comment": "Retrieves the physical monitors associated with an HMONITOR monitor handle."
-    },
-    "GetPrintCapabilitiesThunk2": {
-        "prototype": "HRESULT GetPrintCapabilitiesThunk2(\n  _In_      HPTPROVIDER hProvider,\n  _In_      BYTE        *pPrintTicket,\n  _In_      INT         cbPrintTicket,\n  _Out_     BYTE        **ppbPrintCapabilities,\n  _Out_     INT         *pcbPrintCapabilitiesLength,\n  _Out_opt_ BSTR        *pbstrErrorMessage\n);",
-        "dllLibrary": "prntvpt",
-        "comment": "Retrieves the printer's capabilities formatted in compliance with the XML Print Schema.",
-        "category": "winspool"
     },
     "GetPrinter": {
         "prototype": "BOOL GetPrinterW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pPrinter,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
