@@ -2632,7 +2632,7 @@
     "GetWindowRgn": {
         "prototype": "int GetWindowRgn(\n  HWND hWnd,\n  HRGN hRgn\n);",
         "dllLibrary": "user32",
-        "comment": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
+        "comment": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region."
     },
     "GetWindowRgnBox": {
         "prototype": "int GetWindowRgnBox(\n  HWND   hWnd,\n  LPRECT lprc\n);",
@@ -4845,6 +4845,11 @@
         "dllLibrary": "user32",
         "comment": "The SetWindowRgn function sets the window region of a window. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
     },
+    "SetWindowsHookEx": {
+        "prototype": "HHOOK SetWindowsHookExW(\n  int       idHook,\n  HOOKPROC  lpfn,\n  HINSTANCE hmod,\n  DWORD     dwThreadId\n);",
+        "dllLibrary": "user32",
+        "comment": "Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread."
+    },
     "SetWindowText": {
         "prototype": "BOOL SetWindowTextW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
@@ -5239,6 +5244,11 @@
         "prototype": "DWORD IMAGEAPI UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
         "dllLibrary": "dbghelp",
         "comment": "Undecorates the specified decorated C++ symbol name."
+    },
+    "UnhookWindowsHookEx": {
+        "prototype": "BOOL UnhookWindowsHookEx(\n  HHOOK hhk\n);",
+        "dllLibrary": "user32",
+        "comment": "Removes a hook procedure installed in a hook chain by the SetWindowsHookEx function."
     },
     "UnionRect": {
         "prototype": "BOOL UnionRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",

@@ -3646,7 +3646,7 @@ int GetWindowRect(int hWnd, Pointer<RECT> lpRect) {
 /// window. The window region of a window is set by calling the
 /// SetWindowRgn function. The window region determines the area within the
 /// window where the system permits drawing. The system does not display
-/// any portion of a window that lies outside of the window region
+/// any portion of a window that lies outside of the window region.
 ///
 /// ```c
 /// int GetWindowRgn(
@@ -6485,6 +6485,30 @@ int SetWindowRgn(int hWnd, int hRgn, int bRedraw) {
   return _SetWindowRgn(hWnd, hRgn, bRedraw);
 }
 
+/// Installs an application-defined hook procedure into a hook chain. You
+/// would install a hook procedure to monitor the system for certain types
+/// of events. These events are associated either with a specific thread or
+/// with all threads in the same desktop as the calling thread.
+///
+/// ```c
+/// HHOOK SetWindowsHookExW(
+///   int       idHook,
+///   HOOKPROC  lpfn,
+///   HINSTANCE hmod,
+///   DWORD     dwThreadId
+/// );
+/// ```
+/// {@category user32}
+int SetWindowsHookEx(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+    int hmod, int dwThreadId) {
+  final _SetWindowsHookEx = _user32.lookupFunction<
+      IntPtr Function(Uint32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+          IntPtr hmod, Uint32 dwThreadId),
+      int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+          int hmod, int dwThreadId)>('SetWindowsHookExW');
+  return _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
+}
+
 /// Changes the text of the specified window's title bar (if it has one).
 /// If the specified window is a control, the text of the control is
 /// changed. However, SetWindowText cannot change the text of a control in
@@ -6978,6 +7002,24 @@ int TranslateMessage(Pointer<MSG> lpMsg) {
       Int32 Function(Pointer<MSG> lpMsg),
       int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
   return _TranslateMessage(lpMsg);
+}
+
+/// Installs an application-defined hook procedure into a hook chain. You
+/// would install a hook procedure to monitor the system for certain types
+/// of events. These events are associated either with a specific thread or
+/// with all threads in the same desktop as the calling thread.
+///
+/// ```c
+/// BOOL UnhookWindowsHookEx(
+///   HHOOK hhk
+/// );
+/// ```
+/// {@category user32}
+int UnhookWindowsHookEx(int hhk) {
+  final _UnhookWindowsHookEx =
+      _user32.lookupFunction<Int32 Function(IntPtr hhk), int Function(int hhk)>(
+          'UnhookWindowsHookEx');
+  return _UnhookWindowsHookEx(hhk);
 }
 
 /// The UnionRect function creates the union of two rectangles. The union

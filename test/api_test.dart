@@ -5613,6 +5613,18 @@ void main() {
           int Function(int hWnd, int hRgn, int bRedraw)>('SetWindowRgn');
       expect(SetWindowRgn, isA<Function>());
     });
+    test('Can instantiate SetWindowsHookEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetWindowsHookEx = user32.lookupFunction<
+          IntPtr Function(
+              Uint32 idHook,
+              Pointer<NativeFunction<CallWndProc>> lpfn,
+              IntPtr hmod,
+              Uint32 dwThreadId),
+          int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+              int hmod, int dwThreadId)>('SetWindowsHookExW');
+      expect(SetWindowsHookEx, isA<Function>());
+    });
     test('Can instantiate SetWindowText', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetWindowText = user32.lookupFunction<
@@ -5829,6 +5841,13 @@ void main() {
           Int32 Function(Pointer<MSG> lpMsg),
           int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
       expect(TranslateMessage, isA<Function>());
+    });
+    test('Can instantiate UnhookWindowsHookEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UnhookWindowsHookEx = user32.lookupFunction<
+          Int32 Function(IntPtr hhk),
+          int Function(int hhk)>('UnhookWindowsHookEx');
+      expect(UnhookWindowsHookEx, isA<Function>());
     });
     test('Can instantiate UnionRect', () {
       final user32 = DynamicLibrary.open('user32.dll');

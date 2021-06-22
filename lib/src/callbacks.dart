@@ -11,6 +11,11 @@ import 'package:ffi/ffi.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
+/// An application-defined or library-defined callback function used with the
+/// SetWindowsHookEx function. The system calls this function before calling the
+/// window procedure to process a message sent to the thread.
+typedef CallWndProc = Int32 Function(Int32 nCode, IntPtr wParam, IntPtr lParam);
+
 /// Application-defined callback function used with the ChooseColor function.
 /// Receives messages or notifications intended for the default dialog box
 /// procedure of the Color dialog box.
