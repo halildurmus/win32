@@ -15,6 +15,7 @@ const _IMAGE_FILE_MACHINE_I386 = 0x014C;
 const _IMAGE_FILE_MACHINE_IA64 = 0x0200;
 const _IMAGE_FILE_MACHINE_AMD64 = 0x8664;
 
+/// The platform targeted by an executable.
 enum ImageType { i386, ia64, amd64 }
 
 /// A representation of the assembly file's portable executable format.

@@ -22,6 +22,7 @@ import 'typeidentifier.dart';
 import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
+/// Specifies visibility of a type to other types.
 enum TypeVisibility {
   /// Specifies that the type is not in public scope.
   notPublic,
@@ -48,6 +49,7 @@ enum TypeVisibility {
   nestedFamilyOrAssembly
 }
 
+/// Specifies how fields are laid out in the type.
 enum TypeLayout {
   /// Specifies that the fields of this type are laid out automatically.
   auto,
@@ -59,6 +61,7 @@ enum TypeLayout {
   explicit
 }
 
+/// Specifies how string types are interpreted.
 enum StringFormat {
   /// Specifies that this type interprets an LPTSTR as ANSI.
   ansi,
