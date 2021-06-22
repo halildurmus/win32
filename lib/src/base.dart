@@ -22,7 +22,10 @@ const MAX_STRING_SIZE = 256;
 /// underlying Windows metadata database. The high byte of the token describes
 /// its type.
 abstract class TokenObject {
+  /// The [Scope] that contains this token.
   final Scope scope;
+
+  /// A unique identifier for this token in the metadata file.
   final int token;
 
   const TokenObject(this.scope, this.token);
