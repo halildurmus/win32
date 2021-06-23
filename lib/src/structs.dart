@@ -45,6 +45,29 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
 
+/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
+/// information field and provides the current data for that field.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  @Uint16()
+  external int Type;
+  @Uint16()
+  external int Field;
+  @Uint32()
+  external int Reserved;
+  @Uint32()
+  external int Id;
+  // TODO: Check packing
+  @Uint32()
+  external int _pack;
+  @Uint32()
+  external int cbBuf;
+  @Uint32()
+  external int _pack2;
+  external Pointer pBuf;
+}
+
 /// Contains information about a communications driver.
 ///
 /// {@category Struct}

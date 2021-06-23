@@ -12,7 +12,7 @@
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\struct_sizes.dart as input to the test harness.
 
-// Compile with cl struct_sizes.cpp /Fe:structs64.exe
+// Compile with cl tool\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
 #include <windows.h>
@@ -47,6 +47,7 @@ void main()
     printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
     printf("  'NOTIFYICONDATA': %zu,\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
+    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
@@ -179,7 +180,6 @@ void main()
     printf("  'PRINTER_INFO_5': %zu,\n", sizeof(PRINTER_INFO_5W));
     printf("  'PRINTER_INFO_6': %zu,\n", sizeof(PRINTER_INFO_6));
     printf("  'PRINTER_NOTIFY_INFO': %zu,\n", sizeof(PRINTER_NOTIFY_INFO));
-    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
