@@ -2747,6 +2747,40 @@ int GetProcessId(int Process) {
   return _GetProcessId(Process);
 }
 
+/// Retrieves the shutdown parameters for the currently calling process.
+///
+/// ```c
+/// BOOL GetProcessShutdownParameters(
+///   LPDWORD lpdwLevel,
+///   LPDWORD lpdwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessShutdownParameters(
+    Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags) {
+  final _GetProcessShutdownParameters = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags),
+      int Function(Pointer<Uint32> lpdwLevel,
+          Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
+  return _GetProcessShutdownParameters(lpdwLevel, lpdwFlags);
+}
+
+/// Retrieves the major and minor version numbers of the system on which
+/// the specified process expects to run.
+///
+/// ```c
+/// DWORD GetProcessVersion(
+///   DWORD ProcessId
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessVersion(int ProcessId) {
+  final _GetProcessVersion = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 ProcessId),
+      int Function(int ProcessId)>('GetProcessVersion');
+  return _GetProcessVersion(ProcessId);
+}
+
 /// Retrieves the minimum and maximum working set sizes of the specified
 /// process.
 ///
@@ -4593,6 +4627,24 @@ int SetProcessAffinityMask(int hProcess, int dwProcessAffinityMask) {
       int Function(
           int hProcess, int dwProcessAffinityMask)>('SetProcessAffinityMask');
   return _SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
+}
+
+/// Disables or enables the ability of the system to temporarily boost the
+/// priority of the threads of the specified process.
+///
+/// ```c
+/// BOOL SetProcessPriorityBoost(
+///   HANDLE hProcess,
+///   BOOL   bDisablePriorityBoost
+/// );
+/// ```
+/// {@category kernel32}
+int SetProcessPriorityBoost(int hProcess, int bDisablePriorityBoost) {
+  final _SetProcessPriorityBoost = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Int32 bDisablePriorityBoost),
+      int Function(
+          int hProcess, int bDisablePriorityBoost)>('SetProcessPriorityBoost');
+  return _SetProcessPriorityBoost(hProcess, bDisablePriorityBoost);
 }
 
 /// Sets the minimum and maximum working set sizes for the specified

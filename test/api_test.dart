@@ -1696,6 +1696,21 @@ void main() {
           int Function(int Process)>('GetProcessId');
       expect(GetProcessId, isA<Function>());
     });
+    test('Can instantiate GetProcessShutdownParameters', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessShutdownParameters = kernel32.lookupFunction<
+          Int32 Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags),
+          int Function(Pointer<Uint32> lpdwLevel,
+              Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
+      expect(GetProcessShutdownParameters, isA<Function>());
+    });
+    test('Can instantiate GetProcessVersion', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessVersion = kernel32.lookupFunction<
+          Uint32 Function(Uint32 ProcessId),
+          int Function(int ProcessId)>('GetProcessVersion');
+      expect(GetProcessVersion, isA<Function>());
+    });
     test('Can instantiate GetProcessWorkingSetSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProcessWorkingSetSize = kernel32.lookupFunction<
@@ -2557,6 +2572,14 @@ void main() {
           int Function(int hProcess,
               int dwProcessAffinityMask)>('SetProcessAffinityMask');
       expect(SetProcessAffinityMask, isA<Function>());
+    });
+    test('Can instantiate SetProcessPriorityBoost', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetProcessPriorityBoost = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Int32 bDisablePriorityBoost),
+          int Function(int hProcess,
+              int bDisablePriorityBoost)>('SetProcessPriorityBoost');
+      expect(SetProcessPriorityBoost, isA<Function>());
     });
     test('Can instantiate SetProcessWorkingSetSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
