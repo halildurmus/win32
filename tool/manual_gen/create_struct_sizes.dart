@@ -16,7 +16,7 @@ const header = '''
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\\struct_sizes.dart as input to the test harness.
 
-// Compile with cl struct_sizes.cpp /Fe:structs64.exe
+// Compile with cl tool\\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
 #include <windows.h>
