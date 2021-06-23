@@ -2505,23 +2505,6 @@ class PRINTER_NOTIFY_INFO extends Struct {
   external Array<PRINTER_NOTIFY_INFO_DATA> aData;
 }
 
-/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
-/// information field and provides the current data for that field.
-///
-/// {@category Struct}
-class PRINTER_NOTIFY_INFO_DATA extends Struct {
-  @Uint16()
-  external int Type;
-  @Uint16()
-  external int Field;
-  @Uint32()
-  external int Reserved;
-  @Uint32()
-  external int Id;
-  @Uint32()
-  external int NotifyData;
-}
-
 /// Represents printer options.
 ///
 /// {@category Struct}
