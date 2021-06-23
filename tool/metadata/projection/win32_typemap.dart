@@ -30,6 +30,7 @@ const win32TypeMap = <String, String>{
   'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
   'DRAWSTATEPROC': 'Pointer<NativeFunction<DrawStateProc>>',
   'WNDPROC': 'Pointer<NativeFunction<WindowProc>>',
+  'HOOKPROC': 'Pointer<NativeFunction<CallWndProc>>',
   'WNDENUMPROC': 'Pointer<NativeFunction<EnumWindowsProc>>',
   'FONTENUMPROCW': 'Pointer<NativeFunction<EnumFontFamExProc>>',
   'ENUMRESNAMEPROCW': 'Pointer<NativeFunction<EnumResNameProc>>',

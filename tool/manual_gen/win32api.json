@@ -1240,6 +1240,11 @@
         "dllLibrary": "kernel32",
         "comment": "Ends the calling process and all its threads."
     },
+    "ExitThread": {
+        "prototype": "void ExitThread(\n  DWORD dwExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Ends the calling thread."
+    },
     "ExtCreatePen": {
         "prototype": "HPEN ExtCreatePen(\n  DWORD          iPenStyle,\n  DWORD          cWidth,\n  const LOGBRUSH *plbrush,\n  DWORD          cStyle,\n  const DWORD    *pstyle\n);",
         "dllLibrary": "gdi32",
@@ -1617,10 +1622,25 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pseudo handle for the current process."
     },
+    "GetCurrentProcessId": {
+        "prototype": "DWORD GetCurrentProcessId();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the process identifier of the calling process."
+    },
+    "GetCurrentProcessorNumber": {
+        "prototype": "DWORD GetCurrentProcessorNumber();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the number of the processor the current thread was running on during the call to this function."
+    },
     "GetCurrentThread": {
         "prototype": "HANDLE GetCurrentThread();",
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pseudo handle for the calling thread."
+    },
+    "GetCurrentThreadId": {
+        "prototype": "DWORD GetCurrentThreadId();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the thread identifier of the calling thread."
     },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
@@ -2276,6 +2296,16 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the process identifier of the specified process."
     },
+    "GetProcessShutdownParameters": {
+        "prototype": "BOOL GetProcessShutdownParameters(\n  LPDWORD lpdwLevel,\n  LPDWORD lpdwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the shutdown parameters for the currently calling process."
+    },
+    "GetProcessVersion": {
+        "prototype": "DWORD GetProcessVersion(\n  DWORD ProcessId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the major and minor version numbers of the system on which the specified process expects to run."
+    },
     "GetProcessWindowStation": {
         "prototype": "HWINSTA GetProcessWindowStation();",
         "dllLibrary": "user32",
@@ -2632,7 +2662,7 @@
     "GetWindowRgn": {
         "prototype": "int GetWindowRgn(\n  HWND hWnd,\n  HRGN hRgn\n);",
         "dllLibrary": "user32",
-        "comment": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
+        "comment": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region."
     },
     "GetWindowRgnBox": {
         "prototype": "int GetWindowRgnBox(\n  HWND   hWnd,\n  LPRECT lprc\n);",
@@ -4702,6 +4732,11 @@
         "comment": "It is recommended that you set the process-default DPI awareness via application manifest. See Setting the default DPI awareness for a process for more information. Setting the process-default DPI awareness via API call can lead to unexpected application behavior. Sets the current process to a specified dots per inch (dpi) awareness context. The DPI awareness contexts are from the DPI_AWARENESS_CONTEXT value.",
         "minimumWindowsVersion": "WIN10_RS2"
     },
+    "SetProcessPriorityBoost": {
+        "prototype": "BOOL SetProcessPriorityBoost(\n  HANDLE hProcess,\n  BOOL   bDisablePriorityBoost\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Disables or enables the ability of the system to temporarily boost the priority of the threads of the specified process."
+    },
     "SetProcessWorkingSetSize": {
         "prototype": "BOOL SetProcessWorkingSetSize(\n  HANDLE hProcess,\n  SIZE_T dwMinimumWorkingSetSize,\n  SIZE_T dwMaximumWorkingSetSize\n);",
         "dllLibrary": "kernel32",
@@ -4844,6 +4879,11 @@
         "prototype": "int SetWindowRgn(\n  HWND hWnd,\n  HRGN hRgn,\n  BOOL bRedraw\n);",
         "dllLibrary": "user32",
         "comment": "The SetWindowRgn function sets the window region of a window. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
+    },
+    "SetWindowsHookEx": {
+        "prototype": "HHOOK SetWindowsHookExW(\n  int       idHook,\n  HOOKPROC  lpfn,\n  HINSTANCE hmod,\n  DWORD     dwThreadId\n);",
+        "dllLibrary": "user32",
+        "comment": "Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread."
     },
     "SetWindowText": {
         "prototype": "BOOL SetWindowTextW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
@@ -5175,6 +5215,11 @@
         "dllLibrary": "kernel32",
         "comment": "Terminates the specified process and all of its threads."
     },
+    "TerminateThread": {
+        "prototype": "BOOL TerminateThread(\n  HANDLE hThread,\n  DWORD  dwExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Terminates a thread."
+    },
     "TextOut": {
         "prototype": "BOOL TextOutW(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPCWSTR lpString,\n  int     c\n);",
         "dllLibrary": "gdi32",
@@ -5239,6 +5284,11 @@
         "prototype": "DWORD IMAGEAPI UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
         "dllLibrary": "dbghelp",
         "comment": "Undecorates the specified decorated C++ symbol name."
+    },
+    "UnhookWindowsHookEx": {
+        "prototype": "BOOL UnhookWindowsHookEx(\n  HHOOK hhk\n);",
+        "dllLibrary": "user32",
+        "comment": "Removes a hook procedure installed in a hook chain by the SetWindowsHookEx function."
     },
     "UnionRect": {
         "prototype": "BOOL UnionRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",

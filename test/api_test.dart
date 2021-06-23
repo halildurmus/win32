@@ -944,6 +944,13 @@ void main() {
           void Function(int uExitCode)>('ExitProcess');
       expect(ExitProcess, isA<Function>());
     });
+    test('Can instantiate ExitThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ExitThread = kernel32.lookupFunction<
+          Void Function(Uint32 dwExitCode),
+          void Function(int dwExitCode)>('ExitThread');
+      expect(ExitThread, isA<Function>());
+    });
     test('Can instantiate FileTimeToDosDateTime', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FileTimeToDosDateTime = kernel32.lookupFunction<
@@ -1307,12 +1314,33 @@ void main() {
               'GetCurrentProcess');
       expect(GetCurrentProcess, isA<Function>());
     });
+    test('Can instantiate GetCurrentProcessId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentProcessId =
+          kernel32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetCurrentProcessId');
+      expect(GetCurrentProcessId, isA<Function>());
+    });
+    test('Can instantiate GetCurrentProcessorNumber', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentProcessorNumber =
+          kernel32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetCurrentProcessorNumber');
+      expect(GetCurrentProcessorNumber, isA<Function>());
+    });
     test('Can instantiate GetCurrentThread', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetCurrentThread =
           kernel32.lookupFunction<IntPtr Function(), int Function()>(
               'GetCurrentThread');
       expect(GetCurrentThread, isA<Function>());
+    });
+    test('Can instantiate GetCurrentThreadId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentThreadId =
+          kernel32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetCurrentThreadId');
+      expect(GetCurrentThreadId, isA<Function>());
     });
     test('Can instantiate GetDefaultCommConfig', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -2597,6 +2625,13 @@ void main() {
           Int32 Function(IntPtr hProcess, Uint32 uExitCode),
           int Function(int hProcess, int uExitCode)>('TerminateProcess');
       expect(TerminateProcess, isA<Function>());
+    });
+    test('Can instantiate TerminateThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final TerminateThread = kernel32.lookupFunction<
+          Int32 Function(IntPtr hThread, Uint32 dwExitCode),
+          int Function(int hThread, int dwExitCode)>('TerminateThread');
+      expect(TerminateThread, isA<Function>());
     });
     test('Can instantiate TransactNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -5613,6 +5648,18 @@ void main() {
           int Function(int hWnd, int hRgn, int bRedraw)>('SetWindowRgn');
       expect(SetWindowRgn, isA<Function>());
     });
+    test('Can instantiate SetWindowsHookEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetWindowsHookEx = user32.lookupFunction<
+          IntPtr Function(
+              Uint32 idHook,
+              Pointer<NativeFunction<CallWndProc>> lpfn,
+              IntPtr hmod,
+              Uint32 dwThreadId),
+          int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+              int hmod, int dwThreadId)>('SetWindowsHookExW');
+      expect(SetWindowsHookEx, isA<Function>());
+    });
     test('Can instantiate SetWindowText', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetWindowText = user32.lookupFunction<
@@ -5829,6 +5876,13 @@ void main() {
           Int32 Function(Pointer<MSG> lpMsg),
           int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
       expect(TranslateMessage, isA<Function>());
+    });
+    test('Can instantiate UnhookWindowsHookEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UnhookWindowsHookEx = user32.lookupFunction<
+          Int32 Function(IntPtr hhk),
+          int Function(int hhk)>('UnhookWindowsHookEx');
+      expect(UnhookWindowsHookEx, isA<Function>());
     });
     test('Can instantiate UnionRect', () {
       final user32 = DynamicLibrary.open('user32.dll');

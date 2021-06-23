@@ -1116,6 +1116,20 @@ void ExitProcess(int uExitCode) {
   return _ExitProcess(uExitCode);
 }
 
+/// Ends the calling thread.
+///
+/// ```c
+/// void ExitThread(
+///   DWORD dwExitCode
+/// );
+/// ```
+/// {@category kernel32}
+void ExitThread(int dwExitCode) {
+  final _ExitThread = _kernel32.lookupFunction<Void Function(Uint32 dwExitCode),
+      void Function(int dwExitCode)>('ExitThread');
+  return _ExitThread(dwExitCode);
+}
+
 /// Converts a file time to MS-DOS date and time values.
 ///
 /// ```c
@@ -1911,6 +1925,32 @@ int GetCurrentProcess() {
   return _GetCurrentProcess();
 }
 
+/// Retrieves the process identifier of the calling process.
+///
+/// ```c
+/// DWORD GetCurrentProcessId();
+/// ```
+/// {@category kernel32}
+int GetCurrentProcessId() {
+  final _GetCurrentProcessId = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetCurrentProcessId');
+  return _GetCurrentProcessId();
+}
+
+/// Retrieves the number of the processor the current thread was running on
+/// during the call to this function.
+///
+/// ```c
+/// DWORD GetCurrentProcessorNumber();
+/// ```
+/// {@category kernel32}
+int GetCurrentProcessorNumber() {
+  final _GetCurrentProcessorNumber =
+      _kernel32.lookupFunction<Uint32 Function(), int Function()>(
+          'GetCurrentProcessorNumber');
+  return _GetCurrentProcessorNumber();
+}
+
 /// Retrieves a pseudo handle for the calling thread.
 ///
 /// ```c
@@ -1921,6 +1961,18 @@ int GetCurrentThread() {
   final _GetCurrentThread = _kernel32
       .lookupFunction<IntPtr Function(), int Function()>('GetCurrentThread');
   return _GetCurrentThread();
+}
+
+/// Retrieves the thread identifier of the calling thread.
+///
+/// ```c
+/// DWORD GetCurrentThreadId();
+/// ```
+/// {@category kernel32}
+int GetCurrentThreadId() {
+  final _GetCurrentThreadId = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetCurrentThreadId');
+  return _GetCurrentThreadId();
 }
 
 /// Retrieves the default configuration for the specified communications
@@ -4694,6 +4746,22 @@ int TerminateProcess(int hProcess, int uExitCode) {
       Int32 Function(IntPtr hProcess, Uint32 uExitCode),
       int Function(int hProcess, int uExitCode)>('TerminateProcess');
   return _TerminateProcess(hProcess, uExitCode);
+}
+
+/// Terminates a thread.
+///
+/// ```c
+/// BOOL TerminateThread(
+///   HANDLE hThread,
+///   DWORD  dwExitCode
+/// );
+/// ```
+/// {@category kernel32}
+int TerminateThread(int hThread, int dwExitCode) {
+  final _TerminateThread = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hThread, Uint32 dwExitCode),
+      int Function(int hThread, int dwExitCode)>('TerminateThread');
+  return _TerminateThread(hThread, dwExitCode);
 }
 
 /// Combines the functions that write a message to and read a message from

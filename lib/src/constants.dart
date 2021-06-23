@@ -2073,6 +2073,27 @@ const PBT_APMRESUMEAUTOMATIC = 0x0012;
 const PBT_POWERSETTINGCHANGE = 0x8013;
 
 // -----------------------------------------------------------------------------
+// Size constants (from WM_SIZE)
+// -----------------------------------------------------------------------------
+
+/// The window has been resized, but neither the SIZE_MINIMIZED nor
+/// SIZE_MAXIMIZED value applies.
+const SIZE_RESTORED = 0;
+
+/// The window has been minimized.
+const SIZE_MINIMIZED = 1;
+
+/// The window has been maximized.
+const SIZE_MAXIMIZED = 2;
+
+/// Message is sent to all pop-up windows when some other window has been
+/// restored to its former size.
+const SIZE_MAXSHOW = 3;
+
+/// Message is sent to all pop-up windows when some other window is maximized.
+const SIZE_MAXHIDE = 4;
+
+// -----------------------------------------------------------------------------
 // Queue status flags
 // -----------------------------------------------------------------------------
 
@@ -2131,6 +2152,67 @@ const QS_ALLINPUT = QS_INPUT |
     QS_PAINT |
     QS_HOTKEY |
     QS_SENDMESSAGE;
+
+// -----------------------------------------------------------------------------
+// Hook constants
+// -----------------------------------------------------------------------------
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar.
+const WH_MSGFILTER = -1;
+
+/// Installs a hook procedure that records input messages posted to the system
+/// message queue.
+const WH_JOURNALRECORD = 0;
+
+/// Installs a hook procedure that posts messages previously recorded by a
+/// WH_JOURNALRECORD hook procedure.
+const WH_JOURNALPLAYBACK = 1;
+
+/// Installs a hook procedure that monitors keystroke messages.
+const WH_KEYBOARD = 2;
+
+/// Installs a hook procedure that monitors messages posted to a message queue.
+const WH_GETMESSAGE = 3;
+
+/// Installs a hook procedure that monitors messages before the system sends
+/// them to the destination window procedure.
+const WH_CALLWNDPROC = 4;
+
+/// Installs a hook procedure that receives notifications useful to a CBT
+/// application.
+const WH_CBT = 5;
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar. The hook
+/// procedure monitors these messages for all applications in the same desktop
+/// as the calling thread.
+const WH_SYSMSGFILTER = 6;
+
+/// Installs a hook procedure that monitors mouse messages.
+const WH_MOUSE = 7;
+
+/// Installs a hook procedure useful for debugging other hook procedures.
+const WH_DEBUG = 9;
+
+/// Installs a hook procedure that receives notifications useful to shell
+/// applications.
+const WH_SHELL = 10;
+
+/// Installs a hook procedure that will be called when the application's
+/// foreground thread is about to become idle. This hook is useful for
+/// performing low priority tasks during idle time.
+const WH_FOREGROUNDIDLE = 11;
+
+/// Installs a hook procedure that monitors messages after they have been
+/// processed by the destination window procedure.
+const WH_CALLWNDPROCRET = 12;
+
+/// Installs a hook procedure that monitors low-level keyboard input events.
+const WH_KEYBOARD_LL = 13;
+
+/// Installs a hook procedure that monitors low-level mouse input events.
+const WH_MOUSE_LL = 14;
 
 // -----------------------------------------------------------------------------
 // System colors
