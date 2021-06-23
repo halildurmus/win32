@@ -41,16 +41,14 @@ class Win32Prototype {
 
   String get dartFfiMapping =>
       '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
-      '$_nameWithoutEncoding($dartParams) {\n'
-      '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
+      '$_nameWithoutEncoding($dartParams) =>\n'
+      '  _$_nameWithoutEncoding'
+      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
+      ';\n\n'
+      '  late final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
-      "  >('${_method.name}');\n"
-      '  return _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
-      ';\n'
-      '}\n';
-
+      "  >('${_method.name}');\n\n";
   const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
 }
 
