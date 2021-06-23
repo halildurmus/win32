@@ -2073,6 +2073,27 @@ const PBT_APMRESUMEAUTOMATIC = 0x0012;
 const PBT_POWERSETTINGCHANGE = 0x8013;
 
 // -----------------------------------------------------------------------------
+// Size constants (from WM_SIZE)
+// -----------------------------------------------------------------------------
+
+/// The window has been resized, but neither the SIZE_MINIMIZED nor
+/// SIZE_MAXIMIZED value applies.
+const SIZE_RESTORED = 0;
+
+/// The window has been minimized.
+const SIZE_MINIMIZED = 1;
+
+/// The window has been maximized.
+const SIZE_MAXIMIZED = 2;
+
+/// Message is sent to all pop-up windows when some other window has been
+/// restored to its former size.
+const SIZE_MAXSHOW = 3;
+
+/// Message is sent to all pop-up windows when some other window is maximized.
+const SIZE_MAXHIDE = 4;
+
+// -----------------------------------------------------------------------------
 // Queue status flags
 // -----------------------------------------------------------------------------
 

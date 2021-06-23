@@ -7004,10 +7004,8 @@ int TranslateMessage(Pointer<MSG> lpMsg) {
   return _TranslateMessage(lpMsg);
 }
 
-/// Installs an application-defined hook procedure into a hook chain. You
-/// would install a hook procedure to monitor the system for certain types
-/// of events. These events are associated either with a specific thread or
-/// with all threads in the same desktop as the calling thread.
+/// Removes a hook procedure installed in a hook chain by the
+/// SetWindowsHookEx function.
 ///
 /// ```c
 /// BOOL UnhookWindowsHookEx(

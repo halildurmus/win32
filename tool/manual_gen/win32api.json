@@ -1240,6 +1240,11 @@
         "dllLibrary": "kernel32",
         "comment": "Ends the calling process and all its threads."
     },
+    "ExitThread": {
+        "prototype": "void ExitThread(\n  DWORD dwExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Ends the calling thread."
+    },
     "ExtCreatePen": {
         "prototype": "HPEN ExtCreatePen(\n  DWORD          iPenStyle,\n  DWORD          cWidth,\n  const LOGBRUSH *plbrush,\n  DWORD          cStyle,\n  const DWORD    *pstyle\n);",
         "dllLibrary": "gdi32",
@@ -1617,10 +1622,25 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pseudo handle for the current process."
     },
+    "GetCurrentProcessId": {
+        "prototype": "DWORD GetCurrentProcessId();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the process identifier of the calling process."
+    },
+    "GetCurrentProcessorNumber": {
+        "prototype": "DWORD GetCurrentProcessorNumber();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the number of the processor the current thread was running on during the call to this function."
+    },
     "GetCurrentThread": {
         "prototype": "HANDLE GetCurrentThread();",
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pseudo handle for the calling thread."
+    },
+    "GetCurrentThreadId": {
+        "prototype": "DWORD GetCurrentThreadId();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the thread identifier of the calling thread."
     },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
@@ -2275,6 +2295,16 @@
         "prototype": "DWORD GetProcessId(\n  HANDLE Process\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the process identifier of the specified process."
+    },
+    "GetProcessShutdownParameters": {
+        "prototype": "BOOL GetProcessShutdownParameters(\n  LPDWORD lpdwLevel,\n  LPDWORD lpdwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the shutdown parameters for the currently calling process."
+    },
+    "GetProcessVersion": {
+        "prototype": "DWORD GetProcessVersion(\n  DWORD ProcessId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the major and minor version numbers of the system on which the specified process expects to run."
     },
     "GetProcessWindowStation": {
         "prototype": "HWINSTA GetProcessWindowStation();",
@@ -4702,6 +4732,11 @@
         "comment": "It is recommended that you set the process-default DPI awareness via application manifest. See Setting the default DPI awareness for a process for more information. Setting the process-default DPI awareness via API call can lead to unexpected application behavior. Sets the current process to a specified dots per inch (dpi) awareness context. The DPI awareness contexts are from the DPI_AWARENESS_CONTEXT value.",
         "minimumWindowsVersion": "WIN10_RS2"
     },
+    "SetProcessPriorityBoost": {
+        "prototype": "BOOL SetProcessPriorityBoost(\n  HANDLE hProcess,\n  BOOL   bDisablePriorityBoost\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Disables or enables the ability of the system to temporarily boost the priority of the threads of the specified process."
+    },
     "SetProcessWorkingSetSize": {
         "prototype": "BOOL SetProcessWorkingSetSize(\n  HANDLE hProcess,\n  SIZE_T dwMinimumWorkingSetSize,\n  SIZE_T dwMaximumWorkingSetSize\n);",
         "dllLibrary": "kernel32",
@@ -5179,6 +5214,11 @@
         "prototype": "BOOL TerminateProcess(\n  HANDLE hProcess,\n  UINT   uExitCode);",
         "dllLibrary": "kernel32",
         "comment": "Terminates the specified process and all of its threads."
+    },
+    "TerminateThread": {
+        "prototype": "BOOL TerminateThread(\n  HANDLE hThread,\n  DWORD  dwExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Terminates a thread."
     },
     "TextOut": {
         "prototype": "BOOL TextOutW(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPCWSTR lpString,\n  int     c\n);",
