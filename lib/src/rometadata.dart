@@ -30,11 +30,11 @@ final _rometadata = DynamicLibrary.open('rometadata.dll');
 /// ```
 /// {@category winrt}
 int MetaDataGetDispenser(
-    Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv) {
-  final _MetaDataGetDispenser = _rometadata.lookupFunction<
-      Int32 Function(
-          Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv),
-      int Function(Pointer<GUID> rclsid, Pointer<GUID> riid,
-          Pointer<Pointer> ppv)>('MetaDataGetDispenser');
-  return _MetaDataGetDispenser(rclsid, riid, ppv);
-}
+        Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+    _MetaDataGetDispenser(rclsid, riid, ppv);
+
+late final _MetaDataGetDispenser = _rometadata.lookupFunction<
+    Int32 Function(
+        Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv),
+    int Function(Pointer<GUID> rclsid, Pointer<GUID> riid,
+        Pointer<Pointer> ppv)>('MetaDataGetDispenser');
