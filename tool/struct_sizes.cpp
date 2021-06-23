@@ -12,8 +12,9 @@
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\struct_sizes.dart as input to the test harness.
 
-// Compile with cl struct_sizes.cpp /Fe:structs64.exe
+// Compile with cl tool\struct_sizes.cpp /link ws2_32.lib
 
+#include <winsock2.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
@@ -27,7 +28,6 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock2.h>
 
 void main()
 {
