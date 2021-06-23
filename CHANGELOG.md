@@ -1,3 +1,9 @@
+## 2.2.3
+
+- Lazily evaluate `lookupFunction` FFI calls for improved performance.
+- Add APIs for hooks and a few extra kernel32 APIs
+- Add some more tests.
+
 ## 2.2.2
 
 - Add Windows Spooler library support.
