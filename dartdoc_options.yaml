@@ -36,6 +36,8 @@ dartdoc:
       markdown: doc/user32.md
     "uxtheme":
       markdown: doc/uxtheme.md
+    "dwmapi":
+      markdown: doc/dwmapi.md
     "version":
       markdown: doc/version.md
     "winmm":

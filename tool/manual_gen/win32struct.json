@@ -271,6 +271,10 @@
         "namespace": "Windows.Win32.System.SystemServices.LUID",
         "comment": "A Locally Unique Identifier (LUID). This is a value guaranteed to be unique only on the system on which it was generated. The uniqueness of a locally unique identifier is guaranteed only until the system is restarted."
     },
+    "MARGINS": {
+        "namespace": "Windows.Win32.UI.Controls.MARGINS",
+        "comment": "Returned by the GetThemeMargins function to define the margins of windows that have visual styles applied."
+    },
     "MCI_OPEN_PARMS": {
         "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_OPEN_PARMSW",
         "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command."

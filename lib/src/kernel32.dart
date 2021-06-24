@@ -4202,13 +4202,13 @@ late final _SetCommTimeouts = _kernel32.lookupFunction<
 /// ```
 /// {@category kernel32}
 int SetConsoleCtrlHandler(
-        Pointer<NativeFunction<HandlerProc>> HandlerRoutine, int Add) =>
+        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, int Add) =>
     _SetConsoleCtrlHandler(HandlerRoutine, Add);
 
 late final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
     Int32 Function(
-        Pointer<NativeFunction<HandlerProc>> HandlerRoutine, Int32 Add),
-    int Function(Pointer<NativeFunction<HandlerProc>> HandlerRoutine,
+        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, Int32 Add),
+    int Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
         int Add)>('SetConsoleCtrlHandler');
 
 /// Sets the size and visibility of the cursor for the specified console

@@ -19,6 +19,27 @@ import 'structs.g.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
 
+/// Calls the next handler in a window's subclass chain. The last handler
+/// in the subclass chain calls the original window procedure for the
+/// window.
+///
+/// ```c
+/// LRESULT DefSubclassProc(
+///   HWND   hWnd,
+///   UINT   uMsg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category comctl32}
+int DefSubclassProc(int hWnd, int uMsg, int wParam, int lParam) =>
+    _DefSubclassProc(hWnd, uMsg, wParam, lParam);
+
+late final _DefSubclassProc = _comctl32.lookupFunction<
+    IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
+    int Function(
+        int hWnd, int uMsg, int wParam, int lParam)>('DefSubclassProc');
+
 /// The DrawStatusText function draws the specified text in the style of a
 /// status window with borders.
 ///
@@ -57,6 +78,53 @@ int InitCommonControlsEx(Pointer<INITCOMMONCONTROLSEX> picce) =>
 late final _InitCommonControlsEx = _comctl32.lookupFunction<
     Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
     int Function(Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
+
+/// Removes a subclass callback from a window.
+///
+/// ```c
+/// BOOL RemoveWindowSubclass(
+///   HWND         hWnd,
+///   SUBCLASSPROC pfnSubclass,
+///   UINT_PTR     uIdSubclass
+/// );
+/// ```
+/// {@category comctl32}
+int RemoveWindowSubclass(int hWnd,
+        Pointer<NativeFunction<SubclassProc>> pfnSubclass, int uIdSubclass) =>
+    _RemoveWindowSubclass(hWnd, pfnSubclass, uIdSubclass);
+
+late final _RemoveWindowSubclass = _comctl32.lookupFunction<
+    Int32 Function(IntPtr hWnd,
+        Pointer<NativeFunction<SubclassProc>> pfnSubclass, IntPtr uIdSubclass),
+    int Function(int hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        int uIdSubclass)>('RemoveWindowSubclass');
+
+/// Installs or updates a window subclass callback.
+///
+/// ```c
+/// BOOL SetWindowSubclass(
+///   HWND         hWnd,
+///   SUBCLASSPROC pfnSubclass,
+///   UINT_PTR     uIdSubclass,
+///   DWORD_PTR    dwRefData
+/// );
+/// ```
+/// {@category comctl32}
+int SetWindowSubclass(
+        int hWnd,
+        Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        int uIdSubclass,
+        int dwRefData) =>
+    _SetWindowSubclass(hWnd, pfnSubclass, uIdSubclass, dwRefData);
+
+late final _SetWindowSubclass = _comctl32.lookupFunction<
+    Int32 Function(
+        IntPtr hWnd,
+        Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        IntPtr uIdSubclass,
+        IntPtr dwRefData),
+    int Function(int hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        int uIdSubclass, int dwRefData)>('SetWindowSubclass');
 
 /// The TaskDialog function creates, displays, and operates a task dialog.
 /// The task dialog contains application-defined message text and title,

@@ -871,6 +871,11 @@
         "dllLibrary": "user32",
         "comment": "Provides default processing for any window message that the window procedure of a multiple-document interface (MDI) child window does not process. A window message not processed by the window procedure must be passed to the DefMDIChildProc function, not to the DefWindowProc function."
     },
+    "DefSubclassProc": {
+        "prototype": "LRESULT DefSubclassProc(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "comctl32",
+        "comment": "Calls the next handler in a window's subclass chain. The last handler in the subclass chain calls the original window procedure for the window."
+    },
     "DefWindowProc": {
         "prototype": "LRESULT DefWindowProcW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
@@ -1046,6 +1051,11 @@
         "prototype": "BOOL DuplicateHandle(\n  HANDLE   hSourceProcessHandle,\n  HANDLE   hSourceHandle,\n  HANDLE   hTargetProcessHandle,\n  LPHANDLE lpTargetHandle,\n  DWORD    dwDesiredAccess,\n  BOOL     bInheritHandle,\n  DWORD    dwOptions\n);",
         "dllLibrary": "kernel32",
         "comment": "Duplicates an object handle."
+    },
+    "DwmExtendFrameIntoClientArea": {
+        "prototype": "DWMAPI DwmExtendFrameIntoClientArea(\n  HWND          hWnd,\n  const MARGINS *pMarInset\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Extends the window frame into the client area."
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
@@ -3986,6 +3996,11 @@
         "dllLibrary": "user32",
         "comment": "Removes an entry from the property list of the specified window. The specified character string identifies the entry to be removed."
     },
+    "RemoveWindowSubclass": {
+        "prototype": "BOOL RemoveWindowSubclass(\n  HWND         hWnd,\n  SUBCLASSPROC pfnSubclass,\n  UINT_PTR     uIdSubclass\n);",
+        "dllLibrary": "comctl32",
+        "comment": "Removes a subclass callback from a window."
+    },
     "ReOpenFile": {
         "prototype": "HANDLE ReOpenFile(\n  HANDLE hOriginalFile,\n  DWORD  dwDesiredAccess,\n  DWORD  dwShareMode,\n  DWORD  dwFlagsAndAttributes);",
         "dllLibrary": "kernel32",
@@ -4884,6 +4899,11 @@
         "prototype": "HHOOK SetWindowsHookExW(\n  int       idHook,\n  HOOKPROC  lpfn,\n  HINSTANCE hmod,\n  DWORD     dwThreadId\n);",
         "dllLibrary": "user32",
         "comment": "Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread."
+    },
+    "SetWindowSubclass": {
+        "prototype": "BOOL SetWindowSubclass(\n  HWND         hWnd,\n  SUBCLASSPROC pfnSubclass,\n  UINT_PTR     uIdSubclass,\n  DWORD_PTR    dwRefData\n);",
+        "dllLibrary": "comctl32",
+        "comment": "Installs or updates a window subclass callback."
     },
     "SetWindowText": {
         "prototype": "BOOL SetWindowTextW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",

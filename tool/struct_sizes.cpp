@@ -127,6 +127,7 @@ void main()
     printf("  'LOGFONT': %zu,\n", sizeof(LOGFONTW));
     printf("  'LOGPALETTE': %zu,\n", sizeof(LOGPALETTE));
     printf("  'LUID': %zu,\n", sizeof(LUID));
+    printf("  'MARGINS': %zu,\n", sizeof(MARGINS));
     printf("  'MCI_OPEN_PARMS': %zu,\n", sizeof(MCI_OPEN_PARMSW));
     printf("  'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("  'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));

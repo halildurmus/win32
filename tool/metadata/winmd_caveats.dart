@@ -10,6 +10,7 @@ const winmdGenerated = [
   'comctl32',
   'comdlg32',
   'dbghelp',
+  'dwmapi',
   'dxva2',
   'gdi32',
   'kernel32',

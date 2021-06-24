@@ -2414,9 +2414,9 @@ void main() {
     test('Can instantiate SetConsoleCtrlHandler', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetConsoleCtrlHandler = kernel32.lookupFunction<
-          Int32 Function(
-              Pointer<NativeFunction<HandlerProc>> HandlerRoutine, Int32 Add),
-          int Function(Pointer<NativeFunction<HandlerProc>> HandlerRoutine,
+          Int32 Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
+              Int32 Add),
+          int Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
               int Add)>('SetConsoleCtrlHandler');
       expect(SetConsoleCtrlHandler, isA<Function>());
     });
@@ -8355,6 +8355,63 @@ void main() {
     });
   });
 
+  group('Test comctl32 functions', () {
+    test('Can instantiate DefSubclassProc', () {
+      final comctl32 = DynamicLibrary.open('comctl32.dll');
+      final DefSubclassProc = comctl32.lookupFunction<
+          IntPtr Function(
+              IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
+          int Function(
+              int hWnd, int uMsg, int wParam, int lParam)>('DefSubclassProc');
+      expect(DefSubclassProc, isA<Function>());
+    });
+    test('Can instantiate DrawStatusText', () {
+      final comctl32 = DynamicLibrary.open('comctl32.dll');
+      final DrawStatusText = comctl32.lookupFunction<
+          Void Function(IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+              Uint32 uFlags),
+          void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+              int uFlags)>('DrawStatusTextW');
+      expect(DrawStatusText, isA<Function>());
+    });
+    test('Can instantiate InitCommonControlsEx', () {
+      final comctl32 = DynamicLibrary.open('comctl32.dll');
+      final InitCommonControlsEx = comctl32.lookupFunction<
+          Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
+          int Function(
+              Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
+      expect(InitCommonControlsEx, isA<Function>());
+    });
+    test('Can instantiate RemoveWindowSubclass', () {
+      final comctl32 = DynamicLibrary.open('comctl32.dll');
+      final RemoveWindowSubclass = comctl32.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd,
+              Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+              IntPtr uIdSubclass),
+          int Function(
+              int hWnd,
+              Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+              int uIdSubclass)>('RemoveWindowSubclass');
+      expect(RemoveWindowSubclass, isA<Function>());
+    });
+    test('Can instantiate SetWindowSubclass', () {
+      final comctl32 = DynamicLibrary.open('comctl32.dll');
+      final SetWindowSubclass = comctl32.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd,
+              Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+              IntPtr uIdSubclass,
+              IntPtr dwRefData),
+          int Function(
+              int hWnd,
+              Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+              int uIdSubclass,
+              int dwRefData)>('SetWindowSubclass');
+      expect(SetWindowSubclass, isA<Function>());
+    });
+  });
+
   group('Test dxva2 functions', () {
     test('Can instantiate DestroyPhysicalMonitor', () {
       final dxva2 = DynamicLibrary.open('dxva2.dll');
@@ -8730,23 +8787,14 @@ void main() {
     });
   });
 
-  group('Test comctl32 functions', () {
-    test('Can instantiate DrawStatusText', () {
-      final comctl32 = DynamicLibrary.open('comctl32.dll');
-      final DrawStatusText = comctl32.lookupFunction<
-          Void Function(IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
-              Uint32 uFlags),
-          void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
-              int uFlags)>('DrawStatusTextW');
-      expect(DrawStatusText, isA<Function>());
-    });
-    test('Can instantiate InitCommonControlsEx', () {
-      final comctl32 = DynamicLibrary.open('comctl32.dll');
-      final InitCommonControlsEx = comctl32.lookupFunction<
-          Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
-          int Function(
-              Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
-      expect(InitCommonControlsEx, isA<Function>());
+  group('Test dwmapi functions', () {
+    test('Can instantiate DwmExtendFrameIntoClientArea', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmExtendFrameIntoClientArea = dwmapi.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<MARGINS> pMarInset),
+          int Function(int hWnd,
+              Pointer<MARGINS> pMarInset)>('DwmExtendFrameIntoClientArea');
+      expect(DwmExtendFrameIntoClientArea, isA<Function>());
     });
   });
 

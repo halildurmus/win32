@@ -1391,6 +1391,21 @@ class LUID extends Struct {
   external int HighPart;
 }
 
+/// Returned by the GetThemeMargins function to define the margins of
+/// windows that have visual styles applied.
+///
+/// {@category Struct}
+class MARGINS extends Struct {
+  @Int32()
+  external int cxLeftWidth;
+  @Int32()
+  external int cxRightWidth;
+  @Int32()
+  external int cyTopHeight;
+  @Int32()
+  external int cyBottomHeight;
+}
+
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
 /// command.
 ///
