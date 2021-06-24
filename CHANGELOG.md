@@ -1,3 +1,7 @@
+## 2.2.4
+
+- Add various DWM and subclassing APIs
+
 ## 2.2.3
 
 - Lazily evaluate `lookupFunction` FFI calls for improved performance.
