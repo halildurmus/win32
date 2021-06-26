@@ -28,6 +28,7 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
+#include <dwmapi.h>
 
 void main()
 {
