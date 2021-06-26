@@ -890,6 +890,22 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// Specifies Desktop Window Manager (DWM) blur-behind properties. Used by
+/// the DwmEnableBlurBehindWindow function.
+///
+/// {@category Struct}
+@Packed(1)
+class DWM_BLURBEHIND extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Int32()
+  external int fEnable;
+  @IntPtr()
+  external int hRgnBlur;
+  @Int32()
+  external int fTransitionOnMaximized;
+}
+
 /// The ENUMLOGFONTEX structure contains information about an enumerated
 /// font.
 ///
@@ -3259,6 +3275,19 @@ class TYPEATTR extends Struct {
   external int wMinorVerNum;
   external TYPEDESC tdescAlias;
   external IDLDESC idldescType;
+}
+
+/// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
+/// represents a generic ratio and is used for different purposes and units
+/// even within a single API.
+///
+/// {@category Struct}
+@Packed(1)
+class UNSIGNED_RATIO extends Struct {
+  @Uint32()
+  external int uiNumerator;
+  @Uint32()
+  external int uiDenominator;
 }
 
 /// Used by UpdateLayeredWindowIndirect to provide position, size, shape,

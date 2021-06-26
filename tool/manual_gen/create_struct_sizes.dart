@@ -19,6 +19,7 @@ const header = '''
 // Compile with cl tool\\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
+#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
@@ -31,7 +32,6 @@ const header = '''
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock2.h>
 
 void main()
 {

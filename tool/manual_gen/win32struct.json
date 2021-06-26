@@ -179,6 +179,10 @@
         "namespace": "Windows.Win32.Graphics.Gdi.DRAWTEXTPARAMS",
         "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
     },
+    "DWM_BLURBEHIND": {
+        "namespace": "Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND",
+        "comment": "Specifies Desktop Window Manager (DWM) blur-behind properties. Used by the DwmEnableBlurBehindWindow function."
+    },
     "ENUMLOGFONTEX": {
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
@@ -650,6 +654,10 @@
     "TYPEATTR": {
         "namespace": "Windows.Win32.System.OleAutomation.TYPEATTR",
         "comment": "Contains attributes of a type."
+    },
+    "UNSIGNED_RATIO": {
+        "namespace": "Windows.Win32.Graphics.Dwm.UNSIGNED_RATIO",
+        "comment": "Defines a data type used by the Desktop Window Manager (DWM) APIs. It represents a generic ratio and is used for different purposes and units even within a single API."
     },
     "UPDATELAYEREDWINDOWINFO": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO",

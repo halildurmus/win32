@@ -8788,6 +8788,21 @@ void main() {
   });
 
   group('Test dwmapi functions', () {
+    test('Can instantiate DwmEnableBlurBehindWindow', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmEnableBlurBehindWindow = dwmapi.lookupFunction<
+              Int32 Function(IntPtr hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind),
+              int Function(int hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind)>(
+          'DwmEnableBlurBehindWindow');
+      expect(DwmEnableBlurBehindWindow, isA<Function>());
+    });
+    test('Can instantiate DwmEnableMMCSS', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmEnableMMCSS = dwmapi.lookupFunction<
+          Int32 Function(Int32 fEnableMMCSS),
+          int Function(int fEnableMMCSS)>('DwmEnableMMCSS');
+      expect(DwmEnableMMCSS, isA<Function>());
+    });
     test('Can instantiate DwmExtendFrameIntoClientArea', () {
       final dwmapi = DynamicLibrary.open('dwmapi.dll');
       final DwmExtendFrameIntoClientArea = dwmapi.lookupFunction<
@@ -8795,6 +8810,21 @@ void main() {
           int Function(int hWnd,
               Pointer<MARGINS> pMarInset)>('DwmExtendFrameIntoClientArea');
       expect(DwmExtendFrameIntoClientArea, isA<Function>());
+    });
+    test('Can instantiate DwmFlush', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmFlush =
+          dwmapi.lookupFunction<Int32 Function(), int Function()>('DwmFlush');
+      expect(DwmFlush, isA<Function>());
+    });
+    test('Can instantiate DwmGetWindowAttribute', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmGetWindowAttribute = dwmapi.lookupFunction<
+          Int32 Function(IntPtr hwnd, Uint32 dwAttribute, Pointer pvAttribute,
+              Uint32 cbAttribute),
+          int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
+              int cbAttribute)>('DwmGetWindowAttribute');
+      expect(DwmGetWindowAttribute, isA<Function>());
     });
   });
 

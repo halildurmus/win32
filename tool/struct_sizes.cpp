@@ -15,6 +15,7 @@
 // Compile with cl tool\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
+#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
@@ -27,7 +28,6 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock2.h>
 
 void main()
 {
@@ -104,6 +104,7 @@ void main()
     printf("  'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("  'DOC_INFO_1': %zu,\n", sizeof(DOC_INFO_1W));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
+    printf("  'DWM_BLURBEHIND': %zu,\n", sizeof(DWM_BLURBEHIND));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("  'fd_set': %zu,\n", sizeof(fd_set));
@@ -222,6 +223,7 @@ void main()
     printf("  'TOUCHINPUT': %zu,\n", sizeof(TOUCHINPUT));
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
     printf("  'TYPEATTR': %zu,\n", sizeof(TYPEATTR));
+    printf("  'UNSIGNED_RATIO': %zu,\n", sizeof(UNSIGNED_RATIO));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));

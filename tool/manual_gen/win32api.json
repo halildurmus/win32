@@ -1052,10 +1052,30 @@
         "dllLibrary": "kernel32",
         "comment": "Duplicates an object handle."
     },
+    "DwmEnableBlurBehindWindow": {
+        "prototype": "DWMAPI DwmEnableBlurBehindWindow(\n  HWND                 hWnd,\n  const DWM_BLURBEHIND *pBlurBehind\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Enables the blur effect on a specified window."
+    },
+    "DwmEnableMMCSS": {
+        "prototype": "DWMAPI DwmEnableMMCSS(\n  BOOL fEnableMMCSS\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Notifies the Desktop Window Manager (DWM) to opt in to or out of Multimedia Class Schedule Service (MMCSS) scheduling while the calling process is alive."
+    },
     "DwmExtendFrameIntoClientArea": {
         "prototype": "DWMAPI DwmExtendFrameIntoClientArea(\n  HWND          hWnd,\n  const MARGINS *pMarInset\n);",
         "dllLibrary": "dwmapi",
         "comment": "Extends the window frame into the client area."
+    },
+    "DwmFlush": {
+        "prototype": "DWMAPI DwmFlush();",
+        "dllLibrary": "dwmapi",
+        "comment": "Issues a flush call that blocks the caller until the next present, when all of the Microsoft DirectX surface updates that are currently outstanding have been made. This compensates for very complex scenes or calling processes with very low priority."
+    },
+    "DwmGetWindowAttribute": {
+        "prototype": "DWMAPI DwmGetWindowAttribute(\n  HWND  hwnd,\n  DWORD dwAttribute,\n  PVOID pvAttribute,\n  DWORD cbAttribute\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window."
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
