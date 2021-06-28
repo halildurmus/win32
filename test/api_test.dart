@@ -8817,6 +8817,15 @@ void main() {
           dwmapi.lookupFunction<Int32 Function(), int Function()>('DwmFlush');
       expect(DwmFlush, isA<Function>());
     });
+    test('Can instantiate DwmGetColorizationColor', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmGetColorizationColor = dwmapi.lookupFunction<
+          Int32 Function(
+              Pointer<Uint32> pcrColorization, Pointer<Int32> pfOpaqueBlend),
+          int Function(Pointer<Uint32> pcrColorization,
+              Pointer<Int32> pfOpaqueBlend)>('DwmGetColorizationColor');
+      expect(DwmGetColorizationColor, isA<Function>());
+    });
     test('Can instantiate DwmGetWindowAttribute', () {
       final dwmapi = DynamicLibrary.open('dwmapi.dll');
       final DwmGetWindowAttribute = dwmapi.lookupFunction<

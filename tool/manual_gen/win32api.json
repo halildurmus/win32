@@ -1072,6 +1072,11 @@
         "dllLibrary": "dwmapi",
         "comment": "Issues a flush call that blocks the caller until the next present, when all of the Microsoft DirectX surface updates that are currently outstanding have been made. This compensates for very complex scenes or calling processes with very low priority."
     },
+    "DwmGetColorizationColor": {
+        "prototype": "DWMAPI DwmGetColorizationColor(\n  DWORD *pcrColorization,\n  BOOL  *pfOpaqueBlend\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Retrieves the current color used for Desktop Window Manager (DWM) glass composition. This value is based on the current color scheme and can be modified by the user. Applications can listen for color changes by handling the WM_DWMCOLORIZATIONCOLORCHANGED notification."
+    },
     "DwmGetWindowAttribute": {
         "prototype": "DWMAPI DwmGetWindowAttribute(\n  HWND  hwnd,\n  DWORD dwAttribute,\n  PVOID pvAttribute,\n  DWORD cbAttribute\n);",
         "dllLibrary": "dwmapi",

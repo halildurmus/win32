@@ -83,6 +83,28 @@ int DwmFlush() => _DwmFlush();
 late final _DwmFlush =
     _dwmapi.lookupFunction<Int32 Function(), int Function()>('DwmFlush');
 
+/// Retrieves the current color used for Desktop Window Manager (DWM) glass
+/// composition. This value is based on the current color scheme and can be
+/// modified by the user. Applications can listen for color changes by
+/// handling the WM_DWMCOLORIZATIONCOLORCHANGED notification.
+///
+/// ```c
+/// DWMAPI DwmGetColorizationColor(
+///   DWORD *pcrColorization,
+///   BOOL  *pfOpaqueBlend
+/// );
+/// ```
+/// {@category dwmapi}
+int DwmGetColorizationColor(
+        Pointer<Uint32> pcrColorization, Pointer<Int32> pfOpaqueBlend) =>
+    _DwmGetColorizationColor(pcrColorization, pfOpaqueBlend);
+
+late final _DwmGetColorizationColor = _dwmapi.lookupFunction<
+    Int32 Function(
+        Pointer<Uint32> pcrColorization, Pointer<Int32> pfOpaqueBlend),
+    int Function(Pointer<Uint32> pcrColorization,
+        Pointer<Int32> pfOpaqueBlend)>('DwmGetColorizationColor');
+
 /// Retrieves the current value of a specified Desktop Window Manager (DWM)
 /// attribute applied to a window.
 ///
