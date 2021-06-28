@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 1.0.4
 
 - Treat HSTRING as an int, rather than as a `Pointer<IntPtr>`, for consistency
