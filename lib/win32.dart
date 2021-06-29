@@ -128,6 +128,7 @@ export 'src/shell32.dart';
 export 'src/spoolss.dart';
 export 'src/types.dart';
 export 'src/user32.dart';
+export 'src/uxtheme.dart';
 export 'src/version.dart';
 export 'src/winmm.dart';
 export 'src/winscard.dart';

@@ -890,6 +890,51 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// Defines the options for the DrawThemeBackgroundEx function.
+///
+/// {@category Struct}
+class DTBGOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  external RECT rcClip;
+}
+
+/// Defines the options for the DrawThemeTextEx function.
+///
+/// {@category Struct}
+class DTTOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int crText;
+  @Uint32()
+  external int crBorder;
+  @Uint32()
+  external int crShadow;
+  @Int32()
+  external int iTextShadowType;
+  external POINT ptShadowOffset;
+  @Int32()
+  external int iBorderSize;
+  @Int32()
+  external int iFontPropId;
+  @Int32()
+  external int iColorPropId;
+  @Int32()
+  external int iStateId;
+  @Int32()
+  external int fApplyOverlay;
+  @Int32()
+  external int iGlowSize;
+  external Pointer<NativeFunction<DrawTextCallback>> pfnDrawTextCallback;
+  @IntPtr()
+  external int lParam;
+}
+
 /// Specifies Desktop Window Manager (DWM) blur-behind properties. Used by
 /// the DwmEnableBlurBehindWindow function.
 ///
@@ -3594,6 +3639,16 @@ class WNDCLASSEX extends Struct {
   external Pointer<Utf16> lpszClassName;
   @IntPtr()
   external int hIconSm;
+}
+
+/// Defines options that are used to set window visual style attributes.
+///
+/// {@category Struct}
+class WTA_OPTIONS extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
 }
 
 /// The XFORM structure specifies a world-space to page-space

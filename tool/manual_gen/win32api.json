@@ -506,6 +506,11 @@
         "dllLibrary": "winspool",
         "comment": "The CloseSpoolFileHandle function closes a handle to a spool file associated with the print job currently submitted by the application."
     },
+    "CloseThemeData": {
+        "prototype": "HRESULT CloseThemeData(\n  HTHEME hTheme\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Closes the theme data handle."
+    },
     "CloseTouchInputHandle": {
         "prototype": "BOOL CloseTouchInputHandle(\n  HTOUCHINPUT hTouchInput\n);",
         "dllLibrary": "user32",
@@ -1047,6 +1052,16 @@
         "dllLibrary": "user32",
         "comment": "The DrawTextEx function draws formatted text in the specified rectangle."
     },
+    "DrawThemeBackground": {
+        "prototype": "HRESULT DrawThemeBackground(\n  HTHEME  hTheme,\n  HDC     hdc,\n  int     iPartId,\n  int     iStateId,\n  LPCRECT pRect,\n  LPCRECT pClipRect\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Draws the border and fill defined by the visual style for the specified control part."
+    },
+    "DrawThemeIcon": {
+        "prototype": "HRESULT DrawThemeIcon(\n  HTHEME     hTheme,\n  HDC        hdc,\n  int        iPartId,\n  int        iStateId,\n  LPCRECT    pRect,\n  HIMAGELIST himl,\n  int        iImageIndex\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Draws an image from an image list with the icon effect defined by the visual style."
+    },
     "DuplicateHandle": {
         "prototype": "BOOL DuplicateHandle(\n  HANDLE   hSourceProcessHandle,\n  HANDLE   hSourceHandle,\n  HANDLE   hTargetProcessHandle,\n  LPHANDLE lpTargetHandle,\n  DWORD    dwDesiredAccess,\n  BOOL     bInheritHandle,\n  DWORD    dwOptions\n);",
         "dllLibrary": "kernel32",
@@ -1107,6 +1122,11 @@
         "prototype": "BOOL EnableScrollBar(\n  HWND hWnd,\n  UINT wSBflags,\n  UINT wArrows\n);",
         "dllLibrary": "user32",
         "comment": "The EnableScrollBar function enables or disables one or both scroll bar arrows."
+    },
+    "EnableThemeDialogTexture": {
+        "prototype": "HRESULT EnableThemeDialogTexture(\n  HWND  hwnd,\n  DWORD dwFlags\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Enables or disables the visual style of the background of a dialog window."
     },
     "EnableWindow": {
         "prototype": "BOOL EnableWindow(\n  HWND hWnd,\n  BOOL bEnable\n);",
@@ -1666,6 +1686,11 @@
         "prototype": "DWORD GetCurrentProcessorNumber();",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the number of the processor the current thread was running on during the call to this function."
+    },
+    "GetCurrentThemeName": {
+        "prototype": "HRESULT GetCurrentThemeName(\n  LPWSTR pszThemeFileName,\n  int    cchMaxNameChars,\n  LPWSTR pszColorBuff,\n  int    cchMaxColorChars,\n  LPWSTR pszSizeBuff,\n  int    cchMaxSizeChars\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the name of the current visual style, and optionally retrieves the color scheme name and size name."
     },
     "GetCurrentThread": {
         "prototype": "HANDLE GetCurrentThread();",
@@ -2540,6 +2565,36 @@
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
     },
+    "GetThemeMetric": {
+        "prototype": "HRESULT GetThemeMetric(\n  HTHEME hTheme,\n  HDC    hdc,\n  int    iPartId,\n  int    iStateId,\n  int    iPropId,\n  int    *piVal\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the value of a metric property."
+    },
+    "GetThemeRect": {
+        "prototype": "HRESULT GetThemeRect(\n  HTHEME hTheme,\n  int    iPartId,\n  int    iStateId,\n  int    iPropId,\n  LPRECT pRect\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the value of a RECT property."
+    },
+    "GetThemeSysColor": {
+        "prototype": "COLORREF GetThemeSysColor(\n  HTHEME hTheme,\n  int    iColorId\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the value of a system color."
+    },
+    "GetThemeSysColorBrush": {
+        "prototype": "HBRUSH GetThemeSysColorBrush(\n  HTHEME hTheme,\n  int    iColorId\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves a system color brush."
+    },
+    "GetThemeSysFont": {
+        "prototype": "HRESULT GetThemeSysFont(\n  HTHEME   hTheme,\n  int      iFontId,\n  LOGFONTW *plf\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the LOGFONT of a system font."
+    },
+    "GetThemeSysSize": {
+        "prototype": "int GetThemeSysSize(\n  HTHEME hTheme,\n  int    iSizeId\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves the value of a system size metric from theme data."
+    },
     "GetThreadDesktop": {
         "prototype": "HDESK GetThreadDesktop(\n  DWORD dwThreadId\n);",
         "dllLibrary": "user32",
@@ -2713,6 +2768,11 @@
         "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application."
+    },
+    "GetWindowTheme": {
+        "prototype": "HTHEME GetWindowTheme(\n  HWND hwnd\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves a theme handle to a window that has visual styles applied."
     },
     "GetWindowThreadProcessId": {
         "prototype": "DWORD GetWindowThreadProcessId(\n  HWND    hWnd,\n  LPDWORD lpdwProcessId\n);",
@@ -2919,6 +2979,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "IsAppThemed": {
+        "prototype": "BOOL IsAppThemed();",
+        "dllLibrary": "uxtheme",
+        "comment": "Reports whether the current application's user interface displays using visual styles."
+    },
     "IsChild": {
         "prototype": "BOOL IsChild(\n  HWND hWndParent,\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -2928,6 +2993,11 @@
         "prototype": "BOOL IsClipboardFormatAvailable(\n  UINT format\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether the clipboard contains data in the specified format."
+    },
+    "IsCompositionActive": {
+        "prototype": "BOOL IsCompositionActive();",
+        "dllLibrary": "uxtheme",
+        "comment": "Determines whether Desktop Window Manager (DWM) composition effects are available to the theme."
     },
     "IsDebuggerPresent": {
         "prototype": "BOOL IsDebuggerPresent();",
@@ -2988,6 +3058,21 @@
         "prototype": "BOOL IsSystemResumeAutomatic();",
         "dllLibrary": "kernel32",
         "comment": "Determines the current state of the computer."
+    },
+    "IsThemeActive": {
+        "prototype": "BOOL IsThemeActive();",
+        "dllLibrary": "uxtheme",
+        "comment": "Tests if a visual style for the current application is active."
+    },
+    "IsThemeBackgroundPartiallyTransparent": {
+        "prototype": "BOOL IsThemeBackgroundPartiallyTransparent(\n  HTHEME hTheme,\n  int    iPartId,\n  int    iStateId\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves whether the background specified by the visual style has transparent pieces or alpha-blended pieces."
+    },
+    "IsThemeDialogTextureEnabled": {
+        "prototype": "BOOL IsThemeDialogTextureEnabled(\n  HWND hwnd\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Reports whether a specified dialog window supports background texturing."
     },
     "IsTouchWindow": {
         "prototype": "BOOL IsTouchWindow(\n  HWND   hwnd,\n  PULONG pulFlags\n);",
@@ -3507,6 +3592,11 @@
         "prototype": "HTHEME OpenThemeData(\n  HWND    hwnd,\n  LPCWSTR pszClassList\n);",
         "dllLibrary": "uxtheme",
         "comment": "Opens the theme data for a window and its associated class."
+    },
+    "OpenThemeDataEx": {
+        "prototype": "HTHEME OpenThemeDataEx(\n  HWND    hwnd,\n  LPCWSTR pszClassList,\n  DWORD   dwFlags\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Opens the theme data associated with a window for specified theme classes."
     },
     "OpenThemeDataForDpi": {
         "prototype": "HTHEME OpenThemeDataForDpi(\n  HWND    hwnd,\n  LPCWSTR pszClassList,\n  UINT    dpi\n);",
@@ -4934,6 +5024,16 @@
         "prototype": "BOOL SetWindowTextW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
         "comment": "Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed. However, SetWindowText cannot change the text of a control in another application."
+    },
+    "SetWindowTheme": {
+        "prototype": "HRESULT SetWindowTheme(\n  HWND    hwnd,\n  LPCWSTR pszSubAppName,\n  LPCWSTR pszSubIdList\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Causes a window to use a different set of visual style information than its class normally uses."
+    },
+    "SetWindowThemeNonClientAttributes": {
+        "prototype": "HRESULT SetWindowThemeNonClientAttributes(\n  HWND  hwnd,\n  DWORD dwMask,\n  DWORD dwAttributes\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Sets non-client attributes to control how visual styles are applied to a specified window."
     },
     "SHCreateItemFromParsingName": {
         "prototype": "SHSTDAPI SHCreateItemFromParsingName(\n  PCWSTR   pszPath,\n  IBindCtx *pbc,\n  REFIID   riid,\n  void     **ppv\n);",

@@ -33,6 +33,11 @@ typedef CFHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 /// modeless dialog box.
 typedef DlgProc = INT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 
+/// Application-defined callback function used with the DrawThemeTextEx
+/// function. This function is used instead of DrawText.
+typedef DrawTextCallback = Int32 Function(HDC hdc, LPWSTR pszText,
+    Int32 cchText, Pointer<RECT> prc, UINT dwFlags, LPARAM lparam);
+
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
 typedef EnumWindowsProc = BOOL Function(HWND hwnd, LPARAM lParam);

@@ -39,6 +39,7 @@ const win32TypeMap = <String, String>{
   'GRAYSTRINGPROC': 'Pointer<NativeFunction<OutputProc>>',
   'SENDASYNCPROC': 'Pointer<NativeFunction<SendAsyncProc>>',
   'SUBCLASSPROC': 'Pointer<NativeFunction<SubclassProc>>',
+  'DTT_CALLBACK_PROC': 'Pointer<NativeFunction<DrawTextCallback>>',
   'PHANDLER_ROUTINE': 'Pointer<NativeFunction<HandlerRoutine>>',
   'LPOCNCHKPROC': 'Pointer<NativeFunction<OpenCardCheckProc>>',
   'LPOCNCONNPROCW': 'Pointer<NativeFunction<OpenCardConnProc>>',
