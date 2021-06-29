@@ -6451,7 +6451,7 @@ late final _ShowWindow = _user32.lookupFunction<
 int ShowWindowAsync(int hWnd, int nCmdShow) => _ShowWindowAsync(hWnd, nCmdShow);
 
 late final _ShowWindowAsync = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+    Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
     int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
 
 /// Triggers a visual signal to indicate that a sound is playing.

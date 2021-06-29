@@ -5719,7 +5719,7 @@ void main() {
     test('Can instantiate ShowWindowAsync', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ShowWindowAsync = user32.lookupFunction<
-          Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+          Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
           int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
       expect(ShowWindowAsync, isA<Function>());
     });
