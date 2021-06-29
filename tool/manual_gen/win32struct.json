@@ -179,6 +179,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.DRAWTEXTPARAMS",
         "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
     },
+    "DTBGOPTS": {
+        "namespace": "Windows.Win32.UI.Controls.DTBGOPTS",
+        "comment": "Defines the options for the DrawThemeBackgroundEx function."
+    },
+    "DTTOPTS": {
+        "namespace": "Windows.Win32.UI.Controls.DTTOPTS",
+        "comment": "Defines the options for the DrawThemeTextEx function."
+    },
     "DWM_BLURBEHIND": {
         "namespace": "Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND",
         "comment": "Specifies Desktop Window Manager (DWM) blur-behind properties. Used by the DwmEnableBlurBehindWindow function."
@@ -702,6 +710,10 @@
     "WNDCLASSEX": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW",
         "comment": "Contains window class information. It is used with the RegisterClassEx and GetClassInfoEx functions. The WNDCLASSEX structure is similar to the WNDCLASS structure. There are two differences. WNDCLASSEX includes the cbSize member, which specifies the size of the structure, and the hIconSm member, which contains a handle to a small icon associated with the window class."
+    },
+    "WTA_OPTIONS": {
+        "namespace": "Windows.Win32.UI.Controls.WTA_OPTIONS",
+        "comment": "Defines options that are used to set window visual style attributes."
     },
     "XFORM": {
         "namespace": "Windows.Win32.Graphics.Gdi.XFORM",

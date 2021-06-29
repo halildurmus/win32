@@ -105,6 +105,8 @@ void main()
     printf("  'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("  'DOC_INFO_1': %zu,\n", sizeof(DOC_INFO_1W));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
+    printf("  'DTBGOPTS': %zu,\n", sizeof(DTBGOPTS));
+    printf("  'DTTOPTS': %zu,\n", sizeof(DTTOPTS));
     printf("  'DWM_BLURBEHIND': %zu,\n", sizeof(DWM_BLURBEHIND));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
@@ -236,6 +238,7 @@ void main()
     printf("  'WINDOWPLACEMENT': %zu,\n", sizeof(WINDOWPLACEMENT));
     printf("  'WNDCLASS': %zu,\n", sizeof(WNDCLASSW));
     printf("  'WNDCLASSEX': %zu,\n", sizeof(WNDCLASSEXW));
+    printf("  'WTA_OPTIONS': %zu,\n", sizeof(WTA_OPTIONS));
     printf("  'XFORM': %zu,\n", sizeof(XFORM));
     printf("};\n");
 }

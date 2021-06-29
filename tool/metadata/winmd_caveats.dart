@@ -24,6 +24,7 @@ const winmdGenerated = [
   'shell32',
   'spoolss',
   'user32',
+  'uxtheme',
   'version',
   'winmm',
   'winscard',
