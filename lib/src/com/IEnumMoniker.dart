@@ -44,20 +44,27 @@ class IEnumMoniker extends IUnknown {
   IEnumMoniker(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>
-      Pointer<NativeFunction<_Next_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_Next_Native>>>()
+          .value
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(int celt) => Pointer<NativeFunction<_Skip_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(4).value)
+  int Skip(int celt) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_Skip_Native>>>()
+      .value
       .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(5).value)
+  int Reset() => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_Reset_Native>>>()
+      .value
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer> ppenum) =>
-      Pointer<NativeFunction<_Clone_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppenum);
+  int Clone(Pointer<Pointer> ppenum) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Clone_Native>>>()
+      .value
+      .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppenum);
 }

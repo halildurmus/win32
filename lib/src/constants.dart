@@ -35,6 +35,9 @@ const LOCALE_SYSTEM_DEFAULT = 0x0800;
 /// The default locale for the user or process.
 const LOCALE_USER_DEFAULT = 0x0400;
 
+/// All processor groups.
+const ALL_PROCESSOR_GROUPS = 0xFFFF;
+
 // -----------------------------------------------------------------------------
 // COM Error Codes
 // -----------------------------------------------------------------------------
@@ -101,8 +104,8 @@ const CLSCTX_LOCAL_SERVER = 0x4;
 /// manages objects of this class is run on a different computer.
 const CLSCTX_REMOTE_SERVER = 0x10;
 
-/// The combination of [CLSCTX_INPROC_SERVER], [CLSCTX_INPROC_HANDLER],
-/// [CLSCTX_LOCAL_SERVER], and [CLSCTX_REMOTE_SERVER].
+/// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
+/// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
 const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
@@ -471,6 +474,66 @@ const OPEN_ALWAYS = 4;
 const TRUNCATE_EXISTING = 5;
 
 // -----------------------------------------------------------------------------
+// Access rights for access token objects
+// -----------------------------------------------------------------------------
+
+/// Required to attach a primary token to a process. The
+/// SE_ASSIGNPRIMARYTOKEN_NAME privilege is also required to accomplish this
+/// task.
+const TOKEN_ASSIGN_PRIMARY = 0x0001;
+
+/// Required to duplicate an access token.
+const TOKEN_DUPLICATE = 0x0002;
+
+/// Required to attach an impersonation access token to a process.
+const TOKEN_IMPERSONATE = 0x0004;
+
+/// Required to query an access token.
+const TOKEN_QUERY = 0x0008;
+
+/// Required to query the source of an access token.
+const TOKEN_QUERY_SOURCE = 0x0010;
+
+/// Required to enable or disable the privileges in an access token.
+const TOKEN_ADJUST_PRIVILEGES = 0x0020;
+
+/// Required to adjust the attributes of the groups in an access token.
+const TOKEN_ADJUST_GROUPS = 0x0040;
+
+/// Required to change the default owner, primary group, or DACL of an access
+/// token.
+const TOKEN_ADJUST_DEFAULT = 0x0080;
+
+/// Required to adjust the session ID of an access token. The SE_TCB_NAME
+/// privilege is required.
+const TOKEN_ADJUST_SESSIONID = 0x0100;
+
+/// Combines all possible access rights for a token.
+const TOKEN_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED |
+    TOKEN_ASSIGN_PRIMARY |
+    TOKEN_DUPLICATE |
+    TOKEN_IMPERSONATE |
+    TOKEN_QUERY |
+    TOKEN_QUERY_SOURCE |
+    TOKEN_ADJUST_PRIVILEGES |
+    TOKEN_ADJUST_GROUPS |
+    TOKEN_ADJUST_DEFAULT |
+    TOKEN_ADJUST_SESSIONID;
+
+/// Combines STANDARD_RIGHTS_READ and TOKEN_QUERY.
+const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
+
+/// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
+/// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
+const TOKEN_WRITE = STANDARD_RIGHTS_WRITE |
+    TOKEN_ADJUST_PRIVILEGES |
+    TOKEN_ADJUST_GROUPS |
+    TOKEN_ADJUST_DEFAULT;
+
+/// Same as STANDARD_RIGHTS_EXECUTE.
+const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
+
+// -----------------------------------------------------------------------------
 // Heap allocation flags
 // -----------------------------------------------------------------------------
 
@@ -501,7 +564,6 @@ const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
 const ES_SYSTEM_REQUIRED = 0x00000001;
 
 /// Forces the display to be on by resetting the display idle timer.
-
 const ES_DISPLAY_REQUIRED = 0x00000002;
 
 /// This value is not supported. If ES_USER_PRESENT is combined with other
@@ -516,6 +578,9 @@ const ES_AWAYMODE_REQUIRED = 0x00000040;
 /// the next call that uses ES_CONTINUOUS and one of the other state flags is
 /// cleared.
 const ES_CONTINUOUS = 0x80000000;
+
+/// The thread is still active.
+const STILL_ACTIVE = 259;
 
 // -----------------------------------------------------------------------------
 // Named pipe flags
@@ -669,6 +734,107 @@ const HANDLE_FLAG_INHERIT = 0x00000001;
 const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
 
 // -----------------------------------------------------------------------------
+// Serial port flags
+// -----------------------------------------------------------------------------
+
+/// No parity.
+const NOPARITY = 0;
+
+/// Odd parity.
+const ODDPARITY = 1;
+
+/// Even parity.
+const EVENPARITY = 2;
+
+/// Mark parity.
+const MARKPARITY = 3;
+
+/// Space parity.
+const SPACEPARITY = 4;
+
+/// 1 stop bit.
+const ONESTOPBIT = 0;
+
+/// 1.5 stop bits.
+const ONE5STOPBITS = 1;
+
+/// 2 stop bits.
+const TWOSTOPBITS = 2;
+
+/// 110 bps.
+const CBR_110 = 110;
+
+/// 300 bps.
+const CBR_300 = 300;
+
+/// 600 bps.
+const CBR_600 = 600;
+
+/// 1200 bps.
+const CBR_1200 = 1200;
+
+/// 2400 bps.
+const CBR_2400 = 2400;
+
+/// 4800 bps.
+const CBR_4800 = 4800;
+
+/// 9600 bps.
+const CBR_9600 = 9600;
+
+/// 14400 bps.
+const CBR_14400 = 14400;
+
+/// 19200 bps.
+const CBR_19200 = 19200;
+
+/// 38400 bps.
+const CBR_38400 = 38400;
+
+/// 56000 bps.
+const CBR_56000 = 56000;
+
+/// 57600 bps.
+const CBR_57600 = 57600;
+
+/// 115200 bps.
+const CBR_115200 = 115200;
+
+/// 128000 bps.
+const CBR_128000 = 128000;
+
+/// 256000 bps.
+const CBR_256000 = 256000;
+
+/// Disables the DTR line when the device is opened and leaves it disabled.
+const DTR_CONTROL_DISABLE = 0x00;
+
+/// Enables the DTR line when the device is opened and leaves it on.
+const DTR_CONTROL_ENABLE = 0x01;
+
+/// Enables DTR handshaking. If handshaking is enabled, it is an error for the
+/// application to adjust the line by using the EscapeCommFunction function.
+const DTR_CONTROL_HANDSHAKE = 0x02;
+
+/// Disables the RTS line when the device is opened and leaves it disabled.
+const RTS_CONTROL_DISABLE = 0x00;
+
+/// Enables the RTS line when the device is opened and leaves it on.
+const RTS_CONTROL_ENABLE = 0x01;
+
+/// Enables RTS handshaking. The driver raises the RTS line when the
+/// "type-ahead" (input) buffer is less than one-half full and lowers the RTS
+/// line when the buffer is more than three-quarters full. If handshaking is
+/// enabled, it is an error for the application to adjust the line by using the
+/// EscapeCommFunction function.
+const RTS_CONTROL_HANDSHAKE = 0x02;
+
+/// Specifies that the RTS line will be high if bytes are available for
+/// transmission. After all buffered bytes have been sent, the RTS line will be
+/// low.
+const RTS_CONTROL_TOGGLE = 0x03;
+
+// -----------------------------------------------------------------------------
 // Get Binary Type flags
 // -----------------------------------------------------------------------------
 
@@ -731,6 +897,67 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 /// function stores hard-coded line breaks in the message definition text into
 /// the output buffer. The function generates no new line breaks.
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
+
+// -----------------------------------------------------------------------------
+// StartupInfo flags
+// -----------------------------------------------------------------------------
+
+/// The wShowWindow member contains additional information.
+const STARTF_USESHOWWINDOW = 0x00000001;
+
+/// The dwXSize and dwYSize members contain additional information.
+const STARTF_USESIZE = 0x00000002;
+
+/// The dwX and dwY members contain additional information.
+const STARTF_USEPOSITION = 0x00000004;
+
+/// The dwXCountChars and dwYCountChars members contain additional information.
+const STARTF_USECOUNTCHARS = 0x00000008;
+
+/// The dwFillAttribute member contains additional information.
+const STARTF_USEFILLATTRIBUTE = 0x00000010;
+
+/// Indicates that the process should be run in full-screen mode, rather than in
+/// windowed mode. This flag is only valid for console applications running on
+/// an x86 computer.
+const STARTF_RUNFULLSCREEN = 0x00000020;
+
+/// Indicates that the cursor is in feedback mode for two seconds after
+/// CreateProcess is called. The Working in Background cursor is displayed (see
+/// the Pointers tab in the Mouse control panel utility).
+const STARTF_FORCEONFEEDBACK = 0x00000040;
+
+/// Indicates that the feedback cursor is forced off while the process is
+/// starting. The Normal Select cursor is displayed.
+const STARTF_FORCEOFFFEEDBACK = 0x00000080;
+
+/// The hStdInput, hStdOutput, and hStdError members contain additional
+/// information.
+const STARTF_USESTDHANDLES = 0x00000100;
+
+/// The hStdInput member contains additional information.
+const STARTF_USEHOTKEY = 0x00000200;
+
+/// The lpTitle member contains the path of the shortcut file (.lnk) that the
+/// user invoked to start this process. This is typically set by the shell when
+/// a .lnk file pointing to the launched application is invoked. Most
+/// applications will not need to set this value.
+const STARTF_TITLEISLINKNAME = 0x00000800;
+
+/// The lpTitle member contains an AppUserModelID. This identifier controls how
+/// the taskbar and Start menu present the application, and enables it to be
+/// associated with the correct shortcuts and Jump Lists. Generally,
+/// applications will use the SetCurrentProcessExplicitAppUserModelID and
+/// GetCurrentProcessExplicitAppUserModelID functions instead of setting this
+/// flag.
+const STARTF_TITLEISAPPID = 0x00001000;
+
+/// Indicates that any windows created by the process cannot be pinned on the
+/// taskbar.
+const STARTF_PREVENTPINNING = 0x00002000;
+
+/// The command line came from an untrusted source.
+const STARTF_UNTRUSTEDSOURCE = 0x00008000;
 
 // -----------------------------------------------------------------------------
 // WindowStyle constants
@@ -1846,6 +2073,48 @@ const PBT_APMRESUMEAUTOMATIC = 0x0012;
 const PBT_POWERSETTINGCHANGE = 0x8013;
 
 // -----------------------------------------------------------------------------
+// Size constants (from WM_SIZE)
+// -----------------------------------------------------------------------------
+
+/// The window has been resized, but neither the SIZE_MINIMIZED nor
+/// SIZE_MAXIMIZED value applies.
+const SIZE_RESTORED = 0;
+
+/// The window has been minimized.
+const SIZE_MINIMIZED = 1;
+
+/// The window has been maximized.
+const SIZE_MAXIMIZED = 2;
+
+/// Message is sent to all pop-up windows when some other window has been
+/// restored to its former size.
+const SIZE_MAXSHOW = 3;
+
+/// Message is sent to all pop-up windows when some other window is maximized.
+const SIZE_MAXHIDE = 4;
+
+// -----------------------------------------------------------------------------
+// Window z-ordering constants
+// -----------------------------------------------------------------------------
+
+/// Places the window at the top of the Z order.
+const HWND_TOP = 0;
+
+/// Places the window at the bottom of the Z order. If the hWnd parameter
+/// identifies a topmost window, the window loses its topmost status and is
+/// placed at the bottom of all other windows.
+const HWND_BOTTOM = 1;
+
+/// Places the window above all non-topmost windows. The window maintains its
+/// topmost position even when it is deactivated.
+const HWND_TOPMOST = -1;
+
+/// Places the window above all non-topmost windows (that is, behind all topmost
+/// windows). This flag has no effect if the window is already a non-topmost
+/// window.
+const HWND_NOTOPMOST = -2;
+
+// -----------------------------------------------------------------------------
 // Queue status flags
 // -----------------------------------------------------------------------------
 
@@ -1904,6 +2173,67 @@ const QS_ALLINPUT = QS_INPUT |
     QS_PAINT |
     QS_HOTKEY |
     QS_SENDMESSAGE;
+
+// -----------------------------------------------------------------------------
+// Hook constants
+// -----------------------------------------------------------------------------
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar.
+const WH_MSGFILTER = -1;
+
+/// Installs a hook procedure that records input messages posted to the system
+/// message queue.
+const WH_JOURNALRECORD = 0;
+
+/// Installs a hook procedure that posts messages previously recorded by a
+/// WH_JOURNALRECORD hook procedure.
+const WH_JOURNALPLAYBACK = 1;
+
+/// Installs a hook procedure that monitors keystroke messages.
+const WH_KEYBOARD = 2;
+
+/// Installs a hook procedure that monitors messages posted to a message queue.
+const WH_GETMESSAGE = 3;
+
+/// Installs a hook procedure that monitors messages before the system sends
+/// them to the destination window procedure.
+const WH_CALLWNDPROC = 4;
+
+/// Installs a hook procedure that receives notifications useful to a CBT
+/// application.
+const WH_CBT = 5;
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar. The hook
+/// procedure monitors these messages for all applications in the same desktop
+/// as the calling thread.
+const WH_SYSMSGFILTER = 6;
+
+/// Installs a hook procedure that monitors mouse messages.
+const WH_MOUSE = 7;
+
+/// Installs a hook procedure useful for debugging other hook procedures.
+const WH_DEBUG = 9;
+
+/// Installs a hook procedure that receives notifications useful to shell
+/// applications.
+const WH_SHELL = 10;
+
+/// Installs a hook procedure that will be called when the application's
+/// foreground thread is about to become idle. This hook is useful for
+/// performing low priority tasks during idle time.
+const WH_FOREGROUNDIDLE = 11;
+
+/// Installs a hook procedure that monitors messages after they have been
+/// processed by the destination window procedure.
+const WH_CALLWNDPROCRET = 12;
+
+/// Installs a hook procedure that monitors low-level keyboard input events.
+const WH_KEYBOARD_LL = 13;
+
+/// Installs a hook procedure that monitors low-level mouse input events.
+const WH_MOUSE_LL = 14;
 
 // -----------------------------------------------------------------------------
 // System colors
@@ -3217,6 +3547,202 @@ const SM_CONVERTIBLESLATEMODE = 0x2003;
 /// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
 /// otherwise.
 const SM_SYSTEMDOCKED = 0x2004;
+
+// -----------------------------------------------------------------------------
+// Scrollbar constants
+// -----------------------------------------------------------------------------
+
+/// Apply to the window's standard horizontal scroll bar.
+const SB_HORZ = 0;
+
+/// Apply to the window's standard vertical scroll bar.
+const SB_VERT = 1;
+
+/// Apply to a scroll bar control.
+const SB_CTL = 2;
+
+/// Apply to the window's standard horizontal and vertical scroll bars.
+const SB_BOTH = 3;
+
+/// Scrolls one line up.
+const SB_LINEUP = 0;
+
+/// Scrolls left by one unit.
+const SB_LINELEFT = 0;
+
+/// Scrolls one line down.
+const SB_LINEDOWN = 1;
+
+/// Scrolls right by one unit.
+const SB_LINERIGHT = 1;
+
+/// Scrolls one page up.
+const SB_PAGEUP = 2;
+
+/// Scrolls left by the width of the window.
+const SB_PAGELEFT = 2;
+
+/// Scrolls one page down.
+const SB_PAGEDOWN = 3;
+
+/// Scrolls right by the width of the window.
+const SB_PAGERIGHT = 3;
+
+/// The user has dragged the scroll box (thumb) and released the mouse button.
+const SB_THUMBPOSITION = 4;
+
+/// The user is dragging the scroll box. This message is sent repeatedly until
+/// the user releases the mouse button.
+const SB_THUMBTRACK = 5;
+
+/// Scrolls to the upper left.
+const SB_TOP = 6;
+
+/// Scrolls to the upper left.
+const SB_LEFT = 6;
+
+/// Scrolls to the lower right.
+const SB_BOTTOM = 7;
+
+/// Scrolls to the lower right.
+const SB_RIGHT = 7;
+
+/// Ends scroll.
+const SB_ENDSCROLL = 8;
+
+// -----------------------------------------------------------------------------
+// Up/Down Control styles
+// -----------------------------------------------------------------------------
+
+/// Causes the position to "wrap" if it is incremented or decremented beyond the
+/// ending or beginning of the range.
+const UDS_WRAP = 0x0001;
+
+/// Causes the up-down control to set the text of the buddy window (using the
+/// WM_SETTEXT message) when the position changes. The text consists of the
+/// position formatted as a decimal or hexadecimal string.
+const UDS_SETBUDDYINT = 0x0002;
+
+/// Positions the up-down control next to the right edge of the buddy window.
+/// The width of the buddy window is decreased to accommodate the width of the
+/// up-down control.
+const UDS_ALIGNRIGHT = 0x0004;
+
+/// Positions the up-down control next to the left edge of the buddy window. The
+/// buddy window is moved to the right, and its width is decreased to
+/// accommodate the width of the up-down control.
+const UDS_ALIGNLEFT = 0x0008;
+
+/// Automatically selects the previous window in the z-order as the up-down
+/// control's buddy window.
+const UDS_AUTOBUDDY = 0x0010;
+
+/// Causes the up-down control to increment and decrement the position when the
+/// UP ARROW and DOWN ARROW keys are pressed.
+const UDS_ARROWKEYS = 0x0020;
+
+/// Causes the up-down control's arrows to point left and right instead of up
+/// and down.
+const UDS_HORZ = 0x0040;
+
+/// Does not insert a thousands separator between every three decimal digits.
+const UDS_NOTHOUSANDS = 0x0080;
+
+/// Causes the control to exhibit "hot tracking" behavior. That is, it
+/// highlights the UP ARROW and DOWN ARROW on the control as the pointer passes
+/// over them.
+const UDS_HOTTRACK = 0x0100;
+
+// -----------------------------------------------------------------------------
+// Progress Bar styles
+// -----------------------------------------------------------------------------
+
+/// The progress bar displays progress status in a smooth scrolling bar instead
+/// of the default segmented bar.
+const PBS_SMOOTH = 0x01;
+
+/// The progress bar displays progress status vertically, from bottom to top.
+const PBS_VERTICAL = 0x04;
+
+/// Sets the minimum and maximum values for a progress bar and redraws the bar
+/// to reflect the new range.
+const PBM_SETRANGE = WM_USER + 1;
+
+/// Sets the current position for a progress bar and redraws the bar to reflect
+/// the new position.
+const PBM_SETPOS = WM_USER + 2;
+
+/// Advances the current position of a progress bar by a specified increment and
+/// redraws the bar to reflect the new position.
+const PBM_DELTAPOS = WM_USER + 3;
+
+/// Specifies the step increment for a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_SETSTEP = WM_USER + 4;
+
+/// Advances the current position for a progress bar by the step increment and
+/// redraws the bar to reflect the new position. An application sets the step
+/// increment by sending the PBM_SETSTEP message.
+const PBM_STEPIT = WM_USER + 5;
+
+/// Sets the minimum and maximum values for a progress bar to 32-bit values, and
+/// redraws the bar to reflect the new range
+const PBM_SETRANGE32 = WM_USER + 6;
+
+/// Retrieves information about the current high and low limits of a given
+/// progress bar control.
+const PBM_GETRANGE = WM_USER + 7;
+
+/// Retrieves the current position of the progress bar.
+const PBM_GETPOS = WM_USER + 8;
+
+/// Sets the color of the progress indicator bar in the progress bar control.
+const PBM_SETBARCOLOR = WM_USER + 9;
+
+/// Sets the background color in the progress bar.
+const PBM_SETBKCOLOR = 0x2001;
+
+/// The progress indicator does not grow in size but instead moves repeatedly
+/// along the length of the bar, indicating activity without specifying what
+/// proportion of the progress is complete.
+const PBS_MARQUEE = 0x08;
+
+/// Sets the progress bar to marquee mode. This causes the progress bar to move
+/// like a marquee.
+const PBM_SETMARQUEE = WM_USER + 10;
+
+/// Determines the animation behavior that the progress bar should use when
+/// moving backward (from a higher value to a lower value). If this is set, then
+/// a "smooth" transition will occur, otherwise the control will "jump" to the
+/// lower value.
+const PBS_SMOOTHREVERSE = 0x10;
+
+/// Retrieves the step increment from a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_GETSTEP = WM_USER + 13;
+
+/// Gets the background color of the progress bar.
+const PBM_GETBKCOLOR = WM_USER + 14;
+
+/// Gets the color of the progress bar.
+const PBM_GETBARCOLOR = WM_USER + 15;
+
+/// Sets the state of the progress bar.
+const PBM_SETSTATE = WM_USER + 16;
+
+/// Gets the state of the progress bar.
+const PBM_GETSTATE = WM_USER + 17;
+
+/// In progress.
+const PBST_NORMAL = 0x0001;
+
+/// Error.
+const PBST_ERROR = 0x0002;
+
+/// Paused.
+const PBST_PAUSED = 0x0003;
 
 // -----------------------------------------------------------------------------
 // Clipboard Format constants
@@ -4894,6 +5420,8 @@ const CALLBACK_FUNCTION = 0x00030000;
 /// The dwCallback parameter is an event handle.
 const CALLBACK_EVENT = 0x00050000;
 
+/// The function queries the device to determine whether it supports the given
+/// format, but it does not open the device.
 const WAVE_FORMAT_QUERY = 0x0001;
 
 /// If this flag is specified, a synchronous waveform-audio device can be
@@ -4912,6 +5440,192 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// -----------------------------------------------------------------------------
+// Multimedia Extensions messages
+// -----------------------------------------------------------------------------
+
+/// The MM_JOY1MOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position has changed.
+const MM_JOY1MOVE = 0x3A0;
+
+/// The MM_JOY2MOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position has changed.
+const MM_JOY2MOVE = 0x3A1;
+
+/// The MM_JOY1ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position on the z-axis has changed.
+const MM_JOY1ZMOVE = 0x3A2;
+
+/// The MM_JOY2ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position on the z-axis has changed.
+const MM_JOY2ZMOVE = 0x3A3;
+
+/// The MM_JOY1BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been pressed.
+const MM_JOY1BUTTONDOWN = 0x3B5;
+
+/// The MM_JOY2BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been pressed.
+const MM_JOY2BUTTONDOWN = 0x3B6;
+
+/// The MM_JOY1BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been released.
+const MM_JOY1BUTTONUP = 0x3B7;
+
+/// The MM_JOY2BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been released.
+const MM_JOY2BUTTONUP = 0x3B8;
+
+/// The MM_MCINOTIFY message notifies an application that an MCI device has
+/// completed an operation. MCI devices send this message only when the
+/// MCI_NOTIFY flag is used.
+const MM_MCINOTIFY = 0x3B9;
+
+/// The MM_WOM_OPEN message is sent to a window when the given waveform-audio
+/// output device is opened.
+const MM_WOM_OPEN = 0x3BB;
+
+/// The MM_WOM_CLOSE message is sent to a window when a waveform-audio output
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WOM_CLOSE = 0x3BC;
+
+/// The MM_WOM_DONE message is sent to a window when the given output buffer is
+/// being returned to the application. Buffers are returned to the application
+/// when they have been played, or as the result of a call to the waveOutReset
+/// function.
+const MM_WOM_DONE = 0x3BD;
+
+/// The MM_WIM_OPEN message is sent to a window when a waveform-audio input
+/// device is opened.
+const MM_WIM_OPEN = 0x3BE;
+
+/// The MM_WIM_CLOSE message is sent to a window when a waveform-audio input
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WIM_CLOSE = 0x3BF;
+
+/// The MM_WIM_DATA message is sent to a window when waveform-audio data is
+/// present in the input buffer and the buffer is being returned to the
+/// application. The message can be sent either when the buffer is full or after
+/// the waveInReset function is called.
+const MM_WIM_DATA = 0x3C0;
+
+/// The MM_MIM_OPEN message is sent to a window when a MIDI input device is
+/// opened.
+const MM_MIM_OPEN = 0x3C1;
+
+/// The MM_MIM_CLOSE message is sent to a window when a MIDI input device is
+/// closed.
+const MM_MIM_CLOSE = 0x3C2;
+
+/// The MM_MIM_DATA message is sent to a window when a complete MIDI message is
+/// received by a MIDI input device.
+const MM_MIM_DATA = 0x3C3;
+
+/// The MM_MIM_LONGDATA message is sent to a window when either a complete MIDI
+/// system-exclusive message is received or when a buffer has been filled with
+/// system-exclusive data.
+const MM_MIM_LONGDATA = 0x3C4;
+
+/// The MM_MIM_ERROR message is sent to a window when an invalid MIDI message is
+/// received.
+const MM_MIM_ERROR = 0x3C5;
+
+/// The MM_MIM_LONGERROR message is sent to a window when an invalid or
+/// incomplete MIDI system-exclusive message is received.
+const MM_MIM_LONGERROR = 0x3C6;
+
+/// The MM_MOM_OPEN message is sent to a window when a MIDI output device is
+/// opened.
+const MM_MOM_OPEN = 0x3C7;
+
+/// The MM_MOM_CLOSE message is sent to a window when a MIDI output device is
+/// closed.
+const MM_MOM_CLOSE = 0x3C8;
+
+/// The MM_MOM_DONE message is sent to a window when the specified MIDI
+/// system-exclusive or stream buffer has been played and is being returned to
+/// the application.
+const MM_MOM_DONE = 0x3C9;
+
+/// The MM_MOM_POSITIONCB message is sent to a window when an MEVT_F_CALLBACK
+/// event is reached in the MIDI output stream.
+const MM_MOM_POSITIONCB = 0x3CA;
+
+/// The MM_MCISIGNAL message is sent to a window to notify an application that
+/// an MCI device has reached a position defined in a previous signal (
+/// MCI_SIGNAL) command.
+const MM_MCISIGNAL = 0x3CB;
+
+/// The MM_MIM_MOREDATA message is sent to a callback window when a MIDI message
+/// is received by a MIDI input device but the application is not processing
+/// MIM_DATA messages fast enough to keep up with the input device driver. The
+/// window receives this message only when the application specifies
+/// MIDI_IO_STATUS in the call to the midiInOpen function.
+const MM_MIM_MOREDATA = 0x3CC;
+
+/// The MM_MIXM_LINE_CHANGE message is sent by a mixer device to notify an
+/// application that the state of an audio line on the specified device has
+/// changed. The application should refresh its display and cached values for
+/// the specified audio line.
+const MM_MIXM_LINE_CHANGE = 0x3D0;
+
+/// The MM_MIXM_CONTROL_CHANGE message is sent by a mixer device to notify an
+/// application that the state of a control associated with an audio line has
+/// changed. The application should refresh its display and cached values for
+/// the specified control.
+const MM_MIXM_CONTROL_CHANGE = 0x3D1;
+
+/// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
+/// input device is opened.
+const MIM_OPEN = MM_MIM_OPEN;
+
+/// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
+/// input device is closed.
+const MIM_CLOSE = MM_MIM_CLOSE;
+
+/// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
+/// message is received by a MIDI input device.
+const MIM_DATA = MM_MIM_DATA;
+
+/// The MIM_LONGDATA message is sent to a MIDI input callback function when a
+/// system-exclusive buffer has been filled with data and is being returned to
+/// the application.
+const MIM_LONGDATA = MM_MIM_LONGDATA;
+
+/// The MIM_ERROR message is sent to a MIDI input callback function when an
+/// invalid MIDI message is received.
+const MIM_ERROR = MM_MIM_ERROR;
+
+/// The MIM_LONGERROR message is sent to a MIDI input callback function when an
+/// invalid or incomplete MIDI system-exclusive message is received.
+const MIM_LONGERROR = MM_MIM_LONGERROR;
+
+/// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
+/// output device is opened.
+const MOM_OPEN = MM_MOM_OPEN;
+
+/// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
+/// output device is closed.
+const MOM_CLOSE = MM_MOM_CLOSE;
+
+/// The MOM_DONE message is sent to a MIDI output callback function when the
+/// specified system-exclusive or stream buffer has been played and is being
+/// returned to the application.
+const MOM_DONE = MM_MOM_DONE;
+
+/// The MIM_MOREDATA message is sent to a MIDI input callback function when a
+/// MIDI message is received by a MIDI input device but the application is not
+/// processing MIM_DATA messages fast enough to keep up with the input device
+/// driver. The callback function receives this message only when the
+/// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
+const MIM_MOREDATA = MM_MIM_MOREDATA;
+
+/// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
+/// the MIDI output stream.
+const MOM_POSITIONCB = MM_MOM_POSITIONCB;
 
 // -----------------------------------------------------------------------------
 // Monitor Configuration constants & enumerations
@@ -5109,6 +5823,485 @@ const WDA_MONITOR = 0x00000001;
 const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 
 // -----------------------------------------------------------------------------
+// Bitmap compression constants
+// -----------------------------------------------------------------------------
+
+/// An uncompressed format.
+const BI_RGB = 0;
+
+/// A run-length encoded (RLE) format for bitmaps with 8 bpp. The compression
+/// format is a two-byte format consisting of a count byte followed by a byte
+/// containing a color index. If bV5Compression is BI_RGB and the bV5BitCount
+/// member is 16, 24, or 32, the bitmap array specifies the actual intensities
+/// of blue, green, and red rather than using color table indexes.
+const BI_RLE8 = 1;
+
+/// An RLE format for bitmaps with 4 bpp. The compression format is a two-byte
+/// format consisting of a count byte followed by two word-length color indexes.
+const BI_RLE4 = 2;
+
+/// Specifies that the bitmap is not compressed and that the color masks for the
+/// red, green, and blue components of each pixel are specified in the
+/// bV5RedMask, bV5GreenMask, and bV5BlueMask members. This is valid when used
+/// with 16- and 32-bpp bitmaps.
+const BI_BITFIELDS = 3;
+
+/// Specifies that the image is compressed using the JPEG file Interchange
+/// Format. JPEG compression trades off compression against loss; it can achieve
+/// a compression ratio of 20:1 with little noticeable loss.
+const BI_JPEG = 4;
+
+/// Specifies that the image is compressed using the PNG file Interchange
+/// Format.
+const BI_PNG = 5;
+
+// -----------------------------------------------------------------------------
+// Color Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the dialog box to use the color specified in the rgbResult member as
+/// the initial color selection.
+const CC_RGBINIT = 0x00000001;
+
+/// Causes the dialog box to display the additional controls that allow the user
+/// to create custom colors. If this flag is not set, the user must click the
+/// Define Custom Color button to display the custom color controls.
+const CC_FULLOPEN = 0x00000002;
+
+/// Disables the Define Custom Color button.
+const CC_PREVENTFULLOPEN = 0x00000004;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CC_SHOWHELP = 0x00000008;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure. This flag is used only to initialize the dialog box.
+const CC_ENABLEHOOK = 0x00000010;
+
+/// The hInstance and lpTemplateName members specify a dialog box template to
+/// use in place of the default template. This flag is used only to initialize
+/// the dialog box.
+const CC_ENABLETEMPLATE = 0x00000020;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores the lpTemplateName member if this
+/// flag is specified. This flag is used only to initialize the dialog box.
+const CC_ENABLETEMPLATEHANDLE = 0x00000040;
+
+/// Causes the dialog box to display only solid colors in the set of basic
+/// colors.
+const CC_SOLIDCOLOR = 0x00000080;
+
+/// Causes the dialog box to display all available colors in the set of basic
+/// colors.
+const CC_ANYCOLOR = 0x00000100;
+
+// -----------------------------------------------------------------------------
+// Font Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the screen fonts supported by the system.
+const CF_SCREENFONTS = 0x00000001;
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the fonts supported by the printer
+/// associated with the device context or information context identified by the
+/// hDC member.
+const CF_PRINTERFONTS = 0x00000002;
+
+/// This flag is ignored for font enumeration.
+const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CF_SHOWHELP = 0x00000004;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure.
+const CF_ENABLEHOOK = 0x00000008;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template.
+const CF_ENABLETEMPLATE = 0x00000010;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const CF_ENABLETEMPLATEHANDLE = 0x00000020;
+
+/// ChooseFont should use the structure pointed to by the lpLogFont member to
+/// initialize the dialog box controls.
+const CF_INITTOLOGFONTSTRUCT = 0x00000040;
+
+/// The lpszStyle member is a pointer to a buffer that contains style data that
+/// ChooseFont should use to initialize the Font Style combo box. When the user
+/// closes the dialog box, ChooseFont copies style data for the user's selection
+/// to this buffer.
+const CF_USESTYLE = 0x00000080;
+
+/// Causes the dialog box to display the controls that allow the user to specify
+/// strikeout, underline, and text color options. If this flag is set, you can
+/// use the rgbColors member to specify the initial text color. You can use the
+/// lfStrikeOut and lfUnderline members of the structure pointed to by lpLogFont
+/// to specify the initial settings of the strikeout and underline check boxes.
+/// ChooseFont can use these members to return the user's selections.
+const CF_EFFECTS = 0x00000100;
+
+/// Causes the dialog box to display the Apply button. You should provide a hook
+/// procedure to process WM_COMMAND messages for the Apply button. The hook
+/// procedure can send the WM_CHOOSEFONT_GETLOGFONT message to the dialog box to
+/// retrieve the address of the structure that contains the current selections
+/// for the font.
+const CF_APPLY = 0x00000200;
+
+/// This flag is obsolete.
+const CF_ANSIONLY = 0x00000400;
+
+/// ChooseFont should allow selection of fonts for all non-OEM and Symbol
+/// character sets, as well as the ANSI character set.
+const CF_SCRIPTSONLY = CF_ANSIONLY;
+
+/// ChooseFont should not allow vector font selections.
+const CF_NOVECTORFONTS = 0x00000800;
+
+/// Same as the CF_NOVECTORFONTS flag.
+const CF_NOOEMFONTS = CF_NOVECTORFONTS;
+
+/// ChooseFont should not display or allow selection of font simulations.
+const CF_NOSIMULATIONS = 0x00001000;
+
+/// ChooseFont should select only font sizes within the range specified by the
+/// nSizeMin and nSizeMax members.
+const CF_LIMITSIZE = 0x00002000;
+
+/// ChooseFont should enumerate and allow selection of only fixed-pitch fonts.
+const CF_FIXEDPITCHONLY = 0x00004000;
+
+/// Obsolete. ChooseFont ignores this flag.
+const CF_WYSIWYG = 0x00008000;
+
+/// ChooseFont should indicate an error condition if the user attempts to select
+/// a font or style that is not listed in the dialog box.
+const CF_FORCEFONTEXIST = 0x00010000;
+
+/// Specifies that ChooseFont should allow only the selection of scalable fonts.
+/// Scalable fonts include vector fonts, scalable printer fonts, TrueType fonts,
+/// and fonts scaled by other technologies.
+const CF_SCALABLEONLY = 0x00020000;
+
+/// ChooseFont should only enumerate and allow the selection of TrueType fonts.
+const CF_TTONLY = 0x00040000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the font name combo box. This is useful when there is no single font name
+/// that applies to the text selection.
+const CF_NOFACESEL = 0x00080000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the Font Style combo box. This is useful when there is no single font style
+/// that applies to the text selection.
+const CF_NOSTYLESEL = 0x00100000;
+
+/// When using a structure to initialize the dialog box controls, use this flag
+/// to prevent the dialog box from displaying an initial selection for the Font
+/// Size combo box. This is useful when there is no single font size that
+/// applies to the text selection.
+const CF_NOSIZESEL = 0x00200000;
+
+/// When specified on input, only fonts with the character set identified in the
+/// lfCharSet member of the LOGFONT structure are displayed. The user will not
+/// be allowed to change the character set specified in the Scripts combo box.
+const CF_SELECTSCRIPT = 0x00400000;
+
+/// Disables the Script combo box. When this flag is set, the lfCharSet member
+/// of the LOGFONT structure is set to DEFAULT_CHARSET when ChooseFont returns.
+/// This flag is used only to initialize the dialog box.
+const CF_NOSCRIPTSEL = 0x00800000;
+
+/// Causes the Font dialog box to list only horizontally oriented fonts.
+const CF_NOVERTFONTS = 0x01000000;
+
+/// ChooseFont should additionally display fonts that are set to Hide in Fonts
+/// Control Panel.
+const CF_INACTIVEFONTS = 0x02000000;
+
+// -----------------------------------------------------------------------------
+// Find / Replace Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// If set, the Down button of the direction radio buttons in a Find dialog box
+/// is selected indicating that you should search from the current location to
+/// the end of the document. If not set, the Up button is selected so you should
+/// search to the beginning of the document. You can set this flag to initialize
+/// the dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_DOWN = 0x00000001;
+
+/// If set, the Match Whole Word Only check box is selected indicating that you
+/// should search only for whole words that match the search string. If not set,
+/// the check box is unselected so you should also search for word fragments
+/// that match the search string. You can set this flag to initialize the dialog
+/// box. If set in a FINDMSGSTRING message, indicates the user's selection.
+const FR_WHOLEWORD = 0x00000002;
+
+/// If set, the Match Case check box is selected indicating that the search
+/// should be case-sensitive. If not set, the check box is unselected so the
+/// search should be case-insensitive. You can set this flag to initialize the
+/// dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_MATCHCASE = 0x00000004;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the Find
+/// Next button in a Find or Replace dialog box. The lpstrFindWhat member
+/// specifies the string to search for.
+const FR_FINDNEXT = 0x00000008;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace button in a Replace dialog box. The lpstrFindWhat member specifies
+/// the string to be replaced and the lpstrReplaceWith member specifies the
+/// replacement string.
+const FR_REPLACE = 0x00000010;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace All button in a Replace dialog box. The lpstrFindWhat member
+/// specifies the string to be replaced and the lpstrReplaceWith member
+/// specifies the replacement string.
+const FR_REPLACEALL = 0x00000020;
+
+/// If set in a FINDMSGSTRING message, indicates that the dialog box is closing.
+/// When you receive a message with this flag set, the dialog box handle
+/// returned by the FindText or ReplaceText function is no longer valid.
+const FR_DIALOGTERM = 0x00000040;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const FR_SHOWHELP = 0x00000080;
+
+/// Enables the hook function specified in the lpfnHook member. This flag is
+/// used only to initialize the dialog box.
+const FR_ENABLEHOOK = 0x00000100;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template. This flag is used only to
+/// initialize the dialog box.
+const FR_ENABLETEMPLATE = 0x00000200;
+
+/// If set when initializing a Find dialog box, disables the search direction
+/// radio buttons.
+const FR_NOUPDOWN = 0x00000400;
+
+/// If set when initializing a Find or Replace dialog box, disables the Match
+/// Case check box.
+const FR_NOMATCHCASE = 0x00000800;
+
+/// If set when initializing a Find or Replace dialog box, disables the Whole
+/// Word check box.
+const FR_NOWHOLEWORD = 0x00001000;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const FR_ENABLETEMPLATEHANDLE = 0x00002000;
+
+/// If set when initializing a Find dialog box, hides the search direction radio
+/// buttons.
+const FR_HIDEUPDOWN = 0x00004000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Case
+/// check box.
+const FR_HIDEMATCHCASE = 0x00008000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Whole
+/// Word Only check box.
+const FR_HIDEWHOLEWORD = 0x00010000;
+
+/// If set, the search operation considers Arabic and Hebrew diacritical marks.
+/// If not set, diacritical marks are ignored.
+const FR_MATCHDIAC = 0x20000000;
+
+/// If set, the search operation considers Arabic and Hebrew kashidas. If not
+/// set, kashidas are ignored.
+const FR_MATCHKASHIDA = 0x40000000;
+
+/// If set, the search differentiates between Arabic and Hebrew alefs with
+/// different accents. If not set, all alefs are matched by the alef character
+/// alone.
+const FR_MATCHALEFHAMZA = 0x80000000;
+
+// -----------------------------------------------------------------------------
+// Open File Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the Read Only check box to be selected initially when the dialog box
+/// is created. This flag indicates the state of the Read Only check box when
+/// the dialog box is closed.
+const OFN_READONLY = 0x00000001;
+
+/// Causes the Save As dialog box to generate a message box if the selected file
+/// already exists. The user must confirm whether to overwrite the file.
+const OFN_OVERWRITEPROMPT = 0x00000002;
+
+/// Hides the Read Only check box.
+const OFN_HIDEREADONLY = 0x00000004;
+
+/// Restores the current directory to its original value if the user changed the
+/// directory while searching for files.
+const OFN_NOCHANGEDIR = 0x00000008;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button. An Explorer-style
+/// dialog box sends a CDN_HELP notification message to your hook procedure when
+/// the user clicks the Help button.
+const OFN_SHOWHELP = 0x00000010;
+
+/// Enables the hook function specified in the lpfnHook member.
+const OFN_ENABLEHOOK = 0x00000020;
+
+/// The lpTemplateName member is a pointer to the name of a dialog template
+/// resource in the module identified by the hInstance member. If the
+/// OFN_EXPLORER flag is set, the system uses the specified template to create a
+/// dialog box that is a child of the default Explorer-style dialog box. If the
+/// OFN_EXPLORER flag is not set, the system uses the template to create an
+/// old-style dialog box that replaces the default dialog box.
+const OFN_ENABLETEMPLATE = 0x00000040;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores lpTemplateName if this flag is
+/// specified. If the OFN_EXPLORER flag is set, the system uses the specified
+/// template to create a dialog box that is a child of the default
+/// Explorer-style dialog box. If the OFN_EXPLORER flag is not set, the system
+/// uses the template to create an old-style dialog box that replaces the
+/// default dialog box.
+const OFN_ENABLETEMPLATEHANDLE = 0x00000080;
+
+/// The common dialog boxes allow invalid characters in the returned file name.
+/// Typically, the calling application uses a hook procedure that checks the
+/// file name by using the FILEOKSTRING message. If the text box in the edit
+/// control is empty or contains nothing but spaces, the lists of files and
+/// directories are updated. If the text box in the edit control contains
+/// anything else, nFileOffset and nFileExtension are set to values generated by
+/// parsing the text. No default extension is added to the text, nor is text
+/// copied to the buffer specified by lpstrFileTitle. If the value specified by
+/// nFileOffset is less than zero, the file name is invalid. Otherwise, the file
+/// name is valid, and nFileExtension and nFileOffset can be used as if the
+/// OFN_NOVALIDATE flag had not been specified.
+const OFN_NOVALIDATE = 0x00000100;
+
+/// The File Name list box allows multiple selections. If you also set the
+/// OFN_EXPLORER flag, the dialog box uses the Explorer-style user interface;
+/// otherwise, it uses the old-style user interface.
+const OFN_ALLOWMULTISELECT = 0x00000200;
+
+/// The user typed a file name extension that differs from the extension
+/// specified by lpstrDefExt. The function does not use this flag if lpstrDefExt
+/// is NULL.
+const OFN_EXTENSIONDIFFERENT = 0x00000400;
+
+/// The user can type only valid paths and file names. If this flag is used and
+/// the user types an invalid path and file name in the File Name entry field,
+/// the dialog box function displays a warning in a message box.
+const OFN_PATHMUSTEXIST = 0x00000800;
+
+/// The user can type only names of existing files in the File Name entry field.
+/// If this flag is specified and the user enters an invalid name, the dialog
+/// box procedure displays a warning in a message box. If this flag is
+/// specified, the OFN_PATHMUSTEXIST flag is also used. This flag can be used in
+/// an Open dialog box. It cannot be used with a Save As dialog box.
+const OFN_FILEMUSTEXIST = 0x00001000;
+
+/// If the user specifies a file that does not exist, this flag causes the
+/// dialog box to prompt the user for permission to create the file. If the user
+/// chooses to create the file, the dialog box closes and the function returns
+/// the specified name; otherwise, the dialog box remains open. If you use this
+/// flag with the OFN_ALLOWMULTISELECT flag, the dialog box allows the user to
+/// specify only one nonexistent file.
+const OFN_CREATEPROMPT = 0x00002000;
+
+/// Specifies that if a call to the OpenFile function fails because of a network
+/// sharing violation, the error is ignored and the dialog box returns the
+/// selected file name. If this flag is not set, the dialog box notifies your
+/// hook procedure when a network sharing violation occurs for the file name
+/// specified by the user. If you set the OFN_EXPLORER flag, the dialog box
+/// sends the CDN_SHAREVIOLATION message to the hook procedure. If you do not
+/// set OFN_EXPLORER, the dialog box sends the SHAREVISTRING registered message
+/// to the hook procedure.
+const OFN_SHAREAWARE = 0x00004000;
+
+/// The returned file does not have the Read Only check box selected and is not
+/// in a write-protected directory.
+const OFN_NOREADONLYRETURN = 0x00008000;
+
+/// The file is not created before the dialog box is closed. This flag should be
+/// specified if the application saves the file on a create-nonmodify network
+/// share. When an application specifies this flag, the library does not check
+/// for write protection, a full disk, an open drive door, or network
+/// protection. Applications using this flag must perform file operations
+/// carefully, because a file cannot be reopened once it is closed.
+const OFN_NOTESTFILECREATE = 0x00010000;
+
+/// Hides and disables the Network button.
+const OFN_NONETWORKBUTTON = 0x00020000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use short
+/// file names (8.3 format). Explorer-style dialog boxes ignore this flag and
+/// always display long file names.
+const OFN_NOLONGNAMES = 0x00040000;
+
+/// Indicates that any customizations made to the Open or Save As dialog box use
+/// the Explorer-style customization methods.
+const OFN_EXPLORER = 0x00080000;
+
+/// Directs the dialog box to return the path and file name of the selected
+/// shortcut (.LNK) file. If this value is not specified, the dialog box returns
+/// the path and file name of the file referenced by the shortcut.
+const OFN_NODEREFERENCELINKS = 0x00100000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use long file
+/// names. If this flag is not specified, or if the OFN_ALLOWMULTISELECT flag is
+/// also set, old-style dialog boxes use short file names (8.3 format) for file
+/// names with spaces. Explorer-style dialog boxes ignore this flag and always
+/// display long file names.
+const OFN_LONGNAMES = 0x00200000;
+
+/// Causes the dialog box to send CDN_INCLUDEITEM notification messages to your
+/// OFNHookProc hook procedure when the user opens a folder. The dialog box
+/// sends a notification for each item in the newly opened folder. These
+/// messages enable you to control which items the dialog box displays in the
+/// folder's item list.
+const OFN_ENABLEINCLUDENOTIFY = 0x00400000;
+
+/// Enables the Explorer-style dialog box to be resized using either the mouse
+/// or the keyboard. By default, the Explorer-style Open and Save As dialog
+/// boxes allow the dialog box to be resized regardless of whether this flag is
+/// set. This flag is necessary only if you provide a hook procedure or custom
+/// template. The old-style dialog box does not permit resizing.
+const OFN_ENABLESIZING = 0x00800000;
+
+/// Prevents the system from adding a link to the selected file in the file
+/// system directory that contains the user's most recently used documents. To
+/// retrieve the location of this directory, call the SHGetSpecialFolderLocation
+/// function with the CSIDL_RECENT flag.
+const OFN_DONTADDTORECENT = 0x02000000;
+
+/// Forces the showing of system and hidden files, thus overriding the user
+/// setting to show or not show hidden files. However, a file that is marked
+/// both system and hidden is not shown.
+const OFN_FORCESHOWHIDDEN = 0x10000000;
+
+/// If this flag is set, the places bar is not displayed. If this flag is not
+/// set, Explorer-style dialog boxes include a places bar containing icons for
+/// commonly-used folders, such as Favorites and Desktop.
+const OFN_EX_NOPLACESBAR = 0x00000001;
+
+// -----------------------------------------------------------------------------
 /// High DPI constants & enumerations
 // -----------------------------------------------------------------------------
 
@@ -5299,52 +6492,70 @@ class DESKTOP_WALLPAPER_POSITION {
 // -----------------------------------------------------------------------------
 
 /// play synchronously (default)
-const int SND_SYNC = 0x0000;
+const SND_SYNC = 0x0000;
 
 /// play asynchronously
-const int SND_ASYNC = 0x0001;
+const SND_ASYNC = 0x0001;
 
 /// silence (!default) if sound not found
-const int SND_NODEFAULT = 0x0002;
+const SND_NODEFAULT = 0x0002;
 
 /// pszSound points to a memory file
-const int SND_MEMORY = 0x0004;
+const SND_MEMORY = 0x0004;
 
 /// loop the sound until next sndPlaySound
-const int SND_LOOP = 0x0008;
+const SND_LOOP = 0x0008;
 
 /// don't stop any currently playing sound
-const int SND_NOSTOP = 0x0010;
+const SND_NOSTOP = 0x0010;
 
 /// don't wait if the driver is busy
-const int SND_NOWAIT = 0x00002000;
+const SND_NOWAIT = 0x00002000;
 
 /// name is a registry alias
-const int SND_ALIAS = 0x00010000;
+const SND_ALIAS = 0x00010000;
 
 /// alias is a predefined ID
-const int SND_ALIAS_ID = 0x00110000;
+const SND_ALIAS_ID = 0x00110000;
 
 /// name is file name
-const int SND_FILENAME = 0x00020000;
+const SND_FILENAME = 0x00020000;
 
 /// name is resource name or atom
-const int SND_RESOURCE = 0x00040004;
+const SND_RESOURCE = 0x00040004;
 
 /// purge non-static events for task
-const int SND_PURGE = 0x0040;
+const SND_PURGE = 0x0040;
 
 /// look for application specific association
-const int SND_APPLICATION = 0x0080;
+const SND_APPLICATION = 0x0080;
 
 /// Generate a SoundSentry event with this sound
-const int SND_SENTRY = 0x00080000;
+const SND_SENTRY = 0x00080000;
 
 /// Treat this as a "ring" from a communications app - don't duck me
-const int SND_RING = 0x00100000;
+const SND_RING = 0x00100000;
 
 /// Treat this as a system sound
-const int SND_SYSTEM = 0x00200000;
+const SND_SYSTEM = 0x00200000;
+
+// -----------------------------------------------------------------------------
+// PurgeComm() flags
+// -----------------------------------------------------------------------------
+
+/// Terminates all outstanding overlapped write operations and returns
+/// immediately, even if the write operations have not been completed.
+const PURGE_TXABORT = 0x0001;
+
+/// Terminates all outstanding overlapped read operations and returns
+/// immediately, even if the read operations have not been completed.
+const PURGE_RXABORT = 0x0002;
+
+/// Clears the output buffer (if the device driver has one).
+const PURGE_TXCLEAR = 0x0004;
+
+/// Clears the input buffer (if the device driver has one).
+const PURGE_RXCLEAR = 0x0008;
 
 // -----------------------------------------------------------------------------
 // Shutdown constants
@@ -5882,3 +7093,242 @@ class ACTIVATEOPTIONS {
   /// supported starting in Windows 10.
   static const AO_PRELAUNCH = 0x2000000;
 }
+
+// -----------------------------------------------------------------------------
+// Symbol Flag constants
+// -----------------------------------------------------------------------------
+
+/// The Value member is used.
+const SYMFLAG_VALUEPRESENT = 0x00000001;
+
+/// The symbol is a register. The Register member is used.
+const SYMFLAG_REGISTER = 0x00000008;
+
+/// Offsets are register relative.
+const SYMFLAG_REGREL = 0x00000010;
+
+/// Offsets are frame relative.
+const SYMFLAG_FRAMEREL = 0x00000020;
+
+/// The symbol is a parameter.
+const SYMFLAG_PARAMETER = 0x00000040;
+
+/// The symbol is a local variable.
+const SYMFLAG_LOCAL = 0x00000080;
+
+/// The symbol is a constant.
+const SYMFLAG_CONSTANT = 0x00000100;
+
+/// The symbol is from the export table.
+const SYMFLAG_EXPORT = 0x00000200;
+
+/// The symbol is a forwarder.
+const SYMFLAG_FORWARDER = 0x00000400;
+
+/// The symbol is a known function.
+const SYMFLAG_FUNCTION = 0x00000800;
+
+/// The symbol is a virtual symbol created by the SymAddSymbol function.
+const SYMFLAG_VIRTUAL = 0x00001000;
+
+/// The symbol is a thunk.
+const SYMFLAG_THUNK = 0x00002000;
+
+/// The symbol is an offset into the TLS data area.
+const SYMFLAG_TLSREL = 0x00004000;
+
+/// The symbol is a managed code slot.
+const SYMFLAG_SLOT = 0x00008000;
+
+/// The symbol address is an offset relative to the beginning of the
+/// intermediate language block. This applies to managed code only.
+const SYMFLAG_ILREL = 0x00010000;
+
+/// The symbol is managed metadata.
+const SYMFLAG_METADATA = 0x00020000;
+
+/// The symbol is a CLR token.
+const SYMFLAG_CLR_TOKEN = 0x00040000;
+
+// -----------------------------------------------------------------------------
+// Token information constants
+// -----------------------------------------------------------------------------
+
+/// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
+/// type of information being assigned to or retrieved from an access token.
+///
+/// {@category Struct}
+class TOKEN_INFORMATION_CLASS {
+  static const TokenUser = 1;
+  static const TokenGroups = 2;
+  static const TokenPrivileges = 3;
+  static const TokenOwner = 4;
+  static const TokenPrimaryGroup = 5;
+  static const TokenDefaultDacl = 6;
+  static const TokenSource = 7;
+  static const TokenType = 8;
+  static const TokenImpersonationLevel = 9;
+  static const TokenStatistics = 10;
+  static const TokenRestrictedSids = 11;
+  static const TokenSessionId = 12;
+  static const TokenGroupsAndPrivileges = 13;
+  static const TokenSessionReference = 14;
+  static const TokenSandBoxInert = 15;
+  static const TokenAuditPolicy = 16;
+  static const TokenOrigin = 17;
+  static const TokenElevationType = 18;
+  static const TokenLinkedToken = 19;
+  static const TokenElevation = 20;
+  static const TokenHasRestrictions = 21;
+  static const TokenAccessInformation = 22;
+  static const TokenVirtualizationAllowed = 23;
+  static const TokenVirtualizationEnabled = 24;
+  static const TokenIntegrityLevel = 25;
+  static const TokenUIAccess = 26;
+  static const TokenMandatoryPolicy = 27;
+  static const TokenLogonSid = 28;
+  static const TokenIsAppContainer = 29;
+  static const TokenCapabilities = 30;
+  static const TokenAppContainerSid = 31;
+  static const TokenAppContainerNumber = 32;
+  static const TokenUserClaimAttributes = 33;
+  static const TokenDeviceClaimAttributes = 34;
+  static const TokenRestrictedUserClaimAttributes = 35;
+  static const TokenRestrictedDeviceClaimAttributes = 36;
+  static const TokenDeviceGroups = 37;
+  static const TokenRestrictedDeviceGroups = 38;
+  static const TokenSecurityAttributes = 39;
+  static const TokenIsRestricted = 40;
+  static const TokenProcessTrustLevel = 41;
+  static const TokenPrivateNameSpace = 42;
+  static const TokenSingletonAttributes = 43;
+  static const TokenBnoIsolation = 44;
+  static const TokenChildProcessFlags = 45;
+  static const TokenIsLessPrivilegedAppContainer = 46;
+  static const TokenIsSandboxed = 47;
+  static const TokenOriginatingProcessTrustLevel = 48;
+}
+
+// -----------------------------------------------------------------------------
+// Smartcard constants
+// -----------------------------------------------------------------------------
+
+/// A smart card holder verification (CHV) attempt failed.
+const SCARD_AUDIT_CHV_FAILURE = 0x0;
+
+/// A smart card holder verification (CHV) attempt succeeded.
+const SCARD_AUDIT_CHV_SUCCESS = 0x1;
+
+/// No transmission protocol is active.
+const SCARD_PROTOCOL_UNDEFINED = 0x00000000;
+
+/// The ISO 7816/3 T=0 protocol is in use.
+const SCARD_PROTOCOL_T0 = 0x00000001;
+
+/// The ISO 7816/3 T=1 protocol is in use.
+const SCARD_PROTOCOL_T1 = 0x00000002;
+
+/// The Raw Transfer protocol is in use.
+const SCARD_PROTOCOL_RAW = 0x00010000;
+
+/// Bitwise OR combination of both of the two International Standards
+/// Organization (IS0) transmission protocols SCARD_PROTOCOL_T0 and
+/// SCARD_PROTOCOL_T1.
+const SCARD_PROTOCOL_Tx = (SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1);
+
+/// Use the implicit protocol of the card with standard parameters.
+const SCARD_PROTOCOL_DEFAULT = 0x80000000;
+
+/// Use the best possible communication parameters.
+const SCARD_PROTOCOL_OPTIMAL = 0x00000000;
+
+/// Remove power from the smart card.
+const SCARD_POWER_DOWN = 0;
+
+/// Power down the smart card and power it up again.
+const SCARD_COLD_RESET = 1;
+
+/// Reset the smart card without removing power.
+const SCARD_WARM_RESET = 2;
+
+/// The reader driver has no information concerning the current state of the
+/// reader.
+const SCARD_UNKNOWN = 0;
+
+/// There is no card in the reader.
+const SCARD_ABSENT = 1;
+
+/// There is a card in the reader, but it has not been moved into position for
+/// use.
+const SCARD_PRESENT = 2;
+
+/// There is a card in the reader in position for use. The card is not powered.
+const SCARD_SWALLOWED = 3;
+
+/// Power is being provided to the card, but the reader driver is unaware of the
+/// mode of the card.
+const SCARD_POWERED = 4;
+
+/// The card has been reset and is awaiting PTS negotiation.
+const SCARD_NEGOTIABLE = 5;
+
+/// The card has been reset and specific communication protocols have been
+/// established.
+const SCARD_SPECIFIC = 6;
+
+/// This application is not willing to share the card with other applications.
+const SCARD_SHARE_EXCLUSIVE = 1;
+
+/// This application is willing to share the card with other applications.
+const SCARD_SHARE_SHARED = 2;
+
+/// This application is allocating the reader for its private use, and will be
+/// controlling it directly. No other applications are allowed access to it.
+const SCARD_SHARE_DIRECT = 3;
+
+/// Don't do anything special on close.
+const SCARD_LEAVE_CARD = 0;
+
+/// Reset the card on close.
+const SCARD_RESET_CARD = 1;
+
+/// Power down the card on close.
+const SCARD_UNPOWER_CARD = 2;
+
+/// Eject the card on close.
+const SCARD_EJECT_CARD = 3;
+
+/// Database operations are performed within the domain of the user.
+const SCARD_SCOPE_USER = 0;
+
+/// Database operations are performed within the domain of the current terminal.
+const SCARD_SCOPE_TERMINAL = 1;
+
+/// Database operations are performed within the domain of the system. The
+/// calling application must have appropriate access permissions for any
+/// database actions.
+const SCARD_SCOPE_SYSTEM = 2;
+
+/// The function retrieves the name of the smart card's primary service provider as a GUID string.
+const SCARD_PROVIDER_PRIMARY = 1;
+
+/// The function retrieves the name of the cryptographic service provider.
+const SCARD_PROVIDER_CSP = 2;
+
+/// The function retrieves the name of the smart card key storage provider (KSP).
+const SCARD_PROVIDER_KSP = 3;
+
+/// The function retrieves the name of the card module.
+const SCARD_PROVIDER_CARD_MODULE = 0x80000001;
+
+/// Selects the smart card if only one smart card meets the criteria, or returns
+/// information about the user's selection if more than one smart card meets the
+/// criteria.
+const SC_DLG_MINIMAL_UI = 0x01;
+
+/// Selects the first available card.
+const SC_DLG_NO_UI = 0x02;
+
+/// Connects to the card selected by the user from the smart card Select Card
+/// dialog box.
+const SC_DLG_FORCE_UI = 0x04;

@@ -97,9 +97,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_LanguageTag_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_get_LanguageTag_Native>>>()
+          .value
           .asFunction<_get_LanguageTag_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -109,43 +112,55 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  int Check(Pointer<Utf16> text, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_Check_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_Check_Dart>()(ptr.ref.lpVtbl, text, value);
+  int Check(Pointer<Utf16> text, Pointer<Pointer> value) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_Check_Native>>>()
+      .value
+      .asFunction<_Check_Dart>()(ptr.ref.lpVtbl, text, value);
 
   int Suggest(Pointer<Utf16> word, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_Suggest_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_Suggest_Native>>>()
+          .value
           .asFunction<_Suggest_Dart>()(ptr.ref.lpVtbl, word, value);
 
-  int Add(Pointer<Utf16> word) =>
-      Pointer<NativeFunction<_Add_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Add_Dart>()(ptr.ref.lpVtbl, word);
+  int Add(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Add_Native>>>()
+      .value
+      .asFunction<_Add_Dart>()(ptr.ref.lpVtbl, word);
 
-  int Ignore(Pointer<Utf16> word) =>
-      Pointer<NativeFunction<_Ignore_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_Ignore_Dart>()(ptr.ref.lpVtbl, word);
+  int Ignore(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_Ignore_Native>>>()
+      .value
+      .asFunction<_Ignore_Dart>()(ptr.ref.lpVtbl, word);
 
   int AutoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) =>
-      Pointer<NativeFunction<_AutoCorrect_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<Pointer<NativeFunction<_AutoCorrect_Native>>>()
+          .value
           .asFunction<_AutoCorrect_Dart>()(ptr.ref.lpVtbl, from, to);
 
   int GetOptionValue(Pointer<Utf16> optionId, Pointer<Uint8> value) =>
-      Pointer<NativeFunction<_GetOptionValue_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<Pointer<NativeFunction<_GetOptionValue_Native>>>()
+          .value
           .asFunction<_GetOptionValue_Dart>()(ptr.ref.lpVtbl, optionId, value);
 
   Pointer get OptionIds {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_OptionIds_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_get_OptionIds_Native>>>()
+          .value
           .asFunction<_get_OptionIds_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -159,9 +174,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(11)
+          .cast<Pointer<NativeFunction<_get_Id_Native>>>()
+          .value
           .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -175,9 +193,12 @@ class ISpellChecker extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = Pointer<NativeFunction<_get_LocalizedName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<Pointer<NativeFunction<_get_LocalizedName_Native>>>()
+          .value
           .asFunction<_get_LocalizedName_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
@@ -188,25 +209,32 @@ class ISpellChecker extends IUnknown {
   }
 
   int add_SpellCheckerChanged(Pointer handler, Pointer<Uint32> eventCookie) =>
-      Pointer<NativeFunction<_add_SpellCheckerChanged_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(13).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(13)
+              .cast<Pointer<NativeFunction<_add_SpellCheckerChanged_Native>>>()
+              .value
               .asFunction<_add_SpellCheckerChanged_Dart>()(
           ptr.ref.lpVtbl, handler, eventCookie);
 
-  int remove_SpellCheckerChanged(int eventCookie) =>
-      Pointer<NativeFunction<_remove_SpellCheckerChanged_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
-              .asFunction<_remove_SpellCheckerChanged_Dart>()(
-          ptr.ref.lpVtbl, eventCookie);
+  int remove_SpellCheckerChanged(int eventCookie) => ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<Pointer<NativeFunction<_remove_SpellCheckerChanged_Native>>>()
+          .value
+          .asFunction<_remove_SpellCheckerChanged_Dart>()(
+      ptr.ref.lpVtbl, eventCookie);
 
   int GetOptionDescription(Pointer<Utf16> optionId, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_GetOptionDescription_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(15)
+              .cast<Pointer<NativeFunction<_GetOptionDescription_Native>>>()
+              .value
               .asFunction<_GetOptionDescription_Dart>()(
           ptr.ref.lpVtbl, optionId, value);
 
   int ComprehensiveCheck(Pointer<Utf16> text, Pointer<Pointer> value) =>
-      Pointer<NativeFunction<_ComprehensiveCheck_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(16)
+          .cast<Pointer<NativeFunction<_ComprehensiveCheck_Native>>>()
+          .value
           .asFunction<_ComprehensiveCheck_Dart>()(ptr.ref.lpVtbl, text, value);
 }

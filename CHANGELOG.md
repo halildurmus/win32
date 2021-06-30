@@ -1,3 +1,51 @@
+## 2.2.4
+
+- Add various DWM and subclassing APIs
+
+## 2.2.3
+
+- Lazily evaluate `lookupFunction` FFI calls for improved performance.
+- Add APIs for hooks and a few extra kernel32 APIs
+- Add some more tests.
+
+## 2.2.2
+
+- Add Windows Spooler library support.
+
+## 2.2.1
+
+- Add initial support for the Windows Socket library (winsock2).
+
+## 2.2.0
+
+- Fixes convertToHString to return an int, since `HSTRING`s are handles. This is
+  a breaking change for any apps that use WinRT APIs, but given the limited
+  availability of WinRT classes that fall into this category, updating only the
+  minor version.
+- Add low-level Device IO and structured storage APIs and diskinfo.dart sample.
+
+## 2.1.5
+
+- Add smart card reader support.
+
+## 2.1.4
+
+- Add helper functions for COM along with extra documentation.
+
+## 2.1.3
+
+- Fix bug in shell COM APIs.
+- Add examples for shortcut creation and named pipes.
+
+## 2.1.2
+
+- Add serial port comms APIs
+- Add additional shell COM APIs
+
+## 2.1.1
+
+- Work around FFI regression in Dart master and dev builds.
+
 ## 2.1.0
 
 - Upgrade to Dart 2.13, which supports packed structs and arrays in FFI. This

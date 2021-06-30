@@ -52,28 +52,34 @@ class IErrorInfo extends IUnknown {
 
   IErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetGUID(Pointer<GUID> pGUID) =>
-      Pointer<NativeFunction<_GetGUID_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetGUID_Dart>()(ptr.ref.lpVtbl, pGUID);
+  int GetGUID(Pointer<GUID> pGUID) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetGUID_Native>>>()
+      .value
+      .asFunction<_GetGUID_Dart>()(ptr.ref.lpVtbl, pGUID);
 
-  int GetSource(Pointer<Pointer<Utf16>> pBstrSource) =>
-      Pointer<NativeFunction<_GetSource_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetSource_Dart>()(ptr.ref.lpVtbl, pBstrSource);
+  int GetSource(Pointer<Pointer<Utf16>> pBstrSource) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetSource_Native>>>()
+      .value
+      .asFunction<_GetSource_Dart>()(ptr.ref.lpVtbl, pBstrSource);
 
   int GetDescription(Pointer<Pointer<Utf16>> pBstrDescription) =>
-      Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<Pointer<NativeFunction<_GetDescription_Native>>>()
+          .value
           .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pBstrDescription);
 
-  int GetHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) =>
-      Pointer<NativeFunction<_GetHelpFile_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetHelpFile_Dart>()(ptr.ref.lpVtbl, pBstrHelpFile);
+  int GetHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetHelpFile_Native>>>()
+      .value
+      .asFunction<_GetHelpFile_Dart>()(ptr.ref.lpVtbl, pBstrHelpFile);
 
-  int GetHelpContext(Pointer<Uint32> pdwHelpContext) =>
-      Pointer<NativeFunction<_GetHelpContext_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetHelpContext_Dart>()(ptr.ref.lpVtbl, pdwHelpContext);
+  int GetHelpContext(Pointer<Uint32> pdwHelpContext) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetHelpContext_Native>>>()
+      .value
+      .asFunction<_GetHelpContext_Dart>()(ptr.ref.lpVtbl, pdwHelpContext);
 }

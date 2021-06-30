@@ -118,81 +118,103 @@ class IMoniker extends IPersistStream {
 
   int BindToObject(Pointer pbc, Pointer pmkToLeft, Pointer<GUID> riidResult,
           Pointer<Pointer> ppvResult) =>
-      Pointer<NativeFunction<_BindToObject_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_BindToObject_Native>>>()
+              .value
               .asFunction<_BindToObject_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, riidResult, ppvResult);
 
   int BindToStorage(Pointer pbc, Pointer pmkToLeft, Pointer<GUID> riid,
           Pointer<Pointer> ppvObj) =>
-      Pointer<NativeFunction<_BindToStorage_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<Pointer<NativeFunction<_BindToStorage_Native>>>()
+              .value
               .asFunction<_BindToStorage_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, riid, ppvObj);
 
   int Reduce(Pointer pbc, int dwReduceHowFar, Pointer<Pointer> ppmkToLeft,
           Pointer<Pointer> ppmkReduced) =>
-      Pointer<NativeFunction<_Reduce_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_Reduce_Native>>>()
+              .value
               .asFunction<_Reduce_Dart>()(
           ptr.ref.lpVtbl, pbc, dwReduceHowFar, ppmkToLeft, ppmkReduced);
 
   int ComposeWith(Pointer pmkRight, int fOnlyIfNotGeneric,
           Pointer<Pointer> ppmkComposite) =>
-      Pointer<NativeFunction<_ComposeWith_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_ComposeWith_Native>>>()
+              .value
               .asFunction<_ComposeWith_Dart>()(
           ptr.ref.lpVtbl, pmkRight, fOnlyIfNotGeneric, ppmkComposite);
 
-  int Enum(int fForward, Pointer<Pointer> ppenumMoniker) =>
-      Pointer<NativeFunction<_Enum_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_Enum_Dart>()(ptr.ref.lpVtbl, fForward, ppenumMoniker);
+  int Enum(int fForward, Pointer<Pointer> ppenumMoniker) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_Enum_Native>>>()
+      .value
+      .asFunction<_Enum_Dart>()(ptr.ref.lpVtbl, fForward, ppenumMoniker);
 
-  int IsEqual(Pointer pmkOtherMoniker) =>
-      Pointer<NativeFunction<_IsEqual_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pmkOtherMoniker);
+  int IsEqual(Pointer pmkOtherMoniker) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_IsEqual_Native>>>()
+      .value
+      .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pmkOtherMoniker);
 
-  int Hash(Pointer<Uint32> pdwHash) =>
-      Pointer<NativeFunction<_Hash_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_Hash_Dart>()(ptr.ref.lpVtbl, pdwHash);
+  int Hash(Pointer<Uint32> pdwHash) => ptr.ref.lpVtbl.value
+      .elementAt(14)
+      .cast<Pointer<NativeFunction<_Hash_Native>>>()
+      .value
+      .asFunction<_Hash_Dart>()(ptr.ref.lpVtbl, pdwHash);
 
   int IsRunning(Pointer pbc, Pointer pmkToLeft, Pointer pmkNewlyRunning) =>
-      Pointer<NativeFunction<_IsRunning_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(15)
+              .cast<Pointer<NativeFunction<_IsRunning_Native>>>()
+              .value
               .asFunction<_IsRunning_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pmkNewlyRunning);
 
   int GetTimeOfLastChange(
           Pointer pbc, Pointer pmkToLeft, Pointer<FILETIME> pFileTime) =>
-      Pointer<NativeFunction<_GetTimeOfLastChange_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(16)
+              .cast<Pointer<NativeFunction<_GetTimeOfLastChange_Native>>>()
+              .value
               .asFunction<_GetTimeOfLastChange_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pFileTime);
 
-  int Inverse(Pointer<Pointer> ppmk) =>
-      Pointer<NativeFunction<_Inverse_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_Inverse_Dart>()(ptr.ref.lpVtbl, ppmk);
+  int Inverse(Pointer<Pointer> ppmk) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_Inverse_Native>>>()
+      .value
+      .asFunction<_Inverse_Dart>()(ptr.ref.lpVtbl, ppmk);
 
   int CommonPrefixWith(Pointer pmkOther, Pointer<Pointer> ppmkPrefix) =>
-      Pointer<NativeFunction<_CommonPrefixWith_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(18).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(18)
+              .cast<Pointer<NativeFunction<_CommonPrefixWith_Native>>>()
+              .value
               .asFunction<_CommonPrefixWith_Dart>()(
           ptr.ref.lpVtbl, pmkOther, ppmkPrefix);
 
   int RelativePathTo(Pointer pmkOther, Pointer<Pointer> ppmkRelPath) =>
-      Pointer<NativeFunction<_RelativePathTo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(19).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(19)
+              .cast<Pointer<NativeFunction<_RelativePathTo_Native>>>()
+              .value
               .asFunction<_RelativePathTo_Dart>()(
           ptr.ref.lpVtbl, pmkOther, ppmkRelPath);
 
   int GetDisplayName(Pointer pbc, Pointer pmkToLeft,
           Pointer<Pointer<Utf16>> ppszDisplayName) =>
-      Pointer<NativeFunction<_GetDisplayName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(20).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(20)
+              .cast<Pointer<NativeFunction<_GetDisplayName_Native>>>()
+              .value
               .asFunction<_GetDisplayName_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, ppszDisplayName);
 
@@ -202,13 +224,16 @@ class IMoniker extends IPersistStream {
           Pointer<Utf16> pszDisplayName,
           Pointer<Uint32> pchEaten,
           Pointer<Pointer> ppmkOut) =>
-      Pointer<NativeFunction<_ParseDisplayName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(21).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(21)
+              .cast<Pointer<NativeFunction<_ParseDisplayName_Native>>>()
+              .value
               .asFunction<_ParseDisplayName_Dart>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pszDisplayName, pchEaten, ppmkOut);
 
-  int IsSystemMoniker(Pointer<Uint32> pdwMksys) =>
-      Pointer<NativeFunction<_IsSystemMoniker_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(22).value)
-          .asFunction<_IsSystemMoniker_Dart>()(ptr.ref.lpVtbl, pdwMksys);
+  int IsSystemMoniker(Pointer<Uint32> pdwMksys) => ptr.ref.lpVtbl.value
+      .elementAt(22)
+      .cast<Pointer<NativeFunction<_IsSystemMoniker_Native>>>()
+      .value
+      .asFunction<_IsSystemMoniker_Dart>()(ptr.ref.lpVtbl, pdwMksys);
 }

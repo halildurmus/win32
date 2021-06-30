@@ -39,13 +39,16 @@ class IConnectionPointContainer extends IUnknown {
 
   IConnectionPointContainer(Pointer<COMObject> ptr) : super(ptr);
 
-  int EnumConnectionPoints(Pointer<Pointer> ppEnum) =>
-      Pointer<NativeFunction<_EnumConnectionPoints_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_EnumConnectionPoints_Dart>()(ptr.ref.lpVtbl, ppEnum);
+  int EnumConnectionPoints(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_EnumConnectionPoints_Native>>>()
+      .value
+      .asFunction<_EnumConnectionPoints_Dart>()(ptr.ref.lpVtbl, ppEnum);
 
   int FindConnectionPoint(Pointer<GUID> riid, Pointer<Pointer> ppCP) =>
-      Pointer<NativeFunction<_FindConnectionPoint_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_FindConnectionPoint_Native>>>()
+          .value
           .asFunction<_FindConnectionPoint_Dart>()(ptr.ref.lpVtbl, riid, ppCP);
 }

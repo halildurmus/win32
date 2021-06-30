@@ -41,15 +41,17 @@ class IFileOpenDialog extends IFileDialog {
 
   IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetResults(Pointer<Pointer> ppenum) =>
-      Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
+  int GetResults(Pointer<Pointer> ppenum) => ptr.ref.lpVtbl.value
+      .elementAt(27)
+      .cast<Pointer<NativeFunction<_GetResults_Native>>>()
+      .value
+      .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
 
-  int GetSelectedItems(Pointer<Pointer> ppsai) =>
-      Pointer<NativeFunction<_GetSelectedItems_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
+  int GetSelectedItems(Pointer<Pointer> ppsai) => ptr.ref.lpVtbl.value
+      .elementAt(28)
+      .cast<Pointer<NativeFunction<_GetSelectedItems_Native>>>()
+      .value
+      .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
 }
 
 /// {@category com}

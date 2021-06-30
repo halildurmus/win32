@@ -50,27 +50,33 @@ class IFileIsInUse extends IUnknown {
 
   IFileIsInUse(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetAppName(Pointer<Pointer<Utf16>> ppszName) =>
-      Pointer<NativeFunction<_GetAppName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetAppName_Dart>()(ptr.ref.lpVtbl, ppszName);
+  int GetAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_GetAppName_Native>>>()
+      .value
+      .asFunction<_GetAppName_Dart>()(ptr.ref.lpVtbl, ppszName);
 
-  int GetUsage(Pointer<Uint32> pfut) =>
-      Pointer<NativeFunction<_GetUsage_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetUsage_Dart>()(ptr.ref.lpVtbl, pfut);
+  int GetUsage(Pointer<Uint32> pfut) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetUsage_Native>>>()
+      .value
+      .asFunction<_GetUsage_Dart>()(ptr.ref.lpVtbl, pfut);
 
-  int GetCapabilities(Pointer<Uint32> pdwCapFlags) =>
-      Pointer<NativeFunction<_GetCapabilities_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetCapabilities_Dart>()(ptr.ref.lpVtbl, pdwCapFlags);
+  int GetCapabilities(Pointer<Uint32> pdwCapFlags) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetCapabilities_Native>>>()
+      .value
+      .asFunction<_GetCapabilities_Dart>()(ptr.ref.lpVtbl, pdwCapFlags);
 
-  int GetSwitchToHWND(Pointer<IntPtr> phwnd) =>
-      Pointer<NativeFunction<_GetSwitchToHWND_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetSwitchToHWND_Dart>()(ptr.ref.lpVtbl, phwnd);
+  int GetSwitchToHWND(Pointer<IntPtr> phwnd) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetSwitchToHWND_Native>>>()
+      .value
+      .asFunction<_GetSwitchToHWND_Dart>()(ptr.ref.lpVtbl, phwnd);
 
-  int CloseFile() => Pointer<NativeFunction<_CloseFile_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(7).value)
+  int CloseFile() => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_CloseFile_Native>>>()
+      .value
       .asFunction<_CloseFile_Dart>()(ptr.ref.lpVtbl);
 }

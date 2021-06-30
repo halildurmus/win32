@@ -31,7 +31,7 @@ class WindowsException extends COMException {
   /// `FormatMessage()` function. For example, `E_INVALIDARG` (0x80070057)
   /// converts to `The parameter is incorrect.`
   String convertWindowsErrorToString(int windowsError) {
-    final buffer = calloc<Uint16>(256).cast<Utf16>();
+    final buffer = wsalloc(256);
 
     // If FormatMessage fails, it returns 0; otherwise it returns the number of
     // characters in the buffer.

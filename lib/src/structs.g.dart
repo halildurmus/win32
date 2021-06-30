@@ -9,7 +9,8 @@
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types ignore_for_file: camel_case_extensions
+// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_extensions
 //
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
@@ -99,6 +100,36 @@ class ACTCTX extends Struct {
   external Pointer<Utf16> lpApplicationName;
   @IntPtr()
   external int hModule;
+}
+
+/// The ADDJOB_INFO_1 structure identifies a print job as well as the
+/// directory and file in which an application can store that job.
+///
+/// {@category Struct}
+class ADDJOB_INFO_1 extends Struct {
+  external Pointer<Utf16> Path;
+  @Uint32()
+  external int JobId;
+}
+
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class addrinfo extends Struct {
+  @Int32()
+  external int ai_flags;
+  @Int32()
+  external int ai_family;
+  @Int32()
+  external int ai_socktype;
+  @Int32()
+  external int ai_protocol;
+  @IntPtr()
+  external int ai_addrlen;
+  external Pointer<Utf16> ai_canonname;
+  external Pointer<SOCKADDR> ai_addr;
+  external Pointer<addrinfo> ai_next;
 }
 
 /// Contains parameters used during a moniker-binding operation.
@@ -207,6 +238,43 @@ class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// The BLUETOOTH_DEVICE_INFO structure provides information about a
+/// Bluetooth device.
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+  external BLUETOOTH_ADDRESS Address;
+  @Uint32()
+  external int ulClassofDevice;
+  @Int32()
+  external int fConnected;
+  @Int32()
+  external int fRemembered;
+  @Int32()
+  external int fAuthenticated;
+  external SYSTEMTIME stLastSeen;
+  external SYSTEMTIME stLastUsed;
+  @Array(248)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 248; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(248, '\x00');
+    for (var i = 0; i < 248; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
 /// for Bluetooth device searches.
 ///
@@ -248,6 +316,89 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
   external Array<Uint8> C;
   @Array(16)
   external Array<Uint8> R;
+}
+
+/// The BLUETOOTH_RADIO_INFO structure provides information about a
+/// Bluetooth radio.
+///
+/// {@category Struct}
+class BLUETOOTH_RADIO_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+  external BLUETOOTH_ADDRESS address;
+  @Array(248)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 248; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(248, '\x00');
+    for (var i = 0; i < 248; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int ulClassofDevice;
+  @Uint16()
+  external int lmpSubversion;
+  @Uint16()
+  external int manufacturer;
+}
+
+/// Contains information about a window that denied a request from
+/// BroadcastSystemMessageEx.
+///
+/// {@category Struct}
+class BSMINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hdesk;
+  @IntPtr()
+  external int hwnd;
+  external LUID luid;
+}
+
+/// Contains information that the GetFileInformationByHandle function
+/// retrieves.
+///
+/// {@category Struct}
+class BY_HANDLE_FILE_INFORMATION extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+  external FILETIME ftCreationTime;
+  external FILETIME ftLastAccessTime;
+  external FILETIME ftLastWriteTime;
+  @Uint32()
+  external int dwVolumeSerialNumber;
+  @Uint32()
+  external int nFileSizeHigh;
+  @Uint32()
+  external int nFileSizeLow;
+  @Uint32()
+  external int nNumberOfLinks;
+  @Uint32()
+  external int nFileIndexHigh;
+  @Uint32()
+  external int nFileIndexLow;
+}
+
+/// Contains extended result information obtained by calling the
+/// ChangeWindowMessageFilterEx function.
+///
+/// {@category Struct}
+class CHANGEFILTERSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int ExtStatus;
 }
 
 /// Contains information the ChooseColor function uses to initialize the
@@ -348,6 +499,74 @@ class COLORADJUSTMENT extends Struct {
 class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
   external Pointer<Utf16> pszSpec;
+}
+
+/// Contains information about the configuration state of a communications
+/// device.
+///
+/// {@category Struct}
+class COMMCONFIG extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint16()
+  external int wVersion;
+  @Uint16()
+  external int wReserved;
+  external DCB dcb;
+  @Uint32()
+  external int dwProviderSubType;
+  @Uint32()
+  external int dwProviderOffset;
+  @Uint32()
+  external int dwProviderSize;
+  @Array(1)
+  external Array<Uint16> _wcProviderData;
+
+  String get wcProviderData {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_wcProviderData[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set wcProviderData(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _wcProviderData[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Contains the time-out parameters for a communications device. The
+/// parameters determine the behavior of ReadFile, WriteFile, ReadFileEx,
+/// and WriteFileEx operations on the device.
+///
+/// {@category Struct}
+class COMMTIMEOUTS extends Struct {
+  @Uint32()
+  external int ReadIntervalTimeout;
+  @Uint32()
+  external int ReadTotalTimeoutMultiplier;
+  @Uint32()
+  external int ReadTotalTimeoutConstant;
+  @Uint32()
+  external int WriteTotalTimeoutMultiplier;
+  @Uint32()
+  external int WriteTotalTimeoutConstant;
+}
+
+/// Contains information about a communications device. This structure is
+/// filled by the ClearCommError function.
+///
+/// {@category Struct}
+class COMSTAT extends Struct {
+  @Uint32()
+  external int _bitfield;
+  @Uint32()
+  external int cbInQue;
+  @Uint32()
+  external int cbOutQue;
 }
 
 /// Contains information about the console cursor.
@@ -460,6 +679,55 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 }
 
+/// Contains global cursor information.
+///
+/// {@category Struct}
+class CURSORINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int flags;
+  @IntPtr()
+  external int hCursor;
+  external POINT ptScreenPos;
+}
+
+/// Defines the control setting for a serial communications device.
+///
+/// {@category Struct}
+class DCB extends Struct {
+  @Uint32()
+  external int DCBlength;
+  @Uint32()
+  external int BaudRate;
+  @Uint32()
+  external int _bitfield;
+  @Uint16()
+  external int wReserved;
+  @Uint16()
+  external int XonLim;
+  @Uint16()
+  external int XoffLim;
+  @Uint8()
+  external int ByteSize;
+  @Uint8()
+  external int Parity;
+  @Uint8()
+  external int StopBits;
+  @Uint8()
+  external int XonChar;
+  @Uint8()
+  external int XoffChar;
+  @Uint8()
+  external int ErrorChar;
+  @Uint8()
+  external int EofChar;
+  @Uint8()
+  external int EvtChar;
+  @Uint16()
+  external int wReserved1;
+}
+
 /// The DESIGNVECTOR structure is used by an application to specify values
 /// for the axes of a multiple master font.
 ///
@@ -490,6 +758,33 @@ class DIBSECTION extends Struct {
   external int dshSection;
   @Uint32()
   external int dsOffset;
+}
+
+/// Describes the geometry of disk devices and media.
+///
+/// {@category Struct}
+class DISK_GEOMETRY extends Struct {
+  @Int64()
+  external int Cylinders;
+  @Uint32()
+  external int MediaType;
+  @Uint32()
+  external int TracksPerCylinder;
+  @Uint32()
+  external int SectorsPerTrack;
+  @Uint32()
+  external int BytesPerSector;
+}
+
+/// Describes the extended geometry of disk devices and media.
+///
+/// {@category Struct}
+class DISK_GEOMETRY_EX extends Struct {
+  external DISK_GEOMETRY Geometry;
+  @Int64()
+  external int DiskSize;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 /// Contains the arguments passed to a method or property.
@@ -569,6 +864,15 @@ class DLLVERSIONINFO extends Struct {
   external int dwPlatformID;
 }
 
+/// The DOC_INFO_1 structure describes a document that will be printed.
+///
+/// {@category Struct}
+class DOC_INFO_1 extends Struct {
+  external Pointer<Utf16> pDocName;
+  external Pointer<Utf16> pOutputFile;
+  external Pointer<Utf16> pDatatype;
+}
+
 /// The DRAWTEXTPARAMS structure contains extended formatting options for
 /// the DrawTextEx function.
 ///
@@ -584,6 +888,128 @@ class DRAWTEXTPARAMS extends Struct {
   external int iRightMargin;
   @Uint32()
   external int uiLengthDrawn;
+}
+
+/// Defines the options for the DrawThemeBackgroundEx function.
+///
+/// {@category Struct}
+class DTBGOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  external RECT rcClip;
+}
+
+/// Defines the options for the DrawThemeTextEx function.
+///
+/// {@category Struct}
+class DTTOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int crText;
+  @Uint32()
+  external int crBorder;
+  @Uint32()
+  external int crShadow;
+  @Int32()
+  external int iTextShadowType;
+  external POINT ptShadowOffset;
+  @Int32()
+  external int iBorderSize;
+  @Int32()
+  external int iFontPropId;
+  @Int32()
+  external int iColorPropId;
+  @Int32()
+  external int iStateId;
+  @Int32()
+  external int fApplyOverlay;
+  @Int32()
+  external int iGlowSize;
+  external Pointer<NativeFunction<DrawTextCallback>> pfnDrawTextCallback;
+  @IntPtr()
+  external int lParam;
+}
+
+/// Specifies Desktop Window Manager (DWM) blur-behind properties. Used by
+/// the DwmEnableBlurBehindWindow function.
+///
+/// {@category Struct}
+@Packed(1)
+class DWM_BLURBEHIND extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Int32()
+  external int fEnable;
+  @IntPtr()
+  external int hRgnBlur;
+  @Int32()
+  external int fTransitionOnMaximized;
+}
+
+/// The ENUMLOGFONTEX structure contains information about an enumerated
+/// font.
+///
+/// {@category Struct}
+class ENUMLOGFONTEX extends Struct {
+  external LOGFONT elfLogFont;
+  @Array(64)
+  external Array<Uint16> _elfFullName;
+
+  String get elfFullName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_elfFullName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfFullName(String value) {
+    final stringToStore = value.padRight(64, '\x00');
+    for (var i = 0; i < 64; i++) {
+      _elfFullName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(32)
+  external Array<Uint16> _elfStyle;
+
+  String get elfStyle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfStyle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfStyle(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _elfStyle[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(32)
+  external Array<Uint16> _elfScript;
+
+  String get elfScript {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfScript[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfScript(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _elfScript[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Describes an exception that occurred during IDispatch::Invoke.
@@ -603,6 +1029,19 @@ class EXCEPINFO extends Struct {
   external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
   @Int32()
   external int scode;
+}
+
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for
+/// readability using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class fd_set extends Struct {
+  @Uint32()
+  external int fd_count;
+  @Array(64)
+  external Array<IntPtr> fd_array;
 }
 
 /// Contains a 64-bit value representing the number of 100-nanosecond
@@ -670,6 +1109,58 @@ class FUNCDESC extends Struct {
   external int wFuncFlags;
 }
 
+/// Gets and sets the configuration for enabling gesture messages and the
+/// type of this configuration.
+///
+/// {@category Struct}
+class GESTURECONFIG extends Struct {
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwWant;
+  @Uint32()
+  external int dwBlock;
+}
+
+/// Stores information about a gesture.
+///
+/// {@category Struct}
+class GESTUREINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwID;
+  @IntPtr()
+  external int hwndTarget;
+  external POINTS ptsLocation;
+  @Uint32()
+  external int dwInstanceID;
+  @Uint32()
+  external int dwSequenceID;
+  @Uint64()
+  external int ullArguments;
+  @Uint32()
+  external int cbExtraArgs;
+}
+
+/// When transmitted with WM_GESTURENOTIFY messages, passes information
+/// about a gesture.
+///
+/// {@category Struct}
+class GESTURENOTIFYSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTarget;
+  external POINTS ptsLocation;
+  @Uint32()
+  external int dwInstanceID;
+}
+
 /// Contains information about a GUI thread.
 ///
 /// {@category Struct}
@@ -691,6 +1182,97 @@ class GUITHREADINFO extends Struct {
   @IntPtr()
   external int hwndCaret;
   external RECT rcCaret;
+}
+
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free
+/// any of its components. Furthermore, only one copy of the hostent
+/// structure is allocated per thread, and an application should therefore
+/// copy any information that it needs before issuing any other Windows
+/// Sockets API calls.
+///
+/// {@category Struct}
+class hostent extends Struct {
+  external Pointer<Utf8> h_name;
+  external Pointer<Pointer<Int8>> h_aliases;
+  @Int16()
+  external int h_addrtype;
+  @Int16()
+  external int h_length;
+  external Pointer<Pointer<Int8>> h_addr_list;
+}
+
+/// Contains information about an icon or a cursor.
+///
+/// {@category Struct}
+class ICONINFO extends Struct {
+  @Int32()
+  external int fIcon;
+  @Uint32()
+  external int xHotspot;
+  @Uint32()
+  external int yHotspot;
+  @IntPtr()
+  external int hbmMask;
+  @IntPtr()
+  external int hbmColor;
+}
+
+/// Contains information about an icon or a cursor. Extends ICONINFO. Used
+/// by GetIconInfoEx.
+///
+/// {@category Struct}
+class ICONINFOEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int fIcon;
+  @Uint32()
+  external int xHotspot;
+  @Uint32()
+  external int yHotspot;
+  @IntPtr()
+  external int hbmMask;
+  @IntPtr()
+  external int hbmColor;
+  @Uint16()
+  external int wResID;
+  @Array(260)
+  external Array<Uint16> _szModName;
+
+  String get szModName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szModName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szModName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szModName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(260)
+  external Array<Uint16> _szResName;
+
+  String get szResName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szResName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szResName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szResName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains the IDL attributes of a type.
@@ -720,6 +1302,34 @@ class INITCOMMONCONTROLSEX extends Struct {
 /// {@category Struct}
 class ITEMIDLIST extends Struct {
   external SHITEMID mkid;
+}
+
+/// The JOB_INFO_1 structure specifies print-job information such as the
+/// job-identifier value, the name of the printer for which the job is
+/// spooled, the name of the machine that created the print job, the name
+/// of the user that owns the print job, and so on.
+///
+/// {@category Struct}
+class JOB_INFO_1 extends Struct {
+  @Uint32()
+  external int JobId;
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pMachineName;
+  external Pointer<Utf16> pUserName;
+  external Pointer<Utf16> pDocument;
+  external Pointer<Utf16> pDatatype;
+  external Pointer<Utf16> pStatus;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int Priority;
+  @Uint32()
+  external int Position;
+  @Uint32()
+  external int TotalPages;
+  @Uint32()
+  external int PagesPrinted;
+  external SYSTEMTIME Submitted;
 }
 
 /// Defines the specifics of a known folder.
@@ -768,6 +1378,55 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The LOGFONT structure defines the attributes of a font.
+///
+/// {@category Struct}
+class LOGFONT extends Struct {
+  @Int32()
+  external int lfHeight;
+  @Int32()
+  external int lfWidth;
+  @Int32()
+  external int lfEscapement;
+  @Int32()
+  external int lfOrientation;
+  @Int32()
+  external int lfWeight;
+  @Uint8()
+  external int lfItalic;
+  @Uint8()
+  external int lfUnderline;
+  @Uint8()
+  external int lfStrikeOut;
+  @Uint8()
+  external int lfCharSet;
+  @Uint8()
+  external int lfOutPrecision;
+  @Uint8()
+  external int lfClipPrecision;
+  @Uint8()
+  external int lfQuality;
+  @Uint8()
+  external int lfPitchAndFamily;
+  @Array(32)
+  external Array<Uint16> _lfFaceName;
+
+  String get lfFaceName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_lfFaceName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set lfFaceName(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _lfFaceName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// The LOGPALETTE structure defines a logical palette.
 ///
 /// {@category Struct}
@@ -778,6 +1437,34 @@ class LOGPALETTE extends Struct {
   external int palNumEntries;
   @Array(1)
   external Array<PALETTEENTRY> palPalEntry;
+}
+
+/// A Locally Unique Identifier (LUID). This is a value guaranteed to be
+/// unique only on the system on which it was generated. The uniqueness of
+/// a locally unique identifier is guaranteed only until the system is
+/// restarted.
+///
+/// {@category Struct}
+class LUID extends Struct {
+  @Uint32()
+  external int LowPart;
+  @Int32()
+  external int HighPart;
+}
+
+/// Returned by the GetThemeMargins function to define the margins of
+/// windows that have visual styles applied.
+///
+/// {@category Struct}
+class MARGINS extends Struct {
+  @Int32()
+  external int cxLeftWidth;
+  @Int32()
+  external int cxRightWidth;
+  @Int32()
+  external int cyTopHeight;
+  @Int32()
+  external int cyBottomHeight;
 }
 
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
@@ -886,6 +1573,44 @@ class MENUITEMINFO extends Struct {
   external int hbmpItem;
 }
 
+/// Defines a menu item in a menu template.
+///
+/// {@category Struct}
+class MENUITEMTEMPLATE extends Struct {
+  @Uint16()
+  external int mtOption;
+  @Uint16()
+  external int mtID;
+  @Array(1)
+  external Array<Uint16> _mtString;
+
+  String get mtString {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_mtString[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set mtString(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _mtString[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Defines the header for a menu template. A complete menu template
+/// consists of a header and one or more menu item lists.
+///
+/// {@category Struct}
+class MENUITEMTEMPLATEHEADER extends Struct {
+  @Uint16()
+  external int versionNumber;
+  @Uint16()
+  external int offset;
+}
+
 /// Defines the metafile picture format used for exchanging metafile data
 /// through the clipboard.
 ///
@@ -953,7 +1678,23 @@ class MIDIINCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
   @Array(32)
-  external Array<Uint16> szPname;
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
   @Uint32()
   external int dwSupport;
 }
@@ -971,7 +1712,23 @@ class MIDIOUTCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
   @Array(32)
-  external Array<Uint16> szPname;
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
   @Uint16()
   external int wTechnology;
   @Uint16()
@@ -1031,6 +1788,82 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxPosition;
   external POINT ptMinTrackSize;
   external POINT ptMaxTrackSize;
+}
+
+/// Contains information about the capabilities of a modem.
+///
+/// {@category Struct}
+class MODEMDEVCAPS extends Struct {
+  @Uint32()
+  external int dwActualSize;
+  @Uint32()
+  external int dwRequiredSize;
+  @Uint32()
+  external int dwDevSpecificOffset;
+  @Uint32()
+  external int dwDevSpecificSize;
+  @Uint32()
+  external int dwModemProviderVersion;
+  @Uint32()
+  external int dwModemManufacturerOffset;
+  @Uint32()
+  external int dwModemManufacturerSize;
+  @Uint32()
+  external int dwModemModelOffset;
+  @Uint32()
+  external int dwModemModelSize;
+  @Uint32()
+  external int dwModemVersionOffset;
+  @Uint32()
+  external int dwModemVersionSize;
+  @Uint32()
+  external int dwDialOptions;
+  @Uint32()
+  external int dwCallSetupFailTimer;
+  @Uint32()
+  external int dwInactivityTimeout;
+  @Uint32()
+  external int dwSpeakerVolume;
+  @Uint32()
+  external int dwSpeakerMode;
+  @Uint32()
+  external int dwModemOptions;
+  @Uint32()
+  external int dwMaxDTERate;
+  @Uint32()
+  external int dwMaxDCERate;
+  @Array(1)
+  external Array<Uint8> abVariablePortion;
+}
+
+/// Contains information about a modem's configuration.
+///
+/// {@category Struct}
+class MODEMSETTINGS extends Struct {
+  @Uint32()
+  external int dwActualSize;
+  @Uint32()
+  external int dwRequiredSize;
+  @Uint32()
+  external int dwDevSpecificOffset;
+  @Uint32()
+  external int dwDevSpecificSize;
+  @Uint32()
+  external int dwCallSetupFailTimer;
+  @Uint32()
+  external int dwInactivityTimeout;
+  @Uint32()
+  external int dwSpeakerVolume;
+  @Uint32()
+  external int dwSpeakerMode;
+  @Uint32()
+  external int dwPreferredModemOptions;
+  @Uint32()
+  external int dwNegotiatedModemOptions;
+  @Uint32()
+  external int dwNegotiatedDCERate;
+  @Array(1)
+  external Array<Uint8> abVariablePortion;
 }
 
 /// Contains module data.
@@ -1146,6 +1979,39 @@ class NEWTEXTMETRIC extends Struct {
   external int ntmAvgWidth;
 }
 
+/// Used to specify values that are used by SetSimulatedProfileInfo to
+/// override current internet connection profile values in an RDP Child
+/// Session to support the simulation of specific metered internet
+/// connection conditions.
+///
+/// {@category Struct}
+class NLM_SIMULATED_PROFILE_INFO extends Struct {
+  @Array(256)
+  external Array<Uint16> _ProfileName;
+
+  String get ProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_ProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set ProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _ProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int cost;
+  @Uint32()
+  external int UsageInMegabytes;
+  @Uint32()
+  external int DataLimitInMegabytes;
+}
+
 /// Contains the scalable metrics associated with the nonclient area of a
 /// nonminimized window. This structure is used by the
 /// SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the
@@ -1180,6 +2046,117 @@ class NONCLIENTMETRICS extends Struct {
   external LOGFONT lfMessageFont;
   @Int32()
   external int iPaddedBorderWidth;
+}
+
+/// The OPENCARD_SEARCH_CRITERIA structure is used by the
+/// SCardUIDlgSelectCard function in order to recognize cards that meet the
+/// requirements set forth by the caller. You can, however, call
+/// SCardUIDlgSelectCard without using this structure.
+///
+/// {@category Struct}
+class OPENCARD_SEARCH_CRITERIA extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32()
+  external int nMaxGroupNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32()
+  external int cguidInterfaces;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32()
+  external int nMaxCardNames;
+  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+}
+
+/// The OPENCARDNAME structure contains the information that the
+/// GetOpenCardName function uses to initialize a smart card Select Card
+/// dialog box. Calling SCardUIDlgSelectCard with OPENCARDNAME_EX is
+/// recommended over calling GetOpenCardName with OPENCARDNAME.
+/// OPENCARDNAME is provided for backward compatibility.
+///
+/// {@category Struct}
+class OPENCARDNAME extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hSCardContext;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32()
+  external int nMaxGroupNames;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32()
+  external int nMaxCardNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32()
+  external int cguidInterfaces;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32()
+  external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32()
+  external int nMaxCard;
+  external Pointer<Utf16> lpstrTitle;
+  @Uint32()
+  external int dwFlags;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+  @Uint32()
+  external int dwActiveProtocol;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+  @IntPtr()
+  external int hCardHandle;
+}
+
+/// The OPENCARDNAME_EX structure contains the information that the
+/// SCardUIDlgSelectCard function uses to initialize a smart card Select
+/// Card dialog box.
+///
+/// {@category Struct}
+class OPENCARDNAME_EX extends Struct {
+  @Uint32()
+  external int dwStructSize;
+  @IntPtr()
+  external int hSCardContext;
+  @IntPtr()
+  external int hwndOwner;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<Utf16> lpstrTitle;
+  external Pointer<Utf16> lpstrSearchDesc;
+  @IntPtr()
+  external int hIcon;
+  external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwShareMode;
+  @Uint32()
+  external int dwPreferredProtocols;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32()
+  external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32()
+  external int nMaxCard;
+  @Uint32()
+  external int dwActiveProtocol;
+  @IntPtr()
+  external int hCardHandle;
 }
 
 /// Contains information that the GetOpenFileName and GetSaveFileName
@@ -1227,6 +2204,123 @@ class OPENFILENAME extends Struct {
   external int FlagsEx;
 }
 
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier,
+/// and descriptive text about the operating system. This structure is used
+/// with the GetVersionEx function.
+///
+/// {@category Struct}
+class OSVERSIONINFO extends Struct {
+  @Uint32()
+  external int dwOSVersionInfoSize;
+  @Uint32()
+  external int dwMajorVersion;
+  @Uint32()
+  external int dwMinorVersion;
+  @Uint32()
+  external int dwBuildNumber;
+  @Uint32()
+  external int dwPlatformId;
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
+
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szCSDVersion(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier,
+/// and information about product suites and the latest Service Pack
+/// installed on the system. This structure is used with the GetVersionEx
+/// and VerifyVersionInfo functions.
+///
+/// {@category Struct}
+class OSVERSIONINFOEXW extends Struct {
+  @Uint32()
+  external int dwOSVersionInfoSize;
+  @Uint32()
+  external int dwMajorVersion;
+  @Uint32()
+  external int dwMinorVersion;
+  @Uint32()
+  external int dwBuildNumber;
+  @Uint32()
+  external int dwPlatformId;
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
+
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szCSDVersion(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint16()
+  external int wServicePackMajor;
+  @Uint16()
+  external int wServicePackMinor;
+  @Uint16()
+  external int wSuiteMask;
+  @Uint8()
+  external int wProductType;
+  @Uint8()
+  external int wReserved;
+}
+
+/// Contains the information returned by a call to the
+/// GetQueuedCompletionStatusEx function.
+///
+/// {@category Struct}
+class OVERLAPPED_ENTRY extends Struct {
+  @IntPtr()
+  external int lpCompletionKey;
+  external Pointer<OVERLAPPED> lpOverlapped;
+  @IntPtr()
+  external int Internal;
+  @Uint32()
+  external int dwNumberOfBytesTransferred;
+}
+
+/// The PAINTSTRUCT structure contains information for an application. This
+/// information can be used to paint the client area of a window owned by
+/// that application.
+///
+/// {@category Struct}
+class PAINTSTRUCT extends Struct {
+  @IntPtr()
+  external int hdc;
+  @Int32()
+  external int fErase;
+  external RECT rcPaint;
+  @Int32()
+  external int fRestore;
+  @Int32()
+  external int fIncUpdate;
+  @Array(32)
+  external Array<Uint8> rgbReserved;
+}
+
 /// The PALETTEENTRY structure specifies the color and usage of an entry in
 /// a logical palette. A logical palette is defined by a LOGPALETTE
 /// structure.
@@ -1262,6 +2356,33 @@ class PARAMDESCEX extends Struct {
   external VARIANT varDefaultValue;
 }
 
+/// Contains a handle and text description corresponding to a physical
+/// monitor.
+///
+/// {@category Struct}
+@Packed(1)
+class PHYSICAL_MONITOR extends Struct {
+  @IntPtr()
+  external int hPhysicalMonitor;
+  @Array(128)
+  external Array<Uint16> _szPhysicalMonitorDescription;
+
+  String get szPhysicalMonitorDescription {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szPhysicalMonitorDescription[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPhysicalMonitorDescription(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szPhysicalMonitorDescription[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// The POINT structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
@@ -1269,6 +2390,16 @@ class POINT extends Struct {
   @Int32()
   external int x;
   @Int32()
+  external int y;
+}
+
+/// The POINTS structure defines the x- and y-coordinates of a point.
+///
+/// {@category Struct}
+class POINTS extends Struct {
+  @Int16()
+  external int x;
+  @Int16()
   external int y;
 }
 
@@ -1290,6 +2421,26 @@ class POLYTEXT extends Struct {
   external Pointer<Int32> pdx;
 }
 
+/// The PORT_INFO_1 structure identifies a supported printer port.
+///
+/// {@category Struct}
+class PORT_INFO_1 extends Struct {
+  external Pointer<Utf16> pName;
+}
+
+/// The PORT_INFO_2 structure identifies a supported printer port.
+///
+/// {@category Struct}
+class PORT_INFO_2 extends Struct {
+  external Pointer<Utf16> pPortName;
+  external Pointer<Utf16> pMonitorName;
+  external Pointer<Utf16> pDescription;
+  @Uint32()
+  external int fPortType;
+  @Uint32()
+  external int Reserved;
+}
+
 /// Sent with a power setting event and contains data about the specific
 /// change.
 ///
@@ -1300,6 +2451,144 @@ class POWERBROADCAST_SETTING extends Struct {
   external int DataLength;
   @Array(1)
   external Array<Uint8> Data;
+}
+
+/// Contains the execution context of the printer driver that calls
+/// GetPrintExecutionData.
+///
+/// {@category Struct}
+class PRINT_EXECUTION_DATA extends Struct {
+  @Uint32()
+  external int context;
+  @Uint32()
+  external int clientAppPID;
+}
+
+/// The PRINTER_DEFAULTS structure specifies the default data type,
+/// environment, initialization data, and access rights for a printer.
+///
+/// {@category Struct}
+class PRINTER_DEFAULTS extends Struct {
+  external Pointer<Utf16> pDatatype;
+  external Pointer<DEVMODE> pDevMode;
+  @Uint32()
+  external int DesiredAccess;
+}
+
+/// The PRINTER_INFO_1 structure specifies general printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_1 extends Struct {
+  @Uint32()
+  external int Flags;
+  external Pointer<Utf16> pDescription;
+  external Pointer<Utf16> pName;
+  external Pointer<Utf16> pComment;
+}
+
+/// The PRINTER_INFO_2 structure specifies detailed printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_2 extends Struct {
+  external Pointer<Utf16> pServerName;
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pShareName;
+  external Pointer<Utf16> pPortName;
+  external Pointer<Utf16> pDriverName;
+  external Pointer<Utf16> pComment;
+  external Pointer<Utf16> pLocation;
+  external Pointer<DEVMODE> pDevMode;
+  external Pointer<Utf16> pSepFile;
+  external Pointer<Utf16> pPrintProcessor;
+  external Pointer<Utf16> pDatatype;
+  external Pointer<Utf16> pParameters;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+  @Uint32()
+  external int Attributes;
+  @Uint32()
+  external int Priority;
+  @Uint32()
+  external int DefaultPriority;
+  @Uint32()
+  external int StartTime;
+  @Uint32()
+  external int UntilTime;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int cJobs;
+  @Uint32()
+  external int AveragePPM;
+}
+
+/// The PRINTER_INFO_3 structure specifies printer security information.
+///
+/// {@category Struct}
+class PRINTER_INFO_3 extends Struct {
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+}
+
+/// The PRINTER_INFO_4 structure specifies general printer information. The
+/// structure can be used to retrieve minimal printer information on a call
+/// to EnumPrinters. Such a call is a fast and easy way to retrieve the
+/// names and attributes of all locally installed printers on a system and
+/// all remote printer connections that a user has established.
+///
+/// {@category Struct}
+class PRINTER_INFO_4 extends Struct {
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pServerName;
+  @Uint32()
+  external int Attributes;
+}
+
+/// The PRINTER_INFO_5 structure specifies detailed printer information.
+///
+/// {@category Struct}
+class PRINTER_INFO_5 extends Struct {
+  external Pointer<Utf16> pPrinterName;
+  external Pointer<Utf16> pPortName;
+  @Uint32()
+  external int Attributes;
+  @Uint32()
+  external int DeviceNotSelectedTimeout;
+  @Uint32()
+  external int TransmissionRetryTimeout;
+}
+
+/// The PRINTER_INFO_6 specifies the status value of a printer.
+///
+/// {@category Struct}
+class PRINTER_INFO_6 extends Struct {
+  @Uint32()
+  external int dwStatus;
+}
+
+/// The PRINTER_NOTIFY_INFO structure contains printer information returned
+/// by the FindNextPrinterChangeNotification function. The function returns
+/// this information after a wait operation on a printer change
+/// notification object has been satisfied.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO extends Struct {
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Count;
+  @Array(1)
+  external Array<PRINTER_NOTIFY_INFO_DATA> aData;
+}
+
+/// Represents printer options.
+///
+/// {@category Struct}
+class PRINTER_OPTIONS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
 }
 
 /// Contains information about a newly created process and its primary
@@ -1326,6 +2615,21 @@ class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32()
   external int pid;
+}
+
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class protoent extends Struct {
+  external Pointer<Utf8> p_name;
+  external Pointer<Pointer<Int8>> p_aliases;
+  @Int16()
+  external int p_proto;
 }
 
 /// The RECT structure defines a rectangle by the coordinates of its
@@ -1385,6 +2689,70 @@ class SAFEARRAYBOUND extends Struct {
   external int lLbound;
 }
 
+/// The SCARD_ATRMASK structure is used by the SCardLocateCardsByATR
+/// function to locate cards.
+///
+/// {@category Struct}
+class SCARD_ATRMASK extends Struct {
+  @Uint32()
+  external int cbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
+  @Array(36)
+  external Array<Uint8> rgbMask;
+}
+
+/// The SCARD_IO_REQUEST structure begins a protocol control information
+/// structure. Any protocol-specific information then immediately follows
+/// this structure. The entire length of the structure must be aligned with
+/// the underlying hardware architecture word size. For example, in Win32
+/// the length of any PCI information must be a multiple of four bytes so
+/// that it aligns on a 32-bit boundary.
+///
+/// {@category Struct}
+class SCARD_IO_REQUEST extends Struct {
+  @Uint32()
+  external int dwProtocol;
+  @Uint32()
+  external int cbPciLength;
+}
+
+/// The SCARD_READERSTATE structure is used by functions for tracking smart
+/// cards within readers.
+///
+/// {@category Struct}
+class SCARD_READERSTATE extends Struct {
+  external Pointer<Utf16> szReader;
+  external Pointer pvUserData;
+  @Uint32()
+  external int dwCurrentState;
+  @Uint32()
+  external int dwEventState;
+  @Uint32()
+  external int cbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
+}
+
+/// The SCROLLBARINFO structure contains scroll bar information.
+///
+/// {@category Struct}
+class SCROLLBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcScrollBar;
+  @Int32()
+  external int dxyLineButton;
+  @Int32()
+  external int xyThumbTop;
+  @Int32()
+  external int xyThumbBottom;
+  @Int32()
+  external int reserved;
+  @Array(6)
+  external Array<Uint32> rgstate;
+}
+
 /// The SCROLLINFO structure contains scroll bar parameters to be set by
 /// the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved
 /// by the GetScrollInfo function (or SBM_GETSCROLLINFO message)
@@ -1440,6 +2808,42 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Dacl;
 }
 
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class servent extends Struct {
+  external Pointer<Utf8> s_name;
+  external Pointer<Pointer<Int8>> s_aliases;
+  external Pointer<Utf8> s_proto;
+  @Int16()
+  external int s_port;
+}
+
+/// Defines Shell item resource.
+///
+/// {@category Struct}
+class SHELL_ITEM_RESOURCE extends Struct {
+  external GUID guidType;
+  @Array(260)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Defines an item identifier.
 ///
 /// {@category Struct}
@@ -1487,6 +2891,16 @@ class SMALL_RECT extends Struct {
   external int Right;
   @Int16()
   external int Bottom;
+}
+
+/// The SOCKADDR structure stores socket address information.
+///
+/// {@category Struct}
+class SOCKADDR extends Struct {
+  @Uint16()
+  external int sa_family;
+  @Array(14)
+  external Array<Uint8> sa_data;
 }
 
 /// Identifies an authentication service that a server is willing to use to
@@ -1540,6 +2954,34 @@ class STARTUPINFO extends Struct {
   external int hStdOutput;
   @IntPtr()
   external int hStdError;
+}
+
+/// The STATPROPSETSTG structure contains information about a property set.
+///
+/// {@category Struct}
+class STATPROPSETSTG extends Struct {
+  external GUID fmtid;
+  external GUID clsid;
+  @Uint32()
+  external int grfFlags;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32()
+  external int dwOSVersion;
+}
+
+/// The STATPROPSTG structure contains data about a single property in a
+/// property set. This data is the property ID and type tag, and the
+/// optional string name that may be associated with the property.
+///
+/// {@category Struct}
+class STATPROPSTG extends Struct {
+  external Pointer<Utf16> lpwstrName;
+  @Uint32()
+  external int propid;
+  @Uint16()
+  external int vt;
 }
 
 /// The STATSTG structure contains statistical data about an open storage,
@@ -1610,7 +3052,22 @@ class SYMBOL_INFO extends Struct {
   @Uint32()
   external int MaxNameLen;
   @Array(1)
-  external Array<Uint16> Name;
+  external Array<Uint16> _Name;
+
+  String get Name {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_Name[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set Name(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _Name[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains information about the current state of the system battery.
@@ -1746,6 +3203,18 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class timeval extends Struct {
+  @Int32()
+  external int tv_sec;
+  @Int32()
+  external int tv_usec;
+}
+
 /// Contains title bar information.
 ///
 /// {@category Struct}
@@ -1770,6 +3239,40 @@ class TITLEBARINFOEX extends Struct {
   external Array<Uint32> rgstate;
   @Array(6)
   external Array<RECT> rgrect;
+}
+
+/// The TOKEN_APPCONTAINER_INFORMATION structure specifies all the
+/// information in a token that is necessary for an app container.
+///
+/// {@category Struct}
+class TOKEN_APPCONTAINER_INFORMATION extends Struct {
+  external Pointer TokenAppContainer;
+}
+
+/// Encapsulates data for touch input.
+///
+/// {@category Struct}
+class TOUCHINPUT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @IntPtr()
+  external int hSource;
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwTime;
+  @IntPtr()
+  external int dwExtraInfo;
+  @Uint32()
+  external int cxContact;
+  @Uint32()
+  external int cyContact;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.
@@ -1817,6 +3320,19 @@ class TYPEATTR extends Struct {
   external int wMinorVerNum;
   external TYPEDESC tdescAlias;
   external IDLDESC idldescType;
+}
+
+/// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
+/// represents a generic ratio and is used for different purposes and units
+/// even within a single API.
+///
+/// {@category Struct}
+@Packed(1)
+class UNSIGNED_RATIO extends Struct {
+  @Uint32()
+  external int uiNumerator;
+  @Uint32()
+  external int uiDenominator;
 }
 
 /// Used by UpdateLayeredWindowIndirect to provide position, size, shape,
@@ -1935,6 +3451,101 @@ class WAVEHDR extends Struct {
   external int reserved;
 }
 
+/// The WAVEOUTCAPS structure describes the capabilities of a
+/// waveform-audio output device.
+///
+/// {@category Struct}
+@Packed(1)
+class WAVEOUTCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwFormats;
+  @Uint16()
+  external int wChannels;
+  @Uint16()
+  external int wReserved1;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// Contains information about the file that is found by the FindFirstFile,
+/// FindFirstFileEx, or FindNextFile function.
+///
+/// {@category Struct}
+class WIN32_FIND_DATA extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+  external FILETIME ftCreationTime;
+  external FILETIME ftLastAccessTime;
+  external FILETIME ftLastWriteTime;
+  @Uint32()
+  external int nFileSizeHigh;
+  @Uint32()
+  external int nFileSizeLow;
+  @Uint32()
+  external int dwReserved0;
+  @Uint32()
+  external int dwReserved1;
+  @Array(260)
+  external Array<Uint16> _cFileName;
+
+  String get cFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_cFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set cFileName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _cFileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(14)
+  external Array<Uint16> _cAlternateFileName;
+
+  String get cAlternateFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 14; i++) {
+      charCodes.add(_cAlternateFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set cAlternateFileName(String value) {
+    final stringToStore = value.padRight(14, '\x00');
+    for (var i = 0; i < 14; i++) {
+      _cAlternateFileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Contains window information.
 ///
 /// {@category Struct}
@@ -2028,6 +3639,16 @@ class WNDCLASSEX extends Struct {
   external Pointer<Utf16> lpszClassName;
   @IntPtr()
   external int hIconSm;
+}
+
+/// Defines options that are used to set window visual style attributes.
+///
+/// {@category Struct}
+class WTA_OPTIONS extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
 }
 
 /// The XFORM structure specifies a world-space to page-space

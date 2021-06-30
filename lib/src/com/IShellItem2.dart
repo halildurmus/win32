@@ -111,78 +111,103 @@ class IShellItem2 extends IShellItem {
   IShellItem2(Pointer<COMObject> ptr) : super(ptr);
 
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_GetPropertyStore_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_GetPropertyStore_Native>>>()
+              .value
               .asFunction<_GetPropertyStore_Dart>()(
           ptr.ref.lpVtbl, flags, riid, ppv);
 
-  int GetPropertyStoreWithCreateObject(int flags, Pointer punkCreateObject,
-          Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      Pointer<
-                  NativeFunction<
-                      _GetPropertyStoreWithCreateObject_Native>>.fromAddress(ptr
-                  .ref.vtable
+  int
+      GetPropertyStoreWithCreateObject(int flags, Pointer punkCreateObject,
+              Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+          ptr.ref.lpVtbl.value
                   .elementAt(9)
-                  .value)
-              .asFunction<_GetPropertyStoreWithCreateObject_Dart>()(
-          ptr.ref.lpVtbl, flags, punkCreateObject, riid, ppv);
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              _GetPropertyStoreWithCreateObject_Native>>>()
+                  .value
+                  .asFunction<_GetPropertyStoreWithCreateObject_Dart>()(
+              ptr.ref.lpVtbl, flags, punkCreateObject, riid, ppv);
 
   int GetPropertyStoreForKeys(Pointer<PROPERTYKEY> rgKeys, int cKeys, int flags,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_GetPropertyStoreForKeys_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(10)
+              .cast<Pointer<NativeFunction<_GetPropertyStoreForKeys_Native>>>()
+              .value
               .asFunction<_GetPropertyStoreForKeys_Dart>()(
           ptr.ref.lpVtbl, rgKeys, cKeys, flags, riid, ppv);
 
   int GetPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      Pointer<NativeFunction<_GetPropertyDescriptionList_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_GetPropertyDescriptionList_Native>>>()
+              .value
               .asFunction<_GetPropertyDescriptionList_Dart>()(
           ptr.ref.lpVtbl, keyType, riid, ppv);
 
-  int Update(Pointer pbc) =>
-      Pointer<NativeFunction<_Update_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_Update_Dart>()(ptr.ref.lpVtbl, pbc);
+  int Update(Pointer pbc) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_Update_Native>>>()
+      .value
+      .asFunction<_Update_Dart>()(ptr.ref.lpVtbl, pbc);
 
   int GetProperty(Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> ppropvar) =>
-      Pointer<NativeFunction<_GetProperty_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(13)
+          .cast<Pointer<NativeFunction<_GetProperty_Native>>>()
+          .value
           .asFunction<_GetProperty_Dart>()(ptr.ref.lpVtbl, key, ppropvar);
 
   int GetCLSID(Pointer<PROPERTYKEY> key, Pointer<GUID> pclsid) =>
-      Pointer<NativeFunction<_GetCLSID_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<Pointer<NativeFunction<_GetCLSID_Native>>>()
+          .value
           .asFunction<_GetCLSID_Dart>()(ptr.ref.lpVtbl, key, pclsid);
 
   int GetFileTime(Pointer<PROPERTYKEY> key, Pointer<FILETIME> pft) =>
-      Pointer<NativeFunction<_GetFileTime_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(15)
+          .cast<Pointer<NativeFunction<_GetFileTime_Native>>>()
+          .value
           .asFunction<_GetFileTime_Dart>()(ptr.ref.lpVtbl, key, pft);
 
   int GetInt32(Pointer<PROPERTYKEY> key, Pointer<Int32> pi) =>
-      Pointer<NativeFunction<_GetInt32_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(16)
+          .cast<Pointer<NativeFunction<_GetInt32_Native>>>()
+          .value
           .asFunction<_GetInt32_Dart>()(ptr.ref.lpVtbl, key, pi);
 
   int GetString(Pointer<PROPERTYKEY> key, Pointer<Pointer<Utf16>> ppsz) =>
-      Pointer<NativeFunction<_GetString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(17)
+          .cast<Pointer<NativeFunction<_GetString_Native>>>()
+          .value
           .asFunction<_GetString_Dart>()(ptr.ref.lpVtbl, key, ppsz);
 
   int GetUInt32(Pointer<PROPERTYKEY> key, Pointer<Uint32> pui) =>
-      Pointer<NativeFunction<_GetUInt32_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(18).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(18)
+          .cast<Pointer<NativeFunction<_GetUInt32_Native>>>()
+          .value
           .asFunction<_GetUInt32_Dart>()(ptr.ref.lpVtbl, key, pui);
 
   int GetUInt64(Pointer<PROPERTYKEY> key, Pointer<Uint64> pull) =>
-      Pointer<NativeFunction<_GetUInt64_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(19)
+          .cast<Pointer<NativeFunction<_GetUInt64_Native>>>()
+          .value
           .asFunction<_GetUInt64_Dart>()(ptr.ref.lpVtbl, key, pull);
 
   int GetBool(Pointer<PROPERTYKEY> key, Pointer<Int32> pf) =>
-      Pointer<NativeFunction<_GetBool_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(20)
+          .cast<Pointer<NativeFunction<_GetBool_Native>>>()
+          .value
           .asFunction<_GetBool_Dart>()(ptr.ref.lpVtbl, key, pf);
 }

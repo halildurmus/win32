@@ -1,13 +1,12 @@
 @TestOn('windows')
 
-import 'dart:ffi';
-
-import 'package:test/test.dart';
-
 import 'package:ffi/ffi.dart';
+import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 const testString = "If my grandmother had wheels, she'd be a motorbike";
+
+const testDartStringArray = ['heads', 'shoulders', 'knees', 'toes'];
 
 // String arrays are delimited with NUL characters, and ended with a double NUL.
 // Since the TEXT macro null-terminates all input, we only add one NUL character
@@ -49,7 +48,7 @@ void main() {
       }
     });
 
-    test('Array', () {
+    test('String array unpacking', () {
       for (var i = 0; i < TEST_RUNS; i++) {
         final arrayPtr = TEXT(testStringArray);
 
@@ -64,6 +63,18 @@ void main() {
         free(arrayPtr);
       }
     });
+
+    test('String array packing', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
+        final lpStringArray = testDartStringArray.toWideCharArray();
+
+        final outArray = lpStringArray.unpackStringArray(100);
+        expect(outArray.length, equals(testDartStringArray.length));
+        expect(outArray.first, equals(testDartStringArray.first));
+        expect(outArray.last, equals(testDartStringArray.last));
+        free(lpStringArray);
+      }
+    });
   });
 
   if (isWindowsRuntimeAvailable()) {
@@ -76,8 +87,7 @@ void main() {
           final string2 = convertFromHString(hstring);
           expect(string, equals(string2));
 
-          WindowsDeleteString(hstring.value);
-          free(hstring);
+          WindowsDeleteString(hstring);
         }
       });
       test('String to HSTRING conversion -- more complex', () {
@@ -92,8 +102,7 @@ Some accented text: Résumé
           final string2 = convertFromHString(hstring);
           expect(string, equals(string2));
 
-          WindowsDeleteString(hstring.value);
-          free(hstring);
+          WindowsDeleteString(hstring);
         }
       });
     });

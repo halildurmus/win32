@@ -45,17 +45,21 @@ class IInspectable extends IUnknown {
   IInspectable(Pointer<COMObject> ptr) : super(ptr);
 
   int GetIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) =>
-      Pointer<NativeFunction<_GetIids_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetIids_Native>>>()
+          .value
           .asFunction<_GetIids_Dart>()(ptr.ref.lpVtbl, iidCount, iids);
 
-  int GetRuntimeClassName(Pointer<IntPtr> className) =>
-      Pointer<NativeFunction<_GetRuntimeClassName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetRuntimeClassName_Dart>()(ptr.ref.lpVtbl, className);
+  int GetRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_GetRuntimeClassName_Native>>>()
+      .value
+      .asFunction<_GetRuntimeClassName_Dart>()(ptr.ref.lpVtbl, className);
 
-  int GetTrustLevel(Pointer<Uint32> trustLevel) =>
-      Pointer<NativeFunction<_GetTrustLevel_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetTrustLevel_Dart>()(ptr.ref.lpVtbl, trustLevel);
+  int GetTrustLevel(Pointer<Uint32> trustLevel) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_GetTrustLevel_Native>>>()
+      .value
+      .asFunction<_GetTrustLevel_Dart>()(ptr.ref.lpVtbl, trustLevel);
 }

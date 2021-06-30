@@ -8,6 +8,53 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'constants.dart';
+import 'kernel32.dart';
+import 'shell32.dart';
+import 'structs.g.dart';
+import 'types.dart';
+
+/// Sets up a WinMain function with all the relevant information.
+///
+/// Add the following line to your command line app:
+/// ```dart
+/// void main() => initApp(winMain);
+/// ```
+///
+/// Now you can declare a winMain function as:
+/// ```dart
+/// void winMain(int hInstance, List<String> args, int nShowCmd) {
+/// ...
+/// }
+/// ```
+void initApp(Function winMain) {
+  final nArgs = calloc<Int32>();
+  final args = <String>[];
+  final lpStartupInfo = calloc<STARTUPINFO>();
+
+  // Parse command line args using Win32 functions, to reduce ceremony in the
+  // app that uses this.
+  final szArgList = CommandLineToArgvW(GetCommandLine(), nArgs);
+  for (var i = 0; i < nArgs.value; i++) {
+    args.add(szArgList[i].toDartString());
+  }
+  LocalFree(szArgList.address);
+
+  final hInstance = GetModuleHandle(nullptr);
+  GetStartupInfo(lpStartupInfo);
+  try {
+    winMain(
+        hInstance,
+        args,
+        lpStartupInfo.ref.dwFlags & STARTF_USESHOWWINDOW == STARTF_USESHOWWINDOW
+            ? lpStartupInfo.ref.wShowWindow
+            : SW_SHOWDEFAULT);
+  } finally {
+    free(nArgs);
+    free(lpStartupInfo);
+  }
+}
+
 /// Detects whether the Windows Runtime is available by attempting to open its
 /// core library.
 bool isWindowsRuntimeAvailable() {
@@ -23,9 +70,16 @@ bool isWindowsRuntimeAvailable() {
 
 /// Converts a Dart string to a natively-allocated string.
 ///
-/// The user is responsible for disposing its memory, typically by calling
-/// free() when it has been used.
-Pointer<Utf16> TEXT(String string) => string.toNativeUtf16();
+/// The receiver is responsible for disposing its memory, typically by calling
+/// [free] when it has been used.
+LPWSTR TEXT(String string) => string.toNativeUtf16();
+
+/// Allocates memory for a Unicode string and returns a pointer.
+///
+/// The parameter indicates how many characters should be allocated. The
+/// receiver is responsible for disposing the memory allocated, typically by
+/// calling [free] when it is no longer required.
+LPWSTR wsalloc(int wChars) => calloc<WCHAR>(wChars).cast();
 
 /// Frees allocated memory.
 ///

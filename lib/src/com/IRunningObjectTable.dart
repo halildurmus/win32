@@ -62,41 +62,52 @@ class IRunningObjectTable extends IUnknown {
 
   int Register(int grfFlags, Pointer punkObject, Pointer pmkObjectName,
           Pointer<Uint32> pdwRegister) =>
-      Pointer<NativeFunction<_Register_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_Register_Native>>>()
+              .value
               .asFunction<_Register_Dart>()(
           ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
-  int Revoke(int dwRegister) =>
-      Pointer<NativeFunction<_Revoke_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_Revoke_Dart>()(ptr.ref.lpVtbl, dwRegister);
+  int Revoke(int dwRegister) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_Revoke_Native>>>()
+      .value
+      .asFunction<_Revoke_Dart>()(ptr.ref.lpVtbl, dwRegister);
 
-  int IsRunning(Pointer pmkObjectName) =>
-      Pointer<NativeFunction<_IsRunning_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_IsRunning_Dart>()(ptr.ref.lpVtbl, pmkObjectName);
+  int IsRunning(Pointer pmkObjectName) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_IsRunning_Native>>>()
+      .value
+      .asFunction<_IsRunning_Dart>()(ptr.ref.lpVtbl, pmkObjectName);
 
   int GetObject(Pointer pmkObjectName, Pointer<Pointer> ppunkObject) =>
-      Pointer<NativeFunction<_GetObject_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<Pointer<NativeFunction<_GetObject_Native>>>()
+              .value
               .asFunction<_GetObject_Dart>()(
           ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
   int NoteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
-      Pointer<NativeFunction<_NoteChangeTime_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<Pointer<NativeFunction<_NoteChangeTime_Native>>>()
+              .value
               .asFunction<_NoteChangeTime_Dart>()(
           ptr.ref.lpVtbl, dwRegister, pfiletime);
 
   int GetTimeOfLastChange(Pointer pmkObjectName, Pointer<FILETIME> pfiletime) =>
-      Pointer<NativeFunction<_GetTimeOfLastChange_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(8)
+              .cast<Pointer<NativeFunction<_GetTimeOfLastChange_Native>>>()
+              .value
               .asFunction<_GetTimeOfLastChange_Dart>()(
           ptr.ref.lpVtbl, pmkObjectName, pfiletime);
 
-  int EnumRunning(Pointer<Pointer> ppenumMoniker) =>
-      Pointer<NativeFunction<_EnumRunning_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_EnumRunning_Dart>()(ptr.ref.lpVtbl, ppenumMoniker);
+  int EnumRunning(Pointer<Pointer> ppenumMoniker) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_EnumRunning_Native>>>()
+      .value
+      .asFunction<_EnumRunning_Dart>()(ptr.ref.lpVtbl, ppenumMoniker);
 }

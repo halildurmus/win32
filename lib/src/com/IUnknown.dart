@@ -1,20 +1,16 @@
 // IUnknown.dart
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import
+// This class is generated manually, since it includes additional helper
+// functions that are only for the base COM object.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../ole32.dart';
 import '../structs.dart';
-import '../structs.g.dart';
 import '../utils.dart';
 
 /// @nodoc
@@ -35,7 +31,6 @@ typedef _Release_Dart = int Function(Pointer obj);
 /// {@category com}
 class IUnknown {
   // vtable begins at 0, ends at 2
-
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);
@@ -52,4 +47,21 @@ class IUnknown {
   int Release() => Pointer<NativeFunction<_Release_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(2).value)
       .asFunction<_Release_Dart>()(ptr.ref.lpVtbl);
+
+  /// Cast an existing COM object to a specified interface.
+  ///
+  /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
+  /// a COM QueryInterface to return a reference to that interface. This method
+  /// reduces the boilerplate associated with calling QueryInterface manually.
+  Pointer<COMObject> toInterface(String iid) {
+    final pIID = convertToIID(iid);
+    final pObject = calloc<COMObject>();
+    try {
+      final hr = QueryInterface(pIID, pObject.cast());
+      if (FAILED(hr)) throw WindowsException(hr);
+      return pObject;
+    } finally {
+      free(pIID);
+    }
+  }
 }

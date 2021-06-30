@@ -87,6 +87,14 @@ int HRESULT_FROM_WIN32(int x) =>
     (x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
         .toSigned(32);
 
+/// Maps a control code to a constant
+//
+// #define CTL_CODE( DeviceType, Function, Method, Access ) (
+//   ((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method)
+int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
+    (((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method))
+        .toSigned(32);
+
 /// Retrieves the parameters to WM_SYSCOMMAND.
 ///
 /// {@category user32}

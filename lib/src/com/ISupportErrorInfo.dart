@@ -34,8 +34,9 @@ class ISupportErrorInfo extends IUnknown {
 
   ISupportErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) =>
-      Pointer<NativeFunction<_InterfaceSupportsErrorInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_InterfaceSupportsErrorInfo_Dart>()(ptr.ref.lpVtbl, riid);
+  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_InterfaceSupportsErrorInfo_Native>>>()
+      .value
+      .asFunction<_InterfaceSupportsErrorInfo_Dart>()(ptr.ref.lpVtbl, riid);
 }

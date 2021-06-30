@@ -23,7 +23,7 @@
 // underscore-prefixed members that are not used in the library. In this class,
 // we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
 // least as large as the underlying native struct. See, for example,
-// ENUMLOGFONTEX.
+// VARIANT.
 //
 //
 // ignore_for_file: unnecessary_getters_setters
@@ -44,6 +44,192 @@ import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
+
+/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
+/// information field and provides the current data for that field.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  @Uint16()
+  external int Type;
+  @Uint16()
+  external int Field;
+  @Uint32()
+  external int Reserved;
+  @Uint32()
+  external int Id;
+  // TODO: Check packing
+  @Uint32()
+  external int _pack;
+  @Uint32()
+  external int cbBuf;
+  @Uint32()
+  external int _pack2;
+  external Pointer pBuf;
+}
+
+/// Contains information about a communications driver.
+///
+/// {@category Struct}
+@Packed(2)
+class COMMPROP extends Struct {
+  @Uint16()
+  external int wPacketLength;
+  @Uint16()
+  external int wPacketVersion;
+  @Uint32()
+  external int dwServiceMask;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwMaxTxQueue;
+  @Uint32()
+  external int dwMaxRxQueue;
+  @Uint32()
+  external int dwMaxBaud;
+  @Uint32()
+  external int dwProvSubType;
+  @Uint32()
+  external int dwProvCapabilities;
+  @Uint32()
+  external int dwSettableParams;
+  @Uint32()
+  external int dwSettableBaud;
+  @Uint16()
+  external int wSettableData;
+  @Uint32()
+  external int wSettableStopParity;
+  @Uint32()
+  external int dwCurrentTxQueue;
+  @Uint32()
+  external int dwCurrentRxQueue;
+  @Uint32()
+  external int dwProvSpec1;
+  @Uint32()
+  external int dwProvSpec2;
+  @Array(1)
+  external Array<Uint16> _wcProvChar;
+
+  String get wcProvChar {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_wcProvChar[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set wcProvChar(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _wcProvChar[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The DEVMODE data structure contains information about the
+/// initialization and environment of a printer or a display device.
+///
+/// {@category Struct}
+class DEVMODE extends Struct {
+  @Array(32)
+  external Array<Uint16> dmDeviceName;
+  @Uint16()
+  external int dmSpecVersion;
+  @Uint16()
+  external int dmDriverVersion;
+  @Uint16()
+  external int dmSize;
+  @Uint16()
+  external int dmDriverExtra;
+  @Uint32()
+  external int dmFields;
+  @Uint16()
+  external int dmOrientation;
+  @Uint16()
+  external int dmPaperSize;
+  @Uint16()
+  external int dmPaperLength;
+  @Uint16()
+  external int dmPaperWidth;
+  @Uint16()
+  external int dmScale;
+  @Uint16()
+  external int dmCopies;
+  @Uint16()
+  external int dmDefaultSource;
+  @Uint16()
+  external int dmPrintQuality;
+  @Int16()
+  external int dmColor;
+  @Int16()
+  external int dmDuplex;
+  @Int16()
+  external int dmYResolution;
+  @Int16()
+  external int dmTTOption;
+  @Int16()
+  external int dmCollate;
+  @Array(32)
+  external Array<Uint16> dmFormName;
+  @Uint16()
+  external int dmLogPixels;
+  @Uint32()
+  external int dmBitsPerPel;
+  @Uint32()
+  external int dmPelsWidth;
+  @Uint32()
+  external int dmPelsHeight;
+  @Uint32()
+  external int dmDisplayFlags;
+  @Uint32()
+  external int dmDisplayFrequency;
+  @Uint32()
+  external int dmICMMethod;
+  @Uint32()
+  external int dmICMIntent;
+  @Uint32()
+  external int dmMediaType;
+  @Uint32()
+  external int dmDitherType;
+  @Uint32()
+  external int dmReserved1;
+  @Uint32()
+  external int dmReserved2;
+  @Uint32()
+  external int dmPanningWidth;
+  @Uint32()
+  external int dmPanningHeight;
+}
+
+/// The IN_ADDR structure represents an IPv4 Internet address.
+///
+/// {@category Struct}
+class IN_ADDR extends Struct {
+  @Array(4)
+  external Array<Uint8> s_b;
+}
+
+/// Contains information about a heap element. The HeapWalk function uses a
+/// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
+///
+/// {@category Struct}
+class PROCESS_HEAP_ENTRY extends Struct {
+  external Pointer lpData;
+  @Uint32()
+  external int cbData;
+  @Uint8()
+  external int cbOverhead;
+  @Uint8()
+  external int iRegionIndex;
+  @Uint16()
+  external int wFlags;
+  @Uint32()
+  external int dwCommittedSize;
+  @Uint32()
+  external int dwUnCommittedSize;
+  external Pointer lpFirstBlock;
+  external Pointer lpLastBlock;
+}
 
 // typedef struct _SYSTEM_INFO {
 //   union {
@@ -151,6 +337,10 @@ class VARIANT extends Struct {
   external int wReserved2;
   @Uint16()
   external int wReserved3;
+  @Uint64()
+  external int _data;
+  @IntPtr()
+  external int _data2;
 
   // LONGLONG -> __int64 -> Int64
   int get llVal => _data;
@@ -241,37 +431,6 @@ class VARIANT extends Struct {
   // UINT -> unsigned int -> Uint32
   int get uintVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
   set uintVal(int val) => _data = val << 32;
-
-  @Uint64()
-  external int _data;
-  @IntPtr()
-  external int _data2;
-}
-
-const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
-
-// typedef struct _PHYSICAL_MONITOR {
-//   HANDLE hPhysicalMonitor;
-//   WCHAR  szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
-// } PHYSICAL_MONITOR, *LPPHYSICAL_MONITOR;
-
-/// Contains a handle and text description corresponding to a physical monitor.
-///
-/// {@category Struct}
-class PHYSICAL_MONITOR extends Struct {
-  @IntPtr()
-  external int hPhysicalMonitor;
-
-  @Array(128)
-  external Array<Uint16> _szPhysicalMonitorDescription;
-
-  String get szPhysicalMonitorDescription {
-    final charCodes = <int>[];
-    for (var i = 0; i < PHYSICAL_MONITOR_DESCRIPTION_SIZE; i++) {
-      charCodes.add(_szPhysicalMonitorDescription[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
 }
 
 // typedef struct tagTYPEDESC {
@@ -289,11 +448,12 @@ class PHYSICAL_MONITOR extends Struct {
 /// {@category Struct}
 class TYPEDESC extends Struct {
   external Pointer lptdesc;
-  Pointer get lpadesc => lptdesc;
-  int get hreftype => lptdesc.cast<Uint32>().value;
 
   @Uint16()
   external int vt;
+
+  Pointer get lpadesc => lptdesc;
+  int get hreftype => lptdesc.cast<Uint32>().value;
 }
 
 // typedef struct tagELEMDESC {
@@ -511,144 +671,6 @@ class STRRET extends Struct {
         _cStr60, _cStr61, _cStr62, _cStr63,
         _cStr64
       ]).buffer.asUint16List());
-}
-
-// typedef struct {
-//         lfHeight;
-//         lfWidth;
-//         lfEscapement;
-//         lfOrientation;
-//         lfWeight;
-//   BYTE  lfItalic;
-//   BYTE  lfUnderline;
-//   BYTE  lfStrikeOut;
-//   BYTE  lfCharSet;
-//   BYTE  lfOutPrecision;
-//   BYTE  lfClipPrecision;
-//   BYTE  lfQuality;
-//   BYTE  lfPitchAndFamily;
-//   WCHAR lfFaceName[LF_FACESIZE];
-// } LOGFONTW;
-
-/// The LOGFONT structure defines the attributes of a font.
-///
-/// {@category Struct}
-class LOGFONT extends Struct {
-  @Int32()
-  external int lfHeight;
-  @Int32()
-  external int lfWidth;
-  @Int32()
-  external int lfEscapement;
-  @Int32()
-  external int lfOrientation;
-  @Int32()
-  external int lfWeight;
-  @Uint8()
-  external int lfItalic;
-  @Uint8()
-  external int lfUnderline;
-  @Uint8()
-  external int lfStrikeOut;
-  @Uint8()
-  external int lfCharSet;
-  @Uint8()
-  external int lfOutPrecision;
-  @Uint8()
-  external int lfClipPrecision;
-  @Uint8()
-  external int lfQuality;
-  @Uint8()
-  external int lfPitchAndFamily;
-
-  @Array(32)
-  external Array<Uint16> _lfFaceName;
-
-  String get lfFaceName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      charCodes.add(_lfFaceName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-}
-
-// typedef struct tagENUMLOGFONTEXW {
-//   LOGFONTW elfLogFont;
-//   WCHAR    elfFullName[LF_FULLFACESIZE];
-//   WCHAR    elfStyle[LF_FACESIZE];
-//   WCHAR    elfScript[LF_FACESIZE];
-// } ENUMLOGFONTEXW, *LPENUMLOGFONTEXW;
-
-/// The ENUMLOGFONTEX structure contains information about an enumerated font.
-///
-/// {@category Struct}
-class ENUMLOGFONTEX extends Struct {
-  external LOGFONT elfLogFont;
-
-  @Array(64)
-  external Array<Uint16> _elfFullName;
-
-  String get elfFullName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 64; i++) {
-      charCodes.add(_elfFullName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Array(32)
-  external Array<Uint16> _elfStyle;
-
-  String get elfStyle {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      charCodes.add(_elfStyle[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Array(32)
-  external Array<Uint16> _elfScript;
-
-  String get elfScript {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      charCodes.add(_elfScript[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-}
-
-// typedef struct tagPAINTSTRUCT {
-//   HDC  hdc;
-//   BOOL fErase;
-//   RECT rcPaint;
-//   BOOL fRestore;
-//   BOOL fIncUpdate;
-//   BYTE rgbReserved[32];
-// } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
-
-/// The PAINTSTRUCT structure contains information for an application. This
-/// information can be used to paint the client area of a window owned by that
-/// application.
-///
-/// {@category Struct}
-class PAINTSTRUCT extends Struct {
-  @IntPtr()
-  external int hdc;
-  @Int32()
-  external int fErase;
-
-  external RECT rcPaint;
-
-  @Int32()
-  external int fRestore;
-  @Int32()
-  external int fIncUpdate;
-
-  @Array(32)
-  external Array<Uint8> rgbReserved;
 }
 
 // typedef struct tagINPUT {
@@ -902,6 +924,17 @@ class GUID extends Struct {
   }
 }
 
+Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
+
+/// Represents package settings used to create a package.
+///
+/// {@category Struct}
+class APPX_PACKAGE_SETTINGS extends Struct {
+  @Int32()
+  external int forceZip32;
+  external Pointer hashMethod;
+}
+
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;
@@ -1011,45 +1044,6 @@ class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 }
 
-// typedef struct _OSVERSIONINFOW {
-//   DWORD dwOSVersionInfoSize;
-//   DWORD dwMajorVersion;
-//   DWORD dwMinorVersion;
-//   DWORD dwBuildNumber;
-//   DWORD dwPlatformId;
-//   WCHAR szCSDVersion[128];
-// } OSVERSIONINFOW, *POSVERSIONINFOW, *LPOSVERSIONINFOW, RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
-
-/// Contains operating system version information. The information includes
-/// major and minor version numbers, a build number, a platform identifier, and
-/// descriptive text about the operating system. This structure is used with the
-/// GetVersionEx function.
-///
-/// {@category Struct}
-class OSVERSIONINFO extends Struct {
-  @Uint32()
-  external int dwOSVersionInfoSize;
-  @Uint32()
-  external int dwMajorVersion;
-  @Uint32()
-  external int dwMinorVersion;
-  @Uint32()
-  external int dwBuildNumber;
-  @Uint32()
-  external int dwPlatformId;
-
-  @Array(128)
-  external Array<Uint16> _szCSDVersion;
-
-  String get szCSDVersion {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      charCodes.add(_szCSDVersion[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-}
-
 // typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
 //   BLUETOOTH_DEVICE_INFO                 deviceInfo;
 //   BLUETOOTH_AUTHENTICATION_METHOD       authenticationMethod;
@@ -1081,51 +1075,6 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   set Passkey(int value) => Numeric_Value = value;
 }
 
-// typedef struct _BLUETOOTH_DEVICE_INFO {
-//   DWORD             dwSize;
-//   BLUETOOTH_ADDRESS Address;
-//   ULONG             ulClassofDevice;
-//   BOOL              fConnected;
-//   BOOL              fRemembered;
-//   BOOL              fAuthenticated;
-//   SYSTEMTIME        stLastSeen;
-//   SYSTEMTIME        stLastUsed;
-//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
-// } BLUETOOTH_DEVICE_INFO;
-
-/// The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth
-/// device.
-///
-/// {@category Struct}
-class BLUETOOTH_DEVICE_INFO extends Struct {
-  @Uint32()
-  external int dwSize;
-  @Uint64()
-  external int Address;
-  @Uint32()
-  external int ulClassofDevice;
-  @Int32()
-  external int fConnected;
-  @Int32()
-  external int fRemembered;
-  @Int32()
-  external int fAuthenticated;
-
-  external SYSTEMTIME stLastSeen;
-  external SYSTEMTIME stLastUsed;
-
-  @Array(248)
-  external Array<Uint16> _szName;
-
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 248; i++) {
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-}
-
 // typedef struct _BLUETOOTH_ADDRESS {
 //   union {
 //     BTH_ADDR ullLong;
@@ -1148,44 +1097,6 @@ class BLUETOOTH_ADDRESS extends Struct {
         (ullLong & 0xFF00000000) >> 32,
         (ullLong & 0xFF0000000000) >> 40
       ];
-}
-
-// // typedef struct _BLUETOOTH_RADIO_INFO {
-//   DWORD             dwSize;
-//   BLUETOOTH_ADDRESS address;
-//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
-//   ULONG             ulClassofDevice;
-//   USHORT            lmpSubversion;
-//   USHORT            manufacturer;
-// } BLUETOOTH_RADIO_INFO, *PBLUETOOTH_RADIO_INFO;
-
-/// The BLUETOOTH_RADIO_INFO structure contains information about a Bluetooth
-/// radio.
-///
-/// {@category Struct}
-class BLUETOOTH_RADIO_INFO extends Struct {
-  @Uint32()
-  external int dwSize;
-
-  external BLUETOOTH_ADDRESS address;
-
-  @Array(248)
-  external Array<Uint16> _szName;
-
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 248; i++) {
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Uint32()
-  external int ulClassOfDevice;
-  @Uint16()
-  external int lmpSubversion;
-  @Uint16()
-  external int manufacturer;
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
@@ -1270,112 +1181,6 @@ class OVERLAPPED extends Struct {
   external int hEvent;
 }
 
-// typedef struct _WIN32_FIND_DATAW {
-//   DWORD    dwFileAttributes;
-//   FILETIME ftCreationTime;
-//   FILETIME ftLastAccessTime;
-//   FILETIME ftLastWriteTime;
-//   DWORD    nFileSizeHigh;
-//   DWORD    nFileSizeLow;
-//   DWORD    dwReserved0;
-//   DWORD    dwReserved1;
-//   WCHAR    cFileName[MAX_PATH];
-//   WCHAR    cAlternateFileName[14];
-// } WIN32_FIND_DATAW, *PWIN32_FIND_DATAW, *LPWIN32_FIND_DATAW;
-
-/// Contains information about the file that is found by the FindFirstFile,
-/// FindFirstFileEx, or FindNextFile function.
-///
-/// {@category Struct}
-class WIN32_FIND_DATA extends Struct {
-  @Uint32()
-  external int dwFileAttributes;
-
-  external FILETIME ftCreationTime;
-  external FILETIME ftLastAccessTime;
-  external FILETIME ftLastWriteTime;
-
-  @Uint32()
-  external int nFileSizeHigh;
-  @Uint32()
-  external int nFileSizeLow;
-  @Uint32()
-  external int dwReserved0;
-  @Uint32()
-  external int dwReserved1;
-
-  @Array(260)
-  external Array<Uint16> _cFileName;
-
-  String get cFileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      charCodes.add(_cFileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Array(14)
-  external Array<Uint16> _cAlternateFileName;
-
-  String get cAlternateFileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 14; i++) {
-      charCodes.add(_cAlternateFileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-}
-
-// typedef struct tagWAVEOUTCAPSW {
-//   WORD      wMid;
-//   WORD      wPid;
-//   MMVERSION vDriverVersion;
-//   WCHAR     szPname[MAXPNAMELEN];
-//   DWORD     dwFormats;
-//   WORD      wChannels;
-//   WORD      wReserved1;
-//   DWORD     dwSupport;
-// } WAVEOUTCAPSW, *PWAVEOUTCAPSW, *NPWAVEOUTCAPSW, *LPWAVEOUTCAPSW;
-
-/// The WAVEOUTCAPS structure describes the capabilities of a waveform-audio
-/// output device.
-///
-/// {@category Struct}
-class WAVEOUTCAPS extends Struct {
-  @Uint16()
-  external int wMid;
-
-  @Uint16()
-  external int wPid;
-
-  @Uint32()
-  external int vDriverVersion;
-
-  @Array(32)
-  external Array<Uint16> _szPname;
-
-  String get szPname {
-    final charCodes = <int>[];
-    for (var i = 0; i < 32; i++) {
-      charCodes.add(_szPname[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Uint32()
-  external int dwFormats;
-
-  @Uint16()
-  external int wChannels;
-
-  @Uint16()
-  external int wReserved1;
-
-  @Int32()
-  external int dwSupport;
-}
-
 // typedef struct mmtime_tag {
 //   UINT  wType;
 //   union {
@@ -1446,6 +1251,18 @@ class MMTIME extends Struct {
   set midi(_midi value) => ms = value.songptrpos;
 }
 
+/// The PROPSPEC structure is used by many of the methods of
+/// IPropertyStorage to specify a property either by its property
+/// identifier (ID) or the associated string name.
+///
+/// {@category Struct}
+class PROPSPEC extends Struct {
+  @Uint32()
+  external int ulKind;
+
+  external Pointer<Uint16> lpwstr;
+}
+
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
@@ -1464,40 +1281,6 @@ class PROPVARIANT extends Struct {
   external int val1;
   @IntPtr()
   external int val2;
-}
-
-// typedef struct NLM_SIMULATED_PROFILE_INFO {
-//   WCHAR               ProfileName[256];
-//   NLM_CONNECTION_COST cost;
-//   DWORD               UsageInMegabytes;
-//   DWORD               DataLimitInMegabytes;
-// } NLM_SIMULATED_PROFILE_INFO;
-
-/// Used to specify values that are used by SetSimulatedProfileInfo to override
-/// current internet connection profile values in an RDP Child Session to
-/// support the simulation of specific metered internet connection conditions.
-///
-/// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Struct {
-  @Array(256)
-  external Array<Uint16> _ProfileName;
-
-  String get ProfileName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      charCodes.add(_ProfileName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  @Uint32()
-  external int cost;
-
-  @Uint32()
-  external int UsageInMegabytes;
-
-  @Uint32()
-  external int DataLimitInMegabytes;
 }
 
 // typedef struct _NOTIFYICONDATAW {

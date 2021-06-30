@@ -4,18 +4,25 @@ import 'dart:ffi';
 import 'dart:io' show exit;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/src/dbghelp.dart';
 import 'package:win32/win32.dart';
 
-int enumSymbolProc(
-    Pointer<SYMBOL_INFO> pSymInfo, int symbolSize, Pointer UserContext) {
-  print('${pSymInfo.ref.Address.toHexString(32)} $symbolSize '
-      '${pSymInfo.cast<Uint8>().elementAt(84).cast<Utf16>().toDartString()}');
+extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
+  int get virtAddress => ref.Address;
+  String get name => cast<Uint8>().elementAt(84).cast<Utf16>().toDartString();
+}
+
+final _exportedSymbols = <String, int>{};
+
+int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
+  if (pSymInfo.ref.Flags & SYMFLAG_EXPORT == SYMFLAG_EXPORT) {
+    _exportedSymbols[pSymInfo.name] = pSymInfo.virtAddress;
+  }
 
   return TRUE;
 }
 
-void main() {
+Map<String, int> getExports(String module) {
+  _exportedSymbols.clear();
   final hProcess = GetCurrentProcess();
 
   final status = SymInitialize(hProcess, nullptr, FALSE);
@@ -24,11 +31,11 @@ void main() {
     exit(1);
   }
 
-  final module = r'c:\windows\system32\kernel32.dll'.toNativeUtf16();
+  final modulePtr = module.toNativeUtf16();
   final mask = '*'.toNativeUtf16();
 
   final baseOfDll =
-      SymLoadModuleEx(hProcess, 0, module, nullptr, 0, 0, nullptr, 0);
+      SymLoadModuleEx(hProcess, 0, modulePtr, nullptr, 0, 0, nullptr, 0);
 
   if (baseOfDll == 0) {
     print('SymLoadModuleEx failed.');
@@ -41,13 +48,22 @@ void main() {
           hProcess,
           baseOfDll,
           mask,
-          Pointer.fromFunction<SymEnumSymbolsProc>(enumSymbolProc, 0),
+          Pointer.fromFunction<SymEnumSymbolsProc>(_enumSymbolProc, 0),
           nullptr) ==
       FALSE) {
     print('SymEnumSymbols failed.');
   }
 
   SymCleanup(hProcess);
-  free(module);
+  free(modulePtr);
   free(mask);
+
+  return _exportedSymbols;
+}
+
+void main() {
+  final symbols = getExports(r'c:\windows\system32\kernel32.dll');
+
+  symbols
+      .forEach((name, address) => print('[${address.toHexString(32)}] $name'));
 }

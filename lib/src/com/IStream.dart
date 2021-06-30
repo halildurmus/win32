@@ -67,51 +67,64 @@ class IStream extends ISequentialStream {
   IStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) =>
-      Pointer<NativeFunction<_Seek_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_Seek_Native>>>()
+              .value
               .asFunction<_Seek_Dart>()(
           ptr.ref.lpVtbl, dlibMove, dwOrigin, plibNewPosition);
 
-  int SetSize(int libNewSize) =>
-      Pointer<NativeFunction<_SetSize_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_SetSize_Dart>()(ptr.ref.lpVtbl, libNewSize);
+  int SetSize(int libNewSize) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_SetSize_Native>>>()
+      .value
+      .asFunction<_SetSize_Dart>()(ptr.ref.lpVtbl, libNewSize);
 
   int CopyTo(Pointer pstm, int cb, Pointer<Uint64> pcbRead,
           Pointer<Uint64> pcbWritten) =>
-      Pointer<NativeFunction<_CopyTo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<Pointer<NativeFunction<_CopyTo_Native>>>()
+              .value
               .asFunction<_CopyTo_Dart>()(
           ptr.ref.lpVtbl, pstm, cb, pcbRead, pcbWritten);
 
-  int Commit(int grfCommitFlags) =>
-      Pointer<NativeFunction<_Commit_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_Commit_Dart>()(ptr.ref.lpVtbl, grfCommitFlags);
+  int Commit(int grfCommitFlags) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_Commit_Native>>>()
+      .value
+      .asFunction<_Commit_Dart>()(ptr.ref.lpVtbl, grfCommitFlags);
 
-  int Revert() => Pointer<NativeFunction<_Revert_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(9).value)
+  int Revert() => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_Revert_Native>>>()
+      .value
       .asFunction<_Revert_Dart>()(ptr.ref.lpVtbl);
 
-  int LockRegion(int libOffset, int cb, int dwLockType) =>
-      Pointer<NativeFunction<_LockRegion_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_LockRegion_Dart>()(
-          ptr.ref.lpVtbl, libOffset, cb, dwLockType);
+  int LockRegion(int libOffset, int cb, int dwLockType) => ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<Pointer<NativeFunction<_LockRegion_Native>>>()
+          .value
+          .asFunction<_LockRegion_Dart>()(
+      ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
   int UnlockRegion(int libOffset, int cb, int dwLockType) =>
-      Pointer<NativeFunction<_UnlockRegion_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(11)
+              .cast<Pointer<NativeFunction<_UnlockRegion_Native>>>()
+              .value
               .asFunction<_UnlockRegion_Dart>()(
           ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
-  int Stat(Pointer<STATSTG> pstatstg, int grfStatFlag) =>
-      Pointer<NativeFunction<_Stat_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_Stat_Dart>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
+  int Stat(Pointer<STATSTG> pstatstg, int grfStatFlag) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_Stat_Native>>>()
+      .value
+      .asFunction<_Stat_Dart>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
 
-  int Clone(Pointer<Pointer> ppstm) =>
-      Pointer<NativeFunction<_Clone_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppstm);
+  int Clone(Pointer<Pointer> ppstm) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_Clone_Native>>>()
+      .value
+      .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppstm);
 }

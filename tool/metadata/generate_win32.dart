@@ -12,6 +12,7 @@ import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
+import 'projection/typeprojector.dart';
 import 'winmd_caveats.dart';
 
 class Win32Prototype {
@@ -19,12 +20,15 @@ class Win32Prototype {
   final Method _method;
   final String _lib;
 
+  // Sanitize any Dart keywords in parameter names.
+  String sanitize(String input) => input == 'in' ? 'in_' : input;
+
   String get nativePrototype =>
       '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).nativeType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartPrototype =>
@@ -32,21 +36,19 @@ class Win32Prototype {
 
   String get dartParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).dartType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).dartType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartFfiMapping =>
       '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
-      '$_nameWithoutEncoding($dartParams) {\n'
-      '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
+      '$_nameWithoutEncoding($dartParams) =>\n'
+      '  _$_nameWithoutEncoding'
+      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
+      ';\n\n'
+      '  late final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
-      "  >('${_method.methodName}');\n"
-      '  return _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
-      ';\n'
-      '}\n';
-
+      "  >('${_method.name}');\n\n";
   const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
 }
 
@@ -85,6 +87,21 @@ bool methodMatches(String methodName, List<String> rawPrototype) {
   final methodNameToFind = ' $methodName(';
 
   return prototype.contains(methodNameToFind);
+}
+
+/// Qualify the DLL with an extension.
+///
+/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
+/// couple of exceptions. We hardcode them here, since there are so few.
+String libraryFromDllName(String dllName) {
+  switch (dllName) {
+    case 'bthprops':
+      return 'bthprops.cpl';
+    case 'winspool':
+      return 'winspool.drv';
+    default:
+      return '$dllName.dll';
+  }
 }
 
 String generateDocComment(Win32Function func) {
@@ -131,7 +148,7 @@ import 'combase.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
-final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
+final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
 ''');
 
     // Subset of functions that belong to the library we're projecting.
@@ -140,8 +157,8 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
     for (final function in filteredFunctionList.keys) {
       try {
-        final method = methods.firstWhere((m) => methodMatches(
-            m.methodName, filteredFunctionList[function]!.prototype));
+        final method = methods.firstWhere((m) =>
+            methodMatches(m.name, filteredFunctionList[function]!.prototype));
         writer.writeStringSync('''
 ${generateDocComment(filteredFunctionList[function]!)}
 ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
@@ -155,11 +172,21 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
   }
 }
 
-void main() {
-  final scope = MetadataStore.getWin32Scope();
-  final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
+void main(List<String> args) {
+  final options = args.length != 1 ? '--all' : args.last;
+  final optionAPIs =
+      (options != '--tests-only') && (options != '--structs-only');
+  final optionTests =
+      (options != '--apis-only') && (options != '--structs-only');
+  final optionStructs =
+      (options != '--apis-only') && (options != '--tests-only');
 
-  apis.forEach((api) => methods.addAll(api.methods));
+  final scope = MetadataStore.getWin32Scope();
+  final apis = scope.typeDefs.where((type) => type.name.endsWith('Apis'));
+
+  for (final api in apis) {
+    methods.addAll(api.methods);
+  }
   print('${methods.length} APIs collected');
 
   final win32 = Win32API(
@@ -169,15 +196,23 @@ void main() {
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
 
-  generateFfiFiles(win32);
-  print('$genCount typedefs generated from Windows metadata.');
+  if (optionAPIs) {
+    generateFfiFiles(win32);
+    print('$genCount typedefs generated from Windows metadata.');
+  }
 
-  final apiTestsGenerated = generateTests(win32);
-  print('$apiTestsGenerated API tests generated.');
+  if (optionTests) {
+    final apiTestsGenerated = generateTests(win32);
+    print('$apiTestsGenerated API tests generated.');
+  }
 
-  final structsGenerated = generateStructs(win32);
-  print('$structsGenerated structs generated from Windows metadata.');
+  if (optionStructs) {
+    final structsGenerated = generateStructs(win32);
+    print('$structsGenerated structs generated from Windows metadata.');
+  }
 
-  final structTestsGenerated = generateStructSizeTests();
-  print('$structTestsGenerated struct tests generated.');
+  if (optionTests) {
+    final structTestsGenerated = generateStructSizeTests();
+    print('$structTestsGenerated struct tests generated.');
+  }
 }

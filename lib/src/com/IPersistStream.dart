@@ -43,21 +43,27 @@ class IPersistStream extends IPersist {
 
   IPersistStream(Pointer<COMObject> ptr) : super(ptr);
 
-  int IsDirty() => Pointer<NativeFunction<_IsDirty_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(4).value)
+  int IsDirty() => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<_IsDirty_Native>>>()
+      .value
       .asFunction<_IsDirty_Dart>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer pStm) => Pointer<NativeFunction<_Load_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(5).value)
+  int Load(Pointer pStm) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<_Load_Native>>>()
+      .value
       .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pStm);
 
-  int Save(Pointer pStm, int fClearDirty) =>
-      Pointer<NativeFunction<_Save_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pStm, fClearDirty);
+  int Save(Pointer pStm, int fClearDirty) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_Save_Native>>>()
+      .value
+      .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pStm, fClearDirty);
 
-  int GetSizeMax(Pointer<Uint64> pcbSize) =>
-      Pointer<NativeFunction<_GetSizeMax_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetSizeMax_Dart>()(ptr.ref.lpVtbl, pcbSize);
+  int GetSizeMax(Pointer<Uint64> pcbSize) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<_GetSizeMax_Native>>>()
+      .value
+      .asFunction<_GetSizeMax_Dart>()(ptr.ref.lpVtbl, pcbSize);
 }

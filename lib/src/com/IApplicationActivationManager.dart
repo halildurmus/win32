@@ -69,22 +69,28 @@ class IApplicationActivationManager extends IUnknown {
 
   int ActivateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
-      Pointer<NativeFunction<_ActivateApplication_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_ActivateApplication_Native>>>()
+              .value
               .asFunction<_ActivateApplication_Dart>()(
           ptr.ref.lpVtbl, appUserModelId, arguments, options, processId);
 
   int ActivateForFile(Pointer<Utf16> appUserModelId, Pointer itemArray,
           Pointer<Utf16> verb, Pointer<Uint32> processId) =>
-      Pointer<NativeFunction<_ActivateForFile_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_ActivateForFile_Native>>>()
+              .value
               .asFunction<_ActivateForFile_Dart>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, verb, processId);
 
   int ActivateForProtocol(Pointer<Utf16> appUserModelId, Pointer itemArray,
           Pointer<Uint32> processId) =>
-      Pointer<NativeFunction<_ActivateForProtocol_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_ActivateForProtocol_Native>>>()
+              .value
               .asFunction<_ActivateForProtocol_Dart>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, processId);
 }

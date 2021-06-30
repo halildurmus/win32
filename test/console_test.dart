@@ -35,14 +35,16 @@ void main() {
   });
 
   test('SHGetKnownFolderPath', () {
-    final legacyAPI = getFolderPath();
-    final currentAPI = getKnownFolderPath();
+    final legacyAPI = getDesktopPath1();
+    final win32API = getDesktopPath2();
+    final comAPI = getDesktopPath3();
 
     expect(
-      currentAPI,
+      comAPI,
       allOf(
         [
           equals(legacyAPI),
+          equals(win32API),
           isNot(contains('error')),
         ],
       ),

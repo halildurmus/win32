@@ -24,9 +24,10 @@
 /// ## Strings (Win32 and COM)
 ///
 /// Win32 strings are typically stored as null-terminated arrays of UTF-16 code
-/// units. (Some older Windows APIs also offer an ANSI, or 8-bit representation,
-/// but we use the wide versions, which are suffixed with a capital 'W' (e.g.
-/// `FormatMessageW`).
+/// units. (Some Windows APIs also offer an ANSI 8-bit representation, or a
+/// UTF-8 representation. but this library emphasizes the wide character
+/// version, which in the original header files are suffixed with a capital 'W'
+/// (e.g. `FormatMessageW`).
 ///
 /// You can use the [toNativeUtf16] function to convert a Dart string into a
 /// `Pointer<Utf16>`, which can be passed to any Windows API expecting a string,
@@ -42,7 +43,7 @@
 ///
 /// To receive a string, allocate memory with a command like the following:
 /// ```dart
-///   final buffer = calloc<Uint16>(count: length).cast<Utf16>();
+///   final buffer = wsalloc(length);
 ///   GetWindowText(hWnd, buffer, length);
 /// ```
 ///
@@ -66,20 +67,23 @@
 ///
 /// ## Strings (Windows Runtime)
 ///
-/// Windows Runtime APIs use `HSTRING` as their native type, which is created
-/// with the [WindowsCreateString] API and deleted with the
-/// [WindowsDeleteString] API. A Dart function may be used to convert to and
-/// from `HSTRING`s, for example:
+/// Windows Runtime APIs use `HSTRING` as their native type. An HSTRING is an
+/// immutable string object, which is created with the [WindowsCreateString] API
+/// and deleted with the [WindowsDeleteString] API. The HSTRING itself is an
+/// integer value, just like other `HANDLE` objects in the Win32 programming
+/// interface.
+///
+/// A Dart function may be used to convert to and from `HSTRING`s, for example:
 /// ```dart
-///   final systemPtr = calloc<IntPtr>();
+///   final phCalendarSystem = calloc<HSTRING>();
 ///   calendar.GetCalendarSystem(systemPtr);
-///   print('The calendar system is ${convertFromHString(systemPtr)}.');
-///   WindowsDeleteString(systemPtr.value);
-///   free(systemPtr);
+///   print('The calendar system is ${convertFromHString(phCalendarSystem)}.');
+///   WindowsDeleteString(phCalendarSystem.value);
 /// ```
 ///
-/// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
-/// passing the string address itself, not the pointer, as shown above.
+/// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString`; you do
+/// not need to free the pointer itself, since Windows reference counts the
+/// backing store and frees the memory when the reference count reaches 0.
 library win32;
 
 // Core Win32 APIs, constants and macros
@@ -88,8 +92,9 @@ export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
-export 'src/structs.dart';
-export 'src/structs.g.dart';
+export 'src/structs.dart' hide IN_ADDR;
+export 'src/structs.g.dart'
+    hide addrinfo, fd_set, SOCKADDR, timeval, hostent, protoent, servent;
 export 'src/utils.dart';
 
 // Useful extension methods
@@ -98,6 +103,7 @@ export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
 export 'src/extensions/set_string.dart';
+export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
@@ -106,6 +112,8 @@ export 'src/bthprops.dart';
 export 'src/combase.dart';
 export 'src/comctl32.dart';
 export 'src/comdlg32.dart';
+export 'src/dbghelp.dart';
+export 'src/dwmapi.dart';
 export 'src/dxva2.dart';
 export 'src/gdi32.dart';
 export 'src/kernel32.dart';
@@ -114,11 +122,17 @@ export 'src/ole32.dart';
 export 'src/oleaut32.dart';
 export 'src/powrprof.dart';
 export 'src/rometadata.dart';
+export 'src/scarddlg.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
+export 'src/spoolss.dart';
+export 'src/types.dart';
 export 'src/user32.dart';
+export 'src/uxtheme.dart';
 export 'src/version.dart';
 export 'src/winmm.dart';
+export 'src/winscard.dart';
+export 'src/winspool.dart';
 
 export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
@@ -129,7 +143,29 @@ export 'src/winrt/winrt_constants.dart';
 export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
+
 export 'src/com/IApplicationActivationManager.dart';
+export 'src/com/IApplicationActivationManager.dart';
+export 'src/com/IAppxFactory.dart';
+export 'src/com/IAppxFactory.dart';
+export 'src/com/IAppxFile.dart';
+export 'src/com/IAppxFilesEnumerator.dart';
+export 'src/com/IAppxManifestApplication.dart';
+export 'src/com/IAppxManifestApplicationsEnumerator.dart';
+export 'src/com/IAppxManifestOSPackageDependency.dart';
+export 'src/com/IAppxManifestPackageDependenciesEnumerator.dart';
+export 'src/com/IAppxManifestPackageDependency.dart';
+export 'src/com/IAppxManifestPackageId.dart';
+export 'src/com/IAppxManifestProperties.dart';
+export 'src/com/IAppxManifestReader.dart';
+export 'src/com/IAppxManifestReader2.dart';
+export 'src/com/IAppxManifestReader3.dart';
+export 'src/com/IAppxManifestReader4.dart';
+export 'src/com/IAppxManifestReader5.dart';
+export 'src/com/IAppxManifestReader6.dart';
+export 'src/com/IAppxManifestReader7.dart';
+export 'src/com/IAppxPackageReader.dart';
+export 'src/com/IAsyncAction.dart';
 export 'src/com/IAsyncInfo.dart';
 export 'src/com/IBindCtx.dart';
 export 'src/com/ICalendar.dart';
@@ -142,6 +178,7 @@ export 'src/com/IEnumIDList.dart';
 export 'src/com/IEnumMoniker.dart';
 export 'src/com/IEnumNetworkConnections.dart';
 export 'src/com/IEnumNetworks.dart';
+export 'src/com/IEnumResources.dart';
 export 'src/com/IEnumSpellingError.dart';
 export 'src/com/IEnumString.dart';
 export 'src/com/IEnumVARIANT.dart';
@@ -164,6 +201,8 @@ export 'src/com/INetworkConnection.dart';
 export 'src/com/INetworkListManager.dart';
 export 'src/com/INetworkListManagerEvents.dart';
 export 'src/com/IPersist.dart';
+export 'src/com/IPersistFile.dart';
+export 'src/com/IPersistMemory.dart';
 export 'src/com/IPersistStream.dart';
 export 'src/com/IPropertyValue.dart';
 export 'src/com/IProvideClassInfo.dart';
@@ -174,15 +213,27 @@ export 'src/com/IShellItem.dart';
 export 'src/com/IShellItem2.dart';
 export 'src/com/IShellItemArray.dart';
 export 'src/com/IShellItemFilter.dart';
+export 'src/com/IShellItemResources.dart';
+export 'src/com/IShellLinkDataList.dart';
+export 'src/com/IShellLinkDual.dart';
+export 'src/com/IShellLink.dart';
+export 'src/com/IShellService.dart';
 export 'src/com/ISpellChecker.dart';
 export 'src/com/ISpellCheckerChangedEventHandler.dart';
 export 'src/com/ISpellCheckerFactory.dart';
 export 'src/com/ISpellingError.dart';
 export 'src/com/IStream.dart';
 export 'src/com/ISupportErrorInfo.dart';
+export 'src/com/IToastNotificationFactory.dart';
+export 'src/com/IToastNotificationManagerStatics.dart';
 export 'src/com/ITypeInfo.dart';
 export 'src/com/IUnknown.dart';
+export 'src/com/IUri.dart';
+export 'src/com/IUserDataPathsStatics.dart';
+export 'src/com/IVirtualDesktopManager.dart';
 export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemContext.dart';
 export 'src/com/IWbemLocator.dart';
 export 'src/com/IWbemServices.dart';
+export 'src/com/ToastNotification.dart';
+export 'src/com/UserDataPaths.dart';

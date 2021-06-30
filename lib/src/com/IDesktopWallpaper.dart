@@ -100,93 +100,116 @@ class IDesktopWallpaper extends IUnknown {
 
   IDesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
-      Pointer<NativeFunction<_SetWallpaper_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_SetWallpaper_Dart>()(
-          ptr.ref.lpVtbl, monitorID, wallpaper);
+  int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) => ptr
+      .ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<_SetWallpaper_Native>>>()
+      .value
+      .asFunction<_SetWallpaper_Dart>()(ptr.ref.lpVtbl, monitorID, wallpaper);
 
   int GetWallpaper(
           Pointer<Utf16> monitorID, Pointer<Pointer<Utf16>> wallpaper) =>
-      Pointer<NativeFunction<_GetWallpaper_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetWallpaper_Native>>>()
+              .value
               .asFunction<_GetWallpaper_Dart>()(
           ptr.ref.lpVtbl, monitorID, wallpaper);
 
   int GetMonitorDevicePathAt(
           int monitorIndex, Pointer<Pointer<Utf16>> monitorID) =>
-      Pointer<NativeFunction<_GetMonitorDevicePathAt_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_GetMonitorDevicePathAt_Native>>>()
+              .value
               .asFunction<_GetMonitorDevicePathAt_Dart>()(
           ptr.ref.lpVtbl, monitorIndex, monitorID);
 
-  int GetMonitorDevicePathCount(Pointer<Uint32> count) =>
-      Pointer<NativeFunction<_GetMonitorDevicePathCount_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetMonitorDevicePathCount_Dart>()(ptr.ref.lpVtbl, count);
+  int GetMonitorDevicePathCount(Pointer<Uint32> count) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<_GetMonitorDevicePathCount_Native>>>()
+      .value
+      .asFunction<_GetMonitorDevicePathCount_Dart>()(ptr.ref.lpVtbl, count);
 
   int GetMonitorRECT(Pointer<Utf16> monitorID, Pointer<RECT> displayRect) =>
-      Pointer<NativeFunction<_GetMonitorRECT_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(7)
+              .cast<Pointer<NativeFunction<_GetMonitorRECT_Native>>>()
+              .value
               .asFunction<_GetMonitorRECT_Dart>()(
           ptr.ref.lpVtbl, monitorID, displayRect);
 
-  int SetBackgroundColor(int color) =>
-      Pointer<NativeFunction<_SetBackgroundColor_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_SetBackgroundColor_Dart>()(ptr.ref.lpVtbl, color);
+  int SetBackgroundColor(int color) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<Pointer<NativeFunction<_SetBackgroundColor_Native>>>()
+      .value
+      .asFunction<_SetBackgroundColor_Dart>()(ptr.ref.lpVtbl, color);
 
-  int GetBackgroundColor(Pointer<Uint32> color) =>
-      Pointer<NativeFunction<_GetBackgroundColor_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_GetBackgroundColor_Dart>()(ptr.ref.lpVtbl, color);
+  int GetBackgroundColor(Pointer<Uint32> color) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_GetBackgroundColor_Native>>>()
+      .value
+      .asFunction<_GetBackgroundColor_Dart>()(ptr.ref.lpVtbl, color);
 
-  int SetPosition(int position) =>
-      Pointer<NativeFunction<_SetPosition_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_SetPosition_Dart>()(ptr.ref.lpVtbl, position);
+  int SetPosition(int position) => ptr.ref.lpVtbl.value
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<_SetPosition_Native>>>()
+      .value
+      .asFunction<_SetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int GetPosition(Pointer<Uint32> position) =>
-      Pointer<NativeFunction<_GetPosition_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetPosition_Dart>()(ptr.ref.lpVtbl, position);
+  int GetPosition(Pointer<Uint32> position) => ptr.ref.lpVtbl.value
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_GetPosition_Native>>>()
+      .value
+      .asFunction<_GetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int SetSlideshow(Pointer items) =>
-      Pointer<NativeFunction<_SetSlideshow_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_SetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
+  int SetSlideshow(Pointer items) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<Pointer<NativeFunction<_SetSlideshow_Native>>>()
+      .value
+      .asFunction<_SetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
 
-  int GetSlideshow(Pointer<Pointer> items) =>
-      Pointer<NativeFunction<_GetSlideshow_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
+  int GetSlideshow(Pointer<Pointer> items) => ptr.ref.lpVtbl.value
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_GetSlideshow_Native>>>()
+      .value
+      .asFunction<_GetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
 
   int SetSlideshowOptions(int options, int slideshowTick) =>
-      Pointer<NativeFunction<_SetSlideshowOptions_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(14)
+              .cast<Pointer<NativeFunction<_SetSlideshowOptions_Native>>>()
+              .value
               .asFunction<_SetSlideshowOptions_Dart>()(
           ptr.ref.lpVtbl, options, slideshowTick);
 
   int GetSlideshowOptions(
           Pointer<Uint32> options, Pointer<Uint32> slideshowTick) =>
-      Pointer<NativeFunction<_GetSlideshowOptions_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(15)
+              .cast<Pointer<NativeFunction<_GetSlideshowOptions_Native>>>()
+              .value
               .asFunction<_GetSlideshowOptions_Dart>()(
           ptr.ref.lpVtbl, options, slideshowTick);
 
   int AdvanceSlideshow(Pointer<Utf16> monitorID, int direction) =>
-      Pointer<NativeFunction<_AdvanceSlideshow_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
+      ptr.ref.lpVtbl.value
+              .elementAt(16)
+              .cast<Pointer<NativeFunction<_AdvanceSlideshow_Native>>>()
+              .value
               .asFunction<_AdvanceSlideshow_Dart>()(
           ptr.ref.lpVtbl, monitorID, direction);
 
-  int GetStatus(Pointer<Uint32> state) =>
-      Pointer<NativeFunction<_GetStatus_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_GetStatus_Dart>()(ptr.ref.lpVtbl, state);
+  int GetStatus(Pointer<Uint32> state) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<Pointer<NativeFunction<_GetStatus_Native>>>()
+      .value
+      .asFunction<_GetStatus_Dart>()(ptr.ref.lpVtbl, state);
 
-  int Enable(int enable) => Pointer<NativeFunction<_Enable_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(18).value)
+  int Enable(int enable) => ptr.ref.lpVtbl.value
+      .elementAt(18)
+      .cast<Pointer<NativeFunction<_Enable_Native>>>()
+      .value
       .asFunction<_Enable_Dart>()(ptr.ref.lpVtbl, enable);
 }
 

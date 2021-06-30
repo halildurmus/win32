@@ -13,6 +13,7 @@ import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
 import 'generate_win32.dart';
+import 'projection/typeprojector.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
@@ -35,6 +36,7 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
 
 import 'helpers.dart';
 
@@ -62,8 +64,8 @@ void main() {
 
       late Method method;
       try {
-        method = methods.firstWhere((m) => methodMatches(
-            m.methodName, filteredFunctionList[function]!.prototype));
+        method = methods.firstWhere((m) =>
+            methodMatches(m.name, filteredFunctionList[function]!.prototype));
       } on StateError {
         continue;
       }
@@ -80,11 +82,11 @@ void main() {
 
       final test = '''
       test('Can instantiate $function', () {
-        final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
+        final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
         final $function = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(${prototype.nativeParams}),
           $returnDartType Function(${prototype.dartParams})>
-          ('${method.methodName}');
+          ('${method.name}');
         expect($function, isA<Function>());
       });''';
 
@@ -126,6 +128,7 @@ import 'dart:ffi';
 
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;

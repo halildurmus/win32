@@ -13,19 +13,28 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import 'projection/classprojector.dart';
+import 'projection/typeprinter.dart';
+
 final typesToGenerate = [
   'Windows.Foundation.IPropertyValue',
+  'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncInfo',
+  'Windows.Foundation.IAsyncOperation`1',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
-  'Windows.Storage.Pickers.IFileOpenPicker'
+  'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.Storage.IUserDataPathsStatics',
+  'Windows.Gaming.Input.IGamepadStatics',
+  // 'Windows.Gaming.Input.IGamepadStatics2'
+  'Windows.UI.Notifications.IToastNotificationFactory',
+  'Windows.UI.Notifications.IToastNotificationManagerStatics',
 ];
 
 void main(List<String> args) {
-  final outputDirectory = (args.length == 1)
-      ? Directory(args.first)
-      : Directory('lib/src/generated');
+  final outputDirectory =
+      (args.length == 1) ? Directory(args.first) : Directory('lib/src/com');
 
   for (final type in typesToGenerate) {
     final mdTypeDef = MetadataStore.getMetadataForType(type);
