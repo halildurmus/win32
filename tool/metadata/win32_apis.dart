@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
+import 'projection/typeprojector.dart';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
@@ -37,7 +38,7 @@ class Win32Prototype {
       '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
-      "  >('${_method.methodName}');\n"
+      "  >('${_method.name}');\n"
       '  return _$_nameWithoutEncoding'
       '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
       ';\n'
@@ -86,13 +87,13 @@ String generateDocComment(Win32Function func) {
 }
 
 void generateFfiFile(String library, TypeDef typedef) {
-  final folderName = typedef.typeName.split('.')[2].toLowerCase(); // e.g. gdi
+  final folderName = typedef.name.split('.')[2].toLowerCase(); // e.g. gdi
 
   final filteredFunctionList = typedef.methods
       .where((method) => method.module.name == library)
-      .where((method) => !method.methodName.endsWith('A'))
+      .where((method) => !method.name.endsWith('A'))
       .toList()
-        ..sort((a, b) => a.methodName.compareTo(b.methodName));
+        ..sort((a, b) => a.name.compareTo(b.name));
 
   final writer =
       File('lib/src/$folderName/apis.dart').openSync(mode: FileMode.write);
@@ -125,7 +126,7 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
   for (final function in filteredFunctionList) {
     writer.writeStringSync(
-        '${Win32Prototype(function.methodName, function, libraryDartName).dartFfiMapping}\n');
+        '${Win32Prototype(function.name, function, libraryDartName).dartFfiMapping}\n');
   }
 
   writer.closeSync();
@@ -136,7 +137,7 @@ void main() {
 
   // Start with the GDI namespace
   final gdi = scope.typeDefs
-      .where((typedef) => (typedef.typeName == 'Windows.Win32.Gdi.Apis'))
+      .where((typedef) => (typedef.name == 'Windows.Win32.Gdi.Apis'))
       .first;
 
   // List of distinct modules in the namespace

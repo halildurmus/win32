@@ -11,19 +11,19 @@ void initNamespaces(Scope scope) {
 
   final scope = MetadataStore.getWin32Scope();
   for (final td in scope.typeDefs) {
-    if (td.typeName.startsWith('Windows.Win32')) {
-      final namespace = td.typeName.split('.')[2];
+    if (td.name.startsWith('Windows.Win32')) {
+      final namespace = td.name.split('.')[2];
       namespaceSet.add('Windows.Win32.$namespace');
     }
   }
   namespaces = namespaceSet.toList()..sort((a, b) => a.compareTo(b));
 }
 
-String processEnumeration(Enumeration enumClass) {
+String processEnumeration(TypeDef enumClass) {
   final buffer = StringBuffer();
 
   // Get the enum name
-  var dartClass = enumClass.typeName.split('.').last;
+  var dartClass = enumClass.name.split('.').last;
 
   // Dart treats types beginning with _ as private to the library
   while (dartClass.startsWith('_')) {
@@ -54,9 +54,9 @@ void main() {
     final folderName = namespace.split('.').last.toLowerCase();
 
     final filteredEnums = scope.enums
-        .where((typedef) => typedef.typeName.startsWith(namespace))
+        .where((typedef) => typedef.name.startsWith(namespace))
         .toList()
-          ..sort((a, b) => a.typeName.compareTo(b.typeName));
+          ..sort((a, b) => a.name.compareTo(b.name));
 
     if (filteredEnums.isNotEmpty) {
       Directory('lib/src/$folderName').createSync();

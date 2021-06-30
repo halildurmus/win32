@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
+
+import 'projection/typeprinter.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -60,8 +61,8 @@ void initNamespaces(Scope scope) {
 
   final scope = MetadataStore.getWin32Scope();
   for (final td in scope.typeDefs) {
-    if (td.typeName.startsWith('Windows.Win32')) {
-      final namespace = td.typeName.split('.')[2];
+    if (td.name.startsWith('Windows.Win32')) {
+      final namespace = td.name.split('.')[2];
       namespaceSet.add('Windows.Win32.$namespace');
     }
   }
@@ -76,9 +77,9 @@ void main() {
     final folderName = namespace.split('.').last.toLowerCase();
 
     final filteredTypeDefs = scope.typeDefs.where((typedef) =>
-        typedef.typeName.startsWith(namespace) &&
+        typedef.name.startsWith(namespace) &&
         typedef.isClass &&
-        typedef.parent?.typeName == 'System.ValueType');
+        typedef.parent?.name == 'System.ValueType');
 
     if (filteredTypeDefs.isNotEmpty) {
       Directory('lib/src/$folderName').createSync();
@@ -94,7 +95,7 @@ void main() {
 
       for (final struct in filteredTypeDefs) {
         buffer.write(
-            TypePrinter.printStruct(struct, struct.typeName.split('.').last));
+            TypePrinter.printStruct(struct, struct.name.split('.').last));
       }
       writer.writeStringSync(buffer.toString());
     }
