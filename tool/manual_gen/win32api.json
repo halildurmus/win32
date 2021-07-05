@@ -1092,10 +1092,35 @@
         "dllLibrary": "dwmapi",
         "comment": "Retrieves the current color used for Desktop Window Manager (DWM) glass composition. This value is based on the current color scheme and can be modified by the user. Applications can listen for color changes by handling the WM_DWMCOLORIZATIONCOLORCHANGED notification."
     },
+    "DwmGetTransportAttributes": {
+        "prototype": "DWMAPI DwmGetTransportAttributes(\n  BOOL  *pfIsRemoting,\n  BOOL  *pfIsConnected,\n  DWORD *pDwGeneration\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Retrieves transport attributes."
+    },
     "DwmGetWindowAttribute": {
         "prototype": "DWMAPI DwmGetWindowAttribute(\n  HWND  hwnd,\n  DWORD dwAttribute,\n  PVOID pvAttribute,\n  DWORD cbAttribute\n);",
         "dllLibrary": "dwmapi",
         "comment": "Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window."
+    },
+    "DwmInvalidateIconicBitmaps": {
+        "prototype": "DWMAPI DwmInvalidateIconicBitmaps(\n  HWND hwnd\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Called by an application to indicate that all previously provided iconic bitmaps from a window, both thumbnails and peek representations, should be refreshed."
+    },
+    "DwmRenderGesture": {
+        "prototype": "DWMAPI DwmRenderGesture(\n  GESTURE_TYPE gt,\n  UINT         cContacts,\n  const DWORD  *pdwPointerID,\n  const POINT  *pPoints\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture."
+    },
+    "DwmSetWindowAttribute": {
+        "prototype": "DWMAPI DwmSetWindowAttribute(\n  HWND    hwnd,\n  DWORD   dwAttribute,\n  LPCVOID pvAttribute,\n  DWORD   cbAttribute\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window."
+    },
+    "DwmShowContact": {
+        "prototype": "DWMAPI DwmShowContact(\n  DWORD           dwPointerID,\n  DWM_SHOWCONTACT eShowContact\n);",
+        "dllLibrary": "dwmapi",
+        "comment": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact."
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
