@@ -57,6 +57,22 @@ late final _GetProcessDpiAwareness = _shcore.lookupFunction<
     int Function(
         int hprocess, Pointer<Uint32> value)>('GetProcessDpiAwareness');
 
+/// Gets the scale factor of a specific monitor.
+///
+/// ```c
+/// HRESULT GetScaleFactorForMonitor(
+///   HMONITOR            hMon,
+///   DEVICE_SCALE_FACTOR *pScale
+/// );
+/// ```
+/// {@category shcore}
+int GetScaleFactorForMonitor(int hMon, Pointer<Uint32> pScale) =>
+    _GetScaleFactorForMonitor(hMon, pScale);
+
+late final _GetScaleFactorForMonitor = _shcore.lookupFunction<
+    Int32 Function(IntPtr hMon, Pointer<Uint32> pScale),
+    int Function(int hMon, Pointer<Uint32> pScale)>('GetScaleFactorForMonitor');
+
 /// Sets the process-default DPI awareness level. This is equivalent to
 /// calling SetProcessDpiAwarenessContext with the corresponding
 /// DPI_AWARENESS_CONTEXT value.

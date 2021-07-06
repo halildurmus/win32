@@ -71,6 +71,13 @@ void main() {
       expect(sizeOf<OVERLAPPED>(), equals(20));
     }
   });
+  test('Struct PRINTER_NOTIFY_INFO_DATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(32));
+    } else {
+      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(20));
+    }
+  });
   test('Struct PROCESS_HEAP_ENTRY is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(40));
@@ -333,6 +340,23 @@ void main() {
   test('Struct DRAWTEXTPARAMS is the right size', () {
     expect(sizeOf<DRAWTEXTPARAMS>(), equals(20));
   });
+  test('Struct DTBGOPTS is the right size', () {
+    expect(sizeOf<DTBGOPTS>(), equals(24));
+  });
+  test('Struct DTTOPTS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<DTTOPTS>(), equals(72));
+    } else {
+      expect(sizeOf<DTTOPTS>(), equals(64));
+    }
+  });
+  test('Struct DWM_BLURBEHIND is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<DWM_BLURBEHIND>(), equals(20));
+    } else {
+      expect(sizeOf<DWM_BLURBEHIND>(), equals(16));
+    }
+  });
   test('Struct ENUMLOGFONTEX is the right size', () {
     expect(sizeOf<ENUMLOGFONTEX>(), equals(348));
   });
@@ -457,6 +481,9 @@ void main() {
   });
   test('Struct LUID is the right size', () {
     expect(sizeOf<LUID>(), equals(8));
+  });
+  test('Struct MARGINS is the right size', () {
+    expect(sizeOf<MARGINS>(), equals(16));
   });
   test('Struct MCI_OPEN_PARMS is the right size', () {
     if (is64bitOS) {
@@ -737,13 +764,6 @@ void main() {
       expect(sizeOf<PRINTER_NOTIFY_INFO>(), equals(32));
     }
   });
-  test('Struct PRINTER_NOTIFY_INFO_DATA is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(32));
-    } else {
-      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(20));
-    }
-  });
   test('Struct PRINTER_OPTIONS is the right size', () {
     expect(sizeOf<PRINTER_OPTIONS>(), equals(8));
   });
@@ -931,6 +951,9 @@ void main() {
       expect(sizeOf<TYPEATTR>(), equals(76));
     }
   });
+  test('Struct UNSIGNED_RATIO is the right size', () {
+    expect(sizeOf<UNSIGNED_RATIO>(), equals(8));
+  });
   test('Struct UPDATELAYEREDWINDOWINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<UPDATELAYEREDWINDOWINFO>(), equals(80));
@@ -983,6 +1006,9 @@ void main() {
     } else {
       expect(sizeOf<WNDCLASSEX>(), equals(48));
     }
+  });
+  test('Struct WTA_OPTIONS is the right size', () {
+    expect(sizeOf<WTA_OPTIONS>(), equals(8));
   });
   test('Struct XFORM is the right size', () {
     expect(sizeOf<XFORM>(), equals(24));

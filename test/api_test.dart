@@ -9015,6 +9015,17 @@ void main() {
               Pointer<Int32> pfOpaqueBlend)>('DwmGetColorizationColor');
       expect(DwmGetColorizationColor, isA<Function>());
     });
+    test('Can instantiate DwmGetTransportAttributes', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmGetTransportAttributes = dwmapi.lookupFunction<
+          Int32 Function(Pointer<Int32> pfIsRemoting,
+              Pointer<Int32> pfIsConnected, Pointer<Uint32> pDwGeneration),
+          int Function(
+              Pointer<Int32> pfIsRemoting,
+              Pointer<Int32> pfIsConnected,
+              Pointer<Uint32> pDwGeneration)>('DwmGetTransportAttributes');
+      expect(DwmGetTransportAttributes, isA<Function>());
+    });
     test('Can instantiate DwmGetWindowAttribute', () {
       final dwmapi = DynamicLibrary.open('dwmapi.dll');
       final DwmGetWindowAttribute = dwmapi.lookupFunction<
@@ -9023,6 +9034,38 @@ void main() {
           int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
               int cbAttribute)>('DwmGetWindowAttribute');
       expect(DwmGetWindowAttribute, isA<Function>());
+    });
+    test('Can instantiate DwmInvalidateIconicBitmaps', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmInvalidateIconicBitmaps = dwmapi.lookupFunction<
+          Int32 Function(IntPtr hwnd),
+          int Function(int hwnd)>('DwmInvalidateIconicBitmaps');
+      expect(DwmInvalidateIconicBitmaps, isA<Function>());
+    });
+    test('Can instantiate DwmRenderGesture', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmRenderGesture = dwmapi.lookupFunction<
+          Int32 Function(Uint32 gt, Uint32 cContacts,
+              Pointer<Uint32> pdwPointerID, Pointer<POINT> pPoints),
+          int Function(int gt, int cContacts, Pointer<Uint32> pdwPointerID,
+              Pointer<POINT> pPoints)>('DwmRenderGesture');
+      expect(DwmRenderGesture, isA<Function>());
+    });
+    test('Can instantiate DwmSetWindowAttribute', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmSetWindowAttribute = dwmapi.lookupFunction<
+          Int32 Function(IntPtr hwnd, Uint32 dwAttribute, Pointer pvAttribute,
+              Uint32 cbAttribute),
+          int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
+              int cbAttribute)>('DwmSetWindowAttribute');
+      expect(DwmSetWindowAttribute, isA<Function>());
+    });
+    test('Can instantiate DwmShowContact', () {
+      final dwmapi = DynamicLibrary.open('dwmapi.dll');
+      final DwmShowContact = dwmapi.lookupFunction<
+          Int32 Function(Uint32 dwPointerID, Uint32 eShowContact),
+          int Function(int dwPointerID, int eShowContact)>('DwmShowContact');
+      expect(DwmShowContact, isA<Function>());
     });
   });
 
@@ -9048,6 +9091,14 @@ void main() {
         expect(GetProcessDpiAwareness, isA<Function>());
       });
     }
+    test('Can instantiate GetScaleFactorForMonitor', () {
+      final shcore = DynamicLibrary.open('shcore.dll');
+      final GetScaleFactorForMonitor = shcore.lookupFunction<
+          Int32 Function(IntPtr hMon, Pointer<Uint32> pScale),
+          int Function(
+              int hMon, Pointer<Uint32> pScale)>('GetScaleFactorForMonitor');
+      expect(GetScaleFactorForMonitor, isA<Function>());
+    });
     if (windowsBuildNumber >= 9600) {
       test('Can instantiate SetProcessDpiAwareness', () {
         final shcore = DynamicLibrary.open('shcore.dll');

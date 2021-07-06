@@ -1,3 +1,7 @@
+## 2.2.5
+
+- Add more DWM APIs, including `DwmSetWindowAttribute`.
+
 ## 2.2.4
 
 - Add various DWM and subclassing APIs
