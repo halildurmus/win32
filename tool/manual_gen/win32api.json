@@ -2440,6 +2440,11 @@
         "dllLibrary": "comdlg32",
         "comment": "Creates a Save dialog box that lets the user specify the drive, directory, and name of a file to save."
     },
+    "GetScaleFactorForMonitor": {
+        "prototype": "HRESULT GetScaleFactorForMonitor(\n  HMONITOR            hMon,\n  DEVICE_SCALE_FACTOR *pScale\n);",
+        "dllLibrary": "shcore",
+        "comment": "Gets the scale factor of a specific monitor."
+    },
     "GetScrollBarInfo": {
         "prototype": "BOOL GetScrollBarInfo(\n  HWND           hwnd,\n  LONG           idObject,\n  PSCROLLBARINFO psbi\n);",
         "dllLibrary": "user32",

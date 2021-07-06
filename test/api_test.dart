@@ -9091,6 +9091,14 @@ void main() {
         expect(GetProcessDpiAwareness, isA<Function>());
       });
     }
+    test('Can instantiate GetScaleFactorForMonitor', () {
+      final shcore = DynamicLibrary.open('shcore.dll');
+      final GetScaleFactorForMonitor = shcore.lookupFunction<
+          Int32 Function(IntPtr hMon, Pointer<Uint32> pScale),
+          int Function(
+              int hMon, Pointer<Uint32> pScale)>('GetScaleFactorForMonitor');
+      expect(GetScaleFactorForMonitor, isA<Function>());
+    });
     if (windowsBuildNumber >= 9600) {
       test('Can instantiate SetProcessDpiAwareness', () {
         final shcore = DynamicLibrary.open('shcore.dll');
