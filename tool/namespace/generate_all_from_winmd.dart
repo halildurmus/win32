@@ -11,6 +11,20 @@ final scope = MetadataStore.getWin32Scope();
 /// The metadata namespaces we're generating
 const namespaces = <String>['Windows.Win32.Foundation'];
 
+List<String> namespacesInScope(Scope scope) {
+  // Use a Set to avoid duplication
+  final namespaceSet = <String>{};
+
+  final scope = MetadataStore.getWin32Scope();
+  for (final td in scope.typeDefs) {
+    if (td.name.startsWith('Windows.Win32')) {
+      final namespace = td.name.split('.')[2];
+      namespaceSet.add('Windows.Win32.$namespace');
+    }
+  }
+  return namespaceSet.toList()..sort((a, b) => a.compareTo(b));
+}
+
 String folderForNamespace(String namespace) =>
     'lib/src/${namespace.split('.').last.toLowerCase()}';
 

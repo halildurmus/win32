@@ -53,55 +53,6 @@ import 'package:ffi/ffi.dart';
 
 ''';
 
-// List<String> namespaces = [];
-
-// void initNamespaces(Scope scope) {
-//   // Use a Set to avoid duplication
-//   final namespaceSet = <String>{};
-
-//   final scope = MetadataStore.getWin32Scope();
-//   for (final td in scope.typeDefs) {
-//     if (td.name.startsWith('Windows.Win32')) {
-//       final namespace = td.name.split('.')[2];
-//       namespaceSet.add('Windows.Win32.$namespace');
-//     }
-//   }
-//   namespaces = namespaceSet.toList()..sort((a, b) => a.compareTo(b));
-// }
-
-// void main() {
-//   final scope = MetadataStore.getWin32Scope();
-//   initNamespaces(scope);
-
-//   for (final namespace in namespaces) {
-//     final folderName = namespace.split('.').last.toLowerCase();
-
-//     final filteredTypeDefs = scope.typeDefs.where((typedef) =>
-//         typedef.name.startsWith(namespace) &&
-//         typedef.isClass &&
-//         typedef.parent?.name == 'System.ValueType');
-
-//     if (filteredTypeDefs.isNotEmpty) {
-//       Directory('lib/src/$folderName').createSync();
-
-//       final writer = File('lib/src/$folderName/structs.dart')
-//           .openSync(mode: FileMode.write);
-
-//       final structsLength = filteredTypeDefs.length;
-//       print('Processing $structsLength structs in $namespace');
-//       final buffer = StringBuffer();
-
-//       buffer.write(structFileHeader);
-
-//       for (final struct in filteredTypeDefs) {
-//         buffer.write(
-//             TypePrinter.printStruct(struct, struct.name.split('.').last));
-//       }
-//       writer.writeStringSync(buffer.toString());
-//     }
-//   }
-// }
-
 void generateStructsFile(File file, List<TypeDef> typedefs) {
   final writer = file.openSync(mode: FileMode.write);
   final buffer = StringBuffer();

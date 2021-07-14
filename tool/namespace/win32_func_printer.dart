@@ -68,15 +68,6 @@ class Win32Prototype {
   const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
 }
 
-final methods = <Method>[];
-
-bool methodMatches(String methodName, List<String> rawPrototype) {
-  final prototype = rawPrototype.join('\n');
-  final methodNameToFind = ' $methodName(';
-
-  return prototype.contains(methodNameToFind);
-}
-
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
@@ -109,7 +100,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     final libraryDartName = library.replaceAll('-', '_').toLowerCase();
 
     writer.writeStringSync("  final _$libraryDartName = "
-        "DynamicLibrary.open('${libraryFromDllName(library)}');");
+        "DynamicLibrary.open('${libraryFromDllName(library)}');\n\n");
 
     for (final function in filteredFunctionList) {
       writer.writeStringSync(

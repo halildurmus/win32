@@ -16,6 +16,15 @@ import 'generate_win32_tests.dart';
 import 'utils.dart';
 import 'winmd_caveats.dart';
 
+final methods = <Method>[];
+
+bool methodMatches(String methodName, List<String> rawPrototype) {
+  final prototype = rawPrototype.join('\n');
+  final methodNameToFind = ' $methodName(';
+
+  return prototype.contains(methodNameToFind);
+}
+
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
