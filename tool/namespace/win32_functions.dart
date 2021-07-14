@@ -22,8 +22,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
 
@@ -60,8 +58,9 @@ List<String> importsForFunction(Method function) {
   // "foundation"
   for (final param in function.parameters) {
     if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-      final typeName = param.typeIdentifier.name.split('.');
-      importList.add(typeName[typeName.length - 2].toLowerCase());
+      final typeName = param.typeIdentifier.name.split('.').skip(2).toList()
+        ..removeLast();
+      importList.add(typeName.join('/').toLowerCase());
     }
   }
   return importList;
@@ -98,10 +97,12 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
       imports.addAll(importsForFunction(function));
     }
   }
+
   writer.writeStringSync(ffiFileHeader);
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
-      writer.writeStringSync("import '../$import/structs.g.dart';\n");
+      writer.writeStringSync(
+          "import '${relativePathToSrcDirectory(file)}$import/structs.g.dart';\n");
     }
   }
   writer.writeStringSync('\n');

@@ -8,8 +8,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
 

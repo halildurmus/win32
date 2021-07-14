@@ -15,8 +15,8 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-import '../foundation/structs.g.dart';
-import '../console/structs.g.dart';
+import '../../foundation/structs.g.dart';
+import '../../console/structs.g.dart';
 
 class CHAR_INFO extends Struct {
   @Uint32()

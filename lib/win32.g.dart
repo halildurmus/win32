@@ -6,27 +6,27 @@
   export 'src/foundation/functions.g.dart';
   export 'src/foundation/structs.g.dart';
 
-  export 'src/console/callbacks.g.dart';
-  export 'src/console/constants.g.dart';
-  export 'src/console/enums.g.dart';
-  export 'src/console/functions.g.dart';
-  export 'src/console/structs.g.dart';
+  export 'src/system/console/callbacks.g.dart';
+  export 'src/system/console/constants.g.dart';
+  export 'src/system/console/enums.g.dart';
+  export 'src/system/console/functions.g.dart';
+  export 'src/system/console/structs.g.dart';
 
-  export 'src/systeminformation/callbacks.g.dart';
-  export 'src/systeminformation/constants.g.dart';
-  export 'src/systeminformation/enums.g.dart';
-  export 'src/systeminformation/functions.g.dart';
-  export 'src/systeminformation/structs.g.dart';
+  export 'src/system/systeminformation/callbacks.g.dart';
+  export 'src/system/systeminformation/constants.g.dart';
+  export 'src/system/systeminformation/enums.g.dart';
+  export 'src/system/systeminformation/functions.g.dart';
+  export 'src/system/systeminformation/structs.g.dart';
 
-  export 'src/time/callbacks.g.dart';
-  export 'src/time/constants.g.dart';
-  export 'src/time/enums.g.dart';
-  export 'src/time/functions.g.dart';
-  export 'src/time/structs.g.dart';
+  export 'src/system/time/callbacks.g.dart';
+  export 'src/system/time/constants.g.dart';
+  export 'src/system/time/enums.g.dart';
+  export 'src/system/time/functions.g.dart';
+  export 'src/system/time/structs.g.dart';
 
-  export 'src/keyboardandmouseinput/callbacks.g.dart';
-  export 'src/keyboardandmouseinput/constants.g.dart';
-  export 'src/keyboardandmouseinput/enums.g.dart';
-  export 'src/keyboardandmouseinput/functions.g.dart';
-  export 'src/keyboardandmouseinput/structs.g.dart';
+  export 'src/ui/keyboardandmouseinput/callbacks.g.dart';
+  export 'src/ui/keyboardandmouseinput/constants.g.dart';
+  export 'src/ui/keyboardandmouseinput/enums.g.dart';
+  export 'src/ui/keyboardandmouseinput/functions.g.dart';
+  export 'src/ui/keyboardandmouseinput/structs.g.dart';
 

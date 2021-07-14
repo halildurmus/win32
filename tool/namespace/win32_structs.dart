@@ -54,7 +54,8 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
   writer.writeStringSync(structFileHeader);
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
-      writer.writeStringSync("import '../$import/structs.g.dart';\n");
+      writer.writeStringSync(
+          "import '${relativePathToSrcDirectory(file)}$import/structs.g.dart';\n");
     }
   }
   writer.writeStringSync(buffer.toString());

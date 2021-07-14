@@ -1,5 +1,7 @@
 // Useful utilities
 
+import 'dart:io';
+
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`.
 String nameWithoutEncoding(String typeName) {
@@ -50,4 +52,11 @@ String classNameForInterfaceName(String interfaceName) {
 extension CamelCaseConversion on String {
   String toCamelCase() =>
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
+}
+
+String relativePathToSrcDirectory(File file) {
+  // Find out how many parents there are to the lib/src directory
+  final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
+
+  return '../' * pathDepth;
 }

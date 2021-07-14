@@ -8,5 +8,5 @@ const excludedFunctions = <String>[
 ];
 
 const excludedImports = <String>[
-  'textservices',
+  'ui/textservices',
 ];

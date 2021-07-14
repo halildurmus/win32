@@ -35,11 +35,13 @@ List<String> namespacesInScope(Scope scope) {
   return namespaceSet.toList()..sort((a, b) => a.compareTo(b));
 }
 
+/// Turn a Win32 namespace into the appropriate path. For example, turn
+/// `Windows.Win32.System.Console` into `lib/src/system/console`.
 String folderForNamespace(String namespace) =>
-    'lib/src/${namespace.split('.').last.toLowerCase()}';
+    'lib/src/${namespace.split('.').skip(2).join('/').toLowerCase()}';
 
 void createDirectory(String namespace) =>
-    Directory(folderForNamespace(namespace)).createSync();
+    Directory(folderForNamespace(namespace)).createSync(recursive: true);
 
 void generateWin32Functions(String namespace) {
   final funcs = scope.typeDefs
