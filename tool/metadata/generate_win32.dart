@@ -10,10 +10,10 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
-import 'utils.dart';
 import '../namespace/win32_func_printer.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
+import 'utils.dart';
 import 'winmd_caveats.dart';
 
 String generateDocComment(Win32Function func) {
