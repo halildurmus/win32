@@ -406,7 +406,7 @@ void main() {
     return "typedef $callbackName = $returnType Function(${params.join(', ')});";
   }
 
-  static String printType(TypeDef typeDef) {
+  static String printClass(TypeDef typeDef) {
     final type = ClassProjector(typeDef).projection;
     return headerAsString(type) +
         guidConstantsAsString(type) +

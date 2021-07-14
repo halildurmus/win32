@@ -33,7 +33,7 @@ const headerComment =
 String docComment(String comment) =>
     '$headerComment\n  // $comment\n$headerComment\n';
 
-class Win32Prototype {
+class Win32FunctionPrototype {
   final String _nameWithoutEncoding;
   final Method _method;
   final String _lib;
@@ -67,7 +67,9 @@ class Win32Prototype {
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
       "  >('${_method.name}');\n\n";
-  const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
+
+  const Win32FunctionPrototype(
+      this._nameWithoutEncoding, this._method, this._lib);
 }
 
 /// Qualify the DLL with an extension.
@@ -109,7 +111,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
 
     for (final function in functions) {
       writer.writeStringSync(
-          '${Win32Prototype(function.name, function, libraryDartName).dartFfiMapping}\n');
+          '${Win32FunctionPrototype(function.name, function, libraryDartName).dartFfiMapping}\n');
     }
   }
   writer.closeSync();

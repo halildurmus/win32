@@ -4,6 +4,7 @@
 
 import 'package:winmd/winmd.dart';
 
+import '../utils.dart';
 import 'data_classes.dart';
 import 'typeprojector.dart';
 
@@ -11,10 +12,6 @@ extension CamelCaseConversion on String {
   String toCamelCase() =>
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
 }
-
-String removeUnicodeSuffix(String typeName) => typeName.endsWith('W')
-    ? typeName.substring(0, typeName.length - 1)
-    : typeName;
 
 class ClassProjector {
   final TypeDef typeDef;
@@ -68,7 +65,7 @@ class ClassProjector {
             ? SourceType.com
             : SourceType.winrt,
         iid: typeDef.guid,
-        name: removeUnicodeSuffix(typeDef.name),
+        name: nameWithoutEncoding(typeDef.name),
         inherits: classInheritsFrom,
         vtableStart: _vtableStart(typeDef));
 

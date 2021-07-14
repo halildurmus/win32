@@ -12,7 +12,10 @@ import 'win32_structs.dart';
 final scope = MetadataStore.getWin32Scope();
 
 /// The metadata namespaces we're generating
-const namespaces = <String>['Windows.Win32.Foundation'];
+const namespaces = <String>[
+  'Windows.Win32.Foundation',
+  'Windows.Win32.System.SystemInformation'
+];
 
 List<String> namespacesInScope(Scope scope) {
   // Use a Set to avoid duplication
@@ -105,6 +108,7 @@ void generateWin32Callbacks(String namespace) {
 }
 
 void generateLibraryExport(List<String> namespaces) {
+  // TODO: Check that each of these files exist.
   final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
 
   for (final namespace in namespaces) {

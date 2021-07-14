@@ -3,3 +3,8 @@
   export 'src/foundation/enums.g.dart';
   export 'src/foundation/functions.g.dart';
   export 'src/foundation/structs.g.dart';
+  export 'src/systeminformation/callbacks.g.dart';
+  export 'src/systeminformation/constants.g.dart';
+  export 'src/systeminformation/enums.g.dart';
+  export 'src/systeminformation/functions.g.dart';
+  export 'src/systeminformation/structs.g.dart';

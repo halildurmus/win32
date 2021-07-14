@@ -8,6 +8,7 @@ import 'package:winmd/winmd.dart';
 import 'projection/classprojector.dart';
 import 'projection/data_classes.dart';
 import 'projection/typeprinter.dart';
+import 'utils.dart';
 
 const interfacesToGenerate = <String>[
   'Windows.Win32.Globalization.IEnumSpellingError',
@@ -92,22 +93,6 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
 
-/// Take a fully-qualified interface name (e.g.
-/// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding classname
-/// (e.g. `Windows.Win32.UI.Shell.ShellLink`).
-String classNameForInterfaceName(String interfaceName) {
-  final interfaceNameAsList = interfaceName.split('.');
-
-  // Strip off the 'I' from the last component
-  final fullyQualifiedClassName =
-      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
-            ..add(interfaceNameAsList.last.substring(1)))
-          .join('.');
-
-  // If class has a 'W' suffix, erase it.
-  return removeUnicodeSuffix(fullyQualifiedClassName);
-}
-
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
 
@@ -137,11 +122,11 @@ void main(List<String> args) {
       ..sourceType = SourceType.com
       ..generateClass = clsid.isNotEmpty
       ..clsid = clsid
-      ..className = removeUnicodeSuffix(type.split('.').last.substring(1));
+      ..className = nameWithoutEncoding(type.split('.').last.substring(1));
 
     final dartClass = TypePrinter.printProjection(classProjection);
 
-    final classOutputFilename = removeUnicodeSuffix(type.split('.').last);
+    final classOutputFilename = nameWithoutEncoding(type.split('.').last);
     final outputFile =
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 

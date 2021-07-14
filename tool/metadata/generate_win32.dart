@@ -83,7 +83,7 @@ final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
             methodMatches(m.name, filteredFunctionList[function]!.prototype));
         writer.writeStringSync('''
 ${generateDocComment(filteredFunctionList[function]!)}
-${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
+${Win32FunctionPrototype(function, method, libraryDartName).dartFfiMapping}
 ''');
       } on StateError {
         continue;

@@ -71,7 +71,8 @@ void main() {
         continue;
       }
 
-      final prototype = Win32Prototype(function, method, libraryDartName);
+      final prototype =
+          Win32FunctionPrototype(function, method, libraryDartName);
 
       final returnFFIType =
           TypeProjector(method.returnType.typeIdentifier).nativeType;
