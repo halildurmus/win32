@@ -24,21 +24,30 @@ void generateWin32Functions(String namespace) {
   print('funcs: $funcs');
 
   // List of distinct modules in the namespace -- are there multiple?
-  final modules = [
-    funcs.methods.map((method) => method.module.name).toSet().toList().first
-  ];
+  final modules =
+      funcs.methods.map((method) => method.module.name).toSet().toList();
 
+  final file = File('${folderForNamespace(namespace)}/apis.dart');
+  if (file.existsSync()) {
+    file.deleteSync();
+  }
   for (final module in modules) {
-    generateFfiFile(module, funcs);
+    generateFfiFile(file, module, funcs);
   }
 }
 
 void generateWin32Structs(String namespace) {
+  // Ignore "structs" that are just native values; we'll deal with them
+  // elsewhere. Examples include HANDLE, BOOL and BSTR.
   final structs = scope.typeDefs
       .where((typedef) =>
           typedef.name.startsWith(namespace) &&
           typedef.isClass &&
-          typedef.parent?.name == 'System.ValueType')
+          typedef.parent?.name == 'System.ValueType' &&
+          typedef.customAttributes
+              .where((attrib) =>
+                  attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
+              .isEmpty)
       .toList();
   print('structs: $structs');
 

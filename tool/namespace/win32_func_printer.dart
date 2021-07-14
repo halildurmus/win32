@@ -72,17 +72,14 @@ String libraryFromDllName(String dllName) {
 
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
-void generateFfiFile(String library, TypeDef typedef) {
-  final folderName = typedef.name.split('.')[2].toLowerCase(); // e.g. gdi
-
+void generateFfiFile(File file, String library, TypeDef typedef) {
   final filteredFunctionList = typedef.methods
       .where((method) => method.module.name == library)
       .where((method) => !method.name.endsWith('A'))
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
-  final writer =
-      File('lib/src/$folderName/apis.dart').openSync(mode: FileMode.write);
+  final writer = file.openSync(mode: FileMode.writeOnlyAppend);
 
   // API set names aren't legal Dart identifiers, so we rename them
   final libraryDartName = library.replaceAll('-', '_').toLowerCase();

@@ -112,4 +112,5 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
     buffer.write(TypePrinter.printStruct(struct, struct.name.split('.').last));
   }
   writer.writeStringSync(buffer.toString());
+  writer.closeSync();
 }
