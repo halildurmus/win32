@@ -42,7 +42,6 @@ void generateWin32Functions(String namespace) {
   final funcs = scope.typeDefs
       .where((typedef) => (typedef.name == '$namespace.Apis'))
       .first;
-  print('funcs: $funcs');
 
   // List of distinct modules in the namespace. There may be multiple, for
   // example Windows.Win32.Foundation.Apis contains functions from oleaut32.dll,
@@ -68,7 +67,6 @@ void generateWin32Structs(String namespace) {
           .isEmpty)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
-  print('structs: $structs');
 
   final file = File('${folderForNamespace(namespace)}/structs.g.dart');
   generateStructsFile(file, structs);
@@ -79,7 +77,6 @@ void generateWin32Enums(String namespace) {
       .where((typedef) => typedef.name.startsWith(namespace))
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
-  print('enums: $enums');
 
   final file = File('${folderForNamespace(namespace)}/enums.g.dart');
   generateEnumsFile(file, enums);
@@ -90,7 +87,6 @@ void generateWin32Constants(String namespace) {
       .where((typedef) => (typedef.name == '$namespace.Apis'))
       .first
       .fields;
-  print('constants: ${constants.take(4)}...');
 
   final file = File('${folderForNamespace(namespace)}/constants.g.dart');
   generateConstantsFile(file, constants);
@@ -102,7 +98,6 @@ void generateWin32Callbacks(String namespace) {
           (typedef) => typedef.name.startsWith(namespace) && typedef.isDelegate)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
-  print('callbacks: $callbacks');
 
   final file = File('${folderForNamespace(namespace)}/callbacks.g.dart');
   generateCallbacksFile(file, callbacks);
@@ -112,6 +107,7 @@ void generateLibraryExport(List<String> namespaces) {
   // TODO: Check that each of these files exist.
   final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
 
+  writer.writeStringSync('// ignore_for_file: directives_ordering\n\n');
   for (final namespace in namespaces) {
     final relativePath = folderForNamespace(namespace).substring(4);
     writer.writeStringSync('''
@@ -119,7 +115,7 @@ void generateLibraryExport(List<String> namespaces) {
   export '$relativePath/constants.g.dart';
   export '$relativePath/enums.g.dart';
   export '$relativePath/functions.g.dart';
-  export '$relativePath/structs.g.dart';
+  export '$relativePath/structs.g.dart';\n
 ''');
   }
 
@@ -128,6 +124,7 @@ void generateLibraryExport(List<String> namespaces) {
 
 void main() {
   for (final namespace in namespaces) {
+    print('Generating: $namespace...');
     createDirectory(namespace);
     generateWin32Functions(namespace);
     generateWin32Structs(namespace);
