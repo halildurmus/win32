@@ -237,3 +237,6 @@ export 'src/com/IWbemLocator.dart';
 export 'src/com/IWbemServices.dart';
 export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';
+
+// Metadata-generated APIs
+// export 'win32.g.dart';

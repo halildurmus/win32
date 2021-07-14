@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import 'win32_enum_printer.dart';
+import 'win32_field_printer.dart';
 import 'win32_func_printer.dart';
 import 'win32_struct_printer.dart';
 
@@ -80,14 +81,27 @@ void generateWin32Enums(String namespace) {
   generateEnumsFile(file, enums);
 }
 
+void generateWin32Constants(String namespace) {
+  final constants = scope.typeDefs
+      .where((typedef) => (typedef.name == '$namespace.Apis'))
+      .first
+      .fields;
+  print('constants: ${constants.take(10)}...');
+
+  final file = File('${folderForNamespace(namespace)}/constants.dart');
+  generateConstantsFile(file, constants);
+}
+
 void generateLibraryExport(List<String> namespaces) {
   final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
 
   for (final namespace in namespaces) {
+    final relativePath = folderForNamespace(namespace).substring(4);
     writer.writeStringSync('''
-  export '${folderForNamespace(namespace)}/functions.dart';
-  export '${folderForNamespace(namespace)}/structs.dart';
-  export '${folderForNamespace(namespace)}/enums.dart';
+  export '$relativePath/constants.dart';
+  export '$relativePath/enums.dart';
+  export '$relativePath/functions.dart';
+  export '$relativePath/structs.dart';
 ''');
   }
 
@@ -100,6 +114,7 @@ void main() {
     generateWin32Functions(namespace);
     generateWin32Structs(namespace);
     generateWin32Enums(namespace);
+    generateWin32Constants(namespace);
   }
   generateLibraryExport(namespaces);
 }
