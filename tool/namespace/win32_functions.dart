@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 import '../metadata/projection/win32_function_printer.dart';
 import '../metadata/utils.dart';
+import 'exclusions.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
@@ -77,6 +78,8 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     final functions = typedef.methods
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
+        .where(
+            (method) => !exclusions.contains(nameWithoutEncoding(method.name)))
         .toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 

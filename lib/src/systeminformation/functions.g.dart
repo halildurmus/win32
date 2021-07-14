@@ -14,6 +14,7 @@ import 'enums.g.dart';
 import 'structs.g.dart';
 
 import '../foundation/structs.g.dart';
+import '../console/structs.g.dart';
 import '../systeminformation/structs.g.dart';
 
 // -----------------------------------------------------------------------
@@ -78,22 +79,6 @@ late final _GetLogicalProcessorInformation = _kernel32.lookupFunction<
         Pointer<Uint32> ReturnedLength),
     int Function(Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
         Pointer<Uint32> ReturnedLength)>('GetLogicalProcessorInformation');
-
-int GetLogicalProcessorInformationEx(
-        int RelationshipType,
-        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX> Buffer,
-        Pointer<Uint32> ReturnedLength) =>
-    _GetLogicalProcessorInformationEx(RelationshipType, Buffer, ReturnedLength);
-
-late final _GetLogicalProcessorInformationEx = _kernel32.lookupFunction<
-    Int32 Function(
-        Uint32 RelationshipType,
-        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX> Buffer,
-        Pointer<Uint32> ReturnedLength),
-    int Function(
-        int RelationshipType,
-        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX> Buffer,
-        Pointer<Uint32> ReturnedLength)>('GetLogicalProcessorInformationEx');
 
 void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetNativeSystemInfo(lpSystemInfo);

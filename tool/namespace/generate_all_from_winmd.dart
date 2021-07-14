@@ -14,6 +14,7 @@ final scope = MetadataStore.getWin32Scope();
 /// The metadata namespaces we're generating
 const namespaces = <String>[
   'Windows.Win32.Foundation',
+  'Windows.Win32.System.Console',
   'Windows.Win32.System.SystemInformation'
 ];
 
