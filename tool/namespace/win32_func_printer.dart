@@ -7,21 +7,22 @@
 import 'dart:io';
 
 import 'package:winmd/winmd.dart';
-
-import '../manual_gen/function.dart';
-import 'projection/typeprojector.dart';
+import '../metadata/projection/typeprojector.dart';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
   final Method _method;
   final String _lib;
 
+  // Sanitize any Dart keywords in parameter names.
+  String sanitize(String input) => input == 'in' ? 'in_' : input;
+
   String get nativePrototype =>
       '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).nativeType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartPrototype =>
@@ -29,63 +30,48 @@ class Win32Prototype {
 
   String get dartParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).dartType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).dartType} ${sanitize(param.name)}')
       .join(', ');
 
   String get dartFfiMapping =>
       '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
-      '$_nameWithoutEncoding($dartParams) {\n'
-      '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
+      '$_nameWithoutEncoding($dartParams) =>\n'
+      '  _$_nameWithoutEncoding'
+      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
+      ';\n\n'
+      '  late final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
-      "  >('${_method.name}');\n"
-      '  return _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
-      ';\n'
-      '}\n';
-
+      "  >('${_method.name}');\n\n";
   const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
 }
 
 final methods = <Method>[];
 
-String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  final words = inputText.split(' ');
-  final textLine = StringBuffer('/// ');
-  final outputText = StringBuffer();
+bool methodMatches(String methodName, List<String> rawPrototype) {
+  final prototype = rawPrototype.join('\n');
+  final methodNameToFind = ' $methodName(';
 
-  for (final word in words) {
-    if ((textLine.length + word.length) >= wrapLength) {
-      textLine.write('\n');
-      outputText.write(textLine);
-      textLine.clear();
-      textLine.write('/// $word ');
-    } else {
-      textLine.write('$word ');
-    }
-  }
-
-  outputText.write(textLine);
-  return outputText.toString().trimRight();
+  return prototype.contains(methodNameToFind);
 }
 
-String generateDocComment(Win32Function func) {
-  final comment = StringBuffer();
-
-  if (func.comment.isNotEmpty) {
-    comment.writeln(wrapCommentText(func.comment));
-    comment.writeln('///');
+/// Qualify the DLL with an extension.
+///
+/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
+/// couple of exceptions. We hardcode them here, since there are so few.
+String libraryFromDllName(String dllName) {
+  switch (dllName) {
+    case 'bthprops':
+      return 'bthprops.cpl';
+    case 'winspool':
+      return 'winspool.drv';
+    default:
+      return '$dllName.dll';
   }
-
-  comment.writeln('/// ```c');
-  comment.write('/// ');
-  comment.writeln(func.prototype.first.split('\\n').join('\n/// '));
-  comment.writeln('/// ```');
-
-  comment.write('/// {@category ${func.category}}');
-  return comment.toString();
 }
 
+/// Given a library name and a typedef, generate a file of typedefs / function
+/// lookups corresponding to that file.
 void generateFfiFile(String library, TypeDef typedef) {
   final folderName = typedef.name.split('.')[2].toLowerCase(); // e.g. gdi
 
@@ -118,8 +104,8 @@ import 'package:ffi/ffi.dart';
 
 import '../callbacks.dart';
 import '../combase.dart';
-import 'enums.dart';
-import 'structs.dart';
+// import 'enums.dart';
+// import 'structs.dart';
 
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');

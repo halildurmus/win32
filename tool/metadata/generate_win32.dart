@@ -10,99 +10,11 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
+import 'utils.dart';
+import '../namespace/win32_func_printer.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
-import 'projection/typeprojector.dart';
 import 'winmd_caveats.dart';
-
-class Win32Prototype {
-  final String _nameWithoutEncoding;
-  final Method _method;
-  final String _lib;
-
-  // Sanitize any Dart keywords in parameter names.
-  String sanitize(String input) => input == 'in' ? 'in_' : input;
-
-  String get nativePrototype =>
-      '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
-
-  String get nativeParams => _method.parameters
-      .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${sanitize(param.name)}')
-      .join(', ');
-
-  String get dartPrototype =>
-      '${TypeProjector(_method.returnType.typeIdentifier).dartType} Function($dartParams)';
-
-  String get dartParams => _method.parameters
-      .map((param) =>
-          '${TypeProjector(param.typeIdentifier).dartType} ${sanitize(param.name)}')
-      .join(', ');
-
-  String get dartFfiMapping =>
-      '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
-      '$_nameWithoutEncoding($dartParams) =>\n'
-      '  _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
-      ';\n\n'
-      '  late final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
-      '    $nativePrototype, \n'
-      '    $dartPrototype\n'
-      "  >('${_method.name}');\n\n";
-  const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
-}
-
-final methods = <Method>[];
-
-String methodNameWithoutEncoding(String methodName) {
-  if (methodName.endsWith('W') || methodName.endsWith('A')) {
-    return methodName.substring(0, methodName.length - 1);
-  } else {
-    return methodName;
-  }
-}
-
-String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  final words = inputText.split(' ');
-  final textLine = StringBuffer('/// ');
-  final outputText = StringBuffer();
-
-  for (final word in words) {
-    if ((textLine.length + word.length) >= wrapLength) {
-      textLine.write('\n');
-      outputText.write(textLine);
-      textLine.clear();
-      textLine.write('/// $word ');
-    } else {
-      textLine.write('$word ');
-    }
-  }
-
-  outputText.write(textLine);
-  return outputText.toString().trimRight();
-}
-
-bool methodMatches(String methodName, List<String> rawPrototype) {
-  final prototype = rawPrototype.join('\n');
-  final methodNameToFind = ' $methodName(';
-
-  return prototype.contains(methodNameToFind);
-}
-
-/// Qualify the DLL with an extension.
-///
-/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
-/// couple of exceptions. We hardcode them here, since there are so few.
-String libraryFromDllName(String dllName) {
-  switch (dllName) {
-    case 'bthprops':
-      return 'bthprops.cpl';
-    case 'winspool':
-      return 'winspool.drv';
-    default:
-      return '$dllName.dll';
-  }
-}
 
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();

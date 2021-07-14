@@ -10,7 +10,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../manual_gen/win32api.dart';
-import 'generate_win32.dart';
+import 'utils.dart';
 import 'projection/typeprinter.dart';
 
 const structFileHeader = '''
