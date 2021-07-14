@@ -58,7 +58,15 @@ List<String> importsForFunction(Method function) {
 
   for (final param in function.parameters) {
     if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-      importList.add(folderFromNamespace(param.typeIdentifier.name));
+      final paramType = param.typeIdentifier.type;
+
+      if (paramType != null && paramType.isDelegate) {
+        importList.add(
+            '${folderFromNamespace(param.typeIdentifier.name)}/callbacks.g.dart');
+      } else {
+        importList.add(
+            '${folderFromNamespace(param.typeIdentifier.name)}/structs.g.dart');
+      }
     }
   }
   return importList;
@@ -100,7 +108,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
       writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import/structs.g.dart';\n");
+          "import '${relativePathToSrcDirectory(file)}$import';\n");
     }
   }
   writer.writeStringSync('\n');

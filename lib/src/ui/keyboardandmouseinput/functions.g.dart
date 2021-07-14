@@ -13,6 +13,7 @@ import 'structs.g.dart';
 
 import '../../foundation/structs.g.dart';
 import '../../system/console/structs.g.dart';
+import '../../system/console/callbacks.g.dart';
 import '../../system/systeminformation/structs.g.dart';
 import '../../ui/keyboardandmouseinput/structs.g.dart';
 

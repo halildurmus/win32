@@ -8,5 +8,5 @@ const excludedFunctions = <String>[
 ];
 
 const excludedImports = <String>[
-  'ui/textservices',
+  'ui/textservices/structs.g.dart',
 ];
