@@ -22,7 +22,7 @@ import 'package:ffi/ffi.dart';
 
 import '../callbacks.dart';
 import '../combase.dart';
-// import 'enums.dart';
+import 'enums.dart';
 import 'structs.dart';
 
 ''';
@@ -92,7 +92,8 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
 
   writer.writeStringSync(ffiFileHeader);
   for (final library in modules) {
-    final filteredFunctionList = typedef.methods
+    // For now, we only project Unicode methods.
+    final functions = typedef.methods
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
         .toList()
@@ -106,7 +107,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     writer.writeStringSync(
         "  final _$libraryDartName = DynamicLibrary.open('$dll');\n\n");
 
-    for (final function in filteredFunctionList) {
+    for (final function in functions) {
       writer.writeStringSync(
           '${Win32Prototype(function.name, function, libraryDartName).dartFfiMapping}\n');
     }

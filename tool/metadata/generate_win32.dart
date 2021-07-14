@@ -10,7 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
-import '../namespace/win32_func_printer.dart';
+import '../namespace/win32_functions.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
 import 'utils.dart';

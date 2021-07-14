@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import 'win32_enum_printer.dart';
-import 'win32_field_printer.dart';
-import 'win32_func_printer.dart';
-import 'win32_struct_printer.dart';
+import 'win32_callbacks.dart';
+import 'win32_constants.dart';
+import 'win32_enums.dart';
+import 'win32_functions.dart';
+import 'win32_structs.dart';
 
 // The Win32 metadata
 final scope = MetadataStore.getWin32Scope();
@@ -39,14 +40,13 @@ void generateWin32Functions(String namespace) {
       .first;
   print('funcs: $funcs');
 
-  // List of distinct modules in the namespace -- are there multiple?
+  // List of distinct modules in the namespace. There may be multiple, for
+  // example Windows.Win32.Foundation.Apis contains functions from oleaut32.dll,
+  // kernelbase.dll and kernel32.dll (amongst others).
   final modules =
       funcs.methods.map((method) => method.module.name).toSet().toList();
 
   final file = File('${folderForNamespace(namespace)}/functions.dart');
-  if (file.existsSync()) {
-    file.deleteSync();
-  }
   generateFfiFile(file, modules, funcs);
 }
 
@@ -86,10 +86,21 @@ void generateWin32Constants(String namespace) {
       .where((typedef) => (typedef.name == '$namespace.Apis'))
       .first
       .fields;
-  print('constants: ${constants.take(10)}...');
+  print('constants: ${constants.take(4)}...');
 
   final file = File('${folderForNamespace(namespace)}/constants.dart');
   generateConstantsFile(file, constants);
+}
+
+void generateWin32Callbacks(String namespace) {
+  final callbacks = scope.typeDefs
+      .where((typedef) => typedef.name == namespace && typedef.isDelegate)
+      .toList()
+    ..sort((a, b) => a.name.compareTo(b.name));
+  print('callbacks: $callbacks');
+
+  final file = File('${folderForNamespace(namespace)}/callbacks.dart');
+  generateCallbacksFile(file, callbacks);
 }
 
 void generateLibraryExport(List<String> namespaces) {
@@ -98,6 +109,7 @@ void generateLibraryExport(List<String> namespaces) {
   for (final namespace in namespaces) {
     final relativePath = folderForNamespace(namespace).substring(4);
     writer.writeStringSync('''
+  export '$relativePath/callbacks.dart';
   export '$relativePath/constants.dart';
   export '$relativePath/enums.dart';
   export '$relativePath/functions.dart';
@@ -115,6 +127,7 @@ void main() {
     generateWin32Structs(namespace);
     generateWin32Enums(namespace);
     generateWin32Constants(namespace);
+    generateWin32Callbacks(namespace);
   }
   generateLibraryExport(namespaces);
 }
