@@ -18,6 +18,12 @@
   export 'src/systeminformation/functions.g.dart';
   export 'src/systeminformation/structs.g.dart';
 
+  export 'src/time/callbacks.g.dart';
+  export 'src/time/constants.g.dart';
+  export 'src/time/enums.g.dart';
+  export 'src/time/functions.g.dart';
+  export 'src/time/structs.g.dart';
+
   export 'src/keyboardandmouseinput/callbacks.g.dart';
   export 'src/keyboardandmouseinput/constants.g.dart';
   export 'src/keyboardandmouseinput/enums.g.dart';
