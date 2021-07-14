@@ -11,6 +11,7 @@ import 'package:winmd/winmd.dart';
 import 'classprojector.dart';
 import 'data_classes.dart';
 import 'typeprojector.dart';
+import 'win32_function_printer.dart';
 
 class TypePrinter {
   static String headerAsString(ClassProjection type) {
@@ -393,17 +394,14 @@ void main() {
 
   static String printCallback(TypeDef typedef, String callbackName) {
     final invokeMethod = typedef.findMethod('Invoke');
-    if (invokeMethod == null) return '';
 
-    final returnType =
-        TypeProjector(invokeMethod.returnType.typeIdentifier).nativeType;
-    final params = <String>[];
-
-    for (final param in invokeMethod.parameters) {
-      params.add(
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}');
+    if (invokeMethod == null) {
+      throw Exception('${typedef.name} is not a callback.');
     }
-    return "typedef $callbackName = $returnType Function(${params.join(', ')});";
+
+    final printer = Win32FunctionPrinter('', invokeMethod, '');
+
+    return "typedef $callbackName = ${printer.nativePrototype};";
   }
 
   static String printClass(TypeDef typeDef) {

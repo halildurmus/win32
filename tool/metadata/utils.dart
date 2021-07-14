@@ -46,3 +46,8 @@ String classNameForInterfaceName(String interfaceName) {
   // If class has a 'W' suffix, erase it.
   return nameWithoutEncoding(fullyQualifiedClassName);
 }
+
+extension CamelCaseConversion on String {
+  String toCamelCase() =>
+      length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
+}

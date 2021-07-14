@@ -7,7 +7,7 @@
 import 'dart:io';
 
 import 'package:winmd/winmd.dart';
-import '../metadata/projection/typeprojector.dart';
+import '../metadata/projection/win32_function_printer.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
@@ -32,45 +32,6 @@ const headerComment =
 
 String docComment(String comment) =>
     '$headerComment\n  // $comment\n$headerComment\n';
-
-class Win32FunctionPrototype {
-  final String _nameWithoutEncoding;
-  final Method _method;
-  final String _lib;
-
-  // Sanitize any Dart keywords in parameter names.
-  String sanitize(String input) => input == 'in' ? 'in_' : input;
-
-  String get nativePrototype =>
-      '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
-
-  String get nativeParams => _method.parameters
-      .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${sanitize(param.name)}')
-      .join(', ');
-
-  String get dartPrototype =>
-      '${TypeProjector(_method.returnType.typeIdentifier).dartType} Function($dartParams)';
-
-  String get dartParams => _method.parameters
-      .map((param) =>
-          '${TypeProjector(param.typeIdentifier).dartType} ${sanitize(param.name)}')
-      .join(', ');
-
-  String get dartFfiMapping =>
-      '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
-      '$_nameWithoutEncoding($dartParams) =>\n'
-      '  _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name)).map(sanitize).toList().join(', ')})'
-      ';\n\n'
-      '  late final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
-      '    $nativePrototype, \n'
-      '    $dartPrototype\n'
-      "  >('${_method.name}');\n\n";
-
-  const Win32FunctionPrototype(
-      this._nameWithoutEncoding, this._method, this._lib);
-}
 
 /// Qualify the DLL with an extension.
 ///
@@ -111,7 +72,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
 
     for (final function in functions) {
       writer.writeStringSync(
-          '${Win32FunctionPrototype(function.name, function, libraryDartName).dartFfiMapping}\n');
+          '${Win32FunctionPrinter(function.name, function, libraryDartName).dartFfiMapping}\n');
     }
   }
   writer.closeSync();

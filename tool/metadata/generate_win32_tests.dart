@@ -15,6 +15,7 @@ import '../manual_gen/win32api.dart';
 import '../namespace/win32_functions.dart';
 import 'generate_win32.dart';
 import 'projection/typeprojector.dart';
+import 'projection/win32_function_printer.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
@@ -71,8 +72,7 @@ void main() {
         continue;
       }
 
-      final prototype =
-          Win32FunctionPrototype(function, method, libraryDartName);
+      final prototype = Win32FunctionPrinter(function, method, libraryDartName);
 
       final returnFFIType =
           TypeProjector(method.returnType.typeIdentifier).nativeType;
