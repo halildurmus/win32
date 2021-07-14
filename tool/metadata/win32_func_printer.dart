@@ -131,25 +131,3 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
   writer.closeSync();
 }
-
-void main() {
-  final scope = MetadataStore.getWin32Scope();
-
-  // Start with one namespace
-  final foundation = scope.typeDefs
-      .where((typedef) => (typedef.name == 'Windows.Win32.Foundation.Apis'))
-      .first;
-
-  // List of distinct modules in the namespace
-  final modules = [
-    foundation.methods
-        .map((method) => method.module.name)
-        .toSet()
-        .toList()
-        .first
-  ]; // Foundation for now
-
-  for (final module in modules) {
-    generateFfiFile(module, foundation);
-  }
-}
