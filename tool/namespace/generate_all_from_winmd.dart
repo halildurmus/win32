@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import 'win32_enum_printer.dart';
 import 'win32_func_printer.dart';
 import 'win32_struct_printer.dart';
 
@@ -41,7 +42,7 @@ void generateWin32Functions(String namespace) {
   final modules =
       funcs.methods.map((method) => method.module.name).toSet().toList();
 
-  final file = File('${folderForNamespace(namespace)}/apis.dart');
+  final file = File('${folderForNamespace(namespace)}/functions.dart');
   if (file.existsSync()) {
     file.deleteSync();
   }
@@ -60,11 +61,37 @@ void generateWin32Structs(String namespace) {
               .where((attrib) =>
                   attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
               .isEmpty)
-      .toList();
+      .toList()
+    ..sort((a, b) => a.name.compareTo(b.name));
   print('structs: $structs');
 
   final file = File('${folderForNamespace(namespace)}/structs.dart');
   generateStructsFile(file, structs);
+}
+
+void generateWin32Enums(String namespace) {
+  final enums = scope.enums
+      .where((typedef) => typedef.name.startsWith(namespace))
+      .toList()
+    ..sort((a, b) => a.name.compareTo(b.name));
+  print('enums: $enums');
+
+  final file = File('${folderForNamespace(namespace)}/enums.dart');
+  generateEnumsFile(file, enums);
+}
+
+void generateLibraryExport(List<String> namespaces) {
+  final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
+
+  for (final namespace in namespaces) {
+    writer.writeStringSync('''
+  export '${folderForNamespace(namespace)}/functions.dart';
+  export '${folderForNamespace(namespace)}/structs.dart';
+  export '${folderForNamespace(namespace)}/enums.dart';
+''');
+  }
+
+  writer.closeSync();
 }
 
 void main() {
@@ -72,5 +99,7 @@ void main() {
     createDirectory(namespace);
     generateWin32Functions(namespace);
     generateWin32Structs(namespace);
+    generateWin32Enums(namespace);
   }
+  generateLibraryExport(namespaces);
 }
