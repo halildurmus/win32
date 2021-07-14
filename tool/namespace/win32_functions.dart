@@ -8,13 +8,14 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 import '../metadata/projection/win32_function_printer.dart';
+import '../metadata/utils.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
 
 import 'dart:ffi';
 
@@ -33,6 +34,8 @@ const headerComment =
 String docComment(String comment) =>
     '$headerComment\n  // $comment\n$headerComment\n';
 
+final imports = <String>{};
+
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
@@ -48,12 +51,26 @@ String libraryFromDllName(String dllName) {
   }
 }
 
+List<String> importsForFunction(Method function) {
+  final importList = <String>[];
+
+  // If a parameter takes the form Windows.Win32.Foundation.SYSTEMTIME, return
+  // "foundation"
+  for (final param in function.parameters) {
+    if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
+      final typeName = param.typeIdentifier.name.split('.');
+      importList.add(typeName[typeName.length - 2].toLowerCase());
+    }
+  }
+  return importList;
+}
+
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
 void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
   final writer = file.openSync(mode: FileMode.writeOnly);
 
-  writer.writeStringSync(ffiFileHeader);
+  final buffer = StringBuffer();
   for (final library in modules) {
     // For now, we only project Unicode methods.
     final functions = typedef.methods
@@ -66,14 +83,22 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     final libraryDartName = library.replaceAll('-', '_').toLowerCase();
 
     final dll = libraryFromDllName(library);
-    writer.writeStringSync(docComment(dll));
-    writer.writeStringSync(
-        "  final _$libraryDartName = DynamicLibrary.open('$dll');\n\n");
+    buffer.write(docComment(dll));
+    buffer.writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
+    buffer.writeln();
 
     for (final function in functions) {
-      writer.writeStringSync(
-          '${Win32FunctionPrinter(function.name, function, libraryDartName).dartFfiMapping}\n');
+      final printer = Win32FunctionPrinter(
+          nameWithoutEncoding(function.name), function, libraryDartName);
+      buffer.writeln(printer.dartFfiMapping);
+      imports.addAll(importsForFunction(function));
     }
   }
+  writer.writeStringSync(ffiFileHeader);
+  for (final import in imports) {
+    writer.writeStringSync("import '../$import/structs.g.dart';\n");
+  }
+  writer.writeStringSync('\n');
+  writer.writeStringSync(buffer.toString());
   writer.closeSync();
 }

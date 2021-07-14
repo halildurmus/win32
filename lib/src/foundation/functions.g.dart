@@ -2,7 +2,7 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
 
 import 'dart:ffi';
 
@@ -12,6 +12,8 @@ import '../callbacks.dart';
 import '../combase.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
+
+import '../foundation/structs.g.dart';
 
 // -----------------------------------------------------------------------
 // OLEAUT32.dll

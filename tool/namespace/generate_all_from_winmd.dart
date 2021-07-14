@@ -57,14 +57,14 @@ void generateWin32Structs(String namespace) {
   // Ignore "structs" that are just native values; we'll deal with them
   // elsewhere. Examples include HANDLE, BOOL and BSTR.
   final structs = scope.typeDefs
-      .where((typedef) =>
-          typedef.name.startsWith(namespace) &&
-          typedef.isClass &&
-          typedef.parent?.name == 'System.ValueType' &&
-          typedef.customAttributes
-              .where((attrib) =>
-                  attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
-              .isEmpty)
+      .where((typedef) => typedef.name.startsWith(namespace))
+      .where((typedef) => typedef.isClass)
+      .where((typedef) => typedef.parent?.name == 'System.ValueType')
+      .where((typedef) => !typedef.name.endsWith('A'))
+      .where((typedef) => typedef.customAttributes
+          .where((attrib) =>
+              attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
+          .isEmpty)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
   print('structs: $structs');

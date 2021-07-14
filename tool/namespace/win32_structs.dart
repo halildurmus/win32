@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../metadata/projection/typeprinter.dart';
+import '../metadata/utils.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -60,7 +61,8 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
   buffer.write(structFileHeader);
 
   for (final struct in typedefs) {
-    buffer.write(TypePrinter.printStruct(struct, struct.name.split('.').last));
+    buffer.write(TypePrinter.printStruct(
+        struct, nameWithoutEncoding(struct.name.split('.').last)));
   }
   writer.writeStringSync(buffer.toString());
   writer.closeSync();

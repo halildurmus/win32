@@ -2,7 +2,7 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
 
 import 'dart:ffi';
 
@@ -13,16 +13,19 @@ import '../combase.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
 
+import '../foundation/structs.g.dart';
+import '../systeminformation/structs.g.dart';
+
 // -----------------------------------------------------------------------
 // KERNEL32.dll
 // -----------------------------------------------------------------------
 final _kernel32 = DynamicLibrary.open('KERNEL32.dll');
 
-int DnsHostnameToComputerNameExW(Pointer<Utf16> Hostname,
+int DnsHostnameToComputerNameEx(Pointer<Utf16> Hostname,
         Pointer<Utf16> ComputerName, Pointer<Uint32> nSize) =>
-    _DnsHostnameToComputerNameExW(Hostname, ComputerName, nSize);
+    _DnsHostnameToComputerNameEx(Hostname, ComputerName, nSize);
 
-late final _DnsHostnameToComputerNameExW = _kernel32.lookupFunction<
+late final _DnsHostnameToComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
         Pointer<Uint32> nSize),
     int Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
@@ -41,11 +44,11 @@ late final _EnumSystemFirmwareTables = _kernel32.lookupFunction<
         Pointer pFirmwareTableEnumBuffer,
         int BufferSize)>('EnumSystemFirmwareTables');
 
-int GetComputerNameExW(
+int GetComputerNameEx(
         int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) =>
-    _GetComputerNameExW(NameType, lpBuffer, nSize);
+    _GetComputerNameEx(NameType, lpBuffer, nSize);
 
-late final _GetComputerNameExW = _kernel32.lookupFunction<
+late final _GetComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(
         Uint32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
     int Function(int NameType, Pointer<Utf16> lpBuffer,
@@ -152,10 +155,10 @@ int GetSystemDEPPolicy() => _GetSystemDEPPolicy();
 late final _GetSystemDEPPolicy = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetSystemDEPPolicy');
 
-int GetSystemDirectoryW(Pointer<Utf16> lpBuffer, int uSize) =>
-    _GetSystemDirectoryW(lpBuffer, uSize);
+int GetSystemDirectory(Pointer<Utf16> lpBuffer, int uSize) =>
+    _GetSystemDirectory(lpBuffer, uSize);
 
-late final _GetSystemDirectoryW = _kernel32.lookupFunction<
+late final _GetSystemDirectory = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
     int Function(Pointer<Utf16> lpBuffer, int uSize)>('GetSystemDirectoryW');
 
@@ -232,18 +235,18 @@ late final _GetSystemTimePreciseAsFileTime = _kernel32.lookupFunction<
         void Function(Pointer<FILETIME> lpSystemTimeAsFileTime)>(
     'GetSystemTimePreciseAsFileTime');
 
-int GetSystemWindowsDirectoryW(Pointer<Utf16> lpBuffer, int uSize) =>
-    _GetSystemWindowsDirectoryW(lpBuffer, uSize);
+int GetSystemWindowsDirectory(Pointer<Utf16> lpBuffer, int uSize) =>
+    _GetSystemWindowsDirectory(lpBuffer, uSize);
 
-late final _GetSystemWindowsDirectoryW = _kernel32.lookupFunction<
+late final _GetSystemWindowsDirectory = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
     int Function(
         Pointer<Utf16> lpBuffer, int uSize)>('GetSystemWindowsDirectoryW');
 
-int GetSystemWow64DirectoryW(Pointer<Utf16> lpBuffer, int uSize) =>
-    _GetSystemWow64DirectoryW(lpBuffer, uSize);
+int GetSystemWow64Directory(Pointer<Utf16> lpBuffer, int uSize) =>
+    _GetSystemWow64Directory(lpBuffer, uSize);
 
-late final _GetSystemWow64DirectoryW = _kernel32.lookupFunction<
+late final _GetSystemWow64Directory = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
     int Function(
         Pointer<Utf16> lpBuffer, int uSize)>('GetSystemWow64DirectoryW');
@@ -263,17 +266,17 @@ int GetVersion() => _GetVersion();
 late final _GetVersion =
     _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetVersion');
 
-int GetVersionExW(Pointer<OSVERSIONINFO> lpVersionInformation) =>
-    _GetVersionExW(lpVersionInformation);
+int GetVersionEx(Pointer<OSVERSIONINFO> lpVersionInformation) =>
+    _GetVersionEx(lpVersionInformation);
 
-late final _GetVersionExW = _kernel32.lookupFunction<
+late final _GetVersionEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
     int Function(Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
 
-int GetWindowsDirectoryW(Pointer<Utf16> lpBuffer, int uSize) =>
-    _GetWindowsDirectoryW(lpBuffer, uSize);
+int GetWindowsDirectory(Pointer<Utf16> lpBuffer, int uSize) =>
+    _GetWindowsDirectory(lpBuffer, uSize);
 
-late final _GetWindowsDirectoryW = _kernel32.lookupFunction<
+late final _GetWindowsDirectory = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
     int Function(Pointer<Utf16> lpBuffer, int uSize)>('GetWindowsDirectoryW');
 
@@ -307,25 +310,25 @@ late final _IsWow64GuestMachineSupported = _kernel32.lookupFunction<
     int Function(int WowGuestMachine,
         Pointer<Int32> MachineIsSupported)>('IsWow64GuestMachineSupported');
 
-int SetComputerNameEx2W(int NameType, int Flags, Pointer<Utf16> lpBuffer) =>
-    _SetComputerNameEx2W(NameType, Flags, lpBuffer);
+int SetComputerNameEx2(int NameType, int Flags, Pointer<Utf16> lpBuffer) =>
+    _SetComputerNameEx2(NameType, Flags, lpBuffer);
 
-late final _SetComputerNameEx2W = _kernel32.lookupFunction<
+late final _SetComputerNameEx2 = _kernel32.lookupFunction<
     Int32 Function(Uint32 NameType, Uint32 Flags, Pointer<Utf16> lpBuffer),
     int Function(int NameType, int Flags,
         Pointer<Utf16> lpBuffer)>('SetComputerNameEx2W');
 
-int SetComputerNameExW(int NameType, Pointer<Utf16> lpBuffer) =>
-    _SetComputerNameExW(NameType, lpBuffer);
+int SetComputerNameEx(int NameType, Pointer<Utf16> lpBuffer) =>
+    _SetComputerNameEx(NameType, lpBuffer);
 
-late final _SetComputerNameExW = _kernel32.lookupFunction<
+late final _SetComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(Uint32 NameType, Pointer<Utf16> lpBuffer),
     int Function(int NameType, Pointer<Utf16> lpBuffer)>('SetComputerNameExW');
 
-int SetComputerNameW(Pointer<Utf16> lpComputerName) =>
-    _SetComputerNameW(lpComputerName);
+int SetComputerName(Pointer<Utf16> lpComputerName) =>
+    _SetComputerName(lpComputerName);
 
-late final _SetComputerNameW = _kernel32.lookupFunction<
+late final _SetComputerName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpComputerName),
     int Function(Pointer<Utf16> lpComputerName)>('SetComputerNameW');
 
@@ -360,11 +363,11 @@ late final _VerSetConditionMask = _kernel32.lookupFunction<
     int Function(
         int ConditionMask, int TypeMask, int Condition)>('VerSetConditionMask');
 
-int VerifyVersionInfoW(Pointer<OSVERSIONINFOEX> lpVersionInformation,
+int VerifyVersionInfo(Pointer<OSVERSIONINFOEX> lpVersionInformation,
         int dwTypeMask, int dwlConditionMask) =>
-    _VerifyVersionInfoW(lpVersionInformation, dwTypeMask, dwlConditionMask);
+    _VerifyVersionInfo(lpVersionInformation, dwTypeMask, dwlConditionMask);
 
-late final _VerifyVersionInfoW = _kernel32.lookupFunction<
+late final _VerifyVersionInfo = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFOEX> lpVersionInformation,
         Uint32 dwTypeMask, Uint64 dwlConditionMask),
     int Function(Pointer<OSVERSIONINFOEX> lpVersionInformation, int dwTypeMask,
@@ -445,11 +448,11 @@ late final _GetOsManufacturingMode =
 final _api_ms_win_core_wow64_l1_1_1 =
     DynamicLibrary.open('api-ms-win-core-wow64-l1-1-1.dll');
 
-int GetSystemWow64Directory2W(
+int GetSystemWow64Directory2(
         Pointer<Utf16> lpBuffer, int uSize, int ImageFileMachineType) =>
-    _GetSystemWow64Directory2W(lpBuffer, uSize, ImageFileMachineType);
+    _GetSystemWow64Directory2(lpBuffer, uSize, ImageFileMachineType);
 
-late final _GetSystemWow64Directory2W =
+late final _GetSystemWow64Directory2 =
     _api_ms_win_core_wow64_l1_1_1.lookupFunction<
         Uint32 Function(
             Pointer<Utf16> lpBuffer, Uint32 uSize, Uint16 ImageFileMachineType),

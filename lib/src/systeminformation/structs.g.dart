@@ -84,47 +84,7 @@ class MEMORYSTATUSEX extends Struct {
   external int ullAvailExtendedVirtual;
 }
 
-class OSVERSIONINFOA extends Struct {
-  @Uint32()
-  external int dwOSVersionInfoSize;
-  @Uint32()
-  external int dwMajorVersion;
-  @Uint32()
-  external int dwMinorVersion;
-  @Uint32()
-  external int dwBuildNumber;
-  @Uint32()
-  external int dwPlatformId;
-  @Array(128)
-  external Array<Uint8> szCSDVersion;
-}
-
-class OSVERSIONINFOEXA extends Struct {
-  @Uint32()
-  external int dwOSVersionInfoSize;
-  @Uint32()
-  external int dwMajorVersion;
-  @Uint32()
-  external int dwMinorVersion;
-  @Uint32()
-  external int dwBuildNumber;
-  @Uint32()
-  external int dwPlatformId;
-  @Array(128)
-  external Array<Uint8> szCSDVersion;
-  @Uint16()
-  external int wServicePackMajor;
-  @Uint16()
-  external int wServicePackMinor;
-  @Uint16()
-  external int wSuiteMask;
-  @Uint8()
-  external int wProductType;
-  @Uint8()
-  external int wReserved;
-}
-
-class OSVERSIONINFOEXW extends Struct {
+class OSVERSIONINFOEX extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
   @Uint32()
@@ -165,7 +125,7 @@ class OSVERSIONINFOEXW extends Struct {
   external int wReserved;
 }
 
-class OSVERSIONINFOW extends Struct {
+class OSVERSIONINFO extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
   @Uint32()
