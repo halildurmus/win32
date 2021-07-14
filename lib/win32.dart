@@ -88,13 +88,14 @@ library win32;
 
 // Core Win32 APIs, constants and macros
 export 'src/callbacks.dart';
-export 'src/constants.dart';
-export 'src/constants_nodoc.dart';
+export 'src/constants.dart' show TRUE;
+// export 'src/constants_nodoc.dart' hide INVALID_HANDLE_VALUE, E_NOTIMPL;
 export 'src/exceptions.dart';
 export 'src/macros.dart';
-export 'src/structs.dart' hide IN_ADDR;
-export 'src/structs.g.dart'
-    hide addrinfo, fd_set, SOCKADDR, timeval, hostent, protoent, servent;
+export 'src/structs.dart' show GUID, COR_FIELD_OFFSET;
+// export 'src/structs.dart' hide IN_ADDR;
+// export 'src/structs.g.dart'
+// hide addrinfo, fd_set, SOCKADDR, timeval, hostent, protoent, servent;
 export 'src/utils.dart';
 
 // Useful extension methods
@@ -106,33 +107,33 @@ export 'src/extensions/set_string.dart';
 export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 
-// Traditional C-style Windows APIs
-export 'src/advapi32.dart';
-export 'src/bthprops.dart';
+// // Traditional C-style Windows APIs
+// export 'src/advapi32.dart';
+// export 'src/bthprops.dart';
 export 'src/combase.dart';
-export 'src/comctl32.dart';
-export 'src/comdlg32.dart';
-export 'src/dbghelp.dart';
-export 'src/dwmapi.dart';
-export 'src/dxva2.dart';
-export 'src/gdi32.dart';
-export 'src/kernel32.dart';
-export 'src/kernelbase.dart';
-export 'src/ole32.dart';
-export 'src/oleaut32.dart';
-export 'src/powrprof.dart';
+// export 'src/comctl32.dart';
+// export 'src/comdlg32.dart';
+// export 'src/dbghelp.dart';
+// export 'src/dwmapi.dart';
+// export 'src/dxva2.dart';
+// export 'src/gdi32.dart';
+// export 'src/kernel32.dart';
+// export 'src/kernelbase.dart';
+// export 'src/ole32.dart';
+// export 'src/oleaut32.dart';
+// export 'src/powrprof.dart';
 export 'src/rometadata.dart';
-export 'src/scarddlg.dart';
-export 'src/shcore.dart';
-export 'src/shell32.dart';
-export 'src/spoolss.dart';
+// export 'src/scarddlg.dart';
+// export 'src/shcore.dart';
+// export 'src/shell32.dart';
+// export 'src/spoolss.dart';
 export 'src/types.dart';
-export 'src/user32.dart';
-export 'src/uxtheme.dart';
-export 'src/version.dart';
-export 'src/winmm.dart';
-export 'src/winscard.dart';
-export 'src/winspool.dart';
+// export 'src/user32.dart';
+// export 'src/uxtheme.dart';
+// export 'src/version.dart';
+// export 'src/winmm.dart';
+// export 'src/winscard.dart';
+// export 'src/winspool.dart';
 
 export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
@@ -239,4 +240,4 @@ export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';
 
 // Metadata-generated APIs
-// export 'win32.g.dart';
+export 'win32.g.dart';
