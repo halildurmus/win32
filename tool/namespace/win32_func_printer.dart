@@ -10,10 +10,6 @@ import 'package:winmd/winmd.dart';
 import '../metadata/projection/typeprojector.dart';
 
 const ffiFileHeader = '''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
@@ -30,6 +26,12 @@ import '../combase.dart';
 import 'structs.dart';
 
 ''';
+
+const headerComment =
+    '  // -----------------------------------------------------------------------';
+
+String docComment(String comment) =>
+    '$headerComment\n  // $comment\n$headerComment\n';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
@@ -99,8 +101,10 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_').toLowerCase();
 
-    writer.writeStringSync("  final _$libraryDartName = "
-        "DynamicLibrary.open('${libraryFromDllName(library)}');\n\n");
+    final dll = libraryFromDllName(library);
+    writer.writeStringSync(docComment(dll));
+    writer.writeStringSync(
+        "  final _$libraryDartName = DynamicLibrary.open('$dll');\n\n");
 
     for (final function in filteredFunctionList) {
       writer.writeStringSync(

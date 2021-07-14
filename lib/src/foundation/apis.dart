@@ -1,7 +1,3 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
@@ -17,6 +13,9 @@ import '../combase.dart';
 // import 'enums.dart';
 import 'structs.dart';
 
+// -----------------------------------------------------------------------
+// OLEAUT32.dll
+// -----------------------------------------------------------------------
 final _oleaut32 = DynamicLibrary.open('OLEAUT32.dll');
 
 int SysAddRefString(Pointer<Utf16> bstrString) => _SysAddRefString(bstrString);
@@ -89,6 +88,9 @@ late final _SysStringLen = _oleaut32.lookupFunction<
     Uint32 Function(Pointer<Utf16> pbstr),
     int Function(Pointer<Utf16> pbstr)>('SysStringLen');
 
+// -----------------------------------------------------------------------
+// ntdll.dll
+// -----------------------------------------------------------------------
 final _ntdll = DynamicLibrary.open('ntdll.dll');
 
 int RtlNtStatusToDosError(int Status) => _RtlNtStatusToDosError(Status);
@@ -97,6 +99,9 @@ late final _RtlNtStatusToDosError = _ntdll.lookupFunction<
     Uint32 Function(Int32 Status),
     int Function(int Status)>('RtlNtStatusToDosError');
 
+// -----------------------------------------------------------------------
+// KERNEL32.dll
+// -----------------------------------------------------------------------
 final _kernel32 = DynamicLibrary.open('KERNEL32.dll');
 
 int CloseHandle(int hObject) => _CloseHandle(hObject);
@@ -148,6 +153,9 @@ late final _SetHandleInformation = _kernel32.lookupFunction<
     Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
     int Function(int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
 
+// -----------------------------------------------------------------------
+// api-ms-win-core-handle-l1-1-0.dll
+// -----------------------------------------------------------------------
 final _api_ms_win_core_handle_l1_1_0 =
     DynamicLibrary.open('api-ms-win-core-handle-l1-1-0.dll');
 
