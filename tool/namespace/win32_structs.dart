@@ -54,7 +54,7 @@ import 'package:ffi/ffi.dart';
 ''';
 
 void generateStructsFile(File file, List<TypeDef> typedefs) {
-  final writer = file.openSync(mode: FileMode.write);
+  final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
 
   buffer.write(structFileHeader);

@@ -52,7 +52,7 @@ import 'package:ffi/ffi.dart';
 ''';
 
 void generateConstantsFile(File file, List<Field> constants) {
-  final writer = file.openSync(mode: FileMode.write);
+  final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
 
   buffer.write(constantFileHeader);

@@ -80,7 +80,8 @@ void main() {
   final structs =
       win32.structs.map((k, v) => MapEntry(k, v.namespace.split('.').last));
 
-  final writer = File('tool/struct_sizes.cpp').openSync(mode: FileMode.write);
+  final writer =
+      File('tool/struct_sizes.cpp').openSync(mode: FileMode.writeOnly);
   writer.writeStringSync(header);
 
   for (final struct in structs.keys) {

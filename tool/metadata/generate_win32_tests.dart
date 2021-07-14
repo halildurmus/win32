@@ -18,7 +18,7 @@ import 'projection/typeprojector.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
+  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -112,7 +112,8 @@ void main() {
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer = File('test/struct_test.dart').openSync(mode: FileMode.write);
+  final writer =
+      File('test/struct_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file

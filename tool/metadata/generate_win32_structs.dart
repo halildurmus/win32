@@ -72,7 +72,8 @@ int generateStructs(Win32API win32) {
   final scope = MetadataStore.getWin32Scope();
 
   var structsGenerated = 0;
-  final writer = File('lib/src/structs.g.dart').openSync(mode: FileMode.write);
+  final writer =
+      File('lib/src/structs.g.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync(structFileHeader);
 

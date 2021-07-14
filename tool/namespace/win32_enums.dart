@@ -68,8 +68,6 @@ String processEnumeration(TypeDef enumClass) {
 
   // The first field is always the special field _value
   for (final field in enumClass.fields.skip(1)) {
-    // if (field.startsWith('_')) continue;
-
     final value = field.value.toHexString(32);
     buffer.writeln('  static const ${field.name} = $value;');
   }
@@ -79,38 +77,8 @@ String processEnumeration(TypeDef enumClass) {
   return buffer.toString();
 }
 
-// void main() {
-//   final scope = MetadataStore.getWin32Scope();
-//   initNamespaces(scope);
-
-//   for (final namespace in namespaces) {
-//     final folderName = namespace.split('.').last.toLowerCase();
-
-//     final filteredEnums = scope.enums
-//         .where((typedef) => typedef.name.startsWith(namespace))
-//         .toList()
-//       ..sort((a, b) => a.name.compareTo(b.name));
-
-//     if (filteredEnums.isNotEmpty) {
-//       Directory('lib/src/$folderName').createSync();
-
-//       final writer =
-//           File('lib/src/$folderName/enums.dart').openSync(mode: FileMode.write);
-
-//       final enumsLength = filteredEnums.length;
-//       print('Processing $enumsLength enums in $namespace');
-//       final buffer = StringBuffer();
-
-//       for (final enumClass in filteredEnums) {
-//         buffer.write(processEnumeration(enumClass));
-//       }
-//       writer.writeStringSync(buffer.toString());
-//     }
-//   }
-// }
-
 void generateEnumsFile(File file, List<TypeDef> enums) {
-  final writer = file.openSync(mode: FileMode.write);
+  final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
 
   for (final enumObject in enums) {

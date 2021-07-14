@@ -44,7 +44,8 @@ String generateDocComment(Win32Function func) {
 
 void generateFfiFiles(Win32API win32) {
   for (final library in winmdGenerated) {
-    final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
+    final writer =
+        File('lib/src/$library.dart').openSync(mode: FileMode.writeOnly);
 
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
