@@ -51,6 +51,7 @@ String libraryFromDllName(String dllName) {
   }
 }
 
+/// Return all the imports needed for a function to be satisfied.
 List<String> importsForFunction(Method function) {
   final importList = <String>[];
 
