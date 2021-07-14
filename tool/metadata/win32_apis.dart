@@ -93,7 +93,7 @@ void generateFfiFile(String library, TypeDef typedef) {
       .where((method) => method.module.name == library)
       .where((method) => !method.name.endsWith('A'))
       .toList()
-        ..sort((a, b) => a.name.compareTo(b.name));
+    ..sort((a, b) => a.name.compareTo(b.name));
 
   final writer =
       File('lib/src/$folderName/apis.dart').openSync(mode: FileMode.write);
@@ -135,28 +135,21 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 void main() {
   final scope = MetadataStore.getWin32Scope();
 
-  // Start with the GDI namespace
-  final gdi = scope.typeDefs
-      .where((typedef) => (typedef.name == 'Windows.Win32.Gdi.Apis'))
+  // Start with one namespace
+  final foundation = scope.typeDefs
+      .where((typedef) => (typedef.name == 'Windows.Win32.Foundation.Apis'))
       .first;
 
   // List of distinct modules in the namespace
   final modules = [
-    gdi.methods.map((method) => method.module.name).toSet().toList().first
-  ]; // GDI32 for now
+    foundation.methods
+        .map((method) => method.module.name)
+        .toSet()
+        .toList()
+        .first
+  ]; // Foundation for now
 
   for (final module in modules) {
-    generateFfiFile(module, gdi);
+    generateFfiFile(module, foundation);
   }
-
-  // apis.forEach((api) => methods.addAll(api.methods));
-  // print('${methods.length} APIs collected');
-
-  // final win32 = Win32API('tool/win32/win32api.json');
-  // final genCount = win32.functions.values
-  //     .where((func) => winmdGenerated.contains(func.dllLibrary))
-  //     .length;
-
-  // generateFfiFiles(win32);
-  // print('$genCount typedefs generated from Windows metadata.');
 }
