@@ -9,6 +9,28 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 import '../metadata/projection/typeprojector.dart';
 
+const ffiFileHeader = '''
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Maps FFI prototypes onto the corresponding Win32 API function calls
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../callbacks.dart';
+import '../combase.dart';
+// import 'enums.dart';
+import 'structs.dart';
+
+''';
+
 class Win32Prototype {
   final String _nameWithoutEncoding;
   final Method _method;
@@ -75,27 +97,7 @@ String libraryFromDllName(String dllName) {
 void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
   final writer = file.openSync(mode: FileMode.writeOnly);
 
-  writer.writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import
-
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-
-import '../callbacks.dart';
-import '../combase.dart';
-// import 'enums.dart';
-import 'structs.dart';
-
-''');
+  writer.writeStringSync(ffiFileHeader);
   for (final library in modules) {
     final filteredFunctionList = typedef.methods
         .where((method) => method.module.name == library)
@@ -106,9 +108,8 @@ import 'structs.dart';
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_').toLowerCase();
 
-    writer.writeStringSync('''
-  final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
-''');
+    writer.writeStringSync("  final _$libraryDartName = "
+        "DynamicLibrary.open('${libraryFromDllName(library)}');");
 
     for (final function in filteredFunctionList) {
       writer.writeStringSync(
