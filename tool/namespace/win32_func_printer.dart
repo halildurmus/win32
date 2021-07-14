@@ -72,17 +72,8 @@ String libraryFromDllName(String dllName) {
 
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
-void generateFfiFile(File file, String library, TypeDef typedef) {
-  final filteredFunctionList = typedef.methods
-      .where((method) => method.module.name == library)
-      .where((method) => !method.name.endsWith('A'))
-      .toList()
-    ..sort((a, b) => a.name.compareTo(b.name));
-
-  final writer = file.openSync(mode: FileMode.writeOnlyAppend);
-
-  // API set names aren't legal Dart identifiers, so we rename them
-  final libraryDartName = library.replaceAll('-', '_').toLowerCase();
+void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
+  final writer = file.openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -102,15 +93,27 @@ import 'package:ffi/ffi.dart';
 import '../callbacks.dart';
 import '../combase.dart';
 // import 'enums.dart';
-// import 'structs.dart';
+import 'structs.dart';
 
-final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
+''');
+  for (final library in modules) {
+    final filteredFunctionList = typedef.methods
+        .where((method) => method.module.name == library)
+        .where((method) => !method.name.endsWith('A'))
+        .toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
+
+    // API set names aren't legal Dart identifiers, so we rename them
+    final libraryDartName = library.replaceAll('-', '_').toLowerCase();
+
+    writer.writeStringSync('''
+  final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
-  for (final function in filteredFunctionList) {
-    writer.writeStringSync(
-        '${Win32Prototype(function.name, function, libraryDartName).dartFfiMapping}\n');
+    for (final function in filteredFunctionList) {
+      writer.writeStringSync(
+          '${Win32Prototype(function.name, function, libraryDartName).dartFfiMapping}\n');
+    }
   }
-
   writer.closeSync();
 }

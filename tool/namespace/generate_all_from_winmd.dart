@@ -31,9 +31,7 @@ void generateWin32Functions(String namespace) {
   if (file.existsSync()) {
     file.deleteSync();
   }
-  for (final module in modules) {
-    generateFfiFile(file, module, funcs);
-  }
+  generateFfiFile(file, modules, funcs);
 }
 
 void generateWin32Structs(String namespace) {
