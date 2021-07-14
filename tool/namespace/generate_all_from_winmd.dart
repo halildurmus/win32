@@ -46,7 +46,7 @@ void generateWin32Functions(String namespace) {
   final modules =
       funcs.methods.map((method) => method.module.name).toSet().toList();
 
-  final file = File('${folderForNamespace(namespace)}/functions.dart');
+  final file = File('${folderForNamespace(namespace)}/functions.g.dart');
   generateFfiFile(file, modules, funcs);
 }
 
@@ -66,7 +66,7 @@ void generateWin32Structs(String namespace) {
     ..sort((a, b) => a.name.compareTo(b.name));
   print('structs: $structs');
 
-  final file = File('${folderForNamespace(namespace)}/structs.dart');
+  final file = File('${folderForNamespace(namespace)}/structs.g.dart');
   generateStructsFile(file, structs);
 }
 
@@ -77,7 +77,7 @@ void generateWin32Enums(String namespace) {
     ..sort((a, b) => a.name.compareTo(b.name));
   print('enums: $enums');
 
-  final file = File('${folderForNamespace(namespace)}/enums.dart');
+  final file = File('${folderForNamespace(namespace)}/enums.g.dart');
   generateEnumsFile(file, enums);
 }
 
@@ -88,7 +88,7 @@ void generateWin32Constants(String namespace) {
       .fields;
   print('constants: ${constants.take(4)}...');
 
-  final file = File('${folderForNamespace(namespace)}/constants.dart');
+  final file = File('${folderForNamespace(namespace)}/constants.g.dart');
   generateConstantsFile(file, constants);
 }
 
@@ -100,7 +100,7 @@ void generateWin32Callbacks(String namespace) {
     ..sort((a, b) => a.name.compareTo(b.name));
   print('callbacks: $callbacks');
 
-  final file = File('${folderForNamespace(namespace)}/callbacks.dart');
+  final file = File('${folderForNamespace(namespace)}/callbacks.g.dart');
   generateCallbacksFile(file, callbacks);
 }
 
@@ -110,11 +110,11 @@ void generateLibraryExport(List<String> namespaces) {
   for (final namespace in namespaces) {
     final relativePath = folderForNamespace(namespace).substring(4);
     writer.writeStringSync('''
-  export '$relativePath/callbacks.dart';
-  export '$relativePath/constants.dart';
-  export '$relativePath/enums.dart';
-  export '$relativePath/functions.dart';
-  export '$relativePath/structs.dart';
+  export '$relativePath/callbacks.g.dart';
+  export '$relativePath/constants.g.dart';
+  export '$relativePath/enums.g.dart';
+  export '$relativePath/functions.g.dart';
+  export '$relativePath/structs.g.dart';
 ''');
   }
 

@@ -10,8 +10,8 @@ import 'package:ffi/ffi.dart';
 
 import '../callbacks.dart';
 import '../combase.dart';
-import 'enums.dart';
-import 'structs.dart';
+import 'enums.g.dart';
+import 'structs.g.dart';
 
 // -----------------------------------------------------------------------
 // OLEAUT32.dll
