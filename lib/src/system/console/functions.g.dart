@@ -12,6 +12,7 @@ import 'enums.g.dart';
 import 'structs.g.dart';
 
 import '../../foundation/structs.g.dart';
+import '../../system/console/callbacks.g.dart';
 import '../../system/console/structs.g.dart';
 
 // -----------------------------------------------------------------------
@@ -471,13 +472,13 @@ late final _SetConsoleCP = _kernel32.lookupFunction<
     int Function(int wCodePageID)>('SetConsoleCP');
 
 int SetConsoleCtrlHandler(
-        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, int Add) =>
+        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine, int Add) =>
     _SetConsoleCtrlHandler(HandlerRoutine, Add);
 
 late final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
     Int32 Function(
-        Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, Int32 Add),
-    int Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
+        Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine, Int32 Add),
+    int Function(Pointer<NativeFunction<PHANDLER_ROUTINE>> HandlerRoutine,
         int Add)>('SetConsoleCtrlHandler');
 
 int SetConsoleCursorInfo(

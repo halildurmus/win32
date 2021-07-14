@@ -15,7 +15,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-import '../../keyboardandmouseinput/structs.g.dart';
+import '../../ui/keyboardandmouseinput/structs.g.dart';
 import '../../foundation/structs.g.dart';
 
 class HARDWAREINPUT extends Struct {

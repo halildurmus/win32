@@ -15,7 +15,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-import '../../systeminformation/structs.g.dart';
+import '../../system/systeminformation/structs.g.dart';
 
 class MEMORYSTATUS extends Struct {
   @Uint32()

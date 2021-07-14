@@ -225,9 +225,18 @@ class TypeProjector {
     // If it's a Win32 type, we know how to get the type
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.name.startsWith('Windows.Win32')) {
+      // Grab the underlying name
       final win32Type = typeIdentifier.type?.name.split('.').last ?? '';
-      final ffiNativeType = _convertToFFIType(win32Type);
-      return ffiNativeType;
+
+      // Is it a callback?
+      if (typeIdentifier.type!.isDelegate) {
+        return 'Pointer<NativeFunction<$win32Type>>';
+      } else {
+        // TODO: Consider using typedef aliases to skip this step
+        // Convert from DWORD to Uint32 (or similar)
+        final ffiNativeType = _convertToFFIType(win32Type);
+        return ffiNativeType;
+      }
     }
 
     if (typeIdentifier.baseType == BaseType.ClassTypeModifier) {

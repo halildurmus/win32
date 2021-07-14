@@ -32,8 +32,7 @@ List<String> importsForStruct(TypeDef struct) {
 
   for (final field in struct.fields) {
     if (field.typeIdentifier.name.startsWith('Windows.Win32')) {
-      final typeName = field.typeIdentifier.name.split('.');
-      importList.add(typeName[typeName.length - 2].toLowerCase());
+      importList.add(folderFromNamespace(field.typeIdentifier.name));
     }
   }
   return importList;

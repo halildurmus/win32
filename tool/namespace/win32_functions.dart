@@ -50,17 +50,15 @@ String libraryFromDllName(String dllName) {
   }
 }
 
-/// Return all the imports needed for a function to be satisfied.
+/// Return all the imports needed for a function to be satisfied. For example,
+/// if one of the parameters is `Windows.Win32.Foundation.SYSTEMTIME`, we will
+/// add a needed import of `foundation/structs.g.dart`.
 List<String> importsForFunction(Method function) {
   final importList = <String>[];
 
-  // If a parameter takes the form Windows.Win32.Foundation.SYSTEMTIME, return
-  // "foundation"
   for (final param in function.parameters) {
     if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-      final typeName = param.typeIdentifier.name.split('.').skip(2).toList()
-        ..removeLast();
-      importList.add(typeName.join('/').toLowerCase());
+      importList.add(folderFromNamespace(param.typeIdentifier.name));
     }
   }
   return importList;
