@@ -391,6 +391,21 @@ void main() {
     }
   }
 
+  static String printCallback(TypeDef typedef, String callbackName) {
+    final invokeMethod = typedef.findMethod('Invoke');
+    if (invokeMethod == null) return '';
+
+    final returnType =
+        TypeProjector(invokeMethod.returnType.typeIdentifier).nativeType;
+    final params = <String>[];
+
+    for (final param in invokeMethod.parameters) {
+      params.add(
+          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}');
+    }
+    return "typedef $callbackName = $returnType Function(${params.join(', ')});";
+  }
+
   static String printType(TypeDef typeDef) {
     final type = ClassProjector(typeDef).projection;
     return headerAsString(type) +

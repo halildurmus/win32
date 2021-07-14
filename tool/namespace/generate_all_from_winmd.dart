@@ -94,7 +94,8 @@ void generateWin32Constants(String namespace) {
 
 void generateWin32Callbacks(String namespace) {
   final callbacks = scope.typeDefs
-      .where((typedef) => typedef.name == namespace && typedef.isDelegate)
+      .where(
+          (typedef) => typedef.name.startsWith(namespace) && typedef.isDelegate)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
   print('callbacks: $callbacks');
