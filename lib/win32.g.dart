@@ -18,3 +18,9 @@
   export 'src/systeminformation/functions.g.dart';
   export 'src/systeminformation/structs.g.dart';
 
+  export 'src/keyboardandmouseinput/callbacks.g.dart';
+  export 'src/keyboardandmouseinput/constants.g.dart';
+  export 'src/keyboardandmouseinput/enums.g.dart';
+  export 'src/keyboardandmouseinput/functions.g.dart';
+  export 'src/keyboardandmouseinput/structs.g.dart';
+

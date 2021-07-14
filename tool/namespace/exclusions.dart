@@ -1,4 +1,12 @@
-const exclusions = <String>[
+const excludedFunctions = <String>[
+  // Relies on namespaces not imported yet
   'CreateConsoleScreenBuffer',
-  'GetLogicalProcessorInformationEx'
+  'GetLogicalProcessorInformationEx',
+
+  // Duplicates
+  '_TrackMouseEvent',
+];
+
+const excludedImports = <String>[
+  'textservices',
 ];

@@ -16,7 +16,7 @@ const ffiFileHeader = '''
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: unused_import, directives_ordering, unused_element
 
 import 'dart:ffi';
 
@@ -78,8 +78,8 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
     final functions = typedef.methods
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
-        .where(
-            (method) => !exclusions.contains(nameWithoutEncoding(method.name)))
+        .where((method) =>
+            !excludedFunctions.contains(nameWithoutEncoding(method.name)))
         .toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -100,7 +100,9 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
   }
   writer.writeStringSync(ffiFileHeader);
   for (final import in imports) {
-    writer.writeStringSync("import '../$import/structs.g.dart';\n");
+    if (!excludedImports.contains(import)) {
+      writer.writeStringSync("import '../$import/structs.g.dart';\n");
+    }
   }
   writer.writeStringSync('\n');
   writer.writeStringSync(buffer.toString());

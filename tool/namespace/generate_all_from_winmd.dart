@@ -15,7 +15,9 @@ final scope = MetadataStore.getWin32Scope();
 const namespaces = <String>[
   'Windows.Win32.Foundation',
   'Windows.Win32.System.Console',
-  'Windows.Win32.System.SystemInformation'
+  'Windows.Win32.System.SystemInformation',
+  'Windows.Win32.UI.KeyboardAndMouseInput',
+  // 'Windows.Win32.UI.TextServices',
 ];
 
 List<String> namespacesInScope(Scope scope) {
@@ -124,7 +126,7 @@ void generateLibraryExport(List<String> namespaces) {
 
 void main() {
   for (final namespace in namespaces) {
-    print('Generating: $namespace...');
+    print('Generating $namespace...');
     createDirectory(namespace);
     generateWin32Functions(namespace);
     generateWin32Structs(namespace);
