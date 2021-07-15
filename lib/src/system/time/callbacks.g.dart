@@ -42,3 +42,4 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import '../../foundation/structs.g.dart';

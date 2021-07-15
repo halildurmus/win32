@@ -8,9 +8,19 @@ const excludedFunctions = <String>[
   '_TrackMouseEvent',
 ];
 
-const excludedStructs = <String>[];
+const excludedStructs = <String>[
+  'BSMINFO',
+  'CHOOSEFONT',
+  'ICONMETRICS',
+  'UPDATELAYEREDWINDOWINFO',
+  'NONCLIENTMETRICS',
+  'OFNOTIFYEX',
+  'OFNOTIFY',
+];
 
-const excludedCallbacks = <String>[];
+const excludedCallbacks = <String>[
+  'MSGBOXCALLBACK',
+];
 
 const excludedImports = <String>[
   'graphics/gdi/structs.g.dart',

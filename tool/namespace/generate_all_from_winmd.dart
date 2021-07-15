@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:winmd/winmd.dart';
 
+import 'exclusions.dart';
 import 'win32_callbacks.dart';
 import 'win32_constants.dart';
 import 'win32_enums.dart';
@@ -68,6 +69,7 @@ void generateWin32Structs(String namespace) {
       .where((typedef) => typedef.isClass)
       .where((typedef) => typedef.parent?.name == 'System.ValueType')
       .where((typedef) => !typedef.name.endsWith('A'))
+      .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => typedef.customAttributes
           .where((attrib) =>
               attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
@@ -110,6 +112,7 @@ void generateWin32Callbacks(String namespace) {
   final callbacks = scope.typeDefs
       .where(
           (typedef) => typedef.name.startsWith(namespace) && typedef.isDelegate)
+      .where((typedef) => !excludedCallbacks.contains(typedef.name))
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 

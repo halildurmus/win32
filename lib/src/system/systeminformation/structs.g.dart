@@ -15,6 +15,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.g.dart';
 import '../../system/systeminformation/structs.g.dart';
 
 class MEMORYSTATUS extends Struct {
