@@ -66,18 +66,36 @@ List<String> importsForFunction(Method function) {
             '${folderFromNamespace(param.typeIdentifier.name)}/structs.g.dart');
       }
     }
+
+    if (param.typeIdentifier.typeArg != null) {
+      final paramTypeArg = param.typeIdentifier.typeArg!;
+      if (paramTypeArg.name.startsWith('Windows.Win32')) {
+        if (paramTypeArg.type!.isDelegate) {
+          importList.add(
+              '${folderFromNamespace(paramTypeArg.name)}/callbacks.g.dart');
+        } else {
+          importList
+              .add('${folderFromNamespace(paramTypeArg.name)}/structs.g.dart');
+        }
+      }
+    }
   }
   return importList;
 }
 
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
-void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
+void generateFfiFile(File file, TypeDef typedef) {
+  // List of distinct modules in the namespace. There may be multiple, for
+  // example Windows.Win32.Foundation.Apis contains functions from oleaut32.dll,
+  // kernelbase.dll and kernel32.dll (amongst others).
+  final modules =
+      typedef.methods.map((method) => method.module.name).toSet().toList();
   final imports = <String>{};
 
   final writer = file.openSync(mode: FileMode.writeOnly);
-
   final buffer = StringBuffer();
+
   for (final library in modules) {
     // For now, we only project Unicode methods.
     final functions = typedef.methods
@@ -102,6 +120,7 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
       buffer.writeln(printer.dartFfiMapping);
       imports.addAll(importsForFunction(function));
     }
+    buffer.writeln();
   }
 
   writer.writeStringSync(ffiFileHeader);

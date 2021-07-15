@@ -14,13 +14,13 @@ final scope = MetadataStore.getWin32Scope();
 
 /// The metadata namespaces we're generating
 const namespaces = <String>[
+  'Windows.Win32.System.Time',
   'Windows.Win32.Foundation',
   // 'Windows.Win32.System.Com',
   'Windows.Win32.System.Console',
   // 'Windows.Win32.System.Diagnostics.Debug',
   // 'Windows.Win32.System.OleAutomation',
   'Windows.Win32.System.SystemInformation',
-  'Windows.Win32.System.Time',
   // 'Windows.Win32.UI.Controls',
   'Windows.Win32.UI.KeyboardAndMouseInput',
   'Windows.Win32.UI.PointerInput',
@@ -56,14 +56,8 @@ void generateWin32Functions(String namespace) {
       .where((typedef) => (typedef.name == '$namespace.Apis'))
       .first;
 
-  // List of distinct modules in the namespace. There may be multiple, for
-  // example Windows.Win32.Foundation.Apis contains functions from oleaut32.dll,
-  // kernelbase.dll and kernel32.dll (amongst others).
-  final modules =
-      funcs.methods.map((method) => method.module.name).toSet().toList();
-
   final file = File('${folderForNamespace(namespace)}/functions.g.dart');
-  generateFfiFile(file, modules, funcs);
+  generateFfiFile(file, funcs);
 }
 
 void generateWin32Structs(String namespace) {
