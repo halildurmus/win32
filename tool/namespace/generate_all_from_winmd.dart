@@ -118,7 +118,10 @@ void generateWin32Constants(String namespace) {
   final file = File('${folderForNamespace(namespace)}/constants.g.dart');
   generateConstantsFile(file, constants);
 
-  final guidConstants = scope.typeDefs.where(typedefIsGuidConstant).toList();
+  final guidConstants = scope.typeDefs
+      .where((typedef) => typedef.name.startsWith(namespace))
+      .where(typedefIsGuidConstant)
+      .toList();
   appendGuidConstantsFile(file, guidConstants);
 }
 

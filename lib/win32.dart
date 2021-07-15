@@ -92,8 +92,8 @@ export 'src/constants.dart' show TRUE;
 // export 'src/constants_nodoc.dart' hide INVALID_HANDLE_VALUE, E_NOTIMPL;
 export 'src/exceptions.dart';
 export 'src/macros.dart';
-export 'src/guid.dart';
-// export 'src/structs.dart' hide IN_ADDR;
+// export 'src/guid.dart';
+export 'src/structs.dart' show GUID, COR_FIELD_OFFSET;
 // export 'src/structs.g.dart'
 // hide addrinfo, fd_set, SOCKADDR, timeval, hostent, protoent, servent;
 export 'src/utils.dart';
@@ -240,3 +240,38 @@ export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';
 
 // Metadata-generated APIs
+export 'src/foundation/callbacks.g.dart';
+export 'src/foundation/constants.g.dart';
+export 'src/foundation/enums.g.dart';
+export 'src/foundation/functions.g.dart';
+export 'src/foundation/structs.g.dart';
+
+export 'src/system/console/callbacks.g.dart';
+export 'src/system/console/constants.g.dart';
+export 'src/system/console/enums.g.dart';
+export 'src/system/console/functions.g.dart';
+export 'src/system/console/structs.g.dart';
+
+export 'src/system/systeminformation/callbacks.g.dart';
+export 'src/system/systeminformation/constants.g.dart';
+export 'src/system/systeminformation/enums.g.dart';
+export 'src/system/systeminformation/functions.g.dart';
+export 'src/system/systeminformation/structs.g.dart';
+
+export 'src/system/time/callbacks.g.dart';
+export 'src/system/time/constants.g.dart';
+export 'src/system/time/enums.g.dart';
+export 'src/system/time/functions.g.dart';
+export 'src/system/time/structs.g.dart';
+
+export 'src/ui/keyboardandmouseinput/callbacks.g.dart';
+export 'src/ui/keyboardandmouseinput/constants.g.dart';
+export 'src/ui/keyboardandmouseinput/enums.g.dart';
+export 'src/ui/keyboardandmouseinput/functions.g.dart';
+export 'src/ui/keyboardandmouseinput/structs.g.dart';
+
+export 'src/ui/windowsandmessaging/callbacks.g.dart';
+export 'src/ui/windowsandmessaging/constants.g.dart';
+export 'src/ui/windowsandmessaging/enums.g.dart';
+export 'src/ui/windowsandmessaging/functions.g.dart';
+export 'src/ui/windowsandmessaging/structs.g.dart';
