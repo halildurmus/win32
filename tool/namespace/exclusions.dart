@@ -13,6 +13,11 @@ const excludedFunctions = <String>[
 ];
 
 const excludedStructs = <String>[
+  'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER',
+  'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER',
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO',
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL',
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE',
   'Windows.Win32.UI.WindowsAndMessaging.BSMINFO',
   'Windows.Win32.UI.WindowsAndMessaging.CHOOSEFONTW',
   'Windows.Win32.UI.WindowsAndMessaging.ICONMETRICSW',
@@ -21,6 +26,7 @@ const excludedStructs = <String>[
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW',
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW',
   'Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO',
+  ''
 ];
 
 const excludedCallbacks = <String>[
@@ -28,12 +34,16 @@ const excludedCallbacks = <String>[
 ];
 
 const excludedImports = <String>[
-  'graphics/gdi/structs.g.dart',
+  'globalization/structs.g.dart',
+  'graphics/opengl/structs.g.dart',
   'storage/structuredstorage/structs.g.dart',
   'system/com/structs.g.dart',
+  'system/dataexchange/structs.g.dart',
   'system/stationsanddesktops/structs.g.dart',
   'system/systemservices/structs.g.dart',
-  'ui/controls/structs.g.dart',
+  'ui/colorsystem/structs.g.dart',
   'ui/controls/callbacks.g.dart',
+  'ui/controls/structs.g.dart',
+  'ui/displaydevices/structs.g.dart',
   'ui/textservices/structs.g.dart',
 ];

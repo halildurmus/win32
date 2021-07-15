@@ -45,4 +45,3 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.g.dart';
 import '../../guid.dart';
-import '../../foundation/structs.g.dart';

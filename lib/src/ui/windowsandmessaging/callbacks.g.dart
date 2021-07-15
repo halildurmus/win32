@@ -47,7 +47,6 @@ import 'structs.g.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 
-typedef DESKTOPENUMPROCA = Int32 Function(Pointer<Utf8> param0, IntPtr param1);
 typedef DESKTOPENUMPROCW = Int32 Function(Pointer<Utf16> param0, IntPtr param1);
 typedef DLGPROC = IntPtr Function(
     IntPtr param0, Uint32 param1, IntPtr param2, IntPtr param3);
@@ -68,13 +67,8 @@ typedef LPPRINTHOOKPROC = IntPtr Function(
     IntPtr param0, Uint32 param1, IntPtr param2, IntPtr param3);
 typedef LPSETUPHOOKPROC = IntPtr Function(
     IntPtr param0, Uint32 param1, IntPtr param2, IntPtr param3);
-typedef NAMEENUMPROCA = Int32 Function(Pointer<Utf8> param0, IntPtr param1);
 typedef NAMEENUMPROCW = Int32 Function(Pointer<Utf16> param0, IntPtr param1);
 typedef PREGISTERCLASSNAMEW = Uint8 Function(Pointer<Utf16> param0);
-typedef PROPENUMPROCA = Int32 Function(
-    IntPtr param0, Pointer<Utf8> param1, IntPtr param2);
-typedef PROPENUMPROCEXA = Int32 Function(
-    IntPtr param0, Pointer<Utf8> param1, IntPtr param2, IntPtr param3);
 typedef PROPENUMPROCEXW = Int32 Function(
     IntPtr param0, Pointer<Utf16> param1, IntPtr param2, IntPtr param3);
 typedef PROPENUMPROCW = Int32 Function(
@@ -83,7 +77,6 @@ typedef SENDASYNCPROC = Void Function(
     IntPtr param0, Uint32 param1, IntPtr param2, IntPtr param3);
 typedef TIMERPROC = Void Function(
     IntPtr param0, Uint32 param1, IntPtr param2, Uint32 param3);
-typedef WINSTAENUMPROCA = Int32 Function(Pointer<Utf8> param0, IntPtr param1);
 typedef WINSTAENUMPROCW = Int32 Function(Pointer<Utf16> param0, IntPtr param1);
 typedef WNDENUMPROC = Int32 Function(IntPtr param0, IntPtr param1);
 typedef WNDPROC = IntPtr Function(
