@@ -32,6 +32,8 @@ const namespaces = <String>[
   // 'Windows.Win32.UI.TextServices',
 ];
 
+// TODO: Isn't there a better way to identify namespaces?
+// TODO: What about levels of namespace?
 List<String> namespacesInScope(Scope scope) {
   // Use a Set to avoid duplication
   final namespaceSet = <String>{};
@@ -63,6 +65,7 @@ void generateWin32Functions(String namespace) {
   generateFfiFile(file, funcs);
 }
 
+// TODO: Move these clauses into a function (typedefIsStruct?)
 void generateWin32Structs(String namespace) {
   // Ignore "structs" that are just native values; we'll deal with them
   // elsewhere. Examples include HANDLE, BOOL and BSTR.
@@ -137,6 +140,7 @@ void generateWin32Callbacks(String namespace) {
   generateCallbacksFile(file, callbacks);
 }
 
+// TODO: Add exclusion test
 void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
       .where((typedef) => typedef.name.startsWith(namespace))

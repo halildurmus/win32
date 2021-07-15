@@ -44,6 +44,7 @@ class ClassProjection {
   String shortNameWithGenericSpecifier;
   SourceType sourceType;
   int vtableStart;
+  String namespace;
 
   @override
   String toString() =>
@@ -59,6 +60,8 @@ class ClassProjection {
       required this.inherits,
       required this.name,
       this.vtableStart = 0,
-      this.generateClass = false})
-      : shortNameWithGenericSpecifier = name.split('.').last.split('`').first;
+      this.generateClass = false,
+      String? fullyQualifiedName})
+      : shortNameWithGenericSpecifier = name.split('.').last.split('`').first,
+        namespace = fullyQualifiedName ?? name;
 }
