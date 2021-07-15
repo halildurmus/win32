@@ -16,6 +16,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.g.dart';
+import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 
 class DYNAMIC_TIME_ZONE_INFORMATION extends Struct {

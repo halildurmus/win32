@@ -42,6 +42,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import '../guid.dart';
 
 typedef FARPROC = IntPtr Function();
 typedef NEARPROC = IntPtr Function();

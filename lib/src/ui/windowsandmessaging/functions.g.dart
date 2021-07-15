@@ -11,12 +11,8 @@ import 'package:ffi/ffi.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
 
-import '../../foundation/structs.g.dart';
-import '../../system/console/structs.g.dart';
-import '../../system/console/callbacks.g.dart';
-import '../../system/systeminformation/structs.g.dart';
-import '../../ui/keyboardandmouseinput/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
+import '../../foundation/structs.g.dart';
 import '../../ui/windowsandmessaging/callbacks.g.dart';
 
 // -----------------------------------------------------------------------

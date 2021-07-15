@@ -16,6 +16,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.g.dart';
+import '../guid.dart';
 
 class APP_LOCAL_DEVICE_ID extends Struct {
   @Array(32)

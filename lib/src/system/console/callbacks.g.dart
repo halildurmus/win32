@@ -42,5 +42,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import '../../guid.dart';
+import '../../foundation/structs.g.dart';
 
 typedef PHANDLER_ROUTINE = Int32 Function(Uint32 CtrlType);

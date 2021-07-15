@@ -42,4 +42,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import '../../guid.dart';
 import '../../foundation/structs.g.dart';
+import '../../system/diagnostics/debug/structs.g.dart';
