@@ -3,23 +3,26 @@ const excludedFunctions = <String>[
   'CreateConsoleScreenBuffer',
   'GetLogicalProcessorInformationEx',
   'UpdateLayeredWindow',
+  'ChooseFont',
+  'UpdateLayeredWindowIndirect',
 
   // Duplicates
   '_TrackMouseEvent',
 ];
 
 const excludedStructs = <String>[
-  'BSMINFO',
-  'CHOOSEFONT',
-  'ICONMETRICS',
-  'UPDATELAYEREDWINDOWINFO',
-  'NONCLIENTMETRICS',
-  'OFNOTIFYEX',
-  'OFNOTIFY',
+  'Windows.Win32.UI.WindowsAndMessaging.BSMINFO',
+  'Windows.Win32.UI.WindowsAndMessaging.CHOOSEFONTW',
+  'Windows.Win32.UI.WindowsAndMessaging.ICONMETRICSW',
+  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXPARAMSW',
+  'Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO',
+  'Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW',
+  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW',
+  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW',
 ];
 
 const excludedCallbacks = <String>[
-  'MSGBOXCALLBACK',
+  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK',
 ];
 
 const excludedImports = <String>[
