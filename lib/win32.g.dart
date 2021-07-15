@@ -30,3 +30,9 @@
   export 'src/ui/keyboardandmouseinput/functions.g.dart';
   export 'src/ui/keyboardandmouseinput/structs.g.dart';
 
+  export 'src/ui/windowsandmessaging/callbacks.g.dart';
+  export 'src/ui/windowsandmessaging/constants.g.dart';
+  export 'src/ui/windowsandmessaging/enums.g.dart';
+  export 'src/ui/windowsandmessaging/functions.g.dart';
+  export 'src/ui/windowsandmessaging/structs.g.dart';
+
