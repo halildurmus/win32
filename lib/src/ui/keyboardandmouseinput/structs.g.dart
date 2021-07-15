@@ -20,6 +20,7 @@ import '../../guid.dart';
 import '../../ui/keyboardandmouseinput/structs.g.dart';
 import '../../foundation/structs.g.dart';
 
+/// {@category Struct}
 class HARDWAREINPUT extends Struct {
   @Uint32()
   external int uMsg;
@@ -29,6 +30,7 @@ class HARDWAREINPUT extends Struct {
   external int wParamH;
 }
 
+/// {@category Struct}
 class INPUT extends Struct {
   @Uint32()
   external int type;
@@ -36,6 +38,7 @@ class INPUT extends Struct {
   external int Anonymous;
 }
 
+/// {@category Struct}
 class KEYBDINPUT extends Struct {
   @Uint16()
   external int wVk;
@@ -49,6 +52,7 @@ class KEYBDINPUT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class LASTINPUTINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -56,6 +60,7 @@ class LASTINPUTINFO extends Struct {
   external int dwTime;
 }
 
+/// {@category Struct}
 class MOUSEINPUT extends Struct {
   @Int32()
   external int dx;
@@ -71,6 +76,7 @@ class MOUSEINPUT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class MOUSEMOVEPOINT extends Struct {
   @Int32()
   external int x;
@@ -82,6 +88,7 @@ class MOUSEMOVEPOINT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class RAWHID extends Struct {
   @Uint32()
   external int dwSizeHid;
@@ -91,12 +98,14 @@ class RAWHID extends Struct {
   external Array<Uint8> bRawData;
 }
 
+/// {@category Struct}
 class RAWINPUT extends Struct {
   external RAWINPUTHEADER header;
   @Uint32()
   external int data;
 }
 
+/// {@category Struct}
 class RAWINPUTDEVICE extends Struct {
   @Uint16()
   external int usUsagePage;
@@ -108,6 +117,7 @@ class RAWINPUTDEVICE extends Struct {
   external int hwndTarget;
 }
 
+/// {@category Struct}
 class RAWINPUTDEVICELIST extends Struct {
   @IntPtr()
   external int hDevice;
@@ -115,6 +125,7 @@ class RAWINPUTDEVICELIST extends Struct {
   external int dwType;
 }
 
+/// {@category Struct}
 class RAWINPUTHEADER extends Struct {
   @Uint32()
   external int dwType;
@@ -126,6 +137,7 @@ class RAWINPUTHEADER extends Struct {
   external int wParam;
 }
 
+/// {@category Struct}
 class RAWKEYBOARD extends Struct {
   @Uint16()
   external int MakeCode;
@@ -141,6 +153,7 @@ class RAWKEYBOARD extends Struct {
   external int ExtraInformation;
 }
 
+/// {@category Struct}
 class RAWMOUSE extends Struct {
   @Uint16()
   external int usFlags;
@@ -156,6 +169,7 @@ class RAWMOUSE extends Struct {
   external int ulExtraInformation;
 }
 
+/// {@category Struct}
 class RID_DEVICE_INFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -165,6 +179,7 @@ class RID_DEVICE_INFO extends Struct {
   external int Anonymous;
 }
 
+/// {@category Struct}
 class RID_DEVICE_INFO_HID extends Struct {
   @Uint32()
   external int dwVendorId;
@@ -178,6 +193,7 @@ class RID_DEVICE_INFO_HID extends Struct {
   external int usUsage;
 }
 
+/// {@category Struct}
 class RID_DEVICE_INFO_KEYBOARD extends Struct {
   @Uint32()
   external int dwType;
@@ -193,6 +209,7 @@ class RID_DEVICE_INFO_KEYBOARD extends Struct {
   external int dwNumberOfKeysTotal;
 }
 
+/// {@category Struct}
 class RID_DEVICE_INFO_MOUSE extends Struct {
   @Uint32()
   external int dwId;
@@ -204,6 +221,7 @@ class RID_DEVICE_INFO_MOUSE extends Struct {
   external int fHasHorizontalWheel;
 }
 
+/// {@category Struct}
 class TRACKMOUSEEVENT extends Struct {
   @Uint32()
   external int cbSize;

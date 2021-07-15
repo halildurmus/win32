@@ -19,6 +19,7 @@ import 'callbacks.g.dart';
 import '../../guid.dart';
 import '../../system/systeminformation/structs.g.dart';
 
+/// {@category Struct}
 class MEMORYSTATUS extends Struct {
   @Uint32()
   external int dwLength;
@@ -38,6 +39,7 @@ class MEMORYSTATUS extends Struct {
   external int dwAvailVirtual;
 }
 
+/// {@category Struct}
 class MEMORYSTATUSEX extends Struct {
   @Uint32()
   external int dwLength;
@@ -59,6 +61,7 @@ class MEMORYSTATUSEX extends Struct {
   external int ullAvailExtendedVirtual;
 }
 
+/// {@category Struct}
 class OSVERSIONINFOEX extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
@@ -100,6 +103,7 @@ class OSVERSIONINFOEX extends Struct {
   external int wReserved;
 }
 
+/// {@category Struct}
 class OSVERSIONINFO extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
@@ -130,6 +134,7 @@ class OSVERSIONINFO extends Struct {
   }
 }
 
+/// {@category Struct}
 class SYSTEM_INFO extends Struct {
   @Uint32()
   external int Anonymous;
@@ -151,6 +156,7 @@ class SYSTEM_INFO extends Struct {
   external int wProcessorRevision;
 }
 
+/// {@category Struct}
 class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
   @IntPtr()
   external int ProcessorMask;
@@ -160,11 +166,13 @@ class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
   external int Anonymous;
 }
 
+/// {@category Struct}
 class SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION extends Struct {
   @Uint64()
   external int CycleTime;
 }
 
+/// {@category Struct}
 class WOW64_ARCHITECTURE_INFORMATION extends Struct {
   @Uint32()
   external int _bitfield;

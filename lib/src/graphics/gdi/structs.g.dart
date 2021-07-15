@@ -20,6 +20,7 @@ import '../../guid.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../foundation/structs.g.dart';
 
+/// {@category Struct}
 class ABC extends Struct {
   @Int32()
   external int abcA;
@@ -29,6 +30,7 @@ class ABC extends Struct {
   external int abcC;
 }
 
+/// {@category Struct}
 class ABCFLOAT extends Struct {
   @Float()
   external double abcfA;
@@ -38,10 +40,12 @@ class ABCFLOAT extends Struct {
   external double abcfC;
 }
 
+/// {@category Struct}
 class ABORTPATH extends Struct {
   external EMR emr;
 }
 
+/// {@category Struct}
 class AXESLIST extends Struct {
   @Uint32()
   external int axlReserved;
@@ -51,6 +55,7 @@ class AXESLIST extends Struct {
   external Array<AXISINFO> axlAxisInfo;
 }
 
+/// {@category Struct}
 class AXISINFO extends Struct {
   @Int32()
   external int axMinValue;
@@ -75,6 +80,7 @@ class AXISINFO extends Struct {
   }
 }
 
+/// {@category Struct}
 class BITMAP extends Struct {
   @Int32()
   external int bmType;
@@ -91,6 +97,7 @@ class BITMAP extends Struct {
   external Pointer bmBits;
 }
 
+/// {@category Struct}
 class BITMAPCOREHEADER extends Struct {
   @Uint32()
   external int bcSize;
@@ -104,12 +111,15 @@ class BITMAPCOREHEADER extends Struct {
   external int bcBitCount;
 }
 
+/// {@category Struct}
 class BITMAPCOREINFO extends Struct {
   external BITMAPCOREHEADER bmciHeader;
   @Array(1)
   external Array<RGBTRIPLE> bmciColors;
 }
 
+/// {@category Struct}
+@Packed(2)
 class BITMAPFILEHEADER extends Struct {
   @Uint16()
   external int bfType;
@@ -123,12 +133,14 @@ class BITMAPFILEHEADER extends Struct {
   external int bfOffBits;
 }
 
+/// {@category Struct}
 class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
   @Array(1)
   external Array<RGBQUAD> bmiColors;
 }
 
+/// {@category Struct}
 class BITMAPINFOHEADER extends Struct {
   @Uint32()
   external int biSize;
@@ -154,6 +166,7 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 }
 
+/// {@category Struct}
 class BLENDFUNCTION extends Struct {
   @Uint8()
   external int BlendOp;
@@ -165,6 +178,7 @@ class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// {@category Struct}
 class COLORADJUSTMENT extends Struct {
   @Uint16()
   external int caSize;
@@ -192,6 +206,7 @@ class COLORADJUSTMENT extends Struct {
   external int caRedGreenTint;
 }
 
+/// {@category Struct}
 class COLORCORRECTPALETTE extends Struct {
   external EMR emr;
   @Uint32()
@@ -204,6 +219,7 @@ class COLORCORRECTPALETTE extends Struct {
   external int nReserved;
 }
 
+/// {@category Struct}
 class COLORMATCHTOTARGET extends Struct {
   external EMR emr;
   @Uint32()
@@ -218,6 +234,7 @@ class COLORMATCHTOTARGET extends Struct {
   external Array<Uint8> Data;
 }
 
+/// {@category Struct}
 class DESIGNVECTOR extends Struct {
   @Uint32()
   external int dvReserved;
@@ -227,6 +244,7 @@ class DESIGNVECTOR extends Struct {
   external Array<Int32> dvValues;
 }
 
+/// {@category Struct}
 class DIBSECTION extends Struct {
   external BITMAP dsBm;
   external BITMAPINFOHEADER dsBmih;
@@ -238,6 +256,7 @@ class DIBSECTION extends Struct {
   external int dsOffset;
 }
 
+/// {@category Struct}
 class DISPLAY_DEVICE extends Struct {
   @Uint32()
   external int cb;
@@ -316,6 +335,7 @@ class DISPLAY_DEVICE extends Struct {
   }
 }
 
+/// {@category Struct}
 class DRAWTEXTPARAMS extends Struct {
   @Uint32()
   external int cbSize;
@@ -329,6 +349,7 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// {@category Struct}
 class EMR extends Struct {
   @Uint32()
   external int iType;
@@ -336,6 +357,7 @@ class EMR extends Struct {
   external int nSize;
 }
 
+/// {@category Struct}
 class EMRALPHABLEND extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -372,6 +394,7 @@ class EMRALPHABLEND extends Struct {
   external int cySrc;
 }
 
+/// {@category Struct}
 class EMRANGLEARC extends Struct {
   external EMR emr;
   external POINTL ptlCenter;
@@ -383,6 +406,7 @@ class EMRANGLEARC extends Struct {
   external double eSweepAngle;
 }
 
+/// {@category Struct}
 class EMRARC extends Struct {
   external EMR emr;
   external RECTL rclBox;
@@ -390,6 +414,7 @@ class EMRARC extends Struct {
   external POINTL ptlEnd;
 }
 
+/// {@category Struct}
 class EMRBITBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -422,6 +447,7 @@ class EMRBITBLT extends Struct {
   external int cbBitsSrc;
 }
 
+/// {@category Struct}
 class EMRCREATEBRUSHINDIRECT extends Struct {
   external EMR emr;
   @Uint32()
@@ -429,6 +455,7 @@ class EMRCREATEBRUSHINDIRECT extends Struct {
   external LOGBRUSH32 lb;
 }
 
+/// {@category Struct}
 class EMRCREATEDIBPATTERNBRUSHPT extends Struct {
   external EMR emr;
   @Uint32()
@@ -445,6 +472,7 @@ class EMRCREATEDIBPATTERNBRUSHPT extends Struct {
   external int cbBits;
 }
 
+/// {@category Struct}
 class EMRCREATEMONOBRUSH extends Struct {
   external EMR emr;
   @Uint32()
@@ -461,6 +489,7 @@ class EMRCREATEMONOBRUSH extends Struct {
   external int cbBits;
 }
 
+/// {@category Struct}
 class EMRCREATEPALETTE extends Struct {
   external EMR emr;
   @Uint32()
@@ -468,6 +497,7 @@ class EMRCREATEPALETTE extends Struct {
   external LOGPALETTE lgpl;
 }
 
+/// {@category Struct}
 class EMRCREATEPEN extends Struct {
   external EMR emr;
   @Uint32()
@@ -475,11 +505,13 @@ class EMRCREATEPEN extends Struct {
   external LOGPEN lopn;
 }
 
+/// {@category Struct}
 class EMRELLIPSE extends Struct {
   external EMR emr;
   external RECTL rclBox;
 }
 
+/// {@category Struct}
 class EMREOF extends Struct {
   external EMR emr;
   @Uint32()
@@ -490,11 +522,13 @@ class EMREOF extends Struct {
   external int nSizeLast;
 }
 
+/// {@category Struct}
 class EMREXCLUDECLIPRECT extends Struct {
   external EMR emr;
   external RECTL rclClip;
 }
 
+/// {@category Struct}
 class EMREXTCREATEFONTINDIRECT extends Struct {
   external EMR emr;
   @Uint32()
@@ -502,6 +536,7 @@ class EMREXTCREATEFONTINDIRECT extends Struct {
   external EXTLOGFONT elfw;
 }
 
+/// {@category Struct}
 class EMREXTCREATEPEN extends Struct {
   external EMR emr;
   @Uint32()
@@ -517,6 +552,7 @@ class EMREXTCREATEPEN extends Struct {
   external EXTLOGPEN32 elp;
 }
 
+/// {@category Struct}
 class EMREXTESCAPE extends Struct {
   external EMR emr;
   @Int32()
@@ -527,6 +563,7 @@ class EMREXTESCAPE extends Struct {
   external Array<Uint8> EscData;
 }
 
+/// {@category Struct}
 class EMREXTFLOODFILL extends Struct {
   external EMR emr;
   external POINTL ptlStart;
@@ -536,6 +573,7 @@ class EMREXTFLOODFILL extends Struct {
   external int iMode;
 }
 
+/// {@category Struct}
 class EMREXTSELECTCLIPRGN extends Struct {
   external EMR emr;
   @Uint32()
@@ -546,11 +584,13 @@ class EMREXTSELECTCLIPRGN extends Struct {
   external Array<Uint8> RgnData;
 }
 
+/// {@category Struct}
 class EMRFILLPATH extends Struct {
   external EMR emr;
   external RECTL rclBounds;
 }
 
+/// {@category Struct}
 class EMRFILLRGN extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -562,6 +602,7 @@ class EMRFILLRGN extends Struct {
   external Array<Uint8> RgnData;
 }
 
+/// {@category Struct}
 class EMRFORMAT extends Struct {
   @Uint32()
   external int dSignature;
@@ -573,6 +614,7 @@ class EMRFORMAT extends Struct {
   external int offData;
 }
 
+/// {@category Struct}
 class EMRFRAMERGN extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -585,6 +627,7 @@ class EMRFRAMERGN extends Struct {
   external Array<Uint8> RgnData;
 }
 
+/// {@category Struct}
 class EMRGDICOMMENT extends Struct {
   external EMR emr;
   @Uint32()
@@ -593,6 +636,7 @@ class EMRGDICOMMENT extends Struct {
   external Array<Uint8> Data;
 }
 
+/// {@category Struct}
 class EMRGLSBOUNDEDRECORD extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -602,6 +646,7 @@ class EMRGLSBOUNDEDRECORD extends Struct {
   external Array<Uint8> Data;
 }
 
+/// {@category Struct}
 class EMRGLSRECORD extends Struct {
   external EMR emr;
   @Uint32()
@@ -610,6 +655,7 @@ class EMRGLSRECORD extends Struct {
   external Array<Uint8> Data;
 }
 
+/// {@category Struct}
 class EMRGRADIENTFILL extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -623,6 +669,7 @@ class EMRGRADIENTFILL extends Struct {
   external Array<TRIVERTEX> Ver;
 }
 
+/// {@category Struct}
 class EMRINVERTRGN extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -632,11 +679,13 @@ class EMRINVERTRGN extends Struct {
   external Array<Uint8> RgnData;
 }
 
+/// {@category Struct}
 class EMRLINETO extends Struct {
   external EMR emr;
   external POINTL ptl;
 }
 
+/// {@category Struct}
 class EMRMASKBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -683,6 +732,7 @@ class EMRMASKBLT extends Struct {
   external int cbBitsMask;
 }
 
+/// {@category Struct}
 class EMRMODIFYWORLDTRANSFORM extends Struct {
   external EMR emr;
   external XFORM xform;
@@ -690,6 +740,7 @@ class EMRMODIFYWORLDTRANSFORM extends Struct {
   external int iMode;
 }
 
+/// {@category Struct}
 class EMRNAMEDESCAPE extends Struct {
   external EMR emr;
   @Int32()
@@ -702,11 +753,13 @@ class EMRNAMEDESCAPE extends Struct {
   external Array<Uint8> EscData;
 }
 
+/// {@category Struct}
 class EMROFFSETCLIPRGN extends Struct {
   external EMR emr;
   external POINTL ptlOffset;
 }
 
+/// {@category Struct}
 class EMRPLGBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -749,6 +802,7 @@ class EMRPLGBLT extends Struct {
   external int cbBitsMask;
 }
 
+/// {@category Struct}
 class EMRPOLYDRA extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -760,6 +814,7 @@ class EMRPOLYDRA extends Struct {
   external Array<Uint8> abTypes;
 }
 
+/// {@category Struct}
 class EMRPOLYDRAW16 extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -771,6 +826,7 @@ class EMRPOLYDRAW16 extends Struct {
   external Array<Uint8> abTypes;
 }
 
+/// {@category Struct}
 class EMRPOLYLINE extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -780,6 +836,7 @@ class EMRPOLYLINE extends Struct {
   external Array<POINTL> aptl;
 }
 
+/// {@category Struct}
 class EMRPOLYLINE16 extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -789,6 +846,7 @@ class EMRPOLYLINE16 extends Struct {
   external Array<POINTS> apts;
 }
 
+/// {@category Struct}
 class EMRPOLYPOLYLINE extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -802,6 +860,7 @@ class EMRPOLYPOLYLINE extends Struct {
   external Array<POINTL> aptl;
 }
 
+/// {@category Struct}
 class EMRPOLYPOLYLINE16 extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -815,6 +874,7 @@ class EMRPOLYPOLYLINE16 extends Struct {
   external Array<POINTS> apts;
 }
 
+/// {@category Struct}
 class EMRRESIZEPALETTE extends Struct {
   external EMR emr;
   @Uint32()
@@ -823,18 +883,21 @@ class EMRRESIZEPALETTE extends Struct {
   external int cEntries;
 }
 
+/// {@category Struct}
 class EMRRESTOREDC extends Struct {
   external EMR emr;
   @Int32()
   external int iRelative;
 }
 
+/// {@category Struct}
 class EMRROUNDRECT extends Struct {
   external EMR emr;
   external RECTL rclBox;
   external SIZE szlCorner;
 }
 
+/// {@category Struct}
 class EMRSCALEVIEWPORTEXTEX extends Struct {
   external EMR emr;
   @Int32()
@@ -847,41 +910,48 @@ class EMRSCALEVIEWPORTEXTEX extends Struct {
   external int yDenom;
 }
 
+/// {@category Struct}
 class EMRSELECTCLIPPATH extends Struct {
   external EMR emr;
   @Uint32()
   external int iMode;
 }
 
+/// {@category Struct}
 class EMRSELECTOBJECT extends Struct {
   external EMR emr;
   @Uint32()
   external int ihObject;
 }
 
+/// {@category Struct}
 class EMRSELECTPALETTE extends Struct {
   external EMR emr;
   @Uint32()
   external int ihPal;
 }
 
+/// {@category Struct}
 class EMRSETARCDIRECTION extends Struct {
   external EMR emr;
   @Uint32()
   external int iArcDirection;
 }
 
+/// {@category Struct}
 class EMRSETCOLORADJUSTMENT extends Struct {
   external EMR emr;
   external COLORADJUSTMENT ColorAdjustment;
 }
 
+/// {@category Struct}
 class EMRSETCOLORSPACE extends Struct {
   external EMR emr;
   @Uint32()
   external int ihCS;
 }
 
+/// {@category Struct}
 class EMRSETDIBITSTODEVICE extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -913,6 +983,7 @@ class EMRSETDIBITSTODEVICE extends Struct {
   external int cScans;
 }
 
+/// {@category Struct}
 class EMRSETICMPROFILE extends Struct {
   external EMR emr;
   @Uint32()
@@ -925,18 +996,21 @@ class EMRSETICMPROFILE extends Struct {
   external Array<Uint8> Data;
 }
 
+/// {@category Struct}
 class EMRSETMAPPERFLAGS extends Struct {
   external EMR emr;
   @Uint32()
   external int dwFlags;
 }
 
+/// {@category Struct}
 class EMRSETMITERLIMIT extends Struct {
   external EMR emr;
   @Float()
   external double eMiterLimit;
 }
 
+/// {@category Struct}
 class EMRSETPALETTEENTRIES extends Struct {
   external EMR emr;
   @Uint32()
@@ -949,6 +1023,7 @@ class EMRSETPALETTEENTRIES extends Struct {
   external Array<PALETTEENTRY> aPalEntries;
 }
 
+/// {@category Struct}
 class EMRSETPIXELV extends Struct {
   external EMR emr;
   external POINTL ptlPixel;
@@ -956,27 +1031,32 @@ class EMRSETPIXELV extends Struct {
   external int crColor;
 }
 
+/// {@category Struct}
 class EMRSETTEXTCOLOR extends Struct {
   external EMR emr;
   @Uint32()
   external int crColor;
 }
 
+/// {@category Struct}
 class EMRSETVIEWPORTEXTEX extends Struct {
   external EMR emr;
   external SIZE szlExtent;
 }
 
+/// {@category Struct}
 class EMRSETVIEWPORTORGEX extends Struct {
   external EMR emr;
   external POINTL ptlOrigin;
 }
 
+/// {@category Struct}
 class EMRSETWORLDTRANSFORM extends Struct {
   external EMR emr;
   external XFORM xform;
 }
 
+/// {@category Struct}
 class EMRSTRETCHBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -1013,6 +1093,7 @@ class EMRSTRETCHBLT extends Struct {
   external int cySrc;
 }
 
+/// {@category Struct}
 class EMRSTRETCHDIBITS extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -1046,6 +1127,7 @@ class EMRSTRETCHDIBITS extends Struct {
   external int cyDest;
 }
 
+/// {@category Struct}
 class EMRTEXT extends Struct {
   external POINTL ptlReference;
   @Uint32()
@@ -1059,6 +1141,7 @@ class EMRTEXT extends Struct {
   external int offDx;
 }
 
+/// {@category Struct}
 class EMRTRANSPARENTBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
@@ -1095,6 +1178,7 @@ class EMRTRANSPARENTBLT extends Struct {
   external int cySrc;
 }
 
+/// {@category Struct}
 class ENHMETAHEADER extends Struct {
   @Uint32()
   external int iType;
@@ -1131,6 +1215,7 @@ class ENHMETAHEADER extends Struct {
   external SIZE szlMicrometers;
 }
 
+/// {@category Struct}
 class ENHMETARECORD extends Struct {
   @Uint32()
   external int iType;
@@ -1140,11 +1225,13 @@ class ENHMETARECORD extends Struct {
   external Array<Uint32> dParm;
 }
 
+/// {@category Struct}
 class ENUMLOGFONTEXDV extends Struct {
   external ENUMLOGFONTEX elfEnumLogfontEx;
   external DESIGNVECTOR elfDesignVector;
 }
 
+/// {@category Struct}
 class ENUMLOGFONTEX extends Struct {
   external LOGFONT elfLogFont;
   @Array(64)
@@ -1202,6 +1289,7 @@ class ENUMLOGFONTEX extends Struct {
   }
 }
 
+/// {@category Struct}
 class ENUMLOGFONT extends Struct {
   external LOGFONT elfLogFont;
   @Array(64)
@@ -1241,6 +1329,7 @@ class ENUMLOGFONT extends Struct {
   }
 }
 
+/// {@category Struct}
 class EXTLOGFONT extends Struct {
   external LOGFONT elfLogFont;
   @Array(64)
@@ -1294,6 +1383,7 @@ class EXTLOGFONT extends Struct {
   external PANOSE elfPanose;
 }
 
+/// {@category Struct}
 class EXTLOGPEN extends Struct {
   @Uint32()
   external int elpPenStyle;
@@ -1311,6 +1401,7 @@ class EXTLOGPEN extends Struct {
   external Array<Uint32> elpStyleEntry;
 }
 
+/// {@category Struct}
 class EXTLOGPEN32 extends Struct {
   @Uint32()
   external int elpPenStyle;
@@ -1328,6 +1419,7 @@ class EXTLOGPEN32 extends Struct {
   external Array<Uint32> elpStyleEntry;
 }
 
+/// {@category Struct}
 class FIXED extends Struct {
   @Uint16()
   external int fract;
@@ -1335,6 +1427,7 @@ class FIXED extends Struct {
   external int value;
 }
 
+/// {@category Struct}
 class GCP_RESULTS extends Struct {
   @Uint32()
   external int lStructSize;
@@ -1350,6 +1443,7 @@ class GCP_RESULTS extends Struct {
   external int nMaxFit;
 }
 
+/// {@category Struct}
 class GLYPHMETRICS extends Struct {
   @Uint32()
   external int gmBlackBoxX;
@@ -1362,6 +1456,7 @@ class GLYPHMETRICS extends Struct {
   external int gmCellIncY;
 }
 
+/// {@category Struct}
 class GLYPHSET extends Struct {
   @Uint32()
   external int cbThis;
@@ -1375,6 +1470,7 @@ class GLYPHSET extends Struct {
   external Array<WCRANGE> ranges;
 }
 
+/// {@category Struct}
 class GRADIENT_RECT extends Struct {
   @Uint32()
   external int UpperLeft;
@@ -1382,6 +1478,7 @@ class GRADIENT_RECT extends Struct {
   external int LowerRight;
 }
 
+/// {@category Struct}
 class GRADIENT_TRIANGLE extends Struct {
   @Uint32()
   external int Vertex1;
@@ -1391,11 +1488,13 @@ class GRADIENT_TRIANGLE extends Struct {
   external int Vertex3;
 }
 
+/// {@category Struct}
 class HANDLETABLE extends Struct {
   @Array(1)
   external Array<IntPtr> objectHandle;
 }
 
+/// {@category Struct}
 class KERNINGPAIR extends Struct {
   @Uint16()
   external int wFirst;
@@ -1405,6 +1504,7 @@ class KERNINGPAIR extends Struct {
   external int iKernAmount;
 }
 
+/// {@category Struct}
 class LOGBRUSH extends Struct {
   @Uint32()
   external int lbStyle;
@@ -1414,6 +1514,7 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// {@category Struct}
 class LOGBRUSH32 extends Struct {
   @Uint32()
   external int lbStyle;
@@ -1423,6 +1524,7 @@ class LOGBRUSH32 extends Struct {
   external int lbHatch;
 }
 
+/// {@category Struct}
 class LOGFONT extends Struct {
   @Int32()
   external int lfHeight;
@@ -1469,6 +1571,7 @@ class LOGFONT extends Struct {
   }
 }
 
+/// {@category Struct}
 class LOGPALETTE extends Struct {
   @Uint16()
   external int palVersion;
@@ -1478,6 +1581,7 @@ class LOGPALETTE extends Struct {
   external Array<PALETTEENTRY> palPalEntry;
 }
 
+/// {@category Struct}
 class LOGPEN extends Struct {
   @Uint32()
   external int lopnStyle;
@@ -1486,6 +1590,7 @@ class LOGPEN extends Struct {
   external int lopnColor;
 }
 
+/// {@category Struct}
 class MAT2 extends Struct {
   external FIXED eM11;
   external FIXED eM12;
@@ -1493,6 +1598,8 @@ class MAT2 extends Struct {
   external FIXED eM22;
 }
 
+/// {@category Struct}
+@Packed(2)
 class METAHEADER extends Struct {
   @Uint16()
   external int mtType;
@@ -1510,6 +1617,7 @@ class METAHEADER extends Struct {
   external int mtNoParameters;
 }
 
+/// {@category Struct}
 class METARECORD extends Struct {
   @Uint32()
   external int rdSize;
@@ -1519,6 +1627,7 @@ class METARECORD extends Struct {
   external Array<Uint16> rdParm;
 }
 
+/// {@category Struct}
 class MONITORINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -1528,6 +1637,7 @@ class MONITORINFO extends Struct {
   external int dwFlags;
 }
 
+/// {@category Struct}
 class MONITORINFOEX extends Struct {
   external MONITORINFO __AnonymousBase_winuser_L13558_C43;
   @Array(32)
@@ -1549,6 +1659,7 @@ class MONITORINFOEX extends Struct {
   }
 }
 
+/// {@category Struct}
 class NEWTEXTMETRIC extends Struct {
   @Int32()
   external int tmHeight;
@@ -1600,6 +1711,7 @@ class NEWTEXTMETRIC extends Struct {
   external int ntmAvgWidth;
 }
 
+/// {@category Struct}
 class OUTLINETEXTMETRIC extends Struct {
   @Uint32()
   external int otmSize;
@@ -1656,6 +1768,7 @@ class OUTLINETEXTMETRIC extends Struct {
   external Pointer<Utf8> otmpFullName;
 }
 
+/// {@category Struct}
 class PAINTSTRUCT extends Struct {
   @IntPtr()
   external int hdc;
@@ -1670,6 +1783,7 @@ class PAINTSTRUCT extends Struct {
   external Array<Uint8> rgbReserved;
 }
 
+/// {@category Struct}
 class PALETTEENTRY extends Struct {
   @Uint8()
   external int peRed;
@@ -1681,6 +1795,7 @@ class PALETTEENTRY extends Struct {
   external int peFlags;
 }
 
+/// {@category Struct}
 class PANOSE extends Struct {
   @Uint8()
   external int bFamilyType;
@@ -1704,6 +1819,7 @@ class PANOSE extends Struct {
   external int bXHeight;
 }
 
+/// {@category Struct}
 class PELARRAY extends Struct {
   @Int32()
   external int paXCount;
@@ -1717,11 +1833,13 @@ class PELARRAY extends Struct {
   external int paRGBs;
 }
 
+/// {@category Struct}
 class POINTFX extends Struct {
   external FIXED x;
   external FIXED y;
 }
 
+/// {@category Struct}
 class POLYTEXT extends Struct {
   @Int32()
   external int x;
@@ -1736,6 +1854,7 @@ class POLYTEXT extends Struct {
   external Pointer<Int32> pdx;
 }
 
+/// {@category Struct}
 class RASTERIZER_STATUS extends Struct {
   @Int16()
   external int nSize;
@@ -1745,6 +1864,7 @@ class RASTERIZER_STATUS extends Struct {
   external int nLanguageID;
 }
 
+/// {@category Struct}
 class RGBQUAD extends Struct {
   @Uint8()
   external int rgbBlue;
@@ -1756,6 +1876,7 @@ class RGBQUAD extends Struct {
   external int rgbReserved;
 }
 
+/// {@category Struct}
 class RGBTRIPLE extends Struct {
   @Uint8()
   external int rgbtBlue;
@@ -1765,6 +1886,7 @@ class RGBTRIPLE extends Struct {
   external int rgbtRed;
 }
 
+/// {@category Struct}
 class RGNDATAHEADER extends Struct {
   @Uint32()
   external int dwSize;
@@ -1777,6 +1899,7 @@ class RGNDATAHEADER extends Struct {
   external RECT rcBound;
 }
 
+/// {@category Struct}
 class TEXTMETRIC extends Struct {
   @Int32()
   external int tmHeight;
@@ -1820,6 +1943,7 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// {@category Struct}
 class TRIVERTEX extends Struct {
   @Int32()
   external int x;
@@ -1835,6 +1959,7 @@ class TRIVERTEX extends Struct {
   external int Alpha;
 }
 
+/// {@category Struct}
 class TTEMBEDINFO extends Struct {
   @Uint16()
   external int usStructSize;
@@ -1843,6 +1968,7 @@ class TTEMBEDINFO extends Struct {
   external Pointer<Uint16> pusRootStr;
 }
 
+/// {@category Struct}
 class TTLOADINFO extends Struct {
   @Uint16()
   external int usStructSize;
@@ -1851,6 +1977,7 @@ class TTLOADINFO extends Struct {
   external Pointer<Uint16> pusRefStr;
 }
 
+/// {@category Struct}
 class TTPOLYCURVE extends Struct {
   @Uint16()
   external int wType;
@@ -1860,6 +1987,7 @@ class TTPOLYCURVE extends Struct {
   external Array<POINTFX> apfx;
 }
 
+/// {@category Struct}
 class TTPOLYGONHEADER extends Struct {
   @Uint32()
   external int cb;
@@ -1868,6 +1996,7 @@ class TTPOLYGONHEADER extends Struct {
   external POINTFX pfxStart;
 }
 
+/// {@category Struct}
 class TTVALIDATIONTESTSPARAMS extends Struct {
   @Uint32()
   external int ulStructSize;
@@ -1884,6 +2013,7 @@ class TTVALIDATIONTESTSPARAMS extends Struct {
   external Pointer<Uint16> pusCharCodeSet;
 }
 
+/// {@category Struct}
 class TTVALIDATIONTESTSPARAMSEX extends Struct {
   @Uint32()
   external int ulStructSize;
@@ -1900,6 +2030,7 @@ class TTVALIDATIONTESTSPARAMSEX extends Struct {
   external Pointer<Uint32> pulCharCodeSet;
 }
 
+/// {@category Struct}
 class WCRANGE extends Struct {
   @Uint16()
   external int wcLow;
@@ -1907,6 +2038,7 @@ class WCRANGE extends Struct {
   external int cGlyphs;
 }
 
+/// {@category Struct}
 class WGLSWAP extends Struct {
   @IntPtr()
   external int hdc;
@@ -1914,6 +2046,7 @@ class WGLSWAP extends Struct {
   external int uiFlags;
 }
 
+/// {@category Struct}
 class XFORM extends Struct {
   @Float()
   external double eM11;

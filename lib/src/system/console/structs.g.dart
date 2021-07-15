@@ -20,6 +20,7 @@ import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 import '../../system/console/structs.g.dart';
 
+/// {@category Struct}
 class CHAR_INFO extends Struct {
   @Uint32()
   external int Char;
@@ -27,6 +28,7 @@ class CHAR_INFO extends Struct {
   external int Attributes;
 }
 
+/// {@category Struct}
 class CONSOLE_CURSOR_INFO extends Struct {
   @Uint32()
   external int dwSize;
@@ -34,12 +36,14 @@ class CONSOLE_CURSOR_INFO extends Struct {
   external int bVisible;
 }
 
+/// {@category Struct}
 class CONSOLE_FONT_INFO extends Struct {
   @Uint32()
   external int nFont;
   external COORD dwFontSize;
 }
 
+/// {@category Struct}
 class CONSOLE_FONT_INFOEX extends Struct {
   @Uint32()
   external int cbSize;
@@ -69,6 +73,7 @@ class CONSOLE_FONT_INFOEX extends Struct {
   }
 }
 
+/// {@category Struct}
 class CONSOLE_HISTORY_INFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -80,6 +85,7 @@ class CONSOLE_HISTORY_INFO extends Struct {
   external int dwFlags;
 }
 
+/// {@category Struct}
 class CONSOLE_READCONSOLE_CONTROL extends Struct {
   @Uint32()
   external int nLength;
@@ -91,6 +97,7 @@ class CONSOLE_READCONSOLE_CONTROL extends Struct {
   external int dwControlKeyState;
 }
 
+/// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external COORD dwSize;
   external COORD dwCursorPosition;
@@ -100,6 +107,7 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external COORD dwMaximumWindowSize;
 }
 
+/// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFOEX extends Struct {
   @Uint32()
   external int cbSize;
@@ -117,6 +125,7 @@ class CONSOLE_SCREEN_BUFFER_INFOEX extends Struct {
   external Array<Uint32> ColorTable;
 }
 
+/// {@category Struct}
 class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
   external int dwFlags;
@@ -124,6 +133,7 @@ class CONSOLE_SELECTION_INFO extends Struct {
   external SMALL_RECT srSelection;
 }
 
+/// {@category Struct}
 class COORD extends Struct {
   @Int16()
   external int X;
@@ -131,11 +141,13 @@ class COORD extends Struct {
   external int Y;
 }
 
+/// {@category Struct}
 class FOCUS_EVENT_RECORD extends Struct {
   @Int32()
   external int bSetFocus;
 }
 
+/// {@category Struct}
 class INPUT_RECORD extends Struct {
   @Uint16()
   external int EventType;
@@ -143,6 +155,7 @@ class INPUT_RECORD extends Struct {
   external int Event;
 }
 
+/// {@category Struct}
 class KEY_EVENT_RECORD extends Struct {
   @Int32()
   external int bKeyDown;
@@ -158,11 +171,13 @@ class KEY_EVENT_RECORD extends Struct {
   external int dwControlKeyState;
 }
 
+/// {@category Struct}
 class MENU_EVENT_RECORD extends Struct {
   @Uint32()
   external int dwCommandId;
 }
 
+/// {@category Struct}
 class MOUSE_EVENT_RECORD extends Struct {
   external COORD dwMousePosition;
   @Uint32()
@@ -173,6 +188,7 @@ class MOUSE_EVENT_RECORD extends Struct {
   external int dwEventFlags;
 }
 
+/// {@category Struct}
 class SMALL_RECT extends Struct {
   @Int16()
   external int Left;
@@ -184,6 +200,7 @@ class SMALL_RECT extends Struct {
   external int Bottom;
 }
 
+/// {@category Struct}
 class WINDOW_BUFFER_SIZE_RECORD extends Struct {
   external COORD dwSize;
 }

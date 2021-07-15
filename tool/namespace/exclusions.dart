@@ -66,3 +66,14 @@ const excludedImports = <String>[
   'ui/displaydevices/structs.g.dart',
   'ui/textservices/structs.g.dart',
 ];
+
+const excludedComInterfaces = <String>[
+  'IAVIEditStream', 'IAVIFile', 'IAVIPersistFile', 'IAVIStream',
+  'IAVIStreaming', 'IGetFrame', // media.multimedia
+
+  '_IManipulationEvents', 'IInertiaProcessor',
+  'IManipulationProcesor', // touchinput
+
+  'IPrintDialogCallback' /* simplest */,
+  'IPrintDialogServices', // windowsandmessaging
+];

@@ -19,6 +19,7 @@ import 'callbacks.g.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 
+/// {@category Struct}
 class DYNAMIC_TIME_ZONE_INFORMATION extends Struct {
   @Int32()
   external int Bias;
@@ -86,6 +87,7 @@ class DYNAMIC_TIME_ZONE_INFORMATION extends Struct {
   external int DynamicDaylightTimeDisabled;
 }
 
+/// {@category Struct}
 class TIME_ZONE_INFORMATION extends Struct {
   @Int32()
   external int Bias;

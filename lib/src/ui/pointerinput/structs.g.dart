@@ -21,11 +21,13 @@ import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../ui/pointerinput/structs.g.dart';
 import '../../foundation/structs.g.dart';
 
+/// {@category Struct}
 class INPUT_TRANSFORM extends Struct {
   @Uint32()
   external int Anonymous;
 }
 
+/// {@category Struct}
 class POINTER_INFO extends Struct {
   @Uint32()
   external int pointerType;
@@ -57,6 +59,7 @@ class POINTER_INFO extends Struct {
   external int ButtonChangeType;
 }
 
+/// {@category Struct}
 class POINTER_PEN_INFO extends Struct {
   external POINTER_INFO pointerInfo;
   @Uint32()
@@ -73,6 +76,7 @@ class POINTER_PEN_INFO extends Struct {
   external int tiltY;
 }
 
+/// {@category Struct}
 class POINTER_TOUCH_INFO extends Struct {
   external POINTER_INFO pointerInfo;
   @Uint32()

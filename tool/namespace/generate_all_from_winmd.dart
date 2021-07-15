@@ -65,20 +65,24 @@ void generateWin32Functions(String namespace) {
   generateFfiFile(file, funcs);
 }
 
-// TODO: Move these clauses into a function (typedefIsStruct?)
+bool typedefIsStruct(TypeDef typedef) =>
+    typedef.isClass && typedef.parent?.name == 'System.ValueType';
+
+bool structIsNotWrapper(TypeDef typedef) => typedef.customAttributes
+    .where((attrib) =>
+        attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
+    .isEmpty;
+
 void generateWin32Structs(String namespace) {
-  // Ignore "structs" that are just native values; we'll deal with them
-  // elsewhere. Examples include HANDLE, BOOL and BSTR.
+  // All structs that map to Dart structs. We ignore ANSI structs and structs
+  // that are just GUID constants. We also ignore native values that are wrapped
+  // for convenience (examples include HANDLE, BOOL and BSTR).
   final structs = scope.typeDefs
       .where((typedef) => typedef.name.startsWith(namespace))
-      .where((typedef) => typedef.isClass)
-      .where((typedef) => typedef.parent?.name == 'System.ValueType')
+      .where(typedefIsStruct)
+      .where(structIsNotWrapper)
       .where((typedef) => !typedef.name.endsWith('A'))
       .where((typedef) => !excludedStructs.contains(typedef.name))
-      .where((typedef) => typedef.customAttributes
-          .where((attrib) =>
-              attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
-          .isEmpty)
       .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
       .toList()
@@ -140,11 +144,11 @@ void generateWin32Callbacks(String namespace) {
   generateCallbacksFile(file, callbacks);
 }
 
-// TODO: Add exclusion test
 void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
       .where((typedef) => typedef.name.startsWith(namespace))
       .where((typedef) => typedef.isInterface)
+      .where((typedef) => !excludedComInterfaces.contains(typedef.name))
       .toList();
 
   final directory = Directory(folderForNamespace(namespace));

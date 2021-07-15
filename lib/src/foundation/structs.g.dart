@@ -18,11 +18,13 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.g.dart';
 import '../guid.dart';
 
+/// {@category Struct}
 class APP_LOCAL_DEVICE_ID extends Struct {
   @Array(32)
   external Array<Uint8> value;
 }
 
+/// {@category Struct}
 class FILETIME extends Struct {
   @Uint32()
   external int dwLowDateTime;
@@ -30,6 +32,7 @@ class FILETIME extends Struct {
   external int dwHighDateTime;
 }
 
+/// {@category Struct}
 class POINT extends Struct {
   @Int32()
   external int x;
@@ -37,6 +40,7 @@ class POINT extends Struct {
   external int y;
 }
 
+/// {@category Struct}
 class POINTL extends Struct {
   @Int32()
   external int x;
@@ -44,6 +48,7 @@ class POINTL extends Struct {
   external int y;
 }
 
+/// {@category Struct}
 class POINTS extends Struct {
   @Int16()
   external int x;
@@ -51,6 +56,7 @@ class POINTS extends Struct {
   external int y;
 }
 
+/// {@category Struct}
 class RECT extends Struct {
   @Int32()
   external int left;
@@ -62,6 +68,7 @@ class RECT extends Struct {
   external int bottom;
 }
 
+/// {@category Struct}
 class RECTL extends Struct {
   @Int32()
   external int left;
@@ -73,6 +80,7 @@ class RECTL extends Struct {
   external int bottom;
 }
 
+/// {@category Struct}
 class SIZE extends Struct {
   @Int32()
   external int cx;
@@ -80,6 +88,7 @@ class SIZE extends Struct {
   external int cy;
 }
 
+/// {@category Struct}
 class SYSTEMTIME extends Struct {
   @Uint16()
   external int wYear;
