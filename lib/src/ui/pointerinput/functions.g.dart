@@ -9,10 +9,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'enums.g.dart';
-import 'structs.g.dart';
 
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
+import '../../ui/pointerinput/structs.g.dart';
+import '../../ui/windowsandmessaging/structs.g.dart';
 
 // -----------------------------------------------------------------------
 // USER32.dll

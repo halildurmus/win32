@@ -1,5 +1,11 @@
 // ignore_for_file: directives_ordering
 
+  export 'src/system/time/callbacks.g.dart';
+  export 'src/system/time/constants.g.dart';
+  export 'src/system/time/enums.g.dart';
+  export 'src/system/time/functions.g.dart';
+  export 'src/system/time/structs.g.dart';
+
   export 'src/foundation/callbacks.g.dart';
   export 'src/foundation/constants.g.dart';
   export 'src/foundation/enums.g.dart';
@@ -17,12 +23,6 @@
   export 'src/system/systeminformation/enums.g.dart';
   export 'src/system/systeminformation/functions.g.dart';
   export 'src/system/systeminformation/structs.g.dart';
-
-  export 'src/system/time/callbacks.g.dart';
-  export 'src/system/time/constants.g.dart';
-  export 'src/system/time/enums.g.dart';
-  export 'src/system/time/functions.g.dart';
-  export 'src/system/time/structs.g.dart';
 
   export 'src/ui/keyboardandmouseinput/callbacks.g.dart';
   export 'src/ui/keyboardandmouseinput/constants.g.dart';

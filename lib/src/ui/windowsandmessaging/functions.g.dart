@@ -9,11 +9,10 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'enums.g.dart';
-import 'structs.g.dart';
 
 import '../../guid.dart';
-import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../foundation/structs.g.dart';
+import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../ui/windowsandmessaging/callbacks.g.dart';
 
 // -----------------------------------------------------------------------

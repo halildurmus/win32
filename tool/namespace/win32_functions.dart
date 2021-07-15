@@ -23,7 +23,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'enums.g.dart';
-import 'structs.g.dart';
 
 ''';
 
