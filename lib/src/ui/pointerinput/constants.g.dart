@@ -2,9 +2,9 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// Dart representations of common structs used in the Win32 API.
 
-// Native callback functions that can get called by the Win32 API
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // -----------------------------------------------------------------------------
 // Linter exceptions
@@ -40,10 +40,6 @@
 // -----------------------------------------------------------------------------
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
-import 'structs.g.dart';
-import '../../guid.dart';
-
-typedef PHANDLER_ROUTINE = Int32 Function(Uint32 CtrlType);

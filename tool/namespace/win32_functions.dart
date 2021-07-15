@@ -105,6 +105,8 @@ void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
   }
 
   writer.writeStringSync(ffiFileHeader);
+  writer.writeStringSync(
+      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
       writer.writeStringSync(

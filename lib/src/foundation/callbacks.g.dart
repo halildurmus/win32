@@ -42,6 +42,8 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+
+import 'structs.g.dart';
 import '../guid.dart';
 
 typedef FARPROC = IntPtr Function();

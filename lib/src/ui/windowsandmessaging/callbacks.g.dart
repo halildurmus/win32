@@ -42,9 +42,10 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+
+import 'structs.g.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
-import '../../system/diagnostics/debug/structs.g.dart';
 
 typedef DESKTOPENUMPROCA = Int32 Function(Pointer<Utf8> param0, IntPtr param1);
 typedef DESKTOPENUMPROCW = Int32 Function(Pointer<Utf16> param0, IntPtr param1);

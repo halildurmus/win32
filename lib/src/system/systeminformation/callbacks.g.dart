@@ -42,9 +42,10 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+
+import 'structs.g.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
-import '../../system/diagnostics/debug/structs.g.dart';
 
 typedef PGET_SYSTEM_WOW64_DIRECTORY_A = Uint32 Function(
     Pointer<Utf8> lpBuffer, Uint32 uSize);

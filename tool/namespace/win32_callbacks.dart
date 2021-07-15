@@ -52,6 +52,8 @@ const callbacksFileHeader = '''
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+
+import 'structs.g.dart';
 ''';
 
 final imports = <String>{};
