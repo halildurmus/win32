@@ -104,6 +104,37 @@ class CHOOSECOLOR extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+class CHOOSEFONT extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hDC;
+  external Pointer<LOGFONT> lpLogFont;
+  @Int32()
+  external int iPointSize;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int rgbColors;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<LPCFHOOKPROC>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  @IntPtr()
+  external int hInstance;
+  external Pointer<Utf16> lpszStyle;
+  @Uint32()
+  external int nFontType;
+  @Uint16()
+  external int ___MISSING_ALIGNMENT__;
+  @Int32()
+  external int nSizeMin;
+  @Int32()
+  external int nSizeMax;
+}
+
 class CLIENTCREATESTRUCT extends Struct {
   @IntPtr()
   external int hWindowMenu;
@@ -388,6 +419,18 @@ class ICONINFOEX extends Struct {
   }
 }
 
+class ICONMETRICS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iHorzSpacing;
+  @Int32()
+  external int iVertSpacing;
+  @Int32()
+  external int iTitleWrap;
+  external LOGFONT lfFont;
+}
+
 class IndexedResourceQualifier extends Struct {
   external Pointer<Utf16> name;
   external Pointer<Utf16> value;
@@ -630,6 +673,36 @@ class NCCALCSIZE_PARAMS extends Struct {
   external Pointer<WINDOWPOS> lppos;
 }
 
+class NONCLIENTMETRICS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iBorderWidth;
+  @Int32()
+  external int iScrollWidth;
+  @Int32()
+  external int iScrollHeight;
+  @Int32()
+  external int iCaptionWidth;
+  @Int32()
+  external int iCaptionHeight;
+  external LOGFONT lfCaptionFont;
+  @Int32()
+  external int iSmCaptionWidth;
+  @Int32()
+  external int iSmCaptionHeight;
+  external LOGFONT lfSmCaptionFont;
+  @Int32()
+  external int iMenuWidth;
+  @Int32()
+  external int iMenuHeight;
+  external LOGFONT lfMenuFont;
+  external LOGFONT lfStatusFont;
+  external LOGFONT lfMessageFont;
+  @Int32()
+  external int iPaddedBorderWidth;
+}
+
 class OPENFILENAME extends Struct {
   @Uint32()
   external int lStructSize;
@@ -859,6 +932,24 @@ class TouchPredictionParameters extends Struct {
   external int dwSampleTime;
   @Uint32()
   external int bUseHWTimeStamp;
+}
+
+class UPDATELAYEREDWINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hdcDst;
+  external Pointer<POINT> pptDst;
+  external Pointer<SIZE> psize;
+  @IntPtr()
+  external int hdcSrc;
+  external Pointer<POINT> pptSrc;
+  @Uint32()
+  external int crKey;
+  external Pointer<BLENDFUNCTION> pblend;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<RECT> prcDirty;
 }
 
 class WINDOWINFO extends Struct {

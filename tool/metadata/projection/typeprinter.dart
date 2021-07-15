@@ -8,6 +8,7 @@
 
 import 'package:winmd/winmd.dart';
 
+import '../utils.dart';
 import 'classprojector.dart';
 import 'data_classes.dart';
 import 'typeprojector.dart';
@@ -381,7 +382,8 @@ void main() {
             buffer
                 .writeln('  @$nativeType() external $dartType ${field.name};');
           } else {
-            buffer.writeln('  external $dartType ${field.name};');
+            buffer.writeln(
+                '  external ${nameWithoutEncoding(dartType)} ${field.name};');
           }
         }
       }

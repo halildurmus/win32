@@ -3,19 +3,19 @@ const excludedFunctions = <String>[
   'BroadcastSystemMessageEx',
   'ChangeDisplaySettings',
   'ChangeDisplaySettingsEx',
-  'ChooseFont',
+  // 'ChooseFont',
   'CreateConsoleScreenBuffer',
   'CreateDC',
-  'CreateFontIndirectEx',
+  // 'CreateFontIndirectEx',
   'CreateIC',
   'EnumDisplaySettings',
   'EnumDisplaySettingsEx',
   'ExtCreateRegion',
-  'GetLogicalProcessorInformationEx',
-  'GetOutlineTextMetrics',
+  'GetLogicalProcessorInformationEx', // system.systemservices
+  // 'GetOutlineTextMetrics',
   'GetRegionData',
   'MessageBoxIndirect',
-  'ResetDC',
+  'ResetDC', // ui.displaydevices
   'SetWinMetaFileBits',
   'UpdateLayeredWindow',
   'UpdateLayeredWindowIndirect',
@@ -32,33 +32,29 @@ const excludedStructs = <String>[
   'Windows.Win32.Graphics.Gdi.AXESLISTW',
   'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACEW',
   'Windows.Win32.Graphics.Gdi.EMREXTCREATEFONTINDIRECTW',
-  'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVW',
+  // 'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVW',
   'Windows.Win32.Graphics.Gdi.ENUMTEXTMETRICW',
   'Windows.Win32.Graphics.Gdi.NEWTEXTMETRICEXW',
+  // 'Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICW',
 
   // Temporary
-  'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER',
-  'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER',
+  'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER', // ui.colorsystem
+  'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER', // ui.colorsystem
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO',
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL',
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE',
   'Windows.Win32.Graphics.Gdi.EMRPIXELFORMAT',
-  'Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICW',
-  'Windows.Win32.UI.WindowsAndMessaging.BSMINFO',
-  'Windows.Win32.UI.WindowsAndMessaging.CHOOSEFONTW',
-  'Windows.Win32.UI.WindowsAndMessaging.ICONMETRICSW',
-  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXPARAMSW',
-  'Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW',
-  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW',
-  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW',
-  'Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO',
+  'Windows.Win32.UI.WindowsAndMessaging.BSMINFO', // system.systemservices
+  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXPARAMSW', // ui.shell
+  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW', // ui.controls
+  'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW', // ui.controls
   ''
 ];
 
 const excludedCallbacks = <String>[
   'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
   'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
-  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK',
+  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK', // ui.shell
 ];
 
 const excludedImports = <String>[

@@ -2651,6 +2651,12 @@ late final _ChooseColor = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSECOLOR> param0),
     int Function(Pointer<CHOOSECOLOR> param0)>('ChooseColorW');
 
+int ChooseFont(Pointer<CHOOSEFONT> param0) => _ChooseFont(param0);
+
+late final _ChooseFont = _comdlg32.lookupFunction<
+    Int32 Function(Pointer<CHOOSEFONT> param0),
+    int Function(Pointer<CHOOSEFONT> param0)>('ChooseFontW');
+
 int CommDlgExtendedError() => _CommDlgExtendedError();
 
 late final _CommDlgExtendedError = _comdlg32
