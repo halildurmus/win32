@@ -24,6 +24,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.g.dart';
 ''';
 
 /// Return all the imports needed for a struct to be satisfied.
@@ -32,7 +33,8 @@ List<String> importsForStruct(TypeDef struct) {
 
   for (final field in struct.fields) {
     if (field.typeIdentifier.name.startsWith('Windows.Win32')) {
-      importList.add(folderFromNamespace(field.typeIdentifier.name));
+      importList.add(
+          '${folderFromNamespace(field.typeIdentifier.name)}/structs.g.dart');
     }
   }
   return importList;
@@ -54,7 +56,7 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
       writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import/structs.g.dart';\n");
+          "import '${relativePathToSrcDirectory(file)}$import';\n");
     }
   }
   writer.writeStringSync(buffer.toString());

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:winmd/winmd.dart';
 
@@ -19,6 +20,7 @@ const namespaces = <String>[
   'Windows.Win32.System.Time',
   'Windows.Win32.UI.KeyboardAndMouseInput',
   // 'Windows.Win32.UI.TextServices',
+  'Windows.Win32.UI.WindowsAndMessaging',
 ];
 
 List<String> namespacesInScope(Scope scope) {
@@ -70,11 +72,18 @@ void generateWin32Structs(String namespace) {
           .where((attrib) =>
               attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
           .isEmpty)
+      .where(supportsAmd64)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
   final file = File('${folderForNamespace(namespace)}/structs.g.dart');
   generateStructsFile(file, structs);
+}
+
+bool supportsAmd64(TypeDef typedef) {
+  final supportedArch = typedef.customAttributeAsBytes(
+      'Windows.Win32.Interop.SupportedArchitectureAttribute');
+  return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
 }
 
 void generateWin32Enums(String namespace) {

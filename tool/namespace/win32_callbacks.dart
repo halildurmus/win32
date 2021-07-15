@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../metadata/projection/typeprinter.dart';
+import '../metadata/utils.dart';
+import 'exclusions.dart';
+import 'win32_functions.dart';
 
 const callbacksFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -51,15 +54,28 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 ''';
 
+final imports = <String>{};
+
 void generateCallbacksFile(File file, List<TypeDef> callbacks) {
   final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
 
-  buffer.write(callbacksFileHeader);
-
   for (final callback in callbacks) {
     buffer.write(
         TypePrinter.printCallback(callback, callback.name.split('.').last));
+
+    final invokeMethod = callback.findMethod('Invoke');
+    if (invokeMethod != null) {
+      imports.addAll(importsForFunction(invokeMethod));
+    }
+  }
+
+  writer.writeStringSync(callbacksFileHeader);
+  for (final import in imports) {
+    if (!excludedImports.contains(import)) {
+      writer.writeStringSync(
+          "import '${relativePathToSrcDirectory(file)}$import';\n");
+    }
   }
   writer.writeStringSync(buffer.toString());
   writer.closeSync();

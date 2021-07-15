@@ -87,7 +87,7 @@
 library win32;
 
 // Core Win32 APIs, constants and macros
-export 'src/callbacks.dart';
+// export 'src/callbacks.dart';
 export 'src/constants.dart' show TRUE;
 // export 'src/constants_nodoc.dart' hide INVALID_HANDLE_VALUE, E_NOTIMPL;
 export 'src/exceptions.dart';
