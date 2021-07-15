@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import 'com_interfaces.dart';
 import 'exclusions.dart';
 import 'win32_callbacks.dart';
 import 'win32_constants.dart';
@@ -16,6 +17,7 @@ final scope = MetadataStore.getWin32Scope();
 const namespaces = <String>[
   'Windows.Win32.Foundation',
   'Windows.Win32.Graphics.Gdi',
+  'Windows.Win32.Media.Multimedia',
   'Windows.Win32.System.Console',
   'Windows.Win32.System.SystemInformation',
   'Windows.Win32.System.Time',
@@ -135,6 +137,16 @@ void generateWin32Callbacks(String namespace) {
   generateCallbacksFile(file, callbacks);
 }
 
+void generateComInterfaces(String namespace) {
+  final interfaces = scope.typeDefs
+      .where((typedef) => typedef.name.startsWith(namespace))
+      .where((typedef) => typedef.isInterface)
+      .toList();
+
+  final directory = Directory(folderForNamespace(namespace));
+  generateInterfaceFiles(directory, interfaces, scope);
+}
+
 void generateLibraryExport(List<String> namespaces) {
   // TODO: Check that each of these files exist.
   final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
@@ -157,12 +169,14 @@ void generateLibraryExport(List<String> namespaces) {
 void main() {
   for (final namespace in namespaces) {
     print('Generating $namespace...');
+
     createDirectory(namespace);
     generateWin32Functions(namespace);
     generateWin32Structs(namespace);
     generateWin32Enums(namespace);
     generateWin32Constants(namespace);
     generateWin32Callbacks(namespace);
+    generateComInterfaces(namespace);
   }
   generateLibraryExport(namespaces);
 }

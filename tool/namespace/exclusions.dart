@@ -39,6 +39,8 @@ const excludedStructs = <String>[
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXPARAMSW', // ui.shell
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW', // ui.controls
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW', // ui.controls
+  'Windows.Win32.Media.Multimedia.TIMEREVENT', // system.systemservices
+  'Windows.Win32.Media.Multimedia.joyreghwconfig_tag', // devices.humaninterfacedevice
   ''
 ];
 
@@ -51,6 +53,8 @@ const excludedCallbacks = <String>[
 const excludedImports = <String>[
   'globalization/structs.g.dart',
   'graphics/opengl/structs.g.dart',
+  'media/audio/coreaudio/structs.g.dart',
+  'devices/humaninterfacedevice/structs.g.dart',
   'storage/structuredstorage/structs.g.dart',
   'system/com/structs.g.dart',
   'system/dataexchange/structs.g.dart',

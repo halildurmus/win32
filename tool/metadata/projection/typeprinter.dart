@@ -355,6 +355,12 @@ void main() {
     try {
       final buffer = StringBuffer();
 
+      buffer.writeln('/// {@category Struct}');
+
+      final packingAlignment = typedef.classLayout.packingAlignment;
+      if (packingAlignment != null && packingAlignment > 0) {
+        buffer.writeln('@Packed($packingAlignment)');
+      }
       buffer.writeln('class $structName extends Struct {');
 
       for (final field in typedef.fields) {
