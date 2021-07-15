@@ -29,9 +29,11 @@ const excludedCallbacks = <String>[
 
 const excludedImports = <String>[
   'graphics/gdi/structs.g.dart',
+  'storage/structuredstorage/structs.g.dart',
   'system/com/structs.g.dart',
   'system/stationsanddesktops/structs.g.dart',
   'system/systemservices/structs.g.dart',
   'ui/controls/structs.g.dart',
+  'ui/controls/callbacks.g.dart',
   'ui/textservices/structs.g.dart',
 ];

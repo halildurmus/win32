@@ -92,7 +92,7 @@ export 'src/constants.dart' show TRUE;
 // export 'src/constants_nodoc.dart' hide INVALID_HANDLE_VALUE, E_NOTIMPL;
 export 'src/exceptions.dart';
 export 'src/macros.dart';
-export 'src/structs.dart' show GUID, COR_FIELD_OFFSET;
+export 'src/guid.dart';
 // export 'src/structs.dart' hide IN_ADDR;
 // export 'src/structs.g.dart'
 // hide addrinfo, fd_set, SOCKADDR, timeval, hostent, protoent, servent;
@@ -240,4 +240,3 @@ export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';
 
 // Metadata-generated APIs
-export 'win32.g.dart';

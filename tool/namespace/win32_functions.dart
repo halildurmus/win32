@@ -33,8 +33,6 @@ const headerComment =
 String docComment(String comment) =>
     '$headerComment\n  // $comment\n$headerComment\n';
 
-final imports = <String>{};
-
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
@@ -75,6 +73,8 @@ List<String> importsForFunction(Method function) {
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
 void generateFfiFile(File file, List<String> modules, TypeDef typedef) {
+  final imports = <String>{};
+
   final writer = file.openSync(mode: FileMode.writeOnly);
 
   final buffer = StringBuffer();

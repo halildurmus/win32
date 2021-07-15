@@ -64,3 +64,15 @@ void generateConstantsFile(File file, List<Field> constants) {
   writer.writeStringSync(buffer.toString());
   writer.closeSync();
 }
+
+void appendGuidConstantsFile(File file, List<TypeDef> guidConstants) {
+  final writer = file.openSync(mode: FileMode.writeOnlyAppend);
+  final buffer = StringBuffer();
+
+  for (final constant in guidConstants) {
+    buffer.write(
+        "const ${constant.name.split('.').last} = '${constant.guid}';\n");
+  }
+  writer.writeStringSync(buffer.toString());
+  writer.closeSync();
+}

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:winmd/winmd.dart';
 
@@ -16,9 +15,13 @@ final scope = MetadataStore.getWin32Scope();
 /// The metadata namespaces we're generating
 const namespaces = <String>[
   'Windows.Win32.Foundation',
+  'Windows.Win32.System.Com',
   'Windows.Win32.System.Console',
+  'Windows.Win32.System.Diagnostics.Debug',
+  'Windows.Win32.System.OleAutomation',
   'Windows.Win32.System.SystemInformation',
   'Windows.Win32.System.Time',
+  'Windows.Win32.UI.Controls',
   'Windows.Win32.UI.KeyboardAndMouseInput',
   // 'Windows.Win32.UI.TextServices',
   'Windows.Win32.UI.WindowsAndMessaging',
@@ -74,6 +77,7 @@ void generateWin32Structs(String namespace) {
           .where((attrib) =>
               attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
           .isEmpty)
+      .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
@@ -86,6 +90,13 @@ bool supportsAmd64(TypeDef typedef) {
   final supportedArch = typedef.customAttributeAsBytes(
       'Windows.Win32.Interop.SupportedArchitectureAttribute');
   return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
+}
+
+bool typedefIsGuidConstant(TypeDef typedef) {
+  final inheritsValueType = typedef.parent?.name == 'System.ValueType';
+  final guid = typedef.guid;
+
+  return inheritsValueType && guid != null;
 }
 
 void generateWin32Enums(String namespace) {
@@ -106,6 +117,9 @@ void generateWin32Constants(String namespace) {
 
   final file = File('${folderForNamespace(namespace)}/constants.g.dart');
   generateConstantsFile(file, constants);
+
+  final guidConstants = scope.typeDefs.where(typedefIsGuidConstant).toList();
+  appendGuidConstantsFile(file, guidConstants);
 }
 
 void generateWin32Callbacks(String namespace) {
