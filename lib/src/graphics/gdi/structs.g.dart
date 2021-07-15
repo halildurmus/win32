@@ -42,6 +42,15 @@ class ABORTPATH extends Struct {
   external EMR emr;
 }
 
+class AXESLIST extends Struct {
+  @Uint32()
+  external int axlReserved;
+  @Uint32()
+  external int axlNumAxes;
+  @Array(16)
+  external Array<AXISINFO> axlAxisInfo;
+}
+
 class AXISINFO extends Struct {
   @Int32()
   external int axMinValue;
@@ -484,6 +493,13 @@ class EMREOF extends Struct {
 class EMREXCLUDECLIPRECT extends Struct {
   external EMR emr;
   external RECTL rclClip;
+}
+
+class EMREXTCREATEFONTINDIRECT extends Struct {
+  external EMR emr;
+  @Uint32()
+  external int ihFont;
+  external EXTLOGFONT elfw;
 }
 
 class EMREXTCREATEPEN extends Struct {
@@ -1124,6 +1140,11 @@ class ENHMETARECORD extends Struct {
   external Array<Uint32> dParm;
 }
 
+class ENUMLOGFONTEXDV extends Struct {
+  external ENUMLOGFONTEX elfEnumLogfontEx;
+  external DESIGNVECTOR elfDesignVector;
+}
+
 class ENUMLOGFONTEX extends Struct {
   external LOGFONT elfLogFont;
   @Array(64)
@@ -1577,6 +1598,62 @@ class NEWTEXTMETRIC extends Struct {
   external int ntmCellHeight;
   @Uint32()
   external int ntmAvgWidth;
+}
+
+class OUTLINETEXTMETRIC extends Struct {
+  @Uint32()
+  external int otmSize;
+  external TEXTMETRIC otmTextMetrics;
+  @Uint8()
+  external int otmFiller;
+  external PANOSE otmPanoseNumber;
+  @Uint32()
+  external int otmfsSelection;
+  @Uint32()
+  external int otmfsType;
+  @Int32()
+  external int otmsCharSlopeRise;
+  @Int32()
+  external int otmsCharSlopeRun;
+  @Int32()
+  external int otmItalicAngle;
+  @Uint32()
+  external int otmEMSquare;
+  @Int32()
+  external int otmAscent;
+  @Int32()
+  external int otmDescent;
+  @Uint32()
+  external int otmLineGap;
+  @Uint32()
+  external int otmsCapEmHeight;
+  @Uint32()
+  external int otmsXHeight;
+  external RECT otmrcFontBox;
+  @Int32()
+  external int otmMacAscent;
+  @Int32()
+  external int otmMacDescent;
+  @Uint32()
+  external int otmMacLineGap;
+  @Uint32()
+  external int otmusMinimumPPEM;
+  external POINT otmptSubscriptSize;
+  external POINT otmptSubscriptOffset;
+  external POINT otmptSuperscriptSize;
+  external POINT otmptSuperscriptOffset;
+  @Uint32()
+  external int otmsStrikeoutSize;
+  @Int32()
+  external int otmsStrikeoutPosition;
+  @Int32()
+  external int otmsUnderscoreSize;
+  @Int32()
+  external int otmsUnderscorePosition;
+  external Pointer<Utf8> otmpFamilyName;
+  external Pointer<Utf8> otmpFaceName;
+  external Pointer<Utf8> otmpStyleName;
+  external Pointer<Utf8> otmpFullName;
 }
 
 class PAINTSTRUCT extends Struct {

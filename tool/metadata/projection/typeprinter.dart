@@ -370,7 +370,8 @@ void main() {
           // Handle a non-string array
           else {
             buffer.writeln('  @Array($dimensions)');
-            buffer.writeln('  external Array<$nativeType> ${field.name};');
+            buffer.writeln(
+                '  external Array<${nameWithoutEncoding(nativeType)}> ${field.name};');
           }
         }
         // Handle a non-array

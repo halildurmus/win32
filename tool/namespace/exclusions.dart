@@ -1,18 +1,15 @@
 const excludedFunctions = <String>[
   // Relies on namespaces not imported yet
-  'BroadcastSystemMessageEx',
-  'ChangeDisplaySettings',
-  'ChangeDisplaySettingsEx',
-  // 'ChooseFont',
-  'CreateConsoleScreenBuffer',
+  'BroadcastSystemMessageEx', // system.systemservices
+  'ChangeDisplaySettings', // ui.displaydevices
+  'ChangeDisplaySettingsEx', // ui.displaydevices
+  'CreateConsoleScreenBuffer', // security
   'CreateDC',
-  // 'CreateFontIndirectEx',
   'CreateIC',
   'EnumDisplaySettings',
   'EnumDisplaySettingsEx',
-  'ExtCreateRegion',
+  'ExtCreateRegion', // system.systemservices
   'GetLogicalProcessorInformationEx', // system.systemservices
-  // 'GetOutlineTextMetrics',
   'GetRegionData',
   'MessageBoxIndirect',
   'ResetDC', // ui.displaydevices
@@ -28,22 +25,16 @@ const excludedStructs = <String>[
   // ANSI
   'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACE',
 
-  // To fix
-  'Windows.Win32.Graphics.Gdi.AXESLISTW',
-  'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACEW',
-  'Windows.Win32.Graphics.Gdi.EMREXTCREATEFONTINDIRECTW',
-  // 'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVW',
-  'Windows.Win32.Graphics.Gdi.ENUMTEXTMETRICW',
-  'Windows.Win32.Graphics.Gdi.NEWTEXTMETRICEXW',
-  // 'Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICW',
-
   // Temporary
   'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER', // ui.colorsystem
   'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER', // ui.colorsystem
-  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO',
-  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL',
-  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE',
-  'Windows.Win32.Graphics.Gdi.EMRPIXELFORMAT',
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO', // ui.displaydevices
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL', // ui.displaydevices
+  'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE', // ui.displaydevices
+  'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACEW', // ui.colorsystem
+  'Windows.Win32.Graphics.Gdi.EMRPIXELFORMAT', // opengl
+  'Windows.Win32.Graphics.Gdi.ENUMTEXTMETRICW', // globalization
+  'Windows.Win32.Graphics.Gdi.NEWTEXTMETRICEXW', // globalization
   'Windows.Win32.UI.WindowsAndMessaging.BSMINFO', // system.systemservices
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXPARAMSW', // ui.shell
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYEXW', // ui.controls

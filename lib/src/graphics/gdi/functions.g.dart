@@ -286,6 +286,13 @@ late final _CreateEnhMetaFile = _gdi32.lookupFunction<
     int Function(int hdc, Pointer<Utf16> lpFilename, Pointer<RECT> lprc,
         Pointer<Utf16> lpDesc)>('CreateEnhMetaFileW');
 
+int CreateFontIndirectEx(Pointer<ENUMLOGFONTEXDV> param0) =>
+    _CreateFontIndirectEx(param0);
+
+late final _CreateFontIndirectEx = _gdi32.lookupFunction<
+    IntPtr Function(Pointer<ENUMLOGFONTEXDV> param0),
+    int Function(Pointer<ENUMLOGFONTEXDV> param0)>('CreateFontIndirectExW');
+
 int CreateFontIndirect(Pointer<LOGFONT> lplf) => _CreateFontIndirect(lplf);
 
 late final _CreateFontIndirect = _gdi32.lookupFunction<
@@ -1193,6 +1200,15 @@ int GetObject(int h, int c, Pointer pv) => _GetObject(h, c, pv);
 late final _GetObject = _gdi32.lookupFunction<
     Int32 Function(IntPtr h, Int32 c, Pointer pv),
     int Function(int h, int c, Pointer pv)>('GetObjectW');
+
+int GetOutlineTextMetrics(
+        int hdc, int cjCopy, Pointer<OUTLINETEXTMETRIC> potm) =>
+    _GetOutlineTextMetrics(hdc, cjCopy, potm);
+
+late final _GetOutlineTextMetrics = _gdi32.lookupFunction<
+    Uint32 Function(IntPtr hdc, Uint32 cjCopy, Pointer<OUTLINETEXTMETRIC> potm),
+    int Function(int hdc, int cjCopy,
+        Pointer<OUTLINETEXTMETRIC> potm)>('GetOutlineTextMetricsW');
 
 int GetPaletteEntries(int hpal, int iStart, int cEntries,
         Pointer<PALETTEENTRY> pPalEntries) =>
