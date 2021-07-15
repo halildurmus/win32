@@ -19,6 +19,7 @@ import 'callbacks.g.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
+import '../../graphics/gdi/structs.g.dart';
 
 class ACCEL extends Struct {
   @Uint8()

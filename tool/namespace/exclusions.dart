@@ -1,10 +1,22 @@
 const excludedFunctions = <String>[
   // Relies on namespaces not imported yet
   'BroadcastSystemMessageEx',
+  'ChangeDisplaySettings',
+  'ChangeDisplaySettingsEx',
   'ChooseFont',
   'CreateConsoleScreenBuffer',
+  'CreateDC',
+  'CreateFontIndirectEx',
+  'CreateIC',
+  'EnumDisplaySettings',
+  'EnumDisplaySettingsEx',
+  'ExtCreateRegion',
   'GetLogicalProcessorInformationEx',
+  'GetOutlineTextMetrics',
+  'GetRegionData',
   'MessageBoxIndirect',
+  'ResetDC',
+  'SetWinMetaFileBits',
   'UpdateLayeredWindow',
   'UpdateLayeredWindowIndirect',
 
@@ -13,11 +25,25 @@ const excludedFunctions = <String>[
 ];
 
 const excludedStructs = <String>[
+  // ANSI
+  'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACE',
+
+  // To fix
+  'Windows.Win32.Graphics.Gdi.AXESLISTW',
+  'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACEW',
+  'Windows.Win32.Graphics.Gdi.EMREXTCREATEFONTINDIRECTW',
+  'Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVW',
+  'Windows.Win32.Graphics.Gdi.ENUMTEXTMETRICW',
+  'Windows.Win32.Graphics.Gdi.NEWTEXTMETRICEXW',
+
+  // Temporary
   'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER',
   'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER',
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO',
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL',
   'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE',
+  'Windows.Win32.Graphics.Gdi.EMRPIXELFORMAT',
+  'Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICW',
   'Windows.Win32.UI.WindowsAndMessaging.BSMINFO',
   'Windows.Win32.UI.WindowsAndMessaging.CHOOSEFONTW',
   'Windows.Win32.UI.WindowsAndMessaging.ICONMETRICSW',
@@ -30,6 +56,8 @@ const excludedStructs = <String>[
 ];
 
 const excludedCallbacks = <String>[
+  'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
+  'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK',
 ];
 
