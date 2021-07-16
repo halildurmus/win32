@@ -29,7 +29,6 @@ import 'structs.g.dart';
 
 void generateCallbacksFile(File file, List<TypeDef> callbacks) {
   final imports = <String>{};
-  final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
 
   for (final callback in callbacks) {
@@ -42,15 +41,18 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
     }
   }
 
-  writer.writeStringSync(callbacksFileHeader);
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
+  if (callbacks.isNotEmpty) {
+    final writer = file.openSync(mode: FileMode.writeOnly);
+    writer.writeStringSync(callbacksFileHeader);
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+    for (final import in imports) {
+      if (!excludedImports.contains(import)) {
+        writer.writeStringSync(
+            "import '${relativePathToSrcDirectory(file)}$import';\n");
+      }
     }
+    writer.writeStringSync(buffer.toString());
+    writer.closeSync();
   }
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
 }
