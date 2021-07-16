@@ -15,9 +15,11 @@ final scope = MetadataStore.getWin32Scope();
 
 /// The metadata namespaces we're generating
 const namespaces = <String>[
+  'Windows.Win32.Media.Multimedia',
+
+  // Already working:
   'Windows.Win32.Foundation',
   'Windows.Win32.Graphics.Gdi',
-  'Windows.Win32.Media.Multimedia',
   'Windows.Win32.System.Console',
   'Windows.Win32.System.SystemInformation',
   'Windows.Win32.System.Time',
@@ -25,6 +27,8 @@ const namespaces = <String>[
   'Windows.Win32.UI.PointerInput',
   'Windows.Win32.UI.TouchInput',
   'Windows.Win32.UI.WindowsAndMessaging',
+
+  // Consider next:
   // 'Windows.Win32.System.Com',
   // 'Windows.Win32.System.Diagnostics.Debug',
   // 'Windows.Win32.System.OleAutomation',

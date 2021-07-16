@@ -73,7 +73,7 @@ const excludedComInterfaces = <String>[
   'Windows.Win32.Media.Multimedia.IAVIEditStream',
   'Windows.Win32.Media.Multimedia.IAVIFile',
   'Windows.Win32.Media.Multimedia.IAVIPersistFile',
-  'Windows.Win32.Media.Multimedia.IAVIStream', // fix next
+  // 'Windows.Win32.Media.Multimedia.IAVIStream', // fix next
   'Windows.Win32.Media.Multimedia.IAVIStreaming',
   'Windows.Win32.Media.Multimedia.IGetFrame',
   'Windows.Win32.UI.TouchInput._IManipulationEvents',

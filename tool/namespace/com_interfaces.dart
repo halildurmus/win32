@@ -6,6 +6,7 @@ import '../metadata/projection/classprojector.dart';
 import '../metadata/projection/data_classes.dart';
 import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
+import 'exclusions.dart';
 
 // TODO: Remove some of these imports when system/com is projected
 String comFileHeader(TypeDef interface, String pathToLibSrc) {
@@ -42,7 +43,40 @@ import '${pathToLibSrc}utils.dart';
   return buffer.toString();
 }
 
-// TODO: Build and write list of imports
+List<String> importsForClass(TypeDef typedef) {
+  final importList = <String>[];
+
+  for (final method in typedef.methods) {
+    for (final param in method.parameters) {
+      if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
+        final paramType = param.typeIdentifier.type;
+
+        if (paramType != null && paramType.isDelegate) {
+          importList.add(
+              '${folderFromNamespace(param.typeIdentifier.name)}/callbacks.g.dart');
+        } else {
+          importList.add(
+              '${folderFromNamespace(param.typeIdentifier.name)}/structs.g.dart');
+        }
+      }
+
+      if (param.typeIdentifier.typeArg != null) {
+        final paramTypeArg = param.typeIdentifier.typeArg!;
+        if (paramTypeArg.name.startsWith('Windows.Win32')) {
+          if (paramTypeArg.type!.isDelegate) {
+            importList.add(
+                '${folderFromNamespace(paramTypeArg.name)}/callbacks.g.dart');
+          } else {
+            importList.add(
+                '${folderFromNamespace(paramTypeArg.name)}/structs.g.dart');
+          }
+        }
+      }
+    }
+  }
+  return importList;
+}
+
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
   for (final interface in interfaces) {
@@ -64,6 +98,8 @@ void generateInterfaceFiles(
       ..className =
           nameWithoutEncoding(interface.name.split('.').last.substring(1));
 
+    final imports = importsForClass(interface).toSet();
+
     // Pass relative directory to lib/src as second parameter (e.g. '../../')
     final prefix = '../' * (interface.name.split('.').length - 3);
     final dartClass =
@@ -71,11 +107,15 @@ void generateInterfaceFiles(
 
     final classOutputFilename =
         nameWithoutEncoding(interface.name.split('.').last);
-    final outputFile =
+    final writer =
         File('${directory.uri.toFilePath()}$classOutputFilename.dart')
             .openSync(mode: FileMode.writeOnly);
-    outputFile.writeStringSync(comFileHeader(interface, prefix));
-    outputFile.writeStringSync(dartClass);
-    outputFile.closeSync();
+    writer.writeStringSync(comFileHeader(interface, prefix));
+    for (final import in imports) {
+      if (!excludedImports.contains(import)) {
+        writer.writeStringSync("import '$prefix$import';\n");
+      }
+    }
+    writer.writeStringSync(dartClass);
   }
 }

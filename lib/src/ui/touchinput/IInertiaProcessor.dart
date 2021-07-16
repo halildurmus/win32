@@ -17,6 +17,7 @@ import '../../structs.dart';
 import '../../utils.dart';
 
 import '../../system/com/IUnknown.dart';
+import '../../foundation/structs.g.dart';
 
 /// @nodoc
 const CLSID_InertiaProcessor = '{ABB27087-4CE0-4E58-A0CB-E24DF96814BE}';

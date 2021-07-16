@@ -1,5 +1,11 @@
 // ignore_for_file: directives_ordering
 
+export 'src/media/multimedia/callbacks.g.dart';
+export 'src/media/multimedia/constants.g.dart';
+export 'src/media/multimedia/enums.g.dart';
+export 'src/media/multimedia/functions.g.dart';
+export 'src/media/multimedia/IAVIStream.dart';
+export 'src/media/multimedia/structs.g.dart';
 export 'src/foundation/callbacks.g.dart';
 export 'src/foundation/constants.g.dart';
 export 'src/foundation/enums.g.dart';
@@ -10,11 +16,6 @@ export 'src/graphics/gdi/constants.g.dart';
 export 'src/graphics/gdi/enums.g.dart';
 export 'src/graphics/gdi/functions.g.dart';
 export 'src/graphics/gdi/structs.g.dart';
-export 'src/media/multimedia/callbacks.g.dart';
-export 'src/media/multimedia/constants.g.dart';
-export 'src/media/multimedia/enums.g.dart';
-export 'src/media/multimedia/functions.g.dart';
-export 'src/media/multimedia/structs.g.dart';
 export 'src/system/console/callbacks.g.dart';
 export 'src/system/console/constants.g.dart';
 export 'src/system/console/enums.g.dart';

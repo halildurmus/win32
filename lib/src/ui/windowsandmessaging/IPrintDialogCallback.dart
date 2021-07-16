@@ -17,6 +17,7 @@ import '../../structs.dart';
 import '../../utils.dart';
 
 import '../../system/com/IUnknown.dart';
+import '../../foundation/structs.g.dart';
 
 /// @nodoc
 const IID_IPrintDialogCallback = '{5852A2C3-6530-11D1-B6A3-0000F8757BF9}';
