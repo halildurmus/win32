@@ -625,6 +625,14 @@ class MESSAGE_RESOURCE_BLOCK extends Struct {
 }
 
 /// {@category Struct}
+class MESSAGE_RESOURCE_DATA extends Struct {
+  @Uint32()
+  external int NumberOfBlocks;
+  @Array(1)
+  external Array<MESSAGE_RESOURCE_BLOCK> Blocks;
+}
+
+/// {@category Struct}
 class MESSAGE_RESOURCE_ENTRY extends Struct {
   @Uint16()
   external int Length;

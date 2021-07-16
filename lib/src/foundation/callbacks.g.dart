@@ -16,6 +16,7 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.g.dart';
 import '../guid.dart';
+import '../combase.dart';
 
 typedef FARPROC = IntPtr Function();
 typedef NEARPROC = IntPtr Function();

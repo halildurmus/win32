@@ -4,18 +4,17 @@ const excludedFunctions = <String>[
   'ChangeDisplaySettings', // ui.displaydevices
   'ChangeDisplaySettingsEx', // ui.displaydevices
   'CreateConsoleScreenBuffer', // security
-  'CreateDC',
-  'CreateIC',
-  'EnumDisplaySettings',
-  'EnumDisplaySettingsEx',
+  'CreateDC', // ui.displaydevices
+  'CreateIC', // ui.displaydevices
+  'EnumDisplaySettings', // ui.displaydevices
+  'EnumDisplaySettingsEx', // ui.displaydevices
   'ExtCreateRegion', // system.systemservices
   'GetLogicalProcessorInformationEx', // system.systemservices
-  'GetRegionData',
-  'MessageBoxIndirect',
+  // 'MessageBoxIndirect',
   'ResetDC', // ui.displaydevices
-  'SetWinMetaFileBits',
-  'UpdateLayeredWindow',
-  'UpdateLayeredWindowIndirect',
+  'SetWinMetaFileBits', // system.dataexchange
+  // 'UpdateLayeredWindow',
+  // 'UpdateLayeredWindowIndirect',
 
   // Duplicates
   '_TrackMouseEvent',
@@ -55,7 +54,7 @@ const excludedCallbacks = <String>[
   'Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF', // devices.display
   'Windows.Win32.System.SystemServices.FREEOBJPROC', // ui.displaydevices
   'Windows.Win32.System.SystemServices.LPD3DENUMPIXELFORMATSCALLBACK', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.LPD3DENUMTEXTUREFORMATSCALLBACK', // graphics.directdraw
+  // 'Windows.Win32.System.SystemServices.LPD3DENUMTEXTUREFORMATSCALLBACK', // graphics.directdraw
   'Windows.Win32.System.SystemServices.PEXCEPTION_FILTER', // diagnostics.debug
   'Windows.Win32.System.SystemServices.PFN_DrvAccumulateD3DDirtyRect', // ui.displaydevices
   'Windows.Win32.System.SystemServices.PFN_DrvAlphaBlend', // ui.displaydevices

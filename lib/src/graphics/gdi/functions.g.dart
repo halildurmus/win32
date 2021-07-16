@@ -1262,6 +1262,14 @@ late final _GetRasterizerCaps = _gdi32.lookupFunction<
     int Function(Pointer<RASTERIZER_STATUS> lpraststat,
         int cjBytes)>('GetRasterizerCaps');
 
+int GetRegionData(int hrgn, int nCount, Pointer<RGNDATA> lpRgnData) =>
+    _GetRegionData(hrgn, nCount, lpRgnData);
+
+late final _GetRegionData = _gdi32.lookupFunction<
+    Uint32 Function(IntPtr hrgn, Uint32 nCount, Pointer<RGNDATA> lpRgnData),
+    int Function(
+        int hrgn, int nCount, Pointer<RGNDATA> lpRgnData)>('GetRegionData');
+
 int GetRgnBox(int hrgn, Pointer<RECT> lprc) => _GetRgnBox(hrgn, lprc);
 
 late final _GetRgnBox = _gdi32.lookupFunction<

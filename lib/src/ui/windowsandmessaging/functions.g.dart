@@ -2195,6 +2195,50 @@ late final _UnregisterClass = _user32.lookupFunction<
     int Function(
         Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
 
+int UpdateLayeredWindow(
+        int hWnd,
+        int hdcDst,
+        Pointer<POINT> pptDst,
+        Pointer<SIZE> psize,
+        int hdcSrc,
+        Pointer<POINT> pptSrc,
+        int crKey,
+        Pointer<BLENDFUNCTION> pblend,
+        int dwFlags) =>
+    _UpdateLayeredWindow(
+        hWnd, hdcDst, pptDst, psize, hdcSrc, pptSrc, crKey, pblend, dwFlags);
+
+late final _UpdateLayeredWindow = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr hWnd,
+        IntPtr hdcDst,
+        Pointer<POINT> pptDst,
+        Pointer<SIZE> psize,
+        IntPtr hdcSrc,
+        Pointer<POINT> pptSrc,
+        Uint32 crKey,
+        Pointer<BLENDFUNCTION> pblend,
+        Uint32 dwFlags),
+    int Function(
+        int hWnd,
+        int hdcDst,
+        Pointer<POINT> pptDst,
+        Pointer<SIZE> psize,
+        int hdcSrc,
+        Pointer<POINT> pptSrc,
+        int crKey,
+        Pointer<BLENDFUNCTION> pblend,
+        int dwFlags)>('UpdateLayeredWindow');
+
+int UpdateLayeredWindowIndirect(
+        int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo) =>
+    _UpdateLayeredWindowIndirect(hWnd, pULWInfo);
+
+late final _UpdateLayeredWindowIndirect = _user32.lookupFunction<
+        Int32 Function(IntPtr hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo),
+        int Function(int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo)>(
+    'UpdateLayeredWindowIndirect');
+
 int WaitMessage() => _WaitMessage();
 
 late final _WaitMessage =

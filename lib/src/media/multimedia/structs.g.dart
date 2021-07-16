@@ -18,8 +18,8 @@ import '../../combase.dart';
 import '../../guid.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../foundation/structs.g.dart';
-import '../../media/multimedia/callbacks.g.dart';
 import '../../media/multimedia/structs.g.dart';
+import '../../media/multimedia/callbacks.g.dart';
 import '../../graphics/gdi/structs.g.dart';
 
 /// {@category Struct}
@@ -916,6 +916,15 @@ class DRVCONFIGINFOEX extends Struct {
   external Pointer<Utf16> lpszDCIAliasName;
   @Uint32()
   external int dnDevNode;
+}
+
+/// {@category Struct}
+@Packed(1)
+class DRVM_IOCTL_DATA extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCmd;
 }
 
 /// {@category Struct}

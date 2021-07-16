@@ -16,6 +16,7 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.g.dart';
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../foundation/structs.g.dart';
 
 typedef DESKTOPENUMPROCW = Int32 Function(Pointer<Utf16> param0, IntPtr param1);

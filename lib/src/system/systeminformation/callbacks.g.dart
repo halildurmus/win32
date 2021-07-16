@@ -16,6 +16,7 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.g.dart';
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../foundation/structs.g.dart';
 
 typedef PGET_SYSTEM_WOW64_DIRECTORY_W = Uint32 Function(
