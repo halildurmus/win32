@@ -24,12 +24,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '${pathToLibSrc}combase.dart';
-import '${pathToLibSrc}constants.dart';
 import '${pathToLibSrc}exceptions.dart';
 import '${pathToLibSrc}macros.dart';
-import '${pathToLibSrc}ole32.dart';
-import '${pathToLibSrc}structs.dart';
-import '${pathToLibSrc}structs.g.dart';
 import '${pathToLibSrc}utils.dart';
 ''');
 

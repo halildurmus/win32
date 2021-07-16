@@ -20,6 +20,7 @@ import '../../guid.dart';
 import '../../ui/touchinput/structs.g.dart';
 import '../../foundation/structs.g.dart';
 
+/// {@category Struct}
 class GESTURECONFIG extends Struct {
   @Uint32()
   external int dwID;
@@ -29,6 +30,7 @@ class GESTURECONFIG extends Struct {
   external int dwBlock;
 }
 
+/// {@category Struct}
 class GESTUREINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -49,6 +51,7 @@ class GESTUREINFO extends Struct {
   external int cbExtraArgs;
 }
 
+/// {@category Struct}
 class GESTURENOTIFYSTRUCT extends Struct {
   @Uint32()
   external int cbSize;
@@ -61,6 +64,7 @@ class GESTURENOTIFYSTRUCT extends Struct {
   external int dwInstanceID;
 }
 
+/// {@category Struct}
 class TOUCHINPUT extends Struct {
   @Int32()
   external int x;

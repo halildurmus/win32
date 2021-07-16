@@ -166,7 +166,8 @@ void generateLibraryExport(List<String> namespaces) {
     final relativePath = folderForNamespace(namespace).substring(4);
     for (final file in directory.listSync()) {
       if (file.existsSync() && file.uri.toFilePath().endsWith('.dart')) {
-        writer.writeStringSync("  export '$relativePath/callbacks.g.dart';");
+        writer.writeStringSync(
+            "  export '$relativePath/${file.path.split('\\').last}';");
       }
     }
   }

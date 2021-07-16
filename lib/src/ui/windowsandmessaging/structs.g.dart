@@ -21,6 +21,7 @@ import '../../foundation/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../graphics/gdi/structs.g.dart';
 
+/// {@category Struct}
 class ACCEL extends Struct {
   @Uint8()
   external int fVirt;
@@ -30,6 +31,7 @@ class ACCEL extends Struct {
   external int cmd;
 }
 
+/// {@category Struct}
 class ALTTABINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -50,6 +52,7 @@ class ALTTABINFO extends Struct {
   external POINT ptStart;
 }
 
+/// {@category Struct}
 class ANIMATIONINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -57,6 +60,7 @@ class ANIMATIONINFO extends Struct {
   external int iMinAnimate;
 }
 
+/// {@category Struct}
 class AUDIODESCRIPTION extends Struct {
   @Uint32()
   external int cbSize;
@@ -66,6 +70,7 @@ class AUDIODESCRIPTION extends Struct {
   external int Locale;
 }
 
+/// {@category Struct}
 class CBTACTIVATESTRUCT extends Struct {
   @Int32()
   external int fMouse;
@@ -73,12 +78,14 @@ class CBTACTIVATESTRUCT extends Struct {
   external int hWndActive;
 }
 
+/// {@category Struct}
 class CBT_CREATEWND extends Struct {
   external Pointer<CREATESTRUCT> lpcs;
   @IntPtr()
   external int hwndInsertAfter;
 }
 
+/// {@category Struct}
 class CHANGEFILTERSTRUCT extends Struct {
   @Uint32()
   external int cbSize;
@@ -86,6 +93,7 @@ class CHANGEFILTERSTRUCT extends Struct {
   external int ExtStatus;
 }
 
+/// {@category Struct}
 class CHOOSECOLOR extends Struct {
   @Uint32()
   external int lStructSize;
@@ -104,6 +112,7 @@ class CHOOSECOLOR extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// {@category Struct}
 class CHOOSEFONT extends Struct {
   @Uint32()
   external int lStructSize;
@@ -135,6 +144,7 @@ class CHOOSEFONT extends Struct {
   external int nSizeMax;
 }
 
+/// {@category Struct}
 class CLIENTCREATESTRUCT extends Struct {
   @IntPtr()
   external int hWindowMenu;
@@ -142,6 +152,7 @@ class CLIENTCREATESTRUCT extends Struct {
   external int idFirstChild;
 }
 
+/// {@category Struct}
 class CREATESTRUCT extends Struct {
   external Pointer lpCreateParams;
   @IntPtr()
@@ -166,6 +177,7 @@ class CREATESTRUCT extends Struct {
   external int dwExStyle;
 }
 
+/// {@category Struct}
 class CURSORINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -176,6 +188,7 @@ class CURSORINFO extends Struct {
   external POINT ptScreenPos;
 }
 
+/// {@category Struct}
 class CURSORSHAPE extends Struct {
   @Int32()
   external int xHotSpot;
@@ -193,6 +206,7 @@ class CURSORSHAPE extends Struct {
   external int BitsPixel;
 }
 
+/// {@category Struct}
 class CWPRETSTRUCT extends Struct {
   @IntPtr()
   external int lResult;
@@ -206,6 +220,7 @@ class CWPRETSTRUCT extends Struct {
   external int hwnd;
 }
 
+/// {@category Struct}
 class CWPSTRUCT extends Struct {
   @IntPtr()
   external int lParam;
@@ -217,6 +232,7 @@ class CWPSTRUCT extends Struct {
   external int hwnd;
 }
 
+/// {@category Struct}
 class DEBUGHOOKINFO extends Struct {
   @Uint32()
   external int idThread;
@@ -230,6 +246,7 @@ class DEBUGHOOKINFO extends Struct {
   external int code;
 }
 
+/// {@category Struct}
 class DEVNAMES extends Struct {
   @Uint16()
   external int wDriverOffset;
@@ -241,6 +258,8 @@ class DEVNAMES extends Struct {
   external int wDefault;
 }
 
+/// {@category Struct}
+@Packed(2)
 class DLGITEMTEMPLATE extends Struct {
   @Uint32()
   external int style;
@@ -258,6 +277,8 @@ class DLGITEMTEMPLATE extends Struct {
   external int id;
 }
 
+/// {@category Struct}
+@Packed(2)
 class DLGTEMPLATE extends Struct {
   @Uint32()
   external int style;
@@ -275,6 +296,7 @@ class DLGTEMPLATE extends Struct {
   external int cy;
 }
 
+/// {@category Struct}
 class DROPSTRUCT extends Struct {
   @IntPtr()
   external int hwndSource;
@@ -289,6 +311,7 @@ class DROPSTRUCT extends Struct {
   external int dwControlData;
 }
 
+/// {@category Struct}
 class EVENTMSG extends Struct {
   @Uint32()
   external int message;
@@ -302,6 +325,7 @@ class EVENTMSG extends Struct {
   external int hwnd;
 }
 
+/// {@category Struct}
 class FINDREPLACE extends Struct {
   @Uint32()
   external int lStructSize;
@@ -323,6 +347,7 @@ class FINDREPLACE extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// {@category Struct}
 class GUITHREADINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -343,6 +368,7 @@ class GUITHREADINFO extends Struct {
   external RECT rcCaret;
 }
 
+/// {@category Struct}
 class HARDWAREHOOKSTRUCT extends Struct {
   @IntPtr()
   external int hwnd;
@@ -354,6 +380,7 @@ class HARDWAREHOOKSTRUCT extends Struct {
   external int lParam;
 }
 
+/// {@category Struct}
 class ICONINFO extends Struct {
   @Int32()
   external int fIcon;
@@ -367,6 +394,7 @@ class ICONINFO extends Struct {
   external int hbmColor;
 }
 
+/// {@category Struct}
 class ICONINFOEX extends Struct {
   @Uint32()
   external int cbSize;
@@ -419,6 +447,7 @@ class ICONINFOEX extends Struct {
   }
 }
 
+/// {@category Struct}
 class ICONMETRICS extends Struct {
   @Uint32()
   external int cbSize;
@@ -431,11 +460,13 @@ class ICONMETRICS extends Struct {
   external LOGFONT lfFont;
 }
 
+/// {@category Struct}
 class IndexedResourceQualifier extends Struct {
   external Pointer<Utf16> name;
   external Pointer<Utf16> value;
 }
 
+/// {@category Struct}
 class KBDLLHOOKSTRUCT extends Struct {
   @Uint32()
   external int vkCode;
@@ -449,6 +480,7 @@ class KBDLLHOOKSTRUCT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class MDICREATESTRUCT extends Struct {
   external Pointer<Utf16> szClass;
   external Pointer<Utf16> szTitle;
@@ -468,6 +500,7 @@ class MDICREATESTRUCT extends Struct {
   external int lParam;
 }
 
+/// {@category Struct}
 class MDINEXTMENU extends Struct {
   @IntPtr()
   external int hmenuIn;
@@ -477,6 +510,7 @@ class MDINEXTMENU extends Struct {
   external int hwndNext;
 }
 
+/// {@category Struct}
 class MENUBARINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -489,6 +523,7 @@ class MENUBARINFO extends Struct {
   external int _bitfield;
 }
 
+/// {@category Struct}
 class MENUGETOBJECTINFO extends Struct {
   @Uint32()
   external int dwFlags;
@@ -500,6 +535,7 @@ class MENUGETOBJECTINFO extends Struct {
   external Pointer pvObj;
 }
 
+/// {@category Struct}
 class MENUINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -517,6 +553,7 @@ class MENUINFO extends Struct {
   external int dwMenuData;
 }
 
+/// {@category Struct}
 class MENUITEMINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -543,6 +580,7 @@ class MENUITEMINFO extends Struct {
   external int hbmpItem;
 }
 
+/// {@category Struct}
 class MENUITEMTEMPLATE extends Struct {
   @Uint16()
   external int mtOption;
@@ -567,6 +605,7 @@ class MENUITEMTEMPLATE extends Struct {
   }
 }
 
+/// {@category Struct}
 class MENUITEMTEMPLATEHEADER extends Struct {
   @Uint16()
   external int versionNumber;
@@ -574,6 +613,7 @@ class MENUITEMTEMPLATEHEADER extends Struct {
   external int offset;
 }
 
+/// {@category Struct}
 class MESSAGE_RESOURCE_BLOCK extends Struct {
   @Uint32()
   external int LowId;
@@ -583,6 +623,7 @@ class MESSAGE_RESOURCE_BLOCK extends Struct {
   external int OffsetToEntries;
 }
 
+/// {@category Struct}
 class MESSAGE_RESOURCE_ENTRY extends Struct {
   @Uint16()
   external int Length;
@@ -592,6 +633,7 @@ class MESSAGE_RESOURCE_ENTRY extends Struct {
   external Array<Uint8> Text;
 }
 
+/// {@category Struct}
 class MINIMIZEDMETRICS extends Struct {
   @Uint32()
   external int cbSize;
@@ -605,6 +647,7 @@ class MINIMIZEDMETRICS extends Struct {
   external int iArrange;
 }
 
+/// {@category Struct}
 class MINMAXINFO extends Struct {
   external POINT ptReserved;
   external POINT ptMaxSize;
@@ -613,6 +656,7 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxTrackSize;
 }
 
+/// {@category Struct}
 class MOUSEHOOKSTRUCT extends Struct {
   external POINT pt;
   @IntPtr()
@@ -623,12 +667,14 @@ class MOUSEHOOKSTRUCT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class MOUSEHOOKSTRUCTEX extends Struct {
   external MOUSEHOOKSTRUCT __AnonymousBase_winuser_L1173_C46;
   @Uint32()
   external int mouseData;
 }
 
+/// {@category Struct}
 class MSG extends Struct {
   @IntPtr()
   external int hwnd;
@@ -643,6 +689,7 @@ class MSG extends Struct {
   external POINT pt;
 }
 
+/// {@category Struct}
 class MSLLHOOKSTRUCT extends Struct {
   external POINT pt;
   @Uint32()
@@ -655,10 +702,12 @@ class MSLLHOOKSTRUCT extends Struct {
   external int dwExtraInfo;
 }
 
+/// {@category Struct}
 class MrmResourceIndexerHandle extends Struct {
   external Pointer handle;
 }
 
+/// {@category Struct}
 class MrmResourceIndexerMessage extends Struct {
   @Uint32()
   external int severity;
@@ -667,12 +716,14 @@ class MrmResourceIndexerMessage extends Struct {
   external Pointer<Utf16> text;
 }
 
+/// {@category Struct}
 class NCCALCSIZE_PARAMS extends Struct {
   @Array(3)
   external Array<RECT> rgrc;
   external Pointer<WINDOWPOS> lppos;
 }
 
+/// {@category Struct}
 class NONCLIENTMETRICS extends Struct {
   @Uint32()
   external int cbSize;
@@ -703,6 +754,7 @@ class NONCLIENTMETRICS extends Struct {
   external int iPaddedBorderWidth;
 }
 
+/// {@category Struct}
 class OPENFILENAME extends Struct {
   @Uint32()
   external int lStructSize;
@@ -742,6 +794,7 @@ class OPENFILENAME extends Struct {
   external int FlagsEx;
 }
 
+/// {@category Struct}
 class OPENFILENAME_NT4 extends Struct {
   @Uint32()
   external int lStructSize;
@@ -776,6 +829,7 @@ class OPENFILENAME_NT4 extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// {@category Struct}
 class PAGESETUPDLG extends Struct {
   @Uint32()
   external int lStructSize;
@@ -801,6 +855,7 @@ class PAGESETUPDLG extends Struct {
   external int hPageSetupTemplate;
 }
 
+/// {@category Struct}
 class PRINTDLGEX extends Struct {
   @Uint32()
   external int lStructSize;
@@ -842,6 +897,7 @@ class PRINTDLGEX extends Struct {
   external int dwResultAction;
 }
 
+/// {@category Struct}
 class PRINTDLG extends Struct {
   @Uint32()
   external int lStructSize;
@@ -879,6 +935,7 @@ class PRINTDLG extends Struct {
   external int hSetupTemplate;
 }
 
+/// {@category Struct}
 class PRINTPAGERANGE extends Struct {
   @Uint32()
   external int nFromPage;
@@ -886,12 +943,14 @@ class PRINTPAGERANGE extends Struct {
   external int nToPage;
 }
 
+/// {@category Struct}
 class SHELLHOOKINFO extends Struct {
   @IntPtr()
   external int hwnd;
   external RECT rc;
 }
 
+/// {@category Struct}
 class STYLESTRUCT extends Struct {
   @Uint32()
   external int styleOld;
@@ -899,6 +958,7 @@ class STYLESTRUCT extends Struct {
   external int styleNew;
 }
 
+/// {@category Struct}
 class TITLEBARINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -907,6 +967,7 @@ class TITLEBARINFO extends Struct {
   external Array<Uint32> rgstate;
 }
 
+/// {@category Struct}
 class TITLEBARINFOEX extends Struct {
   @Uint32()
   external int cbSize;
@@ -917,12 +978,14 @@ class TITLEBARINFOEX extends Struct {
   external Array<RECT> rgrect;
 }
 
+/// {@category Struct}
 class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
   external RECT rcExclude;
 }
 
+/// {@category Struct}
 class TouchPredictionParameters extends Struct {
   @Uint32()
   external int cbSize;
@@ -934,6 +997,7 @@ class TouchPredictionParameters extends Struct {
   external int bUseHWTimeStamp;
 }
 
+/// {@category Struct}
 class UPDATELAYEREDWINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -952,6 +1016,7 @@ class UPDATELAYEREDWINDOWINFO extends Struct {
   external Pointer<RECT> prcDirty;
 }
 
+/// {@category Struct}
 class WINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
@@ -973,6 +1038,7 @@ class WINDOWINFO extends Struct {
   external int wCreatorVersion;
 }
 
+/// {@category Struct}
 class WINDOWPLACEMENT extends Struct {
   @Uint32()
   external int length;
@@ -985,6 +1051,7 @@ class WINDOWPLACEMENT extends Struct {
   external RECT rcNormalPosition;
 }
 
+/// {@category Struct}
 class WINDOWPOS extends Struct {
   @IntPtr()
   external int hwnd;
@@ -1002,6 +1069,7 @@ class WINDOWPOS extends Struct {
   external int flags;
 }
 
+/// {@category Struct}
 class WNDCLASSEX extends Struct {
   @Uint32()
   external int cbSize;
@@ -1026,6 +1094,7 @@ class WNDCLASSEX extends Struct {
   external int hIconSm;
 }
 
+/// {@category Struct}
 class WNDCLASS extends Struct {
   @Uint32()
   external int style;

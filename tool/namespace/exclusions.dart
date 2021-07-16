@@ -77,8 +77,7 @@ const excludedComInterfaces = <String>[
   'Windows.Win32.Media.Multimedia.IAVIStreaming',
   'Windows.Win32.Media.Multimedia.IGetFrame',
   'Windows.Win32.UI.TouchInput._IManipulationEvents',
-  'Windows.Win32.UI.TouchInput.IInertiaProcessor',
+  // 'Windows.Win32.UI.TouchInput.IInertiaProcessor',
   'Windows.Win32.UI.TouchInput.IManipulationProcessor',
-  // 'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogCallback' /* simplest */,
-  'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogServices',
+  'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogServices', // ui.displaydevices
 ];
