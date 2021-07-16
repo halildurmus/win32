@@ -413,21 +413,16 @@ void main() {
     return "typedef $callbackName = ${printer.nativePrototype};";
   }
 
-  static String printClass(TypeDef typeDef) {
-    final type = ClassProjector(typeDef).projection;
-    return headerAsString(type) +
-        guidConstantsAsString(type) +
-        typedefsAsString(type) +
-        interfaceAsString(type) +
-        classAsString(type);
-  }
+  static String printClass(TypeDef typeDef) =>
+      printProjection(ClassProjector(typeDef).projection);
 
-  static String printProjection(ClassProjection projection) =>
-      headerAsString(projection) +
-      guidConstantsAsString(projection) +
-      typedefsAsString(projection) +
-      interfaceAsString(projection) +
-      classAsString(projection);
+  static String printProjection(ClassProjection projection,
+          {bool excludeHeader = false}) =>
+      '${excludeHeader ? "" : headerAsString(projection)}'
+      '${guidConstantsAsString(projection)}'
+      '${typedefsAsString(projection)}'
+      '${interfaceAsString(projection)}'
+      '${classAsString(projection)}';
 
   static String printTests(ClassProjection projection) =>
       classTestsAsString(projection);

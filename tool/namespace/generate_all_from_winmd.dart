@@ -161,16 +161,15 @@ void generateLibraryExport(List<String> namespaces) {
 
   writer.writeStringSync('// ignore_for_file: directives_ordering\n\n');
   for (final namespace in namespaces) {
-    final relativePath = folderForNamespace(namespace).substring(4);
-    writer.writeStringSync('''
-  export '$relativePath/callbacks.g.dart';
-  export '$relativePath/constants.g.dart';
-  export '$relativePath/enums.g.dart';
-  export '$relativePath/functions.g.dart';
-  export '$relativePath/structs.g.dart';\n
-''');
-  }
+    final directory = Directory(folderForNamespace(namespace));
 
+    final relativePath = folderForNamespace(namespace).substring(4);
+    for (final file in directory.listSync()) {
+      if (file.existsSync() && file.uri.toFilePath().endsWith('.dart')) {
+        writer.writeStringSync("  export '$relativePath/callbacks.g.dart';");
+      }
+    }
+  }
   writer.closeSync();
 }
 

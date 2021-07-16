@@ -68,12 +68,17 @@ const excludedImports = <String>[
 ];
 
 const excludedComInterfaces = <String>[
-  'IAVIEditStream', 'IAVIFile', 'IAVIPersistFile', 'IAVIStream',
-  'IAVIStreaming', 'IGetFrame', // media.multimedia
+  'Windows.Win32.System.Com.IUnknown', // generated manually w/ extra APIs
 
-  '_IManipulationEvents', 'IInertiaProcessor',
-  'IManipulationProcesor', // touchinput
-
-  'IPrintDialogCallback' /* simplest */,
-  'IPrintDialogServices', // windowsandmessaging
+  'Windows.Win32.Media.Multimedia.IAVIEditStream',
+  'Windows.Win32.Media.Multimedia.IAVIFile',
+  'Windows.Win32.Media.Multimedia.IAVIPersistFile',
+  'Windows.Win32.Media.Multimedia.IAVIStream',
+  'Windows.Win32.Media.Multimedia.IAVIStreaming',
+  'Windows.Win32.Media.Multimedia.IGetFrame',
+  'Windows.Win32.UI.TouchInput._IManipulationEvents',
+  'Windows.Win32.UI.TouchInput.IInertiaProcessor',
+  'Windows.Win32.UI.TouchInput.IManipulationProcessor',
+  // 'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogCallback' /* simplest */,
+  'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogServices',
 ];

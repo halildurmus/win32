@@ -7,6 +7,41 @@ import '../metadata/projection/data_classes.dart';
 import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
 
+String comFileHeader(TypeDef interface, String pathToLibSrc) {
+  final buffer = StringBuffer();
+
+  final interfaceName = interface.name.split('.').last;
+
+  buffer.write('''
+// $interfaceName.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '${pathToLibSrc}combase.dart';
+import '${pathToLibSrc}constants.dart';
+import '${pathToLibSrc}exceptions.dart';
+import '${pathToLibSrc}macros.dart';
+import '${pathToLibSrc}ole32.dart';
+import '${pathToLibSrc}structs.dart';
+import '${pathToLibSrc}structs.g.dart';
+import '${pathToLibSrc}utils.dart';
+''');
+
+  if (interface.interfaces.isNotEmpty) {
+    final parent = interface.interfaces.first.name;
+    buffer.writeln("\nimport '$pathToLibSrc${folderFromNamespace(parent)}/"
+        "${parent.split('.').last}.dart';");
+  }
+
+  return buffer.toString();
+}
+
 // TODO: Build and write list of imports
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
@@ -29,15 +64,18 @@ void generateInterfaceFiles(
       ..className =
           nameWithoutEncoding(interface.name.split('.').last.substring(1));
 
-    // TODO: Pass prefix to lib/src as an optional second parameter (e.g.
-    // '../../')
-    final dartClass = TypePrinter.printProjection(classProjection);
+    // Pass relative directory to lib/src as second parameter (e.g. '../../')
+    final prefix = '../' * (interface.name.split('.').length - 3);
+    final dartClass =
+        TypePrinter.printProjection(classProjection, excludeHeader: true);
 
     final classOutputFilename =
         nameWithoutEncoding(interface.name.split('.').last);
     final outputFile =
-        File('${directory.uri.toFilePath()}$classOutputFilename.dart');
-
-    outputFile.writeAsStringSync(dartClass);
+        File('${directory.uri.toFilePath()}$classOutputFilename.dart')
+            .openSync(mode: FileMode.writeOnly);
+    outputFile.writeStringSync(comFileHeader(interface, prefix));
+    outputFile.writeStringSync(dartClass);
+    outputFile.closeSync();
   }
 }
