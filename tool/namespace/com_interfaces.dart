@@ -7,6 +7,7 @@ import '../metadata/projection/data_classes.dart';
 import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
 
+// TODO: Remove some of these imports when system/com is projected
 String comFileHeader(TypeDef interface, String pathToLibSrc) {
   final buffer = StringBuffer();
 
@@ -24,8 +25,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '${pathToLibSrc}combase.dart';
+import '${pathToLibSrc}constants.dart';
 import '${pathToLibSrc}exceptions.dart';
 import '${pathToLibSrc}macros.dart';
+import '${pathToLibSrc}ole32.dart';
+import '${pathToLibSrc}structs.dart';
 import '${pathToLibSrc}utils.dart';
 ''');
 

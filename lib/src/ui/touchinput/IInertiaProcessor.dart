@@ -9,8 +9,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../../combase.dart';
+import '../../constants.dart';
 import '../../exceptions.dart';
 import '../../macros.dart';
+import '../../ole32.dart';
+import '../../structs.dart';
 import '../../utils.dart';
 
 import '../../system/com/IUnknown.dart';

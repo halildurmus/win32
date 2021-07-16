@@ -8,6 +8,7 @@
 
 import 'package:winmd/winmd.dart';
 
+import '../../namespace/exclusions.dart';
 import '../utils.dart';
 import 'classprojector.dart';
 import 'data_classes.dart';
@@ -358,7 +359,9 @@ void main() {
       buffer.writeln('/// {@category Struct}');
 
       final packingAlignment = typedef.classLayout.packingAlignment;
-      if (packingAlignment != null && packingAlignment > 0) {
+      if (packingAlignment != null &&
+          packingAlignment > 0 &&
+          !ignorePackingDirectives.contains(typedef.name)) {
         buffer.writeln('@Packed($packingAlignment)');
       }
       buffer.writeln('class $structName extends Struct {');

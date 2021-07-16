@@ -436,7 +436,6 @@ class AUDIOFILE_AF36WAVEFORMAT extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class AUXCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -943,7 +942,6 @@ class ECHOWAVEFILTER extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class EXBMINFOHEADER extends Struct {
   external BITMAPINFOHEADER bmi;
   @Uint32()
@@ -1256,7 +1254,6 @@ class IMAADPCMWAVEFORMAT extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class JOYCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -1521,7 +1518,6 @@ class JPEGINFOHEADER extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_CAPTURE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1530,7 +1526,6 @@ class MCI_DGV_CAPTURE_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_COPY_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1555,7 +1550,6 @@ class MCI_DGV_CUE_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_CUT_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1571,7 +1565,6 @@ class MCI_DGV_CUT_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_DELETE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1641,7 +1634,6 @@ class MCI_DGV_OPEN_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_PASTE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1669,7 +1661,6 @@ class MCI_DGV_QUALITY_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_RECORD_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1685,7 +1676,6 @@ class MCI_DGV_RECORD_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_RECT_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1703,7 +1693,6 @@ class MCI_DGV_RESERVE_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_RESTORE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1712,7 +1701,6 @@ class MCI_DGV_RESTORE_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_SAVE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1806,7 +1794,6 @@ class MCI_DGV_STEP_PARMS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MCI_DGV_UPDATE_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1882,7 +1869,6 @@ class MIDIHDR extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MIDIINCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -1947,7 +1933,6 @@ class MIDIINCAPS extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MIDIOUTCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -2057,7 +2042,6 @@ class MIDISTRMBUFFVER extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class MIXERCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -2539,7 +2523,6 @@ class WAVEFORMATEX extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class WAVEFORMATEXTENSIBLE extends Struct {
   external WAVEFORMATEX Format;
   @Uint32()
@@ -2569,7 +2552,6 @@ class WAVEHDR extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class WAVEINCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -2658,7 +2640,6 @@ class WAVEOPENDESC extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class WAVEOUTCAPS2 extends Struct {
   @Uint16()
   external int wMid;
@@ -2842,7 +2823,6 @@ class joyreghwsettings_tag extends Struct {
 }
 
 /// {@category Struct}
-@Packed(1)
 class joyreguservalues_tag extends Struct {
   @Uint32()
   external int dwTimeOut;
