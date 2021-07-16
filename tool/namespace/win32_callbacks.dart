@@ -46,6 +46,8 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
     writer.writeStringSync(callbacksFileHeader);
     writer.writeStringSync(
         "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
     for (final import in imports) {
       if (!excludedImports.contains(import)) {
         writer.writeStringSync(

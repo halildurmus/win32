@@ -15,18 +15,23 @@ final scope = MetadataStore.getWin32Scope();
 
 /// The metadata namespaces we're generating
 const namespaces = <String>[
-  'Windows.Win32.Media.Multimedia',
+  // Working on:
+  'Windows.Win32.System.SystemServices',
+  'Windows.Win32.UI.DisplayDevices',
+  'Windows.Win32.Graphics.DirectDraw',
 
   // Already working:
-  'Windows.Win32.Foundation',
-  'Windows.Win32.Graphics.Gdi',
-  'Windows.Win32.System.Console',
-  'Windows.Win32.System.SystemInformation',
-  'Windows.Win32.System.Time',
-  'Windows.Win32.UI.KeyboardAndMouseInput',
-  'Windows.Win32.UI.PointerInput',
-  'Windows.Win32.UI.TouchInput',
-  'Windows.Win32.UI.WindowsAndMessaging',
+  // 'Windows.Win32.Foundation',
+  // 'Windows.Win32.Graphics.Gdi',
+  // 'Windows.Win32.Media.Multimedia',
+  // 'Windows.Win32.System.Console',
+  // 'Windows.Win32.System.SystemInformation',
+  // 'Windows.Win32.System.Time',
+
+  // 'Windows.Win32.UI.KeyboardAndMouseInput',
+  // 'Windows.Win32.UI.PointerInput',
+  // 'Windows.Win32.UI.TouchInput',
+  // 'Windows.Win32.UI.WindowsAndMessaging',
 
   // Consider next:
   // 'Windows.Win32.System.Com',
@@ -83,6 +88,9 @@ bool supportsAmd64(TypeDef typedef) {
   return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
 }
 
+bool typedefisNotAnsi(TypeDef typedef) =>
+    !typedef.name.endsWith('A') || typedef.name.endsWith('DATA');
+
 void generateWin32Structs(String namespace) {
   // All structs that map to Dart structs. We ignore ANSI structs and structs
   // that are just GUID constants. We also ignore native values that are wrapped
@@ -91,10 +99,11 @@ void generateWin32Structs(String namespace) {
       .where((typedef) => typedef.name.startsWith(namespace))
       .where(typedefIsStruct)
       .where(structIsNotWrapper)
-      .where((typedef) => !typedef.name.endsWith('A'))
+      .where(typedefisNotAnsi)
       .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
+      .where((typedef) => typedef.fields.isNotEmpty)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 

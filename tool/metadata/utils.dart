@@ -5,13 +5,15 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
-/// should become `MessageBox`.
+/// should become `MessageBox`. Heuristic approach.
 String nameWithoutEncoding(String typeName) {
-  if (typeName.endsWith('W') || typeName.endsWith('A')) {
-    return typeName.substring(0, typeName.length - 1);
-  } else {
+  if (typeName.endsWith('DATA')) {
     return typeName;
   }
+  if (typeName.endsWith('W') || typeName.endsWith('A')) {
+    return typeName.substring(0, typeName.length - 1);
+  }
+  return typeName;
 }
 
 /// Take an input string and turn it into a multi-line doc comment.

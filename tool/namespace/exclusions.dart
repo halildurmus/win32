@@ -41,6 +41,7 @@ const excludedStructs = <String>[
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW', // ui.controls
   'Windows.Win32.Media.Multimedia.TIMEREVENT', // system.systemservices
   'Windows.Win32.Media.Multimedia.joyreghwconfig_tag', // devices.humaninterfacedevice
+  'Windows.Win32.Graphics.DirectDraw.DDHAL_GETHEAPALIGNMENTDATA', // devices.display
   ''
 ];
 
@@ -48,22 +49,38 @@ const excludedCallbacks = <String>[
   'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
   'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK', // ui.shell
+  'Windows.Win32.System.SystemServices.FREEOBJPROC', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.LPD3DENUMPIXELFORMATSCALLBACK', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.LPD3DENUMTEXTUREFORMATSCALLBACK', // graphics.directdraw
+  'Windows.Win32.System.SystemServices.PEXCEPTION_FILTER', // diagnostics.debug
+  'Windows.Win32.System.SystemServices.PFN_DrvAccumulateD3DDirtyRect', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.PFN_DrvAlphaBlend', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.PFN_DrvAssociateSharedSurface', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.PFN_DrvBitBlt', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.PFN_DrvCopyBits', // ui.displaydevices
+  'Windows.Win32.System.SystemServices.PFN_DrvDeriveSurface', // graphics.directdraw
+  'Windows.Win32.System.SystemServices.PFN_DrvDescribePixelFormat', // graphics.opengl
+  'Windows.Win32.System.SystemServices.', //
 ];
 
 const excludedImports = <String>[
+  'devices/display/structs.g.dart',
+  'devices/humaninterfacedevice/structs.g.dart',
   'globalization/structs.g.dart',
   'graphics/opengl/structs.g.dart',
   'media/audio/coreaudio/structs.g.dart',
-  'devices/humaninterfacedevice/structs.g.dart',
+  'storage/filesystem/callbacks.g.dart',
   'storage/structuredstorage/structs.g.dart',
   'system/com/structs.g.dart',
   'system/dataexchange/structs.g.dart',
+  'system/diagnostics/debug/structs.g.dart',
+  'system/kernel/structs.g.dart',
+  'system/power/structs.g.dart',
+  'system/rpc/structs.g.dart',
   'system/stationsanddesktops/structs.g.dart',
-  'system/systemservices/structs.g.dart',
   'ui/colorsystem/structs.g.dart',
   'ui/controls/callbacks.g.dart',
   'ui/controls/structs.g.dart',
-  'ui/displaydevices/structs.g.dart',
   'ui/textservices/structs.g.dart',
 ];
 
