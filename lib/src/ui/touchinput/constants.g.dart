@@ -14,6 +14,3 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
-const InertiaProcessor = '{ABB27087-4CE0-4E58-A0CB-E24DF96814BE}';
-const ManipulationProcessor = '{597D4FB0-47FD-4AFF-89B9-C6CFAE8CF08E}';

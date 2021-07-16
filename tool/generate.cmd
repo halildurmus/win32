@@ -22,7 +22,7 @@ echo.
 
 :format
 echo Formatting generated source code
-call dart format %~dp0..\lib\src
+call dart format %~dp0..\lib
 @REM call dart format %~dp0..\test\api_test.dart
 @REM call dart format %~dp0..\test\struct_test.dart
 @REM call dart format %~dp0..\test\com

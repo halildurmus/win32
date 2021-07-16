@@ -73,6 +73,12 @@ bool structIsNotWrapper(TypeDef typedef) => typedef.customAttributes
         attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
     .isEmpty;
 
+bool supportsAmd64(TypeDef typedef) {
+  final supportedArch = typedef.customAttributeAsBytes(
+      'Windows.Win32.Interop.SupportedArchitectureAttribute');
+  return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
+}
+
 void generateWin32Structs(String namespace) {
   // All structs that map to Dart structs. We ignore ANSI structs and structs
   // that are just GUID constants. We also ignore native values that are wrapped
@@ -92,10 +98,14 @@ void generateWin32Structs(String namespace) {
   generateStructsFile(file, structs);
 }
 
-bool supportsAmd64(TypeDef typedef) {
-  final supportedArch = typedef.customAttributeAsBytes(
-      'Windows.Win32.Interop.SupportedArchitectureAttribute');
-  return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
+void generateWin32Enums(String namespace) {
+  final enums = scope.enums
+      .where((typedef) => typedef.name.startsWith(namespace))
+      .toList()
+    ..sort((a, b) => a.name.compareTo(b.name));
+
+  final file = File('${folderForNamespace(namespace)}/enums.g.dart');
+  generateEnumsFile(file, enums);
 }
 
 bool typedefIsGuidConstant(TypeDef typedef) {
@@ -105,14 +115,12 @@ bool typedefIsGuidConstant(TypeDef typedef) {
   return inheritsValueType && guid != null;
 }
 
-void generateWin32Enums(String namespace) {
-  final enums = scope.enums
-      .where((typedef) => typedef.name.startsWith(namespace))
-      .toList()
-    ..sort((a, b) => a.name.compareTo(b.name));
+bool constantIsClassClsid(TypeDef typedef) {
+  final interfaceParts = typedef.name.split('.');
+  final finalPart = interfaceParts.removeLast();
+  final interface = '${interfaceParts.join('.')}.I$finalPart';
 
-  final file = File('${folderForNamespace(namespace)}/enums.g.dart');
-  generateEnumsFile(file, enums);
+  return typedef.scope.findTypeDef(interface) != null;
 }
 
 void generateWin32Constants(String namespace) {
@@ -127,6 +135,7 @@ void generateWin32Constants(String namespace) {
   final guidConstants = scope.typeDefs
       .where((typedef) => typedef.name.startsWith(namespace))
       .where(typedefIsGuidConstant)
+      .where((typedef) => !(constantIsClassClsid(typedef)))
       .toList();
   appendGuidConstantsFile(file, guidConstants);
 }
@@ -167,7 +176,7 @@ void generateLibraryExport(List<String> namespaces) {
     for (final file in directory.listSync()) {
       if (file.existsSync() && file.uri.toFilePath().endsWith('.dart')) {
         writer.writeStringSync(
-            "  export '$relativePath/${file.path.split('\\').last}';");
+            "  export '$relativePath/${file.path.split('\\').last}';\n");
       }
     }
   }
