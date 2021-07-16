@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:winmd/winmd.dart';
+
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`.
 String nameWithoutEncoding(String typeName) {
@@ -61,6 +63,16 @@ String relativePathToSrcDirectory(File file) {
   final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
 
   return '../' * pathDepth;
+}
+
+String importForWin32Type(TypeIdentifier identifier) {
+  if (identifier.type != null && identifier.type!.isDelegate) {
+    return '${folderFromNamespace(identifier.name)}/callbacks.g.dart';
+  } else if (identifier.type!.isInterface) {
+    return '${folderFromNamespace(identifier.name)}/${identifier.name.split(".").last}.dart';
+  } else {
+    return '${folderFromNamespace(identifier.name)}/structs.g.dart';
+  }
 }
 
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the

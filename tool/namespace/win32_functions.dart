@@ -49,16 +49,6 @@ String libraryFromDllName(String dllName) {
   }
 }
 
-String importForWin32Type(TypeIdentifier identifier) {
-  if (identifier.type != null && identifier.type!.isDelegate) {
-    return '${folderFromNamespace(identifier.name)}/callbacks.g.dart';
-  } else if (identifier.type!.isInterface) {
-    return '${folderFromNamespace(identifier.name)}/${identifier.name.split(".").last}.dart';
-  } else {
-    return '${folderFromNamespace(identifier.name)}/structs.g.dart';
-  }
-}
-
 /// Return all the imports needed for a function to be satisfied. For example,
 /// if one of the parameters is `Windows.Win32.Foundation.SYSTEMTIME`, we will
 /// add a needed import of `foundation/structs.g.dart`.

@@ -23,8 +23,6 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
-import 'callbacks.g.dart';
 ''';
 
 /// Return all the imports needed for a struct to be satisfied.
@@ -33,8 +31,7 @@ List<String> importsForStruct(TypeDef struct) {
 
   for (final field in struct.fields) {
     if (field.typeIdentifier.name.startsWith('Windows.Win32')) {
-      importList.add(
-          '${folderFromNamespace(field.typeIdentifier.name)}/structs.g.dart');
+      importList.add(importForWin32Type(field.typeIdentifier));
     }
   }
   return importList;

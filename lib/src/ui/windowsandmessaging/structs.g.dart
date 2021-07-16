@@ -14,13 +14,13 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
-import 'callbacks.g.dart';
 import '../../combase.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
+import '../../ui/windowsandmessaging/callbacks.g.dart';
 import '../../graphics/gdi/structs.g.dart';
+import '../../system/com/IUnknown.dart';
 
 /// {@category Struct}
 class ACCEL extends Struct {

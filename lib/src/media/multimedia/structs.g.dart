@@ -14,12 +14,11 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
-import 'callbacks.g.dart';
 import '../../combase.dart';
 import '../../guid.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../foundation/structs.g.dart';
+import '../../media/multimedia/callbacks.g.dart';
 import '../../media/multimedia/structs.g.dart';
 import '../../graphics/gdi/structs.g.dart';
 
