@@ -13,6 +13,7 @@ import 'package:ffi/ffi.dart';
 import 'enums.g.dart';
 
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../ui/keyboardandmouseinput/structs.g.dart';
 import '../../foundation/structs.g.dart';
 

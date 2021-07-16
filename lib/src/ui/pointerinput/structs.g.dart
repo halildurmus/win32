@@ -16,6 +16,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.g.dart';
+import '../../combase.dart';
 import '../../guid.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../ui/pointerinput/structs.g.dart';

@@ -16,6 +16,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.g.dart';
+import '../../combase.dart';
 import '../../guid.dart';
 import '../../foundation/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
@@ -887,7 +888,7 @@ class PRINTDLGEX extends Struct {
   @IntPtr()
   external int hInstance;
   external Pointer<Utf16> lpPrintTemplateName;
-  external Pointer lpCallback;
+  external COMObject lpCallback;
   @Uint32()
   external int nPropertyPages;
   external Pointer<IntPtr> lphPropertyPages;

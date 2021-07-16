@@ -70,11 +70,7 @@ const excludedImports = <String>[
 const excludedComInterfaces = <String>[
   'Windows.Win32.System.Com.IUnknown', // generated manually w/ extra APIs
 
-  'Windows.Win32.Media.Multimedia.IAVIEditStream',
-  'Windows.Win32.Media.Multimedia.IAVIPersistFile',
-  'Windows.Win32.Media.Multimedia.IAVIStreaming',
-  'Windows.Win32.UI.TouchInput._IManipulationEvents',
-  'Windows.Win32.UI.TouchInput.IManipulationProcessor',
+  'Windows.Win32.Media.Multimedia.IAVIPersistFile', // system.com
   'Windows.Win32.UI.WindowsAndMessaging.IPrintDialogServices', // ui.displaydevices
 ];
 

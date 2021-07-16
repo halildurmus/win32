@@ -13,6 +13,7 @@ import 'package:ffi/ffi.dart';
 import 'enums.g.dart';
 
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../foundation/structs.g.dart';
 import '../../graphics/gdi/callbacks.g.dart';
