@@ -18,15 +18,15 @@ const namespaces = <String>[
   'Windows.Win32.Media.Multimedia',
 
   // Already working:
-  'Windows.Win32.Foundation',
-  'Windows.Win32.Graphics.Gdi',
-  'Windows.Win32.System.Console',
-  'Windows.Win32.System.SystemInformation',
-  'Windows.Win32.System.Time',
-  'Windows.Win32.UI.KeyboardAndMouseInput',
-  'Windows.Win32.UI.PointerInput',
-  'Windows.Win32.UI.TouchInput',
-  'Windows.Win32.UI.WindowsAndMessaging',
+  // 'Windows.Win32.Foundation',
+  // 'Windows.Win32.Graphics.Gdi',
+  // 'Windows.Win32.System.Console',
+  // 'Windows.Win32.System.SystemInformation',
+  // 'Windows.Win32.System.Time',
+  // 'Windows.Win32.UI.KeyboardAndMouseInput',
+  // 'Windows.Win32.UI.PointerInput',
+  // 'Windows.Win32.UI.TouchInput',
+  // 'Windows.Win32.UI.WindowsAndMessaging',
 
   // Consider next:
   // 'Windows.Win32.System.Com',

@@ -231,6 +231,8 @@ class TypeProjector {
       // Is it a callback?
       if (typeIdentifier.type!.isDelegate) {
         return 'Pointer<NativeFunction<$win32Type>>';
+      } else if (typeIdentifier.type!.isInterface) {
+        return 'COMObject';
       } else {
         // TODO: Consider using typedef aliases to skip this step
         // Convert from DWORD to Uint32 (or similar)

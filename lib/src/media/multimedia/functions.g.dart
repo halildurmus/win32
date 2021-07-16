@@ -13,12 +13,16 @@ import 'package:ffi/ffi.dart';
 import 'enums.g.dart';
 
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../media/multimedia/structs.g.dart';
 import '../../foundation/structs.g.dart';
 import '../../media/multimedia/callbacks.g.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../ui/windowsandmessaging/structs.g.dart';
 import '../../foundation/callbacks.g.dart';
+import '../../media/multimedia/IAVIFile.dart';
+import '../../media/multimedia/IAVIStream.dart';
+import '../../media/multimedia/IGetFrame.dart';
 
 // -----------------------------------------------------------------------
 // WINMM.dll
@@ -1900,27 +1904,27 @@ int AVIClearClipboard() => _AVIClearClipboard();
 late final _AVIClearClipboard = _avifil32
     .lookupFunction<Int32 Function(), int Function()>('AVIClearClipboard');
 
-int AVIFileAddRef(IAVIFile pfile) => _AVIFileAddRef(pfile);
+int AVIFileAddRef(COMObject pfile) => _AVIFileAddRef(pfile);
 
 late final _AVIFileAddRef = _avifil32.lookupFunction<
-    Uint32 Function(IAVIFile pfile),
-    int Function(IAVIFile pfile)>('AVIFileAddRef');
+    Uint32 Function(COMObject pfile),
+    int Function(COMObject pfile)>('AVIFileAddRef');
 
-int AVIFileCreateStream(IAVIFile pfile, Pointer<IAVIStream> ppavi,
+int AVIFileCreateStream(COMObject pfile, Pointer<COMObject> ppavi,
         Pointer<AVISTREAMINFO> psi) =>
     _AVIFileCreateStream(pfile, ppavi, psi);
 
 late final _AVIFileCreateStream = _avifil32.lookupFunction<
     Int32 Function(
-        IAVIFile pfile, Pointer<IAVIStream> ppavi, Pointer<AVISTREAMINFO> psi),
-    int Function(IAVIFile pfile, Pointer<IAVIStream> ppavi,
+        COMObject pfile, Pointer<COMObject> ppavi, Pointer<AVISTREAMINFO> psi),
+    int Function(COMObject pfile, Pointer<COMObject> ppavi,
         Pointer<AVISTREAMINFO> psi)>('AVIFileCreateStreamW');
 
-int AVIFileEndRecord(IAVIFile pfile) => _AVIFileEndRecord(pfile);
+int AVIFileEndRecord(COMObject pfile) => _AVIFileEndRecord(pfile);
 
 late final _AVIFileEndRecord = _avifil32.lookupFunction<
-    Int32 Function(IAVIFile pfile),
-    int Function(IAVIFile pfile)>('AVIFileEndRecord');
+    Int32 Function(COMObject pfile),
+    int Function(COMObject pfile)>('AVIFileEndRecord');
 
 void AVIFileExit() => _AVIFileExit();
 
@@ -1928,116 +1932,116 @@ late final _AVIFileExit =
     _avifil32.lookupFunction<Void Function(), void Function()>('AVIFileExit');
 
 int AVIFileGetStream(
-        IAVIFile pfile, Pointer<IAVIStream> ppavi, int fccType, int lParam) =>
+        COMObject pfile, Pointer<COMObject> ppavi, int fccType, int lParam) =>
     _AVIFileGetStream(pfile, ppavi, fccType, lParam);
 
 late final _AVIFileGetStream = _avifil32.lookupFunction<
-    Int32 Function(IAVIFile pfile, Pointer<IAVIStream> ppavi, Uint32 fccType,
+    Int32 Function(COMObject pfile, Pointer<COMObject> ppavi, Uint32 fccType,
         Int32 lParam),
-    int Function(IAVIFile pfile, Pointer<IAVIStream> ppavi, int fccType,
+    int Function(COMObject pfile, Pointer<COMObject> ppavi, int fccType,
         int lParam)>('AVIFileGetStream');
 
-int AVIFileInfo(IAVIFile pfile, Pointer<AVIFILEINFO> pfi, int lSize) =>
+int AVIFileInfo(COMObject pfile, Pointer<AVIFILEINFO> pfi, int lSize) =>
     _AVIFileInfo(pfile, pfi, lSize);
 
 late final _AVIFileInfo = _avifil32.lookupFunction<
-    Int32 Function(IAVIFile pfile, Pointer<AVIFILEINFO> pfi, Int32 lSize),
+    Int32 Function(COMObject pfile, Pointer<AVIFILEINFO> pfi, Int32 lSize),
     int Function(
-        IAVIFile pfile, Pointer<AVIFILEINFO> pfi, int lSize)>('AVIFileInfoW');
+        COMObject pfile, Pointer<AVIFILEINFO> pfi, int lSize)>('AVIFileInfoW');
 
 void AVIFileInit() => _AVIFileInit();
 
 late final _AVIFileInit =
     _avifil32.lookupFunction<Void Function(), void Function()>('AVIFileInit');
 
-int AVIFileOpen(Pointer<IAVIFile> ppfile, Pointer<Utf16> szFile, int uMode,
+int AVIFileOpen(Pointer<COMObject> ppfile, Pointer<Utf16> szFile, int uMode,
         Pointer<GUID> lpHandler) =>
     _AVIFileOpen(ppfile, szFile, uMode, lpHandler);
 
 late final _AVIFileOpen = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIFile> ppfile, Pointer<Utf16> szFile,
+    Int32 Function(Pointer<COMObject> ppfile, Pointer<Utf16> szFile,
         Uint32 uMode, Pointer<GUID> lpHandler),
-    int Function(Pointer<IAVIFile> ppfile, Pointer<Utf16> szFile, int uMode,
+    int Function(Pointer<COMObject> ppfile, Pointer<Utf16> szFile, int uMode,
         Pointer<GUID> lpHandler)>('AVIFileOpenW');
 
 int AVIFileReadData(
-        IAVIFile pfile, int ckid, Pointer lpData, Pointer<Int32> lpcbData) =>
+        COMObject pfile, int ckid, Pointer lpData, Pointer<Int32> lpcbData) =>
     _AVIFileReadData(pfile, ckid, lpData, lpcbData);
 
 late final _AVIFileReadData = _avifil32.lookupFunction<
     Int32 Function(
-        IAVIFile pfile, Uint32 ckid, Pointer lpData, Pointer<Int32> lpcbData),
-    int Function(IAVIFile pfile, int ckid, Pointer lpData,
+        COMObject pfile, Uint32 ckid, Pointer lpData, Pointer<Int32> lpcbData),
+    int Function(COMObject pfile, int ckid, Pointer lpData,
         Pointer<Int32> lpcbData)>('AVIFileReadData');
 
-int AVIFileRelease(IAVIFile pfile) => _AVIFileRelease(pfile);
+int AVIFileRelease(COMObject pfile) => _AVIFileRelease(pfile);
 
 late final _AVIFileRelease = _avifil32.lookupFunction<
-    Uint32 Function(IAVIFile pfile),
-    int Function(IAVIFile pfile)>('AVIFileRelease');
+    Uint32 Function(COMObject pfile),
+    int Function(COMObject pfile)>('AVIFileRelease');
 
-int AVIFileWriteData(IAVIFile pfile, int ckid, Pointer lpData, int cbData) =>
+int AVIFileWriteData(COMObject pfile, int ckid, Pointer lpData, int cbData) =>
     _AVIFileWriteData(pfile, ckid, lpData, cbData);
 
 late final _AVIFileWriteData = _avifil32.lookupFunction<
-    Int32 Function(IAVIFile pfile, Uint32 ckid, Pointer lpData, Int32 cbData),
-    int Function(IAVIFile pfile, int ckid, Pointer lpData,
+    Int32 Function(COMObject pfile, Uint32 ckid, Pointer lpData, Int32 cbData),
+    int Function(COMObject pfile, int ckid, Pointer lpData,
         int cbData)>('AVIFileWriteData');
 
-int AVIGetFromClipboard(Pointer<IAVIFile> lppf) => _AVIGetFromClipboard(lppf);
+int AVIGetFromClipboard(Pointer<COMObject> lppf) => _AVIGetFromClipboard(lppf);
 
 late final _AVIGetFromClipboard = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIFile> lppf),
-    int Function(Pointer<IAVIFile> lppf)>('AVIGetFromClipboard');
+    Int32 Function(Pointer<COMObject> lppf),
+    int Function(Pointer<COMObject> lppf)>('AVIGetFromClipboard');
 
 int AVIMakeCompressedStream(
-        Pointer<IAVIStream> ppsCompressed,
-        IAVIStream ppsSource,
+        Pointer<COMObject> ppsCompressed,
+        COMObject ppsSource,
         Pointer<AVICOMPRESSOPTIONS> lpOptions,
         Pointer<GUID> pclsidHandler) =>
     _AVIMakeCompressedStream(
         ppsCompressed, ppsSource, lpOptions, pclsidHandler);
 
 late final _AVIMakeCompressedStream = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIStream> ppsCompressed, IAVIStream ppsSource,
+    Int32 Function(Pointer<COMObject> ppsCompressed, COMObject ppsSource,
         Pointer<AVICOMPRESSOPTIONS> lpOptions, Pointer<GUID> pclsidHandler),
     int Function(
-        Pointer<IAVIStream> ppsCompressed,
-        IAVIStream ppsSource,
+        Pointer<COMObject> ppsCompressed,
+        COMObject ppsSource,
         Pointer<AVICOMPRESSOPTIONS> lpOptions,
         Pointer<GUID> pclsidHandler)>('AVIMakeCompressedStream');
 
-int AVIMakeFileFromStreams(Pointer<IAVIFile> ppfile, int nStreams,
-        Pointer<IAVIStream> papStreams) =>
+int AVIMakeFileFromStreams(Pointer<COMObject> ppfile, int nStreams,
+        Pointer<COMObject> papStreams) =>
     _AVIMakeFileFromStreams(ppfile, nStreams, papStreams);
 
 late final _AVIMakeFileFromStreams = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIFile> ppfile, Int32 nStreams,
-        Pointer<IAVIStream> papStreams),
-    int Function(Pointer<IAVIFile> ppfile, int nStreams,
-        Pointer<IAVIStream> papStreams)>('AVIMakeFileFromStreams');
+    Int32 Function(Pointer<COMObject> ppfile, Int32 nStreams,
+        Pointer<COMObject> papStreams),
+    int Function(Pointer<COMObject> ppfile, int nStreams,
+        Pointer<COMObject> papStreams)>('AVIMakeFileFromStreams');
 
 int AVIMakeStreamFromClipboard(
-        int cfFormat, int hGlobal, Pointer<IAVIStream> ppstream) =>
+        int cfFormat, int hGlobal, Pointer<COMObject> ppstream) =>
     _AVIMakeStreamFromClipboard(cfFormat, hGlobal, ppstream);
 
 late final _AVIMakeStreamFromClipboard = _avifil32.lookupFunction<
     Int32 Function(
-        Uint32 cfFormat, IntPtr hGlobal, Pointer<IAVIStream> ppstream),
+        Uint32 cfFormat, IntPtr hGlobal, Pointer<COMObject> ppstream),
     int Function(int cfFormat, int hGlobal,
-        Pointer<IAVIStream> ppstream)>('AVIMakeStreamFromClipboard');
+        Pointer<COMObject> ppstream)>('AVIMakeStreamFromClipboard');
 
-int AVIPutFileOnClipboard(IAVIFile pf) => _AVIPutFileOnClipboard(pf);
+int AVIPutFileOnClipboard(COMObject pf) => _AVIPutFileOnClipboard(pf);
 
 late final _AVIPutFileOnClipboard = _avifil32.lookupFunction<
-    Int32 Function(IAVIFile pf),
-    int Function(IAVIFile pf)>('AVIPutFileOnClipboard');
+    Int32 Function(COMObject pf),
+    int Function(COMObject pf)>('AVIPutFileOnClipboard');
 
 int AVISaveOptions(
         int hwnd,
         int uiFlags,
         int nStreams,
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions) =>
     _AVISaveOptions(hwnd, uiFlags, nStreams, ppavi, plpOptions);
 
@@ -2046,9 +2050,9 @@ late final _AVISaveOptions = _avifil32.lookupFunction<
         IntPtr hwnd,
         Uint32 uiFlags,
         Int32 nStreams,
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions),
-    int Function(int hwnd, int uiFlags, int nStreams, Pointer<IAVIStream> ppavi,
+    int Function(int hwnd, int uiFlags, int nStreams, Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions)>('AVISaveOptions');
 
 int AVISaveOptionsFree(
@@ -2066,7 +2070,7 @@ int AVISaveV(
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         int nStreams,
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions) =>
     _AVISaveV(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions);
 
@@ -2076,14 +2080,14 @@ late final _AVISaveV = _avifil32.lookupFunction<
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         Int32 nStreams,
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions),
     int Function(
         Pointer<Utf16> szFile,
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         int nStreams,
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Pointer<AVICOMPRESSOPTIONS>> plpOptions)>('AVISaveVW');
 
 int AVISave(
@@ -2091,7 +2095,7 @@ int AVISave(
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         int nStreams,
-        IAVIStream pfile,
+        COMObject pfile,
         Pointer<AVICOMPRESSOPTIONS> lpOptions) =>
     _AVISave(szFile, pclsidHandler, lpfnCallback, nStreams, pfile, lpOptions);
 
@@ -2101,112 +2105,112 @@ late final _AVISave = _avifil32.lookupFunction<
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         Int32 nStreams,
-        IAVIStream pfile,
+        COMObject pfile,
         Pointer<AVICOMPRESSOPTIONS> lpOptions),
     int Function(
         Pointer<Utf16> szFile,
         Pointer<GUID> pclsidHandler,
         Pointer<NativeFunction<AVISAVECALLBACK>> lpfnCallback,
         int nStreams,
-        IAVIStream pfile,
+        COMObject pfile,
         Pointer<AVICOMPRESSOPTIONS> lpOptions)>('AVISaveW');
 
-int AVIStreamAddRef(IAVIStream pavi) => _AVIStreamAddRef(pavi);
+int AVIStreamAddRef(COMObject pavi) => _AVIStreamAddRef(pavi);
 
 late final _AVIStreamAddRef = _avifil32.lookupFunction<
-    Uint32 Function(IAVIStream pavi),
-    int Function(IAVIStream pavi)>('AVIStreamAddRef');
+    Uint32 Function(COMObject pavi),
+    int Function(COMObject pavi)>('AVIStreamAddRef');
 
-int AVIStreamBeginStreaming(IAVIStream pavi, int lStart, int lEnd, int lRate) =>
+int AVIStreamBeginStreaming(COMObject pavi, int lStart, int lEnd, int lRate) =>
     _AVIStreamBeginStreaming(pavi, lStart, lEnd, lRate);
 
 late final _AVIStreamBeginStreaming = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Int32 lStart, Int32 lEnd, Int32 lRate),
-    int Function(IAVIStream pavi, int lStart, int lEnd,
+    Int32 Function(COMObject pavi, Int32 lStart, Int32 lEnd, Int32 lRate),
+    int Function(COMObject pavi, int lStart, int lEnd,
         int lRate)>('AVIStreamBeginStreaming');
 
-int AVIStreamCreate(Pointer<IAVIStream> ppavi, int lParam1, int lParam2,
+int AVIStreamCreate(Pointer<COMObject> ppavi, int lParam1, int lParam2,
         Pointer<GUID> pclsidHandler) =>
     _AVIStreamCreate(ppavi, lParam1, lParam2, pclsidHandler);
 
 late final _AVIStreamCreate = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIStream> ppavi, Int32 lParam1, Int32 lParam2,
+    Int32 Function(Pointer<COMObject> ppavi, Int32 lParam1, Int32 lParam2,
         Pointer<GUID> pclsidHandler),
-    int Function(Pointer<IAVIStream> ppavi, int lParam1, int lParam2,
+    int Function(Pointer<COMObject> ppavi, int lParam1, int lParam2,
         Pointer<GUID> pclsidHandler)>('AVIStreamCreate');
 
-int AVIStreamEndStreaming(IAVIStream pavi) => _AVIStreamEndStreaming(pavi);
+int AVIStreamEndStreaming(COMObject pavi) => _AVIStreamEndStreaming(pavi);
 
 late final _AVIStreamEndStreaming = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi),
-    int Function(IAVIStream pavi)>('AVIStreamEndStreaming');
+    Int32 Function(COMObject pavi),
+    int Function(COMObject pavi)>('AVIStreamEndStreaming');
 
-int AVIStreamFindSample(IAVIStream pavi, int lPos, int lFlags) =>
+int AVIStreamFindSample(COMObject pavi, int lPos, int lFlags) =>
     _AVIStreamFindSample(pavi, lPos, lFlags);
 
 late final _AVIStreamFindSample = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Int32 lPos, Int32 lFlags),
-    int Function(IAVIStream pavi, int lPos, int lFlags)>('AVIStreamFindSample');
+    Int32 Function(COMObject pavi, Int32 lPos, Int32 lFlags),
+    int Function(COMObject pavi, int lPos, int lFlags)>('AVIStreamFindSample');
 
-Pointer AVIStreamGetFrame(IGetFrame pg, int lPos) =>
+Pointer AVIStreamGetFrame(COMObject pg, int lPos) =>
     _AVIStreamGetFrame(pg, lPos);
 
 late final _AVIStreamGetFrame = _avifil32.lookupFunction<
-    Pointer Function(IGetFrame pg, Int32 lPos),
-    Pointer Function(IGetFrame pg, int lPos)>('AVIStreamGetFrame');
+    Pointer Function(COMObject pg, Int32 lPos),
+    Pointer Function(COMObject pg, int lPos)>('AVIStreamGetFrame');
 
-int AVIStreamGetFrameClose(IGetFrame pg) => _AVIStreamGetFrameClose(pg);
+int AVIStreamGetFrameClose(COMObject pg) => _AVIStreamGetFrameClose(pg);
 
 late final _AVIStreamGetFrameClose = _avifil32.lookupFunction<
-    Int32 Function(IGetFrame pg),
-    int Function(IGetFrame pg)>('AVIStreamGetFrameClose');
+    Int32 Function(COMObject pg),
+    int Function(COMObject pg)>('AVIStreamGetFrameClose');
 
-IGetFrame AVIStreamGetFrameOpen(
-        IAVIStream pavi, Pointer<BITMAPINFOHEADER> lpbiWanted) =>
+COMObject AVIStreamGetFrameOpen(
+        COMObject pavi, Pointer<BITMAPINFOHEADER> lpbiWanted) =>
     _AVIStreamGetFrameOpen(pavi, lpbiWanted);
 
 late final _AVIStreamGetFrameOpen = _avifil32.lookupFunction<
-    IGetFrame Function(IAVIStream pavi, Pointer<BITMAPINFOHEADER> lpbiWanted),
-    IGetFrame Function(IAVIStream pavi,
+    COMObject Function(COMObject pavi, Pointer<BITMAPINFOHEADER> lpbiWanted),
+    COMObject Function(COMObject pavi,
         Pointer<BITMAPINFOHEADER> lpbiWanted)>('AVIStreamGetFrameOpen');
 
-int AVIStreamInfo(IAVIStream pavi, Pointer<AVISTREAMINFO> psi, int lSize) =>
+int AVIStreamInfo(COMObject pavi, Pointer<AVISTREAMINFO> psi, int lSize) =>
     _AVIStreamInfo(pavi, psi, lSize);
 
 late final _AVIStreamInfo = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<AVISTREAMINFO> psi, Int32 lSize),
-    int Function(IAVIStream pavi, Pointer<AVISTREAMINFO> psi,
+    Int32 Function(COMObject pavi, Pointer<AVISTREAMINFO> psi, Int32 lSize),
+    int Function(COMObject pavi, Pointer<AVISTREAMINFO> psi,
         int lSize)>('AVIStreamInfoW');
 
-int AVIStreamLength(IAVIStream pavi) => _AVIStreamLength(pavi);
+int AVIStreamLength(COMObject pavi) => _AVIStreamLength(pavi);
 
 late final _AVIStreamLength = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi),
-    int Function(IAVIStream pavi)>('AVIStreamLength');
+    Int32 Function(COMObject pavi),
+    int Function(COMObject pavi)>('AVIStreamLength');
 
-int AVIStreamOpenFromFile(Pointer<IAVIStream> ppavi, Pointer<Utf16> szFile,
+int AVIStreamOpenFromFile(Pointer<COMObject> ppavi, Pointer<Utf16> szFile,
         int fccType, int lParam, int mode, Pointer<GUID> pclsidHandler) =>
     _AVIStreamOpenFromFile(ppavi, szFile, fccType, lParam, mode, pclsidHandler);
 
 late final _AVIStreamOpenFromFile = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIStream> ppavi, Pointer<Utf16> szFile,
+    Int32 Function(Pointer<COMObject> ppavi, Pointer<Utf16> szFile,
         Uint32 fccType, Int32 lParam, Uint32 mode, Pointer<GUID> pclsidHandler),
     int Function(
-        Pointer<IAVIStream> ppavi,
+        Pointer<COMObject> ppavi,
         Pointer<Utf16> szFile,
         int fccType,
         int lParam,
         int mode,
         Pointer<GUID> pclsidHandler)>('AVIStreamOpenFromFileW');
 
-int AVIStreamRead(IAVIStream pavi, int lStart, int lSamples, Pointer lpBuffer,
+int AVIStreamRead(COMObject pavi, int lStart, int lSamples, Pointer lpBuffer,
         int cbBuffer, Pointer<Int32> plBytes, Pointer<Int32> plSamples) =>
     _AVIStreamRead(
         pavi, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples);
 
 late final _AVIStreamRead = _avifil32.lookupFunction<
     Int32 Function(
-        IAVIStream pavi,
+        COMObject pavi,
         Int32 lStart,
         Int32 lSamples,
         Pointer lpBuffer,
@@ -2214,7 +2218,7 @@ late final _AVIStreamRead = _avifil32.lookupFunction<
         Pointer<Int32> plBytes,
         Pointer<Int32> plSamples),
     int Function(
-        IAVIStream pavi,
+        COMObject pavi,
         int lStart,
         int lSamples,
         Pointer lpBuffer,
@@ -2223,63 +2227,62 @@ late final _AVIStreamRead = _avifil32.lookupFunction<
         Pointer<Int32> plSamples)>('AVIStreamRead');
 
 int AVIStreamReadData(
-        IAVIStream pavi, int fcc, Pointer lp, Pointer<Int32> lpcb) =>
+        COMObject pavi, int fcc, Pointer lp, Pointer<Int32> lpcb) =>
     _AVIStreamReadData(pavi, fcc, lp, lpcb);
 
 late final _AVIStreamReadData = _avifil32.lookupFunction<
-    Int32 Function(
-        IAVIStream pavi, Uint32 fcc, Pointer lp, Pointer<Int32> lpcb),
-    int Function(IAVIStream pavi, int fcc, Pointer lp,
+    Int32 Function(COMObject pavi, Uint32 fcc, Pointer lp, Pointer<Int32> lpcb),
+    int Function(COMObject pavi, int fcc, Pointer lp,
         Pointer<Int32> lpcb)>('AVIStreamReadData');
 
-int AVIStreamReadFormat(IAVIStream pavi, int lPos, Pointer lpFormat,
+int AVIStreamReadFormat(COMObject pavi, int lPos, Pointer lpFormat,
         Pointer<Int32> lpcbFormat) =>
     _AVIStreamReadFormat(pavi, lPos, lpFormat, lpcbFormat);
 
 late final _AVIStreamReadFormat = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Int32 lPos, Pointer lpFormat,
+    Int32 Function(COMObject pavi, Int32 lPos, Pointer lpFormat,
         Pointer<Int32> lpcbFormat),
-    int Function(IAVIStream pavi, int lPos, Pointer lpFormat,
+    int Function(COMObject pavi, int lPos, Pointer lpFormat,
         Pointer<Int32> lpcbFormat)>('AVIStreamReadFormat');
 
-int AVIStreamRelease(IAVIStream pavi) => _AVIStreamRelease(pavi);
+int AVIStreamRelease(COMObject pavi) => _AVIStreamRelease(pavi);
 
 late final _AVIStreamRelease = _avifil32.lookupFunction<
-    Uint32 Function(IAVIStream pavi),
-    int Function(IAVIStream pavi)>('AVIStreamRelease');
+    Uint32 Function(COMObject pavi),
+    int Function(COMObject pavi)>('AVIStreamRelease');
 
-int AVIStreamSampleToTime(IAVIStream pavi, int lSample) =>
+int AVIStreamSampleToTime(COMObject pavi, int lSample) =>
     _AVIStreamSampleToTime(pavi, lSample);
 
 late final _AVIStreamSampleToTime = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Int32 lSample),
-    int Function(IAVIStream pavi, int lSample)>('AVIStreamSampleToTime');
+    Int32 Function(COMObject pavi, Int32 lSample),
+    int Function(COMObject pavi, int lSample)>('AVIStreamSampleToTime');
 
 int AVIStreamSetFormat(
-        IAVIStream pavi, int lPos, Pointer lpFormat, int cbFormat) =>
+        COMObject pavi, int lPos, Pointer lpFormat, int cbFormat) =>
     _AVIStreamSetFormat(pavi, lPos, lpFormat, cbFormat);
 
 late final _AVIStreamSetFormat = _avifil32.lookupFunction<
     Int32 Function(
-        IAVIStream pavi, Int32 lPos, Pointer lpFormat, Int32 cbFormat),
-    int Function(IAVIStream pavi, int lPos, Pointer lpFormat,
+        COMObject pavi, Int32 lPos, Pointer lpFormat, Int32 cbFormat),
+    int Function(COMObject pavi, int lPos, Pointer lpFormat,
         int cbFormat)>('AVIStreamSetFormat');
 
-int AVIStreamStart(IAVIStream pavi) => _AVIStreamStart(pavi);
+int AVIStreamStart(COMObject pavi) => _AVIStreamStart(pavi);
 
 late final _AVIStreamStart = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi),
-    int Function(IAVIStream pavi)>('AVIStreamStart');
+    Int32 Function(COMObject pavi),
+    int Function(COMObject pavi)>('AVIStreamStart');
 
-int AVIStreamTimeToSample(IAVIStream pavi, int lTime) =>
+int AVIStreamTimeToSample(COMObject pavi, int lTime) =>
     _AVIStreamTimeToSample(pavi, lTime);
 
 late final _AVIStreamTimeToSample = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Int32 lTime),
-    int Function(IAVIStream pavi, int lTime)>('AVIStreamTimeToSample');
+    Int32 Function(COMObject pavi, Int32 lTime),
+    int Function(COMObject pavi, int lTime)>('AVIStreamTimeToSample');
 
 int AVIStreamWrite(
-        IAVIStream pavi,
+        COMObject pavi,
         int lStart,
         int lSamples,
         Pointer lpBuffer,
@@ -2292,7 +2295,7 @@ int AVIStreamWrite(
 
 late final _AVIStreamWrite = _avifil32.lookupFunction<
     Int32 Function(
-        IAVIStream pavi,
+        COMObject pavi,
         Int32 lStart,
         Int32 lSamples,
         Pointer lpBuffer,
@@ -2301,7 +2304,7 @@ late final _AVIStreamWrite = _avifil32.lookupFunction<
         Pointer<Int32> plSampWritten,
         Pointer<Int32> plBytesWritten),
     int Function(
-        IAVIStream pavi,
+        COMObject pavi,
         int lStart,
         int lSamples,
         Pointer lpBuffer,
@@ -2310,84 +2313,79 @@ late final _AVIStreamWrite = _avifil32.lookupFunction<
         Pointer<Int32> plSampWritten,
         Pointer<Int32> plBytesWritten)>('AVIStreamWrite');
 
-int AVIStreamWriteData(IAVIStream pavi, int fcc, Pointer lp, int cb) =>
+int AVIStreamWriteData(COMObject pavi, int fcc, Pointer lp, int cb) =>
     _AVIStreamWriteData(pavi, fcc, lp, cb);
 
 late final _AVIStreamWriteData = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Uint32 fcc, Pointer lp, Int32 cb),
+    Int32 Function(COMObject pavi, Uint32 fcc, Pointer lp, Int32 cb),
     int Function(
-        IAVIStream pavi, int fcc, Pointer lp, int cb)>('AVIStreamWriteData');
+        COMObject pavi, int fcc, Pointer lp, int cb)>('AVIStreamWriteData');
 
-int CreateEditableStream(
-        Pointer<IAVIStream> ppsEditable, IAVIStream psSource) =>
+int CreateEditableStream(Pointer<COMObject> ppsEditable, COMObject psSource) =>
     _CreateEditableStream(ppsEditable, psSource);
 
 late final _CreateEditableStream = _avifil32.lookupFunction<
-    Int32 Function(Pointer<IAVIStream> ppsEditable, IAVIStream psSource),
-    int Function(Pointer<IAVIStream> ppsEditable,
-        IAVIStream psSource)>('CreateEditableStream');
+    Int32 Function(Pointer<COMObject> ppsEditable, COMObject psSource),
+    int Function(Pointer<COMObject> ppsEditable,
+        COMObject psSource)>('CreateEditableStream');
 
-int EditStreamClone(IAVIStream pavi, Pointer<IAVIStream> ppResult) =>
+int EditStreamClone(COMObject pavi, Pointer<COMObject> ppResult) =>
     _EditStreamClone(pavi, ppResult);
 
 late final _EditStreamClone = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<IAVIStream> ppResult),
+    Int32 Function(COMObject pavi, Pointer<COMObject> ppResult),
     int Function(
-        IAVIStream pavi, Pointer<IAVIStream> ppResult)>('EditStreamClone');
+        COMObject pavi, Pointer<COMObject> ppResult)>('EditStreamClone');
 
-int EditStreamCopy(IAVIStream pavi, Pointer<Int32> plStart,
-        Pointer<Int32> plLength, Pointer<IAVIStream> ppResult) =>
+int EditStreamCopy(COMObject pavi, Pointer<Int32> plStart,
+        Pointer<Int32> plLength, Pointer<COMObject> ppResult) =>
     _EditStreamCopy(pavi, plStart, plLength, ppResult);
 
 late final _EditStreamCopy = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<Int32> plStart,
-        Pointer<Int32> plLength, Pointer<IAVIStream> ppResult),
+    Int32 Function(COMObject pavi, Pointer<Int32> plStart,
+        Pointer<Int32> plLength, Pointer<COMObject> ppResult),
     int Function(
-        IAVIStream pavi,
+        COMObject pavi,
         Pointer<Int32> plStart,
         Pointer<Int32> plLength,
-        Pointer<IAVIStream> ppResult)>('EditStreamCopy');
+        Pointer<COMObject> ppResult)>('EditStreamCopy');
 
-int EditStreamCut(IAVIStream pavi, Pointer<Int32> plStart,
-        Pointer<Int32> plLength, Pointer<IAVIStream> ppResult) =>
+int EditStreamCut(COMObject pavi, Pointer<Int32> plStart,
+        Pointer<Int32> plLength, Pointer<COMObject> ppResult) =>
     _EditStreamCut(pavi, plStart, plLength, ppResult);
 
 late final _EditStreamCut = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<Int32> plStart,
-        Pointer<Int32> plLength, Pointer<IAVIStream> ppResult),
-    int Function(
-        IAVIStream pavi,
-        Pointer<Int32> plStart,
-        Pointer<Int32> plLength,
-        Pointer<IAVIStream> ppResult)>('EditStreamCut');
+    Int32 Function(COMObject pavi, Pointer<Int32> plStart,
+        Pointer<Int32> plLength, Pointer<COMObject> ppResult),
+    int Function(COMObject pavi, Pointer<Int32> plStart,
+        Pointer<Int32> plLength, Pointer<COMObject> ppResult)>('EditStreamCut');
 
-int EditStreamPaste(IAVIStream pavi, Pointer<Int32> plPos,
-        Pointer<Int32> plLength, IAVIStream pstream, int lStart, int lEnd) =>
+int EditStreamPaste(COMObject pavi, Pointer<Int32> plPos,
+        Pointer<Int32> plLength, COMObject pstream, int lStart, int lEnd) =>
     _EditStreamPaste(pavi, plPos, plLength, pstream, lStart, lEnd);
 
 late final _EditStreamPaste = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<Int32> plPos,
-        Pointer<Int32> plLength, IAVIStream pstream, Int32 lStart, Int32 lEnd),
-    int Function(IAVIStream pavi, Pointer<Int32> plPos, Pointer<Int32> plLength,
-        IAVIStream pstream, int lStart, int lEnd)>('EditStreamPaste');
+    Int32 Function(COMObject pavi, Pointer<Int32> plPos,
+        Pointer<Int32> plLength, COMObject pstream, Int32 lStart, Int32 lEnd),
+    int Function(COMObject pavi, Pointer<Int32> plPos, Pointer<Int32> plLength,
+        COMObject pstream, int lStart, int lEnd)>('EditStreamPaste');
 
 int EditStreamSetInfo(
-        IAVIStream pavi, Pointer<AVISTREAMINFO> lpInfo, int cbInfo) =>
+        COMObject pavi, Pointer<AVISTREAMINFO> lpInfo, int cbInfo) =>
     _EditStreamSetInfo(pavi, lpInfo, cbInfo);
 
 late final _EditStreamSetInfo = _avifil32.lookupFunction<
-    Int32 Function(
-        IAVIStream pavi, Pointer<AVISTREAMINFO> lpInfo, Int32 cbInfo),
-    int Function(IAVIStream pavi, Pointer<AVISTREAMINFO> lpInfo,
+    Int32 Function(COMObject pavi, Pointer<AVISTREAMINFO> lpInfo, Int32 cbInfo),
+    int Function(COMObject pavi, Pointer<AVISTREAMINFO> lpInfo,
         int cbInfo)>('EditStreamSetInfoW');
 
-int EditStreamSetName(IAVIStream pavi, Pointer<Utf16> lpszName) =>
+int EditStreamSetName(COMObject pavi, Pointer<Utf16> lpszName) =>
     _EditStreamSetName(pavi, lpszName);
 
 late final _EditStreamSetName = _avifil32.lookupFunction<
-    Int32 Function(IAVIStream pavi, Pointer<Utf16> lpszName),
+    Int32 Function(COMObject pavi, Pointer<Utf16> lpszName),
     int Function(
-        IAVIStream pavi, Pointer<Utf16> lpszName)>('EditStreamSetNameW');
+        COMObject pavi, Pointer<Utf16> lpszName)>('EditStreamSetNameW');
 
 // -----------------------------------------------------------------------
 // AVICAP32.dll

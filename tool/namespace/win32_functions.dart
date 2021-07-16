@@ -49,6 +49,16 @@ String libraryFromDllName(String dllName) {
   }
 }
 
+String importForWin32Type(TypeIdentifier identifier) {
+  if (identifier.type != null && identifier.type!.isDelegate) {
+    return '${folderFromNamespace(identifier.name)}/callbacks.g.dart';
+  } else if (identifier.type!.isInterface) {
+    return '${folderFromNamespace(identifier.name)}/${identifier.name.split(".").last}.dart';
+  } else {
+    return '${folderFromNamespace(identifier.name)}/structs.g.dart';
+  }
+}
+
 /// Return all the imports needed for a function to be satisfied. For example,
 /// if one of the parameters is `Windows.Win32.Foundation.SYSTEMTIME`, we will
 /// add a needed import of `foundation/structs.g.dart`.
@@ -57,27 +67,13 @@ List<String> importsForFunction(Method function) {
 
   for (final param in function.parameters) {
     if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-      final paramType = param.typeIdentifier.type;
-
-      if (paramType != null && paramType.isDelegate) {
-        importList.add(
-            '${folderFromNamespace(param.typeIdentifier.name)}/callbacks.g.dart');
-      } else {
-        importList.add(
-            '${folderFromNamespace(param.typeIdentifier.name)}/structs.g.dart');
-      }
+      importList.add(importForWin32Type(param.typeIdentifier));
     }
 
     if (param.typeIdentifier.typeArg != null) {
       final paramTypeArg = param.typeIdentifier.typeArg!;
       if (paramTypeArg.name.startsWith('Windows.Win32')) {
-        if (paramTypeArg.type!.isDelegate) {
-          importList.add(
-              '${folderFromNamespace(paramTypeArg.name)}/callbacks.g.dart');
-        } else {
-          importList
-              .add('${folderFromNamespace(paramTypeArg.name)}/structs.g.dart');
-        }
+        importList.add(importForWin32Type(paramTypeArg));
       }
     }
   }
@@ -127,6 +123,8 @@ void generateFfiFile(File file, TypeDef typedef) {
   writer.writeStringSync(ffiFileHeader);
   writer.writeStringSync(
       "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+  writer.writeStringSync(
+      "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
       writer.writeStringSync(
