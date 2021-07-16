@@ -16,6 +16,7 @@ import '../../guid.dart';
 import '../../combase.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../foundation/structs.g.dart';
+import '../../ui/displaydevices/structs.g.dart';
 import '../../graphics/gdi/callbacks.g.dart';
 
 // -----------------------------------------------------------------------
@@ -212,6 +213,16 @@ late final _CreateCompatibleDC =
     _gdi32.lookupFunction<IntPtr Function(IntPtr hdc), int Function(int hdc)>(
         'CreateCompatibleDC');
 
+int CreateDC(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm) =>
+    _CreateDC(pwszDriver, pwszDevice, pszPort, pdm);
+
+late final _CreateDC = _gdi32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm),
+    int Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm)>('CreateDCW');
+
 int CreateDIBPatternBrush(int h, int iUsage) =>
     _CreateDIBPatternBrush(h, iUsage);
 
@@ -374,6 +385,16 @@ int CreateHatchBrush(int iHatch, int color) => _CreateHatchBrush(iHatch, color);
 late final _CreateHatchBrush = _gdi32.lookupFunction<
     IntPtr Function(Uint32 iHatch, Uint32 color),
     int Function(int iHatch, int color)>('CreateHatchBrush');
+
+int CreateIC(Pointer<Utf16> pszDriver, Pointer<Utf16> pszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm) =>
+    _CreateIC(pszDriver, pszDevice, pszPort, pdm);
+
+late final _CreateIC = _gdi32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> pszDriver, Pointer<Utf16> pszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm),
+    int Function(Pointer<Utf16> pszDriver, Pointer<Utf16> pszDevice,
+        Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm)>('CreateICW');
 
 int CreateMetaFile(Pointer<Utf16> pszFile) => _CreateMetaFile(pszFile);
 
@@ -2835,6 +2856,24 @@ late final _BeginPaint = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
     int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('BeginPaint');
 
+int ChangeDisplaySettingsEx(Pointer<Utf16> lpszDeviceName,
+        Pointer<DEVMODE> lpDevMode, int hwnd, int dwflags, Pointer lParam) =>
+    _ChangeDisplaySettingsEx(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
+
+late final _ChangeDisplaySettingsEx = _user32.lookupFunction<
+    Uint32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
+        IntPtr hwnd, Uint32 dwflags, Pointer lParam),
+    int Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
+        int hwnd, int dwflags, Pointer lParam)>('ChangeDisplaySettingsExW');
+
+int ChangeDisplaySettings(Pointer<DEVMODE> lpDevMode, int dwFlags) =>
+    _ChangeDisplaySettings(lpDevMode, dwFlags);
+
+late final _ChangeDisplaySettings = _user32.lookupFunction<
+    Uint32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+    int Function(
+        Pointer<DEVMODE> lpDevMode, int dwFlags)>('ChangeDisplaySettingsW');
+
 int ClientToScreen(int hWnd, Pointer<POINT> lpPoint) =>
     _ClientToScreen(hWnd, lpPoint);
 
@@ -2985,6 +3024,26 @@ late final _EnumDisplayMonitors = _user32.lookupFunction<
         Pointer<RECT> lprcClip,
         Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
         int dwData)>('EnumDisplayMonitors');
+
+int EnumDisplaySettingsEx(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode, int dwFlags) =>
+    _EnumDisplaySettingsEx(lpszDeviceName, iModeNum, lpDevMode, dwFlags);
+
+late final _EnumDisplaySettingsEx = _user32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+        Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode, int dwFlags)>('EnumDisplaySettingsExW');
+
+int EnumDisplaySettings(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode) =>
+    _EnumDisplaySettings(lpszDeviceName, iModeNum, lpDevMode);
+
+late final _EnumDisplaySettings = _user32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+        Pointer<DEVMODE> lpDevMode),
+    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode)>('EnumDisplaySettingsW');
 
 int EqualRect(Pointer<RECT> lprc1, Pointer<RECT> lprc2) =>
     _EqualRect(lprc1, lprc2);

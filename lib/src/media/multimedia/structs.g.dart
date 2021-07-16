@@ -21,6 +21,7 @@ import '../../foundation/structs.g.dart';
 import '../../media/multimedia/structs.g.dart';
 import '../../media/multimedia/callbacks.g.dart';
 import '../../graphics/gdi/structs.g.dart';
+import '../../system/systemservices/structs.g.dart';
 
 /// {@category Struct}
 @Packed(1)

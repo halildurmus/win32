@@ -18,6 +18,8 @@ import '../../combase.dart';
 import '../../guid.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../foundation/structs.g.dart';
+import '../../ui/displaydevices/structs.g.dart';
+import '../../system/systemservices/structs.g.dart';
 
 /// {@category Struct}
 class ABC extends Struct {
@@ -253,6 +255,31 @@ class DIBSECTION extends Struct {
   external int dshSection;
   @Uint32()
   external int dsOffset;
+}
+
+/// {@category Struct}
+class DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32()
+  external int Anonymous;
+  @Uint32()
+  external int colorEncoding;
+  @Uint32()
+  external int bitsPerColorChannel;
+}
+
+/// {@category Struct}
+class DISPLAYCONFIG_SDR_WHITE_LEVEL extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32()
+  external int SDRWhiteLevel;
+}
+
+/// {@category Struct}
+class DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32()
+  external int Anonymous;
 }
 
 /// {@category Struct}

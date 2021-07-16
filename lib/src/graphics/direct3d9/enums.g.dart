@@ -1,0 +1,871 @@
+/// {@category Enum}
+class D3DAUTHENTICATEDCHANNELTYPE {
+  static const D3DAUTHENTICATEDCHANNEL_D3D9 = 0x00000001;
+  static const D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE = 0x00000002;
+  static const D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE = 0x00000003;
+}
+
+/// {@category Enum}
+class D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE {
+  static const PROCESSIDTYPE_UNKNOWN = 0x00000000;
+  static const PROCESSIDTYPE_DWM = 0x00000001;
+  static const PROCESSIDTYPE_HANDLE = 0x00000002;
+}
+
+/// {@category Enum}
+class D3DBACKBUFFER_TYPE {
+  static const D3DBACKBUFFER_TYPE_MONO = 0x00000000;
+  static const D3DBACKBUFFER_TYPE_LEFT = 0x00000001;
+  static const D3DBACKBUFFER_TYPE_RIGHT = 0x00000002;
+  static const D3DBACKBUFFER_TYPE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DBASISTYPE {
+  static const D3DBASIS_BEZIER = 0x00000000;
+  static const D3DBASIS_BSPLINE = 0x00000001;
+  static const D3DBASIS_CATMULL_ROM = 0x00000002;
+  static const D3DBASIS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DBLEND {
+  static const D3DBLEND_ZERO = 0x00000001;
+  static const D3DBLEND_ONE = 0x00000002;
+  static const D3DBLEND_SRCCOLOR = 0x00000003;
+  static const D3DBLEND_INVSRCCOLOR = 0x00000004;
+  static const D3DBLEND_SRCALPHA = 0x00000005;
+  static const D3DBLEND_INVSRCALPHA = 0x00000006;
+  static const D3DBLEND_DESTALPHA = 0x00000007;
+  static const D3DBLEND_INVDESTALPHA = 0x00000008;
+  static const D3DBLEND_DESTCOLOR = 0x00000009;
+  static const D3DBLEND_INVDESTCOLOR = 0x0000000a;
+  static const D3DBLEND_SRCALPHASAT = 0x0000000b;
+  static const D3DBLEND_BOTHSRCALPHA = 0x0000000c;
+  static const D3DBLEND_BOTHINVSRCALPHA = 0x0000000d;
+  static const D3DBLEND_BLENDFACTOR = 0x0000000e;
+  static const D3DBLEND_INVBLENDFACTOR = 0x0000000f;
+  static const D3DBLEND_SRCCOLOR2 = 0x00000010;
+  static const D3DBLEND_INVSRCCOLOR2 = 0x00000011;
+  static const D3DBLEND_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DBLENDOP {
+  static const D3DBLENDOP_ADD = 0x00000001;
+  static const D3DBLENDOP_SUBTRACT = 0x00000002;
+  static const D3DBLENDOP_REVSUBTRACT = 0x00000003;
+  static const D3DBLENDOP_MIN = 0x00000004;
+  static const D3DBLENDOP_MAX = 0x00000005;
+  static const D3DBLENDOP_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DBUSTYPE {
+  static const D3DBUSTYPE_OTHER = 0x00000000;
+  static const D3DBUSTYPE_PCI = 0x00000001;
+  static const D3DBUSTYPE_PCIX = 0x00000002;
+  static const D3DBUSTYPE_PCIEXPRESS = 0x00000003;
+  static const D3DBUSTYPE_AGP = 0x00000004;
+  static const D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET = 0x00010000;
+  static const D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP = 0x00020000;
+  static const D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET =
+      0x00030000;
+  static const D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR = 0x00040000;
+  static const D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE =
+      0x00050000;
+  static const D3DBUSIMPL_MODIFIER_NON_STANDARD = 0x80000000;
+}
+
+/// {@category Enum}
+class D3DCMPFUNC {
+  static const D3DCMP_NEVER = 0x00000001;
+  static const D3DCMP_LESS = 0x00000002;
+  static const D3DCMP_EQUAL = 0x00000003;
+  static const D3DCMP_LESSEQUAL = 0x00000004;
+  static const D3DCMP_GREATER = 0x00000005;
+  static const D3DCMP_NOTEQUAL = 0x00000006;
+  static const D3DCMP_GREATEREQUAL = 0x00000007;
+  static const D3DCMP_ALWAYS = 0x00000008;
+  static const D3DCMP_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DCOMPOSERECTSOP {
+  static const D3DCOMPOSERECTS_COPY = 0x00000001;
+  static const D3DCOMPOSERECTS_OR = 0x00000002;
+  static const D3DCOMPOSERECTS_AND = 0x00000003;
+  static const D3DCOMPOSERECTS_NEG = 0x00000004;
+  static const D3DCOMPOSERECTS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DCUBEMAP_FACES {
+  static const D3DCUBEMAP_FACE_POSITIVE_X = 0x00000000;
+  static const D3DCUBEMAP_FACE_NEGATIVE_X = 0x00000001;
+  static const D3DCUBEMAP_FACE_POSITIVE_Y = 0x00000002;
+  static const D3DCUBEMAP_FACE_NEGATIVE_Y = 0x00000003;
+  static const D3DCUBEMAP_FACE_POSITIVE_Z = 0x00000004;
+  static const D3DCUBEMAP_FACE_NEGATIVE_Z = 0x00000005;
+  static const D3DCUBEMAP_FACE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DCULL {
+  static const D3DCULL_NONE = 0x00000001;
+  static const D3DCULL_CW = 0x00000002;
+  static const D3DCULL_CCW = 0x00000003;
+  static const D3DCULL_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DDEBUGMONITORTOKENS {
+  static const D3DDMT_ENABLE = 0x00000000;
+  static const D3DDMT_DISABLE = 0x00000001;
+  static const D3DDMT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DDECLMETHOD {
+  static const D3DDECLMETHOD_DEFAULT = 0x00000000;
+  static const D3DDECLMETHOD_PARTIALU = 0x00000001;
+  static const D3DDECLMETHOD_PARTIALV = 0x00000002;
+  static const D3DDECLMETHOD_CROSSUV = 0x00000003;
+  static const D3DDECLMETHOD_UV = 0x00000004;
+  static const D3DDECLMETHOD_LOOKUP = 0x00000005;
+  static const D3DDECLMETHOD_LOOKUPPRESAMPLED = 0x00000006;
+}
+
+/// {@category Enum}
+class D3DDECLTYPE {
+  static const D3DDECLTYPE_FLOAT1 = 0x00000000;
+  static const D3DDECLTYPE_FLOAT2 = 0x00000001;
+  static const D3DDECLTYPE_FLOAT3 = 0x00000002;
+  static const D3DDECLTYPE_FLOAT4 = 0x00000003;
+  static const D3DDECLTYPE_D3DCOLOR = 0x00000004;
+  static const D3DDECLTYPE_UBYTE4 = 0x00000005;
+  static const D3DDECLTYPE_SHORT2 = 0x00000006;
+  static const D3DDECLTYPE_SHORT4 = 0x00000007;
+  static const D3DDECLTYPE_UBYTE4N = 0x00000008;
+  static const D3DDECLTYPE_SHORT2N = 0x00000009;
+  static const D3DDECLTYPE_SHORT4N = 0x0000000a;
+  static const D3DDECLTYPE_USHORT2N = 0x0000000b;
+  static const D3DDECLTYPE_USHORT4N = 0x0000000c;
+  static const D3DDECLTYPE_UDEC3 = 0x0000000d;
+  static const D3DDECLTYPE_DEC3N = 0x0000000e;
+  static const D3DDECLTYPE_FLOAT16_2 = 0x0000000f;
+  static const D3DDECLTYPE_FLOAT16_4 = 0x00000010;
+  static const D3DDECLTYPE_UNUSED = 0x00000011;
+}
+
+/// {@category Enum}
+class D3DDECLUSAGE {
+  static const D3DDECLUSAGE_POSITION = 0x00000000;
+  static const D3DDECLUSAGE_BLENDWEIGHT = 0x00000001;
+  static const D3DDECLUSAGE_BLENDINDICES = 0x00000002;
+  static const D3DDECLUSAGE_NORMAL = 0x00000003;
+  static const D3DDECLUSAGE_PSIZE = 0x00000004;
+  static const D3DDECLUSAGE_TEXCOORD = 0x00000005;
+  static const D3DDECLUSAGE_TANGENT = 0x00000006;
+  static const D3DDECLUSAGE_BINORMAL = 0x00000007;
+  static const D3DDECLUSAGE_TESSFACTOR = 0x00000008;
+  static const D3DDECLUSAGE_POSITIONT = 0x00000009;
+  static const D3DDECLUSAGE_COLOR = 0x0000000a;
+  static const D3DDECLUSAGE_FOG = 0x0000000b;
+  static const D3DDECLUSAGE_DEPTH = 0x0000000c;
+  static const D3DDECLUSAGE_SAMPLE = 0x0000000d;
+}
+
+/// {@category Enum}
+class D3DDEGREETYPE {
+  static const D3DDEGREE_LINEAR = 0x00000001;
+  static const D3DDEGREE_QUADRATIC = 0x00000002;
+  static const D3DDEGREE_CUBIC = 0x00000003;
+  static const D3DDEGREE_QUINTIC = 0x00000005;
+  static const D3DDEGREE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DDEVTYPE {
+  static const D3DDEVTYPE_HAL = 0x00000001;
+  static const D3DDEVTYPE_REF = 0x00000002;
+  static const D3DDEVTYPE_SW = 0x00000003;
+  static const D3DDEVTYPE_NULLREF = 0x00000004;
+  static const D3DDEVTYPE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DDISPLAYROTATION {
+  static const D3DDISPLAYROTATION_IDENTITY = 0x00000001;
+  static const D3DDISPLAYROTATION_90 = 0x00000002;
+  static const D3DDISPLAYROTATION_180 = 0x00000003;
+  static const D3DDISPLAYROTATION_270 = 0x00000004;
+}
+
+/// {@category Enum}
+class D3DFILLMODE {
+  static const D3DFILL_POINT = 0x00000001;
+  static const D3DFILL_WIREFRAME = 0x00000002;
+  static const D3DFILL_SOLID = 0x00000003;
+  static const D3DFILL_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DFOGMODE {
+  static const D3DFOG_NONE = 0x00000000;
+  static const D3DFOG_EXP = 0x00000001;
+  static const D3DFOG_EXP2 = 0x00000002;
+  static const D3DFOG_LINEAR = 0x00000003;
+  static const D3DFOG_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DFORMAT {
+  static const D3DFMT_UNKNOWN = 0x00000000;
+  static const D3DFMT_R8G8B8 = 0x00000014;
+  static const D3DFMT_A8R8G8B8 = 0x00000015;
+  static const D3DFMT_X8R8G8B8 = 0x00000016;
+  static const D3DFMT_R5G6B5 = 0x00000017;
+  static const D3DFMT_X1R5G5B5 = 0x00000018;
+  static const D3DFMT_A1R5G5B5 = 0x00000019;
+  static const D3DFMT_A4R4G4B4 = 0x0000001a;
+  static const D3DFMT_R3G3B2 = 0x0000001b;
+  static const D3DFMT_A8 = 0x0000001c;
+  static const D3DFMT_A8R3G3B2 = 0x0000001d;
+  static const D3DFMT_X4R4G4B4 = 0x0000001e;
+  static const D3DFMT_A2B10G10R10 = 0x0000001f;
+  static const D3DFMT_A8B8G8R8 = 0x00000020;
+  static const D3DFMT_X8B8G8R8 = 0x00000021;
+  static const D3DFMT_G16R16 = 0x00000022;
+  static const D3DFMT_A2R10G10B10 = 0x00000023;
+  static const D3DFMT_A16B16G16R16 = 0x00000024;
+  static const D3DFMT_A8P8 = 0x00000028;
+  static const D3DFMT_P8 = 0x00000029;
+  static const D3DFMT_L8 = 0x00000032;
+  static const D3DFMT_A8L8 = 0x00000033;
+  static const D3DFMT_A4L4 = 0x00000034;
+  static const D3DFMT_V8U8 = 0x0000003c;
+  static const D3DFMT_L6V5U5 = 0x0000003d;
+  static const D3DFMT_X8L8V8U8 = 0x0000003e;
+  static const D3DFMT_Q8W8V8U8 = 0x0000003f;
+  static const D3DFMT_V16U16 = 0x00000040;
+  static const D3DFMT_A2W10V10U10 = 0x00000043;
+  static const D3DFMT_UYVY = 0x59565955;
+  static const D3DFMT_R8G8_B8G8 = 0x47424752;
+  static const D3DFMT_YUY2 = 0x32595559;
+  static const D3DFMT_G8R8_G8B8 = 0x42475247;
+  static const D3DFMT_DXT1 = 0x31545844;
+  static const D3DFMT_DXT2 = 0x32545844;
+  static const D3DFMT_DXT3 = 0x33545844;
+  static const D3DFMT_DXT4 = 0x34545844;
+  static const D3DFMT_DXT5 = 0x35545844;
+  static const D3DFMT_D16_LOCKABLE = 0x00000046;
+  static const D3DFMT_D32 = 0x00000047;
+  static const D3DFMT_D15S1 = 0x00000049;
+  static const D3DFMT_D24S8 = 0x0000004b;
+  static const D3DFMT_D24X8 = 0x0000004d;
+  static const D3DFMT_D24X4S4 = 0x0000004f;
+  static const D3DFMT_D16 = 0x00000050;
+  static const D3DFMT_D32F_LOCKABLE = 0x00000052;
+  static const D3DFMT_D24FS8 = 0x00000053;
+  static const D3DFMT_D32_LOCKABLE = 0x00000054;
+  static const D3DFMT_S8_LOCKABLE = 0x00000055;
+  static const D3DFMT_L16 = 0x00000051;
+  static const D3DFMT_VERTEXDATA = 0x00000064;
+  static const D3DFMT_INDEX16 = 0x00000065;
+  static const D3DFMT_INDEX32 = 0x00000066;
+  static const D3DFMT_Q16W16V16U16 = 0x0000006e;
+  static const D3DFMT_MULTI2_ARGB8 = 0x3154454d;
+  static const D3DFMT_R16F = 0x0000006f;
+  static const D3DFMT_G16R16F = 0x00000070;
+  static const D3DFMT_A16B16G16R16F = 0x00000071;
+  static const D3DFMT_R32F = 0x00000072;
+  static const D3DFMT_G32R32F = 0x00000073;
+  static const D3DFMT_A32B32G32R32F = 0x00000074;
+  static const D3DFMT_CxV8U8 = 0x00000075;
+  static const D3DFMT_A1 = 0x00000076;
+  static const D3DFMT_A2B10G10R10_XR_BIAS = 0x00000077;
+  static const D3DFMT_BINARYBUFFER = 0x000000c7;
+  static const D3DFMT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DLIGHTTYPE {
+  static const D3DLIGHT_POINT = 0x00000001;
+  static const D3DLIGHT_SPOT = 0x00000002;
+  static const D3DLIGHT_DIRECTIONAL = 0x00000003;
+  static const D3DLIGHT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DMATERIALCOLORSOURCE {
+  static const D3DMCS_MATERIAL = 0x00000000;
+  static const D3DMCS_COLOR1 = 0x00000001;
+  static const D3DMCS_COLOR2 = 0x00000002;
+  static const D3DMCS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DMULTISAMPLE_TYPE {
+  static const D3DMULTISAMPLE_NONE = 0x00000000;
+  static const D3DMULTISAMPLE_NONMASKABLE = 0x00000001;
+  static const D3DMULTISAMPLE_2_SAMPLES = 0x00000002;
+  static const D3DMULTISAMPLE_3_SAMPLES = 0x00000003;
+  static const D3DMULTISAMPLE_4_SAMPLES = 0x00000004;
+  static const D3DMULTISAMPLE_5_SAMPLES = 0x00000005;
+  static const D3DMULTISAMPLE_6_SAMPLES = 0x00000006;
+  static const D3DMULTISAMPLE_7_SAMPLES = 0x00000007;
+  static const D3DMULTISAMPLE_8_SAMPLES = 0x00000008;
+  static const D3DMULTISAMPLE_9_SAMPLES = 0x00000009;
+  static const D3DMULTISAMPLE_10_SAMPLES = 0x0000000a;
+  static const D3DMULTISAMPLE_11_SAMPLES = 0x0000000b;
+  static const D3DMULTISAMPLE_12_SAMPLES = 0x0000000c;
+  static const D3DMULTISAMPLE_13_SAMPLES = 0x0000000d;
+  static const D3DMULTISAMPLE_14_SAMPLES = 0x0000000e;
+  static const D3DMULTISAMPLE_15_SAMPLES = 0x0000000f;
+  static const D3DMULTISAMPLE_16_SAMPLES = 0x00000010;
+  static const D3DMULTISAMPLE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DPATCHEDGESTYLE {
+  static const D3DPATCHEDGE_DISCRETE = 0x00000000;
+  static const D3DPATCHEDGE_CONTINUOUS = 0x00000001;
+  static const D3DPATCHEDGE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DPOOL {
+  static const D3DPOOL_DEFAULT = 0x00000000;
+  static const D3DPOOL_MANAGED = 0x00000001;
+  static const D3DPOOL_SYSTEMMEM = 0x00000002;
+  static const D3DPOOL_SCRATCH = 0x00000003;
+  static const D3DPOOL_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DPRIMITIVETYPE {
+  static const D3DPT_POINTLIST = 0x00000001;
+  static const D3DPT_LINELIST = 0x00000002;
+  static const D3DPT_LINESTRIP = 0x00000003;
+  static const D3DPT_TRIANGLELIST = 0x00000004;
+  static const D3DPT_TRIANGLESTRIP = 0x00000005;
+  static const D3DPT_TRIANGLEFAN = 0x00000006;
+  static const D3DPT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DQUERYTYPE {
+  static const D3DQUERYTYPE_VCACHE = 0x00000004;
+  static const D3DQUERYTYPE_RESOURCEMANAGER = 0x00000005;
+  static const D3DQUERYTYPE_VERTEXSTATS = 0x00000006;
+  static const D3DQUERYTYPE_EVENT = 0x00000008;
+  static const D3DQUERYTYPE_OCCLUSION = 0x00000009;
+  static const D3DQUERYTYPE_TIMESTAMP = 0x0000000a;
+  static const D3DQUERYTYPE_TIMESTAMPDISJOINT = 0x0000000b;
+  static const D3DQUERYTYPE_TIMESTAMPFREQ = 0x0000000c;
+  static const D3DQUERYTYPE_PIPELINETIMINGS = 0x0000000d;
+  static const D3DQUERYTYPE_INTERFACETIMINGS = 0x0000000e;
+  static const D3DQUERYTYPE_VERTEXTIMINGS = 0x0000000f;
+  static const D3DQUERYTYPE_PIXELTIMINGS = 0x00000010;
+  static const D3DQUERYTYPE_BANDWIDTHTIMINGS = 0x00000011;
+  static const D3DQUERYTYPE_CACHEUTILIZATION = 0x00000012;
+  static const D3DQUERYTYPE_MEMORYPRESSURE = 0x00000013;
+}
+
+/// {@category Enum}
+class D3DRENDERSTATETYPE {
+  static const D3DRS_ZENABLE = 0x00000007;
+  static const D3DRS_FILLMODE = 0x00000008;
+  static const D3DRS_SHADEMODE = 0x00000009;
+  static const D3DRS_ZWRITEENABLE = 0x0000000e;
+  static const D3DRS_ALPHATESTENABLE = 0x0000000f;
+  static const D3DRS_LASTPIXEL = 0x00000010;
+  static const D3DRS_SRCBLEND = 0x00000013;
+  static const D3DRS_DESTBLEND = 0x00000014;
+  static const D3DRS_CULLMODE = 0x00000016;
+  static const D3DRS_ZFUNC = 0x00000017;
+  static const D3DRS_ALPHAREF = 0x00000018;
+  static const D3DRS_ALPHAFUNC = 0x00000019;
+  static const D3DRS_DITHERENABLE = 0x0000001a;
+  static const D3DRS_ALPHABLENDENABLE = 0x0000001b;
+  static const D3DRS_FOGENABLE = 0x0000001c;
+  static const D3DRS_SPECULARENABLE = 0x0000001d;
+  static const D3DRS_FOGCOLOR = 0x00000022;
+  static const D3DRS_FOGTABLEMODE = 0x00000023;
+  static const D3DRS_FOGSTART = 0x00000024;
+  static const D3DRS_FOGEND = 0x00000025;
+  static const D3DRS_FOGDENSITY = 0x00000026;
+  static const D3DRS_RANGEFOGENABLE = 0x00000030;
+  static const D3DRS_STENCILENABLE = 0x00000034;
+  static const D3DRS_STENCILFAIL = 0x00000035;
+  static const D3DRS_STENCILZFAIL = 0x00000036;
+  static const D3DRS_STENCILPASS = 0x00000037;
+  static const D3DRS_STENCILFUNC = 0x00000038;
+  static const D3DRS_STENCILREF = 0x00000039;
+  static const D3DRS_STENCILMASK = 0x0000003a;
+  static const D3DRS_STENCILWRITEMASK = 0x0000003b;
+  static const D3DRS_TEXTUREFACTOR = 0x0000003c;
+  static const D3DRS_WRAP0 = 0x00000080;
+  static const D3DRS_WRAP1 = 0x00000081;
+  static const D3DRS_WRAP2 = 0x00000082;
+  static const D3DRS_WRAP3 = 0x00000083;
+  static const D3DRS_WRAP4 = 0x00000084;
+  static const D3DRS_WRAP5 = 0x00000085;
+  static const D3DRS_WRAP6 = 0x00000086;
+  static const D3DRS_WRAP7 = 0x00000087;
+  static const D3DRS_CLIPPING = 0x00000088;
+  static const D3DRS_LIGHTING = 0x00000089;
+  static const D3DRS_AMBIENT = 0x0000008b;
+  static const D3DRS_FOGVERTEXMODE = 0x0000008c;
+  static const D3DRS_COLORVERTEX = 0x0000008d;
+  static const D3DRS_LOCALVIEWER = 0x0000008e;
+  static const D3DRS_NORMALIZENORMALS = 0x0000008f;
+  static const D3DRS_DIFFUSEMATERIALSOURCE = 0x00000091;
+  static const D3DRS_SPECULARMATERIALSOURCE = 0x00000092;
+  static const D3DRS_AMBIENTMATERIALSOURCE = 0x00000093;
+  static const D3DRS_EMISSIVEMATERIALSOURCE = 0x00000094;
+  static const D3DRS_VERTEXBLEND = 0x00000097;
+  static const D3DRS_CLIPPLANEENABLE = 0x00000098;
+  static const D3DRS_POINTSIZE = 0x0000009a;
+  static const D3DRS_POINTSIZE_MIN = 0x0000009b;
+  static const D3DRS_POINTSPRITEENABLE = 0x0000009c;
+  static const D3DRS_POINTSCALEENABLE = 0x0000009d;
+  static const D3DRS_POINTSCALE_A = 0x0000009e;
+  static const D3DRS_POINTSCALE_B = 0x0000009f;
+  static const D3DRS_POINTSCALE_C = 0x000000a0;
+  static const D3DRS_MULTISAMPLEANTIALIAS = 0x000000a1;
+  static const D3DRS_MULTISAMPLEMASK = 0x000000a2;
+  static const D3DRS_PATCHEDGESTYLE = 0x000000a3;
+  static const D3DRS_DEBUGMONITORTOKEN = 0x000000a5;
+  static const D3DRS_POINTSIZE_MAX = 0x000000a6;
+  static const D3DRS_INDEXEDVERTEXBLENDENABLE = 0x000000a7;
+  static const D3DRS_COLORWRITEENABLE = 0x000000a8;
+  static const D3DRS_TWEENFACTOR = 0x000000aa;
+  static const D3DRS_BLENDOP = 0x000000ab;
+  static const D3DRS_POSITIONDEGREE = 0x000000ac;
+  static const D3DRS_NORMALDEGREE = 0x000000ad;
+  static const D3DRS_SCISSORTESTENABLE = 0x000000ae;
+  static const D3DRS_SLOPESCALEDEPTHBIAS = 0x000000af;
+  static const D3DRS_ANTIALIASEDLINEENABLE = 0x000000b0;
+  static const D3DRS_MINTESSELLATIONLEVEL = 0x000000b2;
+  static const D3DRS_MAXTESSELLATIONLEVEL = 0x000000b3;
+  static const D3DRS_ADAPTIVETESS_X = 0x000000b4;
+  static const D3DRS_ADAPTIVETESS_Y = 0x000000b5;
+  static const D3DRS_ADAPTIVETESS_Z = 0x000000b6;
+  static const D3DRS_ADAPTIVETESS_W = 0x000000b7;
+  static const D3DRS_ENABLEADAPTIVETESSELLATION = 0x000000b8;
+  static const D3DRS_TWOSIDEDSTENCILMODE = 0x000000b9;
+  static const D3DRS_CCW_STENCILFAIL = 0x000000ba;
+  static const D3DRS_CCW_STENCILZFAIL = 0x000000bb;
+  static const D3DRS_CCW_STENCILPASS = 0x000000bc;
+  static const D3DRS_CCW_STENCILFUNC = 0x000000bd;
+  static const D3DRS_COLORWRITEENABLE1 = 0x000000be;
+  static const D3DRS_COLORWRITEENABLE2 = 0x000000bf;
+  static const D3DRS_COLORWRITEENABLE3 = 0x000000c0;
+  static const D3DRS_BLENDFACTOR = 0x000000c1;
+  static const D3DRS_SRGBWRITEENABLE = 0x000000c2;
+  static const D3DRS_DEPTHBIAS = 0x000000c3;
+  static const D3DRS_WRAP8 = 0x000000c6;
+  static const D3DRS_WRAP9 = 0x000000c7;
+  static const D3DRS_WRAP10 = 0x000000c8;
+  static const D3DRS_WRAP11 = 0x000000c9;
+  static const D3DRS_WRAP12 = 0x000000ca;
+  static const D3DRS_WRAP13 = 0x000000cb;
+  static const D3DRS_WRAP14 = 0x000000cc;
+  static const D3DRS_WRAP15 = 0x000000cd;
+  static const D3DRS_SEPARATEALPHABLENDENABLE = 0x000000ce;
+  static const D3DRS_SRCBLENDALPHA = 0x000000cf;
+  static const D3DRS_DESTBLENDALPHA = 0x000000d0;
+  static const D3DRS_BLENDOPALPHA = 0x000000d1;
+  static const D3DRS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DRESOURCETYPE {
+  static const D3DRTYPE_SURFACE = 0x00000001;
+  static const D3DRTYPE_VOLUME = 0x00000002;
+  static const D3DRTYPE_TEXTURE = 0x00000003;
+  static const D3DRTYPE_VOLUMETEXTURE = 0x00000004;
+  static const D3DRTYPE_CUBETEXTURE = 0x00000005;
+  static const D3DRTYPE_VERTEXBUFFER = 0x00000006;
+  static const D3DRTYPE_INDEXBUFFER = 0x00000007;
+  static const D3DRTYPE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSAMPLERSTATETYPE {
+  static const D3DSAMP_ADDRESSU = 0x00000001;
+  static const D3DSAMP_ADDRESSV = 0x00000002;
+  static const D3DSAMP_ADDRESSW = 0x00000003;
+  static const D3DSAMP_BORDERCOLOR = 0x00000004;
+  static const D3DSAMP_MAGFILTER = 0x00000005;
+  static const D3DSAMP_MINFILTER = 0x00000006;
+  static const D3DSAMP_MIPFILTER = 0x00000007;
+  static const D3DSAMP_MIPMAPLODBIAS = 0x00000008;
+  static const D3DSAMP_MAXMIPLEVEL = 0x00000009;
+  static const D3DSAMP_MAXANISOTROPY = 0x0000000a;
+  static const D3DSAMP_SRGBTEXTURE = 0x0000000b;
+  static const D3DSAMP_ELEMENTINDEX = 0x0000000c;
+  static const D3DSAMP_DMAPOFFSET = 0x0000000d;
+  static const D3DSAMP_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSAMPLER_TEXTURE_TYPE {
+  static const D3DSTT_UNKNOWN = 0x00000000;
+  static const D3DSTT_2D = 0x10000000;
+  static const D3DSTT_CUBE = 0x18000000;
+  static const D3DSTT_VOLUME = 0x20000000;
+  static const D3DSTT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSCANLINEORDERING {
+  static const D3DSCANLINEORDERING_UNKNOWN = 0x00000000;
+  static const D3DSCANLINEORDERING_PROGRESSIVE = 0x00000001;
+  static const D3DSCANLINEORDERING_INTERLACED = 0x00000002;
+}
+
+/// {@category Enum}
+class D3DSHADEMODE {
+  static const D3DSHADE_FLAT = 0x00000001;
+  static const D3DSHADE_GOURAUD = 0x00000002;
+  static const D3DSHADE_PHONG = 0x00000003;
+  static const D3DSHADE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSHADER_ADDRESSMODE_TYPE {
+  static const D3DSHADER_ADDRMODE_ABSOLUTE = 0x00000000;
+  static const D3DSHADER_ADDRMODE_RELATIVE = 0x00002000;
+  static const D3DSHADER_ADDRMODE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSHADER_COMPARISON {
+  static const D3DSPC_RESERVED0 = 0x00000000;
+  static const D3DSPC_GT = 0x00000001;
+  static const D3DSPC_EQ = 0x00000002;
+  static const D3DSPC_GE = 0x00000003;
+  static const D3DSPC_LT = 0x00000004;
+  static const D3DSPC_NE = 0x00000005;
+  static const D3DSPC_LE = 0x00000006;
+  static const D3DSPC_RESERVED1 = 0x00000007;
+}
+
+/// {@category Enum}
+class D3DSHADER_INSTRUCTION_OPCODE_TYPE {
+  static const D3DSIO_NOP = 0x00000000;
+  static const D3DSIO_MOV = 0x00000001;
+  static const D3DSIO_ADD = 0x00000002;
+  static const D3DSIO_SUB = 0x00000003;
+  static const D3DSIO_MAD = 0x00000004;
+  static const D3DSIO_MUL = 0x00000005;
+  static const D3DSIO_RCP = 0x00000006;
+  static const D3DSIO_RSQ = 0x00000007;
+  static const D3DSIO_DP3 = 0x00000008;
+  static const D3DSIO_DP4 = 0x00000009;
+  static const D3DSIO_MIN = 0x0000000a;
+  static const D3DSIO_MAX = 0x0000000b;
+  static const D3DSIO_SLT = 0x0000000c;
+  static const D3DSIO_SGE = 0x0000000d;
+  static const D3DSIO_EXP = 0x0000000e;
+  static const D3DSIO_LOG = 0x0000000f;
+  static const D3DSIO_LIT = 0x00000010;
+  static const D3DSIO_DST = 0x00000011;
+  static const D3DSIO_LRP = 0x00000012;
+  static const D3DSIO_FRC = 0x00000013;
+  static const D3DSIO_M4x4 = 0x00000014;
+  static const D3DSIO_M4x3 = 0x00000015;
+  static const D3DSIO_M3x4 = 0x00000016;
+  static const D3DSIO_M3x3 = 0x00000017;
+  static const D3DSIO_M3x2 = 0x00000018;
+  static const D3DSIO_CALL = 0x00000019;
+  static const D3DSIO_CALLNZ = 0x0000001a;
+  static const D3DSIO_LOOP = 0x0000001b;
+  static const D3DSIO_RET = 0x0000001c;
+  static const D3DSIO_ENDLOOP = 0x0000001d;
+  static const D3DSIO_LABEL = 0x0000001e;
+  static const D3DSIO_DCL = 0x0000001f;
+  static const D3DSIO_POW = 0x00000020;
+  static const D3DSIO_CRS = 0x00000021;
+  static const D3DSIO_SGN = 0x00000022;
+  static const D3DSIO_ABS = 0x00000023;
+  static const D3DSIO_NRM = 0x00000024;
+  static const D3DSIO_SINCOS = 0x00000025;
+  static const D3DSIO_REP = 0x00000026;
+  static const D3DSIO_ENDREP = 0x00000027;
+  static const D3DSIO_IF = 0x00000028;
+  static const D3DSIO_IFC = 0x00000029;
+  static const D3DSIO_ELSE = 0x0000002a;
+  static const D3DSIO_ENDIF = 0x0000002b;
+  static const D3DSIO_BREAK = 0x0000002c;
+  static const D3DSIO_BREAKC = 0x0000002d;
+  static const D3DSIO_MOVA = 0x0000002e;
+  static const D3DSIO_DEFB = 0x0000002f;
+  static const D3DSIO_DEFI = 0x00000030;
+  static const D3DSIO_TEXCOORD = 0x00000040;
+  static const D3DSIO_TEXKILL = 0x00000041;
+  static const D3DSIO_TEX = 0x00000042;
+  static const D3DSIO_TEXBEM = 0x00000043;
+  static const D3DSIO_TEXBEML = 0x00000044;
+  static const D3DSIO_TEXREG2AR = 0x00000045;
+  static const D3DSIO_TEXREG2GB = 0x00000046;
+  static const D3DSIO_TEXM3x2PAD = 0x00000047;
+  static const D3DSIO_TEXM3x2TEX = 0x00000048;
+  static const D3DSIO_TEXM3x3PAD = 0x00000049;
+  static const D3DSIO_TEXM3x3TEX = 0x0000004a;
+  static const D3DSIO_RESERVED0 = 0x0000004b;
+  static const D3DSIO_TEXM3x3SPEC = 0x0000004c;
+  static const D3DSIO_TEXM3x3VSPEC = 0x0000004d;
+  static const D3DSIO_EXPP = 0x0000004e;
+  static const D3DSIO_LOGP = 0x0000004f;
+  static const D3DSIO_CND = 0x00000050;
+  static const D3DSIO_DEF = 0x00000051;
+  static const D3DSIO_TEXREG2RGB = 0x00000052;
+  static const D3DSIO_TEXDP3TEX = 0x00000053;
+  static const D3DSIO_TEXM3x2DEPTH = 0x00000054;
+  static const D3DSIO_TEXDP3 = 0x00000055;
+  static const D3DSIO_TEXM3x3 = 0x00000056;
+  static const D3DSIO_TEXDEPTH = 0x00000057;
+  static const D3DSIO_CMP = 0x00000058;
+  static const D3DSIO_BEM = 0x00000059;
+  static const D3DSIO_DP2ADD = 0x0000005a;
+  static const D3DSIO_DSX = 0x0000005b;
+  static const D3DSIO_DSY = 0x0000005c;
+  static const D3DSIO_TEXLDD = 0x0000005d;
+  static const D3DSIO_SETP = 0x0000005e;
+  static const D3DSIO_TEXLDL = 0x0000005f;
+  static const D3DSIO_BREAKP = 0x00000060;
+  static const D3DSIO_PHASE = 0x0000fffd;
+  static const D3DSIO_COMMENT = 0x0000fffe;
+  static const D3DSIO_END = 0x0000ffff;
+  static const D3DSIO_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSHADER_MIN_PRECISION {
+  static const D3DMP_DEFAULT = 0x00000000;
+  static const D3DMP_16 = 0x00000001;
+  static const D3DMP_2_8 = 0x00000002;
+}
+
+/// {@category Enum}
+class D3DSHADER_MISCTYPE_OFFSETS {
+  static const D3DSMO_POSITION = 0x00000000;
+  static const D3DSMO_FACE = 0x00000001;
+}
+
+/// {@category Enum}
+class D3DSHADER_PARAM_REGISTER_TYPE {
+  static const D3DSPR_TEMP = 0x00000000;
+  static const D3DSPR_INPUT = 0x00000001;
+  static const D3DSPR_CONST = 0x00000002;
+  static const D3DSPR_ADDR = 0x00000003;
+  static const D3DSPR_TEXTURE = 0x00000003;
+  static const D3DSPR_RASTOUT = 0x00000004;
+  static const D3DSPR_ATTROUT = 0x00000005;
+  static const D3DSPR_TEXCRDOUT = 0x00000006;
+  static const D3DSPR_OUTPUT = 0x00000006;
+  static const D3DSPR_CONSTINT = 0x00000007;
+  static const D3DSPR_COLOROUT = 0x00000008;
+  static const D3DSPR_DEPTHOUT = 0x00000009;
+  static const D3DSPR_SAMPLER = 0x0000000a;
+  static const D3DSPR_CONST2 = 0x0000000b;
+  static const D3DSPR_CONST3 = 0x0000000c;
+  static const D3DSPR_CONST4 = 0x0000000d;
+  static const D3DSPR_CONSTBOOL = 0x0000000e;
+  static const D3DSPR_LOOP = 0x0000000f;
+  static const D3DSPR_TEMPFLOAT16 = 0x00000010;
+  static const D3DSPR_MISCTYPE = 0x00000011;
+  static const D3DSPR_LABEL = 0x00000012;
+  static const D3DSPR_PREDICATE = 0x00000013;
+  static const D3DSPR_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSHADER_PARAM_SRCMOD_TYPE {
+  static const D3DSPSM_NONE = 0x00000000;
+  static const D3DSPSM_NEG = 0x01000000;
+  static const D3DSPSM_BIAS = 0x02000000;
+  static const D3DSPSM_BIASNEG = 0x03000000;
+  static const D3DSPSM_SIGN = 0x04000000;
+  static const D3DSPSM_SIGNNEG = 0x05000000;
+  static const D3DSPSM_COMP = 0x06000000;
+  static const D3DSPSM_X2 = 0x07000000;
+  static const D3DSPSM_X2NEG = 0x08000000;
+  static const D3DSPSM_DZ = 0x09000000;
+  static const D3DSPSM_DW = 0x0a000000;
+  static const D3DSPSM_ABS = 0x0b000000;
+  static const D3DSPSM_ABSNEG = 0x0c000000;
+  static const D3DSPSM_NOT = 0x0d000000;
+  static const D3DSPSM_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSTATEBLOCKTYPE {
+  static const D3DSBT_ALL = 0x00000001;
+  static const D3DSBT_PIXELSTATE = 0x00000002;
+  static const D3DSBT_VERTEXSTATE = 0x00000003;
+  static const D3DSBT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSTENCILOP {
+  static const D3DSTENCILOP_KEEP = 0x00000001;
+  static const D3DSTENCILOP_ZERO = 0x00000002;
+  static const D3DSTENCILOP_REPLACE = 0x00000003;
+  static const D3DSTENCILOP_INCRSAT = 0x00000004;
+  static const D3DSTENCILOP_DECRSAT = 0x00000005;
+  static const D3DSTENCILOP_INVERT = 0x00000006;
+  static const D3DSTENCILOP_INCR = 0x00000007;
+  static const D3DSTENCILOP_DECR = 0x00000008;
+  static const D3DSTENCILOP_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DSWAPEFFECT {
+  static const D3DSWAPEFFECT_DISCARD = 0x00000001;
+  static const D3DSWAPEFFECT_FLIP = 0x00000002;
+  static const D3DSWAPEFFECT_COPY = 0x00000003;
+  static const D3DSWAPEFFECT_OVERLAY = 0x00000004;
+  static const D3DSWAPEFFECT_FLIPEX = 0x00000005;
+  static const D3DSWAPEFFECT_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTEXTUREADDRESS {
+  static const D3DTADDRESS_WRAP = 0x00000001;
+  static const D3DTADDRESS_MIRROR = 0x00000002;
+  static const D3DTADDRESS_CLAMP = 0x00000003;
+  static const D3DTADDRESS_BORDER = 0x00000004;
+  static const D3DTADDRESS_MIRRORONCE = 0x00000005;
+  static const D3DTADDRESS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTEXTUREFILTERTYPE {
+  static const D3DTEXF_NONE = 0x00000000;
+  static const D3DTEXF_POINT = 0x00000001;
+  static const D3DTEXF_LINEAR = 0x00000002;
+  static const D3DTEXF_ANISOTROPIC = 0x00000003;
+  static const D3DTEXF_PYRAMIDALQUAD = 0x00000006;
+  static const D3DTEXF_GAUSSIANQUAD = 0x00000007;
+  static const D3DTEXF_CONVOLUTIONMONO = 0x00000008;
+  static const D3DTEXF_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTEXTUREOP {
+  static const D3DTOP_DISABLE = 0x00000001;
+  static const D3DTOP_SELECTARG1 = 0x00000002;
+  static const D3DTOP_SELECTARG2 = 0x00000003;
+  static const D3DTOP_MODULATE = 0x00000004;
+  static const D3DTOP_MODULATE2X = 0x00000005;
+  static const D3DTOP_MODULATE4X = 0x00000006;
+  static const D3DTOP_ADD = 0x00000007;
+  static const D3DTOP_ADDSIGNED = 0x00000008;
+  static const D3DTOP_ADDSIGNED2X = 0x00000009;
+  static const D3DTOP_SUBTRACT = 0x0000000a;
+  static const D3DTOP_ADDSMOOTH = 0x0000000b;
+  static const D3DTOP_BLENDDIFFUSEALPHA = 0x0000000c;
+  static const D3DTOP_BLENDTEXTUREALPHA = 0x0000000d;
+  static const D3DTOP_BLENDFACTORALPHA = 0x0000000e;
+  static const D3DTOP_BLENDTEXTUREALPHAPM = 0x0000000f;
+  static const D3DTOP_BLENDCURRENTALPHA = 0x00000010;
+  static const D3DTOP_PREMODULATE = 0x00000011;
+  static const D3DTOP_MODULATEALPHA_ADDCOLOR = 0x00000012;
+  static const D3DTOP_MODULATECOLOR_ADDALPHA = 0x00000013;
+  static const D3DTOP_MODULATEINVALPHA_ADDCOLOR = 0x00000014;
+  static const D3DTOP_MODULATEINVCOLOR_ADDALPHA = 0x00000015;
+  static const D3DTOP_BUMPENVMAP = 0x00000016;
+  static const D3DTOP_BUMPENVMAPLUMINANCE = 0x00000017;
+  static const D3DTOP_DOTPRODUCT3 = 0x00000018;
+  static const D3DTOP_MULTIPLYADD = 0x00000019;
+  static const D3DTOP_LERP = 0x0000001a;
+  static const D3DTOP_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTEXTURESTAGESTATETYPE {
+  static const D3DTSS_COLOROP = 0x00000001;
+  static const D3DTSS_COLORARG1 = 0x00000002;
+  static const D3DTSS_COLORARG2 = 0x00000003;
+  static const D3DTSS_ALPHAOP = 0x00000004;
+  static const D3DTSS_ALPHAARG1 = 0x00000005;
+  static const D3DTSS_ALPHAARG2 = 0x00000006;
+  static const D3DTSS_BUMPENVMAT00 = 0x00000007;
+  static const D3DTSS_BUMPENVMAT01 = 0x00000008;
+  static const D3DTSS_BUMPENVMAT10 = 0x00000009;
+  static const D3DTSS_BUMPENVMAT11 = 0x0000000a;
+  static const D3DTSS_TEXCOORDINDEX = 0x0000000b;
+  static const D3DTSS_BUMPENVLSCALE = 0x00000016;
+  static const D3DTSS_BUMPENVLOFFSET = 0x00000017;
+  static const D3DTSS_TEXTURETRANSFORMFLAGS = 0x00000018;
+  static const D3DTSS_COLORARG0 = 0x0000001a;
+  static const D3DTSS_ALPHAARG0 = 0x0000001b;
+  static const D3DTSS_RESULTARG = 0x0000001c;
+  static const D3DTSS_CONSTANT = 0x00000020;
+  static const D3DTSS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTEXTURETRANSFORMFLAGS {
+  static const D3DTTFF_DISABLE = 0x00000000;
+  static const D3DTTFF_COUNT1 = 0x00000001;
+  static const D3DTTFF_COUNT2 = 0x00000002;
+  static const D3DTTFF_COUNT3 = 0x00000003;
+  static const D3DTTFF_COUNT4 = 0x00000004;
+  static const D3DTTFF_PROJECTED = 0x00000100;
+  static const D3DTTFF_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DTRANSFORMSTATETYPE {
+  static const D3DTS_VIEW = 0x00000002;
+  static const D3DTS_PROJECTION = 0x00000003;
+  static const D3DTS_TEXTURE0 = 0x00000010;
+  static const D3DTS_TEXTURE1 = 0x00000011;
+  static const D3DTS_TEXTURE2 = 0x00000012;
+  static const D3DTS_TEXTURE3 = 0x00000013;
+  static const D3DTS_TEXTURE4 = 0x00000014;
+  static const D3DTS_TEXTURE5 = 0x00000015;
+  static const D3DTS_TEXTURE6 = 0x00000016;
+  static const D3DTS_TEXTURE7 = 0x00000017;
+  static const D3DTS_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DVERTEXBLENDFLAGS {
+  static const D3DVBF_DISABLE = 0x00000000;
+  static const D3DVBF_1WEIGHTS = 0x00000001;
+  static const D3DVBF_2WEIGHTS = 0x00000002;
+  static const D3DVBF_3WEIGHTS = 0x00000003;
+  static const D3DVBF_TWEENING = 0x000000ff;
+  static const D3DVBF_0WEIGHTS = 0x00000100;
+  static const D3DVBF_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DVS_ADDRESSMODE_TYPE {
+  static const D3DVS_ADDRMODE_ABSOLUTE = 0x00000000;
+  static const D3DVS_ADDRMODE_RELATIVE = 0x00002000;
+  static const D3DVS_ADDRMODE_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DVS_RASTOUT_OFFSETS {
+  static const D3DSRO_POSITION = 0x00000000;
+  static const D3DSRO_FOG = 0x00000001;
+  static const D3DSRO_POINT_SIZE = 0x00000002;
+  static const D3DSRO_FORCE_DWORD = 0x7fffffff;
+}
+
+/// {@category Enum}
+class D3DZBUFFERTYPE {
+  static const D3DZB_FALSE = 0x00000000;
+  static const D3DZB_TRUE = 0x00000001;
+  static const D3DZB_USEW = 0x00000002;
+  static const D3DZB_FORCE_DWORD = 0x7fffffff;
+}
