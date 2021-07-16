@@ -16,13 +16,13 @@ final scope = MetadataStore.getWin32Scope();
 /// The metadata namespaces we're generating
 const namespaces = <String>[
   // Working on:
+  'Windows.Win32.Graphics.Gdi',
   'Windows.Win32.System.SystemServices',
   'Windows.Win32.UI.DisplayDevices',
   'Windows.Win32.Graphics.DirectDraw',
 
   // Already working:
   // 'Windows.Win32.Foundation',
-  // 'Windows.Win32.Graphics.Gdi',
   // 'Windows.Win32.Media.Multimedia',
   // 'Windows.Win32.System.Console',
   // 'Windows.Win32.System.SystemInformation',

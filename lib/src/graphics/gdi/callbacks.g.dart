@@ -16,6 +16,7 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.g.dart';
 import '../../guid.dart';
+import '../../combase.dart';
 import '../../graphics/gdi/structs.g.dart';
 import '../../foundation/structs.g.dart';
 

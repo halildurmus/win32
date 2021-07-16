@@ -1886,6 +1886,13 @@ class RGBTRIPLE extends Struct {
 }
 
 /// {@category Struct}
+class RGNDATA extends Struct {
+  external RGNDATAHEADER rdh;
+  @Array(1)
+  external Array<Uint8> Buffer;
+}
+
+/// {@category Struct}
 class RGNDATAHEADER extends Struct {
   @Uint32()
   external int dwSize;

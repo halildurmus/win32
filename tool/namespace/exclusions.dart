@@ -49,6 +49,10 @@ const excludedCallbacks = <String>[
   'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
   'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK', // ui.shell
+  'Windows.Win32.Graphics.DirectDraw.LPDDHAL_GETHEAPALIGNMENT', // devices.display
+  'Windows.Win32.Graphics.DirectDraw.PDD_DESTROYDRIVER', // devices.display
+  'Windows.Win32.Graphics.DirectDraw.PDD_SETMODE', // devices.display
+  'Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF', // devices.display
   'Windows.Win32.System.SystemServices.FREEOBJPROC', // ui.displaydevices
   'Windows.Win32.System.SystemServices.LPD3DENUMPIXELFORMATSCALLBACK', // ui.displaydevices
   'Windows.Win32.System.SystemServices.LPD3DENUMTEXTUREFORMATSCALLBACK', // graphics.directdraw
@@ -60,7 +64,6 @@ const excludedCallbacks = <String>[
   'Windows.Win32.System.SystemServices.PFN_DrvCopyBits', // ui.displaydevices
   'Windows.Win32.System.SystemServices.PFN_DrvDeriveSurface', // graphics.directdraw
   'Windows.Win32.System.SystemServices.PFN_DrvDescribePixelFormat', // graphics.opengl
-  'Windows.Win32.System.SystemServices.', //
 ];
 
 const excludedImports = <String>[
@@ -78,6 +81,7 @@ const excludedImports = <String>[
   'system/power/structs.g.dart',
   'system/rpc/structs.g.dart',
   'system/stationsanddesktops/structs.g.dart',
+  'system/systemservices/structs.g.dart',
   'ui/colorsystem/structs.g.dart',
   'ui/controls/callbacks.g.dart',
   'ui/controls/structs.g.dart',
