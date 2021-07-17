@@ -20,6 +20,8 @@ const namespaces = <String>[
   'Windows.Win32.System.SystemServices',
   'Windows.Win32.UI.DisplayDevices',
   'Windows.Win32.Graphics.DirectDraw',
+  'Windows.Win32.Devices.Display',
+  'Windows.Win32.Graphics.Direct3D9',
 
   // Already working:
   'Windows.Win32.Foundation',

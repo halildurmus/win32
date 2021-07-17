@@ -7,7 +7,7 @@ import 'package:winmd/winmd.dart';
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String nameWithoutEncoding(String typeName) {
-  if (typeName.endsWith('DATA')) {
+  if (typeName.endsWith('DATA') || typeName == 'M128A') {
     return typeName;
   }
   if (typeName.endsWith('W') || typeName.endsWith('A')) {
