@@ -62,8 +62,6 @@ export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 ''';
 
-// TODO: Isn't there a better way to identify namespaces?
-// TODO: What about levels of namespace?
 List<String> namespacesInScope(Scope scope) {
   // Use a Set to avoid duplication
   final namespaceSet = <String>{};
@@ -71,8 +69,8 @@ List<String> namespacesInScope(Scope scope) {
   final scope = MetadataStore.getWin32Scope();
   for (final td in scope.typeDefs) {
     if (td.name.startsWith('Windows.Win32')) {
-      final namespace = td.name.split('.')[2];
-      namespaceSet.add('Windows.Win32.$namespace');
+      final namespace = td.name.split('.').skip(2).toList()..removeLast();
+      namespaceSet.add('Windows.Win32.${namespace.join('.')}');
     }
   }
   return namespaceSet.toList()..sort((a, b) => a.compareTo(b));
