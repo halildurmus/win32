@@ -215,7 +215,7 @@ void generateLibraryExport(List<String> namespaces) {
 }
 
 void main() {
-  for (final namespace in namespaces) {
+  for (final namespace in namespacesInScope(scope)) {
     print('Generating $namespace...');
 
     createDirectory(namespace);
