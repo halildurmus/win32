@@ -1,13 +1,7 @@
 const excludedFunctions = <String>[
   // Relies on namespaces not imported yet
   'BroadcastSystemMessageEx', // system.systemservices
-  // 'ChangeDisplaySettings', // ui.displaydevices
-  // 'ChangeDisplaySettingsEx', // ui.displaydevices
-  // 'CreateConsoleScreenBuffer', // security
-  // 'CreateDC', // ui.displaydevices
-  // 'CreateIC', // ui.displaydevices
-  // 'EnumDisplaySettings', // ui.displaydevices
-  // 'EnumDisplaySettingsEx', // ui.displaydevices
+  'CreateConsoleScreenBuffer', // security
   'ExtCreateRegion', // system.systemservices
   'GetLogicalProcessorInformationEx', // system.systemservices
   'MessageBoxIndirect', // ui.shell
@@ -25,9 +19,6 @@ const excludedStructs = <String>[
   // Temporary
   'Windows.Win32.Graphics.Gdi.BITMAPV4HEADER', // ui.colorsystem
   'Windows.Win32.Graphics.Gdi.BITMAPV5HEADER', // ui.colorsystem
-  // 'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO', // ui.displaydevices
-  // 'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SDR_WHITE_LEVEL', // ui.displaydevices
-  // 'Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE', // ui.displaydevices
   'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACEW', // ui.colorsystem
   'Windows.Win32.Graphics.Gdi.EMRPIXELFORMAT', // opengl
   'Windows.Win32.Graphics.Gdi.ENUMTEXTMETRICW', // globalization
@@ -38,31 +29,18 @@ const excludedStructs = <String>[
   'Windows.Win32.UI.WindowsAndMessaging.OFNOTIFYW', // ui.controls
   'Windows.Win32.Media.Multimedia.TIMEREVENT', // system.systemservices
   'Windows.Win32.Media.Multimedia.joyreghwconfig_tag', // devices.humaninterfacedevice
-  'Windows.Win32.Graphics.DirectDraw.DDHAL_GETHEAPALIGNMENTDATA', // devices.display
-  'Windows.Win32.Graphics.DirectDraw.DDHAL_DDMISCELLANEOUSCALLBACKS', // devices.display
   'Windows.Win32.System.SystemServices.CACHE_RELATIONSHIP', // system.kernel
   'Windows.Win32.System.SystemServices.CSV_QUERY_FILE_REVISION_FILE_ID_128', // storage.filesystem
-  'Windows.Win32.System.SystemServices.D3DLIGHTDATA', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DNTHAL_CALLBACKS', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DNTHAL_CALLBACKS2', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DNTHAL_CALLBACKS3', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DLIGHTDATA', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DLIGHT', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DLIGHT2', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DLIGHT7', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DLIGHTINGELEMENT', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DNTHAL_CLEAR2DATA', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DNTHAL_DP2SETTRANSFORM', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DSTATUS', // graphics.direct3d9
-  'Windows.Win32.System.SystemServices.D3DTRANSFORMDATA', // graphics.direct3d9
   'Windows.Win32.System.SystemServices.DISPATCHER_CONTEXT', // system.kernel
   'Windows.Win32.System.SystemServices.EXCEPTION_REGISTRATION_RECORD', // system.kernel
   'Windows.Win32.System.SystemServices.IMAGE_COR20_HEADER', // diagnostics.debug
   'Windows.Win32.System.SystemServices.IMAGE_ROM_HEADERS', // diagnostics.debug
   'Windows.Win32.System.SystemServices.JOBOBJECT_SECURITY_LIMIT_INFORMATION', // system.security
   'Windows.Win32.System.SystemServices.NUMA_NODE_RELATIONSHIP', // system.kernel
+  'Windows.Win32.System.SystemServices.NT_TIB', // system.kernel
   'Windows.Win32.System.SystemServices.PROCESSOR_RELATIONSHIP', // system.kernel
   'Windows.Win32.System.SystemServices.RPC_IMPORT_CONTEXT_P', // system.rpc
+  'Windows.Win32.System.SystemServices.RTL_CRITICAL_SECTION', // system.kernel
   'Windows.Win32.System.SystemServices.RTL_CRITICAL_SECTION_DEBUG', // system.kernel
   'Windows.Win32.System.SystemServices.SE_ACCESS_REPLY', // security
   'Windows.Win32.System.SystemServices.SE_ACCESS_REQUEST', // security
@@ -73,6 +51,7 @@ const excludedStructs = <String>[
   'Windows.Win32.System.SystemServices.SYSTEM_ACCESS_FILTER_ACE', //
   'Windows.Win32.System.SystemServices.SYSTEM_PROCESS_TRUST_LABEL_ACE', //
   'Windows.Win32.System.SystemServices.USN_RECORD_UNION', //
+  'Windows.Win32.System.SystemServices.WOF_EXTERNAL_FILE_ID', // system.kernel
   'Windows.Win32.System.SystemServices.XSTATE_CONTEXT', //
 ];
 
@@ -80,29 +59,12 @@ const excludedCallbacks = <String>[
   'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
   'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
   'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK', // ui.shell
-  'Windows.Win32.Graphics.DirectDraw.LPDDHAL_GETHEAPALIGNMENT', // devices.display
-  'Windows.Win32.Graphics.DirectDraw.PDD_DESTROYDRIVER', // devices.display
-  'Windows.Win32.Graphics.DirectDraw.PDD_SETMODE', // devices.display
-  'Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF', // devices.display
-  'Windows.Win32.System.SystemServices.FREEOBJPROC', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.LPD3DENUMPIXELFORMATSCALLBACK', // ui.displaydevices
-  // 'Windows.Win32.System.SystemServices.LPD3DENUMTEXTUREFORMATSCALLBACK', // graphics.directdraw
   'Windows.Win32.System.SystemServices.PEXCEPTION_FILTER', // diagnostics.debug
-  'Windows.Win32.System.SystemServices.PFN_DrvAccumulateD3DDirtyRect', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.PFN_DrvAlphaBlend', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.PFN_DrvAssociateSharedSurface', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.PFN_DrvBitBlt', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.PFN_DrvCopyBits', // ui.displaydevices
-  'Windows.Win32.System.SystemServices.PFN_DrvDeriveSurface', // graphics.directdraw
-  'Windows.Win32.System.SystemServices.PFN_DrvDescribePixelFormat', // graphics.opengl
 ];
 
 const excludedImports = <String>[
-  // 'devices/display/structs.g.dart',
   'devices/humaninterfacedevice/structs.g.dart',
   'globalization/structs.g.dart',
-  // 'graphics/direct3d9/structs.g.dart',
-  'graphics/opengl/structs.g.dart',
   'media/audio/coreaudio/structs.g.dart',
   'security/structs.g.dart',
   'storage/filesystem/callbacks.g.dart',
@@ -136,6 +98,8 @@ const excludedComInterfaces = <String>[
 // Working around https://github.com/dart-lang/sdk/issues/46644
 const ignorePackingDirectives = <String>[
   'Windows.Win32.System.SystemServices.DEVICEDUMP_SECTION_HEADER',
+  'Windows.Win32.System.SystemServices.DEVICEDUMP_STORAGEDEVICE_DATA',
+  'Windows.Win32.System.SystemServices.SENDCMDINPARAMS',
   'Windows.Win32.Media.Multimedia.AUXCAPS2W',
   'Windows.Win32.Media.Multimedia.EXBMINFOHEADER',
   'Windows.Win32.Media.Multimedia.JOYCAPS2W',

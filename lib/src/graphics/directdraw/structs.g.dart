@@ -18,10 +18,12 @@ import '../../combase.dart';
 import '../../guid.dart';
 import '../../graphics/directdraw/structs.g.dart';
 import '../../foundation/structs.g.dart';
+import '../../system/systemservices/structs.g.dart';
 import '../../graphics/directdraw/IDirectDrawSurface.dart';
 import '../../graphics/directdraw/callbacks.g.dart';
 import '../../ui/displaydevices/structs.g.dart';
 import '../../graphics/gdi/structs.g.dart';
+import '../../devices/display/structs.g.dart';
 import '../../system/com/IUnknown.dart';
 import '../../ui/displaydevices/callbacks.g.dart';
 
@@ -1322,6 +1324,18 @@ class DDHAL_GETFLIPSTATUSDATA extends Struct {
   @Int32()
   external int ddRVal;
   external Pointer<NativeFunction<LPDDHALSURFCB_GETFLIPSTATUS>> GetFlipStatus;
+}
+
+/// {@category Struct}
+class DDHAL_GETHEAPALIGNMENTDATA extends Struct {
+  @IntPtr()
+  external int dwInstance;
+  @Uint32()
+  external int dwHeap;
+  @Int32()
+  external int ddRVal;
+  external Pointer<NativeFunction<LPDDHAL_GETHEAPALIGNMENT>> GetHeapAlignment;
+  external HEAPALIGNMENT Alignment;
 }
 
 /// {@category Struct}

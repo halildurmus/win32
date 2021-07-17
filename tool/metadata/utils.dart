@@ -7,7 +7,7 @@ import 'package:winmd/winmd.dart';
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String nameWithoutEncoding(String typeName) {
-  if (typeName.endsWith('DATA') || typeName == 'M128A') {
+  if (typePretendsToBeAnsi(typeName)) {
     return typeName;
   }
   if (typeName.endsWith('W') || typeName.endsWith('A')) {
@@ -15,6 +15,13 @@ String nameWithoutEncoding(String typeName) {
   }
   return typeName;
 }
+
+bool typePretendsToBeAnsi(String typeName) =>
+    typeName.endsWith('DATA') ||
+    ['M128A', 'CIECHROMA'].contains(typeName.split('.').last);
+
+bool typedefIsAnsi(TypeDef typedef) =>
+    typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {

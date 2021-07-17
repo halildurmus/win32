@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../metadata/utils.dart';
 import 'com_interfaces.dart';
 import 'exclusions.dart';
 import 'win32_callbacks.dart';
@@ -90,9 +91,6 @@ bool supportsAmd64(TypeDef typedef) {
   return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
 }
 
-bool typedefisNotAnsi(TypeDef typedef) =>
-    !typedef.name.endsWith('A') || typedef.name.endsWith('DATA');
-
 void generateWin32Structs(String namespace) {
   // All structs that map to Dart structs. We ignore ANSI structs and structs
   // that are just GUID constants. We also ignore native values that are wrapped
@@ -101,7 +99,7 @@ void generateWin32Structs(String namespace) {
       .where((typedef) => typedef.name.startsWith(namespace))
       .where(typedefIsStruct)
       .where(structIsNotWrapper)
-      .where(typedefisNotAnsi)
+      .where((typedef) => !typedefIsAnsi(typedef))
       .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
@@ -180,7 +178,6 @@ void generateComInterfaces(String namespace) {
 }
 
 void generateLibraryExport(List<String> namespaces) {
-  // TODO: Check that each of these files exist.
   final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('// ignore_for_file: directives_ordering\n\n');
