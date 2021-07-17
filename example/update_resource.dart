@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 final RT_MANIFEST = Pointer<Utf16>.fromAddress(24);
 

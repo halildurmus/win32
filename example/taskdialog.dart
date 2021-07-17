@@ -18,7 +18,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/src/constants_nodoc.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 void showSimpleTaskDialog() {
   final windowTitle = TEXT('Dart TaskDialog Sample');

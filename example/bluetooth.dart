@@ -8,7 +8,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 String addressAsString(List<int> bluetoothAddress) => bluetoothAddress
     .map((byte) => byte.toRadixString(16).toUpperCase().padLeft(2, '0'))

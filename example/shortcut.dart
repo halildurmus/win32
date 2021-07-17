@@ -4,7 +4,7 @@ import 'dart:ffi';
 
 import 'package:args/args.dart';
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 void createShortcut(String path, String pathLink, String? description) {
   final shellLink = ShellLink.createInstance();

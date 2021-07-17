@@ -17,7 +17,7 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 const pipeName = r'\\.\pipe\dart_pipe';
 const pipeMessage = '*** Hello Pipe World ***';

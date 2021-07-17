@@ -6,7 +6,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 // Convert from Win32 0x00BBGGRR color layout to a user-friendly string
 String toHexColor(int color) => '0x'

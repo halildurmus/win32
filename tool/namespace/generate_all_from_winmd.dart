@@ -17,32 +17,50 @@ final scope = MetadataStore.getWin32Scope();
 /// The metadata namespaces we're generating
 const namespaces = <String>[
   // Working on:
-  'Windows.Win32.Graphics.Gdi',
   'Windows.Win32.System.SystemServices',
-  'Windows.Win32.UI.DisplayDevices',
   'Windows.Win32.Graphics.DirectDraw',
-  'Windows.Win32.Devices.Display',
-  'Windows.Win32.Graphics.Direct3D9',
+  'Windows.Win32.System.Diagnostics.Debug',
 
   // Already working:
+  'Windows.Win32.Devices.Display',
   'Windows.Win32.Foundation',
+  'Windows.Win32.Graphics.Direct3D9',
+  'Windows.Win32.Graphics.Gdi',
   'Windows.Win32.Media.Multimedia',
+  'Windows.Win32.Storage.FileSystem',
   'Windows.Win32.System.Console',
   'Windows.Win32.System.SystemInformation',
   'Windows.Win32.System.Time',
-
+  'Windows.Win32.UI.Controls',
+  'Windows.Win32.UI.DisplayDevices',
   'Windows.Win32.UI.KeyboardAndMouseInput',
   'Windows.Win32.UI.PointerInput',
+  'Windows.Win32.UI.TextServices',
   'Windows.Win32.UI.TouchInput',
   'Windows.Win32.UI.WindowsAndMessaging',
 
   // Consider next:
   // 'Windows.Win32.System.Com',
-  // 'Windows.Win32.System.Diagnostics.Debug',
   // 'Windows.Win32.System.OleAutomation',
-  // 'Windows.Win32.UI.Controls',
-  // 'Windows.Win32.UI.TextServices',
 ];
+
+const win32FileHeader = '''
+library new_win32;
+
+export 'src/constants_new.dart';
+export 'src/exceptions.dart';
+export 'src/macros.dart';
+export 'src/types.dart';
+export 'src/utils.dart';
+
+export 'src/extensions/dialogs.dart';
+export 'src/extensions/int_to_hexstring.dart';
+export 'src/extensions/list_to_blob.dart';
+export 'src/extensions/set_ansi.dart';
+export 'src/extensions/set_string.dart';
+export 'src/extensions/set_string_array.dart';
+export 'src/extensions/unpack_utf16.dart';
+''';
 
 // TODO: Isn't there a better way to identify namespaces?
 // TODO: What about levels of namespace?
@@ -178,9 +196,10 @@ void generateComInterfaces(String namespace) {
 }
 
 void generateLibraryExport(List<String> namespaces) {
-  final writer = File('lib/win32.g.dart').openSync(mode: FileMode.writeOnly);
+  final writer = File('lib/new_win32.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('// ignore_for_file: directives_ordering\n\n');
+  writer.writeStringSync(win32FileHeader);
   for (final namespace in namespaces) {
     final directory = Directory(folderForNamespace(namespace));
 

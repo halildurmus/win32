@@ -15,7 +15,7 @@ import 'dart:ffi';
 import 'dart:math' show Random;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 late int hWnd;
 const IDT_TIMER1 = 1;

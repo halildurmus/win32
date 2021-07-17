@@ -7,7 +7,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/win32.dart';
+import 'package:win32/new_win32.dart';
 
 int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
