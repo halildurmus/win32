@@ -1260,8 +1260,8 @@
         "dllLibrary": "winspool",
         "comment": "The EnumPrinterKey function enumerates the subkeys of a specified key for a specified printer."
     },
-    "EnumPrintersW": {
-        "prototype": "BOOL EnumPrinters(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
+    "EnumPrinters": {
+        "prototype": "BOOL EnumPrintersW(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
         "dllLibrary": "winspool",
         "comment": "The EnumPrinters function enumerates available printers, print servers, domains, or print providers."
     },
