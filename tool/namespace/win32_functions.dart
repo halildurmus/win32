@@ -94,7 +94,9 @@ void generateFfiFile(File file, TypeDef typedef) {
       ..sort((a, b) => a.name.compareTo(b.name));
 
     // API set names aren't legal Dart identifiers, so we rename them
-    final libraryDartName = library.replaceAll('-', '_').toLowerCase();
+    // Some modules may also be of the form windows.ai.machinelearning.dll.
+    final libraryDartName =
+        library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
 
     final dll = libraryFromDllName(library);
     buffer.write(docComment(dll));
