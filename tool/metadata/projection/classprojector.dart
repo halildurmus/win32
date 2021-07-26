@@ -106,13 +106,18 @@ class ClassProjector {
 
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
-          final typeBuilder =
-              TypeProjector(mdMethod.parameters.first.typeIdentifier.typeArg!);
-          methodProjection.parameters = [
-            ParameterProjection(mdMethod.parameters.first.name,
-                nativeType: typeBuilder.nativeType,
-                dartType: typeBuilder.dartType)
-          ];
+          final arg = mdMethod.parameters.first.typeIdentifier.typeArg;
+          if (arg == null) {
+            throw Exception(
+                '$mdMethod (${mdMethod.token.toRadixString(16)}) missing typearg for ${mdMethod.parameters.first}');
+          } else {
+            final typeBuilder = TypeProjector(arg);
+            methodProjection.parameters = [
+              ParameterProjection(mdMethod.parameters.first.name,
+                  nativeType: typeBuilder.nativeType,
+                  dartType: typeBuilder.dartType)
+            ];
+          }
         }
       } else {
         // WinRT methods always return an HRESULT, and provide the actual return
