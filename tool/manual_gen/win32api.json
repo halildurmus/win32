@@ -745,6 +745,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateEllipticRgn function creates an elliptical region."
     },
+    "CreateEvent": {
+        "prototype": "HANDLE CreateEventW(\n  LPSECURITY_ATTRIBUTES lpEventAttributes,\n  BOOL bManualReset,\n  BOOL  bInitialState,\n  LPCWSTR lpName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a named or unnamed event object."
+    },
     "CreateFile": {
         "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
         "dllLibrary": "kernel32",

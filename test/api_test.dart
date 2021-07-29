@@ -653,6 +653,18 @@ void main() {
           'CreateDirectoryW');
       expect(CreateDirectory, isA<Function>());
     });
+    test('Can instantiate CreateEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateEvent = kernel32.lookupFunction<
+          IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              Int32 bManualReset, Int32 bInitialState, Pointer<Utf16> lpName),
+          int Function(
+              Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              int bManualReset,
+              int bInitialState,
+              Pointer<Utf16> lpName)>('CreateEventW');
+      expect(CreateEvent, isA<Function>());
+    });
     test('Can instantiate CreateFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateFile = kernel32.lookupFunction<
