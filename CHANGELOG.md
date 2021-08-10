@@ -1,3 +1,8 @@
+## 2.2.6
+
+- Add some requested APIs thanks to contributions from @ilopX, in particular
+  a new sample for enumerating locally installed printers.
+
 ## 2.2.5
 
 - Add more DWM APIs, including `DwmSetWindowAttribute`.
