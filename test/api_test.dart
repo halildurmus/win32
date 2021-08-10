@@ -6807,6 +6807,27 @@ void main() {
               Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
       expect(EnumPrinterKey, isA<Function>());
     });
+    test('Can instantiate EnumPrinters', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumPrinters = winspool.lookupFunction<
+          Int32 Function(
+              Uint32 Flags,
+              Pointer<Utf16> Name,
+              Uint32 Level,
+              Pointer<Uint8> pPrinterEnum,
+              Uint32 cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned),
+          int Function(
+              int Flags,
+              Pointer<Utf16> Name,
+              int Level,
+              Pointer<Uint8> pPrinterEnum,
+              int cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned)>('EnumPrintersW');
+      expect(EnumPrinters, isA<Function>());
+    });
     test('Can instantiate FindFirstPrinterChangeNotification', () {
       final winspool = DynamicLibrary.open('winspool.drv');
       final FindFirstPrinterChangeNotification = winspool.lookupFunction<

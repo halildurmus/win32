@@ -7453,3 +7453,87 @@ const SC_DLG_NO_UI = 0x02;
 /// Connects to the card selected by the user from the smart card Select Card
 /// dialog box.
 const SC_DLG_FORCE_UI = 0x04;
+
+// -----------------------------------------------------------------------------
+// EnumPrinters constants
+// -----------------------------------------------------------------------------
+
+/// (Win9.x only) enumerates the default printer.
+const PRINTER_ENUM_DEFAULT = 00000001;
+
+/// If the PRINTER_ENUM_NAME flag is not also passed, the function ignores the
+/// Name parameter, and enumerates the locally installed printers.
+/// If PRINTER_ENUM_NAME is also passed, the function enumerates the local
+/// printers on Name.
+const PRINTER_ENUM_LOCAL = 00000002;
+
+/// The function enumerates the list of printers to which the user has made
+/// previous connections.
+const PRINTER_ENUM_CONNECTIONS = 0x00000004;
+
+///
+const PRINTER_ENUM_FAVORITE = 0x00000004;
+
+/// The function enumerates the printer identified by Name. This can be a server
+/// a domain, or a print provider. If Name is NULL, the function enumerates
+/// available print providers.
+const PRINTER_ENUM_NAME = 00000008;
+
+/// The function enumerates network printers and print servers in the computer's
+/// domain. This value is valid only if Level is 1.
+const PRINTER_ENUM_REMOTE = 00000010;
+
+/// The function enumerates printers that have the shared attribute. Cannot be
+/// used in isolation; use an OR operation to combine with another PRINTER_ENUM
+/// type.
+const PRINTER_ENUM_SHARED = 00000020;
+
+/// The function enumerates network printers in the computer's domain. This
+/// value is valid only if Level is 1.
+const PRINTER_ENUM_NETWORK = 00000040;
+
+/// Indicates that the printer object contains further enumerable child objects.
+const PRINTER_ENUM_EXPAND = 00004000;
+
+/// Indicates that the printer object is capable of containing enumerable
+/// objects. One such object is a print provider, which is a print server that
+/// contains printers.
+const PRINTER_ENUM_CONTAINER = 0x00008000;
+
+///
+const PRINTER_ENUM_ICONMASK = 0x00ff0000;
+
+///
+const PRINTER_ENUM_ICON1 = 00010000;
+
+///
+const PRINTER_ENUM_ICON2 = 00020000;
+
+///
+const PRINTER_ENUM_ICON3 = 00040000;
+
+///
+const PRINTER_ENUM_ICON4 = 00080000;
+
+///
+const PRINTER_ENUM_ICON5 = 00100000;
+
+///
+const PRINTER_ENUM_ICON6 = 00200000;
+
+///
+const PRINTER_ENUM_ICON7 = 00400000;
+
+/// Indicates that, where appropriate, an application treats an object as a
+/// print server. A GUI application can<145> choose to display an icon of choice
+/// for this type of object.
+const PRINTER_ENUM_ICON8 = 00800000;
+
+/// Indicates that an application cannot display the printer object.
+const PRINTER_ENUM_HIDE = 01000000;
+
+/// PRINTER_ENUM_CATEGORY_ALL
+const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
+
+/// The function enumerates only 3D printers.
+const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
