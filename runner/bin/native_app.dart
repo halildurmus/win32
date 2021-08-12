@@ -55,7 +55,6 @@ abstract class NativeWindow {
       case WM_CLOSE:
         _windows.remove(hWnd);
         DestroyWindow(hWnd);
-
         return true;
 
       case WM_PAINT:

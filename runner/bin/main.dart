@@ -1,8 +1,10 @@
+import 'flutter_window.dart';
+import 'flutter_wrappers.dart';
 import 'native_app.dart';
-import 'window.dart';
 
 void main() {
-  final wnd = Window()
+  final dartProject = DartProject('!!! path directory !!!');
+  final wnd = FlutterWindow(dartProject)
     ..title = 'New Window'
     ..show();
 

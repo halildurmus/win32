@@ -1,7 +1,8 @@
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' ;
 
 import 'native_app.dart';
+import 'tools.dart' as tools;
 
 class Window extends NativeWindow {
   void show() {
@@ -27,4 +28,32 @@ class Window extends NativeWindow {
     }
   }
 
+  tools.Size get size => throw UnimplementedError();
+
+
+  tools.Rect get rect {
+    //   RECT frame;
+    //   GetClientRect(window_handle_, &frame);
+    //   return frame;
+     throw UnimplementedError();
+  }
+
+  int _childContent = 0;
+
+  int get childContent => _childContent;
+
+  set childContent(int child) {
+    SetParent(child, hWnd);
+    final rect = this.rect;
+    MoveWindow(
+      child,
+      rect.left,
+      rect.top,
+      rect.right - rect.left,
+      rect.bottom - rect.top,
+      TRUE,
+    );
+    SetFocus(child);
+    _childContent = child;
+  }
 }
