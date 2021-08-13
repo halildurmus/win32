@@ -5,6 +5,11 @@ import 'package:ffi/ffi.dart';
 import 'package:meta/meta.dart';
 import 'package:win32/win32.dart';
 
+import 'throw_unimplemented.dart';
+import 'tools.dart' as tools;
+
+part 'native_window.dart';
+
 // ignore: avoid_classes_with_only_static_members
 class NativeApp {
   static final hInst = GetModuleHandle(nullptr);
@@ -19,7 +24,7 @@ class NativeApp {
   }
 }
 
-int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
+int _wndProc(int hWnd, int uMsg, int wParam, int lParam) {
   final window = _windows[hWnd];
   if (window != null) {
     final windowResult = window.wndProc(hWnd, uMsg, wParam, lParam);
@@ -40,40 +45,6 @@ int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
 }
 
 final _windows = <int, NativeWindow>{};
-
-abstract class NativeWindow {
-  late final int hWnd;
-
-  NativeWindow() {
-    hWnd = _createWindowHidden();
-    _windows[hWnd] = this;
-  }
-
-  @protected
-  bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-    switch(uMsg) {
-      case WM_CLOSE:
-        _windows.remove(hWnd);
-        DestroyWindow(hWnd);
-        return true;
-
-      case WM_PAINT:
-        final ps = calloc<PAINTSTRUCT>();
-        final rect = calloc<RECT>();
-        try {
-          GetClientRect(hWnd, rect);
-          final hdc = BeginPaint(hWnd, ps);
-          FillRect(hdc, rect, COLOR_WINDOW);
-          EndPaint(hWnd, ps);
-        } finally {
-          free(ps);
-          free(rect);
-        }
-        return true;
-    }
-    return false;
-  }
-}
 
 int _createWindowHidden() {
   final rect = _getWindowCenterRect();
@@ -122,7 +93,7 @@ void _registryWinClass() {
   try {
     pWndClass.ref
       ..style = CS_HREDRAW | CS_VREDRAW
-      ..lpfnWndProc = Pointer.fromFunction<WindowProc>(wndProc, 0)
+      ..lpfnWndProc = Pointer.fromFunction<WindowProc>(_wndProc, 0)
       ..hInstance = NativeApp.hInst
     //..hbrBackground = LoadResource(hInst, WHITE_BRUSH)
     //..hIcon = LoadIcon (hInst , 1)

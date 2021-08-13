@@ -1,9 +1,10 @@
+import 'package:meta/meta.dart';
 import 'package:win32/win32.dart';
 
+import '../app/native_app.dart';
 import 'flutter_wrappers.dart';
-import 'window.dart';
 
-class FlutterWindow extends Window {
+class FlutterWindow extends NativeWindow {
   final DartProject _dartProject;
   late final FlutterViewController _flutterController;
 
@@ -19,8 +20,12 @@ class FlutterWindow extends Window {
   }
 
   @override
+  @protected
   bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-    final flutterResult = _flutterController.wndProc(hWnd, uMsg, wParam, lParam);
+
+    //final flutterResult =
+    _flutterController.wndProc(hWnd, uMsg, wParam, lParam);
+    // todo: return result if
     // if (flutterResult) {
     // return *flutterResult;
     // }

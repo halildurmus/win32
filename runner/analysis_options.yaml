@@ -1,6 +1,7 @@
 include: package:lint/analysis_options_package.yaml
 
 analyzer:
+  exclude: [lib/tmp/**]
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
@@ -17,7 +18,7 @@ linter:
     avoid_private_typedef_functions: false
 
     # win32 parity requires SCREAMING_CAPS constants
-    constant_identifier_names: false  
+    constant_identifier_names: false
 
     # deliberately name generated files after their COM equivalents
     file_names: false

@@ -12,7 +12,7 @@ environment:
 dependencies:
   ffi: ^1.0.0
   win32:
-    path: ..
+    path: ../
 
 dev_dependencies:
   lint: ^1.2.0
