@@ -3,7 +3,7 @@ import 'app/throw_unimplemented.dart';
 import 'flutter/flutter_window.dart';
 import 'flutter/flutter_wrappers.dart';
 
-void main() {
+Future main() async {
   ThrowUnimplemented.off();
 
   final dartProject = DartProject('!!! path directory !!!');

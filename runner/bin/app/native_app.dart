@@ -5,8 +5,7 @@ import 'package:ffi/ffi.dart';
 import 'package:meta/meta.dart';
 import 'package:win32/win32.dart';
 
-import 'throw_unimplemented.dart';
-import 'tools.dart' as tools;
+import 'tools.dart';
 
 part 'native_window.dart';
 
