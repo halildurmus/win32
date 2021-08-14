@@ -105,14 +105,14 @@ void _registryWinClass() {
   }
 }
 
-math.Rectangle<int> _getWindowCenterRect() {
+Rect _getWindowCenterRect() {
   const windowWidth = 500;
-  const windowHeight = 250;
+  const windowHeight = 500;
 
   final screenWidth = GetSystemMetrics(SM_CXFULLSCREEN);
   final screenHeight = GetSystemMetrics(SM_CYFULLSCREEN);
 
   final x = (screenWidth - windowWidth) ~/ 2;
   final y = (screenHeight - windowHeight) ~/ 2;
-  return math.Rectangle(x, y, windowWidth, windowHeight);
+  return Rect.fromXYWH(x, y, windowWidth, windowHeight);
 }

@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '../tools/memory_liberator.dart';
+import 'memory_liberator.dart';
 import 'flutter_api.dart';
 
 class Bundle {

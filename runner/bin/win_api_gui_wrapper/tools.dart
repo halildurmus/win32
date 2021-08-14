@@ -10,6 +10,10 @@ class Rect {
 
   Rect(this.left, this.top, this.right, this.bottom);
 
+  factory Rect.fromXYWH(int x, int y, int width, int height) {
+    return Rect(x, y, x+width, y+height);
+  }
+
   factory Rect.fromAddress(int address) {
     final pRect = Pointer<RECT>.fromAddress(address);
     return  Rect.fromPRect(pRect);
@@ -43,5 +47,3 @@ class Size {
 // #if(WINVER >= 0x0601)
 const  WM_DPICHANGED         =          0x02E0;
 // #endif /* WINVER >= 0x0601 */
-
-

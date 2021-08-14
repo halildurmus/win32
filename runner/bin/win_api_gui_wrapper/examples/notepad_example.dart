@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'app/native_app.dart';
+import '../native_app.dart';
 
 Future main() async {
   Process.run('notepad', []);

@@ -1,36 +1,29 @@
-import '../app/tools.dart';
+import '../win_api_gui_wrapper/tools.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
 import 'flutter_view.dart';
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-class FlutterViewController {
+class FlutterController {
   final FlutterApi _flutterApi;
   late final FlutterEngine engine;
   late final FlutterView view;
 
   ViewControllerRef _controllerRef = nullptr;
 
-  FlutterViewController(Size size, this._controllerRef, this._flutterApi) {
-    // todo: check created refs
-    // if (_controllerRef == nullptr) {
-    // throw 'Create flutter controller error';
-    //}
-  }
+  FlutterController(Size size, this._controllerRef, this._flutterApi);
 
   int wndProc(int hWnd, int uMsg, int wParam, int lParam){
     final resultCallBack = calloc<IntPtr>();
     try {
-
       final handled = _flutterApi.controllerWndProc(
         _controllerRef, hWnd,  uMsg, wParam, lParam, resultCallBack,
       );
-      final returns = handled == 1 ? resultCallBack.value : 0;
-      // todo: transfer to main proc
-      return returns;
+      return handled == 1 ? resultCallBack.value : 0;
     } finally {
       free(resultCallBack);
     }

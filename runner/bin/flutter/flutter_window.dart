@@ -1,37 +1,34 @@
 import 'package:meta/meta.dart';
-import '../app/native_app.dart';
+import '../win_api_gui_wrapper/native_app.dart';
+import 'bundle.dart';
+import 'flutter_api.dart';
 import 'flutter_engine.dart';
+import 'flutter_wrappers.dart';
 
 class FlutterWindow extends NativeWindow {
-  late final FlutterEngine _engine;
+  late final FlutterEngine engine;
 
-  FlutterWindow(String flutterDllPath, String flutterBundlePath) : super() {
-    _engine = FlutterEngine.fromFilePaths(
-      size,
-      flutterBundlePath,
-      flutterDllPath,
-    );
+  FlutterWindow(Bundle bundle, FlutterApi flutterApi) : super() {
+    engine = FlutterEngine(size, bundle, flutterApi);
 
-    // registerPlugins(_engine);
-    childContent = _engine.view.nativeWindow;
+    registerPlugins(engine);
+    childContent = engine.view.nativeWindow;
   }
 
   @protected
   @override
   void onFontChange() {
-    _engine.reloadSystemFonts();
+    engine.reloadSystemFonts();
   }
 
   @override
   @protected
   bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-    //final flutterResult =
-    //_engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
-    _engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
-    // todo: return result if
-    // if (flutterResult) {
-    // return *flutterResult;
-    // }
+    final flutterResult = engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
+
+    if (flutterResult != 0) {
+      return true;
+    }
 
     return super.wndProc(hWnd, uMsg, wParam, lParam);
   }

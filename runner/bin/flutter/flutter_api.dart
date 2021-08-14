@@ -2,8 +2,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../app/throw_unimplemented.dart';
-import '../app/tools.dart';
+import '../win_api_gui_wrapper/tools.dart';
 import 'bundle.dart';
 
 class FlutterApi {
@@ -66,8 +65,8 @@ class FlutterApi {
     );
   }
 
-  EngineRef createEngine(Bundle dartProject) {
-    final engineProperties = dartProject.toEngineProperties();
+  EngineRef createEngine(Bundle bundle) {
+    final engineProperties = bundle.toEngineProperties();
     try {
       return _createEngine(engineProperties.pValue);
     } finally {
@@ -80,7 +79,7 @@ class FlutterApi {
   }
 }
 
-// flutter dll describer
+// flutter dll describe
 // =============================================================================
 
 // FlutterDesktopEngine
@@ -113,8 +112,8 @@ typedef FlutterDesktopMessengerRef = Pointer;
 
 typedef CViewGetHWND = Int32 Function(ViewRef);
 typedef FuncViewGetHWND = int Function(ViewRef);
-// =============================================================================
 
+// =============================================================================
 
 class EngineProperties  extends Struct {
   // The path to the flutter_assets folder for the application to be run.
@@ -146,10 +145,4 @@ class EngineProperties  extends Struct {
   // to FlutterDesktopEngineCreate.
   // const char** dart_entrypoint_argv;
   external Pointer<Pointer<Utf8>> dart_entrypoint_argv;
-}
-
-FlutterDesktopMessengerRef FlutterDesktopEngineGetMessenger(
-    EngineRef engine) {
-  ThrowUnimplemented.throwIfOn();
-  return nullptr;
 }

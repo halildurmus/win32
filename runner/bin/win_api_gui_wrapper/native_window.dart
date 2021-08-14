@@ -13,6 +13,7 @@ class NativeWindow {
   @protected
   bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch(uMsg) {
+
       case WM_CLOSE:
         _closeEvent();
         return true;
@@ -31,6 +32,10 @@ class NativeWindow {
 
       case WM_DPICHANGED:
         onDpiChange(Rect.fromAddress(lParam));
+        return true;
+
+      case WM_SHOWWINDOW:
+        onShow();
         return true;
     }
     return false;
@@ -95,6 +100,9 @@ class NativeWindow {
         break;
     }
   }
+
+  @protected
+  void onShow() {}
 
   void hide() {
     ShowWindowAsync(hWnd, SW_HIDE);
@@ -169,6 +177,5 @@ class NativeWindow {
 
     // SetFocus(_childContent);
     // SetActiveWindow(_childContent);
-    // UpdateWindow(_childContent);
   }
 }
