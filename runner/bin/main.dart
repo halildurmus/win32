@@ -1,15 +1,16 @@
 import 'app/native_app.dart';
 import 'app/throw_unimplemented.dart';
 import 'flutter/flutter_window.dart';
-import 'flutter/flutter_wrappers.dart';
 
 Future main() async {
   ThrowUnimplemented.off();
 
-  final dartProject = DartProject('!!! path directory !!!');
-  FlutterWindow(dartProject)
-    ..title = 'New Window'
+  final flutterDllPath = r'c:\Users\ilopX\fvm\default\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll';
+  final dartProject =  r'd:\downloads\Release\data';
+
+  FlutterWindow(flutterDllPath, dartProject)
+    ..title = 'Flutter dart runner'
     ..show();
 
-  NativeApp.run();
+   NativeApp.run();
 }

@@ -36,10 +36,10 @@ class Win32Window {
   bool quit_on_close_ = false;
 
   // window handle for top level window.
-  int window_handle_;
+  late int window_handle_;
 
   // window handle for hosted content.
-  int child_content_;
+  late int child_content_;
 
   // Creates and shows a win32 window with |title| and position and size using
   // |origin| and |size|. New windows are created on the default monitor. Window
@@ -50,18 +50,20 @@ class Win32Window {
   bool CreateAndShow(String title, Point origin, Size size) {
     final classNamePtr = TEXT(className);
 
-    final window_class = WNDCLASS.allocate()
+    final window_class = malloc<WNDCLASS>();
+    window_class.ref
       ..hCursor = LoadCursor(NULL, IDC_ARROW)
       ..lpszClassName = classNamePtr
       ..style = CS_HREDRAW | CS_VREDRAW
       ..hInstance = GetModuleHandle(nullptr)
       ..hbrBackground = 0
       ..lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-    RegisterClass(window_class.addressOf);
+    RegisterClass(window_class);
 
-    final monitor = MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
-    final int dpi = FlutterDesktopGetDpiForMonitor(monitor);
-    final scale_factor = dpi / 96.0;
+    //final monitor = MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
+    //final int dpi = FlutterDesktopGetDpiForMonitor(monitor);
+    const dpi = 96;
+    const scale_factor = dpi / 96.0;
 
     final window = CreateWindow(
         classNamePtr,
@@ -76,7 +78,9 @@ class Win32Window {
         GetModuleHandle(nullptr),
         nullptr);
 
+    ShowWindow(window, SW_SHOW);
     free(classNamePtr);
+    return window != 0;
   }
 
   // Release OS resources associated with window.
@@ -89,27 +93,26 @@ class Win32Window {
   // window properties. Returns nullptr if the window has been destroyed.
   int GetHandle() => window_handle_;
 
-  int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
+  static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch (uMsg) {
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
 
       case WM_PAINT:
-        final ps = PAINTSTRUCT.allocate();
-        final hdc = BeginPaint(hWnd, ps.addressOf);
-        final rect = RECT.allocate();
+        final ps = malloc<PAINTSTRUCT>();
+        final rect = malloc<RECT>();
         final msg = TEXT('Hello, Dart!');
-
-        GetClientRect(hWnd, rect.addressOf);
-        DrawText(hdc, msg, -1, rect.addressOf,
-            DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-        EndPaint(hWnd, ps.addressOf);
-
-        free(ps.addressOf);
-        free(rect.addressOf);
-        free(msg);
-
+        try {
+          // final hdc = BeginPaint(hWnd, ps);
+          // GetClientRect(hWnd, rect);
+          // DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+          // EndPaint(hWnd, ps);
+        } finally {
+          free(ps);
+          free(rect);
+          free(msg);
+        }
         return 0;
     }
     return DefWindowProc(hWnd, uMsg, wParam, lParam);

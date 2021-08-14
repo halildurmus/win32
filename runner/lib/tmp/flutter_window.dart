@@ -3,7 +3,8 @@ import 'win32_window.dart';
 
 // Temporary
 class DartProject {
-  DartProject(String s);
+  final String dir;
+  DartProject(this.dir);
 }
 
 // A window that does nothing but host a Flutter view.

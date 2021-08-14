@@ -1,20 +1,18 @@
 import 'package:meta/meta.dart';
-
 import '../app/native_app.dart';
-import 'flutter_wrappers.dart';
+import 'bundle.dart';
+import 'flutter_api.dart';
+import 'flutter_controller.dart';
 
 class FlutterWindow extends NativeWindow {
-  final DartProject _dartProject;
   late final FlutterViewController _flutterController;
 
-  FlutterWindow(this._dartProject) : super() {
-    _flutterController = FlutterViewController(
-      size.width,
-      size.height,
-      _dartProject,
-    );
+  FlutterWindow(String flutterDllPath, String flutterBundlePath) : super() {
+    final flutterApi = FlutterApi.load(flutterDllPath);
+    final bundle = Bundle.fromSourceDir(flutterBundlePath);
+    _flutterController = FlutterViewController(size, bundle, flutterApi);
 
-    registerPlugins(_flutterController.engine);
+    // registerPlugins(_flutterController.engine);
     childContent = _flutterController.view.nativeWindow;
   }
 

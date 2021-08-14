@@ -4,11 +4,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class TimePoint {
-  static int _frequency;
+  static int _frequency  = 0;
 
   int get frequency {
-    if (_frequency == null) {
-      final frequencyPtr = allocate<Int64>();
+    if (_frequency == 0) {
+      final frequencyPtr = malloc<Int64>();
 
       try {
         QueryPerformanceFrequency(frequencyPtr);
@@ -22,7 +22,5 @@ class TimePoint {
     }
   }
 
-  int get now {
-    return 0;
-  }
+  int get now => 0;
 }

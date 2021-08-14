@@ -1,7 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
-
 import 'package:win32/win32.dart';
 
 import 'flutter_window.dart';
@@ -14,15 +12,17 @@ const EXIT_SUCCESS = 0;
 const EXIT_FAILURE = 1;
 
 int main() {
+
   // Attach to console when present (e.g., 'flutter run') or create a
   // new console when running with a debugger.
   if (AttachConsole(ATTACH_PARENT_PROCESS) == 0 && IsDebuggerPresent() != 0) {
     CreateAndAttachConsole();
   }
 
+
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
-  RunLoop run_loop;
+  final run_loop = RunLoop();
 
   final project = DartProject("data");
   final window = FlutterWindow(run_loop, project);
