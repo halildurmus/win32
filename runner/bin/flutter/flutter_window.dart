@@ -1,32 +1,33 @@
 import 'package:meta/meta.dart';
 import '../app/native_app.dart';
-import 'bundle.dart';
-import 'flutter_api.dart';
-import 'flutter_controller.dart';
+import 'flutter_engine.dart';
 
 class FlutterWindow extends NativeWindow {
-  late final FlutterViewController _flutterController;
+  late final FlutterEngine _engine;
 
   FlutterWindow(String flutterDllPath, String flutterBundlePath) : super() {
-    final flutterApi = FlutterApi.load(flutterDllPath);
-    final bundle = Bundle.fromSourceDir(flutterBundlePath);
-    _flutterController = FlutterViewController(size, bundle, flutterApi);
+    _engine = FlutterEngine.fromFilePaths(
+      size,
+      flutterBundlePath,
+      flutterDllPath,
+    );
 
-    // registerPlugins(_flutterController.engine);
-    childContent = _flutterController.view.nativeWindow;
+    // registerPlugins(_engine);
+    childContent = _engine.view.nativeWindow;
   }
 
   @protected
   @override
   void onFontChange() {
-    _flutterController.engine.reloadSystemFonts();
+    _engine.reloadSystemFonts();
   }
 
   @override
   @protected
   bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     //final flutterResult =
-    _flutterController.wndProc(hWnd, uMsg, wParam, lParam);
+    //_engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
+    _engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
     // todo: return result if
     // if (flutterResult) {
     // return *flutterResult;

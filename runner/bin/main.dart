@@ -6,9 +6,9 @@ Future main() async {
   ThrowUnimplemented.off();
 
   final flutterDllPath = r'c:\Users\ilopX\fvm\default\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll';
-  final dartProject =  r'd:\downloads\Release\data';
+  final bundlePath =  r'd:\downloads\Release\data';
 
-  FlutterWindow(flutterDllPath, dartProject)
+  FlutterWindow(flutterDllPath, bundlePath)
     ..title = 'Flutter dart runner'
     ..show();
 

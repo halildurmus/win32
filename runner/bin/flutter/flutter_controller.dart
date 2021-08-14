@@ -1,5 +1,4 @@
 import '../app/tools.dart';
-import 'bundle.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
 import 'flutter_view.dart';
@@ -15,19 +14,7 @@ class FlutterViewController {
 
   ViewControllerRef _controllerRef = nullptr;
 
-  FlutterViewController(Size size, Bundle bundle, this._flutterApi) {
-    final engineRef = _flutterApi.createEngine(bundle);
-    final controllerRef = _flutterApi.createController(size, engineRef);
-    final viewRef = _flutterApi.getView(controllerRef);
-
-    print('engine: 0x${engineRef.value.toRadixString(16)}');
-    print('controller: 0x${controllerRef.value.toRadixString(16)}');
-    print('view: 0x${viewRef.value.toRadixString(16)}');
-
-    _controllerRef = controllerRef;
-    engine = FlutterEngine(engineRef, _flutterApi);
-    view = FlutterView(viewRef, _flutterApi);
-
+  FlutterViewController(Size size, this._controllerRef, this._flutterApi) {
     // todo: check created refs
     // if (_controllerRef == nullptr) {
     // throw 'Create flutter controller error';
