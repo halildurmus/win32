@@ -17,11 +17,16 @@ class FlutterController {
 
   FlutterController(Size size, this._controllerRef, this._flutterApi);
 
-  int wndProc(int hWnd, int uMsg, int wParam, int lParam){
+  int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     final resultCallBack = calloc<IntPtr>();
     try {
       final handled = _flutterApi.controllerWndProc(
-        _controllerRef, hWnd,  uMsg, wParam, lParam, resultCallBack,
+        _controllerRef,
+        hWnd,
+        uMsg,
+        wParam,
+        lParam,
+        resultCallBack,
       );
       return handled == 0 ? 0 : resultCallBack.value;
     } finally {

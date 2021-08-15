@@ -11,13 +11,12 @@ class Rect {
   Rect(this.left, this.top, this.right, this.bottom);
 
   factory Rect.fromXYWH(int x, int y, int width, int height) {
-    return Rect(x, y, x+width, y+height);
+    return Rect(x, y, x + width, y + height);
   }
 
   factory Rect.fromAddress(int address) {
     final pRect = Pointer<RECT>.fromAddress(address);
-    return  Rect.fromPRect(pRect);
-
+    return Rect.fromPRect(pRect);
   }
 
   factory Rect.fromPRect(Pointer<RECT> pRect) {
@@ -26,6 +25,7 @@ class Rect {
   }
 
   int get width => right - left;
+
   int get height => bottom - top;
 
   Size get size => Size(width, height);
