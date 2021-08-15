@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_runner/flutter_runner.dart';
+import '../lib/flutter_runner.dart';
 
 Future main() async {
   ThrowUnimplemented.off();
