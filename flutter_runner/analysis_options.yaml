@@ -37,7 +37,7 @@ linter:
 
     # Some additional lints we want to enforce
     omit_local_variable_types: true
-    prefer_expression_function_bodies: flase
+    prefer_expression_function_bodies: false
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
     unnecessary_lambdas: true
