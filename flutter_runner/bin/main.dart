@@ -1,11 +1,6 @@
 import 'dart:async';
 
-import 'flutter/bundle.dart';
-import 'flutter/flutter_api.dart';
-import 'flutter/flutter_window.dart';
-import 'win_api_gui_wrapper/native_app.dart';
-import 'win_api_gui_wrapper/throw_unimplemented.dart';
-import 'win_api_gui_wrapper/tools.dart';
+import 'package:flutter_runner/flutter_runner.dart';
 
 Future main() async {
   ThrowUnimplemented.off();
@@ -18,9 +13,7 @@ Future main() async {
 
   FlutterWindow(bundle, flutterApi)
     ..title = 'Flutter dart runner'
-    // todo: after changing the new dimensions, the flutter is not updated on the first launch
-    ..size = Size(300, 680)
-    //..centredOfScreen()
+    ..size = Size(400, 500)
     ..show();
 
    NativeApp.run();

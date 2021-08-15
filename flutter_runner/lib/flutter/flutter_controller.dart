@@ -23,13 +23,13 @@ class FlutterController {
       final handled = _flutterApi.controllerWndProc(
         _controllerRef, hWnd,  uMsg, wParam, lParam, resultCallBack,
       );
-      return handled == 1 ? resultCallBack.value : 0;
+      return handled == 0 ? 0 : resultCallBack.value;
     } finally {
       free(resultCallBack);
     }
   }
 
-  void release() {
+  void destroy() {
     if (_controllerRef == nullptr) {
       return;
     }

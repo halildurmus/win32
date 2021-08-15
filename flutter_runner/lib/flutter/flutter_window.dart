@@ -3,20 +3,25 @@ import '../win_api_gui_wrapper/native_app.dart';
 import 'bundle.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
-import 'flutter_wrappers.dart';
+
 
 class FlutterWindow extends NativeWindow {
   late final FlutterEngine engine;
 
   FlutterWindow(Bundle bundle, FlutterApi flutterApi) : super() {
     engine = FlutterEngine(size, bundle, flutterApi);
-
-    registerPlugins(engine);
     childContent = engine.view.nativeWindow;
   }
 
-  @protected
   @override
+  @protected
+  WindowState onClose() {
+    engine.controller.destroy();
+    return super.onClose();
+  }
+
+  @override
+  @protected
   void onFontChange() {
     engine.reloadSystemFonts();
   }

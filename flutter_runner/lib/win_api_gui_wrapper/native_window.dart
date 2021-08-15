@@ -1,6 +1,6 @@
 part of 'native_app.dart';
 
-enum WindowState { close, hide, minimize, stayOpen }
+enum WindowState { destroy, hide, minimize, stayOpen }
 
 class NativeWindow {
   late final int hWnd;
@@ -14,7 +14,6 @@ class NativeWindow {
   @protected
   int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch(uMsg) {
-
       case WM_CLOSE:
         _closeEvent();
         return 0;
@@ -41,9 +40,6 @@ class NativeWindow {
     }
     return 0;
   }
-
-  @protected
-  WindowState onClose() => WindowState.close;
 
   @protected
   void onPaint() {
@@ -90,10 +86,13 @@ class NativeWindow {
   @protected
   void onCreate() {}
 
+  @protected
+  WindowState onClose() => WindowState.destroy;
+
   void _closeEvent() {
     final closeAnswer = onClose();
     switch(closeAnswer){
-      case WindowState.close:
+      case WindowState.destroy:
         _windows.remove(hWnd);
         DestroyWindow(hWnd);
         break;
@@ -129,9 +128,10 @@ class NativeWindow {
   }
 
   String get title {
-    final pTitle = calloc.allocate<Utf16>(256*2);
+
+    final pTitle = calloc.allocate<Utf16>(MAX_PATH*2);
     try {
-      GetWindowText(hWnd, pTitle, 256);
+      GetWindowText(hWnd, pTitle, MAX_PATH);
       return pTitle.toDartString();
     } finally {
       free(pTitle);

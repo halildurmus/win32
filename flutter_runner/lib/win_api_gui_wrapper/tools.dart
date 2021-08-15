@@ -52,7 +52,6 @@ Rect centredOfScreenRect(int windowWidth, int windowHeight) {
   return Rect.fromXYWH(x, y, windowWidth, windowHeight);
 }
 
-// todo: add to win32 package
 // #if(WINVER >= 0x0601)
 const  WM_DPICHANGED         =          0x02E0;
 // #endif /* WINVER >= 0x0601 */
