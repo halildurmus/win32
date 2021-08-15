@@ -96,6 +96,7 @@ int _createWindowHidden(int nativeWindowAddress) {
 }
 
 String __windowClassName = '';
+
 String get _windowClassName {
   if (__windowClassName.isEmpty) {
     __windowClassName = kWindowClassName;
@@ -113,8 +114,8 @@ void _registryWinClass() {
       ..style = CS_HREDRAW | CS_VREDRAW
       ..lpfnWndProc = Pointer.fromFunction<WindowProc>(_wndProc, 0)
       ..hInstance = NativeApp.hInst
-    //..hbrBackground = LoadResource(hInst, WHITE_BRUSH)
-    //..hIcon = LoadIcon (hInst , 1)
+      //..hbrBackground = LoadResource(hInst, WHITE_BRUSH)
+      //..hIcon = LoadIcon (hInst , 1)
       ..hCursor = LoadCursor(NULL, IDC_ARROW)
       ..lpszClassName = pWindowClass;
     RegisterClass(pWndClass);

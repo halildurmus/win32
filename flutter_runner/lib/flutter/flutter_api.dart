@@ -25,34 +25,25 @@ class FlutterApi {
   factory FlutterApi.load(String libPath) {
     final dll = DynamicLibrary.open(libPath);
 
-    final createEngine = dll.lookupFunction<
-        CEngineCreate,
-        FuncEngineCreate>(
+    final createEngine = dll.lookupFunction<CEngineCreate, FuncEngineCreate>(
         'FlutterDesktopEngineCreate');
 
-    final createController = dll.lookupFunction<
-        CViewControllerCreate,
-        FuncViewControllerCreate>(
-        'FlutterDesktopViewControllerCreate');
+    final createController =
+        dll.lookupFunction<CViewControllerCreate, FuncViewControllerCreate>(
+            'FlutterDesktopViewControllerCreate');
 
-    final getView = dll.lookupFunction<
-        CGetView,
-        FuncGetView>(
+    final getView = dll.lookupFunction<CGetView, FuncGetView>(
         'FlutterDesktopViewControllerGetView');
 
-    final controllerWndProc = dll.lookupFunction<
-        CControllerWindowProc,
-        FuncControllerWindowProc>(
-        'FlutterDesktopViewControllerHandleTopLevelWindowProc');
+    final controllerWndProc =
+        dll.lookupFunction<CControllerWindowProc, FuncControllerWindowProc>(
+            'FlutterDesktopViewControllerHandleTopLevelWindowProc');
 
-    final controllerDestroy = dll.lookupFunction<
-      CControllerDestroy,
-      FuncControllerDestroy>(
-        'FlutterDesktopViewControllerDestroy');
+    final controllerDestroy =
+        dll.lookupFunction<CControllerDestroy, FuncControllerDestroy>(
+            'FlutterDesktopViewControllerDestroy');
 
-    final viewGetHWND = dll.lookupFunction<
-        CViewGetHWND,
-        FuncViewGetHWND>(
+    final viewGetHWND = dll.lookupFunction<CViewGetHWND, FuncViewGetHWND>(
         'FlutterDesktopViewGetHWND');
 
     return FlutterApi._internal(
@@ -91,7 +82,7 @@ typedef FuncEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 // FlutterDesktopViewControllerState
 typedef ViewControllerRef = Pointer<IntPtr>;
 
-typedef CViewControllerCreate= EngineRef Function(Int32, Int32, EngineRef);
+typedef CViewControllerCreate = EngineRef Function(Int32, Int32, EngineRef);
 typedef FuncViewControllerCreate = EngineRef Function(int, int, EngineRef);
 
 // FlutterDesktopView;
@@ -115,7 +106,7 @@ typedef FuncViewGetHWND = int Function(ViewRef);
 
 // =============================================================================
 
-class EngineProperties  extends Struct {
+class EngineProperties extends Struct {
   // The path to the flutter_assets folder for the application to be run.
   // This can either be an absolute path or a path relative to the directory
   // containing the executable.

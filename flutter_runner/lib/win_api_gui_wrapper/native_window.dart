@@ -13,7 +13,7 @@ class NativeWindow {
 
   @protected
   int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-    switch(uMsg) {
+    switch (uMsg) {
       case WM_CLOSE:
         _closeEvent();
         return 0;
@@ -70,13 +70,14 @@ class NativeWindow {
 
   @protected
   void onDpiChange(Rect newWindowRect) {
-    SetWindowPos(hWnd,
-        NULL,
-        newWindowRect.left,
-        newWindowRect.top,
-        newWindowRect.width,
-        newWindowRect.height,
-        SWP_NOZORDER | SWP_NOACTIVATE,
+    SetWindowPos(
+      hWnd,
+      NULL,
+      newWindowRect.left,
+      newWindowRect.top,
+      newWindowRect.width,
+      newWindowRect.height,
+      SWP_NOZORDER | SWP_NOACTIVATE,
     );
   }
 
@@ -91,7 +92,7 @@ class NativeWindow {
 
   void _closeEvent() {
     final closeAnswer = onClose();
-    switch(closeAnswer){
+    switch (closeAnswer) {
       case WindowState.destroy:
         _windows.remove(hWnd);
         DestroyWindow(hWnd);
@@ -128,8 +129,7 @@ class NativeWindow {
   }
 
   String get title {
-
-    final pTitle = calloc.allocate<Utf16>(MAX_PATH*2);
+    final pTitle = calloc.allocate<Utf16>(MAX_PATH * 2);
     try {
       GetWindowText(hWnd, pTitle, MAX_PATH);
       return pTitle.toDartString();
@@ -158,7 +158,8 @@ class NativeWindow {
   }
 
   set screenRect(Rect newRect) {
-    SetWindowPos(hWnd,
+    SetWindowPos(
+      hWnd,
       NULL,
       newRect.left,
       newRect.top,
@@ -182,8 +183,10 @@ class NativeWindow {
     final screen = screenRect;
     MoveWindow(
       hWnd,
-      screen.left, screen.top,
-      newSize.width, newSize.height,
+      screen.left,
+      screen.top,
+      newSize.width,
+      newSize.height,
       TRUE,
     );
   }
@@ -201,7 +204,7 @@ class NativeWindow {
   }
 
   void _childContentResize() {
-    if(_childContent == 0) {
+    if (_childContent == 0) {
       return;
     }
 

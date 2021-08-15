@@ -3,8 +3,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'memory_liberator.dart';
 import 'flutter_api.dart';
+import 'memory_liberator.dart';
 
 class Bundle {
   final String assets_path;
@@ -16,10 +16,10 @@ class Bundle {
   Bundle(this.assets_path, this.icu_data_path, this.aot_library_path);
 
   factory Bundle.fromSourceDir(String path) => Bundle(
-    '$path\\flutter_assets',
-    '$path\\icudtl.dat',
-    '$path\\app.so',
-  );
+        '$path\\flutter_assets',
+        '$path\\icudtl.dat',
+        '$path\\app.so',
+      );
 
   MemoryLiberator<Pointer<EngineProperties>> toEngineProperties() {
     return MemoryLiberator(

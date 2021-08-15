@@ -4,7 +4,6 @@ import 'bundle.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
 
-
 class FlutterWindow extends NativeWindow {
   late final FlutterEngine engine;
 

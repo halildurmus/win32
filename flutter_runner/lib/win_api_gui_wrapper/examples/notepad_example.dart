@@ -11,7 +11,8 @@ Future main() async {
 
   await Future<void>.delayed(const Duration(microseconds: 1));
   final notePadWnd = FindWindow('notepad'.toNativeUtf16(), nullptr);
-  SetWindowLongPtr(notePadWnd, GWL_STYLE, WS_CHILD | WS_POPUPWINDOW | WS_VISIBLE);
+  SetWindowLongPtr(
+      notePadWnd, GWL_STYLE, WS_CHILD | WS_POPUPWINDOW | WS_VISIBLE);
 
   NativeWindow()
     ..childContent = notePadWnd

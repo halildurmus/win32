@@ -1,4 +1,4 @@
-class MemoryLiberator<T>{
+class MemoryLiberator<T> {
   final T Function() allocMemory;
   final Function(T) _free;
 
@@ -8,9 +8,7 @@ class MemoryLiberator<T>{
   T? _val;
 
   T get pValue {
-    if (_val == null) {
-      _val = allocMemory();
-    }
+    _val ??= allocMemory();
     return _val!;
   }
 

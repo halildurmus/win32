@@ -4,6 +4,7 @@ import 'win32_window.dart';
 // Temporary
 class DartProject {
   final String dir;
+
   DartProject(this.dir);
 }
 
@@ -15,6 +16,7 @@ class FlutterWindow extends Win32Window {
 
   // Win32Window:
   void OnCreate() {}
+
   void OnDestroy() {}
 
   // The run loop driving events for this window.
@@ -25,6 +27,6 @@ class FlutterWindow extends Win32Window {
 
   void SetQuitOnClose(bool bool) {}
 
-  // The Flutter instance hosted by this window.
-  // FlutterViewController flutter_controller_;
+// The Flutter instance hosted by this window.
+// FlutterViewController flutter_controller_;
 }
