@@ -31,8 +31,8 @@ int _wndProc(int hWnd, int uMsg, int wParam, int lParam) {
   final window = _windows[hWnd];
   if (window != null) {
     final windowResult = window.wndProc(hWnd, uMsg, wParam, lParam);
-    if (windowResult) {
-      return 0;
+    if (windowResult != 0) {
+      return windowResult;
     }
   }
 

@@ -12,34 +12,34 @@ class NativeWindow {
   }
 
   @protected
-  bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
+  int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch(uMsg) {
 
       case WM_CLOSE:
         _closeEvent();
-        return true;
+        return 0;
 
       case WM_PAINT:
         onPaint();
-        return true;
+        return 0;
 
       case WM_SIZE:
         onResize(LOWORD(lParam), HIWORD(lParam));
-        return true;
+        return 0;
 
       case WM_FONTCHANGE:
         onFontChange();
-        return true;
+        return 0;
 
       case WM_DPICHANGED:
         onDpiChange(Rect.fromAddress(lParam));
-        return true;
+        return 0;
 
       case WM_SHOWWINDOW:
         onShow();
-        return true;
+        return 0;
     }
-    return false;
+    return 0;
   }
 
   @protected

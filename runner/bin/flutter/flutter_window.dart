@@ -23,11 +23,11 @@ class FlutterWindow extends NativeWindow {
 
   @override
   @protected
-  bool wndProc(int hWnd, int uMsg, int wParam, int lParam) {
+  int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
     final flutterResult = engine.controller.wndProc(hWnd, uMsg, wParam, lParam);
 
     if (flutterResult != 0) {
-      return true;
+      return flutterResult;
     }
 
     return super.wndProc(hWnd, uMsg, wParam, lParam);
