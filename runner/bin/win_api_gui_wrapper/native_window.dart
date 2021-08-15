@@ -6,8 +6,9 @@ class NativeWindow {
   late final int hWnd;
 
   NativeWindow() {
-    hWnd = _createWindowHidden();
-    _windows[hWnd] = this;
+    final thisAddress = hashCode;
+    _winCtorStack[thisAddress] = this;
+    hWnd = _createWindowHidden(thisAddress);
   }
 
   @protected
@@ -83,6 +84,12 @@ class NativeWindow {
     );
   }
 
+  @protected
+  void onShow() {}
+
+  @protected
+  void onCreate() {}
+
   void _closeEvent() {
     final closeAnswer = onClose();
     switch(closeAnswer){
@@ -101,8 +108,13 @@ class NativeWindow {
     }
   }
 
-  @protected
-  void onShow() {}
+  void centredOfScreen() {
+    final thisScreenRect = screenRect;
+    screenRect = centredOfScreenRect(
+      thisScreenRect.width,
+      thisScreenRect.height,
+    );
+  }
 
   void hide() {
     ShowWindowAsync(hWnd, SW_HIDE);
@@ -135,16 +147,45 @@ class NativeWindow {
     }
   }
 
-  Size get size => rect.size;
-
-  Rect get rect {
+  Rect get screenRect {
     final pRect = calloc<RECT>();
     try {
-      GetClientRect(hWnd, pRect);
+      GetWindowRect(hWnd, pRect);
       return Rect.fromPRect(pRect);
     } finally {
       free(pRect);
     }
+  }
+
+  set screenRect(Rect newRect) {
+    SetWindowPos(hWnd,
+      NULL,
+      newRect.left,
+      newRect.top,
+      newRect.width,
+      newRect.height,
+      SWP_NOZORDER | SWP_NOACTIVATE,
+    );
+  }
+
+  Size get size {
+    final pRect = calloc<RECT>();
+    try {
+      GetClientRect(hWnd, pRect);
+      return Rect.fromPRect(pRect).size;
+    } finally {
+      free(pRect);
+    }
+  }
+
+  set size(Size newSize) {
+    final screen = screenRect;
+    MoveWindow(
+      hWnd,
+      screen.left, screen.top,
+      newSize.width, newSize.height,
+      TRUE,
+    );
   }
 
   int _childContent = 0;
@@ -153,10 +194,10 @@ class NativeWindow {
 
   set childContent(int child) {
     SetParent(child, hWnd);
-    //SetWindowLongPtr(child, GWL_STYLE, WS_POPUPWINDOW|WS_TABSTOP |WS_VISIBLE | WS_CHILD);
+    //SetWindowLongPtr(child, GWL_STYLE, WS_VISIBLE | WS_CHILD);
     _childContent = child;
     _childContentResize();
-    SetFocus(child);
+    // SetFocus(child);
   }
 
   void _childContentResize() {
@@ -164,18 +205,14 @@ class NativeWindow {
       return;
     }
 
-    final rect = this.rect;
-
+    final thisSize = size;
     MoveWindow(
       _childContent,
-      rect.left,
-      rect.top,
-      rect.width,
-      rect.height,
+      0,
+      0,
+      thisSize.width,
+      thisSize.height,
       TRUE,
     );
-
-    // SetFocus(_childContent);
-    // SetActiveWindow(_childContent);
   }
 }

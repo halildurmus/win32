@@ -43,6 +43,15 @@ class Size {
   Size(this.width, this.height);
 }
 
+Rect centredOfScreenRect(int windowWidth, int windowHeight) {
+  final screenWidth = GetSystemMetrics(SM_CXFULLSCREEN);
+  final screenHeight = GetSystemMetrics(SM_CYFULLSCREEN);
+
+  final x = (screenWidth - windowWidth) ~/ 2;
+  final y = (screenHeight - windowHeight) ~/ 2;
+  return Rect.fromXYWH(x, y, windowWidth, windowHeight);
+}
+
 // todo: add to win32 package
 // #if(WINVER >= 0x0601)
 const  WM_DPICHANGED         =          0x02E0;

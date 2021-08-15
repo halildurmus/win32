@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math' as math;
 
 import 'package:ffi/ffi.dart';
 import 'package:meta/meta.dart';
@@ -8,6 +7,11 @@ import 'package:win32/win32.dart';
 import 'tools.dart';
 
 part 'native_window.dart';
+
+const kWindowClassName = 'FLUTTER_RUNNER_WIN32_WINDOW';
+
+final _windows = <int, NativeWindow>{};
+final _winCtorStack = <int, NativeWindow>{};
 
 // ignore: avoid_classes_with_only_static_members
 class NativeApp {
@@ -33,6 +37,24 @@ int _wndProc(int hWnd, int uMsg, int wParam, int lParam) {
   }
 
   switch (uMsg) {
+    case WM_CREATE:
+      final createInfo = Pointer<CREATESTRUCT>.fromAddress(lParam).ref;
+      final createdClassName = createInfo.lpszClass.toDartString();
+      final nativeWindowAddress = createInfo.lpCreateParams.cast<Int64>();
+      try {
+        if (createdClassName == kWindowClassName) {
+          if (_winCtorStack.containsKey(nativeWindowAddress.value)) {
+            final nativeWindow = _winCtorStack[nativeWindowAddress.value];
+            _windows[hWnd] = nativeWindow!;
+            nativeWindow.onCreate();
+            return 0;
+          }
+        }
+      } finally {
+        free(nativeWindowAddress);
+      }
+      break;
+
     case WM_DESTROY:
       if (_windows.isEmpty) {
         PostQuitMessage(0);
@@ -43,11 +65,8 @@ int _wndProc(int hWnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-final _windows = <int, NativeWindow>{};
-
-int _createWindowHidden() {
-  final rect = _getWindowCenterRect();
-
+int _createWindowHidden(int nativeWindowAddress) {
+  final pNativeWindowAddress = calloc<Int64>()..value = nativeWindowAddress;
   final pWindowClassName = _windowClassName.toNativeUtf16();
   final pTitle = 'Window'.toNativeUtf16();
   try {
@@ -56,14 +75,14 @@ int _createWindowHidden() {
         pWindowClassName,
         pTitle,
         WS_OVERLAPPEDWINDOW,
-        rect.left,
-        rect.top,
-        rect.width,
-        rect.height,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
         NULL,
         NULL,
         NativeApp.hInst,
-        nullptr);
+        pNativeWindowAddress);
 
     if (hWnd == 0) {
       throw 'Window create erorr';
@@ -79,7 +98,7 @@ int _createWindowHidden() {
 String __windowClassName = '';
 String get _windowClassName {
   if (__windowClassName.isEmpty) {
-    __windowClassName = 'WindowClass';
+    __windowClassName = kWindowClassName;
     _registryWinClass();
   }
   return __windowClassName;
@@ -103,16 +122,4 @@ void _registryWinClass() {
     free(pWindowClass);
     free(pWndClass);
   }
-}
-
-Rect _getWindowCenterRect() {
-  const windowWidth = 500;
-  const windowHeight = 500;
-
-  final screenWidth = GetSystemMetrics(SM_CXFULLSCREEN);
-  final screenHeight = GetSystemMetrics(SM_CYFULLSCREEN);
-
-  final x = (screenWidth - windowWidth) ~/ 2;
-  final y = (screenHeight - windowHeight) ~/ 2;
-  return Rect.fromXYWH(x, y, windowWidth, windowHeight);
 }
