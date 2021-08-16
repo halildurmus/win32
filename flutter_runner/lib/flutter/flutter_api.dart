@@ -65,7 +65,7 @@ class FlutterApi {
     }
   }
 
-  ViewControllerRef createController(Size size, EngineRef engineRef) {
+  ControllerRef createController(Size size, EngineRef engineRef) {
     return _createController(size.width, size.height, engineRef);
   }
 }
@@ -80,7 +80,7 @@ typedef CEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 typedef FuncEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 
 // FlutterDesktopViewControllerState
-typedef ViewControllerRef = Pointer<IntPtr>;
+typedef ControllerRef = Pointer<IntPtr>;
 
 typedef CViewControllerCreate = EngineRef Function(Int32, Int32, EngineRef);
 typedef FuncViewControllerCreate = EngineRef Function(int, int, EngineRef);
@@ -88,16 +88,16 @@ typedef FuncViewControllerCreate = EngineRef Function(int, int, EngineRef);
 // FlutterDesktopView;
 typedef ViewRef = Pointer<IntPtr>;
 
-typedef CGetView = ViewRef Function(ViewControllerRef);
-typedef FuncGetView = ViewRef Function(ViewControllerRef);
+typedef CGetView = ViewRef Function(ControllerRef);
+typedef FuncGetView = ViewRef Function(ControllerRef);
 
 typedef CControllerWindowProc = Int32 Function(
-    ViewControllerRef, Int32, Int32, Int32, Int32, Pointer);
+    ControllerRef, Int32, Int32, Int32, Int32, Pointer);
 typedef FuncControllerWindowProc = int Function(
-    ViewControllerRef, int, int, int, int, Pointer);
+    ControllerRef, int, int, int, int, Pointer);
 
-typedef CControllerDestroy = Void Function(ViewControllerRef);
-typedef FuncControllerDestroy = void Function(ViewControllerRef);
+typedef CControllerDestroy = Void Function(ControllerRef);
+typedef FuncControllerDestroy = void Function(ControllerRef);
 
 typedef FlutterDesktopMessengerRef = Pointer;
 
@@ -111,14 +111,12 @@ class EngineProperties extends Struct {
   // This can either be an absolute path or a path relative to the directory
   // containing the executable.
   // const wchar_t* assets_path;
-
   external Pointer<Utf16> assets_path;
 
   // The path to the icudtl.dat file for the version of Flutter you are using.
   // This can either be an absolute path or a path relative to the directory
   // containing the executable.
   // const wchar_t* icu_data_path;
-
   external Pointer<Utf16> icu_data_path;
 
   // The path to the AOT library file for your application, if any.

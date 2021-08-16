@@ -38,8 +38,8 @@ class Bundle {
         free(pProp.ref.assets_path);
         free(pProp.ref.icu_data_path);
         free(pProp.ref.aot_library_path);
-        free(pProp.ref.dart_entrypoint_argv.value.cast());
-        free(pProp.ref.dart_entrypoint_argv.cast());
+        free(pProp.ref.dart_entrypoint_argv.value);
+        free(pProp.ref.dart_entrypoint_argv);
         free(pProp);
       },
     );

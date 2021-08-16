@@ -1,3 +1,5 @@
+library flutter_runner;
+
 export 'flutter/bundle.dart';
 export 'flutter/flutter_api.dart';
 export 'flutter/flutter_controller.dart';

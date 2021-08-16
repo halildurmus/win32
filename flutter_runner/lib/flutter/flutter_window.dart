@@ -1,5 +1,8 @@
+import '../win_api_gui_wrapper/window_event.dart';
+
+import '../win_api_gui_wrapper/hwnd.dart';
 import 'package:meta/meta.dart';
-import '../win_api_gui_wrapper/native_app.dart';
+import '../win_api_gui_wrapper/native_window.dart';
 import 'bundle.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
@@ -9,7 +12,7 @@ class FlutterWindow extends NativeWindow {
 
   FlutterWindow(Bundle bundle, FlutterApi flutterApi) : super() {
     engine = FlutterEngine(size, bundle, flutterApi);
-    childContent = engine.view.nativeWindow;
+    childContent = Hwnd.fomHandle(engine.view.nativeWindow);
   }
 
   @override

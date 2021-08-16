@@ -13,7 +13,7 @@ class FlutterController {
   late final FlutterEngine engine;
   late final FlutterView view;
 
-  ViewControllerRef _controllerRef = nullptr;
+  ControllerRef _controllerRef = nullptr;
 
   FlutterController(Size size, this._controllerRef, this._flutterApi);
 
