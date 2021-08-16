@@ -1,221 +1,93 @@
-part of 'native_app.dart';
+import 'dart:ffi';
 
-enum WindowState { destroy, hide, minimize, stayOpen }
+import 'package:ffi/ffi.dart';
+import 'window_events.dart';
 
-class NativeWindow {
-  late final int hWnd;
+import 'package:win32/win32.dart';
+
+import 'native_app.dart';
+import 'tools.dart';
+
+class NativeWindow extends WindowEvents {
+  late final int _hWnd;
 
   NativeWindow() {
-    final thisAddress = hashCode;
-    _winCtorStack[thisAddress] = this;
-    hWnd = _createWindowHidden(thisAddress);
+    _hWnd = _createWindowHidden();
   }
 
-  @protected
-  int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-    switch (uMsg) {
-      case WM_CLOSE:
-        _closeEvent();
-        return 0;
+  @override
+  int get handle => _hWnd;
 
-      case WM_PAINT:
-        onPaint();
-        return 0;
-
-      case WM_SIZE:
-        onResize(LOWORD(lParam), HIWORD(lParam));
-        return 0;
-
-      case WM_FONTCHANGE:
-        onFontChange();
-        return 0;
-
-      case WM_DPICHANGED:
-        onDpiChange(Rect.fromAddress(lParam));
-        return 0;
-
-      case WM_SHOWWINDOW:
-        onShow();
-        return 0;
-    }
-    return 0;
-  }
-
-  @protected
-  void onPaint() {
-    if (_childContent != 0) {
-      return;
-    }
-
-    final ps = calloc<PAINTSTRUCT>();
-    final rect = calloc<RECT>();
-    try {
-      GetClientRect(hWnd, rect);
-      final hdc = BeginPaint(hWnd, ps);
-      FillRect(hdc, rect, COLOR_WINDOW);
-      EndPaint(hWnd, ps);
-    } finally {
-      free(ps);
-      free(rect);
-    }
-  }
-
-  @protected
-  void onResize(int width, int height) {
-    _childContentResize();
-  }
-
-  @protected
-  void onFontChange() {}
-
-  @protected
-  void onDpiChange(Rect newWindowRect) {
-    SetWindowPos(
-      hWnd,
-      NULL,
-      newWindowRect.left,
-      newWindowRect.top,
-      newWindowRect.width,
-      newWindowRect.height,
-      SWP_NOZORDER | SWP_NOACTIVATE,
-    );
-  }
-
-  @protected
-  void onShow() {}
-
-  @protected
-  void onCreate() {}
-
-  @protected
-  WindowState onClose() => WindowState.destroy;
-
-  void _closeEvent() {
-    final closeAnswer = onClose();
-    switch (closeAnswer) {
-      case WindowState.destroy:
-        _windows.remove(hWnd);
-        DestroyWindow(hWnd);
-        break;
-      case WindowState.hide:
-        hide();
-        break;
-      case WindowState.minimize:
-        minimize();
-        break;
-      case WindowState.stayOpen:
-        break;
-    }
-  }
-
-  void centredOfScreen() {
-    final thisScreenRect = screenRect;
-    screenRect = centredOfScreenRect(
+  void center() {
+    final thisScreenRect = rect;
+    rect = centredOfScreenRect(
       thisScreenRect.width,
       thisScreenRect.height,
     );
   }
 
-  void hide() {
-    ShowWindowAsync(hWnd, SW_HIDE);
-  }
+  int _createWindowHidden() {
+    final pWindowClassName = _windowClassName.toNativeUtf16();
 
-  void show() {
-    ShowWindowAsync(hWnd, SW_SHOW);
-  }
-
-  void minimize() {
-    ShowWindowAsync(hWnd, SW_SHOWMINIMIZED);
-  }
-
-  String get title {
-    final pTitle = calloc.allocate<Utf16>(MAX_PATH * 2);
+    // this pointer is used in the main wndProc
+    // to register and associate with this object
+    // memory will be free in WindowEventRegistry.endRegistration()
+    final pNativeWindowAddress = calloc<Int64>()..value = hashCode;
+    final pTitle = 'Window'.toNativeUtf16();
     try {
-      GetWindowText(hWnd, pTitle, MAX_PATH);
-      return pTitle.toDartString();
+      final hWnd = CreateWindowEx(
+        0,
+        pWindowClassName,
+        pTitle,
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        NULL,
+        NULL,
+        NativeApp.hInst,
+        pNativeWindowAddress,
+      );
+
+      if (hWnd == 0) {
+        throw 'Window create error';
+      }
+
+      return hWnd;
     } finally {
       free(pTitle);
+      free(pWindowClassName);
     }
   }
 
-  set title(String newTitle) {
-    final pTitle = newTitle.toNativeUtf16();
+  String __windowClassName = '';
+
+  String get _windowClassName {
+    if (__windowClassName.isEmpty) {
+      __windowClassName = WindowClassName;
+      _registryWinClass();
+    }
+    return __windowClassName;
+  }
+
+  void _registryWinClass() {
+    final pWindowClass = __windowClassName.toNativeUtf16();
+    final pWndClass = calloc<WNDCLASS>();
+
     try {
-      SetWindowText(hWnd, pTitle);
+      pWndClass.ref
+        ..style = CS_HREDRAW | CS_VREDRAW
+        ..lpfnWndProc = Pointer.fromFunction<WindowProc>(wndProc, 0)
+        ..hInstance = NativeApp.hInst
+        //..hbrBackground = LoadResource(hInst, WHITE_BRUSH)
+        //..hIcon = LoadIcon (hInst , 1)
+        ..hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..lpszClassName = pWindowClass;
+      RegisterClass(pWndClass);
     } finally {
-      free(pTitle);
+      free(pWindowClass);
+      free(pWndClass);
     }
-  }
-
-  Rect get screenRect {
-    final pRect = calloc<RECT>();
-    try {
-      GetWindowRect(hWnd, pRect);
-      return Rect.fromPRect(pRect);
-    } finally {
-      free(pRect);
-    }
-  }
-
-  set screenRect(Rect newRect) {
-    SetWindowPos(
-      hWnd,
-      NULL,
-      newRect.left,
-      newRect.top,
-      newRect.width,
-      newRect.height,
-      SWP_NOZORDER | SWP_NOACTIVATE,
-    );
-  }
-
-  Size get size {
-    final pRect = calloc<RECT>();
-    try {
-      GetClientRect(hWnd, pRect);
-      return Rect.fromPRect(pRect).size;
-    } finally {
-      free(pRect);
-    }
-  }
-
-  set size(Size newSize) {
-    final screen = screenRect;
-    MoveWindow(
-      hWnd,
-      screen.left,
-      screen.top,
-      newSize.width,
-      newSize.height,
-      TRUE,
-    );
-  }
-
-  int _childContent = 0;
-
-  int get childContent => _childContent;
-
-  set childContent(int child) {
-    SetParent(child, hWnd);
-    //SetWindowLongPtr(child, GWL_STYLE, WS_VISIBLE | WS_CHILD);
-    _childContent = child;
-    _childContentResize();
-    // SetFocus(child);
-  }
-
-  void _childContentResize() {
-    if (_childContent == 0) {
-      return;
-    }
-
-    final thisSize = size;
-    MoveWindow(
-      _childContent,
-      0,
-      0,
-      thisSize.width,
-      thisSize.height,
-      TRUE,
-    );
   }
 }

@@ -1,11 +1,10 @@
-import '../win_api_gui_wrapper/window_event.dart';
-
-import '../win_api_gui_wrapper/hwnd.dart';
 import 'package:meta/meta.dart';
-import '../win_api_gui_wrapper/native_window.dart';
 import 'bundle.dart';
 import 'flutter_api.dart';
 import 'flutter_engine.dart';
+
+import '../win_api_gui_wrapper/hwnd.dart';
+import '../win_api_gui_wrapper/native_window.dart';
 
 class FlutterWindow extends NativeWindow {
   late final FlutterEngine engine;
@@ -17,9 +16,8 @@ class FlutterWindow extends NativeWindow {
 
   @override
   @protected
-  WindowState onClose() {
+  void onDestroy() {
     engine.controller.destroy();
-    return super.onClose();
   }
 
   @override

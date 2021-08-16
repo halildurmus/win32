@@ -7,7 +7,7 @@ import 'bundle.dart';
 
 class FlutterApi {
   final FuncEngineCreate _createEngine;
-  final FuncViewControllerCreate _createController;
+  final FuncControllerCreate _createController;
   final FuncGetView getView;
   final FuncControllerWindowProc controllerWndProc;
   final FuncControllerDestroy controllerDestroy;
@@ -29,7 +29,7 @@ class FlutterApi {
         'FlutterDesktopEngineCreate');
 
     final createController =
-        dll.lookupFunction<CViewControllerCreate, FuncViewControllerCreate>(
+        dll.lookupFunction<CControllerCreate, FuncControllerCreate>(
             'FlutterDesktopViewControllerCreate');
 
     final getView = dll.lookupFunction<CGetView, FuncGetView>(
@@ -82,8 +82,8 @@ typedef FuncEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 // FlutterDesktopViewControllerState
 typedef ControllerRef = Pointer<IntPtr>;
 
-typedef CViewControllerCreate = EngineRef Function(Int32, Int32, EngineRef);
-typedef FuncViewControllerCreate = EngineRef Function(int, int, EngineRef);
+typedef CControllerCreate = EngineRef Function(Int32, Int32, EngineRef);
+typedef FuncControllerCreate = EngineRef Function(int, int, EngineRef);
 
 // FlutterDesktopView;
 typedef ViewRef = Pointer<IntPtr>;

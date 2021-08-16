@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../lib/flutter_runner.dart';
+import 'package:flutter_runner/flutter_runner.dart';
 
 Future main() async {
   ThrowUnimplemented.off();
@@ -13,8 +13,9 @@ Future main() async {
   final bundle = Bundle.fromSourceDir(bundlePath);
 
   FlutterWindow(bundle, flutterApi)
-    ..title = 'Flutter dart runner'
+    ..text = 'Flutter dart runner'
     ..size = Size(400, 500)
+    ..center()
     ..show();
 
   NativeApp.run();
