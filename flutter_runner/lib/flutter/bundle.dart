@@ -1,7 +1,9 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
+import 'package:path/path.dart' as path;
 
 import 'flutter_api.dart';
 import 'memory_liberator.dart';
@@ -43,5 +45,25 @@ class Bundle {
         free(pProp);
       },
     );
+  }
+
+  static bool isDirectoryContain(String dir) {
+    final assetDir = path.join(dir, 'flutter_assets');
+
+    if (!Directory(assetDir).existsSync()) {
+      return false;
+    }
+
+    final icudtlDat = path.join(dir, 'icudtl.dat');
+    if (!File(icudtlDat).existsSync()) {
+      return false;
+    }
+
+    final so = path.join(dir, 'app.so');
+    if (!File(so).existsSync()) {
+      return false;
+    }
+
+    return true;
   }
 }
