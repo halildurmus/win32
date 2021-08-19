@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Rect {
@@ -30,6 +31,16 @@ class Rect {
 
   Size get size => Size(width, height);
 
+  Pointer<RECT> toPRect() {
+    final pRect = calloc<RECT>();
+    pRect.ref
+      ..bottom = bottom
+      ..top = top
+      ..right = right
+      ..left = left;
+    return pRect;
+  }
+
   @override
   String toString() => 'Rect('
       'left: $left, top: $top, '
@@ -41,6 +52,13 @@ class Size {
   final int height;
 
   Size(this.width, this.height);
+}
+
+class Point {
+  final int x;
+  final int y;
+
+  Point(this.x, this.y);
 }
 
 Rect centredOfScreenRect(int windowWidth, int windowHeight) {

@@ -42,7 +42,7 @@ class FlutterFinder {
     }
   }
 
-  static String searchDllFile(String supposePath) {
+  static String searchDllFile([String supposePath = '']) {
     try {
       return dllSearchPaths(supposePath)
           .firstWhere((dllPath) => File(dllPath).existsSync());
@@ -53,7 +53,7 @@ class FlutterFinder {
     }
   }
 
-  static Iterable<String> bundleSearchPaths(String supposePath) sync* {
+  static Iterable<String> bundleSearchPaths([String supposePath = '']) sync* {
     for (final dir in _searchPaths(supposePath)) {
       yield dir;
       yield path.join(dir, 'data');
@@ -80,6 +80,8 @@ class FlutterFinder {
     if (currentDir != supposePath) {
       yield currentDir;
     }
+
+    yield path.join(currentDir, supposePath);
 
     if (workingDir != currentDir) {
       yield workingDir;

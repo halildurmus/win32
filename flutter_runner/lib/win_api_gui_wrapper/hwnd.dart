@@ -20,6 +20,8 @@ abstract class Hwnd {
     return _Hwnd(handle);
   }
 
+  void destroy() => DestroyWindow(handle);
+
   void hide() => ShowWindowAsync(handle, SW_HIDE);
 
   void show() => ShowWindowAsync(handle, SW_SHOW);
@@ -77,6 +79,11 @@ abstract class Hwnd {
     } finally {
       free(pRect);
     }
+  }
+
+  set pos(Point pos) {
+    final thisRect = rect;
+    rect = Rect.fromXYWH(pos.x, pos.y, thisRect.width, thisRect.height);
   }
 
   Size get size => clientRect.size;

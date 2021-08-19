@@ -11,8 +11,17 @@ import 'window_events.dart';
 class WindowsRegistry {
   static final _awaitingList = <int, WindowEvents>{};
   static final _windows = <int, WindowEvents>{};
+  static int? _mainWindowHandle;
 
   static Map<int, WindowEvents> get windows => Map.unmodifiable(_windows);
+
+  static bool isMainWindow(int handle) {
+    return _mainWindowHandle == handle;
+  }
+
+  static int get mainWindowHandle => _mainWindowHandle!;
+
+  static WindowEvents get mainWindow => _windows[_mainWindowHandle!]!;
 
   static WindowEvents? find(int handle) {
     return _windows[handle];
@@ -23,22 +32,25 @@ class WindowsRegistry {
     _awaitingList[address] = window;
   }
 
-  static bool endRegistration(int handle, CREATESTRUCT createInfo) {
+  static WindowEvents endRegistration(int handle, CREATESTRUCT createInfo) {
     final createClassName = createInfo.lpszClass.toDartString();
     final pWindowHashCode = createInfo.lpCreateParams.cast<Int64>();
     try {
       if (createClassName != WindowClassName) {
-        return false;
+        throw 'Class name is not contain';
       }
 
       final waitingWindow = _awaitingList.remove(pWindowHashCode.value);
       if (waitingWindow == null) {
-        return false;
+        throw 'beginRegistration method was not called.';
+      }
+
+      if (_windows.isEmpty) {
+        _mainWindowHandle = handle;
       }
 
       _windows[handle] = waitingWindow;
-      waitingWindow.onCreate();
-      return true;
+      return waitingWindow;
     } finally {
       free(pWindowHashCode);
     }

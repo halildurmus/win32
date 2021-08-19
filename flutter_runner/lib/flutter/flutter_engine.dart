@@ -1,4 +1,3 @@
-import '../win_api_gui_wrapper/throw_unimplemented.dart';
 import '../win_api_gui_wrapper/tools.dart';
 import 'bundle.dart';
 import 'flutter_api.dart';
@@ -22,8 +21,5 @@ class FlutterEngine {
     view = FlutterView(viewRef, _flutterApi);
   }
 
-  void reloadSystemFonts() {
-    // TODO: add reload fonts
-    ThrowUnimplemented.throwIfOn();
-  }
+  void reloadSystemFonts() {}
 }

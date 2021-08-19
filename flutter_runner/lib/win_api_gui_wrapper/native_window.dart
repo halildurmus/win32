@@ -1,22 +1,35 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'window_events.dart';
-
 import 'package:win32/win32.dart';
+import 'package:meta/meta.dart';
+
+import '../win32_addons.dart';
+import 'window_events.dart';
+import 'window_registry.dart';
 
 import 'native_app.dart';
 import 'tools.dart';
 
 class NativeWindow extends WindowEvents {
-  late final int _hWnd;
-
   NativeWindow() {
-    _hWnd = _createWindowHidden();
+    _createWindowHidden();
   }
 
   @override
-  int get handle => _hWnd;
+  @protected
+  void onCreate(int hWnd, CREATESTRUCT createInfo) {
+    if (!WindowsRegistry.isMainWindow(hWnd)) {
+      SetWindowLongPtr(hWnd, GWL_HWNDPARENT, WindowsRegistry.mainWindowHandle);
+    }
+    super.onCreate(hWnd, createInfo);
+  }
+
+  @override
+  @protected
+  void onPaint(int hdc, Pointer<RECT> pRect) {
+    FillRect(hdc, pRect, COLOR_WINDOW);
+  }
 
   void center() {
     final thisScreenRect = rect;
@@ -26,17 +39,17 @@ class NativeWindow extends WindowEvents {
     );
   }
 
-  int _createWindowHidden() {
-    final pWindowClassName = _windowClassName.toNativeUtf16();
-
-    // this pointer is used in the main wndProc
+  void _createWindowHidden() {
+    // this pointer is used in the main NativeApp.wndProc
     // to register and associate with this object
     // memory will be free in WindowEventRegistry.endRegistration()
-    final pNativeWindowAddress = calloc<Int64>()..value = hashCode;
+    final pWindowHashCode = calloc<Int64>()..value = hashCode;
+
+    final pWindowClassName = windowClassName.toNativeUtf16();
     final pTitle = 'Window'.toNativeUtf16();
     try {
       final hWnd = CreateWindowEx(
-        0,
+        WindowsRegistry.windows.isEmpty ? WS_EX_APPWINDOW : WS_EX_TOOLWINDOW,
         pWindowClassName,
         pTitle,
         WS_OVERLAPPEDWINDOW,
@@ -47,41 +60,29 @@ class NativeWindow extends WindowEvents {
         NULL,
         NULL,
         NativeApp.hInst,
-        pNativeWindowAddress,
+        pWindowHashCode,
       );
 
       if (hWnd == 0) {
         throw 'Window create error';
       }
-
-      return hWnd;
     } finally {
       free(pTitle);
       free(pWindowClassName);
     }
   }
 
-  String __windowClassName = '';
+  late String windowClassName = _registerWindowClass();
 
-  String get _windowClassName {
-    if (__windowClassName.isEmpty) {
-      __windowClassName = WindowClassName;
-      _registryWinClass();
-    }
-    return __windowClassName;
-  }
-
-  void _registryWinClass() {
-    final pWindowClass = __windowClassName.toNativeUtf16();
+  String _registerWindowClass() {
+    final pWindowClass = WindowClassName.toNativeUtf16();
     final pWndClass = calloc<WNDCLASS>();
 
     try {
       pWndClass.ref
         ..style = CS_HREDRAW | CS_VREDRAW
-        ..lpfnWndProc = Pointer.fromFunction<WindowProc>(wndProc, 0)
+        ..lpfnWndProc = Pointer.fromFunction<WindowProc>(NativeApp.wndProc, 0)
         ..hInstance = NativeApp.hInst
-        //..hbrBackground = LoadResource(hInst, WHITE_BRUSH)
-        //..hIcon = LoadIcon (hInst , 1)
         ..hCursor = LoadCursor(NULL, IDC_ARROW)
         ..lpszClassName = pWindowClass;
       RegisterClass(pWndClass);
@@ -89,5 +90,7 @@ class NativeWindow extends WindowEvents {
       free(pWindowClass);
       free(pWndClass);
     }
+
+    return WindowClassName;
   }
 }

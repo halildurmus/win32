@@ -10,5 +10,7 @@ export 'flutter/flutter_window.dart';
 export 'win_api_gui_wrapper/native_app.dart';
 export 'win_api_gui_wrapper/native_window.dart';
 export 'win_api_gui_wrapper/hwnd.dart';
-export 'win_api_gui_wrapper/throw_unimplemented.dart';
 export 'win_api_gui_wrapper/tools.dart';
+export 'cmd_tool/flutter_finder.dart';
+
+export 'win32_addons.dart';

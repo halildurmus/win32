@@ -39,7 +39,7 @@ class FlutterApi {
         dll.lookupFunction<CControllerWindowProc, FuncControllerWindowProc>(
             'FlutterDesktopViewControllerHandleTopLevelWindowProc');
 
-    final controllerDestroy =
+    final destroyController =
         dll.lookupFunction<CControllerDestroy, FuncControllerDestroy>(
             'FlutterDesktopViewControllerDestroy');
 
@@ -51,7 +51,7 @@ class FlutterApi {
       createController,
       getView,
       controllerWndProc,
-      controllerDestroy,
+      destroyController,
       viewGetHWND,
     );
   }
@@ -70,9 +70,8 @@ class FlutterApi {
   }
 }
 
-// flutter dll describe
+// flutter dll description
 // =============================================================================
-
 // FlutterDesktopEngine
 typedef EngineRef = Pointer<IntPtr>;
 
@@ -85,12 +84,6 @@ typedef ControllerRef = Pointer<IntPtr>;
 typedef CControllerCreate = EngineRef Function(Int32, Int32, EngineRef);
 typedef FuncControllerCreate = EngineRef Function(int, int, EngineRef);
 
-// FlutterDesktopView;
-typedef ViewRef = Pointer<IntPtr>;
-
-typedef CGetView = ViewRef Function(ControllerRef);
-typedef FuncGetView = ViewRef Function(ControllerRef);
-
 typedef CControllerWindowProc = Int32 Function(
     ControllerRef, Int32, Int32, Int32, Int32, Pointer);
 typedef FuncControllerWindowProc = int Function(
@@ -99,13 +92,16 @@ typedef FuncControllerWindowProc = int Function(
 typedef CControllerDestroy = Void Function(ControllerRef);
 typedef FuncControllerDestroy = void Function(ControllerRef);
 
-typedef FlutterDesktopMessengerRef = Pointer;
+// FlutterDesktopView;
+typedef ViewRef = Pointer<IntPtr>;
+
+typedef CGetView = ViewRef Function(ControllerRef);
+typedef FuncGetView = ViewRef Function(ControllerRef);
 
 typedef CViewGetHWND = Int32 Function(ViewRef);
 typedef FuncViewGetHWND = int Function(ViewRef);
 
 // =============================================================================
-
 class EngineProperties extends Struct {
   // The path to the flutter_assets folder for the application to be run.
   // This can either be an absolute path or a path relative to the directory

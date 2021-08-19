@@ -21,33 +21,34 @@ class NativeApp {
     }
     free(msg);
   }
-}
 
-int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
-  switch (uMsg) {
-    case WM_CREATE:
-      final createInfo = Pointer<CREATESTRUCT>.fromAddress(lParam).ref;
-      final isRegistered = WindowsRegistry.endRegistration(hWnd, createInfo);
-
-      if (isRegistered) {
-        return 0;
-      }
-      break;
-
-    case WM_DESTROY:
-      if (WindowsRegistry.windows.isEmpty) {
-        PostQuitMessage(0);
-      }
-      return 0;
+  static void quit() {
+    WindowsRegistry.mainWindow.destroy();
   }
 
-  final windowEvent = WindowsRegistry.find(hWnd);
-  if (windowEvent != null) {
-    final result = windowEvent.wndProc(hWnd, uMsg, wParam, lParam);
-    if (result != 0) {
+  static int wndProc(int hWnd, int uMsg, int wParam, int lParam) {
+    final windowEvent = WindowsRegistry.find(hWnd);
+    final result = windowEvent?.wndProc(hWnd, uMsg, wParam, lParam);
+    if (result != null && result != 0) {
       return result;
     }
-  }
 
-  return DefWindowProc(hWnd, uMsg, wParam, lParam);
+    switch (uMsg) {
+      case WM_CREATE:
+        final createInfo = Pointer<CREATESTRUCT>.fromAddress(lParam).ref;
+        final eventWindow = WindowsRegistry.endRegistration(hWnd, createInfo);
+        eventWindow.onCreate(hWnd, createInfo);
+        return 0;
+
+      case WM_DESTROY:
+        if (WindowsRegistry.isMainWindow(hWnd)) {
+          final allWindow = WindowsRegistry.windows.values.toList();
+          allWindow.forEach((win) => win.destroy());
+          PostQuitMessage(0);
+          return 0;
+        }
+    }
+
+    return DefWindowProc(hWnd, uMsg, wParam, lParam);
+  }
 }
