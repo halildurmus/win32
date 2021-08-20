@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import '../win32_addons.dart';
 import 'parent_hwnd.dart';
 import 'package:meta/meta.dart';
 import 'package:win32/win32.dart';

@@ -32,10 +32,10 @@ class NativeWindow extends WindowEvents {
   }
 
   void center() {
-    final thisScreenRect = rect;
+    final thisRect = rect;
     rect = centredOfScreenRect(
-      thisScreenRect.width,
-      thisScreenRect.height,
+      thisRect.width,
+      thisRect.height,
     );
   }
 

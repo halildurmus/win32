@@ -6,20 +6,30 @@ import 'package:win32/win32.dart';
 
 import '../../lib/flutter_runner.dart';
 
-Future main() async {
+void main(List<String> args) {
   final bundlePath = FlutterFinder.searchBundleFolder('bundle');
   final flutterDllPath = FlutterFinder.searchDllFile();
 
   final bundle = Bundle.fromSourceDir(bundlePath);
   final flutterApi = FlutterApi.load(flutterDllPath);
 
-  for (var rect in generateScreenGrid(3)) {
+  final gridLen = fromArgs(args);
+
+  for (var rect in generateScreenGrid(gridLen)) {
     FlutterWindow(bundle, flutterApi)
       ..text = 'Flutter dart runner'
       ..rect = rect
       ..show();
   }
   NativeApp.run();
+}
+
+int fromArgs(List<String> args) {
+  try {
+    return int.parse(args[0]);
+  } catch (e) {
+    return 1;
+  }
 }
 
 Iterable<Rect> generateScreenGrid(int gridLen) sync* {

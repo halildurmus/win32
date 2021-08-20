@@ -69,7 +69,3 @@ Rect centredOfScreenRect(int windowWidth, int windowHeight) {
   final y = (screenHeight - windowHeight) ~/ 2;
   return Rect.fromXYWH(x, y, windowWidth, windowHeight);
 }
-
-// #if(WINVER >= 0x0601)
-const WM_DPICHANGED = 0x02E0;
-// #endif /* WINVER >= 0x0601 */

@@ -7,8 +7,9 @@ import 'bundle.dart';
 
 class FlutterApi {
   final FuncEngineCreate _createEngine;
+  final DartEngineReloadSystemFonts engineReloadSystemFonts;
   final FuncControllerCreate _createController;
-  final FuncGetView getView;
+  final FuncControllerGetView controllerGetView;
   final FuncControllerWindowProc controllerWndProc;
   final FuncControllerDestroy controllerDestroy;
   final FuncViewGetHWND viewGetHWND;
@@ -16,7 +17,8 @@ class FlutterApi {
   FlutterApi._internal(
     this._createEngine,
     this._createController,
-    this.getView,
+    this.engineReloadSystemFonts,
+    this.controllerGetView,
     this.controllerWndProc,
     this.controllerDestroy,
     this.viewGetHWND,
@@ -32,7 +34,10 @@ class FlutterApi {
         dll.lookupFunction<CControllerCreate, FuncControllerCreate>(
             'FlutterDesktopViewControllerCreate');
 
-    final getView = dll.lookupFunction<CGetView, FuncGetView>(
+    final engineReloadSystemFonts = dll.lookupFunction<CEngineReloadSystemFonts,
+        DartEngineReloadSystemFonts>('FlutterDesktopEngineReloadSystemFonts');
+
+    final getView = dll.lookupFunction<CGetView, FuncControllerGetView>(
         'FlutterDesktopViewControllerGetView');
 
     final controllerWndProc =
@@ -49,6 +54,7 @@ class FlutterApi {
     return FlutterApi._internal(
       createEngine,
       createController,
+      engineReloadSystemFonts,
       getView,
       controllerWndProc,
       destroyController,
@@ -78,6 +84,9 @@ typedef EngineRef = Pointer<IntPtr>;
 typedef CEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 typedef FuncEngineCreate = EngineRef Function(Pointer<EngineProperties>);
 
+typedef CEngineReloadSystemFonts = Void Function(EngineRef);
+typedef DartEngineReloadSystemFonts = void Function(EngineRef);
+
 // FlutterDesktopViewControllerState
 typedef ControllerRef = Pointer<IntPtr>;
 
@@ -96,7 +105,7 @@ typedef FuncControllerDestroy = void Function(ControllerRef);
 typedef ViewRef = Pointer<IntPtr>;
 
 typedef CGetView = ViewRef Function(ControllerRef);
-typedef FuncGetView = ViewRef Function(ControllerRef);
+typedef FuncControllerGetView = ViewRef Function(ControllerRef);
 
 typedef CViewGetHWND = Int32 Function(ViewRef);
 typedef FuncViewGetHWND = int Function(ViewRef);
