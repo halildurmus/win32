@@ -459,6 +459,30 @@ late final _CreateDirectory = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpPathName,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>('CreateDirectoryW');
 
+/// Creates or opens a named or unnamed event object.
+///
+/// ```c
+/// HANDLE CreateEventW(
+///   LPSECURITY_ATTRIBUTES lpEventAttributes,
+///   BOOL bManualReset,
+///   BOOL  bInitialState,
+///   LPCWSTR lpName
+/// );
+/// ```
+/// {@category kernel32}
+int CreateEvent(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        int bManualReset, int bInitialState, Pointer<Utf16> lpName) =>
+    _CreateEvent(lpEventAttributes, bManualReset, bInitialState, lpName);
+
+late final _CreateEvent = _kernel32.lookupFunction<
+    IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        Int32 bManualReset, Int32 bInitialState, Pointer<Utf16> lpName),
+    int Function(
+        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        int bManualReset,
+        int bInitialState,
+        Pointer<Utf16> lpName)>('CreateEventW');
+
 /// Creates or opens a file or I/O device. The most commonly used I/O
 /// devices are as follows: file, file stream, directory, physical disk,
 /// volume, console buffer, tape drive, communications resource, mailslot,

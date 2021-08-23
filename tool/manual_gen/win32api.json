@@ -745,6 +745,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateEllipticRgn function creates an elliptical region."
     },
+    "CreateEvent": {
+        "prototype": "HANDLE CreateEventW(\n  LPSECURITY_ATTRIBUTES lpEventAttributes,\n  BOOL bManualReset,\n  BOOL  bInitialState,\n  LPCWSTR lpName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a named or unnamed event object."
+    },
     "CreateFile": {
         "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
         "dllLibrary": "kernel32",
@@ -1260,8 +1265,8 @@
         "dllLibrary": "winspool",
         "comment": "The EnumPrinterKey function enumerates the subkeys of a specified key for a specified printer."
     },
-    "EnumPrintersW": {
-        "prototype": "BOOL EnumPrinters(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
+    "EnumPrinters": {
+        "prototype": "BOOL EnumPrintersW(\n   _In_  DWORD   Flags,\n   _In_  LPTSTR  Name,\n   _In_  DWORD   Level,\n   _Out_ LPBYTE  pPrinterEnum,\n   _In_  DWORD   cbBuf,\n   _Out_ LPDWORD pcbNeeded,\n   _Out_ LPDWORD pcReturned\n);",
         "dllLibrary": "winspool",
         "comment": "The EnumPrinters function enumerates available printers, print servers, domains, or print providers."
     },
@@ -1329,6 +1334,11 @@
         "prototype": "HPEN ExtCreatePen(\n  DWORD          iPenStyle,\n  DWORD          cWidth,\n  const LOGBRUSH *plbrush,\n  DWORD          cStyle,\n  const DWORD    *pstyle\n);",
         "dllLibrary": "gdi32",
         "comment": "The ExtCreatePen function creates a logical cosmetic or geometric pen that has the specified style, width, and brush attributes."
+    },
+    "ExtractAssociatedIcon": {
+        "prototype": "HICON ExtractAssociatedIconW(\n  HINSTANCE hInst,\n  LPWSTR    pszIconPath,\n  WORD      *piIcon\n);",
+        "dllLibrary": "shell32",
+        "comment": "Gets a handle to an icon stored as a resource in a file or an icon stored in a file's associated executable file."
     },
     "ExtTextOut": {
         "prototype": "BOOL ExtTextOutW(\n  HDC        hdc,\n  int        x,\n  int        y,\n  UINT       options,\n  const RECT *lprect,\n  LPCWSTR    lpString,\n  UINT       c,\n  const INT  *lpDx\n);",

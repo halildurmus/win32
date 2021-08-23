@@ -418,6 +418,50 @@ late final _EnumPrinterKey = _winspool.lookupFunction<
     int Function(int hPrinter, Pointer<Utf16> pKeyName, Pointer<Utf16> pSubkey,
         int cbSubkey, Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
 
+/// The EnumPrinters function enumerates available printers, print servers,
+/// domains, or print providers.
+///
+/// ```c
+/// BOOL EnumPrintersW(
+///    _In_  DWORD   Flags,
+///    _In_  LPTSTR  Name,
+///    _In_  DWORD   Level,
+///    _Out_ LPBYTE  pPrinterEnum,
+///    _In_  DWORD   cbBuf,
+///    _Out_ LPDWORD pcbNeeded,
+///    _Out_ LPDWORD pcReturned
+/// );
+/// ```
+/// {@category winspool}
+int EnumPrinters(
+        int Flags,
+        Pointer<Utf16> Name,
+        int Level,
+        Pointer<Uint8> pPrinterEnum,
+        int cbBuf,
+        Pointer<Uint32> pcbNeeded,
+        Pointer<Uint32> pcReturned) =>
+    _EnumPrinters(
+        Flags, Name, Level, pPrinterEnum, cbBuf, pcbNeeded, pcReturned);
+
+late final _EnumPrinters = _winspool.lookupFunction<
+    Int32 Function(
+        Uint32 Flags,
+        Pointer<Utf16> Name,
+        Uint32 Level,
+        Pointer<Uint8> pPrinterEnum,
+        Uint32 cbBuf,
+        Pointer<Uint32> pcbNeeded,
+        Pointer<Uint32> pcReturned),
+    int Function(
+        int Flags,
+        Pointer<Utf16> Name,
+        int Level,
+        Pointer<Uint8> pPrinterEnum,
+        int cbBuf,
+        Pointer<Uint32> pcbNeeded,
+        Pointer<Uint32> pcReturned)>('EnumPrintersW');
+
 /// The FindFirstPrinterChangeNotification function creates a change
 /// notification object and returns a handle to the object. You can then
 /// use this handle in a call to one of the wait functions to monitor

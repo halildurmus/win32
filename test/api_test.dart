@@ -653,6 +653,18 @@ void main() {
           'CreateDirectoryW');
       expect(CreateDirectory, isA<Function>());
     });
+    test('Can instantiate CreateEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateEvent = kernel32.lookupFunction<
+          IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              Int32 bManualReset, Int32 bInitialState, Pointer<Utf16> lpName),
+          int Function(
+              Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              int bManualReset,
+              int bInitialState,
+              Pointer<Utf16> lpName)>('CreateEventW');
+      expect(CreateEvent, isA<Function>());
+    });
     test('Can instantiate CreateFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateFile = kernel32.lookupFunction<
@@ -5719,7 +5731,7 @@ void main() {
     test('Can instantiate ShowWindowAsync', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ShowWindowAsync = user32.lookupFunction<
-          Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
+          Int32 Function(IntPtr hWnd, Int32 nCmdShow),
           int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
       expect(ShowWindowAsync, isA<Function>());
     });
@@ -6795,6 +6807,27 @@ void main() {
               Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
       expect(EnumPrinterKey, isA<Function>());
     });
+    test('Can instantiate EnumPrinters', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final EnumPrinters = winspool.lookupFunction<
+          Int32 Function(
+              Uint32 Flags,
+              Pointer<Utf16> Name,
+              Uint32 Level,
+              Pointer<Uint8> pPrinterEnum,
+              Uint32 cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned),
+          int Function(
+              int Flags,
+              Pointer<Utf16> Name,
+              int Level,
+              Pointer<Uint8> pPrinterEnum,
+              int cbBuf,
+              Pointer<Uint32> pcbNeeded,
+              Pointer<Uint32> pcReturned)>('EnumPrintersW');
+      expect(EnumPrinters, isA<Function>());
+    });
     test('Can instantiate FindFirstPrinterChangeNotification', () {
       final winspool = DynamicLibrary.open('winspool.drv');
       final FindFirstPrinterChangeNotification = winspool.lookupFunction<
@@ -7712,6 +7745,15 @@ void main() {
           Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
               Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
       expect(CommandLineToArgvW, isA<Function>());
+    });
+    test('Can instantiate ExtractAssociatedIcon', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ExtractAssociatedIcon = shell32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
+          int Function(int hInst, Pointer<Utf16> pszIconPath,
+              Pointer<Uint16> piIcon)>('ExtractAssociatedIconW');
+      expect(ExtractAssociatedIcon, isA<Function>());
     });
     test('Can instantiate FindExecutable', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
