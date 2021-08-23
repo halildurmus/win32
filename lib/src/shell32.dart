@@ -38,6 +38,27 @@ late final _CommandLineToArgvW = _shell32.lookupFunction<
     Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
         Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
 
+/// Gets a handle to an icon stored as a resource in a file or an icon
+/// stored in a file's associated executable file.
+///
+/// ```c
+/// HICON ExtractAssociatedIconW(
+///   HINSTANCE hInst,
+///   LPWSTR    pszIconPath,
+///   WORD      *piIcon
+/// );
+/// ```
+/// {@category shell32}
+int ExtractAssociatedIcon(
+        int hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon) =>
+    _ExtractAssociatedIcon(hInst, pszIconPath, piIcon);
+
+late final _ExtractAssociatedIcon = _shell32.lookupFunction<
+    IntPtr Function(
+        IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
+    int Function(int hInst, Pointer<Utf16> pszIconPath,
+        Pointer<Uint16> piIcon)>('ExtractAssociatedIconW');
+
 /// Retrieves the name of and handle to the executable (.exe) file
 /// associated with a specific document file.
 ///
