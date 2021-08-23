@@ -49,11 +49,11 @@ late final _CommandLineToArgvW = _shell32.lookupFunction<
 /// );
 /// ```
 /// {@category shell32}
-int ExtractAssociatedIconW(
+int ExtractAssociatedIcon(
         int hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon) =>
-    _ExtractAssociatedIconW(hInst, pszIconPath, piIcon);
+    _ExtractAssociatedIcon(hInst, pszIconPath, piIcon);
 
-late final _ExtractAssociatedIconW = _shell32.lookupFunction<
+late final _ExtractAssociatedIcon = _shell32.lookupFunction<
     IntPtr Function(
         IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
     int Function(int hInst, Pointer<Utf16> pszIconPath,
