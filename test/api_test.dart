@@ -7746,6 +7746,15 @@ void main() {
               Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
       expect(CommandLineToArgvW, isA<Function>());
     });
+    test('Can instantiate ExtractAssociatedIconW', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ExtractAssociatedIconW = shell32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
+          int Function(int hInst, Pointer<Utf16> pszIconPath,
+              Pointer<Uint16> piIcon)>('ExtractAssociatedIconW');
+      expect(ExtractAssociatedIconW, isA<Function>());
+    });
     test('Can instantiate FindExecutable', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final FindExecutable = shell32.lookupFunction<
