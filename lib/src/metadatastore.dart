@@ -2,6 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// waitFor is controversial, but necessary in the absence of a better mechanism
+// for non-Flutter packages to load binary assets.
+//
+// ignore_for_file: deprecated_member_use
+
 import 'dart:cli';
 import 'dart:ffi';
 import 'dart:io';
