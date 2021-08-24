@@ -1335,6 +1335,11 @@
         "dllLibrary": "gdi32",
         "comment": "The ExtCreatePen function creates a logical cosmetic or geometric pen that has the specified style, width, and brush attributes."
     },
+    "ExtractAssociatedIcon": {
+        "prototype": "HICON ExtractAssociatedIconW(\n  HINSTANCE hInst,\n  LPWSTR    pszIconPath,\n  WORD      *piIcon\n);",
+        "dllLibrary": "shell32",
+        "comment": "Gets a handle to an icon stored as a resource in a file or an icon stored in a file's associated executable file."
+    },
     "ExtTextOut": {
         "prototype": "BOOL ExtTextOutW(\n  HDC        hdc,\n  int        x,\n  int        y,\n  UINT       options,\n  const RECT *lprect,\n  LPCWSTR    lpString,\n  UINT       c,\n  const INT  *lpDx\n);",
         "dllLibrary": "gdi32",
