@@ -359,6 +359,24 @@ void main() {
         param.typeIdentifier.name, endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW'));
     expect(param.typeIdentifier.typeArg, isNull);
   });
+
+  test('Constants are accessible from metadata', () {
+    final scope = MetadataStore.getWin32Scope();
+    final typedef =
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
+    final constants = typedef.fields;
+    expect(constants.length, greaterThan(100));
+  });
+
+  test('A given literal constant can be read', () {
+    final scope = MetadataStore.getWin32Scope();
+    final typedef =
+        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
+    final wmPaint =
+        typedef.fields.firstWhere((c) => c.name.endsWith('WM_PAINT'));
+    expect(wmPaint.value, equals(15)); // winuser.h: #define WM_PAINT 0x000F
+  });
+
   test('Naked structs are generated correctly', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef('Windows.Win32.System.Threading.Apis')!;
