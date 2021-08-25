@@ -1944,6 +1944,22 @@ const WM_MOUSEHWHEEL = 0x020E;
 /// Notifies applications that a power-management event has occurred.
 const WM_POWERBROADCAST = 0x0218;
 
+///Sent when the effective dots per inch (dpi) for a window has changed
+/// WINVER >= 0x0601
+const WM_DPICHANGED = 0x02E0;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWDN tree of the window that is undergoing a DPI change. This
+/// message occurs before the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up.
+/// WINVER >= 0x0605
+const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
+const WM_DPICHANGED_AFTERPARENT = 0x02E3;
+
+/// This message tells the operating system that the window will be sized to
+/// dimensions other than the default.
+const WM_GETDPISCALEDSIZE = 0x02E4;
+
 /// An application sends a WM_CUT message to an edit control or combo box to
 /// delete (cut) the current selection, if any, in the edit control and copy the
 /// deleted text to the clipboard in CF_TEXT format.

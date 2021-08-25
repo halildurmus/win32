@@ -6,7 +6,7 @@ import '../../lib/flutter_runner.dart';
 
 void main() {
   Window()
-    ..text = 'Dart canvas'
+    ..text = 'Paint'
     ..size = Size(640, 480)
     ..center()
     ..show();
@@ -42,3 +42,8 @@ class Window extends NativeWindow {
     FillPath(hdc);
   }
 }
+
+final _gdi32 = DynamicLibrary.open('gdi32.dll');
+
+final FillPath =
+    _gdi32.lookupFunction<Int32 Function(Int32), int Function(int)>('FillPath');

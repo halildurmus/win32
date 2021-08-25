@@ -15,5 +15,6 @@ abstract class ParentHwnd extends Hwnd {
     child.parent = this;
     child.rect = Rect(0, 0, thisSize.width, thisSize.height);
     _childContent = child;
+    _childContent?.show();
   }
 }

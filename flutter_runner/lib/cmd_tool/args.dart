@@ -19,7 +19,7 @@ class Args {
     parser.addOption(
       'dll',
       help: '"flutter_windows.dll" file path.\n'
-          'If not specified, then search occurs in the current or flutter sdk'
+          'If not specified, then search occurs in the current  or flutter sdk'
           ' directory',
       defaultsTo: '',
     );

@@ -23,6 +23,7 @@ class FlutterWindow extends NativeWindow {
     if (engine == null) {
       _createEngine();
     }
+    super.onShow();
   }
 
   @override

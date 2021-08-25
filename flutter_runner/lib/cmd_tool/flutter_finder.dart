@@ -5,33 +5,7 @@ import 'package:path/path.dart' as path;
 import '../flutter_runner.dart';
 
 class FlutterFinder {
-  final String bundlePath;
-  final String dllPath;
-
-  final Bundle bundle;
-  final FlutterApi api;
-
-  FlutterFinder._internal(this.bundlePath, this.dllPath, this.bundle, this.api);
-
-  factory FlutterFinder.searchFromSupposedPaths({
-    required String dataPath,
-    required String dllFilePath,
-  }) {
-    final bundlePath = searchBundleFolder(dataPath);
-    final dllPath = searchDllFile(dllFilePath);
-
-    final bundle = Bundle.fromSourceDir(bundlePath);
-    final flutterApi = FlutterApi.load(dllPath);
-
-    return FlutterFinder._internal(
-      bundlePath,
-      dllPath,
-      bundle,
-      flutterApi,
-    );
-  }
-
-  static String searchBundleFolder(String supposePath) {
+  static String searchBundleFolder([String supposePath = '']) {
     try {
       return bundleSearchPaths(supposePath)
           .firstWhere(Bundle.isDirectoryContain);
@@ -62,6 +36,7 @@ class FlutterFinder {
 
   static Iterable<String> dllSearchPaths(String supposePath) sync* {
     for (final dir in _searchPaths(supposePath)) {
+      yield dir;
       yield path.join(dir, 'flutter_windows.dll');
     }
 
@@ -77,14 +52,12 @@ class FlutterFinder {
       yield supposePath;
     }
 
-    if (currentDir != supposePath) {
-      yield currentDir;
-    }
-
-    yield path.join(currentDir, supposePath);
+    var returnPath = path.join(currentDir, supposePath);
+    yield returnPath;
 
     if (workingDir != currentDir) {
-      yield workingDir;
+      returnPath = path.join(workingDir, supposePath);
+      yield returnPath;
     }
   }
 

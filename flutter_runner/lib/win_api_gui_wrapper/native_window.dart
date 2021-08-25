@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 import 'package:meta/meta.dart';
 
-import '../win32_addons.dart';
 import 'window_events.dart';
 import 'window_registry.dart';
 
@@ -19,10 +18,10 @@ class NativeWindow extends WindowEvents {
   @override
   @protected
   void onCreate(int hWnd, CREATESTRUCT createInfo) {
-    if (!WindowsRegistry.isMainWindow(hWnd)) {
-      SetWindowLongPtr(hWnd, GWL_HWNDPARENT, WindowsRegistry.mainWindowHandle);
-    }
     super.onCreate(hWnd, createInfo);
+    if (!WindowsRegistry.isMainWindow(hWnd)) {
+      SetWindowLongPtr(hWnd, GWLP_HWNDPARENT, WindowsRegistry.mainWindowHandle);
+    }
   }
 
   @override
@@ -49,10 +48,12 @@ class NativeWindow extends WindowEvents {
     final pTitle = 'Window'.toNativeUtf16();
     try {
       final hWnd = CreateWindowEx(
-        WindowsRegistry.windows.isEmpty ? WS_EX_APPWINDOW : WS_EX_TOOLWINDOW,
+        WindowsRegistry.windows.isEmpty ? WS_EX_APPWINDOW : 0,
         pWindowClassName,
         pTitle,
-        WS_OVERLAPPEDWINDOW,
+        WindowsRegistry.windows.isEmpty
+            ? WS_OVERLAPPEDWINDOW
+            : WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
