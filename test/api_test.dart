@@ -665,6 +665,18 @@ void main() {
               Pointer<Utf16> lpName)>('CreateEventW');
       expect(CreateEvent, isA<Function>());
     });
+    test('Can instantiate CreateEventEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateEventEx = kernel32.lookupFunction<
+          IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              Pointer<Utf16> lpName, Uint32 dwFlags, Uint32 dwDesiredAccess),
+          int Function(
+              Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+              Pointer<Utf16> lpName,
+              int dwFlags,
+              int dwDesiredAccess)>('CreateEventExW');
+      expect(CreateEventEx, isA<Function>());
+    });
     test('Can instantiate CreateFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateFile = kernel32.lookupFunction<
@@ -2188,6 +2200,15 @@ void main() {
               Pointer<Utf16> lpNewFileName)>('MoveFileW');
       expect(MoveFile, isA<Function>());
     });
+    test('Can instantiate OpenEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final OpenEvent = kernel32.lookupFunction<
+          IntPtr Function(Uint32 dwDesiredAccess, Int32 bInheritHandle,
+              Pointer<Utf16> lpName),
+          int Function(int dwDesiredAccess, int bInheritHandle,
+              Pointer<Utf16> lpName)>('OpenEventW');
+      expect(OpenEvent, isA<Function>());
+    });
     test('Can instantiate OpenProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenProcess = kernel32.lookupFunction<
@@ -2359,6 +2380,12 @@ void main() {
           int Function(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
               int dwFlagsAndAttributes)>('ReOpenFile');
       expect(ReOpenFile, isA<Function>());
+    });
+    test('Can instantiate ResetEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ResetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+          int Function(int hEvent)>('ResetEvent');
+      expect(ResetEvent, isA<Function>());
     });
     if (windowsBuildNumber >= 17763) {
       test('Can instantiate ResizePseudoConsole', () {
@@ -2653,6 +2680,13 @@ void main() {
           Void Function(Uint32 dwMilliseconds),
           void Function(int dwMilliseconds)>('Sleep');
       expect(Sleep, isA<Function>());
+    });
+    test('Can instantiate SleepEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SleepEx = kernel32.lookupFunction<
+          Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
+          int Function(int dwMilliseconds, int bAlertable)>('SleepEx');
+      expect(SleepEx, isA<Function>());
     });
     test('Can instantiate TerminateProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -5731,7 +5765,7 @@ void main() {
     test('Can instantiate ShowWindowAsync', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ShowWindowAsync = user32.lookupFunction<
-          Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+          Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
           int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
       expect(ShowWindowAsync, isA<Function>());
     });
@@ -7745,6 +7779,15 @@ void main() {
           Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
               Pointer<Int32> pNumArgs)>('CommandLineToArgvW');
       expect(CommandLineToArgvW, isA<Function>());
+    });
+    test('Can instantiate ExtractAssociatedIcon', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final ExtractAssociatedIcon = shell32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
+          int Function(int hInst, Pointer<Utf16> pszIconPath,
+              Pointer<Uint16> piIcon)>('ExtractAssociatedIconW');
+      expect(ExtractAssociatedIcon, isA<Function>());
     });
     test('Can instantiate FindExecutable', () {
       final shell32 = DynamicLibrary.open('shell32.dll');

@@ -751,6 +751,11 @@
         "dllLibrary": "kernel32",
         "comment": "Creates or opens a named or unnamed event object."
     },
+    "CreateEventEx": {
+        "prototype": "HANDLE CreateEventExW(\n  LPSECURITY_ATTRIBUTES lpEventAttributes,\n  LPCWSTR               lpName,\n  DWORD                 dwFlags,\n  DWORD                 dwDesiredAccess\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a named or unnamed event object and returns a handle to the object."
+    },
     "CreateFile": {
         "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
         "dllLibrary": "kernel32",
@@ -1337,6 +1342,11 @@
         "prototype": "HPEN ExtCreatePen(\n  DWORD          iPenStyle,\n  DWORD          cWidth,\n  const LOGBRUSH *plbrush,\n  DWORD          cStyle,\n  const DWORD    *pstyle\n);",
         "dllLibrary": "gdi32",
         "comment": "The ExtCreatePen function creates a logical cosmetic or geometric pen that has the specified style, width, and brush attributes."
+    },
+    "ExtractAssociatedIcon": {
+        "prototype": "HICON ExtractAssociatedIconW(\n  HINSTANCE hInst,\n  LPWSTR    pszIconPath,\n  WORD      *piIcon\n);",
+        "dllLibrary": "shell32",
+        "comment": "Gets a handle to an icon stored as a resource in a file or an icon stored in a file's associated executable file."
     },
     "ExtTextOut": {
         "prototype": "BOOL ExtTextOutW(\n  HDC        hdc,\n  int        x,\n  int        y,\n  UINT       options,\n  const RECT *lprect,\n  LPCWSTR    lpString,\n  UINT       c,\n  const INT  *lpDx\n);",
@@ -3600,6 +3610,11 @@
         "dllLibrary": "user32",
         "comment": "Opens the specified desktop object."
     },
+    "OpenEvent": {
+        "prototype": "HANDLE OpenEventW(\n  DWORD   dwDesiredAccess,\n  BOOL    bInheritHandle,\n  LPCWSTR lpName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Opens an existing named event object."
+    },
     "OpenIcon": {
         "prototype": "BOOL OpenIcon(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -4180,6 +4195,11 @@
         "dllLibrary": "spoolss",
         "comment": "Reports to the Print Spooler service whether an XPS print job is in the spooling or the rendering phase and what part of the processing is currently underway.",
         "category": "winspool"
+    },
+    "ResetEvent": {
+        "prototype": "BOOL ResetEvent(\n  HANDLE hEvent\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the specified event object to the nonsignaled state."
     },
     "ResetPrinter": {
         "prototype": "BOOL ResetPrinterW(\n  _In_ HANDLE             hPrinter,\n  _In_ LPPRINTER_DEFAULTS pDefault\n);",
@@ -5183,6 +5203,11 @@
         "prototype": "void Sleep(\n  DWORD dwMilliseconds\n);",
         "dllLibrary": "kernel32",
         "comment": "Suspends the execution of the current thread until the time-out interval elapses."
+    },
+    "SleepEx": {
+        "prototype": "DWORD SleepEx(\n  DWORD dwMilliseconds,\n  BOOL  bAlertable\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends the current thread until the specified condition is met. Execution resumes when one of the following occurs: (i) an I/O completion callback function is called; (ii) an asynchronous procedure call (APC) is queued to the thread; (iii) the time-out interval elapses."
     },
     "socket": {
         "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",

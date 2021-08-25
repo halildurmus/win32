@@ -164,7 +164,7 @@ late final _TaskDialog = _comctl32.lookupFunction<
         Pointer<Utf16> pszWindowTitle,
         Pointer<Utf16> pszMainInstruction,
         Pointer<Utf16> pszContent,
-        Int32 dwCommonButtons,
+        Uint32 dwCommonButtons,
         Pointer<Utf16> pszIcon,
         Pointer<Int32> pnButton),
     int Function(
