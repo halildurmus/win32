@@ -678,7 +678,8 @@
     "CoWaitForMultipleObjects": {
         "prototype": "HRESULT CoWaitForMultipleObjects(\n  DWORD        dwFlags,\n  DWORD        dwTimeout,\n  ULONG        cHandles,\n  const HANDLE *pHandles,\n  LPDWORD      lpdwindex\n);",
         "dllLibrary": "ole32",
-        "comment": "A replacement for CoWaitForMultipleHandles. This replacement API hides the options for CoWaitForMultipleHandles that are not supported in ASTA."
+        "comment": "A replacement for CoWaitForMultipleHandles. This replacement API hides the options for CoWaitForMultipleHandles that are not supported in ASTA.",
+        "minimumWindowsVersion": "WIN10_TH2"
     },
     "CreateAcceleratorTable": {
         "prototype": "HACCEL CreateAcceleratorTableW(\n  LPACCEL paccel,\n  int     cAccel\n);",
@@ -1115,7 +1116,8 @@
     "DwmRenderGesture": {
         "prototype": "DWMAPI DwmRenderGesture(\n  GESTURE_TYPE gt,\n  UINT         cContacts,\n  const DWORD  *pdwPointerID,\n  const POINT  *pPoints\n);",
         "dllLibrary": "dwmapi",
-        "comment": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture."
+        "comment": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture.",
+        "minimumWindowsVersion": "WIN8"
     },
     "DwmSetWindowAttribute": {
         "prototype": "DWMAPI DwmSetWindowAttribute(\n  HWND    hwnd,\n  DWORD   dwAttribute,\n  LPCVOID pvAttribute,\n  DWORD   cbAttribute\n);",
@@ -1125,7 +1127,8 @@
     "DwmShowContact": {
         "prototype": "DWMAPI DwmShowContact(\n  DWORD           dwPointerID,\n  DWM_SHOWCONTACT eShowContact\n);",
         "dllLibrary": "dwmapi",
-        "comment": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact."
+        "comment": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact.",
+        "minimumWindowsVersion": "WIN8"
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
@@ -1802,7 +1805,8 @@
     "GetDisplayAutoRotationPreferences": {
         "prototype": "BOOL GetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE *pOrientation\n);",
         "dllLibrary": "user32",
-        "comment": "Retrieves the screen auto-rotation preferences for the current process."
+        "comment": "Retrieves the screen auto-rotation preferences for the current process.",
+        "minimumWindowsVersion": "WIN8"
     },
     "GetDlgItem": {
         "prototype": "HWND GetDlgItem(\n  HWND hDlg,\n  int  nIDDlgItem\n);",
@@ -2306,7 +2310,8 @@
     "GetOverlappedResultEx": {
         "prototype": "BOOL GetOverlappedResultEx(\n  HANDLE       hFile,\n  LPOVERLAPPED lpOverlapped,\n  LPDWORD      lpNumberOfBytesTransferred,\n  DWORD        dwMilliseconds,\n  BOOL         bAlertable\n);",
         "dllLibrary": "kernel32",
-        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device within the specified time-out interval. The calling thread can perform an alertable wait."
+        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device within the specified time-out interval. The calling thread can perform an alertable wait.",
+        "minimumWindowsVersion": "WIN8"
     },
     "GetParent": {
         "prototype": "HWND GetParent(\n  HWND hWnd\n);",
@@ -2448,7 +2453,8 @@
     "GetScaleFactorForMonitor": {
         "prototype": "HRESULT GetScaleFactorForMonitor(\n  HMONITOR            hMon,\n  DEVICE_SCALE_FACTOR *pScale\n);",
         "dllLibrary": "shcore",
-        "comment": "Gets the scale factor of a specific monitor."
+        "comment": "Gets the scale factor of a specific monitor.",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetScrollBarInfo": {
         "prototype": "BOOL GetScrollBarInfo(\n  HWND           hwnd,\n  LONG           idObject,\n  PSCROLLBARINFO psbi\n);",
@@ -3067,7 +3073,8 @@
     "IsImmersiveProcess": {
         "prototype": "BOOL IsImmersiveProcess(\n  HANDLE hProcess\n);",
         "dllLibrary": "user32",
-        "comment": "Determines whether the process belongs to a Windows Store app."
+        "comment": "Determines whether the process belongs to a Windows Store app.",
+        "minimumWindowsVersion": "WIN8"
     },
     "IsMenu": {
         "prototype": "BOOL IsMenu(\n  HMENU hMenu\n);",
@@ -3077,7 +3084,8 @@
     "IsNativeVhdBoot": {
         "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
         "dllLibrary": "kernel32",
-        "comment": "Indicates if the OS was booted from a VHD container."
+        "comment": "Indicates if the OS was booted from a VHD container.",
+        "minimumWindowsVersion": "WIN8"
     },
     "IsProcessDPIAware": {
         "prototype": "BOOL IsProcessDPIAware();",
@@ -3984,7 +3992,8 @@
     "RegisterTouchHitTestingWindow": {
         "prototype": "BOOL RegisterTouchHitTestingWindow(\n  HWND  hwnd,\n  ULONG value\n);",
         "dllLibrary": "user32",
-        "comment": "Registers a window to process the WM_TOUCHHITTESTING notification."
+        "comment": "Registers a window to process the WM_TOUCHHITTESTING notification.",
+        "minimumWindowsVersion": "WIN8"
     },
     "RegisterTouchWindow": {
         "prototype": "BOOL RegisterTouchWindow(\n  HWND  hwnd,\n  ULONG ulFlags\n);",
@@ -4253,7 +4262,8 @@
     "SCardAudit": {
         "prototype": "LONG SCardAudit(\n  SCARDCONTEXT hContext,\n  DWORD        dwEvent\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardAudit function writes event messages to the Windows application log Microsoft-Windows-SmartCard-Audit/Authentication."
+        "comment": "The SCardAudit function writes event messages to the Windows application log Microsoft-Windows-SmartCard-Audit/Authentication.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardBeginTransaction": {
         "prototype": "LONG SCardBeginTransaction(\n  SCARDHANDLE hCard\n);",
@@ -4323,7 +4333,8 @@
     "SCardGetDeviceTypeId": {
         "prototype": "LONG SCardGetDeviceTypeIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPDWORD      pdwDeviceTypeId\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetDeviceTypeId function gets the device type identifier of the card reader for the given reader name. This function does not affect the state of the reader."
+        "comment": "The SCardGetDeviceTypeId function gets the device type identifier of the card reader for the given reader name. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetProviderId": {
         "prototype": "LONG SCardGetProviderIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szCard,\n  LPGUID       pguidProviderId\n);",
@@ -4333,12 +4344,14 @@
     "SCardGetReaderDeviceInstanceId": {
         "prototype": "LONG SCardGetReaderDeviceInstanceIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPWSTR       szDeviceInstanceId,\n  LPDWORD      pcchDeviceInstanceId\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetReaderDeviceInstanceId function gets the device instance identifier of the card reader for the given reader name. This function does not affect the state of the reader."
+        "comment": "The SCardGetReaderDeviceInstanceId function gets the device instance identifier of the card reader for the given reader name. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetReaderIcon": {
         "prototype": "LONG SCardGetReaderIconW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPBYTE       pbIcon,\n  LPDWORD      pcbIcon\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetReaderIcon function gets an icon of the smart card reader for a given reader's name. This function does not affect the state of the card reader."
+        "comment": "The SCardGetReaderIcon function gets an icon of the smart card reader for a given reader's name. This function does not affect the state of the card reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetStatusChange": {
         "prototype": "LONG SCardGetStatusChangeW(\n  SCARDCONTEXT         hContext,\n  DWORD                dwTimeout,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
@@ -4393,7 +4406,8 @@
     "SCardListReadersWithDeviceInstanceId": {
         "prototype": "LONG SCardListReadersWithDeviceInstanceIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szDeviceInstanceId,\n  LPWSTR       mszReaders,\n  LPDWORD      pcchReaders\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardListReadersWithDeviceInstanceId function gets the list of readers that have provided a device instance identifier. This function does not affect the state of the reader."
+        "comment": "The SCardListReadersWithDeviceInstanceId function gets the list of readers that have provided a device instance identifier. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardLocateCards": {
         "prototype": "LONG SCardLocateCardsW(\n  SCARDCONTEXT         hContext,\n  LPCWSTR              mszCards,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
@@ -4591,7 +4605,8 @@
     "SetCoalescableTimer": {
         "prototype": "UINT_PTR SetCoalescableTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc,\n  ULONG     uToleranceDelay\n);",
         "dllLibrary": "user32",
-        "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay."
+        "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetCommBreak": {
         "prototype": "BOOL SetCommBreak(\n  HANDLE hFile\n);",
@@ -4693,7 +4708,8 @@
     "SetDisplayAutoRotationPreferences": {
         "prototype": "BOOL SetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE orientation\n);",
         "dllLibrary": "user32",
-        "comment": "Sets the screen auto-rotation preferences for the current process."
+        "comment": "Sets the screen auto-rotation preferences for the current process.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetDlgItemInt": {
         "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
@@ -4738,7 +4754,8 @@
     "SetFirmwareEnvironmentVariableEx": {
         "prototype": "BOOL SetFirmwareEnvironmentVariableExW(\n  LPCWSTR lpName,\n  LPCWSTR lpGuid,\n  PVOID   pValue,\n  DWORD   nSize,\n  DWORD   dwAttributes\n);",
         "dllLibrary": "kernel32",
-        "comment": "Sets the value of the specified firmware environment variable and the attributes that indicate how this variable is stored and maintained."
+        "comment": "Sets the value of the specified firmware environment variable and the attributes that indicate how this variable is stored and maintained.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetFocus": {
         "prototype": "HWND SetFocus(\n  HWND hWnd\n);",
@@ -5300,7 +5317,8 @@
     "SymSetScopeFromInlineContext": {
         "prototype": "BOOL IMAGEAPI SymSetScopeFromInlineContext(\n  HANDLE  hProcess,\n  ULONG64 Address,\n  ULONG   InlineContext\n);",
         "dllLibrary": "dbghelp",
-        "comment": "Sets the local scope to the symbol that matches the specified address and inline context."
+        "comment": "Sets the local scope to the symbol that matches the specified address and inline context.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SymSetSearchPath": {
         "prototype": "BOOL IMAGEAPI SymSetSearchPathW(\n  HANDLE hProcess,\n  PCWSTR SearchPath\n);",
