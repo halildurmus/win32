@@ -435,6 +435,14 @@ void main() {
         equals('System.Enum'));
   });
 
+  test('Get properties are appropriately marked', () {
+    final scope = MetadataStore.getWin32Scope();
+    final typedef = scope
+        .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
+    final api = typedef.findMethod('get_IsConnectedToInternet');
+    expect(api?.isGetProperty, isTrue);
+  });
+
   test('Delegates are appropriately marked', () {
     final scope = MetadataStore.getWin32Scope();
     final delegate =
