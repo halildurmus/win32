@@ -483,6 +483,31 @@ late final _CreateEvent = _kernel32.lookupFunction<
         int bInitialState,
         Pointer<Utf16> lpName)>('CreateEventW');
 
+/// Creates or opens a named or unnamed event object and returns a handle
+/// to the object.
+///
+/// ```c
+/// HANDLE CreateEventExW(
+///   LPSECURITY_ATTRIBUTES lpEventAttributes,
+///   LPCWSTR               lpName,
+///   DWORD                 dwFlags,
+///   DWORD                 dwDesiredAccess
+/// );
+/// ```
+/// {@category kernel32}
+int CreateEventEx(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        Pointer<Utf16> lpName, int dwFlags, int dwDesiredAccess) =>
+    _CreateEventEx(lpEventAttributes, lpName, dwFlags, dwDesiredAccess);
+
+late final _CreateEventEx = _kernel32.lookupFunction<
+    IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        Pointer<Utf16> lpName, Uint32 dwFlags, Uint32 dwDesiredAccess),
+    int Function(
+        Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
+        Pointer<Utf16> lpName,
+        int dwFlags,
+        int dwDesiredAccess)>('CreateEventExW');
+
 /// Creates or opens a file or I/O device. The most commonly used I/O
 /// devices are as follows: file, file stream, directory, physical disk,
 /// volume, console buffer, tape drive, communications resource, mailslot,
@@ -3735,6 +3760,25 @@ late final _MoveFile = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpExistingFileName,
         Pointer<Utf16> lpNewFileName)>('MoveFileW');
 
+/// Opens an existing named event object.
+///
+/// ```c
+/// HANDLE OpenEventW(
+///   DWORD   dwDesiredAccess,
+///   BOOL    bInheritHandle,
+///   LPCWSTR lpName
+/// );
+/// ```
+/// {@category kernel32}
+int OpenEvent(int dwDesiredAccess, int bInheritHandle, Pointer<Utf16> lpName) =>
+    _OpenEvent(dwDesiredAccess, bInheritHandle, lpName);
+
+late final _OpenEvent = _kernel32.lookupFunction<
+    IntPtr Function(
+        Uint32 dwDesiredAccess, Int32 bInheritHandle, Pointer<Utf16> lpName),
+    int Function(int dwDesiredAccess, int bInheritHandle,
+        Pointer<Utf16> lpName)>('OpenEventW');
+
 /// Opens an existing local process object.
 ///
 /// ```c
@@ -4078,6 +4122,19 @@ late final _ReOpenFile = _kernel32.lookupFunction<
         Uint32 dwShareMode, Uint32 dwFlagsAndAttributes),
     int Function(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
         int dwFlagsAndAttributes)>('ReOpenFile');
+
+/// Sets the specified event object to the nonsignaled state.
+///
+/// ```c
+/// BOOL ResetEvent(
+///   HANDLE hEvent
+/// );
+/// ```
+/// {@category kernel32}
+int ResetEvent(int hEvent) => _ResetEvent(hEvent);
+
+late final _ResetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+    int Function(int hEvent)>('ResetEvent');
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
@@ -4713,6 +4770,26 @@ void Sleep(int dwMilliseconds) => _Sleep(dwMilliseconds);
 late final _Sleep = _kernel32.lookupFunction<
     Void Function(Uint32 dwMilliseconds),
     void Function(int dwMilliseconds)>('Sleep');
+
+/// Suspends the current thread until the specified condition is met.
+/// Execution resumes when one of the following occurs: (i) an I/O
+/// completion callback function is called; (ii) an asynchronous procedure
+/// call (APC) is queued to the thread; (iii) the time-out interval
+/// elapses.
+///
+/// ```c
+/// DWORD SleepEx(
+///   DWORD dwMilliseconds,
+///   BOOL  bAlertable
+/// );
+/// ```
+/// {@category kernel32}
+int SleepEx(int dwMilliseconds, int bAlertable) =>
+    _SleepEx(dwMilliseconds, bAlertable);
+
+late final _SleepEx = _kernel32.lookupFunction<
+    Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
+    int Function(int dwMilliseconds, int bAlertable)>('SleepEx');
 
 /// Terminates the specified process and all of its threads.
 ///
