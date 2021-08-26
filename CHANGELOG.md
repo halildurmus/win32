@@ -1,3 +1,8 @@
+## 2.2.7
+
+- Added ResetEvent and complete `OVERLAPPED` struct (#295)
+- Added more virtual memory functions (#297)
+
 ## 2.2.6
 
 - Add some requested APIs thanks to contributions from @ilopX, in particular

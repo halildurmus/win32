@@ -5385,6 +5385,88 @@ const VARIANT_NOUSEROVERRIDE = 0x04;
 const VARIANT_LOCALBOOL = 0x10;
 
 // -----------------------------------------------------------------------------
+// Memory constants
+// -----------------------------------------------------------------------------
+
+/// Allocates memory charges (from the overall size of memory and the paging
+/// files on disk) for the specified reserved memory pages. The function also
+/// guarantees that when the caller later initially accesses the memory, the
+/// contents will be zero. Actual physical pages are not allocated unless/until
+/// the virtual addresses are actually accessed.
+const MEM_COMMIT = 0x00001000;
+
+/// Reserves a range of the process's virtual address space without allocating
+/// any actual physical storage in memory or in the paging file on disk.
+const MEM_RESERVE = 0x00002000;
+
+/// Replaces a placeholder with a mapped view. Only data/pf-backed section views
+/// are supported (no images, physical memory, etc.). When you replace a
+/// placeholder, BaseAddress and ViewSize must exactly match those of the
+/// placeholder.
+const MEM_REPLACE_PLACEHOLDER = 0x00004000;
+
+/// A placeholder is a type of reserved memory region.
+const MEM_RESERVE_PLACEHOLDER = 0x00040000;
+
+/// Indicates that data in the memory range specified by lpAddress and dwSize is
+/// no longer of interest. The pages should not be read from or written to the
+/// paging file. However, the memory block will be used again later, so it
+/// should not be decommitted. This value cannot be used with any other value.
+const MEM_RESET = 0x00080000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_TOP_DOWN = 0x00100000;
+
+/// Causes the system to track pages that are written to in the allocated
+/// region.
+const MEM_WRITE_WATCH = 0x00200000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_PHYSICAL = 0x00400000;
+
+/// MEM_RESET_UNDO should only be called on an address range to which MEM_RESET
+/// was successfully applied earlier. It indicates that the data in the
+/// specified memory range specified by lpAddress and dwSize is of interest to
+/// the caller and attempts to reverse the effects of MEM_RESET. If the function
+/// succeeds, that means all data in the specified address range is intact. If
+/// the function fails, at least some of the data in the address range has been
+/// replaced with zeroes.
+const MEM_RESET_UNDO = 0x01000000;
+
+/// Allocates memory using large page support.
+const MEM_LARGE_PAGES = 0x20000000;
+
+/// Specifies that the priority of the pages being unmapped should be
+/// temporarily boosted (with automatic short term decay) because the caller
+/// expects that these pages will be accessed again shortly from another thread.
+const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
+
+/// To coalesce two adjacent placeholders, specify MEM_RELEASE |
+/// MEM_COALESCE_PLACEHOLDERS. When you coalesce placeholders, lpAddress and
+/// dwSize must exactly match those of the placeholder.
+const MEM_COALESCE_PLACEHOLDERS = 0x00000001;
+
+/// Frees an allocation back to a placeholder (after you've replaced a
+/// placeholder with a private allocation using VirtualAlloc2 or
+/// Virtual2AllocFromApp).
+const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
+
+/// Decommits the specified region of committed pages. After the operation, the
+/// pages are in the reserved state.
+const MEM_DECOMMIT = 0x00004000;
+
+/// Releases the specified region of pages, or placeholder (for a placeholder,
+/// the address space is released and available for other allocations). After
+/// this operation, the pages are in the free state.
+const MEM_RELEASE = 0x00008000;
+
+/// Indicates free pages not accessible to the calling process and available to
+/// be allocated.
+const MEM_FREE = 0x00010000;
+
+// -----------------------------------------------------------------------------
 // Multimedia constants
 // -----------------------------------------------------------------------------
 /// Time in milliseconds.
