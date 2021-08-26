@@ -5628,10 +5628,30 @@
         "dllLibrary": "kernel32",
         "comment": "Reserves, commits, or changes the state of a region of pages in the virtual address space of the calling process. Memory allocated by this function is automatically initialized to zero."
     },
+    "VirtualAllocEx": {
+        "prototype": "LPVOID VirtualAllocEx(\n  HANDLE hProcess,\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flAllocationType,\n  DWORD  flProtect\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reserves, commits, or changes the state of a region of memory within the virtual address space of a specified process. The function initializes the memory it allocates to zero."
+    },
     "VirtualFree": {
         "prototype": "BOOL VirtualFree(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  dwFreeType\n);",
         "dllLibrary": "kernel32",
         "comment": "Releases, decommits, or releases and decommits a region of pages within the virtual address space of the calling process."
+    },
+    "VirtualFreeEx": {
+        "prototype": "BOOL VirtualFreeEx(\n  HANDLE hProcess,\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  dwFreeType\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Releases, decommits, or releases and decommits a region of memory within the virtual address space of a specified process."
+    },
+    "VirtualLock": {
+        "prototype": "BOOL VirtualLock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locks the specified region of the process's virtual address space into physical memory, ensuring that subsequent access to the region will not incur a page fault."
+    },
+    "VirtualUnlock": {
+        "prototype": "BOOL VirtualUnlock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Unlocks a specified range of pages in the virtual address space of a process, enabling the system to swap the pages out to the paging file if necessary."
     },
     "VkKeyScan": {
         "prototype": "SHORT VkKeyScanW(\n  WCHAR ch\n);",

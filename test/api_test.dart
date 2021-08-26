@@ -2793,6 +2793,15 @@ void main() {
               int flProtect)>('VirtualAlloc');
       expect(VirtualAlloc, isA<Function>());
     });
+    test('Can instantiate VirtualAllocEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualAllocEx = kernel32.lookupFunction<
+          Pointer Function(IntPtr hProcess, Pointer lpAddress, IntPtr dwSize,
+              Uint32 flAllocationType, Uint32 flProtect),
+          Pointer Function(int hProcess, Pointer lpAddress, int dwSize,
+              int flAllocationType, int flProtect)>('VirtualAllocEx');
+      expect(VirtualAllocEx, isA<Function>());
+    });
     test('Can instantiate VirtualFree', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VirtualFree = kernel32.lookupFunction<
@@ -2800,6 +2809,29 @@ void main() {
           int Function(
               Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
       expect(VirtualFree, isA<Function>());
+    });
+    test('Can instantiate VirtualFreeEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualFreeEx = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer lpAddress, IntPtr dwSize,
+              Uint32 dwFreeType),
+          int Function(int hProcess, Pointer lpAddress, int dwSize,
+              int dwFreeType)>('VirtualFreeEx');
+      expect(VirtualFreeEx, isA<Function>());
+    });
+    test('Can instantiate VirtualLock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualLock = kernel32.lookupFunction<
+          Int32 Function(Pointer lpAddress, IntPtr dwSize),
+          int Function(Pointer lpAddress, int dwSize)>('VirtualLock');
+      expect(VirtualLock, isA<Function>());
+    });
+    test('Can instantiate VirtualUnlock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualUnlock = kernel32.lookupFunction<
+          Int32 Function(Pointer lpAddress, IntPtr dwSize),
+          int Function(Pointer lpAddress, int dwSize)>('VirtualUnlock');
+      expect(VirtualUnlock, isA<Function>());
     });
     test('Can instantiate WaitCommEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
