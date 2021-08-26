@@ -4991,6 +4991,30 @@ late final _VirtualAlloc = _kernel32.lookupFunction<
     Pointer Function(Pointer lpAddress, int dwSize, int flAllocationType,
         int flProtect)>('VirtualAlloc');
 
+/// Reserves, commits, or changes the state of a region of memory within
+/// the virtual address space of a specified process. The function
+/// initializes the memory it allocates to zero.
+///
+/// ```c
+/// LPVOID VirtualAllocEx(
+///   HANDLE hProcess,
+///   LPVOID lpAddress,
+///   SIZE_T dwSize,
+///   DWORD  flAllocationType,
+///   DWORD  flProtect
+/// );
+/// ```
+/// {@category kernel32}
+Pointer VirtualAllocEx(int hProcess, Pointer lpAddress, int dwSize,
+        int flAllocationType, int flProtect) =>
+    _VirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
+
+late final _VirtualAllocEx = _kernel32.lookupFunction<
+    Pointer Function(IntPtr hProcess, Pointer lpAddress, IntPtr dwSize,
+        Uint32 flAllocationType, Uint32 flProtect),
+    Pointer Function(int hProcess, Pointer lpAddress, int dwSize,
+        int flAllocationType, int flProtect)>('VirtualAllocEx');
+
 /// Releases, decommits, or releases and decommits a region of pages within
 /// the virtual address space of the calling process.
 ///
@@ -5008,6 +5032,64 @@ int VirtualFree(Pointer lpAddress, int dwSize, int dwFreeType) =>
 late final _VirtualFree = _kernel32.lookupFunction<
     Int32 Function(Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
     int Function(Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
+
+/// Releases, decommits, or releases and decommits a region of memory
+/// within the virtual address space of a specified process.
+///
+/// ```c
+/// BOOL VirtualFreeEx(
+///   HANDLE hProcess,
+///   LPVOID lpAddress,
+///   SIZE_T dwSize,
+///   DWORD  dwFreeType
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualFreeEx(
+        int hProcess, Pointer lpAddress, int dwSize, int dwFreeType) =>
+    _VirtualFreeEx(hProcess, lpAddress, dwSize, dwFreeType);
+
+late final _VirtualFreeEx = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hProcess, Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
+    int Function(int hProcess, Pointer lpAddress, int dwSize,
+        int dwFreeType)>('VirtualFreeEx');
+
+/// Locks the specified region of the process's virtual address space into
+/// physical memory, ensuring that subsequent access to the region will not
+/// incur a page fault.
+///
+/// ```c
+/// BOOL VirtualLock(
+///   LPVOID lpAddress,
+///   SIZE_T dwSize
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualLock(Pointer lpAddress, int dwSize) =>
+    _VirtualLock(lpAddress, dwSize);
+
+late final _VirtualLock = _kernel32.lookupFunction<
+    Int32 Function(Pointer lpAddress, IntPtr dwSize),
+    int Function(Pointer lpAddress, int dwSize)>('VirtualLock');
+
+/// Unlocks a specified range of pages in the virtual address space of a
+/// process, enabling the system to swap the pages out to the paging file
+/// if necessary.
+///
+/// ```c
+/// BOOL VirtualUnlock(
+///   LPVOID lpAddress,
+///   SIZE_T dwSize
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualUnlock(Pointer lpAddress, int dwSize) =>
+    _VirtualUnlock(lpAddress, dwSize);
+
+late final _VirtualUnlock = _kernel32.lookupFunction<
+    Int32 Function(Pointer lpAddress, IntPtr dwSize),
+    int Function(Pointer lpAddress, int dwSize)>('VirtualUnlock');
 
 /// Waits for an event to occur for a specified communications device. The
 /// set of events that are monitored by this function is contained in the
