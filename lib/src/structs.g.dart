@@ -4328,19 +4328,6 @@ class WLAN_RAW_DATA extends Struct {
   external Array<Uint8> DataBlob;
 }
 
-/// The WLAN_RAW_DATA_LIST structure contains raw data in the form of an
-/// array of data blobs that are used by some Native Wifi functions.
-///
-/// {@category Struct}
-class WLAN_RAW_DATA_LIST extends Struct {
-  @Uint32()
-  external int dwTotalSize;
-  @Uint32()
-  external int dwNumberOfItems;
-  @Array(1)
-  external Array<Uint32> DataList;
-}
-
 /// The WLAN_SECURITY_ATTRIBUTES structure defines the security attributes
 /// for a wireless connection.
 ///

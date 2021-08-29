@@ -59,6 +59,7 @@ void main()
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
+    printf("  'WLAN_RAW_DATA_LIST': %zu,\n", sizeof(WLAN_RAW_DATA_LIST));
 
     // Automatically generated structs
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
@@ -277,7 +278,6 @@ void main()
     printf("  'WLAN_RADIO_STATE': %zu,\n", sizeof(WLAN_RADIO_STATE));
     printf("  'WLAN_RATE_SET': %zu,\n", sizeof(WLAN_RATE_SET));
     printf("  'WLAN_RAW_DATA': %zu,\n", sizeof(WLAN_RAW_DATA));
-    printf("  'WLAN_RAW_DATA_LIST': %zu,\n", sizeof(WLAN_RAW_DATA_LIST));
     printf("  'WLAN_SECURITY_ATTRIBUTES': %zu,\n", sizeof(WLAN_SECURITY_ATTRIBUTES));
     printf("  'WLAN_STATISTICS': %zu,\n", sizeof(WLAN_STATISTICS));
     printf("  'WNDCLASS': %zu,\n", sizeof(WNDCLASSW));

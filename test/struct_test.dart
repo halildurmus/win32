@@ -337,6 +337,21 @@ void main() {
       expect(sizeOf<DOC_INFO_1>(), equals(12));
     }
   });
+  test('Struct DOT11_AUTH_CIPHER_PAIR is the right size', () {
+    expect(sizeOf<DOT11_AUTH_CIPHER_PAIR>(), equals(8));
+  });
+  test('Struct DOT11_BSSID_LIST is the right size', () {
+    expect(sizeOf<DOT11_BSSID_LIST>(), equals(20));
+  });
+  test('Struct DOT11_NETWORK is the right size', () {
+    expect(sizeOf<DOT11_NETWORK>(), equals(40));
+  });
+  test('Struct DOT11_NETWORK_LIST is the right size', () {
+    expect(sizeOf<DOT11_NETWORK_LIST>(), equals(48));
+  });
+  test('Struct DOT11_SSID is the right size', () {
+    expect(sizeOf<DOT11_SSID>(), equals(36));
+  });
   test('Struct DRAWTEXTPARAMS is the right size', () {
     expect(sizeOf<DRAWTEXTPARAMS>(), equals(20));
   });
@@ -356,6 +371,12 @@ void main() {
     } else {
       expect(sizeOf<DWM_BLURBEHIND>(), equals(16));
     }
+  });
+  test('Struct EAP_METHOD_TYPE is the right size', () {
+    expect(sizeOf<EAP_METHOD_TYPE>(), equals(16));
+  });
+  test('Struct EAP_TYPE is the right size', () {
+    expect(sizeOf<EAP_TYPE>(), equals(12));
   });
   test('Struct ENUMLOGFONTEX is the right size', () {
     expect(sizeOf<ENUMLOGFONTEX>(), equals(348));
@@ -461,6 +482,13 @@ void main() {
       expect(sizeOf<KNOWNFOLDER_DEFINITION>(), equals(112));
     } else {
       expect(sizeOf<KNOWNFOLDER_DEFINITION>(), equals(76));
+    }
+  });
+  test('Struct L2_NOTIFICATION_DATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<L2_NOTIFICATION_DATA>(), equals(40));
+    } else {
+      expect(sizeOf<L2_NOTIFICATION_DATA>(), equals(32));
     }
   });
   test('Struct LASTINPUTINFO is the right size', () {
@@ -597,6 +625,9 @@ void main() {
     } else {
       expect(sizeOf<MSG>(), equals(28));
     }
+  });
+  test('Struct NDIS_OBJECT_HEADER is the right size', () {
+    expect(sizeOf<NDIS_OBJECT_HEADER>(), equals(4));
   });
   test('Struct NEWTEXTMETRIC is the right size', () {
     expect(sizeOf<NEWTEXTMETRIC>(), equals(76));
@@ -992,6 +1023,113 @@ void main() {
   });
   test('Struct WINDOWPLACEMENT is the right size', () {
     expect(sizeOf<WINDOWPLACEMENT>(), equals(44));
+  });
+  test('Struct WLAN_ASSOCIATION_ATTRIBUTES is the right size', () {
+    expect(sizeOf<WLAN_ASSOCIATION_ATTRIBUTES>(), equals(68));
+  });
+  test('Struct WLAN_AUTH_CIPHER_PAIR_LIST is the right size', () {
+    expect(sizeOf<WLAN_AUTH_CIPHER_PAIR_LIST>(), equals(12));
+  });
+  test('Struct WLAN_AVAILABLE_NETWORK is the right size', () {
+    expect(sizeOf<WLAN_AVAILABLE_NETWORK>(), equals(628));
+  });
+  test('Struct WLAN_AVAILABLE_NETWORK_LIST is the right size', () {
+    expect(sizeOf<WLAN_AVAILABLE_NETWORK_LIST>(), equals(636));
+  });
+  test('Struct WLAN_BSS_ENTRY is the right size', () {
+    expect(sizeOf<WLAN_BSS_ENTRY>(), equals(360));
+  });
+  test('Struct WLAN_BSS_LIST is the right size', () {
+    expect(sizeOf<WLAN_BSS_LIST>(), equals(368));
+  });
+  test('Struct WLAN_CONNECTION_ATTRIBUTES is the right size', () {
+    expect(sizeOf<WLAN_CONNECTION_ATTRIBUTES>(), equals(604));
+  });
+  test('Struct WLAN_CONNECTION_NOTIFICATION_DATA is the right size', () {
+    expect(sizeOf<WLAN_CONNECTION_NOTIFICATION_DATA>(), equals(572));
+  });
+  test('Struct WLAN_CONNECTION_PARAMETERS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WLAN_CONNECTION_PARAMETERS>(), equals(40));
+    } else {
+      expect(sizeOf<WLAN_CONNECTION_PARAMETERS>(), equals(24));
+    }
+  });
+  test('Struct WLAN_COUNTRY_OR_REGION_STRING_LIST is the right size', () {
+    expect(sizeOf<WLAN_COUNTRY_OR_REGION_STRING_LIST>(), equals(8));
+  });
+  test('Struct WLAN_DEVICE_SERVICE_GUID_LIST is the right size', () {
+    expect(sizeOf<WLAN_DEVICE_SERVICE_GUID_LIST>(), equals(24));
+  });
+  test('Struct WLAN_DEVICE_SERVICE_NOTIFICATION_DATA is the right size', () {
+    expect(sizeOf<WLAN_DEVICE_SERVICE_NOTIFICATION_DATA>(), equals(28));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS>(), equals(40));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE is the right size',
+      () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE>(), equals(28));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_PEER_STATE is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_PEER_STATE>(), equals(12));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_RADIO_STATE is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_RADIO_STATE>(), equals(8));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_SECURITY_SETTINGS is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_SECURITY_SETTINGS>(), equals(8));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_STATE_CHANGE is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_STATE_CHANGE>(), equals(12));
+  });
+  test('Struct WLAN_HOSTED_NETWORK_STATUS is the right size', () {
+    expect(sizeOf<WLAN_HOSTED_NETWORK_STATUS>(), equals(52));
+  });
+  test('Struct WLAN_INTERFACE_CAPABILITY is the right size', () {
+    expect(sizeOf<WLAN_INTERFACE_CAPABILITY>(), equals(276));
+  });
+  test('Struct WLAN_INTERFACE_INFO is the right size', () {
+    expect(sizeOf<WLAN_INTERFACE_INFO>(), equals(532));
+  });
+  test('Struct WLAN_INTERFACE_INFO_LIST is the right size', () {
+    expect(sizeOf<WLAN_INTERFACE_INFO_LIST>(), equals(540));
+  });
+  test('Struct WLAN_MAC_FRAME_STATISTICS is the right size', () {
+    expect(sizeOf<WLAN_MAC_FRAME_STATISTICS>(), equals(96));
+  });
+  test('Struct WLAN_MSM_NOTIFICATION_DATA is the right size', () {
+    expect(sizeOf<WLAN_MSM_NOTIFICATION_DATA>(), equals(580));
+  });
+  test('Struct WLAN_PHY_FRAME_STATISTICS is the right size', () {
+    expect(sizeOf<WLAN_PHY_FRAME_STATISTICS>(), equals(144));
+  });
+  test('Struct WLAN_PHY_RADIO_STATE is the right size', () {
+    expect(sizeOf<WLAN_PHY_RADIO_STATE>(), equals(12));
+  });
+  test('Struct WLAN_PROFILE_INFO is the right size', () {
+    expect(sizeOf<WLAN_PROFILE_INFO>(), equals(516));
+  });
+  test('Struct WLAN_PROFILE_INFO_LIST is the right size', () {
+    expect(sizeOf<WLAN_PROFILE_INFO_LIST>(), equals(524));
+  });
+  test('Struct WLAN_RADIO_STATE is the right size', () {
+    expect(sizeOf<WLAN_RADIO_STATE>(), equals(772));
+  });
+  test('Struct WLAN_RATE_SET is the right size', () {
+    expect(sizeOf<WLAN_RATE_SET>(), equals(256));
+  });
+  test('Struct WLAN_RAW_DATA is the right size', () {
+    expect(sizeOf<WLAN_RAW_DATA>(), equals(8));
+  });
+  test('Struct WLAN_RAW_DATA_LIST is the right size', () {
+    expect(sizeOf<WLAN_RAW_DATA_LIST>(), equals(16));
+  });
+  test('Struct WLAN_SECURITY_ATTRIBUTES is the right size', () {
+    expect(sizeOf<WLAN_SECURITY_ATTRIBUTES>(), equals(16));
+  });
+  test('Struct WLAN_STATISTICS is the right size', () {
+    expect(sizeOf<WLAN_STATISTICS>(), equals(368));
   });
   test('Struct WNDCLASS is the right size', () {
     if (is64bitOS) {
