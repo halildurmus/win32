@@ -179,10 +179,6 @@
         "namespace": "Windows.Win32.NetworkManagement.WiFi.DOT11_AUTH_CIPHER_PAIR",
         "comment": "The DOT11_AUTH_CIPHER_PAIR structure defines a pair of 802.11 authentication and cipher algorithms that can be enabled at the same time on the 802.11 station."
     },
-    "NDIS_OBJECT_HEADER": {
-        "namespace": "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER",
-        "comment": "The NDIS_OBJECT_HEADER structure packages the object type, version, and size information that is required in many NDIS 6.0 structures."
-    },
     "DOT11_BSSID_LIST": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.DOT11_BSSID_LIST",
         "comment": "The DOT11_BSSID_LIST structure contains a list of basic service set (BSS) identifiers."
@@ -410,6 +406,10 @@
     "MSG": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSG",
         "comment": "Contains message information from a thread's message queue."
+    },
+    "NDIS_OBJECT_HEADER": {
+        "namespace": "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER",
+        "comment": "The NDIS_OBJECT_HEADER structure packages the object type, version, and size information that is required in many NDIS 6.0 structures."
     },
     "NEWTEXTMETRIC": {
         "namespace": "Windows.Win32.Graphics.Gdi.NEWTEXTMETRICW",
@@ -830,6 +830,10 @@
     "WLAN_MSM_NOTIFICATION_DATA": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_MSM_NOTIFICATION_DATA",
         "comment": "The WLAN_MSM_NOTIFICATION_DATA structure contains information about media specific module (MSM) connection related notifications."
+    },
+    "WLAN_NOTIFICATION_DATA": {
+        "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_DATA",
+        "comment": "The WLAN_NOTIFICATION_DATA structure contains information provided when receiving notifications."
     },
     "WLAN_PHY_FRAME_STATISTICS": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_PHY_FRAME_STATISTICS",

@@ -50,6 +50,8 @@ const win32TypeMap = <String, String>{
   'PSYM_ENUMERATESYMBOLS_CALLBACKW':
       'Pointer<NativeFunction<SymEnumSymbolsProc>>',
   'LPEXCEPFINO_DEFERRED_FILLIN': 'Pointer<NativeFunction<ExcepInfoProc>>',
+  'WLAN_NOTIFICATION_CALLBACK':
+      'Pointer<NativeFunction<WlanNotificationCallback>>',
 
   // Void pointers
   'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',
