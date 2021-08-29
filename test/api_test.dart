@@ -11558,26 +11558,5 @@ void main() {
               Pointer<Utf16> strModifiedSDDL)>('WlanSetSecuritySettings');
       expect(WlanSetSecuritySettings, isA<Function>());
     });
-    test('Can instantiate WlanUIEditProfile', () {
-      final wlanapi = DynamicLibrary.open('wlanapi.dll');
-      final WlanUIEditProfile = wlanapi.lookupFunction<
-          Uint32 Function(
-              Uint32 dwClientVersion,
-              Pointer<Utf16> wstrProfileName,
-              Pointer<GUID> pInterfaceGuid,
-              IntPtr hWnd,
-              Uint32 wlStartPage,
-              Pointer pReserved,
-              Pointer<Uint32> pWlanReasonCode),
-          int Function(
-              int dwClientVersion,
-              Pointer<Utf16> wstrProfileName,
-              Pointer<GUID> pInterfaceGuid,
-              int hWnd,
-              int wlStartPage,
-              Pointer pReserved,
-              Pointer<Uint32> pWlanReasonCode)>('WlanUIEditProfile');
-      expect(WlanUIEditProfile, isA<Function>());
-    });
   });
 }

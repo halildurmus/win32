@@ -6177,11 +6177,6 @@
         "dllLibrary": "wlanapi",
         "comment": "The WlanGetProfileList function sets the security settings for a configurable object."
     },
-    "WlanUIEditProfile": {
-        "prototype": "DWORD WlanUIEditProfile(\n  DWORD             dwClientVersion,\n  LPCWSTR           wstrProfileName,\n  GUID              *pInterfaceGuid,\n  HWND              hWnd,\n  WL_DISPLAY_PAGES  wlStartPage,\n  PVOID             pReserved,\n  PWLAN_REASON_CODE pWlanReasonCode\n);",
-        "dllLibrary": "wlanapi",
-        "comment": "Displays the wireless profile user interface (UI). This UI is used to view and edit advanced settings of a wireless network profile."
-    },
     "Wow64SuspendThread": {
         "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",
         "dllLibrary": "kernel32",

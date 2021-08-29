@@ -1436,6 +1436,22 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   external GUID ftidType;
 }
 
+/// The L2_NOTIFICATION_DATA structure is used by the IHV Extensions DLL to
+/// send notifications to any service or applications that has registered
+/// for the notification.
+///
+/// {@category Struct}
+class L2_NOTIFICATION_DATA extends Struct {
+  @Uint32()
+  external int NotificationSource;
+  @Uint32()
+  external int NotificationCode;
+  external GUID InterfaceGuid;
+  @Uint32()
+  external int dwDataSize;
+  external Pointer pData;
+}
+
 /// Contains the time of the last input.
 ///
 /// {@category Struct}

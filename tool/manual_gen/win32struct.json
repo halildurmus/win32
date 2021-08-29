@@ -291,6 +291,10 @@
         "namespace": "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION",
         "comment": "Defines the specifics of a known folder."
     },
+    "L2_NOTIFICATION_DATA": {
+        "namespace": "Windows.Win32.NetworkManagement.WiFi.L2_NOTIFICATION_DATA",
+        "comment": "The L2_NOTIFICATION_DATA structure is used by the IHV Extensions DLL to send notifications to any service or applications that has registered for the notification."
+    },
     "LASTINPUTINFO": {
         "namespace": "Windows.Win32.UI.KeyboardAndMouseInput.LASTINPUTINFO",
         "comment": "Contains the time of the last input."
@@ -830,10 +834,6 @@
     "WLAN_MSM_NOTIFICATION_DATA": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_MSM_NOTIFICATION_DATA",
         "comment": "The WLAN_MSM_NOTIFICATION_DATA structure contains information about media specific module (MSM) connection related notifications."
-    },
-    "WLAN_NOTIFICATION_DATA": {
-        "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_DATA",
-        "comment": "The WLAN_NOTIFICATION_DATA structure contains information provided when receiving notifications."
     },
     "WLAN_PHY_FRAME_STATISTICS": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_PHY_FRAME_STATISTICS",
