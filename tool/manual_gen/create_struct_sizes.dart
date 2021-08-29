@@ -33,6 +33,7 @@ const header = '''
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
 #include <dwmapi.h>
+#include <wlanapi.h>
 
 void main()
 {

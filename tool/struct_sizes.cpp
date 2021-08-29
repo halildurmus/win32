@@ -29,6 +29,7 @@
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
 #include <dwmapi.h>
+#include <wlanapi.h>
 
 void main()
 {
@@ -133,6 +134,7 @@ void main()
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
+    printf("  'L2_NOTIFICATION_DATA': %zu,\n", sizeof(L2_NOTIFICATION_DATA));
     printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
     printf("  'LOGBRUSH': %zu,\n", sizeof(LOGBRUSH));
     printf("  'LOGFONT': %zu,\n", sizeof(LOGFONTW));
@@ -268,7 +270,6 @@ void main()
     printf("  'WLAN_INTERFACE_INFO_LIST': %zu,\n", sizeof(WLAN_INTERFACE_INFO_LIST));
     printf("  'WLAN_MAC_FRAME_STATISTICS': %zu,\n", sizeof(WLAN_MAC_FRAME_STATISTICS));
     printf("  'WLAN_MSM_NOTIFICATION_DATA': %zu,\n", sizeof(WLAN_MSM_NOTIFICATION_DATA));
-    printf("  'WLAN_NOTIFICATION_DATA': %zu,\n", sizeof(WLAN_NOTIFICATION_DATA));
     printf("  'WLAN_PHY_FRAME_STATISTICS': %zu,\n", sizeof(WLAN_PHY_FRAME_STATISTICS));
     printf("  'WLAN_PHY_RADIO_STATE': %zu,\n", sizeof(WLAN_PHY_RADIO_STATE));
     printf("  'WLAN_PROFILE_INFO': %zu,\n", sizeof(WLAN_PROFILE_INFO));
