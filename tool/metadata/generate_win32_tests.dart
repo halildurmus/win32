@@ -45,14 +45,12 @@ void main() {
 ''');
   // Generate a list of libs, e.g. [kernel32, gdi32, ...]
   // The .toSet() removes duplicates.
-  //
+  final libraries =
+      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
+
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  final libraries = win32.functions.values
-      .map((e) => e.dllLibrary)
-      .toSet()
-      .toList()
-    ..removeWhere((library) => library == 'wlanapi');
+  libraries.removeWhere((library) => library == 'wlanapi');
 
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
