@@ -1,3 +1,7 @@
+## 2.2.8
+
+- Add Native Wifi APIs (#299)
+
 ## 2.2.7
 
 - Added ResetEvent and complete `OVERLAPPED` struct (#295)
