@@ -175,17 +175,13 @@
         "namespace": "Windows.Win32.Graphics.Printing.DOC_INFO_1W",
         "comment": "The DOC_INFO_1 structure describes a document that will be printed."
     },
-    "EAP_METHOD_TYPE": {
-        "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_METHOD_TYPE",
-        "comment": "The EAP_METHOD_TYPE structure contains type, identification, and author information about an EAP method."
-    },
-    "EAP_TYPE": {
-        "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_TYPE",
-        "comment": "The EAP_TYPE structure contains type and vendor identification information for an EAP method."
-    },
     "DOT11_AUTH_CIPHER_PAIR": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.DOT11_AUTH_CIPHER_PAIR",
         "comment": "The DOT11_AUTH_CIPHER_PAIR structure defines a pair of 802.11 authentication and cipher algorithms that can be enabled at the same time on the 802.11 station."
+    },
+    "NDIS_OBJECT_HEADER": {
+        "namespace": "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER",
+        "comment": "The NDIS_OBJECT_HEADER structure packages the object type, version, and size information that is required in many NDIS 6.0 structures."
     },
     "DOT11_BSSID_LIST": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.DOT11_BSSID_LIST",
@@ -218,6 +214,14 @@
     "DWM_BLURBEHIND": {
         "namespace": "Windows.Win32.Graphics.Dwm.DWM_BLURBEHIND",
         "comment": "Specifies Desktop Window Manager (DWM) blur-behind properties. Used by the DwmEnableBlurBehindWindow function."
+    },
+    "EAP_METHOD_TYPE": {
+        "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_METHOD_TYPE",
+        "comment": "The EAP_METHOD_TYPE structure contains type, identification, and author information about an EAP method."
+    },
+    "EAP_TYPE": {
+        "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_TYPE",
+        "comment": "The EAP_TYPE structure contains type and vendor identification information for an EAP method."
     },
     "ENUMLOGFONTEX": {
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
