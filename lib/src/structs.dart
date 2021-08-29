@@ -1196,6 +1196,38 @@ class OVERLAPPED extends Struct {
   external int hEvent;
 }
 
+// typedef struct _WLAN_RAW_DATA_LIST {
+//     DWORD dwTotalSize;
+//     DWORD dwNumberOfItems;
+//     struct {
+//         // the beginning of the data blob
+//         // the offset is w.r.t. the beginning of the entry
+//         DWORD dwDataOffset;
+//         // size of the data blob
+//         DWORD dwDataSize;
+//     } DataList[1];
+// } WLAN_RAW_DATA_LIST, *PWLAN_RAW_DATA_LIST;
+
+class _DataList extends Struct {
+  @Uint32()
+  external int dwDataOffset;
+  @Uint32()
+  external int dwDataSize;
+}
+
+/// The WLAN_RAW_DATA_LIST structure contains raw data in the form of an
+/// array of data blobs that are used by some Native Wifi functions.
+///
+/// {@category Struct}
+class WLAN_RAW_DATA_LIST extends Struct {
+  @Uint32()
+  external int dwTotalSize;
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<_DataList> DataList;
+}
+
 // typedef struct mmtime_tag {
 //   UINT  wType;
 //   union {

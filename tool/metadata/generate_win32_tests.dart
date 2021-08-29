@@ -48,6 +48,10 @@ void main() {
   final libraries =
       win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
+  // GitHub Actions doesn't install Native Wifi API on runners, so we remove
+  // wlanapi manually to prevent test failures.
+  libraries.removeWhere((library) => library == 'wlanapi');
+
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');

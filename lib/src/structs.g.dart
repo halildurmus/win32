@@ -873,6 +873,65 @@ class DOC_INFO_1 extends Struct {
   external Pointer<Utf16> pDatatype;
 }
 
+/// The DOT11_AUTH_CIPHER_PAIR structure defines a pair of 802.11
+/// authentication and cipher algorithms that can be enabled at the same
+/// time on the 802.11 station.
+///
+/// {@category Struct}
+class DOT11_AUTH_CIPHER_PAIR extends Struct {
+  @Uint32()
+  external int AuthAlgoId;
+  @Uint32()
+  external int CipherAlgoId;
+}
+
+/// The DOT11_BSSID_LIST structure contains a list of basic service set
+/// (BSS) identifiers.
+///
+/// {@category Struct}
+class DOT11_BSSID_LIST extends Struct {
+  external NDIS_OBJECT_HEADER Header;
+  @Uint32()
+  external int uNumOfEntries;
+  @Uint32()
+  external int uTotalNumOfEntries;
+  @Array(6)
+  external Array<Uint8> BSSIDs;
+}
+
+/// The DOT11_NETWORK structure contains information about an available
+/// wireless network.
+///
+/// {@category Struct}
+class DOT11_NETWORK extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int dot11BssType;
+}
+
+/// The DOT11_NETWORK_LIST structure contains a list of 802.11 wireless
+/// networks.
+///
+/// {@category Struct}
+class DOT11_NETWORK_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<DOT11_NETWORK> Network;
+}
+
+/// A DOT11_SSID structure contains the SSID of an interface.
+///
+/// {@category Struct}
+class DOT11_SSID extends Struct {
+  @Uint32()
+  external int uSSIDLength;
+  @Array(32)
+  external Array<Uint8> ucSSID;
+}
+
 /// The DRAWTEXTPARAMS structure contains extended formatting options for
 /// the DrawTextEx function.
 ///
@@ -949,6 +1008,29 @@ class DWM_BLURBEHIND extends Struct {
   external int hRgnBlur;
   @Int32()
   external int fTransitionOnMaximized;
+}
+
+/// The EAP_METHOD_TYPE structure contains type, identification, and author
+/// information about an EAP method.
+///
+/// {@category Struct}
+class EAP_METHOD_TYPE extends Struct {
+  external EAP_TYPE eapType;
+  @Uint32()
+  external int dwAuthorId;
+}
+
+/// The EAP_TYPE structure contains type and vendor identification
+/// information for an EAP method.
+///
+/// {@category Struct}
+class EAP_TYPE extends Struct {
+  @Uint8()
+  external int type;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwVendorType;
 }
 
 /// The ENUMLOGFONTEX structure contains information about an enumerated
@@ -1352,6 +1434,22 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   @Uint32()
   external int kfdFlags;
   external GUID ftidType;
+}
+
+/// The L2_NOTIFICATION_DATA structure is used by the IHV Extensions DLL to
+/// send notifications to any service or applications that has registered
+/// for the notification.
+///
+/// {@category Struct}
+class L2_NOTIFICATION_DATA extends Struct {
+  @Uint32()
+  external int NotificationSource;
+  @Uint32()
+  external int NotificationCode;
+  external GUID InterfaceGuid;
+  @Uint32()
+  external int dwDataSize;
+  external Pointer pData;
 }
 
 /// Contains the time of the last input.
@@ -1922,6 +2020,19 @@ class MSG extends Struct {
   @Uint32()
   external int time;
   external POINT pt;
+}
+
+/// The NDIS_OBJECT_HEADER structure packages the object type, version, and
+/// size information that is required in many NDIS 6.0 structures.
+///
+/// {@category Struct}
+class NDIS_OBJECT_HEADER extends Struct {
+  @Uint8()
+  external int Type;
+  @Uint8()
+  external int Revision;
+  @Uint16()
+  external int Size;
 }
 
 /// The NEWTEXTMETRIC structure contains data that describes a physical
@@ -3583,6 +3694,672 @@ class WINDOWPLACEMENT extends Struct {
   external POINT ptMinPosition;
   external POINT ptMaxPosition;
   external RECT rcNormalPosition;
+}
+
+/// The WLAN_ASSOCIATION_ATTRIBUTES structure contains association
+/// attributes for a connection.
+///
+/// {@category Struct}
+class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int dot11BssType;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
+  @Uint32()
+  external int dot11PhyType;
+  @Uint32()
+  external int uDot11PhyIndex;
+  @Uint32()
+  external int wlanSignalQuality;
+  @Uint32()
+  external int ulRxRate;
+  @Uint32()
+  external int ulTxRate;
+}
+
+/// The WLAN_AUTH_CIPHER_PAIR_LIST structure contains a list of
+/// authentication and cipher algorithm pairs.
+///
+/// {@category Struct}
+class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<DOT11_AUTH_CIPHER_PAIR> pAuthCipherPairList;
+}
+
+/// The WLAN_AVAILABLE_NETWORK structure contains information about an
+/// available wireless network.
+///
+/// {@category Struct}
+class WLAN_AVAILABLE_NETWORK extends Struct {
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int dot11BssType;
+  @Uint32()
+  external int uNumberOfBssids;
+  @Int32()
+  external int bNetworkConnectable;
+  @Uint32()
+  external int wlanNotConnectableReason;
+  @Uint32()
+  external int uNumberOfPhyTypes;
+  @Array(8)
+  external Array<Uint32> dot11PhyTypes;
+  @Int32()
+  external int bMorePhyTypes;
+  @Uint32()
+  external int wlanSignalQuality;
+  @Int32()
+  external int bSecurityEnabled;
+  @Uint32()
+  external int dot11DefaultAuthAlgorithm;
+  @Uint32()
+  external int dot11DefaultCipherAlgorithm;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwReserved;
+}
+
+/// The WLAN_AVAILABLE_NETWORK_LIST structure contains an array of
+/// information about available networks.
+///
+/// {@category Struct}
+class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_AVAILABLE_NETWORK> Network;
+}
+
+/// The WLAN_BSS_ENTRY structure contains information about a basic service
+/// set (BSS).
+///
+/// {@category Struct}
+class WLAN_BSS_ENTRY extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int uPhyId;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
+  @Uint32()
+  external int dot11BssType;
+  @Uint32()
+  external int dot11BssPhyType;
+  @Int32()
+  external int lRssi;
+  @Uint32()
+  external int uLinkQuality;
+  @Uint8()
+  external int bInRegDomain;
+  @Uint16()
+  external int usBeaconPeriod;
+  @Uint64()
+  external int ullTimestamp;
+  @Uint64()
+  external int ullHostTimestamp;
+  @Uint16()
+  external int usCapabilityInformation;
+  @Uint32()
+  external int ulChCenterFrequency;
+  external WLAN_RATE_SET wlanRateSet;
+  @Uint32()
+  external int ulIeOffset;
+  @Uint32()
+  external int ulIeSize;
+}
+
+/// The WLAN_BSS_LIST structure contains a list of basic service set (BSS)
+/// entries.
+///
+/// {@category Struct}
+class WLAN_BSS_LIST extends Struct {
+  @Uint32()
+  external int dwTotalSize;
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<WLAN_BSS_ENTRY> wlanBssEntries;
+}
+
+/// The WLAN_CONNECTION_ATTRIBUTES structure defines the attributes of a
+/// wireless connection.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_ATTRIBUTES extends Struct {
+  @Uint32()
+  external int isState;
+  @Uint32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external WLAN_ASSOCIATION_ATTRIBUTES wlanAssociationAttributes;
+  external WLAN_SECURITY_ATTRIBUTES wlanSecurityAttributes;
+}
+
+/// The WLAN_CONNECTION_NOTIFICATION_DATA structure contains information
+/// about connection related notifications.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
+  @Uint32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int dot11BssType;
+  @Int32()
+  external int bSecurityEnabled;
+  @Uint32()
+  external int wlanReasonCode;
+  @Uint32()
+  external int dwFlags;
+  @Array(1)
+  external Array<Uint16> _strProfileXml;
+
+  String get strProfileXml {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_strProfileXml[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileXml(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _strProfileXml[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The WLAN_CONNECTION_PARAMETERS structure specifies the parameters used
+/// when using the WlanConnect function.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_PARAMETERS extends Struct {
+  @Uint32()
+  external int wlanConnectionMode;
+  external Pointer<Utf16> strProfile;
+  external Pointer<DOT11_SSID> pDot11Ssid;
+  external Pointer<DOT11_BSSID_LIST> pDesiredBssidList;
+  @Uint32()
+  external int dot11BssType;
+  @Uint32()
+  external int dwFlags;
+}
+
+/// A WLAN_COUNTRY_OR_REGION_STRING_LIST structure contains a list of
+/// supported country or region strings.
+///
+/// {@category Struct}
+class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(3)
+  external Array<Uint8> pCountryOrRegionStringList;
+}
+
+/// Contains an array of device service GUIDs.
+///
+/// {@category Struct}
+class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<GUID> DeviceService;
+}
+
+/// A structure that represents a device service notification.
+///
+/// {@category Struct}
+class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
+  external GUID DeviceService;
+  @Uint32()
+  external int dwOpCode;
+  @Uint32()
+  external int dwDataSize;
+  @Array(1)
+  external Array<Uint8> DataBlob;
+}
+
+/// The WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS structure contains
+/// information about the connection settings on the wireless Hosted
+/// Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
+  external DOT11_SSID hostedNetworkSSID;
+  @Uint32()
+  external int dwMaxNumberOfPeers;
+}
+
+/// The WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE structure contains
+/// information about a network state change for a data peer on the
+/// wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
+  external WLAN_HOSTED_NETWORK_PEER_STATE OldState;
+  external WLAN_HOSTED_NETWORK_PEER_STATE NewState;
+  @Uint32()
+  external int PeerStateChangeReason;
+}
+
+/// The WLAN_HOSTED_NETWORK_PEER_STATE structure contains information about
+/// the peer state for a peer on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
+  @Array(6)
+  external Array<Uint8> PeerMacAddress;
+  @Uint32()
+  external int PeerAuthState;
+}
+
+/// The WLAN_HOSTED_NETWORK_RADIO_STATE structure contains information
+/// about the radio state on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
+  @Uint32()
+  external int dot11SoftwareRadioState;
+  @Uint32()
+  external int dot11HardwareRadioState;
+}
+
+/// The WLAN_HOSTED_NETWORK_SECURITY_SETTINGS structure contains
+/// information about the security settings on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
+  @Uint32()
+  external int dot11AuthAlgo;
+  @Uint32()
+  external int dot11CipherAlgo;
+}
+
+/// The WLAN_HOSTED_NETWORK_STATE_CHANGE structure contains information
+/// about a network state change on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
+  @Uint32()
+  external int OldState;
+  @Uint32()
+  external int NewState;
+  @Uint32()
+  external int StateChangeReason;
+}
+
+/// The WLAN_HOSTED_NETWORK_STATUS structure contains information about the
+/// status of the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_STATUS extends Struct {
+  @Uint32()
+  external int HostedNetworkState;
+  external GUID IPDeviceID;
+  @Array(6)
+  external Array<Uint8> wlanHostedNetworkBSSID;
+  @Uint32()
+  external int dot11PhyType;
+  @Uint32()
+  external int ulChannelFrequency;
+  @Uint32()
+  external int dwNumberOfPeers;
+  @Array(1)
+  external Array<WLAN_HOSTED_NETWORK_PEER_STATE> PeerList;
+}
+
+/// The WLAN_INTERFACE_CAPABILITY structure contains information about the
+/// capabilities of an interface.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_CAPABILITY extends Struct {
+  @Uint32()
+  external int interfaceType;
+  @Int32()
+  external int bDot11DSupported;
+  @Uint32()
+  external int dwMaxDesiredSsidListSize;
+  @Uint32()
+  external int dwMaxDesiredBssidListSize;
+  @Uint32()
+  external int dwNumberOfSupportedPhys;
+  @Array(64)
+  external Array<Uint32> dot11PhyTypes;
+}
+
+/// The WLAN_INTERFACE_INFO structure contains information about a wireless
+/// LAN interface.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_INFO extends Struct {
+  external GUID InterfaceGuid;
+  @Array(256)
+  external Array<Uint16> _strInterfaceDescription;
+
+  String get strInterfaceDescription {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strInterfaceDescription[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strInterfaceDescription(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strInterfaceDescription[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int isState;
+}
+
+/// The WLAN_INTERFACE_INFO_LIST structure contains an array of NIC
+/// interface information.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_INFO_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_INTERFACE_INFO> InterfaceInfo;
+}
+
+/// The WLAN_MAC_FRAME_STATISTICS structure contains information about sent
+/// and received MAC frames.
+///
+/// {@category Struct}
+class WLAN_MAC_FRAME_STATISTICS extends Struct {
+  @Uint64()
+  external int ullTransmittedFrameCount;
+  @Uint64()
+  external int ullReceivedFrameCount;
+  @Uint64()
+  external int ullWEPExcludedCount;
+  @Uint64()
+  external int ullTKIPLocalMICFailures;
+  @Uint64()
+  external int ullTKIPReplays;
+  @Uint64()
+  external int ullTKIPICVErrorCount;
+  @Uint64()
+  external int ullCCMPReplays;
+  @Uint64()
+  external int ullCCMPDecryptErrors;
+  @Uint64()
+  external int ullWEPUndecryptableCount;
+  @Uint64()
+  external int ullWEPICVErrorCount;
+  @Uint64()
+  external int ullDecryptSuccessCount;
+  @Uint64()
+  external int ullDecryptFailureCount;
+}
+
+/// The WLAN_MSM_NOTIFICATION_DATA structure contains information about
+/// media specific module (MSM) connection related notifications.
+///
+/// {@category Struct}
+class WLAN_MSM_NOTIFICATION_DATA extends Struct {
+  @Uint32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int dot11BssType;
+  @Array(6)
+  external Array<Uint8> dot11MacAddr;
+  @Int32()
+  external int bSecurityEnabled;
+  @Int32()
+  external int bFirstPeer;
+  @Int32()
+  external int bLastPeer;
+  @Uint32()
+  external int wlanReasonCode;
+}
+
+/// The WLAN_PHY_FRAME_STATISTICS structure contains information about sent
+/// and received PHY frames.
+///
+/// {@category Struct}
+class WLAN_PHY_FRAME_STATISTICS extends Struct {
+  @Uint64()
+  external int ullTransmittedFrameCount;
+  @Uint64()
+  external int ullMulticastTransmittedFrameCount;
+  @Uint64()
+  external int ullFailedCount;
+  @Uint64()
+  external int ullRetryCount;
+  @Uint64()
+  external int ullMultipleRetryCount;
+  @Uint64()
+  external int ullMaxTXLifetimeExceededCount;
+  @Uint64()
+  external int ullTransmittedFragmentCount;
+  @Uint64()
+  external int ullRTSSuccessCount;
+  @Uint64()
+  external int ullRTSFailureCount;
+  @Uint64()
+  external int ullACKFailureCount;
+  @Uint64()
+  external int ullReceivedFrameCount;
+  @Uint64()
+  external int ullMulticastReceivedFrameCount;
+  @Uint64()
+  external int ullPromiscuousReceivedFrameCount;
+  @Uint64()
+  external int ullMaxRXLifetimeExceededCount;
+  @Uint64()
+  external int ullFrameDuplicateCount;
+  @Uint64()
+  external int ullReceivedFragmentCount;
+  @Uint64()
+  external int ullPromiscuousReceivedFragmentCount;
+  @Uint64()
+  external int ullFCSErrorCount;
+}
+
+/// The WLAN_PHY_RADIO_STATE structure specifies the radio state on a
+/// specific physical layer (PHY) type.
+///
+/// {@category Struct}
+class WLAN_PHY_RADIO_STATE extends Struct {
+  @Uint32()
+  external int dwPhyIndex;
+  @Uint32()
+  external int dot11SoftwareRadioState;
+  @Uint32()
+  external int dot11HardwareRadioState;
+}
+
+/// The WLAN_PROFILE_INFO structure contains basic information about a
+/// profile.
+///
+/// {@category Struct}
+class WLAN_PROFILE_INFO extends Struct {
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwFlags;
+}
+
+/// The WLAN_PROFILE_INFO_LIST structure contains a list of wireless
+/// profile information.
+///
+/// {@category Struct}
+class WLAN_PROFILE_INFO_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_PROFILE_INFO> ProfileInfo;
+}
+
+/// The WLAN_RADIO_STATE structure specifies the radio state on a list of
+/// physical layer (PHY) types.
+///
+/// {@category Struct}
+class WLAN_RADIO_STATE extends Struct {
+  @Uint32()
+  external int dwNumberOfPhys;
+  @Array(64)
+  external Array<WLAN_PHY_RADIO_STATE> PhyRadioState;
+}
+
+/// The set of supported data rates.
+///
+/// {@category Struct}
+class WLAN_RATE_SET extends Struct {
+  @Uint32()
+  external int uRateSetLength;
+  @Array(126)
+  external Array<Uint16> usRateSet;
+}
+
+/// The WLAN_RAW_DATA structure contains raw data in the form of a blob
+/// that is used by some Native Wifi functions.
+///
+/// {@category Struct}
+class WLAN_RAW_DATA extends Struct {
+  @Uint32()
+  external int dwDataSize;
+  @Array(1)
+  external Array<Uint8> DataBlob;
+}
+
+/// The WLAN_SECURITY_ATTRIBUTES structure defines the security attributes
+/// for a wireless connection.
+///
+/// {@category Struct}
+class WLAN_SECURITY_ATTRIBUTES extends Struct {
+  @Int32()
+  external int bSecurityEnabled;
+  @Int32()
+  external int bOneXEnabled;
+  @Uint32()
+  external int dot11AuthAlgorithm;
+  @Uint32()
+  external int dot11CipherAlgorithm;
+}
+
+/// The WLAN_STATISTICS structure contains assorted statistics about an
+/// interface.
+///
+/// {@category Struct}
+class WLAN_STATISTICS extends Struct {
+  @Uint64()
+  external int ullFourWayHandshakeFailures;
+  @Uint64()
+  external int ullTKIPCounterMeasuresInvoked;
+  @Uint64()
+  external int ullReserved;
+  external WLAN_MAC_FRAME_STATISTICS MacUcastCounters;
+  external WLAN_MAC_FRAME_STATISTICS MacMcastCounters;
+  @Uint32()
+  external int dwNumberOfPhys;
+  @Array(1)
+  external Array<WLAN_PHY_FRAME_STATISTICS> PhyCounters;
 }
 
 /// Contains the window class attributes that are registered by the

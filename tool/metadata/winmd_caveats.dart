@@ -29,5 +29,6 @@ const winmdGenerated = [
   'winmm',
   'winscard',
   'winspool',
+  'wlanapi',
   'ws2_32',
 ];

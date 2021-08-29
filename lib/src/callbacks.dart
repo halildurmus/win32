@@ -138,6 +138,11 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 typedef WindowProc = LRESULT Function(
     HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+/// Application-defined callback function that is used by an application to
+/// register and unregister notifications on all wireless interfaces.
+typedef WlanNotificationCallback = Void Function(
+    Pointer<L2_NOTIFICATION_DATA>, Pointer);
+
 /// Application-defined callback function that provides special verification
 /// for smart card searches.
 typedef OpenCardCheckProc = Int32 Function(IntPtr, IntPtr, Pointer);
