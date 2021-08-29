@@ -141,9 +141,7 @@ typedef WindowProc = LRESULT Function(
 /// Application-defined callback function that is used by an application to
 /// register and unregister notifications on all wireless interfaces.
 typedef WlanNotificationCallback = Void Function(
-    // Pointer<WLAN_NOTIFICATION_DATA>, Pointer);
-    Pointer,
-    Pointer);
+    Pointer<L2_NOTIFICATION_DATA>, Pointer);
 
 /// Application-defined callback function that provides special verification
 /// for smart card searches.
