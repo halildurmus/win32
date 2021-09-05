@@ -1944,6 +1944,29 @@ const WM_MOUSEHWHEEL = 0x020E;
 /// Notifies applications that a power-management event has occurred.
 const WM_POWERBROADCAST = 0x0218;
 
+/// Sent when the effective dots per inch (dpi) for a window has changed.
+/// Requires Windows 8.1 or above.
+const WM_DPICHANGED = 0x02E0;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs before the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs after the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_AFTERPARENT = 0x02E3;
+
+/// This message tells the operating system that the window will be sized to
+/// dimensions other than the default. Requires Windows 10, version
+/// 1703 or higher.
+const WM_GETDPISCALEDSIZE = 0x02E4;
+
 /// An application sends a WM_CUT message to an edit control or combo box to
 /// delete (cut) the current selection, if any, in the edit control and copy the
 /// deleted text to the clipboard in CF_TEXT format.
@@ -2045,6 +2068,10 @@ const WM_HOTKEY = 0x0312;
 /// in the form WM_USER+x, where x is an integer value.
 const WM_USER = 0x0400;
 
+// -----------------------------------------------------------------------------
+// Power management events
+// -----------------------------------------------------------------------------
+
 /// Notifies applications that the computer is about to enter a suspended state.
 /// This event is typically broadcast when all applications and installable
 /// drivers have returned TRUE to a previous PBT_APMQUERYSUSPEND event.
@@ -2071,22 +2098,6 @@ const PBT_APMRESUMEAUTOMATIC = 0x0012;
 /// Power setting change event sent with a WM_POWERBROADCAST window message or
 /// in a HandlerEx notification callback for services.
 const PBT_POWERSETTINGCHANGE = 0x8013;
-
-///Sent when the effective dots per inch (dpi) for a window has changed
-/// WINVER >= 0x0601
-const WM_DPICHANGED = 0x02E0;
-
-/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
-/// the child HWDN tree of the window that is undergoing a DPI change. This
-/// message occurs before the top-level window receives WM_DPICHANGED, and
-/// traverses the child tree from the bottom up.
-/// WINVER >= 0x0605
-const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
-const WM_DPICHANGED_AFTERPARENT = 0x02E3;
-
-/// This message tells the operating system that the window will be sized to
-/// dimensions other than the default.
-const WM_GETDPISCALEDSIZE = 0x02E4;
 
 // -----------------------------------------------------------------------------
 // Size constants (from WM_SIZE)
@@ -6889,6 +6900,7 @@ const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
 /// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
 /// PBT_POWERSETTINGCHANGE.
 const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
+
 // -----------------------------------------------------------------------------
 // TrackPopupMenuEx constants
 // -----------------------------------------------------------------------------

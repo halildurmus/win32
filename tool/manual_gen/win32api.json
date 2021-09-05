@@ -1,4 +1,9 @@
 {
+    "AbortPath": {
+        "prototype": "BOOL AbortPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AbortPath function closes and discards any paths in the specified device context."
+    },
     "AbortPrinter": {
         "prototype": "BOOL AbortPrinter(\n  _In_ HANDLE hPrinter\n);",
         "dllLibrary": "spoolss",
@@ -1480,6 +1485,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search."
     },
+    "FlattenPath": {
+        "prototype": "BOOL FlattenPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The FlattenPath function transforms any curves in the path that is selected into the current device context (DC), turning each curve into a sequence of lines."
+    },
     "FlushConsoleInputBuffer": {
         "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
         "dllLibrary": "kernel32",
@@ -2332,6 +2342,11 @@
         "prototype": "HWND GetParent(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the specified window's parent or owner."
+    },
+    "GetPath": {
+        "prototype": "int GetPath(\n  HDC     hdc,\n  LPPOINT apt,\n  LPBYTE  aj,\n  int     cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetPath function retrieves the coordinates defining the endpoints of lines and the control points of curves found in the path that is selected into the specified device context."
     },
     "getpeername": {
         "prototype": "int getpeername(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
@@ -4543,6 +4558,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "SelectClipPath": {
+        "prototype": "BOOL SelectClipPath(\n  HDC hdc,\n  int mode\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SelectClipPath function selects the current path as a clipping region for a device context, combining the new region with any existing clipping region using the specified mode."
+    },
     "SelectObject": {
         "prototype": "HGDIOBJ SelectObject(\n  HDC     hdc,\n  HGDIOBJ h\n);",
         "dllLibrary": "gdi32",
@@ -5267,6 +5287,16 @@
         "dllLibrary": "ole32",
         "comment": "Converts an interface identifier into a string of printable characters."
     },
+    "StrokeAndFillPath": {
+        "prototype": "BOOL StrokeAndFillPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StrokeAndFillPath function closes any open figures in a path, strokes the outline of the path by using the current pen, and fills its interior by using the current brush."
+    },
+    "StrokePath": {
+        "prototype": "BOOL StrokePath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StrokePath function renders the specified path by using the current pen."
+    },
     "SubtractRect": {
         "prototype": "BOOL SubtractRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
         "dllLibrary": "user32",
@@ -5797,6 +5827,11 @@
         "prototype": "int WideCharToMultiByte(\n  UINT   CodePage,\n  DWORD  dwFlags,\n  LPCWCH lpWideCharStr,\n  int    cchWideChar,\n  LPSTR  lpMultiByteStr,\n  int    cbMultiByte,\n  LPCCH  lpDefaultChar,\n  LPBOOL lpUsedDefaultChar\n);",
         "dllLibrary": "kernel32",
         "comment": "Maps a UTF-16 (wide character) string to a new character string. The new character string is not necessarily from a multibyte character set."
+    },
+    "WidenPath": {
+        "prototype": "BOOL WidenPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The WidenPath function redefines the current path as the area that would be painted if the path were stroked using the pen currently selected into the given device context."
     },
     "WindowFromDC": {
         "prototype": "HWND WindowFromDC(\n  HDC hDC\n);",
