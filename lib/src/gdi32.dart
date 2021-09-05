@@ -638,6 +638,22 @@ late final _ExtTextOut = _gdi32.lookupFunction<
     int Function(int hdc, int x, int y, int options, Pointer<RECT> lprect,
         Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx)>('ExtTextOutW');
 
+/// The FillPath function closes any open figures in the current path and
+/// fills the path's interior by using the current brush and
+/// polygon-filling mode.
+///
+/// ```c
+/// BOOL FillPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int FillPath(int hdc) => _FillPath(hdc);
+
+late final _FillPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'FillPath');
+
 /// The GetDIBits function retrieves the bits of the specified compatible
 /// bitmap and copies them into a buffer as a DIB using the specified
 /// format.

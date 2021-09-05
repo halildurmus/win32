@@ -1373,6 +1373,11 @@
         "dllLibrary": "kernel32",
         "comment": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates."
     },
+    "FillPath": {
+        "prototype": "BOOL FillPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The FillPath function closes any open figures in the current path and fills the path's interior by using the current brush and polygon-filling mode."
+    },
     "FillRect": {
         "prototype": "int FillRect(\n  HDC        hDC,\n  const RECT *lprc,\n  HBRUSH     hbr\n);",
         "dllLibrary": "user32",
@@ -2784,6 +2789,11 @@
         "prototype": "BOOL GetWindowInfo(\n  HWND hwnd,\n  PWINDOWINFO pwi\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves information about the specified window."
+    },
+    "GetWindowLongPtr": {
+        "prototype": "LONG_PTR GetWindowLongPtrW(\n  HWND hWnd,\n  int  nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory."
     },
     "GetWindowModuleFileName": {
         "prototype": "UINT GetWindowModuleFileNameW(\n  HWND   hwnd,\n  LPWSTR pszFileName,\n  UINT   cchFileNameMax\n);",

@@ -4526,6 +4526,13 @@ void main() {
           int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
       expect(GetWindowInfo, isA<Function>());
     });
+    test('Can instantiate GetWindowLongPtr', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowLongPtr = user32.lookupFunction<
+          IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+          int Function(int hWnd, int nIndex)>('GetWindowLongPtrW');
+      expect(GetWindowLongPtr, isA<Function>());
+    });
     test('Can instantiate GetWindowModuleFileName', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetWindowModuleFileName = user32.lookupFunction<
@@ -6389,6 +6396,12 @@ void main() {
               int c,
               Pointer<Int32> lpDx)>('ExtTextOutW');
       expect(ExtTextOut, isA<Function>());
+    });
+    test('Can instantiate FillPath', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final FillPath = gdi32.lookupFunction<Int32 Function(IntPtr hdc),
+          int Function(int hdc)>('FillPath');
+      expect(FillPath, isA<Function>());
     });
     test('Can instantiate GetDIBits', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');

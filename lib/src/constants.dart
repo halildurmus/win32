@@ -2072,6 +2072,22 @@ const PBT_APMRESUMEAUTOMATIC = 0x0012;
 /// in a HandlerEx notification callback for services.
 const PBT_POWERSETTINGCHANGE = 0x8013;
 
+///Sent when the effective dots per inch (dpi) for a window has changed
+/// WINVER >= 0x0601
+const WM_DPICHANGED = 0x02E0;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWDN tree of the window that is undergoing a DPI change. This
+/// message occurs before the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up.
+/// WINVER >= 0x0605
+const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
+const WM_DPICHANGED_AFTERPARENT = 0x02E3;
+
+/// This message tells the operating system that the window will be sized to
+/// dimensions other than the default.
+const WM_GETDPISCALEDSIZE = 0x02E4;
+
 // -----------------------------------------------------------------------------
 // Size constants (from WM_SIZE)
 // -----------------------------------------------------------------------------
@@ -7619,3 +7635,54 @@ const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
 
 /// The function enumerates only 3D printers.
 const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
+
+// -----------------------------------------------------------------------------
+// GetWindow constants
+// -----------------------------------------------------------------------------
+/// The retrieved handle identifies the child window at the top of the Z order,
+/// if the specified window is a parent window; otherwise, the retrieved handle
+/// is NULL. The function examines only child windows of the specified window.
+/// It does not examine descendant windows.
+const GW_CHILD = 5;
+
+/// The retrieved handle identifies the enabled popup window owned by the
+/// specified window (the search uses the first such window found using
+/// GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the
+/// retrieved handle is that of the specified window.
+const GW_ENABLEDPOPUP = 6;
+
+/// The retrieved handle identifies the window of the same type that is highest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDFIRST = 0;
+
+/// The retrieved handle identifies the window of the same type that is lowest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDLAST = 1;
+
+/// The retrieved handle identifies the window below the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDNEXT = 2;
+
+/// The retrieved handle identifies the window above the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDPREV = 3;
+
+/// The retrieved handle identifies the specified window's owner window, if any.
+/// For more information, see Owned Windows.
+const GW_OWNER = 4;
