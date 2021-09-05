@@ -3493,6 +3493,22 @@ late final _GetWindowInfo = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
     int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
 
+/// Retrieves information about the specified window. The function also
+/// retrieves the value at a specified offset into the extra window memory.
+///
+/// ```c
+/// LONG_PTR GetWindowLongPtrW(
+///   HWND hWnd,
+///   int  nIndex
+/// );
+/// ```
+/// {@category user32}
+int GetWindowLongPtr(int hWnd, int nIndex) => _GetWindowLongPtr(hWnd, nIndex);
+
+late final _GetWindowLongPtr = _user32.lookupFunction<
+    IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+    int Function(int hWnd, int nIndex)>('GetWindowLongPtrW');
+
 /// Retrieves the full path and file name of the module associated with the
 /// specified window handle.
 ///

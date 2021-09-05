@@ -19,6 +19,21 @@ import 'structs.g.dart';
 
 final _gdi32 = DynamicLibrary.open('gdi32.dll');
 
+/// The AbortPath function closes and discards any paths in the specified
+/// device context.
+///
+/// ```c
+/// BOOL AbortPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int AbortPath(int hdc) => _AbortPath(hdc);
+
+late final _AbortPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'AbortPath');
+
 /// The AddFontResource function adds the font resource from the specified
 /// file to the system font table. The font can subsequently be used for
 /// text output by any application.
@@ -638,6 +653,38 @@ late final _ExtTextOut = _gdi32.lookupFunction<
     int Function(int hdc, int x, int y, int options, Pointer<RECT> lprect,
         Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx)>('ExtTextOutW');
 
+/// The FillPath function closes any open figures in the current path and
+/// fills the path's interior by using the current brush and
+/// polygon-filling mode.
+///
+/// ```c
+/// BOOL FillPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int FillPath(int hdc) => _FillPath(hdc);
+
+late final _FillPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'FillPath');
+
+/// The FlattenPath function transforms any curves in the path that is
+/// selected into the current device context (DC), turning each curve into
+/// a sequence of lines.
+///
+/// ```c
+/// BOOL FlattenPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int FlattenPath(int hdc) => _FlattenPath(hdc);
+
+late final _FlattenPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'FlattenPath');
+
 /// The GetDIBits function retrieves the bits of the specified compatible
 /// bitmap and copies them into a buffer as a DIB using the specified
 /// format.
@@ -697,6 +744,28 @@ int GetObject(int h, int c, Pointer pv) => _GetObject(h, c, pv);
 late final _GetObject = _gdi32.lookupFunction<
     Int32 Function(IntPtr h, Int32 c, Pointer pv),
     int Function(int h, int c, Pointer pv)>('GetObjectW');
+
+/// The GetPath function retrieves the coordinates defining the endpoints
+/// of lines and the control points of curves found in the path that is
+/// selected into the specified device context.
+///
+/// ```c
+/// int GetPath(
+///   HDC     hdc,
+///   LPPOINT apt,
+///   LPBYTE  aj,
+///   int     cpt
+/// );
+/// ```
+/// {@category gdi32}
+int GetPath(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) =>
+    _GetPath(hdc, apt, aj, cpt);
+
+late final _GetPath = _gdi32.lookupFunction<
+    Int32 Function(
+        IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+    int Function(
+        int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('GetPath');
 
 /// The GetStockObject function retrieves a handle to one of the stock
 /// pens, brushes, fonts, or palettes.
@@ -1043,6 +1112,23 @@ late final _SaveDC =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'SaveDC');
 
+/// The SelectClipPath function selects the current path as a clipping
+/// region for a device context, combining the new region with any existing
+/// clipping region using the specified mode.
+///
+/// ```c
+/// BOOL SelectClipPath(
+///   HDC hdc,
+///   int mode
+/// );
+/// ```
+/// {@category gdi32}
+int SelectClipPath(int hdc, int mode) => _SelectClipPath(hdc, mode);
+
+late final _SelectClipPath = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Uint32 mode),
+    int Function(int hdc, int mode)>('SelectClipPath');
+
 /// The SelectObject function selects an object into the specified device
 /// context (DC). The new object replaces the previous object of the same
 /// type.
@@ -1347,6 +1433,37 @@ late final _StretchDIBits = _gdi32.lookupFunction<
         int iUsage,
         int rop)>('StretchDIBits');
 
+/// The StrokeAndFillPath function closes any open figures in a path,
+/// strokes the outline of the path by using the current pen, and fills its
+/// interior by using the current brush.
+///
+/// ```c
+/// BOOL StrokeAndFillPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int StrokeAndFillPath(int hdc) => _StrokeAndFillPath(hdc);
+
+late final _StrokeAndFillPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'StrokeAndFillPath');
+
+/// The StrokePath function renders the specified path by using the current
+/// pen.
+///
+/// ```c
+/// BOOL StrokePath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int StrokePath(int hdc) => _StrokePath(hdc);
+
+late final _StrokePath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'StrokePath');
+
 /// The TextOut function writes a character string at the specified
 /// location, using the currently selected font, background color, and text
 /// color.
@@ -1369,3 +1486,19 @@ late final _TextOut = _gdi32.lookupFunction<
         IntPtr hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c),
     int Function(
         int hdc, int x, int y, Pointer<Utf16> lpString, int c)>('TextOutW');
+
+/// The WidenPath function redefines the current path as the area that
+/// would be painted if the path were stroked using the pen currently
+/// selected into the given device context.
+///
+/// ```c
+/// BOOL WidenPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int WidenPath(int hdc) => _WidenPath(hdc);
+
+late final _WidenPath =
+    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+        'WidenPath');
