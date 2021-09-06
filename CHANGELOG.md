@@ -1,3 +1,7 @@
+## 2.2.9
+
+- Add some missing GDI functions
+
 ## 2.2.8
 
 - Add Native Wifi APIs (#299)
