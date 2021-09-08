@@ -34,6 +34,7 @@ const header = '''
 #include <AppxPackaging.h>
 #include <dwmapi.h>
 #include <wlanapi.h>
+#include <SetupAPI.h>
 
 void main()
 {

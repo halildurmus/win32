@@ -627,6 +627,10 @@
         "namespace": "Windows.Win32.System.Com.SOLE_AUTHENTICATION_SERVICE",
         "comment": "Identifies an authentication service that a server is willing to use to communicate to a client."
     },
+    "SP_DEVINFO_DATA": {
+        "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINFO_DATA",
+        "comment": "An SP_DEVINFO_DATA structure defines a device instance that is a member of a device information set."
+    },
     "STARTUPINFO": {
         "namespace": "Windows.Win32.System.Threading.STARTUPINFOW",
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."

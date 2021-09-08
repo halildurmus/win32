@@ -1800,6 +1800,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted."
     },
+    "GetDeviceCaps": {
+        "prototype": "int GetDeviceCaps(\n  HDC hdc,\n  int index\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetDeviceCaps function retrieves device-specific information for the specified device."
+    },
     "GetDialogBaseUnits": {
         "prototype": "long GetDialogBaseUnits();",
         "dllLibrary": "user32",
@@ -5061,6 +5066,26 @@
         "prototype": "BOOL SetupComm(\n  HANDLE hFile,\n  DWORD  dwInQueue,\n  DWORD  dwOutQueue\n);",
         "dllLibrary": "kernel32",
         "comment": "Initializes the communications parameters for a specified communications device."
+    },
+    "SetupDiDestroyDeviceInfoList": {
+        "prototype": "WINSETUPAPI BOOL SetupDiDestroyDeviceInfoList(\n  HDEVINFO DeviceInfoSet\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiDestroyDeviceInfoList function deletes a device information set and frees all associated memory."
+    },
+    "SetupDiEnumDeviceInfo": {
+        "prototype": "WINSETUPAPI BOOL SetupDiEnumDeviceInfo(\n  HDEVINFO         DeviceInfoSet,\n  DWORD            MemberIndex,\n  PSP_DEVINFO_DATA DeviceInfoData\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure that specifies a device information element in a device information set."
+    },
+    "SetupDiGetClassDevs": {
+        "prototype": "WINSETUPAPI HDEVINFO SetupDiGetClassDevsW(\n  const GUID *ClassGuid,\n  PCWSTR     Enumerator,\n  HWND       hwndParent,\n  DWORD      Flags\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiGetClassDevs function returns a handle to a device information set that contains requested device information elements for a local computer."
+    },
+    "SetupDiOpenDevRegKey": {
+        "prototype": "WINSETUPAPI HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiOpenDevRegKey function opens a registry key for device-specific configuration information."
     },
     "SetUserObjectInformation": {
         "prototype": "BOOL SetUserObjectInformationW(\n  HANDLE hObj,\n  int    nIndex,\n  PVOID  pvInfo,\n  DWORD  nLength\n);",
