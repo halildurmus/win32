@@ -304,6 +304,13 @@ void main() {
           int Function(int hdc)>('FlattenPath');
       expect(FlattenPath, isA<Function>());
     });
+    test('Can instantiate GetDeviceCaps', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetDeviceCaps = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Uint32 index),
+          int Function(int hdc, int index)>('GetDeviceCaps');
+      expect(GetDeviceCaps, isA<Function>());
+    });
     test('Can instantiate GetDIBits', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final GetDIBits = gdi32.lookupFunction<
@@ -10439,6 +10446,54 @@ void main() {
           int Function(
               Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');
       expect(SCardUIDlgSelectCard, isA<Function>());
+    });
+  });
+
+  group('Test setupapi functions', () {
+    test('Can instantiate SetupDiDestroyDeviceInfoList', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiDestroyDeviceInfoList = setupapi.lookupFunction<
+          Int32 Function(Pointer DeviceInfoSet),
+          int Function(Pointer DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
+      expect(SetupDiDestroyDeviceInfoList, isA<Function>());
+    });
+    test('Can instantiate SetupDiEnumDeviceInfo', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiEnumDeviceInfo = setupapi.lookupFunction<
+              Int32 Function(Pointer DeviceInfoSet, Uint32 MemberIndex,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData),
+              int Function(Pointer DeviceInfoSet, int MemberIndex,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData)>(
+          'SetupDiEnumDeviceInfo');
+      expect(SetupDiEnumDeviceInfo, isA<Function>());
+    });
+    test('Can instantiate SetupDiGetClassDevs', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiGetClassDevs = setupapi.lookupFunction<
+          Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+              IntPtr hwndParent, Uint32 Flags),
+          Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+              int hwndParent, int Flags)>('SetupDiGetClassDevsW');
+      expect(SetupDiGetClassDevs, isA<Function>());
+    });
+    test('Can instantiate SetupDiOpenDevRegKey', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiOpenDevRegKey = setupapi.lookupFunction<
+          IntPtr Function(
+              Pointer DeviceInfoSet,
+              Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+              Uint32 Scope,
+              Uint32 HwProfile,
+              Uint32 KeyType,
+              Uint32 samDesired),
+          int Function(
+              Pointer DeviceInfoSet,
+              Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+              int Scope,
+              int HwProfile,
+              int KeyType,
+              int samDesired)>('SetupDiOpenDevRegKey');
+      expect(SetupDiOpenDevRegKey, isA<Function>());
     });
   });
 

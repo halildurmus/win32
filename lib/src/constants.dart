@@ -5551,6 +5551,159 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 
 // -----------------------------------------------------------------------------
+// GetDeviceCaps() constants
+// -----------------------------------------------------------------------------
+
+/// The device driver version.
+const DRIVERVERSION = 0;
+
+/// Device technology
+const TECHNOLOGY = 2;
+
+/// Width, in millimeters, of the physical screen.
+const HORZSIZE = 4;
+
+/// Height, in millimeters, of the physical screen.
+const VERTSIZE = 6;
+
+/// Width, in pixels, of the screen; or for printers, the width, in pixels, of
+/// the printable area of the page.
+const HORZRES = 8;
+
+/// Height, in raster lines, of the screen; or for printers, the height, in
+/// pixels, of the printable area of the page.
+const VERTRES = 10;
+
+/// Number of adjacent color bits for each pixel.
+const BITSPIXEL = 12;
+
+/// Number of color planes.
+const PLANES = 14;
+
+/// Number of device-specific brushes.
+const NUMBRUSHES = 16;
+
+/// Number of device-specific pens.
+const NUMPENS = 18;
+
+const NUMMARKERS = 20;
+
+/// Number of device-specific fonts.
+const NUMFONTS = 22;
+
+/// Number of entries in the device's color table, if the device has a color
+/// depth of no more than 8 bits per pixel. For devices with greater color
+/// depths, 1 is returned.
+const NUMCOLORS = 24;
+
+/// Reserved.
+const PDEVICESIZE = 26;
+
+/// Value that indicates the curve capabilities of the device.
+const CURVECAPS = 28;
+
+/// Value that indicates the line capabilities of the device.
+const LINECAPS = 30;
+
+/// Value that indicates the line capabilities of the device.
+const POLYGONALCAPS = 32;
+
+/// Value that indicates the text capabilities of the device.
+const TEXTCAPS = 34;
+
+/// Flag that indicates the clipping capabilities of the device. If the device
+/// can clip to a rectangle, it is 1. Otherwise, it is 0.
+const CLIPCAPS = 36;
+
+/// Value that indicates the raster capabilities of the device.
+const RASTERCAPS = 38;
+
+/// Relative width of a device pixel used for line drawing.
+const ASPECTX = 40;
+
+/// Relative height of a device pixel used for line drawing.
+const ASPECTY = 42;
+
+/// Diagonal width of the device pixel used for line drawing.
+const ASPECTXY = 44;
+
+/// Number of pixels per logical inch along the screen width. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSX = 88;
+
+/// Number of pixels per logical inch along the screen height. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSY = 90;
+
+/// Number of entries in the system palette. This index is valid only if the
+/// device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const SIZEPALETTE = 104;
+
+/// Number of reserved entries in the system palette. This index is valid only
+/// if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const NUMRESERVED = 106;
+
+/// Actual color resolution of the device, in bits per pixel. This index is
+/// valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS
+/// index and is available only if the driver is compatible with 16-bit Windows.
+const COLORRES = 108;
+
+/// For printing devices: the width of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-x11-inch paper has a
+/// physical width value of 5100 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALWIDTH = 110;
+
+/// For printing devices: the height of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-by-11-inch paper has a
+/// physical height value of 6600 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALHEIGHT = 111;
+
+/// For printing devices: the distance from the left edge of the physical page
+/// to the left edge of the printable area, in device units. For example, a
+/// printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print
+/// on the leftmost 0.25-inch of paper, has a horizontal physical offset of 150
+/// device units.
+const PHYSICALOFFSETX = 112;
+
+/// For printing devices: the distance from the top edge of the physical page to
+/// the top edge of the printable area, in device units. For example, a printer
+/// set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the
+/// topmost 0.5-inch of paper, has a vertical physical offset of 300 device
+/// units.
+const PHYSICALOFFSETY = 113;
+
+/// Scaling factor for the x-axis of the printer.
+const SCALINGFACTORX = 114;
+
+/// Scaling factor for the y-axis of the printer.
+const SCALINGFACTORY = 115;
+
+/// For display devices: the current vertical refresh rate of the device, in
+/// cycles per second (Hz). A vertical refresh rate value of 0 or 1 represents
+/// the display hardware's default refresh rate.
+const VREFRESH = 116;
+const DESKTOPVERTRES = 117;
+const DESKTOPHORZRES = 118;
+
+/// Preferred horizontal drawing alignment, expressed as a multiple of pixels.
+/// For best drawing performance, windows should be horizontally aligned to a
+/// multiple of this value. A value of zero indicates that the device is
+/// accelerated, and any alignment may be used.
+const BLTALIGNMENT = 119;
+
+/// Value that indicates the shading and blending capabilities of the device.
+const SHADEBLENDCAPS = 120;
+
+/// Value that indicates the color management capabilities of the device.
+const COLORMGMTCAPS = 121;
+
+// -----------------------------------------------------------------------------
 // Multimedia Extensions messages
 // -----------------------------------------------------------------------------
 

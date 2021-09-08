@@ -30,6 +30,7 @@
 #include <AppxPackaging.h>
 #include <dwmapi.h>
 #include <wlanapi.h>
+#include <SetupAPI.h>
 
 void main()
 {
@@ -219,6 +220,7 @@ void main()
     printf("  'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
     printf("  'SOCKADDR': %zu,\n", sizeof(SOCKADDR));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
+    printf("  'SP_DEVINFO_DATA': %zu,\n", sizeof(SP_DEVINFO_DATA));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));

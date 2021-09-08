@@ -685,6 +685,22 @@ late final _FlattenPath =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'FlattenPath');
 
+/// The GetDeviceCaps function retrieves device-specific information for
+/// the specified device.
+///
+/// ```c
+/// int GetDeviceCaps(
+///   HDC hdc,
+///   int index
+/// );
+/// ```
+/// {@category gdi32}
+int GetDeviceCaps(int hdc, int index) => _GetDeviceCaps(hdc, index);
+
+late final _GetDeviceCaps = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Uint32 index),
+    int Function(int hdc, int index)>('GetDeviceCaps');
+
 /// The GetDIBits function retrieves the bits of the specified compatible
 /// bitmap and copies them into a buffer as a DIB using the specified
 /// format.

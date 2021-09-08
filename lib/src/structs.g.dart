@@ -3028,6 +3028,20 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
   external int hr;
 }
 
+/// An SP_DEVINFO_DATA structure defines a device instance that is a member
+/// of a device information set.
+///
+/// {@category Struct}
+class SP_DEVINFO_DATA extends Struct {
+  @Uint32()
+  external int cbSize;
+  external GUID ClassGuid;
+  @Uint32()
+  external int DevInst;
+  @IntPtr()
+  external int Reserved;
+}
+
 /// Specifies the window station, desktop, standard handles, and appearance
 /// of the main window for a process at creation time.
 ///
