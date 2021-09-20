@@ -12,8 +12,8 @@ dependencies:
   ffi: ^1.0.0
 
 dev_dependencies:
-  args: ^2.2.0
+  args: ^2.3.0
   lints: ^1.0.1
   path: ^1.8.0
-  test: ^1.17.11
-  winmd: 1.0.6
+  test: ^1.17.12
+  winmd: 1.0.7
