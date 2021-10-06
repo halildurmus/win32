@@ -1,7 +1,6 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
-import 'package:winmd/src/pinvokemap.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a method representation.
