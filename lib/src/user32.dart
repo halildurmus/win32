@@ -1385,14 +1385,14 @@ late final _DragDetect = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DrawAnimatedRects(
-    int hwnd, int idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo) {
-  final _DrawAnimatedRects = _user32.lookupFunction<
-      Int32 Function(IntPtr hwnd, Int32 idAni, Pointer<RECT> lprcFrom,
-          Pointer<RECT> lprcTo),
-      int Function(int hwnd, int idAni, Pointer<RECT> lprcFrom,
-          Pointer<RECT> lprcTo)>('DrawAnimatedRects');
-  return _DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo);
-}
+        int hwnd, int idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo) =>
+    _DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo);
+
+late final _DrawAnimatedRects = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr hwnd, Int32 idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo),
+    int Function(int hwnd, int idAni, Pointer<RECT> lprcFrom,
+        Pointer<RECT> lprcTo)>('DrawAnimatedRects');
 
 /// The DrawCaption function draws a window caption.
 ///
@@ -1423,14 +1423,13 @@ late final _DrawCaption = _user32.lookupFunction<
 ///   UINT   grfFlags);
 /// ```
 /// {@category user32}
-int DrawEdge(int hdc, Pointer<RECT> qrc, int edge, int grfFlags) {
-  final _DrawEdge = _user32.lookupFunction<
-      Int32 Function(
-          IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
-      int Function(
-          int hdc, Pointer<RECT> qrc, int edge, int grfFlags)>('DrawEdge');
-  return _DrawEdge(hdc, qrc, edge, grfFlags);
-}
+int DrawEdge(int hdc, Pointer<RECT> qrc, int edge, int grfFlags) =>
+    _DrawEdge(hdc, qrc, edge, grfFlags);
+
+late final _DrawEdge = _user32.lookupFunction<
+    Int32 Function(IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
+    int Function(
+        int hdc, Pointer<RECT> qrc, int edge, int grfFlags)>('DrawEdge');
 
 /// The DrawFocusRect function draws a rectangle in the style used to
 /// indicate that the rectangle has the focus.
@@ -1441,12 +1440,11 @@ int DrawEdge(int hdc, Pointer<RECT> qrc, int edge, int grfFlags) {
 ///   const RECT *lprc);
 /// ```
 /// {@category user32}
-int DrawFocusRect(int hDC, Pointer<RECT> lprc) {
-  final _DrawFocusRect = _user32.lookupFunction<
-      Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
-      int Function(int hDC, Pointer<RECT> lprc)>('DrawFocusRect');
-  return _DrawFocusRect(hDC, lprc);
-}
+int DrawFocusRect(int hDC, Pointer<RECT> lprc) => _DrawFocusRect(hDC, lprc);
+
+late final _DrawFocusRect = _user32.lookupFunction<
+    Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+    int Function(int hDC, Pointer<RECT> lprc)>('DrawFocusRect');
 
 /// The DrawFrameControl function draws a frame control of the specified
 /// type and style.
@@ -1459,14 +1457,15 @@ int DrawFocusRect(int hDC, Pointer<RECT> lprc) {
 ///   UINT);
 /// ```
 /// {@category user32}
-int DrawFrameControl(int param0, Pointer<RECT> param1, int param2, int param3) {
-  final _DrawFrameControl = _user32.lookupFunction<
-      Int32 Function(
-          IntPtr param0, Pointer<RECT> param1, Uint32 param2, Uint32 param3),
-      int Function(int param0, Pointer<RECT> param1, int param2,
-          int param3)>('DrawFrameControl');
-  return _DrawFrameControl(param0, param1, param2, param3);
-}
+int DrawFrameControl(
+        int param0, Pointer<RECT> param1, int param2, int param3) =>
+    _DrawFrameControl(param0, param1, param2, param3);
+
+late final _DrawFrameControl = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr param0, Pointer<RECT> param1, Uint32 param2, Uint32 param3),
+    int Function(int param0, Pointer<RECT> param1, int param2,
+        int param3)>('DrawFrameControl');
 
 /// Draws an icon or cursor into the specified device context.
 ///
@@ -1503,42 +1502,41 @@ late final _DrawIcon = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 int DrawState(
-    int hdc,
-    int hbrFore,
-    Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
-    int lData,
-    int wData,
-    int x,
-    int y,
-    int cx,
-    int cy,
-    int uFlags) {
-  final _DrawState = _user32.lookupFunction<
-      Int32 Function(
-          IntPtr hdc,
-          IntPtr hbrFore,
-          Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
-          IntPtr lData,
-          IntPtr wData,
-          Int32 x,
-          Int32 y,
-          Int32 cx,
-          Int32 cy,
-          Uint32 uFlags),
-      int Function(
-          int hdc,
-          int hbrFore,
-          Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
-          int lData,
-          int wData,
-          int x,
-          int y,
-          int cx,
-          int cy,
-          int uFlags)>('DrawStateW');
-  return _DrawState(
-      hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags);
-}
+        int hdc,
+        int hbrFore,
+        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        int lData,
+        int wData,
+        int x,
+        int y,
+        int cx,
+        int cy,
+        int uFlags) =>
+    _DrawState(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags);
+
+late final _DrawState = _user32.lookupFunction<
+    Int32 Function(
+        IntPtr hdc,
+        IntPtr hbrFore,
+        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        IntPtr lData,
+        IntPtr wData,
+        Int32 x,
+        Int32 y,
+        Int32 cx,
+        Int32 cy,
+        Uint32 uFlags),
+    int Function(
+        int hdc,
+        int hbrFore,
+        Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+        int lData,
+        int wData,
+        int x,
+        int y,
+        int cx,
+        int cy,
+        int uFlags)>('DrawStateW');
 
 /// The DrawText function draws formatted text in the specified rectangle.
 /// It formats the text according to the specified method (expanding tabs,
