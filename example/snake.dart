@@ -7,9 +7,9 @@
 // Original C implementation by David Jones, available here:
 //     https://github.com/davidejones/winsnake
 
-// NB THe code isn't yet idiomatic Dart, but it demonstrates some
-// useful concepts, including pointer arithmetic and use of virtual
-// memory in Win32.
+// Note: This code isn't very idiomatic for Dart, since it's an almost direct
+// translation of the C code. Nevertheless, it demonstrates some useful
+// concepts, including pointer arithmetic and use of virtual memory in Win32.
 
 import 'dart:ffi';
 import 'dart:math' show Random;
@@ -17,18 +17,15 @@ import 'dart:math' show Random;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Win32-specific vars
-final hInstance = GetModuleHandle(nullptr);
-
 late int hWnd;
 const IDT_TIMER1 = 1;
 const IDT_TIMER2 = 2;
 
 final rng = Random();
 
-final bitmapInfo = BITMAPINFO.allocate();
+final bitmapInfo = calloc<BITMAPINFO>();
 
-Pointer<Void> bitmapMemory = nullptr;
+Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
 late int bitmapHeight;
 const bytesPerPixel = 4;
@@ -105,8 +102,8 @@ void setApple() {
   data[appleY][appleX] = 0;
 
   // get a random x, y coordinate on the gameboard
-  final x = randRange(0, (bitmapWidth / 10).floor());
-  final y = randRange(0, (bitmapHeight / 10).floor());
+  final x = randRange(0, (bitmapWidth ~/ 10));
+  final y = randRange(0, (bitmapHeight ~/ 10));
 
   // set to 1 to represent apple
   if (data[y][x] == 0) {
@@ -123,9 +120,9 @@ void collectApple() {
   // play sound
   Beep(750, 100);
   // increase speed and increase snake
-  final newPoint = Point();
-  newPoint.x = snakePoints[snakePoints.length - 1].x;
-  newPoint.y = snakePoints[snakePoints.length - 1].y;
+  final newPoint = Point()
+    ..x = snakePoints[snakePoints.length - 1].x
+    ..y = snakePoints[snakePoints.length - 1].y;
   snakePoints.add(newPoint);
 
   KillTimer(hWnd, IDT_TIMER1);
@@ -161,26 +158,26 @@ void moveSnake() {
       if (direction.x == 1) {
         // right
         snakePoints[i].x += 1;
-        if (snakePoints[i].x >= (bitmapWidth / 10).floor()) {
+        if (snakePoints[i].x >= (bitmapWidth ~/ 10)) {
           snakePoints[i].x = 0;
         }
       } else if (direction.x == -1) {
         // left
         snakePoints[i].x -= 1;
         if (snakePoints[i].x < 0) {
-          snakePoints[i].x = (bitmapWidth / 10).floor();
+          snakePoints[i].x = (bitmapWidth ~/ 10);
         }
       } else if (direction.y == 1) {
         // down
         snakePoints[i].y += 1;
-        if (snakePoints[i].y >= (bitmapHeight / 10).floor()) {
+        if (snakePoints[i].y >= (bitmapHeight ~/ 10)) {
           snakePoints[i].y = 0;
         }
       } else if (direction.y == -1) {
         // up
         snakePoints[i].y -= 1;
         if (snakePoints[i].y < 0) {
-          snakePoints[i].y = (bitmapHeight / 10).floor() - 1;
+          snakePoints[i].y = (bitmapHeight ~/ 10) - 1;
         }
       }
     } else {
@@ -289,10 +286,10 @@ void setVectorToMemory() {
         ptr.elementAt(pixelOffset).value = 0;
         pixelOffset++;
       }
-      vecX = (x / 10).floor();
+      vecX = x ~/ 10;
     }
     rowOffset += pitch;
-    vecY = (y / 10).floor();
+    vecY = y ~/ 10;
   }
 }
 
@@ -307,24 +304,24 @@ void resetGame() {
 
   // init snake
   snakePoints.clear();
-  final p1 = Point();
-  p1.x = 3;
-  p1.y = 0;
+  final p1 = Point()
+    ..x = 3
+    ..y = 0;
   snakePoints.add(p1);
 
-  final p2 = Point();
-  p2.x = 2;
-  p2.y = 0;
+  final p2 = Point()
+    ..x = 2
+    ..y = 0;
   snakePoints.add(p2);
 
-  final p3 = Point();
-  p3.x = 1;
-  p3.y = 0;
+  final p3 = Point()
+    ..x = 1
+    ..y = 0;
   snakePoints.add(p3);
 
-  final p4 = Point();
-  p4.x = 0;
-  p4.y = 0;
+  final p4 = Point()
+    ..x = 0
+    ..y = 0;
   snakePoints.add(p4);
 
   for (var i = 0; i < snakePoints.length; i++) {
@@ -382,17 +379,12 @@ void init(int width, int height) {
   bitmapWidth = width;
   bitmapHeight = height;
 
-  bitmapInfo.biSize = sizeOf<BITMAPINFO>();
-  bitmapInfo.biWidth = width;
-  bitmapInfo.biHeight = height;
-  bitmapInfo.biPlanes = 1;
-  bitmapInfo.biBitCount = 32;
-  bitmapInfo.biCompression = BI_RGB;
-  bitmapInfo.biSizeImage = 0;
-  bitmapInfo.biXPelsPerMeter = 0;
-  bitmapInfo.biYPelsPerMeter = 0;
-  bitmapInfo.biClrUsed = 0;
-  bitmapInfo.biClrImportant = 0;
+  bitmapInfo.ref.bmiHeader.biSize = sizeOf<BITMAPINFO>();
+  bitmapInfo.ref.bmiHeader.biWidth = width;
+  bitmapInfo.ref.bmiHeader.biHeight = height;
+  bitmapInfo.ref.bmiHeader.biPlanes = 1;
+  bitmapInfo.ref.bmiHeader.biBitCount = 32;
+  bitmapInfo.ref.bmiHeader.biCompression = BI_RGB;
 
   final bitmapMemorySize = (width * height) * bytesPerPixel;
   bitmapMemory =
@@ -424,7 +416,7 @@ void draw(int hdc, RECT rect, int x, int y, int width, int height) {
       windowWidth, // source width in pixels
       -windowHeight, // source height in pixels
       bitmapMemory, // pointer to the image bits
-      bitmapInfo.addressOf, // pointer to DIB
+      bitmapInfo, // pointer to DIB
       DIB_RGB_COLORS, // color table is literal RGB values
       SRCCOPY // copy directly to dest rectangle
       );
@@ -461,14 +453,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_SIZE:
-      final rect = RECT.allocate();
-      GetClientRect(hwnd, rect.addressOf);
-      final width = rect.right - rect.left;
-      final height = rect.bottom - rect.top;
+      final rect = calloc<RECT>();
+      GetClientRect(hwnd, rect);
+      final width = rect.ref.right - rect.ref.left;
+      final height = rect.ref.bottom - rect.ref.top;
 
       init(width, height);
 
-      free(rect.addressOf);
+      free(rect);
       break;
 
     case WM_CLOSE:
@@ -481,21 +473,21 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       break;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final dc = BeginPaint(hwnd, ps.addressOf);
-      final x = ps.rcPaintL;
-      final y = ps.rcPaintT;
-      final width = ps.rcPaintR - ps.rcPaintL;
-      final height = ps.rcPaintB - ps.rcPaintT;
+      final ps = calloc<PAINTSTRUCT>();
+      final dc = BeginPaint(hwnd, ps);
+      final x = ps.ref.rcPaint.left;
+      final y = ps.ref.rcPaint.top;
+      final width = ps.ref.rcPaint.right - ps.ref.rcPaint.left;
+      final height = ps.ref.rcPaint.bottom - ps.ref.rcPaint.top;
 
-      final rect = RECT.allocate();
-      GetClientRect(hwnd, rect.addressOf);
+      final rect = calloc<RECT>();
+      GetClientRect(hwnd, rect);
       gameTick();
-      draw(dc, rect, x, y, width, height);
-      EndPaint(hwnd, ps.addressOf);
+      draw(dc, rect.ref, x, y, width, height);
+      EndPaint(hwnd, ps);
 
-      free(rect.addressOf);
-      free(ps.addressOf);
+      free(rect);
+      free(ps);
       break;
 
     case WM_KEYDOWN:
@@ -553,16 +545,18 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return result;
 }
 
-void main() {
+void main() => initApp(winMain);
+
+void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
 
   final className = TEXT('WinSnakeWindowClass');
 
-  final wc = WNDCLASS.allocate();
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  if (RegisterClass(wc.addressOf) != 0) {
+  final wc = calloc<WNDCLASS>()
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className;
+  if (RegisterClass(wc) != 0) {
     // Create the window.
 
     hWnd = CreateWindowEx(
@@ -589,28 +583,28 @@ void main() {
       while (isRunning) {
         // Run the message loop.
 
-        final msg = MSG.allocate();
-        while (PeekMessage(msg.addressOf, 0, 0, 0, PM_REMOVE) != 0) {
-          if (msg.message == WM_QUIT) {
+        final msg = calloc<MSG>();
+        while (PeekMessage(msg, 0, 0, 0, PM_REMOVE) != 0) {
+          if (msg.ref.message == WM_QUIT) {
             isRunning = false;
           }
-          TranslateMessage(msg.addressOf);
-          DispatchMessage(msg.addressOf);
+          TranslateMessage(msg);
+          DispatchMessage(msg);
         }
-        free(msg.addressOf);
+        free(msg);
 
         final dc = GetDC(hWnd);
-        final rect = RECT.allocate();
+        final rect = calloc<RECT>();
 
-        GetClientRect(hWnd, rect.addressOf);
+        GetClientRect(hWnd, rect);
 
-        final windowWidth = rect.right - rect.left;
-        final windowHeight = rect.bottom - rect.top;
+        final windowWidth = rect.ref.right - rect.ref.left;
+        final windowHeight = rect.ref.bottom - rect.ref.top;
 
-        draw(dc, rect, 0, 0, windowWidth, windowHeight);
+        draw(dc, rect.ref, 0, 0, windowWidth, windowHeight);
 
         ReleaseDC(hWnd, dc);
-        free(rect.addressOf);
+        free(rect);
       }
     } else {
       MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),

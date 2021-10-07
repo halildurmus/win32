@@ -56,19 +56,19 @@ int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
 bool testBitmask(int bitmask, int value) => bitmask & value == value;
 
 int findPrimaryMonitor(List<int> monitors) {
-  final monitorInfo = MONITORINFO.allocate();
+  final monitorInfo = calloc<MONITORINFO>()..ref.cbSize = sizeOf<MONITORINFO>();
 
   for (final monitor in monitors) {
-    final result = GetMonitorInfo(monitor, monitorInfo.addressOf);
+    final result = GetMonitorInfo(monitor, monitorInfo);
     if (result == TRUE) {
-      if (testBitmask(monitorInfo.dwFlags, MONITORINFOF_PRIMARY)) {
-        free(monitorInfo.addressOf);
+      if (testBitmask(monitorInfo.ref.dwFlags, MONITORINFOF_PRIMARY)) {
+        free(monitorInfo);
         return monitor;
       }
     }
   }
 
-  free(monitorInfo.addressOf);
+  free(monitorInfo);
   return 0;
 }
 
@@ -109,7 +109,7 @@ void main() {
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
   print('Primary monitor handle: $primaryMonitorHandle');
 
-  final physicalMonitorCountPtr = allocate<Uint32>();
+  final physicalMonitorCountPtr = calloc<DWORD>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
       primaryMonitorHandle, physicalMonitorCountPtr);
   if (result == FALSE) {
@@ -125,8 +125,8 @@ void main() {
   // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
   // and since we only need the first entry, we can manually allocate space of
   // the right size.
-  final physicalMonitorArray = allocate<Uint8>(
-      count: physicalMonitorCountPtr.value * (sizeOf<IntPtr>() + 256));
+  final physicalMonitorArray =
+      calloc<PHYSICAL_MONITOR>(physicalMonitorCountPtr.value);
 
   result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
       physicalMonitorCountPtr.value, physicalMonitorArray);
@@ -140,11 +140,11 @@ void main() {
   final physicalMonitorDescription = physicalMonitorArray
       .elementAt(sizeOf<IntPtr>())
       .cast<Utf16>()
-      .unpackString(128);
+      .toDartString();
   print('Physical monitor description: $physicalMonitorDescription');
 
-  final monitorCapabilitiesPtr = allocate<Uint32>();
-  final monitorColorTemperaturesPtr = allocate<Uint32>();
+  final monitorCapabilitiesPtr = calloc<DWORD>();
+  final monitorColorTemperaturesPtr = calloc<DWORD>();
 
   result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
       monitorColorTemperaturesPtr);
@@ -155,9 +155,9 @@ void main() {
     print('Monitor does not support DDC/CI.');
   }
 
-  final minimumBrightnessPtr = allocate<Uint32>();
-  final currentBrightnessPtr = allocate<Uint32>();
-  final maximumBrightnessPtr = allocate<Uint32>();
+  final minimumBrightnessPtr = calloc<DWORD>();
+  final currentBrightnessPtr = calloc<DWORD>();
+  final maximumBrightnessPtr = calloc<DWORD>();
   result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
       currentBrightnessPtr, maximumBrightnessPtr);
   if (result == TRUE) {

@@ -11,37 +11,40 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void write({required String credentialName, required String userName, required String password}) {
+void write(
+    {required String credentialName,
+    required String userName,
+    required String password}) {
   print('Writing $credentialName ...');
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
-  final credential = CREDENTIAL.allocate()
-    ..Type = CRED_TYPE_GENERIC
-    ..TargetName = TEXT(credentialName)
-    ..Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..UserName = TEXT(userName)
-    ..CredentialBlob = blob
-    ..CredentialBlobSize = examplePassword.length;
+  final credential = calloc<CREDENTIAL>()
+    ..ref.Type = CRED_TYPE_GENERIC
+    ..ref.TargetName = credentialName.toNativeUtf16()
+    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..ref.UserName = userName.toNativeUtf16()
+    ..ref.CredentialBlob = blob
+    ..ref.CredentialBlobSize = examplePassword.length;
 
-  final result = CredWrite(credential.addressOf, 0);
+  final result = CredWrite(credential, 0);
 
   if (result != TRUE) {
     final errorCode = GetLastError();
     print('Error ($result): $errorCode');
     return;
   }
-  print('Success. (${credential.CredentialBlobSize})');
+  print('Success. (${credential.ref.CredentialBlobSize})');
 
   free(blob);
-  free(credential.addressOf);
+  free(credential);
 }
 
 void read(String credentialName) {
   print('Reading $credentialName ...');
-  final credPointer = allocate<Pointer<CREDENTIAL>>();
-  final result =
-      CredRead(TEXT(credentialName), CRED_TYPE_GENERIC, 0, credPointer);
+  final credPointer = calloc<Pointer<CREDENTIAL>>();
+  final result = CredRead(
+      credentialName.toNativeUtf16(), CRED_TYPE_GENERIC, 0, credPointer);
   if (result != TRUE) {
     final errorCode = GetLastError();
     var errorText = '$errorCode';
@@ -52,7 +55,7 @@ void read(String credentialName) {
     return;
   }
   final cred = credPointer.value.ref;
-  print('Success. Read username ${cred.UserName.unpackString(100)} '
+  print('Success. Read username ${cred.UserName.toDartString()} '
       'password size: ${cred.CredentialBlobSize}');
   final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
   final password = utf8.decode(blob);
@@ -65,7 +68,8 @@ void read(String credentialName) {
 
 void delete(String credentialName) {
   print('Deleting $credentialName');
-  final result = CredDelete(TEXT(credentialName), CRED_TYPE_GENERIC, 0);
+  final result =
+      CredDelete(credentialName.toNativeUtf16(), CRED_TYPE_GENERIC, 0);
   if (result != TRUE) {
     final errorCode = GetLastError();
     print('Error ($result): $errorCode');

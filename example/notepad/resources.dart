@@ -84,7 +84,7 @@ class NotepadResources {
   }
 
   static Pointer<DLGTEMPLATE> loadAboutBox() {
-    final pDialog = allocate<Uint16>(count: 1024).cast<Uint16>();
+    final pDialog = calloc<Uint16>(1024);
     var idx = 0;
 
     idx += pDialog.cast<DLGTEMPLATE>().setDialog(
@@ -151,7 +151,7 @@ class NotepadResources {
   }
 
   static int loadAccelerators() {
-    final pTable = allocate<ACCEL>(count: 18);
+    final pTable = calloc<ACCEL>(18);
 
     pTable[0]
       ..fVirt = FVIRTKEY | FALT | FNOINVERT

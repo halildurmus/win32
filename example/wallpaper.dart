@@ -12,15 +12,14 @@ import 'package:win32/win32.dart';
 late DesktopWallpaper wallpaper;
 
 void printWallpaper() {
-  final pathPtr = allocate<IntPtr>();
+  final pathPtr = calloc<Pointer<Utf16>>();
 
   try {
-    final hr = wallpaper.GetWallpaper(nullptr, pathPtr.cast());
+    final hr = wallpaper.GetWallpaper(nullptr, pathPtr);
 
     switch (hr) {
       case S_OK:
-        final path =
-            Pointer<Utf16>.fromAddress(pathPtr.value).unpackString(1024);
+        final path = pathPtr.value.toDartString();
         print(
             path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path');
         break;
@@ -39,7 +38,7 @@ void printWallpaper() {
 }
 
 void printBackgroundColor() {
-  final colorPtr = allocate<Uint32>(); // COLORREF
+  final colorPtr = calloc<COLORREF>();
 
   try {
     final hr = wallpaper.GetBackgroundColor(colorPtr);

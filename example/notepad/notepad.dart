@@ -22,11 +22,11 @@ late NotepadFind find;
 /// The handle of the Notepad window's text edit control
 late int hwndEdit;
 
-late FINDREPLACE findReplace;
+late Pointer<FINDREPLACE> findReplace;
 int messageFindReplace = 0;
 int hDlgModeless = NULL;
 
-final iOffset = allocate<Uint32>()..value = 0;
+final iOffset = calloc<Uint32>();
 
 int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
   switch (message) {
@@ -239,30 +239,28 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
     default:
       // Process "Find/Replace" messages
       if (message == messageFindReplace) {
-        findReplace = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
+        findReplace = Pointer<FINDREPLACE>.fromAddress(lParam);
 
-        if (findReplace.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+        if (findReplace.ref.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
           hDlgModeless = NULL;
         }
 
-        if (findReplace.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-          if (!find.findTextInEditWindow(
-              hwndEdit, iOffset, findReplace.addressOf)) {
+        if (findReplace.ref.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+          if (!find.findTextInEditWindow(hwndEdit, iOffset, findReplace)) {
             editor.showMessage('Text not found!');
           }
         }
 
-        if ((findReplace.Flags & FR_REPLACE == FR_REPLACE) ||
-            (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
-          if (!find.replaceTextInEditWindow(
-              hwndEdit, iOffset, findReplace.addressOf)) {
+        if ((findReplace.ref.Flags & FR_REPLACE == FR_REPLACE) ||
+            (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+          if (!find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {
             editor.showMessage('Text not found!');
           }
         }
 
-        if (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL) {
-          while (find.replaceTextInEditWindow(
-              hwndEdit, iOffset, findReplace.addressOf)) {}
+        if (findReplace.ref.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+          while (
+              find.replaceTextInEditWindow(hwndEdit, iOffset, findReplace)) {}
         }
 
         return 0;
@@ -290,14 +288,14 @@ void main() {
   // Register the window class.
   final className = TEXT(APP_NAME);
 
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  final wc = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  RegisterClass(wc);
 
   final hMenu = NotepadResources.loadMenus();
 
@@ -331,17 +329,17 @@ void main() {
 
   // Run the message loop.
 
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
+  final msg = calloc<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != 0) {
     // Translate dialog messages
     if ((hDlgModeless == NULL) ||
-        (IsDialogMessage(hDlgModeless, msg.addressOf) == FALSE)) {
+        (IsDialogMessage(hDlgModeless, msg) == FALSE)) {
       // Translate window accelerators and messages
-      if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
-        TranslateMessage(msg.addressOf);
-        DispatchMessage(msg.addressOf);
+      if (TranslateAccelerator(hWnd, hAccel, msg) == FALSE) {
+        TranslateMessage(msg);
+        DispatchMessage(msg);
       }
     }
   }
-  free(msg.addressOf);
+  free(msg);
 }

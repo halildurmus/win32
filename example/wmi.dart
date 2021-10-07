@@ -40,14 +40,13 @@ void main() {
 
   // Obtain the initial locator to Windows Management
   // on a particular host computer.
-  final pLoc = IWbemLocator(COMObject.allocate().addressOf);
+  final pLoc = IWbemLocator(calloc<COMObject>());
+
+  final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
+  final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
 
   hr = CoCreateInstance(
-      GUID.fromString(CLSID_WbemLocator).addressOf,
-      nullptr,
-      CLSCTX_INPROC_SERVER,
-      GUID.fromString(IID_IWbemLocator).addressOf,
-      pLoc.ptr.cast());
+      clsid, nullptr, CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -57,7 +56,7 @@ void main() {
     throw exception;
   }
 
-  final proxy = allocate<IntPtr>();
+  final proxy = calloc<Pointer>();
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -90,7 +89,7 @@ void main() {
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
   hr = CoSetProxyBlanket(
-      Pointer.fromAddress(proxy.value), // the proxy to set
+      proxy.value, // the proxy to set
       RPC_C_AUTHN_WINNT, // authentication service
       RPC_C_AUTHZ_NONE, // authorization service
       nullptr, // Server principal name
@@ -111,7 +110,7 @@ void main() {
 
   // Use the IWbemServices pointer to make requests of WMI.
 
-  final pEnumerator = allocate<IntPtr>();
+  final pEnumerator = calloc<Pointer>();
   IEnumWbemClassObject enumerator;
 
   // For example, query for all the running processes
@@ -135,11 +134,11 @@ void main() {
   } else {
     enumerator = IEnumWbemClassObject(pEnumerator.cast());
 
-    final uReturn = allocate<Uint32>();
+    final uReturn = calloc<Uint32>();
 
     var idx = 0;
     while (enumerator.ptr.address > 0) {
-      final pClsObj = allocate<IntPtr>();
+      final pClsObj = calloc<IntPtr>();
 
       hr = enumerator.Next(
           WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
@@ -151,17 +150,14 @@ void main() {
 
       final clsObj = IWbemClassObject(pClsObj.cast());
 
-      // A VARIANT is a union struct, which can't be directly represented by
-      // FFI yet. In this case we know that the VARIANT can only contain a BSTR
-      // so we are able to use a specialized variant.
-      final vtProp = VARIANT.allocate();
-      hr = clsObj.Get(TEXT('Name'), 0, vtProp.addressOf, nullptr, nullptr);
+      final vtProp = calloc<VARIANT>();
+      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ptr.cast<Utf16>().unpackString(256)}');
+        print('Process: ${vtProp.ref.bstrVal.toDartString()}');
       }
       // Free BSTRs in the returned variants
-      VariantClear(vtProp.addressOf);
-      free(vtProp.addressOf);
+      VariantClear(vtProp);
+      free(vtProp);
 
       clsObj.Release();
     }

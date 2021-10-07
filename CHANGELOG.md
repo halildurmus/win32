@@ -1,32 +1,139 @@
-## 2.0.0-nullsafety.5
+## 2.2.9
 
-- Add dialog box example and supporting extension methods
+- Add some missing GDI functions
 
-## 2.0.0-nullsafety.4
+## 2.2.8
 
-- Add remaining Win32 dialog calls
+- Add Native Wifi APIs (#299)
 
-## 2.0.0-nullsafety.3
+## 2.2.7
 
-- Add button and dialog style constants
-- Add DLGTEMPLATE and DLGITEMTEMPLATE
+- Added ResetEvent and complete `OVERLAPPED` struct (#295)
+- Added more virtual memory functions (#297)
 
-## 2.0.0-nullsafety.2
+## 2.2.6
 
-- Add extended window style constants (WM_EX_*)
+- Add some requested APIs thanks to contributions from @ilopX, in particular
+  a new sample for enumerating locally installed printers.
+- Added ExtractAssociatedIcon, with thanks to @halildurmus.
 
-## 2.0.0-nullsafety.1
+## 2.2.5
 
-- Add a number of GDI calls
+- Add more DWM APIs, including `DwmSetWindowAttribute`.
+
+## 2.2.4
+
+- Add various DWM and subclassing APIs
+
+## 2.2.3
+
+- Lazily evaluate `lookupFunction` FFI calls for improved performance.
+- Add APIs for hooks and a few extra kernel32 APIs
+- Add some more tests.
+
+## 2.2.2
+
+- Add Windows Spooler library support.
+
+## 2.2.1
+
+- Add initial support for the Windows Socket library (winsock2).
+
+## 2.2.0
+
+- Fixes convertToHString to return an int, since `HSTRING`s are handles. This is
+  a breaking change for any apps that use WinRT APIs, but given the limited
+  availability of WinRT classes that fall into this category, updating only the
+  minor version.
+- Add low-level Device IO and structured storage APIs and diskinfo.dart sample.
+
+## 2.1.5
+
+- Add smart card reader support.
+
+## 2.1.4
+
+- Add helper functions for COM along with extra documentation.
+
+## 2.1.3
+
+- Fix bug in shell COM APIs.
+- Add examples for shortcut creation and named pipes.
+
+## 2.1.2
+
+- Add serial port comms APIs
+- Add additional shell COM APIs
+
+## 2.1.1
+
+- Work around FFI regression in Dart master and dev builds.
+
+## 2.1.0
+
+- Upgrade to Dart 2.13, which supports packed structs and arrays in FFI. This
+  enables support for more automated generation of structs, which in turn
+  increases development velocity for this package.
+
+- Other APIs included in this release include:
+  - More complete Bluetooth support
+  - MIDI support
+  - High DPI support
+  - `IDispatch` support
+  - Many more core user32 APIs
+
+## 2.0.5
+
+- Add some debugging APIs to allow enumerating exported symbols, along with a
+  sample (`dump.dart`).
+- Free memory allocations in samples.
+- Use latest version of Win32 metadata from winmd package, and generate most
+  structs automatically using this metadata.
+- Generate COM helper classes wherever metadata supports it, instead of
+  requiring a manual decorator.
+- Add about 20 new kernel32 APIs.
+
+## 2.0.4
+
+- Add network events, thanks to a contribution from @sunbreak.
+- Update COM vtable generation, thanks to a contribution from @bonukai.
+- Update to use the latest WinMD package.
+
+## 2.0.3
+
+- Add spellchecking COM APIs, thanks to a contribution from @bonukai.
+
+## 2.0.2
+
+- Adds named pipe APIs to support projects like TerminalStudio/pty.
+
+## 2.0.1
+
+- Adds a demo of custom window shapes.
+- Removes Windows Metadata classes (now in the `winmd` package). This is a
+  breaking change, but it's not anticipated to be a problem since these classes
+  are only used for code generation.
+- Update to latest WinMD package
+- Add shell folder APIs
+- Add registry key APIs
+
+## 2.0.0
+
+- Stable version w/ sound null safety.
+- Update to ffi 1.0.0 and address breaking changes.
+- 100+ new APIs in kernel32, user32, ole32, advapi32, shell32 and gdi32, as well
+  as a series of COM interfaces.
 - Rework API wrapper to use functions instead of properties
-- Convert API tests support reworked API wrapper
-- High-fidelity INPUT struct that demonstrates an approach for union structs in
-  Dart FFI
-- Document some more constants
-
-## 2.0.0-nullsafety.0
-
-- Enable sound null safety
+- New JSON-based metadata format for Win32 APIs that supports API sets and
+  minimum versions, and more robust tooling for loading and saving metadata
+- Migrated Windows Runtime APIs into core unmanaged metadata
+- Add waveOut* APIs from winmm.dll (thanks @slightfoot)
+- Make VARIANT more representative of the underlying type.
+- Add DLGTEMPLATE and DLGITEMTEMPLATE structs with extension methods.
+- Add more tests.
+- Add dialog box example and supporting extension methods
+- New shell tray notification example (thanks @ilopX)
+- Better documentation of constants and callbacks
 
 ## 1.7.5
 

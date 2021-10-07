@@ -22,7 +22,7 @@ const echoOffPrompt = 'Type any key, or q to quit: ';
 final stdin = GetStdHandle(STD_INPUT_HANDLE);
 final stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-late CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+late Pointer<CONSOLE_SCREEN_BUFFER_INFO> bufferInfo;
 
 /// Convert a byte array pointer into a Dart string
 String fromCString(Pointer<Uint8> buffer, int maxLength) =>
@@ -34,78 +34,76 @@ String fromCString(Pointer<Uint8> buffer, int maxLength) =>
 /// The returned string is _not_ null-terminated.
 Pointer<Uint8> toCString(String buffer) {
   final units = utf8.encode(buffer);
-  final result = allocate<Uint8>(count: units.length);
+  final result = calloc<Uint8>(units.length);
   final nativeString = result.asTypedList(units.length);
   nativeString.setAll(0, units);
-  return result.cast();
+  return result;
 }
 
 /// The newLine function handles carriage returns when the processed input mode
 /// is disabled. It gets the current cursor position and resets it to the first
 /// cell of the next row.
 void newLine() {
-  GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
+  GetConsoleScreenBufferInfo(stdout, bufferInfo);
 
-  bufferInfo.dwCursorPositionX = 0;
-  if (bufferInfo.dwSizeY - 1 == bufferInfo.dwCursorPositionY) {
+  bufferInfo.ref.dwCursorPosition.X = 0;
+  if (bufferInfo.ref.dwSize.Y - 1 == bufferInfo.ref.dwCursorPosition.Y) {
     scrollScreenBuffer(stdout, 1);
   } else {
-    bufferInfo.dwCursorPositionY += 1;
+    bufferInfo.ref.dwCursorPosition.Y += 1;
   }
 
-  // When nested structs are supported, the second parameter will be
-  // bufferInfo.dwCursorPosition instead of the current one.
-  SetConsoleCursorPosition(stdout,
-      bufferInfo.dwCursorPositionY << 16 + bufferInfo.dwCursorPositionX);
+  SetConsoleCursorPosition(stdout, bufferInfo.ref.dwCursorPosition);
 }
 
 void scrollScreenBuffer(int handle, int x) {
-  final scrollRect = SMALL_RECT.allocate();
-  scrollRect.Left = 0;
-  scrollRect.Top = 1;
-  scrollRect.Right = bufferInfo.dwSizeX - x;
-  scrollRect.Bottom = bufferInfo.dwSizeY - x;
+  final scrollRect = calloc<SMALL_RECT>()
+    ..ref.Left = 0
+    ..ref.Top = 1
+    ..ref.Right = bufferInfo.ref.dwSize.X - x
+    ..ref.Bottom = bufferInfo.ref.dwSize.Y - x;
 
   // The destination for the scroll rectangle is one row up.
-  final coordDest = COORD.allocate();
-  coordDest.X = 0;
-  coordDest.Y = 0;
+  final coordDest = calloc<COORD>()
+    ..ref.X = 0
+    ..ref.Y = 0;
 
   final clipRect = scrollRect;
 
-  final fillChar = CHAR_INFO.allocate();
-  fillChar.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
-  fillChar.UnicodeChar = ' '.codeUnits.first;
+  final fillChar = calloc<CHAR_INFO>()
+    ..ref.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY
+    ..ref.UnicodeChar = ' '.codeUnits.first;
 
-  ScrollConsoleScreenBuffer(handle, scrollRect.addressOf, clipRect.addressOf,
-      coordDest.Y << 16 + coordDest.X, fillChar.addressOf);
+  ScrollConsoleScreenBuffer(
+      handle, scrollRect, clipRect, coordDest.ref, fillChar);
 
-  free(scrollRect.addressOf);
-  free(coordDest.addressOf);
-  free(fillChar.addressOf);
+  free(scrollRect);
+  free(coordDest);
+  free(fillChar);
 }
 
 void main() {
-  bufferInfo = CONSOLE_SCREEN_BUFFER_INFO.allocate();
-  GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
+  bufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
+  GetConsoleScreenBufferInfo(stdout, bufferInfo);
 
   print('Some console metrics:');
-  print('  Window dimensions LTRB: (${bufferInfo.srWindowLeft}, '
-      '${bufferInfo.srWindowTop}, ${bufferInfo.srWindowRight}, '
-      '${bufferInfo.srWindowBottom})');
-  print('  Cursor position X/Y: (${bufferInfo.dwCursorPositionX}, '
-      '${bufferInfo.dwCursorPositionY})');
-  print('  Window size X/Y: (${bufferInfo.dwSizeX}, ${bufferInfo.dwSizeY})');
-  print('  Maximum window size X/Y: (${bufferInfo.dwMaximumWindowSizeX}, '
-      '${bufferInfo.dwMaximumWindowSizeY})\n');
+  print('  Window dimensions LTRB: (${bufferInfo.ref.srWindow.Left}, '
+      '${bufferInfo.ref.srWindow.Top}, ${bufferInfo.ref.srWindow.Right}, '
+      '${bufferInfo.ref.srWindow.Bottom})');
+  print('  Cursor position X/Y: (${bufferInfo.ref.dwCursorPosition.X}, '
+      '${bufferInfo.ref.dwCursorPosition.Y})');
+  print(
+      '  Window size X/Y: (${bufferInfo.ref.dwSize.Y}, ${bufferInfo.ref.dwSize.Y})');
+  print('  Maximum window size X/Y: (${bufferInfo.ref.dwMaximumWindowSize.X}, '
+      '${bufferInfo.ref.dwMaximumWindowSize.Y})\n');
 
   // Set the text attributes to draw red text on black background.
-  final originalAttributes = bufferInfo.wAttributes;
+  final originalAttributes = bufferInfo.ref.wAttributes;
   SetConsoleTextAttribute(stdout, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
-  final cWritten = allocate<Uint32>();
-  final buffer = allocate<Uint8>(count: 256);
-  final cRead = allocate<Uint32>();
+  final cWritten = calloc<DWORD>();
+  final buffer = calloc<Uint8>(256);
+  final lpNumberOfBytesRead = calloc<DWORD>();
 
   // Write to STDOUT and read from STDIN by using the default
   // modes. Input is echoed automatically, and ReadFile
@@ -121,15 +119,15 @@ void main() {
         normalPrompt.length, // string length
         cWritten, // bytes written
         nullptr); // not overlapped
-    ReadFile(stdin, buffer, 255, cRead, nullptr);
-    final inputString = fromCString(buffer, cRead.value);
+    ReadFile(stdin, buffer, 255, lpNumberOfBytesRead, nullptr);
+    final inputString = fromCString(buffer, lpNumberOfBytesRead.value);
     if (inputString.startsWith('q')) {
       break;
     }
   }
 
   // Turn off the line input and echo input modes
-  final originalConsoleMode = allocate<Uint32>();
+  final originalConsoleMode = calloc<DWORD>();
   GetConsoleMode(stdin, originalConsoleMode);
   final mode =
       originalConsoleMode.value & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
@@ -143,11 +141,13 @@ void main() {
 
     // ReadFile returns when any input is available.
     // WriteFile is used to echo input.
-    if (ReadFile(stdin, buffer, 1, cRead, nullptr) == 0) break;
+    if (ReadFile(stdin, buffer, 1, lpNumberOfBytesRead, nullptr) == 0) break;
 
     if (String.fromCharCode(buffer.value) == '\r') {
       newLine();
-    } else if (WriteFile(stdout, buffer, cRead.value, cWritten, nullptr) == 0) {
+    } else if (WriteFile(
+            stdout, buffer, lpNumberOfBytesRead.value, cWritten, nullptr) ==
+        0) {
       break;
     } else {
       newLine();
@@ -161,9 +161,9 @@ void main() {
   SetConsoleMode(stdin, originalConsoleMode.value);
   SetConsoleTextAttribute(stdout, originalAttributes);
 
-  free(bufferInfo.addressOf);
+  free(bufferInfo);
   free(cWritten);
   free(buffer);
-  free(cRead);
+  free(lpNumberOfBytesRead);
   free(originalConsoleMode);
 }

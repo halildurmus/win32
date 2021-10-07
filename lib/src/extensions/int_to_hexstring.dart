@@ -19,6 +19,6 @@ extension HexConversion on int {
     // Need to cast to a BigInt because Dart integers are signed 64-bit values
     final bigValue = BigInt.from(this);
     final value = bigValue.toUnsigned(bits);
-    return '0x${value.toRadixString(16).padLeft((bits / 4).floor(), '0')}';
+    return '0x${value.toRadixString(16).padLeft(bits ~/ 4, '0')}';
   }
 }

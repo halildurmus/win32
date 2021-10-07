@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      # Free config supports up to five concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
+      matrix:
+        include:
+          - os: windows-2022
+            sdk: main
+          - os: windows-2019
+            sdk: beta
+          - os: windows-2016
+            sdk: stable
+          - os: ubuntu-latest
+            sdk: stable
+
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v2
+
+      - name: Set up Dart
+        # https://github.com/dart-lang/setup-dart/issues/42
+        uses: dart-lang/setup-dart@v1.2
+        with:
+          sdk: ${{matrix.sdk}}
+
+      - name: Print Dart SDK version
+        run: dart --version
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
+
+      - name: Run tests
+        run: dart test

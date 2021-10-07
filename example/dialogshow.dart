@@ -16,7 +16,7 @@ void main() {
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Uint32>();
+    final pfos = calloc<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
@@ -24,19 +24,27 @@ void main() {
     hr = fileDialog.SetOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.SetDefaultExtension(TEXT('txt;csv'));
+    final defaultExtensions = TEXT('txt;csv');
+    hr = fileDialog.SetDefaultExtension(defaultExtensions);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(defaultExtensions);
 
-    hr = fileDialog.SetFileNameLabel(TEXT('Custom Label:'));
+    final fileNameLabel = TEXT('Custom Label:');
+    hr = fileDialog.SetFileNameLabel(fileNameLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(fileNameLabel);
 
-    hr = fileDialog.SetTitle(TEXT('Custom Title'));
+    final title = TEXT('Custom Title');
+    hr = fileDialog.SetTitle(title);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(title);
 
-    hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
+    final okButtonLabel = TEXT('Go');
+    hr = fileDialog.SetOkButtonLabel(okButtonLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(okButtonLabel);
 
-    final rgSpec = allocate<COMDLG_FILTERSPEC>(count: 3);
+    final rgSpec = calloc<COMDLG_FILTERSPEC>(3);
     rgSpec[0]
       ..pszName = TEXT('JPEG Files')
       ..pszSpec = TEXT('*.jpg;*.jpeg');
@@ -57,20 +65,19 @@ void main() {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = allocate<IntPtr>();
-      hr = fileDialog.GetResult(ppsi);
+      final ppsi = calloc<COMObject>();
+      hr = fileDialog.GetResult(ppsi.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-      final item = IShellItem(ppsi.cast());
-      final pathPtr = allocate<IntPtr>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
+      final item = IShellItem(ppsi);
+      final pathPtr = calloc<Pointer<Utf16>>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
       // MAX_PATH may truncate early if long filename support is enabled
-      final pathRes = path.unpackString(MAX_PATH);
-      print('Result: $pathRes');
+      final path = pathPtr.value.toDartString();
+
+      print('Result: $path');
 
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);

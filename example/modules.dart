@@ -24,23 +24,22 @@ int printModules(int processID) {
   }
 
   // Get a list of all the modules in this process.
-  final hMods = allocate<IntPtr>(count: 1024);
-  final cbNeeded = allocate<Uint32>();
+  final hMods = calloc<HMODULE>(1024);
+  final cbNeeded = calloc<DWORD>();
 
-  if (EnumProcessModules(
-          hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded.cast()) ==
+  if (EnumProcessModules(hProcess, hMods, sizeOf<HMODULE>() * 1024, cbNeeded) ==
       1) {
-    for (var i = 0; i < ((cbNeeded.value / sizeOf<IntPtr>()).floor()); i++) {
-      final szModName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+    for (var i = 0; i < (cbNeeded.value ~/ sizeOf<HMODULE>()); i++) {
+      final szModName = wsalloc(MAX_PATH);
 
       // Get the full path to the module's file.
       final hModule = hMods.elementAt(i).value;
       final moduleValue =
-          '0x${hModule.toRadixString(16).padLeft(sizeOf<IntPtr>(), '0').toUpperCase()}';
+          '0x${hModule.toRadixString(16).padLeft(sizeOf<HMODULE>(), '0').toUpperCase()}';
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         // Print the module name and handle value.
-        print('\t${szModName.unpackString(MAX_PATH)} ($moduleValue)');
+        print('\t${szModName.toDartString()} ($moduleValue)');
       }
       free(szModName);
     }
@@ -56,18 +55,17 @@ int printModules(int processID) {
 }
 
 void main() {
-  final aProcesses = allocate<Uint32>(count: 1024);
-  final cbNeeded = allocate<Uint32>();
+  final aProcesses = calloc<DWORD>(1024);
+  final cbNeeded = calloc<DWORD>();
 
   // Get the list of process identifiers.
-  if (EnumProcesses(aProcesses, sizeOf<Uint32>() * 1024, cbNeeded.cast()) ==
-      0) {
+  if (EnumProcesses(aProcesses, sizeOf<DWORD>() * 1024, cbNeeded) == 0) {
     print('EnumProcesses failed.');
     exit(1);
   }
 
   // Calculate how many process identifiers were returned.
-  final cProcesses = (cbNeeded.value / sizeOf<Uint32>()).floor();
+  final cProcesses = cbNeeded.value ~/ sizeOf<DWORD>();
 
   // Print the names of the modules for each process.
   for (var i = 0; i < cProcesses; i++) {

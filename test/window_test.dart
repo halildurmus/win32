@@ -2,6 +2,7 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -18,15 +19,15 @@ void main() {
 
     final CLASS_NAME = TEXT('CLASS_NAME');
 
-    final wc = WNDCLASS.allocate();
-    wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
-    wc.hInstance = hInstance;
-    wc.lpszClassName = CLASS_NAME;
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = GetStockObject(WHITE_BRUSH);
+    final wc = calloc<WNDCLASS>()
+      ..ref.style = CS_HREDRAW | CS_VREDRAW
+      ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0)
+      ..ref.hInstance = hInstance
+      ..ref.lpszClassName = CLASS_NAME
+      ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+      ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
 
-    final result = RegisterClass(wc.addressOf);
+    final result = RegisterClass(wc);
 
     expect(result, isNot(0));
   });

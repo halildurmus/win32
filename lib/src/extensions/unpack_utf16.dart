@@ -10,6 +10,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 extension Utf16Conversion on Pointer<Utf16> {
+  @Deprecated('Use the toDartString method in package:ffi 1.0 instead.')
   String unpackString(int maxLength) {
     final pathData = cast<Uint16>().asTypedList(maxLength);
 
@@ -31,11 +32,11 @@ extension Utf16Conversion on Pointer<Utf16> {
     for (var v = 0; v < maxLength; v++) {
       final charCode = ptr.elementAt(v).value;
       if (charCode != 0) {
-        buf.write(String.fromCharCode(charCode));
+        buf.writeCharCode(charCode);
       } else {
         results.add(buf.toString());
         if (ptr.elementAt(v + 1).value == 0) {
-          return results;
+          break;
         } else {
           buf.clear();
         }

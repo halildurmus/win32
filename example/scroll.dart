@@ -10,8 +10,6 @@ import 'dart:math' show min, max;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-final hInstance = GetModuleHandle(nullptr);
-
 final abc = [
   'anteater',
   'bear',
@@ -61,11 +59,11 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       final hdc = GetDC(hwnd);
 
       // Extract font dimensions from the text metrics.
-      final tm = TEXTMETRIC.allocate();
-      GetTextMetrics(hdc, tm.addressOf);
-      xChar = tm.tmAveCharWidth;
-      xUpper = ((tm.tmPitchAndFamily & 1 == 1 ? 3 : 2) * xChar / 2).floor();
-      yChar = tm.tmHeight + tm.tmExternalLeading;
+      final tm = calloc<TEXTMETRIC>();
+      GetTextMetrics(hdc, tm);
+      xChar = tm.ref.tmAveCharWidth;
+      xUpper = (tm.ref.tmPitchAndFamily & 1 == 1 ? 3 : 2) * xChar ~/ 2;
+      yChar = tm.ref.tmHeight + tm.ref.tmExternalLeading;
 
       // Free the device context.
       ReleaseDC(hwnd, hdc);
@@ -75,7 +73,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       // lowercase letters and 12 uppercase letters.)
       xClientMax = 48 * xChar + 12 * xUpper;
 
-      free(tm.addressOf);
+      free(tm);
 
       return 0;
 
@@ -86,60 +84,60 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xClient = LOWORD(lParam);
 
       // Set the vertical scrolling range and page size
-      final si = SCROLLINFO.allocate();
-      si.cbSize = sizeOf<SCROLLINFO>();
-      si.fMask = SIF_RANGE | SIF_PAGE;
-      si.nMin = 0;
-      si.nMax = abc.length - 1;
-      si.nPage = (yClient / yChar).floor();
-      SetScrollInfo(hwnd, SB_VERT, si.addressOf, TRUE);
+      final si = calloc<SCROLLINFO>()
+        ..ref.cbSize = sizeOf<SCROLLINFO>()
+        ..ref.fMask = SIF_RANGE | SIF_PAGE
+        ..ref.nMin = 0
+        ..ref.nMax = abc.length - 1
+        ..ref.nPage = yClient ~/ yChar;
+      SetScrollInfo(hwnd, SB_VERT, si, TRUE);
 
       // Set the horizontal scrolling range and page size.
-      si.cbSize = sizeOf<SCROLLINFO>();
-      si.fMask = SIF_RANGE | SIF_PAGE;
-      si.nMin = 0;
-      si.nMax = 2 + (xClientMax / xChar).floor();
-      si.nPage = (xClient / xChar).floor();
-      SetScrollInfo(hwnd, SB_HORZ, si.addressOf, TRUE);
+      si.ref.cbSize = sizeOf<SCROLLINFO>();
+      si.ref.fMask = SIF_RANGE | SIF_PAGE;
+      si.ref.nMin = 0;
+      si.ref.nMax = 2 + xClientMax ~/ xChar;
+      si.ref.nPage = xClient ~/ xChar;
+      SetScrollInfo(hwnd, SB_HORZ, si, TRUE);
 
-      free(si.addressOf);
+      free(si);
 
       return 0;
 
     case WM_HSCROLL:
-      final si = SCROLLINFO.allocate();
+      final si = calloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
-      si.cbSize = sizeOf<SCROLLINFO>();
-      si.fMask = SIF_ALL;
+      si.ref.cbSize = sizeOf<SCROLLINFO>();
+      si.ref.fMask = SIF_ALL;
 
       // Save the position for comparison later on.
-      GetScrollInfo(hwnd, SB_HORZ, si.addressOf);
-      xPos = si.nPos;
+      GetScrollInfo(hwnd, SB_HORZ, si);
+      xPos = si.ref.nPos;
       switch (LOWORD(wParam)) {
         // User clicked the left arrow.
         case SB_LINELEFT:
-          si.nPos -= 1;
+          si.ref.nPos -= 1;
           break;
 
         // User clicked the right arrow.
         case SB_LINERIGHT:
-          si.nPos += 1;
+          si.ref.nPos += 1;
           break;
 
         // User clicked the scroll bar shaft left of the scroll box.
         case SB_PAGELEFT:
-          si.nPos -= si.nPage;
+          si.ref.nPos -= si.ref.nPage;
           break;
 
         // User clicked the scroll bar shaft right of the scroll box.
         case SB_PAGERIGHT:
-          si.nPos += si.nPage;
+          si.ref.nPos += si.ref.nPage;
           break;
 
         // User dragged the scroll box.
         case SB_THUMBTRACK:
-          si.nPos = si.nTrackPos;
+          si.ref.nPos = si.ref.nTrackPos;
           break;
 
         default:
@@ -148,63 +146,63 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // Set the position and then retrieve it.  Due to adjustments
       // by Windows it may not be the same as the value set.
-      si.fMask = SIF_POS;
-      SetScrollInfo(hwnd, SB_HORZ, si.addressOf, TRUE);
-      GetScrollInfo(hwnd, SB_HORZ, si.addressOf);
+      si.ref.fMask = SIF_POS;
+      SetScrollInfo(hwnd, SB_HORZ, si, TRUE);
+      GetScrollInfo(hwnd, SB_HORZ, si);
 
       // If the position has changed, scroll the window.
-      if (si.nPos != xPos) {
-        ScrollWindow(hwnd, xChar * (xPos - si.nPos), 0, nullptr, nullptr);
+      if (si.ref.nPos != xPos) {
+        ScrollWindow(hwnd, xChar * (xPos - si.ref.nPos), 0, nullptr, nullptr);
       }
 
-      free(si.addressOf);
+      free(si);
       return 0;
 
     case WM_VSCROLL:
-      final si = SCROLLINFO.allocate();
+      final si = calloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
-      si.cbSize = sizeOf<SCROLLINFO>();
-      si.fMask = SIF_ALL;
-      GetScrollInfo(hwnd, SB_VERT, si.addressOf);
+      si.ref.cbSize = sizeOf<SCROLLINFO>();
+      si.ref.fMask = SIF_ALL;
+      GetScrollInfo(hwnd, SB_VERT, si);
 
       // Save the position for comparison later on.
-      yPos = si.nPos;
+      yPos = si.ref.nPos;
       switch (LOWORD(wParam)) {
 
         // User clicked the HOME keyboard key.
         case SB_TOP:
-          si.nPos = si.nMin;
+          si.ref.nPos = si.ref.nMin;
           break;
 
         // User clicked the END keyboard key.
         case SB_BOTTOM:
-          si.nPos = si.nMax;
+          si.ref.nPos = si.ref.nMax;
           break;
 
         // User clicked the top arrow.
         case SB_LINEUP:
-          si.nPos -= 1;
+          si.ref.nPos -= 1;
           break;
 
         // User clicked the bottom arrow.
         case SB_LINEDOWN:
-          si.nPos += 1;
+          si.ref.nPos += 1;
           break;
 
         // User clicked the scroll bar shaft above the scroll box.
         case SB_PAGEUP:
-          si.nPos -= si.nPage;
+          si.ref.nPos -= si.ref.nPage;
           break;
 
         // User clicked the scroll bar shaft below the scroll box.
         case SB_PAGEDOWN:
-          si.nPos += si.nPage;
+          si.ref.nPos += si.ref.nPage;
           break;
 
         // User dragged the scroll box.
         case SB_THUMBTRACK:
-          si.nPos = si.nTrackPos;
+          si.ref.nPos = si.ref.nTrackPos;
           break;
 
         default:
@@ -213,40 +211,40 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // Set the position and then retrieve it. Due to adjustments
       // by Windows it may not be the same as the value set.
-      si.fMask = SIF_POS;
-      SetScrollInfo(hwnd, SB_VERT, si.addressOf, TRUE);
-      GetScrollInfo(hwnd, SB_VERT, si.addressOf);
+      si.ref.fMask = SIF_POS;
+      SetScrollInfo(hwnd, SB_VERT, si, TRUE);
+      GetScrollInfo(hwnd, SB_VERT, si);
 
       // If the position has changed, scroll window and update it.
-      if (si.nPos != yPos) {
-        ScrollWindow(hwnd, 0, yChar * (yPos - si.nPos), nullptr, nullptr);
+      if (si.ref.nPos != yPos) {
+        ScrollWindow(hwnd, 0, yChar * (yPos - si.ref.nPos), nullptr, nullptr);
         UpdateWindow(hwnd);
       }
 
-      free(si.addressOf);
+      free(si);
       return 0;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final si = SCROLLINFO.allocate();
+      final ps = calloc<PAINTSTRUCT>();
+      final si = calloc<SCROLLINFO>();
 
       // Prepare the window for painting.
-      final hdc = BeginPaint(hwnd, ps.addressOf);
+      final hdc = BeginPaint(hwnd, ps);
 
       // Get vertical scroll bar position.
-      si.cbSize = sizeOf<SCROLLINFO>();
-      si.fMask = SIF_POS;
-      GetScrollInfo(hwnd, SB_VERT, si.addressOf);
-      yPos = si.nPos;
+      si.ref.cbSize = sizeOf<SCROLLINFO>();
+      si.ref.fMask = SIF_POS;
+      GetScrollInfo(hwnd, SB_VERT, si);
+      yPos = si.ref.nPos;
 
       // Get horizontal scroll bar position.
-      GetScrollInfo(hwnd, SB_HORZ, si.addressOf);
-      xPos = si.nPos;
+      GetScrollInfo(hwnd, SB_HORZ, si);
+      xPos = si.ref.nPos;
 
       // Find painting limits.
-      final firstLine = max(0, yPos + (ps.rcPaintT / yChar).floor());
+      final firstLine = max(0, yPos + (ps.ref.rcPaint.top ~/ yChar));
       final lastLine =
-          min(abc.length - 1, yPos + (ps.rcPaintB / yChar).floor());
+          min(abc.length - 1, yPos + (ps.ref.rcPaint.bottom ~/ yChar));
 
       for (var i = firstLine; i <= lastLine; i++) {
         final x = xChar * (1 - xPos);
@@ -257,9 +255,9 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       }
 
       // Indicate that painting is finished.
-      EndPaint(hwnd, ps.addressOf);
-      free(ps.addressOf);
-      free(si.addressOf);
+      EndPaint(hwnd, ps);
+      free(ps);
+      free(si);
       return 0;
 
     case WM_DESTROY:
@@ -270,19 +268,20 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void main() {
-  // Register the window class.
+void main() => initApp(winMain);
 
+void winMain(int hInstance, List<String> args, int nShowCmd) {
+  // Register the window class.
   final className = TEXT('Scrollbar Sample');
 
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  final wc = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  RegisterClass(wc);
 
   // Create the window.
 
@@ -308,14 +307,14 @@ void main() {
     throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
+  ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
   // Run the message loop.
 
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
+  final msg = calloc<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != 0) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
   }
 }

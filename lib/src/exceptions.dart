@@ -10,8 +10,8 @@ import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'extensions/int_to_hexstring.dart';
-import 'extensions/unpack_utf16.dart';
 import 'kernel32.dart';
+import 'utils.dart';
 
 /// Generic COM Exception
 class COMException implements Exception {
@@ -31,7 +31,7 @@ class WindowsException extends COMException {
   /// `FormatMessage()` function. For example, `E_INVALIDARG` (0x80070057)
   /// converts to `The parameter is incorrect.`
   String convertWindowsErrorToString(int windowsError) {
-    final buffer = allocate<Uint16>(count: 256).cast<Utf16>();
+    final buffer = wsalloc(256);
 
     // If FormatMessage fails, it returns 0; otherwise it returns the number of
     // characters in the buffer.
@@ -50,7 +50,7 @@ class WindowsException extends COMException {
         // Failed to get error string
         errorMessage = '';
       } else {
-        errorMessage = buffer.unpackString(result);
+        errorMessage = buffer.toDartString();
       }
 
       // Strip off CRLF in the returned error message, if it exists

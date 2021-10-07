@@ -1,17 +1,28 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Play a sound
+
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  print('Type the audio file path.');
-  final file = stdin.readLineSync();
-  if (file != null && File(file).existsSync()) {
-    final result =
-        PlaySound(Utf16.toUtf16(file), NULL, SND_FILENAME | SND_ASYNC);
-    print('Press any button to continue');
-    stdin
-        .readByteSync(); // This is needed since we are using the SND_ASNYC flag and the PlaySound function returns immediately, to avoid this behavior use SND_SYNC instead (default)
-    print('Result: $result');
+  const logonSound = r'C:\Windows\Media\Windows Logon.wav';
+
+  final file = File(logonSound).existsSync();
+
+  if (!file) {
+    print('WAV file missing.');
+    exit(1);
+  } else {
+    final pszLogonSound = TEXT(logonSound);
+    final result = PlaySound(pszLogonSound, NULL, SND_FILENAME | SND_SYNC);
+
+    if (result != TRUE) {
+      print('Sound playback failed.');
+    }
+    free(pszLogonSound);
   }
 }

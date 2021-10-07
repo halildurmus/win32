@@ -54,7 +54,7 @@ const dialogGolden = [
 
 void main() {
   test('Dialog creation returns the right results', () {
-    final ptr = allocate<Uint16>(count: 1024);
+    final ptr = calloc<Uint16>(1024);
     var idx = 0;
 
     idx += ptr.elementAt(idx).cast<DLGTEMPLATE>().setDialog(
@@ -123,5 +123,7 @@ void main() {
 
     expect(idx, equals(dialogGolden.length));
     expect(ptr.cast<Uint16>().asTypedList(idx), equals(dialogGolden));
+
+    free(ptr);
   });
 }

@@ -14,28 +14,28 @@ void main() {
   try {
     final object =
         CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-    final calendar = ICalendar(object.cast());
+    final calendar = ICalendar(object);
 
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');
 
-    final systemPtr = allocate<IntPtr>();
+    final systemPtr = calloc<HSTRING>();
     calendar.GetCalendarSystem(systemPtr);
-    print('The calendar system is ${convertFromHString(systemPtr)}.');
+    print('The calendar system is ${convertFromHString(systemPtr.value)}.');
     WindowsDeleteString(systemPtr.value);
     free(systemPtr);
 
-    final dayPtr = allocate<IntPtr>();
+    final dayPtr = calloc<HSTRING>();
     calendar.DayOfWeekAsFullSoloString(dayPtr);
-    print('Today is ${convertFromHString(dayPtr)}.');
-    WindowsDeleteString(systemPtr.value);
+    print('Today is ${convertFromHString(dayPtr.value)}.');
+    WindowsDeleteString(dayPtr.value);
     free(dayPtr);
 
     free(object);
 
-    if (calendar.IsDaylightSavingTime == 1) {
+    if (calendar.IsDaylightSavingTime) {
       print('Daylight Saving Time is in observance.');
-    } else if (calendar.IsDaylightSavingTime == 0) {
+    } else if (calendar.IsDaylightSavingTime) {
       print('Daylight Savings Time is not in observance.');
     }
   } finally {

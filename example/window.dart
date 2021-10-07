@@ -19,9 +19,9 @@ int enumWindowsProc(int hWnd, int lParam) {
     return TRUE;
   }
 
-  final buffer = allocate<Uint16>(count: length + 1).cast<Utf16>();
+  final buffer = wsalloc(length + 1);
   GetWindowText(hWnd, buffer, length + 1);
-  print('hWnd $hWnd: ${buffer.unpackString(length)}');
+  print('hWnd $hWnd: ${buffer.toDartString()}');
   free(buffer);
 
   return TRUE;

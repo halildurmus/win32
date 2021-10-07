@@ -8,8 +8,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../constants_nodoc.dart';
-import '../structs.dart';
+import '../constants.dart';
+import '../structs.g.dart';
 
 import 'set_string.dart';
 

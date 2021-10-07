@@ -265,7 +265,7 @@ class Level {
 
   // Draw different kinds of info
   void drawSpeed() {
-    de.drawSpeed(((500 - speed) / 2).floor(), width + 1, 12);
+    de.drawSpeed((500 - speed) ~/ 2, width + 1, 12);
   }
 
   void drawScore() {

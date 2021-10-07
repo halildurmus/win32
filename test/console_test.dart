@@ -2,6 +2,7 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -20,29 +21,30 @@ void main() {
   test('GetConsoleScreenBufferInfo', () {
     final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    final bufferInfo = CONSOLE_SCREEN_BUFFER_INFO.allocate();
-    final result =
-        GetConsoleScreenBufferInfo(outputHandle, bufferInfo.addressOf);
+    final bufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
+    final result = GetConsoleScreenBufferInfo(outputHandle, bufferInfo);
 
     // This will not be supported on a non-interactive console; skip the test if
     // so.
     if (result != FALSE) {
-      expect(
-          bufferInfo.dwCursorPositionX, lessThanOrEqualTo(bufferInfo.dwSizeX));
-      expect(
-          bufferInfo.dwCursorPositionY, lessThanOrEqualTo(bufferInfo.dwSizeY));
+      expect(bufferInfo.ref.dwCursorPosition.X,
+          lessThanOrEqualTo(bufferInfo.ref.dwSize.X));
+      expect(bufferInfo.ref.dwCursorPosition.Y,
+          lessThanOrEqualTo(bufferInfo.ref.dwSize.Y));
     }
   });
 
   test('SHGetKnownFolderPath', () {
-    final legacyAPI = getFolderPath();
-    final currentAPI = getKnownFolderPath();
+    final legacyAPI = getDesktopPath1();
+    final win32API = getDesktopPath2();
+    final comAPI = getDesktopPath3();
 
     expect(
-      currentAPI,
+      comAPI,
       allOf(
         [
           equals(legacyAPI),
+          equals(win32API),
           isNot(contains('error')),
         ],
       ),

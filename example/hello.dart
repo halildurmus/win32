@@ -9,8 +9,6 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-final hInstance = GetModuleHandle(nullptr);
-
 int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
@@ -18,18 +16,17 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final hdc = BeginPaint(hWnd, ps.addressOf);
-      final rect = RECT.allocate();
+      final ps = calloc<PAINTSTRUCT>();
+      final hdc = BeginPaint(hWnd, ps);
+      final rect = calloc<RECT>();
       final msg = TEXT('Hello, Dart!');
 
-      GetClientRect(hWnd, rect.addressOf);
-      DrawText(
-          hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-      EndPaint(hWnd, ps.addressOf);
+      GetClientRect(hWnd, rect);
+      DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      EndPaint(hWnd, ps);
 
-      free(ps.addressOf);
-      free(rect.addressOf);
+      free(ps);
+      free(rect);
       free(msg);
 
       return 0;
@@ -37,25 +34,29 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-void main() {
+// An optional approach to launching a GUI app that lets you use a more
+// traditional WinMain entry point, rather than having to manually retrieve the
+// hInstance and nShowCmd parameters.
+void main() => initApp(winMain);
+
+void winMain(int hInstance, List<String> args, int nShowCmd) {
   // Register the window class.
   final className = TEXT('Sample Window Class');
-
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  final wc = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  RegisterClass(wc);
 
   // Create the window.
-
+  final windowCaption = TEXT('Dart Native Win32 window');
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       className, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
+      windowCaption, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -68,20 +69,23 @@ void main() {
       hInstance, // Instance handle
       nullptr // Additional application data
       );
+  free(windowCaption);
+  free(className);
 
   if (hWnd == 0) {
     final error = GetLastError();
     throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
-  ShowWindow(hWnd, SW_SHOWNORMAL);
+  ShowWindow(hWnd, nShowCmd);
   UpdateWindow(hWnd);
 
   // Run the message loop.
-
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
+  final msg = calloc<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != 0) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
   }
+
+  free(msg);
 }

@@ -13,9 +13,9 @@ void main() {
 
   final fviSize = getVersionBlockSize(lpFilename);
 
-  final pBlock = allocate<Uint8>(count: fviSize);
-  final lpFixedFileVersionInfo = allocate<IntPtr>();
-  final uLen = allocate<Uint32>();
+  final pBlock = calloc<BYTE>(fviSize);
+  final lpFixedFileVersionInfo = calloc<Pointer>();
+  final uLen = calloc<UINT>();
   final subBlock = TEXT(r'\');
 
   try {
@@ -30,8 +30,7 @@ void main() {
     }
 
     final fixedFileVersionInfo =
-        Pointer.fromAddress(lpFixedFileVersionInfo.value)
-            .cast<VS_FIXEDFILEINFO>();
+        lpFixedFileVersionInfo.value.cast<VS_FIXEDFILEINFO>();
 
     print('Version of shell32.dll: '
         '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'
@@ -51,7 +50,7 @@ int getVersionBlockSize(Pointer<Utf16> lpFilename) {
   int fviSize;
 
   // dwDummy isn't used; it's a historical vestige.
-  final dwDummy = allocate<Uint32>();
+  final dwDummy = calloc<DWORD>();
 
   try {
     fviSize = GetFileVersionInfoSize(lpFilename, dwDummy);

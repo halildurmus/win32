@@ -12,21 +12,20 @@ import 'package:win32/win32.dart';
 final fontNames = <String>[];
 
 int enumerateFonts(
-    Pointer<LOGFONT> logFontPtr, Pointer<TEXTMETRIC> _, int __, int ___) {
+    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int __, int ___) {
   // Get extended information from the font
-  final logFont = logFontPtr.cast<ENUMLOGFONTEX>().ref;
+  final logFontEx = logFont.cast<ENUMLOGFONTEX>();
 
-  fontNames.add(logFont.elfFullName);
+  fontNames.add(logFontEx.ref.elfFullName);
   return TRUE; // continue enumeration
 }
 
 void main() {
   final hDC = GetDC(NULL);
-  final searchFont = LOGFONT.allocate();
+  final searchFont = calloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
   final callback = Pointer.fromFunction<EnumFontFamExProc>(enumerateFonts, 0);
 
-  searchFont.lfCharSet = ANSI_CHARSET;
-  EnumFontFamiliesEx(hDC, searchFont.addressOf, callback, 0, 0);
+  EnumFontFamiliesEx(hDC, searchFont, callback, 0, 0);
   fontNames.sort();
 
   print('${fontNames.length} font families discovered.');
@@ -34,5 +33,5 @@ void main() {
     print(font);
   }
 
-  free(searchFont.addressOf);
+  free(searchFont);
 }

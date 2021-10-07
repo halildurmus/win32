@@ -4,9 +4,13 @@
 
 // Scratch file for testing various ideas.
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  print(WindowsException(2147549446));
-  print(WindowsException(-2147417850));
+  final sh = calloc<SHITEMID>();
+  sh.ref.cb = 0x0102;
+  print(sh.ref.cb == 0x0102);
 }

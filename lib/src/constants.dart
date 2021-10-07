@@ -6,6 +6,10 @@
 
 // ignore_for_file: camel_case_types
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
 // -----------------------------------------------------------------------------
 // General constants
 // -----------------------------------------------------------------------------
@@ -24,6 +28,15 @@ const STATUS_SUCCESS = 0;
 
 // Path length
 const MAX_PATH = 260;
+
+/// The default locale for the operating system.
+const LOCALE_SYSTEM_DEFAULT = 0x0800;
+
+/// The default locale for the user or process.
+const LOCALE_USER_DEFAULT = 0x0400;
+
+/// All processor groups.
+const ALL_PROCESSOR_GROUPS = 0xFFFF;
 
 // -----------------------------------------------------------------------------
 // COM Error Codes
@@ -72,6 +85,50 @@ const FACILITY_CERT = 11;
 
 /// The source of the error code is Wininet related.
 const FACILITY_INTERNET = 12;
+
+/// The code that creates and manages objects of this class is a DLL that runs
+/// in the same process as the caller of the function specifying the class
+/// context.
+const CLSCTX_INPROC_SERVER = 0x1;
+
+/// The code that manages objects of this class is an in-process handler. This
+/// is a DLL that runs in the client process and implements client-side
+/// structures of this class when instances of the class are accessed remotely.
+const CLSCTX_INPROC_HANDLER = 0x2;
+
+/// The EXE code that creates and manages objects of this class runs on same
+/// machine but is loaded in a separate process space.
+const CLSCTX_LOCAL_SERVER = 0x4;
+
+/// A remote context. The LocalServer32 or LocalService code that creates and
+/// manages objects of this class is run on a different computer.
+const CLSCTX_REMOTE_SERVER = 0x10;
+
+/// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
+/// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
+    CLSCTX_INPROC_HANDLER |
+    CLSCTX_LOCAL_SERVER |
+    CLSCTX_REMOTE_SERVER;
+
+// -----------------------------------------------------------------------------
+// IDispatch constants
+// -----------------------------------------------------------------------------
+
+/// The member is invoked as a method. If a property has the same name, both
+/// this and the DISPATCH_PROPERTYGET flag can be set.
+const DISPATCH_METHOD = 0x1;
+
+/// The member is retrieved as a property or data member.
+const DISPATCH_PROPERTYGET = 0x2;
+
+/// The member is changed as a property or data member.
+const DISPATCH_PROPERTYPUT = 0x4;
+
+/// The member is changed by a reference assignment, rather than a value
+/// assignment. This flag is valid only when the property accepts a reference to
+/// an object.
+const DISPATCH_PROPERTYPUTREF = 0x8;
 
 // -----------------------------------------------------------------------------
 // Error constants
@@ -316,6 +373,493 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 // -----------------------------------------------------------------------------
+// Windows Runtime errors
+// -----------------------------------------------------------------------------
+
+/// Typename or Namespace was not found in metadata file.
+const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
+
+/// Name is an existing namespace rather than a typename.
+const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
+
+/// Typename has an invalid format.
+const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
+
+/// Metadata file is invalid or corrupted.
+const RO_E_INVALID_METADATA_FILE = 0x80000012;
+
+/// The object has been closed.
+const RO_E_CLOSED = 0x80000013;
+
+/// Only one thread may access the object during a write operation.
+const RO_E_EXCLUSIVE_WRITE = 0x80000014;
+
+/// Operation is prohibited during change notification.
+const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
+
+/// The text associated with this error code could not be found.
+const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
+
+// -----------------------------------------------------------------------------
+// Process and file access types
+// -----------------------------------------------------------------------------
+
+/// The right to delete the object.
+const DELETE = 0x00010000;
+
+/// The right to read the information in the object's security descriptor, not
+/// including the information in the system access control list (SACL).
+const READ_CONTROL = 0x00020000;
+
+/// The right to modify the discretionary access control list (DACL) in the
+/// object's security descriptor.
+const WRITE_DAC = 0x00040000;
+
+/// The right to change the owner in the object's security descriptor.
+const WRITE_OWNER = 0x00080000;
+
+/// The right to use the object for synchronization. This enables a thread to
+/// wait until the object is in the signaled state.
+const SYNCHRONIZE = 0x00100000;
+
+/// Combines DELETE, READ_CONTROL, WRITE_DAC, and WRITE_OWNER access.
+const STANDARD_RIGHTS_REQUIRED = 0x000F0000;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_READ = READ_CONTROL;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_WRITE = READ_CONTROL;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
+
+/// Combines DELETE, READ_CONTROL, WRITE_DAC, WRITE_OWNER, and SYNCHRONIZE
+/// access.
+const STANDARD_RIGHTS_ALL = 0x001F0000;
+
+/// Specifies access to the system security portion of the security descriptor.
+const ACCESS_SYSTEM_SECURITY = 0x01000000;
+
+/// Indicates that the caller is requesting the most access possible to the
+/// object.
+const MAXIMUM_ALLOWED = 0x02000000;
+
+/// Specifies access control suitable for reading the object.
+const GENERIC_READ = 0x80000000;
+
+/// Specifies access control suitable for updating attributes on the object.
+const GENERIC_WRITE = 0x40000000;
+
+/// Specifies access control suitable for executing an action on the object.
+const GENERIC_EXECUTE = 0x20000000;
+
+/// Specifies all defined access control on the object.
+const GENERIC_ALL = 0x10000000;
+
+/// Creates a new file, only if it does not already exist.
+const CREATE_NEW = 1;
+
+/// Creates a new file, always.
+const CREATE_ALWAYS = 2;
+
+/// Opens a file or device, only if it exists.
+const OPEN_EXISTING = 3;
+
+/// Opens a file, always.
+const OPEN_ALWAYS = 4;
+
+/// Opens a file and truncates it so that its size is zero bytes, only if it
+/// exists.
+const TRUNCATE_EXISTING = 5;
+
+// -----------------------------------------------------------------------------
+// Access rights for access token objects
+// -----------------------------------------------------------------------------
+
+/// Required to attach a primary token to a process. The
+/// SE_ASSIGNPRIMARYTOKEN_NAME privilege is also required to accomplish this
+/// task.
+const TOKEN_ASSIGN_PRIMARY = 0x0001;
+
+/// Required to duplicate an access token.
+const TOKEN_DUPLICATE = 0x0002;
+
+/// Required to attach an impersonation access token to a process.
+const TOKEN_IMPERSONATE = 0x0004;
+
+/// Required to query an access token.
+const TOKEN_QUERY = 0x0008;
+
+/// Required to query the source of an access token.
+const TOKEN_QUERY_SOURCE = 0x0010;
+
+/// Required to enable or disable the privileges in an access token.
+const TOKEN_ADJUST_PRIVILEGES = 0x0020;
+
+/// Required to adjust the attributes of the groups in an access token.
+const TOKEN_ADJUST_GROUPS = 0x0040;
+
+/// Required to change the default owner, primary group, or DACL of an access
+/// token.
+const TOKEN_ADJUST_DEFAULT = 0x0080;
+
+/// Required to adjust the session ID of an access token. The SE_TCB_NAME
+/// privilege is required.
+const TOKEN_ADJUST_SESSIONID = 0x0100;
+
+/// Combines all possible access rights for a token.
+const TOKEN_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED |
+    TOKEN_ASSIGN_PRIMARY |
+    TOKEN_DUPLICATE |
+    TOKEN_IMPERSONATE |
+    TOKEN_QUERY |
+    TOKEN_QUERY_SOURCE |
+    TOKEN_ADJUST_PRIVILEGES |
+    TOKEN_ADJUST_GROUPS |
+    TOKEN_ADJUST_DEFAULT |
+    TOKEN_ADJUST_SESSIONID;
+
+/// Combines STANDARD_RIGHTS_READ and TOKEN_QUERY.
+const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
+
+/// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
+/// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
+const TOKEN_WRITE = STANDARD_RIGHTS_WRITE |
+    TOKEN_ADJUST_PRIVILEGES |
+    TOKEN_ADJUST_GROUPS |
+    TOKEN_ADJUST_DEFAULT;
+
+/// Same as STANDARD_RIGHTS_EXECUTE.
+const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
+
+// -----------------------------------------------------------------------------
+// Heap allocation flags
+// -----------------------------------------------------------------------------
+
+/// Serialized access will not be used for this allocation.
+const HEAP_NO_SERIALIZE = 0x00000001;
+
+/// The system will raise an exception to indicate a function failure, such as
+/// an out-of-memory condition, instead of returning NULL.
+const HEAP_GENERATE_EXCEPTIONS = 0x00000004;
+
+/// The allocated memory will be initialized to zero. Otherwise, the memory is
+/// not initialized to zero.
+const HEAP_ZERO_MEMORY = 0x00000008;
+
+/// There can be no movement when reallocating a memory block.
+const HEAP_REALLOC_IN_PLACE_ONLY = 0x00000010;
+
+/// All memory blocks that are allocated from this heap allow code execution, if
+/// the hardware enforces data execution prevention.
+const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
+
+// -----------------------------------------------------------------------------
+// Thread execution states
+// -----------------------------------------------------------------------------
+
+/// Forces the system to be in the working state by resetting the system idle
+/// timer.
+const ES_SYSTEM_REQUIRED = 0x00000001;
+
+/// Forces the display to be on by resetting the display idle timer.
+const ES_DISPLAY_REQUIRED = 0x00000002;
+
+/// This value is not supported. If ES_USER_PRESENT is combined with other
+/// esFlags values, the call will fail and none of the specified states will be
+/// set.
+const ES_USER_PRESENT = 0x00000004;
+
+/// Enables away mode. This value must be specified with ES_CONTINUOUS.
+const ES_AWAYMODE_REQUIRED = 0x00000040;
+
+/// Informs the system that the state being set should remain in effect until
+/// the next call that uses ES_CONTINUOUS and one of the other state flags is
+/// cleared.
+const ES_CONTINUOUS = 0x80000000;
+
+/// The thread is still active.
+const STILL_ACTIVE = 259;
+
+// -----------------------------------------------------------------------------
+// Named pipe flags
+// -----------------------------------------------------------------------------
+
+/// The flow of data in the pipe goes from client to server only. This mode
+/// gives the server the equivalent of GENERIC_READ access to the pipe. The
+/// client must specify GENERIC_WRITE access when connecting to the pipe. If the
+/// client must read pipe settings by calling the GetNamedPipeInfo or
+/// GetNamedPipeHandleState functions, the client must specify GENERIC_WRITE and
+/// FILE_READ_ATTRIBUTES access when connecting to the pipe.
+const PIPE_ACCESS_INBOUND = 0x00000001;
+
+/// The flow of data in the pipe goes from server to client only. This mode
+/// gives the server the equivalent of GENERIC_WRITE access to the pipe. The
+/// client must specify GENERIC_READ access when connecting to the pipe. If the
+/// client must change pipe settings by calling the SetNamedPipeHandleState
+/// function, the client must specify GENERIC_READ and FILE_WRITE_ATTRIBUTES
+/// access when connecting to the pipe.
+const PIPE_ACCESS_OUTBOUND = 0x00000002;
+
+/// The pipe is bi-directional; both server and client processes can read from
+/// and write to the pipe. This mode gives the server the equivalent of
+/// GENERIC_READ and GENERIC_WRITE access to the pipe. The client can specify
+/// GENERIC_READ or GENERIC_WRITE, or both, when it connects to the pipe using
+/// the CreateFile function.
+const PIPE_ACCESS_DUPLEX = 0x00000003;
+
+/// The handle refers to the client end of a named pipe instance. This is the
+/// default.
+const PIPE_CLIENT_END = 0x00000000;
+
+/// The handle refers to the server end of a named pipe instance. If this value
+/// is not specified, the handle refers to the client end of a named pipe
+/// instance.
+const PIPE_SERVER_END = 0x00000001;
+
+/// Blocking mode is enabled. When the pipe handle is specified in the ReadFile,
+/// WriteFile, or ConnectNamedPipe function, the operations are not completed
+/// until there is data to read, all data is written, or a client is connected.
+/// Use of this mode can mean waiting indefinitely in some situations for a
+/// client process to perform an action.
+const PIPE_WAIT = 0x00000000;
+
+/// Nonblocking mode is enabled. In this mode, ReadFile, WriteFile, and
+/// ConnectNamedPipe always return immediately.
+const PIPE_NOWAIT = 0x00000001;
+
+/// Data is read from the pipe as a stream of bytes. This mode can be used with
+/// either PIPE_TYPE_MESSAGE or PIPE_TYPE_BYTE.
+const PIPE_READMODE_BYTE = 0x00000000;
+
+/// Data is read from the pipe as a stream of messages. This mode can be only
+/// used if PIPE_TYPE_MESSAGE is also specified.
+const PIPE_READMODE_MESSAGE = 0x00000002;
+
+/// The named pipe is a byte pipe. This is the default.
+const PIPE_TYPE_BYTE = 0x00000000;
+
+/// The named pipe is a message pipe. If this value is not specified, the pipe
+/// is a byte pipe.
+const PIPE_TYPE_MESSAGE = 0x00000004;
+
+/// Connections from remote clients can be accepted and checked against the
+/// security descriptor for the pipe.
+const PIPE_ACCEPT_REMOTE_CLIENTS = 0x00000000;
+
+/// Connections from remote clients are automatically rejected.
+const PIPE_REJECT_REMOTE_CLIENTS = 0x00000008;
+
+/// The number of pipe instances that can be created is limited only by the
+/// availability of system resources.
+const PIPE_UNLIMITED_INSTANCES = 255;
+
+// -----------------------------------------------------------------------------
+// File create flags
+// -----------------------------------------------------------------------------
+
+/// Write operations will not go through any intermediate cache, they will go
+/// directly to disk.
+const FILE_FLAG_WRITE_THROUGH = 0x80000000;
+
+/// The file or device is being opened or created for asynchronous I/O. When
+/// subsequent I/O operations are completed on this handle, the event specified
+/// in the OVERLAPPED structure will be set to the signaled state. If this flag
+/// is specified, the file can be used for simultaneous read and write
+/// operations. If this flag is not specified, then I/O operations are
+/// serialized, even if the calls to the read and write functions specify an
+/// OVERLAPPED structure.
+const FILE_FLAG_OVERLAPPED = 0x40000000;
+
+/// The file or device is being opened with no system caching for data reads and
+/// writes. This flag does not affect hard disk caching or memory mapped files
+const FILE_FLAG_NO_BUFFERING = 0x20000000;
+
+/// Access is intended to be random. The system can use this as a hint to
+/// optimize file caching.
+const FILE_FLAG_RANDOM_ACCESS = 0x10000000;
+
+/// Access is intended to be sequential from beginning to end. The system can
+/// use this as a hint to optimize file caching.
+const FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
+
+/// The file is to be deleted immediately after all of its handles are closed,
+/// which includes the specified handle and any other open or duplicated
+/// handles.
+const FILE_FLAG_DELETE_ON_CLOSE = 0x04000000;
+
+/// The file is being opened or created for a backup or restore operation. The
+/// system ensures that the calling process overrides file security checks when
+/// the process has SE_BACKUP_NAME and SE_RESTORE_NAME privileges.
+const FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
+
+/// Access will occur according to POSIX rules. This includes allowing multiple
+/// files with names, differing only in case, for file systems that support that
+/// naming.
+const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
+
+/// The file or device is being opened with session awareness. If this flag is
+/// not specified, then per-session devices (such as a device using RemoteFX USB
+/// Redirection) cannot be opened by processes running in session 0. This flag
+/// has no effect for callers not in session 0. This flag is supported only on
+/// server editions of Windows.
+const FILE_FLAG_SESSION_AWARE = 0x00800000;
+
+/// Normal reparse point processing will not occur; CreateFile will attempt to
+/// open the reparse point. When a file is opened, a file handle is returned,
+/// whether or not the filter that controls the reparse point is operational.
+const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
+
+/// The file data is requested, but it should continue to be located in remote
+/// storage. It should not be transported back to local storage. This flag is
+/// for use by remote storage systems.
+const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
+
+/// If you attempt to create multiple instances of a pipe with this flag,
+/// creation of the first instance succeeds, but creation of the next instance
+/// fails with ERROR_ACCESS_DENIED.
+const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
+
+// -----------------------------------------------------------------------------
+// Handle flags
+// -----------------------------------------------------------------------------
+
+/// If this flag is set, a child process created with the bInheritHandles
+/// parameter of CreateProcess set to TRUE will inherit the object handle.
+const HANDLE_FLAG_INHERIT = 0x00000001;
+
+/// If this flag is set, calling the CloseHandle function will not close the
+/// object handle.
+const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// Serial port flags
+// -----------------------------------------------------------------------------
+
+/// No parity.
+const NOPARITY = 0;
+
+/// Odd parity.
+const ODDPARITY = 1;
+
+/// Even parity.
+const EVENPARITY = 2;
+
+/// Mark parity.
+const MARKPARITY = 3;
+
+/// Space parity.
+const SPACEPARITY = 4;
+
+/// 1 stop bit.
+const ONESTOPBIT = 0;
+
+/// 1.5 stop bits.
+const ONE5STOPBITS = 1;
+
+/// 2 stop bits.
+const TWOSTOPBITS = 2;
+
+/// 110 bps.
+const CBR_110 = 110;
+
+/// 300 bps.
+const CBR_300 = 300;
+
+/// 600 bps.
+const CBR_600 = 600;
+
+/// 1200 bps.
+const CBR_1200 = 1200;
+
+/// 2400 bps.
+const CBR_2400 = 2400;
+
+/// 4800 bps.
+const CBR_4800 = 4800;
+
+/// 9600 bps.
+const CBR_9600 = 9600;
+
+/// 14400 bps.
+const CBR_14400 = 14400;
+
+/// 19200 bps.
+const CBR_19200 = 19200;
+
+/// 38400 bps.
+const CBR_38400 = 38400;
+
+/// 56000 bps.
+const CBR_56000 = 56000;
+
+/// 57600 bps.
+const CBR_57600 = 57600;
+
+/// 115200 bps.
+const CBR_115200 = 115200;
+
+/// 128000 bps.
+const CBR_128000 = 128000;
+
+/// 256000 bps.
+const CBR_256000 = 256000;
+
+/// Disables the DTR line when the device is opened and leaves it disabled.
+const DTR_CONTROL_DISABLE = 0x00;
+
+/// Enables the DTR line when the device is opened and leaves it on.
+const DTR_CONTROL_ENABLE = 0x01;
+
+/// Enables DTR handshaking. If handshaking is enabled, it is an error for the
+/// application to adjust the line by using the EscapeCommFunction function.
+const DTR_CONTROL_HANDSHAKE = 0x02;
+
+/// Disables the RTS line when the device is opened and leaves it disabled.
+const RTS_CONTROL_DISABLE = 0x00;
+
+/// Enables the RTS line when the device is opened and leaves it on.
+const RTS_CONTROL_ENABLE = 0x01;
+
+/// Enables RTS handshaking. The driver raises the RTS line when the
+/// "type-ahead" (input) buffer is less than one-half full and lowers the RTS
+/// line when the buffer is more than three-quarters full. If handshaking is
+/// enabled, it is an error for the application to adjust the line by using the
+/// EscapeCommFunction function.
+const RTS_CONTROL_HANDSHAKE = 0x02;
+
+/// Specifies that the RTS line will be high if bytes are available for
+/// transmission. After all buffered bytes have been sent, the RTS line will be
+/// low.
+const RTS_CONTROL_TOGGLE = 0x03;
+
+// -----------------------------------------------------------------------------
+// Get Binary Type flags
+// -----------------------------------------------------------------------------
+
+/// A 32-bit Windows-based application
+const SCS_32BIT_BINARY = 0;
+
+/// An MS-DOS – based application
+const SCS_DOS_BINARY = 1;
+
+/// A 16-bit Windows-based application
+const SCS_WOW_BINARY = 2;
+
+/// A PIF file that executes an MS-DOS–based application
+const SCS_PIF_BINARY = 3;
+
+/// A POSIX–based application
+const SCS_POSIX_BINARY = 4;
+
+/// A 16-bit OS/2-based application
+const SCS_OS216_BINARY = 5;
+
+/// A 64-bit Windows-based application.
+const SCS_64BIT_BINARY = 6;
+
+// -----------------------------------------------------------------------------
 // Format message flags
 // -----------------------------------------------------------------------------
 
@@ -355,8 +899,72 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
 // -----------------------------------------------------------------------------
+// StartupInfo flags
+// -----------------------------------------------------------------------------
+
+/// The wShowWindow member contains additional information.
+const STARTF_USESHOWWINDOW = 0x00000001;
+
+/// The dwXSize and dwYSize members contain additional information.
+const STARTF_USESIZE = 0x00000002;
+
+/// The dwX and dwY members contain additional information.
+const STARTF_USEPOSITION = 0x00000004;
+
+/// The dwXCountChars and dwYCountChars members contain additional information.
+const STARTF_USECOUNTCHARS = 0x00000008;
+
+/// The dwFillAttribute member contains additional information.
+const STARTF_USEFILLATTRIBUTE = 0x00000010;
+
+/// Indicates that the process should be run in full-screen mode, rather than in
+/// windowed mode. This flag is only valid for console applications running on
+/// an x86 computer.
+const STARTF_RUNFULLSCREEN = 0x00000020;
+
+/// Indicates that the cursor is in feedback mode for two seconds after
+/// CreateProcess is called. The Working in Background cursor is displayed (see
+/// the Pointers tab in the Mouse control panel utility).
+const STARTF_FORCEONFEEDBACK = 0x00000040;
+
+/// Indicates that the feedback cursor is forced off while the process is
+/// starting. The Normal Select cursor is displayed.
+const STARTF_FORCEOFFFEEDBACK = 0x00000080;
+
+/// The hStdInput, hStdOutput, and hStdError members contain additional
+/// information.
+const STARTF_USESTDHANDLES = 0x00000100;
+
+/// The hStdInput member contains additional information.
+const STARTF_USEHOTKEY = 0x00000200;
+
+/// The lpTitle member contains the path of the shortcut file (.lnk) that the
+/// user invoked to start this process. This is typically set by the shell when
+/// a .lnk file pointing to the launched application is invoked. Most
+/// applications will not need to set this value.
+const STARTF_TITLEISLINKNAME = 0x00000800;
+
+/// The lpTitle member contains an AppUserModelID. This identifier controls how
+/// the taskbar and Start menu present the application, and enables it to be
+/// associated with the correct shortcuts and Jump Lists. Generally,
+/// applications will use the SetCurrentProcessExplicitAppUserModelID and
+/// GetCurrentProcessExplicitAppUserModelID functions instead of setting this
+/// flag.
+const STARTF_TITLEISAPPID = 0x00001000;
+
+/// Indicates that any windows created by the process cannot be pinned on the
+/// taskbar.
+const STARTF_PREVENTPINNING = 0x00002000;
+
+/// The command line came from an untrusted source.
+const STARTF_UNTRUSTEDSOURCE = 0x00008000;
+
+// -----------------------------------------------------------------------------
 // WindowStyle constants
 // -----------------------------------------------------------------------------
+
+/// The window is active.
+const WS_ACTIVECAPTION = 0x0001;
 
 /// The window has a thin-line border.
 const WS_BORDER = 0x00800000;
@@ -1333,6 +1941,32 @@ const WM_XBUTTONDBLCLK = 0x020D;
 /// window that processes it.
 const WM_MOUSEHWHEEL = 0x020E;
 
+/// Notifies applications that a power-management event has occurred.
+const WM_POWERBROADCAST = 0x0218;
+
+/// Sent when the effective dots per inch (dpi) for a window has changed.
+/// Requires Windows 8.1 or above.
+const WM_DPICHANGED = 0x02E0;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs before the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs after the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_AFTERPARENT = 0x02E3;
+
+/// This message tells the operating system that the window will be sized to
+/// dimensions other than the default. Requires Windows 10, version
+/// 1703 or higher.
+const WM_GETDPISCALEDSIZE = 0x02E4;
+
 /// An application sends a WM_CUT message to an edit control or combo box to
 /// delete (cut) the current selection, if any, in the edit control and copy the
 /// deleted text to the clipboard in CF_TEXT format.
@@ -1430,6 +2064,83 @@ const WM_PALETTECHANGED = 0x0311;
 /// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
 
+/// Used to define private messages for use by private window classes, usually
+/// in the form WM_USER+x, where x is an integer value.
+const WM_USER = 0x0400;
+
+// -----------------------------------------------------------------------------
+// Power management events
+// -----------------------------------------------------------------------------
+
+/// Notifies applications that the computer is about to enter a suspended state.
+/// This event is typically broadcast when all applications and installable
+/// drivers have returned TRUE to a previous PBT_APMQUERYSUSPEND event.
+const PBT_APMSUSPEND = 0x0004;
+
+/// Notifies applications that the system has resumed operation after being
+/// suspended.
+const PBT_APMRESUMESUSPEND = 0x0007;
+
+/// Notifies applications that the battery power is low.
+const PBT_APMBATTERYLOW = 0x0009;
+
+/// Notifies applications of a change in the power status of the computer, such
+/// as a switch from battery power to A/C. The system also broadcasts this event
+/// when remaining battery power slips below the threshold specified by the user
+/// or if the battery power changes by a specified percentage.
+const PBT_APMPOWERSTATUSCHANGE = 0x000A;
+
+/// Notifies applications that the system is resuming from sleep or hibernation.
+/// This event is delivered every time the system resumes and does not indicate
+/// whether a user is present.
+const PBT_APMRESUMEAUTOMATIC = 0x0012;
+
+/// Power setting change event sent with a WM_POWERBROADCAST window message or
+/// in a HandlerEx notification callback for services.
+const PBT_POWERSETTINGCHANGE = 0x8013;
+
+// -----------------------------------------------------------------------------
+// Size constants (from WM_SIZE)
+// -----------------------------------------------------------------------------
+
+/// The window has been resized, but neither the SIZE_MINIMIZED nor
+/// SIZE_MAXIMIZED value applies.
+const SIZE_RESTORED = 0;
+
+/// The window has been minimized.
+const SIZE_MINIMIZED = 1;
+
+/// The window has been maximized.
+const SIZE_MAXIMIZED = 2;
+
+/// Message is sent to all pop-up windows when some other window has been
+/// restored to its former size.
+const SIZE_MAXSHOW = 3;
+
+/// Message is sent to all pop-up windows when some other window is maximized.
+const SIZE_MAXHIDE = 4;
+
+// -----------------------------------------------------------------------------
+// Window z-ordering constants
+// -----------------------------------------------------------------------------
+
+/// Places the window at the top of the Z order.
+const HWND_TOP = 0;
+
+/// Places the window at the bottom of the Z order. If the hWnd parameter
+/// identifies a topmost window, the window loses its topmost status and is
+/// placed at the bottom of all other windows.
+const HWND_BOTTOM = 1;
+
+/// Places the window above all non-topmost windows. The window maintains its
+/// topmost position even when it is deactivated.
+const HWND_TOPMOST = -1;
+
+/// Places the window above all non-topmost windows (that is, behind all topmost
+/// windows). This flag has no effect if the window is already a non-topmost
+/// window.
+const HWND_NOTOPMOST = -2;
+
 // -----------------------------------------------------------------------------
 // Queue status flags
 // -----------------------------------------------------------------------------
@@ -1489,6 +2200,272 @@ const QS_ALLINPUT = QS_INPUT |
     QS_PAINT |
     QS_HOTKEY |
     QS_SENDMESSAGE;
+
+// -----------------------------------------------------------------------------
+// Hook constants
+// -----------------------------------------------------------------------------
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar.
+const WH_MSGFILTER = -1;
+
+/// Installs a hook procedure that records input messages posted to the system
+/// message queue.
+const WH_JOURNALRECORD = 0;
+
+/// Installs a hook procedure that posts messages previously recorded by a
+/// WH_JOURNALRECORD hook procedure.
+const WH_JOURNALPLAYBACK = 1;
+
+/// Installs a hook procedure that monitors keystroke messages.
+const WH_KEYBOARD = 2;
+
+/// Installs a hook procedure that monitors messages posted to a message queue.
+const WH_GETMESSAGE = 3;
+
+/// Installs a hook procedure that monitors messages before the system sends
+/// them to the destination window procedure.
+const WH_CALLWNDPROC = 4;
+
+/// Installs a hook procedure that receives notifications useful to a CBT
+/// application.
+const WH_CBT = 5;
+
+/// Installs a hook procedure that monitors messages generated as a result of an
+/// input event in a dialog box, message box, menu, or scroll bar. The hook
+/// procedure monitors these messages for all applications in the same desktop
+/// as the calling thread.
+const WH_SYSMSGFILTER = 6;
+
+/// Installs a hook procedure that monitors mouse messages.
+const WH_MOUSE = 7;
+
+/// Installs a hook procedure useful for debugging other hook procedures.
+const WH_DEBUG = 9;
+
+/// Installs a hook procedure that receives notifications useful to shell
+/// applications.
+const WH_SHELL = 10;
+
+/// Installs a hook procedure that will be called when the application's
+/// foreground thread is about to become idle. This hook is useful for
+/// performing low priority tasks during idle time.
+const WH_FOREGROUNDIDLE = 11;
+
+/// Installs a hook procedure that monitors messages after they have been
+/// processed by the destination window procedure.
+const WH_CALLWNDPROCRET = 12;
+
+/// Installs a hook procedure that monitors low-level keyboard input events.
+const WH_KEYBOARD_LL = 13;
+
+/// Installs a hook procedure that monitors low-level mouse input events.
+const WH_MOUSE_LL = 14;
+
+// -----------------------------------------------------------------------------
+// System colors
+// -----------------------------------------------------------------------------
+
+/// Scroll bar gray area.
+const COLOR_SCROLLBAR = 0;
+
+/// Desktop.
+const COLOR_BACKGROUND = 1;
+
+/// Active window title bar.
+const COLOR_ACTIVECAPTION = 2;
+
+/// Inactive window caption.
+const COLOR_INACTIVECAPTION = 3;
+
+/// Menu background.
+const COLOR_MENU = 4;
+
+/// Window background.
+const COLOR_WINDOW = 5;
+
+/// Window frame.
+const COLOR_WINDOWFRAME = 6;
+
+/// Text in menus.
+const COLOR_MENUTEXT = 7;
+
+/// Text in windows.
+const COLOR_WINDOWTEXT = 8;
+
+/// Text in caption, size box, and scroll bar arrow box.
+const COLOR_CAPTIONTEXT = 9;
+
+/// Active window border.
+const COLOR_ACTIVEBORDER = 10;
+
+/// Inactive window border.
+const COLOR_INACTIVEBORDER = 11;
+
+/// Background color of multiple document interface (MDI) applications.
+const COLOR_APPWORKSPACE = 12;
+
+/// Item(s) selected in a control.
+const COLOR_HIGHLIGHT = 13;
+
+/// Text of item(s) selected in a control.
+const COLOR_HIGHLIGHTTEXT = 14;
+
+/// Face color for three-dimensional display elements and for dialog box
+/// backgrounds.
+const COLOR_BTNFACE = 15;
+
+/// Shadow color for three-dimensional display elements (for edges facing away
+/// from the light source).
+const COLOR_BTNSHADOW = 16;
+
+/// Grayed (disabled) text.
+const COLOR_GRAYTEXT = 17;
+
+/// Text on push buttons.
+const COLOR_BTNTEXT = 18;
+
+/// Color of text in an inactive caption.
+const COLOR_INACTIVECAPTIONTEXT = 19;
+
+/// Highlight color for three-dimensional display elements (for edges facing the
+/// light source.)
+const COLOR_BTNHIGHLIGHT = 20;
+
+// -----------------------------------------------------------------------------
+// GetWindowLong styles
+// -----------------------------------------------------------------------------
+
+/// Gets/sets the extended window styles.
+const GWL_EXSTYLE = -20;
+
+/// Gets/sets a new application instance handle.
+const GWL_HINSTANCE = -6;
+
+/// Gets/sets a new identifier of the child window. The window cannot be a
+/// top-level window.
+const GWL_ID = -12;
+
+/// Gets/sets a new window style.
+const GWL_STYLE = -16;
+
+/// Gets/sets the user data associated with the window. This data is intended
+/// for use by the application that created the window. Its value is initially
+/// zero.
+const GWL_USERDATA = -21;
+
+/// Sets a new address for the window procedure. You cannot change this
+/// attribute if the window does not belong to the same process as the calling
+/// thread.
+const GWL_WNDPROC = -4;
+
+/// Sets a new address for the window procedure.
+const GWLP_WNDPROC = -4;
+
+/// Sets a new application instance handle.
+const GWLP_HINSTANCE = -6;
+
+/// Retrieves a handle to the parent window, if there is one.
+const GWLP_HWNDPARENT = -8;
+
+/// Sets the user data associated with the window. This data is intended for use
+/// by the application that created the window. Its value is initially zero.
+const GWLP_USERDATA = -21;
+
+/// Sets a new identifier of the child window. The window cannot be a top-level
+/// window.
+const GWLP_ID = -12;
+
+// -----------------------------------------------------------------------------
+// Hit testing constants
+// -----------------------------------------------------------------------------
+
+/// On the screen background or on a dividing line between windows (same as
+/// HTNOWHERE, except that the DefWindowProc function produces a system beep to
+/// indicate an error).
+const HTERROR = -2;
+
+/// In a window currently covered by another window in the same thread (the
+/// message will be sent to underlying windows in the same thread until one of
+/// them returns a code that is not HTTRANSPARENT).
+const HTTRANSPARENT = -1;
+
+/// On the screen background or on a dividing line between windows.
+const HTNOWHERE = 0;
+
+/// In a client area.
+const HTCLIENT = 1;
+
+/// In a title bar.
+const HTCAPTION = 2;
+
+/// In a window menu or in a Close button in a child window.
+const HTSYSMENU = 3;
+
+/// In a size box (same as HTSIZE).
+const HTGROWBOX = 4;
+
+/// In a size box (same as HTGROWBOX).
+const HTSIZE = HTGROWBOX;
+
+/// In a menu.
+const HTMENU = 5;
+
+/// In a horizontal scroll bar.
+const HTHSCROLL = 6;
+
+/// In the vertical scroll bar.
+const HTVSCROLL = 7;
+
+/// In a Minimize button.
+const HTMINBUTTON = 8;
+
+/// In a Maximize button.
+const HTMAXBUTTON = 9;
+
+/// In the left border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTLEFT = 10;
+
+/// In the right border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTRIGHT = 11;
+
+/// In the upper-horizontal border of a window.
+const HTTOP = 12;
+
+/// In the upper-left corner of a window border.
+const HTTOPLEFT = 13;
+
+/// In the upper-right corner of a window border.
+const HTTOPRIGHT = 14;
+
+/// In the lower-horizontal border of a resizable window (the user can click the
+/// mouse to resize the window vertically).
+const HTBOTTOM = 15;
+
+/// In the lower-left corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMLEFT = 16;
+
+/// In the lower-right corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMRIGHT = 17;
+
+/// In the border of a window that does not have a sizing border.
+const HTBORDER = 18;
+
+/// In a Minimize button.
+const HTREDUCE = HTMINBUTTON;
+
+/// In a Maximize button.
+const HTZOOM = HTMAXBUTTON;
+
+/// In a Close button.
+const HTCLOSE = 20;
+
+/// In a Help button.
+const HTHELP = 21;
 
 // -----------------------------------------------------------------------------
 // System-wide parameters
@@ -2014,6 +2991,895 @@ const SW_SHOWDEFAULT = 10;
 const SW_FORCEMINIMIZE = 11;
 
 // -----------------------------------------------------------------------------
+// Mapping mode constants
+// -----------------------------------------------------------------------------
+
+/// Each logical unit is mapped to one device pixel. Positive x is to the right;
+/// positive y is down.
+const MM_TEXT = 1;
+
+/// Each logical unit is mapped to 0.1 millimeter. Positive x is to the right;
+/// positive y is up.
+const MM_LOMETRIC = 2;
+
+/// Each logical unit is mapped to 0.01 millimeter. Positive x is to the right;
+/// positive y is up.
+const MM_HIMETRIC = 3;
+
+/// Each logical unit is mapped to 0.01 inch. Positive x is to the right;
+/// positive y is up.
+const MM_LOENGLISH = 4;
+
+/// Each logical unit is mapped to 0.001 inch. Positive x is to the right;
+/// positive y is up.
+const MM_HIENGLISH = 5;
+
+/// Each logical unit is mapped to one twentieth of a printer's point (1/1440
+/// inch, also called a twip). Positive x is to the right; positive y is up.
+const MM_TWIPS = 6;
+
+/// Logical units are mapped to arbitrary units with equally scaled axes; that
+/// is, one unit along the x-axis is equal to one unit along the y-axis. Use the
+/// SetWindowExtEx and SetViewportExtEx functions to specify the units and the
+/// orientation of the axes. Graphics device interface (GDI) makes adjustments
+/// as necessary to ensure the x and y units remain the same size (When the
+/// window extent is set, the viewport will be adjusted to keep the units
+/// isotropic).
+const MM_ISOTROPIC = 7;
+
+/// Logical units are mapped to arbitrary units with arbitrarily scaled axes.
+/// Use the SetWindowExtEx and SetViewportExtEx functions to specify the units,
+/// orientation, and scaling.
+const MM_ANISOTROPIC = 8;
+
+// -----------------------------------------------------------------------------
+// SetWindowPos flags
+// -----------------------------------------------------------------------------
+
+/// Retains the current size (ignores the cx and cy parameters).
+const SWP_NOSIZE = 0x0001;
+
+/// Retains the current position (ignores X and Y parameters).
+const SWP_NOMOVE = 0x0002;
+
+/// Retains the current Z order (ignores the hWndInsertAfter parameter).
+const SWP_NOZORDER = 0x0004;
+
+/// Does not redraw changes. If this flag is set, no repainting of any kind
+/// occurs. This applies to the client area, the nonclient area (including the
+/// title bar and scroll bars), and any part of the parent window uncovered as a
+/// result of the window being moved. When this flag is set, the application
+/// must explicitly invalidate or redraw any parts of the window and parent
+/// window that need redrawing.
+const SWP_NOREDRAW = 0x0008;
+
+/// Does not activate the window. If this flag is not set, the window is
+/// activated and moved to the top of either the topmost or non-topmost group
+/// (depending on the setting of the hWndInsertAfter parameter).
+const SWP_NOACTIVATE = 0x0010;
+
+/// Applies new frame styles set using the SetWindowLong function. Sends a
+/// WM_NCCALCSIZE message to the window, even if the window's size is not being
+/// changed. If this flag is not specified, WM_NCCALCSIZE is sent only when the
+/// window's size is being changed.
+const SWP_FRAMECHANGED = 0x0020;
+
+/// Displays the window.
+const SWP_SHOWWINDOW = 0x0040;
+
+/// Hides the window.
+const SWP_HIDEWINDOW = 0x0080;
+
+/// Discards the entire contents of the client area. If this flag is not
+/// specified, the valid contents of the client area are saved and copied back
+/// into the client area after the window is sized or repositioned.
+const SWP_NOCOPYBITS = 0x0100;
+
+/// Does not change the owner window's position in the Z order.
+const SWP_NOOWNERZORDER = 0x0200;
+
+/// Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
+const SWP_NOSENDCHANGING = 0x0400;
+
+/// Draws a frame (defined in the window's class description) around the window.
+const SWP_DRAWFRAME = SWP_FRAMECHANGED;
+
+/// Same as the SWP_NOOWNERZORDER flag.
+const SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+
+/// Prevents generation of the WM_SYNCPAINT message.
+const SWP_DEFERERASE = 0x2000;
+
+/// If the calling thread and the thread that owns the window are attached to
+/// different input queues, the system posts the request to the thread that owns
+/// the window. This prevents the calling thread from blocking its execution
+/// while other threads process the request.
+const SWP_ASYNCWINDOWPOS = 0x4000;
+
+// -----------------------------------------------------------------------------
+// Animate Window constants
+// -----------------------------------------------------------------------------
+
+/// Animates the window from left to right. This flag can be used with roll or
+/// slide animation.
+const AW_HOR_POSITIVE = 0x00000001;
+
+/// Animates the window from right to left. This flag can be used with roll or
+/// slide animation
+const AW_HOR_NEGATIVE = 0x00000002;
+
+/// Animates the window from top to bottom. This flag can be used with roll or
+/// slide animation.
+const AW_VER_POSITIVE = 0x00000004;
+
+/// Animates the window from bottom to top. This flag can be used with roll or
+/// slide animation.
+const AW_VER_NEGATIVE = 0x00000008;
+
+/// Makes the window appear to collapse inward if AW_HIDE is used or expand
+/// outward if the AW_HIDE is not used. The various direction flags have no
+/// effect.
+const AW_CENTER = 0x00000010;
+
+/// Hides the window. By default, the window is shown.
+const AW_HIDE = 0x00010000;
+
+/// Activates the window.
+const AW_ACTIVATE = 0x00020000;
+
+/// Uses slide animation. By default, roll animation is used.
+const AW_SLIDE = 0x00040000;
+
+/// Uses a fade effect.
+const AW_BLEND = 0x00080000;
+
+// -----------------------------------------------------------------------------
+// System Command messages
+// -----------------------------------------------------------------------------
+
+/// Sizes the window.
+const SC_SIZE = 0xF000;
+
+/// Moves the window.
+const SC_MOVE = 0xF010;
+
+/// Minimizes the window.
+const SC_MINIMIZE = 0xF020;
+
+/// Maximizes the window.
+const SC_MAXIMIZE = 0xF030;
+
+/// Moves to the next window.
+const SC_NEXTWINDOW = 0xF040;
+
+/// Moves to the previous window.
+const SC_PREVWINDOW = 0xF050;
+
+/// Closes the window.
+const SC_CLOSE = 0xF060;
+
+/// Scrolls vertically.
+const SC_VSCROLL = 0xF070;
+
+/// Scrolls horizontally.
+const SC_HSCROLL = 0xF080;
+
+/// Retrieves the window menu as a result of a mouse click.
+const SC_MOUSEMENU = 0xF090;
+
+/// Retrieves the window menu as a result of a keystroke.
+const SC_KEYMENU = 0xF100;
+
+/// Restores the window to its normal position and size.
+const SC_RESTORE = 0xF120;
+
+/// Activates the Start menu.
+const SC_TASKLIST = 0xF130;
+
+/// Executes the screen saver application.
+const SC_SCREENSAVE = 0xF140;
+
+/// Activates the window associated with the application-specified hot key. The
+/// lParam parameter identifies the window to activate.
+const SC_HOTKEY = 0xF150;
+
+/// Selects the default item; the user double-clicked the window menu.
+const SC_DEFAULT = 0xF160;
+
+/// Sets the state of the display. This command supports devices that have
+/// power-saving features, such as a battery-powered personal computer.
+const SC_MONITORPOWER = 0xF170;
+
+/// Changes the cursor to a question mark with a pointer. If the user then
+/// clicks a control in the dialog box, the control receives a WM_HELP message.
+const SC_CONTEXTHELP = 0xF180;
+
+/// Indicates whether the screen saver is secure.
+const SCF_ISSECURE = 0x00000001;
+
+// -----------------------------------------------------------------------------
+// System Metrics constants
+// -----------------------------------------------------------------------------
+
+/// The width of the screen of the primary display monitor, in pixels.
+const SM_CXSCREEN = 0;
+
+/// The height of the screen of the primary display monitor, in pixels.
+const SM_CYSCREEN = 1;
+
+/// The width of a vertical scroll bar, in pixels.
+const SM_CXVSCROLL = 2;
+
+/// The height of a horizontal scroll bar, in pixels.
+const SM_CYHSCROLL = 3;
+
+/// The height of a caption area, in pixels.
+const SM_CYCAPTION = 4;
+
+/// The width of a window border, in pixels.
+const SM_CXBORDER = 5;
+
+/// The height of a window border, in pixels.
+const SM_CYBORDER = 6;
+
+/// This value is the same as SM_CXFIXEDFRAME.
+const SM_CXDLGFRAME = 7;
+
+/// This value is the same as SM_CYFIXEDFRAME.
+const SM_CYDLGFRAME = 8;
+
+/// The height of the thumb box in a vertical scroll bar, in pixels.
+const SM_CYVTHUMB = 9;
+
+/// The width of the thumb box in a horizontal scroll bar, in pixels.
+const SM_CXHTHUMB = 10;
+
+/// The default width of an icon, in pixels.
+const SM_CXICON = 11;
+
+/// The default height of an icon, in pixels.
+const SM_CYICON = 12;
+
+/// The width of a cursor, in pixels.
+const SM_CXCURSOR = 13;
+
+/// The height of a cursor, in pixels.
+const SM_CYCURSOR = 14;
+
+/// The height of a single-line menu bar, in pixels.
+const SM_CYMENU = 15;
+
+/// The width of the client area for a full-screen window on the primary display
+/// monitor, in pixels.
+const SM_CXFULLSCREEN = 16;
+
+/// The height of the client area for a full-screen window on the primary
+/// display monitor, in pixels.
+const SM_CYFULLSCREEN = 17;
+
+/// For double byte character set versions of the system, this is the height of
+/// the Kanji window at the bottom of the screen, in pixels.
+const SM_CYKANJIWINDOW = 18;
+
+/// Nonzero if a mouse is installed; otherwise, 0. This value is rarely zero,
+/// because of support for virtual mice and because some systems detect the
+/// presence of the port instead of the presence of a mouse.
+const SM_MOUSEPRESENT = 19;
+
+/// The height of the arrow bitmap on a vertical scroll bar, in pixels.
+const SM_CYVSCROLL = 20;
+
+/// The width of the arrow bitmap on a horizontal scroll bar, in pixels.
+const SM_CXHSCROLL = 21;
+
+/// Nonzero if the debug version of User.exe is installed; otherwise, 0.
+const SM_DEBUG = 22;
+
+/// Nonzero if the meanings of the left and right mouse buttons are swapped;
+/// otherwise, 0.
+const SM_SWAPBUTTON = 23;
+
+/// The minimum width of a window, in pixels.
+const SM_CXMIN = 28;
+
+/// The minimum height of a window, in pixels.
+const SM_CYMIN = 29;
+
+/// The width of a button in a window caption or title bar, in pixels.
+const SM_CXSIZE = 30;
+
+/// The height of a button in a window caption or title bar, in pixels.
+const SM_CYSIZE = 31;
+
+/// This value is the same as SM_CXSIZEFRAME.
+const SM_CXFRAME = 32;
+
+/// This value is the same as SM_CYSIZEFRAME.
+const SM_CYFRAME = 33;
+
+/// The minimum tracking width of a window, in pixels. The user cannot drag the
+/// window frame to a size smaller than these dimensions.
+const SM_CXMINTRACK = 34;
+
+/// The minimum tracking height of a window, in pixels. The user cannot drag the
+/// window frame to a size smaller than these dimensions.
+const SM_CYMINTRACK = 35;
+
+/// The width of the rectangle around the location of a first click in a
+/// double-click sequence, in pixels. The second click must occur within the
+/// rectangle that is defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the
+/// system to consider the two clicks a double-click.
+const SM_CXDOUBLECLK = 36;
+
+/// The height of the rectangle around the location of a first click in a
+/// double-click sequence, in pixels. The second click must occur within the
+/// rectangle defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the system to
+/// consider the two clicks a double-click. The two clicks must also occur
+/// within a specified time.
+const SM_CYDOUBLECLK = 37;
+
+/// The width of a grid cell for items in large icon view, in pixels. Each item
+/// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
+/// arranged. This value is always greater than or equal to SM_CXICON.
+const SM_CXICONSPACING = 38;
+
+/// The height of a grid cell for items in large icon view, in pixels. Each item
+/// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
+/// arranged. This value is always greater than or equal to SM_CYICON.
+const SM_CYICONSPACING = 39;
+
+/// Nonzero if drop-down menus are right-aligned with the corresponding menu-bar
+/// item; 0 if the menus are left-aligned.
+const SM_MENUDROPALIGNMENT = 40;
+
+/// Nonzero if the Microsoft Windows for Pen computing extensions are installed;
+/// zero otherwise.
+const SM_PENWINDOWS = 41;
+
+/// Nonzero if User32.dll supports DBCS; otherwise, 0.
+const SM_DBCSENABLED = 42;
+
+/// The number of buttons on a mouse, or zero if no mouse is installed.
+const SM_CMOUSEBUTTONS = 43;
+
+/// The thickness of the frame around the perimeter of a window that has a
+/// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
+/// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
+const SM_CXFIXEDFRAME = SM_CXDLGFRAME;
+
+/// The thickness of the frame around the perimeter of a window that has a
+/// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
+/// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
+const SM_CYFIXEDFRAME = SM_CYDLGFRAME;
+
+/// The thickness of the sizing border around the perimeter of a window that can
+/// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
+/// and SM_CYSIZEFRAME is the height of the vertical border.
+const SM_CXSIZEFRAME = SM_CXFRAME;
+
+/// The thickness of the sizing border around the perimeter of a window that can
+/// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
+/// and SM_CYSIZEFRAME is the height of the vertical border.
+const SM_CYSIZEFRAME = SM_CYFRAME;
+
+/// This system metric should be ignored; it always returns 0.
+const SM_SECURE = 44;
+
+/// The width of a 3-D border, in pixels.
+const SM_CXEDGE = 45;
+
+/// The height of a 3-D border, in pixels.
+const SM_CYEDGE = 46;
+
+/// The width of a grid cell for a minimized window, in pixels. Each minimized
+/// window fits into a rectangle this size when arranged. This value is always
+/// greater than or equal to SM_CXMINIMIZED.
+const SM_CXMINSPACING = 47;
+
+/// The height of a grid cell for a minimized window, in pixels. Each minimized
+/// window fits into a rectangle this size when arranged. This value is always
+/// greater than or equal to SM_CYMINIMIZED.
+const SM_CYMINSPACING = 48;
+
+/// The recommended width of a small icon, in pixels. Small icons typically
+/// appear in window captions and in small icon view.
+const SM_CXSMICON = 49;
+
+/// The recommended height of a small icon, in pixels. Small icons typically
+/// appear in window captions and in small icon view.
+const SM_CYSMICON = 50;
+
+/// The height of a small caption, in pixels.
+const SM_CYSMCAPTION = 51;
+
+/// The width of small caption buttons, in pixels.
+const SM_CXSMSIZE = 52;
+
+/// The height of small caption buttons, in pixels.
+const SM_CYSMSIZE = 53;
+
+/// The width of menu bar buttons, such as the child window close button that is
+/// used in the multiple document interface, in pixels.
+const SM_CXMENUSIZE = 54;
+
+/// The height of menu bar buttons, such as the child window close button that
+/// is used in the multiple document interface, in pixels.
+const SM_CYMENUSIZE = 55;
+
+/// The flags that specify how the system arranged minimized windows.
+const SM_ARRANGE = 56;
+
+/// The width of a minimized window, in pixels.
+const SM_CXMINIMIZED = 57;
+
+/// The height of a minimized window, in pixels.
+const SM_CYMINIMIZED = 58;
+
+/// The default maximum width of a window that has a caption and sizing borders,
+/// in pixels. This metric refers to the entire desktop. The user cannot drag
+/// the window frame to a size larger than these dimensions.
+const SM_CXMAXTRACK = 59;
+
+/// The default maximum height of a window that has a caption and sizing
+/// borders, in pixels. This metric refers to the entire desktop. The user
+/// cannot drag the window frame to a size larger than these dimensions.
+const SM_CYMAXTRACK = 60;
+
+/// The default width, in pixels, of a maximized top-level window on the primary
+/// display monitor.
+const SM_CXMAXIMIZED = 61;
+
+/// The default height, in pixels, of a maximized top-level window on the
+/// primary display monitor.
+const SM_CYMAXIMIZED = 62;
+
+/// The least significant bit is set if a network is present; otherwise, it is
+/// cleared.
+const SM_NETWORK = 63;
+
+/// The value that specifies how the system is started.
+const SM_CLEANBOOT = 67;
+
+/// The number of pixels on either side of a mouse-down point that the mouse
+/// pointer can move before a drag operation begins. This allows the user to
+/// click and release the mouse button easily without unintentionally starting a
+/// drag operation. If this value is negative, it is subtracted from the left of
+/// the mouse-down point and added to the right of it.
+const SM_CXDRAG = 68;
+
+/// The number of pixels above and below a mouse-down point that the mouse
+/// pointer can move before a drag operation begins. This allows the user to
+/// click and release the mouse button easily without unintentionally starting a
+/// drag operation. If this value is negative, it is subtracted from above the
+/// mouse-down point and added below it.
+const SM_CYDRAG = 69;
+
+/// Nonzero if the user requires an application to present information visually
+/// in situations where it would otherwise present the information only in
+/// audible form; otherwise, 0.
+const SM_SHOWSOUNDS = 70;
+
+/// The width of the default menu check-mark bitmap, in pixels.
+const SM_CXMENUCHECK = 71;
+
+/// The height of the default menu check-mark bitmap, in pixels.
+const SM_CYMENUCHECK = 72;
+
+/// Nonzero if the computer has a low-end (slow) processor; otherwise, 0.
+const SM_SLOWMACHINE = 73;
+
+/// Nonzero if the system is enabled for Hebrew and Arabic languages, 0 if not.
+const SM_MIDEASTENABLED = 74;
+
+/// Nonzero if a mouse with a vertical scroll wheel is installed; otherwise 0.
+const SM_MOUSEWHEELPRESENT = 75;
+
+/// The coordinates for the left side of the virtual screen. The virtual screen
+/// is the bounding rectangle of all display monitors. The SM_CXVIRTUALSCREEN
+/// metric is the width of the virtual screen.
+const SM_XVIRTUALSCREEN = 76;
+
+/// The coordinates for the top of the virtual screen. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_CYVIRTUALSCREEN metric is
+/// the height of the virtual screen.
+const SM_YVIRTUALSCREEN = 77;
+
+/// The width of the virtual screen, in pixels. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_XVIRTUALSCREEN metric is
+/// the coordinates for the left side of the virtual screen.
+const SM_CXVIRTUALSCREEN = 78;
+
+/// The height of the virtual screen, in pixels. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_YVIRTUALSCREEN metric is
+/// the coordinates for the top of the virtual screen.
+const SM_CYVIRTUALSCREEN = 79;
+
+/// The number of display monitors on a desktop.
+const SM_CMONITORS = 80;
+
+/// Nonzero if all the display monitors have the same color format, otherwise,
+/// 0. Two displays can have the same bit depth, but different color formats.
+/// For example, the red, green, and blue pixels can be encoded with different
+/// numbers of bits, or those bits can be located in different places in a pixel
+/// color value.
+const SM_SAMEDISPLAYFORMAT = 81;
+
+/// Nonzero if Input Method Manager/Input Method Editor features are enabled;
+/// otherwise, 0.
+const SM_IMMENABLED = 82;
+
+/// The width of the left and right edges of the focus rectangle that the
+/// DrawFocusRect draws. This value is in pixels.
+const SM_CXFOCUSBORDER = 83;
+
+/// The height of the top and bottom edges of the focus rectangle drawn by
+/// DrawFocusRect. This value is in pixels.
+const SM_CYFOCUSBORDER = 84;
+
+/// Nonzero if the current operating system is the Windows XP Tablet PC edition
+/// or if the current operating system is Windows Vista or Windows 7 and the
+/// Tablet PC Input service is started; otherwise, 0.
+const SM_TABLETPC = 86;
+
+/// Nonzero if the current operating system is the Windows XP, Media Center
+/// Edition, 0 if not.
+const SM_MEDIACENTER = 87;
+
+/// Nonzero if the current operating system is Windows 7 Starter Edition,
+/// Windows Vista Starter, or Windows XP Starter Edition; otherwise, 0.
+const SM_STARTER = 88;
+
+/// The build number if the system is Windows Server 2003 R2; otherwise, 0.
+const SM_SERVERR2 = 89;
+
+/// Nonzero if a mouse with a horizontal scroll wheel is installed; otherwise 0.
+const SM_MOUSEHORIZONTALWHEELPRESENT = 91;
+
+/// The amount of border padding for captioned windows, in pixels.
+const SM_CXPADDEDBORDER = 92;
+
+/// Nonzero if the current operating system is Windows 7 or Windows Server 2008
+/// R2 and the Tablet PC Input service is started; otherwise, 0. The return
+/// value is a bitmask that specifies the type of digitizer input supported by
+/// the device.
+const SM_DIGITIZER = 94;
+
+/// Nonzero if there are digitizers in the system; otherwise, 0.
+/// SM_MAXIMUMTOUCHES returns the aggregate maximum of the maximum number of
+/// contacts supported by every digitizer in the system. If the system has only
+/// single-touch digitizers, the return value is 1. If the system has
+/// multi-touch digitizers, the return value is the number of simultaneous
+/// contacts the hardware can provide.
+const SM_MAXIMUMTOUCHES = 95;
+
+/// This system metric is used in a Terminal Services environment. If the
+/// calling process is associated with a Terminal Services client session, the
+/// return value is nonzero. If the calling process is associated with the
+/// Terminal Services console session, the return value is 0
+const SM_REMOTESESSION = 0x1000;
+
+/// Nonzero if the current session is shutting down; otherwise, 0.
+const SM_SHUTTINGDOWN = 0x2000;
+
+/// This system metric is used in a Terminal Services environment to determine
+/// if the current Terminal Server session is being remotely controlled. Its
+/// value is nonzero if the current session is remotely controlled; otherwise,
+/// 0.
+const SM_REMOTECONTROL = 0x2001;
+
+/// Reflects the state of the laptop or slate mode, 0 for Slate Mode and
+/// non-zero otherwise.
+const SM_CONVERTIBLESLATEMODE = 0x2003;
+
+/// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
+/// otherwise.
+const SM_SYSTEMDOCKED = 0x2004;
+
+// -----------------------------------------------------------------------------
+// Scrollbar constants
+// -----------------------------------------------------------------------------
+
+/// Apply to the window's standard horizontal scroll bar.
+const SB_HORZ = 0;
+
+/// Apply to the window's standard vertical scroll bar.
+const SB_VERT = 1;
+
+/// Apply to a scroll bar control.
+const SB_CTL = 2;
+
+/// Apply to the window's standard horizontal and vertical scroll bars.
+const SB_BOTH = 3;
+
+/// Scrolls one line up.
+const SB_LINEUP = 0;
+
+/// Scrolls left by one unit.
+const SB_LINELEFT = 0;
+
+/// Scrolls one line down.
+const SB_LINEDOWN = 1;
+
+/// Scrolls right by one unit.
+const SB_LINERIGHT = 1;
+
+/// Scrolls one page up.
+const SB_PAGEUP = 2;
+
+/// Scrolls left by the width of the window.
+const SB_PAGELEFT = 2;
+
+/// Scrolls one page down.
+const SB_PAGEDOWN = 3;
+
+/// Scrolls right by the width of the window.
+const SB_PAGERIGHT = 3;
+
+/// The user has dragged the scroll box (thumb) and released the mouse button.
+const SB_THUMBPOSITION = 4;
+
+/// The user is dragging the scroll box. This message is sent repeatedly until
+/// the user releases the mouse button.
+const SB_THUMBTRACK = 5;
+
+/// Scrolls to the upper left.
+const SB_TOP = 6;
+
+/// Scrolls to the upper left.
+const SB_LEFT = 6;
+
+/// Scrolls to the lower right.
+const SB_BOTTOM = 7;
+
+/// Scrolls to the lower right.
+const SB_RIGHT = 7;
+
+/// Ends scroll.
+const SB_ENDSCROLL = 8;
+
+// -----------------------------------------------------------------------------
+// Up/Down Control styles
+// -----------------------------------------------------------------------------
+
+/// Causes the position to "wrap" if it is incremented or decremented beyond the
+/// ending or beginning of the range.
+const UDS_WRAP = 0x0001;
+
+/// Causes the up-down control to set the text of the buddy window (using the
+/// WM_SETTEXT message) when the position changes. The text consists of the
+/// position formatted as a decimal or hexadecimal string.
+const UDS_SETBUDDYINT = 0x0002;
+
+/// Positions the up-down control next to the right edge of the buddy window.
+/// The width of the buddy window is decreased to accommodate the width of the
+/// up-down control.
+const UDS_ALIGNRIGHT = 0x0004;
+
+/// Positions the up-down control next to the left edge of the buddy window. The
+/// buddy window is moved to the right, and its width is decreased to
+/// accommodate the width of the up-down control.
+const UDS_ALIGNLEFT = 0x0008;
+
+/// Automatically selects the previous window in the z-order as the up-down
+/// control's buddy window.
+const UDS_AUTOBUDDY = 0x0010;
+
+/// Causes the up-down control to increment and decrement the position when the
+/// UP ARROW and DOWN ARROW keys are pressed.
+const UDS_ARROWKEYS = 0x0020;
+
+/// Causes the up-down control's arrows to point left and right instead of up
+/// and down.
+const UDS_HORZ = 0x0040;
+
+/// Does not insert a thousands separator between every three decimal digits.
+const UDS_NOTHOUSANDS = 0x0080;
+
+/// Causes the control to exhibit "hot tracking" behavior. That is, it
+/// highlights the UP ARROW and DOWN ARROW on the control as the pointer passes
+/// over them.
+const UDS_HOTTRACK = 0x0100;
+
+// -----------------------------------------------------------------------------
+// Progress Bar styles
+// -----------------------------------------------------------------------------
+
+/// The progress bar displays progress status in a smooth scrolling bar instead
+/// of the default segmented bar.
+const PBS_SMOOTH = 0x01;
+
+/// The progress bar displays progress status vertically, from bottom to top.
+const PBS_VERTICAL = 0x04;
+
+/// Sets the minimum and maximum values for a progress bar and redraws the bar
+/// to reflect the new range.
+const PBM_SETRANGE = WM_USER + 1;
+
+/// Sets the current position for a progress bar and redraws the bar to reflect
+/// the new position.
+const PBM_SETPOS = WM_USER + 2;
+
+/// Advances the current position of a progress bar by a specified increment and
+/// redraws the bar to reflect the new position.
+const PBM_DELTAPOS = WM_USER + 3;
+
+/// Specifies the step increment for a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_SETSTEP = WM_USER + 4;
+
+/// Advances the current position for a progress bar by the step increment and
+/// redraws the bar to reflect the new position. An application sets the step
+/// increment by sending the PBM_SETSTEP message.
+const PBM_STEPIT = WM_USER + 5;
+
+/// Sets the minimum and maximum values for a progress bar to 32-bit values, and
+/// redraws the bar to reflect the new range
+const PBM_SETRANGE32 = WM_USER + 6;
+
+/// Retrieves information about the current high and low limits of a given
+/// progress bar control.
+const PBM_GETRANGE = WM_USER + 7;
+
+/// Retrieves the current position of the progress bar.
+const PBM_GETPOS = WM_USER + 8;
+
+/// Sets the color of the progress indicator bar in the progress bar control.
+const PBM_SETBARCOLOR = WM_USER + 9;
+
+/// Sets the background color in the progress bar.
+const PBM_SETBKCOLOR = 0x2001;
+
+/// The progress indicator does not grow in size but instead moves repeatedly
+/// along the length of the bar, indicating activity without specifying what
+/// proportion of the progress is complete.
+const PBS_MARQUEE = 0x08;
+
+/// Sets the progress bar to marquee mode. This causes the progress bar to move
+/// like a marquee.
+const PBM_SETMARQUEE = WM_USER + 10;
+
+/// Determines the animation behavior that the progress bar should use when
+/// moving backward (from a higher value to a lower value). If this is set, then
+/// a "smooth" transition will occur, otherwise the control will "jump" to the
+/// lower value.
+const PBS_SMOOTHREVERSE = 0x10;
+
+/// Retrieves the step increment from a progress bar. The step increment is the
+/// amount by which the progress bar increases its current position whenever it
+/// receives a PBM_STEPIT message. By default, the step increment is set to 10.
+const PBM_GETSTEP = WM_USER + 13;
+
+/// Gets the background color of the progress bar.
+const PBM_GETBKCOLOR = WM_USER + 14;
+
+/// Gets the color of the progress bar.
+const PBM_GETBARCOLOR = WM_USER + 15;
+
+/// Sets the state of the progress bar.
+const PBM_SETSTATE = WM_USER + 16;
+
+/// Gets the state of the progress bar.
+const PBM_GETSTATE = WM_USER + 17;
+
+/// In progress.
+const PBST_NORMAL = 0x0001;
+
+/// Error.
+const PBST_ERROR = 0x0002;
+
+/// Paused.
+const PBST_PAUSED = 0x0003;
+
+// -----------------------------------------------------------------------------
+// Clipboard Format constants
+// -----------------------------------------------------------------------------
+
+/// Text format. Each line ends with a carriage return/linefeed (CR-LF)
+/// combination. A null character signals the end of the data. Use this format
+/// for ANSI text.
+const CF_TEXT = 1;
+
+/// A handle to a bitmap (HBITMAP).
+const CF_BITMAP = 2;
+
+/// Handle to a metafile picture format as defined by the METAFILEPICT
+/// structure. When passing a CF_METAFILEPICT handle by means of DDE, the
+/// application responsible for deleting hMem should also free the metafile
+/// referred to by the CF_METAFILEPICT handle.
+const CF_METAFILEPICT = 3;
+
+/// Microsoft Symbolic Link (SYLK) format.
+const CF_SYLK = 4;
+
+/// Software Arts' Data Interchange Format.
+const CF_DIF = 5;
+
+// Tagged-image file format.
+const CF_TIFF = 6;
+
+/// Text format containing characters in the OEM character set. Each line ends
+/// with a carriage return/linefeed (CR-LF) combination. A null character
+/// signals the end of the data.
+const CF_OEMTEXT = 7;
+
+/// A memory object containing a BITMAPINFO structure followed by the bitmap
+/// bits.
+const CF_DIB = 8;
+
+/// Handle to a color palette. Whenever an application places data in the
+/// clipboard that depends on or assumes a color palette, it should place the
+/// palette on the clipboard as well.
+const CF_PALETTE = 9;
+
+/// Data for the pen extensions to the Microsoft Windows for Pen Computing.
+const CF_PENDATA = 10;
+
+/// Represents audio data more complex than can be represented in a CF_WAVE
+/// standard wave format.
+const CF_RIFF = 11;
+
+/// Represents audio data in one of the standard wave formats, such as 11 kHz or
+/// 22 kHz PCM.
+const CF_WAVE = 12;
+
+/// Unicode text format. Each line ends with a carriage return/linefeed (CR-LF)
+/// combination. A null character signals the end of the data.
+const CF_UNICODETEXT = 13;
+
+/// A handle to an enhanced metafile (HENHMETAFILE).
+const CF_ENHMETAFILE = 14;
+
+/// A handle to type HDROP that identifies a list of files. An application can
+/// retrieve information about the files by passing the handle to the
+/// DragQueryFile function.
+const CF_HDROP = 15;
+
+/// The data is a handle (HGLOBAL) to the locale identifier (LCID) associated
+/// with text in the clipboard. When you close the clipboard, if it contains
+/// CF_TEXT data but no CF_LOCALE data, the system automatically sets the
+/// CF_LOCALE format to the current input language. You can use the CF_LOCALE
+/// format to associate a different locale with the clipboard text.
+const CF_LOCALE = 16;
+
+/// A memory object containing a BITMAPV5HEADER structure followed by the bitmap
+/// color space information and the bitmap bits.
+const CF_DIBV5 = 17;
+
+/// Owner-display format. The clipboard owner must display and update the
+/// clipboard viewer window, and receive the WM_ASKCBFORMATNAME,
+/// WM_HSCROLLCLIPBOARD, WM_PAINTCLIPBOARD, WM_SIZECLIPBOARD, and
+/// WM_VSCROLLCLIPBOARD messages.
+const CF_OWNERDISPLAY = 0x0080;
+
+/// Text display format associated with a private format.
+const CF_DSPTEXT = 0x0081;
+
+/// Bitmap display format associated with a private format.
+const CF_DSPBITMAP = 0x0082;
+
+/// Metafile-picture display format associated with a private format.
+const CF_DSPMETAFILEPICT = 0x0083;
+
+/// Enhanced metafile display format associated with a private format.
+const CF_DSPENHMETAFILE = 0x008E;
+
+/// Start of a range of integer values for private clipboard formats. The range
+/// ends with CF_PRIVATELAST.
+const CF_PRIVATEFIRST = 0x0200;
+
+/// End of a range of integer values for private clipboard formats.
+const CF_PRIVATELAST = 0x02FF;
+
+/// Start of a range of integer values for application-defined GDI object
+/// clipboard formats. The range ends with CF_GDIOBJLAST.
+const CF_GDIOBJFIRST = 0x0300;
+
+/// End of a range of integer values for application-defined GDI object
+/// clipboard formats.
+const CF_GDIOBJLAST = 0x03FF;
+
+// -----------------------------------------------------------------------------
 // Edit Control constants
 // -----------------------------------------------------------------------------
 
@@ -2381,6 +4247,139 @@ const EM_GETIMESTATUS = 0x00D9;
 const EM_ENABLEFEATURE = 0x00DA;
 
 // -----------------------------------------------------------------------------
+// Button Style constants
+// -----------------------------------------------------------------------------
+
+/// Creates a push button that posts a WM_COMMAND message to the owner window
+/// when the user selects the button.
+const BS_PUSHBUTTON = 0x00000000;
+
+/// Creates a push button that behaves like a BS_PUSHBUTTON style button, but
+/// has a distinct appearance. If the button is in a dialog box, the user can
+/// select the button by pressing the ENTER key, even when the button does not
+/// have the input focus. This style is useful for enabling the user to quickly
+/// select the most likely (default) option.
+const BS_DEFPUSHBUTTON = 0x00000001;
+
+/// Creates a small, empty check box with text. By default, the text is
+/// displayed to the right of the check box. To display the text to the left of
+/// the check box, combine this flag with the BS_LEFTTEXT style (or with the
+/// equivalent BS_RIGHTBUTTON style).
+const BS_CHECKBOX = 0x00000002;
+
+/// Creates a button that is the same as a check box, except that the check
+/// state automatically toggles between checked and cleared each time the user
+/// selects the check box.
+const BS_AUTOCHECKBOX = 0x00000003;
+
+/// Creates a small circle with text. By default, the text is displayed to the
+/// right of the circle. To display the text to the left of the circle, combine
+/// this flag with the BS_LEFTTEXT style (or with the equivalent BS_RIGHTBUTTON
+/// style). Use radio buttons for groups of related, but mutually exclusive
+/// choices.
+const BS_RADIOBUTTON = 0x00000004;
+
+/// Creates a button that is the same as a check box, except that the box can be
+/// grayed as well as checked or cleared. Use the grayed state to show that the
+/// state of the check box is not determined.
+const BS_3STATE = 0x00000005;
+
+/// Creates a button that is the same as a three-state check box, except that
+/// the box changes its state when the user selects it. The state cycles through
+/// checked, indeterminate, and cleared.
+const BS_AUTO3STATE = 0x00000006;
+
+/// Creates a rectangle in which other controls can be grouped. Any text
+/// associated with this style is displayed in the rectangle's upper left
+/// corner.
+const BS_GROUPBOX = 0x00000007;
+
+/// Obsolete, but provided for compatibility with 16-bit versions of Windows.
+/// Applications should use BS_OWNERDRAW instead.
+const BS_USERBUTTON = 0x00000008;
+
+/// Creates a button that is the same as a radio button, except that when the
+/// user selects it, the system automatically sets the button's check state to
+/// checked and automatically sets the check state for all other buttons in the
+/// same group to cleared.
+const BS_AUTORADIOBUTTON = 0x00000009;
+
+/// Defines a push-box control, which is identical to a PUSHBUTTON, except that
+/// it does not display a button face or frame; only the text appears.
+const BS_PUSHBOX = 0x0000000A;
+
+/// Creates an owner-drawn button. The owner window receives a WM_DRAWITEM
+/// message when a visual aspect of the button has changed. Do not combine the
+/// BS_OWNERDRAW style with any other button styles.
+const BS_OWNERDRAW = 0x0000000B;
+
+/// Do not use this style. A composite style bit that results from using the OR
+/// operator on BS_* style bits. It can be used to mask out valid BS_* bits from
+/// a given bitmask. Note that this is out of date and does not correctly
+/// include all valid styles. Thus, you should not use this style.
+const BS_TYPEMASK = 0x0000000F;
+
+/// Places text on the left side of the radio button or check box when combined
+/// with a radio button or check box style. Same as the BS_RIGHTBUTTON style.
+const BS_LEFTTEXT = 0x00000020;
+
+/// Specifies that the button displays text.
+const BS_TEXT = 0x00000000;
+
+/// Specifies that the button displays an icon. See the Remarks section for its
+/// interaction with BS_BITMAP.
+const BS_ICON = 0x00000040;
+
+/// Specifies that the button displays a bitmap. See the Remarks section for its
+/// interaction with BS_ICON.
+const BS_BITMAP = 0x00000080;
+
+/// Left-justifies the text in the button rectangle. However, if the button is a
+/// check box or radio button that does not have the BS_RIGHTBUTTON style, the
+/// text is left justified on the right side of the check box or radio button.
+const BS_LEFT = 0x00000100;
+
+/// Right-justifies text in the button rectangle. However, if the button is a
+/// check box or radio button that does not have the BS_RIGHTBUTTON style, the
+/// text is right justified on the right side of the check box or radio button.
+const BS_RIGHT = 0x00000200;
+
+/// Centers text horizontally in the button rectangle.
+const BS_CENTER = 0x00000300;
+
+/// Places text at the top of the button rectangle.
+const BS_TOP = 0x00000400;
+
+/// Places text at the bottom of the button rectangle.
+const BS_BOTTOM = 0x00000800;
+
+/// Places text in the middle (vertically) of the button rectangle.
+const BS_VCENTER = 0x00000C00;
+
+/// Makes a button (such as a check box, three-state check box, or radio button)
+/// look and act like a push button. The button looks raised when it isn't
+/// pushed or checked, and sunken when it is pushed or checked.
+const BS_PUSHLIKE = 0x00001000;
+
+/// Wraps the button text to multiple lines if the text string is too long to
+/// fit on a single line in the button rectangle.
+const BS_MULTILINE = 0x00002000;
+
+/// Enables a button to send BN_KILLFOCUS and BN_SETFOCUS notification codes to
+/// its parent window. Note that buttons send the BN_CLICKED notification code
+/// regardless of whether it has this style. To get BN_DBLCLK notification
+/// codes, the button must have the BS_RADIOBUTTON or BS_OWNERDRAW style.
+const BS_NOTIFY = 0x00004000;
+
+/// Specifies that the button is two-dimensional; it does not use the default
+/// shading to create a 3-D image.
+const BS_FLAT = 0x00008000;
+
+/// Positions a radio button's circle or a check box's square on the right side
+/// of the button rectangle. Same as the BS_LEFTTEXT style.
+const BS_RIGHTBUTTON = BS_LEFTTEXT;
+
+// -----------------------------------------------------------------------------
 // ScrollInfo constants
 // -----------------------------------------------------------------------------
 
@@ -2725,6 +4724,432 @@ const MF_UNHILITE = 0x00000000;
 const MF_HILITE = 0x00000080;
 
 // -----------------------------------------------------------------------------
+// Dialog Box styles
+// -----------------------------------------------------------------------------
+
+/// Indicates that the coordinates of the dialog box are screen coordinates. If
+/// this style is not specified, the coordinates are client coordinates.
+const DS_ABSALIGN = 0x01;
+
+/// Obsolete. Do not use.
+const DS_SYSMODAL = 0x02;
+
+/// Obsolete. Do not use.
+const DS_LOCALEDIT = 0x20;
+
+/// Indicates that the header of the dialog box template (either standard or
+/// extended) contains additional data specifying the font to use for text in
+/// the client area and controls of the dialog box.
+const DS_SETFONT = 0x40;
+
+/// Creates a dialog box with a modal dialog-box frame that can be combined with
+/// a title bar and window menu by specifying the WS_CAPTION and WS_SYSMENU
+/// styles.
+const DS_MODALFRAME = 0x80;
+
+/// Suppresses WM_ENTERIDLE messages that the system would otherwise send to the
+/// owner of the dialog box while the dialog box is displayed.
+const DS_NOIDLEMSG = 0x100;
+
+/// Causes the system to use the SetForegroundWindow function to bring the
+/// dialog box to the foreground. This style is useful for modal dialog boxes
+/// that require immediate attention from the user regardless of whether the
+/// owner window is the foreground window.
+const DS_SETFOREGROUND = 0x200;
+
+/// Obsolete. Do not use.
+const DS_3DLOOK = 0x0004;
+
+/// Causes the dialog box to use the monospace SYSTEM_FIXED_FONT instead of the
+/// default SYSTEM_FONT.
+const DS_FIXEDSYS = 0x0008;
+
+/// Creates the dialog box even if errors occur for example, if a child window
+/// cannot be created or if the system cannot create a special data segment for
+/// an edit control.
+const DS_NOFAILCREATE = 0x0010;
+
+/// Creates a dialog box that works well as a child window of another dialog
+/// box, much like a page in a property sheet. This style allows the user to tab
+/// among the control windows of a child dialog box, use its accelerator keys,
+/// and so on.
+const DS_CONTROL = 0x0400;
+
+/// Centers the dialog box in the working area of the monitor that contains the
+/// owner window. If no owner window is specified, the dialog box is centered in
+/// the working area of a monitor determined by the system. The working area is
+/// the area not obscured by the taskbar or any appbars.
+const DS_CENTER = 0x0800;
+
+/// Centers the dialog box on the mouse cursor.
+const DS_CENTERMOUSE = 0x1000;
+
+/// Includes a question mark in the title bar of the dialog box. When the user
+/// clicks the question mark, the cursor changes to a question mark with a
+/// pointer.
+const DS_CONTEXTHELP = 0x2000;
+
+/// Indicates that the dialog box should use the system font. The typeface
+/// member of the extended dialog box template must be set to MS Shell Dlg.
+/// Otherwise, this style has no effect.
+const DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
+
+// -----------------------------------------------------------------------------
+// Static control styles
+// -----------------------------------------------------------------------------
+
+/// A simple rectangle and left-aligns the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next
+/// left-aligned line. Words that are longer than the width of the control are
+/// truncated.
+const SS_LEFT = 0x00000000;
+
+/// A simple rectangle and centers the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next centered
+/// line. Words that are longer than the width of the control are truncated.
+const SS_CENTER = 0x00000001;
+
+/// A simple rectangle and right-aligns the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next
+/// right-aligned line. Words that are longer than the width of the control are
+/// truncated.
+const SS_RIGHT = 0x00000002;
+
+/// An icon to be displayed in the dialog box.
+///
+/// If the control is created as part of a dialog box, the text is the name of
+/// an icon (not a filename) defined elsewhere in the resource file. If the
+/// control is created via CreateWindow or a related function, the text is the
+/// name of an icon (not a filename) defined in the resource file associated
+/// with the module specified by the hInstance parameter to CreateWindow.
+const SS_ICON = 0x00000003;
+
+/// A rectangle filled with the current window frame color. This color is black
+/// in the default color scheme.
+const SS_BLACKRECT = 0x00000004;
+
+/// A rectangle filled with the current screen background color. This color is
+/// gray in the default color scheme.
+const SS_GRAYRECT = 0x00000005;
+
+/// A rectangle filled with the current window background color. This color is
+/// white in the default color scheme.
+const SS_WHITERECT = 0x00000006;
+
+/// A box with a frame drawn in the same color as the window frames. This color
+/// is black in the default color scheme.
+const SS_BLACKFRAME = 0x00000007;
+
+/// A box with a frame drawn with the same color as the screen background
+/// (desktop). This color is gray in the default color scheme.
+const SS_GRAYFRAME = 0x00000008;
+
+/// A box with a frame drawn with the same color as the window background. This
+/// color is white in the default color scheme.
+const SS_WHITEFRAME = 0x00000009;
+
+/// Specifies a user-defined item.
+const SS_USERITEM = 0x0000000A;
+
+/// A simple rectangle and displays a single line of left-aligned text in the
+/// rectangle.
+const SS_SIMPLE = 0x0000000B;
+
+/// A simple rectangle and left-aligns the text in the rectangle.
+///
+/// Tabs are expanded, but words are not wrapped. Text that extends past the
+/// end of a line is clipped.
+const SS_LEFTNOWORDWRAP = 0x0000000C;
+
+/// The owner of the static control is responsible for drawing the control. The
+/// owner window receives a WM_DRAWITEM message whenever the control needs to be
+/// drawn.
+const SS_OWNERDRAW = 0x0000000D;
+
+/// A bitmap is to be displayed in the static control.
+///
+/// The text is the name of a bitmap (not a filename) defined elsewhere in the
+/// resource file. The style ignores the nWidth and nHeight parameters; the
+/// control automatically sizes itself to accommodate the bitmap.
+const SS_BITMAP = 0x0000000E;
+
+/// An enhanced metafile is to be displayed in the static control.
+///
+/// The text is the name of a metafile. An enhanced metafile static control has
+/// a fixed size; the metafile is scaled to fit the static control's client
+/// area.
+const SS_ENHMETAFILE = 0x0000000F;
+
+/// Draws the top and bottom edges of the static control using the EDGE_ETCHED
+/// edge style.
+const SS_ETCHEDHORZ = 0x00000010;
+
+/// Draws the left and right edges of the static control using the EDGE_ETCHED
+/// edge style.
+const SS_ETCHEDVERT = 0x00000011;
+
+/// Draws the frame of the static control using the EDGE_ETCHED edge style.
+const SS_ETCHEDFRAME = 0x00000012;
+
+/// A composite style bit that results from using the OR operator on SS_* style
+/// bits.
+///
+/// Can be used to mask out valid SS_* bits from a given bitmask. Note that this
+/// is out of date and does not correctly include all valid styles. Thus, you
+/// should not use this style.
+const SS_TYPEMASK = 0x0000001F;
+
+/// Adjusts the bitmap to fit the size of the static control.
+///
+/// For example, changing the locale can change the system font, and thus
+/// controls might be resized. If a static control had a bitmap, the bitmap
+/// would no longer fit the control. This style bit dictates automatic
+/// redimensioning of bitmaps to fit their controls.
+const SS_REALSIZECONTROL = 0x00000040;
+
+/// Prevents interpretation of any ampersand (&) characters in the control's
+/// text as accelerator prefix characters.
+///
+/// These are displayed with the ampersand removed and the next character in the
+/// string underlined. This static control style may be included with any of the
+/// defined static controls. You can combine SS_NOPREFIX with other styles. This
+/// can be useful when filenames or other strings that may contain an ampersand
+/// (&) must be displayed in a static control in a dialog box.
+const SS_NOPREFIX = 0x00000080;
+
+/// Sends the parent window STN_CLICKED, STN_DBLCLK, STN_DISABLE, and STN_ENABLE
+/// notification codes when the user clicks or double-clicks the control.
+const SS_NOTIFY = 0x00000100;
+
+/// A bitmap is centered in the static control that contains it.
+///
+/// The control is not resized, so that a bitmap too large for the control will
+/// be clipped. If the static control contains a single line of text, the text
+/// is centered vertically in the client area of the control.
+const SS_CENTERIMAGE = 0x00000200;
+
+/// The lower right corner of a static control with the SS_BITMAP or SS_ICON
+/// style is to remain fixed when the control is resized.
+///
+/// Only the top and left sides are adjusted to accommodate a new bitmap or
+/// icon.
+const SS_RIGHTJUST = 0x00000400;
+
+/// Specifies that the actual resource width is used and the icon is loaded
+/// using LoadImage. SS_REALSIZEIMAGE is always used in conjunction with
+/// SS_ICON.
+const SS_REALSIZEIMAGE = 0x00000800;
+
+/// Draws a half-sunken border around a static control.
+const SS_SUNKEN = 0x00001000;
+
+/// The static control duplicates the text-displaying characteristics of a
+/// multiline edit control.
+///
+/// Specifically, the average character width is calculated in the same manner
+/// as with an edit control, and the function does not display a partially
+/// visible last line.
+const SS_EDITCONTROL = 0x00002000;
+
+/// If the end of a string does not fit in the rectangle, it is truncated and
+/// ellipses are added.
+///
+/// If a word that is not at the end of the string goes beyond the limits of the
+/// rectangle, it is truncated without ellipses. Using this style will force the
+/// control's text to be on one line with no word wrap. Compare with
+/// SS_PATHELLIPSIS and SS_WORDELLIPSIS.
+const SS_ENDELLIPSIS = 0x00004000;
+
+/// Replaces characters in the middle of the string with ellipses so that the
+/// result fits in the specified rectangle.
+///
+/// If the string contains backslash (\) characters, SS_PATHELLIPSIS preserves
+/// as much as possible of the text after the last backslash. Using this style
+/// will force the control's text to be on one line with no word wrap.
+const SS_PATHELLIPSIS = 0x00008000;
+
+/// Truncates any word that does not fit in the rectangle and adds ellipses.
+/// Using this style will force the control s text to be on one line with no
+/// word wrap.
+const SS_WORDELLIPSIS = 0x0000C000;
+
+/// Mask for text ellipsis styles.
+const SS_ELLIPSISMASK = 0x0000C000;
+
+// -----------------------------------------------------------------------------
+// Pen Styles
+// -----------------------------------------------------------------------------
+
+/// The pen is solid.
+const PS_SOLID = 0;
+
+/// The pen is dashed.
+const PS_DASH = 1;
+
+/// The pen is dotted.
+const PS_DOT = 2;
+
+/// The pen has alternating dashes and dots.
+const PS_DASHDOT = 3;
+
+/// The pen has alternating dashes and double dots.
+const PS_DASHDOTDOT = 4;
+
+/// The pen is invisible.
+const PS_NULL = 5;
+
+/// The pen is solid. When this pen is used in any GDI drawing function that
+/// takes a bounding rectangle, the dimensions of the figure are shrunk so that
+/// it fits entirely in the bounding rectangle, taking into account the width of
+/// the pen. This applies only to geometric pens.
+const PS_INSIDEFRAME = 6;
+
+/// The pen uses a styling array supplied by the user.
+const PS_USERSTYLE = 7;
+
+/// The pen sets every other pixel. (This style is applicable only for cosmetic
+/// pens.)
+const PS_ALTERNATE = 8;
+
+// Mask for pen styles.
+const PS_STYLE_MASK = 0x0000000F;
+
+/// End caps are round.
+const PS_ENDCAP_ROUND = 0x00000000;
+
+/// End caps are square.
+const PS_ENDCAP_SQUARE = 0x00000100;
+
+/// End caps are flat.
+const PS_ENDCAP_FLAT = 0x00000200;
+
+/// Mask for pen endcap styles.
+const PS_ENDCAP_MASK = 0x00000F00;
+
+/// Line joins are round.
+const PS_JOIN_ROUND = 0x00000000;
+
+/// Line joins are beveled.
+const PS_JOIN_BEVEL = 0x00001000;
+
+/// Line joins are mitered when they are within the current limit set by the
+/// SetMiterLimit function. A join is beveled when it would exceed the limit.
+const PS_JOIN_MITER = 0x00002000;
+
+/// Mask for pen join values.
+const PS_JOIN_MASK = 0x0000F000;
+
+/// The pen is cosmetic.
+const PS_COSMETIC = 0x00000000;
+
+/// The pen is geometric.
+const PS_GEOMETRIC = 0x00010000;
+
+/// Mask for pen types.
+const PS_TYPE_MASK = 0x000F0000;
+
+// -----------------------------------------------------------------------------
+// Brush Styles
+// -----------------------------------------------------------------------------
+
+/// Solid brush.
+const BS_SOLID = 0;
+
+/// Hollow brush.
+const BS_NULL = 1;
+
+/// Hollow brush.
+const BS_HOLLOW = BS_NULL;
+
+/// Hatched brush.
+const BS_HATCHED = 2;
+
+/// Pattern brush defined by a memory bitmap.
+const BS_PATTERN = 3;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERN = 5;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERNPT = 6;
+
+/// Pattern brush defined by a memory bitmap.
+const BS_PATTERN8X8 = 7;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERN8X8 = 8;
+
+// -----------------------------------------------------------------------------
+// Hatch Styles
+// -----------------------------------------------------------------------------
+
+/// Horizontal hatch
+const HS_HORIZONTAL = 0;
+
+/// Vertical hatch
+const HS_VERTICAL = 1;
+
+/// 45-degree downward left-to-right hatch
+const HS_FDIAGONAL = 2;
+
+/// 45-degree upward left-to-right hatch
+const HS_BDIAGONAL = 3;
+
+/// Horizontal and vertical crosshatch
+const HS_CROSS = 4;
+
+/// 45-degree crosshatch
+const HS_DIAGCROSS = 5;
+
+// -----------------------------------------------------------------------------
+// Stretching mode constants
+// -----------------------------------------------------------------------------
+
+/// Performs a Boolean AND operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves black pixels at the expense of white pixels.
+const BLACKONWHITE = 1;
+
+/// Performs a Boolean OR operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves white pixels at the expense of black pixels.
+const WHITEONBLACK = 2;
+
+/// Deletes the pixels. This mode deletes all eliminated lines of pixels without
+/// trying to preserve their information.
+const COLORONCOLOR = 3;
+
+/// Maps pixels from the source rectangle into blocks of pixels in the
+/// destination rectangle. The average color over the destination block of
+/// pixels approximates the color of the source pixels.
+const HALFTONE = 4;
+
+/// Performs a Boolean AND operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves black pixels at the expense of white pixels.
+const STRETCH_ANDSCANS = BLACKONWHITE;
+
+/// Performs a Boolean OR operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves white pixels at the expense of black pixels.
+const STRETCH_ORSCANS = WHITEONBLACK;
+
+/// Deletes the pixels. This mode deletes all eliminated lines of pixels without
+/// trying to preserve their information.
+const STRETCH_DELETESCANS = COLORONCOLOR;
+
+/// Maps pixels from the source rectangle into blocks of pixels in the
+/// destination rectangle. The average color over the destination block of
+/// pixels approximates the color of the source pixels.
+const STRETCH_HALFTONE = HALFTONE;
+
+// -----------------------------------------------------------------------------
 // Console constants
 // -----------------------------------------------------------------------------
 
@@ -2855,7 +5280,9 @@ const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 /// popped from the stack.
 const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
-// *** COM CONSTANTS ***
+// -----------------------------------------------------------------------------
+// COM Constants
+// -----------------------------------------------------------------------------
 
 /// Operation successful
 const S_OK = 0;
@@ -2903,17 +5330,11 @@ final E_ACCESSDENIED = 0x80070005.toSigned(32);
 /// The data necessary to complete this operation is not yet available.
 final E_PENDING = 0x8000000A.toSigned(32);
 
-/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
-/// authentication types during device pairing.
-///
-/// {@category Enum}
-class BLUETOOTH_AUTHENTICATION_METHOD {
-  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
-}
+/// typedef short VARIANT_BOOL: -1 == TRUE
+final VARIANT_TRUE = -1;
+
+/// typedef short VARIANT_BOOL: 0 == FALSE
+final VARIANT_FALSE = 0;
 
 /// Specifies the variant types.
 ///
@@ -2973,6 +5394,1240 @@ class VARENUM {
   static const VT_TYPEMASK = 0xff;
 }
 
+/// Prevents the function from attempting to coerce an object to a fundamental
+/// type by getting the Value property. Applications should set this flag only
+/// if necessary, because it makes their behavior inconsistent with other
+/// applications.
+const VARIANT_NOVALUEPROP = 0x01;
+
+/// Converts a VT_BOOL value to a string containing either "True" or "False".
+const VARIANT_ALPHABOOL = 0x02;
+
+/// For conversions to or from VT_BSTR, passes LOCALE_NOUSEROVERRIDE to the core
+/// coercion routines.
+const VARIANT_NOUSEROVERRIDE = 0x04;
+
+/// For conversions from VT_BOOL to VT_BSTR and back, uses the language
+/// specified by the locale in use on the local computer.
+const VARIANT_LOCALBOOL = 0x10;
+
+// -----------------------------------------------------------------------------
+// Memory constants
+// -----------------------------------------------------------------------------
+
+/// Allocates memory charges (from the overall size of memory and the paging
+/// files on disk) for the specified reserved memory pages. The function also
+/// guarantees that when the caller later initially accesses the memory, the
+/// contents will be zero. Actual physical pages are not allocated unless/until
+/// the virtual addresses are actually accessed.
+const MEM_COMMIT = 0x00001000;
+
+/// Reserves a range of the process's virtual address space without allocating
+/// any actual physical storage in memory or in the paging file on disk.
+const MEM_RESERVE = 0x00002000;
+
+/// Replaces a placeholder with a mapped view. Only data/pf-backed section views
+/// are supported (no images, physical memory, etc.). When you replace a
+/// placeholder, BaseAddress and ViewSize must exactly match those of the
+/// placeholder.
+const MEM_REPLACE_PLACEHOLDER = 0x00004000;
+
+/// A placeholder is a type of reserved memory region.
+const MEM_RESERVE_PLACEHOLDER = 0x00040000;
+
+/// Indicates that data in the memory range specified by lpAddress and dwSize is
+/// no longer of interest. The pages should not be read from or written to the
+/// paging file. However, the memory block will be used again later, so it
+/// should not be decommitted. This value cannot be used with any other value.
+const MEM_RESET = 0x00080000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_TOP_DOWN = 0x00100000;
+
+/// Causes the system to track pages that are written to in the allocated
+/// region.
+const MEM_WRITE_WATCH = 0x00200000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_PHYSICAL = 0x00400000;
+
+/// MEM_RESET_UNDO should only be called on an address range to which MEM_RESET
+/// was successfully applied earlier. It indicates that the data in the
+/// specified memory range specified by lpAddress and dwSize is of interest to
+/// the caller and attempts to reverse the effects of MEM_RESET. If the function
+/// succeeds, that means all data in the specified address range is intact. If
+/// the function fails, at least some of the data in the address range has been
+/// replaced with zeroes.
+const MEM_RESET_UNDO = 0x01000000;
+
+/// Allocates memory using large page support.
+const MEM_LARGE_PAGES = 0x20000000;
+
+/// Specifies that the priority of the pages being unmapped should be
+/// temporarily boosted (with automatic short term decay) because the caller
+/// expects that these pages will be accessed again shortly from another thread.
+const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
+
+/// To coalesce two adjacent placeholders, specify MEM_RELEASE |
+/// MEM_COALESCE_PLACEHOLDERS. When you coalesce placeholders, lpAddress and
+/// dwSize must exactly match those of the placeholder.
+const MEM_COALESCE_PLACEHOLDERS = 0x00000001;
+
+/// Frees an allocation back to a placeholder (after you've replaced a
+/// placeholder with a private allocation using VirtualAlloc2 or
+/// Virtual2AllocFromApp).
+const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
+
+/// Decommits the specified region of committed pages. After the operation, the
+/// pages are in the reserved state.
+const MEM_DECOMMIT = 0x00004000;
+
+/// Releases the specified region of pages, or placeholder (for a placeholder,
+/// the address space is released and available for other allocations). After
+/// this operation, the pages are in the free state.
+const MEM_RELEASE = 0x00008000;
+
+/// Indicates free pages not accessible to the calling process and available to
+/// be allocated.
+const MEM_FREE = 0x00010000;
+
+// -----------------------------------------------------------------------------
+// Multimedia constants
+// -----------------------------------------------------------------------------
+/// Time in milliseconds.
+const TIME_MS = 0x0001;
+
+/// Number of waveform-audio samples.
+const TIME_SAMPLES = 0x0002;
+
+/// Current byte offset from beginning of the file.
+const TIME_BYTES = 0x0004;
+
+/// SMPTE (Society of Motion Picture and Television Engineers) time.
+const TIME_SMPTE = 0x0008;
+
+/// MIDI time.
+const TIME_MIDI = 0x0010;
+
+/// Ticks within a MIDI stream.
+const TIME_TICKS = 0x0020;
+
+/// No callback mechanism. This is the default setting.
+const CALLBACK_NULL = 0x00000000;
+
+/// The dwCallback parameter is a window handle.
+const CALLBACK_WINDOW = 0x00010000;
+
+/// The dwCallback parameter is a thread identifier.
+const CALLBACK_THREAD = 0x00020000;
+
+/// The dwCallback parameter is a callback procedure address.
+const CALLBACK_FUNCTION = 0x00030000;
+
+/// The dwCallback parameter is an event handle.
+const CALLBACK_EVENT = 0x00050000;
+
+/// The function queries the device to determine whether it supports the given
+/// format, but it does not open the device.
+const WAVE_FORMAT_QUERY = 0x0001;
+
+/// If this flag is specified, a synchronous waveform-audio device can be
+/// opened. If this flag is not specified while opening a synchronous driver,
+/// the device will fail to open.
+const WAVE_ALLOWSYNC = 0x0002;
+
+/// If this flag is specified, the uDeviceID parameter specifies a
+/// waveform-audio device to be mapped to by the wave mapper.
+const WAVE_MAPPED = 0x0004;
+
+/// If this flag is specified, the ACM driver does not perform conversions on
+/// the audio data.
+const WAVE_FORMAT_DIRECT = 0x0008;
+
+/// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
+/// function opens the default communication device.
+const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// -----------------------------------------------------------------------------
+// GetDeviceCaps() constants
+// -----------------------------------------------------------------------------
+
+/// The device driver version.
+const DRIVERVERSION = 0;
+
+/// Device technology
+const TECHNOLOGY = 2;
+
+/// Width, in millimeters, of the physical screen.
+const HORZSIZE = 4;
+
+/// Height, in millimeters, of the physical screen.
+const VERTSIZE = 6;
+
+/// Width, in pixels, of the screen; or for printers, the width, in pixels, of
+/// the printable area of the page.
+const HORZRES = 8;
+
+/// Height, in raster lines, of the screen; or for printers, the height, in
+/// pixels, of the printable area of the page.
+const VERTRES = 10;
+
+/// Number of adjacent color bits for each pixel.
+const BITSPIXEL = 12;
+
+/// Number of color planes.
+const PLANES = 14;
+
+/// Number of device-specific brushes.
+const NUMBRUSHES = 16;
+
+/// Number of device-specific pens.
+const NUMPENS = 18;
+
+const NUMMARKERS = 20;
+
+/// Number of device-specific fonts.
+const NUMFONTS = 22;
+
+/// Number of entries in the device's color table, if the device has a color
+/// depth of no more than 8 bits per pixel. For devices with greater color
+/// depths, 1 is returned.
+const NUMCOLORS = 24;
+
+/// Reserved.
+const PDEVICESIZE = 26;
+
+/// Value that indicates the curve capabilities of the device.
+const CURVECAPS = 28;
+
+/// Value that indicates the line capabilities of the device.
+const LINECAPS = 30;
+
+/// Value that indicates the line capabilities of the device.
+const POLYGONALCAPS = 32;
+
+/// Value that indicates the text capabilities of the device.
+const TEXTCAPS = 34;
+
+/// Flag that indicates the clipping capabilities of the device. If the device
+/// can clip to a rectangle, it is 1. Otherwise, it is 0.
+const CLIPCAPS = 36;
+
+/// Value that indicates the raster capabilities of the device.
+const RASTERCAPS = 38;
+
+/// Relative width of a device pixel used for line drawing.
+const ASPECTX = 40;
+
+/// Relative height of a device pixel used for line drawing.
+const ASPECTY = 42;
+
+/// Diagonal width of the device pixel used for line drawing.
+const ASPECTXY = 44;
+
+/// Number of pixels per logical inch along the screen width. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSX = 88;
+
+/// Number of pixels per logical inch along the screen height. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSY = 90;
+
+/// Number of entries in the system palette. This index is valid only if the
+/// device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const SIZEPALETTE = 104;
+
+/// Number of reserved entries in the system palette. This index is valid only
+/// if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const NUMRESERVED = 106;
+
+/// Actual color resolution of the device, in bits per pixel. This index is
+/// valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS
+/// index and is available only if the driver is compatible with 16-bit Windows.
+const COLORRES = 108;
+
+/// For printing devices: the width of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-x11-inch paper has a
+/// physical width value of 5100 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALWIDTH = 110;
+
+/// For printing devices: the height of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-by-11-inch paper has a
+/// physical height value of 6600 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALHEIGHT = 111;
+
+/// For printing devices: the distance from the left edge of the physical page
+/// to the left edge of the printable area, in device units. For example, a
+/// printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print
+/// on the leftmost 0.25-inch of paper, has a horizontal physical offset of 150
+/// device units.
+const PHYSICALOFFSETX = 112;
+
+/// For printing devices: the distance from the top edge of the physical page to
+/// the top edge of the printable area, in device units. For example, a printer
+/// set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the
+/// topmost 0.5-inch of paper, has a vertical physical offset of 300 device
+/// units.
+const PHYSICALOFFSETY = 113;
+
+/// Scaling factor for the x-axis of the printer.
+const SCALINGFACTORX = 114;
+
+/// Scaling factor for the y-axis of the printer.
+const SCALINGFACTORY = 115;
+
+/// For display devices: the current vertical refresh rate of the device, in
+/// cycles per second (Hz). A vertical refresh rate value of 0 or 1 represents
+/// the display hardware's default refresh rate.
+const VREFRESH = 116;
+const DESKTOPVERTRES = 117;
+const DESKTOPHORZRES = 118;
+
+/// Preferred horizontal drawing alignment, expressed as a multiple of pixels.
+/// For best drawing performance, windows should be horizontally aligned to a
+/// multiple of this value. A value of zero indicates that the device is
+/// accelerated, and any alignment may be used.
+const BLTALIGNMENT = 119;
+
+/// Value that indicates the shading and blending capabilities of the device.
+const SHADEBLENDCAPS = 120;
+
+/// Value that indicates the color management capabilities of the device.
+const COLORMGMTCAPS = 121;
+
+// -----------------------------------------------------------------------------
+// Multimedia Extensions messages
+// -----------------------------------------------------------------------------
+
+/// The MM_JOY1MOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position has changed.
+const MM_JOY1MOVE = 0x3A0;
+
+/// The MM_JOY2MOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position has changed.
+const MM_JOY2MOVE = 0x3A1;
+
+/// The MM_JOY1ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position on the z-axis has changed.
+const MM_JOY1ZMOVE = 0x3A2;
+
+/// The MM_JOY2ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position on the z-axis has changed.
+const MM_JOY2ZMOVE = 0x3A3;
+
+/// The MM_JOY1BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been pressed.
+const MM_JOY1BUTTONDOWN = 0x3B5;
+
+/// The MM_JOY2BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been pressed.
+const MM_JOY2BUTTONDOWN = 0x3B6;
+
+/// The MM_JOY1BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been released.
+const MM_JOY1BUTTONUP = 0x3B7;
+
+/// The MM_JOY2BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been released.
+const MM_JOY2BUTTONUP = 0x3B8;
+
+/// The MM_MCINOTIFY message notifies an application that an MCI device has
+/// completed an operation. MCI devices send this message only when the
+/// MCI_NOTIFY flag is used.
+const MM_MCINOTIFY = 0x3B9;
+
+/// The MM_WOM_OPEN message is sent to a window when the given waveform-audio
+/// output device is opened.
+const MM_WOM_OPEN = 0x3BB;
+
+/// The MM_WOM_CLOSE message is sent to a window when a waveform-audio output
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WOM_CLOSE = 0x3BC;
+
+/// The MM_WOM_DONE message is sent to a window when the given output buffer is
+/// being returned to the application. Buffers are returned to the application
+/// when they have been played, or as the result of a call to the waveOutReset
+/// function.
+const MM_WOM_DONE = 0x3BD;
+
+/// The MM_WIM_OPEN message is sent to a window when a waveform-audio input
+/// device is opened.
+const MM_WIM_OPEN = 0x3BE;
+
+/// The MM_WIM_CLOSE message is sent to a window when a waveform-audio input
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WIM_CLOSE = 0x3BF;
+
+/// The MM_WIM_DATA message is sent to a window when waveform-audio data is
+/// present in the input buffer and the buffer is being returned to the
+/// application. The message can be sent either when the buffer is full or after
+/// the waveInReset function is called.
+const MM_WIM_DATA = 0x3C0;
+
+/// The MM_MIM_OPEN message is sent to a window when a MIDI input device is
+/// opened.
+const MM_MIM_OPEN = 0x3C1;
+
+/// The MM_MIM_CLOSE message is sent to a window when a MIDI input device is
+/// closed.
+const MM_MIM_CLOSE = 0x3C2;
+
+/// The MM_MIM_DATA message is sent to a window when a complete MIDI message is
+/// received by a MIDI input device.
+const MM_MIM_DATA = 0x3C3;
+
+/// The MM_MIM_LONGDATA message is sent to a window when either a complete MIDI
+/// system-exclusive message is received or when a buffer has been filled with
+/// system-exclusive data.
+const MM_MIM_LONGDATA = 0x3C4;
+
+/// The MM_MIM_ERROR message is sent to a window when an invalid MIDI message is
+/// received.
+const MM_MIM_ERROR = 0x3C5;
+
+/// The MM_MIM_LONGERROR message is sent to a window when an invalid or
+/// incomplete MIDI system-exclusive message is received.
+const MM_MIM_LONGERROR = 0x3C6;
+
+/// The MM_MOM_OPEN message is sent to a window when a MIDI output device is
+/// opened.
+const MM_MOM_OPEN = 0x3C7;
+
+/// The MM_MOM_CLOSE message is sent to a window when a MIDI output device is
+/// closed.
+const MM_MOM_CLOSE = 0x3C8;
+
+/// The MM_MOM_DONE message is sent to a window when the specified MIDI
+/// system-exclusive or stream buffer has been played and is being returned to
+/// the application.
+const MM_MOM_DONE = 0x3C9;
+
+/// The MM_MOM_POSITIONCB message is sent to a window when an MEVT_F_CALLBACK
+/// event is reached in the MIDI output stream.
+const MM_MOM_POSITIONCB = 0x3CA;
+
+/// The MM_MCISIGNAL message is sent to a window to notify an application that
+/// an MCI device has reached a position defined in a previous signal (
+/// MCI_SIGNAL) command.
+const MM_MCISIGNAL = 0x3CB;
+
+/// The MM_MIM_MOREDATA message is sent to a callback window when a MIDI message
+/// is received by a MIDI input device but the application is not processing
+/// MIM_DATA messages fast enough to keep up with the input device driver. The
+/// window receives this message only when the application specifies
+/// MIDI_IO_STATUS in the call to the midiInOpen function.
+const MM_MIM_MOREDATA = 0x3CC;
+
+/// The MM_MIXM_LINE_CHANGE message is sent by a mixer device to notify an
+/// application that the state of an audio line on the specified device has
+/// changed. The application should refresh its display and cached values for
+/// the specified audio line.
+const MM_MIXM_LINE_CHANGE = 0x3D0;
+
+/// The MM_MIXM_CONTROL_CHANGE message is sent by a mixer device to notify an
+/// application that the state of a control associated with an audio line has
+/// changed. The application should refresh its display and cached values for
+/// the specified control.
+const MM_MIXM_CONTROL_CHANGE = 0x3D1;
+
+/// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
+/// input device is opened.
+const MIM_OPEN = MM_MIM_OPEN;
+
+/// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
+/// input device is closed.
+const MIM_CLOSE = MM_MIM_CLOSE;
+
+/// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
+/// message is received by a MIDI input device.
+const MIM_DATA = MM_MIM_DATA;
+
+/// The MIM_LONGDATA message is sent to a MIDI input callback function when a
+/// system-exclusive buffer has been filled with data and is being returned to
+/// the application.
+const MIM_LONGDATA = MM_MIM_LONGDATA;
+
+/// The MIM_ERROR message is sent to a MIDI input callback function when an
+/// invalid MIDI message is received.
+const MIM_ERROR = MM_MIM_ERROR;
+
+/// The MIM_LONGERROR message is sent to a MIDI input callback function when an
+/// invalid or incomplete MIDI system-exclusive message is received.
+const MIM_LONGERROR = MM_MIM_LONGERROR;
+
+/// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
+/// output device is opened.
+const MOM_OPEN = MM_MOM_OPEN;
+
+/// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
+/// output device is closed.
+const MOM_CLOSE = MM_MOM_CLOSE;
+
+/// The MOM_DONE message is sent to a MIDI output callback function when the
+/// specified system-exclusive or stream buffer has been played and is being
+/// returned to the application.
+const MOM_DONE = MM_MOM_DONE;
+
+/// The MIM_MOREDATA message is sent to a MIDI input callback function when a
+/// MIDI message is received by a MIDI input device but the application is not
+/// processing MIM_DATA messages fast enough to keep up with the input device
+/// driver. The callback function receives this message only when the
+/// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
+const MIM_MOREDATA = MM_MIM_MOREDATA;
+
+/// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
+/// the MIDI output stream.
+const MOM_POSITIONCB = MM_MOM_POSITIONCB;
+
+// -----------------------------------------------------------------------------
+// Monitor Configuration constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// If the point is not contained within any display monitor, return NULL.
+const MONITOR_DEFAULTTONULL = 0x00000000;
+
+/// If the point is not contained within any display monitor, return a handle to
+/// the primary display monitor.
+const MONITOR_DEFAULTTOPRIMARY = 0x00000001;
+
+/// If the point is not contained within any display monitor, return a handle to
+/// the display monitor that is nearest to the point.
+const MONITOR_DEFAULTTONEAREST = 0x00000002;
+
+/// This is the primary display monitor.
+const MONITORINFOF_PRIMARY = 0x00000001;
+
+/// Describes a monitor's color temperature.
+///
+/// {@category Enum}
+class MC_COLOR_TEMPERATURE {
+  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
+  static const MC_COLOR_TEMPERATURE_4000K = 1;
+  static const MC_COLOR_TEMPERATURE_5000K = 2;
+  static const MC_COLOR_TEMPERATURE_6500K = 3;
+  static const MC_COLOR_TEMPERATURE_7500K = 4;
+  static const MC_COLOR_TEMPERATURE_8200K = 5;
+  static const MC_COLOR_TEMPERATURE_9300K = 6;
+  static const MC_COLOR_TEMPERATURE_10000K = 7;
+  static const MC_COLOR_TEMPERATURE_11500K = 8;
+}
+
+/// Identifies monitor display technologies.
+///
+////// {@category Enum}
+class MC_DISPLAY_TECHNOLOGY_TYPE {
+  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
+  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
+  static const MC_THIN_FILM_TRANSISTOR = 2;
+  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
+  static const MC_PLASMA = 4;
+  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
+  static const MC_ELECTROLUMINESCENT = 6;
+  static const MC_MICROELECTROMECHANICAL = 7;
+  static const MC_FIELD_EMISSION_DEVICE = 8;
+}
+
+/// Specifies whether to set or get a monitor's red, green, or blue drive.
+///
+////// {@category Enum}
+class MC_DRIVE_TYPE {
+  static const MC_RED_DRIVE = 0;
+  static const MC_GREEN_DRIVE = 1;
+  static const MC_BLUE_DRIVE = 2;
+}
+
+/// Specifies whether to get or set a monitor's red, green, or blue gain.
+///
+/// {@category Enum}
+class MC_GAIN_TYPE {
+  static const MC_RED_GAIN = 0;
+  static const MC_GREEN_GAIN = 1;
+  static const MC_BLUE_GAIN = 2;
+}
+
+/// Specifies whether to get or set the vertical or horizontal position of a
+/// monitor's display area.
+///
+/// {@category Enum}
+class MC_POSITION_TYPE {
+  static const MC_HORIZONTAL_POSITION = 0;
+  static const MC_VERTICAL_POSITION = 1;
+}
+
+/// Specifies whether to get or set the width or height of a monitor's display
+/// area.
+///
+/// {@category Enum}
+class MC_SIZE_TYPE {
+  static const MC_WIDTH = 0;
+  static const MC_HEIGHT = 1;
+}
+
+/// Identifies the dots per inch (dpi) setting for a thread, process, or window.
+///
+/// {@category Enum}
+class DPI_AWARENESS {
+  /// Invalid DPI awareness. This is an invalid DPI awareness value.
+  static const DPI_AWARENESS_INVALID = -1;
+
+  /// DPI unaware. This process does not scale for DPI changes and is always
+  /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+  /// scaled by the system on any other DPI setting.
+  static const DPI_AWARENESS_UNAWARE = 0;
+
+  /// System DPI aware. This process does not scale for DPI changes. It will
+  /// query for the DPI once and use that value for the lifetime of the process.
+  /// If the DPI changes, the process will not adjust to the new DPI value. It
+  /// will be automatically scaled up or down by the system when the DPI changes
+  /// from the system value.
+  static const DPI_AWARENESS_SYSTEM_AWARE = 1;
+
+  /// Per monitor DPI aware. This process checks for the DPI when it is created
+  /// and adjusts the scale factor whenever the DPI changes. These processes are
+  /// not automatically scaled by the system.
+  static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
+}
+
+/// Identifies the DPI hosting behavior for a window. This behavior allows
+/// windows created in the thread to host child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+///
+/// {@category Enum}
+class DPI_HOSTING_BEHAVIOR {
+  /// Invalid DPI hosting behavior. This usually occurs if the previous
+  /// SetThreadDpiHostingBehavior call used an invalid parameter.
+  static const DPI_HOSTING_BEHAVIOR_INVALID = -1;
+
+  /// Default DPI hosting behavior. The associated window behaves as normal, and
+  /// cannot create or re-parent child windows with a different
+  /// DPI_AWARENESS_CONTEXT.
+  static const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
+
+  /// Mixed DPI hosting behavior. This enables the creation and re-parenting of
+  /// child windows with different DPI_AWARENESS_CONTEXT. These child windows
+  /// will be independently scaled by the OS.
+  static const DPI_HOSTING_BEHAVIOR_MIXED = 1;
+}
+
+/// Identifies dots per inch (dpi) awareness values. DPI awareness indicates how
+/// much scaling work an application performs for DPI versus how much is done by
+/// the system.
+///
+/// {@category Enum}
+class PROCESS_DPI_AWARENESS {
+  /// DPI unaware. This app does not scale for DPI changes and is always assumed
+  /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
+  /// by the system on any other DPI setting.
+  static const PROCESS_DPI_UNAWARE = 0;
+
+  /// System DPI aware. This app does not scale for DPI changes. It will query
+  /// for the DPI once and use that value for the lifetime of the app. If the
+  /// DPI changes, the app will not adjust to the new DPI value. It will be
+  /// automatically scaled up or down by the system when the DPI changes from
+  /// the system value.
+  static const PROCESS_SYSTEM_DPI_AWARE = 1;
+
+  /// Per monitor DPI aware. This app checks for the DPI when it is created and
+  /// adjusts the scale factor whenever the DPI changes. These applications are
+  /// not automatically scaled by the system.
+  static const PROCESS_PER_MONITOR_DPI_AWARE = 2;
+}
+
+/// Identifies the dots per inch (dpi) setting for a monitor.
+///
+/// {@category Enum}
+class MONITOR_DPI_TYPE {
+  /// The effective DPI. This value should be used when determining the correct
+  /// scale factor for scaling UI elements. This incorporates the scale factor
+  /// set by the user for this specific display.
+  static const MDT_EFFECTIVE_DPI = 0;
+
+  /// The angular DPI. This DPI ensures rendering at a compliant angular
+  /// resolution on the screen. This does not include the scale factor set by
+  /// the user for this specific display.
+  static const MDT_ANGULAR_DPI = 1;
+
+  /// The raw DPI. This value is the linear DPI of the screen as measured on the
+  /// screen itself. Use this value when you want to read the pixel density and
+  /// not the recommended scaling setting. This does not include the scale
+  /// factor set by the user for this specific display and is not guaranteed to
+  /// be a supported DPI value.
+  static const MDT_RAW_DPI = 2;
+
+  /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
+  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+}
+
+// -----------------------------------------------------------------------------
+// Window Display Affinity constants
+// -----------------------------------------------------------------------------
+
+/// Imposes no restrictions on where the window can be displayed.
+const WDA_NONE = 0x00000000;
+
+/// The window content is displayed only on a monitor. Everywhere else, the
+/// window appears with no content.
+const WDA_MONITOR = 0x00000001;
+
+/// The window is displayed only on a monitor. Everywhere else, the window does
+/// not appear at all. One use for this affinity is for windows that show video
+/// recording controls, so that the controls are not included in the capture.
+const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
+
+// -----------------------------------------------------------------------------
+// Bitmap compression constants
+// -----------------------------------------------------------------------------
+
+/// An uncompressed format.
+const BI_RGB = 0;
+
+/// A run-length encoded (RLE) format for bitmaps with 8 bpp. The compression
+/// format is a two-byte format consisting of a count byte followed by a byte
+/// containing a color index. If bV5Compression is BI_RGB and the bV5BitCount
+/// member is 16, 24, or 32, the bitmap array specifies the actual intensities
+/// of blue, green, and red rather than using color table indexes.
+const BI_RLE8 = 1;
+
+/// An RLE format for bitmaps with 4 bpp. The compression format is a two-byte
+/// format consisting of a count byte followed by two word-length color indexes.
+const BI_RLE4 = 2;
+
+/// Specifies that the bitmap is not compressed and that the color masks for the
+/// red, green, and blue components of each pixel are specified in the
+/// bV5RedMask, bV5GreenMask, and bV5BlueMask members. This is valid when used
+/// with 16- and 32-bpp bitmaps.
+const BI_BITFIELDS = 3;
+
+/// Specifies that the image is compressed using the JPEG file Interchange
+/// Format. JPEG compression trades off compression against loss; it can achieve
+/// a compression ratio of 20:1 with little noticeable loss.
+const BI_JPEG = 4;
+
+/// Specifies that the image is compressed using the PNG file Interchange
+/// Format.
+const BI_PNG = 5;
+
+// -----------------------------------------------------------------------------
+// Color Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the dialog box to use the color specified in the rgbResult member as
+/// the initial color selection.
+const CC_RGBINIT = 0x00000001;
+
+/// Causes the dialog box to display the additional controls that allow the user
+/// to create custom colors. If this flag is not set, the user must click the
+/// Define Custom Color button to display the custom color controls.
+const CC_FULLOPEN = 0x00000002;
+
+/// Disables the Define Custom Color button.
+const CC_PREVENTFULLOPEN = 0x00000004;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CC_SHOWHELP = 0x00000008;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure. This flag is used only to initialize the dialog box.
+const CC_ENABLEHOOK = 0x00000010;
+
+/// The hInstance and lpTemplateName members specify a dialog box template to
+/// use in place of the default template. This flag is used only to initialize
+/// the dialog box.
+const CC_ENABLETEMPLATE = 0x00000020;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores the lpTemplateName member if this
+/// flag is specified. This flag is used only to initialize the dialog box.
+const CC_ENABLETEMPLATEHANDLE = 0x00000040;
+
+/// Causes the dialog box to display only solid colors in the set of basic
+/// colors.
+const CC_SOLIDCOLOR = 0x00000080;
+
+/// Causes the dialog box to display all available colors in the set of basic
+/// colors.
+const CC_ANYCOLOR = 0x00000100;
+
+// -----------------------------------------------------------------------------
+// Font Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the screen fonts supported by the system.
+const CF_SCREENFONTS = 0x00000001;
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the fonts supported by the printer
+/// associated with the device context or information context identified by the
+/// hDC member.
+const CF_PRINTERFONTS = 0x00000002;
+
+/// This flag is ignored for font enumeration.
+const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CF_SHOWHELP = 0x00000004;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure.
+const CF_ENABLEHOOK = 0x00000008;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template.
+const CF_ENABLETEMPLATE = 0x00000010;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const CF_ENABLETEMPLATEHANDLE = 0x00000020;
+
+/// ChooseFont should use the structure pointed to by the lpLogFont member to
+/// initialize the dialog box controls.
+const CF_INITTOLOGFONTSTRUCT = 0x00000040;
+
+/// The lpszStyle member is a pointer to a buffer that contains style data that
+/// ChooseFont should use to initialize the Font Style combo box. When the user
+/// closes the dialog box, ChooseFont copies style data for the user's selection
+/// to this buffer.
+const CF_USESTYLE = 0x00000080;
+
+/// Causes the dialog box to display the controls that allow the user to specify
+/// strikeout, underline, and text color options. If this flag is set, you can
+/// use the rgbColors member to specify the initial text color. You can use the
+/// lfStrikeOut and lfUnderline members of the structure pointed to by lpLogFont
+/// to specify the initial settings of the strikeout and underline check boxes.
+/// ChooseFont can use these members to return the user's selections.
+const CF_EFFECTS = 0x00000100;
+
+/// Causes the dialog box to display the Apply button. You should provide a hook
+/// procedure to process WM_COMMAND messages for the Apply button. The hook
+/// procedure can send the WM_CHOOSEFONT_GETLOGFONT message to the dialog box to
+/// retrieve the address of the structure that contains the current selections
+/// for the font.
+const CF_APPLY = 0x00000200;
+
+/// This flag is obsolete.
+const CF_ANSIONLY = 0x00000400;
+
+/// ChooseFont should allow selection of fonts for all non-OEM and Symbol
+/// character sets, as well as the ANSI character set.
+const CF_SCRIPTSONLY = CF_ANSIONLY;
+
+/// ChooseFont should not allow vector font selections.
+const CF_NOVECTORFONTS = 0x00000800;
+
+/// Same as the CF_NOVECTORFONTS flag.
+const CF_NOOEMFONTS = CF_NOVECTORFONTS;
+
+/// ChooseFont should not display or allow selection of font simulations.
+const CF_NOSIMULATIONS = 0x00001000;
+
+/// ChooseFont should select only font sizes within the range specified by the
+/// nSizeMin and nSizeMax members.
+const CF_LIMITSIZE = 0x00002000;
+
+/// ChooseFont should enumerate and allow selection of only fixed-pitch fonts.
+const CF_FIXEDPITCHONLY = 0x00004000;
+
+/// Obsolete. ChooseFont ignores this flag.
+const CF_WYSIWYG = 0x00008000;
+
+/// ChooseFont should indicate an error condition if the user attempts to select
+/// a font or style that is not listed in the dialog box.
+const CF_FORCEFONTEXIST = 0x00010000;
+
+/// Specifies that ChooseFont should allow only the selection of scalable fonts.
+/// Scalable fonts include vector fonts, scalable printer fonts, TrueType fonts,
+/// and fonts scaled by other technologies.
+const CF_SCALABLEONLY = 0x00020000;
+
+/// ChooseFont should only enumerate and allow the selection of TrueType fonts.
+const CF_TTONLY = 0x00040000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the font name combo box. This is useful when there is no single font name
+/// that applies to the text selection.
+const CF_NOFACESEL = 0x00080000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the Font Style combo box. This is useful when there is no single font style
+/// that applies to the text selection.
+const CF_NOSTYLESEL = 0x00100000;
+
+/// When using a structure to initialize the dialog box controls, use this flag
+/// to prevent the dialog box from displaying an initial selection for the Font
+/// Size combo box. This is useful when there is no single font size that
+/// applies to the text selection.
+const CF_NOSIZESEL = 0x00200000;
+
+/// When specified on input, only fonts with the character set identified in the
+/// lfCharSet member of the LOGFONT structure are displayed. The user will not
+/// be allowed to change the character set specified in the Scripts combo box.
+const CF_SELECTSCRIPT = 0x00400000;
+
+/// Disables the Script combo box. When this flag is set, the lfCharSet member
+/// of the LOGFONT structure is set to DEFAULT_CHARSET when ChooseFont returns.
+/// This flag is used only to initialize the dialog box.
+const CF_NOSCRIPTSEL = 0x00800000;
+
+/// Causes the Font dialog box to list only horizontally oriented fonts.
+const CF_NOVERTFONTS = 0x01000000;
+
+/// ChooseFont should additionally display fonts that are set to Hide in Fonts
+/// Control Panel.
+const CF_INACTIVEFONTS = 0x02000000;
+
+// -----------------------------------------------------------------------------
+// Find / Replace Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// If set, the Down button of the direction radio buttons in a Find dialog box
+/// is selected indicating that you should search from the current location to
+/// the end of the document. If not set, the Up button is selected so you should
+/// search to the beginning of the document. You can set this flag to initialize
+/// the dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_DOWN = 0x00000001;
+
+/// If set, the Match Whole Word Only check box is selected indicating that you
+/// should search only for whole words that match the search string. If not set,
+/// the check box is unselected so you should also search for word fragments
+/// that match the search string. You can set this flag to initialize the dialog
+/// box. If set in a FINDMSGSTRING message, indicates the user's selection.
+const FR_WHOLEWORD = 0x00000002;
+
+/// If set, the Match Case check box is selected indicating that the search
+/// should be case-sensitive. If not set, the check box is unselected so the
+/// search should be case-insensitive. You can set this flag to initialize the
+/// dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_MATCHCASE = 0x00000004;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the Find
+/// Next button in a Find or Replace dialog box. The lpstrFindWhat member
+/// specifies the string to search for.
+const FR_FINDNEXT = 0x00000008;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace button in a Replace dialog box. The lpstrFindWhat member specifies
+/// the string to be replaced and the lpstrReplaceWith member specifies the
+/// replacement string.
+const FR_REPLACE = 0x00000010;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace All button in a Replace dialog box. The lpstrFindWhat member
+/// specifies the string to be replaced and the lpstrReplaceWith member
+/// specifies the replacement string.
+const FR_REPLACEALL = 0x00000020;
+
+/// If set in a FINDMSGSTRING message, indicates that the dialog box is closing.
+/// When you receive a message with this flag set, the dialog box handle
+/// returned by the FindText or ReplaceText function is no longer valid.
+const FR_DIALOGTERM = 0x00000040;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const FR_SHOWHELP = 0x00000080;
+
+/// Enables the hook function specified in the lpfnHook member. This flag is
+/// used only to initialize the dialog box.
+const FR_ENABLEHOOK = 0x00000100;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template. This flag is used only to
+/// initialize the dialog box.
+const FR_ENABLETEMPLATE = 0x00000200;
+
+/// If set when initializing a Find dialog box, disables the search direction
+/// radio buttons.
+const FR_NOUPDOWN = 0x00000400;
+
+/// If set when initializing a Find or Replace dialog box, disables the Match
+/// Case check box.
+const FR_NOMATCHCASE = 0x00000800;
+
+/// If set when initializing a Find or Replace dialog box, disables the Whole
+/// Word check box.
+const FR_NOWHOLEWORD = 0x00001000;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const FR_ENABLETEMPLATEHANDLE = 0x00002000;
+
+/// If set when initializing a Find dialog box, hides the search direction radio
+/// buttons.
+const FR_HIDEUPDOWN = 0x00004000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Case
+/// check box.
+const FR_HIDEMATCHCASE = 0x00008000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Whole
+/// Word Only check box.
+const FR_HIDEWHOLEWORD = 0x00010000;
+
+/// If set, the search operation considers Arabic and Hebrew diacritical marks.
+/// If not set, diacritical marks are ignored.
+const FR_MATCHDIAC = 0x20000000;
+
+/// If set, the search operation considers Arabic and Hebrew kashidas. If not
+/// set, kashidas are ignored.
+const FR_MATCHKASHIDA = 0x40000000;
+
+/// If set, the search differentiates between Arabic and Hebrew alefs with
+/// different accents. If not set, all alefs are matched by the alef character
+/// alone.
+const FR_MATCHALEFHAMZA = 0x80000000;
+
+// -----------------------------------------------------------------------------
+// Open File Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the Read Only check box to be selected initially when the dialog box
+/// is created. This flag indicates the state of the Read Only check box when
+/// the dialog box is closed.
+const OFN_READONLY = 0x00000001;
+
+/// Causes the Save As dialog box to generate a message box if the selected file
+/// already exists. The user must confirm whether to overwrite the file.
+const OFN_OVERWRITEPROMPT = 0x00000002;
+
+/// Hides the Read Only check box.
+const OFN_HIDEREADONLY = 0x00000004;
+
+/// Restores the current directory to its original value if the user changed the
+/// directory while searching for files.
+const OFN_NOCHANGEDIR = 0x00000008;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button. An Explorer-style
+/// dialog box sends a CDN_HELP notification message to your hook procedure when
+/// the user clicks the Help button.
+const OFN_SHOWHELP = 0x00000010;
+
+/// Enables the hook function specified in the lpfnHook member.
+const OFN_ENABLEHOOK = 0x00000020;
+
+/// The lpTemplateName member is a pointer to the name of a dialog template
+/// resource in the module identified by the hInstance member. If the
+/// OFN_EXPLORER flag is set, the system uses the specified template to create a
+/// dialog box that is a child of the default Explorer-style dialog box. If the
+/// OFN_EXPLORER flag is not set, the system uses the template to create an
+/// old-style dialog box that replaces the default dialog box.
+const OFN_ENABLETEMPLATE = 0x00000040;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores lpTemplateName if this flag is
+/// specified. If the OFN_EXPLORER flag is set, the system uses the specified
+/// template to create a dialog box that is a child of the default
+/// Explorer-style dialog box. If the OFN_EXPLORER flag is not set, the system
+/// uses the template to create an old-style dialog box that replaces the
+/// default dialog box.
+const OFN_ENABLETEMPLATEHANDLE = 0x00000080;
+
+/// The common dialog boxes allow invalid characters in the returned file name.
+/// Typically, the calling application uses a hook procedure that checks the
+/// file name by using the FILEOKSTRING message. If the text box in the edit
+/// control is empty or contains nothing but spaces, the lists of files and
+/// directories are updated. If the text box in the edit control contains
+/// anything else, nFileOffset and nFileExtension are set to values generated by
+/// parsing the text. No default extension is added to the text, nor is text
+/// copied to the buffer specified by lpstrFileTitle. If the value specified by
+/// nFileOffset is less than zero, the file name is invalid. Otherwise, the file
+/// name is valid, and nFileExtension and nFileOffset can be used as if the
+/// OFN_NOVALIDATE flag had not been specified.
+const OFN_NOVALIDATE = 0x00000100;
+
+/// The File Name list box allows multiple selections. If you also set the
+/// OFN_EXPLORER flag, the dialog box uses the Explorer-style user interface;
+/// otherwise, it uses the old-style user interface.
+const OFN_ALLOWMULTISELECT = 0x00000200;
+
+/// The user typed a file name extension that differs from the extension
+/// specified by lpstrDefExt. The function does not use this flag if lpstrDefExt
+/// is NULL.
+const OFN_EXTENSIONDIFFERENT = 0x00000400;
+
+/// The user can type only valid paths and file names. If this flag is used and
+/// the user types an invalid path and file name in the File Name entry field,
+/// the dialog box function displays a warning in a message box.
+const OFN_PATHMUSTEXIST = 0x00000800;
+
+/// The user can type only names of existing files in the File Name entry field.
+/// If this flag is specified and the user enters an invalid name, the dialog
+/// box procedure displays a warning in a message box. If this flag is
+/// specified, the OFN_PATHMUSTEXIST flag is also used. This flag can be used in
+/// an Open dialog box. It cannot be used with a Save As dialog box.
+const OFN_FILEMUSTEXIST = 0x00001000;
+
+/// If the user specifies a file that does not exist, this flag causes the
+/// dialog box to prompt the user for permission to create the file. If the user
+/// chooses to create the file, the dialog box closes and the function returns
+/// the specified name; otherwise, the dialog box remains open. If you use this
+/// flag with the OFN_ALLOWMULTISELECT flag, the dialog box allows the user to
+/// specify only one nonexistent file.
+const OFN_CREATEPROMPT = 0x00002000;
+
+/// Specifies that if a call to the OpenFile function fails because of a network
+/// sharing violation, the error is ignored and the dialog box returns the
+/// selected file name. If this flag is not set, the dialog box notifies your
+/// hook procedure when a network sharing violation occurs for the file name
+/// specified by the user. If you set the OFN_EXPLORER flag, the dialog box
+/// sends the CDN_SHAREVIOLATION message to the hook procedure. If you do not
+/// set OFN_EXPLORER, the dialog box sends the SHAREVISTRING registered message
+/// to the hook procedure.
+const OFN_SHAREAWARE = 0x00004000;
+
+/// The returned file does not have the Read Only check box selected and is not
+/// in a write-protected directory.
+const OFN_NOREADONLYRETURN = 0x00008000;
+
+/// The file is not created before the dialog box is closed. This flag should be
+/// specified if the application saves the file on a create-nonmodify network
+/// share. When an application specifies this flag, the library does not check
+/// for write protection, a full disk, an open drive door, or network
+/// protection. Applications using this flag must perform file operations
+/// carefully, because a file cannot be reopened once it is closed.
+const OFN_NOTESTFILECREATE = 0x00010000;
+
+/// Hides and disables the Network button.
+const OFN_NONETWORKBUTTON = 0x00020000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use short
+/// file names (8.3 format). Explorer-style dialog boxes ignore this flag and
+/// always display long file names.
+const OFN_NOLONGNAMES = 0x00040000;
+
+/// Indicates that any customizations made to the Open or Save As dialog box use
+/// the Explorer-style customization methods.
+const OFN_EXPLORER = 0x00080000;
+
+/// Directs the dialog box to return the path and file name of the selected
+/// shortcut (.LNK) file. If this value is not specified, the dialog box returns
+/// the path and file name of the file referenced by the shortcut.
+const OFN_NODEREFERENCELINKS = 0x00100000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use long file
+/// names. If this flag is not specified, or if the OFN_ALLOWMULTISELECT flag is
+/// also set, old-style dialog boxes use short file names (8.3 format) for file
+/// names with spaces. Explorer-style dialog boxes ignore this flag and always
+/// display long file names.
+const OFN_LONGNAMES = 0x00200000;
+
+/// Causes the dialog box to send CDN_INCLUDEITEM notification messages to your
+/// OFNHookProc hook procedure when the user opens a folder. The dialog box
+/// sends a notification for each item in the newly opened folder. These
+/// messages enable you to control which items the dialog box displays in the
+/// folder's item list.
+const OFN_ENABLEINCLUDENOTIFY = 0x00400000;
+
+/// Enables the Explorer-style dialog box to be resized using either the mouse
+/// or the keyboard. By default, the Explorer-style Open and Save As dialog
+/// boxes allow the dialog box to be resized regardless of whether this flag is
+/// set. This flag is necessary only if you provide a hook procedure or custom
+/// template. The old-style dialog box does not permit resizing.
+const OFN_ENABLESIZING = 0x00800000;
+
+/// Prevents the system from adding a link to the selected file in the file
+/// system directory that contains the user's most recently used documents. To
+/// retrieve the location of this directory, call the SHGetSpecialFolderLocation
+/// function with the CSIDL_RECENT flag.
+const OFN_DONTADDTORECENT = 0x02000000;
+
+/// Forces the showing of system and hidden files, thus overriding the user
+/// setting to show or not show hidden files. However, a file that is marked
+/// both system and hidden is not shown.
+const OFN_FORCESHOWHIDDEN = 0x10000000;
+
+/// If this flag is set, the places bar is not displayed. If this flag is not
+/// set, Explorer-style dialog boxes include a places bar containing icons for
+/// commonly-used folders, such as Favorites and Desktop.
+const OFN_EX_NOPLACESBAR = 0x00000001;
+
+// -----------------------------------------------------------------------------
+/// High DPI constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// Describes per-monitor DPI scaling behavior overrides for child windows
+/// within dialogs. The values in this enumeration are bitfields and can be
+/// combined.
+///
+/// {@category Enum}
+class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. The dialog managed will update
+  /// the font, size, and position of the child window on DPI changes.
+  static const DCDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from sending an updated font to the child
+  /// window via WM_SETFONT in response to a DPI change.
+  static const DCDC_DISABLE_FONT_UPDATE = 0x0001;
+
+  /// Prevents the dialog manager from resizing and repositioning the child
+  /// window in response to a DPI change.
+  static const DCDC_DISABLE_RELAYOUT = 0x0002;
+}
+
+/// In Per Monitor v2 contexts, dialogs will automatically respond to DPI
+/// changes by resizing themselves and re-computing the positions of their child
+/// windows (here referred to as re-layouting). This enum works in conjunction
+/// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
+/// behavior for dialogs.
+///
+/// {@category Enum}
+class DIALOG_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. In response to a DPI change,
+  /// the dialog manager will re-layout each control, update the font on each
+  /// control, resize the dialog, and update the dialog's own font.
+  static const DDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
+  /// WM_DPICHANGED, disabling all default DPI scaling behavior.
+  static const DDC_DISABLE_ALL = 0x0001;
+
+  /// Prevents the dialog manager from resizing the dialog in response to a DPI
+  /// change.
+  static const DDC_DISABLE_RESIZE = 0x0002;
+
+  /// Prevents the dialog manager from re-layouting all of the dialogue's
+  /// immediate children HWNDs in response to a DPI change.
+  static const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
+}
+
+// -----------------------------------------------------------------------------
+/// Bluetooth constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
+/// authentication types during device pairing.
+///
+/// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_METHOD {
+  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
 /// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
 /// the Middle' protection required for authentication.
 ///
@@ -2998,6 +6653,10 @@ class BLUETOOTH_IO_CAPABILITY {
   static const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
   static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
 }
+
+// -----------------------------------------------------------------------------
+/// Common dialog constants & enumerations
+// -----------------------------------------------------------------------------
 
 /// Defines the set of options available to an Open or Save dialog.
 ///
@@ -3029,53 +6688,1166 @@ class FILEOPENDIALOGOPTIONS {
 }
 
 // -----------------------------------------------------------------------------
+// Desktop shell constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// Desktop wallpaper slideshow settings for shuffling images.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_OPTIONS {
+  /// Shuffle is enabled; the images are shown in a random order.
+  static const DSO_SHUFFLEIMAGES = 0x1;
+}
+
+/// Gets the current status of the slideshow.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_STATE {
+  /// Slideshows are enabled.
+  static const DSS_ENABLED = 0x1;
+
+  /// A slideshow is currently configured.
+  static const DSS_SLIDESHOW = 0x2;
+
+  /// A remote session has temporarily disabled the slideshow.
+  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+}
+
+/// The direction that the slideshow should advance.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_DIRECTION {
+  /// Advance the slideshow forward.
+  static const DSD_FORWARD = 0;
+
+  /// Advance the slideshow backward.
+  static const DSD_BACKWARD = 1;
+}
+
+/// Specifies how the desktop wallpaper should be displayed.
+///
+/// {@category Enum}
+class DESKTOP_WALLPAPER_POSITION {
+  /// Center the image; do not stretch.
+  static const DWPOS_CENTER = 0;
+
+  /// Tile the image across all monitors.
+  static const DWPOS_TILE = 1;
+
+  /// Stretch the image to exactly fit on the monitor.
+  static const DWPOS_STRETCH = 2;
+
+  /// Stretch the image to exactly the height or width of the monitor without
+  /// changing its aspect ratio or cropping the image.
+  static const DWPOS_FIT = 3;
+
+  /// Stretch the image to fill the screen, cropping the image as necessary to
+  /// avoid letterbox bars.
+  static const DWPOS_FILL = 4;
+
+  /// Spans a single image across all monitors attached to the system.
+  static const DWPOS_SPAN = 5;
+}
+
+// -----------------------------------------------------------------------------
 // PlaySound constants
 // -----------------------------------------------------------------------------
 
 /// play synchronously (default)
-const int SND_SYNC = 0x0000;
+const SND_SYNC = 0x0000;
 
 /// play asynchronously
-const int SND_ASYNC = 0x0001;
+const SND_ASYNC = 0x0001;
 
 /// silence (!default) if sound not found
-const int SND_NODEFAULT = 0x0002;
+const SND_NODEFAULT = 0x0002;
 
 /// pszSound points to a memory file
-const int SND_MEMORY = 0x0004;
+const SND_MEMORY = 0x0004;
 
 /// loop the sound until next sndPlaySound
-const int SND_LOOP = 0x0008;
+const SND_LOOP = 0x0008;
 
 /// don't stop any currently playing sound
-const int SND_NOSTOP = 0x0010;
+const SND_NOSTOP = 0x0010;
 
 /// don't wait if the driver is busy
-const int SND_NOWAIT = 0x00002000;
+const SND_NOWAIT = 0x00002000;
 
 /// name is a registry alias
-const int SND_ALIAS = 0x00010000;
+const SND_ALIAS = 0x00010000;
 
 /// alias is a predefined ID
-const int SND_ALIAS_ID = 0x00110000;
+const SND_ALIAS_ID = 0x00110000;
 
 /// name is file name
-const int SND_FILENAME = 0x00020000;
+const SND_FILENAME = 0x00020000;
 
 /// name is resource name or atom
-const int SND_RESOURCE = 0x00040004;
+const SND_RESOURCE = 0x00040004;
 
 /// purge non-static events for task
-const int SND_PURGE = 0x0040;
+const SND_PURGE = 0x0040;
 
 /// look for application specific association
-const int SND_APPLICATION = 0x0080;
+const SND_APPLICATION = 0x0080;
 
 /// Generate a SoundSentry event with this sound
-const int SND_SENTRY = 0x00080000;
+const SND_SENTRY = 0x00080000;
 
 /// Treat this as a "ring" from a communications app - don't duck me
-const int SND_RING = 0x00100000;
+const SND_RING = 0x00100000;
 
 /// Treat this as a system sound
-const int SND_SYSTEM = 0x00200000;
+const SND_SYSTEM = 0x00200000;
+
+// -----------------------------------------------------------------------------
+// PurgeComm() flags
+// -----------------------------------------------------------------------------
+
+/// Terminates all outstanding overlapped write operations and returns
+/// immediately, even if the write operations have not been completed.
+const PURGE_TXABORT = 0x0001;
+
+/// Terminates all outstanding overlapped read operations and returns
+/// immediately, even if the read operations have not been completed.
+const PURGE_RXABORT = 0x0002;
+
+/// Clears the output buffer (if the device driver has one).
+const PURGE_TXCLEAR = 0x0004;
+
+/// Clears the input buffer (if the device driver has one).
+const PURGE_RXCLEAR = 0x0008;
+
+// -----------------------------------------------------------------------------
+// Shutdown constants
+// -----------------------------------------------------------------------------
+
+/// All sessions are forcefully logged off. If this flag is not set and users
+/// other than the current user are logged on to the computer specified by the
+/// lpMachineName parameter, this function fails with a return value of
+/// ERROR_SHUTDOWN_USERS_LOGGED_ON.
+const SHUTDOWN_FORCE_OTHERS = 0x0000001;
+
+/// Specifies that the originating session is logged off forcefully. If this
+/// flag is not set, the originating session is shut down interactively, so a
+/// shutdown is not guaranteed even if the function returns successfully.
+const SHUTDOWN_FORCE_SELF = 0x0000002;
+
+/// The computer is shut down and rebooted.
+const SHUTDOWN_RESTART = 0x0000004;
+
+/// The computer is shut down and powered down.
+const SHUTDOWN_POWEROFF = 0x0000008;
+
+/// The computer is shut down but is not powered down or rebooted.
+const SHUTDOWN_NOREBOOT = 0x0000010;
+
+/// Overrides the grace period so that the computer is shut down immediately.
+const SHUTDOWN_GRACE_OVERRIDE = 0x0000020;
+
+/// The computer installs any updates before starting the shutdown.
+const SHUTDOWN_INSTALL_UPDATES = 0x0000040;
+
+/// The system is rebooted using the ExitWindowsEx function with the
+/// EWX_RESTARTAPPS flag. This restarts any applications that have been
+/// registered for restart using the RegisterApplicationRestart function.
+const SHUTDOWN_RESTARTAPPS = 0x0000080;
+
+/// Beginning with InitiateShutdown running on Windows 8, you must include the
+/// SHUTDOWN_HYBRID flag with one or more of the flags in this table to specify
+/// options for the shutdown.
+const SHUTDOWN_HYBRID = 0x0000200;
+
+// -----------------------------------------------------------------------------
+// Shell_NotifyIcon uFlags constants
+// -----------------------------------------------------------------------------
+
+/// Adds an icon to the status area. The icon is given an identifier in the
+/// NOTIFYICONDATA structure pointed to by lpdata—either through its uID or
+/// guidItem member. This identifier is used in subsequent calls to
+/// Shell_NotifyIcon to perform later actions on the icon.
+const NIM_ADD = 0x00000000;
+
+/// Modifies an icon in the status area. NOTIFYICONDATA structure pointed to by
+/// lpdata uses the ID originally assigned to the icon when it was added to the
+/// notification area (NIM_ADD) to identify the icon to be modified.
+const NIM_MODIFY = 0x00000001;
+
+/// Deletes an icon from the status area. NOTIFYICONDATA structure
+/// pointed to by lpdata uses the ID originally assigned to the icon when it was
+/// added to the notification area (NIM_ADD) to identify the icon to be deleted.
+const NIM_DELETE = 0x00000002;
+
+/// Shell32.dll version 5.0 and later only. Returns focus to the
+/// taskbar notification area. Notification area icons should use this message
+/// when they have completed their UI operation. For example, if the icon
+/// displays a shortcut menu, but the user presses ESC to cancel it, use
+/// NIM_SETFOCUS to return focus to the notification area.
+const NIM_SETFOCUS = 0x00000003;
+
+/// Shell32.dll version 5.0 and later only. Instructs the notification area to
+/// behave according to the version number specified in the uVersion member of
+/// the structure pointed to by lpdata. The version number specifies which
+/// members are recognized. NIM_SETVERSION must be called every time a
+/// notification area icon is added (NIM_ADD)>. It does not need to be called
+/// with NIM_MOFIDY. The version setting is not persisted once a user logs off.
+const NIM_SETVERSION = 0x00000004;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::uVersion constants
+// Flags that either indicate which of the other members of the structure
+// contain valid data or provide additional information to the tooltip as to
+// how it should display. This member can be a combination of the following
+// values:
+// -----------------------------------------------------------------------------
+const NOTIFYICON_VERSION = 3;
+const NOTIFYICON_VERSION_4 = 4;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::uFlags constants
+// -----------------------------------------------------------------------------
+
+/// The uCallbackMessage member is valid.
+const NIF_MESSAGE = 0x00000001;
+
+/// The hIcon member is valid.
+const NIF_ICON = 0x00000002;
+
+/// The szTip member is valid.
+const NIF_TIP = 0x00000004;
+
+/// The dwState and dwStateMask members are valid.
+const NIF_STATE = 0x00000008;
+
+/// To display the balloon notification, specify NIF_INFO and provide
+/// text in szInfo.
+/// To remove a balloon notification, specify NIF_INFO and provide an empty
+/// string through szInfo.
+/// To add a notification area icon without displaying a notification,
+/// do not set the NIF_INFO flag.
+const NIF_INFO = 0x00000010;
+
+/// Windows 7 and later: The guidItem is valid.
+/// Windows Vista and earlier: Reserved.
+const NIF_GUID = 0x00000020;
+
+/// Windows Vista and later. If the balloon notification cannot be displayed
+/// immediately, discard it. Use this flag for notifications that represent
+/// real-time information which would be meaningless or misleading if displayed
+/// at a later time. For example, a message that states
+/// "Your telephone is ringing." NIF_REALTIME is meaningful only when combined
+/// with the NIF_INFO flag.
+const NIF_REALTIME = 0x00000040;
+
+/// Windows Vista and later. Use the standard tooltip. Normally, when uVersion
+/// is set to NOTIFYICON_VERSION_4, the standard tooltip is suppressed and
+/// can be replaced by the application-drawn, pop-up UI. If the application
+/// wants to show the standard tooltip with NOTIFYICON_VERSION_4, it can
+/// specify NIF_SHOWTIP to indicate the standard tooltip should still be shown.
+const NIF_SHOWTIP = 0x00000080;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::dwState constants
+// The state of the icon. One or both of the following values.
+// -----------------------------------------------------------------------------
+
+/// The icon is hidden.
+const NIS_HIDDEN = 0x00000001;
+
+/// The icon resource is shared between multiple icons.
+const NIS_SHAREDICON = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::dwInfoFlags constants
+// Flags that can be set to modify the behavior and appearance of a balloon
+// notification. The icon is placed to the left of the title. If the szInfoTitle
+// member is zero-length, the icon is not shown.
+// -----------------------------------------------------------------------------
+
+/// No icon.
+const NIIF_NONE = 0x00000000;
+
+/// An information icon.
+const NIIF_INFO = 0x00000001;
+
+/// A warning icon.
+const NIIF_WARNING = 0x00000002;
+
+/// An error icon.
+const NIIF_ERROR = 0x00000003;
+
+/// Windows Vista and later: Use the icon identified in hBalloonIcon as the
+/// notification balloon's title icon.
+const NIIF_USER = 0x00000004;
+
+/// Windows XP and later. Reserved.
+const NIIF_ICON_MASK = 0x0000000F;
+
+/// Do not play the associated sound. Applies only to notifications.
+const NIIF_NOSOUND = 0x00000010;
+
+/// The large version of the icon should be used as the notification icon
+const NIIF_LARGE_ICON = 0x00000020;
+
+/// Do not display the balloon notification if the curr user is in "quiet time"
+const NIIF_RESPECT_QUIET_TIME = 0x00000080;
+
+/// Used to define private messages, usually of the form WM_APP+x, where x
+/// is an integer value.
+const WM_APP = 0x8000;
+
+// -----------------------------------------------------------------------------
+// Shell_NotifyIcon WndProc callback message contants
+// -----------------------------------------------------------------------------
+
+/// If a user selects a notify icon with the mouse and activates it with the
+/// ENTER key, the Shell now sends the associated application an NIN_SELECT
+/// notification. Earlier versions send WM_RBUTTONDOWN and WM_RBUTTONUP
+/// messages.
+const NIN_SELECT = WM_USER + 0;
+
+const NINF_KEY = 0x1;
+
+/// If a user selects a notify icon with the keyboard and activates it with
+/// the SPACEBAR or ENTER key, the version 5.0 Shell sends the associated
+/// application an NIN_KEYSELECT notification. Earlier versions send
+/// WM_RBUTTONDOWN and WM_RBUTTONUP messages.
+const NIN_KEYSELECT = NIN_SELECT | NINF_KEY;
+
+/// Sent when the balloon is shown (balloons are queued).
+const NIN_BALLOONSHOW = WM_USER + 2;
+
+/// Sent when the balloon disappears. For example, when the icon is deleted.
+/// This message is not sent if the balloon is dismissed because of a timeout or
+/// if the user clicks the mouse.
+/// As of Windows 7, NIN_BALLOONHIDE is also sent when a notification with
+/// the NIIF_RESPECT_QUIET_TIME flag set attempts to display during quiet time
+/// (a user's first hour on a new computer). In that case, the balloon is never
+/// displayed at all.
+const NIN_BALLOONHIDE = WM_USER + 3;
+
+/// Sent when the balloon is dismissed because of a timeout.
+const NIN_BALLOONTIMEOUT = WM_USER + 4;
+
+/// Sent when the balloon is dismissed because the user clicked the mouse.
+const NIN_BALLOONUSERCLICK = WM_USER + 5;
+
+/// Sent when the user hovers the cursor over an icon to indicate that the
+/// richer pop-up UI should be used in place of a standard textual tooltip.
+const NIN_POPUPOPEN = WM_USER + 6;
+
+/// Sent when a cursor no longer hovers over an icon to indicate that the rich
+/// pop-up UI should be closed.
+const NIN_POPUPCLOSE = WM_USER + 7;
+
+// -----------------------------------------------------------------------------
+// Power setting constants
+// -----------------------------------------------------------------------------
+
+/// Notifications are sent using WM_POWERBROADCAST messages with a wParam
+/// parameter of PBT_POWERSETTINGCHANGE.
+const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
+
+/// Notifications are sent to the HandlerEx callback function with a dwControl
+/// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
+/// PBT_POWERSETTINGCHANGE.
+const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
+
+// -----------------------------------------------------------------------------
+// TrackPopupMenuEx constants
+// -----------------------------------------------------------------------------
+
+/// The user can select menu items with only the left mouse button.
+const TPM_LEFTBUTTON = 0x0000;
+
+/// The user can select menu items with both the left and right mouse buttons.
+const TPM_RIGHTBUTTON = 0x0002;
+
+/// Positions the shortcut menu so that its left side is aligned with the
+/// coordinate specified by the x parameter.
+const TPM_LEFTALIGN = 0x0000;
+
+/// Centers the shortcut menu horizontally relative to the coordinate specified
+/// by the x parameter.
+const TPM_CENTERALIGN = 0x0004;
+
+/// Positions the shortcut menu so that its right side is aligned with the
+/// coordinate specified by the x parameter.
+const TPM_RIGHTALIGN = 0x0008;
+
+/// Positions the shortcut menu so that its top side is aligned with the
+/// coordinate specified by the y parameter.
+const TPM_TOPALIGN = 0x0000;
+
+/// Centers the shortcut menu vertically relative to the coordinate specified by
+/// the y parameter.
+const TPM_VCENTERALIGN = 0x0010;
+
+/// Positions the shortcut menu so that its bottom side is aligned with the
+/// coordinate specified by the y parameter.
+const TPM_BOTTOMALIGN = 0x0020;
+
+/// If the menu cannot be shown at the specified location without overlapping
+/// the excluded rectangle, the system tries to accommodate the requested
+/// horizontal alignment before the requested vertical alignment.
+const TPM_HORIZONTAL = 0x0000;
+
+/// If the menu cannot be shown at the specified location without overlapping
+/// the excluded rectangle, the system tries to accommodate the requested
+/// vertical alignment before the requested horizontal alignment.
+const TPM_VERTICAL = 0x0040;
+
+/// The function does not send notification messages when the user clicks a menu
+/// item.
+const TPM_NONOTIFY = 0x0080;
+
+/// The function returns the menu item identifier of the user's selection in the
+/// return value.
+const TPM_RETURNCMD = 0x0100;
+
+/// Use the TPM_RECURSE flag to display a menu when another menu is already
+/// displayed. This is intended to support context menus within a menu.
+const TPM_RECURSE = 0x0001;
+
+/// Animates the menu from left to right.
+const TPM_HORPOSANIMATION = 0x0400;
+
+/// Animates the menu from right to left.
+const TPM_HORNEGANIMATION = 0x0800;
+
+/// Animates the menu from top to bottom.
+const TPM_VERPOSANIMATION = 0x1000;
+
+/// Animates the menu from bottom to top.
+const TPM_VERNEGANIMATION = 0x2000;
+
+/// Displays menu without animation.
+const TPM_NOANIMATION = 0x4000;
+
+/// For right-to-left text layout, use TPM_LAYOUTRTL. By default, the text
+/// layout is left-to-right.
+const TPM_LAYOUTRTL = 0x8000;
+
+/// Restricts the pop-up window to within the work area.
+const TPM_WORKAREA = 0x10000;
+
+// -----------------------------------------------------------------------------
+// LoadImage constants
+// -----------------------------------------------------------------------------
+
+/// Loads a bitmap.
+const IMAGE_BITMAP = 0;
+
+/// Loads an icon.
+const IMAGE_ICON = 1;
+
+/// Loads a cursor.
+const IMAGE_CURSOR = 2;
+
+/// Loads an enhanced metafile.
+const IMAGE_ENHMETAFILE = 3;
+
+// -----------------------------------------------------------------------------
+// Stock icons and cursors
+// -----------------------------------------------------------------------------
+
+// In the original header files, these take the form:
+//   #define IDI_APPLICATION     MAKEINTRESOURCE(32512)
+// The MAKEINTRESOURCE() macro creates a pointer to a known memory address. The
+// address itself has no meaning other than as a marker.
+
+/// Default application icon.
+final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
+
+/// Hand-shaped icon. Same as IDI_ERROR.
+final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
+
+/// Question mark icon.
+final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
+
+/// Exclamation point icon. Same as IDI_WARNING.
+final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
+
+/// Asterisk icon. Same as IDI_INFORMATION.
+final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
+
+/// Windows logo icon.
+final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
+
+/// Security Shield icon.
+final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
+
+/// Exclamation point icon.
+final IDI_WARNING = IDI_EXCLAMATION;
+
+/// Hand-shaped icon.
+final IDI_ERROR = IDI_HAND;
+
+/// Asterisk icon.
+final IDI_INFORMATION = IDI_ASTERISK;
+
+/// Standard arrow
+final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
+
+/// I-beam
+final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
+
+/// Hourglass
+final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
+
+/// Crosshair
+final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
+
+/// Vertical arrow
+final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
+
+/// Double-pointed arrow pointing northwest and southeast
+final IDC_SIZENWSE = Pointer<Utf16>.fromAddress(32642);
+
+/// Double-pointed arrow pointing northeast and southwest
+final IDC_SIZENESW = Pointer<Utf16>.fromAddress(32643);
+
+/// Double-pointed arrow pointing west and east
+final IDC_SIZEWE = Pointer<Utf16>.fromAddress(32644);
+
+/// Double-pointed arrow pointing north and south
+final IDC_SIZENS = Pointer<Utf16>.fromAddress(32645);
+
+/// Four-pointed arrow pointing north, south, east, and west
+final IDC_SIZEALL = Pointer<Utf16>.fromAddress(32646);
+
+/// Slashed circle
+final IDC_NO = Pointer<Utf16>.fromAddress(32648);
+
+/// Hand
+final IDC_HAND = Pointer<Utf16>.fromAddress(32649);
+
+/// Standard arrow and small hourglass
+final IDC_APPSTARTING = Pointer<Utf16>.fromAddress(32650);
+
+/// Arrow and question mark
+final IDC_HELP = Pointer<Utf16>.fromAddress(32651);
+
+// -----------------------------------------------------------------------------
+// LoadImage fuLoad constants
+// -----------------------------------------------------------------------------
+
+/// The default flag; it does nothing.
+const LR_DEFAULTCOLOR = 0x00000000;
+
+/// Loads the image in black and white.
+const LR_MONOCHROME = 0x00000001;
+
+/// Returns the original hImage if it satisfies the criteria for the copy—that
+/// is, correct dimensions and color depth—in which case the LR_COPYDELETEORG
+/// flag is ignored. If this flag is not specified, a new object is always
+/// created.
+const LR_COPYRETURNORG = 0x00000004;
+
+/// Deletes the original image after creating the copy.
+const LR_COPYDELETEORG = 0x00000008;
+
+/// Loads the stand-alone image from the file specified by lpszName (icon,
+/// cursor, or bitmap file).
+const LR_LOADFROMFILE = 0x00000010;
+
+/// Retrieves the color value of the first pixel in the image and replaces the
+/// corresponding entry in the color table with the default window color
+/// (COLOR_WINDOW). All pixels in the image that use that entry become the
+/// default window color. This value applies only to images that have
+/// corresponding color tables.
+const LR_LOADTRANSPARENT = 0x00000020;
+
+/// Uses the width or height specified by the system metric values for cursors
+/// or icons, if the cxDesired or cyDesired values are set to zero.
+const LR_DEFAULTSIZE = 0x00000040;
+
+/// Uses true VGA colors.
+const LR_VGACOLOR = 0x00000080;
+
+/// Searches the color table for the image and replaces shades of gray with the
+/// corresponding 3-D color.
+const LR_LOADMAP3DCOLORS = 0x00001000;
+
+/// Causes the function to return a DIB section bitmap rather than a compatible
+/// bitmap. This flag is useful for loading a bitmap without mapping it to the
+/// colors of the display device.
+const LR_CREATEDIBSECTION = 0x00002000;
+
+/// Tries to reload an icon or cursor resource from the original resource file
+/// rather than simply copying the current image. This is useful for creating a
+/// different-sized copy when the resource file contains multiple sizes of the
+/// resource. Without this flag, CopyImage stretches the original image to the
+/// new size. If this flag is set, CopyImage uses the size in the resource file
+/// closest to the desired size.
+const LR_COPYFROMRESOURCE = 0x00004000;
+
+/// Shares the image handle if the image is loaded multiple times. If LR_SHARED
+/// is not set, a second call to LoadImage for the same resource will load the
+/// image again and return a different handle.
+const LR_SHARED = 0x00008000;
+
+// -----------------------------------------------------------------------------
+// Windows Runtime constants
+// -----------------------------------------------------------------------------
+
+/// Determines the concurrency model used for incoming calls to the objects
+/// created by this thread.
+///
+/// {@category Enum}
+class RO_INIT_TYPE {
+  static const RO_INIT_SINGLETHREADED = 0;
+
+  /// Initializes the thread for multi-threaded concurrency. The current thread
+  /// is initialized in the MTA.
+  static const RO_INIT_MULTITHREADED = 1;
+}
+
+// -----------------------------------------------------------------------------
+// Internationalization for Windows Applications constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the type of corrective action to be taken for a spelling error.
+///
+/// {@category Enum}
+class CORRECTIVE_ACTION {
+  /// There are no errors.
+  static const NONE = 0;
+
+  /// The user should be prompted with a list of suggestions as returned by
+  /// ISpellChecker::Suggest.
+  static const GET_SUGGESTIONS = 1;
+
+  /// Replace the indicated erroneous text with the text provided in the
+  /// suggestion. The user does not need to be prompted.
+  static const REPLACE = 2;
+
+  /// The user should be prompted to delete the indicated erroneous text.
+  static const DELETE = 3;
+}
+
+// -----------------------------------------------------------------------------
+// IApplicationActivationManager constants
+// -----------------------------------------------------------------------------
+
+/// Flags used to support design mode, debugging, and testing scenarios.
+class ACTIVATEOPTIONS {
+  /// No flags are set.
+  static const AO_NONE = 0;
+
+  /// The app is being activated for design mode, so it can't create its normal
+  /// window. The creation of the app's window must be done by design tools that
+  /// load the necessary components by communicating with a designer-specified
+  /// service on the site chain established through the activation manager. Note
+  /// that this means that the splash screen seen during regular activations
+  /// won't be seen.
+  static const AO_DESIGNMODE = 0x1;
+
+  /// Do not display an error dialog if the app fails to activate.
+  static const AO_NOERRORUI = 0x2;
+
+  /// Do not display the app's splash screen when the app is activated. You must
+  /// enable debug mode on the app's package when you use this flag; otherwise,
+  /// the PLM will terminate the app after a few seconds.
+  static const AO_NOSPLASHSCREEN = 0x4;
+
+  /// The application is being activated in prelaunch mode. This value is
+  /// supported starting in Windows 10.
+  static const AO_PRELAUNCH = 0x2000000;
+}
+
+// -----------------------------------------------------------------------------
+// Symbol Flag constants
+// -----------------------------------------------------------------------------
+
+/// The Value member is used.
+const SYMFLAG_VALUEPRESENT = 0x00000001;
+
+/// The symbol is a register. The Register member is used.
+const SYMFLAG_REGISTER = 0x00000008;
+
+/// Offsets are register relative.
+const SYMFLAG_REGREL = 0x00000010;
+
+/// Offsets are frame relative.
+const SYMFLAG_FRAMEREL = 0x00000020;
+
+/// The symbol is a parameter.
+const SYMFLAG_PARAMETER = 0x00000040;
+
+/// The symbol is a local variable.
+const SYMFLAG_LOCAL = 0x00000080;
+
+/// The symbol is a constant.
+const SYMFLAG_CONSTANT = 0x00000100;
+
+/// The symbol is from the export table.
+const SYMFLAG_EXPORT = 0x00000200;
+
+/// The symbol is a forwarder.
+const SYMFLAG_FORWARDER = 0x00000400;
+
+/// The symbol is a known function.
+const SYMFLAG_FUNCTION = 0x00000800;
+
+/// The symbol is a virtual symbol created by the SymAddSymbol function.
+const SYMFLAG_VIRTUAL = 0x00001000;
+
+/// The symbol is a thunk.
+const SYMFLAG_THUNK = 0x00002000;
+
+/// The symbol is an offset into the TLS data area.
+const SYMFLAG_TLSREL = 0x00004000;
+
+/// The symbol is a managed code slot.
+const SYMFLAG_SLOT = 0x00008000;
+
+/// The symbol address is an offset relative to the beginning of the
+/// intermediate language block. This applies to managed code only.
+const SYMFLAG_ILREL = 0x00010000;
+
+/// The symbol is managed metadata.
+const SYMFLAG_METADATA = 0x00020000;
+
+/// The symbol is a CLR token.
+const SYMFLAG_CLR_TOKEN = 0x00040000;
+
+// -----------------------------------------------------------------------------
+// DWM constants
+// -----------------------------------------------------------------------------
+
+/// Flags used by the DwmGetWindowAttribute and DwmSetWindowAttribute functions
+/// to specify window attributes for Desktop Window Manager (DWM) non-client
+/// rendering.
+class DWMWINDOWATTRIBUTE {
+  /// Use with DwmGetWindowAttribute. Discovers whether non-client rendering is
+  /// enabled. The retrieved value is of type BOOL. TRUE if non-client rendering
+  /// is enabled; otherwise, FALSE.
+  static const DWMWA_NCRENDERING_ENABLED = 1;
+
+  /// Use with DwmSetWindowAttribute. Sets the non-client rendering policy. The
+  /// pvAttribute parameter points to a value from the DWMNCRENDERINGPOLICY
+  /// enumeration.
+  static const DWMWA_NCRENDERING_POLICY = 2;
+
+  /// Use with DwmSetWindowAttribute. Enables or forcibly disables DWM
+  /// transitions. The pvAttribute parameter points to a value of type BOOL.
+  /// TRUE to disable transitions, or FALSE to enable transitions.
+  static const DWMWA_TRANSITIONS_FORCEDISABLED = 3;
+
+  /// Use with DwmSetWindowAttribute. Enables content rendered in the non-client
+  /// area to be visible on the frame drawn by DWM. The pvAttribute parameter
+  /// points to a value of type BOOL. TRUE to enable content rendered in the
+  /// non-client area to be visible on the frame; otherwise, FALSE.
+  static const DWMWA_ALLOW_NCPAINT = 4;
+
+  /// Use with DwmGetWindowAttribute. Retrieves the bounds of the caption button
+  /// area in the window-relative space. The retrieved value is of type RECT. If
+  /// the window is minimized or otherwise not visible to the user, then the
+  /// value of the RECT retrieved is undefined. You should check whether the
+  /// retrieved RECT contains a boundary that you can work with, and if it
+  /// doesn't then you can conclude that the window is minimized or otherwise
+  /// not visible.
+  static const DWMWA_CAPTION_BUTTON_BOUNDS = 5;
+
+  /// Use with DwmSetWindowAttribute. Specifies whether non-client content is
+  /// right-to-left (RTL) mirrored. The pvAttribute parameter points to a value
+  /// of type BOOL. TRUE if the non-client content is right-to-left (RTL)
+  /// mirrored; otherwise, FALSE.
+  static const DWMWA_NONCLIENT_RTL_LAYOUT = 6;
+
+  /// Use with DwmSetWindowAttribute. Forces the window to display an iconic
+  /// thumbnail or peek representation (a static bitmap), even if a live or
+  /// snapshot representation of the window is available. This value is normally
+  /// set during a window's creation, and not changed throughout the window's
+  /// lifetime. Some scenarios, however, might require the value to change over
+  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+  /// require a iconic thumbnail or peek representation; otherwise, FALSE.
+  static const DWMWA_FORCE_ICONIC_REPRESENTATION = 7;
+
+  /// Use with DwmSetWindowAttribute. Sets how Flip3D treats the window. The
+  /// pvAttribute parameter points to a value from the DWMFLIP3DWINDOWPOLICY
+  /// enumeration.
+  static const DWMWA_FLIP3D_POLICY = 8;
+
+  /// Use with DwmGetWindowAttribute. Retrieves the extended frame bounds
+  /// rectangle in screen space. The retrieved value is of type RECT.
+  static const DWMWA_EXTENDED_FRAME_BOUNDS = 9;
+
+  /// Use with DwmSetWindowAttribute. The window will provide a bitmap for use
+  /// by DWM as an iconic thumbnail or peek representation (a static bitmap) for
+  /// the window. DWMWA_HAS_ICONIC_BITMAP can be specified with
+  /// DWMWA_FORCE_ICONIC_REPRESENTATION. DWMWA_HAS_ICONIC_BITMAP normally is set
+  /// during a window's creation and not changed throughout the window's
+  /// lifetime. Some scenarios, however, might require the value to change over
+  /// time. The pvAttribute parameter points to a value of type BOOL. TRUE to
+  /// inform DWM that the window will provide an iconic thumbnail or peek
+  /// representation; otherwise, FALSE.
+  static const DWMWA_HAS_ICONIC_BITMAP = 10;
+
+  /// Use with DwmSetWindowAttribute. Do not show peek preview for the window.
+  /// The peek view shows a full-sized preview of the window when the mouse
+  /// hovers over the window's thumbnail in the taskbar. If this attribute is
+  /// set, hovering the mouse pointer over the window's thumbnail dismisses peek
+  /// (in case another window in the group has a peek preview showing). The
+  /// pvAttribute parameter points to a value of type BOOL. TRUE to prevent peek
+  /// functionality, or FALSE to allow it.
+  static const DWMWA_DISALLOW_PEEK = 11;
+
+  /// Use with DwmSetWindowAttribute. Prevents a window from fading to a glass
+  /// sheet when peek is invoked. The pvAttribute parameter points to a value of
+  /// type BOOL. TRUE to prevent the window from fading during another window's
+  /// peek, or FALSE for normal behavior.
+  static const DWMWA_EXCLUDED_FROM_PEEK = 12;
+
+  /// Use with DwmSetWindowAttribute. Cloaks the window such that it is not
+  /// visible to the user. The window is still composed by DWM.
+  static const DWMWA_CLOAK = 13;
+
+  /// Use with DwmGetWindowAttribute. If the window is cloaked, provides one of
+  /// the following values explaining why.
+  ///
+  /// - DWM_CLOAKED_APP (value 0x0000001). The window was cloaked by its owner
+  ///   application.
+  /// - DWM_CLOAKED_SHELL (value 0x0000002). The window was cloaked by the
+  ///   Shell.
+  /// - DWM_CLOAKED_INHERITED (value 0x0000004). The cloak value was inherited
+  ///   from its owner window.
+  static const DWMWA_CLOAKED = 14;
+
+  /// Use with DwmSetWindowAttribute. Freeze the window's thumbnail image with
+  /// its current visuals. Do no further live updates on the thumbnail image to
+  /// match the window's contents.
+  static const DWMWA_FREEZE_REPRESENTATION = 15;
+
+  /// [Windows 11 and above.] Use with DwmSetWindowAttribute. Enables a non-UWP
+  /// window to use host backdrop brushes. If this flag is set, then a Win32 app
+  /// that calls Windows::UI::Composition APIs can build transparency effects
+  /// using the host backdrop brush (see Compositor.CreateHostBackdropBrush).
+  /// The retrieved value is of type BOOL. TRUE to enable host backdrop brushes
+  /// for the window; otherwise, FALSE.
+  static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
+
+  /// The maximum recognized DWMWINDOWATTRIBUTE value, used for validation
+  /// purposes.
+  static const DWMWA_LAST = 17;
+}
+
+// -----------------------------------------------------------------------------
+// Token information constants
+// -----------------------------------------------------------------------------
+
+/// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
+/// type of information being assigned to or retrieved from an access token.
+///
+/// {@category Struct}
+class TOKEN_INFORMATION_CLASS {
+  static const TokenUser = 1;
+  static const TokenGroups = 2;
+  static const TokenPrivileges = 3;
+  static const TokenOwner = 4;
+  static const TokenPrimaryGroup = 5;
+  static const TokenDefaultDacl = 6;
+  static const TokenSource = 7;
+  static const TokenType = 8;
+  static const TokenImpersonationLevel = 9;
+  static const TokenStatistics = 10;
+  static const TokenRestrictedSids = 11;
+  static const TokenSessionId = 12;
+  static const TokenGroupsAndPrivileges = 13;
+  static const TokenSessionReference = 14;
+  static const TokenSandBoxInert = 15;
+  static const TokenAuditPolicy = 16;
+  static const TokenOrigin = 17;
+  static const TokenElevationType = 18;
+  static const TokenLinkedToken = 19;
+  static const TokenElevation = 20;
+  static const TokenHasRestrictions = 21;
+  static const TokenAccessInformation = 22;
+  static const TokenVirtualizationAllowed = 23;
+  static const TokenVirtualizationEnabled = 24;
+  static const TokenIntegrityLevel = 25;
+  static const TokenUIAccess = 26;
+  static const TokenMandatoryPolicy = 27;
+  static const TokenLogonSid = 28;
+  static const TokenIsAppContainer = 29;
+  static const TokenCapabilities = 30;
+  static const TokenAppContainerSid = 31;
+  static const TokenAppContainerNumber = 32;
+  static const TokenUserClaimAttributes = 33;
+  static const TokenDeviceClaimAttributes = 34;
+  static const TokenRestrictedUserClaimAttributes = 35;
+  static const TokenRestrictedDeviceClaimAttributes = 36;
+  static const TokenDeviceGroups = 37;
+  static const TokenRestrictedDeviceGroups = 38;
+  static const TokenSecurityAttributes = 39;
+  static const TokenIsRestricted = 40;
+  static const TokenProcessTrustLevel = 41;
+  static const TokenPrivateNameSpace = 42;
+  static const TokenSingletonAttributes = 43;
+  static const TokenBnoIsolation = 44;
+  static const TokenChildProcessFlags = 45;
+  static const TokenIsLessPrivilegedAppContainer = 46;
+  static const TokenIsSandboxed = 47;
+  static const TokenOriginatingProcessTrustLevel = 48;
+}
+
+// -----------------------------------------------------------------------------
+// Smartcard constants
+// -----------------------------------------------------------------------------
+
+/// A smart card holder verification (CHV) attempt failed.
+const SCARD_AUDIT_CHV_FAILURE = 0x0;
+
+/// A smart card holder verification (CHV) attempt succeeded.
+const SCARD_AUDIT_CHV_SUCCESS = 0x1;
+
+/// No transmission protocol is active.
+const SCARD_PROTOCOL_UNDEFINED = 0x00000000;
+
+/// The ISO 7816/3 T=0 protocol is in use.
+const SCARD_PROTOCOL_T0 = 0x00000001;
+
+/// The ISO 7816/3 T=1 protocol is in use.
+const SCARD_PROTOCOL_T1 = 0x00000002;
+
+/// The Raw Transfer protocol is in use.
+const SCARD_PROTOCOL_RAW = 0x00010000;
+
+/// Bitwise OR combination of both of the two International Standards
+/// Organization (IS0) transmission protocols SCARD_PROTOCOL_T0 and
+/// SCARD_PROTOCOL_T1.
+const SCARD_PROTOCOL_Tx = (SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1);
+
+/// Use the implicit protocol of the card with standard parameters.
+const SCARD_PROTOCOL_DEFAULT = 0x80000000;
+
+/// Use the best possible communication parameters.
+const SCARD_PROTOCOL_OPTIMAL = 0x00000000;
+
+/// Remove power from the smart card.
+const SCARD_POWER_DOWN = 0;
+
+/// Power down the smart card and power it up again.
+const SCARD_COLD_RESET = 1;
+
+/// Reset the smart card without removing power.
+const SCARD_WARM_RESET = 2;
+
+/// The reader driver has no information concerning the current state of the
+/// reader.
+const SCARD_UNKNOWN = 0;
+
+/// There is no card in the reader.
+const SCARD_ABSENT = 1;
+
+/// There is a card in the reader, but it has not been moved into position for
+/// use.
+const SCARD_PRESENT = 2;
+
+/// There is a card in the reader in position for use. The card is not powered.
+const SCARD_SWALLOWED = 3;
+
+/// Power is being provided to the card, but the reader driver is unaware of the
+/// mode of the card.
+const SCARD_POWERED = 4;
+
+/// The card has been reset and is awaiting PTS negotiation.
+const SCARD_NEGOTIABLE = 5;
+
+/// The card has been reset and specific communication protocols have been
+/// established.
+const SCARD_SPECIFIC = 6;
+
+/// This application is not willing to share the card with other applications.
+const SCARD_SHARE_EXCLUSIVE = 1;
+
+/// This application is willing to share the card with other applications.
+const SCARD_SHARE_SHARED = 2;
+
+/// This application is allocating the reader for its private use, and will be
+/// controlling it directly. No other applications are allowed access to it.
+const SCARD_SHARE_DIRECT = 3;
+
+/// Don't do anything special on close.
+const SCARD_LEAVE_CARD = 0;
+
+/// Reset the card on close.
+const SCARD_RESET_CARD = 1;
+
+/// Power down the card on close.
+const SCARD_UNPOWER_CARD = 2;
+
+/// Eject the card on close.
+const SCARD_EJECT_CARD = 3;
+
+/// Database operations are performed within the domain of the user.
+const SCARD_SCOPE_USER = 0;
+
+/// Database operations are performed within the domain of the current terminal.
+const SCARD_SCOPE_TERMINAL = 1;
+
+/// Database operations are performed within the domain of the system. The
+/// calling application must have appropriate access permissions for any
+/// database actions.
+const SCARD_SCOPE_SYSTEM = 2;
+
+/// The function retrieves the name of the smart card's primary service provider as a GUID string.
+const SCARD_PROVIDER_PRIMARY = 1;
+
+/// The function retrieves the name of the cryptographic service provider.
+const SCARD_PROVIDER_CSP = 2;
+
+/// The function retrieves the name of the smart card key storage provider (KSP).
+const SCARD_PROVIDER_KSP = 3;
+
+/// The function retrieves the name of the card module.
+const SCARD_PROVIDER_CARD_MODULE = 0x80000001;
+
+/// Selects the smart card if only one smart card meets the criteria, or returns
+/// information about the user's selection if more than one smart card meets the
+/// criteria.
+const SC_DLG_MINIMAL_UI = 0x01;
+
+/// Selects the first available card.
+const SC_DLG_NO_UI = 0x02;
+
+/// Connects to the card selected by the user from the smart card Select Card
+/// dialog box.
+const SC_DLG_FORCE_UI = 0x04;
+
+// -----------------------------------------------------------------------------
+// EnumPrinters constants
+// -----------------------------------------------------------------------------
+
+/// (Win9.x only) enumerates the default printer.
+const PRINTER_ENUM_DEFAULT = 00000001;
+
+/// If the PRINTER_ENUM_NAME flag is not also passed, the function ignores the
+/// Name parameter, and enumerates the locally installed printers.
+/// If PRINTER_ENUM_NAME is also passed, the function enumerates the local
+/// printers on Name.
+const PRINTER_ENUM_LOCAL = 00000002;
+
+/// The function enumerates the list of printers to which the user has made
+/// previous connections.
+const PRINTER_ENUM_CONNECTIONS = 0x00000004;
+
+///
+const PRINTER_ENUM_FAVORITE = 0x00000004;
+
+/// The function enumerates the printer identified by Name. This can be a server
+/// a domain, or a print provider. If Name is NULL, the function enumerates
+/// available print providers.
+const PRINTER_ENUM_NAME = 00000008;
+
+/// The function enumerates network printers and print servers in the computer's
+/// domain. This value is valid only if Level is 1.
+const PRINTER_ENUM_REMOTE = 00000010;
+
+/// The function enumerates printers that have the shared attribute. Cannot be
+/// used in isolation; use an OR operation to combine with another PRINTER_ENUM
+/// type.
+const PRINTER_ENUM_SHARED = 00000020;
+
+/// The function enumerates network printers in the computer's domain. This
+/// value is valid only if Level is 1.
+const PRINTER_ENUM_NETWORK = 00000040;
+
+/// Indicates that the printer object contains further enumerable child objects.
+const PRINTER_ENUM_EXPAND = 00004000;
+
+/// Indicates that the printer object is capable of containing enumerable
+/// objects. One such object is a print provider, which is a print server that
+/// contains printers.
+const PRINTER_ENUM_CONTAINER = 0x00008000;
+
+///
+const PRINTER_ENUM_ICONMASK = 0x00ff0000;
+
+///
+const PRINTER_ENUM_ICON1 = 00010000;
+
+///
+const PRINTER_ENUM_ICON2 = 00020000;
+
+///
+const PRINTER_ENUM_ICON3 = 00040000;
+
+///
+const PRINTER_ENUM_ICON4 = 00080000;
+
+///
+const PRINTER_ENUM_ICON5 = 00100000;
+
+///
+const PRINTER_ENUM_ICON6 = 00200000;
+
+///
+const PRINTER_ENUM_ICON7 = 00400000;
+
+/// Indicates that, where appropriate, an application treats an object as a
+/// print server. A GUI application can<145> choose to display an icon of choice
+/// for this type of object.
+const PRINTER_ENUM_ICON8 = 00800000;
+
+/// Indicates that an application cannot display the printer object.
+const PRINTER_ENUM_HIDE = 01000000;
+
+/// PRINTER_ENUM_CATEGORY_ALL
+const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
+
+/// The function enumerates only 3D printers.
+const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
+
+// -----------------------------------------------------------------------------
+// GetWindow constants
+// -----------------------------------------------------------------------------
+/// The retrieved handle identifies the child window at the top of the Z order,
+/// if the specified window is a parent window; otherwise, the retrieved handle
+/// is NULL. The function examines only child windows of the specified window.
+/// It does not examine descendant windows.
+const GW_CHILD = 5;
+
+/// The retrieved handle identifies the enabled popup window owned by the
+/// specified window (the search uses the first such window found using
+/// GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the
+/// retrieved handle is that of the specified window.
+const GW_ENABLEDPOPUP = 6;
+
+/// The retrieved handle identifies the window of the same type that is highest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDFIRST = 0;
+
+/// The retrieved handle identifies the window of the same type that is lowest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDLAST = 1;
+
+/// The retrieved handle identifies the window below the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDNEXT = 2;
+
+/// The retrieved handle identifies the window above the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDPREV = 3;
+
+/// The retrieved handle identifies the specified window's owner window, if any.
+/// For more information, see Owned Windows.
+const GW_OWNER = 4;

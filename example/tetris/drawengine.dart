@@ -13,7 +13,7 @@ class DrawEngine {
   int hwnd;
 
   /// rectangle for drawing
-  final rect = RECT.allocate();
+  final rect = calloc<RECT>();
 
   /// level width
   int width;
@@ -24,7 +24,7 @@ class DrawEngine {
   /// Initiate the DrawEngine
   DrawEngine(this.hdc, this.hwnd,
       [int pxPerBlock = 25, this.width = 10, this.height = 20]) {
-    GetClientRect(hwnd, rect.addressOf);
+    GetClientRect(hwnd, rect);
 
     SaveDC(hdc);
 
@@ -32,7 +32,7 @@ class DrawEngine {
     SetMapMode(hdc, MM_ISOTROPIC);
     SetViewportExtEx(hdc, pxPerBlock, pxPerBlock, nullptr);
     SetWindowExtEx(hdc, 1, -1, nullptr);
-    SetViewportOrgEx(hdc, 0, rect.bottom, nullptr);
+    SetViewportOrgEx(hdc, 0, rect.ref.bottom, nullptr);
 
     // Set default colors
     SetTextColor(hdc, RGB(255, 255, 255));
@@ -42,12 +42,12 @@ class DrawEngine {
 
   void drawBlock(int x, int y, int color) {
     final hBrush = CreateSolidBrush(color);
-    rect.left = x;
-    rect.right = x + 1;
-    rect.top = y;
-    rect.bottom = y + 1;
+    rect.ref.left = x;
+    rect.ref.right = x + 1;
+    rect.ref.top = y;
+    rect.ref.bottom = y + 1;
 
-    FillRect(hdc, rect.addressOf, hBrush);
+    FillRect(hdc, rect, hBrush);
 
     // Draw left and bottom black border
     MoveToEx(hdc, x, y + 1, nullptr);
@@ -58,11 +58,11 @@ class DrawEngine {
 
   void drawInterface() {
     final hBrush = CreateSolidBrush(RGB(70, 70, 70));
-    rect.top = height;
-    rect.left = width;
-    rect.bottom = 0;
-    rect.right = width + 8;
-    FillRect(hdc, rect.addressOf, hBrush);
+    rect.ref.top = height;
+    rect.ref.left = width;
+    rect.ref.bottom = 0;
+    rect.ref.right = width + 8;
+    FillRect(hdc, rect, hBrush);
     DeleteObject(hBrush);
   }
 
