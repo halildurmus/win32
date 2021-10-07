@@ -4169,6 +4169,15 @@ void main() {
           int Function(int hwnd, POINT pt)>('DragDetect');
       expect(DragDetect, isA<Function>());
     });
+    test('Can instantiate DrawAnimatedRects', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawAnimatedRects = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Int32 idAni, Pointer<RECT> lprcFrom,
+              Pointer<RECT> lprcTo),
+          int Function(int hwnd, int idAni, Pointer<RECT> lprcFrom,
+              Pointer<RECT> lprcTo)>('DrawAnimatedRects');
+      expect(DrawAnimatedRects, isA<Function>());
+    });
     test('Can instantiate DrawCaption', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final DrawCaption = user32.lookupFunction<
@@ -4178,12 +4187,64 @@ void main() {
               int flags)>('DrawCaption');
       expect(DrawCaption, isA<Function>());
     });
+    test('Can instantiate DrawEdge', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawEdge = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
+          int Function(
+              int hdc, Pointer<RECT> qrc, int edge, int grfFlags)>('DrawEdge');
+      expect(DrawEdge, isA<Function>());
+    });
+    test('Can instantiate DrawFocusRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawFocusRect = user32.lookupFunction<
+          Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+          int Function(int hDC, Pointer<RECT> lprc)>('DrawFocusRect');
+      expect(DrawFocusRect, isA<Function>());
+    });
+    test('Can instantiate DrawFrameControl', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawFrameControl = user32.lookupFunction<
+          Int32 Function(IntPtr param0, Pointer<RECT> param1, Uint32 param2,
+              Uint32 param3),
+          int Function(int param0, Pointer<RECT> param1, int param2,
+              int param3)>('DrawFrameControl');
+      expect(DrawFrameControl, isA<Function>());
+    });
     test('Can instantiate DrawIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final DrawIcon = user32.lookupFunction<
           Int32 Function(IntPtr hDC, Int32 X, Int32 Y, IntPtr hIcon),
           int Function(int hDC, int X, int Y, int hIcon)>('DrawIcon');
       expect(DrawIcon, isA<Function>());
+    });
+    test('Can instantiate DrawState', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawState = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hdc,
+              IntPtr hbrFore,
+              Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+              IntPtr lData,
+              IntPtr wData,
+              Int32 x,
+              Int32 y,
+              Int32 cx,
+              Int32 cy,
+              Uint32 uFlags),
+          int Function(
+              int hdc,
+              int hbrFore,
+              Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+              int lData,
+              int wData,
+              int x,
+              int y,
+              int cx,
+              int cy,
+              int uFlags)>('DrawStateW');
+      expect(DrawState, isA<Function>());
     });
     test('Can instantiate DrawText', () {
       final user32 = DynamicLibrary.open('user32.dll');
