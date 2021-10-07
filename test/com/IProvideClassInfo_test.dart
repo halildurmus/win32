@@ -7,6 +7,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
+// ignore_for_file: unused_local_variable
+
 @TestOn('windows')
 
 import 'dart:ffi';
@@ -21,8 +23,7 @@ void main() {
 
   final provideclassinfo = IProvideClassInfo(ptr);
   test('Can instantiate IProvideClassInfo.GetClassInfo', () {
-    // BUG: https://github.com/microsoft/win32metadata/issues/290
-    expect(provideclassinfo.GetClassInfoA, isA<Function>());
+    expect(provideclassinfo.GetClassInfo, isA<Function>());
   });
   free(ptr);
 }

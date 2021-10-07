@@ -1,3 +1,104 @@
+## 2.2.9
+
+- Add some missing GDI functions
+
+## 2.2.8
+
+- Add Native Wifi APIs (#299)
+
+## 2.2.7
+
+- Added ResetEvent and complete `OVERLAPPED` struct (#295)
+- Added more virtual memory functions (#297)
+
+## 2.2.6
+
+- Add some requested APIs thanks to contributions from @ilopX, in particular
+  a new sample for enumerating locally installed printers.
+- Added ExtractAssociatedIcon, with thanks to @halildurmus.
+
+## 2.2.5
+
+- Add more DWM APIs, including `DwmSetWindowAttribute`.
+
+## 2.2.4
+
+- Add various DWM and subclassing APIs
+
+## 2.2.3
+
+- Lazily evaluate `lookupFunction` FFI calls for improved performance.
+- Add APIs for hooks and a few extra kernel32 APIs
+- Add some more tests.
+
+## 2.2.2
+
+- Add Windows Spooler library support.
+
+## 2.2.1
+
+- Add initial support for the Windows Socket library (winsock2).
+
+## 2.2.0
+
+- Fixes convertToHString to return an int, since `HSTRING`s are handles. This is
+  a breaking change for any apps that use WinRT APIs, but given the limited
+  availability of WinRT classes that fall into this category, updating only the
+  minor version.
+- Add low-level Device IO and structured storage APIs and diskinfo.dart sample.
+
+## 2.1.5
+
+- Add smart card reader support.
+
+## 2.1.4
+
+- Add helper functions for COM along with extra documentation.
+
+## 2.1.3
+
+- Fix bug in shell COM APIs.
+- Add examples for shortcut creation and named pipes.
+
+## 2.1.2
+
+- Add serial port comms APIs
+- Add additional shell COM APIs
+
+## 2.1.1
+
+- Work around FFI regression in Dart master and dev builds.
+
+## 2.1.0
+
+- Upgrade to Dart 2.13, which supports packed structs and arrays in FFI. This
+  enables support for more automated generation of structs, which in turn
+  increases development velocity for this package.
+
+- Other APIs included in this release include:
+  - More complete Bluetooth support
+  - MIDI support
+  - High DPI support
+  - `IDispatch` support
+  - Many more core user32 APIs
+
+## 2.0.5
+
+- Add some debugging APIs to allow enumerating exported symbols, along with a
+  sample (`dump.dart`).
+- Free memory allocations in samples.
+- Use latest version of Win32 metadata from winmd package, and generate most
+  structs automatically using this metadata.
+- Generate COM helper classes wherever metadata supports it, instead of
+  requiring a manual decorator.
+- Add about 20 new kernel32 APIs.
+
+## 2.0.4
+
+- Add network events, thanks to a contribution from @sunbreak.
+- Update COM vtable generation, thanks to a contribution from @bonukai.
+- Update to use the latest WinMD package.
+
 ## 2.0.3
 
 - Add spellchecking COM APIs, thanks to a contribution from @bonukai.

@@ -10,37 +10,30 @@ jobs:
   build:
     runs-on: ${{matrix.os}}
     strategy:
-      # We want to see the results on edge even if beta fails (and vice versa).
-      # This prevents one failure from stopping the entire run.
+      # We want to see the results on stable even if main fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
+      # Free config supports up to five concurrent jobs, so pick a sparse matrix
+      # that tiles the space well.
       matrix:
-        # Include newest and latest versions of Windows, plus Ubuntu (to make
-        # sure that tests don't fail on a non-supported platform).
-        os: [windows-latest, windows-2016, ubuntu-latest]
-
-        sdk: [stable, dev, main]
-
-        # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
-        # it's unlikely that we'll find unique bugs associated with running the
-        # oldest Windows version on leading-edge Dart releases that won't be
-        # caught by running on the latest Windows version.
-        exclude:
-          - os: ubuntu-latest
+        include:
+          - os: windows-2022
             sdk: main
+          - os: windows-2019
+            sdk: beta
+          - os: windows-2016
+            sdk: stable
           - os: ubuntu-latest
-            sdk: dev
-          - os: windows-2016
-            sdk: main
-          - os: windows-2016
-            sdk: dev
+            sdk: stable
 
     steps:
       - name: Fetch sources
         uses: actions/checkout@v2
 
       - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
+        # https://github.com/dart-lang/setup-dart/issues/42
+        uses: dart-lang/setup-dart@v1.2
         with:
           sdk: ${{matrix.sdk}}
 

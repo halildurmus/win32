@@ -6,9 +6,11 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'callbacks.dart';
 import 'constants.dart';
-import 'structs.dart';
+import 'structs.g.dart';
 import 'user32.dart';
 
 /// Creates a WORD value by concatenating the specified values.
@@ -85,12 +87,57 @@ int HRESULT_FROM_WIN32(int x) =>
     (x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
         .toSigned(32);
 
+/// Maps a control code to a constant
+//
+// #define CTL_CODE( DeviceType, Function, Method, Access ) (
+//   ((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method)
+int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
+    (((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method))
+        .toSigned(32);
+
 /// Retrieves the parameters to WM_SYSCOMMAND.
 ///
 /// {@category user32}
 //
 // #define GET_SC_WPARAM(wParam) ((int)wParam & 0xFFF0)
 int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
+
+/// Creates an overlapped, pop-up, or child window. It specifies the window
+/// class, window title, window style, and (optionally) the initial position and
+/// size of the window. The function also specifies the window's parent or
+/// owner, if any, and the window's menu.
+///
+/// ```c
+/// HWND CreateWindowW(
+///   LPCWSTR   lpClassName,
+///   LPCWSTR   lpWindowName,
+///   DWORD     dwStyle,
+///   int       X,
+///   int       Y,
+///   int       nWidth,
+///   int       nHeight,
+///   HWND      hWndParent,
+///   HMENU     hMenu,
+///   HINSTANCE hInstance,
+///   LPVOID    lpParam
+/// );
+/// ```
+///
+/// {@category user32}
+int CreateWindow(
+        Pointer<Utf16> lpClassName,
+        Pointer<Utf16> lpWindowName,
+        int dwStyle,
+        int X,
+        int Y,
+        int nWidth,
+        int nHeight,
+        int hWndParent,
+        int hMenu,
+        int hInstance,
+        Pointer lpParam) =>
+    CreateWindowEx(0, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
+        hWndParent, hMenu, hInstance, lpParam);
 
 /// Creates a modal dialog box from a dialog box template in memory.
 /// DialogBoxIndirect does not return control until the specified callback

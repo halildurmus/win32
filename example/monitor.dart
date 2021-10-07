@@ -109,7 +109,7 @@ void main() {
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
   print('Primary monitor handle: $primaryMonitorHandle');
 
-  final physicalMonitorCountPtr = calloc<Uint32>();
+  final physicalMonitorCountPtr = calloc<DWORD>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
       primaryMonitorHandle, physicalMonitorCountPtr);
   if (result == FALSE) {
@@ -143,8 +143,8 @@ void main() {
       .toDartString();
   print('Physical monitor description: $physicalMonitorDescription');
 
-  final monitorCapabilitiesPtr = calloc<Uint32>();
-  final monitorColorTemperaturesPtr = calloc<Uint32>();
+  final monitorCapabilitiesPtr = calloc<DWORD>();
+  final monitorColorTemperaturesPtr = calloc<DWORD>();
 
   result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
       monitorColorTemperaturesPtr);
@@ -155,9 +155,9 @@ void main() {
     print('Monitor does not support DDC/CI.');
   }
 
-  final minimumBrightnessPtr = calloc<Uint32>();
-  final currentBrightnessPtr = calloc<Uint32>();
-  final maximumBrightnessPtr = calloc<Uint32>();
+  final minimumBrightnessPtr = calloc<DWORD>();
+  final currentBrightnessPtr = calloc<DWORD>();
+  final maximumBrightnessPtr = calloc<DWORD>();
   result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
       currentBrightnessPtr, maximumBrightnessPtr);
   if (result == TRUE) {

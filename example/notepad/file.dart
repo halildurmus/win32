@@ -34,13 +34,10 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool showOpenDialog(int hwnd) {
-    final strFile = path.isNotEmpty
-        ? path.toNativeUtf16()
-        : calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final strFile = path.isNotEmpty ? path.toNativeUtf16() : wsalloc(MAX_PATH);
 
-    final strFileTitle = title.isNotEmpty
-        ? title.toNativeUtf16()
-        : calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final strFileTitle =
+        title.isNotEmpty ? title.toNativeUtf16() : wsalloc(MAX_PATH);
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
@@ -62,13 +59,10 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool showSaveDialog(int hwnd) {
-    final strFile = path.isNotEmpty
-        ? path.toNativeUtf16()
-        : calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final strFile = path.isNotEmpty ? path.toNativeUtf16() : wsalloc(MAX_PATH);
 
-    final strFileTitle = title.isNotEmpty
-        ? title.toNativeUtf16()
-        : calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final strFileTitle =
+        title.isNotEmpty ? title.toNativeUtf16() : wsalloc(MAX_PATH);
 
     ofn.ref.lpstrFile = strFile;
     ofn.ref.lpstrFileTitle = strFileTitle;
@@ -96,7 +90,7 @@ class NotepadFile {
   void writeFileFromEditControl(int hwndEdit) {
     final file = File(path);
     final iLength = GetWindowTextLength(hwndEdit);
-    final buffer = calloc<Uint16>(iLength).cast<Utf16>();
+    final buffer = wsalloc(iLength);
 
     GetWindowText(hwndEdit, buffer, iLength + 1);
     file.writeAsStringSync(buffer.toDartString());

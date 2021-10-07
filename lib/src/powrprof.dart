@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _powrprof = DynamicLibrary.open('powrprof.dll');
 
@@ -31,20 +32,20 @@ final _powrprof = DynamicLibrary.open('powrprof.dll');
 /// ```
 /// {@category powrprof}
 int CallNtPowerInformation(int InformationLevel, Pointer InputBuffer,
-    int InputBufferLength, Pointer OutputBuffer, int OutputBufferLength) {
-  final _CallNtPowerInformation = _powrprof.lookupFunction<
-      Int32 Function(
-          Int32 InformationLevel,
-          Pointer InputBuffer,
-          Uint32 InputBufferLength,
-          Pointer OutputBuffer,
-          Uint32 OutputBufferLength),
-      int Function(
-          int InformationLevel,
-          Pointer InputBuffer,
-          int InputBufferLength,
-          Pointer OutputBuffer,
-          int OutputBufferLength)>('CallNtPowerInformation');
-  return _CallNtPowerInformation(InformationLevel, InputBuffer,
-      InputBufferLength, OutputBuffer, OutputBufferLength);
-}
+        int InputBufferLength, Pointer OutputBuffer, int OutputBufferLength) =>
+    _CallNtPowerInformation(InformationLevel, InputBuffer, InputBufferLength,
+        OutputBuffer, OutputBufferLength);
+
+late final _CallNtPowerInformation = _powrprof.lookupFunction<
+    Int32 Function(
+        Uint32 InformationLevel,
+        Pointer InputBuffer,
+        Uint32 InputBufferLength,
+        Pointer OutputBuffer,
+        Uint32 OutputBufferLength),
+    int Function(
+        int InformationLevel,
+        Pointer InputBuffer,
+        int InputBufferLength,
+        Pointer OutputBuffer,
+        int OutputBufferLength)>('CallNtPowerInformation');

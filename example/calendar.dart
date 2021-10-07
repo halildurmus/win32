@@ -19,16 +19,16 @@ void main() {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');
 
-    final systemPtr = calloc<IntPtr>();
+    final systemPtr = calloc<HSTRING>();
     calendar.GetCalendarSystem(systemPtr);
-    print('The calendar system is ${convertFromHString(systemPtr)}.');
+    print('The calendar system is ${convertFromHString(systemPtr.value)}.');
     WindowsDeleteString(systemPtr.value);
     free(systemPtr);
 
-    final dayPtr = calloc<IntPtr>();
+    final dayPtr = calloc<HSTRING>();
     calendar.DayOfWeekAsFullSoloString(dayPtr);
-    print('Today is ${convertFromHString(dayPtr)}.');
-    WindowsDeleteString(systemPtr.value);
+    print('Today is ${convertFromHString(dayPtr.value)}.');
+    WindowsDeleteString(dayPtr.value);
     free(dayPtr);
 
     free(object);

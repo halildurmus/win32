@@ -1,3 +1,4 @@
+/// Maps between Windows versions and the corresponding build numbers
 const windowsBuilds = <String, int>{
   'WIN8': 9200,
   'WIN81': 9600,
@@ -14,6 +15,24 @@ const windowsBuilds = <String, int>{
   'WIN10_20H2': 19042,
 };
 
+/// Converts to/from win32struct.json
+class Win32Struct {
+  final String namespace;
+  final String comment;
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'namespace': namespace,
+        'comment': comment,
+      };
+
+  Win32Struct.fromJson(Map<String, dynamic> json)
+      : assert(json['namespace'] != null),
+        assert(json['comment'] != null),
+        namespace = json['namespace'] as String,
+        comment = json['comment'] as String;
+}
+
+/// Converts to/from win32api.json
 class Win32Function {
   final List<String> prototype;
 

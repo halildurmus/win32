@@ -3,8 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // Play a sound
-// Example comes from:
-//   https://docs.microsoft.com/en-us/windows/win32/gdi/capturing-an-image
 
 import 'dart:io';
 
@@ -14,14 +12,17 @@ void main() {
   const logonSound = r'C:\Windows\Media\Windows Logon.wav';
 
   final file = File(logonSound).existsSync();
+
   if (!file) {
     print('WAV file missing.');
     exit(1);
   } else {
-    final result = PlaySound(TEXT(logonSound), NULL, SND_FILENAME | SND_SYNC);
+    final pszLogonSound = TEXT(logonSound);
+    final result = PlaySound(pszLogonSound, NULL, SND_FILENAME | SND_SYNC);
 
     if (result != TRUE) {
       print('Sound playback failed.');
     }
+    free(pszLogonSound);
   }
 }

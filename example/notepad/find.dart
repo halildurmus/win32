@@ -16,8 +16,8 @@ class NotepadFind {
   late Pointer<Utf16> szReplText;
 
   NotepadFind() {
-    szFindText = calloc<Uint16>(MAX_STRING_LEN).cast<Utf16>();
-    szReplText = calloc<Uint16>(MAX_STRING_LEN).cast<Utf16>();
+    szFindText = wsalloc(MAX_STRING_LEN);
+    szReplText = wsalloc(MAX_STRING_LEN);
     find = calloc<FINDREPLACE>();
   }
 
@@ -50,7 +50,7 @@ class NotepadFind {
     // Read in the edit document
     iLength = GetWindowTextLength(hwndEdit);
 
-    final pDoc = calloc<Uint16>(iLength + 1).cast<Utf16>();
+    final pDoc = wsalloc(iLength + 1);
     GetWindowText(hwndEdit, pDoc, iLength + 1);
     final strDoc = pDoc.toDartString();
     free(pDoc);

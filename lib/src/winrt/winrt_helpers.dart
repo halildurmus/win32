@@ -10,19 +10,20 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../com/combase.dart';
+import '../com/IInspectable.dart';
+import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../types.dart';
 import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
 /// {@category winrt}
-void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
+void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
 /// Closes the Windows Runtime on the current thread.
 /// {@category winrt}
@@ -30,11 +31,11 @@ void winrtUninitialize() => RoUninitialize();
 
 /// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
 /// {@category winrt}
-String convertFromHString(Pointer<IntPtr> hstring) {
-  final stringLength = calloc<Uint32>();
+String convertFromHString(int hstring) {
+  final stringLength = calloc<UINT32>();
 
   try {
-    final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
+    final stringPtr = WindowsGetStringRawBuffer(hstring, stringLength);
     final dartString = stringPtr.toDartString();
 
     return dartString;
@@ -44,13 +45,16 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 }
 
 /// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
-/// returning a pointer to the `HSTRING`.
+/// returning an integer handle.
 ///
 /// The caller is responsible for deleting the `HSTRING` when it is no longer
-/// used, through a call to `WindowsDeleteString()`.
+/// used, through a call to `WindowsDeleteString(HSTRING hstr)`, which
+/// decrements the reference count of that string. If the reference count
+/// reaches 0, the Windows Runtime deallocates the buffer.
+///
 /// {@category winrt}
-Pointer<IntPtr> convertToHString(String string) {
-  final hString = calloc<IntPtr>();
+int convertToHString(String string) {
+  final hString = calloc<HSTRING>();
   final stringPtr = string.toNativeUtf16();
   // Create a HSTRING representing the object
   try {
@@ -58,7 +62,7 @@ Pointer<IntPtr> convertToHString(String string) {
     if (FAILED(hr)) {
       throw WindowsException(hr);
     } else {
-      return hString;
+      return hString.value;
     }
   } finally {
     free(stringPtr);
@@ -73,7 +77,7 @@ Pointer<IntPtr> convertToHString(String string) {
 /// ```
 /// {@category winrt}
 Pointer<COMObject> CreateObject(String className, String iid) {
-  final hstrClass = calloc<IntPtr>();
+  final hstrClass = calloc<HSTRING>();
   final lpClassName = className.toNativeUtf16();
   final inspectablePtr = calloc<COMObject>();
   final riid = calloc<GUID>();

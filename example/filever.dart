@@ -13,9 +13,9 @@ void main() {
 
   final fviSize = getVersionBlockSize(lpFilename);
 
-  final pBlock = calloc<Uint8>(fviSize);
+  final pBlock = calloc<BYTE>(fviSize);
   final lpFixedFileVersionInfo = calloc<Pointer>();
-  final uLen = calloc<Uint32>();
+  final uLen = calloc<UINT>();
   final subBlock = TEXT(r'\');
 
   try {
@@ -50,7 +50,7 @@ int getVersionBlockSize(Pointer<Utf16> lpFilename) {
   int fviSize;
 
   // dwDummy isn't used; it's a historical vestige.
-  final dwDummy = calloc<Uint32>();
+  final dwDummy = calloc<DWORD>();
 
   try {
     fviSize = GetFileVersionInfoSize(lpFilename, dwDummy);

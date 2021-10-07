@@ -49,10 +49,10 @@ void main() {
     });
 
     test('Calendar month as string', () {
-      final hstr = calloc<IntPtr>();
+      final hstr = calloc<HSTRING>();
       calendar.MonthAsFullString(hstr);
       expect(
-          convertFromHString(hstr),
+          convertFromHString(hstr.value),
           isIn([
             'January',
             'February',
@@ -72,10 +72,10 @@ void main() {
     });
 
     test('Calendar month as truncated string', () {
-      final hstr = calloc<IntPtr>();
+      final hstr = calloc<HSTRING>();
       calendar.MonthAsString(3, hstr);
       expect(
-          convertFromHString(hstr),
+          convertFromHString(hstr.value),
           isIn([
             'Jan',
             'Feb',
@@ -95,8 +95,8 @@ void main() {
     });
 
     test('Calendar resolved language', () {
-      final hstrPtr = calloc<IntPtr>()..value = calendar.ResolvedLanguage;
-      final lang = convertFromHString(hstrPtr);
+      final hstrPtr = calloc<HSTRING>()..value = calendar.ResolvedLanguage;
+      final lang = convertFromHString(hstrPtr.value);
 
       // Should be something like en-US
       expect(lang[2], equals('-'));

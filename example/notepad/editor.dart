@@ -35,8 +35,8 @@ class NotepadEditor {
   bool get isTextSelected {
     bool result;
 
-    final iSelBeg = calloc<Uint32>();
-    final iSelEnd = calloc<Uint32>();
+    final iSelBeg = calloc<DWORD>();
+    final iSelEnd = calloc<DWORD>();
 
     SendMessage(_hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
 
