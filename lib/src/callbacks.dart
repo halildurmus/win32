@@ -78,6 +78,18 @@ typedef FRHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 /// new thread in the process to execute the function.
 typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
 
+/// Application-defined callback function implements a custom transform for
+/// image scaling.
+typedef MagImageScalingCallback = BOOL Function(
+    HWND hwnd,
+    Pointer srcdata,
+    MAGIMAGEHEADER srcheader,
+    Pointer destdata,
+    MAGIMAGEHEADER destheader,
+    RECT unclipped,
+    RECT clipped,
+    HRGN dirty);
+
 /// Application-defined callback function for handling incoming MIDI messages.
 /// MidiInProc is a placeholder for the application-supplied function name. The
 /// address of this function can be specified in the callback-address parameter

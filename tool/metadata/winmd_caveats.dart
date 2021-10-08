@@ -15,6 +15,7 @@ const winmdGenerated = [
   'gdi32',
   'kernel32',
   'kernelbase',
+  'magnification',
   'ole32',
   'oleaut32',
   'powrprof',

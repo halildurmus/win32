@@ -3352,6 +3352,101 @@
         "dllLibrary": "user32",
         "comment": "Searches through icon or cursor data for the icon or cursor that best fits the current display device."
     },
+    "MagGetColorEffect": {
+        "prototype": "BOOL MagGetColorEffect(\n  HWND            hwnd,\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Gets the color transformation matrix for a magnifier control."
+    },
+    "MagGetFullscreenColorEffect": {
+        "prototype": "BOOL MagGetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the color transformation matrix associated with the full-screen magnifier."
+    },
+    "MagGetFullscreenTransform": {
+        "prototype": "BOOL MagGetFullscreenTransform(\n  float *pMagLevel,\n  int   *pxOffset,\n  int   *pyOffset\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the magnification settings for the full-screen magnifier."
+    },
+    "MagGetImageScalingCallback": {
+        "prototype": "MagImageScalingCallback MagGetImageScalingCallback(\n  HWND hwnd\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the registered callback function that implements a custom transform for image scaling."
+    },
+    "MagGetInputTransform": {
+        "prototype": "BOOL MagGetInputTransform(\n  BOOL   *pfEnabled,\n  LPRECT pRectSource,\n  LPRECT pRectDest\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the current input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+    },
+    "MagGetWindowFilterList": {
+        "prototype": "int MagGetWindowFilterList(\n  HWND  hwnd,\n  DWORD *pdwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the list of windows that are magnified or excluded from magnification."
+    },
+    "MagGetWindowSource": {
+        "prototype": "BOOL MagGetWindowSource(\n  HWND hwnd,\n  RECT *pRect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Gets the rectangle of the area that is being magnified."
+    },
+    "MagGetWindowTransform": {
+        "prototype": "BOOL MagGetWindowTransform(\n  HWND          hwnd,\n  PMAGTRANSFORM pTransform\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the transformation matrix associated with a magnifier control."
+    },
+    "MagInitialize": {
+        "prototype": "BOOL MagInitialize();",
+        "dllLibrary": "magnification",
+        "comment": "Creates and initializes the magnifier run-time objects."
+    },
+    "MagSetColorEffect": {
+        "prototype": "BOOL MagSetColorEffect(\n  HWND            hwnd,\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the color transformation matrix for a magnifier control."
+    },
+    "MagSetFullscreenColorEffect": {
+        "prototype": "BOOL MagSetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Changes the color transformation matrix associated with the full-screen magnifier."
+    },
+    "MagSetFullscreenTransform": {
+        "prototype": "BOOL MagSetFullscreenTransform(\n  float magLevel,\n  int   xOffset,\n  int   yOffset\n);",
+        "dllLibrary": "magnification",
+        "comment": "Changes the magnification settings for the full-screen magnifier."
+    },
+    "MagSetImageScalingCallback": {
+        "prototype": "BOOL MagSetImageScalingCallback(\n  HWND                    hwnd,\n  MagImageScalingCallback callback\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the callback function for external image filtering and scaling."
+    },
+    "MagSetInputTransform": {
+        "prototype": "BOOL MagSetInputTransform(\n  BOOL         fEnabled,\n  const LPRECT pRectSource,\n  const LPRECT pRectDest\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the current active input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+    },
+    "MagSetWindowFilterList": {
+        "prototype": "BOOL MagSetWindowFilterList(\n  HWND  hwnd,\n  DWORD dwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the list of windows to be magnified or the list of windows to be excluded from magnification."
+    },
+    "MagSetWindowSource": {
+        "prototype": "BOOL MagSetWindowSource(\n  HWND hwnd,\n  RECT rect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the source rectangle for the magnification window."
+    },
+    "MagSetWindowTransform": {
+        "prototype": "BOOL MagSetWindowTransform(\n  HWND          hwnd,\n  PMAGTRANSFORM pTransform\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the transformation matrix for a magnifier control."
+    },
+    "MagShowSystemCursor": {
+        "prototype": "BOOL MagShowSystemCursor(\n  BOOL fShowCursor\n);",
+        "dllLibrary": "magnification",
+        "comment": "Shows or hides the system cursor."
+    },
+    "MagUninitialize": {
+        "prototype": "BOOL MagUninitialize();",
+        "dllLibrary": "magnification",
+        "comment": "Destroys the magnifier run-time objects."
+    },
     "MapDialogRect": {
         "prototype": "BOOL MapDialogRect(\n  HWND   hDlg,\n  LPRECT lpRect\n);",
         "dllLibrary": "user32",
