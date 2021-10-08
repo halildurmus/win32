@@ -2068,6 +2068,41 @@ const WM_HOTKEY = 0x0312;
 /// in the form WM_USER+x, where x is an integer value.
 const WM_USER = 0x0400;
 
+/// A message-only window enables you to send and receive messages. It is not
+/// visible, has no z-order, cannot be enumerated, and does not receive
+/// broadcast messages. The window simply dispatches messages.
+const HWND_MESSAGE = 0xFFFFFFFFFFFFFFFD; // (HWND) -3
+
+/// Special HWND value for use with PostMessage() and SendMessage(). The message
+/// is sent to all top-level windows in the system, including disabled or
+/// invisible unowned windows, overlapped windows, and pop-up windows; but the
+/// message is not sent to child windows.
+const HWND_BROADCAST = 0xffff;
+
+// -----------------------------------------------------------------------------
+// SendMessageTimeout values
+// -----------------------------------------------------------------------------
+
+/// The calling thread is not prevented from processing other requests while
+/// waiting for the function to return.
+const SMTO_NORMAL = 0x0000;
+
+/// Prevents the calling thread from processing any other requests until the
+/// function returns.
+const SMTO_BLOCK = 0x0001;
+
+/// The function returns without waiting for the time-out period to elapse if
+/// the receiving thread appears to not respond or "hangs."
+const SMTO_ABORTIFHUNG = 0x0002;
+
+/// The function does not enforce the time-out period as long as the receiving
+/// thread is processing messages.
+const SMTO_NOTIMEOUTIFNOTHUNG = 0x0008;
+
+/// The function should return 0 if the receiving window is destroyed or its
+/// owning thread dies while the message is being processed.
+const SMTO_ERRORONEXIT = 0x0020;
+
 // -----------------------------------------------------------------------------
 // Power management events
 // -----------------------------------------------------------------------------
