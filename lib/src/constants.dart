@@ -5551,6 +5551,38 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
 
 // -----------------------------------------------------------------------------
+// Layered Window Attributes constants
+// -----------------------------------------------------------------------------
+
+/// Use crKey as the transparency color.
+const LWA_COLORKEY = 0x00000001;
+
+/// Use bAlpha to determine the opacity of the layered window.
+const LWA_ALPHA = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// Magnifier constants
+// -----------------------------------------------------------------------------
+
+/// Displays the magnified system cursor along with the magnified screen
+/// content.
+const MS_SHOWMAGNIFIEDCURSOR = 0x0001;
+
+/// Clips the area of the magnifier window that surrounds the system cursor.
+/// This style enables the user to see screen content that is behind the
+/// magnifier window.
+const MS_CLIPAROUNDCURSOR = 0x0002;
+
+/// Displays the magnified screen content using inverted colors.
+const MS_INVERTCOLORS = 0x0004;
+
+/// Exclude the windows from magnification.
+const MW_FILTERMODE_EXCLUDE = 0;
+
+/// Magnify the windows.
+const MW_FILTERMODE_INCLUDE = 1;
+
+// -----------------------------------------------------------------------------
 // GetDeviceCaps() constants
 // -----------------------------------------------------------------------------
 

@@ -45,6 +45,7 @@ const win32TypeMap = <String, String>{
   'LPOCNCONNPROCW': 'Pointer<NativeFunction<OpenCardConnProc>>',
   'LPOCNDSCPROC': 'Pointer<NativeFunction<OpenCardDisconnProc>>',
   'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
+  'MagImageScalingCallback': 'Pointer<NativeFunction<MagImageScalingCallback>>',
   'PFN_AUTHENTICATION_CALLBACK_EX':
       'Pointer<NativeFunction<PfnAuthenticationCallbackEx>>',
   'PSYM_ENUMERATESYMBOLS_CALLBACKW':

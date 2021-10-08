@@ -1550,6 +1550,41 @@ class LUID extends Struct {
   external int HighPart;
 }
 
+/// Describes a color transformation matrix that a magnifier control uses
+/// to apply a color effect to magnified screen content.
+///
+/// {@category Struct}
+class MAGCOLOREFFECT extends Struct {
+  @Array(25)
+  external Array<Float> transform;
+}
+
+/// Describes an image format.
+///
+/// {@category Struct}
+class MAGIMAGEHEADER extends Struct {
+  @Uint32()
+  external int width;
+  @Uint32()
+  external int height;
+  external GUID format;
+  @Uint32()
+  external int stride;
+  @Uint32()
+  external int offset;
+  @IntPtr()
+  external int cbSize;
+}
+
+/// Describes a transformation matrix that a magnifier control uses to
+/// magnify screen content.
+///
+/// {@category Struct}
+class MAGTRANSFORM extends Struct {
+  @Array(9)
+  external Array<Float> v;
+}
+
 /// Returned by the GetThemeMargins function to define the margins of
 /// windows that have visual styles applied.
 ///

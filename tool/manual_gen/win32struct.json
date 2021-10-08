@@ -315,6 +315,18 @@
         "namespace": "Windows.Win32.System.SystemServices.LUID",
         "comment": "A Locally Unique Identifier (LUID). This is a value guaranteed to be unique only on the system on which it was generated. The uniqueness of a locally unique identifier is guaranteed only until the system is restarted."
     },
+    "MAGCOLOREFFECT": {
+        "namespace": "Windows.Win32.UI.Magnification.MAGCOLOREFFECT",
+        "comment": "Describes a color transformation matrix that a magnifier control uses to apply a color effect to magnified screen content."
+    },
+    "MAGIMAGEHEADER": {
+        "namespace": "Windows.Win32.UI.Magnification.MAGIMAGEHEADER",
+        "comment": "Describes an image format."
+    },
+    "MAGTRANSFORM": {
+        "namespace": "Windows.Win32.UI.Magnification.MAGTRANSFORM",
+        "comment": "Describes a transformation matrix that a magnifier control uses to magnify screen content."
+    },
     "MARGINS": {
         "namespace": "Windows.Win32.UI.Controls.MARGINS",
         "comment": "Returned by the GetThemeMargins function to define the margins of windows that have visual styles applied."
