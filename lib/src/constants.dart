@@ -7596,9 +7596,41 @@ class DWMWINDOWATTRIBUTE {
   /// for the window; otherwise, FALSE.
   static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
 
-  /// The maximum recognized DWMWINDOWATTRIBUTE value, used for validation
-  /// purposes.
-  static const DWMWA_LAST = 17;
+  /// [Windows 11 and above.] Allows a window to either use the accent color, or
+  /// dark, according to the user Color Mode preferences.
+  static const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+  /// [Windows 11 and above.] Controls the policy that rounds top-level window
+  /// corners.
+  static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
+
+  /// [Windows 11 and above.]  The color of the thin border around a top-level
+  /// window.
+  static const DWMWA_BORDER_COLOR = 34;
+
+  /// [Windows 11 and above.]  The color of the caption.
+  static const DWMWA_CAPTION_COLOR = 35;
+
+  /// [Windows 11 and above.] The color of the caption text.
+  static const DWMWA_TEXT_COLOR = 36;
+
+  /// [Windows 11 and above.] Width of the visible border around a thick frame
+  /// window.
+  static const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
+}
+
+class DWM_WINDOW_CORNER_PREFERENCE {
+  /// Let the system decide whether or not to round window corners
+  static const DWMWCP_DEFAULT = 0;
+
+  /// Never round window corners
+  static const DWMWCP_DONOTROUND = 1;
+
+  /// Round the corners if appropriate
+  static const DWMWCP_ROUND = 2;
+
+  /// Round the corners if appropriate, with a small radius
+  static const DWMWCP_ROUNDSMALL = 3;
 }
 
 // -----------------------------------------------------------------------------
