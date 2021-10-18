@@ -9,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^9.0.0
-  path_provider: ^2.0.2
+  font_awesome_flutter: ^9.1.0
+  path_provider: ^2.0.5
   win32:
     path: ../../
 
