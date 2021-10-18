@@ -7604,11 +7604,11 @@ class DWMWINDOWATTRIBUTE {
   /// corners.
   static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
 
-  /// [Windows 11 and above.]  The color of the thin border around a top-level
+  /// [Windows 11 and above.] The color of the thin border around a top-level
   /// window.
   static const DWMWA_BORDER_COLOR = 34;
 
-  /// [Windows 11 and above.]  The color of the caption.
+  /// [Windows 11 and above.] The color of the caption.
   static const DWMWA_CAPTION_COLOR = 35;
 
   /// [Windows 11 and above.] The color of the caption text.
