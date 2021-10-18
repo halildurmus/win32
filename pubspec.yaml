@@ -1,6 +1,6 @@
 name: winmd
 description: A Dart library for working with Windows Metadata (winmd) formats.
-version: 1.0.8
+version: 1.0.9
 repository: https://github.com/timsneath/winmd
 issue_tracker: https://github.com/timsneath/winmd/issues
 
@@ -13,4 +13,4 @@ dependencies:
 
 dev_dependencies:
   lints: ^1.0.1
-  test: ^1.17.12
+  test: ^1.18.2
