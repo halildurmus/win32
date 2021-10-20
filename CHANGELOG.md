@@ -1,3 +1,9 @@
+## 2.2.10
+
+- Add Windows 11 rounded corner window support along with sample (check Flutter
+  app in example\explorer)
+- Add magnifier APIs and example
+
 ## 2.2.9
 
 - Add some missing GDI functions
