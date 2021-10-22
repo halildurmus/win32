@@ -6,7 +6,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/new_win32.dart';
+import 'package:win32/win32.dart';
 
 // Convert from Win32 0x00BBGGRR color layout to a user-friendly string
 String toHexColor(int color) => '0x'
@@ -33,7 +33,7 @@ void main() {
   // Set dialog flags:
   //   CC_RGBINIT: use rgbResult for the dialog default value
   //   CC_FULLOPEN: automatically open custom colors section of dialog
-  cc.ref.Flags = CHOOSECOLOR_FLAGS.CC_RGBINIT | CHOOSECOLOR_FLAGS.CC_FULLOPEN;
+  cc.ref.Flags = CC_RGBINIT | CC_FULLOPEN;
 
   // Call the Win32 API to show dialog, passing pointer to the config struct
   ChooseColor(cc);

@@ -14,7 +14,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/new_win32.dart';
+import 'package:win32/win32.dart';
 
 const normalPrompt = 'Type a line and press Enter, or q to quit: ';
 const echoOffPrompt = 'Type any key, or q to quit: ';

@@ -10,9 +10,9 @@ import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'exceptions.dart';
+import 'guid.dart';
 import 'macros.dart';
 import 'ole32.dart';
-import 'structs.dart';
 import 'utils.dart';
 
 /// A representation of a generic COM object. All Dart COM objects inherit from

@@ -8,7 +8,7 @@ import 'dart:ffi';
 import 'dart:math' show min, max;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/new_win32.dart';
+import 'package:win32/win32.dart';
 
 final abc = [
   'anteater',

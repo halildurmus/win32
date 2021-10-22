@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/new_win32.dart';
+import 'package:win32/win32.dart';
 
 bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
   final bytesReturned = calloc<Uint32>();

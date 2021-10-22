@@ -8,8 +8,8 @@ import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../combase.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
-import '../structs.dart';
 import '../utils.dart';
 import '../winrt/winrt_helpers.dart';
 

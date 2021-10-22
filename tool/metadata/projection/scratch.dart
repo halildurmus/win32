@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:winmd/winmd.dart';
 
 void main() {
