@@ -1,3 +1,22 @@
+## 2.2.10
+
+- Add Windows 11 rounded corner window support along with sample (check Flutter
+  app in example\explorer)
+- Add magnifier APIs and example
+
+## 2.2.9
+
+- Add some missing GDI functions
+
+## 2.2.8
+
+- Add Native Wifi APIs (#299)
+
+## 2.2.7
+
+- Added ResetEvent and complete `OVERLAPPED` struct (#295)
+- Added more virtual memory functions (#297)
+
 ## 2.2.6
 
 - Add some requested APIs thanks to contributions from @ilopX, in particular

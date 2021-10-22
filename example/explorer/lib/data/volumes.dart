@@ -21,7 +21,7 @@ class Volumes {
 
   List<Volume> getVolumes() => _volumes;
 
-  List<String> GetVolumePaths(String volumeName) {
+  List<String> getVolumePaths(String volumeName) {
     final paths = <String>[];
 
     // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
@@ -80,7 +80,7 @@ class Volumes {
       }
 
       _volumes.add(Volume(
-          deviceName.toDartString(), volumeName, GetVolumePaths(volumeName)));
+          deviceName.toDartString(), volumeName, getVolumePaths(volumeName)));
 
       final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
       if (success == FALSE) {

@@ -38,6 +38,11 @@ typedef DlgProc = INT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 typedef DrawTextCallback = Int32 Function(HDC hdc, LPWSTR pszText,
     Int32 cchText, Pointer<RECT> prc, UINT dwFlags, LPARAM lparam);
 
+/// Application-defined callback function that renders a complex image for the
+/// DrawState function.
+typedef DrawStateProc = Int32 Function(
+    IntPtr hdc, IntPtr lData, IntPtr wData, Int32 cx, Int32 cy);
+
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
 typedef EnumWindowsProc = BOOL Function(HWND hwnd, LPARAM lParam);
@@ -72,6 +77,18 @@ typedef FRHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 /// received by the process. When the signal is received, the system creates a
 /// new thread in the process to execute the function.
 typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
+
+/// Application-defined callback function implements a custom transform for
+/// image scaling.
+typedef MagImageScalingCallback = BOOL Function(
+    HWND hwnd,
+    Pointer srcdata,
+    MAGIMAGEHEADER srcheader,
+    Pointer destdata,
+    MAGIMAGEHEADER destheader,
+    RECT unclipped,
+    RECT clipped,
+    HRGN dirty);
 
 /// Application-defined callback function for handling incoming MIDI messages.
 /// MidiInProc is a placeholder for the application-supplied function name. The
@@ -137,6 +154,11 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 /// window.
 typedef WindowProc = LRESULT Function(
     HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+/// Application-defined callback function that is used by an application to
+/// register and unregister notifications on all wireless interfaces.
+typedef WlanNotificationCallback = Void Function(
+    Pointer<L2_NOTIFICATION_DATA>, Pointer);
 
 /// Application-defined callback function that provides special verification
 /// for smart card searches.

@@ -33,6 +33,8 @@ const header = '''
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
 #include <dwmapi.h>
+#include <wlanapi.h>
+#include <SetupAPI.h>
 
 void main()
 {
@@ -62,6 +64,7 @@ void main()
     printf("  'TASKDIALOGCONFIG': %zu,\\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
+    printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));
 
     // Automatically generated structs
 ''';

@@ -1,4 +1,9 @@
 {
+    "AbortPath": {
+        "prototype": "BOOL AbortPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AbortPath function closes and discards any paths in the specified device context."
+    },
     "AbortPrinter": {
         "prototype": "BOOL AbortPrinter(\n  _In_ HANDLE hPrinter\n);",
         "dllLibrary": "spoolss",
@@ -678,7 +683,8 @@
     "CoWaitForMultipleObjects": {
         "prototype": "HRESULT CoWaitForMultipleObjects(\n  DWORD        dwFlags,\n  DWORD        dwTimeout,\n  ULONG        cHandles,\n  const HANDLE *pHandles,\n  LPDWORD      lpdwindex\n);",
         "dllLibrary": "ole32",
-        "comment": "A replacement for CoWaitForMultipleHandles. This replacement API hides the options for CoWaitForMultipleHandles that are not supported in ASTA."
+        "comment": "A replacement for CoWaitForMultipleHandles. This replacement API hides the options for CoWaitForMultipleHandles that are not supported in ASTA.",
+        "minimumWindowsVersion": "WIN10_TH2"
     },
     "CreateAcceleratorTable": {
         "prototype": "HACCEL CreateAcceleratorTableW(\n  LPACCEL paccel,\n  int     cAccel\n);",
@@ -749,6 +755,11 @@
         "prototype": "HANDLE CreateEventW(\n  LPSECURITY_ATTRIBUTES lpEventAttributes,\n  BOOL bManualReset,\n  BOOL  bInitialState,\n  LPCWSTR lpName\n);",
         "dllLibrary": "kernel32",
         "comment": "Creates or opens a named or unnamed event object."
+    },
+    "CreateEventEx": {
+        "prototype": "HANDLE CreateEventExW(\n  LPSECURITY_ATTRIBUTES lpEventAttributes,\n  LPCWSTR               lpName,\n  DWORD                 dwFlags,\n  DWORD                 dwDesiredAccess\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a named or unnamed event object and returns a handle to the object."
     },
     "CreateFile": {
         "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
@@ -1027,20 +1038,45 @@
         "dllLibrary": "user32",
         "comment": "Captures the mouse and tracks its movement until the user releases the left button, presses the ESC key, or moves the mouse outside the drag rectangle around the specified point."
     },
+    "DrawAnimatedRects": {
+        "prototype": "BOOL DrawAnimatedRects(\n  HWND       hwnd,\n  int        idAni,\n  const RECT *lprcFrom,\n  const RECT *lprcTo);",
+        "dllLibrary": "user32",
+        "comment": "Animates the caption of a window to indicate the opening of an icon or the minimizing or maximizing of a window."
+    },
     "DrawCaption": {
         "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
         "dllLibrary": "user32",
         "comment": "The DrawCaption function draws a window caption."
+    },
+    "DrawEdge": {
+        "prototype": "BOOL DrawEdge(\n  HDC    hdc,\n  LPRECT qrc,\n  UINT   edge,\n  UINT   grfFlags);",
+        "dllLibrary": "user32",
+        "comment": "The DrawEdge function draws one or more edges of rectangle."
     },
     "DrawEscape": {
         "prototype": "int DrawEscape(\n  HDC    hdc,\n  int    iEscape,\n  int    cjIn,\n  LPCSTR lpIn\n);",
         "dllLibrary": "gdi32",
         "comment": "The DrawEscape function provides drawing capabilities of the specified video display that are not directly available through the graphics device interface (GDI)."
     },
+    "DrawFocusRect": {
+        "prototype": "BOOL DrawFocusRect(\n  HDC        hDC,\n  const RECT *lprc);",
+        "dllLibrary": "user32",
+        "comment": "The DrawFocusRect function draws a rectangle in the style used to indicate that the rectangle has the focus."
+    },
+    "DrawFrameControl": {
+        "prototype": "BOOL DrawFrameControl(\n  HDC    ,\n  LPRECT ,\n  UINT   ,\n  UINT);",
+        "dllLibrary": "user32",
+        "comment": "The DrawFrameControl function draws a frame control of the specified type and style."
+    },
     "DrawIcon": {
         "prototype": "BOOL DrawIcon(\n  HDC   hDC,\n  int   X,\n  int   Y,\n  HICON hIcon\n);",
         "dllLibrary": "user32",
         "comment": "Draws an icon or cursor into the specified device context."
+    },
+    "DrawState": {
+        "prototype": "BOOL DrawStateW(\n  HDC           hdc,\n  HBRUSH        hbrFore,\n  DRAWSTATEPROC qfnCallBack,\n  LPARAM        lData,\n  WPARAM        wData,\n  int           x,\n  int           y,\n  int           cx,\n  int           cy,\n  UINT          uFlags);",
+        "dllLibrary": "user32",
+        "comment": "The DrawState function displays an image and applies a visual effect to indicate a state, such as a disabled or default state."
     },
     "DrawStatusText": {
         "prototype": "void DrawStatusTextW(\n  HDC     hDC,\n  LPCRECT lprc,\n  LPCWSTR pszText,\n  UINT    uFlags\n);",
@@ -1115,7 +1151,8 @@
     "DwmRenderGesture": {
         "prototype": "DWMAPI DwmRenderGesture(\n  GESTURE_TYPE gt,\n  UINT         cContacts,\n  const DWORD  *pdwPointerID,\n  const POINT  *pPoints\n);",
         "dllLibrary": "dwmapi",
-        "comment": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture."
+        "comment": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture.",
+        "minimumWindowsVersion": "WIN8"
     },
     "DwmSetWindowAttribute": {
         "prototype": "DWMAPI DwmSetWindowAttribute(\n  HWND    hwnd,\n  DWORD   dwAttribute,\n  LPCVOID pvAttribute,\n  DWORD   cbAttribute\n);",
@@ -1125,7 +1162,8 @@
     "DwmShowContact": {
         "prototype": "DWMAPI DwmShowContact(\n  DWORD           dwPointerID,\n  DWM_SHOWCONTACT eShowContact\n);",
         "dllLibrary": "dwmapi",
-        "comment": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact."
+        "comment": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact.",
+        "minimumWindowsVersion": "WIN8"
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
@@ -1365,6 +1403,11 @@
         "dllLibrary": "kernel32",
         "comment": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates."
     },
+    "FillPath": {
+        "prototype": "BOOL FillPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The FillPath function closes any open figures in the current path and fills the path's interior by using the current brush and polygon-filling mode."
+    },
     "FillRect": {
         "prototype": "int FillRect(\n  HDC        hDC,\n  const RECT *lprc,\n  HBRUSH     hbr\n);",
         "dllLibrary": "user32",
@@ -1466,6 +1509,11 @@
         "prototype": "HWND FindWindowExW(\n  HWND    hWndParent,\n  HWND    hWndChildAfter,\n  LPCWSTR lpszClass,\n  LPCWSTR lpszWindow\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search."
+    },
+    "FlattenPath": {
+        "prototype": "BOOL FlattenPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The FlattenPath function transforms any curves in the path that is selected into the current device context (DC), turning each curve into a sequence of lines."
     },
     "FlushConsoleInputBuffer": {
         "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
@@ -1777,6 +1825,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted."
     },
+    "GetDeviceCaps": {
+        "prototype": "int GetDeviceCaps(\n  HDC hdc,\n  int index\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetDeviceCaps function retrieves device-specific information for the specified device."
+    },
     "GetDialogBaseUnits": {
         "prototype": "long GetDialogBaseUnits();",
         "dllLibrary": "user32",
@@ -1807,7 +1860,8 @@
     "GetDisplayAutoRotationPreferences": {
         "prototype": "BOOL GetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE *pOrientation\n);",
         "dllLibrary": "user32",
-        "comment": "Retrieves the screen auto-rotation preferences for the current process."
+        "comment": "Retrieves the screen auto-rotation preferences for the current process.",
+        "minimumWindowsVersion": "WIN8"
     },
     "GetDlgItem": {
         "prototype": "HWND GetDlgItem(\n  HWND hDlg,\n  int  nIDDlgItem\n);",
@@ -2311,12 +2365,18 @@
     "GetOverlappedResultEx": {
         "prototype": "BOOL GetOverlappedResultEx(\n  HANDLE       hFile,\n  LPOVERLAPPED lpOverlapped,\n  LPDWORD      lpNumberOfBytesTransferred,\n  DWORD        dwMilliseconds,\n  BOOL         bAlertable\n);",
         "dllLibrary": "kernel32",
-        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device within the specified time-out interval. The calling thread can perform an alertable wait."
+        "comment": "Retrieves the results of an overlapped operation on the specified file, named pipe, or communications device within the specified time-out interval. The calling thread can perform an alertable wait.",
+        "minimumWindowsVersion": "WIN8"
     },
     "GetParent": {
         "prototype": "HWND GetParent(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the specified window's parent or owner."
+    },
+    "GetPath": {
+        "prototype": "int GetPath(\n  HDC     hdc,\n  LPPOINT apt,\n  LPBYTE  aj,\n  int     cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetPath function retrieves the coordinates defining the endpoints of lines and the control points of curves found in the path that is selected into the specified device context."
     },
     "getpeername": {
         "prototype": "int getpeername(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
@@ -2453,7 +2513,8 @@
     "GetScaleFactorForMonitor": {
         "prototype": "HRESULT GetScaleFactorForMonitor(\n  HMONITOR            hMon,\n  DEVICE_SCALE_FACTOR *pScale\n);",
         "dllLibrary": "shcore",
-        "comment": "Gets the scale factor of a specific monitor."
+        "comment": "Gets the scale factor of a specific monitor.",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetScrollBarInfo": {
         "prototype": "BOOL GetScrollBarInfo(\n  HWND           hwnd,\n  LONG           idObject,\n  PSCROLLBARINFO psbi\n);",
@@ -2774,6 +2835,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves information about the specified window."
     },
+    "GetWindowLongPtr": {
+        "prototype": "LONG_PTR GetWindowLongPtrW(\n  HWND hWnd,\n  int  nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory."
+    },
     "GetWindowModuleFileName": {
         "prototype": "UINT GetWindowModuleFileNameW(\n  HWND   hwnd,\n  LPWSTR pszFileName,\n  UINT   cchFileNameMax\n);",
         "dllLibrary": "user32",
@@ -3072,7 +3138,8 @@
     "IsImmersiveProcess": {
         "prototype": "BOOL IsImmersiveProcess(\n  HANDLE hProcess\n);",
         "dllLibrary": "user32",
-        "comment": "Determines whether the process belongs to a Windows Store app."
+        "comment": "Determines whether the process belongs to a Windows Store app.",
+        "minimumWindowsVersion": "WIN8"
     },
     "IsMenu": {
         "prototype": "BOOL IsMenu(\n  HMENU hMenu\n);",
@@ -3082,7 +3149,8 @@
     "IsNativeVhdBoot": {
         "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
         "dllLibrary": "kernel32",
-        "comment": "Indicates if the OS was booted from a VHD container."
+        "comment": "Indicates if the OS was booted from a VHD container.",
+        "minimumWindowsVersion": "WIN8"
     },
     "IsProcessDPIAware": {
         "prototype": "BOOL IsProcessDPIAware();",
@@ -3283,6 +3351,101 @@
         "prototype": "int LookupIconIdFromDirectoryEx(\n  PBYTE presbits,\n  BOOL  fIcon,\n  int   cxDesired,\n  int   cyDesired,\n  UINT  Flags\n);",
         "dllLibrary": "user32",
         "comment": "Searches through icon or cursor data for the icon or cursor that best fits the current display device."
+    },
+    "MagGetColorEffect": {
+        "prototype": "BOOL MagGetColorEffect(\n  HWND            hwnd,\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Gets the color transformation matrix for a magnifier control."
+    },
+    "MagGetFullscreenColorEffect": {
+        "prototype": "BOOL MagGetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the color transformation matrix associated with the full-screen magnifier."
+    },
+    "MagGetFullscreenTransform": {
+        "prototype": "BOOL MagGetFullscreenTransform(\n  float *pMagLevel,\n  int   *pxOffset,\n  int   *pyOffset\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the magnification settings for the full-screen magnifier."
+    },
+    "MagGetImageScalingCallback": {
+        "prototype": "MagImageScalingCallback MagGetImageScalingCallback(\n  HWND hwnd\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the registered callback function that implements a custom transform for image scaling."
+    },
+    "MagGetInputTransform": {
+        "prototype": "BOOL MagGetInputTransform(\n  BOOL   *pfEnabled,\n  LPRECT pRectSource,\n  LPRECT pRectDest\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the current input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+    },
+    "MagGetWindowFilterList": {
+        "prototype": "int MagGetWindowFilterList(\n  HWND  hwnd,\n  DWORD *pdwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the list of windows that are magnified or excluded from magnification."
+    },
+    "MagGetWindowSource": {
+        "prototype": "BOOL MagGetWindowSource(\n  HWND hwnd,\n  RECT *pRect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Gets the rectangle of the area that is being magnified."
+    },
+    "MagGetWindowTransform": {
+        "prototype": "BOOL MagGetWindowTransform(\n  HWND          hwnd,\n  PMAGTRANSFORM pTransform\n);",
+        "dllLibrary": "magnification",
+        "comment": "Retrieves the transformation matrix associated with a magnifier control."
+    },
+    "MagInitialize": {
+        "prototype": "BOOL MagInitialize();",
+        "dllLibrary": "magnification",
+        "comment": "Creates and initializes the magnifier run-time objects."
+    },
+    "MagSetColorEffect": {
+        "prototype": "BOOL MagSetColorEffect(\n  HWND            hwnd,\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the color transformation matrix for a magnifier control."
+    },
+    "MagSetFullscreenColorEffect": {
+        "prototype": "BOOL MagSetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Changes the color transformation matrix associated with the full-screen magnifier."
+    },
+    "MagSetFullscreenTransform": {
+        "prototype": "BOOL MagSetFullscreenTransform(\n  float magLevel,\n  int   xOffset,\n  int   yOffset\n);",
+        "dllLibrary": "magnification",
+        "comment": "Changes the magnification settings for the full-screen magnifier."
+    },
+    "MagSetImageScalingCallback": {
+        "prototype": "BOOL MagSetImageScalingCallback(\n  HWND                    hwnd,\n  MagImageScalingCallback callback\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the callback function for external image filtering and scaling."
+    },
+    "MagSetInputTransform": {
+        "prototype": "BOOL MagSetInputTransform(\n  BOOL         fEnabled,\n  const LPRECT pRectSource,\n  const LPRECT pRectDest\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the current active input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+    },
+    "MagSetWindowFilterList": {
+        "prototype": "BOOL MagSetWindowFilterList(\n  HWND  hwnd,\n  DWORD dwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the list of windows to be magnified or the list of windows to be excluded from magnification."
+    },
+    "MagSetWindowSource": {
+        "prototype": "BOOL MagSetWindowSource(\n  HWND hwnd,\n  RECT rect\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the source rectangle for the magnification window."
+    },
+    "MagSetWindowTransform": {
+        "prototype": "BOOL MagSetWindowTransform(\n  HWND          hwnd,\n  PMAGTRANSFORM pTransform\n);",
+        "dllLibrary": "magnification",
+        "comment": "Sets the transformation matrix for a magnifier control."
+    },
+    "MagShowSystemCursor": {
+        "prototype": "BOOL MagShowSystemCursor(\n  BOOL fShowCursor\n);",
+        "dllLibrary": "magnification",
+        "comment": "Shows or hides the system cursor."
+    },
+    "MagUninitialize": {
+        "prototype": "BOOL MagUninitialize();",
+        "dllLibrary": "magnification",
+        "comment": "Destroys the magnifier run-time objects."
     },
     "MapDialogRect": {
         "prototype": "BOOL MapDialogRect(\n  HWND   hDlg,\n  LPRECT lpRect\n);",
@@ -3596,6 +3759,11 @@
         "prototype": "HDESK OpenDesktopW(\n  LPCWSTR     lpszDesktop,\n  DWORD       dwFlags,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
         "dllLibrary": "user32",
         "comment": "Opens the specified desktop object."
+    },
+    "OpenEvent": {
+        "prototype": "HANDLE OpenEventW(\n  DWORD   dwDesiredAccess,\n  BOOL    bInheritHandle,\n  LPCWSTR lpName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Opens an existing named event object."
     },
     "OpenIcon": {
         "prototype": "BOOL OpenIcon(\n  HWND hWnd\n);",
@@ -3989,7 +4157,8 @@
     "RegisterTouchHitTestingWindow": {
         "prototype": "BOOL RegisterTouchHitTestingWindow(\n  HWND  hwnd,\n  ULONG value\n);",
         "dllLibrary": "user32",
-        "comment": "Registers a window to process the WM_TOUCHHITTESTING notification."
+        "comment": "Registers a window to process the WM_TOUCHHITTESTING notification.",
+        "minimumWindowsVersion": "WIN8"
     },
     "RegisterTouchWindow": {
         "prototype": "BOOL RegisterTouchWindow(\n  HWND  hwnd,\n  ULONG ulFlags\n);",
@@ -4177,6 +4346,11 @@
         "comment": "Reports to the Print Spooler service whether an XPS print job is in the spooling or the rendering phase and what part of the processing is currently underway.",
         "category": "winspool"
     },
+    "ResetEvent": {
+        "prototype": "BOOL ResetEvent(\n  HANDLE hEvent\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the specified event object to the nonsignaled state."
+    },
     "ResetPrinter": {
         "prototype": "BOOL ResetPrinterW(\n  _In_ HANDLE             hPrinter,\n  _In_ LPPRINTER_DEFAULTS pDefault\n);",
         "dllLibrary": "winspool",
@@ -4258,7 +4432,8 @@
     "SCardAudit": {
         "prototype": "LONG SCardAudit(\n  SCARDCONTEXT hContext,\n  DWORD        dwEvent\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardAudit function writes event messages to the Windows application log Microsoft-Windows-SmartCard-Audit/Authentication."
+        "comment": "The SCardAudit function writes event messages to the Windows application log Microsoft-Windows-SmartCard-Audit/Authentication.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardBeginTransaction": {
         "prototype": "LONG SCardBeginTransaction(\n  SCARDHANDLE hCard\n);",
@@ -4328,7 +4503,8 @@
     "SCardGetDeviceTypeId": {
         "prototype": "LONG SCardGetDeviceTypeIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPDWORD      pdwDeviceTypeId\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetDeviceTypeId function gets the device type identifier of the card reader for the given reader name. This function does not affect the state of the reader."
+        "comment": "The SCardGetDeviceTypeId function gets the device type identifier of the card reader for the given reader name. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetProviderId": {
         "prototype": "LONG SCardGetProviderIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szCard,\n  LPGUID       pguidProviderId\n);",
@@ -4338,12 +4514,14 @@
     "SCardGetReaderDeviceInstanceId": {
         "prototype": "LONG SCardGetReaderDeviceInstanceIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPWSTR       szDeviceInstanceId,\n  LPDWORD      pcchDeviceInstanceId\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetReaderDeviceInstanceId function gets the device instance identifier of the card reader for the given reader name. This function does not affect the state of the reader."
+        "comment": "The SCardGetReaderDeviceInstanceId function gets the device instance identifier of the card reader for the given reader name. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetReaderIcon": {
         "prototype": "LONG SCardGetReaderIconW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szReaderName,\n  LPBYTE       pbIcon,\n  LPDWORD      pcbIcon\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardGetReaderIcon function gets an icon of the smart card reader for a given reader's name. This function does not affect the state of the card reader."
+        "comment": "The SCardGetReaderIcon function gets an icon of the smart card reader for a given reader's name. This function does not affect the state of the card reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardGetStatusChange": {
         "prototype": "LONG SCardGetStatusChangeW(\n  SCARDCONTEXT         hContext,\n  DWORD                dwTimeout,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
@@ -4398,7 +4576,8 @@
     "SCardListReadersWithDeviceInstanceId": {
         "prototype": "LONG SCardListReadersWithDeviceInstanceIdW(\n  SCARDCONTEXT hContext,\n  LPCWSTR      szDeviceInstanceId,\n  LPWSTR       mszReaders,\n  LPDWORD      pcchReaders\n);",
         "dllLibrary": "winscard",
-        "comment": "The SCardListReadersWithDeviceInstanceId function gets the list of readers that have provided a device instance identifier. This function does not affect the state of the reader."
+        "comment": "The SCardListReadersWithDeviceInstanceId function gets the list of readers that have provided a device instance identifier. This function does not affect the state of the reader.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SCardLocateCards": {
         "prototype": "LONG SCardLocateCardsW(\n  SCARDCONTEXT         hContext,\n  LPCWSTR              mszCards,\n  LPSCARD_READERSTATEW rgReaderStates,\n  DWORD                cReaders\n);",
@@ -4504,6 +4683,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "SelectClipPath": {
+        "prototype": "BOOL SelectClipPath(\n  HDC hdc,\n  int mode\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SelectClipPath function selects the current path as a clipping region for a device context, combining the new region with any existing clipping region using the specified mode."
+    },
     "SelectObject": {
         "prototype": "HGDIOBJ SelectObject(\n  HDC     hdc,\n  HGDIOBJ h\n);",
         "dllLibrary": "gdi32",
@@ -4596,7 +4780,8 @@
     "SetCoalescableTimer": {
         "prototype": "UINT_PTR SetCoalescableTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc,\n  ULONG     uToleranceDelay\n);",
         "dllLibrary": "user32",
-        "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay."
+        "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetCommBreak": {
         "prototype": "BOOL SetCommBreak(\n  HANDLE hFile\n);",
@@ -4698,7 +4883,8 @@
     "SetDisplayAutoRotationPreferences": {
         "prototype": "BOOL SetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE orientation\n);",
         "dllLibrary": "user32",
-        "comment": "Sets the screen auto-rotation preferences for the current process."
+        "comment": "Sets the screen auto-rotation preferences for the current process.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetDlgItemInt": {
         "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
@@ -4743,7 +4929,8 @@
     "SetFirmwareEnvironmentVariableEx": {
         "prototype": "BOOL SetFirmwareEnvironmentVariableExW(\n  LPCWSTR lpName,\n  LPCWSTR lpGuid,\n  PVOID   pValue,\n  DWORD   nSize,\n  DWORD   dwAttributes\n);",
         "dllLibrary": "kernel32",
-        "comment": "Sets the value of the specified firmware environment variable and the attributes that indicate how this variable is stored and maintained."
+        "comment": "Sets the value of the specified firmware environment variable and the attributes that indicate how this variable is stored and maintained.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetFocus": {
         "prototype": "HWND SetFocus(\n  HWND hWnd\n);",
@@ -5000,6 +5187,26 @@
         "dllLibrary": "kernel32",
         "comment": "Initializes the communications parameters for a specified communications device."
     },
+    "SetupDiDestroyDeviceInfoList": {
+        "prototype": "WINSETUPAPI BOOL SetupDiDestroyDeviceInfoList(\n  HDEVINFO DeviceInfoSet\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiDestroyDeviceInfoList function deletes a device information set and frees all associated memory."
+    },
+    "SetupDiEnumDeviceInfo": {
+        "prototype": "WINSETUPAPI BOOL SetupDiEnumDeviceInfo(\n  HDEVINFO         DeviceInfoSet,\n  DWORD            MemberIndex,\n  PSP_DEVINFO_DATA DeviceInfoData\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure that specifies a device information element in a device information set."
+    },
+    "SetupDiGetClassDevs": {
+        "prototype": "WINSETUPAPI HDEVINFO SetupDiGetClassDevsW(\n  const GUID *ClassGuid,\n  PCWSTR     Enumerator,\n  HWND       hwndParent,\n  DWORD      Flags\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiGetClassDevs function returns a handle to a device information set that contains requested device information elements for a local computer."
+    },
+    "SetupDiOpenDevRegKey": {
+        "prototype": "WINSETUPAPI HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiOpenDevRegKey function opens a registry key for device-specific configuration information."
+    },
     "SetUserObjectInformation": {
         "prototype": "BOOL SetUserObjectInformationW(\n  HANDLE hObj,\n  int    nIndex,\n  PVOID  pvInfo,\n  DWORD  nLength\n);",
         "dllLibrary": "user32",
@@ -5172,6 +5379,11 @@
         "dllLibrary": "kernel32",
         "comment": "Suspends the execution of the current thread until the time-out interval elapses."
     },
+    "SleepEx": {
+        "prototype": "DWORD SleepEx(\n  DWORD dwMilliseconds,\n  BOOL  bAlertable\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends the current thread until the specified condition is met. Execution resumes when one of the following occurs: (i) an I/O completion callback function is called; (ii) an asynchronous procedure call (APC) is queued to the thread; (iii) the time-out interval elapses."
+    },
     "socket": {
         "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",
         "dllLibrary": "ws2_32",
@@ -5219,6 +5431,16 @@
         "prototype": "HRESULT StringFromIID(\n  REFIID   rclsid,\n  LPOLESTR *lplpsz\n);",
         "dllLibrary": "ole32",
         "comment": "Converts an interface identifier into a string of printable characters."
+    },
+    "StrokeAndFillPath": {
+        "prototype": "BOOL StrokeAndFillPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StrokeAndFillPath function closes any open figures in a path, strokes the outline of the path by using the current pen, and fills its interior by using the current brush."
+    },
+    "StrokePath": {
+        "prototype": "BOOL StrokePath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StrokePath function renders the specified path by using the current pen."
     },
     "SubtractRect": {
         "prototype": "BOOL SubtractRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
@@ -5305,7 +5527,8 @@
     "SymSetScopeFromInlineContext": {
         "prototype": "BOOL IMAGEAPI SymSetScopeFromInlineContext(\n  HANDLE  hProcess,\n  ULONG64 Address,\n  ULONG   InlineContext\n);",
         "dllLibrary": "dbghelp",
-        "comment": "Sets the local scope to the symbol that matches the specified address and inline context."
+        "comment": "Sets the local scope to the symbol that matches the specified address and inline context.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SymSetSearchPath": {
         "prototype": "BOOL IMAGEAPI SymSetSearchPathW(\n  HANDLE hProcess,\n  PCWSTR SearchPath\n);",
@@ -5590,10 +5813,30 @@
         "dllLibrary": "kernel32",
         "comment": "Reserves, commits, or changes the state of a region of pages in the virtual address space of the calling process. Memory allocated by this function is automatically initialized to zero."
     },
+    "VirtualAllocEx": {
+        "prototype": "LPVOID VirtualAllocEx(\n  HANDLE hProcess,\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flAllocationType,\n  DWORD  flProtect\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reserves, commits, or changes the state of a region of memory within the virtual address space of a specified process. The function initializes the memory it allocates to zero."
+    },
     "VirtualFree": {
         "prototype": "BOOL VirtualFree(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  dwFreeType\n);",
         "dllLibrary": "kernel32",
         "comment": "Releases, decommits, or releases and decommits a region of pages within the virtual address space of the calling process."
+    },
+    "VirtualFreeEx": {
+        "prototype": "BOOL VirtualFreeEx(\n  HANDLE hProcess,\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  dwFreeType\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Releases, decommits, or releases and decommits a region of memory within the virtual address space of a specified process."
+    },
+    "VirtualLock": {
+        "prototype": "BOOL VirtualLock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locks the specified region of the process's virtual address space into physical memory, ensuring that subsequent access to the region will not incur a page fault."
+    },
+    "VirtualUnlock": {
+        "prototype": "BOOL VirtualUnlock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Unlocks a specified range of pages in the virtual address space of a process, enabling the system to swap the pages out to the paging file if necessary."
     },
     "VkKeyScan": {
         "prototype": "SHORT VkKeyScanW(\n  WCHAR ch\n);",
@@ -5730,6 +5973,11 @@
         "dllLibrary": "kernel32",
         "comment": "Maps a UTF-16 (wide character) string to a new character string. The new character string is not necessarily from a multibyte character set."
     },
+    "WidenPath": {
+        "prototype": "BOOL WidenPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The WidenPath function redefines the current path as the area that would be painted if the path were stroked using the pen currently selected into the given device context."
+    },
     "WindowFromDC": {
         "prototype": "HWND WindowFromDC(\n  HDC hDC\n);",
         "dllLibrary": "user32",
@@ -5863,6 +6111,261 @@
         "comment": "Removes all leading occurrences of a specified set of characters from the source string.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
+    },
+    "WlanAllocateMemory": {
+        "prototype": "PVOID WlanAllocateMemory(\n  DWORD dwMemorySize\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanAllocateMemory function allocates memory. Any memory passed to other Native Wifi functions must be allocated with this function."
+    },
+    "WlanCloseHandle": {
+        "prototype": "DWORD WlanCloseHandle(\n  HANDLE hClientHandle,\n  PVOID  pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanCloseHandle function closes a connection to the server."
+    },
+    "WlanConnect": {
+        "prototype": "DWORD WlanConnect(\n  HANDLE                            hClientHandle,\n  const GUID                        *pInterfaceGuid,\n  const PWLAN_CONNECTION_PARAMETERS pConnectionParameters,\n  PVOID                             pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanConnect function attempts to connect to a specific network."
+    },
+    "WlanDeleteProfile": {
+        "prototype": "DWORD WlanDeleteProfile(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanDeleteProfile function deletes a wireless profile for a wireless interface on the local computer."
+    },
+    "WlanDeviceServiceCommand": {
+        "prototype": "DWORD WlanDeviceServiceCommand(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPGUID     pDeviceServiceGuid,\n  DWORD      dwOpCode,\n  DWORD      dwInBufferSize,\n  PVOID      pInBuffer,\n  DWORD      dwOutBufferSize,\n  PVOID      pOutBuffer,\n  PDWORD     pdwBytesReturned\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "Allows an original equipment manufacturer (OEM) or independent hardware vendor (IHV) component to communicate with a device service on a particular wireless LAN interface."
+    },
+    "WlanDisconnect": {
+        "prototype": "DWORD WlanDisconnect(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanDisconnect function disconnects an interface from its current network."
+    },
+    "WlanEnumInterfaces": {
+        "prototype": "DWORD WlanEnumInterfaces(\n  HANDLE                    hClientHandle,\n  PVOID                     pReserved,\n  PWLAN_INTERFACE_INFO_LIST *ppInterfaceList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanEnumInterfaces function enumerates all of the wireless LAN interfaces currently enabled on the local computer."
+    },
+    "WlanExtractPsdIEDataList": {
+        "prototype": "DWORD WlanExtractPsdIEDataList(\n  HANDLE              hClientHandle,\n  DWORD               dwIeDataSize,\n  const PBYTE         pRawIeData,\n  LPCWSTR             strFormat,\n  PVOID               pReserved,\n  PWLAN_RAW_DATA_LIST *ppPsdIEDataList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanExtractPsdIEDataList function extracts the proximity service discovery (PSD) information element (IE) data list from raw IE data included in a beacon."
+    },
+    "WlanFreeMemory": {
+        "prototype": "void WlanFreeMemory(\n  PVOID pMemory\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanFreeMemory function frees memory. Any memory returned from Native Wifi functions must be freed."
+    },
+    "WlanGetAvailableNetworkList": {
+        "prototype": "DWORD WlanGetAvailableNetworkList(\n  HANDLE                       hClientHandle,\n  const GUID                   *pInterfaceGuid,\n  DWORD                        dwFlags,\n  PVOID                        pReserved,\n  PWLAN_AVAILABLE_NETWORK_LIST *ppAvailableNetworkList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetAvailableNetworkList function retrieves the list of available networks on a wireless LAN interface."
+    },
+    "WlanGetFilterList": {
+        "prototype": "DWORD WlanGetFilterList(\n  HANDLE                hClientHandle,\n  WLAN_FILTER_LIST_TYPE wlanFilterListType,\n  PVOID                 pReserved,\n  PDOT11_NETWORK_LIST   *ppNetworkList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetFilterList function retrieves a group policy or user permission list."
+    },
+    "WlanGetInterfaceCapability": {
+        "prototype": "DWORD WlanGetInterfaceCapability(\n  HANDLE                     hClientHandle,\n  const GUID                 *pInterfaceGuid,\n  PVOID                      pReserved,\n  PWLAN_INTERFACE_CAPABILITY *ppCapability\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetInterfaceCapability function retrieves the capabilities of an interface."
+    },
+    "WlanGetNetworkBssList": {
+        "prototype": "DWORD WlanGetNetworkBssList(\n  HANDLE            hClientHandle,\n  const GUID        *pInterfaceGuid,\n  const PDOT11_SSID pDot11Ssid,\n  DOT11_BSS_TYPE    dot11BssType,\n  BOOL              bSecurityEnabled,\n  PVOID             pReserved,\n  PWLAN_BSS_LIST    *ppWlanBssList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetNetworkBssList function retrieves a list of the basic service set (BSS) entries of the wireless network or networks on a given wireless LAN interface."
+    },
+    "WlanGetProfile": {
+        "prototype": "DWORD WlanGetProfile(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  PVOID      pReserved,\n  LPWSTR     *pstrProfileXml,\n  DWORD      *pdwFlags,\n  DWORD      *pdwGrantedAccess\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetProfile function retrieves all information about a specified wireless profile."
+    },
+    "WlanGetProfileCustomUserData": {
+        "prototype": "DWORD WlanGetProfileCustomUserData(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  PVOID      pReserved,\n  DWORD      *pdwDataSize,\n  PBYTE      *ppData\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetProfileCustomUserData function gets the custom user data associated with a wireless profile."
+    },
+    "WlanGetProfileList": {
+        "prototype": "DWORD WlanGetProfileList(\n  HANDLE                  hClientHandle,\n  const GUID              *pInterfaceGuid,\n  PVOID                   pReserved,\n  PWLAN_PROFILE_INFO_LIST *ppProfileList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetProfileList function retrieves the list of profiles in preference order."
+    },
+    "WlanGetSecuritySettings": {
+        "prototype": "DWORD WlanGetSecuritySettings(\n  HANDLE                  hClientHandle,\n  WLAN_SECURABLE_OBJECT   SecurableObject,\n  PWLAN_OPCODE_VALUE_TYPE pValueType,\n  LPWSTR                  *pstrCurrentSDDL,\n  PDWORD                  pdwGrantedAccess\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetSecuritySettings function gets the security settings associated with a configurable object."
+    },
+    "WlanGetSupportedDeviceServices": {
+        "prototype": "DWORD WlanGetSupportedDeviceServices(\n  HANDLE                         hClientHandle,\n  const GUID                     *pInterfaceGuid,\n  PWLAN_DEVICE_SERVICE_GUID_LIST *ppDevSvcGuidList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "Retrieves a list of the supported device services on a given wireless LAN interface."
+    },
+    "WlanHostedNetworkForceStart": {
+        "prototype": "DWORD WlanHostedNetworkForceStart(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkForceStart function transitions the wireless Hosted Network to the wlan_hosted_network_active state without associating the request with the application's calling handle."
+    },
+    "WlanHostedNetworkForceStop": {
+        "prototype": "DWORD WlanHostedNetworkForceStop(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkForceStop function transitions the wireless Hosted Network to the wlan_hosted_network_idle without associating the request with the application's calling handle."
+    },
+    "WlanHostedNetworkInitSettings": {
+        "prototype": "DWORD WlanHostedNetworkInitSettings(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkInitSettings function configures and persists to storage the network connection settings (SSID and maximum number of peers, for example) on the wireless Hosted Network if these settings are not already configured."
+    },
+    "WlanHostedNetworkQueryProperty": {
+        "prototype": "DWORD WlanHostedNetworkQueryProperty(\n  HANDLE                     hClientHandle,\n  WLAN_HOSTED_NETWORK_OPCODE OpCode,\n  PDWORD                     pdwDataSize,\n  PVOID                      *ppvData,\n  PWLAN_OPCODE_VALUE_TYPE    pWlanOpcodeValueType,\n  PVOID                      pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkQueryProperty function queries the current static properties of the wireless Hosted Network."
+    },
+    "WlanHostedNetworkQuerySecondaryKey": {
+        "prototype": "DWORD WlanHostedNetworkQuerySecondaryKey(\n  HANDLE                      hClientHandle,\n  PDWORD                      pdwKeyLength,\n  PUCHAR                      *ppucKeyData,\n  PBOOL                       pbIsPassPhrase,\n  PBOOL                       pbPersistent,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkQuerySecondaryKey function queries the secondary security key that is configured to be used by the wireless Hosted Network."
+    },
+    "WlanHostedNetworkQueryStatus": {
+        "prototype": "DWORD WlanHostedNetworkQueryStatus(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_STATUS *ppWlanHostedNetworkStatus,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkQueryStatus function queries the current status of the wireless Hosted Network."
+    },
+    "WlanHostedNetworkRefreshSecuritySettings": {
+        "prototype": "DWORD WlanHostedNetworkRefreshSecuritySettings(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkRefreshSecuritySettings function refreshes the configurable and auto-generated parts of the wireless Hosted Network security settings."
+    },
+    "WlanHostedNetworkSetProperty": {
+        "prototype": "DWORD WlanHostedNetworkSetProperty(\n  HANDLE                      hClientHandle,\n  WLAN_HOSTED_NETWORK_OPCODE  OpCode,\n  DWORD                       dwDataSize,\n  PVOID                       pvData,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkSetProperty function sets static properties of the wireless Hosted Network."
+    },
+    "WlanHostedNetworkSetSecondaryKey": {
+        "prototype": "DWORD WlanHostedNetworkSetSecondaryKey(\n  HANDLE                      hClientHandle,\n  DWORD                       dwKeyLength,\n  PUCHAR                      pucKeyData,\n  BOOL                        bIsPassPhrase,\n  BOOL                        bPersistent,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkSetSecondaryKey function configures the secondary security key that will be used by the wireless Hosted Network."
+    },
+    "WlanHostedNetworkStartUsing": {
+        "prototype": "DWORD WlanHostedNetworkStartUsing(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkStartUsing function starts the wireless Hosted Network."
+    },
+    "WlanHostedNetworkStopUsing": {
+        "prototype": "DWORD WlanHostedNetworkStopUsing(\n  HANDLE                      hClientHandle,\n  PWLAN_HOSTED_NETWORK_REASON pFailReason,\n  PVOID                       pvReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanHostedNetworkStopUsing function stops the wireless Hosted Network."
+    },
+    "WlanIhvControl": {
+        "prototype": "DWORD WlanIhvControl(\n  HANDLE                hClientHandle,\n  const GUID            *pInterfaceGuid,\n  WLAN_IHV_CONTROL_TYPE Type,\n  DWORD                 dwInBufferSize,\n  PVOID                 pInBuffer,\n  DWORD                 dwOutBufferSize,\n  PVOID                 pOutBuffer,\n  PDWORD                pdwBytesReturned\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanIhvControl function provides a mechanism for independent hardware vendor (IHV) control of WLAN drivers or services."
+    },
+    "WlanOpenHandle": {
+        "prototype": "DWORD WlanOpenHandle(\n  DWORD   dwClientVersion,\n  PVOID   pReserved,\n  PDWORD  pdwNegotiatedVersion,\n  PHANDLE phClientHandle\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanOpenHandle function opens a connection to the server."
+    },
+    "WlanQueryAutoConfigParameter": {
+        "prototype": "DWORD WlanQueryAutoConfigParameter(\n  HANDLE                  hClientHandle,\n  WLAN_AUTOCONF_OPCODE    OpCode,\n  PVOID                   pReserved,\n  PDWORD                  pdwDataSize,\n  PVOID                   *ppData,\n  PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanQueryAutoConfigParameter function queries for the parameters of the auto configuration service."
+    },
+    "WlanQueryInterface": {
+        "prototype": "DWORD WlanQueryInterface(\n  HANDLE                  hClientHandle,\n  const GUID              *pInterfaceGuid,\n  WLAN_INTF_OPCODE        OpCode,\n  PVOID                   pReserved,\n  PDWORD                  pdwDataSize,\n  PVOID                   *ppData,\n  PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanQueryInterface function queries various parameters of a specified interface."
+    },
+    "WlanReasonCodeToString": {
+        "prototype": "DWORD WlanReasonCodeToString(\n  DWORD  dwReasonCode,\n  DWORD  dwBufferSize,\n  PWCHAR pStringBuffer,\n  PVOID  pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanReasonCodeToString function retrieves a string that describes a specified reason code."
+    },
+    "WlanRegisterDeviceServiceNotification": {
+        "prototype": "DWORD WlanRegisterDeviceServiceNotification(\n  HANDLE                               hClientHandle,\n  const PWLAN_DEVICE_SERVICE_GUID_LIST pDevSvcGuidList\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "Allows user mode clients with admin privileges, or User-Mode Driver Framework (UMDF) drivers, to register for unsolicited notifications corresponding to device services that they're interested in."
+    },
+    "WlanRegisterNotification": {
+        "prototype": "DWORD WlanRegisterNotification(\n  HANDLE                     hClientHandle,\n  DWORD                      dwNotifSource,\n  BOOL                       bIgnoreDuplicate,\n  WLAN_NOTIFICATION_CALLBACK funcCallback,\n  PVOID                      pCallbackContext,\n  PVOID                      pReserved,\n  PDWORD                     pdwPrevNotifSource\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanRegisterNotification function is used to register and unregister notifications on all wireless interfaces."
+    },
+    "WlanRegisterVirtualStationNotification": {
+        "prototype": "DWORD WlanRegisterVirtualStationNotification(\n  HANDLE hClientHandle,\n  BOOL   bRegister,\n  PVOID  pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanRegisterVirtualStationNotification function is used to register and unregister notifications on a virtual station."
+    },
+    "WlanRenameProfile": {
+        "prototype": "DWORD WlanRenameProfile(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strOldProfileName,\n  LPCWSTR    strNewProfileName,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanRenameProfile function renames the specified profile."
+    },
+    "WlanSaveTemporaryProfile": {
+        "prototype": "DWORD WlanSaveTemporaryProfile(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  LPCWSTR    strAllUserProfileSecurity,\n  DWORD      dwFlags,\n  BOOL       bOverWrite,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSaveTemporaryProfile function saves a temporary profile to the profile store."
+    },
+    "WlanScan": {
+        "prototype": "DWORD WlanScan(\n  HANDLE               hClientHandle,\n  const GUID           *pInterfaceGuid,\n  const PDOT11_SSID    pDot11Ssid,\n  const PWLAN_RAW_DATA pIeData,\n  PVOID                pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanScan function requests a scan for available networks on the indicated interface."
+    },
+    "WlanSetAutoConfigParameter": {
+        "prototype": "DWORD WlanSetAutoConfigParameter(\n  HANDLE               hClientHandle,\n  WLAN_AUTOCONF_OPCODE OpCode,\n  DWORD                dwDataSize,\n  const PVOID          pData,\n  PVOID                pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetAutoConfigParameter function sets parameters for the automatic configuration service."
+    },
+    "WlanSetFilterList": {
+        "prototype": "DWORD WlanSetFilterList(\n  HANDLE                    hClientHandle,\n  WLAN_FILTER_LIST_TYPE     wlanFilterListType,\n  const PDOT11_NETWORK_LIST pNetworkList,\n  PVOID                     pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetFilterList function sets the permit/deny list."
+    },
+    "WlanSetInterface": {
+        "prototype": "DWORD WlanSetInterface(\n  HANDLE           hClientHandle,\n  const GUID       *pInterfaceGuid,\n  WLAN_INTF_OPCODE OpCode,\n  DWORD            dwDataSize,\n  const PVOID      pData,\n  PVOID            pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetInterface function sets user-configurable parameters for a specified interface."
+    },
+    "WlanSetProfile": {
+        "prototype": "DWORD WlanSetProfile(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  DWORD      dwFlags,\n  LPCWSTR    strProfileXml,\n  LPCWSTR    strAllUserProfileSecurity,\n  BOOL       bOverwrite,\n  PVOID      pReserved,\n  DWORD      *pdwReasonCode\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfile function sets the content of a specific profile."
+    },
+    "WlanSetProfileCustomUserData": {
+        "prototype": "DWORD WlanSetProfileCustomUserData(\n  HANDLE      hClientHandle,\n  const GUID  *pInterfaceGuid,\n  LPCWSTR     strProfileName,\n  DWORD       dwDataSize,\n  const PBYTE pData,\n  PVOID       pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfileCustomUserData function sets the custom user data associated with a profile."
+    },
+    "WlanSetProfileEapUserData": {
+        "prototype": "DWORD WlanSetProfileEapUserData(\n  HANDLE          hClientHandle,\n  const GUID      *pInterfaceGuid,\n  LPCWSTR         strProfileName,\n  EAP_METHOD_TYPE eapType,\n  DWORD           dwFlags,\n  DWORD           dwEapUserDataSize,\n  const LPBYTE    pbEapUserData,\n  PVOID           pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfileEapUserData function sets the Extensible Authentication Protocol (EAP) user credentials as specified by raw EAP data. The user credentials apply to a profile on an interface."
+    },
+    "WlanSetProfileEapXmlUserData": {
+        "prototype": "DWORD WlanSetProfileEapXmlUserData(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  DWORD      dwFlags,\n  LPCWSTR    strEapXmlUserData,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfileEapXmlUserData function sets the Extensible Authentication Protocol (EAP) user credentials as specified by an XML string. The user credentials apply to a profile on an adapter. These credentials can be used only by the caller."
+    },
+    "WlanSetProfileList": {
+        "prototype": "DWORD WlanSetProfileList(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  DWORD      dwItems,\n  LPCWSTR    *strProfileNames,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfileList function sets the preference order of profiles for a given interface."
+    },
+    "WlanSetProfilePosition": {
+        "prototype": "DWORD WlanSetProfilePosition(\n  HANDLE     hClientHandle,\n  const GUID *pInterfaceGuid,\n  LPCWSTR    strProfileName,\n  DWORD      dwPosition,\n  PVOID      pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetProfilePosition function sets the position of a single, specified profile in the preference list."
+    },
+    "WlanSetPsdIEDataList": {
+        "prototype": "DWORD WlanSetPsdIEDataList(\n  HANDLE                    hClientHandle,\n  LPCWSTR                   strFormat,\n  const PWLAN_RAW_DATA_LIST pPsdIEDataList,\n  PVOID                     pReserved\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanSetPsdIeDataList function sets the proximity service discovery (PSD) information element (IE) data list."
+    },
+    "WlanSetSecuritySettings": {
+        "prototype": "DWORD WlanSetSecuritySettings(\n  HANDLE                hClientHandle,\n  WLAN_SECURABLE_OBJECT SecurableObject,\n  LPCWSTR               strModifiedSDDL\n);",
+        "dllLibrary": "wlanapi",
+        "comment": "The WlanGetProfileList function sets the security settings for a configurable object."
     },
     "Wow64SuspendThread": {
         "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",

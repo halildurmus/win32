@@ -268,6 +268,7 @@ void main() {
       'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
       'CurrentBuildNumber') as String);
   if (buildNumber >= 10240) print(' - Windows 10');
+  if (buildNumber >= 22000) print(' - Windows 11');
 
   print('\nWindows build number is: $buildNumber');
 

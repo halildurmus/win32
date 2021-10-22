@@ -112,6 +112,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `idispatch.dart`   | Demonstrates calling a method using `IDispatch`           |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
+| `magnifier.dart`   | Provides a magnifier window using the Magnification API   |
 | `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
 | `midi.dart`        | Demonstrates MIDI playback using MCI commands             |
 | `modules.dart`     | Enumerates all loaded modules on the current system       |

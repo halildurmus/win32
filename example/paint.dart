@@ -96,4 +96,6 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  free(className);
 }

@@ -14,19 +14,19 @@ void main() {
   const logonSound = r'C:\Windows\Media\Windows Logon.wav';
   final pLogonSound = logonSound.toNativeUtf16();
 
-  try {
-    final file = File(logonSound).existsSync();
-    if (!file) {
-      print('WAV file missing.');
-      exit(1);
-    } else {
-      final result = PlaySound(pLogonSound, NULL, SND_FILENAME | SND_SYNC);
+  final file = File(logonSound).existsSync();
+
+  if (!file) {
+    print('WAV file missing.');
+    exit(1);
+  } else {
+    final pszLogonSound = TEXT(logonSound);
+    final result = PlaySound(pszLogonSound, NULL, SND_FILENAME | SND_SYNC);
 
       if (result != TRUE) {
         print('Sound playback failed.');
       }
     }
-  } finally {
-    free(pLogonSound);
+    free(pszLogonSound);
   }
 }

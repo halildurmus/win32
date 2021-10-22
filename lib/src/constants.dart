@@ -1944,6 +1944,29 @@ const WM_MOUSEHWHEEL = 0x020E;
 /// Notifies applications that a power-management event has occurred.
 const WM_POWERBROADCAST = 0x0218;
 
+/// Sent when the effective dots per inch (dpi) for a window has changed.
+/// Requires Windows 8.1 or above.
+const WM_DPICHANGED = 0x02E0;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs before the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_BEFOREPARENT = 0x02E2;
+
+/// For Per Monitor v2 top-level windows, this message is sent to all HWNDs in
+/// the child HWND tree of the window that is undergoing a DPI change. This
+/// message occurs after the top-level window receives WM_DPICHANGED, and
+/// traverses the child tree from the bottom up. Requires Windows 10, version
+/// 1703 or higher.
+const WM_DPICHANGED_AFTERPARENT = 0x02E3;
+
+/// This message tells the operating system that the window will be sized to
+/// dimensions other than the default. Requires Windows 10, version
+/// 1703 or higher.
+const WM_GETDPISCALEDSIZE = 0x02E4;
+
 /// An application sends a WM_CUT message to an edit control or combo box to
 /// delete (cut) the current selection, if any, in the edit control and copy the
 /// deleted text to the clipboard in CF_TEXT format.
@@ -2044,6 +2067,45 @@ const WM_HOTKEY = 0x0312;
 /// Used to define private messages for use by private window classes, usually
 /// in the form WM_USER+x, where x is an integer value.
 const WM_USER = 0x0400;
+
+/// A message-only window enables you to send and receive messages. It is not
+/// visible, has no z-order, cannot be enumerated, and does not receive
+/// broadcast messages. The window simply dispatches messages.
+const HWND_MESSAGE = 0xFFFFFFFFFFFFFFFD; // (HWND) -3
+
+/// Special HWND value for use with PostMessage() and SendMessage(). The message
+/// is sent to all top-level windows in the system, including disabled or
+/// invisible unowned windows, overlapped windows, and pop-up windows; but the
+/// message is not sent to child windows.
+const HWND_BROADCAST = 0xffff;
+
+// -----------------------------------------------------------------------------
+// SendMessageTimeout values
+// -----------------------------------------------------------------------------
+
+/// The calling thread is not prevented from processing other requests while
+/// waiting for the function to return.
+const SMTO_NORMAL = 0x0000;
+
+/// Prevents the calling thread from processing any other requests until the
+/// function returns.
+const SMTO_BLOCK = 0x0001;
+
+/// The function returns without waiting for the time-out period to elapse if
+/// the receiving thread appears to not respond or "hangs."
+const SMTO_ABORTIFHUNG = 0x0002;
+
+/// The function does not enforce the time-out period as long as the receiving
+/// thread is processing messages.
+const SMTO_NOTIMEOUTIFNOTHUNG = 0x0008;
+
+/// The function should return 0 if the receiving window is destroyed or its
+/// owning thread dies while the message is being processed.
+const SMTO_ERRORONEXIT = 0x0020;
+
+// -----------------------------------------------------------------------------
+// Power management events
+// -----------------------------------------------------------------------------
 
 /// Notifies applications that the computer is about to enter a suspended state.
 /// This event is typically broadcast when all applications and installable
@@ -5385,6 +5447,88 @@ const VARIANT_NOUSEROVERRIDE = 0x04;
 const VARIANT_LOCALBOOL = 0x10;
 
 // -----------------------------------------------------------------------------
+// Memory constants
+// -----------------------------------------------------------------------------
+
+/// Allocates memory charges (from the overall size of memory and the paging
+/// files on disk) for the specified reserved memory pages. The function also
+/// guarantees that when the caller later initially accesses the memory, the
+/// contents will be zero. Actual physical pages are not allocated unless/until
+/// the virtual addresses are actually accessed.
+const MEM_COMMIT = 0x00001000;
+
+/// Reserves a range of the process's virtual address space without allocating
+/// any actual physical storage in memory or in the paging file on disk.
+const MEM_RESERVE = 0x00002000;
+
+/// Replaces a placeholder with a mapped view. Only data/pf-backed section views
+/// are supported (no images, physical memory, etc.). When you replace a
+/// placeholder, BaseAddress and ViewSize must exactly match those of the
+/// placeholder.
+const MEM_REPLACE_PLACEHOLDER = 0x00004000;
+
+/// A placeholder is a type of reserved memory region.
+const MEM_RESERVE_PLACEHOLDER = 0x00040000;
+
+/// Indicates that data in the memory range specified by lpAddress and dwSize is
+/// no longer of interest. The pages should not be read from or written to the
+/// paging file. However, the memory block will be used again later, so it
+/// should not be decommitted. This value cannot be used with any other value.
+const MEM_RESET = 0x00080000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_TOP_DOWN = 0x00100000;
+
+/// Causes the system to track pages that are written to in the allocated
+/// region.
+const MEM_WRITE_WATCH = 0x00200000;
+
+/// Reserves an address range that can be used to map Address Windowing
+/// Extensions (AWE) pages.
+const MEM_PHYSICAL = 0x00400000;
+
+/// MEM_RESET_UNDO should only be called on an address range to which MEM_RESET
+/// was successfully applied earlier. It indicates that the data in the
+/// specified memory range specified by lpAddress and dwSize is of interest to
+/// the caller and attempts to reverse the effects of MEM_RESET. If the function
+/// succeeds, that means all data in the specified address range is intact. If
+/// the function fails, at least some of the data in the address range has been
+/// replaced with zeroes.
+const MEM_RESET_UNDO = 0x01000000;
+
+/// Allocates memory using large page support.
+const MEM_LARGE_PAGES = 0x20000000;
+
+/// Specifies that the priority of the pages being unmapped should be
+/// temporarily boosted (with automatic short term decay) because the caller
+/// expects that these pages will be accessed again shortly from another thread.
+const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
+
+/// To coalesce two adjacent placeholders, specify MEM_RELEASE |
+/// MEM_COALESCE_PLACEHOLDERS. When you coalesce placeholders, lpAddress and
+/// dwSize must exactly match those of the placeholder.
+const MEM_COALESCE_PLACEHOLDERS = 0x00000001;
+
+/// Frees an allocation back to a placeholder (after you've replaced a
+/// placeholder with a private allocation using VirtualAlloc2 or
+/// Virtual2AllocFromApp).
+const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
+
+/// Decommits the specified region of committed pages. After the operation, the
+/// pages are in the reserved state.
+const MEM_DECOMMIT = 0x00004000;
+
+/// Releases the specified region of pages, or placeholder (for a placeholder,
+/// the address space is released and available for other allocations). After
+/// this operation, the pages are in the free state.
+const MEM_RELEASE = 0x00008000;
+
+/// Indicates free pages not accessible to the calling process and available to
+/// be allocated.
+const MEM_FREE = 0x00010000;
+
+// -----------------------------------------------------------------------------
 // Multimedia constants
 // -----------------------------------------------------------------------------
 /// Time in milliseconds.
@@ -5440,6 +5584,191 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// -----------------------------------------------------------------------------
+// Layered Window Attributes constants
+// -----------------------------------------------------------------------------
+
+/// Use crKey as the transparency color.
+const LWA_COLORKEY = 0x00000001;
+
+/// Use bAlpha to determine the opacity of the layered window.
+const LWA_ALPHA = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// Magnifier constants
+// -----------------------------------------------------------------------------
+
+/// Displays the magnified system cursor along with the magnified screen
+/// content.
+const MS_SHOWMAGNIFIEDCURSOR = 0x0001;
+
+/// Clips the area of the magnifier window that surrounds the system cursor.
+/// This style enables the user to see screen content that is behind the
+/// magnifier window.
+const MS_CLIPAROUNDCURSOR = 0x0002;
+
+/// Displays the magnified screen content using inverted colors.
+const MS_INVERTCOLORS = 0x0004;
+
+/// Exclude the windows from magnification.
+const MW_FILTERMODE_EXCLUDE = 0;
+
+/// Magnify the windows.
+const MW_FILTERMODE_INCLUDE = 1;
+
+// -----------------------------------------------------------------------------
+// GetDeviceCaps() constants
+// -----------------------------------------------------------------------------
+
+/// The device driver version.
+const DRIVERVERSION = 0;
+
+/// Device technology
+const TECHNOLOGY = 2;
+
+/// Width, in millimeters, of the physical screen.
+const HORZSIZE = 4;
+
+/// Height, in millimeters, of the physical screen.
+const VERTSIZE = 6;
+
+/// Width, in pixels, of the screen; or for printers, the width, in pixels, of
+/// the printable area of the page.
+const HORZRES = 8;
+
+/// Height, in raster lines, of the screen; or for printers, the height, in
+/// pixels, of the printable area of the page.
+const VERTRES = 10;
+
+/// Number of adjacent color bits for each pixel.
+const BITSPIXEL = 12;
+
+/// Number of color planes.
+const PLANES = 14;
+
+/// Number of device-specific brushes.
+const NUMBRUSHES = 16;
+
+/// Number of device-specific pens.
+const NUMPENS = 18;
+
+const NUMMARKERS = 20;
+
+/// Number of device-specific fonts.
+const NUMFONTS = 22;
+
+/// Number of entries in the device's color table, if the device has a color
+/// depth of no more than 8 bits per pixel. For devices with greater color
+/// depths, 1 is returned.
+const NUMCOLORS = 24;
+
+/// Reserved.
+const PDEVICESIZE = 26;
+
+/// Value that indicates the curve capabilities of the device.
+const CURVECAPS = 28;
+
+/// Value that indicates the line capabilities of the device.
+const LINECAPS = 30;
+
+/// Value that indicates the line capabilities of the device.
+const POLYGONALCAPS = 32;
+
+/// Value that indicates the text capabilities of the device.
+const TEXTCAPS = 34;
+
+/// Flag that indicates the clipping capabilities of the device. If the device
+/// can clip to a rectangle, it is 1. Otherwise, it is 0.
+const CLIPCAPS = 36;
+
+/// Value that indicates the raster capabilities of the device.
+const RASTERCAPS = 38;
+
+/// Relative width of a device pixel used for line drawing.
+const ASPECTX = 40;
+
+/// Relative height of a device pixel used for line drawing.
+const ASPECTY = 42;
+
+/// Diagonal width of the device pixel used for line drawing.
+const ASPECTXY = 44;
+
+/// Number of pixels per logical inch along the screen width. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSX = 88;
+
+/// Number of pixels per logical inch along the screen height. In a system with
+/// multiple display monitors, this value is the same for all monitors.
+const LOGPIXELSY = 90;
+
+/// Number of entries in the system palette. This index is valid only if the
+/// device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const SIZEPALETTE = 104;
+
+/// Number of reserved entries in the system palette. This index is valid only
+/// if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is
+/// available only if the driver is compatible with 16-bit Windows.
+const NUMRESERVED = 106;
+
+/// Actual color resolution of the device, in bits per pixel. This index is
+/// valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS
+/// index and is available only if the driver is compatible with 16-bit Windows.
+const COLORRES = 108;
+
+/// For printing devices: the width of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-x11-inch paper has a
+/// physical width value of 5100 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALWIDTH = 110;
+
+/// For printing devices: the height of the physical page, in device units. For
+/// example, a printer set to print at 600 dpi on 8.5-by-11-inch paper has a
+/// physical height value of 6600 device units. Note that the physical page is
+/// almost always greater than the printable area of the page, and never
+/// smaller.
+const PHYSICALHEIGHT = 111;
+
+/// For printing devices: the distance from the left edge of the physical page
+/// to the left edge of the printable area, in device units. For example, a
+/// printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print
+/// on the leftmost 0.25-inch of paper, has a horizontal physical offset of 150
+/// device units.
+const PHYSICALOFFSETX = 112;
+
+/// For printing devices: the distance from the top edge of the physical page to
+/// the top edge of the printable area, in device units. For example, a printer
+/// set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the
+/// topmost 0.5-inch of paper, has a vertical physical offset of 300 device
+/// units.
+const PHYSICALOFFSETY = 113;
+
+/// Scaling factor for the x-axis of the printer.
+const SCALINGFACTORX = 114;
+
+/// Scaling factor for the y-axis of the printer.
+const SCALINGFACTORY = 115;
+
+/// For display devices: the current vertical refresh rate of the device, in
+/// cycles per second (Hz). A vertical refresh rate value of 0 or 1 represents
+/// the display hardware's default refresh rate.
+const VREFRESH = 116;
+const DESKTOPVERTRES = 117;
+const DESKTOPHORZRES = 118;
+
+/// Preferred horizontal drawing alignment, expressed as a multiple of pixels.
+/// For best drawing performance, windows should be horizontally aligned to a
+/// multiple of this value. A value of zero indicates that the device is
+/// accelerated, and any alignment may be used.
+const BLTALIGNMENT = 119;
+
+/// Value that indicates the shading and blending capabilities of the device.
+const SHADEBLENDCAPS = 120;
+
+/// Value that indicates the color management capabilities of the device.
+const COLORMGMTCAPS = 121;
 
 // -----------------------------------------------------------------------------
 // Multimedia Extensions messages
@@ -6791,6 +7120,7 @@ const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
 /// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
 /// PBT_POWERSETTINGCHANGE.
 const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
+
 // -----------------------------------------------------------------------------
 // TrackPopupMenuEx constants
 // -----------------------------------------------------------------------------
@@ -7266,9 +7596,41 @@ class DWMWINDOWATTRIBUTE {
   /// for the window; otherwise, FALSE.
   static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
 
-  /// The maximum recognized DWMWINDOWATTRIBUTE value, used for validation
-  /// purposes.
-  static const DWMWA_LAST = 17;
+  /// [Windows 11 and above.] Allows a window to either use the accent color, or
+  /// dark, according to the user Color Mode preferences.
+  static const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+  /// [Windows 11 and above.] Controls the policy that rounds top-level window
+  /// corners.
+  static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
+
+  /// [Windows 11 and above.] The color of the thin border around a top-level
+  /// window.
+  static const DWMWA_BORDER_COLOR = 34;
+
+  /// [Windows 11 and above.] The color of the caption.
+  static const DWMWA_CAPTION_COLOR = 35;
+
+  /// [Windows 11 and above.] The color of the caption text.
+  static const DWMWA_TEXT_COLOR = 36;
+
+  /// [Windows 11 and above.] Width of the visible border around a thick frame
+  /// window.
+  static const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
+}
+
+class DWM_WINDOW_CORNER_PREFERENCE {
+  /// Let the system decide whether or not to round window corners
+  static const DWMWCP_DEFAULT = 0;
+
+  /// Never round window corners
+  static const DWMWCP_DONOTROUND = 1;
+
+  /// Round the corners if appropriate
+  static const DWMWCP_ROUND = 2;
+
+  /// Round the corners if appropriate, with a small radius
+  static const DWMWCP_ROUNDSMALL = 3;
 }
 
 // -----------------------------------------------------------------------------
@@ -7537,3 +7899,54 @@ const PRINTER_ENUM_CATEGORY_ALL = 0x02000000;
 
 /// The function enumerates only 3D printers.
 const PRINTER_ENUM_CATEGORY_3D = 0x04000000;
+
+// -----------------------------------------------------------------------------
+// GetWindow constants
+// -----------------------------------------------------------------------------
+/// The retrieved handle identifies the child window at the top of the Z order,
+/// if the specified window is a parent window; otherwise, the retrieved handle
+/// is NULL. The function examines only child windows of the specified window.
+/// It does not examine descendant windows.
+const GW_CHILD = 5;
+
+/// The retrieved handle identifies the enabled popup window owned by the
+/// specified window (the search uses the first such window found using
+/// GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the
+/// retrieved handle is that of the specified window.
+const GW_ENABLEDPOPUP = 6;
+
+/// The retrieved handle identifies the window of the same type that is highest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDFIRST = 0;
+
+/// The retrieved handle identifies the window of the same type that is lowest
+/// in the Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDLAST = 1;
+
+/// The retrieved handle identifies the window below the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDNEXT = 2;
+
+/// The retrieved handle identifies the window above the specified window in the
+/// Z order.
+/// If the specified window is a topmost window, the handle identifies a topmost
+/// window. If the specified window is a top-level window, the handle identifies
+/// a top-level window. If the specified window is a child window, the handle
+/// identifies a sibling window.
+const GW_HWNDPREV = 3;
+
+/// The retrieved handle identifies the specified window's owner window, if any.
+/// For more information, see Owned Windows.
+const GW_OWNER = 4;

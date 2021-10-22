@@ -24,18 +24,18 @@ int printModules(int processID) {
   }
 
   // Get a list of all the modules in this process.
-  final hMods = calloc<HANDLE>(1024);
+  final hMods = calloc<HMODULE>(1024);
   final cbNeeded = calloc<DWORD>();
 
-  if (EnumProcessModules(hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded) ==
+  if (EnumProcessModules(hProcess, hMods, sizeOf<HMODULE>() * 1024, cbNeeded) ==
       1) {
-    for (var i = 0; i < (cbNeeded.value ~/ sizeOf<IntPtr>()); i++) {
+    for (var i = 0; i < (cbNeeded.value ~/ sizeOf<HMODULE>()); i++) {
       final szModName = wsalloc(MAX_PATH);
 
       // Get the full path to the module's file.
       final hModule = hMods.elementAt(i).value;
       final moduleValue =
-          '0x${hModule.toRadixString(16).padLeft(sizeOf<IntPtr>(), '0').toUpperCase()}';
+          '0x${hModule.toRadixString(16).padLeft(sizeOf<HMODULE>(), '0').toUpperCase()}';
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         // Print the module name and handle value.
@@ -59,7 +59,7 @@ void main() {
   final cbNeeded = calloc<DWORD>();
 
   // Get the list of process identifiers.
-  if (EnumProcesses(aProcesses, sizeOf<Uint32>() * 1024, cbNeeded) == 0) {
+  if (EnumProcesses(aProcesses, sizeOf<DWORD>() * 1024, cbNeeded) == 0) {
     print('EnumProcesses failed.');
     exit(1);
   }
