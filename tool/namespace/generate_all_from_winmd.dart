@@ -159,20 +159,20 @@ bool constantIsClassClsid(TypeDef typedef) {
 }
 
 void generateWin32Constants(String namespace) {
-  final constants = scope.typeDefs
-      .where((typedef) => (typedef.name == '$namespace.Apis'))
-      .first
-      .fields;
+  final constants =
+      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
 
-  final file = File('${folderForNamespace(namespace)}/constants.g.dart');
-  generateConstantsFile(file, constants);
+  if (constants.isNotEmpty) {
+    final file = File('${folderForNamespace(namespace)}/constants.g.dart');
+    generateConstantsFile(file, constants.first.fields);
 
-  final guidConstants = scope.typeDefs
-      .where((typedef) => typedef.name.startsWith(namespace))
-      .where(typedefIsGuidConstant)
-      .where((typedef) => !(constantIsClassClsid(typedef)))
-      .toList();
-  appendGuidConstantsFile(file, guidConstants);
+    final guidConstants = scope.typeDefs
+        .where((typedef) => typedef.name.startsWith(namespace))
+        .where(typedefIsGuidConstant)
+        .where((typedef) => !(constantIsClassClsid(typedef)))
+        .toList();
+    appendGuidConstantsFile(file, guidConstants);
+  }
 }
 
 void generateWin32Callbacks(String namespace) {
