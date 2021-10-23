@@ -25,9 +25,11 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '${pathToLibSrc}com/IUnknown.dart';
 import '${pathToLibSrc}combase.dart';
 import '${pathToLibSrc}constants.dart';
 import '${pathToLibSrc}exceptions.dart';
+import '${pathToLibSrc}guid.dart';
 import '${pathToLibSrc}macros.dart';
 import '${pathToLibSrc}ole32.dart';
 import '${pathToLibSrc}structs.dart';
@@ -36,8 +38,10 @@ import '${pathToLibSrc}utils.dart';
 
   if (interface.interfaces.isNotEmpty) {
     final parent = interface.interfaces.first.name;
-    buffer.writeln("\nimport '$pathToLibSrc${folderFromNamespace(parent)}/"
-        "${parent.split('.').last}.dart';");
+    if (!excludedComInterfaces.contains(parent)) {
+      buffer.writeln("\nimport '$pathToLibSrc${folderFromNamespace(parent)}/"
+          "${parent.split('.').last}.dart';");
+    }
   }
 
   return buffer.toString();
