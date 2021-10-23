@@ -94,6 +94,8 @@ class ClassProjector {
             dartType: typeProjection.dartType));
       }
 
+      // TODO: Rationalize these. We shouldn't have to hardcode for the
+      // difference between Win32 and WinRT metadata...
       if (interface.name.startsWith('Windows.Win32')) {
         // return type is almost certainly an HRESULT, but we'll use the return
         // type just to be sure.
@@ -108,10 +110,14 @@ class ClassProjector {
           // TODO: Deal with methods like IUPnPServices.get_Item([In], [Out]).
           // Right now we ignore the [In] parameter :-O
 
+          // TODO: Next line should throw an exception when
+          // https://github.com/microsoft/win32metadata/issues/707 is fixed and
+          // we can reliably detect Win32 properties.
+
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
           final outParam = mdMethod.parameters
-              .firstWhere((param) => param.isOutParam)
+              .lastWhere((param) => param.isOutParam)
               .typeIdentifier;
           final arg = outParam.typeArg;
           if (arg == null) {
