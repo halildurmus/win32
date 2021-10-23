@@ -1,3 +1,7 @@
+const excludedNamespaces = <String>[
+  // 'Windows.Win32.Data.Xml.MsXml', // https://github.com/microsoft/win32metadata/issues/707
+];
+
 const excludedFunctions = <String>[
   // Relies on namespaces not imported yet
   'BroadcastSystemMessageEx', // system.systemservices

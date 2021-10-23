@@ -73,7 +73,9 @@ List<String> namespacesInScope(Scope scope) {
       namespaceSet.add('Windows.Win32.${namespace.join('.')}');
     }
   }
-  return namespaceSet.toList()..sort((a, b) => a.compareTo(b));
+  return namespaceSet.toList()
+    ..sort((a, b) => a.compareTo(b))
+    ..removeWhere((namespace) => excludedNamespaces.contains(namespace));
 }
 
 /// Turn a Win32 namespace into the appropriate path. For example, turn

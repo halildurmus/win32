@@ -40,6 +40,7 @@ class ClassProjector {
 
   /// Take a TypeDef and create a Dart projection of it.
   ClassProjection get projection {
+    // TODO: Refactor this into smaller pieces
     var parent = '';
 
     // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
@@ -104,20 +105,25 @@ class ClassProjector {
         if (mdMethod.isGetProperty) {
           methodProjection.isGetProperty = true;
 
+          // TODO: Deal with methods like IUPnPServices.get_Item([In], [Out]).
+          // Right now we ignore the [In] parameter :-O
+
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
-          final arg = mdMethod.parameters.first.typeIdentifier.typeArg;
+          final outParam = mdMethod.parameters
+              .firstWhere((param) => param.isOutParam)
+              .typeIdentifier;
+          final arg = outParam.typeArg;
           if (arg == null) {
             throw Exception(
                 '$mdMethod (${mdMethod.token.toRadixString(16)}) missing '
-                'typearg for ${mdMethod.parameters.first} in '
-                '${mdMethod.parent}');
+                'typearg for $outParam in ${mdMethod.parent}');
           } else {
-            final typeBuilder = TypeProjector(arg);
+            final outParamType = TypeProjector(arg);
             methodProjection.parameters = [
-              ParameterProjection(mdMethod.parameters.first.name,
-                  nativeType: typeBuilder.nativeType,
-                  dartType: typeBuilder.dartType)
+              ParameterProjection(outParam.name,
+                  nativeType: outParamType.nativeType,
+                  dartType: outParamType.dartType)
             ];
           }
         }
