@@ -1,13 +1,16 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [{
-        "name": "Dart",
-        "program": "tool\\winmd\\winmd.dart",
-        "request": "launch",
-        "args": ["lib\\src\\generated"],
-        "type": "dart"
-    }]
+            "name": "Generate Bindings",
+            "program": "tool\\namespace\\generate_all_from_winmd.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Dart Tests",
+            "program": "test",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
 }

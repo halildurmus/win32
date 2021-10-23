@@ -87,12 +87,16 @@ void createDirectory(String namespace) =>
     Directory(folderForNamespace(namespace)).createSync(recursive: true);
 
 void generateWin32Functions(String namespace) {
-  final funcs = scope.typeDefs
-      .where((typedef) => (typedef.name == '$namespace.Apis'))
-      .first;
+  final funcs =
+      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
 
-  final file = File('${folderForNamespace(namespace)}/functions.g.dart');
-  generateFfiFile(file, funcs);
+  // Some namespaces may not contain a Win32 APIs subnamespace (e.g.
+  // Windows.Win32.Media.Streaming does not contain
+  // Windows.Win32.Media.Streaming.Apis)
+  if (funcs.isNotEmpty) {
+    final file = File('${folderForNamespace(namespace)}/functions.g.dart');
+    generateFfiFile(file, funcs.first);
+  }
 }
 
 bool typedefIsStruct(TypeDef typedef) =>
