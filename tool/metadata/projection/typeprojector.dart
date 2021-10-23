@@ -133,7 +133,7 @@ class TypeProjector {
       return 'void';
     }
 
-    if (ffiType == '/* Boolean */ Uint8') {
+    if (ffiType == 'Bool') {
       return 'bool';
     }
 
@@ -171,7 +171,7 @@ class TypeProjector {
       case BaseType.Void:
         return 'Void';
       case BaseType.Boolean:
-        return '/* Boolean */ Uint8';
+        return 'Bool';
       case BaseType.Char:
         return 'Uint16';
       case BaseType.Int8:
