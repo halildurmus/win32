@@ -6,8 +6,10 @@ const excludedFunctions = <String>[
 ];
 
 const excludedStructs = <String>[
-  // ANSI
-  'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACE',
+  // // ANSI
+  // 'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACE',
+  'Windows.Win32.System.OleAutomation.VARIANT',
+  'Windows.Win32.Storage.StructuredStorage.PROPVARIANT'
 ];
 
 const excludedCallbacks = <String>[

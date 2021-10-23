@@ -220,7 +220,7 @@ void generateLibraryExport(List<String> namespaces) {
 
 void main() {
   for (final namespace in namespacesInScope(scope)) {
-    // if (namespace == 'Windows.Win32.Networking.HttpServer') {
+    // if (namespace == 'Windows.Win32.AI.MachineLearning.WinML') {
     print('Generating $namespace...');
 
     createDirectory(namespace);
@@ -230,7 +230,7 @@ void main() {
     generateWin32Constants(namespace);
     generateWin32Callbacks(namespace);
     generateComInterfaces(namespace);
-    // }
   }
+  // }
   generateLibraryExport(namespaces);
 }
