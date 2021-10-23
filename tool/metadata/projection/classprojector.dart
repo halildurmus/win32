@@ -109,7 +109,7 @@ class ClassProjector {
           final arg = mdMethod.parameters.first.typeIdentifier.typeArg;
           if (arg == null) {
             throw Exception(
-                '$mdMethod (${mdMethod.token.toRadixString(16)}) missing typearg for ${mdMethod.parameters.first} in ${mdMethod.name}');
+                '$mdMethod (${mdMethod.token.toRadixString(16)}) missing typearg for ${mdMethod.parameters.first} in ${mdMethod.parent}');
           } else {
             final typeBuilder = TypeProjector(arg);
             methodProjection.parameters = [
