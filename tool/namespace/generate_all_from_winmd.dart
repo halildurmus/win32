@@ -188,9 +188,15 @@ void generateWin32Callbacks(String namespace) {
   generateCallbacksFile(file, callbacks);
 }
 
+bool typeDirectlyInNamespace(String type, String namespace) {
+  final typeComponents = type.split('.');
+  typeComponents.removeLast();
+  return typeComponents.join('.') == namespace;
+}
+
 void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
-      .where((typedef) => typedef.name.startsWith(namespace))
+      .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where((typedef) => typedef.isInterface)
       .where((typedef) => !excludedComInterfaces.contains(typedef.name))
       .toList();
