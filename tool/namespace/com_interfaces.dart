@@ -47,34 +47,40 @@ import '${pathToLibSrc}utils.dart';
   return buffer.toString();
 }
 
+String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
+  if (typeIdentifier.name.startsWith('Windows.Win32')) {
+    final paramType = typeIdentifier.type;
+
+    if (paramType != null && paramType.isDelegate) {
+      return '${folderFromNamespace(typeIdentifier.name)}/callbacks.g.dart';
+    } else {
+      return '${folderFromNamespace(typeIdentifier.name)}/structs.g.dart';
+    }
+  }
+}
+
 List<String> importsForClass(TypeDef typedef) {
   final importList = <String>[];
 
   for (final method in typedef.methods) {
     final paramsAndReturnType = [...method.parameters, method.returnType];
     for (final param in paramsAndReturnType) {
-      if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-        final paramType = param.typeIdentifier.type;
+      // Add imports for a parameter itself (e.g. VARIANT)
+      final import = getImportForTypeIdentifier(param.typeIdentifier);
+      if (import != null) importList.add(import);
 
-        if (paramType != null && paramType.isDelegate) {
-          importList.add(
-              '${folderFromNamespace(param.typeIdentifier.name)}/callbacks.g.dart');
-        } else {
-          importList.add(
-              '${folderFromNamespace(param.typeIdentifier.name)}/structs.g.dart');
-        }
-      }
-
+      // Add imports for a type within a pointer (e.g. Pointer<VARIANT>)
       if (param.typeIdentifier.typeArg != null) {
-        final paramTypeArg = param.typeIdentifier.typeArg!;
-        if (paramTypeArg.name.startsWith('Windows.Win32')) {
-          if (paramTypeArg.type!.isDelegate) {
-            importList.add(
-                '${folderFromNamespace(paramTypeArg.name)}/callbacks.g.dart');
-          } else {
-            importList.add(
-                '${folderFromNamespace(paramTypeArg.name)}/structs.g.dart');
-          }
+        final import =
+            getImportForTypeIdentifier(param.typeIdentifier.typeArg!);
+        if (import != null) importList.add(import);
+
+        // Add imports for a type within a double pointer (e.g.
+        // Pointer<Pointer<VARIANT>>)
+        if (param.typeIdentifier.typeArg!.typeArg != null) {
+          final import = getImportForTypeIdentifier(
+              param.typeIdentifier.typeArg!.typeArg!);
+          if (import != null) importList.add(import);
         }
       }
     }
