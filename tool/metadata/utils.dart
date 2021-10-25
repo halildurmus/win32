@@ -102,6 +102,8 @@ String folderFromNamespace(String namespace) {
   return segments.join('/').toLowerCase();
 }
 
+bool characterIsNumeral(String c) => int.tryParse(c) != null;
+
 /// Takes an identifier and converts it to a safe Dart identifier (i.e. one that
 /// is not a reserved word or a private modifier).
 ///
@@ -112,7 +114,11 @@ String safeName(String name) {
     return '${name}_';
   }
   if (name.startsWith('_')) {
-    return name.substring(1);
+    if (characterIsNumeral(name.substring(1, 2))) {
+      return 'x${name.substring(1)}';
+    } else {
+      return name.substring(1);
+    }
   }
   return name;
 }
