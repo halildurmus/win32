@@ -230,7 +230,7 @@ void main() {
     generateWin32Constants(namespace);
     generateWin32Callbacks(namespace);
     generateComInterfaces(namespace);
+    // }
   }
-  // }
   generateLibraryExport(namespaces);
 }

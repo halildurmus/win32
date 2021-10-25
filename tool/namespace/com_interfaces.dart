@@ -51,7 +51,8 @@ List<String> importsForClass(TypeDef typedef) {
   final importList = <String>[];
 
   for (final method in typedef.methods) {
-    for (final param in method.parameters) {
+    final paramsAndReturnType = [...method.parameters, method.returnType];
+    for (final param in paramsAndReturnType) {
       if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
         final paramType = param.typeIdentifier.type;
 

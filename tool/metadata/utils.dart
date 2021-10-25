@@ -4,6 +4,16 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+const dartKeywords = <String>[
+  // Keywords from https://dart.dev/guides/language/language-tour#keywords.
+  // Contextual keywords and built-in identifiers are not included here, since
+  // they can be used as valid identifiers in most places.
+  'assert', 'break', 'case', 'catch', 'class', 'const', 'continue', 'default',
+  'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
+  'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
+  'throw', 'true', 'try', 'var', 'void', 'while', 'with',
+];
+
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String nameWithoutEncoding(String typeName) {
@@ -90,4 +100,19 @@ String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
 
   return segments.join('/').toLowerCase();
+}
+
+/// Takes an identifier and converts it to a safe Dart identifier (i.e. one that
+/// is not a reserved word or a private modifier).
+///
+/// For example, `VARIANT var` should be converted to `VARIANT var_`, and
+/// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
+String safeName(String name) {
+  if (dartKeywords.contains(name)) {
+    return '${name}_';
+  }
+  if (name.startsWith('_')) {
+    return name.substring(1);
+  }
+  return name;
 }

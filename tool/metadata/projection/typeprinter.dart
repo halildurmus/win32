@@ -373,14 +373,16 @@ void main() {
 
           // Handle a string array
           if (field.typeIdentifier.typeArg?.baseType == BaseType.Char) {
-            buffer.write(printArray(nativeType, field.name, dimensions));
+            buffer.write(
+                printArray(nativeType, safeName(field.name), dimensions));
           }
 
           // Handle a non-string array
           else {
             buffer.writeln('  @Array($dimensions)');
-            buffer.writeln(
-                '  external Array<${nameWithoutEncoding(nativeType)}> ${field.name};');
+            buffer
+                .writeln('  external Array<${nameWithoutEncoding(nativeType)}> '
+                    '${safeName(field.name)};');
           }
         }
         // Handle a non-array
@@ -388,12 +390,12 @@ void main() {
           final nativeType = TypeProjector(field.typeIdentifier).nativeType;
           final dartType = TypeProjector(field.typeIdentifier).dartType;
 
-          if (dartType == 'int' || dartType == 'double') {
-            buffer
-                .writeln('  @$nativeType() external $dartType ${field.name};');
-          } else {
+          if (dartType == 'int' || dartType == 'double' || dartType == 'bool') {
             buffer.writeln(
-                '  external ${nameWithoutEncoding(dartType)} ${field.name};');
+                '  @$nativeType() external $dartType ${safeName(field.name)};');
+          } else {
+            buffer.writeln('  external ${nameWithoutEncoding(dartType)} '
+                '${safeName(field.name)};');
           }
         }
       }
