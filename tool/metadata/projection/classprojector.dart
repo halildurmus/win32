@@ -74,22 +74,31 @@ class ClassProjector {
       interface.shortNameWithGenericSpecifier = interface.shortName;
     }
 
-    for (final mdMethod in typeDef.methods) {
+    for (final method in typeDef.methods) {
       final methodProjection = MethodProjection();
-      final overload = mdMethod
+      final overload = method
           .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
       if (overload.isNotEmpty) {
         methodProjection.name = overload;
       } else {
-        methodProjection.name = mdMethod.name;
+        // Win32 COM interfaces just overload without providing a secondary
+        // name. So we have to generate one.
+        final overloads = typeDef.methods.where((m) => m.name == method.name);
+        if (overloads.length > 1) {
+          final overloadIndex = overloads.toList().indexOf(method);
+          methodProjection.name = '${method.name}_$overloadIndex';
+        } else {
+          methodProjection.name = method.name;
+        }
       }
-      methodProjection.isGetProperty = mdMethod.isGetProperty;
-      methodProjection.isSetProperty = mdMethod.isSetProperty;
+      methodProjection.isGetProperty = method.isGetProperty;
+      methodProjection.isSetProperty = method.isSetProperty;
 
-      for (final mdParam in mdMethod.parameters) {
+      for (final mdParam in method.parameters) {
         final typeProjection = TypeProjector(mdParam.typeIdentifier);
 
-        methodProjection.parameters.add(ParameterProjection(mdParam.name,
+        methodProjection.parameters.add(ParameterProjection(
+            safeName(mdParam.name),
             nativeType: typeProjection.nativeType,
             dartType: typeProjection.dartType));
       }
@@ -99,12 +108,12 @@ class ClassProjector {
       if (interface.name.startsWith('Windows.Win32')) {
         // return type is almost certainly an HRESULT, but we'll use the return
         // type just to be sure.
-        final typeBuilder = TypeProjector(mdMethod.returnType.typeIdentifier);
+        final typeBuilder = TypeProjector(method.returnType.typeIdentifier);
 
         methodProjection.returnTypeNative = typeBuilder.nativeType;
         methodProjection.returnTypeDart = typeBuilder.dartType;
 
-        if (mdMethod.isGetProperty) {
+        if (method.isGetProperty) {
           methodProjection.isGetProperty = true;
 
           // TODO: Deal with methods like IUPnPServices.get_Item([In], [Out]).
@@ -116,14 +125,14 @@ class ClassProjector {
 
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
-          final outParam = mdMethod.parameters
+          final outParam = method.parameters
               .lastWhere((param) => param.isOutParam)
               .typeIdentifier;
           final arg = outParam.typeArg;
           if (arg == null) {
             throw Exception(
-                '$mdMethod (${mdMethod.token.toRadixString(16)}) missing '
-                'typearg for $outParam in ${mdMethod.parent}');
+                '$method (${method.token.toRadixString(16)}) missing '
+                'typearg for $outParam in ${method.parent}');
           } else {
             final outParamType = TypeProjector(arg);
             methodProjection.parameters = [
@@ -138,15 +147,15 @@ class ClassProjector {
         // value as an pointer
         methodProjection.returnTypeNative = 'Int32';
         methodProjection.returnTypeDart = 'int';
-        if (mdMethod.returnType.typeIdentifier.baseType != BaseType.Void) {
-          final typeBuilder = TypeProjector(mdMethod.returnType.typeIdentifier);
+        if (method.returnType.typeIdentifier.baseType != BaseType.Void) {
+          final typeBuilder = TypeProjector(method.returnType.typeIdentifier);
 
-          if (mdMethod.isSetProperty) {
+          if (method.isSetProperty) {
             final paramName = methodProjection.name.substring(4).toCamelCase();
             methodProjection.parameters.add(ParameterProjection(paramName,
                 nativeType: typeBuilder.nativeType,
                 dartType: typeBuilder.dartType));
-          } else if (mdMethod.isGetProperty) {
+          } else if (method.isGetProperty) {
             methodProjection.parameters.add(ParameterProjection('value',
                 nativeType: typeBuilder.nativeType,
                 dartType: typeBuilder.dartType));
