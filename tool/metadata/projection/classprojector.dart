@@ -76,6 +76,11 @@ class ClassProjector {
 
     for (final method in typeDef.methods) {
       final methodProjection = MethodProjection();
+
+      // Name the method.
+
+      // Dart doesn't allow overloaded methods, so we have to rename methods
+      // that are duplicated.
       final overload = method
           .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
       if (overload.isNotEmpty) {
@@ -84,9 +89,15 @@ class ClassProjector {
         // Win32 COM interfaces just overload without providing a secondary
         // name. So we have to generate one.
         final overloads = typeDef.methods.where((m) => m.name == method.name);
+
+        // If there is more than one entry with the same name, add a suffix to all but the first.
         if (overloads.length > 1) {
           final overloadIndex = overloads.toList().indexOf(method);
-          methodProjection.name = '${method.name}_$overloadIndex';
+          if (overloadIndex == 0) {
+            methodProjection.name = method.name;
+          } else {
+            methodProjection.name = '${method.name}_$overloadIndex';
+          }
         } else {
           methodProjection.name = method.name;
         }
