@@ -6,8 +6,15 @@
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
-enum SourceType { com, winrt, win32, unknown }
+// These classes offer an intermediate format between the underlying Windows
+// metadata, and the generated Dart code. Unlike the Windows Metadata database,
+// they are designed for ease of serialization in Dart, requiring no further
+// significant interpretation.
 
+/// A parameter.
+///
+/// Parameters have a name, along with the Dart type and the FFI equivalent
+/// type.
 class ParameterProjection {
   final String dartType;
   final String name;
@@ -20,6 +27,9 @@ class ParameterProjection {
   String toString() => '$name (dart: $dartType, native: $nativeType)';
 }
 
+/// A method or a property.
+///
+/// Methods have names, a list of parameters, and may return a type.
 class MethodProjection {
   late bool isGetProperty;
   late bool isSetProperty;
@@ -33,6 +43,13 @@ class MethodProjection {
       '$name (params: ${parameters.length}, returns: $returnTypeNative)';
 }
 
+/// The architecture used to represent a class.
+enum SourceType { com, winrt, win32, unknown }
+
+/// An interface or class.
+///
+/// Interfaces may have a unique GUID. They may be materialized as a class. They
+/// have zero or more methods.
 class ClassProjection {
   String? className;
   String? clsid;
