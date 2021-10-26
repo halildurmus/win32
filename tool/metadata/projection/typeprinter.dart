@@ -367,9 +367,9 @@ void main() {
 
       // Some structs may be opaque types. For example, WS_ERROR.
       if (typedef.fields.isEmpty) {
-        buffer.writeln('class $structName extends Opaque {');
+        buffer.writeln('class ${safeName(structName)} extends Opaque {');
       } else {
-        buffer.writeln('class $structName extends Struct {');
+        buffer.writeln('class ${safeName(structName)} extends Struct {');
       }
 
       for (final field in typedef.fields) {

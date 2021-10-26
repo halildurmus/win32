@@ -192,3 +192,48 @@ class PROPVARIANT extends Struct {
   @IntPtr()
   external int val2;
 }
+
+// typedef struct _OVERLAPPED {
+//   ULONG_PTR Internal;
+//   ULONG_PTR InternalHigh;
+//   union {
+//     struct {
+//       DWORD Offset;
+//       DWORD OffsetHigh;
+//     } DUMMYSTRUCTNAME;
+//     PVOID Pointer;
+//   } DUMMYUNIONNAME;
+//   HANDLE    hEvent;
+// } OVERLAPPED, *LPOVERLAPPED;
+
+/// Contains information used in asynchronous (or overlapped) input and output
+/// (I/O).
+///
+/// {@category Struct}
+class OVERLAPPED extends Struct {
+  @IntPtr()
+  external int Internal;
+
+  @IntPtr()
+  external int InternalHigh;
+
+  external Pointer pointer;
+
+  // Workaround lack of anonymous unions in Dart
+  // (https://github.com/dart-lang/sdk/issues/46501)
+  int get Offset => pointer.address & 0xFFFFFFFF;
+  int get OffsetHigh => (pointer.address >> 32) & 0xFFFFFFFF;
+
+  set Offset(int newValue) {
+    pointer = Pointer.fromAddress(
+        (pointer.address & 0xFFFFFFFF00000000) + (newValue & 0xFFFFFFFF));
+  }
+
+  set OffsetHigh(int newValue) {
+    pointer = Pointer.fromAddress(
+        ((newValue & 0xFFFFFFFF) << 32) + (pointer.address & 0xFFFFFFFF));
+  }
+
+  @IntPtr()
+  external int hEvent;
+}

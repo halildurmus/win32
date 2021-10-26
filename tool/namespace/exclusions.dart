@@ -7,7 +7,8 @@ const excludedFunctions = <String>[
 
 const excludedStructs = <String>[
   'Windows.Win32.System.OleAutomation.VARIANT',
-  'Windows.Win32.Storage.StructuredStorage.PROPVARIANT'
+  'Windows.Win32.Storage.StructuredStorage.PROPVARIANT',
+  'Windows.Win32.System.SystemServices.OVERLAPPED',
 ];
 
 const excludedCallbacks = <String>[];
