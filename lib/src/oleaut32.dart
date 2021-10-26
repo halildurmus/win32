@@ -15,6 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
+import 'specialTypes.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 

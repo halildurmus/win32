@@ -12,6 +12,13 @@ const dartKeywords = <String>[
   'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
   'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
   'throw', 'true', 'try', 'var', 'void', 'while', 'with',
+
+  // FFI special words
+  'Int8', 'Int16', 'Int32', 'Int64',
+  'Uint8', 'Uint16', 'Uint32', 'Uint64',
+  'Double', 'Float', 'Array',
+  'Pointer', 'Union', 'Opaque', 'Struct',
+  'Unsized', 'Void', 'Packed', 'Handle',
 ];
 
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`

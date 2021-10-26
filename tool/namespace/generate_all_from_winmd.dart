@@ -225,7 +225,7 @@ void generateLibraryExport(List<String> namespaces) {
 
 void main() {
   for (final namespace in namespacesInScope(scope)) {
-    // if (namespace == 'Windows.Win32.AI.MachineLearning.WinML') {
+    // if (namespace == 'Windows.Win32.Data.Xml.XmlLite') {
     print('Generating $namespace...');
 
     createDirectory(namespace);

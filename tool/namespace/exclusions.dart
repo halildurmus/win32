@@ -6,24 +6,19 @@ const excludedFunctions = <String>[
 ];
 
 const excludedStructs = <String>[
-  // // ANSI
-  // 'Windows.Win32.Graphics.Gdi.EMRCREATECOLORSPACE',
   'Windows.Win32.System.OleAutomation.VARIANT',
   'Windows.Win32.Storage.StructuredStorage.PROPVARIANT'
 ];
 
-const excludedCallbacks = <String>[
-  'Windows.Win32.Graphics.Gdi.LPFNDEVCAPS',
-  'Windows.Win32.Graphics.Gdi.LPFNDEVMODE',
-  'Windows.Win32.UI.WindowsAndMessaging.MSGBOXCALLBACK', // ui.shell
-  'Windows.Win32.System.SystemServices.PEXCEPTION_FILTER', // diagnostics.debug
-];
+const excludedCallbacks = <String>[];
 
 const excludedImports = <String>[];
 
 const excludedComInterfaces = <String>[
   'Windows.Win32.System.Com.IUnknown', // generated manually w/ extra APIs
 ];
+
+const specialTypes = [...excludedStructs, ...excludedComInterfaces];
 
 // Working around https://github.com/dart-lang/sdk/issues/46644
 const ignorePackingDirectives = <String>[

@@ -48,6 +48,10 @@ import '${pathToLibSrc}utils.dart';
 }
 
 String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
+  if (specialTypes.contains(typeIdentifier.name)) {
+    return 'specialTypes.dart';
+  }
+
   if (typeIdentifier.name.startsWith('Windows.Win32')) {
     final paramType = typeIdentifier.type;
 

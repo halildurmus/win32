@@ -50,6 +50,7 @@ import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';
+import 'specialTypes.dart';
 import 'structs.dart';
 
 /// Defines an accelerator key used in an accelerator table.
