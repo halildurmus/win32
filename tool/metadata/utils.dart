@@ -129,3 +129,21 @@ String safeName(String name) {
   }
   return name;
 }
+
+/// Takes a type and makes sure it is accessible by stripping off any private
+/// modifiers.
+///
+/// For example, `Pointer<_alljoyn_abouticon_handle>` should become
+/// `Pointer<alljoyn_abouticon_handle>`.
+String safeTypename(String name) {
+  if (name.startsWith('Pointer<')) {
+    final wrappedType = name.substring(8, name.length - 1); // Pointer<X> => X
+    return 'Pointer<${safeTypename(wrappedType)}>';
+  }
+
+  if (name.startsWith('_')) {
+    return name.substring(1);
+  } else {
+    return name;
+  }
+}
