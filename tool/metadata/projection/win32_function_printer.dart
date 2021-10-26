@@ -7,10 +7,6 @@ class Win32FunctionPrinter {
   final Method _method;
   final String _lib;
 
-  // Sanitize any Dart keywords in parameter names.
-  // TODO: Duplicate of safename()
-  // String sanitize(String input) => input == 'in' ? 'in_' : input;
-
   String get nativePrototype =>
       '${safeTypename(TypeProjector(_method.returnType.typeIdentifier).nativeType)} Function($nativeParams)';
 

@@ -386,9 +386,9 @@ void main() {
           // Handle a non-string array
           else {
             buffer.writeln('  @Array($dimensions)');
-            buffer
-                .writeln('  external Array<${nameWithoutEncoding(nativeType)}> '
-                    '${safeName(field.name)};');
+            buffer.writeln(
+                '  external Array<${safeTypename(nameWithoutEncoding(nativeType))}> '
+                '${safeName(field.name)};');
           }
         }
         // Handle a non-array
@@ -400,7 +400,8 @@ void main() {
             buffer.writeln(
                 '  @$nativeType() external $dartType ${safeName(field.name)};');
           } else {
-            buffer.writeln('  external ${nameWithoutEncoding(dartType)} '
+            buffer.writeln(
+                '  external ${safeTypename(nameWithoutEncoding(dartType))} '
                 '${safeName(field.name)};');
           }
         }

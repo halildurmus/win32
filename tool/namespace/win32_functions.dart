@@ -57,21 +57,20 @@ List<String> importsForFunction(Method function) {
 
   // TODO: Clean this up -- there's a better example duplicated elsewhere.
   for (final param in function.parameters) {
-    if (specialTypes.contains(param.typeIdentifier.name)) {
-      importList.add('specialTypes.dart');
-    } else {
-      if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
-        importList.add(importForWin32Type(param.typeIdentifier));
-      }
+    if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
+      importList.add(importForWin32Type(param.typeIdentifier));
     }
 
     if (param.typeIdentifier.typeArg != null) {
       final paramTypeArg = param.typeIdentifier.typeArg!;
-      if (specialTypes.contains(paramTypeArg.name)) {
-        importList.add('specialTypes.dart');
-      } else {
-        if (paramTypeArg.name.startsWith('Windows.Win32')) {
-          importList.add(importForWin32Type(paramTypeArg));
+      if (paramTypeArg.name.startsWith('Windows.Win32')) {
+        importList.add(importForWin32Type(paramTypeArg));
+      }
+
+      if (param.typeIdentifier.typeArg!.typeArg != null) {
+        final ppTypeArg = param.typeIdentifier.typeArg!.typeArg!;
+        if (ppTypeArg.name.startsWith('Windows.Win32')) {
+          importList.add(importForWin32Type(ppTypeArg));
         }
       }
     }

@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../namespace/exclusions.dart';
+
 const dartKeywords = <String>[
   // Keywords from https://dart.dev/guides/language/language-tour#keywords.
   // Contextual keywords and built-in identifiers are not included here, since
@@ -92,6 +94,10 @@ String relativePathToSrcDirectory(File file) {
 }
 
 String importForWin32Type(TypeIdentifier identifier) {
+  if (specialTypes.contains(identifier.name)) {
+    return 'specialTypes.dart';
+  }
+
   if (identifier.type != null && identifier.type!.isDelegate) {
     return '${folderFromNamespace(identifier.name)}/callbacks.g.dart';
   } else if (identifier.type!.isInterface) {
