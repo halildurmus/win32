@@ -362,14 +362,14 @@ void main() {
       if (packingAlignment != null &&
           packingAlignment > 0 &&
           !ignorePackingDirectives.contains(typedef.name)) {
-        buffer.writeln('@Packed($packingAlignment)');
+        buffer.writeln('@ffi.Packed($packingAlignment)');
       }
 
       // Some structs may be opaque types. For example, WS_ERROR.
       if (typedef.fields.isEmpty) {
-        buffer.writeln('class $structName extends Opaque {');
+        buffer.writeln('class $structName extends ffi.Opaque {');
       } else {
-        buffer.writeln('class $structName extends Struct {');
+        buffer.writeln('class $structName extends ffi.Struct {');
       }
 
       for (final field in typedef.fields) {
@@ -385,7 +385,7 @@ void main() {
 
           // Handle a non-string array
           else {
-            buffer.writeln('  @Array($dimensions)');
+            buffer.writeln('  @ffi.Array($dimensions)');
             buffer
                 .writeln('  external Array<${nameWithoutEncoding(nativeType)}> '
                     '${safeName(field.name)};');
@@ -398,7 +398,7 @@ void main() {
 
           if (dartType == 'int' || dartType == 'double' || dartType == 'bool') {
             buffer.writeln(
-                '  @$nativeType() external $dartType ${safeName(field.name)};');
+                '  @ffi.$nativeType() external $dartType ${safeName(field.name)};');
           } else {
             buffer.writeln('  external ${nameWithoutEncoding(dartType)} '
                 '${safeName(field.name)};');
