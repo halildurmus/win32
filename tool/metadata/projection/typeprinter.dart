@@ -70,7 +70,7 @@ import '../winrt/winrt_constants.dart';
       // Native typedef
       buffer.writeln(
           'typedef _${method.name}_Native = ${method.returnTypeNative} Function(');
-      buffer.write('  Pointer obj');
+      buffer.write('  Pointer');
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
@@ -90,7 +90,7 @@ import '../winrt/winrt_constants.dart';
       // Dart typedef
       buffer.writeln(
           'typedef _${method.name}_Dart = ${method.returnTypeDart} Function(');
-      buffer.write('  Pointer obj');
+      buffer.write('  Pointer');
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
