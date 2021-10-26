@@ -118,7 +118,7 @@ void generateWin32Structs(String namespace) {
   // that are just GUID constants. We also ignore native values that are wrapped
   // for convenience (examples include HANDLE, BOOL and BSTR).
   final structs = scope.typeDefs
-      .where((typedef) => typedef.name.startsWith(namespace))
+      .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsStruct)
       .where(structIsNotWrapper)
       .where((typedef) => !typedefIsAnsi(typedef))
@@ -134,7 +134,7 @@ void generateWin32Structs(String namespace) {
 
 void generateWin32Enums(String namespace) {
   final enums = scope.enums
-      .where((typedef) => typedef.name.startsWith(namespace))
+      .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -166,7 +166,7 @@ void generateWin32Constants(String namespace) {
     generateConstantsFile(file, constants.first.fields);
 
     final guidConstants = scope.typeDefs
-        .where((typedef) => typedef.name.startsWith(namespace))
+        .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
         .where(typedefIsGuidConstant)
         .where((typedef) => !(constantIsClassClsid(typedef)))
         .toList();
@@ -176,8 +176,8 @@ void generateWin32Constants(String namespace) {
 
 void generateWin32Callbacks(String namespace) {
   final callbacks = scope.typeDefs
-      .where(
-          (typedef) => typedef.name.startsWith(namespace) && typedef.isDelegate)
+      .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
+      .where((typedef) => typedef.isDelegate)
       .where((typedef) => !typedef.name.endsWith('A'))
       .where((typedef) => !excludedCallbacks.contains(typedef.name))
       .toList()
