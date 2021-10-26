@@ -125,7 +125,6 @@ void generateWin32Structs(String namespace) {
       .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
-      .where((typedef) => typedef.fields.isNotEmpty)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 

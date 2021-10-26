@@ -364,7 +364,13 @@ void main() {
           !ignorePackingDirectives.contains(typedef.name)) {
         buffer.writeln('@Packed($packingAlignment)');
       }
-      buffer.writeln('class $structName extends Struct {');
+
+      // Some structs may be opaque types. For example, WS_ERROR.
+      if (typedef.fields.isEmpty) {
+        buffer.writeln('class $structName extends Opaque {');
+      } else {
+        buffer.writeln('class $structName extends Struct {');
+      }
 
       for (final field in typedef.fields) {
         if (field.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
