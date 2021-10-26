@@ -19,7 +19,7 @@ const structFileHeader = '''
 // ignore_for_file: directives_ordering, unnecessary_getters_setters
 // ignore_for_file: unused_field, unused_import
 
-import 'dart:ffi' as ffi;
+import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
