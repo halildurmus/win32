@@ -4,6 +4,7 @@
 
 import 'package:winmd/winmd.dart';
 
+import '../utils.dart';
 import 'win32_typemap.dart';
 
 const Map<String, String> specialTypes = {
@@ -95,7 +96,7 @@ class TypeProjector {
       final T = TypeProjector(typeArgs).nativeType;
       // If it's a Unicode Win32 type, strip off the ending 'W'.
       if (T.endsWith('W')) {
-        return 'Pointer<${T.substring(0, T.length - 1)}>';
+        return 'Pointer<${safeName(T.substring(0, T.length - 1))}>';
       } else {
         return 'Pointer<$T>';
       }
