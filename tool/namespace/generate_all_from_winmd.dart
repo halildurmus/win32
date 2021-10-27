@@ -225,7 +225,7 @@ void generateLibraryExport(List<String> namespaces) {
 
 void main() {
   for (final namespace in namespacesInScope(scope)) {
-    // if (namespace == 'Windows.Win32.Data.Xml.XmlLite') {
+    // if (namespace == 'Windows.Win32.System.Com') {
     print('Generating $namespace...');
 
     createDirectory(namespace);

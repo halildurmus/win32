@@ -84,8 +84,10 @@ void generateFfiFile(File file, TypeDef typedef) {
   // List of distinct modules in the namespace. There may be multiple, for
   // example Windows.Win32.Foundation.Apis contains functions from oleaut32.dll,
   // kernelbase.dll and kernel32.dll (amongst others).
-  final modules =
-      typedef.methods.map((method) => method.module.name).toSet().toList();
+  final modules = typedef.methods
+      .map((method) => method.module.name.toLowerCase())
+      .toSet()
+      .toList();
   final imports = <String>{};
 
   final writer = file.openSync(mode: FileMode.writeOnly);
