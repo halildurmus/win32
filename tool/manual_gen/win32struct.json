@@ -291,10 +291,6 @@
         "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
         "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
     },
-    "KEYBDINPUT": {
-        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.KEYBDINPUT",
-        "comment": "Contains information about a simulated keyboard event."
-    },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION",
         "comment": "Defines the specifics of a known folder."

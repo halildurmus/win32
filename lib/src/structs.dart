@@ -688,6 +688,23 @@ class _INPUT_Anonymous_0 extends Union {
   external HARDWAREINPUT hi;
 }
 
+/// Contains information about a simulated keyboard event.
+///
+/// {@category Struct}
+class KEYBDINPUT extends Struct {
+  // TODO: Fix type parser to detect this correctly
+  @Uint16()
+  external int wVk;
+  @Uint16()
+  external int wScan;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
+}
+
 /// Used by SendInput to store information for synthesizing input events such as
 /// keystrokes, mouse movement, and mouse clicks.
 ///

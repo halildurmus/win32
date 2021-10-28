@@ -1427,22 +1427,6 @@ class JOB_INFO_1 extends Struct {
   external SYSTEMTIME Submitted;
 }
 
-/// Contains information about a simulated keyboard event.
-///
-/// {@category Struct}
-class KEYBDINPUT extends Struct {
-  @Uint32()
-  external int wVk;
-  @Uint16()
-  external int wScan;
-  @Uint32()
-  external int dwFlags;
-  @Uint32()
-  external int time;
-  @IntPtr()
-  external int dwExtraInfo;
-}
-
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}

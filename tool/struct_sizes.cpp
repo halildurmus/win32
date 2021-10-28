@@ -136,7 +136,6 @@ void main()
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
-    printf("  'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("  'L2_NOTIFICATION_DATA': %zu,\n", sizeof(L2_NOTIFICATION_DATA));
     printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
