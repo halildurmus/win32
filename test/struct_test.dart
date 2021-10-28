@@ -113,6 +113,13 @@ void main() {
       expect(sizeOf<STARTUPINFOEX>(), equals(72));
     }
   });
+  test('Struct STRRET is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<STRRET>(), equals(272));
+    } else {
+      expect(sizeOf<STRRET>(), equals(264));
+    }
+  });
   test('Struct SYSTEM_INFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<SYSTEM_INFO>(), equals(48));
@@ -439,6 +446,9 @@ void main() {
       expect(sizeOf<GUITHREADINFO>(), equals(48));
     }
   });
+  test('Struct HARDWAREINPUT is the right size', () {
+    expect(sizeOf<HARDWAREINPUT>(), equals(8));
+  });
   test('Struct hostent is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<hostent>(), equals(32));
@@ -512,6 +522,19 @@ void main() {
   });
   test('Struct LUID is the right size', () {
     expect(sizeOf<LUID>(), equals(8));
+  });
+  test('Struct MAGCOLOREFFECT is the right size', () {
+    expect(sizeOf<MAGCOLOREFFECT>(), equals(100));
+  });
+  test('Struct MAGIMAGEHEADER is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MAGIMAGEHEADER>(), equals(40));
+    } else {
+      expect(sizeOf<MAGIMAGEHEADER>(), equals(36));
+    }
+  });
+  test('Struct MAGTRANSFORM is the right size', () {
+    expect(sizeOf<MAGTRANSFORM>(), equals(36));
   });
   test('Struct MARGINS is the right size', () {
     expect(sizeOf<MARGINS>(), equals(16));
@@ -614,6 +637,13 @@ void main() {
   });
   test('Struct MONITORINFO is the right size', () {
     expect(sizeOf<MONITORINFO>(), equals(40));
+  });
+  test('Struct MOUSEINPUT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MOUSEINPUT>(), equals(32));
+    } else {
+      expect(sizeOf<MOUSEINPUT>(), equals(24));
+    }
   });
   test('Struct MOUSEMOVEPOINT is the right size', () {
     if (is64bitOS) {
