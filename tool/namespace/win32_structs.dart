@@ -43,6 +43,13 @@ List<String> importsForStruct(TypeDef struct) {
       if (fieldTypeArg.name.startsWith('Windows.Win32')) {
         importList.add(importForWin32Type(fieldTypeArg));
       }
+
+      if (fieldTypeArg.typeArg != null) {
+        final ffTypeArg = fieldTypeArg.typeArg!;
+        if (ffTypeArg.name.startsWith('Windows.Win32')) {
+          importList.add(importForWin32Type(ffTypeArg));
+        }
+      }
     }
   }
   return importList;

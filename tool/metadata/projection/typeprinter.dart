@@ -161,6 +161,14 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
+  // TODO: Check whether there's a better way to detect how methods like
+  // put_AutoDemodulate are declared (should this be a property?)
+  // Detect whether it's a property masquerading as a method. The test should
+  // be the use of the get_ prefix, combined with the specialname modifier,
+  // but win32metadata incorrectly marks some methods with this combination
+  // (https://github.com/microsoft/win32metadata/issues/707). So instead, we
+  // also need to check the number of parameters.
+
   static String dartMethod(MethodProjection method, int? vtableIndex) {
     final buffer = StringBuffer();
     buffer.write('  ${method.returnTypeDart} ${method.name}(');
