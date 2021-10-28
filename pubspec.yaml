@@ -16,4 +16,4 @@ dev_dependencies:
   lints: ^1.0.1
   path: ^1.8.0
   test: ^1.18.2
-  winmd: 1.0.9 # Pinned deliberately
+  winmd: 1.0.10 # Pinned deliberately

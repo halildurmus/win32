@@ -22,8 +22,6 @@ void main() {
       'Windows.Win32.Networking.NetworkListManager.INetwork': 7,
       'Windows.Win32.Networking.NetworkListManager.INetworkConnection': 7,
       'Windows.Win32.Networking.NetworkListManager.INetworkListManager': 7,
-      'Windows.Win32.Storage.StructuredStorage.ISequentialStream': 3,
-      'Windows.Win32.Storage.StructuredStorage.IStream': 5,
       'Windows.Win32.System.Com.IBindCtx': 3,
       'Windows.Win32.System.Com.IClassFactory': 3,
       'Windows.Win32.System.Com.IEnumMoniker': 3,
@@ -31,12 +29,14 @@ void main() {
       'Windows.Win32.System.Com.IMoniker': 8,
       'Windows.Win32.System.Com.IPersist': 3,
       'Windows.Win32.System.Com.IPersistStream': 4,
-      'Windows.Win32.System.Com.IProvideClassInfo': 3,
       'Windows.Win32.System.Com.IRunningObjectTable': 3,
-      'Windows.Win32.System.OleAutomation.IDispatch': 3,
-      'Windows.Win32.System.OleAutomation.IEnumVARIANT': 3,
-      'Windows.Win32.System.OleAutomation.IErrorInfo': 3,
-      'Windows.Win32.System.OleAutomation.ISupportErrorInfo': 3,
+      'Windows.Win32.System.Com.ISequentialStream': 3,
+      'Windows.Win32.System.Com.IStream': 5,
+      'Windows.Win32.System.Ole.Automation.IDispatch': 3,
+      'Windows.Win32.System.Ole.Automation.IEnumVARIANT': 3,
+      'Windows.Win32.System.Ole.Automation.IErrorInfo': 3,
+      'Windows.Win32.System.Ole.Automation.ISupportErrorInfo': 3,
+      'Windows.Win32.System.Ole.IProvideClassInfo': 3,
       'Windows.Win32.System.WinRT.IInspectable': 3,
       'Windows.Win32.System.Wmi.IEnumWbemClassObject': 3,
       'Windows.Win32.System.Wmi.IWbemClassObject': 3,
@@ -65,12 +65,15 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     for (final type in testedTypes.keys) {
-      final typedef = scope.findTypeDef(type)!;
-      final projectedClass = ClassProjector(typedef);
-      final calculatedVTableStart = projectedClass.vtableStart;
+      final typeDef = scope.findTypeDef(type);
+      expect(typeDef, isNotNull, reason: type);
+      if (typeDef != null) {
+        final projectedClass = ClassProjector(typeDef);
+        final calculatedVTableStart = projectedClass.vtableStart;
 
-      expect(calculatedVTableStart, equals(testedTypes[type]),
-          reason: typedef.name);
+        expect(calculatedVTableStart, equals(testedTypes[type]),
+            reason: typeDef.name);
+      }
     }
   });
 
@@ -83,12 +86,15 @@ void main() {
 
     for (final type in testedTypes.keys) {
       final scope = MetadataStore.getScopeForType(type);
-      final typedef = scope.findTypeDef(type)!;
-      final projectedClass = ClassProjector(typedef);
-      final calculatedVTableStart = projectedClass.vtableStart;
+      final typeDef = scope.findTypeDef(type);
+      expect(typeDef, isNotNull);
+      if (typeDef != null) {
+        final projectedClass = ClassProjector(typeDef);
+        final calculatedVTableStart = projectedClass.vtableStart;
 
-      expect(calculatedVTableStart, equals(testedTypes[type]),
-          reason: typedef.name);
+        expect(calculatedVTableStart, equals(testedTypes[type]),
+            reason: typeDef.name);
+      }
     }
   });
 }

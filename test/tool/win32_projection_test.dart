@@ -27,7 +27,7 @@ void main() {
 
   test('ANSI string', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.KeyboardAndMouseInput.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
     final api = typedef.findMethod('GetKeyNameTextA')!;
     final type = api.parameters[1].typeIdentifier; // LPSTR
     final typeProjection = TypeProjector(type);
@@ -38,7 +38,7 @@ void main() {
 
   test('Handle', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.KeyboardAndMouseInput.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
     final api = typedef.findMethod('UnregisterHotKey')!;
     final type = api.parameters.first.typeIdentifier; // HWND
     final typeProjection = TypeProjector(type);
@@ -49,7 +49,7 @@ void main() {
 
   test('Pointer<T>', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.KeyboardAndMouseInput.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
     final api = typedef.findMethod('GetKeyboardState')!;
     final type = api.parameters.first.typeIdentifier; // PBYTE
     final typeProjection = TypeProjector(type);
@@ -101,7 +101,7 @@ void main() {
 
   test('Pass double pointers to COM interfaces', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.System.OleAutomation.Apis')!;
+        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis')!;
     final api = typedef.findMethod('GetActiveObject')!;
     final type = api.parameters.last.typeIdentifier; // IUnknown **
     final typeProjection = TypeProjector(type);
@@ -159,7 +159,7 @@ void main() {
 
   test('Pointers to structs are represented correctly', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Controls.Dialogs.Apis')!;
     final api = typedef.findMethod('ChooseFontW')!;
     final type = api.parameters.first.typeIdentifier; // CHOOSEFONTW
     final typeProjection = TypeProjector(type);
@@ -254,8 +254,7 @@ void main() {
   });
 
   test('Struct STATSTG projects correctly', () {
-    final procInfo =
-        scope.findTypeDef('Windows.Win32.Storage.StructuredStorage.STATSTG')!;
+    final procInfo = scope.findTypeDef('Windows.Win32.System.Com.STATSTG')!;
     final cbSize = procInfo.fields[2].typeIdentifier; // cbSize
 
     final nativeType = TypeProjector(cbSize).nativeType;
@@ -266,7 +265,7 @@ void main() {
 
   test('HANDLE-style parameters have the correct projection', () {
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.KeyboardAndMouseInput.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
     final api = typedef.findMethod('UnregisterHotKey')!;
     final param = api.parameters.first;
     expect(TypeProjector(param.typeIdentifier).nativeType, equals('IntPtr'));
