@@ -37,6 +37,7 @@ String nameWithoutEncoding(String typeName) {
 
 bool typePretendsToBeAnsi(String typeName) =>
     typeName.endsWith('DATA') ||
+    typeName.endsWith('SCHEMA') ||
     ['M128A', 'CIECHROMA'].contains(typeName.split('.').last);
 
 bool typedefIsAnsi(TypeDef typedef) =>
