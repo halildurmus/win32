@@ -443,6 +443,18 @@ class VARIANT extends Struct {
   int get vt => __VARIANT_NAME_1.__VARIANT_NAME_2.vt;
   set vt(int value) => __VARIANT_NAME_1.__VARIANT_NAME_2.vt = value;
 
+  int get wReserved1 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved1;
+  set wReserved1(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved1 = value;
+
+  int get wReserved2 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved2;
+  set wReserved2(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved2 = value;
+
+  int get wReserved3 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved3;
+  set wReserved3(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved3 = value;
+
   // LONGLONG -> __int64 -> Int64
   int get llVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.llVal;
   set llVal(int value) =>
@@ -570,6 +582,16 @@ class VARIANT extends Struct {
   int get uintVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal;
   set uintVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal = value;
+
+  Pointer get pvRecord => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord;
+  set pvRecord(Pointer value) => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord = value;
+
+  Pointer<COMObject> get pRecInfo => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo;
+  set pRecInfo(Pointer<COMObject> value) => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
 }
 
 // typedef struct tagTYPEDESC {
