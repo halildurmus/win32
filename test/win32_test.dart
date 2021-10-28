@@ -225,7 +225,7 @@ void main() {
   test('HANDLE-style parameters have the correct type', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.KeyboardAndMouseInput.Apis')!;
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
     final api = typedef.findMethod('UnregisterHotKey')!;
     final param = api.parameters.first;
 
@@ -276,7 +276,7 @@ void main() {
   test('GetActiveObject REFCLSID has the correct parameter type', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef =
-        scope.findTypeDef('Windows.Win32.System.OleAutomation.Apis')!;
+        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis')!;
     final api = typedef.findMethod('GetActiveObject')!;
     final param = api.parameters.first;
 

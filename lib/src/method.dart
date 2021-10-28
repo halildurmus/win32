@@ -64,8 +64,7 @@ enum VtableLayout {
 class Method extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
   int implFlags;
-  bool isGetProperty = false;
-  bool isSetProperty = false;
+
   String name;
   List<Parameter> parameters = <Parameter>[];
   int relativeVirtualAddress;
@@ -78,7 +77,6 @@ class Method extends TokenObject
   Method(Scope scope, int token, this._parentToken, this.name, this._attributes,
       this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(scope, token) {
-    _parseMethodType();
     _parseParameterNames();
     _parseSignatureBlob();
   }
@@ -207,6 +205,12 @@ class Method extends TokenObject
   MethodImplementationFeatures get implFeatures =>
       MethodImplementationFeatures(implFlags);
 
+  /// Returns true if the method is a property getter
+  bool get isGetProperty => isSpecialName && name.startsWith('get_');
+
+  /// Returns true if the method is a property setter
+  bool get isSetProperty => isSpecialName && name.startsWith('put_');
+
   /// Returns true if the method is a property getter or setter.
   bool get isProperty => isGetProperty | isSetProperty;
 
@@ -234,23 +238,6 @@ class Method extends TokenObject
 
   /// Returns true if the method contains generic parameters.
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
-
-  // TODO: Check whether there's a better way to detect how methods like
-  // put_AutoDemodulate are declared (should this be a property?)
-  void _parseMethodType() {
-    // Detect whether it's a property masquerading as a method. The test should
-    // be the use of the get_ prefix, combined with the specialname modifier,
-    // but win32metadata incorrectly marks some methods with this combination
-    // (https://github.com/microsoft/win32metadata/issues/707). So instead, we
-    // also need to check the number of parameters.
-    if (isSpecialName && name.startsWith('get_') && parameters.length == 1) {
-      isGetProperty = true;
-    } else if (isSpecialName &&
-        name.startsWith('put_') &&
-        parameters.isNotEmpty) {
-      isSetProperty = true;
-    }
-  }
 
   /// Returns flags relating to the method calling convention.
   String get callingConvention {
