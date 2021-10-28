@@ -569,9 +569,20 @@ class VARIANT extends Struct {
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ulVal = value;
 
   // // ULONGLONG -> unsigned long long -> Uint64
-  int get ullVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal;
-  set ullVal(int value) =>
-      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal = value;
+  BigInt get ullVal {
+    final src = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal;
+    final hi = (((src & 0xFFFFFFFF00000000) >> 32).toUnsigned(32))
+        .toRadixString(16)
+        .padLeft(8, '0');
+    final lo = ((src & 0x00000000FFFFFFFF).toRadixString(16).padLeft(8, '0'));
+    return BigInt.parse('$hi$lo', radix: 16);
+  }
+
+  set ullVal(BigInt value) {
+    final hi = ((value & BigInt.from(0xFFFFFFFF00000000)) >> 32).toInt();
+    final lo = (value & BigInt.from(0x00000000FFFFFFFF)).toInt();
+    __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal = (hi << 32) + lo;
+  }
 
   // // INT -> int -> Int32
   int get intVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.intVal;

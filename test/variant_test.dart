@@ -70,6 +70,24 @@ void main() {
     free(intVar);
   });
 
+  test('ULONGLONG Variant', () {
+    final bigint = calloc<VARIANT>();
+    VariantInit(bigint);
+    bigint.ref.vt = VARENUM.VT_UI8;
+    bigint.ref.ullVal = BigInt.zero;
+    expect(bigint.ref.ullVal, equals(BigInt.from(0)));
+
+    bigint.ref.ullVal = BigInt.parse('18446744073709551615');
+    final uint64Max = BigInt.parse('FFFFFFFFFFFFFFFF', radix: 16);
+    expect(bigint.ref.ullVal, equals(uint64Max));
+
+    bigint.ref.ullVal = BigInt.parse('8000000000000000', radix: 16);
+    final testValue2 = BigInt.parse('9223372036854775808');
+    expect(bigint.ref.ullVal, equals(testValue2));
+
+    free(bigint);
+  });
+
   test('ULONG Variant', () {
     final intVar = calloc<VARIANT>();
     VariantInit(intVar);
