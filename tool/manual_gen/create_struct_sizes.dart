@@ -35,6 +35,7 @@ const header = '''
 #include <dwmapi.h>
 #include <wlanapi.h>
 #include <SetupAPI.h>
+#include <magnification.h>
 
 void main()
 {
@@ -48,6 +49,7 @@ void main()
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
     printf("  'COMMPROP': %zu,\\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
+    printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\\n", sizeof(GUID));
     printf("  'INPUT': %zu,\\n", sizeof(INPUT));
@@ -60,6 +62,7 @@ void main()
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));
+    printf("  'STRRET': %zu,\\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
     printf("  'TASKDIALOGCONFIG': %zu,\\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\\n", sizeof(TYPEDESC));

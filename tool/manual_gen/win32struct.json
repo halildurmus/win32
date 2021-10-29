@@ -64,7 +64,7 @@
         "comment": "The BLUETOOTH_RADIO_INFO structure provides information about a Bluetooth radio."
     },
     "BSMINFO": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.BSMINFO",
+        "namespace": "Windows.Win32.System.StationsAndDesktops.BSMINFO",
         "comment": "Contains information about a window that denied a request from BroadcastSystemMessageEx."
     },
     "BY_HANDLE_FILE_INFORMATION": {
@@ -76,11 +76,11 @@
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
     },
     "CHOOSECOLOR": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHOOSECOLORW",
+        "namespace": "Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "CHOOSEFONT": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHOOSEFONTW",
+        "namespace": "Windows.Win32.UI.Controls.Dialogs.CHOOSEFONTW",
         "comment": "Contains information that the ChooseFont function uses to initialize the Font dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "COLORADJUSTMENT": {
@@ -148,15 +148,15 @@
         "comment": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function."
     },
     "DISK_GEOMETRY": {
-        "namespace": "Windows.Win32.Storage.FileSystem.DISK_GEOMETRY",
+        "namespace": "Windows.Win32.System.Ioctl.DISK_GEOMETRY",
         "comment": "Describes the geometry of disk devices and media."
     },
     "DISK_GEOMETRY_EX": {
-        "namespace": "Windows.Win32.Storage.FileSystem.DISK_GEOMETRY_EX",
+        "namespace": "Windows.Win32.System.Ioctl.DISK_GEOMETRY_EX",
         "comment": "Describes the extended geometry of disk devices and media."
     },
     "DISPPARAMS": {
-        "namespace": "Windows.Win32.System.OleAutomation.DISPPARAMS",
+        "namespace": "Windows.Win32.System.Ole.Automation.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
     },
     "DLGITEMTEMPLATE": {
@@ -224,7 +224,7 @@
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
     },
     "EXCEPINFO": {
-        "namespace": "Windows.Win32.System.OleAutomation.EXCEPINFO",
+        "namespace": "Windows.Win32.System.Ole.Automation.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
     },
     "fd_set": {
@@ -236,28 +236,32 @@
         "comment": "Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
     },
     "FINDREPLACE": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.FINDREPLACEW",
+        "namespace": "Windows.Win32.UI.Controls.Dialogs.FINDREPLACEW",
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
     "FUNCDESC": {
-        "namespace": "Windows.Win32.System.OleAutomation.FUNCDESC",
+        "namespace": "Windows.Win32.System.Ole.Automation.FUNCDESC",
         "comment": "Describes a function."
     },
     "GESTURECONFIG": {
-        "namespace": "Windows.Win32.UI.TouchInput.GESTURECONFIG",
+        "namespace": "Windows.Win32.UI.Input.Touch.GESTURECONFIG",
         "comment": "Gets and sets the configuration for enabling gesture messages and the type of this configuration."
     },
     "GESTUREINFO": {
-        "namespace": "Windows.Win32.UI.TouchInput.GESTUREINFO",
+        "namespace": "Windows.Win32.UI.Input.Touch.GESTUREINFO",
         "comment": "Stores information about a gesture."
     },
     "GESTURENOTIFYSTRUCT": {
-        "namespace": "Windows.Win32.UI.TouchInput.GESTURENOTIFYSTRUCT",
+        "namespace": "Windows.Win32.UI.Input.Touch.GESTURENOTIFYSTRUCT",
         "comment": "When transmitted with WM_GESTURENOTIFY messages, passes information about a gesture."
     },
     "GUITHREADINFO": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.GUITHREADINFO",
         "comment": "Contains information about a GUI thread."
+    },
+    "HARDWAREINPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.HARDWAREINPUT",
+        "comment": "Contains information about a simulated message generated by an input device other than a keyboard or mouse."
     },
     "hostent": {
         "namespace": "Windows.Win32.Networking.WinSock.hostent",
@@ -272,7 +276,7 @@
         "comment": "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx."
     },
     "IDLDESC": {
-        "namespace": "Windows.Win32.System.OleAutomation.IDLDESC",
+        "namespace": "Windows.Win32.System.Ole.Automation.IDLDESC",
         "comment": "Contains the IDL attributes of a type."
     },
     "INITCOMMONCONTROLSEX": {
@@ -296,7 +300,7 @@
         "comment": "The L2_NOTIFICATION_DATA structure is used by the IHV Extensions DLL to send notifications to any service or applications that has registered for the notification."
     },
     "LASTINPUTINFO": {
-        "namespace": "Windows.Win32.UI.KeyboardAndMouseInput.LASTINPUTINFO",
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.LASTINPUTINFO",
         "comment": "Contains the time of the last input."
     },
     "LOGBRUSH": {
@@ -312,7 +316,7 @@
         "comment": "The LOGPALETTE structure defines a logical palette."
     },
     "LUID": {
-        "namespace": "Windows.Win32.System.SystemServices.LUID",
+        "namespace": "Windows.Win32.Foundation.LUID",
         "comment": "A Locally Unique Identifier (LUID). This is a value guaranteed to be unique only on the system on which it was generated. The uniqueness of a locally unique identifier is guaranteed only until the system is restarted."
     },
     "MAGCOLOREFFECT": {
@@ -415,8 +419,12 @@
         "namespace": "Windows.Win32.Graphics.Gdi.MONITORINFO",
         "comment": "The MONITORINFO structure contains information about a display monitor."
     },
+    "MOUSEINPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEINPUT",
+        "comment": "Contains information about a simulated mouse event."
+    },
     "MOUSEMOVEPOINT": {
-        "namespace": "Windows.Win32.UI.KeyboardAndMouseInput.MOUSEMOVEPOINT",
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEMOVEPOINT",
         "comment": "Contains information about the mouse's location in screen coordinates."
     },
     "MSG": {
@@ -452,7 +460,7 @@
         "comment": "The OPENCARDNAME_EX structure contains the information that the SCardUIDlgSelectCard function uses to initialize a smart card Select Card dialog box."
     },
     "OPENFILENAME": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.OPENFILENAMEW",
+        "namespace": "Windows.Win32.UI.Controls.Dialogs.OPENFILENAMEW",
         "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "OSVERSIONINFO": {
@@ -464,7 +472,7 @@
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions."
     },
     "OVERLAPPED_ENTRY": {
-        "namespace": "Windows.Win32.Storage.FileSystem.OVERLAPPED_ENTRY",
+        "namespace": "Windows.Win32.System.IO.OVERLAPPED_ENTRY",
         "comment": "Contains the information returned by a call to the GetQueuedCompletionStatusEx function."
     },
     "PAINTSTRUCT": {
@@ -476,11 +484,11 @@
         "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
     },
     "PARAMDESC": {
-        "namespace": "Windows.Win32.System.OleAutomation.PARAMDESC",
+        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESC",
         "comment": "Contains information needed for transferring a structure element, parameter, or function return value between processes."
     },
     "PARAMDESCEX": {
-        "namespace": "Windows.Win32.System.OleAutomation.PARAMDESCEX",
+        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESCEX",
         "comment": "Contains information about the default value of a parameter."
     },
     "PHYSICAL_MONITOR": {
@@ -572,11 +580,11 @@
         "comment": "The RGBQUAD structure describes a color consisting of relative intensities of red, green, and blue."
     },
     "SAFEARRAY": {
-        "namespace": "Windows.Win32.System.OleAutomation.SAFEARRAY",
+        "namespace": "Windows.Win32.System.Com.SAFEARRAY",
         "comment": "Represents a safe array."
     },
     "SAFEARRAYBOUND": {
-        "namespace": "Windows.Win32.System.OleAutomation.SAFEARRAYBOUND",
+        "namespace": "Windows.Win32.System.Com.SAFEARRAYBOUND",
         "comment": "Represents the bounds of one dimension of the array."
     },
     "SCARD_ATRMASK": {
@@ -592,11 +600,11 @@
         "comment": "The SCARD_READERSTATE structure is used by functions for tracking smart cards within readers."
     },
     "SCROLLBARINFO": {
-        "namespace": "Windows.Win32.UI.Controls.SCROLLBARINFO",
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.SCROLLBARINFO",
         "comment": "The SCROLLBARINFO structure contains scroll bar information."
     },
     "SCROLLINFO": {
-        "namespace": "Windows.Win32.UI.Controls.SCROLLINFO",
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.SCROLLINFO",
         "comment": "The SCROLLINFO structure contains scroll bar parameters to be set by the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the GetScrollInfo function (or SBM_GETSCROLLINFO message)"
     },
     "SECURITY_ATTRIBUTES": {
@@ -648,15 +656,15 @@
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."
     },
     "STATPROPSETSTG": {
-        "namespace": "Windows.Win32.Storage.StructuredStorage.STATPROPSETSTG",
+        "namespace": "Windows.Win32.System.Com.StructuredStorage.STATPROPSETSTG",
         "comment": "The STATPROPSETSTG structure contains information about a property set."
     },
     "STATPROPSTG": {
-        "namespace": "Windows.Win32.Storage.StructuredStorage.STATPROPSTG",
+        "namespace": "Windows.Win32.System.Com.StructuredStorage.STATPROPSTG",
         "comment": "The STATPROPSTG structure contains data about a single property in a property set. This data is the property ID and type tag, and the optional string name that may be associated with the property."
     },
     "STATSTG": {
-        "namespace": "Windows.Win32.Storage.StructuredStorage.STATSTG",
+        "namespace": "Windows.Win32.System.Com.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
     },
     "STYLESTRUCT": {
@@ -704,7 +712,7 @@
         "comment": "The TOKEN_APPCONTAINER_INFORMATION structure specifies all the information in a token that is necessary for an app container."
     },
     "TOUCHINPUT": {
-        "namespace": "Windows.Win32.UI.TouchInput.TOUCHINPUT",
+        "namespace": "Windows.Win32.UI.Input.Touch.TOUCHINPUT",
         "comment": "Encapsulates data for touch input."
     },
     "TPMPARAMS": {
@@ -712,7 +720,7 @@
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
     },
     "TYPEATTR": {
-        "namespace": "Windows.Win32.System.OleAutomation.TYPEATTR",
+        "namespace": "Windows.Win32.System.Ole.Automation.TYPEATTR",
         "comment": "Contains attributes of a type."
     },
     "UNSIGNED_RATIO": {

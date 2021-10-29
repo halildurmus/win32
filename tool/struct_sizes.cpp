@@ -31,6 +31,7 @@
 #include <dwmapi.h>
 #include <wlanapi.h>
 #include <SetupAPI.h>
+#include <magnification.h>
 
 void main()
 {
@@ -56,6 +57,7 @@ void main()
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
+    printf("  'STRRET': %zu,\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
@@ -128,6 +130,7 @@ void main()
     printf("  'GESTUREINFO': %zu,\n", sizeof(GESTUREINFO));
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
+    printf("  'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
     printf("  'hostent': %zu,\n", sizeof(hostent));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
@@ -167,6 +170,7 @@ void main()
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("  'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MSG': %zu,\n", sizeof(MSG));
     printf("  'NDIS_OBJECT_HEADER': %zu,\n", sizeof(NDIS_OBJECT_HEADER));
