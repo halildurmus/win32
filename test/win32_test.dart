@@ -512,4 +512,14 @@ void main() {
     expect(interface.customAttributes.first.name,
         endsWith('SupportedOSPlatformAttribute'));
   });
+
+  // test('Can identify platform architecture', () {
+  //   final scope = MetadataStore.getWin32Scope();
+  //   final typedef =
+  //       scope.findTypeDef('Windows.Win32.System.Diagnostics.Debug.Apis');
+  //   final api = typedef?.findMethod('SymSetHomeDirectory');
+
+  //   expect(api?.customAttributes.length, equals(2));
+  //   // TODO: Test for platform architecture specifically
+  // });
 }
