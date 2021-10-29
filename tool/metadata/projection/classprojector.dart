@@ -38,6 +38,31 @@ class ClassProjector {
 
   const ClassProjector(this.typeDef);
 
+  /// Uniquely name the method.
+  ///
+  /// Dart doesn't allow overloaded methods, so we have to rename methods that
+  /// are duplicated.
+  String uniquelyNameMethod(Method method) {
+    // Is it an overload with a name provided by the metadata?
+    final overloadName = method
+        .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
+    if (overloadName.isNotEmpty) return overloadName;
+
+    // If not, we check whether multiple methods exist with the same name.
+    final overloads = typeDef.methods.where((m) => m.name == method.name);
+
+    // If so, and there is more than one entry with the same name, add a suffix to all but the first.
+    if (overloads.length > 1) {
+      final overloadIndex = overloads.toList().indexOf(method);
+      if (overloadIndex > 0) {
+        return '${method.name}_$overloadIndex';
+      }
+    }
+
+    // Otherwise the original name is fine.
+    return method.name;
+  }
+
   /// Take a TypeDef and create a Dart projection of it.
   ClassProjection get projection {
     // TODO: Refactor this into smaller pieces
@@ -77,31 +102,9 @@ class ClassProjector {
     for (final method in typeDef.methods) {
       final methodProjection = MethodProjection();
 
-      // Name the method.
+      // Generate a Dart-compatible name
+      methodProjection.name = uniquelyNameMethod(method);
 
-      // Dart doesn't allow overloaded methods, so we have to rename methods
-      // that are duplicated.
-      final overload = method
-          .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
-      if (overload.isNotEmpty) {
-        methodProjection.name = overload;
-      } else {
-        // Win32 COM interfaces just overload without providing a secondary
-        // name. So we have to generate one.
-        final overloads = typeDef.methods.where((m) => m.name == method.name);
-
-        // If there is more than one entry with the same name, add a suffix to all but the first.
-        if (overloads.length > 1) {
-          final overloadIndex = overloads.toList().indexOf(method);
-          if (overloadIndex == 0) {
-            methodProjection.name = method.name;
-          } else {
-            methodProjection.name = '${method.name}_$overloadIndex';
-          }
-        } else {
-          methodProjection.name = method.name;
-        }
-      }
       methodProjection.isGetProperty = method.isGetProperty;
       methodProjection.isSetProperty = method.isSetProperty;
 
@@ -117,14 +120,12 @@ class ClassProjector {
       // TODO: Rationalize these. We shouldn't have to hardcode for the
       // difference between Win32 and WinRT metadata...
       if (interface.name.startsWith('Windows.Win32')) {
-        // return type is almost certainly an HRESULT, but we'll use the return
-        // type just to be sure.
         final typeBuilder = TypeProjector(method.returnType.typeIdentifier);
 
         methodProjection.returnTypeNative = typeBuilder.nativeType;
         methodProjection.returnTypeDart = typeBuilder.dartType;
 
-        if (method.isGetProperty) {
+        if (method.isGetProperty && method.parameters.isNotEmpty) {
           methodProjection.isGetProperty = true;
 
           // TODO: Deal with methods like IUPnPServices.get_Item([In], [Out]).
@@ -136,21 +137,23 @@ class ClassProjector {
 
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
-          final outParam = method.parameters
-              .lastWhere((param) => param.isOutParam)
-              .typeIdentifier;
-          final arg = outParam.typeArg;
-          if (arg == null) {
-            throw Exception(
-                '$method (${method.token.toRadixString(16)}) missing '
-                'typearg for $outParam in ${method.parent}');
-          } else {
+          try {
+            final outParam = method.parameters
+                .lastWhere((param) => param.isOutParam)
+                .typeIdentifier;
+
+            final arg = outParam.typeArg ?? outParam;
+
             final outParamType = TypeProjector(arg);
             methodProjection.parameters = [
               ParameterProjection(outParam.name,
                   nativeType: outParamType.nativeType,
                   dartType: outParamType.dartType)
             ];
+          } catch (identifier) {
+            print(method.parameters.length);
+            throw Exception(
+                'Get property $method in ${method.parent} has no out param');
           }
         }
       } else {

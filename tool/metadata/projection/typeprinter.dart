@@ -74,7 +74,8 @@ import '../winrt/winrt_constants.dart';
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
-      if (method.isGetProperty) {
+      // TODO: Remove params check when https://github.com/microsoft/win32metadata/issues/707 is fixed
+      if (method.isGetProperty && method.parameters.isNotEmpty) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -94,7 +95,8 @@ import '../winrt/winrt_constants.dart';
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
-      if (method.isGetProperty) {
+      // TODO: Remove params check when https://github.com/microsoft/win32metadata/issues/707 is fixed
+      if (method.isGetProperty && method.parameters.isNotEmpty) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -145,9 +147,9 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (final method in type.methods) {
-      if (method.isGetProperty) {
+      if (method.isGetProperty && method.parameters.isNotEmpty) {
         buffer.write(dartGetProperty(method, vtableIndex));
-      } else if (method.isSetProperty) {
+      } else if (method.isSetProperty && method.parameters.isNotEmpty) {
         buffer.write(dartSetProperty(method, vtableIndex));
       } else {
         buffer.write(dartMethod(method, vtableIndex));
