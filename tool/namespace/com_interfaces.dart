@@ -63,8 +63,8 @@ String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
   }
 }
 
-List<String> importsForClass(TypeDef typedef) {
-  final importList = <String>[];
+Set<String> importsForClass(TypeDef typedef) {
+  final importList = <String>{};
 
   for (final method in typedef.methods) {
     final paramsAndReturnType = [...method.parameters, method.returnType];

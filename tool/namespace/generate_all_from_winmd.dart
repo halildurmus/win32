@@ -14,36 +14,6 @@ import 'win32_structs.dart';
 // The Win32 metadata
 final scope = MetadataStore.getWin32Scope();
 
-/// The metadata namespaces we're generating
-const namespaces = <String>[
-  // Working on:
-  'Windows.Win32.System.SystemServices',
-  'Windows.Win32.Graphics.DirectDraw',
-  'Windows.Win32.System.Diagnostics.Debug',
-
-  // Already working:
-  'Windows.Win32.Devices.Display',
-  'Windows.Win32.Foundation',
-  'Windows.Win32.Graphics.Direct3D9',
-  'Windows.Win32.Graphics.Gdi',
-  'Windows.Win32.Media.Multimedia',
-  'Windows.Win32.Storage.FileSystem',
-  'Windows.Win32.System.Console',
-  'Windows.Win32.System.SystemInformation',
-  'Windows.Win32.System.Time',
-  'Windows.Win32.UI.Controls',
-  'Windows.Win32.UI.DisplayDevices',
-  'Windows.Win32.UI.KeyboardAndMouseInput',
-  'Windows.Win32.UI.PointerInput',
-  'Windows.Win32.UI.TextServices',
-  'Windows.Win32.UI.TouchInput',
-  'Windows.Win32.UI.WindowsAndMessaging',
-
-  // Consider next:
-  // 'Windows.Win32.System.Com',
-  // 'Windows.Win32.System.OleAutomation',
-];
-
 const win32FileHeader = '''
 library new_win32;
 
@@ -223,9 +193,12 @@ void generateLibraryExport(List<String> namespaces) {
   writer.closeSync();
 }
 
-void main() {
-  for (final namespace in namespacesInScope(scope)) {
-    // if (namespace == 'Windows.Win32.System.Com') {
+// Example:
+//   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
+void main(List<String> args) {
+  final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
+
+  for (final namespace in namespaces) {
     print('Generating $namespace...');
 
     createDirectory(namespace);
@@ -235,7 +208,6 @@ void main() {
     generateWin32Constants(namespace);
     generateWin32Callbacks(namespace);
     generateComInterfaces(namespace);
-    // }
   }
   generateLibraryExport(namespaces);
 }
