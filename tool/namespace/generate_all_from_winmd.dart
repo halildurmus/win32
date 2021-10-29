@@ -209,5 +209,5 @@ void main(List<String> args) {
     generateWin32Callbacks(namespace);
     generateComInterfaces(namespace);
   }
-  generateLibraryExport(namespaces);
+  // generateLibraryExport(namespaces);
 }

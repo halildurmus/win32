@@ -16,6 +16,16 @@ import 'typeprojector.dart';
 import 'win32_function_printer.dart';
 
 class TypePrinter {
+  // TODO: Remove params check when
+  // https://github.com/microsoft/win32metadata/issues/707 is fixed
+  static bool treatAsGetProperty(
+          MethodProjection method, String parentClassName) =>
+      method.isGetProperty && method.parameters.isNotEmpty;
+
+  static bool treatAsSetProperty(
+          MethodProjection method, String parentClassName) =>
+      method.isGetProperty && method.parameters.isNotEmpty;
+
   static String headerAsString(ClassProjection type) {
     final buffer = StringBuffer();
     buffer.writeln('''
@@ -75,7 +85,7 @@ import '../winrt/winrt_constants.dart';
         buffer.writeln(',');
       }
       // TODO: Remove params check when https://github.com/microsoft/win32metadata/issues/707 is fixed
-      if (method.isGetProperty && method.parameters.isNotEmpty) {
+      if (treatAsGetProperty(method, type.name)) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -95,8 +105,7 @@ import '../winrt/winrt_constants.dart';
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
-      // TODO: Remove params check when https://github.com/microsoft/win32metadata/issues/707 is fixed
-      if (method.isGetProperty && method.parameters.isNotEmpty) {
+      if (treatAsGetProperty(method, type.name)) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -147,9 +156,9 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (final method in type.methods) {
-      if (method.isGetProperty && method.parameters.isNotEmpty) {
+      if (treatAsGetProperty(method, type.name)) {
         buffer.write(dartGetProperty(method, vtableIndex));
-      } else if (method.isSetProperty && method.parameters.isNotEmpty) {
+      } else if (treatAsSetProperty(method, type.name)) {
         buffer.write(dartSetProperty(method, vtableIndex));
       } else {
         buffer.write(dartMethod(method, vtableIndex));
