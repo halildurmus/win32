@@ -324,6 +324,89 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 }
 
+// typedef struct tagDEC {
+//   USHORT wReserved;
+//   union {
+//     struct {
+//       BYTE scale;
+//       BYTE sign;
+//     } DUMMYSTRUCTNAME;
+//     USHORT signscale;
+//   } DUMMYUNIONNAME;
+//   ULONG  Hi32;
+//   union {
+//     struct {
+//       ULONG Lo32;
+//       ULONG Mid32;
+//     } DUMMYSTRUCTNAME2;
+//     ULONGLONG Lo64;
+//   } DUMMYUNIONNAME2;
+// } DECIMAL;
+
+/// Represents a decimal data type that provides a sign and scale for a number
+/// (as in coordinates.)
+///
+/// Decimal variables are stored as 96-bit (12-byte) unsigned integers scaled by
+/// a variable power of 10. The power of 10 scaling factor specifies the number
+/// of digits to the right of the decimal point, and ranges from 0 to 28.
+///
+/// {@category Struct}
+class _DECIMAL_Anonymous_0 extends Union {
+  external _DECIMAL_Anonymous_2 _DUMMYSTRUCTNAME;
+  @Uint16()
+  external int signscale;
+}
+
+class _DECIMAL_Anonymous_1 extends Union {
+  external _DECIMAL_Anonymous_3 _DUMMYSTRUCTNAME2;
+  @Uint64()
+  external int Lo64;
+}
+
+class _DECIMAL_Anonymous_2 extends Struct {
+  @Uint8()
+  external int scale;
+  @Uint8()
+  external int sign;
+}
+
+class _DECIMAL_Anonymous_3 extends Struct {
+  @Uint32()
+  external int Lo32;
+  @Uint32()
+  external int Mid32;
+}
+
+class DECIMAL extends Struct {
+  @Uint16()
+  external int wReserved;
+
+  external _DECIMAL_Anonymous_0 _DUMMYUNIONNAME;
+
+  @Uint32()
+  external int Hi32;
+
+  external _DECIMAL_Anonymous_1 _DUMMYUNIONNAME2;
+
+  int get scale => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale;
+  set scale(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale = value;
+
+  int get sign => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign;
+  set sign(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign = value;
+
+  int get signscale => _DUMMYUNIONNAME.signscale;
+  set signscale(int value) => _DUMMYUNIONNAME.signscale = value;
+
+  int get Lo32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32;
+  set Lo32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32 = value;
+
+  int get Mid32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32;
+  set Mid32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32 = value;
+
+  int get Lo64 => _DUMMYUNIONNAME2.Lo64;
+  set Lo64(int value) => _DUMMYUNIONNAME2.Lo64 = value;
+}
+
 // struct tagVARIANT
 //    {
 //        VARTYPE vt;
@@ -338,12 +421,6 @@ class STARTUPINFOEX extends Struct {
 //            SHORT iVal;
 //            ...
 //    } ;
-
-/// The VARIANT type is used in Win32 to represent a dynamic type. It is
-/// represented as a struct containing a union of the types that could be
-/// stored.
-///
-/// VARIANTs must be initialized with [VariantInit] before their use.
 
 class _VARIANT_Anonymous_3 extends Struct {
   external Pointer pvRecord;
@@ -369,14 +446,14 @@ class _VARIANT_Anonymous_2 extends Union {
   external int __OBSOLETE__VARIANT_BOOL;
   @Int32()
   external int scode;
-
-  // .field /* 040182CB */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.System.Com.CY cyVal
+  @Int64()
+  external int cyVal;
   @Double()
   external double date;
   external Pointer<Utf16> bstrVal;
   external Pointer<COMObject> punkVal;
   external Pointer<COMObject> pdispVal;
-  // .field /* 040182D0 */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.System.Com.SAFEARRAY* parray
+  external Pointer/*<SAFEARRAY>*/ parray;
   external Pointer<Uint8> pbVal;
   external Pointer<Int16> piVal;
   external Pointer<Int32> plVal;
@@ -386,12 +463,12 @@ class _VARIANT_Anonymous_2 extends Union {
   external Pointer<Int16> pboolVal;
   external Pointer<Int16> __OBSOLETE__VARIANT_PBOOL;
   external Pointer<Int32> pscode;
-  // .field /* 040182DA */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.System.Com.CY* pcyVal
+  external Pointer/*<CY>*/ pcyVal;
   external Pointer<Double> pdate;
   external Pointer<Pointer<Utf16>> pbstrVal;
   external Pointer<Pointer<COMObject>> ppunkVal;
   external Pointer<Pointer<COMObject>> ppdispVal;
-  // .field /* 040182DF */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.System.Com.SAFEARRAY** pparray
+  external Pointer<Pointer/*<SAFEARRAY>*/ > pparray;
   external Pointer<VARIANT> pvarVal;
   external Pointer byref;
   @Int8()
@@ -406,7 +483,7 @@ class _VARIANT_Anonymous_2 extends Union {
   external int intVal;
   @Uint32()
   external int uintVal;
-  // .field /* 040182E8 */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.DECIMAL* pdecVal
+  external Pointer<DECIMAL> pdecVal;
   external Pointer<Int8> pcVal;
   external Pointer<Uint16> puiVal;
   external Pointer<Uint32> pulVal;
@@ -430,14 +507,17 @@ class _VARIANT_Anonymous_1 extends Struct {
 
 class _VARIANT_Anonymous_0 extends Union {
   external _VARIANT_Anonymous_1 __VARIANT_NAME_2;
-  // .field /* 040182BC */ [0] public valuetype [Windows.Win32.winmd]Windows.Win32.Foundation.DECIMAL decVal
+  external DECIMAL decVal;
 }
 
+/// The VARIANT type is used in Win32 to represent a dynamic type. It is
+/// represented as a struct containing a union of the types that could be
+/// stored.
+///
+/// VARIANTs must be initialized with [VariantInit] before their use.
+///
 /// {@category Struct}
 class VARIANT extends Struct {
-  // The size of a union type equals the largest member it can contain, which in
-  // the case of VARIANT is a struct of two pointers (BRECORD).
-
   external _VARIANT_Anonymous_0 __VARIANT_NAME_1;
 
   int get vt => __VARIANT_NAME_1.__VARIANT_NAME_2.vt;
@@ -465,29 +545,29 @@ class VARIANT extends Struct {
   set lVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.lVal = value;
 
-  // BYTE => unsigned char => Uint8
+  // BYTE -> unsigned char -> Uint8
   int get bVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bVal;
   set bVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bVal = value;
 
-  // SHORT => short => Int16
+  // SHORT -> short -> Int16
   int get iVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.iVal;
   set iVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.iVal = value;
 
-  // FLOAT => float => double
+  // FLOAT -> float -> double
   double get fltVal =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.fltVal;
   set fltVal(double value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.fltVal = value;
 
-  // DOUBLE => double => double
+  // DOUBLE -> double -> double
   double get dblVal =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.dblVal;
   set dblVal(double value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.dblVal = value;
 
-  // VARIANT_BOOL => Int16
+  // VARIANT_BOOL -> Int16
   bool get boolVal =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal ==
       VARIANT_TRUE;
@@ -495,7 +575,22 @@ class VARIANT extends Struct {
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal =
           value ? VARIANT_TRUE : VARIANT_FALSE;
 
-  // BSTR => OLECHAR* => Pointer<Utf16>
+  // SCODE -> LONG -> long -> Int32
+  int get scode => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode;
+  set lscodeVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode = value;
+
+  // CY -> Int64
+  int get cyVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cyVal;
+  set cyVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cyVal = value;
+
+  // DATE -> double -> double
+  double get date => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.date;
+  set date(double value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.date = value;
+
+  // BSTR -> OLECHAR* -> Pointer<Utf16>
   Pointer<Utf16> get bstrVal =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bstrVal;
   set bstrVal(Pointer<Utf16> value) =>
@@ -512,6 +607,11 @@ class VARIANT extends Struct {
       IDispatch(__VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal);
   set pdispVal(IDispatch value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal = value.ptr;
+
+  Pointer get parray =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.parray;
+  set parray(Pointer value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.parray = value;
 
   // BYTE*
   Pointer<Uint8> get pbVal =>
@@ -549,26 +649,71 @@ class VARIANT extends Struct {
   set pdblVal(Pointer<Double> value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdblVal = value;
 
+  Pointer<Int16> get pboolVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pboolVal;
+  set pboolVal(Pointer<Int16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pboolVal = value;
+
+  Pointer<Int32> get pscode =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pscode;
+  set pscode(Pointer<Int32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pscode = value;
+
+  Pointer get pcyVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcyVal;
+  set pcyVal(Pointer value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcyVal = value;
+
+  Pointer<Double> get pdate =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdate;
+  set pdate(Pointer<Double> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdate = value;
+
+  Pointer<Pointer<Utf16>> get pbstrVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbstrVal;
+  set pbstrVal(Pointer<Pointer<Utf16>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbstrVal = value;
+
+  Pointer<Pointer<COMObject>> get ppunkVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppunkVal;
+  set ppunkVal(Pointer<Pointer<COMObject>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppunkVal = value;
+
+  Pointer<Pointer<COMObject>> get ppdispVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppdispVal;
+  set ppdispVal(Pointer<Pointer<COMObject>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppdispVal = value;
+
+  Pointer<Pointer> get pparray =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pparray;
+  set pparray(Pointer<Pointer> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pparray = value;
+
+  Pointer<VARIANT> get pvarVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pvarVal;
+  set pvarVal(Pointer<VARIANT> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pvarVal = value;
+
   Pointer get byref => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.byref;
   set byref(Pointer value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.byref = value;
 
-  // // CHAR -> char -> Int8
+  // CHAR -> char -> Int8
   int get cVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cVal;
   set cVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cVal = value;
 
-  // // USHORT -> unsigned short -> Uint16
+  // USHORT -> unsigned short -> Uint16
   int get uiVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uiVal;
   set uiVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uiVal = value;
 
-  // // ULONG -> unsigned long -> Uint32
+  // ULONG -> unsigned long -> Uint32
   int get ulVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ulVal;
   set ulVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ulVal = value;
 
-  // // ULONGLONG -> unsigned long long -> Uint64
+  // ULONGLONG -> unsigned long long -> Uint64
   BigInt get ullVal {
     final src = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal;
     final hi = (((src & 0xFFFFFFFF00000000) >> 32).toUnsigned(32))
@@ -584,15 +729,50 @@ class VARIANT extends Struct {
     __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal = (hi << 32) + lo;
   }
 
-  // // INT -> int -> Int32
+  // INT -> int -> Int32
   int get intVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.intVal;
   set intVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.intVal = value;
 
-  // // UINT -> unsigned int -> Uint32
+  // UINT -> unsigned int -> Uint32
   int get uintVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal;
   set uintVal(int value) =>
       __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal = value;
+
+  Pointer<DECIMAL> get pdecVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdecVal;
+  set pdecVal(Pointer<DECIMAL> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdecVal = value;
+
+  Pointer<Int8> get pcVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcVal;
+  set pcVal(Pointer<Int8> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcVal = value;
+
+  Pointer<Uint16> get puiVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puiVal;
+  set puiVal(Pointer<Uint16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puiVal = value;
+
+  Pointer<Uint32> get pulVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pulVal;
+  set pulVal(Pointer<Uint32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pulVal = value;
+
+  Pointer<Uint64> get pullVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pullVal;
+  set pullVal(Pointer<Uint64> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pullVal = value;
+
+  Pointer<Int32> get pintVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pintVal;
+  set pintVal(Pointer<Int32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pintVal = value;
+
+  Pointer<Uint32> get puintVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal;
+  set puintVal(Pointer<Uint32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal = value;
 
   Pointer get pvRecord => __VARIANT_NAME_1
       .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord;
