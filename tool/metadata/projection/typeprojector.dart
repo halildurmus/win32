@@ -219,7 +219,7 @@ class TypeProjector {
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.interfaces.isNotEmpty &&
         typeIdentifier.type!.interfaces.first.name ==
-            'Windows.Win32.Com.IUnknown') {
+            'Windows.Win32.System.Com.IUnknown') {
       return 'Pointer';
     }
 
