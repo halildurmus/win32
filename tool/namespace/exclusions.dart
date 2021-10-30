@@ -1,4 +1,20 @@
-const excludedNamespaces = <String>[];
+const excludedNamespaces = <String>[
+  // 'Data.Xml',
+  // 'Devices.DeviceAndDriverInstallation',
+  // 'Devices.Enumeration',
+  // 'Devices.Fax',
+  // 'Devices.Geolocation',
+  // 'Devices.HumanInterfaceDevice',
+  // 'Devices.Tapi',
+  // 'Devices.Usb',
+  // 'Globalization',
+  // 'Graphics.Direct2D',
+  // 'Graphics.DirectComposition',
+  // 'Graphics.DirectShow',
+  // 'Graphics.DirectWrite',
+  // 'Graphics.Dwm',
+  // 'Graphics.'
+];
 
 const excludedFunctions = <String>[
   // Duplicates

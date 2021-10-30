@@ -26,6 +26,11 @@ const dartKeywords = <String>[
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String nameWithoutEncoding(String typeName) {
+  if (typeName.startsWith('Pointer<')) {
+    final wrappedType =
+        typeName.substring(8, typeName.length - 1); // Pointer<X> => X
+    return 'Pointer<${nameWithoutEncoding(wrappedType)}>';
+  }
   if (typePretendsToBeAnsi(typeName)) {
     return typeName;
   }

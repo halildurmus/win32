@@ -216,6 +216,10 @@ class TypeProjector {
     }
 
     // COM type
+    if (typeIdentifier.name.endsWith('IUnknown')) {
+      return 'Pointer';
+    }
+
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.interfaces.isNotEmpty &&
         typeIdentifier.type!.interfaces.first.name ==
