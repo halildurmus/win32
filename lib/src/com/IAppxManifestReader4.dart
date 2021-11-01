@@ -23,9 +23,9 @@ import 'IAppxManifestReader3.dart';
 const IID_IAppxManifestReader4 = '{4579BB7C-741D-4161-B5A1-47BD3B78AD9B}';
 
 typedef _GetOptionalPackageInfo_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> optionalPackageInfo);
+    Pointer obj, Pointer<Pointer<COMObject>> optionalPackageInfo);
 typedef _GetOptionalPackageInfo_Dart = int Function(
-    Pointer obj, Pointer<Pointer> optionalPackageInfo);
+    Pointer obj, Pointer<Pointer<COMObject>> optionalPackageInfo);
 
 /// {@category Interface}
 /// {@category com}
@@ -34,7 +34,7 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
 
   IAppxManifestReader4(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetOptionalPackageInfo(Pointer<Pointer> optionalPackageInfo) =>
+  int GetOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
       ptr.ref.lpVtbl.value
               .elementAt(15)
               .cast<Pointer<NativeFunction<_GetOptionalPackageInfo_Native>>>()

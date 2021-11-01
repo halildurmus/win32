@@ -1792,7 +1792,7 @@ int GetComputerNameEx(
 
 late final _GetComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(
-        Uint32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+        Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
     int Function(int NameType, Pointer<Utf16> lpBuffer,
         Pointer<Uint32> nSize)>('GetComputerNameExW');
 
@@ -2108,7 +2108,7 @@ int GetFileAttributesEx(Pointer<Utf16> lpFileName, int fInfoLevelId,
     _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
 
 late final _GetFileAttributesEx = _kernel32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpFileName, Uint32 fInfoLevelId,
+    Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
         Pointer lpFileInformation),
     int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
         Pointer lpFileInformation)>('GetFileAttributesExW');
@@ -2692,12 +2692,12 @@ late final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
+Pointer GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
     _GetProcAddress(hModule, lpProcName);
 
 late final _GetProcAddress = _kernel32.lookupFunction<
-    IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
-    int Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
+    Pointer Function(IntPtr hModule, Pointer<Utf8> lpProcName),
+    Pointer Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
 
 /// Retrieves a handle to the default heap of the calling process. This
 /// handle can then be used in subsequent calls to the heap functions.
@@ -3459,7 +3459,7 @@ int HeapQueryInformation(
 late final _HeapQueryInformation = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr HeapHandle,
-        Uint32 HeapInformationClass,
+        Int32 HeapInformationClass,
         Pointer HeapInformation,
         IntPtr HeapInformationLength,
         Pointer<IntPtr> ReturnLength),
@@ -3507,7 +3507,7 @@ int HeapSetInformation(int HeapHandle, int HeapInformationClass,
         HeapInformationLength);
 
 late final _HeapSetInformation = _kernel32.lookupFunction<
-    Int32 Function(IntPtr HeapHandle, Uint32 HeapInformationClass,
+    Int32 Function(IntPtr HeapHandle, Int32 HeapInformationClass,
         Pointer HeapInformation, IntPtr HeapInformationLength),
     int Function(
         int HeapHandle,
@@ -3995,8 +3995,12 @@ late final _QueryPerformanceFrequency = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int ReadConsole(int hConsoleInput, Pointer lpBuffer, int nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead, Pointer<Void> pInputControl) =>
+int ReadConsole(
+        int hConsoleInput,
+        Pointer lpBuffer,
+        int nNumberOfCharsToRead,
+        Pointer<Uint32> lpNumberOfCharsRead,
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl) =>
     _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
         lpNumberOfCharsRead, pInputControl);
 
@@ -4006,13 +4010,13 @@ late final _ReadConsole = _kernel32.lookupFunction<
         Pointer lpBuffer,
         Uint32 nNumberOfCharsToRead,
         Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<Void> pInputControl),
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl),
     int Function(
         int hConsoleInput,
         Pointer lpBuffer,
         int nNumberOfCharsToRead,
         Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<Void> pInputControl)>('ReadConsoleW');
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl)>('ReadConsoleW');
 
 /// Reads data from the specified file or input/output (I/O) device. Reads
 /// occur at the position specified by the file pointer if supported by the

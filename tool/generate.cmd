@@ -14,8 +14,8 @@ echo Generating COM classes and tests from Windows metadata
 call dart %~dp0metadata\generate_com_apis.dart
 echo.
 
-echo Generating Windows Runtime classes from Windows metadata
-call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
+echo Generating Windows Runtime classes from Windows metadata [DISABLED]
+rem call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
 echo.
 
 :format

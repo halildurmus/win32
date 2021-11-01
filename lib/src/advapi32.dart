@@ -171,7 +171,7 @@ int GetTokenInformation(
 late final _GetTokenInformation = _advapi32.lookupFunction<
     Int32 Function(
         IntPtr TokenHandle,
-        Uint32 TokenInformationClass,
+        Int32 TokenInformationClass,
         Pointer TokenInformation,
         Uint32 TokenInformationLength,
         Pointer<Uint32> ReturnLength),
@@ -1244,7 +1244,7 @@ int RegRestoreKey(int hKey, Pointer<Utf16> lpFile, int dwFlags) =>
     _RegRestoreKey(hKey, lpFile, dwFlags);
 
 late final _RegRestoreKey = _advapi32.lookupFunction<
-    Int32 Function(IntPtr hKey, Pointer<Utf16> lpFile, Uint32 dwFlags),
+    Int32 Function(IntPtr hKey, Pointer<Utf16> lpFile, Int32 dwFlags),
     int Function(
         int hKey, Pointer<Utf16> lpFile, int dwFlags)>('RegRestoreKeyW');
 

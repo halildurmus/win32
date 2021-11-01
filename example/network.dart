@@ -17,7 +17,7 @@ void main() {
   }
 
   final netManager = NetworkListManager.createInstance();
-  final nlmConnectivity = calloc<Uint32>();
+  final nlmConnectivity = calloc<Int32>();
   final enumPtr = calloc<COMObject>();
   final netPtr = calloc<COMObject>();
   final descPtr = calloc<Pointer<Utf16>>();

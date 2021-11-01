@@ -510,7 +510,7 @@ int ChangeDisplaySettings(Pointer<DEVMODE> lpDevMode, int dwFlags) =>
     _ChangeDisplaySettings(lpDevMode, dwFlags);
 
 late final _ChangeDisplaySettings = _user32.lookupFunction<
-    Uint32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+    Int32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
     int Function(
         Pointer<DEVMODE> lpDevMode, int dwFlags)>('ChangeDisplaySettingsW');
 
@@ -532,7 +532,7 @@ int ChangeDisplaySettingsEx(Pointer<Utf16> lpszDeviceName,
     _ChangeDisplaySettingsEx(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
 
 late final _ChangeDisplaySettingsEx = _user32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
         IntPtr hwnd, Uint32 dwflags, Pointer lParam),
     int Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
         int hwnd, int dwflags, Pointer lParam)>('ChangeDisplaySettingsExW');
@@ -2040,7 +2040,7 @@ int GetAwarenessFromDpiAwarenessContext(int value) =>
     _GetAwarenessFromDpiAwarenessContext(value);
 
 late final _GetAwarenessFromDpiAwarenessContext = _user32.lookupFunction<
-    Uint32 Function(IntPtr value),
+    Int32 Function(IntPtr value),
     int Function(int value)>('GetAwarenessFromDpiAwarenessContext');
 
 /// Retrieves a handle to the window (if any) that has captured the mouse.
@@ -2137,7 +2137,7 @@ late final _GetClassInfoEx = _user32.lookupFunction<
 int GetClassLongPtr(int hWnd, int nIndex) => _GetClassLongPtr(hWnd, nIndex);
 
 late final _GetClassLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex),
     int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -2392,13 +2392,13 @@ late final _GetDialogDpiChangeBehavior = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetDisplayAutoRotationPreferences(Pointer<Uint32> pOrientation) =>
+int GetDisplayAutoRotationPreferences(Pointer<Int32> pOrientation) =>
     _GetDisplayAutoRotationPreferences(pOrientation);
 
 late final _GetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint32> pOrientation),
+    Int32 Function(Pointer<Int32> pOrientation),
     int Function(
-        Pointer<Uint32> pOrientation)>('GetDisplayAutoRotationPreferences');
+        Pointer<Int32> pOrientation)>('GetDisplayAutoRotationPreferences');
 
 /// Retrieves a handle to a control in the specified dialog box.
 ///
@@ -3176,7 +3176,7 @@ int GetScrollBarInfo(int hwnd, int idObject, Pointer<SCROLLBARINFO> psbi) =>
     _GetScrollBarInfo(hwnd, idObject, psbi);
 
 late final _GetScrollBarInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 idObject, Pointer<SCROLLBARINFO> psbi),
+    Int32 Function(IntPtr hwnd, Int32 idObject, Pointer<SCROLLBARINFO> psbi),
     int Function(int hwnd, int idObject,
         Pointer<SCROLLBARINFO> psbi)>('GetScrollBarInfo');
 
@@ -3388,7 +3388,7 @@ late final _GetThreadDpiAwarenessContext =
 int GetThreadDpiHostingBehavior() => _GetThreadDpiHostingBehavior();
 
 late final _GetThreadDpiHostingBehavior =
-    _user32.lookupFunction<Uint32 Function(), int Function()>(
+    _user32.lookupFunction<Int32 Function(), int Function()>(
         'GetThreadDpiHostingBehavior');
 
 /// Retrieves information about the specified title bar.
@@ -3602,9 +3602,9 @@ late final _GetWindowDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int GetWindowDpiHostingBehavior(int hwnd) => _GetWindowDpiHostingBehavior(hwnd);
 
-late final _GetWindowDpiHostingBehavior = _user32.lookupFunction<
-    Uint32 Function(IntPtr hwnd),
-    int Function(int hwnd)>('GetWindowDpiHostingBehavior');
+late final _GetWindowDpiHostingBehavior =
+    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+        'GetWindowDpiHostingBehavior');
 
 /// Retrieves information about the specified window.
 ///
@@ -3635,7 +3635,7 @@ late final _GetWindowInfo = _user32.lookupFunction<
 int GetWindowLongPtr(int hWnd, int nIndex) => _GetWindowLongPtr(hWnd, nIndex);
 
 late final _GetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex),
     int Function(int hWnd, int nIndex)>('GetWindowLongPtrW');
 
 /// Retrieves the full path and file name of the module associated with the
@@ -4712,8 +4712,8 @@ int MessageBox(
     _MessageBox(hWnd, lpText, lpCaption, uType);
 
 late final _MessageBox = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
-        Pointer<Utf16> lpCaption, Uint32 uType),
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
+        Uint32 uType),
     int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
         int uType)>('MessageBoxW');
 
@@ -4737,8 +4737,8 @@ int MessageBoxEx(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
     _MessageBoxEx(hWnd, lpText, lpCaption, uType, wLanguageId);
 
 late final _MessageBoxEx = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
-        Pointer<Utf16> lpCaption, Uint32 uType, Uint16 wLanguageId),
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
+        Uint32 uType, Uint16 wLanguageId),
     int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
         int uType, int wLanguageId)>('MessageBoxExW');
 
@@ -5910,7 +5910,7 @@ int SetDisplayAutoRotationPreferences(int orientation) =>
     _SetDisplayAutoRotationPreferences(orientation);
 
 late final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Uint32 orientation),
+    Int32 Function(Int32 orientation),
     int Function(int orientation)>('SetDisplayAutoRotationPreferences');
 
 /// Sets the text of a control in a dialog box to the string representation
@@ -6339,7 +6339,7 @@ int SetThreadDpiHostingBehavior(int value) =>
     _SetThreadDpiHostingBehavior(value);
 
 late final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
-    Uint32 Function(Uint32 value),
+    Int32 Function(Int32 value),
     int Function(int value)>('SetThreadDpiHostingBehavior');
 
 /// Creates a timer with the specified time-out value.
@@ -6414,7 +6414,7 @@ int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) =>
     _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
 
 late final _SetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
     int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
 
 /// Sets the show state and the restored, minimized, and maximized
@@ -6501,7 +6501,7 @@ int SetWindowsHookEx(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
     _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
 
 late final _SetWindowsHookEx = _user32.lookupFunction<
-    IntPtr Function(Uint32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+    IntPtr Function(Int32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
         IntPtr hmod, Uint32 dwThreadId),
     int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
         int hmod, int dwThreadId)>('SetWindowsHookExW');

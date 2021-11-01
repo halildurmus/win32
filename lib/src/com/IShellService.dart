@@ -22,8 +22,10 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IShellService = '{5836FB00-8187-11CF-A12B-00AA004AE837}';
 
-typedef _SetOwner_Native = Int32 Function(Pointer obj, Pointer punkOwner);
-typedef _SetOwner_Dart = int Function(Pointer obj, Pointer punkOwner);
+typedef _SetOwner_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> punkOwner);
+typedef _SetOwner_Dart = int Function(
+    Pointer obj, Pointer<COMObject> punkOwner);
 
 /// {@category Interface}
 /// {@category com}
@@ -32,7 +34,7 @@ class IShellService extends IUnknown {
 
   IShellService(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetOwner(Pointer punkOwner) => ptr.ref.lpVtbl.value
+  int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_SetOwner_Native>>>()
       .value

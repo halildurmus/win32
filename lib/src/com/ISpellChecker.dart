@@ -28,14 +28,14 @@ typedef _get_LanguageTag_Dart = int Function(
     Pointer obj, Pointer<Pointer<Utf16>> value);
 
 typedef _Check_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> text, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> text, Pointer<Pointer<COMObject>> value);
 typedef _Check_Dart = int Function(
-    Pointer obj, Pointer<Utf16> text, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> text, Pointer<Pointer<COMObject>> value);
 
 typedef _Suggest_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> word, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> word, Pointer<Pointer<COMObject>> value);
 typedef _Suggest_Dart = int Function(
-    Pointer obj, Pointer<Utf16> word, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> word, Pointer<Pointer<COMObject>> value);
 
 typedef _Add_Native = Int32 Function(Pointer obj, Pointer<Utf16> word);
 typedef _Add_Dart = int Function(Pointer obj, Pointer<Utf16> word);
@@ -54,8 +54,9 @@ typedef _GetOptionValue_Dart = int Function(
     Pointer obj, Pointer<Utf16> optionId, Pointer<Uint8> value);
 
 typedef _get_OptionIds_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> value);
-typedef _get_OptionIds_Dart = int Function(Pointer obj, Pointer<Pointer> value);
+    Pointer obj, Pointer<Pointer<COMObject>> value);
+typedef _get_OptionIds_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> value);
 
 typedef _get_Id_Native = Int32 Function(
     Pointer obj, Pointer<Pointer<Utf16>> value);
@@ -67,9 +68,9 @@ typedef _get_LocalizedName_Dart = int Function(
     Pointer obj, Pointer<Pointer<Utf16>> value);
 
 typedef _add_SpellCheckerChanged_Native = Int32 Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> eventCookie);
+    Pointer obj, Pointer<COMObject> handler, Pointer<Uint32> eventCookie);
 typedef _add_SpellCheckerChanged_Dart = int Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> eventCookie);
+    Pointer obj, Pointer<COMObject> handler, Pointer<Uint32> eventCookie);
 
 typedef _remove_SpellCheckerChanged_Native = Int32 Function(
     Pointer obj, Uint32 eventCookie);
@@ -77,14 +78,14 @@ typedef _remove_SpellCheckerChanged_Dart = int Function(
     Pointer obj, int eventCookie);
 
 typedef _GetOptionDescription_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> optionId, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value);
 typedef _GetOptionDescription_Dart = int Function(
-    Pointer obj, Pointer<Utf16> optionId, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value);
 
 typedef _ComprehensiveCheck_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> text, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> text, Pointer<Pointer<COMObject>> value);
 typedef _ComprehensiveCheck_Dart = int Function(
-    Pointer obj, Pointer<Utf16> text, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> text, Pointer<Pointer<COMObject>> value);
 
 /// {@category Interface}
 /// {@category com}
@@ -112,13 +113,14 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  int Check(Pointer<Utf16> text, Pointer<Pointer> value) => ptr.ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<_Check_Native>>>()
-      .value
-      .asFunction<_Check_Dart>()(ptr.ref.lpVtbl, text, value);
+  int Check(Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<Pointer<NativeFunction<_Check_Native>>>()
+          .value
+          .asFunction<_Check_Dart>()(ptr.ref.lpVtbl, text, value);
 
-  int Suggest(Pointer<Utf16> word, Pointer<Pointer> value) =>
+  int Suggest(Pointer<Utf16> word, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<Pointer<NativeFunction<_Suggest_Native>>>()
@@ -151,8 +153,8 @@ class ISpellChecker extends IUnknown {
           .value
           .asFunction<_GetOptionValue_Dart>()(ptr.ref.lpVtbl, optionId, value);
 
-  Pointer get OptionIds {
-    final retValuePtr = calloc<Pointer>();
+  Pointer<COMObject> get OptionIds {
+    final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -208,7 +210,8 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  int add_SpellCheckerChanged(Pointer handler, Pointer<Uint32> eventCookie) =>
+  int add_SpellCheckerChanged(
+          Pointer<COMObject> handler, Pointer<Uint32> eventCookie) =>
       ptr.ref.lpVtbl.value
               .elementAt(13)
               .cast<Pointer<NativeFunction<_add_SpellCheckerChanged_Native>>>()
@@ -223,7 +226,8 @@ class ISpellChecker extends IUnknown {
           .asFunction<_remove_SpellCheckerChanged_Dart>()(
       ptr.ref.lpVtbl, eventCookie);
 
-  int GetOptionDescription(Pointer<Utf16> optionId, Pointer<Pointer> value) =>
+  int GetOptionDescription(
+          Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.lpVtbl.value
               .elementAt(15)
               .cast<Pointer<NativeFunction<_GetOptionDescription_Native>>>()
@@ -231,7 +235,8 @@ class ISpellChecker extends IUnknown {
               .asFunction<_GetOptionDescription_Dart>()(
           ptr.ref.lpVtbl, optionId, value);
 
-  int ComprehensiveCheck(Pointer<Utf16> text, Pointer<Pointer> value) =>
+  int ComprehensiveCheck(
+          Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.lpVtbl.value
           .elementAt(16)
           .cast<Pointer<NativeFunction<_ComprehensiveCheck_Native>>>()

@@ -27,8 +27,10 @@ typedef _SetCancelButtonLabel_Native = Int32 Function(
 typedef _SetCancelButtonLabel_Dart = int Function(
     Pointer obj, Pointer<Utf16> pszLabel);
 
-typedef _SetNavigationRoot_Native = Int32 Function(Pointer obj, Pointer psi);
-typedef _SetNavigationRoot_Dart = int Function(Pointer obj, Pointer psi);
+typedef _SetNavigationRoot_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> psi);
+typedef _SetNavigationRoot_Dart = int Function(
+    Pointer obj, Pointer<COMObject> psi);
 
 /// {@category Interface}
 /// {@category com}
@@ -43,7 +45,7 @@ class IFileDialog2 extends IFileDialog {
       .value
       .asFunction<_SetCancelButtonLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
 
-  int SetNavigationRoot(Pointer psi) => ptr.ref.lpVtbl.value
+  int SetNavigationRoot(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
       .elementAt(28)
       .cast<Pointer<NativeFunction<_SetNavigationRoot_Native>>>()
       .value

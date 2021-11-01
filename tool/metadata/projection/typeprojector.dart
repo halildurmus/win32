@@ -25,15 +25,18 @@ const Map<BaseType, TypeTuple> baseNativeMapping = {
   BaseType.Float: TypeTuple('Float', 'double', attribute: '@Float()'),
   BaseType.Double: TypeTuple('Double', 'double', attribute: '@Double()'),
   BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
-  BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()')
+  BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
 };
-
-const Map<String, TypeTuple> specialTypeMapping = {
+const Map<String, TypeTuple> win32SpecialType = {
+  'Windows.Win32.Foundation.BSTR':
+      TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
   'Windows.Win32.Foundation.PWSTR':
       TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
   'Windows.Win32.Foundation.PSTR': TypeTuple('Pointer<Utf8>', 'Pointer<Utf8>'),
-  'Windows.Win32.Foundation.LARGE_INTEGER': TypeTuple('Int64', 'int'),
-  'Windows.Win32.Foundation.ULARGE_INTEGER': TypeTuple('Uint64', 'int'),
+  'Windows.Win32.Foundation.LARGE_INTEGER':
+      TypeTuple('Int64', 'int', attribute: '@Int64()'),
+  'Windows.Win32.Foundation.ULARGE_INTEGER':
+      TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
 };
 
@@ -53,7 +56,9 @@ class TypeProjector {
       baseNativeMapping.keys.contains(typeIdentifier.baseType);
 
   bool get isWin32SpecialType =>
-      specialTypeMapping.keys.contains(typeIdentifier.name);
+      win32SpecialType.keys.contains(typeIdentifier.name);
+
+  bool get isString => typeIdentifier.baseType == BaseType.String;
 
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
 
@@ -69,22 +74,24 @@ class TypeProjector {
       typeIdentifier.baseType == BaseType.ClassTypeModifier &&
       typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
 
-  bool get isComInterface {
-    if (typeIdentifier.name.endsWith('IUnknown')) {
-      return true;
-    }
+  // bool get isComInterface {
+  //   if (typeIdentifier.name.endsWith('IUnknown')) {
+  //     return true;
+  //   }
 
-    // Keep checking up the chain to see if this inherits from IUnknown
-    var interfaces = typeIdentifier.type?.interfaces;
-    while (interfaces != null && interfaces.isNotEmpty) {
-      if (interfaces.first.name.endsWith('IUnknown')) {
-        return true;
-      }
-      interfaces = interfaces.first.interfaces;
-    }
+  //   // Keep checking up the chain to see if this inherits from IUnknown
+  //   var interfaces = typeIdentifier.type?.interfaces;
+  //   while (interfaces != null && interfaces.isNotEmpty) {
+  //     if (interfaces.first.name.endsWith('IUnknown')) {
+  //       return true;
+  //     }
+  //     interfaces = interfaces.first.interfaces;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
+
+  bool get isInterface => typeIdentifier.type?.isInterface ?? false;
 
   TypeTuple unwrapEnumType() {
     final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;
@@ -108,7 +115,8 @@ class TypeProjector {
       final typeIdentifier = wrappedType.fields.first.typeIdentifier;
       return TypeProjector(typeIdentifier).projection;
     } else {
-      final typeClass = wrappedType.name.split('.').last;
+      final typeClass =
+          stripAnsiUnicodeSuffix(wrappedType.name.split('.').last);
       return TypeTuple(typeClass, typeClass);
     }
   }
@@ -172,7 +180,12 @@ class TypeProjector {
 
     // Could be a string or other special type that we want to custom-map
     if (isWin32SpecialType) {
-      return specialTypeMapping[typeIdentifier.name]!;
+      return win32SpecialType[typeIdentifier.name]!;
+    }
+
+    // This is used by WinRT for an HSTRING
+    if (isString) {
+      return TypeTuple('Pointer<IntPtr>', 'Pointer<IntPtr>');
     }
 
     // Could be an enum like FOLDERFLAGS
@@ -197,7 +210,7 @@ class TypeProjector {
       return unwrapCallbackType();
     }
 
-    if (isComInterface) {
+    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
       return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 

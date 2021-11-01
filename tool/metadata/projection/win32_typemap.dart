@@ -1,5 +1,6 @@
 const callbackTypeMapping = <String, String>{
   // Callbacks
+  'FARPROC': 'Pointer',
   'LPCCHOOKPROC': 'Pointer<NativeFunction<CCHookProc>>',
   'LPCFHOOKPROC': 'Pointer<NativeFunction<CFHookProc>>',
   'LPFRHOOKPROC': 'Pointer<NativeFunction<FRHookProc>>',
@@ -31,3 +32,16 @@ const callbackTypeMapping = <String, String>{
   'WLAN_NOTIFICATION_CALLBACK':
       'Pointer<NativeFunction<WlanNotificationCallback>>',
 };
+
+String stripAnsiUnicodeSuffix(String name) {
+  if (name.startsWith('Pointer<')) {
+    final wrappedType = name.substring(8, name.length - 1); // Pointer<X> => X
+    return 'Pointer<${stripAnsiUnicodeSuffix(wrappedType)}>';
+  }
+
+  if (name.endsWith('W')) {
+    return name.substring(0, name.length - 1);
+  } else {
+    return name;
+  }
+}

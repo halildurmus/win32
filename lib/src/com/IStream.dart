@@ -30,10 +30,10 @@ typedef _Seek_Dart = int Function(
 typedef _SetSize_Native = Int32 Function(Pointer obj, Uint64 libNewSize);
 typedef _SetSize_Dart = int Function(Pointer obj, int libNewSize);
 
-typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer pstm, Uint64 cb,
-    Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
-typedef _CopyTo_Dart = int Function(Pointer obj, Pointer pstm, int cb,
-    Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
+typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer<COMObject> pstm,
+    Uint64 cb, Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
+typedef _CopyTo_Dart = int Function(Pointer obj, Pointer<COMObject> pstm,
+    int cb, Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
 
 typedef _Commit_Native = Int32 Function(Pointer obj, Uint32 grfCommitFlags);
 typedef _Commit_Dart = int Function(Pointer obj, int grfCommitFlags);
@@ -56,8 +56,10 @@ typedef _Stat_Native = Int32 Function(
 typedef _Stat_Dart = int Function(
     Pointer obj, Pointer<STATSTG> pstatstg, int grfStatFlag);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppstm);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppstm);
+typedef _Clone_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppstm);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppstm);
 
 /// {@category Interface}
 /// {@category com}
@@ -80,7 +82,7 @@ class IStream extends ISequentialStream {
       .value
       .asFunction<_SetSize_Dart>()(ptr.ref.lpVtbl, libNewSize);
 
-  int CopyTo(Pointer pstm, int cb, Pointer<Uint64> pcbRead,
+  int CopyTo(Pointer<COMObject> pstm, int cb, Pointer<Uint64> pcbRead,
           Pointer<Uint64> pcbWritten) =>
       ptr.ref.lpVtbl.value
               .elementAt(7)
@@ -122,7 +124,7 @@ class IStream extends ISequentialStream {
       .value
       .asFunction<_Stat_Dart>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
 
-  int Clone(Pointer<Pointer> ppstm) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppstm) => ptr.ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value

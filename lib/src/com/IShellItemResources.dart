@@ -62,9 +62,9 @@ typedef _GetResourceDescription_Dart = int Function(
     Pointer<Pointer<Utf16>> ppszDescription);
 
 typedef _EnumResources_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppenumr);
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumr);
 typedef _EnumResources_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppenumr);
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumr);
 
 typedef _SupportsResource_Native = Int32 Function(
     Pointer obj, Pointer<SHELL_ITEM_RESOURCE> pcsir);
@@ -142,7 +142,7 @@ class IShellItemResources extends IUnknown {
               .asFunction<_GetResourceDescription_Dart>()(
           ptr.ref.lpVtbl, pcsir, ppszDescription);
 
-  int EnumResources(Pointer<Pointer> ppenumr) => ptr.ref.lpVtbl.value
+  int EnumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.lpVtbl.value
       .elementAt(8)
       .cast<Pointer<NativeFunction<_EnumResources_Native>>>()
       .value

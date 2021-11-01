@@ -23,14 +23,14 @@ import 'IDispatch.dart';
 const IID_IEnumNetworks = '{DCB00003-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _get__NewEnum_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppEnumVar);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumVar);
 typedef _get__NewEnum_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppEnumVar);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumVar);
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
-    Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched);
-typedef _Next_Dart = int Function(Pointer obj, int celt, Pointer<Pointer> rgelt,
-    Pointer<Uint32> pceltFetched);
+    Pointer<Pointer<COMObject>> rgelt, Pointer<Uint32> pceltFetched);
+typedef _Next_Dart = int Function(Pointer obj, int celt,
+    Pointer<Pointer<COMObject>> rgelt, Pointer<Uint32> pceltFetched);
 
 typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
 typedef _Skip_Dart = int Function(Pointer obj, int celt);
@@ -39,8 +39,9 @@ typedef _Reset_Native = Int32 Function(Pointer obj);
 typedef _Reset_Dart = int Function(Pointer obj);
 
 typedef _Clone_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppEnumNetwork);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppEnumNetwork);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumNetwork);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumNetwork);
 
 /// {@category Interface}
 /// {@category com}
@@ -49,8 +50,8 @@ class IEnumNetworks extends IDispatch {
 
   IEnumNetworks(Pointer<COMObject> ptr) : super(ptr);
 
-  Pointer get NewEnum {
-    final retValuePtr = calloc<Pointer>();
+  Pointer<COMObject> get NewEnum {
+    final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -68,7 +69,8 @@ class IEnumNetworks extends IDispatch {
     }
   }
 
-  int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>
+  int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
+          Pointer<Uint32> pceltFetched) =>
       ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<Pointer<NativeFunction<_Next_Native>>>()
@@ -87,7 +89,7 @@ class IEnumNetworks extends IDispatch {
       .value
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer> ppEnumNetwork) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppEnumNetwork) => ptr.ref.lpVtbl.value
       .elementAt(11)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value

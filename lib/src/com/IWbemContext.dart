@@ -25,8 +25,10 @@ const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
 /// @nodoc
 const IID_IWbemContext = '{44ACA674-E8FC-11D0-A07C-00C04FB68820}';
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppNewCopy);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppNewCopy);
+typedef _Clone_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppNewCopy);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppNewCopy);
 
 typedef _GetNames_Native = Int32 Function(
     Pointer obj, Int32 lFlags, Pointer<Pointer<SAFEARRAY>> pNames);
@@ -69,7 +71,7 @@ class IWbemContext extends IUnknown {
 
   IWbemContext(Pointer<COMObject> ptr) : super(ptr);
 
-  int Clone(Pointer<Pointer> ppNewCopy) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value

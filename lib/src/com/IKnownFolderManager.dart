@@ -41,14 +41,14 @@ typedef _GetFolderIds_Dart = int Function(
     Pointer obj, Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount);
 
 typedef _GetFolder_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> rfid, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf);
 typedef _GetFolder_Dart = int Function(
-    Pointer obj, Pointer<GUID> rfid, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf);
 
-typedef _GetFolderByName_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszCanonicalName, Pointer<Pointer> ppkf);
-typedef _GetFolderByName_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszCanonicalName, Pointer<Pointer> ppkf);
+typedef _GetFolderByName_Native = Int32 Function(Pointer obj,
+    Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf);
+typedef _GetFolderByName_Dart = int Function(Pointer obj,
+    Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf);
 
 typedef _RegisterFolder_Native = Int32 Function(
     Pointer obj, Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD);
@@ -59,15 +59,15 @@ typedef _UnregisterFolder_Native = Int32 Function(
     Pointer obj, Pointer<GUID> rfid);
 typedef _UnregisterFolder_Dart = int Function(Pointer obj, Pointer<GUID> rfid);
 
-typedef _FindFolderFromPath_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszPath, Uint32 mode, Pointer<Pointer> ppkf);
-typedef _FindFolderFromPath_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszPath, int mode, Pointer<Pointer> ppkf);
+typedef _FindFolderFromPath_Native = Int32 Function(Pointer obj,
+    Pointer<Utf16> pszPath, Int32 mode, Pointer<Pointer<COMObject>> ppkf);
+typedef _FindFolderFromPath_Dart = int Function(Pointer obj,
+    Pointer<Utf16> pszPath, int mode, Pointer<Pointer<COMObject>> ppkf);
 
 typedef _FindFolderFromIDList_Native = Int32 Function(
-    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf);
 typedef _FindFolderFromIDList_Dart = int Function(
-    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf);
 
 typedef _Redirect_Native = Int32 Function(
     Pointer obj,
@@ -115,14 +115,15 @@ class IKnownFolderManager extends IUnknown {
           .value
           .asFunction<_GetFolderIds_Dart>()(ptr.ref.lpVtbl, ppKFId, pCount);
 
-  int GetFolder(Pointer<GUID> rfid, Pointer<Pointer> ppkf) =>
+  int GetFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<Pointer<NativeFunction<_GetFolder_Native>>>()
           .value
           .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, rfid, ppkf);
 
-  int GetFolderByName(Pointer<Utf16> pszCanonicalName, Pointer<Pointer> ppkf) =>
+  int GetFolderByName(
+          Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.lpVtbl.value
               .elementAt(7)
               .cast<Pointer<NativeFunction<_GetFolderByName_Native>>>()
@@ -145,7 +146,7 @@ class IKnownFolderManager extends IUnknown {
       .asFunction<_UnregisterFolder_Dart>()(ptr.ref.lpVtbl, rfid);
 
   int FindFolderFromPath(
-          Pointer<Utf16> pszPath, int mode, Pointer<Pointer> ppkf) =>
+          Pointer<Utf16> pszPath, int mode, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.lpVtbl.value
               .elementAt(10)
               .cast<Pointer<NativeFunction<_FindFolderFromPath_Native>>>()
@@ -153,7 +154,8 @@ class IKnownFolderManager extends IUnknown {
               .asFunction<_FindFolderFromPath_Dart>()(
           ptr.ref.lpVtbl, pszPath, mode, ppkf);
 
-  int FindFolderFromIDList(Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf) =>
+  int FindFolderFromIDList(
+          Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.lpVtbl.value
           .elementAt(11)
           .cast<Pointer<NativeFunction<_FindFolderFromIDList_Native>>>()

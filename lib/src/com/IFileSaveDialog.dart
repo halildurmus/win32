@@ -25,26 +25,37 @@ const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 /// @nodoc
 const IID_IFileSaveDialog = '{84BCCD23-5FDE-4CDB-AEA4-AF64B83D78AB}';
 
-typedef _SetSaveAsItem_Native = Int32 Function(Pointer obj, Pointer psi);
-typedef _SetSaveAsItem_Dart = int Function(Pointer obj, Pointer psi);
+typedef _SetSaveAsItem_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> psi);
+typedef _SetSaveAsItem_Dart = int Function(Pointer obj, Pointer<COMObject> psi);
 
-typedef _SetProperties_Native = Int32 Function(Pointer obj, Pointer pStore);
-typedef _SetProperties_Dart = int Function(Pointer obj, Pointer pStore);
+typedef _SetProperties_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> pStore);
+typedef _SetProperties_Dart = int Function(
+    Pointer obj, Pointer<COMObject> pStore);
 
 typedef _SetCollectedProperties_Native = Int32 Function(
-    Pointer obj, Pointer pList, Int32 fAppendDefault);
+    Pointer obj, Pointer<COMObject> pList, Int32 fAppendDefault);
 typedef _SetCollectedProperties_Dart = int Function(
-    Pointer obj, Pointer pList, int fAppendDefault);
+    Pointer obj, Pointer<COMObject> pList, int fAppendDefault);
 
 typedef _GetProperties_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppStore);
+    Pointer obj, Pointer<Pointer<COMObject>> ppStore);
 typedef _GetProperties_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppStore);
+    Pointer obj, Pointer<Pointer<COMObject>> ppStore);
 
 typedef _ApplyProperties_Native = Int32 Function(
-    Pointer obj, Pointer psi, Pointer pStore, IntPtr hwnd, Pointer pSink);
+    Pointer obj,
+    Pointer<COMObject> psi,
+    Pointer<COMObject> pStore,
+    IntPtr hwnd,
+    Pointer<COMObject> pSink);
 typedef _ApplyProperties_Dart = int Function(
-    Pointer obj, Pointer psi, Pointer pStore, int hwnd, Pointer pSink);
+    Pointer obj,
+    Pointer<COMObject> psi,
+    Pointer<COMObject> pStore,
+    int hwnd,
+    Pointer<COMObject> pSink);
 
 /// {@category Interface}
 /// {@category com}
@@ -53,19 +64,19 @@ class IFileSaveDialog extends IFileDialog {
 
   IFileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetSaveAsItem(Pointer psi) => ptr.ref.lpVtbl.value
+  int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
       .elementAt(27)
       .cast<Pointer<NativeFunction<_SetSaveAsItem_Native>>>()
       .value
       .asFunction<_SetSaveAsItem_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int SetProperties(Pointer pStore) => ptr.ref.lpVtbl.value
+  int SetProperties(Pointer<COMObject> pStore) => ptr.ref.lpVtbl.value
       .elementAt(28)
       .cast<Pointer<NativeFunction<_SetProperties_Native>>>()
       .value
       .asFunction<_SetProperties_Dart>()(ptr.ref.lpVtbl, pStore);
 
-  int SetCollectedProperties(Pointer pList, int fAppendDefault) =>
+  int SetCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
       ptr.ref.lpVtbl.value
               .elementAt(29)
               .cast<Pointer<NativeFunction<_SetCollectedProperties_Native>>>()
@@ -73,13 +84,14 @@ class IFileSaveDialog extends IFileDialog {
               .asFunction<_SetCollectedProperties_Dart>()(
           ptr.ref.lpVtbl, pList, fAppendDefault);
 
-  int GetProperties(Pointer<Pointer> ppStore) => ptr.ref.lpVtbl.value
+  int GetProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.lpVtbl.value
       .elementAt(30)
       .cast<Pointer<NativeFunction<_GetProperties_Native>>>()
       .value
       .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, ppStore);
 
-  int ApplyProperties(Pointer psi, Pointer pStore, int hwnd, Pointer pSink) =>
+  int ApplyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
+          int hwnd, Pointer<COMObject> pSink) =>
       ptr.ref.lpVtbl.value
               .elementAt(31)
               .cast<Pointer<NativeFunction<_ApplyProperties_Native>>>()

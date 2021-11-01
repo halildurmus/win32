@@ -33,9 +33,9 @@ typedef _GetRuntimeClassName_Dart = int Function(
     Pointer obj, Pointer<IntPtr> className);
 
 typedef _GetTrustLevel_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> trustLevel);
+    Pointer obj, Pointer<Int32> trustLevel);
 typedef _GetTrustLevel_Dart = int Function(
-    Pointer obj, Pointer<Uint32> trustLevel);
+    Pointer obj, Pointer<Int32> trustLevel);
 
 /// {@category Interface}
 /// {@category com}
@@ -57,7 +57,7 @@ class IInspectable extends IUnknown {
       .value
       .asFunction<_GetRuntimeClassName_Dart>()(ptr.ref.lpVtbl, className);
 
-  int GetTrustLevel(Pointer<Uint32> trustLevel) => ptr.ref.lpVtbl.value
+  int GetTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.lpVtbl.value
       .elementAt(5)
       .cast<Pointer<NativeFunction<_GetTrustLevel_Native>>>()
       .value

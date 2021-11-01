@@ -30,9 +30,9 @@ typedef _get_Length_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
 typedef _get_Length_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _get_CorrectiveAction_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
+    Pointer obj, Pointer<Int32> value);
 typedef _get_CorrectiveAction_Dart = int Function(
-    Pointer obj, Pointer<Uint32> value);
+    Pointer obj, Pointer<Int32> value);
 
 typedef _get_Replacement_Native = Int32 Function(
     Pointer obj, Pointer<Pointer<Utf16>> value);
@@ -85,7 +85,7 @@ class ISpellingError extends IUnknown {
   }
 
   int get CorrectiveAction {
-    final retValuePtr = calloc<Uint32>();
+    final retValuePtr = calloc<Int32>();
 
     try {
       final hr = ptr.ref.lpVtbl.value

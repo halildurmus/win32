@@ -27,10 +27,10 @@ typedef _GetTypeInfoCount_Native = Int32 Function(
 typedef _GetTypeInfoCount_Dart = int Function(
     Pointer obj, Pointer<Uint32> pctinfo);
 
-typedef _GetTypeInfo_Native = Int32 Function(
-    Pointer obj, Uint32 iTInfo, Uint32 lcid, Pointer<Pointer> ppTInfo);
+typedef _GetTypeInfo_Native = Int32 Function(Pointer obj, Uint32 iTInfo,
+    Uint32 lcid, Pointer<Pointer<COMObject>> ppTInfo);
 typedef _GetTypeInfo_Dart = int Function(
-    Pointer obj, int iTInfo, int lcid, Pointer<Pointer> ppTInfo);
+    Pointer obj, int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo);
 
 typedef _GetIDsOfNames_Native = Int32 Function(
     Pointer obj,
@@ -81,12 +81,13 @@ class IDispatch extends IUnknown {
       .value
       .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
 
-  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer> ppTInfo) => ptr
-      .ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<_GetTypeInfo_Native>>>()
-      .value
-      .asFunction<_GetTypeInfo_Dart>()(ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
+  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetTypeInfo_Native>>>()
+              .value
+              .asFunction<_GetTypeInfo_Dart>()(
+          ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
   int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
           int cNames, int lcid, Pointer<Int32> rgDispId) =>

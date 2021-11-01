@@ -22,10 +22,16 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IClassFactory = '{00000001-0000-0000-C000-000000000046}';
 
-typedef _CreateInstance_Native = Int32 Function(Pointer obj, Pointer pUnkOuter,
-    Pointer<GUID> riid, Pointer<Pointer> ppvObject);
-typedef _CreateInstance_Dart = int Function(Pointer obj, Pointer pUnkOuter,
-    Pointer<GUID> riid, Pointer<Pointer> ppvObject);
+typedef _CreateInstance_Native = Int32 Function(
+    Pointer obj,
+    Pointer<COMObject> pUnkOuter,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppvObject);
+typedef _CreateInstance_Dart = int Function(
+    Pointer obj,
+    Pointer<COMObject> pUnkOuter,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppvObject);
 
 typedef _LockServer_Native = Int32 Function(Pointer obj, Int32 fLock);
 typedef _LockServer_Dart = int Function(Pointer obj, int fLock);
@@ -37,8 +43,8 @@ class IClassFactory extends IUnknown {
 
   IClassFactory(Pointer<COMObject> ptr) : super(ptr);
 
-  int CreateInstance(
-          Pointer pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
+  int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
+          Pointer<Pointer> ppvObject) =>
       ptr.ref.lpVtbl.value
               .elementAt(3)
               .cast<Pointer<NativeFunction<_CreateInstance_Native>>>()

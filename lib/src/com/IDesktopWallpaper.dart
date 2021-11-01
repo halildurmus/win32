@@ -58,37 +58,40 @@ typedef _GetBackgroundColor_Native = Int32 Function(
 typedef _GetBackgroundColor_Dart = int Function(
     Pointer obj, Pointer<Uint32> color);
 
-typedef _SetPosition_Native = Int32 Function(Pointer obj, Uint32 position);
+typedef _SetPosition_Native = Int32 Function(Pointer obj, Int32 position);
 typedef _SetPosition_Dart = int Function(Pointer obj, int position);
 
 typedef _GetPosition_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> position);
-typedef _GetPosition_Dart = int Function(Pointer obj, Pointer<Uint32> position);
+    Pointer obj, Pointer<Int32> position);
+typedef _GetPosition_Dart = int Function(Pointer obj, Pointer<Int32> position);
 
-typedef _SetSlideshow_Native = Int32 Function(Pointer obj, Pointer items);
-typedef _SetSlideshow_Dart = int Function(Pointer obj, Pointer items);
+typedef _SetSlideshow_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> items);
+typedef _SetSlideshow_Dart = int Function(
+    Pointer obj, Pointer<COMObject> items);
 
 typedef _GetSlideshow_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> items);
-typedef _GetSlideshow_Dart = int Function(Pointer obj, Pointer<Pointer> items);
+    Pointer obj, Pointer<Pointer<COMObject>> items);
+typedef _GetSlideshow_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> items);
 
 typedef _SetSlideshowOptions_Native = Int32 Function(
-    Pointer obj, Uint32 options, Uint32 slideshowTick);
+    Pointer obj, Int32 options, Uint32 slideshowTick);
 typedef _SetSlideshowOptions_Dart = int Function(
     Pointer obj, int options, int slideshowTick);
 
 typedef _GetSlideshowOptions_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> options, Pointer<Uint32> slideshowTick);
+    Pointer obj, Pointer<Int32> options, Pointer<Uint32> slideshowTick);
 typedef _GetSlideshowOptions_Dart = int Function(
-    Pointer obj, Pointer<Uint32> options, Pointer<Uint32> slideshowTick);
+    Pointer obj, Pointer<Int32> options, Pointer<Uint32> slideshowTick);
 
 typedef _AdvanceSlideshow_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> monitorID, Uint32 direction);
+    Pointer obj, Pointer<Utf16> monitorID, Int32 direction);
 typedef _AdvanceSlideshow_Dart = int Function(
     Pointer obj, Pointer<Utf16> monitorID, int direction);
 
-typedef _GetStatus_Native = Int32 Function(Pointer obj, Pointer<Uint32> state);
-typedef _GetStatus_Dart = int Function(Pointer obj, Pointer<Uint32> state);
+typedef _GetStatus_Native = Int32 Function(Pointer obj, Pointer<Int32> state);
+typedef _GetStatus_Dart = int Function(Pointer obj, Pointer<Int32> state);
 
 typedef _Enable_Native = Int32 Function(Pointer obj, Int32 enable);
 typedef _Enable_Dart = int Function(Pointer obj, int enable);
@@ -157,19 +160,19 @@ class IDesktopWallpaper extends IUnknown {
       .value
       .asFunction<_SetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int GetPosition(Pointer<Uint32> position) => ptr.ref.lpVtbl.value
+  int GetPosition(Pointer<Int32> position) => ptr.ref.lpVtbl.value
       .elementAt(11)
       .cast<Pointer<NativeFunction<_GetPosition_Native>>>()
       .value
       .asFunction<_GetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int SetSlideshow(Pointer items) => ptr.ref.lpVtbl.value
+  int SetSlideshow(Pointer<COMObject> items) => ptr.ref.lpVtbl.value
       .elementAt(12)
       .cast<Pointer<NativeFunction<_SetSlideshow_Native>>>()
       .value
       .asFunction<_SetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
 
-  int GetSlideshow(Pointer<Pointer> items) => ptr.ref.lpVtbl.value
+  int GetSlideshow(Pointer<Pointer<COMObject>> items) => ptr.ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetSlideshow_Native>>>()
       .value
@@ -184,7 +187,7 @@ class IDesktopWallpaper extends IUnknown {
           ptr.ref.lpVtbl, options, slideshowTick);
 
   int GetSlideshowOptions(
-          Pointer<Uint32> options, Pointer<Uint32> slideshowTick) =>
+          Pointer<Int32> options, Pointer<Uint32> slideshowTick) =>
       ptr.ref.lpVtbl.value
               .elementAt(15)
               .cast<Pointer<NativeFunction<_GetSlideshowOptions_Native>>>()
@@ -200,7 +203,7 @@ class IDesktopWallpaper extends IUnknown {
               .asFunction<_AdvanceSlideshow_Dart>()(
           ptr.ref.lpVtbl, monitorID, direction);
 
-  int GetStatus(Pointer<Uint32> state) => ptr.ref.lpVtbl.value
+  int GetStatus(Pointer<Int32> state) => ptr.ref.lpVtbl.value
       .elementAt(17)
       .cast<Pointer<NativeFunction<_GetStatus_Native>>>()
       .value

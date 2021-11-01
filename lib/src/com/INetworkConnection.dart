@@ -23,9 +23,9 @@ import 'IDispatch.dart';
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetwork_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppNetwork);
+    Pointer obj, Pointer<Pointer<COMObject>> ppNetwork);
 typedef _GetNetwork_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppNetwork);
+    Pointer obj, Pointer<Pointer<COMObject>> ppNetwork);
 
 typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
@@ -38,9 +38,9 @@ typedef _get_IsConnected_Dart = int Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
 
 typedef _GetConnectivity_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pConnectivity);
+    Pointer obj, Pointer<Int32> pConnectivity);
 typedef _GetConnectivity_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pConnectivity);
+    Pointer obj, Pointer<Int32> pConnectivity);
 
 typedef _GetConnectionId_Native = Int32 Function(
     Pointer obj, Pointer<GUID> pgdConnectionId);
@@ -53,9 +53,9 @@ typedef _GetAdapterId_Dart = int Function(
     Pointer obj, Pointer<GUID> pgdAdapterId);
 
 typedef _GetDomainType_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pDomainType);
+    Pointer obj, Pointer<Int32> pDomainType);
 typedef _GetDomainType_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pDomainType);
+    Pointer obj, Pointer<Int32> pDomainType);
 
 /// {@category Interface}
 /// {@category com}
@@ -64,7 +64,7 @@ class INetworkConnection extends IDispatch {
 
   INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetwork(Pointer<Pointer> ppNetwork) => ptr.ref.lpVtbl.value
+  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.lpVtbl.value
       .elementAt(7)
       .cast<Pointer<NativeFunction<_GetNetwork_Native>>>()
       .value
@@ -109,7 +109,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Uint32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
       .elementAt(10)
       .cast<Pointer<NativeFunction<_GetConnectivity_Native>>>()
       .value
@@ -127,7 +127,7 @@ class INetworkConnection extends IDispatch {
       .value
       .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
 
-  int GetDomainType(Pointer<Uint32> pDomainType) => ptr.ref.lpVtbl.value
+  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetDomainType_Native>>>()
       .value

@@ -142,7 +142,7 @@ int DwmGetWindowAttribute(
     _DwmGetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
 late final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 dwAttribute, Pointer pvAttribute,
+    Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
         Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
         int cbAttribute)>('DwmGetWindowAttribute');
@@ -181,7 +181,7 @@ int DwmRenderGesture(int gt, int cContacts, Pointer<Uint32> pdwPointerID,
     _DwmRenderGesture(gt, cContacts, pdwPointerID, pPoints);
 
 late final _DwmRenderGesture = _dwmapi.lookupFunction<
-    Int32 Function(Uint32 gt, Uint32 cContacts, Pointer<Uint32> pdwPointerID,
+    Int32 Function(Int32 gt, Uint32 cContacts, Pointer<Uint32> pdwPointerID,
         Pointer<POINT> pPoints),
     int Function(int gt, int cContacts, Pointer<Uint32> pdwPointerID,
         Pointer<POINT> pPoints)>('DwmRenderGesture');
@@ -203,7 +203,7 @@ int DwmSetWindowAttribute(
     _DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
 late final _DwmSetWindowAttribute = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 dwAttribute, Pointer pvAttribute,
+    Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
         Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
         int cbAttribute)>('DwmSetWindowAttribute');

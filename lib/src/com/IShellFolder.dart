@@ -25,7 +25,7 @@ const IID_IShellFolder = '{000214E6-0000-0000-C000-000000000046}';
 typedef _ParseDisplayName_Native = Int32 Function(
     Pointer obj,
     IntPtr hwnd,
-    Pointer pbc,
+    Pointer<COMObject> pbc,
     Pointer<Utf16> pszDisplayName,
     Pointer<Uint32> pchEaten,
     Pointer<Pointer<ITEMIDLIST>> ppidl,
@@ -33,36 +33,36 @@ typedef _ParseDisplayName_Native = Int32 Function(
 typedef _ParseDisplayName_Dart = int Function(
     Pointer obj,
     int hwnd,
-    Pointer pbc,
+    Pointer<COMObject> pbc,
     Pointer<Utf16> pszDisplayName,
     Pointer<Uint32> pchEaten,
     Pointer<Pointer<ITEMIDLIST>> ppidl,
     Pointer<Uint32> pdwAttributes);
 
-typedef _EnumObjects_Native = Int32 Function(
-    Pointer obj, IntPtr hwnd, Uint32 grfFlags, Pointer<Pointer> ppenumIDList);
-typedef _EnumObjects_Dart = int Function(
-    Pointer obj, int hwnd, int grfFlags, Pointer<Pointer> ppenumIDList);
+typedef _EnumObjects_Native = Int32 Function(Pointer obj, IntPtr hwnd,
+    Uint32 grfFlags, Pointer<Pointer<COMObject>> ppenumIDList);
+typedef _EnumObjects_Dart = int Function(Pointer obj, int hwnd, int grfFlags,
+    Pointer<Pointer<COMObject>> ppenumIDList);
 
 typedef _BindToObject_Native = Int32 Function(
     Pointer obj,
     Pointer<ITEMIDLIST> pidl,
-    Pointer pbc,
+    Pointer<COMObject> pbc,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 typedef _BindToObject_Dart = int Function(Pointer obj, Pointer<ITEMIDLIST> pidl,
-    Pointer pbc, Pointer<GUID> riid, Pointer<Pointer> ppv);
+    Pointer<COMObject> pbc, Pointer<GUID> riid, Pointer<Pointer> ppv);
 
 typedef _BindToStorage_Native = Int32 Function(
     Pointer obj,
     Pointer<ITEMIDLIST> pidl,
-    Pointer pbc,
+    Pointer<COMObject> pbc,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 typedef _BindToStorage_Dart = int Function(
     Pointer obj,
     Pointer<ITEMIDLIST> pidl,
-    Pointer pbc,
+    Pointer<COMObject> pbc,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 
@@ -127,7 +127,7 @@ class IShellFolder extends IUnknown {
 
   int ParseDisplayName(
           int hwnd,
-          Pointer pbc,
+          Pointer<COMObject> pbc,
           Pointer<Utf16> pszDisplayName,
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<ITEMIDLIST>> ppidl,
@@ -139,7 +139,8 @@ class IShellFolder extends IUnknown {
               .asFunction<_ParseDisplayName_Dart>()(ptr.ref.lpVtbl, hwnd, pbc,
           pszDisplayName, pchEaten, ppidl, pdwAttributes);
 
-  int EnumObjects(int hwnd, int grfFlags, Pointer<Pointer> ppenumIDList) =>
+  int EnumObjects(
+          int hwnd, int grfFlags, Pointer<Pointer<COMObject>> ppenumIDList) =>
       ptr.ref.lpVtbl.value
               .elementAt(4)
               .cast<Pointer<NativeFunction<_EnumObjects_Native>>>()
@@ -147,8 +148,8 @@ class IShellFolder extends IUnknown {
               .asFunction<_EnumObjects_Dart>()(
           ptr.ref.lpVtbl, hwnd, grfFlags, ppenumIDList);
 
-  int BindToObject(Pointer<ITEMIDLIST> pidl, Pointer pbc, Pointer<GUID> riid,
-          Pointer<Pointer> ppv) =>
+  int BindToObject(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
+          Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
               .cast<Pointer<NativeFunction<_BindToObject_Native>>>()
@@ -156,8 +157,8 @@ class IShellFolder extends IUnknown {
               .asFunction<_BindToObject_Dart>()(
           ptr.ref.lpVtbl, pidl, pbc, riid, ppv);
 
-  int BindToStorage(Pointer<ITEMIDLIST> pidl, Pointer pbc, Pointer<GUID> riid,
-          Pointer<Pointer> ppv) =>
+  int BindToStorage(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
+          Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value
               .elementAt(6)
               .cast<Pointer<NativeFunction<_BindToStorage_Native>>>()

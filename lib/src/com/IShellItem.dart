@@ -25,16 +25,22 @@ const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
 /// @nodoc
 const IID_IShellItem = '{43826D1E-E718-42EE-BC55-A1E261C37BFE}';
 
-typedef _BindToHandler_Native = Int32 Function(Pointer obj, Pointer pbc,
-    Pointer<GUID> bhid, Pointer<GUID> riid, Pointer<Pointer> ppv);
-typedef _BindToHandler_Dart = int Function(Pointer obj, Pointer pbc,
+typedef _BindToHandler_Native = Int32 Function(
+    Pointer obj,
+    Pointer<COMObject> pbc,
+    Pointer<GUID> bhid,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppv);
+typedef _BindToHandler_Dart = int Function(Pointer obj, Pointer<COMObject> pbc,
     Pointer<GUID> bhid, Pointer<GUID> riid, Pointer<Pointer> ppv);
 
-typedef _GetParent_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppsi);
-typedef _GetParent_Dart = int Function(Pointer obj, Pointer<Pointer> ppsi);
+typedef _GetParent_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppsi);
+typedef _GetParent_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppsi);
 
 typedef _GetDisplayName_Native = Int32 Function(
-    Pointer obj, Uint32 sigdnName, Pointer<Pointer<Utf16>> ppszName);
+    Pointer obj, Int32 sigdnName, Pointer<Pointer<Utf16>> ppszName);
 typedef _GetDisplayName_Dart = int Function(
     Pointer obj, int sigdnName, Pointer<Pointer<Utf16>> ppszName);
 
@@ -44,9 +50,9 @@ typedef _GetAttributes_Dart = int Function(
     Pointer obj, int sfgaoMask, Pointer<Uint32> psfgaoAttribs);
 
 typedef _Compare_Native = Int32 Function(
-    Pointer obj, Pointer psi, Uint32 hint, Pointer<Int32> piOrder);
+    Pointer obj, Pointer<COMObject> psi, Uint32 hint, Pointer<Int32> piOrder);
 typedef _Compare_Dart = int Function(
-    Pointer obj, Pointer psi, int hint, Pointer<Int32> piOrder);
+    Pointer obj, Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder);
 
 /// {@category Interface}
 /// {@category com}
@@ -55,8 +61,8 @@ class IShellItem extends IUnknown {
 
   IShellItem(Pointer<COMObject> ptr) : super(ptr);
 
-  int BindToHandler(Pointer pbc, Pointer<GUID> bhid, Pointer<GUID> riid,
-          Pointer<Pointer> ppv) =>
+  int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
+          Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value
               .elementAt(3)
               .cast<Pointer<NativeFunction<_BindToHandler_Native>>>()
@@ -64,7 +70,7 @@ class IShellItem extends IUnknown {
               .asFunction<_BindToHandler_Dart>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<Pointer> ppsi) => ptr.ref.lpVtbl.value
+  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetParent_Native>>>()
       .value
@@ -85,7 +91,7 @@ class IShellItem extends IUnknown {
               .asFunction<_GetAttributes_Dart>()(
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
-  int Compare(Pointer psi, int hint, Pointer<Int32> piOrder) =>
+  int Compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) =>
       ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<Pointer<NativeFunction<_Compare_Native>>>()

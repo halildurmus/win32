@@ -26,9 +26,8 @@ typedef _GetId_Native = Int32 Function(Pointer obj, Pointer<GUID> pkfid);
 typedef _GetId_Dart = int Function(Pointer obj, Pointer<GUID> pkfid);
 
 typedef _GetCategory_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pCategory);
-typedef _GetCategory_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pCategory);
+    Pointer obj, Pointer<Int32> pCategory);
+typedef _GetCategory_Dart = int Function(Pointer obj, Pointer<Int32> pCategory);
 
 typedef _GetShellItem_Native = Int32 Function(
     Pointer obj, Uint32 dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv);
@@ -77,7 +76,7 @@ class IKnownFolder extends IUnknown {
       .value
       .asFunction<_GetId_Dart>()(ptr.ref.lpVtbl, pkfid);
 
-  int GetCategory(Pointer<Uint32> pCategory) => ptr.ref.lpVtbl.value
+  int GetCategory(Pointer<Int32> pCategory) => ptr.ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetCategory_Native>>>()
       .value

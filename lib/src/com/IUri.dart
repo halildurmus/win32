@@ -22,23 +22,23 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IUri = '{A39EE748-6A27-4817-A6F2-13914BEF5890}';
 
-typedef _GetPropertyBSTR_Native = Int32 Function(Pointer obj, Uint32 uriProp,
+typedef _GetPropertyBSTR_Native = Int32 Function(Pointer obj, Int32 uriProp,
     Pointer<Pointer<Utf16>> pbstrProperty, Uint32 dwFlags);
 typedef _GetPropertyBSTR_Dart = int Function(Pointer obj, int uriProp,
     Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags);
 
 typedef _GetPropertyLength_Native = Int32 Function(
-    Pointer obj, Uint32 uriProp, Pointer<Uint32> pcchProperty, Uint32 dwFlags);
+    Pointer obj, Int32 uriProp, Pointer<Uint32> pcchProperty, Uint32 dwFlags);
 typedef _GetPropertyLength_Dart = int Function(
     Pointer obj, int uriProp, Pointer<Uint32> pcchProperty, int dwFlags);
 
 typedef _GetPropertyDWORD_Native = Int32 Function(
-    Pointer obj, Uint32 uriProp, Pointer<Uint32> pdwProperty, Uint32 dwFlags);
+    Pointer obj, Int32 uriProp, Pointer<Uint32> pdwProperty, Uint32 dwFlags);
 typedef _GetPropertyDWORD_Dart = int Function(
     Pointer obj, int uriProp, Pointer<Uint32> pdwProperty, int dwFlags);
 
 typedef _HasProperty_Native = Int32 Function(
-    Pointer obj, Uint32 uriProp, Pointer<Int32> pfHasProperty);
+    Pointer obj, Int32 uriProp, Pointer<Int32> pfHasProperty);
 typedef _HasProperty_Dart = int Function(
     Pointer obj, int uriProp, Pointer<Int32> pfHasProperty);
 
@@ -138,9 +138,9 @@ typedef _GetProperties_Dart = int Function(
     Pointer obj, Pointer<Uint32> pdwFlags);
 
 typedef _IsEqual_Native = Int32 Function(
-    Pointer obj, Pointer pUri, Pointer<Int32> pfEqual);
+    Pointer obj, Pointer<COMObject> pUri, Pointer<Int32> pfEqual);
 typedef _IsEqual_Dart = int Function(
-    Pointer obj, Pointer pUri, Pointer<Int32> pfEqual);
+    Pointer obj, Pointer<COMObject> pUri, Pointer<Int32> pfEqual);
 
 /// {@category Interface}
 /// {@category com}
@@ -308,9 +308,10 @@ class IUri extends IUnknown {
       .value
       .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, pdwFlags);
 
-  int IsEqual(Pointer pUri, Pointer<Int32> pfEqual) => ptr.ref.lpVtbl.value
-      .elementAt(27)
-      .cast<Pointer<NativeFunction<_IsEqual_Native>>>()
-      .value
-      .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pUri, pfEqual);
+  int IsEqual(Pointer<COMObject> pUri, Pointer<Int32> pfEqual) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(27)
+          .cast<Pointer<NativeFunction<_IsEqual_Native>>>()
+          .value
+          .asFunction<_IsEqual_Dart>()(ptr.ref.lpVtbl, pUri, pfEqual);
 }
