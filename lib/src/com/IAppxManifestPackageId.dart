@@ -27,9 +27,9 @@ typedef _GetName_Native = Int32 Function(
 typedef _GetName_Dart = int Function(Pointer obj, Pointer<Pointer<Utf16>> name);
 
 typedef _GetArchitecture_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> architecture);
+    Pointer obj, Pointer<Int32> architecture);
 typedef _GetArchitecture_Dart = int Function(
-    Pointer obj, Pointer<Uint32> architecture);
+    Pointer obj, Pointer<Int32> architecture);
 
 typedef _GetPublisher_Native = Int32 Function(
     Pointer obj, Pointer<Pointer<Utf16>> publisher);
@@ -74,7 +74,7 @@ class IAppxManifestPackageId extends IUnknown {
       .value
       .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
 
-  int GetArchitecture(Pointer<Uint32> architecture) => ptr.ref.lpVtbl.value
+  int GetArchitecture(Pointer<Int32> architecture) => ptr.ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetArchitecture_Native>>>()
       .value

@@ -23,8 +23,8 @@ import 'IUnknown.dart';
 const IID_ISpellCheckerChangedEventHandler =
     '{0B83A5B0-792F-4EAB-9799-ACF52C5ED08A}';
 
-typedef _Invoke_Native = Int32 Function(Pointer obj, Pointer sender);
-typedef _Invoke_Dart = int Function(Pointer obj, Pointer sender);
+typedef _Invoke_Native = Int32 Function(Pointer obj, Pointer<COMObject> sender);
+typedef _Invoke_Dart = int Function(Pointer obj, Pointer<COMObject> sender);
 
 /// {@category Interface}
 /// {@category com}
@@ -33,7 +33,7 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
 
   ISpellCheckerChangedEventHandler(Pointer<COMObject> ptr) : super(ptr);
 
-  int Invoke(Pointer sender) => ptr.ref.lpVtbl.value
+  int Invoke(Pointer<COMObject> sender) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_Invoke_Native>>>()
       .value

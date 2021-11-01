@@ -23,20 +23,20 @@ import 'IShellItem.dart';
 const IID_IShellItem2 = '{7E9FB0D3-919F-4307-AB2E-9B1860310C93}';
 
 typedef _GetPropertyStore_Native = Int32 Function(
-    Pointer obj, Uint32 flags, Pointer<GUID> riid, Pointer<Pointer> ppv);
+    Pointer obj, Int32 flags, Pointer<GUID> riid, Pointer<Pointer> ppv);
 typedef _GetPropertyStore_Dart = int Function(
     Pointer obj, int flags, Pointer<GUID> riid, Pointer<Pointer> ppv);
 
 typedef _GetPropertyStoreWithCreateObject_Native = Int32 Function(
     Pointer obj,
-    Uint32 flags,
-    Pointer punkCreateObject,
+    Int32 flags,
+    Pointer<COMObject> punkCreateObject,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 typedef _GetPropertyStoreWithCreateObject_Dart = int Function(
     Pointer obj,
     int flags,
-    Pointer punkCreateObject,
+    Pointer<COMObject> punkCreateObject,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 
@@ -44,7 +44,7 @@ typedef _GetPropertyStoreForKeys_Native = Int32 Function(
     Pointer obj,
     Pointer<PROPERTYKEY> rgKeys,
     Uint32 cKeys,
-    Uint32 flags,
+    Int32 flags,
     Pointer<GUID> riid,
     Pointer<Pointer> ppv);
 typedef _GetPropertyStoreForKeys_Dart = int Function(
@@ -60,8 +60,8 @@ typedef _GetPropertyDescriptionList_Native = Int32 Function(Pointer obj,
 typedef _GetPropertyDescriptionList_Dart = int Function(Pointer obj,
     Pointer<PROPERTYKEY> keyType, Pointer<GUID> riid, Pointer<Pointer> ppv);
 
-typedef _Update_Native = Int32 Function(Pointer obj, Pointer pbc);
-typedef _Update_Dart = int Function(Pointer obj, Pointer pbc);
+typedef _Update_Native = Int32 Function(Pointer obj, Pointer<COMObject> pbc);
+typedef _Update_Dart = int Function(Pointer obj, Pointer<COMObject> pbc);
 
 typedef _GetProperty_Native = Int32 Function(
     Pointer obj, Pointer<PROPERTYKEY> key, Pointer<PROPVARIANT> ppropvar);
@@ -119,8 +119,11 @@ class IShellItem2 extends IShellItem {
           ptr.ref.lpVtbl, flags, riid, ppv);
 
   int
-      GetPropertyStoreWithCreateObject(int flags, Pointer punkCreateObject,
-              Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+      GetPropertyStoreWithCreateObject(
+              int flags,
+              Pointer<COMObject> punkCreateObject,
+              Pointer<GUID> riid,
+              Pointer<Pointer> ppv) =>
           ptr.ref.lpVtbl.value
                   .elementAt(9)
                   .cast<
@@ -149,7 +152,7 @@ class IShellItem2 extends IShellItem {
               .asFunction<_GetPropertyDescriptionList_Dart>()(
           ptr.ref.lpVtbl, keyType, riid, ppv);
 
-  int Update(Pointer pbc) => ptr.ref.lpVtbl.value
+  int Update(Pointer<COMObject> pbc) => ptr.ref.lpVtbl.value
       .elementAt(12)
       .cast<Pointer<NativeFunction<_Update_Native>>>()
       .value

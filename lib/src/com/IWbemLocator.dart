@@ -33,8 +33,8 @@ typedef _ConnectServer_Native = Int32 Function(
     Pointer<Utf16> strLocale,
     Int32 lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer pCtx,
-    Pointer<Pointer> ppNamespace);
+    Pointer<COMObject> pCtx,
+    Pointer<Pointer<COMObject>> ppNamespace);
 typedef _ConnectServer_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strNetworkResource,
@@ -43,8 +43,8 @@ typedef _ConnectServer_Dart = int Function(
     Pointer<Utf16> strLocale,
     int lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer pCtx,
-    Pointer<Pointer> ppNamespace);
+    Pointer<COMObject> pCtx,
+    Pointer<Pointer<COMObject>> ppNamespace);
 
 /// {@category Interface}
 /// {@category com}
@@ -60,8 +60,8 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strLocale,
           int lSecurityFlags,
           Pointer<Utf16> strAuthority,
-          Pointer pCtx,
-          Pointer<Pointer> ppNamespace) =>
+          Pointer<COMObject> pCtx,
+          Pointer<Pointer<COMObject>> ppNamespace) =>
       ptr.ref.lpVtbl.value
               .elementAt(3)
               .cast<Pointer<NativeFunction<_ConnectServer_Native>>>()

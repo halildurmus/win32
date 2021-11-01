@@ -1,242 +1,233 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:winmd/winmd.dart';
 
 import 'win32_typemap.dart';
 
-const Map<String, String> specialTypes = {
-  'System.Guid': 'GUID',
-  'Windows.Win32.System.SystemServices.LARGE_INTEGER': 'Int64',
-  'Windows.Win32.System.SystemServices.ULARGE_INTEGER': 'Uint64',
+class TypeTuple {
+  final String nativeType;
+  final String dartType;
+  final String attribute;
+
+  const TypeTuple(this.nativeType, this.dartType, {this.attribute = ''});
+}
+
+const Map<BaseType, TypeTuple> baseNativeMapping = {
+  BaseType.Void: TypeTuple('Void', 'void'),
+  BaseType.Boolean: TypeTuple('Bool', 'bool', attribute: '@Bool()'),
+  BaseType.Int8: TypeTuple('Int8', 'int', attribute: '@Int8()'),
+  BaseType.Uint8: TypeTuple('Uint8', 'int', attribute: '@Uint8()'),
+  BaseType.Int16: TypeTuple('Int16', 'int', attribute: '@Int16()'),
+  BaseType.Uint16: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+  BaseType.Int32: TypeTuple('Int32', 'int', attribute: '@Int32()'),
+  BaseType.Uint32: TypeTuple('Uint32', 'int', attribute: '@Uint32()'),
+  BaseType.Int64: TypeTuple('Int64', 'int', attribute: '@Int64()'),
+  BaseType.Uint64: TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
+  BaseType.IntPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.Float: TypeTuple('Float', 'double', attribute: '@Float()'),
+  BaseType.Double: TypeTuple('Double', 'double', attribute: '@Double()'),
+  BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+};
+const Map<String, TypeTuple> specialTypes = {
+  'Windows.Win32.Foundation.BSTR':
+      TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
+  'Windows.Win32.Foundation.PWSTR':
+      TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
+  'Windows.Win32.Foundation.PSTR': TypeTuple('Pointer<Utf8>', 'Pointer<Utf8>'),
+  'Windows.Win32.Foundation.LARGE_INTEGER':
+      TypeTuple('Int64', 'int', attribute: '@Int64()'),
+  'Windows.Win32.Foundation.ULARGE_INTEGER':
+      TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
+  'System.Guid': TypeTuple('GUID', 'GUID'),
+  'Windows.Foundation.HResult':
+      TypeTuple('Int32', 'int', attribute: '@Int32()'),
 };
 
-/// Takes a WinMD type and builds a Dart representation of it.
 class TypeProjector {
   final TypeIdentifier typeIdentifier;
+  late final TypeTuple projection;
 
-  const TypeProjector(this.typeIdentifier);
-
-  bool get isWin32Type => typeIdentifier.name.startsWith('Windows.Win32');
-
-  // The Win32 metadata wraps types like HANDLE into a strongly-typed equivalent
-  // (e.g. NonCloseableHandle). That seems unnecessary for now, and so we're
-  // going to unwrap that to its underlying value.
-  bool get isWin32WrappedType {
-    final scope = MetadataStore.getWin32Scope();
-
-    final valueTypeDef = scope.findTypeDef(typeIdentifier.name);
-
-    return (valueTypeDef?.fields.length == 1 &&
-        valueTypeDef?.fields.first.name == 'Value');
+  TypeProjector(this.typeIdentifier) {
+    projection = projectType();
   }
 
-  /// Converts from a Win32 type (e.g. BOOL, UINT, DWORD) to the underlying Dart
-  /// FFI native type (e.g. Uint32).
-  String _convertToFFIType(String win32Type) {
-    if (win32TypeMap.containsKey(win32Type)) {
-      return win32TypeMap[win32Type]!;
+  String get attribute => projection.attribute;
+  String get nativeType => projection.nativeType;
+  String get dartType => projection.dartType;
+
+  bool get isIntrinsic =>
+      baseNativeMapping.keys.contains(typeIdentifier.baseType);
+
+  bool get isWin32SpecialType =>
+      specialTypes.keys.contains(typeIdentifier.name);
+
+  bool get isString => typeIdentifier.baseType == BaseType.String;
+
+  bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
+
+  bool get isWrappedValueType =>
+      typeIdentifier.baseType == BaseType.ValueTypeModifier;
+
+  bool get isPointerType =>
+      typeIdentifier.baseType == BaseType.PointerTypeModifier;
+
+  bool get isArrayType => typeIdentifier.baseType == BaseType.ArrayTypeModifier;
+
+  bool get isWin32Delegate =>
+      typeIdentifier.baseType == BaseType.ClassTypeModifier &&
+      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+
+  // bool get isComInterface {
+  //   if (typeIdentifier.name.endsWith('IUnknown')) {
+  //     return true;
+  //   }
+
+  //   // Keep checking up the chain to see if this inherits from IUnknown
+  //   var interfaces = typeIdentifier.type?.interfaces;
+  //   while (interfaces != null && interfaces.isNotEmpty) {
+  //     if (interfaces.first.name.endsWith('IUnknown')) {
+  //       return true;
+  //     }
+  //     interfaces = interfaces.first.interfaces;
+  //   }
+
+  //   return false;
+  // }
+
+  bool get isInterface => typeIdentifier.type?.isInterface ?? false;
+
+  TypeTuple unwrapEnumType() {
+    final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;
+    if (fieldType == null) {
+      throw Exception('Enum $typeIdentifier is missing value__');
+    }
+    return TypeProjector(fieldType).projection;
+  }
+
+  TypeTuple unwrapValueType() {
+    final wrappedType = typeIdentifier.type;
+    if (wrappedType == null) {
+      throw Exception(
+          'Wrapped type TypeIdentifier missing for $typeIdentifier.');
+    }
+
+    // A type like HWND
+    if (wrappedType
+        .customAttributeAsBytes('Windows.Win32.Interop.NativeTypedefAttribute')
+        .isNotEmpty) {
+      final typeIdentifier = wrappedType.fields.first.typeIdentifier;
+      return TypeProjector(typeIdentifier).projection;
     } else {
-      if (win32Type.startsWith('LP')) {
-        return 'Pointer<${win32Type.substring(2)}>';
-      }
-      // It's a STRUCT (or an unknown type, in which case it will fail Dart
-      // analysis.)
-      return win32Type;
+      final typeClass =
+          stripAnsiUnicodeSuffix(wrappedType.name.split('.').last);
+      return TypeTuple(typeClass, typeClass);
     }
   }
 
-  TypeIdentifier? get win32WrappedType {
-    // Test to see if it's a type on our exceptions list, in which case do
-    // nothing.
-    final win32Type = typeIdentifier.type?.name.split('.').last ?? '';
-    final ffiNativeType = _convertToFFIType(win32Type);
-    if (ffiNativeType != win32Type) return null;
+  TypeTuple unwrapPointerType() {
+    if (typeIdentifier.typeArg == null) {
+      throw Exception('Pointer type missing for $typeIdentifier.');
+    }
+    final typeArg = TypeProjector(typeIdentifier.typeArg!);
 
-    final scope = MetadataStore.getWin32Scope();
-    final valueTypeDef = scope.findTypeDef(typeIdentifier.name);
-    return valueTypeDef?.fields.first.typeIdentifier;
+    // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+    // Win32 meaning, which is more like "undefined type". We can
+    // model that with a generic Pointer in Dart.
+    final projection = typeArg.projection;
+    if (projection.nativeType == 'Void') {
+      return TypeTuple('Pointer', 'Pointer');
+    }
+
+    final nativeType = 'Pointer<${projection.nativeType}>';
+    final dartType = 'Pointer<${projection.nativeType}>';
+
+    return TypeTuple(nativeType, dartType);
   }
 
-  bool get isTypeAnEnum => typeIdentifier.type?.parent?.name == 'System.Enum';
-
-  bool get isTypeValueType =>
-      (typeIdentifier.baseType == BaseType.ValueTypeModifier ||
-          typeIdentifier.type?.parent?.name == 'System.ValueType');
-
-  String pointerType(TypeIdentifier typeIdentifier) {
-    // Is it a string pointer?
-    if (typeIdentifier.name == 'LPWSTR') {
-      return 'Pointer<Utf16>';
-    }
-    if (typeIdentifier.name == 'LPSTR') {
-      return 'Pointer<Utf8>';
-    }
-    // In ECMA-335, 'char' is understood to represent a wide character
-    if (typeIdentifier.name == 'char') {
-      return 'Pointer<Utf16>';
-    }
-    if (typeIdentifier.typeArg?.type?.parent?.name == 'System.Enum') {
-      return 'Pointer<Uint32>';
+  TypeTuple unwrapArrayType() {
+    if (typeIdentifier.typeArg == null ||
+        typeIdentifier.arrayDimensions == null) {
+      throw Exception('Array information missing for $typeIdentifier.');
     }
 
-    // Check if it's Pointer<T>, in which case we have work
-    final typeArgs = typeIdentifier.typeArg;
-    if (typeArgs != null) {
-      // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-      // Win32 meaning, which is more like "undefined type". We can
-      // model that with a generic Pointer in Dart.
+    final typeArg = TypeProjector(typeIdentifier.typeArg!);
+    final projection = typeArg.projection;
 
-      if (typeArgs.baseType == BaseType.Void) {
-        return 'Pointer';
-      }
+    final nativeType = 'Array<${projection.nativeType}>';
+    final dartType = 'Array<${projection.nativeType}>';
+    final upperBound = typeIdentifier.arrayDimensions?.first;
 
-      final T = TypeProjector(typeArgs).nativeType;
-      // If it's a Unicode Win32 type, strip off the ending 'W'.
-      if (T.endsWith('W')) {
-        return 'Pointer<${T.substring(0, T.length - 1)}>';
-      } else {
-        return 'Pointer<$T>';
-      }
-    } else {
-      return 'Pointer';
-    }
+    return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');
   }
 
-  /// Take a Dart FFI native type (e.g. `Uint32`) and return the equivalent Dart
-  /// type (e.g. `int`).
-  String get dartType {
-    final ffiType = nativeType;
+  TypeTuple unwrapCallbackType() {
+    final callbackType = typeIdentifier.name.split('.').last;
 
-    const intTypes = <String>[
-      'Int8',
-      'Int16',
-      'Int32',
-      'Int64',
-      'IntPtr',
-      'Uint8',
-      'Uint16',
-      'Uint32',
-      'Uint64'
-    ];
-
-    if (['Float', 'Double'].contains(ffiType)) {
-      return 'double';
+    // TODO: Remove in v3 -- for backward compat only
+    if (callbackTypeMapping.keys.contains(callbackType)) {
+      final mappedType = callbackTypeMapping[callbackType]!;
+      return TypeTuple(mappedType, mappedType);
     }
 
-    if (intTypes.contains(ffiType)) {
-      return 'int';
+    // TODO: Understand and fix (perhaps in winmd)
+    // Deal with PROC, FARPROC, NEARPROC
+    if (typeIdentifier.type
+            ?.findMethod('Invoke')
+            ?.returnType
+            .typeIdentifier
+            .baseType ==
+        BaseType.IntPtr) {
+      return baseNativeMapping[BaseType.IntPtr]!;
     }
 
-    if (ffiType == 'Void') {
-      return 'void';
-    }
+    final nativeType = 'Pointer<NativeFunction<$callbackType>>';
+    final dartType = 'Pointer<NativeFunction<$callbackType>>';
 
-    if (ffiType == '/* Boolean */ Uint8') {
-      return 'bool';
-    }
-
-    return ffiType;
+    return TypeTuple(nativeType, dartType);
   }
 
-  String get nativeType {
-    // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
-    // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
-    // enums are always signed or unsigned 32-bit values.
-    if (isTypeAnEnum) {
-      return 'Uint32';
+  TypeTuple projectType() {
+    // Could be an intrinsic base type (e.g. Int32)
+    if (isIntrinsic) {
+      return baseNativeMapping[typeIdentifier.baseType]!;
     }
 
-    // For now, treat GUIDs specially
-    if (specialTypes.containsKey(typeIdentifier.name)) {
+    // Could be a string or other special type that we want to custom-map
+    if (isWin32SpecialType) {
       return specialTypes[typeIdentifier.name]!;
     }
 
-    // Unwrap Win32 value types
-    if (isTypeValueType && isWin32Type && isWin32WrappedType) {
-      final wrappedType = win32WrappedType;
-      if (wrappedType != null) {
-        return TypeProjector(wrappedType).nativeType;
-      }
+    // This is used by WinRT for an HSTRING
+    if (isString) {
+      return TypeTuple('Pointer<IntPtr>', 'Pointer<IntPtr>');
     }
 
-    // Treat WinRT value types as Uint32
-    if (isTypeValueType && !isWin32Type) {
-      return 'Uint32';
+    // Could be an enum like FOLDERFLAGS
+    if (isEnumType) {
+      return unwrapEnumType();
     }
 
-    // Handle base types
-    switch (typeIdentifier.baseType) {
-      case BaseType.Void:
-        return 'Void';
-      case BaseType.Boolean:
-        return '/* Boolean */ Uint8';
-      case BaseType.Char:
-        return 'Uint16';
-      case BaseType.Int8:
-        return 'Int8';
-      case BaseType.Uint8:
-        return 'Uint8';
-      case BaseType.Int16:
-        return 'Int16';
-      case BaseType.Uint16:
-        return 'Uint16';
-      case BaseType.Int32:
-        return 'Int32';
-      case BaseType.Uint32:
-        return 'Uint32';
-      case BaseType.Int64:
-        return 'Int64';
-      case BaseType.Uint64:
-        return 'Uint64';
-      case BaseType.Float:
-        return 'Float';
-      case BaseType.Double:
-        return 'Double';
-      case BaseType.String:
-        return 'IntPtr';
-      case BaseType.Object:
-        return 'COMObject';
-      case BaseType.ClassVariableTypeModifier:
-      case BaseType.MethodVariableTypeModifier:
-        return 'Pointer';
-      case BaseType.GenericTypeModifier:
-      case BaseType.ArrayTypeModifier:
-        return TypeProjector(typeIdentifier.typeArg!).nativeType;
-      case BaseType.PointerTypeModifier:
-        return pointerType(typeIdentifier);
-      case BaseType.FunctionPointer:
-        return 'Pointer';
-      case BaseType.IntPtr:
-      case BaseType.UintPtr:
-        return 'IntPtr';
-      default:
+    // Could be a wrapped type (e.g. a HWND)
+    if (isWrappedValueType) {
+      return unwrapValueType();
     }
 
-    // COM type
-    if (typeIdentifier.type != null &&
-        typeIdentifier.type!.interfaces.isNotEmpty &&
-        typeIdentifier.type!.interfaces.first.name ==
-            'Windows.Win32.Com.IUnknown') {
-      return 'Pointer';
+    if (isPointerType) {
+      return unwrapPointerType();
     }
 
-    // If it's a Win32 type, we know how to get the type
-    if (typeIdentifier.type != null &&
-        typeIdentifier.type!.name.startsWith('Windows.Win32')) {
-      final win32Type = typeIdentifier.type?.name.split('.').last ?? '';
-      final ffiNativeType = _convertToFFIType(win32Type);
-      return ffiNativeType;
+    if (isArrayType) {
+      return unwrapArrayType();
     }
 
-    if (typeIdentifier.baseType == BaseType.ClassTypeModifier) {
-      // WinRT type
-      return 'Pointer';
+    if (isWin32Delegate) {
+      return unwrapCallbackType();
     }
 
-    // Something failed. Return something egregiously wrong, so that the
-    // analyzer picks it up as an error.
-    return '__${typeIdentifier.name}__';
+    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
+      return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+    }
+
+    // default: return the name as returned by metadata
+    throw Exception('Type information missing for $typeIdentifier.');
   }
 }

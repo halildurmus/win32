@@ -119,7 +119,7 @@ late final _SymFromToken = _dbghelp.lookupFunction<
 int SymGetExtendedOption(int option) => _SymGetExtendedOption(option);
 
 late final _SymGetExtendedOption = _dbghelp.lookupFunction<
-    Int32 Function(Uint32 option),
+    Int32 Function(Int32 option),
     int Function(int option)>('SymGetExtendedOption');
 
 /// Initializes the symbol handler for a process.
@@ -201,7 +201,7 @@ int SymSetExtendedOption(int option, int value) =>
     _SymSetExtendedOption(option, value);
 
 late final _SymSetExtendedOption = _dbghelp.lookupFunction<
-    Int32 Function(Uint32 option, Int32 value),
+    Int32 Function(Int32 option, Int32 value),
     int Function(int option, int value)>('SymSetExtendedOption');
 
 /// Sets the options mask.

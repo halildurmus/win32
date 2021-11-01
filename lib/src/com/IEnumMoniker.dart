@@ -23,9 +23,9 @@ import 'IUnknown.dart';
 const IID_IEnumMoniker = '{00000102-0000-0000-C000-000000000046}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
-    Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched);
-typedef _Next_Dart = int Function(Pointer obj, int celt, Pointer<Pointer> rgelt,
-    Pointer<Uint32> pceltFetched);
+    Pointer<Pointer<COMObject>> rgelt, Pointer<Uint32> pceltFetched);
+typedef _Next_Dart = int Function(Pointer obj, int celt,
+    Pointer<Pointer<COMObject>> rgelt, Pointer<Uint32> pceltFetched);
 
 typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
 typedef _Skip_Dart = int Function(Pointer obj, int celt);
@@ -33,8 +33,10 @@ typedef _Skip_Dart = int Function(Pointer obj, int celt);
 typedef _Reset_Native = Int32 Function(Pointer obj);
 typedef _Reset_Dart = int Function(Pointer obj);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppenum);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppenum);
+typedef _Clone_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppenum);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppenum);
 
 /// {@category Interface}
 /// {@category com}
@@ -43,7 +45,8 @@ class IEnumMoniker extends IUnknown {
 
   IEnumMoniker(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>
+  int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
+          Pointer<Uint32> pceltFetched) =>
       ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<Pointer<NativeFunction<_Next_Native>>>()
@@ -62,7 +65,7 @@ class IEnumMoniker extends IUnknown {
       .value
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer> ppenum) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
       .elementAt(6)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value

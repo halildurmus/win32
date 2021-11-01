@@ -28,22 +28,22 @@ typedef _GetConnectionInterface_Dart = int Function(
     Pointer obj, Pointer<GUID> pIID);
 
 typedef _GetConnectionPointContainer_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppCPC);
+    Pointer obj, Pointer<Pointer<COMObject>> ppCPC);
 typedef _GetConnectionPointContainer_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppCPC);
+    Pointer obj, Pointer<Pointer<COMObject>> ppCPC);
 
 typedef _Advise_Native = Int32 Function(
-    Pointer obj, Pointer pUnkSink, Pointer<Uint32> pdwCookie);
+    Pointer obj, Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie);
 typedef _Advise_Dart = int Function(
-    Pointer obj, Pointer pUnkSink, Pointer<Uint32> pdwCookie);
+    Pointer obj, Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie);
 
 typedef _Unadvise_Native = Int32 Function(Pointer obj, Uint32 dwCookie);
 typedef _Unadvise_Dart = int Function(Pointer obj, int dwCookie);
 
 typedef _EnumConnections_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppEnum);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnum);
 typedef _EnumConnections_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppEnum);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnum);
 
 /// {@category Interface}
 /// {@category com}
@@ -58,14 +58,14 @@ class IConnectionPoint extends IUnknown {
       .value
       .asFunction<_GetConnectionInterface_Dart>()(ptr.ref.lpVtbl, pIID);
 
-  int GetConnectionPointContainer(Pointer<Pointer> ppCPC) => ptr
+  int GetConnectionPointContainer(Pointer<Pointer<COMObject>> ppCPC) => ptr
       .ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetConnectionPointContainer_Native>>>()
       .value
       .asFunction<_GetConnectionPointContainer_Dart>()(ptr.ref.lpVtbl, ppCPC);
 
-  int Advise(Pointer pUnkSink, Pointer<Uint32> pdwCookie) =>
+  int Advise(Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<Pointer<NativeFunction<_Advise_Native>>>()
@@ -78,9 +78,10 @@ class IConnectionPoint extends IUnknown {
       .value
       .asFunction<_Unadvise_Dart>()(ptr.ref.lpVtbl, dwCookie);
 
-  int EnumConnections(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
-      .elementAt(7)
-      .cast<Pointer<NativeFunction<_EnumConnections_Native>>>()
-      .value
-      .asFunction<_EnumConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
+  int EnumConnections(Pointer<Pointer<COMObject>> ppEnum) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<Pointer<NativeFunction<_EnumConnections_Native>>>()
+          .value
+          .asFunction<_EnumConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
 }

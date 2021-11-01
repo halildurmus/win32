@@ -23,19 +23,19 @@ import 'IUnknown.dart';
 const IID_IAppxManifestReader7 = '{8EFE6F27-0CE0-4988-B32D-738EB63DB3B7}';
 
 typedef _GetDriverDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> driverDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> driverDependencies);
 typedef _GetDriverDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> driverDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> driverDependencies);
 
 typedef _GetOSPackageDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> osPackageDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> osPackageDependencies);
 typedef _GetOSPackageDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> osPackageDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> osPackageDependencies);
 
 typedef _GetHostRuntimeDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> hostRuntimeDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> hostRuntimeDependencies);
 typedef _GetHostRuntimeDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> hostRuntimeDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> hostRuntimeDependencies);
 
 /// {@category Interface}
 /// {@category com}
@@ -44,7 +44,7 @@ class IAppxManifestReader7 extends IUnknown {
 
   IAppxManifestReader7(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetDriverDependencies(Pointer<Pointer> driverDependencies) =>
+  int GetDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
       ptr.ref.lpVtbl.value
               .elementAt(3)
               .cast<Pointer<NativeFunction<_GetDriverDependencies_Native>>>()
@@ -52,7 +52,8 @@ class IAppxManifestReader7 extends IUnknown {
               .asFunction<_GetDriverDependencies_Dart>()(
           ptr.ref.lpVtbl, driverDependencies);
 
-  int GetOSPackageDependencies(Pointer<Pointer> osPackageDependencies) =>
+  int GetOSPackageDependencies(
+          Pointer<Pointer<COMObject>> osPackageDependencies) =>
       ptr.ref.lpVtbl.value
               .elementAt(4)
               .cast<Pointer<NativeFunction<_GetOSPackageDependencies_Native>>>()
@@ -60,11 +61,12 @@ class IAppxManifestReader7 extends IUnknown {
               .asFunction<_GetOSPackageDependencies_Dart>()(
           ptr.ref.lpVtbl, osPackageDependencies);
 
-  int GetHostRuntimeDependencies(Pointer<Pointer> hostRuntimeDependencies) => ptr
-          .ref.lpVtbl.value
-          .elementAt(5)
-          .cast<Pointer<NativeFunction<_GetHostRuntimeDependencies_Native>>>()
-          .value
-          .asFunction<_GetHostRuntimeDependencies_Dart>()(
-      ptr.ref.lpVtbl, hostRuntimeDependencies);
+  int GetHostRuntimeDependencies(
+          Pointer<Pointer<COMObject>> hostRuntimeDependencies) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<Pointer<NativeFunction<_GetHostRuntimeDependencies_Native>>>()
+              .value
+              .asFunction<_GetHostRuntimeDependencies_Dart>()(
+          ptr.ref.lpVtbl, hostRuntimeDependencies);
 }

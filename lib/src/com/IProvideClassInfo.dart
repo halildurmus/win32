@@ -23,8 +23,9 @@ import 'IUnknown.dart';
 const IID_IProvideClassInfo = '{B196B283-BAB4-101A-B69C-00AA00341D07}';
 
 typedef _GetClassInfo_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppTI);
-typedef _GetClassInfo_Dart = int Function(Pointer obj, Pointer<Pointer> ppTI);
+    Pointer obj, Pointer<Pointer<COMObject>> ppTI);
+typedef _GetClassInfo_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppTI);
 
 /// {@category Interface}
 /// {@category com}
@@ -33,7 +34,7 @@ class IProvideClassInfo extends IUnknown {
 
   IProvideClassInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassInfo(Pointer<Pointer> ppTI) => ptr.ref.lpVtbl.value
+  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_GetClassInfo_Native>>>()
       .value

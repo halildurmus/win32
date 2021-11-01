@@ -22,13 +22,14 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IShellItemFilter = '{2659B475-EEB8-48B7-8F07-B378810F48CF}';
 
-typedef _IncludeItem_Native = Int32 Function(Pointer obj, Pointer psi);
-typedef _IncludeItem_Dart = int Function(Pointer obj, Pointer psi);
+typedef _IncludeItem_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> psi);
+typedef _IncludeItem_Dart = int Function(Pointer obj, Pointer<COMObject> psi);
 
 typedef _GetEnumFlagsForItem_Native = Int32 Function(
-    Pointer obj, Pointer psi, Pointer<Uint32> pgrfFlags);
+    Pointer obj, Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags);
 typedef _GetEnumFlagsForItem_Dart = int Function(
-    Pointer obj, Pointer psi, Pointer<Uint32> pgrfFlags);
+    Pointer obj, Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags);
 
 /// {@category Interface}
 /// {@category com}
@@ -37,16 +38,17 @@ class IShellItemFilter extends IUnknown {
 
   IShellItemFilter(Pointer<COMObject> ptr) : super(ptr);
 
-  int IncludeItem(Pointer psi) => ptr.ref.lpVtbl.value
+  int IncludeItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_IncludeItem_Native>>>()
       .value
       .asFunction<_IncludeItem_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int GetEnumFlagsForItem(Pointer psi, Pointer<Uint32> pgrfFlags) => ptr
-      .ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<_GetEnumFlagsForItem_Native>>>()
-      .value
-      .asFunction<_GetEnumFlagsForItem_Dart>()(ptr.ref.lpVtbl, psi, pgrfFlags);
+  int GetEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<Pointer<NativeFunction<_GetEnumFlagsForItem_Native>>>()
+              .value
+              .asFunction<_GetEnumFlagsForItem_Dart>()(
+          ptr.ref.lpVtbl, psi, pgrfFlags);
 }

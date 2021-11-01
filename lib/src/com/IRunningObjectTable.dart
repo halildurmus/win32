@@ -22,21 +22,31 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IRunningObjectTable = '{00000010-0000-0000-C000-000000000046}';
 
-typedef _Register_Native = Int32 Function(Pointer obj, Uint32 grfFlags,
-    Pointer punkObject, Pointer pmkObjectName, Pointer<Uint32> pdwRegister);
-typedef _Register_Dart = int Function(Pointer obj, int grfFlags,
-    Pointer punkObject, Pointer pmkObjectName, Pointer<Uint32> pdwRegister);
+typedef _Register_Native = Int32 Function(
+    Pointer obj,
+    Uint32 grfFlags,
+    Pointer<COMObject> punkObject,
+    Pointer<COMObject> pmkObjectName,
+    Pointer<Uint32> pdwRegister);
+typedef _Register_Dart = int Function(
+    Pointer obj,
+    int grfFlags,
+    Pointer<COMObject> punkObject,
+    Pointer<COMObject> pmkObjectName,
+    Pointer<Uint32> pdwRegister);
 
 typedef _Revoke_Native = Int32 Function(Pointer obj, Uint32 dwRegister);
 typedef _Revoke_Dart = int Function(Pointer obj, int dwRegister);
 
-typedef _IsRunning_Native = Int32 Function(Pointer obj, Pointer pmkObjectName);
-typedef _IsRunning_Dart = int Function(Pointer obj, Pointer pmkObjectName);
+typedef _IsRunning_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> pmkObjectName);
+typedef _IsRunning_Dart = int Function(
+    Pointer obj, Pointer<COMObject> pmkObjectName);
 
-typedef _GetObject_Native = Int32 Function(
-    Pointer obj, Pointer pmkObjectName, Pointer<Pointer> ppunkObject);
-typedef _GetObject_Dart = int Function(
-    Pointer obj, Pointer pmkObjectName, Pointer<Pointer> ppunkObject);
+typedef _GetObject_Native = Int32 Function(Pointer obj,
+    Pointer<COMObject> pmkObjectName, Pointer<Pointer<COMObject>> ppunkObject);
+typedef _GetObject_Dart = int Function(Pointer obj,
+    Pointer<COMObject> pmkObjectName, Pointer<Pointer<COMObject>> ppunkObject);
 
 typedef _NoteChangeTime_Native = Int32 Function(
     Pointer obj, Uint32 dwRegister, Pointer<FILETIME> pfiletime);
@@ -44,14 +54,14 @@ typedef _NoteChangeTime_Dart = int Function(
     Pointer obj, int dwRegister, Pointer<FILETIME> pfiletime);
 
 typedef _GetTimeOfLastChange_Native = Int32 Function(
-    Pointer obj, Pointer pmkObjectName, Pointer<FILETIME> pfiletime);
+    Pointer obj, Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime);
 typedef _GetTimeOfLastChange_Dart = int Function(
-    Pointer obj, Pointer pmkObjectName, Pointer<FILETIME> pfiletime);
+    Pointer obj, Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime);
 
 typedef _EnumRunning_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppenumMoniker);
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumMoniker);
 typedef _EnumRunning_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppenumMoniker);
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumMoniker);
 
 /// {@category Interface}
 /// {@category com}
@@ -60,8 +70,8 @@ class IRunningObjectTable extends IUnknown {
 
   IRunningObjectTable(Pointer<COMObject> ptr) : super(ptr);
 
-  int Register(int grfFlags, Pointer punkObject, Pointer pmkObjectName,
-          Pointer<Uint32> pdwRegister) =>
+  int Register(int grfFlags, Pointer<COMObject> punkObject,
+          Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
       ptr.ref.lpVtbl.value
               .elementAt(3)
               .cast<Pointer<NativeFunction<_Register_Native>>>()
@@ -75,13 +85,14 @@ class IRunningObjectTable extends IUnknown {
       .value
       .asFunction<_Revoke_Dart>()(ptr.ref.lpVtbl, dwRegister);
 
-  int IsRunning(Pointer pmkObjectName) => ptr.ref.lpVtbl.value
+  int IsRunning(Pointer<COMObject> pmkObjectName) => ptr.ref.lpVtbl.value
       .elementAt(5)
       .cast<Pointer<NativeFunction<_IsRunning_Native>>>()
       .value
       .asFunction<_IsRunning_Dart>()(ptr.ref.lpVtbl, pmkObjectName);
 
-  int GetObject(Pointer pmkObjectName, Pointer<Pointer> ppunkObject) =>
+  int GetObject(Pointer<COMObject> pmkObjectName,
+          Pointer<Pointer<COMObject>> ppunkObject) =>
       ptr.ref.lpVtbl.value
               .elementAt(6)
               .cast<Pointer<NativeFunction<_GetObject_Native>>>()
@@ -97,7 +108,8 @@ class IRunningObjectTable extends IUnknown {
               .asFunction<_NoteChangeTime_Dart>()(
           ptr.ref.lpVtbl, dwRegister, pfiletime);
 
-  int GetTimeOfLastChange(Pointer pmkObjectName, Pointer<FILETIME> pfiletime) =>
+  int GetTimeOfLastChange(
+          Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime) =>
       ptr.ref.lpVtbl.value
               .elementAt(8)
               .cast<Pointer<NativeFunction<_GetTimeOfLastChange_Native>>>()
@@ -105,9 +117,10 @@ class IRunningObjectTable extends IUnknown {
               .asFunction<_GetTimeOfLastChange_Dart>()(
           ptr.ref.lpVtbl, pmkObjectName, pfiletime);
 
-  int EnumRunning(Pointer<Pointer> ppenumMoniker) => ptr.ref.lpVtbl.value
-      .elementAt(9)
-      .cast<Pointer<NativeFunction<_EnumRunning_Native>>>()
-      .value
-      .asFunction<_EnumRunning_Dart>()(ptr.ref.lpVtbl, ppenumMoniker);
+  int EnumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<Pointer<NativeFunction<_EnumRunning_Native>>>()
+          .value
+          .asFunction<_EnumRunning_Dart>()(ptr.ref.lpVtbl, ppenumMoniker);
 }

@@ -22,8 +22,10 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IAppxFilesEnumerator = '{F007EEAF-9831-411C-9847-917CDC62D1FE}';
 
-typedef _GetCurrent_Native = Int32 Function(Pointer obj, Pointer<Pointer> file);
-typedef _GetCurrent_Dart = int Function(Pointer obj, Pointer<Pointer> file);
+typedef _GetCurrent_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> file);
+typedef _GetCurrent_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> file);
 
 typedef _GetHasCurrent_Native = Int32 Function(
     Pointer obj, Pointer<Int32> hasCurrent);
@@ -40,7 +42,7 @@ class IAppxFilesEnumerator extends IUnknown {
 
   IAppxFilesEnumerator(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetCurrent(Pointer<Pointer> file) => ptr.ref.lpVtbl.value
+  int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.lpVtbl.value
       .elementAt(3)
       .cast<Pointer<NativeFunction<_GetCurrent_Native>>>()
       .value

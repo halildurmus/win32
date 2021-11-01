@@ -56,7 +56,7 @@ void main() {
     throw exception;
   }
 
-  final proxy = calloc<Pointer>();
+  final proxy = calloc<Pointer<COMObject>>();
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -110,7 +110,7 @@ void main() {
 
   // Use the IWbemServices pointer to make requests of WMI.
 
-  final pEnumerator = calloc<Pointer>();
+  final pEnumerator = calloc<Pointer<COMObject>>();
   IEnumWbemClassObject enumerator;
 
   // For example, query for all the running processes

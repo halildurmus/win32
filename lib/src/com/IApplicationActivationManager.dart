@@ -31,7 +31,7 @@ typedef _ActivateApplication_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> appUserModelId,
     Pointer<Utf16> arguments,
-    Uint32 options,
+    Int32 options,
     Pointer<Uint32> processId);
 typedef _ActivateApplication_Dart = int Function(
     Pointer obj,
@@ -43,25 +43,25 @@ typedef _ActivateApplication_Dart = int Function(
 typedef _ActivateForFile_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> appUserModelId,
-    Pointer itemArray,
+    Pointer<COMObject> itemArray,
     Pointer<Utf16> verb,
     Pointer<Uint32> processId);
 typedef _ActivateForFile_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> appUserModelId,
-    Pointer itemArray,
+    Pointer<COMObject> itemArray,
     Pointer<Utf16> verb,
     Pointer<Uint32> processId);
 
 typedef _ActivateForProtocol_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> appUserModelId,
-    Pointer itemArray,
+    Pointer<COMObject> itemArray,
     Pointer<Uint32> processId);
 typedef _ActivateForProtocol_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> appUserModelId,
-    Pointer itemArray,
+    Pointer<COMObject> itemArray,
     Pointer<Uint32> processId);
 
 /// {@category Interface}
@@ -80,8 +80,11 @@ class IApplicationActivationManager extends IUnknown {
               .asFunction<_ActivateApplication_Dart>()(
           ptr.ref.lpVtbl, appUserModelId, arguments, options, processId);
 
-  int ActivateForFile(Pointer<Utf16> appUserModelId, Pointer itemArray,
-          Pointer<Utf16> verb, Pointer<Uint32> processId) =>
+  int ActivateForFile(
+          Pointer<Utf16> appUserModelId,
+          Pointer<COMObject> itemArray,
+          Pointer<Utf16> verb,
+          Pointer<Uint32> processId) =>
       ptr.ref.lpVtbl.value
               .elementAt(4)
               .cast<Pointer<NativeFunction<_ActivateForFile_Native>>>()
@@ -89,8 +92,8 @@ class IApplicationActivationManager extends IUnknown {
               .asFunction<_ActivateForFile_Dart>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, verb, processId);
 
-  int ActivateForProtocol(Pointer<Utf16> appUserModelId, Pointer itemArray,
-          Pointer<Uint32> processId) =>
+  int ActivateForProtocol(Pointer<Utf16> appUserModelId,
+          Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
               .cast<Pointer<NativeFunction<_ActivateForProtocol_Native>>>()

@@ -1142,7 +1142,7 @@ late final _SaveDC =
 int SelectClipPath(int hdc, int mode) => _SelectClipPath(hdc, mode);
 
 late final _SelectClipPath = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Uint32 mode),
+    Int32 Function(IntPtr hdc, Int32 mode),
     int Function(int hdc, int mode)>('SelectClipPath');
 
 /// The SelectObject function selects an object into the specified device

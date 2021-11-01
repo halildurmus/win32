@@ -22,15 +22,15 @@ import 'IAppxManifestReader2.dart';
 /// @nodoc
 const IID_IAppxManifestReader3 = '{C43825AB-69B7-400A-9709-CC37F5A72D24}';
 
-typedef _GetCapabilitiesByCapabilityClass_Native = Int32 Function(
-    Pointer obj, Uint32 capabilityClass, Pointer<Pointer> capabilities);
+typedef _GetCapabilitiesByCapabilityClass_Native = Int32 Function(Pointer obj,
+    Int32 capabilityClass, Pointer<Pointer<COMObject>> capabilities);
 typedef _GetCapabilitiesByCapabilityClass_Dart = int Function(
-    Pointer obj, int capabilityClass, Pointer<Pointer> capabilities);
+    Pointer obj, int capabilityClass, Pointer<Pointer<COMObject>> capabilities);
 
 typedef _GetTargetDeviceFamilies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> targetDeviceFamilies);
+    Pointer obj, Pointer<Pointer<COMObject>> targetDeviceFamilies);
 typedef _GetTargetDeviceFamilies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> targetDeviceFamilies);
+    Pointer obj, Pointer<Pointer<COMObject>> targetDeviceFamilies);
 
 /// {@category Interface}
 /// {@category com}
@@ -41,7 +41,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
 
   int
       GetCapabilitiesByCapabilityClass(
-              int capabilityClass, Pointer<Pointer> capabilities) =>
+              int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
           ptr.ref.lpVtbl.value
                   .elementAt(13)
                   .cast<
@@ -52,7 +52,8 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
                   .asFunction<_GetCapabilitiesByCapabilityClass_Dart>()(
               ptr.ref.lpVtbl, capabilityClass, capabilities);
 
-  int GetTargetDeviceFamilies(Pointer<Pointer> targetDeviceFamilies) =>
+  int GetTargetDeviceFamilies(
+          Pointer<Pointer<COMObject>> targetDeviceFamilies) =>
       ptr.ref.lpVtbl.value
               .elementAt(14)
               .cast<Pointer<NativeFunction<_GetTargetDeviceFamilies_Native>>>()

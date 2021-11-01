@@ -27,8 +27,8 @@ typedef _GetAppName_Native = Int32 Function(
 typedef _GetAppName_Dart = int Function(
     Pointer obj, Pointer<Pointer<Utf16>> ppszName);
 
-typedef _GetUsage_Native = Int32 Function(Pointer obj, Pointer<Uint32> pfut);
-typedef _GetUsage_Dart = int Function(Pointer obj, Pointer<Uint32> pfut);
+typedef _GetUsage_Native = Int32 Function(Pointer obj, Pointer<Int32> pfut);
+typedef _GetUsage_Dart = int Function(Pointer obj, Pointer<Int32> pfut);
 
 typedef _GetCapabilities_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pdwCapFlags);
@@ -56,7 +56,7 @@ class IFileIsInUse extends IUnknown {
       .value
       .asFunction<_GetAppName_Dart>()(ptr.ref.lpVtbl, ppszName);
 
-  int GetUsage(Pointer<Uint32> pfut) => ptr.ref.lpVtbl.value
+  int GetUsage(Pointer<Int32> pfut) => ptr.ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetUsage_Native>>>()
       .value

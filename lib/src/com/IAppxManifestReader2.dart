@@ -23,9 +23,9 @@ import 'IAppxManifestReader.dart';
 const IID_IAppxManifestReader2 = '{D06F67BC-B31D-4EBA-A8AF-638E73E77B4D}';
 
 typedef _GetQualifiedResources_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> resources);
+    Pointer obj, Pointer<Pointer<COMObject>> resources);
 typedef _GetQualifiedResources_Dart = int Function(
-    Pointer obj, Pointer<Pointer> resources);
+    Pointer obj, Pointer<Pointer<COMObject>> resources);
 
 /// {@category Interface}
 /// {@category com}
@@ -34,9 +34,10 @@ class IAppxManifestReader2 extends IAppxManifestReader {
 
   IAppxManifestReader2(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetQualifiedResources(Pointer<Pointer> resources) => ptr.ref.lpVtbl.value
-      .elementAt(12)
-      .cast<Pointer<NativeFunction<_GetQualifiedResources_Native>>>()
-      .value
-      .asFunction<_GetQualifiedResources_Dart>()(ptr.ref.lpVtbl, resources);
+  int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<Pointer<NativeFunction<_GetQualifiedResources_Native>>>()
+          .value
+          .asFunction<_GetQualifiedResources_Dart>()(ptr.ref.lpVtbl, resources);
 }

@@ -107,6 +107,10 @@
         "namespace": "Windows.Win32.System.Console.CONSOLE_CURSOR_INFO",
         "comment": "Contains information about the console cursor."
     },
+    "CONSOLE_READCONSOLE_CONTROL": {
+        "namespace": "Windows.Win32.System.Console.CONSOLE_READCONSOLE_CONTROL",
+        "comment": "Contains information for a console read operation."
+    },
     "CONSOLE_SCREEN_BUFFER_INFO": {
         "namespace": "Windows.Win32.System.Console.CONSOLE_SCREEN_BUFFER_INFO",
         "comment": "Contains information about a console screen buffer."

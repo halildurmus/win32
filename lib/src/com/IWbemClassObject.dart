@@ -26,9 +26,9 @@ const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
 const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 
 typedef _GetQualifierSet_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppQualSet);
+    Pointer obj, Pointer<Pointer<COMObject>> ppQualSet);
 typedef _GetQualifierSet_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppQualSet);
+    Pointer obj, Pointer<Pointer<COMObject>> ppQualSet);
 
 typedef _Get_Native = Int32 Function(
     Pointer obj,
@@ -88,13 +88,15 @@ typedef _Next_Dart = int Function(
 typedef _EndEnumeration_Native = Int32 Function(Pointer obj);
 typedef _EndEnumeration_Dart = int Function(Pointer obj);
 
-typedef _GetPropertyQualifierSet_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> wszProperty, Pointer<Pointer> ppQualSet);
-typedef _GetPropertyQualifierSet_Dart = int Function(
-    Pointer obj, Pointer<Utf16> wszProperty, Pointer<Pointer> ppQualSet);
+typedef _GetPropertyQualifierSet_Native = Int32 Function(Pointer obj,
+    Pointer<Utf16> wszProperty, Pointer<Pointer<COMObject>> ppQualSet);
+typedef _GetPropertyQualifierSet_Dart = int Function(Pointer obj,
+    Pointer<Utf16> wszProperty, Pointer<Pointer<COMObject>> ppQualSet);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppCopy);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppCopy);
+typedef _Clone_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppCopy);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppCopy);
 
 typedef _GetObjectText_Native = Int32 Function(
     Pointer obj, Int32 lFlags, Pointer<Pointer<Utf16>> pstrObjectText);
@@ -102,19 +104,19 @@ typedef _GetObjectText_Dart = int Function(
     Pointer obj, int lFlags, Pointer<Pointer<Utf16>> pstrObjectText);
 
 typedef _SpawnDerivedClass_Native = Int32 Function(
-    Pointer obj, Int32 lFlags, Pointer<Pointer> ppNewClass);
+    Pointer obj, Int32 lFlags, Pointer<Pointer<COMObject>> ppNewClass);
 typedef _SpawnDerivedClass_Dart = int Function(
-    Pointer obj, int lFlags, Pointer<Pointer> ppNewClass);
+    Pointer obj, int lFlags, Pointer<Pointer<COMObject>> ppNewClass);
 
 typedef _SpawnInstance_Native = Int32 Function(
-    Pointer obj, Int32 lFlags, Pointer<Pointer> ppNewInstance);
+    Pointer obj, Int32 lFlags, Pointer<Pointer<COMObject>> ppNewInstance);
 typedef _SpawnInstance_Dart = int Function(
-    Pointer obj, int lFlags, Pointer<Pointer> ppNewInstance);
+    Pointer obj, int lFlags, Pointer<Pointer<COMObject>> ppNewInstance);
 
 typedef _CompareTo_Native = Int32 Function(
-    Pointer obj, Int32 lFlags, Pointer pCompareTo);
+    Pointer obj, Int32 lFlags, Pointer<COMObject> pCompareTo);
 typedef _CompareTo_Dart = int Function(
-    Pointer obj, int lFlags, Pointer pCompareTo);
+    Pointer obj, int lFlags, Pointer<COMObject> pCompareTo);
 
 typedef _GetPropertyOrigin_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> wszName, Pointer<Pointer<Utf16>> pstrClassName);
@@ -130,19 +132,27 @@ typedef _GetMethod_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> wszName,
     Int32 lFlags,
-    Pointer<Pointer> ppInSignature,
-    Pointer<Pointer> ppOutSignature);
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature);
 typedef _GetMethod_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> wszName,
     int lFlags,
-    Pointer<Pointer> ppInSignature,
-    Pointer<Pointer> ppOutSignature);
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature);
 
-typedef _PutMethod_Native = Int32 Function(Pointer obj, Pointer<Utf16> wszName,
-    Int32 lFlags, Pointer pInSignature, Pointer pOutSignature);
-typedef _PutMethod_Dart = int Function(Pointer obj, Pointer<Utf16> wszName,
-    int lFlags, Pointer pInSignature, Pointer pOutSignature);
+typedef _PutMethod_Native = Int32 Function(
+    Pointer obj,
+    Pointer<Utf16> wszName,
+    Int32 lFlags,
+    Pointer<COMObject> pInSignature,
+    Pointer<COMObject> pOutSignature);
+typedef _PutMethod_Dart = int Function(
+    Pointer obj,
+    Pointer<Utf16> wszName,
+    int lFlags,
+    Pointer<COMObject> pInSignature,
+    Pointer<COMObject> pOutSignature);
 
 typedef _DeleteMethod_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> wszName);
@@ -157,22 +167,22 @@ typedef _NextMethod_Native = Int32 Function(
     Pointer obj,
     Int32 lFlags,
     Pointer<Pointer<Utf16>> pstrName,
-    Pointer<Pointer> ppInSignature,
-    Pointer<Pointer> ppOutSignature);
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature);
 typedef _NextMethod_Dart = int Function(
     Pointer obj,
     int lFlags,
     Pointer<Pointer<Utf16>> pstrName,
-    Pointer<Pointer> ppInSignature,
-    Pointer<Pointer> ppOutSignature);
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature);
 
 typedef _EndMethodEnumeration_Native = Int32 Function(Pointer obj);
 typedef _EndMethodEnumeration_Dart = int Function(Pointer obj);
 
-typedef _GetMethodQualifierSet_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> wszMethod, Pointer<Pointer> ppQualSet);
-typedef _GetMethodQualifierSet_Dart = int Function(
-    Pointer obj, Pointer<Utf16> wszMethod, Pointer<Pointer> ppQualSet);
+typedef _GetMethodQualifierSet_Native = Int32 Function(Pointer obj,
+    Pointer<Utf16> wszMethod, Pointer<Pointer<COMObject>> ppQualSet);
+typedef _GetMethodQualifierSet_Dart = int Function(Pointer obj,
+    Pointer<Utf16> wszMethod, Pointer<Pointer<COMObject>> ppQualSet);
 
 typedef _GetMethodOrigin_Native = Int32 Function(Pointer obj,
     Pointer<Utf16> wszMethodName, Pointer<Pointer<Utf16>> pstrClassName);
@@ -186,11 +196,12 @@ class IWbemClassObject extends IUnknown {
 
   IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetQualifierSet(Pointer<Pointer> ppQualSet) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<Pointer<NativeFunction<_GetQualifierSet_Native>>>()
-      .value
-      .asFunction<_GetQualifierSet_Dart>()(ptr.ref.lpVtbl, ppQualSet);
+  int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetQualifierSet_Native>>>()
+          .value
+          .asFunction<_GetQualifierSet_Dart>()(ptr.ref.lpVtbl, ppQualSet);
 
   int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
@@ -246,7 +257,7 @@ class IWbemClassObject extends IUnknown {
       .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl);
 
   int GetPropertyQualifierSet(
-          Pointer<Utf16> wszProperty, Pointer<Pointer> ppQualSet) =>
+          Pointer<Utf16> wszProperty, Pointer<Pointer<COMObject>> ppQualSet) =>
       ptr.ref.lpVtbl.value
               .elementAt(11)
               .cast<Pointer<NativeFunction<_GetPropertyQualifierSet_Native>>>()
@@ -254,7 +265,7 @@ class IWbemClassObject extends IUnknown {
               .asFunction<_GetPropertyQualifierSet_Dart>()(
           ptr.ref.lpVtbl, wszProperty, ppQualSet);
 
-  int Clone(Pointer<Pointer> ppCopy) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppCopy) => ptr.ref.lpVtbl.value
       .elementAt(12)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value
@@ -268,7 +279,7 @@ class IWbemClassObject extends IUnknown {
               .asFunction<_GetObjectText_Dart>()(
           ptr.ref.lpVtbl, lFlags, pstrObjectText);
 
-  int SpawnDerivedClass(int lFlags, Pointer<Pointer> ppNewClass) =>
+  int SpawnDerivedClass(int lFlags, Pointer<Pointer<COMObject>> ppNewClass) =>
       ptr.ref.lpVtbl.value
               .elementAt(14)
               .cast<Pointer<NativeFunction<_SpawnDerivedClass_Native>>>()
@@ -276,18 +287,20 @@ class IWbemClassObject extends IUnknown {
               .asFunction<_SpawnDerivedClass_Dart>()(
           ptr.ref.lpVtbl, lFlags, ppNewClass);
 
-  int SpawnInstance(int lFlags, Pointer<Pointer> ppNewInstance) => ptr
-      .ref.lpVtbl.value
-      .elementAt(15)
-      .cast<Pointer<NativeFunction<_SpawnInstance_Native>>>()
-      .value
-      .asFunction<_SpawnInstance_Dart>()(ptr.ref.lpVtbl, lFlags, ppNewInstance);
+  int SpawnInstance(int lFlags, Pointer<Pointer<COMObject>> ppNewInstance) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(15)
+              .cast<Pointer<NativeFunction<_SpawnInstance_Native>>>()
+              .value
+              .asFunction<_SpawnInstance_Dart>()(
+          ptr.ref.lpVtbl, lFlags, ppNewInstance);
 
-  int CompareTo(int lFlags, Pointer pCompareTo) => ptr.ref.lpVtbl.value
-      .elementAt(16)
-      .cast<Pointer<NativeFunction<_CompareTo_Native>>>()
-      .value
-      .asFunction<_CompareTo_Dart>()(ptr.ref.lpVtbl, lFlags, pCompareTo);
+  int CompareTo(int lFlags, Pointer<COMObject> pCompareTo) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(16)
+          .cast<Pointer<NativeFunction<_CompareTo_Native>>>()
+          .value
+          .asFunction<_CompareTo_Dart>()(ptr.ref.lpVtbl, lFlags, pCompareTo);
 
   int GetPropertyOrigin(
           Pointer<Utf16> wszName, Pointer<Pointer<Utf16>> pstrClassName) =>
@@ -304,8 +317,11 @@ class IWbemClassObject extends IUnknown {
       .value
       .asFunction<_InheritsFrom_Dart>()(ptr.ref.lpVtbl, strAncestor);
 
-  int GetMethod(Pointer<Utf16> wszName, int lFlags,
-          Pointer<Pointer> ppInSignature, Pointer<Pointer> ppOutSignature) =>
+  int GetMethod(
+          Pointer<Utf16> wszName,
+          int lFlags,
+          Pointer<Pointer<COMObject>> ppInSignature,
+          Pointer<Pointer<COMObject>> ppOutSignature) =>
       ptr.ref.lpVtbl.value
               .elementAt(19)
               .cast<Pointer<NativeFunction<_GetMethod_Native>>>()
@@ -313,8 +329,8 @@ class IWbemClassObject extends IUnknown {
               .asFunction<_GetMethod_Dart>()(
           ptr.ref.lpVtbl, wszName, lFlags, ppInSignature, ppOutSignature);
 
-  int PutMethod(Pointer<Utf16> wszName, int lFlags, Pointer pInSignature,
-          Pointer pOutSignature) =>
+  int PutMethod(Pointer<Utf16> wszName, int lFlags,
+          Pointer<COMObject> pInSignature, Pointer<COMObject> pOutSignature) =>
       ptr.ref.lpVtbl.value
               .elementAt(20)
               .cast<Pointer<NativeFunction<_PutMethod_Native>>>()
@@ -334,8 +350,11 @@ class IWbemClassObject extends IUnknown {
       .value
       .asFunction<_BeginMethodEnumeration_Dart>()(ptr.ref.lpVtbl, lEnumFlags);
 
-  int NextMethod(int lFlags, Pointer<Pointer<Utf16>> pstrName,
-          Pointer<Pointer> ppInSignature, Pointer<Pointer> ppOutSignature) =>
+  int NextMethod(
+          int lFlags,
+          Pointer<Pointer<Utf16>> pstrName,
+          Pointer<Pointer<COMObject>> ppInSignature,
+          Pointer<Pointer<COMObject>> ppOutSignature) =>
       ptr.ref.lpVtbl.value
               .elementAt(23)
               .cast<Pointer<NativeFunction<_NextMethod_Native>>>()
@@ -350,7 +369,7 @@ class IWbemClassObject extends IUnknown {
       .asFunction<_EndMethodEnumeration_Dart>()(ptr.ref.lpVtbl);
 
   int GetMethodQualifierSet(
-          Pointer<Utf16> wszMethod, Pointer<Pointer> ppQualSet) =>
+          Pointer<Utf16> wszMethod, Pointer<Pointer<COMObject>> ppQualSet) =>
       ptr.ref.lpVtbl.value
               .elementAt(25)
               .cast<Pointer<NativeFunction<_GetMethodQualifierSet_Native>>>()

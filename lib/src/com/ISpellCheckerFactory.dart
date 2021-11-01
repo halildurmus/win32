@@ -26,9 +26,9 @@ const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
 const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
 
 typedef _get_SupportedLanguages_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> value);
+    Pointer obj, Pointer<Pointer<COMObject>> value);
 typedef _get_SupportedLanguages_Dart = int Function(
-    Pointer obj, Pointer<Pointer> value);
+    Pointer obj, Pointer<Pointer<COMObject>> value);
 
 typedef _IsSupported_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> languageTag, Pointer<Int32> value);
@@ -36,9 +36,9 @@ typedef _IsSupported_Dart = int Function(
     Pointer obj, Pointer<Utf16> languageTag, Pointer<Int32> value);
 
 typedef _CreateSpellChecker_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value);
 typedef _CreateSpellChecker_Dart = int Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer> value);
+    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value);
 
 /// {@category Interface}
 /// {@category com}
@@ -47,8 +47,8 @@ class ISpellCheckerFactory extends IUnknown {
 
   ISpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
 
-  Pointer get SupportedLanguages {
-    final retValuePtr = calloc<Pointer>();
+  Pointer<COMObject> get SupportedLanguages {
+    final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -74,7 +74,8 @@ class ISpellCheckerFactory extends IUnknown {
           .value
           .asFunction<_IsSupported_Dart>()(ptr.ref.lpVtbl, languageTag, value);
 
-  int CreateSpellChecker(Pointer<Utf16> languageTag, Pointer<Pointer> value) =>
+  int CreateSpellChecker(
+          Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
               .cast<Pointer<NativeFunction<_CreateSpellChecker_Native>>>()

@@ -35,7 +35,7 @@ int GetDpiForMonitor(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
     _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
 
 late final _GetDpiForMonitor = _shcore.lookupFunction<
-    Int32 Function(IntPtr hmonitor, Uint32 dpiType, Pointer<Uint32> dpiX,
+    Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY),
     int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY)>('GetDpiForMonitor');
@@ -49,13 +49,12 @@ late final _GetDpiForMonitor = _shcore.lookupFunction<
 /// );
 /// ```
 /// {@category shcore}
-int GetProcessDpiAwareness(int hprocess, Pointer<Uint32> value) =>
+int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) =>
     _GetProcessDpiAwareness(hprocess, value);
 
 late final _GetProcessDpiAwareness = _shcore.lookupFunction<
-    Int32 Function(IntPtr hprocess, Pointer<Uint32> value),
-    int Function(
-        int hprocess, Pointer<Uint32> value)>('GetProcessDpiAwareness');
+    Int32 Function(IntPtr hprocess, Pointer<Int32> value),
+    int Function(int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
 
 /// Gets the scale factor of a specific monitor.
 ///
@@ -66,12 +65,12 @@ late final _GetProcessDpiAwareness = _shcore.lookupFunction<
 /// );
 /// ```
 /// {@category shcore}
-int GetScaleFactorForMonitor(int hMon, Pointer<Uint32> pScale) =>
+int GetScaleFactorForMonitor(int hMon, Pointer<Int32> pScale) =>
     _GetScaleFactorForMonitor(hMon, pScale);
 
 late final _GetScaleFactorForMonitor = _shcore.lookupFunction<
-    Int32 Function(IntPtr hMon, Pointer<Uint32> pScale),
-    int Function(int hMon, Pointer<Uint32> pScale)>('GetScaleFactorForMonitor');
+    Int32 Function(IntPtr hMon, Pointer<Int32> pScale),
+    int Function(int hMon, Pointer<Int32> pScale)>('GetScaleFactorForMonitor');
 
 /// Sets the process-default DPI awareness level. This is equivalent to
 /// calling SetProcessDpiAwarenessContext with the corresponding
@@ -86,5 +85,5 @@ late final _GetScaleFactorForMonitor = _shcore.lookupFunction<
 int SetProcessDpiAwareness(int value) => _SetProcessDpiAwareness(value);
 
 late final _SetProcessDpiAwareness = _shcore.lookupFunction<
-    Int32 Function(Uint32 value),
+    Int32 Function(Int32 value),
     int Function(int value)>('SetProcessDpiAwareness');

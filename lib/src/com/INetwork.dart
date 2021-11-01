@@ -48,14 +48,14 @@ typedef _GetNetworkId_Dart = int Function(
     Pointer obj, Pointer<GUID> pgdGuidNetworkId);
 
 typedef _GetDomainType_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pNetworkType);
+    Pointer obj, Pointer<Int32> pNetworkType);
 typedef _GetDomainType_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pNetworkType);
+    Pointer obj, Pointer<Int32> pNetworkType);
 
 typedef _GetNetworkConnections_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppEnumNetworkConnection);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumNetworkConnection);
 typedef _GetNetworkConnections_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppEnumNetworkConnection);
+    Pointer obj, Pointer<Pointer<COMObject>> ppEnumNetworkConnection);
 
 typedef _GetTimeCreatedAndConnected_Native = Int32 Function(
     Pointer obj,
@@ -81,16 +81,15 @@ typedef _get_IsConnected_Dart = int Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
 
 typedef _GetConnectivity_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pConnectivity);
+    Pointer obj, Pointer<Int32> pConnectivity);
 typedef _GetConnectivity_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pConnectivity);
+    Pointer obj, Pointer<Int32> pConnectivity);
 
 typedef _GetCategory_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pCategory);
-typedef _GetCategory_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pCategory);
+    Pointer obj, Pointer<Int32> pCategory);
+typedef _GetCategory_Dart = int Function(Pointer obj, Pointer<Int32> pCategory);
 
-typedef _SetCategory_Native = Int32 Function(Pointer obj, Uint32 NewCategory);
+typedef _SetCategory_Native = Int32 Function(Pointer obj, Int32 NewCategory);
 typedef _SetCategory_Dart = int Function(Pointer obj, int NewCategory);
 
 /// {@category Interface}
@@ -131,13 +130,14 @@ class INetwork extends IDispatch {
       .value
       .asFunction<_GetNetworkId_Dart>()(ptr.ref.lpVtbl, pgdGuidNetworkId);
 
-  int GetDomainType(Pointer<Uint32> pNetworkType) => ptr.ref.lpVtbl.value
+  int GetDomainType(Pointer<Int32> pNetworkType) => ptr.ref.lpVtbl.value
       .elementAt(12)
       .cast<Pointer<NativeFunction<_GetDomainType_Native>>>()
       .value
       .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pNetworkType);
 
-  int GetNetworkConnections(Pointer<Pointer> ppEnumNetworkConnection) =>
+  int GetNetworkConnections(
+          Pointer<Pointer<COMObject>> ppEnumNetworkConnection) =>
       ptr.ref.lpVtbl.value
               .elementAt(13)
               .cast<Pointer<NativeFunction<_GetNetworkConnections_Native>>>()
@@ -200,13 +200,13 @@ class INetwork extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Uint32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
       .elementAt(17)
       .cast<Pointer<NativeFunction<_GetConnectivity_Native>>>()
       .value
       .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
-  int GetCategory(Pointer<Uint32> pCategory) => ptr.ref.lpVtbl.value
+  int GetCategory(Pointer<Int32> pCategory) => ptr.ref.lpVtbl.value
       .elementAt(18)
       .cast<Pointer<NativeFunction<_GetCategory_Native>>>()
       .value

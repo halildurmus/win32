@@ -28,8 +28,9 @@ typedef _GetTypeAttr_Dart = int Function(
     Pointer obj, Pointer<Pointer<TYPEATTR>> ppTypeAttr);
 
 typedef _GetTypeComp_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppTComp);
-typedef _GetTypeComp_Dart = int Function(Pointer obj, Pointer<Pointer> ppTComp);
+    Pointer obj, Pointer<Pointer<COMObject>> ppTComp);
+typedef _GetTypeComp_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppTComp);
 
 typedef _GetFuncDesc_Native = Int32 Function(
     Pointer obj, Uint32 index, Pointer<Pointer<FUNCDESC>> ppFuncDesc);
@@ -106,7 +107,7 @@ typedef _GetDocumentation_Dart = int Function(
 typedef _GetDllEntry_Native = Int32 Function(
     Pointer obj,
     Int32 memid,
-    Uint32 invKind,
+    Int32 invKind,
     Pointer<Pointer<Utf16>> pBstrDllName,
     Pointer<Pointer<Utf16>> pBstrName,
     Pointer<Uint16> pwOrdinal);
@@ -119,19 +120,19 @@ typedef _GetDllEntry_Dart = int Function(
     Pointer<Uint16> pwOrdinal);
 
 typedef _GetRefTypeInfo_Native = Int32 Function(
-    Pointer obj, Uint32 hRefType, Pointer<Pointer> ppTInfo);
+    Pointer obj, Uint32 hRefType, Pointer<Pointer<COMObject>> ppTInfo);
 typedef _GetRefTypeInfo_Dart = int Function(
-    Pointer obj, int hRefType, Pointer<Pointer> ppTInfo);
+    Pointer obj, int hRefType, Pointer<Pointer<COMObject>> ppTInfo);
 
 typedef _AddressOfMember_Native = Int32 Function(
-    Pointer obj, Int32 memid, Uint32 invKind, Pointer<Pointer> ppv);
+    Pointer obj, Int32 memid, Int32 invKind, Pointer<Pointer> ppv);
 typedef _AddressOfMember_Dart = int Function(
     Pointer obj, int memid, int invKind, Pointer<Pointer> ppv);
 
-typedef _CreateInstance_Native = Int32 Function(Pointer obj, Pointer pUnkOuter,
-    Pointer<GUID> riid, Pointer<Pointer> ppvObj);
-typedef _CreateInstance_Dart = int Function(Pointer obj, Pointer pUnkOuter,
-    Pointer<GUID> riid, Pointer<Pointer> ppvObj);
+typedef _CreateInstance_Native = Int32 Function(Pointer obj,
+    Pointer<COMObject> pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObj);
+typedef _CreateInstance_Dart = int Function(Pointer obj,
+    Pointer<COMObject> pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObj);
 
 typedef _GetMops_Native = Int32 Function(
     Pointer obj, Int32 memid, Pointer<Pointer<Utf16>> pBstrMops);
@@ -139,9 +140,9 @@ typedef _GetMops_Dart = int Function(
     Pointer obj, int memid, Pointer<Pointer<Utf16>> pBstrMops);
 
 typedef _GetContainingTypeLib_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppTLib, Pointer<Uint32> pIndex);
+    Pointer obj, Pointer<Pointer<COMObject>> ppTLib, Pointer<Uint32> pIndex);
 typedef _GetContainingTypeLib_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppTLib, Pointer<Uint32> pIndex);
+    Pointer obj, Pointer<Pointer<COMObject>> ppTLib, Pointer<Uint32> pIndex);
 
 typedef _ReleaseTypeAttr_Native = Void Function(
     Pointer obj, Pointer<TYPEATTR> pTypeAttr);
@@ -171,7 +172,7 @@ class ITypeInfo extends IUnknown {
       .value
       .asFunction<_GetTypeAttr_Dart>()(ptr.ref.lpVtbl, ppTypeAttr);
 
-  int GetTypeComp(Pointer<Pointer> ppTComp) => ptr.ref.lpVtbl.value
+  int GetTypeComp(Pointer<Pointer<COMObject>> ppTComp) => ptr.ref.lpVtbl.value
       .elementAt(4)
       .cast<Pointer<NativeFunction<_GetTypeComp_Native>>>()
       .value
@@ -262,7 +263,7 @@ class ITypeInfo extends IUnknown {
               .asFunction<_GetDllEntry_Dart>()(
           ptr.ref.lpVtbl, memid, invKind, pBstrDllName, pBstrName, pwOrdinal);
 
-  int GetRefTypeInfo(int hRefType, Pointer<Pointer> ppTInfo) => ptr
+  int GetRefTypeInfo(int hRefType, Pointer<Pointer<COMObject>> ppTInfo) => ptr
       .ref.lpVtbl.value
       .elementAt(14)
       .cast<Pointer<NativeFunction<_GetRefTypeInfo_Native>>>()
@@ -276,8 +277,8 @@ class ITypeInfo extends IUnknown {
       .value
       .asFunction<_AddressOfMember_Dart>()(ptr.ref.lpVtbl, memid, invKind, ppv);
 
-  int CreateInstance(
-          Pointer pUnkOuter, Pointer<GUID> riid, Pointer<Pointer> ppvObj) =>
+  int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
+          Pointer<Pointer> ppvObj) =>
       ptr.ref.lpVtbl.value
               .elementAt(16)
               .cast<Pointer<NativeFunction<_CreateInstance_Native>>>()
@@ -292,7 +293,8 @@ class ITypeInfo extends IUnknown {
           .value
           .asFunction<_GetMops_Dart>()(ptr.ref.lpVtbl, memid, pBstrMops);
 
-  int GetContainingTypeLib(Pointer<Pointer> ppTLib, Pointer<Uint32> pIndex) =>
+  int GetContainingTypeLib(
+          Pointer<Pointer<COMObject>> ppTLib, Pointer<Uint32> pIndex) =>
       ptr.ref.lpVtbl.value
               .elementAt(18)
               .cast<Pointer<NativeFunction<_GetContainingTypeLib_Native>>>()

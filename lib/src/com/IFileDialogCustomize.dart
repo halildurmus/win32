@@ -67,12 +67,12 @@ typedef _SetControlLabel_Dart = int Function(
     Pointer obj, int dwIDCtl, Pointer<Utf16> pszLabel);
 
 typedef _GetControlState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Pointer<Uint32> pdwState);
+    Pointer obj, Uint32 dwIDCtl, Pointer<Int32> pdwState);
 typedef _GetControlState_Dart = int Function(
-    Pointer obj, int dwIDCtl, Pointer<Uint32> pdwState);
+    Pointer obj, int dwIDCtl, Pointer<Int32> pdwState);
 
 typedef _SetControlState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Uint32 dwState);
+    Pointer obj, Uint32 dwIDCtl, Int32 dwState);
 typedef _SetControlState_Dart = int Function(
     Pointer obj, int dwIDCtl, int dwState);
 
@@ -111,12 +111,12 @@ typedef _RemoveAllControlItems_Native = Int32 Function(
 typedef _RemoveAllControlItems_Dart = int Function(Pointer obj, int dwIDCtl);
 
 typedef _GetControlItemState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Pointer<Uint32> pdwState);
+    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Pointer<Int32> pdwState);
 typedef _GetControlItemState_Dart = int Function(
-    Pointer obj, int dwIDCtl, int dwIDItem, Pointer<Uint32> pdwState);
+    Pointer obj, int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState);
 
 typedef _SetControlItemState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Uint32 dwState);
+    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Int32 dwState);
 typedef _SetControlItemState_Dart = int Function(
     Pointer obj, int dwIDCtl, int dwIDItem, int dwState);
 
@@ -217,7 +217,7 @@ class IFileDialogCustomize extends IUnknown {
       .value
       .asFunction<_SetControlLabel_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int GetControlState(int dwIDCtl, Pointer<Uint32> pdwState) => ptr
+  int GetControlState(int dwIDCtl, Pointer<Int32> pdwState) => ptr
       .ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetControlState_Native>>>()
@@ -279,8 +279,7 @@ class IFileDialogCustomize extends IUnknown {
       .value
       .asFunction<_RemoveAllControlItems_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
 
-  int GetControlItemState(
-          int dwIDCtl, int dwIDItem, Pointer<Uint32> pdwState) =>
+  int GetControlItemState(int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState) =>
       ptr.ref.lpVtbl.value
               .elementAt(22)
               .cast<Pointer<NativeFunction<_GetControlItemState_Native>>>()

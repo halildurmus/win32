@@ -24,9 +24,9 @@ const IID_IAppxManifestApplicationsEnumerator =
     '{9EB8A55A-F04B-4D0D-808D-686185D4847A}';
 
 typedef _GetCurrent_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> application);
+    Pointer obj, Pointer<Pointer<COMObject>> application);
 typedef _GetCurrent_Dart = int Function(
-    Pointer obj, Pointer<Pointer> application);
+    Pointer obj, Pointer<Pointer<COMObject>> application);
 
 typedef _GetHasCurrent_Native = Int32 Function(
     Pointer obj, Pointer<Int32> hasCurrent);
@@ -43,11 +43,12 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
 
   IAppxManifestApplicationsEnumerator(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetCurrent(Pointer<Pointer> application) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<Pointer<NativeFunction<_GetCurrent_Native>>>()
-      .value
-      .asFunction<_GetCurrent_Dart>()(ptr.ref.lpVtbl, application);
+  int GetCurrent(Pointer<Pointer<COMObject>> application) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<Pointer<NativeFunction<_GetCurrent_Native>>>()
+          .value
+          .asFunction<_GetCurrent_Dart>()(ptr.ref.lpVtbl, application);
 
   int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.lpVtbl.value
       .elementAt(4)

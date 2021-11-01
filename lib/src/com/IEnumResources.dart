@@ -33,8 +33,10 @@ typedef _Skip_Dart = int Function(Pointer obj, int celt);
 typedef _Reset_Native = Int32 Function(Pointer obj);
 typedef _Reset_Dart = int Function(Pointer obj);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppenumr);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppenumr);
+typedef _Clone_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumr);
+typedef _Clone_Dart = int Function(
+    Pointer obj, Pointer<Pointer<COMObject>> ppenumr);
 
 /// {@category Interface}
 /// {@category com}
@@ -63,7 +65,7 @@ class IEnumResources extends IUnknown {
       .value
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer> ppenumr) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.lpVtbl.value
       .elementAt(6)
       .cast<Pointer<NativeFunction<_Clone_Native>>>()
       .value

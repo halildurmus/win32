@@ -450,7 +450,7 @@ class CHOOSEFONT extends Struct {
   @IntPtr()
   external int hInstance;
   external Pointer<Utf16> lpszStyle;
-  @Uint32()
+  @Uint16()
   external int nFontType;
   @Uint16()
   external int ___MISSING_ALIGNMENT__;
@@ -577,6 +577,20 @@ class CONSOLE_CURSOR_INFO extends Struct {
   external int dwSize;
   @Int32()
   external int bVisible;
+}
+
+/// Contains information for a console read operation.
+///
+/// {@category Struct}
+class CONSOLE_READCONSOLE_CONTROL extends Struct {
+  @Uint32()
+  external int nLength;
+  @Uint32()
+  external int nInitialChars;
+  @Uint32()
+  external int dwCtrlWakeupMask;
+  @Uint32()
+  external int dwControlKeyState;
 }
 
 /// Contains information about a console screen buffer.
@@ -766,7 +780,7 @@ class DIBSECTION extends Struct {
 class DISK_GEOMETRY extends Struct {
   @Int64()
   external int Cylinders;
-  @Uint32()
+  @Int32()
   external int MediaType;
   @Uint32()
   external int TracksPerCylinder;
@@ -879,9 +893,9 @@ class DOC_INFO_1 extends Struct {
 ///
 /// {@category Struct}
 class DOT11_AUTH_CIPHER_PAIR extends Struct {
-  @Uint32()
+  @Int32()
   external int AuthAlgoId;
-  @Uint32()
+  @Int32()
   external int CipherAlgoId;
 }
 
@@ -905,7 +919,7 @@ class DOT11_BSSID_LIST extends Struct {
 /// {@category Struct}
 class DOT11_NETWORK extends Struct {
   external DOT11_SSID dot11Ssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
 }
 
@@ -1172,11 +1186,11 @@ class FUNCDESC extends Struct {
   external int memid;
   external Pointer<Int32> lprgscode;
   external Pointer<ELEMDESC> lprgelemdescParam;
-  @Uint32()
+  @Int32()
   external int funckind;
-  @Uint32()
+  @Int32()
   external int invkind;
-  @Uint32()
+  @Int32()
   external int callconv;
   @Int16()
   external int cParams;
@@ -1431,7 +1445,7 @@ class JOB_INFO_1 extends Struct {
 ///
 /// {@category Struct}
 class KNOWNFOLDER_DEFINITION extends Struct {
-  @Uint32()
+  @Int32()
   external int category;
   external Pointer<Utf16> pszName;
   external Pointer<Utf16> pszDescription;
@@ -2181,7 +2195,7 @@ class NLM_SIMULATED_PROFILE_INFO extends Struct {
     }
   }
 
-  @Uint32()
+  @Int32()
   external int cost;
   @Uint32()
   external int UsageInMegabytes;
@@ -2635,7 +2649,7 @@ class POWERBROADCAST_SETTING extends Struct {
 ///
 /// {@category Struct}
 class PRINT_EXECUTION_DATA extends Struct {
-  @Uint32()
+  @Int32()
   external int context;
   @Uint32()
   external int clientAppPID;
@@ -2979,8 +2993,10 @@ class SECURITY_DESCRIPTOR extends Struct {
   external int Sbz1;
   @Uint16()
   external int Control;
-  external Pointer Owner;
-  external Pointer Group;
+  @IntPtr()
+  external int Owner;
+  @IntPtr()
+  external int Group;
   external Pointer<ACL> Sacl;
   external Pointer<ACL> Dacl;
 }
@@ -3437,7 +3453,8 @@ class TITLEBARINFOEX extends Struct {
 ///
 /// {@category Struct}
 class TOKEN_APPCONTAINER_INFORMATION extends Struct {
-  external Pointer TokenAppContainer;
+  @IntPtr()
+  external int TokenAppContainer;
 }
 
 /// Encapsulates data for touch input.
@@ -3491,7 +3508,7 @@ class TYPEATTR extends Struct {
   external Pointer<Utf16> lpstrSchema;
   @Uint32()
   external int cbSizeInstance;
-  @Uint32()
+  @Int32()
   external int typekind;
   @Uint16()
   external int cFuncs;
@@ -3583,11 +3600,11 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileFlagsMask;
   @Uint32()
   external int dwFileFlags;
-  @Uint32()
+  @Int32()
   external int dwFileOS;
-  @Uint32()
+  @Int32()
   external int dwFileType;
-  @Uint32()
+  @Int32()
   external int dwFileSubtype;
   @Uint32()
   external int dwFileDateMS;
@@ -3782,11 +3799,11 @@ class WINDOWPLACEMENT extends Struct {
 /// {@category Struct}
 class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
   external DOT11_SSID dot11Ssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
   @Array(6)
   external Array<Uint8> dot11Bssid;
-  @Uint32()
+  @Int32()
   external int dot11PhyType;
   @Uint32()
   external int uDot11PhyIndex;
@@ -3833,7 +3850,7 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
   }
 
   external DOT11_SSID dot11Ssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
   @Uint32()
   external int uNumberOfBssids;
@@ -3844,16 +3861,16 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
   @Uint32()
   external int uNumberOfPhyTypes;
   @Array(8)
-  external Array<Uint32> dot11PhyTypes;
+  external Array<Int32> dot11PhyTypes;
   @Int32()
   external int bMorePhyTypes;
   @Uint32()
   external int wlanSignalQuality;
   @Int32()
   external int bSecurityEnabled;
-  @Uint32()
+  @Int32()
   external int dot11DefaultAuthAlgorithm;
-  @Uint32()
+  @Int32()
   external int dot11DefaultCipherAlgorithm;
   @Uint32()
   external int dwFlags;
@@ -3884,9 +3901,9 @@ class WLAN_BSS_ENTRY extends Struct {
   external int uPhyId;
   @Array(6)
   external Array<Uint8> dot11Bssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
-  @Uint32()
+  @Int32()
   external int dot11BssPhyType;
   @Int32()
   external int lRssi;
@@ -3929,9 +3946,9 @@ class WLAN_BSS_LIST extends Struct {
 ///
 /// {@category Struct}
 class WLAN_CONNECTION_ATTRIBUTES extends Struct {
-  @Uint32()
+  @Int32()
   external int isState;
-  @Uint32()
+  @Int32()
   external int wlanConnectionMode;
   @Array(256)
   external Array<Uint16> _strProfileName;
@@ -3960,7 +3977,7 @@ class WLAN_CONNECTION_ATTRIBUTES extends Struct {
 ///
 /// {@category Struct}
 class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
-  @Uint32()
+  @Int32()
   external int wlanConnectionMode;
   @Array(256)
   external Array<Uint16> _strProfileName;
@@ -3981,7 +3998,7 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   }
 
   external DOT11_SSID dot11Ssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
   @Int32()
   external int bSecurityEnabled;
@@ -4013,12 +4030,12 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
 ///
 /// {@category Struct}
 class WLAN_CONNECTION_PARAMETERS extends Struct {
-  @Uint32()
+  @Int32()
   external int wlanConnectionMode;
   external Pointer<Utf16> strProfile;
   external Pointer<DOT11_SSID> pDot11Ssid;
   external Pointer<DOT11_BSSID_LIST> pDesiredBssidList;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
   @Uint32()
   external int dwFlags;
@@ -4079,7 +4096,7 @@ class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
 class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
   external WLAN_HOSTED_NETWORK_PEER_STATE OldState;
   external WLAN_HOSTED_NETWORK_PEER_STATE NewState;
-  @Uint32()
+  @Int32()
   external int PeerStateChangeReason;
 }
 
@@ -4090,7 +4107,7 @@ class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
 class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
   @Array(6)
   external Array<Uint8> PeerMacAddress;
-  @Uint32()
+  @Int32()
   external int PeerAuthState;
 }
 
@@ -4099,9 +4116,9 @@ class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
 ///
 /// {@category Struct}
 class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
-  @Uint32()
+  @Int32()
   external int dot11SoftwareRadioState;
-  @Uint32()
+  @Int32()
   external int dot11HardwareRadioState;
 }
 
@@ -4110,9 +4127,9 @@ class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
 ///
 /// {@category Struct}
 class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
-  @Uint32()
+  @Int32()
   external int dot11AuthAlgo;
-  @Uint32()
+  @Int32()
   external int dot11CipherAlgo;
 }
 
@@ -4121,11 +4138,11 @@ class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
 ///
 /// {@category Struct}
 class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
-  @Uint32()
+  @Int32()
   external int OldState;
-  @Uint32()
+  @Int32()
   external int NewState;
-  @Uint32()
+  @Int32()
   external int StateChangeReason;
 }
 
@@ -4134,12 +4151,12 @@ class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
 ///
 /// {@category Struct}
 class WLAN_HOSTED_NETWORK_STATUS extends Struct {
-  @Uint32()
+  @Int32()
   external int HostedNetworkState;
   external GUID IPDeviceID;
   @Array(6)
   external Array<Uint8> wlanHostedNetworkBSSID;
-  @Uint32()
+  @Int32()
   external int dot11PhyType;
   @Uint32()
   external int ulChannelFrequency;
@@ -4154,7 +4171,7 @@ class WLAN_HOSTED_NETWORK_STATUS extends Struct {
 ///
 /// {@category Struct}
 class WLAN_INTERFACE_CAPABILITY extends Struct {
-  @Uint32()
+  @Int32()
   external int interfaceType;
   @Int32()
   external int bDot11DSupported;
@@ -4165,7 +4182,7 @@ class WLAN_INTERFACE_CAPABILITY extends Struct {
   @Uint32()
   external int dwNumberOfSupportedPhys;
   @Array(64)
-  external Array<Uint32> dot11PhyTypes;
+  external Array<Int32> dot11PhyTypes;
 }
 
 /// The WLAN_INTERFACE_INFO structure contains information about a wireless
@@ -4192,7 +4209,7 @@ class WLAN_INTERFACE_INFO extends Struct {
     }
   }
 
-  @Uint32()
+  @Int32()
   external int isState;
 }
 
@@ -4245,7 +4262,7 @@ class WLAN_MAC_FRAME_STATISTICS extends Struct {
 ///
 /// {@category Struct}
 class WLAN_MSM_NOTIFICATION_DATA extends Struct {
-  @Uint32()
+  @Int32()
   external int wlanConnectionMode;
   @Array(256)
   external Array<Uint16> _strProfileName;
@@ -4266,7 +4283,7 @@ class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   }
 
   external DOT11_SSID dot11Ssid;
-  @Uint32()
+  @Int32()
   external int dot11BssType;
   @Array(6)
   external Array<Uint8> dot11MacAddr;
@@ -4330,9 +4347,9 @@ class WLAN_PHY_FRAME_STATISTICS extends Struct {
 class WLAN_PHY_RADIO_STATE extends Struct {
   @Uint32()
   external int dwPhyIndex;
-  @Uint32()
+  @Int32()
   external int dot11SoftwareRadioState;
-  @Uint32()
+  @Int32()
   external int dot11HardwareRadioState;
 }
 
@@ -4417,9 +4434,9 @@ class WLAN_SECURITY_ATTRIBUTES extends Struct {
   external int bSecurityEnabled;
   @Int32()
   external int bOneXEnabled;
-  @Uint32()
+  @Int32()
   external int dot11AuthAlgorithm;
-  @Uint32()
+  @Int32()
   external int dot11CipherAlgorithm;
 }
 

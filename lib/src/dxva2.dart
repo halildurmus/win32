@@ -124,14 +124,14 @@ late final _GetMonitorCapabilities = _dxva2.lookupFunction<
 /// ```
 /// {@category dxva2}
 int GetMonitorColorTemperature(
-        int hMonitor, Pointer<Uint32> pctCurrentColorTemperature) =>
+        int hMonitor, Pointer<Int32> pctCurrentColorTemperature) =>
     _GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature);
 
 late final _GetMonitorColorTemperature = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Pointer<Uint32> pctCurrentColorTemperature),
+    Int32 Function(IntPtr hMonitor, Pointer<Int32> pctCurrentColorTemperature),
     int Function(
         int hMonitor,
-        Pointer<Uint32>
+        Pointer<Int32>
             pctCurrentColorTemperature)>('GetMonitorColorTemperature');
 
 /// Retrieves a monitor's minimum, maximum, and current contrast settings.
@@ -187,7 +187,7 @@ int GetMonitorDisplayAreaPosition(
 late final _GetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
     Int32 Function(
         IntPtr hMonitor,
-        Uint32 ptPositionType,
+        Int32 ptPositionType,
         Pointer<Uint32> pdwMinimumPosition,
         Pointer<Uint32> pdwCurrentPosition,
         Pointer<Uint32> pdwMaximumPosition),
@@ -222,7 +222,7 @@ int GetMonitorDisplayAreaSize(
 late final _GetMonitorDisplayAreaSize = _dxva2.lookupFunction<
     Int32 Function(
         IntPtr hMonitor,
-        Uint32 stSizeType,
+        Int32 stSizeType,
         Pointer<Uint32> pdwMinimumWidthOrHeight,
         Pointer<Uint32> pdwCurrentWidthOrHeight,
         Pointer<Uint32> pdwMaximumWidthOrHeight),
@@ -257,7 +257,7 @@ int GetMonitorRedGreenOrBlueDrive(
 late final _GetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
     Int32 Function(
         IntPtr hMonitor,
-        Uint32 dtDriveType,
+        Int32 dtDriveType,
         Pointer<Uint32> pdwMinimumDrive,
         Pointer<Uint32> pdwCurrentDrive,
         Pointer<Uint32> pdwMaximumDrive),
@@ -292,7 +292,7 @@ int GetMonitorRedGreenOrBlueGain(
 late final _GetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
     Int32 Function(
         IntPtr hMonitor,
-        Uint32 gtGainType,
+        Int32 gtGainType,
         Pointer<Uint32> pdwMinimumGain,
         Pointer<Uint32> pdwCurrentGain,
         Pointer<Uint32> pdwMaximumGain),
@@ -313,13 +313,13 @@ late final _GetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
 /// ```
 /// {@category dxva2}
 int GetMonitorTechnologyType(
-        int hMonitor, Pointer<Uint32> pdtyDisplayTechnologyType) =>
+        int hMonitor, Pointer<Int32> pdtyDisplayTechnologyType) =>
     _GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType);
 
 late final _GetMonitorTechnologyType = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Pointer<Uint32> pdtyDisplayTechnologyType),
+    Int32 Function(IntPtr hMonitor, Pointer<Int32> pdtyDisplayTechnologyType),
     int Function(int hMonitor,
-        Pointer<Uint32> pdtyDisplayTechnologyType)>('GetMonitorTechnologyType');
+        Pointer<Int32> pdtyDisplayTechnologyType)>('GetMonitorTechnologyType');
 
 /// Retrieves the number of physical monitors associated with an HMONITOR
 /// monitor handle. Call this function before calling
@@ -416,7 +416,7 @@ int SetMonitorColorTemperature(int hMonitor, int ctCurrentColorTemperature) =>
     _SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature);
 
 late final _SetMonitorColorTemperature = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Uint32 ctCurrentColorTemperature),
+    Int32 Function(IntPtr hMonitor, Int32 ctCurrentColorTemperature),
     int Function(int hMonitor,
         int ctCurrentColorTemperature)>('SetMonitorColorTemperature');
 
@@ -456,8 +456,7 @@ int SetMonitorDisplayAreaPosition(
     _SetMonitorDisplayAreaPosition(hMonitor, ptPositionType, dwNewPosition);
 
 late final _SetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
-    Int32 Function(
-        IntPtr hMonitor, Uint32 ptPositionType, Uint32 dwNewPosition),
+    Int32 Function(IntPtr hMonitor, Int32 ptPositionType, Uint32 dwNewPosition),
     int Function(int hMonitor, int ptPositionType,
         int dwNewPosition)>('SetMonitorDisplayAreaPosition');
 
@@ -477,7 +476,7 @@ int SetMonitorDisplayAreaSize(
         hMonitor, stSizeType, dwNewDisplayAreaWidthOrHeight);
 
 late final _SetMonitorDisplayAreaSize = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Uint32 stSizeType,
+    Int32 Function(IntPtr hMonitor, Int32 stSizeType,
         Uint32 dwNewDisplayAreaWidthOrHeight),
     int Function(int hMonitor, int stSizeType,
         int dwNewDisplayAreaWidthOrHeight)>('SetMonitorDisplayAreaSize');
@@ -497,7 +496,7 @@ int SetMonitorRedGreenOrBlueDrive(
     _SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive);
 
 late final _SetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Uint32 dtDriveType, Uint32 dwNewDrive),
+    Int32 Function(IntPtr hMonitor, Int32 dtDriveType, Uint32 dwNewDrive),
     int Function(int hMonitor, int dtDriveType,
         int dwNewDrive)>('SetMonitorRedGreenOrBlueDrive');
 
@@ -515,6 +514,6 @@ int SetMonitorRedGreenOrBlueGain(int hMonitor, int gtGainType, int dwNewGain) =>
     _SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain);
 
 late final _SetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
-    Int32 Function(IntPtr hMonitor, Uint32 gtGainType, Uint32 dwNewGain),
+    Int32 Function(IntPtr hMonitor, Int32 gtGainType, Uint32 dwNewGain),
     int Function(int hMonitor, int gtGainType,
         int dwNewGain)>('SetMonitorRedGreenOrBlueGain');

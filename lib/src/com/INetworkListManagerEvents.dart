@@ -23,7 +23,7 @@ import 'IUnknown.dart';
 const IID_INetworkListManagerEvents = '{DCB00001-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _ConnectivityChanged_Native = Int32 Function(
-    Pointer obj, Uint32 newConnectivity);
+    Pointer obj, Int32 newConnectivity);
 typedef _ConnectivityChanged_Dart = int Function(
     Pointer obj, int newConnectivity);
 

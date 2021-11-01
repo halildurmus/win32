@@ -23,9 +23,9 @@ import 'IUnknown.dart';
 const IID_IAppxManifestReader5 = '{8D7AE132-A690-4C00-B75A-6AAE1FEAAC80}';
 
 typedef _GetMainPackageDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> mainPackageDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> mainPackageDependencies);
 typedef _GetMainPackageDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> mainPackageDependencies);
+    Pointer obj, Pointer<Pointer<COMObject>> mainPackageDependencies);
 
 /// {@category Interface}
 /// {@category com}
@@ -34,11 +34,12 @@ class IAppxManifestReader5 extends IUnknown {
 
   IAppxManifestReader5(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetMainPackageDependencies(Pointer<Pointer> mainPackageDependencies) => ptr
-          .ref.lpVtbl.value
-          .elementAt(3)
-          .cast<Pointer<NativeFunction<_GetMainPackageDependencies_Native>>>()
-          .value
-          .asFunction<_GetMainPackageDependencies_Dart>()(
-      ptr.ref.lpVtbl, mainPackageDependencies);
+  int GetMainPackageDependencies(
+          Pointer<Pointer<COMObject>> mainPackageDependencies) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<Pointer<NativeFunction<_GetMainPackageDependencies_Native>>>()
+              .value
+              .asFunction<_GetMainPackageDependencies_Dart>()(
+          ptr.ref.lpVtbl, mainPackageDependencies);
 }

@@ -48,7 +48,7 @@ void main() {
     final projection = TypeProjector(param.typeIdentifier);
 
     expect(projection.dartType, equals('int'));
-    expect(projection.nativeType, equals('Uint32'));
+    expect(projection.nativeType, equals('Int32'));
   });
 
   test('Pointers to enums are projected accurately', () {
@@ -58,8 +58,8 @@ void main() {
     final param = getCategory.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
 
-    expect(projection.dartType, equals('Pointer<Uint32>'));
-    expect(projection.nativeType, equals('Pointer<Uint32>'));
+    expect(projection.dartType, equals('Pointer<Int32>'));
+    expect(projection.nativeType, equals('Pointer<Int32>'));
   });
 
   test('Pointers to interfaces are projected accurately', () {
@@ -69,8 +69,8 @@ void main() {
     final param = getNetworkConnections.parameters.first;
     final projection = TypeProjector(param.typeIdentifier);
 
-    expect(projection.dartType, equals('Pointer<Pointer>'));
-    expect(projection.nativeType, equals('Pointer<Pointer>'));
+    expect(projection.dartType, equals('Pointer<Pointer<COMObject>>'));
+    expect(projection.nativeType, equals('Pointer<Pointer<COMObject>>'));
   });
 
   test('Properties are projected accurately', () {
@@ -158,8 +158,8 @@ void main() {
     final newEnum = projection.methods
         .firstWhere((method) => (method.name == 'get__NewEnum'));
     expect(newEnum.parameters.length, equals(1));
-    expect(newEnum.parameters.first.nativeType, equals('Pointer'));
-    expect(newEnum.parameters.first.dartType, equals('Pointer'));
+    expect(newEnum.parameters.first.nativeType, equals('Pointer<COMObject>'));
+    expect(newEnum.parameters.first.dartType, equals('Pointer<COMObject>'));
   });
 
   test(
@@ -172,8 +172,8 @@ void main() {
     final param = activateApplication.parameters[2];
     final projector = TypeProjector(param.typeIdentifier);
 
-    expect(projector.isTypeAnEnum, equals(true));
-    expect(projector.nativeType, equals('Uint32'));
+    expect(projector.isEnumType, equals(true));
+    expect(projector.nativeType, equals('Int32'));
     expect(projector.dartType, equals('int'));
   });
   test('COM interfaces should be represented as Pointers', () {
@@ -184,7 +184,7 @@ void main() {
         .parameters.last.typeIdentifier; // ISpellChecker **value
     final typeProjection = TypeProjector(type);
 
-    expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
-    expect(typeProjection.dartType, equals('Pointer<Pointer>'));
+    expect(typeProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
+    expect(typeProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
   });
 }

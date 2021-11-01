@@ -45,6 +45,7 @@ void main()
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'COMMPROP': %zu,\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
+    printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\n", sizeof(GUID));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
@@ -92,6 +93,7 @@ void main()
     printf("  'COMMTIMEOUTS': %zu,\n", sizeof(COMMTIMEOUTS));
     printf("  'COMSTAT': %zu,\n", sizeof(COMSTAT));
     printf("  'CONSOLE_CURSOR_INFO': %zu,\n", sizeof(CONSOLE_CURSOR_INFO));
+    printf("  'CONSOLE_READCONSOLE_CONTROL': %zu,\n", sizeof(CONSOLE_READCONSOLE_CONTROL));
     printf("  'CONSOLE_SCREEN_BUFFER_INFO': %zu,\n", sizeof(CONSOLE_SCREEN_BUFFER_INFO));
     printf("  'CONSOLE_SELECTION_INFO': %zu,\n", sizeof(CONSOLE_SELECTION_INFO));
     printf("  'COORD': %zu,\n", sizeof(COORD));
