@@ -172,7 +172,7 @@ void main() {
     final param = activateApplication.parameters[2];
     final projector = TypeProjector(param.typeIdentifier);
 
-    expect(projector.isTypeAnEnum, equals(true));
+    expect(projector.isEnumType, equals(true));
     expect(projector.nativeType, equals('Uint32'));
     expect(projector.dartType, equals('int'));
   });

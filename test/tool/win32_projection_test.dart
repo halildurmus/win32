@@ -15,16 +15,6 @@ void main() {
     expect(typeProjection.nativeType, equals('Int32'));
   });
 
-  test('Unicode string', () {
-    final type = TypeIdentifier(BaseType.PointerTypeModifier)
-      ..name = 'LPWSTR'
-      ..typeArg = TypeIdentifier(BaseType.Uint16);
-    final typeProjection = TypeProjector(type);
-
-    expect(typeProjection.dartType, equals('Pointer<Utf16>'));
-    expect(typeProjection.nativeType, equals('Pointer<Utf16>'));
-  });
-
   test('ANSI string', () {
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.Apis')!;
