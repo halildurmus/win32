@@ -521,8 +521,8 @@ void main() {
     final param = api!.returnType;
     final projection = TypeProjector(param.typeIdentifier);
 
-    expect(projection.nativeType, equals('IntPtr'));
-    expect(projection.dartType, equals('int'));
-    expect(projection.attribute, equals('@IntPtr()'));
+    expect(projection.nativeType, equals('Pointer'));
+    expect(projection.dartType, equals('Pointer'));
+    expect(projection.attribute, isEmpty);
   });
 }
