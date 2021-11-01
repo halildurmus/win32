@@ -1,6 +1,5 @@
 const callbackTypeMapping = <String, String>{
   // Callbacks
-  'FARPROC': 'Pointer',
   'LPCCHOOKPROC': 'Pointer<NativeFunction<CCHookProc>>',
   'LPCFHOOKPROC': 'Pointer<NativeFunction<CFHookProc>>',
   'LPFRHOOKPROC': 'Pointer<NativeFunction<FRHookProc>>',

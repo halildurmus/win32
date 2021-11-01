@@ -27,11 +27,12 @@ void main() {
   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
   free(ansi);
 
-  if (pGetNativeSystemInfo != nullptr) {
+  if (pGetNativeSystemInfo != NULL) {
     print('GetNativeSystemInfo() is available on this system.');
-    final funcGetNativeSystemInfo = pGetNativeSystemInfo
-        .cast<NativeFunction<getNativeSystemInfoNative>>()
-        .asFunction<getNativeSystemInfoDart>();
+    final funcGetNativeSystemInfo =
+        Pointer<NativeFunction<getNativeSystemInfoNative>>.fromAddress(
+                pGetNativeSystemInfo)
+            .asFunction<getNativeSystemInfoDart>();
 
     funcGetNativeSystemInfo(systemInfo);
   } else {

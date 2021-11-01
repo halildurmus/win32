@@ -508,4 +508,21 @@ void main() {
     expect(projection.dartType, equals('Pointer<GUID>'));
     expect(projection.attribute, isEmpty);
   });
+
+  test('FARPROC is projected correctly', () {
+    final scope = MetadataStore.getWin32Scope();
+
+    final typedef =
+        scope.findTypeDef('Windows.Win32.System.LibraryLoader.Apis');
+    final api = typedef?.findMethod('GetProcAddress');
+
+    expect(api, isNotNull);
+
+    final param = api!.returnType;
+    final projection = TypeProjector(param.typeIdentifier);
+
+    expect(projection.nativeType, equals('IntPtr'));
+    expect(projection.dartType, equals('int'));
+    expect(projection.attribute, equals('@IntPtr()'));
+  });
 }
