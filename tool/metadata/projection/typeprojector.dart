@@ -168,7 +168,7 @@ class TypeProjector {
       return TypeTuple(mappedType, mappedType);
     }
 
-    // TODO: Understand and fix
+    // TODO: Understand and fix (perhaps in winmd)
     // Deal with PROC, FARPROC, NEARPROC
     if (typeIdentifier.type
             ?.findMethod('Invoke')
