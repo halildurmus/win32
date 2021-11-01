@@ -54,14 +54,6 @@ class Win32Prototype {
 
 final methods = <Method>[];
 
-String methodNameWithoutEncoding(String methodName) {
-  if (methodName.endsWith('W') || methodName.endsWith('A')) {
-    return methodName.substring(0, methodName.length - 1);
-  } else {
-    return methodName;
-  }
-}
-
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');
   final textLine = StringBuffer('/// ');

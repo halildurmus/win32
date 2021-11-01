@@ -168,17 +168,6 @@ class TypeProjector {
       return TypeTuple(mappedType, mappedType);
     }
 
-    // // TODO: Understand and fix (perhaps in winmd)
-    // // Deal with PROC, FARPROC, NEARPROC
-    // if (typeIdentifier.type
-    //         ?.findMethod('Invoke')
-    //         ?.returnType
-    //         .typeIdentifier
-    //         .baseType ==
-    //     BaseType.IntPtr) {
-    //   return baseNativeMapping[BaseType.IntPtr]!;
-    // }
-
     final nativeType = 'Pointer<NativeFunction<$callbackType>>';
     final dartType = 'Pointer<NativeFunction<$callbackType>>';
 
