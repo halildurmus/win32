@@ -162,7 +162,7 @@ class TypeProjector {
   TypeTuple unwrapCallbackType() {
     final callbackType = typeIdentifier.name.split('.').last;
 
-    // TODO: Remove -- for backward compat only
+    // TODO: Remove in v3 -- for backward compat only
     if (callbackTypeMapping.keys.contains(callbackType)) {
       final mappedType = callbackTypeMapping[callbackType]!;
       return TypeTuple(mappedType, mappedType);
