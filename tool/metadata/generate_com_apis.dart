@@ -8,6 +8,7 @@ import 'package:winmd/winmd.dart';
 import 'projection/classprojector.dart';
 import 'projection/data_classes.dart';
 import 'projection/typeprinter.dart';
+import 'projection/win32_typemap.dart';
 
 const interfacesToGenerate = <String>[
   'Windows.Win32.Globalization.IEnumSpellingError',
@@ -105,7 +106,7 @@ String classNameForInterfaceName(String interfaceName) {
           .join('.');
 
   // If class has a 'W' suffix, erase it.
-  return removeUnicodeSuffix(fullyQualifiedClassName);
+  return stripAnsiUnicodeSuffix(fullyQualifiedClassName);
 }
 
 void main(List<String> args) {
@@ -137,11 +138,11 @@ void main(List<String> args) {
       ..sourceType = SourceType.com
       ..generateClass = clsid.isNotEmpty
       ..clsid = clsid
-      ..className = removeUnicodeSuffix(type.split('.').last.substring(1));
+      ..className = stripAnsiUnicodeSuffix(type.split('.').last.substring(1));
 
     final dartClass = TypePrinter.printProjection(projection);
 
-    final classOutputFilename = removeUnicodeSuffix(type.split('.').last);
+    final classOutputFilename = stripAnsiUnicodeSuffix(type.split('.').last);
     final outputFile =
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
