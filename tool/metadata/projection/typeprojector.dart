@@ -27,7 +27,7 @@ const Map<BaseType, TypeTuple> baseNativeMapping = {
   BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
   BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
 };
-const Map<String, TypeTuple> win32SpecialType = {
+const Map<String, TypeTuple> specialTypes = {
   'Windows.Win32.Foundation.BSTR':
       TypeTuple('Pointer<Utf16>', 'Pointer<Utf16>'),
   'Windows.Win32.Foundation.PWSTR':
@@ -38,6 +38,8 @@ const Map<String, TypeTuple> win32SpecialType = {
   'Windows.Win32.Foundation.ULARGE_INTEGER':
       TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
+  'Windows.Foundation.HResult':
+      TypeTuple('Int32', 'int', attribute: '@Int32()'),
 };
 
 class TypeProjector {
@@ -56,7 +58,7 @@ class TypeProjector {
       baseNativeMapping.keys.contains(typeIdentifier.baseType);
 
   bool get isWin32SpecialType =>
-      win32SpecialType.keys.contains(typeIdentifier.name);
+      specialTypes.keys.contains(typeIdentifier.name);
 
   bool get isString => typeIdentifier.baseType == BaseType.String;
 
@@ -180,7 +182,7 @@ class TypeProjector {
 
     // Could be a string or other special type that we want to custom-map
     if (isWin32SpecialType) {
-      return win32SpecialType[typeIdentifier.name]!;
+      return specialTypes[typeIdentifier.name]!;
     }
 
     // This is used by WinRT for an HSTRING
