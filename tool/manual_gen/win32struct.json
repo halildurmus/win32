@@ -88,7 +88,7 @@
         "comment": "The COLORADJUSTMENT structure defines the color adjustment values used by the StretchBlt and StretchDIBits functions when the stretch mode is HALFTONE. You can set the color adjustment values by calling the SetColorAdjustment function."
     },
     "COMDLG_FILTERSPEC": {
-        "namespace": "Windows.Win32.UI.Shell.COMDLG_FILTERSPEC",
+        "namespace": "Windows.Win32.UI.Shell.Common.COMDLG_FILTERSPEC",
         "comment": "Used generically to filter elements."
     },
     "COMMCONFIG": {
@@ -160,7 +160,7 @@
         "comment": "Describes the extended geometry of disk devices and media."
     },
     "DISPPARAMS": {
-        "namespace": "Windows.Win32.System.Ole.Automation.DISPPARAMS",
+        "namespace": "Windows.Win32.System.Com.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
     },
     "DLGITEMTEMPLATE": {
@@ -228,7 +228,7 @@
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
     },
     "EXCEPINFO": {
-        "namespace": "Windows.Win32.System.Ole.Automation.EXCEPINFO",
+        "namespace": "Windows.Win32.System.Com.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
     },
     "fd_set": {
@@ -244,7 +244,7 @@
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
     "FUNCDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.FUNCDESC",
+        "namespace": "Windows.Win32.System.Com.FUNCDESC",
         "comment": "Describes a function."
     },
     "GESTURECONFIG": {
@@ -280,7 +280,7 @@
         "comment": "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx."
     },
     "IDLDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.IDLDESC",
+        "namespace": "Windows.Win32.System.Com.IDLDESC",
         "comment": "Contains the IDL attributes of a type."
     },
     "INITCOMMONCONTROLSEX": {
@@ -288,7 +288,7 @@
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
     "ITEMIDLIST": {
-        "namespace": "Windows.Win32.UI.Shell.ITEMIDLIST",
+        "namespace": "Windows.Win32.UI.Shell.Common.ITEMIDLIST",
         "comment": "Contains a list of item identifiers."
     },
     "JOB_INFO_1": {
@@ -340,19 +340,19 @@
         "comment": "Returned by the GetThemeMargins function to define the margins of windows that have visual styles applied."
     },
     "MCI_OPEN_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_OPEN_PARMSW",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_OPEN_PARMSW",
         "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command."
     },
     "MCI_PLAY_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_PLAY_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_PLAY_PARMS",
         "comment": "The MCI_PLAY_PARMS structure contains positioning information for the MCI_PLAY command."
     },
     "MCI_SEEK_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_SEEK_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_SEEK_PARMS",
         "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command."
     },
     "MCI_STATUS_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_STATUS_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_STATUS_PARMS",
         "comment": "The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command."
     },
     "MENUINFO": {
@@ -376,31 +376,31 @@
         "comment": "Defines the metafile picture format used for exchanging metafile data through the clipboard."
     },
     "MIDIEVENT": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIEVENT",
+        "namespace": "Windows.Win32.Media.Audio.MIDIEVENT",
         "comment": "The MIDIEVENT structure describes a MIDI event in a stream buffer."
     },
     "MIDIHDR": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIHDR",
+        "namespace": "Windows.Win32.Media.Audio.MIDIHDR",
         "comment": "The MIDIHDR structure defines the header used to identify a MIDI system-exclusive or stream buffer."
     },
     "MIDIINCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIINCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.MIDIINCAPSW",
         "comment": "The MIDIINCAPS structure describes the capabilities of a MIDI input device."
     },
     "MIDIOUTCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIOUTCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.MIDIOUTCAPSW",
         "comment": "The MIDIOUTCAPS structure describes the capabilities of a MIDI output device."
     },
     "MIDIPROPTEMPO": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIPROPTEMPO",
+        "namespace": "Windows.Win32.Media.Audio.MIDIPROPTEMPO",
         "comment": "The MIDIPROPTEMPO structure contains the tempo property for a stream."
     },
     "MIDIPROPTIMEDIV": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIPROPTIMEDIV",
+        "namespace": "Windows.Win32.Media.Audio.MIDIPROPTIMEDIV",
         "comment": "The MIDIPROPTIMEDIV structure contains the time division property for a stream."
     },
     "MIDISTRMBUFFVER": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDISTRMBUFFVER",
+        "namespace": "Windows.Win32.Media.Audio.MIDISTRMBUFFVER",
         "comment": "The MIDISTRMBUFFVER structure contains version information for a long MIDI event of the MEVT_VERSION type."
     },
     "MINMAXINFO": {
@@ -488,11 +488,11 @@
         "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
     },
     "PARAMDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESC",
+        "namespace": "Windows.Win32.System.Ole.PARAMDESC",
         "comment": "Contains information needed for transferring a structure element, parameter, or function return value between processes."
     },
     "PARAMDESCEX": {
-        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESCEX",
+        "namespace": "Windows.Win32.System.Ole.PARAMDESCEX",
         "comment": "Contains information about the default value of a parameter."
     },
     "PHYSICAL_MONITOR": {
@@ -568,7 +568,7 @@
         "comment": "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function."
     },
     "PROPERTYKEY": {
-        "namespace": "Windows.Win32.System.PropertiesSystem.PROPERTYKEY",
+        "namespace": "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY",
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
     "protoent": {
@@ -628,7 +628,7 @@
         "comment": "Defines Shell item resource."
     },
     "SHITEMID": {
-        "namespace": "Windows.Win32.UI.Shell.SHITEMID",
+        "namespace": "Windows.Win32.UI.Shell.Common.SHITEMID",
         "comment": "Defines an item identifier."
     },
     "SHQUERYRBINFO": {
@@ -724,7 +724,7 @@
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
     },
     "TYPEATTR": {
-        "namespace": "Windows.Win32.System.Ole.Automation.TYPEATTR",
+        "namespace": "Windows.Win32.System.Com.TYPEATTR",
         "comment": "Contains attributes of a type."
     },
     "UNSIGNED_RATIO": {
@@ -744,15 +744,15 @@
         "comment": "Contains version information for a file. This information is language and code page independent."
     },
     "WAVEFORMATEX": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEFORMATEX",
+        "namespace": "Windows.Win32.Media.Audio.WAVEFORMATEX",
         "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information."
     },
     "WAVEHDR": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEHDR",
+        "namespace": "Windows.Win32.Media.Audio.WAVEHDR",
         "comment": "The WAVEHDR structure defines the header used to identify a waveform-audio buffer."
     },
     "WAVEOUTCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEOUTCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.WAVEOUTCAPSW",
         "comment": "The WAVEOUTCAPS structure describes the capabilities of a waveform-audio output device."
     },
     "WIN32_FIND_DATA": {
