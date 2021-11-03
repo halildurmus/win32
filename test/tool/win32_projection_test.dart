@@ -184,8 +184,7 @@ void main() {
   test('Pass double pointers to COM interfaces', () {
     final scope = MetadataStore.getWin32Scope();
 
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis');
+    final typedef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
     final api = typedef?.findMethod('GetActiveObject');
 
     expect(api, isNotNull);
@@ -496,7 +495,7 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     final typedef =
-        scope.findTypeDef('Windows.Win32.System.PropertiesSystem.Apis');
+        scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
     final api = typedef?.findMethod('PSPropertyBag_WriteGUID')!;
 
     expect(api, isNotNull);
