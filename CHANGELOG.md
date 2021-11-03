@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 1.0.10
 
 - Minor tweaks to property detection
