@@ -49,84 +49,69 @@ class Property extends TokenObject with CustomAttributesMixin {
       : super(scope, token);
 
   /// Creates a property object from a provided token.
-  factory Property.fromToken(Scope scope, int token) {
-    final ptkTypeDef = calloc<mdTypeDef>();
-    final szProperty = wsalloc(MAX_STRING_SIZE);
-    final pchProperty = calloc<ULONG>();
-    final pdwPropFlags = calloc<DWORD>();
-    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-    final pcbSigBlob = calloc<ULONG>();
-    final pdwCPlusTypeFlag = calloc<DWORD>();
-    final ppDefaultValue = calloc<UVCP_CONSTANT>();
-    final pcchDefaultValue = calloc<ULONG>();
-    final ptkSetter = calloc<mdMethodDef>();
-    final ptkGetter = calloc<mdMethodDef>();
-    final rgOtherMethod = calloc<mdMethodDef>(256);
-    final pcOtherMethod = calloc<ULONG>();
+  factory Property.fromToken(Scope scope, int token) => using((Arena arena) {
+        final ptkTypeDef = arena<mdTypeDef>();
+        final szProperty = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchProperty = arena<ULONG>();
+        final pdwPropFlags = arena<DWORD>();
+        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+        final pcbSigBlob = arena<ULONG>();
+        final pdwCPlusTypeFlag = arena<DWORD>();
+        final ppDefaultValue = arena<UVCP_CONSTANT>();
+        final pcchDefaultValue = arena<ULONG>();
+        final ptkSetter = arena<mdMethodDef>();
+        final ptkGetter = arena<mdMethodDef>();
+        final rgOtherMethod = arena<mdMethodDef>(256);
+        final pcOtherMethod = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetPropertyProps(
-          token,
-          ptkTypeDef,
-          szProperty,
-          MAX_STRING_SIZE,
-          pchProperty,
-          pdwPropFlags,
-          ppvSigBlob,
-          pcbSigBlob,
-          pdwCPlusTypeFlag,
-          ppDefaultValue,
-          pcchDefaultValue,
-          ptkSetter,
-          ptkGetter,
-          rgOtherMethod,
-          256,
-          pcOtherMethod);
-
-      if (SUCCEEDED(hr)) {
-        final propName = szProperty.toDartString();
-
-        // PropertySig is defined in §II.23.2.5.
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
-        final defaultValue =
-            ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
-        final otherMethodTokens =
-            rgOtherMethod.asTypedList(pcOtherMethod.value);
-
-        return Property(
-            scope,
+        final reader = scope.reader;
+        final hr = reader.GetPropertyProps(
             token,
-            ptkTypeDef.value,
-            propName,
-            pdwPropFlags.value,
-            signature,
-            typeTuple.typeIdentifier,
-            parseCorElementType(pdwCPlusTypeFlag.value),
-            defaultValue,
-            ptkSetter.value,
-            ptkGetter.value,
-            otherMethodTokens);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkTypeDef);
-      free(szProperty);
-      free(pchProperty);
-      free(pdwPropFlags);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-      free(pdwCPlusTypeFlag);
-      free(ppDefaultValue);
-      free(pcchDefaultValue);
-      free(ptkSetter);
-      free(ptkGetter);
-      free(rgOtherMethod);
-      free(pcOtherMethod);
-    }
-  }
+            ptkTypeDef,
+            szProperty,
+            MAX_STRING_SIZE,
+            pchProperty,
+            pdwPropFlags,
+            ppvSigBlob,
+            pcbSigBlob,
+            pdwCPlusTypeFlag,
+            ppDefaultValue,
+            pcchDefaultValue,
+            ptkSetter,
+            ptkGetter,
+            rgOtherMethod,
+            256,
+            pcOtherMethod);
+
+        if (SUCCEEDED(hr)) {
+          final propName = szProperty.toDartString();
+
+          // PropertySig is defined in §II.23.2.5.
+          final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+          final typeTuple =
+              TypeTuple.fromSignature(signature.sublist(2), scope);
+          final defaultValue =
+              ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
+          final otherMethodTokens =
+              rgOtherMethod.asTypedList(pcOtherMethod.value);
+
+          return Property(
+              scope,
+              token,
+              ptkTypeDef.value,
+              propName,
+              pdwPropFlags.value,
+              signature,
+              typeTuple.typeIdentifier,
+              parseCorElementType(pdwCPlusTypeFlag.value),
+              defaultValue,
+              ptkSetter.value,
+              ptkGetter.value,
+              otherMethodTokens);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;

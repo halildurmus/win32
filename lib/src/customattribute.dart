@@ -21,36 +21,30 @@ class CustomAttribute extends TokenObject {
   final String name;
   final Uint8List signatureBlob;
 
-  CustomAttribute(Scope scope, int token, this.name, this.modifiedObjectToken,
-      this.attributeType, this.signatureBlob)
+  const CustomAttribute(Scope scope, int token, this.name,
+      this.modifiedObjectToken, this.attributeType, this.signatureBlob)
       : super(scope, token);
 
   /// Creates a custom attribute object from a provided token.
-  factory CustomAttribute.fromToken(Scope scope, int token) {
-    final ptkObj = calloc<mdToken>();
-    final ptkType = calloc<mdToken>();
-    final ppBlob = calloc<UVCP_CONSTANT>();
-    final pcbBlob = calloc<ULONG>();
+  factory CustomAttribute.fromToken(Scope scope, int token) =>
+      using((Arena arena) {
+        final ptkObj = arena<mdToken>();
+        final ptkType = arena<mdToken>();
+        final ppBlob = arena<UVCP_CONSTANT>();
+        final pcbBlob = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetCustomAttributeProps(
-          token, ptkObj, ptkType, ppBlob, pcbBlob);
-      if (SUCCEEDED(hr)) {
-        final member = MemberRef.fromToken(scope, ptkType.value);
-        final memberParent = TypeDef.fromToken(scope, member.token);
-        return CustomAttribute(scope, token, memberParent.name, ptkObj.value,
-            ptkType.value, ppBlob.value.asTypedList(pcbBlob.value));
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkObj);
-      free(ptkType);
-      free(ppBlob);
-      free(pcbBlob);
-    }
-  }
+        final reader = scope.reader;
+        final hr = reader.GetCustomAttributeProps(
+            token, ptkObj, ptkType, ppBlob, pcbBlob);
+        if (SUCCEEDED(hr)) {
+          final member = MemberRef.fromToken(scope, ptkType.value);
+          final memberParent = TypeDef.fromToken(scope, member.token);
+          return CustomAttribute(scope, token, memberParent.name, ptkObj.value,
+              ptkType.value, ppBlob.value.asTypedList(pcbBlob.value));
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;

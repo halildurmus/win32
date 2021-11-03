@@ -8,11 +8,11 @@ import 'com/constants.dart';
 import 'scope.dart';
 
 /// A tuple of a field and its byte offset within a parent struct.
-class FieldOffset {
-  final int fieldToken;
+class FieldOffset extends TokenObject {
   final int offset;
 
-  const FieldOffset(this.fieldToken, this.offset);
+  const FieldOffset(Scope scope, int fieldToken, this.offset)
+      : super(scope, fieldToken);
 }
 
 /// Layout information for the class referenced by a specified token.
@@ -31,12 +31,12 @@ class ClassLayout extends TokenObject {
   int? packingAlignment;
 
   ClassLayout(Scope scope, int classToken) : super(scope, classToken) {
-    final pdwPackSize = calloc<DWORD>();
-    final rgFieldOffset = calloc<COR_FIELD_OFFSET>(256);
-    final pcFieldOffset = calloc<ULONG>();
-    final pulClassSize = calloc<ULONG>();
+    using((Arena arena) {
+      final pdwPackSize = arena<DWORD>();
+      final rgFieldOffset = arena<COR_FIELD_OFFSET>(256);
+      final pcFieldOffset = arena<ULONG>();
+      final pulClassSize = arena<ULONG>();
 
-    try {
       final hr = reader.GetClassLayout(classToken, pdwPackSize, rgFieldOffset,
           256, pcFieldOffset, pulClassSize);
       if (SUCCEEDED(hr)) {
@@ -47,7 +47,8 @@ class ClassLayout extends TokenObject {
         final offsetCount = pcFieldOffset.value;
         for (var i = 0; i < offsetCount; i++) {
           final offset = rgFieldOffset.elementAt(i).ref;
-          fieldOffsets?.add(FieldOffset(offset.ridOfField, offset.ulOffset));
+          fieldOffsets
+              ?.add(FieldOffset(scope, offset.ridOfField, offset.ulOffset));
         }
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         // No class layout record, so leave the fields null
@@ -56,11 +57,6 @@ class ClassLayout extends TokenObject {
         // Some other failure
         throw WindowsException(hr);
       }
-    } finally {
-      free(pulClassSize);
-      free(pcFieldOffset);
-      free(rgFieldOffset);
-      free(pdwPackSize);
-    }
+    });
   }
 }

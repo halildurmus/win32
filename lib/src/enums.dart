@@ -177,8 +177,14 @@ enum TokenType {
   /// A type, such as a boxed value type, that can be used as input to any MSIL
   /// instruction that takes a type.
   TypeSpec,
+
+  /// An assembly.
   Assembly,
+
+  /// A reference to an assembly.
   AssemblyRef,
+
+  /// A file.
   File,
   ExportedType,
   ManifestResource,

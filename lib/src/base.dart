@@ -52,7 +52,7 @@ abstract class TokenObject {
   bool get isGlobal {
     if (!isResolvedToken) return false;
 
-    using((Arena arena) {
+    return using((Arena arena) {
       final pIsGlobal = arena<Int32>();
       final hr = reader.IsGlobal(token, pIsGlobal);
       if (FAILED(hr)) throw WindowsException(hr);

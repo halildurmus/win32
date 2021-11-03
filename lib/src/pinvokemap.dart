@@ -95,36 +95,29 @@ class PinvokeMap extends TokenObject {
       : super(scope, token);
 
   /// Creates a P/Invoke method representation object from a provided token.
-  factory PinvokeMap.fromToken(Scope scope, int token) {
-    final pdwMappingFlags = calloc<DWORD>();
-    final szImportName = wsalloc(MAX_STRING_SIZE);
-    final pchImportName = calloc<ULONG>();
-    final ptkImportDLL = calloc<mdModuleRef>();
-    final szModuleName = wsalloc(MAX_STRING_SIZE);
-    final pchModuleName = calloc<ULONG>();
+  factory PinvokeMap.fromToken(Scope scope, int token) => using((Arena arena) {
+        final pdwMappingFlags = arena<DWORD>();
+        final szImportName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchImportName = arena<ULONG>();
+        final ptkImportDLL = arena<mdModuleRef>();
+        final szModuleName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchModuleName = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
-          MAX_STRING_SIZE, pchImportName, ptkImportDLL);
-      if (SUCCEEDED(hr)) {
-        hr = reader.GetModuleRefProps(
-            ptkImportDLL.value, szModuleName, MAX_STRING_SIZE, pchModuleName);
+        final reader = scope.reader;
+        var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+            MAX_STRING_SIZE, pchImportName, ptkImportDLL);
+        if (SUCCEEDED(hr)) {
+          hr = reader.GetModuleRefProps(
+              ptkImportDLL.value, szModuleName, MAX_STRING_SIZE, pchModuleName);
 
-        final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
+          final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
 
-        return PinvokeMap(scope, token, pdwMappingFlags.value,
-            szImportName.toDartString(), ptkImportDLL.value, moduleName);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(pdwMappingFlags);
-      free(szImportName);
-      free(pchImportName);
-      free(ptkImportDLL);
-    }
-  }
+          return PinvokeMap(scope, token, pdwMappingFlags.value,
+              szImportName.toDartString(), ptkImportDLL.value, moduleName);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   /// Returns true if each member name is used as specified.
   bool get isNoMangle =>

@@ -25,26 +25,22 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       : super(scope, token);
 
   /// Creates a generic parameter constraint object from a provided token.
-  factory GenericParamConstraint.fromToken(Scope scope, int token) {
-    final ptGenericParam = calloc<mdGenericParam>();
-    final ptkConstraintType = calloc<mdToken>();
+  factory GenericParamConstraint.fromToken(Scope scope, int token) =>
+      using((Arena arena) {
+        final ptGenericParam = arena<mdGenericParam>();
+        final ptkConstraintType = arena<mdToken>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetGenericParamConstraintProps(
-          token, ptGenericParam, ptkConstraintType);
+        final reader = scope.reader;
+        final hr = reader.GetGenericParamConstraintProps(
+            token, ptGenericParam, ptkConstraintType);
 
-      if (SUCCEEDED(hr)) {
-        return GenericParamConstraint(
-            scope, token, ptGenericParam.value, ptkConstraintType.value);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptGenericParam);
-      free(ptkConstraintType);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return GenericParamConstraint(
+              scope, token, ptGenericParam.value, ptkConstraintType.value);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   /// The generic parameter that is constrained by this object.
   GenericParam get parent => GenericParam.fromToken(scope, _parentToken);
