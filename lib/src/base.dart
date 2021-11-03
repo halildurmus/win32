@@ -50,22 +50,15 @@ abstract class TokenObject {
 
   /// Returns true if the token is marked as global.
   bool get isGlobal {
-    if (isResolvedToken) {
-      final pIsGlobal = calloc<Int32>();
+    if (!isResolvedToken) return false;
 
-      try {
-        final hr = reader.IsGlobal(token, pIsGlobal);
-        if (SUCCEEDED(hr)) {
-          return pIsGlobal.value == 1;
-        } else {
-          throw WindowsException(hr);
-        }
-      } finally {
-        free(pIsGlobal);
-      }
-    } else {
-      return false;
-    }
+    using((Arena arena) {
+      final pIsGlobal = arena<Int32>();
+      final hr = reader.IsGlobal(token, pIsGlobal);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return pIsGlobal.value == 1;
+    });
   }
 
   /// Returns the type of the token.
