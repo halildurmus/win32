@@ -19,7 +19,7 @@ class FieldProjection {
 
     final dartCode = '''
       ${typeProjection.attribute}
-      external ${typeProjection.nativeType} $name;
+      external ${typeProjection.nativeType} _$name;
 
       String get $name {
         final charCodes = <int>[];
