@@ -11,12 +11,12 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
 import 'IUnknown.dart';
 
 /// @nodoc

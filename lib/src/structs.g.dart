@@ -48,6 +48,7 @@ import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 

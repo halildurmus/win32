@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -990,9 +991,9 @@ late final _EndUpdateResource = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcesses(
         Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) =>
-    _EnumProcesses(lpidProcess, cb, lpcbNeeded);
+    _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
 
-late final _EnumProcesses = _kernel32.lookupFunction<
+late final _K32EnumProcesses = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
     int Function(Pointer<Uint32> lpidProcess, int cb,
@@ -1011,9 +1012,9 @@ late final _EnumProcesses = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded) =>
-    _EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+    _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
 
-late final _EnumProcessModules = _kernel32.lookupFunction<
+late final _K32EnumProcessModules = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded),
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
@@ -1034,9 +1035,9 @@ late final _EnumProcessModules = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded, int dwFilterFlag) =>
-    _EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
+    _K32EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 
-late final _EnumProcessModulesEx = _kernel32.lookupFunction<
+late final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
     int Function(
@@ -2376,9 +2377,9 @@ late final _GetMaximumProcessorGroupCount =
 /// {@category kernel32}
 int GetModuleBaseName(
         int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) =>
-    _GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+    _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
 
-late final _GetModuleBaseName = _kernel32.lookupFunction<
+late final _K32GetModuleBaseName = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
@@ -2418,9 +2419,9 @@ late final _GetModuleFileName = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetModuleFileNameEx(
         int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) =>
-    _GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
+    _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
 
-late final _GetModuleFileNameEx = _kernel32.lookupFunction<
+late final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
