@@ -23,13 +23,15 @@ const dartKeywords = <String>[
   'Unsized', 'Void', 'Packed', 'Handle',
 ];
 
-bool typePretendsToBeAnsi(String typeName) => [
-      'DATA',
-      'SCHEMA',
-      'AREA',
-      'M128A',
-      'CIECHROMA'
-    ].contains(typeName.split('.').last);
+bool typePretendsToBeAnsi(String typeName) {
+  final falseAnsiEndings = ['DATA', 'SCHEMA', 'AREA', 'M128A', 'CIECHROMA'];
+  for (final word in falseAnsiEndings) {
+    if (typeName.endsWith(word)) {
+      return true;
+    }
+  }
+  return false;
+}
 
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
