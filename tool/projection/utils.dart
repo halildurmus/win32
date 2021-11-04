@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../namespace/exclusions.dart';
+import 'type.dart';
 
 const dartKeywords = <String>[
   // Keywords from https://dart.dev/guides/language/language-tour#keywords.
@@ -49,6 +50,15 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+/// Convert a *typeProjection into a typeProjection
+TypeProjection dereference(TypeProjection pointer) {
+  if (pointer.typeIdentifier.typeArg != null) {
+    return TypeProjection(pointer.typeIdentifier.typeArg!);
+  } else {
+    throw Exception('Type $pointer cannot be dereferenced.');
+  }
+}
+
 String stripPointer(String typeName) =>
     typeName.substring(8, typeName.length - 1); // Pointer<X> => X
 
@@ -91,7 +101,7 @@ String relativePathToSrcDirectory(File file) {
 }
 
 String importForWin32Type(TypeIdentifier identifier) {
-  if (specialTypes.contains(identifier.name)) {
+  if (excludedTypes.contains(identifier.name)) {
     return 'specialTypes.dart';
   }
 

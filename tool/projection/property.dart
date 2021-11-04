@@ -22,26 +22,29 @@ class GetPropertyProjection extends PropertyProjection {
       : method.name.substring(4);
 
   @override
-  String toString() => '''
-    ${stripPointer(parameters.first.type.dartType)} get $exposedMethodName {
-      final retValuePtr = calloc<${stripPointer(parameters.first.type.nativeType)}>();
-      
-      try {
-        final hr = ptr.ref.lpVtbl.value
-          .elementAt($vtableOffset)
-          .cast<Pointer<NativeFunction<$nativePrototype>>>()
-          .value
-          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+  String toString() {
+    final returnValue = dereference(parameters.first.type);
+    return '''
+      ${returnValue.dartType} get $exposedMethodName {
+        final retValuePtr = calloc<${returnValue.nativeType}>();
+        
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
 
-        if (FAILED(hr)) throw WindowsException(hr);
+          if (FAILED(hr)) throw WindowsException(hr);
 
-        final retValue = retValuePtr.value;
-        return ${convertBool ? 'retValue == 0' : 'retValue'};
-      } finally {
-        free(retValuePtr);
+          final retValue = retValuePtr.value;
+          return ${convertBool ? 'retValue == 0' : 'retValue'};
+        } finally {
+          free(retValuePtr);
+        }
       }
-    }
 ''';
+  }
 }
 
 class SetPropertyProjection extends PropertyProjection {
