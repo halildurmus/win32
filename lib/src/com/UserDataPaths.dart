@@ -10,7 +10,6 @@ import '../combase.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../structs.dart';
 import '../utils.dart';
 import '../winrt/winrt_helpers.dart';
 

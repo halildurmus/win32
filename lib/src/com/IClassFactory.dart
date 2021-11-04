@@ -23,39 +23,33 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IClassFactory = '{00000001-0000-0000-C000-000000000046}';
 
-typedef _CreateInstance_Native = Int32 Function(
-    Pointer obj,
-    Pointer<COMObject> pUnkOuter,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppvObject);
-typedef _CreateInstance_Dart = int Function(
-    Pointer obj,
-    Pointer<COMObject> pUnkOuter,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppvObject);
-
-typedef _LockServer_Native = Int32 Function(Pointer obj, Int32 fLock);
-typedef _LockServer_Dart = int Function(Pointer obj, int fLock);
-
 /// {@category Interface}
 /// {@category com}
 class IClassFactory extends IUnknown {
   // vtable begins at 3, ends at 4
-
   IClassFactory(Pointer<COMObject> ptr) : super(ptr);
 
   int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<Pointer<NativeFunction<_CreateInstance_Native>>>()
-              .value
-              .asFunction<_CreateInstance_Dart>()(
-          ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<COMObject> pUnkOuter,
+                          Pointer<GUID> riid, Pointer<Pointer> ppvObject)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<COMObject> pUnkOuter,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer>
+                      ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
   int LockServer(int fLock) => ptr.ref.lpVtbl.value
       .elementAt(4)
-      .cast<Pointer<NativeFunction<_LockServer_Native>>>()
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
       .value
-      .asFunction<_LockServer_Dart>()(ptr.ref.lpVtbl, fLock);
+      .asFunction<int Function(Pointer, int fLock)>()(ptr.ref.lpVtbl, fLock);
 }
