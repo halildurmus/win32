@@ -9,7 +9,7 @@ class ClassProjection extends InterfaceProjection {
   ClassProjection(winmd.TypeDef typeDef, this.interface) : super(typeDef);
 
   factory ClassProjection.fromInterface(winmd.TypeDef interface) {
-    final className = _generateClassName(interface);
+    final className = generateClassName(interface);
     final classTypeDef = interface.scope.findTypeDef(className);
 
     if (classTypeDef == null) {
@@ -22,7 +22,7 @@ class ClassProjection extends InterfaceProjection {
   /// Take a fully-qualified interface name (e.g.
   /// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding class
   /// name (e.g. `Windows.Win32.UI.Shell.ShellLink`).
-  static String _generateClassName(winmd.TypeDef interface) {
+  static String generateClassName(winmd.TypeDef interface) {
     final interfaceNameAsList = interface.name.split('.');
 
     // Strip off the 'I' from the last component

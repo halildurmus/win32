@@ -37,8 +37,7 @@ bool typePretendsToBeAnsi(String typeName) {
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
   if (typeName.startsWith('Pointer<')) {
-    final wrappedType =
-        typeName.substring(8, typeName.length - 1); // Pointer<X> => X
+    final wrappedType = stripPointer(typeName);
     return 'Pointer<${stripAnsiUnicodeSuffix(wrappedType)}>';
   }
   if (typePretendsToBeAnsi(typeName)) {
@@ -49,6 +48,9 @@ String stripAnsiUnicodeSuffix(String typeName) {
   }
   return typeName;
 }
+
+String stripPointer(String typeName) =>
+    typeName.substring(8, typeName.length - 1); // Pointer<X> => X
 
 bool typedefIsAnsi(TypeDef typedef) =>
     typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
@@ -138,7 +140,7 @@ String safeName(String name) {
 /// `Pointer<alljoyn_abouticon_handle>`.
 String safeTypename(String name) {
   if (name.startsWith('Pointer<')) {
-    final wrappedType = name.substring(8, name.length - 1); // Pointer<X> => X
+    final wrappedType = stripPointer(name);
     return 'Pointer<${safeTypename(wrappedType)}>';
   }
 

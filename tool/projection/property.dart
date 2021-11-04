@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart' as winmd;
 
 import 'method.dart';
+import 'utils.dart';
 
 // TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
 
@@ -22,8 +23,8 @@ class GetPropertyProjection extends PropertyProjection {
 
   @override
   String toString() => '''
-    ${parameters.first.type.dartType} get $exposedMethodName {
-      final retValuePtr = calloc<${parameters.first.type.nativeType}>();
+    ${stripPointer(parameters.first.type.dartType)} get $exposedMethodName {
+      final retValuePtr = calloc<${stripPointer(parameters.first.type.nativeType)}>();
       
       try {
         final hr = ptr.ref.lpVtbl.value
