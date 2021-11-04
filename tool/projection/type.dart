@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart' as winmd;
 
 import 'utils.dart';
+import 'win32_typemap.dart';
 
 class TypeTuple {
   final String nativeType;
@@ -163,6 +164,12 @@ class TypeProjection {
 
   TypeTuple unwrapCallbackType() {
     final callbackType = typeIdentifier.name.split('.').last;
+
+    // TODO: Remove in v3 -- for backward compat only
+    if (callbackTypeMapping.keys.contains(callbackType)) {
+      final mappedType = callbackTypeMapping[callbackType]!;
+      return TypeTuple(mappedType, mappedType);
+    }
 
     final nativeType = 'Pointer<NativeFunction<$callbackType>>';
     final dartType = 'Pointer<NativeFunction<$callbackType>>';
