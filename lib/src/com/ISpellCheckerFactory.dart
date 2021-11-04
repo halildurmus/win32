@@ -12,7 +12,6 @@ import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
-
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,31 +21,12 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
-
-/// @nodoc
 const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
-
-typedef _get_SupportedLanguages_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> value);
-typedef _get_SupportedLanguages_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> value);
-
-typedef _IsSupported_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Int32> value);
-typedef _IsSupported_Dart = int Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Int32> value);
-
-typedef _CreateSpellChecker_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value);
-typedef _CreateSpellChecker_Dart = int Function(
-    Pointer obj, Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value);
 
 /// {@category Interface}
 /// {@category com}
 class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, ends at 5
-
   ISpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer<COMObject> get SupportedLanguages {
@@ -55,9 +35,14 @@ class ISpellCheckerFactory extends IUnknown {
     try {
       final hr = ptr.ref.lpVtbl.value
               .elementAt(3)
-              .cast<Pointer<NativeFunction<_get_SupportedLanguages_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> value)>>>()
               .value
-              .asFunction<_get_SupportedLanguages_Dart>()(
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -72,19 +57,34 @@ class ISpellCheckerFactory extends IUnknown {
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
       ptr.ref.lpVtbl.value
           .elementAt(4)
-          .cast<Pointer<NativeFunction<_IsSupported_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Utf16> languageTag,
+                          Pointer<Int32> value)>>>()
           .value
-          .asFunction<_IsSupported_Dart>()(ptr.ref.lpVtbl, languageTag, value);
+          .asFunction<
+              int Function(Pointer, Pointer<Utf16> languageTag,
+                  Pointer<Int32> value)>()(ptr.ref.lpVtbl, languageTag, value);
 
   int CreateSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
-              .cast<Pointer<NativeFunction<_CreateSpellChecker_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> languageTag,
+                              Pointer<Pointer<COMObject>> value)>>>()
               .value
-              .asFunction<_CreateSpellChecker_Dart>()(
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> languageTag,
+                      Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, languageTag, value);
 }
+
+/// @nodoc
+const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
 
 /// {@category com}
 class SpellCheckerFactory extends ISpellCheckerFactory {

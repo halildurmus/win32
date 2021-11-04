@@ -72,3 +72,28 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 }
+
+/// @nodoc
+const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
+
+/// {@category com}
+class VirtualDesktopManager extends IVirtualDesktopManager {
+  VirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
+
+  factory VirtualDesktopManager.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_VirtualDesktopManager);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IVirtualDesktopManager);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return VirtualDesktopManager(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
+}

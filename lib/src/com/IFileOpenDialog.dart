@@ -12,7 +12,6 @@ import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
-
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,41 +21,42 @@ import '../utils.dart';
 import 'IFileDialog.dart';
 
 /// @nodoc
-const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4DDE-A5A1-60F82A20AEF7}';
-
-/// @nodoc
 const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
-
-typedef _GetResults_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> ppenum);
-typedef _GetResults_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> ppenum);
-
-typedef _GetSelectedItems_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> ppsai);
-typedef _GetSelectedItems_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> ppsai);
 
 /// {@category Interface}
 /// {@category com}
 class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, ends at 28
-
   IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
-      .elementAt(27)
-      .cast<Pointer<NativeFunction<_GetResults_Native>>>()
-      .value
-      .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
+          .elementAt(27)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> ppenum)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
+      ptr.ref.lpVtbl, ppenum);
 
   int GetSelectedItems(Pointer<Pointer<COMObject>> ppsai) =>
       ptr.ref.lpVtbl.value
-          .elementAt(28)
-          .cast<Pointer<NativeFunction<_GetSelectedItems_Native>>>()
-          .value
-          .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
+              .elementAt(28)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
+          ptr.ref.lpVtbl, ppsai);
 }
+
+/// @nodoc
+const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4DDE-A5A1-60F82A20AEF7}';
 
 /// {@category com}
 class FileOpenDialog extends IFileOpenDialog {

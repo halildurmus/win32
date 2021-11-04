@@ -394,3 +394,28 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<Utf16>> pstrClassName)>()(
           ptr.ref.lpVtbl, wszMethodName, pstrClassName);
 }
+
+/// @nodoc
+const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
+
+/// {@category com}
+class WbemClassObject extends IWbemClassObject {
+  WbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+
+  factory WbemClassObject.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemClassObject);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemClassObject);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return WbemClassObject(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
+}

@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart' as winmd;
 
 import 'method.dart';
 import 'property.dart';
+import 'utils.dart';
 
 class InterfaceProjection {
   final winmd.TypeDef typeDef;
@@ -47,7 +48,7 @@ class InterfaceProjection {
 
   int get vtableStart => calculateVTableStart(typeDef);
 
-  String get shortName => typeDef.name.split('.').last;
+  String get shortName => stripAnsiUnicodeSuffix(typeDef.name.split('.').last);
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {

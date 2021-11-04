@@ -104,3 +104,28 @@ class IShellItem extends IUnknown {
           int Function(Pointer, Pointer<COMObject> psi, int hint,
               Pointer<Int32> piOrder)>()(ptr.ref.lpVtbl, psi, hint, piOrder);
 }
+
+/// @nodoc
+const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
+
+/// {@category com}
+class ShellItem extends IShellItem {
+  ShellItem(Pointer<COMObject> ptr) : super(ptr);
+
+  factory ShellItem.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellItem);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IShellItem);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return ShellItem(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
+}

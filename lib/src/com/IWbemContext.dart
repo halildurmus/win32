@@ -134,3 +134,28 @@ class IWbemContext extends IUnknown {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 }
+
+/// @nodoc
+const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
+
+/// {@category com}
+class WbemContext extends IWbemContext {
+  WbemContext(Pointer<COMObject> ptr) : super(ptr);
+
+  factory WbemContext.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemContext);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemContext);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return WbemContext(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
+}

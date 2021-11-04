@@ -100,3 +100,30 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, processId);
 }
+
+/// @nodoc
+const CLSID_ApplicationActivationManager =
+    '{45BA127D-10A8-46EA-8AB7-56EA9078943C}';
+
+/// {@category com}
+class ApplicationActivationManager extends IApplicationActivationManager {
+  ApplicationActivationManager(Pointer<COMObject> ptr) : super(ptr);
+
+  factory ApplicationActivationManager.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()
+      ..ref.setGUID(CLSID_ApplicationActivationManager);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IApplicationActivationManager);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return ApplicationActivationManager(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
+}
