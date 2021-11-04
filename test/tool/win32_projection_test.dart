@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../tool/metadata/projection/typeprojector.dart';
+import '../../tool/projection/type.dart';
 
 void main() {
   test('Special types exist in metadata', () {
@@ -24,7 +24,7 @@ void main() {
 
     final param = api!.parameters.first.typeIdentifier; // uint32
 
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
     expect(typeProjection.nativeType, equals('Uint32'));
     expect(typeProjection.dartType, equals('int'));
   });
@@ -39,7 +39,7 @@ void main() {
 
     final param = api!.parameters.first.typeIdentifier; // HWND
 
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
     expect(typeProjection.nativeType, equals('IntPtr'));
     expect(typeProjection.dartType, equals('int'));
   });
@@ -53,7 +53,7 @@ void main() {
 
     final param = api!.parameters[1].typeIdentifier; // PWSTR
 
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
     expect(typeProjection.nativeType, equals('Pointer<Utf16>'));
     expect(typeProjection.dartType, equals('Pointer<Utf16>'));
   });
@@ -68,7 +68,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters[1].typeIdentifier; // LPSTR
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.nativeType, equals('Pointer<Utf8>'));
     expect(typeProjection.dartType, equals('Pointer<Utf8>'));
@@ -84,7 +84,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters.first.typeIdentifier; // PBYTE
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.nativeType, equals('Pointer<Uint8>'));
     expect(typeProjection.dartType, equals('Pointer<Uint8>'));
@@ -99,7 +99,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters.last.typeIdentifier;
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.nativeType, equals('Pointer<IntPtr>'));
     expect(typeProjection.dartType, equals('Pointer<IntPtr>'));
@@ -114,7 +114,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters.last.typeIdentifier; // PWSTR *
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.nativeType, equals('Pointer<Pointer<Utf16>>'));
     expect(typeProjection.dartType, equals('Pointer<Pointer<Utf16>>'));
@@ -130,7 +130,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters.last.typeIdentifier; // PCREDENTIALW *
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.nativeType, equals('Pointer<Pointer<CREDENTIAL>>'));
     expect(typeProjection.dartType, equals('Pointer<Pointer<CREDENTIAL>>'));
@@ -145,7 +145,7 @@ void main() {
     expect(api, isNotNull);
 
     final type = api!.parameters.first.typeIdentifier; // IUnknown
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
@@ -160,7 +160,7 @@ void main() {
     expect(api, isNotNull);
 
     final type = api!.parameters.first.typeIdentifier; // IMoniker*
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
     expect(typeProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
@@ -175,7 +175,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters[1].typeIdentifier; // LPUNKNOWN
-    final typeProjection = TypeProjector(param);
+    final typeProjection = TypeProjection(param);
 
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
@@ -184,13 +184,14 @@ void main() {
   test('Pass double pointers to COM interfaces', () {
     final scope = MetadataStore.getWin32Scope();
 
-    final typedef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
+    final typedef =
+        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis');
     final api = typedef?.findMethod('GetActiveObject');
 
     expect(api, isNotNull);
 
     final type = api!.parameters.last.typeIdentifier; // IUnknown **
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
     expect(typeProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
@@ -204,7 +205,7 @@ void main() {
 
     expect(api, isNotNull);
     final type = api!.parameters.first.typeIdentifier; // OLECHAR *
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Pointer<Utf16>'));
     expect(typeProjection.dartType, equals('Pointer<Utf16>'));
@@ -219,12 +220,12 @@ void main() {
     expect(api, isNotNull);
 
     final type = api!.parameters[2].typeIdentifier; // FONTENUMPROCW
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
+        equals('Pointer<NativeFunction<FONTENUMPROCW>>'));
     expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
+        equals('Pointer<NativeFunction<FONTENUMPROCW>>'));
   });
 
   test('Callbacks are represented correctly 2', () {
@@ -238,12 +239,12 @@ void main() {
 
     final type =
         api!.parameters[3].typeIdentifier; // PSYM_ENUMERATESYMBOLS_CALLBACKW
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACKW>>'));
     expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACKW>>'));
   });
 
   test('Pointers to structs are represented correctly', () {
@@ -254,7 +255,7 @@ void main() {
 
     expect(api, isNotNull);
     final type = api!.parameters.first.typeIdentifier; // CHOOSEFONTW
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Pointer<CHOOSEFONT>'));
     expect(typeProjection.dartType, equals('Pointer<CHOOSEFONT>'));
@@ -270,7 +271,7 @@ void main() {
 
     final type =
         api!.parameters.first.typeIdentifier; // LPPROC_THREAD_ATTRIBUTE_LIST
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Pointer'));
     expect(typeProjection.dartType, equals('Pointer'));
@@ -284,7 +285,7 @@ void main() {
 
     expect(api, isNotNull);
     final type = api!.parameters.last.typeIdentifier;
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Uint32'));
     expect(typeProjection.dartType, equals('int'));
@@ -300,7 +301,7 @@ void main() {
 
     final type = api!.parameters[1].typeIdentifier;
 
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Uint16'));
     expect(typeProjection.dartType, equals('int'));
@@ -314,7 +315,7 @@ void main() {
 
     expect(api, isNotNull);
     final type = api!.parameters[1].typeIdentifier;
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Pointer<Uint32>'));
     expect(typeProjection.dartType, equals('Pointer<Uint32>'));
@@ -330,7 +331,7 @@ void main() {
     expect(api, isNotNull);
 
     final type = api!.returnType.typeIdentifier;
-    final typeProjection = TypeProjector(type);
+    final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType, equals('Void'));
     expect(typeProjection.dartType, equals('void'));
@@ -349,7 +350,7 @@ void main() {
     expect(returnType.baseType, equals(BaseType.ValueTypeModifier));
     expect(returnType.name, equals('Windows.Win32.Foundation.HANDLE'));
 
-    final projection = TypeProjector(returnType);
+    final projection = TypeProjection(returnType);
     expect(projection.nativeType, equals('IntPtr'));
     expect(projection.dartType, equals('int'));
   });
@@ -364,7 +365,7 @@ void main() {
 
     final param = api!.parameters[1];
 
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
     expect(projection.nativeType, equals('Int64'));
     expect(projection.dartType, equals('int'));
   });
@@ -377,7 +378,7 @@ void main() {
 
     expect(bmiColors, isNotNull);
 
-    final projection = TypeProjector(bmiColors!);
+    final projection = TypeProjection(bmiColors!);
 
     expect(projection.nativeType, equals('Array<RGBQUAD>'));
     expect(projection.dartType, equals('Array<RGBQUAD>'));
@@ -390,7 +391,7 @@ void main() {
     final cbSize = procInfo?.fields[2].typeIdentifier; // cbSize
 
     expect(cbSize, isNotNull);
-    final projection = TypeProjector(cbSize!);
+    final projection = TypeProjection(cbSize!);
 
     expect(projection.nativeType, equals('Uint64'));
     expect(projection.dartType, equals('int'));
@@ -405,7 +406,7 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.parameters.first; // native int
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
 
     expect(projection.nativeType, equals('IntPtr'));
     expect(projection.dartType, equals('int'));
@@ -422,7 +423,7 @@ void main() {
 
     final param = api!.parameters.first;
     expect(param.name, equals('Buffer'));
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
 
     expect(projection.nativeType, equals('Pointer'));
     expect(projection.dartType, equals('Pointer'));
@@ -438,7 +439,7 @@ void main() {
 
     final param = api!.parameters.first;
     expect(param.name, equals('pAddress'));
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
 
     expect(projection.nativeType, equals('Pointer<BLUETOOTH_ADDRESS>'));
     expect(projection.dartType, equals('Pointer<BLUETOOTH_ADDRESS>'));
@@ -453,7 +454,7 @@ void main() {
 
     final field = struct!.fields[2];
     expect(field.name, equals('szName'));
-    final projection = TypeProjector(field.typeIdentifier);
+    final projection = TypeProjection(field.typeIdentifier);
 
     expect(projection.nativeType, equals('Array<Uint16>'));
     expect(projection.dartType, equals('Array<Uint16>'));
@@ -469,7 +470,7 @@ void main() {
 
     final field = struct!.fields.last;
     expect(field.name, equals('Network'));
-    final projection = TypeProjector(field.typeIdentifier);
+    final projection = TypeProjection(field.typeIdentifier);
 
     expect(projection.nativeType, equals('Array<DOT11_NETWORK>'));
     expect(projection.dartType, equals('Array<DOT11_NETWORK>'));
@@ -484,7 +485,7 @@ void main() {
     expect(struct, isNotNull);
 
     final field = struct!.fields.first;
-    final projection = TypeProjector(field.typeIdentifier);
+    final projection = TypeProjection(field.typeIdentifier);
 
     expect(projection.nativeType, equals('Array<Float>'));
     expect(projection.dartType, equals('Array<Float>'));
@@ -495,13 +496,13 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     final typedef =
-        scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
+        scope.findTypeDef('Windows.Win32.System.PropertiesSystem.Apis');
     final api = typedef?.findMethod('PSPropertyBag_WriteGUID')!;
 
     expect(api, isNotNull);
 
     final param = api!.parameters.last;
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
 
     expect(projection.nativeType, equals('Pointer<GUID>'));
     expect(projection.dartType, equals('Pointer<GUID>'));
@@ -518,10 +519,10 @@ void main() {
     expect(api, isNotNull);
 
     final param = api!.returnType;
-    final projection = TypeProjector(param.typeIdentifier);
+    final projection = TypeProjection(param.typeIdentifier);
 
-    expect(projection.nativeType, equals('Pointer'));
-    expect(projection.dartType, equals('Pointer'));
+    expect(projection.nativeType, equals('Pointer<NativeFunction<FARPROC>>'));
+    expect(projection.dartType, equals('Pointer<NativeFunction<FARPROC>>'));
     expect(projection.attribute, isEmpty);
   });
 }

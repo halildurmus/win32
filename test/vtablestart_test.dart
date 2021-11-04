@@ -7,7 +7,8 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../tool/metadata/projection/classprojector.dart';
+import '../tool/projection/interface.dart';
+import '../tool/projection/winrt_interface.dart';
 
 void main() {
   test('vTableStart for COM types', () {
@@ -68,7 +69,7 @@ void main() {
       final typeDef = scope.findTypeDef(type);
       expect(typeDef, isNotNull, reason: type);
       if (typeDef != null) {
-        final projectedClass = ClassProjector(typeDef);
+        final projectedClass = InterfaceProjection(typeDef);
         final calculatedVTableStart = projectedClass.vtableStart;
 
         expect(calculatedVTableStart, equals(testedTypes[type]),
@@ -89,7 +90,7 @@ void main() {
       final typeDef = scope.findTypeDef(type);
       expect(typeDef, isNotNull);
       if (typeDef != null) {
-        final projectedClass = ClassProjector(typeDef);
+        final projectedClass = WinRTInterfaceProjection(typeDef);
         final calculatedVTableStart = projectedClass.vtableStart;
 
         expect(calculatedVTableStart, equals(testedTypes[type]),

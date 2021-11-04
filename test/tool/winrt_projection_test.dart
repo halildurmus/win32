@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../tool/metadata/projection/typeprojector.dart';
+import '../../tool/projection/type.dart';
 
 void main() {
   test('Class valuetype is correctly identified', () {
@@ -12,7 +12,7 @@ void main() {
 
     final method = winTypeDef.findMethod('put_ViewMode')!;
     final classType = method.parameters.first.typeIdentifier;
-    final typeProjection = TypeProjector(classType);
+    final typeProjection = TypeProjection(classType);
 
     expect(typeProjection.isWrappedValueType, isTrue);
   });
@@ -22,7 +22,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Media.Playback.MediaPlayer')!;
 
     final method = winTypeDef.findMethod('get_Source')!;
-    final typeProjection = TypeProjector(method.returnType.typeIdentifier);
+    final typeProjection = TypeProjection(method.returnType.typeIdentifier);
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
   });
@@ -33,7 +33,7 @@ void main() {
 
     final method = winTypeDef.findMethod('put_Completed')!;
     final typeProjection =
-        TypeProjector(method.parameters.first.typeIdentifier);
+        TypeProjection(method.parameters.first.typeIdentifier);
     expect(typeProjection.dartType,
         equals('Pointer<NativeFunction<AsyncActionCompletedHandler>>'));
     expect(typeProjection.nativeType,
@@ -48,7 +48,7 @@ void main() {
     final method = winTypeDef!.findMethod('GetString');
     expect(method, isNotNull);
     final typeIdentifier = method!.returnType.typeIdentifier;
-    final typeProjection = TypeProjector(typeIdentifier);
+    final typeProjection = TypeProjection(typeIdentifier);
 
     expect(typeProjection.dartType, equals('Pointer<IntPtr>'));
     expect(typeProjection.nativeType, equals('Pointer<IntPtr>'));
