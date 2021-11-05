@@ -12,12 +12,14 @@ import 'package:winmd/winmd.dart';
 import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
+import '../namespace/win32_functions.dart';
+import '../projection/function.dart';
+import '../projection/type.dart';
 import 'generate_win32.dart';
-import 'projection/typeprojector.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
+  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -74,12 +76,12 @@ void main() {
         continue;
       }
 
-      final prototype = Win32Prototype(function, method, libraryDartName);
+      final prototype = FunctionProjection(method, libraryDartName);
 
       final returnFFIType =
-          TypeProjector(method.returnType.typeIdentifier).nativeType;
+          TypeProjection(method.returnType.typeIdentifier).nativeType;
       final returnDartType =
-          TypeProjector(method.returnType.typeIdentifier).dartType;
+          TypeProjection(method.returnType.typeIdentifier).dartType;
 
       final minimumWindowsVersion =
           filteredFunctionList[function]!.minimumWindowsVersion;
@@ -115,7 +117,8 @@ void main() {
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer = File('test/struct_test.dart').openSync(mode: FileMode.write);
+  final writer =
+      File('test/struct_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file

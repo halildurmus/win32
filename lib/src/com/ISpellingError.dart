@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,28 +23,10 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
 
-typedef _get_StartIndex_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
-typedef _get_StartIndex_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _get_Length_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
-typedef _get_Length_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _get_CorrectiveAction_Native = Int32 Function(
-    Pointer obj, Pointer<Int32> value);
-typedef _get_CorrectiveAction_Dart = int Function(
-    Pointer obj, Pointer<Int32> value);
-
-typedef _get_Replacement_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<Utf16>> value);
-typedef _get_Replacement_Dart = int Function(
-    Pointer obj, Pointer<Pointer<Utf16>> value);
-
 /// {@category Interface}
 /// {@category com}
 class ISpellingError extends IUnknown {
   // vtable begins at 3, ends at 6
-
   ISpellingError(Pointer<COMObject> ptr) : super(ptr);
 
   int get StartIndex {
@@ -51,10 +34,14 @@ class ISpellingError extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<Pointer<NativeFunction<_get_StartIndex_Native>>>()
-          .value
-          .asFunction<_get_StartIndex_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Uint32> value)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Uint32> value)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -70,10 +57,14 @@ class ISpellingError extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<Pointer<NativeFunction<_get_Length_Native>>>()
-          .value
-          .asFunction<_get_Length_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Uint32> value)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Uint32> value)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -90,9 +81,12 @@ class ISpellingError extends IUnknown {
     try {
       final hr = ptr.ref.lpVtbl.value
               .elementAt(5)
-              .cast<Pointer<NativeFunction<_get_CorrectiveAction_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Int32> value)>>>()
               .value
-              .asFunction<_get_CorrectiveAction_Dart>()(
+              .asFunction<int Function(Pointer, Pointer<Int32> value)>()(
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -109,10 +103,16 @@ class ISpellingError extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<Pointer<NativeFunction<_get_Replacement_Native>>>()
-          .value
-          .asFunction<_get_Replacement_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<Utf16>> value)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

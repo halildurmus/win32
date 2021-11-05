@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,118 +23,131 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IAppxManifestReader = '{4E1BD148-55A0-4480-A3D1-15544710637C}';
 
-typedef _GetPackageId_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> packageId);
-typedef _GetPackageId_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> packageId);
-
-typedef _GetProperties_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> packageProperties);
-typedef _GetProperties_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> packageProperties);
-
-typedef _GetPackageDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> dependencies);
-typedef _GetPackageDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> dependencies);
-
-typedef _GetCapabilities_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> capabilities);
-typedef _GetCapabilities_Dart = int Function(
-    Pointer obj, Pointer<Uint32> capabilities);
-
-typedef _GetResources_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> resources);
-typedef _GetResources_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> resources);
-
-typedef _GetDeviceCapabilities_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> deviceCapabilities);
-typedef _GetDeviceCapabilities_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> deviceCapabilities);
-
-typedef _GetPrerequisite_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> name, Pointer<Uint64> value);
-typedef _GetPrerequisite_Dart = int Function(
-    Pointer obj, Pointer<Utf16> name, Pointer<Uint64> value);
-
-typedef _GetApplications_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> applications);
-typedef _GetApplications_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> applications);
-
-typedef _GetStream_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<COMObject>> manifestStream);
-typedef _GetStream_Dart = int Function(
-    Pointer obj, Pointer<Pointer<COMObject>> manifestStream);
-
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, ends at 11
-
   IAppxManifestReader(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetPackageId(Pointer<Pointer<COMObject>> packageId) =>
-      ptr.ref.lpVtbl.value
+  int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr
+          .ref.lpVtbl.value
           .elementAt(3)
-          .cast<Pointer<NativeFunction<_GetPackageId_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> packageId)>>>()
           .value
-          .asFunction<_GetPackageId_Dart>()(ptr.ref.lpVtbl, packageId);
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> packageId)>()(
+      ptr.ref.lpVtbl, packageId);
 
-  int GetProperties(Pointer<Pointer<COMObject>> packageProperties) =>
-      ptr.ref.lpVtbl.value
+  int GetProperties(Pointer<Pointer<COMObject>> packageProperties) => ptr
+          .ref.lpVtbl.value
           .elementAt(4)
-          .cast<Pointer<NativeFunction<_GetProperties_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> packageProperties)>>>()
           .value
-          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, packageProperties);
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Pointer<COMObject>> packageProperties)>()(
+      ptr.ref.lpVtbl, packageProperties);
 
-  int GetPackageDependencies(Pointer<Pointer<COMObject>> dependencies) => ptr
-      .ref.lpVtbl.value
-      .elementAt(5)
-      .cast<Pointer<NativeFunction<_GetPackageDependencies_Native>>>()
-      .value
-      .asFunction<_GetPackageDependencies_Dart>()(ptr.ref.lpVtbl, dependencies);
+  int GetPackageDependencies(Pointer<Pointer<COMObject>> dependencies) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> dependencies)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
+          ptr.ref.lpVtbl, dependencies);
 
   int GetCapabilities(Pointer<Uint32> capabilities) => ptr.ref.lpVtbl.value
-      .elementAt(6)
-      .cast<Pointer<NativeFunction<_GetCapabilities_Native>>>()
-      .value
-      .asFunction<_GetCapabilities_Dart>()(ptr.ref.lpVtbl, capabilities);
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Uint32> capabilities)>>>()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint32> capabilities)>()(
+      ptr.ref.lpVtbl, capabilities);
 
-  int GetResources(Pointer<Pointer<COMObject>> resources) =>
-      ptr.ref.lpVtbl.value
+  int GetResources(Pointer<Pointer<COMObject>> resources) => ptr
+          .ref.lpVtbl.value
           .elementAt(7)
-          .cast<Pointer<NativeFunction<_GetResources_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> resources)>>>()
           .value
-          .asFunction<_GetResources_Dart>()(ptr.ref.lpVtbl, resources);
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
+      ptr.ref.lpVtbl, resources);
 
-  int GetDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(8)
-              .cast<Pointer<NativeFunction<_GetDeviceCapabilities_Native>>>()
-              .value
-              .asFunction<_GetDeviceCapabilities_Dart>()(
-          ptr.ref.lpVtbl, deviceCapabilities);
+  int
+      GetDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
+          ptr.ref.lpVtbl.value
+                  .elementAt(8)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              Int32 Function(
+                                  Pointer,
+                                  Pointer<Pointer<COMObject>>
+                                      deviceCapabilities)>>>()
+                  .value
+                  .asFunction<
+                      int Function(Pointer,
+                          Pointer<Pointer<COMObject>> deviceCapabilities)>()(
+              ptr.ref.lpVtbl, deviceCapabilities);
 
-  int GetPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<Pointer<NativeFunction<_GetPrerequisite_Native>>>()
-          .value
-          .asFunction<_GetPrerequisite_Dart>()(ptr.ref.lpVtbl, name, value);
+  int GetPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) => ptr
+      .ref.lpVtbl.value
+      .elementAt(9)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(
+                      Pointer, Pointer<Utf16> name, Pointer<Uint64> value)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<Utf16> name,
+              Pointer<Uint64> value)>()(ptr.ref.lpVtbl, name, value);
 
   int GetApplications(Pointer<Pointer<COMObject>> applications) =>
       ptr.ref.lpVtbl.value
-          .elementAt(10)
-          .cast<Pointer<NativeFunction<_GetApplications_Native>>>()
-          .value
-          .asFunction<_GetApplications_Dart>()(ptr.ref.lpVtbl, applications);
+              .elementAt(10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> applications)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> applications)>()(
+          ptr.ref.lpVtbl, applications);
 
   int GetStream(Pointer<Pointer<COMObject>> manifestStream) =>
       ptr.ref.lpVtbl.value
-          .elementAt(11)
-          .cast<Pointer<NativeFunction<_GetStream_Native>>>()
-          .value
-          .asFunction<_GetStream_Dart>()(ptr.ref.lpVtbl, manifestStream);
+              .elementAt(11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> manifestStream)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> manifestStream)>()(
+          ptr.ref.lpVtbl, manifestStream);
 }

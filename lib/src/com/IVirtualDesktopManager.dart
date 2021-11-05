@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -20,62 +21,60 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
-
-/// @nodoc
 const IID_IVirtualDesktopManager = '{A5CD92FF-29BE-454C-8D04-D82879FB3F1B}';
-
-typedef _IsWindowOnCurrentVirtualDesktop_Native = Int32 Function(
-    Pointer obj, IntPtr topLevelWindow, Pointer<Int32> onCurrentDesktop);
-typedef _IsWindowOnCurrentVirtualDesktop_Dart = int Function(
-    Pointer obj, int topLevelWindow, Pointer<Int32> onCurrentDesktop);
-
-typedef _GetWindowDesktopId_Native = Int32 Function(
-    Pointer obj, IntPtr topLevelWindow, Pointer<GUID> desktopId);
-typedef _GetWindowDesktopId_Dart = int Function(
-    Pointer obj, int topLevelWindow, Pointer<GUID> desktopId);
-
-typedef _MoveWindowToDesktop_Native = Int32 Function(
-    Pointer obj, IntPtr topLevelWindow, Pointer<GUID> desktopId);
-typedef _MoveWindowToDesktop_Dart = int Function(
-    Pointer obj, int topLevelWindow, Pointer<GUID> desktopId);
 
 /// {@category Interface}
 /// {@category com}
 class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, ends at 5
-
   IVirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
 
-  int
-      IsWindowOnCurrentVirtualDesktop(
-              int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
-          ptr.ref.lpVtbl.value
-                  .elementAt(3)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              _IsWindowOnCurrentVirtualDesktop_Native>>>()
-                  .value
-                  .asFunction<_IsWindowOnCurrentVirtualDesktop_Dart>()(
-              ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
+  int IsWindowOnCurrentVirtualDesktop(
+          int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                              Pointer<Int32> onCurrentDesktop)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int topLevelWindow,
+                      Pointer<Int32> onCurrentDesktop)>()(
+          ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
 
   int GetWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
       ptr.ref.lpVtbl.value
               .elementAt(4)
-              .cast<Pointer<NativeFunction<_GetWindowDesktopId_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                              Pointer<GUID> desktopId)>>>()
               .value
-              .asFunction<_GetWindowDesktopId_Dart>()(
+              .asFunction<
+                  int Function(
+                      Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 
   int MoveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
-              .cast<Pointer<NativeFunction<_MoveWindowToDesktop_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                              Pointer<GUID> desktopId)>>>()
               .value
-              .asFunction<_MoveWindowToDesktop_Dart>()(
+              .asFunction<
+                  int Function(
+                      Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 }
+
+/// @nodoc
+const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
 
 /// {@category com}
 class VirtualDesktopManager extends IVirtualDesktopManager {

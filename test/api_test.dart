@@ -6735,8 +6735,8 @@ void main() {
     test('Can instantiate UnregisterPowerSettingNotification', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final UnregisterPowerSettingNotification = user32.lookupFunction<
-          Int32 Function(IntPtr Handle),
-          int Function(int Handle)>('UnregisterPowerSettingNotification');
+          Int32 Function(IntPtr Handle_),
+          int Function(int Handle_)>('UnregisterPowerSettingNotification');
       expect(UnregisterPowerSettingNotification, isA<Function>());
     });
     test('Can instantiate UnregisterTouchWindow', () {

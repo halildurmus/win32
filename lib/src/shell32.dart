@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -28,11 +29,11 @@ final _shell32 = DynamicLibrary.open('shell32.dll');
 /// );
 /// ```
 /// {@category shell32}
-Pointer<Pointer<Utf16>> CommandLineToArgvW(
+Pointer<Pointer<Utf16>> CommandLineToArgv(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs) =>
-    _CommandLineToArgvW(lpCmdLine, pNumArgs);
+    _CommandLineToArgv(lpCmdLine, pNumArgs);
 
-late final _CommandLineToArgvW = _shell32.lookupFunction<
+late final _CommandLineToArgv = _shell32.lookupFunction<
     Pointer<Pointer<Utf16>> Function(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs),
     Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,

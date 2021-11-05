@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -96,11 +97,11 @@ late final _connect = _ws2_32.lookupFunction<
 /// );
 /// ```
 /// {@category winsock}
-int GetAddrInfoW(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
+int GetAddrInfo(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
         Pointer<addrinfo> pHints, Pointer<Pointer<addrinfo>> ppResult) =>
-    _GetAddrInfoW(pNodeName, pServiceName, pHints, ppResult);
+    _GetAddrInfo(pNodeName, pServiceName, pHints, ppResult);
 
-late final _GetAddrInfoW = _ws2_32.lookupFunction<
+late final _GetAddrInfo = _ws2_32.lookupFunction<
     Int32 Function(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
         Pointer<addrinfo> pHints, Pointer<Pointer<addrinfo>> ppResult),
     int Function(

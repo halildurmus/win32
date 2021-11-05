@@ -91,6 +91,7 @@ export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
+export 'src/guid.dart';
 export 'src/macros.dart';
 export 'src/structs.dart' hide IN_ADDR;
 export 'src/structs.g.dart'

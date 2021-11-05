@@ -13,8 +13,9 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import 'projection/classprojector.dart';
-import 'projection/typeprinter.dart';
+import '../projection/winrt_interface.dart';
+
+// import '../projection/typeprinter.dart';
 
 final typesToGenerate = [
   'Windows.Foundation.IPropertyValue',
@@ -42,8 +43,8 @@ void main(List<String> args) {
       throw Exception("Can't find type $type.");
     }
 
-    final projection = ClassProjector(mdTypeDef).projection;
-    final dartClass = TypePrinter.printProjection(projection);
+    final projection = WinRTInterfaceProjection(mdTypeDef);
+    final dartClass = projection.toString();
 
     final outputFilename = type.split('.').last;
     final outputFile =

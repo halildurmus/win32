@@ -35,7 +35,7 @@ void initApp(Function winMain) {
 
   // Parse command line args using Win32 functions, to reduce ceremony in the
   // app that uses this.
-  final szArgList = CommandLineToArgvW(GetCommandLine(), nArgs);
+  final szArgList = CommandLineToArgv(GetCommandLine(), nArgs);
   for (var i = 0; i < nArgs.value; i++) {
     args.add(szArgList[i].toDartString());
   }

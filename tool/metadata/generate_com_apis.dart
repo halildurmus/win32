@@ -5,10 +5,9 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:winmd/winmd.dart';
 
-import 'projection/classprojector.dart';
-import 'projection/data_classes.dart';
-import 'projection/typeprinter.dart';
-import 'projection/win32_typemap.dart';
+import '../projection/class.dart';
+import '../projection/interface.dart';
+import '../projection/utils.dart';
 
 const interfacesToGenerate = <String>[
   'Windows.Win32.Globalization.IEnumSpellingError',
@@ -92,23 +91,6 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IShellService',
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
-
-/// Take a fully-qualified interface name (e.g.
-/// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding classname
-/// (e.g. `Windows.Win32.UI.Shell.ShellLink`).
-String classNameForInterfaceName(String interfaceName) {
-  final interfaceNameAsList = interfaceName.split('.');
-
-  // Strip off the 'I' from the last component
-  final fullyQualifiedClassName =
-      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
-            ..add(interfaceNameAsList.last.substring(1)))
-          .join('.');
-
-  // If class has a 'W' suffix, erase it.
-  return stripAnsiUnicodeSuffix(fullyQualifiedClassName);
-}
-
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
 
@@ -118,43 +100,37 @@ void main(List<String> args) {
 
   final argResults = parser.parse(args);
   final classDirectory = Directory(argResults['classDirectory'] as String);
-  final testDirectory = Directory(argResults['testDirectory'] as String);
+  // final testDirectory = Directory(argResults['testDirectory'] as String);
 
-  for (final type in interfacesToGenerate) {
-    final mdTypeDef = scope.findTypeDef(type);
+  for (final interface in interfacesToGenerate) {
+    final typeDef = scope.findTypeDef(interface);
+    if (typeDef == null) throw Exception("Can't find $interface");
 
-    if (mdTypeDef == null) throw Exception("Can't find $type");
+    InterfaceProjection interfaceProjection;
+    interfaceProjection = InterfaceProjection(typeDef);
 
-    final clsid =
-        scope.findTypeDef(classNameForInterfaceName(type))?.guid ?? '';
+    // In v2, we put classes and interfaces in the same file.
+    final className = ClassProjection.generateClassName(typeDef);
+    if (scope.findTypeDef(className) != null) {
+      interfaceProjection = ClassProjection.fromInterface(typeDef);
+    }
 
-    final parentInterface = mdTypeDef.interfaces.isNotEmpty
-        ? mdTypeDef.interfaces.first.name.split('.').last
-        : '';
+    final dartClass = interfaceProjection.toString();
 
-    final projection = ClassProjector(mdTypeDef).projection
-      ..inherits = parentInterface
-      // ..vtableStart = vTableStart(mdTypeDef)
-      ..sourceType = SourceType.com
-      ..generateClass = clsid.isNotEmpty
-      ..clsid = clsid
-      ..className = stripAnsiUnicodeSuffix(type.split('.').last.substring(1));
-
-    final dartClass = TypePrinter.printProjection(projection);
-
-    final classOutputFilename = stripAnsiUnicodeSuffix(type.split('.').last);
+    final classOutputFilename =
+        stripAnsiUnicodeSuffix(interface.split('.').last);
     final outputFile =
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
     print('Writing:    ${outputFile.path}');
     outputFile.writeAsStringSync(dartClass);
 
-    final dartTests = TypePrinter.printTests(projection);
+    //   final dartTests = TypePrinter.printTests(classProjection);
 
-    final testFile = File(
-        '${testDirectory.uri.toFilePath()}${classOutputFilename}_test.dart');
+    //   final testFile = File(
+    //       '${testDirectory.uri.toFilePath()}${classOutputFilename}_test.dart');
 
-    print('Writing:    ${testFile.path}');
-    testFile.writeAsStringSync(dartTests);
+    //   print('Writing:    ${testFile.path}');
+    //   testFile.writeAsStringSync(dartTests);
   }
 }
