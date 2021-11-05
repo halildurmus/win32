@@ -58,9 +58,17 @@ class WinRTInterfaceProjection extends InterfaceProjection {
     // WinRT types inherit from IInspectable
     if (type.interfaces.isEmpty) {
       return 6;
-    } else {
-      return super.calculateVTableStart(type);
     }
+    if (type.isInterface && type.interfaces.isNotEmpty) {
+      var sum = 0;
+
+      for (final interface in type.interfaces) {
+        sum += interface.methods.length + calculateVTableStart(interface);
+      }
+
+      return sum;
+    }
+    return 0;
   }
 
   @override

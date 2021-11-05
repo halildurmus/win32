@@ -146,22 +146,26 @@ void main() {
       final isConnected = projection.methodProjections
           .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
       expect(isConnected.parameters.length, equals(1));
-      expect(isConnected.parameters.first.type.nativeType, equals('Int16'));
-      expect(isConnected.parameters.first.type.dartType, equals('int'));
+      expect(isConnected.parameters.first.type.nativeType,
+          equals('Pointer<Int16>'));
+      expect(
+          isConnected.parameters.first.type.dartType, equals('Pointer<Int16>'));
     });
   });
 
-  test('IEnumNetworkConnections.NewEnum projects a Pointer', () {
+  test(
+      'IEnumNetworkConnections.NewEnum projects the appropriate type for IEnumVARIANT*',
+      () {
     final iEnumNetworkConnections = scope.findTypeDef(
         'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections')!;
     final projection = InterfaceProjection(iEnumNetworkConnections);
     final newEnum = projection.methodProjections
         .firstWhere((method) => (method.name == 'get__NewEnum'));
     expect(newEnum.parameters.length, equals(1));
-    expect(
-        newEnum.parameters.first.type.nativeType, equals('Pointer<COMObject>'));
-    expect(
-        newEnum.parameters.first.type.dartType, equals('Pointer<COMObject>'));
+    expect(newEnum.parameters.first.type.nativeType,
+        equals('Pointer<Pointer<COMObject>>'));
+    expect(newEnum.parameters.first.type.dartType,
+        equals('Pointer<Pointer<COMObject>>'));
   });
 
   test(

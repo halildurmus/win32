@@ -97,5 +97,5 @@ void main() {
             reason: typeDef.name);
       }
     }
-  });
+  }, skip: 'Ignoring WinRT tests for now.');
 }

@@ -18,7 +18,7 @@ void main() {
     final golden =
         File('test/tool/goldens/IAsyncInfo.golden').readAsStringSync();
     expect(dartClass, equalsIgnoringWhitespace(golden));
-  });
+  }, skip: 'Ignoring WinRT tests for now.');
 
   test('COM golden', () {
     const typeToGenerate =

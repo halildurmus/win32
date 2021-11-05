@@ -184,8 +184,7 @@ void main() {
   test('Pass double pointers to COM interfaces', () {
     final scope = MetadataStore.getWin32Scope();
 
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis');
+    final typedef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
     final api = typedef?.findMethod('GetActiveObject');
 
     expect(api, isNotNull);
@@ -223,9 +222,9 @@ void main() {
     final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<FONTENUMPROCW>>'));
+        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
     expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<FONTENUMPROCW>>'));
+        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
   });
 
   test('Callbacks are represented correctly 2', () {
@@ -242,9 +241,9 @@ void main() {
     final typeProjection = TypeProjection(type);
 
     expect(typeProjection.nativeType,
-        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACKW>>'));
+        equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
     expect(typeProjection.dartType,
-        equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACKW>>'));
+        equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
   });
 
   test('Pointers to structs are represented correctly', () {
@@ -496,7 +495,7 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     final typedef =
-        scope.findTypeDef('Windows.Win32.System.PropertiesSystem.Apis');
+        scope.findTypeDef('Windows.Win32.UI.Shell.PropertiesSystem.Apis');
     final api = typedef?.findMethod('PSPropertyBag_WriteGUID')!;
 
     expect(api, isNotNull);
@@ -521,8 +520,8 @@ void main() {
     final param = api!.returnType;
     final projection = TypeProjection(param.typeIdentifier);
 
-    expect(projection.nativeType, equals('Pointer<NativeFunction<FARPROC>>'));
-    expect(projection.dartType, equals('Pointer<NativeFunction<FARPROC>>'));
+    expect(projection.nativeType, equals('Pointer'));
+    expect(projection.dartType, equals('Pointer'));
     expect(projection.attribute, isEmpty);
   });
 }
