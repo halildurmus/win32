@@ -41,6 +41,9 @@ void main() {
   test('Struct COR_FIELD_OFFSET is the right size', () {
     expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
   });
+  test('Struct DECIMAL is the right size', () {
+    expect(sizeOf<DECIMAL>(), equals(16));
+  });
   test('Struct DEVMODE is the right size', () {
     expect(sizeOf<DEVMODE>(), equals(220));
   });
@@ -267,6 +270,9 @@ void main() {
   });
   test('Struct CONSOLE_CURSOR_INFO is the right size', () {
     expect(sizeOf<CONSOLE_CURSOR_INFO>(), equals(8));
+  });
+  test('Struct CONSOLE_READCONSOLE_CONTROL is the right size', () {
+    expect(sizeOf<CONSOLE_READCONSOLE_CONTROL>(), equals(16));
   });
   test('Struct CONSOLE_SCREEN_BUFFER_INFO is the right size', () {
     expect(sizeOf<CONSOLE_SCREEN_BUFFER_INFO>(), equals(22));
