@@ -95,6 +95,10 @@
         "namespace": "Windows.Win32.Devices.Communication.COMMCONFIG",
         "comment": "Contains information about the configuration state of a communications device."
     },
+    "COMMPROP": {
+        "namespace": "Windows.Win32.Devices.Communication.COMMPROP",
+        "comment": "Contains information about a communications driver."
+    },
     "COMMTIMEOUTS": {
         "namespace": "Windows.Win32.Devices.Communication.COMMTIMEOUTS",
         "comment": "Contains the time-out parameters for a communications device. The parameters determine the behavior of ReadFile, WriteFile, ReadFileEx, and WriteFileEx operations on the device."
@@ -294,6 +298,10 @@
     "JOB_INFO_1": {
         "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
         "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
+    },
+    "KEYBDINPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.KEYBDINPUT",
+        "comment": "Contains information about a simulated keyboard event."
     },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION",

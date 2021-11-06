@@ -52,6 +52,7 @@ import 'structs.g.dart';
 ///
 /// {@category Struct}
 class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  // TODO: Union
   @Uint16()
   external int Type;
   @Uint16()
@@ -70,69 +71,12 @@ class PRINTER_NOTIFY_INFO_DATA extends Struct {
   external Pointer pBuf;
 }
 
-/// Contains information about a communications driver.
-///
-/// {@category Struct}
-@Packed(2)
-class COMMPROP extends Struct {
-  @Uint16()
-  external int wPacketLength;
-  @Uint16()
-  external int wPacketVersion;
-  @Uint32()
-  external int dwServiceMask;
-  @Uint32()
-  external int dwReserved1;
-  @Uint32()
-  external int dwMaxTxQueue;
-  @Uint32()
-  external int dwMaxRxQueue;
-  @Uint32()
-  external int dwMaxBaud;
-  @Uint32()
-  external int dwProvSubType;
-  @Uint32()
-  external int dwProvCapabilities;
-  @Uint32()
-  external int dwSettableParams;
-  @Uint32()
-  external int dwSettableBaud;
-  @Uint16()
-  external int wSettableData;
-  @Uint32()
-  external int wSettableStopParity;
-  @Uint32()
-  external int dwCurrentTxQueue;
-  @Uint32()
-  external int dwCurrentRxQueue;
-  @Uint32()
-  external int dwProvSpec1;
-  @Uint32()
-  external int dwProvSpec2;
-  @Array(1)
-  external Array<Uint16> _wcProvChar;
-
-  String get wcProvChar {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      charCodes.add(_wcProvChar[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set wcProvChar(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _wcProvChar[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-}
-
 /// The DEVMODE data structure contains information about the
 /// initialization and environment of a printer or a display device.
 ///
 /// {@category Struct}
 class DEVMODE extends Struct {
+  // TODO: Union
   @Array(32)
   external Array<Uint16> dmDeviceName;
   @Uint16()
@@ -207,6 +151,8 @@ class DEVMODE extends Struct {
 ///
 /// {@category Struct}
 class IN_ADDR extends Struct {
+  // TODO: Union
+
   @Array(4)
   external Array<Uint8> s_b;
 }
@@ -216,6 +162,8 @@ class IN_ADDR extends Struct {
 ///
 /// {@category Struct}
 class PROCESS_HEAP_ENTRY extends Struct {
+  // TODO: Union
+
   external Pointer lpData;
   @Uint32()
   external int cbData;
@@ -905,23 +853,6 @@ class _INPUT_Anonymous_0 extends Union {
   external MOUSEINPUT mi;
   external KEYBDINPUT ki;
   external HARDWAREINPUT hi;
-}
-
-/// Contains information about a simulated keyboard event.
-///
-/// {@category Struct}
-class KEYBDINPUT extends Struct {
-  // TODO: Fix type parser to detect this correctly
-  @Uint16()
-  external int wVk;
-  @Uint16()
-  external int wScan;
-  @Uint32()
-  external int dwFlags;
-  @Uint32()
-  external int time;
-  @IntPtr()
-  external int dwExtraInfo;
 }
 
 /// Used by SendInput to store information for synthesizing input events such as

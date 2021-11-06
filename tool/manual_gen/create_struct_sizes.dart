@@ -47,7 +47,6 @@ void main()
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
-    printf("  'COMMPROP': %zu,\\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));

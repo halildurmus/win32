@@ -90,6 +90,7 @@ void main()
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("  'COMMCONFIG': %zu,\n", sizeof(COMMCONFIG));
+    printf("  'COMMPROP': %zu,\n", sizeof(COMMPROP));
     printf("  'COMMTIMEOUTS': %zu,\n", sizeof(COMMTIMEOUTS));
     printf("  'COMSTAT': %zu,\n", sizeof(COMSTAT));
     printf("  'CONSOLE_CURSOR_INFO': %zu,\n", sizeof(CONSOLE_CURSOR_INFO));
@@ -140,6 +141,7 @@ void main()
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
+    printf("  'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("  'L2_NOTIFICATION_DATA': %zu,\n", sizeof(L2_NOTIFICATION_DATA));
     printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
