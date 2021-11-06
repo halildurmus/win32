@@ -170,9 +170,26 @@ class TypeDef extends TokenObject
         // If it's the same scope, just look it up based on the returned name.
         if (scope.moduleToken == resolutionScopeToken) {
           return scope.findTypeDef(typeName) ??
-              // anonymous union won't resolve
+              // TODO: anonymous union won't resolve
               TypeDef(scope, 0, typeName);
         }
+
+        // TODO: Why does this not work to resolve the typeref?
+        // final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
+        // final refScope = calloc<COMObject>();
+        // final ptkTypeDef = calloc<mdTypeDef>();
+
+        // try {
+        //   final hr = reader.ResolveTypeRef(
+        //       typeRefToken, IID_IMetaDataImport2, refScope.cast(), ptkTypeDef);
+        //   if (SUCCEEDED(hr)) {
+        //     return TypeDef.fromTypeDefToken(scope, ptkTypeDef.value);
+        //   }
+        // } finally {
+        //   free(IID_IMetaDataImport2);
+        //   free(refScope);
+        //   free(ptkTypeDef);
+        // }
 
         // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
         // OK, so we'll just return the type name.
