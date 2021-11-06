@@ -4,7 +4,7 @@ import 'interface.dart';
 import 'utils.dart';
 
 class ClassProjection extends InterfaceProjection {
-  late final InterfaceProjection interface;
+  final InterfaceProjection interface;
 
   ClassProjection(winmd.TypeDef typeDef, this.interface) : super(typeDef);
 

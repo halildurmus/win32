@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart' as winmd;
 
-import '../namespace/exclusions.dart';
+import '../metadata/exclusions.dart';
 import 'field.dart';
 import 'utils.dart';
 

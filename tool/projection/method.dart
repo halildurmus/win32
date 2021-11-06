@@ -9,26 +9,23 @@ import 'type.dart';
 class MethodProjection {
   final winmd.Method method;
   final int vtableOffset;
-  late String name;
-  late List<ParameterProjection> parameters;
-  late TypeProjection returnType;
+  final String name;
+  final List<ParameterProjection> parameters;
+  final TypeProjection returnType;
 
-  MethodProjection(this.method, this.vtableOffset) {
-    // Generate a Dart-compatible name
-    name = uniquelyNameMethod(method);
-
-    returnType = TypeProjection(method.returnType.typeIdentifier);
-    parameters = method.parameters
-        .map((param) => ParameterProjection(
-            param.name, TypeProjection(param.typeIdentifier)))
-        .toList();
-  }
+  MethodProjection(this.method, this.vtableOffset)
+      : name = uniquelyNameMethod(method),
+        returnType = TypeProjection(method.returnType.typeIdentifier),
+        parameters = method.parameters
+            .map((param) => ParameterProjection(
+                param.name, TypeProjection(param.typeIdentifier)))
+            .toList();
 
   /// Uniquely name the method.
   ///
   /// Dart doesn't allow overloaded methods, so we have to rename methods that
   /// are duplicated.
-  String uniquelyNameMethod(winmd.Method method) {
+  static String uniquelyNameMethod(winmd.Method method) {
     // Is it an overload with a name provided by the metadata?
     final overloadName = method
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');

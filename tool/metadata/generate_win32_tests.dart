@@ -12,10 +12,10 @@ import 'package:winmd/winmd.dart';
 import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
-import '../namespace/win32_functions.dart';
 import '../projection/function.dart';
 import '../projection/type.dart';
 import 'generate_win32.dart';
+import 'win32_functions.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;

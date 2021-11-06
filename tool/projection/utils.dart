@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../namespace/exclusions.dart';
+import '../metadata/exclusions.dart';
 import 'type.dart';
 
 const dartKeywords = <String>[
