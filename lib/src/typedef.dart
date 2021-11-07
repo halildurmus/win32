@@ -118,114 +118,99 @@ class TypeDef extends TokenObject
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
-    final szTypeDef = wsalloc(MAX_STRING_SIZE);
-    final pchTypeDef = calloc<ULONG>();
-    final pdwTypeDefFlags = calloc<DWORD>();
-    final ptkExtends = calloc<mdToken>();
+  factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) =>
+      using((Arena arena) {
+        final szTypeDef = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchTypeDef = arena<ULONG>();
+        final pdwTypeDefFlags = arena<DWORD>();
+        final ptkExtends = arena<mdToken>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
-          MAX_STRING_SIZE, pchTypeDef, pdwTypeDefFlags, ptkExtends);
+        final reader = scope.reader;
+        final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
+            MAX_STRING_SIZE, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
-      if (SUCCEEDED(hr)) {
-        return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
-            pdwTypeDefFlags.value, ptkExtends.value);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(pchTypeDef);
-      free(pdwTypeDefFlags);
-      free(ptkExtends);
-      free(szTypeDef);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
+              pdwTypeDefFlags.value, ptkExtends.value);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   /// Instantiate a typedef from a TypeRef token.
   ///
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
-    final ptkResolutionScope = calloc<mdToken>();
-    final szName = wsalloc(MAX_STRING_SIZE);
-    final pchName = calloc<ULONG>();
+  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) =>
+      using((Arena arena) {
+        final ptkResolutionScope = arena<mdToken>();
+        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchName = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetTypeRefProps(
-          typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
+        final reader = scope.reader;
+        final hr = reader.GetTypeRefProps(
+            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
 
-      if (SUCCEEDED(hr)) {
-        final typeName = szName.toDartString();
-        final resolutionScopeToken = ptkResolutionScope.value;
+        if (SUCCEEDED(hr)) {
+          final typeName = szName.toDartString();
+          final resolutionScopeToken = ptkResolutionScope.value;
 
-        // Special case for WinRT base type
-        if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
-          return TypeDef(scope, 0, 'IInspectable');
+          // Special case for WinRT base type
+          if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
+            return TypeDef(scope, 0, 'IInspectable');
+          }
+
+          // If it's the same scope, just look it up based on the returned name.
+          if (scope.moduleToken == resolutionScopeToken) {
+            return scope.findTypeDef(typeName) ??
+                // TODO: anonymous union won't resolve
+                TypeDef(scope, 0, typeName);
+          }
+
+          // TODO: Why does this not work to resolve the typeref?
+          // final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
+          // final refScope = calloc<COMObject>();
+          // final ptkTypeDef = calloc<mdTypeDef>();
+
+          // try {
+          //   final hr = reader.ResolveTypeRef(
+          //       typeRefToken, IID_IMetaDataImport2, refScope.cast(), ptkTypeDef);
+          //   if (SUCCEEDED(hr)) {
+          //     return TypeDef.fromTypeDefToken(scope, ptkTypeDef.value);
+          //   }
+          // } finally {
+          //   free(IID_IMetaDataImport2);
+          //   free(refScope);
+          //   free(ptkTypeDef);
+          // }
+
+          // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
+          // OK, so we'll just return the type name.
+          return TypeDef(scope, 0, typeName);
+        } else {
+          throw WindowsException(hr);
         }
-
-        // If it's the same scope, just look it up based on the returned name.
-        if (scope.moduleToken == resolutionScopeToken) {
-          return scope.findTypeDef(typeName) ??
-              // TODO: anonymous union won't resolve
-              TypeDef(scope, 0, typeName);
-        }
-
-        // TODO: Why does this not work to resolve the typeref?
-        // final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
-        // final refScope = calloc<COMObject>();
-        // final ptkTypeDef = calloc<mdTypeDef>();
-
-        // try {
-        //   final hr = reader.ResolveTypeRef(
-        //       typeRefToken, IID_IMetaDataImport2, refScope.cast(), ptkTypeDef);
-        //   if (SUCCEEDED(hr)) {
-        //     return TypeDef.fromTypeDefToken(scope, ptkTypeDef.value);
-        //   }
-        // } finally {
-        //   free(IID_IMetaDataImport2);
-        //   free(refScope);
-        //   free(ptkTypeDef);
-        // }
-
-        // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
-        // OK, so we'll just return the type name.
-        return TypeDef(scope, 0, typeName);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkResolutionScope);
-      free(szName);
-      free(pchName);
-    }
-  }
+      });
 
   /// Instantiate a typedef from a TypeSpec token.
-  factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) {
-    final ppvSig = calloc<PCCOR_SIGNATURE>();
-    final pcbSig = calloc<ULONG>();
+  factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) =>
+      using((Arena arena) {
+        final ppvSig = arena<PCCOR_SIGNATURE>();
+        final pcbSig = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
-      final signature = ppvSig.value.asTypedList(pcbSig.value);
-      final typeTuple = TypeTuple.fromSignature(signature, scope);
+        final reader = scope.reader;
+        final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
+        final signature = ppvSig.value.asTypedList(pcbSig.value);
+        final typeTuple = TypeTuple.fromSignature(signature, scope);
 
-      if (SUCCEEDED(hr)) {
-        return TypeDef(
-            scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ppvSig);
-      free(pcbSig);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return TypeDef(
+              scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;
@@ -320,32 +305,27 @@ class TypeDef extends TokenObject
   ClassLayout get classLayout => ClassLayout(scope, token);
 
   /// Converts an individual interface into a type.
-  TypeDef processInterfaceToken(int token) {
-    final ptkClass = calloc<mdTypeDef>();
-    final ptkIface = calloc<mdToken>();
+  TypeDef processInterfaceToken(int token) => using((Arena arena) {
+        final ptkClass = arena<mdTypeDef>();
+        final ptkIface = arena<mdToken>();
 
-    try {
-      final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
-      if (SUCCEEDED(hr)) {
-        final interfaceToken = ptkIface.value;
-        return TypeDef.fromToken(scope, interfaceToken);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkClass);
-      free(ptkIface);
-    }
-  }
+        final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
+        if (SUCCEEDED(hr)) {
+          final interfaceToken = ptkIface.value;
+          return TypeDef.fromToken(scope, interfaceToken);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   /// Enumerate all interfaces that this type implements.
   List<TypeDef> get interfaces {
     if (_interfaces.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rImpls = calloc<mdInterfaceImpl>();
-      final pcImpls = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rImpls = arena<mdInterfaceImpl>();
+        final pcImpls = arena<ULONG>();
 
-      try {
         var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
         while (hr == S_OK) {
           final interfaceToken = rImpls.value;
@@ -353,24 +333,21 @@ class TypeDef extends TokenObject
           _interfaces.add(processInterfaceToken(interfaceToken));
           hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rImpls);
-        free(pcImpls);
-      }
+      });
     }
+
     return _interfaces;
   }
 
   /// Enumerate all fields contained within this type.
   List<Field> get fields {
     if (_fields.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgFields = calloc<mdFieldDef>();
-      final pcTokens = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgFields = arena<mdFieldDef>();
+        final pcTokens = arena<ULONG>();
 
-      try {
         var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
         while (hr == S_OK) {
           final fieldToken = rgFields.value;
@@ -378,24 +355,21 @@ class TypeDef extends TokenObject
           _fields.add(Field.fromToken(scope, fieldToken));
           hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgFields);
-        free(pcTokens);
-      }
+      });
     }
+
     return _fields;
   }
 
   /// Enumerate all methods contained within this type.
   List<Method> get methods {
     if (_methods.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgMethods = calloc<mdMethodDef>();
-      final pcTokens = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgMethods = arena<mdMethodDef>();
+        final pcTokens = arena<ULONG>();
 
-      try {
         var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
         while (hr == S_OK) {
           final methodToken = rgMethods.value;
@@ -403,24 +377,21 @@ class TypeDef extends TokenObject
           _methods.add(Method.fromToken(scope, methodToken));
           hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgMethods);
-        free(pcTokens);
-      }
+      });
     }
+
     return _methods;
   }
 
   /// Enumerate all properties contained within this type.
   List<Property> get properties {
     if (_properties.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgProperties = calloc<mdProperty>();
-      final pcProperties = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgProperties = arena<mdProperty>();
+        final pcProperties = arena<ULONG>();
 
-      try {
         var hr =
             reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
         while (hr == S_OK) {
@@ -429,24 +400,21 @@ class TypeDef extends TokenObject
           _properties.add(Property.fromToken(scope, propertyToken));
           hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgProperties);
-        free(pcProperties);
-      }
+      });
     }
+
     return _properties;
   }
 
   /// Enumerate all events contained within this type.
   List<Event> get events {
     if (_events.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgEvents = calloc<mdEvent>();
-      final pcEvents = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgEvents = arena<mdEvent>();
+        final pcEvents = arena<ULONG>();
 
-      try {
         var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
         while (hr == S_OK) {
           final eventToken = rgEvents.value;
@@ -454,13 +422,10 @@ class TypeDef extends TokenObject
           _events.add(Event.fromToken(scope, eventToken));
           hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgEvents);
-        free(pcEvents);
-      }
+      });
     }
+
     return _events;
   }
 
