@@ -12,7 +12,6 @@ linter:
     # Some additional lints we want to enforce
     directives_ordering: true
     omit_local_variable_types: true
-    prefer_expression_function_bodies: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
     prefer_interpolation_to_compose_strings: true

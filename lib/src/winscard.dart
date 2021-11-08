@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -28,12 +29,11 @@ final _winscard = DynamicLibrary.open('winscard.dll');
 /// HANDLE SCardAccessStartedEvent();
 /// ```
 /// {@category winscard}
-int SCardAccessStartedEvent() {
-  final _SCardAccessStartedEvent =
-      _winscard.lookupFunction<IntPtr Function(), int Function()>(
-          'SCardAccessStartedEvent');
-  return _SCardAccessStartedEvent();
-}
+int SCardAccessStartedEvent() => _SCardAccessStartedEvent();
+
+late final _SCardAccessStartedEvent =
+    _winscard.lookupFunction<IntPtr Function(), int Function()>(
+        'SCardAccessStartedEvent');
 
 /// The SCardAddReaderToGroup function adds a reader to a reader group.
 ///
@@ -45,15 +45,15 @@ int SCardAccessStartedEvent() {
 /// );
 /// ```
 /// {@category winscard}
-int SCardAddReaderToGroup(
-    int hContext, Pointer<Utf16> szReaderName, Pointer<Utf16> szGroupName) {
-  final _SCardAddReaderToGroup = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szGroupName),
-      int Function(int hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szGroupName)>('SCardAddReaderToGroupW');
-  return _SCardAddReaderToGroup(hContext, szReaderName, szGroupName);
-}
+int SCardAddReaderToGroup(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName) =>
+    _SCardAddReaderToGroup(hContext, szReaderName, szGroupName);
+
+late final _SCardAddReaderToGroup = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName),
+    int Function(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName)>('SCardAddReaderToGroupW');
 
 /// The SCardAudit function writes event messages to the Windows
 /// application log Microsoft-Windows-SmartCard-Audit/Authentication.
@@ -65,12 +65,11 @@ int SCardAddReaderToGroup(
 /// );
 /// ```
 /// {@category winscard}
-int SCardAudit(int hContext, int dwEvent) {
-  final _SCardAudit = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Uint32 dwEvent),
-      int Function(int hContext, int dwEvent)>('SCardAudit');
-  return _SCardAudit(hContext, dwEvent);
-}
+int SCardAudit(int hContext, int dwEvent) => _SCardAudit(hContext, dwEvent);
+
+late final _SCardAudit = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Uint32 dwEvent),
+    int Function(int hContext, int dwEvent)>('SCardAudit');
 
 /// The SCardBeginTransaction function starts a transaction. The function
 /// waits for the completion of all other transactions before it begins.
@@ -83,12 +82,11 @@ int SCardAudit(int hContext, int dwEvent) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardBeginTransaction(int hCard) {
-  final _SCardBeginTransaction = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard),
-      int Function(int hCard)>('SCardBeginTransaction');
-  return _SCardBeginTransaction(hCard);
-}
+int SCardBeginTransaction(int hCard) => _SCardBeginTransaction(hCard);
+
+late final _SCardBeginTransaction = _winscard.lookupFunction<
+    Int32 Function(IntPtr hCard),
+    int Function(int hCard)>('SCardBeginTransaction');
 
 /// The SCardCancel function terminates all outstanding actions within a
 /// specific resource manager context. The only requests that you can
@@ -103,11 +101,10 @@ int SCardBeginTransaction(int hCard) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardCancel(int hContext) {
-  final _SCardCancel = _winscard.lookupFunction<Int32 Function(IntPtr hContext),
-      int Function(int hContext)>('SCardCancel');
-  return _SCardCancel(hContext);
-}
+int SCardCancel(int hContext) => _SCardCancel(hContext);
+
+late final _SCardCancel = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext), int Function(int hContext)>('SCardCancel');
 
 /// The SCardConnect function establishes a connection (using a specific
 /// resource manager context) between the calling application and a smart
@@ -126,30 +123,30 @@ int SCardCancel(int hContext) {
 /// ```
 /// {@category winscard}
 int SCardConnect(
-    int hContext,
-    Pointer<Utf16> szReader,
-    int dwShareMode,
-    int dwPreferredProtocols,
-    Pointer<IntPtr> phCard,
-    Pointer<Uint32> pdwActiveProtocol) {
-  final _SCardConnect = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<Utf16> szReader,
-          Uint32 dwShareMode,
-          Uint32 dwPreferredProtocols,
-          Pointer<IntPtr> phCard,
-          Pointer<Uint32> pdwActiveProtocol),
-      int Function(
-          int hContext,
-          Pointer<Utf16> szReader,
-          int dwShareMode,
-          int dwPreferredProtocols,
-          Pointer<IntPtr> phCard,
-          Pointer<Uint32> pdwActiveProtocol)>('SCardConnectW');
-  return _SCardConnect(hContext, szReader, dwShareMode, dwPreferredProtocols,
-      phCard, pdwActiveProtocol);
-}
+        int hContext,
+        Pointer<Utf16> szReader,
+        int dwShareMode,
+        int dwPreferredProtocols,
+        Pointer<IntPtr> phCard,
+        Pointer<Uint32> pdwActiveProtocol) =>
+    _SCardConnect(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard,
+        pdwActiveProtocol);
+
+late final _SCardConnect = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<Utf16> szReader,
+        Uint32 dwShareMode,
+        Uint32 dwPreferredProtocols,
+        Pointer<IntPtr> phCard,
+        Pointer<Uint32> pdwActiveProtocol),
+    int Function(
+        int hContext,
+        Pointer<Utf16> szReader,
+        int dwShareMode,
+        int dwPreferredProtocols,
+        Pointer<IntPtr> phCard,
+        Pointer<Uint32> pdwActiveProtocol)>('SCardConnectW');
 
 /// The SCardControl function gives you direct control of the reader. You
 /// can call it any time after a successful call to SCardConnect and before
@@ -169,33 +166,33 @@ int SCardConnect(
 /// ```
 /// {@category winscard}
 int SCardControl(
-    int hCard,
-    int dwControlCode,
-    Pointer lpInBuffer,
-    int cbInBufferSize,
-    Pointer lpOutBuffer,
-    int cbOutBufferSize,
-    Pointer<Uint32> lpBytesReturned) {
-  final _SCardControl = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hCard,
-          Uint32 dwControlCode,
-          Pointer lpInBuffer,
-          Uint32 cbInBufferSize,
-          Pointer lpOutBuffer,
-          Uint32 cbOutBufferSize,
-          Pointer<Uint32> lpBytesReturned),
-      int Function(
-          int hCard,
-          int dwControlCode,
-          Pointer lpInBuffer,
-          int cbInBufferSize,
-          Pointer lpOutBuffer,
-          int cbOutBufferSize,
-          Pointer<Uint32> lpBytesReturned)>('SCardControl');
-  return _SCardControl(hCard, dwControlCode, lpInBuffer, cbInBufferSize,
-      lpOutBuffer, cbOutBufferSize, lpBytesReturned);
-}
+        int hCard,
+        int dwControlCode,
+        Pointer lpInBuffer,
+        int cbInBufferSize,
+        Pointer lpOutBuffer,
+        int cbOutBufferSize,
+        Pointer<Uint32> lpBytesReturned) =>
+    _SCardControl(hCard, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer,
+        cbOutBufferSize, lpBytesReturned);
+
+late final _SCardControl = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hCard,
+        Uint32 dwControlCode,
+        Pointer lpInBuffer,
+        Uint32 cbInBufferSize,
+        Pointer lpOutBuffer,
+        Uint32 cbOutBufferSize,
+        Pointer<Uint32> lpBytesReturned),
+    int Function(
+        int hCard,
+        int dwControlCode,
+        Pointer lpInBuffer,
+        int cbInBufferSize,
+        Pointer lpOutBuffer,
+        int cbOutBufferSize,
+        Pointer<Uint32> lpBytesReturned)>('SCardControl');
 
 /// The SCardDisconnect function terminates a connection previously opened
 /// between the calling application and a smart card in the target reader.
@@ -207,12 +204,12 @@ int SCardControl(
 /// );
 /// ```
 /// {@category winscard}
-int SCardDisconnect(int hCard, int dwDisposition) {
-  final _SCardDisconnect = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwDisposition),
-      int Function(int hCard, int dwDisposition)>('SCardDisconnect');
-  return _SCardDisconnect(hCard, dwDisposition);
-}
+int SCardDisconnect(int hCard, int dwDisposition) =>
+    _SCardDisconnect(hCard, dwDisposition);
+
+late final _SCardDisconnect = _winscard.lookupFunction<
+    Int32 Function(IntPtr hCard, Uint32 dwDisposition),
+    int Function(int hCard, int dwDisposition)>('SCardDisconnect');
 
 /// The SCardEndTransaction function completes a previously declared
 /// transaction, allowing other applications to resume interactions with
@@ -225,12 +222,12 @@ int SCardDisconnect(int hCard, int dwDisposition) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardEndTransaction(int hCard, int dwDisposition) {
-  final _SCardEndTransaction = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwDisposition),
-      int Function(int hCard, int dwDisposition)>('SCardEndTransaction');
-  return _SCardEndTransaction(hCard, dwDisposition);
-}
+int SCardEndTransaction(int hCard, int dwDisposition) =>
+    _SCardEndTransaction(hCard, dwDisposition);
+
+late final _SCardEndTransaction = _winscard.lookupFunction<
+    Int32 Function(IntPtr hCard, Uint32 dwDisposition),
+    int Function(int hCard, int dwDisposition)>('SCardEndTransaction');
 
 /// The SCardEstablishContext function establishes the resource manager
 /// context (the scope) within which database operations are performed.
@@ -245,14 +242,14 @@ int SCardEndTransaction(int hCard, int dwDisposition) {
 /// ```
 /// {@category winscard}
 int SCardEstablishContext(int dwScope, Pointer pvReserved1, Pointer pvReserved2,
-    Pointer<IntPtr> phContext) {
-  final _SCardEstablishContext = _winscard.lookupFunction<
-      Int32 Function(Uint32 dwScope, Pointer pvReserved1, Pointer pvReserved2,
-          Pointer<IntPtr> phContext),
-      int Function(int dwScope, Pointer pvReserved1, Pointer pvReserved2,
-          Pointer<IntPtr> phContext)>('SCardEstablishContext');
-  return _SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext);
-}
+        Pointer<IntPtr> phContext) =>
+    _SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext);
+
+late final _SCardEstablishContext = _winscard.lookupFunction<
+    Int32 Function(Uint32 dwScope, Pointer pvReserved1, Pointer pvReserved2,
+        Pointer<IntPtr> phContext),
+    int Function(int dwScope, Pointer pvReserved1, Pointer pvReserved2,
+        Pointer<IntPtr> phContext)>('SCardEstablishContext');
 
 /// The SCardForgetCardType function removes an introduced smart card from
 /// the smart card subsystem.
@@ -264,13 +261,13 @@ int SCardEstablishContext(int dwScope, Pointer pvReserved1, Pointer pvReserved2,
 /// );
 /// ```
 /// {@category winscard}
-int SCardForgetCardType(int hContext, Pointer<Utf16> szCardName) {
-  final _SCardForgetCardType = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName),
-      int Function(
-          int hContext, Pointer<Utf16> szCardName)>('SCardForgetCardTypeW');
-  return _SCardForgetCardType(hContext, szCardName);
-}
+int SCardForgetCardType(int hContext, Pointer<Utf16> szCardName) =>
+    _SCardForgetCardType(hContext, szCardName);
+
+late final _SCardForgetCardType = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName),
+    int Function(
+        int hContext, Pointer<Utf16> szCardName)>('SCardForgetCardTypeW');
 
 /// The SCardForgetReader function removes a previously introduced reader
 /// from control by the smart card subsystem. It is removed from the smart
@@ -284,13 +281,13 @@ int SCardForgetCardType(int hContext, Pointer<Utf16> szCardName) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardForgetReader(int hContext, Pointer<Utf16> szReaderName) {
-  final _SCardForgetReader = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName),
-      int Function(
-          int hContext, Pointer<Utf16> szReaderName)>('SCardForgetReaderW');
-  return _SCardForgetReader(hContext, szReaderName);
-}
+int SCardForgetReader(int hContext, Pointer<Utf16> szReaderName) =>
+    _SCardForgetReader(hContext, szReaderName);
+
+late final _SCardForgetReader = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName),
+    int Function(
+        int hContext, Pointer<Utf16> szReaderName)>('SCardForgetReaderW');
 
 /// The SCardForgetReaderGroup function removes a previously introduced
 /// smart card reader group from the smart card subsystem. Although this
@@ -304,13 +301,13 @@ int SCardForgetReader(int hContext, Pointer<Utf16> szReaderName) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardForgetReaderGroup(int hContext, Pointer<Utf16> szGroupName) {
-  final _SCardForgetReaderGroup = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
-      int Function(
-          int hContext, Pointer<Utf16> szGroupName)>('SCardForgetReaderGroupW');
-  return _SCardForgetReaderGroup(hContext, szGroupName);
-}
+int SCardForgetReaderGroup(int hContext, Pointer<Utf16> szGroupName) =>
+    _SCardForgetReaderGroup(hContext, szGroupName);
+
+late final _SCardForgetReaderGroup = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
+    int Function(
+        int hContext, Pointer<Utf16> szGroupName)>('SCardForgetReaderGroupW');
 
 /// The SCardFreeMemory function releases memory that has been returned
 /// from the resource manager using the SCARD_AUTOALLOCATE length
@@ -323,12 +320,12 @@ int SCardForgetReaderGroup(int hContext, Pointer<Utf16> szGroupName) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardFreeMemory(int hContext, Pointer pvMem) {
-  final _SCardFreeMemory = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer pvMem),
-      int Function(int hContext, Pointer pvMem)>('SCardFreeMemory');
-  return _SCardFreeMemory(hContext, pvMem);
-}
+int SCardFreeMemory(int hContext, Pointer pvMem) =>
+    _SCardFreeMemory(hContext, pvMem);
+
+late final _SCardFreeMemory = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer pvMem),
+    int Function(int hContext, Pointer pvMem)>('SCardFreeMemory');
 
 /// The SCardGetAttrib function retrieves the current reader attributes for
 /// the given handle. It does not affect the state of the reader, driver,
@@ -344,14 +341,14 @@ int SCardFreeMemory(int hContext, Pointer pvMem) {
 /// ```
 /// {@category winscard}
 int SCardGetAttrib(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
-    Pointer<Uint32> pcbAttrLen) {
-  final _SCardGetAttrib = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr,
-          Pointer<Uint32> pcbAttrLen),
-      int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
-          Pointer<Uint32> pcbAttrLen)>('SCardGetAttrib');
-  return _SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen);
-}
+        Pointer<Uint32> pcbAttrLen) =>
+    _SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen);
+
+late final _SCardGetAttrib = _winscard.lookupFunction<
+    Int32 Function(IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr,
+        Pointer<Uint32> pcbAttrLen),
+    int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
+        Pointer<Uint32> pcbAttrLen)>('SCardGetAttrib');
 
 /// The SCardGetCardTypeProviderName function returns the name of the
 /// module (dynamic link library) that contains the provider for a given
@@ -367,24 +364,28 @@ int SCardGetAttrib(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
 /// );
 /// ```
 /// {@category winscard}
-int SCardGetCardTypeProviderName(int hContext, Pointer<Utf16> szCardName,
-    int dwProviderId, Pointer<Utf16> szProvider, Pointer<Uint32> pcchProvider) {
-  final _SCardGetCardTypeProviderName = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<Utf16> szCardName,
-          Uint32 dwProviderId,
-          Pointer<Utf16> szProvider,
-          Pointer<Uint32> pcchProvider),
-      int Function(
-          int hContext,
-          Pointer<Utf16> szCardName,
-          int dwProviderId,
-          Pointer<Utf16> szProvider,
-          Pointer<Uint32> pcchProvider)>('SCardGetCardTypeProviderNameW');
-  return _SCardGetCardTypeProviderName(
-      hContext, szCardName, dwProviderId, szProvider, pcchProvider);
-}
+int SCardGetCardTypeProviderName(
+        int hContext,
+        Pointer<Utf16> szCardName,
+        int dwProviderId,
+        Pointer<Utf16> szProvider,
+        Pointer<Uint32> pcchProvider) =>
+    _SCardGetCardTypeProviderName(
+        hContext, szCardName, dwProviderId, szProvider, pcchProvider);
+
+late final _SCardGetCardTypeProviderName = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<Utf16> szCardName,
+        Uint32 dwProviderId,
+        Pointer<Utf16> szProvider,
+        Pointer<Uint32> pcchProvider),
+    int Function(
+        int hContext,
+        Pointer<Utf16> szCardName,
+        int dwProviderId,
+        Pointer<Utf16> szProvider,
+        Pointer<Uint32> pcchProvider)>('SCardGetCardTypeProviderNameW');
 
 /// The SCardGetDeviceTypeId function gets the device type identifier of
 /// the card reader for the given reader name. This function does not
@@ -399,14 +400,14 @@ int SCardGetCardTypeProviderName(int hContext, Pointer<Utf16> szCardName,
 /// ```
 /// {@category winscard}
 int SCardGetDeviceTypeId(int hContext, Pointer<Utf16> szReaderName,
-    Pointer<Uint32> pdwDeviceTypeId) {
-  final _SCardGetDeviceTypeId = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
-          Pointer<Uint32> pdwDeviceTypeId),
-      int Function(int hContext, Pointer<Utf16> szReaderName,
-          Pointer<Uint32> pdwDeviceTypeId)>('SCardGetDeviceTypeIdW');
-  return _SCardGetDeviceTypeId(hContext, szReaderName, pdwDeviceTypeId);
-}
+        Pointer<Uint32> pdwDeviceTypeId) =>
+    _SCardGetDeviceTypeId(hContext, szReaderName, pdwDeviceTypeId);
+
+late final _SCardGetDeviceTypeId = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+        Pointer<Uint32> pdwDeviceTypeId),
+    int Function(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Uint32> pdwDeviceTypeId)>('SCardGetDeviceTypeIdW');
 
 /// The SCardGetProviderId function returns the identifier (GUID) of the
 /// primary service provider for a given card. The caller supplies the name
@@ -423,14 +424,14 @@ int SCardGetDeviceTypeId(int hContext, Pointer<Utf16> szReaderName,
 /// ```
 /// {@category winscard}
 int SCardGetProviderId(
-    int hContext, Pointer<Utf16> szCard, Pointer<GUID> pguidProviderId) {
-  final _SCardGetProviderId = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szCard,
-          Pointer<GUID> pguidProviderId),
-      int Function(int hContext, Pointer<Utf16> szCard,
-          Pointer<GUID> pguidProviderId)>('SCardGetProviderIdW');
-  return _SCardGetProviderId(hContext, szCard, pguidProviderId);
-}
+        int hContext, Pointer<Utf16> szCard, Pointer<GUID> pguidProviderId) =>
+    _SCardGetProviderId(hContext, szCard, pguidProviderId);
+
+late final _SCardGetProviderId = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext, Pointer<Utf16> szCard, Pointer<GUID> pguidProviderId),
+    int Function(int hContext, Pointer<Utf16> szCard,
+        Pointer<GUID> pguidProviderId)>('SCardGetProviderIdW');
 
 /// The SCardGetReaderDeviceInstanceId function gets the device instance
 /// identifier of the card reader for the given reader name. This function
@@ -445,23 +446,26 @@ int SCardGetProviderId(
 /// );
 /// ```
 /// {@category winscard}
-int SCardGetReaderDeviceInstanceId(int hContext, Pointer<Utf16> szReaderName,
-    Pointer<Utf16> szDeviceInstanceId, Pointer<Uint32> pcchDeviceInstanceId) {
-  final _SCardGetReaderDeviceInstanceId = _winscard.lookupFunction<
-          Int32 Function(
-              IntPtr hContext,
-              Pointer<Utf16> szReaderName,
-              Pointer<Utf16> szDeviceInstanceId,
-              Pointer<Uint32> pcchDeviceInstanceId),
-          int Function(
-              int hContext,
-              Pointer<Utf16> szReaderName,
-              Pointer<Utf16> szDeviceInstanceId,
-              Pointer<Uint32> pcchDeviceInstanceId)>(
-      'SCardGetReaderDeviceInstanceIdW');
-  return _SCardGetReaderDeviceInstanceId(
-      hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId);
-}
+int SCardGetReaderDeviceInstanceId(
+        int hContext,
+        Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szDeviceInstanceId,
+        Pointer<Uint32> pcchDeviceInstanceId) =>
+    _SCardGetReaderDeviceInstanceId(
+        hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId);
+
+late final _SCardGetReaderDeviceInstanceId = _winscard.lookupFunction<
+        Int32 Function(
+            IntPtr hContext,
+            Pointer<Utf16> szReaderName,
+            Pointer<Utf16> szDeviceInstanceId,
+            Pointer<Uint32> pcchDeviceInstanceId),
+        int Function(
+            int hContext,
+            Pointer<Utf16> szReaderName,
+            Pointer<Utf16> szDeviceInstanceId,
+            Pointer<Uint32> pcchDeviceInstanceId)>(
+    'SCardGetReaderDeviceInstanceIdW');
 
 /// The SCardGetReaderIcon function gets an icon of the smart card reader
 /// for a given reader's name. This function does not affect the state of
@@ -477,17 +481,14 @@ int SCardGetReaderDeviceInstanceId(int hContext, Pointer<Utf16> szReaderName,
 /// ```
 /// {@category winscard}
 int SCardGetReaderIcon(int hContext, Pointer<Utf16> szReaderName,
-    Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon) {
-  final _SCardGetReaderIcon = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
-          Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon),
-      int Function(
-          int hContext,
-          Pointer<Utf16> szReaderName,
-          Pointer<Uint8> pbIcon,
-          Pointer<Uint32> pcbIcon)>('SCardGetReaderIconW');
-  return _SCardGetReaderIcon(hContext, szReaderName, pbIcon, pcbIcon);
-}
+        Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon) =>
+    _SCardGetReaderIcon(hContext, szReaderName, pbIcon, pcbIcon);
+
+late final _SCardGetReaderIcon = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+        Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon),
+    int Function(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Uint8> pbIcon, Pointer<Uint32> pcbIcon)>('SCardGetReaderIconW');
 
 /// The SCardGetStatusChange function blocks execution until the current
 /// availability of the cards in a specific set of readers changes. The
@@ -511,17 +512,17 @@ int SCardGetReaderIcon(int hContext, Pointer<Utf16> szReaderName,
 /// ```
 /// {@category winscard}
 int SCardGetStatusChange(int hContext, int dwTimeout,
-    Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) {
-  final _SCardGetStatusChange = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Uint32 dwTimeout,
-          Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
-      int Function(
-          int hContext,
-          int dwTimeout,
-          Pointer<SCARD_READERSTATE> rgReaderStates,
-          int cReaders)>('SCardGetStatusChangeW');
-  return _SCardGetStatusChange(hContext, dwTimeout, rgReaderStates, cReaders);
-}
+        Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) =>
+    _SCardGetStatusChange(hContext, dwTimeout, rgReaderStates, cReaders);
+
+late final _SCardGetStatusChange = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Uint32 dwTimeout,
+        Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
+    int Function(
+        int hContext,
+        int dwTimeout,
+        Pointer<SCARD_READERSTATE> rgReaderStates,
+        int cReaders)>('SCardGetStatusChangeW');
 
 /// The SCardGetTransmitCount function retrieves the number of transmit
 /// operations that have completed since the specified card reader was
@@ -534,13 +535,13 @@ int SCardGetStatusChange(int hContext, int dwTimeout,
 /// );
 /// ```
 /// {@category winscard}
-int SCardGetTransmitCount(int hCard, Pointer<Uint32> pcTransmitCount) {
-  final _SCardGetTransmitCount = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard, Pointer<Uint32> pcTransmitCount),
-      int Function(
-          int hCard, Pointer<Uint32> pcTransmitCount)>('SCardGetTransmitCount');
-  return _SCardGetTransmitCount(hCard, pcTransmitCount);
-}
+int SCardGetTransmitCount(int hCard, Pointer<Uint32> pcTransmitCount) =>
+    _SCardGetTransmitCount(hCard, pcTransmitCount);
+
+late final _SCardGetTransmitCount = _winscard.lookupFunction<
+    Int32 Function(IntPtr hCard, Pointer<Uint32> pcTransmitCount),
+    int Function(
+        int hCard, Pointer<Uint32> pcTransmitCount)>('SCardGetTransmitCount');
 
 /// The SCardIntroduceCardType function introduces a smart card to the
 /// smart card subsystem (for the active user) by adding it to the smart
@@ -560,36 +561,36 @@ int SCardGetTransmitCount(int hCard, Pointer<Uint32> pcTransmitCount) {
 /// ```
 /// {@category winscard}
 int SCardIntroduceCardType(
-    int hContext,
-    Pointer<Utf16> szCardName,
-    Pointer<GUID> pguidPrimaryProvider,
-    Pointer<GUID> rgguidInterfaces,
-    int dwInterfaceCount,
-    Pointer<Uint8> pbAtr,
-    Pointer<Uint8> pbAtrMask,
-    int cbAtrLen) {
-  final _SCardIntroduceCardType = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<Utf16> szCardName,
-          Pointer<GUID> pguidPrimaryProvider,
-          Pointer<GUID> rgguidInterfaces,
-          Uint32 dwInterfaceCount,
-          Pointer<Uint8> pbAtr,
-          Pointer<Uint8> pbAtrMask,
-          Uint32 cbAtrLen),
-      int Function(
-          int hContext,
-          Pointer<Utf16> szCardName,
-          Pointer<GUID> pguidPrimaryProvider,
-          Pointer<GUID> rgguidInterfaces,
-          int dwInterfaceCount,
-          Pointer<Uint8> pbAtr,
-          Pointer<Uint8> pbAtrMask,
-          int cbAtrLen)>('SCardIntroduceCardTypeW');
-  return _SCardIntroduceCardType(hContext, szCardName, pguidPrimaryProvider,
-      rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen);
-}
+        int hContext,
+        Pointer<Utf16> szCardName,
+        Pointer<GUID> pguidPrimaryProvider,
+        Pointer<GUID> rgguidInterfaces,
+        int dwInterfaceCount,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint8> pbAtrMask,
+        int cbAtrLen) =>
+    _SCardIntroduceCardType(hContext, szCardName, pguidPrimaryProvider,
+        rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen);
+
+late final _SCardIntroduceCardType = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<Utf16> szCardName,
+        Pointer<GUID> pguidPrimaryProvider,
+        Pointer<GUID> rgguidInterfaces,
+        Uint32 dwInterfaceCount,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint8> pbAtrMask,
+        Uint32 cbAtrLen),
+    int Function(
+        int hContext,
+        Pointer<Utf16> szCardName,
+        Pointer<GUID> pguidPrimaryProvider,
+        Pointer<GUID> rgguidInterfaces,
+        int dwInterfaceCount,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint8> pbAtrMask,
+        int cbAtrLen)>('SCardIntroduceCardTypeW');
 
 /// The SCardIntroduceReader function introduces a new name for an existing
 /// smart card reader.
@@ -602,15 +603,15 @@ int SCardIntroduceCardType(
 /// );
 /// ```
 /// {@category winscard}
-int SCardIntroduceReader(
-    int hContext, Pointer<Utf16> szReaderName, Pointer<Utf16> szDeviceName) {
-  final _SCardIntroduceReader = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szDeviceName),
-      int Function(int hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szDeviceName)>('SCardIntroduceReaderW');
-  return _SCardIntroduceReader(hContext, szReaderName, szDeviceName);
-}
+int SCardIntroduceReader(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szDeviceName) =>
+    _SCardIntroduceReader(hContext, szReaderName, szDeviceName);
+
+late final _SCardIntroduceReader = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szDeviceName),
+    int Function(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szDeviceName)>('SCardIntroduceReaderW');
 
 /// The SCardIntroduceReaderGroup function introduces a reader group to the
 /// smart card subsystem. However, the reader group is not created until
@@ -623,13 +624,13 @@ int SCardIntroduceReader(
 /// );
 /// ```
 /// {@category winscard}
-int SCardIntroduceReaderGroup(int hContext, Pointer<Utf16> szGroupName) {
-  final _SCardIntroduceReaderGroup = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
-      int Function(int hContext,
-          Pointer<Utf16> szGroupName)>('SCardIntroduceReaderGroupW');
-  return _SCardIntroduceReaderGroup(hContext, szGroupName);
-}
+int SCardIntroduceReaderGroup(int hContext, Pointer<Utf16> szGroupName) =>
+    _SCardIntroduceReaderGroup(hContext, szGroupName);
+
+late final _SCardIntroduceReaderGroup = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szGroupName),
+    int Function(int hContext,
+        Pointer<Utf16> szGroupName)>('SCardIntroduceReaderGroupW');
 
 /// The SCardIsValidContext function determines whether a smart card
 /// context handle is valid.
@@ -640,12 +641,11 @@ int SCardIntroduceReaderGroup(int hContext, Pointer<Utf16> szGroupName) {
 /// );
 /// ```
 /// {@category winscard}
-int SCardIsValidContext(int hContext) {
-  final _SCardIsValidContext = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext),
-      int Function(int hContext)>('SCardIsValidContext');
-  return _SCardIsValidContext(hContext);
-}
+int SCardIsValidContext(int hContext) => _SCardIsValidContext(hContext);
+
+late final _SCardIsValidContext = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext),
+    int Function(int hContext)>('SCardIsValidContext');
 
 /// The SCardListCards function searches the smart card database and
 /// provides a list of named cards previously introduced to the system by
@@ -666,30 +666,30 @@ int SCardIsValidContext(int hContext) {
 /// ```
 /// {@category winscard}
 int SCardListCards(
-    int hContext,
-    Pointer<Uint8> pbAtr,
-    Pointer<GUID> rgquidInterfaces,
-    int cguidInterfaceCount,
-    Pointer<Utf16> mszCards,
-    Pointer<Uint32> pcchCards) {
-  final _SCardListCards = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<Uint8> pbAtr,
-          Pointer<GUID> rgquidInterfaces,
-          Uint32 cguidInterfaceCount,
-          Pointer<Utf16> mszCards,
-          Pointer<Uint32> pcchCards),
-      int Function(
-          int hContext,
-          Pointer<Uint8> pbAtr,
-          Pointer<GUID> rgquidInterfaces,
-          int cguidInterfaceCount,
-          Pointer<Utf16> mszCards,
-          Pointer<Uint32> pcchCards)>('SCardListCardsW');
-  return _SCardListCards(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount,
-      mszCards, pcchCards);
-}
+        int hContext,
+        Pointer<Uint8> pbAtr,
+        Pointer<GUID> rgquidInterfaces,
+        int cguidInterfaceCount,
+        Pointer<Utf16> mszCards,
+        Pointer<Uint32> pcchCards) =>
+    _SCardListCards(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount,
+        mszCards, pcchCards);
+
+late final _SCardListCards = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<Uint8> pbAtr,
+        Pointer<GUID> rgquidInterfaces,
+        Uint32 cguidInterfaceCount,
+        Pointer<Utf16> mszCards,
+        Pointer<Uint32> pcchCards),
+    int Function(
+        int hContext,
+        Pointer<Uint8> pbAtr,
+        Pointer<GUID> rgquidInterfaces,
+        int cguidInterfaceCount,
+        Pointer<Utf16> mszCards,
+        Pointer<Uint32> pcchCards)>('SCardListCardsW');
 
 /// The SCardListInterfaces function provides a list of interfaces supplied
 /// by a given card. The caller supplies the name of a smart card
@@ -706,18 +706,17 @@ int SCardListCards(
 /// ```
 /// {@category winscard}
 int SCardListInterfaces(int hContext, Pointer<Utf16> szCard,
-    Pointer<GUID> pguidInterfaces, Pointer<Uint32> pcguidInterfaces) {
-  final _SCardListInterfaces = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szCard,
-          Pointer<GUID> pguidInterfaces, Pointer<Uint32> pcguidInterfaces),
-      int Function(
-          int hContext,
-          Pointer<Utf16> szCard,
-          Pointer<GUID> pguidInterfaces,
-          Pointer<Uint32> pcguidInterfaces)>('SCardListInterfacesW');
-  return _SCardListInterfaces(
-      hContext, szCard, pguidInterfaces, pcguidInterfaces);
-}
+        Pointer<GUID> pguidInterfaces, Pointer<Uint32> pcguidInterfaces) =>
+    _SCardListInterfaces(hContext, szCard, pguidInterfaces, pcguidInterfaces);
+
+late final _SCardListInterfaces = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szCard,
+        Pointer<GUID> pguidInterfaces, Pointer<Uint32> pcguidInterfaces),
+    int Function(
+        int hContext,
+        Pointer<Utf16> szCard,
+        Pointer<GUID> pguidInterfaces,
+        Pointer<Uint32> pcguidInterfaces)>('SCardListInterfacesW');
 
 /// The SCardListReaderGroups function provides the list of reader groups
 /// that have previously been introduced to the system.
@@ -731,14 +730,14 @@ int SCardListInterfaces(int hContext, Pointer<Utf16> szCard,
 /// ```
 /// {@category winscard}
 int SCardListReaderGroups(
-    int hContext, Pointer<Utf16> mszGroups, Pointer<Uint32> pcchGroups) {
-  final _SCardListReaderGroups = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> mszGroups,
-          Pointer<Uint32> pcchGroups),
-      int Function(int hContext, Pointer<Utf16> mszGroups,
-          Pointer<Uint32> pcchGroups)>('SCardListReaderGroupsW');
-  return _SCardListReaderGroups(hContext, mszGroups, pcchGroups);
-}
+        int hContext, Pointer<Utf16> mszGroups, Pointer<Uint32> pcchGroups) =>
+    _SCardListReaderGroups(hContext, mszGroups, pcchGroups);
+
+late final _SCardListReaderGroups = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext, Pointer<Utf16> mszGroups, Pointer<Uint32> pcchGroups),
+    int Function(int hContext, Pointer<Utf16> mszGroups,
+        Pointer<Uint32> pcchGroups)>('SCardListReaderGroupsW');
 
 /// The SCardListReaders function provides the list of readers within a set
 /// of named reader groups, eliminating duplicates. The caller supplies a
@@ -757,17 +756,17 @@ int SCardListReaderGroups(
 /// ```
 /// {@category winscard}
 int SCardListReaders(int hContext, Pointer<Utf16> mszGroups,
-    Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders) {
-  final _SCardListReaders = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> mszGroups,
-          Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
-      int Function(
-          int hContext,
-          Pointer<Utf16> mszGroups,
-          Pointer<Utf16> mszReaders,
-          Pointer<Uint32> pcchReaders)>('SCardListReadersW');
-  return _SCardListReaders(hContext, mszGroups, mszReaders, pcchReaders);
-}
+        Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders) =>
+    _SCardListReaders(hContext, mszGroups, mszReaders, pcchReaders);
+
+late final _SCardListReaders = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> mszGroups,
+        Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
+    int Function(
+        int hContext,
+        Pointer<Utf16> mszGroups,
+        Pointer<Utf16> mszReaders,
+        Pointer<Uint32> pcchReaders)>('SCardListReadersW');
 
 /// The SCardListReadersWithDeviceInstanceId function gets the list of
 /// readers that have provided a device instance identifier. This function
@@ -783,19 +782,21 @@ int SCardListReaders(int hContext, Pointer<Utf16> mszGroups,
 /// ```
 /// {@category winscard}
 int SCardListReadersWithDeviceInstanceId(
-    int hContext,
-    Pointer<Utf16> szDeviceInstanceId,
-    Pointer<Utf16> mszReaders,
-    Pointer<Uint32> pcchReaders) {
-  final _SCardListReadersWithDeviceInstanceId = _winscard.lookupFunction<
-          Int32 Function(IntPtr hContext, Pointer<Utf16> szDeviceInstanceId,
-              Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
-          int Function(int hContext, Pointer<Utf16> szDeviceInstanceId,
-              Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders)>(
-      'SCardListReadersWithDeviceInstanceIdW');
-  return _SCardListReadersWithDeviceInstanceId(
-      hContext, szDeviceInstanceId, mszReaders, pcchReaders);
-}
+        int hContext,
+        Pointer<Utf16> szDeviceInstanceId,
+        Pointer<Utf16> mszReaders,
+        Pointer<Uint32> pcchReaders) =>
+    _SCardListReadersWithDeviceInstanceId(
+        hContext, szDeviceInstanceId, mszReaders, pcchReaders);
+
+late final _SCardListReadersWithDeviceInstanceId = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szDeviceInstanceId,
+        Pointer<Utf16> mszReaders, Pointer<Uint32> pcchReaders),
+    int Function(
+        int hContext,
+        Pointer<Utf16> szDeviceInstanceId,
+        Pointer<Utf16> mszReaders,
+        Pointer<Uint32> pcchReaders)>('SCardListReadersWithDeviceInstanceIdW');
 
 /// The SCardLocateCards function searches the readers listed in the
 /// rgReaderStates parameter for a card with an ATR string that matches one
@@ -812,17 +813,17 @@ int SCardListReadersWithDeviceInstanceId(
 /// ```
 /// {@category winscard}
 int SCardLocateCards(int hContext, Pointer<Utf16> mszCards,
-    Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) {
-  final _SCardLocateCards = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> mszCards,
-          Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
-      int Function(
-          int hContext,
-          Pointer<Utf16> mszCards,
-          Pointer<SCARD_READERSTATE> rgReaderStates,
-          int cReaders)>('SCardLocateCardsW');
-  return _SCardLocateCards(hContext, mszCards, rgReaderStates, cReaders);
-}
+        Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) =>
+    _SCardLocateCards(hContext, mszCards, rgReaderStates, cReaders);
+
+late final _SCardLocateCards = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> mszCards,
+        Pointer<SCARD_READERSTATE> rgReaderStates, Uint32 cReaders),
+    int Function(
+        int hContext,
+        Pointer<Utf16> mszCards,
+        Pointer<SCARD_READERSTATE> rgReaderStates,
+        int cReaders)>('SCardLocateCardsW');
 
 /// The SCardLocateCardsByATR function searches the readers listed in the
 /// rgReaderStates parameter for a card with a name that matches one of the
@@ -840,23 +841,23 @@ int SCardLocateCards(int hContext, Pointer<Utf16> mszCards,
 /// ```
 /// {@category winscard}
 int SCardLocateCardsByATR(int hContext, Pointer<SCARD_ATRMASK> rgAtrMasks,
-    int cAtrs, Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) {
-  final _SCardLocateCardsByATR = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<SCARD_ATRMASK> rgAtrMasks,
-          Uint32 cAtrs,
-          Pointer<SCARD_READERSTATE> rgReaderStates,
-          Uint32 cReaders),
-      int Function(
-          int hContext,
-          Pointer<SCARD_ATRMASK> rgAtrMasks,
-          int cAtrs,
-          Pointer<SCARD_READERSTATE> rgReaderStates,
-          int cReaders)>('SCardLocateCardsByATRW');
-  return _SCardLocateCardsByATR(
-      hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders);
-}
+        int cAtrs, Pointer<SCARD_READERSTATE> rgReaderStates, int cReaders) =>
+    _SCardLocateCardsByATR(
+        hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders);
+
+late final _SCardLocateCardsByATR = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<SCARD_ATRMASK> rgAtrMasks,
+        Uint32 cAtrs,
+        Pointer<SCARD_READERSTATE> rgReaderStates,
+        Uint32 cReaders),
+    int Function(
+        int hContext,
+        Pointer<SCARD_ATRMASK> rgAtrMasks,
+        int cAtrs,
+        Pointer<SCARD_READERSTATE> rgReaderStates,
+        int cReaders)>('SCardLocateCardsByATRW');
 
 /// The SCardReadCache function retrieves the value portion of a name-value
 /// pair from the global cache maintained by the Smart Card Resource
@@ -874,30 +875,30 @@ int SCardLocateCardsByATR(int hContext, Pointer<SCARD_ATRMASK> rgAtrMasks,
 /// ```
 /// {@category winscard}
 int SCardReadCache(
-    int hContext,
-    Pointer<GUID> CardIdentifier,
-    int FreshnessCounter,
-    Pointer<Utf16> LookupName,
-    Pointer<Uint8> Data,
-    Pointer<Uint32> DataLen) {
-  final _SCardReadCache = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<GUID> CardIdentifier,
-          Uint32 FreshnessCounter,
-          Pointer<Utf16> LookupName,
-          Pointer<Uint8> Data,
-          Pointer<Uint32> DataLen),
-      int Function(
-          int hContext,
-          Pointer<GUID> CardIdentifier,
-          int FreshnessCounter,
-          Pointer<Utf16> LookupName,
-          Pointer<Uint8> Data,
-          Pointer<Uint32> DataLen)>('SCardReadCacheW');
-  return _SCardReadCache(
-      hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen);
-}
+        int hContext,
+        Pointer<GUID> CardIdentifier,
+        int FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        Pointer<Uint32> DataLen) =>
+    _SCardReadCache(
+        hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen);
+
+late final _SCardReadCache = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<GUID> CardIdentifier,
+        Uint32 FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        Pointer<Uint32> DataLen),
+    int Function(
+        int hContext,
+        Pointer<GUID> CardIdentifier,
+        int FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        Pointer<Uint32> DataLen)>('SCardReadCacheW');
 
 /// The SCardReconnect function reestablishes an existing connection
 /// between the calling application and a smart card. This function moves a
@@ -916,23 +917,23 @@ int SCardReadCache(
 /// ```
 /// {@category winscard}
 int SCardReconnect(int hCard, int dwShareMode, int dwPreferredProtocols,
-    int dwInitialization, Pointer<Uint32> pdwActiveProtocol) {
-  final _SCardReconnect = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hCard,
-          Uint32 dwShareMode,
-          Uint32 dwPreferredProtocols,
-          Uint32 dwInitialization,
-          Pointer<Uint32> pdwActiveProtocol),
-      int Function(
-          int hCard,
-          int dwShareMode,
-          int dwPreferredProtocols,
-          int dwInitialization,
-          Pointer<Uint32> pdwActiveProtocol)>('SCardReconnect');
-  return _SCardReconnect(hCard, dwShareMode, dwPreferredProtocols,
-      dwInitialization, pdwActiveProtocol);
-}
+        int dwInitialization, Pointer<Uint32> pdwActiveProtocol) =>
+    _SCardReconnect(hCard, dwShareMode, dwPreferredProtocols, dwInitialization,
+        pdwActiveProtocol);
+
+late final _SCardReconnect = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hCard,
+        Uint32 dwShareMode,
+        Uint32 dwPreferredProtocols,
+        Uint32 dwInitialization,
+        Pointer<Uint32> pdwActiveProtocol),
+    int Function(
+        int hCard,
+        int dwShareMode,
+        int dwPreferredProtocols,
+        int dwInitialization,
+        Pointer<Uint32> pdwActiveProtocol)>('SCardReconnect');
 
 /// The SCardReleaseContext function closes an established resource manager
 /// context, freeing any resources allocated under that context, including
@@ -944,12 +945,11 @@ int SCardReconnect(int hCard, int dwShareMode, int dwPreferredProtocols,
 /// SCARDCONTEXT hContext);
 /// ```
 /// {@category winscard}
-int SCardReleaseContext(int hContext) {
-  final _SCardReleaseContext = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext),
-      int Function(int hContext)>('SCardReleaseContext');
-  return _SCardReleaseContext(hContext);
-}
+int SCardReleaseContext(int hContext) => _SCardReleaseContext(hContext);
+
+late final _SCardReleaseContext = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext),
+    int Function(int hContext)>('SCardReleaseContext');
 
 /// The SCardReleaseStartedEvent function decrements the reference count
 /// for a handle acquired by a previous call to the SCardAccessStartedEvent
@@ -959,12 +959,11 @@ int SCardReleaseContext(int hContext) {
 /// void SCardReleaseStartedEvent();
 /// ```
 /// {@category winscard}
-void SCardReleaseStartedEvent() {
-  final _SCardReleaseStartedEvent =
-      _winscard.lookupFunction<Void Function(), void Function()>(
-          'SCardReleaseStartedEvent');
-  return _SCardReleaseStartedEvent();
-}
+void SCardReleaseStartedEvent() => _SCardReleaseStartedEvent();
+
+late final _SCardReleaseStartedEvent =
+    _winscard.lookupFunction<Void Function(), void Function()>(
+        'SCardReleaseStartedEvent');
 
 /// The SCardRemoveReaderFromGroup function removes a reader from an
 /// existing reader group. This function has no effect on the reader.
@@ -977,15 +976,15 @@ void SCardReleaseStartedEvent() {
 /// );
 /// ```
 /// {@category winscard}
-int SCardRemoveReaderFromGroup(
-    int hContext, Pointer<Utf16> szReaderName, Pointer<Utf16> szGroupName) {
-  final _SCardRemoveReaderFromGroup = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szGroupName),
-      int Function(int hContext, Pointer<Utf16> szReaderName,
-          Pointer<Utf16> szGroupName)>('SCardRemoveReaderFromGroupW');
-  return _SCardRemoveReaderFromGroup(hContext, szReaderName, szGroupName);
-}
+int SCardRemoveReaderFromGroup(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName) =>
+    _SCardRemoveReaderFromGroup(hContext, szReaderName, szGroupName);
+
+late final _SCardRemoveReaderFromGroup = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName),
+    int Function(int hContext, Pointer<Utf16> szReaderName,
+        Pointer<Utf16> szGroupName)>('SCardRemoveReaderFromGroupW');
 
 /// The SCardSetAttrib function sets the given reader attribute for the
 /// given handle. It does not affect the state of the reader, reader
@@ -1003,14 +1002,14 @@ int SCardRemoveReaderFromGroup(
 /// ```
 /// {@category winscard}
 int SCardSetAttrib(
-    int hCard, int dwAttrId, Pointer<Uint8> pbAttr, int cbAttrLen) {
-  final _SCardSetAttrib = _winscard.lookupFunction<
-      Int32 Function(IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr,
-          Uint32 cbAttrLen),
-      int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
-          int cbAttrLen)>('SCardSetAttrib');
-  return _SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen);
-}
+        int hCard, int dwAttrId, Pointer<Uint8> pbAttr, int cbAttrLen) =>
+    _SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen);
+
+late final _SCardSetAttrib = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hCard, Uint32 dwAttrId, Pointer<Uint8> pbAttr, Uint32 cbAttrLen),
+    int Function(int hCard, int dwAttrId, Pointer<Uint8> pbAttr,
+        int cbAttrLen)>('SCardSetAttrib');
 
 /// The SCardSetCardTypeProviderName function specifies the name of the
 /// module (dynamic link library) containing the provider for a given card
@@ -1026,15 +1025,15 @@ int SCardSetAttrib(
 /// ```
 /// {@category winscard}
 int SCardSetCardTypeProviderName(int hContext, Pointer<Utf16> szCardName,
-    int dwProviderId, Pointer<Utf16> szProvider) {
-  final _SCardSetCardTypeProviderName = _winscard.lookupFunction<
-      Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName,
-          Uint32 dwProviderId, Pointer<Utf16> szProvider),
-      int Function(int hContext, Pointer<Utf16> szCardName, int dwProviderId,
-          Pointer<Utf16> szProvider)>('SCardSetCardTypeProviderNameW');
-  return _SCardSetCardTypeProviderName(
-      hContext, szCardName, dwProviderId, szProvider);
-}
+        int dwProviderId, Pointer<Utf16> szProvider) =>
+    _SCardSetCardTypeProviderName(
+        hContext, szCardName, dwProviderId, szProvider);
+
+late final _SCardSetCardTypeProviderName = _winscard.lookupFunction<
+    Int32 Function(IntPtr hContext, Pointer<Utf16> szCardName,
+        Uint32 dwProviderId, Pointer<Utf16> szProvider),
+    int Function(int hContext, Pointer<Utf16> szCardName, int dwProviderId,
+        Pointer<Utf16> szProvider)>('SCardSetCardTypeProviderNameW');
 
 /// The SCardStatus function provides the current status of a smart card in
 /// a reader. You can call it any time after a successful call to
@@ -1054,33 +1053,33 @@ int SCardSetCardTypeProviderName(int hContext, Pointer<Utf16> szCardName,
 /// ```
 /// {@category winscard}
 int SCardStatus(
-    int hCard,
-    Pointer<Utf16> mszReaderNames,
-    Pointer<Uint32> pcchReaderLen,
-    Pointer<Uint32> pdwState,
-    Pointer<Uint32> pdwProtocol,
-    Pointer<Uint8> pbAtr,
-    Pointer<Uint32> pcbAtrLen) {
-  final _SCardStatus = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hCard,
-          Pointer<Utf16> mszReaderNames,
-          Pointer<Uint32> pcchReaderLen,
-          Pointer<Uint32> pdwState,
-          Pointer<Uint32> pdwProtocol,
-          Pointer<Uint8> pbAtr,
-          Pointer<Uint32> pcbAtrLen),
-      int Function(
-          int hCard,
-          Pointer<Utf16> mszReaderNames,
-          Pointer<Uint32> pcchReaderLen,
-          Pointer<Uint32> pdwState,
-          Pointer<Uint32> pdwProtocol,
-          Pointer<Uint8> pbAtr,
-          Pointer<Uint32> pcbAtrLen)>('SCardStatusW');
-  return _SCardStatus(hCard, mszReaderNames, pcchReaderLen, pdwState,
-      pdwProtocol, pbAtr, pcbAtrLen);
-}
+        int hCard,
+        Pointer<Utf16> mszReaderNames,
+        Pointer<Uint32> pcchReaderLen,
+        Pointer<Uint32> pdwState,
+        Pointer<Uint32> pdwProtocol,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint32> pcbAtrLen) =>
+    _SCardStatus(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol,
+        pbAtr, pcbAtrLen);
+
+late final _SCardStatus = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hCard,
+        Pointer<Utf16> mszReaderNames,
+        Pointer<Uint32> pcchReaderLen,
+        Pointer<Uint32> pdwState,
+        Pointer<Uint32> pdwProtocol,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint32> pcbAtrLen),
+    int Function(
+        int hCard,
+        Pointer<Utf16> mszReaderNames,
+        Pointer<Uint32> pcchReaderLen,
+        Pointer<Uint32> pdwState,
+        Pointer<Uint32> pdwProtocol,
+        Pointer<Uint8> pbAtr,
+        Pointer<Uint32> pcbAtrLen)>('SCardStatusW');
 
 /// The SCardTransmit function sends a service request to the smart card
 /// and expects to receive data back from the card.
@@ -1098,33 +1097,33 @@ int SCardStatus(
 /// ```
 /// {@category winscard}
 int SCardTransmit(
-    int hCard,
-    Pointer<SCARD_IO_REQUEST> pioSendPci,
-    Pointer<Uint8> pbSendBuffer,
-    int cbSendLength,
-    Pointer<SCARD_IO_REQUEST> pioRecvPci,
-    Pointer<Uint8> pbRecvBuffer,
-    Pointer<Uint32> pcbRecvLength) {
-  final _SCardTransmit = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hCard,
-          Pointer<SCARD_IO_REQUEST> pioSendPci,
-          Pointer<Uint8> pbSendBuffer,
-          Uint32 cbSendLength,
-          Pointer<SCARD_IO_REQUEST> pioRecvPci,
-          Pointer<Uint8> pbRecvBuffer,
-          Pointer<Uint32> pcbRecvLength),
-      int Function(
-          int hCard,
-          Pointer<SCARD_IO_REQUEST> pioSendPci,
-          Pointer<Uint8> pbSendBuffer,
-          int cbSendLength,
-          Pointer<SCARD_IO_REQUEST> pioRecvPci,
-          Pointer<Uint8> pbRecvBuffer,
-          Pointer<Uint32> pcbRecvLength)>('SCardTransmit');
-  return _SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength,
-      pioRecvPci, pbRecvBuffer, pcbRecvLength);
-}
+        int hCard,
+        Pointer<SCARD_IO_REQUEST> pioSendPci,
+        Pointer<Uint8> pbSendBuffer,
+        int cbSendLength,
+        Pointer<SCARD_IO_REQUEST> pioRecvPci,
+        Pointer<Uint8> pbRecvBuffer,
+        Pointer<Uint32> pcbRecvLength) =>
+    _SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, pioRecvPci,
+        pbRecvBuffer, pcbRecvLength);
+
+late final _SCardTransmit = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hCard,
+        Pointer<SCARD_IO_REQUEST> pioSendPci,
+        Pointer<Uint8> pbSendBuffer,
+        Uint32 cbSendLength,
+        Pointer<SCARD_IO_REQUEST> pioRecvPci,
+        Pointer<Uint8> pbRecvBuffer,
+        Pointer<Uint32> pcbRecvLength),
+    int Function(
+        int hCard,
+        Pointer<SCARD_IO_REQUEST> pioSendPci,
+        Pointer<Uint8> pbSendBuffer,
+        int cbSendLength,
+        Pointer<SCARD_IO_REQUEST> pioRecvPci,
+        Pointer<Uint8> pbRecvBuffer,
+        Pointer<Uint32> pcbRecvLength)>('SCardTransmit');
 
 /// The SCardWriteCache function writes a name-value pair from a smart card
 /// to the global cache maintained by the Smart Card Resource Manager.
@@ -1141,27 +1140,27 @@ int SCardTransmit(
 /// ```
 /// {@category winscard}
 int SCardWriteCache(
-    int hContext,
-    Pointer<GUID> CardIdentifier,
-    int FreshnessCounter,
-    Pointer<Utf16> LookupName,
-    Pointer<Uint8> Data,
-    int DataLen) {
-  final _SCardWriteCache = _winscard.lookupFunction<
-      Int32 Function(
-          IntPtr hContext,
-          Pointer<GUID> CardIdentifier,
-          Uint32 FreshnessCounter,
-          Pointer<Utf16> LookupName,
-          Pointer<Uint8> Data,
-          Uint32 DataLen),
-      int Function(
-          int hContext,
-          Pointer<GUID> CardIdentifier,
-          int FreshnessCounter,
-          Pointer<Utf16> LookupName,
-          Pointer<Uint8> Data,
-          int DataLen)>('SCardWriteCacheW');
-  return _SCardWriteCache(
-      hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen);
-}
+        int hContext,
+        Pointer<GUID> CardIdentifier,
+        int FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        int DataLen) =>
+    _SCardWriteCache(
+        hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen);
+
+late final _SCardWriteCache = _winscard.lookupFunction<
+    Int32 Function(
+        IntPtr hContext,
+        Pointer<GUID> CardIdentifier,
+        Uint32 FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        Uint32 DataLen),
+    int Function(
+        int hContext,
+        Pointer<GUID> CardIdentifier,
+        int FreshnessCounter,
+        Pointer<Utf16> LookupName,
+        Pointer<Uint8> Data,
+        int DataLen)>('SCardWriteCacheW');

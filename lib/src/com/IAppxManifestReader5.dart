@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,23 +23,26 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IAppxManifestReader5 = '{8D7AE132-A690-4C00-B75A-6AAE1FEAAC80}';
 
-typedef _GetMainPackageDependencies_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> mainPackageDependencies);
-typedef _GetMainPackageDependencies_Dart = int Function(
-    Pointer obj, Pointer<Pointer> mainPackageDependencies);
-
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader5 extends IUnknown {
   // vtable begins at 3, ends at 3
-
   IAppxManifestReader5(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetMainPackageDependencies(Pointer<Pointer> mainPackageDependencies) => ptr
-          .ref.lpVtbl.value
-          .elementAt(3)
-          .cast<Pointer<NativeFunction<_GetMainPackageDependencies_Native>>>()
-          .value
-          .asFunction<_GetMainPackageDependencies_Dart>()(
-      ptr.ref.lpVtbl, mainPackageDependencies);
+  int GetMainPackageDependencies(
+          Pointer<Pointer<COMObject>> mainPackageDependencies) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<Pointer<COMObject>>
+                                  mainPackageDependencies)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer,
+                      Pointer<Pointer<COMObject>> mainPackageDependencies)>()(
+          ptr.ref.lpVtbl, mainPackageDependencies);
 }

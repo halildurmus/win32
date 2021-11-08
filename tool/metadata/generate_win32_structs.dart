@@ -10,8 +10,8 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../manual_gen/win32api.dart';
-import 'generate_win32.dart';
-import 'projection/typeprinter.dart';
+import '../projection/struct.dart';
+import '../projection/utils.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -64,6 +64,7 @@ import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 ''';
@@ -72,7 +73,8 @@ int generateStructs(Win32API win32) {
   final scope = MetadataStore.getWin32Scope();
 
   var structsGenerated = 0;
-  final writer = File('lib/src/structs.g.dart').openSync(mode: FileMode.write);
+  final writer =
+      File('lib/src/structs.g.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync(structFileHeader);
 
@@ -84,14 +86,10 @@ int generateStructs(Win32API win32) {
     }
 
     writer.writeStringSync(wrapCommentText(win32struct.comment));
+    writer.writeStringSync('\n///\n');
 
-    writer.writeStringSync('\n///\n/// {@category Struct}\n');
-    final packingAlignment = typedef.classLayout.packingAlignment;
-    if (packingAlignment != null && packingAlignment > 0) {
-      writer.writeStringSync('@Packed($packingAlignment)\n');
-    }
-
-    writer.writeStringSync(TypePrinter.printStruct(typedef, struct));
+    final projectedStruct = StructProjection(typedef, struct);
+    writer.writeStringSync(projectedStruct.toString());
     structsGenerated++;
   }
 

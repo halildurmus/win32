@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -28,9 +29,9 @@ final _scarddlg = DynamicLibrary.open('scarddlg.dll');
 /// );
 /// ```
 /// {@category winscard}
-int SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0) {
-  final _SCardUIDlgSelectCard = _scarddlg.lookupFunction<
-      Int32 Function(Pointer<OPENCARDNAME_EX> param0),
-      int Function(Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');
-  return _SCardUIDlgSelectCard(param0);
-}
+int SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0) =>
+    _SCardUIDlgSelectCard(param0);
+
+late final _SCardUIDlgSelectCard = _scarddlg.lookupFunction<
+    Int32 Function(Pointer<OPENCARDNAME_EX> param0),
+    int Function(Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');

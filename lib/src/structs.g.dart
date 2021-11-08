@@ -48,6 +48,7 @@ import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 
@@ -90,13 +91,17 @@ class ACTCTX extends Struct {
   external int cbSize;
   @Uint32()
   external int dwFlags;
+
   external Pointer<Utf16> lpSource;
   @Uint16()
   external int wProcessorArchitecture;
   @Uint16()
   external int wLangId;
+
   external Pointer<Utf16> lpAssemblyDirectory;
+
   external Pointer<Utf16> lpResourceName;
+
   external Pointer<Utf16> lpApplicationName;
   @IntPtr()
   external int hModule;
@@ -127,8 +132,11 @@ class addrinfo extends Struct {
   external int ai_protocol;
   @IntPtr()
   external int ai_addrlen;
+
   external Pointer<Utf16> ai_canonname;
+
   external Pointer<SOCKADDR> ai_addr;
+
   external Pointer<addrinfo> ai_next;
 }
 
@@ -163,6 +171,7 @@ class BITMAP extends Struct {
   external int bmPlanes;
   @Uint16()
   external int bmBitsPixel;
+
   external Pointer bmBits;
 }
 
@@ -245,6 +254,7 @@ class BLENDFUNCTION extends Struct {
 class BLUETOOTH_DEVICE_INFO extends Struct {
   @Uint32()
   external int dwSize;
+
   external BLUETOOTH_ADDRESS Address;
   @Uint32()
   external int ulClassofDevice;
@@ -254,7 +264,9 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external int fRemembered;
   @Int32()
   external int fAuthenticated;
+
   external SYSTEMTIME stLastSeen;
+
   external SYSTEMTIME stLastUsed;
   @Array(248)
   external Array<Uint16> _szName;
@@ -325,6 +337,7 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
 class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
+
   external BLUETOOTH_ADDRESS address;
   @Array(248)
   external Array<Uint16> _szName;
@@ -363,6 +376,7 @@ class BSMINFO extends Struct {
   external int hdesk;
   @IntPtr()
   external int hwnd;
+
   external LUID luid;
 }
 
@@ -373,8 +387,11 @@ class BSMINFO extends Struct {
 class BY_HANDLE_FILE_INFORMATION extends Struct {
   @Uint32()
   external int dwFileAttributes;
+
   external FILETIME ftCreationTime;
+
   external FILETIME ftLastAccessTime;
+
   external FILETIME ftLastWriteTime;
   @Uint32()
   external int dwVolumeSerialNumber;
@@ -415,12 +432,15 @@ class CHOOSECOLOR extends Struct {
   external int hInstance;
   @Uint32()
   external int rgbResult;
+
   external Pointer<Uint32> lpCustColors;
   @Uint32()
   external int Flags;
   @IntPtr()
   external int lCustData;
+
   external Pointer<NativeFunction<CCHookProc>> lpfnHook;
+
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -436,6 +456,7 @@ class CHOOSEFONT extends Struct {
   external int hwndOwner;
   @IntPtr()
   external int hDC;
+
   external Pointer<LOGFONT> lpLogFont;
   @Int32()
   external int iPointSize;
@@ -445,12 +466,15 @@ class CHOOSEFONT extends Struct {
   external int rgbColors;
   @IntPtr()
   external int lCustData;
+
   external Pointer<NativeFunction<CFHookProc>> lpfnHook;
+
   external Pointer<Utf16> lpTemplateName;
   @IntPtr()
   external int hInstance;
+
   external Pointer<Utf16> lpszStyle;
-  @Uint32()
+  @Uint16()
   external int nFontType;
   @Uint16()
   external int ___MISSING_ALIGNMENT__;
@@ -498,6 +522,7 @@ class COLORADJUSTMENT extends Struct {
 /// {@category Struct}
 class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
+
   external Pointer<Utf16> pszSpec;
 }
 
@@ -512,6 +537,7 @@ class COMMCONFIG extends Struct {
   external int wVersion;
   @Uint16()
   external int wReserved;
+
   external DCB dcb;
   @Uint32()
   external int dwProviderSubType;
@@ -534,6 +560,63 @@ class COMMCONFIG extends Struct {
     final stringToStore = value.padRight(1, '\x00');
     for (var i = 0; i < 1; i++) {
       _wcProviderData[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Contains information about a communications driver.
+///
+/// {@category Struct}
+class COMMPROP extends Struct {
+  @Uint16()
+  external int wPacketLength;
+  @Uint16()
+  external int wPacketVersion;
+  @Uint32()
+  external int dwServiceMask;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwMaxTxQueue;
+  @Uint32()
+  external int dwMaxRxQueue;
+  @Uint32()
+  external int dwMaxBaud;
+  @Uint32()
+  external int dwProvSubType;
+  @Uint32()
+  external int dwProvCapabilities;
+  @Uint32()
+  external int dwSettableParams;
+  @Uint32()
+  external int dwSettableBaud;
+  @Uint16()
+  external int wSettableData;
+  @Uint16()
+  external int wSettableStopParity;
+  @Uint32()
+  external int dwCurrentTxQueue;
+  @Uint32()
+  external int dwCurrentRxQueue;
+  @Uint32()
+  external int dwProvSpec1;
+  @Uint32()
+  external int dwProvSpec2;
+  @Array(1)
+  external Array<Uint16> _wcProvChar;
+
+  String get wcProvChar {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_wcProvChar[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set wcProvChar(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _wcProvChar[i] = stringToStore.codeUnitAt(i);
     }
   }
 }
@@ -579,15 +662,32 @@ class CONSOLE_CURSOR_INFO extends Struct {
   external int bVisible;
 }
 
+/// Contains information for a console read operation.
+///
+/// {@category Struct}
+class CONSOLE_READCONSOLE_CONTROL extends Struct {
+  @Uint32()
+  external int nLength;
+  @Uint32()
+  external int nInitialChars;
+  @Uint32()
+  external int dwCtrlWakeupMask;
+  @Uint32()
+  external int dwControlKeyState;
+}
+
 /// Contains information about a console screen buffer.
 ///
 /// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external COORD dwSize;
+
   external COORD dwCursorPosition;
   @Uint16()
   external int wAttributes;
+
   external SMALL_RECT srWindow;
+
   external COORD dwMaximumWindowSize;
 }
 
@@ -597,7 +697,9 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
   external int dwFlags;
+
   external COORD dwSelectionAnchor;
+
   external SMALL_RECT srSelection;
 }
 
@@ -636,7 +738,9 @@ class CREATESTRUCT extends Struct {
   external int x;
   @Int32()
   external int style;
+
   external Pointer<Utf16> lpszName;
+
   external Pointer<Utf16> lpszClass;
   @Uint32()
   external int dwExStyle;
@@ -650,18 +754,25 @@ class CREDENTIAL extends Struct {
   external int Flags;
   @Uint32()
   external int Type;
+
   external Pointer<Utf16> TargetName;
+
   external Pointer<Utf16> Comment;
+
   external FILETIME LastWritten;
   @Uint32()
   external int CredentialBlobSize;
+
   external Pointer<Uint8> CredentialBlob;
   @Uint32()
   external int Persist;
   @Uint32()
   external int AttributeCount;
+
   external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
+
   external Pointer<Utf16> TargetAlias;
+
   external Pointer<Utf16> UserName;
 }
 
@@ -676,6 +787,7 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external int Flags;
   @Uint32()
   external int ValueSize;
+
   external Pointer<Uint8> Value;
 }
 
@@ -689,6 +801,7 @@ class CURSORINFO extends Struct {
   external int flags;
   @IntPtr()
   external int hCursor;
+
   external POINT ptScreenPos;
 }
 
@@ -751,6 +864,7 @@ class DESIGNVECTOR extends Struct {
 /// {@category Struct}
 class DIBSECTION extends Struct {
   external BITMAP dsBm;
+
   external BITMAPINFOHEADER dsBmih;
   @Array(3)
   external Array<Uint32> dsBitfields;
@@ -766,7 +880,7 @@ class DIBSECTION extends Struct {
 class DISK_GEOMETRY extends Struct {
   @Int64()
   external int Cylinders;
-  @Uint32()
+  @Int32()
   external int MediaType;
   @Uint32()
   external int TracksPerCylinder;
@@ -792,6 +906,7 @@ class DISK_GEOMETRY_EX extends Struct {
 /// {@category Struct}
 class DISPPARAMS extends Struct {
   external Pointer<VARIANT> rgvarg;
+
   external Pointer<Int32> rgdispidNamedArgs;
   @Uint32()
   external int cArgs;
@@ -869,8 +984,69 @@ class DLLVERSIONINFO extends Struct {
 /// {@category Struct}
 class DOC_INFO_1 extends Struct {
   external Pointer<Utf16> pDocName;
+
   external Pointer<Utf16> pOutputFile;
+
   external Pointer<Utf16> pDatatype;
+}
+
+/// The DOT11_AUTH_CIPHER_PAIR structure defines a pair of 802.11
+/// authentication and cipher algorithms that can be enabled at the same
+/// time on the 802.11 station.
+///
+/// {@category Struct}
+class DOT11_AUTH_CIPHER_PAIR extends Struct {
+  @Int32()
+  external int AuthAlgoId;
+  @Int32()
+  external int CipherAlgoId;
+}
+
+/// The DOT11_BSSID_LIST structure contains a list of basic service set
+/// (BSS) identifiers.
+///
+/// {@category Struct}
+class DOT11_BSSID_LIST extends Struct {
+  external NDIS_OBJECT_HEADER Header;
+  @Uint32()
+  external int uNumOfEntries;
+  @Uint32()
+  external int uTotalNumOfEntries;
+  @Array(6)
+  external Array<Uint8> BSSIDs;
+}
+
+/// The DOT11_NETWORK structure contains information about an available
+/// wireless network.
+///
+/// {@category Struct}
+class DOT11_NETWORK extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Int32()
+  external int dot11BssType;
+}
+
+/// The DOT11_NETWORK_LIST structure contains a list of 802.11 wireless
+/// networks.
+///
+/// {@category Struct}
+class DOT11_NETWORK_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<DOT11_NETWORK> Network;
+}
+
+/// A DOT11_SSID structure contains the SSID of an interface.
+///
+/// {@category Struct}
+class DOT11_SSID extends Struct {
+  @Uint32()
+  external int uSSIDLength;
+  @Array(32)
+  external Array<Uint8> ucSSID;
 }
 
 /// The DRAWTEXTPARAMS structure contains extended formatting options for
@@ -888,6 +1064,93 @@ class DRAWTEXTPARAMS extends Struct {
   external int iRightMargin;
   @Uint32()
   external int uiLengthDrawn;
+}
+
+/// Defines the options for the DrawThemeBackgroundEx function.
+///
+/// {@category Struct}
+class DTBGOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+
+  external RECT rcClip;
+}
+
+/// Defines the options for the DrawThemeTextEx function.
+///
+/// {@category Struct}
+class DTTOPTS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int crText;
+  @Uint32()
+  external int crBorder;
+  @Uint32()
+  external int crShadow;
+  @Int32()
+  external int iTextShadowType;
+
+  external POINT ptShadowOffset;
+  @Int32()
+  external int iBorderSize;
+  @Int32()
+  external int iFontPropId;
+  @Int32()
+  external int iColorPropId;
+  @Int32()
+  external int iStateId;
+  @Int32()
+  external int fApplyOverlay;
+  @Int32()
+  external int iGlowSize;
+
+  external Pointer<NativeFunction<DrawTextCallback>> pfnDrawTextCallback;
+  @IntPtr()
+  external int lParam;
+}
+
+/// Specifies Desktop Window Manager (DWM) blur-behind properties. Used by
+/// the DwmEnableBlurBehindWindow function.
+///
+/// {@category Struct}
+@Packed(1)
+class DWM_BLURBEHIND extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Int32()
+  external int fEnable;
+  @IntPtr()
+  external int hRgnBlur;
+  @Int32()
+  external int fTransitionOnMaximized;
+}
+
+/// The EAP_METHOD_TYPE structure contains type, identification, and author
+/// information about an EAP method.
+///
+/// {@category Struct}
+class EAP_METHOD_TYPE extends Struct {
+  external EAP_TYPE eapType;
+  @Uint32()
+  external int dwAuthorId;
+}
+
+/// The EAP_TYPE structure contains type and vendor identification
+/// information for an EAP method.
+///
+/// {@category Struct}
+class EAP_TYPE extends Struct {
+  @Uint8()
+  external int type;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwVendorType;
 }
 
 /// The ENUMLOGFONTEX structure contains information about an enumerated
@@ -959,12 +1222,17 @@ class EXCEPINFO extends Struct {
   external int wCode;
   @Uint16()
   external int wReserved;
+
   external Pointer<Utf16> bstrSource;
+
   external Pointer<Utf16> bstrDescription;
+
   external Pointer<Utf16> bstrHelpFile;
   @Uint32()
   external int dwHelpContext;
+
   external Pointer pvReserved;
+
   external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
   @Int32()
   external int scode;
@@ -1009,7 +1277,9 @@ class FINDREPLACE extends Struct {
   external int hInstance;
   @Uint32()
   external int Flags;
+
   external Pointer<Utf16> lpstrFindWhat;
+
   external Pointer<Utf16> lpstrReplaceWith;
   @Uint16()
   external int wFindWhatLen;
@@ -1017,7 +1287,9 @@ class FINDREPLACE extends Struct {
   external int wReplaceWithLen;
   @IntPtr()
   external int lCustData;
+
   external Pointer<NativeFunction<FRHookProc>> lpfnHook;
+
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -1027,13 +1299,15 @@ class FINDREPLACE extends Struct {
 class FUNCDESC extends Struct {
   @Int32()
   external int memid;
+
   external Pointer<Int32> lprgscode;
+
   external Pointer<ELEMDESC> lprgelemdescParam;
-  @Uint32()
+  @Int32()
   external int funckind;
-  @Uint32()
+  @Int32()
   external int invkind;
-  @Uint32()
+  @Int32()
   external int callconv;
   @Int16()
   external int cParams;
@@ -1043,6 +1317,7 @@ class FUNCDESC extends Struct {
   external int oVft;
   @Int16()
   external int cScodes;
+
   external ELEMDESC elemdescFunc;
   @Uint16()
   external int wFuncFlags;
@@ -1073,6 +1348,7 @@ class GESTUREINFO extends Struct {
   external int dwID;
   @IntPtr()
   external int hwndTarget;
+
   external POINTS ptsLocation;
   @Uint32()
   external int dwInstanceID;
@@ -1095,6 +1371,7 @@ class GESTURENOTIFYSTRUCT extends Struct {
   external int dwFlags;
   @IntPtr()
   external int hwndTarget;
+
   external POINTS ptsLocation;
   @Uint32()
   external int dwInstanceID;
@@ -1120,7 +1397,21 @@ class GUITHREADINFO extends Struct {
   external int hwndMoveSize;
   @IntPtr()
   external int hwndCaret;
+
   external RECT rcCaret;
+}
+
+/// Contains information about a simulated message generated by an input
+/// device other than a keyboard or mouse.
+///
+/// {@category Struct}
+class HARDWAREINPUT extends Struct {
+  @Uint32()
+  external int uMsg;
+  @Uint16()
+  external int wParamL;
+  @Uint16()
+  external int wParamH;
 }
 
 /// The hostent structure is used by functions to store information about a
@@ -1134,11 +1425,13 @@ class GUITHREADINFO extends Struct {
 /// {@category Struct}
 class hostent extends Struct {
   external Pointer<Utf8> h_name;
+
   external Pointer<Pointer<Int8>> h_aliases;
   @Int16()
   external int h_addrtype;
   @Int16()
   external int h_length;
+
   external Pointer<Pointer<Int8>> h_addr_list;
 }
 
@@ -1252,11 +1545,17 @@ class ITEMIDLIST extends Struct {
 class JOB_INFO_1 extends Struct {
   @Uint32()
   external int JobId;
+
   external Pointer<Utf16> pPrinterName;
+
   external Pointer<Utf16> pMachineName;
+
   external Pointer<Utf16> pUserName;
+
   external Pointer<Utf16> pDocument;
+
   external Pointer<Utf16> pDatatype;
+
   external Pointer<Utf16> pStatus;
   @Uint32()
   external int Status;
@@ -1268,29 +1567,74 @@ class JOB_INFO_1 extends Struct {
   external int TotalPages;
   @Uint32()
   external int PagesPrinted;
+
   external SYSTEMTIME Submitted;
+}
+
+/// Contains information about a simulated keyboard event.
+///
+/// {@category Struct}
+class KEYBDINPUT extends Struct {
+  @Uint16()
+  external int wVk;
+  @Uint16()
+  external int wScan;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
 class KNOWNFOLDER_DEFINITION extends Struct {
-  @Uint32()
+  @Int32()
   external int category;
+
   external Pointer<Utf16> pszName;
+
   external Pointer<Utf16> pszDescription;
+
   external GUID fidParent;
+
   external Pointer<Utf16> pszRelativePath;
+
   external Pointer<Utf16> pszParsingName;
+
   external Pointer<Utf16> pszTooltip;
+
   external Pointer<Utf16> pszLocalizedName;
+
   external Pointer<Utf16> pszIcon;
+
   external Pointer<Utf16> pszSecurity;
   @Uint32()
   external int dwAttributes;
   @Uint32()
   external int kfdFlags;
+
   external GUID ftidType;
+}
+
+/// The L2_NOTIFICATION_DATA structure is used by the IHV Extensions DLL to
+/// send notifications to any service or applications that has registered
+/// for the notification.
+///
+/// {@category Struct}
+class L2_NOTIFICATION_DATA extends Struct {
+  @Uint32()
+  external int NotificationSource;
+  @Uint32()
+  external int NotificationCode;
+
+  external GUID InterfaceGuid;
+  @Uint32()
+  external int dwDataSize;
+
+  external Pointer pData;
 }
 
 /// Contains the time of the last input.
@@ -1391,6 +1735,57 @@ class LUID extends Struct {
   external int HighPart;
 }
 
+/// Describes a color transformation matrix that a magnifier control uses
+/// to apply a color effect to magnified screen content.
+///
+/// {@category Struct}
+class MAGCOLOREFFECT extends Struct {
+  @Array(25)
+  external Array<Float> transform;
+}
+
+/// Describes an image format.
+///
+/// {@category Struct}
+class MAGIMAGEHEADER extends Struct {
+  @Uint32()
+  external int width;
+  @Uint32()
+  external int height;
+
+  external GUID format;
+  @Uint32()
+  external int stride;
+  @Uint32()
+  external int offset;
+  @IntPtr()
+  external int cbSize;
+}
+
+/// Describes a transformation matrix that a magnifier control uses to
+/// magnify screen content.
+///
+/// {@category Struct}
+class MAGTRANSFORM extends Struct {
+  @Array(9)
+  external Array<Float> v;
+}
+
+/// Returned by the GetThemeMargins function to define the margins of
+/// windows that have visual styles applied.
+///
+/// {@category Struct}
+class MARGINS extends Struct {
+  @Int32()
+  external int cxLeftWidth;
+  @Int32()
+  external int cxRightWidth;
+  @Int32()
+  external int cyTopHeight;
+  @Int32()
+  external int cyBottomHeight;
+}
+
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
 /// command.
 ///
@@ -1401,8 +1796,11 @@ class MCI_OPEN_PARMS extends Struct {
   external int dwCallback;
   @Uint32()
   external int wDeviceID;
+
   external Pointer<Utf16> lpstrDeviceType;
+
   external Pointer<Utf16> lpstrElementName;
+
   external Pointer<Utf16> lpstrAlias;
 }
 
@@ -1490,6 +1888,7 @@ class MENUITEMINFO extends Struct {
   external int hbmpUnchecked;
   @IntPtr()
   external int dwItemData;
+
   external Pointer<Utf16> dwTypeData;
   @Uint32()
   external int cch;
@@ -1580,6 +1979,7 @@ class MIDIHDR extends Struct {
   external int dwUser;
   @Uint32()
   external int dwFlags;
+
   external Pointer<MIDIHDR> lpNext;
   @IntPtr()
   external int reserved;
@@ -1708,9 +2108,13 @@ class MIDISTRMBUFFVER extends Struct {
 /// {@category Struct}
 class MINMAXINFO extends Struct {
   external POINT ptReserved;
+
   external POINT ptMaxSize;
+
   external POINT ptMaxPosition;
+
   external POINT ptMinTrackSize;
+
   external POINT ptMaxTrackSize;
 }
 
@@ -1798,6 +2202,7 @@ class MODLOAD_DATA extends Struct {
   external int ssize;
   @Uint32()
   external int ssig;
+
   external Pointer data;
   @Uint32()
   external int size;
@@ -1811,10 +2216,30 @@ class MODLOAD_DATA extends Struct {
 class MONITORINFO extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcMonitor;
+
   external RECT rcWork;
   @Uint32()
   external int dwFlags;
+}
+
+/// Contains information about a simulated mouse event.
+///
+/// {@category Struct}
+class MOUSEINPUT extends Struct {
+  @Int32()
+  external int dx;
+  @Int32()
+  external int dy;
+  @Uint32()
+  external int mouseData;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 /// Contains information about the mouse's location in screen coordinates.
@@ -1845,7 +2270,21 @@ class MSG extends Struct {
   external int lParam;
   @Uint32()
   external int time;
+
   external POINT pt;
+}
+
+/// The NDIS_OBJECT_HEADER structure packages the object type, version, and
+/// size information that is required in many NDIS 6.0 structures.
+///
+/// {@category Struct}
+class NDIS_OBJECT_HEADER extends Struct {
+  @Uint8()
+  external int Type;
+  @Uint8()
+  external int Revision;
+  @Uint16()
+  external int Size;
 }
 
 /// The NEWTEXTMETRIC structure contains data that describes a physical
@@ -1928,7 +2367,7 @@ class NLM_SIMULATED_PROFILE_INFO extends Struct {
     }
   }
 
-  @Uint32()
+  @Int32()
   external int cost;
   @Uint32()
   external int UsageInMegabytes;
@@ -1955,18 +2394,23 @@ class NONCLIENTMETRICS extends Struct {
   external int iCaptionWidth;
   @Int32()
   external int iCaptionHeight;
+
   external LOGFONT lfCaptionFont;
   @Int32()
   external int iSmCaptionWidth;
   @Int32()
   external int iSmCaptionHeight;
+
   external LOGFONT lfSmCaptionFont;
   @Int32()
   external int iMenuWidth;
   @Int32()
   external int iMenuHeight;
+
   external LOGFONT lfMenuFont;
+
   external LOGFONT lfStatusFont;
+
   external LOGFONT lfMessageFont;
   @Int32()
   external int iPaddedBorderWidth;
@@ -1981,18 +2425,25 @@ class NONCLIENTMETRICS extends Struct {
 class OPENCARD_SEARCH_CRITERIA extends Struct {
   @Uint32()
   external int dwStructSize;
+
   external Pointer<Utf16> lpstrGroupNames;
   @Uint32()
   external int nMaxGroupNames;
+
   external Pointer<GUID> rgguidInterfaces;
   @Uint32()
   external int cguidInterfaces;
+
   external Pointer<Utf16> lpstrCardNames;
   @Uint32()
   external int nMaxCardNames;
+
   external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+
   external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+
   external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+
   external Pointer pvUserData;
   @Uint32()
   external int dwShareMode;
@@ -2014,24 +2465,31 @@ class OPENCARDNAME extends Struct {
   external int hwndOwner;
   @IntPtr()
   external int hSCardContext;
+
   external Pointer<Utf16> lpstrGroupNames;
   @Uint32()
   external int nMaxGroupNames;
+
   external Pointer<Utf16> lpstrCardNames;
   @Uint32()
   external int nMaxCardNames;
+
   external Pointer<GUID> rgguidInterfaces;
   @Uint32()
   external int cguidInterfaces;
+
   external Pointer<Utf16> lpstrRdr;
   @Uint32()
   external int nMaxRdr;
+
   external Pointer<Utf16> lpstrCard;
   @Uint32()
   external int nMaxCard;
+
   external Pointer<Utf16> lpstrTitle;
   @Uint32()
   external int dwFlags;
+
   external Pointer pvUserData;
   @Uint32()
   external int dwShareMode;
@@ -2039,8 +2497,11 @@ class OPENCARDNAME extends Struct {
   external int dwPreferredProtocols;
   @Uint32()
   external int dwActiveProtocol;
+
   external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+
   external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+
   external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
   @IntPtr()
   external int hCardHandle;
@@ -2060,20 +2521,27 @@ class OPENCARDNAME_EX extends Struct {
   external int hwndOwner;
   @Uint32()
   external int dwFlags;
+
   external Pointer<Utf16> lpstrTitle;
+
   external Pointer<Utf16> lpstrSearchDesc;
   @IntPtr()
   external int hIcon;
+
   external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
+
   external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+
   external Pointer pvUserData;
   @Uint32()
   external int dwShareMode;
   @Uint32()
   external int dwPreferredProtocols;
+
   external Pointer<Utf16> lpstrRdr;
   @Uint32()
   external int nMaxRdr;
+
   external Pointer<Utf16> lpstrCard;
   @Uint32()
   external int nMaxCard;
@@ -2096,19 +2564,25 @@ class OPENFILENAME extends Struct {
   external int hwndOwner;
   @IntPtr()
   external int hInstance;
+
   external Pointer<Utf16> lpstrFilter;
+
   external Pointer<Utf16> lpstrCustomFilter;
   @Uint32()
   external int nMaxCustFilter;
   @Uint32()
   external int nFilterIndex;
+
   external Pointer<Utf16> lpstrFile;
   @Uint32()
   external int nMaxFile;
+
   external Pointer<Utf16> lpstrFileTitle;
   @Uint32()
   external int nMaxFileTitle;
+
   external Pointer<Utf16> lpstrInitialDir;
+
   external Pointer<Utf16> lpstrTitle;
   @Uint32()
   external int Flags;
@@ -2116,11 +2590,15 @@ class OPENFILENAME extends Struct {
   external int nFileOffset;
   @Uint16()
   external int nFileExtension;
+
   external Pointer<Utf16> lpstrDefExt;
   @IntPtr()
   external int lCustData;
+
   external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
+
   external Pointer<Utf16> lpTemplateName;
+
   external Pointer pvReserved;
   @Uint32()
   external int dwReserved;
@@ -2219,6 +2697,7 @@ class OSVERSIONINFOEXW extends Struct {
 class OVERLAPPED_ENTRY extends Struct {
   @IntPtr()
   external int lpCompletionKey;
+
   external Pointer<OVERLAPPED> lpOverlapped;
   @IntPtr()
   external int Internal;
@@ -2236,6 +2715,7 @@ class PAINTSTRUCT extends Struct {
   external int hdc;
   @Int32()
   external int fErase;
+
   external RECT rcPaint;
   @Int32()
   external int fRestore;
@@ -2277,6 +2757,7 @@ class PARAMDESC extends Struct {
 class PARAMDESCEX extends Struct {
   @Uint32()
   external int cBytes;
+
   external VARIANT varDefaultValue;
 }
 
@@ -2338,10 +2819,13 @@ class POLYTEXT extends Struct {
   external int y;
   @Uint32()
   external int n;
+
   external Pointer<Utf16> lpstr;
   @Uint32()
   external int uiFlags;
+
   external RECT rcl;
+
   external Pointer<Int32> pdx;
 }
 
@@ -2357,7 +2841,9 @@ class PORT_INFO_1 extends Struct {
 /// {@category Struct}
 class PORT_INFO_2 extends Struct {
   external Pointer<Utf16> pPortName;
+
   external Pointer<Utf16> pMonitorName;
+
   external Pointer<Utf16> pDescription;
   @Uint32()
   external int fPortType;
@@ -2382,7 +2868,7 @@ class POWERBROADCAST_SETTING extends Struct {
 ///
 /// {@category Struct}
 class PRINT_EXECUTION_DATA extends Struct {
-  @Uint32()
+  @Int32()
   external int context;
   @Uint32()
   external int clientAppPID;
@@ -2394,6 +2880,7 @@ class PRINT_EXECUTION_DATA extends Struct {
 /// {@category Struct}
 class PRINTER_DEFAULTS extends Struct {
   external Pointer<Utf16> pDatatype;
+
   external Pointer<DEVMODE> pDevMode;
   @Uint32()
   external int DesiredAccess;
@@ -2405,8 +2892,11 @@ class PRINTER_DEFAULTS extends Struct {
 class PRINTER_INFO_1 extends Struct {
   @Uint32()
   external int Flags;
+
   external Pointer<Utf16> pDescription;
+
   external Pointer<Utf16> pName;
+
   external Pointer<Utf16> pComment;
 }
 
@@ -2415,17 +2905,29 @@ class PRINTER_INFO_1 extends Struct {
 /// {@category Struct}
 class PRINTER_INFO_2 extends Struct {
   external Pointer<Utf16> pServerName;
+
   external Pointer<Utf16> pPrinterName;
+
   external Pointer<Utf16> pShareName;
+
   external Pointer<Utf16> pPortName;
+
   external Pointer<Utf16> pDriverName;
+
   external Pointer<Utf16> pComment;
+
   external Pointer<Utf16> pLocation;
+
   external Pointer<DEVMODE> pDevMode;
+
   external Pointer<Utf16> pSepFile;
+
   external Pointer<Utf16> pPrintProcessor;
+
   external Pointer<Utf16> pDatatype;
+
   external Pointer<Utf16> pParameters;
+
   external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32()
   external int Attributes;
@@ -2461,6 +2963,7 @@ class PRINTER_INFO_3 extends Struct {
 /// {@category Struct}
 class PRINTER_INFO_4 extends Struct {
   external Pointer<Utf16> pPrinterName;
+
   external Pointer<Utf16> pServerName;
   @Uint32()
   external int Attributes;
@@ -2471,6 +2974,7 @@ class PRINTER_INFO_4 extends Struct {
 /// {@category Struct}
 class PRINTER_INFO_5 extends Struct {
   external Pointer<Utf16> pPrinterName;
+
   external Pointer<Utf16> pPortName;
   @Uint32()
   external int Attributes;
@@ -2503,23 +3007,6 @@ class PRINTER_NOTIFY_INFO extends Struct {
   external int Count;
   @Array(1)
   external Array<PRINTER_NOTIFY_INFO_DATA> aData;
-}
-
-/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
-/// information field and provides the current data for that field.
-///
-/// {@category Struct}
-class PRINTER_NOTIFY_INFO_DATA extends Struct {
-  @Uint16()
-  external int Type;
-  @Uint16()
-  external int Field;
-  @Uint32()
-  external int Reserved;
-  @Uint32()
-  external int Id;
-  @Uint32()
-  external int NotifyData;
 }
 
 /// Represents printer options.
@@ -2568,6 +3055,7 @@ class PROPERTYKEY extends Struct {
 /// {@category Struct}
 class protoent extends Struct {
   external Pointer<Utf8> p_name;
+
   external Pointer<Pointer<Int8>> p_aliases;
   @Int16()
   external int p_proto;
@@ -2615,6 +3103,7 @@ class SAFEARRAY extends Struct {
   external int cbElements;
   @Uint32()
   external int cLocks;
+
   external Pointer pvData;
   @Array(1)
   external Array<SAFEARRAYBOUND> rgsabound;
@@ -2664,6 +3153,7 @@ class SCARD_IO_REQUEST extends Struct {
 /// {@category Struct}
 class SCARD_READERSTATE extends Struct {
   external Pointer<Utf16> szReader;
+
   external Pointer pvUserData;
   @Uint32()
   external int dwCurrentState;
@@ -2681,6 +3171,7 @@ class SCARD_READERSTATE extends Struct {
 class SCROLLBARINFO extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcScrollBar;
   @Int32()
   external int dxyLineButton;
@@ -2726,6 +3217,7 @@ class SCROLLINFO extends Struct {
 class SECURITY_ATTRIBUTES extends Struct {
   @Uint32()
   external int nLength;
+
   external Pointer lpSecurityDescriptor;
   @Int32()
   external int bInheritHandle;
@@ -2743,9 +3235,13 @@ class SECURITY_DESCRIPTOR extends Struct {
   external int Sbz1;
   @Uint16()
   external int Control;
-  external Pointer Owner;
-  external Pointer Group;
+  @IntPtr()
+  external int Owner;
+  @IntPtr()
+  external int Group;
+
   external Pointer<ACL> Sacl;
+
   external Pointer<ACL> Dacl;
 }
 
@@ -2755,7 +3251,9 @@ class SECURITY_DESCRIPTOR extends Struct {
 /// {@category Struct}
 class servent extends Struct {
   external Pointer<Utf8> s_name;
+
   external Pointer<Pointer<Int8>> s_aliases;
+
   external Pointer<Utf8> s_proto;
   @Int16()
   external int s_port;
@@ -2853,9 +3351,25 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
   external int dwAuthnSvc;
   @Uint32()
   external int dwAuthzSvc;
+
   external Pointer<Utf16> pPrincipalName;
   @Int32()
   external int hr;
+}
+
+/// An SP_DEVINFO_DATA structure defines a device instance that is a member
+/// of a device information set.
+///
+/// {@category Struct}
+class SP_DEVINFO_DATA extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external GUID ClassGuid;
+  @Uint32()
+  external int DevInst;
+  @IntPtr()
+  external int Reserved;
 }
 
 /// Specifies the window station, desktop, standard handles, and appearance
@@ -2865,8 +3379,11 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 class STARTUPINFO extends Struct {
   @Uint32()
   external int cb;
+
   external Pointer<Utf16> lpReserved;
+
   external Pointer<Utf16> lpDesktop;
+
   external Pointer<Utf16> lpTitle;
   @Uint32()
   external int dwX;
@@ -2888,6 +3405,7 @@ class STARTUPINFO extends Struct {
   external int wShowWindow;
   @Uint16()
   external int cbReserved2;
+
   external Pointer<Uint8> lpReserved2;
   @IntPtr()
   external int hStdInput;
@@ -2902,11 +3420,15 @@ class STARTUPINFO extends Struct {
 /// {@category Struct}
 class STATPROPSETSTG extends Struct {
   external GUID fmtid;
+
   external GUID clsid;
   @Uint32()
   external int grfFlags;
+
   external FILETIME mtime;
+
   external FILETIME ctime;
+
   external FILETIME atime;
   @Uint32()
   external int dwOSVersion;
@@ -2936,13 +3458,17 @@ class STATSTG extends Struct {
   external int type;
   @Uint64()
   external int cbSize;
+
   external FILETIME mtime;
+
   external FILETIME ctime;
+
   external FILETIME atime;
   @Uint32()
   external int grfMode;
   @Uint32()
   external int grfLocksSupported;
+
   external GUID clsid;
   @Uint32()
   external int grfStateBits;
@@ -3093,6 +3619,7 @@ class SYSTEMTIME extends Struct {
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;
+
   external Pointer<Utf16> pszButtonText;
 }
 
@@ -3162,6 +3689,7 @@ class timeval extends Struct {
 class TITLEBARINFO extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcTitleBar;
   @Array(6)
   external Array<Uint32> rgstate;
@@ -3175,6 +3703,7 @@ class TITLEBARINFO extends Struct {
 class TITLEBARINFOEX extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcTitleBar;
   @Array(6)
   external Array<Uint32> rgstate;
@@ -3187,7 +3716,8 @@ class TITLEBARINFOEX extends Struct {
 ///
 /// {@category Struct}
 class TOKEN_APPCONTAINER_INFORMATION extends Struct {
-  external Pointer TokenAppContainer;
+  @IntPtr()
+  external int TokenAppContainer;
 }
 
 /// Encapsulates data for touch input.
@@ -3222,6 +3752,7 @@ class TOUCHINPUT extends Struct {
 class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcExclude;
 }
 
@@ -3238,10 +3769,11 @@ class TYPEATTR extends Struct {
   external int memidConstructor;
   @Int32()
   external int memidDestructor;
+
   external Pointer<Utf16> lpstrSchema;
   @Uint32()
   external int cbSizeInstance;
-  @Uint32()
+  @Int32()
   external int typekind;
   @Uint16()
   external int cFuncs;
@@ -3259,8 +3791,23 @@ class TYPEATTR extends Struct {
   external int wMajorVerNum;
   @Uint16()
   external int wMinorVerNum;
+
   external TYPEDESC tdescAlias;
+
   external IDLDESC idldescType;
+}
+
+/// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
+/// represents a generic ratio and is used for different purposes and units
+/// even within a single API.
+///
+/// {@category Struct}
+@Packed(1)
+class UNSIGNED_RATIO extends Struct {
+  @Uint32()
+  external int uiNumerator;
+  @Uint32()
+  external int uiDenominator;
 }
 
 /// Used by UpdateLayeredWindowIndirect to provide position, size, shape,
@@ -3272,16 +3819,21 @@ class UPDATELAYEREDWINDOWINFO extends Struct {
   external int cbSize;
   @IntPtr()
   external int hdcDst;
+
   external Pointer<POINT> pptDst;
+
   external Pointer<SIZE> psize;
   @IntPtr()
   external int hdcSrc;
+
   external Pointer<POINT> pptSrc;
   @Uint32()
   external int crKey;
+
   external Pointer<BLENDFUNCTION> pblend;
   @Uint32()
   external int dwFlags;
+
   external Pointer<RECT> prcDirty;
 }
 
@@ -3320,11 +3872,11 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileFlagsMask;
   @Uint32()
   external int dwFileFlags;
-  @Uint32()
+  @Int32()
   external int dwFileOS;
-  @Uint32()
+  @Int32()
   external int dwFileType;
-  @Uint32()
+  @Int32()
   external int dwFileSubtype;
   @Uint32()
   external int dwFileDateMS;
@@ -3374,6 +3926,7 @@ class WAVEHDR extends Struct {
   external int dwFlags;
   @Uint32()
   external int dwLoops;
+
   external Pointer<WAVEHDR> lpNext;
   @IntPtr()
   external int reserved;
@@ -3426,8 +3979,11 @@ class WAVEOUTCAPS extends Struct {
 class WIN32_FIND_DATA extends Struct {
   @Uint32()
   external int dwFileAttributes;
+
   external FILETIME ftCreationTime;
+
   external FILETIME ftLastAccessTime;
+
   external FILETIME ftLastWriteTime;
   @Uint32()
   external int nFileSizeHigh;
@@ -3480,7 +4036,9 @@ class WIN32_FIND_DATA extends Struct {
 class WINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
+
   external RECT rcWindow;
+
   external RECT rcClient;
   @Uint32()
   external int dwStyle;
@@ -3508,9 +4066,687 @@ class WINDOWPLACEMENT extends Struct {
   external int flags;
   @Uint32()
   external int showCmd;
+
   external POINT ptMinPosition;
+
   external POINT ptMaxPosition;
+
   external RECT rcNormalPosition;
+}
+
+/// The WLAN_ASSOCIATION_ATTRIBUTES structure contains association
+/// attributes for a connection.
+///
+/// {@category Struct}
+class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Int32()
+  external int dot11BssType;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
+  @Int32()
+  external int dot11PhyType;
+  @Uint32()
+  external int uDot11PhyIndex;
+  @Uint32()
+  external int wlanSignalQuality;
+  @Uint32()
+  external int ulRxRate;
+  @Uint32()
+  external int ulTxRate;
+}
+
+/// The WLAN_AUTH_CIPHER_PAIR_LIST structure contains a list of
+/// authentication and cipher algorithm pairs.
+///
+/// {@category Struct}
+class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<DOT11_AUTH_CIPHER_PAIR> pAuthCipherPairList;
+}
+
+/// The WLAN_AVAILABLE_NETWORK structure contains information about an
+/// available wireless network.
+///
+/// {@category Struct}
+class WLAN_AVAILABLE_NETWORK extends Struct {
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Int32()
+  external int dot11BssType;
+  @Uint32()
+  external int uNumberOfBssids;
+  @Int32()
+  external int bNetworkConnectable;
+  @Uint32()
+  external int wlanNotConnectableReason;
+  @Uint32()
+  external int uNumberOfPhyTypes;
+  @Array(8)
+  external Array<Int32> dot11PhyTypes;
+  @Int32()
+  external int bMorePhyTypes;
+  @Uint32()
+  external int wlanSignalQuality;
+  @Int32()
+  external int bSecurityEnabled;
+  @Int32()
+  external int dot11DefaultAuthAlgorithm;
+  @Int32()
+  external int dot11DefaultCipherAlgorithm;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwReserved;
+}
+
+/// The WLAN_AVAILABLE_NETWORK_LIST structure contains an array of
+/// information about available networks.
+///
+/// {@category Struct}
+class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_AVAILABLE_NETWORK> Network;
+}
+
+/// The WLAN_BSS_ENTRY structure contains information about a basic service
+/// set (BSS).
+///
+/// {@category Struct}
+class WLAN_BSS_ENTRY extends Struct {
+  external DOT11_SSID dot11Ssid;
+  @Uint32()
+  external int uPhyId;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
+  @Int32()
+  external int dot11BssType;
+  @Int32()
+  external int dot11BssPhyType;
+  @Int32()
+  external int lRssi;
+  @Uint32()
+  external int uLinkQuality;
+  @Uint8()
+  external int bInRegDomain;
+  @Uint16()
+  external int usBeaconPeriod;
+  @Uint64()
+  external int ullTimestamp;
+  @Uint64()
+  external int ullHostTimestamp;
+  @Uint16()
+  external int usCapabilityInformation;
+  @Uint32()
+  external int ulChCenterFrequency;
+
+  external WLAN_RATE_SET wlanRateSet;
+  @Uint32()
+  external int ulIeOffset;
+  @Uint32()
+  external int ulIeSize;
+}
+
+/// The WLAN_BSS_LIST structure contains a list of basic service set (BSS)
+/// entries.
+///
+/// {@category Struct}
+class WLAN_BSS_LIST extends Struct {
+  @Uint32()
+  external int dwTotalSize;
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<WLAN_BSS_ENTRY> wlanBssEntries;
+}
+
+/// The WLAN_CONNECTION_ATTRIBUTES structure defines the attributes of a
+/// wireless connection.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_ATTRIBUTES extends Struct {
+  @Int32()
+  external int isState;
+  @Int32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external WLAN_ASSOCIATION_ATTRIBUTES wlanAssociationAttributes;
+
+  external WLAN_SECURITY_ATTRIBUTES wlanSecurityAttributes;
+}
+
+/// The WLAN_CONNECTION_NOTIFICATION_DATA structure contains information
+/// about connection related notifications.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
+  @Int32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Int32()
+  external int dot11BssType;
+  @Int32()
+  external int bSecurityEnabled;
+  @Uint32()
+  external int wlanReasonCode;
+  @Uint32()
+  external int dwFlags;
+  @Array(1)
+  external Array<Uint16> _strProfileXml;
+
+  String get strProfileXml {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_strProfileXml[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileXml(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _strProfileXml[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The WLAN_CONNECTION_PARAMETERS structure specifies the parameters used
+/// when using the WlanConnect function.
+///
+/// {@category Struct}
+class WLAN_CONNECTION_PARAMETERS extends Struct {
+  @Int32()
+  external int wlanConnectionMode;
+
+  external Pointer<Utf16> strProfile;
+
+  external Pointer<DOT11_SSID> pDot11Ssid;
+
+  external Pointer<DOT11_BSSID_LIST> pDesiredBssidList;
+  @Int32()
+  external int dot11BssType;
+  @Uint32()
+  external int dwFlags;
+}
+
+/// A WLAN_COUNTRY_OR_REGION_STRING_LIST structure contains a list of
+/// supported country or region strings.
+///
+/// {@category Struct}
+class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(3)
+  external Array<Uint8> pCountryOrRegionStringList;
+}
+
+/// Contains an array of device service GUIDs.
+///
+/// {@category Struct}
+class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<GUID> DeviceService;
+}
+
+/// A structure that represents a device service notification.
+///
+/// {@category Struct}
+class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
+  external GUID DeviceService;
+  @Uint32()
+  external int dwOpCode;
+  @Uint32()
+  external int dwDataSize;
+  @Array(1)
+  external Array<Uint8> DataBlob;
+}
+
+/// The WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS structure contains
+/// information about the connection settings on the wireless Hosted
+/// Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS extends Struct {
+  external DOT11_SSID hostedNetworkSSID;
+  @Uint32()
+  external int dwMaxNumberOfPeers;
+}
+
+/// The WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE structure contains
+/// information about a network state change for a data peer on the
+/// wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
+  external WLAN_HOSTED_NETWORK_PEER_STATE OldState;
+
+  external WLAN_HOSTED_NETWORK_PEER_STATE NewState;
+  @Int32()
+  external int PeerStateChangeReason;
+}
+
+/// The WLAN_HOSTED_NETWORK_PEER_STATE structure contains information about
+/// the peer state for a peer on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
+  @Array(6)
+  external Array<Uint8> PeerMacAddress;
+  @Int32()
+  external int PeerAuthState;
+}
+
+/// The WLAN_HOSTED_NETWORK_RADIO_STATE structure contains information
+/// about the radio state on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
+  @Int32()
+  external int dot11SoftwareRadioState;
+  @Int32()
+  external int dot11HardwareRadioState;
+}
+
+/// The WLAN_HOSTED_NETWORK_SECURITY_SETTINGS structure contains
+/// information about the security settings on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
+  @Int32()
+  external int dot11AuthAlgo;
+  @Int32()
+  external int dot11CipherAlgo;
+}
+
+/// The WLAN_HOSTED_NETWORK_STATE_CHANGE structure contains information
+/// about a network state change on the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
+  @Int32()
+  external int OldState;
+  @Int32()
+  external int NewState;
+  @Int32()
+  external int StateChangeReason;
+}
+
+/// The WLAN_HOSTED_NETWORK_STATUS structure contains information about the
+/// status of the wireless Hosted Network.
+///
+/// {@category Struct}
+class WLAN_HOSTED_NETWORK_STATUS extends Struct {
+  @Int32()
+  external int HostedNetworkState;
+
+  external GUID IPDeviceID;
+  @Array(6)
+  external Array<Uint8> wlanHostedNetworkBSSID;
+  @Int32()
+  external int dot11PhyType;
+  @Uint32()
+  external int ulChannelFrequency;
+  @Uint32()
+  external int dwNumberOfPeers;
+  @Array(1)
+  external Array<WLAN_HOSTED_NETWORK_PEER_STATE> PeerList;
+}
+
+/// The WLAN_INTERFACE_CAPABILITY structure contains information about the
+/// capabilities of an interface.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_CAPABILITY extends Struct {
+  @Int32()
+  external int interfaceType;
+  @Int32()
+  external int bDot11DSupported;
+  @Uint32()
+  external int dwMaxDesiredSsidListSize;
+  @Uint32()
+  external int dwMaxDesiredBssidListSize;
+  @Uint32()
+  external int dwNumberOfSupportedPhys;
+  @Array(64)
+  external Array<Int32> dot11PhyTypes;
+}
+
+/// The WLAN_INTERFACE_INFO structure contains information about a wireless
+/// LAN interface.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_INFO extends Struct {
+  external GUID InterfaceGuid;
+  @Array(256)
+  external Array<Uint16> _strInterfaceDescription;
+
+  String get strInterfaceDescription {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strInterfaceDescription[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strInterfaceDescription(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strInterfaceDescription[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Int32()
+  external int isState;
+}
+
+/// The WLAN_INTERFACE_INFO_LIST structure contains an array of NIC
+/// interface information.
+///
+/// {@category Struct}
+class WLAN_INTERFACE_INFO_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_INTERFACE_INFO> InterfaceInfo;
+}
+
+/// The WLAN_MAC_FRAME_STATISTICS structure contains information about sent
+/// and received MAC frames.
+///
+/// {@category Struct}
+class WLAN_MAC_FRAME_STATISTICS extends Struct {
+  @Uint64()
+  external int ullTransmittedFrameCount;
+  @Uint64()
+  external int ullReceivedFrameCount;
+  @Uint64()
+  external int ullWEPExcludedCount;
+  @Uint64()
+  external int ullTKIPLocalMICFailures;
+  @Uint64()
+  external int ullTKIPReplays;
+  @Uint64()
+  external int ullTKIPICVErrorCount;
+  @Uint64()
+  external int ullCCMPReplays;
+  @Uint64()
+  external int ullCCMPDecryptErrors;
+  @Uint64()
+  external int ullWEPUndecryptableCount;
+  @Uint64()
+  external int ullWEPICVErrorCount;
+  @Uint64()
+  external int ullDecryptSuccessCount;
+  @Uint64()
+  external int ullDecryptFailureCount;
+}
+
+/// The WLAN_MSM_NOTIFICATION_DATA structure contains information about
+/// media specific module (MSM) connection related notifications.
+///
+/// {@category Struct}
+class WLAN_MSM_NOTIFICATION_DATA extends Struct {
+  @Int32()
+  external int wlanConnectionMode;
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external DOT11_SSID dot11Ssid;
+  @Int32()
+  external int dot11BssType;
+  @Array(6)
+  external Array<Uint8> dot11MacAddr;
+  @Int32()
+  external int bSecurityEnabled;
+  @Int32()
+  external int bFirstPeer;
+  @Int32()
+  external int bLastPeer;
+  @Uint32()
+  external int wlanReasonCode;
+}
+
+/// The WLAN_PHY_FRAME_STATISTICS structure contains information about sent
+/// and received PHY frames.
+///
+/// {@category Struct}
+class WLAN_PHY_FRAME_STATISTICS extends Struct {
+  @Uint64()
+  external int ullTransmittedFrameCount;
+  @Uint64()
+  external int ullMulticastTransmittedFrameCount;
+  @Uint64()
+  external int ullFailedCount;
+  @Uint64()
+  external int ullRetryCount;
+  @Uint64()
+  external int ullMultipleRetryCount;
+  @Uint64()
+  external int ullMaxTXLifetimeExceededCount;
+  @Uint64()
+  external int ullTransmittedFragmentCount;
+  @Uint64()
+  external int ullRTSSuccessCount;
+  @Uint64()
+  external int ullRTSFailureCount;
+  @Uint64()
+  external int ullACKFailureCount;
+  @Uint64()
+  external int ullReceivedFrameCount;
+  @Uint64()
+  external int ullMulticastReceivedFrameCount;
+  @Uint64()
+  external int ullPromiscuousReceivedFrameCount;
+  @Uint64()
+  external int ullMaxRXLifetimeExceededCount;
+  @Uint64()
+  external int ullFrameDuplicateCount;
+  @Uint64()
+  external int ullReceivedFragmentCount;
+  @Uint64()
+  external int ullPromiscuousReceivedFragmentCount;
+  @Uint64()
+  external int ullFCSErrorCount;
+}
+
+/// The WLAN_PHY_RADIO_STATE structure specifies the radio state on a
+/// specific physical layer (PHY) type.
+///
+/// {@category Struct}
+class WLAN_PHY_RADIO_STATE extends Struct {
+  @Uint32()
+  external int dwPhyIndex;
+  @Int32()
+  external int dot11SoftwareRadioState;
+  @Int32()
+  external int dot11HardwareRadioState;
+}
+
+/// The WLAN_PROFILE_INFO structure contains basic information about a
+/// profile.
+///
+/// {@category Struct}
+class WLAN_PROFILE_INFO extends Struct {
+  @Array(256)
+  external Array<Uint16> _strProfileName;
+
+  String get strProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_strProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set strProfileName(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _strProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwFlags;
+}
+
+/// The WLAN_PROFILE_INFO_LIST structure contains a list of wireless
+/// profile information.
+///
+/// {@category Struct}
+class WLAN_PROFILE_INFO_LIST extends Struct {
+  @Uint32()
+  external int dwNumberOfItems;
+  @Uint32()
+  external int dwIndex;
+  @Array(1)
+  external Array<WLAN_PROFILE_INFO> ProfileInfo;
+}
+
+/// The WLAN_RADIO_STATE structure specifies the radio state on a list of
+/// physical layer (PHY) types.
+///
+/// {@category Struct}
+class WLAN_RADIO_STATE extends Struct {
+  @Uint32()
+  external int dwNumberOfPhys;
+  @Array(64)
+  external Array<WLAN_PHY_RADIO_STATE> PhyRadioState;
+}
+
+/// The set of supported data rates.
+///
+/// {@category Struct}
+class WLAN_RATE_SET extends Struct {
+  @Uint32()
+  external int uRateSetLength;
+  @Array(126)
+  external Array<Uint16> usRateSet;
+}
+
+/// The WLAN_RAW_DATA structure contains raw data in the form of a blob
+/// that is used by some Native Wifi functions.
+///
+/// {@category Struct}
+class WLAN_RAW_DATA extends Struct {
+  @Uint32()
+  external int dwDataSize;
+  @Array(1)
+  external Array<Uint8> DataBlob;
+}
+
+/// The WLAN_SECURITY_ATTRIBUTES structure defines the security attributes
+/// for a wireless connection.
+///
+/// {@category Struct}
+class WLAN_SECURITY_ATTRIBUTES extends Struct {
+  @Int32()
+  external int bSecurityEnabled;
+  @Int32()
+  external int bOneXEnabled;
+  @Int32()
+  external int dot11AuthAlgorithm;
+  @Int32()
+  external int dot11CipherAlgorithm;
+}
+
+/// The WLAN_STATISTICS structure contains assorted statistics about an
+/// interface.
+///
+/// {@category Struct}
+class WLAN_STATISTICS extends Struct {
+  @Uint64()
+  external int ullFourWayHandshakeFailures;
+  @Uint64()
+  external int ullTKIPCounterMeasuresInvoked;
+  @Uint64()
+  external int ullReserved;
+
+  external WLAN_MAC_FRAME_STATISTICS MacUcastCounters;
+
+  external WLAN_MAC_FRAME_STATISTICS MacMcastCounters;
+  @Uint32()
+  external int dwNumberOfPhys;
+  @Array(1)
+  external Array<WLAN_PHY_FRAME_STATISTICS> PhyCounters;
 }
 
 /// Contains the window class attributes that are registered by the
@@ -3520,6 +4756,7 @@ class WINDOWPLACEMENT extends Struct {
 class WNDCLASS extends Struct {
   @Uint32()
   external int style;
+
   external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32()
   external int cbClsExtra;
@@ -3533,7 +4770,9 @@ class WNDCLASS extends Struct {
   external int hCursor;
   @IntPtr()
   external int hbrBackground;
+
   external Pointer<Utf16> lpszMenuName;
+
   external Pointer<Utf16> lpszClassName;
 }
 
@@ -3550,6 +4789,7 @@ class WNDCLASSEX extends Struct {
   external int cbSize;
   @Uint32()
   external int style;
+
   external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32()
   external int cbClsExtra;
@@ -3563,10 +4803,22 @@ class WNDCLASSEX extends Struct {
   external int hCursor;
   @IntPtr()
   external int hbrBackground;
+
   external Pointer<Utf16> lpszMenuName;
+
   external Pointer<Utf16> lpszClassName;
   @IntPtr()
   external int hIconSm;
+}
+
+/// Defines options that are used to set window visual style attributes.
+///
+/// {@category Struct}
+class WTA_OPTIONS extends Struct {
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
 }
 
 /// The XFORM structure specifies a world-space to page-space

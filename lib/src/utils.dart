@@ -9,6 +9,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
+import 'extensions/int_to_hexstring.dart';
 import 'kernel32.dart';
 import 'shell32.dart';
 import 'structs.g.dart';
@@ -34,7 +35,7 @@ void initApp(Function winMain) {
 
   // Parse command line args using Win32 functions, to reduce ceremony in the
   // app that uses this.
-  final szArgList = CommandLineToArgvW(GetCommandLine(), nArgs);
+  final szArgList = CommandLineToArgv(GetCommandLine(), nArgs);
   for (var i = 0; i < nArgs.value; i++) {
     args.add(szArgList[i].toDartString());
   }
@@ -66,6 +67,16 @@ bool isWindowsRuntimeAvailable() {
   }
 
   return true;
+}
+
+/// For debugging, print the memory structure of a given struct.
+void printStruct(Pointer struct, int sizeInBytes) {
+  final words = <int>[];
+  final ptr = struct.cast<Uint16>();
+  for (var i = 0; i < sizeInBytes ~/ 2; i++) {
+    words.add(ptr.elementAt(i).value);
+  }
+  print(words.map((word) => word.toHexString(16)).join(', '));
 }
 
 /// Converts a Dart string to a natively-allocated string.

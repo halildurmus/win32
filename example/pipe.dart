@@ -33,7 +33,7 @@ class ClientCommand extends Command<void> {
   void run() {
     final lpPipeName = pipeName.toNativeUtf16();
     final lpBuffer = wsalloc(128);
-    final lpNumBytesRead = calloc<Uint32>();
+    final lpNumBytesRead = calloc<DWORD>();
     try {
       stdout.writeln('Connecting to pipe...');
       final pipe = CreateFile(
@@ -80,7 +80,7 @@ class ServerCommand extends Command<void> {
   void run() {
     final lpPipeName = pipeName.toNativeUtf16();
     final lpPipeMessage = pipeMessage.toNativeUtf16();
-    final lpNumBytesWritten = calloc<Uint32>();
+    final lpNumBytesWritten = calloc<DWORD>();
     try {
       final pipe = CreateNamedPipe(lpPipeName, PIPE_ACCESS_OUTBOUND,
           PIPE_TYPE_BYTE, 1, 0, 0, 0, nullptr);

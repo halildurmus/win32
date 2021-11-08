@@ -16,9 +16,10 @@ const header = '''
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\\struct_sizes.dart as input to the test harness.
 
-// Compile with cl struct_sizes.cpp /Fe:structs64.exe
+// Compile with cl tool\\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
+#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
@@ -31,7 +32,10 @@ const header = '''
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock2.h>
+#include <dwmapi.h>
+#include <wlanapi.h>
+#include <SetupAPI.h>
+#include <magnification.h>
 
 void main()
 {
@@ -43,23 +47,26 @@ void main()
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
-    printf("  'COMMPROP': %zu,\\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
+    printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\\n", sizeof(GUID));
     printf("  'INPUT': %zu,\\n", sizeof(INPUT));
     printf("  'MMTIME': %zu,\\n", sizeof(MMTIME));
     printf("  'NOTIFYICONDATA': %zu,\\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
+    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPSPEC': %zu,\\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));
+    printf("  'STRRET': %zu,\\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
     printf("  'TASKDIALOGCONFIG': %zu,\\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
+    printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));
 
     // Automatically generated structs
 ''';

@@ -10,45 +10,57 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 import 'structs.g.dart';
+import 'types.dart';
 
 /// An application-defined or library-defined callback function used with the
 /// SetWindowsHookEx function. The system calls this function before calling the
 /// window procedure to process a message sent to the thread.
-typedef CallWndProc = Int32 Function(Int32 nCode, IntPtr wParam, IntPtr lParam);
+typedef CallWndProc = LRESULT Function(
+    Int32 nCode, WPARAM wParam, LPARAM lParam);
 
 /// Application-defined callback function used with the ChooseColor function.
 /// Receives messages or notifications intended for the default dialog box
 /// procedure of the Color dialog box.
-typedef CCHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+typedef CCHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 
 /// Application-defined callback function used with the ChooseFont function.
 /// Receives messages or notifications intended for the default dialog box
 /// procedure of the Font dialog box.
-typedef CFHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+typedef CFHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 
 /// Application-defined callback function used with the CreateDialog and
 /// DialogBox families of functions. It processes messages sent to a modal or
 /// modeless dialog box.
-typedef DlgProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+typedef DlgProc = INT_PTR Function(HWND, UINT, WPARAM, LPARAM);
+
+/// Application-defined callback function used with the DrawThemeTextEx
+/// function. This function is used instead of DrawText.
+typedef DrawTextCallback = Int32 Function(HDC hdc, LPWSTR pszText,
+    Int32 cchText, Pointer<RECT> prc, UINT dwFlags, LPARAM lparam);
+
+/// Application-defined callback function that renders a complex image for the
+/// DrawState function.
+typedef DrawStateProc = Int32 Function(
+    IntPtr hdc, IntPtr lData, IntPtr wData, Int32 cx, Int32 cy);
 
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
-typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
+typedef EnumWindowsProc = BOOL Function(HWND hwnd, LPARAM lParam);
 
 /// Application defined callback function used with the EnumFontFamiliesEx
 /// function. It is used to process the fonts.
 typedef EnumFontFamExProc = Int32 Function(Pointer<LOGFONT> lpelfe,
-    Pointer<TEXTMETRIC> lpntme, Uint32 FontType, IntPtr lParam);
+    Pointer<TEXTMETRIC> lpntme, DWORD FontType, LPARAM lParam);
 
 /// Application-defined callback function used with the EnumResourceNames and
 /// EnumResourceNamesEx functions. It receives the type and name of a resource.
-typedef EnumResNameProc = Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
-    Pointer<Utf16> lpName, IntPtr lParam);
+typedef EnumResNameProc = BOOL Function(HMODULE hModule, Pointer<Utf16> lpType,
+    Pointer<Utf16> lpName, LONG_PTR lParam);
 
 /// Application-defined callback function used with the EnumResourceTypes and
 /// EnumResourceTypesEx functions. It receives resource types.
-typedef EnumResTypeProc = Int32 Function(
-    IntPtr hModule, Pointer<Utf16> lpszType, IntPtr lParam);
+typedef EnumResTypeProc = BOOL Function(
+    HMODULE hModule, Pointer<Utf16> lpszType, LONG_PTR lParam);
 
 /// Application-defined callback function used with the IDispatch::Invoke
 /// function to defer filling in bstrDescription, bstrHelpFile, and
@@ -58,20 +70,32 @@ typedef ExcepInfoProc = IntPtr Function(Pointer<EXCEPINFO>);
 /// Application-defined callback function used with the FindText or ReplaceText
 /// function. Receives messages or notifications intended for the default dialog
 /// box procedure of the Find or Replace dialog box.
-typedef FRHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+typedef FRHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 
 /// Application-defined callback function used with the SetConsoleCtrlHandler
 /// function. A console process uses this function to handle control signals
 /// received by the process. When the signal is received, the system creates a
 /// new thread in the process to execute the function.
-typedef HandlerProc = Int32 Function(Uint32 dwCtrlType);
+typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
+
+/// Application-defined callback function implements a custom transform for
+/// image scaling.
+typedef MagImageScalingCallback = BOOL Function(
+    HWND hwnd,
+    Pointer srcdata,
+    MAGIMAGEHEADER srcheader,
+    Pointer destdata,
+    MAGIMAGEHEADER destheader,
+    RECT unclipped,
+    RECT clipped,
+    HRGN dirty);
 
 /// Application-defined callback function for handling incoming MIDI messages.
 /// MidiInProc is a placeholder for the application-supplied function name. The
 /// address of this function can be specified in the callback-address parameter
 /// of the midiInOpen function.
-typedef MidiInProc = Void Function(IntPtr hMidiIn, Uint32 wMsg,
-    IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2);
+typedef MidiInProc = Void Function(HMIDIIN hMidiIn, UINT wMsg,
+    DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2);
 
 /// Application-defined callback function for handling outgoing MIDI messages.
 /// MidiOutProc is a placeholder for the application-supplied function name. The
@@ -89,7 +113,7 @@ typedef MonitorEnumProc = Int32 Function(
 /// Save As dialog boxes. Receives notification messages sent from the dialog
 /// box. The function also receives messages for any additional controls that
 /// you defined by specifying a child dialog template.
-typedef OFNHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+typedef OFNHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 
 /// Application-defined callback function used with the GrayString function. It
 /// is used to draw a string.
@@ -107,6 +131,11 @@ typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
 /// placeholder for the application-defined function name.
 typedef SendAsyncProc = Void Function(IntPtr, Uint32, IntPtr, IntPtr);
 
+/// Application-defined callback function used with the RemoveWindowSubclass
+/// and SetWindowSubclass functions.
+typedef SubclassProc = LRESULT Function(HWND hWnd, UINT uMsg, WPARAM wParam,
+    LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
+
 /// Application-defined callback function used with the SymEnumSymbols,
 /// SymEnumTypes, and SymEnumTypesByName functions.
 typedef SymEnumSymbolsProc = Int32 Function(
@@ -123,8 +152,13 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 
 /// Application-defined callback function that processes messages sent to a
 /// window.
-typedef WindowProc = IntPtr Function(
-    IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
+typedef WindowProc = LRESULT Function(
+    HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+/// Application-defined callback function that is used by an application to
+/// register and unregister notifications on all wireless interfaces.
+typedef WlanNotificationCallback = Void Function(
+    Pointer<L2_NOTIFICATION_DATA>, Pointer);
 
 /// Application-defined callback function that provides special verification
 /// for smart card searches.

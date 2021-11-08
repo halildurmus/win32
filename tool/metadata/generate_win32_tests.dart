@@ -12,12 +12,14 @@ import 'package:winmd/winmd.dart';
 import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
+import '../projection/function.dart';
+import '../projection/type.dart';
 import 'generate_win32.dart';
-import 'projection/typeprojector.dart';
+import 'win32_functions.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
+  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -48,6 +50,10 @@ void main() {
   final libraries =
       win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
+  // GitHub Actions doesn't install Native Wifi API on runners, so we remove
+  // wlanapi manually to prevent test failures.
+  libraries.removeWhere((library) => library == 'wlanapi');
+
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
@@ -70,12 +76,12 @@ void main() {
         continue;
       }
 
-      final prototype = Win32Prototype(function, method, libraryDartName);
+      final prototype = FunctionProjection(method, libraryDartName);
 
       final returnFFIType =
-          TypeProjector(method.returnType.typeIdentifier).nativeType;
+          TypeProjection(method.returnType.typeIdentifier).nativeType;
       final returnDartType =
-          TypeProjector(method.returnType.typeIdentifier).dartType;
+          TypeProjection(method.returnType.typeIdentifier).dartType;
 
       final minimumWindowsVersion =
           filteredFunctionList[function]!.minimumWindowsVersion;
@@ -111,7 +117,8 @@ void main() {
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer = File('test/struct_test.dart').openSync(mode: FileMode.write);
+  final writer =
+      File('test/struct_test.dart').openSync(mode: FileMode.writeOnly);
 
   writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -128,6 +135,7 @@ import 'dart:ffi';
 
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;

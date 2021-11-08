@@ -1,3 +1,42 @@
+## 2.2.10
+
+- Add Windows 11 rounded corner window support along with sample (check Flutter
+  app in example\explorer)
+- Add magnifier APIs and example
+
+## 2.2.9
+
+- Add some missing GDI functions
+
+## 2.2.8
+
+- Add Native Wifi APIs (#299)
+
+## 2.2.7
+
+- Added ResetEvent and complete `OVERLAPPED` struct (#295)
+- Added more virtual memory functions (#297)
+
+## 2.2.6
+
+- Add some requested APIs thanks to contributions from @ilopX, in particular
+  a new sample for enumerating locally installed printers.
+- Added ExtractAssociatedIcon, with thanks to @halildurmus.
+
+## 2.2.5
+
+- Add more DWM APIs, including `DwmSetWindowAttribute`.
+
+## 2.2.4
+
+- Add various DWM and subclassing APIs
+
+## 2.2.3
+
+- Lazily evaluate `lookupFunction` FFI calls for improved performance.
+- Add APIs for hooks and a few extra kernel32 APIs
+- Add some more tests.
+
 ## 2.2.2
 
 - Add Windows Spooler library support.

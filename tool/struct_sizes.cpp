@@ -12,9 +12,10 @@
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\struct_sizes.dart as input to the test harness.
 
-// Compile with cl struct_sizes.cpp /Fe:structs64.exe
+// Compile with cl tool\struct_sizes.cpp /link ws2_32.lib
 
 #include <stdlib.h>
+#include <winsock2.h>
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
@@ -27,7 +28,10 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
-#include <winsock2.h>
+#include <dwmapi.h>
+#include <wlanapi.h>
+#include <SetupAPI.h>
+#include <magnification.h>
 
 void main()
 {
@@ -39,23 +43,26 @@ void main()
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
-    printf("  'COMMPROP': %zu,\n", sizeof(COMMPROP));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
+    printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\n", sizeof(GUID));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
     printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
     printf("  'NOTIFYICONDATA': %zu,\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
+    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
+    printf("  'STRRET': %zu,\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
+    printf("  'WLAN_RAW_DATA_LIST': %zu,\n", sizeof(WLAN_RAW_DATA_LIST));
 
     // Automatically generated structs
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
@@ -82,9 +89,11 @@ void main()
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("  'COMMCONFIG': %zu,\n", sizeof(COMMCONFIG));
+    printf("  'COMMPROP': %zu,\n", sizeof(COMMPROP));
     printf("  'COMMTIMEOUTS': %zu,\n", sizeof(COMMTIMEOUTS));
     printf("  'COMSTAT': %zu,\n", sizeof(COMSTAT));
     printf("  'CONSOLE_CURSOR_INFO': %zu,\n", sizeof(CONSOLE_CURSOR_INFO));
+    printf("  'CONSOLE_READCONSOLE_CONTROL': %zu,\n", sizeof(CONSOLE_READCONSOLE_CONTROL));
     printf("  'CONSOLE_SCREEN_BUFFER_INFO': %zu,\n", sizeof(CONSOLE_SCREEN_BUFFER_INFO));
     printf("  'CONSOLE_SELECTION_INFO': %zu,\n", sizeof(CONSOLE_SELECTION_INFO));
     printf("  'COORD': %zu,\n", sizeof(COORD));
@@ -102,7 +111,17 @@ void main()
     printf("  'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));
     printf("  'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("  'DOC_INFO_1': %zu,\n", sizeof(DOC_INFO_1W));
+    printf("  'DOT11_AUTH_CIPHER_PAIR': %zu,\n", sizeof(DOT11_AUTH_CIPHER_PAIR));
+    printf("  'DOT11_BSSID_LIST': %zu,\n", sizeof(DOT11_BSSID_LIST));
+    printf("  'DOT11_NETWORK': %zu,\n", sizeof(DOT11_NETWORK));
+    printf("  'DOT11_NETWORK_LIST': %zu,\n", sizeof(DOT11_NETWORK_LIST));
+    printf("  'DOT11_SSID': %zu,\n", sizeof(DOT11_SSID));
     printf("  'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
+    printf("  'DTBGOPTS': %zu,\n", sizeof(DTBGOPTS));
+    printf("  'DTTOPTS': %zu,\n", sizeof(DTTOPTS));
+    printf("  'DWM_BLURBEHIND': %zu,\n", sizeof(DWM_BLURBEHIND));
+    printf("  'EAP_METHOD_TYPE': %zu,\n", sizeof(EAP_METHOD_TYPE));
+    printf("  'EAP_TYPE': %zu,\n", sizeof(EAP_TYPE));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("  'fd_set': %zu,\n", sizeof(fd_set));
@@ -113,6 +132,7 @@ void main()
     printf("  'GESTUREINFO': %zu,\n", sizeof(GESTUREINFO));
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
+    printf("  'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
     printf("  'hostent': %zu,\n", sizeof(hostent));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
@@ -120,12 +140,18 @@ void main()
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
+    printf("  'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
+    printf("  'L2_NOTIFICATION_DATA': %zu,\n", sizeof(L2_NOTIFICATION_DATA));
     printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
     printf("  'LOGBRUSH': %zu,\n", sizeof(LOGBRUSH));
     printf("  'LOGFONT': %zu,\n", sizeof(LOGFONTW));
     printf("  'LOGPALETTE': %zu,\n", sizeof(LOGPALETTE));
     printf("  'LUID': %zu,\n", sizeof(LUID));
+    printf("  'MAGCOLOREFFECT': %zu,\n", sizeof(MAGCOLOREFFECT));
+    printf("  'MAGIMAGEHEADER': %zu,\n", sizeof(MAGIMAGEHEADER));
+    printf("  'MAGTRANSFORM': %zu,\n", sizeof(MAGTRANSFORM));
+    printf("  'MARGINS': %zu,\n", sizeof(MARGINS));
     printf("  'MCI_OPEN_PARMS': %zu,\n", sizeof(MCI_OPEN_PARMSW));
     printf("  'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("  'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));
@@ -147,8 +173,10 @@ void main()
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("  'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MSG': %zu,\n", sizeof(MSG));
+    printf("  'NDIS_OBJECT_HEADER': %zu,\n", sizeof(NDIS_OBJECT_HEADER));
     printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
     printf("  'NONCLIENTMETRICS': %zu,\n", sizeof(NONCLIENTMETRICSW));
@@ -179,7 +207,6 @@ void main()
     printf("  'PRINTER_INFO_5': %zu,\n", sizeof(PRINTER_INFO_5W));
     printf("  'PRINTER_INFO_6': %zu,\n", sizeof(PRINTER_INFO_6));
     printf("  'PRINTER_NOTIFY_INFO': %zu,\n", sizeof(PRINTER_NOTIFY_INFO));
-    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
@@ -203,6 +230,7 @@ void main()
     printf("  'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
     printf("  'SOCKADDR': %zu,\n", sizeof(SOCKADDR));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
+    printf("  'SP_DEVINFO_DATA': %zu,\n", sizeof(SP_DEVINFO_DATA));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));
@@ -221,6 +249,7 @@ void main()
     printf("  'TOUCHINPUT': %zu,\n", sizeof(TOUCHINPUT));
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
     printf("  'TYPEATTR': %zu,\n", sizeof(TYPEATTR));
+    printf("  'UNSIGNED_RATIO': %zu,\n", sizeof(UNSIGNED_RATIO));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
@@ -230,8 +259,42 @@ void main()
     printf("  'WIN32_FIND_DATA': %zu,\n", sizeof(WIN32_FIND_DATAW));
     printf("  'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
     printf("  'WINDOWPLACEMENT': %zu,\n", sizeof(WINDOWPLACEMENT));
+    printf("  'WLAN_ASSOCIATION_ATTRIBUTES': %zu,\n", sizeof(WLAN_ASSOCIATION_ATTRIBUTES));
+    printf("  'WLAN_AUTH_CIPHER_PAIR_LIST': %zu,\n", sizeof(WLAN_AUTH_CIPHER_PAIR_LIST));
+    printf("  'WLAN_AVAILABLE_NETWORK': %zu,\n", sizeof(WLAN_AVAILABLE_NETWORK));
+    printf("  'WLAN_AVAILABLE_NETWORK_LIST': %zu,\n", sizeof(WLAN_AVAILABLE_NETWORK_LIST));
+    printf("  'WLAN_BSS_ENTRY': %zu,\n", sizeof(WLAN_BSS_ENTRY));
+    printf("  'WLAN_BSS_LIST': %zu,\n", sizeof(WLAN_BSS_LIST));
+    printf("  'WLAN_CONNECTION_ATTRIBUTES': %zu,\n", sizeof(WLAN_CONNECTION_ATTRIBUTES));
+    printf("  'WLAN_CONNECTION_NOTIFICATION_DATA': %zu,\n", sizeof(WLAN_CONNECTION_NOTIFICATION_DATA));
+    printf("  'WLAN_CONNECTION_PARAMETERS': %zu,\n", sizeof(WLAN_CONNECTION_PARAMETERS));
+    printf("  'WLAN_COUNTRY_OR_REGION_STRING_LIST': %zu,\n", sizeof(WLAN_COUNTRY_OR_REGION_STRING_LIST));
+    printf("  'WLAN_DEVICE_SERVICE_GUID_LIST': %zu,\n", sizeof(WLAN_DEVICE_SERVICE_GUID_LIST));
+    printf("  'WLAN_DEVICE_SERVICE_NOTIFICATION_DATA': %zu,\n", sizeof(WLAN_DEVICE_SERVICE_NOTIFICATION_DATA));
+    printf("  'WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS));
+    printf("  'WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE));
+    printf("  'WLAN_HOSTED_NETWORK_PEER_STATE': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_PEER_STATE));
+    printf("  'WLAN_HOSTED_NETWORK_RADIO_STATE': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_RADIO_STATE));
+    printf("  'WLAN_HOSTED_NETWORK_SECURITY_SETTINGS': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_SECURITY_SETTINGS));
+    printf("  'WLAN_HOSTED_NETWORK_STATE_CHANGE': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_STATE_CHANGE));
+    printf("  'WLAN_HOSTED_NETWORK_STATUS': %zu,\n", sizeof(WLAN_HOSTED_NETWORK_STATUS));
+    printf("  'WLAN_INTERFACE_CAPABILITY': %zu,\n", sizeof(WLAN_INTERFACE_CAPABILITY));
+    printf("  'WLAN_INTERFACE_INFO': %zu,\n", sizeof(WLAN_INTERFACE_INFO));
+    printf("  'WLAN_INTERFACE_INFO_LIST': %zu,\n", sizeof(WLAN_INTERFACE_INFO_LIST));
+    printf("  'WLAN_MAC_FRAME_STATISTICS': %zu,\n", sizeof(WLAN_MAC_FRAME_STATISTICS));
+    printf("  'WLAN_MSM_NOTIFICATION_DATA': %zu,\n", sizeof(WLAN_MSM_NOTIFICATION_DATA));
+    printf("  'WLAN_PHY_FRAME_STATISTICS': %zu,\n", sizeof(WLAN_PHY_FRAME_STATISTICS));
+    printf("  'WLAN_PHY_RADIO_STATE': %zu,\n", sizeof(WLAN_PHY_RADIO_STATE));
+    printf("  'WLAN_PROFILE_INFO': %zu,\n", sizeof(WLAN_PROFILE_INFO));
+    printf("  'WLAN_PROFILE_INFO_LIST': %zu,\n", sizeof(WLAN_PROFILE_INFO_LIST));
+    printf("  'WLAN_RADIO_STATE': %zu,\n", sizeof(WLAN_RADIO_STATE));
+    printf("  'WLAN_RATE_SET': %zu,\n", sizeof(WLAN_RATE_SET));
+    printf("  'WLAN_RAW_DATA': %zu,\n", sizeof(WLAN_RAW_DATA));
+    printf("  'WLAN_SECURITY_ATTRIBUTES': %zu,\n", sizeof(WLAN_SECURITY_ATTRIBUTES));
+    printf("  'WLAN_STATISTICS': %zu,\n", sizeof(WLAN_STATISTICS));
     printf("  'WNDCLASS': %zu,\n", sizeof(WNDCLASSW));
     printf("  'WNDCLASSEX': %zu,\n", sizeof(WNDCLASSEXW));
+    printf("  'WTA_OPTIONS': %zu,\n", sizeof(WTA_OPTIONS));
     printf("  'XFORM': %zu,\n", sizeof(XFORM));
     printf("};\n");
 }

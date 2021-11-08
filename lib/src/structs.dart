@@ -42,65 +42,33 @@ import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
+import 'constants.dart';
+import 'guid.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
 
-/// Contains information about a communications driver.
+/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
+/// information field and provides the current data for that field.
 ///
 /// {@category Struct}
-@Packed(2)
-class COMMPROP extends Struct {
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  // TODO: Union
   @Uint16()
-  external int wPacketLength;
+  external int Type;
   @Uint16()
-  external int wPacketVersion;
+  external int Field;
   @Uint32()
-  external int dwServiceMask;
+  external int Reserved;
   @Uint32()
-  external int dwReserved1;
+  external int Id;
+  // TODO: Check packing
   @Uint32()
-  external int dwMaxTxQueue;
+  external int _pack;
   @Uint32()
-  external int dwMaxRxQueue;
+  external int cbBuf;
   @Uint32()
-  external int dwMaxBaud;
-  @Uint32()
-  external int dwProvSubType;
-  @Uint32()
-  external int dwProvCapabilities;
-  @Uint32()
-  external int dwSettableParams;
-  @Uint32()
-  external int dwSettableBaud;
-  @Uint16()
-  external int wSettableData;
-  @Uint32()
-  external int wSettableStopParity;
-  @Uint32()
-  external int dwCurrentTxQueue;
-  @Uint32()
-  external int dwCurrentRxQueue;
-  @Uint32()
-  external int dwProvSpec1;
-  @Uint32()
-  external int dwProvSpec2;
-  @Array(1)
-  external Array<Uint16> _wcProvChar;
-
-  String get wcProvChar {
-    final charCodes = <int>[];
-    for (var i = 0; i < 1; i++) {
-      charCodes.add(_wcProvChar[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set wcProvChar(String value) {
-    final stringToStore = value.padRight(1, '\x00');
-    for (var i = 0; i < 1; i++) {
-      _wcProvChar[i] = stringToStore.codeUnitAt(i);
-    }
-  }
+  external int _pack2;
+  external Pointer pBuf;
 }
 
 /// The DEVMODE data structure contains information about the
@@ -108,6 +76,7 @@ class COMMPROP extends Struct {
 ///
 /// {@category Struct}
 class DEVMODE extends Struct {
+  // TODO: Union
   @Array(32)
   external Array<Uint16> dmDeviceName;
   @Uint16()
@@ -182,6 +151,8 @@ class DEVMODE extends Struct {
 ///
 /// {@category Struct}
 class IN_ADDR extends Struct {
+  // TODO: Union
+
   @Array(4)
   external Array<Uint8> s_b;
 }
@@ -191,6 +162,8 @@ class IN_ADDR extends Struct {
 ///
 /// {@category Struct}
 class PROCESS_HEAP_ENTRY extends Struct {
+  // TODO: Union
+
   external Pointer lpData;
   @Uint32()
   external int cbData;
@@ -227,17 +200,38 @@ class PROCESS_HEAP_ENTRY extends Struct {
 //   WORD      wProcessorRevision;
 // } SYSTEM_INFO, *LPSYSTEM_INFO;
 
+class _SYSTEM_INFO_Anonymous_1 extends Struct {
+  @Uint16()
+  external int wProcessorArchitecture;
+  @Uint16()
+  external int wReserved;
+}
+
+class _SYSTEM_INFO_Anonymous_0 extends Union {
+  @Uint32()
+  external int dwOemId;
+
+  external _SYSTEM_INFO_Anonymous_1 _DUMMYSTRUCTNAME;
+}
+
 /// Contains information about the current computer system. This includes the
 /// architecture and type of the processor, the number of processors in the
 /// system, the page size, and other such information.
 ///
 /// {@category Struct}
 class SYSTEM_INFO extends Struct {
-  @Uint16()
-  external int wProcessorArchitecture;
+  external _SYSTEM_INFO_Anonymous_0 _DUMMYUNIONNAME;
 
-  @Uint16()
-  external int wReserved;
+  int get dwOemId => _DUMMYUNIONNAME.dwOemId;
+  set dwOemId(int value) => _DUMMYUNIONNAME.dwOemId = value;
+
+  int get wProcessorArchitecture =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.wProcessorArchitecture;
+  int get wReserved => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.wReserved;
+  set wProcessorArchitecture(int value) =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.wProcessorArchitecture = value;
+  set wReserved(int value) =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.wReserved = value;
 
   @Uint32()
   external int dwPageSize;
@@ -279,6 +273,89 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 }
 
+// typedef struct tagDEC {
+//   USHORT wReserved;
+//   union {
+//     struct {
+//       BYTE scale;
+//       BYTE sign;
+//     } DUMMYSTRUCTNAME;
+//     USHORT signscale;
+//   } DUMMYUNIONNAME;
+//   ULONG  Hi32;
+//   union {
+//     struct {
+//       ULONG Lo32;
+//       ULONG Mid32;
+//     } DUMMYSTRUCTNAME2;
+//     ULONGLONG Lo64;
+//   } DUMMYUNIONNAME2;
+// } DECIMAL;
+
+/// Represents a decimal data type that provides a sign and scale for a number
+/// (as in coordinates.)
+///
+/// Decimal variables are stored as 96-bit (12-byte) unsigned integers scaled by
+/// a variable power of 10. The power of 10 scaling factor specifies the number
+/// of digits to the right of the decimal point, and ranges from 0 to 28.
+///
+/// {@category Struct}
+class _DECIMAL_Anonymous_0 extends Union {
+  external _DECIMAL_Anonymous_2 _DUMMYSTRUCTNAME;
+  @Uint16()
+  external int signscale;
+}
+
+class _DECIMAL_Anonymous_1 extends Union {
+  external _DECIMAL_Anonymous_3 _DUMMYSTRUCTNAME2;
+  @Uint64()
+  external int Lo64;
+}
+
+class _DECIMAL_Anonymous_2 extends Struct {
+  @Uint8()
+  external int scale;
+  @Uint8()
+  external int sign;
+}
+
+class _DECIMAL_Anonymous_3 extends Struct {
+  @Uint32()
+  external int Lo32;
+  @Uint32()
+  external int Mid32;
+}
+
+class DECIMAL extends Struct {
+  @Uint16()
+  external int wReserved;
+
+  external _DECIMAL_Anonymous_0 _DUMMYUNIONNAME;
+
+  @Uint32()
+  external int Hi32;
+
+  external _DECIMAL_Anonymous_1 _DUMMYUNIONNAME2;
+
+  int get scale => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale;
+  set scale(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale = value;
+
+  int get sign => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign;
+  set sign(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign = value;
+
+  int get signscale => _DUMMYUNIONNAME.signscale;
+  set signscale(int value) => _DUMMYUNIONNAME.signscale = value;
+
+  int get Lo32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32;
+  set Lo32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32 = value;
+
+  int get Mid32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32;
+  set Mid32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32 = value;
+
+  int get Lo64 => _DUMMYUNIONNAME2.Lo64;
+  set Lo64(int value) => _DUMMYUNIONNAME2.Lo64 = value;
+}
+
 // struct tagVARIANT
 //    {
 //        VARTYPE vt;
@@ -294,18 +371,78 @@ class STARTUPINFOEX extends Struct {
 //            ...
 //    } ;
 
-/// The VARIANT type is used in Win32 to represent a dynamic type. It is
-/// represented as a struct containing a union of the types that could be
-/// stored.
-///
-/// VARIANTs must be initialized with [VariantInit] before their use.
+class _VARIANT_Anonymous_3 extends Struct {
+  external Pointer pvRecord;
+  external Pointer<COMObject> pRecInfo;
+}
 
-/// {@category Struct}
+class _VARIANT_Anonymous_2 extends Union {
+  @Int64()
+  external int llVal;
+  @Int32()
+  external int lVal;
+  @Uint8()
+  external int bVal;
+  @Int16()
+  external int iVal;
+  @Float()
+  external double fltVal;
+  @Double()
+  external double dblVal;
+  @Int16()
+  external int boolVal;
+  @Int16()
+  external int __OBSOLETE__VARIANT_BOOL;
+  @Int32()
+  external int scode;
+  @Int64()
+  external int cyVal;
+  @Double()
+  external double date;
+  external Pointer<Utf16> bstrVal;
+  external Pointer<COMObject> punkVal;
+  external Pointer<COMObject> pdispVal;
+  external Pointer/*<SAFEARRAY>*/ parray;
+  external Pointer<Uint8> pbVal;
+  external Pointer<Int16> piVal;
+  external Pointer<Int32> plVal;
+  external Pointer<Int64> pllVal;
+  external Pointer<Float> pfltVal;
+  external Pointer<Double> pdblVal;
+  external Pointer<Int16> pboolVal;
+  external Pointer<Int16> __OBSOLETE__VARIANT_PBOOL;
+  external Pointer<Int32> pscode;
+  external Pointer/*<CY>*/ pcyVal;
+  external Pointer<Double> pdate;
+  external Pointer<Pointer<Utf16>> pbstrVal;
+  external Pointer<Pointer<COMObject>> ppunkVal;
+  external Pointer<Pointer<COMObject>> ppdispVal;
+  external Pointer<Pointer/*<SAFEARRAY>*/ > pparray;
+  external Pointer<VARIANT> pvarVal;
+  external Pointer byref;
+  @Int8()
+  external int cVal;
+  @Uint16()
+  external int uiVal;
+  @Uint32()
+  external int ulVal;
+  @Uint64()
+  external int ullVal;
+  @Int32()
+  external int intVal;
+  @Uint32()
+  external int uintVal;
+  external Pointer<DECIMAL> pdecVal;
+  external Pointer<Int8> pcVal;
+  external Pointer<Uint16> puiVal;
+  external Pointer<Uint32> pulVal;
+  external Pointer<Uint64> pullVal;
+  external Pointer<Int32> pintVal;
+  external Pointer<Uint32> puintVal;
+  external _VARIANT_Anonymous_3 __VARIANT_NAME_4;
+}
 
-class VARIANT extends Struct {
-  // The size of a union type equals the largest member it can contain, which in
-  // the case of VARIANT is a struct of two pointers (BRECORD).
-
+class _VARIANT_Anonymous_1 extends Struct {
   @Uint16()
   external int vt;
   @Uint16()
@@ -314,100 +451,287 @@ class VARIANT extends Struct {
   external int wReserved2;
   @Uint16()
   external int wReserved3;
-  @Uint64()
-  external int _data;
-  @IntPtr()
-  external int _data2;
+  external _VARIANT_Anonymous_2 __VARIANT_NAME_3;
+}
+
+class _VARIANT_Anonymous_0 extends Union {
+  external _VARIANT_Anonymous_1 __VARIANT_NAME_2;
+  external DECIMAL decVal;
+}
+
+/// The VARIANT type is used in Win32 to represent a dynamic type. It is
+/// represented as a struct containing a union of the types that could be
+/// stored.
+///
+/// VARIANTs must be initialized with [VariantInit] before their use.
+///
+/// {@category Struct}
+class VARIANT extends Struct {
+  external _VARIANT_Anonymous_0 __VARIANT_NAME_1;
+
+  int get vt => __VARIANT_NAME_1.__VARIANT_NAME_2.vt;
+  set vt(int value) => __VARIANT_NAME_1.__VARIANT_NAME_2.vt = value;
+
+  int get wReserved1 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved1;
+  set wReserved1(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved1 = value;
+
+  int get wReserved2 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved2;
+  set wReserved2(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved2 = value;
+
+  int get wReserved3 => __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved3;
+  set wReserved3(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.wReserved3 = value;
 
   // LONGLONG -> __int64 -> Int64
-  int get llVal => _data;
-  set llVal(int val) => _data = val;
+  int get llVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.llVal;
+  set llVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.llVal = value;
 
   // LONG -> long -> Int32
-  int get lVal => ((_data & 0xFFFFFFFF00000000) >> 32).toSigned(32);
-  set lVal(int val) => _data = (val.toUnsigned(32) << 32);
+  int get lVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.lVal;
+  set lVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.lVal = value;
 
-  // BYTE => unsigned char => Uint8
-  int get bVal => ((_data & 0xFF00000000000000) >> 56).toUnsigned(8);
-  set bVal(int val) => _data = val << 56;
+  // BYTE -> unsigned char -> Uint8
+  int get bVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bVal;
+  set bVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bVal = value;
 
-  // SHORT => short => Int16
-  int get iVal => ((_data & 0xFFFF000000000000) >> 48).toSigned(16);
-  set iVal(int val) => _data = (val.toUnsigned(16) << 48);
+  // SHORT -> short -> Int16
+  int get iVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.iVal;
+  set iVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.iVal = value;
 
-  // BSTR => OLECHAR* => Pointer<Utf16>
-  Pointer<Utf16> get bstrVal => Pointer<Utf16>.fromAddress(_data);
-  set bstrVal(Pointer<Utf16> val) => _data = val.address;
-
-  // FLOAT => float => double
+  // FLOAT -> float -> double
   double get fltVal =>
-      (ByteData(4)..setUint32(0, (_data & 0xFFFFFFFF00000000) >> 32))
-          .getFloat32(0);
-  set fltVal(double val) =>
-      (ByteData(4)..setFloat32(0, val)).getUint32(0) << 32;
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.fltVal;
+  set fltVal(double value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.fltVal = value;
 
-  // DOUBLE => double => double
-  double get dblVal => (ByteData(8)..setUint64(0, _data)).getFloat64(0);
-  set dblVal(double val) => (ByteData(8)..setFloat64(0, val)).getUint64(0);
+  // DOUBLE -> double -> double
+  double get dblVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.dblVal;
+  set dblVal(double value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.dblVal = value;
+
+  // VARIANT_BOOL -> Int16
+  bool get boolVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal ==
+      VARIANT_TRUE;
+  set boolVal(bool value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.boolVal =
+          value ? VARIANT_TRUE : VARIANT_FALSE;
+
+  // SCODE -> LONG -> long -> Int32
+  int get scode => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode;
+  set lscodeVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.scode = value;
+
+  // CY -> Int64
+  int get cyVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cyVal;
+  set cyVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cyVal = value;
+
+  // DATE -> double -> double
+  double get date => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.date;
+  set date(double value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.date = value;
+
+  // BSTR -> OLECHAR* -> Pointer<Utf16>
+  Pointer<Utf16> get bstrVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bstrVal;
+  set bstrVal(Pointer<Utf16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.bstrVal = value;
 
   // IUnknown
-  IUnknown get punkVal => IUnknown(Pointer<COMObject>.fromAddress(_data));
-  set punkVal(IUnknown val) => _data = val.ptr.address;
+  IUnknown get punkVal =>
+      IUnknown(__VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal);
+  set punkVal(IUnknown value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.punkVal = value.ptr;
 
   // IDispatch
-  IDispatch get pdispVal => IDispatch(Pointer<COMObject>.fromAddress(_data));
-  set pdispVal(IDispatch val) => _data = val.ptr.address;
+  IDispatch get pdispVal =>
+      IDispatch(__VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal);
+  set pdispVal(IDispatch value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdispVal = value.ptr;
+
+  Pointer get parray =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.parray;
+  set parray(Pointer value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.parray = value;
 
   // BYTE*
-  Pointer<Uint8> get pbVal => Pointer<Uint8>.fromAddress(_data);
-  set pbVal(Pointer<Uint8> val) => _data = val.address;
+  Pointer<Uint8> get pbVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbVal;
+  set pbVal(Pointer<Uint8> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbVal = value;
 
   // SHORT*
-  Pointer<Int16> get piVal => Pointer<Int16>.fromAddress(_data);
-  set piVal(Pointer<Int16> val) => _data = val.address;
+  Pointer<Int16> get piVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.piVal;
+  set piVal(Pointer<Int16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.piVal = value;
 
   // LONG*
-  Pointer<Int32> get plVal => Pointer<Int32>.fromAddress(_data);
-  set plVal(Pointer<Int32> val) => _data = val.address;
+  Pointer<Int32> get plVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.plVal;
+  set plVal(Pointer<Int32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.plVal = value;
 
   // LONGLONG*
-  Pointer<Int64> get pllVal => Pointer<Int64>.fromAddress(_data);
-  set pllVal(Pointer<Int64> val) => _data = val.address;
+  Pointer<Int64> get pllVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pllVal;
+  set pllVal(Pointer<Int64> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pllVal = value;
 
   // FLOAT*
-  Pointer<Float> get pfltVal => Pointer<Float>.fromAddress(_data);
-  set pfltVal(Pointer<Float> val) => _data = val.address;
+  Pointer<Float> get pfltVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pfltVal;
+  set pfltVal(Pointer<Float> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pfltVal = value;
 
   // DOUBLE*
-  Pointer<Double> get pdblVal => Pointer<Double>.fromAddress(_data);
-  set pdblVal(Pointer<Double> val) => _data = val.address;
+  Pointer<Double> get pdblVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdblVal;
+  set pdblVal(Pointer<Double> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdblVal = value;
 
-  Pointer get byref => Pointer.fromAddress(_data);
-  set byref(Pointer val) => _data = val.address;
+  Pointer<Int16> get pboolVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pboolVal;
+  set pboolVal(Pointer<Int16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pboolVal = value;
+
+  Pointer<Int32> get pscode =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pscode;
+  set pscode(Pointer<Int32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pscode = value;
+
+  Pointer get pcyVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcyVal;
+  set pcyVal(Pointer value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcyVal = value;
+
+  Pointer<Double> get pdate =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdate;
+  set pdate(Pointer<Double> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdate = value;
+
+  Pointer<Pointer<Utf16>> get pbstrVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbstrVal;
+  set pbstrVal(Pointer<Pointer<Utf16>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pbstrVal = value;
+
+  Pointer<Pointer<COMObject>> get ppunkVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppunkVal;
+  set ppunkVal(Pointer<Pointer<COMObject>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppunkVal = value;
+
+  Pointer<Pointer<COMObject>> get ppdispVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppdispVal;
+  set ppdispVal(Pointer<Pointer<COMObject>> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ppdispVal = value;
+
+  Pointer<Pointer> get pparray =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pparray;
+  set pparray(Pointer<Pointer> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pparray = value;
+
+  Pointer<VARIANT> get pvarVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pvarVal;
+  set pvarVal(Pointer<VARIANT> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pvarVal = value;
+
+  Pointer get byref => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.byref;
+  set byref(Pointer value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.byref = value;
 
   // CHAR -> char -> Int8
-  int get cVal => (_data & 0xFF00000000000000) >> 56.toSigned(8);
-  set cVal(int val) => _data = (val.toUnsigned(8) << 56);
+  int get cVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cVal;
+  set cVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.cVal = value;
 
   // USHORT -> unsigned short -> Uint16
-  int get uiVal => ((_data & 0xFFFF000000000000) >> 48).toUnsigned(16);
-  set uiVal(int val) => _data = val << 48;
+  int get uiVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uiVal;
+  set uiVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uiVal = value;
 
   // ULONG -> unsigned long -> Uint32
-  int get ulVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
-  set ulVal(int val) => _data = val << 32;
+  int get ulVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ulVal;
+  set ulVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ulVal = value;
 
   // ULONGLONG -> unsigned long long -> Uint64
-  int get ullVal => _data;
-  set ullVal(int val) => _data;
+  BigInt get ullVal {
+    final src = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal;
+    final hi = (((src & 0xFFFFFFFF00000000) >> 32).toUnsigned(32))
+        .toRadixString(16)
+        .padLeft(8, '0');
+    final lo = ((src & 0x00000000FFFFFFFF).toRadixString(16).padLeft(8, '0'));
+    return BigInt.parse('$hi$lo', radix: 16);
+  }
+
+  set ullVal(BigInt value) {
+    final hi = ((value & BigInt.from(0xFFFFFFFF00000000)) >> 32).toInt();
+    final lo = (value & BigInt.from(0x00000000FFFFFFFF)).toInt();
+    __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal = (hi << 32) + lo;
+  }
 
   // INT -> int -> Int32
-  int get intVal => ((_data & 0xFFFFFFFF00000000) >> 32).toSigned(32);
-  set intVal(int val) => _data = (val.toUnsigned(32) << 32);
+  int get intVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.intVal;
+  set intVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.intVal = value;
 
   // UINT -> unsigned int -> Uint32
-  int get uintVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
-  set uintVal(int val) => _data = val << 32;
+  int get uintVal => __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal;
+  set uintVal(int value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.uintVal = value;
+
+  Pointer<DECIMAL> get pdecVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdecVal;
+  set pdecVal(Pointer<DECIMAL> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pdecVal = value;
+
+  Pointer<Int8> get pcVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcVal;
+  set pcVal(Pointer<Int8> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pcVal = value;
+
+  Pointer<Uint16> get puiVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puiVal;
+  set puiVal(Pointer<Uint16> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puiVal = value;
+
+  Pointer<Uint32> get pulVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pulVal;
+  set pulVal(Pointer<Uint32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pulVal = value;
+
+  Pointer<Uint64> get pullVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pullVal;
+  set pullVal(Pointer<Uint64> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pullVal = value;
+
+  Pointer<Int32> get pintVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pintVal;
+  set pintVal(Pointer<Int32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.pintVal = value;
+
+  Pointer<Uint32> get puintVal =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal;
+  set puintVal(Pointer<Uint32> value) =>
+      __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.puintVal = value;
+
+  Pointer get pvRecord => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord;
+  set pvRecord(Pointer value) => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pvRecord = value;
+
+  Pointer<COMObject> get pRecInfo => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo;
+  set pRecInfo(Pointer<COMObject> value) => __VARIANT_NAME_1
+      .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
 }
 
 // typedef struct tagTYPEDESC {
@@ -489,6 +813,14 @@ class VARDESC extends Struct {
 //   } DUMMYUNIONNAME;
 // } STRRET;
 
+class _STRRET_Anonymous_0 extends Union {
+  external Pointer<Utf16> pOleStr;
+  @Uint32()
+  external int uOffset;
+  @Array(260)
+  external Array<Uint8> cStr;
+}
+
 /// Contains strings returned from the IShellFolder interface methods.
 ///
 /// {@category Struct}
@@ -496,158 +828,16 @@ class STRRET extends Struct {
   @Uint32()
   external int uType;
 
-  int get uOffset => _cStr0;
+  external _STRRET_Anonymous_0 _DUMMYUNIONNAME;
 
-  @Uint32()
-  external int _cStr0;
-  @Uint32()
-  external int _cStr1;
-  @Uint32()
-  external int _cStr2;
-  @Uint32()
-  external int _cStr3;
-  @Uint32()
-  external int _cStr4;
-  @Uint32()
-  external int _cStr5;
-  @Uint32()
-  external int _cStr6;
-  @Uint32()
-  external int _cStr7;
-  @Uint32()
-  external int _cStr8;
-  @Uint32()
-  external int _cStr9;
-  @Uint32()
-  external int _cStr10;
-  @Uint32()
-  external int _cStr11;
-  @Uint32()
-  external int _cStr12;
-  @Uint32()
-  external int _cStr13;
-  @Uint32()
-  external int _cStr14;
-  @Uint32()
-  external int _cStr15;
-  @Uint32()
-  external int _cStr16;
-  @Uint32()
-  external int _cStr17;
-  @Uint32()
-  external int _cStr18;
-  @Uint32()
-  external int _cStr19;
-  @Uint32()
-  external int _cStr20;
-  @Uint32()
-  external int _cStr21;
-  @Uint32()
-  external int _cStr22;
-  @Uint32()
-  external int _cStr23;
-  @Uint32()
-  external int _cStr24;
-  @Uint32()
-  external int _cStr25;
-  @Uint32()
-  external int _cStr26;
-  @Uint32()
-  external int _cStr27;
-  @Uint32()
-  external int _cStr28;
-  @Uint32()
-  external int _cStr29;
-  @Uint32()
-  external int _cStr30;
-  @Uint32()
-  external int _cStr31;
-  @Uint32()
-  external int _cStr32;
-  @Uint32()
-  external int _cStr33;
-  @Uint32()
-  external int _cStr34;
-  @Uint32()
-  external int _cStr35;
-  @Uint32()
-  external int _cStr36;
-  @Uint32()
-  external int _cStr37;
-  @Uint32()
-  external int _cStr38;
-  @Uint32()
-  external int _cStr39;
-  @Uint32()
-  external int _cStr40;
-  @Uint32()
-  external int _cStr41;
-  @Uint32()
-  external int _cStr42;
-  @Uint32()
-  external int _cStr43;
-  @Uint32()
-  external int _cStr44;
-  @Uint32()
-  external int _cStr45;
-  @Uint32()
-  external int _cStr46;
-  @Uint32()
-  external int _cStr47;
-  @Uint32()
-  external int _cStr48;
-  @Uint32()
-  external int _cStr49;
-  @Uint32()
-  external int _cStr50;
-  @Uint32()
-  external int _cStr51;
-  @Uint32()
-  external int _cStr52;
-  @Uint32()
-  external int _cStr53;
-  @Uint32()
-  external int _cStr54;
-  @Uint32()
-  external int _cStr55;
-  @Uint32()
-  external int _cStr56;
-  @Uint32()
-  external int _cStr57;
-  @Uint32()
-  external int _cStr58;
-  @Uint32()
-  external int _cStr59;
-  @Uint32()
-  external int _cStr60;
-  @Uint32()
-  external int _cStr61;
-  @Uint32()
-  external int _cStr62;
-  @Uint32()
-  external int _cStr63;
-  @Uint32()
-  external int _cStr64;
+  Pointer<Utf16> get pOleStr => _DUMMYUNIONNAME.pOleStr;
+  set pOleStr(Pointer<Utf16> value) => _DUMMYUNIONNAME.pOleStr = value;
 
-  String get cStr => String.fromCharCodes(Uint32List.fromList([
-        _cStr0, _cStr1, _cStr2, _cStr3, //
-        _cStr4, _cStr5, _cStr6, _cStr7,
-        _cStr8, _cStr9, _cStr10, _cStr11,
-        _cStr12, _cStr13, _cStr14, _cStr15,
-        _cStr16, _cStr17, _cStr18, _cStr19,
-        _cStr20, _cStr21, _cStr22, _cStr23,
-        _cStr24, _cStr25, _cStr26, _cStr27,
-        _cStr28, _cStr29, _cStr30, _cStr31,
-        _cStr32, _cStr33, _cStr34, _cStr35,
-        _cStr36, _cStr37, _cStr38, _cStr39,
-        _cStr40, _cStr41, _cStr42, _cStr43,
-        _cStr44, _cStr45, _cStr46, _cStr47,
-        _cStr48, _cStr49, _cStr50, _cStr51,
-        _cStr52, _cStr53, _cStr54, _cStr55,
-        _cStr56, _cStr57, _cStr58, _cStr59,
-        _cStr60, _cStr61, _cStr62, _cStr63,
-        _cStr64
-      ]).buffer.asUint16List());
+  int get uOffset => _DUMMYUNIONNAME.uOffset;
+  set uOffset(int value) => _DUMMYUNIONNAME.uOffset = value;
+
+  Array<Uint8> get cStr => _DUMMYUNIONNAME.cStr;
+  set cStr(Array<Uint8> value) => _DUMMYUNIONNAME.cStr = value;
 }
 
 // typedef struct tagINPUT {
@@ -659,6 +849,12 @@ class STRRET extends Struct {
 //   } DUMMYUNIONNAME;
 // } INPUT, *PINPUT, *LPINPUT;
 
+class _INPUT_Anonymous_0 extends Union {
+  external MOUSEINPUT mi;
+  external KEYBDINPUT ki;
+  external HARDWAREINPUT hi;
+}
+
 /// Used by SendInput to store information for synthesizing input events such as
 /// keystrokes, mouse movement, and mouse clicks.
 ///
@@ -667,113 +863,16 @@ class INPUT extends Struct {
   // 28 bytes on 32-bit, 40 bytes on 64-bit
   @Uint32()
   external int type;
-  @Int32()
-  external int _data0;
-  @IntPtr()
-  external int _data1;
-  @IntPtr()
-  external int _data2;
-  @IntPtr()
-  external int _data3;
-  @Uint64()
-  external int _data4;
-}
 
-extension PointerINPUTExtension on Pointer<INPUT> {
-  // Location adjusts for padding on 32-bit or 64-bit
-  MOUSEINPUT get mi =>
-      MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
-  KEYBDINPUT get ki =>
-      KEYBDINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
-  HARDWAREINPUT get hi =>
-      HARDWAREINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
-}
+  external _INPUT_Anonymous_0 _DUMMYUNIONNAME;
 
-// typedef struct tagMOUSEINPUT {
-//   LONG      dx;
-//   LONG      dy;
-//   DWORD     mouseData;
-//   DWORD     dwFlags;
-//   DWORD     time;
-//   ULONG_PTR dwExtraInfo;
-// } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
+  MOUSEINPUT get mi => _DUMMYUNIONNAME.mi;
+  KEYBDINPUT get ki => _DUMMYUNIONNAME.ki;
+  HARDWAREINPUT get hi => _DUMMYUNIONNAME.hi;
 
-/// Contains information about a simulated mouse event.
-///
-/// {@category Struct}
-class MOUSEINPUT {
-  Pointer<Uint32> ptr;
-
-  MOUSEINPUT(this.ptr);
-
-  int get dx => ptr.value;
-  int get dy => ptr.elementAt(1).value;
-
-  set dx(int value) => ptr.value = value;
-  set dy(int value) => ptr.elementAt(1).value = value;
-
-  int get mouseData => ptr.elementAt(2).value;
-  int get dwFlags => ptr.elementAt(3).value;
-  int get time => ptr.elementAt(4).value;
-  int get dwExtraInfo => ptr.elementAt(5).value;
-
-  set mouseData(int value) => ptr.elementAt(2).value = value;
-  set dwFlags(int value) => ptr.elementAt(3).value = value;
-  set time(int value) => ptr.elementAt(4).value = value;
-  set dwExtraInfo(int value) => ptr.elementAt(5).value = value;
-}
-
-// typedef struct tagKEYBDINPUT {
-//   WORD      wVk;
-//   WORD      wScan;
-//   DWORD     dwFlags;
-//   DWORD     time;
-//   ULONG_PTR dwExtraInfo;
-// } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
-
-/// Contains information about a simulated keyboard event.
-///
-/// {@category Struct}
-class KEYBDINPUT {
-  Pointer<Uint16> ptr;
-
-  KEYBDINPUT(this.ptr);
-
-  int get wVk => ptr.value;
-  int get wScan => ptr.elementAt(1).value;
-  int get dwFlags => ptr.elementAt(2).cast<Uint32>().value;
-  int get time => ptr.elementAt(4).cast<Uint32>().value;
-  int get dwExtraInfo => ptr.elementAt(6).cast<IntPtr>().value;
-
-  set wVk(int value) => ptr.value = value;
-  set wScan(int value) => ptr.elementAt(1).value = value;
-  set dwFlags(int value) => ptr.elementAt(2).cast<Uint32>().value = value;
-  set time(int value) => ptr.elementAt(4).cast<Uint32>().value = value;
-  set dwExtraInfo(int value) => ptr.elementAt(6).cast<IntPtr>().value = value;
-}
-
-// typedef struct tagHARDWAREINPUT {
-//   DWORD uMsg;
-//   WORD  wParamL;
-//   WORD  wParamH;
-// } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
-
-/// Contains information about a simulated message generated by an input device
-/// other than a keyboard or mouse.
-///
-/// {@category Struct}
-class HARDWAREINPUT {
-  Pointer<Uint16> ptr;
-
-  HARDWAREINPUT(this.ptr);
-
-  int get uMsg => ptr.cast<Uint32>().value;
-  int get wParamL => ptr.elementAt(2).value;
-  int get wParamH => ptr.elementAt(3).value;
-
-  set uMsg(int value) => ptr.cast<Uint32>().value = value;
-  set wParamL(int value) => ptr.elementAt(2).value = value;
-  set wParamH(int value) => ptr.elementAt(3).value = value;
+  set mi(MOUSEINPUT value) => _DUMMYUNIONNAME.mi = value;
+  set ki(KEYBDINPUT value) => _DUMMYUNIONNAME.ki = value;
+  set hi(HARDWAREINPUT value) => _DUMMYUNIONNAME.hi = value;
 }
 
 // typedef struct _SHELLEXECUTEINFOW {
@@ -832,76 +931,6 @@ class SHELLEXECUTEINFO extends Struct {
   @IntPtr()
   external int hProcess;
 }
-
-// typedef struct _GUID {
-//     unsigned long  Data1;
-//     unsigned short Data2;
-//     unsigned short Data3;
-//     unsigned char  Data4[ 8 ];
-// } GUID;
-
-/// Represents a globally unique identifier (GUID).
-///
-/// {@category Struct}
-@Packed(4)
-class GUID extends Struct {
-  @Uint32()
-  external int Data1;
-  @Uint16()
-  external int Data2;
-  @Uint16()
-  external int Data3;
-  @Uint64()
-  external int Data4;
-
-  /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
-  @override
-  String toString() {
-    final comp1 = (Data4 & 0xFF).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF00) >> 8).toRadixString(16).padLeft(2, '0');
-
-    // This is hacky as all get-out :)
-    final comp2 = ((Data4 & 0xFF0000) >> 16).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF000000) >> 24).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF00000000) >> 32).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF0000000000) >> 40).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF000000000000) >> 48).toRadixString(16).padLeft(2, '0') +
-        (BigInt.from(Data4 & 0xFF00000000000000).toUnsigned(64) >> 56)
-            .toRadixString(16)
-            .padLeft(2, '0');
-
-    return '{${Data1.toRadixString(16).padLeft(8, '0').toUpperCase()}-'
-        '${Data2.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-        '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-        '${comp1.toUpperCase()}-'
-        '${comp2.toUpperCase()}}';
-  }
-
-  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
-  void setGUID(String guidString) {
-    assert(guidString.length == 38);
-    Data1 = int.parse(guidString.substring(1, 9), radix: 16);
-    Data2 = int.parse(guidString.substring(10, 14), radix: 16);
-    Data3 = int.parse(guidString.substring(15, 19), radix: 16);
-
-    // Final component is pushed on the stack in reverse order per x64
-    // calling convention.
-    final rawString = guidString.substring(35, 37) +
-        guidString.substring(33, 35) +
-        guidString.substring(31, 33) +
-        guidString.substring(29, 31) +
-        guidString.substring(27, 29) +
-        guidString.substring(25, 27) +
-        guidString.substring(22, 24) +
-        guidString.substring(20, 22);
-
-    // We need to split this to avoid overflowing a signed int.parse()
-    Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
-        int.parse(rawString.substring(4, 16), radix: 16);
-  }
-}
-
-Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
 
 /// Represents package settings used to create a package.
 ///
@@ -1111,23 +1140,6 @@ class BLUETOOTH_PIN_INFO extends Struct {
   }
 }
 
-// typedef struct COR_FIELD_OFFSET
-//     {
-//     mdFieldDef ridOfField;
-//     ULONG32 ulOffset;
-//     } 	COR_FIELD_OFFSET;
-
-/// Stores the offset, within a class, of the specified field.
-///
-/// {@category Struct}
-class COR_FIELD_OFFSET extends Struct {
-  @Uint32()
-  external int ridOfField;
-
-  @Uint32()
-  external int ulOffset;
-}
-
 // typedef struct _OVERLAPPED {
 //   ULONG_PTR Internal;
 //   ULONG_PTR InternalHigh;
@@ -1141,6 +1153,18 @@ class COR_FIELD_OFFSET extends Struct {
 //   HANDLE    hEvent;
 // } OVERLAPPED, *LPOVERLAPPED;
 
+class _OVERLAPPED_Anonymous_1 extends Struct {
+  @Uint32()
+  external int Offset;
+  @Uint32()
+  external int OffsetHigh;
+}
+
+class _OVERLAPPED_Anonymous_0 extends Union {
+  external _OVERLAPPED_Anonymous_1 _DUMMYSTRUCTNAME;
+  external Pointer pointer;
+}
+
 /// Contains information used in asynchronous (or overlapped) input and output
 /// (I/O).
 ///
@@ -1152,10 +1176,52 @@ class OVERLAPPED extends Struct {
   @IntPtr()
   external int InternalHigh;
 
-  external Pointer pointer;
+  external _OVERLAPPED_Anonymous_0 _DUMMYUNIONNAME;
+
+  int get Offset => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.Offset;
+  int get OffsetHigh => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.OffsetHigh;
+
+  set Offset(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.Offset = value;
+  set OffsetHigh(int value) =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.OffsetHigh = value;
+
+  Pointer get pointer => _DUMMYUNIONNAME.pointer;
+  set pointer(Pointer value) => _DUMMYUNIONNAME.pointer = value;
 
   @IntPtr()
   external int hEvent;
+}
+
+// typedef struct _WLAN_RAW_DATA_LIST {
+//     DWORD dwTotalSize;
+//     DWORD dwNumberOfItems;
+//     struct {
+//         // the beginning of the data blob
+//         // the offset is w.r.t. the beginning of the entry
+//         DWORD dwDataOffset;
+//         // size of the data blob
+//         DWORD dwDataSize;
+//     } DataList[1];
+// } WLAN_RAW_DATA_LIST, *PWLAN_RAW_DATA_LIST;
+
+class _DataList extends Struct {
+  @Uint32()
+  external int dwDataOffset;
+  @Uint32()
+  external int dwDataSize;
+}
+
+/// The WLAN_RAW_DATA_LIST structure contains raw data in the form of an
+/// array of data blobs that are used by some Native Wifi functions.
+///
+/// {@category Struct}
+class WLAN_RAW_DATA_LIST extends Struct {
+  @Uint32()
+  external int dwTotalSize;
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<_DataList> DataList;
 }
 
 // typedef struct mmtime_tag {
@@ -1281,6 +1347,13 @@ class PROPVARIANT extends Struct {
 //   HICON hBalloonIcon;
 // } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
 
+class _NOTIFYICONDATA_Anonymous_0 extends Union {
+  @Uint32()
+  external int uTimeout;
+  @Uint32()
+  external int uVersion;
+}
+
 /// The NOTIFYICONDATA contains information that the system needs to display
 /// notifications in the notification area. Used by Shell_NotifyIcon.
 ///
@@ -1347,12 +1420,12 @@ class NOTIFYICONDATA extends Struct {
     }
   }
 
-  @Uint32()
-  external int uTimeout;
+  external _NOTIFYICONDATA_Anonymous_0 _DUMMYUNIONNAME;
 
-  // This field is in a UNION with uTimeout, so we define it as the same.
-  int get uVersion => uTimeout;
-  set uVersion(int value) => uTimeout = value;
+  int get uTimeout => _DUMMYUNIONNAME.uTimeout;
+  int get uVersion => _DUMMYUNIONNAME.uVersion;
+  set uTimeout(int value) => _DUMMYUNIONNAME.uTimeout = value;
+  set uVersion(int value) => _DUMMYUNIONNAME.uVersion = value;
 
   @Array(64)
   external Array<Uint16> _szInfoTitle;

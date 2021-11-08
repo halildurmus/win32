@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -29,13 +30,13 @@ final _kernelbase = DynamicLibrary.open('kernelbase.dll');
 /// );
 /// ```
 /// {@category kernel32}
-int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) {
-  final _CompareObjectHandles = _kernelbase.lookupFunction<
-      Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
-      int Function(int hFirstObjectHandle,
-          int hSecondObjectHandle)>('CompareObjectHandles');
-  return _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
-}
+int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
+    _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
+
+late final _CompareObjectHandles = _kernelbase.lookupFunction<
+    Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+    int Function(int hFirstObjectHandle,
+        int hSecondObjectHandle)>('CompareObjectHandles');
 
 /// Gets an array that contains the well-formed COM ports.
 ///
@@ -48,14 +49,14 @@ int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) {
 /// ```
 /// {@category kernel32}
 int GetCommPorts(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
-    Pointer<Uint32> puPortNumbersFound) {
-  final _GetCommPorts = _kernelbase.lookupFunction<
-      Uint32 Function(Pointer<Uint32> lpPortNumbers, Uint32 uPortNumbersCount,
-          Pointer<Uint32> puPortNumbersFound),
-      int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
-          Pointer<Uint32> puPortNumbersFound)>('GetCommPorts');
-  return _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
-}
+        Pointer<Uint32> puPortNumbersFound) =>
+    _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
+
+late final _GetCommPorts = _kernelbase.lookupFunction<
+    Uint32 Function(Pointer<Uint32> lpPortNumbers, Uint32 uPortNumbersCount,
+        Pointer<Uint32> puPortNumbersFound),
+    int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
+        Pointer<Uint32> puPortNumbersFound)>('GetCommPorts');
 
 /// Retrieves the best estimate of the diagonal size of the built-in
 /// screen, in inches.
@@ -66,12 +67,12 @@ int GetCommPorts(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
 /// );
 /// ```
 /// {@category kernel32}
-int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) {
-  final _GetIntegratedDisplaySize = _kernelbase.lookupFunction<
-      Int32 Function(Pointer<Double> sizeInInches),
-      int Function(Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
-  return _GetIntegratedDisplaySize(sizeInInches);
-}
+int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) =>
+    _GetIntegratedDisplaySize(sizeInInches);
+
+late final _GetIntegratedDisplaySize = _kernelbase.lookupFunction<
+    Int32 Function(Pointer<Double> sizeInInches),
+    int Function(Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
 
 /// Attempts to open a communication device.
 ///
@@ -84,11 +85,11 @@ int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) {
 /// ```
 /// {@category kernel32}
 int OpenCommPort(
-    int uPortNumber, int dwDesiredAccess, int dwFlagsAndAttributes) {
-  final _OpenCommPort = _kernelbase.lookupFunction<
-      IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
-          Uint32 dwFlagsAndAttributes),
-      int Function(int uPortNumber, int dwDesiredAccess,
-          int dwFlagsAndAttributes)>('OpenCommPort');
-  return _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
-}
+        int uPortNumber, int dwDesiredAccess, int dwFlagsAndAttributes) =>
+    _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
+
+late final _OpenCommPort = _kernelbase.lookupFunction<
+    IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
+        Uint32 dwFlagsAndAttributes),
+    int Function(int uPortNumber, int dwDesiredAccess,
+        int dwFlagsAndAttributes)>('OpenCommPort');
