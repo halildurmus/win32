@@ -407,6 +407,27 @@ class BY_HANDLE_FILE_INFORMATION extends Struct {
   external int nFileIndexLow;
 }
 
+/// Contains information passed to a WH_CBT hook procedure, CBTProc, before
+/// a window is created.
+///
+/// {@category Struct}
+class CBT_CREATEWNDW extends Struct {
+  external Pointer<CREATESTRUCT> lpcs;
+  @IntPtr()
+  external int hwndInsertAfter;
+}
+
+/// Contains information passed to a WH_CBT hook procedure, CBTProc, before
+/// a window is activated.
+///
+/// {@category Struct}
+class CBTACTIVATESTRUCT extends Struct {
+  @Int32()
+  external int fMouse;
+  @IntPtr()
+  external int hWndActive;
+}
+
 /// Contains extended result information obtained by calling the
 /// ChangeWindowMessageFilterEx function.
 ///
@@ -805,6 +826,40 @@ class CURSORINFO extends Struct {
   external POINT ptScreenPos;
 }
 
+/// Defines the message parameters passed to a WH_CALLWNDPROCRET hook
+/// procedure, CallWndRetProc.
+///
+/// {@category Struct}
+class CWPRETSTRUCT extends Struct {
+  @IntPtr()
+  external int lResult;
+  @IntPtr()
+  external int lParam;
+  @IntPtr()
+  external int wParam;
+  @Uint32()
+  external int message;
+  @IntPtr()
+  external int hwnd;
+}
+
+/// Defines the message parameters passed to a WH_CALLWNDPROC hook
+/// procedure, CallWndProc.
+///
+/// {@category Struct}
+class CWPSTRUCT extends Struct {
+  @IntPtr()
+  external int lResult;
+  @IntPtr()
+  external int lParam;
+  @IntPtr()
+  external int wParam;
+  @Uint32()
+  external int message;
+  @IntPtr()
+  external int hwnd;
+}
+
 /// Defines the control setting for a serial communications device.
 ///
 /// {@category Struct}
@@ -839,6 +894,23 @@ class DCB extends Struct {
   external int EvtChar;
   @Uint16()
   external int wReserved1;
+}
+
+/// Contains debugging information passed to a WH_DEBUG hook procedure,
+/// DebugProc.
+///
+/// {@category Struct}
+class DEBUGHOOKINFO extends Struct {
+  @Uint32()
+  external int idThread;
+  @Uint32()
+  external int idThreadInstaller;
+  @IntPtr()
+  external int lParam;
+  @IntPtr()
+  external int wParam;
+  @Int32()
+  external int code;
 }
 
 /// The DESIGNVECTOR structure is used by an application to specify values
@@ -1214,6 +1286,24 @@ class ENUMLOGFONTEX extends Struct {
   }
 }
 
+/// Contains information about a hardware message sent to the system
+/// message queue. This structure is used to store message information for
+/// the JournalPlaybackProc callback function.
+///
+/// {@category Struct}
+class EVENTMSG extends Struct {
+  @Uint32()
+  external int message;
+  @Uint32()
+  external int paramL;
+  @Uint32()
+  external int paramH;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int hwnd;
+}
+
 /// Describes an exception that occurred during IDispatch::Invoke.
 ///
 /// {@category Struct}
@@ -1569,6 +1659,22 @@ class JOB_INFO_1 extends Struct {
   external int PagesPrinted;
 
   external SYSTEMTIME Submitted;
+}
+
+/// Contains information about a low-level keyboard input event.
+///
+/// {@category Struct}
+class KBDLLHOOKSTRUCT extends Struct {
+  @Uint32()
+  external int vkCode;
+  @Uint32()
+  external int scanCode;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 /// Contains information about a simulated keyboard event.
@@ -2224,6 +2330,38 @@ class MONITORINFO extends Struct {
   external int dwFlags;
 }
 
+/// Contains information about a mouse event passed to a WH_MOUSE hook
+/// procedure, MouseProc.
+///
+/// {@category Struct}
+class MOUSEHOOKSTRUCT extends Struct {
+  external POINT pt;
+  @IntPtr()
+  external int hwnd;
+  @Uint32()
+  external int wHitTestCode;
+  @IntPtr()
+  external int dwExtraInfo;
+}
+
+/// Contains information about a mouse event passed to a WH_MOUSE hook
+/// procedure, MouseProc. This is an extension of the MOUSEHOOKSTRUCT
+/// structure that includes information about wheel movement or the use of
+/// the X button.
+///
+/// {@category Struct}
+class MOUSEHOOKSTRUCTEX extends Struct {
+  external POINT pt;
+  @Uint32()
+  external int mouseData;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
+}
+
 /// Contains information about a simulated mouse event.
 ///
 /// {@category Struct}
@@ -2272,6 +2410,21 @@ class MSG extends Struct {
   external int time;
 
   external POINT pt;
+}
+
+/// Contains information about a low-level mouse input event.
+///
+/// {@category Struct}
+class MSLLHOOKSTRUCT extends Struct {
+  external POINT pt;
+  @Uint32()
+  external int mouseData;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 /// The NDIS_OBJECT_HEADER structure packages the object type, version, and

@@ -71,6 +71,14 @@
         "namespace": "Windows.Win32.Storage.FileSystem.BY_HANDLE_FILE_INFORMATION",
         "comment": "Contains information that the GetFileInformationByHandle function retrieves."
     },
+    "CBT_CREATEWNDW": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CBT_CREATEWNDW",
+        "comment": "Contains information passed to a WH_CBT hook procedure, CBTProc, before a window is created."
+    },
+    "CBTACTIVATESTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CBTACTIVATESTRUCT",
+        "comment": "Contains information passed to a WH_CBT hook procedure, CBTProc, before a window is activated."
+    },
     "CHANGEFILTERSTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHANGEFILTERSTRUCT",
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
@@ -143,9 +151,21 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO",
         "comment": "Contains global cursor information."
     },
+    "CWPRETSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT",
+        "comment": "Defines the message parameters passed to a WH_CALLWNDPROCRET hook procedure, CallWndRetProc."
+    },
+    "CWPSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT",
+        "comment": "Defines the message parameters passed to a WH_CALLWNDPROC hook procedure, CallWndProc."
+    },
     "DCB": {
         "namespace": "Windows.Win32.Devices.Communication.DCB",
         "comment": "Defines the control setting for a serial communications device."
+    },
+    "DEBUGHOOKINFO": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.DEBUGHOOKINFO",
+        "comment": "Contains debugging information passed to a WH_DEBUG hook procedure, DebugProc."
     },
     "DESIGNVECTOR": {
         "namespace": "Windows.Win32.Graphics.Gdi.DESIGNVECTOR",
@@ -231,6 +251,10 @@
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
     },
+    "EVENTMSG": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.EVENTMSG",
+        "comment": "Contains information about a hardware message sent to the system message queue. This structure is used to store message information for the JournalPlaybackProc callback function."
+    },
     "EXCEPINFO": {
         "namespace": "Windows.Win32.System.Com.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
@@ -298,6 +322,10 @@
     "JOB_INFO_1": {
         "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
         "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
+    },
+    "KBDLLHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.KBDLLHOOKSTRUCT",
+        "comment": "Contains information about a low-level keyboard input event."
     },
     "KEYBDINPUT": {
         "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.KEYBDINPUT",
@@ -431,6 +459,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.MONITORINFO",
         "comment": "The MONITORINFO structure contains information about a display monitor."
     },
+    "MOUSEHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCT",
+        "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc."
+    },
+    "MOUSEHOOKSTRUCTEX": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT",
+        "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc. This is an extension of the MOUSEHOOKSTRUCT structure that includes information about wheel movement or the use of the X button."
+    },
     "MOUSEINPUT": {
         "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEINPUT",
         "comment": "Contains information about a simulated mouse event."
@@ -442,6 +478,10 @@
     "MSG": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSG",
         "comment": "Contains message information from a thread's message queue."
+    },
+    "MSLLHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT",
+        "comment": "Contains information about a low-level mouse input event."
     },
     "NDIS_OBJECT_HEADER": {
         "namespace": "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER",
