@@ -1901,22 +1901,7 @@ void main() {
               Pointer<Uint32> nSize)>('GetComputerNameExW');
       expect(GetComputerNameEx, isA<Function>());
     });
-    test('Can instantiate GetProcessShutdownParameters', () {
-      final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GetProcessShutdownParameters = kernel32.lookupFunction<
-          Int32 Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags),
-          int Function(Pointer<Uint32> lpdwLevel,
-              Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
-      expect(GetProcessShutdownParameters, isA<Function>());
-    });
-    test('Can instantiate GetProcessVersion', () {
-      final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GetProcessVersion = kernel32.lookupFunction<
-          Uint32 Function(Uint32 ProcessId),
-          int Function(int ProcessId)>('GetProcessVersion');
-      expect(GetProcessVersion, isA<Function>());
-    });
-    test('Can instantiate GetProcessWorkingSetSize', () {
+    test('Can instantiate GetConsoleCursorInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetConsoleCursorInfo = kernel32.lookupFunction<
               Int32 Function(IntPtr hConsoleOutput,
@@ -2780,6 +2765,17 @@ void main() {
               'IsDebuggerPresent');
       expect(IsDebuggerPresent, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate IsNativeVhdBoot', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final IsNativeVhdBoot = kernel32.lookupFunction<
+            Int32 Function(Pointer<Int32> NativeVhdBoot),
+            int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
+        expect(IsNativeVhdBoot, isA<Function>());
+      });
+    }
+    test('Can instantiate IsSystemResumeAutomatic', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
       final IsSystemResumeAutomatic =
           kernel32.lookupFunction<Int32 Function(), int Function()>(
               'IsSystemResumeAutomatic');
@@ -2790,6 +2786,7 @@ void main() {
       final IsValidLocaleName = kernel32.lookupFunction<
           Int32 Function(Pointer<Utf16> lpLocaleName),
           int Function(Pointer<Utf16> lpLocaleName)>('IsValidLocaleName');
+      expect(IsValidLocaleName, isA<Function>());
     });
     if (windowsBuildNumber >= 16299) {
       test('Can instantiate IsWow64Process2', () {
