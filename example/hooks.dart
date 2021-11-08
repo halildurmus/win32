@@ -1,6 +1,10 @@
-// Demonstrates using hooks
+// Demonstrates using hooks.
+
+// Installs a low-level keyboard hook that changes every 'A' keypress to 'B'.
+// Also adds a window that shows keystrokes entered.
 
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:math';
 import 'package:ffi/ffi.dart';
 
@@ -52,21 +56,26 @@ final className = TEXT('Keyboard Hook WndClass');
 final windowCaption = TEXT('Keyboard message viewer');
 
 int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
-  // Windows controls this memory; don't deallocate it.
-  final kbs = Pointer<KBDLLHOOKSTRUCT>.fromAddress(lParam);
+  if (code == HC_ACTION) {
+    // Windows controls this memory; don't deallocate it.
+    final kbs = Pointer<KBDLLHOOKSTRUCT>.fromAddress(lParam);
 
-  if ((kbs.ref.flags & LLKHF_INJECTED) == 0) {
-    final input = calloc<INPUT>();
-    input.ref.type = INPUT_KEYBOARD;
-    input.ref.ki.dwFlags = (wParam == WM_KEYDOWN) ? 0 : KEYEVENTF_KEYUP;
+    if ((kbs.ref.flags & LLKHF_INJECTED) == 0) {
+      final input = calloc<INPUT>();
+      input.ref.type = INPUT_KEYBOARD;
+      input.ref.ki.dwFlags = (wParam == WM_KEYDOWN) ? 0 : KEYEVENTF_KEYUP;
 
-    print('kbs: ${kbs.ref.vkCode}');
+      // Demonstrate that we're successfully intercepting codes
+      if (wParam == WM_KEYUP && kbs.ref.vkCode > 0 && kbs.ref.vkCode < 128) {
+        stdout.write(String.fromCharCode(kbs.ref.vkCode));
+      }
 
-    // Swap 'A' with 'B'
-    input.ref.ki.wVk = (kbs.ref.vkCode == VK_A ? VK_B : kbs.ref.vkCode);
-    SendInput(1, input, sizeOf<INPUT>());
-    free(input);
-    return -1;
+      // Swap 'A' with 'B' in output
+      input.ref.ki.wVk = (kbs.ref.vkCode == VK_A ? VK_B : kbs.ref.vkCode);
+      SendInput(1, input, sizeOf<INPUT>());
+      free(input);
+      return -1;
+    }
   }
   return CallNextHookEx(keyHook, code, wParam, lParam);
 }
@@ -111,18 +120,20 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_KEYDOWN:
-      // case WM_KEYUP:
-      // case WM_CHAR:
-      // case WM_DEADCHAR:
-      // case WM_SYSKEYDOWN:
-      // case WM_SYSKEYUP:
-      // case WM_SYSCHAR:
-      // case WM_SYSDEADCHAR:
+    case WM_KEYUP:
+    case WM_CHAR:
+    case WM_DEADCHAR:
+    case WM_SYSKEYDOWN:
+    case WM_SYSKEYUP:
+    case WM_SYSCHAR:
+    case WM_SYSDEADCHAR:
       msgArr.add(Message(uMsg, wParam, lParam));
       cLines = min(cLines + 1, cLinesMax);
 
       // Scroll up
       ScrollWindow(hWnd, 0, -cyChar, rectScroll, rectScroll);
+      InvalidateRect(hWnd, nullptr, TRUE);
+
       break;
 
     case WM_PAINT:
@@ -148,7 +159,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
         final szBuffer = '${messages[msg.uMsg - WM_KEYDOWN].padRight(15)}'
             '${msg.wParam.toString().padRight(3)}'
-            '${keyName.padRight(3)}'
+            '${!iType ? keyName.padRight(3) : '   '}'
             '${String.fromCharCode(msg.wParam).padRight(6)} '
             '${LOWORD(msg.lParam).toHexString(8).substring(2)} '
             '${(HIWORD(msg.lParam) & 0xFF).toHexString(8).substring(2)}      '
@@ -178,8 +189,8 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 void main() => initApp(winMain);
 
 void winMain(int hInstance, List<String> args, int nShowCmd) {
-  // keyHook = SetWindowsHookEx(WH_KEYBOARD_LL,
-  //     Pointer.fromFunction<CallWndProc>(lowlevelKeyboardHookProc, 0), NULL, 0);
+  keyHook = SetWindowsHookEx(WH_KEYBOARD_LL,
+      Pointer.fromFunction<CallWndProc>(lowlevelKeyboardHookProc, 0), NULL, 0);
 
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
