@@ -1,3 +1,8 @@
+## 2.2.11
+
+- Add raw input APIs
+- Add low-level keyboard hooks example
+
 ## 2.2.10
 
 - Add Windows 11 rounded corner window support along with sample (check Flutter
