@@ -1,5 +1,15 @@
-## 2.2.11
+## 2.3.0
 
+- Completely overhauled the metadata generation tooling (tools\projection
+  directory). The code is much better structured, with each layer (type ->
+  parameter -> method -> class) in its own `___Projection` class. Fixed a number
+  of errors in the process, such as the assumption that all enums are of type
+  `Uint32`.
+- Rewrote several complex structs to use the new `Union` FFI type introduced in
+  Dart 2.14 (and updated the minimum version accordingly). Code that uses the
+  `INPUT` struct will need to be slightly modified, since the `mi`/`ki`/`hi`
+  fields are now nested rather than provided as an extension property.
+- Cleaned up some COM `Pointer` types to be more explicit.
 - Add raw input APIs
 - Add low-level keyboard hooks example
 
