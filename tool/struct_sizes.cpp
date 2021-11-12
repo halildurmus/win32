@@ -211,6 +211,11 @@ void main()
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'protoent': %zu,\n", sizeof(protoent));
+    printf("  'RAWHID': %zu,\n", sizeof(RAWHID));
+    printf("  'RAWINPUTDEVICE': %zu,\n", sizeof(RAWINPUTDEVICE));
+    printf("  'RAWINPUTDEVICELIST': %zu,\n", sizeof(RAWINPUTDEVICELIST));
+    printf("  'RAWINPUTHEADER': %zu,\n", sizeof(RAWINPUTHEADER));
+    printf("  'RAWKEYBOARD': %zu,\n", sizeof(RAWKEYBOARD));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
