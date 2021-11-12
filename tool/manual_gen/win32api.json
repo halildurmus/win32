@@ -892,6 +892,11 @@
         "dllLibrary": "user32",
         "comment": "Provides default processing for any window message that the window procedure of a multiple-document interface (MDI) child window does not process. A window message not processed by the window procedure must be passed to the DefMDIChildProc function, not to the DefWindowProc function."
     },
+    "DefRawInputProc": {
+        "prototype": "LRESULT DefRawInputProc(\n  PRAWINPUT *paRawInput,\n  INT       nInput,\n  UINT      cbSizeHeader\n);",
+        "dllLibrary": "user32",
+        "comment": "Unlike DefWindowProcA and DefWindowProcW, this function doesn't do any processing. DefRawInputProc only checks whether cbSizeHeader's value corresponds to the expected size of RAWINPUTHEADER."
+    },
     "DefSubclassProc": {
         "prototype": "LRESULT DefSubclassProc(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "comctl32",
@@ -2505,6 +2510,31 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves multiple completion port entries simultaneously. It waits for pending I/O operations that are associated with the specified completion port to complete."
     },
+    "GetRawInputBuffer": {
+        "prototype": "UINT GetRawInputBuffer(\n  PRAWINPUT pData,\n  PUINT     pcbSize,\n  UINT      cbSizeHeader\n);",
+        "dllLibrary": "user32",
+        "comment": "Performs a buffered read of the raw input messages data found in the calling thread's message queue."
+    },
+    "GetRawInputData": {
+        "prototype": "UINT GetRawInputData(\n  HRAWINPUT hRawInput,\n  UINT      uiCommand,\n  LPVOID    pData,\n  PUINT     pcbSize,\n  UINT      cbSizeHeader\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the raw input from the specified device."
+    },
+    "GetRawInputDeviceInfo": {
+        "prototype": "UINT GetRawInputDeviceInfoW(\n  HANDLE hDevice,\n  UINT   uiCommand,\n  LPVOID pData,\n  PUINT  pcbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the raw input device."
+    },
+    "GetRawInputDeviceList": {
+        "prototype": "UINT GetRawInputDeviceList(\n  PRAWINPUTDEVICELIST pRawInputDeviceList,\n  PUINT               puiNumDevices,\n  UINT                cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates the raw input devices attached to the system."
+    },
+    "GetRegisteredRawInputDevices": {
+        "prototype": "UINT GetRegisteredRawInputDevices(\n  PRAWINPUTDEVICE pRawInputDevices,\n  PUINT           puiNumDevices,\n  UINT            cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the information about the raw input devices for the current application."
+    },
     "GetSaveFileName": {
         "prototype": "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
         "dllLibrary": "comdlg32",
@@ -3728,6 +3758,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "OemKeyScan": {
+        "prototype": "DWORD OemKeyScan(\n  WORD wOemChar\n);",
+        "dllLibrary": "user32",
+        "comment": "Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift states. The function provides information that allows a program to send OEM text to another program by simulating keyboard input."
+    },
     "OffsetRect": {
         "prototype": "BOOL OffsetRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
         "dllLibrary": "user32",
@@ -4153,6 +4188,11 @@
         "prototype": "HPOWERNOTIFY RegisterPowerSettingNotification(\n  HANDLE  hRecipient,\n  LPCGUID PowerSettingGuid,\n  DWORD   Flags\n);",
         "dllLibrary": "user32",
         "comment": "Registers the application to receive power setting notifications for the specific power setting event."
+    },
+    "RegisterRawInputDevices": {
+        "prototype": "BOOL RegisterRawInputDevices(\n  PCRAWINPUTDEVICE pRawInputDevices,\n  UINT             uiNumDevices,\n  UINT             cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers the devices that supply the raw input data."
     },
     "RegisterTouchHitTestingWindow": {
         "prototype": "BOOL RegisterTouchHitTestingWindow(\n  HWND  hwnd,\n  ULONG value\n);",

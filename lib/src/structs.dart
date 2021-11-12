@@ -1326,6 +1326,88 @@ class PROPVARIANT extends Struct {
   external int val2;
 }
 
+// typedef struct tagRAWINPUT {
+//   RAWINPUTHEADER header;
+//   union {
+//     RAWMOUSE    mouse;
+//     RAWKEYBOARD keyboard;
+//     RAWHID      hid;
+//   } data;
+// } RAWINPUT, *PRAWINPUT, *LPRAWINPUT;
+class _RAWINPUT_Anonymous_0 extends Union {
+  external RAWMOUSE mouse;
+  external RAWKEYBOARD keyboard;
+  external RAWHID hid;
+}
+
+/// Contains the raw input from a device.
+///
+/// {@category Struct}
+class RAWINPUT extends Struct {
+  external RAWINPUTHEADER header;
+  external _RAWINPUT_Anonymous_0 data;
+
+  RAWMOUSE get mouse => data.mouse;
+  set mouse(RAWMOUSE value) => data.mouse = value;
+
+  RAWKEYBOARD get keyboard => data.keyboard;
+  set keyboard(RAWKEYBOARD value) => data.keyboard = value;
+
+  RAWHID get hid => data.hid;
+  set hid(RAWHID value) => data.hid = value;
+}
+
+// typedef struct tagRAWMOUSE {
+//   USHORT usFlags;
+//   union {
+//     ULONG ulButtons;
+//     struct {
+//       USHORT usButtonFlags;
+//       USHORT usButtonData;
+//     } DUMMYSTRUCTNAME;
+//   } DUMMYUNIONNAME;
+//   ULONG  ulRawButtons;
+//   LONG   lLastX;
+//   LONG   lLastY;
+//   ULONG  ulExtraInformation;
+// } RAWMOUSE, *PRAWMOUSE, *LPRAWMOUSE;
+class _RAWMOUSE_Anonymous_0 extends Struct {
+  @Uint16()
+  external int usButtonFlags;
+  @Uint16()
+  external int usButtonData;
+}
+
+class _RAWMOUSE_Anonymous_1 extends Union {
+  @Uint32()
+  external int ulButtons;
+  external _RAWMOUSE_Anonymous_0 _DUMMYSTRUCTNAME;
+}
+
+/// Contains information about the state of the mouse.
+///
+/// {@category Struct}
+class RAWMOUSE extends Struct {
+  @Uint16()
+  external int usFlags;
+  external _RAWMOUSE_Anonymous_1 _DUMMYUNIONNAME;
+  @Uint32()
+  external int ulRawButtons;
+  @Int32()
+  external int lLastX;
+  @Int32()
+  external int lLastY;
+  @Uint32()
+  external int ulExtraInformation;
+
+  int get usButtonFlags => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonFlags;
+  set usButtonFlags(int value) =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonFlags = value;
+  int get usButtonData => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData;
+  set usButtonData(int value) =>
+      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData = value;
+}
+
 // typedef struct _NOTIFYICONDATAW {
 //   DWORD cbSize;
 //   HWND hWnd;
