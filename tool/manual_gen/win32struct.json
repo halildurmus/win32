@@ -623,6 +623,26 @@
         "namespace": "Windows.Win32.Networking.WinSock.protoent",
         "comment": "The protoent structure contains the name and protocol numbers that correspond to a given protocol name. Applications must never attempt to modify this structure or to free any of its components. Furthermore, only one copy of this structure is allocated per thread, and therefore, the application should copy any information it needs before issuing any other Windows Sockets function calls."
     },
+    "RAWHID": {
+        "namespace": "Windows.Win32.UI.Input.RAWHID",
+        "comment": "Describes the format of the raw input from a Human Interface Device (HID)."
+    },
+    "RAWINPUTDEVICE": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICE",
+        "comment": "Defines information for the raw input devices."
+    },
+    "RAWINPUTDEVICELIST": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICELIST",
+        "comment": "Contains information about a raw input device."
+    },
+    "RAWINPUTHEADER": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTHEADER",
+        "comment": "Contains the header information that is part of the raw input data."
+    },
+    "RAWKEYBOARD": {
+        "namespace": "Windows.Win32.UI.Input.RAWKEYBOARD",
+        "comment": "Contains information about the state of the keyboard."
+    },
     "RECT": {
         "namespace": "Windows.Win32.Foundation.RECT",
         "comment": "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners."

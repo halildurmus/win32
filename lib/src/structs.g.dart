@@ -3214,6 +3214,75 @@ class protoent extends Struct {
   external int p_proto;
 }
 
+/// Describes the format of the raw input from a Human Interface Device
+/// (HID).
+///
+/// {@category Struct}
+class RAWHID extends Struct {
+  @Uint32()
+  external int dwSizeHid;
+  @Uint32()
+  external int dwCount;
+  @Array(1)
+  external Array<Uint8> bRawData;
+}
+
+/// Defines information for the raw input devices.
+///
+/// {@category Struct}
+class RAWINPUTDEVICE extends Struct {
+  @Uint16()
+  external int usUsagePage;
+  @Uint16()
+  external int usUsage;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTarget;
+}
+
+/// Contains information about a raw input device.
+///
+/// {@category Struct}
+class RAWINPUTDEVICELIST extends Struct {
+  @IntPtr()
+  external int hDevice;
+  @Uint32()
+  external int dwType;
+}
+
+/// Contains the header information that is part of the raw input data.
+///
+/// {@category Struct}
+class RAWINPUTHEADER extends Struct {
+  @Uint32()
+  external int dwType;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hDevice;
+  @IntPtr()
+  external int wParam;
+}
+
+/// Contains information about the state of the keyboard.
+///
+/// {@category Struct}
+class RAWKEYBOARD extends Struct {
+  @Uint16()
+  external int MakeCode;
+  @Uint16()
+  external int Flags;
+  @Uint16()
+  external int Reserved;
+  @Uint16()
+  external int VKey;
+  @Uint32()
+  external int Message;
+  @Uint32()
+  external int ExtraInformation;
+}
+
 /// The RECT structure defines a rectangle by the coordinates of its
 /// upper-left and lower-right corners.
 ///

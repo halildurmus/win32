@@ -1189,6 +1189,28 @@ late final _DefMDIChildProc = _user32.lookupFunction<
     int Function(
         int hWnd, int uMsg, int wParam, int lParam)>('DefMDIChildProcW');
 
+/// Unlike DefWindowProcA and DefWindowProcW, this function doesn't do any
+/// processing. DefRawInputProc only checks whether cbSizeHeader's value
+/// corresponds to the expected size of RAWINPUTHEADER.
+///
+/// ```c
+/// LRESULT DefRawInputProc(
+///   PRAWINPUT *paRawInput,
+///   INT       nInput,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int DefRawInputProc(
+        Pointer<Pointer<RAWINPUT>> paRawInput, int nInput, int cbSizeHeader) =>
+    _DefRawInputProc(paRawInput, nInput, cbSizeHeader);
+
+late final _DefRawInputProc = _user32.lookupFunction<
+    IntPtr Function(Pointer<Pointer<RAWINPUT>> paRawInput, Int32 nInput,
+        Uint32 cbSizeHeader),
+    int Function(Pointer<Pointer<RAWINPUT>> paRawInput, int nInput,
+        int cbSizeHeader)>('DefRawInputProc');
+
 /// Calls the default window procedure to provide default processing for
 /// any window messages that an application does not process. This function
 /// ensures that every message is processed. DefWindowProc is called with
@@ -3162,6 +3184,113 @@ late final _GetProp = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
     int Function(int hWnd, Pointer<Utf16> lpString)>('GetPropW');
 
+/// Performs a buffered read of the raw input messages data found in the
+/// calling thread's message queue.
+///
+/// ```c
+/// UINT GetRawInputBuffer(
+///   PRAWINPUT pData,
+///   PUINT     pcbSize,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputBuffer(
+        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, int cbSizeHeader) =>
+    _GetRawInputBuffer(pData, pcbSize, cbSizeHeader);
+
+late final _GetRawInputBuffer = _user32.lookupFunction<
+    Uint32 Function(
+        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
+    int Function(Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize,
+        int cbSizeHeader)>('GetRawInputBuffer');
+
+/// Retrieves the raw input from the specified device.
+///
+/// ```c
+/// UINT GetRawInputData(
+///   HRAWINPUT hRawInput,
+///   UINT      uiCommand,
+///   LPVOID    pData,
+///   PUINT     pcbSize,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputData(int hRawInput, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, int cbSizeHeader) =>
+    _GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader);
+
+late final _GetRawInputData = _user32.lookupFunction<
+    Uint32 Function(IntPtr hRawInput, Uint32 uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
+    int Function(int hRawInput, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, int cbSizeHeader)>('GetRawInputData');
+
+/// Retrieves information about the raw input device.
+///
+/// ```c
+/// UINT GetRawInputDeviceInfoW(
+///   HANDLE hDevice,
+///   UINT   uiCommand,
+///   LPVOID pData,
+///   PUINT  pcbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputDeviceInfo(
+        int hDevice, int uiCommand, Pointer pData, Pointer<Uint32> pcbSize) =>
+    _GetRawInputDeviceInfo(hDevice, uiCommand, pData, pcbSize);
+
+late final _GetRawInputDeviceInfo = _user32.lookupFunction<
+    Uint32 Function(IntPtr hDevice, Uint32 uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize),
+    int Function(int hDevice, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize)>('GetRawInputDeviceInfoW');
+
+/// Enumerates the raw input devices attached to the system.
+///
+/// ```c
+/// UINT GetRawInputDeviceList(
+///   PRAWINPUTDEVICELIST pRawInputDeviceList,
+///   PUINT               puiNumDevices,
+///   UINT                cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputDeviceList(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, int cbSize) =>
+    _GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize);
+
+late final _GetRawInputDeviceList = _user32.lookupFunction<
+    Uint32 Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+    int Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, int cbSize)>('GetRawInputDeviceList');
+
+/// Retrieves the information about the raw input devices for the current
+/// application.
+///
+/// ```c
+/// UINT GetRegisteredRawInputDevices(
+///   PRAWINPUTDEVICE pRawInputDevices,
+///   PUINT           puiNumDevices,
+///   UINT            cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRegisteredRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices, int cbSize) =>
+    _GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize);
+
+late final _GetRegisteredRawInputDevices = _user32.lookupFunction<
+    Uint32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+    int Function(
+        Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices,
+        int cbSize)>('GetRegisteredRawInputDevices');
+
 /// The GetScrollBarInfo function retrieves information about the specified
 /// scroll bar.
 ///
@@ -4915,6 +5044,21 @@ late final _NotifyWinEvent = _user32.lookupFunction<
     void Function(
         int event, int hwnd, int idObject, int idChild)>('NotifyWinEvent');
 
+/// Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift
+/// states. The function provides information that allows a program to send
+/// OEM text to another program by simulating keyboard input.
+///
+/// ```c
+/// DWORD OemKeyScan(
+///   WORD wOemChar
+/// );
+/// ```
+/// {@category user32}
+int OemKeyScan(int wOemChar) => _OemKeyScan(wOemChar);
+
+late final _OemKeyScan = _user32.lookupFunction<
+    Uint32 Function(Uint16 wOemChar), int Function(int wOemChar)>('OemKeyScan');
+
 /// The OffsetRect function moves the specified rectangle by the specified
 /// offsets.
 ///
@@ -5292,6 +5436,26 @@ late final _RegisterPowerSettingNotification = _user32.lookupFunction<
         IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
     int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
         int Flags)>('RegisterPowerSettingNotification');
+
+/// Registers the devices that supply the raw input data.
+///
+/// ```c
+/// BOOL RegisterRawInputDevices(
+///   PCRAWINPUTDEVICE pRawInputDevices,
+///   UINT             uiNumDevices,
+///   UINT             cbSize
+/// );
+/// ```
+/// {@category user32}
+int RegisterRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        int uiNumDevices, int cbSize) =>
+    _RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize);
+
+late final _RegisterRawInputDevices = _user32.lookupFunction<
+    Int32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Uint32 uiNumDevices, Uint32 cbSize),
+    int Function(Pointer<RAWINPUTDEVICE> pRawInputDevices, int uiNumDevices,
+        int cbSize)>('RegisterRawInputDevices');
 
 /// Registers a window to process the WM_TOUCHHITTESTING notification.
 ///

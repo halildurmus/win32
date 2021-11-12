@@ -4091,6 +4091,15 @@ void main() {
               int hWnd, int uMsg, int wParam, int lParam)>('DefMDIChildProcW');
       expect(DefMDIChildProc, isA<Function>());
     });
+    test('Can instantiate DefRawInputProc', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DefRawInputProc = user32.lookupFunction<
+          IntPtr Function(Pointer<Pointer<RAWINPUT>> paRawInput, Int32 nInput,
+              Uint32 cbSizeHeader),
+          int Function(Pointer<Pointer<RAWINPUT>> paRawInput, int nInput,
+              int cbSizeHeader)>('DefRawInputProc');
+      expect(DefRawInputProc, isA<Function>());
+    });
     test('Can instantiate DefWindowProc', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final DefWindowProc = user32.lookupFunction<
@@ -5005,6 +5014,55 @@ void main() {
           int Function(int hWnd, Pointer<Utf16> lpString)>('GetPropW');
       expect(GetProp, isA<Function>());
     });
+    test('Can instantiate GetRawInputBuffer', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetRawInputBuffer = user32.lookupFunction<
+          Uint32 Function(Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize,
+              Uint32 cbSizeHeader),
+          int Function(Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize,
+              int cbSizeHeader)>('GetRawInputBuffer');
+      expect(GetRawInputBuffer, isA<Function>());
+    });
+    test('Can instantiate GetRawInputData', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetRawInputData = user32.lookupFunction<
+          Uint32 Function(IntPtr hRawInput, Uint32 uiCommand, Pointer pData,
+              Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
+          int Function(int hRawInput, int uiCommand, Pointer pData,
+              Pointer<Uint32> pcbSize, int cbSizeHeader)>('GetRawInputData');
+      expect(GetRawInputData, isA<Function>());
+    });
+    test('Can instantiate GetRawInputDeviceInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetRawInputDeviceInfo = user32.lookupFunction<
+          Uint32 Function(IntPtr hDevice, Uint32 uiCommand, Pointer pData,
+              Pointer<Uint32> pcbSize),
+          int Function(int hDevice, int uiCommand, Pointer pData,
+              Pointer<Uint32> pcbSize)>('GetRawInputDeviceInfoW');
+      expect(GetRawInputDeviceInfo, isA<Function>());
+    });
+    test('Can instantiate GetRawInputDeviceList', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetRawInputDeviceList = user32.lookupFunction<
+          Uint32 Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+              Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+          int Function(
+              Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+              Pointer<Uint32> puiNumDevices,
+              int cbSize)>('GetRawInputDeviceList');
+      expect(GetRawInputDeviceList, isA<Function>());
+    });
+    test('Can instantiate GetRegisteredRawInputDevices', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetRegisteredRawInputDevices = user32.lookupFunction<
+          Uint32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+              Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+          int Function(
+              Pointer<RAWINPUTDEVICE> pRawInputDevices,
+              Pointer<Uint32> puiNumDevices,
+              int cbSize)>('GetRegisteredRawInputDevices');
+      expect(GetRegisteredRawInputDevices, isA<Function>());
+    });
     test('Can instantiate GetScrollBarInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetScrollBarInfo = user32.lookupFunction<
@@ -5765,6 +5823,12 @@ void main() {
               int idChild)>('NotifyWinEvent');
       expect(NotifyWinEvent, isA<Function>());
     });
+    test('Can instantiate OemKeyScan', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final OemKeyScan = user32.lookupFunction<Uint32 Function(Uint16 wOemChar),
+          int Function(int wOemChar)>('OemKeyScan');
+      expect(OemKeyScan, isA<Function>());
+    });
     test('Can instantiate OffsetRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final OffsetRect = user32.lookupFunction<
@@ -5929,6 +5993,15 @@ void main() {
           int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
               int Flags)>('RegisterPowerSettingNotification');
       expect(RegisterPowerSettingNotification, isA<Function>());
+    });
+    test('Can instantiate RegisterRawInputDevices', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final RegisterRawInputDevices = user32.lookupFunction<
+          Int32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+              Uint32 uiNumDevices, Uint32 cbSize),
+          int Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+              int uiNumDevices, int cbSize)>('RegisterRawInputDevices');
+      expect(RegisterRawInputDevices, isA<Function>());
     });
     if (windowsBuildNumber >= 9200) {
       test('Can instantiate RegisterTouchHitTestingWindow', () {

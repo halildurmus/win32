@@ -35,9 +35,6 @@ void main() {
   test('Struct CHAR_INFO is the right size', () {
     expect(sizeOf<CHAR_INFO>(), equals(4));
   });
-  test('Struct COMMPROP is the right size', () {
-    expect(sizeOf<COMMPROP>(), equals(64));
-  });
   test('Struct COR_FIELD_OFFSET is the right size', () {
     expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
   });
@@ -261,6 +258,9 @@ void main() {
   });
   test('Struct COMMCONFIG is the right size', () {
     expect(sizeOf<COMMCONFIG>(), equals(52));
+  });
+  test('Struct COMMPROP is the right size', () {
+    expect(sizeOf<COMMPROP>(), equals(64));
   });
   test('Struct COMMTIMEOUTS is the right size', () {
     expect(sizeOf<COMMTIMEOUTS>(), equals(20));
@@ -494,6 +494,13 @@ void main() {
       expect(sizeOf<JOB_INFO_1>(), equals(96));
     } else {
       expect(sizeOf<JOB_INFO_1>(), equals(64));
+    }
+  });
+  test('Struct KEYBDINPUT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<KEYBDINPUT>(), equals(24));
+    } else {
+      expect(sizeOf<KEYBDINPUT>(), equals(16));
     }
   });
   test('Struct KNOWNFOLDER_DEFINITION is the right size', () {
@@ -853,6 +860,33 @@ void main() {
     } else {
       expect(sizeOf<protoent>(), equals(12));
     }
+  });
+  test('Struct RAWHID is the right size', () {
+    expect(sizeOf<RAWHID>(), equals(12));
+  });
+  test('Struct RAWINPUTDEVICE is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<RAWINPUTDEVICE>(), equals(16));
+    } else {
+      expect(sizeOf<RAWINPUTDEVICE>(), equals(12));
+    }
+  });
+  test('Struct RAWINPUTDEVICELIST is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<RAWINPUTDEVICELIST>(), equals(16));
+    } else {
+      expect(sizeOf<RAWINPUTDEVICELIST>(), equals(8));
+    }
+  });
+  test('Struct RAWINPUTHEADER is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<RAWINPUTHEADER>(), equals(24));
+    } else {
+      expect(sizeOf<RAWINPUTHEADER>(), equals(16));
+    }
+  });
+  test('Struct RAWKEYBOARD is the right size', () {
+    expect(sizeOf<RAWKEYBOARD>(), equals(16));
   });
   test('Struct RECT is the right size', () {
     expect(sizeOf<RECT>(), equals(16));

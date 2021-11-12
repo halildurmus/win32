@@ -5316,6 +5316,26 @@ const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
 // -----------------------------------------------------------------------------
+// Raw input flags
+// -----------------------------------------------------------------------------
+
+/// Get the raw data from the RAWINPUT structure.
+const RID_INPUT = 0x10000003;
+
+/// Get the header information from the RAWINPUT structure.
+const RID_HEADER = 0x10000005;
+
+/// pData is a PHIDP_PREPARSED_DATA pointer to a buffer for a top-level
+/// collection's preparsed data.
+const RIDI_PREPARSEDDATA = 0x20000005;
+
+/// pData points to a string that contains the device interface name.
+const RIDI_DEVICENAME = 0x20000007;
+
+/// pData points to an RID_DEVICE_INFO structure.
+const RIDI_DEVICEINFO = 0x2000000b;
+
+// -----------------------------------------------------------------------------
 // COM Constants
 // -----------------------------------------------------------------------------
 
