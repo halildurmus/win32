@@ -533,6 +533,9 @@ const VK_PROCESSKEY = 0xE5;
 const VK_ICO_CLEAR = 0xE6;
 const VK_PACKET = 0xE7;
 
+// Hook codes
+const HC_ACTION = 0;
+
 // Input types
 const INPUT_MOUSE = 0;
 const INPUT_KEYBOARD = 1;

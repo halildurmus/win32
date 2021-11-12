@@ -83,6 +83,8 @@ void main()
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BSMINFO': %zu,\n", sizeof(BSMINFO));
     printf("  'BY_HANDLE_FILE_INFORMATION': %zu,\n", sizeof(BY_HANDLE_FILE_INFORMATION));
+    printf("  'CBT_CREATEWNDW': %zu,\n", sizeof(CBT_CREATEWNDW));
+    printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
@@ -101,7 +103,10 @@ void main()
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
+    printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
+    printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'DCB': %zu,\n", sizeof(DCB));
+    printf("  'DEBUGHOOKINFO': %zu,\n", sizeof(DEBUGHOOKINFO));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
@@ -123,6 +128,7 @@ void main()
     printf("  'EAP_METHOD_TYPE': %zu,\n", sizeof(EAP_METHOD_TYPE));
     printf("  'EAP_TYPE': %zu,\n", sizeof(EAP_TYPE));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
+    printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("  'fd_set': %zu,\n", sizeof(fd_set));
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
@@ -140,6 +146,7 @@ void main()
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
+    printf("  'KBDLLHOOKSTRUCT': %zu,\n", sizeof(KBDLLHOOKSTRUCT));
     printf("  'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("  'L2_NOTIFICATION_DATA': %zu,\n", sizeof(L2_NOTIFICATION_DATA));
@@ -173,9 +180,12 @@ void main()
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("  'MOUSEHOOKSTRUCT': %zu,\n", sizeof(MOUSEHOOKSTRUCT));
+    printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MSLLHOOKSTRUCT));
     printf("  'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MSG': %zu,\n", sizeof(MSG));
+    printf("  'MSLLHOOKSTRUCT': %zu,\n", sizeof(MSLLHOOKSTRUCT));
     printf("  'NDIS_OBJECT_HEADER': %zu,\n", sizeof(NDIS_OBJECT_HEADER));
     printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
