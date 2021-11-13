@@ -3168,7 +3168,7 @@ class PRINTER_NOTIFY_INFO extends Struct {
 class PRINTER_OPTIONS extends Struct {
   @Uint32()
   external int cbSize;
-  @Uint32()
+  @Int32()
   external int dwFlags;
 }
 

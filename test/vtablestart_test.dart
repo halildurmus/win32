@@ -37,7 +37,7 @@ void main() {
       'Windows.Win32.System.Com.IStream': 5,
       'Windows.Win32.System.Ole.IEnumVARIANT': 3,
       'Windows.Win32.System.Ole.IProvideClassInfo': 3,
-      'Windows.Win32.System.Ole.ISupportErrorInfo': 3,
+      'Windows.Win32.System.Com.ISupportErrorInfo': 3,
       'Windows.Win32.System.WinRT.IInspectable': 3,
       'Windows.Win32.System.Wmi.IEnumWbemClassObject': 3,
       'Windows.Win32.System.Wmi.IWbemClassObject': 3,

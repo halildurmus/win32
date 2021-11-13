@@ -58,7 +58,7 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.System.Com.IDispatch',
   'Windows.Win32.System.Ole.IEnumVARIANT',
   'Windows.Win32.System.Com.IErrorInfo',
-  'Windows.Win32.System.Ole.ISupportErrorInfo',
+  'Windows.Win32.System.Com.ISupportErrorInfo',
   'Windows.Win32.System.Com.ITypeInfo',
   'Windows.Win32.System.WinRT.IInspectable',
   'Windows.Win32.System.Wmi.IEnumWbemClassObject',
