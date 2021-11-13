@@ -1,3 +1,7 @@
+## 1.0.13
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 1.0.12
 
 - Fix accidental break.

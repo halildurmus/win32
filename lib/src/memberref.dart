@@ -25,32 +25,24 @@ class MemberRef extends TokenObject {
       : super(scope, token);
 
   /// Creates a module object from a provided token.
-  factory MemberRef.fromToken(Scope scope, int token) {
-    final ptk = calloc<mdToken>();
-    final szMember = wsalloc(MAX_STRING_SIZE);
-    final pchMember = calloc<ULONG>();
-    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-    final pcbSigBlob = calloc<ULONG>();
+  factory MemberRef.fromToken(Scope scope, int token) => using((Arena arena) {
+        final ptk = arena<mdToken>();
+        final szMember = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchMember = arena<ULONG>();
+        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+        final pcbSigBlob = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetMemberRefProps(token, ptk, szMember, MAX_STRING_SIZE,
-          pchMember, ppvSigBlob, pcbSigBlob);
+        final reader = scope.reader;
+        final hr = reader.GetMemberRefProps(token, ptk, szMember,
+            MAX_STRING_SIZE, pchMember, ppvSigBlob, pcbSigBlob);
 
-      if (SUCCEEDED(hr)) {
-        return MemberRef(scope, ptk.value, szMember.toDartString(),
-            ppvSigBlob.value.asTypedList(pcbSigBlob.value));
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptk);
-      free(szMember);
-      free(pchMember);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return MemberRef(scope, ptk.value, szMember.toDartString(),
+              ppvSigBlob.value.asTypedList(pcbSigBlob.value));
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;

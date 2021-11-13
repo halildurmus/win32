@@ -71,34 +71,26 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       : super(scope, token);
 
   /// Creates a generic parameter object from a provided token.
-  factory GenericParam.fromToken(Scope scope, int token) {
-    final pulParamSeq = calloc<ULONG>();
-    final pdwParamFlags = calloc<DWORD>();
-    final ptOwner = calloc<mdToken>();
-    final reserved = calloc<DWORD>();
-    final wzName = wsalloc(MAX_STRING_SIZE);
-    final pchName = calloc<ULONG>();
+  factory GenericParam.fromToken(Scope scope, int token) =>
+      using((Arena arena) {
+        final pulParamSeq = arena<ULONG>();
+        final pdwParamFlags = arena<DWORD>();
+        final ptOwner = arena<mdToken>();
+        final reserved = arena<DWORD>();
+        final wzName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchName = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
-          ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
+        final reader = scope.reader;
+        final hr = reader.GetGenericParamProps(token, pulParamSeq,
+            pdwParamFlags, ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
 
-      if (SUCCEEDED(hr)) {
-        return GenericParam(scope, token, pulParamSeq.value,
-            pdwParamFlags.value, ptOwner.value, wzName.toDartString());
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(pulParamSeq);
-      free(pdwParamFlags);
-      free(ptOwner);
-      free(reserved);
-      free(wzName);
-      free(pchName);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return GenericParam(scope, token, pulParamSeq.value,
+              pdwParamFlags.value, ptOwner.value, wzName.toDartString());
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;
@@ -137,11 +129,11 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   /// Returns a list of the constraints on the generic parameter.
   List<GenericParamConstraint> get constraints {
     if (_constraints.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rGenericParamConstraints = calloc<mdGenericParam>();
-      final pcGenericParamConstraints = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rGenericParamConstraints = arena<mdGenericParam>();
+        final pcGenericParamConstraints = arena<ULONG>();
 
-      try {
         var hr = reader.EnumGenericParamConstraints(phEnum, token,
             rGenericParamConstraints, 1, pcGenericParamConstraints);
         while (hr == S_OK) {
@@ -151,12 +143,8 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
           hr = reader.EnumGenericParamConstraints(phEnum, token,
               rGenericParamConstraints, 1, pcGenericParamConstraints);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rGenericParamConstraints);
-        free(pcGenericParamConstraints);
-      }
+      });
     }
     return _constraints;
   }

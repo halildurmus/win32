@@ -27,12 +27,14 @@ class Scope {
   final _enums = <TypeDef>[];
   final _modules = <ModuleRef>[];
   final _typedefs = <TypeDef>[];
+  final _userStrings = <String>[];
 
   Scope(this.reader) {
-    final szName = wsalloc(MAX_STRING_SIZE);
-    final pchName = calloc<ULONG>();
-    final pmvid = calloc<GUID>();
-    try {
+    using((Arena arena) {
+      final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      final pmvid = arena<GUID>();
+
       final hr = reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, pmvid);
       if (SUCCEEDED(hr)) {
         name = szName.toDartString();
@@ -40,10 +42,7 @@ class Scope {
       } else {
         throw COMException(hr);
       }
-    } finally {
-      free(szName);
-      free(pchName);
-    }
+    });
   }
 
   @override
@@ -57,11 +56,11 @@ class Scope {
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
     if (_typedefs.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgTypeDefs = calloc<mdTypeDef>();
-      final pcTypeDefs = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgTypeDefs = arena<mdTypeDef>();
+        final pcTypeDefs = arena<ULONG>();
 
-      try {
         var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
         while (hr == S_OK) {
           final typeDefToken = rgTypeDefs.value;
@@ -69,13 +68,10 @@ class Scope {
           _typedefs.add(TypeDef.fromToken(this, typeDefToken));
           hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgTypeDefs);
-        free(pcTypeDefs);
-      }
+      });
     }
+
     return _typedefs;
   }
 
@@ -100,58 +96,49 @@ class Scope {
   /// Get an enumerated list of modules in this scope.
   List<ModuleRef> get moduleRefs {
     if (_modules.isEmpty) {
-      final phEnum = calloc<HCORENUM>();
-      final rgModuleRefs = calloc<mdModuleRef>();
-      final pcModuleRefs = calloc<ULONG>();
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgModuleRefs = arena<mdModuleRef>();
+        final pcModuleRefs = arena<ULONG>();
 
-      try {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         while (hr == S_OK) {
           final moduleToken = rgModuleRefs.value;
           _modules.add(ModuleRef.fromToken(this, moduleToken));
           hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         }
-      } finally {
         reader.CloseEnum(phEnum.value);
-        free(phEnum);
-        free(rgModuleRefs);
-        free(pcModuleRefs);
-      }
+      });
     }
+
     return _modules;
   }
 
   /// Get an enumerated list of all hard-coded strings in this scope.
   List<String> get userStrings {
-    final strings = <String>[];
+    if (_userStrings.isEmpty) {
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rgStrings = arena<mdString>();
+        final pcStrings = arena<ULONG>();
+        final szString = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchString = arena<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rgStrings = calloc<mdString>();
-    final pcStrings = calloc<ULONG>();
-    final szString = wsalloc(MAX_STRING_SIZE);
-    final pchString = calloc<ULONG>();
-
-    try {
-      var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
-      while (hr == S_OK) {
-        final stringToken = rgStrings.value;
-        hr = reader.GetUserString(
-            stringToken, szString, MAX_STRING_SIZE, pchString);
-        if (hr == S_OK) {
-          strings.add(szString.toDartString());
+        var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+        while (hr == S_OK) {
+          final stringToken = rgStrings.value;
+          hr = reader.GetUserString(
+              stringToken, szString, MAX_STRING_SIZE, pchString);
+          if (hr == S_OK) {
+            _userStrings.add(szString.toDartString());
+          }
+          hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
         }
-        hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
-      }
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rgStrings);
-      free(pcStrings);
-      free(szString);
-      free(pchString);
+        reader.CloseEnum(phEnum.value);
+      });
     }
 
-    return strings;
+    return _userStrings;
   }
 
   /// Get an enumerated list of all enumerations in this scope.
@@ -168,20 +155,16 @@ class Scope {
 
   PEKind get executableKind => PEKind(reader);
 
-  String get versionNumber {
-    final pwzBuf = wsalloc(MAX_STRING_SIZE);
-    final pccBufSize = calloc<DWORD>();
-    try {
-      final hr = reader.GetVersionString(pwzBuf, MAX_STRING_SIZE, pccBufSize);
+  String get versionNumber => using((Arena arena) {
+        final pwzBuf = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pccBufSize = arena<DWORD>();
 
-      if (SUCCEEDED(hr)) {
-        return pwzBuf.toDartString();
-      } else {
-        return '';
-      }
-    } finally {
-      free(pwzBuf);
-      free(pccBufSize);
-    }
-  }
+        final hr = reader.GetVersionString(pwzBuf, MAX_STRING_SIZE, pccBufSize);
+
+        if (SUCCEEDED(hr)) {
+          return pwzBuf.toDartString();
+        } else {
+          return '';
+        }
+      });
 }

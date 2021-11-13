@@ -82,48 +82,37 @@ class Method extends TokenObject
   }
 
   /// Creates a method object from a provided token.
-  factory Method.fromToken(Scope scope, int token) {
-    final ptkClass = calloc<mdTypeDef>();
-    final szMethod = wsalloc(MAX_STRING_SIZE);
-    final pchMethod = calloc<ULONG>();
-    final pdwAttr = calloc<DWORD>();
-    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-    final pcbSigBlob = calloc<ULONG>();
-    final pulCodeRVA = calloc<ULONG>();
-    final pdwImplFlags = calloc<DWORD>();
+  factory Method.fromToken(Scope scope, int token) => using((Arena arena) {
+        final ptkClass = arena<mdTypeDef>();
+        final szMethod = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchMethod = arena<ULONG>();
+        final pdwAttr = arena<DWORD>();
+        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+        final pcbSigBlob = arena<ULONG>();
+        final pulCodeRVA = arena<ULONG>();
+        final pdwImplFlags = arena<DWORD>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetMethodProps(
-          token,
-          ptkClass,
-          szMethod,
-          MAX_STRING_SIZE,
-          pchMethod,
-          pdwAttr,
-          ppvSigBlob,
-          pcbSigBlob,
-          pulCodeRVA,
-          pdwImplFlags);
+        final reader = scope.reader;
+        final hr = reader.GetMethodProps(
+            token,
+            ptkClass,
+            szMethod,
+            MAX_STRING_SIZE,
+            pchMethod,
+            pdwAttr,
+            ppvSigBlob,
+            pcbSigBlob,
+            pulCodeRVA,
+            pdwImplFlags);
 
-      if (SUCCEEDED(hr)) {
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        return Method(scope, token, ptkClass.value, szMethod.toDartString(),
-            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkClass);
-      free(szMethod);
-      free(pchMethod);
-      free(pdwAttr);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-      free(pulCodeRVA);
-      free(pdwImplFlags);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+          return Method(scope, token, ptkClass.value, szMethod.toDartString(),
+              pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;
@@ -215,26 +204,20 @@ class Method extends TokenObject
   bool get isProperty => isGetProperty | isSetProperty;
 
   /// Returns the module that contains the method.
-  ModuleRef get module {
-    final pdwMappingFlags = calloc<DWORD>();
-    final szImportName = wsalloc(MAX_STRING_SIZE);
-    final pchImportName = calloc<ULONG>();
-    final ptkImportDLL = calloc<mdModuleRef>();
-    try {
-      final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
-          MAX_STRING_SIZE, pchImportName, ptkImportDLL);
-      if (SUCCEEDED(hr)) {
-        return ModuleRef.fromToken(scope, ptkImportDLL.value);
-      } else {
-        throw COMException(hr);
-      }
-    } finally {
-      free(pdwMappingFlags);
-      free(szImportName);
-      free(pchImportName);
-      free(ptkImportDLL);
-    }
-  }
+  ModuleRef get module => using((Arena arena) {
+        final pdwMappingFlags = arena<DWORD>();
+        final szImportName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchImportName = arena<ULONG>();
+        final ptkImportDLL = arena<mdModuleRef>();
+
+        final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+            MAX_STRING_SIZE, pchImportName, ptkImportDLL);
+        if (SUCCEEDED(hr)) {
+          return ModuleRef.fromToken(scope, ptkImportDLL.value);
+        } else {
+          throw COMException(hr);
+        }
+      });
 
   /// Returns true if the method contains generic parameters.
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
@@ -334,26 +317,20 @@ class Method extends TokenObject
     }
   }
 
-  void _parseParameterNames() {
-    final phEnum = calloc<HCORENUM>();
-    final rParams = calloc<mdParamDef>();
-    final pcTokens = calloc<ULONG>();
+  void _parseParameterNames() => using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rParams = arena<mdParamDef>();
+        final pcTokens = arena<ULONG>();
 
-    try {
-      var hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
-      while (hr == S_OK) {
-        final parameterToken = rParams.value;
+        var hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
+        while (hr == S_OK) {
+          final parameterToken = rParams.value;
 
-        parameters.add(Parameter.fromToken(scope, parameterToken));
-        hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
-      }
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rParams);
-      free(pcTokens);
-    }
-  }
+          parameters.add(Parameter.fromToken(scope, parameterToken));
+          hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
+        }
+        reader.CloseEnum(phEnum.value);
+      });
 
   // Various projections do smart things to mask this into a single array
   // value. We're not that clever yet, so we project it in its raw state, which
