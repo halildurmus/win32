@@ -37,6 +37,16 @@ class StructProjection {
         buffer.write(fieldProjection);
       }
       buffer.writeln('}\n');
+
+      // Add any nested types on which there is a dependency
+      for (final field in typedef.fields) {
+        if (field.isNestedType) {
+          final nestedType = field.nestedType!;
+          final nestedTypeProjection = StructProjection(nestedType, field.name);
+          buffer.write('\n$nestedTypeProjection\n');
+        }
+      }
+
       return buffer.toString();
     } catch (_) {
       print('Failed to project $structName');
