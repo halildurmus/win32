@@ -99,10 +99,12 @@ class Field extends TokenObject with CustomAttributesMixin {
           final typeTuple =
               TypeTuple.fromSignature(signature.sublist(1), scope);
 
+          final tkTypeDef = ptkTypeDef.value;
+
           return Field(
               scope,
               token,
-              ptkTypeDef.value,
+              tkTypeDef,
               fieldName,
               ppValue.value != nullptr ? ppValue.value.value : 0,
               typeTuple.typeIdentifier,
