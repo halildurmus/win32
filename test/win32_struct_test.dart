@@ -79,4 +79,45 @@ void main() {
     expect(cFileName.name, equals('cFileName'));
     expect(cFileName.typeIdentifier.arrayDimensions?.first, equals(260));
   });
+
+  test('Nested types are identified correctly', () {
+    final scope = MetadataStore.getWin32Scope();
+    final struct =
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT')!;
+
+    final lastField = struct.fields.last;
+    expect(lastField.nestedType, isNotNull);
+
+    final nestedUnion = lastField.nestedType!;
+    expect(nestedUnion.isNested, isTrue);
+  });
+
+  test('Union structs are identified correctly', () {
+    final scope = MetadataStore.getWin32Scope();
+    final struct =
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT')!;
+
+    // INPUT is not itself a union, but it contains a union.
+    expect(struct.isUnion, isFalse);
+    final lastField = struct.fields.last;
+    expect(lastField.nestedType, isNotNull);
+
+    final nestedUnion = lastField.nestedType!;
+    expect(nestedUnion.isUnion, isTrue);
+  });
+
+  test('Union structs have correct parent', () {
+    final scope = MetadataStore.getWin32Scope();
+    final struct =
+        scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT')!;
+
+    // INPUT is not itself a union, but it contains a union.
+    expect(struct.isUnion, isFalse);
+    final lastField = struct.fields.last;
+    expect(lastField.nestedType, isNotNull);
+
+    final nestedUnion = lastField.nestedType!;
+
+    expect(nestedUnion.enclosingClass, equals(struct));
+  });
 }
