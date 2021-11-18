@@ -298,6 +298,15 @@ class TypeDef extends TokenObject
   /// Returns true if the type is a delegate.
   bool get isDelegate => parent?.name == 'System.MulticastDelegate';
 
+  /// Returns true if the type is a union.
+  ///
+  /// A union is a struct where every field begins at the zeroth offset; it is
+  /// sized to the largest field. An example is the Win32 `INPUT` union, which
+  /// can contain a keyboard, mouse or other hardware input type.
+  bool get isUnion =>
+      classLayout.fieldOffsets != null &&
+      classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
+
   /// Retrieve class layout information.
   ///
   /// This includes the packing alignment, the minimum class size, and the field
