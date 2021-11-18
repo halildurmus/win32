@@ -9,7 +9,6 @@ environment:
 
 dependencies:
   ffi: ^1.1.2
-  hive: ^2.0.4
   win32: ^2.3.0
 
 dev_dependencies:
