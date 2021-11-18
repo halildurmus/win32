@@ -1,3 +1,7 @@
+## 1.0.14
+
+- Add support for nested types.
+
 ## 1.0.13
 
 - Update to latest win32metadata `.winmd` file.
