@@ -11,10 +11,9 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope
-      .findTypeDef('Windows.Win32.System.Com.StructuredStorage.PROPVARIANT');
+  final struct = scope.findTypeDef('Windows.Win32.UI.Shell.Common.STRRET');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'PROPVARIANT');
+    final structProjection = StructProjection(struct, 'STRRET');
     print(structProjection);
   }
 }
