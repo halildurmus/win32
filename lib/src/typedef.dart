@@ -83,6 +83,7 @@ class TypeDef extends TokenObject
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
+  late final int enclosingClassToken;
 
   final int _attributes;
   final _events = <Event>[];
@@ -101,7 +102,19 @@ class TypeDef extends TokenObject
       this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
-      : super(scope, token);
+      : super(scope, token) {
+    enclosingClassToken = _getEnclosingClassToken();
+  }
+
+  int _getEnclosingClassToken() => using((Arena arena) {
+        final ptdEnclosingClass = arena<mdTypeDef>();
+        final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
+        if (SUCCEEDED(hr)) {
+          return ptdEnclosingClass.value;
+        } else {
+          return 0;
+        }
+      });
 
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
@@ -163,27 +176,8 @@ class TypeDef extends TokenObject
 
           // If it's the same scope, just look it up based on the returned name.
           if (scope.moduleToken == resolutionScopeToken) {
-            return scope.findTypeDef(typeName) ??
-                // TODO: anonymous union won't resolve
-                TypeDef(scope, 0, typeName);
+            return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
           }
-
-          // TODO: Why does this not work to resolve the typeref?
-          // final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
-          // final refScope = calloc<COMObject>();
-          // final ptkTypeDef = calloc<mdTypeDef>();
-
-          // try {
-          //   final hr = reader.ResolveTypeRef(
-          //       typeRefToken, IID_IMetaDataImport2, refScope.cast(), ptkTypeDef);
-          //   if (SUCCEEDED(hr)) {
-          //     return TypeDef.fromTypeDefToken(scope, ptkTypeDef.value);
-          //   }
-          // } finally {
-          //   free(IID_IMetaDataImport2);
-          //   free(refScope);
-          //   free(ptkTypeDef);
-          // }
 
           // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
           // OK, so we'll just return the type name.
@@ -297,6 +291,15 @@ class TypeDef extends TokenObject
 
   /// Returns true if the type is a delegate.
   bool get isDelegate => parent?.name == 'System.MulticastDelegate';
+
+  /// Returns true if the type is a union.
+  ///
+  /// A union is a struct where every field begins at the zeroth offset; it is
+  /// sized to the largest field. An example is the Win32 `INPUT` union, which
+  /// can contain a keyboard, mouse or other hardware input type.
+  bool get isUnion =>
+      classLayout.fieldOffsets != null &&
+      classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
 
   /// Retrieve class layout information.
   ///
@@ -466,27 +469,47 @@ class TypeDef extends TokenObject
   TypeDef? get parent =>
       token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
-  String? getCustomGUIDAttribute(String guidAttributeName) {
-    final ptrAttributeName = guidAttributeName.toNativeUtf16();
-    final ppData = calloc<Pointer<BYTE>>();
-    final pcbData = calloc<ULONG>();
+  /// Returns true if the type is nested in an enclosing class (e.g. a struct
+  /// within a struct).
+  bool get isNested =>
+      typeVisibility == TypeVisibility.nestedPublic ||
+      typeVisibility == TypeVisibility.nestedPrivate ||
+      typeVisibility == TypeVisibility.nestedAssembly ||
+      typeVisibility == TypeVisibility.nestedFamily ||
+      typeVisibility == TypeVisibility.nestedFamilyAndAssembly ||
+      typeVisibility == TypeVisibility.nestedFamilyOrAssembly;
 
-    try {
-      final hr = reader.GetCustomAttributeByName(
-          token, ptrAttributeName, ppData, pcbData);
-      if (SUCCEEDED(hr)) {
-        final blob = ppData.value;
-        if (pcbData.value > 0) {
-          final returnValue = blob.elementAt(2).cast<GUID>();
-          return returnValue.ref.toString();
+  /// Returns the type that encloses the current type (if the type is nested).
+  ///
+  /// If the type is not nested, returns null. Use the [isNested] property to
+  /// determine whether the type is nested. Alternatively, use the
+  /// [typeVisibility] property to determine the visibility of the type,
+  /// including whether it is nested.
+  TypeDef? get enclosingClass => enclosingClassToken != 0
+      ? TypeDef.fromToken(scope, enclosingClassToken)
+      : null;
+
+  Iterable<TypeDef> get nestedTypeDefs =>
+      scope.typeDefs.where((t) => t.enclosingClassToken == token);
+
+  /// Gets a named custom attribute that is stored as a GUID.
+  String? getCustomGUIDAttribute(String guidAttributeName) =>
+      using((Arena arena) {
+        final ptrAttributeName =
+            guidAttributeName.toNativeUtf16(allocator: arena);
+        final ppData = arena<Pointer<BYTE>>();
+        final pcbData = arena<ULONG>();
+
+        final hr = reader.GetCustomAttributeByName(
+            token, ptrAttributeName, ppData, pcbData);
+        if (SUCCEEDED(hr)) {
+          final blob = ppData.value;
+          if (pcbData.value > 0) {
+            final returnValue = blob.elementAt(2).cast<GUID>();
+            return returnValue.ref.toString();
+          }
         }
-      }
-    } finally {
-      free(ptrAttributeName);
-      free(ppData);
-      free(pcbData);
-    }
-  }
+      });
 
   /// Get the GUID for this type.
   ///
