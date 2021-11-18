@@ -83,6 +83,7 @@ class TypeDef extends TokenObject
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
+  late final int enclosingClassToken;
 
   final int _attributes;
   final _events = <Event>[];
@@ -101,7 +102,19 @@ class TypeDef extends TokenObject
       this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
-      : super(scope, token);
+      : super(scope, token) {
+    enclosingClassToken = _getEnclosingClassToken();
+  }
+
+  int _getEnclosingClassToken() => using((Arena arena) {
+        final ptdEnclosingClass = arena<mdTypeDef>();
+        final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
+        if (SUCCEEDED(hr)) {
+          return ptdEnclosingClass.value;
+        } else {
+          return 0;
+        }
+      });
 
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
@@ -163,27 +176,8 @@ class TypeDef extends TokenObject
 
           // If it's the same scope, just look it up based on the returned name.
           if (scope.moduleToken == resolutionScopeToken) {
-            return scope.findTypeDef(typeName) ??
-                // TODO: anonymous union won't resolve
-                TypeDef(scope, 0, typeName);
+            return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
           }
-
-          // TODO: Why does this not work to resolve the typeref?
-          // final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
-          // final refScope = calloc<COMObject>();
-          // final ptkTypeDef = calloc<mdTypeDef>();
-
-          // try {
-          //   final hr = reader.ResolveTypeRef(
-          //       typeRefToken, IID_IMetaDataImport2, refScope.cast(), ptkTypeDef);
-          //   if (SUCCEEDED(hr)) {
-          //     return TypeDef.fromTypeDefToken(scope, ptkTypeDef.value);
-          //   }
-          // } finally {
-          //   free(IID_IMetaDataImport2);
-          //   free(refScope);
-          //   free(ptkTypeDef);
-          // }
 
           // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
           // OK, so we'll just return the type name.
@@ -491,22 +485,12 @@ class TypeDef extends TokenObject
   /// determine whether the type is nested. Alternatively, use the
   /// [typeVisibility] property to determine the visibility of the type,
   /// including whether it is nested.
-  TypeDef? get enclosingClass {
-    if (!isNested) {
-      return null;
-    } else {
-      return using((Arena arena) {
-        final ptdEnclosingClass = arena<mdTypeDef>();
-        final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
-        if (SUCCEEDED(hr)) {
-          final tdEnclosingClass = ptdEnclosingClass.value;
-          return TypeDef.fromToken(scope, tdEnclosingClass);
-        } else {
-          throw COMException(hr);
-        }
-      });
-    }
-  }
+  TypeDef? get enclosingClass => enclosingClassToken != 0
+      ? TypeDef.fromToken(scope, enclosingClassToken)
+      : null;
+
+  Iterable<TypeDef> get nestedTypeDefs =>
+      scope.typeDefs.where((t) => t.enclosingClassToken == token);
 
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) =>

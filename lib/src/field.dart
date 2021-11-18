@@ -170,31 +170,6 @@ class Field extends TokenObject with CustomAttributesMixin {
   bool get hasFieldRVA =>
       _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
 
-  // TODO: Rough and ready implementation
-  // Match _Anonymous_e__Union or _VersionDetail_e__Struct
-  bool get isNestedType =>
-      typeIdentifier.name.startsWith('_') &&
-      (typeIdentifier.name.endsWith('Struct') ||
-          typeIdentifier.name.endsWith('Union'));
-
-  TypeDef? get nestedType {
-    if (isNestedType) {
-      return using((Arena arena) {
-        final szTypeDef = typeIdentifier.name.toNativeUtf16(allocator: arena);
-        final ptkTypeDef = arena<mdTypeDef>();
-
-        final hr =
-            scope.reader.FindTypeDefByName(szTypeDef, parent.token, ptkTypeDef);
-        if (SUCCEEDED(hr)) {
-          final nestedType = scope.findTypeDefByToken(ptkTypeDef.value);
-          return nestedType;
-        }
-      });
-    } else {
-      return null;
-    }
-  }
-
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 }
