@@ -466,27 +466,24 @@ class TypeDef extends TokenObject
   TypeDef? get parent =>
       token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
-  String? getCustomGUIDAttribute(String guidAttributeName) {
-    final ptrAttributeName = guidAttributeName.toNativeUtf16();
-    final ppData = calloc<Pointer<BYTE>>();
-    final pcbData = calloc<ULONG>();
+  /// Gets a named custom attribute that is stored as a GUID.
+  String? getCustomGUIDAttribute(String guidAttributeName) =>
+      using((Arena arena) {
+        final ptrAttributeName =
+            guidAttributeName.toNativeUtf16(allocator: arena);
+        final ppData = arena<Pointer<BYTE>>();
+        final pcbData = arena<ULONG>();
 
-    try {
-      final hr = reader.GetCustomAttributeByName(
-          token, ptrAttributeName, ppData, pcbData);
-      if (SUCCEEDED(hr)) {
-        final blob = ppData.value;
-        if (pcbData.value > 0) {
-          final returnValue = blob.elementAt(2).cast<GUID>();
-          return returnValue.ref.toString();
+        final hr = reader.GetCustomAttributeByName(
+            token, ptrAttributeName, ppData, pcbData);
+        if (SUCCEEDED(hr)) {
+          final blob = ppData.value;
+          if (pcbData.value > 0) {
+            final returnValue = blob.elementAt(2).cast<GUID>();
+            return returnValue.ref.toString();
+          }
         }
-      }
-    } finally {
-      free(ptrAttributeName);
-      free(ppData);
-      free(pcbData);
-    }
-  }
+      });
 
   /// Get the GUID for this type.
   ///
