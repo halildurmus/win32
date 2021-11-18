@@ -475,6 +475,39 @@ class TypeDef extends TokenObject
   TypeDef? get parent =>
       token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
+  /// Returns true if the type is nested in an enclosing class (e.g. a struct
+  /// within a struct).
+  bool get isNested =>
+      typeVisibility == TypeVisibility.nestedPublic ||
+      typeVisibility == TypeVisibility.nestedPrivate ||
+      typeVisibility == TypeVisibility.nestedAssembly ||
+      typeVisibility == TypeVisibility.nestedFamily ||
+      typeVisibility == TypeVisibility.nestedFamilyAndAssembly ||
+      typeVisibility == TypeVisibility.nestedFamilyOrAssembly;
+
+  /// Returns the type that encloses the current type (if the type is nested).
+  ///
+  /// If the type is not nested, returns null. Use the [isNested] property to
+  /// determine whether the type is nested. Alternatively, use the
+  /// [typeVisibility] property to determine the visibility of the type,
+  /// including whether it is nested.
+  TypeDef? get enclosingClass {
+    if (!isNested) {
+      return null;
+    } else {
+      return using((Arena arena) {
+        final ptdEnclosingClass = arena<mdTypeDef>();
+        final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
+        if (SUCCEEDED(hr)) {
+          final tdEnclosingClass = ptdEnclosingClass.value;
+          return TypeDef.fromToken(scope, tdEnclosingClass);
+        } else {
+          throw COMException(hr);
+        }
+      });
+    }
+  }
+
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) =>
       using((Arena arena) {
