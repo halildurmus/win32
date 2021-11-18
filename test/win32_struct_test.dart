@@ -94,9 +94,10 @@ void main() {
     expect(struct.enclosingClassToken, isZero);
 
     final lastField = struct.fields.last;
-    final nestedUnion = struct.nestedTypeDefs
-        .firstWhere((t) => t.name == lastField.typeIdentifier.name);
-    expect(nestedUnion, isNotNull);
+    final nestedUnions = struct.nestedTypeDefs
+        .where((t) => t.name == lastField.typeIdentifier.name);
+    expect(nestedUnions, isNotEmpty);
+    final nestedUnion = nestedUnions.first;
 
     expect(nestedUnion.isNested, isTrue);
     expect(nestedUnion.enclosingClassToken, equals(struct.token));
