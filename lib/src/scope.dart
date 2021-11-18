@@ -53,6 +53,11 @@ class Scope {
     return (typeDef.isNotEmpty ? typeDef.first : null);
   }
 
+  TypeDef? findTypeDefByToken(int token) {
+    final typeDef = typeDefs.where((t) => t.token == token);
+    return (typeDef.isNotEmpty ? typeDef.first : null);
+  }
+
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
     if (_typedefs.isEmpty) {
