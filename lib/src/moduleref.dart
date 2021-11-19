@@ -18,25 +18,20 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
   ModuleRef(Scope scope, int token, this.name) : super(scope, token);
 
   /// Creates a module object from a provided token.
-  factory ModuleRef.fromToken(Scope scope, int token) {
-    final szName = wsalloc(MAX_STRING_SIZE);
-    final pchName = calloc<ULONG>();
+  factory ModuleRef.fromToken(Scope scope, int token) => using((Arena arena) {
+        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchName = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr =
-          reader.GetModuleRefProps(token, szName, MAX_STRING_SIZE, pchName);
+        final reader = scope.reader;
+        final hr =
+            reader.GetModuleRefProps(token, szName, MAX_STRING_SIZE, pchName);
 
-      if (SUCCEEDED(hr)) {
-        return ModuleRef(scope, token, szName.toDartString());
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(pchName);
-      free(szName);
-    }
-  }
+        if (SUCCEEDED(hr)) {
+          return ModuleRef(scope, token, szName.toDartString());
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;

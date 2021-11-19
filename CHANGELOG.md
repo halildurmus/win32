@@ -1,3 +1,20 @@
+## 1.0.14
+
+- Add support for nested types.
+
+## 1.0.13
+
+- Update to latest win32metadata `.winmd` file.
+
+## 1.0.12
+
+- Fix accidental break.
+
+## 1.0.11
+
+- [Broken build] Please upgrade to 1.0.12.
+- Update to latest win32metadata `.winmd` file.
+
 ## 1.0.10
 
 - Minor tweaks to property detection

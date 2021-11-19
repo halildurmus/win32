@@ -19,7 +19,6 @@ linter:
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
     sort_unnamed_constructors_first: true
-    unnecessary_lambdas: true
     unnecessary_null_aware_assignments: true
 
     # We name Win32 constants for consistency with Win32, not Dart

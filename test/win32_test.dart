@@ -275,8 +275,7 @@ void main() {
 
   test('GetActiveObject REFCLSID has the correct parameter type', () {
     final scope = MetadataStore.getWin32Scope();
-    final typedef =
-        scope.findTypeDef('Windows.Win32.System.Ole.Automation.Apis')!;
+    final typedef = scope.findTypeDef('Windows.Win32.System.Ole.Apis')!;
     final api = typedef.findMethod('GetActiveObject')!;
     final param = api.parameters.first;
 

@@ -42,63 +42,50 @@ class Event extends TokenObject with CustomAttributesMixin {
       : super(scope, token);
 
   /// Creates an event object from a provided token.
-  factory Event.fromToken(Scope scope, int token) {
-    final ptkClass = calloc<mdTypeDef>();
-    final szEvent = wsalloc(MAX_STRING_SIZE);
-    final pchEvent = calloc<ULONG>();
-    final pdwEventFlags = calloc<DWORD>();
-    final ptkEventType = calloc<mdToken>();
-    final ptkAddOn = calloc<mdMethodDef>();
-    final ptkRemoveOn = calloc<mdMethodDef>();
-    final tkkFire = calloc<mdMethodDef>();
-    final rgOtherMethod = calloc<mdMethodDef>(16);
-    final pcOtherMethod = calloc<ULONG>();
+  factory Event.fromToken(Scope scope, int token) => using((Arena arena) {
+        final ptkClass = arena<mdTypeDef>();
+        final szEvent = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchEvent = arena<ULONG>();
+        final pdwEventFlags = arena<DWORD>();
+        final ptkEventType = arena<mdToken>();
+        final ptkAddOn = arena<mdMethodDef>();
+        final ptkRemoveOn = arena<mdMethodDef>();
+        final tkkFire = arena<mdMethodDef>();
+        final rgOtherMethod = arena<mdMethodDef>(16);
+        final pcOtherMethod = arena<ULONG>();
 
-    try {
-      final reader = scope.reader;
-      final hr = reader.GetEventProps(
-          token,
-          ptkClass,
-          szEvent,
-          MAX_STRING_SIZE,
-          pchEvent,
-          pdwEventFlags,
-          ptkEventType,
-          ptkAddOn,
-          ptkRemoveOn,
-          tkkFire,
-          rgOtherMethod,
-          16,
-          pcOtherMethod);
-
-      if (SUCCEEDED(hr)) {
-        return Event(
-            scope,
+        final reader = scope.reader;
+        final hr = reader.GetEventProps(
             token,
-            ptkClass.value,
-            szEvent.toDartString(),
-            pdwEventFlags.value,
-            ptkEventType.value,
-            ptkAddOn.value,
-            ptkRemoveOn.value,
-            tkkFire.value,
-            rgOtherMethod.asTypedList(pcOtherMethod.value));
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkClass);
-      free(szEvent);
-      free(pchEvent);
-      free(pdwEventFlags);
-      free(ptkEventType);
-      free(ptkAddOn);
-      free(ptkRemoveOn);
-      free(tkkFire);
-      free(rgOtherMethod);
-      free(pcOtherMethod);
-    }
-  }
+            ptkClass,
+            szEvent,
+            MAX_STRING_SIZE,
+            pchEvent,
+            pdwEventFlags,
+            ptkEventType,
+            ptkAddOn,
+            ptkRemoveOn,
+            tkkFire,
+            rgOtherMethod,
+            16,
+            pcOtherMethod);
+
+        if (SUCCEEDED(hr)) {
+          return Event(
+              scope,
+              token,
+              ptkClass.value,
+              szEvent.toDartString(),
+              pdwEventFlags.value,
+              ptkEventType.value,
+              ptkAddOn.value,
+              ptkRemoveOn.value,
+              tkkFire.value,
+              rgOtherMethod.asTypedList(pcOtherMethod.value));
+        } else {
+          throw WindowsException(hr);
+        }
+      });
 
   @override
   String toString() => name;

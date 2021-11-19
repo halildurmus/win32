@@ -24,10 +24,10 @@ class PEKind {
   late final int _peKind;
 
   PEKind(IMetaDataImport2 reader) {
-    final pdwPEKind = calloc<DWORD>();
-    final pdwMachine = calloc<DWORD>();
+    using((Arena arena) {
+      final pdwPEKind = arena<DWORD>();
+      final pdwMachine = arena<DWORD>();
 
-    try {
       final hr = reader.GetPEKind(pdwPEKind, pdwMachine);
       if (SUCCEEDED(hr)) {
         _peKind = pdwPEKind.value;
@@ -36,10 +36,7 @@ class PEKind {
         _peKind = 0;
         _machine = 0;
       }
-    } finally {
-      free(pdwPEKind);
-      free(pdwMachine);
-    }
+    });
   }
 
   /// Returns false if the file is not in portable executable (PE) file format.
