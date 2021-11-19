@@ -11,10 +11,9 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct =
-      scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT');
+  final struct = scope.findTypeDef('Windows.Win32.System.Com.TYPEDESC');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'INPUT');
+    final structProjection = StructProjection(struct, 'TYPEDESC');
     print(structProjection);
   }
 }

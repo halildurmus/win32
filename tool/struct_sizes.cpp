@@ -64,6 +64,7 @@ void main()
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
     printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -249,6 +250,7 @@ void main()
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
+    printf("  'STRRET': %zu,\n", sizeof(STRRET));
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
@@ -264,6 +266,7 @@ void main()
     printf("  'TOUCHINPUT': %zu,\n", sizeof(TOUCHINPUT));
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
     printf("  'TYPEATTR': %zu,\n", sizeof(TYPEATTR));
+    printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
     printf("  'UNSIGNED_RATIO': %zu,\n", sizeof(UNSIGNED_RATIO));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));

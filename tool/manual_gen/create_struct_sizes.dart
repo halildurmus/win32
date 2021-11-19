@@ -56,9 +56,7 @@ void main()
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));
-    printf("  'STRRET': %zu,\\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
-    printf("  'TYPEDESC': %zu,\\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
     printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));
 

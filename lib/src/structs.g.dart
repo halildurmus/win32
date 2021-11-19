@@ -140,6 +140,17 @@ class addrinfo extends Struct {
   external Pointer<addrinfo> ai_next;
 }
 
+/// Describes an array, its element type, and its dimension.
+///
+/// {@category Struct}
+class ARRAYDESC extends Struct {
+  external TYPEDESC tdescElem;
+  @Uint16()
+  external int cDims;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgbounds;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
@@ -3900,6 +3911,36 @@ class STATSTG extends Struct {
   external int reserved;
 }
 
+/// Contains strings returned from the IShellFolder interface methods.
+///
+/// {@category Struct}
+class STRRET extends Struct {
+  @Uint32()
+  external int uType;
+
+  external _STRRET__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _STRRET__Anonymous_e__Union extends Union {
+  external Pointer<Utf16> pOleStr;
+  @Uint32()
+  external int uOffset;
+  @Array(260)
+  external Array<Uint8> cStr;
+}
+
+extension STRRET_Extension on STRRET {
+  Pointer<Utf16> get pOleStr => Anonymous.pOleStr;
+  set pOleStr(Pointer<Utf16> value) => Anonymous.pOleStr = value;
+
+  int get uOffset => Anonymous.uOffset;
+  set uOffset(int value) => Anonymous.uOffset = value;
+
+  Array<Uint8> get cStr => Anonymous.cStr;
+  set cStr(Array<Uint8> value) => Anonymous.cStr = value;
+}
+
 /// Contains the styles for a window.
 ///
 /// {@category Struct}
@@ -4309,6 +4350,36 @@ class TYPEATTR extends Struct {
   external TYPEDESC tdescAlias;
 
   external IDLDESC idldescType;
+}
+
+/// Describes the type of a variable, the return type of a function, or the
+/// type of a function parameter.
+///
+/// {@category Struct}
+class TYPEDESC extends Struct {
+  external _TYPEDESC__Anonymous_e__Union Anonymous;
+  @Uint16()
+  external int vt;
+}
+
+/// {@category Struct}
+class _TYPEDESC__Anonymous_e__Union extends Union {
+  external Pointer<TYPEDESC> lptdesc;
+
+  external Pointer<ARRAYDESC> lpadesc;
+  @Uint32()
+  external int hreftype;
+}
+
+extension TYPEDESC_Extension on TYPEDESC {
+  Pointer<TYPEDESC> get lptdesc => Anonymous.lptdesc;
+  set lptdesc(Pointer<TYPEDESC> value) => Anonymous.lptdesc = value;
+
+  Pointer<ARRAYDESC> get lpadesc => Anonymous.lpadesc;
+  set lpadesc(Pointer<ARRAYDESC> value) => Anonymous.lpadesc = value;
+
+  int get hreftype => Anonymous.hreftype;
+  set hreftype(int value) => Anonymous.hreftype = value;
 }
 
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It

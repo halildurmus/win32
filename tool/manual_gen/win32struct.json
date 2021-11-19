@@ -19,6 +19,10 @@
         "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
         "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
     },
+    "ARRAYDESC": {
+        "namespace": "Windows.Win32.System.Ole.ARRAYDESC",
+        "comment": "Describes an array, its element type, and its dimension."
+    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.System.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
@@ -759,6 +763,10 @@
         "namespace": "Windows.Win32.System.Com.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
     },
+    "STRRET": {
+        "namespace": "Windows.Win32.UI.Shell.Common.STRRET",
+        "comment": "Contains strings returned from the IShellFolder interface methods."
+    },
     "STYLESTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.STYLESTRUCT",
         "comment": "Contains the styles for a window."
@@ -818,6 +826,10 @@
     "TYPEATTR": {
         "namespace": "Windows.Win32.System.Com.TYPEATTR",
         "comment": "Contains attributes of a type."
+    },
+    "TYPEDESC": {
+        "namespace": "Windows.Win32.System.Com.TYPEDESC",
+        "comment": "Describes the type of a variable, the return type of a function, or the type of a function parameter."
     },
     "UNSIGNED_RATIO": {
         "namespace": "Windows.Win32.Graphics.Dwm.UNSIGNED_RATIO",

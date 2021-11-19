@@ -731,29 +731,6 @@ class VARIANT extends Struct {
       .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
 }
 
-// typedef struct tagTYPEDESC {
-//   union {
-//     struct tagTYPEDESC *lptdesc;
-//     struct tagARRAYDESC *lpadesc;
-//     HREFTYPE hreftype;
-//   } DUMMYUNIONNAME;
-//   VARTYPE vt;
-// } TYPEDESC;
-
-/// Describes the type of a variable, the return type of a function, or the type
-/// of a function parameter.
-///
-/// {@category Struct}
-class TYPEDESC extends Struct {
-  external Pointer lptdesc;
-
-  @Uint16()
-  external int vt;
-
-  Pointer get lpadesc => lptdesc;
-  int get hreftype => lptdesc.cast<Uint32>().value;
-}
-
 // typedef struct tagELEMDESC {
 //   TYPEDESC tdesc;
 //   union {
@@ -799,42 +776,6 @@ class VARDESC extends Struct {
   external int wVarFlags;
   @Uint32()
   external int varkind;
-}
-
-// typedef struct _STRRET {
-//   UINT  uType;
-//   union {
-//     LPWSTR pOleStr;
-//     UINT   uOffset;
-//     char   cStr[260];
-//   } DUMMYUNIONNAME;
-// } STRRET;
-
-class _STRRET_Anonymous_0 extends Union {
-  external Pointer<Utf16> pOleStr;
-  @Uint32()
-  external int uOffset;
-  @Array(260)
-  external Array<Uint8> cStr;
-}
-
-/// Contains strings returned from the IShellFolder interface methods.
-///
-/// {@category Struct}
-class STRRET extends Struct {
-  @Uint32()
-  external int uType;
-
-  external _STRRET_Anonymous_0 _DUMMYUNIONNAME;
-
-  Pointer<Utf16> get pOleStr => _DUMMYUNIONNAME.pOleStr;
-  set pOleStr(Pointer<Utf16> value) => _DUMMYUNIONNAME.pOleStr = value;
-
-  int get uOffset => _DUMMYUNIONNAME.uOffset;
-  set uOffset(int value) => _DUMMYUNIONNAME.uOffset = value;
-
-  Array<Uint8> get cStr => _DUMMYUNIONNAME.cStr;
-  set cStr(Array<Uint8> value) => _DUMMYUNIONNAME.cStr = value;
 }
 
 // typedef struct _SHELLEXECUTEINFOW {
