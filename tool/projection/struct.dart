@@ -21,9 +21,9 @@ class StructProjection {
     buffer.writeln('extension {{PARENT}}_Extension on {{PARENT}} {');
     for (final field in typedef.fields) {
       final typeProjection = TypeProjection(field.typeIdentifier);
-      buffer.write('''
+      buffer.writeln('''
   ${typeProjection.dartType} get ${field.name} => {{CLASS}}.${field.name};
-  set ${field.name}({typeProjection.dartType} value) => {{CLASS}}.${field.name} = value;
+  set ${field.name}(${typeProjection.dartType} value) => {{CLASS}}.${field.name} = value;
       ''');
     }
     buffer.writeln('}');

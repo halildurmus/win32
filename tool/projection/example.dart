@@ -11,9 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope.findTypeDef('Windows.Win32.UI.Shell.Common.STRRET');
+  final struct =
+      scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'STRRET');
+    final structProjection = StructProjection(struct, 'INPUT');
     print(structProjection);
   }
 }
