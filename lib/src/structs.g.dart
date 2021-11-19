@@ -1619,6 +1619,37 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwICC;
 }
 
+/// Used by SendInput to store information for synthesizing input events
+/// such as keystrokes, mouse movement, and mouse clicks.
+///
+/// {@category Struct}
+class INPUT extends Struct {
+  @Uint32()
+  external int type;
+
+  external _Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _Anonymous_e__Union extends Union {
+  external MOUSEINPUT mi;
+
+  external KEYBDINPUT ki;
+
+  external HARDWAREINPUT hi;
+}
+
+extension INPUT_Extension on INPUT {
+  MOUSEINPUT get mi => Anonymous.mi;
+  set mi(MOUSEINPUT value) => Anonymous.mi = value;
+
+  KEYBDINPUT get ki => Anonymous.ki;
+  set ki(KEYBDINPUT value) => Anonymous.ki = value;
+
+  HARDWAREINPUT get hi => Anonymous.hi;
+  set hi(HARDWAREINPUT value) => Anonymous.hi = value;
+}
+
 /// Contains a list of item identifiers.
 ///
 /// {@category Struct}

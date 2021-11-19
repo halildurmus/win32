@@ -840,41 +840,6 @@ class STRRET extends Struct {
   set cStr(Array<Uint8> value) => _DUMMYUNIONNAME.cStr = value;
 }
 
-// typedef struct tagINPUT {
-//   DWORD type;
-//   union {
-//     MOUSEINPUT    mi;
-//     KEYBDINPUT    ki;
-//     HARDWAREINPUT hi;
-//   } DUMMYUNIONNAME;
-// } INPUT, *PINPUT, *LPINPUT;
-
-class _INPUT_Anonymous_0 extends Union {
-  external MOUSEINPUT mi;
-  external KEYBDINPUT ki;
-  external HARDWAREINPUT hi;
-}
-
-/// Used by SendInput to store information for synthesizing input events such as
-/// keystrokes, mouse movement, and mouse clicks.
-///
-/// {@category Struct}
-class INPUT extends Struct {
-  // 28 bytes on 32-bit, 40 bytes on 64-bit
-  @Uint32()
-  external int type;
-
-  external _INPUT_Anonymous_0 _DUMMYUNIONNAME;
-
-  MOUSEINPUT get mi => _DUMMYUNIONNAME.mi;
-  KEYBDINPUT get ki => _DUMMYUNIONNAME.ki;
-  HARDWAREINPUT get hi => _DUMMYUNIONNAME.hi;
-
-  set mi(MOUSEINPUT value) => _DUMMYUNIONNAME.mi = value;
-  set ki(KEYBDINPUT value) => _DUMMYUNIONNAME.ki = value;
-  set hi(HARDWAREINPUT value) => _DUMMYUNIONNAME.hi = value;
-}
-
 // typedef struct _SHELLEXECUTEINFOW {
 //   DWORD     cbSize;
 //   ULONG     fMask;

@@ -315,6 +315,10 @@
         "namespace": "Windows.Win32.UI.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
+    "INPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT",
+        "comment": "Used by SendInput to store information for synthesizing input events such as keystrokes, mouse movement, and mouse clicks."
+    },
     "ITEMIDLIST": {
         "namespace": "Windows.Win32.UI.Shell.Common.ITEMIDLIST",
         "comment": "Contains a list of item identifiers."
