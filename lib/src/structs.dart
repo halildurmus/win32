@@ -43,7 +43,6 @@ import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'constants.dart';
-import 'guid.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
 
@@ -1046,30 +1045,6 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   set Passkey(int value) => Numeric_Value = value;
 }
 
-// typedef struct _BLUETOOTH_ADDRESS {
-//   union {
-//     BTH_ADDR ullLong;
-//     BYTE     rgBytes[6];
-//   };
-// } BLUETOOTH_ADDRESS;
-
-/// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
-///
-/// {@category Struct}
-class BLUETOOTH_ADDRESS extends Struct {
-  @Uint64()
-  external int ullLong;
-
-  List<int> get rgBytes => [
-        (ullLong & 0xFF),
-        (ullLong & 0xFF00) >> 8,
-        (ullLong & 0xFF0000) >> 16,
-        (ullLong & 0xFF000000) >> 24,
-        (ullLong & 0xFF00000000) >> 32,
-        (ullLong & 0xFF0000000000) >> 40
-      ];
-}
-
 // typedef struct _BLUETOOTH_PIN_INFO {
 //   UCHAR pin[BTH_MAX_PIN_SIZE];
 //   UCHAR pinLength;
@@ -1371,133 +1346,4 @@ class RAWMOUSE extends Struct {
   int get usButtonData => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData;
   set usButtonData(int value) =>
       _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData = value;
-}
-
-// typedef struct _NOTIFYICONDATAW {
-//   DWORD cbSize;
-//   HWND hWnd;
-//   UINT uID;
-//   UINT uFlags;
-//   UINT uCallbackMessage;
-//   HICON hIcon;
-//   WCHAR  szTip[128];
-//   DWORD dwState;
-//   DWORD dwStateMask;
-//   WCHAR  szInfo[256];
-//   union {
-//   UINT  uTimeout;
-//   UINT  uVersion;
-//   } DUMMYUNIONNAME;
-//   WCHAR  szInfoTitle[64];
-//   DWORD dwInfoFlags;
-//   GUID guidItem;
-//   HICON hBalloonIcon;
-// } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
-
-class _NOTIFYICONDATA_Anonymous_0 extends Union {
-  @Uint32()
-  external int uTimeout;
-  @Uint32()
-  external int uVersion;
-}
-
-/// The NOTIFYICONDATA contains information that the system needs to display
-/// notifications in the notification area. Used by Shell_NotifyIcon.
-///
-/// {@category Struct}
-class NOTIFYICONDATA extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @IntPtr()
-  external int hWnd;
-
-  @Uint32()
-  external int uID;
-
-  @Uint32()
-  external int uFlags;
-
-  @Uint32()
-  external int uCallbackMessage;
-
-  @IntPtr()
-  external int hIcon;
-
-  @Array(128)
-  external Array<Uint16> _szTip;
-
-  String get szTip {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      charCodes.add(_szTip[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set szTip(String value) {
-    // Pad with null characters
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szTip[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-
-  @Uint32()
-  external int dwState;
-
-  @Uint32()
-  external int dwStateMask;
-  @Array(256)
-  external Array<Uint16> _szInfo;
-
-  String get szInfo {
-    final charCodes = <int>[];
-    for (var i = 0; i < 256; i++) {
-      charCodes.add(_szInfo[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set szInfo(String value) {
-    // Pad with null characters
-    final stringToStore = value.padRight(256, '\x00');
-    for (var i = 0; i < 256; i++) {
-      _szInfo[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-
-  external _NOTIFYICONDATA_Anonymous_0 _DUMMYUNIONNAME;
-
-  int get uTimeout => _DUMMYUNIONNAME.uTimeout;
-  int get uVersion => _DUMMYUNIONNAME.uVersion;
-  set uTimeout(int value) => _DUMMYUNIONNAME.uTimeout = value;
-  set uVersion(int value) => _DUMMYUNIONNAME.uVersion = value;
-
-  @Array(64)
-  external Array<Uint16> _szInfoTitle;
-
-  String get szInfoTitle {
-    final charCodes = <int>[];
-    for (var i = 0; i < 64; i++) {
-      charCodes.add(_szInfoTitle[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set szInfoTitle(String value) {
-    // Pad with null characters
-    final stringToStore = value.padRight(64, '\x00');
-    for (var i = 0; i < 64; i++) {
-      _szInfoTitle[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-
-  @Uint32()
-  external int dwInfoFlags;
-
-  external GUID guidItem;
-
-  @IntPtr()
-  external int hBalloonIcon;
 }

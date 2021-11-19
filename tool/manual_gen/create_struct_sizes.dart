@@ -43,7 +43,6 @@ void main()
 
     // Manually generated structs
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\\n", sizeof(APPX_PACKAGE_SETTINGS));
-    printf("  'BLUETOOTH_ADDRESS': %zu,\\n", sizeof(BLUETOOTH_ADDRESS));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
@@ -51,9 +50,7 @@ void main()
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\\n", sizeof(GUID));
-    printf("  'INPUT': %zu,\\n", sizeof(INPUT));
     printf("  'MMTIME': %zu,\\n", sizeof(MMTIME));
-    printf("  'NOTIFYICONDATA': %zu,\\n", sizeof(NOTIFYICONDATAW));
     printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
     printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));

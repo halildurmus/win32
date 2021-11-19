@@ -247,6 +247,30 @@ class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth
+/// device.
+///
+/// {@category Struct}
+class BLUETOOTH_ADDRESS extends Struct {
+  external _BLUETOOTH_ADDRESS__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int ullLong;
+  @Array(6)
+  external Array<Uint8> rgBytes;
+}
+
+extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
+  int get ullLong => Anonymous.ullLong;
+  set ullLong(int value) => Anonymous.ullLong = value;
+
+  Array<Uint8> get rgBytes => Anonymous.rgBytes;
+  set rgBytes(Array<Uint8> value) => Anonymous.rgBytes = value;
+}
+
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a
 /// Bluetooth device.
 ///
@@ -1627,11 +1651,11 @@ class INPUT extends Struct {
   @Uint32()
   external int type;
 
-  external _Anonymous_e__Union Anonymous;
+  external _INPUT__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _Anonymous_e__Union extends Union {
+class _INPUT__Anonymous_e__Union extends Union {
   external MOUSEINPUT mi;
 
   external KEYBDINPUT ki;
@@ -2598,6 +2622,106 @@ class NONCLIENTMETRICS extends Struct {
   external LOGFONT lfMessageFont;
   @Int32()
   external int iPaddedBorderWidth;
+}
+
+/// Contains information that the system needs to display notifications in
+/// the notification area. Used by Shell_NotifyIcon.
+///
+/// {@category Struct}
+class NOTIFYICONDATA extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hWnd;
+  @Uint32()
+  external int uID;
+  @Uint32()
+  external int uFlags;
+  @Uint32()
+  external int uCallbackMessage;
+  @IntPtr()
+  external int hIcon;
+  @Array(128)
+  external Array<Uint16> _szTip;
+
+  String get szTip {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szTip[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szTip(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szTip[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwState;
+  @Uint32()
+  external int dwStateMask;
+  @Array(256)
+  external Array<Uint16> _szInfo;
+
+  String get szInfo {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_szInfo[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szInfo(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _szInfo[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external _NOTIFYICONDATAW__Anonymous_e__Union Anonymous;
+  @Array(64)
+  external Array<Uint16> _szInfoTitle;
+
+  String get szInfoTitle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_szInfoTitle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szInfoTitle(String value) {
+    final stringToStore = value.padRight(64, '\x00');
+    for (var i = 0; i < 64; i++) {
+      _szInfoTitle[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwInfoFlags;
+
+  external GUID guidItem;
+  @IntPtr()
+  external int hBalloonIcon;
+}
+
+/// {@category Struct}
+class _NOTIFYICONDATAW__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int uTimeout;
+  @Uint32()
+  external int uVersion;
+}
+
+extension NOTIFYICONDATA_Extension on NOTIFYICONDATA {
+  int get uTimeout => Anonymous.uTimeout;
+  set uTimeout(int value) => Anonymous.uTimeout = value;
+
+  int get uVersion => Anonymous.uVersion;
+  set uVersion(int value) => Anonymous.uVersion = value;
 }
 
 /// The OPENCARD_SEARCH_CRITERIA structure is used by the

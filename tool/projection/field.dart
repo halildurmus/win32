@@ -39,14 +39,33 @@ class FieldProjection {
     return dartCode;
   }
 
+  String _printNestedFieldType(TypeProjection typeProjection) {
+    final parentName = field.parent.name.split('.').last;
+    return '  ${typeProjection.attribute}\n'
+        '  external _${parentName}_${typeProjection.dartType} ${field.name};\n';
+  }
+
   @override
   String toString() {
     final typeProjection = TypeProjection(field.typeIdentifier);
-    if (field.typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
-        field.typeIdentifier.typeArg?.baseType == winmd.BaseType.Char) {
+    if (field.isCharArray) {
       return _printCharArray(typeProjection);
-    } else {
-      return '  ${typeProjection.attribute}\n  external ${typeProjection.dartType} ${field.name};\n';
     }
+
+    if (field.isNested) {
+      return _printNestedFieldType(typeProjection);
+    }
+
+    return '  ${typeProjection.attribute}\n  external ${typeProjection.dartType} ${field.name};\n';
   }
+}
+
+extension FieldNestedExtension on winmd.Field {
+  bool get isCharArray =>
+      typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
+      typeIdentifier.typeArg?.baseType == winmd.BaseType.Char;
+
+  bool get isNested => parent.nestedTypeDefs
+      .where((t) => t.name == typeIdentifier.name)
+      .isNotEmpty;
 }

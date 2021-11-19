@@ -30,6 +30,12 @@ class StructProjection {
     return buffer.toString();
   }
 
+  String _nestedName(String structName) {
+    final enclosedName = typedef.enclosingClass!.name.split('.').last;
+
+    return '_${enclosedName}_$structName';
+  }
+
   @override
   String toString() {
     try {
@@ -44,14 +50,18 @@ class StructProjection {
         buffer.writeln('@Packed($packingAlignment)');
       }
 
+      final safeStructName = typedef.isNested
+          ? _nestedName(safeName(structName))
+          : safeName(structName);
+
       // Some structs may be opaque types. For example, WS_ERROR. Others may be
       // unions, e.g. INPUT.
       if (typedef.fields.isEmpty) {
-        buffer.writeln('class ${safeName(structName)} extends Opaque {');
+        buffer.writeln('class $safeStructName extends Opaque {');
       } else if (typedef.isUnion) {
-        buffer.writeln('class ${safeName(structName)} extends Union {');
+        buffer.writeln('class $safeStructName extends Union {');
       } else {
-        buffer.writeln('class ${safeName(structName)} extends Struct {');
+        buffer.writeln('class $safeStructName extends Struct {');
       }
 
       for (final field in typedef.fields) {

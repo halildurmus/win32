@@ -43,6 +43,10 @@
         "namespace": "Windows.Win32.Graphics.Gdi.BLENDFUNCTION",
         "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
     },
+    "BLUETOOTH_ADDRESS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS",
+        "comment": "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device."
+    },
     "BLUETOOTH_DEVICE_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO",
         "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
@@ -502,6 +506,10 @@
     "NONCLIENTMETRICS": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW",
         "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
+    },
+    "NOTIFYICONDATA": {
+        "namespace": "Windows.Win32.UI.Shell.NOTIFYICONDATAW",
+        "comment": "Contains information that the system needs to display notifications in the notification area. Used by Shell_NotifyIcon."
     },
     "OPENCARD_SEARCH_CRITERIA": {
         "namespace": "Windows.Win32.Security.Credentials.OPENCARD_SEARCH_CRITERIAW",
