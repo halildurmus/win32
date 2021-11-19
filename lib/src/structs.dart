@@ -731,53 +731,6 @@ class VARIANT extends Struct {
       .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
 }
 
-// typedef struct tagELEMDESC {
-//   TYPEDESC tdesc;
-//   union {
-//     IDLDESC   idldesc;
-//     PARAMDESC paramdesc;
-//   } DUMMYUNIONNAME;
-// } ELEMDESC, *LPELEMDESC;
-
-/// Contains the type description and process-transfer information for a
-/// variable, a function, or a function parameter.
-///
-/// {@category Struct}
-class ELEMDESC extends Struct {
-  external TYPEDESC tdesc;
-  external IDLDESC idldesc;
-  // Waiting on union types
-  //   PARAMDESC get paramdesc => idldesc.cast<PARAMDESC>().value;
-}
-
-// typedef struct tagVARDESC {
-//   MEMBERID memid;
-//   LPOLESTR lpstrSchema;
-//   union {
-//     ULONG   oInst;
-//     VARIANT *lpvarValue;
-//   } DUMMYUNIONNAME;
-//   ELEMDESC elemdescVar;
-//   WORD     wVarFlags;
-//   VARKIND  varkind;
-// } VARDESC, *LPVARDESC;
-
-/// Describes a variable, constant, or data member.
-///
-/// {@category Struct}
-class VARDESC extends Struct {
-  @Uint32()
-  external int memid;
-  external Pointer<Utf16> lpstrSchema;
-  external Pointer<VARIANT> lpvarValue;
-  int get oInst => lpvarValue.cast<Uint32>().value;
-  external ELEMDESC elemdescVar;
-  @Uint16()
-  external int wVarFlags;
-  @Uint32()
-  external int varkind;
-}
-
 // typedef struct _SHELLEXECUTEINFOW {
 //   DWORD     cbSize;
 //   ULONG     fMask;
@@ -833,15 +786,6 @@ class SHELLEXECUTEINFO extends Struct {
 
   @IntPtr()
   external int hProcess;
-}
-
-/// Represents package settings used to create a package.
-///
-/// {@category Struct}
-class APPX_PACKAGE_SETTINGS extends Struct {
-  @Int32()
-  external int forceZip32;
-  external Pointer hashMethod;
 }
 
 // typedef struct _CHAR_INFO {

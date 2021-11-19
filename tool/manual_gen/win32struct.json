@@ -19,6 +19,10 @@
         "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
         "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
     },
+    "APPX_PACKAGE_SETTINGS": {
+        "namespace": "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS",
+        "comment": "Represents package settings used to create a package."
+    },
     "ARRAYDESC": {
         "namespace": "Windows.Win32.System.Ole.ARRAYDESC",
         "comment": "Describes an array, its element type, and its dimension."
@@ -262,6 +266,10 @@
     "EAP_TYPE": {
         "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_TYPE",
         "comment": "The EAP_TYPE structure contains type and vendor identification information for an EAP method."
+    },
+    "ELEMDESC": {
+        "namespace": "Windows.Win32.System.Com.ELEMDESC",
+        "comment": "Contains the type description and process-transfer information for a variable, a function, or a function parameter."
     },
     "ENUMLOGFONTEX": {
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
@@ -842,6 +850,10 @@
     "VALENT": {
         "namespace": "Windows.Win32.System.Registry.VALENTW",
         "comment": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure."
+    },
+    "VARDESC": {
+        "namespace": "Windows.Win32.System.Com.VARDESC",
+        "comment": "Describes a variable, constant, or data member."
     },
     "VS_FIXEDFILEINFO": {
         "namespace": "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO",

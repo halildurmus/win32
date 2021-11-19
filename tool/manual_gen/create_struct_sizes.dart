@@ -42,7 +42,6 @@ void main()
     printf("  const structSizeXX = {\\n");
 
     // Manually generated structs
-    printf("  'APPX_PACKAGE_SETTINGS': %zu,\\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));

@@ -38,7 +38,6 @@ void main()
     printf("  const structSizeXX = {\n");
 
     // Manually generated structs
-    printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
@@ -52,9 +51,7 @@ void main()
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
-    printf("  'STRRET': %zu,\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
-    printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
     printf("  'WLAN_RAW_DATA_LIST': %zu,\n", sizeof(WLAN_RAW_DATA_LIST));
 
@@ -64,6 +61,7 @@ void main()
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
     printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
@@ -125,6 +123,7 @@ void main()
     printf("  'DWM_BLURBEHIND': %zu,\n", sizeof(DWM_BLURBEHIND));
     printf("  'EAP_METHOD_TYPE': %zu,\n", sizeof(EAP_METHOD_TYPE));
     printf("  'EAP_TYPE': %zu,\n", sizeof(EAP_TYPE));
+    printf("  'ELEMDESC': %zu,\n", sizeof(ELEMDESC));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
@@ -270,6 +269,7 @@ void main()
     printf("  'UNSIGNED_RATIO': %zu,\n", sizeof(UNSIGNED_RATIO));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
+    printf("  'VARDESC': %zu,\n", sizeof(VARDESC));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
     printf("  'WAVEFORMATEX': %zu,\n", sizeof(WAVEFORMATEX));
     printf("  'WAVEHDR': %zu,\n", sizeof(WAVEHDR));

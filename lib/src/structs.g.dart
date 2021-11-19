@@ -140,6 +140,16 @@ class addrinfo extends Struct {
   external Pointer<addrinfo> ai_next;
 }
 
+/// Represents package settings used to create a package.
+///
+/// {@category Struct}
+class APPX_PACKAGE_SETTINGS extends Struct {
+  @Int32()
+  external int forceZip32;
+
+  external Pointer<COMObject> hashMethod;
+}
+
 /// Describes an array, its element type, and its dimension.
 ///
 /// {@category Struct}
@@ -1305,6 +1315,31 @@ class EAP_TYPE extends Struct {
   external int dwVendorId;
   @Uint32()
   external int dwVendorType;
+}
+
+/// Contains the type description and process-transfer information for a
+/// variable, a function, or a function parameter.
+///
+/// {@category Struct}
+class ELEMDESC extends Struct {
+  external TYPEDESC tdesc;
+
+  external _ELEMDESC__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _ELEMDESC__Anonymous_e__Union extends Union {
+  external IDLDESC idldesc;
+
+  external PARAMDESC paramdesc;
+}
+
+extension ELEMDESC_Extension on ELEMDESC {
+  IDLDESC get idldesc => Anonymous.idldesc;
+  set idldesc(IDLDESC value) => Anonymous.idldesc = value;
+
+  PARAMDESC get paramdesc => Anonymous.paramdesc;
+  set paramdesc(PARAMDESC value) => Anonymous.paramdesc = value;
 }
 
 /// The ENUMLOGFONTEX structure contains information about an enumerated
@@ -4434,6 +4469,40 @@ class VALENT extends Struct {
   external int ve_valueptr;
   @Uint32()
   external int ve_type;
+}
+
+/// Describes a variable, constant, or data member.
+///
+/// {@category Struct}
+class VARDESC extends Struct {
+  @Int32()
+  external int memid;
+
+  external Pointer<Utf16> lpstrSchema;
+
+  external _VARDESC__Anonymous_e__Union Anonymous;
+
+  external ELEMDESC elemdescVar;
+  @Uint16()
+  external int wVarFlags;
+  @Int32()
+  external int varkind;
+}
+
+/// {@category Struct}
+class _VARDESC__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int oInst;
+
+  external Pointer<VARIANT> lpvarValue;
+}
+
+extension VARDESC_Extension on VARDESC {
+  int get oInst => Anonymous.oInst;
+  set oInst(int value) => Anonymous.oInst = value;
+
+  Pointer<VARIANT> get lpvarValue => Anonymous.lpvarValue;
+  set lpvarValue(Pointer<VARIANT> value) => Anonymous.lpvarValue = value;
 }
 
 /// Contains version information for a file. This information is language
