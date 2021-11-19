@@ -18,7 +18,7 @@ class StructProjection {
   /// we use a templated value `{{CLASS}}` to represent it.
   String propertyAccessors() {
     final buffer = StringBuffer();
-    buffer.writeln('extension {{PARENT}}_Extension on {{PARENT}} {');
+    buffer.writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
     for (final field in typedef.fields) {
       final typeProjection = TypeProjection(field.typeIdentifier);
       buffer.writeln('''
@@ -73,6 +73,7 @@ class StructProjection {
       // Add any nested types on which there is a dependency
       if (typedef.nestedTypeDefs.isNotEmpty) {
         final nested = typedef.nestedTypeDefs.map((t) => t.name);
+        var fieldIdx = 0;
         for (final field in typedef.fields) {
           if (nested.contains(field.typeIdentifier.name)) {
             final nestedType = typedef.nestedTypeDefs
@@ -81,11 +82,14 @@ class StructProjection {
             final nestedTypeProjection =
                 StructProjection(nestedType, '_${nestedType.name}');
 
+            final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
             buffer.write('\n$nestedTypeProjection\n');
             buffer.write(nestedTypeProjection
                 .propertyAccessors()
                 .replaceAll('{{CLASS}}', field.name)
-                .replaceAll('{{PARENT}}', structName));
+                .replaceAll('{{PARENT}}', structName)
+                .replaceAll('{{SUFFIX}}', suffix));
+            fieldIdx++;
           }
         }
       }

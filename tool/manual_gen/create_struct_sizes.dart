@@ -43,8 +43,6 @@ void main()
 
     // Manually generated structs
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\\n", sizeof(APPX_PACKAGE_SETTINGS));
-    printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
-    printf("  'BLUETOOTH_PIN_INFO': %zu,\\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
@@ -60,7 +58,6 @@ void main()
     printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));
     printf("  'STRRET': %zu,\\n", sizeof(STRRET));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
-    printf("  'TASKDIALOGCONFIG': %zu,\\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TYPEDESC': %zu,\\n", sizeof(TYPEDESC));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
     printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));

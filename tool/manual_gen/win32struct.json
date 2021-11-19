@@ -47,6 +47,10 @@
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS",
         "comment": "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device."
     },
+    "BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS",
+        "comment": "The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific configuration information about the Bluetooth device responding to an authentication request."
+    },
     "BLUETOOTH_DEVICE_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO",
         "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
@@ -62,6 +66,10 @@
     "BLUETOOTH_OOB_DATA_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
         "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
+    },
+    "BLUETOOTH_PIN_INFO": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_PIN_INFO",
+        "comment": "The BLUETOOTH_PIN_INFO structure contains information used for authentication via PIN."
     },
     "BLUETOOTH_RADIO_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO",
@@ -774,6 +782,10 @@
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.UI.Controls.TASKDIALOG_BUTTON",
         "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
+    },
+    "TASKDIALOGCONFIG": {
+        "namespace": "Windows.Win32.UI.Controls.TASKDIALOGCONFIG",
+        "comment": "The TASKDIALOGCONFIG structure contains information used to display a task dialog. The TaskDialogIndirect function uses this structure."
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Graphics.Gdi.TEXTMETRICW",

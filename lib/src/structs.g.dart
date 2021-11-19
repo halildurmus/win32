@@ -271,6 +271,42 @@ extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
   set rgBytes(Array<Uint8> value) => Anonymous.rgBytes = value;
 }
 
+/// The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains
+/// specific configuration information about the Bluetooth device
+/// responding to an authentication request.
+///
+/// {@category Struct}
+class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  @Int32()
+  external int authenticationMethod;
+  @Int32()
+  external int ioCapability;
+  @Int32()
+  external int authenticationRequirements;
+
+  external _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
+      Anonymous;
+}
+
+/// {@category Struct}
+class _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
+    extends Union {
+  @Uint32()
+  external int Numeric_Value;
+  @Uint32()
+  external int Passkey;
+}
+
+extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
+    on BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+  int get Numeric_Value => Anonymous.Numeric_Value;
+  set Numeric_Value(int value) => Anonymous.Numeric_Value = value;
+
+  int get Passkey => Anonymous.Passkey;
+  set Passkey(int value) => Anonymous.Passkey = value;
+}
+
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a
 /// Bluetooth device.
 ///
@@ -352,6 +388,17 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
   external Array<Uint8> C;
   @Array(16)
   external Array<Uint8> R;
+}
+
+/// The BLUETOOTH_PIN_INFO structure contains information used for
+/// authentication via PIN.
+///
+/// {@category Struct}
+class BLUETOOTH_PIN_INFO extends Struct {
+  @Array(16)
+  external Array<Uint8> pin;
+  @Uint8()
+  external int pinLength;
 }
 
 /// The BLUETOOTH_RADIO_INFO structure provides information about a
@@ -3998,6 +4045,96 @@ class TASKDIALOG_BUTTON extends Struct {
   external int nButtonID;
 
   external Pointer<Utf16> pszButtonText;
+}
+
+/// The TASKDIALOGCONFIG structure contains information used to display a
+/// task dialog. The TaskDialogIndirect function uses this structure.
+///
+/// {@category Struct}
+@Packed(1)
+class TASKDIALOGCONFIG extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hwndParent;
+  @IntPtr()
+  external int hInstance;
+  @Int32()
+  external int dwFlags;
+  @Int32()
+  external int dwCommonButtons;
+
+  external Pointer<Utf16> pszWindowTitle;
+
+  external _TASKDIALOGCONFIG__Anonymous1_e__Union Anonymous1;
+
+  external Pointer<Utf16> pszMainInstruction;
+
+  external Pointer<Utf16> pszContent;
+  @Uint32()
+  external int cButtons;
+
+  external Pointer<TASKDIALOG_BUTTON> pButtons;
+  @Int32()
+  external int nDefaultButton;
+  @Uint32()
+  external int cRadioButtons;
+
+  external Pointer<TASKDIALOG_BUTTON> pRadioButtons;
+  @Int32()
+  external int nDefaultRadioButton;
+
+  external Pointer<Utf16> pszVerificationText;
+
+  external Pointer<Utf16> pszExpandedInformation;
+
+  external Pointer<Utf16> pszExpandedControlText;
+
+  external Pointer<Utf16> pszCollapsedControlText;
+
+  external _TASKDIALOGCONFIG__Anonymous2_e__Union Anonymous2;
+
+  external Pointer<Utf16> pszFooter;
+
+  external Pointer<NativeFunction<TaskDialogCallbackProc>> pfCallback;
+  @IntPtr()
+  external int lpCallbackData;
+  @Uint32()
+  external int cxWidth;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _TASKDIALOGCONFIG__Anonymous1_e__Union extends Union {
+  @IntPtr()
+  external int hMainIcon;
+
+  external Pointer<Utf16> pszMainIcon;
+}
+
+extension TASKDIALOGCONFIG_Extension on TASKDIALOGCONFIG {
+  int get hMainIcon => Anonymous1.hMainIcon;
+  set hMainIcon(int value) => Anonymous1.hMainIcon = value;
+
+  Pointer<Utf16> get pszMainIcon => Anonymous1.pszMainIcon;
+  set pszMainIcon(Pointer<Utf16> value) => Anonymous1.pszMainIcon = value;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _TASKDIALOGCONFIG__Anonymous2_e__Union extends Union {
+  @IntPtr()
+  external int hFooterIcon;
+
+  external Pointer<Utf16> pszFooterIcon;
+}
+
+extension TASKDIALOGCONFIG_Extension_1 on TASKDIALOGCONFIG {
+  int get hFooterIcon => Anonymous2.hFooterIcon;
+  set hFooterIcon(int value) => Anonymous2.hFooterIcon = value;
+
+  Pointer<Utf16> get pszFooterIcon => Anonymous2.pszFooterIcon;
+  set pszFooterIcon(Pointer<Utf16> value) => Anonymous2.pszFooterIcon = value;
 }
 
 /// The TEXTMETRIC structure contains basic information about a physical
