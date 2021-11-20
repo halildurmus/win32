@@ -48,11 +48,17 @@ class Scope {
   @override
   String toString() => name;
 
-  TypeDef? findTypeDef(String typedef) {
-    final typeDef = typeDefs.where((t) => t.name == typedef);
+  /// Return the first typedef object matching the given name.
+  ///
+  /// Returns null if no typedefs match the name.
+  TypeDef? findTypeDef(String name) {
+    final typeDef = typeDefs.where((t) => t.name == name);
     return (typeDef.isNotEmpty ? typeDef.first : null);
   }
 
+  /// Return the typedef matching the given token.
+  ///
+  /// Returns null if no typedefs match the token.
   TypeDef? findTypeDefByToken(int token) {
     final typeDef = typeDefs.where((t) => t.token == token);
     return (typeDef.isNotEmpty ? typeDef.first : null);
@@ -95,6 +101,7 @@ class Scope {
     }
   }
 
+  /// Get an enumerated list of delegates in this scope.
   List<TypeDef> get delegates =>
       typeDefs.where((typeDef) => typeDef.isDelegate).toList();
 

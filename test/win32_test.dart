@@ -508,7 +508,32 @@ void main() {
     final interface =
         scope.findTypeDef('Windows.Win32.System.WinRT.IActivationFactory')!;
     expect(interface.customAttributes.length, equals(2));
-    expect(interface.customAttributes.first.name,
-        endsWith('SupportedOSPlatformAttribute'));
+    expect(interface.customAttributes.map((attr) => attr.name),
+        contains('Windows.Win32.Interop.SupportedOSPlatformAttribute'));
+
+    // TODO: Add method to convert a custom attribute to string.
+    final supportedOSAttr = interface.customAttributes.where((attr) =>
+        attr.name == 'Windows.Win32.Interop.SupportedOSPlatformAttribute');
+    final supportedOS =
+        String.fromCharCodes(supportedOSAttr.first.signatureBlob.sublist(3));
+    expect(supportedOS, startsWith('windows8.0'));
+  });
+
+  test('Can identify platform architecture', () {
+    final scope = MetadataStore.getWin32Scope();
+    final structs = scope.typeDefs.where(
+        (type) => type.name == 'Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
+    expect(structs.length, equals(2));
+    for (final struct in structs) {
+      final supportedArchAttribute = struct.customAttributes.where((attr) =>
+          attr.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute');
+      expect(supportedArchAttribute, isNotNull);
+
+      // [0x01, 00x00] prolog, then first digit is arch attribute.
+      final arch = Architecture(supportedArchAttribute.first.signatureBlob[2]);
+
+      // One structure for 64-bit, one structure for 32-bit
+      expect((arch.x64 && arch.arm64 && !arch.x86) || arch.x86, isTrue);
+    }
   });
 }
