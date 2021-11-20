@@ -57,6 +57,7 @@ export 'src/event.dart';
 export 'src/field.dart';
 export 'src/genericparam.dart';
 export 'src/genericparamconstraint.dart';
+export 'src/interop.dart';
 export 'src/metadatastore.dart';
 export 'src/method.dart';
 export 'src/methodimpls.dart';
