@@ -531,6 +531,33 @@ class CHANGEFILTERSTRUCT extends Struct {
   external int ExtStatus;
 }
 
+/// Specifies a Unicode or ANSI character and its attributes. This
+/// structure is used by console functions to read from and write to a
+/// console screen buffer.
+///
+/// {@category Struct}
+class CHAR_INFO extends Struct {
+  external _CHAR_INFO__Char_e__Union Char;
+  @Uint16()
+  external int Attributes;
+}
+
+/// {@category Struct}
+class _CHAR_INFO__Char_e__Union extends Union {
+  @Uint16()
+  external int UnicodeChar;
+  @Uint8()
+  external int AsciiChar;
+}
+
+extension CHAR_INFO_Extension on CHAR_INFO {
+  int get UnicodeChar => Char.UnicodeChar;
+  set UnicodeChar(int value) => Char.UnicodeChar = value;
+
+  int get AsciiChar => Char.AsciiChar;
+  set AsciiChar(int value) => Char.AsciiChar = value;
+}
+
 /// Contains information the ChooseColor function uses to initialize the
 /// Color dialog box. After the user closes the dialog box, the system
 /// returns information about the user's selection in this structure.
@@ -3751,6 +3778,58 @@ class SHELL_ITEM_RESOURCE extends Struct {
       _szName[i] = stringToStore.codeUnitAt(i);
     }
   }
+}
+
+/// Contains information used by ShellExecuteEx.
+///
+/// {@category Struct}
+class SHELLEXECUTEINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int fMask;
+  @IntPtr()
+  external int hwnd;
+
+  external Pointer<Utf16> lpVerb;
+
+  external Pointer<Utf16> lpFile;
+
+  external Pointer<Utf16> lpParameters;
+
+  external Pointer<Utf16> lpDirectory;
+  @Int32()
+  external int nShow;
+  @IntPtr()
+  external int hInstApp;
+
+  external Pointer lpIDList;
+
+  external Pointer<Utf16> lpClass;
+  @IntPtr()
+  external int hkeyClass;
+  @Uint32()
+  external int dwHotKey;
+
+  external _SHELLEXECUTEINFOW__Anonymous_e__Union Anonymous;
+  @IntPtr()
+  external int hProcess;
+}
+
+/// {@category Struct}
+class _SHELLEXECUTEINFOW__Anonymous_e__Union extends Union {
+  @IntPtr()
+  external int hIcon;
+  @IntPtr()
+  external int hMonitor;
+}
+
+extension SHELLEXECUTEINFO_Extension on SHELLEXECUTEINFO {
+  int get hIcon => Anonymous.hIcon;
+  set hIcon(int value) => Anonymous.hIcon = value;
+
+  int get hMonitor => Anonymous.hMonitor;
+  set hMonitor(int value) => Anonymous.hMonitor = value;
 }
 
 /// Defines an item identifier.

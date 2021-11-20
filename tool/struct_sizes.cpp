@@ -82,6 +82,7 @@ void main()
     printf("  'CBT_CREATEWNDW': %zu,\n", sizeof(CBT_CREATEWNDW));
     printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
+    printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLORW));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONTW));
     printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
@@ -238,6 +239,7 @@ void main()
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
     printf("  'servent': %zu,\n", sizeof(servent));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
+    printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFOW));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
     printf("  'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));
     printf("  'SIZE': %zu,\n", sizeof(SIZE));

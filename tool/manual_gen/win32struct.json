@@ -103,6 +103,10 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHANGEFILTERSTRUCT",
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
     },
+    "CHAR_INFO": {
+        "namespace": "Windows.Win32.System.Console.CHAR_INFO",
+        "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
+    },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -726,6 +730,10 @@
     "SHELL_ITEM_RESOURCE": {
         "namespace": "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE",
         "comment": "Defines Shell item resource."
+    },
+    "SHELLEXECUTEINFO": {
+        "namespace": "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW",
+        "comment": "Contains information used by ShellExecuteEx."
     },
     "SHITEMID": {
         "namespace": "Windows.Win32.UI.Shell.Common.SHITEMID",
