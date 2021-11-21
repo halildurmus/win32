@@ -38,7 +38,6 @@ void main()
     printf("  const structSizeXX = {\n");
 
     // Manually generated structs
-    printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
@@ -47,10 +46,7 @@ void main()
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
     printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
-    printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
-    printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
-    printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
     printf("  'WLAN_RAW_DATA_LIST': %zu,\n", sizeof(WLAN_RAW_DATA_LIST));
@@ -220,8 +216,10 @@ void main()
     printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
+    printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
     printf("  'protoent': %zu,\n", sizeof(protoent));
     printf("  'RAWHID': %zu,\n", sizeof(RAWHID));
+    printf("  'RAWINPUT': %zu,\n", sizeof(RAWINPUT));
     printf("  'RAWINPUTDEVICE': %zu,\n", sizeof(RAWINPUTDEVICE));
     printf("  'RAWINPUTDEVICELIST': %zu,\n", sizeof(RAWINPUTDEVICELIST));
     printf("  'RAWINPUTHEADER': %zu,\n", sizeof(RAWINPUTHEADER));
@@ -248,6 +246,7 @@ void main()
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'SP_DEVINFO_DATA': %zu,\n", sizeof(SP_DEVINFO_DATA));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
+    printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEXW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));

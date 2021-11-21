@@ -120,11 +120,15 @@ class TypeProjection {
         .isNotEmpty) {
       final typeIdentifier = wrappedType.fields.first.typeIdentifier;
       return TypeProjection(typeIdentifier).projection;
-    } else {
-      final typeClass =
-          stripAnsiUnicodeSuffix(wrappedType.name.split('.').last);
+    }
+
+    if (wrappedType.isNested) {
+      final typeClass = mangleName(wrappedType);
       return TypeTuple(typeClass, typeClass);
     }
+
+    final typeClass = stripAnsiUnicodeSuffix(wrappedType.name.split('.').last);
+    return TypeTuple(typeClass, typeClass);
   }
 
   TypeTuple unwrapPointerType() {

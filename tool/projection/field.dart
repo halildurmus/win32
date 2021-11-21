@@ -60,7 +60,7 @@ class FieldProjection {
   }
 }
 
-extension FieldNestedExtension on winmd.Field {
+extension FieldWin32Extension on winmd.Field {
   bool get isCharArray =>
       typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
       typeIdentifier.typeArg?.baseType == winmd.BaseType.Char;

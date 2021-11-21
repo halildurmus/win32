@@ -42,7 +42,6 @@ void main()
     printf("  const structSizeXX = {\\n");
 
     // Manually generated structs
-    printf("  'CHAR_INFO': %zu,\\n", sizeof(CHAR_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
     printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));
@@ -51,10 +50,7 @@ void main()
     printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
     printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));
-    printf("  'PROPSPEC': %zu,\\n", sizeof(PROPSPEC));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
-    printf("  'SHELLEXECUTEINFO': %zu,\\n", sizeof(SHELLEXECUTEINFO));
-    printf("  'STARTUPINFOEX': %zu,\\n", sizeof(STARTUPINFOEX));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
     printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));

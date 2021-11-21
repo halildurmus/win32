@@ -42,14 +42,13 @@ import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'oleaut32.dart';
-import 'structs.g.dart';
 
 /// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
 /// information field and provides the current data for that field.
 ///
 /// {@category Struct}
 class PRINTER_NOTIFY_INFO_DATA extends Struct {
-  // TODO: Union
+  // TODO: Nested Union
   @Uint16()
   external int Type;
   @Uint16()
@@ -73,7 +72,7 @@ class PRINTER_NOTIFY_INFO_DATA extends Struct {
 ///
 /// {@category Struct}
 class DEVMODE extends Struct {
-  // TODO: Union
+  // TODO: Nested Union
   @Array(32)
   external Array<Uint16> dmDeviceName;
   @Uint16()
@@ -159,7 +158,7 @@ class IN_ADDR extends Struct {
 ///
 /// {@category Struct}
 class PROCESS_HEAP_ENTRY extends Struct {
-  // TODO: Union
+  // TODO: Nested Union
 
   external Pointer lpData;
   @Uint32()
@@ -253,21 +252,6 @@ class SYSTEM_INFO extends Struct {
 
   @Uint16()
   external int wProcessorRevision;
-}
-
-// typedef struct _STARTUPINFOEXW {
-//   STARTUPINFOW                 StartupInfo;
-//   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
-// } STARTUPINFOEXW, *LPSTARTUPINFOEXW;
-
-/// Specifies the window station, desktop, standard handles, and attributes for
-/// a new process. It is used with the CreateProcess and CreateProcessAsUser
-/// functions.
-///
-/// {@category Struct}
-class STARTUPINFOEX extends Struct {
-  external STARTUPINFO StartupInfo;
-  external Pointer lpAttributeList;
 }
 
 // typedef struct tagDEC {
@@ -885,18 +869,6 @@ class MMTIME extends Struct {
   set midi(_midi value) => ms = value.songptrpos;
 }
 
-/// The PROPSPEC structure is used by many of the methods of
-/// IPropertyStorage to specify a property either by its property
-/// identifier (ID) or the associated string name.
-///
-/// {@category Struct}
-class PROPSPEC extends Struct {
-  @Uint32()
-  external int ulKind;
-
-  external Pointer<Uint16> lpwstr;
-}
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
@@ -915,37 +887,6 @@ class PROPVARIANT extends Struct {
   external int val1;
   @IntPtr()
   external int val2;
-}
-
-// typedef struct tagRAWINPUT {
-//   RAWINPUTHEADER header;
-//   union {
-//     RAWMOUSE    mouse;
-//     RAWKEYBOARD keyboard;
-//     RAWHID      hid;
-//   } data;
-// } RAWINPUT, *PRAWINPUT, *LPRAWINPUT;
-class _RAWINPUT_Anonymous_0 extends Union {
-  external RAWMOUSE mouse;
-  external RAWKEYBOARD keyboard;
-  external RAWHID hid;
-}
-
-/// Contains the raw input from a device.
-///
-/// {@category Struct}
-class RAWINPUT extends Struct {
-  external RAWINPUTHEADER header;
-  external _RAWINPUT_Anonymous_0 data;
-
-  RAWMOUSE get mouse => data.mouse;
-  set mouse(RAWMOUSE value) => data.mouse = value;
-
-  RAWKEYBOARD get keyboard => data.keyboard;
-  set keyboard(RAWKEYBOARD value) => data.keyboard = value;
-
-  RAWHID get hid => data.hid;
-  set hid(RAWHID value) => data.hid = value;
 }
 
 // typedef struct tagRAWMOUSE {

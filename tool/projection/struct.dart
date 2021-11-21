@@ -75,9 +75,12 @@ class StructProjection {
         final nested = typedef.nestedTypeDefs.map((t) => t.name);
         var fieldIdx = 0;
         for (final field in typedef.fields) {
-          if (nested.contains(field.typeIdentifier.name)) {
+          if (nested.contains(field.typeIdentifier.name) ||
+              nested.contains(field.typeIdentifier.typeArg?.name)) {
             final nestedType = typedef.nestedTypeDefs
-                .where((t) => t.name == field.typeIdentifier.name)
+                .where((t) =>
+                    t.name == field.typeIdentifier.name ||
+                    t.name == field.typeIdentifier.typeArg?.name)
                 .first;
             final nestedTypeProjection =
                 StructProjection(nestedType, '_${nestedType.name}');
@@ -97,7 +100,7 @@ class StructProjection {
       return buffer.toString();
     } catch (_) {
       print('Failed to project $structName');
-      return '';
+      rethrow;
     }
   }
 }

@@ -3473,6 +3473,34 @@ class PROPERTYKEY extends Struct {
   external int pid;
 }
 
+/// The PROPSPEC structure is used by many of the methods of
+/// IPropertyStorage to specify a property either by its property
+/// identifier (ID) or the associated string name.
+///
+/// {@category Struct}
+class PROPSPEC extends Struct {
+  @Uint32()
+  external int ulKind;
+
+  external _PROPSPEC__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _PROPSPEC__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int propid;
+
+  external Pointer<Utf16> lpwstr;
+}
+
+extension PROPSPEC_Extension on PROPSPEC {
+  int get propid => Anonymous.propid;
+  set propid(int value) => Anonymous.propid = value;
+
+  Pointer<Utf16> get lpwstr => Anonymous.lpwstr;
+  set lpwstr(Pointer<Utf16> value) => Anonymous.lpwstr = value;
+}
+
 /// The protoent structure contains the name and protocol numbers that
 /// correspond to a given protocol name. Applications must never attempt to
 /// modify this structure or to free any of its components. Furthermore,
@@ -3500,6 +3528,35 @@ class RAWHID extends Struct {
   external int dwCount;
   @Array(1)
   external Array<Uint8> bRawData;
+}
+
+/// Contains the raw input from a device.
+///
+/// {@category Struct}
+class RAWINPUT extends Struct {
+  external RAWINPUTHEADER header;
+
+  external _RAWINPUT__data_e__Union data;
+}
+
+/// {@category Struct}
+class _RAWINPUT__data_e__Union extends Union {
+  external RAWMOUSE mouse;
+
+  external RAWKEYBOARD keyboard;
+
+  external RAWHID hid;
+}
+
+extension RAWINPUT_Extension on RAWINPUT {
+  RAWMOUSE get mouse => data.mouse;
+  set mouse(RAWMOUSE value) => data.mouse = value;
+
+  RAWKEYBOARD get keyboard => data.keyboard;
+  set keyboard(RAWKEYBOARD value) => data.keyboard = value;
+
+  RAWHID get hid => data.hid;
+  set hid(RAWHID value) => data.hid = value;
 }
 
 /// Defines information for the raw input devices.
@@ -3962,6 +4019,17 @@ class STARTUPINFO extends Struct {
   external int hStdOutput;
   @IntPtr()
   external int hStdError;
+}
+
+/// Specifies the window station, desktop, standard handles, and attributes
+/// for a new process. It is used with the CreateProcess and
+/// CreateProcessAsUser functions.
+///
+/// {@category Struct}
+class STARTUPINFOEX extends Struct {
+  external STARTUPINFO StartupInfo;
+
+  external Pointer lpAttributeList;
 }
 
 /// The STATPROPSETSTG structure contains information about a property set.

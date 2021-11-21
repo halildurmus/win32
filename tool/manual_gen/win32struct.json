@@ -655,6 +655,10 @@
         "namespace": "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY",
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
+    "PROPSPEC": {
+        "namespace": "Windows.Win32.System.Com.StructuredStorage.PROPSPEC",
+        "comment": "The PROPSPEC structure is used by many of the methods of IPropertyStorage to specify a property either by its property identifier (ID) or the associated string name."
+    },
     "protoent": {
         "namespace": "Windows.Win32.Networking.WinSock.protoent",
         "comment": "The protoent structure contains the name and protocol numbers that correspond to a given protocol name. Applications must never attempt to modify this structure or to free any of its components. Furthermore, only one copy of this structure is allocated per thread, and therefore, the application should copy any information it needs before issuing any other Windows Sockets function calls."
@@ -662,6 +666,10 @@
     "RAWHID": {
         "namespace": "Windows.Win32.UI.Input.RAWHID",
         "comment": "Describes the format of the raw input from a Human Interface Device (HID)."
+    },
+    "RAWINPUT": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUT",
+        "comment": "Contains the raw input from a device."
     },
     "RAWINPUTDEVICE": {
         "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICE",
@@ -766,6 +774,10 @@
     "STARTUPINFO": {
         "namespace": "Windows.Win32.System.Threading.STARTUPINFOW",
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."
+    },
+    "STARTUPINFOEX": {
+        "namespace": "Windows.Win32.System.Threading.STARTUPINFOEXW",
+        "comment": "Specifies the window station, desktop, standard handles, and attributes for a new process. It is used with the CreateProcess and CreateProcessAsUser functions."
     },
     "STATPROPSETSTG": {
         "namespace": "Windows.Win32.System.Com.StructuredStorage.STATPROPSETSTG",
