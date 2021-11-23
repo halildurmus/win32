@@ -11,11 +11,4 @@ void main() {
   final unionFieldType = unionField.typeIdentifier.typeArg?.type;
   print('unionField: $unionFieldType | isNested: ${unionFieldType?.isNested}');
   print('Field: ${unionField.token.toHexString(32)}');
-
-  print('Nested: ${struct.nestedTypeDefs}');
-  final nestedStruct = struct.nestedTypeDefs
-      .firstWhere((t) => t.name == unionField.typeIdentifier.typeArg!.name);
-  print('nestedStruct: $nestedStruct | isNested: ${nestedStruct.isNested}');
-
-  print('match: ${unionFieldType == nestedStruct}');
 }

@@ -83,7 +83,6 @@ class TypeDef extends TokenObject
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
-  late final int enclosingClassToken;
 
   final int _attributes;
   final _events = <Event>[];
@@ -102,19 +101,23 @@ class TypeDef extends TokenObject
       this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
-      : super(scope, token) {
-    enclosingClassToken = _getEnclosingClassToken();
-  }
+      : super(scope, token);
 
-  int _getEnclosingClassToken() => using((Arena arena) {
-        final ptdEnclosingClass = arena<mdTypeDef>();
-        final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
-        if (SUCCEEDED(hr)) {
-          return ptdEnclosingClass.value;
-        } else {
-          return 0;
-        }
-      });
+  /// The token for the class within which this typedef is nested, if there is
+  /// one.
+  ///
+  /// Returns null if there is no nested parent.
+  late final _enclosingClassToken = isNested
+      ? using((Arena arena) {
+          final ptdEnclosingClass = arena<mdTypeDef>();
+          final hr = reader.GetNestedClassProps(token, ptdEnclosingClass);
+          if (SUCCEEDED(hr)) {
+            return ptdEnclosingClass.value;
+          } else {
+            throw WindowsException(hr);
+          }
+        })
+      : null;
 
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
@@ -189,7 +192,7 @@ class TypeDef extends TokenObject
             }
             final parentTypeDef = scope.findTypeDef(parentTypeName);
 
-            final matchingTypes = parentTypeDef?.nestedTypeDefs
+            final matchingTypes = parentTypeDef?._nestedTypeDefs
                 .where((td) => td.name == typeName);
             if (matchingTypes != null && matchingTypes.length == 1) {
               return matchingTypes.first;
@@ -235,6 +238,8 @@ class TypeDef extends TokenObject
             typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
         if (SUCCEEDED(hr)) {
           return szName.toDartString();
+        } else {
+          throw WindowsException(hr);
         }
       });
 
@@ -517,14 +522,12 @@ class TypeDef extends TokenObject
   /// determine whether the type is nested. Alternatively, use the
   /// [typeVisibility] property to determine the visibility of the type,
   /// including whether it is nested.
-  TypeDef? get enclosingClass => enclosingClassToken != 0
-      ? TypeDef.fromToken(scope, enclosingClassToken)
+  late final enclosingClass = _enclosingClassToken != null
+      ? TypeDef.fromToken(scope, _enclosingClassToken!)
       : null;
 
-  // TODO: This has to be slow. We should use the NestedClasses table to figure
-  // this out.
-  Iterable<TypeDef> get nestedTypeDefs =>
-      scope.typeDefs.where((t) => t.enclosingClassToken == token);
+  late final _nestedTypeDefs =
+      scope.typeDefs.where((t) => t._enclosingClassToken == token);
 
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) =>

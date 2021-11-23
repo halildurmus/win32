@@ -83,24 +83,19 @@ void main() {
   test('Non-nested types are identified correctly', () {
     final scope = MetadataStore.getWin32Scope();
     final struct = scope.findTypeDef('Windows.Win32.UI.Controls.CCINFOW')!;
-    expect(struct.enclosingClassToken, isZero);
-    expect(struct.nestedTypeDefs, isEmpty);
+    expect(struct.enclosingClass, isNull);
   });
 
   test('Nested types are identified correctly', () {
     final scope = MetadataStore.getWin32Scope();
     final struct =
         scope.findTypeDef('Windows.Win32.UI.Input.KeyboardAndMouse.INPUT')!;
-    expect(struct.enclosingClassToken, isZero);
 
-    final lastField = struct.fields.last;
-    final nestedUnions = struct.nestedTypeDefs
-        .where((t) => t.name == lastField.typeIdentifier.name);
-    expect(nestedUnions, isNotEmpty);
-    final nestedUnion = nestedUnions.first;
+    final lastFieldType = struct.fields.last.typeIdentifier.type;
+    expect(lastFieldType, isNotNull);
 
-    expect(nestedUnion.isNested, isTrue);
-    expect(nestedUnion.enclosingClassToken, equals(struct.token));
+    expect(lastFieldType!.isNested, isTrue);
+    expect(lastFieldType.enclosingClass, equals(struct));
   });
 
   test('Union structs are identified correctly', () {
@@ -110,11 +105,10 @@ void main() {
 
     // INPUT is not itself a union, but it contains a union.
     expect(struct.isUnion, isFalse);
-    final lastField = struct.fields.last;
-    final nestedUnion = struct.nestedTypeDefs
-        .firstWhere((t) => t.name == lastField.typeIdentifier.name);
 
-    expect(nestedUnion.isUnion, isTrue);
+    final lastFieldType = struct.fields.last.typeIdentifier.type;
+    expect(lastFieldType, isNotNull);
+    expect(lastFieldType!.isUnion, isTrue);
   });
 
   test('Union structs have correct parent', () {
@@ -124,10 +118,9 @@ void main() {
 
     // INPUT is not itself a union, but it contains a union.
     expect(struct.isUnion, isFalse);
-    final lastField = struct.fields.last;
-    final nestedUnion = struct.nestedTypeDefs
-        .firstWhere((t) => t.name == lastField.typeIdentifier.name);
+    final lastFieldType = struct.fields.last.typeIdentifier.type;
+    expect(lastFieldType, isNotNull);
 
-    expect(nestedUnion.enclosingClass, equals(struct));
+    expect(lastFieldType!.enclosingClass, equals(struct));
   });
 }
