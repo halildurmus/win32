@@ -53,7 +53,6 @@ void main()
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
-    printf("  'WLAN_RAW_DATA_LIST': %zu,\\n", sizeof(WLAN_RAW_DATA_LIST));
 
     // Automatically generated structs
 ''';
