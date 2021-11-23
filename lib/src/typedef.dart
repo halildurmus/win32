@@ -175,8 +175,28 @@ class TypeDef extends TokenObject
           }
 
           // If it's the same scope, just look it up based on the returned name.
-          if (scope.moduleToken == resolutionScopeToken) {
+          if (resolutionScopeToken == scope.moduleToken) {
             return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
+          }
+
+          // Is it a nested type? If so, we find a type in the parent type that
+          // matches its name, if one exists (which it presumably should).
+          if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtTypeRef) {
+            final parentTypeRef = resolutionScopeToken;
+            final parentTypeName = _getTypeRefName(scope, parentTypeRef);
+            if (parentTypeName == null) {
+              throw Exception('Cannot get parent type name.');
+            }
+            final parentTypeDef = scope.findTypeDef(parentTypeName);
+
+            final matchingTypes = parentTypeDef?.nestedTypeDefs
+                .where((td) => td.name == typeName);
+            if (matchingTypes != null && matchingTypes.length == 1) {
+              return matchingTypes.first;
+            } else {
+              // For debugging purposes -- this should never happen.
+              throw WinmdException('Could not find matching type.');
+            }
           }
 
           // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
@@ -203,6 +223,18 @@ class TypeDef extends TokenObject
               scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
         } else {
           throw WindowsException(hr);
+        }
+      });
+
+  static String? _getTypeRefName(Scope scope, int typeRefToken) =>
+      using((Arena arena) {
+        final ptkResolutionScope = arena<mdToken>();
+        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchName = arena<ULONG>();
+        final hr = scope.reader.GetTypeRefProps(
+            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
+        if (SUCCEEDED(hr)) {
+          return szName.toDartString();
         }
       });
 
@@ -489,6 +521,8 @@ class TypeDef extends TokenObject
       ? TypeDef.fromToken(scope, enclosingClassToken)
       : null;
 
+  // TODO: This has to be slow. We should use the NestedClasses table to figure
+  // this out.
   Iterable<TypeDef> get nestedTypeDefs =>
       scope.typeDefs.where((t) => t.enclosingClassToken == token);
 
