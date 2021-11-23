@@ -185,20 +185,14 @@ class TypeDef extends TokenObject
           // Is it a nested type? If so, we find a type in the parent type that
           // matches its name, if one exists (which it presumably should).
           if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtTypeRef) {
-            final parentTypeRef = resolutionScopeToken;
-            final parentTypeName = _getTypeRefName(scope, parentTypeRef);
-            if (parentTypeName == null) {
-              throw Exception('Cannot get parent type name.');
-            }
-            final parentTypeDef = scope.findTypeDef(parentTypeName);
-
-            final matchingTypes = parentTypeDef?._nestedTypeDefs
-                .where((td) => td.name == typeName);
-            if (matchingTypes != null && matchingTypes.length == 1) {
-              return matchingTypes.first;
+            final szTypeDef = typeName.toNativeUtf16(allocator: arena);
+            final ptd = arena<mdTypeDef>();
+            final hr =
+                reader.FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
+            if (SUCCEEDED(hr)) {
+              return TypeDef.fromToken(scope, ptd.value);
             } else {
-              // For debugging purposes -- this should never happen.
-              throw WinmdException('Could not find matching type.');
+              throw WindowsException(hr);
             }
           }
 
@@ -224,20 +218,6 @@ class TypeDef extends TokenObject
         if (SUCCEEDED(hr)) {
           return TypeDef(
               scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
-
-  static String? _getTypeRefName(Scope scope, int typeRefToken) =>
-      using((Arena arena) {
-        final ptkResolutionScope = arena<mdToken>();
-        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
-        final pchName = arena<ULONG>();
-        final hr = scope.reader.GetTypeRefProps(
-            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
-        if (SUCCEEDED(hr)) {
-          return szName.toDartString();
         } else {
           throw WindowsException(hr);
         }
@@ -525,9 +505,6 @@ class TypeDef extends TokenObject
   late final enclosingClass = _enclosingClassToken != null
       ? TypeDef.fromToken(scope, _enclosingClassToken!)
       : null;
-
-  late final _nestedTypeDefs =
-      scope.typeDefs.where((t) => t._enclosingClassToken == token);
 
   /// Gets a named custom attribute that is stored as a GUID.
   String? getCustomGUIDAttribute(String guidAttributeName) =>
