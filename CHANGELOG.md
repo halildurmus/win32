@@ -1,3 +1,7 @@
+## 1.0.16
+
+- Better integrate support for nested types.
+
 ## 1.0.15
 
 - Add platform architecture support.
