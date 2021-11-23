@@ -39,23 +39,17 @@ class FieldProjection {
     return dartCode;
   }
 
+  bool get _isCharArray =>
+      field.typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
+      field.typeIdentifier.typeArg?.baseType == winmd.BaseType.Char;
+
   @override
   String toString() {
     final typeProjection = TypeProjection(field.typeIdentifier);
-    if (field.isCharArray) {
+    if (_isCharArray) {
       return _printCharArray(typeProjection);
     }
 
     return '  ${typeProjection.attribute}\n  external ${typeProjection.dartType} ${field.name};\n';
   }
-}
-
-extension FieldWin32Extension on winmd.Field {
-  bool get isCharArray =>
-      typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
-      typeIdentifier.typeArg?.baseType == winmd.BaseType.Char;
-
-  bool get isNested => parent.nestedTypeDefs
-      .where((t) => t.name == typeIdentifier.name)
-      .isNotEmpty;
 }

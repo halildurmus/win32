@@ -36,16 +36,19 @@ void main() {
     final propVariant = scope
         .findTypeDef('Windows.Win32.System.Com.StructuredStorage.PROPVARIANT')!;
 
-    final union1 = propVariant.nestedTypeDefs.first;
-    expect(mangleName(union1), equals('_PROPVARIANT__Anonymous_e__Union'));
+    final union1 = propVariant.fields.first.typeIdentifier.type;
+    expect(union1, isNotNull);
+    expect(mangleName(union1!), equals('_PROPVARIANT__Anonymous_e__Union'));
 
-    final struct1 = union1.nestedTypeDefs.first;
-    expect(mangleName(struct1),
+    final struct1 = union1.fields.first.typeIdentifier.type;
+    expect(struct1, isNotNull);
+    expect(mangleName(struct1!),
         equals('_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct'));
 
-    final union2 = struct1.nestedTypeDefs.first;
+    final union2 = struct1.fields.last.typeIdentifier.type;
+    expect(union2, isNotNull);
     expect(
-        mangleName(union2),
+        mangleName(union2!),
         equals(
             '_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union'));
   });

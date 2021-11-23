@@ -16,7 +16,7 @@ class StructProjection {
   /// do this through a templated class that contains the field accessors. At
   /// the time this is created, we don't know the name of the parent class, so
   /// we use a templated value `{{CLASS}}` to represent it.
-  String propertyAccessors() {
+  String _propertyAccessors() {
     final buffer = StringBuffer();
     buffer.writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
     for (final field in typedef.fields) {
@@ -36,12 +36,16 @@ class StructProjection {
     return '_${enclosedName}_$structName';
   }
 
+  bool _isNestedType(winmd.Field field) =>
+      field.typeIdentifier.type?.isNested ?? false;
+
   bool _hasNestedArray(winmd.Field field) =>
       field.typeIdentifier.typeArg?.type?.isNested != null &&
       field.typeIdentifier.typeArg!.type!.isNested;
 
   @override
   String toString() {
+    // TODO: Needs some cleanup -- ideally avoid buffer and return in one go.
     try {
       final buffer = StringBuffer();
 
@@ -75,7 +79,7 @@ class StructProjection {
         final fieldProjection = FieldProjection(field);
         buffer.write(fieldProjection);
 
-        if (field.isNested) {
+        if (_isNestedType(fieldProjection.field)) {
           nestedTypes[field.name] = field.typeIdentifier.type!;
         }
 
@@ -96,7 +100,7 @@ class StructProjection {
         final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
         buffer.write('\n$nestedTypeProjection\n');
         buffer.write(nestedTypeProjection
-            .propertyAccessors()
+            ._propertyAccessors()
             .replaceAll('{{CLASS}}', field)
             .replaceAll('{{PARENT}}', structName)
             .replaceAll('{{SUFFIX}}', suffix));
