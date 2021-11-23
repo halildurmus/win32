@@ -36,6 +36,10 @@ class StructProjection {
     return '_${enclosedName}_$structName';
   }
 
+  bool _hasNestedArray(winmd.Field field) =>
+      field.typeIdentifier.typeArg?.type?.isNested != null &&
+      field.typeIdentifier.typeArg!.type!.isNested;
+
   @override
   String toString() {
     try {
@@ -64,37 +68,46 @@ class StructProjection {
         buffer.writeln('class $safeStructName extends Struct {');
       }
 
+      final nestedTypes = <String, winmd.TypeDef>{};
+      final nestedArrays = <String, winmd.TypeDef>{};
+
       for (final field in typedef.fields) {
         final fieldProjection = FieldProjection(field);
         buffer.write(fieldProjection);
+
+        if (field.isNested) {
+          nestedTypes[field.name] = field.typeIdentifier.type!;
+        }
+
+        if (_hasNestedArray(field)) {
+          nestedArrays[field.typeIdentifier.typeArg!.name] =
+              field.typeIdentifier.typeArg!.type!;
+        }
       }
       buffer.writeln('}\n');
 
       // Add any nested types on which there is a dependency
-      if (typedef.nestedTypeDefs.isNotEmpty) {
-        final nested = typedef.nestedTypeDefs.map((t) => t.name);
-        var fieldIdx = 0;
-        for (final field in typedef.fields) {
-          if (nested.contains(field.typeIdentifier.name) ||
-              nested.contains(field.typeIdentifier.typeArg?.name)) {
-            final nestedType = typedef.nestedTypeDefs
-                .where((t) =>
-                    t.name == field.typeIdentifier.name ||
-                    t.name == field.typeIdentifier.typeArg?.name)
-                .first;
-            final nestedTypeProjection =
-                StructProjection(nestedType, '_${nestedType.name}');
+      var fieldIdx = 0;
+      for (final field in nestedTypes.keys) {
+        final nestedType = nestedTypes[field]!;
+        final nestedTypeProjection =
+            StructProjection(nestedType, '_${nestedType.name}');
 
-            final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
-            buffer.write('\n$nestedTypeProjection\n');
-            buffer.write(nestedTypeProjection
-                .propertyAccessors()
-                .replaceAll('{{CLASS}}', field.name)
-                .replaceAll('{{PARENT}}', structName)
-                .replaceAll('{{SUFFIX}}', suffix));
-            fieldIdx++;
-          }
-        }
+        final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
+        buffer.write('\n$nestedTypeProjection\n');
+        buffer.write(nestedTypeProjection
+            .propertyAccessors()
+            .replaceAll('{{CLASS}}', field)
+            .replaceAll('{{PARENT}}', structName)
+            .replaceAll('{{SUFFIX}}', suffix));
+        fieldIdx++;
+      }
+      for (final field in nestedArrays.keys) {
+        final nestedType = nestedArrays[field]!;
+        final nestedTypeProjection =
+            StructProjection(nestedType, '_${nestedType.name}');
+
+        buffer.write('\n$nestedTypeProjection\n');
       }
 
       return buffer.toString();

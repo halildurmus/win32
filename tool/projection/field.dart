@@ -39,21 +39,11 @@ class FieldProjection {
     return dartCode;
   }
 
-  String _printNestedFieldType(TypeProjection typeProjection) {
-    final parentName = field.parent.name.split('.').last;
-    return '  ${typeProjection.attribute}\n'
-        '  external _${parentName}_${typeProjection.dartType} ${field.name};\n';
-  }
-
   @override
   String toString() {
     final typeProjection = TypeProjection(field.typeIdentifier);
     if (field.isCharArray) {
       return _printCharArray(typeProjection);
-    }
-
-    if (field.isNested) {
-      return _printNestedFieldType(typeProjection);
     }
 
     return '  ${typeProjection.attribute}\n  external ${typeProjection.dartType} ${field.name};\n';

@@ -18,6 +18,6 @@ dev_dependencies:
   test: ^1.19.3
   winmd: 1.0.15 # Pinned deliberately
 
-# dependency_overrides:
-#   winmd: 
-#     path: ../winmd
+dependency_overrides:
+  winmd: 
+    path: ../winmd

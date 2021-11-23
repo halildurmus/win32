@@ -1027,6 +1027,10 @@
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA",
         "comment": "The WLAN_RAW_DATA structure contains raw data in the form of a blob that is used by some Native Wifi functions."
     },
+    "WLAN_RAW_DATA_LIST": {
+        "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST",
+        "comment": "The WLAN_RAW_DATA_LIST structure contains raw data in the form of an array of data blobs that are used by some Native Wifi functions."
+    },
     "WLAN_SECURITY_ATTRIBUTES": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_SECURITY_ATTRIBUTES",
         "comment": "The WLAN_SECURITY_ATTRIBUTES structure defines the security attributes for a wireless connection."
