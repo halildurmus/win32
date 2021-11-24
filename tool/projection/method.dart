@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
 import 'type.dart';
@@ -7,7 +7,7 @@ import 'type.dart';
 ///
 /// Methods have names, a list of parameters, and may return a type.
 class MethodProjection {
-  final winmd.Method method;
+  final Method method;
   final int vtableOffset;
   final String name;
   final List<ParameterProjection> parameters;
@@ -25,7 +25,7 @@ class MethodProjection {
   ///
   /// Dart doesn't allow overloaded methods, so we have to rename methods that
   /// are duplicated.
-  static String uniquelyNameMethod(winmd.Method method) {
+  static String uniquelyNameMethod(Method method) {
     // Is it an overload with a name provided by the metadata?
     final overloadName = method
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');

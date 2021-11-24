@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'method.dart';
 import 'utils.dart';
@@ -6,14 +6,14 @@ import 'utils.dart';
 // TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
 
 class PropertyProjection extends MethodProjection {
-  PropertyProjection(winmd.Method method, int vtableOffset)
+  PropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
   bool get convertBool => parameters.first.type.dartType == 'bool';
 }
 
 class GetPropertyProjection extends PropertyProjection {
-  GetPropertyProjection(winmd.Method method, int vtableOffset)
+  GetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
   /// Strip off all underscores, even if double underscores
@@ -48,7 +48,7 @@ class GetPropertyProjection extends PropertyProjection {
 }
 
 class SetPropertyProjection extends PropertyProjection {
-  SetPropertyProjection(winmd.Method method, int vtableOffset)
+  SetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
   /// Strip off all underscores, even if double underscores

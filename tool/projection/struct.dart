@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import '../metadata/exclusions.dart';
 import 'field.dart';
@@ -7,7 +7,7 @@ import 'utils.dart';
 
 /// Represents a Dart projection of a Struct typedef.
 class StructProjection {
-  final winmd.TypeDef typeDef;
+  final TypeDef typeDef;
   final String structName;
 
   StructProjection(this.typeDef, this.structName);
@@ -36,10 +36,10 @@ class StructProjection {
     return '_${enclosedName}_$structName';
   }
 
-  bool _isNestedType(winmd.Field field) =>
+  bool _isNestedType(Field field) =>
       field.typeIdentifier.type?.isNested ?? false;
 
-  bool _hasNestedArray(winmd.Field field) =>
+  bool _hasNestedArray(Field field) =>
       field.typeIdentifier.typeArg?.type?.isNested != null &&
       field.typeIdentifier.typeArg!.type!.isNested;
 
@@ -71,7 +71,7 @@ class StructProjection {
 
   String get _nestedTypes {
     final buffer = StringBuffer();
-    final nestedTypes = <String, winmd.TypeDef>{};
+    final nestedTypes = <String, TypeDef>{};
 
     for (final field in typeDef.fields) {
       if (_isNestedType(field)) {
@@ -101,7 +101,7 @@ class StructProjection {
 
   String get _nestedArrays {
     final buffer = StringBuffer();
-    final nestedArrays = <String, winmd.TypeDef>{};
+    final nestedArrays = <String, TypeDef>{};
 
     for (final field in typeDef.fields) {
       if (_hasNestedArray(field)) {

@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'type.dart';
 
@@ -6,7 +6,7 @@ import 'type.dart';
 ///
 /// Fields are a tuple of a type and a name.
 class FieldProjection {
-  final winmd.Field field;
+  final Field field;
 
   const FieldProjection(this.field);
 
@@ -40,8 +40,8 @@ class FieldProjection {
   }
 
   bool get _isCharArray =>
-      field.typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier &&
-      field.typeIdentifier.typeArg?.baseType == winmd.BaseType.Char;
+      field.typeIdentifier.baseType == BaseType.ArrayTypeModifier &&
+      field.typeIdentifier.typeArg?.baseType == BaseType.Char;
 
   @override
   String toString() {

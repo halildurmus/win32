@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import '../metadata/win32_typemap.dart';
 import 'utils.dart';
@@ -11,22 +11,22 @@ class TypeTuple {
   const TypeTuple(this.nativeType, this.dartType, {this.attribute = ''});
 }
 
-const Map<winmd.BaseType, TypeTuple> baseNativeMapping = {
-  winmd.BaseType.Void: TypeTuple('Void', 'void'),
-  winmd.BaseType.Boolean: TypeTuple('Bool', 'bool', attribute: '@Bool()'),
-  winmd.BaseType.Int8: TypeTuple('Int8', 'int', attribute: '@Int8()'),
-  winmd.BaseType.Uint8: TypeTuple('Uint8', 'int', attribute: '@Uint8()'),
-  winmd.BaseType.Int16: TypeTuple('Int16', 'int', attribute: '@Int16()'),
-  winmd.BaseType.Uint16: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
-  winmd.BaseType.Int32: TypeTuple('Int32', 'int', attribute: '@Int32()'),
-  winmd.BaseType.Uint32: TypeTuple('Uint32', 'int', attribute: '@Uint32()'),
-  winmd.BaseType.Int64: TypeTuple('Int64', 'int', attribute: '@Int64()'),
-  winmd.BaseType.Uint64: TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
-  winmd.BaseType.IntPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
-  winmd.BaseType.Float: TypeTuple('Float', 'double', attribute: '@Float()'),
-  winmd.BaseType.Double: TypeTuple('Double', 'double', attribute: '@Double()'),
-  winmd.BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
-  winmd.BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+const Map<BaseType, TypeTuple> baseNativeMapping = {
+  BaseType.Void: TypeTuple('Void', 'void'),
+  BaseType.Boolean: TypeTuple('Bool', 'bool', attribute: '@Bool()'),
+  BaseType.Int8: TypeTuple('Int8', 'int', attribute: '@Int8()'),
+  BaseType.Uint8: TypeTuple('Uint8', 'int', attribute: '@Uint8()'),
+  BaseType.Int16: TypeTuple('Int16', 'int', attribute: '@Int16()'),
+  BaseType.Uint16: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+  BaseType.Int32: TypeTuple('Int32', 'int', attribute: '@Int32()'),
+  BaseType.Uint32: TypeTuple('Uint32', 'int', attribute: '@Uint32()'),
+  BaseType.Int64: TypeTuple('Int64', 'int', attribute: '@Int64()'),
+  BaseType.Uint64: TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
+  BaseType.IntPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.Float: TypeTuple('Float', 'double', attribute: '@Float()'),
+  BaseType.Double: TypeTuple('Double', 'double', attribute: '@Double()'),
+  BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
 };
 
 const Map<String, TypeTuple> specialTypes = {
@@ -45,7 +45,7 @@ const Map<String, TypeTuple> specialTypes = {
 };
 
 class TypeProjection {
-  final winmd.TypeIdentifier typeIdentifier;
+  final TypeIdentifier typeIdentifier;
   late final TypeTuple projection;
 
   TypeProjection(this.typeIdentifier) {
@@ -63,39 +63,21 @@ class TypeProjection {
   bool get isWin32SpecialType =>
       specialTypes.keys.contains(typeIdentifier.name);
 
-  bool get isString => typeIdentifier.baseType == winmd.BaseType.String;
+  bool get isString => typeIdentifier.baseType == BaseType.String;
 
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
 
   bool get isWrappedValueType =>
-      typeIdentifier.baseType == winmd.BaseType.ValueTypeModifier;
+      typeIdentifier.baseType == BaseType.ValueTypeModifier;
 
   bool get isPointerType =>
-      typeIdentifier.baseType == winmd.BaseType.PointerTypeModifier;
+      typeIdentifier.baseType == BaseType.PointerTypeModifier;
 
-  bool get isArrayType =>
-      typeIdentifier.baseType == winmd.BaseType.ArrayTypeModifier;
+  bool get isArrayType => typeIdentifier.baseType == BaseType.ArrayTypeModifier;
 
   bool get isWin32Delegate =>
-      typeIdentifier.baseType == winmd.BaseType.ClassTypeModifier &&
+      typeIdentifier.baseType == BaseType.ClassTypeModifier &&
       typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
-
-  // bool get isComInterface {
-  //   if (typeIdentifier.name.endsWith('IUnknown')) {
-  //     return true;
-  //   }
-
-  //   // Keep checking up the chain to see if this inherits from IUnknown
-  //   var interfaces = typeIdentifier.type?.interfaces;
-  //   while (interfaces != null && interfaces.isNotEmpty) {
-  //     if (interfaces.first.name.endsWith('IUnknown')) {
-  //       return true;
-  //     }
-  //     interfaces = interfaces.first.interfaces;
-  //   }
-
-  //   return false;
-  // }
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
 
@@ -220,7 +202,7 @@ class TypeProjection {
       return unwrapCallbackType();
     }
 
-    if (isInterface || typeIdentifier.baseType == winmd.BaseType.Object) {
+    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
       return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 

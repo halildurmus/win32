@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'function.dart';
 
@@ -6,7 +6,7 @@ class CallbackProjection {
   late String callbackName;
   late FunctionProjection functionProjection;
 
-  CallbackProjection(winmd.TypeDef typedef) {
+  CallbackProjection(TypeDef typedef) {
     final invokeMethod = typedef.findMethod('Invoke');
 
     if (invokeMethod == null) {

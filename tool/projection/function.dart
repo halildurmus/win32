@@ -1,11 +1,11 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
 import 'type.dart';
 import 'utils.dart';
 
 class FunctionProjection {
-  final winmd.Method method;
+  final Method method;
   final String lib;
   final String nameWithoutEncoding;
   final TypeProjection returnType;

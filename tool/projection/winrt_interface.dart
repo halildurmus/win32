@@ -1,9 +1,9 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
 
 class WinRTInterfaceProjection extends InterfaceProjection {
-  WinRTInterfaceProjection(winmd.TypeDef typeDef) : super(typeDef);
+  WinRTInterfaceProjection(TypeDef typeDef) : super(typeDef);
 
   @override
   String get inheritsFrom {
@@ -51,7 +51,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
   }
 
   @override
-  int calculateVTableStart(winmd.TypeDef? type) {
+  int calculateVTableStart(TypeDef? type) {
     if (type == null) {
       return 0;
     }

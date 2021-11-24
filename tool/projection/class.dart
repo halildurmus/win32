@@ -1,4 +1,4 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
 import 'utils.dart';
@@ -6,9 +6,9 @@ import 'utils.dart';
 class ClassProjection extends InterfaceProjection {
   final InterfaceProjection interface;
 
-  ClassProjection(winmd.TypeDef typeDef, this.interface) : super(typeDef);
+  ClassProjection(TypeDef typeDef, this.interface) : super(typeDef);
 
-  factory ClassProjection.fromInterface(winmd.TypeDef interface) {
+  factory ClassProjection.fromInterface(TypeDef interface) {
     final className = generateClassName(interface);
     final classTypeDef = interface.scope.findTypeDef(className);
 
@@ -22,7 +22,7 @@ class ClassProjection extends InterfaceProjection {
   /// Take a fully-qualified interface name (e.g.
   /// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding class
   /// name (e.g. `Windows.Win32.UI.Shell.ShellLink`).
-  static String generateClassName(winmd.TypeDef interface) {
+  static String generateClassName(TypeDef interface) {
     final interfaceNameAsList = interface.name.split('.');
 
     // Strip off the 'I' from the last component

@@ -1,11 +1,11 @@
-import 'package:winmd/winmd.dart' as winmd;
+import 'package:winmd/winmd.dart';
 
 import 'method.dart';
 import 'property.dart';
 import 'utils.dart';
 
 class InterfaceProjection {
-  final winmd.TypeDef typeDef;
+  final TypeDef typeDef;
   final List<MethodProjection> methodProjections = [];
 
   InterfaceProjection(this.typeDef) {
@@ -28,7 +28,7 @@ class InterfaceProjection {
     }
   }
 
-  int calculateVTableStart(winmd.TypeDef? type) {
+  int calculateVTableStart(TypeDef? type) {
     if (type == null) {
       return 0;
     }
