@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/projection/classprojector.dart';
-import '../metadata/projection/data_classes.dart';
-import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
+import '../projection/class.dart';
+import '../projection/interface.dart';
 import 'exclusions.dart';
 
 // TODO: Remove some of these imports when system/com is projected
@@ -95,42 +94,24 @@ Set<String> importsForClass(TypeDef typedef) {
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
   for (final interface in interfaces) {
-    final clsid =
-        scope.findTypeDef(classNameForInterfaceName(interface.name))?.guid ??
-            '';
+    final typeDef = scope.findTypeDef(interface.name);
+    if (typeDef == null) throw Exception("Can't find $interface");
 
-    final parentInterface = interface.interfaces.isNotEmpty
-        ? interface.interfaces.first.name.split('.').last
-        : '';
+    InterfaceProjection interfaceProjection;
+    interfaceProjection = InterfaceProjection(typeDef);
 
-    final classProjection = ClassProjector(interface).projection
-      ..inherits = parentInterface
-      ..namespace = interface.name
-      // ..vtableStart = vTableStart(mdTypeDef)
-      ..sourceType = SourceType.com
-      ..generateClass = clsid.isNotEmpty
-      ..clsid = clsid
-      ..className =
-          nameWithoutEncoding(interface.name.split('.').last.substring(1));
+    // In v2, we put classes and interfaces in the same file.
+    final className = ClassProjection.generateClassName(typeDef);
+    if (scope.findTypeDef(className) != null) {
+      interfaceProjection = ClassProjection.fromInterface(typeDef);
+    }
 
-    final imports = importsForClass(interface).toSet();
-
-    // Pass relative directory to lib/src as second parameter (e.g. '../../')
-    final prefix = '../' * (interface.name.split('.').length - 3);
-    final dartClass =
-        TypePrinter.printProjection(classProjection, excludeHeader: true);
+    final dartClass = interfaceProjection.toString();
 
     final classOutputFilename =
         nameWithoutEncoding(interface.name.split('.').last);
-    final writer =
-        File('${directory.uri.toFilePath()}$classOutputFilename.dart')
-            .openSync(mode: FileMode.writeOnly);
-    writer.writeStringSync(comFileHeader(interface, prefix));
-    for (final import in imports) {
-      if (!excludedImports.contains(import)) {
-        writer.writeStringSync("import '$prefix$import';\n");
-      }
-    }
-    writer.writeStringSync(dartClass);
+    final outputFile =
+        File('${directory.uri.toFilePath()}$classOutputFilename.dart');
+    outputFile.writeAsStringSync(dartClass);
   }
 }

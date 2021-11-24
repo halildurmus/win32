@@ -19,6 +19,14 @@
         "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
         "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
     },
+    "APPX_PACKAGE_SETTINGS": {
+        "namespace": "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS",
+        "comment": "Represents package settings used to create a package."
+    },
+    "ARRAYDESC": {
+        "namespace": "Windows.Win32.System.Ole.ARRAYDESC",
+        "comment": "Describes an array, its element type, and its dimension."
+    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.System.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
@@ -43,6 +51,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.BLENDFUNCTION",
         "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
     },
+    "BLUETOOTH_ADDRESS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS",
+        "comment": "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device."
+    },
+    "BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS",
+        "comment": "The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific configuration information about the Bluetooth device responding to an authentication request."
+    },
     "BLUETOOTH_DEVICE_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO",
         "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
@@ -59,6 +75,10 @@
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
         "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
     },
+    "BLUETOOTH_PIN_INFO": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_PIN_INFO",
+        "comment": "The BLUETOOTH_PIN_INFO structure contains information used for authentication via PIN."
+    },
     "BLUETOOTH_RADIO_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO",
         "comment": "The BLUETOOTH_RADIO_INFO structure provides information about a Bluetooth radio."
@@ -71,9 +91,21 @@
         "namespace": "Windows.Win32.Storage.FileSystem.BY_HANDLE_FILE_INFORMATION",
         "comment": "Contains information that the GetFileInformationByHandle function retrieves."
     },
+    "CBT_CREATEWNDW": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CBT_CREATEWNDW",
+        "comment": "Contains information passed to a WH_CBT hook procedure, CBTProc, before a window is created."
+    },
+    "CBTACTIVATESTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CBTACTIVATESTRUCT",
+        "comment": "Contains information passed to a WH_CBT hook procedure, CBTProc, before a window is activated."
+    },
     "CHANGEFILTERSTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHANGEFILTERSTRUCT",
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
+    },
+    "CHAR_INFO": {
+        "namespace": "Windows.Win32.System.Console.CHAR_INFO",
+        "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
     },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW",
@@ -88,12 +120,16 @@
         "comment": "The COLORADJUSTMENT structure defines the color adjustment values used by the StretchBlt and StretchDIBits functions when the stretch mode is HALFTONE. You can set the color adjustment values by calling the SetColorAdjustment function."
     },
     "COMDLG_FILTERSPEC": {
-        "namespace": "Windows.Win32.UI.Shell.COMDLG_FILTERSPEC",
+        "namespace": "Windows.Win32.UI.Shell.Common.COMDLG_FILTERSPEC",
         "comment": "Used generically to filter elements."
     },
     "COMMCONFIG": {
         "namespace": "Windows.Win32.Devices.Communication.COMMCONFIG",
         "comment": "Contains information about the configuration state of a communications device."
+    },
+    "COMMPROP": {
+        "namespace": "Windows.Win32.Devices.Communication.COMMPROP",
+        "comment": "Contains information about a communications driver."
     },
     "COMMTIMEOUTS": {
         "namespace": "Windows.Win32.Devices.Communication.COMMTIMEOUTS",
@@ -106,6 +142,10 @@
     "CONSOLE_CURSOR_INFO": {
         "namespace": "Windows.Win32.System.Console.CONSOLE_CURSOR_INFO",
         "comment": "Contains information about the console cursor."
+    },
+    "CONSOLE_READCONSOLE_CONTROL": {
+        "namespace": "Windows.Win32.System.Console.CONSOLE_READCONSOLE_CONTROL",
+        "comment": "Contains information for a console read operation."
     },
     "CONSOLE_SCREEN_BUFFER_INFO": {
         "namespace": "Windows.Win32.System.Console.CONSOLE_SCREEN_BUFFER_INFO",
@@ -135,9 +175,21 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO",
         "comment": "Contains global cursor information."
     },
+    "CWPRETSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT",
+        "comment": "Defines the message parameters passed to a WH_CALLWNDPROCRET hook procedure, CallWndRetProc."
+    },
+    "CWPSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT",
+        "comment": "Defines the message parameters passed to a WH_CALLWNDPROC hook procedure, CallWndProc."
+    },
     "DCB": {
         "namespace": "Windows.Win32.Devices.Communication.DCB",
         "comment": "Defines the control setting for a serial communications device."
+    },
+    "DEBUGHOOKINFO": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.DEBUGHOOKINFO",
+        "comment": "Contains debugging information passed to a WH_DEBUG hook procedure, DebugProc."
     },
     "DESIGNVECTOR": {
         "namespace": "Windows.Win32.Graphics.Gdi.DESIGNVECTOR",
@@ -156,7 +208,7 @@
         "comment": "Describes the extended geometry of disk devices and media."
     },
     "DISPPARAMS": {
-        "namespace": "Windows.Win32.System.Ole.Automation.DISPPARAMS",
+        "namespace": "Windows.Win32.System.Com.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
     },
     "DLGITEMTEMPLATE": {
@@ -219,12 +271,20 @@
         "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_TYPE",
         "comment": "The EAP_TYPE structure contains type and vendor identification information for an EAP method."
     },
+    "ELEMDESC": {
+        "namespace": "Windows.Win32.System.Com.ELEMDESC",
+        "comment": "Contains the type description and process-transfer information for a variable, a function, or a function parameter."
+    },
     "ENUMLOGFONTEX": {
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
     },
+    "EVENTMSG": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.EVENTMSG",
+        "comment": "Contains information about a hardware message sent to the system message queue. This structure is used to store message information for the JournalPlaybackProc callback function."
+    },
     "EXCEPINFO": {
-        "namespace": "Windows.Win32.System.Ole.Automation.EXCEPINFO",
+        "namespace": "Windows.Win32.System.Com.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
     },
     "fd_set": {
@@ -240,7 +300,7 @@
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
     "FUNCDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.FUNCDESC",
+        "namespace": "Windows.Win32.System.Com.FUNCDESC",
         "comment": "Describes a function."
     },
     "GESTURECONFIG": {
@@ -276,20 +336,32 @@
         "comment": "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx."
     },
     "IDLDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.IDLDESC",
+        "namespace": "Windows.Win32.System.Com.IDLDESC",
         "comment": "Contains the IDL attributes of a type."
     },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.UI.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
+    "INPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT",
+        "comment": "Used by SendInput to store information for synthesizing input events such as keystrokes, mouse movement, and mouse clicks."
+    },
     "ITEMIDLIST": {
-        "namespace": "Windows.Win32.UI.Shell.ITEMIDLIST",
+        "namespace": "Windows.Win32.UI.Shell.Common.ITEMIDLIST",
         "comment": "Contains a list of item identifiers."
     },
     "JOB_INFO_1": {
         "namespace": "Windows.Win32.Graphics.Printing.JOB_INFO_1W",
         "comment": "The JOB_INFO_1 structure specifies print-job information such as the job-identifier value, the name of the printer for which the job is spooled, the name of the machine that created the print job, the name of the user that owns the print job, and so on."
+    },
+    "KBDLLHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.KBDLLHOOKSTRUCT",
+        "comment": "Contains information about a low-level keyboard input event."
+    },
+    "KEYBDINPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.KEYBDINPUT",
+        "comment": "Contains information about a simulated keyboard event."
     },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.UI.Shell.KNOWNFOLDER_DEFINITION",
@@ -336,19 +408,19 @@
         "comment": "Returned by the GetThemeMargins function to define the margins of windows that have visual styles applied."
     },
     "MCI_OPEN_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_OPEN_PARMSW",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_OPEN_PARMSW",
         "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command."
     },
     "MCI_PLAY_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_PLAY_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_PLAY_PARMS",
         "comment": "The MCI_PLAY_PARMS structure contains positioning information for the MCI_PLAY command."
     },
     "MCI_SEEK_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_SEEK_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_SEEK_PARMS",
         "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command."
     },
     "MCI_STATUS_PARMS": {
-        "namespace": "Windows.Win32.Media.Audio.CoreAudio.MCI_STATUS_PARMS",
+        "namespace": "Windows.Win32.Media.Multimedia.MCI_STATUS_PARMS",
         "comment": "The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command."
     },
     "MENUINFO": {
@@ -372,31 +444,31 @@
         "comment": "Defines the metafile picture format used for exchanging metafile data through the clipboard."
     },
     "MIDIEVENT": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIEVENT",
+        "namespace": "Windows.Win32.Media.Audio.MIDIEVENT",
         "comment": "The MIDIEVENT structure describes a MIDI event in a stream buffer."
     },
     "MIDIHDR": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIHDR",
+        "namespace": "Windows.Win32.Media.Audio.MIDIHDR",
         "comment": "The MIDIHDR structure defines the header used to identify a MIDI system-exclusive or stream buffer."
     },
     "MIDIINCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIINCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.MIDIINCAPSW",
         "comment": "The MIDIINCAPS structure describes the capabilities of a MIDI input device."
     },
     "MIDIOUTCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIOUTCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.MIDIOUTCAPSW",
         "comment": "The MIDIOUTCAPS structure describes the capabilities of a MIDI output device."
     },
     "MIDIPROPTEMPO": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIPROPTEMPO",
+        "namespace": "Windows.Win32.Media.Audio.MIDIPROPTEMPO",
         "comment": "The MIDIPROPTEMPO structure contains the tempo property for a stream."
     },
     "MIDIPROPTIMEDIV": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDIPROPTIMEDIV",
+        "namespace": "Windows.Win32.Media.Audio.MIDIPROPTIMEDIV",
         "comment": "The MIDIPROPTIMEDIV structure contains the time division property for a stream."
     },
     "MIDISTRMBUFFVER": {
-        "namespace": "Windows.Win32.Media.Multimedia.MIDISTRMBUFFVER",
+        "namespace": "Windows.Win32.Media.Audio.MIDISTRMBUFFVER",
         "comment": "The MIDISTRMBUFFVER structure contains version information for a long MIDI event of the MEVT_VERSION type."
     },
     "MINMAXINFO": {
@@ -419,6 +491,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.MONITORINFO",
         "comment": "The MONITORINFO structure contains information about a display monitor."
     },
+    "MOUSEHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCT",
+        "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc."
+    },
+    "MOUSEHOOKSTRUCTEX": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT",
+        "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc. This is an extension of the MOUSEHOOKSTRUCT structure that includes information about wheel movement or the use of the X button."
+    },
     "MOUSEINPUT": {
         "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEINPUT",
         "comment": "Contains information about a simulated mouse event."
@@ -430,6 +510,10 @@
     "MSG": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSG",
         "comment": "Contains message information from a thread's message queue."
+    },
+    "MSLLHOOKSTRUCT": {
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT",
+        "comment": "Contains information about a low-level mouse input event."
     },
     "NDIS_OBJECT_HEADER": {
         "namespace": "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER",
@@ -446,6 +530,10 @@
     "NONCLIENTMETRICS": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW",
         "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
+    },
+    "NOTIFYICONDATA": {
+        "namespace": "Windows.Win32.UI.Shell.NOTIFYICONDATAW",
+        "comment": "Contains information that the system needs to display notifications in the notification area. Used by Shell_NotifyIcon."
     },
     "OPENCARD_SEARCH_CRITERIA": {
         "namespace": "Windows.Win32.Security.Credentials.OPENCARD_SEARCH_CRITERIAW",
@@ -484,11 +572,11 @@
         "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
     },
     "PARAMDESC": {
-        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESC",
+        "namespace": "Windows.Win32.System.Ole.PARAMDESC",
         "comment": "Contains information needed for transferring a structure element, parameter, or function return value between processes."
     },
     "PARAMDESCEX": {
-        "namespace": "Windows.Win32.System.Ole.Automation.PARAMDESCEX",
+        "namespace": "Windows.Win32.System.Ole.PARAMDESCEX",
         "comment": "Contains information about the default value of a parameter."
     },
     "PHYSICAL_MONITOR": {
@@ -564,12 +652,40 @@
         "comment": "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function."
     },
     "PROPERTYKEY": {
-        "namespace": "Windows.Win32.System.PropertiesSystem.PROPERTYKEY",
+        "namespace": "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY",
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
+    },
+    "PROPSPEC": {
+        "namespace": "Windows.Win32.System.Com.StructuredStorage.PROPSPEC",
+        "comment": "The PROPSPEC structure is used by many of the methods of IPropertyStorage to specify a property either by its property identifier (ID) or the associated string name."
     },
     "protoent": {
         "namespace": "Windows.Win32.Networking.WinSock.protoent",
         "comment": "The protoent structure contains the name and protocol numbers that correspond to a given protocol name. Applications must never attempt to modify this structure or to free any of its components. Furthermore, only one copy of this structure is allocated per thread, and therefore, the application should copy any information it needs before issuing any other Windows Sockets function calls."
+    },
+    "RAWHID": {
+        "namespace": "Windows.Win32.UI.Input.RAWHID",
+        "comment": "Describes the format of the raw input from a Human Interface Device (HID)."
+    },
+    "RAWINPUT": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUT",
+        "comment": "Contains the raw input from a device."
+    },
+    "RAWINPUTDEVICE": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICE",
+        "comment": "Defines information for the raw input devices."
+    },
+    "RAWINPUTDEVICELIST": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICELIST",
+        "comment": "Contains information about a raw input device."
+    },
+    "RAWINPUTHEADER": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUTHEADER",
+        "comment": "Contains the header information that is part of the raw input data."
+    },
+    "RAWKEYBOARD": {
+        "namespace": "Windows.Win32.UI.Input.RAWKEYBOARD",
+        "comment": "Contains information about the state of the keyboard."
     },
     "RECT": {
         "namespace": "Windows.Win32.Foundation.RECT",
@@ -623,8 +739,12 @@
         "namespace": "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE",
         "comment": "Defines Shell item resource."
     },
+    "SHELLEXECUTEINFO": {
+        "namespace": "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW",
+        "comment": "Contains information used by ShellExecuteEx."
+    },
     "SHITEMID": {
-        "namespace": "Windows.Win32.UI.Shell.SHITEMID",
+        "namespace": "Windows.Win32.UI.Shell.Common.SHITEMID",
         "comment": "Defines an item identifier."
     },
     "SHQUERYRBINFO": {
@@ -655,6 +775,10 @@
         "namespace": "Windows.Win32.System.Threading.STARTUPINFOW",
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."
     },
+    "STARTUPINFOEX": {
+        "namespace": "Windows.Win32.System.Threading.STARTUPINFOEXW",
+        "comment": "Specifies the window station, desktop, standard handles, and attributes for a new process. It is used with the CreateProcess and CreateProcessAsUser functions."
+    },
     "STATPROPSETSTG": {
         "namespace": "Windows.Win32.System.Com.StructuredStorage.STATPROPSETSTG",
         "comment": "The STATPROPSETSTG structure contains information about a property set."
@@ -666,6 +790,10 @@
     "STATSTG": {
         "namespace": "Windows.Win32.System.Com.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
+    },
+    "STRRET": {
+        "namespace": "Windows.Win32.UI.Shell.Common.STRRET",
+        "comment": "Contains strings returned from the IShellFolder interface methods."
     },
     "STYLESTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.STYLESTRUCT",
@@ -690,6 +818,10 @@
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.UI.Controls.TASKDIALOG_BUTTON",
         "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
+    },
+    "TASKDIALOGCONFIG": {
+        "namespace": "Windows.Win32.UI.Controls.TASKDIALOGCONFIG",
+        "comment": "The TASKDIALOGCONFIG structure contains information used to display a task dialog. The TaskDialogIndirect function uses this structure."
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Graphics.Gdi.TEXTMETRICW",
@@ -720,8 +852,12 @@
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
     },
     "TYPEATTR": {
-        "namespace": "Windows.Win32.System.Ole.Automation.TYPEATTR",
+        "namespace": "Windows.Win32.System.Com.TYPEATTR",
         "comment": "Contains attributes of a type."
+    },
+    "TYPEDESC": {
+        "namespace": "Windows.Win32.System.Com.TYPEDESC",
+        "comment": "Describes the type of a variable, the return type of a function, or the type of a function parameter."
     },
     "UNSIGNED_RATIO": {
         "namespace": "Windows.Win32.Graphics.Dwm.UNSIGNED_RATIO",
@@ -735,20 +871,24 @@
         "namespace": "Windows.Win32.System.Registry.VALENTW",
         "comment": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure."
     },
+    "VARDESC": {
+        "namespace": "Windows.Win32.System.Com.VARDESC",
+        "comment": "Describes a variable, constant, or data member."
+    },
     "VS_FIXEDFILEINFO": {
         "namespace": "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO",
         "comment": "Contains version information for a file. This information is language and code page independent."
     },
     "WAVEFORMATEX": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEFORMATEX",
+        "namespace": "Windows.Win32.Media.Audio.WAVEFORMATEX",
         "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information."
     },
     "WAVEHDR": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEHDR",
+        "namespace": "Windows.Win32.Media.Audio.WAVEHDR",
         "comment": "The WAVEHDR structure defines the header used to identify a waveform-audio buffer."
     },
     "WAVEOUTCAPS": {
-        "namespace": "Windows.Win32.Media.Multimedia.WAVEOUTCAPSW",
+        "namespace": "Windows.Win32.Media.Audio.WAVEOUTCAPSW",
         "comment": "The WAVEOUTCAPS structure describes the capabilities of a waveform-audio output device."
     },
     "WIN32_FIND_DATA": {
@@ -886,6 +1026,10 @@
     "WLAN_RAW_DATA": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA",
         "comment": "The WLAN_RAW_DATA structure contains raw data in the form of a blob that is used by some Native Wifi functions."
+    },
+    "WLAN_RAW_DATA_LIST": {
+        "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST",
+        "comment": "The WLAN_RAW_DATA_LIST structure contains raw data in the form of an array of data blobs that are used by some Native Wifi functions."
     },
     "WLAN_SECURITY_ATTRIBUTES": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_SECURITY_ATTRIBUTES",

@@ -10,14 +10,33 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
-import '../namespace/win32_functions.dart';
+import '../projection/function.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
-import 'projection/win32_function_printer.dart';
-import 'utils.dart';
+import 'win32_functions.dart';
 import 'winmd_caveats.dart';
 
 final methods = <Method>[];
+
+String wrapCommentText(String inputText, [int wrapLength = 76]) {
+  final words = inputText.split(' ');
+  final textLine = StringBuffer('/// ');
+  final outputText = StringBuffer();
+
+  for (final word in words) {
+    if ((textLine.length + word.length) >= wrapLength) {
+      textLine.write('\n');
+      outputText.write(textLine);
+      textLine.clear();
+      textLine.write('/// $word ');
+    } else {
+      textLine.write('$word ');
+    }
+  }
+
+  outputText.write(textLine);
+  return outputText.toString().trimRight();
+}
 
 bool methodMatches(String methodName, List<String> rawPrototype) {
   final prototype = rawPrototype.join('\n');
@@ -68,6 +87,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -84,7 +104,7 @@ final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
             methodMatches(m.name, filteredFunctionList[function]!.prototype));
         writer.writeStringSync('''
 ${generateDocComment(filteredFunctionList[function]!)}
-${Win32FunctionPrinter(function, method, libraryDartName).dartFfiMapping}
+${FunctionProjection(method, libraryDartName).toString()}
 ''');
       } on StateError {
         continue;

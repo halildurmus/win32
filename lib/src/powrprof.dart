@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -38,7 +39,7 @@ int CallNtPowerInformation(int InformationLevel, Pointer InputBuffer,
 
 late final _CallNtPowerInformation = _powrprof.lookupFunction<
     Int32 Function(
-        Uint32 InformationLevel,
+        Int32 InformationLevel,
         Pointer InputBuffer,
         Uint32 InputBufferLength,
         Pointer OutputBuffer,

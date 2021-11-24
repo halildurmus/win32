@@ -23,33 +23,37 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
 
-typedef _EnumConnectionPoints_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppEnum);
-typedef _EnumConnectionPoints_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppEnum);
-
-typedef _FindConnectionPoint_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppCP);
-typedef _FindConnectionPoint_Dart = int Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppCP);
-
 /// {@category Interface}
 /// {@category com}
 class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, ends at 4
-
   IConnectionPointContainer(Pointer<COMObject> ptr) : super(ptr);
 
-  int EnumConnectionPoints(Pointer<Pointer> ppEnum) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<Pointer<NativeFunction<_EnumConnectionPoints_Native>>>()
-      .value
-      .asFunction<_EnumConnectionPoints_Dart>()(ptr.ref.lpVtbl, ppEnum);
-
-  int FindConnectionPoint(Pointer<GUID> riid, Pointer<Pointer> ppCP) =>
+  int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<Pointer<NativeFunction<_FindConnectionPoint_Native>>>()
-          .value
-          .asFunction<_FindConnectionPoint_Dart>()(ptr.ref.lpVtbl, riid, ppCP);
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+          ptr.ref.lpVtbl, ppEnum);
+
+  int FindConnectionPoint(
+          Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppCP) =>
+      ptr.ref.lpVtbl.value
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<GUID> riid,
+                              Pointer<Pointer<COMObject>> ppCP)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<GUID> riid,
+                      Pointer<Pointer<COMObject>> ppCP)>()(
+          ptr.ref.lpVtbl, riid, ppCP);
 }

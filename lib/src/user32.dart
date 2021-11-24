@@ -511,7 +511,7 @@ int ChangeDisplaySettings(Pointer<DEVMODE> lpDevMode, int dwFlags) =>
     _ChangeDisplaySettings(lpDevMode, dwFlags);
 
 late final _ChangeDisplaySettings = _user32.lookupFunction<
-    Uint32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+    Int32 Function(Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
     int Function(
         Pointer<DEVMODE> lpDevMode, int dwFlags)>('ChangeDisplaySettingsW');
 
@@ -533,7 +533,7 @@ int ChangeDisplaySettingsEx(Pointer<Utf16> lpszDeviceName,
     _ChangeDisplaySettingsEx(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam);
 
 late final _ChangeDisplaySettingsEx = _user32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
         IntPtr hwnd, Uint32 dwflags, Pointer lParam),
     int Function(Pointer<Utf16> lpszDeviceName, Pointer<DEVMODE> lpDevMode,
         int hwnd, int dwflags, Pointer lParam)>('ChangeDisplaySettingsExW');
@@ -1188,6 +1188,28 @@ late final _DefMDIChildProc = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
     int Function(
         int hWnd, int uMsg, int wParam, int lParam)>('DefMDIChildProcW');
+
+/// Unlike DefWindowProcA and DefWindowProcW, this function doesn't do any
+/// processing. DefRawInputProc only checks whether cbSizeHeader's value
+/// corresponds to the expected size of RAWINPUTHEADER.
+///
+/// ```c
+/// LRESULT DefRawInputProc(
+///   PRAWINPUT *paRawInput,
+///   INT       nInput,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int DefRawInputProc(
+        Pointer<Pointer<RAWINPUT>> paRawInput, int nInput, int cbSizeHeader) =>
+    _DefRawInputProc(paRawInput, nInput, cbSizeHeader);
+
+late final _DefRawInputProc = _user32.lookupFunction<
+    IntPtr Function(Pointer<Pointer<RAWINPUT>> paRawInput, Int32 nInput,
+        Uint32 cbSizeHeader),
+    int Function(Pointer<Pointer<RAWINPUT>> paRawInput, int nInput,
+        int cbSizeHeader)>('DefRawInputProc');
 
 /// Calls the default window procedure to provide default processing for
 /// any window messages that an application does not process. This function
@@ -2041,7 +2063,7 @@ int GetAwarenessFromDpiAwarenessContext(int value) =>
     _GetAwarenessFromDpiAwarenessContext(value);
 
 late final _GetAwarenessFromDpiAwarenessContext = _user32.lookupFunction<
-    Uint32 Function(IntPtr value),
+    Int32 Function(IntPtr value),
     int Function(int value)>('GetAwarenessFromDpiAwarenessContext');
 
 /// Retrieves a handle to the window (if any) that has captured the mouse.
@@ -2138,7 +2160,7 @@ late final _GetClassInfoEx = _user32.lookupFunction<
 int GetClassLongPtr(int hWnd, int nIndex) => _GetClassLongPtr(hWnd, nIndex);
 
 late final _GetClassLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex),
     int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -2393,13 +2415,13 @@ late final _GetDialogDpiChangeBehavior = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int GetDisplayAutoRotationPreferences(Pointer<Uint32> pOrientation) =>
+int GetDisplayAutoRotationPreferences(Pointer<Int32> pOrientation) =>
     _GetDisplayAutoRotationPreferences(pOrientation);
 
 late final _GetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Pointer<Uint32> pOrientation),
+    Int32 Function(Pointer<Int32> pOrientation),
     int Function(
-        Pointer<Uint32> pOrientation)>('GetDisplayAutoRotationPreferences');
+        Pointer<Int32> pOrientation)>('GetDisplayAutoRotationPreferences');
 
 /// Retrieves a handle to a control in the specified dialog box.
 ///
@@ -3162,6 +3184,113 @@ late final _GetProp = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
     int Function(int hWnd, Pointer<Utf16> lpString)>('GetPropW');
 
+/// Performs a buffered read of the raw input messages data found in the
+/// calling thread's message queue.
+///
+/// ```c
+/// UINT GetRawInputBuffer(
+///   PRAWINPUT pData,
+///   PUINT     pcbSize,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputBuffer(
+        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, int cbSizeHeader) =>
+    _GetRawInputBuffer(pData, pcbSize, cbSizeHeader);
+
+late final _GetRawInputBuffer = _user32.lookupFunction<
+    Uint32 Function(
+        Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
+    int Function(Pointer<RAWINPUT> pData, Pointer<Uint32> pcbSize,
+        int cbSizeHeader)>('GetRawInputBuffer');
+
+/// Retrieves the raw input from the specified device.
+///
+/// ```c
+/// UINT GetRawInputData(
+///   HRAWINPUT hRawInput,
+///   UINT      uiCommand,
+///   LPVOID    pData,
+///   PUINT     pcbSize,
+///   UINT      cbSizeHeader
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputData(int hRawInput, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, int cbSizeHeader) =>
+    _GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader);
+
+late final _GetRawInputData = _user32.lookupFunction<
+    Uint32 Function(IntPtr hRawInput, Uint32 uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, Uint32 cbSizeHeader),
+    int Function(int hRawInput, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize, int cbSizeHeader)>('GetRawInputData');
+
+/// Retrieves information about the raw input device.
+///
+/// ```c
+/// UINT GetRawInputDeviceInfoW(
+///   HANDLE hDevice,
+///   UINT   uiCommand,
+///   LPVOID pData,
+///   PUINT  pcbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputDeviceInfo(
+        int hDevice, int uiCommand, Pointer pData, Pointer<Uint32> pcbSize) =>
+    _GetRawInputDeviceInfo(hDevice, uiCommand, pData, pcbSize);
+
+late final _GetRawInputDeviceInfo = _user32.lookupFunction<
+    Uint32 Function(IntPtr hDevice, Uint32 uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize),
+    int Function(int hDevice, int uiCommand, Pointer pData,
+        Pointer<Uint32> pcbSize)>('GetRawInputDeviceInfoW');
+
+/// Enumerates the raw input devices attached to the system.
+///
+/// ```c
+/// UINT GetRawInputDeviceList(
+///   PRAWINPUTDEVICELIST pRawInputDeviceList,
+///   PUINT               puiNumDevices,
+///   UINT                cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRawInputDeviceList(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, int cbSize) =>
+    _GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize);
+
+late final _GetRawInputDeviceList = _user32.lookupFunction<
+    Uint32 Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+    int Function(Pointer<RAWINPUTDEVICELIST> pRawInputDeviceList,
+        Pointer<Uint32> puiNumDevices, int cbSize)>('GetRawInputDeviceList');
+
+/// Retrieves the information about the raw input devices for the current
+/// application.
+///
+/// ```c
+/// UINT GetRegisteredRawInputDevices(
+///   PRAWINPUTDEVICE pRawInputDevices,
+///   PUINT           puiNumDevices,
+///   UINT            cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetRegisteredRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices, int cbSize) =>
+    _GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize);
+
+late final _GetRegisteredRawInputDevices = _user32.lookupFunction<
+    Uint32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices, Uint32 cbSize),
+    int Function(
+        Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Pointer<Uint32> puiNumDevices,
+        int cbSize)>('GetRegisteredRawInputDevices');
+
 /// The GetScrollBarInfo function retrieves information about the specified
 /// scroll bar.
 ///
@@ -3177,7 +3306,7 @@ int GetScrollBarInfo(int hwnd, int idObject, Pointer<SCROLLBARINFO> psbi) =>
     _GetScrollBarInfo(hwnd, idObject, psbi);
 
 late final _GetScrollBarInfo = _user32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Uint32 idObject, Pointer<SCROLLBARINFO> psbi),
+    Int32 Function(IntPtr hwnd, Int32 idObject, Pointer<SCROLLBARINFO> psbi),
     int Function(int hwnd, int idObject,
         Pointer<SCROLLBARINFO> psbi)>('GetScrollBarInfo');
 
@@ -3389,7 +3518,7 @@ late final _GetThreadDpiAwarenessContext =
 int GetThreadDpiHostingBehavior() => _GetThreadDpiHostingBehavior();
 
 late final _GetThreadDpiHostingBehavior =
-    _user32.lookupFunction<Uint32 Function(), int Function()>(
+    _user32.lookupFunction<Int32 Function(), int Function()>(
         'GetThreadDpiHostingBehavior');
 
 /// Retrieves information about the specified title bar.
@@ -3603,9 +3732,9 @@ late final _GetWindowDpiAwarenessContext = _user32.lookupFunction<
 /// {@category user32}
 int GetWindowDpiHostingBehavior(int hwnd) => _GetWindowDpiHostingBehavior(hwnd);
 
-late final _GetWindowDpiHostingBehavior = _user32.lookupFunction<
-    Uint32 Function(IntPtr hwnd),
-    int Function(int hwnd)>('GetWindowDpiHostingBehavior');
+late final _GetWindowDpiHostingBehavior =
+    _user32.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+        'GetWindowDpiHostingBehavior');
 
 /// Retrieves information about the specified window.
 ///
@@ -3636,7 +3765,7 @@ late final _GetWindowInfo = _user32.lookupFunction<
 int GetWindowLongPtr(int hWnd, int nIndex) => _GetWindowLongPtr(hWnd, nIndex);
 
 late final _GetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex),
     int Function(int hWnd, int nIndex)>('GetWindowLongPtrW');
 
 /// Retrieves the full path and file name of the module associated with the
@@ -4713,8 +4842,8 @@ int MessageBox(
     _MessageBox(hWnd, lpText, lpCaption, uType);
 
 late final _MessageBox = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
-        Pointer<Utf16> lpCaption, Uint32 uType),
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
+        Uint32 uType),
     int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
         int uType)>('MessageBoxW');
 
@@ -4738,8 +4867,8 @@ int MessageBoxEx(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
     _MessageBoxEx(hWnd, lpText, lpCaption, uType, wLanguageId);
 
 late final _MessageBoxEx = _user32.lookupFunction<
-    Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
-        Pointer<Utf16> lpCaption, Uint32 uType, Uint16 wLanguageId),
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
+        Uint32 uType, Uint16 wLanguageId),
     int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
         int uType, int wLanguageId)>('MessageBoxExW');
 
@@ -4914,6 +5043,21 @@ late final _NotifyWinEvent = _user32.lookupFunction<
     Void Function(Uint32 event, IntPtr hwnd, Int32 idObject, Int32 idChild),
     void Function(
         int event, int hwnd, int idObject, int idChild)>('NotifyWinEvent');
+
+/// Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift
+/// states. The function provides information that allows a program to send
+/// OEM text to another program by simulating keyboard input.
+///
+/// ```c
+/// DWORD OemKeyScan(
+///   WORD wOemChar
+/// );
+/// ```
+/// {@category user32}
+int OemKeyScan(int wOemChar) => _OemKeyScan(wOemChar);
+
+late final _OemKeyScan = _user32.lookupFunction<
+    Uint32 Function(Uint16 wOemChar), int Function(int wOemChar)>('OemKeyScan');
 
 /// The OffsetRect function moves the specified rectangle by the specified
 /// offsets.
@@ -5292,6 +5436,26 @@ late final _RegisterPowerSettingNotification = _user32.lookupFunction<
         IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
     int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
         int Flags)>('RegisterPowerSettingNotification');
+
+/// Registers the devices that supply the raw input data.
+///
+/// ```c
+/// BOOL RegisterRawInputDevices(
+///   PCRAWINPUTDEVICE pRawInputDevices,
+///   UINT             uiNumDevices,
+///   UINT             cbSize
+/// );
+/// ```
+/// {@category user32}
+int RegisterRawInputDevices(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        int uiNumDevices, int cbSize) =>
+    _RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize);
+
+late final _RegisterRawInputDevices = _user32.lookupFunction<
+    Int32 Function(Pointer<RAWINPUTDEVICE> pRawInputDevices,
+        Uint32 uiNumDevices, Uint32 cbSize),
+    int Function(Pointer<RAWINPUTDEVICE> pRawInputDevices, int uiNumDevices,
+        int cbSize)>('RegisterRawInputDevices');
 
 /// Registers a window to process the WM_TOUCHHITTESTING notification.
 ///
@@ -5911,7 +6075,7 @@ int SetDisplayAutoRotationPreferences(int orientation) =>
     _SetDisplayAutoRotationPreferences(orientation);
 
 late final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
-    Int32 Function(Uint32 orientation),
+    Int32 Function(Int32 orientation),
     int Function(int orientation)>('SetDisplayAutoRotationPreferences');
 
 /// Sets the text of a control in a dialog box to the string representation
@@ -6340,7 +6504,7 @@ int SetThreadDpiHostingBehavior(int value) =>
     _SetThreadDpiHostingBehavior(value);
 
 late final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
-    Uint32 Function(Uint32 value),
+    Int32 Function(Int32 value),
     int Function(int value)>('SetThreadDpiHostingBehavior');
 
 /// Creates a timer with the specified time-out value.
@@ -6415,7 +6579,7 @@ int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) =>
     _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
 
 late final _SetWindowLongPtr = _user32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
+    IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
     int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
 
 /// Sets the show state and the restored, minimized, and maximized
@@ -6502,7 +6666,7 @@ int SetWindowsHookEx(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
     _SetWindowsHookEx(idHook, lpfn, hmod, dwThreadId);
 
 late final _SetWindowsHookEx = _user32.lookupFunction<
-    IntPtr Function(Uint32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
+    IntPtr Function(Int32 idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
         IntPtr hmod, Uint32 dwThreadId),
     int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
         int hmod, int dwThreadId)>('SetWindowsHookExW');
@@ -7076,12 +7240,12 @@ late final _UnregisterHotKey = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int UnregisterPowerSettingNotification(int Handle) =>
-    _UnregisterPowerSettingNotification(Handle);
+int UnregisterPowerSettingNotification(int Handle_) =>
+    _UnregisterPowerSettingNotification(Handle_);
 
 late final _UnregisterPowerSettingNotification = _user32.lookupFunction<
-    Int32 Function(IntPtr Handle),
-    int Function(int Handle)>('UnregisterPowerSettingNotification');
+    Int32 Function(IntPtr Handle_),
+    int Function(int Handle_)>('UnregisterPowerSettingNotification');
 
 /// Registers a window as no longer being touch-capable.
 ///

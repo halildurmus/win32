@@ -10,9 +10,15 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-String addressAsString(List<int> bluetoothAddress) => bluetoothAddress
-    .map((byte) => byte.toRadixString(16).toUpperCase().padLeft(2, '0'))
-    .join(':');
+String addressAsString(Array<Uint8> bluetoothAddress) {
+  final bluetoothAddressList = <int>[];
+  for (var i = 0; i < 6; i++) {
+    bluetoothAddressList.add(bluetoothAddress[i]);
+  }
+  return bluetoothAddressList
+      .map((byte) => byte.toRadixString(16).toUpperCase().padLeft(2, '0'))
+      .join(':');
+}
 
 List<int> findBluetoothRadios() {
   final findRadioParams = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()

@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -164,7 +165,7 @@ late final _TaskDialog = _comctl32.lookupFunction<
         Pointer<Utf16> pszWindowTitle,
         Pointer<Utf16> pszMainInstruction,
         Pointer<Utf16> pszContent,
-        Uint32 dwCommonButtons,
+        Int32 dwCommonButtons,
         Pointer<Utf16> pszIcon,
         Pointer<Int32> pnButton),
     int Function(

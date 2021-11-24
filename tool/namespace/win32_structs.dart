@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
+import '../projection/struct.dart';
 import 'exclusions.dart';
 
 const structFileHeader = '''
@@ -62,8 +62,9 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
   final buffer = StringBuffer();
 
   for (final struct in typedefs) {
-    buffer.write(TypePrinter.printStruct(
+    buffer.write(StructProjection(
         struct, nameWithoutEncoding(struct.name.split('.').last)));
+
     imports.addAll(importsForStruct(struct));
   }
 

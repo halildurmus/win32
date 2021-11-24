@@ -29,11 +29,11 @@ final _shell32 = DynamicLibrary.open('shell32.dll');
 /// );
 /// ```
 /// {@category shell32}
-Pointer<Pointer<Utf16>> CommandLineToArgvW(
+Pointer<Pointer<Utf16>> CommandLineToArgv(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs) =>
-    _CommandLineToArgvW(lpCmdLine, pNumArgs);
+    _CommandLineToArgv(lpCmdLine, pNumArgs);
 
-late final _CommandLineToArgvW = _shell32.lookupFunction<
+late final _CommandLineToArgv = _shell32.lookupFunction<
     Pointer<Pointer<Utf16>> Function(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs),
     Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
@@ -92,14 +92,17 @@ late final _FindExecutable = _shell32.lookupFunction<
 /// );
 /// ```
 /// {@category shell32}
-int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer pbc,
+int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer<COMObject> pbc,
         Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
 
 late final _SHCreateItemFromParsingName = _shell32.lookupFunction<
-    Int32 Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-        Pointer<Pointer> ppv),
-    int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+    Int32 Function(Pointer<Utf16> pszPath, Pointer<COMObject> pbc,
+        Pointer<GUID> riid, Pointer<Pointer> ppv),
+    int Function(
+        Pointer<Utf16> pszPath,
+        Pointer<COMObject> pbc,
+        Pointer<GUID> riid,
         Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
 
 /// Sends a message to the taskbar's status area.
@@ -221,11 +224,12 @@ late final _SHEmptyRecycleBin = _shell32.lookupFunction<
 /// );
 /// ```
 /// {@category shell32}
-int SHGetDesktopFolder(Pointer<Pointer> ppshf) => _SHGetDesktopFolder(ppshf);
+int SHGetDesktopFolder(Pointer<Pointer<COMObject>> ppshf) =>
+    _SHGetDesktopFolder(ppshf);
 
 late final _SHGetDesktopFolder = _shell32.lookupFunction<
-    Int32 Function(Pointer<Pointer> ppshf),
-    int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
+    Int32 Function(Pointer<Pointer<COMObject>> ppshf),
+    int Function(Pointer<Pointer<COMObject>> ppshf)>('SHGetDesktopFolder');
 
 /// Retrieves disk space information for a disk volume.
 ///

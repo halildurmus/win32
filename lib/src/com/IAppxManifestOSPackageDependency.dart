@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -23,30 +24,29 @@ import 'IUnknown.dart';
 const IID_IAppxManifestOSPackageDependency =
     '{154995EE-54A6-4F14-AC97-D8CF0519644B}';
 
-typedef _GetName_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<Utf16>> name);
-typedef _GetName_Dart = int Function(Pointer obj, Pointer<Pointer<Utf16>> name);
-
-typedef _GetVersion_Native = Int32 Function(
-    Pointer obj, Pointer<Uint64> version);
-typedef _GetVersion_Dart = int Function(Pointer obj, Pointer<Uint64> version);
-
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, ends at 4
-
   IAppxManifestOSPackageDependency(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<Pointer<NativeFunction<_GetName_Native>>>()
-      .value
-      .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, name);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>>>()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
+      ptr.ref.lpVtbl, name);
 
   int GetVersion(Pointer<Uint64> version) => ptr.ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<_GetVersion_Native>>>()
-      .value
-      .asFunction<_GetVersion_Dart>()(ptr.ref.lpVtbl, version);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Uint64> version)>>>()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> version)>()(
+      ptr.ref.lpVtbl, version);
 }

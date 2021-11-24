@@ -91,6 +91,7 @@ export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
+export 'src/guid.dart';
 export 'src/macros.dart';
 export 'src/guid.dart';
 export 'src/structs.dart' hide COR_FIELD_OFFSET;

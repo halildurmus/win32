@@ -7,8 +7,8 @@
 import 'dart:io';
 
 import 'package:winmd/winmd.dart';
-import '../metadata/projection/win32_function_printer.dart';
 import '../metadata/utils.dart';
+import '../projection/function.dart';
 import 'exclusions.dart';
 
 const ffiFileHeader = '''
@@ -114,9 +114,8 @@ void generateFfiFile(File file, TypeDef typedef) {
     buffer.writeln();
 
     for (final function in functions) {
-      final printer = Win32FunctionPrinter(
-          nameWithoutEncoding(function.name), function, libraryDartName);
-      buffer.writeln(printer.dartFfiMapping);
+      final printer = FunctionProjection(function, libraryDartName);
+      buffer.writeln(printer.toString());
       imports.addAll(importsForFunction(function));
     }
     buffer.writeln();

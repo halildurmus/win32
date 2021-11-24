@@ -50,7 +50,7 @@ late final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
         IntPtr hRadioIn,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
         Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-        Uint32 authenticationRequirement),
+        Int32 authenticationRequirement),
     int Function(
         int hwndParentIn,
         int hRadioIn,

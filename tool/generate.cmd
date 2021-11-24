@@ -16,9 +16,9 @@ echo.
 @REM call dart %~dp0metadata\generate_com_apis.dart
 @REM echo.
 
-@REM echo Generating Windows Runtime classes from Windows metadata
-@REM call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
-@REM echo.
+echo Generating Windows Runtime classes from Windows metadata [DISABLED]
+rem call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
+echo.
 
 :format
 echo Formatting generated source code

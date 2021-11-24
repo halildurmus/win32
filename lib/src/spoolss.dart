@@ -14,6 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
+import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
@@ -179,8 +180,8 @@ int ReportJobProcessingProgress(
         printerHandle, jobId, jobOperation, jobProgress);
 
 late final _ReportJobProcessingProgress = _spoolss.lookupFunction<
-    Int32 Function(IntPtr printerHandle, Uint32 jobId, Uint32 jobOperation,
-        Uint32 jobProgress),
+    Int32 Function(IntPtr printerHandle, Uint32 jobId, Int32 jobOperation,
+        Int32 jobProgress),
     int Function(int printerHandle, int jobId, int jobOperation,
         int jobProgress)>('ReportJobProcessingProgress');
 

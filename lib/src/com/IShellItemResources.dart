@@ -23,158 +23,160 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IShellItemResources = '{FF5693BE-2CE0-4D48-B5C5-40817D1ACDB9}';
 
-typedef _GetAttributes_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pdwAttributes);
-typedef _GetAttributes_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pdwAttributes);
-
-typedef _GetSize_Native = Int32 Function(Pointer obj, Pointer<Uint64> pullSize);
-typedef _GetSize_Dart = int Function(Pointer obj, Pointer<Uint64> pullSize);
-
-typedef _GetTimes_Native = Int32 Function(
-    Pointer obj,
-    Pointer<FILETIME> pftCreation,
-    Pointer<FILETIME> pftWrite,
-    Pointer<FILETIME> pftAccess);
-typedef _GetTimes_Dart = int Function(
-    Pointer obj,
-    Pointer<FILETIME> pftCreation,
-    Pointer<FILETIME> pftWrite,
-    Pointer<FILETIME> pftAccess);
-
-typedef _SetTimes_Native = Int32 Function(
-    Pointer obj,
-    Pointer<FILETIME> pftCreation,
-    Pointer<FILETIME> pftWrite,
-    Pointer<FILETIME> pftAccess);
-typedef _SetTimes_Dart = int Function(
-    Pointer obj,
-    Pointer<FILETIME> pftCreation,
-    Pointer<FILETIME> pftWrite,
-    Pointer<FILETIME> pftAccess);
-
-typedef _GetResourceDescription_Native = Int32 Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<Pointer<Utf16>> ppszDescription);
-typedef _GetResourceDescription_Dart = int Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<Pointer<Utf16>> ppszDescription);
-
-typedef _EnumResources_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> ppenumr);
-typedef _EnumResources_Dart = int Function(
-    Pointer obj, Pointer<Pointer> ppenumr);
-
-typedef _SupportsResource_Native = Int32 Function(
-    Pointer obj, Pointer<SHELL_ITEM_RESOURCE> pcsir);
-typedef _SupportsResource_Dart = int Function(
-    Pointer obj, Pointer<SHELL_ITEM_RESOURCE> pcsir);
-
-typedef _OpenResource_Native = Int32 Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv);
-typedef _OpenResource_Dart = int Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv);
-
-typedef _CreateResource_Native = Int32 Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv);
-typedef _CreateResource_Dart = int Function(
-    Pointer obj,
-    Pointer<SHELL_ITEM_RESOURCE> pcsir,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv);
-
-typedef _MarkForDelete_Native = Int32 Function(Pointer obj);
-typedef _MarkForDelete_Dart = int Function(Pointer obj);
-
 /// {@category Interface}
 /// {@category com}
 class IShellItemResources extends IUnknown {
   // vtable begins at 3, ends at 12
-
   IShellItemResources(Pointer<COMObject> ptr) : super(ptr);
 
   int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.lpVtbl.value
       .elementAt(3)
-      .cast<Pointer<NativeFunction<_GetAttributes_Native>>>()
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Uint32> pdwAttributes)>>>()
       .value
-      .asFunction<_GetAttributes_Dart>()(ptr.ref.lpVtbl, pdwAttributes);
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, pdwAttributes);
 
   int GetSize(Pointer<Uint64> pullSize) => ptr.ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<_GetSize_Native>>>()
-      .value
-      .asFunction<_GetSize_Dart>()(ptr.ref.lpVtbl, pullSize);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer<Uint64> pullSize)>>>()
+          .value
+          .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
+      ptr.ref.lpVtbl, pullSize);
 
   int GetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
       ptr.ref.lpVtbl.value
               .elementAt(5)
-              .cast<Pointer<NativeFunction<_GetTimes_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<FILETIME> pftCreation,
+                              Pointer<FILETIME> pftWrite,
+                              Pointer<FILETIME> pftAccess)>>>()
               .value
-              .asFunction<_GetTimes_Dart>()(
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      Pointer<FILETIME> pftCreation,
+                      Pointer<FILETIME> pftWrite,
+                      Pointer<FILETIME> pftAccess)>()(
           ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
   int SetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
       ptr.ref.lpVtbl.value
               .elementAt(6)
-              .cast<Pointer<NativeFunction<_SetTimes_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<FILETIME> pftCreation,
+                              Pointer<FILETIME> pftWrite,
+                              Pointer<FILETIME> pftAccess)>>>()
               .value
-              .asFunction<_SetTimes_Dart>()(
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      Pointer<FILETIME> pftCreation,
+                      Pointer<FILETIME> pftWrite,
+                      Pointer<FILETIME> pftAccess)>()(
           ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
   int GetResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
           Pointer<Pointer<Utf16>> ppszDescription) =>
       ptr.ref.lpVtbl.value
               .elementAt(7)
-              .cast<Pointer<NativeFunction<_GetResourceDescription_Native>>>()
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                              Pointer<Pointer<Utf16>> ppszDescription)>>>()
               .value
-              .asFunction<_GetResourceDescription_Dart>()(
+              .asFunction<
+                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                      Pointer<Pointer<Utf16>> ppszDescription)>()(
           ptr.ref.lpVtbl, pcsir, ppszDescription);
 
-  int EnumResources(Pointer<Pointer> ppenumr) => ptr.ref.lpVtbl.value
-      .elementAt(8)
-      .cast<Pointer<NativeFunction<_EnumResources_Native>>>()
-      .value
-      .asFunction<_EnumResources_Dart>()(ptr.ref.lpVtbl, ppenumr);
+  int EnumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> ppenumr)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
+      ptr.ref.lpVtbl, ppenumr);
 
   int SupportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) =>
       ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<Pointer<NativeFunction<_SupportsResource_Native>>>()
-          .value
-          .asFunction<_SupportsResource_Dart>()(ptr.ref.lpVtbl, pcsir);
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
+          ptr.ref.lpVtbl, pcsir);
 
   int OpenResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value
           .elementAt(10)
-          .cast<Pointer<NativeFunction<_OpenResource_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer,
+                          Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                          Pointer<GUID> riid,
+                          Pointer<Pointer> ppv)>>>()
           .value
-          .asFunction<_OpenResource_Dart>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
   int CreateResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value
           .elementAt(11)
-          .cast<Pointer<NativeFunction<_CreateResource_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer,
+                          Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                          Pointer<GUID> riid,
+                          Pointer<Pointer> ppv)>>>()
           .value
-          .asFunction<_CreateResource_Dart>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<SHELL_ITEM_RESOURCE> pcsir,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
   int MarkForDelete() => ptr.ref.lpVtbl.value
       .elementAt(12)
-      .cast<Pointer<NativeFunction<_MarkForDelete_Native>>>()
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
-      .asFunction<_MarkForDelete_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 }

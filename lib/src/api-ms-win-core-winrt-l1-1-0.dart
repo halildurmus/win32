@@ -30,13 +30,15 @@ final _api_ms_win_core_winrt_l1_1_0 =
 /// );
 /// ```
 /// {@category winrt}
-int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) =>
+int RoActivateInstance(
+        int activatableClassId, Pointer<Pointer<COMObject>> instance) =>
     _RoActivateInstance(activatableClassId, instance);
 
 late final _RoActivateInstance = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-    Int32 Function(IntPtr activatableClassId, Pointer<Pointer> instance),
+    Int32 Function(
+        IntPtr activatableClassId, Pointer<Pointer<COMObject>> instance),
     int Function(int activatableClassId,
-        Pointer<Pointer> instance)>('RoActivateInstance');
+        Pointer<Pointer<COMObject>> instance)>('RoActivateInstance');
 
 /// Gets the activation factory for the specified runtime class.
 ///
@@ -88,8 +90,7 @@ late final _RoGetApartmentIdentifier =
 int RoInitialize(int initType) => _RoInitialize(initType);
 
 late final _RoInitialize = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-    Int32 Function(Uint32 initType),
-    int Function(int initType)>('RoInitialize');
+    Int32 Function(Int32 initType), int Function(int initType)>('RoInitialize');
 
 /// Closes the Windows Runtime on the current thread.
 ///

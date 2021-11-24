@@ -5316,6 +5316,75 @@ const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
 // -----------------------------------------------------------------------------
+// Raw input flags
+// -----------------------------------------------------------------------------
+
+/// Get the raw data from the RAWINPUT structure.
+const RID_INPUT = 0x10000003;
+
+/// Get the header information from the RAWINPUT structure.
+const RID_HEADER = 0x10000005;
+
+/// pData is a PHIDP_PREPARSED_DATA pointer to a buffer for a top-level
+/// collection's preparsed data.
+const RIDI_PREPARSEDDATA = 0x20000005;
+
+/// pData points to a string that contains the device interface name.
+const RIDI_DEVICENAME = 0x20000007;
+
+/// pData points to an RID_DEVICE_INFO structure.
+const RIDI_DEVICEINFO = 0x2000000b;
+
+/// If set, this removes the top level collection from the inclusion list. This
+/// tells the operating system to stop reading from a device which matches the
+/// top level collection.
+const RIDEV_REMOVE = 0x00000001;
+
+/// If set, this specifies the top level collections to exclude when reading a
+/// complete usage page. This flag only affects a TLC whose usage page is
+/// already specified with RIDEV_PAGEONLY.
+const RIDEV_EXCLUDE = 0x00000010;
+
+/// If set, this specifies all devices whose top level collection is from the
+/// specified usUsagePage. Note that usUsage must be zero. To exclude a
+/// particular top level collection, use RIDEV_EXCLUDE.
+const RIDEV_PAGEONLY = 0x00000020;
+
+/// If set, this prevents any devices specified by usUsagePage or usUsage from
+/// generating legacy messages. This is only for the mouse and keyboard.
+const RIDEV_NOLEGACY = 0x00000030;
+
+/// If set, this enables the caller to receive the input even when the caller is
+/// not in the foreground. Note that hwndTarget must be specified.
+const RIDEV_INPUTSINK = 0x00000100;
+
+/// If set, the mouse button click does not activate the other window.
+/// RIDEV_CAPTUREMOUSE can be specified only if RIDEV_NOLEGACY is specified for
+/// a mouse device.
+const RIDEV_CAPTUREMOUSE = 0x00000200;
+
+/// If set, the application-defined keyboard device hotkeys are not handled.
+/// However, the system hotkeys; for example, ALT+TAB and CTRL+ALT+DEL, are
+/// still handled. By default, all keyboard hotkeys are handled. RIDEV_NOHOTKEYS
+/// can be specified even if RIDEV_NOLEGACY is not specified and hwndTarget is
+/// NULL.
+const RIDEV_NOHOTKEYS = 0x00000200;
+
+/// If set, the application command keys are handled. RIDEV_APPKEYS can be
+/// specified only if RIDEV_NOLEGACY is specified for a keyboard device.
+const RIDEV_APPKEYS = 0x00000400;
+
+/// If set, this enables the caller to receive input in the background only if
+/// the foreground application does not process it. In other words, if the
+/// foreground application is not registered for raw input, then the background
+/// application that is registered will receive the input.
+const RIDEV_EXINPUTSINK = 0x00001000;
+
+/// If set, this enables the caller to receive WM_INPUT_DEVICE_CHANGE
+/// notifications for device arrival and device removal.
+const RIDEV_DEVNOTIFY = 0x00002000;
+
+// -----------------------------------------------------------------------------
 // COM Constants
 // -----------------------------------------------------------------------------
 

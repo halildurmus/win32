@@ -991,9 +991,9 @@ late final _EndUpdateResource = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcesses(
         Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) =>
-    _EnumProcesses(lpidProcess, cb, lpcbNeeded);
+    _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
 
-late final _EnumProcesses = _kernel32.lookupFunction<
+late final _K32EnumProcesses = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
     int Function(Pointer<Uint32> lpidProcess, int cb,
@@ -1012,9 +1012,9 @@ late final _EnumProcesses = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded) =>
-    _EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+    _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
 
-late final _EnumProcessModules = _kernel32.lookupFunction<
+late final _K32EnumProcessModules = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded),
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
@@ -1035,9 +1035,9 @@ late final _EnumProcessModules = _kernel32.lookupFunction<
 /// {@category kernel32}
 int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded, int dwFilterFlag) =>
-    _EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
+    _K32EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 
-late final _EnumProcessModulesEx = _kernel32.lookupFunction<
+late final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
     int Function(
@@ -1793,7 +1793,7 @@ int GetComputerNameEx(
 
 late final _GetComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(
-        Uint32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+        Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
     int Function(int NameType, Pointer<Utf16> lpBuffer,
         Pointer<Uint32> nSize)>('GetComputerNameExW');
 
@@ -2109,7 +2109,7 @@ int GetFileAttributesEx(Pointer<Utf16> lpFileName, int fInfoLevelId,
     _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
 
 late final _GetFileAttributesEx = _kernel32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpFileName, Uint32 fInfoLevelId,
+    Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
         Pointer lpFileInformation),
     int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
         Pointer lpFileInformation)>('GetFileAttributesExW');
@@ -2377,9 +2377,9 @@ late final _GetMaximumProcessorGroupCount =
 /// {@category kernel32}
 int GetModuleBaseName(
         int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) =>
-    _GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+    _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
 
-late final _GetModuleBaseName = _kernel32.lookupFunction<
+late final _K32GetModuleBaseName = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
@@ -2419,9 +2419,9 @@ late final _GetModuleFileName = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetModuleFileNameEx(
         int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) =>
-    _GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
+    _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
 
-late final _GetModuleFileNameEx = _kernel32.lookupFunction<
+late final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
@@ -2693,12 +2693,12 @@ late final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
+Pointer GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
     _GetProcAddress(hModule, lpProcName);
 
 late final _GetProcAddress = _kernel32.lookupFunction<
-    IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
-    int Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
+    Pointer Function(IntPtr hModule, Pointer<Utf8> lpProcName),
+    Pointer Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
 
 /// Retrieves a handle to the default heap of the calling process. This
 /// handle can then be used in subsequent calls to the heap functions.
@@ -3460,7 +3460,7 @@ int HeapQueryInformation(
 late final _HeapQueryInformation = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr HeapHandle,
-        Uint32 HeapInformationClass,
+        Int32 HeapInformationClass,
         Pointer HeapInformation,
         IntPtr HeapInformationLength,
         Pointer<IntPtr> ReturnLength),
@@ -3508,7 +3508,7 @@ int HeapSetInformation(int HeapHandle, int HeapInformationClass,
         HeapInformationLength);
 
 late final _HeapSetInformation = _kernel32.lookupFunction<
-    Int32 Function(IntPtr HeapHandle, Uint32 HeapInformationClass,
+    Int32 Function(IntPtr HeapHandle, Int32 HeapInformationClass,
         Pointer HeapInformation, IntPtr HeapInformationLength),
     int Function(
         int HeapHandle,
@@ -3996,8 +3996,12 @@ late final _QueryPerformanceFrequency = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-int ReadConsole(int hConsoleInput, Pointer lpBuffer, int nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead, Pointer<Void> pInputControl) =>
+int ReadConsole(
+        int hConsoleInput,
+        Pointer lpBuffer,
+        int nNumberOfCharsToRead,
+        Pointer<Uint32> lpNumberOfCharsRead,
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl) =>
     _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
         lpNumberOfCharsRead, pInputControl);
 
@@ -4007,13 +4011,13 @@ late final _ReadConsole = _kernel32.lookupFunction<
         Pointer lpBuffer,
         Uint32 nNumberOfCharsToRead,
         Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<Void> pInputControl),
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl),
     int Function(
         int hConsoleInput,
         Pointer lpBuffer,
         int nNumberOfCharsToRead,
         Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer<Void> pInputControl)>('ReadConsoleW');
+        Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl)>('ReadConsoleW');
 
 /// Reads data from the specified file or input/output (I/O) device. Reads
 /// occur at the position specified by the file pointer if supported by the

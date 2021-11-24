@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/projection/typeprinter.dart';
 import '../metadata/utils.dart';
+import '../projection/callback.dart';
 import 'exclusions.dart';
 import 'win32_functions.dart';
 
@@ -32,8 +32,7 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
   final buffer = StringBuffer();
 
   for (final callback in callbacks) {
-    buffer.write(
-        TypePrinter.printCallback(callback, callback.name.split('.').last));
+    buffer.write(CallbackProjection(callback).toString());
 
     final invokeMethod = callback.findMethod('Invoke');
     if (invokeMethod != null) {

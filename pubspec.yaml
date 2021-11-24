@@ -6,7 +6,7 @@ repository: https://github.com/timsneath/win32
 issue_tracker: https://github.com/timsneath/win32/issues
 
 environment:
-  sdk: '>=2.13.0 <3.0.0'
+  sdk: '>=2.14.0 <3.0.0'
 
 dependencies:
   ffi: ^1.0.0
@@ -15,8 +15,9 @@ dev_dependencies:
   args: ^2.3.0
   lints: ^1.0.1
   path: ^1.8.0
-  test: ^1.19.1
-  winmd: 1.0.10
+  test: ^1.19.3
+  winmd: 1.0.16 # Pinned deliberately
 
 dependency_overrides:
-  winmd: 1.0.10
+   winmd: 1.0.16
+    #  path: ../winmd

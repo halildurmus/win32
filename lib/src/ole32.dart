@@ -113,15 +113,19 @@ late final _CoCreateGuid = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-int CoCreateInstance(Pointer<GUID> rclsid, Pointer pUnkOuter, int dwClsContext,
-        Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+int CoCreateInstance(Pointer<GUID> rclsid, Pointer<COMObject> pUnkOuter,
+        int dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv);
 
 late final _CoCreateInstance = _ole32.lookupFunction<
-    Int32 Function(Pointer<GUID> rclsid, Pointer pUnkOuter, Uint32 dwClsContext,
-        Pointer<GUID> riid, Pointer<Pointer> ppv),
-    int Function(Pointer<GUID> rclsid, Pointer pUnkOuter, int dwClsContext,
-        Pointer<GUID> riid, Pointer<Pointer> ppv)>('CoCreateInstance');
+    Int32 Function(Pointer<GUID> rclsid, Pointer<COMObject> pUnkOuter,
+        Uint32 dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv),
+    int Function(
+        Pointer<GUID> rclsid,
+        Pointer<COMObject> pUnkOuter,
+        int dwClsContext,
+        Pointer<GUID> riid,
+        Pointer<Pointer> ppv)>('CoCreateInstance');
 
 /// Provides a pointer to an interface on a class object associated with a
 /// specified CLSID. CoGetClassObject locates, and if necessary,
@@ -216,7 +220,7 @@ late final _CoInitializeSecurity = _ole32.lookupFunction<
         Uint32 dwAuthnLevel,
         Uint32 dwImpLevel,
         Pointer pAuthList,
-        Uint32 dwCapabilities,
+        Int32 dwCapabilities,
         Pointer pReserved3),
     int Function(
         Pointer<SECURITY_DESCRIPTOR> pSecDesc,
@@ -247,7 +251,7 @@ late final _CoInitializeSecurity = _ole32.lookupFunction<
 /// ```
 /// {@category ole32}
 int CoSetProxyBlanket(
-        Pointer pProxy,
+        Pointer<COMObject> pProxy,
         int dwAuthnSvc,
         int dwAuthzSvc,
         Pointer<Utf16> pServerPrincName,
@@ -260,16 +264,16 @@ int CoSetProxyBlanket(
 
 late final _CoSetProxyBlanket = _ole32.lookupFunction<
     Int32 Function(
-        Pointer pProxy,
+        Pointer<COMObject> pProxy,
         Uint32 dwAuthnSvc,
         Uint32 dwAuthzSvc,
         Pointer<Utf16> pServerPrincName,
         Uint32 dwAuthnLevel,
         Uint32 dwImpLevel,
         Pointer pAuthInfo,
-        Uint32 dwCapabilities),
+        Int32 dwCapabilities),
     int Function(
-        Pointer pProxy,
+        Pointer<COMObject> pProxy,
         int dwAuthnSvc,
         int dwAuthzSvc,
         Pointer<Utf16> pServerPrincName,

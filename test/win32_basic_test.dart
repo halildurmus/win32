@@ -20,7 +20,7 @@ void main() {
 
     final ansi = 'Beep'.toANSI();
     final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
-    expect(pGetNativeSystemInfo, isNonZero);
+    expect(pGetNativeSystemInfo.address, isNonZero);
     free(ansi);
   });
 

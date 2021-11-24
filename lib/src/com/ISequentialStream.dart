@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
@@ -22,33 +23,35 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
 
-typedef _Read_Native = Int32 Function(
-    Pointer obj, Pointer pv, Uint32 cb, Pointer<Uint32> pcbRead);
-typedef _Read_Dart = int Function(
-    Pointer obj, Pointer pv, int cb, Pointer<Uint32> pcbRead);
-
-typedef _Write_Native = Int32 Function(
-    Pointer obj, Pointer pv, Uint32 cb, Pointer<Uint32> pcbWritten);
-typedef _Write_Dart = int Function(
-    Pointer obj, Pointer pv, int cb, Pointer<Uint32> pcbWritten);
-
 /// {@category Interface}
 /// {@category com}
 class ISequentialStream extends IUnknown {
   // vtable begins at 3, ends at 4
-
   ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.lpVtbl.value
       .elementAt(3)
-      .cast<Pointer<NativeFunction<_Read_Native>>>()
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer pv, Uint32 cb,
+                      Pointer<Uint32> pcbRead)>>>()
       .value
-      .asFunction<_Read_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
+      .asFunction<
+          int Function(Pointer, Pointer pv, int cb,
+              Pointer<Uint32> pcbRead)>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
-      ptr.ref.lpVtbl.value
+  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr
+          .ref.lpVtbl.value
           .elementAt(4)
-          .cast<Pointer<NativeFunction<_Write_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Pointer pv, Uint32 cb,
+                          Pointer<Uint32> pcbWritten)>>>()
           .value
-          .asFunction<_Write_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
+          .asFunction<
+              int Function(
+                  Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)>()(
+      ptr.ref.lpVtbl, pv, cb, pcbWritten);
 }
