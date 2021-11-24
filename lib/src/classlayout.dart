@@ -9,6 +9,10 @@ import 'scope.dart';
 
 /// A tuple of a field and its byte offset within a parent struct.
 class FieldOffset extends TokenObject {
+  /// The byte offset of a specific field relative to its parent struct.
+  ///
+  /// Normally fields are located consecutively within a struct, but in a union
+  /// the fields are aligned with the 0th index of the struct.
   final int offset;
 
   const FieldOffset(Scope scope, int fieldToken, this.offset)
