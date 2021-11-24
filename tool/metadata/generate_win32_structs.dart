@@ -90,12 +90,13 @@ int generateStructs(Win32API win32) {
   for (final struct in win32.structs.keys) {
     final win32struct = win32.structs[struct]!;
     final typeDefs = scope.typeDefs
-        .where((typeDef) => typeDef.name == win32struct.namespace);
+        .where((typeDef) => typeDef.name == win32struct.namespace)
+        .toList();
     if (typeDefs.isEmpty) {
       throw Exception('$struct missing');
     }
     if (typeDefs.length > 1) {
-      typeDefs.toList().retainWhere(supports64Bit);
+      typeDefs.retainWhere(supports64Bit);
     }
     final typeDef = typeDefs.first;
 
