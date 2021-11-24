@@ -198,7 +198,8 @@ class Method extends TokenObject
   // TODO: Remove this check when
   // https://github.com/microsoft/win32metadata/issues/707 is fixed
   bool get _isFakeGetProperty =>
-      parameters.length != 1 || !parameters.first.isOutParam;
+      parent.name.startsWith('Windows.Win32') &&
+      (parameters.length != 1 || !parameters.first.isOutParam);
 
   /// Returns true if the method is a property getter
   bool get isGetProperty =>
