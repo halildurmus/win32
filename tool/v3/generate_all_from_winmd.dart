@@ -196,19 +196,19 @@ void generateLibraryExport(List<String> namespaces) {
 // Example:
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  final namespaces = ['Windows.Win32.System.Kernel'];
-  // final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
+  // final namespaces = ['Windows.Win32.Data.Xml.MsXml'];
+  final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
 
   for (final namespace in namespaces) {
     print('Generating $namespace...');
 
     createDirectory(namespace);
-    generateWin32Functions(namespace);
-    generateWin32Structs(namespace);
+    // generateWin32Functions(namespace);
+    // generateWin32Structs(namespace);
     // generateWin32Enums(namespace);
     // generateWin32Constants(namespace);
     // generateWin32Callbacks(namespace);
-    // generateComInterfaces(namespace);
+    generateComInterfaces(namespace);
   }
   // generateLibraryExport(namespaces);
 }

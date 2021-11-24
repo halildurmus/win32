@@ -11,9 +11,7 @@ class InterfaceProjection {
   InterfaceProjection(this.typeDef) {
     var vtableOffset = vtableStart;
     for (final method in typeDef.methods) {
-      // TODO: Remove params check when
-      // https://github.com/microsoft/win32metadata/issues/707 is fixed
-      if (method.isGetProperty && method.parameters.isNotEmpty) {
+      if (method.isGetProperty) {
         final getPropertyProjection =
             GetPropertyProjection(method, vtableOffset++);
         methodProjections.add(getPropertyProjection);
