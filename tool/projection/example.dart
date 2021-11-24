@@ -11,10 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct =
-      scope.findTypeDef('Windows.Win32.UI.Controls.Dialogs.OPENFILENAMEW');
+  final struct = scope
+      .findTypeDef('Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'OPENFILENAME');
+    final structProjection = StructProjection(struct, 'WLAN_RAW_DATA_LIST');
     print(structProjection);
   }
 }
@@ -92,5 +92,5 @@ void printComClass() {
 }
 
 void main() {
-  printComClass();
+  printStruct();
 }

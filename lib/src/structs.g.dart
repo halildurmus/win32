@@ -140,6 +140,27 @@ class addrinfo extends Struct {
   external Pointer<addrinfo> ai_next;
 }
 
+/// Represents package settings used to create a package.
+///
+/// {@category Struct}
+class APPX_PACKAGE_SETTINGS extends Struct {
+  @Int32()
+  external int forceZip32;
+
+  external Pointer<COMObject> hashMethod;
+}
+
+/// Describes an array, its element type, and its dimension.
+///
+/// {@category Struct}
+class ARRAYDESC extends Struct {
+  external TYPEDESC tdescElem;
+  @Uint16()
+  external int cDims;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgbounds;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
@@ -247,6 +268,66 @@ class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth
+/// device.
+///
+/// {@category Struct}
+class BLUETOOTH_ADDRESS extends Struct {
+  external _BLUETOOTH_ADDRESS__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int ullLong;
+  @Array(6)
+  external Array<Uint8> rgBytes;
+}
+
+extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
+  int get ullLong => Anonymous.ullLong;
+  set ullLong(int value) => Anonymous.ullLong = value;
+
+  Array<Uint8> get rgBytes => Anonymous.rgBytes;
+  set rgBytes(Array<Uint8> value) => Anonymous.rgBytes = value;
+}
+
+/// The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains
+/// specific configuration information about the Bluetooth device
+/// responding to an authentication request.
+///
+/// {@category Struct}
+class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  @Int32()
+  external int authenticationMethod;
+  @Int32()
+  external int ioCapability;
+  @Int32()
+  external int authenticationRequirements;
+
+  external _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
+      Anonymous;
+}
+
+/// {@category Struct}
+class _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union
+    extends Union {
+  @Uint32()
+  external int Numeric_Value;
+  @Uint32()
+  external int Passkey;
+}
+
+extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
+    on BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+  int get Numeric_Value => Anonymous.Numeric_Value;
+  set Numeric_Value(int value) => Anonymous.Numeric_Value = value;
+
+  int get Passkey => Anonymous.Passkey;
+  set Passkey(int value) => Anonymous.Passkey = value;
+}
+
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a
 /// Bluetooth device.
 ///
@@ -328,6 +409,17 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
   external Array<Uint8> C;
   @Array(16)
   external Array<Uint8> R;
+}
+
+/// The BLUETOOTH_PIN_INFO structure contains information used for
+/// authentication via PIN.
+///
+/// {@category Struct}
+class BLUETOOTH_PIN_INFO extends Struct {
+  @Array(16)
+  external Array<Uint8> pin;
+  @Uint8()
+  external int pinLength;
 }
 
 /// The BLUETOOTH_RADIO_INFO structure provides information about a
@@ -437,6 +529,33 @@ class CHANGEFILTERSTRUCT extends Struct {
   external int cbSize;
   @Uint32()
   external int ExtStatus;
+}
+
+/// Specifies a Unicode or ANSI character and its attributes. This
+/// structure is used by console functions to read from and write to a
+/// console screen buffer.
+///
+/// {@category Struct}
+class CHAR_INFO extends Struct {
+  external _CHAR_INFO__Char_e__Union Char;
+  @Uint16()
+  external int Attributes;
+}
+
+/// {@category Struct}
+class _CHAR_INFO__Char_e__Union extends Union {
+  @Uint16()
+  external int UnicodeChar;
+  @Uint8()
+  external int AsciiChar;
+}
+
+extension CHAR_INFO_Extension on CHAR_INFO {
+  int get UnicodeChar => Char.UnicodeChar;
+  set UnicodeChar(int value) => Char.UnicodeChar = value;
+
+  int get AsciiChar => Char.AsciiChar;
+  set AsciiChar(int value) => Char.AsciiChar = value;
 }
 
 /// Contains information the ChooseColor function uses to initialize the
@@ -1225,6 +1344,31 @@ class EAP_TYPE extends Struct {
   external int dwVendorType;
 }
 
+/// Contains the type description and process-transfer information for a
+/// variable, a function, or a function parameter.
+///
+/// {@category Struct}
+class ELEMDESC extends Struct {
+  external TYPEDESC tdesc;
+
+  external _ELEMDESC__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _ELEMDESC__Anonymous_e__Union extends Union {
+  external IDLDESC idldesc;
+
+  external PARAMDESC paramdesc;
+}
+
+extension ELEMDESC_Extension on ELEMDESC {
+  IDLDESC get idldesc => Anonymous.idldesc;
+  set idldesc(IDLDESC value) => Anonymous.idldesc = value;
+
+  PARAMDESC get paramdesc => Anonymous.paramdesc;
+  set paramdesc(PARAMDESC value) => Anonymous.paramdesc = value;
+}
+
 /// The ENUMLOGFONTEX structure contains information about an enumerated
 /// font.
 ///
@@ -1617,6 +1761,37 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwSize;
   @Uint32()
   external int dwICC;
+}
+
+/// Used by SendInput to store information for synthesizing input events
+/// such as keystrokes, mouse movement, and mouse clicks.
+///
+/// {@category Struct}
+class INPUT extends Struct {
+  @Uint32()
+  external int type;
+
+  external _INPUT__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _INPUT__Anonymous_e__Union extends Union {
+  external MOUSEINPUT mi;
+
+  external KEYBDINPUT ki;
+
+  external HARDWAREINPUT hi;
+}
+
+extension INPUT_Extension on INPUT {
+  MOUSEINPUT get mi => Anonymous.mi;
+  set mi(MOUSEINPUT value) => Anonymous.mi = value;
+
+  KEYBDINPUT get ki => Anonymous.ki;
+  set ki(KEYBDINPUT value) => Anonymous.ki = value;
+
+  HARDWAREINPUT get hi => Anonymous.hi;
+  set hi(HARDWAREINPUT value) => Anonymous.hi = value;
 }
 
 /// Contains a list of item identifiers.
@@ -2569,6 +2744,106 @@ class NONCLIENTMETRICS extends Struct {
   external int iPaddedBorderWidth;
 }
 
+/// Contains information that the system needs to display notifications in
+/// the notification area. Used by Shell_NotifyIcon.
+///
+/// {@category Struct}
+class NOTIFYICONDATA extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hWnd;
+  @Uint32()
+  external int uID;
+  @Uint32()
+  external int uFlags;
+  @Uint32()
+  external int uCallbackMessage;
+  @IntPtr()
+  external int hIcon;
+  @Array(128)
+  external Array<Uint16> _szTip;
+
+  String get szTip {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szTip[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szTip(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szTip[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwState;
+  @Uint32()
+  external int dwStateMask;
+  @Array(256)
+  external Array<Uint16> _szInfo;
+
+  String get szInfo {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_szInfo[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szInfo(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _szInfo[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  external _NOTIFYICONDATAW__Anonymous_e__Union Anonymous;
+  @Array(64)
+  external Array<Uint16> _szInfoTitle;
+
+  String get szInfoTitle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_szInfoTitle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szInfoTitle(String value) {
+    final stringToStore = value.padRight(64, '\x00');
+    for (var i = 0; i < 64; i++) {
+      _szInfoTitle[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwInfoFlags;
+
+  external GUID guidItem;
+  @IntPtr()
+  external int hBalloonIcon;
+}
+
+/// {@category Struct}
+class _NOTIFYICONDATAW__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int uTimeout;
+  @Uint32()
+  external int uVersion;
+}
+
+extension NOTIFYICONDATA_Extension on NOTIFYICONDATA {
+  int get uTimeout => Anonymous.uTimeout;
+  set uTimeout(int value) => Anonymous.uTimeout = value;
+
+  int get uVersion => Anonymous.uVersion;
+  set uVersion(int value) => Anonymous.uVersion = value;
+}
+
 /// The OPENCARD_SEARCH_CRITERIA structure is used by the
 /// SCardUIDlgSelectCard function in order to recognize cards that meet the
 /// requirements set forth by the caller. You can, however, call
@@ -3198,6 +3473,34 @@ class PROPERTYKEY extends Struct {
   external int pid;
 }
 
+/// The PROPSPEC structure is used by many of the methods of
+/// IPropertyStorage to specify a property either by its property
+/// identifier (ID) or the associated string name.
+///
+/// {@category Struct}
+class PROPSPEC extends Struct {
+  @Uint32()
+  external int ulKind;
+
+  external _PROPSPEC__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _PROPSPEC__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int propid;
+
+  external Pointer<Utf16> lpwstr;
+}
+
+extension PROPSPEC_Extension on PROPSPEC {
+  int get propid => Anonymous.propid;
+  set propid(int value) => Anonymous.propid = value;
+
+  Pointer<Utf16> get lpwstr => Anonymous.lpwstr;
+  set lpwstr(Pointer<Utf16> value) => Anonymous.lpwstr = value;
+}
+
 /// The protoent structure contains the name and protocol numbers that
 /// correspond to a given protocol name. Applications must never attempt to
 /// modify this structure or to free any of its components. Furthermore,
@@ -3225,6 +3528,35 @@ class RAWHID extends Struct {
   external int dwCount;
   @Array(1)
   external Array<Uint8> bRawData;
+}
+
+/// Contains the raw input from a device.
+///
+/// {@category Struct}
+class RAWINPUT extends Struct {
+  external RAWINPUTHEADER header;
+
+  external _RAWINPUT__data_e__Union data;
+}
+
+/// {@category Struct}
+class _RAWINPUT__data_e__Union extends Union {
+  external RAWMOUSE mouse;
+
+  external RAWKEYBOARD keyboard;
+
+  external RAWHID hid;
+}
+
+extension RAWINPUT_Extension on RAWINPUT {
+  RAWMOUSE get mouse => data.mouse;
+  set mouse(RAWMOUSE value) => data.mouse = value;
+
+  RAWKEYBOARD get keyboard => data.keyboard;
+  set keyboard(RAWKEYBOARD value) => data.keyboard = value;
+
+  RAWHID get hid => data.hid;
+  set hid(RAWHID value) => data.hid = value;
 }
 
 /// Defines information for the raw input devices.
@@ -3505,6 +3837,58 @@ class SHELL_ITEM_RESOURCE extends Struct {
   }
 }
 
+/// Contains information used by ShellExecuteEx.
+///
+/// {@category Struct}
+class SHELLEXECUTEINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int fMask;
+  @IntPtr()
+  external int hwnd;
+
+  external Pointer<Utf16> lpVerb;
+
+  external Pointer<Utf16> lpFile;
+
+  external Pointer<Utf16> lpParameters;
+
+  external Pointer<Utf16> lpDirectory;
+  @Int32()
+  external int nShow;
+  @IntPtr()
+  external int hInstApp;
+
+  external Pointer lpIDList;
+
+  external Pointer<Utf16> lpClass;
+  @IntPtr()
+  external int hkeyClass;
+  @Uint32()
+  external int dwHotKey;
+
+  external _SHELLEXECUTEINFOW__Anonymous_e__Union Anonymous;
+  @IntPtr()
+  external int hProcess;
+}
+
+/// {@category Struct}
+class _SHELLEXECUTEINFOW__Anonymous_e__Union extends Union {
+  @IntPtr()
+  external int hIcon;
+  @IntPtr()
+  external int hMonitor;
+}
+
+extension SHELLEXECUTEINFO_Extension on SHELLEXECUTEINFO {
+  int get hIcon => Anonymous.hIcon;
+  set hIcon(int value) => Anonymous.hIcon = value;
+
+  int get hMonitor => Anonymous.hMonitor;
+  set hMonitor(int value) => Anonymous.hMonitor = value;
+}
+
 /// Defines an item identifier.
 ///
 /// {@category Struct}
@@ -3637,6 +4021,17 @@ class STARTUPINFO extends Struct {
   external int hStdError;
 }
 
+/// Specifies the window station, desktop, standard handles, and attributes
+/// for a new process. It is used with the CreateProcess and
+/// CreateProcessAsUser functions.
+///
+/// {@category Struct}
+class STARTUPINFOEX extends Struct {
+  external STARTUPINFO StartupInfo;
+
+  external Pointer lpAttributeList;
+}
+
 /// The STATPROPSETSTG structure contains information about a property set.
 ///
 /// {@category Struct}
@@ -3696,6 +4091,36 @@ class STATSTG extends Struct {
   external int grfStateBits;
   @Uint32()
   external int reserved;
+}
+
+/// Contains strings returned from the IShellFolder interface methods.
+///
+/// {@category Struct}
+class STRRET extends Struct {
+  @Uint32()
+  external int uType;
+
+  external _STRRET__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _STRRET__Anonymous_e__Union extends Union {
+  external Pointer<Utf16> pOleStr;
+  @Uint32()
+  external int uOffset;
+  @Array(260)
+  external Array<Uint8> cStr;
+}
+
+extension STRRET_Extension on STRRET {
+  Pointer<Utf16> get pOleStr => Anonymous.pOleStr;
+  set pOleStr(Pointer<Utf16> value) => Anonymous.pOleStr = value;
+
+  int get uOffset => Anonymous.uOffset;
+  set uOffset(int value) => Anonymous.uOffset = value;
+
+  Array<Uint8> get cStr => Anonymous.cStr;
+  set cStr(Array<Uint8> value) => Anonymous.cStr = value;
 }
 
 /// Contains the styles for a window.
@@ -3843,6 +4268,96 @@ class TASKDIALOG_BUTTON extends Struct {
   external int nButtonID;
 
   external Pointer<Utf16> pszButtonText;
+}
+
+/// The TASKDIALOGCONFIG structure contains information used to display a
+/// task dialog. The TaskDialogIndirect function uses this structure.
+///
+/// {@category Struct}
+@Packed(1)
+class TASKDIALOGCONFIG extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hwndParent;
+  @IntPtr()
+  external int hInstance;
+  @Int32()
+  external int dwFlags;
+  @Int32()
+  external int dwCommonButtons;
+
+  external Pointer<Utf16> pszWindowTitle;
+
+  external _TASKDIALOGCONFIG__Anonymous1_e__Union Anonymous1;
+
+  external Pointer<Utf16> pszMainInstruction;
+
+  external Pointer<Utf16> pszContent;
+  @Uint32()
+  external int cButtons;
+
+  external Pointer<TASKDIALOG_BUTTON> pButtons;
+  @Int32()
+  external int nDefaultButton;
+  @Uint32()
+  external int cRadioButtons;
+
+  external Pointer<TASKDIALOG_BUTTON> pRadioButtons;
+  @Int32()
+  external int nDefaultRadioButton;
+
+  external Pointer<Utf16> pszVerificationText;
+
+  external Pointer<Utf16> pszExpandedInformation;
+
+  external Pointer<Utf16> pszExpandedControlText;
+
+  external Pointer<Utf16> pszCollapsedControlText;
+
+  external _TASKDIALOGCONFIG__Anonymous2_e__Union Anonymous2;
+
+  external Pointer<Utf16> pszFooter;
+
+  external Pointer<NativeFunction<TaskDialogCallbackProc>> pfCallback;
+  @IntPtr()
+  external int lpCallbackData;
+  @Uint32()
+  external int cxWidth;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _TASKDIALOGCONFIG__Anonymous1_e__Union extends Union {
+  @IntPtr()
+  external int hMainIcon;
+
+  external Pointer<Utf16> pszMainIcon;
+}
+
+extension TASKDIALOGCONFIG_Extension on TASKDIALOGCONFIG {
+  int get hMainIcon => Anonymous1.hMainIcon;
+  set hMainIcon(int value) => Anonymous1.hMainIcon = value;
+
+  Pointer<Utf16> get pszMainIcon => Anonymous1.pszMainIcon;
+  set pszMainIcon(Pointer<Utf16> value) => Anonymous1.pszMainIcon = value;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _TASKDIALOGCONFIG__Anonymous2_e__Union extends Union {
+  @IntPtr()
+  external int hFooterIcon;
+
+  external Pointer<Utf16> pszFooterIcon;
+}
+
+extension TASKDIALOGCONFIG_Extension_1 on TASKDIALOGCONFIG {
+  int get hFooterIcon => Anonymous2.hFooterIcon;
+  set hFooterIcon(int value) => Anonymous2.hFooterIcon = value;
+
+  Pointer<Utf16> get pszFooterIcon => Anonymous2.pszFooterIcon;
+  set pszFooterIcon(Pointer<Utf16> value) => Anonymous2.pszFooterIcon = value;
 }
 
 /// The TEXTMETRIC structure contains basic information about a physical
@@ -4019,6 +4534,36 @@ class TYPEATTR extends Struct {
   external IDLDESC idldescType;
 }
 
+/// Describes the type of a variable, the return type of a function, or the
+/// type of a function parameter.
+///
+/// {@category Struct}
+class TYPEDESC extends Struct {
+  external _TYPEDESC__Anonymous_e__Union Anonymous;
+  @Uint16()
+  external int vt;
+}
+
+/// {@category Struct}
+class _TYPEDESC__Anonymous_e__Union extends Union {
+  external Pointer<TYPEDESC> lptdesc;
+
+  external Pointer<ARRAYDESC> lpadesc;
+  @Uint32()
+  external int hreftype;
+}
+
+extension TYPEDESC_Extension on TYPEDESC {
+  Pointer<TYPEDESC> get lptdesc => Anonymous.lptdesc;
+  set lptdesc(Pointer<TYPEDESC> value) => Anonymous.lptdesc = value;
+
+  Pointer<ARRAYDESC> get lpadesc => Anonymous.lpadesc;
+  set lpadesc(Pointer<ARRAYDESC> value) => Anonymous.lpadesc = value;
+
+  int get hreftype => Anonymous.hreftype;
+  set hreftype(int value) => Anonymous.hreftype = value;
+}
+
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
 /// represents a generic ratio and is used for different purposes and units
 /// even within a single API.
@@ -4071,6 +4616,40 @@ class VALENT extends Struct {
   external int ve_valueptr;
   @Uint32()
   external int ve_type;
+}
+
+/// Describes a variable, constant, or data member.
+///
+/// {@category Struct}
+class VARDESC extends Struct {
+  @Int32()
+  external int memid;
+
+  external Pointer<Utf16> lpstrSchema;
+
+  external _VARDESC__Anonymous_e__Union Anonymous;
+
+  external ELEMDESC elemdescVar;
+  @Uint16()
+  external int wVarFlags;
+  @Int32()
+  external int varkind;
+}
+
+/// {@category Struct}
+class _VARDESC__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int oInst;
+
+  external Pointer<VARIANT> lpvarValue;
+}
+
+extension VARDESC_Extension on VARDESC {
+  int get oInst => Anonymous.oInst;
+  set oInst(int value) => Anonymous.oInst = value;
+
+  Pointer<VARIANT> get lpvarValue => Anonymous.lpvarValue;
+  set lpvarValue(Pointer<VARIANT> value) => Anonymous.lpvarValue = value;
 }
 
 /// Contains version information for a file. This information is language
@@ -4933,6 +5512,27 @@ class WLAN_RAW_DATA extends Struct {
   external int dwDataSize;
   @Array(1)
   external Array<Uint8> DataBlob;
+}
+
+/// The WLAN_RAW_DATA_LIST structure contains raw data in the form of an
+/// array of data blobs that are used by some Native Wifi functions.
+///
+/// {@category Struct}
+class WLAN_RAW_DATA_LIST extends Struct {
+  @Uint32()
+  external int dwTotalSize;
+  @Uint32()
+  external int dwNumberOfItems;
+  @Array(1)
+  external Array<_WLAN_RAW_DATA_LIST__Anonymous_e__Struct> DataList;
+}
+
+/// {@category Struct}
+class _WLAN_RAW_DATA_LIST__Anonymous_e__Struct extends Struct {
+  @Uint32()
+  external int dwDataOffset;
+  @Uint32()
+  external int dwDataSize;
 }
 
 /// The WLAN_SECURITY_ATTRIBUTES structure defines the security attributes

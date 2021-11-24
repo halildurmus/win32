@@ -19,6 +19,14 @@
         "namespace": "Windows.Win32.Networking.WinSock.addrinfoW",
         "comment": "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information."
     },
+    "APPX_PACKAGE_SETTINGS": {
+        "namespace": "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS",
+        "comment": "Represents package settings used to create a package."
+    },
+    "ARRAYDESC": {
+        "namespace": "Windows.Win32.System.Ole.ARRAYDESC",
+        "comment": "Describes an array, its element type, and its dimension."
+    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.System.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
@@ -43,6 +51,14 @@
         "namespace": "Windows.Win32.Graphics.Gdi.BLENDFUNCTION",
         "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
     },
+    "BLUETOOTH_ADDRESS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS",
+        "comment": "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device."
+    },
+    "BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS",
+        "comment": "The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific configuration information about the Bluetooth device responding to an authentication request."
+    },
     "BLUETOOTH_DEVICE_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO",
         "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
@@ -58,6 +74,10 @@
     "BLUETOOTH_OOB_DATA_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
         "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
+    },
+    "BLUETOOTH_PIN_INFO": {
+        "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_PIN_INFO",
+        "comment": "The BLUETOOTH_PIN_INFO structure contains information used for authentication via PIN."
     },
     "BLUETOOTH_RADIO_INFO": {
         "namespace": "Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO",
@@ -82,6 +102,10 @@
     "CHANGEFILTERSTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CHANGEFILTERSTRUCT",
         "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
+    },
+    "CHAR_INFO": {
+        "namespace": "Windows.Win32.System.Console.CHAR_INFO",
+        "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
     },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW",
@@ -247,6 +271,10 @@
         "namespace": "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EAP_TYPE",
         "comment": "The EAP_TYPE structure contains type and vendor identification information for an EAP method."
     },
+    "ELEMDESC": {
+        "namespace": "Windows.Win32.System.Com.ELEMDESC",
+        "comment": "Contains the type description and process-transfer information for a variable, a function, or a function parameter."
+    },
     "ENUMLOGFONTEX": {
         "namespace": "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW",
         "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
@@ -314,6 +342,10 @@
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.UI.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
+    },
+    "INPUT": {
+        "namespace": "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT",
+        "comment": "Used by SendInput to store information for synthesizing input events such as keystrokes, mouse movement, and mouse clicks."
     },
     "ITEMIDLIST": {
         "namespace": "Windows.Win32.UI.Shell.Common.ITEMIDLIST",
@@ -499,6 +531,10 @@
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.NONCLIENTMETRICSW",
         "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
     },
+    "NOTIFYICONDATA": {
+        "namespace": "Windows.Win32.UI.Shell.NOTIFYICONDATAW",
+        "comment": "Contains information that the system needs to display notifications in the notification area. Used by Shell_NotifyIcon."
+    },
     "OPENCARD_SEARCH_CRITERIA": {
         "namespace": "Windows.Win32.Security.Credentials.OPENCARD_SEARCH_CRITERIAW",
         "comment": "The OPENCARD_SEARCH_CRITERIA structure is used by the SCardUIDlgSelectCard function in order to recognize cards that meet the requirements set forth by the caller. You can, however, call SCardUIDlgSelectCard without using this structure."
@@ -619,6 +655,10 @@
         "namespace": "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY",
         "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
+    "PROPSPEC": {
+        "namespace": "Windows.Win32.System.Com.StructuredStorage.PROPSPEC",
+        "comment": "The PROPSPEC structure is used by many of the methods of IPropertyStorage to specify a property either by its property identifier (ID) or the associated string name."
+    },
     "protoent": {
         "namespace": "Windows.Win32.Networking.WinSock.protoent",
         "comment": "The protoent structure contains the name and protocol numbers that correspond to a given protocol name. Applications must never attempt to modify this structure or to free any of its components. Furthermore, only one copy of this structure is allocated per thread, and therefore, the application should copy any information it needs before issuing any other Windows Sockets function calls."
@@ -626,6 +666,10 @@
     "RAWHID": {
         "namespace": "Windows.Win32.UI.Input.RAWHID",
         "comment": "Describes the format of the raw input from a Human Interface Device (HID)."
+    },
+    "RAWINPUT": {
+        "namespace": "Windows.Win32.UI.Input.RAWINPUT",
+        "comment": "Contains the raw input from a device."
     },
     "RAWINPUTDEVICE": {
         "namespace": "Windows.Win32.UI.Input.RAWINPUTDEVICE",
@@ -695,6 +739,10 @@
         "namespace": "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE",
         "comment": "Defines Shell item resource."
     },
+    "SHELLEXECUTEINFO": {
+        "namespace": "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW",
+        "comment": "Contains information used by ShellExecuteEx."
+    },
     "SHITEMID": {
         "namespace": "Windows.Win32.UI.Shell.Common.SHITEMID",
         "comment": "Defines an item identifier."
@@ -727,6 +775,10 @@
         "namespace": "Windows.Win32.System.Threading.STARTUPINFOW",
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."
     },
+    "STARTUPINFOEX": {
+        "namespace": "Windows.Win32.System.Threading.STARTUPINFOEXW",
+        "comment": "Specifies the window station, desktop, standard handles, and attributes for a new process. It is used with the CreateProcess and CreateProcessAsUser functions."
+    },
     "STATPROPSETSTG": {
         "namespace": "Windows.Win32.System.Com.StructuredStorage.STATPROPSETSTG",
         "comment": "The STATPROPSETSTG structure contains information about a property set."
@@ -738,6 +790,10 @@
     "STATSTG": {
         "namespace": "Windows.Win32.System.Com.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
+    },
+    "STRRET": {
+        "namespace": "Windows.Win32.UI.Shell.Common.STRRET",
+        "comment": "Contains strings returned from the IShellFolder interface methods."
     },
     "STYLESTRUCT": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.STYLESTRUCT",
@@ -762,6 +818,10 @@
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.UI.Controls.TASKDIALOG_BUTTON",
         "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
+    },
+    "TASKDIALOGCONFIG": {
+        "namespace": "Windows.Win32.UI.Controls.TASKDIALOGCONFIG",
+        "comment": "The TASKDIALOGCONFIG structure contains information used to display a task dialog. The TaskDialogIndirect function uses this structure."
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Graphics.Gdi.TEXTMETRICW",
@@ -795,6 +855,10 @@
         "namespace": "Windows.Win32.System.Com.TYPEATTR",
         "comment": "Contains attributes of a type."
     },
+    "TYPEDESC": {
+        "namespace": "Windows.Win32.System.Com.TYPEDESC",
+        "comment": "Describes the type of a variable, the return type of a function, or the type of a function parameter."
+    },
     "UNSIGNED_RATIO": {
         "namespace": "Windows.Win32.Graphics.Dwm.UNSIGNED_RATIO",
         "comment": "Defines a data type used by the Desktop Window Manager (DWM) APIs. It represents a generic ratio and is used for different purposes and units even within a single API."
@@ -806,6 +870,10 @@
     "VALENT": {
         "namespace": "Windows.Win32.System.Registry.VALENTW",
         "comment": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure."
+    },
+    "VARDESC": {
+        "namespace": "Windows.Win32.System.Com.VARDESC",
+        "comment": "Describes a variable, constant, or data member."
     },
     "VS_FIXEDFILEINFO": {
         "namespace": "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO",
@@ -958,6 +1026,10 @@
     "WLAN_RAW_DATA": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA",
         "comment": "The WLAN_RAW_DATA structure contains raw data in the form of a blob that is used by some Native Wifi functions."
+    },
+    "WLAN_RAW_DATA_LIST": {
+        "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST",
+        "comment": "The WLAN_RAW_DATA_LIST structure contains raw data in the form of an array of data blobs that are used by some Native Wifi functions."
     },
     "WLAN_SECURITY_ATTRIBUTES": {
         "namespace": "Windows.Win32.NetworkManagement.WiFi.WLAN_SECURITY_ATTRIBUTES",

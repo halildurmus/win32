@@ -69,6 +69,15 @@ import 'oleaut32.dart';
 import 'structs.dart';
 ''';
 
+bool supports64Bit(TypeDef type) {
+  final supportedArchAttribute = type.customAttributes.where((attr) =>
+      attr.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute');
+
+  // [0x01, 00x00] prolog, then first digit is arch attribute.
+  final arch = Architecture(supportedArchAttribute.first.signatureBlob[2]);
+  return arch.x64;
+}
+
 int generateStructs(Win32API win32) {
   final scope = MetadataStore.getWin32Scope();
 
@@ -80,15 +89,21 @@ int generateStructs(Win32API win32) {
 
   for (final struct in win32.structs.keys) {
     final win32struct = win32.structs[struct]!;
-    final typedef = scope.findTypeDef(win32struct.namespace);
-    if (typedef == null) {
+    final typeDefs = scope.typeDefs
+        .where((typeDef) => typeDef.name == win32struct.namespace)
+        .toList();
+    if (typeDefs.isEmpty) {
       throw Exception('$struct missing');
     }
+    if (typeDefs.length > 1) {
+      typeDefs.retainWhere(supports64Bit);
+    }
+    final typeDef = typeDefs.first;
 
     writer.writeStringSync(wrapCommentText(win32struct.comment));
     writer.writeStringSync('\n///\n');
 
-    final projectedStruct = StructProjection(typedef, struct);
+    final projectedStruct = StructProjection(typeDef, struct);
     writer.writeStringSync(projectedStruct.toString());
     structsGenerated++;
   }

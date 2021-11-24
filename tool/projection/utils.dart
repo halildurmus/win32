@@ -34,6 +34,9 @@ bool typePretendsToBeAnsi(String typeName) {
   return false;
 }
 
+bool typedefIsAnsi(TypeDef typedef) =>
+    typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
+
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
@@ -50,6 +53,15 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+/// Convert a nested type to a guaranteed-unique name.
+String mangleName(TypeDef typeDef) {
+  final name = typeDef.name.split('.').last;
+  if (!typeDef.isNested) {
+    return '_$name';
+  }
+  return '${mangleName(typeDef.enclosingClass!)}_$name';
+}
+
 /// Convert a *typeProjection into a typeProjection
 TypeProjection dereference(TypeProjection pointer) {
   if (pointer.typeIdentifier.typeArg != null) {
@@ -61,9 +73,6 @@ TypeProjection dereference(TypeProjection pointer) {
 
 String stripPointer(String typeName) =>
     typeName.substring(8, typeName.length - 1); // Pointer<X> => X
-
-bool typedefIsAnsi(TypeDef typedef) =>
-    typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {

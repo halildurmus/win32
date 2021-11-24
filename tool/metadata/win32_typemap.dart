@@ -33,4 +33,5 @@ const callbackTypeMapping = <String, String>{
   'LPEXCEPFINO_DEFERRED_FILLIN': 'Pointer<NativeFunction<ExcepInfoProc>>',
   'WLAN_NOTIFICATION_CALLBACK':
       'Pointer<NativeFunction<WlanNotificationCallback>>',
+  'PFTASKDIALOGCALLBACK': 'Pointer<NativeFunction<TaskDialogCallbackProc>>',
 };
