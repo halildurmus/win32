@@ -39,8 +39,6 @@ const header = '''
 
 void main()
 {
-    printf("  const structSizeXX = {\\n");
-
     // Manually generated structs
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
@@ -58,7 +56,6 @@ void main()
 ''';
 
 const footer = '''
-    printf("};\\n");
 }
 ''';
 
@@ -71,7 +68,8 @@ void main() {
   final structs =
       win32.structs.map((k, v) => MapEntry(k, v.namespace.split('.').last));
 
-  final writer = File('tool/struct_sizes.cpp').openSync(mode: FileMode.write);
+  final writer =
+      File('tool/manual_gen/struct_sizes.cpp').openSync(mode: FileMode.write);
   writer.writeStringSync(header);
 
   for (final struct in structs.keys) {
