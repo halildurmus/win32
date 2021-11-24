@@ -191,6 +191,10 @@ class TypeDef extends TokenObject
                 reader.FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
             if (SUCCEEDED(hr)) {
               return TypeDef.fromToken(scope, ptd.value);
+            } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+              print('Unable to find $typeName in resolution scope '
+                  '${resolutionScopeToken.toHexString(32)}.');
+              throw WindowsException(hr);
             } else {
               throw WindowsException(hr);
             }
