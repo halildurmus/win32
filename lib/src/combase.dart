@@ -28,12 +28,14 @@ class COMObject extends Struct {
   /// Create an instance of a COM object using its class identifier, cast to the
   /// specified interface.
   ///
-  /// The caller is responsible for disposing of the memory of this object when
-  /// it's finished with.
-  static Pointer<COMObject> createFromID(String clsid, String iid) {
+  /// The caller is responsible for disposing of the memory of the returned
+  /// object when it is no longer required. A FFI `Arena` may be passed as a
+  /// custom allocator for ease of memory management.
+  static Pointer<COMObject> createFromID(String clsid, String iid,
+      {Allocator allocator = calloc}) {
     final pClsid = convertToCLSID(clsid);
     final pIid = convertToIID(iid);
-    final pObj = calloc<COMObject>();
+    final pObj = allocator<COMObject>();
 
     try {
       final hr =
@@ -54,13 +56,14 @@ class COMObject extends Struct {
 /// '{00000000-0000-0000-C000-000000000046}', and it will return a pointer to a
 /// GUID struct that matches the string.
 ///
-/// It is the caller's responsibility to deallocate the pointer when they are
-/// finished with it.
+/// It is the caller's responsibility to deallocate the returned pointer when
+/// they are finished with it. A FFI `Arena` may be passed as a
+/// custom allocator for ease of memory management.
 ///
 /// {@category com}
-Pointer<GUID> convertToIID(String strIID) {
+Pointer<GUID> convertToIID(String strIID, {Allocator allocator = calloc}) {
   final lpszIID = strIID.toNativeUtf16();
-  final iid = calloc<GUID>();
+  final iid = allocator<GUID>();
 
   try {
     final hr = IIDFromString(lpszIID, iid);
@@ -81,13 +84,14 @@ Pointer<GUID> convertToIID(String strIID) {
 /// associated with it. In either case, it will return a pointer to a GUID
 /// struct that matches the string.
 ///
-/// It is the caller's responsibility to deallocate the pointer when they are
-/// finished with it.
+/// It is the caller's responsibility to deallocate the returned pointer when
+/// they are finished with it. A FFI `Arena` may be passed as a custom allocator
+/// for ease of memory management.
 ///
 /// {@category com}
-Pointer<GUID> convertToCLSID(String strCLSID) {
+Pointer<GUID> convertToCLSID(String strCLSID, {Allocator allocator = calloc}) {
   final lpszCLSID = strCLSID.toNativeUtf16();
-  final clsid = calloc<GUID>();
+  final clsid = allocator<GUID>();
 
   try {
     final hr = CLSIDFromString(lpszCLSID, clsid);
