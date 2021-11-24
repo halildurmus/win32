@@ -123,4 +123,34 @@ void main() {
 
     expect(lastFieldType!.enclosingClass, equals(struct));
   });
+
+  test('Can identify platform architecture', () {
+    final scope = MetadataStore.getWin32Scope();
+    final structs = scope.typeDefs.where(
+        (type) => type.name == 'Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
+    expect(structs.length, equals(2));
+    for (final struct in structs) {
+      final supportedArchAttribute = struct.customAttributes.where((attr) =>
+          attr.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute');
+      expect(supportedArchAttribute, isNotNull);
+
+      // One structure for 64-bit, one structure for 32-bit
+      expect(
+          (struct.supportedArchitectures.x64 &&
+                  struct.supportedArchitectures.arm64 &&
+                  !struct.supportedArchitectures.x86) ||
+              struct.supportedArchitectures.x86,
+          isTrue);
+    }
+  });
+
+  test('Can access nested type even if resolution scope token does not match',
+      () {
+    final scope = MetadataStore.getWin32Scope();
+    final struct = scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER',
+        preferredArchitecture: PreferredArchitecture.x64);
+
+    expect(struct, isNotNull);
+    expect(struct!.fields.last.name, equals('HeaderX64'));
+  });
 }

@@ -15,6 +15,8 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
 
+enum PreferredArchitecture { x86, x64, arm64 }
+
 /// A metadata scope, which typically matches an on-disk file.
 ///
 /// Rather than being created directly, you should obtain a scope from a
@@ -51,9 +53,26 @@ class Scope {
   /// Return the first typedef object matching the given name.
   ///
   /// Returns null if no typedefs match the name.
-  TypeDef? findTypeDef(String name) {
-    final typeDef = typeDefs.where((t) => t.name == name);
-    return (typeDef.isNotEmpty ? typeDef.first : null);
+  TypeDef? findTypeDef(String name,
+      {PreferredArchitecture preferredArchitecture =
+          PreferredArchitecture.x64}) {
+    final matchingTypeDefs = typeDefs.where((t) => t.name == name);
+
+    if (matchingTypeDefs.isEmpty) return null;
+    if (matchingTypeDefs.length == 1) return matchingTypeDefs.first;
+
+    // More than one typedef, so we find the one that matches the preferred
+    // architecture.
+    for (final typeDef in matchingTypeDefs) {
+      final supportedArch = typeDef.supportedArchitectures;
+
+      if (preferredArchitecture == PreferredArchitecture.x64 &&
+          supportedArch.x64) return typeDef;
+      if (preferredArchitecture == PreferredArchitecture.arm64 &&
+          supportedArch.arm64) return typeDef;
+      if (preferredArchitecture == PreferredArchitecture.x86 &&
+          supportedArch.x86) return typeDef;
+    }
   }
 
   /// Return the typedef matching the given token.

@@ -3,14 +3,16 @@
 /// The architectures supported by a specific Win32 method or struct.
 class Architecture {
   // These values are taken from Windows.Win32.Interop.winmd.
-  final _x86 = 0x01;
-  final _x64 = 0x02;
-  final _arm64 = 0x04;
+  static const _x86 = 0x01;
+  static const _x64 = 0x02;
+  static const _arm64 = 0x04;
 
   final int _value;
 
   /// Creates an [Architecture] object.
   const Architecture(this._value);
+
+  factory Architecture.all() => Architecture(_arm64 | _x64 | _x86);
 
   /// Returns true if this object is supported on Intel 32-bit architectures
   bool get x86 => _value & _x86 == _x86;

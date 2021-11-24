@@ -12,6 +12,7 @@ import 'classlayout.dart';
 import 'com/constants.dart';
 import 'event.dart';
 import 'field.dart';
+import 'interop.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
@@ -153,6 +154,74 @@ class TypeDef extends TokenObject
         }
       });
 
+  static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) =>
+      using((Arena arena) {
+        final ptkResolutionScope = arena<mdToken>();
+        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pchName = arena<ULONG>();
+        final hr = scope.reader.GetTypeRefProps(
+            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
+        if (SUCCEEDED(hr)) {
+          return szName.toDartString();
+        } else {
+          throw WindowsException(hr);
+        }
+      });
+
+  /// Resolve nested type by iterating through all typedefs looking for a match.
+  ///
+  /// This is our brute force method for nested types whose resolution scope
+  /// does not contain the type. This occurs in Win32 when a nested type belongs
+  /// to a parent type that has multiple versions with different platform
+  /// architectures.
+  static TypeDef _resolveNestedTypeThroughIteration(Scope scope,
+          int resolutionScopeToken, int typeRefToken, String typeName) =>
+      using((Arena arena) {
+        // Find the name of the parent type
+        final parentTypeName =
+            _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
+
+        // Get the matching typedef that matches the preferred architecture
+        final parentTypeDef = scope.findTypeDef(parentTypeName,
+            preferredArchitecture: PreferredArchitecture.x64);
+        if (parentTypeDef == null) {
+          throw WinmdException('Cannot find matching typeDef');
+        }
+
+        // Now find the nested type that matches the name _and_ is enclosed in
+        // the parent's token.
+        final matchingTypes = scope.typeDefs
+            .where((t) => t.name == typeName)
+            .where((t) => t._enclosingClassToken == parentTypeDef.token);
+
+        if (matchingTypes.length == 1) {
+          return matchingTypes.first;
+        } else {
+          print('${matchingTypes.length} types found for $typeName');
+          return TypeDef(scope, 0, typeName);
+        }
+      });
+
+  /// Attempt to find a nested type using FindTypeDefByName.
+  ///
+  /// If this doesn't work, we then have to try a more labor-intensive approach.
+  static TypeDef _resolveNestedType(Scope scope, int resolutionScopeToken,
+          int typeRefToken, String typeName) =>
+      using((Arena arena) {
+        final szTypeDef = typeName.toNativeUtf16(allocator: arena);
+        final ptd = arena<mdTypeDef>();
+        final hr = scope.reader
+            .FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
+        if (SUCCEEDED(hr)) {
+          return TypeDef.fromToken(scope, ptd.value);
+        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+          return _resolveNestedTypeThroughIteration(
+              scope, resolutionScopeToken, typeRefToken, typeName);
+        } else {
+          throw WindowsException(hr);
+        }
+      });
+
   /// Instantiate a typedef from a TypeRef token.
   ///
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
@@ -185,19 +254,8 @@ class TypeDef extends TokenObject
           // Is it a nested type? If so, we find a type in the parent type that
           // matches its name, if one exists (which it presumably should).
           if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtTypeRef) {
-            final szTypeDef = typeName.toNativeUtf16(allocator: arena);
-            final ptd = arena<mdTypeDef>();
-            final hr =
-                reader.FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
-            if (SUCCEEDED(hr)) {
-              return TypeDef.fromToken(scope, ptd.value);
-            } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-              print('Unable to find $typeName in resolution scope '
-                  '${resolutionScopeToken.toHexString(32)}.');
-              throw WindowsException(hr);
-            } else {
-              throw WindowsException(hr);
-            }
+            return _resolveNestedType(
+                scope, resolutionScopeToken, typeRefToken, typeName);
           }
 
           // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
@@ -321,6 +379,29 @@ class TypeDef extends TokenObject
   bool get isUnion =>
       classLayout.fieldOffsets != null &&
       classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
+
+  /// Get platform architectures on which this type is supported.
+  ///
+  /// This property currently only supports Win32 metadata.
+  Architecture get supportedArchitectures {
+    // By default, this attribute is missing and it is assumed that types
+    // support all valid platform architectures.
+    if (customAttributes
+        .where((ca) =>
+            ca.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute')
+        .isEmpty) {
+      return Architecture.all();
+    }
+
+    final supportedArchRaw = customAttributeAsBytes(
+        'Windows.Win32.Interop.SupportedArchitectureAttribute');
+
+    // [0x01, 00x00] prolog, then next digit is arch attribute.
+    if (supportedArchRaw.length < 3) {
+      throw WinmdException('SupportedArchitecture attribute is malformed.');
+    }
+    return Architecture(supportedArchRaw[2]);
+  }
 
   /// Retrieve class layout information.
   ///

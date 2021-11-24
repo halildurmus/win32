@@ -21,6 +21,7 @@ import 'com/constants.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
+import 'utils/exception.dart';
 
 /// Caches a reader for each file scope.
 ///
@@ -78,7 +79,7 @@ class MetadataStore {
       final future = Isolate.resolvePackageUri(uri);
       final package = waitFor(future, timeout: const Duration(seconds: 5));
       if (package == null) {
-        throw Exception('Could not find $win32ScopeName.');
+        throw WinmdException('Could not find $win32ScopeName.');
       }
       final fileScope = File.fromUri(package);
 
