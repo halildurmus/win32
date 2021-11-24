@@ -86,20 +86,16 @@ class Scope {
     return _typedefs;
   }
 
-  int get moduleToken {
-    final pmd = calloc<mdModule>();
+  int get moduleToken => using((Arena arena) {
+        final pmd = arena<mdModule>();
 
-    try {
-      final hr = reader.GetModuleFromScope(pmd);
-      if (SUCCEEDED(hr)) {
-        return pmd.value;
-      } else {
-        throw WinmdException('Unable to find module token.');
-      }
-    } finally {
-      free(pmd);
-    }
-  }
+        final hr = reader.GetModuleFromScope(pmd);
+        if (SUCCEEDED(hr)) {
+          return pmd.value;
+        } else {
+          throw WinmdException('Unable to find module token.');
+        }
+      });
 
   /// Get an enumerated list of delegates in this scope.
   List<TypeDef> get delegates =>

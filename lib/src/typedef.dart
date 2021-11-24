@@ -463,26 +463,25 @@ class TypeDef extends TokenObject
   /// Get a method matching the name, if one exists.
   ///
   /// Returns null if the method is not found.
-  Method? findMethod(String methodName) {
-    final szName = methodName.toNativeUtf16();
-    final pmb = calloc<mdMethodDef>();
+  Method? findMethod(String methodName) => using((Arena arena) {
+        final szName = methodName.toNativeUtf16(allocator: arena);
+        final pmb = arena<mdMethodDef>();
 
-    try {
-      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
-      if (SUCCEEDED(hr)) {
-        return Method.fromToken(scope, pmb.value);
-      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-        return null;
-      } else {
-        throw COMException(hr);
-      }
-    } finally {
-      free(szName);
-      free(pmb);
-    }
-  }
+        final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
+        if (SUCCEEDED(hr)) {
+          return Method.fromToken(scope, pmb.value);
+        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+          return null;
+        } else {
+          throw COMException(hr);
+        }
+      });
 
-  /// Gets the type referencing this type's superclass.
+  /// Gets the type referencing this type's superclass (the class this type
+  /// inherits from).
+  ///
+  /// For nested types, the [enclosingClass] property may be of interest, which
+  /// is the type in which the current type is embedded.
   TypeDef? get parent =>
       token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
