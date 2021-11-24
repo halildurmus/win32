@@ -1,7 +1,9 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: [example/explorer/**]
+  exclude: 
+    - example/explorer/**
+    # - lib/src/**/*.dart
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
