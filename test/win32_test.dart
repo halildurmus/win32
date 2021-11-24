@@ -511,12 +511,9 @@ void main() {
     expect(interface.customAttributes.map((attr) => attr.name),
         contains('Windows.Win32.Interop.SupportedOSPlatformAttribute'));
 
-    // TODO: Add method to convert a custom attribute to string.
-    final supportedOSAttr = interface.customAttributes.where((attr) =>
-        attr.name == 'Windows.Win32.Interop.SupportedOSPlatformAttribute');
-    final supportedOS =
-        String.fromCharCodes(supportedOSAttr.first.signatureBlob.sublist(3));
-    expect(supportedOS, startsWith('windows8.0'));
+    final supportedOS = interface.attributeAsString(
+        'Windows.Win32.Interop.SupportedOSPlatformAttribute');
+    expect(supportedOS, equals('windows8.0'));
   });
 
   test('Can identify platform architecture', () {
