@@ -200,7 +200,9 @@ class TypeProjection {
       return unwrapCallbackType();
     }
 
-    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
+    if (isInterface ||
+        typeIdentifier.baseType == BaseType.ClassTypeModifier ||
+        typeIdentifier.baseType == BaseType.Object) {
       return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 
