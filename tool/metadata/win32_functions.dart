@@ -56,7 +56,6 @@ String libraryFromDllName(String dllName) {
 List<String> importsForFunction(Method function) {
   final importList = <String>[];
 
-  // TODO: Clean this up -- there's a better example duplicated elsewhere.
   for (final param in function.parameters) {
     if (param.typeIdentifier.name.startsWith('Windows.Win32')) {
       importList.add(importForWin32Type(param.typeIdentifier));
