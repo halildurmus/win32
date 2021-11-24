@@ -46,11 +46,9 @@ const Map<String, TypeTuple> specialTypes = {
 
 class TypeProjection {
   final TypeIdentifier typeIdentifier;
-  late final TypeTuple projection;
+  late final projection = projectType();
 
-  TypeProjection(this.typeIdentifier) {
-    projection = projectType();
-  }
+  TypeProjection(this.typeIdentifier);
 
   String get attribute => projection.attribute;
   String get nativeType => projection.nativeType;
