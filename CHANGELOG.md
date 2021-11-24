@@ -4,6 +4,7 @@
   if you use the Bluetooth APIs, since `BLUETOOTH_ADDRESS.rgBytes` is now an
   `Array<Uint8>` instead of a `List<int>`. This is more accurate, but will
   require minor code change.
+- Add additional raw input constants
 
 ## 2.3.0
 
