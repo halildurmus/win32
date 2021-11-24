@@ -7,7 +7,7 @@ if "%1"=="--help" goto help
 @REM call dart %~dp0manual_gen\win32api.dart
 
 @REM Generate 
-call dart %~dp0namespace\generate_all_from_winmd.dart
+call dart %~dp0v3\generate_all_from_winmd.dart
 echo.
 
 @REM if "%1"=="--win32-only" goto format

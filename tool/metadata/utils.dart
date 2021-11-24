@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../namespace/exclusions.dart';
+import '../v3/exclusions.dart';
 
 const dartKeywords = <String>[
   // Keywords from https://dart.dev/guides/language/language-tour#keywords.
