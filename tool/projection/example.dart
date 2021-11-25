@@ -11,10 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct =
-      scope.findTypeDef('Windows.Win32.UI.Input.Pointer.INPUT_TRANSFORM');
+  final struct = scope.findTypeDef(
+      'Windows.Win32.Devices.DeviceAndDriverInstallation.CM_NOTIFY_EVENT_DATA');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'INPUT_TRANSFORM');
+    final structProjection = StructProjection(struct, 'CM_NOTIFY_EVENT_DATA');
     print(structProjection);
   }
 }
@@ -93,5 +93,5 @@ void printComClass() {
 }
 
 void main() {
-  printComGetProperty();
+  printStruct();
 }

@@ -2,7 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import '../metadata/exclusions.dart';
 import 'field.dart';
-import 'type.dart';
+// import 'type.dart';
 import 'utils.dart';
 
 /// Represents a Dart projection of a Struct typedef.
@@ -12,29 +12,23 @@ class StructProjection {
 
   StructProjection(this.typeDef, this.structName);
 
-  /// A nested type needs a way to access its members from the parent type. We
-  /// do this through a templated class that contains the field accessors. At
-  /// the time this is created, we don't know the name of the parent class, so
-  /// we use a templated value `{{CLASS}}` to represent it.
-  String _propertyAccessors() {
-    final buffer = StringBuffer();
-    buffer.writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
-    for (final field in typeDef.fields) {
-      final typeProjection = TypeProjection(field.typeIdentifier);
-      buffer.writeln('''
-  ${typeProjection.dartType} get ${field.name} => {{CLASS}}.${field.name};
-  set ${field.name}(${typeProjection.dartType} value) => {{CLASS}}.${field.name} = value;
-      ''');
-    }
-    buffer.writeln('}');
-    return buffer.toString();
-  }
-
-  String _nestedName(String structName) {
-    final enclosedName = typeDef.enclosingClass!.name.split('.').last;
-
-    return '_${enclosedName}_$structName';
-  }
+  // /// A nested type needs a way to access its members from the parent type. We
+  // /// do this through a templated class that contains the field accessors. At
+  // /// the time this is created, we don't know the name of the parent class, so
+  // /// we use a templated value `{{CLASS}}` to represent it.
+  // String _propertyAccessors() {
+  //   final buffer = StringBuffer();
+  //   buffer.writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
+  //   for (final field in typeDef.fields) {
+  //     final typeProjection = TypeProjection(field.typeIdentifier);
+  //     buffer.writeln('''
+  // ${typeProjection.dartType} get ${field.name} => {{CLASS}}.${field.name};
+  // set ${field.name}(${typeProjection.dartType} value) => {{CLASS}}.${field.name} = value;
+  //     ''');
+  //   }
+  //   buffer.writeln('}');
+  //   return buffer.toString();
+  // }
 
   bool _isNestedType(Field field) =>
       field.typeIdentifier.type?.isNested ?? false;
@@ -64,7 +58,7 @@ class StructProjection {
   }
 
   String get _projectedName => typeDef.isNested
-      ? _nestedName(safeName(structName))
+      ? '_${safeName(mangleName(typeDef))}'
       : safeName(structName);
 
   String get _fieldsProjection =>
@@ -81,20 +75,20 @@ class StructProjection {
     }
 
     // Add any nested types on which there is a dependency
-    var fieldIdx = 0;
+    // var fieldIdx = 0;
     for (final field in nestedTypes.keys) {
       final nestedType = nestedTypes[field]!;
       final nestedTypeProjection =
           StructProjection(nestedType, '_${nestedType.name}');
 
-      final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
+      // final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
       buffer.write('\n$nestedTypeProjection\n');
-      buffer.write(nestedTypeProjection
-          ._propertyAccessors()
-          .replaceAll('{{CLASS}}', field)
-          .replaceAll('{{PARENT}}', structName)
-          .replaceAll('{{SUFFIX}}', suffix));
-      fieldIdx++;
+      // buffer.write(nestedTypeProjection);
+      // ._propertyAccessors()
+      // .replaceAll('{{CLASS}}', field)
+      // .replaceAll('{{PARENT}}', mangleName(typeDef))
+      // .replaceAll('{{SUFFIX}}', suffix));
+      // fieldIdx++;
     }
 
     return buffer.toString();
