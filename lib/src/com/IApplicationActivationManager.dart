@@ -18,7 +18,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import '../system/com/IUnknown.dart';
 
 /// @nodoc
 const IID_IApplicationActivationManager =

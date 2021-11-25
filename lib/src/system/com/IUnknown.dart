@@ -7,11 +7,11 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../combase.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../utils.dart';
+import '../../combase.dart';
+import '../../exceptions.dart';
+import '../../guid.dart';
+import '../../macros.dart';
+import '../../utils.dart';
 
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';

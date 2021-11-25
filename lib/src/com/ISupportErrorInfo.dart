@@ -18,7 +18,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import '../system/com/IUnknown.dart';
 
 /// @nodoc
 const IID_ISupportErrorInfo = '{DF0B3D60-548F-101B-8E65-08002B2BD119}';

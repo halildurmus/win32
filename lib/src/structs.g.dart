@@ -46,12 +46,12 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
-import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';
 import 'specialTypes.dart';
 import 'structs.dart';
+import 'system/com/IUnknown.dart';
 
 /// Defines an accelerator key used in an accelerator table.
 ///

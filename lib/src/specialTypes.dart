@@ -38,9 +38,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'com/IDispatch.dart';
-import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'constants.dart';
+import 'system/com/IUnknown.dart';
 
 // typedef struct tagDEC {
 //   USHORT wReserved;

@@ -18,7 +18,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import '../system/com/IUnknown.dart';
 
 /// @nodoc
 const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';

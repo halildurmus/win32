@@ -18,7 +18,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import '../system/com/IUnknown.dart';
 
 /// @nodoc
 const IID_IEnumMoniker = '{00000102-0000-0000-C000-000000000046}';

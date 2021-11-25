@@ -18,7 +18,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import '../system/com/IUnknown.dart';
 
 /// @nodoc
 const IID_IWbemServices = '{9556DC99-828C-11CF-A37E-00AA003240C7}';

@@ -108,12 +108,12 @@ class InterfaceProjection {
 
   late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
 
-  String get importHeader => inheritsFrom != ''
-      ? "import '$pathToSrc${getImportForTypeDef(typeDef.interfaces.first)}';"
-      : '';
+  String get interfaceImport =>
+      inheritsFrom != '' ? getImportForTypeDef(typeDef.interfaces.first) : '';
 
-  String get importHeader2 {
-    final imports = importsForClass();
+  String get importHeader {
+    final imports = {interfaceImport, ...importsForClass()}
+      ..removeWhere((item) => item == '');
     return imports.map((import) => "import '$pathToSrc$import';").join('\n');
   }
 
@@ -177,7 +177,6 @@ class InterfaceProjection {
     return '''
       $header
       $importHeader
-      $importHeader2
       $guidConstants
 
       /// {@category Interface}

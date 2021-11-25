@@ -231,7 +231,7 @@ export 'src/com/ISupportErrorInfo.dart';
 export 'src/com/IToastNotificationFactory.dart';
 export 'src/com/IToastNotificationManagerStatics.dart';
 export 'src/com/ITypeInfo.dart';
-export 'src/com/IUnknown.dart';
+export 'src/system/com/IUnknown.dart';
 export 'src/com/IUri.dart';
 export 'src/com/IUserDataPathsStatics.dart';
 export 'src/com/IVirtualDesktopManager.dart';
