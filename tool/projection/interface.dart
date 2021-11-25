@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import '../v3/exclusions.dart';
 import 'method.dart';
 import 'property.dart';
 import 'utils.dart';
@@ -44,41 +45,100 @@ class InterfaceProjection {
     return 0;
   }
 
-  int get vtableStart => calculateVTableStart(typeDef);
+  String get shortName => shortenTypeDef(typeDef);
 
-  String get shortName => stripAnsiUnicodeSuffix(typeDef.name.split('.').last);
+  int get vtableStart => calculateVTableStart(typeDef);
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
-      return typeDef.interfaces.first.name.split('.').last;
+      return shortenTypeDef(typeDef.interfaces.first);
+    }
+    return '';
+  }
+
+  String getImportForTypeDef(TypeDef typeDef) {
+    if (typeDef.isDelegate) {
+      return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
+    } else if (typeDef.isInterface) {
+      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(typeDef.name.split('.').last)}.dart';
     } else {
-      return '';
+      return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
   }
 
-  String get importHeader =>
-      inheritsFrom.isNotEmpty ? "import '$inheritsFrom.dart';" : '';
+  String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
+    if (specialTypes.contains(typeIdentifier.name)) {
+      return 'specialTypes.dart';
+    }
+
+    if (typeIdentifier.name.startsWith('Windows.Win32')) {
+      return getImportForTypeDef(typeIdentifier.type!);
+    }
+  }
+
+  // TODO: Find duplicate
+  Set<String> importsForClass() {
+    final importList = <String>{};
+
+    for (final method in typeDef.methods) {
+      final paramsAndReturnType = [...method.parameters, method.returnType];
+      for (final param in paramsAndReturnType) {
+        // Add imports for a parameter itself (e.g. VARIANT)
+        final import = getImportForTypeIdentifier(param.typeIdentifier);
+        if (import != null) importList.add(import);
+
+        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>)
+        if (param.typeIdentifier.typeArg != null) {
+          final import =
+              getImportForTypeIdentifier(param.typeIdentifier.typeArg!);
+          if (import != null) importList.add(import);
+
+          // Add imports for a type within a double pointer (e.g.
+          // Pointer<Pointer<VARIANT>>)
+          if (param.typeIdentifier.typeArg!.typeArg != null) {
+            final import = getImportForTypeIdentifier(
+                param.typeIdentifier.typeArg!.typeArg!);
+            if (import != null) importList.add(import);
+          }
+        }
+      }
+    }
+    return importList;
+  }
+
+  late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
+
+  String get importHeader => inheritsFrom != ''
+      ? "import '$pathToSrc${getImportForTypeDef(typeDef.interfaces.first)}';"
+      : '';
+
+  String get importHeader2 {
+    final imports = importsForClass();
+    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+  }
 
   String get header => '''
     // $shortName.dart
 
     // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-    // ignore_for_file: unused_import
+    // ignore_for_file: unused_import, directives_ordering
 
     import 'dart:ffi';
 
     import 'package:ffi/ffi.dart';
 
-    import '../combase.dart';
-    import '../constants.dart';
-    import '../exceptions.dart';
-    import '../guid.dart';
-    import '../macros.dart';
-    import '../ole32.dart';
-    import '../structs.dart';
-    import '../structs.g.dart';
-    import '../utils.dart';
+    import '${pathToSrc}combase.dart';
+    import '${pathToSrc}constants.dart';
+    import '${pathToSrc}exceptions.dart';
+    import '${pathToSrc}guid.dart';
+    import '${pathToSrc}macros.dart';
+    import '${pathToSrc}ole32.dart';
+    import '${pathToSrc}structs.dart';
+    import '${pathToSrc}structs.g.dart';
+    import '${pathToSrc}utils.dart';
+
+    import '${pathToSrc}com/IUnknown.dart';
   ''';
 
   String get guidConstants => '''
@@ -117,6 +177,7 @@ class InterfaceProjection {
     return '''
       $header
       $importHeader
+      $importHeader2
       $guidConstants
 
       /// {@category Interface}

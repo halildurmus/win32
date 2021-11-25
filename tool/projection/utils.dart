@@ -123,6 +123,9 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
+String shortenTypeDef(TypeDef typeDef) =>
+    stripAnsiUnicodeSuffix(typeDef.name.split('.').last);
+
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
 /// matching folder (e.g. `system/console`).
 String folderFromNamespace(String namespace) {
