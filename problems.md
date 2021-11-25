@@ -1,8 +1,10 @@
+## TODO
+
 deeply nested structs aren't projecting correctly
 e.g. CM_NOTIFY_EVENT_DATA
 
 property getters and setters don't have the same type
-e.g. IXMLDOMNode.get_dataType 
+e.g. IXMLDOMNode.get_dataType
 
 child structs are more loosely packed than parent structs
 e.g. RFCOMM_COMMAND
@@ -19,14 +21,16 @@ e.g. IWiaMiniDrv.drvValidateItemProperties
 functions are including libraries that don't contain any methods
 e.g. Windows.Win32.Globalization
 
-some structs are being falsely treated as 'A' suffix
-e.g. NCRYPT_ALLOC_PARA, CERT_REVOCATION_CHAIN_PARA
-
 some typedefs are being renamed in v2 style
 e.g. PWLX_DIALOG_BOX
 
 callbacks are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK
 
-struct members are being projected with _ prefixes
+struct members are being projected with `_` prefixes
 e.g. SLIST_HEADER
+
+## DONE
+
+some structs are being falsely treated as 'A' suffix
+e.g. NCRYPT_ALLOC_PARA, CERT_REVOCATION_CHAIN_PARA

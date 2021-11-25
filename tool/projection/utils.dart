@@ -25,7 +25,15 @@ const dartKeywords = <String>[
 ];
 
 bool typePretendsToBeAnsi(String typeName) {
-  final falseAnsiEndings = ['DATA', 'SCHEMA', 'AREA', 'M128A', 'CIECHROMA'];
+  final falseAnsiEndings = [
+    'DATA',
+    'SCHEMA',
+    'AREA',
+    'M128A',
+    'CIECHROMA',
+    'ALLOC_PARA',
+    'CHAIN_PARA'
+  ];
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {
       return true;
