@@ -51,14 +51,15 @@ class StructProjection {
     return 'Struct';
   }
 
-  String get _packingAttribute {
+  String get _classPreamble {
+    const docComment = '/// {@category Struct}';
     final packingAlignment = typeDef.classLayout.packingAlignment;
     if (packingAlignment != null &&
         packingAlignment > 0 &&
         !ignorePackingDirectives.contains(typeDef.name)) {
-      return '@Packed($packingAlignment)';
+      return '$docComment\n@Packed($packingAlignment)';
     } else {
-      return '';
+      return docComment;
     }
   }
 
@@ -123,8 +124,7 @@ class StructProjection {
 
   @override
   String toString() => '''
-        /// {@category Struct}
-        $_packingAttribute
+        $_classPreamble
         class $_projectedName extends $_baseType {
           $_fieldsProjection
         }

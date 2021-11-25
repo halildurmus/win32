@@ -65,8 +65,10 @@ class MethodProjection {
 
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
 
-  String get identifiers =>
-      ['ptr.ref.lpVtbl', ...parameters.map((param) => param.name)].join(', ');
+  String get identifiers => [
+        'ptr.ref.lpVtbl',
+        ...parameters.map((param) => param.identifier)
+      ].join(', ');
 
   // TODO: Check whether there's a better way to detect how methods like
   // put_AutoDemodulate are declared (should this be a property?) Detect whether

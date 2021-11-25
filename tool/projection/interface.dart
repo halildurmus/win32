@@ -134,8 +134,6 @@ class InterfaceProjection {
     import '${pathToSrc}guid.dart';
     import '${pathToSrc}macros.dart';
     import '${pathToSrc}ole32.dart';
-    import '${pathToSrc}structs.dart';
-    import '${pathToSrc}structs.g.dart';
     import '${pathToSrc}utils.dart';
   ''';
 

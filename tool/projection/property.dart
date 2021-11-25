@@ -18,12 +18,17 @@ class GetPropertyProjection extends PropertyProjection {
 
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName => method.name.startsWith('get__')
-      ? method.name.substring(5)
-      : method.name.substring(4);
+      ? safeName(method.name.substring(5))
+      : safeName(method.name.substring(4));
 
   @override
   String toString() {
     final returnValue = dereference(parameters.first.type);
+    final valRef = returnValue.dartType == 'double' ||
+            returnValue.dartType == 'int' ||
+            returnValue.dartType.startsWith('Pointer')
+        ? 'value'
+        : 'ref';
     return '''
       ${returnValue.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnValue.nativeType}>();
@@ -37,7 +42,7 @@ class GetPropertyProjection extends PropertyProjection {
 
           if (FAILED(hr)) throw WindowsException(hr);
 
-          final retValue = retValuePtr.value;
+          final retValue = retValuePtr.$valRef;
           return ${convertBool ? 'retValue == 0' : 'retValue'};
         } finally {
           free(retValuePtr);
@@ -53,8 +58,8 @@ class SetPropertyProjection extends PropertyProjection {
 
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName => method.name.startsWith('put__')
-      ? method.name.substring(5)
-      : method.name.substring(4);
+      ? safeName(method.name.substring(5))
+      : safeName(method.name.substring(4));
 
   @override
   String toString() => '''

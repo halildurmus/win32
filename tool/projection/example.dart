@@ -11,10 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope
-      .findTypeDef('Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST');
+  final struct =
+      scope.findTypeDef('Windows.Win32.UI.Input.Pointer.INPUT_TRANSFORM');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'WLAN_RAW_DATA_LIST');
+    final structProjection = StructProjection(struct, 'INPUT_TRANSFORM');
     print(structProjection);
   }
 }
@@ -53,11 +53,11 @@ void printComMethod() {
 
 void printComGetProperty() {
   final interface = scope.findTypeDef(
-      'Windows.Win32.Networking.ActiveDirectory.IADsPropertyEntry');
-  final method = interface?.findMethod('get_Name');
+      'Windows.Win32.Security.Cryptography.Certificates.ICEnroll4');
+  final method = interface?.findMethod('get_IncludeSubjectKeyID');
 
   if (method != null) {
-    final methodProjection = GetPropertyProjection(method, 10);
+    final methodProjection = GetPropertyProjection(method, 122);
     print(methodProjection);
   }
 }
@@ -74,7 +74,8 @@ void printComSetProperty() {
 }
 
 void printComInterface() {
-  final interface = scope.findTypeDef('Windows.Win32.System.Com.IUnknown');
+  final interface =
+      scope.findTypeDef('Windows.Win32.Data.Xml.MsXml.ISchemaType');
 
   if (interface != null) {
     final interfaceProjection = InterfaceProjection(interface);
@@ -92,5 +93,5 @@ void printComClass() {
 }
 
 void main() {
-  printStruct();
+  printComGetProperty();
 }
