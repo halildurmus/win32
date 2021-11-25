@@ -137,8 +137,6 @@ class InterfaceProjection {
     import '${pathToSrc}structs.dart';
     import '${pathToSrc}structs.g.dart';
     import '${pathToSrc}utils.dart';
-
-    import '${pathToSrc}com/IUnknown.dart';
   ''';
 
   String get guidConstants => '''
