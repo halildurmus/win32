@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/utils.dart';
 import '../projection/class.dart';
 import '../projection/interface.dart';
+import '../projection/utils.dart';
 
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
@@ -24,7 +24,7 @@ void generateInterfaceFiles(
     final dartClass = interfaceProjection.toString();
 
     final classOutputFilename =
-        nameWithoutEncoding(interface.name.split('.').last);
+        stripAnsiUnicodeSuffix(lastComponent(interface.name));
     final outputFile =
         File('${directory.uri.toFilePath()}$classOutputFilename.dart');
     outputFile.writeAsStringSync(dartClass);

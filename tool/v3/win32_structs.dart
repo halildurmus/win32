@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/utils.dart';
 import '../projection/struct.dart';
+import '../projection/utils.dart';
 import 'exclusions.dart';
 
 const structFileHeader = '''
@@ -63,7 +63,7 @@ void generateStructsFile(File file, List<TypeDef> typedefs) {
 
   for (final struct in typedefs) {
     buffer.write(StructProjection(
-        struct, nameWithoutEncoding(struct.name.split('.').last)));
+        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
 
     imports.addAll(importsForStruct(struct));
   }

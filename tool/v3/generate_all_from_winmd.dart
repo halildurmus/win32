@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/utils.dart';
+import '../projection/utils.dart';
 import 'com_interfaces.dart';
 import 'exclusions.dart';
 import 'win32_callbacks.dart';
@@ -148,7 +148,7 @@ void generateWin32Callbacks(String namespace) {
   final callbacks = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where((typedef) => typedef.isDelegate)
-      .where((typedef) => !typedef.name.endsWith('A'))
+      .where((typedef) => !typedefIsAnsi(typedef))
       .where((typedef) => !excludedCallbacks.contains(typedef.name))
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
@@ -196,8 +196,8 @@ void generateLibraryExport(List<String> namespaces) {
 // Example:
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  // final namespaces = ['Windows.Win32.UI.WindowsAndMessaging'];
-  final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
+  final namespaces = ['Windows.Win32.NetworkManagement.WiFi'];
+  // final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
 
   for (final namespace in namespaces) {
     print('Generating $namespace...');

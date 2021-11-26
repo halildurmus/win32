@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/exclusions.dart';
+import '../v3/exclusions.dart';
 import 'type.dart';
 
 const dartKeywords = <String>[
@@ -29,6 +29,7 @@ bool typePretendsToBeAnsi(String typeName) {
     'DATA',
     'SCHEMA',
     'AREA',
+    'ANTENNA',
     'M128A',
     'CIECHROMA',
     'ALLOC_PARA',
@@ -106,6 +107,22 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   return outputText.toString().trimRight();
 }
 
+/// Take a fully-qualified interface name (e.g.
+/// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding class
+/// name (e.g. `Windows.Win32.UI.Shell.ShellLink`).
+String classNameForInterfaceName(String interfaceName) {
+  final interfaceNameAsList = interfaceName.split('.');
+
+  // Strip off the 'I' from the last component
+  final fullyQualifiedClassName =
+      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
+            ..add(interfaceNameAsList.last.substring(1)))
+          .join('.');
+
+  // If class has a 'W' suffix, erase it.
+  return stripAnsiUnicodeSuffix(fullyQualifiedClassName);
+}
+
 extension CamelCaseConversion on String {
   String toCamelCase() =>
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
@@ -121,7 +138,7 @@ String relativePathToSrcDirectory(File file) {
 }
 
 String importForWin32Type(TypeIdentifier identifier) {
-  if (excludedTypes.contains(identifier.name)) {
+  if (excludedStructs.contains(identifier.name)) {
     return 'specialTypes.dart';
   }
 
@@ -156,11 +173,16 @@ String safeName(String name) {
   if (dartKeywords.contains(name)) {
     return '${name}_';
   }
+
+  return stripLeadingUnderscores(name);
+}
+
+String stripLeadingUnderscores(String name) {
   if (name.startsWith('_')) {
     if (characterIsNumeral(name.substring(1, 2))) {
       return 'x${name.substring(1)}';
     } else {
-      return safeName(name.substring(1));
+      return stripLeadingUnderscores(name.substring(1));
     }
   }
   return name;

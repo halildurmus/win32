@@ -6,19 +6,19 @@ e.g. IXMLDOMNode.get_dataType
 child structs are more loosely packed than parent structs
 e.g. RFCOMM_COMMAND
 
-callbacks aren't finding matching functions (could be because of A suffix?)
-e.g. PFAX_EXT_INITIALIZE_CONFIG, PWLX_QUERY_TERMINAL_SERVICES_DATA
-
 interfaces aren't discriminating between 'A' and 'W' suffixes
 e.g. IDirectInput
 
 callbacks are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK
 
+## DONE
+
 struct members are being projected with `_` prefixes
 e.g. SLIST_HEADER
 
-## DONE
+callbacks aren't finding matching functions (could be because of A suffix?)
+e.g. PFAX_EXT_INITIALIZE_CONFIG, PWLX_QUERY_TERMINAL_SERVICES_DATA
 
 functions are including libraries that don't contain any methods
 e.g. Windows.Win32.Globalization

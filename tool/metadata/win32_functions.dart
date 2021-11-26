@@ -10,7 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/function.dart';
 import '../projection/utils.dart';
-import 'exclusions.dart';
+import '../v3/exclusions.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls

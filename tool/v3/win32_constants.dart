@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/utils.dart';
+import '../projection/utils.dart';
 
 const constantFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file

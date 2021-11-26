@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../metadata/exclusions.dart';
+import '../v3/exclusions.dart';
 import 'field.dart';
 import 'nestedStruct.dart';
 import 'utils.dart';

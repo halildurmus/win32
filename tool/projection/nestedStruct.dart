@@ -48,7 +48,7 @@ class NestedStructProjection extends StructProjection {
     final extensionName = suffix == 0
         ? '${parentName}_Extension'
         : '${parentName}_Extension_$suffix';
-    final rootTypeName = safeName(lastComponent(rootType.name));
+    final rootTypeName = safeName(shortenTypeDef(rootType));
 
     final buffer = StringBuffer();
     buffer.writeln('extension $extensionName on $rootTypeName {');

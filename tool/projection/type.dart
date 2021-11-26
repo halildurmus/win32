@@ -130,8 +130,8 @@ class TypeProjection {
       return TypeTuple('Pointer', 'Pointer');
     }
 
-    final nativeType = 'Pointer<${projection.nativeType}>';
-    final dartType = 'Pointer<${projection.nativeType}>';
+    final nativeType = 'Pointer<${stripLeadingUnderscores(projection.nativeType)}>';
+    final dartType = 'Pointer<${stripLeadingUnderscores(projection.nativeType)}>';
 
     return TypeTuple(nativeType, dartType);
   }

@@ -7,8 +7,8 @@
 import 'dart:io';
 
 import 'package:winmd/winmd.dart';
-import '../metadata/utils.dart';
 import '../projection/function.dart';
+import '../projection/utils.dart';
 import 'exclusions.dart';
 
 const ffiFileHeader = '''
@@ -100,7 +100,7 @@ void generateFfiFile(File file, TypeDef typedef) {
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
         .where((method) =>
-            !excludedFunctions.contains(nameWithoutEncoding(method.name)))
+            !excludedFunctions.contains(stripAnsiUnicodeSuffix(method.name)))
         .toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 

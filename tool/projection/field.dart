@@ -53,6 +53,13 @@ class FieldProjection {
       return _printCharArray(typeProjection);
     }
 
-    return '  ${typeProjection.attribute}\n  external ${typeProjection.dartType} $fieldName;\n';
+    // If the field is a nested type (e.g. a nested union), then it's OK for it
+    // to be internal only, since it will be accessed via a property instead.
+    // Otherwise strip it so that it's accessible from outside the library.
+    final dartType = field.typeIdentifier.type?.enclosingClass != null
+        ? typeProjection.dartType
+        : stripLeadingUnderscores(typeProjection.dartType);
+
+    return '  ${typeProjection.attribute}\n  external $dartType $fieldName;\n';
   }
 }
