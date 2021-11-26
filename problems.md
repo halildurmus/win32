@@ -1,8 +1,5 @@
 ## TODO
 
-deeply nested structs aren't projecting correctly
-e.g. CM_NOTIFY_EVENT_DATA
-
 property getters and setters don't have the same type
 e.g. IXMLDOMNode.get_dataType
 
@@ -31,6 +28,9 @@ struct members are being projected with `_` prefixes
 e.g. SLIST_HEADER
 
 ## DONE
+
+deeply nested structs aren't projecting correctly
+e.g. CM_NOTIFY_EVENT_DATA
 
 some structs are being falsely treated as 'A' suffix
 e.g. NCRYPT_ALLOC_PARA, CERT_REVOCATION_CHAIN_PARA
