@@ -31,7 +31,7 @@ class NestedStructProjection extends StructProjection {
   // TODO: Presumably the typeDef here is optional and can be replaced with
   // field.parent.
   String buildInstanceName(TypeDef typeDef, Field field) {
-    var name = field.name;
+    var name = safeName(field.name);
     while (typeDef.enclosingClass != null) {
       final parentField = typeDef.enclosingClass!.fields
           .firstWhere((field) => (field.typeIdentifier.type == typeDef));
@@ -60,8 +60,8 @@ class NestedStructProjection extends StructProjection {
       final mangledType =
           dartTypeProjection == 'Array<Uint16>' ? 'String' : dartTypeProjection;
       buffer.writeln('''
-  $mangledType get ${field.name} => $instanceName;
-  set ${field.name}($mangledType value) => $instanceName = value;
+  $mangledType get ${field.name} => this.$instanceName;
+  set ${field.name}($mangledType value) => this.$instanceName = value;
       ''');
     }
     buffer.writeln('}');
