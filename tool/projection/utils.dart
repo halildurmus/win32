@@ -61,6 +61,9 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+String lastComponent(String fullyQualifiedType) =>
+    fullyQualifiedType.split('.').last;
+
 /// Convert a nested type to a guaranteed-unique name.
 String mangleName(TypeDef typeDef) {
   final name = typeDef.name.split('.').last;
