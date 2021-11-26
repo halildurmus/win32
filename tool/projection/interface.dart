@@ -7,24 +7,41 @@ import 'utils.dart';
 
 class InterfaceProjection {
   final TypeDef typeDef;
-  final List<MethodProjection> methodProjections = [];
 
-  InterfaceProjection(this.typeDef) {
+  // Lazily cached values, with matching property
+  int? _vtableStart;
+  List<MethodProjection>? _methodProjections;
+
+  InterfaceProjection(this.typeDef);
+
+  int get vtableStart {
+    _vtableStart ??= calculateVTableStart(typeDef);
+    return _vtableStart!;
+  }
+
+  List<MethodProjection> get methodProjections {
+    _methodProjections ??= _cacheMethodProjections();
+    return _methodProjections!;
+  }
+
+  List<MethodProjection> _cacheMethodProjections() {
+    final projection = <MethodProjection>[];
     var vtableOffset = vtableStart;
     for (final method in typeDef.methods) {
       if (method.isGetProperty) {
         final getPropertyProjection =
             GetPropertyProjection(method, vtableOffset++);
-        methodProjections.add(getPropertyProjection);
+        projection.add(getPropertyProjection);
       } else if (method.isSetProperty && method.parameters.isNotEmpty) {
         final setPropertyProjection =
             SetPropertyProjection(method, vtableOffset++);
-        methodProjections.add(setPropertyProjection);
+        projection.add(setPropertyProjection);
       } else {
         final methodProjection = MethodProjection(method, vtableOffset++);
-        methodProjections.add(methodProjection);
+        projection.add(methodProjection);
       }
     }
+    return projection;
   }
 
   int calculateVTableStart(TypeDef? type) {
@@ -46,8 +63,6 @@ class InterfaceProjection {
   }
 
   String get shortName => shortenTypeDef(typeDef);
-
-  int get vtableStart => calculateVTableStart(typeDef);
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
