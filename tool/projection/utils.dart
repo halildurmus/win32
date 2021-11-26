@@ -32,8 +32,8 @@ bool typePretendsToBeAnsi(String typeName) {
     'ANTENNA',
     'M128A',
     'CIECHROMA',
-    'ALLOC_PARA',
-    'CHAIN_PARA'
+    'PARA',
+    'CRITERIA'
   ];
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {

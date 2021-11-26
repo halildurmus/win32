@@ -196,8 +196,11 @@ void generateLibraryExport(List<String> namespaces) {
 // Example:
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  // final namespaces = ['Windows.Win32.NetworkManagement.WiFi'];
-  final namespaces = args.isNotEmpty ? [args[0]] : namespacesInScope(scope);
+  final namespacesDefault = [
+    'Windows.Win32.Security.Cryptography.Certificates'
+  ];
+  // final namespacesDefault = namespacesInScope(scope);
+  final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
 
   for (final namespace in namespaces) {
     print('Generating $namespace...');

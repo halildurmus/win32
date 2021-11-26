@@ -32,7 +32,7 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
   final buffer = StringBuffer();
 
   for (final callback in callbacks) {
-    buffer.write(CallbackProjection(callback).toString());
+    buffer.writeln(CallbackProjection(callback).toString());
 
     final invokeMethod = callback.findMethod('Invoke');
     if (invokeMethod != null) {
