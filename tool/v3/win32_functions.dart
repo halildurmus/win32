@@ -90,8 +90,9 @@ void generateFfiFile(File file, TypeDef typedef) {
       .toList();
   final imports = <String>{};
 
-  final writer = file.openSync(mode: FileMode.writeOnly);
   final buffer = StringBuffer();
+
+  var projectedFunctionsCount = 0;
 
   for (final library in modules) {
     // For now, we only project Unicode methods.
@@ -103,36 +104,45 @@ void generateFfiFile(File file, TypeDef typedef) {
         .toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 
-    // API set names aren't legal Dart identifiers, so we rename them
-    // Some modules may also be of the form windows.ai.machinelearning.dll.
-    final libraryDartName =
-        library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
+    // Don't bother with modules that don't contain any relevant functions.
+    if (functions.isNotEmpty) {
+      // API set names aren't legal Dart identifiers, so we rename them
+      // Some modules may also be of the form windows.ai.machinelearning.dll.
+      final libraryDartName =
+          library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
 
-    final dll = libraryFromDllName(library);
-    buffer.write(docComment(dll));
-    buffer.writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
-    buffer.writeln();
+      final dll = libraryFromDllName(library);
+      buffer.write(docComment(dll));
+      buffer
+          .writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
+      buffer.writeln();
 
-    for (final function in functions) {
-      final printer = FunctionProjection(function, libraryDartName);
-      buffer.writeln(printer.toString());
-      imports.addAll(importsForFunction(function));
-    }
-    buffer.writeln();
-  }
-
-  writer.writeStringSync(ffiFileHeader);
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-  for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
+      for (final function in functions) {
+        final printer = FunctionProjection(function, libraryDartName);
+        buffer.writeln(printer.toString());
+        imports.addAll(importsForFunction(function));
+        projectedFunctionsCount++;
+      }
+      buffer.writeln();
     }
   }
-  writer.writeStringSync('\n');
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
+
+  if (projectedFunctionsCount > 0) {
+    final writer = file.openSync(mode: FileMode.writeOnly);
+
+    writer.writeStringSync(ffiFileHeader);
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
+    for (final import in imports) {
+      if (!excludedImports.contains(import)) {
+        writer.writeStringSync(
+            "import '${relativePathToSrcDirectory(file)}$import';\n");
+      }
+    }
+    writer.writeStringSync('\n');
+    writer.writeStringSync(buffer.toString());
+    writer.closeSync();
+  }
 }

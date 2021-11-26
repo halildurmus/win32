@@ -12,14 +12,8 @@ e.g. PFAX_EXT_INITIALIZE_CONFIG, PWLX_QUERY_TERMINAL_SERVICES_DATA
 interfaces aren't discriminating between 'A' and 'W' suffixes
 e.g. IDirectInput
 
-PROPSPEC isn't being promoted correctly
-e.g. IWiaMiniDrv.drvValidateItemProperties
-
 functions are including libraries that don't contain any methods
 e.g. Windows.Win32.Globalization
-
-some typedefs are being renamed in v2 style
-e.g. PWLX_DIALOG_BOX
 
 callbacks are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK
@@ -28,6 +22,12 @@ struct members are being projected with `_` prefixes
 e.g. SLIST_HEADER
 
 ## DONE
+
+some typedefs are being renamed in v2 style
+e.g. PWLX_DIALOG_BOX
+
+PROPSPEC isn't being promoted correctly
+e.g. IWiaMiniDrv.drvValidateItemProperties
 
 deeply nested structs aren't projecting correctly
 e.g. CM_NOTIFY_EVENT_DATA

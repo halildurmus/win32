@@ -11,10 +11,9 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope.findTypeDef(
-      'Windows.Win32.Devices.DeviceAndDriverInstallation.CM_NOTIFY_EVENT_DATA');
+  final struct = scope.findTypeDef('Windows.Win32.System.IO.OVERLAPPED');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'CM_NOTIFY_EVENT_DATA');
+    final structProjection = StructProjection(struct, 'OVERLAPPED');
     print(structProjection);
   }
 }

@@ -160,7 +160,7 @@ String safeName(String name) {
     if (characterIsNumeral(name.substring(1, 2))) {
       return 'x${name.substring(1)}';
     } else {
-      return name.substring(1);
+      return safeName(name.substring(1));
     }
   }
   return name;
