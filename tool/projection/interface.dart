@@ -10,18 +10,30 @@ class InterfaceProjection {
 
   // Lazily cached values, with matching property
   int? _vtableStart;
+  int get vtableStart => _vtableStart ??= cacheVtableStart(typeDef);
+
   List<MethodProjection>? _methodProjections;
+  List<MethodProjection> get methodProjections =>
+      _methodProjections ??= _cacheMethodProjections();
 
   InterfaceProjection(this.typeDef);
 
-  int get vtableStart {
-    _vtableStart ??= calculateVTableStart(typeDef);
-    return _vtableStart!;
-  }
+  int cacheVtableStart(TypeDef? type) {
+    if (type == null) {
+      return 0;
+    }
 
-  List<MethodProjection> get methodProjections {
-    _methodProjections ??= _cacheMethodProjections();
-    return _methodProjections!;
+    if (type.isInterface && type.interfaces.isNotEmpty) {
+      var sum = 0;
+
+      for (final interface in type.interfaces) {
+        sum += interface.methods.length + cacheVtableStart(interface);
+      }
+
+      return sum;
+    }
+
+    return 0;
   }
 
   List<MethodProjection> _cacheMethodProjections() {
@@ -42,24 +54,6 @@ class InterfaceProjection {
       }
     }
     return projection;
-  }
-
-  int calculateVTableStart(TypeDef? type) {
-    if (type == null) {
-      return 0;
-    }
-
-    if (type.isInterface && type.interfaces.isNotEmpty) {
-      var sum = 0;
-
-      for (final interface in type.interfaces) {
-        sum += interface.methods.length + calculateVTableStart(interface);
-      }
-
-      return sum;
-    }
-
-    return 0;
   }
 
   String get shortName => shortenTypeDef(typeDef);

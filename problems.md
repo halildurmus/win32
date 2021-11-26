@@ -12,9 +12,6 @@ e.g. PFAX_EXT_INITIALIZE_CONFIG, PWLX_QUERY_TERMINAL_SERVICES_DATA
 interfaces aren't discriminating between 'A' and 'W' suffixes
 e.g. IDirectInput
 
-functions are including libraries that don't contain any methods
-e.g. Windows.Win32.Globalization
-
 callbacks are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK
 
@@ -22,6 +19,9 @@ struct members are being projected with `_` prefixes
 e.g. SLIST_HEADER
 
 ## DONE
+
+functions are including libraries that don't contain any methods
+e.g. Windows.Win32.Globalization
 
 some typedefs are being renamed in v2 style
 e.g. PWLX_DIALOG_BOX

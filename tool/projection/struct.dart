@@ -46,7 +46,10 @@ class StructProjection {
   String get _fieldsProjection =>
       typeDef.fields.map((field) => FieldProjection(field)).join('\n');
 
-  String get _nestedTypes {
+  String? _nestedTypes;
+  String get nestedTypes => _nestedTypes ??= _cacheNestedTypes();
+
+  String _cacheNestedTypes() {
     final buffer = StringBuffer();
     final nestedTypes = <String, TypeDef>{};
 
@@ -99,7 +102,7 @@ class StructProjection {
           $_fieldsProjection
         }
 
-        $_nestedTypes
+        $nestedTypes
         $_nestedArrays
       ''';
 }
