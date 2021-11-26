@@ -1,6 +1,5 @@
 import 'package:winmd/winmd.dart';
 
-import '../metadata/win32_typemap.dart';
 import 'utils.dart';
 
 class TypeTuple {
@@ -154,17 +153,21 @@ class TypeProjection {
   }
 
   TypeTuple unwrapCallbackType() {
+    const voidCallbackTypes = <String, String>{
+      'FARPROC': 'Pointer',
+      'PROC': 'Pointer',
+      'NEARPROC': 'Pointer',
+    };
+
     final callbackType = typeIdentifier.name.split('.').last;
 
-    // TODO: Remove in v3 -- for backward compat only
-    if (callbackTypeMapping.keys.contains(callbackType)) {
-      final mappedType = callbackTypeMapping[callbackType]!;
+    if (voidCallbackTypes.keys.contains(callbackType)) {
+      final mappedType = voidCallbackTypes[callbackType]!;
       return TypeTuple(mappedType, mappedType);
     }
 
     final nativeType = 'Pointer<NativeFunction<$callbackType>>';
     final dartType = 'Pointer<NativeFunction<$callbackType>>';
-
     return TypeTuple(nativeType, dartType);
   }
 
