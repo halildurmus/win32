@@ -205,8 +205,13 @@ class Method extends TokenObject
   bool get isGetProperty =>
       isSpecialName && name.startsWith('get_') && !_isFakeGetProperty;
 
+  bool get _isFakeSetProperty =>
+      parent.name.startsWith('Windows.Win32') &&
+      (parameters.length != 1 || !parameters.first.isInParam);
+
   /// Returns true if the method is a property setter
-  bool get isSetProperty => isSpecialName && name.startsWith('put_');
+  bool get isSetProperty =>
+      isSpecialName && name.startsWith('put_') && !_isFakeSetProperty;
 
   /// Returns true if the method is a property getter or setter.
   bool get isProperty => isGetProperty | isSetProperty;
