@@ -116,6 +116,8 @@ class TypeProjection {
     return TypeTuple(typeClass, typeClass);
   }
 
+  /// Takes a type such as `PointerTypeModifier` -> `BaseType.Uint32` and
+  /// converts it to `Pointer<Uint32>.
   TypeTuple unwrapPointerType() {
     if (typeIdentifier.typeArg == null) {
       throw Exception('Pointer type missing for $typeIdentifier.');
@@ -125,13 +127,13 @@ class TypeProjection {
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
     // model that with a generic Pointer in Dart.
-    final projection = typeArg.projection;
-    if (projection.nativeType == 'Void') {
+    final typeArgNativeType = typeArg.projection.nativeType;
+    if (typeArgNativeType == 'Void') {
       return TypeTuple('Pointer', 'Pointer');
     }
 
-    final nativeType = 'Pointer<${stripLeadingUnderscores(projection.nativeType)}>';
-    final dartType = 'Pointer<${stripLeadingUnderscores(projection.nativeType)}>';
+    final nativeType = 'Pointer<${stripLeadingUnderscores(typeArgNativeType)}>';
+    final dartType = 'Pointer<${stripLeadingUnderscores(typeArgNativeType)}>';
 
     return TypeTuple(nativeType, dartType);
   }
