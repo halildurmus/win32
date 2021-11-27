@@ -75,9 +75,11 @@ class NestedStructProjection extends StructProjection {
       // Arrays. This is unlikely to survive.
       final mangledType =
           dartTypeProjection == 'Array<Uint16>' ? 'String' : dartTypeProjection;
+
+      final safeFieldName = safeName(field.name);
       buffer.writeln('''
-  $mangledType get ${stripLeadingUnderscores(field.name)} => this.$instanceName;
-  set ${stripLeadingUnderscores(field.name)}($mangledType value) => this.$instanceName = value;
+  $mangledType get $safeFieldName => this.$instanceName;
+  set $safeFieldName($mangledType value) => this.$instanceName = value;
       ''');
     }
     buffer.writeln('}');

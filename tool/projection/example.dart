@@ -11,9 +11,11 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope.findTypeDef('Windows.Win32.Media.Multimedia.JOYCAPS2W');
+  final struct = scope.findTypeDef(
+      'Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_METHOD');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'JOYCAPS2W');
+    final structProjection =
+        StructProjection(struct, 'BLUETOOTH_AUTHENTICATION_METHOD');
     print(structProjection);
   }
 }

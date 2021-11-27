@@ -82,7 +82,7 @@ class StructProjection {
     // Walk through children to see if they have a packing alignment
     for (final field in typeDef.fields) {
       final fieldTypeDef = field.typeIdentifier.type;
-      if (fieldTypeDef != null) {
+      if (fieldTypeDef != null && !field.isLiteral) {
         final fieldPacking = calculatePackingAlignment(fieldTypeDef);
         alignment = min(fieldPacking, alignment);
       }

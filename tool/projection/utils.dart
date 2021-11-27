@@ -148,12 +148,14 @@ String importForWin32Type(TypeIdentifier identifier) {
     return 'specialTypes.dart';
   }
 
+  final folder = folderFromNamespace(identifier.name);
   if (identifier.type != null && identifier.type!.isDelegate) {
-    return '${folderFromNamespace(identifier.name)}/callbacks.g.dart';
+    return '$folder/callbacks.g.dart';
   } else if (identifier.type!.isInterface) {
-    return '${folderFromNamespace(identifier.name)}/${identifier.name.split(".").last}.dart';
+    final fileName = stripAnsiUnicodeSuffix(lastComponent(identifier.name));
+    return '$folder/$fileName.dart';
   } else {
-    return '${folderFromNamespace(identifier.name)}/structs.g.dart';
+    return '$folder/structs.g.dart';
   }
 }
 
