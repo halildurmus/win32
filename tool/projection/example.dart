@@ -74,7 +74,7 @@ void printComSetProperty() {
 
 void printComInterface() {
   final interface =
-      scope.findTypeDef('Windows.Win32.Data.Xml.MsXml.ISchemaType');
+      scope.findTypeDef('Windows.Win32.UI.Shell.IBrowserService2');
 
   if (interface != null) {
     final interfaceProjection = InterfaceProjection(interface);
@@ -92,5 +92,5 @@ void printComClass() {
 }
 
 void main() {
-  printStruct();
+  printComInterface();
 }

@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
 import 'type.dart';
+import 'utils.dart';
 
 /// A method.
 ///
@@ -39,12 +40,12 @@ class MethodProjection {
     if (overloads.length > 1) {
       final overloadIndex = overloads.toList().indexOf(method);
       if (overloadIndex > 0) {
-        return '${method.name}_$overloadIndex';
+        return '${safeName(method.name)}_$overloadIndex';
       }
     }
 
     // Otherwise the original name is fine.
-    return method.name;
+    return safeName(method.name);
   }
 
   String get methodParams =>
@@ -79,7 +80,7 @@ class MethodProjection {
   // this combination (https://github.com/microsoft/win32metadata/issues/707).
   // So instead, we also need to check the number of parameters.
 
-  // TODO: Consider using `late final` technique to cache the function lookup.
+  // TODO: Consider using technique to cache the function lookup.
   @override
   String toString() => '''
       ${returnType.dartType} $name($methodParams) => ptr.ref.lpVtbl.value

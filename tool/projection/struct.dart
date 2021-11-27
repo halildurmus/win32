@@ -27,12 +27,9 @@ class StructProjection {
     return 'Struct';
   }
 
-  String get _classPreamble {
+  String get classPreamble {
     const docComment = '/// {@category Struct}';
-    final packingAlignment = typeDef.classLayout.packingAlignment;
-    if (packingAlignment != null &&
-        packingAlignment > 0 &&
-        !ignorePackingDirectives.contains(typeDef.name)) {
+    if (packingAlignment > 0) {
       return '$docComment\n@Packed($packingAlignment)';
     } else {
       return docComment;
@@ -73,6 +70,26 @@ class StructProjection {
     return buffer.toString();
   }
 
+  int? _packingAlignment;
+
+  int get packingAlignment =>
+      _packingAlignment ??= calculatePackingAlignment(typeDef);
+
+  int calculatePackingAlignment(TypeDef typeDef) {
+    final alignment = typeDef.classLayout.packingAlignment;
+    if (alignment != null &&
+        alignment > 0 &&
+        !ignorePackingDirectives.contains(typeDef.name)) {
+      return alignment;
+    }
+
+    // // TODO: Walk through children to see if they have a packing alignment
+    // for (final field in typeDef.fields.where(_isNestedType)) {
+
+    // }
+    return 0;
+  }
+
   String get _nestedArrays {
     final buffer = StringBuffer();
     final nestedArrays = <String, TypeDef>{};
@@ -97,7 +114,7 @@ class StructProjection {
 
   @override
   String toString() => '''
-        $_classPreamble
+        $classPreamble
         class $_projectedName extends $_baseType {
           $_fieldsProjection
         }

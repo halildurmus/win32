@@ -60,7 +60,7 @@ class FieldProjection {
     // to not do the extra work necessary to test whether they're safe or not.
     final dartType = field.typeIdentifier.type?.enclosingClass != null
         ? typeProjection.dartType
-        : safeName(stripLeadingUnderscores(typeProjection.dartType));
+        : safeTypename(stripLeadingUnderscores(typeProjection.dartType));
 
     return '  ${typeProjection.attribute}\n  external $dartType $fieldName;\n';
   }

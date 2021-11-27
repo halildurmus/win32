@@ -127,13 +127,14 @@ class TypeProjection {
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
     // model that with a generic Pointer in Dart.
-    final typeArgNativeType = typeArg.projection.nativeType;
+    final typeArgNativeType =
+        stripLeadingUnderscores(typeArg.projection.nativeType);
     if (typeArgNativeType == 'Void') {
       return TypeTuple('Pointer', 'Pointer');
     }
 
-    final nativeType = 'Pointer<${stripLeadingUnderscores(typeArgNativeType)}>';
-    final dartType = 'Pointer<${stripLeadingUnderscores(typeArgNativeType)}>';
+    final nativeType = 'Pointer<$typeArgNativeType>';
+    final dartType = 'Pointer<$typeArgNativeType>';
 
     return TypeTuple(nativeType, dartType);
   }
@@ -145,10 +146,11 @@ class TypeProjection {
     }
 
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
-    final projection = typeArg.projection;
+    final typeArgNativeType =
+        stripLeadingUnderscores(typeArg.projection.nativeType);
 
-    final nativeType = 'Array<${projection.nativeType}>';
-    final dartType = 'Array<${projection.nativeType}>';
+    final nativeType = 'Array<$typeArgNativeType>';
+    final dartType = 'Array<$typeArgNativeType>';
     final upperBound = typeIdentifier.arrayDimensions?.first;
 
     return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');

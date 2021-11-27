@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../v3/exclusions.dart';
+import '../v3/falseProperties.dart';
 import 'type.dart';
 
 const dartKeywords = <String>[
@@ -177,6 +178,18 @@ String safeName(String name) {
   return stripLeadingUnderscores(name);
 }
 
+bool isExcludedGetProperty(Method method) => falseProperties
+    .where((p) =>
+        p.interface == shortenTypeDef(method.parent) &&
+        p.property == method.name)
+    .isNotEmpty;
+
+bool isExcludedSetProperty(Method method) => falseProperties
+    .where((p) =>
+        p.interface == shortenTypeDef(method.parent) &&
+        p.property.replaceFirst('get', 'put') == method.name)
+    .isNotEmpty;
+
 String stripLeadingUnderscores(String name) {
   if (name.startsWith('_')) {
     if (characterIsNumeral(name.substring(1, 2))) {
@@ -199,9 +212,5 @@ String safeTypename(String name) {
     return 'Pointer<${safeTypename(wrappedType)}>';
   }
 
-  if (name.startsWith('_')) {
-    return name.substring(1);
-  } else {
-    return name;
-  }
+  return stripLeadingUnderscores(name);
 }

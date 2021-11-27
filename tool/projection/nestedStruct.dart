@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import '../v3/exclusions.dart';
 import 'type.dart';
 import 'struct.dart';
 import 'utils.dart';
@@ -41,6 +42,18 @@ class NestedStructProjection extends StructProjection {
     return name;
   }
 
+  @override
+  String get classPreamble {
+    final packingAlignment = rootType.classLayout.packingAlignment;
+    if (packingAlignment != null &&
+        packingAlignment > 0 &&
+        !ignorePackingDirectives.contains(typeDef.name)) {
+      return '@Packed($packingAlignment)';
+    } else {
+      return '';
+    }
+  }
+
   /// A nested type needs a way to access its members from the parent type. We
   /// do this through an extension that contains the field accessors.
   String get propertyAccessors {
@@ -60,8 +73,8 @@ class NestedStructProjection extends StructProjection {
       final mangledType =
           dartTypeProjection == 'Array<Uint16>' ? 'String' : dartTypeProjection;
       buffer.writeln('''
-  $mangledType get ${field.name} => this.$instanceName;
-  set ${field.name}($mangledType value) => this.$instanceName = value;
+  $mangledType get ${stripLeadingUnderscores(field.name)} => this.$instanceName;
+  set ${stripLeadingUnderscores(field.name)}($mangledType value) => this.$instanceName = value;
       ''');
     }
     buffer.writeln('}');

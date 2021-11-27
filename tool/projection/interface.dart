@@ -40,11 +40,13 @@ class InterfaceProjection {
     final projection = <MethodProjection>[];
     var vtableOffset = vtableStart;
     for (final method in typeDef.methods) {
-      if (method.isGetProperty) {
+      if (method.isGetProperty && !isExcludedGetProperty(method)) {
         final getPropertyProjection =
             GetPropertyProjection(method, vtableOffset++);
         projection.add(getPropertyProjection);
-      } else if (method.isSetProperty && method.parameters.isNotEmpty) {
+      } else if (method.isSetProperty &&
+          method.parameters.isNotEmpty &&
+          !isExcludedSetProperty(method)) {
         final setPropertyProjection =
             SetPropertyProjection(method, vtableOffset++);
         projection.add(setPropertyProjection);

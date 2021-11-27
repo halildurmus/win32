@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
+import '../projection/utils.dart';
+
 const enumFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -40,7 +42,7 @@ String processEnumeration(TypeDef enumClass) {
   // The first field is always the special field _value
   for (final field in enumClass.fields.skip(1)) {
     final value = field.value.toHexString(32);
-    buffer.writeln('  static const ${field.name} = $value;');
+    buffer.writeln('  static const ${safeName(field.name)} = $value;');
   }
 
   buffer.writeln('}\n');
