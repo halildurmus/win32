@@ -17,6 +17,8 @@ const dartKeywords = <String>[
   'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
   'throw', 'true', 'try', 'var', 'void', 'while', 'with',
 
+  'String',
+
   // FFI special words
   'Int8', 'Int16', 'Int32', 'Int64',
   'Uint8', 'Uint16', 'Uint32', 'Uint64',
@@ -34,7 +36,10 @@ bool typePretendsToBeAnsi(String typeName) {
     'M128A',
     'CIECHROMA',
     'PARA',
-    'CRITERIA'
+    'CRITERIA',
+    'UIDNA',
+    'YCbCrA',
+    'RGBA',
   ];
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {

@@ -167,7 +167,8 @@ class TypeProjection {
       'NEARPROC': 'Pointer',
     };
 
-    final callbackType = typeIdentifier.name.split('.').last;
+    final callbackType =
+        stripLeadingUnderscores(lastComponent(typeIdentifier.name));
 
     if (voidCallbackTypes.keys.contains(callbackType)) {
       final mappedType = voidCallbackTypes[callbackType]!;

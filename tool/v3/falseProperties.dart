@@ -1,32 +1,37 @@
-class ComFalseProperty {
+class ComProperty {
   final String interface;
   final String property;
 
-  const ComFalseProperty(this.interface, this.property);
+  const ComProperty(this.interface, this.property);
 }
 
-const falseProperties = <ComFalseProperty>[
-  ComFalseProperty('IRealTimeStylus', 'get_WindowInputRectangle'),
-  ComFalseProperty('IDynamicRenderer', 'get_ClipRectangle'),
-  ComFalseProperty('ISWbemQualifier', 'get_Value'),
-  ComFalseProperty('ISWbemProperty', 'get_Value'),
-  ComFalseProperty('ISWbemNamedValue', 'get_Value'),
-  ComFalseProperty('ISideShowNotification', 'get_ExpirationTime'),
-  ComFalseProperty('IContactAggregationGroup', 'get_GlobalObjectId'),
-  ComFalseProperty('IEventProperty', 'get_Value'),
-  ComFalseProperty('ITuningSpace', 'get_NetworkType'),
-  ComFalseProperty('IMSVidVideoRenderer', 'get_CustomCompositorClass'),
-  ComFalseProperty('IMSVidVideoRenderer', 'get_MixerBitmap'),
-  ComFalseProperty('IComponentType', 'get_MediaType'),
-  ComFalseProperty('IComponentType', 'get_MediaMajorType'),
-  ComFalseProperty('IComponentType', 'get_MediaSubType'),
-  ComFalseProperty('IComponentType', 'get_MediaFormatType'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_ModulationType'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_InnerFECMethod'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_InnerFECRate'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_OuterFECMethod'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_OuterFECRate'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_SymbolRate'),
-  ComFalseProperty('IBDA_DigitalDemodulator', 'get_SpectralInversion'),
-  ComFalseProperty('IXMLDOMNode', 'get_dataType'),
+const falseProperties = <ComProperty>[
+  ComProperty('IRealTimeStylus', 'get_WindowInputRectangle'),
+  ComProperty('IDynamicRenderer', 'get_ClipRectangle'),
+  ComProperty('ISWbemQualifier', 'get_Value'),
+  ComProperty('ISWbemProperty', 'get_Value'),
+  ComProperty('ISWbemNamedValue', 'get_Value'),
+  ComProperty('ISideShowNotification', 'get_ExpirationTime'),
+  ComProperty('IContactAggregationGroup', 'get_GlobalObjectId'),
+  ComProperty('IEventProperty', 'get_Value'),
+  ComProperty('ITuningSpace', 'get_NetworkType'),
+  ComProperty('IPrintSchemaParameterInitializer', 'get_Value'),
+  ComProperty('IMSVidVideoRenderer', 'get_CustomCompositorClass'),
+  ComProperty('IMSVidVideoRenderer', 'get_MixerBitmap'),
+  ComProperty('IComponentType', 'get_MediaType'),
+  ComProperty('IComponentType', 'get_MediaMajorType'),
+  ComProperty('IComponentType', 'get_MediaSubType'),
+  ComProperty('IComponentType', 'get_MediaFormatType'),
+  ComProperty('IBDA_DigitalDemodulator2', 'get_Pilot'),
+  ComProperty('IBDA_DigitalDemodulator2', 'get_RollOff'),
+  ComProperty('IBDA_DigitalDemodulator2', 'get_GuardInterval'),
+  ComProperty('IBDA_DigitalDemodulator2', 'get_TransmissionMode'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_ModulationType'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_InnerFECMethod'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_InnerFECRate'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_OuterFECMethod'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_OuterFECRate'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_SymbolRate'),
+  ComProperty('IBDA_DigitalDemodulator', 'get_SpectralInversion'),
+  ComProperty('IXMLDOMNode', 'get_dataType'),
 ];
