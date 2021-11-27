@@ -1,8 +1,5 @@
 ## TODO
 
-property getters and setters don't have the same type
-e.g. IXMLDOMNode.get_dataType
-
 child structs are more loosely packed than parent structs
 e.g. RFCOMM_COMMAND
 
@@ -12,7 +9,16 @@ e.g. IDirectInput
 callbacks and functions are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK, SymFromAddr
 
+interfaces that add overridden methods don't name them uniquely
+e.g. IDWriteTextRenderer1.DrawGlyphRun
+
+arrays must contain safeTypename children
+e.g. _rloop DMUS_REGION.WLOOP
+
 ## DONE
+
+property getters and setters don't have the same type
+e.g. IXMLDOMNode.get_dataType
 
 use of reserved keywords for struct fields
 e.g. FILTER_AGGREGATE_BASIC_INFORMATION.Type
