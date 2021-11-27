@@ -1,8 +1,5 @@
 ## TODO
 
-use of reserved keywords for struct fields
-e.g. FILTER_AGGREGATE_BASIC_INFORMATION.Type
-
 property getters and setters don't have the same type
 e.g. IXMLDOMNode.get_dataType
 
@@ -16,6 +13,9 @@ callbacks and functions are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK, SymFromAddr
 
 ## DONE
+
+use of reserved keywords for struct fields
+e.g. FILTER_AGGREGATE_BASIC_INFORMATION.Type
 
 set properties that have multiple parameters
 e.g. IX509SignatureInformation.Parameters

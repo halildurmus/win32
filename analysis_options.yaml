@@ -28,5 +28,8 @@ linter:
     non_constant_identifier_names: false
     camel_case_types: false
 
+    # We use `this` to minimize the risk of name clashes
+    unnecessary_this: false
+
     # COM interop classes are named for their contents
     file_names: false
