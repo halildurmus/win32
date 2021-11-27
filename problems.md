@@ -1,11 +1,5 @@
 ## TODO
 
-child structs are more loosely packed than parent structs
-e.g. RFCOMM_COMMAND
-
-interfaces aren't discriminating between 'A' and 'W' suffixes
-e.g. IDirectInput
-
 callbacks and functions are being defined for each processor type
 e.g. PGET_RUNTIME_FUNCTION_CALLBACK, SymFromAddr
 
@@ -16,6 +10,12 @@ arrays must contain safeTypename children
 e.g. _rloop DMUS_REGION.WLOOP
 
 ## DONE
+
+interfaces aren't discriminating between 'A' and 'W' suffixes
+e.g. IDirectInput
+
+child structs are more loosely packed than parent structs
+e.g. RFCOMM_COMMAND
 
 property getters and setters don't have the same type
 e.g. IXMLDOMNode.get_dataType

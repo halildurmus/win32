@@ -11,9 +11,9 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope.findTypeDef('Windows.Win32.System.IO.OVERLAPPED');
+  final struct = scope.findTypeDef('Windows.Win32.Media.Multimedia.JOYCAPS2W');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'OVERLAPPED');
+    final structProjection = StructProjection(struct, 'JOYCAPS2W');
     print(structProjection);
   }
 }
@@ -92,5 +92,5 @@ void printComClass() {
 }
 
 void main() {
-  printComInterface();
+  printStruct();
 }

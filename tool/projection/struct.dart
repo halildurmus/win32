@@ -1,6 +1,7 @@
+import 'dart:math' show min;
+
 import 'package:winmd/winmd.dart';
 
-import '../v3/exclusions.dart';
 import 'field.dart';
 import 'nestedStruct.dart';
 import 'utils.dart';
@@ -71,23 +72,22 @@ class StructProjection {
   }
 
   int? _packingAlignment;
-
   int get packingAlignment =>
       _packingAlignment ??= calculatePackingAlignment(typeDef);
 
   int calculatePackingAlignment(TypeDef typeDef) {
-    final alignment = typeDef.classLayout.packingAlignment;
-    if (alignment != null &&
-        alignment > 0 &&
-        !ignorePackingDirectives.contains(typeDef.name)) {
-      return alignment;
+    var alignment =
+        typeDef.classLayout.packingAlignment ?? 0xFF; // marker value
+
+    // Walk through children to see if they have a packing alignment
+    for (final field in typeDef.fields) {
+      final fieldTypeDef = field.typeIdentifier.type;
+      if (fieldTypeDef != null) {
+        final fieldPacking = calculatePackingAlignment(fieldTypeDef);
+        alignment = min(fieldPacking, alignment);
+      }
     }
-
-    // // TODO: Walk through children to see if they have a packing alignment
-    // for (final field in typeDef.fields.where(_isNestedType)) {
-
-    // }
-    return 0;
+    return alignment == 0xFF ? 0 : alignment;
   }
 
   String get _nestedArrays {

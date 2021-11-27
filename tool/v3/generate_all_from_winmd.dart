@@ -167,6 +167,7 @@ void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where((typedef) => typedef.isInterface)
+      .where((typedef) => !typedefIsAnsi(typedef))
       .where((typedef) => !excludedComInterfaces.contains(typedef.name))
       .toList();
 
