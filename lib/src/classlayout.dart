@@ -35,6 +35,11 @@ class ClassLayout extends TokenObject {
   int? packingAlignment;
 
   ClassLayout(Scope scope, int classToken) : super(scope, classToken) {
+    // Check for synthetic type like GUID
+    if (classToken == 0) {
+      return;
+    }
+
     using((Arena arena) {
       final pdwPackSize = arena<DWORD>();
       final rgFieldOffset = arena<COR_FIELD_OFFSET>(256);
