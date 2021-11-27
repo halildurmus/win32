@@ -67,7 +67,10 @@ class NestedStructProjection extends StructProjection {
     buffer.writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
       final instanceName = buildInstanceName(typeDef, field);
-      final dartTypeProjection = TypeProjection(field.typeIdentifier).dartType;
+      final dartTypeProjection = field.typeIdentifier.type?.isNested == true
+          ? TypeProjection(field.typeIdentifier).dartType
+          : stripLeadingUnderscores(
+              TypeProjection(field.typeIdentifier).dartType);
       // TODO: Hack to work around the fact that Strings are projected as
       // Arrays. This is unlikely to survive.
       final mangledType =

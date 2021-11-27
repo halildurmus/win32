@@ -71,6 +71,7 @@ const ignorePackingDirectives = <String>[
   //   packed struct 'JET_SIGNATURE' is not supported.
   'Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE',
   'Windows.Win32.Devices.Bluetooth.SOCKADDR_BTH',
+  'Windows.Win32.Devices.Bluetooth.RFCOMM_COMMAND',
   'Windows.Win32.Devices.DeviceAndDriverInstallation.CS_DES',
   'Windows.Win32.Devices.HumanInterfaceDevice.JOYREGHWVALUES',
   'Windows.Win32.Devices.Tapi.LINEAGENTCAPS',

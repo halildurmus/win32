@@ -146,8 +146,12 @@ class TypeProjection {
     }
 
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
-    final typeArgNativeType =
-        stripLeadingUnderscores(typeArg.projection.nativeType);
+
+    // Arrays of nested types have a private _ prefix. This is not a very
+    // expensive operation.
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+        ? typeArg.nativeType
+        : stripLeadingUnderscores(typeArg.nativeType);
 
     final nativeType = 'Array<$typeArgNativeType>';
     final dartType = 'Array<$typeArgNativeType>';
