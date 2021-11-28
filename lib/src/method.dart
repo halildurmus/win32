@@ -118,7 +118,7 @@ class Method extends TokenObject
   String toString() => name;
 
   /// The method's parent type.
-  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
+  TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns information about the method's visibility / accessibility to other
   /// types.

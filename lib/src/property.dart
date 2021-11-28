@@ -127,7 +127,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       : null;
 
   /// Returns the [TypeDef] representing the type that implements the property.
-  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
+  TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns true if the property is special; the name describes how.
   bool get isSpecialName =>

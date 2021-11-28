@@ -118,7 +118,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   String toString() => name;
 
   /// Returns the [TypeDef] representing the class that the field belongs to.
-  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
+  TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns the visibility of the field (public, private, etc.)
   FieldAccess get fieldAccess =>

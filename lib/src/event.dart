@@ -106,7 +106,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       : null;
 
   /// Returns the [TypeDef] representing the class that declares the event.
-  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
+  TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
 
   /// Returns true if the event is special; its name describes how.
   bool get isSpecialName =>
