@@ -14,6 +14,7 @@ import 'enums.dart';
 import 'methodimpls.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
+import 'mixins/supportedarchitectures_mixin.dart';
 import 'moduleref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
@@ -62,7 +63,10 @@ enum VtableLayout {
 
 /// A method.
 class Method extends TokenObject
-    with CustomAttributesMixin, GenericParamsMixin {
+    with
+        CustomAttributesMixin,
+        GenericParamsMixin,
+        SupportedArchitecturesMixin {
   int implFlags;
 
   String name;

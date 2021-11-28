@@ -12,10 +12,10 @@ import 'classlayout.dart';
 import 'com/constants.dart';
 import 'event.dart';
 import 'field.dart';
-import 'interop.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
+import 'mixins/supportedarchitectures_mixin.dart';
 import 'property.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
@@ -80,7 +80,10 @@ enum StringFormat {
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject
-    with CustomAttributesMixin, GenericParamsMixin {
+    with
+        CustomAttributesMixin,
+        GenericParamsMixin,
+        SupportedArchitecturesMixin {
   final int baseTypeToken;
   final String name;
   final TypeIdentifier? typeSpec;
@@ -380,29 +383,6 @@ class TypeDef extends TokenObject
   bool get isUnion =>
       classLayout.fieldOffsets != null &&
       classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
-
-  /// Get platform architectures on which this type is supported.
-  ///
-  /// This property currently only supports Win32 metadata.
-  Architecture get supportedArchitectures {
-    // By default, this attribute is missing and it is assumed that types
-    // support all valid platform architectures.
-    if (customAttributes
-        .where((ca) =>
-            ca.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute')
-        .isEmpty) {
-      return Architecture.all();
-    }
-
-    final supportedArchRaw = customAttributeAsBytes(
-        'Windows.Win32.Interop.SupportedArchitectureAttribute');
-
-    // [0x01, 00x00] prolog, then next digit is arch attribute.
-    if (supportedArchRaw.length < 3) {
-      throw WinmdException('SupportedArchitecture attribute is malformed.');
-    }
-    return Architecture(supportedArchRaw[2]);
-  }
 
   /// Retrieve class layout information.
   ///
