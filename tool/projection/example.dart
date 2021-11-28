@@ -76,7 +76,7 @@ void printComSetProperty() {
 
 void printComInterface() {
   final interface =
-      scope.findTypeDef('Windows.Win32.Graphics.DirectWrite.IDWriteFactory2');
+      scope.findTypeDef('Windows.Win32.Media.DirectShow.ITuningSpace');
 
   if (interface != null) {
     final interfaceProjection = InterfaceProjection(interface);

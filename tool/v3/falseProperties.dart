@@ -15,6 +15,7 @@ const falseProperties = <ComProperty>[
   ComProperty('IContactAggregationGroup', 'get_GlobalObjectId'),
   ComProperty('IEventProperty', 'get_Value'),
   ComProperty('ITuningSpace', 'get_NetworkType'),
+  ComProperty('ITuningSpace', 'get__NetworkType'),
   ComProperty('IPrintSchemaParameterInitializer', 'get_Value'),
   ComProperty('IMSVidVideoRenderer', 'get_CustomCompositorClass'),
   ComProperty('IMSVidVideoRenderer', 'get_MixerBitmap'),

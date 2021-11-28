@@ -33,9 +33,11 @@ bool typePretendsToBeAnsi(String typeName) {
     'SCHEMA',
     'AREA',
     'ANTENNA',
+    'MEDIA',
     'M128A',
     'CIECHROMA',
     'PARA',
+    'BUFFER_WMA',
     'CRITERIA',
     'UIDNA',
     'YCbCrA',
@@ -50,7 +52,7 @@ bool typePretendsToBeAnsi(String typeName) {
   if (typeName.startsWith('Windows.Win32.System.Wmi.MI_')) {
     return true;
   }
-  
+
   return false;
 }
 

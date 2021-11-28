@@ -61,8 +61,9 @@ class StructProjection {
     var fieldIdx = 0;
     for (final field in nestedTypes.keys) {
       final nestedType = nestedTypes[field]!;
-      final nestedTypeProjection =
-          NestedStructProjection(nestedType, '_${nestedType.name}', fieldIdx);
+      final nestedTypeProjection = NestedStructProjection(
+          nestedType, '_${nestedType.name}',
+          suffix: fieldIdx, rootTypePackingAlignment: packingAlignment);
 
       buffer.write('\n$nestedTypeProjection\n');
       fieldIdx++;

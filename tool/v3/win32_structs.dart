@@ -34,6 +34,10 @@ List<String> importsForStruct(TypeDef struct) {
       importList.add('specialTypes.dart');
     }
 
+    if (field.typeIdentifier.type?.isNested == true) {
+      importList.addAll(importsForStruct(field.typeIdentifier.type!));
+    }
+
     if (field.typeIdentifier.name.startsWith('Windows.Win32')) {
       importList.add(importForWin32Type(field.typeIdentifier));
     }

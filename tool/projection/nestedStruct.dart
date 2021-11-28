@@ -13,9 +13,11 @@ import 'utils.dart';
 /// structs.
 class NestedStructProjection extends StructProjection {
   final int suffix;
+  final int rootTypePackingAlignment;
   final TypeDef rootType;
 
-  NestedStructProjection(TypeDef typeDef, String structName, this.suffix)
+  NestedStructProjection(TypeDef typeDef, String structName,
+      {required this.suffix, required this.rootTypePackingAlignment})
       : rootType = _getRootTypeDef(typeDef),
         super(typeDef, structName);
 
@@ -87,8 +89,12 @@ class NestedStructProjection extends StructProjection {
     return buffer.toString();
   }
 
+  String get rootPackingPreamble =>
+      rootTypePackingAlignment > 0 ? '@Packed($rootTypePackingAlignment)' : '';
+
   @override
   String toString() => '''
+  $rootPackingPreamble
   ${super.toString()}
   $propertyAccessors
   ''';
