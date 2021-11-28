@@ -11,11 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct = scope.findTypeDef(
-      'Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_METHOD');
+  final struct =
+      scope.findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE');
   if (struct != null) {
-    final structProjection =
-        StructProjection(struct, 'BLUETOOTH_AUTHENTICATION_METHOD');
+    final structProjection = StructProjection(struct, 'BTH_QUERY_SERVICE');
     print(structProjection);
   }
 }
@@ -94,5 +93,5 @@ void printComClass() {
 }
 
 void main() {
-  printComInterface();
+  printStruct();
 }

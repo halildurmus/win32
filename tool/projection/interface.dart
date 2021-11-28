@@ -189,7 +189,7 @@ class InterfaceProjection {
       /// {@category Interface}
       /// {@category com}
       class $shortName $extendsClause {
-        // vtable begins at $vtableStart, ends at ${vtableStart + methodProjections.length - 1}
+        // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
