@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../v3/exclusions.dart';
+// import '../v3/exclusions.dart';
 import 'type.dart';
 import 'struct.dart';
 import 'utils.dart';
@@ -31,9 +31,9 @@ class NestedStructProjection extends StructProjection {
     return rootType;
   }
 
-  // TODO: Presumably the typeDef here is optional and can be replaced with
-  // field.parent.
-  String buildInstanceName(TypeDef typeDef, Field field) {
+  String _instanceName(Field field) {
+    // Walk up the tree and append each item.
+    var typeDef = field.parent;
     var name = safeName(field.name);
     while (typeDef.enclosingClass != null) {
       final parentField = typeDef.enclosingClass!.fields
@@ -44,18 +44,18 @@ class NestedStructProjection extends StructProjection {
     return name;
   }
 
-  @override
-  String get classPreamble {
-    // TODO: Remove this, I think?
-    final packingAlignment = rootType.classLayout.packingAlignment;
-    if (packingAlignment != null &&
-        packingAlignment > 0 &&
-        !ignorePackingDirectives.contains(typeDef.name)) {
-      return '@Packed($packingAlignment)';
-    } else {
-      return '';
-    }
-  }
+  // @override
+  // String get classPreamble {
+  //   // TODO: Remove this, I think?
+  //   final packingAlignment = rootType.classLayout.packingAlignment;
+  //   if (packingAlignment != null &&
+  //       packingAlignment > 0 &&
+  //       !ignorePackingDirectives.contains(typeDef.name)) {
+  //     return '@Packed($packingAlignment)';
+  //   } else {
+  //     return '';
+  //   }
+  // }
 
   /// A nested type needs a way to access its members from the parent type. We
   /// do this through an extension that contains the field accessors.
@@ -69,7 +69,7 @@ class NestedStructProjection extends StructProjection {
     final buffer = StringBuffer();
     buffer.writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
-      final instanceName = buildInstanceName(typeDef, field);
+      final instanceName = _instanceName(field);
       final dartTypeProjection = field.typeIdentifier.type?.isNested == true
           ? TypeProjection(field.typeIdentifier).dartType
           : stripLeadingUnderscores(

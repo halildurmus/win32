@@ -32,6 +32,8 @@ export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 ''';
 
+// TODO: Rationalize this set of utility functions with the ones in utils.dart.
+
 List<String> namespacesInScope(Scope scope) {
   // Use a Set to avoid duplication
   final namespaceSet = <String>{};
@@ -87,7 +89,7 @@ void generateWin32Structs(String namespace) {
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsStruct)
       .where(structIsNotWrapper)
-      .where((typedef) => !typedefIsAnsi(typedef))
+      .where(typedefIsNotAnsi)
       .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => !typedefIsGuidConstant(typedef))
       .where(supportsAmd64)
@@ -164,7 +166,7 @@ void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where((typedef) => typedef.isInterface)
-      .where((typedef) => !typedefIsAnsi(typedef))
+      .where(comInterfaceIsNotAnsi)
       .where((typedef) => !excludedComInterfaces.contains(typedef.name))
       .toList();
 

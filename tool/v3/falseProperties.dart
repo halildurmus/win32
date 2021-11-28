@@ -29,6 +29,7 @@ const falseProperties = <ComProperty>[
   ComProperty('IMSVidDevice', 'get__Category'),
   ComProperty('IMSVidDevice', 'get__ClassID'),
   ComProperty('IBDA_DigitalDemodulator3', 'get_SignalTimeouts'),
+  ComProperty('IBDA_DigitalDemodulator3', 'get_PLPNumber'),
   ComProperty('IEventObjectCollection', 'get__NewEnum'),
   ComProperty('IComponentType', 'get_MediaType'),
   ComProperty('IComponentType', 'get_MediaMajorType'),

@@ -27,29 +27,25 @@ const dartKeywords = <String>[
   'Unsized', 'Void', 'Packed', 'Handle',
 ];
 
+const falseAnsiEndings = <String>[
+  // These are structs that appear in the Win32 metadata that end in 'A' but
+  // are not ANSI. In the absence of a better way to determine ANSI attributes
+  // (https://github.com/microsoft/win32metadata/issues/711), we resort to a
+  // manual list.
+  'DATA', 'SCHEMA', 'AREA', 'ANTENNA', 'MEDIA', 'M128A', 'CIECHROMA', 'PARA',
+  'ALPHA', 'BUFFER_WMA', 'CRITERIA', 'UIDNA', 'YCbCrA', 'RGBA',
+];
+
+/// Returns true if a [TypeDef] name ends with 'A' but is _not_ ANSI.
 bool typePretendsToBeAnsi(String typeName) {
-  final falseAnsiEndings = [
-    'DATA',
-    'SCHEMA',
-    'AREA',
-    'ANTENNA',
-    'MEDIA',
-    'M128A',
-    'CIECHROMA',
-    'PARA',
-    'ALPHA',
-    'BUFFER_WMA',
-    'CRITERIA',
-    'UIDNA',
-    'YCbCrA',
-    'RGBA',
-  ];
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {
       return true;
     }
   }
 
+  // There are a number of types in this namespace that end with 'A' but are not
+  // ANSI, so we treat this as a one-off exception.
   if (typeName.startsWith('Windows.Win32.System.Wmi.MI_')) {
     return true;
   }
@@ -57,8 +53,16 @@ bool typePretendsToBeAnsi(String typeName) {
   return false;
 }
 
-bool typedefIsAnsi(TypeDef typedef) =>
-    typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
+/// Returns true if a [TypeDef] struct is ANSI.
+///
+/// This is used to avoid projecting ANSI types in favor of Unicode ones.
+bool typedefIsAnsi(TypeDef typeDef) =>
+    typeDef.name.endsWith('A') && !typePretendsToBeAnsi(typeDef.name);
+
+bool typedefIsNotAnsi(TypeDef typeDef) => !typedefIsAnsi(typeDef);
+
+bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
+    !comInterface.name.endsWith('A');
 
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
@@ -76,6 +80,8 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+/// Return the final component of a fully qualified name (e.g.
+/// `Windows.Win32.UI.Controls.TASKDIALOGCONFIG` becomes `TASKDIALOGCONFIG`).
 String lastComponent(String fullyQualifiedType) =>
     fullyQualifiedType.split('.').last;
 
@@ -167,8 +173,12 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
+/// Take a [TypeDef] and return a name suitable for filenames.
+///
+/// This should not be used for identifiers without further processing, since it
+/// could include a reserved word or a leading underscore.
 String shortenTypeDef(TypeDef typeDef) =>
-    stripAnsiUnicodeSuffix(typeDef.name.split('.').last);
+    stripAnsiUnicodeSuffix(lastComponent(typeDef.name));
 
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
 /// matching folder (e.g. `system/console`).

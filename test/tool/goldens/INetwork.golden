@@ -27,7 +27,7 @@ import '../../networking/networklistmanager/IEnumNetworkConnections.dart';
       /// {@category Interface}
       /// {@category com}
       class INetwork extends IDispatch {
-        // vtable begins at 7, ends at 19
+        // vtable begins at 7, is 13 entries long.
         INetwork(Pointer<COMObject> ptr) : super(ptr);
 
               int GetName(Pointer<Pointer<Utf16>> pszNetworkName) => ptr.ref.lpVtbl.value
