@@ -37,6 +37,7 @@ bool typePretendsToBeAnsi(String typeName) {
     'M128A',
     'CIECHROMA',
     'PARA',
+    'ALPHA',
     'BUFFER_WMA',
     'CRITERIA',
     'UIDNA',

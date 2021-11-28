@@ -57,9 +57,8 @@ void createDirectory(String namespace) =>
     Directory(folderForNamespace(namespace)).createSync(recursive: true);
 
 void generateWin32Functions(String namespace) {
-  final funcs = scope.typeDefs
-      .where((typedef) => (typedef.name == '$namespace.Apis'))
-      .where(supportsAmd64);
+  final funcs =
+      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
 
   // Some namespaces may not contain a Win32 APIs subnamespace (e.g.
   // Windows.Win32.Media.Streaming does not contain
@@ -70,6 +69,8 @@ void generateWin32Functions(String namespace) {
   }
 }
 
+bool supportsAmd64(TypeDef typedef) => typedef.supportedArchitectures.x64;
+
 bool typedefIsStruct(TypeDef typedef) =>
     typedef.isClass && typedef.parent?.name == 'System.ValueType';
 
@@ -77,13 +78,6 @@ bool structIsNotWrapper(TypeDef typedef) => typedef.customAttributes
     .where((attrib) =>
         attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
     .isEmpty;
-
-// TODO: This can come from winmd directly
-bool supportsAmd64(TypeDef typedef) {
-  final supportedArch = typedef.customAttributeAsBytes(
-      'Windows.Win32.Interop.SupportedArchitectureAttribute');
-  return !(supportedArch.length >= 3 && supportedArch[2] & 0x02 != 0x02);
-}
 
 void generateWin32Structs(String namespace) {
   // All structs that map to Dart structs. We ignore ANSI structs and structs

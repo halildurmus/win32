@@ -78,6 +78,19 @@ List<String> importsForFunction(Method function) {
   return importList;
 }
 
+/// Makes sure there's no better Unicode variant available for a given function.
+///
+/// For most functions, the ANSI version has an 'A' suffix. For a function like
+/// `SymFindDebugInfoFile`, the unprefixed version is ANSI, the Unicode version
+/// has a 'W' suffix.
+bool noUnicodeVariantAvailable(Method method) {
+  // We'd prefer to project the Unicode version, so we append a W and see if the
+  // API is available. If the function already has a prefix, this will return
+  // false, since there are no functions that end with a suffix 'AW' or 'WW".
+  final suffixedName = '${lastComponent(method.name)}W';
+  return method.parent.methods.where((m) => m.name == suffixedName).isEmpty;
+}
+
 /// Given a library name and a typedef, generate a file of typedefs / function
 /// lookups corresponding to that file.
 void generateFfiFile(File file, TypeDef typedef) {
@@ -99,6 +112,8 @@ void generateFfiFile(File file, TypeDef typedef) {
     final functions = typedef.methods
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
+        .where(noUnicodeVariantAvailable)
+        .where((method) => method.supportedArchitectures.x64)
         .where((method) =>
             !excludedFunctions.contains(stripAnsiUnicodeSuffix(method.name)))
         .toList()
