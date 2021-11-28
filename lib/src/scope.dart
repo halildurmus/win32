@@ -15,7 +15,17 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
 
-enum PreferredArchitecture { x86, x64, arm64 }
+/// Indicates the preferred architecture for a requested [TypeDef].
+enum PreferredArchitecture {
+  /// Prefer Intel 32-bit architecture.
+  x86,
+
+  /// Prefer Intel 64-bit architecture.
+  x64,
+
+  // Prefer ARM 64-bit architecture.
+  arm64
+}
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
