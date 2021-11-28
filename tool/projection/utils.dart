@@ -67,6 +67,7 @@ bool typedefIsAnsi(TypeDef typeDef) =>
 bool typedefIsNotAnsi(TypeDef typeDef) => !typedefIsAnsi(typeDef);
 
 bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
+    comInterface.name.endsWith('IEnumSTATDATA') ||
     !comInterface.name.endsWith('A');
 
 /// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`

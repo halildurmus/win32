@@ -50,20 +50,21 @@ class StructProjection {
 
   String _cacheNestedTypes() {
     final buffer = StringBuffer();
-    final nestedTypes = <String, TypeDef>{};
+    final nestedTypes = <TypeDef>{};
 
     for (final field in typeDef.fields) {
       if (_isNestedType(field)) {
-        nestedTypes[field.name] = field.typeIdentifier.type!;
+        nestedTypes.add(field.typeIdentifier.type!);
       }
     }
 
     // Add any nested types on which there is a dependency
     var fieldIdx = 0;
-    for (final field in nestedTypes.keys) {
-      final nestedType = nestedTypes[field]!;
+    for (final nestedType in nestedTypes) {
+      // Nested types should have just one leading underscore, so we strip the
+      // others off and add one back.
       final nestedTypeProjection = NestedStructProjection(
-          nestedType, '_${nestedType.name}',
+          nestedType, '_${stripLeadingUnderscores(nestedType.name)}',
           suffix: fieldIdx, rootTypePackingAlignment: packingAlignment);
 
       buffer.write('\n$nestedTypeProjection\n');

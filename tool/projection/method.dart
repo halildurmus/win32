@@ -59,6 +59,12 @@ class MethodProjection {
       }
     }
 
+    // Windows.Win32.Web.MsHtml includes a .toString() method. We replace this
+    // to avoid undue complexity.
+    if (method.name == 'toString') {
+      return 'toUtf16String';
+    }
+
     // Otherwise the original name is fine. TODO: Can we remove safeName here?
     // Do we apply it later anyway?
     return safeName(method.name);
