@@ -1,3 +1,11 @@
+## 1.0.17
+
+- Much faster for deeply nested types.
+- Add support for "fake" getters and setters in Win32 metadata.
+- More tolerant support of nested types.
+- Built-in support for platform architecture without attribute queries.
+- More tests.
+
 ## 1.0.16
 
 - Better integrate support for nested types.
