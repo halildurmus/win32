@@ -58,7 +58,7 @@ class InterfaceProjection {
     return projection;
   }
 
-  String get shortName => shortenTypeDef(typeDef);
+  String get shortName => stripLeadingUnderscores(shortenTypeDef(typeDef));
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {

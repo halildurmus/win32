@@ -27,24 +27,42 @@ class MethodProjection {
   /// Dart doesn't allow overloaded methods, so we have to rename methods that
   /// are duplicated.
   static String uniquelyNameMethod(Method method) {
+    print('Method: ${method.name} on ${method.parent.name}');
+
     // Is it an overload with a name provided by the metadata?
     final overloadName = method
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
     if (overloadName.isNotEmpty) return overloadName;
 
-    // If not, we check whether multiple methods exist with the same name.
-    final overloads = method.parent.methods.where((m) => m.name == method.name);
+    // If not, we check whether multiple methods exist with the same name. We
+    // also need to check up the interface chain, since otherwise overloaded
+    // methods may be missed. For example, IDWriteFactory2 contains methods that
+    // overload those in IDWriteFactory1.
+    final overloads =
+        method.parent.methods.where((m) => m.name == method.name).toList();
+    var interfaceTypeDef = method.parent;
+    // perf optimization to save work on the most common case of IUnknown
+    while (interfaceTypeDef.interfaces.isNotEmpty &&
+        !(interfaceTypeDef.interfaces.first.name ==
+            'Windows.Win32.System.Com.IUnknown')) {
+      interfaceTypeDef = interfaceTypeDef.interfaces.first;
+      overloads
+          .addAll(interfaceTypeDef.methods.where((m) => m.name == method.name));
+    }
 
     // If so, and there is more than one entry with the same name, add a suffix
     // to all but the first.
     if (overloads.length > 1) {
-      final overloadIndex = overloads.toList().indexOf(method);
+      final reversedOverloads = overloads.reversed.toList();
+      final overloadIndex =
+          reversedOverloads.indexWhere((m) => m.token == method.token);
       if (overloadIndex > 0) {
         return '${safeName(method.name)}_$overloadIndex';
       }
     }
 
-    // Otherwise the original name is fine.
+    // Otherwise the original name is fine. TODO: Can we remove safeName here?
+    // Do we apply it later anyway?
     return safeName(method.name);
   }
 

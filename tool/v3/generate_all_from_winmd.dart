@@ -57,8 +57,9 @@ void createDirectory(String namespace) =>
     Directory(folderForNamespace(namespace)).createSync(recursive: true);
 
 void generateWin32Functions(String namespace) {
-  final funcs =
-      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
+  final funcs = scope.typeDefs
+      .where((typedef) => (typedef.name == '$namespace.Apis'))
+      .where(supportsAmd64);
 
   // Some namespaces may not contain a Win32 APIs subnamespace (e.g.
   // Windows.Win32.Media.Streaming does not contain
@@ -77,6 +78,7 @@ bool structIsNotWrapper(TypeDef typedef) => typedef.customAttributes
         attrib.name == 'Windows.Win32.Interop.NativeTypedefAttribute')
     .isEmpty;
 
+// TODO: This can come from winmd directly
 bool supportsAmd64(TypeDef typedef) {
   final supportedArch = typedef.customAttributeAsBytes(
       'Windows.Win32.Interop.SupportedArchitectureAttribute');
@@ -150,6 +152,7 @@ void generateWin32Callbacks(String namespace) {
       .where((typedef) => typedef.isDelegate)
       .where((typedef) => !typedefIsAnsi(typedef))
       .where((typedef) => !excludedCallbacks.contains(typedef.name))
+      .where(supportsAmd64)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -200,6 +203,8 @@ void main(List<String> args) {
   // final namespacesDefault = [
   // 'Windows.Win32.Security.Cryptography.Certificates'
   // ];
+  final stopwatch = Stopwatch()..start();
+
   final namespacesDefault = namespacesInScope(scope);
   final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
 
@@ -215,4 +220,7 @@ void main(List<String> args) {
     generateComInterfaces(namespace);
   }
   generateLibraryExport(namespaces);
+
+  stopwatch.stop();
+  print('Projection generation completed in ${stopwatch.elapsed}');
 }

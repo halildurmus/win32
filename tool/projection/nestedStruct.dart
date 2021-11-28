@@ -44,6 +44,7 @@ class NestedStructProjection extends StructProjection {
 
   @override
   String get classPreamble {
+    // TODO: Remove this, I think?
     final packingAlignment = rootType.classLayout.packingAlignment;
     if (packingAlignment != null &&
         packingAlignment > 0 &&

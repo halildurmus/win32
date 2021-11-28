@@ -76,7 +76,7 @@ void printComSetProperty() {
 
 void printComInterface() {
   final interface =
-      scope.findTypeDef('Windows.Win32.UI.Shell.IBrowserService2');
+      scope.findTypeDef('Windows.Win32.Graphics.DirectWrite.IDWriteFactory2');
 
   if (interface != null) {
     final interfaceProjection = InterfaceProjection(interface);
@@ -94,5 +94,5 @@ void printComClass() {
 }
 
 void main() {
-  printStruct();
+  printComInterface();
 }

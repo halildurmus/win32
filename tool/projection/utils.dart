@@ -46,6 +46,11 @@ bool typePretendsToBeAnsi(String typeName) {
       return true;
     }
   }
+
+  if (typeName.startsWith('Windows.Win32.System.Wmi.MI_')) {
+    return true;
+  }
+  
   return false;
 }
 
