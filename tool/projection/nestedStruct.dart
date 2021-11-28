@@ -61,9 +61,9 @@ class NestedStructProjection extends StructProjection {
   /// do this through an extension that contains the field accessors.
   String get propertyAccessors {
     final parentName = mangleName(typeDef.enclosingClass!).substring(1);
-    final extensionName = suffix == 0
+    final extensionName = stripLeadingUnderscores(suffix == 0
         ? '${parentName}_Extension'
-        : '${parentName}_Extension_$suffix';
+        : '${parentName}_Extension_$suffix');
     final rootTypeName = safeName(shortenTypeDef(rootType));
 
     final buffer = StringBuffer();
@@ -93,9 +93,13 @@ class NestedStructProjection extends StructProjection {
       rootTypePackingAlignment > 0 ? '@Packed($rootTypePackingAlignment)' : '';
 
   @override
-  String toString() => '''
-  $rootPackingPreamble
+  String toString() {
+    final superString = super.toString();
+
+    return '''
+  ${superString.contains('@Packed(') ? '' : rootPackingPreamble}
   ${super.toString()}
   $propertyAccessors
   ''';
+  }
 }

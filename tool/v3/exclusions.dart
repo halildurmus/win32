@@ -26,6 +26,7 @@ const excludedStructs = <String>[
   'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
   // 'Windows.Win32.System.Com.StructuredStorage.PROPSPEC',
   'Windows.Win32.System.IO.OVERLAPPED',
+  'Windows.Win32.Foundation.DECIMAL',
 
   // This is an ANSI struct without a suffix. The Unicode variant is
   // EMRCREATECOLORSPACEW.

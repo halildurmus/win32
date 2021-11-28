@@ -30,6 +30,7 @@ class StructProjection {
 
   String get classPreamble {
     const docComment = '/// {@category Struct}';
+
     if (packingAlignment > 0) {
       return '$docComment\n@Packed($packingAlignment)';
     } else {
