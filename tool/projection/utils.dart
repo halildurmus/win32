@@ -8,6 +8,7 @@ import '../v3/exclusions.dart';
 import '../v3/falseProperties.dart';
 import 'type.dart';
 
+// TODO: Change this to a Set to include a replacement (e.g. Int8 -> int8)
 const dartKeywords = <String>[
   // Keywords from https://dart.dev/guides/language/language-tour#keywords.
   // Contextual keywords and built-in identifiers are not included here, since
@@ -25,6 +26,10 @@ const dartKeywords = <String>[
   'Double', 'Float', 'Array', 'IntPtr',
   'Pointer', 'Union', 'Opaque', 'Struct',
   'Unsized', 'Void', 'Packed', 'Handle',
+
+  // GUID is a type, so it shouldn't be used as an identifier.
+  // Example: Windows.Win32.Media.DirectShow.VMRGUID.GUID
+  'GUID',
 ];
 
 const falseAnsiEndings = <String>[
