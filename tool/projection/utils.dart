@@ -22,7 +22,7 @@ const dartKeywords = <String>[
   // FFI special words
   'Int8', 'Int16', 'Int32', 'Int64',
   'Uint8', 'Uint16', 'Uint32', 'Uint64',
-  'Double', 'Float', 'Array',
+  'Double', 'Float', 'Array', 'IntPtr',
   'Pointer', 'Union', 'Opaque', 'Struct',
   'Unsized', 'Void', 'Packed', 'Handle',
 ];
