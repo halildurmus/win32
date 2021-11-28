@@ -143,6 +143,22 @@ void main() {
     });
   });
 
+  test('Multiple layers of interface inheritance are correct', () {
+    final scope = MetadataStore.getWin32Scope();
+    final iFactory2 = scope
+        .findTypeDef('Windows.Win32.Graphics.DirectWrite.IDWriteFactory2')!;
+    expect(iFactory2.interfaces.length, equals(1));
+    final iFactory1 = iFactory2.interfaces.first;
+    expect(iFactory1.name, endsWith('IDWriteFactory1'));
+    expect(iFactory1.interfaces.length, equals(1));
+    final iFactory = iFactory1.interfaces.first;
+    expect(iFactory.name, endsWith('IDWriteFactory'));
+    expect(iFactory.interfaces.length, equals(1));
+    final iUnknown = iFactory.interfaces.first;
+    expect(iUnknown.name, endsWith('IUnknown'));
+    expect(iUnknown.interfaces.length, isZero);
+  });
+
   test(
       'IApplicationActivationManager.ActivateApplication '
       'recognizes ACTIVATEOPTIONS as an enum', () {
