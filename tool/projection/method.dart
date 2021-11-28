@@ -27,8 +27,6 @@ class MethodProjection {
   /// Dart doesn't allow overloaded methods, so we have to rename methods that
   /// are duplicated.
   static String uniquelyNameMethod(Method method) {
-    print('Method: ${method.name} on ${method.parent.name}');
-
     // Is it an overload with a name provided by the metadata?
     final overloadName = method
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');

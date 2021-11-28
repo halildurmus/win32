@@ -200,12 +200,9 @@ void generateLibraryExport(List<String> namespaces) {
 // Example:
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  // final namespacesDefault = [
-  // 'Windows.Win32.Security.Cryptography.Certificates'
-  // ];
-  final stopwatch = Stopwatch()..start();
-
+  // final namespacesDefault = ['Windows.Win32.Graphics.DirectDraw'];
   final namespacesDefault = namespacesInScope(scope);
+  final stopwatch = Stopwatch()..start();
   final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
 
   for (final namespace in namespaces) {
