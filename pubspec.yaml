@@ -16,8 +16,7 @@ dev_dependencies:
   lints: ^1.0.1
   path: ^1.8.0
   test: ^1.19.4
-  winmd: 1.0.17 # Pinned deliberately
+  winmd: 1.0.18 # Pinned deliberately
 
 dependency_overrides:
-  winmd:
-    path: ../winmd
+  winmd: 1.0.18 # Because this is v3
