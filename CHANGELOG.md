@@ -1,3 +1,7 @@
+## 1.0.18
+
+- Move architectures to a mixin.
+
 ## 1.0.17
 
 - Much faster for deeply nested types.
