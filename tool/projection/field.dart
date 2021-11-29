@@ -60,9 +60,15 @@ class FieldProjection {
     // do the extra work necessary to test whether they're safe or not.
     //
     // Otherwise strip it so that it's accessible from outside the library.
-    final dartType = field.typeIdentifier.type?.enclosingClass != null
-        ? '_${stripLeadingUnderscores(typeProjection.dartType)}'
-        : safeTypename(stripLeadingUnderscores(typeProjection.dartType));
+    var dartType =
+        safeTypename(stripLeadingUnderscores(typeProjection.dartType));
+
+    if (field.typeIdentifier.type?.isNested == true) {
+      dartType = '_${stripLeadingUnderscores(typeProjection.dartType)}';
+    }
+    if (field.typeIdentifier.typeArg?.type?.isNested == true) {
+      dartType = typeProjection.dartType;
+    }
 
     return '  ${typeProjection.attribute}\n  external $dartType $fieldName;\n';
   }

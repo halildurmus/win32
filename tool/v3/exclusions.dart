@@ -33,6 +33,12 @@ const excludedStructs = <String>[
   'Windows.Win32.System.Mapi.MapiFileDesc',
   'Windows.Win32.System.Mapi.MapiMessage',
   'Windows.Win32.System.Mapi.MapiRecipDesc',
+  'Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_CBA_EVENT',
+  'Windows.Win32.System.Diagnostics.Debug.SOURCEFILE',
+  'Windows.Win32.System.Diagnostics.Debug.SRCCODEINFO',
+  'Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO',
+  'Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO_PACKAGE',
+  'Windows.Win32.System.Diagnostics.Debug.SYMSRV_INDEX_INFO',
 
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V1',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V2',

@@ -11,10 +11,10 @@ import 'struct.dart';
 final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
-  final struct =
-      scope.findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE');
+  final struct = scope
+      .findTypeDef('Windows.Win32.NetworkManagement.Dhcp.DHCP_ALL_OPTIONS');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'BTH_QUERY_SERVICE');
+    final structProjection = StructProjection(struct, 'DHCP_ALL_OPTIONS');
     print(structProjection);
   }
 }

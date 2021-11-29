@@ -74,15 +74,16 @@ class NestedStructProjection extends StructProjection {
           ? TypeProjection(field.typeIdentifier).dartType
           : stripLeadingUnderscores(
               TypeProjection(field.typeIdentifier).dartType);
-      // TODO: Hack to work around the fact that Strings are projected as
-      // Arrays. This is unlikely to survive.
-      final mangledType =
-          dartTypeProjection == 'Array<Uint16>' ? 'String' : dartTypeProjection;
+
+      // TODO: Need to figure out why this is needed at all. Shouldn't the type projection figure out the difference here?
+      final typeIsString = (dartTypeProjection == 'Array<Uint16>') &&
+          (field.typeIdentifier.typeArg!.baseType == BaseType.Char);
+      final fieldType = typeIsString ? 'String' : dartTypeProjection;
 
       final safeFieldName = safeName(field.name);
       buffer.writeln('''
-  $mangledType get $safeFieldName => this.$instanceName;
-  set $safeFieldName($mangledType value) => this.$instanceName = value;
+  $fieldType get $safeFieldName => this.$instanceName;
+  set $safeFieldName($fieldType value) => this.$instanceName = value;
       ''');
     }
     buffer.writeln('}');
