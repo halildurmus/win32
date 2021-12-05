@@ -112,7 +112,7 @@ class OpenFilePicker extends FileDialog {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = calloc<Pointer>();
+      final ppsi = calloc<Pointer<COMObject>>();
       hr = fileDialog.GetResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 

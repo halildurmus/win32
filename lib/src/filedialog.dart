@@ -130,7 +130,7 @@ abstract class FileDialog {
     final knownFolderManager = KnownFolderManager.createInstance();
     final publicMusicFolder = calloc<GUID>()..ref.setGUID(folderGUID);
 
-    final ppkf = calloc<Pointer>();
+    final ppkf = calloc<Pointer<COMObject>>();
     hr = knownFolderManager.GetFolder(publicMusicFolder, ppkf);
     if (FAILED(hr)) throw WindowsException(hr);
     final knownFolder = IKnownFolder(ppkf.cast());

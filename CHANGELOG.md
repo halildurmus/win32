@@ -1,4 +1,8 @@
-## 2.0.0-nullsafety.0
+## 2.0.1
+
+- Upgrade win32 dependency
+
+## 2.0.0
 
 - Enable sound null safety
 

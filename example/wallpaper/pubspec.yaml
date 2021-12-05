@@ -24,4 +24,4 @@ flutter:
   uses-material-design: true
 
 dev_dependencies:
-  lint: ^1.5.3
+  lints: ^1.0.1

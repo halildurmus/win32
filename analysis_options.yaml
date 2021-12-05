@@ -1,4 +1,4 @@
-include: package:lint/analysis_options_package.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
   strong-mode:
@@ -7,26 +7,14 @@ analyzer:
 
 linter:
   rules:
-    # redundancy is good if it leads to better documentation
-    avoid_redundant_argument_values: false
-
     # print is useful for examples
     avoid_print: false
-
-    # disable for now per https://github.com/timsneath/win32/issues/87
-    avoid_private_typedef_functions: false
 
     # win32 parity requires SCREAMING_CAPS constants
     constant_identifier_names: false  
 
     # deliberately name generated files after their COM equivalents
     file_names: false
-
-    # seems to trigger false positives
-    invariant_booleans: false
-
-    # while(true) is useful for Win32 enumerations
-    literal_only_boolean_expressions: false
 
     # doesn't make sense if adjacent strings are not human language
     missing_whitespace_between_adjacent_strings: false

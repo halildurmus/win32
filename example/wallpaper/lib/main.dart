@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:filepicker_windows/filepicker_windows.dart' as picker;
+import 'package:flutter/material.dart';
 
 import 'wallpaper.dart';
 

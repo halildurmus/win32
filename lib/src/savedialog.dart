@@ -81,7 +81,7 @@ class SaveFilePicker extends FileDialog {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = calloc<Pointer>();
+      final ppsi = calloc<Pointer<COMObject>>();
       hr = fileDialog.GetResult(ppsi);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 

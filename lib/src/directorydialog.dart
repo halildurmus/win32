@@ -13,7 +13,9 @@ class DirectoryPicker extends FileDialog {
     late String path;
 
     var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      nullptr,
+      COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE,
+    );
     if (FAILED(hr)) throw WindowsException(hr);
 
     final dialog = FileOpenDialog.createInstance();
