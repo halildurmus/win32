@@ -1,4 +1,4 @@
-import '../../winmd.dart';
+import '../utils/exception.dart';
 import 'customattributes_mixin.dart';
 
 /// The architectures supported by a specific Win32 method or struct.
