@@ -8,14 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
+    runs-on: windows-latest
     strategy:
       # We want to see the results even if one Dart version fails (and vice
       # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
       matrix:
-        os: [windows-latest, windows-2016]
         sdk: [stable, beta, dev]
 
     steps:
@@ -39,11 +38,26 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-warnings
 
+      # For non-stable builds, we just do tests
+      - name: Run tests
+        if: ${{ matrix.sdk != 'stable' }}
+        run: dart test
+
+      # For stable, we generate and upload code coverage along with tests 
       - name: Add code coverage package
+        if: ${{ matrix.sdk == 'stable' }} 
         run: dart pub global activate coverage
 
-      - name: Run tests
+      - name: Generate code coverage
+        if: ${{ matrix.sdk == 'stable' }} 
         run: dart test --coverage=coverage
 
       - name: Convert code coverage into lcov file
+        if: ${{ matrix.sdk == 'stable' }} 
         run: dart pub global run coverage:format_coverage --lcov --in=coverage --out=lcov.info --packages=.packages --report-on=lib
+
+      - name: Upload code coverage
+        if: ${{ matrix.sdk == 'stable' }} 
+        uses: codecov/codecov-action@v2.1.0
+        files: lcov.info
+
