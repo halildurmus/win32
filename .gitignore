@@ -11,3 +11,7 @@ build/
 
 # Directory created by dartdoc
 doc/api/
+
+# Temporary coverage files
+coverage/
+lcov.info

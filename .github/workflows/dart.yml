@@ -39,5 +39,7 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-warnings
 
-      - name: Run tests
-        run: dart test
+      - name: Run tests with code coverage
+        run: pub global activate coverage
+        run: pub run test --coverage=coverage
+        run: pub global run coverage:format_coverage --lcov --in=coverage --out=lcov.info --packages=.packages --report-on=lib
