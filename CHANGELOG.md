@@ -1,3 +1,8 @@
+## 1.0.20
+
+- Export architecture mixin.
+- Add more tests.
+
 ## 1.0.19
 
 - Update to latest win32metadata `.winmd` file.
