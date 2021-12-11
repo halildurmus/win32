@@ -4,21 +4,6 @@ import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test('Scope name is as expected', () {
-    final scope = MetadataStore.getWin32Scope();
-    expect(scope.name, equals('Windows.Win32.winmd'));
-  });
-
-  test('Scope version string returns expected result', () {
-    final scope = MetadataStore.getWin32Scope();
-    expect(scope.versionNumber, equals('v4.0.30319'));
-  });
-
-  test('Scope toString() is as expected', () {
-    final scope = MetadataStore.getWin32Scope();
-    expect(scope.toString(), equals('Windows.Win32.winmd'));
-  });
-
   test('Scope modules contain expected DLLs', () {
     final scope = MetadataStore.getWin32Scope();
     expect(scope.moduleRefs.map((module) => module.name),

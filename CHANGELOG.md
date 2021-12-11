@@ -1,3 +1,8 @@
+## 1.0.19
+
+- Update to latest win32metadata `.winmd` file.
+- Add code coverage generation
+
 ## 1.0.18
 
 - Move architectures to a mixin.

@@ -30,11 +30,6 @@ void main() {
     expect(win32Scope.userStrings.length, equals(0));
   });
 
-  test('Appropriate response to failure to find scope', () {
-    expect(() => MetadataStore.getScopeForType('Windows.Monetization.Dogecoin'),
-        throwsA(isA<WindowsException>()));
-  });
-
   test('Find a specific WinMD token', () {
     final mdScope =
         MetadataStore.getScopeForType('Windows.Globalization.ICalendarFactory');
