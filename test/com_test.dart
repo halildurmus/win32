@@ -178,4 +178,20 @@ void main() {
     expect(scope.enums.firstWhere((p) => p.name == param.typeIdentifier.name),
         isNotNull);
   });
+
+  test('Optional COM parameters', () {
+    final scope = MetadataStore.getWin32Scope();
+    final interface =
+        scope.findTypeDef('Windows.Win32.Graphics.Direct3D12.ID3D12Device8')!;
+    final method = interface.methods.first;
+    final param = method.parameters.last;
+    expect(param.isOptional, isTrue);
+    expect(param.isOutParam, isTrue);
+    expect(param.isInParam, isFalse);
+    expect(param.hasDefault, isFalse);
+    expect(param.hasFieldMarshal, isFalse);
+
+    expect(param.parent, equals(method));
+    expect(param.toString(), equals('pResourceAllocationInfo1'));
+  });
 }

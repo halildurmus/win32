@@ -607,4 +607,35 @@ void main() {
     expect(getCompleted.returnType.typeIdentifier.name,
         endsWith('AsyncOperationCompletedHandler`1'));
   });
+
+  test('Events can be found', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.PropertySet')!;
+
+    expect(winTypeDef.events.length, equals(1));
+    expect(winTypeDef.events.first.toString(), equals('MapChanged'));
+    expect(winTypeDef.events.first.name, equals('MapChanged'));
+  });
+
+  test('Event contains the correct methods and properties', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.PropertySet')!;
+    final mapChanged = winTypeDef.events.first;
+
+    expect(mapChanged.isRTSpecialName, isFalse);
+    expect(mapChanged.isSpecialName, isFalse);
+    expect(mapChanged.addMethod, isNotNull);
+    expect(mapChanged.removeMethod, isNotNull);
+    expect(mapChanged.raiseMethod, isNull);
+    expect(mapChanged.parent, equals(winTypeDef));
+  });
+
+  test('Event names are correct', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.PropertySet')!;
+    final mapChanged = winTypeDef.events.first;
+
+    expect(mapChanged.addMethod!.name, equals('add_MapChanged'));
+    expect(mapChanged.removeMethod!.name, equals('remove_MapChanged'));
+  });
 }
