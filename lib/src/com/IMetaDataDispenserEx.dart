@@ -1,5 +1,7 @@
 // IMetaDataDispenserEx.dart
 
+// coverage:ignore-file
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

@@ -1,11 +1,9 @@
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 // Constant values that go with the underlying COM definitions. These should not
 // need to be exported to external package consumers, since they should be
 // converted to a more friendly equivalent, either as a property or enum on the
 // object.
+
+// coverage:ignore-file
 
 import '../enums.dart';
 import '../utils/exception.dart';

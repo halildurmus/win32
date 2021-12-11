@@ -1,8 +1,6 @@
 // IMetaDataTables.dart
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import
+// coverage:ignore-file
 
 import 'dart:ffi';
 
