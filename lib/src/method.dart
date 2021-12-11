@@ -209,6 +209,8 @@ class Method extends TokenObject
   bool get isGetProperty =>
       isSpecialName && name.startsWith('get_') && !_isFakeGetProperty;
 
+  // TODO: Remove this check when
+  // https://github.com/microsoft/win32metadata/issues/707 is fixed
   bool get _isFakeSetProperty =>
       parent.name.startsWith('Windows.Win32') &&
       (parameters.length != 1 || !parameters.first.isInParam);

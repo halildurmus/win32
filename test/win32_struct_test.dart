@@ -153,4 +153,18 @@ void main() {
     expect(struct, isNotNull);
     expect(struct!.fields.last.name, equals('HeaderX64'));
   });
+
+  test('Can distinguish global tokens', () {
+    // TODO: Find an example of a global token
+    final scope = MetadataStore.getWin32Scope();
+    final struct = scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER',
+        preferredArchitecture: PreferredArchitecture.x64);
+
+    expect(struct, isNotNull);
+    expect(struct!.isGlobal, isFalse);
+
+    // _Anonymous_e__Struct
+    final nestedStruct = struct.fields.last.typeIdentifier.type!;
+    expect(nestedStruct.isGlobal, isFalse);
+  });
 }
