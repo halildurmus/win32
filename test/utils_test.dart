@@ -71,7 +71,14 @@ void main() {
 
     test('Conversion fail test 2', () {
       const compressed = <int>[0xDF, 0x3F, 0x00];
-      // Large, should be two bytes long
+      // Large, should be four bytes long
+      expect(() => UncompressedData.fromBlob(compressed),
+          throwsA(isA<WinmdException>()));
+    });
+
+    test('Conversion fail test 3', () {
+      const compressed = <int>[0xF3];
+      // Invalid (should be 110? ????)
       expect(() => UncompressedData.fromBlob(compressed),
           throwsA(isA<WinmdException>()));
     });
