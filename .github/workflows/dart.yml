@@ -54,7 +54,7 @@ jobs:
 
       - name: Convert code coverage into lcov file
         if: ${{ matrix.sdk == 'stable' }} 
-        run: dart pub global run coverage:format_coverage --lcov --in=coverage --out=lcov.info --packages=.packages --report-on=lib
+        run: dart pub global run coverage:format_coverage --lcov --check-ignore --in=coverage --out=lcov.info --packages=.packages --report-on=lib
 
       - name: Upload code coverage
         if: ${{ matrix.sdk == 'stable' }} 
