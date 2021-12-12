@@ -89,7 +89,7 @@ int generateStructs(Win32API win32) {
       throw Exception('$struct missing');
     }
     if (typeDefs.length > 1) {
-      typeDefs.retainWhere(supports64Bit);
+      typeDefs.retainWhere((t) => t.supportedArchitectures.x64);
     }
     final typeDef = typeDefs.first;
 

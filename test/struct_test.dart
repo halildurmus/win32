@@ -73,9 +73,6 @@ void main() {
       expect(sizeOf<VARIANT>(), equals(16));
     }
   });
-  test('Struct WLAN_RAW_DATA_LIST is the right size', () {
-    expect(sizeOf<WLAN_RAW_DATA_LIST>(), equals(16));
-  });
   test('Struct ACCEL is the right size', () {
     expect(sizeOf<ACCEL>(), equals(6));
   });
@@ -1299,6 +1296,9 @@ void main() {
   });
   test('Struct WLAN_RAW_DATA is the right size', () {
     expect(sizeOf<WLAN_RAW_DATA>(), equals(8));
+  });
+  test('Struct WLAN_RAW_DATA_LIST is the right size', () {
+    expect(sizeOf<WLAN_RAW_DATA_LIST>(), equals(16));
   });
   test('Struct WLAN_SECURITY_ATTRIBUTES is the right size', () {
     expect(sizeOf<WLAN_SECURITY_ATTRIBUTES>(), equals(16));
