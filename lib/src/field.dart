@@ -171,8 +171,3 @@ class Field extends TokenObject with CustomAttributesMixin {
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 }
-
-/// Provides an accessor for a field.
-extension ListField on List<Field> {
-  int operator [](String type) => firstWhere((f) => f.name == type).value;
-}

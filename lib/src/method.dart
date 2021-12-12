@@ -22,7 +22,6 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
 /// Specifies member access.
@@ -154,12 +153,11 @@ class Method extends TokenObject
   /// slot in the virtual table.
   VtableLayout get vTableLayout {
     switch (_attributes & CorMethodAttr.mdVtableLayoutMask) {
-      case CorMethodAttr.mdReuseSlot:
-        return VtableLayout.reuseSlot;
       case CorMethodAttr.mdNewSlot:
         return VtableLayout.newSlot;
+      case CorMethodAttr.mdReuseSlot:
       default:
-        throw WinmdException('Attribute missing vtable layout information');
+        return VtableLayout.reuseSlot;
     }
   }
 
