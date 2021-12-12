@@ -13,16 +13,16 @@ class UncompressedData {
 
   // The code here is the Dart equivalent of CorSigUncompressedData() in cor.h.
   factory UncompressedData.fromBlob(List<int> rawBytes) {
+    if (rawBytes.isEmpty) {
+      throw WinmdException('Bad signature');
+    }
+
     // Smallest -- one byte
     if ((rawBytes[0] & 0x80) == 0x00) // 0??? ????
     {
-      if (rawBytes.isEmpty) {
-        throw WinmdException('Bad signature');
-      } else {
-        final value = rawBytes[0];
-        final length = 1;
-        return UncompressedData(value, length);
-      }
+      final value = rawBytes[0];
+      final length = 1;
+      return UncompressedData(value, length);
     }
 
     // Medium -- two bytes
