@@ -153,9 +153,3 @@ class Property extends TokenObject with CustomAttributesMixin {
       _attributes & CorPropertyAttr.prRTSpecialName ==
       CorPropertyAttr.prRTSpecialName;
 }
-
-/// Provides an accessor for a property.
-extension ListProperty on List<Property> {
-  Property operator [](String propName) =>
-      firstWhere((p) => p.name == propName);
-}
