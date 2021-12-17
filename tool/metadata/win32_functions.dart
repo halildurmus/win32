@@ -127,10 +127,8 @@ void generateFfiFile(File file, TypeDef typedef) {
   writer.writeStringSync(
       "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
   for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
-    }
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}$import';\n");
   }
   writer.writeStringSync('\n');
   writer.writeStringSync(buffer.toString());

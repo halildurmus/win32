@@ -4,7 +4,6 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
 import '../projection/callback.dart';
-import 'exclusions.dart';
 import 'win32_functions.dart';
 
 const callbacksFileHeader = '''
@@ -48,10 +47,8 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
     writer.writeStringSync(
         "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
     for (final import in imports) {
-      if (!excludedImports.contains(import)) {
-        writer.writeStringSync(
-            "import '${relativePathToSrcDirectory(file)}$import';\n");
-      }
+      writer.writeStringSync(
+          "import '${relativePathToSrcDirectory(file)}$import';\n");
     }
     writer.writeStringSync(buffer.toString());
     writer.closeSync();

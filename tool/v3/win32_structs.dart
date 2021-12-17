@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../projection/struct.dart';
 import '../projection/utils.dart';
+import 'generate.dart';
 import 'exclusions.dart';
 
 const structFileHeader = '''
@@ -61,44 +61,19 @@ List<String> importsForStruct(TypeDef struct) {
 }
 
 void generateStructsFile(File file, List<TypeDef> typedefs) {
-  final imports = <String>{};
-  final structProjections = <String>[];
+  final structProjections = typedefs.map((struct) => StructProjection(
+      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
 
+  final importList = <String>{'combase.dart', 'guid.dart'};
   for (final struct in typedefs) {
-    structProjections.add(StructProjection(
-            struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)))
-        .toString());
-
-    imports.addAll(importsForStruct(struct));
+    importList.addAll(importsForStruct(struct));
   }
-  imports.removeWhere((import) => excludedImports.contains(import));
 
-  final structsFile = '''
-  $structFileHeader
-  import '${relativePathToSrcDirectory(file)}combase.dart';
-  import '${relativePathToSrcDirectory(file)}guid.dart';
+  final importDeclarations = importList
+      .map((import) => "import '${relativePathToSrcDirectory(file)}$import';");
 
-  ${imports.map((import) => "import '${relativePathToSrcDirectory(file)}$import';")}
+  final structsFile =
+      [structFileHeader, ...importDeclarations, ...structProjections].join();
 
-  ${structProjections.join('')}
-  ''';
-
-  // buffer.write(structFileHeader);
-  // buffer.write(
-  //     "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-  // buffer.write(
-  //     "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  // for (final import in imports) {
-  //   if (!excludedImports.contains(import)) {
-  //     buffer.write(
-  //         "import '${relativePathToSrcDirectory(file)}$import';\n");
-  //   }
-  // }
-  // buffer.write(structProjections.join(''));
-
-  final formatter = DartFormatter();
-
-  final writer = file.openSync(mode: FileMode.writeOnly);
-  writer.writeStringSync(formatter.format(structsFile));
-  writer.closeSync();
+  file.writeAsStringSync(formatter.format(structsFile));
 }

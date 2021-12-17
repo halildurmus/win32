@@ -51,8 +51,6 @@ const excludedStructs = <String>[
 
 const excludedCallbacks = <String>[];
 
-const excludedImports = <String>[];
-
 const excludedComInterfaces = <String>[
   // TODO: We may be able to remove this from the list.
   'Windows.Win32.System.Com.IUnknown',

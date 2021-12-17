@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
 import 'com_interfaces.dart';
 import 'exclusions.dart';
+import 'library.dart';
 import 'win32_callbacks.dart';
 import 'win32_constants.dart';
 import 'win32_enums.dart';
@@ -13,24 +15,7 @@ import 'win32_structs.dart';
 
 // The Win32 metadata
 final scope = MetadataStore.getWin32Scope();
-
-const win32FileHeader = '''
-library new_win32;
-
-export 'src/constants_new.dart';
-export 'src/exceptions.dart';
-export 'src/macros.dart';
-export 'src/types.dart';
-export 'src/utils.dart';
-
-export 'src/extensions/dialogs.dart';
-export 'src/extensions/int_to_hexstring.dart';
-export 'src/extensions/list_to_blob.dart';
-export 'src/extensions/set_ansi.dart';
-export 'src/extensions/set_string.dart';
-export 'src/extensions/set_string_array.dart';
-export 'src/extensions/unpack_utf16.dart';
-''';
+final formatter = DartFormatter();
 
 // TODO: Rationalize this set of utility functions with the ones in utils.dart.
 
@@ -71,8 +56,6 @@ void generateWin32Functions(String namespace) {
   }
 }
 
-bool supportsAmd64(TypeDef typedef) => typedef.supportedArchitectures.x64;
-
 bool typedefIsStruct(TypeDef typedef) =>
     typedef.isClass && typedef.parent?.name == 'System.ValueType';
 
@@ -92,7 +75,7 @@ void generateWin32Structs(String namespace) {
       .where(typedefIsNotAnsi)
       .where((typedef) => !excludedStructs.contains(typedef.name))
       .where((typedef) => !typedefIsGuidConstant(typedef))
-      .where(supportsAmd64)
+      .where((typedef) => typedef.supportedArchitectures.x64)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -148,7 +131,7 @@ void generateWin32Callbacks(String namespace) {
       .where((typedef) => typedef.isDelegate)
       .where((typedef) => !typedefIsAnsi(typedef))
       .where((typedef) => !excludedCallbacks.contains(typedef.name))
-      .where(supportsAmd64)
+      .where((typedef) => typedef.supportedArchitectures.x64)
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -172,25 +155,6 @@ void generateComInterfaces(String namespace) {
 
   final directory = Directory(folderForNamespace(namespace));
   generateInterfaceFiles(directory, interfaces, scope);
-}
-
-void generateLibraryExport(List<String> namespaces) {
-  final writer = File('lib/new_win32.dart').openSync(mode: FileMode.writeOnly);
-
-  writer.writeStringSync('// ignore_for_file: directives_ordering\n\n');
-  writer.writeStringSync(win32FileHeader);
-  for (final namespace in namespaces) {
-    final directory = Directory(folderForNamespace(namespace));
-
-    final relativePath = folderForNamespace(namespace).substring(4);
-    for (final file in directory.listSync()) {
-      if (file.existsSync() && file.uri.toFilePath().endsWith('.dart')) {
-        writer.writeStringSync(
-            "  export '$relativePath/${file.path.split('\\').last}';\n");
-      }
-    }
-  }
-  writer.closeSync();
 }
 
 // Example:
