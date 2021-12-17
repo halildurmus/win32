@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../projection/struct.dart';
@@ -61,28 +62,43 @@ List<String> importsForStruct(TypeDef struct) {
 
 void generateStructsFile(File file, List<TypeDef> typedefs) {
   final imports = <String>{};
-
-  final writer = file.openSync(mode: FileMode.writeOnly);
-  final buffer = StringBuffer();
+  final structProjections = <String>[];
 
   for (final struct in typedefs) {
-    buffer.write(StructProjection(
-        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
+    structProjections.add(StructProjection(
+            struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)))
+        .toString());
 
     imports.addAll(importsForStruct(struct));
   }
+  imports.removeWhere((import) => excludedImports.contains(import));
 
-  writer.writeStringSync(structFileHeader);
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
-    }
-  }
-  writer.writeStringSync(buffer.toString());
+  final structsFile = '''
+  $structFileHeader
+  import '${relativePathToSrcDirectory(file)}combase.dart';
+  import '${relativePathToSrcDirectory(file)}guid.dart';
+
+  ${imports.map((import) => "import '${relativePathToSrcDirectory(file)}$import';")}
+
+  ${structProjections.join('')}
+  ''';
+
+  // buffer.write(structFileHeader);
+  // buffer.write(
+  //     "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
+  // buffer.write(
+  //     "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+  // for (final import in imports) {
+  //   if (!excludedImports.contains(import)) {
+  //     buffer.write(
+  //         "import '${relativePathToSrcDirectory(file)}$import';\n");
+  //   }
+  // }
+  // buffer.write(structProjections.join(''));
+
+  final formatter = DartFormatter();
+
+  final writer = file.openSync(mode: FileMode.writeOnly);
+  writer.writeStringSync(formatter.format(structsFile));
   writer.closeSync();
 }
