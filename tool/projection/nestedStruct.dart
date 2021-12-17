@@ -75,7 +75,8 @@ class NestedStructProjection extends StructProjection {
           : stripLeadingUnderscores(
               TypeProjection(field.typeIdentifier).dartType);
 
-      // TODO: Need to figure out why this is needed at all. Shouldn't the type projection figure out the difference here?
+      // TODO: Need to figure out why this is needed at all. Shouldn't the type
+      // projection figure out the difference here?
       final typeIsString = (dartTypeProjection == 'Array<Uint16>') &&
           (field.typeIdentifier.typeArg!.baseType == BaseType.Char);
       final fieldType = typeIsString ? 'String' : dartTypeProjection;

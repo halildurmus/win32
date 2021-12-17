@@ -8,8 +8,7 @@ import '../v3/exclusions.dart';
 import '../v3/falseProperties.dart';
 import 'type.dart';
 
-// TODO: Change this to a Set to include a replacement (e.g. Int8 -> int8)
-const dartKeywords = <String>[
+const dartReservedWords = <String>{
   // Keywords from https://dart.dev/guides/language/language-tour#keywords.
   // Contextual keywords and built-in identifiers are not included here, since
   // they can be used as valid identifiers in most places.
@@ -17,15 +16,26 @@ const dartKeywords = <String>[
   'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
   'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
   'throw', 'true', 'try', 'var', 'void', 'while', 'with',
+};
 
-  'String',
+const dartTypes = <String>{
+  // Core Dart types that are likely to clash if used as an identifier
+  'int', 'double', 'String', 'bool', 'List', 'Set', 'Map',
+};
 
-  // FFI special words
+const ffiTypes = <String>{
+  // FFI types
   'Int8', 'Int16', 'Int32', 'Int64',
   'Uint8', 'Uint16', 'Uint32', 'Uint64',
   'Double', 'Float', 'Array', 'IntPtr',
   'Pointer', 'Union', 'Opaque', 'Struct',
   'Unsized', 'Void', 'Packed', 'Handle',
+};
+
+const dartKeywords = <String>[
+  ...dartReservedWords,
+  ...dartTypes,
+  ...ffiTypes,
 
   // GUID is a type, so it shouldn't be used as an identifier.
   // Example: Windows.Win32.Media.DirectShow.VMRGUID.GUID
