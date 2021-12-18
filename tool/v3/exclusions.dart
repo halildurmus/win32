@@ -12,6 +12,7 @@ const excludedNamespaces = <String>[
   'Windows.Win32.NetworkManagement.Rras',
   'Windows.Win32.Storage.IndexServer',
   'Windows.Win32.System.Iis',
+  'Windows.Win32.System.Search',
   'Windows.Win32.System.ServerBackup',
   'Windows.Win32.System.SideShow',
   'Windows.Win32.System.WinRT.AllJoyn',
