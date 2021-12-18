@@ -4,6 +4,7 @@ import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
+import 'generate.dart';
 
 const enumFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -51,12 +52,6 @@ String processEnumeration(TypeDef enumClass) {
 }
 
 void generateEnumsFile(File file, List<TypeDef> enums) {
-  final writer = file.openSync(mode: FileMode.writeOnly);
-  final buffer = StringBuffer();
-
-  for (final enumObject in enums) {
-    buffer.write(processEnumeration(enumObject));
-  }
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
+  final enumsFile = enums.map(processEnumeration).join();
+  file.writeAsStringSync(formatter.format(enumsFile));
 }

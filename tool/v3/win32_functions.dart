@@ -10,6 +10,7 @@ import 'package:winmd/winmd.dart';
 import '../projection/function.dart';
 import '../projection/utils.dart';
 import 'exclusions.dart';
+import 'generate.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
@@ -103,7 +104,7 @@ void generateFfiFile(File file, TypeDef typedef) {
       .toList();
   final imports = <String>{};
 
-  final buffer = StringBuffer();
+  final functionProjection = StringBuffer();
 
   var projectedFunctionsCount = 0;
 
@@ -127,35 +128,33 @@ void generateFfiFile(File file, TypeDef typedef) {
           library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
 
       final dll = libraryFromDllName(library);
-      buffer.write(docComment(dll));
-      buffer
+      functionProjection.write(docComment(dll));
+      functionProjection
           .writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
-      buffer.writeln();
+      functionProjection.writeln();
 
       for (final function in functions) {
         final printer = FunctionProjection(function, libraryDartName);
-        buffer.writeln(printer.toString());
+        functionProjection.writeln(printer.toString());
         imports.addAll(importsForFunction(function));
         projectedFunctionsCount++;
       }
-      buffer.writeln();
+      functionProjection.writeln();
     }
   }
 
   if (projectedFunctionsCount > 0) {
-    final writer = file.openSync(mode: FileMode.writeOnly);
+    final buffer = StringBuffer();
 
-    writer.writeStringSync(ffiFileHeader);
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
+    buffer.write(ffiFileHeader);
+    buffer.write("import '${relativePathToSrcDirectory(file)}guid.dart';\n");
+    buffer.write("import '${relativePathToSrcDirectory(file)}combase.dart';\n");
     for (final import in imports) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
+      buffer.write("import '${relativePathToSrcDirectory(file)}$import';\n");
     }
-    writer.writeStringSync('\n');
-    writer.writeStringSync(buffer.toString());
-    writer.closeSync();
+    buffer.write(functionProjection.toString());
+
+    final functionsFile = buffer.toString();
+    file.writeAsStringSync(formatter.format(functionsFile));
   }
 }
