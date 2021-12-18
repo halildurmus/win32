@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
+import 'generate.dart';
 
 const constantFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -24,28 +25,20 @@ import 'package:ffi/ffi.dart';
 
 ''';
 
-void generateConstantsFile(File file, List<Field> constants) {
-  final writer = file.openSync(mode: FileMode.writeOnly);
-  final buffer = StringBuffer();
+Iterable<String> getConstants(List<Field> constants) => constants.map((constant) =>
+    'const ${safeName(constant.name)} = 0x${constant.value.toRadixString(16)};\n');
 
-  buffer.write(constantFileHeader);
+Iterable<String> getGuidConstants(List<TypeDef> guidConstants) =>
+    guidConstants.map((constant) =>
+        "const ${safeName(lastComponent(constant.name))} = '${constant.guid}';\n");
 
-  for (final constant in constants) {
-    buffer.write('const ${safeName(constant.name)} = '
-        '0x${constant.value.toRadixString(16)};\n');
-  }
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
-}
+void generateConstantsFile(
+    File file, List<Field> constants, List<TypeDef> guidConstants) {
+  final constantProjections = getConstants(constants);
+  final guidProjections = getGuidConstants(guidConstants);
 
-void appendGuidConstantsFile(File file, List<TypeDef> guidConstants) {
-  final writer = file.openSync(mode: FileMode.writeOnlyAppend);
-  final buffer = StringBuffer();
+  final constantsFile =
+      [constantFileHeader, ...constantProjections, ...guidProjections].join();
 
-  for (final constant in guidConstants) {
-    buffer.write("const ${safeName(constant.name.split('.').last)} = "
-        "'${constant.guid}';\n");
-  }
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
+  file.writeAsStringSync(formatter.format(constantsFile));
 }

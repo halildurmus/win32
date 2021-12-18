@@ -112,16 +112,15 @@ void generateWin32Constants(String namespace) {
   final constants =
       scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
 
+  final guidConstants = scope.typeDefs
+      .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
+      .where(typedefIsGuidConstant)
+      .where((typedef) => !(constantIsClassClsid(typedef)))
+      .toList();
+
   if (constants.isNotEmpty) {
     final file = File('${folderForNamespace(namespace)}/constants.g.dart');
-    generateConstantsFile(file, constants.first.fields);
-
-    final guidConstants = scope.typeDefs
-        .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
-        .where(typedefIsGuidConstant)
-        .where((typedef) => !(constantIsClassClsid(typedef)))
-        .toList();
-    appendGuidConstantsFile(file, guidConstants);
+    generateConstantsFile(file, constants.first.fields, guidConstants);
   }
 }
 
