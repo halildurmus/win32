@@ -60,17 +60,16 @@ List<String> importsForStruct(TypeDef struct) {
   return importList;
 }
 
-void generateStructsFile(File file, List<TypeDef> typedefs) {
-  final structProjections = typedefs.map((struct) => StructProjection(
-      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
-
-  final importList = <String>{'combase.dart', 'guid.dart'};
-  for (final struct in typedefs) {
+void generateStructsFile(File file, List<TypeDef> structs) {
+  final importList = {'combase.dart', 'guid.dart'};
+  for (final struct in structs) {
     importList.addAll(importsForStruct(struct));
   }
-
   final importDeclarations = importList
       .map((import) => "import '${relativePathToSrcDirectory(file)}$import';");
+
+  final structProjections = structs.map((struct) => StructProjection(
+      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
 
   final structsFile =
       [structFileHeader, ...importDeclarations, ...structProjections].join();

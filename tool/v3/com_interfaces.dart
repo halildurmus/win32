@@ -5,6 +5,7 @@ import 'package:winmd/winmd.dart';
 import '../projection/class.dart';
 import '../projection/interface.dart';
 import '../projection/utils.dart';
+import 'generate.dart';
 
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
@@ -22,11 +23,12 @@ void generateInterfaceFiles(
     }
 
     final dartClass = interfaceProjection.toString();
+    final formattedFile = formatter.format(dartClass);
 
     final classOutputFilename =
         stripAnsiUnicodeSuffix(lastComponent(interface.name));
-    final outputFile =
-        File('${directory.uri.toFilePath()}$classOutputFilename.dart');
-    outputFile.writeAsStringSync(dartClass);
+
+    File('${directory.uri.toFilePath()}$classOutputFilename.dart')
+        .writeAsStringSync(formattedFile);
   }
 }

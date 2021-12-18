@@ -135,8 +135,10 @@ void generateWin32Callbacks(String namespace) {
       .toList()
     ..sort((a, b) => a.name.compareTo(b.name));
 
-  final file = File('${folderForNamespace(namespace)}/callbacks.g.dart');
-  generateCallbacksFile(file, callbacks);
+  if (callbacks.isNotEmpty) {
+    final file = File('${folderForNamespace(namespace)}/callbacks.g.dart');
+    generateCallbacksFile(file, callbacks);
+  }
 }
 
 bool typeDirectlyInNamespace(String type, String namespace) {
