@@ -6,41 +6,8 @@ import 'package:winmd/winmd.dart';
 
 import '../v3/exclusions.dart';
 import '../v3/falseProperties.dart';
+import 'safenames.dart';
 import 'type.dart';
-
-const dartReservedWords = <String>{
-  // Keywords from https://dart.dev/guides/language/language-tour#keywords.
-  // Contextual keywords and built-in identifiers are not included here, since
-  // they can be used as valid identifiers in most places.
-  'assert', 'break', 'case', 'catch', 'class', 'const', 'continue', 'default',
-  'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
-  'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
-  'throw', 'true', 'try', 'var', 'void', 'while', 'with',
-};
-
-const dartTypes = <String>{
-  // Core Dart types that are likely to clash if used as an identifier
-  'int', 'double', 'String', 'bool', 'List', 'Set', 'Map',
-};
-
-const ffiTypes = <String>{
-  // FFI types
-  'Int8', 'Int16', 'Int32', 'Int64',
-  'Uint8', 'Uint16', 'Uint32', 'Uint64',
-  'Double', 'Float', 'Array', 'IntPtr',
-  'Pointer', 'Union', 'Opaque', 'Struct',
-  'Unsized', 'Void', 'Packed', 'Handle',
-};
-
-const dartKeywords = <String>[
-  ...dartReservedWords,
-  ...dartTypes,
-  ...ffiTypes,
-
-  // GUID is a type, so it shouldn't be used as an identifier.
-  // Example: Windows.Win32.Media.DirectShow.VMRGUID.GUID
-  'GUID',
-];
 
 const falseAnsiEndings = <String>[
   // These are structs that appear in the Win32 metadata that end in 'A' but
@@ -212,7 +179,7 @@ bool characterIsNumeral(String c) => int.tryParse(c) != null;
 /// For example, `VARIANT var` should be converted to `VARIANT var_`, and
 /// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
 String safeName(String name) {
-  if (dartKeywords.contains(name)) {
+  if (badIdentifierNames.contains(name)) {
     return '${name}_';
   }
 
