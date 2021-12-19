@@ -518,13 +518,19 @@ class TypeDef extends TokenObject
   /// Get a field matching the name, if one exists.
   ///
   /// Returns null if the field is not found.
-  Field? findField(String fieldName) {
-    try {
-      return fields.firstWhere((field) => field.name == fieldName);
-    } on StateError {
-      return null;
-    }
-  }
+  Field? findField(String fieldName) => using((Arena arena) {
+        final szName = fieldName.toNativeUtf16(allocator: arena);
+        final ptkFieldDef = arena<mdFieldDef>();
+
+        final hr = reader.FindField(token, szName, nullptr, 0, ptkFieldDef);
+        if (SUCCEEDED(hr)) {
+          return Field.fromToken(scope, ptkFieldDef.value);
+        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+          return null;
+        } else {
+          throw COMException(hr);
+        }
+      });
 
   /// Get a method matching the name, if one exists.
   ///
