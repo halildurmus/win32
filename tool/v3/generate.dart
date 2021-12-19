@@ -162,23 +162,34 @@ void generateComInterfaces(String namespace) {
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
   // final namespacesDefault = ['Windows.Win32.Devices.Bluetooth'];
-  final namespacesDefault = namespacesInScope(scope);
   final stopwatch = Stopwatch()..start();
+  final namespacesDefault = namespacesInScope(scope);
   final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
 
-  for (final namespace in namespaces) {
-    print('Generating $namespace...');
+  print('[${stopwatch.elapsed}] Creating directories');
+  namespaces.forEach(createDirectory);
 
-    createDirectory(namespace);
-    generateWin32Functions(namespace);
-    generateWin32Structs(namespace);
-    generateWin32Enums(namespace);
-    generateWin32Constants(namespace);
-    generateWin32Callbacks(namespace);
-    generateComInterfaces(namespace);
-  }
+  print('[${stopwatch.elapsed}] Generating constants');
+  namespaces.forEach(generateWin32Constants);
+
+  print('[${stopwatch.elapsed}] Generating structs');
+  namespaces.forEach(generateWin32Structs);
+
+  print('[${stopwatch.elapsed}] Generating enums');
+  namespaces.forEach(generateWin32Enums);
+
+  print('[${stopwatch.elapsed}] Generating callbacks');
+  namespaces.forEach(generateWin32Callbacks);
+
+  print('[${stopwatch.elapsed}] Generating Win32 functions');
+  namespaces.forEach(generateWin32Functions);
+
+  print('[${stopwatch.elapsed}] Generating COM interfaces');
+  namespaces.forEach(generateComInterfaces);
+
+  print('[${stopwatch.elapsed}] Generating library export');
   generateLibraryExport(namespaces);
 
   stopwatch.stop();
-  print('Projection generation completed in ${stopwatch.elapsed}');
+  print('[${stopwatch.elapsed}] Projection generation completed.');
 }
