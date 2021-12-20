@@ -1,3 +1,8 @@
+## 1.0.21
+
+- Extra backstop of looking locally for Win32 metadata file. This is for
+  compiled EXEs.
+  
 ## 1.0.20
 
 - Export architecture mixin.

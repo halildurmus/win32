@@ -78,13 +78,18 @@ class MetadataStore {
       final uri = Uri.parse('package:winmd/assets/$win32ScopeName');
       final future = Isolate.resolvePackageUri(uri);
       final package = waitFor(future, timeout: const Duration(seconds: 5));
-      if (package == null) {
-        throw WinmdException('Could not find $win32ScopeName.');
+      if (package != null) {
+        final fileScope = File.fromUri(package);
+        return getScopeForFile(fileScope);
+      } else {
+        // Last ditch attempt: look in local folder
+        final fileScope = File('Windows.Win32.winmd');
+        if (fileScope.existsSync()) {
+          return getScopeForFile(fileScope);
+        }
       }
-      final fileScope = File.fromUri(package);
-
-      return getScopeForFile(fileScope);
     }
+    throw WinmdException('Could not find $win32ScopeName.');
   }
 
   /// Takes a metadata file path and returns the matching scope.
