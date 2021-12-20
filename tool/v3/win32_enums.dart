@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
-import '../projection/utils.dart';
+import '../projection/safenames.dart';
 import 'generate.dart';
 
 const enumFileHeader = '''
@@ -43,7 +43,8 @@ String processEnumeration(TypeDef enumClass) {
   // The first field is always the special field _value
   for (final field in enumClass.fields.skip(1)) {
     final value = field.value.toHexString(32);
-    buffer.writeln('  static const ${safeName(field.name)} = $value;');
+    buffer.writeln(
+        '  static const ${safeIdentifierForString(field.name)} = $value;');
   }
 
   buffer.writeln('}\n');

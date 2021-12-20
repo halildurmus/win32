@@ -1,6 +1,10 @@
 // Functions for taking raw identifiers in Windows Metadata and safely
 // converting them to names that can be used as a Dart identifier.
 
+import 'package:winmd/winmd.dart';
+
+import 'utils.dart';
+
 /// Reserved words in the Dart language that can never be used as identifiers.
 /// Keywords from https://dart.dev/guides/language/language-tour#keywords.
 const dartReservedWords = <String>{
@@ -50,7 +54,37 @@ const badIdentifierNames = <String>[
 /// Raw module names may include hyphens (e.g.
 /// `api-ms-win-core-winrt-l1-1-0.dll`), or periods (e.g.
 /// `windows.ai.machinelearning.dll`)
-String dartIdentifierFromModuleName(String libraryName) =>
-    libraryName.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
+String identifierForModuleName(String moduleName) =>
+    moduleName.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
 
+/// Creates an allowed public identifier from a [TypeDef].
+String safeIdentifierForTypeDef(TypeDef typeDef) {
+  final name = lastComponent(typeDef.name);
+  return safeIdentifierForString(name);
+}
+
+/// Takes an identifier and converts it to a safe Dart identifier (i.e. one that
+/// is not a reserved word or a private modifier).
+///
+/// For example, `VARIANT var` should be converted to `VARIANT $var`, and
+/// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
+String safeIdentifierForString(String name) => badIdentifierNames.contains(name)
+    ? r'$' + name
+    : stripLeadingUnderscores(name);
+
+/// Takes a type and makes sure it is accessible by stripping off any private
+/// modifiers.
+///
+/// For example, `Pointer<_alljoyn_abouticon_handle>` should become
+/// `Pointer<alljoyn_abouticon_handle>`.
+String safeTypenameForString(String name) {
+  if (name.startsWith('Pointer<')) {
+    final wrappedType = stripPointer(name);
+    return 'Pointer<${safeTypenameForString(wrappedType)}>';
+  }
+
+  return stripLeadingUnderscores(name);
+}
+
+/// Marks an identifier as private to the win32 library.
 String private(String identifier) => '_$identifier';

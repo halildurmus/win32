@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import 'method.dart';
+import 'safenames.dart';
 import 'utils.dart';
 
 // TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
@@ -18,8 +19,8 @@ class GetPropertyProjection extends PropertyProjection {
 
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName => method.name.startsWith('get__')
-      ? safeName(method.name.substring(5))
-      : safeName(method.name.substring(4));
+      ? safeIdentifierForString(method.name.substring(5))
+      : safeIdentifierForString(method.name.substring(4));
 
   @override
   String toString() {
@@ -58,8 +59,8 @@ class SetPropertyProjection extends PropertyProjection {
 
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName => method.name.startsWith('put__')
-      ? safeName(method.name.substring(5))
-      : safeName(method.name.substring(4));
+      ? safeIdentifierForString(method.name.substring(5))
+      : safeIdentifierForString(method.name.substring(4));
 
   @override
   String toString() => '''

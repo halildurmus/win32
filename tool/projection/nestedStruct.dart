@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 // import '../v3/exclusions.dart';
+import 'safenames.dart';
 import 'type.dart';
 import 'struct.dart';
 import 'utils.dart';
@@ -34,7 +35,7 @@ class NestedStructProjection extends StructProjection {
   String _instanceName(Field field) {
     // Walk up the tree and append each item.
     var typeDef = field.parent;
-    var name = safeName(field.name);
+    var name = safeIdentifierForString(field.name);
     while (typeDef.enclosingClass != null) {
       final parentField = typeDef.enclosingClass!.fields
           .firstWhere((field) => (field.typeIdentifier.type == typeDef));
@@ -64,7 +65,7 @@ class NestedStructProjection extends StructProjection {
     final extensionName = stripLeadingUnderscores(suffix == 0
         ? '${parentName}_Extension'
         : '${parentName}_Extension_$suffix');
-    final rootTypeName = safeName(shortenTypeDef(rootType));
+    final rootTypeName = safeTypenameForString(shortenTypeDef(rootType));
 
     final buffer = StringBuffer();
     buffer.writeln('extension $extensionName on $rootTypeName {');
@@ -81,7 +82,7 @@ class NestedStructProjection extends StructProjection {
           (field.typeIdentifier.typeArg!.baseType == BaseType.Char);
       final fieldType = typeIsString ? 'String' : dartTypeProjection;
 
-      final safeFieldName = safeName(field.name);
+      final safeFieldName = safeIdentifierForString(field.name);
       buffer.writeln('''
   $fieldType get $safeFieldName => this.$instanceName;
   set $safeFieldName($fieldType value) => this.$instanceName = value;

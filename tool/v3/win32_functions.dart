@@ -126,7 +126,7 @@ void generateFfiFile(File file, TypeDef typedef) {
 
     // Don't bother with modules that don't contain any relevant functions.
     if (functions.isNotEmpty) {
-      final moduleDartIdentifier = dartIdentifierFromModuleName(module);
+      final moduleDartIdentifier = identifierForModuleName(module);
       final dllFilename = DLLFromModuleName(module);
       functionProjections.write(commentHeader(dllFilename));
       functionProjections.writeln(

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../projection/utils.dart';
+import '../projection/safenames.dart';
 import 'generate.dart';
 
 const constantFileHeader = '''
@@ -26,11 +26,11 @@ import 'package:ffi/ffi.dart';
 ''';
 
 Iterable<String> getConstants(List<Field> constants) => constants.map((constant) =>
-    'const ${safeName(constant.name)} = 0x${constant.value.toRadixString(16)};\n');
+    'const ${safeIdentifierForString(constant.name)} = 0x${constant.value.toRadixString(16)};\n');
 
 Iterable<String> getGuidConstants(List<TypeDef> guidConstants) =>
     guidConstants.map((constant) =>
-        "const ${safeName(lastComponent(constant.name))} = '${constant.guid}';\n");
+        "const ${safeIdentifierForTypeDef(constant)} = '${constant.guid}';\n");
 
 void generateConstantsFile(
     File file, List<Field> constants, List<TypeDef> guidConstants) {

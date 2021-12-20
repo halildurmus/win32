@@ -1,11 +1,11 @@
 import 'package:winmd/winmd.dart';
 
 import 'function.dart';
-import 'utils.dart';
+import 'safenames.dart';
 
 class CallbackProjection {
-  late String callbackName;
-  late FunctionProjection functionProjection;
+  late final String callbackName;
+  late final FunctionProjection functionProjection;
 
   CallbackProjection(TypeDef typeDef) {
     final invokeMethod = typeDef.findMethod('Invoke');
@@ -14,7 +14,7 @@ class CallbackProjection {
       throw Exception('${typeDef.name} is not a callback.');
     }
 
-    callbackName = stripLeadingUnderscores(lastComponent(typeDef.name));
+    callbackName = safeIdentifierForTypeDef(typeDef);
     functionProjection = FunctionProjection(invokeMethod, '');
   }
 

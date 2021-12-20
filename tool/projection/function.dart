@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
+import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
 
@@ -38,7 +39,7 @@ class FunctionProjection {
 
   @override
   String toString() => '''
-    ${safeTypename(returnType.dartType)} $k32StrippedName($dartParams) =>
+    ${safeTypenameForString(returnType.dartType)} $k32StrippedName($dartParams) =>
       _$nameWithoutEncoding(${parameters.map((param) => param.identifier).join(', ')});
 
     late final _$nameWithoutEncoding = 

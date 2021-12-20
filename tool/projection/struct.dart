@@ -4,6 +4,7 @@ import 'package:winmd/winmd.dart';
 
 import 'field.dart';
 import 'nestedStruct.dart';
+import 'safenames.dart';
 import 'utils.dart';
 
 /// Represents a Dart projection of a Struct typedef.
@@ -39,8 +40,8 @@ class StructProjection {
   }
 
   String get _projectedName => typeDef.isNested
-      ? '_${safeName(mangleName(typeDef))}'
-      : safeName(structName);
+      ? '_${safeTypenameForString(mangleName(typeDef))}'
+      : safeTypenameForString(structName);
 
   String get _fieldsProjection =>
       typeDef.fields.map((field) => FieldProjection(field)).join('\n');
