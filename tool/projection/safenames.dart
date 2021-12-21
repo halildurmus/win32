@@ -48,6 +48,13 @@ const badIdentifierNames = <String>[
   ...win32TypesUsedAsIdentifiers,
 ];
 
+/// Take a [TypeDef] and return a name suitable for filenames.
+///
+/// This should not be used for identifiers without further processing, since it
+/// could include a reserved word or a leading underscore.
+String safeFilenameForTypeDef(TypeDef typeDef) =>
+    stripAnsiUnicodeSuffix(lastComponent(typeDef.name));
+
 /// Convert a raw module name into something that can be safely used as an
 /// identifier.
 ///
@@ -72,6 +79,9 @@ String safeIdentifierForString(String name) => badIdentifierNames.contains(name)
     ? r'$' + name
     : stripLeadingUnderscores(name);
 
+String safeTypenameForTypeDef(TypeDef typeDef) =>
+    safeTypenameForString(lastComponent(typeDef.name));
+
 /// Takes a type and makes sure it is accessible by stripping off any private
 /// modifiers.
 ///
@@ -85,6 +95,3 @@ String safeTypenameForString(String name) {
 
   return stripLeadingUnderscores(name);
 }
-
-/// Marks an identifier as private to the win32 library.
-String private(String identifier) => '_$identifier';

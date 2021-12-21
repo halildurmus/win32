@@ -3,6 +3,7 @@ import 'package:winmd/winmd.dart';
 import '../v3/exclusions.dart';
 import 'method.dart';
 import 'property.dart';
+import 'safenames.dart';
 import 'utils.dart';
 
 class InterfaceProjection {
@@ -58,11 +59,12 @@ class InterfaceProjection {
     return projection;
   }
 
-  String get shortName => stripLeadingUnderscores(shortenTypeDef(typeDef));
+  String get shortName =>
+      stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef));
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
-      return shortenTypeDef(typeDef.interfaces.first);
+      return safeIdentifierForTypeDef(typeDef.interfaces.first);
     }
     return '';
   }

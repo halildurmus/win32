@@ -33,30 +33,20 @@ class NestedStructProjection extends StructProjection {
   }
 
   String _instanceName(Field field) {
-    // Walk up the tree and append each item.
+    // Walk up the tree and append each item, making sure along the way that
+    // each identifier is valid.
     var typeDef = field.parent;
     var name = safeIdentifierForString(field.name);
+
     while (typeDef.enclosingClass != null) {
       final parentField = typeDef.enclosingClass!.fields
           .firstWhere((field) => (field.typeIdentifier.type == typeDef));
-      name = '${parentField.name}.$name';
+      final parentName = safeIdentifierForString(parentField.name);
+      name = '$parentName.$name';
       typeDef = typeDef.enclosingClass!;
     }
     return name;
   }
-
-  // @override
-  // String get classPreamble {
-  //   // TODO: Remove this, I think?
-  //   final packingAlignment = rootType.classLayout.packingAlignment;
-  //   if (packingAlignment != null &&
-  //       packingAlignment > 0 &&
-  //       !ignorePackingDirectives.contains(typeDef.name)) {
-  //     return '@Packed($packingAlignment)';
-  //   } else {
-  //     return '';
-  //   }
-  // }
 
   /// A nested type needs a way to access its members from the parent type. We
   /// do this through an extension that contains the field accessors.
@@ -65,7 +55,8 @@ class NestedStructProjection extends StructProjection {
     final extensionName = stripLeadingUnderscores(suffix == 0
         ? '${parentName}_Extension'
         : '${parentName}_Extension_$suffix');
-    final rootTypeName = safeTypenameForString(shortenTypeDef(rootType));
+    final rootTypeName = stripLeadingUnderscores(
+        stripAnsiUnicodeSuffix(lastComponent(rootType.name)));
 
     final buffer = StringBuffer();
     buffer.writeln('extension $extensionName on $rootTypeName {');

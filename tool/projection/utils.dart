@@ -6,6 +6,7 @@ import 'package:winmd/winmd.dart';
 
 import '../v3/exclusions.dart';
 import '../v3/falseProperties.dart';
+import 'safenames.dart';
 import 'type.dart';
 
 const falseAnsiEndings = <String>[
@@ -46,16 +47,20 @@ bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
     comInterface.name.endsWith('IEnumSTATDATA') ||
     !comInterface.name.endsWith('A');
 
-/// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
+/// Strip the Unicode / ANSI suffix from the name. For example, `MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
   if (typeName.startsWith('Pointer<')) {
     final wrappedType = stripPointer(typeName);
     return 'Pointer<${stripAnsiUnicodeSuffix(wrappedType)}>';
   }
-  if (typePretendsToBeAnsi(typeName)) {
+
+  // Frustratingly, Windows.Win32.System.Wmi.MI_* types are the exception where
+  // 'A' suffix does not seem to denote ASCII.
+  if (typePretendsToBeAnsi(typeName) || typeName.startsWith('MI_')) {
     return typeName;
   }
+
   if (typeName.endsWith('W') || typeName.endsWith('A')) {
     return typeName.substring(0, typeName.length - 1);
   }
@@ -155,13 +160,6 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
-/// Take a [TypeDef] and return a name suitable for filenames.
-///
-/// This should not be used for identifiers without further processing, since it
-/// could include a reserved word or a leading underscore.
-String shortenTypeDef(TypeDef typeDef) =>
-    stripAnsiUnicodeSuffix(lastComponent(typeDef.name));
-
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
 /// matching folder (e.g. `system/console`).
 String folderFromNamespace(String namespace) {
@@ -170,17 +168,21 @@ String folderFromNamespace(String namespace) {
   return segments.join('/').toLowerCase();
 }
 
+/// Marks an identifier as private to the win32 library.
+String private(String identifier) => '_$identifier';
+
+/// Returns true if the string can be converted to an integer.
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
 
 bool isExcludedGetProperty(Method method) => falseProperties
     .where((p) =>
-        p.interface == shortenTypeDef(method.parent) &&
+        p.interface == safeTypenameForTypeDef(method.parent) &&
         p.property == method.name)
     .isNotEmpty;
 
 bool isExcludedSetProperty(Method method) => falseProperties
     .where((p) =>
-        p.interface == shortenTypeDef(method.parent) &&
+        p.interface == safeTypenameForTypeDef(method.parent) &&
         p.property.replaceFirst('get', 'put') == method.name)
     .isNotEmpty;
 

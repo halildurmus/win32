@@ -161,9 +161,11 @@ void generateComInterfaces(String namespace) {
 // Example:
 //   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  // final namespacesDefault = ['Windows.Win32.Devices.Bluetooth'];
+  final namespacesDefault = ['Windows.Win32.System.Ole'];
   final stopwatch = Stopwatch()..start();
-  final namespacesDefault = namespacesInScope(scope);
+
+  print('[${stopwatch.elapsed}] Loading metadata');
+  // final namespacesDefault = namespacesInScope(scope);
   final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
 
   print('[${stopwatch.elapsed}] Creating directories');

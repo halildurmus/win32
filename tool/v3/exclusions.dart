@@ -44,6 +44,8 @@ const excludedStructs = <String>[
   'Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO',
   'Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO_PACKAGE',
   'Windows.Win32.System.Diagnostics.Debug.SYMSRV_INDEX_INFO',
+  'Windows.Win32.System.Diagnostics.ToolHelp.MODULEENTRY32',
+  'Windows.Win32.System.Diagnostics.ToolHelp.PROCESSENTRY32',
 
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V1',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V2',
