@@ -17,9 +17,9 @@ dev_dependencies:
   lints: ^1.0.1
   path: ^1.8.0
   test: ^1.19.5
-  winmd: 1.0.20 # Pinned deliberately
+  winmd: 1.0.21 # Pinned deliberately
 
 dependency_overrides:
   # Because win32 is v3 and winmd doesn't know that it's compatible with it, we
   # have to manually override this value
-  winmd: 1.0.20 
+  winmd: 1.0.21

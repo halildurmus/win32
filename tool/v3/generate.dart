@@ -14,7 +14,7 @@ import 'win32_functions.dart';
 import 'win32_structs.dart';
 
 // The Win32 metadata
-final scope = MetadataStore.getWin32Scope();
+late final scope = MetadataStore.getWin32Scope();
 final formatter = DartFormatter();
 
 // TODO: Rationalize this set of utility functions with the ones in utils.dart.
@@ -159,14 +159,21 @@ void generateComInterfaces(String namespace) {
 }
 
 // Example:
-//   dart tool\namespace\generate_all_from_winmd.dart Windows.Win32.System.Com
+//   dart tool\v3\generate.dart Windows.Win32.System.Com
 void main(List<String> args) {
-  final namespacesDefault = ['Windows.Win32.System.Ole'];
-  final stopwatch = Stopwatch()..start();
+  // Uncomment this for interactive debugging.
+  const namespacesToDebug = <String>[/*'Windows.Win32.System.Ole'*/];
 
+  final stopwatch = Stopwatch()..start();
   print('[${stopwatch.elapsed}] Loading metadata');
-  // final namespacesDefault = namespacesInScope(scope);
-  final namespaces = args.isNotEmpty ? [args[0]] : namespacesDefault;
+  List<String> namespaces;
+  if (args.isNotEmpty) {
+    namespaces = [args[0]];
+  } else if (namespacesToDebug.isNotEmpty) {
+    namespaces = namespacesToDebug;
+  } else {
+    namespaces = namespacesInScope(scope);
+  }
 
   print('[${stopwatch.elapsed}] Creating directories');
   namespaces.forEach(createDirectory);
