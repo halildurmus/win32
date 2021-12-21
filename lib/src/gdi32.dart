@@ -373,6 +373,37 @@ late final _CreateDIBPatternBrushPt = _gdi32.lookupFunction<
     IntPtr Function(Pointer lpPackedDIB, Uint32 iUsage),
     int Function(Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
 
+/// The CreateDIBSection function creates a DIB that applications can write
+/// to directly. The function gives you a pointer to the location of the
+/// bitmap bit values. You can supply a handle to a file-mapping object
+/// that the function will use to create the bitmap, or you can let the
+/// system allocate the memory for the bitmap.
+///
+/// ```c
+/// HBITMAP CreateDIBSection(
+///   HDC              hdc,
+///   const BITMAPINFO *pbmi,
+///   UINT             usage,
+///   VOID             **ppvBits,
+///   HANDLE           hSection,
+///   DWORD            offset);
+/// ```
+/// {@category gdi32}
+int CreateDIBSection(int hdc, Pointer<BITMAPINFO> pbmi, int usage,
+        Pointer<Pointer> ppvBits, int hSection, int offset) =>
+    _CreateDIBSection(hdc, pbmi, usage, ppvBits, hSection, offset);
+
+late final _CreateDIBSection = _gdi32.lookupFunction<
+    IntPtr Function(IntPtr hdc, Pointer<BITMAPINFO> pbmi, Uint32 usage,
+        Pointer<Pointer> ppvBits, IntPtr hSection, Uint32 offset),
+    int Function(
+        int hdc,
+        Pointer<BITMAPINFO> pbmi,
+        int usage,
+        Pointer<Pointer> ppvBits,
+        int hSection,
+        int offset)>('CreateDIBSection');
+
 /// The CreateEllipticRgn function creates an elliptical region.
 ///
 /// ```c
