@@ -175,7 +175,7 @@ void generateForNamespaces(PartitionData data) async {
   final namespaces = data.namespaces;
   final stopwatch = data.stopwatch;
   final partition = data.partition;
-  
+
   print('[${stopwatch.elapsed}] Creating directories (partition $partition)');
   namespaces.forEach(createDirectory);
 
@@ -199,17 +199,18 @@ void generateForNamespaces(PartitionData data) async {
       '[${stopwatch.elapsed}] Generating COM interfaces (partition $partition)');
   namespaces.forEach(generateComInterfaces);
 
+  print('[${stopwatch.elapsed}] Completed (partition $partition)');
+
   Isolate.exit(data.port, true);
 }
 
-List<List<String>> partitionNamespaces(
-    List<String> namespaces, int partitions) {
-  final chunkSize = (namespaces.length / partitions).ceil();
-  final chunks = [
-    for (var i = 0; i < namespaces.length; i += chunkSize)
-      namespaces.sublist(i, min(i + chunkSize, namespaces.length))
+/// Partition a list into the given number of sublists.
+List<List<T>> partitionList<T>(List<T> list, int partitions) {
+  final chunkSize = (list.length / partitions).ceil();
+  return [
+    for (var i = 0; i < list.length; i += chunkSize)
+      list.sublist(i, min(i + chunkSize, list.length))
   ];
-  return chunks;
 }
 
 // Example:
@@ -230,7 +231,7 @@ Future<void> main(List<String> args) async {
   }
 
   const concurrentProcesses = 16;
-  final partitions = partitionNamespaces(namespaces, concurrentProcesses);
+  final partitions = partitionList<String>(namespaces, concurrentProcesses);
   final ports = List.generate(concurrentProcesses, (i) => ReceivePort());
 
   for (var i = 0; i < partitions.length; i++) {
