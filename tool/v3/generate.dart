@@ -231,9 +231,9 @@ Future<void> main(List<String> args) async {
     namespaces = namespacesInScope(scope);
   }
 
-  const concurrentProcesses = 16;
-  final partitions = partitionList<String>(namespaces, concurrentProcesses);
-  final ports = List.generate(concurrentProcesses, (i) => ReceivePort());
+  const concurrentIsolates = 32;
+  final partitions = partitionList<String>(namespaces, concurrentIsolates);
+  final ports = List.generate(concurrentIsolates, (i) => ReceivePort());
 
   for (var i = 0; i < partitions.length; i++) {
     await Isolate.spawn<PartitionData>(generateForNamespaces,
