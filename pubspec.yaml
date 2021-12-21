@@ -15,8 +15,8 @@ dev_dependencies:
   args: ^2.3.0
   lints: ^1.0.1
   path: ^1.8.0
-  test: ^1.19.5
-  winmd: 1.0.20 # Pinned deliberately
+  test: ^1.20.1
+  winmd: 1.0.21 # Pinned deliberately
 
 # dependency_overrides:
 #   winmd: 
