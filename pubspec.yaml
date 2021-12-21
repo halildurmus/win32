@@ -13,6 +13,7 @@ dependencies:
 
 dev_dependencies:
   args: ^2.3.0
+  async: ^2.8.2
   dart_style: ^2.2.1
   lints: ^1.0.1
   path: ^1.8.0
