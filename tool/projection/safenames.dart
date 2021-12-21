@@ -38,7 +38,7 @@ const ffiTypes = <String>{
 /// Since `GUID GUID;` is not a valid statement in Dart if the type already
 /// exists, we need to avoid these. (An example is
 /// `Windows.Win32.Media.DirectShow.VMRGUID.GUID`.)
-const win32TypesUsedAsIdentifiers = <String>{'GUID'};
+const win32TypesUsedAsIdentifiers = <String>{'GUID', 'UiInfo'};
 
 /// A list of all words that should not be used as identifiers.
 const badIdentifierNames = <String>[

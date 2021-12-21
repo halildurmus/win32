@@ -4,6 +4,7 @@ const excludedNamespaces = <String>[
   // Trident MSHTML engine.
   'Windows.Win32.AI.MachineLearning.DirectML',
   'Windows.Win32.AI.MachineLearning.WinML',
+  'Windows.Win32.System.Diagnostics.Debug.WebApp',
   'Windows.Win32.Devices.AllJoyn',
   'Windows.Win32.Networking.ActiveDirectory',
   'Windows.Win32.Networking.Clustering',
@@ -47,9 +48,14 @@ const excludedStructs = <String>[
   'Windows.Win32.System.Diagnostics.ToolHelp.MODULEENTRY32',
   'Windows.Win32.System.Diagnostics.ToolHelp.PROCESSENTRY32',
 
+  // Other ANSI structs where the 'A' is not a suffix.
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V1',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V2',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V3',
+  'Windows.Win32.Media.Audio.DirectMusic.DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA',
+
+  // Duplicated definitions.
+  'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
 ];
 
 const excludedCallbacks = <String>[];
