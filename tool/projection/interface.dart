@@ -100,19 +100,13 @@ class InterfaceProjection {
         final import = getImportForTypeIdentifier(param.typeIdentifier);
         if (import != null) importList.add(import);
 
-        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>)
-        if (param.typeIdentifier.typeArg != null) {
-          final import =
-              getImportForTypeIdentifier(param.typeIdentifier.typeArg!);
+        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>). Keep
+        // unwrapping until there are no types left.
+        var refType = param.typeIdentifier;
+        while (refType.typeArg != null) {
+          refType = refType.typeArg!;
+          final import = getImportForTypeIdentifier(refType);
           if (import != null) importList.add(import);
-
-          // Add imports for a type within a double pointer (e.g.
-          // Pointer<Pointer<VARIANT>>)
-          if (param.typeIdentifier.typeArg!.typeArg != null) {
-            final import = getImportForTypeIdentifier(
-                param.typeIdentifier.typeArg!.typeArg!);
-            if (import != null) importList.add(import);
-          }
         }
       }
     }
