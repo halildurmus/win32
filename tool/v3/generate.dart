@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:isolate';
+import 'dart:math' show min;
 
+import 'package:async/async.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
@@ -16,6 +19,16 @@ import 'win32_structs.dart';
 // The Win32 metadata
 late final scope = MetadataStore.getWin32Scope();
 final formatter = DartFormatter();
+
+class PartitionData {
+  final SendPort port;
+  final List<String> namespaces;
+  final int partition;
+  final Stopwatch stopwatch;
+
+  const PartitionData(
+      this.port, this.namespaces, this.partition, this.stopwatch);
+}
 
 // TODO: Rationalize this set of utility functions with the ones in utils.dart.
 
@@ -158,9 +171,50 @@ void generateComInterfaces(String namespace) {
   generateInterfaceFiles(directory, interfaces, scope);
 }
 
+void generateForNamespaces(PartitionData data) async {
+  final namespaces = data.namespaces;
+  final stopwatch = data.stopwatch;
+  final partition = data.partition;
+  
+  print('[${stopwatch.elapsed}] Creating directories (partition $partition)');
+  namespaces.forEach(createDirectory);
+
+  print('[${stopwatch.elapsed}] Generating constants (partition $partition)');
+  namespaces.forEach(generateWin32Constants);
+
+  print('[${stopwatch.elapsed}] Generating structs (partition $partition)');
+  namespaces.forEach(generateWin32Structs);
+
+  print('[${stopwatch.elapsed}] Generating enums (partition $partition)');
+  namespaces.forEach(generateWin32Enums);
+
+  print('[${stopwatch.elapsed}] Generating callbacks (partition $partition)');
+  namespaces.forEach(generateWin32Callbacks);
+
+  print(
+      '[${stopwatch.elapsed}] Generating Win32 functions (partition $partition)');
+  namespaces.forEach(generateWin32Functions);
+
+  print(
+      '[${stopwatch.elapsed}] Generating COM interfaces (partition $partition)');
+  namespaces.forEach(generateComInterfaces);
+
+  Isolate.exit(data.port, true);
+}
+
+List<List<String>> partitionNamespaces(
+    List<String> namespaces, int partitions) {
+  final chunkSize = (namespaces.length / partitions).ceil();
+  final chunks = [
+    for (var i = 0; i < namespaces.length; i += chunkSize)
+      namespaces.sublist(i, min(i + chunkSize, namespaces.length))
+  ];
+  return chunks;
+}
+
 // Example:
 //   dart tool\v3\generate.dart Windows.Win32.System.Com
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   // Uncomment this for interactive debugging.
   const namespacesToDebug = <String>[/*'Windows.Win32.System.Ole'*/];
 
@@ -175,26 +229,21 @@ void main(List<String> args) {
     namespaces = namespacesInScope(scope);
   }
 
-  print('[${stopwatch.elapsed}] Creating directories');
-  namespaces.forEach(createDirectory);
+  const concurrentProcesses = 16;
+  final partitions = partitionNamespaces(namespaces, concurrentProcesses);
+  final ports = List.generate(concurrentProcesses, (i) => ReceivePort());
 
-  print('[${stopwatch.elapsed}] Generating constants');
-  namespaces.forEach(generateWin32Constants);
+  for (var i = 0; i < partitions.length; i++) {
+    await Isolate.spawn<PartitionData>(generateForNamespaces,
+        PartitionData(ports[i].sendPort, partitions[i], i, stopwatch));
+  }
 
-  print('[${stopwatch.elapsed}] Generating structs');
-  namespaces.forEach(generateWin32Structs);
-
-  print('[${stopwatch.elapsed}] Generating enums');
-  namespaces.forEach(generateWin32Enums);
-
-  print('[${stopwatch.elapsed}] Generating callbacks');
-  namespaces.forEach(generateWin32Callbacks);
-
-  print('[${stopwatch.elapsed}] Generating Win32 functions');
-  namespaces.forEach(generateWin32Functions);
-
-  print('[${stopwatch.elapsed}] Generating COM interfaces');
-  namespaces.forEach(generateComInterfaces);
+  final futureGroup = FutureGroup<dynamic>();
+  for (final port in ports) {
+    futureGroup.add(port.first);
+  }
+  futureGroup.close();
+  await futureGroup.future;
 
   print('[${stopwatch.elapsed}] Generating library export');
   generateLibraryExport(namespaces);
