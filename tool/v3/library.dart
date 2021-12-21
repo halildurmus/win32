@@ -27,8 +27,8 @@ final exports = <String, List<String>>{};
 
 /// For a given Win32 namespace, return its top-level feature area.
 ///
-/// For example, `Windows.Win32.Media.Audio.DirectMusic` resolves to `Media`.
-String featureArea(String namespace) => namespace.split('.')[2];
+/// For example, `Windows.Win32.Media.Audio.DirectMusic` resolves to `media`.
+String featureArea(String namespace) => namespace.split('.')[2].toLowerCase();
 
 /// Add a new export to the exports map.
 void addExport(String featureArea, String export) {
