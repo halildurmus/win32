@@ -38,8 +38,7 @@ void generateCallbacksFile(File file, List<TypeDef> callbacks) {
   final importDeclarations = importList
       .map((import) => "import '${relativePathToSrcDirectory(file)}$import';");
 
-  final callbackProjections =
-      callbacks.map((callback) => CallbackProjection(callback));
+  final callbackProjections = callbacks.map(CallbackProjection.new);
 
   final callbacksFile = [
     callbacksFileHeader,

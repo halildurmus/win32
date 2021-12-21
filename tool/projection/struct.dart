@@ -44,7 +44,7 @@ class StructProjection {
       : safeTypenameForString(structName);
 
   String get _fieldsProjection =>
-      typeDef.fields.map((field) => FieldProjection(field)).join('\n');
+      typeDef.fields.map(FieldProjection.new).join('\n');
 
   String? _nestedTypes;
   String get nestedTypes => _nestedTypes ??= _cacheNestedTypes();

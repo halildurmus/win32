@@ -48,6 +48,12 @@ List<String> namespacesInScope(Scope scope) {
     ..removeWhere((namespace) => excludedNamespaces.contains(namespace));
 }
 
+bool typeDirectlyInNamespace(String type, String namespace) {
+  final typeComponents = type.split('.');
+  typeComponents.removeLast();
+  return typeComponents.join('.') == namespace;
+}
+
 /// Turn a Win32 namespace into the appropriate path. For example, turn
 /// `Windows.Win32.System.Console` into `lib/src/system/console`.
 String folderForNamespace(String namespace) =>
@@ -153,12 +159,6 @@ void generateWin32Callbacks(String namespace) {
   }
 }
 
-bool typeDirectlyInNamespace(String type, String namespace) {
-  final typeComponents = type.split('.');
-  typeComponents.removeLast();
-  return typeComponents.join('.') == namespace;
-}
-
 void generateComInterfaces(String namespace) {
   final interfaces = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
@@ -171,6 +171,7 @@ void generateComInterfaces(String namespace) {
   generateInterfaceFiles(directory, interfaces, scope);
 }
 
+/// Generate code for a partitioned subset of namespaces.
 void generateForNamespaces(PartitionData data) async {
   final namespaces = data.namespaces;
   final stopwatch = data.stopwatch;
