@@ -217,7 +217,7 @@ List<List<T>> partitionList<T>(List<T> list, int partitions) {
 
 // Example:
 //   dart tool\v3\generate.dart Windows.Win32.System.Com
-Future<void> main(List<String> args) async {
+void main(List<String> args) async {
   // Uncomment this for interactive debugging.
   const namespacesToDebug = <String>[/*'Windows.Win32.System.Ole'*/];
 
@@ -241,9 +241,9 @@ Future<void> main(List<String> args) async {
         PartitionData(ports[i].sendPort, partitions[i], i, stopwatch));
   }
 
-  final futureGroup = FutureGroup<dynamic>();
+  final futureGroup = FutureGroup<bool>();
   for (final port in ports) {
-    futureGroup.add(port.first);
+    futureGroup.add(port.first as Future<bool>);
   }
   futureGroup.close();
   await futureGroup.future;

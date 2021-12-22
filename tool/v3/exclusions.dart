@@ -96,6 +96,7 @@ const specialTypes = {...excludedStructs, ...excludedComInterfaces};
 /// Used to manually add back in imports where needed
 String specialHeaders(String pathToSrc, String interfaceName) {
   if (interfaceName.startsWith('Windows.Win32.Media.DeviceManager')) {
+    // BUGBUG: This isn't currently working... :(
     print(interfaceName);
     return "import '${pathToSrc}media/audio/structs.g.dart'";
   }
