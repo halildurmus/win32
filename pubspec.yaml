@@ -31,9 +31,9 @@ dev_dependencies:
   test: ^1.20.1
 
   # Windows metadata for automatically generating API signatures
-  winmd: 1.0.21 # Pinned deliberately
+  winmd: 1.0.22 # Pinned deliberately
 
-dependency_overrides:
-  # Because win32 is v3 and winmd doesn't know that it's compatible with it, we
-  # have to manually override this value
-  winmd: 1.0.21
+# Uncomment when using a local copy of winmd
+# dependency_overrides:
+#   winmd:
+#     path: ../winmd

@@ -22,7 +22,7 @@ const concurrentIsolates = 32;
 
 // The Win32 metadata. Declared globally so it's accessible to all
 // partitions.
-late final Scope scope;
+final Scope scope = MetadataStore.getWin32Scope();
 
 // This is the API for `dart format`
 final formatter = DartFormatter();
@@ -231,9 +231,6 @@ void main(List<String> args) async {
   final stopwatch = Stopwatch()..start();
   print('[${stopwatch.elapsed}] Loading metadata');
 
-  // Initialize this here rather than on definition, so we can include the time
-  // it takes in the log output.
-  scope = MetadataStore.getWin32Scope();
   List<String> namespaces;
   if (args.isNotEmpty) {
     namespaces = [args[0]];

@@ -93,12 +93,13 @@ const excludedComClasses = <String>{
 
 const specialTypes = {...excludedStructs, ...excludedComInterfaces};
 
-/// Used to manually add back in imports where needed
+/// Used to manually add back in imports where needed.
 String specialHeaders(String pathToSrc, String interfaceName) {
+  // WAVEFORMATEX is duplicated in Media.Audio and Media.DeviceManager, so we
+  // remove its generation above, and manually add back the right import in
+  // DeviceManager APIs.
   if (interfaceName.startsWith('Windows.Win32.Media.DeviceManager')) {
-    // BUGBUG: This isn't currently working... :(
-    print(interfaceName);
-    return "import '${pathToSrc}media/audio/structs.g.dart'";
+    return "import '${pathToSrc}media/audio/structs.g.dart';";
   }
   return '';
 }
