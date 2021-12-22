@@ -38,8 +38,10 @@ class Scope {
 
   final _enums = <TypeDef>[];
   final _modules = <ModuleRef>[];
-  final _typedefs = <TypeDef>[];
+  final _delegates = <TypeDef>[];
   final _userStrings = <String>[];
+  final _typedefsByName = <String, List<TypeDef>>{};
+  final _typedefs = <int, TypeDef>{};
 
   Scope(this.reader) {
     using((Arena arena) {
@@ -55,6 +57,8 @@ class Scope {
         throw COMException(hr);
       }
     });
+
+    _populateTypeDefs();
   }
 
   @override
@@ -66,9 +70,9 @@ class Scope {
   TypeDef? findTypeDef(String name,
       {PreferredArchitecture preferredArchitecture =
           PreferredArchitecture.x64}) {
-    final matchingTypeDefs = typeDefs.where((t) => t.name == name);
+    final matchingTypeDefs = _typedefsByName[name];
 
-    if (matchingTypeDefs.isEmpty) return null;
+    if (matchingTypeDefs == null) return null;
     if (matchingTypeDefs.length == 1) return matchingTypeDefs.first;
 
     // More than one typedef, so we find the one that matches the preferred
@@ -88,31 +92,30 @@ class Scope {
   /// Return the typedef matching the given token.
   ///
   /// Returns null if no typedefs match the token.
-  TypeDef? findTypeDefByToken(int token) {
-    final typeDef = typeDefs.where((t) => t.token == token);
-    return (typeDef.isNotEmpty ? typeDef.first : null);
-  }
+  TypeDef? findTypeDefByToken(int token) => _typedefs[token];
 
   /// Get an enumerated list of typedefs for this scope.
-  List<TypeDef> get typeDefs {
-    if (_typedefs.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgTypeDefs = arena<mdTypeDef>();
-        final pcTypeDefs = arena<ULONG>();
+  Iterable<TypeDef> get typeDefs => _typedefs.values;
 
-        var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
-        while (hr == S_OK) {
-          final typeDefToken = rgTypeDefs.value;
+  void _populateTypeDefs() {
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgTypeDefs = arena<mdTypeDef>();
+      final pcTypeDefs = arena<ULONG>();
 
-          _typedefs.add(TypeDef.fromToken(this, typeDefToken));
-          hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
+      var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+      while (hr == S_OK) {
+        final typeDefToken = rgTypeDefs.value;
+
+        _typedefs[typeDefToken] = TypeDef.fromToken(this, typeDefToken);
+        hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
+
+    for (final typeDef in typeDefs) {
+      _typedefsByName.putIfAbsent(typeDef.name, () => []).add(typeDef);
     }
-
-    return _typedefs;
   }
 
   int get moduleToken => using((Arena arena) {
@@ -125,10 +128,6 @@ class Scope {
           throw WinmdException('Unable to find module token.');
         }
       });
-
-  /// Get an enumerated list of delegates in this scope.
-  List<TypeDef> get delegates =>
-      typeDefs.where((typeDef) => typeDef.isDelegate).toList();
 
   /// Get an enumerated list of modules in this scope.
   List<ModuleRef> get moduleRefs {
@@ -181,13 +180,17 @@ class Scope {
   /// Get an enumerated list of all enumerations in this scope.
   List<TypeDef> get enums {
     if (_enums.isEmpty) {
-      for (final typeDef in typeDefs) {
-        if (typeDef.parent?.name == 'System.Enum') {
-          _enums.add(typeDef);
-        }
-      }
+      _enums.addAll(typeDefs.where((typeDef) => typeDef.isEnum));
     }
     return _enums;
+  }
+
+  /// Get an enumerated list of all delegates in this scope.
+  List<TypeDef> get delegates {
+    if (_delegates.isEmpty) {
+      _delegates.addAll(typeDefs.where((typeDef) => typeDef.isDelegate));
+    }
+    return _delegates;
   }
 
   PEKind get executableKind => PEKind(reader);

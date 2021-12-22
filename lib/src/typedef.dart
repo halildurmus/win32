@@ -375,6 +375,9 @@ class TypeDef extends TokenObject
   /// Returns true if the type is a delegate.
   bool get isDelegate => parent?.name == 'System.MulticastDelegate';
 
+  /// Returns true if the type is an enumeration.
+  bool get isEnum => parent?.name == 'System.Enum';
+
   /// Returns true if the type is a union.
   ///
   /// A union is a struct where every field begins at the zeroth offset; it is
