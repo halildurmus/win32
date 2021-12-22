@@ -180,6 +180,7 @@ class InterfaceProjection {
     return '''
       $header
       $importHeader
+      ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
 
       /// {@category Interface}
