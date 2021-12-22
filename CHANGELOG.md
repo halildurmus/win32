@@ -1,3 +1,7 @@
+## 1.0.22
+
+- Performance improvements (thanks to @dantup).
+  
 ## 1.0.21
 
 - Extra backstop of looking locally for Win32 metadata file. This is for
