@@ -16,8 +16,15 @@ import 'win32_enums.dart';
 import 'win32_functions.dart';
 import 'win32_structs.dart';
 
-// The Win32 metadata
-final scope = MetadataStore.getWin32Scope();
+// How many isolates should be spun up simultaneously. This works well on a
+// Xeon machine with 16 virtual cores; your mileage may vary.
+const concurrentIsolates = 32;
+
+// The Win32 metadata. Declared globally so it's accessible to all
+// partitions.
+late final Scope scope;
+
+// This is the API for `dart format`
 final formatter = DartFormatter();
 
 class PartitionData {
@@ -223,6 +230,10 @@ void main(List<String> args) async {
 
   final stopwatch = Stopwatch()..start();
   print('[${stopwatch.elapsed}] Loading metadata');
+
+  // Initialize this here rather than on definition, so we can include the time
+  // it takes in the log output.
+  scope = MetadataStore.getWin32Scope();
   List<String> namespaces;
   if (args.isNotEmpty) {
     namespaces = [args[0]];
@@ -232,18 +243,20 @@ void main(List<String> args) async {
     namespaces = namespacesInScope(scope);
   }
 
-  const concurrentIsolates = 16;
   final partitions = partitionList<String>(namespaces, concurrentIsolates);
-  final ports = List.generate(concurrentIsolates, (i) => ReceivePort());
+
+  /// There could be fewer partitions than isolates, e.g. where we're only
+  /// generating for a subset of namespaces.
+  final ports = List.generate(partitions.length, (i) => ReceivePort());
 
   for (var i = 0; i < partitions.length; i++) {
     await Isolate.spawn<PartitionData>(generateForNamespaces,
         PartitionData(ports[i].sendPort, partitions[i], i, stopwatch));
   }
 
-  final futureGroup = FutureGroup<bool>();
+  final futureGroup = FutureGroup<dynamic>();
   for (final port in ports) {
-    futureGroup.add(port.first as Future<bool>);
+    futureGroup.add(port.first);
   }
   futureGroup.close();
   await futureGroup.future;
