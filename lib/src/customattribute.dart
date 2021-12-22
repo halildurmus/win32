@@ -48,4 +48,7 @@ class CustomAttribute extends TokenObject {
 
   @override
   String toString() => name;
+
+  // TODO: Attributes can have types and constructors (e.g.
+  // Windows.Foundation.Metadata.DeprecatedAttribute)
 }
