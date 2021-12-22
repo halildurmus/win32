@@ -40,6 +40,9 @@ class Scope {
   final _modules = <ModuleRef>[];
   final _typedefs = <TypeDef>[];
   final _userStrings = <String>[];
+  final _typedefsByName = <String, List<TypeDef>>{};
+  final _typedefsByToken = <int, TypeDef>{};
+  final _typedefDelegates = <TypeDef>[];
 
   Scope(this.reader) {
     using((Arena arena) {
@@ -66,9 +69,10 @@ class Scope {
   TypeDef? findTypeDef(String name,
       {PreferredArchitecture preferredArchitecture =
           PreferredArchitecture.x64}) {
-    final matchingTypeDefs = typeDefs.where((t) => t.name == name);
+    _populateTypeDefs();
+    final matchingTypeDefs = _typedefsByName[name];
 
-    if (matchingTypeDefs.isEmpty) return null;
+    if (matchingTypeDefs == null) return null;
     if (matchingTypeDefs.length == 1) return matchingTypeDefs.first;
 
     // More than one typedef, so we find the one that matches the preferred
@@ -89,12 +93,17 @@ class Scope {
   ///
   /// Returns null if no typedefs match the token.
   TypeDef? findTypeDefByToken(int token) {
-    final typeDef = typeDefs.where((t) => t.token == token);
-    return (typeDef.isNotEmpty ? typeDef.first : null);
+    _populateTypeDefs();
+    return _typedefsByToken[token];
   }
 
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
+    _populateTypeDefs();
+    return _typedefs;
+  }
+
+  void _populateTypeDefs() {
     if (_typedefs.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
@@ -110,9 +119,13 @@ class Scope {
         }
         reader.CloseEnum(phEnum.value);
       });
-    }
 
-    return _typedefs;
+      for (final typeDef in typeDefs) {
+        _typedefsByName.putIfAbsent(typeDef.name, () => []).add(typeDef);
+        _typedefsByToken.putIfAbsent(typeDef.token, () => typeDef);
+      }
+      _typedefDelegates.addAll(typeDefs.where((typeDef) => typeDef.isDelegate));
+    }
   }
 
   int get moduleToken => using((Arena arena) {
@@ -127,8 +140,10 @@ class Scope {
       });
 
   /// Get an enumerated list of delegates in this scope.
-  List<TypeDef> get delegates =>
-      typeDefs.where((typeDef) => typeDef.isDelegate).toList();
+  List<TypeDef> get delegates {
+    _populateTypeDefs();
+    return _typedefDelegates.toList();
+  }
 
   /// Get an enumerated list of modules in this scope.
   List<ModuleRef> get moduleRefs {
