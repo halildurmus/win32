@@ -1,4 +1,4 @@
-const excludedNamespaces = <String>[
+const excludedNamespaces = <String>{
   // We're focusing on client APIs, rather than server-centric APIs like IIS.
   // We're also excluding APIs that are no longer well supported, like the old
   // Trident MSHTML engine.
@@ -20,14 +20,14 @@ const excludedNamespaces = <String>[
   'Windows.Win32.System.WinRT.Holographic',
   'Windows.Win32.System.WinRT.ML',
   'Windows.Win32.Web.MsHtml',
-];
+};
 
-const excludedFunctions = <String>[
+const excludedFunctions = <String>{
   // Duplicates
   '_TrackMouseEvent',
-];
+};
 
-const excludedStructs = <String>[
+const excludedStructs = <String>{
   'Windows.Win32.System.Com.VARIANT',
   'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
   'Windows.Win32.System.IO.OVERLAPPED',
@@ -56,11 +56,11 @@ const excludedStructs = <String>[
 
   // Duplicated definitions.
   'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
-];
+};
 
-const excludedCallbacks = <String>[];
+const excludedCallbacks = <String>{};
 
-const excludedComInterfaces = <String>[
+const excludedComInterfaces = <String>{
   // TODO: We may be able to remove this from the list.
   'Windows.Win32.System.Com.IUnknown',
 
@@ -75,6 +75,6 @@ const excludedComInterfaces = <String>[
 
   // Windows.Win32.Devices.Fax._IFaxServerNotify2 is the "real" one.
   'Windows.Win32.Devices.Fax.IFaxServerNotify2',
-];
+};
 
-const specialTypes = [...excludedStructs, ...excludedComInterfaces];
+const specialTypes = {...excludedStructs, ...excludedComInterfaces};
