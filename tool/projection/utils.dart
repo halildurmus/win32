@@ -16,6 +16,7 @@ const falseAnsiEndings = <String>[
   // manual list.
   'DATA', 'SCHEMA', 'AREA', 'ANTENNA', 'MEDIA', 'M128A', 'CIECHROMA', 'PARA',
   'ALPHA', 'BUFFER_WMA', 'CRITERIA', 'UIDNA', 'YCbCrA', 'RGBA',
+  'PSP_FILE_CALLBACK_A',
 ];
 
 /// Returns true if a [TypeDef] name ends with 'A' but is _not_ ANSI.

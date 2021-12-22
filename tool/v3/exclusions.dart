@@ -8,6 +8,7 @@ const excludedNamespaces = <String>{
   'Windows.Win32.Devices.AllJoyn',
   'Windows.Win32.Networking.ActiveDirectory',
   'Windows.Win32.Networking.Clustering',
+  'Windows.Win32.Networking.WinHttp',
   'Windows.Win32.NetworkManagement.Dhcp',
   'Windows.Win32.NetworkManagement.InternetConnectionWizard',
   'Windows.Win32.NetworkManagement.Rras',
@@ -56,6 +57,15 @@ const excludedStructs = <String>{
 
   // Duplicated definitions.
   'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
+  'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
+  'Windows.Win32.Devices.Fax.IStiDeviceW',
+};
+
+const excludedConstants = <String>{
+  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlReader',
+  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlResolver',
+  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlWriter',
+  'Windows.Win32.UI.Shell.ShellLink',
 };
 
 const excludedCallbacks = <String>{};
@@ -69,12 +79,25 @@ const excludedComInterfaces = <String>{
   'Windows.Win32.System.Mmc._AppEvents',
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',
+};
 
+const excludedComClasses = <String>{
   // Windows.Win32.Devices.Fax._IFaxAccountNotify is the "real" one.
   'Windows.Win32.Devices.Fax.IFaxAccountNotify',
 
   // Windows.Win32.Devices.Fax._IFaxServerNotify2 is the "real" one.
   'Windows.Win32.Devices.Fax.IFaxServerNotify2',
+
+  'Windows.Win32.Media.DirectShow.DvbParentalRatingDescriptor',
 };
 
 const specialTypes = {...excludedStructs, ...excludedComInterfaces};
+
+/// Used to manually add back in imports where needed
+String specialHeaders(String pathToSrc, String interfaceName) {
+  if (interfaceName.startsWith('Windows.Win32.Media.DeviceManager')) {
+    print(interfaceName);
+    return "import '${pathToSrc}media/audio/structs.g.dart'";
+  }
+  return '';
+}

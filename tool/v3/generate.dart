@@ -134,6 +134,7 @@ void generateWin32Constants(String namespace) {
   final guidConstants = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsGuidConstant)
+      .where((typedef) => !excludedConstants.contains(typedef.name))
       .where((typedef) => !(constantIsClassClsid(typedef)))
       .toList();
 
@@ -231,7 +232,7 @@ Future<void> main(List<String> args) async {
     namespaces = namespacesInScope(scope);
   }
 
-  const concurrentIsolates = 32;
+  const concurrentIsolates = 16;
   final partitions = partitionList<String>(namespaces, concurrentIsolates);
   final ports = List.generate(concurrentIsolates, (i) => ReceivePort());
 

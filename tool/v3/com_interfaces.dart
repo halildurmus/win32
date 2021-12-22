@@ -5,6 +5,7 @@ import 'package:winmd/winmd.dart';
 import '../projection/class.dart';
 import '../projection/interface.dart';
 import '../projection/safenames.dart';
+import 'exclusions.dart';
 import 'generate.dart';
 
 void generateInterfaceFiles(
@@ -18,7 +19,8 @@ void generateInterfaceFiles(
 
     // We put classes and interfaces in the same file.
     final className = ClassProjection.generateClassName(typeDef);
-    if (scope.findTypeDef(className) != null) {
+    if (scope.findTypeDef(className) != null &&
+        !excludedComClasses.contains(className)) {
       interfaceProjection = ClassProjection.fromInterface(typeDef);
     }
 
