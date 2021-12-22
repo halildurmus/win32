@@ -57,14 +57,15 @@ const excludedStructs = <String>{
 
   // Duplicated definitions.
   'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
+  'Windows.Win32.Media.DeviceManager._VIDEOINFOHEADER',
   'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
   'Windows.Win32.Devices.Fax.IStiDeviceW',
 };
 
 const excludedConstants = <String>{
-  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlReader',
-  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlResolver',
-  'Windows.Win32.Data.Xml.XmlLite.IID_IXmlWriter',
+  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlReader',
+  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlResolver',
+  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlWriter',
   'Windows.Win32.UI.Shell.ShellLink',
 };
 
@@ -79,6 +80,9 @@ const excludedComInterfaces = <String>{
   'Windows.Win32.System.Mmc._AppEvents',
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',
+
+  'Windows.Win32.Devices.Fax.IFaxAccountNotify',
+  'Windows.Win32.Devices.Fax.IFaxServerNotify2',
 };
 
 const excludedComClasses = <String>{
