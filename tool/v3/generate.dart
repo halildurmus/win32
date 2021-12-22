@@ -17,7 +17,7 @@ import 'win32_functions.dart';
 import 'win32_structs.dart';
 
 // The Win32 metadata
-late final scope = MetadataStore.getWin32Scope();
+final scope = MetadataStore.getWin32Scope();
 final formatter = DartFormatter();
 
 class PartitionData {
