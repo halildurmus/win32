@@ -597,7 +597,7 @@ void main() {
         endsWith('AsyncOperationCompletedHandler`1'));
   });
 
-  test('Generic get parameter contains the right type', () {
+  test('Generic get parameter contains the right type name', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.IAsyncOperation`1')!;
 
@@ -638,4 +638,17 @@ void main() {
     expect(mapChanged.addMethod!.name, equals('add_MapChanged'));
     expect(mapChanged.removeMethod!.name, equals('remove_MapChanged'));
   });
+
+  test('Generic constraints', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IAsyncActionWithProgress`1')!;
+    final putProgress = winTypeDef.methods.first;
+    expect(putProgress.hasGenericParameters, isFalse);
+
+    final handler = putProgress.parameters.first;
+    expect(handler.typeIdentifier.type, isNotNull);
+
+    final aaph = handler.typeIdentifier.type!;
+    expect(aaph.genericParams.length, equals(1));
+  }, skip: 'Need to implement GenericTypeModifier support');
 }
