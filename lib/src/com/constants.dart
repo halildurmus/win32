@@ -12,8 +12,11 @@ class CorMetaDataDispenser {
   static const CLSID = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
 }
 
-/// COM error returned when a Find* method returns no results
+/// COM error returned when a Find* method returns no results.
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
+
+/// COM error returned when a token cannot be found.
+final CLDB_E_INDEX_NOTFOUND = 0x80131124.toSigned(32);
 
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
