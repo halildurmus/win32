@@ -1,4 +1,4 @@
-const excludedNamespaces = <String>[
+const excludedNamespaces = <String>{
   // We're focusing on client APIs, rather than server-centric APIs like IIS.
   // We're also excluding APIs that are no longer well supported, like the old
   // Trident MSHTML engine.
@@ -21,14 +21,14 @@ const excludedNamespaces = <String>[
   'Windows.Win32.System.WinRT.Holographic',
   'Windows.Win32.System.WinRT.ML',
   'Windows.Win32.Web.MsHtml',
-];
+};
 
-const excludedFunctions = <String>[
+const excludedFunctions = <String>{
   // Duplicates
   '_TrackMouseEvent',
-];
+};
 
-const excludedStructs = <String>[
+const excludedStructs = <String>{
   'Windows.Win32.System.Com.VARIANT',
   'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
   'Windows.Win32.System.IO.OVERLAPPED',
@@ -59,18 +59,18 @@ const excludedStructs = <String>[
   'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
   'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
   'Windows.Win32.Devices.Fax.IStiDeviceW',
-];
+};
 
-const excludedConstants = <String>[
+const excludedConstants = <String>{
   'Windows.Win32.Data.Xml.XmlLite.IID_IXmlReader',
   'Windows.Win32.Data.Xml.XmlLite.IID_IXmlResolver',
   'Windows.Win32.Data.Xml.XmlLite.IID_IXmlWriter',
   'Windows.Win32.UI.Shell.ShellLink',
-];
+};
 
-const excludedCallbacks = <String>[];
+const excludedCallbacks = <String>{};
 
-const excludedComInterfaces = <String>[
+const excludedComInterfaces = <String>{
   // TODO: We may be able to remove this from the list.
   'Windows.Win32.System.Com.IUnknown',
 
@@ -79,9 +79,9 @@ const excludedComInterfaces = <String>[
   'Windows.Win32.System.Mmc._AppEvents',
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',
-];
+};
 
-const excludedComClasses = <String>[
+const excludedComClasses = <String>{
   // Windows.Win32.Devices.Fax._IFaxAccountNotify is the "real" one.
   'Windows.Win32.Devices.Fax.IFaxAccountNotify',
 
@@ -89,9 +89,9 @@ const excludedComClasses = <String>[
   'Windows.Win32.Devices.Fax.IFaxServerNotify2',
 
   'Windows.Win32.Media.DirectShow.DvbParentalRatingDescriptor',
-];
+};
 
-const specialTypes = [...excludedStructs, ...excludedComInterfaces];
+const specialTypes = {...excludedStructs, ...excludedComInterfaces};
 
 /// Used to manually add back in imports where needed
 String specialHeaders(String pathToSrc, String interfaceName) {
