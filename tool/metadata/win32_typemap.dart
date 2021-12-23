@@ -24,6 +24,7 @@ const callbackTypeMapping = <String, String>{
   'LPOCNCHKPROC': 'Pointer<NativeFunction<OpenCardCheckProc>>',
   'LPOCNCONNPROCW': 'Pointer<NativeFunction<OpenCardConnProc>>',
   'LPOCNDSCPROC': 'Pointer<NativeFunction<OpenCardDisconnProc>>',
+  'LPTHREAD_START_ROUTINE': 'Pointer<NativeFunction<ThreadProc>>',
   'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
   'MagImageScalingCallback': 'Pointer<NativeFunction<MagImageScalingCallback>>',
   'PFN_AUTHENTICATION_CALLBACK_EX':

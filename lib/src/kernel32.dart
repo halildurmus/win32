@@ -743,6 +743,148 @@ late final _CreatePseudoConsole = _kernel32.lookupFunction<
     int Function(COORD size, int hInput, int hOutput, int dwFlags,
         Pointer<IntPtr> phPC)>('CreatePseudoConsole');
 
+/// Creates a thread that runs in the virtual address space of another
+/// process. Use the CreateRemoteThreadEx function to create a thread that
+/// runs in the virtual address space of another process and optionally
+/// specify extended attributes.
+///
+/// ```c
+/// HANDLE CreateRemoteThread(
+///   HANDLE hProcess,
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateRemoteThread(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize,
+        lpStartAddress, lpParameter, dwCreationFlags, lpThreadId);
+
+late final _CreateRemoteThread = _kernel32.lookupFunction<
+    IntPtr Function(
+        IntPtr hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId)>('CreateRemoteThread');
+
+/// Creates a thread that runs in the virtual address space of another
+/// process and optionally specifies extended attributes such as processor
+/// group affinity.
+///
+/// ```c
+/// HANDLE CreateRemoteThreadEx(
+///   HANDLE hProcess,
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateRemoteThreadEx(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateRemoteThreadEx(
+        hProcess,
+        lpThreadAttributes,
+        dwStackSize,
+        lpStartAddress,
+        lpParameter,
+        dwCreationFlags,
+        lpAttributeList,
+        lpThreadId);
+
+late final _CreateRemoteThreadEx = _kernel32.lookupFunction<
+    IntPtr Function(
+        IntPtr hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId)>('CreateRemoteThreadEx');
+
+/// Creates a thread to execute within the virtual address space of the
+/// calling process.
+///
+/// ```c
+/// HANDLE CreateThread(
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateThread(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter,
+        dwCreationFlags, lpThreadId);
+
+late final _CreateThread = _kernel32.lookupFunction<
+    IntPtr Function(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId)>('CreateThread');
+
 /// The DeactivateActCtx function deactivates the activation context
 /// corresponding to the specified cookie.
 ///
@@ -2334,6 +2476,26 @@ late final _GetLogicalDriveStrings = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
+
+/// Queries if the specified architecture is supported on the current
+/// system, either natively or by any form of compatibility or emulation
+/// layer.
+///
+/// ```c
+/// HRESULT GetMachineTypeAttributes(
+///   USHORT Machine,
+///   MACHINE_ATTRIBUTES *MachineTypeAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int GetMachineTypeAttributes(
+        int Machine, Pointer<Uint32> MachineTypeAttributes) =>
+    _GetMachineTypeAttributes(Machine, MachineTypeAttributes);
+
+late final _GetMachineTypeAttributes = _kernel32.lookupFunction<
+    Int32 Function(Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+    int Function(int Machine,
+        Pointer<Uint32> MachineTypeAttributes)>('GetMachineTypeAttributes');
 
 /// Returns the maximum number of logical processors that a processor group
 /// or the system can have.

@@ -1430,6 +1430,69 @@ void main() {
         expect(CreatePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate CreateRemoteThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateRemoteThread = kernel32.lookupFunction<
+          IntPtr Function(
+              IntPtr hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              int hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer<Uint32> lpThreadId)>('CreateRemoteThread');
+      expect(CreateRemoteThread, isA<Function>());
+    });
+    test('Can instantiate CreateRemoteThreadEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateRemoteThreadEx = kernel32.lookupFunction<
+          IntPtr Function(
+              IntPtr hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer lpAttributeList,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              int hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer lpAttributeList,
+              Pointer<Uint32> lpThreadId)>('CreateRemoteThreadEx');
+      expect(CreateRemoteThreadEx, isA<Function>());
+    });
+    test('Can instantiate CreateThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateThread = kernel32.lookupFunction<
+          IntPtr Function(
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer<Uint32> lpThreadId)>('CreateThread');
+      expect(CreateThread, isA<Function>());
+    });
     test('Can instantiate DeactivateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final DeactivateActCtx = kernel32.lookupFunction<
@@ -2180,6 +2243,18 @@ void main() {
               Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
       expect(GetLogicalDriveStrings, isA<Function>());
     });
+    if (windowsBuildNumber >= 22000) {
+      test('Can instantiate GetMachineTypeAttributes', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final GetMachineTypeAttributes = kernel32.lookupFunction<
+                Int32 Function(
+                    Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+                int Function(
+                    int Machine, Pointer<Uint32> MachineTypeAttributes)>(
+            'GetMachineTypeAttributes');
+        expect(GetMachineTypeAttributes, isA<Function>());
+      });
+    }
     test('Can instantiate GetMaximumProcessorCount', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetMaximumProcessorCount = kernel32.lookupFunction<

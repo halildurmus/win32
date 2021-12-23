@@ -827,10 +827,25 @@
         "comment": "Creates a new pseudoconsole object for the calling process.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
+    "CreateRemoteThread": {
+        "prototype": "HANDLE CreateRemoteThread(\n  HANDLE hProcess,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread that runs in the virtual address space of another process. Use the CreateRemoteThreadEx function to create a thread that runs in the virtual address space of another process and optionally specify extended attributes."
+    },
+    "CreateRemoteThreadEx": {
+        "prototype": "HANDLE CreateRemoteThreadEx(\n  HANDLE hProcess,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread that runs in the virtual address space of another process and optionally specifies extended attributes such as processor group affinity."
+    },
     "CreateSolidBrush": {
         "prototype": "HBRUSH CreateSolidBrush(\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The CreateSolidBrush function creates a logical brush that has the specified solid color."
+    },
+    "CreateThread": {
+        "prototype": "HANDLE CreateThread(\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread to execute within the virtual address space of the calling process."
     },
     "CreateWindowEx": {
         "prototype": "HWND CreateWindowExW(\n  DWORD     dwExStyle,\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HMENU     hMenu,\n  HINSTANCE hInstance,\n  LPVOID    lpParam\n);",
@@ -1795,6 +1810,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the thread identifier of the calling thread."
     },
+    "GetCurrentThreadToken": {
+        "prototype": "HANDLE GetCurrentThreadToken();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a pseudo-handle that you can use as a shorthand way to refer to the impersonation token that was assigned to the current thread."
+    },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
         "dllLibrary": "user32",
@@ -2154,6 +2174,12 @@
         "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
+    },
+    "GetMachineTypeAttributes": {
+        "prototype": "HRESULT GetMachineTypeAttributes(\n  USHORT Machine,\n  MACHINE_ATTRIBUTES *MachineTypeAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Queries if the specified architecture is supported on the current system, either natively or by any form of compatibility or emulation layer.",
+        "minimumWindowsVersion": "WIN11_21H2"
     },
     "GetMaximumProcessorCount": {
         "prototype": "DWORD GetMaximumProcessorCount(\n  WORD GroupNumber\n);",
