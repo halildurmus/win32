@@ -115,7 +115,7 @@ void generateFfiFile(File file, TypeDef typedef) {
   for (final module in modules) {
     // For now, we only project Unicode methods.
     final functions = typedef.methods
-        .where((method) => method.module.name == module)
+        .where((method) => method.module.name.toLowerCase() == module)
         .where((method) => !method.name.endsWith('A'))
         .where(noUnicodeVariantAvailable)
         .where((method) => method.supportedArchitectures.x64)
