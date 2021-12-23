@@ -1,3 +1,8 @@
+## 2.3.3
+
+- Added CreateThread, CreateRemoteThread, CreateRemoteThreadEx() per request
+- Added GetMachineTypeAttributes and added logic for Windows 11.
+
 ## 2.3.2
 
 - Added CreateDIBSection per request.
