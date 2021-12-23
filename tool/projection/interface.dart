@@ -89,7 +89,7 @@ class InterfaceProjection {
     }
   }
 
-  // TODO: Find duplicate
+  // TODO: Find duplicates. This is the "correct" one.
   Set<String> importsForClass() {
     final importList = <String>{};
 
