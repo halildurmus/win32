@@ -63,9 +63,9 @@ const excludedStructs = <String>{
 };
 
 const excludedConstants = <String>{
-  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlReader',
-  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlResolver',
-  'Windows.Win32.Data.Xml.XmlLite._IID_IXmlWriter',
+  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlReader',
+  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver',
+  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter',
   'Windows.Win32.UI.Shell.ShellLink',
 };
 
@@ -83,6 +83,14 @@ const excludedComInterfaces = <String>{
 
   'Windows.Win32.Devices.Fax.IFaxAccountNotify',
   'Windows.Win32.Devices.Fax.IFaxServerNotify2',
+
+  'Windows.Win32.System.ComponentServices.ObjectContext',
+  'Windows.Win32.System.ComponentServices.ObjectControl',
+  'Windows.Win32.System.ComponentServices.SecurityProperty',
+  'Windows.Win32.System.Performance.DICounterItem',
+  'Windows.Win32.System.Performance.DILogFileItem',
+  'Windows.Win32.System.Performance.DISystemMonitor',
+  'Windows.Win32.System.Performance.DISystemMonitorEvents',
 };
 
 const excludedComClasses = <String>{
@@ -99,11 +107,12 @@ const specialTypes = {...excludedStructs, ...excludedComInterfaces};
 
 /// Used to manually add back in imports where needed.
 String specialHeaders(String pathToSrc, String interfaceName) {
-  // WAVEFORMATEX is duplicated in Media.Audio and Media.DeviceManager, so we
-  // remove its generation above, and manually add back the right import in
+  // WAVEFORMATEX and VIDEOINFOHEADER are duplicated in Media.DeviceManager, so
+  // we remove their generation above, and manually add back the right import in
   // DeviceManager APIs.
   if (interfaceName.startsWith('Windows.Win32.Media.DeviceManager')) {
-    return "import '${pathToSrc}media/audio/structs.g.dart';";
+    return "import '${pathToSrc}media/audio/structs.g.dart';\n"
+        "import '${pathToSrc}media/directshow/structs.g.dart';\n";
   }
   return '';
 }
