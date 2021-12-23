@@ -120,7 +120,10 @@ class InterfaceProjection {
 
   String get importHeader {
     final imports = {interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == '');
+      ..removeWhere((item) => item == '')
+      // TODO: Use exclusions.dart for these next two lines
+      ..removeWhere((item) => item.endsWith('ICondition.dart'))
+      ..removeWhere((item) => item.endsWith('IStemmer.dart'));
     return imports.map((import) => "import '$pathToSrc$import';").join('\n');
   }
 

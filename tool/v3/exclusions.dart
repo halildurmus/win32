@@ -108,6 +108,13 @@ const excludedComClasses = <String>{
 
 const specialTypes = {...excludedStructs, ...excludedComInterfaces};
 
+// Imports that are in excluded namespaces
+const excludedImports = {
+  // System.Search
+  'IStemmer.dart',
+  'ICondition.dart',
+};
+
 /// Used to manually add back in imports where needed.
 String specialHeaders(String pathToSrc, String interfaceName) {
   // WAVEFORMATEX and VIDEOINFOHEADER are duplicated in Media.DeviceManager, so

@@ -139,6 +139,10 @@ void generateWin32Constants(String namespace) {
   final constants = container == null ? <Field>[] : container.fields
     ..removeWhere((field) => excludedConstants.contains(field.name));
 
+  if (namespace == 'Windows.Win32.NetworkManagement.NetManagement') {
+    constants.removeWhere((constant) => constant.name.startsWith('AE_'));
+  }
+
   final guidConstants = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsGuidConstant)
