@@ -135,10 +135,8 @@ bool constantIsClassClsid(TypeDef typedef) {
 }
 
 void generateWin32Constants(String namespace) {
-  final constants = scope.typeDefs
-      .where((typedef) => (typedef.name == '$namespace.Apis'))
-      .first
-      .fields
+  final container = scope.findTypeDef('$namespace.Apis');
+  final constants = container == null ? <Field>[] : container.fields
     ..removeWhere((field) => excludedConstants.contains(field.name));
 
   final guidConstants = scope.typeDefs
