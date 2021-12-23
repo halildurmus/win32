@@ -63,9 +63,9 @@ const excludedStructs = <String>{
 };
 
 const excludedConstants = <String>{
-  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlReader',
-  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver',
-  'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter',
+  '_IID_IXmlReader',
+  '_IID_IXmlResolver',
+  '_IID_IXmlWriter',
 };
 
 const excludedGuidConstants = <String>{
