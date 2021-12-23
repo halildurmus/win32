@@ -66,6 +66,9 @@ const excludedConstants = <String>{
   'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlReader',
   'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver',
   'Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter',
+};
+
+const excludedGuidConstants = <String>{
   'Windows.Win32.UI.Shell.ShellLink',
 };
 

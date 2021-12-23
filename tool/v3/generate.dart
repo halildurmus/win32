@@ -135,19 +135,22 @@ bool constantIsClassClsid(TypeDef typedef) {
 }
 
 void generateWin32Constants(String namespace) {
-  final constants =
-      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
+  final constants = scope.typeDefs
+      .where((typedef) => (typedef.name == '$namespace.Apis'))
+      .first
+      .fields
+    ..removeWhere((field) => excludedConstants.contains(field.name));
 
   final guidConstants = scope.typeDefs
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsGuidConstant)
-      .where((typedef) => !excludedConstants.contains(typedef.name))
+      .where((typedef) => !excludedGuidConstants.contains(typedef.name))
       .where((typedef) => !(constantIsClassClsid(typedef)))
       .toList();
 
-  if (constants.isNotEmpty) {
+  if (constants.isNotEmpty || guidConstants.isNotEmpty) {
     final file = File('${folderForNamespace(namespace)}/constants.g.dart');
-    generateConstantsFile(file, constants.first.fields, guidConstants);
+    generateConstantsFile(file, constants, guidConstants);
   }
 }
 
