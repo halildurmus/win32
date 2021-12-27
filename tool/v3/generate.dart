@@ -28,13 +28,11 @@ final Scope scope = MetadataStore.getWin32Scope();
 final formatter = DartFormatter();
 
 class PartitionData {
-  final SendPort port;
   final List<String> namespaces;
   final int partition;
   final Stopwatch stopwatch;
 
-  const PartitionData(
-      this.port, this.namespaces, this.partition, this.stopwatch);
+  const PartitionData(this.namespaces, this.partition, this.stopwatch);
 }
 
 // TODO: Rationalize this set of utility functions with the ones in utils.dart.
@@ -214,8 +212,6 @@ void generateForNamespaces(PartitionData data) async {
   namespaces.forEach(generateComInterfaces);
 
   print('[${stopwatch.elapsed}] Completed (partition $partition)');
-
-  Isolate.exit(data.port, true);
 }
 
 /// Partition a list into the given number of sublists.
@@ -252,8 +248,11 @@ void main(List<String> args) async {
   final ports = List.generate(partitions.length, (i) => ReceivePort());
 
   for (var i = 0; i < partitions.length; i++) {
-    await Isolate.spawn<PartitionData>(generateForNamespaces,
-        PartitionData(ports[i].sendPort, partitions[i], i, stopwatch));
+    await Isolate.spawn<PartitionData>(
+      generateForNamespaces,
+      PartitionData(partitions[i], i, stopwatch),
+      onExit: ports[i].sendPort,
+    );
   }
 
   final futureGroup = FutureGroup<dynamic>();
