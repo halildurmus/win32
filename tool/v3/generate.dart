@@ -28,11 +28,13 @@ final Scope scope = MetadataStore.getWin32Scope();
 final formatter = DartFormatter();
 
 class PartitionData {
+  final SendPort port;
   final List<String> namespaces;
   final int partition;
   final Stopwatch stopwatch;
 
-  const PartitionData(this.namespaces, this.partition, this.stopwatch);
+  const PartitionData(
+      this.port, this.namespaces, this.partition, this.stopwatch);
 }
 
 // TODO: Rationalize this set of utility functions with the ones in utils.dart.
@@ -212,6 +214,8 @@ void generateForNamespaces(PartitionData data) async {
   namespaces.forEach(generateComInterfaces);
 
   print('[${stopwatch.elapsed}] Completed (partition $partition)');
+
+  Isolate.exit(data.port, true);
 }
 
 /// Partition a list into the given number of sublists.
@@ -250,21 +254,36 @@ void main(List<String> args) async {
   for (var i = 0; i < partitions.length; i++) {
     await Isolate.spawn<PartitionData>(
       generateForNamespaces,
-      PartitionData(partitions[i], i, stopwatch),
+      PartitionData(ports[i].sendPort, partitions[i], i, stopwatch),
       onExit: ports[i].sendPort,
     );
   }
 
-  final futureGroup = FutureGroup<dynamic>();
-  for (final port in ports) {
-    futureGroup.add(port.first);
-  }
-  futureGroup.close();
-  await futureGroup.future;
+  // Collect the results from the isolates. If the complete successfully, they
+  // will emit `true`. Otherwise they terminated with an error (which will have
+  // been written to stderr normally).
+  final isolateResults =
+      await Future.wait<Object?>(ports.map((port) => port.first));
 
   print('[${stopwatch.elapsed}] Generating library export');
   generateLibraryExport(namespaces);
 
   stopwatch.stop();
   print('[${stopwatch.elapsed}] Projection generation completed.');
+
+  /// Write an obvious summary of failure to stdout right at the end (and set
+  /// the exit code) so exceptions that occurred much further up in the output
+  /// are not missed.
+  var errors = 0;
+  for (var i = 0; i < isolateResults.length; i++) {
+    if (isolateResults[i] != true) {
+      errors++;
+      stderr.writeln(
+        'Partition $i failed, generated files may be incomplete. '
+        'Review the output above for exception details.',
+      );
+    }
+  }
+
+  exit(errors);
 }
