@@ -71,12 +71,12 @@ class MethodProjection {
   }
 
   String get methodParams =>
-      parameters.map((param) => param.dartProjection).join(', ');
+      parameters.map((param) => '${param.dartProjection}, ').join();
 
   String get nativeParams => [
         'Pointer',
         ...parameters.map((param) => param.ffiProjection),
-      ].join(', ');
+      ].map((p) => '$p, ').join();
 
   String get nativePrototype =>
       '${returnType.nativeType} Function($nativeParams)';
@@ -84,14 +84,14 @@ class MethodProjection {
   String get dartParams => [
         'Pointer',
         ...parameters.map((param) => param.dartProjection),
-      ].join(', ');
+      ].map((p) => '$p, ').join();
 
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
 
   String get identifiers => [
         'ptr.ref.lpVtbl',
         ...parameters.map((param) => param.identifier)
-      ].join(', ');
+      ].map((p) => '$p, ').join();
 
   // TODO: Check whether there's a better way to detect how methods like
   // put_AutoDemodulate are declared (should this be a property?) Detect whether

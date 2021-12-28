@@ -30,17 +30,17 @@ class FunctionProjection {
       '${returnType.nativeType} Function($nativeParams)';
 
   String get nativeParams =>
-      parameters.map((param) => param.ffiProjection).join(', ');
+      parameters.map((param) => '${param.ffiProjection}, ').join();
 
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
 
   String get dartParams =>
-      parameters.map((param) => param.dartProjection).join(', ');
+      parameters.map((param) => '${param.dartProjection}, ').join();
 
   @override
   String toString() => '''
     ${safeTypenameForString(returnType.dartType)} $k32StrippedName($dartParams) =>
-      _$nameWithoutEncoding(${parameters.map((param) => param.identifier).join(', ')});
+      _$nameWithoutEncoding(${parameters.map((param) => '${param.identifier}, ').join()});
 
     late final _$nameWithoutEncoding = 
       _$lib.lookupFunction<$nativePrototype, $dartPrototype>('${method.name}');
