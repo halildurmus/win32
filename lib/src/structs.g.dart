@@ -5849,6 +5849,9 @@ class WIN32_FIND_DATA extends Struct {
   String get cFileName {
     final charCodes = <int>[];
     for (var i = 0; i < 260; i++) {
+      if (_cFileName[i] == 0) {
+        break;
+      }
       charCodes.add(_cFileName[i]);
     }
     return String.fromCharCodes(charCodes);
