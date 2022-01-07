@@ -5870,6 +5870,9 @@ class WIN32_FIND_DATA extends Struct {
   String get cAlternateFileName {
     final charCodes = <int>[];
     for (var i = 0; i < 14; i++) {
+      if (_cAlternateFileName[i] == 0) {
+        break;
+      }
       charCodes.add(_cAlternateFileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -5993,6 +5996,9 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0) {
+        break;
+      }
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6150,6 +6156,9 @@ class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0) {
+        break;
+      }
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6182,6 +6191,9 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0) {
+        break;
+      }
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
