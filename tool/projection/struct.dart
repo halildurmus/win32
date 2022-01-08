@@ -17,8 +17,8 @@ class StructProjection {
   /// the time this is created, we don't know the name of the parent class, so
   /// we use a templated value `{{CLASS}}` to represent it.
   String _propertyAccessors() {
-    final buffer = StringBuffer();
-    buffer.writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
+    final buffer = StringBuffer()
+      ..writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
     for (final field in typeDef.fields) {
       final typeProjection = TypeProjection(field.typeIdentifier);
       buffer.writeln('''
@@ -87,12 +87,13 @@ class StructProjection {
           StructProjection(nestedType, '_${nestedType.name}');
 
       final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
-      buffer.write('\n$nestedTypeProjection\n');
-      buffer.write(nestedTypeProjection
-          ._propertyAccessors()
-          .replaceAll('{{CLASS}}', field)
-          .replaceAll('{{PARENT}}', structName)
-          .replaceAll('{{SUFFIX}}', suffix));
+      buffer
+        ..write('\n$nestedTypeProjection\n')
+        ..write(nestedTypeProjection
+            ._propertyAccessors()
+            .replaceAll('{{CLASS}}', field)
+            .replaceAll('{{PARENT}}', structName)
+            .replaceAll('{{SUFFIX}}', suffix));
       fieldIdx++;
     }
 

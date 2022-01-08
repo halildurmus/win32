@@ -49,8 +49,9 @@ class NotepadEditor {
   }
 
   void newFile() {
-    file.title = '';
-    file.path = '';
+    file
+      ..title = ''
+      ..path = '';
     isFileDirty = false;
     updateWindowTitle();
   }

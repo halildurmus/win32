@@ -100,7 +100,8 @@ int hostWndProc(int hWnd, int message, int wParam, int lParam) {
   return 0;
 }
 
-/// Registers the window class for the window that contains the magnification control
+/// Registers the window class for the window that contains the magnification
+/// control.
 int registerHostWindowClass(int hInstance) {
   final wcex = calloc<WNDCLASSEX>()
     ..ref.cbSize = sizeOf<WNDCLASSEX>()
@@ -220,8 +221,10 @@ void updateMagWindow(int hwnd, int uMsg, Pointer<Uint32> idEvent, int dwTime) {
         (magWindowRect.ref.right - magWindowRect.ref.left) ~/ MAGFACTOR;
     final height =
         (magWindowRect.ref.bottom - magWindowRect.ref.top) ~/ MAGFACTOR;
-    sourceRect.left = mousePoint.ref.x - width ~/ 2;
-    sourceRect.top = mousePoint.ref.y - height ~/ 2;
+
+    sourceRect
+      ..left = mousePoint.ref.x - width ~/ 2
+      ..top = mousePoint.ref.y - height ~/ 2;
 
     // Don't scroll outside desktop area.
     if (sourceRect.left < 0) {
@@ -243,7 +246,8 @@ void updateMagWindow(int hwnd, int uMsg, Pointer<Uint32> idEvent, int dwTime) {
     // Set the source rectangle for the magnifier control.
     MagSetWindowSource(hwndMag, sourceRect);
 
-    // Reclaim topmost status, to prevent unmagnified menus from remaining in view.
+    // Reclaim topmost status, to prevent unmagnified menus from remaining in
+    // view.
     SetWindowPos(hwndHost, HWND_TOPMOST, 0, 0, 0, 0,
         SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
 

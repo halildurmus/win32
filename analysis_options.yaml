@@ -11,8 +11,10 @@ analyzer:
 linter:
   rules:
     # Some additional lints we want to enforce
-    directives_ordering: true
+    cascade_invocations: true
     omit_local_variable_types: true
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
     prefer_expression_function_bodies: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
@@ -21,6 +23,7 @@ linter:
     sort_unnamed_constructors_first: true
     unnecessary_lambdas: true
     unnecessary_null_aware_assignments: true
+    unnecessary_parenthesis: true
 
     # We name Win32 constants for consistency with Win32, not Dart
     constant_identifier_names: false

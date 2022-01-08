@@ -168,7 +168,8 @@ void main() {
     }
     PrintVerticalBorder(); // print border at right side
     if (line + 1 != numLines * 2) {
-      // Advance to next line. If we're at the bottom of the margins, the text will scroll.
+      // Advance to next line. If we're at the bottom of the margins, the text
+      // will scroll.
       printf("\n");
       printf("\r"); // return to first col in buffer
     }

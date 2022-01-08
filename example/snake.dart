@@ -102,8 +102,8 @@ void setApple() {
   data[appleY][appleX] = 0;
 
   // get a random x, y coordinate on the gameboard
-  final x = randRange(0, (bitmapWidth ~/ 10));
-  final y = randRange(0, (bitmapHeight ~/ 10));
+  final x = randRange(0, bitmapWidth ~/ 10);
+  final y = randRange(0, bitmapHeight ~/ 10);
 
   // set to 1 to represent apple
   if (data[y][x] == 0) {
@@ -141,8 +141,6 @@ void moveSnake() {
   // unset old
   // set direction on new
   final lastBlock = Point();
-  lastBlock.x = 0;
-  lastBlock.y = 0;
 
   for (var i = 0; i < snakePoints.length; i++) {
     data[snakePoints[i].y][snakePoints[i].x] = 0;
@@ -165,7 +163,7 @@ void moveSnake() {
         // left
         snakePoints[i].x -= 1;
         if (snakePoints[i].x < 0) {
-          snakePoints[i].x = (bitmapWidth ~/ 10);
+          snakePoints[i].x = bitmapWidth ~/ 10;
         }
       } else if (direction.y == 1) {
         // down
@@ -187,8 +185,9 @@ void moveSnake() {
       snakePoints[i].y = lastBlock.y;
     }
 
-    lastBlock.x = tempX;
-    lastBlock.y = tempY;
+    lastBlock
+      ..x = tempX
+      ..y = tempY;
 
     data[snakePoints[i].y][snakePoints[i].x] = 2;
   }

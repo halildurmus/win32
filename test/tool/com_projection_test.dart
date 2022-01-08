@@ -110,7 +110,7 @@ void main() {
       final projection = InterfaceProjection(iNetwork);
 
       final isConnected = projection.methodProjections
-          .indexWhere((method) => (method.name == 'get_IsConnectedToInternet'));
+          .indexWhere((method) => method.name == 'get_IsConnectedToInternet');
       expect(isConnected, isNot(-1));
     });
 
@@ -121,7 +121,7 @@ void main() {
       final projection = InterfaceProjection(iNetwork);
 
       final isConnected = projection.methodProjections
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
+          .firstWhere((method) => method.name == 'get_IsConnectedToInternet');
       expect(isConnected.method.isGetProperty, isTrue);
     });
 
@@ -132,7 +132,7 @@ void main() {
       final projection = InterfaceProjection(iNetwork);
 
       final isConnected = projection.methodProjections
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
+          .firstWhere((method) => method.name == 'get_IsConnectedToInternet');
       expect(isConnected.returnType.nativeType, equals('Int32'));
       expect(isConnected.returnType.dartType, equals('int'));
     });
@@ -144,7 +144,7 @@ void main() {
       final projection = InterfaceProjection(iNetwork);
 
       final isConnected = projection.methodProjections
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
+          .firstWhere((method) => method.name == 'get_IsConnectedToInternet');
       expect(isConnected.parameters.length, equals(1));
       expect(isConnected.parameters.first.type.nativeType,
           equals('Pointer<Int16>'));
@@ -154,13 +154,13 @@ void main() {
   });
 
   test(
-      'IEnumNetworkConnections.NewEnum projects the appropriate type for IEnumVARIANT*',
-      () {
+      'IEnumNetworkConnections.NewEnum projects the appropriate type for '
+      'IEnumVARIANT*', () {
     final iEnumNetworkConnections = scope.findTypeDef(
         'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections')!;
     final projection = InterfaceProjection(iEnumNetworkConnections);
     final newEnum = projection.methodProjections
-        .firstWhere((method) => (method.name == 'get__NewEnum'));
+        .firstWhere((method) => method.name == 'get__NewEnum');
     expect(newEnum.parameters.length, equals(1));
     expect(newEnum.parameters.first.type.nativeType,
         equals('Pointer<Pointer<COMObject>>'));

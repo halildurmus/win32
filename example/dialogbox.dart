@@ -72,8 +72,8 @@ void main() {
       cx: 158,
       cy: 12,
       id: ID_PROGRESS,
-      windowClass: 'msctls_progress32', // progress bar
-      text: '');
+      windowClass: 'msctls_progress32' // progress bar
+      );
 
   idx += ptr.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
       style: WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER,

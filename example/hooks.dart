@@ -71,7 +71,7 @@ int lowlevelKeyboardHookProc(int code, int wParam, int lParam) {
       }
 
       // Swap 'A' with 'B' in output
-      input.ref.ki.wVk = (kbs.ref.vkCode == VK_A ? VK_B : kbs.ref.vkCode);
+      input.ref.ki.wVk = kbs.ref.vkCode == VK_A ? VK_B : kbs.ref.vkCode;
       SendInput(1, input, sizeOf<INPUT>());
       free(input);
       return -1;

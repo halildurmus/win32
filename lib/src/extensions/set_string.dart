@@ -17,9 +17,7 @@ extension SetString on Pointer<Utf16> {
     final ptr = cast<Uint16>();
 
     final units = string.codeUnits;
-    final nativeString = ptr.asTypedList(units.length + 1);
-
-    nativeString.setAll(0, units);
+    final nativeString = ptr.asTypedList(units.length + 1)..setAll(0, units);
     nativeString[units.length] = 0;
     return (units.length + 1) * 2;
   }

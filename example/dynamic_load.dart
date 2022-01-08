@@ -35,8 +35,8 @@ void main() {
 
     funcGetNativeSystemInfo(systemInfo);
   } else {
-    print(
-        'GetNativeSystemInfo() not available on this system. Falling back to GetSystemInfo().');
+    print('GetNativeSystemInfo() not available on this system. '
+        'Falling back to GetSystemInfo().');
 
     GetSystemInfo(systemInfo);
   }

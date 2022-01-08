@@ -73,10 +73,9 @@ int generateStructs(Win32API win32) {
   final scope = MetadataStore.getWin32Scope();
 
   var structsGenerated = 0;
-  final writer =
-      File('lib/src/structs.g.dart').openSync(mode: FileMode.writeOnly);
-
-  writer.writeStringSync(structFileHeader);
+  final writer = File('lib/src/structs.g.dart')
+      .openSync(mode: FileMode.writeOnly)
+    ..writeStringSync(structFileHeader);
 
   for (final struct in win32.structs.keys) {
     final win32struct = win32.structs[struct]!;
@@ -91,8 +90,9 @@ int generateStructs(Win32API win32) {
     }
     final typeDef = typeDefs.first;
 
-    writer.writeStringSync(wrapCommentText(win32struct.comment));
-    writer.writeStringSync('\n///\n');
+    writer
+      ..writeStringSync(wrapCommentText(win32struct.comment))
+      ..writeStringSync('\n///\n');
 
     final projectedStruct = StructProjection(typeDef, struct);
     writer.writeStringSync(projectedStruct.toString());

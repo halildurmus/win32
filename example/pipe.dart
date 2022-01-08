@@ -55,8 +55,9 @@ class ClientCommand extends Command<void> {
         stderr.writeln('Failed to read data from the pipe.');
       } else {
         final numBytesRead = lpNumBytesRead.value;
-        stdout.writeln('Number of bytes read: $numBytesRead');
-        stdout.writeln('Message: ${lpBuffer.toDartString()}');
+        stdout
+          ..writeln('Number of bytes read: $numBytesRead')
+          ..writeln('Message: ${lpBuffer.toDartString()}');
       }
 
       CloseHandle(pipe);

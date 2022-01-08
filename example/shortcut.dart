@@ -20,9 +20,9 @@ void createShortcut(String path, String pathLink, String? description) {
 
     final hr = shellLink.QueryInterface(ptrIID_IPersistFile, ppf.cast());
     if (SUCCEEDED(hr)) {
-      final persistFile = IPersistFile(ppf);
-      persistFile.Save(lpPathLink, TRUE);
-      persistFile.Release();
+      IPersistFile(ppf)
+        ..Save(lpPathLink, TRUE)
+        ..Release();
     }
     shellLink.Release();
   } finally {
@@ -35,7 +35,7 @@ void createShortcut(String path, String pathLink, String? description) {
 }
 
 void main(List<String> args) {
-  final parser = ArgParser(allowTrailingOptions: true, usageLineLength: 80)
+  final parser = ArgParser(usageLineLength: 80)
     ..addOption('path',
         abbr: 'p',
         mandatory: true,

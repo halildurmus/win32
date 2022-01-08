@@ -65,25 +65,30 @@ class Game {
 
     isPaused = true;
     drawPause();
-    level.drawScore();
-    level.drawSpeed();
+    level
+      ..drawScore()
+      ..drawSpeed();
   }
 
   void resumeGame() {
     if (isGameOver) return;
 
     isPaused = false;
-    level.drawScore();
-    level.drawSpeed();
+    level
+      ..drawScore()
+      ..drawSpeed();
   }
 
   /// Called on WM_PAINT
   void repaint() {
     de.drawInterface();
-    level.drawScore();
-    level.drawSpeed();
-    level.drawNextPiece();
-    level.drawBoard();
+
+    level
+      ..drawScore()
+      ..drawSpeed()
+      ..drawNextPiece()
+      ..drawBoard();
+
     if (isGameOver) {
       drawGameOver();
     } else if (isPaused) {
@@ -105,11 +110,10 @@ class Game {
       return;
     }
 
-    // Update game data
-    level.timerUpdate();
-
-    // Redraw
-    level.drawBoard();
+    // Update game data and redraw
+    level
+      ..timerUpdate()
+      ..drawBoard();
   }
 
   /// Restarts the game
@@ -121,13 +125,15 @@ class Game {
 
   /// Shows GAME OVER message
   void drawGameOver() {
-    de.drawText('GAME OVER', 3, 10);
-    de.drawText('Press ENTER to restart', 2, 9);
+    de
+      ..drawText('GAME OVER', 3, 10)
+      ..drawText('Press ENTER to restart', 2, 9);
   }
 
   /// Shows PAUSE message
   void drawPause() {
-    de.drawText('PAUSE', 4, 10);
-    de.drawText('Press PAUSE again to continue', 1, 9);
+    de
+      ..drawText('PAUSE', 4, 10)
+      ..drawText('Press PAUSE again to continue', 1, 9);
   }
 }

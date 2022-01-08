@@ -87,7 +87,7 @@ const SO_LINGER = 0x0080;
 const SO_OOBINLINE = 0x0100;
 
 /// Does not block close waiting for unsent data to be sent.
-const SO_DONTLINGER = (~SO_LINGER);
+const SO_DONTLINGER = ~SO_LINGER;
 
 /*
  * Additional options.

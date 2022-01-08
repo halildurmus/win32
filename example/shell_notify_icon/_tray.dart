@@ -26,12 +26,12 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
 }
 
 void addIcon({required int hWndParent}) {
-  final nid = _nid.ref;
-  nid.hWnd = hWndParent;
-  nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID;
-  nid.szTip = 'Dart tray';
-  nid.uCallbackMessage = app.EVENT_TRAY_NOTIFY;
-  nid.hIcon = app.loadDartIcon();
+  final nid = _nid.ref
+    ..hWnd = hWndParent
+    ..uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID
+    ..szTip = 'Dart tray'
+    ..uCallbackMessage = app.EVENT_TRAY_NOTIFY
+    ..hIcon = app.loadDartIcon();
 
   Shell_NotifyIcon(NIM_ADD, _nid);
 

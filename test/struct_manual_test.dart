@@ -9,9 +9,8 @@ import 'package:win32/win32.dart';
 void main() {
   test('OVERLAPPED struct', () {
     final pOverlapped = calloc<OVERLAPPED>();
-    final overlapped = pOverlapped.ref;
-
-    overlapped.pointer = Pointer.fromAddress(0x0807060504030201);
+    final overlapped = pOverlapped.ref
+      ..pointer = Pointer.fromAddress(0x0807060504030201);
     expect(overlapped.pointer.address, equals(0x0807060504030201));
     expect(overlapped.Offset, equals(0x04030201));
     expect(overlapped.OffsetHigh, equals(0x08070605));

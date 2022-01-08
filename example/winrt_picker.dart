@@ -15,15 +15,14 @@ void main() async {
   final object = CreateObject(
       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
 
-  final picker = IFileOpenPicker(object);
-  picker.ViewMode = PickerViewMode.Thumbnail;
+  final picker = IFileOpenPicker(object)..ViewMode = PickerViewMode.Thumbnail;
 
   final result = calloc<Pointer>();
 
   // Does not work yet
   picker.PickSingleFileAsync(result);
 
-  await Future<void>.delayed(Duration(seconds: 5));
+  await Future<void>.delayed(const Duration(seconds: 5));
 
   winrtUninitialize();
   print('Complete');

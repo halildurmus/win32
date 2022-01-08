@@ -52,10 +52,9 @@ void showSimpleTaskDialog() {
     }
     // ignore: avoid_catching_errors
   } on ArgumentError {
-    print(
-        'If you see an error "Failed to lookup symbol", it\'s likely because the '
-        'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n\n'
-        'See the comment at the top of the sample source code.\n');
+    print('If you see an error "Failed to lookup symbol", it\'s likely because '
+        'the app manifest\ndeclaring a dependency on comctl32.dll v6 is '
+        'missing.\n\nSee the comment at the top of the sample source code.\n');
     rethrow;
   } finally {
     free(windowTitle);
@@ -65,6 +64,9 @@ void showSimpleTaskDialog() {
 }
 
 void showCustomTaskDialog() {
+  // Note that this example does not explicitly free allocated memory, since it
+  // returns quickly to the command prompt. As part of a real app, you'd
+  // certainly want to free each string here.
   final buttonSelected = calloc<Int32>();
 
   final buttons = calloc<TASKDIALOG_BUTTON>(2);
@@ -79,6 +81,17 @@ void showCustomTaskDialog() {
         'Take the red pill\nYou stay in Wonderland, and I show you how deep '
         'the rabbit hole goes.');
 
+  const matrixDescription =
+      'In The Matrix, the main character Neo is offered  the choice between '
+      'a red pill and a blue pill by rebel leader Morpheus. The red pill '
+      'represents an uncertain future: it would free him from the enslaving '
+      'control of the machine-generated dream world and allow him to escape '
+      'into the real world, but living the "truth of reality" is harsher and '
+      'more difficult. On the other hand, the blue pill represents a '
+      'beautiful prison: it would lead him back to ignorance, living in '
+      'confined comfort without want or fear within '
+      'the simulated reality of the Matrix.';
+
   final config = calloc<TASKDIALOGCONFIG>()
     ..ref.cbSize = sizeOf<TASKDIALOGCONFIG>()
     ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
@@ -87,15 +100,7 @@ void showCustomTaskDialog() {
         TEXT('This is your last chance. There is no turning back.')
     ..ref.hMainIcon = TD_WARNING_ICON.address
     ..ref.pszCollapsedControlText = TEXT('See more details.')
-    ..ref.pszExpandedControlText = TEXT(
-        'In The Matrix, the main character Neo is offered the choice between a '
-        'red pill and a blue pill by rebel leader Morpheus. The red pill represents '
-        'an uncertain future: it would free him from the enslaving control of the '
-        'machine-generated dream world and allow him to escape into the real world, '
-        'but living the "truth of reality" is harsher and more difficult. On the '
-        'other hand, the blue pill represents a beautiful prison: it would lead him '
-        'back to ignorance, living in confined comfort without want or fear within '
-        'the simulated reality of the Matrix.')
+    ..ref.pszExpandedControlText = matrixDescription.toNativeUtf16()
     ..ref.dwFlags = TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS
     ..ref.cButtons = 2
     ..ref.pButtons = buttons;

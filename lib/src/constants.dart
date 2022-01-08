@@ -296,7 +296,8 @@ const ERROR_BAD_REM_ADAP = 60;
 /// The printer queue is full.
 const ERROR_PRINTQ_FULL = 61;
 
-/// Space to store the file waiting to be printed is not available on the server.
+/// Space to store the file waiting to be printed is not available on the
+/// server.
 const ERROR_NO_SPOOL_SPACE = 62;
 
 /// Your file waiting to be printed was deleted.
@@ -4471,7 +4472,8 @@ const DT_CENTER = 0x001;
 /// Aligns text to the right.
 const DT_RIGHT = 0x002;
 
-/// Centers text vertically. This value is used only with the DT_SINGLELINE value.
+/// Centers text vertically. This value is used only with the DT_SINGLELINE
+/// value.
 const DT_VCENTER = 0x004;
 
 /// Justifies the text to the bottom of the rectangle. This value is used only
@@ -7786,7 +7788,7 @@ const SCARD_PROTOCOL_RAW = 0x00010000;
 /// Bitwise OR combination of both of the two International Standards
 /// Organization (IS0) transmission protocols SCARD_PROTOCOL_T0 and
 /// SCARD_PROTOCOL_T1.
-const SCARD_PROTOCOL_Tx = (SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1);
+const SCARD_PROTOCOL_Tx = SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1;
 
 /// Use the implicit protocol of the card with standard parameters.
 const SCARD_PROTOCOL_DEFAULT = 0x80000000;
@@ -7861,13 +7863,15 @@ const SCARD_SCOPE_TERMINAL = 1;
 /// database actions.
 const SCARD_SCOPE_SYSTEM = 2;
 
-/// The function retrieves the name of the smart card's primary service provider as a GUID string.
+/// The function retrieves the name of the smart card's primary service provider
+/// as a GUID string.
 const SCARD_PROVIDER_PRIMARY = 1;
 
 /// The function retrieves the name of the cryptographic service provider.
 const SCARD_PROVIDER_CSP = 2;
 
-/// The function retrieves the name of the smart card key storage provider (KSP).
+/// The function retrieves the name of the smart card key storage provider
+/// (KSP).
 const SCARD_PROVIDER_KSP = 3;
 
 /// The function retrieves the name of the card module.

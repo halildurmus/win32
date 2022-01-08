@@ -109,9 +109,10 @@ void generateFfiFile(File file, TypeDef typedef) {
         library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
 
     final dll = libraryFromDllName(library);
-    buffer.write(docComment(dll));
-    buffer.writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
-    buffer.writeln();
+    buffer
+      ..write(docComment(dll))
+      ..writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');")
+      ..writeln();
 
     for (final function in functions) {
       final printer = FunctionProjection(function, libraryDartName);
@@ -121,18 +122,21 @@ void generateFfiFile(File file, TypeDef typedef) {
     buffer.writeln();
   }
 
-  writer.writeStringSync(ffiFileHeader);
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
+  writer
+    ..writeStringSync(ffiFileHeader)
+    ..writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}guid.dart';\n")
+    ..writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
+
   for (final import in imports) {
     if (!excludedImports.contains(import)) {
       writer.writeStringSync(
           "import '${relativePathToSrcDirectory(file)}$import';\n");
     }
   }
-  writer.writeStringSync('\n');
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
+  writer
+    ..writeStringSync('\n')
+    ..writeStringSync(buffer.toString())
+    ..closeSync();
 }

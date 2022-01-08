@@ -27,8 +27,9 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
     if ((textLine.length + word.length) >= wrapLength) {
       textLine.write('\n');
       outputText.write(textLine);
-      textLine.clear();
-      textLine.write('/// $word ');
+      textLine
+        ..clear()
+        ..write('/// $word ');
     } else {
       textLine.write('$word ');
     }
@@ -49,16 +50,17 @@ String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
   if (func.comment.isNotEmpty) {
-    comment.writeln(wrapCommentText(func.comment));
-    comment.writeln('///');
+    comment
+      ..writeln(wrapCommentText(func.comment))
+      ..writeln('///');
   }
 
-  comment.writeln('/// ```c');
-  comment.write('/// ');
-  comment.writeln(func.prototype.first.split('\\n').join('\n/// '));
-  comment.writeln('/// ```');
-
-  comment.write('/// {@category ${func.category}}');
+  comment
+    ..writeln('/// ```c')
+    ..write('/// ')
+    ..writeln(func.prototype.first.split('\\n').join('\n/// '))
+    ..writeln('/// ```')
+    ..write('/// {@category ${func.category}}');
   return comment.toString();
 }
 

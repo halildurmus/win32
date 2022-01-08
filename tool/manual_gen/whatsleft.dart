@@ -98,6 +98,6 @@ void main(List<String> args) {
   print('$missing symbols missing.');
   // projectedSymbols.forEach(print);
 
-  // symbols
-  //     .forEach((name, address) => print('[${address.toHexString(32)}] $name'));
+  // symbols.forEach((name, address) => print('[${address.toHexString(32)}] '
+  //     '$name'));
 }

@@ -22,7 +22,7 @@ bool isAppContainer() {
             sizeOf<DWORD>(),
             bytesReturned) !=
         FALSE) {
-      return (tokenInfo.value != 0);
+      return tokenInfo.value != 0;
     }
     return false;
   } finally {
