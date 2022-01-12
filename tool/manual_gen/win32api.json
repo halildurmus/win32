@@ -6444,7 +6444,7 @@
         "comment": "Suspends the specified WOW64 thread."
     },
     "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_ HANDLE hConsoleOutput,\n  _In_ const VOID *lpBuffer,\n  _In_ DWORD nNumberOfCharsToWrite,\n  _Out_opt_ LPDWORD lpNumberOfCharsWritten,\n  _Reserved_ LPVOID lpReserved\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
     },
@@ -6463,5 +6463,54 @@
         "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
+    },
+    "WslConfigureDistribution": {
+        "prototype": "HRESULT WslConfigureDistribution(\n  _In_ PCWSTR distributionName,\n  _In_ ULONG defaultUID,\n  WSL_DISTRIBUTION_FLAGS wslDistributionFlags\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Modifies the behavior of a distribution registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslGetDistributionConfiguration": {
+        "prototype": "HRESULT WslGetDistributionConfiguration(\n  _In_ PCWSTR distributionName,\n  _Out_ ULONG *distributionVersion,\n  _Out_ ULONG *defaultUID,\n  _Out_ WSL_DISTRIBUTION_FLAGS *wslDistributionFlags,\n  _Outptr_result_buffer_ PSTR **defaultEnvironmentVariables,\n  _Out_ ULONG *defaultEnvironmentVariableCount\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Retrieves the current configuration of a distribution registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslIsDistributionRegistered": {
+        "prototype": "BOOL WslIsDistributionRegistered(\n  _In_ PCWSTR distributionName\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Determines if a distribution is registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslLaunch": {
+        "prototype": "HRESULT WslLaunch(\n  _In_ PCWSTR distributionName,\n  _In_opt_ PCWSTR command,\n  _In_ BOOL useCurrentWorkingDirectory,\n  _In_ HANDLE stdIn,\n  _In_ HANDLE stdOut,\n  _In_      HANDLE  stdErr,\n  _Out_     HANDLE  *process\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Launches a Windows Subsystem for Linux (WSL) process in the context of a particular distribution.",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslLaunchInteractive": {
+        "prototype": "HRESULT WslLaunchInteractive(\n  _In_ PCWSTR distributionName,\n  _In_opt_ command,\n  _In_ BOOL useCurrentWorkingDirectory,\n  _Out_ DWORD *exitCode\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Launches an interactive Windows Subsystem for Linux (WSL) process in the context of a particular distribution.This differs from WslLaunch in that the end user will be able to interact with the newly-created process.",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslRegisterDistribution": {
+        "prototype": "HRESULT WslRegisterDistribution(\n  _In_ PCWSTR distributionName,\n  _In_ PCWSTR tarGzFilename\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Registers a new distribution with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslUnregisterDistribution": {
+        "prototype": "HRESULT WslUnregisterDistribution(\n  _In_ PCWSTR distributionName\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Unregisters a distribution from the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
     }
 }
