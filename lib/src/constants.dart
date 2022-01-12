@@ -8019,3 +8019,17 @@ const GW_HWNDPREV = 3;
 /// The retrieved handle identifies the specified window's owner window, if any.
 /// For more information, see Owned Windows.
 const GW_OWNER = 4;
+
+/// No flags are being supplied.
+const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
+
+/// Allow the distribution to interoperate with Windows processes (for example,
+/// the user can invoke "cmd.exe" or "notepad.exe" from within a WSL session).
+const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
+
+/// Add the Windows %PATH% environment variable values to WSL sessions.
+const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
+
+/// Automatically mount Windows drives inside of WSL sessions (for example,
+/// "C:" will be available under "/mnt/c").
+const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
