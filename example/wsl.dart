@@ -97,6 +97,11 @@ void main() {
       final config = getDistributionConfiguration(distributionName);
       print('Distribution: $distributionName');
       print('Version: ${config.wslVersion}');
+      final driveMounting = config.flags &
+              WSL_DISTRIBUTION_FLAGS
+                  .WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
+          WSL_DISTRIBUTION_FLAGS.WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
+      print('Windows drives automatically mounted: $driveMounting');
       print('Environment variables: ');
       config.environmentVariables.forEach(print);
 
