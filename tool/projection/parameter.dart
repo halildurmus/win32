@@ -1,5 +1,5 @@
+import 'safenames.dart';
 import 'type.dart';
-import 'utils.dart';
 
 /// A parameter.
 ///
@@ -14,10 +14,10 @@ class ParameterProjection {
   String toString() => '$name (${type.nativeType})';
 
   String get ffiProjection =>
-      '${safeTypename(type.nativeType)} ${safeName(name)}';
+      '${safeTypenameForString(type.nativeType)} ${safeIdentifierForString(name)}';
 
   String get dartProjection =>
-      '${safeTypename(type.dartType)} ${safeName(name)}';
+      '${safeTypenameForString(type.dartType)} ${safeIdentifierForString(name)}';
 
-  String get identifier => safeName(name);
+  String get identifier => safeIdentifierForString(name);
 }

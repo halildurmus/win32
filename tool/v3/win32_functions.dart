@@ -8,10 +8,12 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 import '../projection/function.dart';
+import '../projection/safenames.dart';
 import '../projection/utils.dart';
 import 'exclusions.dart';
+import 'generate.dart';
 
-const ffiFileHeader = '''
+const functionFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
@@ -28,24 +30,27 @@ import 'enums.g.dart';
 
 ''';
 
-const headerComment =
+const commentDivider =
     '  // -----------------------------------------------------------------------';
 
-String docComment(String comment) =>
-    '$headerComment\n  // $comment\n$headerComment\n';
+/// Create a comment header out of a simple string comment.
+///
+/// This function does not wrap the comment.
+String commentHeader(String comment) =>
+    '$commentDivider\n  // $comment\n$commentDivider\n';
 
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
 /// couple of exceptions. We hardcode them here, since there are so few.
-String libraryFromDllName(String dllName) {
-  switch (dllName) {
+String DLLFromModuleName(String moduleName) {
+  switch (moduleName) {
     case 'bthprops':
       return 'bthprops.cpl';
     case 'winspool':
       return 'winspool.drv';
     default:
-      return '$dllName.dll';
+      return '$moduleName.dll';
   }
 }
 
@@ -101,16 +106,16 @@ void generateFfiFile(File file, TypeDef typedef) {
       .map((method) => method.module.name.toLowerCase())
       .toSet()
       .toList();
-  final imports = <String>{};
+  final importList = {'combase.dart', 'guid.dart'};
 
-  final buffer = StringBuffer();
+  final functionProjections = StringBuffer();
 
-  var projectedFunctionsCount = 0;
+  var functionsCount = 0;
 
-  for (final library in modules) {
+  for (final module in modules) {
     // For now, we only project Unicode methods.
     final functions = typedef.methods
-        .where((method) => method.module.name == library)
+        .where((method) => method.module.name.toLowerCase() == module)
         .where((method) => !method.name.endsWith('A'))
         .where(noUnicodeVariantAvailable)
         .where((method) => method.supportedArchitectures.x64)
@@ -121,43 +126,30 @@ void generateFfiFile(File file, TypeDef typedef) {
 
     // Don't bother with modules that don't contain any relevant functions.
     if (functions.isNotEmpty) {
-      // API set names aren't legal Dart identifiers, so we rename them
-      // Some modules may also be of the form windows.ai.machinelearning.dll.
-      final libraryDartName =
-          library.replaceAll('-', '_').replaceAll('.', '_').toLowerCase();
-
-      final dll = libraryFromDllName(library);
-      buffer.write(docComment(dll));
-      buffer
-          .writeln("  final _$libraryDartName = DynamicLibrary.open('$dll');");
-      buffer.writeln();
+      final moduleDartIdentifier = identifierForModuleName(module);
+      final dllFilename = DLLFromModuleName(module);
+      functionProjections.write(commentHeader(dllFilename));
+      functionProjections.writeln(
+          "  final _$moduleDartIdentifier = DynamicLibrary.open('$dllFilename');");
+      functionProjections.writeln();
 
       for (final function in functions) {
-        final printer = FunctionProjection(function, libraryDartName);
-        buffer.writeln(printer.toString());
-        imports.addAll(importsForFunction(function));
-        projectedFunctionsCount++;
+        final printer = FunctionProjection(function, moduleDartIdentifier);
+        functionProjections.writeln(printer.toString());
+        functionsCount++;
+        importList.addAll(importsForFunction(function));
       }
-      buffer.writeln();
+      functionProjections.writeln();
     }
   }
 
-  if (projectedFunctionsCount > 0) {
-    final writer = file.openSync(mode: FileMode.writeOnly);
+  if (functionsCount > 0) {
+    final importDeclarations = importList.map(
+        (import) => "import '${relativePathToSrcDirectory(file)}$import';");
 
-    writer.writeStringSync(ffiFileHeader);
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-    for (final import in imports) {
-      if (!excludedImports.contains(import)) {
-        writer.writeStringSync(
-            "import '${relativePathToSrcDirectory(file)}$import';\n");
-      }
-    }
-    writer.writeStringSync('\n');
-    writer.writeStringSync(buffer.toString());
-    writer.closeSync();
+    final functionsFile =
+        [functionFileHeader, ...importDeclarations, functionProjections].join();
+
+    file.writeAsStringSync(formatter.format(functionsFile));
   }
 }

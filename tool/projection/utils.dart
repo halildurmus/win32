@@ -6,31 +6,8 @@ import 'package:winmd/winmd.dart';
 
 import '../v3/exclusions.dart';
 import '../v3/falseProperties.dart';
+import 'safenames.dart';
 import 'type.dart';
-
-// TODO: Change this to a Set to include a replacement (e.g. Int8 -> int8)
-const dartKeywords = <String>[
-  // Keywords from https://dart.dev/guides/language/language-tour#keywords.
-  // Contextual keywords and built-in identifiers are not included here, since
-  // they can be used as valid identifiers in most places.
-  'assert', 'break', 'case', 'catch', 'class', 'const', 'continue', 'default',
-  'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
-  'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
-  'throw', 'true', 'try', 'var', 'void', 'while', 'with',
-
-  'String',
-
-  // FFI special words
-  'Int8', 'Int16', 'Int32', 'Int64',
-  'Uint8', 'Uint16', 'Uint32', 'Uint64',
-  'Double', 'Float', 'Array', 'IntPtr',
-  'Pointer', 'Union', 'Opaque', 'Struct',
-  'Unsized', 'Void', 'Packed', 'Handle',
-
-  // GUID is a type, so it shouldn't be used as an identifier.
-  // Example: Windows.Win32.Media.DirectShow.VMRGUID.GUID
-  'GUID',
-];
 
 const falseAnsiEndings = <String>[
   // These are structs that appear in the Win32 metadata that end in 'A' but
@@ -39,6 +16,7 @@ const falseAnsiEndings = <String>[
   // manual list.
   'DATA', 'SCHEMA', 'AREA', 'ANTENNA', 'MEDIA', 'M128A', 'CIECHROMA', 'PARA',
   'ALPHA', 'BUFFER_WMA', 'CRITERIA', 'UIDNA', 'YCbCrA', 'RGBA',
+  'PSP_FILE_CALLBACK_A',
 ];
 
 /// Returns true if a [TypeDef] name ends with 'A' but is _not_ ANSI.
@@ -70,16 +48,20 @@ bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
     comInterface.name.endsWith('IEnumSTATDATA') ||
     !comInterface.name.endsWith('A');
 
-/// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
+/// Strip the Unicode / ANSI suffix from the name. For example, `MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
   if (typeName.startsWith('Pointer<')) {
     final wrappedType = stripPointer(typeName);
     return 'Pointer<${stripAnsiUnicodeSuffix(wrappedType)}>';
   }
-  if (typePretendsToBeAnsi(typeName)) {
+
+  // Frustratingly, Windows.Win32.System.Wmi.MI_* types are the exception where
+  // 'A' suffix does not seem to denote ASCII.
+  if (typePretendsToBeAnsi(typeName) || typeName.startsWith('MI_')) {
     return typeName;
   }
+
   if (typeName.endsWith('W') || typeName.endsWith('A')) {
     return typeName.substring(0, typeName.length - 1);
   }
@@ -179,13 +161,6 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
-/// Take a [TypeDef] and return a name suitable for filenames.
-///
-/// This should not be used for identifiers without further processing, since it
-/// could include a reserved word or a leading underscore.
-String shortenTypeDef(TypeDef typeDef) =>
-    stripAnsiUnicodeSuffix(lastComponent(typeDef.name));
-
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
 /// matching folder (e.g. `system/console`).
 String folderFromNamespace(String namespace) {
@@ -194,30 +169,21 @@ String folderFromNamespace(String namespace) {
   return segments.join('/').toLowerCase();
 }
 
+/// Marks an identifier as private to the win32 library.
+String private(String identifier) => '_$identifier';
+
+/// Returns true if the string can be converted to an integer.
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
-
-/// Takes an identifier and converts it to a safe Dart identifier (i.e. one that
-/// is not a reserved word or a private modifier).
-///
-/// For example, `VARIANT var` should be converted to `VARIANT var_`, and
-/// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
-String safeName(String name) {
-  if (dartKeywords.contains(name)) {
-    return '${name}_';
-  }
-
-  return stripLeadingUnderscores(name);
-}
 
 bool isExcludedGetProperty(Method method) => falseProperties
     .where((p) =>
-        p.interface == shortenTypeDef(method.parent) &&
+        p.interface == safeTypenameForTypeDef(method.parent) &&
         p.property == method.name)
     .isNotEmpty;
 
 bool isExcludedSetProperty(Method method) => falseProperties
     .where((p) =>
-        p.interface == shortenTypeDef(method.parent) &&
+        p.interface == safeTypenameForTypeDef(method.parent) &&
         p.property.replaceFirst('get', 'put') == method.name)
     .isNotEmpty;
 
@@ -230,18 +196,4 @@ String stripLeadingUnderscores(String name) {
     }
   }
   return name;
-}
-
-/// Takes a type and makes sure it is accessible by stripping off any private
-/// modifiers.
-///
-/// For example, `Pointer<_alljoyn_abouticon_handle>` should become
-/// `Pointer<alljoyn_abouticon_handle>`.
-String safeTypename(String name) {
-  if (name.startsWith('Pointer<')) {
-    final wrappedType = stripPointer(name);
-    return 'Pointer<${safeTypename(wrappedType)}>';
-  }
-
-  return stripLeadingUnderscores(name);
 }

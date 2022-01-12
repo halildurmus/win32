@@ -1,3 +1,11 @@
+## 2.3.2
+
+- Added CreateDIBSection per request.
+- Upgraded to latest published Windows metadata from Microsoft, which modifies
+  the signature of some registry-related APIs from Int32 to Uint32 for better
+  accuracy with the original API.
+- Updated to the latest code generator, ported back from the v3 code.
+
 ## 2.3.1
 
 - Use automatic code generator for most structs. This may be a breaking change

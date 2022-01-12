@@ -3,6 +3,7 @@ import 'package:winmd/winmd.dart';
 import '../v3/exclusions.dart';
 import 'method.dart';
 import 'property.dart';
+import 'safenames.dart';
 import 'utils.dart';
 
 class InterfaceProjection {
@@ -58,11 +59,12 @@ class InterfaceProjection {
     return projection;
   }
 
-  String get shortName => stripLeadingUnderscores(shortenTypeDef(typeDef));
+  String get shortName =>
+      stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef));
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
-      return shortenTypeDef(typeDef.interfaces.first);
+      return safeIdentifierForTypeDef(typeDef.interfaces.first);
     }
     return '';
   }
@@ -87,7 +89,7 @@ class InterfaceProjection {
     }
   }
 
-  // TODO: Find duplicate
+  // TODO: Find duplicates. This is the "correct" one.
   Set<String> importsForClass() {
     final importList = <String>{};
 
@@ -98,19 +100,13 @@ class InterfaceProjection {
         final import = getImportForTypeIdentifier(param.typeIdentifier);
         if (import != null) importList.add(import);
 
-        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>)
-        if (param.typeIdentifier.typeArg != null) {
-          final import =
-              getImportForTypeIdentifier(param.typeIdentifier.typeArg!);
+        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>). Keep
+        // unwrapping until there are no types left.
+        var refType = param.typeIdentifier;
+        while (refType.typeArg != null) {
+          refType = refType.typeArg!;
+          final import = getImportForTypeIdentifier(refType);
           if (import != null) importList.add(import);
-
-          // Add imports for a type within a double pointer (e.g.
-          // Pointer<Pointer<VARIANT>>)
-          if (param.typeIdentifier.typeArg!.typeArg != null) {
-            final import = getImportForTypeIdentifier(
-                param.typeIdentifier.typeArg!.typeArg!);
-            if (import != null) importList.add(import);
-          }
         }
       }
     }
@@ -124,7 +120,10 @@ class InterfaceProjection {
 
   String get importHeader {
     final imports = {interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == '');
+      ..removeWhere((item) => item == '')
+      // TODO: Use exclusions.dart for these next two lines
+      ..removeWhere((item) => item.endsWith('ICondition.dart'))
+      ..removeWhere((item) => item.endsWith('IStemmer.dart'));
     return imports.map((import) => "import '$pathToSrc$import';").join('\n');
   }
 
@@ -184,6 +183,7 @@ class InterfaceProjection {
     return '''
       $header
       $importHeader
+      ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
 
       /// {@category Interface}

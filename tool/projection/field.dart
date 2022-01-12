@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
 
@@ -8,10 +9,10 @@ import 'utils.dart';
 /// Fields are a tuple of a type and a name.
 class FieldProjection {
   final Field field;
-  late String fieldName;
+  late final String fieldName;
 
   FieldProjection(this.field) {
-    fieldName = safeName(field.name);
+    fieldName = safeIdentifierForString(field.name);
   }
 
   String _printCharArray(TypeProjection typeProjection) {
@@ -61,7 +62,7 @@ class FieldProjection {
     //
     // Otherwise strip it so that it's accessible from outside the library.
     var dartType =
-        safeTypename(stripLeadingUnderscores(typeProjection.dartType));
+        safeTypenameForString(stripLeadingUnderscores(typeProjection.dartType));
 
     if (field.typeIdentifier.type?.isNested == true) {
       dartType = '_${stripLeadingUnderscores(typeProjection.dartType)}';

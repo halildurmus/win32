@@ -4,7 +4,7 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
 import '../projection/callback.dart';
-import 'exclusions.dart';
+import 'generate.dart';
 import 'win32_functions.dart';
 
 const callbacksFileHeader = '''
@@ -28,32 +28,23 @@ import 'structs.g.dart';
 ''';
 
 void generateCallbacksFile(File file, List<TypeDef> callbacks) {
-  final imports = <String>{};
-  final buffer = StringBuffer();
-
+  final importList = {'combase.dart', 'guid.dart'};
   for (final callback in callbacks) {
-    buffer.writeln(CallbackProjection(callback).toString());
-
     final invokeMethod = callback.findMethod('Invoke');
     if (invokeMethod != null) {
-      imports.addAll(importsForFunction(invokeMethod));
+      importList.addAll(importsForFunction(invokeMethod));
     }
   }
+  final importDeclarations = importList
+      .map((import) => "import '${relativePathToSrcDirectory(file)}$import';");
 
-  if (callbacks.isNotEmpty) {
-    final writer = file.openSync(mode: FileMode.writeOnly);
-    writer.writeStringSync(callbacksFileHeader);
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-    writer.writeStringSync(
-        "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-    for (final import in imports) {
-      if (!excludedImports.contains(import)) {
-        writer.writeStringSync(
-            "import '${relativePathToSrcDirectory(file)}$import';\n");
-      }
-    }
-    writer.writeStringSync(buffer.toString());
-    writer.closeSync();
-  }
+  final callbackProjections = callbacks.map(CallbackProjection.new);
+
+  final callbacksFile = [
+    callbacksFileHeader,
+    ...importDeclarations,
+    ...callbackProjections
+  ].join();
+
+  file.writeAsStringSync(formatter.format(callbacksFile));
 }

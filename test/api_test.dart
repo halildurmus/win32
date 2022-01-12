@@ -164,6 +164,20 @@ void main() {
               Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
       expect(CreateDIBPatternBrushPt, isA<Function>());
     });
+    test('Can instantiate CreateDIBSection', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateDIBSection = gdi32.lookupFunction<
+          IntPtr Function(IntPtr hdc, Pointer<BITMAPINFO> pbmi, Uint32 usage,
+              Pointer<Pointer> ppvBits, IntPtr hSection, Uint32 offset),
+          int Function(
+              int hdc,
+              Pointer<BITMAPINFO> pbmi,
+              int usage,
+              Pointer<Pointer> ppvBits,
+              int hSection,
+              int offset)>('CreateDIBSection');
+      expect(CreateDIBSection, isA<Function>());
+    });
     test('Can instantiate CreateEllipticRgn', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateEllipticRgn = gdi32.lookupFunction<

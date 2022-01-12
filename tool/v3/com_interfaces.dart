@@ -4,7 +4,9 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/class.dart';
 import '../projection/interface.dart';
-import '../projection/utils.dart';
+import '../projection/safenames.dart';
+import 'exclusions.dart';
+import 'generate.dart';
 
 void generateInterfaceFiles(
     Directory directory, List<TypeDef> interfaces, Scope scope) {
@@ -15,18 +17,19 @@ void generateInterfaceFiles(
     InterfaceProjection interfaceProjection;
     interfaceProjection = InterfaceProjection(typeDef);
 
-    // In v2, we put classes and interfaces in the same file.
+    // We put classes and interfaces in the same file.
     final className = ClassProjection.generateClassName(typeDef);
-    if (scope.findTypeDef(className) != null) {
+    if (scope.findTypeDef(className) != null &&
+        !excludedComClasses.contains(className)) {
       interfaceProjection = ClassProjection.fromInterface(typeDef);
     }
 
     final dartClass = interfaceProjection.toString();
+    final formattedFile = formatter.format(dartClass);
 
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(interface.name));
-    final outputFile =
-        File('${directory.uri.toFilePath()}$classOutputFilename.dart');
-    outputFile.writeAsStringSync(dartClass);
+    final classOutputFilename = safeFilenameForTypeDef(interface);
+
+    File('${directory.uri.toFilePath()}$classOutputFilename.dart')
+        .writeAsStringSync(formattedFile);
   }
 }

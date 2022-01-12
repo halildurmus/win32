@@ -1,8 +1,8 @@
 import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
+import 'safenames.dart';
 import 'type.dart';
-import 'utils.dart';
 
 /// A method.
 ///
@@ -55,7 +55,7 @@ class MethodProjection {
       final overloadIndex =
           reversedOverloads.indexWhere((m) => m.token == method.token);
       if (overloadIndex > 0) {
-        return '${safeName(method.name)}_$overloadIndex';
+        return '${safeIdentifierForString(method.name)}_$overloadIndex';
       }
     }
 
@@ -65,9 +65,9 @@ class MethodProjection {
       return 'toUtf16String';
     }
 
-    // Otherwise the original name is fine. TODO: Can we remove safeName here?
-    // Do we apply it later anyway?
-    return safeName(method.name);
+    // Otherwise the original name is fine. TODO: Can we remove
+    // safeIdentifierForString here? Do we apply it later anyway?
+    return safeIdentifierForString(method.name);
   }
 
   String get methodParams =>

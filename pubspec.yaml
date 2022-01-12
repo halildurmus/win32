@@ -1,22 +1,39 @@
 name: win32
 description: A Dart library for accessing common Win32 APIs using FFI. No C required!
-version: 3.0.0
+version: 3.0.0-pre.0
 homepage: https://win32.pub
 repository: https://github.com/timsneath/win32
 issue_tracker: https://github.com/timsneath/win32/issues
 
 environment:
-  sdk: '>=2.14.0 <3.0.0'
+  sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
-  ffi: ^1.0.0
+  ffi: ^1.1.0
 
 dev_dependencies:
+  # Handle command-line arguments for development tooling
   args: ^2.3.0
-  lints: ^1.0.1
-  path: ^1.8.0
-  test: ^1.19.5
-  winmd: 1.0.20 # Pinned deliberately
 
-dependency_overrides:
-  winmd: 1.0.18 # Because this is v3
+  # FutureGroup, for use with concurrent code generation
+  async: ^2.8.2
+
+  # For formatting Dart code (APIs for performing dart format)
+  dart_style: ^2.2.1
+
+  # Help ensure that the code is well-written
+  lints: ^1.0.1
+
+  # Used for joining paths, as part of our path_provider integration test
+  path: ^1.8.0
+
+  # Running the test suite
+  test: ^1.20.1
+
+  # Windows metadata for automatically generating API signatures
+  winmd: 1.0.22 # Pinned deliberately
+
+# Uncomment when using a local copy of winmd
+# dependency_overrides:
+#   winmd:
+#     path: ../winmd

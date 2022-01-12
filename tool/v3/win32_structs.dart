@@ -4,6 +4,7 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/struct.dart';
 import '../projection/utils.dart';
+import 'generate.dart';
 import 'exclusions.dart';
 
 const structFileHeader = '''
@@ -59,30 +60,19 @@ List<String> importsForStruct(TypeDef struct) {
   return importList;
 }
 
-void generateStructsFile(File file, List<TypeDef> typedefs) {
-  final imports = <String>{};
-
-  final writer = file.openSync(mode: FileMode.writeOnly);
-  final buffer = StringBuffer();
-
-  for (final struct in typedefs) {
-    buffer.write(StructProjection(
-        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
-
-    imports.addAll(importsForStruct(struct));
+void generateStructsFile(File file, List<TypeDef> structs) {
+  final importList = {'combase.dart', 'guid.dart'};
+  for (final struct in structs) {
+    importList.addAll(importsForStruct(struct));
   }
+  final importDeclarations = importList
+      .map((import) => "import '${relativePathToSrcDirectory(file)}$import';");
 
-  writer.writeStringSync(structFileHeader);
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
-  writer.writeStringSync(
-      "import '${relativePathToSrcDirectory(file)}guid.dart';\n");
-  for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
-    }
-  }
-  writer.writeStringSync(buffer.toString());
-  writer.closeSync();
+  final structProjections = structs.map((struct) => StructProjection(
+      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name))));
+
+  final structsFile =
+      [structFileHeader, ...importDeclarations, ...structProjections].join();
+
+  file.writeAsStringSync(formatter.format(structsFile));
 }
