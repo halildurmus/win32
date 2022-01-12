@@ -136,6 +136,7 @@ export 'src/winmm.dart';
 export 'src/winscard.dart';
 export 'src/winspool.dart';
 export 'src/wlanapi.dart';
+export 'src/wslapi.dart';
 
 export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
