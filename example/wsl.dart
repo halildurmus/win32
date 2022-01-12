@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+/// Represents a configuration of an installed WSL distribution.
 class DistributionConfiguration {
   final String name;
   final int wslVersion;
@@ -24,6 +25,7 @@ bool isDistributionRegistered(String distributionName) {
   }
 }
 
+/// Get information about a specified WSL distribution.
 DistributionConfiguration getDistributionConfiguration(
     String distributionName) {
   final pDistributionName = distributionName.toNativeUtf16();
@@ -64,16 +66,16 @@ DistributionConfiguration getDistributionConfiguration(
   }
 }
 
-int runTestCommand(String distributionName) {
+/// Run a test Linux shell command on a given distribution.
+int runCommand(String distributionName, String command) {
   final pDistributionName = distributionName.toNativeUtf16();
-  final testCommand = 'uname -a'.toNativeUtf16(); // Change as appropriate
+  final pCommand = command.toNativeUtf16();
   final processHandle = calloc<HANDLE>();
   final exitCode = calloc<DWORD>();
   try {
-    // You
     final hr = WslLaunch(
         pDistributionName,
-        testCommand,
+        pCommand,
         FALSE,
         GetStdHandle(STD_INPUT_HANDLE), // redirect as appropriate
         GetStdHandle(STD_OUTPUT_HANDLE), // redirect as appropriate
@@ -85,7 +87,7 @@ int runTestCommand(String distributionName) {
     return exitCode.value;
   } finally {
     free(pDistributionName);
-    free(testCommand);
+    free(pCommand);
     free(processHandle);
     free(exitCode);
   }
@@ -106,7 +108,7 @@ void main() {
       config.environmentVariables.forEach(print);
 
       print('Test command (uname -a) reports:');
-      final exitCode = runTestCommand(distributionName);
+      final exitCode = runCommand(distributionName, 'uname -a');
       print('Command returned exit code: $exitCode');
     }
   }
