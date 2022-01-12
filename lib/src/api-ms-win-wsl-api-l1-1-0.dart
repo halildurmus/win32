@@ -18,42 +18,43 @@ import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
-final _wslapi = DynamicLibrary.open('wslapi.dll');
+final _api_ms_win_wsl_api_l1_1_0 =
+    DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
 
-/// Modifies the behavior of a distribution registered with the Windows Subsystem
-/// for Linux (WSL).
+/// Modifies the behavior of a distribution registered with the Windows
+/// Subsystem for Linux (WSL).
 ///
 /// ```c
 /// HRESULT WslConfigureDistribution(
-///   _In_  PCWSTR                  distributionName,
-///   _In_  ULONG                   defaultUID,
-///   _In_  WSL_DISTRIBUTION_FLAGS  wslDistributionFlags
+///   _In_ PCWSTR distributionName,
+///   _In_ ULONG defaultUID,
+///   WSL_DISTRIBUTION_FLAGS wslDistributionFlags
 /// );
 /// ```
 /// {@category wslapi}
 int WslConfigureDistribution(Pointer<Utf16> distributionName, int defaultUID,
-        WSL_DISTRIBUTION_FLAGS wslDistributionFlags) =>
+        int wslDistributionFlags) =>
     _WslConfigureDistribution(
         distributionName, defaultUID, wslDistributionFlags);
 
-late final _WslConfigureDistribution = _wslapi.lookupFunction<
+late final _WslConfigureDistribution =
+    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
         Int32 Function(Pointer<Utf16> distributionName, Uint32 defaultUID,
-            WSL_DISTRIBUTION_FLAGS wslDistributionFlags),
+            Uint32 wslDistributionFlags),
         int Function(Pointer<Utf16> distributionName, int defaultUID,
-            WSL_DISTRIBUTION_FLAGS wslDistributionFlags)>(
-    'WslConfigureDistribution');
+            int wslDistributionFlags)>('WslConfigureDistribution');
 
 /// Retrieves the current configuration of a distribution registered with
 /// the Windows Subsystem for Linux (WSL).
 ///
 /// ```c
 /// HRESULT WslGetDistributionConfiguration(
-///   _In_                    PCWSTR                  distributionName,
-///   _Out_                   ULONG                   *distributionVersion,
-///   _Out_                   ULONG                   *defaultUID,
-///   _Out_                   WSL_DISTRIBUTION_FLAGS  *wslDistributionFlags,
-///   _Outptr_result_buffer_  PSTR                    **defaultEnvironmentVariables,
-///   _Out_                   ULONG                   *defaultEnvironmentVariableCount
+///   _In_ PCWSTR distributionName,
+///   _Out_ ULONG *distributionVersion,
+///   _Out_ ULONG *defaultUID,
+///   _Out_ WSL_DISTRIBUTION_FLAGS *wslDistributionFlags,
+///   _Outptr_result_buffer_ PSTR **defaultEnvironmentVariables,
+///   _Out_ ULONG *defaultEnvironmentVariableCount
 /// );
 /// ```
 /// {@category wslapi}
@@ -61,8 +62,8 @@ int WslGetDistributionConfiguration(
         Pointer<Utf16> distributionName,
         Pointer<Uint32> distributionVersion,
         Pointer<Uint32> defaultUID,
-        Pointer<WSL_DISTRIBUTION_FLAGS> wslDistributionFlags,
-        Pointer<Pointer<Utf8>> defaultEnvironmentVariables,
+        Pointer<Uint32> wslDistributionFlags,
+        Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
         Pointer<Uint32> defaultEnvironmentVariableCount) =>
     _WslGetDistributionConfiguration(
         distributionName,
@@ -72,50 +73,52 @@ int WslGetDistributionConfiguration(
         defaultEnvironmentVariables,
         defaultEnvironmentVariableCount);
 
-late final _WslGetDistributionConfiguration = _wslapi.lookupFunction<
-        Int32 Function(
-            Pointer<Utf16> distributionName,
-            Pointer<Uint32> distributionVersion,
-            Pointer<Uint32> defaultUID,
-            Pointer<WSL_DISTRIBUTION_FLAGS> wslDistributionFlags,
-            Pointer<Pointer<Utf8>> defaultEnvironmentVariables,
-            Pointer<Uint32> defaultEnvironmentVariableCount),
-        int Function(
-            Pointer<Utf16> distributionName,
-            Pointer<Uint32> distributionVersion,
-            Pointer<Uint32> defaultUID,
-            Pointer<WSL_DISTRIBUTION_FLAGS> wslDistributionFlags,
-            Pointer<Pointer<Utf8>> defaultEnvironmentVariables,
-            Pointer<Uint32> defaultEnvironmentVariableCount)>(
-    'WslGetDistributionConfiguration');
+late final _WslGetDistributionConfiguration =
+    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+            Int32 Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Uint32> distributionVersion,
+                Pointer<Uint32> defaultUID,
+                Pointer<Uint32> wslDistributionFlags,
+                Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
+                Pointer<Uint32> defaultEnvironmentVariableCount),
+            int Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Uint32> distributionVersion,
+                Pointer<Uint32> defaultUID,
+                Pointer<Uint32> wslDistributionFlags,
+                Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
+                Pointer<Uint32> defaultEnvironmentVariableCount)>(
+        'WslGetDistributionConfiguration');
 
-/// Determines if a distribution is registered with the Windows Subsystem for
-/// Linux (WSL).
+/// Determines if a distribution is registered with the Windows Subsystem
+/// for Linux (WSL).
 ///
 /// ```c
 /// BOOL WslIsDistributionRegistered(
-///   _In_  PCWSTR  distributionName
+///   _In_ PCWSTR distributionName
 /// );
 /// ```
 /// {@category wslapi}
-bool WslIsDistributionRegistered(Pointer<Utf16> distributionName) =>
+int WslIsDistributionRegistered(Pointer<Utf16> distributionName) =>
     _WslIsDistributionRegistered(distributionName);
 
-late final _WslIsDistributionRegistered = _wslapi.lookupFunction<
-    Bool Function(Pointer<Utf16> distributionName),
-    bool Function(
-        Pointer<Utf16> distributionName)>('WslIsDistributionRegistered');
+late final _WslIsDistributionRegistered =
+    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+        Int32 Function(Pointer<Utf16> distributionName),
+        int Function(
+            Pointer<Utf16> distributionName)>('WslIsDistributionRegistered');
 
 /// Launches a Windows Subsystem for Linux (WSL) process in the context of
 /// a particular distribution.
 ///
 /// ```c
 /// HRESULT WslLaunch(
-///   _In_      PCWSTR  distributionName,
-///   _In_opt_  PCWSTR  command,
-///   _In_      BOOL    useCurrentWorkingDirectory,
-///   _In_      HANDLE  stdIn,
-///   _In_      HANDLE  stdOut,
+///   _In_ PCWSTR distributionName,
+///   _In_opt_ PCWSTR command,
+///   _In_ BOOL useCurrentWorkingDirectory,
+///   _In_ HANDLE stdIn,
+///   _In_ HANDLE stdOut,
 ///   _In_      HANDLE  stdErr,
 ///   _Out_     HANDLE  *process
 /// );
@@ -124,7 +127,7 @@ late final _WslIsDistributionRegistered = _wslapi.lookupFunction<
 int WslLaunch(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
-        bool useCurrentWorkingDirectory,
+        int useCurrentWorkingDirectory,
         int stdIn,
         int stdOut,
         int stdErr,
@@ -132,11 +135,11 @@ int WslLaunch(
     _WslLaunch(distributionName, command, useCurrentWorkingDirectory, stdIn,
         stdOut, stdErr, process);
 
-late final _WslLaunch = _wslapi.lookupFunction<
+late final _WslLaunch = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
-        Bool useCurrentWorkingDirectory,
+        Int32 useCurrentWorkingDirectory,
         IntPtr stdIn,
         IntPtr stdOut,
         IntPtr stdErr,
@@ -144,7 +147,7 @@ late final _WslLaunch = _wslapi.lookupFunction<
     int Function(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
-        bool useCurrentWorkingDirectory,
+        int useCurrentWorkingDirectory,
         int stdIn,
         int stdOut,
         int stdErr,
@@ -152,40 +155,42 @@ late final _WslLaunch = _wslapi.lookupFunction<
 
 /// Launches an interactive Windows Subsystem for Linux (WSL) process in
 /// the context of a particular distribution.This differs from WslLaunch in
-/// that the end user will be able to interact with the newly-created process.
+/// that the end user will be able to interact with the newly-created
+/// process.
 ///
 /// ```c
 /// HRESULT WslLaunchInteractive(
-///   _In_      PCWSTR  distributionName,
-///   _In_opt_  PCWSTR  command,
-///   _In_      BOOL    useCurrentWorkingDirectory,
-///   _Out_     DWORD   *exitCode
+///   _In_ PCWSTR distributionName,
+///   _In_opt_ command,
+///   _In_ BOOL useCurrentWorkingDirectory,
+///   _Out_ DWORD *exitCode
 /// );
 /// ```
 /// {@category wslapi}
 int WslLaunchInteractive(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
-        bool useCurrentWorkingDirectory,
+        int useCurrentWorkingDirectory,
         Pointer<Uint32> exitCode) =>
     _WslLaunchInteractive(
         distributionName, command, useCurrentWorkingDirectory, exitCode);
 
-late final _WslLaunchInteractive = _wslapi.lookupFunction<
+late final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(Pointer<Utf16> distributionName, Pointer<Utf16> command,
-        Bool useCurrentWorkingDirectory, Pointer<Uint32> exitCode),
+        Int32 useCurrentWorkingDirectory, Pointer<Uint32> exitCode),
     int Function(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
-        bool useCurrentWorkingDirectory,
+        int useCurrentWorkingDirectory,
         Pointer<Uint32> exitCode)>('WslLaunchInteractive');
 
-/// Registers a new distribution with the Windows Subsystem for Linux (WSL).
+/// Registers a new distribution with the Windows Subsystem for Linux
+/// (WSL).
 ///
 /// ```c
 /// HRESULT WslRegisterDistribution(
-///   _In_  PCWSTR  distributionName,
-///   _In_  PCWSTR  tarGzFilename
+///   _In_ PCWSTR distributionName,
+///   _In_ PCWSTR tarGzFilename
 /// );
 /// ```
 /// {@category wslapi}
@@ -193,7 +198,7 @@ int WslRegisterDistribution(
         Pointer<Utf16> distributionName, Pointer<Utf16> tarGzFilename) =>
     _WslRegisterDistribution(distributionName, tarGzFilename);
 
-late final _WslRegisterDistribution = _wslapi.lookupFunction<
+late final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(
         Pointer<Utf16> distributionName, Pointer<Utf16> tarGzFilename),
     int Function(Pointer<Utf16> distributionName,
@@ -203,13 +208,15 @@ late final _WslRegisterDistribution = _wslapi.lookupFunction<
 ///
 /// ```c
 /// HRESULT WslUnregisterDistribution(
-///   _In_  PCWSTR  distributionName
+///   _In_ PCWSTR distributionName
 /// );
 /// ```
 /// {@category wslapi}
 int WslUnregisterDistribution(Pointer<Utf16> distributionName) =>
     _WslUnregisterDistribution(distributionName);
 
-late final _WslUnregisterDistribution = _wslapi.lookupFunction<
-    Int32 Function(Pointer<Utf16> distributionName),
-    int Function(Pointer<Utf16> distributionName)>('WslUnregisterDistribution');
+late final _WslUnregisterDistribution =
+    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+        Int32 Function(Pointer<Utf16> distributionName),
+        int Function(
+            Pointer<Utf16> distributionName)>('WslUnregisterDistribution');

@@ -6,6 +6,7 @@ const winmdGenerated = [
   'api-ms-win-core-winrt-l1-1-0',
   'api-ms-win-core-winrt-string-l1-1-0',
   // 'api-ms-win-ro-typeresolution-l1-1-0',
+  'api-ms-win-wsl-api-l1-1-0',
   'bthprops',
   'comctl32',
   'comdlg32',

@@ -907,39 +907,3 @@ class RAWMOUSE extends Struct {
   set usButtonData(int value) =>
       _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData = value;
 }
-
-/// The WSL_DISTRIBUTION_FLAGS enumeration specifies the behavior of
-/// a distribution in the Windows Subsystem for Linux (WSL).
-///
-/// {@category Struct}
-class WSL_DISTRIBUTION_FLAGS extends Struct {
-  @Uint8()
-  external int value;
-
-  static int get DEFAULT =>
-      WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP ^
-      WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH ^
-      WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
-
-  bool get NONE => value == WSL_DISTRIBUTION_FLAGS_NONE;
-  bool get ENABLE_INTEROP =>
-      value & WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP ==
-      WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP;
-  bool get APPEND_NT_PATH =>
-      value & WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH ==
-      WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH;
-  bool get ENABLE_DRIVE_MOUNTING =>
-      value & WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING ==
-      WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING;
-
-  set NONE(bool _v) => value = _v ? WSL_DISTRIBUTION_FLAGS_NONE : DEFAULT;
-  set ENABLE_INTEROP(bool _v) => value = _v != ENABLE_INTEROP
-      ? value ^ WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP
-      : value;
-  set APPEND_NT_PATH(bool _v) => value = _v != APPEND_NT_PATH
-      ? value ^ WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH
-      : value;
-  set ENABLE_DRIVE_MOUNTING(bool _v) => value = _v != ENABLE_DRIVE_MOUNTING
-      ? value ^ WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING
-      : value;
-}

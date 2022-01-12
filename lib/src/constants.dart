@@ -6060,7 +6060,7 @@ class MC_COLOR_TEMPERATURE {
 
 /// Identifies monitor display technologies.
 ///
-////// {@category Enum}
+/// {@category Enum}
 class MC_DISPLAY_TECHNOLOGY_TYPE {
   static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
   static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
@@ -6075,7 +6075,7 @@ class MC_DISPLAY_TECHNOLOGY_TYPE {
 
 /// Specifies whether to set or get a monitor's red, green, or blue drive.
 ///
-////// {@category Enum}
+/// {@category Enum}
 class MC_DRIVE_TYPE {
   static const MC_RED_DRIVE = 0;
   static const MC_GREEN_DRIVE = 1;
@@ -8020,16 +8020,23 @@ const GW_HWNDPREV = 3;
 /// For more information, see Owned Windows.
 const GW_OWNER = 4;
 
-/// No flags are being supplied.
-const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
+/// The WSL_DISTRIBUTION_FLAGS enumeration specifies the behavior of a
+/// distribution in the Windows Subsystem for Linux (WSL).
+///
+/// {@category Enum}
+class WSL_DISTRIBUTION_FLAGS {
+  /// No flags are being supplied.
+  static const WSL_DISTRIBUTION_FLAGS_NONE = 0x0;
 
-/// Allow the distribution to interoperate with Windows processes (for example,
-/// the user can invoke "cmd.exe" or "notepad.exe" from within a WSL session).
-const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
+  /// Allow the distribution to interoperate with Windows processes (for
+  /// example, the user can invoke "cmd.exe" or "notepad.exe" from within a WSL
+  /// session).
+  static const WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP = 0x1;
 
-/// Add the Windows %PATH% environment variable values to WSL sessions.
-const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
+  /// Add the Windows %PATH% environment variable values to WSL sessions.
+  static const WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH = 0x2;
 
-/// Automatically mount Windows drives inside of WSL sessions (for example,
-/// "C:" will be available under "/mnt/c").
-const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
+  /// Automatically mount Windows drives inside of WSL sessions (for example,
+  /// "C:" will be available under "/mnt/c").
+  static const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
+}
