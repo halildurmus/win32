@@ -5,12 +5,12 @@ import 'package:win32/win32.dart';
 
 class DistributionConfiguration {
   final String name;
-  final int version;
+  final int wslVersion;
   final int userID;
   final int flags;
   final List<String> environmentVariables;
 
-  const DistributionConfiguration(this.name, this.version, this.userID,
+  const DistributionConfiguration(this.name, this.wslVersion, this.userID,
       this.flags, this.environmentVariables);
 }
 
@@ -30,7 +30,7 @@ DistributionConfiguration getDistributionConfiguration(
   final distributionVersion = calloc<ULONG>();
   final defaultUID = calloc<ULONG>();
   final wslDistributionFlags = calloc<ULONG>();
-  final defaultEnvironmentVariables = calloc<Pointer<Pointer<Utf8>>>();
+  final defaultEnvironmentVariables = calloc<Pointer<PSTR>>();
   final defaultEnvironmentVariableCount = calloc<ULONG>();
 
   try {
@@ -66,20 +66,21 @@ DistributionConfiguration getDistributionConfiguration(
 
 int runTestCommand(String distributionName) {
   final pDistributionName = distributionName.toNativeUtf16();
-  final testCommand = 'uname -a'.toNativeUtf16();
+  final testCommand = 'uname -a'.toNativeUtf16(); // Change as appropriate
   final processHandle = calloc<HANDLE>();
   final exitCode = calloc<DWORD>();
   try {
+    // You
     final hr = WslLaunch(
         pDistributionName,
         testCommand,
         FALSE,
-        GetStdHandle(STD_INPUT_HANDLE),
-        GetStdHandle(STD_OUTPUT_HANDLE),
-        GetStdHandle(STD_ERROR_HANDLE),
+        GetStdHandle(STD_INPUT_HANDLE), // redirect as appropriate
+        GetStdHandle(STD_OUTPUT_HANDLE), // redirect as appropriate
+        GetStdHandle(STD_ERROR_HANDLE), // redirect as appropriate
         processHandle);
     if (FAILED(hr)) throw WindowsException(hr);
-    WaitForSingleObject(processHandle.value, 10000000);
+    WaitForSingleObject(processHandle.value, INFINITE);
     GetExitCodeProcess(processHandle.value, exitCode);
     return exitCode.value;
   } finally {
@@ -95,10 +96,11 @@ void main() {
     if (isDistributionRegistered(distributionName)) {
       final config = getDistributionConfiguration(distributionName);
       print('Distribution: $distributionName');
-      print('Version: ${config.version}');
+      print('Version: ${config.wslVersion}');
       print('Environment variables: ');
       config.environmentVariables.forEach(print);
 
+      print('Test command (uname -a) reports:');
       final exitCode = runTestCommand(distributionName);
       print('Command returned exit code: $exitCode');
     }

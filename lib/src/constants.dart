@@ -5202,6 +5202,9 @@ const STD_OUTPUT_HANDLE = -11;
 /// buffer, CONOUT$.
 const STD_ERROR_HANDLE = -12;
 
+/// Return only when the object is signaled.
+const INFINITE = 0xFFFFFFFF;
+
 // Input flags
 
 /// Characters read by the ReadFile or ReadConsole function are written to the
