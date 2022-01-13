@@ -786,6 +786,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateHatchBrush function creates a logical brush that has the specified hatch pattern and color."
     },
+    "CreateIcon": {
+        "prototype": "HICON CreateIcon(\n  HINSTANCE  hInstance,\n  int        nWidth,\n  int        nHeight,\n  BYTE       cPlanes,\n  BYTE       cBitsPixel,\n  const BYTE *lpbANDbits,\n  const BYTE *lpbXORbits\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates an icon that has the specified size, colors, and bit patterns."
+    },
     "CreateIoCompletionPort": {
         "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",
         "dllLibrary": "kernel32",
