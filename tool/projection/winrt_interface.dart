@@ -40,7 +40,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
 
     // if (typeDef.genericParams.isNotEmpty) {
     //   final genericParams =
-    //       typeDef.genericParams.map<String>((p) => p.name).join(', ');
+    //       typeDef.genericParams.map<String>((p) => '${p.name}, ').join();
     //   interface.shortNameWithGenericSpecifier =
     //       '${interface.shortName}<$genericParams>';
     // } else {
