@@ -1,0 +1,82 @@
+/// {@category Enum}
+class WINTRUST_DATA_PROVIDER_FLAGS {
+  static const WTD_USE_IE4_TRUST_FLAG = 0x00000001;
+  static const WTD_NO_IE4_CHAIN_FLAG = 0x00000002;
+  static const WTD_NO_POLICY_USAGE_FLAG = 0x00000004;
+  static const WTD_REVOCATION_CHECK_NONE = 0x00000010;
+  static const WTD_REVOCATION_CHECK_END_CERT = 0x00000020;
+  static const WTD_REVOCATION_CHECK_CHAIN = 0x00000040;
+  static const WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 0x00000080;
+  static const WTD_SAFER_FLAG = 0x00000100;
+  static const WTD_HASH_ONLY_FLAG = 0x00000200;
+  static const WTD_USE_DEFAULT_OSVER_CHECK = 0x00000400;
+  static const WTD_LIFETIME_SIGNING_FLAG = 0x00000800;
+  static const WTD_CACHE_ONLY_URL_RETRIEVAL = 0x00001000;
+  static const WTD_DISABLE_MD2_MD4 = 0x00002000;
+  static const WTD_MOTW = 0x00004000;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_REVOCATION_CHECKS {
+  static const WTD_REVOKE_NONE = 0x00000000;
+  static const WTD_REVOKE_WHOLECHAIN = 0x00000001;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_STATE_ACTION {
+  static const WTD_STATEACTION_IGNORE = 0x00000000;
+  static const WTD_STATEACTION_VERIFY = 0x00000001;
+  static const WTD_STATEACTION_CLOSE = 0x00000002;
+  static const WTD_STATEACTION_AUTO_CACHE = 0x00000003;
+  static const WTD_STATEACTION_AUTO_CACHE_FLUSH = 0x00000004;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_UICHOICE {
+  static const WTD_UI_ALL = 0x00000001;
+  static const WTD_UI_NONE = 0x00000002;
+  static const WTD_UI_NOBAD = 0x00000003;
+  static const WTD_UI_NOGOOD = 0x00000004;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_UICONTEXT {
+  static const WTD_UICONTEXT_EXECUTE = 0x00000000;
+  static const WTD_UICONTEXT_INSTALL = 0x00000001;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_UNION_CHOICE {
+  static const WTD_CHOICE_FILE = 0x00000001;
+  static const WTD_CHOICE_CATALOG = 0x00000002;
+  static const WTD_CHOICE_BLOB = 0x00000003;
+  static const WTD_CHOICE_SIGNER = 0x00000004;
+  static const WTD_CHOICE_CERT = 0x00000005;
+}
+
+/// {@category Enum}
+class WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION {
+  static const DWACTION_ALLOCANDFILL = 0x00000001;
+  static const DWACTION_FREE = 0x00000002;
+}
+
+/// {@category Enum}
+class WINTRUST_POLICY_FLAGS {
+  static const WTPF_TRUSTTEST = 0x00000020;
+  static const WTPF_TESTCANBEVALID = 0x00000080;
+  static const WTPF_IGNOREEXPIRATION = 0x00000100;
+  static const WTPF_IGNOREREVOKATION = 0x00000200;
+  static const WTPF_OFFLINEOK_IND = 0x00000400;
+  static const WTPF_OFFLINEOK_COM = 0x00000800;
+  static const WTPF_OFFLINEOKNBU_IND = 0x00001000;
+  static const WTPF_OFFLINEOKNBU_COM = 0x00002000;
+  static const WTPF_VERIFY_V1_OFF = 0x00010000;
+  static const WTPF_IGNOREREVOCATIONONTS = 0x00020000;
+  static const WTPF_ALLOWONLYPERTRUST = 0x00040000;
+}
+
+/// {@category Enum}
+class WINTRUST_SIGNATURE_SETTINGS_FLAGS {
+  static const WSS_VERIFY_SPECIFIC = 0x00000001;
+  static const WSS_GET_SECONDARY_SIG_COUNT = 0x00000002;
+}

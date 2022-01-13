@@ -1,0 +1,9 @@
+/// {@category Enum}
+class WIAVIDEO_STATE {
+  static const WIAVIDEO_NO_VIDEO = 0x00000001;
+  static const WIAVIDEO_CREATING_VIDEO = 0x00000002;
+  static const WIAVIDEO_VIDEO_CREATED = 0x00000003;
+  static const WIAVIDEO_VIDEO_PLAYING = 0x00000004;
+  static const WIAVIDEO_VIDEO_PAUSED = 0x00000005;
+  static const WIAVIDEO_DESTROYING_VIDEO = 0x00000006;
+}

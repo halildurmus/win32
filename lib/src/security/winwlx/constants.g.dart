@@ -1,0 +1,76 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Dart representations of common structs used in the Win32 API.
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: camel_case_extensions, camel_case_types
+// ignore_for_file: directives_ordering, unnecessary_getters_setters
+// ignore_for_file: unused_field, unused_import
+
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+
+const WLX_VERSION_1_0 = 0x10000;
+const WLX_VERSION_1_1 = 0x10001;
+const WLX_VERSION_1_2 = 0x10002;
+const WLX_VERSION_1_3 = 0x10003;
+const WLX_VERSION_1_4 = 0x10004;
+const WLX_CURRENT_VERSION = 0x10004;
+const WLX_SAS_TYPE_TIMEOUT = 0x0;
+const WLX_SAS_TYPE_CTRL_ALT_DEL = 0x1;
+const WLX_SAS_TYPE_SCRNSVR_TIMEOUT = 0x2;
+const WLX_SAS_TYPE_SCRNSVR_ACTIVITY = 0x3;
+const WLX_SAS_TYPE_USER_LOGOFF = 0x4;
+const WLX_SAS_TYPE_SC_INSERT = 0x5;
+const WLX_SAS_TYPE_SC_REMOVE = 0x6;
+const WLX_SAS_TYPE_AUTHENTICATED = 0x7;
+const WLX_SAS_TYPE_SC_FIRST_READER_ARRIVED = 0x8;
+const WLX_SAS_TYPE_SC_LAST_READER_REMOVED = 0x9;
+const WLX_SAS_TYPE_SWITCHUSER = 0xa;
+const WLX_SAS_TYPE_MAX_MSFT_VALUE = 0x7f;
+const WLX_LOGON_OPT_NO_PROFILE = 0x1;
+const WLX_PROFILE_TYPE_V1_0 = 0x1;
+const WLX_PROFILE_TYPE_V2_0 = 0x2;
+const WLX_SAS_ACTION_LOGON = 0x1;
+const WLX_SAS_ACTION_NONE = 0x2;
+const WLX_SAS_ACTION_LOCK_WKSTA = 0x3;
+const WLX_SAS_ACTION_LOGOFF = 0x4;
+const WLX_SAS_ACTION_PWD_CHANGED = 0x6;
+const WLX_SAS_ACTION_TASKLIST = 0x7;
+const WLX_SAS_ACTION_UNLOCK_WKSTA = 0x8;
+const WLX_SAS_ACTION_FORCE_LOGOFF = 0x9;
+const WLX_SAS_ACTION_SHUTDOWN_SLEEP = 0xc;
+const WLX_SAS_ACTION_SHUTDOWN_SLEEP2 = 0xd;
+const WLX_SAS_ACTION_SHUTDOWN_HIBERNATE = 0xe;
+const WLX_SAS_ACTION_RECONNECTED = 0xf;
+const WLX_SAS_ACTION_DELAYED_FORCE_LOGOFF = 0x10;
+const WLX_SAS_ACTION_SWITCH_CONSOLE = 0x11;
+const WLX_WM_SAS = 0x659;
+const WLX_DLG_SAS = 0x65;
+const WLX_DLG_INPUT_TIMEOUT = 0x66;
+const WLX_DLG_SCREEN_SAVER_TIMEOUT = 0x67;
+const WLX_DLG_USER_LOGOFF = 0x68;
+const WLX_DIRECTORY_LENGTH = 0x100;
+const WLX_CREDENTIAL_TYPE_V1_0 = 0x1;
+const WLX_CREDENTIAL_TYPE_V2_0 = 0x2;
+const WLX_CONSOLESWITCHCREDENTIAL_TYPE_V1_0 = 0x1;
+const STATUSMSG_OPTION_NOANIMATION = 0x1;
+const STATUSMSG_OPTION_SETFOREGROUND = 0x2;
+const WLX_DESKTOP_NAME = 0x1;
+const WLX_DESKTOP_HANDLE = 0x2;
+const WLX_CREATE_INSTANCE_ONLY = 0x1;
+const WLX_CREATE_USER = 0x2;
+const WLX_OPTION_USE_CTRL_ALT_DEL = 0x1;
+const WLX_OPTION_CONTEXT_POINTER = 0x2;
+const WLX_OPTION_USE_SMART_CARD = 0x3;
+const WLX_OPTION_FORCE_LOGOFF_TIME = 0x4;
+const WLX_OPTION_IGNORE_AUTO_LOGON = 0x8;
+const WLX_OPTION_NO_SWITCH_ON_SAS = 0x9;
+const WLX_OPTION_SMART_CARD_PRESENT = 0x10001;
+const WLX_OPTION_SMART_CARD_INFO = 0x10002;
+const WLX_OPTION_DISPATCH_TABLE_SIZE = 0x10003;

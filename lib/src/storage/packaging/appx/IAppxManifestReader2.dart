@@ -1,0 +1,53 @@
+// IAppxManifestReader2.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../../../combase.dart';
+import '../../../constants.dart';
+import '../../../exceptions.dart';
+import '../../../guid.dart';
+import '../../../macros.dart';
+import '../../../ole32.dart';
+import '../../../utils.dart';
+
+import '../../../storage/packaging/appx/IAppxManifestReader.dart';
+import '../../../storage/packaging/appx/IAppxManifestQualifiedResourcesEnumerator.dart';
+import '../../../foundation/structs.g.dart';
+
+/// @nodoc
+const IID_IAppxManifestReader2 = '{D06F67BC-B31D-4EBA-A8AF-638E73E77B4D}';
+
+/// {@category Interface}
+/// {@category com}
+class IAppxManifestReader2 extends IAppxManifestReader {
+  // vtable begins at 12, is 1 entries long.
+  IAppxManifestReader2(Pointer<COMObject> ptr) : super(ptr);
+
+  int GetQualifiedResources(
+    Pointer<Pointer<COMObject>> resources,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> resources,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> resources,
+          )>()(
+        ptr.ref.lpVtbl,
+        resources,
+      );
+}

@@ -1,0 +1,46 @@
+/// {@category Enum}
+class SECURITY_INFO_PAGE_FLAGS {
+  static const SI_ADVANCED = 0x00000010;
+  static const SI_EDIT_AUDITS = 0x00000002;
+  static const SI_EDIT_PROPERTIES = 0x00000080;
+}
+
+/// {@category Enum}
+class SI_OBJECT_INFO_FLAGS {
+  static const SI_AUDITS_ELEVATION_REQUIRED = 0x02000000;
+  static const SI_DISABLE_DENY_ACE = 0x80000000;
+  static const SI_EDIT_EFFECTIVE = 0x00020000;
+  static const SI_ENABLE_CENTRAL_POLICY = 0x40000000;
+  static const SI_ENABLE_EDIT_ATTRIBUTE_CONDITION = 0x20000000;
+  static const SI_MAY_WRITE = 0x10000000;
+  static const SI_NO_ADDITIONAL_PERMISSION = 0x00200000;
+  static const SI_OWNER_ELEVATION_REQUIRED = 0x04000000;
+  static const SI_PERMS_ELEVATION_REQUIRED = 0x01000000;
+  static const SI_RESET_DACL = 0x00040000;
+  static const SI_RESET_OWNER = 0x00100000;
+  static const SI_RESET_SACL = 0x00080000;
+  static const SI_SCOPE_ELEVATION_REQUIRED = 0x08000000;
+  static const SI_VIEW_ONLY = 0x00400000;
+}
+
+/// {@category Enum}
+class SI_PAGE_ACTIVATED {
+  static const SI_SHOW_DEFAULT = 0x00000000;
+  static const SI_SHOW_PERM_ACTIVATED = 0x00000001;
+  static const SI_SHOW_AUDIT_ACTIVATED = 0x00000002;
+  static const SI_SHOW_OWNER_ACTIVATED = 0x00000003;
+  static const SI_SHOW_EFFECTIVE_ACTIVATED = 0x00000004;
+  static const SI_SHOW_SHARE_ACTIVATED = 0x00000005;
+  static const SI_SHOW_CENTRAL_POLICY_ACTIVATED = 0x00000006;
+}
+
+/// {@category Enum}
+class SI_PAGE_TYPE {
+  static const SI_PAGE_PERM = 0x00000000;
+  static const SI_PAGE_ADVPERM = 0x00000001;
+  static const SI_PAGE_AUDIT = 0x00000002;
+  static const SI_PAGE_OWNER = 0x00000003;
+  static const SI_PAGE_EFFECTIVE = 0x00000004;
+  static const SI_PAGE_TAKEOWNERSHIP = 0x00000005;
+  static const SI_PAGE_SHARE = 0x00000006;
+}

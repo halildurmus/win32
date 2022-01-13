@@ -1,0 +1,147 @@
+// IConnectionPoint.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../../combase.dart';
+import '../../constants.dart';
+import '../../exceptions.dart';
+import '../../guid.dart';
+import '../../macros.dart';
+import '../../ole32.dart';
+import '../../utils.dart';
+
+import '../../system/com/IUnknown.dart';
+import '../../foundation/structs.g.dart';
+import '../../system/com/IConnectionPointContainer.dart';
+import '../../specialTypes.dart';
+import '../../system/com/IEnumConnections.dart';
+
+/// @nodoc
+const IID_IConnectionPoint = '{B196B286-BAB4-101A-B69C-00AA00341D07}';
+
+/// {@category Interface}
+/// {@category com}
+class IConnectionPoint extends IUnknown {
+  // vtable begins at 3, is 5 entries long.
+  IConnectionPoint(Pointer<COMObject> ptr) : super(ptr);
+
+  int GetConnectionInterface(
+    Pointer<GUID> pIID,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> pIID,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> pIID,
+          )>()(
+        ptr.ref.lpVtbl,
+        pIID,
+      );
+
+  int GetConnectionPointContainer(
+    Pointer<Pointer<COMObject>> ppCPC,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppCPC,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppCPC,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppCPC,
+      );
+
+  int Advise(
+    Pointer<COMObject> pUnkSink,
+    Pointer<Uint32> pdwCookie,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> pUnkSink,
+            Pointer<Uint32> pdwCookie,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> pUnkSink,
+            Pointer<Uint32> pdwCookie,
+          )>()(
+        ptr.ref.lpVtbl,
+        pUnkSink,
+        pdwCookie,
+      );
+
+  int Unadvise(
+    int dwCookie,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Uint32 dwCookie,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int dwCookie,
+          )>()(
+        ptr.ref.lpVtbl,
+        dwCookie,
+      );
+
+  int EnumConnections(
+    Pointer<Pointer<COMObject>> ppEnum,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppEnum,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppEnum,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppEnum,
+      );
+}

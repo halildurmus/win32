@@ -1,0 +1,541 @@
+/// {@category Enum}
+class ADVF {
+  static const ADVF_NODATA = 0x00000001;
+  static const ADVF_PRIMEFIRST = 0x00000002;
+  static const ADVF_ONLYONCE = 0x00000004;
+  static const ADVF_DATAONSTOP = 0x00000040;
+  static const ADVFCACHE_NOHANDLER = 0x00000008;
+  static const ADVFCACHE_FORCEBUILTIN = 0x00000010;
+  static const ADVFCACHE_ONSAVE = 0x00000020;
+}
+
+/// {@category Enum}
+class APTTYPE {
+  static const APTTYPE_CURRENT = 0xffffffff;
+  static const APTTYPE_STA = 0x00000000;
+  static const APTTYPE_MTA = 0x00000001;
+  static const APTTYPE_NA = 0x00000002;
+  static const APTTYPE_MAINSTA = 0x00000003;
+}
+
+/// {@category Enum}
+class APTTYPEQUALIFIER {
+  static const APTTYPEQUALIFIER_NONE = 0x00000000;
+  static const APTTYPEQUALIFIER_IMPLICIT_MTA = 0x00000001;
+  static const APTTYPEQUALIFIER_NA_ON_MTA = 0x00000002;
+  static const APTTYPEQUALIFIER_NA_ON_STA = 0x00000003;
+  static const APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA = 0x00000004;
+  static const APTTYPEQUALIFIER_NA_ON_MAINSTA = 0x00000005;
+  static const APTTYPEQUALIFIER_APPLICATION_STA = 0x00000006;
+  static const APTTYPEQUALIFIER_RESERVED_1 = 0x00000007;
+}
+
+/// {@category Enum}
+class ApplicationType {
+  static const ServerApplication = 0x00000000;
+  static const LibraryApplication = 0x00000001;
+}
+
+/// {@category Enum}
+class BINDINFOF {
+  static const BINDINFOF_URLENCODESTGMEDDATA = 0x00000001;
+  static const BINDINFOF_URLENCODEDEXTRAINFO = 0x00000002;
+}
+
+/// {@category Enum}
+class BIND_FLAGS {
+  static const BIND_MAYBOTHERUSER = 0x00000001;
+  static const BIND_JUSTTESTEXISTENCE = 0x00000002;
+}
+
+/// {@category Enum}
+class CALLCONV {
+  static const CC_FASTCALL = 0x00000000;
+  static const CC_CDECL = 0x00000001;
+  static const CC_MSCPASCAL = 0x00000002;
+  static const CC_PASCAL = 0x00000002;
+  static const CC_MACPASCAL = 0x00000003;
+  static const CC_STDCALL = 0x00000004;
+  static const CC_FPFASTCALL = 0x00000005;
+  static const CC_SYSCALL = 0x00000006;
+  static const CC_MPWCDECL = 0x00000007;
+  static const CC_MPWPASCAL = 0x00000008;
+  static const CC_MAX = 0x00000009;
+}
+
+/// {@category Enum}
+class CALLTYPE {
+  static const CALLTYPE_TOPLEVEL = 0x00000001;
+  static const CALLTYPE_NESTED = 0x00000002;
+  static const CALLTYPE_ASYNC = 0x00000003;
+  static const CALLTYPE_TOPLEVEL_CALLPENDING = 0x00000004;
+  static const CALLTYPE_ASYNC_CALLPENDING = 0x00000005;
+}
+
+/// {@category Enum}
+class CLSCTX {
+  static const CLSCTX_INPROC_SERVER = 0x00000001;
+  static const CLSCTX_INPROC_HANDLER = 0x00000002;
+  static const CLSCTX_LOCAL_SERVER = 0x00000004;
+  static const CLSCTX_INPROC_SERVER16 = 0x00000008;
+  static const CLSCTX_REMOTE_SERVER = 0x00000010;
+  static const CLSCTX_INPROC_HANDLER16 = 0x00000020;
+  static const CLSCTX_RESERVED1 = 0x00000040;
+  static const CLSCTX_RESERVED2 = 0x00000080;
+  static const CLSCTX_RESERVED3 = 0x00000100;
+  static const CLSCTX_RESERVED4 = 0x00000200;
+  static const CLSCTX_NO_CODE_DOWNLOAD = 0x00000400;
+  static const CLSCTX_RESERVED5 = 0x00000800;
+  static const CLSCTX_NO_CUSTOM_MARSHAL = 0x00001000;
+  static const CLSCTX_ENABLE_CODE_DOWNLOAD = 0x00002000;
+  static const CLSCTX_NO_FAILURE_LOG = 0x00004000;
+  static const CLSCTX_DISABLE_AAA = 0x00008000;
+  static const CLSCTX_ENABLE_AAA = 0x00010000;
+  static const CLSCTX_FROM_DEFAULT_CONTEXT = 0x00020000;
+  static const CLSCTX_ACTIVATE_X86_SERVER = 0x00040000;
+  static const CLSCTX_ACTIVATE_32_BIT_SERVER = 0x00040000;
+  static const CLSCTX_ACTIVATE_64_BIT_SERVER = 0x00080000;
+  static const CLSCTX_ENABLE_CLOAKING = 0x00100000;
+  static const CLSCTX_APPCONTAINER = 0x00400000;
+  static const CLSCTX_ACTIVATE_AAA_AS_IU = 0x00800000;
+  static const CLSCTX_RESERVED6 = 0x01000000;
+  static const CLSCTX_ACTIVATE_ARM32_SERVER = 0x02000000;
+  static const CLSCTX_PS_DLL = 0x80000000;
+  static const CLSCTX_ALL = 0x00000017;
+  static const CLSCTX_SERVER = 0x00000015;
+}
+
+/// {@category Enum}
+class COINIT {
+  static const COINIT_APARTMENTTHREADED = 0x00000002;
+  static const COINIT_MULTITHREADED = 0x00000000;
+  static const COINIT_DISABLE_OLE1DDE = 0x00000004;
+  static const COINIT_SPEED_OVER_MEMORY = 0x00000008;
+}
+
+/// {@category Enum}
+class COINITBASE {
+  static const COINITBASE_MULTITHREADED = 0x00000000;
+}
+
+/// {@category Enum}
+class COMSD {
+  static const SD_LAUNCHPERMISSIONS = 0x00000000;
+  static const SD_ACCESSPERMISSIONS = 0x00000001;
+  static const SD_LAUNCHRESTRICTIONS = 0x00000002;
+  static const SD_ACCESSRESTRICTIONS = 0x00000003;
+}
+
+/// {@category Enum}
+class COWAIT_FLAGS {
+  static const COWAIT_DEFAULT = 0x00000000;
+  static const COWAIT_WAITALL = 0x00000001;
+  static const COWAIT_ALERTABLE = 0x00000002;
+  static const COWAIT_INPUTAVAILABLE = 0x00000004;
+  static const COWAIT_DISPATCH_CALLS = 0x00000008;
+  static const COWAIT_DISPATCH_WINDOW_MESSAGES = 0x00000010;
+}
+
+/// {@category Enum}
+class CO_MARSHALING_CONTEXT_ATTRIBUTES {
+  static const CO_MARSHALING_SOURCE_IS_APP_CONTAINER = 0x00000000;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_1 = 0x80000000;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_2 = 0x80000001;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_3 = 0x80000002;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_4 = 0x80000003;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_5 = 0x80000004;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_6 = 0x80000005;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_7 = 0x80000006;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_8 = 0x80000007;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_9 = 0x80000008;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_10 = 0x80000009;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_11 = 0x8000000a;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_12 = 0x8000000b;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_13 = 0x8000000c;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_14 = 0x8000000d;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_15 = 0x8000000e;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_16 = 0x8000000f;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_17 = 0x80000010;
+  static const CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18 = 0x80000011;
+}
+
+/// {@category Enum}
+class CWMO_FLAGS {
+  static const CWMO_DEFAULT = 0x00000000;
+  static const CWMO_DISPATCH_CALLS = 0x00000001;
+  static const CWMO_DISPATCH_WINDOW_MESSAGES = 0x00000002;
+}
+
+/// {@category Enum}
+class DATADIR {
+  static const DATADIR_GET = 0x00000001;
+  static const DATADIR_SET = 0x00000002;
+}
+
+/// {@category Enum}
+class DCOM_CALL_STATE {
+  static const DCOM_NONE = 0x00000000;
+  static const DCOM_CALL_COMPLETE = 0x00000001;
+  static const DCOM_CALL_CANCELED = 0x00000002;
+}
+
+/// {@category Enum}
+class DESCKIND {
+  static const DESCKIND_NONE = 0x00000000;
+  static const DESCKIND_FUNCDESC = 0x00000001;
+  static const DESCKIND_VARDESC = 0x00000002;
+  static const DESCKIND_TYPECOMP = 0x00000003;
+  static const DESCKIND_IMPLICITAPPOBJ = 0x00000004;
+  static const DESCKIND_MAX = 0x00000005;
+}
+
+/// {@category Enum}
+class DVASPECT {
+  static const DVASPECT_CONTENT = 0x00000001;
+  static const DVASPECT_THUMBNAIL = 0x00000002;
+  static const DVASPECT_ICON = 0x00000004;
+  static const DVASPECT_DOCPRINT = 0x00000008;
+}
+
+/// {@category Enum}
+class EOLE_AUTHENTICATION_CAPABILITIES {
+  static const EOAC_NONE = 0x00000000;
+  static const EOAC_MUTUAL_AUTH = 0x00000001;
+  static const EOAC_STATIC_CLOAKING = 0x00000020;
+  static const EOAC_DYNAMIC_CLOAKING = 0x00000040;
+  static const EOAC_ANY_AUTHORITY = 0x00000080;
+  static const EOAC_MAKE_FULLSIC = 0x00000100;
+  static const EOAC_DEFAULT = 0x00000800;
+  static const EOAC_SECURE_REFS = 0x00000002;
+  static const EOAC_ACCESS_CONTROL = 0x00000004;
+  static const EOAC_APPID = 0x00000008;
+  static const EOAC_DYNAMIC = 0x00000010;
+  static const EOAC_REQUIRE_FULLSIC = 0x00000200;
+  static const EOAC_AUTO_IMPERSONATE = 0x00000400;
+  static const EOAC_DISABLE_AAA = 0x00001000;
+  static const EOAC_NO_CUSTOM_MARSHAL = 0x00002000;
+  static const EOAC_RESERVED1 = 0x00004000;
+}
+
+/// {@category Enum}
+class EXTCONN {
+  static const EXTCONN_STRONG = 0x00000001;
+  static const EXTCONN_WEAK = 0x00000002;
+  static const EXTCONN_CALLABLE = 0x00000004;
+}
+
+/// {@category Enum}
+class FUNCKIND {
+  static const FUNC_VIRTUAL = 0x00000000;
+  static const FUNC_PUREVIRTUAL = 0x00000001;
+  static const FUNC_NONVIRTUAL = 0x00000002;
+  static const FUNC_STATIC = 0x00000003;
+  static const FUNC_DISPATCH = 0x00000004;
+}
+
+/// {@category Enum}
+class GLOBALOPT_EH_VALUES {
+  static const COMGLB_EXCEPTION_HANDLE = 0x00000000;
+  static const COMGLB_EXCEPTION_DONOT_HANDLE_FATAL = 0x00000001;
+  static const COMGLB_EXCEPTION_DONOT_HANDLE = 0x00000001;
+  static const COMGLB_EXCEPTION_DONOT_HANDLE_ANY = 0x00000002;
+}
+
+/// {@category Enum}
+class GLOBALOPT_PROPERTIES {
+  static const COMGLB_EXCEPTION_HANDLING = 0x00000001;
+  static const COMGLB_APPID = 0x00000002;
+  static const COMGLB_RPC_THREADPOOL_SETTING = 0x00000003;
+  static const COMGLB_RO_SETTINGS = 0x00000004;
+  static const COMGLB_UNMARSHALING_POLICY = 0x00000005;
+  static const COMGLB_PROPERTIES_RESERVED1 = 0x00000006;
+  static const COMGLB_PROPERTIES_RESERVED2 = 0x00000007;
+  static const COMGLB_PROPERTIES_RESERVED3 = 0x00000008;
+}
+
+/// {@category Enum}
+class GLOBALOPT_RO_FLAGS {
+  static const COMGLB_STA_MODALLOOP_REMOVE_TOUCH_MESSAGES = 0x00000001;
+  static const COMGLB_STA_MODALLOOP_SHARED_QUEUE_REMOVE_INPUT_MESSAGES =
+      0x00000002;
+  static const COMGLB_STA_MODALLOOP_SHARED_QUEUE_DONOT_REMOVE_INPUT_MESSAGES =
+      0x00000004;
+  static const COMGLB_FAST_RUNDOWN = 0x00000008;
+  static const COMGLB_RESERVED1 = 0x00000010;
+  static const COMGLB_RESERVED2 = 0x00000020;
+  static const COMGLB_RESERVED3 = 0x00000040;
+  static const COMGLB_STA_MODALLOOP_SHARED_QUEUE_REORDER_POINTER_MESSAGES =
+      0x00000080;
+  static const COMGLB_RESERVED4 = 0x00000100;
+  static const COMGLB_RESERVED5 = 0x00000200;
+  static const COMGLB_RESERVED6 = 0x00000400;
+}
+
+/// {@category Enum}
+class GLOBALOPT_RPCTP_VALUES {
+  static const COMGLB_RPC_THREADPOOL_SETTING_DEFAULT_POOL = 0x00000000;
+  static const COMGLB_RPC_THREADPOOL_SETTING_PRIVATE_POOL = 0x00000001;
+}
+
+/// {@category Enum}
+class GLOBALOPT_UNMARSHALING_POLICY_VALUES {
+  static const COMGLB_UNMARSHALING_POLICY_NORMAL = 0x00000000;
+  static const COMGLB_UNMARSHALING_POLICY_STRONG = 0x00000001;
+  static const COMGLB_UNMARSHALING_POLICY_HYBRID = 0x00000002;
+}
+
+/// {@category Enum}
+class INVOKEKIND {
+  static const INVOKE_FUNC = 0x00000001;
+  static const INVOKE_PROPERTYGET = 0x00000002;
+  static const INVOKE_PROPERTYPUT = 0x00000004;
+  static const INVOKE_PROPERTYPUTREF = 0x00000008;
+}
+
+/// {@category Enum}
+class MEMCTX {
+  static const MEMCTX_TASK = 0x00000001;
+  static const MEMCTX_SHARED = 0x00000002;
+  static const MEMCTX_MACSYSTEM = 0x00000003;
+  static const MEMCTX_UNKNOWN = 0xffffffff;
+  static const MEMCTX_SAME = 0xfffffffe;
+}
+
+/// {@category Enum}
+class MKREDUCE {
+  static const MKRREDUCE_ONE = 0x00030000;
+  static const MKRREDUCE_TOUSER = 0x00020000;
+  static const MKRREDUCE_THROUGHUSER = 0x00010000;
+  static const MKRREDUCE_ALL = 0x00000000;
+}
+
+/// {@category Enum}
+class MKSYS {
+  static const MKSYS_NONE = 0x00000000;
+  static const MKSYS_GENERICCOMPOSITE = 0x00000001;
+  static const MKSYS_FILEMONIKER = 0x00000002;
+  static const MKSYS_ANTIMONIKER = 0x00000003;
+  static const MKSYS_ITEMMONIKER = 0x00000004;
+  static const MKSYS_POINTERMONIKER = 0x00000005;
+  static const MKSYS_CLASSMONIKER = 0x00000007;
+  static const MKSYS_OBJREFMONIKER = 0x00000008;
+  static const MKSYS_SESSIONMONIKER = 0x00000009;
+  static const MKSYS_LUAMONIKER = 0x0000000a;
+}
+
+/// {@category Enum}
+class MSHCTX {
+  static const MSHCTX_LOCAL = 0x00000000;
+  static const MSHCTX_NOSHAREDMEM = 0x00000001;
+  static const MSHCTX_DIFFERENTMACHINE = 0x00000002;
+  static const MSHCTX_INPROC = 0x00000003;
+  static const MSHCTX_CROSSCTX = 0x00000004;
+  static const MSHCTX_CONTAINER = 0x00000005;
+}
+
+/// {@category Enum}
+class MSHLFLAGS {
+  static const MSHLFLAGS_NORMAL = 0x00000000;
+  static const MSHLFLAGS_TABLESTRONG = 0x00000001;
+  static const MSHLFLAGS_TABLEWEAK = 0x00000002;
+  static const MSHLFLAGS_NOPING = 0x00000004;
+  static const MSHLFLAGS_RESERVED1 = 0x00000008;
+  static const MSHLFLAGS_RESERVED2 = 0x00000010;
+  static const MSHLFLAGS_RESERVED3 = 0x00000020;
+  static const MSHLFLAGS_RESERVED4 = 0x00000040;
+}
+
+/// {@category Enum}
+class PENDINGMSG {
+  static const PENDINGMSG_CANCELCALL = 0x00000000;
+  static const PENDINGMSG_WAITNOPROCESS = 0x00000001;
+  static const PENDINGMSG_WAITDEFPROCESS = 0x00000002;
+}
+
+/// {@category Enum}
+class PENDINGTYPE {
+  static const PENDINGTYPE_TOPLEVEL = 0x00000001;
+  static const PENDINGTYPE_NESTED = 0x00000002;
+}
+
+/// {@category Enum}
+class REGCLS {
+  static const REGCLS_SINGLEUSE = 0x00000000;
+  static const REGCLS_MULTIPLEUSE = 0x00000001;
+  static const REGCLS_MULTI_SEPARATE = 0x00000002;
+  static const REGCLS_SUSPENDED = 0x00000004;
+  static const REGCLS_SURROGATE = 0x00000008;
+  static const REGCLS_AGILE = 0x00000010;
+}
+
+/// {@category Enum}
+class RPCOPT_PROPERTIES {
+  static const COMBND_RPCTIMEOUT = 0x00000001;
+  static const COMBND_SERVER_LOCALITY = 0x00000002;
+  static const COMBND_RESERVED1 = 0x00000004;
+  static const COMBND_RESERVED2 = 0x00000005;
+  static const COMBND_RESERVED3 = 0x00000008;
+  static const COMBND_RESERVED4 = 0x00000010;
+}
+
+/// {@category Enum}
+class RPCOPT_SERVER_LOCALITY_VALUES {
+  static const SERVER_LOCALITY_PROCESS_LOCAL = 0x00000000;
+  static const SERVER_LOCALITY_MACHINE_LOCAL = 0x00000001;
+  static const SERVER_LOCALITY_REMOTE = 0x00000002;
+}
+
+/// {@category Enum}
+class RPC_C_AUTHN_LEVEL {
+  static const RPC_C_AUTHN_LEVEL_DEFAULT = 0x00000000;
+  static const RPC_C_AUTHN_LEVEL_NONE = 0x00000001;
+  static const RPC_C_AUTHN_LEVEL_CONNECT = 0x00000002;
+  static const RPC_C_AUTHN_LEVEL_CALL = 0x00000003;
+  static const RPC_C_AUTHN_LEVEL_PKT = 0x00000004;
+  static const RPC_C_AUTHN_LEVEL_PKT_INTEGRITY = 0x00000005;
+  static const RPC_C_AUTHN_LEVEL_PKT_PRIVACY = 0x00000006;
+}
+
+/// {@category Enum}
+class RPC_C_IMP_LEVEL {
+  static const RPC_C_IMP_LEVEL_DEFAULT = 0x00000000;
+  static const RPC_C_IMP_LEVEL_ANONYMOUS = 0x00000001;
+  static const RPC_C_IMP_LEVEL_IDENTIFY = 0x00000002;
+  static const RPC_C_IMP_LEVEL_IMPERSONATE = 0x00000003;
+  static const RPC_C_IMP_LEVEL_DELEGATE = 0x00000004;
+}
+
+/// {@category Enum}
+class SERVERCALL {
+  static const SERVERCALL_ISHANDLED = 0x00000000;
+  static const SERVERCALL_REJECTED = 0x00000001;
+  static const SERVERCALL_RETRYLATER = 0x00000002;
+}
+
+/// {@category Enum}
+class STGTY {
+  static const STGTY_STORAGE = 0x00000001;
+  static const STGTY_STREAM = 0x00000002;
+  static const STGTY_LOCKBYTES = 0x00000003;
+  static const STGTY_PROPERTY = 0x00000004;
+}
+
+/// {@category Enum}
+class STREAM_SEEK {
+  static const STREAM_SEEK_SET = 0x00000000;
+  static const STREAM_SEEK_CUR = 0x00000001;
+  static const STREAM_SEEK_END = 0x00000002;
+}
+
+/// {@category Enum}
+class SYSKIND {
+  static const SYS_WIN16 = 0x00000000;
+  static const SYS_WIN32 = 0x00000001;
+  static const SYS_MAC = 0x00000002;
+  static const SYS_WIN64 = 0x00000003;
+}
+
+/// {@category Enum}
+class ShutdownType {
+  static const IdleShutdown = 0x00000000;
+  static const ForcedShutdown = 0x00000001;
+}
+
+/// {@category Enum}
+class THDTYPE {
+  static const THDTYPE_BLOCKMESSAGES = 0x00000000;
+  static const THDTYPE_PROCESSMESSAGES = 0x00000001;
+}
+
+/// {@category Enum}
+class TYMED {
+  static const TYMED_HGLOBAL = 0x00000001;
+  static const TYMED_FILE = 0x00000002;
+  static const TYMED_ISTREAM = 0x00000004;
+  static const TYMED_ISTORAGE = 0x00000008;
+  static const TYMED_GDI = 0x00000010;
+  static const TYMED_MFPICT = 0x00000020;
+  static const TYMED_ENHMF = 0x00000040;
+  static const TYMED_NULL = 0x00000000;
+}
+
+/// {@category Enum}
+class TYPEKIND {
+  static const TKIND_ENUM = 0x00000000;
+  static const TKIND_RECORD = 0x00000001;
+  static const TKIND_MODULE = 0x00000002;
+  static const TKIND_INTERFACE = 0x00000003;
+  static const TKIND_DISPATCH = 0x00000004;
+  static const TKIND_COCLASS = 0x00000005;
+  static const TKIND_ALIAS = 0x00000006;
+  static const TKIND_UNION = 0x00000007;
+  static const TKIND_MAX = 0x00000008;
+}
+
+/// {@category Enum}
+class TYSPEC {
+  static const TYSPEC_CLSID = 0x00000000;
+  static const TYSPEC_FILEEXT = 0x00000001;
+  static const TYSPEC_MIMETYPE = 0x00000002;
+  static const TYSPEC_FILENAME = 0x00000003;
+  static const TYSPEC_PROGID = 0x00000004;
+  static const TYSPEC_PACKAGENAME = 0x00000005;
+  static const TYSPEC_OBJECTID = 0x00000006;
+}
+
+/// {@category Enum}
+class URI_CREATE_FLAGS {
+  static const Uri_CREATE_ALLOW_RELATIVE = 0x00000001;
+  static const Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME = 0x00000002;
+  static const Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME = 0x00000004;
+  static const Uri_CREATE_NOFRAG = 0x00000008;
+  static const Uri_CREATE_NO_CANONICALIZE = 0x00000010;
+  static const Uri_CREATE_CANONICALIZE = 0x00000100;
+  static const Uri_CREATE_FILE_USE_DOS_PATH = 0x00000020;
+  static const Uri_CREATE_DECODE_EXTRA_INFO = 0x00000040;
+  static const Uri_CREATE_NO_DECODE_EXTRA_INFO = 0x00000080;
+  static const Uri_CREATE_CRACK_UNKNOWN_SCHEMES = 0x00000200;
+  static const Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES = 0x00000400;
+  static const Uri_CREATE_PRE_PROCESS_HTML_URI = 0x00000800;
+  static const Uri_CREATE_NO_PRE_PROCESS_HTML_URI = 0x00001000;
+  static const Uri_CREATE_IE_SETTINGS = 0x00002000;
+  static const Uri_CREATE_NO_IE_SETTINGS = 0x00004000;
+  static const Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS = 0x00008000;
+  static const Uri_CREATE_NORMALIZE_INTL_CHARACTERS = 0x00010000;
+  static const Uri_CREATE_CANONICALIZE_ABSOLUTE = 0x00020000;
+}
+
+/// {@category Enum}
+class Uri_PROPERTY {
+  static const Uri_PROPERTY_ABSOLUTE_URI = 0x00000000;
+  static const Uri_PROPERTY_STRING_START = 0x00000000;
+  static const Uri_PROPERTY_AUTHORITY = 0x00000001;
+  static const Uri_PROPERTY_DISPLAY_URI = 0x00000002;
+  static const Uri_PROPERTY_DOMAIN = 0x00000003;
+  static const Uri_PROPERTY_EXTENSION = 0x00000004;
+  static const Uri_PROPERTY_FRAGMENT = 0x00000005;
+  static const Uri_PROPERTY_HOST = 0x00000006;
+  static const Uri_PROPERTY_PASSWORD = 0x00000007;
+  static const Uri_PROPERTY_PATH = 0x00000008;
+  static const Uri_PROPERTY_PATH_AND_QUERY = 0x00000009;
+  static const Uri_PROPERTY_QUERY = 0x0000000a;
+  static const Uri_PROPERTY_RAW_URI = 0x0000000b;
+  static const Uri_PROPERTY_SCHEME_NAME = 0x0000000c;
+  static const Uri_PROPERTY_USER_INFO = 0x0000000d;
+  static const Uri_PROPERTY_USER_NAME = 0x0000000e;
+  static const Uri_PROPERTY_STRING_LAST = 0x0000000e;
+  static const Uri_PROPERTY_HOST_TYPE = 0x0000000f;
+  static const Uri_PROPERTY_DWORD_START = 0x0000000f;
+  static const Uri_PROPERTY_PORT = 0x00000010;
+  static const Uri_PROPERTY_SCHEME = 0x00000011;
+  static const Uri_PROPERTY_ZONE = 0x00000012;
+  static const Uri_PROPERTY_DWORD_LAST = 0x00000012;
+}
+
+/// {@category Enum}
+class VARKIND {
+  static const VAR_PERINSTANCE = 0x00000000;
+  static const VAR_STATIC = 0x00000001;
+  static const VAR_CONST = 0x00000002;
+  static const VAR_DISPATCH = 0x00000003;
+}

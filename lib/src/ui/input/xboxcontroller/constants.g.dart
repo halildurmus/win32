@@ -1,0 +1,68 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Dart representations of common structs used in the Win32 API.
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: camel_case_extensions, camel_case_types
+// ignore_for_file: directives_ordering, unnecessary_getters_setters
+// ignore_for_file: unused_field, unused_import
+
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:ffi/ffi.dart';
+
+const XINPUT_DEVTYPE_GAMEPAD = 0x1;
+const XINPUT_DEVSUBTYPE_GAMEPAD = 0x1;
+const XINPUT_DEVSUBTYPE_UNKNOWN = 0x0;
+const XINPUT_DEVSUBTYPE_WHEEL = 0x2;
+const XINPUT_DEVSUBTYPE_ARCADE_STICK = 0x3;
+const XINPUT_DEVSUBTYPE_FLIGHT_STICK = 0x4;
+const XINPUT_DEVSUBTYPE_DANCE_PAD = 0x5;
+const XINPUT_DEVSUBTYPE_GUITAR = 0x6;
+const XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE = 0x7;
+const XINPUT_DEVSUBTYPE_DRUM_KIT = 0x8;
+const XINPUT_DEVSUBTYPE_GUITAR_BASS = 0xb;
+const XINPUT_DEVSUBTYPE_ARCADE_PAD = 0x13;
+const XINPUT_CAPS_VOICE_SUPPORTED = 0x4;
+const XINPUT_CAPS_FFB_SUPPORTED = 0x1;
+const XINPUT_CAPS_WIRELESS = 0x2;
+const XINPUT_CAPS_PMD_SUPPORTED = 0x8;
+const XINPUT_CAPS_NO_NAVIGATION = 0x10;
+const XINPUT_GAMEPAD_DPAD_UP = 0x1;
+const XINPUT_GAMEPAD_DPAD_DOWN = 0x2;
+const XINPUT_GAMEPAD_DPAD_LEFT = 0x4;
+const XINPUT_GAMEPAD_DPAD_RIGHT = 0x8;
+const XINPUT_GAMEPAD_START = 0x10;
+const XINPUT_GAMEPAD_BACK = 0x20;
+const XINPUT_GAMEPAD_LEFT_THUMB = 0x40;
+const XINPUT_GAMEPAD_RIGHT_THUMB = 0x80;
+const XINPUT_GAMEPAD_LEFT_SHOULDER = 0x100;
+const XINPUT_GAMEPAD_RIGHT_SHOULDER = 0x200;
+const XINPUT_GAMEPAD_A = 0x1000;
+const XINPUT_GAMEPAD_B = 0x2000;
+const XINPUT_GAMEPAD_X = 0x4000;
+const XINPUT_GAMEPAD_Y = 0x8000;
+const XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = 0x1ea9;
+const XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = 0x21f1;
+const XINPUT_GAMEPAD_TRIGGER_THRESHOLD = 0x1e;
+const XINPUT_FLAG_GAMEPAD = 0x1;
+const BATTERY_DEVTYPE_GAMEPAD = 0x0;
+const BATTERY_DEVTYPE_HEADSET = 0x1;
+const BATTERY_TYPE_DISCONNECTED = 0x0;
+const BATTERY_TYPE_WIRED = 0x1;
+const BATTERY_TYPE_ALKALINE = 0x2;
+const BATTERY_TYPE_NIMH = 0x3;
+const BATTERY_TYPE_UNKNOWN = 0xff;
+const BATTERY_LEVEL_EMPTY = 0x0;
+const BATTERY_LEVEL_LOW = 0x1;
+const BATTERY_LEVEL_MEDIUM = 0x2;
+const BATTERY_LEVEL_FULL = 0x3;
+const XUSER_MAX_COUNT = 0x4;
+const XUSER_INDEX_ANY = 0xff;
+const XINPUT_KEYSTROKE_KEYDOWN = 0x1;
+const XINPUT_KEYSTROKE_KEYUP = 0x2;
+const XINPUT_KEYSTROKE_REPEAT = 0x4;

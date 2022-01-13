@@ -1,0 +1,140 @@
+// IPersistMemory.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../../combase.dart';
+import '../../constants.dart';
+import '../../exceptions.dart';
+import '../../guid.dart';
+import '../../macros.dart';
+import '../../ole32.dart';
+import '../../utils.dart';
+
+import '../../system/com/IPersist.dart';
+import '../../foundation/structs.g.dart';
+
+/// @nodoc
+const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';
+
+/// {@category Interface}
+/// {@category com}
+class IPersistMemory extends IPersist {
+  // vtable begins at 4, is 5 entries long.
+  IPersistMemory(Pointer<COMObject> ptr) : super(ptr);
+
+  int IsDirty() => ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
+
+  int Load(
+    Pointer pMem,
+    int cbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer pMem,
+            Uint32 cbSize,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer pMem,
+            int cbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pMem,
+        cbSize,
+      );
+
+  int Save(
+    Pointer pMem,
+    int fClearDirty,
+    int cbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer pMem,
+            Int32 fClearDirty,
+            Uint32 cbSize,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer pMem,
+            int fClearDirty,
+            int cbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pMem,
+        fClearDirty,
+        cbSize,
+      );
+
+  int GetSizeMax(
+    Pointer<Uint32> pCbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> pCbSize,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> pCbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pCbSize,
+      );
+
+  int InitNew() => ptr.ref.lpVtbl.value
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
+}

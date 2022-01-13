@@ -1,0 +1,147 @@
+// ISpellingError.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../combase.dart';
+import '../constants.dart';
+import '../exceptions.dart';
+import '../guid.dart';
+import '../macros.dart';
+import '../ole32.dart';
+import '../utils.dart';
+
+import '../system/com/IUnknown.dart';
+import '../foundation/structs.g.dart';
+import '../globalization/structs.g.dart';
+
+/// @nodoc
+const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
+
+/// {@category Interface}
+/// {@category com}
+class ISpellingError extends IUnknown {
+  // vtable begins at 3, is 4 entries long.
+  ISpellingError(Pointer<COMObject> ptr) : super(ptr);
+
+  int get StartIndex {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int get Length {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int get CorrectiveAction {
+    final retValuePtr = calloc<Int32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  Pointer<Utf16> get Replacement {
+    final retValuePtr = calloc<Pointer<Utf16>>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+}

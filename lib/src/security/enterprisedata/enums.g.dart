@@ -1,0 +1,19 @@
+/// {@category Enum}
+class ENTERPRISE_DATA_POLICIES {
+  static const ENTERPRISE_POLICY_NONE = 0x00000000;
+  static const ENTERPRISE_POLICY_ALLOWED = 0x00000001;
+  static const ENTERPRISE_POLICY_ENLIGHTENED = 0x00000002;
+  static const ENTERPRISE_POLICY_EXEMPT = 0x00000004;
+}
+
+/// {@category Enum}
+class SRPHOSTING_TYPE {
+  static const SRPHOSTING_TYPE_NONE = 0x00000000;
+  static const SRPHOSTING_TYPE_WINHTTP = 0x00000001;
+  static const SRPHOSTING_TYPE_WININET = 0x00000002;
+}
+
+/// {@category Enum}
+class SRPHOSTING_VERSION {
+  static const SRPHOSTING_VERSION1 = 0x00000001;
+}
