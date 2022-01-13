@@ -1,3 +1,7 @@
+## 1.0.23
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 1.0.22
 
 - Performance improvements (thanks to @dantup).
