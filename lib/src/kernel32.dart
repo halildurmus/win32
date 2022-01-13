@@ -4610,6 +4610,19 @@ late final _SetDefaultCommConfig = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         int dwSize)>('SetDefaultCommConfigW');
 
+/// Sets the specified event object to the signaled state.
+///
+/// ```c
+/// BOOL SetEvent(
+///   HANDLE hEvent
+/// );
+/// ```
+/// {@category kernel32}
+int SetEvent(int hEvent) => _SetEvent(hEvent);
+
+late final _SetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+    int Function(int hEvent)>('SetEvent');
+
 /// Moves the file pointer of the specified file.
 ///
 /// ```c

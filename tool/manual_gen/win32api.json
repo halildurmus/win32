@@ -4977,6 +4977,11 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the contents of the specified environment variable for the current process."
     },
+    "SetEvent": {
+        "prototype": "BOOL SetEvent(\n  HANDLE hEvent\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the specified event object to the signaled state."
+    },
     "SetFilePointer": {
         "prototype": "DWORD SetFilePointer(\n  HANDLE hFile,\n  LONG   lDistanceToMove,\n  PLONG  lpDistanceToMoveHigh,\n  DWORD  dwMoveMethod\n);",
         "dllLibrary": "kernel32",

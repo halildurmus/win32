@@ -3252,6 +3252,12 @@ void main() {
               int dwSize)>('SetDefaultCommConfigW');
       expect(SetDefaultCommConfig, isA<Function>());
     });
+    test('Can instantiate SetEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+          int Function(int hEvent)>('SetEvent');
+      expect(SetEvent, isA<Function>());
+    });
     test('Can instantiate SetFilePointer', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetFilePointer = kernel32.lookupFunction<
