@@ -151,7 +151,7 @@
         "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
     "AttachConsole": {
-        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
+        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
         "comment": "Attaches the calling process to the console of the specified process."
     },
@@ -707,7 +707,7 @@
         "comment": "The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device."
     },
     "CreateConsoleScreenBuffer": {
-        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
+        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
         "dllLibrary": "kernel32",
         "comment": "Creates a console screen buffer."
     },
@@ -1541,7 +1541,7 @@
         "comment": "The FlattenPath function transforms any curves in the path that is selected into the current device context (DC), turning each curve into a sequence of lines."
     },
     "FlushConsoleInputBuffer": {
-        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
+        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
         "dllLibrary": "kernel32",
         "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
     },
@@ -2136,7 +2136,7 @@
         "comment": "Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, off—alternating each time the key is pressed)."
     },
     "GetLargestConsoleWindowSize": {
-        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
+        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the size of the largest possible console window, based on the current font and the size of the display."
     },
@@ -3534,22 +3534,22 @@
         "comment": "The mciGetDeviceID function retrieves the device identifier corresponding to the name of an open device."
     },
     "mciGetDeviceIDFromElementID": {
-        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n  DWORD   dwElementID,\n  LPCTSTR lpstrType\n);",
+        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n  DWORD   dwElementID,\n  LPCTSTR lpstrType\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetDeviceIDFromElementID function retrieves the MCI device identifier corresponding to an element identifier."
     },
     "mciGetErrorString": {
-        "prototype": "BOOL mciGetErrorStringW(\n  DWORD  fdwError,\n  LPTSTR lpszErrorText,\n  UINT   cchErrorText\n);",
+        "prototype": "BOOL mciGetErrorStringW(\n  DWORD  fdwError,\n  LPTSTR lpszErrorText,\n  UINT   cchErrorText\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetErrorString function retrieves a string that describes the specified MCI error code."
     },
     "mciSendCommand": {
-        "prototype": "MCIERROR mciSendCommandW(\n  MCIDEVICEID IDDevice,\n  UINT        uMsg,\n  DWORD_PTR   fdwCommand,\n  DWORD_PTR   dwParam\n);",
+        "prototype": "MCIERROR mciSendCommandW(\n  MCIDEVICEID IDDevice,\n  UINT        uMsg,\n  DWORD_PTR   fdwCommand,\n  DWORD_PTR   dwParam\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendCommand function sends a command message to the specified MCI device."
     },
     "mciSendString": {
-        "prototype": "MCIERROR mciSendStringW(\n  LPCTSTR lpszCommand,\n  LPTSTR  lpszReturnString,\n  UINT    cchReturn,\n  HANDLE  hwndCallback\n);",
+        "prototype": "MCIERROR mciSendStringW(\n  LPCTSTR lpszCommand,\n  LPTSTR  lpszReturnString,\n  UINT    cchReturn,\n  HANDLE  hwndCallback\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendString function sends a command string to an MCI device. The device that the command is sent to is specified in the command string."
     },
@@ -4041,7 +4041,7 @@
         "comment": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached."
     },
     "ReadConsole": {
-        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
+        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads character input from the console input buffer and removes it from the buffer."
     },
@@ -4728,7 +4728,7 @@
         "comment": "The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates."
     },
     "ScrollConsoleScreenBuffer": {
-        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
+        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
         "dllLibrary": "kernel32",
         "comment": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged."
     },
@@ -4880,7 +4880,7 @@
         "comment": "Sets the time-out parameters for all read and write operations on a specified communications device."
     },
     "SetConsoleCtrlHandler": {
-        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
+        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
         "dllLibrary": "kernel32",
         "comment": "Adds or removes an application-defined HandlerRoutine function from the list of handler functions for the calling process."
     },
@@ -4895,7 +4895,7 @@
         "comment": "Sets the cursor position in the specified console screen buffer."
     },
     "SetConsoleDisplayMode": {
-        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
+        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the display mode of the specified console screen buffer."
     },
@@ -4910,7 +4910,7 @@
         "comment": "Sets the attributes of characters written to the console screen buffer by the WriteFile or WriteConsole function, or echoed by the ReadFile or ReadConsole function. This function affects text written after the function call."
     },
     "SetConsoleWindowInfo": {
-        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
+        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the current size and position of a console screen buffer's window."
     },
@@ -5192,7 +5192,7 @@
         "comment": "The SetScrollInfo function sets the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb). The function also redraws the scroll bar, if requested."
     },
     "SetStdHandle": {
-        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
+        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the handle for the specified standard device (standard input, standard output, or standard error)."
     },
@@ -6444,7 +6444,7 @@
         "comment": "Suspends the specified WOW64 thread."
     },
     "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_ HANDLE hConsoleOutput,\n  _In_ const VOID *lpBuffer,\n  _In_ DWORD nNumberOfCharsToWrite,\n  _Out_opt_ LPDWORD lpNumberOfCharsWritten,\n  _Reserved_ LPVOID lpReserved\n);",
+        "prototype": "BOOL WINAPI WriteConsole(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
     },

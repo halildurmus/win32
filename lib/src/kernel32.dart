@@ -5364,11 +5364,11 @@ late final _Wow64SuspendThread = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI WriteConsoleW(
-///   _In_             HANDLE  hConsoleOutput,
-///   _In_       const VOID    *lpBuffer,
-///   _In_             DWORD   nNumberOfCharsToWrite,
-///   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
-///   _Reserved_       LPVOID  lpReserved
+///   _In_ HANDLE hConsoleOutput,
+///   _In_ const VOID *lpBuffer,
+///   _In_ DWORD nNumberOfCharsToWrite,
+///   _Out_opt_ LPDWORD lpNumberOfCharsWritten,
+///   _Reserved_ LPVOID lpReserved
 /// );
 /// ```
 /// {@category kernel32}
