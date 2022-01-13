@@ -6444,7 +6444,7 @@
         "comment": "Suspends the specified WOW64 thread."
     },
     "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsole(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
     },

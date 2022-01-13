@@ -69,7 +69,7 @@ late final _AllocConsole =
 ///
 /// ```c
 /// BOOL WINAPI AttachConsole(
-///   _In_ DWORD dwProcessId
+///   _In_ DWORD dwProcessId
 /// );
 /// ```
 /// {@category kernel32}
@@ -408,11 +408,11 @@ late final _CreateActCtx = _kernel32.lookupFunction<
 ///
 /// ```c
 /// HANDLE WINAPI CreateConsoleScreenBuffer(
-///   _In_             DWORD               dwDesiredAccess,
-///   _In_             DWORD               dwShareMode,
-///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
-///   _In_             DWORD               dwFlags,
-///   _Reserved_       LPVOID              lpScreenBufferData
+///   _In_             DWORD               dwDesiredAccess,
+///   _In_             DWORD               dwShareMode,
+///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
+///   _In_             DWORD               dwFlags,
+///   _Reserved_       LPVOID              lpScreenBufferData
 /// );
 /// ```
 /// {@category kernel32}
@@ -1621,7 +1621,7 @@ late final _FindVolumeClose = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI FlushConsoleInputBuffer(
-///   _In_ HANDLE hConsoleInput
+///   _In_ HANDLE hConsoleInput
 /// );
 /// ```
 /// {@category kernel32}
@@ -2389,7 +2389,7 @@ late final _GetHandleInformation = _kernel32.lookupFunction<
 ///
 /// ```c
 /// COORD WINAPI GetLargestConsoleWindowSize(
-///   _In_ HANDLE hConsoleOutput
+///   _In_ HANDLE hConsoleOutput
 /// );
 /// ```
 /// {@category kernel32}
@@ -4150,11 +4150,11 @@ late final _QueryPerformanceFrequency = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI ReadConsoleW(
-///   _In_     HANDLE  hConsoleInput,
-///   _Out_    LPVOID  lpBuffer,
-///   _In_     DWORD   nNumberOfCharsToRead,
-///   _Out_    LPDWORD lpNumberOfCharsRead,
-///   _In_opt_ LPVOID  pInputControl
+///   _In_     HANDLE  hConsoleInput,
+///   _Out_    LPVOID  lpBuffer,
+///   _In_     DWORD   nNumberOfCharsToRead,
+///   _Out_    LPDWORD lpNumberOfCharsRead,
+///   _In_opt_ LPVOID  pInputControl
 /// );
 /// ```
 /// {@category kernel32}
@@ -4324,11 +4324,11 @@ late final _ResizePseudoConsole = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI ScrollConsoleScreenBufferW(
-///   _In_           HANDLE     hConsoleOutput,
-///   _In_     const SMALL_RECT *lpScrollRectangle,
-///   _In_opt_ const SMALL_RECT *lpClipRectangle,
-///   _In_           COORD      dwDestinationOrigin,
-///   _In_     const CHAR_INFO  *lpFill
+///   _In_           HANDLE     hConsoleOutput,
+///   _In_     const SMALL_RECT *lpScrollRectangle,
+///   _In_opt_ const SMALL_RECT *lpClipRectangle,
+///   _In_           COORD      dwDestinationOrigin,
+///   _In_     const CHAR_INFO  *lpFill
 /// );
 /// ```
 /// {@category kernel32}
@@ -4444,8 +4444,8 @@ late final _SetCommTimeouts = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleCtrlHandler(
-///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
-///   _In_     BOOL             Add
+///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
+///   _In_     BOOL             Add
 /// );
 /// ```
 /// {@category kernel32}
@@ -4501,9 +4501,9 @@ late final _SetConsoleCursorPosition = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleDisplayMode(
-///   _In_      HANDLE hConsoleOutput,
-///   _In_      DWORD  dwFlags,
-///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
+///   _In_      HANDLE hConsoleOutput,
+///   _In_      DWORD  dwFlags,
+///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
 /// );
 /// ```
 /// {@category kernel32}
@@ -4559,9 +4559,9 @@ late final _SetConsoleTextAttribute = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleWindowInfo(
-///   _In_       HANDLE     hConsoleOutput,
-///   _In_       BOOL       bAbsolute,
-///   _In_ const SMALL_RECT *lpConsoleWindow
+///   _In_       HANDLE     hConsoleOutput,
+///   _In_       BOOL       bAbsolute,
+///   _In_ const SMALL_RECT *lpConsoleWindow
 /// );
 /// ```
 /// {@category kernel32}
@@ -4829,8 +4829,8 @@ late final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetStdHandle(
-///   _In_ DWORD  nStdHandle,
-///   _In_ HANDLE hHandle
+///   _In_ DWORD  nStdHandle,
+///   _In_ HANDLE hHandle
 /// );
 /// ```
 /// {@category kernel32}
@@ -5364,11 +5364,11 @@ late final _Wow64SuspendThread = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI WriteConsoleW(
-///   _In_ HANDLE hConsoleOutput,
-///   _In_ const VOID *lpBuffer,
-///   _In_ DWORD nNumberOfCharsToWrite,
-///   _Out_opt_ LPDWORD lpNumberOfCharsWritten,
-///   _Reserved_ LPVOID lpReserved
+///   _In_             HANDLE  hConsoleOutput,
+///   _In_       const VOID    *lpBuffer,
+///   _In_             DWORD   nNumberOfCharsToWrite,
+///   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
+///   _Reserved_       LPVOID  lpReserved
 /// );
 /// ```
 /// {@category kernel32}
