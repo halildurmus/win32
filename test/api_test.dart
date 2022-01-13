@@ -4079,6 +4079,27 @@ void main() {
               int dwInitParam)>('CreateDialogIndirectParamW');
       expect(CreateDialogIndirectParam, isA<Function>());
     });
+    test('Can instantiate CreateIcon', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateIcon = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInstance,
+              Int32 nWidth,
+              Int32 nHeight,
+              Uint8 cPlanes,
+              Uint8 cBitsPixel,
+              Pointer<Uint8> lpbANDbits,
+              Pointer<Uint8> lpbXORbits),
+          int Function(
+              int hInstance,
+              int nWidth,
+              int nHeight,
+              int cPlanes,
+              int cBitsPixel,
+              Pointer<Uint8> lpbANDbits,
+              Pointer<Uint8> lpbXORbits)>('CreateIcon');
+      expect(CreateIcon, isA<Function>());
+    });
     test('Can instantiate CreateMDIWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateMDIWindow = user32.lookupFunction<
