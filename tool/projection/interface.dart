@@ -66,7 +66,7 @@ class InterfaceProjection {
 
     // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-    // ignore_for_file: unused_import
+    // ignore_for_file: unused_import, directives_ordering
 
     import 'dart:ffi';
 
