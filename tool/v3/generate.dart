@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:math' show min;
 
+import 'package:async/async.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
