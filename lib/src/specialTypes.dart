@@ -437,7 +437,7 @@ class VARIANT extends Struct {
     final hi = (((src & 0xFFFFFFFF00000000) >> 32).toUnsigned(32))
         .toRadixString(16)
         .padLeft(8, '0');
-    final lo = ((src & 0x00000000FFFFFFFF).toRadixString(16).padLeft(8, '0'));
+    final lo = (src & 0x00000000FFFFFFFF).toRadixString(16).padLeft(8, '0');
     return BigInt.parse('$hi$lo', radix: 16);
   }
 

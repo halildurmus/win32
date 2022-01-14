@@ -128,10 +128,11 @@ void generateFfiFile(File file, TypeDef typedef) {
     if (functions.isNotEmpty) {
       final moduleDartIdentifier = identifierForModuleName(module);
       final dllFilename = DLLFromModuleName(module);
-      functionProjections.write(commentHeader(dllFilename));
-      functionProjections.writeln(
-          "  final _$moduleDartIdentifier = DynamicLibrary.open('$dllFilename');");
-      functionProjections.writeln();
+      functionProjections
+        ..writeln(commentHeader(dllFilename))
+        ..writeln(
+            "  final _$moduleDartIdentifier = DynamicLibrary.open('$dllFilename');")
+        ..writeln();
 
       for (final function in functions) {
         final printer = FunctionProjection(function, moduleDartIdentifier);

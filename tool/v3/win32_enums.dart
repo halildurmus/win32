@@ -37,8 +37,9 @@ String processEnumeration(TypeDef enumClass) {
     dartClass = dartClass.substring(1);
   }
 
-  buffer.writeln('/// {@category Enum}');
-  buffer.writeln('class $dartClass {');
+  buffer
+    ..writeln('/// {@category Enum}')
+    ..writeln('class $dartClass {');
 
   // The first field is always the special field _value
   for (final field in enumClass.fields.skip(1)) {

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:math' show min;
 
-import 'package:async/async.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
@@ -56,8 +55,7 @@ List<String> namespacesInScope(Scope scope) {
 }
 
 bool typeDirectlyInNamespace(String type, String namespace) {
-  final typeComponents = type.split('.');
-  typeComponents.removeLast();
+  final typeComponents = type.split('.')..removeLast();
   return typeComponents.join('.') == namespace;
 }
 
@@ -71,7 +69,7 @@ void createDirectory(String namespace) =>
 
 void generateWin32Functions(String namespace) {
   final funcs =
-      scope.typeDefs.where((typedef) => (typedef.name == '$namespace.Apis'));
+      scope.typeDefs.where((typedef) => typedef.name == '$namespace.Apis');
 
   // Some namespaces may not contain a Win32 APIs subnamespace (e.g.
   // Windows.Win32.Media.Streaming does not contain
@@ -147,7 +145,7 @@ void generateWin32Constants(String namespace) {
       .where((typedef) => typeDirectlyInNamespace(typedef.name, namespace))
       .where(typedefIsGuidConstant)
       .where((typedef) => !excludedGuidConstants.contains(typedef.name))
-      .where((typedef) => !(constantIsClassClsid(typedef)))
+      .where((typedef) => !constantIsClassClsid(typedef))
       .toList();
 
   if (constants.isNotEmpty || guidConstants.isNotEmpty) {

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../projection/utils.dart';
 import '../projection/callback.dart';
+import '../projection/utils.dart';
 import 'generate.dart';
 import 'win32_functions.dart';
 

@@ -4,8 +4,8 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/struct.dart';
 import '../projection/utils.dart';
-import 'generate.dart';
 import 'exclusions.dart';
+import 'generate.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
