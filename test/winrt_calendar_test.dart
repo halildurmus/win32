@@ -52,7 +52,7 @@ void main() {
       final hstr = calloc<HSTRING>();
       calendar.MonthAsFullString(hstr);
       expect(
-          convertFromHString(hstr.value),
+          hstr.toDartString(),
           isIn([
             'January',
             'February',
@@ -75,7 +75,7 @@ void main() {
       final hstr = calloc<HSTRING>();
       calendar.MonthAsString(3, hstr);
       expect(
-          convertFromHString(hstr.value),
+          hstr.toDartString(),
           isIn([
             'Jan',
             'Feb',
@@ -96,7 +96,7 @@ void main() {
 
     test('Calendar resolved language', () {
       final hstrPtr = calloc<HSTRING>()..value = calendar.ResolvedLanguage;
-      final lang = convertFromHString(hstrPtr.value);
+      final lang = hstrPtr.toDartString();
 
       // Should be something like en-US
       expect(lang[2], equals('-'));

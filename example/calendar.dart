@@ -12,32 +12,30 @@ void main() {
   winrtInitialize();
 
   try {
-    final object =
+    final comObject =
         CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-    final calendar = ICalendar(object);
+    final calendar = ICalendar(comObject);
 
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');
 
-    final systemPtr = calloc<HSTRING>();
-    calendar.GetCalendarSystem(systemPtr);
-    print('The calendar system is ${convertFromHString(systemPtr.value)}.');
-    WindowsDeleteString(systemPtr.value);
-    free(systemPtr);
+    final calendarSystem = calloc<HSTRING>();
+    calendar.GetCalendarSystem(calendarSystem);
+    print('The calendar system is ${calendarSystem.toDartString()}.');
+    free(calendarSystem);
 
-    final dayPtr = calloc<HSTRING>();
-    calendar.DayOfWeekAsFullSoloString(dayPtr);
-    print('Today is ${convertFromHString(dayPtr.value)}.');
-    WindowsDeleteString(dayPtr.value);
-    free(dayPtr);
-
-    free(object);
+    final dayOfWeek = calloc<HSTRING>();
+    calendar.DayOfWeekAsFullSoloString(dayOfWeek);
+    print('Today is ${dayOfWeek.toDartString()}.');
+    free(dayOfWeek);
 
     if (calendar.IsDaylightSavingTime) {
       print('Daylight Saving Time is in observance.');
     } else if (calendar.IsDaylightSavingTime) {
       print('Daylight Savings Time is not in observance.');
     }
+
+    free(comObject);
   } finally {
     winrtUninitialize();
   }
