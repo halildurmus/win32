@@ -50,4 +50,5 @@
         "example/explorer"
     ],
     "dart.sdkPath": "c:\\flutter\\bin\\cache\\dart-sdk",
+    "cmake.configureOnOpen": false,
 }
