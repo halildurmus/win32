@@ -474,20 +474,19 @@ void main() {
   }, skip: !Platform.isWindows);
 
   test('getApplicationSupportPath with no version info', () async {
-    final pathProvider = PathProviderWindows();
-    pathProvider.versionInfoQuerier =
-        FakeVersionInfoQuerier(<String, String>{});
+    final pathProvider = PathProviderWindows()
+      ..versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{});
     final path = await pathProvider.getApplicationSupportPath();
     expect(path, contains(r'C:\'));
     expect(path, contains(r'AppData'));
   }, skip: !Platform.isWindows);
 
   test('getApplicationSupportPath with full version info', () async {
-    final pathProvider = PathProviderWindows();
-    pathProvider.versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
-      'CompanyName': 'A Company',
-      'ProductName': 'Amazing App',
-    });
+    final pathProvider = PathProviderWindows()
+      ..versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
+        'CompanyName': 'A Company',
+        'ProductName': 'Amazing App',
+      });
     final path = await pathProvider.getApplicationSupportPath();
     expect(path, isNotNull);
     if (path != null) {
@@ -497,10 +496,10 @@ void main() {
   }, skip: !Platform.isWindows);
 
   test('getApplicationSupportPath with missing company', () async {
-    final pathProvider = PathProviderWindows();
-    pathProvider.versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
-      'ProductName': 'Amazing App',
-    });
+    final pathProvider = PathProviderWindows()
+      ..versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
+        'ProductName': 'Amazing App',
+      });
     final path = await pathProvider.getApplicationSupportPath();
     expect(path, isNotNull);
     if (path != null) {
@@ -510,11 +509,11 @@ void main() {
   }, skip: !Platform.isWindows);
 
   test('getApplicationSupportPath with problematic values', () async {
-    final pathProvider = PathProviderWindows();
-    pathProvider.versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
-      'CompanyName': r'A <Bad> Company: Name.',
-      'ProductName': r'A"/Terrible\|App?*Name',
-    });
+    final pathProvider = PathProviderWindows()
+      ..versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
+        'CompanyName': r'A <Bad> Company: Name.',
+        'ProductName': r'A"/Terrible\|App?*Name',
+      });
     final path = await pathProvider.getApplicationSupportPath();
     expect(path, isNotNull);
     if (path != null) {
@@ -528,11 +527,11 @@ void main() {
   }, skip: !Platform.isWindows);
 
   test('getApplicationSupportPath with a completely invalid company', () async {
-    final pathProvider = PathProviderWindows();
-    pathProvider.versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
-      'CompanyName': r'..',
-      'ProductName': r'Amazing App',
-    });
+    final pathProvider = PathProviderWindows()
+      ..versionInfoQuerier = FakeVersionInfoQuerier(<String, String>{
+        'CompanyName': r'..',
+        'ProductName': r'Amazing App',
+      });
     final path = await pathProvider.getApplicationSupportPath();
     expect(path, isNotNull);
     if (path != null) {

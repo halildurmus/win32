@@ -69,7 +69,7 @@ late final _AllocConsole =
 ///
 /// ```c
 /// BOOL WINAPI AttachConsole(
-///   _In_ DWORD dwProcessId
+///   _In_ DWORD dwProcessId
 /// );
 /// ```
 /// {@category kernel32}
@@ -408,11 +408,11 @@ late final _CreateActCtx = _kernel32.lookupFunction<
 ///
 /// ```c
 /// HANDLE WINAPI CreateConsoleScreenBuffer(
-///   _In_             DWORD               dwDesiredAccess,
-///   _In_             DWORD               dwShareMode,
-///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
-///   _In_             DWORD               dwFlags,
-///   _Reserved_       LPVOID              lpScreenBufferData
+///   _In_             DWORD               dwDesiredAccess,
+///   _In_             DWORD               dwShareMode,
+///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
+///   _In_             DWORD               dwFlags,
+///   _Reserved_       LPVOID              lpScreenBufferData
 /// );
 /// ```
 /// {@category kernel32}
@@ -742,6 +742,148 @@ late final _CreatePseudoConsole = _kernel32.lookupFunction<
         Pointer<IntPtr> phPC),
     int Function(COORD size, int hInput, int hOutput, int dwFlags,
         Pointer<IntPtr> phPC)>('CreatePseudoConsole');
+
+/// Creates a thread that runs in the virtual address space of another
+/// process. Use the CreateRemoteThreadEx function to create a thread that
+/// runs in the virtual address space of another process and optionally
+/// specify extended attributes.
+///
+/// ```c
+/// HANDLE CreateRemoteThread(
+///   HANDLE hProcess,
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateRemoteThread(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize,
+        lpStartAddress, lpParameter, dwCreationFlags, lpThreadId);
+
+late final _CreateRemoteThread = _kernel32.lookupFunction<
+    IntPtr Function(
+        IntPtr hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId)>('CreateRemoteThread');
+
+/// Creates a thread that runs in the virtual address space of another
+/// process and optionally specifies extended attributes such as processor
+/// group affinity.
+///
+/// ```c
+/// HANDLE CreateRemoteThreadEx(
+///   HANDLE hProcess,
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateRemoteThreadEx(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateRemoteThreadEx(
+        hProcess,
+        lpThreadAttributes,
+        dwStackSize,
+        lpStartAddress,
+        lpParameter,
+        dwCreationFlags,
+        lpAttributeList,
+        lpThreadId);
+
+late final _CreateRemoteThreadEx = _kernel32.lookupFunction<
+    IntPtr Function(
+        IntPtr hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        int hProcess,
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer lpAttributeList,
+        Pointer<Uint32> lpThreadId)>('CreateRemoteThreadEx');
+
+/// Creates a thread to execute within the virtual address space of the
+/// calling process.
+///
+/// ```c
+/// HANDLE CreateThread(
+///   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+///   SIZE_T dwStackSize,
+///   LPTHREAD_START_ROUTINE lpStartAddress,
+///   LPVOID lpParameter,
+///   DWORD dwCreationFlags,
+///   LPDWORD lpThreadId
+/// );
+/// ```
+/// {@category kernel32}
+int CreateThread(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId) =>
+    _CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter,
+        dwCreationFlags, lpThreadId);
+
+late final _CreateThread = _kernel32.lookupFunction<
+    IntPtr Function(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        IntPtr dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        Uint32 dwCreationFlags,
+        Pointer<Uint32> lpThreadId),
+    int Function(
+        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+        int dwStackSize,
+        Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+        Pointer lpParameter,
+        int dwCreationFlags,
+        Pointer<Uint32> lpThreadId)>('CreateThread');
 
 /// The DeactivateActCtx function deactivates the activation context
 /// corresponding to the specified cookie.
@@ -1479,7 +1621,7 @@ late final _FindVolumeClose = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI FlushConsoleInputBuffer(
-///   _In_ HANDLE hConsoleInput
+///   _In_ HANDLE hConsoleInput
 /// );
 /// ```
 /// {@category kernel32}
@@ -2247,7 +2389,7 @@ late final _GetHandleInformation = _kernel32.lookupFunction<
 ///
 /// ```c
 /// COORD WINAPI GetLargestConsoleWindowSize(
-///   _In_ HANDLE hConsoleOutput
+///   _In_ HANDLE hConsoleOutput
 /// );
 /// ```
 /// {@category kernel32}
@@ -2334,6 +2476,26 @@ late final _GetLogicalDriveStrings = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
+
+/// Queries if the specified architecture is supported on the current
+/// system, either natively or by any form of compatibility or emulation
+/// layer.
+///
+/// ```c
+/// HRESULT GetMachineTypeAttributes(
+///   USHORT Machine,
+///   MACHINE_ATTRIBUTES *MachineTypeAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int GetMachineTypeAttributes(
+        int Machine, Pointer<Uint32> MachineTypeAttributes) =>
+    _GetMachineTypeAttributes(Machine, MachineTypeAttributes);
+
+late final _GetMachineTypeAttributes = _kernel32.lookupFunction<
+    Int32 Function(Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+    int Function(int Machine,
+        Pointer<Uint32> MachineTypeAttributes)>('GetMachineTypeAttributes');
 
 /// Returns the maximum number of logical processors that a processor group
 /// or the system can have.
@@ -3988,11 +4150,11 @@ late final _QueryPerformanceFrequency = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI ReadConsoleW(
-///   _In_     HANDLE  hConsoleInput,
-///   _Out_    LPVOID  lpBuffer,
-///   _In_     DWORD   nNumberOfCharsToRead,
-///   _Out_    LPDWORD lpNumberOfCharsRead,
-///   _In_opt_ LPVOID  pInputControl
+///   _In_     HANDLE  hConsoleInput,
+///   _Out_    LPVOID  lpBuffer,
+///   _In_     DWORD   nNumberOfCharsToRead,
+///   _Out_    LPDWORD lpNumberOfCharsRead,
+///   _In_opt_ LPVOID  pInputControl
 /// );
 /// ```
 /// {@category kernel32}
@@ -4162,11 +4324,11 @@ late final _ResizePseudoConsole = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI ScrollConsoleScreenBufferW(
-///   _In_           HANDLE     hConsoleOutput,
-///   _In_     const SMALL_RECT *lpScrollRectangle,
-///   _In_opt_ const SMALL_RECT *lpClipRectangle,
-///   _In_           COORD      dwDestinationOrigin,
-///   _In_     const CHAR_INFO  *lpFill
+///   _In_           HANDLE     hConsoleOutput,
+///   _In_     const SMALL_RECT *lpScrollRectangle,
+///   _In_opt_ const SMALL_RECT *lpClipRectangle,
+///   _In_           COORD      dwDestinationOrigin,
+///   _In_     const CHAR_INFO  *lpFill
 /// );
 /// ```
 /// {@category kernel32}
@@ -4282,8 +4444,8 @@ late final _SetCommTimeouts = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleCtrlHandler(
-///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
-///   _In_     BOOL             Add
+///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
+///   _In_     BOOL             Add
 /// );
 /// ```
 /// {@category kernel32}
@@ -4339,9 +4501,9 @@ late final _SetConsoleCursorPosition = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleDisplayMode(
-///   _In_      HANDLE hConsoleOutput,
-///   _In_      DWORD  dwFlags,
-///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
+///   _In_      HANDLE hConsoleOutput,
+///   _In_      DWORD  dwFlags,
+///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
 /// );
 /// ```
 /// {@category kernel32}
@@ -4397,9 +4559,9 @@ late final _SetConsoleTextAttribute = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleWindowInfo(
-///   _In_       HANDLE     hConsoleOutput,
-///   _In_       BOOL       bAbsolute,
-///   _In_ const SMALL_RECT *lpConsoleWindow
+///   _In_       HANDLE     hConsoleOutput,
+///   _In_       BOOL       bAbsolute,
+///   _In_ const SMALL_RECT *lpConsoleWindow
 /// );
 /// ```
 /// {@category kernel32}
@@ -4447,6 +4609,19 @@ late final _SetDefaultCommConfig = _kernel32.lookupFunction<
         Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         int dwSize)>('SetDefaultCommConfigW');
+
+/// Sets the specified event object to the signaled state.
+///
+/// ```c
+/// BOOL SetEvent(
+///   HANDLE hEvent
+/// );
+/// ```
+/// {@category kernel32}
+int SetEvent(int hEvent) => _SetEvent(hEvent);
+
+late final _SetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+    int Function(int hEvent)>('SetEvent');
 
 /// Moves the file pointer of the specified file.
 ///
@@ -4667,8 +4842,8 @@ late final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI SetStdHandle(
-///   _In_ DWORD  nStdHandle,
-///   _In_ HANDLE hHandle
+///   _In_ DWORD  nStdHandle,
+///   _In_ HANDLE hHandle
 /// );
 /// ```
 /// {@category kernel32}
@@ -5202,11 +5377,11 @@ late final _Wow64SuspendThread = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI WriteConsoleW(
-///   _In_             HANDLE  hConsoleOutput,
-///   _In_       const VOID    *lpBuffer,
-///   _In_             DWORD   nNumberOfCharsToWrite,
-///   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
-///   _Reserved_       LPVOID  lpReserved
+///   _In_             HANDLE  hConsoleOutput,
+///   _In_       const VOID    *lpBuffer,
+///   _In_             DWORD   nNumberOfCharsToWrite,
+///   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
+///   _Reserved_       LPVOID  lpReserved
 /// );
 /// ```
 /// {@category kernel32}

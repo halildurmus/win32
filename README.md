@@ -138,6 +138,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `winmd.dart`       | Interrogate Windows Runtime types                         |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
+| `wsl.dart`         | Retrieve information from a WSL instance through APIs     |
 
 ### Flutter samples
 

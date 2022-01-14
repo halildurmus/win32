@@ -1430,6 +1430,69 @@ void main() {
         expect(CreatePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate CreateRemoteThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateRemoteThread = kernel32.lookupFunction<
+          IntPtr Function(
+              IntPtr hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              int hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer<Uint32> lpThreadId)>('CreateRemoteThread');
+      expect(CreateRemoteThread, isA<Function>());
+    });
+    test('Can instantiate CreateRemoteThreadEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateRemoteThreadEx = kernel32.lookupFunction<
+          IntPtr Function(
+              IntPtr hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer lpAttributeList,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              int hProcess,
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer lpAttributeList,
+              Pointer<Uint32> lpThreadId)>('CreateRemoteThreadEx');
+      expect(CreateRemoteThreadEx, isA<Function>());
+    });
+    test('Can instantiate CreateThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateThread = kernel32.lookupFunction<
+          IntPtr Function(
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              IntPtr dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              Uint32 dwCreationFlags,
+              Pointer<Uint32> lpThreadId),
+          int Function(
+              Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+              int dwStackSize,
+              Pointer<NativeFunction<ThreadProc>> lpStartAddress,
+              Pointer lpParameter,
+              int dwCreationFlags,
+              Pointer<Uint32> lpThreadId)>('CreateThread');
+      expect(CreateThread, isA<Function>());
+    });
     test('Can instantiate DeactivateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final DeactivateActCtx = kernel32.lookupFunction<
@@ -2180,6 +2243,18 @@ void main() {
               Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
       expect(GetLogicalDriveStrings, isA<Function>());
     });
+    if (windowsBuildNumber >= 22000) {
+      test('Can instantiate GetMachineTypeAttributes', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final GetMachineTypeAttributes = kernel32.lookupFunction<
+                Int32 Function(
+                    Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
+                int Function(
+                    int Machine, Pointer<Uint32> MachineTypeAttributes)>(
+            'GetMachineTypeAttributes');
+        expect(GetMachineTypeAttributes, isA<Function>());
+      });
+    }
     test('Can instantiate GetMaximumProcessorCount', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetMaximumProcessorCount = kernel32.lookupFunction<
@@ -3177,6 +3252,12 @@ void main() {
               int dwSize)>('SetDefaultCommConfigW');
       expect(SetDefaultCommConfig, isA<Function>());
     });
+    test('Can instantiate SetEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+          int Function(int hEvent)>('SetEvent');
+      expect(SetEvent, isA<Function>());
+    });
     test('Can instantiate SetFilePointer', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetFilePointer = kernel32.lookupFunction<
@@ -4003,6 +4084,27 @@ void main() {
               Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               int dwInitParam)>('CreateDialogIndirectParamW');
       expect(CreateDialogIndirectParam, isA<Function>());
+    });
+    test('Can instantiate CreateIcon', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateIcon = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInstance,
+              Int32 nWidth,
+              Int32 nHeight,
+              Uint8 cPlanes,
+              Uint8 cBitsPixel,
+              Pointer<Uint8> lpbANDbits,
+              Pointer<Uint8> lpbXORbits),
+          int Function(
+              int hInstance,
+              int nWidth,
+              int nHeight,
+              int cPlanes,
+              int cBitsPixel,
+              Pointer<Uint8> lpbANDbits,
+              Pointer<Uint8> lpbXORbits)>('CreateIcon');
+      expect(CreateIcon, isA<Function>());
     });
     test('Can instantiate CreateMDIWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -11194,6 +11296,128 @@ void main() {
                 int Function(int string, int trimString,
                     Pointer<IntPtr> newString)>('WindowsTrimStringStart');
         expect(WindowsTrimStringStart, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-wsl-api-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslConfigureDistribution', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslConfigureDistribution =
+            api_ms_win_wsl_api_l1_1_0.lookupFunction<
+                Int32 Function(Pointer<Utf16> distributionName,
+                    Uint32 defaultUID, Uint32 wslDistributionFlags),
+                int Function(Pointer<Utf16> distributionName, int defaultUID,
+                    int wslDistributionFlags)>('WslConfigureDistribution');
+        expect(WslConfigureDistribution, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslGetDistributionConfiguration', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslGetDistributionConfiguration =
+            api_ms_win_wsl_api_l1_1_0
+                .lookupFunction<
+                        Int32 Function(
+                            Pointer<Utf16> distributionName,
+                            Pointer<Uint32> distributionVersion,
+                            Pointer<Uint32> defaultUID,
+                            Pointer<Uint32> wslDistributionFlags,
+                            Pointer<Pointer<Pointer<Utf8>>>
+                                defaultEnvironmentVariables,
+                            Pointer<Uint32> defaultEnvironmentVariableCount),
+                        int Function(
+                            Pointer<Utf16> distributionName,
+                            Pointer<Uint32> distributionVersion,
+                            Pointer<Uint32> defaultUID,
+                            Pointer<Uint32> wslDistributionFlags,
+                            Pointer<Pointer<Pointer<Utf8>>>
+                                defaultEnvironmentVariables,
+                            Pointer<Uint32> defaultEnvironmentVariableCount)>(
+                    'WslGetDistributionConfiguration');
+        expect(WslGetDistributionConfiguration, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslIsDistributionRegistered', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslIsDistributionRegistered =
+            api_ms_win_wsl_api_l1_1_0.lookupFunction<
+                    Int32 Function(Pointer<Utf16> distributionName),
+                    int Function(Pointer<Utf16> distributionName)>(
+                'WslIsDistributionRegistered');
+        expect(WslIsDistributionRegistered, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslLaunch', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslLaunch = api_ms_win_wsl_api_l1_1_0.lookupFunction<
+            Int32 Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Utf16> command,
+                Int32 useCurrentWorkingDirectory,
+                IntPtr stdIn,
+                IntPtr stdOut,
+                IntPtr stdErr,
+                Pointer<IntPtr> process),
+            int Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Utf16> command,
+                int useCurrentWorkingDirectory,
+                int stdIn,
+                int stdOut,
+                int stdErr,
+                Pointer<IntPtr> process)>('WslLaunch');
+        expect(WslLaunch, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslLaunchInteractive', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslLaunchInteractive = api_ms_win_wsl_api_l1_1_0.lookupFunction<
+            Int32 Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Utf16> command,
+                Int32 useCurrentWorkingDirectory,
+                Pointer<Uint32> exitCode),
+            int Function(
+                Pointer<Utf16> distributionName,
+                Pointer<Utf16> command,
+                int useCurrentWorkingDirectory,
+                Pointer<Uint32> exitCode)>('WslLaunchInteractive');
+        expect(WslLaunchInteractive, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslRegisterDistribution', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslRegisterDistribution =
+            api_ms_win_wsl_api_l1_1_0.lookupFunction<
+                Int32 Function(Pointer<Utf16> distributionName,
+                    Pointer<Utf16> tarGzFilename),
+                int Function(Pointer<Utf16> distributionName,
+                    Pointer<Utf16> tarGzFilename)>('WslRegisterDistribution');
+        expect(WslRegisterDistribution, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 19041) {
+      test('Can instantiate WslUnregisterDistribution', () {
+        final api_ms_win_wsl_api_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-wsl-api-l1-1-0.dll');
+        final WslUnregisterDistribution =
+            api_ms_win_wsl_api_l1_1_0.lookupFunction<
+                    Int32 Function(Pointer<Utf16> distributionName),
+                    int Function(Pointer<Utf16> distributionName)>(
+                'WslUnregisterDistribution');
+        expect(WslUnregisterDistribution, isA<Function>());
       });
     }
   });

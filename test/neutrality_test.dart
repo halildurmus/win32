@@ -11,9 +11,9 @@ import 'package:win32/win32.dart';
 //    least one test is run successfully.)
 void main() {
   test('Dormant package does not cause failures on other platforms', () {
-    final point = calloc<POINT>().ref;
-    point.x = 0x10;
-    point.y = 0x7F;
+    final point = calloc<POINT>().ref
+      ..x = 0x10
+      ..y = 0x7F;
     expect(point.x + point.y, equals(0x8F));
   });
 }

@@ -141,6 +141,7 @@ export 'src/winspool.dart';
 export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
 export 'src/api-ms-win-ro-typeresolution-l1-1-0.dart';
+export 'src/api-ms-win-wsl-api-l1-1-0.dart';
 
 // WinRT foundational exports
 export 'src/winrt/winrt_constants.dart';

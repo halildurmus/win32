@@ -40,7 +40,7 @@ late final _mciGetDeviceID = _winmm.lookupFunction<
 ///
 /// ```c
 /// MCIDEVICEID mciGetDeviceIDFromElementIDW(
-///   DWORD   dwElementID,
+///   DWORD   dwElementID,
 ///   LPCTSTR lpstrType
 /// );
 /// ```
@@ -58,9 +58,9 @@ late final _mciGetDeviceIDFromElementID = _winmm.lookupFunction<
 ///
 /// ```c
 /// BOOL mciGetErrorStringW(
-///   DWORD  fdwError,
+///   DWORD  fdwError,
 ///   LPTSTR lpszErrorText,
-///   UINT   cchErrorText
+///   UINT   cchErrorText
 /// );
 /// ```
 /// {@category winmm}
@@ -78,9 +78,9 @@ late final _mciGetErrorString = _winmm.lookupFunction<
 /// ```c
 /// MCIERROR mciSendCommandW(
 ///   MCIDEVICEID IDDevice,
-///   UINT        uMsg,
-///   DWORD_PTR   fdwCommand,
-///   DWORD_PTR   dwParam
+///   UINT        uMsg,
+///   DWORD_PTR   fdwCommand,
+///   DWORD_PTR   dwParam
 /// );
 /// ```
 /// {@category winmm}
@@ -99,9 +99,9 @@ late final _mciSendCommand = _winmm.lookupFunction<
 /// ```c
 /// MCIERROR mciSendStringW(
 ///   LPCTSTR lpszCommand,
-///   LPTSTR  lpszReturnString,
-///   UINT    cchReturn,
-///   HANDLE  hwndCallback
+///   LPTSTR  lpszReturnString,
+///   UINT    cchReturn,
+///   HANDLE  hwndCallback
 /// );
 /// ```
 /// {@category winmm}

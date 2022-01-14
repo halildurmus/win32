@@ -981,6 +981,43 @@ late final _CreateDialogIndirectParam = _user32.lookupFunction<
         Pointer<NativeFunction<DlgProc>> lpDialogFunc,
         int dwInitParam)>('CreateDialogIndirectParamW');
 
+/// Creates an icon that has the specified size, colors, and bit patterns.
+///
+/// ```c
+/// HICON CreateIcon(
+///   HINSTANCE  hInstance,
+///   int        nWidth,
+///   int        nHeight,
+///   BYTE       cPlanes,
+///   BYTE       cBitsPixel,
+///   const BYTE *lpbANDbits,
+///   const BYTE *lpbXORbits
+/// );
+/// ```
+/// {@category user32}
+int CreateIcon(int hInstance, int nWidth, int nHeight, int cPlanes,
+        int cBitsPixel, Pointer<Uint8> lpbANDbits, Pointer<Uint8> lpbXORbits) =>
+    _CreateIcon(hInstance, nWidth, nHeight, cPlanes, cBitsPixel, lpbANDbits,
+        lpbXORbits);
+
+late final _CreateIcon = _user32.lookupFunction<
+    IntPtr Function(
+        IntPtr hInstance,
+        Int32 nWidth,
+        Int32 nHeight,
+        Uint8 cPlanes,
+        Uint8 cBitsPixel,
+        Pointer<Uint8> lpbANDbits,
+        Pointer<Uint8> lpbXORbits),
+    int Function(
+        int hInstance,
+        int nWidth,
+        int nHeight,
+        int cPlanes,
+        int cBitsPixel,
+        Pointer<Uint8> lpbANDbits,
+        Pointer<Uint8> lpbXORbits)>('CreateIcon');
+
 /// Creates a multiple-document interface (MDI) child window.
 ///
 /// ```c

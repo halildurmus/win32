@@ -62,10 +62,8 @@ class Win32API {
 
 // Roundtrip load and save to make sure that the JSON file is ordered.
 void main() {
-  final win32 = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
-  win32.saveAsJson(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+  const apiFile = 'tool/manual_gen/win32api.json';
+  const structFile = 'tool/manual_gen/win32struct.json';
+  Win32API(apiFile: apiFile, structFile: structFile)
+      .saveAsJson(apiFile: apiFile, structFile: structFile);
 }

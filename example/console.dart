@@ -35,8 +35,7 @@ String fromCString(Pointer<Uint8> buffer, int maxLength) =>
 Pointer<Uint8> toCString(String buffer) {
   final units = utf8.encode(buffer);
   final result = calloc<Uint8>(units.length);
-  final nativeString = result.asTypedList(units.length);
-  nativeString.setAll(0, units);
+  result.asTypedList(units.length).setAll(0, units);
   return result;
 }
 

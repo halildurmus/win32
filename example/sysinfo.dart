@@ -171,13 +171,13 @@ void printPowerInfo() {
         if (powerStatus.ref.BatteryLifePercent == 255) {
           print(' - Battery status unknown.');
         } else {
-          print(
-              ' - ${powerStatus.ref.BatteryLifePercent}% percent battery remaining.');
+          print(' - ${powerStatus.ref.BatteryLifePercent}% '
+              'percent battery remaining.');
         }
 
         if (powerStatus.ref.BatteryLifeTime != 0xFFFFFFFF) {
-          print(
-              ' - ${powerStatus.ref.BatteryLifeTime / 60} minutes of power estimated to remain.');
+          print(' - ${powerStatus.ref.BatteryLifeTime / 60} minutes of power '
+              'estimated to remain.');
         }
         // New in Windows 10, but should report 0 on older systems
         if (powerStatus.ref.SystemStatusFlag == 1) {
@@ -228,22 +228,22 @@ void printBatteryStatusInfo() {
             ? ' - Battery is discharging.'
             : ' - Battery is not discharging.');
 
-        print(
-            ' - Theoretical max capacity of the battery is ${batteryStatus.ref.MaxCapacity}.');
+        print(' - Theoretical max capacity of the battery is '
+            '${batteryStatus.ref.MaxCapacity}.');
 
-        print(
-            ' - Estimated remaining capacity of the battery is ${batteryStatus.ref.RemainingCapacity}.');
+        print(' - Estimated remaining capacity of the battery is '
+            '${batteryStatus.ref.RemainingCapacity}.');
 
-        print(
-            ' - Charge/discharge rate of the battery is ${batteryStatus.ref.EstimatedTime.abs()} mW.');
+        print(' - Charge/discharge rate of the battery is '
+            '${batteryStatus.ref.EstimatedTime.abs()} mW.');
 
-        print(
-            ' - Estimated time remaining on the battery is ${batteryStatus.ref.EstimatedTime} seconds.');
+        print(' - Estimated time remaining on the battery is '
+            '${batteryStatus.ref.EstimatedTime} seconds.');
 
-        print(
-            ' - Manufacturer suggested low battery alert is at ${batteryStatus.ref.DefaultAlert1} mWh.');
-        print(
-            ' - Manufacturer suggested warning battery alert is at ${batteryStatus.ref.DefaultAlert2} mWh.');
+        print(' - Manufacturer suggested low battery alert is at '
+            '${batteryStatus.ref.DefaultAlert1} mWh.');
+        print(' - Manufacturer suggested warning battery alert is at '
+            '${batteryStatus.ref.DefaultAlert2} mWh.');
       }
     }
   } finally {
@@ -272,11 +272,11 @@ void main() {
 
   print('\nWindows build number is: $buildNumber');
 
-  print(
-      '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
+  print('\nRAM physically installed on this computer: '
+      '${getSystemMemoryInMegabytes()}MB');
 
-  print(
-      '\nActive processors on the system: ${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}');
+  print('\nActive processors on the system: '
+      '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}');
   print('Computer name is: ${getComputerName()}\n');
 
   printPowerInfo();

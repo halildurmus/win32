@@ -29,20 +29,17 @@ void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 /// {@category winrt}
 void winrtUninitialize() => RoUninitialize();
 
-/// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
-/// {@category winrt}
-String convertFromHString(int hstring) {
-  final stringLength = calloc<UINT32>();
-
-  try {
-    final stringPtr = WindowsGetStringRawBuffer(hstring, stringLength);
-    final dartString = stringPtr.toDartString();
-
-    return dartString;
-  } finally {
-    free(stringLength);
-  }
+extension WinRTStringConversion on Pointer<HSTRING> {
+  /// Gets the Dart string at the handle pointed to by this object.
+  String toDartString() => convertFromHString(value);
 }
+
+/// Takes a `HSTRING` (a WinRT String handle), and converts it to a Dart
+/// `String`.
+///
+/// {@category winrt}
+String convertFromHString(int hstring) =>
+    WindowsGetStringRawBuffer(hstring, nullptr).toDartString();
 
 /// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
 /// returning an integer handle.

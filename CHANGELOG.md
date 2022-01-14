@@ -1,3 +1,15 @@
+## 2.3.4
+
+ - Added Windows Subsystem for Linux APIs (#342), with thanks to @ElMoribond.
+   Add a new example that shows how to use them.
+ - Added SetEvent (#343) and CreateIcon (#344), with thanks to @untp.
+ - Add more optional lints.
+
+## 2.3.3
+
+- Added CreateThread, CreateRemoteThread, CreateRemoteThreadEx() per request
+- Added GetMachineTypeAttributes and added logic for Windows 11.
+
 ## 2.3.2
 
 - Added CreateDIBSection per request.

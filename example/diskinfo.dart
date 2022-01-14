@@ -33,7 +33,7 @@ bool GetDriveGeometry(Pointer<Utf16> wszPath, Pointer<DISK_GEOMETRY> pdg) {
 
     CloseHandle(hDevice);
 
-    return (bResult == TRUE);
+    return bResult == TRUE;
   } finally {
     free(bytesReturned);
   }

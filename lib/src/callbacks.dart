@@ -146,6 +146,11 @@ typedef SymEnumSymbolsProc = Int32 Function(
 typedef TaskDialogCallbackProc = IntPtr Function(
     IntPtr hwnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam, IntPtr lpRefData);
 
+/// Application-defined callback function that serves as the starting address
+/// for a thread. Specify this address when calling the CreateThread,
+/// CreateRemoteThread, or CreateRemoteThreadEx function.
+typedef ThreadProc = DWORD Function(Pointer lpParameter);
+
 /// Application-defined callback function that processes WM_TIMER messages.
 typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 

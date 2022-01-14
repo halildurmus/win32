@@ -10,7 +10,8 @@ void main() {
 
   final result = GetVersionEx(osVersionInfo);
   if (result != 0) {
-    print(
-        'Windows ${osVersionInfo.ref.dwMajorVersion}.${osVersionInfo.ref.dwMinorVersion}');
+    print('Windows '
+        '${osVersionInfo.ref.dwMajorVersion}.'
+        '${osVersionInfo.ref.dwMinorVersion}');
   }
 }

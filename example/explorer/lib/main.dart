@@ -6,29 +6,14 @@ import 'volumepanel.dart';
 import 'windowroundingselector.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ExplorerApp());
 }
 
-class MyApp extends StatelessWidget {
+class ExplorerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      themeMode: ThemeMode.light,
       home: MainPage(),
-
-      // body: VolumePanel(),
-      // Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     // if (isWindows11) WindowRoundingSelector(),
-      //     // const Center(child: Text('Some text here')),
-      //     VolumePanel(),
-      //   ],
-      // ),
-      // ),
     );
   }
 }

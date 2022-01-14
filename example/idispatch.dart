@@ -113,11 +113,12 @@ void main() {
     throw WindowsException(hr);
   }
 
+  print('Minimizing all windows via Shell.Application Automation object');
   final dispatcher = Dispatcher.fromProgID('Shell.Application');
   final dispid = dispatcher.getDispId('MinimizeAll');
 
-  dispatcher.invokeMethod(dispid);
-
-  dispatcher.dispose();
+  dispatcher
+    ..invokeMethod(dispid)
+    ..dispose();
   OleUninitialize();
 }

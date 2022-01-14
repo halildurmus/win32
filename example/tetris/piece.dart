@@ -56,8 +56,9 @@ class Piece {
     final bottomLeft = Point.clone(points[0]);
 
     for (var i = 1; i < pointCount; i++) {
-      bottomLeft.x = min(points[i].x, bottomLeft.x);
-      bottomLeft.y = min(points[i].y, bottomLeft.y);
+      bottomLeft
+        ..x = min(points[i].x, bottomLeft.x)
+        ..y = min(points[i].y, bottomLeft.y);
     }
 
     body = List<Point>.generate(pointCount, (i) => Point());
@@ -77,9 +78,9 @@ class Piece {
     for (var x = 0; x < width; x++) {
       for (var y = 0; y < height; y++) {
         if (isPointExists(x, y)) {
-          final p = Point();
-          p.x = x;
-          p.y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -94,9 +95,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
         if (isPointExists(x, y)) {
-          final p = Point();
-          p.x = x;
-          p.y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -111,9 +112,9 @@ class Piece {
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {
         if (isPointExists(x, y)) {
-          final p = Point();
-          p.x = x;
-          p.y = y;
+          final p = Point()
+            ..x = x
+            ..y = y;
           points.add(p);
           break;
         }
@@ -125,11 +126,11 @@ class Piece {
   /// String representation of a piece (for debugging)
   @override
   String toString() {
-    final buffer = StringBuffer();
-    buffer.write('width = $width | ');
-    buffer.write('height = $height | ');
-    buffer.write('nPoints = $pointCount | ');
-    buffer.writeln('color = ${color.toRadixString(16)}');
+    final buffer = StringBuffer()
+      ..write('width = $width | ')
+      ..write('height = $height | ')
+      ..write('nPoints = $pointCount | ')
+      ..writeln('color = ${color.toRadixString(16)}');
 
     for (var y = height - 1; y >= 0; y--) {
       for (var x = 0; x < width; x++) {

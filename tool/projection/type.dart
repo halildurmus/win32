@@ -133,8 +133,9 @@ class TypeProjection {
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
     // model that with a generic Pointer in Dart.
-    if (typeArgNativeType == 'Void') {
-      return TypeTuple('Pointer', 'Pointer');
+    final projection = typeArg.projection;
+    if (projection.nativeType == 'Void') {
+      return const TypeTuple('Pointer', 'Pointer');
     }
 
     final nativeType = 'Pointer<$typeArgNativeType>';
@@ -197,7 +198,7 @@ class TypeProjection {
 
     // This is used by WinRT for an HSTRING
     if (isString) {
-      return TypeTuple('Pointer<IntPtr>', 'Pointer<IntPtr>');
+      return const TypeTuple('Pointer<IntPtr>', 'Pointer<IntPtr>');
     }
 
     // Could be an enum like FOLDERFLAGS
@@ -225,7 +226,7 @@ class TypeProjection {
     if (isInterface ||
         typeIdentifier.baseType == BaseType.ClassTypeModifier ||
         typeIdentifier.baseType == BaseType.Object) {
-      return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 
     // default: return the name as returned by metadata

@@ -34,12 +34,15 @@ int printModules(int processID) {
 
       // Get the full path to the module's file.
       final hModule = hMods.elementAt(i).value;
-      final moduleValue =
-          '0x${hModule.toRadixString(16).padLeft(sizeOf<HMODULE>(), '0').toUpperCase()}';
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
+        final hexModuleValue = hModule
+            .toRadixString(16)
+            .padLeft(sizeOf<HMODULE>(), '0')
+            .toUpperCase();
+
         // Print the module name and handle value.
-        print('\t${szModName.toDartString()} ($moduleValue)');
+        print('\t${szModName.toDartString()} (0x$hexModuleValue)');
       }
       free(szModName);
     }

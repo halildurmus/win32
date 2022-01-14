@@ -62,8 +62,6 @@ Map<String, int> getExports(String module) {
 }
 
 void main() {
-  final symbols = getExports(r'c:\windows\system32\kernel32.dll');
-
-  symbols
+  getExports(r'c:\windows\system32\kernel32.dll')
       .forEach((name, address) => print('[${address.toHexString(32)}] $name'));
 }

@@ -34,7 +34,7 @@ void write(
     print('Error ($result): $errorCode');
     return;
   }
-  print('Success. (${credential.ref.CredentialBlobSize})');
+  print('Success (blob size: ${credential.ref.CredentialBlobSize})');
 
   free(blob);
   free(credential);
@@ -61,9 +61,7 @@ void read(String credentialName) {
   final password = utf8.decode(blob);
   print('read password: $password');
   CredFree(credPointer.value);
-  print('done.');
   free(credPointer);
-  print('returning');
 }
 
 void delete(String credentialName) {
@@ -88,6 +86,6 @@ void main() {
   );
   read(credentialName);
   delete(credentialName);
-  print('Now reading should fail:');
+  print('Reading deleted credential should fail:');
   read(credentialName);
 }

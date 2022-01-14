@@ -1,4 +1,7 @@
 /// Maps between Windows versions and the corresponding build numbers
+///
+/// Details from:
+/// https://docs.microsoft.com/en-us/windows/release-health/release-information
 const windowsBuilds = <String, int>{
   'WIN8': 9200,
   'WIN81': 9600,
@@ -13,6 +16,9 @@ const windowsBuilds = <String, int>{
   'WIN10_19H2': 18363, // 1909
   'WIN10_20H1': 19041, // 2004
   'WIN10_20H2': 19042,
+  'WIN10_21H1': 19043,
+  'WIN10_21H2': 19044,
+  'WIN11_21H2': 22000,
 };
 
 /// Converts to/from win32struct.json

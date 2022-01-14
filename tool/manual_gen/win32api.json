@@ -151,7 +151,7 @@
         "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
     "AttachConsole": {
-        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
+        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
         "comment": "Attaches the calling process to the console of the specified process."
     },
@@ -707,7 +707,7 @@
         "comment": "The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device."
     },
     "CreateConsoleScreenBuffer": {
-        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
+        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
         "dllLibrary": "kernel32",
         "comment": "Creates a console screen buffer."
     },
@@ -786,6 +786,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateHatchBrush function creates a logical brush that has the specified hatch pattern and color."
     },
+    "CreateIcon": {
+        "prototype": "HICON CreateIcon(\n  HINSTANCE  hInstance,\n  int        nWidth,\n  int        nHeight,\n  BYTE       cPlanes,\n  BYTE       cBitsPixel,\n  const BYTE *lpbANDbits,\n  const BYTE *lpbXORbits\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates an icon that has the specified size, colors, and bit patterns."
+    },
     "CreateIoCompletionPort": {
         "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",
         "dllLibrary": "kernel32",
@@ -827,10 +832,25 @@
         "comment": "Creates a new pseudoconsole object for the calling process.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
+    "CreateRemoteThread": {
+        "prototype": "HANDLE CreateRemoteThread(\n  HANDLE hProcess,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread that runs in the virtual address space of another process. Use the CreateRemoteThreadEx function to create a thread that runs in the virtual address space of another process and optionally specify extended attributes."
+    },
+    "CreateRemoteThreadEx": {
+        "prototype": "HANDLE CreateRemoteThreadEx(\n  HANDLE hProcess,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread that runs in the virtual address space of another process and optionally specifies extended attributes such as processor group affinity."
+    },
     "CreateSolidBrush": {
         "prototype": "HBRUSH CreateSolidBrush(\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The CreateSolidBrush function creates a logical brush that has the specified solid color."
+    },
+    "CreateThread": {
+        "prototype": "HANDLE CreateThread(\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a thread to execute within the virtual address space of the calling process."
     },
     "CreateWindowEx": {
         "prototype": "HWND CreateWindowExW(\n  DWORD     dwExStyle,\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HMENU     hMenu,\n  HINSTANCE hInstance,\n  LPVOID    lpParam\n);",
@@ -1526,7 +1546,7 @@
         "comment": "The FlattenPath function transforms any curves in the path that is selected into the current device context (DC), turning each curve into a sequence of lines."
     },
     "FlushConsoleInputBuffer": {
-        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
+        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
         "dllLibrary": "kernel32",
         "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
     },
@@ -1794,6 +1814,11 @@
         "prototype": "DWORD GetCurrentThreadId();",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the thread identifier of the calling thread."
+    },
+    "GetCurrentThreadToken": {
+        "prototype": "HANDLE GetCurrentThreadToken();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a pseudo-handle that you can use as a shorthand way to refer to the impersonation token that was assigned to the current thread."
     },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
@@ -2116,7 +2141,7 @@
         "comment": "Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, off—alternating each time the key is pressed)."
     },
     "GetLargestConsoleWindowSize": {
-        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
+        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the size of the largest possible console window, based on the current font and the size of the display."
     },
@@ -2154,6 +2179,12 @@
         "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
+    },
+    "GetMachineTypeAttributes": {
+        "prototype": "HRESULT GetMachineTypeAttributes(\n  USHORT Machine,\n  MACHINE_ATTRIBUTES *MachineTypeAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Queries if the specified architecture is supported on the current system, either natively or by any form of compatibility or emulation layer.",
+        "minimumWindowsVersion": "WIN11_21H2"
     },
     "GetMaximumProcessorCount": {
         "prototype": "DWORD GetMaximumProcessorCount(\n  WORD GroupNumber\n);",
@@ -3508,22 +3539,22 @@
         "comment": "The mciGetDeviceID function retrieves the device identifier corresponding to the name of an open device."
     },
     "mciGetDeviceIDFromElementID": {
-        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n  DWORD   dwElementID,\n  LPCTSTR lpstrType\n);",
+        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n  DWORD   dwElementID,\n  LPCTSTR lpstrType\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetDeviceIDFromElementID function retrieves the MCI device identifier corresponding to an element identifier."
     },
     "mciGetErrorString": {
-        "prototype": "BOOL mciGetErrorStringW(\n  DWORD  fdwError,\n  LPTSTR lpszErrorText,\n  UINT   cchErrorText\n);",
+        "prototype": "BOOL mciGetErrorStringW(\n  DWORD  fdwError,\n  LPTSTR lpszErrorText,\n  UINT   cchErrorText\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetErrorString function retrieves a string that describes the specified MCI error code."
     },
     "mciSendCommand": {
-        "prototype": "MCIERROR mciSendCommandW(\n  MCIDEVICEID IDDevice,\n  UINT        uMsg,\n  DWORD_PTR   fdwCommand,\n  DWORD_PTR   dwParam\n);",
+        "prototype": "MCIERROR mciSendCommandW(\n  MCIDEVICEID IDDevice,\n  UINT        uMsg,\n  DWORD_PTR   fdwCommand,\n  DWORD_PTR   dwParam\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendCommand function sends a command message to the specified MCI device."
     },
     "mciSendString": {
-        "prototype": "MCIERROR mciSendStringW(\n  LPCTSTR lpszCommand,\n  LPTSTR  lpszReturnString,\n  UINT    cchReturn,\n  HANDLE  hwndCallback\n);",
+        "prototype": "MCIERROR mciSendStringW(\n  LPCTSTR lpszCommand,\n  LPTSTR  lpszReturnString,\n  UINT    cchReturn,\n  HANDLE  hwndCallback\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendString function sends a command string to an MCI device. The device that the command is sent to is specified in the command string."
     },
@@ -4015,7 +4046,7 @@
         "comment": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached."
     },
     "ReadConsole": {
-        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
+        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads character input from the console input buffer and removes it from the buffer."
     },
@@ -4702,7 +4733,7 @@
         "comment": "The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates."
     },
     "ScrollConsoleScreenBuffer": {
-        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
+        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
         "dllLibrary": "kernel32",
         "comment": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged."
     },
@@ -4854,7 +4885,7 @@
         "comment": "Sets the time-out parameters for all read and write operations on a specified communications device."
     },
     "SetConsoleCtrlHandler": {
-        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
+        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
         "dllLibrary": "kernel32",
         "comment": "Adds or removes an application-defined HandlerRoutine function from the list of handler functions for the calling process."
     },
@@ -4869,7 +4900,7 @@
         "comment": "Sets the cursor position in the specified console screen buffer."
     },
     "SetConsoleDisplayMode": {
-        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
+        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the display mode of the specified console screen buffer."
     },
@@ -4884,7 +4915,7 @@
         "comment": "Sets the attributes of characters written to the console screen buffer by the WriteFile or WriteConsole function, or echoed by the ReadFile or ReadConsole function. This function affects text written after the function call."
     },
     "SetConsoleWindowInfo": {
-        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
+        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the current size and position of a console screen buffer's window."
     },
@@ -4950,6 +4981,11 @@
         "prototype": "BOOL SetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPCTSTR lpValue\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the contents of the specified environment variable for the current process."
+    },
+    "SetEvent": {
+        "prototype": "BOOL SetEvent(\n  HANDLE hEvent\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the specified event object to the signaled state."
     },
     "SetFilePointer": {
         "prototype": "DWORD SetFilePointer(\n  HANDLE hFile,\n  LONG   lDistanceToMove,\n  PLONG  lpDistanceToMoveHigh,\n  DWORD  dwMoveMethod\n);",
@@ -5166,7 +5202,7 @@
         "comment": "The SetScrollInfo function sets the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb). The function also redraws the scroll bar, if requested."
     },
     "SetStdHandle": {
-        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
+        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the handle for the specified standard device (standard input, standard output, or standard error)."
     },
@@ -6418,7 +6454,7 @@
         "comment": "Suspends the specified WOW64 thread."
     },
     "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
     },
@@ -6437,5 +6473,54 @@
         "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
+    },
+    "WslConfigureDistribution": {
+        "prototype": "HRESULT WslConfigureDistribution(\n  _In_ PCWSTR distributionName,\n  _In_ ULONG defaultUID,\n  WSL_DISTRIBUTION_FLAGS wslDistributionFlags\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Modifies the behavior of a distribution registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslGetDistributionConfiguration": {
+        "prototype": "HRESULT WslGetDistributionConfiguration(\n  _In_ PCWSTR distributionName,\n  _Out_ ULONG *distributionVersion,\n  _Out_ ULONG *defaultUID,\n  _Out_ WSL_DISTRIBUTION_FLAGS *wslDistributionFlags,\n  _Outptr_result_buffer_ PSTR **defaultEnvironmentVariables,\n  _Out_ ULONG *defaultEnvironmentVariableCount\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Retrieves the current configuration of a distribution registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslIsDistributionRegistered": {
+        "prototype": "BOOL WslIsDistributionRegistered(\n  _In_ PCWSTR distributionName\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Determines if a distribution is registered with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslLaunch": {
+        "prototype": "HRESULT WslLaunch(\n  _In_ PCWSTR distributionName,\n  _In_opt_ PCWSTR command,\n  _In_ BOOL useCurrentWorkingDirectory,\n  _In_ HANDLE stdIn,\n  _In_ HANDLE stdOut,\n  _In_      HANDLE  stdErr,\n  _Out_     HANDLE  *process\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Launches a Windows Subsystem for Linux (WSL) process in the context of a particular distribution.",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslLaunchInteractive": {
+        "prototype": "HRESULT WslLaunchInteractive(\n  _In_ PCWSTR distributionName,\n  _In_opt_ command,\n  _In_ BOOL useCurrentWorkingDirectory,\n  _Out_ DWORD *exitCode\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Launches an interactive Windows Subsystem for Linux (WSL) process in the context of a particular distribution.This differs from WslLaunch in that the end user will be able to interact with the newly-created process.",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslRegisterDistribution": {
+        "prototype": "HRESULT WslRegisterDistribution(\n  _In_ PCWSTR distributionName,\n  _In_ PCWSTR tarGzFilename\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Registers a new distribution with the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "WslUnregisterDistribution": {
+        "prototype": "HRESULT WslUnregisterDistribution(\n  _In_ PCWSTR distributionName\n);",
+        "apiSet": "api-ms-win-wsl-api-l1-1-0",
+        "comment": "Unregisters a distribution from the Windows Subsystem for Linux (WSL).",
+        "category": "wslapi",
+        "minimumWindowsVersion": "WIN10_20H1"
     }
 }

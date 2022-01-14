@@ -19,9 +19,8 @@ import 'win32_functions.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly);
-
-  writer.writeStringSync('''
+  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly)
+    ..writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -47,12 +46,13 @@ void main() {
 ''');
   // Generate a list of libs, e.g. [kernel32, gdi32, ...]
   // The .toSet() removes duplicates.
-  final libraries =
-      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
-
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  libraries.removeWhere((library) => library == 'wlanapi');
+  final libraries = win32.functions.values
+      .map((e) => e.dllLibrary)
+      .toSet()
+      .toList()
+    ..removeWhere((library) => library == 'wlanapi');
 
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
@@ -109,18 +109,18 @@ void main() {
     }
     writer.writeStringSync('});\n\n');
   }
-  writer.writeStringSync('}');
-  writer.closeSync();
+  writer
+    ..writeStringSync('}')
+    ..closeSync();
 
   return testsGenerated;
 }
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer =
-      File('test/struct_test.dart').openSync(mode: FileMode.writeOnly);
-
-  writer.writeStringSync('''
+  final writer = File('test/struct_test.dart')
+      .openSync(mode: FileMode.writeOnly)
+    ..writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -163,8 +163,9 @@ void main() {
     testsGenerated++;
   }
 
-  writer.writeStringSync('}');
-  writer.closeSync();
+  writer
+    ..writeStringSync('}')
+    ..closeSync();
 
   return testsGenerated;
 }

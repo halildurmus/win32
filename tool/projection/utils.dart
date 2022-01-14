@@ -104,8 +104,9 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
     if ((textLine.length + word.length) >= wrapLength) {
       textLine.write('\n');
       outputText.write(textLine);
-      textLine.clear();
-      textLine.write('/// $word ');
+      textLine
+        ..clear()
+        ..write('/// $word ');
     } else {
       textLine.write('$word ');
     }

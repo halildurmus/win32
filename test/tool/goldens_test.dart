@@ -8,17 +8,16 @@ import 'package:winmd/winmd.dart';
 import '../../tool/projection/interface.dart';
 
 void main() {
-  test('Windows Runtime golden', () {
-    const type = 'Windows.Foundation.IAsyncInfo';
-    final typeDef = MetadataStore.getMetadataForType(type)!;
-    final dartClass = InterfaceProjection(typeDef).toString();
+  // test('Windows Runtime golden', () {
+  //   const type = 'Windows.Globalization.Calendar';
+  //   final typeDef = MetadataStore.getMetadataForType(type)!;
+  //   final dartClass = InterfaceProjection(typeDef).toString();
 
-    File('test/tool/goldens/IAsyncInfo.comparison')
-        .writeAsStringSync(dartClass);
-    final golden =
-        File('test/tool/goldens/IAsyncInfo.golden').readAsStringSync();
-    expect(dartClass, equalsIgnoringWhitespace(golden));
-  }, skip: 'Ignoring WinRT tests for now.');
+  //   File('test/tool/goldens/ICalendar.comparison').writeAsStringSync(dartClass);
+  //   final golden =
+  //       File('test/tool/goldens/ICalendar.golden').readAsStringSync();
+  //   expect(dartClass, equalsIgnoringWhitespace(golden));
+  // });
 
   test('COM golden', () {
     const typeToGenerate =
