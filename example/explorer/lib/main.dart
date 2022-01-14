@@ -18,17 +18,6 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.light,
       home: MainPage(),
-
-      // body: VolumePanel(),
-      // Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     // if (isWindows11) WindowRoundingSelector(),
-      //     // const Center(child: Text('Some text here')),
-      //     VolumePanel(),
-      //   ],
-      // ),
-      // ),
     );
   }
 }
