@@ -2,8 +2,8 @@ import 'package:winmd/winmd.dart';
 
 // import '../v3/exclusions.dart';
 import 'safenames.dart';
-import 'struct.dart';
 import 'type.dart';
+import 'struct.dart';
 import 'utils.dart';
 
 /// A struct or union that is nested in an enclosing class.
@@ -40,7 +40,7 @@ class NestedStructProjection extends StructProjection {
 
     while (typeDef.enclosingClass != null) {
       final parentField = typeDef.enclosingClass!.fields
-          .firstWhere((field) => field.typeIdentifier.type == typeDef);
+          .firstWhere((field) => (field.typeIdentifier.type == typeDef));
       final parentName = safeIdentifierForString(parentField.name);
       name = '$parentName.$name';
       typeDef = typeDef.enclosingClass!;
@@ -58,8 +58,8 @@ class NestedStructProjection extends StructProjection {
     final rootTypeName = stripLeadingUnderscores(
         stripAnsiUnicodeSuffix(lastComponent(rootType.name)));
 
-    final buffer = StringBuffer()
-      ..writeln('extension $extensionName on $rootTypeName {');
+    final buffer = StringBuffer();
+    buffer.writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
       final instanceName = _instanceName(field);
       final dartTypeProjection = field.typeIdentifier.type?.isNested == true
