@@ -5,6 +5,7 @@ import 'package:winmd/winmd.dart';
 import 'field.dart';
 import 'nestedStruct.dart';
 import 'safenames.dart';
+import 'type.dart';
 import 'utils.dart';
 
 /// Represents a Dart projection of a Struct typedef.
@@ -97,7 +98,7 @@ class StructProjection {
         ..write('\n$nestedTypeProjection\n')
         ..write(nestedTypeProjection
             ._propertyAccessors()
-            .replaceAll('{{CLASS}}', field)
+            .replaceAll('{{CLASS}}', nestedType.name)
             .replaceAll('{{PARENT}}', structName)
             .replaceAll('{{SUFFIX}}', suffix));
       fieldIdx++;
