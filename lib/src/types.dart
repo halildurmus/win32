@@ -31,6 +31,7 @@ typedef HANDLE = IntPtr;
 typedef HCALL = DWORD;
 typedef HDC = IntPtr;
 typedef HINSTANCE = IntPtr;
+typedef HKEY = IntPtr;
 typedef HMIDIIN = IntPtr;
 typedef HMODULE = IntPtr;
 typedef HRESULT = LONG;

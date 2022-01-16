@@ -1,9 +1,11 @@
 ## 2.3.4
 
- - Added Windows Subsystem for Linux APIs (#342), with thanks to @ElMoribond.
-   Add a new example that shows how to use them.
- - Added SetEvent (#343) and CreateIcon (#344), with thanks to @untp.
- - Add more optional lints.
+- Added Windows Subsystem for Linux APIs (#342), with thanks to @ElMoribond.
+  Add a new example that shows how to use them.
+- Added SetEvent (#343) and CreateIcon (#344), with thanks to @untp.
+- Add typedef for `HKEY`.
+- Add more optional lints.
+- Tweaked Explorer example.
 
 ## 2.3.3
 
