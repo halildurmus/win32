@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "A new Flutter project." "\0"
+            VALUE "CompanyName", "Dart Team" "\0"
+            VALUE "FileDescription", "Win32 Explorer demo app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "explorer" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "explorer.exe" "\0"
-            VALUE "ProductName", "explorer" "\0"
+            VALUE "InternalName", "Win32_Explorer" "\0"
+            VALUE "LegalCopyright", "Copyright 2019, the Dart project authors. All rights reserved." "\0"
+            VALUE "OriginalFilename", "win32Explorer.exe" "\0"
+            VALUE "ProductName", "win32Explorer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

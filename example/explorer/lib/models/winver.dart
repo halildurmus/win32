@@ -3,7 +3,7 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-Object _getRegistryValue(int key, String subKey, String valueName) {
+Object queryRegistryValue(int key, String subKey, String valueName) {
   late Object dataValue;
 
   final subKeyPtr = TEXT(subKey);
@@ -49,7 +49,7 @@ Object _getRegistryValue(int key, String subKey, String valueName) {
 }
 
 bool isWindows11() {
-  final windowsBuildNumber = int.parse(_getRegistryValue(
+  final windowsBuildNumber = int.parse(queryRegistryValue(
       HKEY_LOCAL_MACHINE,
       'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
       'CurrentBuildNumber') as String);
