@@ -9,11 +9,11 @@ import 'package:win32/win32.dart';
 final volumeHandles = <int, String>{};
 
 class Volume {
-  String deviceName;
-  String volumeName;
-  List<String> paths;
+  final String deviceName;
+  final String volumeName;
+  final List<String> paths;
 
-  Volume(this.deviceName, this.volumeName, this.paths);
+  const Volume(this.deviceName, this.volumeName, this.paths);
 }
 
 class Volumes {

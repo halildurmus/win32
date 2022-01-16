@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'data/volumes.dart';
+import 'models/volumes.dart';
 
 class VolumePanel extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class VolumePanel extends StatefulWidget {
 }
 
 class _VolumePanelState extends State<VolumePanel> {
-  final List<Volume> _volumes = [];
+  final _volumes = <Volume>[];
 
   @override
   void initState() {

@@ -1,7 +1,6 @@
-name: explorer
+name: win32_explorer
 description: Drive explorer, built with Flutter
-
-version: 1.0.0+5
+version: 1.0.0+6
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -31,3 +30,6 @@ publish_to: none
 dependency_overrides:
   win32:
     path: ../../
+
+flutter:
+  uses-material-design: true  
