@@ -125,6 +125,35 @@ class RegistryKey {
     return registryValue;
   }
 
+  String? getValueAsString(String valueName) {
+    final registryValue = getValue(valueName);
+
+    if (registryValue != null &&
+        [
+          RegistryValueKind.string,
+          RegistryValueKind.unexpandedString,
+          RegistryValueKind.link
+        ].contains(registryValue.type)) {
+      return registryValue.data as String;
+    } else {
+      return null;
+    }
+  }
+
+  int? getValueAsInt(String valueName) {
+    final registryValue = getValue(valueName);
+
+    if (registryValue != null &&
+        [
+          RegistryValueKind.int32,
+          RegistryValueKind.int64,
+        ].contains(registryValue.type)) {
+      return registryValue.data as int;
+    } else {
+      return null;
+    }
+  }
+
   void deleteValue(String valueName) {
     final lpValueName = valueName.toNativeUtf16();
 

@@ -6,7 +6,7 @@ void main() {
     // In any working Windows configuration, this key should have a sizable
     // number of values.
     final key = Registry.open(RegistryHive.localMachine,
-        subKey: r'Software\Microsoft\Windows NT\CurrentVersion');
+        path: r'Software\Microsoft\Windows NT\CurrentVersion');
 
     expect(key.values.length, greaterThan(0));
   });

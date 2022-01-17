@@ -9,9 +9,9 @@ import 'registry_key.dart';
 
 class Registry {
   static RegistryKey open(RegistryHive hive,
-      {String subKey = '', AccessRights accessRights = AccessRights.readOnly}) {
+      {String path = '', AccessRights accessRights = AccessRights.readOnly}) {
     final phKey = calloc<HKEY>();
-    final lpSubKey = subKey.toNativeUtf16();
+    final lpSubKey = path.toNativeUtf16();
     try {
       final lStatus = RegOpenKeyEx(
           hive.win32Value, lpSubKey, 0, accessRights.win32Value, phKey);
