@@ -1,3 +1,7 @@
+## 2.3.5
+
+- Add FileTimeToSystemTime and SystemTimeToFileTime.
+
 ## 2.3.4
 
 - Added Windows Subsystem for Linux APIs (#342), with thanks to @ElMoribond.
