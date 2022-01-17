@@ -1209,6 +1209,26 @@ late final _RegQueryValueEx = _advapi32.lookupFunction<
         Pointer<Uint8> lpData,
         Pointer<Uint32> lpcbData)>('RegQueryValueExW');
 
+/// Changes the name of the specified registry key.
+///
+/// ```c
+/// LSTATUS RegRenameKey(
+///   HKEY    hKey,
+///   LPCWSTR lpSubKeyName,
+///   LPCWSTR lpNewKeyName
+/// );
+/// ```
+/// {@category advapi32}
+int RegRenameKey(
+        int hKey, Pointer<Utf16> lpSubKeyName, Pointer<Utf16> lpNewKeyName) =>
+    _RegRenameKey(hKey, lpSubKeyName, lpNewKeyName);
+
+late final _RegRenameKey = _advapi32.lookupFunction<
+    Uint32 Function(
+        IntPtr hKey, Pointer<Utf16> lpSubKeyName, Pointer<Utf16> lpNewKeyName),
+    int Function(int hKey, Pointer<Utf16> lpSubKeyName,
+        Pointer<Utf16> lpNewKeyName)>('RegRenameKey');
+
 /// Replaces the file backing a registry key and all its subkeys with
 /// another file, so that when the system is next started, the key and
 /// subkeys will have the values stored in the new file.

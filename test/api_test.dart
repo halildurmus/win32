@@ -8913,6 +8913,15 @@ void main() {
               Pointer<Uint32> lpcbData)>('RegQueryValueExW');
       expect(RegQueryValueEx, isA<Function>());
     });
+    test('Can instantiate RegRenameKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegRenameKey = advapi32.lookupFunction<
+          Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKeyName,
+              Pointer<Utf16> lpNewKeyName),
+          int Function(int hKey, Pointer<Utf16> lpSubKeyName,
+              Pointer<Utf16> lpNewKeyName)>('RegRenameKey');
+      expect(RegRenameKey, isA<Function>());
+    });
     test('Can instantiate RegReplaceKey', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegReplaceKey = advapi32.lookupFunction<
