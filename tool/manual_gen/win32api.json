@@ -4326,6 +4326,11 @@
         "dllLibrary": "advapi32",
         "comment": "Retrieves the type and data for the specified value name associated with an open registry key. To ensure that any string values (REG_SZ, REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the RegGetValue function."
     },
+    "RegRenameKey": {
+        "prototype": "LSTATUS RegRenameKey(\n  HKEY    hKey,\n  LPCWSTR lpSubKeyName,\n  LPCWSTR lpNewKeyName\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Changes the name of the specified registry key."
+    },
     "RegReplaceKey": {
         "prototype": "LSTATUS RegReplaceKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpNewFile,\n  LPCWSTR lpOldFile);",
         "dllLibrary": "advapi32",
