@@ -1,3 +1,7 @@
+## 2.3.6
+
+- Add RegRenameKey.
+
 ## 2.3.5
 
 - Add FileTimeToSystemTime and SystemTimeToFileTime.
