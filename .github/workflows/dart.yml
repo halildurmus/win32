@@ -1,0 +1,40 @@
+name: Dart
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: main
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
+
+      - name: Add code coverage package
+        run: dart pub global activate coverage
+
+      - name: Generate code coverage
+        run: dart test --coverage=coverage
+
+      - name: Convert code coverage into lcov file
+        run: dart pub global run coverage:format_coverage --lcov --in=coverage --check-ignore --out=lcov.info --packages=.packages
+
+      - name: Upload code coverage
+        uses: codecov/codecov-action@v2
+        with:
+          files: lcov.info
