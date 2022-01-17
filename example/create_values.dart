@@ -3,17 +3,17 @@ import 'package:win32_registry/win32_registry.dart';
 void main() {
   final hkcu = Registry.currentUser;
   const subkeyName = 'DemoTestKey';
-  final subkey = hkcu.createSubkey(subkeyName);
+  final subkey = hkcu.createKey(subkeyName);
 
   final dword =
-      const RegistryValue('TestDWORD', RegistryValueKind.int32, 0xFACEFEED);
+      const RegistryValue('TestDWORD', RegistryValueType.int32, 0xFACEFEED);
   subkey.createValue(dword);
 
   final qword = const RegistryValue(
-      'TestQWORD', RegistryValueKind.int64, 0x0123456789ABCDEF);
+      'TestQWORD', RegistryValueType.int64, 0x0123456789ABCDEF);
   subkey.createValue(qword);
 
-  final string = const RegistryValue('TestString', RegistryValueKind.string,
+  final string = const RegistryValue('TestString', RegistryValueType.string,
       'The human race has one really effective weapon, and that is laughter.');
   subkey.createValue(string);
 }

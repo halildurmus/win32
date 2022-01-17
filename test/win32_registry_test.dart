@@ -16,18 +16,18 @@ void main() {
     final hkcu = Registry.currentUser;
     const subkeyName = 'Win32RegistryTestKey';
     expect(hkcu.subkeyNames.contains(subkeyName), false);
-    hkcu.createSubkey(subkeyName);
+    hkcu.createKey(subkeyName);
     expect(hkcu.subkeyNames.contains(subkeyName), true);
-    hkcu.deleteSubkey(subkeyName);
+    hkcu.deleteKey(subkeyName);
     expect(hkcu.subkeyNames.contains(subkeyName), false);
   });
 
   test('Create a DWORD value (REG_DWORD)', () {
     final hkcu = Registry.currentUser;
     const subkeyName = 'Win32RegistryTestKey';
-    final subkey = hkcu.createSubkey(subkeyName);
+    final subkey = hkcu.createKey(subkeyName);
     final value =
-        const RegistryValue('TestValue', RegistryValueKind.int32, 1234);
+        const RegistryValue('TestValue', RegistryValueType.int32, 1234);
     subkey.createValue(value);
     expect(subkey.values.where((v) => v.name == 'TestValue').first, value);
 
@@ -35,95 +35,124 @@ void main() {
 
     subkey.deleteValue('TestValue');
     expect(subkey.values.where((elem) => elem.name == 'TestValue'), isEmpty);
-    hkcu.deleteSubkey(subkeyName);
+    hkcu.deleteKey(subkeyName);
   });
 
   test('Create a QWORD value (REG_QWORD)', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser);
     const keyName = 'Win32RegistryTestKey';
-    final key = hkcu.createSubkey(keyName);
+    final key = hkcu.createKey(keyName);
     final value = const RegistryValue(
-        'TestValue', RegistryValueKind.int64, 0xFEEDFACECAFEBEEF);
+        'TestValue', RegistryValueType.int64, 0xFEEDFACECAFEBEEF);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     expect(retrievedValue, isNotNull);
     expect(retrievedValue?.name, 'TestValue');
-    expect(retrievedValue?.type, RegistryValueKind.int64);
+    expect(retrievedValue?.type, RegistryValueType.int64);
     expect(retrievedValue?.data as int, 0xFEEDFACECAFEBEEF);
 
     expect(key.getValueAsInt('TestValue'), 0xFEEDFACECAFEBEEF);
 
     key.deleteValue('TestValue');
     expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
-    hkcu.deleteSubkey(keyName);
+    hkcu.deleteKey(keyName);
   });
 
   test('Create a string value (REG_SZ)', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser);
     const keyName = 'Win32RegistryTestKey';
-    final key = hkcu.createSubkey(keyName);
+    final key = hkcu.createKey(keyName);
     final value = const RegistryValue(
-        'TestValue', RegistryValueKind.string, 'Some text here.');
+        'TestValue', RegistryValueType.string, 'Some text here.');
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueKind.string);
+    expect(retrievedValue?.type, RegistryValueType.string);
     final data = retrievedValue?.data as String;
     expect(data, 'Some text here.');
 
     expect(key.getValueAsString('TestValue'), 'Some text here.');
     key.deleteValue('TestValue');
     expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
-    hkcu.deleteSubkey(keyName);
+    hkcu.deleteKey(keyName);
   });
 
   test('Create a string array (REG_MULTI_SZ)', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser);
     const keyName = 'Win32RegistryTestKey';
-    final key = hkcu.createSubkey(keyName);
+    final key = hkcu.createKey(keyName);
     final value = const RegistryValue(
-        'TestValue', RegistryValueKind.stringArray, ['One', 'Two', 'Three']);
+        'TestValue', RegistryValueType.stringArray, ['One', 'Two', 'Three']);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueKind.stringArray);
+    expect(retrievedValue?.type, RegistryValueType.stringArray);
     final array = retrievedValue?.data as List<String>;
     expect(array.length, 3);
     expect(array.first, 'One');
     key.deleteValue('TestValue');
     expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
-    hkcu.deleteSubkey(keyName);
+    hkcu.deleteKey(keyName);
   });
 
   test('Create a binary value (REG_BINARY)', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser);
     const keyName = 'Win32RegistryTestKey';
-    final key = hkcu.createSubkey(keyName);
+    final key = hkcu.createKey(keyName);
     final value = const RegistryValue(
-        'TestValue', RegistryValueKind.binary, [0xFF, 0x33, 0x77, 0xAA]);
+        'TestValue', RegistryValueType.binary, [0xFF, 0x33, 0x77, 0xAA]);
     key.createValue(value);
     final retrievedValue = key.getValue('TestValue');
     expect(retrievedValue, isNotNull);
-    expect(retrievedValue?.type, RegistryValueKind.binary);
+    expect(retrievedValue?.type, RegistryValueType.binary);
     final array = retrievedValue?.data as List<int>;
     expect(array.length, 4);
     expect(array.first, 0xFF);
     expect(array.last, 0xAA);
     key.deleteValue('TestValue');
     expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
-    hkcu.deleteSubkey(keyName);
+    hkcu.deleteKey(keyName);
+  });
+
+  test('Create an expanded string value (REG_EXPAND_SZ)', () {
+    final hkcu = Registry.openPath(RegistryHive.currentUser);
+    const keyName = 'Win32RegistryTestKey';
+    final key = hkcu.createKey(keyName);
+    final value = const RegistryValue(
+        'TestValue',
+        RegistryValueType.unexpandedString,
+        r'%SystemRoot%\System32\MirrorDrvCompat.dll');
+    key.createValue(value);
+
+    final retrievedValue = key.getValue('TestValue', expandPaths: false);
+    expect(retrievedValue, isNotNull);
+    expect(retrievedValue?.type, RegistryValueType.unexpandedString);
+
+    // Unexpanded should be as stored
+    expect(key.getValueAsString('TestValue', expandPaths: false),
+        r'%SystemRoot%\System32\MirrorDrvCompat.dll');
+
+    // Expanded should replace %SystemRoot% with an actual system path
+    expect(key.getValueAsString('TestValue', expandPaths: true),
+        isNot(contains('%SystemRoot%')));
+    expect(key.getValueAsString('TestValue', expandPaths: true),
+        endsWith(r'\System32\MirrorDrvCompat.dll'));
+
+    key.deleteValue('TestValue');
+    expect(key.values.where((elem) => elem.name == 'TestValue'), isEmpty);
+    hkcu.deleteKey(keyName);
   });
 
   test('Rename a subkey', () {
     final hkcu = Registry.openPath(RegistryHive.currentUser)
-      ..createSubkey('Win32RegistryTestKey');
+      ..createKey('Win32RegistryTestKey');
     expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isTrue);
 
     hkcu.renameSubkey('Win32RegistryTestKey', 'MyNewTestKey');
     expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isFalse);
     expect(hkcu.subkeyNames.contains('MyNewTestKey'), isTrue);
 
-    hkcu.deleteSubkey('MyNewTestKey');
+    hkcu.deleteKey('MyNewTestKey');
     expect(hkcu.subkeyNames.contains('Win32RegistryTestKey'), isFalse);
     expect(hkcu.subkeyNames.contains('MyNewTestKey'), isFalse);
   });
@@ -132,8 +161,7 @@ void main() {
     final hkcu = Registry.openPath(RegistryHive.localMachine);
     const subkeyName = 'Win32RegistryTestKey';
     expect(hkcu.subkeyNames.contains(subkeyName), false);
-    expect(
-        () => hkcu.createSubkey(subkeyName), throwsA(isA<WindowsException>()));
+    expect(() => hkcu.createKey(subkeyName), throwsA(isA<WindowsException>()));
     expect(hkcu.subkeyNames.contains(subkeyName), false);
   });
 }

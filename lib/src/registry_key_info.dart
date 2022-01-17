@@ -1,3 +1,4 @@
+/// Information about the specified registry key.
 class RegistryKeyInfo {
   final String className;
   final int subKeyCount;

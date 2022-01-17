@@ -5,7 +5,8 @@ import 'package:win32/win32.dart';
 
 import 'registry_key_info.dart';
 import 'registry_value.dart';
-import 'registry_value_kind.dart';
+import 'registry_value_type.dart';
+import 'utils.dart';
 
 /// An individual node in the Windows registry.
 ///
@@ -17,42 +18,16 @@ import 'registry_value_kind.dart';
 /// Sometimes, the presence of a key is all the data that an application
 /// requires; other times, an application opens a key and uses the values
 /// associated with the key.
-///
-/// The system defines a series of predefined keys as entry points to the
-/// registry, including a
-
 class RegistryKey {
   /// A handle to the current registry key
   final int hkey;
 
   const RegistryKey(this.hkey);
 
-  DateTime? convertToDartDateTime(Pointer<FILETIME> lpFileTime) {
-    if (lpFileTime == nullptr) return null;
-
-    final lpSystemTime = calloc<SYSTEMTIME>();
-    try {
-      final result = FileTimeToSystemTime(lpFileTime, lpSystemTime);
-      if (result == FALSE) return null;
-
-      final systemTime = lpSystemTime.ref;
-      final dateTime = DateTime.utc(
-          systemTime.wYear,
-          systemTime.wMonth,
-          systemTime.wDay,
-          systemTime.wHour,
-          systemTime.wMinute,
-          systemTime.wSecond,
-          systemTime.wMilliseconds);
-
-      return dateTime;
-    } finally {
-      free(lpSystemTime);
-    }
-  }
-
-  RegistryKey createSubkey(String subkey) {
-    final lpSubKey = subkey.toNativeUtf16();
+  /// Creates the specified registry key. If the key already exists, the
+  /// function opens it. Note that key names are not case sensitive.
+  RegistryKey createKey(String keyName) {
+    final lpSubKey = keyName.toNativeUtf16();
     final phkResult = calloc<HKEY>();
 
     try {
@@ -69,8 +44,10 @@ class RegistryKey {
     }
   }
 
-  void deleteSubkey(String subkey) {
-    final lpSubKey = subkey.toNativeUtf16();
+  /// Deletes a subkey and its values from the specified platform-specific view
+  /// of the registry. Note that key names are not case sensitive.
+  void deleteKey(String keyName) {
+    final lpSubKey = keyName.toNativeUtf16();
 
     try {
       final retcode = RegDeleteKey(hkey, lpSubKey);
@@ -83,6 +60,7 @@ class RegistryKey {
     }
   }
 
+  /// Sets the data and type of a specified value under a registry key.
   void createValue(RegistryValue value) {
     final lpValueName = value.name.toNativeUtf16();
     final lpWin32Data = value.toWin32;
@@ -100,39 +78,46 @@ class RegistryKey {
     }
   }
 
-  RegistryValue? getValue(String valueName) {
-    final lpValueName = valueName.toNativeUtf16();
-    final lpType = calloc<DWORD>();
-    final lpcbData = calloc<DWORD>();
+  /// Retrieves the type and data for the specified registry value.
+  RegistryValue? getValue(String valueName,
+      {String path = '', bool expandPaths = false}) {
+    final lpSubKey = path.toNativeUtf16();
+    final lpValue = valueName.toNativeUtf16();
+    final pdwType = calloc<DWORD>();
+    final pcbData = calloc<DWORD>();
+
+    final flags = expandPaths ? RRF_RT_ANY : RRF_RT_ANY | RRF_NOEXPAND;
 
     // Call first time to find out how much memory we need to allocate
     var retcode =
-        RegQueryValueEx(hkey, lpValueName, nullptr, lpType, nullptr, lpcbData);
+        RegGetValue(hkey, lpSubKey, lpValue, flags, pdwType, nullptr, pcbData);
     if (retcode == ERROR_FILE_NOT_FOUND) return null;
 
-    // Now call for real to get the datta we need.
-    final lpData = calloc<BYTE>(lpcbData.value);
+    // Now call for real to get the data we need.
+    final pvData = calloc<BYTE>(pcbData.value);
     retcode =
-        RegQueryValueEx(hkey, lpValueName, nullptr, lpType, lpData, lpcbData);
+        RegGetValue(hkey, lpSubKey, lpValue, flags, pdwType, pvData, pcbData);
     final registryValue = RegistryValue.fromWin32(
-        lpValueName.toDartString(), lpType.value, lpData, lpcbData.value);
+        lpValue.toDartString(), pdwType.value, pvData, pcbData.value);
 
-    free(lpValueName);
-    free(lpType);
-    free(lpData);
-    free(lpcbData);
+    free(lpSubKey);
+    free(lpValue);
+    free(pdwType);
+    free(pcbData);
+    free(pvData);
 
     return registryValue;
   }
 
-  String? getValueAsString(String valueName) {
-    final registryValue = getValue(valueName);
+  /// Retrieves the string data for the specified registry value.
+  String? getValueAsString(String valueName, {bool expandPaths = false}) {
+    final registryValue = getValue(valueName, expandPaths: expandPaths);
 
     if (registryValue != null &&
         [
-          RegistryValueKind.string,
-          RegistryValueKind.unexpandedString,
-          RegistryValueKind.link
+          RegistryValueType.string,
+          RegistryValueType.unexpandedString,
+          RegistryValueType.link
         ].contains(registryValue.type)) {
       return registryValue.data as String;
     } else {
@@ -140,13 +125,14 @@ class RegistryKey {
     }
   }
 
+  /// Retrieves the integer data for the specified registry value.
   int? getValueAsInt(String valueName) {
     final registryValue = getValue(valueName);
 
     if (registryValue != null &&
         [
-          RegistryValueKind.int32,
-          RegistryValueKind.int64,
+          RegistryValueType.int32,
+          RegistryValueType.int64,
         ].contains(registryValue.type)) {
       return registryValue.data as int;
     } else {
@@ -154,6 +140,8 @@ class RegistryKey {
     }
   }
 
+  /// Removes a named value from the specified registry key. Note that value
+  /// names are not case sensitive.
   void deleteValue(String valueName) {
     final lpValueName = valueName.toNativeUtf16();
 
@@ -168,6 +156,7 @@ class RegistryKey {
     }
   }
 
+  /// Changes the name of the specified registry key.
   void renameSubkey(String oldName, String newName) {
     final lpSubKeyName = oldName.toNativeUtf16();
     final lpNewKeyName = newName.toNativeUtf16();
@@ -184,6 +173,7 @@ class RegistryKey {
     }
   }
 
+  /// Retrieves information about the specified registry key.
   RegistryKeyInfo queryInfo() {
     return using((Arena arena) {
       final lpClass = arena<Uint16>(256).cast<Utf16>();
@@ -230,6 +220,7 @@ class RegistryKey {
     });
   }
 
+  /// Enumerates the values for the specified open registry key.
   Iterable<RegistryValue> get values sync* {
     final keyInfo = queryInfo();
 
@@ -265,6 +256,7 @@ class RegistryKey {
     }
   }
 
+  /// Enumerates the values for the specified open registry key.
   Iterable<String> get subkeyNames sync* {
     final keyInfo = queryInfo();
 
@@ -292,6 +284,7 @@ class RegistryKey {
     }
   }
 
+  /// Closes a handle to the specified registry key.
   void close() {
     RegCloseKey(hkey);
   }

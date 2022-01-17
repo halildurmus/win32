@@ -7,17 +7,35 @@ import 'access_rights.dart';
 import 'registry_hive.dart';
 import 'registry_key.dart';
 
+/// Represents the Windows Registry as a database.
+///
+/// Use this object to access the child keys and values within the registry.
+///
+/// You can either open a specific key within the registry or use one of the
+/// predefined root keys (e.g. [localMachine], [currentUser], or [classesRoot]).
+///
+/// Example:
+///
+/// ```dart
+/// final key = Registry.openPath(RegistryHive.localMachine,
+///   path: r'Software\Microsoft\Windows NT\CurrentVersion');
+/// ```
 class Registry {
-  // This class shouldn't be instantiated directly.
+  /// This class shouldn't be instantiated directly.
   Registry._();
 
+  /// Opens a new key based on the given path.
+  ///
+  /// When you are finished with the key, you should close it and release the
+  /// handle with the [RegistryKey.close] method.
   static RegistryKey openPath(RegistryHive hive,
-      {String path = '', AccessRights accessRights = AccessRights.readOnly}) {
+      {String path = '',
+      AccessRights desiredAccessRights = AccessRights.readOnly}) {
     final phKey = calloc<HKEY>();
     final lpSubKey = path.toNativeUtf16();
     try {
       final lStatus = RegOpenKeyEx(
-          hive.win32Value, lpSubKey, 0, accessRights.win32Value, phKey);
+          hive.win32Value, lpSubKey, 0, desiredAccessRights.win32Value, phKey);
 
       if (lStatus == ERROR_SUCCESS) {
         return RegistryKey(phKey.value);
@@ -48,15 +66,15 @@ class Registry {
     }
   }
 
-  static RegistryKey get localMachine =>
-      openPath(RegistryHive.localMachine, accessRights: AccessRights.readOnly);
-  static RegistryKey get allUsers =>
-      openPath(RegistryHive.allUsers, accessRights: AccessRights.readOnly);
+  static RegistryKey get localMachine => openPath(RegistryHive.localMachine,
+      desiredAccessRights: AccessRights.readOnly);
+  static RegistryKey get allUsers => openPath(RegistryHive.allUsers,
+      desiredAccessRights: AccessRights.readOnly);
   static RegistryKey get performanceData =>
       openPath(RegistryHive.performanceData,
-          accessRights: AccessRights.readOnly);
-  static RegistryKey get classesRoot =>
-      openPath(RegistryHive.classesRoot, accessRights: AccessRights.readOnly);
-  static RegistryKey get currentConfig =>
-      openPath(RegistryHive.currentConfig, accessRights: AccessRights.readOnly);
+          desiredAccessRights: AccessRights.readOnly);
+  static RegistryKey get classesRoot => openPath(RegistryHive.classesRoot,
+      desiredAccessRights: AccessRights.readOnly);
+  static RegistryKey get currentConfig => openPath(RegistryHive.currentConfig,
+      desiredAccessRights: AccessRights.readOnly);
 }
