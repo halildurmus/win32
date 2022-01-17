@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -52,10 +53,20 @@ class RegistryValue {
         final ptr = calloc<QWORD>()..value = data as int;
         return PointerData(ptr.cast<Uint8>(), sizeOf<QWORD>());
       case RegistryValueKind.string:
+      case RegistryValueKind.unexpandedString:
+      case RegistryValueKind.link:
         final strData = data as String;
         final ptr = strData.toNativeUtf16();
         return PointerData(ptr.cast<Uint8>(), strData.length * 2 + 1);
-      // TODO: Add others
+      case RegistryValueKind.stringArray:
+        final strArray = (data as List<String>).map((s) => '$s\x00').join();
+        final ptr = strArray.toNativeUtf16();
+        return PointerData(ptr.cast<Uint8>(), strArray.length * 2);
+      case RegistryValueKind.binary:
+        final dataList = Uint8List.fromList(data as List<int>);
+        final ptr = dataList.allocatePointer();
+        return PointerData(ptr, dataList.length);
+
       default:
         return PointerData(nullptr, 0);
     }

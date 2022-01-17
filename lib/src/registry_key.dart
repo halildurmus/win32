@@ -89,7 +89,7 @@ class RegistryKey {
 
     try {
       final retcode = RegSetValueEx(hkey, lpValueName, NULL,
-          value.type.win32Value, lpWin32Data.data, lpWin32Data.lengthBytes);
+          value.type.win32Value, lpWin32Data.data, lpWin32Data.lengthInBytes);
 
       if (retcode != ERROR_SUCCESS) {
         throw WindowsException(HRESULT_FROM_WIN32(retcode));
@@ -165,6 +165,22 @@ class RegistryKey {
       }
     } finally {
       free(lpValueName);
+    }
+  }
+
+  void renameSubkey(String oldName, String newName) {
+    final lpSubKeyName = oldName.toNativeUtf16();
+    final lpNewKeyName = newName.toNativeUtf16();
+
+    try {
+      final retcode = RegRenameKey(hkey, lpSubKeyName, lpNewKeyName);
+
+      if (retcode != ERROR_SUCCESS) {
+        throw WindowsException(HRESULT_FROM_WIN32(retcode));
+      }
+    } finally {
+      free(lpSubKeyName);
+      free(lpNewKeyName);
     }
   }
 

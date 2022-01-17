@@ -1,8 +1,7 @@
 import 'package:win32_registry/win32_registry.dart';
 
 void main() {
-  final hkcu = Registry.open(RegistryHive.currentUser,
-      accessRights: AccessRights.allAccess);
+  final hkcu = Registry.currentUser;
   const subkeyName = 'DemoTestKey';
   final subkey = hkcu.createSubkey(subkeyName);
 

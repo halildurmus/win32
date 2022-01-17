@@ -9,7 +9,9 @@ environment:
 
 dependencies: 
   ffi: ^1.1.2
-  win32: ^2.3.5
+  win32: 
+    git: 
+      url: https://github.com/timsneath/win32.git
 
 dev_dependencies:
   lints: ^1.0.1
