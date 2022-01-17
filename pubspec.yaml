@@ -1,6 +1,6 @@
 name: win32_registry
 description: A set of classes for working with the Windows registry.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/timsneath/win32_registry
 issue_tracker: https://github.com/timsneath/win32_registry/issues
 
