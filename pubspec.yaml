@@ -1,15 +1,17 @@
 name: win32_registry
 description: A set of classes for working with the Windows registry.
-version: 1.0.0
+version: 0.1.0
+repository: https://github.com/timsneath/win32_registry
+issue_tracker: https://github.com/timsneath/win32_registry/issues
 
 environment:
-  sdk: '>=2.17.0-16.0.dev <3.0.0'
+  sdk: '>=2.15.0 <3.0.0'
 
 dependencies: 
   ffi: ^1.1.2
   win32: ^2.3.5
 
 dev_dependencies:
-  lints: ^1.0.0
-  test: ^1.16.0
+  lints: ^1.0.1
+  test: ^1.20.1
 
