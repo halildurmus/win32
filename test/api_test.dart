@@ -1692,6 +1692,15 @@ void main() {
               Pointer<Uint16> lpFatTime)>('FileTimeToDosDateTime');
       expect(FileTimeToDosDateTime, isA<Function>());
     });
+    test('Can instantiate FileTimeToSystemTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FileTimeToSystemTime = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<FILETIME> lpFileTime, Pointer<SYSTEMTIME> lpSystemTime),
+          int Function(Pointer<FILETIME> lpFileTime,
+              Pointer<SYSTEMTIME> lpSystemTime)>('FileTimeToSystemTime');
+      expect(FileTimeToSystemTime, isA<Function>());
+    });
     test('Can instantiate FillConsoleOutputAttribute', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FillConsoleOutputAttribute = kernel32.lookupFunction<
@@ -3420,6 +3429,15 @@ void main() {
           Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
           int Function(int dwMilliseconds, int bAlertable)>('SleepEx');
       expect(SleepEx, isA<Function>());
+    });
+    test('Can instantiate SystemTimeToFileTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SystemTimeToFileTime = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime),
+          int Function(Pointer<SYSTEMTIME> lpSystemTime,
+              Pointer<FILETIME> lpFileTime)>('SystemTimeToFileTime');
+      expect(SystemTimeToFileTime, isA<Function>());
     });
     test('Can instantiate TerminateProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

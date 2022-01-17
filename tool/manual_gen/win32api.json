@@ -1423,6 +1423,11 @@
         "dllLibrary": "kernel32",
         "comment": "Converts a file time to MS-DOS date and time values."
     },
+    "FileTimeToSystemTime": {
+        "prototype": "BOOL FileTimeToSystemTime(\n  const FILETIME *lpFileTime,\n  LPSYSTEMTIME   lpSystemTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts a file time to system time format. System time is based on Coordinated Universal Time (UTC)."
+    },
     "FillConsoleOutputAttribute": {
         "prototype": "BOOL WINAPI FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
         "dllLibrary": "kernel32",
@@ -5681,6 +5686,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the value of one of the system-wide parameters, taking into account the provided DPI value.",
         "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "SystemTimeToFileTime": {
+        "prototype": "BOOL SystemTimeToFileTime(\n  const SYSTEMTIME *lpSystemTime,\n  LPFILETIME       lpFileTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts a system time to file time format. System time is based on Coordinated Universal Time (UTC)."
     },
     "TabbedTextOut": {
         "prototype": "LONG TabbedTextOutW(\n  HDC       hdc,\n  int       x,\n  int       y,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions,\n  int       nTabOrigin\n);",

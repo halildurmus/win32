@@ -1312,6 +1312,26 @@ late final _FileTimeToDosDateTime = _kernel32.lookupFunction<
     int Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
         Pointer<Uint16> lpFatTime)>('FileTimeToDosDateTime');
 
+/// Converts a file time to system time format. System time is based on
+/// Coordinated Universal Time (UTC).
+///
+/// ```c
+/// BOOL FileTimeToSystemTime(
+///   const FILETIME *lpFileTime,
+///   LPSYSTEMTIME   lpSystemTime
+/// );
+/// ```
+/// {@category kernel32}
+int FileTimeToSystemTime(
+        Pointer<FILETIME> lpFileTime, Pointer<SYSTEMTIME> lpSystemTime) =>
+    _FileTimeToSystemTime(lpFileTime, lpSystemTime);
+
+late final _FileTimeToSystemTime = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<FILETIME> lpFileTime, Pointer<SYSTEMTIME> lpSystemTime),
+    int Function(Pointer<FILETIME> lpFileTime,
+        Pointer<SYSTEMTIME> lpSystemTime)>('FileTimeToSystemTime');
+
 /// Sets the character attributes for a specified number of character
 /// cells, beginning at the specified coordinates in a screen buffer.
 ///
@@ -4970,6 +4990,26 @@ int SleepEx(int dwMilliseconds, int bAlertable) =>
 late final _SleepEx = _kernel32.lookupFunction<
     Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
     int Function(int dwMilliseconds, int bAlertable)>('SleepEx');
+
+/// Converts a system time to file time format. System time is based on
+/// Coordinated Universal Time (UTC).
+///
+/// ```c
+/// BOOL SystemTimeToFileTime(
+///   const SYSTEMTIME *lpSystemTime,
+///   LPFILETIME       lpFileTime
+/// );
+/// ```
+/// {@category kernel32}
+int SystemTimeToFileTime(
+        Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime) =>
+    _SystemTimeToFileTime(lpSystemTime, lpFileTime);
+
+late final _SystemTimeToFileTime = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime),
+    int Function(Pointer<SYSTEMTIME> lpSystemTime,
+        Pointer<FILETIME> lpFileTime)>('SystemTimeToFileTime');
 
 /// Terminates the specified process and all of its threads.
 ///
