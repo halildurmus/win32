@@ -1,3 +1,8 @@
+## 2.3.7
+
+- Declare platform support using new `platforms:` declaration in pubspec.yaml
+- Update minimum version to Dart 2.15.0 and use constructor tearoffs
+
 ## 2.3.6
 
 - Add RegRenameKey.
