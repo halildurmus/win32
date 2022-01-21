@@ -1,3 +1,8 @@
+## 1.0.24
+
+- Update to latest win32metadata `.winmd` file.
+- Bump minimum Dart SDK to 2.15.0.
+
 ## 1.0.23
 
 - Update to latest win32metadata `.winmd` file.
