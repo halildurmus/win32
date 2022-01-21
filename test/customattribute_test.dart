@@ -20,8 +20,8 @@ void main() {
 
     expect(mc?.customAttributes.length, equals(5));
 
-    final first = mc?.customAttributes.first;
-    expect(first.toString(),
-        equals('Windows.Foundation.Metadata.DeprecatedAttribute'));
+    final attributes = mc?.customAttributes.map((a) => a.toString());
+    expect(attributes,
+        contains('Windows.Foundation.Metadata.DeprecatedAttribute'));
   });
 }
