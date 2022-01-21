@@ -100,22 +100,14 @@ void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   print(winTypeDef!.guid);
 }
 
-String methodSignature(Method method) {
-  final buffer = StringBuffer();
-  buffer.write('   ${method.isStatic ? 'static ' : ''}'
-      '${method.isFinal ? 'final ' : ''}'
-      '${method.isGetProperty ? '[propget] ' : ''}'
-      '${method.isSetProperty ? '[propset] ' : ''}'
-      '${method.returnType.typeIdentifier.name} '
-      '${method.isProperty ? method.name.substring(4) : method.name}');
-
-  if (!method.isGetProperty) {
-    buffer.write('(${typeParams(method)})');
-  }
-
-  buffer.write(';');
-  return buffer.toString();
-}
+String methodSignature(Method method) =>
+    '   ${method.isStatic ? 'static ' : ''}'
+    '${method.isFinal ? 'final ' : ''}'
+    '${method.isGetProperty ? '[propget] ' : ''}'
+    '${method.isSetProperty ? '[propset] ' : ''}'
+    '${method.returnType.typeIdentifier.name} '
+    '${method.isProperty ? method.name.substring(4) : method.name}'
+    '${method.isGetProperty ? ';' : 'typeParams(method);'}';
 
 String typeParams(Method method) => method.parameters
     .map((param) => '${param.typeIdentifier.name} ${param.name}')
@@ -136,13 +128,12 @@ String convertTypeToProjection(
     idlProjection.writeln('// vtable_start UNKNOWN');
   }
 
-  idlProjection.writeln('[uuid(${winTypeDef!.guid}]');
   idlProjection
-      .writeln('interface ${winTypeDef.name} : ${winTypeDef.parent!.name}');
-  idlProjection.writeln('{');
-
-  idlProjection.writeln(winTypeDef.methods.map(methodSignature).join('\n'));
-  idlProjection.writeln('}');
+    ..writeln('[uuid(${winTypeDef!.guid}]')
+    ..writeln('interface ${winTypeDef.name} : ${winTypeDef.parent!.name}')
+    ..writeln('{')
+    ..writeln(winTypeDef.methods.map(methodSignature).join('\n'))
+    ..writeln('}');
 
   return idlProjection.toString();
 }

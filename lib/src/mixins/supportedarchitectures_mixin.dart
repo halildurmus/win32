@@ -13,7 +13,7 @@ class Architecture {
   /// Creates an [Architecture] object.
   const Architecture(this._value);
 
-  factory Architecture.all() => Architecture(_arm64 | _x64 | _x86);
+  factory Architecture.all() => const Architecture(_arm64 | _x64 | _x86);
 
   /// Returns true if this object is supported on Intel 32-bit architectures
   bool get x86 => _value & _x86 == _x86;
