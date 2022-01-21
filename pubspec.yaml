@@ -8,6 +8,10 @@ issue_tracker: https://github.com/timsneath/win32/issues
 environment:
   sdk: '>=2.14.0 <3.0.0'
 
+# Declare that this package only works on Windows.
+platforms:
+  windows:
+
 dependencies:
   ffi: ^1.0.0
 
