@@ -1,3 +1,8 @@
+## 2.3.8
+
+- Update package:ffi minimum version to 1.1.0, allowing use of arena
+- Hide `Char` within generated structs.g.dart in prep for new FFI feature.
+
 ## 2.3.7
 
 - Declare platform support using new `platforms:` declaration in pubspec.yaml
