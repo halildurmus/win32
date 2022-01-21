@@ -597,6 +597,9 @@ class TypeDef extends TokenObject
             return returnValue.ref.toString();
           }
         }
+
+        // If this fails or no data is returned, return a null value.
+        return null;
       });
 
   /// Get the GUID for this type.

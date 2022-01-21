@@ -87,6 +87,8 @@ class Scope {
       if (preferredArchitecture == PreferredArchitecture.x86 &&
           supportedArch.x86) return typeDef;
     }
+
+    return null;
   }
 
   /// Return the typedef matching the given token.
