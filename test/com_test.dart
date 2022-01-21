@@ -49,7 +49,7 @@ void main() {
 
   test('Create COM object without calling CoInitialize should fail', () {
     expect(
-        () => FileOpenDialog.createInstance(),
+        FileOpenDialog.createInstance,
         throwsA(isA<WindowsException>()
             .having((e) => e.hr, 'hr', equals(CO_E_NOTINITIALIZED))
             .having((e) => e.toString(), 'message',
@@ -112,7 +112,7 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    expect(() => FileOpenDialog.createInstance(), returnsNormally);
+    expect(FileOpenDialog.createInstance, returnsNormally);
 
     CoUninitialize();
   });
