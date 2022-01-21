@@ -55,7 +55,10 @@ const structFileHeader = '''
 // requirement for.
 // -----------------------------------------------------------------------------
 
-import 'dart:ffi';
+// The new `Char` type conflicts with CHAR_INFO.Char. Hiding the former for now.
+// ignore: undefined_hidden_name
+import 'dart:ffi' hide Char;
+
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
