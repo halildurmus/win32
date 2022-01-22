@@ -7,6 +7,9 @@ issue_tracker: https://github.com/timsneath/win32_registry/issues
 environment:
   sdk: '>=2.15.0 <3.0.0'
 
+platforms:
+  windows:
+
 dependencies: 
   ffi: ^1.1.2
   win32: ^2.3.6

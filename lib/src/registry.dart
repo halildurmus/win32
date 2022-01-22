@@ -20,6 +20,9 @@ import 'registry_key.dart';
 /// final key = Registry.openPath(RegistryHive.localMachine,
 ///   path: r'Software\Microsoft\Windows NT\CurrentVersion');
 /// ```
+///
+/// Once you have a key, you can view subkeys, create new keys, and create,
+/// update, rename or delete values stored under that key.
 class Registry {
   /// This class shouldn't be instantiated directly.
   Registry._();
