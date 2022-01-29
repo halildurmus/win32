@@ -1,4 +1,3 @@
-import 'runloop.dart';
 import 'win32_window.dart';
 
 // Temporary
@@ -10,17 +9,14 @@ class DartProject {
 class FlutterWindow extends Win32Window {
   // Creates a new FlutterWindow driven by the |run_loop|, hosting a
   // Flutter view running |project|.
-  FlutterWindow(this.run_loop, this.project);
+  FlutterWindow(this.project);
 
   // Win32Window:
   void OnCreate() {}
   void OnDestroy() {}
 
-  // The run loop driving events for this window.
-  RunLoop run_loop;
-
   // The project to run.
-  DartProject project;
+  final DartProject project;
 
   void SetQuitOnClose(bool bool) {}
 

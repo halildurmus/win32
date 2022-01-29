@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:win32/win32.dart';
 import 'package:ffi/ffi.dart';
+import 'package:win32/win32.dart';
 
 class Point {
   int x;
@@ -31,15 +31,15 @@ class WindowClassRegistrar {
 // inherited from by classes that wish to specialize with custom
 // rendering and input handling
 class Win32Window {
-  static const className = 'FLUTTER_RUNNER_WIN32_WINDOW';
+  static final className = 'FLUTTER_RUNNER_WIN32_WINDOW'.toNativeUtf16();
 
   bool quit_on_close_ = false;
 
   // window handle for top level window.
-  int window_handle_;
+  int? window_handle_;
 
   // window handle for hosted content.
-  int child_content_;
+  int? child_content_;
 
   // Creates and shows a win32 window with |title| and position and size using
   // |origin| and |size|. New windows are created on the default monitor. Window
@@ -48,23 +48,21 @@ class Win32Window {
   // as logical pixels and scale to appropriate for the default monitor. Returns
   // true if the window was created successfully.
   bool CreateAndShow(String title, Point origin, Size size) {
-    final classNamePtr = TEXT(className);
+    final window_class = calloc<WNDCLASS>()
+      ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+      ..ref.lpszClassName = className
+      ..ref.style = CS_HREDRAW | CS_VREDRAW
+      ..ref.hInstance = GetModuleHandle(nullptr)
+      ..ref.hbrBackground = 0
+      ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
+    RegisterClass(window_class);
 
-    final window_class = WNDCLASS.allocate()
-      ..hCursor = LoadCursor(NULL, IDC_ARROW)
-      ..lpszClassName = classNamePtr
-      ..style = CS_HREDRAW | CS_VREDRAW
-      ..hInstance = GetModuleHandle(nullptr)
-      ..hbrBackground = 0
-      ..lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-    RegisterClass(window_class.addressOf);
-
-    final monitor = MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
-    final int dpi = FlutterDesktopGetDpiForMonitor(monitor);
+    // final monitor = MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
+    final dpi = 96;
     final scale_factor = dpi / 96.0;
 
-    final window = CreateWindow(
-        classNamePtr,
+    CreateWindow(
+        className,
         TEXT(title),
         WS_OVERLAPPEDWINDOW | WS_VISIBLE,
         Scale(origin.x, scale_factor),
@@ -76,7 +74,7 @@ class Win32Window {
         GetModuleHandle(nullptr),
         nullptr);
 
-    free(classNamePtr);
+    return true;
   }
 
   // Release OS resources associated with window.
@@ -87,27 +85,26 @@ class Win32Window {
 
   // Returns the backing Window handle to enable clients to set icon and other
   // window properties. Returns nullptr if the window has been destroyed.
-  int GetHandle() => window_handle_;
+  int? GetHandle() => window_handle_;
 
-  int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
+  static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch (uMsg) {
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
 
       case WM_PAINT:
-        final ps = PAINTSTRUCT.allocate();
-        final hdc = BeginPaint(hWnd, ps.addressOf);
-        final rect = RECT.allocate();
+        final ps = calloc<PAINTSTRUCT>();
+        final hdc = BeginPaint(hWnd, ps);
+        final rect = calloc<RECT>();
         final msg = TEXT('Hello, Dart!');
 
-        GetClientRect(hWnd, rect.addressOf);
-        DrawText(hdc, msg, -1, rect.addressOf,
-            DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-        EndPaint(hWnd, ps.addressOf);
+        GetClientRect(hWnd, rect);
+        DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+        EndPaint(hWnd, ps);
 
-        free(ps.addressOf);
-        free(rect.addressOf);
+        free(ps);
+        free(rect);
         free(msg);
 
         return 0;

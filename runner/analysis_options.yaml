@@ -1,42 +1,34 @@
-include: package:lint/analysis_options_package.yaml
+include: package:lints/recommended.yaml
 
 analyzer:
+  exclude: [example/explorer/**]
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-
+  errors: 
+    todo: ignore
+      
 linter:
   rules:
-    # redundancy is good if it leads to better documentation
-    avoid_redundant_argument_values: false
-
-    # print is useful for examples
-    avoid_print: false
-
-    # disable for now per https://github.com/timsneath/win32/issues/87
-    avoid_private_typedef_functions: false
-
-    # win32 parity requires SCREAMING_CAPS constants
-    constant_identifier_names: false  
-
-    # deliberately name generated files after their COM equivalents
-    file_names: false
-
-    # seems to trigger false positives
-    invariant_booleans: false
-
-    # while(true) is useful for Win32 enumerations
-    literal_only_boolean_expressions: false
-
-    # doesn't make sense if adjacent strings are not human language
-    missing_whitespace_between_adjacent_strings: false
-
-    # Win32 parity requires TitleCase method names
-    non_constant_identifier_names: false
-
     # Some additional lints we want to enforce
+    cascade_invocations: true
+    directives_ordering: true
     omit_local_variable_types: true
-    prefer_expression_function_bodies: true
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
+    sort_unnamed_constructors_first: true
     unnecessary_lambdas: true
+    unnecessary_null_aware_assignments: true
+    unnecessary_parenthesis: true
+
+    # We name Win32 constants for consistency with Win32, not Dart
+    constant_identifier_names: false
+    non_constant_identifier_names: false
+    camel_case_types: false
+
+    # COM interop classes are named for their contents
+    file_names: false

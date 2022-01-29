@@ -1,39 +1,42 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-
 import 'package:win32/win32.dart';
 
 import 'flutter_window.dart';
-import 'runloop.dart';
 import 'utils.dart';
 import 'win32_window.dart';
-import 'window_configuration.dart';
 
 const EXIT_SUCCESS = 0;
 const EXIT_FAILURE = 1;
 
-int main() {
+int main(List<String> args) {
   // Attach to console when present (e.g., 'flutter run') or create a
   // new console when running with a debugger.
-  if (AttachConsole(ATTACH_PARENT_PROCESS) == 0 && IsDebuggerPresent() != 0) {
+  if (AttachConsole(ATTACH_PARENT_PROCESS) == FALSE &&
+      IsDebuggerPresent() == TRUE) {
     CreateAndAttachConsole();
   }
 
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
-  RunLoop run_loop;
+  final project = DartProject('data');
 
-  final project = DartProject("data");
-  final window = FlutterWindow(run_loop, project);
-  final origin = Point(kFlutterWindowOriginX, kFlutterWindowOriginY);
-  final size = Size(kFlutterWindowWidth, kFlutterWindowHeight);
-  if (!window.CreateAndShow(kFlutterWindowTitle, origin, size)) {
+  // TODO: Deal with command line arguments
+
+  final window = FlutterWindow(project);
+  final origin = Point(10, 10);
+  final size = Size(1280, 720);
+  if (!window.CreateAndShow('runner', origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);
 
-  run_loop.Run();
+  final msg = calloc<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) == TRUE) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
+  }
 
   CoUninitialize();
   return EXIT_SUCCESS;

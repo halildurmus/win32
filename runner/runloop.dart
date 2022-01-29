@@ -1,5 +1,5 @@
 import 'dart:ffi';
-import 'dart:math' show min, max;
+import 'dart:math' show min;
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -13,18 +13,18 @@ class RunLoop {
 
     while (keep_running) {
       MsgWaitForMultipleObjects(0, nullptr, FALSE, 0, QS_ALLINPUT);
-      bool processed_events = false;
+      var processed_events = false;
 
-      final message = MSG.allocate();
-      while (PeekMessage(message.addressOf, NULL, 0, 0, PM_REMOVE) == TRUE) {
+      final message = calloc<MSG>();
+      while (PeekMessage(message, NULL, 0, 0, PM_REMOVE) == TRUE) {
         processed_events = true;
-        if (message.message == WM_QUIT) {
+        if (message.ref.message == WM_QUIT) {
           keep_running = false;
           break;
         }
 
-        TranslateMessage(message.addressOf);
-        DispatchMessage(message.addressOf);
+        TranslateMessage(message);
+        DispatchMessage(message);
       }
 
       if (!processed_events) {
