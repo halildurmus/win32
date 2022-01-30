@@ -17,5 +17,51 @@ dependencies:
     path: ..
 
 dev_dependencies:
+  # ffigen: ^4.1.2
   lints: ^1.0.1
   test: ^1.20.1
+
+# ffigen:
+#   name: FlutterWindowsEngine
+#   description: Native API for Flutter Windows desktop engine `flutter_windows.h`
+#   headers:
+#     entry-points:
+#       - 'c:\flutter\bin\cache\artifacts\engine\windows-x64\flutter_windows.h'
+#   functions:
+#     exclude:
+#       - 'memchr'
+#       - 'memcmp'
+#       - 'memcpy'
+#       - 'memmove'
+#       - 'memset'
+#       - 'wcsrchr'
+#       - 'wcschr'
+#       - 'strrchr'
+#       - _memicmp
+#       - _memicmp_l
+#       - memccpy
+#       - memicmp
+#       - wcscat_s
+#       - wcscpy_s
+#       - wcsncat_s
+#       - wcsncpy_s
+#       - wcscspn
+#       - wcsnlen
+#       - wcsncat
+#       - wcsncmp
+#       - wcsncpy
+#       - wcsspn
+#       - _wcserror_s
+#       - __wcserror_s
+#       - _wcsnicmp
+#       - _wcsnicmp_l
+#       - _wcsnset_s
+#       - _wcsnset
+#       - _wcsset_s
+#       - _wcsset
+#       - _wcslwr_s
+#       - _wcslwr_s_l
+#       - _wcsupr_s
+#       - _wcsupr_s_l
+#       - wcsxfrm
+#   output: 'flutter_windows.dart'
