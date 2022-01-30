@@ -5,12 +5,6 @@ import 'package:win32/win32.dart';
 
 import 'utils.dart';
 
-class WindowClassRegistrar {
-  static WindowClassRegistrar getInstance() {
-    return WindowClassRegistrar();
-  }
-}
-
 // A class abstraction for a high DPI-aware Win32 Window. Intended to be
 // inherited from by classes that wish to specialize with custom
 // rendering and input handling

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
-import '../flutter_window.dart';
+import '../dart_project.dart';
 import 'engine.dart';
 import 'ffi.dart';
 

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '../flutter_window.dart';
+import '../dart_project.dart';
 import 'ffi.dart';
 
 /// An instance of a Flutter engine.

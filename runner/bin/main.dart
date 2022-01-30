@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart' show calloc;
 import 'package:win32/win32.dart';
 
+import 'dart_project.dart';
 import 'flutter_window.dart';
 import 'utils.dart';
 
