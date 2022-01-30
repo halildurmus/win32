@@ -1,3 +1,7 @@
+## 2.3.9
+
+- Add a few minor constants and handle typedefs. Nothing to see here.
+
 ## 2.3.8
 
 - Update package:ffi minimum version to 1.1.0, allowing use of arena
