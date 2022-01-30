@@ -33,8 +33,6 @@ class WindowClassRegistrar {
 class Win32Window {
   static final className = 'FLUTTER_RUNNER_WIN32_WINDOW'.toNativeUtf16();
 
-  bool quit_on_close_ = false;
-
   // window handle for top level window.
   int topLevelWindowHandle = 0;
 
@@ -74,8 +72,15 @@ class Win32Window {
         GetModuleHandle(nullptr),
         nullptr);
 
-    return true;
+    return OnCreate();
   }
+
+  // Called when CreateAndShow is called, allowing subclass window-related
+  // setup. Subclasses should return false if setup fails.
+  bool OnCreate() => true;
+
+  // Called when Destroy is called.
+  void OnDestroy() {}
 
   // Release OS resources associated with window.
   void Destroy() {}
@@ -104,22 +109,6 @@ class Win32Window {
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
-
-      // case WM_PAINT:
-      //   final ps = calloc<PAINTSTRUCT>();
-      //   final hdc = BeginPaint(hWnd, ps);
-      //   final rect = calloc<RECT>();
-      //   final msg = TEXT('Hello, Dart!');
-
-      //   GetClientRect(hWnd, rect);
-      //   DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-      //   EndPaint(hWnd, ps);
-
-      //   free(ps);
-      //   free(rect);
-      //   free(msg);
-
-      //   return 0;
     }
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
   }

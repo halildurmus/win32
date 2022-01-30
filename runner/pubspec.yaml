@@ -11,6 +11,9 @@ publish_to: none
 environment:
   sdk: '>=2.15.0 <3.0.0'
 
+platforms:
+  windows:
+
 dependencies:
   ffi: ^1.1.2
   win32:

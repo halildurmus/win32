@@ -30,14 +30,14 @@ int main(List<String> args) {
   if (!window.CreateAndShow('runner', origin, size)) {
     return EXIT_FAILURE;
   }
-  window.SetQuitOnClose(true);
+  window.quitOnClose = true;
 
   final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) == TRUE) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
-
+  free(msg);
   CoUninitialize();
   return EXIT_SUCCESS;
 }

@@ -16,11 +16,14 @@ class FlutterWindow extends Win32Window {
   /// The Flutter instance hosted by this window.
   late final FlutterViewController controller;
 
+  bool quitOnClose = false;
+
   // Creates a new FlutterWindow driven by the |run_loop|, hosting a
   // Flutter view running |project|.
   FlutterWindow(this.project);
 
   // Win32Window:
+  @override
   bool OnCreate() {
     final frame = calloc<RECT>();
     GetClientRect(topLevelWindowHandle, frame);
@@ -42,10 +45,9 @@ class FlutterWindow extends Win32Window {
     return true;
   }
 
+  @override
   void OnDestroy() {}
 
   // The project to run.
   final DartProject project;
-
-  void SetQuitOnClose(bool bool) {}
 }
