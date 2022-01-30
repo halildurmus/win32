@@ -1,133 +1,123 @@
-import 'dart:ffi' as ffi;
+// ignore_for_file: slash_for_doc_comments
+
+import 'dart:ffi';
 import 'package:ffi/ffi.dart';
+
 import 'package:win32/win32.dart';
 
-typedef size_t = ffi.Uint64;
-typedef rsize_t = size_t;
-typedef wchar_t = ffi.Uint16;
-
-class FlutterDesktopMessenger extends ffi.Opaque {}
-
-class _FlutterPlatformMessageResponseHandle extends ffi.Opaque {}
-
-class FlutterDesktopMessage extends ffi.Struct {
-  @size_t()
-  external int struct_size;
-
-  external ffi.Pointer<ffi.Int8> channel;
-
-  external ffi.Pointer<ffi.Uint8> message;
-
-  @size_t()
-  external int message_size;
-
-  external ffi.Pointer<FlutterDesktopMessageResponseHandle> response_handle;
-}
-
-typedef FlutterDesktopMessageResponseHandle
-    = _FlutterPlatformMessageResponseHandle;
-typedef FlutterDesktopMessengerRef = ffi.Pointer<FlutterDesktopMessenger>;
-typedef FlutterDesktopBinaryReply = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Void Function(
-            ffi.Pointer<ffi.Uint8>, size_t, ffi.Pointer<ffi.Void>)>>;
-typedef FlutterDesktopMessageCallback = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Void Function(FlutterDesktopMessengerRef,
-            ffi.Pointer<FlutterDesktopMessage>, ffi.Pointer<ffi.Void>)>>;
-
-class FlutterDesktopTextureRegistrar extends ffi.Opaque {}
+/********************************* CONSTANTS *********************************/
 
 abstract class FlutterDesktopTextureType {
   static const int kFlutterDesktopPixelBufferTexture = 0;
 }
 
-class FlutterDesktopPixelBuffer extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> buffer;
+/********************************* CALLBACKS *********************************/
 
-  @size_t()
+typedef FlutterDesktopBinaryReply = Pointer<
+    NativeFunction<Void Function(Pointer<Uint8>, UintPtr, Pointer<Void>)>>;
+
+typedef FlutterDesktopMessageCallback = Pointer<
+    NativeFunction<
+        Void Function(Pointer<FlutterDesktopMessenger>,
+            Pointer<FlutterDesktopMessage>, Pointer<Void>)>>;
+
+typedef FlutterDesktopPixelBufferTextureCallback = Pointer<
+    NativeFunction<
+        Pointer<FlutterDesktopPixelBuffer> Function(
+            UintPtr, UintPtr, Pointer<Void>)>>;
+
+typedef FlutterDesktopOnPluginRegistrarDestroyed = Pointer<
+    NativeFunction<Void Function(Pointer<FlutterDesktopPluginRegistrar>)>>;
+
+/********************************** STRUCTS **********************************/
+
+class FlutterDesktopViewControllerState extends Opaque {}
+
+class FlutterDesktopMessenger extends Opaque {}
+
+class FlutterDesktopMessageResponseHandle extends Opaque {}
+
+class FlutterDesktopView extends Opaque {}
+
+class FlutterDesktopPluginRegistrar extends Opaque {}
+
+class FlutterDesktopEngine extends Opaque {}
+
+class FlutterDesktopTextureRegistrar extends Opaque {}
+
+class FlutterDesktopMessage extends Struct {
+  @UintPtr()
+  external int struct_size;
+
+  external Pointer<Int8> channel;
+
+  external Pointer<Uint8> message;
+
+  @UintPtr()
+  external int message_size;
+
+  external Pointer<FlutterDesktopMessageResponseHandle> response_handle;
+}
+
+class FlutterDesktopPixelBuffer extends Struct {
+  external Pointer<Uint8> buffer;
+
+  @UintPtr()
   external int width;
 
-  @size_t()
+  @UintPtr()
   external int height;
 
-  external ffi
-          .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
+  external Pointer<NativeFunction<Void Function(Pointer<Void>)>>
       release_callback;
 
-  external ffi.Pointer<ffi.Void> release_context;
+  external Pointer<Void> release_context;
 }
 
-class FlutterDesktopPixelBufferTextureConfig extends ffi.Struct {
+class FlutterDesktopPixelBufferTextureConfig extends Struct {
   external FlutterDesktopPixelBufferTextureCallback callback;
 
-  external ffi.Pointer<ffi.Void> user_data;
+  external Pointer<Void> user_data;
 }
 
-typedef FlutterDesktopPixelBufferTextureCallback = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Pointer<FlutterDesktopPixelBuffer> Function(
-            size_t, size_t, ffi.Pointer<ffi.Void>)>>;
-
-class FlutterDesktopTextureInfo extends ffi.Struct {
-  @ffi.Int32()
+class FlutterDesktopTextureInfo extends Struct {
+  @Int32()
   external int type;
 }
 
-typedef FlutterDesktopTextureRegistrarRef
-    = ffi.Pointer<FlutterDesktopTextureRegistrar>;
+class FlutterDesktopEngineProperties extends Struct {
+  external Pointer<Utf16> assets_path;
 
-class FlutterDesktopPluginRegistrar extends ffi.Opaque {}
+  external Pointer<Utf16> icu_data_path;
 
-typedef FlutterDesktopPluginRegistrarRef
-    = ffi.Pointer<FlutterDesktopPluginRegistrar>;
-typedef FlutterDesktopOnPluginRegistrarDestroyed = ffi.Pointer<
-    ffi.NativeFunction<ffi.Void Function(FlutterDesktopPluginRegistrarRef)>>;
+  external Pointer<Utf16> aot_library_path;
 
-class FlutterDesktopViewControllerState extends ffi.Opaque {}
-
-class FlutterDesktopView extends ffi.Opaque {}
-
-class FlutterDesktopEngine extends ffi.Opaque {}
-
-class FlutterDesktopEngineProperties extends ffi.Struct {
-  external ffi.Pointer<Utf16> assets_path;
-
-  external ffi.Pointer<Utf16> icu_data_path;
-
-  external ffi.Pointer<Utf16> aot_library_path;
-
-  @ffi.Int32()
+  @Int32()
   external int dart_entrypoint_argc;
 
-  external ffi.Pointer<ffi.Pointer<ffi.Int8>> dart_entrypoint_argv;
+  external Pointer<Pointer<Int8>> dart_entrypoint_argv;
 }
 
-typedef FlutterDesktopViewControllerRef
-    = ffi.Pointer<FlutterDesktopViewControllerState>;
-typedef FlutterDesktopEngineRef = ffi.Pointer<FlutterDesktopEngine>;
-typedef FlutterDesktopViewRef = ffi.Pointer<FlutterDesktopView>;
+/********************************* FUNCTIONS *********************************/
 
 /// Native API for Flutter Windows desktop engine `flutter_windows.h`
 class FlutterEngineAPI {
   /// Holds the symbol lookup function.
-  final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-      _lookup;
+  final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  FlutterEngineAPI(ffi.DynamicLibrary dynamicLibrary)
+  FlutterEngineAPI(DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
   FlutterEngineAPI.fromLookup(
-      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-          lookup)
+      Pointer<T> Function<T extends NativeType>(String symbolName) lookup)
       : _lookup = lookup;
 
   int FlutterDesktopMessengerSend(
-    FlutterDesktopMessengerRef messenger,
-    ffi.Pointer<ffi.Int8> channel,
-    ffi.Pointer<ffi.Uint8> message,
+    Pointer<FlutterDesktopMessenger> messenger,
+    Pointer<Int8> channel,
+    Pointer<Uint8> message,
     int message_size,
   ) {
     return _FlutterDesktopMessengerSend(
@@ -139,21 +129,21 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopMessengerSendPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(FlutterDesktopMessengerRef, ffi.Pointer<ffi.Int8>,
-              ffi.Pointer<ffi.Uint8>, size_t)>>('FlutterDesktopMessengerSend');
+      NativeFunction<
+          Int32 Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
+              Pointer<Uint8>, UintPtr)>>('FlutterDesktopMessengerSend');
   late final _FlutterDesktopMessengerSend =
       _FlutterDesktopMessengerSendPtr.asFunction<
-          int Function(FlutterDesktopMessengerRef, ffi.Pointer<ffi.Int8>,
-              ffi.Pointer<ffi.Uint8>, int)>();
+          int Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
+              Pointer<Uint8>, int)>();
 
   int FlutterDesktopMessengerSendWithReply(
-    FlutterDesktopMessengerRef messenger,
-    ffi.Pointer<ffi.Int8> channel,
-    ffi.Pointer<ffi.Uint8> message,
+    Pointer<FlutterDesktopMessenger> messenger,
+    Pointer<Int8> channel,
+    Pointer<Uint8> message,
     int message_size,
     FlutterDesktopBinaryReply reply,
-    ffi.Pointer<ffi.Void> user_data,
+    Pointer<Void> user_data,
   ) {
     return _FlutterDesktopMessengerSendWithReply(
       messenger,
@@ -166,28 +156,23 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopMessengerSendWithReplyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(
-              FlutterDesktopMessengerRef,
-              ffi.Pointer<ffi.Int8>,
-              ffi.Pointer<ffi.Uint8>,
-              size_t,
+      NativeFunction<
+          Int32 Function(
+              Pointer<FlutterDesktopMessenger>,
+              Pointer<Int8>,
+              Pointer<Uint8>,
+              UintPtr,
               FlutterDesktopBinaryReply,
-              ffi.Pointer<ffi.Void>)>>('FlutterDesktopMessengerSendWithReply');
+              Pointer<Void>)>>('FlutterDesktopMessengerSendWithReply');
   late final _FlutterDesktopMessengerSendWithReply =
       _FlutterDesktopMessengerSendWithReplyPtr.asFunction<
-          int Function(
-              FlutterDesktopMessengerRef,
-              ffi.Pointer<ffi.Int8>,
-              ffi.Pointer<ffi.Uint8>,
-              int,
-              FlutterDesktopBinaryReply,
-              ffi.Pointer<ffi.Void>)>();
+          int Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
+              Pointer<Uint8>, int, FlutterDesktopBinaryReply, Pointer<Void>)>();
 
   void FlutterDesktopMessengerSendResponse(
-    FlutterDesktopMessengerRef messenger,
-    ffi.Pointer<FlutterDesktopMessageResponseHandle> handle,
-    ffi.Pointer<ffi.Uint8> data,
+    Pointer<FlutterDesktopMessenger> messenger,
+    Pointer<FlutterDesktopMessageResponseHandle> handle,
+    Pointer<Uint8> data,
     int data_length,
   ) {
     return _FlutterDesktopMessengerSendResponse(
@@ -199,25 +184,25 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopMessengerSendResponsePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              FlutterDesktopMessengerRef,
-              ffi.Pointer<FlutterDesktopMessageResponseHandle>,
-              ffi.Pointer<ffi.Uint8>,
-              size_t)>>('FlutterDesktopMessengerSendResponse');
+      NativeFunction<
+          Void Function(
+              Pointer<FlutterDesktopMessenger>,
+              Pointer<FlutterDesktopMessageResponseHandle>,
+              Pointer<Uint8>,
+              UintPtr)>>('FlutterDesktopMessengerSendResponse');
   late final _FlutterDesktopMessengerSendResponse =
       _FlutterDesktopMessengerSendResponsePtr.asFunction<
           void Function(
-              FlutterDesktopMessengerRef,
-              ffi.Pointer<FlutterDesktopMessageResponseHandle>,
-              ffi.Pointer<ffi.Uint8>,
+              Pointer<FlutterDesktopMessenger>,
+              Pointer<FlutterDesktopMessageResponseHandle>,
+              Pointer<Uint8>,
               int)>();
 
   void FlutterDesktopMessengerSetCallback(
-    FlutterDesktopMessengerRef messenger,
-    ffi.Pointer<ffi.Int8> channel,
+    Pointer<FlutterDesktopMessenger> messenger,
+    Pointer<Int8> channel,
     FlutterDesktopMessageCallback callback,
-    ffi.Pointer<ffi.Void> user_data,
+    Pointer<Void> user_data,
   ) {
     return _FlutterDesktopMessengerSetCallback(
       messenger,
@@ -228,20 +213,20 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopMessengerSetCallbackPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-              FlutterDesktopMessengerRef,
-              ffi.Pointer<ffi.Int8>,
+      NativeFunction<
+          Void Function(
+              Pointer<FlutterDesktopMessenger>,
+              Pointer<Int8>,
               FlutterDesktopMessageCallback,
-              ffi.Pointer<ffi.Void>)>>('FlutterDesktopMessengerSetCallback');
+              Pointer<Void>)>>('FlutterDesktopMessengerSetCallback');
   late final _FlutterDesktopMessengerSetCallback =
       _FlutterDesktopMessengerSetCallbackPtr.asFunction<
-          void Function(FlutterDesktopMessengerRef, ffi.Pointer<ffi.Int8>,
-              FlutterDesktopMessageCallback, ffi.Pointer<ffi.Void>)>();
+          void Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
+              FlutterDesktopMessageCallback, Pointer<Void>)>();
 
   int FlutterDesktopTextureRegistrarRegisterExternalTexture(
-    FlutterDesktopTextureRegistrarRef texture_registrar,
-    ffi.Pointer<FlutterDesktopTextureInfo> info,
+    Pointer<FlutterDesktopTextureRegistrar> texture_registrar,
+    Pointer<FlutterDesktopTextureInfo> info,
   ) {
     return _FlutterDesktopTextureRegistrarRegisterExternalTexture(
       texture_registrar,
@@ -251,17 +236,17 @@ class FlutterEngineAPI {
 
   late final _FlutterDesktopTextureRegistrarRegisterExternalTexturePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Int64 Function(FlutterDesktopTextureRegistrarRef,
-                      ffi.Pointer<FlutterDesktopTextureInfo>)>>(
+              NativeFunction<
+                  Int64 Function(Pointer<FlutterDesktopTextureRegistrar>,
+                      Pointer<FlutterDesktopTextureInfo>)>>(
           'FlutterDesktopTextureRegistrarRegisterExternalTexture');
   late final _FlutterDesktopTextureRegistrarRegisterExternalTexture =
       _FlutterDesktopTextureRegistrarRegisterExternalTexturePtr.asFunction<
-          int Function(FlutterDesktopTextureRegistrarRef,
-              ffi.Pointer<FlutterDesktopTextureInfo>)>();
+          int Function(Pointer<FlutterDesktopTextureRegistrar>,
+              Pointer<FlutterDesktopTextureInfo>)>();
 
   int FlutterDesktopTextureRegistrarUnregisterExternalTexture(
-    FlutterDesktopTextureRegistrarRef texture_registrar,
+    Pointer<FlutterDesktopTextureRegistrar> texture_registrar,
     int texture_id,
   ) {
     return _FlutterDesktopTextureRegistrarUnregisterExternalTexture(
@@ -272,16 +257,16 @@ class FlutterEngineAPI {
 
   late final _FlutterDesktopTextureRegistrarUnregisterExternalTexturePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Int32 Function(
-                      FlutterDesktopTextureRegistrarRef, ffi.Int64)>>(
+              NativeFunction<
+                  Int32 Function(
+                      Pointer<FlutterDesktopTextureRegistrar>, Int64)>>(
           'FlutterDesktopTextureRegistrarUnregisterExternalTexture');
   late final _FlutterDesktopTextureRegistrarUnregisterExternalTexture =
       _FlutterDesktopTextureRegistrarUnregisterExternalTexturePtr.asFunction<
-          int Function(FlutterDesktopTextureRegistrarRef, int)>();
+          int Function(Pointer<FlutterDesktopTextureRegistrar>, int)>();
 
   int FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailable(
-    FlutterDesktopTextureRegistrarRef texture_registrar,
+    Pointer<FlutterDesktopTextureRegistrar> texture_registrar,
     int texture_id,
   ) {
     return _FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailable(
@@ -292,16 +277,17 @@ class FlutterEngineAPI {
 
   late final _FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailablePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Int32 Function(
-                      FlutterDesktopTextureRegistrarRef, ffi.Int64)>>(
+              NativeFunction<
+                  Int32 Function(
+                      Pointer<FlutterDesktopTextureRegistrar>, Int64)>>(
           'FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailable');
   late final _FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailable =
       _FlutterDesktopTextureRegistrarMarkExternalTextureFrameAvailablePtr
-          .asFunction<int Function(FlutterDesktopTextureRegistrarRef, int)>();
+          .asFunction<
+              int Function(Pointer<FlutterDesktopTextureRegistrar>, int)>();
 
-  FlutterDesktopMessengerRef FlutterDesktopPluginRegistrarGetMessenger(
-    FlutterDesktopPluginRegistrarRef registrar,
+  Pointer<FlutterDesktopMessenger> FlutterDesktopPluginRegistrarGetMessenger(
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
   ) {
     return _FlutterDesktopPluginRegistrarGetMessenger(
       registrar,
@@ -309,17 +295,18 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopPluginRegistrarGetMessengerPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopMessengerRef Function(
-                  FlutterDesktopPluginRegistrarRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopMessenger> Function(
+                  Pointer<FlutterDesktopPluginRegistrar>)>>(
       'FlutterDesktopPluginRegistrarGetMessenger');
   late final _FlutterDesktopPluginRegistrarGetMessenger =
       _FlutterDesktopPluginRegistrarGetMessengerPtr.asFunction<
-          FlutterDesktopMessengerRef Function(
-              FlutterDesktopPluginRegistrarRef)>();
+          Pointer<FlutterDesktopMessenger> Function(
+              Pointer<FlutterDesktopPluginRegistrar>)>();
 
-  FlutterDesktopTextureRegistrarRef FlutterDesktopRegistrarGetTextureRegistrar(
-    FlutterDesktopPluginRegistrarRef registrar,
+  Pointer<FlutterDesktopTextureRegistrar>
+      FlutterDesktopRegistrarGetTextureRegistrar(
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
   ) {
     return _FlutterDesktopRegistrarGetTextureRegistrar(
       registrar,
@@ -327,17 +314,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopRegistrarGetTextureRegistrarPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopTextureRegistrarRef Function(
-                  FlutterDesktopPluginRegistrarRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopTextureRegistrar> Function(
+                  Pointer<FlutterDesktopPluginRegistrar>)>>(
       'FlutterDesktopRegistrarGetTextureRegistrar');
   late final _FlutterDesktopRegistrarGetTextureRegistrar =
       _FlutterDesktopRegistrarGetTextureRegistrarPtr.asFunction<
-          FlutterDesktopTextureRegistrarRef Function(
-              FlutterDesktopPluginRegistrarRef)>();
+          Pointer<FlutterDesktopTextureRegistrar> Function(
+              Pointer<FlutterDesktopPluginRegistrar>)>();
 
   void FlutterDesktopPluginRegistrarSetDestructionHandler(
-    FlutterDesktopPluginRegistrarRef registrar,
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
     FlutterDesktopOnPluginRegistrarDestroyed callback,
   ) {
     return _FlutterDesktopPluginRegistrarSetDestructionHandler(
@@ -347,20 +334,20 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopPluginRegistrarSetDestructionHandlerPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(FlutterDesktopPluginRegistrarRef,
+          NativeFunction<
+              Void Function(Pointer<FlutterDesktopPluginRegistrar>,
                   FlutterDesktopOnPluginRegistrarDestroyed)>>(
       'FlutterDesktopPluginRegistrarSetDestructionHandler');
   late final _FlutterDesktopPluginRegistrarSetDestructionHandler =
       _FlutterDesktopPluginRegistrarSetDestructionHandlerPtr.asFunction<
-          void Function(FlutterDesktopPluginRegistrarRef,
+          void Function(Pointer<FlutterDesktopPluginRegistrar>,
               FlutterDesktopOnPluginRegistrarDestroyed)>();
 
   /// ! WINUWP
-  FlutterDesktopViewControllerRef FlutterDesktopViewControllerCreate(
+  Pointer<FlutterDesktopViewControllerState> FlutterDesktopViewControllerCreate(
     int width,
     int height,
-    FlutterDesktopEngineRef engine,
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopViewControllerCreate(
       width,
@@ -370,16 +357,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerCreatePtr = _lookup<
-      ffi.NativeFunction<
-          FlutterDesktopViewControllerRef Function(ffi.Int32, ffi.Int32,
-              FlutterDesktopEngineRef)>>('FlutterDesktopViewControllerCreate');
+          NativeFunction<
+              Pointer<FlutterDesktopViewControllerState> Function(
+                  Int32, Int32, Pointer<FlutterDesktopEngine>)>>(
+      'FlutterDesktopViewControllerCreate');
   late final _FlutterDesktopViewControllerCreate =
       _FlutterDesktopViewControllerCreatePtr.asFunction<
-          FlutterDesktopViewControllerRef Function(
-              int, int, FlutterDesktopEngineRef)>();
+          Pointer<FlutterDesktopViewControllerState> Function(
+              int, int, Pointer<FlutterDesktopEngine>)>();
 
   void FlutterDesktopViewControllerDestroy(
-    FlutterDesktopViewControllerRef controller,
+    Pointer<FlutterDesktopViewControllerState> controller,
   ) {
     return _FlutterDesktopViewControllerDestroy(
       controller,
@@ -387,15 +375,15 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerDestroyPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(FlutterDesktopViewControllerRef)>>(
+          NativeFunction<
+              Void Function(Pointer<FlutterDesktopViewControllerState>)>>(
       'FlutterDesktopViewControllerDestroy');
   late final _FlutterDesktopViewControllerDestroy =
       _FlutterDesktopViewControllerDestroyPtr.asFunction<
-          void Function(FlutterDesktopViewControllerRef)>();
+          void Function(Pointer<FlutterDesktopViewControllerState>)>();
 
-  FlutterDesktopEngineRef FlutterDesktopViewControllerGetEngine(
-    FlutterDesktopViewControllerRef controller,
+  Pointer<FlutterDesktopEngine> FlutterDesktopViewControllerGetEngine(
+    Pointer<FlutterDesktopViewControllerState> controller,
   ) {
     return _FlutterDesktopViewControllerGetEngine(
       controller,
@@ -403,16 +391,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerGetEnginePtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopEngineRef Function(
-                  FlutterDesktopViewControllerRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopEngine> Function(
+                  Pointer<FlutterDesktopViewControllerState>)>>(
       'FlutterDesktopViewControllerGetEngine');
   late final _FlutterDesktopViewControllerGetEngine =
       _FlutterDesktopViewControllerGetEnginePtr.asFunction<
-          FlutterDesktopEngineRef Function(FlutterDesktopViewControllerRef)>();
+          Pointer<FlutterDesktopEngine> Function(
+              Pointer<FlutterDesktopViewControllerState>)>();
 
-  FlutterDesktopViewRef FlutterDesktopViewControllerGetView(
-    FlutterDesktopViewControllerRef controller,
+  Pointer<FlutterDesktopView> FlutterDesktopViewControllerGetView(
+    Pointer<FlutterDesktopViewControllerState> controller,
   ) {
     return _FlutterDesktopViewControllerGetView(
       controller,
@@ -420,15 +409,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerGetViewPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopViewRef Function(FlutterDesktopViewControllerRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopView> Function(
+                  Pointer<FlutterDesktopViewControllerState>)>>(
       'FlutterDesktopViewControllerGetView');
   late final _FlutterDesktopViewControllerGetView =
       _FlutterDesktopViewControllerGetViewPtr.asFunction<
-          FlutterDesktopViewRef Function(FlutterDesktopViewControllerRef)>();
+          Pointer<FlutterDesktopView> Function(
+              Pointer<FlutterDesktopViewControllerState>)>();
 
   void FlutterDesktopViewControllerForceRedraw(
-    FlutterDesktopViewControllerRef controller,
+    Pointer<FlutterDesktopViewControllerState> controller,
   ) {
     return _FlutterDesktopViewControllerForceRedraw(
       controller,
@@ -436,20 +427,20 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerForceRedrawPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Void Function(FlutterDesktopViewControllerRef)>>(
+          NativeFunction<
+              Void Function(Pointer<FlutterDesktopViewControllerState>)>>(
       'FlutterDesktopViewControllerForceRedraw');
   late final _FlutterDesktopViewControllerForceRedraw =
       _FlutterDesktopViewControllerForceRedrawPtr.asFunction<
-          void Function(FlutterDesktopViewControllerRef)>();
+          void Function(Pointer<FlutterDesktopViewControllerState>)>();
 
   int FlutterDesktopViewControllerHandleTopLevelWindowProc(
-    FlutterDesktopViewControllerRef controller,
+    Pointer<FlutterDesktopViewControllerState> controller,
     int hwnd,
     int message,
     int wparam,
     int lparam,
-    ffi.Pointer<LRESULT> result,
+    Pointer<LRESULT> result,
   ) {
     return _FlutterDesktopViewControllerHandleTopLevelWindowProc(
       controller,
@@ -462,17 +453,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewControllerHandleTopLevelWindowProcPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int32 Function(FlutterDesktopViewControllerRef, HWND, UINT,
-                  WPARAM, LPARAM, ffi.Pointer<LRESULT>)>>(
+          NativeFunction<
+              Int32 Function(Pointer<FlutterDesktopViewControllerState>, HWND,
+                  UINT, WPARAM, LPARAM, Pointer<LRESULT>)>>(
       'FlutterDesktopViewControllerHandleTopLevelWindowProc');
   late final _FlutterDesktopViewControllerHandleTopLevelWindowProc =
       _FlutterDesktopViewControllerHandleTopLevelWindowProcPtr.asFunction<
-          int Function(FlutterDesktopViewControllerRef, int, int, int, int,
-              ffi.Pointer<LRESULT>)>();
+          int Function(Pointer<FlutterDesktopViewControllerState>, int, int,
+              int, int, Pointer<LRESULT>)>();
 
-  FlutterDesktopEngineRef FlutterDesktopEngineCreate(
-    ffi.Pointer<FlutterDesktopEngineProperties> engine_properties,
+  Pointer<FlutterDesktopEngine> FlutterDesktopEngineCreate(
+    Pointer<FlutterDesktopEngineProperties> engine_properties,
   ) {
     return _FlutterDesktopEngineCreate(
       engine_properties,
@@ -480,17 +471,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineCreatePtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopEngineRef Function(
-                  ffi.Pointer<FlutterDesktopEngineProperties>)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopEngine> Function(
+                  Pointer<FlutterDesktopEngineProperties>)>>(
       'FlutterDesktopEngineCreate');
   late final _FlutterDesktopEngineCreate =
       _FlutterDesktopEngineCreatePtr.asFunction<
-          FlutterDesktopEngineRef Function(
-              ffi.Pointer<FlutterDesktopEngineProperties>)>();
+          Pointer<FlutterDesktopEngine> Function(
+              Pointer<FlutterDesktopEngineProperties>)>();
 
   int FlutterDesktopEngineDestroy(
-    FlutterDesktopEngineRef engine,
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopEngineDestroy(
       engine,
@@ -498,14 +489,14 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineDestroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Int32 Function(FlutterDesktopEngineRef)>>(
+      _lookup<NativeFunction<Int32 Function(Pointer<FlutterDesktopEngine>)>>(
           'FlutterDesktopEngineDestroy');
   late final _FlutterDesktopEngineDestroy = _FlutterDesktopEngineDestroyPtr
-      .asFunction<int Function(FlutterDesktopEngineRef)>();
+      .asFunction<int Function(Pointer<FlutterDesktopEngine>)>();
 
   int FlutterDesktopEngineRun(
-    FlutterDesktopEngineRef engine,
-    ffi.Pointer<ffi.Int8> entry_point,
+    Pointer<FlutterDesktopEngine> engine,
+    Pointer<Int8> entry_point,
   ) {
     return _FlutterDesktopEngineRun(
       engine,
@@ -514,14 +505,14 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineRunPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int32 Function(FlutterDesktopEngineRef,
-              ffi.Pointer<ffi.Int8>)>>('FlutterDesktopEngineRun');
+      NativeFunction<
+          Int32 Function(Pointer<FlutterDesktopEngine>,
+              Pointer<Int8>)>>('FlutterDesktopEngineRun');
   late final _FlutterDesktopEngineRun = _FlutterDesktopEngineRunPtr.asFunction<
-      int Function(FlutterDesktopEngineRef, ffi.Pointer<ffi.Int8>)>();
+      int Function(Pointer<FlutterDesktopEngine>, Pointer<Int8>)>();
 
   int FlutterDesktopEngineProcessMessages(
-    FlutterDesktopEngineRef engine,
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopEngineProcessMessages(
       engine,
@@ -529,14 +520,14 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineProcessMessagesPtr =
-      _lookup<ffi.NativeFunction<ffi.Uint64 Function(FlutterDesktopEngineRef)>>(
+      _lookup<NativeFunction<Uint64 Function(Pointer<FlutterDesktopEngine>)>>(
           'FlutterDesktopEngineProcessMessages');
   late final _FlutterDesktopEngineProcessMessages =
       _FlutterDesktopEngineProcessMessagesPtr.asFunction<
-          int Function(FlutterDesktopEngineRef)>();
+          int Function(Pointer<FlutterDesktopEngine>)>();
 
   void FlutterDesktopEngineReloadSystemFonts(
-    FlutterDesktopEngineRef engine,
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopEngineReloadSystemFonts(
       engine,
@@ -544,14 +535,14 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineReloadSystemFontsPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(FlutterDesktopEngineRef)>>(
+      _lookup<NativeFunction<Void Function(Pointer<FlutterDesktopEngine>)>>(
           'FlutterDesktopEngineReloadSystemFonts');
   late final _FlutterDesktopEngineReloadSystemFonts =
       _FlutterDesktopEngineReloadSystemFontsPtr.asFunction<
-          void Function(FlutterDesktopEngineRef)>();
+          void Function(Pointer<FlutterDesktopEngine>)>();
 
   void FlutterDesktopEngineReloadPlatformBrightness(
-    FlutterDesktopEngineRef engine,
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopEngineReloadPlatformBrightness(
       engine,
@@ -559,15 +550,15 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineReloadPlatformBrightnessPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(FlutterDesktopEngineRef)>>(
+      _lookup<NativeFunction<Void Function(Pointer<FlutterDesktopEngine>)>>(
           'FlutterDesktopEngineReloadPlatformBrightness');
   late final _FlutterDesktopEngineReloadPlatformBrightness =
       _FlutterDesktopEngineReloadPlatformBrightnessPtr.asFunction<
-          void Function(FlutterDesktopEngineRef)>();
+          void Function(Pointer<FlutterDesktopEngine>)>();
 
-  FlutterDesktopPluginRegistrarRef FlutterDesktopEngineGetPluginRegistrar(
-    FlutterDesktopEngineRef engine,
-    ffi.Pointer<ffi.Int8> plugin_name,
+  Pointer<FlutterDesktopPluginRegistrar> FlutterDesktopEngineGetPluginRegistrar(
+    Pointer<FlutterDesktopEngine> engine,
+    Pointer<Int8> plugin_name,
   ) {
     return _FlutterDesktopEngineGetPluginRegistrar(
       engine,
@@ -576,17 +567,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineGetPluginRegistrarPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopPluginRegistrarRef Function(
-                  FlutterDesktopEngineRef, ffi.Pointer<ffi.Int8>)>>(
-      'FlutterDesktopEngineGetPluginRegistrar');
+      NativeFunction<
+          Pointer<FlutterDesktopPluginRegistrar> Function(
+              Pointer<FlutterDesktopEngine>,
+              Pointer<Int8>)>>('FlutterDesktopEngineGetPluginRegistrar');
   late final _FlutterDesktopEngineGetPluginRegistrar =
       _FlutterDesktopEngineGetPluginRegistrarPtr.asFunction<
-          FlutterDesktopPluginRegistrarRef Function(
-              FlutterDesktopEngineRef, ffi.Pointer<ffi.Int8>)>();
+          Pointer<FlutterDesktopPluginRegistrar> Function(
+              Pointer<FlutterDesktopEngine>, Pointer<Int8>)>();
 
-  FlutterDesktopMessengerRef FlutterDesktopEngineGetMessenger(
-    FlutterDesktopEngineRef engine,
+  Pointer<FlutterDesktopMessenger> FlutterDesktopEngineGetMessenger(
+    Pointer<FlutterDesktopEngine> engine,
   ) {
     return _FlutterDesktopEngineGetMessenger(
       engine,
@@ -594,15 +585,18 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineGetMessengerPtr = _lookup<
-      ffi.NativeFunction<
-          FlutterDesktopMessengerRef Function(
-              FlutterDesktopEngineRef)>>('FlutterDesktopEngineGetMessenger');
+          NativeFunction<
+              Pointer<FlutterDesktopMessenger> Function(
+                  Pointer<FlutterDesktopEngine>)>>(
+      'FlutterDesktopEngineGetMessenger');
   late final _FlutterDesktopEngineGetMessenger =
       _FlutterDesktopEngineGetMessengerPtr.asFunction<
-          FlutterDesktopMessengerRef Function(FlutterDesktopEngineRef)>();
+          Pointer<FlutterDesktopMessenger> Function(
+              Pointer<FlutterDesktopEngine>)>();
 
-  FlutterDesktopTextureRegistrarRef FlutterDesktopEngineGetTextureRegistrar(
-    FlutterDesktopTextureRegistrarRef texture_registrar,
+  Pointer<FlutterDesktopTextureRegistrar>
+      FlutterDesktopEngineGetTextureRegistrar(
+    Pointer<FlutterDesktopTextureRegistrar> texture_registrar,
   ) {
     return _FlutterDesktopEngineGetTextureRegistrar(
       texture_registrar,
@@ -610,17 +604,17 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopEngineGetTextureRegistrarPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopTextureRegistrarRef Function(
-                  FlutterDesktopTextureRegistrarRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopTextureRegistrar> Function(
+                  Pointer<FlutterDesktopTextureRegistrar>)>>(
       'FlutterDesktopEngineGetTextureRegistrar');
   late final _FlutterDesktopEngineGetTextureRegistrar =
       _FlutterDesktopEngineGetTextureRegistrarPtr.asFunction<
-          FlutterDesktopTextureRegistrarRef Function(
-              FlutterDesktopTextureRegistrarRef)>();
+          Pointer<FlutterDesktopTextureRegistrar> Function(
+              Pointer<FlutterDesktopTextureRegistrar>)>();
 
   int FlutterDesktopViewGetHWND(
-    FlutterDesktopViewRef view,
+    Pointer<FlutterDesktopView> view,
   ) {
     return _FlutterDesktopViewGetHWND(
       view,
@@ -628,13 +622,13 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopViewGetHWNDPtr =
-      _lookup<ffi.NativeFunction<HWND Function(FlutterDesktopViewRef)>>(
+      _lookup<NativeFunction<HWND Function(Pointer<FlutterDesktopView>)>>(
           'FlutterDesktopViewGetHWND');
   late final _FlutterDesktopViewGetHWND = _FlutterDesktopViewGetHWNDPtr
-      .asFunction<int Function(FlutterDesktopViewRef)>();
+      .asFunction<int Function(Pointer<FlutterDesktopView>)>();
 
-  FlutterDesktopViewRef FlutterDesktopPluginRegistrarGetView(
-    FlutterDesktopPluginRegistrarRef registrar,
+  Pointer<FlutterDesktopView> FlutterDesktopPluginRegistrarGetView(
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
   ) {
     return _FlutterDesktopPluginRegistrarGetView(
       registrar,
@@ -642,18 +636,19 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopPluginRegistrarGetViewPtr = _lookup<
-          ffi.NativeFunction<
-              FlutterDesktopViewRef Function(
-                  FlutterDesktopPluginRegistrarRef)>>(
+          NativeFunction<
+              Pointer<FlutterDesktopView> Function(
+                  Pointer<FlutterDesktopPluginRegistrar>)>>(
       'FlutterDesktopPluginRegistrarGetView');
   late final _FlutterDesktopPluginRegistrarGetView =
       _FlutterDesktopPluginRegistrarGetViewPtr.asFunction<
-          FlutterDesktopViewRef Function(FlutterDesktopPluginRegistrarRef)>();
+          Pointer<FlutterDesktopView> Function(
+              Pointer<FlutterDesktopPluginRegistrar>)>();
 
   void FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegate(
-    FlutterDesktopPluginRegistrarRef registrar,
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
     int delegate,
-    ffi.Pointer<ffi.Void> user_data,
+    Pointer<Void> user_data,
   ) {
     return _FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegate(
       registrar,
@@ -664,18 +659,18 @@ class FlutterEngineAPI {
 
   late final _FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegatePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(FlutterDesktopPluginRegistrarRef, ffi.Int32,
-                      ffi.Pointer<ffi.Void>)>>(
+              NativeFunction<
+                  Void Function(Pointer<FlutterDesktopPluginRegistrar>, Int32,
+                      Pointer<Void>)>>(
           'FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegate');
   late final _FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegate =
       _FlutterDesktopPluginRegistrarRegisterTopLevelWindowProcDelegatePtr
           .asFunction<
-              void Function(FlutterDesktopPluginRegistrarRef, int,
-                  ffi.Pointer<ffi.Void>)>();
+              void Function(Pointer<FlutterDesktopPluginRegistrar>, int,
+                  Pointer<Void>)>();
 
   void FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegate(
-    FlutterDesktopPluginRegistrarRef registrar,
+    Pointer<FlutterDesktopPluginRegistrar> registrar,
     int delegate,
   ) {
     return _FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegate(
@@ -686,13 +681,14 @@ class FlutterEngineAPI {
 
   late final _FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegatePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      FlutterDesktopPluginRegistrarRef, ffi.Int32)>>(
+              NativeFunction<
+                  Void Function(
+                      Pointer<FlutterDesktopPluginRegistrar>, Int32)>>(
           'FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegate');
   late final _FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegate =
       _FlutterDesktopPluginRegistrarUnregisterTopLevelWindowProcDelegatePtr
-          .asFunction<void Function(FlutterDesktopPluginRegistrarRef, int)>();
+          .asFunction<
+              void Function(Pointer<FlutterDesktopPluginRegistrar>, int)>();
 
   int FlutterDesktopGetDpiForHWND(
     int hwnd,
@@ -703,7 +699,7 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopGetDpiForHWNDPtr =
-      _lookup<ffi.NativeFunction<UINT Function(HWND)>>(
+      _lookup<NativeFunction<UINT Function(HWND)>>(
           'FlutterDesktopGetDpiForHWND');
   late final _FlutterDesktopGetDpiForHWND =
       _FlutterDesktopGetDpiForHWNDPtr.asFunction<int Function(int)>();
@@ -717,7 +713,7 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopGetDpiForMonitorPtr =
-      _lookup<ffi.NativeFunction<UINT Function(HMONITOR)>>(
+      _lookup<NativeFunction<UINT Function(HMONITOR)>>(
           'FlutterDesktopGetDpiForMonitor');
   late final _FlutterDesktopGetDpiForMonitor =
       _FlutterDesktopGetDpiForMonitorPtr.asFunction<int Function(int)>();
@@ -727,7 +723,7 @@ class FlutterEngineAPI {
   }
 
   late final _FlutterDesktopResyncOutputStreamsPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+      _lookup<NativeFunction<Void Function()>>(
           'FlutterDesktopResyncOutputStreams');
   late final _FlutterDesktopResyncOutputStreams =
       _FlutterDesktopResyncOutputStreamsPtr.asFunction<void Function()>();
