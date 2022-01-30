@@ -11,8 +11,9 @@ class DartProject {
   DartProject(String s);
 }
 
-// A window that does nothing but host a Flutter view.
+/// A window that does nothing but host a Flutter view.
 class FlutterWindow extends Win32Window {
+  /// The Flutter instance hosted by this window.
   late final FlutterViewController controller;
 
   // Creates a new FlutterWindow driven by the |run_loop|, hosting a
@@ -47,7 +48,4 @@ class FlutterWindow extends Win32Window {
   final DartProject project;
 
   void SetQuitOnClose(bool bool) {}
-
-  // The Flutter instance hosted by this window.
-  // FlutterViewController flutter_controller_;
 }
