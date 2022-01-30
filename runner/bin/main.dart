@@ -63,7 +63,7 @@ class Application {
 
     final flutterWindow = Window(engine.hwnd);
     flutterWindow.setParent(hostWindow);
-    MoveWindow(engine.hwnd, 0, 0, hostSize.width, hostSize.top, TRUE);
+    MoveWindow(engine.hwnd, 0, 0, hostSize.width, hostSize.height, TRUE);
     SetFocus(engine.hwnd);
 
     // Run the message loop.
