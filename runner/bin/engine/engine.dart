@@ -1,8 +1,9 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:math' show Rectangle;
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' as win32;
 
 import 'dart_project.dart';
 import 'ffi.dart';
@@ -24,7 +25,7 @@ class FlutterEngine {
   /// the engine if it hasn't already been run).
   bool hasBeenRun = false;
 
-  FlutterEngine(int width, int height, DartProject project) {
+  FlutterEngine(Rectangle<int> size, DartProject project) {
     // Load the Windows engine
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
@@ -34,8 +35,8 @@ class FlutterEngine {
     // the engine, it's called again, which leads to a "Failed to init
     // NativeSymbolResolver (SymInitialize 87)" error. So we clean up before we
     // call the engine.
-    final hProcess = GetCurrentProcess();
-    SymCleanup(hProcess);
+    final hProcess = win32.GetCurrentProcess();
+    win32.SymCleanup(hProcess);
 
     using((Arena arena) {
       final engineProperties = arena<FlutterDesktopEngineProperties>()
@@ -52,8 +53,8 @@ class FlutterEngine {
       throw Exception('Failed to create messenger.');
     }
 
-    controller =
-        flutter.FlutterDesktopViewControllerCreate(width, height, handle);
+    controller = flutter.FlutterDesktopViewControllerCreate(
+        size.width, size.height, handle);
     if (controller == nullptr) {
       throw Exception('Failed to create view controller.');
     }

@@ -69,7 +69,7 @@ class Window {
     SetFocus(hwnd);
   }
 
-  void move(Rectangle<int> newDimensions, bool repaintWindow) {
+  void move(Rectangle<int> newDimensions, {bool repaintWindow = true}) {
     MoveWindow(hwnd, newDimensions.left, newDimensions.top, newDimensions.width,
         newDimensions.height, repaintWindow ? TRUE : FALSE);
   }

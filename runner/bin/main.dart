@@ -13,13 +13,31 @@ class Application {
   static late FlutterEngine engine;
 
   static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
+    // Give Flutter an opportunity to handle window messages.
+    // final result = engine.handleTopLevelWindowProc(hWnd, uMsg, wParam, lParam);
+    // if (result != FALSE) {
+    //   return result;
+    // }
+
+    // Otherwise, we address host window messages.
     switch (uMsg) {
+      case WM_NCCREATE:
+        EnableNonClientDpiScaling(hWnd);
+        break;
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
       case WM_FONTCHANGE:
         engine.reloadSystemFonts();
-        break;
+        return 0;
+      case WM_SIZE:
+        print('resizing');
+        final hostWindow = Window(hwnd);
+        Window(engine.hwnd).move(hostWindow.dimensions);
+        return 0;
+      case WM_ACTIVATE:
+        Window(engine.hwnd).setFocus();
+        return 0;
     }
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
   }
@@ -38,12 +56,11 @@ class Application {
 
     // Set up Flutter view controller. The size must match the window dimensions
     // to avoid unnecessary surface creation / destruction in the startup path.
-    final hostSize = hostWindow.dimensions;
-    engine = FlutterEngine(hostSize.width, hostSize.height, project);
+    engine = FlutterEngine(hostWindow.dimensions, project);
 
     Window(engine.hwnd)
       ..setParent(hostWindow)
-      ..move(hostSize, true)
+      ..move(hostWindow.dimensions)
       ..setFocus()
       ..runMessageLoop();
 
