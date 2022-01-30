@@ -102,7 +102,7 @@ class Win32Window {
 
   // Returns the backing Window handle to enable clients to set icon and other
   // window properties. Returns nullptr if the window has been destroyed.
-  int? GetHandle() => topLevelWindowHandle;
+  int GetHandle() => topLevelWindowHandle;
 
   static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch (uMsg) {
