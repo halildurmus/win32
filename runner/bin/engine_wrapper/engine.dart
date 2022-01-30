@@ -1,10 +1,11 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
+import 'package:win32/win32.dart';
 
 import '../flutter_window.dart';
 import 'ffi.dart';
-import 'utils.dart';
 
 /// An instance of a Flutter engine.
 class FlutterEngine {
@@ -26,6 +27,13 @@ class FlutterEngine {
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
     flutter = FlutterEngineAPI(library);
+
+    // SymInitialize has already been called when Dart starts. When we invoke the
+    // engine, it's called again, which leads to a Failed to init
+    // NativeSymbolResolver (SymInitialize 87) error. So we clean up before we
+    // call the engine.
+    final hProcess = GetCurrentProcess();
+    SymCleanup(hProcess);
 
     using((Arena arena) {
       final engineProperties = arena<FlutterDesktopEngineProperties>()
@@ -49,18 +57,18 @@ class FlutterEngine {
     // TODO: Implement entryPoint
 
     if (handle == nullptr) {
-      error('Cannot run an engine that failed creation.');
+      stderr.writeln('Cannot run an engine that failed creation.');
       return false;
     }
     if (hasBeenRun) {
-      error('Cannot run an engine more than once.');
+      stderr.writeln('Cannot run an engine more than once.');
       return false;
     }
 
     final runSucceeded = flutter.FlutterDesktopEngineRun(handle, nullptr) != 0;
 
     if (!runSucceeded) {
-      error('Failed to start engine.');
+      stderr.writeln('Failed to start engine.');
     }
 
     hasBeenRun = true;

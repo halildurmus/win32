@@ -5,7 +5,6 @@ import 'package:win32/win32.dart';
 
 import 'flutter_window.dart';
 import 'utils.dart';
-import 'win32_window.dart';
 
 const EXIT_SUCCESS = 0;
 const EXIT_FAILURE = 1;
@@ -15,7 +14,7 @@ int main(List<String> args) {
   // new console when running with a debugger.
   if (AttachConsole(ATTACH_PARENT_PROCESS) == FALSE &&
       IsDebuggerPresent() == TRUE) {
-    CreateAndAttachConsole();
+    // CreateAndAttachConsole();
   }
 
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);

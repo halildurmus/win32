@@ -3,23 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-class Point {
-  int x;
-  int y;
-
-  Point(this.x, this.y);
-}
-
-class Size {
-  int width;
-  int height;
-
-  Size(this.width, this.height);
-}
-
-// Scale helper to convert logical scaler values to physical using passed in
-// scale factor
-int Scale(int source, double scale_factor) => (source * scale_factor).floor();
+import 'utils.dart';
 
 class WindowClassRegistrar {
   static WindowClassRegistrar getInstance() {

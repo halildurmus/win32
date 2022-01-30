@@ -1,11 +1,11 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
 import '../flutter_window.dart';
 import 'engine.dart';
 import 'ffi.dart';
-import 'utils.dart';
 
 class FlutterViewController {
   late final FlutterEngineAPI flutter;
@@ -26,7 +26,7 @@ class FlutterViewController {
         width, height, engine.handle);
 
     if (controller == nullptr) {
-      error('Failed to create view controller.');
+      stderr.writeln('Failed to create view controller.');
     } else {
       view = flutter.FlutterDesktopViewControllerGetView(controller);
     }
