@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../flutter_window.dart';
 import 'ffi.dart';
 import 'utils.dart';
 
@@ -21,13 +22,20 @@ class FlutterEngine {
   bool hasBeenRun = false;
 
   /// Creates a new engine for running the given project.
-  FlutterEngine() {
+  FlutterEngine(DartProject project) {
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
     flutter = FlutterEngineAPI(library);
 
-    final engineProperties = calloc<FlutterDesktopEngineProperties>();
-    handle = flutter.FlutterDesktopEngineCreate(engineProperties);
+    using((Arena arena) {
+      final engineProperties = arena<FlutterDesktopEngineProperties>()
+        ..ref.aot_library_path =
+            project.aotLibraryPath.toNativeUtf16(allocator: arena)
+        ..ref.icu_data_path =
+            project.icuDataPath.toNativeUtf16(allocator: arena)
+        ..ref.assets_path = project.assetsPath.toNativeUtf16(allocator: arena);
+      handle = flutter.FlutterDesktopEngineCreate(engineProperties);
+    });
 
     messenger = flutter.FlutterDesktopEngineGetMessenger(handle);
   }

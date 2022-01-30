@@ -21,7 +21,7 @@ class FlutterViewController {
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
     flutter = FlutterEngineAPI(library);
-    final engine = FlutterEngine();
+    final engine = FlutterEngine(project);
     controller = flutter.FlutterDesktopViewControllerCreate(
         width, height, engine.handle);
 

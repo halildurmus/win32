@@ -1,4 +1,5 @@
 import 'dart:ffi' as ffi;
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 typedef size_t = ffi.Uint64;
@@ -90,11 +91,11 @@ class FlutterDesktopView extends ffi.Opaque {}
 class FlutterDesktopEngine extends ffi.Opaque {}
 
 class FlutterDesktopEngineProperties extends ffi.Struct {
-  external ffi.Pointer<wchar_t> assets_path;
+  external ffi.Pointer<Utf16> assets_path;
 
-  external ffi.Pointer<wchar_t> icu_data_path;
+  external ffi.Pointer<Utf16> icu_data_path;
 
-  external ffi.Pointer<wchar_t> aot_library_path;
+  external ffi.Pointer<Utf16> aot_library_path;
 
   @ffi.Int32()
   external int dart_entrypoint_argc;

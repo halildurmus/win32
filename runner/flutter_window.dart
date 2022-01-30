@@ -6,9 +6,25 @@ import 'package:win32/win32.dart';
 import 'engine_wrapper/viewcontroller.dart';
 import 'win32_window.dart';
 
-// Temporary
+/// A set of Flutter and Dart assets used to initialize a Flutter engine.
 class DartProject {
-  DartProject(String s);
+  final String assetsPath;
+  final String icuDataPath;
+  final String aotLibraryPath;
+
+  /// Creates a DartProject from a series of absolute paths.
+  ///
+  /// The three paths are:
+  /// - assets_path: Path to the assets directory as built by the Flutter tool.
+  /// - icu_data_path: Path to the icudtl.dat file.
+  /// - aot_library_path: Path to the AOT snapshot file.
+  ///
+  /// The paths can either be absolute or relative to the directory containing
+  /// the running executable.
+  const DartProject(
+      {required this.assetsPath,
+      required this.icuDataPath,
+      required this.aotLibraryPath});
 }
 
 /// A window that does nothing but host a Flutter view.
