@@ -1,4 +1,5 @@
 // ignore_for_file: slash_for_doc_comments
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
@@ -101,16 +102,16 @@ class FlutterDesktopEngineProperties extends Struct {
 /********************************* FUNCTIONS *********************************/
 
 /// Native API for Flutter Windows desktop engine `flutter_windows.h`
-class FlutterEngineAPI {
+class FlutterEngineLibrary {
   /// Holds the symbol lookup function.
   final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  FlutterEngineAPI(DynamicLibrary dynamicLibrary)
+  FlutterEngineLibrary(DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
-  FlutterEngineAPI.fromLookup(
+  FlutterEngineLibrary.fromLookup(
       Pointer<T> Function<T extends NativeType>(String symbolName) lookup)
       : _lookup = lookup;
 

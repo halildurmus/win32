@@ -1,6 +1,7 @@
 import 'dart:ffi';
+import 'dart:math' show Rectangle;
 
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide Rectangle;
 
 import 'engine/dart_project.dart';
 import 'engine/engine.dart';
@@ -9,7 +10,7 @@ import 'window.dart';
 void main() => initApp(Application.winMain);
 
 class Application {
-  static late FlutterEngine engine;
+  static late FlutterEmbedder engine;
   static bool engineInitialized = false;
 
   static int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
@@ -44,20 +45,25 @@ class Application {
   }
 
   static void winMain(int hInstance, List<String> args, int nShowCmd) {
+    const appPath = r'c:\scratch\runner_app';
+
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
     final hostWindow = Window.create(
         hInstance: hInstance,
         windowCaption: 'Dart Native Win32 window',
         className: 'FLUTTER_RUNNER_WIN32_WINDOW',
-        windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0));
+        windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
+        dimensions: const Rectangle<int>(10, 10, 1280, 720));
 
-    final project = DartProject.fromPath(
-        r'C:\scratch\runner_app\build\windows\runner\Release\data');
+    final project =
+        DartProject.fromPath('$appPath\\build\\windows\\runner\\Release\\data');
+    const flutterLibrary =
+        '$appPath\\build\\windows\\runner\\Release\\flutter_windows.dll';
 
     // Set up Flutter view controller. The size must match the window dimensions
     // to avoid unnecessary surface creation / destruction in the startup path.
-    engine = FlutterEngine(hostWindow.dimensions, project);
+    engine = FlutterEmbedder(hostWindow.dimensions, project, flutterLibrary);
     engineInitialized = true;
 
     Window(engine.hwnd)
