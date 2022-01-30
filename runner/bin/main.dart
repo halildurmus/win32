@@ -9,20 +9,22 @@ import 'window.dart';
 void main() => initApp(Application.winMain);
 
 class Application {
-  static int hwnd = 0;
   static late FlutterEngine engine;
+  static bool engineInitialized = false;
 
-  static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
+  static int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
     // Give Flutter an opportunity to handle window messages.
-    // final result = engine.handleTopLevelWindowProc(hWnd, uMsg, wParam, lParam);
-    // if (result != FALSE) {
-    //   return result;
-    // }
+    if (engineInitialized) {
+      final result = engine.handleTopLevelWindowProc(hwnd, msg, wParam, lParam);
+      if (result != FALSE) {
+        return result;
+      }
+    }
 
     // Otherwise, we address host window messages.
-    switch (uMsg) {
+    switch (msg) {
       case WM_NCCREATE:
-        EnableNonClientDpiScaling(hWnd);
+        EnableNonClientDpiScaling(hwnd);
         break;
       case WM_DESTROY:
         PostQuitMessage(0);
@@ -31,7 +33,6 @@ class Application {
         engine.reloadSystemFonts();
         return 0;
       case WM_SIZE:
-        print('resizing');
         final hostWindow = Window(hwnd);
         Window(engine.hwnd).move(hostWindow.dimensions);
         return 0;
@@ -39,7 +40,7 @@ class Application {
         Window(engine.hwnd).setFocus();
         return 0;
     }
-    return DefWindowProc(hWnd, uMsg, wParam, lParam);
+    return DefWindowProc(hwnd, msg, wParam, lParam);
   }
 
   static void winMain(int hInstance, List<String> args, int nShowCmd) {
@@ -57,6 +58,7 @@ class Application {
     // Set up Flutter view controller. The size must match the window dimensions
     // to avoid unnecessary surface creation / destruction in the startup path.
     engine = FlutterEngine(hostWindow.dimensions, project);
+    engineInitialized = true;
 
     Window(engine.hwnd)
       ..setParent(hostWindow)
