@@ -7555,6 +7555,124 @@ const SYMFLAG_METADATA = 0x00020000;
 const SYMFLAG_CLR_TOKEN = 0x00040000;
 
 // -----------------------------------------------------------------------------
+// Symbol Option constants
+// -----------------------------------------------------------------------------
+
+/// This symbol option causes all searches for symbol names to be
+/// case-insensitive.
+const SYMOPT_CASE_INSENSITIVE = 0x00000001;
+
+/// This symbol option causes public symbol names to be undecorated when they
+/// are displayed, and causes searches for symbol names to ignore symbol
+/// decorations. Private symbol names are never decorated, regardless of whether
+/// this option is active.
+const SYMOPT_UNDNAME = 0x00000002;
+
+/// This symbol option is called deferred symbol loading or lazy symbol loading.
+/// When it is active, symbols are not actually loaded when the target modules
+/// are loaded. Instead, symbols are loaded by the debugger as they are needed.
+const SYMOPT_DEFERRED_LOADS = 0x00000004;
+
+/// This symbol option turns off C++ translation. When this symbol option is
+/// set, :: is replaced by __ in all symbols.
+const SYMOPT_NO_CPP = 0x00000008;
+
+/// This symbol option allows line number information to be read from source
+/// files. This option must be on for source debugging to work correctly.
+const SYMOPT_LOAD_LINES = 0x00000010;
+
+/// When code has been optimized and there is no symbol at the expected
+/// location, this option causes the nearest symbol to be used instead.
+const SYMOPT_OMAP_FIND_NEAREST = 0x00000020;
+
+/// This symbol option reduces the pickiness of the symbol handler when it is
+/// attempting to match symbols.
+const SYMOPT_LOAD_ANYTHING = 0x00000040;
+
+/// This symbol option causes the symbol handler to ignore the CV record in the
+/// loaded image header when searching for symbols.
+const SYMOPT_IGNORE_CVREC = 0x00000080;
+
+/// This symbol option disables the symbol handler's automatic loading of
+/// modules. When this option is set and the debugger attempts to match a
+/// symbol, it will only search modules which have already been loaded.
+const SYMOPT_NO_UNQUALIFIED_LOADS = 0x00000100;
+
+/// This symbol option causes file access error dialog boxes to be suppressed.
+const SYMOPT_FAIL_CRITICAL_ERRORS = 0x00000200;
+
+/// This symbol option causes the debugger to perform a strict evaluation of all
+/// symbol files.
+const SYMOPT_EXACT_SYMBOLS = 0x00000400;
+
+/// This symbol option allows DbgHelp to read symbols that are stored at an
+/// absolute address in memory. This option is not needed in the vast majority
+/// of cases.
+const SYMOPT_ALLOW_ABSOLUTE_SYMBOLS = 0x00000800;
+
+/// This symbol option causes the debugger to ignore the environment variable
+/// settings for the symbol path and the executable image path.
+const SYMOPT_IGNORE_NT_SYMPATH = 0x00001000;
+
+/// When debugging on 64-bit Windows, include any 32-bit modules.
+const SYMOPT_INCLUDE_32BIT_MODULES = 0x00002000;
+
+/// This symbol option causes DbgHelp to ignore private symbol data, and search
+/// only the public symbol table for symbol information.
+const SYMOPT_PUBLICS_ONLY = 0x00004000;
+
+/// This symbol option prevents DbgHelp from searching the public symbol table.
+/// This can make symbol enumeration and symbol searches much faster. If you are
+/// concerned solely with search speed, the SYMOPT_AUTO_PUBLICS option is
+/// generally preferable to this one.
+const SYMOPT_NO_PUBLICS = 0x00008000;
+
+/// This symbol option causes DbgHelp to search the public symbol table in a
+/// .pdb file only as a last resort. If any matches are found when searching the
+/// private symbol data, the public symbols will not be searched. This improves
+/// symbol search speed.
+const SYMOPT_AUTO_PUBLICS = 0x00010000;
+
+/// This symbol option prevents DbgHelp from searching the disk for a copy of
+/// the image when symbols are loaded.
+const SYMOPT_NO_IMAGE_SEARCH = 0x00020000;
+
+/// (Kernel mode only) This symbol option indicates whether Secure Mode is
+/// active.
+const SYMOPT_SECURE = 0x00040000;
+
+/// This symbol option suppresses authentication dialog boxes from the proxy
+/// server. This may result in SymSrv being unable to access a symbol store on
+/// the internet.
+const SYMOPT_NO_PROMPTS = 0x00080000;
+
+/// Overwrite the downlevel store from the symbol store.
+const SYMOPT_OVERWRITE = 0x00100000;
+
+/// Ignore the image directory.
+const SYMOPT_IGNORE_IMAGEDIR = 0x00200000;
+
+/// Symbols are stored in the root directory of the default downstream store.
+const SYMOPT_FLAT_DIRECTORY = 0x00400000;
+
+/// If there is both an uncompressed and a compressed file available, favor the
+/// compressed file. This option is good for slow connections.
+const SYMOPT_FAVOR_COMPRESSED = 0x00800000;
+
+/// If there is both an uncompressed and a compressed file available, favor the
+/// compressed file. This option is good for slow connections.
+const SYMOPT_ALLOW_ZERO_ADDRESS = 0x01000000;
+
+/// Disables the auto-detection of symbol server stores in the symbol path, even
+/// without the "SRV*" designation, maintaining compatibility with previous
+/// behavior.
+const SYMOPT_DISABLE_SYMSRV_AUTODETECT = 0x02000000;
+
+/// This symbol option turns on noisy symbol loading. This instructs the
+/// debugger to display information about its search for symbols.
+const SYMOPT_DEBUG = 0x80000000;
+
+// -----------------------------------------------------------------------------
 // DWM constants
 // -----------------------------------------------------------------------------
 
