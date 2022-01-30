@@ -20,13 +20,8 @@ int main(List<String> args) {
 
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
-  final project = const DartProject(
-      aotLibraryPath:
-          r'C:\scratch\runner_app\build\windows\runner\Release\data\app.so',
-      icuDataPath:
-          r'C:\scratch\runner_app\build\windows\runner\Release\data\icudtl.dat',
-      assetsPath:
-          r'C:\scratch\runner_app\build\windows\runner\Release\data\flutter_assets');
+  final project = DartProject.fromPath(
+      r'C:\scratch\runner_app\build\windows\runner\Release\data');
 
   // TODO: Deal with command line arguments
 
