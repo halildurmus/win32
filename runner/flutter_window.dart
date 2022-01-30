@@ -8,8 +8,14 @@ import 'win32_window.dart';
 
 /// A set of Flutter and Dart assets used to initialize a Flutter engine.
 class DartProject {
+  /// The path to the assets directory.
   final String assetsPath;
+
+  /// The path to the ICU data.
   final String icuDataPath;
+
+  /// The path to the AOT library. This will always return a path, but non-AOT
+  /// builds will not be expected to actually have a library at that path.
   final String aotLibraryPath;
 
   /// Creates a `DartProject` from a series of absolute paths.
@@ -53,7 +59,6 @@ class FlutterWindow extends Win32Window {
   // Flutter view running |project|.
   FlutterWindow(this.project);
 
-  // Win32Window:
   @override
   bool OnCreate() {
     final frame = calloc<RECT>();
