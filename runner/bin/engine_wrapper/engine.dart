@@ -7,30 +7,36 @@ import 'package:win32/win32.dart';
 import '../dart_project.dart';
 import 'ffi.dart';
 
-/// An instance of a Flutter engine.
 class FlutterEngine {
   late final FlutterEngineAPI flutter;
 
+  int width;
+  int height;
+  DartProject project;
+
   /// Handle for interacting with the C API's engine reference.
-  Pointer<FlutterDesktopEngine> handle = nullptr;
+  late Pointer<FlutterDesktopEngine> handle;
 
   /// Messenger for communicating with the engine.
-  Pointer<FlutterDesktopMessenger> messenger = nullptr;
+  late Pointer<FlutterDesktopMessenger> messenger;
+
+  late Pointer<FlutterDesktopView> view;
+  late Pointer<FlutterDesktopViewControllerState> controller;
 
   /// Whether the engine has been run. This will be true if Run has been called,
   /// or if RelinquishEngine has been called (since the view controller will run
   /// the engine if it hasn't already been run).
   bool hasBeenRun = false;
 
-  /// Creates a new engine for running the given project.
-  FlutterEngine(DartProject project) {
+  FlutterEngine(this.width, this.height, this.project) {
+    // Load the Windows engine
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
     flutter = FlutterEngineAPI(library);
 
-    // SymInitialize has already been called when Dart starts. When we invoke the
-    // engine, it's called again, which leads to a Failed to init
-    // NativeSymbolResolver (SymInitialize 87) error. So we clean up before we
+    // SymInitialize has already been called when Dart starts. When we invoke
+    // the engine, it's called again, which leads to a "Failed to init
+    // NativeSymbolResolver (SymInitialize 87)" error. So we clean up before we
     // call the engine.
     final hProcess = GetCurrentProcess();
     SymCleanup(hProcess);
@@ -46,6 +52,33 @@ class FlutterEngine {
     });
 
     messenger = flutter.FlutterDesktopEngineGetMessenger(handle);
+    controller =
+        flutter.FlutterDesktopViewControllerCreate(width, height, handle);
+
+    if (controller == nullptr) {
+      stderr.writeln('Failed to create view controller.');
+    } else {
+      view = flutter.FlutterDesktopViewControllerGetView(controller);
+    }
+  }
+
+  void reloadSystemFonts() {
+    flutter.FlutterDesktopEngineReloadSystemFonts(handle);
+  }
+
+  int get hwnd => flutter.FlutterDesktopViewGetHWND(view);
+
+  int handleTopLevelWindowProc(int hwnd, int message, int wParam, int lParam) {
+    final result = calloc<IntPtr>();
+    final handled =
+        flutter.FlutterDesktopViewControllerHandleTopLevelWindowProc(
+                controller, hwnd, message, wParam, lParam, result) !=
+            0;
+    if (handled) {
+      return result.value;
+    } else {
+      return 0;
+    }
   }
 
   /// Starts running the engine, with an optional entry point.

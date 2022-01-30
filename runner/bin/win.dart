@@ -5,10 +5,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'dart_project.dart';
-import 'engine_wrapper/viewcontroller.dart';
+import 'engine_wrapper/engine.dart';
 
 int hostWindowHandle = 0;
-int flutterWindowHandle = 0;
+late FlutterEngine engine;
 
 void main() => initApp(winMain);
 
@@ -17,6 +17,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     case WM_DESTROY:
       PostQuitMessage(0);
       return 0;
+    case WM_FONTCHANGE:
+      engine.reloadSystemFonts();
+      break;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
@@ -72,19 +75,18 @@ void winMain(int hInstance, List<String> args, int nShowCmd) {
 
   // The size here must match the window dimensions to avoid unnecessary
   // surface creation / destruction in the startup path.
-  final controller = FlutterViewController(
+  engine = FlutterEngine(
       frame.right - frame.left, frame.bottom - frame.top, project);
-  if (controller.view == nullptr) {
+  if (engine.view == nullptr) {
     stderr.writeln('Fatal error: unable to create Flutter view controller.');
     exit(1);
   }
 
   free(rect);
-  flutterWindowHandle = controller.nativeWindowHandle;
-  SetParent(flutterWindowHandle, hostWindowHandle);
-  MoveWindow(flutterWindowHandle, 0, 0, frame.right - frame.left,
+  SetParent(engine.hwnd, hostWindowHandle);
+  MoveWindow(engine.hwnd, 0, 0, frame.right - frame.left,
       frame.bottom - frame.top, TRUE);
-  SetFocus(flutterWindowHandle);
+  SetFocus(engine.hwnd);
 
   // Run the message loop.
   final msg = calloc<MSG>();
