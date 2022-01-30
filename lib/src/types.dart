@@ -34,6 +34,7 @@ typedef HINSTANCE = IntPtr;
 typedef HKEY = IntPtr;
 typedef HMIDIIN = IntPtr;
 typedef HMODULE = IntPtr;
+typedef HMONITOR = IntPtr;
 typedef HRESULT = LONG;
 typedef HRGN = IntPtr;
 typedef HSTRING = IntPtr;
