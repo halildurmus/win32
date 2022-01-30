@@ -36,10 +36,10 @@ class Win32Window {
   bool quit_on_close_ = false;
 
   // window handle for top level window.
-  int? window_handle_;
+  int topLevelWindowHandle = 0;
 
   // window handle for hosted content.
-  int? child_content_;
+  int childWindowHandle = 0;
 
   // Creates and shows a win32 window with |title| and position and size using
   // |origin| and |size|. New windows are created on the default monitor. Window
@@ -81,11 +81,23 @@ class Win32Window {
   void Destroy() {}
 
   // Inserts |content| into the window tree.
-  void SetChildContent(int content) {}
+  void SetChildContent(int contentWindowHandle) {
+    childWindowHandle = contentWindowHandle;
+    SetParent(contentWindowHandle, topLevelWindowHandle);
+
+    final rect = calloc<RECT>();
+    GetClientRect(topLevelWindowHandle, rect);
+    final frame = rect.ref;
+    MoveWindow(contentWindowHandle, frame.left, frame.top,
+        frame.right - frame.left, frame.bottom - frame.top, TRUE);
+    free(rect);
+
+    SetFocus(childWindowHandle);
+  }
 
   // Returns the backing Window handle to enable clients to set icon and other
   // window properties. Returns nullptr if the window has been destroyed.
-  int? GetHandle() => window_handle_;
+  int? GetHandle() => topLevelWindowHandle;
 
   static int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
     switch (uMsg) {
@@ -93,21 +105,21 @@ class Win32Window {
         PostQuitMessage(0);
         return 0;
 
-      case WM_PAINT:
-        final ps = calloc<PAINTSTRUCT>();
-        final hdc = BeginPaint(hWnd, ps);
-        final rect = calloc<RECT>();
-        final msg = TEXT('Hello, Dart!');
+      // case WM_PAINT:
+      //   final ps = calloc<PAINTSTRUCT>();
+      //   final hdc = BeginPaint(hWnd, ps);
+      //   final rect = calloc<RECT>();
+      //   final msg = TEXT('Hello, Dart!');
 
-        GetClientRect(hWnd, rect);
-        DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-        EndPaint(hWnd, ps);
+      //   GetClientRect(hWnd, rect);
+      //   DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      //   EndPaint(hWnd, ps);
 
-        free(ps);
-        free(rect);
-        free(msg);
+      //   free(ps);
+      //   free(rect);
+      //   free(msg);
 
-        return 0;
+      //   return 0;
     }
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
   }

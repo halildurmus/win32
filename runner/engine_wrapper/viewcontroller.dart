@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../flutter_window.dart';
 import 'engine.dart';
 import 'ffi.dart';
 import 'utils.dart';
@@ -11,11 +12,12 @@ class FlutterViewController {
 
   int width;
   int height;
+  DartProject project;
 
   Pointer<FlutterDesktopView> view = nullptr;
   Pointer<FlutterDesktopViewControllerState> controller = nullptr;
 
-  FlutterViewController(this.width, this.height) {
+  FlutterViewController(this.width, this.height, this.project) {
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
     flutter = FlutterEngineAPI(library);
@@ -29,6 +31,8 @@ class FlutterViewController {
       view = flutter.FlutterDesktopViewControllerGetView(controller);
     }
   }
+
+  int get nativeWindowHandle => flutter.FlutterDesktopViewGetHWND(view);
 
   int handleTopLevelWindowProc(int hwnd, int message, int wParam, int lParam) {
     final result = calloc<IntPtr>();
