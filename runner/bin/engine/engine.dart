@@ -4,31 +4,27 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '../dart_project.dart';
+import 'dart_project.dart';
 import 'ffi.dart';
 
 class FlutterEngine {
   late final FlutterEngineAPI flutter;
 
-  int width;
-  int height;
-  DartProject project;
-
   /// Handle for interacting with the C API's engine reference.
-  late Pointer<FlutterDesktopEngine> handle;
+  late final Pointer<FlutterDesktopEngine> handle;
 
   /// Messenger for communicating with the engine.
-  late Pointer<FlutterDesktopMessenger> messenger;
+  late final Pointer<FlutterDesktopMessenger> messenger;
 
-  late Pointer<FlutterDesktopView> view;
-  late Pointer<FlutterDesktopViewControllerState> controller;
+  late final Pointer<FlutterDesktopView> view;
+  late final Pointer<FlutterDesktopViewControllerState> controller;
 
   /// Whether the engine has been run. This will be true if Run has been called,
   /// or if RelinquishEngine has been called (since the view controller will run
   /// the engine if it hasn't already been run).
   bool hasBeenRun = false;
 
-  FlutterEngine(this.width, this.height, this.project) {
+  FlutterEngine(int width, int height, DartProject project) {
     // Load the Windows engine
     final library = DynamicLibrary.open(
         r'c:\flutter\bin\cache\artifacts\engine\windows-x64-release\flutter_windows.dll');
@@ -52,13 +48,19 @@ class FlutterEngine {
     });
 
     messenger = flutter.FlutterDesktopEngineGetMessenger(handle);
+    if (messenger == nullptr) {
+      throw Exception('Failed to create messenger.');
+    }
+
     controller =
         flutter.FlutterDesktopViewControllerCreate(width, height, handle);
-
     if (controller == nullptr) {
-      stderr.writeln('Failed to create view controller.');
-    } else {
-      view = flutter.FlutterDesktopViewControllerGetView(controller);
+      throw Exception('Failed to create view controller.');
+    }
+
+    view = flutter.FlutterDesktopViewControllerGetView(controller);
+    if (view == nullptr) {
+      throw Exception('Fatal error: unable to create Flutter view controller.');
     }
   }
 

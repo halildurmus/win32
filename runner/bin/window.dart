@@ -11,25 +11,35 @@ class Window {
 
   factory Window.create(
       {required String windowCaption,
-      required int hInstance,
-      required String className}) {
+      required String className,
+      required Pointer<NativeFunction<WindowProc>> windowProc,
+      int? hInstance,
+      Rectangle<int>? dimensions}) {
     final classNamePtr = className.toNativeUtf16();
     final windowCaptionPtr = windowCaption.toNativeUtf16();
+
+    final wc = calloc<WNDCLASS>()
+      ..ref.style = CS_HREDRAW | CS_VREDRAW
+      ..ref.lpfnWndProc = windowProc
+      ..ref.hInstance = hInstance ?? GetModuleHandle(nullptr)
+      ..ref.lpszClassName = classNamePtr
+      ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+      ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+    RegisterClass(wc);
+    free(wc);
 
     final hwnd = CreateWindowEx(
         0, // Optional window styles.
         classNamePtr, // Window class
         windowCaptionPtr, // Window caption
         WS_OVERLAPPEDWINDOW | WS_VISIBLE, // Window style
-
-        // Size and position
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
+        dimensions?.left ?? CW_USEDEFAULT,
+        dimensions?.top ?? CW_USEDEFAULT,
+        dimensions?.width ?? CW_USEDEFAULT,
+        dimensions?.height ?? CW_USEDEFAULT,
         NULL, // Parent window
         NULL, // Menu
-        hInstance, // Instance handle
+        hInstance ?? GetModuleHandle(nullptr), // Instance handle
         nullptr // Additional application data
         );
 
@@ -45,14 +55,33 @@ class Window {
   Rectangle<int> get dimensions {
     final rect = calloc<RECT>();
     GetClientRect(hwnd, rect);
-    final window = Rectangle<int>(rect.ref.left, rect.ref.top,
+    final windowRect = Rectangle<int>(rect.ref.left, rect.ref.top,
         rect.ref.right - rect.ref.left, rect.ref.bottom - rect.ref.top);
     free(rect);
-    return window;
+    return windowRect;
   }
 
   void setParent(Window parent) {
     SetParent(hwnd, parent.hwnd);
+  }
+
+  void setFocus() {
+    SetFocus(hwnd);
+  }
+
+  void move(Rectangle<int> newDimensions, bool repaintWindow) {
+    MoveWindow(hwnd, newDimensions.left, newDimensions.top, newDimensions.width,
+        newDimensions.height, repaintWindow ? TRUE : FALSE);
+  }
+
+  void runMessageLoop() {
+    // Run the message loop.
+    final msg = calloc<MSG>();
+    while (GetMessage(msg, NULL, 0, 0) != FALSE) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
+    free(msg);
   }
 }
 

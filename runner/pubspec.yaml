@@ -1,12 +1,10 @@
-name: dart_runner
+name: runner
 description: A Dart library for accessing common Win32 APIs using FFI. No C required!
 version: 0.0.1
 homepage: https://timsneath.github.io/win32/
 repository: https://github.com/timsneath/win32
 issue_tracker: https://github.com/timsneath/win32/issues
 documentation: https://timsneath.github.io/win32/
-
-publish_to: none
 
 environment:
   sdk: '>=2.15.0 <3.0.0'
@@ -16,8 +14,7 @@ platforms:
 
 dependencies:
   ffi: ^1.1.2
-  win32:
-    path: ..
+  win32: ^2.3.9
 
 dev_dependencies:
   lints: ^1.0.1
