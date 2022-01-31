@@ -1,5 +1,3 @@
-# win32_runner
-
 Experimental package for running Flutter apps from a Dart runner, instead of the
 C++ runner that is provided by default when you do `flutter create`.
 
