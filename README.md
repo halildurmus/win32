@@ -32,3 +32,6 @@ C:\src\simpleapp> dart compile exe ..\win32_runner\example\flutter_run.dart -o f
 # Run Flutter app
 C:\src\simpleapp> flutter_run
 ```
+
+Sample results:
+![image](https://user-images.githubusercontent.com/2319867/151735711-3f3d3e76-5008-495d-8f30-ea5b1de5ae22.png)
