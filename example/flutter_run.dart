@@ -47,14 +47,17 @@ class Application {
     final parser = ArgParser()
       ..addOption('path',
           abbr: 'p',
-          help: '[required] Relative or absolute path to a Flutter app.');
+          help: 'Relative or absolute path to a Flutter app. ',
+          defaultsTo: '.')
+      ..addFlag('help', abbr: 'h', help: 'Shows usage information.');
     final results = parser.parse(args);
-    final appPath = results['path'] as String?;
 
-    if (appPath == null) {
+    if (results['help'] as bool) {
       print('Runs a Flutter app.\n\nSyntax:\n${parser.usage}');
-      exit(-1);
+      exit(0);
     }
+
+    final appPath = results['path'] as String;
     return Directory(appPath).absolute.path;
   }
 
@@ -69,10 +72,9 @@ class Application {
         windowProc: Pointer.fromFunction<WindowProc>(mainWindowProc, 0),
         dimensions: const Rectangle<int>(10, 10, 1280, 720));
 
-    final project =
-        DartProject.fromPath('$appPath\\build\\windows\\runner\\Release\\data');
+    final project = DartProject.fromRoot(appPath);
     final flutterLibrary =
-        '$appPath\\build\\windows\\runner\\Release\\flutter_windows.dll';
+        '$appPath\\windows\\flutter\\ephemeral\\flutter_windows.dll';
 
     // Set up Flutter view controller. The size must match the window dimensions
     // to avoid unnecessary surface creation / destruction in the startup path.

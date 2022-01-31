@@ -38,4 +38,21 @@ class DartProject {
       assetsPath: '$path\\flutter_assets',
       icuDataPath: '$path\\icudtl.dat',
       aotLibraryPath: '$path\\app.so');
+
+  /// Creates a `DartProject` from the root Flutter folder, after running
+  /// `flutter assemble`, with a command such as: `flutter assemble
+  /// -dTargetPlatform=windows-x64 --output=build -dBuildMode=release
+  /// release_bundle_windows_assets`.
+  ///
+  /// The directory should contain the following top-level items:
+  /// - `icudtl.dat` (provided as a resource by the Flutter tool)
+  /// - `flutter_assets` (as built by the Flutter tool)
+  /// - `app.so`, for an AOT build (as built by the Flutter tool)
+  ///
+  /// The path can either be absolute, or relative to the directory containing
+  /// the running executable.
+  factory DartProject.fromRoot(String path) => DartProject(
+      assetsPath: '$path\\build\\flutter_assets',
+      icuDataPath: '$path\\windows\\flutter\\ephemeral\\icudtl.dat',
+      aotLibraryPath: '$path\\build\\windows\\app.so');
 }
