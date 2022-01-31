@@ -28,15 +28,24 @@ class Window {
     RegisterClass(wc);
     free(wc);
 
+    final scaleFactor =
+        dimensions != null ? scaleFactorForOrigin(dimensions) : 1.0;
+
     final hwnd = CreateWindowEx(
         0, // Optional window styles.
         classNamePtr, // Window class
         windowCaptionPtr, // Window caption
         WS_OVERLAPPEDWINDOW | WS_VISIBLE, // Window style
-        dimensions?.left ?? CW_USEDEFAULT,
-        dimensions?.top ?? CW_USEDEFAULT,
-        dimensions?.width ?? CW_USEDEFAULT,
-        dimensions?.height ?? CW_USEDEFAULT,
+        dimensions != null
+            ? scale(dimensions.left, scaleFactor)
+            : CW_USEDEFAULT,
+        dimensions != null ? scale(dimensions.top, scaleFactor) : CW_USEDEFAULT,
+        dimensions != null
+            ? scale(dimensions.width, scaleFactor)
+            : CW_USEDEFAULT,
+        dimensions != null
+            ? scale(dimensions.height, scaleFactor)
+            : CW_USEDEFAULT,
         NULL, // Parent window
         NULL, // Menu
         hInstance ?? GetModuleHandle(nullptr), // Instance handle
@@ -51,6 +60,29 @@ class Window {
     free(classNamePtr);
     return Window(hwnd);
   }
+
+  static double scaleFactorForOrigin(Rectangle<int> dimensions) {
+    final point = calloc<POINT>()
+      ..ref.x = dimensions.left
+      ..ref.y = dimensions.top;
+    final dpiX = calloc<UINT>();
+    final dpiY = calloc<UINT>();
+
+    final hmonitor = MonitorFromPoint(point.ref, MONITOR_DEFAULTTONEAREST);
+    GetDpiForMonitor(hmonitor, MONITOR_DPI_TYPE.MDT_EFFECTIVE_DPI, dpiX, dpiY);
+    final dpi = dpiX.value;
+
+    free(point);
+    free(dpiX);
+    free(dpiY);
+
+    return dpi / 96.0;
+  }
+
+  // Scale helper to convert logical scaler values to physical using passed in
+  // scale factor
+  static int scale(int source, double scaleFactor) =>
+      (source * scaleFactor).floor();
 
   Rectangle<int> get dimensions {
     final rect = calloc<RECT>();
