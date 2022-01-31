@@ -1,4 +1,3 @@
-// ignore_for_file: slash_for_doc_comments
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
@@ -6,13 +5,13 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-/********************************* CONSTANTS *********************************/
+/* ******************************* CONSTANTS ******************************* */
 
 abstract class FlutterDesktopTextureType {
   static const int kFlutterDesktopPixelBufferTexture = 0;
 }
 
-/********************************* CALLBACKS *********************************/
+/* ******************************* CALLBACKS ******************************* */
 
 typedef FlutterDesktopBinaryReply = Pointer<
     NativeFunction<Void Function(Pointer<Uint8>, UintPtr, Pointer<Void>)>>;
@@ -30,7 +29,7 @@ typedef FlutterDesktopPixelBufferTextureCallback = Pointer<
 typedef FlutterDesktopOnPluginRegistrarDestroyed = Pointer<
     NativeFunction<Void Function(Pointer<FlutterDesktopPluginRegistrar>)>>;
 
-/********************************** STRUCTS **********************************/
+/* ******************************** STRUCTS ******************************** */
 
 class FlutterDesktopViewControllerState extends Opaque {}
 
@@ -99,7 +98,7 @@ class FlutterDesktopEngineProperties extends Struct {
   external Pointer<Pointer<Int8>> dart_entrypoint_argv;
 }
 
-/********************************* FUNCTIONS *********************************/
+/* ******************************* FUNCTIONS ******************************* */
 
 /// Native API for Flutter Windows desktop engine `flutter_windows.h`
 class FlutterEngineLibrary {
