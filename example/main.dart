@@ -45,7 +45,9 @@ class Application {
 
   static String parseArgs(List<String> args) {
     final parser = ArgParser()
-      ..addOption('path', abbr: 'p', help: '[required] Path to a Flutter app.');
+      ..addOption('path',
+          abbr: 'p',
+          help: '[required] Relative or absolute path to a Flutter app.');
     final results = parser.parse(args);
     final appPath = results['path'] as String?;
 
@@ -53,7 +55,7 @@ class Application {
       print('Runs a Flutter app.\n\nSyntax:\n${parser.usage}');
       exit(-1);
     }
-    return appPath;
+    return Directory(appPath).absolute.path;
   }
 
   static void winMain(int hInstance, List<String> args, int nShowCmd) {
