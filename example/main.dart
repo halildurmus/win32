@@ -2,10 +2,7 @@ import 'dart:ffi';
 import 'dart:math' show Rectangle;
 
 import 'package:win32/win32.dart' hide Rectangle;
-
-import 'engine/dart_project.dart';
-import 'engine/engine.dart';
-import 'window.dart';
+import 'package:win32_runner/win32_runner.dart';
 
 void main() => initApp(Application.winMain);
 
