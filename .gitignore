@@ -1,0 +1,21 @@
+# Files and directories created by pub
+.dart_tool/
+.packages
+
+# Library packages shouldn't check in their pubspec.lock
+pubspec.lock
+
+# Directory created by dartdoc
+doc/api/*
+
+# Conventional directory for build outputs
+build/
+
+# Get rid of any unwanted executables...
+*.exe
+*.obj
+*.pdb
+*.exe.config
+
+# This file varies from machine to machine
+.vscode/c_cpp_properties.json
