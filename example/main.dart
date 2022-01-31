@@ -1,6 +1,8 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:math' show Rectangle;
 
+import 'package:args/args.dart';
 import 'package:win32/win32.dart' hide Rectangle;
 import 'package:win32_runner/win32_runner.dart';
 
@@ -41,9 +43,21 @@ class Application {
     return DefWindowProc(hwnd, msg, wParam, lParam);
   }
 
-  static void winMain(int hInstance, List<String> args, int nShowCmd) {
-    const appPath = r'c:\scratch\runner_app';
+  static String parseArgs(List<String> args) {
+    final parser = ArgParser()
+      ..addOption('path', abbr: 'p', help: '[required] Path to a Flutter app.');
+    final results = parser.parse(args);
+    final appPath = results['path'] as String?;
 
+    if (appPath == null) {
+      print('Runs a Flutter app.\n\nSyntax:\n${parser.usage}');
+      exit(-1);
+    }
+    return appPath;
+  }
+
+  static void winMain(int hInstance, List<String> args, int nShowCmd) {
+    final appPath = parseArgs(args);
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
     final hostWindow = Window.create(
@@ -55,7 +69,7 @@ class Application {
 
     final project =
         DartProject.fromPath('$appPath\\build\\windows\\runner\\Release\\data');
-    const flutterLibrary =
+    final flutterLibrary =
         '$appPath\\build\\windows\\runner\\Release\\flutter_windows.dll';
 
     // Set up Flutter view controller. The size must match the window dimensions

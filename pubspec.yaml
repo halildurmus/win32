@@ -10,6 +10,7 @@ platforms:
   windows:
 
 dependencies:
+  args: ^2.3.0
   ffi: ^1.1.2
   win32: ^2.3.9
 
