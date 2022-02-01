@@ -3284,6 +3284,16 @@
         "dllLibrary": "user32",
         "comment": "Determines whether the specified window is enabled for mouse and keyboard input."
     },
+    "IsWindows10OrGreater": {
+        "prototype": "VERSIONHELPERAPI IsWindows10OrGreater();",
+        "dllLibrary": "kernel32",
+        "comment": "Indicates if the current OS version matches, or is greater than, the Windows 10 version."
+    },
+    "IsWindowsServer": {
+        "prototype": "VERSIONHELPERAPI IsWindowsServer();",
+        "dllLibrary": "kernel32",
+        "comment": "Indicates if the current OS is a Windows Server release. Applications that need to distinguish between server and client versions of Windows should call this function."
+    },
     "IsWindowUnicode": {
         "prototype": "BOOL IsWindowUnicode(\n  HWND hWnd);",
         "dllLibrary": "user32",
