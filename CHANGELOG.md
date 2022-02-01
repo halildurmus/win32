@@ -1,3 +1,7 @@
+## 2.3.10
+
+- Add DPI_AWARENESS_CONTEXT enum values.
+
 ## 2.3.9
 
 - Add a few minor constants and handle typedefs. Nothing to see here.
