@@ -6139,6 +6139,40 @@ class DPI_AWARENESS {
   static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
 }
 
+/// DPI unaware. This window does not scale for DPI changes and is always
+/// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+/// scaled by the system on any other DPI setting.
+const DPI_AWARENESS_CONTEXT_UNAWARE = -1;
+
+/// System DPI aware. This window does not scale for DPI changes. It will query
+/// for the DPI once and use that value for the lifetime of the process. If the
+/// DPI changes, the process will not adjust to the new DPI value. It will be
+/// automatically scaled up or down by the system when the DPI changes from the
+/// system value.
+const DPI_AWARENESS_CONTEXT_SYSTEM_AWARE = -2;
+
+/// Per monitor DPI aware. This window checks for the DPI when it is created and
+/// adjusts the scale factor whenever the DPI changes. These processes are not
+/// automatically scaled by the system.
+const DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE = -3;
+
+/// Also known as Per Monitor v2. An advancement over the original per-monitor
+/// DPI awareness mode, which enables applications to access new DPI-related
+/// scaling behaviors on a per top-level window basis.
+///
+/// Per Monitor v2 was made available in the Creators Update of Windows 10, and
+/// is not available on earlier versions of the operating system.
+const DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = -4;
+
+/// DPI unaware with improved quality of GDI-based content. This mode behaves
+/// similarly to DPI_AWARENESS_CONTEXT_UNAWARE, but also enables the system to
+/// automatically improve the rendering quality of text and other GDI-based
+/// primitives when the window is displayed on a high-DPI monitor.
+///
+/// DPI_AWARENESS_CONTEXT_UNAWARE_GDISCALED was introduced in the October 2018
+/// update of Windows 10 (also known as version 1809).
+const DPI_AWARENESS_CONTEXT_UNAWARE_GDISCALED = -5;
+
 /// Identifies the DPI hosting behavior for a window. This behavior allows
 /// windows created in the thread to host child windows with a different
 /// DPI_AWARENESS_CONTEXT.
