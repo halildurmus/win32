@@ -8,9 +8,8 @@ You might use this to create a Windows Flutter app without requiring a C++
 compiler on your system.
 
 At present, this is not much more than a lightweight experiment. It doesn't
-currently support high-DPI scaling, or plugins, or theme changes. It is
-therefore not recommended for use with production apps: it's more a
-proof-of-concept.
+currently support plugins or theme changes. It is therefore not recommended for
+use with production apps: it's more a proof-of-concept.
 
 A sample app that uses it can be found in the `example\` subdirectory. This can be
 used to run an existing Flutter app.

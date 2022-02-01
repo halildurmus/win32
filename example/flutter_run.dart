@@ -63,7 +63,9 @@ class Application {
 
   static void winMain(int hInstance, List<String> args, int nShowCmd) {
     final appPath = parseArgs(args);
+
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+    SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
     final hostWindow = Window.create(
         hInstance: hInstance,
