@@ -33,4 +33,4 @@ C:\src\simpleapp> flutter_run
 ```
 
 Sample results:
-![image](https://user-images.githubusercontent.com/2319867/151735711-3f3d3e76-5008-495d-8f30-ea5b1de5ae22.png)
+![image](https://user-images.githubusercontent.com/2319867/151905570-d2ec6dc0-a188-49b9-a186-a1b035ae59c7.png)
