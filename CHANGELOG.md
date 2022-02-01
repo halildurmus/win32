@@ -1,3 +1,7 @@
+## 1.0.25
+
+- Update to Windows.Win32.winmd v17.0.11.56775.
+
 ## 1.0.24
 
 - Update to latest win32metadata `.winmd` file.

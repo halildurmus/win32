@@ -63,7 +63,6 @@ void main() {
 
     expect(awr.implFeatures.codeType, equals(CodeType.IL));
     expect(awr.implFeatures.isManaged, isTrue);
-    expect(awr.implFeatures.isPreserveSig, isTrue);
 
     expect(
         awr.customAttributeAsBytes(
