@@ -11,8 +11,8 @@ At present, this is not much more than a lightweight experiment. It doesn't
 currently support plugins or theme changes. It is therefore not recommended for
 use with production apps: it's more a proof-of-concept.
 
-A sample app that uses it can be found in the `example\` subdirectory. This can be
-used to run an existing Flutter app.
+A sample app that uses it can be found in the `example\` subdirectory. This can
+be used to run an existing Flutter app.
 
 For example:
 
@@ -26,10 +26,10 @@ C:\src> cd simpleapp
 C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -dBuildMode=release release_bundle_windows_assets
 
 # Compile Dart runner
-C:\src\simpleapp> dart compile exe ..\win32_runner\example\flutter_run.dart -o flutter_run.exe
+C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o win32_runner.exe
 
 # Run Flutter app
-C:\src\simpleapp> flutter_run
+C:\src\simpleapp> win32+runner
 ```
 
 Sample results:

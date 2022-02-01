@@ -8,7 +8,9 @@ import 'package:win32/win32.dart' as win32;
 import 'dart_project.dart';
 import 'ffi.dart';
 
+/// A Dart wrapper for the Flutter engine API.
 class FlutterEmbedder {
+  /// Object that holds the native API functions.
   late final FlutterEngineLibrary flutter;
 
   /// Handle for interacting with the C API's engine reference.

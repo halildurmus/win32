@@ -1,4 +1,4 @@
-// Dart FFI wrapper functions for the Flutter Engine API
+// Dart FFI wrapper functions for the Flutter Engine API.
 
 // ignore_for_file: non_constant_identifier_names
 
@@ -157,7 +157,7 @@ class FlutterDesktopEngineProperties extends Struct {
 
 /* ******************************* FUNCTIONS ******************************* */
 
-/// Native API for Flutter Windows desktop engine `flutter_windows.h`
+/// Native API for the Flutter desktop embedder API.
 class FlutterEngineLibrary {
   /// Holds the symbol lookup function.
   final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup;
