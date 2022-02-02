@@ -6547,5 +6547,53 @@
         "comment": "Unregisters a distribution from the Windows Subsystem for Linux (WSL).",
         "category": "wslapi",
         "minimumWindowsVersion": "WIN10_20H1"
+    },
+    "XInputEnable": {
+        "prototype": "void XInputEnable(\n  [in] BOOL enable\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Sets the reporting state of XInput.",
+        "category": "xinput"
+    },
+    "XInputGetAudioDeviceIds": {
+        "prototype": "DWORD XInputGetAudioDeviceIds(\n  [in]                DWORD  dwUserIndex,\n  [out, optional]     LPWSTR pRenderDeviceId,\n  [in, out, optional] UINT   *pRenderCount,\n  [out, optional]     LPWSTR pCaptureDeviceId,\n  [in, out, optional] UINT   *pCaptureCount\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Retrieves the sound rendering and sound capture audio device IDs that are associated with the headset connected to the specified controller.",
+        "category": "xinput"
+    },
+    "XInputGetBatteryInformation": {
+        "prototype": "DWORD XInputGetBatteryInformation(\n  [in]  DWORD                      dwUserIndex,\n  [in]  BYTE                       devType,\n  [out] XINPUT_BATTERY_INFORMATION *pBatteryInformation\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Retrieves the battery type and charge status of a wireless controller.",
+        "category": "xinput"
+    },
+    "XInputGetCapabilities": {
+        "prototype": "DWORD XInputGetCapabilities(\n  [in]  DWORD               dwUserIndex,\n  [in]  DWORD               dwFlags,\n  [out] XINPUT_CAPABILITIES *pCapabilities\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Retrieves the capabilities and features of a connected controller.",
+        "category": "xinput"
+    },
+    "XInputGetDSoundAudioDeviceGuids": {
+        "prototype": "DWORD XInputGetDSoundAudioDeviceGuids(\n  DWORD dwUserIndex,\n  GUID  *pDSoundRenderGuid,\n  GUID  *pDSoundCaptureGuid\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Gets the sound rendering and sound capture device GUIDs that are associated with the headset connected to the specified controller.",
+        "category": "xinput"
+    },
+    "XInputGetKeystroke": {
+        "prototype": "DWORD XInputGetKeystroke(\n  DWORD             dwUserIndex,\n  DWORD             dwReserved,\n  PXINPUT_KEYSTROKE pKeystroke\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Retrieves a gamepad input event.",
+        "category": "xinput"
+    },
+    "XInputGetState": {
+        "prototype": "DWORD XInputGetState(\n  [in]  DWORD        dwUserIndex,\n  [out] XINPUT_STATE *pState\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Retrieves the current state of the specified controller.",
+        "category": "xinput"
+    },
+    "XInputSetState": {
+        "prototype": "DWORD XInputSetState(\n  [in]      DWORD            dwUserIndex,\n  [in, out] XINPUT_VIBRATION *pVibration\n);",
+        "dllLibrary": "xinputuap",
+        "comment": "Sends data to a connected controller. This function is used to activate the vibration function of a controller.",
+        "category": "xinput"
     }
 }

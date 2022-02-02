@@ -28,6 +28,7 @@ const winmdGenerated = [
   'user32',
   'uxtheme',
   'version',
+  'xinputuap',
   'winmm',
   'winscard',
   'winspool',

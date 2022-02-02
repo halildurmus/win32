@@ -1326,4 +1326,22 @@ void main() {
   test('Struct XFORM is the right size', () {
     expect(sizeOf<XFORM>(), equals(24));
   });
+  test('Struct XINPUT_BATTERY_INFORMATION is the right size', () {
+    expect(sizeOf<XINPUT_BATTERY_INFORMATION>(), equals(2));
+  });
+  test('Struct XINPUT_CAPABILITIES is the right size', () {
+    expect(sizeOf<XINPUT_CAPABILITIES>(), equals(20));
+  });
+  test('Struct XINPUT_GAMEPAD is the right size', () {
+    expect(sizeOf<XINPUT_GAMEPAD>(), equals(12));
+  });
+  test('Struct XINPUT_KEYSTROKE is the right size', () {
+    expect(sizeOf<XINPUT_KEYSTROKE>(), equals(8));
+  });
+  test('Struct XINPUT_STATE is the right size', () {
+    expect(sizeOf<XINPUT_STATE>(), equals(16));
+  });
+  test('Struct XINPUT_VIBRATION is the right size', () {
+    expect(sizeOf<XINPUT_VIBRATION>(), equals(4));
+  });
 }
