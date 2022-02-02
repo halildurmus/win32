@@ -16,7 +16,7 @@ be used to run an existing Flutter app.
 
 For example:
 
-```text
+```console
 # Create a sample app
 C:\src\win32_runner> cd ..
 C:\src> flutter create simpleapp
@@ -29,7 +29,7 @@ C:\src\simpleapp> flutter assemble -dTargetPlatform=windows-x64 --output=build -
 C:\src\simpleapp> dart compile exe ..\win32_runner\example\win32_runner.dart -o win32_runner.exe
 
 # Run Flutter app
-C:\src\simpleapp> win32+runner
+C:\src\simpleapp> .\win32_runner
 ```
 
 Sample results:
