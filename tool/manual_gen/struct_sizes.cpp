@@ -32,6 +32,7 @@
 #include <wlanapi.h>
 #include <SetupAPI.h>
 #include <magnification.h>
+#include <Xinput.h>
 
 void main()
 {
@@ -313,4 +314,10 @@ void main()
     printf("  'WNDCLASSEX': %zu,\n", sizeof(WNDCLASSEXW));
     printf("  'WTA_OPTIONS': %zu,\n", sizeof(WTA_OPTIONS));
     printf("  'XFORM': %zu,\n", sizeof(XFORM));
+    printf("  'XINPUT_BATTERY_INFORMATION': %zu,\n", sizeof(XINPUT_BATTERY_INFORMATION));
+    printf("  'XINPUT_CAPABILITIES': %zu,\n", sizeof(XINPUT_CAPABILITIES));
+    printf("  'XINPUT_GAMEPAD': %zu,\n", sizeof(XINPUT_GAMEPAD));
+    printf("  'XINPUT_KEYSTROKE': %zu,\n", sizeof(XINPUT_KEYSTROKE));
+    printf("  'XINPUT_STATE': %zu,\n", sizeof(XINPUT_STATE));
+    printf("  'XINPUT_VIBRATION': %zu,\n", sizeof(XINPUT_VIBRATION));
 }

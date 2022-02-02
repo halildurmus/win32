@@ -36,6 +36,7 @@ const header = '''
 #include <wlanapi.h>
 #include <SetupAPI.h>
 #include <magnification.h>
+#include <Xinput.h>
 
 void main()
 {

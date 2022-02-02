@@ -1054,5 +1054,29 @@
     "XFORM": {
         "namespace": "Windows.Win32.Graphics.Gdi.XFORM",
         "comment": "The XFORM structure specifies a world-space to page-space transformation."
+    },
+    "XINPUT_BATTERY_INFORMATION": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_BATTERY_INFORMATION",
+        "comment": "Contains information on battery type and charge state."
+    },
+    "XINPUT_CAPABILITIES": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES",
+        "comment": "Describes the capabilities of a connected controller. The XInputGetCapabilities function returns XINPUT_CAPABILITIES."
+    },
+    "XINPUT_GAMEPAD": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD",
+        "comment": "Describes the current state of the controller."
+    },
+    "XINPUT_KEYSTROKE": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE",
+        "comment": "Specifies keystroke data returned by XInputGetKeystroke."
+    },
+    "XINPUT_STATE": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_STATE",
+        "comment": "Represents the state of a controller."
+    },
+    "XINPUT_VIBRATION": {
+        "namespace": "Windows.Win32.UI.Input.XboxController.XINPUT_VIBRATION",
+        "comment": "Specifies motor speed levels for the vibration function of a controller."
     }
 }
