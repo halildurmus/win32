@@ -55,13 +55,16 @@ const structFileHeader = '''
 // requirement for.
 // -----------------------------------------------------------------------------
 
-// The new `Char` type conflicts with CHAR_INFO.Char. Hiding the former for now.
+// The new `Char` type conflicts with CHAR_INFO.Char. In Dart 2.16, this is in
+// package:ffi, in Dart 2.17, it will be in dart:ffi. So hiding Char from both
+// places.
+
 // ignore: undefined_hidden_name
 import 'dart:ffi' hide Char;
-
 import 'dart:typed_data';
 
-import 'package:ffi/ffi.dart';
+// ignore: undefined_hidden_name
+import 'package:ffi/ffi.dart' hide Char;
 
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
