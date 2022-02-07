@@ -55,16 +55,15 @@ const structFileHeader = '''
 // requirement for.
 // -----------------------------------------------------------------------------
 
-// The new `Char` type conflicts with CHAR_INFO.Char. In Dart 2.16, this is in
-// package:ffi, in Dart 2.17, it will be in dart:ffi. So hiding Char from both
-// places.
-
+// Dart 2.17 will introduce a new `Char` FFI type, which conflicts with
+// CHAR_INFO.Char. Hiding this in advance to prevent later conflict, but we need
+// to disable the lint since it's not in 2.16. 
 // ignore: undefined_hidden_name
 import 'dart:ffi' hide Char;
+
 import 'dart:typed_data';
 
-// ignore: undefined_hidden_name
-import 'package:ffi/ffi.dart' hide Char;
+import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'com/IDispatch.dart';

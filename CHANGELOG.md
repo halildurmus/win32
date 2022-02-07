@@ -1,3 +1,7 @@
+## 2.3.11
+
+- Add gamepad APIs
+
 ## 2.3.10
 
 - Add DPI_AWARENESS_CONTEXT enum values.
