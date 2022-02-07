@@ -11,7 +11,7 @@ platforms:
 
 dependencies:
   args: ^2.3.0
-  ffi: ^1.2.0
+  ffi: ^1.1.2
   win32: ^2.3.10
 
 dev_dependencies:
