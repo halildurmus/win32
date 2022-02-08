@@ -89,10 +89,9 @@ objects](https://pub.dev/documentation/win32/latest/topics/com-topic.html).
 
 ## Samples
 
-### Dart samples
-
 The package includes a number of examples in the `example` subdirectory. These
-examples use the Win32 API for all UI display and do not require Flutter.
+examples use the Win32 API for all UI display and (unless mentioned) do not
+require Flutter.
 
 | Example            | Description                                               |
 | ------------------ | --------------------------------------------------------- |
@@ -108,6 +107,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `diskinfo.dart`    | Use `DeviceIoControl()` for direct device operations      |
 | `dump.dart`        | Use debugger libraries to print DLL exported functions    |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
+| `explorer\`        | Example Flutter app that uses Win32 file picker APIs      |
 | `filever.dart`     | Getting file version information from the file resource   |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `idispatch.dart`   | Demonstrates calling a method using `IDispatch`           |
@@ -140,11 +140,32 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `wsl.dart`         | Retrieve information from a WSL instance through APIs     |
 
-### Flutter samples
+## Packages built on win32
 
-The `explorer\` subdirectory contains an example of a simple Flutter app that
-uses the volume management Win32 APIs to find the disk drives connected to your
-computer and their volume IDs and attached paths.
+There are a small but growing set of packages that build on the relatively
+low-level APIs exposed by the Dart win32 package to provide more idiomatic class
+wrappers. These packages typically don't require any knowledge of Windows
+programming models or FFI, and are ideal for incorporation into Flutter apps for
+Windows.
+
+Specifically, this includes:
+
+- [dart_console](https://pub.dev/packages/dart_console): provides Dart libraries
+  for building TUIs (terminal UIs) or console apps that use more than the
+  stdin/stdout services provided by Dart itself.
+- [device_info_plus_windows](https://pub.dev/packages/device_info_plus_windows):
+  provides information about the characteristics of the current device.
+- [filepicker_windows](https://pub.dev/packages/filepicker_windows): makes the
+  Windows file open / save common dialog boxes available to Flutter and Dart
+  apps.
+- [path_provider_windows](https://pub.dev/packages/path_provider_windows):
+  provides a way for Dart apps to find common Windows file locations (such as
+  the documents directory).
+- [win32_registry](https://pub.dev/packages/win32_registry): provides Dart
+  classes for accessing and manipulating the Windows registry.
+- [win32_runner](https://pub.dev/packages/win32_runner): provides an
+  experimental shell (or runner) for hosting Flutter apps without needing a C++
+  compiler to create the EXE.
 
 ## Requirements
 
@@ -157,15 +178,15 @@ tested on Windows-on-ARM architecture, running in x64 emulation mode.
 ## Features and bugs
 
 The current package only projects a subset of the Win32 API, but new APIs will
-be added based on user demand. I'm particularly interested in unblocking plugins
-for Windows. Please file feature requests and bugs at the [issue
-tracker][tracker].
+be added based on user demand. I'm particularly interested in unblocking the
+creation of new Dart packages for Windows. Please file feature requests and bugs
+at the [issue tracker][tracker].
 
 ## Backwards compatibility
 
-The library version uses semver, but you should not assume a strict guarantee of
-no breaking changes between minor versions. That guarantee is not possible to
-make, for several reasons:
+The library version tries to model semver, but you should not assume a strict
+guarantee of no breaking changes between minor versions. That guarantee is not
+possible to make, for several reasons:
 
 - Several times, my fixing a bug in the fidelity of the Win32 API has tightened
   the constraints over a parameter (for example, `Pointer` becomes
