@@ -32,6 +32,11 @@
         "dllLibrary": "user32",
         "comment": "Places the given window in the system-maintained clipboard format listener list."
     },
+    "AddDllDirectory": {
+        "prototype": "DLL_DIRECTORY_COOKIE AddDllDirectory(\n  [in] PCWSTR NewDirectory\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Adds a directory to the process DLL search path."
+    },
     "AddFontResource": {
         "prototype": "int AddFontResourceW(\n  LPCWSTR Arg1\n);",
         "dllLibrary": "gdi32",
@@ -1579,6 +1584,11 @@
         "prototype": "BOOL FreeLibrary(\n  HMODULE hLibModule\n);",
         "dllLibrary": "kernel32",
         "comment": "Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid."
+    },
+    "FreeLibraryAndExitThread": {
+        "prototype": "void FreeLibraryAndExitThread(\n  [in] HMODULE hLibModule,\n  [in] DWORD   dwExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Decrements the reference count of a loaded dynamic-link library (DLL) by one, then calls ExitThread to terminate the calling thread. The function does not return."
     },
     "FreePrinterNotifyInfo": {
         "prototype": "BOOL FreePrinterNotifyInfo(\n  _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo\n);",
@@ -3372,6 +3382,11 @@
         "dllLibrary": "kernel32",
         "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
     },
+    "LoadLibraryEx": {
+        "prototype": "HMODULE LoadLibraryExW(\n  [in] LPCWSTR lpLibFileName,\n       HANDLE  hFile,\n  [in] DWORD   dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
+    },
     "LoadMenuIndirect": {
         "prototype": "HMENU LoadMenuIndirectW(\n  const MENUTEMPLATEW *lpMenuTemplate\n);",
         "dllLibrary": "user32",
@@ -4406,6 +4421,11 @@
         "dllLibrary": "kernel32",
         "comment": "Deletes an existing empty directory."
     },
+    "RemoveDllDirectory": {
+        "prototype": "BOOL RemoveDllDirectory(\n  [in] DLL_DIRECTORY_COOKIE Cookie\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Removes a directory that was added to the process DLL search path by using AddDllDirectory."
+    },
     "RemoveMenu": {
         "prototype": "BOOL RemoveMenu(\n  HMENU hMenu,\n  UINT  uPosition,\n  UINT  uFlags\n);",
         "dllLibrary": "user32",
@@ -4958,6 +4978,12 @@
         "prototype": "BOOL SetDefaultCommConfigW(\n  LPCWSTR      lpszName,\n  LPCOMMCONFIG lpCC,\n  DWORD        dwSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the default configuration for a communications device."
+    },
+    "SetDefaultDllDirectories": {
+        "prototype": "BOOL SetDefaultDllDirectories(\n  [in] DWORD DirectoryFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Specifies a default set of directories to search when the calling process loads a DLL. This search path is used when LoadLibraryEx is called with no LOAD_LIBRARY_SEARCH flags.",
+        "minimumWindowsVersion": "WIN8"
     },
     "SetDefaultPrinter": {
         "prototype": "BOOL SetDefaultPrinterW(\n  _In_ LPCTSTR pszPrinter\n);",

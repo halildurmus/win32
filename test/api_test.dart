@@ -1102,6 +1102,13 @@ void main() {
               int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
       expect(ActivateActCtx, isA<Function>());
     });
+    test('Can instantiate AddDllDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final AddDllDirectory = kernel32.lookupFunction<
+          Pointer Function(Pointer<Utf16> NewDirectory),
+          Pointer Function(Pointer<Utf16> NewDirectory)>('AddDllDirectory');
+      expect(AddDllDirectory, isA<Function>());
+    });
     test('Can instantiate AddRefActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final AddRefActCtx = kernel32.lookupFunction<
@@ -1884,6 +1891,14 @@ void main() {
           Int32 Function(IntPtr hLibModule),
           int Function(int hLibModule)>('FreeLibrary');
       expect(FreeLibrary, isA<Function>());
+    });
+    test('Can instantiate FreeLibraryAndExitThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FreeLibraryAndExitThread = kernel32.lookupFunction<
+          Void Function(IntPtr hLibModule, Uint32 dwExitCode),
+          void Function(
+              int hLibModule, int dwExitCode)>('FreeLibraryAndExitThread');
+      expect(FreeLibraryAndExitThread, isA<Function>());
     });
     test('Can instantiate GetActiveProcessorCount', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -2904,6 +2919,15 @@ void main() {
           int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
       expect(LoadLibrary, isA<Function>());
     });
+    test('Can instantiate LoadLibraryEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final LoadLibraryEx = kernel32.lookupFunction<
+          IntPtr Function(
+              Pointer<Utf16> lpLibFileName, IntPtr hFile, Uint32 dwFlags),
+          int Function(Pointer<Utf16> lpLibFileName, int hFile,
+              int dwFlags)>('LoadLibraryExW');
+      expect(LoadLibraryEx, isA<Function>());
+    });
     test('Can instantiate LoadResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final LoadResource = kernel32.lookupFunction<
@@ -3106,6 +3130,13 @@ void main() {
           int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
       expect(RemoveDirectory, isA<Function>());
     });
+    test('Can instantiate RemoveDllDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final RemoveDllDirectory = kernel32.lookupFunction<
+          Int32 Function(Pointer Cookie),
+          int Function(Pointer Cookie)>('RemoveDllDirectory');
+      expect(RemoveDllDirectory, isA<Function>());
+    });
     test('Can instantiate ReOpenFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final ReOpenFile = kernel32.lookupFunction<
@@ -3261,6 +3292,15 @@ void main() {
               int dwSize)>('SetDefaultCommConfigW');
       expect(SetDefaultCommConfig, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate SetDefaultDllDirectories', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final SetDefaultDllDirectories = kernel32.lookupFunction<
+            Int32 Function(Uint32 DirectoryFlags),
+            int Function(int DirectoryFlags)>('SetDefaultDllDirectories');
+        expect(SetDefaultDllDirectories, isA<Function>());
+      });
+    }
     test('Can instantiate SetEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),

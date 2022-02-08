@@ -40,6 +40,21 @@ late final _ActivateActCtx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hActCtx, Pointer<IntPtr> lpCookie),
     int Function(int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
 
+/// Adds a directory to the process DLL search path.
+///
+/// ```c
+/// DLL_DIRECTORY_COOKIE AddDllDirectory(
+///   [in] PCWSTR NewDirectory
+/// );
+/// ```
+/// {@category kernel32}
+Pointer AddDllDirectory(Pointer<Utf16> NewDirectory) =>
+    _AddDllDirectory(NewDirectory);
+
+late final _AddDllDirectory = _kernel32.lookupFunction<
+    Pointer Function(Pointer<Utf16> NewDirectory),
+    Pointer Function(Pointer<Utf16> NewDirectory)>('AddDllDirectory');
+
 /// The AddRefActCtx function increments the reference count of the
 /// specified activation context.
 ///
@@ -1730,6 +1745,24 @@ int FreeLibrary(int hLibModule) => _FreeLibrary(hLibModule);
 late final _FreeLibrary = _kernel32.lookupFunction<
     Int32 Function(IntPtr hLibModule),
     int Function(int hLibModule)>('FreeLibrary');
+
+/// Decrements the reference count of a loaded dynamic-link library (DLL)
+/// by one, then calls ExitThread to terminate the calling thread. The
+/// function does not return.
+///
+/// ```c
+/// void FreeLibraryAndExitThread(
+///   [in] HMODULE hLibModule,
+///   [in] DWORD   dwExitCode
+/// );
+/// ```
+/// {@category kernel32}
+void FreeLibraryAndExitThread(int hLibModule, int dwExitCode) =>
+    _FreeLibraryAndExitThread(hLibModule, dwExitCode);
+
+late final _FreeLibraryAndExitThread = _kernel32.lookupFunction<
+    Void Function(IntPtr hLibModule, Uint32 dwExitCode),
+    void Function(int hLibModule, int dwExitCode)>('FreeLibraryAndExitThread');
 
 /// Returns the number of active processors in a processor group or in the
 /// system.
@@ -3882,6 +3915,25 @@ late final _LoadLibrary = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpLibFileName),
     int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
 
+/// Loads the specified module into the address space of the calling
+/// process. The specified module may cause other modules to be loaded.
+///
+/// ```c
+/// HMODULE LoadLibraryExW(
+///   [in] LPCWSTR lpLibFileName,
+///        HANDLE  hFile,
+///   [in] DWORD   dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int LoadLibraryEx(Pointer<Utf16> lpLibFileName, int hFile, int dwFlags) =>
+    _LoadLibraryEx(lpLibFileName, hFile, dwFlags);
+
+late final _LoadLibraryEx = _kernel32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> lpLibFileName, IntPtr hFile, Uint32 dwFlags),
+    int Function(Pointer<Utf16> lpLibFileName, int hFile,
+        int dwFlags)>('LoadLibraryExW');
+
 /// Retrieves a handle that can be used to obtain a pointer to the first
 /// byte of the specified resource in memory.
 ///
@@ -4288,6 +4340,21 @@ late final _RemoveDirectory = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpPathName),
     int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
 
+/// Removes a directory that was added to the process DLL search path by
+/// using AddDllDirectory.
+///
+/// ```c
+/// BOOL RemoveDllDirectory(
+///   [in] DLL_DIRECTORY_COOKIE Cookie
+/// );
+/// ```
+/// {@category kernel32}
+int RemoveDllDirectory(Pointer Cookie) => _RemoveDllDirectory(Cookie);
+
+late final _RemoveDllDirectory = _kernel32.lookupFunction<
+    Int32 Function(Pointer Cookie),
+    int Function(Pointer Cookie)>('RemoveDllDirectory');
+
 /// Reopens the specified file system object with different access rights,
 /// sharing mode, and flags.
 ///
@@ -4629,6 +4696,23 @@ late final _SetDefaultCommConfig = _kernel32.lookupFunction<
         Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         int dwSize)>('SetDefaultCommConfigW');
+
+/// Specifies a default set of directories to search when the calling
+/// process loads a DLL. This search path is used when LoadLibraryEx is
+/// called with no LOAD_LIBRARY_SEARCH flags.
+///
+/// ```c
+/// BOOL SetDefaultDllDirectories(
+///   [in] DWORD DirectoryFlags
+/// );
+/// ```
+/// {@category kernel32}
+int SetDefaultDllDirectories(int DirectoryFlags) =>
+    _SetDefaultDllDirectories(DirectoryFlags);
+
+late final _SetDefaultDllDirectories = _kernel32.lookupFunction<
+    Int32 Function(Uint32 DirectoryFlags),
+    int Function(int DirectoryFlags)>('SetDefaultDllDirectories');
 
 /// Sets the specified event object to the signaled state.
 ///
