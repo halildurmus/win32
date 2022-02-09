@@ -47,7 +47,9 @@ import 'dart:ffi' hide Char;
 
 import 'dart:typed_data';
 
-import 'package:ffi/ffi.dart';
+// `package:ffi` 1.2.0-dev.0 will introduce a new `Char` FFI type.
+// ignore: undefined_hidden_name
+import 'package:ffi/ffi.dart' hide Char;
 
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
