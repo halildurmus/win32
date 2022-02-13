@@ -53,6 +53,11 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+/// Return the final component of a fully qualified name (e.g.
+/// `Windows.Win32.UI.Controls.TASKDIALOGCONFIG` becomes `TASKDIALOGCONFIG`).
+String lastComponent(String fullyQualifiedType) =>
+    fullyQualifiedType.split('.').last;
+
 /// Convert a nested type to a guaranteed-unique name.
 String mangleName(TypeDef typeDef) {
   final name = typeDef.name.split('.').last;
@@ -169,4 +174,15 @@ String safeTypename(String name) {
   } else {
     return name;
   }
+}
+
+String stripLeadingUnderscores(String name) {
+  if (name.startsWith('_')) {
+    if (characterIsNumeral(name.substring(1, 2))) {
+      return 'x${name.substring(1)}';
+    } else {
+      return stripLeadingUnderscores(name.substring(1));
+    }
+  }
+  return name;
 }
