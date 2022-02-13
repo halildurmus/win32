@@ -18,6 +18,8 @@ const falseAnsiEndings = <String>[
   'ALPHA', 'BUFFER_WMA', 'CRITERIA', 'UIDNA', 'YCbCrA', 'RGBA',
   'PSP_FILE_CALLBACK_A',
 ];
+
+/// Returns true if a [TypeDef] name ends with 'A' but is _not_ ANSI.
 bool typePretendsToBeAnsi(String typeName) {
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {
@@ -145,7 +147,7 @@ String relativePathToSrcDirectory(File file) {
 }
 
 String importForWin32Type(TypeIdentifier identifier) {
-  if (excludedTypes.contains(identifier.name)) {
+  if (excludedStructs.contains(identifier.name)) {
     return 'specialTypes.dart';
   }
 
@@ -166,6 +168,10 @@ String folderFromNamespace(String namespace) {
   return segments.join('/').toLowerCase();
 }
 
+/// Marks an identifier as private to the win32 library.
+String private(String identifier) => '_$identifier';
+
+/// Returns true if the string can be converted to an integer.
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
 
 bool isExcludedGetProperty(Method method) => falseProperties
