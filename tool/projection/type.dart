@@ -55,12 +55,17 @@ class TypeProjection {
   String get dartType => projection.dartType;
   int? get arrayUpperBound => typeIdentifier.arrayDimensions?.first;
 
-  bool get isIntrinsic =>
+  /// Is the resultant Dart type atomic?
+  bool get isDartPrimitive =>
+      ['void', 'bool', 'int', 'double'].contains(dartType) ||
+      dartType.startsWith('Pointer') ||
+      dartType.startsWith('Array');
+
+  bool get isBaseType =>
       baseNativeMapping.keys.contains(typeIdentifier.baseType);
 
   bool get isWin32SpecialType =>
       specialTypes.keys.contains(typeIdentifier.name);
-
   bool get isString => typeIdentifier.baseType == BaseType.String;
 
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
@@ -164,7 +169,7 @@ class TypeProjection {
 
   TypeTuple projectType() {
     // Could be an intrinsic base type (e.g. Int32)
-    if (isIntrinsic) {
+    if (isBaseType) {
       return baseNativeMapping[typeIdentifier.baseType]!;
     }
 

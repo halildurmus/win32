@@ -1,7 +1,6 @@
 import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
-import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
 
