@@ -29,48 +29,93 @@ class IEnumIDList extends IUnknown {
   // vtable begins at 3, ends at 6
   IEnumIDList(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
-          Pointer<Uint32> pceltFetched) =>
+  int Next(
+    int celt,
+    Pointer<Pointer<ITEMIDLIST>> rgelt,
+    Pointer<Uint32> pceltFetched,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Uint32 celt,
-                              Pointer<Pointer<ITEMIDLIST>> rgelt,
-                              Pointer<Uint32> pceltFetched)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int celt,
-                      Pointer<Pointer<ITEMIDLIST>> rgelt,
-                      Pointer<Uint32> pceltFetched)>()(
-          ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Uint32 celt,
+            Pointer<Pointer<ITEMIDLIST>> rgelt,
+            Pointer<Uint32> pceltFetched,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int celt,
+            Pointer<Pointer<ITEMIDLIST>> rgelt,
+            Pointer<Uint32> pceltFetched,
+          )>()(
+        ptr.ref.lpVtbl,
+        celt,
+        rgelt,
+        pceltFetched,
+      );
 
-  int Skip(int celt) => ptr.ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
-      .value
-      .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
+  int Skip(
+    int celt,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Uint32 celt,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int celt,
+          )>()(
+        ptr.ref.lpVtbl,
+        celt,
+      );
 
   int Reset() => ptr.ref.lpVtbl.value
-      .elementAt(5)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
-  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
+  int Clone(
+    Pointer<Pointer<COMObject>> ppenum,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppenum)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
-      ptr.ref.lpVtbl, ppenum);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppenum,
+      );
 }

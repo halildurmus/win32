@@ -29,73 +29,131 @@ class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, ends at 31
   IFileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
+  int SetSaveAsItem(
+    Pointer<COMObject> psi,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(27)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> psi)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> psi,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
-      ptr.ref.lpVtbl, psi);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> psi,
+          )>()(
+        ptr.ref.lpVtbl,
+        psi,
+      );
 
-  int SetProperties(Pointer<COMObject> pStore) => ptr.ref.lpVtbl.value
+  int SetProperties(
+    Pointer<COMObject> pStore,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(28)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> pStore)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> pStore,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> pStore)>()(
-      ptr.ref.lpVtbl, pStore);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> pStore,
+          )>()(
+        ptr.ref.lpVtbl,
+        pStore,
+      );
 
-  int SetCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
+  int SetCollectedProperties(
+    Pointer<COMObject> pList,
+    int fAppendDefault,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(29)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> pList,
-                          Int32 fAppendDefault)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> pList,
+            Int32 fAppendDefault,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<COMObject> pList,
-                  int fAppendDefault)>()(ptr.ref.lpVtbl, pList, fAppendDefault);
+              int Function(
+            Pointer,
+            Pointer<COMObject> pList,
+            int fAppendDefault,
+          )>()(
+        ptr.ref.lpVtbl,
+        pList,
+        fAppendDefault,
+      );
 
-  int GetProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.lpVtbl.value
+  int GetProperties(
+    Pointer<Pointer<COMObject>> ppStore,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(30)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppStore)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppStore,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppStore)>()(
-      ptr.ref.lpVtbl, ppStore);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppStore,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppStore,
+      );
 
-  int ApplyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
-          int hwnd, Pointer<COMObject> pSink) =>
+  int ApplyProperties(
+    Pointer<COMObject> psi,
+    Pointer<COMObject> pStore,
+    int hwnd,
+    Pointer<COMObject> pSink,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(31)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> psi,
-                              Pointer<COMObject> pStore,
-                              IntPtr hwnd,
-                              Pointer<COMObject> pSink)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> psi,
-                      Pointer<COMObject> pStore,
-                      int hwnd,
-                      Pointer<COMObject> pSink)>()(
-          ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
+          .elementAt(31)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> psi,
+            Pointer<COMObject> pStore,
+            IntPtr hwnd,
+            Pointer<COMObject> pSink,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> psi,
+            Pointer<COMObject> pStore,
+            int hwnd,
+            Pointer<COMObject> pSink,
+          )>()(
+        ptr.ref.lpVtbl,
+        psi,
+        pStore,
+        hwnd,
+        pSink,
+      );
 }
 
 /// @nodoc

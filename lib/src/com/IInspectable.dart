@@ -29,36 +29,73 @@ class IInspectable extends IUnknown {
   // vtable begins at 3, ends at 5
   IInspectable(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
-      .ref.lpVtbl.value
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Uint32> iidCount,
-                      Pointer<Pointer<GUID>> iids)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Uint32> iidCount,
-              Pointer<Pointer<GUID>> iids)>()(ptr.ref.lpVtbl, iidCount, iids);
+  int GetIids(
+    Pointer<Uint32> iidCount,
+    Pointer<Pointer<GUID>> iids,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> iidCount,
+            Pointer<Pointer<GUID>> iids,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> iidCount,
+            Pointer<Pointer<GUID>> iids,
+          )>()(
+        ptr.ref.lpVtbl,
+        iidCount,
+        iids,
+      );
 
-  int GetRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.lpVtbl.value
+  int GetRuntimeClassName(
+    Pointer<IntPtr> className,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<IntPtr> className)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<IntPtr> className,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
-      ptr.ref.lpVtbl, className);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<IntPtr> className,
+          )>()(
+        ptr.ref.lpVtbl,
+        className,
+      );
 
-  int GetTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.lpVtbl.value
+  int GetTrustLevel(
+    Pointer<Int32> trustLevel,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> trustLevel)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> trustLevel,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
-      ptr.ref.lpVtbl, trustLevel);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> trustLevel,
+          )>()(
+        ptr.ref.lpVtbl,
+        trustLevel,
+      );
 }

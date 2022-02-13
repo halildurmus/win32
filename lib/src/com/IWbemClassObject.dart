@@ -29,370 +29,645 @@ class IWbemClassObject extends IUnknown {
   // vtable begins at 3, ends at 26
   IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr
-          .ref.lpVtbl.value
+  int GetQualifierSet(
+    Pointer<Pointer<COMObject>> ppQualSet,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppQualSet)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppQualSet)>()(
-      ptr.ref.lpVtbl, ppQualSet);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppQualSet,
+      );
 
-  int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
-          Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
+  int Get(
+    Pointer<Utf16> wszName,
+    int lFlags,
+    Pointer<VARIANT> pVal,
+    Pointer<Int32> pType,
+    Pointer<Int32> plFlavor,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> wszName,
-                              Int32 lFlags,
-                              Pointer<VARIANT> pVal,
-                              Pointer<Int32> pType,
-                              Pointer<Int32> plFlavor)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> wszName,
-                      int lFlags,
-                      Pointer<VARIANT> pVal,
-                      Pointer<Int32> pType,
-                      Pointer<Int32> plFlavor)>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pVal, pType, plFlavor);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Int32 lFlags,
+            Pointer<VARIANT> pVal,
+            Pointer<Int32> pType,
+            Pointer<Int32> plFlavor,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            int lFlags,
+            Pointer<VARIANT> pVal,
+            Pointer<Int32> pType,
+            Pointer<Int32> plFlavor,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+        lFlags,
+        pVal,
+        pType,
+        plFlavor,
+      );
 
-  int Put(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
-          int Type) =>
+  int Put(
+    Pointer<Utf16> wszName,
+    int lFlags,
+    Pointer<VARIANT> pVal,
+    int Type,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> wszName,
-                          Int32 lFlags, Pointer<VARIANT> pVal, Int32 Type)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Int32 lFlags,
+            Pointer<VARIANT> pVal,
+            Int32 Type,
+          )>>>()
           .value
           .asFunction<
               int Function(
-                  Pointer,
-                  Pointer<Utf16> wszName,
-                  int lFlags,
-                  Pointer<VARIANT> pVal,
-                  int Type)>()(ptr.ref.lpVtbl, wszName, lFlags, pVal, Type);
+            Pointer,
+            Pointer<Utf16> wszName,
+            int lFlags,
+            Pointer<VARIANT> pVal,
+            int Type,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+        lFlags,
+        pVal,
+        Type,
+      );
 
-  int Delete(Pointer<Utf16> wszName) => ptr.ref.lpVtbl.value
+  int Delete(
+    Pointer<Utf16> wszName,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> wszName)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> wszName)>()(
-      ptr.ref.lpVtbl, wszName);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+      );
 
-  int GetNames(Pointer<Utf16> wszQualifierName, int lFlags,
-          Pointer<VARIANT> pQualifierVal, Pointer<Pointer<SAFEARRAY>> pNames) =>
+  int GetNames(
+    Pointer<Utf16> wszQualifierName,
+    int lFlags,
+    Pointer<VARIANT> pQualifierVal,
+    Pointer<Pointer<SAFEARRAY>> pNames,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> wszQualifierName,
-                              Int32 lFlags,
-                              Pointer<VARIANT> pQualifierVal,
-                              Pointer<Pointer<SAFEARRAY>> pNames)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> wszQualifierName,
-                      int lFlags,
-                      Pointer<VARIANT> pQualifierVal,
-                      Pointer<Pointer<SAFEARRAY>> pNames)>()(
-          ptr.ref.lpVtbl, wszQualifierName, lFlags, pQualifierVal, pNames);
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszQualifierName,
+            Int32 lFlags,
+            Pointer<VARIANT> pQualifierVal,
+            Pointer<Pointer<SAFEARRAY>> pNames,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszQualifierName,
+            int lFlags,
+            Pointer<VARIANT> pQualifierVal,
+            Pointer<Pointer<SAFEARRAY>> pNames,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszQualifierName,
+        lFlags,
+        pQualifierVal,
+        pNames,
+      );
 
-  int BeginEnumeration(int lEnumFlags) => ptr.ref.lpVtbl.value
-      .elementAt(8)
-      .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int lEnumFlags)>()(ptr.ref.lpVtbl, lEnumFlags);
-
-  int Next(int lFlags, Pointer<Pointer<Utf16>> strName, Pointer<VARIANT> pVal,
-          Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
+  int BeginEnumeration(
+    int lEnumFlags,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lFlags,
-                              Pointer<Pointer<Utf16>> strName,
-                              Pointer<VARIANT> pVal,
-                              Pointer<Int32> pType,
-                              Pointer<Int32> plFlavor)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lFlags,
-                      Pointer<Pointer<Utf16>> strName,
-                      Pointer<VARIANT> pVal,
-                      Pointer<Int32> pType,
-                      Pointer<Int32> plFlavor)>()(
-          ptr.ref.lpVtbl, lFlags, strName, pVal, pType, plFlavor);
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lEnumFlags,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lEnumFlags,
+          )>()(
+        ptr.ref.lpVtbl,
+        lEnumFlags,
+      );
+
+  int Next(
+    int lFlags,
+    Pointer<Pointer<Utf16>> strName,
+    Pointer<VARIANT> pVal,
+    Pointer<Int32> pType,
+    Pointer<Int32> plFlavor,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<Pointer<Utf16>> strName,
+            Pointer<VARIANT> pVal,
+            Pointer<Int32> pType,
+            Pointer<Int32> plFlavor,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<Pointer<Utf16>> strName,
+            Pointer<VARIANT> pVal,
+            Pointer<Int32> pType,
+            Pointer<Int32> plFlavor,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        strName,
+        pVal,
+        pType,
+        plFlavor,
+      );
 
   int EndEnumeration() => ptr.ref.lpVtbl.value
-      .elementAt(10)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
   int GetPropertyQualifierSet(
-          Pointer<Utf16> wszProperty, Pointer<Pointer<COMObject>> ppQualSet) =>
+    Pointer<Utf16> wszProperty,
+    Pointer<Pointer<COMObject>> ppQualSet,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszProperty,
-                              Pointer<Pointer<COMObject>> ppQualSet)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszProperty,
-                      Pointer<Pointer<COMObject>> ppQualSet)>()(
-          ptr.ref.lpVtbl, wszProperty, ppQualSet);
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszProperty,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszProperty,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszProperty,
+        ppQualSet,
+      );
 
-  int Clone(Pointer<Pointer<COMObject>> ppCopy) => ptr.ref.lpVtbl.value
+  int Clone(
+    Pointer<Pointer<COMObject>> ppCopy,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(12)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppCopy)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppCopy,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppCopy)>()(
-      ptr.ref.lpVtbl, ppCopy);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppCopy,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppCopy,
+      );
 
-  int GetObjectText(int lFlags, Pointer<Pointer<Utf16>> pstrObjectText) =>
+  int GetObjectText(
+    int lFlags,
+    Pointer<Pointer<Utf16>> pstrObjectText,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<Pointer<Utf16>> pstrObjectText)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int lFlags,
-                      Pointer<Pointer<Utf16>> pstrObjectText)>()(
-          ptr.ref.lpVtbl, lFlags, pstrObjectText);
+          .elementAt(13)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<Pointer<Utf16>> pstrObjectText,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<Pointer<Utf16>> pstrObjectText,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        pstrObjectText,
+      );
 
-  int SpawnDerivedClass(int lFlags, Pointer<Pointer<COMObject>> ppNewClass) =>
+  int SpawnDerivedClass(
+    int lFlags,
+    Pointer<Pointer<COMObject>> ppNewClass,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<Pointer<COMObject>> ppNewClass)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int lFlags,
-                      Pointer<Pointer<COMObject>> ppNewClass)>()(
-          ptr.ref.lpVtbl, lFlags, ppNewClass);
+          .elementAt(14)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<Pointer<COMObject>> ppNewClass,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<Pointer<COMObject>> ppNewClass,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        ppNewClass,
+      );
 
-  int SpawnInstance(int lFlags, Pointer<Pointer<COMObject>> ppNewInstance) =>
+  int SpawnInstance(
+    int lFlags,
+    Pointer<Pointer<COMObject>> ppNewInstance,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<Pointer<COMObject>> ppNewInstance)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int lFlags,
-                      Pointer<Pointer<COMObject>> ppNewInstance)>()(
-          ptr.ref.lpVtbl, lFlags, ppNewInstance);
+          .elementAt(15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<Pointer<COMObject>> ppNewInstance,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<Pointer<COMObject>> ppNewInstance,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        ppNewInstance,
+      );
 
-  int CompareTo(int lFlags, Pointer<COMObject> pCompareTo) =>
+  int CompareTo(
+    int lFlags,
+    Pointer<COMObject> pCompareTo,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<COMObject> pCompareTo)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int lFlags, Pointer<COMObject> pCompareTo)>()(
-          ptr.ref.lpVtbl, lFlags, pCompareTo);
+          .elementAt(16)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<COMObject> pCompareTo,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<COMObject> pCompareTo,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        pCompareTo,
+      );
 
   int GetPropertyOrigin(
-          Pointer<Utf16> wszName, Pointer<Pointer<Utf16>> pstrClassName) =>
+    Pointer<Utf16> wszName,
+    Pointer<Pointer<Utf16>> pstrClassName,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(17)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszName,
-                              Pointer<Pointer<Utf16>> pstrClassName)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszName,
-                      Pointer<Pointer<Utf16>> pstrClassName)>()(
-          ptr.ref.lpVtbl, wszName, pstrClassName);
+          .elementAt(17)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Pointer<Pointer<Utf16>> pstrClassName,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Pointer<Pointer<Utf16>> pstrClassName,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+        pstrClassName,
+      );
 
-  int InheritsFrom(Pointer<Utf16> strAncestor) => ptr.ref.lpVtbl.value
+  int InheritsFrom(
+    Pointer<Utf16> strAncestor,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(18)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> strAncestor)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> strAncestor,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> strAncestor)>()(
-      ptr.ref.lpVtbl, strAncestor);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> strAncestor,
+          )>()(
+        ptr.ref.lpVtbl,
+        strAncestor,
+      );
 
   int GetMethod(
-          Pointer<Utf16> wszName,
-          int lFlags,
-          Pointer<Pointer<COMObject>> ppInSignature,
-          Pointer<Pointer<COMObject>> ppOutSignature) =>
+    Pointer<Utf16> wszName,
+    int lFlags,
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(19)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> wszName,
-                              Int32 lFlags,
-                              Pointer<Pointer<COMObject>> ppInSignature,
-                              Pointer<Pointer<COMObject>> ppOutSignature)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> wszName,
-                      int lFlags,
-                      Pointer<Pointer<COMObject>> ppInSignature,
-                      Pointer<Pointer<COMObject>> ppOutSignature)>()(
-          ptr.ref.lpVtbl, wszName, lFlags, ppInSignature, ppOutSignature);
+          .elementAt(19)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Int32 lFlags,
+            Pointer<Pointer<COMObject>> ppInSignature,
+            Pointer<Pointer<COMObject>> ppOutSignature,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            int lFlags,
+            Pointer<Pointer<COMObject>> ppInSignature,
+            Pointer<Pointer<COMObject>> ppOutSignature,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+        lFlags,
+        ppInSignature,
+        ppOutSignature,
+      );
 
-  int PutMethod(Pointer<Utf16> wszName, int lFlags,
-          Pointer<COMObject> pInSignature, Pointer<COMObject> pOutSignature) =>
+  int PutMethod(
+    Pointer<Utf16> wszName,
+    int lFlags,
+    Pointer<COMObject> pInSignature,
+    Pointer<COMObject> pOutSignature,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(20)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> wszName,
-                              Int32 lFlags,
-                              Pointer<COMObject> pInSignature,
-                              Pointer<COMObject> pOutSignature)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> wszName,
-                      int lFlags,
-                      Pointer<COMObject> pInSignature,
-                      Pointer<COMObject> pOutSignature)>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pInSignature, pOutSignature);
+          .elementAt(20)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            Int32 lFlags,
+            Pointer<COMObject> pInSignature,
+            Pointer<COMObject> pOutSignature,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+            int lFlags,
+            Pointer<COMObject> pInSignature,
+            Pointer<COMObject> pOutSignature,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+        lFlags,
+        pInSignature,
+        pOutSignature,
+      );
 
-  int DeleteMethod(Pointer<Utf16> wszName) => ptr.ref.lpVtbl.value
+  int DeleteMethod(
+    Pointer<Utf16> wszName,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(21)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> wszName)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Utf16> wszName)>()(
-      ptr.ref.lpVtbl, wszName);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszName,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszName,
+      );
 
-  int BeginMethodEnumeration(int lEnumFlags) => ptr.ref.lpVtbl.value
-      .elementAt(22)
-      .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int lEnumFlags)>()(ptr.ref.lpVtbl, lEnumFlags);
+  int BeginMethodEnumeration(
+    int lEnumFlags,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(22)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lEnumFlags,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lEnumFlags,
+          )>()(
+        ptr.ref.lpVtbl,
+        lEnumFlags,
+      );
 
   int NextMethod(
-          int lFlags,
-          Pointer<Pointer<Utf16>> pstrName,
-          Pointer<Pointer<COMObject>> ppInSignature,
-          Pointer<Pointer<COMObject>> ppOutSignature) =>
+    int lFlags,
+    Pointer<Pointer<Utf16>> pstrName,
+    Pointer<Pointer<COMObject>> ppInSignature,
+    Pointer<Pointer<COMObject>> ppOutSignature,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(23)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 lFlags,
-                              Pointer<Pointer<Utf16>> pstrName,
-                              Pointer<Pointer<COMObject>> ppInSignature,
-                              Pointer<Pointer<COMObject>> ppOutSignature)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int lFlags,
-                      Pointer<Pointer<Utf16>> pstrName,
-                      Pointer<Pointer<COMObject>> ppInSignature,
-                      Pointer<Pointer<COMObject>> ppOutSignature)>()(
-          ptr.ref.lpVtbl, lFlags, pstrName, ppInSignature, ppOutSignature);
+          .elementAt(23)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 lFlags,
+            Pointer<Pointer<Utf16>> pstrName,
+            Pointer<Pointer<COMObject>> ppInSignature,
+            Pointer<Pointer<COMObject>> ppOutSignature,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int lFlags,
+            Pointer<Pointer<Utf16>> pstrName,
+            Pointer<Pointer<COMObject>> ppInSignature,
+            Pointer<Pointer<COMObject>> ppOutSignature,
+          )>()(
+        ptr.ref.lpVtbl,
+        lFlags,
+        pstrName,
+        ppInSignature,
+        ppOutSignature,
+      );
 
   int EndMethodEnumeration() => ptr.ref.lpVtbl.value
-      .elementAt(24)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(24)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
   int GetMethodQualifierSet(
-          Pointer<Utf16> wszMethod, Pointer<Pointer<COMObject>> ppQualSet) =>
+    Pointer<Utf16> wszMethod,
+    Pointer<Pointer<COMObject>> ppQualSet,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(25)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszMethod,
-                              Pointer<Pointer<COMObject>> ppQualSet)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszMethod,
-                      Pointer<Pointer<COMObject>> ppQualSet)>()(
-          ptr.ref.lpVtbl, wszMethod, ppQualSet);
+          .elementAt(25)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszMethod,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszMethod,
+            Pointer<Pointer<COMObject>> ppQualSet,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszMethod,
+        ppQualSet,
+      );
 
-  int GetMethodOrigin(Pointer<Utf16> wszMethodName,
-          Pointer<Pointer<Utf16>> pstrClassName) =>
+  int GetMethodOrigin(
+    Pointer<Utf16> wszMethodName,
+    Pointer<Pointer<Utf16>> pstrClassName,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(26)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> wszMethodName,
-                              Pointer<Pointer<Utf16>> pstrClassName)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> wszMethodName,
-                      Pointer<Pointer<Utf16>> pstrClassName)>()(
-          ptr.ref.lpVtbl, wszMethodName, pstrClassName);
+          .elementAt(26)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> wszMethodName,
+            Pointer<Pointer<Utf16>> pstrClassName,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> wszMethodName,
+            Pointer<Pointer<Utf16>> pstrClassName,
+          )>()(
+        ptr.ref.lpVtbl,
+        wszMethodName,
+        pstrClassName,
+      );
 }
 
 /// @nodoc

@@ -30,46 +30,112 @@ class IPersistMemory extends IPersist {
   IPersistMemory(Pointer<COMObject> ptr) : super(ptr);
 
   int IsDirty() => ptr.ref.lpVtbl.value
-      .elementAt(4)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
-  int Load(Pointer pMem, int cbSize) => ptr.ref.lpVtbl.value
+  int Load(
+    Pointer pMem,
+    int cbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer pMem, Uint32 cbSize)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer pMem,
+            Uint32 cbSize,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
-      ptr.ref.lpVtbl, pMem, cbSize);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer pMem,
+            int cbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pMem,
+        cbSize,
+      );
 
-  int Save(Pointer pMem, int fClearDirty, int cbSize) => ptr.ref.lpVtbl.value
-      .elementAt(6)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer pMem, Int32 fClearDirty,
-                      Uint32 cbSize)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer pMem, int fClearDirty,
-              int cbSize)>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
+  int Save(
+    Pointer pMem,
+    int fClearDirty,
+    int cbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer pMem,
+            Int32 fClearDirty,
+            Uint32 cbSize,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer pMem,
+            int fClearDirty,
+            int cbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pMem,
+        fClearDirty,
+        cbSize,
+      );
 
-  int GetSizeMax(Pointer<Uint32> pCbSize) => ptr.ref.lpVtbl.value
+  int GetSizeMax(
+    Pointer<Uint32> pCbSize,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pCbSize)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> pCbSize,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
-      ptr.ref.lpVtbl, pCbSize);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> pCbSize,
+          )>()(
+        ptr.ref.lpVtbl,
+        pCbSize,
+      );
 
   int InitNew() => ptr.ref.lpVtbl.value
-      .elementAt(8)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 }

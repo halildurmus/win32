@@ -29,20 +29,25 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
   // vtable begins at 15, ends at 15
   IAppxManifestReader4(Pointer<COMObject> ptr) : super(ptr);
 
-  int
-      GetOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
-          ptr.ref.lpVtbl.value
-                  .elementAt(15)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Pointer<Pointer<COMObject>>
-                                      optionalPackageInfo)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer,
-                          Pointer<Pointer<COMObject>> optionalPackageInfo)>()(
-              ptr.ref.lpVtbl, optionalPackageInfo);
+  int GetOptionalPackageInfo(
+    Pointer<Pointer<COMObject>> optionalPackageInfo,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> optionalPackageInfo,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> optionalPackageInfo,
+          )>()(
+        ptr.ref.lpVtbl,
+        optionalPackageInfo,
+      );
 }

@@ -30,50 +30,54 @@ class IWbemLocator extends IUnknown {
   IWbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   int ConnectServer(
-          Pointer<Utf16> strNetworkResource,
-          Pointer<Utf16> strUser,
-          Pointer<Utf16> strPassword,
-          Pointer<Utf16> strLocale,
-          int lSecurityFlags,
-          Pointer<Utf16> strAuthority,
-          Pointer<COMObject> pCtx,
-          Pointer<Pointer<COMObject>> ppNamespace) =>
+    Pointer<Utf16> strNetworkResource,
+    Pointer<Utf16> strUser,
+    Pointer<Utf16> strPassword,
+    Pointer<Utf16> strLocale,
+    int lSecurityFlags,
+    Pointer<Utf16> strAuthority,
+    Pointer<COMObject> pCtx,
+    Pointer<Pointer<COMObject>> ppNamespace,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<Utf16> strNetworkResource,
-                              Pointer<Utf16> strUser,
-                              Pointer<Utf16> strPassword,
-                              Pointer<Utf16> strLocale,
-                              Int32 lSecurityFlags,
-                              Pointer<Utf16> strAuthority,
-                              Pointer<COMObject> pCtx,
-                              Pointer<Pointer<COMObject>> ppNamespace)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<Utf16> strNetworkResource,
-                      Pointer<Utf16> strUser,
-                      Pointer<Utf16> strPassword,
-                      Pointer<Utf16> strLocale,
-                      int lSecurityFlags,
-                      Pointer<Utf16> strAuthority,
-                      Pointer<COMObject> pCtx,
-                      Pointer<Pointer<COMObject>> ppNamespace)>()(
-          ptr.ref.lpVtbl,
-          strNetworkResource,
-          strUser,
-          strPassword,
-          strLocale,
-          lSecurityFlags,
-          strAuthority,
-          pCtx,
-          ppNamespace);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> strNetworkResource,
+            Pointer<Utf16> strUser,
+            Pointer<Utf16> strPassword,
+            Pointer<Utf16> strLocale,
+            Int32 lSecurityFlags,
+            Pointer<Utf16> strAuthority,
+            Pointer<COMObject> pCtx,
+            Pointer<Pointer<COMObject>> ppNamespace,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> strNetworkResource,
+            Pointer<Utf16> strUser,
+            Pointer<Utf16> strPassword,
+            Pointer<Utf16> strLocale,
+            int lSecurityFlags,
+            Pointer<Utf16> strAuthority,
+            Pointer<COMObject> pCtx,
+            Pointer<Pointer<COMObject>> ppNamespace,
+          )>()(
+        ptr.ref.lpVtbl,
+        strNetworkResource,
+        strUser,
+        strPassword,
+        strLocale,
+        lSecurityFlags,
+        strAuthority,
+        pCtx,
+        ppNamespace,
+      );
 }
 
 /// @nodoc

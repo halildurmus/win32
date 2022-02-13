@@ -29,113 +29,197 @@ class IShellItemArray extends IUnknown {
   // vtable begins at 3, ends at 9
   IShellItemArray(Pointer<COMObject> ptr) : super(ptr);
 
-  int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
-          Pointer<GUID> riid, Pointer<Pointer> ppvOut) =>
+  int BindToHandler(
+    Pointer<COMObject> pbc,
+    Pointer<GUID> bhid,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppvOut,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> pbc,
-                              Pointer<GUID> bhid,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer> ppvOut)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> pbc,
-                      Pointer<GUID> bhid,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer> ppvOut)>()(
-          ptr.ref.lpVtbl, pbc, bhid, riid, ppvOut);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> pbc,
+            Pointer<GUID> bhid,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppvOut,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> pbc,
+            Pointer<GUID> bhid,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppvOut,
+          )>()(
+        ptr.ref.lpVtbl,
+        pbc,
+        bhid,
+        riid,
+        ppvOut,
+      );
 
-  int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+  int GetPropertyStore(
+    int flags,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppv,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Uint32 flags, Pointer<GUID> riid,
-                          Pointer<Pointer> ppv)>>>()
+                      Int32 Function(
+            Pointer,
+            Uint32 flags,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppv,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, int flags, Pointer<GUID> riid,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, flags, riid, ppv);
+              int Function(
+            Pointer,
+            int flags,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppv,
+          )>()(
+        ptr.ref.lpVtbl,
+        flags,
+        riid,
+        ppv,
+      );
 
-  int GetPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
-          Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+  int GetPropertyDescriptionList(
+    Pointer<PROPERTYKEY> keyType,
+    Pointer<GUID> riid,
+    Pointer<Pointer> ppv,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<PROPERTYKEY> keyType,
-                          Pointer<GUID> riid, Pointer<Pointer> ppv)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<PROPERTYKEY> keyType,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppv,
+          )>>>()
           .value
           .asFunction<
               int Function(
-                  Pointer,
-                  Pointer<PROPERTYKEY> keyType,
-                  Pointer<GUID> riid,
-                  Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, keyType, riid, ppv);
+            Pointer,
+            Pointer<PROPERTYKEY> keyType,
+            Pointer<GUID> riid,
+            Pointer<Pointer> ppv,
+          )>()(
+        ptr.ref.lpVtbl,
+        keyType,
+        riid,
+        ppv,
+      );
 
-  int
-      GetAttributes(
-              int AttribFlags, int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-          ptr.ref.lpVtbl.value
-                  .elementAt(6)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  Int32 AttribFlags,
-                                  Uint32 sfgaoMask,
-                                  Pointer<Uint32> psfgaoAttribs)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, int AttribFlags, int sfgaoMask,
-                          Pointer<Uint32> psfgaoAttribs)>()(
-              ptr.ref.lpVtbl, AttribFlags, sfgaoMask, psfgaoAttribs);
+  int GetAttributes(
+    int AttribFlags,
+    int sfgaoMask,
+    Pointer<Uint32> psfgaoAttribs,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 AttribFlags,
+            Uint32 sfgaoMask,
+            Pointer<Uint32> psfgaoAttribs,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int AttribFlags,
+            int sfgaoMask,
+            Pointer<Uint32> psfgaoAttribs,
+          )>()(
+        ptr.ref.lpVtbl,
+        AttribFlags,
+        sfgaoMask,
+        psfgaoAttribs,
+      );
 
-  int GetCount(Pointer<Uint32> pdwNumItems) => ptr.ref.lpVtbl.value
+  int GetCount(
+    Pointer<Uint32> pdwNumItems,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pdwNumItems)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> pdwNumItems,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pdwNumItems)>()(
-      ptr.ref.lpVtbl, pdwNumItems);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> pdwNumItems,
+          )>()(
+        ptr.ref.lpVtbl,
+        pdwNumItems,
+      );
 
-  int GetItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) => ptr
-          .ref.lpVtbl.value
+  int GetItemAt(
+    int dwIndex,
+    Pointer<Pointer<COMObject>> ppsi,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Uint32 dwIndex,
-                          Pointer<Pointer<COMObject>> ppsi)>>>()
+                      Int32 Function(
+            Pointer,
+            Uint32 dwIndex,
+            Pointer<Pointer<COMObject>> ppsi,
+          )>>>()
           .value
           .asFunction<
               int Function(
-                  Pointer, int dwIndex, Pointer<Pointer<COMObject>> ppsi)>()(
-      ptr.ref.lpVtbl, dwIndex, ppsi);
+            Pointer,
+            int dwIndex,
+            Pointer<Pointer<COMObject>> ppsi,
+          )>()(
+        ptr.ref.lpVtbl,
+        dwIndex,
+        ppsi,
+      );
 
-  int EnumItems(Pointer<Pointer<COMObject>> ppenumShellItems) =>
+  int EnumItems(
+    Pointer<Pointer<COMObject>> ppenumShellItems,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> ppenumShellItems)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> ppenumShellItems)>()(
-          ptr.ref.lpVtbl, ppenumShellItems);
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenumShellItems,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenumShellItems,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppenumShellItems,
+      );
 }

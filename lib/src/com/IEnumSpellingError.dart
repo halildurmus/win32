@@ -29,15 +29,25 @@ class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, ends at 3
   IEnumSpellingError(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.lpVtbl.value
+  int Next(
+    Pointer<Pointer<COMObject>> value,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> value)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-      ptr.ref.lpVtbl, value);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        value,
+      );
 }

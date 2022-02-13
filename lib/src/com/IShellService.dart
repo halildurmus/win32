@@ -29,13 +29,25 @@ class IShellService extends IUnknown {
   // vtable begins at 3, ends at 3
   IShellService(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.lpVtbl.value
+  int SetOwner(
+    Pointer<COMObject> punkOwner,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> punkOwner)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> punkOwner,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
-      ptr.ref.lpVtbl, punkOwner);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> punkOwner,
+          )>()(
+        ptr.ref.lpVtbl,
+        punkOwner,
+      );
 }

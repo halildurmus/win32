@@ -30,17 +30,24 @@ class IAppxManifestReader6 extends IUnknown {
   IAppxManifestReader6(Pointer<COMObject> ptr) : super(ptr);
 
   int GetIsNonQualifiedResourcePackage(
-          Pointer<Int32> isNonQualifiedResourcePackage) =>
+    Pointer<Int32> isNonQualifiedResourcePackage,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Int32> isNonQualifiedResourcePackage)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Int32> isNonQualifiedResourcePackage)>()(
-          ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> isNonQualifiedResourcePackage,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> isNonQualifiedResourcePackage,
+          )>()(
+        ptr.ref.lpVtbl,
+        isNonQualifiedResourcePackage,
+      );
 }

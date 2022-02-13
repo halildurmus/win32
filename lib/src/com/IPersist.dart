@@ -29,13 +29,25 @@ class IPersist extends IUnknown {
   // vtable begins at 3, ends at 3
   IPersist(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassID(Pointer<GUID> pClassID) => ptr.ref.lpVtbl.value
+  int GetClassID(
+    Pointer<GUID> pClassID,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<GUID> pClassID)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> pClassID,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
-      ptr.ref.lpVtbl, pClassID);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> pClassID,
+          )>()(
+        ptr.ref.lpVtbl,
+        pClassID,
+      );
 }

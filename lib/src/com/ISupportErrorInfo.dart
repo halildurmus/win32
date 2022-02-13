@@ -29,12 +29,25 @@ class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, ends at 3
   ISupportErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> riid)>()(ptr.ref.lpVtbl, riid);
+  int InterfaceSupportsErrorInfo(
+    Pointer<GUID> riid,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> riid,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> riid,
+          )>()(
+        ptr.ref.lpVtbl,
+        riid,
+      );
 }

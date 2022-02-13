@@ -38,11 +38,16 @@ class IShellLinkDual extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> pbs)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Pointer<Utf16>> pbs)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -58,10 +63,17 @@ class IShellLinkDual extends IDispatch {
         .elementAt(8)
         .cast<
             Pointer<
-                NativeFunction<Int32 Function(Pointer, Pointer<Utf16> bs)>>>()
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>>>()
         .value
         .asFunction<
-            int Function(Pointer, Pointer<Utf16> bs)>()(ptr.ref.lpVtbl, value);
+            int Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -75,11 +87,16 @@ class IShellLinkDual extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> pbs)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Pointer<Utf16>> pbs)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -95,10 +112,17 @@ class IShellLinkDual extends IDispatch {
         .elementAt(10)
         .cast<
             Pointer<
-                NativeFunction<Int32 Function(Pointer, Pointer<Utf16> bs)>>>()
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>>>()
         .value
         .asFunction<
-            int Function(Pointer, Pointer<Utf16> bs)>()(ptr.ref.lpVtbl, value);
+            int Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -112,11 +136,16 @@ class IShellLinkDual extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> pbs)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Pointer<Utf16>> pbs)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -132,10 +161,17 @@ class IShellLinkDual extends IDispatch {
         .elementAt(12)
         .cast<
             Pointer<
-                NativeFunction<Int32 Function(Pointer, Pointer<Utf16> bs)>>>()
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>>>()
         .value
         .asFunction<
-            int Function(Pointer, Pointer<Utf16> bs)>()(ptr.ref.lpVtbl, value);
+            int Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -149,11 +185,16 @@ class IShellLinkDual extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> pbs)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Pointer<Utf16>> pbs)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -169,10 +210,17 @@ class IShellLinkDual extends IDispatch {
         .elementAt(14)
         .cast<
             Pointer<
-                NativeFunction<Int32 Function(Pointer, Pointer<Utf16> bs)>>>()
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>>>()
         .value
         .asFunction<
-            int Function(Pointer, Pointer<Utf16> bs)>()(ptr.ref.lpVtbl, value);
+            int Function(
+          Pointer,
+          Pointer<Utf16> bs,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -182,14 +230,20 @@ class IShellLinkDual extends IDispatch {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Int32> piHK)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<Int32> piHK)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> piHK,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> piHK,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -203,9 +257,19 @@ class IShellLinkDual extends IDispatch {
   set Hotkey(int value) {
     final hr = ptr.ref.lpVtbl.value
         .elementAt(16)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 iHK)>>>()
+        .cast<
+            Pointer<
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Int32 iHK,
+        )>>>()
         .value
-        .asFunction<int Function(Pointer, int iHK)>()(ptr.ref.lpVtbl, value);
+        .asFunction<
+            int Function(
+          Pointer,
+          int iHK,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -219,11 +283,16 @@ class IShellLinkDual extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> piShowCommand)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> piShowCommand,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Int32> piShowCommand)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int32> piShowCommand,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -239,48 +308,114 @@ class IShellLinkDual extends IDispatch {
         .elementAt(18)
         .cast<
             Pointer<
-                NativeFunction<Int32 Function(Pointer, Int32 iShowCommand)>>>()
+                NativeFunction<
+                    Int32 Function(
+          Pointer,
+          Int32 iShowCommand,
+        )>>>()
         .value
         .asFunction<
-            int Function(Pointer, int iShowCommand)>()(ptr.ref.lpVtbl, value);
+            int Function(
+          Pointer,
+          int iShowCommand,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int Resolve(int fFlags) => ptr.ref.lpVtbl.value
-      .elementAt(19)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fFlags)>>>()
-      .value
-      .asFunction<int Function(Pointer, int fFlags)>()(ptr.ref.lpVtbl, fFlags);
+  int Resolve(
+    int fFlags,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(19)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 fFlags,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int fFlags,
+          )>()(
+        ptr.ref.lpVtbl,
+        fFlags,
+      );
 
-  int GetIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
+  int GetIconLocation(
+    Pointer<Pointer<Utf16>> pbs,
+    Pointer<Int32> piIcon,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(20)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> pbs,
-                          Pointer<Int32> piIcon)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+            Pointer<Int32> piIcon,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<Utf16>> pbs,
-                  Pointer<Int32> piIcon)>()(ptr.ref.lpVtbl, pbs, piIcon);
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> pbs,
+            Pointer<Int32> piIcon,
+          )>()(
+        ptr.ref.lpVtbl,
+        pbs,
+        piIcon,
+      );
 
-  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.lpVtbl.value
-      .elementAt(21)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Utf16> bs, Int32 iIcon)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> bs,
-              int iIcon)>()(ptr.ref.lpVtbl, bs, iIcon);
+  int SetIconLocation(
+    Pointer<Utf16> bs,
+    int iIcon,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(21)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> bs,
+            Int32 iIcon,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> bs,
+            int iIcon,
+          )>()(
+        ptr.ref.lpVtbl,
+        bs,
+        iIcon,
+      );
 
-  int Save(VARIANT vWhere) => ptr.ref.lpVtbl.value
-      .elementAt(22)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer, VARIANT vWhere)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, VARIANT vWhere)>()(ptr.ref.lpVtbl, vWhere);
+  int Save(
+    VARIANT vWhere,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(22)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            VARIANT vWhere,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            VARIANT vWhere,
+          )>()(
+        ptr.ref.lpVtbl,
+        vWhere,
+      );
 }

@@ -34,16 +34,20 @@ class ISpellChecker extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -54,93 +58,173 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  int Check(Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
+  int Check(
+    Pointer<Utf16> text,
+    Pointer<Pointer<COMObject>> value,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> text,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> text,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, text, value);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> text,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> text,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        text,
+        value,
+      );
 
-  int Suggest(Pointer<Utf16> word, Pointer<Pointer<COMObject>> value) =>
+  int Suggest(
+    Pointer<Utf16> word,
+    Pointer<Pointer<COMObject>> value,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> word,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> word,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, word, value);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> word,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> word,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        word,
+        value,
+      );
 
-  int Add(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
-      .elementAt(6)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
+  int Add(
+    Pointer<Utf16> word,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> word,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> word,
+          )>()(
+        ptr.ref.lpVtbl,
+        word,
+      );
 
-  int Ignore(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
-      .elementAt(7)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
+  int Ignore(
+    Pointer<Utf16> word,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> word,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> word,
+          )>()(
+        ptr.ref.lpVtbl,
+        word,
+      );
 
-  int AutoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) =>
+  int AutoCorrect(
+    Pointer<Utf16> from,
+    Pointer<Utf16> to,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Utf16> from, Pointer<Utf16> to)>>>()
+            Pointer,
+            Pointer<Utf16> from,
+            Pointer<Utf16> to,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> from,
-                  Pointer<Utf16> to)>()(ptr.ref.lpVtbl, from, to);
+              int Function(
+            Pointer,
+            Pointer<Utf16> from,
+            Pointer<Utf16> to,
+          )>()(
+        ptr.ref.lpVtbl,
+        from,
+        to,
+      );
 
-  int GetOptionValue(Pointer<Utf16> optionId, Pointer<Uint8> value) =>
+  int GetOptionValue(
+    Pointer<Utf16> optionId,
+    Pointer<Uint8> value,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> optionId,
-                          Pointer<Uint8> value)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> optionId,
+            Pointer<Uint8> value,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> optionId,
-                  Pointer<Uint8> value)>()(ptr.ref.lpVtbl, optionId, value);
+              int Function(
+            Pointer,
+            Pointer<Utf16> optionId,
+            Pointer<Uint8> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        optionId,
+        value,
+      );
 
   Pointer<COMObject> get OptionIds {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -156,16 +240,20 @@ class ISpellChecker extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -181,16 +269,20 @@ class ISpellChecker extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(12)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<Utf16>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<Utf16>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(12)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -202,57 +294,102 @@ class ISpellChecker extends IUnknown {
   }
 
   int add_SpellCheckerChanged(
-          Pointer<COMObject> handler, Pointer<Uint32> eventCookie) =>
+    Pointer<COMObject> handler,
+    Pointer<Uint32> eventCookie,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> handler,
-                              Pointer<Uint32> eventCookie)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> handler,
-                      Pointer<Uint32> eventCookie)>()(
-          ptr.ref.lpVtbl, handler, eventCookie);
+          .elementAt(13)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> handler,
+            Pointer<Uint32> eventCookie,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> handler,
+            Pointer<Uint32> eventCookie,
+          )>()(
+        ptr.ref.lpVtbl,
+        handler,
+        eventCookie,
+      );
 
-  int remove_SpellCheckerChanged(int eventCookie) => ptr.ref.lpVtbl.value
-      .elementAt(14)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Uint32 eventCookie)>>>()
-      .value
-      .asFunction<
-          int Function(
-              Pointer, int eventCookie)>()(ptr.ref.lpVtbl, eventCookie);
+  int remove_SpellCheckerChanged(
+    int eventCookie,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Uint32 eventCookie,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int eventCookie,
+          )>()(
+        ptr.ref.lpVtbl,
+        eventCookie,
+      );
 
   int GetOptionDescription(
-          Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value) =>
+    Pointer<Utf16> optionId,
+    Pointer<Pointer<COMObject>> value,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(15)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> optionId,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> optionId,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, optionId, value);
+          .elementAt(15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> optionId,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> optionId,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        optionId,
+        value,
+      );
 
   int ComprehensiveCheck(
-          Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
+    Pointer<Utf16> text,
+    Pointer<Pointer<COMObject>> value,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> text,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> text,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, text, value);
+          .elementAt(16)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> text,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> text,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        text,
+        value,
+      );
 }

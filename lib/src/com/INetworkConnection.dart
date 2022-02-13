@@ -29,17 +29,27 @@ class INetworkConnection extends IDispatch {
   // vtable begins at 7, ends at 13
   INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.lpVtbl.value
+  int GetNetwork(
+    Pointer<Pointer<COMObject>> ppNetwork,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppNetwork)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppNetwork,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppNetwork)>()(
-      ptr.ref.lpVtbl, ppNetwork);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppNetwork,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppNetwork,
+      );
 
   int get IsConnectedToInternet {
     final retValuePtr = calloc<Int16>();
@@ -50,11 +60,16 @@ class INetworkConnection extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -74,11 +89,16 @@ class INetworkConnection extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -89,46 +109,91 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(
+    Pointer<Int32> pConnectivity,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(10)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pConnectivity)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> pConnectivity,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
-      ptr.ref.lpVtbl, pConnectivity);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> pConnectivity,
+          )>()(
+        ptr.ref.lpVtbl,
+        pConnectivity,
+      );
 
-  int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
+  int GetConnectionId(
+    Pointer<GUID> pgdConnectionId,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<GUID> pgdConnectionId)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
-          ptr.ref.lpVtbl, pgdConnectionId);
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> pgdConnectionId,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> pgdConnectionId,
+          )>()(
+        ptr.ref.lpVtbl,
+        pgdConnectionId,
+      );
 
-  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.lpVtbl.value
+  int GetAdapterId(
+    Pointer<GUID> pgdAdapterId,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(12)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<GUID> pgdAdapterId)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> pgdAdapterId,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
-      ptr.ref.lpVtbl, pgdAdapterId);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> pgdAdapterId,
+          )>()(
+        ptr.ref.lpVtbl,
+        pgdAdapterId,
+      );
 
-  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.lpVtbl.value
+  int GetDomainType(
+    Pointer<Int32> pDomainType,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(13)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pDomainType)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> pDomainType,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pDomainType)>()(
-      ptr.ref.lpVtbl, pDomainType);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> pDomainType,
+          )>()(
+        ptr.ref.lpVtbl,
+        pDomainType,
+      );
 }

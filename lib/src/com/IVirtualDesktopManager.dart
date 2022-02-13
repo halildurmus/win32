@@ -30,47 +30,82 @@ class IVirtualDesktopManager extends IUnknown {
   IVirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
 
   int IsWindowOnCurrentVirtualDesktop(
-          int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
+    int topLevelWindow,
+    Pointer<Int32> onCurrentDesktop,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, IntPtr topLevelWindow,
-                              Pointer<Int32> onCurrentDesktop)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int topLevelWindow,
-                      Pointer<Int32> onCurrentDesktop)>()(
-          ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            IntPtr topLevelWindow,
+            Pointer<Int32> onCurrentDesktop,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int topLevelWindow,
+            Pointer<Int32> onCurrentDesktop,
+          )>()(
+        ptr.ref.lpVtbl,
+        topLevelWindow,
+        onCurrentDesktop,
+      );
 
-  int GetWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
+  int GetWindowDesktopId(
+    int topLevelWindow,
+    Pointer<GUID> desktopId,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, IntPtr topLevelWindow,
-                              Pointer<GUID> desktopId)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
-          ptr.ref.lpVtbl, topLevelWindow, desktopId);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            IntPtr topLevelWindow,
+            Pointer<GUID> desktopId,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int topLevelWindow,
+            Pointer<GUID> desktopId,
+          )>()(
+        ptr.ref.lpVtbl,
+        topLevelWindow,
+        desktopId,
+      );
 
-  int MoveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) =>
+  int MoveWindowToDesktop(
+    int topLevelWindow,
+    Pointer<GUID> desktopId,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, IntPtr topLevelWindow,
-                              Pointer<GUID> desktopId)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
-          ptr.ref.lpVtbl, topLevelWindow, desktopId);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            IntPtr topLevelWindow,
+            Pointer<GUID> desktopId,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int topLevelWindow,
+            Pointer<GUID> desktopId,
+          )>()(
+        ptr.ref.lpVtbl,
+        topLevelWindow,
+        desktopId,
+      );
 }
 
 /// @nodoc
