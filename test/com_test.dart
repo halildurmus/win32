@@ -54,7 +54,7 @@ void main() {
             .having((e) => e.hr, 'hr', equals(CO_E_NOTINITIALIZED))
             .having((e) => e.toString(), 'message',
                 contains('CoInitialize has not been called.'))));
-  });
+  }, skip: 'Broken on Windows 11.');
 
   test('Create COM object with CoCreateInstance', () {
     var hr = CoInitializeEx(

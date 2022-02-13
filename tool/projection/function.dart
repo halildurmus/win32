@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
+import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
 
@@ -20,7 +21,7 @@ class FunctionProjection {
             .toList();
 
   // TODO: remove when https://github.com/microsoft/win32metadata/issues/229
-  //   is fixed.
+  //  is fixed.
   String get k32StrippedName => nameWithoutEncoding.startsWith('K32')
       ? nameWithoutEncoding.substring(3)
       : nameWithoutEncoding;
