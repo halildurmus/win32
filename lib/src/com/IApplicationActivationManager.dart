@@ -27,7 +27,7 @@ const IID_IApplicationActivationManager =
 /// {@category Interface}
 /// {@category com}
 class IApplicationActivationManager extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IApplicationActivationManager(Pointer<COMObject> ptr) : super(ptr);
 
   int ActivateApplication(

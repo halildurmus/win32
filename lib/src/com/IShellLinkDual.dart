@@ -26,7 +26,7 @@ const IID_IShellLinkDual = '{88A05C00-F000-11CE-8350-444553540000}';
 /// {@category Interface}
 /// {@category com}
 class IShellLinkDual extends IDispatch {
-  // vtable begins at 7, ends at 22
+  // vtable begins at 7, is 16 entries long.
   IShellLinkDual(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer<Utf16> get Path {

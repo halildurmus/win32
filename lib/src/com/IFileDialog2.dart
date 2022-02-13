@@ -26,7 +26,7 @@ const IID_IFileDialog2 = '{61744FC7-85B5-4791-A9B0-272276309B13}';
 /// {@category Interface}
 /// {@category com}
 class IFileDialog2 extends IFileDialog {
-  // vtable begins at 27, ends at 28
+  // vtable begins at 27, is 2 entries long.
   IFileDialog2(Pointer<COMObject> ptr) : super(ptr);
 
   int SetCancelButtonLabel(

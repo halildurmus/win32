@@ -26,7 +26,7 @@ const IID_IClassFactory = '{00000001-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IClassFactory extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IClassFactory(Pointer<COMObject> ptr) : super(ptr);
 
   int CreateInstance(

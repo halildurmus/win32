@@ -26,7 +26,7 @@ const IID_IShellLink = '{000214F9-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IShellLink extends IUnknown {
-  // vtable begins at 3, ends at 20
+  // vtable begins at 3, is 18 entries long.
   IShellLink(Pointer<COMObject> ptr) : super(ptr);
 
   int GetPath(

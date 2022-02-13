@@ -26,7 +26,7 @@ const IID_IFileDialogCustomize = '{E6FDD21A-163F-4975-9C8C-A69F1BA37034}';
 /// {@category Interface}
 /// {@category com}
 class IFileDialogCustomize extends IUnknown {
-  // vtable begins at 3, ends at 29
+  // vtable begins at 3, is 27 entries long.
   IFileDialogCustomize(Pointer<COMObject> ptr) : super(ptr);
 
   int EnableOpenDropDown(

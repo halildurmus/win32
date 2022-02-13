@@ -26,7 +26,7 @@ const IID_IEnumResources = '{2DD81FE3-A83C-4DA9-A330-47249D345BA1}';
 /// {@category Interface}
 /// {@category com}
 class IEnumResources extends IUnknown {
-  // vtable begins at 3, ends at 6
+  // vtable begins at 3, is 4 entries long.
   IEnumResources(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(

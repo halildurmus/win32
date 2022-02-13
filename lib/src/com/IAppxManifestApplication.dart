@@ -26,7 +26,7 @@ const IID_IAppxManifestApplication = '{5DA89BF4-3773-46BE-B650-7E744863B7E8}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestApplication extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IAppxManifestApplication(Pointer<COMObject> ptr) : super(ptr);
 
   int GetStringValue(

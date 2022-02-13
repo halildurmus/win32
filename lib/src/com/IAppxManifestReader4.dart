@@ -26,7 +26,7 @@ const IID_IAppxManifestReader4 = '{4579BB7C-741D-4161-B5A1-47BD3B78AD9B}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader4 extends IAppxManifestReader3 {
-  // vtable begins at 15, ends at 15
+  // vtable begins at 15, is 1 entries long.
   IAppxManifestReader4(Pointer<COMObject> ptr) : super(ptr);
 
   int GetOptionalPackageInfo(

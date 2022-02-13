@@ -26,7 +26,7 @@ const IID_IModalWindow = '{B4DB1657-70D7-485E-8E3E-6FCB5A5C1802}';
 /// {@category Interface}
 /// {@category com}
 class IModalWindow extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IModalWindow(Pointer<COMObject> ptr) : super(ptr);
 
   int Show(

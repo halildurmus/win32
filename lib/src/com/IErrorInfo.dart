@@ -26,7 +26,7 @@ const IID_IErrorInfo = '{1CF2B120-547D-101B-8E65-08002B2BD119}';
 /// {@category Interface}
 /// {@category com}
 class IErrorInfo extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int GetGUID(

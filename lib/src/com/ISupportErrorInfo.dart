@@ -26,7 +26,7 @@ const IID_ISupportErrorInfo = '{DF0B3D60-548F-101B-8E65-08002B2BD119}';
 /// {@category Interface}
 /// {@category com}
 class ISupportErrorInfo extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   ISupportErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int InterfaceSupportsErrorInfo(

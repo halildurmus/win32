@@ -26,7 +26,7 @@ const IID_IConnectionPoint = '{B196B286-BAB4-101A-B69C-00AA00341D07}';
 /// {@category Interface}
 /// {@category com}
 class IConnectionPoint extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IConnectionPoint(Pointer<COMObject> ptr) : super(ptr);
 
   int GetConnectionInterface(

@@ -27,7 +27,7 @@ const IID_ISpellCheckerChangedEventHandler =
 /// {@category Interface}
 /// {@category com}
 class ISpellCheckerChangedEventHandler extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(Pointer<COMObject> ptr) : super(ptr);
 
   int Invoke(

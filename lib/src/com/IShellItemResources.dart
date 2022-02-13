@@ -26,7 +26,7 @@ const IID_IShellItemResources = '{FF5693BE-2CE0-4D48-B5C5-40817D1ACDB9}';
 /// {@category Interface}
 /// {@category com}
 class IShellItemResources extends IUnknown {
-  // vtable begins at 3, ends at 12
+  // vtable begins at 3, is 10 entries long.
   IShellItemResources(Pointer<COMObject> ptr) : super(ptr);
 
   int GetAttributes(

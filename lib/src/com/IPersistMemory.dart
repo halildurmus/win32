@@ -26,7 +26,7 @@ const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';
 /// {@category Interface}
 /// {@category com}
 class IPersistMemory extends IPersist {
-  // vtable begins at 4, ends at 8
+  // vtable begins at 4, is 5 entries long.
   IPersistMemory(Pointer<COMObject> ptr) : super(ptr);
 
   int IsDirty() => ptr.ref.lpVtbl.value

@@ -26,7 +26,7 @@ const IID_IPersist = '{0000010C-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IPersist extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IPersist(Pointer<COMObject> ptr) : super(ptr);
 
   int GetClassID(

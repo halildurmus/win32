@@ -26,7 +26,7 @@ const IID_IAppxPackageReader = '{B5C49650-99BC-481C-9A34-3D53A4106708}';
 /// {@category Interface}
 /// {@category com}
 class IAppxPackageReader extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IAppxPackageReader(Pointer<COMObject> ptr) : super(ptr);
 
   int GetBlockMap(

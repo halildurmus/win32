@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../different/falseProperties.dart';
 import '../metadata/exclusions.dart';
+import 'safenames.dart';
 import 'type.dart';
 
 const dartKeywords = <String>[
@@ -175,6 +177,18 @@ String safeTypename(String name) {
     return name;
   }
 }
+
+bool isExcludedGetProperty(Method method) => falseProperties
+    .where((p) =>
+        p.interface == safeTypenameForTypeDef(method.parent) &&
+        p.property == method.name)
+    .isNotEmpty;
+
+bool isExcludedSetProperty(Method method) => falseProperties
+    .where((p) =>
+        p.interface == safeTypenameForTypeDef(method.parent) &&
+        p.property.replaceFirst('get', 'put') == method.name)
+    .isNotEmpty;
 
 String stripLeadingUnderscores(String name) {
   if (name.startsWith('_')) {

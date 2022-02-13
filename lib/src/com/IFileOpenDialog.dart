@@ -26,7 +26,7 @@ const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
 /// {@category Interface}
 /// {@category com}
 class IFileOpenDialog extends IFileDialog {
-  // vtable begins at 27, ends at 28
+  // vtable begins at 27, is 2 entries long.
   IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int GetResults(

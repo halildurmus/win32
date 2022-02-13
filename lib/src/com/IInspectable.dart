@@ -26,7 +26,7 @@ const IID_IInspectable = '{AF86E2E0-B12D-4C6A-9C5A-D7AA65101E90}';
 /// {@category Interface}
 /// {@category com}
 class IInspectable extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IInspectable(Pointer<COMObject> ptr) : super(ptr);
 
   int GetIids(

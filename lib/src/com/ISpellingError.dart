@@ -26,7 +26,7 @@ const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
 /// {@category Interface}
 /// {@category com}
 class ISpellingError extends IUnknown {
-  // vtable begins at 3, ends at 6
+  // vtable begins at 3, is 4 entries long.
   ISpellingError(Pointer<COMObject> ptr) : super(ptr);
 
   int get StartIndex {

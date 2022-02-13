@@ -26,7 +26,7 @@ const IID_IAppxManifestPackageId = '{283CE2D7-7153-4A91-9649-7A0F7240945F}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageId extends IUnknown {
-  // vtable begins at 3, ends at 10
+  // vtable begins at 3, is 8 entries long.
   IAppxManifestPackageId(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(

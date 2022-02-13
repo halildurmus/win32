@@ -26,7 +26,7 @@ const IID_IBindCtx = '{0000000E-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IBindCtx extends IUnknown {
-  // vtable begins at 3, ends at 12
+  // vtable begins at 3, is 10 entries long.
   IBindCtx(Pointer<COMObject> ptr) : super(ptr);
 
   int RegisterObjectBound(

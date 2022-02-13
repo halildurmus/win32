@@ -26,7 +26,7 @@ const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';
 /// {@category Interface}
 /// {@category com}
 class IFileIsInUse extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IFileIsInUse(Pointer<COMObject> ptr) : super(ptr);
 
   int GetAppName(

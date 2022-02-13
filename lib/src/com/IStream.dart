@@ -26,7 +26,7 @@ const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IStream extends ISequentialStream {
-  // vtable begins at 5, ends at 13
+  // vtable begins at 5, is 9 entries long.
   IStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Seek(

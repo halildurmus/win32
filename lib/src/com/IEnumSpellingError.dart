@@ -26,7 +26,7 @@ const IID_IEnumSpellingError = '{803E3BD4-2828-4410-8290-418D1D73C762}';
 /// {@category Interface}
 /// {@category com}
 class IEnumSpellingError extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IEnumSpellingError(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(

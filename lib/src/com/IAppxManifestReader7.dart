@@ -26,7 +26,7 @@ const IID_IAppxManifestReader7 = '{8EFE6F27-0CE0-4988-B32D-738EB63DB3B7}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader7 extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IAppxManifestReader7(Pointer<COMObject> ptr) : super(ptr);
 
   int GetDriverDependencies(

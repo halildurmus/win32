@@ -26,7 +26,7 @@ const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
 /// {@category Interface}
 /// {@category com}
 class ISequentialStream extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Read(

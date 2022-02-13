@@ -26,7 +26,7 @@ const IID_IUri = '{A39EE748-6A27-4817-A6F2-13914BEF5890}';
 /// {@category Interface}
 /// {@category com}
 class IUri extends IUnknown {
-  // vtable begins at 3, ends at 27
+  // vtable begins at 3, is 25 entries long.
   IUri(Pointer<COMObject> ptr) : super(ptr);
 
   int GetPropertyBSTR(

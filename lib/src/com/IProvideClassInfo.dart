@@ -26,7 +26,7 @@ const IID_IProvideClassInfo = '{B196B283-BAB4-101A-B69C-00AA00341D07}';
 /// {@category Interface}
 /// {@category com}
 class IProvideClassInfo extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int GetClassInfo(

@@ -26,7 +26,7 @@ const IID_IKnownFolderManager = '{8BE2D872-86AA-4D47-B776-32CCA40C7018}';
 /// {@category Interface}
 /// {@category com}
 class IKnownFolderManager extends IUnknown {
-  // vtable begins at 3, ends at 12
+  // vtable begins at 3, is 10 entries long.
   IKnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   int FolderIdFromCsidl(

@@ -27,7 +27,7 @@ const IID_IAppxManifestApplicationsEnumerator =
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestApplicationsEnumerator extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IAppxManifestApplicationsEnumerator(Pointer<COMObject> ptr) : super(ptr);
 
   int GetCurrent(

@@ -26,7 +26,7 @@ const IID_INetwork = '{DCB00002-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category Interface}
 /// {@category com}
 class INetwork extends IDispatch {
-  // vtable begins at 7, ends at 19
+  // vtable begins at 7, is 13 entries long.
   INetwork(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(

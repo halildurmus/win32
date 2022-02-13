@@ -26,7 +26,7 @@ const IID_IFileDialog = '{42F85136-DB7E-439C-85F1-E4075D135FC8}';
 /// {@category Interface}
 /// {@category com}
 class IFileDialog extends IModalWindow {
-  // vtable begins at 4, ends at 26
+  // vtable begins at 4, is 23 entries long.
   IFileDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int SetFileTypes(

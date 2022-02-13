@@ -27,7 +27,7 @@ const IID_IAppxManifestOSPackageDependency =
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestOSPackageDependency extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(

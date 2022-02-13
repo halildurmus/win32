@@ -26,7 +26,7 @@ const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
 /// {@category Interface}
 /// {@category com}
 class ISpellCheckerFactory extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   ISpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer<COMObject> get SupportedLanguages {

@@ -26,7 +26,7 @@ const IID_IWbemServices = '{9556DC99-828C-11CF-A37E-00AA003240C7}';
 /// {@category Interface}
 /// {@category com}
 class IWbemServices extends IUnknown {
-  // vtable begins at 3, ends at 25
+  // vtable begins at 3, is 23 entries long.
   IWbemServices(Pointer<COMObject> ptr) : super(ptr);
 
   int OpenNamespace(

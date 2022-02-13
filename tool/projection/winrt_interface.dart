@@ -40,7 +40,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
 
     // if (typeDef.genericParams.isNotEmpty) {
     //   final genericParams =
-    //       typeDef.genericParams.map<String>((p) => p.name).join(', ');
+    //       typeDef.genericParams.map<String>((p) => '${p.name}, ').join();
     //   interface.shortNameWithGenericSpecifier =
     //       '${interface.shortName}<$genericParams>';
     // } else {
@@ -51,7 +51,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
   }
 
   @override
-  int calculateVTableStart(TypeDef? type) {
+  int cacheVtableStart(TypeDef? type) {
     if (type == null) {
       return 0;
     }
@@ -63,7 +63,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
       var sum = 0;
 
       for (final interface in type.interfaces) {
-        sum += interface.methods.length + calculateVTableStart(interface);
+        sum += interface.methods.length + cacheVtableStart(interface);
       }
 
       return sum;

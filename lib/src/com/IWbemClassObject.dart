@@ -26,7 +26,7 @@ const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 /// {@category Interface}
 /// {@category com}
 class IWbemClassObject extends IUnknown {
-  // vtable begins at 3, ends at 26
+  // vtable begins at 3, is 24 entries long.
   IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
 
   int GetQualifierSet(

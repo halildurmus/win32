@@ -26,7 +26,7 @@ const IID_IMoniker = '{0000000F-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IMoniker extends IPersistStream {
-  // vtable begins at 8, ends at 22
+  // vtable begins at 8, is 15 entries long.
   IMoniker(Pointer<COMObject> ptr) : super(ptr);
 
   int BindToObject(

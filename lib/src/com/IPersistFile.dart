@@ -26,7 +26,7 @@ const IID_IPersistFile = '{0000010B-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IPersistFile extends IPersist {
-  // vtable begins at 4, ends at 8
+  // vtable begins at 4, is 5 entries long.
   IPersistFile(Pointer<COMObject> ptr) : super(ptr);
 
   int IsDirty() => ptr.ref.lpVtbl.value

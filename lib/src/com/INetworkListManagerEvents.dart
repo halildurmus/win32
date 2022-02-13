@@ -26,7 +26,7 @@ const IID_INetworkListManagerEvents = '{DCB00001-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category Interface}
 /// {@category com}
 class INetworkListManagerEvents extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(Pointer<COMObject> ptr) : super(ptr);
 
   int ConnectivityChanged(

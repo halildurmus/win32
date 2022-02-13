@@ -2,7 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Scratch file for testing various ideas.
+// Example of using Windows built-in spellchecker.
+//
+// Try it with something like this:
+//   dart example\spellcheck.dart "The rain inx Spain is very rar"
+//
+// You should see that the words 'inx' and 'rar' generate errors (and suggested
+// corrections).
 
 import 'dart:ffi';
 import 'dart:io';

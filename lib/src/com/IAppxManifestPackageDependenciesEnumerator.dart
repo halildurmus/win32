@@ -27,7 +27,7 @@ const IID_IAppxManifestPackageDependenciesEnumerator =
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IAppxManifestPackageDependenciesEnumerator(Pointer<COMObject> ptr)
       : super(ptr);
 

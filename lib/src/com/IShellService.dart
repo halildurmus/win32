@@ -26,7 +26,7 @@ const IID_IShellService = '{5836FB00-8187-11CF-A12B-00AA004AE837}';
 /// {@category Interface}
 /// {@category com}
 class IShellService extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IShellService(Pointer<COMObject> ptr) : super(ptr);
 
   int SetOwner(

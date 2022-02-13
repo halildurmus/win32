@@ -26,7 +26,7 @@ const IID_IAppxManifestProperties = '{03FAF64D-F26F-4B2C-AAF7-8FE7789B8BCA}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestProperties extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IAppxManifestProperties(Pointer<COMObject> ptr) : super(ptr);
 
   int GetBoolValue(

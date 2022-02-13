@@ -26,7 +26,7 @@ const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category Interface}
 /// {@category com}
 class INetworkListManager extends IDispatch {
-  // vtable begins at 7, ends at 15
+  // vtable begins at 7, is 9 entries long.
   INetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
   int GetNetworks(

@@ -26,7 +26,7 @@ const IID_IRunningObjectTable = '{00000010-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IRunningObjectTable extends IUnknown {
-  // vtable begins at 3, ends at 9
+  // vtable begins at 3, is 7 entries long.
   IRunningObjectTable(Pointer<COMObject> ptr) : super(ptr);
 
   int Register(

@@ -26,7 +26,7 @@ const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
 /// {@category Interface}
 /// {@category com}
 class IConnectionPointContainer extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IConnectionPointContainer(Pointer<COMObject> ptr) : super(ptr);
 
   int EnumConnectionPoints(

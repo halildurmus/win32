@@ -26,7 +26,7 @@ const IID_IEnumString = '{00000101-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IEnumString extends IUnknown {
-  // vtable begins at 3, ends at 6
+  // vtable begins at 3, is 4 entries long.
   IEnumString(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(

@@ -26,7 +26,7 @@ const IID_IPersistStream = '{00000109-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IPersistStream extends IPersist {
-  // vtable begins at 4, ends at 7
+  // vtable begins at 4, is 4 entries long.
   IPersistStream(Pointer<COMObject> ptr) : super(ptr);
 
   int IsDirty() => ptr.ref.lpVtbl.value

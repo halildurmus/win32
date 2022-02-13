@@ -26,7 +26,7 @@ const IID_IShellItem = '{43826D1E-E718-42EE-BC55-A1E261C37BFE}';
 /// {@category Interface}
 /// {@category com}
 class IShellItem extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IShellItem(Pointer<COMObject> ptr) : super(ptr);
 
   int BindToHandler(
