@@ -7277,12 +7277,12 @@ late final _UnregisterHotKey = _user32.lookupFunction<
 /// );
 /// ```
 /// {@category user32}
-int UnregisterPowerSettingNotification(int Handle_) =>
-    _UnregisterPowerSettingNotification(Handle_);
+int UnregisterPowerSettingNotification(int $Handle) =>
+    _UnregisterPowerSettingNotification($Handle);
 
 late final _UnregisterPowerSettingNotification = _user32.lookupFunction<
-    Int32 Function(IntPtr Handle_),
-    int Function(int Handle_)>('UnregisterPowerSettingNotification');
+    Int32 Function(IntPtr $Handle),
+    int Function(int $Handle)>('UnregisterPowerSettingNotification');
 
 /// Registers a window as no longer being touch-capable.
 ///

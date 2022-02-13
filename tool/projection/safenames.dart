@@ -31,6 +31,8 @@ const ffiTypes = <String>{
   'Double', 'Float', 'Array', 'IntPtr',
   'Pointer', 'Union', 'Opaque', 'Struct',
   'Unsized', 'Void', 'Packed', 'Handle',
+
+  // TODO: Add named prefix to use of dart:ffi so that this is a non-issue
 };
 
 /// These types are used in Win32 both as types and identifiers.
