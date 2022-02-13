@@ -121,6 +121,11 @@ class TypeProjection {
       throw Exception('Pointer type missing for $typeIdentifier.');
     }
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
+    // Strip leading underscores (unless the type is nested, in which
+    // case leave one behind).
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+        ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
+        : stripLeadingUnderscores(typeArg.projection.nativeType);
 
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
@@ -130,8 +135,8 @@ class TypeProjection {
       return const TypeTuple('Pointer', 'Pointer');
     }
 
-    final nativeType = 'Pointer<${projection.nativeType}>';
-    final dartType = 'Pointer<${projection.nativeType}>';
+    final nativeType = 'Pointer<$typeArgNativeType>';
+    final dartType = 'Pointer<$typeArgNativeType>';
 
     return TypeTuple(nativeType, dartType);
   }
@@ -205,7 +210,9 @@ class TypeProjection {
       return unwrapCallbackType();
     }
 
-    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
+    if (isInterface ||
+        typeIdentifier.baseType == BaseType.ClassTypeModifier ||
+        typeIdentifier.baseType == BaseType.Object) {
       return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 
