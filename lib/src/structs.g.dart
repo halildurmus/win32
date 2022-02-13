@@ -714,7 +714,7 @@ class CHOOSEFONT extends Struct {
   external int nFontType;
 
   @Uint16()
-  external int ___MISSING_ALIGNMENT__;
+  external int MISSING_ALIGNMENT__;
 
   @Int32()
   external int nSizeMin;
@@ -922,7 +922,7 @@ class COMMTIMEOUTS extends Struct {
 /// {@category Struct}
 class COMSTAT extends Struct {
   @Uint32()
-  external int _bitfield;
+  external int bitfield;
 
   @Uint32()
   external int cbInQue;
@@ -1160,7 +1160,7 @@ class DCB extends Struct {
   external int BaudRate;
 
   @Uint32()
-  external int _bitfield;
+  external int bitfield;
 
   @Uint16()
   external int wReserved;
