@@ -29,53 +29,53 @@
         // vtable begins at 7, ends at 19
         INetwork(Pointer<COMObject> ptr) : super(ptr);
 
-              int GetName(Pointer<Pointer<Utf16>> pszNetworkName) => ptr.ref.lpVtbl.value
+              int GetName(Pointer<Pointer<Utf16>> pszNetworkName, ) => ptr.ref.lpVtbl.value
         .elementAt(7)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> pszNetworkName)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> pszNetworkName, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszNetworkName)>()(ptr.ref.lpVtbl, pszNetworkName);
+        .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszNetworkName, )>()(ptr.ref.lpVtbl, pszNetworkName, );
     
-      int SetName(Pointer<Utf16> szNetworkNewName) => ptr.ref.lpVtbl.value
+      int SetName(Pointer<Utf16> szNetworkNewName, ) => ptr.ref.lpVtbl.value
         .elementAt(8)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> szNetworkNewName)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> szNetworkNewName, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Utf16> szNetworkNewName)>()(ptr.ref.lpVtbl, szNetworkNewName);
+        .asFunction<int Function(Pointer, Pointer<Utf16> szNetworkNewName, )>()(ptr.ref.lpVtbl, szNetworkNewName, );
     
-      int GetDescription(Pointer<Pointer<Utf16>> pszDescription) => ptr.ref.lpVtbl.value
+      int GetDescription(Pointer<Pointer<Utf16>> pszDescription, ) => ptr.ref.lpVtbl.value
         .elementAt(9)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> pszDescription)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<Utf16>> pszDescription, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszDescription)>()(ptr.ref.lpVtbl, pszDescription);
+        .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> pszDescription, )>()(ptr.ref.lpVtbl, pszDescription, );
     
-      int SetDescription(Pointer<Utf16> szDescription) => ptr.ref.lpVtbl.value
+      int SetDescription(Pointer<Utf16> szDescription, ) => ptr.ref.lpVtbl.value
         .elementAt(10)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> szDescription)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Utf16> szDescription, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Utf16> szDescription)>()(ptr.ref.lpVtbl, szDescription);
+        .asFunction<int Function(Pointer, Pointer<Utf16> szDescription, )>()(ptr.ref.lpVtbl, szDescription, );
     
-      int GetNetworkId(Pointer<GUID> pgdGuidNetworkId) => ptr.ref.lpVtbl.value
+      int GetNetworkId(Pointer<GUID> pgdGuidNetworkId, ) => ptr.ref.lpVtbl.value
         .elementAt(11)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pgdGuidNetworkId)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<GUID> pgdGuidNetworkId, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<GUID> pgdGuidNetworkId)>()(ptr.ref.lpVtbl, pgdGuidNetworkId);
+        .asFunction<int Function(Pointer, Pointer<GUID> pgdGuidNetworkId, )>()(ptr.ref.lpVtbl, pgdGuidNetworkId, );
     
-      int GetDomainType(Pointer<Int32> pNetworkType) => ptr.ref.lpVtbl.value
+      int GetDomainType(Pointer<Int32> pNetworkType, ) => ptr.ref.lpVtbl.value
         .elementAt(12)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pNetworkType)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pNetworkType, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Int32> pNetworkType)>()(ptr.ref.lpVtbl, pNetworkType);
+        .asFunction<int Function(Pointer, Pointer<Int32> pNetworkType, )>()(ptr.ref.lpVtbl, pNetworkType, );
     
-      int GetNetworkConnections(Pointer<Pointer<COMObject>> ppEnumNetworkConnection) => ptr.ref.lpVtbl.value
+      int GetNetworkConnections(Pointer<Pointer<COMObject>> ppEnumNetworkConnection, ) => ptr.ref.lpVtbl.value
         .elementAt(13)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetworkConnection)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetworkConnection, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetworkConnection)>()(ptr.ref.lpVtbl, ppEnumNetworkConnection);
+        .asFunction<int Function(Pointer, Pointer<Pointer<COMObject>> ppEnumNetworkConnection, )>()(ptr.ref.lpVtbl, ppEnumNetworkConnection, );
     
-      int GetTimeCreatedAndConnected(Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected) => ptr.ref.lpVtbl.value
+      int GetTimeCreatedAndConnected(Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected, ) => ptr.ref.lpVtbl.value
         .elementAt(14)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected)>()(ptr.ref.lpVtbl, pdwLowDateTimeCreated, pdwHighDateTimeCreated, pdwLowDateTimeConnected, pdwHighDateTimeConnected);
+        .asFunction<int Function(Pointer, Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected, )>()(ptr.ref.lpVtbl, pdwLowDateTimeCreated, pdwHighDateTimeCreated, pdwLowDateTimeConnected, pdwHighDateTimeConnected, );
     
       int get IsConnectedToInternet {
         final retValuePtr = calloc<Int16>();
@@ -83,9 +83,9 @@
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt(15)
-            .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+            .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int16> pbIsConnected, )>>>()
             .value
-            .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+            .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected, )>()(ptr.ref.lpVtbl, retValuePtr);
 
           if (FAILED(hr)) throw WindowsException(hr);
 
@@ -102,9 +102,9 @@
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt(16)
-            .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+            .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int16> pbIsConnected, )>>>()
             .value
-            .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+            .asFunction<int Function(Pointer, Pointer<Int16> pbIsConnected, )>()(ptr.ref.lpVtbl, retValuePtr);
 
           if (FAILED(hr)) throw WindowsException(hr);
 
@@ -115,23 +115,23 @@
         }
       }
 
-      int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
+      int GetConnectivity(Pointer<Int32> pConnectivity, ) => ptr.ref.lpVtbl.value
         .elementAt(17)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pConnectivity)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pConnectivity, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(ptr.ref.lpVtbl, pConnectivity);
+        .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity, )>()(ptr.ref.lpVtbl, pConnectivity, );
     
-      int GetCategory(Pointer<Int32> pCategory) => ptr.ref.lpVtbl.value
+      int GetCategory(Pointer<Int32> pCategory, ) => ptr.ref.lpVtbl.value
         .elementAt(18)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pCategory)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Pointer<Int32> pCategory, )>>>()
         .value
-        .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(ptr.ref.lpVtbl, pCategory);
+        .asFunction<int Function(Pointer, Pointer<Int32> pCategory, )>()(ptr.ref.lpVtbl, pCategory, );
     
-      int SetCategory(int NewCategory) => ptr.ref.lpVtbl.value
+      int SetCategory(int NewCategory, ) => ptr.ref.lpVtbl.value
         .elementAt(19)
-        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 NewCategory)>>>()
+        .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 NewCategory, )>>>()
         .value
-        .asFunction<int Function(Pointer, int NewCategory)>()(ptr.ref.lpVtbl, NewCategory);
+        .asFunction<int Function(Pointer, int NewCategory, )>()(ptr.ref.lpVtbl, NewCategory, );
     
 
         
