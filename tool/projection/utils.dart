@@ -9,23 +9,15 @@ import '../metadata/exclusions.dart';
 import 'safenames.dart';
 import 'type.dart';
 
-const dartKeywords = <String>[
-  // Keywords from https://dart.dev/guides/language/language-tour#keywords.
-  // Contextual keywords and built-in identifiers are not included here, since
-  // they can be used as valid identifiers in most places.
-  'assert', 'break', 'case', 'catch', 'class', 'const', 'continue', 'default',
-  'do', 'else', 'enum', 'extends', 'false', 'final', 'finally', 'for', 'if',
-  'in', 'is', 'new', 'null', 'rethrow', 'return', 'super', 'switch', 'this',
-  'throw', 'true', 'try', 'var', 'void', 'while', 'with',
-
-  // FFI special words
-  'Int8', 'Int16', 'Int32', 'Int64',
-  'Uint8', 'Uint16', 'Uint32', 'Uint64',
-  'Double', 'Float', 'Array',
-  'Pointer', 'Union', 'Opaque', 'Struct',
-  'Unsized', 'Void', 'Packed', 'Handle',
+const falseAnsiEndings = <String>[
+  // These are structs that appear in the Win32 metadata that end in 'A' but
+  // are not ANSI. In the absence of a better way to determine ANSI attributes
+  // (https://github.com/microsoft/win32metadata/issues/711), we resort to a
+  // manual list.
+  'DATA', 'SCHEMA', 'AREA', 'ANTENNA', 'MEDIA', 'M128A', 'CIECHROMA', 'PARA',
+  'ALPHA', 'BUFFER_WMA', 'CRITERIA', 'UIDNA', 'YCbCrA', 'RGBA',
+  'PSP_FILE_CALLBACK_A',
 ];
-
 bool typePretendsToBeAnsi(String typeName) {
   final falseAnsiEndings = ['DATA', 'SCHEMA', 'AREA', 'M128A', 'CIECHROMA'];
   for (final word in falseAnsiEndings) {
@@ -140,43 +132,6 @@ String folderFromNamespace(String namespace) {
 }
 
 bool characterIsNumeral(String c) => int.tryParse(c) != null;
-
-/// Takes an identifier and converts it to a safe Dart identifier (i.e. one that
-/// is not a reserved word or a private modifier).
-///
-/// For example, `VARIANT var` should be converted to `VARIANT var_`, and
-/// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
-String safeName(String name) {
-  if (dartKeywords.contains(name)) {
-    return '${name}_';
-  }
-  if (name.startsWith('_')) {
-    if (characterIsNumeral(name.substring(1, 2))) {
-      return 'x${name.substring(1)}';
-    } else {
-      return name.substring(1);
-    }
-  }
-  return name;
-}
-
-/// Takes a type and makes sure it is accessible by stripping off any private
-/// modifiers.
-///
-/// For example, `Pointer<_alljoyn_abouticon_handle>` should become
-/// `Pointer<alljoyn_abouticon_handle>`.
-String safeTypename(String name) {
-  if (name.startsWith('Pointer<')) {
-    final wrappedType = stripPointer(name);
-    return 'Pointer<${safeTypename(wrappedType)}>';
-  }
-
-  if (name.startsWith('_')) {
-    return name.substring(1);
-  } else {
-    return name;
-  }
-}
 
 bool isExcludedGetProperty(Method method) => falseProperties
     .where((p) =>
