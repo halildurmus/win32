@@ -15,8 +15,6 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/winrt_interface.dart';
 
-// import '../projection/typeprinter.dart';
-
 final typesToGenerate = [
   'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IAsyncAction',
@@ -28,7 +26,6 @@ final typesToGenerate = [
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Storage.IUserDataPathsStatics',
   'Windows.Gaming.Input.IGamepadStatics',
-  // 'Windows.Gaming.Input.IGamepadStatics2'
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
 ];

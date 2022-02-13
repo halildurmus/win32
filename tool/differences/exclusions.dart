@@ -1,5 +1,11 @@
 import 'version.dart';
 
+const v2ExcludedStructs = <String>{
+  'Windows.Win32.System.Com.VARIANT',
+  'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
+  'Windows.Win32.System.IO.OVERLAPPED',
+};
+
 const v3ExcludedStructs = <String>{
   'Windows.Win32.System.Com.VARIANT',
   'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
@@ -33,6 +39,9 @@ const v3ExcludedStructs = <String>{
   'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
   'Windows.Win32.Devices.Fax.IStiDeviceW',
 };
+
+const excludedStructs =
+    win32Version == 2 ? v2ExcludedStructs : v3ExcludedStructs;
 
 const v3ExcludedComInterfaces = <String>{
   // TODO: We may be able to remove this from the list.

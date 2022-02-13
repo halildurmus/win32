@@ -10,7 +10,6 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/function.dart';
 import '../projection/utils.dart';
-import 'exclusions.dart';
 
 const ffiFileHeader = '''
 // Maps FFI prototypes onto the corresponding Win32 API function calls
@@ -98,8 +97,6 @@ void generateFfiFile(File file, TypeDef typedef) {
     final functions = typedef.methods
         .where((method) => method.module.name == library)
         .where((method) => !method.name.endsWith('A'))
-        .where((method) =>
-            !excludedFunctions.contains(stripAnsiUnicodeSuffix(method.name)))
         .toList()
       ..sort((a, b) => a.name.compareTo(b.name));
 
@@ -130,10 +127,8 @@ void generateFfiFile(File file, TypeDef typedef) {
         "import '${relativePathToSrcDirectory(file)}combase.dart';\n");
 
   for (final import in imports) {
-    if (!excludedImports.contains(import)) {
-      writer.writeStringSync(
-          "import '${relativePathToSrcDirectory(file)}$import';\n");
-    }
+    writer.writeStringSync(
+        "import '${relativePathToSrcDirectory(file)}$import';\n");
   }
   writer
     ..writeStringSync('\n')
