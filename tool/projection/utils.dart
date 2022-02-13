@@ -19,28 +19,47 @@ const falseAnsiEndings = <String>[
   'PSP_FILE_CALLBACK_A',
 ];
 bool typePretendsToBeAnsi(String typeName) {
-  final falseAnsiEndings = ['DATA', 'SCHEMA', 'AREA', 'M128A', 'CIECHROMA'];
   for (final word in falseAnsiEndings) {
     if (typeName.endsWith(word)) {
       return true;
     }
   }
+
+  // There are a number of types in this namespace that end with 'A' but are not
+  // ANSI, so we treat this as a one-off exception.
+  if (typeName.startsWith('Windows.Win32.System.Wmi.MI_')) {
+    return true;
+  }
+
   return false;
 }
 
-bool typedefIsAnsi(TypeDef typedef) =>
-    typedef.name.endsWith('A') && !typePretendsToBeAnsi(typedef.name);
+/// Returns true if a [TypeDef] struct is ANSI.
+///
+/// This is used to avoid projecting ANSI types in favor of Unicode ones.
+bool typedefIsAnsi(TypeDef typeDef) =>
+    typeDef.name.endsWith('A') && !typePretendsToBeAnsi(typeDef.name);
 
-/// Strip the Unicode / ANSI suffix from the name. For example,`MessageBoxW`
+bool typedefIsNotAnsi(TypeDef typeDef) => !typedefIsAnsi(typeDef);
+
+bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
+    comInterface.name.endsWith('IEnumSTATDATA') ||
+    !comInterface.name.endsWith('A');
+
+/// Strip the Unicode / ANSI suffix from the name. For example, `MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
   if (typeName.startsWith('Pointer<')) {
     final wrappedType = stripPointer(typeName);
     return 'Pointer<${stripAnsiUnicodeSuffix(wrappedType)}>';
   }
-  if (typePretendsToBeAnsi(typeName)) {
+
+  // Frustratingly, Windows.Win32.System.Wmi.MI_* types are the exception where
+  // 'A' suffix does not seem to denote ASCII.
+  if (typePretendsToBeAnsi(typeName) || typeName.startsWith('MI_')) {
     return typeName;
   }
+
   if (typeName.endsWith('W') || typeName.endsWith('A')) {
     return typeName.substring(0, typeName.length - 1);
   }
@@ -93,6 +112,22 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
 
   outputText.write(textLine);
   return outputText.toString().trimRight();
+}
+
+/// Take a fully-qualified interface name (e.g.
+/// `Windows.Win32.UI.Shell.IShellLinkW`) and return the corresponding class
+/// name (e.g. `Windows.Win32.UI.Shell.ShellLink`).
+String classNameForInterfaceName(String interfaceName) {
+  final interfaceNameAsList = interfaceName.split('.');
+
+  // Strip off the 'I' from the last component
+  final fullyQualifiedClassName =
+      (interfaceNameAsList.sublist(0, interfaceNameAsList.length - 1)
+            ..add(interfaceNameAsList.last.substring(1)))
+          .join('.');
+
+  // If class has a 'W' suffix, erase it.
+  return stripAnsiUnicodeSuffix(fullyQualifiedClassName);
 }
 
 extension CamelCaseConversion on String {
