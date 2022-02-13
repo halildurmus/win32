@@ -46,7 +46,13 @@ const Map<String, TypeTuple> specialTypes = {
 
 class TypeProjection {
   final TypeIdentifier typeIdentifier;
-  late final projection = projectType();
+  TypeTuple? _projection;
+
+  TypeTuple get projection {
+    _projection ??= projectType();
+
+    return _projection!;
+  }
 
   TypeProjection(this.typeIdentifier);
 
@@ -66,6 +72,7 @@ class TypeProjection {
 
   bool get isWin32SpecialType =>
       specialTypes.keys.contains(typeIdentifier.name);
+
   bool get isString => typeIdentifier.baseType == BaseType.String;
 
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
@@ -116,11 +123,14 @@ class TypeProjection {
     return TypeTuple(typeClass, typeClass);
   }
 
+  /// Takes a type such as `PointerTypeModifier` -> `BaseType.Uint32` and
+  /// converts it to `Pointer<Uint32>.
   TypeTuple unwrapPointerType() {
     if (typeIdentifier.typeArg == null) {
       throw Exception('Pointer type missing for $typeIdentifier.');
     }
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
+
     // Strip leading underscores (unless the type is nested, in which
     // case leave one behind).
     final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
@@ -148,10 +158,15 @@ class TypeProjection {
     }
 
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
-    final projection = typeArg.projection;
 
-    final nativeType = 'Array<${projection.nativeType}>';
-    final dartType = 'Array<${projection.nativeType}>';
+    // Arrays of nested types have a private _ prefix. This is not a very
+    // expensive operation.
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+        ? typeArg.nativeType
+        : stripLeadingUnderscores(typeArg.nativeType);
+
+    final nativeType = 'Array<$typeArgNativeType>';
+    final dartType = 'Array<$typeArgNativeType>';
     final upperBound = typeIdentifier.arrayDimensions?.first;
 
     return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');

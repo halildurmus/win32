@@ -12,9 +12,9 @@ final scope = MetadataStore.getWin32Scope();
 
 void printStruct() {
   final struct = scope
-      .findTypeDef('Windows.Win32.NetworkManagement.WiFi.WLAN_RAW_DATA_LIST');
+      .findTypeDef('Windows.Win32.NetworkManagement.Dhcp.DHCP_ALL_OPTIONS');
   if (struct != null) {
-    final structProjection = StructProjection(struct, 'WLAN_RAW_DATA_LIST');
+    final structProjection = StructProjection(struct, 'DHCP_ALL_OPTIONS');
     print(structProjection);
   }
 }
@@ -53,11 +53,11 @@ void printComMethod() {
 
 void printComGetProperty() {
   final interface = scope.findTypeDef(
-      'Windows.Win32.Networking.ActiveDirectory.IADsPropertyEntry');
-  final method = interface?.findMethod('get_Name');
+      'Windows.Win32.Security.Cryptography.Certificates.ICEnroll4');
+  final method = interface?.findMethod('get_IncludeSubjectKeyID');
 
   if (method != null) {
-    final methodProjection = GetPropertyProjection(method, 10);
+    final methodProjection = GetPropertyProjection(method, 122);
     print(methodProjection);
   }
 }
@@ -74,7 +74,8 @@ void printComSetProperty() {
 }
 
 void printComInterface() {
-  final interface = scope.findTypeDef('Windows.Win32.System.Com.IUnknown');
+  final interface =
+      scope.findTypeDef('Windows.Win32.Media.DirectShow.ITuningSpace');
 
   if (interface != null) {
     final interfaceProjection = InterfaceProjection(interface);
