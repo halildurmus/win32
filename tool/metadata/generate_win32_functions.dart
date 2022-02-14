@@ -8,36 +8,16 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../common/headers.dart';
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
 import '../projection/function.dart';
+import '../projection/utils.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
-import 'win32_functions.dart';
 import 'winmd_caveats.dart';
 
 final methods = <Method>[];
-
-String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  final words = inputText.split(' ');
-  final textLine = StringBuffer('/// ');
-  final outputText = StringBuffer();
-
-  for (final word in words) {
-    if ((textLine.length + word.length) >= wrapLength) {
-      textLine.write('\n');
-      outputText.write(textLine);
-      textLine
-        ..clear()
-        ..write('/// $word ');
-    } else {
-      textLine.write('$word ');
-    }
-  }
-
-  outputText.write(textLine);
-  return outputText.toString().trimRight();
-}
 
 bool methodMatches(String methodName, List<String> rawPrototype) {
   final prototype = rawPrototype.join('\n');
@@ -64,7 +44,7 @@ String generateDocComment(Win32Function func) {
   return comment.toString();
 }
 
-void generateFfiFiles(Win32API win32) {
+void generateFunctions(Map<String, Win32Function> functions) {
   for (final library in winmdGenerated) {
     final writer =
         File('lib/src/$library.dart').openSync(mode: FileMode.writeOnly);
@@ -73,31 +53,13 @@ void generateFfiFiles(Win32API win32) {
     final libraryDartName = library.replaceAll('-', '_');
 
     writer.writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Maps FFI prototypes onto the corresponding Win32 API function calls
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import
-
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-
-import 'callbacks.dart';
-import 'combase.dart';
-import 'guid.dart';
-import 'structs.dart';
-import 'structs.g.dart';
+$functionsFileHeader
 
 final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
 ''');
 
     // Subset of functions that belong to the library we're projecting.
-    final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
+    final filteredFunctionList = Map<String, Win32Function>.of(functions)
       ..removeWhere((key, value) => value.dllLibrary != library);
 
     for (final function in filteredFunctionList.keys) {
@@ -142,7 +104,7 @@ void main(List<String> args) {
       .length;
 
   if (optionAPIs) {
-    generateFfiFiles(win32);
+    generateFunctions(win32.functions);
     print('$genCount typedefs generated from Windows metadata.');
   }
 

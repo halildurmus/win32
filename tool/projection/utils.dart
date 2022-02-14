@@ -202,3 +202,18 @@ String stripLeadingUnderscores(String name) {
   }
   return name;
 }
+
+/// Qualify the DLL with an extension.
+///
+/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
+/// couple of exceptions. We hardcode them here, since there are so few.
+String libraryFromDllName(String dllName) {
+  switch (dllName) {
+    case 'bthprops':
+      return 'bthprops.cpl';
+    case 'winspool':
+      return 'winspool.drv';
+    default:
+      return '$dllName.dll';
+  }
+}
