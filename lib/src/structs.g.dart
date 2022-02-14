@@ -6,49 +6,18 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// -----------------------------------------------------------------------------
-// Linter exceptions
-// -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types
-// ignore_for_file: camel_case_extensions
-//
-// Why? The linter defaults to throw a warning for types not named as camel
-// case. We deliberately break this convention to match the Win32 underlying
-// types.
-//
-//
-// ignore_for_file: unused_field
-//
-// Why? The linter complains about unused fields (e.g. a class that contains
-// underscore-prefixed members that are not used in the library. In this class,
-// we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
-// least as large as the underlying native struct. See, for example,
-// ENUMLOGFONTEX.
-//
-//
-// ignore_for_file: unnecessary_getters_setters
-//
-// Why? In structs like VARIANT, we're using getters and setters to project the
-// same underlying data property to various union types. The trivial overhead is
-// outweighed by readability.
-//
-//
-// ignore_for_file: unused_import
-//
-// Why? We speculatively include some imports that we might generate a
-// requirement for.
-// -----------------------------------------------------------------------------
+// ignore_for_file: camel_case_extensions, camel_case_types
+// ignore_for_file: directives_ordering, unnecessary_getters_setters
+// ignore_for_file: unused_field, unused_import
 
 // Dart 2.17 will introduce a new `Char` FFI type, which conflicts with
 // CHAR_INFO.Char. Hiding this in advance to prevent later conflict, but we need
 // to disable the lint since it's not in 2.16.
 // ignore: undefined_hidden_name
 import 'dart:ffi' hide Char;
-
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
@@ -131,33 +100,6 @@ class ADDJOB_INFO_1 extends Struct {
 
   @Uint32()
   external int JobId;
-}
-
-/// The addrinfoW structure is used by the GetAddrInfoW function to hold
-/// host address information.
-///
-/// {@category Struct}
-class addrinfo extends Struct {
-  @Int32()
-  external int ai_flags;
-
-  @Int32()
-  external int ai_family;
-
-  @Int32()
-  external int ai_socktype;
-
-  @Int32()
-  external int ai_protocol;
-
-  @IntPtr()
-  external int ai_addrlen;
-
-  external Pointer<Utf16> ai_canonname;
-
-  external Pointer<SOCKADDR> ai_addr;
-
-  external Pointer<addrinfo> ai_next;
 }
 
 /// Represents package settings used to create a package.
@@ -578,17 +520,6 @@ class BY_HANDLE_FILE_INFORMATION extends Struct {
 }
 
 /// Contains information passed to a WH_CBT hook procedure, CBTProc, before
-/// a window is created.
-///
-/// {@category Struct}
-class CBT_CREATEWNDW extends Struct {
-  external Pointer<CREATESTRUCT> lpcs;
-
-  @IntPtr()
-  external int hwndInsertAfter;
-}
-
-/// Contains information passed to a WH_CBT hook procedure, CBTProc, before
 /// a window is activated.
 ///
 /// {@category Struct}
@@ -598,6 +529,17 @@ class CBTACTIVATESTRUCT extends Struct {
 
   @IntPtr()
   external int hWndActive;
+}
+
+/// Contains information passed to a WH_CBT hook procedure, CBTProc, before
+/// a window is created.
+///
+/// {@category Struct}
+class CBT_CREATEWND extends Struct {
+  external Pointer<CREATESTRUCT> lpcs;
+
+  @IntPtr()
+  external int hwndInsertAfter;
 }
 
 /// Contains extended result information obtained by calling the
@@ -1133,9 +1075,6 @@ class CWPRETSTRUCT extends Struct {
 ///
 /// {@category Struct}
 class CWPSTRUCT extends Struct {
-  @IntPtr()
-  external int lResult;
-
   @IntPtr()
   external int lParam;
 
@@ -1728,20 +1667,6 @@ class EXCEPINFO extends Struct {
   external int scode;
 }
 
-/// The fd_set structure is used by various Windows Sockets functions and
-/// service providers, such as the select function, to place sockets into a
-/// set for various purposes, such as testing a given socket for
-/// readability using the readfds parameter of the select function.
-///
-/// {@category Struct}
-class fd_set extends Struct {
-  @Uint32()
-  external int fd_count;
-
-  @Array(64)
-  external Array<IntPtr> fd_array;
-}
-
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -1939,29 +1864,6 @@ class HARDWAREINPUT extends Struct {
 
   @Uint16()
   external int wParamH;
-}
-
-/// The hostent structure is used by functions to store information about a
-/// given host, such as host name, IPv4 address, and so forth. An
-/// application should never attempt to modify this structure or to free
-/// any of its components. Furthermore, only one copy of the hostent
-/// structure is allocated per thread, and an application should therefore
-/// copy any information that it needs before issuing any other Windows
-/// Sockets API calls.
-///
-/// {@category Struct}
-class hostent extends Struct {
-  external Pointer<Utf8> h_name;
-
-  external Pointer<Pointer<Int8>> h_aliases;
-
-  @Int16()
-  external int h_addrtype;
-
-  @Int16()
-  external int h_length;
-
-  external Pointer<Pointer<Int8>> h_addr_list;
 }
 
 /// Contains information about an icon or a cursor.
@@ -2968,19 +2870,10 @@ class MOUSEHOOKSTRUCT extends Struct {
 ///
 /// {@category Struct}
 class MOUSEHOOKSTRUCTEX extends Struct {
-  external POINT pt;
+  external MOUSEHOOKSTRUCT AnonymousBase_winuser_L1166_C46;
 
   @Uint32()
   external int mouseData;
-
-  @Uint32()
-  external int flags;
-
-  @Uint32()
-  external int time;
-
-  @IntPtr()
-  external int dwExtraInfo;
 }
 
 /// Contains information about a simulated mouse event.
@@ -3354,46 +3247,6 @@ extension NOTIFYICONDATAW_Extension on NOTIFYICONDATA {
   set uVersion(int value) => this.Anonymous.uVersion = value;
 }
 
-/// The OPENCARD_SEARCH_CRITERIA structure is used by the
-/// SCardUIDlgSelectCard function in order to recognize cards that meet the
-/// requirements set forth by the caller. You can, however, call
-/// SCardUIDlgSelectCard without using this structure.
-///
-/// {@category Struct}
-class OPENCARD_SEARCH_CRITERIA extends Struct {
-  @Uint32()
-  external int dwStructSize;
-
-  external Pointer<Utf16> lpstrGroupNames;
-
-  @Uint32()
-  external int nMaxGroupNames;
-
-  external Pointer<GUID> rgguidInterfaces;
-
-  @Uint32()
-  external int cguidInterfaces;
-
-  external Pointer<Utf16> lpstrCardNames;
-
-  @Uint32()
-  external int nMaxCardNames;
-
-  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
-
-  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
-
-  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
-
-  external Pointer pvUserData;
-
-  @Uint32()
-  external int dwShareMode;
-
-  @Uint32()
-  external int dwPreferredProtocols;
-}
-
 /// The OPENCARDNAME structure contains the information that the
 /// GetOpenCardName function uses to initialize a smart card Select Card
 /// dialog box. Calling SCardUIDlgSelectCard with OPENCARDNAME_EX is
@@ -3516,6 +3369,46 @@ class OPENCARDNAME_EX extends Struct {
   external int hCardHandle;
 }
 
+/// The OPENCARD_SEARCH_CRITERIA structure is used by the
+/// SCardUIDlgSelectCard function in order to recognize cards that meet the
+/// requirements set forth by the caller. You can, however, call
+/// SCardUIDlgSelectCard without using this structure.
+///
+/// {@category Struct}
+class OPENCARD_SEARCH_CRITERIA extends Struct {
+  @Uint32()
+  external int dwStructSize;
+
+  external Pointer<Utf16> lpstrGroupNames;
+
+  @Uint32()
+  external int nMaxGroupNames;
+
+  external Pointer<GUID> rgguidInterfaces;
+
+  @Uint32()
+  external int cguidInterfaces;
+
+  external Pointer<Utf16> lpstrCardNames;
+
+  @Uint32()
+  external int nMaxCardNames;
+
+  external Pointer<NativeFunction<OpenCardCheckProc>> lpfnCheck;
+
+  external Pointer<NativeFunction<OpenCardConnProc>> lpfnConnect;
+
+  external Pointer<NativeFunction<OpenCardDisconnProc>> lpfnDisconnect;
+
+  external Pointer pvUserData;
+
+  @Uint32()
+  external int dwShareMode;
+
+  @Uint32()
+  external int dwPreferredProtocols;
+}
+
 /// Contains information that the GetOpenFileName and GetSaveFileName
 /// functions use to initialize an Open or Save As dialog box. After the
 /// user closes the dialog box, the system returns information about the
@@ -3585,53 +3478,12 @@ class OPENFILENAME extends Struct {
 
 /// Contains operating system version information. The information includes
 /// major and minor version numbers, a build number, a platform identifier,
-/// and descriptive text about the operating system. This structure is used
-/// with the GetVersionEx function.
-///
-/// {@category Struct}
-class OSVERSIONINFO extends Struct {
-  @Uint32()
-  external int dwOSVersionInfoSize;
-
-  @Uint32()
-  external int dwMajorVersion;
-
-  @Uint32()
-  external int dwMinorVersion;
-
-  @Uint32()
-  external int dwBuildNumber;
-
-  @Uint32()
-  external int dwPlatformId;
-
-  @Array(128)
-  external Array<Uint16> _szCSDVersion;
-
-  String get szCSDVersion {
-    final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
-      charCodes.add(_szCSDVersion[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set szCSDVersion(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
-      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-}
-
-/// Contains operating system version information. The information includes
-/// major and minor version numbers, a build number, a platform identifier,
 /// and information about product suites and the latest Service Pack
 /// installed on the system. This structure is used with the GetVersionEx
 /// and VerifyVersionInfo functions.
 ///
 /// {@category Struct}
-class OSVERSIONINFOEXW extends Struct {
+class OSVERSIONINFOEX extends Struct {
   @Uint32()
   external int dwOSVersionInfoSize;
 
@@ -3679,6 +3531,47 @@ class OSVERSIONINFOEXW extends Struct {
 
   @Uint8()
   external int wReserved;
+}
+
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier,
+/// and descriptive text about the operating system. This structure is used
+/// with the GetVersionEx function.
+///
+/// {@category Struct}
+class OSVERSIONINFO extends Struct {
+  @Uint32()
+  external int dwOSVersionInfoSize;
+
+  @Uint32()
+  external int dwMajorVersion;
+
+  @Uint32()
+  external int dwMinorVersion;
+
+  @Uint32()
+  external int dwBuildNumber;
+
+  @Uint32()
+  external int dwPlatformId;
+
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
+
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szCSDVersion(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains the information returned by a call to the
@@ -3874,18 +3767,6 @@ class POWERBROADCAST_SETTING extends Struct {
   external Array<Uint8> Data;
 }
 
-/// Contains the execution context of the printer driver that calls
-/// GetPrintExecutionData.
-///
-/// {@category Struct}
-class PRINT_EXECUTION_DATA extends Struct {
-  @Int32()
-  external int context;
-
-  @Uint32()
-  external int clientAppPID;
-}
-
 /// The PRINTER_DEFAULTS structure specifies the default data type,
 /// environment, initialization data, and access rights for a printer.
 ///
@@ -4048,6 +3929,18 @@ class PRINTER_OPTIONS extends Struct {
   external int dwFlags;
 }
 
+/// Contains the execution context of the printer driver that calls
+/// GetPrintExecutionData.
+///
+/// {@category Struct}
+class PRINT_EXECUTION_DATA extends Struct {
+  @Int32()
+  external int context;
+
+  @Uint32()
+  external int clientAppPID;
+}
+
 /// Contains information about a newly created process and its primary
 /// thread. It is used with the CreateProcess, CreateProcessAsUser,
 /// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
@@ -4104,23 +3997,6 @@ extension PROPSPEC_Extension on PROPSPEC {
 
   Pointer<Utf16> get lpwstr => this.Anonymous.lpwstr;
   set lpwstr(Pointer<Utf16> value) => this.Anonymous.lpwstr = value;
-}
-
-/// The protoent structure contains the name and protocol numbers that
-/// correspond to a given protocol name. Applications must never attempt to
-/// modify this structure or to free any of its components. Furthermore,
-/// only one copy of this structure is allocated per thread, and therefore,
-/// the application should copy any information it needs before issuing any
-/// other Windows Sockets function calls.
-///
-/// {@category Struct}
-class protoent extends Struct {
-  external Pointer<Utf8> p_name;
-
-  external Pointer<Pointer<Int8>> p_aliases;
-
-  @Int16()
-  external int p_proto;
 }
 
 /// Describes the format of the raw input from a Human Interface Device
@@ -4453,46 +4329,6 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Dacl;
 }
 
-/// The servent structure is used to store or return the name and service
-/// number for a given service name.
-///
-/// {@category Struct}
-class servent extends Struct {
-  external Pointer<Utf8> s_name;
-
-  external Pointer<Pointer<Int8>> s_aliases;
-
-  external Pointer<Utf8> s_proto;
-
-  @Int16()
-  external int s_port;
-}
-
-/// Defines Shell item resource.
-///
-/// {@category Struct}
-class SHELL_ITEM_RESOURCE extends Struct {
-  external GUID guidType;
-
-  @Array(260)
-  external Array<Uint16> _szName;
-
-  String get szName {
-    final charCodes = <int>[];
-    for (var i = 0; i < 260; i++) {
-      charCodes.add(_szName[i]);
-    }
-    return String.fromCharCodes(charCodes);
-  }
-
-  set szName(String value) {
-    final stringToStore = value.padRight(260, '\x00');
-    for (var i = 0; i < 260; i++) {
-      _szName[i] = stringToStore.codeUnitAt(i);
-    }
-  }
-}
-
 /// Contains information used by ShellExecuteEx.
 ///
 /// {@category Struct}
@@ -4551,6 +4387,31 @@ extension SHELLEXECUTEINFOW_Extension on SHELLEXECUTEINFO {
 
   int get hMonitor => this.Anonymous.hMonitor;
   set hMonitor(int value) => this.Anonymous.hMonitor = value;
+}
+
+/// Defines Shell item resource.
+///
+/// {@category Struct}
+class SHELL_ITEM_RESOURCE extends Struct {
+  external GUID guidType;
+
+  @Array(260)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Defines an item identifier.
@@ -4654,6 +4515,17 @@ class SP_DEVINFO_DATA extends Struct {
   external int Reserved;
 }
 
+/// Specifies the window station, desktop, standard handles, and attributes
+/// for a new process. It is used with the CreateProcess and
+/// CreateProcessAsUser functions.
+///
+/// {@category Struct}
+class STARTUPINFOEX extends Struct {
+  external STARTUPINFO StartupInfo;
+
+  external Pointer lpAttributeList;
+}
+
 /// Specifies the window station, desktop, standard handles, and appearance
 /// of the main window for a process at creation time.
 ///
@@ -4708,17 +4580,6 @@ class STARTUPINFO extends Struct {
 
   @IntPtr()
   external int hStdError;
-}
-
-/// Specifies the window station, desktop, standard handles, and attributes
-/// for a new process. It is used with the CreateProcess and
-/// CreateProcessAsUser functions.
-///
-/// {@category Struct}
-class STARTUPINFOEX extends Struct {
-  external STARTUPINFO StartupInfo;
-
-  external Pointer lpAttributeList;
 }
 
 /// The STATPROPSETSTG structure contains information about a property set.
@@ -4900,6 +4761,38 @@ class SYMBOL_INFO extends Struct {
   }
 }
 
+/// Specifies a date and time, using individual members for the month, day,
+/// year, weekday, hour, minute, second, and millisecond. The time is
+/// either in coordinated universal time (UTC) or local time, depending on
+/// the function that is being called.
+///
+/// {@category Struct}
+class SYSTEMTIME extends Struct {
+  @Uint16()
+  external int wYear;
+
+  @Uint16()
+  external int wMonth;
+
+  @Uint16()
+  external int wDayOfWeek;
+
+  @Uint16()
+  external int wDay;
+
+  @Uint16()
+  external int wHour;
+
+  @Uint16()
+  external int wMinute;
+
+  @Uint16()
+  external int wSecond;
+
+  @Uint16()
+  external int wMilliseconds;
+}
+
 /// Contains information about the current state of the system battery.
 ///
 /// {@category Struct}
@@ -4962,51 +4855,6 @@ class SYSTEM_POWER_STATUS extends Struct {
 
   @Uint32()
   external int BatteryFullLifeTime;
-}
-
-/// Specifies a date and time, using individual members for the month, day,
-/// year, weekday, hour, minute, second, and millisecond. The time is
-/// either in coordinated universal time (UTC) or local time, depending on
-/// the function that is being called.
-///
-/// {@category Struct}
-class SYSTEMTIME extends Struct {
-  @Uint16()
-  external int wYear;
-
-  @Uint16()
-  external int wMonth;
-
-  @Uint16()
-  external int wDayOfWeek;
-
-  @Uint16()
-  external int wDay;
-
-  @Uint16()
-  external int wHour;
-
-  @Uint16()
-  external int wMinute;
-
-  @Uint16()
-  external int wSecond;
-
-  @Uint16()
-  external int wMilliseconds;
-}
-
-/// The TASKDIALOG_BUTTON structure contains information used to display a
-/// button in a task dialog. The TASKDIALOGCONFIG structure uses this
-/// structure.
-///
-/// {@category Struct}
-@Packed(1)
-class TASKDIALOG_BUTTON extends Struct {
-  @Int32()
-  external int nButtonID;
-
-  external Pointer<Utf16> pszButtonText;
 }
 
 /// The TASKDIALOGCONFIG structure contains information used to display a
@@ -5110,6 +4958,19 @@ extension TASKDIALOGCONFIG_Extension_1 on TASKDIALOGCONFIG {
       this.Anonymous2.pszFooterIcon = value;
 }
 
+/// The TASKDIALOG_BUTTON structure contains information used to display a
+/// button in a task dialog. The TASKDIALOGCONFIG structure uses this
+/// structure.
+///
+/// {@category Struct}
+@Packed(1)
+class TASKDIALOG_BUTTON extends Struct {
+  @Int32()
+  external int nButtonID;
+
+  external Pointer<Utf16> pszButtonText;
+}
+
 /// The TEXTMETRIC structure contains basic information about a physical
 /// font. All sizes are specified in logical units; that is, they depend on
 /// the current mapping mode of the display context.
@@ -5175,19 +5036,6 @@ class TEXTMETRIC extends Struct {
 
   @Uint8()
   external int tmCharSet;
-}
-
-/// The timeval structure is used to specify a time interval. It is
-/// associated with the Berkeley Software Distribution (BSD) Time.h header
-/// file.
-///
-/// {@category Struct}
-class timeval extends Struct {
-  @Int32()
-  external int tv_sec;
-
-  @Int32()
-  external int tv_usec;
 }
 
 /// Contains title bar information.
@@ -6550,39 +6398,6 @@ class WLAN_STATISTICS extends Struct {
   external Array<WLAN_PHY_FRAME_STATISTICS> PhyCounters;
 }
 
-/// Contains the window class attributes that are registered by the
-/// RegisterClass function.
-///
-/// {@category Struct}
-class WNDCLASS extends Struct {
-  @Uint32()
-  external int style;
-
-  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
-
-  @Int32()
-  external int cbClsExtra;
-
-  @Int32()
-  external int cbWndExtra;
-
-  @IntPtr()
-  external int hInstance;
-
-  @IntPtr()
-  external int hIcon;
-
-  @IntPtr()
-  external int hCursor;
-
-  @IntPtr()
-  external int hbrBackground;
-
-  external Pointer<Utf16> lpszMenuName;
-
-  external Pointer<Utf16> lpszClassName;
-}
-
 /// Contains window class information. It is used with the RegisterClassEx
 /// and GetClassInfoEx functions. The WNDCLASSEX structure is similar to
 /// the WNDCLASS structure. There are two differences. WNDCLASSEX includes
@@ -6624,6 +6439,39 @@ class WNDCLASSEX extends Struct {
 
   @IntPtr()
   external int hIconSm;
+}
+
+/// Contains the window class attributes that are registered by the
+/// RegisterClass function.
+///
+/// {@category Struct}
+class WNDCLASS extends Struct {
+  @Uint32()
+  external int style;
+
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
+
+  @Int32()
+  external int cbClsExtra;
+
+  @Int32()
+  external int cbWndExtra;
+
+  @IntPtr()
+  external int hInstance;
+
+  @IntPtr()
+  external int hIcon;
+
+  @IntPtr()
+  external int hCursor;
+
+  @IntPtr()
+  external int hbrBackground;
+
+  external Pointer<Utf16> lpszMenuName;
+
+  external Pointer<Utf16> lpszClassName;
 }
 
 /// Defines options that are used to set window visual style attributes.
@@ -6757,4 +6605,113 @@ class XINPUT_VIBRATION extends Struct {
 
   @Uint16()
   external int wRightMotorSpeed;
+}
+
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class addrinfo extends Struct {
+  @Int32()
+  external int ai_flags;
+
+  @Int32()
+  external int ai_family;
+
+  @Int32()
+  external int ai_socktype;
+
+  @Int32()
+  external int ai_protocol;
+
+  @IntPtr()
+  external int ai_addrlen;
+
+  external Pointer<Utf16> ai_canonname;
+
+  external Pointer<SOCKADDR> ai_addr;
+
+  external Pointer<addrinfo> ai_next;
+}
+
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for
+/// readability using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class fd_set extends Struct {
+  @Uint32()
+  external int fd_count;
+
+  @Array(64)
+  external Array<IntPtr> fd_array;
+}
+
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free
+/// any of its components. Furthermore, only one copy of the hostent
+/// structure is allocated per thread, and an application should therefore
+/// copy any information that it needs before issuing any other Windows
+/// Sockets API calls.
+///
+/// {@category Struct}
+class hostent extends Struct {
+  external Pointer<Utf8> h_name;
+
+  external Pointer<Pointer<Int8>> h_aliases;
+
+  @Int16()
+  external int h_addrtype;
+
+  @Int16()
+  external int h_length;
+
+  external Pointer<Pointer<Int8>> h_addr_list;
+}
+
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class protoent extends Struct {
+  external Pointer<Utf8> p_name;
+
+  external Pointer<Pointer<Int8>> p_aliases;
+
+  @Int16()
+  external int p_proto;
+}
+
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class servent extends Struct {
+  external Pointer<Utf8> s_name;
+
+  external Pointer<Pointer<Int8>> s_aliases;
+
+  external Pointer<Utf8> s_proto;
+
+  @Int16()
+  external int s_port;
+}
+
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class timeval extends Struct {
+  @Int32()
+  external int tv_sec;
+
+  @Int32()
+  external int tv_usec;
 }

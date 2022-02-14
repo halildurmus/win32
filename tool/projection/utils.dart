@@ -96,6 +96,10 @@ String stripPointer(String typeName) =>
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
+  if (inputText.isEmpty) {
+    return '';
+  }
+
   final words = inputText.split(' ');
   final textLine = StringBuffer('/// ');
   final outputText = StringBuffer();

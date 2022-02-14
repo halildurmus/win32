@@ -152,7 +152,7 @@ void main(List<String> args) {
   }
 
   if (optionStructs) {
-    final structsGenerated = generateStructs(win32);
+    final structsGenerated = generateStructs(win32.structs.values);
     print('$structsGenerated structs generated from Windows metadata.');
   }
 

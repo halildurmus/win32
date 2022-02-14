@@ -96,8 +96,4 @@ void main(List<String> args) {
 
   print('$included symbols projected.');
   print('$missing symbols missing.');
-  // projectedSymbols.forEach(print);
-
-  // symbols.forEach((name, address) => print('[${address.toHexString(32)}] '
-  //     '$name'));
 }

@@ -91,7 +91,7 @@
         "namespace": "Windows.Win32.Storage.FileSystem.BY_HANDLE_FILE_INFORMATION",
         "comment": "Contains information that the GetFileInformationByHandle function retrieves."
     },
-    "CBT_CREATEWNDW": {
+    "CBT_CREATEWND": {
         "namespace": "Windows.Win32.UI.WindowsAndMessaging.CBT_CREATEWNDW",
         "comment": "Contains information passed to a WH_CBT hook procedure, CBTProc, before a window is created."
     },
@@ -180,7 +180,7 @@
         "comment": "Defines the message parameters passed to a WH_CALLWNDPROCRET hook procedure, CallWndRetProc."
     },
     "CWPSTRUCT": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT",
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.CWPSTRUCT",
         "comment": "Defines the message parameters passed to a WH_CALLWNDPROC hook procedure, CallWndProc."
     },
     "DCB": {
@@ -496,7 +496,7 @@
         "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc."
     },
     "MOUSEHOOKSTRUCTEX": {
-        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT",
+        "namespace": "Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX",
         "comment": "Contains information about a mouse event passed to a WH_MOUSE hook procedure, MouseProc. This is an extension of the MOUSEHOOKSTRUCT structure that includes information about wheel movement or the use of the X button."
     },
     "MOUSEINPUT": {
@@ -555,7 +555,7 @@
         "namespace": "Windows.Win32.System.SystemInformation.OSVERSIONINFOW",
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and descriptive text about the operating system. This structure is used with the GetVersionEx function."
     },
-    "OSVERSIONINFOEXW": {
+    "OSVERSIONINFOEX": {
         "namespace": "Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW",
         "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions."
     },

@@ -7,64 +7,16 @@
 
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
+import '../common/headers.dart';
+import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
 import '../projection/struct.dart';
 import '../projection/utils.dart';
 
-const structFileHeader = '''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Dart representations of common structs used in the Win32 API.
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// -----------------------------------------------------------------------------
-// Linter exceptions
-// -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types
-// ignore_for_file: camel_case_extensions
-//
-// Why? The linter defaults to throw a warning for types not named as camel
-// case. We deliberately break this convention to match the Win32 underlying
-// types.
-//
-//
-// ignore_for_file: unused_field
-//
-// Why? The linter complains about unused fields (e.g. a class that contains
-// underscore-prefixed members that are not used in the library. In this class,
-// we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
-// least as large as the underlying native struct. See, for example,
-// ENUMLOGFONTEX.
-//
-//
-// ignore_for_file: unnecessary_getters_setters
-//
-// Why? In structs like VARIANT, we're using getters and setters to project the
-// same underlying data property to various union types. The trivial overhead is
-// outweighed by readability.
-//
-//
-// ignore_for_file: unused_import
-//
-// Why? We speculatively include some imports that we might generate a
-// requirement for.
-// -----------------------------------------------------------------------------
-
-// Dart 2.17 will introduce a new `Char` FFI type, which conflicts with
-// CHAR_INFO.Char. Hiding this in advance to prevent later conflict, but we need
-// to disable the lint since it's not in 2.16. 
-// ignore: undefined_hidden_name
-import 'dart:ffi' hide Char;
-
-import 'dart:typed_data';
-
-import 'package:ffi/ffi.dart';
-
+const structFileImports = '''
 import 'callbacks.dart';
 import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
@@ -74,35 +26,37 @@ import 'oleaut32.dart';
 import 'structs.dart';
 ''';
 
-int generateStructs(Win32API win32) {
+int generateStructs(Iterable<Win32Struct> structs) {
   final scope = MetadataStore.getWin32Scope();
 
-  var structsGenerated = 0;
-  final writer = File('lib/src/structs.g.dart')
-      .openSync(mode: FileMode.writeOnly)
-    ..writeStringSync(structFileHeader);
+  final file = File('lib/src/structs.g.dart');
 
-  for (final struct in win32.structs.keys) {
-    final win32struct = win32.structs[struct]!;
-    final typeDefs = scope.typeDefs
-        .where((typeDef) => typeDef.name == win32struct.namespace)
-        .toList();
-    if (typeDefs.isEmpty) {
-      throw Exception('$struct missing');
-    }
-    if (typeDefs.length > 1) {
-      typeDefs.retainWhere((t) => t.supportedArchitectures.x64);
-    }
-    final typeDef = typeDefs.first;
+  final structNames = structs.map((s) => s.namespace);
 
-    writer
-      ..writeStringSync(wrapCommentText(win32struct.comment))
-      ..writeStringSync('\n///\n');
+  final typeDefs = scope.typeDefs
+      .where((typeDef) => structNames.contains(typeDef.name))
+      .where((typeDef) => typeDef.supportedArchitectures.x64)
+      .toList()
+    ..sort((a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)));
 
-    final projectedStruct = StructProjection(typeDef, struct);
-    writer.writeStringSync(projectedStruct.toString());
-    structsGenerated++;
-  }
+  final structProjections = typeDefs.map((struct) => StructProjection(
+      struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
+      comment: structs
+          .firstWhere((win32Struct) => struct.name == win32Struct.namespace)
+          .comment));
 
-  return structsGenerated;
+  final structsFile =
+      [structFileHeader, structFileImports, ...structProjections].join();
+
+  file.writeAsStringSync(DartFormatter().format(structsFile));
+  return structProjections.length;
+}
+
+void main() {
+  final win32 = Win32API(
+      apiFile: 'tool/manual_gen/win32api.json',
+      structFile: 'tool/manual_gen/win32struct.json');
+
+  final structsToGenerate = win32.structs.values;
+  generateStructs(structsToGenerate);
 }

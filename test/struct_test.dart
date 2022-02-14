@@ -174,11 +174,11 @@ void main() {
   test('Struct BY_HANDLE_FILE_INFORMATION is the right size', () {
     expect(sizeOf<BY_HANDLE_FILE_INFORMATION>(), equals(52));
   });
-  test('Struct CBT_CREATEWNDW is the right size', () {
+  test('Struct CBT_CREATEWND is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<CBT_CREATEWNDW>(), equals(16));
+      expect(sizeOf<CBT_CREATEWND>(), equals(16));
     } else {
-      expect(sizeOf<CBT_CREATEWNDW>(), equals(8));
+      expect(sizeOf<CBT_CREATEWND>(), equals(8));
     }
   });
   test('Struct CBTACTIVATESTRUCT is the right size', () {
@@ -282,9 +282,9 @@ void main() {
   });
   test('Struct CWPSTRUCT is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<CWPSTRUCT>(), equals(40));
+      expect(sizeOf<CWPSTRUCT>(), equals(32));
     } else {
-      expect(sizeOf<CWPSTRUCT>(), equals(20));
+      expect(sizeOf<CWPSTRUCT>(), equals(16));
     }
   });
   test('Struct DCB is the right size', () {
@@ -671,7 +671,7 @@ void main() {
   });
   test('Struct MOUSEHOOKSTRUCTEX is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<MOUSEHOOKSTRUCTEX>(), equals(32));
+      expect(sizeOf<MOUSEHOOKSTRUCTEX>(), equals(40));
     } else {
       expect(sizeOf<MOUSEHOOKSTRUCTEX>(), equals(24));
     }
@@ -754,8 +754,8 @@ void main() {
   test('Struct OSVERSIONINFO is the right size', () {
     expect(sizeOf<OSVERSIONINFO>(), equals(276));
   });
-  test('Struct OSVERSIONINFOEXW is the right size', () {
-    expect(sizeOf<OSVERSIONINFOEXW>(), equals(284));
+  test('Struct OSVERSIONINFOEX is the right size', () {
+    expect(sizeOf<OSVERSIONINFOEX>(), equals(284));
   });
   test('Struct OVERLAPPED_ENTRY is the right size', () {
     if (is64bitOS) {

@@ -13,8 +13,9 @@ import 'utils.dart';
 class StructProjection {
   final TypeDef typeDef;
   final String structName;
+  final String comment;
 
-  StructProjection(this.typeDef, this.structName);
+  StructProjection(this.typeDef, this.structName, {this.comment = ''});
 
   bool _isNestedType(Field field) =>
       field.typeIdentifier.type?.isNested ?? false;
@@ -32,7 +33,11 @@ class StructProjection {
   }
 
   String get classPreamble {
-    const docComment = '/// {@category Struct}';
+    const structCategoryComment = '/// {@category Struct}';
+    final classComment = wrapCommentText(comment);
+    final docComment = classComment.isEmpty
+        ? structCategoryComment
+        : '$classComment\n///\n$structCategoryComment';
 
     if (packingAlignment > 0 &&
         !ignorePackingDirectives.contains(typeDef.name)) {
