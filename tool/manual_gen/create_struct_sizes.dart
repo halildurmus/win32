@@ -16,7 +16,9 @@ const header = '''
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\\struct_sizes.dart as input to the test harness.
 
-// Compile with cl tool\\struct_sizes.cpp /link ws2_32.lib
+// Compile with 
+//    cl /I "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt" \\
+//      tool\\manual_gen\\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <winsock2.h>
