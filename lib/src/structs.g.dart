@@ -4288,9 +4288,9 @@ class SCROLLINFO extends Struct {
 
 /// The SECURITY_ATTRIBUTES structure contains the security descriptor for
 /// an object and specifies whether the handle retrieved by specifying this
-/// structure is inheritable.\n\nThis structure provides security settings
-/// for objects created by various functions, such as CreateFile,
-/// CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx.
+/// structure is inheritable. This structure provides security settings for
+/// objects created by various functions, such as CreateFile, CreatePipe,
+/// CreateProcess, RegCreateKeyEx, or RegSaveKeyEx.
 ///
 /// {@category Struct}
 class SECURITY_ATTRIBUTES extends Struct {

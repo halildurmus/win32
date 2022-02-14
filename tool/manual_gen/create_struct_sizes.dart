@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'win32api.dart';
+import '../projection/utils.dart';
+import 'win32struct.dart';
 
 const header = '''
 /**
@@ -63,13 +64,11 @@ const footer = '''
 ''';
 
 void main() {
-  final win32 = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+  final structsToGenerate = loadStructsFromJson();
 
   // Creates pairs like {LOGFONT: LOGFONTW}
-  final structs =
-      win32.structs.map((k, v) => MapEntry(k, v.namespace.split('.').last));
+  final structs = structsToGenerate.map((k, dynamic _) =>
+      MapEntry(stripAnsiUnicodeSuffix(lastComponent(k)), lastComponent(k)));
 
   final writer = File('tool/manual_gen/struct_sizes.cpp')
       .openSync(mode: FileMode.write)

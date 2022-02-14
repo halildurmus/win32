@@ -5,7 +5,7 @@ if "%1"=="--help" goto help
 echo Generating C-style Win32 APIs and tests
 call dart %~dp0manual_gen\create_struct_sizes.dart
 call dart %~dp0manual_gen\win32api.dart
-call dart %~dp0metadata\generate_win32.dart
+call dart %~dp0metadata\generate_win32_functions.dart
 echo.
 
 if "%1"=="--win32-only" goto format

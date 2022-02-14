@@ -11,6 +11,7 @@ import 'package:winmd/winmd.dart';
 import '../common/headers.dart';
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
+import '../manual_gen/win32struct.dart';
 import '../projection/function.dart';
 import '../projection/utils.dart';
 import 'generate_win32_structs.dart';
@@ -96,9 +97,7 @@ void main(List<String> args) {
   }
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+  final win32 = Win32API(apiFile: 'tool/manual_gen/win32api.json');
   final genCount = win32.functions.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
@@ -114,7 +113,8 @@ void main(List<String> args) {
   }
 
   if (optionStructs) {
-    final structsGenerated = generateStructs(win32.structs.values);
+    final structsToGenerate = loadStructsFromJson();
+    final structsGenerated = generateStructs(structsToGenerate);
     print('$structsGenerated structs generated from Windows metadata.');
   }
 

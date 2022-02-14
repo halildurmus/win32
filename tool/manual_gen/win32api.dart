@@ -11,10 +11,6 @@ class Win32API {
   final functions = SplayTreeMap<String, Win32Function>(
       (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()));
 
-  /// Maps from a Struct to its metadata
-  final structs = SplayTreeMap<String, Win32Struct>(
-      (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()));
-
   // Serializes to JSON.
   void saveAsJson({String? apiFile, String? structFile}) {
     if (apiFile != null) {
@@ -23,15 +19,6 @@ class Win32API {
 
       // Don't double-escape newlines.
       final fileContents = encoder.convert(functions).replaceAll(r'\\n', r'\n');
-      file.writeAsStringSync(fileContents);
-    }
-
-    if (structFile != null) {
-      final file = File(structFile);
-      const encoder = JsonEncoder.withIndent('    ');
-
-      // Don't double-escape newlines.
-      final fileContents = encoder.convert(structs).replaceAll(r'\\n', r'\n');
       file.writeAsStringSync(fileContents);
     }
   }
@@ -46,16 +33,6 @@ class Win32API {
         functions[api] =
             Win32Function.fromJson(decoded[api] as Map<String, dynamic>);
       }
-      if (structFile != null) {
-        final file = File(structFile);
-        final fileContents = file.readAsStringSync().replaceAll(r'\n', r'\\n');
-
-        final decoded = json.decode(fileContents) as Map<String, dynamic>;
-        for (final api in decoded.keys) {
-          structs[api] =
-              Win32Struct.fromJson(decoded[api] as Map<String, dynamic>);
-        }
-      }
     }
   }
 }
@@ -63,7 +40,5 @@ class Win32API {
 // Roundtrip load and save to make sure that the JSON file is ordered.
 void main() {
   const apiFile = 'tool/manual_gen/win32api.json';
-  const structFile = 'tool/manual_gen/win32struct.json';
-  Win32API(apiFile: apiFile, structFile: structFile)
-      .saveAsJson(apiFile: apiFile, structFile: structFile);
+  Win32API(apiFile: apiFile).saveAsJson(apiFile: apiFile);
 }

@@ -11,8 +11,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../common/headers.dart';
-import '../manual_gen/function.dart';
-import '../manual_gen/win32api.dart';
+import '../manual_gen/win32struct.dart';
 import '../projection/struct.dart';
 import '../projection/utils.dart';
 
@@ -26,24 +25,20 @@ import 'oleaut32.dart';
 import 'structs.dart';
 ''';
 
-int generateStructs(Iterable<Win32Struct> structs) {
+int generateStructs(Map<String, String> structs) {
   final scope = MetadataStore.getWin32Scope();
 
   final file = File('lib/src/structs.g.dart');
 
-  final structNames = structs.map((s) => s.namespace);
-
   final typeDefs = scope.typeDefs
-      .where((typeDef) => structNames.contains(typeDef.name))
+      .where((typeDef) => structs.keys.contains(typeDef.name))
       .where((typeDef) => typeDef.supportedArchitectures.x64)
       .toList()
     ..sort((a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)));
 
   final structProjections = typeDefs.map((struct) => StructProjection(
       struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-      comment: structs
-          .firstWhere((win32Struct) => struct.name == win32Struct.namespace)
-          .comment));
+      comment: structs[struct.name]!));
 
   final structsFile =
       [structFileHeader, structFileImports, ...structProjections].join();
@@ -53,10 +48,6 @@ int generateStructs(Iterable<Win32Struct> structs) {
 }
 
 void main() {
-  final win32 = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
-
-  final structsToGenerate = win32.structs.values;
+  final structsToGenerate = loadStructsFromJson();
   generateStructs(structsToGenerate);
 }
