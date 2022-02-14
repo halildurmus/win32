@@ -6,6 +6,7 @@
 
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../common/headers.dart';
@@ -46,13 +47,12 @@ String generateDocComment(Win32Function func) {
 
 void generateFunctions(Map<String, Win32Function> functions) {
   for (final library in winmdGenerated) {
-    final writer =
-        File('lib/src/$library.dart').openSync(mode: FileMode.writeOnly);
+    final buffer = StringBuffer();
 
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
 
-    writer.writeStringSync('''
+    buffer.write('''
 $functionsFileHeader
 
 final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
@@ -66,7 +66,7 @@ final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
       try {
         final method = methods.firstWhere((m) =>
             methodMatches(m.name, filteredFunctionList[function]!.prototype));
-        writer.writeStringSync('''
+        buffer.write('''
 ${generateDocComment(filteredFunctionList[function]!)}
 ${FunctionProjection(method, libraryDartName).toString()}
 ''');
@@ -75,7 +75,8 @@ ${FunctionProjection(method, libraryDartName).toString()}
       }
     }
 
-    writer.closeSync();
+    File('lib/src/$library.dart')
+        .writeAsStringSync(DartFormatter().format(buffer.toString()));
   }
 }
 
@@ -107,7 +108,7 @@ void main(List<String> args) {
   }
 
   if (optionTests) {
-    final apiTestsGenerated = generateTests(functionsToGenerate);
+    final apiTestsGenerated = generateFunctionTests(functionsToGenerate);
     print('$apiTestsGenerated API tests generated.');
   }
 

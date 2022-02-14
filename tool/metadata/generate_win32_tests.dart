@@ -7,8 +7,10 @@
 
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
+import '../common/headers.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
 import '../projection/function.dart';
@@ -16,27 +18,10 @@ import '../projection/type.dart';
 import '../projection/utils.dart';
 import 'generate_win32_functions.dart';
 
-int generateTests(Map<String, Win32Function> functions) {
+int generateFunctionTests(Map<String, Win32Function> functions) {
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly)
-    ..writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Tests that Win32 API prototypes can be successfully loaded (i.e. that
-// lookupFunction works for all the APIs generated)
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-@TestOn('windows')
-
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'package:test/test.dart';
-
-import 'package:win32/win32.dart';
-import 'package:win32/winsock2.dart';
+  final buffer = StringBuffer()..write('''
+$testFunctionsHeader
 
 import 'helpers.dart';
 
@@ -54,7 +39,7 @@ void main() {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
 
-    writer.writeStringSync("group('Test $library functions', () {\n");
+    buffer.write("group('Test $library functions', () {\n");
 
     final filteredFunctions = Map<String, Win32Function>.of(functions)
       ..removeWhere((key, value) => value.dllLibrary != library)
@@ -93,45 +78,29 @@ void main() {
       });''';
 
       if (minimumWindowsVersion > 0) {
-        writer.writeStringSync('''
+        buffer.write('''
         if (windowsBuildNumber >= $minimumWindowsVersion) {
           $test
         }''');
       } else {
-        writer.writeStringSync(test);
+        buffer.write(test);
       }
-      writer.writeStringSync('\n');
+      buffer.writeln();
       testsGenerated++;
     }
-    writer.writeStringSync('});\n\n');
+    buffer.write('});\n\n');
   }
-  writer
-    ..writeStringSync('}')
-    ..closeSync();
+  buffer.write('}');
+  File('test/api_test.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
 }
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer = File('test/struct_test.dart')
-      .openSync(mode: FileMode.writeOnly)
-    ..writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Tests that Win32 structs are the right size.
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-@TestOn('windows')
-
-import 'dart:ffi';
-
-import 'package:test/test.dart';
-import 'package:win32/win32.dart';
-import 'package:win32/winsock2.dart';
+  final buffer = StringBuffer()..write('''
+$testStructsHeader
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;
@@ -139,13 +108,13 @@ void main() {
 
   for (final struct in structSize64.keys) {
     if (structSize64[struct] == structSize32[struct]) {
-      writer.writeStringSync('''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
   });
     ''');
     } else {
-      writer.writeStringSync('''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
@@ -159,9 +128,10 @@ void main() {
     testsGenerated++;
   }
 
-  writer
-    ..writeStringSync('}')
-    ..closeSync();
+  buffer.write('}');
+
+  File('test/struct_test.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
 }

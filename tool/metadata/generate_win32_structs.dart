@@ -46,8 +46,3 @@ int generateStructs(Map<String, String> structs) {
   file.writeAsStringSync(DartFormatter().format(structsFile));
   return structProjections.length;
 }
-
-void main() {
-  final structsToGenerate = loadStructsFromJson();
-  generateStructs(structsToGenerate);
-}

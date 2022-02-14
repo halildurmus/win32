@@ -44,3 +44,37 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 ''';
+
+const testFunctionsHeader = '''
+$copyrightHeader
+
+// Tests that Win32 API prototypes can be successfully loaded (i.e. that
+// lookupFunction works for all the APIs generated)
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+@TestOn('windows')
+
+import 'dart:ffi';
+import 'package:ffi/ffi.dart';
+import 'package:test/test.dart';
+
+import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
+''';
+
+const testStructsHeader = '''
+$copyrightHeader
+
+// Tests that Win32 structs are the right size.
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+@TestOn('windows')
+
+import 'dart:ffi';
+
+import 'package:test/test.dart';
+import 'package:win32/win32.dart';
+import 'package:win32/winsock2.dart';
+''';
