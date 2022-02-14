@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Added various inline functions, tidied up projection logic.
+
 ## 2.3.11
 
 - Add gamepad APIs
