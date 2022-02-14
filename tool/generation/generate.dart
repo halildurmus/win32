@@ -10,15 +10,26 @@ import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
 
 void main() {
+  final functionsToGenerate = loadFunctionsFromJson();
+
+  print('Generating struct_sizes.cpp...');
   generateStructSizeAnalyzer();
 
+  print('Generating structs...');
   generateStructs(structsToGenerate);
+
+  print('Generating struct tests...');
   generateStructSizeTests();
 
-  final functionsToGenerate = loadFunctionsFromJson();
+  print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
+
+  print('Generating FFI function tests...');
   generateFunctionTests(functionsToGenerate);
 
+  print('Generating COM interfaces...');
   generateComApis();
+
+  print('Generating COM interface tests...');
   generateComTests();
 }

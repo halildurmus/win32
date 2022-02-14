@@ -16,6 +16,10 @@ You can see this behavior in action by running `version.dart` (which calls
 `GetVersionEx()`) in a few different configurations. The documented behavior
 below assumes that you are running Windows 10.
 
+Note that Windows 11 reports itself as 10.0.22000.0, so these APIs cannot be
+used to differentiate between Windows 10 and Windows 11. For that, you should
+check the build number. An example of that can be found in `sysinfo.dart`.
+
 ## 1. Running a Dart file directly
 
 ```cmd

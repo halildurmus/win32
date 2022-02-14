@@ -2258,6 +2258,27 @@ late final _GetDriveType = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpRootPathName),
     int Function(Pointer<Utf16> lpRootPathName)>('GetDriveTypeW');
 
+/// Retrieves the contents of the specified variable from the environment
+/// block of the calling process.
+///
+/// ```c
+/// DWORD GetEnvironmentVariableW(
+///   LPCTSTR lpName,
+///   LPTSTR  lpBuffer,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetEnvironmentVariable(
+        Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, int nSize) =>
+    _GetEnvironmentVariable(lpName, lpBuffer, nSize);
+
+late final _GetEnvironmentVariable = _kernel32.lookupFunction<
+    Uint32 Function(
+        Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, Uint32 nSize),
+    int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer,
+        int nSize)>('GetEnvironmentVariableW');
+
 /// Retrieves the termination status of the specified process.
 ///
 /// ```c
@@ -4714,6 +4735,24 @@ late final _SetDefaultDllDirectories = _kernel32.lookupFunction<
     Int32 Function(Uint32 DirectoryFlags),
     int Function(int DirectoryFlags)>('SetDefaultDllDirectories');
 
+/// Sets the contents of the specified environment variable for the current
+/// process.
+///
+/// ```c
+/// BOOL SetEnvironmentVariableW(
+///   LPCWSTR lpName,
+///   LPCWSTR lpValue
+/// );
+/// ```
+/// {@category kernel32}
+int SetEnvironmentVariable(Pointer<Utf16> lpName, Pointer<Utf16> lpValue) =>
+    _SetEnvironmentVariable(lpName, lpValue);
+
+late final _SetEnvironmentVariable = _kernel32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpValue),
+    int Function(Pointer<Utf16> lpName,
+        Pointer<Utf16> lpValue)>('SetEnvironmentVariableW');
+
 /// Sets the specified event object to the signaled state.
 ///
 /// ```c
@@ -5253,6 +5292,28 @@ late final _UpdateResource = _kernel32.lookupFunction<
     int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         int wLanguage, Pointer lpData, int cb)>('UpdateResourceW');
 
+/// Compares a set of operating system version requirements to the
+/// corresponding values for the currently running version of the system.
+/// This function is subject to manifest-based behavior.
+///
+/// ```c
+/// BOOL VerifyVersionInfoW(
+///   [in] LPOSVERSIONINFOEXW lpVersionInformation,
+///   [in] DWORD              dwTypeMask,
+///   [in] DWORDLONG          dwlConditionMask
+/// );
+/// ```
+/// {@category kernel32}
+int VerifyVersionInfo(Pointer<OSVERSIONINFOEX> lpVersionInformation,
+        int dwTypeMask, int dwlConditionMask) =>
+    _VerifyVersionInfo(lpVersionInformation, dwTypeMask, dwlConditionMask);
+
+late final _VerifyVersionInfo = _kernel32.lookupFunction<
+    Int32 Function(Pointer<OSVERSIONINFOEX> lpVersionInformation,
+        Uint32 dwTypeMask, Uint64 dwlConditionMask),
+    int Function(Pointer<OSVERSIONINFOEX> lpVersionInformation, int dwTypeMask,
+        int dwlConditionMask)>('VerifyVersionInfoW');
+
 /// Retrieves a description string for the language associated with a
 /// specified binary Microsoft language identifier.
 ///
@@ -5271,6 +5332,27 @@ late final _VerLanguageName = _kernel32.lookupFunction<
     Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
     int Function(
         int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
+
+/// Sets the bits of a 64-bit value to indicate the comparison operator to
+/// use for a specified operating system version attribute. This function
+/// is used to build the dwlConditionMask parameter of the
+/// VerifyVersionInfo function.
+///
+/// ```c
+/// NTSYSAPI ULONGLONG VerSetConditionMask(
+/// [in] ULONGLONG ConditionMask,
+/// [in] DWORD     TypeMask,
+/// [in] BYTE      Condition
+/// );
+/// ```
+/// {@category kernel32}
+int VerSetConditionMask(int ConditionMask, int TypeMask, int Condition) =>
+    _VerSetConditionMask(ConditionMask, TypeMask, Condition);
+
+late final _VerSetConditionMask = _kernel32.lookupFunction<
+    Uint64 Function(Uint64 ConditionMask, Uint32 TypeMask, Uint8 Condition),
+    int Function(
+        int ConditionMask, int TypeMask, int Condition)>('VerSetConditionMask');
 
 /// Reserves, commits, or changes the state of a region of pages in the
 /// virtual address space of the calling process. Memory allocated by this

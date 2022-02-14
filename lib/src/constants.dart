@@ -584,6 +584,33 @@ const ES_CONTINUOUS = 0x80000000;
 const STILL_ACTIVE = 259;
 
 // -----------------------------------------------------------------------------
+// Version constants
+// -----------------------------------------------------------------------------
+
+// The current value must be equal to the specified value.
+const VER_EQUAL = 1;
+
+/// The current value must be greater than the specified value.
+const VER_GREATER = 2;
+
+/// The current value must be greater than or equal to the specified value.
+const VER_GREATER_EQUAL = 3;
+
+/// The current value must be less than the specified value.
+const VER_LESS = 4;
+
+/// The current value must be less than or equal to the specified value.
+const VER_LESS_EQUAL = 5;
+
+/// All product suites specified in the wSuiteMask member must be present in the
+/// current system.
+const VER_AND = 6;
+
+/// At least one of the specified product suites must be present in the current
+/// system.
+const VER_OR = 7;
+
+// -----------------------------------------------------------------------------
 // Named pipe flags
 // -----------------------------------------------------------------------------
 
@@ -8280,4 +8307,10 @@ class WSL_DISTRIBUTION_FLAGS {
   /// Automatically mount Windows drives inside of WSL sessions (for example,
   /// "C:" will be available under "/mnt/c").
   static const WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING = 0x4;
+}
+
+/// Specifies the type of visual style attribute to set on a window.
+class WINDOWTHEMEATTRIBUTETYPE {
+  /// Non-client area window attributes will be set.
+  static const WTA_NONCLIENT = 1;
 }

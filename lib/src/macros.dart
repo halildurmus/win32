@@ -4,14 +4,7 @@
 
 // Dart representations of Win32 C macros
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-
-import 'callbacks.dart';
 import 'constants.dart';
-import 'structs.g.dart';
-import 'user32.dart';
 
 /// Creates a WORD value by concatenating the specified values.
 //
@@ -101,60 +94,3 @@ int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
 //
 // #define GET_SC_WPARAM(wParam) ((int)wParam & 0xFFF0)
 int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
-
-/// Creates an overlapped, pop-up, or child window. It specifies the window
-/// class, window title, window style, and (optionally) the initial position and
-/// size of the window. The function also specifies the window's parent or
-/// owner, if any, and the window's menu.
-///
-/// ```c
-/// HWND CreateWindowW(
-///   LPCWSTR   lpClassName,
-///   LPCWSTR   lpWindowName,
-///   DWORD     dwStyle,
-///   int       X,
-///   int       Y,
-///   int       nWidth,
-///   int       nHeight,
-///   HWND      hWndParent,
-///   HMENU     hMenu,
-///   HINSTANCE hInstance,
-///   LPVOID    lpParam
-/// );
-/// ```
-///
-/// {@category user32}
-int CreateWindow(
-        Pointer<Utf16> lpClassName,
-        Pointer<Utf16> lpWindowName,
-        int dwStyle,
-        int X,
-        int Y,
-        int nWidth,
-        int nHeight,
-        int hWndParent,
-        int hMenu,
-        int hInstance,
-        Pointer lpParam) =>
-    CreateWindowEx(0, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
-        hWndParent, hMenu, hInstance, lpParam);
-
-/// Creates a modal dialog box from a dialog box template in memory.
-/// DialogBoxIndirect does not return control until the specified callback
-/// function terminates the modal dialog box by calling the EndDialog function.
-///
-/// DialogBoxIndirect is implemented as a call to the DialogBoxIndirectParam
-/// function.
-///
-/// ```c
-/// void DialogBoxIndirectW(
-///    hInstance,
-///    lpTemplate,
-///    hWndParent,
-///    lpDialogFunc
-/// );
-/// ```
-/// {@category user32}
-void DialogBoxIndirect(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent, Pointer<NativeFunction<DlgProc>> lpDialogFunc) =>
-    DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);

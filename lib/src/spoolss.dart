@@ -35,6 +35,24 @@ late final _AbortPrinter = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('AbortPrinter');
 
+/// The AddForm function adds a form to the list of available forms that
+/// can be selected for the specified printer.
+///
+/// ```c
+/// BOOL AddFormW(
+///   _In_ HANDLE hPrinter,
+///   _In_ DWORD  Level,
+///   _In_ LPBYTE pForm
+/// );
+/// ```
+/// {@category winspool}
+int AddForm(int hPrinter, int Level, Pointer<Uint8> pForm) =>
+    _AddForm(hPrinter, Level, pForm);
+
+late final _AddForm = _spoolss.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm),
+    int Function(int hPrinter, int Level, Pointer<Uint8> pForm)>('AddFormW');
+
 /// The ClosePrinter function closes the specified printer object.
 ///
 /// ```c
