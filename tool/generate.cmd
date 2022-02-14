@@ -2,13 +2,13 @@
 
 if "%1"=="--help" goto help
 
-echo Generating C-style Win32 APIs and tests
-call dart %~dp0manual_gen\create_struct_sizes.dart
-call dart %~dp0manual_gen\win32api.dart
-call dart %~dp0metadata\generate_win32_functions.dart
+echo Generating struct sizes
+call dart %~dp0metadata\generate_struct_sizes_cpp.dart
 echo.
 
-if "%1"=="--win32-only" goto format
+echo Generating APIs and tests
+call dart %~dp0metadata\generate.dart
+echo.
 
 echo Generating COM classes and tests from Windows metadata
 call dart %~dp0metadata\generate_com_apis.dart
@@ -26,7 +26,6 @@ call dart format %~dp0..\test\struct_test.dart
 call dart format %~dp0..\test\com
 echo.
 
-if "%1"=="--win32-only" goto end
 if "%1"=="--no-test" goto end
 
 :dart_test
@@ -39,7 +38,6 @@ goto end
 echo generate -- Auto-generates various Windows API classes from metadata.
 echo.
 echo Useful flags
-echo  --win32-only  Generate just the Win32 classes
 echo  --no-test     Generate all classes but don't test
 echo.
 echo Running the command without any flags generates all classes and runs all tests.

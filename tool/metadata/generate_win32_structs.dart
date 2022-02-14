@@ -11,7 +11,6 @@ import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../common/headers.dart';
-import '../manual_gen/win32struct.dart';
 import '../projection/struct.dart';
 import '../projection/utils.dart';
 

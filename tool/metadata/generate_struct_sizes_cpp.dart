@@ -1,6 +1,6 @@
 import 'dart:io';
+import '../manual_gen/win32struct.dart';
 import '../projection/utils.dart';
-import 'win32struct.dart';
 
 const header = '''
 /**

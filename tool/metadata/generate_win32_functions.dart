@@ -11,14 +11,9 @@ import 'package:winmd/winmd.dart';
 
 import '../common/headers.dart';
 import '../manual_gen/win32api.dart';
-import '../manual_gen/win32struct.dart';
 import '../projection/function.dart';
 import '../projection/utils.dart';
-import 'generate_win32_structs.dart';
-import 'generate_win32_tests.dart';
 import 'winmd_caveats.dart';
-
-final methods = <Method>[];
 
 bool methodMatches(String methodName, List<String> rawPrototype) {
   final prototype = rawPrototype.join('\n');
@@ -46,6 +41,13 @@ String generateDocComment(Win32Function func) {
 }
 
 void generateFunctions(Map<String, Win32Function> functions) {
+  final methods = <Method>[];
+  final scope = MetadataStore.getWin32Scope();
+  final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+  for (final api in apis) {
+    methods.addAll(api.methods);
+  }
+
   for (final library in winmdGenerated) {
     final buffer = StringBuffer();
 
@@ -77,49 +79,5 @@ ${FunctionProjection(method, libraryDartName).toString()}
 
     File('lib/src/$library.dart')
         .writeAsStringSync(DartFormatter().format(buffer.toString()));
-  }
-}
-
-void main(List<String> args) {
-  final options = args.length != 1 ? '--all' : args.last;
-  final optionAPIs =
-      (options != '--tests-only') && (options != '--structs-only');
-  final optionTests =
-      (options != '--apis-only') && (options != '--structs-only');
-  final optionStructs =
-      (options != '--apis-only') && (options != '--tests-only');
-
-  final scope = MetadataStore.getWin32Scope();
-  final apis = scope.typeDefs.where((type) => type.name.endsWith('Apis'));
-
-  for (final api in apis) {
-    methods.addAll(api.methods);
-  }
-  print('${methods.length} APIs collected');
-
-  final functionsToGenerate = loadFunctionsFromJson();
-  final genCount = functionsToGenerate.values
-      .where((func) => winmdGenerated.contains(func.dllLibrary))
-      .length;
-
-  if (optionAPIs) {
-    generateFunctions(functionsToGenerate);
-    print('$genCount typedefs generated from Windows metadata.');
-  }
-
-  if (optionTests) {
-    final apiTestsGenerated = generateFunctionTests(functionsToGenerate);
-    print('$apiTestsGenerated API tests generated.');
-  }
-
-  if (optionStructs) {
-    final structsToGenerate = loadStructsFromJson();
-    final structsGenerated = generateStructs(structsToGenerate);
-    print('$structsGenerated structs generated from Windows metadata.');
-  }
-
-  if (optionTests) {
-    final structTestsGenerated = generateStructSizeTests();
-    print('$structTestsGenerated struct tests generated.');
   }
 }

@@ -19,6 +19,12 @@ import '../projection/utils.dart';
 import 'generate_win32_functions.dart';
 
 int generateFunctionTests(Map<String, Win32Function> functions) {
+  final methods = <Method>[];
+  final scope = MetadataStore.getWin32Scope();
+  final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+  for (final api in apis) {
+    methods.addAll(api.methods);
+  }
   var testsGenerated = 0;
   final buffer = StringBuffer()..write('''
 $testFunctionsHeader
