@@ -10,13 +10,14 @@ import 'dart:io';
 import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
-import '../common/headers.dart';
-import '../manual_gen/struct_sizes.dart';
-import '../manual_gen/win32api.dart';
+import '../inputs/functions.dart';
 import '../projection/function.dart';
 import '../projection/type.dart';
 import '../projection/utils.dart';
+
 import 'generate_win32_functions.dart';
+import 'headers.dart';
+import 'struct_sizes.dart';
 
 int generateFunctionTests(Map<String, Win32Function> functions) {
   final methods = <Method>[];

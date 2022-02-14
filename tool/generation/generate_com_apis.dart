@@ -1,8 +1,6 @@
-// generate_com_classes.dart
-
 import 'dart:io';
 
-import 'package:args/args.dart';
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
 import '../projection/class.dart';
@@ -91,23 +89,16 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IShellService',
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
-void main(List<String> args) {
+void generateComApis() {
   final scope = MetadataStore.getWin32Scope();
 
-  final parser = ArgParser()
-    ..addOption('classDirectory', defaultsTo: 'lib/src/com')
-    ..addOption('testDirectory', defaultsTo: 'test/com');
-
-  final argResults = parser.parse(args);
-  final classDirectory = Directory(argResults['classDirectory'] as String);
-  // final testDirectory = Directory(argResults['testDirectory'] as String);
+  final classDirectory = Directory('lib/src/com');
 
   for (final interface in interfacesToGenerate) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
 
-    InterfaceProjection interfaceProjection;
-    interfaceProjection = InterfaceProjection(typeDef);
+    var interfaceProjection = InterfaceProjection(typeDef);
 
     // In v2, we put classes and interfaces in the same file.
     final className = ClassProjection.generateClassName(typeDef);
@@ -123,8 +114,9 @@ void main(List<String> args) {
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
     print('Writing:    ${outputFile.path}');
-    outputFile.writeAsStringSync(dartClass);
+    outputFile.writeAsStringSync(DartFormatter().format(dartClass));
 
+    // TODO: Add tests back in
     //   final dartTests = TypePrinter.printTests(classProjection);
 
     //   final testFile = File(

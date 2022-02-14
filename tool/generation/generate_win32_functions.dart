@@ -9,11 +9,10 @@ import 'dart:io';
 import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
-import '../common/headers.dart';
-import '../manual_gen/win32api.dart';
+import '../inputs/functions.dart';
 import '../projection/function.dart';
 import '../projection/utils.dart';
-import 'winmd_caveats.dart';
+import 'headers.dart';
 
 bool methodMatches(String methodName, List<String> rawPrototype) {
   final prototype = rawPrototype.join('\n');
@@ -48,7 +47,7 @@ void generateFunctions(Map<String, Win32Function> functions) {
     methods.addAll(api.methods);
   }
 
-  for (final library in winmdGenerated) {
+  for (final library in dllLibraries) {
     final buffer = StringBuffer();
 
     // API set names aren't legal Dart identifiers, so we rename them

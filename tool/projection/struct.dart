@@ -2,7 +2,7 @@ import 'dart:math' show min;
 
 import 'package:winmd/winmd.dart';
 
-import '../differences/exclusions.dart';
+import '../shared/exclusions.dart';
 import 'field.dart';
 import 'nestedStruct.dart';
 import 'safenames.dart';
