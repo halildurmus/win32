@@ -2,6 +2,23 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
+/// DLL libraries and API sets for which we will generate FFI bindings. These
+/// are the only ones we cover; anything missing here won't be generated.
+const dllLibraries = [
+  // TODO: do we still need this?
+
+  // API sets
+  'api-ms-win-core-winrt-l1-1-0', 'api-ms-win-core-winrt-string-l1-1-0',
+  'api-ms-win-wsl-api-l1-1-0',
+
+  // DLLs
+  'advapi32', 'bthprops', 'comctl32', 'comdlg32', 'dbghelp', 'dwmapi', 'dxva2',
+  'gdi32', 'kernel32', 'kernelbase', 'magnification', 'ole32', 'oleaut32',
+  'powrprof', 'rometadata', 'scarddlg', 'shcore', 'shell32', 'spoolss',
+  'user32', 'uxtheme', 'version', 'xinputuap', 'winmm', 'winscard',
+  'winspool', 'wlanapi', 'ws2_32'
+];
+
 /// Maps between Windows versions and the corresponding build numbers
 ///
 /// Details from:
@@ -70,7 +87,7 @@ class Win32Function {
 }
 
 SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
-  final jsonFile = File('tool/manual_gen/win32api.json')
+  final jsonFile = File('tool/inputs/functions.json')
       .readAsStringSync()
       .replaceAll(r'\n', r'\\n');
   final decodedJson = json.decode(jsonFile) as Map<String, dynamic>;

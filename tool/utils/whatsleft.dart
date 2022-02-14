@@ -6,7 +6,7 @@ import 'dart:io' show exit;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'win32api.dart';
+import '../inputs/functions.dart';
 
 extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
   int get virtAddress => ref.Address;

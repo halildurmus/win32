@@ -13,28 +13,14 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../inputs/interfaces.dart';
 import '../projection/winrt_interface.dart';
-
-final typesToGenerate = [
-  'Windows.Foundation.IPropertyValue',
-  'Windows.Foundation.IAsyncAction',
-  'Windows.Foundation.IAsyncInfo',
-  'Windows.Foundation.IAsyncOperation`1',
-  'Windows.Foundation.IClosable',
-  'Windows.Foundation.IStringable',
-  'Windows.Globalization.ICalendar',
-  'Windows.Storage.Pickers.IFileOpenPicker',
-  'Windows.Storage.IUserDataPathsStatics',
-  'Windows.Gaming.Input.IGamepadStatics',
-  'Windows.UI.Notifications.IToastNotificationFactory',
-  'Windows.UI.Notifications.IToastNotificationManagerStatics',
-];
 
 void main(List<String> args) {
   final outputDirectory =
       (args.length == 1) ? Directory(args.first) : Directory('lib/src/com');
 
-  for (final type in typesToGenerate) {
+  for (final type in windowsRuntimeTypesToGenerate) {
     final mdTypeDef = MetadataStore.getMetadataForType(type);
     if (mdTypeDef == null) {
       throw Exception("Can't find type $type.");

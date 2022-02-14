@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../differences/win32_typemap.dart';
+import '../shared/win32_typemap.dart';
 import 'utils.dart';
 
 class TypeTuple {

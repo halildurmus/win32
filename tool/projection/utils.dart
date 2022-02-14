@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../differences/exclusions.dart';
-import '../differences/falseProperties.dart';
+import '../shared/exclusions.dart';
+import '../shared/falseProperties.dart';
 import 'safenames.dart';
 import 'type.dart';
 

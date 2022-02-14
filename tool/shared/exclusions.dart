@@ -7,9 +7,7 @@ const v2ExcludedStructs = <String>{
 };
 
 const v3ExcludedStructs = <String>{
-  'Windows.Win32.System.Com.VARIANT',
-  'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
-  'Windows.Win32.System.IO.OVERLAPPED',
+  ...v2ExcludedStructs,
   'Windows.Win32.Foundation.DECIMAL',
 
   // These are ANSI structs without a suffix. The Unicode variant is

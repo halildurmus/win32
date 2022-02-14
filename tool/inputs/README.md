@@ -7,7 +7,7 @@ and tests as output.
 
 ## JSON Format
 
-The format for the JSON file (`win32api.json`) is as follows:
+The format for the JSON file (`functions.json`) is as follows:
 
 ```jsonc
 {
