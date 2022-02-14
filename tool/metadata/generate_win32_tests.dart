@@ -16,7 +16,7 @@ import '../projection/type.dart';
 import '../projection/utils.dart';
 import 'generate_win32_functions.dart';
 
-int generateTests(Win32API win32) {
+int generateTests(Map<String, Win32Function> functions) {
   var testsGenerated = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly)
     ..writeStringSync('''
@@ -47,10 +47,7 @@ void main() {
   // The .toSet() removes duplicates.
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  final libraries = win32.functions.values
-      .map((e) => e.dllLibrary)
-      .toSet()
-      .toList()
+  final libraries = functions.values.map((e) => e.dllLibrary).toSet().toList()
     ..removeWhere((library) => library == 'wlanapi');
 
   for (final library in libraries) {
@@ -59,18 +56,18 @@ void main() {
 
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
+    final filteredFunctions = Map<String, Win32Function>.of(functions)
       ..removeWhere((key, value) => value.dllLibrary != library)
       ..removeWhere(
           (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
-    for (final function in filteredFunctionList.keys) {
-      if (filteredFunctionList[function]!.test == false) continue;
+    for (final function in filteredFunctions.keys) {
+      if (filteredFunctions[function]!.test == false) continue;
 
       late Method method;
       try {
         method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctionList[function]!.prototype));
+            methodMatches(m.name, filteredFunctions[function]!.prototype));
       } on StateError {
         continue;
       }
@@ -83,7 +80,7 @@ void main() {
           TypeProjection(method.returnType.typeIdentifier).dartType;
 
       final minimumWindowsVersion =
-          filteredFunctionList[function]!.minimumWindowsVersion;
+          filteredFunctions[function]!.minimumWindowsVersion;
 
       final test = '''
       test('Can instantiate $function', () {

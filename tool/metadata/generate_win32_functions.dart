@@ -96,18 +96,18 @@ void main(List<String> args) {
   }
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API(apiFile: 'tool/manual_gen/win32api.json');
-  final genCount = win32.functions.values
+  final functionsToGenerate = loadFunctionsFromJson();
+  final genCount = functionsToGenerate.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
 
   if (optionAPIs) {
-    generateFunctions(win32.functions);
+    generateFunctions(functionsToGenerate);
     print('$genCount typedefs generated from Windows metadata.');
   }
 
   if (optionTests) {
-    final apiTestsGenerated = generateTests(win32);
+    final apiTestsGenerated = generateTests(functionsToGenerate);
     print('$apiTestsGenerated API tests generated.');
   }
 

@@ -69,41 +69,17 @@ class Win32Function {
         test = json['test'] as bool? ?? true;
 }
 
-/// The collection of all C-style Windows API functions that are
-/// exposed through this Dart library.
-class Win32API {
-  /// Maps from an API to its metadata.
+SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
+  final jsonFile = File('tool/manual_gen/win32api.json')
+      .readAsStringSync()
+      .replaceAll(r'\n', r'\\n');
+  final decodedJson = json.decode(jsonFile) as Map<String, dynamic>;
   final functions = SplayTreeMap<String, Win32Function>(
       (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()));
 
-  // Serializes to JSON.
-  void saveAsJson({String? apiFile, String? structFile}) {
-    if (apiFile != null) {
-      final file = File(apiFile);
-      const encoder = JsonEncoder.withIndent('    ');
-
-      // Don't double-escape newlines.
-      final fileContents = encoder.convert(functions).replaceAll(r'\\n', r'\n');
-      file.writeAsStringSync(fileContents);
-    }
+  for (final api in decodedJson.keys) {
+    functions[api] =
+        Win32Function.fromJson(decodedJson[api] as Map<String, dynamic>);
   }
-
-  Win32API({String? apiFile}) {
-    if (apiFile != null) {
-      final file = File(apiFile);
-      final fileContents = file.readAsStringSync().replaceAll(r'\n', r'\\n');
-
-      final decoded = json.decode(fileContents) as Map<String, dynamic>;
-      for (final api in decoded.keys) {
-        functions[api] =
-            Win32Function.fromJson(decoded[api] as Map<String, dynamic>);
-      }
-    }
-  }
-}
-
-// Roundtrip load and save to make sure that the JSON file is ordered.
-void main() {
-  const apiFile = 'tool/manual_gen/win32api.json';
-  Win32API(apiFile: apiFile).saveAsJson(apiFile: apiFile);
+  return functions;
 }

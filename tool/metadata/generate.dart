@@ -8,7 +8,6 @@ void main() {
   final structsToGenerate = loadStructsFromJson();
   generateStructs(structsToGenerate);
 
-  final win32 = Win32API(apiFile: 'tool/manual_gen/win32api.json');
-  final functionsToGenerate = win32.functions;
+  final functionsToGenerate = loadFunctionsFromJson();
   generateFunctions(functionsToGenerate);
 }
