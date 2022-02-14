@@ -26,68 +26,108 @@ const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category Interface}
 /// {@category com}
 class INetworkListManager extends IDispatch {
-  // vtable begins at 7, ends at 15
+  // vtable begins at 7, is 9 entries long.
   INetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
+  int GetNetworks(
+    int Flags,
+    Pointer<Pointer<COMObject>> ppEnumNetwork,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 Flags,
-                              Pointer<Pointer<COMObject>> ppEnumNetwork)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int Flags,
-                      Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
-          ptr.ref.lpVtbl, Flags, ppEnumNetwork);
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 Flags,
+            Pointer<Pointer<COMObject>> ppEnumNetwork,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int Flags,
+            Pointer<Pointer<COMObject>> ppEnumNetwork,
+          )>()(
+        ptr.ref.lpVtbl,
+        Flags,
+        ppEnumNetwork,
+      );
 
-  int GetNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
+  int GetNetwork(
+    GUID gdNetworkId,
+    Pointer<Pointer<COMObject>> ppNetwork,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, GUID gdNetworkId,
-                              Pointer<Pointer<COMObject>> ppNetwork)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, GUID gdNetworkId,
-                      Pointer<Pointer<COMObject>> ppNetwork)>()(
-          ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            GUID gdNetworkId,
+            Pointer<Pointer<COMObject>> ppNetwork,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            GUID gdNetworkId,
+            Pointer<Pointer<COMObject>> ppNetwork,
+          )>()(
+        ptr.ref.lpVtbl,
+        gdNetworkId,
+        ppNetwork,
+      );
 
-  int GetNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
+  int GetNetworkConnections(
+    Pointer<Pointer<COMObject>> ppEnum,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-          ptr.ref.lpVtbl, ppEnum);
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppEnum,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppEnum,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppEnum,
+      );
 
-  int
-      GetNetworkConnection(GUID gdNetworkConnectionId,
-              Pointer<Pointer<COMObject>> ppNetworkConnection) =>
-          ptr.ref.lpVtbl.value
-                  .elementAt(10)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              Int32 Function(
-                                  Pointer,
-                                  GUID gdNetworkConnectionId,
-                                  Pointer<Pointer<COMObject>>
-                                      ppNetworkConnection)>>>()
-                  .value
-                  .asFunction<
-                      int Function(Pointer, GUID gdNetworkConnectionId,
-                          Pointer<Pointer<COMObject>> ppNetworkConnection)>()(
-              ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
+  int GetNetworkConnection(
+    GUID gdNetworkConnectionId,
+    Pointer<Pointer<COMObject>> ppNetworkConnection,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            GUID gdNetworkConnectionId,
+            Pointer<Pointer<COMObject>> ppNetworkConnection,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            GUID gdNetworkConnectionId,
+            Pointer<Pointer<COMObject>> ppNetworkConnection,
+          )>()(
+        ptr.ref.lpVtbl,
+        gdNetworkConnectionId,
+        ppNetworkConnection,
+      );
 
   int get IsConnectedToInternet {
     final retValuePtr = calloc<Int16>();
@@ -98,11 +138,16 @@ class INetworkListManager extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -122,11 +167,16 @@ class INetworkListManager extends IDispatch {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int16> pbIsConnected)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<Int16> pbIsConnected)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int16> pbIsConnected,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -137,39 +187,65 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(
+    Pointer<Int32> pConnectivity,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(13)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> pConnectivity)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> pConnectivity,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
-      ptr.ref.lpVtbl, pConnectivity);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> pConnectivity,
+          )>()(
+        ptr.ref.lpVtbl,
+        pConnectivity,
+      );
 
   int SetSimulatedProfileInfo(
-          Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
-      ptr
-              .ref.lpVtbl.value
-              .elementAt(14)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<NLM_SIMULATED_PROFILE_INFO>
-                                  pSimulatedInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer,
-                      Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo)>()(
-          ptr.ref.lpVtbl, pSimulatedInfo);
+    Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(14)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo,
+          )>()(
+        ptr.ref.lpVtbl,
+        pSimulatedInfo,
+      );
 
   int ClearSimulatedProfileInfo() => ptr.ref.lpVtbl.value
-      .elementAt(15)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(15)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 }
 
 /// @nodoc

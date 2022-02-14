@@ -10,14 +10,11 @@ the form of an ECMA-335 specification file, generated from this repo:
 The metadata is extracted and parsed using the separate winmd package:
   <https://pub.dev/packages/winmd>
 
-The `.winmd` file supplied in the `tool\metadata` directory is used to generate
-the APIs.
-
 Not every API is projected.
 
-- For Win32 APIs, the JSON file in the `manual_gen` directory is used to
+- For Win32 APIs, the JSON file in the `inputs` directory is used to
   determine which APIs to project.
-- For COM and WinRT APIs, the Dart files in the `metadata` directly explicitly
+- For COM and WinRT APIs, the Dart files in the `inputs` directory explicitly
   name the types that should be projected.
 
 During the build process, you should call `generate.cmd` to instantiate these

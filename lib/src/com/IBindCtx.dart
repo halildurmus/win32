@@ -26,116 +26,228 @@ const IID_IBindCtx = '{0000000E-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IBindCtx extends IUnknown {
-  // vtable begins at 3, ends at 12
+  // vtable begins at 3, is 10 entries long.
   IBindCtx(Pointer<COMObject> ptr) : super(ptr);
 
-  int RegisterObjectBound(Pointer<COMObject> punk) => ptr.ref.lpVtbl.value
+  int RegisterObjectBound(
+    Pointer<COMObject> punk,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> punk)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> punk,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> punk)>()(
-      ptr.ref.lpVtbl, punk);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> punk,
+          )>()(
+        ptr.ref.lpVtbl,
+        punk,
+      );
 
-  int RevokeObjectBound(Pointer<COMObject> punk) => ptr.ref.lpVtbl.value
+  int RevokeObjectBound(
+    Pointer<COMObject> punk,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> punk)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> punk,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> punk)>()(
-      ptr.ref.lpVtbl, punk);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> punk,
+          )>()(
+        ptr.ref.lpVtbl,
+        punk,
+      );
 
   int ReleaseBoundObjects() => ptr.ref.lpVtbl.value
-      .elementAt(5)
-      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
-      .value
-      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
-  int SetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.lpVtbl.value
+  int SetBindOptions(
+    Pointer<BIND_OPTS> pbindopts,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<BIND_OPTS> pbindopts)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<BIND_OPTS> pbindopts,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<BIND_OPTS> pbindopts)>()(
-      ptr.ref.lpVtbl, pbindopts);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<BIND_OPTS> pbindopts,
+          )>()(
+        ptr.ref.lpVtbl,
+        pbindopts,
+      );
 
-  int GetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.lpVtbl.value
+  int GetBindOptions(
+    Pointer<BIND_OPTS> pbindopts,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<BIND_OPTS> pbindopts)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<BIND_OPTS> pbindopts,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<BIND_OPTS> pbindopts)>()(
-      ptr.ref.lpVtbl, pbindopts);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<BIND_OPTS> pbindopts,
+          )>()(
+        ptr.ref.lpVtbl,
+        pbindopts,
+      );
 
-  int GetRunningObjectTable(Pointer<Pointer<COMObject>> pprot) =>
+  int GetRunningObjectTable(
+    Pointer<Pointer<COMObject>> pprot,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> pprot)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> pprot)>()(
-          ptr.ref.lpVtbl, pprot);
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> pprot,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> pprot,
+          )>()(
+        ptr.ref.lpVtbl,
+        pprot,
+      );
 
-  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer<COMObject> punk) =>
+  int RegisterObjectParam(
+    Pointer<Utf16> pszKey,
+    Pointer<COMObject> punk,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> pszKey,
-                          Pointer<COMObject> punk)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+            Pointer<COMObject> punk,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> pszKey,
-                  Pointer<COMObject> punk)>()(ptr.ref.lpVtbl, pszKey, punk);
+              int Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+            Pointer<COMObject> punk,
+          )>()(
+        ptr.ref.lpVtbl,
+        pszKey,
+        punk,
+      );
 
   int GetObjectParam(
-          Pointer<Utf16> pszKey, Pointer<Pointer<COMObject>> ppunk) =>
+    Pointer<Utf16> pszKey,
+    Pointer<Pointer<COMObject>> ppunk,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> pszKey,
-                              Pointer<Pointer<COMObject>> ppunk)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> pszKey,
-                      Pointer<Pointer<COMObject>> ppunk)>()(
-          ptr.ref.lpVtbl, pszKey, ppunk);
+          .elementAt(10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+            Pointer<Pointer<COMObject>> ppunk,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+            Pointer<Pointer<COMObject>> ppunk,
+          )>()(
+        ptr.ref.lpVtbl,
+        pszKey,
+        ppunk,
+      );
 
-  int EnumObjectParam(Pointer<Pointer<COMObject>> ppenum) =>
+  int EnumObjectParam(
+    Pointer<Pointer<COMObject>> ppenum,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppenum)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
-          ptr.ref.lpVtbl, ppenum);
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppenum,
+      );
 
-  int RevokeObjectParam(Pointer<Utf16> pszKey) => ptr.ref.lpVtbl.value
-      .elementAt(12)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<Utf16> pszKey)>>>()
-      .value
-      .asFunction<
-          int Function(
-              Pointer, Pointer<Utf16> pszKey)>()(ptr.ref.lpVtbl, pszKey);
+  int RevokeObjectParam(
+    Pointer<Utf16> pszKey,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(12)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> pszKey,
+          )>()(
+        ptr.ref.lpVtbl,
+        pszKey,
+      );
 }

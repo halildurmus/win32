@@ -407,3 +407,25 @@ late final _SetWindowTheme = _uxtheme.lookupFunction<
         IntPtr hwnd, Pointer<Utf16> pszSubAppName, Pointer<Utf16> pszSubIdList),
     int Function(int hwnd, Pointer<Utf16> pszSubAppName,
         Pointer<Utf16> pszSubIdList)>('SetWindowTheme');
+
+/// Sets attributes to control how visual styles are applied to a specified
+/// window.
+///
+/// ```c
+/// HRESULT SetWindowThemeAttribute(
+///   [in] HWND                     hwnd,
+///        WINDOWTHEMEATTRIBUTETYPE eAttribute,
+///   [in] PVOID                    pvAttribute,
+///   [in] DWORD                    cbAttribute
+/// );
+/// ```
+/// {@category uxtheme}
+int SetWindowThemeAttribute(
+        int hwnd, int eAttribute, Pointer pvAttribute, int cbAttribute) =>
+    _SetWindowThemeAttribute(hwnd, eAttribute, pvAttribute, cbAttribute);
+
+late final _SetWindowThemeAttribute = _uxtheme.lookupFunction<
+    Int32 Function(
+        IntPtr hwnd, Int32 eAttribute, Pointer pvAttribute, Uint32 cbAttribute),
+    int Function(int hwnd, int eAttribute, Pointer pvAttribute,
+        int cbAttribute)>('SetWindowThemeAttribute');

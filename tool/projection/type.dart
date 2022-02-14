@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../metadata/win32_typemap.dart';
+import '../shared/win32_typemap.dart';
 import 'utils.dart';
 
 class TypeTuple {
@@ -46,7 +46,13 @@ const Map<String, TypeTuple> specialTypes = {
 
 class TypeProjection {
   final TypeIdentifier typeIdentifier;
-  late final projection = projectType();
+  TypeTuple? _projection;
+
+  TypeTuple get projection {
+    _projection ??= projectType();
+
+    return _projection!;
+  }
 
   TypeProjection(this.typeIdentifier);
 
@@ -55,7 +61,13 @@ class TypeProjection {
   String get dartType => projection.dartType;
   int? get arrayUpperBound => typeIdentifier.arrayDimensions?.first;
 
-  bool get isIntrinsic =>
+  /// Is the resultant Dart type atomic?
+  bool get isDartPrimitive =>
+      ['void', 'bool', 'int', 'double'].contains(dartType) ||
+      dartType.startsWith('Pointer') ||
+      dartType.startsWith('Array');
+
+  bool get isBaseType =>
       baseNativeMapping.keys.contains(typeIdentifier.baseType);
 
   bool get isWin32SpecialType =>
@@ -111,11 +123,19 @@ class TypeProjection {
     return TypeTuple(typeClass, typeClass);
   }
 
+  /// Takes a type such as `PointerTypeModifier` -> `BaseType.Uint32` and
+  /// converts it to `Pointer<Uint32>.
   TypeTuple unwrapPointerType() {
     if (typeIdentifier.typeArg == null) {
       throw Exception('Pointer type missing for $typeIdentifier.');
     }
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
+
+    // Strip leading underscores (unless the type is nested, in which
+    // case leave one behind).
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+        ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
+        : stripLeadingUnderscores(typeArg.projection.nativeType);
 
     // Pointer<Void> in Dart is unnecessarily restrictive, versus the
     // Win32 meaning, which is more like "undefined type". We can
@@ -125,8 +145,8 @@ class TypeProjection {
       return const TypeTuple('Pointer', 'Pointer');
     }
 
-    final nativeType = 'Pointer<${projection.nativeType}>';
-    final dartType = 'Pointer<${projection.nativeType}>';
+    final nativeType = 'Pointer<$typeArgNativeType>';
+    final dartType = 'Pointer<$typeArgNativeType>';
 
     return TypeTuple(nativeType, dartType);
   }
@@ -138,20 +158,34 @@ class TypeProjection {
     }
 
     final typeArg = TypeProjection(typeIdentifier.typeArg!);
-    final projection = typeArg.projection;
 
-    final nativeType = 'Array<${projection.nativeType}>';
-    final dartType = 'Array<${projection.nativeType}>';
+    // Arrays of nested types have a private _ prefix. This is not a very
+    // expensive operation.
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+        ? typeArg.nativeType
+        : stripLeadingUnderscores(typeArg.nativeType);
+
+    final nativeType = 'Array<$typeArgNativeType>';
+    final dartType = 'Array<$typeArgNativeType>';
     final upperBound = typeIdentifier.arrayDimensions?.first;
 
     return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');
   }
 
   TypeTuple unwrapCallbackType() {
-    final callbackType = typeIdentifier.name.split('.').last;
+    const voidCallbackTypes = <String, String>{
+      'FARPROC': 'Pointer',
+      'PROC': 'Pointer',
+      'NEARPROC': 'Pointer',
+    };
 
-    // TODO: Remove in v3 -- for backward compat only
-    if (callbackTypeMapping.keys.contains(callbackType)) {
+    final callbackType =
+        stripLeadingUnderscores(lastComponent(typeIdentifier.name));
+
+    if (voidCallbackTypes.keys.contains(callbackType)) {
+      final mappedType = voidCallbackTypes[callbackType]!;
+      return TypeTuple(mappedType, mappedType);
+    } else if (callbackTypeMapping.keys.contains(callbackType)) {
       final mappedType = callbackTypeMapping[callbackType]!;
       return TypeTuple(mappedType, mappedType);
     }
@@ -164,7 +198,7 @@ class TypeProjection {
 
   TypeTuple projectType() {
     // Could be an intrinsic base type (e.g. Int32)
-    if (isIntrinsic) {
+    if (isBaseType) {
       return baseNativeMapping[typeIdentifier.baseType]!;
     }
 
@@ -200,7 +234,9 @@ class TypeProjection {
       return unwrapCallbackType();
     }
 
-    if (isInterface || typeIdentifier.baseType == BaseType.Object) {
+    if (isInterface ||
+        typeIdentifier.baseType == BaseType.ClassTypeModifier ||
+        typeIdentifier.baseType == BaseType.Object) {
       return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 

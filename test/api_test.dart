@@ -673,6 +673,14 @@ void main() {
           int Function(int hPrinter)>('AbortPrinter');
       expect(AbortPrinter, isA<Function>());
     });
+    test('Can instantiate AddForm', () {
+      final spoolss = DynamicLibrary.open('spoolss.dll');
+      final AddForm = spoolss.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm),
+          int Function(
+              int hPrinter, int Level, Pointer<Uint8> pForm)>('AddFormW');
+      expect(AddForm, isA<Function>());
+    });
     test('Can instantiate ClosePrinter', () {
       final spoolss = DynamicLibrary.open('spoolss.dll');
       final ClosePrinter = spoolss.lookupFunction<
@@ -974,8 +982,8 @@ void main() {
       test('Can instantiate inet_ntoa', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
         final inet_ntoa = ws2_32.lookupFunction<
-            Pointer<Utf8> Function(IN_ADDR in_),
-            Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
+            Pointer<Utf8> Function(IN_ADDR $in),
+            Pointer<Utf8> Function(IN_ADDR $in)>('inet_ntoa');
         expect(inet_ntoa, isA<Function>());
       });
     }
@@ -2139,6 +2147,15 @@ void main() {
           int Function(Pointer<Utf16> lpRootPathName)>('GetDriveTypeW');
       expect(GetDriveType, isA<Function>());
     });
+    test('Can instantiate GetEnvironmentVariable', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetEnvironmentVariable = kernel32.lookupFunction<
+          Uint32 Function(
+              Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, Uint32 nSize),
+          int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer,
+              int nSize)>('GetEnvironmentVariableW');
+      expect(GetEnvironmentVariable, isA<Function>());
+    });
     test('Can instantiate GetExitCodeProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetExitCodeProcess = kernel32.lookupFunction<
@@ -3301,6 +3318,14 @@ void main() {
         expect(SetDefaultDllDirectories, isA<Function>());
       });
     }
+    test('Can instantiate SetEnvironmentVariable', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetEnvironmentVariable = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpValue),
+          int Function(Pointer<Utf16> lpName,
+              Pointer<Utf16> lpValue)>('SetEnvironmentVariableW');
+      expect(SetEnvironmentVariable, isA<Function>());
+    });
     test('Can instantiate SetEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
@@ -3561,6 +3586,15 @@ void main() {
               int cb)>('UpdateResourceW');
       expect(UpdateResource, isA<Function>());
     });
+    test('Can instantiate VerifyVersionInfo', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VerifyVersionInfo = kernel32.lookupFunction<
+          Int32 Function(Pointer<OSVERSIONINFOEX> lpVersionInformation,
+              Uint32 dwTypeMask, Uint64 dwlConditionMask),
+          int Function(Pointer<OSVERSIONINFOEX> lpVersionInformation,
+              int dwTypeMask, int dwlConditionMask)>('VerifyVersionInfoW');
+      expect(VerifyVersionInfo, isA<Function>());
+    });
     test('Can instantiate VerLanguageName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VerLanguageName = kernel32.lookupFunction<
@@ -3568,6 +3602,15 @@ void main() {
           int Function(int wLang, Pointer<Utf16> szLang,
               int cchLang)>('VerLanguageNameW');
       expect(VerLanguageName, isA<Function>());
+    });
+    test('Can instantiate VerSetConditionMask', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VerSetConditionMask = kernel32.lookupFunction<
+          Uint64 Function(
+              Uint64 ConditionMask, Uint32 TypeMask, Uint8 Condition),
+          int Function(int ConditionMask, int TypeMask,
+              int Condition)>('VerSetConditionMask');
+      expect(VerSetConditionMask, isA<Function>());
     });
     test('Can instantiate VirtualAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -6982,8 +7025,8 @@ void main() {
     test('Can instantiate UnregisterPowerSettingNotification', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final UnregisterPowerSettingNotification = user32.lookupFunction<
-          Int32 Function(IntPtr Handle_),
-          int Function(int Handle_)>('UnregisterPowerSettingNotification');
+          Int32 Function(IntPtr $Handle),
+          int Function(int $Handle)>('UnregisterPowerSettingNotification');
       expect(UnregisterPowerSettingNotification, isA<Function>());
     });
     test('Can instantiate UnregisterTouchWindow', () {
@@ -7072,6 +7115,57 @@ void main() {
   });
 
   group('Test winspool functions', () {
+    test('Can instantiate AddJob', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final AddJob = winspool.lookupFunction<
+          Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pData,
+              Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
+          int Function(int hPrinter, int Level, Pointer<Uint8> pData, int cbBuf,
+              Pointer<Uint32> pcbNeeded)>('AddJobW');
+      expect(AddJob, isA<Function>());
+    });
+    test('Can instantiate AddPrinter', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final AddPrinter = winspool.lookupFunction<
+          IntPtr Function(
+              Pointer<Utf16> pName, Uint32 Level, Pointer<Uint8> pPrinter),
+          int Function(Pointer<Utf16> pName, int Level,
+              Pointer<Uint8> pPrinter)>('AddPrinterW');
+      expect(AddPrinter, isA<Function>());
+    });
+    test('Can instantiate AddPrinterConnection', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final AddPrinterConnection = winspool.lookupFunction<
+          Int32 Function(Pointer<Utf16> pName),
+          int Function(Pointer<Utf16> pName)>('AddPrinterConnectionW');
+      expect(AddPrinterConnection, isA<Function>());
+    });
+    test('Can instantiate AddPrinterConnection2', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final AddPrinterConnection2 = winspool.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<Utf16> pszName, Uint32 dwLevel,
+              Pointer pConnectionInfo),
+          int Function(int hWnd, Pointer<Utf16> pszName, int dwLevel,
+              Pointer pConnectionInfo)>('AddPrinterConnection2W');
+      expect(AddPrinterConnection2, isA<Function>());
+    });
+    test('Can instantiate AdvancedDocumentProperties', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final AdvancedDocumentProperties = winspool.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd,
+              IntPtr hPrinter,
+              Pointer<Utf16> pDeviceName,
+              Pointer<DEVMODE> pDevModeOutput,
+              Pointer<DEVMODE> pDevModeInput),
+          int Function(
+              int hWnd,
+              int hPrinter,
+              Pointer<Utf16> pDeviceName,
+              Pointer<DEVMODE> pDevModeOutput,
+              Pointer<DEVMODE> pDevModeInput)>('AdvancedDocumentPropertiesW');
+      expect(AdvancedDocumentProperties, isA<Function>());
+    });
     test('Can instantiate CloseSpoolFileHandle', () {
       final winspool = DynamicLibrary.open('winspool.drv');
       final CloseSpoolFileHandle = winspool.lookupFunction<
@@ -7333,6 +7427,25 @@ void main() {
               Pointer<Uint32> pcchBuffer)>('GetDefaultPrinterW');
       expect(GetDefaultPrinter, isA<Function>());
     });
+    test('Can instantiate GetForm', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetForm = winspool.lookupFunction<
+          Int32 Function(
+              IntPtr hPrinter,
+              Pointer<Utf16> pFormName,
+              Uint32 Level,
+              Pointer<Uint8> pForm,
+              Uint32 cbBuf,
+              Pointer<Uint32> pcbNeeded),
+          int Function(
+              int hPrinter,
+              Pointer<Utf16> pFormName,
+              int Level,
+              Pointer<Uint8> pForm,
+              int cbBuf,
+              Pointer<Uint32> pcbNeeded)>('GetFormW');
+      expect(GetForm, isA<Function>());
+    });
     test('Can instantiate GetJob', () {
       final winspool = DynamicLibrary.open('winspool.drv');
       final GetJob = winspool.lookupFunction<
@@ -7398,6 +7511,13 @@ void main() {
           int Function(
               Pointer<PRINT_EXECUTION_DATA> pData)>('GetPrintExecutionData');
       expect(GetPrintExecutionData, isA<Function>());
+    });
+    test('Can instantiate GetSpoolFileHandle', () {
+      final winspool = DynamicLibrary.open('winspool.drv');
+      final GetSpoolFileHandle = winspool.lookupFunction<
+          IntPtr Function(IntPtr hPrinter),
+          int Function(int hPrinter)>('GetSpoolFileHandle');
+      expect(GetSpoolFileHandle, isA<Function>());
     });
     test('Can instantiate IsValidDevmode', () {
       final winspool = DynamicLibrary.open('winspool.drv');
@@ -7955,6 +8075,15 @@ void main() {
           int Function(int hwnd, Pointer<Utf16> pszSubAppName,
               Pointer<Utf16> pszSubIdList)>('SetWindowTheme');
       expect(SetWindowTheme, isA<Function>());
+    });
+    test('Can instantiate SetWindowThemeAttribute', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final SetWindowThemeAttribute = uxtheme.lookupFunction<
+          Int32 Function(IntPtr hwnd, Int32 eAttribute, Pointer pvAttribute,
+              Uint32 cbAttribute),
+          int Function(int hwnd, int eAttribute, Pointer pvAttribute,
+              int cbAttribute)>('SetWindowThemeAttribute');
+      expect(SetWindowThemeAttribute, isA<Function>());
     });
   });
 
@@ -10398,8 +10527,6 @@ void main() {
       });
     }
   });
-
-  group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {});
 
   group('Test winscard functions', () {
     test('Can instantiate SCardAccessStartedEvent', () {

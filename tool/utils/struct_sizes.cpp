@@ -12,7 +12,9 @@
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\struct_sizes.dart as input to the test harness.
 
-// Compile with cl tool\struct_sizes.cpp /link ws2_32.lib
+// Compile with:
+//    cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt" \
+//      tool\utils\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <winsock2.h>
@@ -73,7 +75,7 @@ void main()
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BSMINFO': %zu,\n", sizeof(BSMINFO));
     printf("  'BY_HANDLE_FILE_INFORMATION': %zu,\n", sizeof(BY_HANDLE_FILE_INFORMATION));
-    printf("  'CBT_CREATEWNDW': %zu,\n", sizeof(CBT_CREATEWNDW));
+    printf("  'CBT_CREATEWND': %zu,\n", sizeof(CBT_CREATEWNDW));
     printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
@@ -95,7 +97,7 @@ void main()
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
-    printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
+    printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));
     printf("  'DCB': %zu,\n", sizeof(DCB));
     printf("  'DEBUGHOOKINFO': %zu,\n", sizeof(DEBUGHOOKINFO));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
@@ -174,7 +176,7 @@ void main()
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'MOUSEHOOKSTRUCT': %zu,\n", sizeof(MOUSEHOOKSTRUCT));
-    printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MSLLHOOKSTRUCT));
+    printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MOUSEHOOKSTRUCTEX));
     printf("  'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MSG': %zu,\n", sizeof(MSG));
@@ -189,7 +191,7 @@ void main()
     printf("  'OPENCARDNAME_EX': %zu,\n", sizeof(OPENCARDNAME_EXW));
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAMEW));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
-    printf("  'OSVERSIONINFOEXW': %zu,\n", sizeof(OSVERSIONINFOEXW));
+    printf("  'OSVERSIONINFOEX': %zu,\n", sizeof(OSVERSIONINFOEXW));
     printf("  'OVERLAPPED_ENTRY': %zu,\n", sizeof(OVERLAPPED_ENTRY));
     printf("  'PAINTSTRUCT': %zu,\n", sizeof(PAINTSTRUCT));
     printf("  'PALETTEENTRY': %zu,\n", sizeof(PALETTEENTRY));

@@ -26,33 +26,52 @@ const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
 /// {@category Interface}
 /// {@category com}
 class IFileOpenDialog extends IFileDialog {
-  // vtable begins at 27, ends at 28
+  // vtable begins at 27, is 2 entries long.
   IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
+  int GetResults(
+    Pointer<Pointer<COMObject>> ppenum,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(27)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-                          Pointer, Pointer<Pointer<COMObject>> ppenum)>>>()
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
-      ptr.ref.lpVtbl, ppenum);
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppenum,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppenum,
+      );
 
-  int GetSelectedItems(Pointer<Pointer<COMObject>> ppsai) =>
+  int GetSelectedItems(
+    Pointer<Pointer<COMObject>> ppsai,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(28)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
-          ptr.ref.lpVtbl, ppsai);
+          .elementAt(28)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppsai,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> ppsai,
+          )>()(
+        ptr.ref.lpVtbl,
+        ppsai,
+      );
 }
 
 /// @nodoc

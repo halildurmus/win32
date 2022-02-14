@@ -26,93 +26,146 @@ const IID_IDispatch = '{00020400-0000-0000-C000-000000000046}';
 /// {@category Interface}
 /// {@category com}
 class IDispatch extends IUnknown {
-  // vtable begins at 3, ends at 6
+  // vtable begins at 3, is 4 entries long.
   IDispatch(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.lpVtbl.value
+  int GetTypeInfoCount(
+    Pointer<Uint32> pctinfo,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint32> pctinfo)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint32> pctinfo,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint32> pctinfo)>()(
-      ptr.ref.lpVtbl, pctinfo);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32> pctinfo,
+          )>()(
+        ptr.ref.lpVtbl,
+        pctinfo,
+      );
 
-  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
+  int GetTypeInfo(
+    int iTInfo,
+    int lcid,
+    Pointer<Pointer<COMObject>> ppTInfo,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Uint32 iTInfo, Uint32 lcid,
-                              Pointer<Pointer<COMObject>> ppTInfo)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, int iTInfo, int lcid,
-                      Pointer<Pointer<COMObject>> ppTInfo)>()(
-          ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Uint32 iTInfo,
+            Uint32 lcid,
+            Pointer<Pointer<COMObject>> ppTInfo,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int iTInfo,
+            int lcid,
+            Pointer<Pointer<COMObject>> ppTInfo,
+          )>()(
+        ptr.ref.lpVtbl,
+        iTInfo,
+        lcid,
+        ppTInfo,
+      );
 
-  int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
-          int cNames, int lcid, Pointer<Int32> rgDispId) =>
+  int GetIDsOfNames(
+    Pointer<GUID> riid,
+    Pointer<Pointer<Utf16>> rgszNames,
+    int cNames,
+    int lcid,
+    Pointer<Int32> rgDispId,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<GUID> riid,
-                              Pointer<Pointer<Utf16>> rgszNames,
-                              Uint32 cNames,
-                              Uint32 lcid,
-                              Pointer<Int32> rgDispId)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<GUID> riid,
-                      Pointer<Pointer<Utf16>> rgszNames,
-                      int cNames,
-                      int lcid,
-                      Pointer<Int32> rgDispId)>()(
-          ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> riid,
+            Pointer<Pointer<Utf16>> rgszNames,
+            Uint32 cNames,
+            Uint32 lcid,
+            Pointer<Int32> rgDispId,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> riid,
+            Pointer<Pointer<Utf16>> rgszNames,
+            int cNames,
+            int lcid,
+            Pointer<Int32> rgDispId,
+          )>()(
+        ptr.ref.lpVtbl,
+        riid,
+        rgszNames,
+        cNames,
+        lcid,
+        rgDispId,
+      );
 
   int Invoke(
-          int dispIdMember,
-          Pointer<GUID> riid,
-          int lcid,
-          int wFlags,
-          Pointer<DISPPARAMS> pDispParams,
-          Pointer<VARIANT> pVarResult,
-          Pointer<EXCEPINFO> pExcepInfo,
-          Pointer<Uint32> puArgErr) =>
+    int dispIdMember,
+    Pointer<GUID> riid,
+    int lcid,
+    int wFlags,
+    Pointer<DISPPARAMS> pDispParams,
+    Pointer<VARIANT> pVarResult,
+    Pointer<EXCEPINFO> pExcepInfo,
+    Pointer<Uint32> puArgErr,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Int32 dispIdMember,
-                              Pointer<GUID> riid,
-                              Uint32 lcid,
-                              Uint16 wFlags,
-                              Pointer<DISPPARAMS> pDispParams,
-                              Pointer<VARIANT> pVarResult,
-                              Pointer<EXCEPINFO> pExcepInfo,
-                              Pointer<Uint32> puArgErr)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      int dispIdMember,
-                      Pointer<GUID> riid,
-                      int lcid,
-                      int wFlags,
-                      Pointer<DISPPARAMS> pDispParams,
-                      Pointer<VARIANT> pVarResult,
-                      Pointer<EXCEPINFO> pExcepInfo,
-                      Pointer<Uint32> puArgErr)>()(ptr.ref.lpVtbl, dispIdMember,
-          riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 dispIdMember,
+            Pointer<GUID> riid,
+            Uint32 lcid,
+            Uint16 wFlags,
+            Pointer<DISPPARAMS> pDispParams,
+            Pointer<VARIANT> pVarResult,
+            Pointer<EXCEPINFO> pExcepInfo,
+            Pointer<Uint32> puArgErr,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int dispIdMember,
+            Pointer<GUID> riid,
+            int lcid,
+            int wFlags,
+            Pointer<DISPPARAMS> pDispParams,
+            Pointer<VARIANT> pVarResult,
+            Pointer<EXCEPINFO> pExcepInfo,
+            Pointer<Uint32> puArgErr,
+          )>()(
+        ptr.ref.lpVtbl,
+        dispIdMember,
+        riid,
+        lcid,
+        wFlags,
+        pDispParams,
+        pVarResult,
+        pExcepInfo,
+        puArgErr,
+      );
 }

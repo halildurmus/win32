@@ -1,34 +1,26 @@
 import 'package:winmd/winmd.dart';
 
+import '../shared/exclusions.dart';
+import '../shared/importHeaders.dart';
 import 'method.dart';
 import 'property.dart';
+import 'safenames.dart';
 import 'utils.dart';
 
 class InterfaceProjection {
   final TypeDef typeDef;
-  final List<MethodProjection> methodProjections = [];
 
-  InterfaceProjection(this.typeDef) {
-    var vtableOffset = vtableStart;
-    for (final method in typeDef.methods) {
-      // TODO: Remove params check when
-      // https://github.com/microsoft/win32metadata/issues/707 is fixed
-      if (method.isGetProperty && method.parameters.isNotEmpty) {
-        final getPropertyProjection =
-            GetPropertyProjection(method, vtableOffset++);
-        methodProjections.add(getPropertyProjection);
-      } else if (method.isSetProperty && method.parameters.isNotEmpty) {
-        final setPropertyProjection =
-            SetPropertyProjection(method, vtableOffset++);
-        methodProjections.add(setPropertyProjection);
-      } else {
-        final methodProjection = MethodProjection(method, vtableOffset++);
-        methodProjections.add(methodProjection);
-      }
-    }
-  }
+  // Lazily cached values, with matching property
+  int? _vtableStart;
+  int get vtableStart => _vtableStart ??= cacheVtableStart(typeDef);
 
-  int calculateVTableStart(TypeDef? type) {
+  List<MethodProjection>? _methodProjections;
+  List<MethodProjection> get methodProjections =>
+      _methodProjections ??= _cacheMethodProjections();
+
+  InterfaceProjection(this.typeDef);
+
+  int cacheVtableStart(TypeDef? type) {
     if (type == null) {
       return 0;
     }
@@ -37,7 +29,7 @@ class InterfaceProjection {
       var sum = 0;
 
       for (final interface in type.interfaces) {
-        sum += interface.methods.length + calculateVTableStart(interface);
+        sum += interface.methods.length + cacheVtableStart(interface);
       }
 
       return sum;
@@ -46,20 +38,98 @@ class InterfaceProjection {
     return 0;
   }
 
-  int get vtableStart => calculateVTableStart(typeDef);
+  List<MethodProjection> _cacheMethodProjections() {
+    final projection = <MethodProjection>[];
+    var vtableOffset = vtableStart;
+    for (final method in typeDef.methods) {
+      if (method.isGetProperty && !isExcludedGetProperty(method)) {
+        final getPropertyProjection =
+            GetPropertyProjection(method, vtableOffset++);
+        projection.add(getPropertyProjection);
+      } else if (method.isSetProperty &&
+          method.parameters.isNotEmpty &&
+          !isExcludedSetProperty(method)) {
+        final setPropertyProjection =
+            SetPropertyProjection(method, vtableOffset++);
+        projection.add(setPropertyProjection);
+      } else {
+        final methodProjection = MethodProjection(method, vtableOffset++);
+        projection.add(methodProjection);
+      }
+    }
+    return projection;
+  }
 
-  String get shortName => stripAnsiUnicodeSuffix(typeDef.name.split('.').last);
+  // TODO: May need to review suffix stripping on v3
+  String get shortName => stripAnsiUnicodeSuffix(
+      stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)));
 
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
-      return typeDef.interfaces.first.name.split('.').last;
+      return safeIdentifierForTypeDef(typeDef.interfaces.first);
+    }
+    return '';
+  }
+
+  String getImportForTypeDef(TypeDef typeDef) {
+    if (typeDef.isDelegate) {
+      return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
+    } else if (typeDef.isInterface) {
+      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(typeDef.name.split('.').last)}.dart';
     } else {
-      return '';
+      return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
   }
 
-  String get importHeader =>
-      inheritsFrom.isNotEmpty ? "import '$inheritsFrom.dart';" : '';
+  String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
+    if (specialTypes.contains(typeIdentifier.name)) {
+      return 'specialTypes.dart';
+    }
+
+    if (typeIdentifier.name.startsWith('Windows.Win32')) {
+      return getImportForTypeDef(typeIdentifier.type!);
+    }
+
+    return null;
+  }
+
+  // TODO: Find duplicates. This is the "correct" one.
+  Set<String> importsForClass() {
+    final importList = <String>{};
+
+    for (final method in typeDef.methods) {
+      final paramsAndReturnType = [...method.parameters, method.returnType];
+      for (final param in paramsAndReturnType) {
+        // Add imports for a parameter itself (e.g. VARIANT)
+        final import = getImportForTypeIdentifier(param.typeIdentifier);
+        if (import != null) importList.add(import);
+
+        // Add imports for a type within a pointer (e.g. Pointer<VARIANT>). Keep
+        // unwrapping until there are no types left.
+        var refType = param.typeIdentifier;
+        while (refType.typeArg != null) {
+          refType = refType.typeArg!;
+          final import = getImportForTypeIdentifier(refType);
+          if (import != null) importList.add(import);
+        }
+      }
+    }
+    return importList;
+  }
+
+  late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
+
+  String get interfaceImport =>
+      inheritsFrom != '' ? getImportForTypeDef(typeDef.interfaces.first) : '';
+
+  String get importHeader {
+    final imports = {interfaceImport, ...importsForClass()}
+      ..removeWhere((item) => item == '')
+      // TODO: Use exclusions.dart for these next two lines
+      ..removeWhere((item) => item.endsWith('ICondition.dart'))
+      ..removeWhere((item) => item.endsWith('IStemmer.dart'));
+    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+  }
 
   String get header => '''
     // $shortName.dart
@@ -71,16 +141,6 @@ class InterfaceProjection {
     import 'dart:ffi';
 
     import 'package:ffi/ffi.dart';
-
-    import '../combase.dart';
-    import '../constants.dart';
-    import '../exceptions.dart';
-    import '../guid.dart';
-    import '../macros.dart';
-    import '../ole32.dart';
-    import '../structs.dart';
-    import '../structs.g.dart';
-    import '../utils.dart';
   ''';
 
   String get guidConstants => '''
@@ -118,13 +178,14 @@ class InterfaceProjection {
 
     return '''
       $header
-      $importHeader
+      ${versionSpecificImports(pathToSrc, importHeader, typeDef.interfaces)}
+      ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
 
       /// {@category Interface}
       /// {@category com}
       class $shortName $extendsClause {
-        // vtable begins at $vtableStart, ends at ${vtableStart + methodProjections.length - 1}
+        // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor
 
         ${methodProjections.map((p) => p.toString()).join('\n')}

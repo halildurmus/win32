@@ -48,28 +48,28 @@
         "comment": "The AddFontResourceEx function adds the font resource from the specified file to the system. Fonts added with the AddFontResourceEx function can be marked as private and not enumerable."
     },
     "AddForm": {
-        "prototype": "BOOL AddForm(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pForm\n);",
+        "prototype": "BOOL AddFormW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pForm\n);",
         "dllLibrary": "spoolss",
         "comment": "The AddForm function adds a form to the list of available forms that can be selected for the specified printer.",
         "category": "winspool"
     },
     "AddJob": {
-        "prototype": "BOOL AddJob(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "prototype": "BOOL AddJobW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
         "dllLibrary": "winspool",
         "comment": "The AddJob function adds a print job to the list of print jobs that can be scheduled by the print spooler. The function retrieves the name of the file you can use to store the job."
     },
     "AddPrinter": {
-        "prototype": "HANDLE AddPrinter(\n  _In_ LPTSTR *pName,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter\n);",
+        "prototype": "HANDLE AddPrinterW(\n  _In_ LPWSTR pName,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pPrinter\n);",
         "dllLibrary": "winspool",
         "comment": "The AddPrinter function adds a printer to the list of supported printers for a specified server."
     },
     "AddPrinterConnection": {
-        "prototype": "BOOL AddPrinterConnection(\n  _In_ LPTSTR pName\n);",
+        "prototype": "BOOL AddPrinterConnectionW(\n  _In_ LPWSTR pName\n);",
         "dllLibrary": "winspool",
         "comment": "The AddPrinterConnection function adds a connection to the specified printer for the current user."
     },
     "AddPrinterConnection2": {
-        "prototype": "BOOL AddPrinterConnection2(\n  _In_ HWND    hWnd,\n  _In_ LPCTSTR pszName,\n       DWORD   dwLevel,\n  _In_ PVOID   pConnectionInfo\n);",
+        "prototype": "BOOL AddPrinterConnection2W(\n  _In_ HWND    hWnd,\n  _In_ LPCWSTR pszName,\n       DWORD   dwLevel,\n  _In_ PVOID   pConnectionInfo\n);",
         "dllLibrary": "winspool",
         "comment": "Adds a connection to the specified printer for the current user and specifies connection details."
     },
@@ -95,7 +95,7 @@
         "minimumWindowsVersion": "WIN10_RS1"
     },
     "AdvancedDocumentProperties": {
-        "prototype": "LONG AdvancedDocumentProperties(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput\n);",
+        "prototype": "LONG AdvancedDocumentPropertiesW(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPWSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput\n);",
         "dllLibrary": "winspool",
         "comment": "The AdvancedDocumentProperties function displays a printer-configuration dialog box for the specified printer, allowing the user to configure that printer."
     },
@@ -1048,11 +1048,6 @@
         "dllLibrary": "kernel32",
         "comment": "Converts a DNS-style host name to a NetBIOS-style computer name."
     },
-    "DocumentEvent": {
-        "prototype": "HRESULT DocumentEventW(\n  _In_  HANDLE hPrinter,\n  _In_  HDC    hdc,\n        INT    iEsc,\n        ULONG  cbIn,\n  _In_  PVOID  pvIn,\n        ULONG  cbOut,\n  _Out_ PVOID  pvOut\n);",
-        "dllLibrary": "winspool",
-        "comment": "The DocumentEvent function is an event handler for events associated with printing a document."
-    },
     "DocumentProperties": {
         "prototype": "LONG DocumentPropertiesW(\n  _In_  HWND     hWnd,\n  _In_  HANDLE   hPrinter,\n  _In_  LPTSTR   pDeviceName,\n  _Out_ PDEVMODE pDevModeOutput,\n  _In_  PDEVMODE pDevModeInput,\n  _In_  DWORD    fMode\n);",
         "dllLibrary": "winspool",
@@ -1277,11 +1272,6 @@
         "prototype": "BOOL EndPath(\n  HDC hdc\n);",
         "dllLibrary": "gdi32",
         "comment": "The EndPath function closes a path bracket and selects the path defined by the bracket into the specified device context."
-    },
-    "EndTask": {
-        "prototype": "BOOL EndTask(\n  HWND hWnd,\n  BOOL fShutDown,\n  BOOL fForce\n);",
-        "dllLibrary": "user32",
-        "comment": "Forcibly closes the specified window."
     },
     "EndUpdateResource": {
         "prototype": "BOOL EndUpdateResourceW(\n  HANDLE hUpdate,\n  BOOL   fDiscard\n);",
@@ -1830,11 +1820,6 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the thread identifier of the calling thread."
     },
-    "GetCurrentThreadToken": {
-        "prototype": "HANDLE GetCurrentThreadToken();",
-        "dllLibrary": "kernel32",
-        "comment": "Retrieves a pseudo-handle that you can use as a shorthand way to refer to the impersonation token that was assigned to the current thread."
-    },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
         "dllLibrary": "user32",
@@ -1968,7 +1953,7 @@
         "comment": "Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or network drive."
     },
     "GetEnvironmentVariable": {
-        "prototype": "DWORD GetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPTSTR  lpBuffer,\n  DWORD   nSize\n);",
+        "prototype": "DWORD GetEnvironmentVariableW(\n  LPCTSTR lpName,\n  LPTSTR  lpBuffer,\n  DWORD   nSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the contents of the specified variable from the environment block of the calling process."
     },
@@ -2043,7 +2028,7 @@
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
     },
     "GetForm": {
-        "prototype": "BOOL GetForm(\n  _In_  HANDLE  hPrinter,\n  _In_  LPTSTR  pFormName,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
+        "prototype": "BOOL GetFormW(\n  _In_  HANDLE  hPrinter,\n  _In_  LPWSTR  pFormName,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pForm,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
         "dllLibrary": "winspool",
         "comment": "The GetForm function retrieves information about a specified form."
     },
@@ -2641,7 +2626,7 @@
         "minimumWindowsVersion": "WIN81"
     },
     "GetSpoolFileHandle": {
-        "prototype": "HANDLE GetSpoolFileHandleW(\n  _In_ HANDLE hPrinter\n);",
+        "prototype": "HANDLE GetSpoolFileHandle(\n  _In_ HANDLE hPrinter\n);",
         "dllLibrary": "winspool",
         "comment": "The GetSpoolFileHandle function retrieves a handle for the spool file associated with the job currently submitted by the application."
     },
@@ -3293,16 +3278,6 @@
         "prototype": "BOOL IsWindowEnabled(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether the specified window is enabled for mouse and keyboard input."
-    },
-    "IsWindows10OrGreater": {
-        "prototype": "VERSIONHELPERAPI IsWindows10OrGreater();",
-        "dllLibrary": "kernel32",
-        "comment": "Indicates if the current OS version matches, or is greater than, the Windows 10 version."
-    },
-    "IsWindowsServer": {
-        "prototype": "VERSIONHELPERAPI IsWindowsServer();",
-        "dllLibrary": "kernel32",
-        "comment": "Indicates if the current OS is a Windows Server release. Applications that need to distinguish between server and client versions of Windows should call this function."
     },
     "IsWindowUnicode": {
         "prototype": "BOOL IsWindowUnicode(\n  HWND hWnd);",
@@ -4499,13 +4474,6 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
-    "RoGetMetaDataFile": {
-        "prototype": "HRESULT RoGetMetaDataFile(\n  const HSTRING        name,\n  IMetaDataDispenserEx *metaDataDispenser,\n  HSTRING              *metaDataFilePath,\n  IMetaDataImport2     **metaDataImport,\n  mdTypeDef            *typeDefToken\n);",
-        "apiSet": "api-ms-win-ro-typeresolution-l1-1-0",
-        "comment": "Locates and retrieves the metadata file that describes the Application Binary Interface (ABI) for the specified typename.",
-        "category": "winrt",
-        "minimumWindowsVersion": "WIN8"
-    },
     "RoInitialize": {
         "prototype": "HRESULT RoInitialize(\n  RO_INIT_TYPE initType\n);",
         "apiSet": "api-ms-win-core-winrt-l1-1-0",
@@ -5024,7 +4992,7 @@
         "comment": "Sets the double-click time for the mouse. A double-click is a series of two clicks of a mouse button, the second occurring within a specified time after the first. The double-click time is the maximum number of milliseconds that may occur between the first and second clicks of a double-click."
     },
     "SetEnvironmentVariable": {
-        "prototype": "BOOL SetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPCTSTR lpValue\n);",
+        "prototype": "BOOL SetEnvironmentVariableW(\n  LPCWSTR lpName,\n  LPCWSTR lpValue\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the contents of the specified environment variable for the current process."
     },
@@ -5404,10 +5372,10 @@
         "dllLibrary": "uxtheme",
         "comment": "Causes a window to use a different set of visual style information than its class normally uses."
     },
-    "SetWindowThemeNonClientAttributes": {
-        "prototype": "HRESULT SetWindowThemeNonClientAttributes(\n  HWND  hwnd,\n  DWORD dwMask,\n  DWORD dwAttributes\n);",
+    "SetWindowThemeAttribute": {
+        "prototype": "HRESULT SetWindowThemeAttribute(\n  [in] HWND                     hwnd,\n       WINDOWTHEMEATTRIBUTETYPE eAttribute,\n  [in] PVOID                    pvAttribute,\n  [in] DWORD                    cbAttribute\n);",
         "dllLibrary": "uxtheme",
-        "comment": "Sets non-client attributes to control how visual styles are applied to a specified window."
+        "comment": "Sets attributes to control how visual styles are applied to a specified window."
     },
     "SHCreateItemFromParsingName": {
         "prototype": "SHSTDAPI SHCreateItemFromParsingName(\n  PCWSTR   pszPath,\n  IBindCtx *pbc,\n  REFIID   riid,\n  void     **ppv\n);",
@@ -5939,6 +5907,16 @@
         "prototype": "BOOL VerQueryValueW(\n  LPCVOID pBlock,\n  LPCWSTR lpSubBlock,\n  LPVOID  *lplpBuffer,\n  PUINT   puLen\n);",
         "dllLibrary": "version",
         "comment": "Retrieves specified version information from the specified version-information resource. To retrieve the appropriate resource, before you call VerQueryValue, you must first call the GetFileVersionInfoSize function, and then the GetFileVersionInfo function."
+    },
+    "VerSetConditionMask": {
+        "prototype": "NTSYSAPI ULONGLONG VerSetConditionMask(  \n[in] ULONGLONG ConditionMask,  \n[in] DWORD     TypeMask,  \n[in] BYTE      Condition\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the bits of a 64-bit value to indicate the comparison operator to use for a specified operating system version attribute. This function is used to build the dwlConditionMask parameter of the VerifyVersionInfo function."
+    },
+    "VerifyVersionInfo": {
+        "prototype": "BOOL VerifyVersionInfoW(\n  [in] LPOSVERSIONINFOEXW lpVersionInformation,\n  [in] DWORD              dwTypeMask,\n  [in] DWORDLONG          dwlConditionMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Compares a set of operating system version requirements to the corresponding values for the currently running version of the system. This function is subject to manifest-based behavior."
     },
     "VirtualAlloc": {
         "prototype": "LPVOID VirtualAlloc(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flAllocationType,\n  DWORD  flProtect\n);",
@@ -6596,12 +6574,6 @@
         "prototype": "DWORD XInputGetCapabilities(\n  [in]  DWORD               dwUserIndex,\n  [in]  DWORD               dwFlags,\n  [out] XINPUT_CAPABILITIES *pCapabilities\n);",
         "dllLibrary": "xinputuap",
         "comment": "Retrieves the capabilities and features of a connected controller.",
-        "category": "xinput"
-    },
-    "XInputGetDSoundAudioDeviceGuids": {
-        "prototype": "DWORD XInputGetDSoundAudioDeviceGuids(\n  DWORD dwUserIndex,\n  GUID  *pDSoundRenderGuid,\n  GUID  *pDSoundCaptureGuid\n);",
-        "dllLibrary": "xinputuap",
-        "comment": "Gets the sound rendering and sound capture device GUIDs that are associated with the headset connected to the specified controller.",
         "category": "xinput"
     },
     "XInputGetKeystroke": {

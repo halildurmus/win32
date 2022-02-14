@@ -27,26 +27,50 @@ const IID_IAppxManifestOSPackageDependency =
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestOSPackageDependency extends IUnknown {
-  // vtable begins at 3, ends at 4
+  // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+  int GetName(
+    Pointer<Pointer<Utf16>> name,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Pointer<Utf16>> name)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> name,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
-      ptr.ref.lpVtbl, name);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<Utf16>> name,
+          )>()(
+        ptr.ref.lpVtbl,
+        name,
+      );
 
-  int GetVersion(Pointer<Uint64> version) => ptr.ref.lpVtbl.value
+  int GetVersion(
+    Pointer<Uint64> version,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Uint64> version)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Uint64> version,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Uint64> version)>()(
-      ptr.ref.lpVtbl, version);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint64> version,
+          )>()(
+        ptr.ref.lpVtbl,
+        version,
+      );
 }

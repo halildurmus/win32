@@ -26,37 +26,72 @@ const IID_IAppxFilesEnumerator = '{F007EEAF-9831-411C-9847-917CDC62D1FE}';
 /// {@category Interface}
 /// {@category com}
 class IAppxFilesEnumerator extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   IAppxFilesEnumerator(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Pointer<Pointer<COMObject>> file)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer,
-              Pointer<Pointer<COMObject>> file)>()(ptr.ref.lpVtbl, file);
+  int GetCurrent(
+    Pointer<Pointer<COMObject>> file,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> file,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> file,
+          )>()(
+        ptr.ref.lpVtbl,
+        file,
+      );
 
-  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.lpVtbl.value
+  int GetHasCurrent(
+    Pointer<Int32> hasCurrent,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> hasCurrent)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> hasCurrent,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
-      ptr.ref.lpVtbl, hasCurrent);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> hasCurrent,
+          )>()(
+        ptr.ref.lpVtbl,
+        hasCurrent,
+      );
 
-  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.lpVtbl.value
+  int MoveNext(
+    Pointer<Int32> hasNext,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Int32> hasNext)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> hasNext,
+          )>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
-      ptr.ref.lpVtbl, hasNext);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> hasNext,
+          )>()(
+        ptr.ref.lpVtbl,
+        hasNext,
+      );
 }

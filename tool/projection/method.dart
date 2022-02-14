@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import 'parameter.dart';
+import 'safenames.dart';
 import 'type.dart';
 
 /// A method.
@@ -31,29 +32,53 @@ class MethodProjection {
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
     if (overloadName.isNotEmpty) return overloadName;
 
-    // If not, we check whether multiple methods exist with the same name.
-    final overloads = method.parent.methods.where((m) => m.name == method.name);
+    // If not, we check whether multiple methods exist with the same name. We
+    // also need to check up the interface chain, since otherwise overloaded
+    // methods may be missed. For example, IDWriteFactory2 contains methods that
+    // overload those in IDWriteFactory1.
+    final overloads =
+        method.parent.methods.where((m) => m.name == method.name).toList();
+    var interfaceTypeDef = method.parent;
+    // perf optimization to save work on the most common case of IUnknown
+    while (interfaceTypeDef.interfaces.isNotEmpty &&
+        !(interfaceTypeDef.interfaces.first.name ==
+            'Windows.Win32.System.Com.IUnknown')) {
+      interfaceTypeDef = interfaceTypeDef.interfaces.first;
+      overloads
+          .addAll(interfaceTypeDef.methods.where((m) => m.name == method.name));
+    }
 
     // If so, and there is more than one entry with the same name, add a suffix
     // to all but the first.
     if (overloads.length > 1) {
-      final overloadIndex = overloads.toList().indexOf(method);
+      final reversedOverloads = overloads.reversed.toList();
+      final overloadIndex =
+          reversedOverloads.indexWhere((m) => m.token == method.token);
       if (overloadIndex > 0) {
-        return '${method.name}_$overloadIndex';
+        return '${safeIdentifierForString(method.name)}_$overloadIndex';
       }
     }
 
+    // Windows.Win32.Web.MsHtml includes a .toString() method. We replace this
+    // to avoid undue complexity.
+    if (method.name == 'toString') {
+      return 'toUtf16String';
+    }
+
     // Otherwise the original name is fine.
-    return method.name;
+
+    // TODO: Can we remove safeIdentifierForString here? Do we apply it later
+    //  anyway?
+    return safeIdentifierForString(method.name);
   }
 
   String get methodParams =>
-      parameters.map((param) => param.dartProjection).join(', ');
+      parameters.map((param) => '${param.dartProjection}, ').join();
 
   String get nativeParams => [
         'Pointer',
         ...parameters.map((param) => param.ffiProjection),
-      ].join(', ');
+      ].map((p) => '$p, ').join();
 
   String get nativePrototype =>
       '${returnType.nativeType} Function($nativeParams)';
@@ -61,12 +86,14 @@ class MethodProjection {
   String get dartParams => [
         'Pointer',
         ...parameters.map((param) => param.dartProjection),
-      ].join(', ');
+      ].map((p) => '$p, ').join();
 
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
 
-  String get identifiers =>
-      ['ptr.ref.lpVtbl', ...parameters.map((param) => param.name)].join(', ');
+  String get identifiers => [
+        'ptr.ref.lpVtbl',
+        ...parameters.map((param) => param.identifier)
+      ].map((p) => '$p, ').join();
 
   // TODO: Check whether there's a better way to detect how methods like
   // put_AutoDemodulate are declared (should this be a property?) Detect whether
@@ -77,7 +104,7 @@ class MethodProjection {
   // this combination (https://github.com/microsoft/win32metadata/issues/707).
   // So instead, we also need to check the number of parameters.
 
-  // TODO: Consider using `late final` technique to cache the function lookup.
+  // TODO: Consider using technique to cache the function lookup.
   @override
   String toString() => '''
       ${returnType.dartType} $name($methodParams) => ptr.ref.lpVtbl.value

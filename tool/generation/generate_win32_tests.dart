@@ -7,37 +7,28 @@
 
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:winmd/winmd.dart';
 
-import '../manual_gen/function.dart';
-import '../manual_gen/struct_sizes.dart';
-import '../manual_gen/win32api.dart';
+import '../inputs/functions.dart';
+import '../inputs/struct_sizes.dart';
 import '../projection/function.dart';
 import '../projection/type.dart';
-import 'generate_win32.dart';
-import 'win32_functions.dart';
+import '../projection/utils.dart';
 
-int generateTests(Win32API win32) {
+import 'generate_win32_functions.dart';
+import 'headers.dart';
+
+int generateFunctionTests(Map<String, Win32Function> functions) {
+  final methods = <Method>[];
+  final scope = MetadataStore.getWin32Scope();
+  final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+  for (final api in apis) {
+    methods.addAll(api.methods);
+  }
   var testsGenerated = 0;
-  final writer = File('test/api_test.dart').openSync(mode: FileMode.writeOnly)
-    ..writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Tests that Win32 API prototypes can be successfully loaded (i.e. that
-// lookupFunction works for all the APIs generated)
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-@TestOn('windows')
-
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'package:test/test.dart';
-
-import 'package:win32/win32.dart';
-import 'package:win32/winsock2.dart';
+  final buffer = StringBuffer()..write('''
+$testFunctionsHeader
 
 import 'helpers.dart';
 
@@ -48,31 +39,29 @@ void main() {
   // The .toSet() removes duplicates.
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  final libraries = win32.functions.values
-      .map((e) => e.dllLibrary)
-      .toSet()
-      .toList()
+  final libraries = functions.values.map((e) => e.dllLibrary).toSet().toList()
     ..removeWhere((library) => library == 'wlanapi');
 
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
 
-    writer.writeStringSync("group('Test $library functions', () {\n");
+    buffer.write("group('Test $library functions', () {\n");
 
-    final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
+    final filteredFunctions = Map<String, Win32Function>.of(functions)
       ..removeWhere((key, value) => value.dllLibrary != library)
       ..removeWhere(
           (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
-    for (final function in filteredFunctionList.keys) {
-      if (filteredFunctionList[function]!.test == false) continue;
+    for (final function in filteredFunctions.keys) {
+      if (filteredFunctions[function]!.test == false) continue;
 
       late Method method;
       try {
         method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctionList[function]!.prototype));
+            methodMatches(m.name, filteredFunctions[function]!.prototype));
       } on StateError {
+        print("Couldn't find $function");
         continue;
       }
 
@@ -84,7 +73,7 @@ void main() {
           TypeProjection(method.returnType.typeIdentifier).dartType;
 
       final minimumWindowsVersion =
-          filteredFunctionList[function]!.minimumWindowsVersion;
+          filteredFunctions[function]!.minimumWindowsVersion;
 
       final test = '''
       test('Can instantiate $function', () {
@@ -97,45 +86,29 @@ void main() {
       });''';
 
       if (minimumWindowsVersion > 0) {
-        writer.writeStringSync('''
+        buffer.write('''
         if (windowsBuildNumber >= $minimumWindowsVersion) {
           $test
         }''');
       } else {
-        writer.writeStringSync(test);
+        buffer.write(test);
       }
-      writer.writeStringSync('\n');
+      buffer.writeln();
       testsGenerated++;
     }
-    writer.writeStringSync('});\n\n');
+    buffer.write('});\n\n');
   }
-  writer
-    ..writeStringSync('}')
-    ..closeSync();
+  buffer.write('}');
+  File('test/api_test.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
 }
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final writer = File('test/struct_test.dart')
-      .openSync(mode: FileMode.writeOnly)
-    ..writeStringSync('''
-// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
-// Tests that Win32 structs are the right size.
-
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-@TestOn('windows')
-
-import 'dart:ffi';
-
-import 'package:test/test.dart';
-import 'package:win32/win32.dart';
-import 'package:win32/winsock2.dart';
+  final buffer = StringBuffer()..write('''
+$testStructsHeader
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;
@@ -143,13 +116,13 @@ void main() {
 
   for (final struct in structSize64.keys) {
     if (structSize64[struct] == structSize32[struct]) {
-      writer.writeStringSync('''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
   });
     ''');
     } else {
-      writer.writeStringSync('''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
@@ -163,9 +136,10 @@ void main() {
     testsGenerated++;
   }
 
-  writer
-    ..writeStringSync('}')
-    ..closeSync();
+  buffer.write('}');
+
+  File('test/struct_test.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
 }

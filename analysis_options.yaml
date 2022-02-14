@@ -33,3 +33,6 @@ linter:
 
     # COM interop classes are named for their contents
     file_names: false
+
+    # Unnecessary in most cases, but avoids accidental name clashes.
+    unnecessary_this: false

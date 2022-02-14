@@ -26,15 +26,28 @@ const IID_ISupportErrorInfo = '{DF0B3D60-548F-101B-8E65-08002B2BD119}';
 /// {@category Interface}
 /// {@category com}
 class ISupportErrorInfo extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   ISupportErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.lpVtbl.value
-      .elementAt(3)
-      .cast<
-          Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<GUID> riid)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, Pointer<GUID> riid)>()(ptr.ref.lpVtbl, riid);
+  int InterfaceSupportsErrorInfo(
+    Pointer<GUID> riid,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<GUID> riid,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<GUID> riid,
+          )>()(
+        ptr.ref.lpVtbl,
+        riid,
+      );
 }

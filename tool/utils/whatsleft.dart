@@ -6,7 +6,7 @@ import 'dart:io' show exit;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'win32api.dart';
+import '../inputs/functions.dart';
 
 extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
   int get virtAddress => ref.Address;
@@ -66,11 +66,9 @@ Map<String, int> getExports(String module) {
 void main(List<String> args) {
   final module = args.isNotEmpty ? args.first : 'gdi32.dll';
 
-  final projected = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+  final projected = loadFunctionsFromJson();
 
-  final projectedSymbols = projected.functions.entries.map((e) {
+  final projectedSymbols = projected.entries.map((e) {
     var protoShard = e.value.prototype.first.split(' ')[1];
     if (['WINAPI', 'IMAGEAPI'].contains(protoShard)) {
       protoShard = e.value.prototype.first.split(' ')[2];
@@ -96,8 +94,4 @@ void main(List<String> args) {
 
   print('$included symbols projected.');
   print('$missing symbols missing.');
-  // projectedSymbols.forEach(print);
-
-  // symbols.forEach((name, address) => print('[${address.toHexString(32)}] '
-  //     '$name'));
 }

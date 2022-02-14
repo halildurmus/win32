@@ -1,7 +1,11 @@
+import 'dart:math' show min;
+
 import 'package:winmd/winmd.dart';
 
-import '../metadata/exclusions.dart';
+import '../shared/exclusions.dart';
 import 'field.dart';
+import 'nestedStruct.dart';
+import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
 
@@ -9,32 +13,9 @@ import 'utils.dart';
 class StructProjection {
   final TypeDef typeDef;
   final String structName;
+  final String comment;
 
-  StructProjection(this.typeDef, this.structName);
-
-  /// A nested type needs a way to access its members from the parent type. We
-  /// do this through a templated class that contains the field accessors. At
-  /// the time this is created, we don't know the name of the parent class, so
-  /// we use a templated value `{{CLASS}}` to represent it.
-  String _propertyAccessors() {
-    final buffer = StringBuffer()
-      ..writeln('extension {{PARENT}}_Extension{{SUFFIX}} on {{PARENT}} {');
-    for (final field in typeDef.fields) {
-      final typeProjection = TypeProjection(field.typeIdentifier);
-      buffer.writeln('''
-  ${typeProjection.dartType} get ${field.name} => {{CLASS}}.${field.name};
-  set ${field.name}(${typeProjection.dartType} value) => {{CLASS}}.${field.name} = value;
-      ''');
-    }
-    buffer.writeln('}');
-    return buffer.toString();
-  }
-
-  String _nestedName(String structName) {
-    final enclosedName = typeDef.enclosingClass!.name.split('.').last;
-
-    return '_${enclosedName}_$structName';
-  }
+  StructProjection(this.typeDef, this.structName, {this.comment = ''});
 
   bool _isNestedType(Field field) =>
       field.typeIdentifier.type?.isNested ?? false;
@@ -51,53 +32,82 @@ class StructProjection {
     return 'Struct';
   }
 
-  String get _packingAttribute {
-    final packingAlignment = typeDef.classLayout.packingAlignment;
-    if (packingAlignment != null &&
-        packingAlignment > 0 &&
+  String get classPreamble {
+    const structCategoryComment = '/// {@category Struct}';
+    final classComment = wrapCommentText(comment);
+    final docComment = classComment.isEmpty
+        ? structCategoryComment
+        : '$classComment\n///\n$structCategoryComment';
+
+    if (packingAlignment > 0 &&
         !ignorePackingDirectives.contains(typeDef.name)) {
-      return '@Packed($packingAlignment)';
+      return '$docComment\n@Packed($packingAlignment)';
     } else {
-      return '';
+      return docComment;
     }
   }
 
   String get _projectedName => typeDef.isNested
-      ? _nestedName(safeName(structName))
-      : safeName(structName);
+      ? '_${safeTypenameForString(mangleName(typeDef))}'
+      : safeTypenameForString(structName);
 
   String get _fieldsProjection =>
       typeDef.fields.map(FieldProjection.new).join('\n');
 
-  String get _nestedTypes {
+  String? _nestedTypes;
+  String get nestedTypes => _nestedTypes ??= _cacheNestedTypes();
+
+  String _cacheNestedTypes() {
     final buffer = StringBuffer();
-    final nestedTypes = <String, TypeDef>{};
+    final nestedTypes = <TypeDef>{};
 
     for (final field in typeDef.fields) {
       if (_isNestedType(field)) {
-        nestedTypes[field.name] = field.typeIdentifier.type!;
+        nestedTypes.add(field.typeIdentifier.type!);
       }
     }
 
     // Add any nested types on which there is a dependency
     var fieldIdx = 0;
-    for (final field in nestedTypes.keys) {
-      final nestedType = nestedTypes[field]!;
-      final nestedTypeProjection =
-          StructProjection(nestedType, '_${nestedType.name}');
+    for (final nestedType in nestedTypes) {
+      // Nested types should have just one leading underscore, so we strip the
+      // others off and add one back.
+      final nestedTypeProjection = NestedStructProjection(
+          nestedType, '_${stripLeadingUnderscores(nestedType.name)}',
+          suffix: fieldIdx, rootTypePackingAlignment: packingAlignment);
 
-      final suffix = fieldIdx == 0 ? '' : '_$fieldIdx';
-      buffer
-        ..write('\n$nestedTypeProjection\n')
-        ..write(nestedTypeProjection
-            ._propertyAccessors()
-            .replaceAll('{{CLASS}}', field)
-            .replaceAll('{{PARENT}}', structName)
-            .replaceAll('{{SUFFIX}}', suffix));
+      buffer.write('\n$nestedTypeProjection\n');
       fieldIdx++;
     }
 
     return buffer.toString();
+  }
+
+  int? _packingAlignment;
+  int get packingAlignment =>
+      _packingAlignment ??= calculatePackingAlignment(typeDef);
+
+  int calculatePackingAlignment(TypeDef typeDef) {
+    var alignment =
+        typeDef.classLayout.packingAlignment ?? 0xFF; // marker value
+
+    // Walk through children to see if they have a packing alignment
+    for (final field in typeDef.fields) {
+      final fieldTypeDef = field.typeIdentifier.type;
+      if (fieldTypeDef != null &&
+          !field.isLiteral && // TODO: Can remove this without breaking v3?
+          !TypeProjection(field.typeIdentifier).isDartPrimitive) {
+        final fieldPacking = calculatePackingAlignment(fieldTypeDef);
+        alignment = min(fieldPacking, alignment);
+      }
+      if (field.typeIdentifier.baseType == BaseType.ArrayTypeModifier &&
+          field.typeIdentifier.typeArg?.type != null) {
+        final arrayPacking =
+            calculatePackingAlignment(field.typeIdentifier.typeArg!.type!);
+        alignment = min(arrayPacking, alignment);
+      }
+    }
+    return alignment == 0xFF ? 0 : alignment;
   }
 
   String get _nestedArrays {
@@ -124,13 +134,12 @@ class StructProjection {
 
   @override
   String toString() => '''
-        /// {@category Struct}
-        $_packingAttribute
+        $classPreamble
         class $_projectedName extends $_baseType {
           $_fieldsProjection
         }
 
-        $_nestedTypes
+        $nestedTypes
         $_nestedArrays
       ''';
 }

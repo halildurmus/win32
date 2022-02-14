@@ -20,6 +20,120 @@ import 'structs.g.dart';
 
 final _winspool = DynamicLibrary.open('winspool.drv');
 
+/// The AddJob function adds a print job to the list of print jobs that can
+/// be scheduled by the print spooler. The function retrieves the name of
+/// the file you can use to store the job.
+///
+/// ```c
+/// BOOL AddJobW(
+///   _In_  HANDLE  hPrinter,
+///   _In_  DWORD   Level,
+///   _Out_ LPBYTE  pData,
+///   _In_  DWORD   cbBuf,
+///   _Out_ LPDWORD pcbNeeded
+/// );
+/// ```
+/// {@category winspool}
+int AddJob(int hPrinter, int Level, Pointer<Uint8> pData, int cbBuf,
+        Pointer<Uint32> pcbNeeded) =>
+    _AddJob(hPrinter, Level, pData, cbBuf, pcbNeeded);
+
+late final _AddJob = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pData,
+        Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
+    int Function(int hPrinter, int Level, Pointer<Uint8> pData, int cbBuf,
+        Pointer<Uint32> pcbNeeded)>('AddJobW');
+
+/// The AddPrinter function adds a printer to the list of supported
+/// printers for a specified server.
+///
+/// ```c
+/// HANDLE AddPrinterW(
+///   _In_ LPWSTR pName,
+///   _In_ DWORD  Level,
+///   _In_ LPBYTE pPrinter
+/// );
+/// ```
+/// {@category winspool}
+int AddPrinter(Pointer<Utf16> pName, int Level, Pointer<Uint8> pPrinter) =>
+    _AddPrinter(pName, Level, pPrinter);
+
+late final _AddPrinter = _winspool.lookupFunction<
+    IntPtr Function(
+        Pointer<Utf16> pName, Uint32 Level, Pointer<Uint8> pPrinter),
+    int Function(Pointer<Utf16> pName, int Level,
+        Pointer<Uint8> pPrinter)>('AddPrinterW');
+
+/// The AddPrinterConnection function adds a connection to the specified
+/// printer for the current user.
+///
+/// ```c
+/// BOOL AddPrinterConnectionW(
+///   _In_ LPWSTR pName
+/// );
+/// ```
+/// {@category winspool}
+int AddPrinterConnection(Pointer<Utf16> pName) => _AddPrinterConnection(pName);
+
+late final _AddPrinterConnection = _winspool.lookupFunction<
+    Int32 Function(Pointer<Utf16> pName),
+    int Function(Pointer<Utf16> pName)>('AddPrinterConnectionW');
+
+/// Adds a connection to the specified printer for the current user and
+/// specifies connection details.
+///
+/// ```c
+/// BOOL AddPrinterConnection2W(
+///   _In_ HWND    hWnd,
+///   _In_ LPCWSTR pszName,
+///        DWORD   dwLevel,
+///   _In_ PVOID   pConnectionInfo
+/// );
+/// ```
+/// {@category winspool}
+int AddPrinterConnection2(int hWnd, Pointer<Utf16> pszName, int dwLevel,
+        Pointer pConnectionInfo) =>
+    _AddPrinterConnection2(hWnd, pszName, dwLevel, pConnectionInfo);
+
+late final _AddPrinterConnection2 = _winspool.lookupFunction<
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> pszName, Uint32 dwLevel,
+        Pointer pConnectionInfo),
+    int Function(int hWnd, Pointer<Utf16> pszName, int dwLevel,
+        Pointer pConnectionInfo)>('AddPrinterConnection2W');
+
+/// The AdvancedDocumentProperties function displays a
+/// printer-configuration dialog box for the specified printer, allowing
+/// the user to configure that printer.
+///
+/// ```c
+/// LONG AdvancedDocumentPropertiesW(
+///   _In_  HWND     hWnd,
+///   _In_  HANDLE   hPrinter,
+///   _In_  LPWSTR   pDeviceName,
+///   _Out_ PDEVMODE pDevModeOutput,
+///   _In_  PDEVMODE pDevModeInput
+/// );
+/// ```
+/// {@category winspool}
+int AdvancedDocumentProperties(
+        int hWnd,
+        int hPrinter,
+        Pointer<Utf16> pDeviceName,
+        Pointer<DEVMODE> pDevModeOutput,
+        Pointer<DEVMODE> pDevModeInput) =>
+    _AdvancedDocumentProperties(
+        hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput);
+
+late final _AdvancedDocumentProperties = _winspool.lookupFunction<
+    Int32 Function(IntPtr hWnd, IntPtr hPrinter, Pointer<Utf16> pDeviceName,
+        Pointer<DEVMODE> pDevModeOutput, Pointer<DEVMODE> pDevModeInput),
+    int Function(
+        int hWnd,
+        int hPrinter,
+        Pointer<Utf16> pDeviceName,
+        Pointer<DEVMODE> pDevModeOutput,
+        Pointer<DEVMODE> pDevModeInput)>('AdvancedDocumentPropertiesW');
+
 /// The CloseSpoolFileHandle function closes a handle to a spool file
 /// associated with the print job currently submitted by the application.
 ///
@@ -572,6 +686,34 @@ late final _GetDefaultPrinter = _winspool.lookupFunction<
     int Function(Pointer<Utf16> pszBuffer,
         Pointer<Uint32> pcchBuffer)>('GetDefaultPrinterW');
 
+/// The GetForm function retrieves information about a specified form.
+///
+/// ```c
+/// BOOL GetFormW(
+///   _In_  HANDLE  hPrinter,
+///   _In_  LPWSTR  pFormName,
+///   _In_  DWORD   Level,
+///   _Out_ LPBYTE  pForm,
+///   _In_  DWORD   cbBuf,
+///   _Out_ LPDWORD pcbNeeded
+/// );
+/// ```
+/// {@category winspool}
+int GetForm(int hPrinter, Pointer<Utf16> pFormName, int Level,
+        Pointer<Uint8> pForm, int cbBuf, Pointer<Uint32> pcbNeeded) =>
+    _GetForm(hPrinter, pFormName, Level, pForm, cbBuf, pcbNeeded);
+
+late final _GetForm = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName, Uint32 Level,
+        Pointer<Uint8> pForm, Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
+    int Function(
+        int hPrinter,
+        Pointer<Utf16> pFormName,
+        int Level,
+        Pointer<Uint8> pForm,
+        int cbBuf,
+        Pointer<Uint32> pcbNeeded)>('GetFormW');
+
 /// The GetJob function retrieves information about a specified print job.
 ///
 /// ```c
@@ -718,6 +860,21 @@ int GetPrintExecutionData(Pointer<PRINT_EXECUTION_DATA> pData) =>
 late final _GetPrintExecutionData = _winspool.lookupFunction<
     Int32 Function(Pointer<PRINT_EXECUTION_DATA> pData),
     int Function(Pointer<PRINT_EXECUTION_DATA> pData)>('GetPrintExecutionData');
+
+/// The GetSpoolFileHandle function retrieves a handle for the spool file
+/// associated with the job currently submitted by the application.
+///
+/// ```c
+/// HANDLE GetSpoolFileHandle(
+///   _In_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int GetSpoolFileHandle(int hPrinter) => _GetSpoolFileHandle(hPrinter);
+
+late final _GetSpoolFileHandle = _winspool.lookupFunction<
+    IntPtr Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('GetSpoolFileHandle');
 
 /// The IsValidDevmode function verifies that the contents of a DEVMODE
 /// structure are valid.

@@ -26,76 +26,124 @@ const IID_IAppxPackageReader = '{B5C49650-99BC-481C-9A34-3D53A4106708}';
 /// {@category Interface}
 /// {@category com}
 class IAppxPackageReader extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IAppxPackageReader(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetBlockMap(Pointer<Pointer<COMObject>> blockMapReader) =>
+  int GetBlockMap(
+    Pointer<Pointer<COMObject>> blockMapReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> blockMapReader)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> blockMapReader)>()(
-          ptr.ref.lpVtbl, blockMapReader);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        blockMapReader,
+      );
 
-  int GetFootprintFile(int type, Pointer<Pointer<COMObject>> file) => ptr
-      .ref.lpVtbl.value
-      .elementAt(4)
-      .cast<
-          Pointer<
-              NativeFunction<
-                  Int32 Function(Pointer, Int32 type,
-                      Pointer<Pointer<COMObject>> file)>>>()
-      .value
-      .asFunction<
-          int Function(Pointer, int type,
-              Pointer<Pointer<COMObject>> file)>()(ptr.ref.lpVtbl, type, file);
+  int GetFootprintFile(
+    int type,
+    Pointer<Pointer<COMObject>> file,
+  ) =>
+      ptr.ref.lpVtbl.value
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Int32 type,
+            Pointer<Pointer<COMObject>> file,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int type,
+            Pointer<Pointer<COMObject>> file,
+          )>()(
+        ptr.ref.lpVtbl,
+        type,
+        file,
+      );
 
   int GetPayloadFile(
-          Pointer<Utf16> fileName, Pointer<Pointer<COMObject>> file) =>
+    Pointer<Utf16> fileName,
+    Pointer<Pointer<COMObject>> file,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> fileName,
-                              Pointer<Pointer<COMObject>> file)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> fileName,
-                      Pointer<Pointer<COMObject>> file)>()(
-          ptr.ref.lpVtbl, fileName, file);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> fileName,
+            Pointer<Pointer<COMObject>> file,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> fileName,
+            Pointer<Pointer<COMObject>> file,
+          )>()(
+        ptr.ref.lpVtbl,
+        fileName,
+        file,
+      );
 
-  int GetPayloadFiles(Pointer<Pointer<COMObject>> filesEnumerator) => ptr
-          .ref.lpVtbl.value
+  int GetPayloadFiles(
+    Pointer<Pointer<COMObject>> filesEnumerator,
+  ) =>
+      ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer,
-                          Pointer<Pointer<COMObject>> filesEnumerator)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> filesEnumerator,
+          )>>>()
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Pointer<COMObject>> filesEnumerator)>()(
-      ptr.ref.lpVtbl, filesEnumerator);
+            Pointer,
+            Pointer<Pointer<COMObject>> filesEnumerator,
+          )>()(
+        ptr.ref.lpVtbl,
+        filesEnumerator,
+      );
 
-  int GetManifest(Pointer<Pointer<COMObject>> manifestReader) =>
+  int GetManifest(
+    Pointer<Pointer<COMObject>> manifestReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> manifestReader)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> manifestReader)>()(
-          ptr.ref.lpVtbl, manifestReader);
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> manifestReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> manifestReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        manifestReader,
+      );
 }

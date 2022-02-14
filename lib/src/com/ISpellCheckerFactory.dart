@@ -26,7 +26,7 @@ const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
 /// {@category Interface}
 /// {@category com}
 class ISpellCheckerFactory extends IUnknown {
-  // vtable begins at 3, ends at 5
+  // vtable begins at 3, is 3 entries long.
   ISpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer<COMObject> get SupportedLanguages {
@@ -34,16 +34,20 @@ class ISpellCheckerFactory extends IUnknown {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Pointer<COMObject>> value,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -54,33 +58,57 @@ class ISpellCheckerFactory extends IUnknown {
     }
   }
 
-  int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
+  int IsSupported(
+    Pointer<Utf16> languageTag,
+    Pointer<Int32> value,
+  ) =>
       ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<Utf16> languageTag,
-                          Pointer<Int32> value)>>>()
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> languageTag,
+            Pointer<Int32> value,
+          )>>>()
           .value
           .asFunction<
-              int Function(Pointer, Pointer<Utf16> languageTag,
-                  Pointer<Int32> value)>()(ptr.ref.lpVtbl, languageTag, value);
+              int Function(
+            Pointer,
+            Pointer<Utf16> languageTag,
+            Pointer<Int32> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        languageTag,
+        value,
+      );
 
   int CreateSpellChecker(
-          Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
+    Pointer<Utf16> languageTag,
+    Pointer<Pointer<COMObject>> value,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<Utf16> languageTag,
-                              Pointer<Pointer<COMObject>> value)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Utf16> languageTag,
-                      Pointer<Pointer<COMObject>> value)>()(
-          ptr.ref.lpVtbl, languageTag, value);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Utf16> languageTag,
+            Pointer<Pointer<COMObject>> value,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Utf16> languageTag,
+            Pointer<Pointer<COMObject>> value,
+          )>()(
+        ptr.ref.lpVtbl,
+        languageTag,
+        value,
+      );
 }
 
 /// @nodoc

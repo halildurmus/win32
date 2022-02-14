@@ -26,99 +26,146 @@ const IID_IAppxFactory = '{BEB94909-E451-438B-B5A7-D79E767B75D8}';
 /// {@category Interface}
 /// {@category com}
 class IAppxFactory extends IUnknown {
-  // vtable begins at 3, ends at 7
+  // vtable begins at 3, is 5 entries long.
   IAppxFactory(Pointer<COMObject> ptr) : super(ptr);
 
   int CreatePackageWriter(
-          Pointer<COMObject> outputStream,
-          Pointer<APPX_PACKAGE_SETTINGS> settings,
-          Pointer<Pointer<COMObject>> packageWriter) =>
+    Pointer<COMObject> outputStream,
+    Pointer<APPX_PACKAGE_SETTINGS> settings,
+    Pointer<Pointer<COMObject>> packageWriter,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> outputStream,
-                              Pointer<APPX_PACKAGE_SETTINGS> settings,
-                              Pointer<Pointer<COMObject>> packageWriter)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> outputStream,
-                      Pointer<APPX_PACKAGE_SETTINGS> settings,
-                      Pointer<Pointer<COMObject>> packageWriter)>()(
-          ptr.ref.lpVtbl, outputStream, settings, packageWriter);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> outputStream,
+            Pointer<APPX_PACKAGE_SETTINGS> settings,
+            Pointer<Pointer<COMObject>> packageWriter,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> outputStream,
+            Pointer<APPX_PACKAGE_SETTINGS> settings,
+            Pointer<Pointer<COMObject>> packageWriter,
+          )>()(
+        ptr.ref.lpVtbl,
+        outputStream,
+        settings,
+        packageWriter,
+      );
 
-  int CreatePackageReader(Pointer<COMObject> inputStream,
-          Pointer<Pointer<COMObject>> packageReader) =>
+  int CreatePackageReader(
+    Pointer<COMObject> inputStream,
+    Pointer<Pointer<COMObject>> packageReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(4)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> inputStream,
-                              Pointer<Pointer<COMObject>> packageReader)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> inputStream,
-                      Pointer<Pointer<COMObject>> packageReader)>()(
-          ptr.ref.lpVtbl, inputStream, packageReader);
+          .elementAt(4)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> packageReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> packageReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        inputStream,
+        packageReader,
+      );
 
-  int CreateManifestReader(Pointer<COMObject> inputStream,
-          Pointer<Pointer<COMObject>> manifestReader) =>
+  int CreateManifestReader(
+    Pointer<COMObject> inputStream,
+    Pointer<Pointer<COMObject>> manifestReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> inputStream,
-                              Pointer<Pointer<COMObject>> manifestReader)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> inputStream,
-                      Pointer<Pointer<COMObject>> manifestReader)>()(
-          ptr.ref.lpVtbl, inputStream, manifestReader);
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> manifestReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> manifestReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        inputStream,
+        manifestReader,
+      );
 
-  int CreateBlockMapReader(Pointer<COMObject> inputStream,
-          Pointer<Pointer<COMObject>> blockMapReader) =>
+  int CreateBlockMapReader(
+    Pointer<COMObject> inputStream,
+    Pointer<Pointer<COMObject>> blockMapReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Pointer<COMObject> inputStream,
-                              Pointer<Pointer<COMObject>> blockMapReader)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<COMObject> inputStream,
-                      Pointer<Pointer<COMObject>> blockMapReader)>()(
-          ptr.ref.lpVtbl, inputStream, blockMapReader);
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> inputStream,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        inputStream,
+        blockMapReader,
+      );
 
   int CreateValidatedBlockMapReader(
-          Pointer<COMObject> blockMapStream,
-          Pointer<Utf16> signatureFileName,
-          Pointer<Pointer<COMObject>> blockMapReader) =>
+    Pointer<COMObject> blockMapStream,
+    Pointer<Utf16> signatureFileName,
+    Pointer<Pointer<COMObject>> blockMapReader,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer,
-                              Pointer<COMObject> blockMapStream,
-                              Pointer<Utf16> signatureFileName,
-                              Pointer<Pointer<COMObject>> blockMapReader)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer,
-                      Pointer<COMObject> blockMapStream,
-                      Pointer<Utf16> signatureFileName,
-                      Pointer<Pointer<COMObject>> blockMapReader)>()(
-          ptr.ref.lpVtbl, blockMapStream, signatureFileName, blockMapReader);
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<COMObject> blockMapStream,
+            Pointer<Utf16> signatureFileName,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<COMObject> blockMapStream,
+            Pointer<Utf16> signatureFileName,
+            Pointer<Pointer<COMObject>> blockMapReader,
+          )>()(
+        ptr.ref.lpVtbl,
+        blockMapStream,
+        signatureFileName,
+        blockMapReader,
+      );
 }
 
 /// @nodoc

@@ -26,21 +26,28 @@ const IID_IAppxManifestReader6 = '{34DEACA4-D3C0-4E3E-B312-E42625E3807E}';
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader6 extends IUnknown {
-  // vtable begins at 3, ends at 3
+  // vtable begins at 3, is 1 entries long.
   IAppxManifestReader6(Pointer<COMObject> ptr) : super(ptr);
 
   int GetIsNonQualifiedResourcePackage(
-          Pointer<Int32> isNonQualifiedResourcePackage) =>
+    Pointer<Int32> isNonQualifiedResourcePackage,
+  ) =>
       ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Int32> isNonQualifiedResourcePackage)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Int32> isNonQualifiedResourcePackage)>()(
-          ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32> isNonQualifiedResourcePackage,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32> isNonQualifiedResourcePackage,
+          )>()(
+        ptr.ref.lpVtbl,
+        isNonQualifiedResourcePackage,
+      );
 }

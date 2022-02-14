@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'win32api.dart';
+import '../inputs/structs.dart';
+import '../projection/utils.dart';
 
 const header = '''
 /**
@@ -16,7 +17,9 @@ const header = '''
 // widths across x86 and x64 architectures. The results are pasted into
 // win32\\struct_sizes.dart as input to the test harness.
 
-// Compile with cl tool\\struct_sizes.cpp /link ws2_32.lib
+// Compile with:
+//    cl /I "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt" \\
+//      tool\\utils\\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <winsock2.h>
@@ -60,23 +63,17 @@ const footer = '''
 }
 ''';
 
-void main() {
-  final win32 = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+void generateStructSizeAnalyzer() {
+  final buffer = StringBuffer()..write(header);
 
-  // Creates pairs like {LOGFONT: LOGFONTW}
-  final structs =
-      win32.structs.map((k, v) => MapEntry(k, v.namespace.split('.').last));
-
-  final writer = File('tool/manual_gen/struct_sizes.cpp')
-      .openSync(mode: FileMode.write)
-    ..writeStringSync(header);
-
-  for (final struct in structs.keys) {
-    writer.writeStringSync(
-        '    printf("  \'$struct\': %zu,\\n", sizeof(${structs[struct]}));\n');
+  for (final struct in structsToGenerate.keys) {
+    final cStructName = lastComponent(struct);
+    final dartStructName = stripAnsiUnicodeSuffix(cStructName);
+    buffer.write(
+        '    printf("  \'$dartStructName\': %zu,\\n", sizeof($cStructName));\n');
   }
 
-  writer.writeStringSync(footer);
+  buffer.write(footer);
+
+  File('tool/utils/struct_sizes.cpp').writeAsStringSync(buffer.toString());
 }

@@ -49,6 +49,26 @@
     "dart.analysisExcludedFolders": [
         "example/explorer"
     ],
-    "dart.sdkPath": "c:\\tools\\dart-sdk",
+    "dart.sdkPath": "c:\\flutter\\bin\\cache\\dart-sdk",
     "cmake.configureOnOpen": false,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#23baff",
+        "activityBar.activeBorder": "#df0099",
+        "activityBar.background": "#23baff",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#df0099",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "sash.hoverBorder": "#23baff",
+        "statusBar.background": "#00a4ef",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#23baff",
+        "statusBarItem.remoteBackground": "#00a4ef",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#00a4ef",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#00a4ef99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#00a4ef",
 }
