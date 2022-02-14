@@ -9,7 +9,6 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
 import '../projection/function.dart';

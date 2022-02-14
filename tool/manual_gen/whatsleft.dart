@@ -66,9 +66,7 @@ Map<String, int> getExports(String module) {
 void main(List<String> args) {
   final module = args.isNotEmpty ? args.first : 'gdi32.dll';
 
-  final projected = Win32API(
-      apiFile: 'tool/manual_gen/win32api.json',
-      structFile: 'tool/manual_gen/win32struct.json');
+  final projected = Win32API(apiFile: 'tool/manual_gen/win32api.json');
 
   final projectedSymbols = projected.functions.entries.map((e) {
     var protoShard = e.value.prototype.first.split(' ')[1];
