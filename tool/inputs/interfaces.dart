@@ -1,4 +1,17 @@
+<<<<<<<< HEAD:tool/inputs/interfaces.dart
 const comInterfacesToGenerate = <String>[
+========
+import 'dart:io';
+
+import 'package:dart_style/dart_style.dart';
+import 'package:winmd/winmd.dart';
+
+import '../projection/class.dart';
+import '../projection/interface.dart';
+import '../projection/utils.dart';
+
+const interfacesToGenerate = <String>[
+>>>>>>>> bead1590577f2f47c274e5f5a11c775f9d71a1ee:tool/generation/generate_com_apis.dart
   'Windows.Win32.Globalization.IEnumSpellingError',
   'Windows.Win32.Globalization.ISpellChecker',
   'Windows.Win32.Globalization.ISpellCheckerChangedEventHandler',
@@ -80,6 +93,7 @@ const comInterfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IShellService',
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
 ];
+<<<<<<<< HEAD:tool/inputs/interfaces.dart
 
 final windowsRuntimeTypesToGenerate = [
   'Windows.Foundation.IPropertyValue',
@@ -95,3 +109,42 @@ final windowsRuntimeTypesToGenerate = [
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
 ];
+========
+void generateComApis() {
+  final scope = MetadataStore.getWin32Scope();
+
+  final classDirectory = Directory('lib/src/com');
+
+  for (final interface in interfacesToGenerate) {
+    final typeDef = scope.findTypeDef(interface);
+    if (typeDef == null) throw Exception("Can't find $interface");
+
+    var interfaceProjection = InterfaceProjection(typeDef);
+
+    // In v2, we put classes and interfaces in the same file.
+    final className = ClassProjection.generateClassName(typeDef);
+    if (scope.findTypeDef(className) != null) {
+      interfaceProjection = ClassProjection.fromInterface(typeDef);
+    }
+
+    final dartClass = interfaceProjection.toString();
+
+    final classOutputFilename =
+        stripAnsiUnicodeSuffix(interface.split('.').last);
+    final outputFile =
+        File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
+
+    print('Writing:    ${outputFile.path}');
+    outputFile.writeAsStringSync(DartFormatter().format(dartClass));
+
+    // TODO: Add tests back in
+    //   final dartTests = TypePrinter.printTests(classProjection);
+
+    //   final testFile = File(
+    //       '${testDirectory.uri.toFilePath()}${classOutputFilename}_test.dart');
+
+    //   print('Writing:    ${testFile.path}');
+    //   testFile.writeAsStringSync(dartTests);
+  }
+}
+>>>>>>>> bead1590577f2f47c274e5f5a11c775f9d71a1ee:tool/generation/generate_com_apis.dart
