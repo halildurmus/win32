@@ -1,4 +1,4 @@
-[![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
+[![pub package](https://img.shields.io/pub/v/win32_gamepad.svg)](https://pub.dev/packages/win32_gamepad)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 
 A package that provides a friendly Dart API for accessing gamepads connected to a Windows machine.
