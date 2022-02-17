@@ -1,13 +1,53 @@
 import 'package:win32/win32.dart';
 
 class GamepadState {
-  final bool isConnected;
   final int _buttonBitmask;
+
+  /// Returns true if the gamepad is currently connected.
+  final bool isConnected;
+
+  /// The current value of the left trigger analog control. The value is between
+  /// 0 and 255.
   final int leftTrigger;
+
+  /// The current value of the right trigger analog control. The value is
+  /// between 0 and 255.
   final int rightTrigger;
+
+  /// Left thumbstick x-axis value.
+  ///
+  /// A signed value between -32768 and 32767 describing the position of the
+  /// left thumbstick. A value of 0 is centered. Negative values signify to the
+  /// left. Positive values signify to the right. The constant value
+  /// [GamepadCapabilities.leftThumbDeadzone] can be used as a positive and
+  /// negative filter to filter a thumbstick input.
   final int leftThumbstickX;
+
+  /// Left thumbstick y-axis value.
+  ///
+  /// A signed value between -32768 and 32767 describing the position of the
+  /// left thumbstick. A value of 0 is centered. Negative values signify down.
+  /// Positive values signify up. The constant value
+  /// [GamepadCapabilities.leftThumbDeadzone] can be used as a positive and
+  /// negative filter to filter a thumbstick input.
   final int leftThumbstickY;
+
+  /// Right thumbstick x-axis value.
+  ///
+  /// A signed value between -32768 and 32767 describing the position of the
+  /// right thumbstick. A value of 0 is centered. Negative values signify to the
+  /// left. Positive values signify to the right. The constant value
+  /// [GamepadCapabilities.rightThumbDeadzone] can be used as a positive and
+  /// negative filter to filter a thumbstick input.
   final int rightThumbstickX;
+
+  /// Right thumbstick y-axis value.
+  ///
+  /// A signed value between -32768 and 32767 describing the position of the
+  /// right thumbstick. A value of 0 is centered. Negative values signify down.
+  /// Positive values signify up. The constant value
+  /// [GamepadCapabilities.rightThumbDeadzone] can be used as a positive and
+  /// negative filter to filter a thumbstick input.
   final int rightThumbstickY;
 
   /// Returns true if the D-pad direction is up.
