@@ -25,7 +25,7 @@ class Gamepad {
   }
 
   Gamepad(this.controller)
-      : assert(controller > 0 && controller < XUSER_MAX_COUNT) {
+      : assert(controller >= 0 && controller < XUSER_MAX_COUNT) {
     _initializeCom();
     updateState();
   }
