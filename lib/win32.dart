@@ -130,6 +130,7 @@ export 'src/shcore.dart';
 export 'src/shell32.dart';
 export 'src/spoolss.dart';
 export 'src/types.dart';
+export 'src/xinput1_4.dart';
 export 'src/user32.dart';
 export 'src/uxtheme.dart';
 export 'src/version.dart';

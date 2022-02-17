@@ -109,6 +109,7 @@ require Flutter.
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `explorer\`        | Example Flutter app that uses Win32 file picker APIs      |
 | `filever.dart`     | Getting file version information from the file resource   |
+| `gamepad.dart`     | Show which gamepads are connected                         |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `idispatch.dart`   | Demonstrates calling a method using `IDispatch`           |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |

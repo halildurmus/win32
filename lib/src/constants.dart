@@ -373,6 +373,9 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 /// Cannot request exclusive semaphores at interrupt time.
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
+/// The device is not connected.
+const ERROR_DEVICE_NOT_CONNECTED = 1167;
+
 // -----------------------------------------------------------------------------
 // Windows Runtime errors
 // -----------------------------------------------------------------------------

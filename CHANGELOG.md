@@ -1,3 +1,8 @@
+## 2.4.1
+
+- Fix import error for gamepad APIs
+- Add gamepad example
+
 ## 2.4.0
 
 - Added various inline functions, tidied up projection logic.

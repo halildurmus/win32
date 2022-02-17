@@ -164,3 +164,19 @@ int SetWindowThemeNonClientAttributes(int hwnd, int dwMask, int dwAttributes) {
     free(wta);
   }
 }
+
+/// Fills a block of memory with a specified value.
+///
+/// {@category kernel32}
+void FillMemory(Pointer destination, int length, int fill) {
+  final ptr = destination.cast<Uint8>();
+  for (var i = 0; i < length; i++) {
+    ptr[i] = fill;
+  }
+}
+
+/// Fills a block of memory with zeros.
+///
+/// {@category kernel32}
+void ZeroMemory(Pointer destination, int length) =>
+    FillMemory(destination, length, 0);

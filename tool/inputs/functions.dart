@@ -15,7 +15,7 @@ const dllLibraries = [
   'advapi32', 'bthprops', 'comctl32', 'comdlg32', 'dbghelp', 'dwmapi', 'dxva2',
   'gdi32', 'kernel32', 'kernelbase', 'magnification', 'ole32', 'oleaut32',
   'powrprof', 'rometadata', 'scarddlg', 'shcore', 'shell32', 'spoolss',
-  'user32', 'uxtheme', 'version', 'xinputuap', 'winmm', 'winscard',
+  'user32', 'uxtheme', 'version', 'xinput1_4', 'winmm', 'winscard',
   'winspool', 'wlanapi', 'ws2_32'
 ];
 

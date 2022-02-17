@@ -6554,44 +6554,51 @@
     },
     "XInputEnable": {
         "prototype": "void XInputEnable(\n  [in] BOOL enable\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Sets the reporting state of XInput.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputGetAudioDeviceIds": {
         "prototype": "DWORD XInputGetAudioDeviceIds(\n  [in]                DWORD  dwUserIndex,\n  [out, optional]     LPWSTR pRenderDeviceId,\n  [in, out, optional] UINT   *pRenderCount,\n  [out, optional]     LPWSTR pCaptureDeviceId,\n  [in, out, optional] UINT   *pCaptureCount\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Retrieves the sound rendering and sound capture audio device IDs that are associated with the headset connected to the specified controller.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputGetBatteryInformation": {
         "prototype": "DWORD XInputGetBatteryInformation(\n  [in]  DWORD                      dwUserIndex,\n  [in]  BYTE                       devType,\n  [out] XINPUT_BATTERY_INFORMATION *pBatteryInformation\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Retrieves the battery type and charge status of a wireless controller.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputGetCapabilities": {
         "prototype": "DWORD XInputGetCapabilities(\n  [in]  DWORD               dwUserIndex,\n  [in]  DWORD               dwFlags,\n  [out] XINPUT_CAPABILITIES *pCapabilities\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Retrieves the capabilities and features of a connected controller.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputGetKeystroke": {
         "prototype": "DWORD XInputGetKeystroke(\n  DWORD             dwUserIndex,\n  DWORD             dwReserved,\n  PXINPUT_KEYSTROKE pKeystroke\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Retrieves a gamepad input event.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputGetState": {
         "prototype": "DWORD XInputGetState(\n  [in]  DWORD        dwUserIndex,\n  [out] XINPUT_STATE *pState\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Retrieves the current state of the specified controller.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     },
     "XInputSetState": {
         "prototype": "DWORD XInputSetState(\n  [in]      DWORD            dwUserIndex,\n  [in, out] XINPUT_VIBRATION *pVibration\n);",
-        "dllLibrary": "xinputuap",
+        "dllLibrary": "xinput1_4",
         "comment": "Sends data to a connected controller. This function is used to activate the vibration function of a controller.",
-        "category": "xinput"
+        "category": "xinput",
+        "minimumWindowsVersion": "WIN8"
     }
 }

@@ -11616,75 +11616,90 @@ void main() {
     }
   });
 
-  group('Test xinputuap functions', () {
-    test('Can instantiate XInputEnable', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputEnable = xinputuap.lookupFunction<Void Function(Int32 enable),
-          void Function(int enable)>('XInputEnable');
-      expect(XInputEnable, isA<Function>());
-    });
-    test('Can instantiate XInputGetAudioDeviceIds', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputGetAudioDeviceIds = xinputuap.lookupFunction<
-          Uint32 Function(
-              Uint32 dwUserIndex,
-              Pointer<Utf16> pRenderDeviceId,
-              Pointer<Uint32> pRenderCount,
-              Pointer<Utf16> pCaptureDeviceId,
-              Pointer<Uint32> pCaptureCount),
-          int Function(
-              int dwUserIndex,
-              Pointer<Utf16> pRenderDeviceId,
-              Pointer<Uint32> pRenderCount,
-              Pointer<Utf16> pCaptureDeviceId,
-              Pointer<Uint32> pCaptureCount)>('XInputGetAudioDeviceIds');
-      expect(XInputGetAudioDeviceIds, isA<Function>());
-    });
-    test('Can instantiate XInputGetBatteryInformation', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputGetBatteryInformation = xinputuap.lookupFunction<
-              Uint32 Function(Uint32 dwUserIndex, Uint8 devType,
-                  Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation),
-              int Function(int dwUserIndex, int devType,
-                  Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation)>(
-          'XInputGetBatteryInformation');
-      expect(XInputGetBatteryInformation, isA<Function>());
-    });
-    test('Can instantiate XInputGetCapabilities', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputGetCapabilities = xinputuap.lookupFunction<
-              Uint32 Function(Uint32 dwUserIndex, Uint32 dwFlags,
-                  Pointer<XINPUT_CAPABILITIES> pCapabilities),
-              int Function(int dwUserIndex, int dwFlags,
-                  Pointer<XINPUT_CAPABILITIES> pCapabilities)>(
-          'XInputGetCapabilities');
-      expect(XInputGetCapabilities, isA<Function>());
-    });
-    test('Can instantiate XInputGetKeystroke', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputGetKeystroke = xinputuap.lookupFunction<
-          Uint32 Function(Uint32 dwUserIndex, Uint32 dwReserved,
-              Pointer<XINPUT_KEYSTROKE> pKeystroke),
-          int Function(int dwUserIndex, int dwReserved,
-              Pointer<XINPUT_KEYSTROKE> pKeystroke)>('XInputGetKeystroke');
-      expect(XInputGetKeystroke, isA<Function>());
-    });
-    test('Can instantiate XInputGetState', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputGetState = xinputuap.lookupFunction<
-          Uint32 Function(Uint32 dwUserIndex, Pointer<XINPUT_STATE> pState),
-          int Function(
-              int dwUserIndex, Pointer<XINPUT_STATE> pState)>('XInputGetState');
-      expect(XInputGetState, isA<Function>());
-    });
-    test('Can instantiate XInputSetState', () {
-      final xinputuap = DynamicLibrary.open('xinputuap.dll');
-      final XInputSetState = xinputuap.lookupFunction<
-          Uint32 Function(
-              Uint32 dwUserIndex, Pointer<XINPUT_VIBRATION> pVibration),
-          int Function(int dwUserIndex,
-              Pointer<XINPUT_VIBRATION> pVibration)>('XInputSetState');
-      expect(XInputSetState, isA<Function>());
-    });
+  group('Test xinput1_4 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputEnable', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputEnable = xinput1_4.lookupFunction<
+            Void Function(Int32 enable),
+            void Function(int enable)>('XInputEnable');
+        expect(XInputEnable, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputGetAudioDeviceIds', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputGetAudioDeviceIds = xinput1_4.lookupFunction<
+            Uint32 Function(
+                Uint32 dwUserIndex,
+                Pointer<Utf16> pRenderDeviceId,
+                Pointer<Uint32> pRenderCount,
+                Pointer<Utf16> pCaptureDeviceId,
+                Pointer<Uint32> pCaptureCount),
+            int Function(
+                int dwUserIndex,
+                Pointer<Utf16> pRenderDeviceId,
+                Pointer<Uint32> pRenderCount,
+                Pointer<Utf16> pCaptureDeviceId,
+                Pointer<Uint32> pCaptureCount)>('XInputGetAudioDeviceIds');
+        expect(XInputGetAudioDeviceIds, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputGetBatteryInformation', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputGetBatteryInformation = xinput1_4.lookupFunction<
+                Uint32 Function(Uint32 dwUserIndex, Uint8 devType,
+                    Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation),
+                int Function(int dwUserIndex, int devType,
+                    Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation)>(
+            'XInputGetBatteryInformation');
+        expect(XInputGetBatteryInformation, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputGetCapabilities', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputGetCapabilities = xinput1_4.lookupFunction<
+                Uint32 Function(Uint32 dwUserIndex, Uint32 dwFlags,
+                    Pointer<XINPUT_CAPABILITIES> pCapabilities),
+                int Function(int dwUserIndex, int dwFlags,
+                    Pointer<XINPUT_CAPABILITIES> pCapabilities)>(
+            'XInputGetCapabilities');
+        expect(XInputGetCapabilities, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputGetKeystroke', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputGetKeystroke = xinput1_4.lookupFunction<
+            Uint32 Function(Uint32 dwUserIndex, Uint32 dwReserved,
+                Pointer<XINPUT_KEYSTROKE> pKeystroke),
+            int Function(int dwUserIndex, int dwReserved,
+                Pointer<XINPUT_KEYSTROKE> pKeystroke)>('XInputGetKeystroke');
+        expect(XInputGetKeystroke, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputGetState', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputGetState = xinput1_4.lookupFunction<
+            Uint32 Function(Uint32 dwUserIndex, Pointer<XINPUT_STATE> pState),
+            int Function(int dwUserIndex,
+                Pointer<XINPUT_STATE> pState)>('XInputGetState');
+        expect(XInputGetState, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate XInputSetState', () {
+        final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+        final XInputSetState = xinput1_4.lookupFunction<
+            Uint32 Function(
+                Uint32 dwUserIndex, Pointer<XINPUT_VIBRATION> pVibration),
+            int Function(int dwUserIndex,
+                Pointer<XINPUT_VIBRATION> pVibration)>('XInputSetState');
+        expect(XInputSetState, isA<Function>());
+      });
+    }
   });
 }

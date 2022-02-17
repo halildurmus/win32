@@ -18,7 +18,7 @@ import 'guid.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
-final _xinputuap = DynamicLibrary.open('xinputuap.dll');
+final _xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
 
 /// Sets the reporting state of XInput.
 ///
@@ -30,7 +30,7 @@ final _xinputuap = DynamicLibrary.open('xinputuap.dll');
 /// {@category xinput}
 void XInputEnable(int enable) => _XInputEnable(enable);
 
-late final _XInputEnable = _xinputuap.lookupFunction<
+late final _XInputEnable = _xinput1_4.lookupFunction<
     Void Function(Int32 enable), void Function(int enable)>('XInputEnable');
 
 /// Retrieves the sound rendering and sound capture audio device IDs that
@@ -55,7 +55,7 @@ int XInputGetAudioDeviceIds(
     _XInputGetAudioDeviceIds(dwUserIndex, pRenderDeviceId, pRenderCount,
         pCaptureDeviceId, pCaptureCount);
 
-late final _XInputGetAudioDeviceIds = _xinputuap.lookupFunction<
+late final _XInputGetAudioDeviceIds = _xinput1_4.lookupFunction<
     Uint32 Function(
         Uint32 dwUserIndex,
         Pointer<Utf16> pRenderDeviceId,
@@ -83,7 +83,7 @@ int XInputGetBatteryInformation(int dwUserIndex, int devType,
         Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation) =>
     _XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation);
 
-late final _XInputGetBatteryInformation = _xinputuap.lookupFunction<
+late final _XInputGetBatteryInformation = _xinput1_4.lookupFunction<
         Uint32 Function(Uint32 dwUserIndex, Uint8 devType,
             Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation),
         int Function(int dwUserIndex, int devType,
@@ -104,7 +104,7 @@ int XInputGetCapabilities(int dwUserIndex, int dwFlags,
         Pointer<XINPUT_CAPABILITIES> pCapabilities) =>
     _XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities);
 
-late final _XInputGetCapabilities = _xinputuap.lookupFunction<
+late final _XInputGetCapabilities = _xinput1_4.lookupFunction<
     Uint32 Function(Uint32 dwUserIndex, Uint32 dwFlags,
         Pointer<XINPUT_CAPABILITIES> pCapabilities),
     int Function(int dwUserIndex, int dwFlags,
@@ -124,7 +124,7 @@ int XInputGetKeystroke(int dwUserIndex, int dwReserved,
         Pointer<XINPUT_KEYSTROKE> pKeystroke) =>
     _XInputGetKeystroke(dwUserIndex, dwReserved, pKeystroke);
 
-late final _XInputGetKeystroke = _xinputuap.lookupFunction<
+late final _XInputGetKeystroke = _xinput1_4.lookupFunction<
     Uint32 Function(Uint32 dwUserIndex, Uint32 dwReserved,
         Pointer<XINPUT_KEYSTROKE> pKeystroke),
     int Function(int dwUserIndex, int dwReserved,
@@ -142,7 +142,7 @@ late final _XInputGetKeystroke = _xinputuap.lookupFunction<
 int XInputGetState(int dwUserIndex, Pointer<XINPUT_STATE> pState) =>
     _XInputGetState(dwUserIndex, pState);
 
-late final _XInputGetState = _xinputuap.lookupFunction<
+late final _XInputGetState = _xinput1_4.lookupFunction<
     Uint32 Function(Uint32 dwUserIndex, Pointer<XINPUT_STATE> pState),
     int Function(
         int dwUserIndex, Pointer<XINPUT_STATE> pState)>('XInputGetState');
@@ -160,7 +160,7 @@ late final _XInputGetState = _xinputuap.lookupFunction<
 int XInputSetState(int dwUserIndex, Pointer<XINPUT_VIBRATION> pVibration) =>
     _XInputSetState(dwUserIndex, pVibration);
 
-late final _XInputSetState = _xinputuap.lookupFunction<
+late final _XInputSetState = _xinput1_4.lookupFunction<
     Uint32 Function(Uint32 dwUserIndex, Pointer<XINPUT_VIBRATION> pVibration),
     int Function(int dwUserIndex,
         Pointer<XINPUT_VIBRATION> pVibration)>('XInputSetState');
