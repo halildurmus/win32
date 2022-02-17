@@ -15,8 +15,18 @@ class Gamepad {
   int _packetNumber = -1;
   late GamepadState state;
 
+  static bool _isComInitialized = false;
+
+  void _initializeCom() {
+    if (!_isComInitialized) {
+      CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+      _isComInitialized = true;
+    }
+  }
+
   Gamepad(this.controller)
       : assert(controller > 0 && controller < XUSER_MAX_COUNT) {
+    _initializeCom();
     updateState();
   }
 
@@ -86,7 +96,7 @@ class Gamepad {
   ///
   /// Either the left or right motor can be activated. The value should be
   /// between 0 and 65535.
-  void setVibration(int leftMotorSpeed, int rightMotorSpeed) {
+  void vibrate({int leftMotorSpeed = 0, int rightMotorSpeed = 0}) {
     if (leftMotorSpeed < 0 ||
         leftMotorSpeed > 65535 ||
         rightMotorSpeed < 0 ||

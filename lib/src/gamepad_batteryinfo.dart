@@ -20,7 +20,7 @@ enum GamepadBatteryType {
   alkaline,
 
   /// The device has a nickel metal hydride battery.
-  NiMH,
+  nickelMetalHydride,
 
   /// The device has an unknown battery type.
   unknown
@@ -60,7 +60,7 @@ class GamepadBatteryInfo {
       case BATTERY_TYPE_ALKALINE:
         return GamepadBatteryType.alkaline;
       case BATTERY_TYPE_NIMH:
-        return GamepadBatteryType.NiMH;
+        return GamepadBatteryType.nickelMetalHydride;
       default:
         return GamepadBatteryType.unknown;
     }

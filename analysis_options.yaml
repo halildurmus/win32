@@ -1,12 +1,9 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: [example/explorer/**]
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-  errors: 
-    todo: ignore
       
 linter:
   rules:
@@ -25,14 +22,3 @@ linter:
     unnecessary_lambdas: true
     unnecessary_null_aware_assignments: true
     unnecessary_parenthesis: true
-
-    # We name Win32 constants for consistency with Win32, not Dart
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    camel_case_types: false
-
-    # COM interop classes are named for their contents
-    file_names: false
-
-    # Unnecessary in most cases, but avoids accidental name clashes.
-    unnecessary_this: false
