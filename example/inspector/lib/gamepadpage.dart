@@ -17,7 +17,7 @@ class GamepadPage extends StatefulWidget {
 
 class _GamepadPageState extends State<GamepadPage>
     with TickerProviderStateMixin {
-  int number = 0;
+  // This will fire with every frame painted.
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: const Duration(seconds: 1))
         ..repeat();
@@ -47,6 +47,15 @@ class GamepadStatusView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text('Gamepad:'),
+        const SizedBox(width: 10),
+        Text(gamepad.state.isConnected ? 'connected.' : 'not connected.',
+            style: TextStyle(
+                color: gamepad.state.isConnected
+                    ? Colors.green.dark
+                    : Colors.red.dark)),
+      ]),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -85,8 +94,18 @@ class GamepadStatusView extends StatelessWidget {
           onChanged: (_) {},
         ),
       ]),
-      ProgressBar(value: gamepad.state.leftTrigger.toDouble() / 2.55),
-      ProgressBar(value: gamepad.state.rightTrigger.toDouble() / 2.55),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text('Left trigger:'),
+        const SizedBox(width: 10),
+        // Convert from 0..255 to 0..100
+        ProgressBar(value: gamepad.state.leftTrigger.toDouble() / 2.55),
+      ]),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text('Right trigger:'),
+        const SizedBox(width: 10),
+        // Convert from 0..255 to 0..100
+        ProgressBar(value: gamepad.state.rightTrigger.toDouble() / 2.55),
+      ]),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         ToggleSwitch(
           checked: gamepad.state.buttonA,

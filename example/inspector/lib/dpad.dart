@@ -8,7 +8,10 @@ class DpadIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // For consistency, rotate a single arrow rather than use different arrows
+    // (FluentIcons seems to be missing some directions).
     const icon = Icon(FluentIcons.up);
+
     switch (direction) {
       case Direction.west:
         return Transform.rotate(child: icon, angle: pi * 6 / 4);
@@ -27,7 +30,7 @@ class DpadIcon extends StatelessWidget {
       case Direction.southwest:
         return Transform.rotate(child: icon, angle: pi * 5 / 4);
       default:
-        return const Icon(FluentIcons.circle_ring);
+        return const Icon(FluentIcons.location_outline);
     }
   }
 }

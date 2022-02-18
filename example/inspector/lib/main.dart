@@ -15,6 +15,7 @@ class GamepadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FluentApp(
       title: appTitle,
+      themeMode: ThemeMode.system,
       initialRoute: '/',
       routes: {'/': (_) => const InspectorPage()},
     );
@@ -37,6 +38,16 @@ class _InspectorPageState extends State<InspectorPage> {
         pane: NavigationPane(
             selected: index,
             onChanged: (i) => setState(() => index = i),
+            header: Container(
+              height: kOneLineTileHeight,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(children: const [
+                Icon(FluentIcons.repair),
+                SizedBox(width: 10),
+                Text('Gamepad Inspector')
+              ]),
+            ),
+            displayMode: PaneDisplayMode.auto,
             items: [
               PaneItem(
                   icon: const Icon(FluentIcons.game),

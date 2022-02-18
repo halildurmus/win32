@@ -29,8 +29,12 @@ class ThumbstickPainter extends CustomPainter {
     final minSize = min(size.width, size.height);
     final border = minSize / 10;
     final boxLength = minSize - border * 2;
+
+    // Range of thumbsticks is -32768 <= x <= 32767. We rescale the values to
+    // fit in the bounding box.
     final offset = Offset(((x + 32768) / 65535 * boxLength) + border,
         (boxLength - (y + 32768) / 65535 * boxLength) + border);
+
     final boundingBox = Paint()
       ..color = Colors.blue
       ..strokeWidth = border / 6
