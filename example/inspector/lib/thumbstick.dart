@@ -10,9 +10,14 @@ class ThumbstickView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode =
+        context.findAncestorWidgetOfExactType<FluentApp>()?.themeMode;
     return CustomPaint(
       size: MediaQuery.of(context).size,
-      painter: ThumbstickPainter(x, y),
+      painter: ThumbstickPainter(x, y,
+          backgroundColor: themeMode == ThemeMode.light
+              ? Colors.grey[20]
+              : Colors.grey[160]),
     );
   }
 }
@@ -20,8 +25,14 @@ class ThumbstickView extends StatelessWidget {
 class ThumbstickPainter extends CustomPainter {
   final int x;
   final int y;
+  final Color? boundingBoxColor;
+  final Color? thumbstickPositionColor;
+  final Color? backgroundColor;
 
-  ThumbstickPainter(this.x, this.y);
+  ThumbstickPainter(this.x, this.y,
+      {this.boundingBoxColor,
+      this.thumbstickPositionColor,
+      this.backgroundColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -36,16 +47,16 @@ class ThumbstickPainter extends CustomPainter {
         (boxLength - (y + 32768) / 65535 * boxLength) + border);
 
     final boundingBox = Paint()
-      ..color = Colors.blue
+      ..color = boundingBoxColor ?? Colors.blue
       ..strokeWidth = border / 6
       ..style = PaintingStyle.stroke;
     final positionPaint = Paint()
-      ..color = Colors.blue
+      ..color = thumbstickPositionColor ?? Colors.blue
       ..strokeWidth = border / 4
       ..style = PaintingStyle.fill;
 
     canvas
-      ..drawRect(rect, Paint()..color = Colors.white)
+      ..drawRect(rect, Paint()..color = backgroundColor ?? Colors.white)
       ..drawRect(
           Rect.fromLTWH(border, border, boxLength, boxLength), boundingBox)
       ..drawCircle(offset, border / 4, positionPaint);

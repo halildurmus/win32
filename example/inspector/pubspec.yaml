@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   fluent_ui: ^3.9.0
+  win32_registry: ^0.1.2
+  
   win32_gamepad: 
     path: ../..
 

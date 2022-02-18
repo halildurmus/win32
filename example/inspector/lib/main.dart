@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'gamepadpage.dart';
+import 'utils.dart';
 
 const appTitle = 'Gamepad Inspector';
 
@@ -15,7 +16,10 @@ class GamepadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FluentApp(
       title: appTitle,
-      themeMode: ThemeMode.system,
+      themeMode: WindowsSystemConfiguration.isDarkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      darkTheme: ThemeData(brightness: Brightness.dark),
       initialRoute: '/',
       routes: {'/': (_) => const InspectorPage()},
     );
@@ -39,13 +43,8 @@ class _InspectorPageState extends State<InspectorPage> {
             selected: index,
             onChanged: (i) => setState(() => index = i),
             header: Container(
-              height: kOneLineTileHeight,
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(children: const [
-                Icon(FluentIcons.repair),
-                SizedBox(width: 10),
-                Text('Gamepad Inspector')
-              ]),
+              child: Row(children: const [Text('Gamepad Inspector')]),
             ),
             displayMode: PaneDisplayMode.auto,
             items: [
