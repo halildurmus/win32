@@ -1,5 +1,6 @@
 import 'package:win32/win32.dart';
 
+/// The current status of a gamepad.
 class GamepadState {
   final int _buttonBitmask;
 
