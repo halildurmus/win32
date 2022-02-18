@@ -11,15 +11,15 @@ class DpadIcon extends StatelessWidget {
     const icon = Icon(FluentIcons.up);
     switch (direction) {
       case Direction.west:
-        return Transform.rotate(child: icon, angle: pi * 3 / 2);
+        return Transform.rotate(child: icon, angle: pi * 6 / 4);
       case Direction.northwest:
         return Transform.rotate(child: icon, angle: pi * 7 / 4);
       case Direction.north:
         return Transform.rotate(child: icon, angle: 0);
       case Direction.northeast:
-        return Transform.rotate(child: icon, angle: pi / 4);
+        return Transform.rotate(child: icon, angle: pi * 1 / 4);
       case Direction.east:
-        return Transform.rotate(child: icon, angle: pi / 2);
+        return Transform.rotate(child: icon, angle: pi * 2 / 4);
       case Direction.southeast:
         return Transform.rotate(child: icon, angle: pi * 3 / 4);
       case Direction.south:
