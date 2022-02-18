@@ -1,5 +1,18 @@
 import 'package:win32/win32.dart';
 
+/// The compass point represented by the directional pad.
+enum Direction {
+  west,
+  northwest,
+  north,
+  northeast,
+  east,
+  southeast,
+  south,
+  southwest,
+  center
+}
+
 /// The current status of a gamepad.
 class GamepadState {
   final int _buttonBitmask;
@@ -50,6 +63,20 @@ class GamepadState {
   /// [GamepadCapabilities.rightThumbDeadzone] can be used as a positive and
   /// negative filter to filter a thumbstick input.
   final int rightThumbstickY;
+
+  /// Returns the eight-way direction pressed on the d-pad, or center if the
+  /// dpad is not pressed.
+  Direction get dpadDirection {
+    if (dpadLeft && dpadUp) return Direction.northwest;
+    if (dpadLeft && dpadDown) return Direction.southwest;
+    if (dpadLeft) return Direction.west;
+    if (dpadRight && dpadUp) return Direction.northeast;
+    if (dpadRight && dpadDown) return Direction.southeast;
+    if (dpadRight) return Direction.east;
+    if (dpadUp) return Direction.north;
+    if (dpadDown) return Direction.south;
+    return Direction.center;
+  }
 
   /// Returns true if the D-pad direction is up.
   bool get dpadUp =>

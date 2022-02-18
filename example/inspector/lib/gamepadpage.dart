@@ -1,6 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:win32_gamepad/win32_gamepad.dart';
 
+import 'dpad.dart';
+import 'thumbstick.dart';
+
 class GamepadPage extends StatefulWidget {
   final int controller;
   late final Gamepad gamepad;
@@ -44,6 +47,44 @@ class GamepadStatusView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 120,
+            width: 120,
+            child: ThumbstickView(
+                x: gamepad.state.leftThumbstickX,
+                y: gamepad.state.leftThumbstickY),
+          ),
+          const SizedBox(width: 20),
+          SizedBox(
+            height: 120,
+            width: 120,
+            child: ThumbstickView(
+                x: gamepad.state.rightThumbstickX,
+                y: gamepad.state.rightThumbstickY),
+          ),
+        ],
+      ),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text('Directional pad:'),
+        const SizedBox(width: 10),
+        DpadIcon(direction: gamepad.state.dpadDirection),
+      ]),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        ToggleSwitch(
+          checked: gamepad.state.leftShoulder,
+          content: const Text('Left shoulder button'),
+          onChanged: (_) {},
+        ),
+        const SizedBox(width: 20),
+        ToggleSwitch(
+          checked: gamepad.state.rightShoulder,
+          content: const Text('Right shoulder button'),
+          onChanged: (_) {},
+        ),
+      ]),
       ProgressBar(value: gamepad.state.leftTrigger.toDouble() / 2.55),
       ProgressBar(value: gamepad.state.rightTrigger.toDouble() / 2.55),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
