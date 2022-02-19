@@ -52,13 +52,10 @@ class _InspectorPageState extends State<InspectorPage> {
           actions: CustomWindowButtonsSection(),
         ),
         pane: NavigationPane(
+            size: const NavigationPaneSize(openMaxWidth: 200),
+            displayMode: PaneDisplayMode.open,
             selected: index,
             onChanged: (i) => setState(() => index = i),
-            header: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(children: const [Text('Gamepad Inspector')]),
-            ),
-            displayMode: PaneDisplayMode.auto,
             items: [
               PaneItem(
                   icon: const Icon(FluentIcons.game),
