@@ -1,5 +1,7 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
+import 'custom_window.dart';
 import 'gamepadpage.dart';
 import 'utils.dart';
 
@@ -7,6 +9,12 @@ const appTitle = 'Gamepad Inspector';
 
 void main() {
   runApp(const GamepadApp());
+  doWhenWindowReady(() {
+    appWindow
+      ..alignment = Alignment.center
+      ..title = appTitle
+      ..show();
+  });
 }
 
 class GamepadApp extends StatelessWidget {
@@ -39,6 +47,10 @@ class _InspectorPageState extends State<InspectorPage> {
   @override
   Widget build(BuildContext context) {
     return NavigationView(
+        appBar: const NavigationAppBar(
+          title: CustomWindowTitleSection(appTitle: appTitle),
+          actions: CustomWindowButtonsSection(),
+        ),
         pane: NavigationPane(
             selected: index,
             onChanged: (i) => setState(() => index = i),

@@ -1,12 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:win32_gamepad/win32_gamepad.dart';
 
+import 'abxy_buttons.dart';
 import 'dpad.dart';
 import 'thumbstick.dart';
 
 class GamepadPage extends StatefulWidget {
   final int controller;
   late final Gamepad gamepad;
+
   GamepadPage({Key? key, required this.controller}) : super(key: key) {
     gamepad = Gamepad(controller);
   }
@@ -28,7 +30,8 @@ class _GamepadPageState extends State<GamepadPage>
       animation: _controller,
       builder: (BuildContext context, Widget? child) {
         widget.gamepad.updateState();
-        return GamepadStatusView(gamepad: widget.gamepad);
+        return GamepadStatusView(
+            gamepad: widget.gamepad, controller: widget.controller);
       },
     );
   }
@@ -42,118 +45,145 @@ class _GamepadPageState extends State<GamepadPage>
 
 class GamepadStatusView extends StatelessWidget {
   final Gamepad gamepad;
-  const GamepadStatusView({Key? key, required this.gamepad}) : super(key: key);
+  final int controller;
+
+  const GamepadStatusView(
+      {Key? key, required this.gamepad, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Text('Gamepad:'),
-            const SizedBox(width: 10),
-            Text(gamepad.state.isConnected ? 'connected.' : 'not connected.',
-                style: TextStyle(
-                    color: gamepad.state.isConnected
-                        ? Colors.green.dark
-                        : Colors.red.dark)),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+    final isDarkMode =
+        context.findAncestorWidgetOfExactType<FluentApp>()?.themeMode ==
+            ThemeMode.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        GamepadConnectedView(gamepad: gamepad, controller: controller),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Wrap(spacing: 20, children: [
             ToggleSwitch(
               checked: gamepad.state.leftShoulder,
               content: const Text('Left shoulder button'),
               onChanged: (_) {},
             ),
-            const SizedBox(width: 20),
             ToggleSwitch(
               checked: gamepad.state.rightShoulder,
               content: const Text('Right shoulder button'),
               onChanged: (_) {},
             ),
           ]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 120,
-                width: 120,
-                child: ThumbstickView(
-                    x: gamepad.state.leftThumbstickX,
-                    y: gamepad.state.leftThumbstickY),
+        ),
+        Row(
+          children: [
+            SizedBox(
+              height: 120,
+              width: 120,
+              child: ThumbstickView(
+                  x: gamepad.state.leftThumbstickX,
+                  y: gamepad.state.leftThumbstickY),
+            ),
+            const SizedBox(width: 20),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ToggleSwitch(
+                checked: gamepad.state.buttonStart,
+                content: const Text('Start'),
+                onChanged: (_) {},
               ),
               const SizedBox(width: 20),
-              SizedBox(
-                height: 120,
-                width: 120,
-                child: ThumbstickView(
-                    x: gamepad.state.rightThumbstickX,
-                    y: gamepad.state.rightThumbstickY),
+              ToggleSwitch(
+                checked: gamepad.state.buttonBack,
+                content: const Text('Back'),
+                onChanged: (_) {},
               ),
-            ],
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Text('Directional pad:'),
-            const SizedBox(width: 10),
-            DpadIcon(direction: gamepad.state.dpadDirection),
-          ]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(children: [
+            ]),
+            const SizedBox(width: 20),
+            SizedBox(
+              height: 120,
+              width: 120,
+              child: ThumbstickView(
+                  x: gamepad.state.rightThumbstickX,
+                  y: gamepad.state.rightThumbstickY),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        Row(children: [
+          const Text('Directional pad:'),
+          const SizedBox(width: 10),
+          DpadIcon(direction: gamepad.state.dpadDirection),
+        ]),
+        const SizedBox(height: 20),
+        Wrap(
+          spacing: 20,
+          alignment: WrapAlignment.start,
+          children: [
+            FittedBox(
+              child: Row(children: [
                 const Text('Left trigger:'),
                 const SizedBox(width: 10),
                 // Convert from 0..255 to 0..100
-                ProgressBar(value: gamepad.state.leftTrigger.toDouble() / 2.55),
-              ]),
-              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                ToggleSwitch(
-                  checked: gamepad.state.buttonStart,
-                  content: const Text('Start'),
-                  onChanged: (_) {},
-                ),
-                const SizedBox(width: 20),
-                ToggleSwitch(
-                  checked: gamepad.state.buttonBack,
-                  content: const Text('Back'),
-                  onChanged: (_) {},
+                ProgressBar(
+                  value: gamepad.state.leftTrigger.toDouble() / 2.55,
+                  backgroundColor: isDarkMode ? Colors.grey[140] : null,
                 ),
               ]),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            ),
+            FittedBox(
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 const Text('Right trigger:'),
                 const SizedBox(width: 10),
                 // Convert from 0..255 to 0..100
                 ProgressBar(
-                    value: gamepad.state.rightTrigger.toDouble() / 2.55),
+                  value: gamepad.state.rightTrigger.toDouble() / 2.55,
+                  backgroundColor: isDarkMode ? Colors.grey[140] : null,
+                ),
               ]),
-            ],
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ToggleSwitch(
-              checked: gamepad.state.buttonA,
-              content: const Text('A button'),
-              onChanged: (_) {},
             ),
-            const SizedBox(width: 20),
-            ToggleSwitch(
-              checked: gamepad.state.buttonB,
-              content: const Text('B button'),
-              onChanged: (_) {},
-            ),
-          ]),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ToggleSwitch(
-              checked: gamepad.state.buttonX,
-              content: const Text('X button'),
-              onChanged: (_) {},
-            ),
-            const SizedBox(width: 20),
-            ToggleSwitch(
-              checked: gamepad.state.buttonY,
-              content: const Text('Y button'),
-              onChanged: (_) {},
-            ),
-          ]),
-        ]);
+          ],
+        ),
+        const SizedBox(height: 20),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Text('Main buttons:'),
+          ABXYButtons(gamepad: gamepad),
+        ]),
+      ]),
+    );
+  }
+}
+
+class GamepadConnectedView extends StatelessWidget {
+  const GamepadConnectedView({
+    Key? key,
+    required this.gamepad,
+    required this.controller,
+  }) : super(key: key);
+
+  final Gamepad gamepad;
+  final int controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      Icon(FluentIcons.game,
+          size: 60,
+          color: gamepad.state.isConnected
+              ? Colors.successPrimaryColor
+              : Colors.warningPrimaryColor),
+      const SizedBox(width: 20),
+      Text(
+          gamepad.state.isConnected
+              ? 'Controller ${controller + 1} connected'
+              : 'Controller ${controller + 1} disconnected',
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: gamepad.state.isConnected
+                  ? Colors.successPrimaryColor
+                  : Colors.warningPrimaryColor)),
+    ]);
   }
 }
