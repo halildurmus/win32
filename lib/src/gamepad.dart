@@ -8,9 +8,10 @@ import 'gamepad_batteryinfo.dart';
 import 'gamepad_state.dart';
 
 /// Represents a gamepad controller.
-///
-/// Up to four controllers may be connected to a system, numbered from 0 to 3.
 class Gamepad {
+  /// The identifier for the current controller.
+  ///
+  /// Up to four controllers may be connected to a system, numbered from 0 to 3.
   final int controller;
   int _packetNumber = -1;
 

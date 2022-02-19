@@ -51,6 +51,7 @@ class GamepadBatteryInfo {
   late int _batteryType;
   late int _batteryLevel;
 
+  /// The type of battery.
   GamepadBatteryType get batteryType {
     switch (_batteryType) {
       case BATTERY_TYPE_DISCONNECTED:
@@ -66,6 +67,9 @@ class GamepadBatteryInfo {
     }
   }
 
+  /// The charge state of the battery.
+  ///
+  /// This value is only valid for wireless devices with a known battery type.
   GamepadBatteryLevel get batteryLevel {
     switch (_batteryLevel) {
       case BATTERY_LEVEL_FULL:
