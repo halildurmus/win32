@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Fix some bugs and add better examples and documentation.
+
 ## 1.0.0
 
 - Initial version.
