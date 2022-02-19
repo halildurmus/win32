@@ -13,6 +13,8 @@ import 'gamepad_state.dart';
 class Gamepad {
   final int controller;
   int _packetNumber = -1;
+
+  /// The status of the buttons, triggers and thumbsticks on the gamepad.
   late GamepadState state;
 
   static bool _isComInitialized = false;
