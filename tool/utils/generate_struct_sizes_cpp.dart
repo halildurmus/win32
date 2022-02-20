@@ -50,7 +50,6 @@ void main()
     printf("  'GUID': %zu,\\n", sizeof(GUID));
     printf("  'MMTIME': %zu,\\n", sizeof(MMTIME));
     printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
-    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
     printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));

@@ -3918,6 +3918,64 @@ class PRINTER_NOTIFY_INFO extends Struct {
   external Array<PRINTER_NOTIFY_INFO_DATA> aData;
 }
 
+/// The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer
+/// information field and provides the current data for that field.
+///
+/// {@category Struct}
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  @Uint16()
+  external int Type;
+
+  @Uint16()
+  external int Field;
+
+  @Uint32()
+  external int Reserved;
+
+  @Uint32()
+  external int Id;
+
+  external _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union NotifyData;
+}
+
+/// {@category Struct}
+class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union extends Union {
+  @Array(2)
+  external Array<Uint32> adwData;
+
+  external _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct Data;
+}
+
+/// {@category Struct}
+class _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct
+    extends Struct {
+  @Uint32()
+  external int cbBuf;
+
+  external Pointer pBuf;
+}
+
+extension PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union_Extension
+    on PRINTER_NOTIFY_INFO_DATA {
+  int get cbBuf => this.NotifyData.Data.cbBuf;
+  set cbBuf(int value) => this.NotifyData.Data.cbBuf = value;
+
+  Pointer get pBuf => this.NotifyData.Data.pBuf;
+  set pBuf(Pointer value) => this.NotifyData.Data.pBuf = value;
+}
+
+extension PRINTER_NOTIFY_INFO_DATA_Extension on PRINTER_NOTIFY_INFO_DATA {
+  Array<Uint32> get adwData => this.NotifyData.adwData;
+  set adwData(Array<Uint32> value) => this.NotifyData.adwData = value;
+
+  _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct get Data =>
+      this.NotifyData.Data;
+  set Data(
+          _PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct
+              value) =>
+      this.NotifyData.Data = value;
+}
+
 /// Represents printer options.
 ///
 /// {@category Struct}

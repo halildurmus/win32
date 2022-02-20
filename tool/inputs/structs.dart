@@ -318,6 +318,8 @@ const structsToGenerate = <String, String>{
       "The PRINTER_INFO_6 specifies the status value of a printer.",
   "Windows.Win32.Graphics.Printing.PRINTER_NOTIFY_INFO":
       "The PRINTER_NOTIFY_INFO structure contains printer information returned by the FindNextPrinterChangeNotification function. The function returns this information after a wait operation on a printer change notification object has been satisfied.",
+  "Windows.Win32.Graphics.Printing.PRINTER_NOTIFY_INFO_DATA":
+      "The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer information field and provides the current data for that field.",
   "Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW":
       "Represents printer options.",
   "Windows.Win32.System.Threading.PROCESS_INFORMATION":

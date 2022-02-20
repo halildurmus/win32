@@ -45,7 +45,6 @@ void main()
     printf("  'GUID': %zu,\n", sizeof(GUID));
     printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
     printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
-    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
@@ -213,6 +212,7 @@ void main()
     printf("  'PRINTER_INFO_5': %zu,\n", sizeof(PRINTER_INFO_5W));
     printf("  'PRINTER_INFO_6': %zu,\n", sizeof(PRINTER_INFO_6));
     printf("  'PRINTER_NOTIFY_INFO': %zu,\n", sizeof(PRINTER_NOTIFY_INFO));
+    printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
