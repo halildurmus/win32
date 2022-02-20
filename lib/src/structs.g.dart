@@ -1088,6 +1088,37 @@ class CWPSTRUCT extends Struct {
   external int hwnd;
 }
 
+/// A currency number stored as an 8-byte, two's complement integer, scaled
+/// by 10,000 to give a fixed-point number with 15 digits to the left of
+/// the decimal point and 4 digits to the right. This
+/// IDispatch::GetTypeInfo representation provides a range of
+/// 922337203685477.5807 to -922337203685477.5808.
+///
+/// {@category Struct}
+class CY extends Union {
+  external _CY__Anonymous_e__Struct Anonymous;
+
+  @Int64()
+  external int int64;
+}
+
+/// {@category Struct}
+class _CY__Anonymous_e__Struct extends Struct {
+  @Uint32()
+  external int Lo;
+
+  @Int32()
+  external int Hi;
+}
+
+extension CY_Extension on CY {
+  int get Lo => this.Anonymous.Lo;
+  set Lo(int value) => this.Anonymous.Lo = value;
+
+  int get Hi => this.Anonymous.Hi;
+  set Hi(int value) => this.Anonymous.Hi = value;
+}
+
 /// Defines the control setting for a serial communications device.
 ///
 /// {@category Struct}
@@ -1157,6 +1188,95 @@ class DEBUGHOOKINFO extends Struct {
 
   @Int32()
   external int code;
+}
+
+/// Represents a decimal data type that provides a sign and scale for a
+/// number (as in coordinates.) Decimal variables are stored as 96-bit
+/// (12-byte) unsigned integers scaled by a variable power of 10. The power
+/// of 10 scaling factor specifies the number of digits to the right of the
+/// decimal point, and ranges from 0 to 28.
+///
+/// {@category Struct}
+class DECIMAL extends Struct {
+  @Uint16()
+  external int wReserved;
+
+  external _DECIMAL__Anonymous1_e__Union Anonymous1;
+
+  @Uint32()
+  external int Hi32;
+
+  external _DECIMAL__Anonymous2_e__Union Anonymous2;
+}
+
+/// {@category Struct}
+class _DECIMAL__Anonymous1_e__Union extends Union {
+  external _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct Anonymous;
+
+  @Uint16()
+  external int signscale;
+}
+
+/// {@category Struct}
+class _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct extends Struct {
+  @Uint8()
+  external int scale;
+
+  @Uint8()
+  external int sign;
+}
+
+extension DECIMAL__Anonymous1_e__Union_Extension on DECIMAL {
+  int get scale => this.Anonymous1.Anonymous.scale;
+  set scale(int value) => this.Anonymous1.Anonymous.scale = value;
+
+  int get sign => this.Anonymous1.Anonymous.sign;
+  set sign(int value) => this.Anonymous1.Anonymous.sign = value;
+}
+
+extension DECIMAL_Extension on DECIMAL {
+  _DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct get Anonymous =>
+      this.Anonymous1.Anonymous;
+  set Anonymous(_DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct value) =>
+      this.Anonymous1.Anonymous = value;
+
+  int get signscale => this.Anonymous1.signscale;
+  set signscale(int value) => this.Anonymous1.signscale = value;
+}
+
+/// {@category Struct}
+class _DECIMAL__Anonymous2_e__Union extends Union {
+  external _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct Anonymous;
+
+  @Uint64()
+  external int Lo64;
+}
+
+/// {@category Struct}
+class _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct extends Struct {
+  @Uint32()
+  external int Lo32;
+
+  @Uint32()
+  external int Mid32;
+}
+
+extension DECIMAL__Anonymous2_e__Union_Extension on DECIMAL {
+  int get Lo32 => this.Anonymous2.Anonymous.Lo32;
+  set Lo32(int value) => this.Anonymous2.Anonymous.Lo32 = value;
+
+  int get Mid32 => this.Anonymous2.Anonymous.Mid32;
+  set Mid32(int value) => this.Anonymous2.Anonymous.Mid32 = value;
+}
+
+extension DECIMAL_Extension_1 on DECIMAL {
+  _DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct get Anonymous =>
+      this.Anonymous2.Anonymous;
+  set Anonymous(_DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct value) =>
+      this.Anonymous2.Anonymous = value;
+
+  int get Lo64 => this.Anonymous2.Lo64;
+  set Lo64(int value) => this.Anonymous2.Lo64 = value;
 }
 
 /// The DESIGNVECTOR structure is used by an application to specify values
@@ -3017,6 +3137,115 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxTrackSize;
 }
 
+/// The MMTIME structure contains timing information for different types of
+/// multimedia data.
+///
+/// {@category Struct}
+class MMTIME extends Struct {
+  @Uint32()
+  external int wType;
+
+  external _MMTIME__u_e__Union u;
+}
+
+/// {@category Struct}
+class _MMTIME__u_e__Union extends Union {
+  @Uint32()
+  external int ms;
+
+  @Uint32()
+  external int sample;
+
+  @Uint32()
+  external int cb;
+
+  @Uint32()
+  external int ticks;
+
+  external _MMTIME__u_e__Union__smpte_e__Struct smpte;
+
+  external _MMTIME__u_e__Union__midi_e__Struct midi;
+}
+
+/// {@category Struct}
+class _MMTIME__u_e__Union__smpte_e__Struct extends Struct {
+  @Uint8()
+  external int hour;
+
+  @Uint8()
+  external int min;
+
+  @Uint8()
+  external int sec;
+
+  @Uint8()
+  external int frame;
+
+  @Uint8()
+  external int fps;
+
+  @Uint8()
+  external int dummy;
+
+  @Array(2)
+  external Array<Uint8> pad;
+}
+
+extension MMTIME__u_e__Union_Extension on MMTIME {
+  int get hour => this.u.smpte.hour;
+  set hour(int value) => this.u.smpte.hour = value;
+
+  int get min => this.u.smpte.min;
+  set min(int value) => this.u.smpte.min = value;
+
+  int get sec => this.u.smpte.sec;
+  set sec(int value) => this.u.smpte.sec = value;
+
+  int get frame => this.u.smpte.frame;
+  set frame(int value) => this.u.smpte.frame = value;
+
+  int get fps => this.u.smpte.fps;
+  set fps(int value) => this.u.smpte.fps = value;
+
+  int get dummy => this.u.smpte.dummy;
+  set dummy(int value) => this.u.smpte.dummy = value;
+
+  Array<Uint8> get pad => this.u.smpte.pad;
+  set pad(Array<Uint8> value) => this.u.smpte.pad = value;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _MMTIME__u_e__Union__midi_e__Struct extends Struct {
+  @Uint32()
+  external int songptrpos;
+}
+
+extension MMTIME__u_e__Union_Extension_1 on MMTIME {
+  int get songptrpos => this.u.midi.songptrpos;
+  set songptrpos(int value) => this.u.midi.songptrpos = value;
+}
+
+extension MMTIME_Extension on MMTIME {
+  int get ms => this.u.ms;
+  set ms(int value) => this.u.ms = value;
+
+  int get sample => this.u.sample;
+  set sample(int value) => this.u.sample = value;
+
+  int get cb => this.u.cb;
+  set cb(int value) => this.u.cb = value;
+
+  int get ticks => this.u.ticks;
+  set ticks(int value) => this.u.ticks = value;
+
+  _MMTIME__u_e__Union__smpte_e__Struct get smpte => this.u.smpte;
+  set smpte(_MMTIME__u_e__Union__smpte_e__Struct value) => this.u.smpte = value;
+
+  _MMTIME__u_e__Union__midi_e__Struct get midi => this.u.midi;
+  set midi(_MMTIME__u_e__Union__midi_e__Struct value) => this.u.midi = value;
+}
+
 /// Contains information about the capabilities of a modem.
 ///
 /// {@category Struct}
@@ -4372,6 +4601,96 @@ class PRINT_EXECUTION_DATA extends Struct {
   external int clientAppPID;
 }
 
+/// Contains information about a heap element. The HeapWalk function uses a
+/// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
+///
+/// {@category Struct}
+class PROCESS_HEAP_ENTRY extends Struct {
+  external Pointer lpData;
+
+  @Uint32()
+  external int cbData;
+
+  @Uint8()
+  external int cbOverhead;
+
+  @Uint8()
+  external int iRegionIndex;
+
+  @Uint16()
+  external int wFlags;
+
+  external _PROCESS_HEAP_ENTRY__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _PROCESS_HEAP_ENTRY__Anonymous_e__Union extends Union {
+  external _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct Block;
+
+  external _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct Region;
+}
+
+/// {@category Struct}
+class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct extends Struct {
+  @IntPtr()
+  external int hMem;
+
+  @Array(3)
+  external Array<Uint32> dwReserved;
+}
+
+extension PROCESS_HEAP_ENTRY__Anonymous_e__Union_Extension
+    on PROCESS_HEAP_ENTRY {
+  int get hMem => this.Anonymous.Block.hMem;
+  set hMem(int value) => this.Anonymous.Block.hMem = value;
+
+  Array<Uint32> get dwReserved => this.Anonymous.Block.dwReserved;
+  set dwReserved(Array<Uint32> value) =>
+      this.Anonymous.Block.dwReserved = value;
+}
+
+/// {@category Struct}
+class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct extends Struct {
+  @Uint32()
+  external int dwCommittedSize;
+
+  @Uint32()
+  external int dwUnCommittedSize;
+
+  external Pointer lpFirstBlock;
+
+  external Pointer lpLastBlock;
+}
+
+extension PROCESS_HEAP_ENTRY__Anonymous_e__Union_Extension_1
+    on PROCESS_HEAP_ENTRY {
+  int get dwCommittedSize => this.Anonymous.Region.dwCommittedSize;
+  set dwCommittedSize(int value) =>
+      this.Anonymous.Region.dwCommittedSize = value;
+
+  int get dwUnCommittedSize => this.Anonymous.Region.dwUnCommittedSize;
+  set dwUnCommittedSize(int value) =>
+      this.Anonymous.Region.dwUnCommittedSize = value;
+
+  Pointer get lpFirstBlock => this.Anonymous.Region.lpFirstBlock;
+  set lpFirstBlock(Pointer value) => this.Anonymous.Region.lpFirstBlock = value;
+
+  Pointer get lpLastBlock => this.Anonymous.Region.lpLastBlock;
+  set lpLastBlock(Pointer value) => this.Anonymous.Region.lpLastBlock = value;
+}
+
+extension PROCESS_HEAP_ENTRY_Extension on PROCESS_HEAP_ENTRY {
+  _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct get Block =>
+      this.Anonymous.Block;
+  set Block(_PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct value) =>
+      this.Anonymous.Block = value;
+
+  _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct get Region =>
+      this.Anonymous.Region;
+  set Region(_PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct value) =>
+      this.Anonymous.Region = value;
+}
+
 /// Contains information about a newly created process and its primary
 /// thread. It is used with the CreateProcess, CreateProcessAsUser,
 /// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
@@ -4540,6 +4859,64 @@ class RAWKEYBOARD extends Struct {
 
   @Uint32()
   external int ExtraInformation;
+}
+
+/// Contains information about the state of the mouse.
+///
+/// {@category Struct}
+class RAWMOUSE extends Struct {
+  @Uint16()
+  external int usFlags;
+
+  external _RAWMOUSE__Anonymous_e__Union Anonymous;
+
+  @Uint32()
+  external int ulRawButtons;
+
+  @Int32()
+  external int lLastX;
+
+  @Int32()
+  external int lLastY;
+
+  @Uint32()
+  external int ulExtraInformation;
+}
+
+/// {@category Struct}
+class _RAWMOUSE__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int ulButtons;
+
+  external _RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
+}
+
+/// {@category Struct}
+class _RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+  @Uint16()
+  external int usButtonFlags;
+
+  @Uint16()
+  external int usButtonData;
+}
+
+extension RAWMOUSE__Anonymous_e__Union_Extension on RAWMOUSE {
+  int get usButtonFlags => this.Anonymous.Anonymous.usButtonFlags;
+  set usButtonFlags(int value) =>
+      this.Anonymous.Anonymous.usButtonFlags = value;
+
+  int get usButtonData => this.Anonymous.Anonymous.usButtonData;
+  set usButtonData(int value) => this.Anonymous.Anonymous.usButtonData = value;
+}
+
+extension RAWMOUSE_Extension on RAWMOUSE {
+  int get ulButtons => this.Anonymous.ulButtons;
+  set ulButtons(int value) => this.Anonymous.ulButtons = value;
+
+  _RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct get Anonymous =>
+      this.Anonymous.Anonymous;
+  set Anonymous(_RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct value) =>
+      this.Anonymous.Anonymous = value;
 }
 
 /// The RECT structure defines a rectangle by the coordinates of its

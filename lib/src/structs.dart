@@ -2,36 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Dart representations of common structs used in the Win32 API. If you add a
-// new struct, make sure you also add a line to struct_sizes.cpp and
-// struct_sizes.dart to ensure that the C size matches the Dart representation.
-
-// -----------------------------------------------------------------------------
-// Linter exceptions
-// -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types
-// ignore_for_file: camel_case_extensions
-//
-// Why? The linter defaults to throw a warning for types not named as camel
-// case. We deliberately break this convention to match the Win32 underlying
-// types.
-//
-//
-// ignore_for_file: unused_field
-//
-// Why? The linter complains about unused fields (e.g. a class that contains
-// underscore-prefixed members that are not used in the library. In this class,
-// we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
-// least as large as the underlying native struct. See, for example,
-// VARIANT.
-//
-//
-// ignore_for_file: unnecessary_getters_setters
-//
-// Why? In structs like VARIANT, we're using getters and setters to project the
-// same underlying data property to various union types. The trivial overhead is
-// outweighed by readability.
-// -----------------------------------------------------------------------------
+// Dart representations of COM variant structs used in the Win32 API.
 
 import 'dart:ffi';
 
@@ -41,114 +12,7 @@ import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'constants.dart';
-import 'oleaut32.dart';
-
-/// Contains information about a heap element. The HeapWalk function uses a
-/// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
-///
-/// {@category Struct}
-class PROCESS_HEAP_ENTRY extends Struct {
-  // TODO: Nested Union
-
-  external Pointer lpData;
-  @Uint32()
-  external int cbData;
-  @Uint8()
-  external int cbOverhead;
-  @Uint8()
-  external int iRegionIndex;
-  @Uint16()
-  external int wFlags;
-  @Uint32()
-  external int dwCommittedSize;
-  @Uint32()
-  external int dwUnCommittedSize;
-  external Pointer lpFirstBlock;
-  external Pointer lpLastBlock;
-}
-
-// typedef struct tagDEC {
-//   USHORT wReserved;
-//   union {
-//     struct {
-//       BYTE scale;
-//       BYTE sign;
-//     } DUMMYSTRUCTNAME;
-//     USHORT signscale;
-//   } DUMMYUNIONNAME;
-//   ULONG  Hi32;
-//   union {
-//     struct {
-//       ULONG Lo32;
-//       ULONG Mid32;
-//     } DUMMYSTRUCTNAME2;
-//     ULONGLONG Lo64;
-//   } DUMMYUNIONNAME2;
-// } DECIMAL;
-
-/// Represents a decimal data type that provides a sign and scale for a number
-/// (as in coordinates.)
-///
-/// Decimal variables are stored as 96-bit (12-byte) unsigned integers scaled by
-/// a variable power of 10. The power of 10 scaling factor specifies the number
-/// of digits to the right of the decimal point, and ranges from 0 to 28.
-///
-/// {@category Struct}
-class _DECIMAL_Anonymous_0 extends Union {
-  external _DECIMAL_Anonymous_2 _DUMMYSTRUCTNAME;
-  @Uint16()
-  external int signscale;
-}
-
-class _DECIMAL_Anonymous_1 extends Union {
-  external _DECIMAL_Anonymous_3 _DUMMYSTRUCTNAME2;
-  @Uint64()
-  external int Lo64;
-}
-
-class _DECIMAL_Anonymous_2 extends Struct {
-  @Uint8()
-  external int scale;
-  @Uint8()
-  external int sign;
-}
-
-class _DECIMAL_Anonymous_3 extends Struct {
-  @Uint32()
-  external int Lo32;
-  @Uint32()
-  external int Mid32;
-}
-
-class DECIMAL extends Struct {
-  @Uint16()
-  external int wReserved;
-
-  external _DECIMAL_Anonymous_0 _DUMMYUNIONNAME;
-
-  @Uint32()
-  external int Hi32;
-
-  external _DECIMAL_Anonymous_1 _DUMMYUNIONNAME2;
-
-  int get scale => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale;
-  set scale(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.scale = value;
-
-  int get sign => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign;
-  set sign(int value) => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.sign = value;
-
-  int get signscale => _DUMMYUNIONNAME.signscale;
-  set signscale(int value) => _DUMMYUNIONNAME.signscale = value;
-
-  int get Lo32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32;
-  set Lo32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Lo32 = value;
-
-  int get Mid32 => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32;
-  set Mid32(int value) => _DUMMYUNIONNAME2._DUMMYSTRUCTNAME2.Mid32 = value;
-
-  int get Lo64 => _DUMMYUNIONNAME2.Lo64;
-  set Lo64(int value) => _DUMMYUNIONNAME2.Lo64 = value;
-}
+import 'structs.g.dart';
 
 // struct tagVARIANT
 //    {
@@ -186,6 +50,7 @@ class _VARIANT_Anonymous_2 extends Union {
   @Int16()
   external int boolVal;
   @Int16()
+  // ignore: unused_field
   external int __OBSOLETE__VARIANT_BOOL;
   @Int32()
   external int scode;
@@ -204,6 +69,7 @@ class _VARIANT_Anonymous_2 extends Union {
   external Pointer<Float> pfltVal;
   external Pointer<Double> pdblVal;
   external Pointer<Int16> pboolVal;
+  // ignore: unused_field
   external Pointer<Int16> __OBSOLETE__VARIANT_PBOOL;
   external Pointer<Int32> pscode;
   external Pointer/*<CY>*/ pcyVal;
@@ -528,76 +394,6 @@ class VARIANT extends Struct {
       .__VARIANT_NAME_2.__VARIANT_NAME_3.__VARIANT_NAME_4.pRecInfo = value;
 }
 
-// typedef struct mmtime_tag {
-//   UINT  wType;
-//   union {
-//     DWORD  ms;
-//     DWORD  sample;
-//     DWORD  cb;
-//     DWORD  ticks;
-//     struct {
-//       BYTE hour;
-//       BYTE min;
-//       BYTE sec;
-//       BYTE frame;
-//       BYTE fps;
-//       BYTE dummy;
-//       BYTE pad[2];
-//     } smpte;
-//     struct {
-//       DWORD songptrpos;
-//     } midi;
-//   } u;
-// } MMTIME, *PMMTIME, *LPMMTIME;
-
-class _smpte {
-  final int hour;
-  final int min;
-  final int sec;
-  final int frame;
-  final int fps;
-  final int dummy;
-
-  const _smpte(this.hour, this.min, this.sec, this.frame, this.fps, this.dummy);
-}
-
-class _midi {
-  final int songptrpos;
-
-  const _midi(this.songptrpos);
-}
-
-/// The MMTIME structure contains timing information for different types of
-/// multimedia data.
-///
-/// {@category Struct}
-class MMTIME extends Struct {
-  @Uint32()
-  external int wType;
-
-  @Uint32()
-  external int ms;
-
-  @Uint16()
-  external int _valueExtra;
-
-  @Uint16()
-  external int _pad;
-
-  int get sample => ms;
-  int get cb => ms;
-  int get ticks => ms;
-
-  _smpte get smpte => _smpte((ms & 0xFF000000) << 24, (ms & 0xFF0000) << 16,
-      (ms & 0xFF00) << 8, ms & 0xFF, (_valueExtra & 0xFF00) << 8, _valueExtra);
-  _midi get midi => _midi(ms);
-
-  set sample(int value) => ms = value;
-  set cb(int value) => ms = value;
-  set ticks(int value) => ms = value;
-  set midi(_midi value) => ms = value.songptrpos;
-}
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
@@ -616,55 +412,4 @@ class PROPVARIANT extends Struct {
   external int val1;
   @IntPtr()
   external int val2;
-}
-
-// typedef struct tagRAWMOUSE {
-//   USHORT usFlags;
-//   union {
-//     ULONG ulButtons;
-//     struct {
-//       USHORT usButtonFlags;
-//       USHORT usButtonData;
-//     } DUMMYSTRUCTNAME;
-//   } DUMMYUNIONNAME;
-//   ULONG  ulRawButtons;
-//   LONG   lLastX;
-//   LONG   lLastY;
-//   ULONG  ulExtraInformation;
-// } RAWMOUSE, *PRAWMOUSE, *LPRAWMOUSE;
-class _RAWMOUSE_Anonymous_0 extends Struct {
-  @Uint16()
-  external int usButtonFlags;
-  @Uint16()
-  external int usButtonData;
-}
-
-class _RAWMOUSE_Anonymous_1 extends Union {
-  @Uint32()
-  external int ulButtons;
-  external _RAWMOUSE_Anonymous_0 _DUMMYSTRUCTNAME;
-}
-
-/// Contains information about the state of the mouse.
-///
-/// {@category Struct}
-class RAWMOUSE extends Struct {
-  @Uint16()
-  external int usFlags;
-  external _RAWMOUSE_Anonymous_1 _DUMMYUNIONNAME;
-  @Uint32()
-  external int ulRawButtons;
-  @Int32()
-  external int lLastX;
-  @Int32()
-  external int lLastY;
-  @Uint32()
-  external int ulExtraInformation;
-
-  int get usButtonFlags => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonFlags;
-  set usButtonFlags(int value) =>
-      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonFlags = value;
-  int get usButtonData => _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData;
-  set usButtonData(int value) =>
-      _DUMMYUNIONNAME._DUMMYSTRUCTNAME.usButtonData = value;
 }

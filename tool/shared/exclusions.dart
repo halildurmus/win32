@@ -1,13 +1,6 @@
 import 'version.dart';
 
-const v2ExcludedStructs = <String>{
-  'Windows.Win32.System.Com.VARIANT',
-  'Windows.Win32.System.Com.StructuredStorage.PROPVARIANT',
-  'Windows.Win32.System.IO.OVERLAPPED',
-};
-
 const v3ExcludedStructs = <String>{
-  ...v2ExcludedStructs,
   'Windows.Win32.Foundation.DECIMAL',
 
   // These are ANSI structs without a suffix. The Unicode variant is
@@ -38,8 +31,7 @@ const v3ExcludedStructs = <String>{
   'Windows.Win32.Devices.Fax.IStiDeviceW',
 };
 
-const excludedStructs =
-    win32Version == 2 ? v2ExcludedStructs : v3ExcludedStructs;
+const excludedStructs = win32Version == 2 ? <String>[] : v3ExcludedStructs;
 
 const v3ExcludedComInterfaces = <String>{
   // TODO: We may be able to remove this from the list.

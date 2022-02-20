@@ -40,14 +40,8 @@ void main()
 {
     // Manually generated structs
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
-    printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
-    printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\n", sizeof(GUID));
-    printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
-    printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
-    printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
-    printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
     // Automatically generated structs
@@ -97,8 +91,10 @@ void main()
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));
+    printf("  'CY': %zu,\n", sizeof(CY));
     printf("  'DCB': %zu,\n", sizeof(DCB));
     printf("  'DEBUGHOOKINFO': %zu,\n", sizeof(DEBUGHOOKINFO));
+    printf("  'DECIMAL': %zu,\n", sizeof(DECIMAL));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
@@ -172,6 +168,7 @@ void main()
     printf("  'MIDIPROPTIMEDIV': %zu,\n", sizeof(MIDIPROPTIMEDIV));
     printf("  'MIDISTRMBUFFVER': %zu,\n", sizeof(MIDISTRMBUFFVER));
     printf("  'MINMAXINFO': %zu,\n", sizeof(MINMAXINFO));
+    printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
     printf("  'MODEMDEVCAPS': %zu,\n", sizeof(MODEMDEVCAPS));
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
@@ -218,6 +215,7 @@ void main()
     printf("  'PRINTER_NOTIFY_INFO': %zu,\n", sizeof(PRINTER_NOTIFY_INFO));
     printf("  'PRINTER_NOTIFY_INFO_DATA': %zu,\n", sizeof(PRINTER_NOTIFY_INFO_DATA));
     printf("  'PRINTER_OPTIONS': %zu,\n", sizeof(PRINTER_OPTIONSW));
+    printf("  'PROCESS_HEAP_ENTRY': %zu,\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
@@ -228,6 +226,7 @@ void main()
     printf("  'RAWINPUTDEVICELIST': %zu,\n", sizeof(RAWINPUTDEVICELIST));
     printf("  'RAWINPUTHEADER': %zu,\n", sizeof(RAWINPUTHEADER));
     printf("  'RAWKEYBOARD': %zu,\n", sizeof(RAWKEYBOARD));
+    printf("  'RAWMOUSE': %zu,\n", sizeof(RAWMOUSE));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));

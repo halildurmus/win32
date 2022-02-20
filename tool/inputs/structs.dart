@@ -91,10 +91,14 @@ const structsToGenerate = <String, String>{
       "Defines the message parameters passed to a WH_CALLWNDPROCRET hook procedure, CallWndRetProc.",
   "Windows.Win32.UI.WindowsAndMessaging.CWPSTRUCT":
       "Defines the message parameters passed to a WH_CALLWNDPROC hook procedure, CallWndProc.",
+  "Windows.Win32.System.Com.CY":
+      "A currency number stored as an 8-byte, two's complement integer, scaled by 10,000 to give a fixed-point number with 15 digits to the left of the decimal point and 4 digits to the right. This IDispatch::GetTypeInfo representation provides a range of 922337203685477.5807 to -922337203685477.5808.",
   "Windows.Win32.Devices.Communication.DCB":
       "Defines the control setting for a serial communications device.",
   "Windows.Win32.UI.WindowsAndMessaging.DEBUGHOOKINFO":
       "Contains debugging information passed to a WH_DEBUG hook procedure, DebugProc.",
+  "Windows.Win32.Foundation.DECIMAL":
+      "Represents a decimal data type that provides a sign and scale for a number (as in coordinates.) Decimal variables are stored as 96-bit (12-byte) unsigned integers scaled by a variable power of 10. The power of 10 scaling factor specifies the number of digits to the right of the decimal point, and ranges from 0 to 28.",
   "Windows.Win32.Graphics.Gdi.DESIGNVECTOR":
       "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font.",
   "Windows.Win32.Graphics.Gdi.DEVMODEW":
@@ -238,6 +242,8 @@ const structsToGenerate = <String, String>{
       "The MIDISTRMBUFFVER structure contains version information for a long MIDI event of the MEVT_VERSION type.",
   "Windows.Win32.UI.WindowsAndMessaging.MINMAXINFO":
       "Contains information about a window's maximized size and position and its minimum and maximum tracking size.",
+  "Windows.Win32.Media.MMTIME":
+      "The MMTIME structure contains timing information for different types of multimedia data.",
   "Windows.Win32.Devices.Communication.MODEMDEVCAPS":
       "Contains information about the capabilities of a modem.",
   "Windows.Win32.Devices.Communication.MODEMSETTINGS":
@@ -330,12 +336,16 @@ const structsToGenerate = <String, String>{
       "The PRINTER_NOTIFY_INFO_DATA structure identifies a job or printer information field and provides the current data for that field.",
   "Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW":
       "Represents printer options.",
+  "Windows.Win32.System.Memory.PROCESS_HEAP_ENTRY":
+      "Contains information about a heap element. The HeapWalk function uses a PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.",
   "Windows.Win32.System.Threading.PROCESS_INFORMATION":
       "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function.",
   "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY":
       "Specifies the FMTID/PID identifier that programmatically identifies a property.",
   "Windows.Win32.System.Com.StructuredStorage.PROPSPEC":
       "The PROPSPEC structure is used by many of the methods of IPropertyStorage to specify a property either by its property identifier (ID) or the associated string name.",
+  // "Windows.Win32.System.Com.StructuredStorage.PROPVARIANT":
+  //     "PROPVARIANT is the fundamental data type by which property values are read and written through the IPropertyStorage interface.",
   "Windows.Win32.Networking.WinSock.protoent":
       "The protoent structure contains the name and protocol numbers that correspond to a given protocol name. Applications must never attempt to modify this structure or to free any of its components. Furthermore, only one copy of this structure is allocated per thread, and therefore, the application should copy any information it needs before issuing any other Windows Sockets function calls.",
   "Windows.Win32.UI.Input.RAWHID":
@@ -349,6 +359,8 @@ const structsToGenerate = <String, String>{
       "Contains the header information that is part of the raw input data.",
   "Windows.Win32.UI.Input.RAWKEYBOARD":
       "Contains information about the state of the keyboard.",
+  "Windows.Win32.UI.Input.RAWMOUSE":
+      "Contains information about the state of the mouse.",
   "Windows.Win32.Foundation.RECT":
       "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners.",
   "Windows.Win32.Graphics.Gdi.RGBQUAD":
@@ -441,6 +453,8 @@ const structsToGenerate = <String, String>{
       "Contains information about a registry value. The RegQueryMultipleValues function uses this structure.",
   "Windows.Win32.System.Com.VARDESC":
       "Describes a variable, constant, or data member.",
+  // "Windows.Win32.System.Com.VARIANT":
+  //     "The VARIANT structure is a container for a large union that carries many types of data.",
   "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO":
       "Contains version information for a file. This information is language and code page independent.",
   "Windows.Win32.Media.Audio.WAVEFORMATEX":
