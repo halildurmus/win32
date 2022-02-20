@@ -97,6 +97,8 @@ const structsToGenerate = <String, String>{
       "Contains debugging information passed to a WH_DEBUG hook procedure, DebugProc.",
   "Windows.Win32.Graphics.Gdi.DESIGNVECTOR":
       "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font.",
+  "Windows.Win32.Graphics.Gdi.DEVMODEW":
+      "The DEVMODE data structure contains information about the initialization and environment of a printer or a display device.",
   "Windows.Win32.Graphics.Gdi.DIBSECTION":
       "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function.",
   "Windows.Win32.System.Ioctl.DISK_GEOMETRY":
@@ -167,6 +169,8 @@ const structsToGenerate = <String, String>{
   "Windows.Win32.UI.WindowsAndMessaging.ICONINFOEXW":
       "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx.",
   "Windows.Win32.System.Com.IDLDESC": "Contains the IDL attributes of a type.",
+  "Windows.Win32.Networking.WinSock.IN_ADDR":
+      "The IN_ADDR structure represents an IPv4 Internet address.",
   "Windows.Win32.UI.Controls.INITCOMMONCONTROLSEX":
       "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function.",
   "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT":
@@ -276,6 +280,8 @@ const structsToGenerate = <String, String>{
       "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and descriptive text about the operating system. This structure is used with the GetVersionEx function.",
   "Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW":
       "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions.",
+  "Windows.Win32.System.IO.OVERLAPPED":
+      "Contains information used in asynchronous (or overlapped) input and output (I/O).",
   "Windows.Win32.System.IO.OVERLAPPED_ENTRY":
       "Contains the information returned by a call to the GetQueuedCompletionStatusEx function.",
   "Windows.Win32.Graphics.Gdi.PAINTSTRUCT":
@@ -290,6 +296,8 @@ const structsToGenerate = <String, String>{
       "Contains a handle and text description corresponding to a physical monitor.",
   "Windows.Win32.Foundation.POINT":
       "The POINT structure defines the x- and y-coordinates of a point.",
+  "Windows.Win32.Foundation.POINTL":
+      "The POINTL structure defines the x- and y-coordinates of a point.",
   "Windows.Win32.Foundation.POINTS":
       "The POINTS structure defines the x- and y-coordinates of a point.",
   "Windows.Win32.Graphics.Gdi.POLYTEXTW":
@@ -398,6 +406,8 @@ const structsToGenerate = <String, String>{
       "Contains symbol information.",
   "Windows.Win32.System.Power.SYSTEM_BATTERY_STATE":
       "Contains information about the current state of the system battery.",
+  "Windows.Win32.System.SystemInformation.SYSTEM_INFO":
+      "Contains information about the current computer system. This includes the architecture and type of the processor, the number of processors in the system, the page size, and other such information.",
   "Windows.Win32.System.Power.SYSTEM_POWER_STATUS":
       "Contains information about the power status of the system.",
   "Windows.Win32.Foundation.SYSTEMTIME":

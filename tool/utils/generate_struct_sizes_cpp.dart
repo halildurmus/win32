@@ -46,13 +46,10 @@ void main()
     // Manually generated structs
     printf("  'COR_FIELD_OFFSET': %zu,\\n", sizeof(COR_FIELD_OFFSET));
     printf("  'DECIMAL': %zu,\\n", sizeof(DECIMAL));
-    printf("  'DEVMODE': %zu,\\n", sizeof(DEVMODEW));
     printf("  'GUID': %zu,\\n", sizeof(GUID));
     printf("  'MMTIME': %zu,\\n", sizeof(MMTIME));
-    printf("  'OVERLAPPED': %zu,\\n", sizeof(OVERLAPPED));
     printf("  'PROCESS_HEAP_ENTRY': %zu,\\n", sizeof(PROCESS_HEAP_ENTRY));
     printf("  'PROPVARIANT': %zu,\\n", sizeof(PROPVARIANT));
-    printf("  'SYSTEM_INFO': %zu,\\n", sizeof(SYSTEM_INFO));
     printf("  'VARIANT': %zu,\\n", sizeof(VARIANT));
 
     // Automatically generated structs

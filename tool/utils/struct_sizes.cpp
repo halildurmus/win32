@@ -100,6 +100,7 @@ void main()
     printf("  'DCB': %zu,\n", sizeof(DCB));
     printf("  'DEBUGHOOKINFO': %zu,\n", sizeof(DEBUGHOOKINFO));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
+    printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
     printf("  'DISK_GEOMETRY_EX': %zu,\n", sizeof(DISK_GEOMETRY_EX));
@@ -136,6 +137,7 @@ void main()
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
+    printf("  'IN_ADDR': %zu,\n", sizeof(IN_ADDR));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
@@ -191,6 +193,7 @@ void main()
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAMEW));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("  'OSVERSIONINFOEX': %zu,\n", sizeof(OSVERSIONINFOEXW));
+    printf("  'OVERLAPPED': %zu,\n", sizeof(OVERLAPPED));
     printf("  'OVERLAPPED_ENTRY': %zu,\n", sizeof(OVERLAPPED_ENTRY));
     printf("  'PAINTSTRUCT': %zu,\n", sizeof(PAINTSTRUCT));
     printf("  'PALETTEENTRY': %zu,\n", sizeof(PALETTEENTRY));
@@ -198,6 +201,7 @@ void main()
     printf("  'PARAMDESCEX': %zu,\n", sizeof(PARAMDESCEX));
     printf("  'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
     printf("  'POINT': %zu,\n", sizeof(POINT));
+    printf("  'POINTL': %zu,\n", sizeof(POINTL));
     printf("  'POINTS': %zu,\n", sizeof(POINTS));
     printf("  'POLYTEXT': %zu,\n", sizeof(POLYTEXTW));
     printf("  'PORT_INFO_1': %zu,\n", sizeof(PORT_INFO_1W));
@@ -254,6 +258,7 @@ void main()
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
+    printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("  'SYSTEM_POWER_STATUS': %zu,\n", sizeof(SYSTEM_POWER_STATUS));
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
