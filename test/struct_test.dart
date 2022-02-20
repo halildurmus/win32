@@ -19,51 +19,14 @@ void main() {
   test('Struct COR_FIELD_OFFSET is the right size', () {
     expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
   });
-  test('Struct DECIMAL is the right size', () {
-    expect(sizeOf<DECIMAL>(), equals(16));
-  });
-  test('Struct DEVMODE is the right size', () {
-    expect(sizeOf<DEVMODE>(), equals(220));
-  });
   test('Struct GUID is the right size', () {
     expect(sizeOf<GUID>(), equals(16));
-  });
-  test('Struct MMTIME is the right size', () {
-    expect(sizeOf<MMTIME>(), equals(12));
-  });
-  test('Struct OVERLAPPED is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<OVERLAPPED>(), equals(32));
-    } else {
-      expect(sizeOf<OVERLAPPED>(), equals(20));
-    }
-  });
-  test('Struct PRINTER_NOTIFY_INFO_DATA is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(32));
-    } else {
-      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(20));
-    }
-  });
-  test('Struct PROCESS_HEAP_ENTRY is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(40));
-    } else {
-      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(28));
-    }
   });
   test('Struct PROPVARIANT is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PROPVARIANT>(), equals(24));
     } else {
       expect(sizeOf<PROPVARIANT>(), equals(16));
-    }
-  });
-  test('Struct SYSTEM_INFO is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<SYSTEM_INFO>(), equals(48));
-    } else {
-      expect(sizeOf<SYSTEM_INFO>(), equals(36));
     }
   });
   test('Struct VARIANT is the right size', () {
@@ -287,6 +250,9 @@ void main() {
       expect(sizeOf<CWPSTRUCT>(), equals(16));
     }
   });
+  test('Struct CY is the right size', () {
+    expect(sizeOf<CY>(), equals(8));
+  });
   test('Struct DCB is the right size', () {
     expect(sizeOf<DCB>(), equals(28));
   });
@@ -297,8 +263,14 @@ void main() {
       expect(sizeOf<DEBUGHOOKINFO>(), equals(20));
     }
   });
+  test('Struct DECIMAL is the right size', () {
+    expect(sizeOf<DECIMAL>(), equals(16));
+  });
   test('Struct DESIGNVECTOR is the right size', () {
     expect(sizeOf<DESIGNVECTOR>(), equals(72));
+  });
+  test('Struct DEVMODE is the right size', () {
+    expect(sizeOf<DEVMODE>(), equals(220));
   });
   test('Struct DIBSECTION is the right size', () {
     if (is64bitOS) {
@@ -480,6 +452,9 @@ void main() {
       expect(sizeOf<IDLDESC>(), equals(8));
     }
   });
+  test('Struct IN_ADDR is the right size', () {
+    expect(sizeOf<IN_ADDR>(), equals(4));
+  });
   test('Struct INITCOMMONCONTROLSEX is the right size', () {
     expect(sizeOf<INITCOMMONCONTROLSEX>(), equals(8));
   });
@@ -646,6 +621,9 @@ void main() {
   test('Struct MINMAXINFO is the right size', () {
     expect(sizeOf<MINMAXINFO>(), equals(40));
   });
+  test('Struct MMTIME is the right size', () {
+    expect(sizeOf<MMTIME>(), equals(12));
+  });
   test('Struct MODEMDEVCAPS is the right size', () {
     expect(sizeOf<MODEMDEVCAPS>(), equals(80));
   });
@@ -757,6 +735,13 @@ void main() {
   test('Struct OSVERSIONINFOEX is the right size', () {
     expect(sizeOf<OSVERSIONINFOEX>(), equals(284));
   });
+  test('Struct OVERLAPPED is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OVERLAPPED>(), equals(32));
+    } else {
+      expect(sizeOf<OVERLAPPED>(), equals(20));
+    }
+  });
   test('Struct OVERLAPPED_ENTRY is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<OVERLAPPED_ENTRY>(), equals(32));
@@ -797,6 +782,9 @@ void main() {
   });
   test('Struct POINT is the right size', () {
     expect(sizeOf<POINT>(), equals(8));
+  });
+  test('Struct POINTL is the right size', () {
+    expect(sizeOf<POINTL>(), equals(8));
   });
   test('Struct POINTS is the right size', () {
     expect(sizeOf<POINTS>(), equals(4));
@@ -880,8 +868,22 @@ void main() {
       expect(sizeOf<PRINTER_NOTIFY_INFO>(), equals(32));
     }
   });
+  test('Struct PRINTER_NOTIFY_INFO_DATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(32));
+    } else {
+      expect(sizeOf<PRINTER_NOTIFY_INFO_DATA>(), equals(20));
+    }
+  });
   test('Struct PRINTER_OPTIONS is the right size', () {
     expect(sizeOf<PRINTER_OPTIONS>(), equals(8));
+  });
+  test('Struct PROCESS_HEAP_ENTRY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(40));
+    } else {
+      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(28));
+    }
   });
   test('Struct PROCESS_INFORMATION is the right size', () {
     if (is64bitOS) {
@@ -940,6 +942,9 @@ void main() {
   });
   test('Struct RAWKEYBOARD is the right size', () {
     expect(sizeOf<RAWKEYBOARD>(), equals(16));
+  });
+  test('Struct RAWMOUSE is the right size', () {
+    expect(sizeOf<RAWMOUSE>(), equals(24));
   });
   test('Struct RECT is the right size', () {
     expect(sizeOf<RECT>(), equals(16));
@@ -1086,6 +1091,13 @@ void main() {
   });
   test('Struct SYSTEM_BATTERY_STATE is the right size', () {
     expect(sizeOf<SYSTEM_BATTERY_STATE>(), equals(32));
+  });
+  test('Struct SYSTEM_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SYSTEM_INFO>(), equals(48));
+    } else {
+      expect(sizeOf<SYSTEM_INFO>(), equals(36));
+    }
   });
   test('Struct SYSTEM_POWER_STATUS is the right size', () {
     expect(sizeOf<SYSTEM_POWER_STATUS>(), equals(12));
