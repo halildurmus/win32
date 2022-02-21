@@ -10,6 +10,10 @@ class TestInterfaceProjection {
   const TestInterfaceProjection(this.typeDef, this.projection);
 
   String get header => '''
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 // Tests that Win32 API prototypes can be successfully loaded (i.e. that
 // lookupFunction works for all the APIs generated)
 
@@ -30,10 +34,9 @@ import 'package:win32/win32.dart';
   String testMethod(String interfaceName, String instanceName,
           MethodProjection methodProjection) =>
       '''
-test('Can instantiate $interfaceName.${methodProjection.name}', () {
-  expect($instanceName.${methodProjection.name}, isA<Function>());
-});
-''';
+  test('Can instantiate $interfaceName.${methodProjection.name}', () {
+    expect($instanceName.${methodProjection.name}, isA<Function>());
+  });''';
 
   @override
   String toString() {
@@ -46,9 +49,7 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final $instanceName = $interfaceName(ptr);
-
-  ${projection.methodProjections.map((p) => testMethod(interfaceName, instanceName, p)).join('\n')}
-
+  ${projection.methodProjections.map((p) => testMethod(interfaceName, instanceName, p)).join()}
   free(ptr);
 }
   """;
