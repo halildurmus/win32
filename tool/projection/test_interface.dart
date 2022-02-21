@@ -27,24 +27,27 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
   ''';
 
-  String testMethod(String objName, MethodProjection methodProjection) => '''
-test('Can instantiate ${methodProjection.name}', () {
-  expect($objName.${methodProjection.name}, isA<Function>());
+  String testMethod(String interfaceName, String instanceName,
+          MethodProjection methodProjection) =>
+      '''
+test('Can instantiate $interfaceName.${methodProjection.name}', () {
+  expect($instanceName.${methodProjection.name}, isA<Function>());
 });
 ''';
 
   @override
   String toString() {
-    final objName = projection.shortName.toLowerCase();
+    final interfaceName = projection.shortName;
+    final instanceName = interfaceName.substring(1).toLowerCase();
     return """
 $header
 
 void main() {
   final ptr = calloc<COMObject>();
 
-  final $objName = ${projection.shortName}(ptr);
+  final $instanceName = $interfaceName(ptr);
 
-  ${projection.methodProjections.map((p) => testMethod(objName, p)).join('\n')}
+  ${projection.methodProjections.map((p) => testMethod(interfaceName, instanceName, p)).join('\n')}
 
   free(ptr);
 }
