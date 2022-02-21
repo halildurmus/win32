@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
 import 'method.dart';
+import 'property.dart';
 
 class TestInterfaceProjection {
   final TypeDef typeDef;
@@ -32,11 +33,24 @@ import 'package:win32/win32.dart';
   ''';
 
   String testMethod(String interfaceName, String instanceName,
-          MethodProjection methodProjection) =>
-      '''
+      MethodProjection methodProjection) {
+    if (methodProjection.runtimeType == GetPropertyProjection ||
+        methodProjection.runtimeType == SetPropertyProjection) {
+      return '';
+      // TODO: Add this.
+      // final propertyType =
+      //     (methodProjection as PropertyProjection).returnType.dartType;
+      //     return '''
+      // test('Can access property $interfaceName.${methodProjection.name}', () {
+      //   expect($instanceName.${methodProjection.exposedMethodName}, isNot(isA<$propertyType>()));
+      // });''';
+    } else {
+      return '''
   test('Can instantiate $interfaceName.${methodProjection.name}', () {
     expect($instanceName.${methodProjection.name}, isA<Function>());
   });''';
+    }
+  }
 
   @override
   String toString() {
