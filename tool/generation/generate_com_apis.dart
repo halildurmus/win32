@@ -6,6 +6,7 @@ import 'package:winmd/winmd.dart';
 import '../inputs/interfaces.dart';
 import '../projection/class.dart';
 import '../projection/interface.dart';
+import '../projection/test_interface.dart';
 import '../projection/utils.dart';
 
 void generateComApis() {
@@ -23,12 +24,19 @@ void generateComApis() {
       interfaceProjection = ClassProjection.fromInterface(typeDef);
     }
 
+    // Generate class
     final dartClass = interfaceProjection.toString();
-
     final classOutputFilename =
         stripAnsiUnicodeSuffix(interface.split('.').last);
     final classOutputPath = 'lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
+
+    // Generate test
+    final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
+    final testOutputPath = 'test/com/${classOutputFilename}_test.dart';
+
+    File(testOutputPath)
+        .writeAsStringSync(DartFormatter().format(dartTest.toString()));
   }
 }
