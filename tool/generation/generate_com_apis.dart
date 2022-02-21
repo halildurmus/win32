@@ -6,6 +6,7 @@ import 'package:winmd/winmd.dart';
 import '../inputs/interfaces.dart';
 import '../projection/class.dart';
 import '../projection/interface.dart';
+import '../projection/test_interface.dart';
 import '../projection/utils.dart';
 
 void generateComApis() {
@@ -14,21 +15,28 @@ void generateComApis() {
   for (final interface in comInterfacesToGenerate) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
-
-    var interfaceProjection = InterfaceProjection(typeDef);
+    final interfaceProjection = InterfaceProjection(typeDef);
 
     // In v2, we put classes and interfaces in the same file.
     final className = ClassProjection.generateClassName(typeDef);
-    if (scope.findTypeDef(className) != null) {
-      interfaceProjection = ClassProjection.fromInterface(typeDef);
-    }
+    final classNameExists = scope.findTypeDef(className) != null;
+    final comObject = classNameExists
+        ? ClassProjection.fromInterface(typeDef)
+        : interfaceProjection;
 
-    final dartClass = interfaceProjection.toString();
-
+    // Generate class
+    final dartClass = comObject.toString();
     final classOutputFilename =
         stripAnsiUnicodeSuffix(interface.split('.').last);
     final classOutputPath = 'lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
+
+    // Generate test
+    final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
+    final testOutputPath = 'test/com/${classOutputFilename}_test.dart';
+
+    File(testOutputPath)
+        .writeAsStringSync(DartFormatter().format(dartTest.toString()));
   }
 }

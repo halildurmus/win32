@@ -6,9 +6,11 @@ import 'utils.dart';
 
 // TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
 
-class PropertyProjection extends MethodProjection {
+abstract class PropertyProjection extends MethodProjection {
   PropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
+
+  String get exposedMethodName;
 
   bool get convertBool => parameters.first.type.dartType == 'bool';
 }
@@ -18,6 +20,7 @@ class GetPropertyProjection extends PropertyProjection {
       : super(method, vtableOffset);
 
   /// Strip off all underscores, even if double underscores
+  @override
   String get exposedMethodName => method.name.startsWith('get__')
       ? safeIdentifierForString(method.name.substring(5))
       : safeIdentifierForString(method.name.substring(4));
@@ -58,6 +61,7 @@ class SetPropertyProjection extends PropertyProjection {
       : super(method, vtableOffset);
 
   /// Strip off all underscores, even if double underscores
+  @override
   String get exposedMethodName => method.name.startsWith('put__')
       ? safeIdentifierForString(method.name.substring(5))
       : safeIdentifierForString(method.name.substring(4));

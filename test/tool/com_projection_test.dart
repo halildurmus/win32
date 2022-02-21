@@ -4,6 +4,8 @@ import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 import '../../tool/projection/interface.dart';
+import '../../tool/projection/method.dart';
+import '../../tool/projection/property.dart';
 import '../../tool/projection/type.dart';
 
 void main() {
@@ -192,5 +194,25 @@ void main() {
 
     expect(typeProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
     expect(typeProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
+  });
+
+  test('Interfaces differentiate between methods and properties 1', () {
+    final iEnumNetworkConnections = scope.findTypeDef(
+        'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections')!;
+    final interfaceProjection = InterfaceProjection(iEnumNetworkConnections);
+    final newEnum = interfaceProjection.methodProjections[0];
+    expect(newEnum.name, equals('get__NewEnum'));
+    expect(newEnum, isA<GetPropertyProjection>());
+    expect(newEnum, isA<MethodProjection>());
+  });
+
+  test('Interfaces differentiate between methods and properties 2', () {
+    final iEnumNetworkConnections = scope.findTypeDef(
+        'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections')!;
+    final interfaceProjection = InterfaceProjection(iEnumNetworkConnections);
+    final next = interfaceProjection.methodProjections[1];
+    expect(next.name, equals('Next'));
+    expect(next, isNot(isA<GetPropertyProjection>()));
+    expect(next, isA<MethodProjection>());
   });
 }

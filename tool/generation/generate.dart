@@ -4,7 +4,6 @@ import '../inputs/structs.dart';
 import '../utils/generate_struct_sizes_cpp.dart';
 
 import 'generate_com_apis.dart';
-import 'generate_com_tests.dart';
 import 'generate_win32_functions.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
@@ -27,9 +26,6 @@ void main() {
   print('Generating FFI function tests...');
   generateFunctionTests(functionsToGenerate);
 
-  print('Generating COM interfaces...');
+  print('Generating COM interfaces and tests...');
   generateComApis();
-
-  print('Generating COM interface tests...');
-  generateComTests();
 }
