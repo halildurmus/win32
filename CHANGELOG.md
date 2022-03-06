@@ -1,3 +1,7 @@
+## 1.0.26
+
+- Update to Windows.Win32.winmd v17.0.23.22086.
+
 ## 1.0.25
 
 - Update to Windows.Win32.winmd v17.0.11.56775.
