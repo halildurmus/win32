@@ -1577,7 +1577,7 @@ int FindPackagesByPackageFamily(
         packageFullNames, bufferLength, buffer, packageProperties);
 
 late final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
-    Int32 Function(
+    Uint32 Function(
         Pointer<Utf16> packageFamilyName,
         Uint32 packageFilters,
         Pointer<Uint32> count,
@@ -4087,7 +4087,7 @@ int PackageFamilyNameFromFullName(
         packageFullName, packageFamilyNameLength, packageFamilyName);
 
 late final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
-    Int32 Function(
+    Uint32 Function(
         Pointer<Utf16> packageFullName,
         Pointer<Uint32> packageFamilyNameLength,
         Pointer<Utf16> packageFamilyName),

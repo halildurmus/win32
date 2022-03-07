@@ -35,4 +35,4 @@ dev_dependencies:
   # relationship between these two packages is tightly coupled, since this
   # package includes a specific version of the Win32 metadata, so we pin the
   # dependency by version to avoid surprising conflicts.
-  winmd: 1.0.25   
+  winmd: 1.0.26  

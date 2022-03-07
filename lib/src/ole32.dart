@@ -199,7 +199,7 @@ late final _CoInitializeEx = _ole32.lookupFunction<
 /// ```
 /// {@category ole32}
 int CoInitializeSecurity(
-        Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+        Pointer pSecDesc,
         int cAuthSvc,
         Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
         Pointer pReserved1,
@@ -213,7 +213,7 @@ int CoInitializeSecurity(
 
 late final _CoInitializeSecurity = _ole32.lookupFunction<
     Int32 Function(
-        Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+        Pointer pSecDesc,
         Int32 cAuthSvc,
         Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
         Pointer pReserved1,
@@ -223,7 +223,7 @@ late final _CoInitializeSecurity = _ole32.lookupFunction<
         Int32 dwCapabilities,
         Pointer pReserved3),
     int Function(
-        Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+        Pointer pSecDesc,
         int cAuthSvc,
         Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
         Pointer pReserved1,

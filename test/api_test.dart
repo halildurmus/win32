@@ -1814,7 +1814,7 @@ void main() {
       test('Can instantiate FindPackagesByPackageFamily', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final FindPackagesByPackageFamily = kernel32.lookupFunction<
-                Int32 Function(
+                Uint32 Function(
                     Pointer<Utf16> packageFamilyName,
                     Uint32 packageFilters,
                     Pointer<Uint32> count,
@@ -3003,7 +3003,7 @@ void main() {
       test('Can instantiate PackageFamilyNameFromFullName', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final PackageFamilyNameFromFullName = kernel32.lookupFunction<
-                Int32 Function(
+                Uint32 Function(
                     Pointer<Utf16> packageFullName,
                     Pointer<Uint32> packageFamilyNameLength,
                     Pointer<Utf16> packageFamilyName),
@@ -8170,7 +8170,7 @@ void main() {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoInitializeSecurity = ole32.lookupFunction<
           Int32 Function(
-              Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+              Pointer pSecDesc,
               Int32 cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
               Pointer pReserved1,
@@ -8180,7 +8180,7 @@ void main() {
               Int32 dwCapabilities,
               Pointer pReserved3),
           int Function(
-              Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+              Pointer pSecDesc,
               int cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
               Pointer pReserved1,

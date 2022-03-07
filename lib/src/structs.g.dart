@@ -4424,7 +4424,7 @@ class PRINTER_INFO_2 extends Struct {
 
   external Pointer<Utf16> pParameters;
 
-  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+  external Pointer pSecurityDescriptor;
 
   @Uint32()
   external int Attributes;
@@ -4455,7 +4455,7 @@ class PRINTER_INFO_2 extends Struct {
 ///
 /// {@category Struct}
 class PRINTER_INFO_3 extends Struct {
-  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
+  external Pointer pSecurityDescriptor;
 }
 
 /// The PRINTER_INFO_4 structure specifies general printer information. The
