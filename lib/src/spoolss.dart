@@ -31,8 +31,7 @@ final _spoolss = DynamicLibrary.open('spoolss.dll');
 /// {@category winspool}
 int AbortPrinter(int hPrinter) => _AbortPrinter(hPrinter);
 
-late final _AbortPrinter = _spoolss.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+final _AbortPrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('AbortPrinter');
 
 /// The AddForm function adds a form to the list of available forms that
@@ -49,7 +48,7 @@ late final _AbortPrinter = _spoolss.lookupFunction<
 int AddForm(int hPrinter, int Level, Pointer<Uint8> pForm) =>
     _AddForm(hPrinter, Level, pForm);
 
-late final _AddForm = _spoolss.lookupFunction<
+final _AddForm = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm),
     int Function(int hPrinter, int Level, Pointer<Uint8> pForm)>('AddFormW');
 
@@ -63,8 +62,7 @@ late final _AddForm = _spoolss.lookupFunction<
 /// {@category winspool}
 int ClosePrinter(int hPrinter) => _ClosePrinter(hPrinter);
 
-late final _ClosePrinter = _spoolss.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+final _ClosePrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('ClosePrinter');
 
 /// The DeletePrinter function deletes the specified printer object.
@@ -77,8 +75,7 @@ late final _ClosePrinter = _spoolss.lookupFunction<
 /// {@category winspool}
 int DeletePrinter(int hPrinter) => _DeletePrinter(hPrinter);
 
-late final _DeletePrinter = _spoolss.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+final _DeletePrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('DeletePrinter');
 
 /// The EndDocPrinter function ends a print job for the specified printer.
@@ -91,8 +88,7 @@ late final _DeletePrinter = _spoolss.lookupFunction<
 /// {@category winspool}
 int EndDocPrinter(int hPrinter) => _EndDocPrinter(hPrinter);
 
-late final _EndDocPrinter = _spoolss.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+final _EndDocPrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('EndDocPrinter');
 
 /// The EndPagePrinter function notifies the print spooler that the
@@ -106,8 +102,7 @@ late final _EndDocPrinter = _spoolss.lookupFunction<
 /// {@category winspool}
 int EndPagePrinter(int hPrinter) => _EndPagePrinter(hPrinter);
 
-late final _EndPagePrinter = _spoolss.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+final _EndPagePrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('EndPagePrinter');
 
 /// The FindClosePrinterChangeNotification function closes a change
@@ -125,7 +120,7 @@ late final _EndPagePrinter = _spoolss.lookupFunction<
 int FindClosePrinterChangeNotification(int hChange) =>
     _FindClosePrinterChangeNotification(hChange);
 
-late final _FindClosePrinterChangeNotification = _spoolss.lookupFunction<
+final _FindClosePrinterChangeNotification = _spoolss.lookupFunction<
     Int32 Function(IntPtr hChange),
     int Function(int hChange)>('FindClosePrinterChangeNotification');
 
@@ -149,7 +144,7 @@ int OpenPrinter2(
         Pointer<PRINTER_OPTIONS> pOptions) =>
     _OpenPrinter2(pPrinterName, phPrinter, pDefault, pOptions);
 
-late final _OpenPrinter2 = _spoolss.lookupFunction<
+final _OpenPrinter2 = _spoolss.lookupFunction<
     Int32 Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault, Pointer<PRINTER_OPTIONS> pOptions),
     int Function(
@@ -173,7 +168,7 @@ int ReadPrinter(
         int hPrinter, Pointer pBuf, int cbBuf, Pointer<Uint32> pNoBytesRead) =>
     _ReadPrinter(hPrinter, pBuf, cbBuf, pNoBytesRead);
 
-late final _ReadPrinter = _spoolss.lookupFunction<
+final _ReadPrinter = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
         Pointer<Uint32> pNoBytesRead),
     int Function(int hPrinter, Pointer pBuf, int cbBuf,
@@ -197,7 +192,7 @@ int ReportJobProcessingProgress(
     _ReportJobProcessingProgress(
         printerHandle, jobId, jobOperation, jobProgress);
 
-late final _ReportJobProcessingProgress = _spoolss.lookupFunction<
+final _ReportJobProcessingProgress = _spoolss.lookupFunction<
     Int32 Function(IntPtr printerHandle, Uint32 jobId, Int32 jobOperation,
         Int32 jobProgress),
     int Function(int printerHandle, int jobId, int jobOperation,
@@ -215,7 +210,7 @@ late final _ReportJobProcessingProgress = _spoolss.lookupFunction<
 /// {@category winspool}
 int ScheduleJob(int hPrinter, int JobId) => _ScheduleJob(hPrinter, JobId);
 
-late final _ScheduleJob = _spoolss.lookupFunction<
+final _ScheduleJob = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter, Uint32 JobId),
     int Function(int hPrinter, int JobId)>('ScheduleJob');
 
@@ -230,7 +225,7 @@ late final _ScheduleJob = _spoolss.lookupFunction<
 /// {@category winspool}
 int StartPagePrinter(int hPrinter) => _StartPagePrinter(hPrinter);
 
-late final _StartPagePrinter = _spoolss.lookupFunction<
+final _StartPagePrinter = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('StartPagePrinter');
 
@@ -250,7 +245,7 @@ int WritePrinter(
         int hPrinter, Pointer pBuf, int cbBuf, Pointer<Uint32> pcWritten) =>
     _WritePrinter(hPrinter, pBuf, cbBuf, pcWritten);
 
-late final _WritePrinter = _spoolss.lookupFunction<
+final _WritePrinter = _spoolss.lookupFunction<
     Int32 Function(
         IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf, Pointer<Uint32> pcWritten),
     int Function(int hPrinter, Pointer pBuf, int cbBuf,

@@ -33,7 +33,7 @@ Pointer<Pointer<Utf16>> CommandLineToArgv(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs) =>
     _CommandLineToArgv(lpCmdLine, pNumArgs);
 
-late final _CommandLineToArgv = _shell32.lookupFunction<
+final _CommandLineToArgv = _shell32.lookupFunction<
     Pointer<Pointer<Utf16>> Function(
         Pointer<Utf16> lpCmdLine, Pointer<Int32> pNumArgs),
     Pointer<Pointer<Utf16>> Function(Pointer<Utf16> lpCmdLine,
@@ -54,7 +54,7 @@ int ExtractAssociatedIcon(
         int hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon) =>
     _ExtractAssociatedIcon(hInst, pszIconPath, piIcon);
 
-late final _ExtractAssociatedIcon = _shell32.lookupFunction<
+final _ExtractAssociatedIcon = _shell32.lookupFunction<
     IntPtr Function(
         IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
     int Function(int hInst, Pointer<Utf16> pszIconPath,
@@ -75,7 +75,7 @@ int FindExecutable(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
         Pointer<Utf16> lpResult) =>
     _FindExecutable(lpFile, lpDirectory, lpResult);
 
-late final _FindExecutable = _shell32.lookupFunction<
+final _FindExecutable = _shell32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
         Pointer<Utf16> lpResult),
     int Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
@@ -96,7 +96,7 @@ int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer<COMObject> pbc,
         Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
 
-late final _SHCreateItemFromParsingName = _shell32.lookupFunction<
+final _SHCreateItemFromParsingName = _shell32.lookupFunction<
     Int32 Function(Pointer<Utf16> pszPath, Pointer<COMObject> pbc,
         Pointer<GUID> riid, Pointer<Pointer> ppv),
     int Function(
@@ -117,7 +117,7 @@ late final _SHCreateItemFromParsingName = _shell32.lookupFunction<
 int Shell_NotifyIcon(int dwMessage, Pointer<NOTIFYICONDATA> lpData) =>
     _Shell_NotifyIcon(dwMessage, lpData);
 
-late final _Shell_NotifyIcon = _shell32.lookupFunction<
+final _Shell_NotifyIcon = _shell32.lookupFunction<
     Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
     int Function(
         int dwMessage, Pointer<NOTIFYICONDATA> lpData)>('Shell_NotifyIconW');
@@ -137,7 +137,7 @@ int ShellAbout(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
         int hIcon) =>
     _ShellAbout(hWnd, szApp, szOtherStuff, hIcon);
 
-late final _ShellAbout = _shell32.lookupFunction<
+final _ShellAbout = _shell32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
         Pointer<Utf16> szOtherStuff, IntPtr hIcon),
     int Function(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
@@ -166,7 +166,7 @@ int ShellExecute(
     _ShellExecute(
         hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd);
 
-late final _ShellExecute = _shell32.lookupFunction<
+final _ShellExecute = _shell32.lookupFunction<
     IntPtr Function(
         IntPtr hwnd,
         Pointer<Utf16> lpOperation,
@@ -193,7 +193,7 @@ late final _ShellExecute = _shell32.lookupFunction<
 int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) =>
     _ShellExecuteEx(pExecInfo);
 
-late final _ShellExecuteEx = _shell32.lookupFunction<
+final _ShellExecuteEx = _shell32.lookupFunction<
     Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
     int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
 
@@ -210,7 +210,7 @@ late final _ShellExecuteEx = _shell32.lookupFunction<
 int SHEmptyRecycleBin(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags) =>
     _SHEmptyRecycleBin(hwnd, pszRootPath, dwFlags);
 
-late final _SHEmptyRecycleBin = _shell32.lookupFunction<
+final _SHEmptyRecycleBin = _shell32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
     int Function(int hwnd, Pointer<Utf16> pszRootPath,
         int dwFlags)>('SHEmptyRecycleBinW');
@@ -227,7 +227,7 @@ late final _SHEmptyRecycleBin = _shell32.lookupFunction<
 int SHGetDesktopFolder(Pointer<Pointer<COMObject>> ppshf) =>
     _SHGetDesktopFolder(ppshf);
 
-late final _SHGetDesktopFolder = _shell32.lookupFunction<
+final _SHGetDesktopFolder = _shell32.lookupFunction<
     Int32 Function(Pointer<Pointer<COMObject>> ppshf),
     int Function(Pointer<Pointer<COMObject>> ppshf)>('SHGetDesktopFolder');
 
@@ -250,7 +250,7 @@ int SHGetDiskFreeSpaceEx(
     _SHGetDiskFreeSpaceEx(pszDirectoryName, pulFreeBytesAvailableToCaller,
         pulTotalNumberOfBytes, pulTotalNumberOfFreeBytes);
 
-late final _SHGetDiskFreeSpaceEx = _shell32.lookupFunction<
+final _SHGetDiskFreeSpaceEx = _shell32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> pszDirectoryName,
         Pointer<Uint64> pulFreeBytesAvailableToCaller,
@@ -274,7 +274,7 @@ late final _SHGetDiskFreeSpaceEx = _shell32.lookupFunction<
 int SHGetDriveMedia(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent) =>
     _SHGetDriveMedia(pszDrive, pdwMediaContent);
 
-late final _SHGetDriveMedia = _shell32.lookupFunction<
+final _SHGetDriveMedia = _shell32.lookupFunction<
     Int32 Function(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
     int Function(Pointer<Utf16> pszDrive,
         Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
@@ -295,7 +295,7 @@ int SHGetFolderPath(
         int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath) =>
     _SHGetFolderPath(hwnd, csidl, hToken, dwFlags, pszPath);
 
-late final _SHGetFolderPath = _shell32.lookupFunction<
+final _SHGetFolderPath = _shell32.lookupFunction<
     Int32 Function(IntPtr hwnd, Int32 csidl, IntPtr hToken, Uint32 dwFlags,
         Pointer<Utf16> pszPath),
     int Function(int hwnd, int csidl, int hToken, int dwFlags,
@@ -317,7 +317,7 @@ int SHGetKnownFolderPath(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<Pointer<Utf16>> ppszPath) =>
     _SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath);
 
-late final _SHGetKnownFolderPath = _shell32.lookupFunction<
+final _SHGetKnownFolderPath = _shell32.lookupFunction<
     Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
         Pointer<Pointer<Utf16>> ppszPath),
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
@@ -337,7 +337,7 @@ int SHQueryRecycleBin(
         Pointer<Utf16> pszRootPath, Pointer<SHQUERYRBINFO> pSHQueryRBInfo) =>
     _SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
 
-late final _SHQueryRecycleBin = _shell32.lookupFunction<
+final _SHQueryRecycleBin = _shell32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> pszRootPath, Pointer<SHQUERYRBINFO> pSHQueryRBInfo),
     int Function(Pointer<Utf16> pszRootPath,

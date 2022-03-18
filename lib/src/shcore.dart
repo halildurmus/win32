@@ -35,7 +35,7 @@ int GetDpiForMonitor(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY) =>
     _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
 
-late final _GetDpiForMonitor = _shcore.lookupFunction<
+final _GetDpiForMonitor = _shcore.lookupFunction<
     Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY),
     int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
@@ -53,7 +53,7 @@ late final _GetDpiForMonitor = _shcore.lookupFunction<
 int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) =>
     _GetProcessDpiAwareness(hprocess, value);
 
-late final _GetProcessDpiAwareness = _shcore.lookupFunction<
+final _GetProcessDpiAwareness = _shcore.lookupFunction<
     Int32 Function(IntPtr hprocess, Pointer<Int32> value),
     int Function(int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
 
@@ -69,7 +69,7 @@ late final _GetProcessDpiAwareness = _shcore.lookupFunction<
 int GetScaleFactorForMonitor(int hMon, Pointer<Int32> pScale) =>
     _GetScaleFactorForMonitor(hMon, pScale);
 
-late final _GetScaleFactorForMonitor = _shcore.lookupFunction<
+final _GetScaleFactorForMonitor = _shcore.lookupFunction<
     Int32 Function(IntPtr hMon, Pointer<Int32> pScale),
     int Function(int hMon, Pointer<Int32> pScale)>('GetScaleFactorForMonitor');
 
@@ -85,6 +85,6 @@ late final _GetScaleFactorForMonitor = _shcore.lookupFunction<
 /// {@category shcore}
 int SetProcessDpiAwareness(int value) => _SetProcessDpiAwareness(value);
 
-late final _SetProcessDpiAwareness = _shcore.lookupFunction<
+final _SetProcessDpiAwareness = _shcore.lookupFunction<
     Int32 Function(Int32 value),
     int Function(int value)>('SetProcessDpiAwareness');

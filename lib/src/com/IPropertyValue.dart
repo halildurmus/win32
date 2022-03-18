@@ -2,7 +2,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 

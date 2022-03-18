@@ -34,7 +34,7 @@ int MetaDataGetDispenser(
         Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _MetaDataGetDispenser(rclsid, riid, ppv);
 
-late final _MetaDataGetDispenser = _rometadata.lookupFunction<
+final _MetaDataGetDispenser = _rometadata.lookupFunction<
     Int32 Function(
         Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv),
     int Function(Pointer<GUID> rclsid, Pointer<GUID> riid,

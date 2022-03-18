@@ -37,12 +37,11 @@ int WslConfigureDistribution(Pointer<Utf16> distributionName, int defaultUID,
     _WslConfigureDistribution(
         distributionName, defaultUID, wslDistributionFlags);
 
-late final _WslConfigureDistribution =
-    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
-        Int32 Function(Pointer<Utf16> distributionName, Uint32 defaultUID,
-            Uint32 wslDistributionFlags),
-        int Function(Pointer<Utf16> distributionName, int defaultUID,
-            int wslDistributionFlags)>('WslConfigureDistribution');
+final _WslConfigureDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+    Int32 Function(Pointer<Utf16> distributionName, Uint32 defaultUID,
+        Uint32 wslDistributionFlags),
+    int Function(Pointer<Utf16> distributionName, int defaultUID,
+        int wslDistributionFlags)>('WslConfigureDistribution');
 
 /// Retrieves the current configuration of a distribution registered with
 /// the Windows Subsystem for Linux (WSL).
@@ -73,7 +72,7 @@ int WslGetDistributionConfiguration(
         defaultEnvironmentVariables,
         defaultEnvironmentVariableCount);
 
-late final _WslGetDistributionConfiguration =
+final _WslGetDistributionConfiguration =
     _api_ms_win_wsl_api_l1_1_0.lookupFunction<
             Int32 Function(
                 Pointer<Utf16> distributionName,
@@ -103,11 +102,10 @@ late final _WslGetDistributionConfiguration =
 int WslIsDistributionRegistered(Pointer<Utf16> distributionName) =>
     _WslIsDistributionRegistered(distributionName);
 
-late final _WslIsDistributionRegistered =
-    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
-        Int32 Function(Pointer<Utf16> distributionName),
-        int Function(
-            Pointer<Utf16> distributionName)>('WslIsDistributionRegistered');
+final _WslIsDistributionRegistered = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+    Int32 Function(Pointer<Utf16> distributionName),
+    int Function(
+        Pointer<Utf16> distributionName)>('WslIsDistributionRegistered');
 
 /// Launches a Windows Subsystem for Linux (WSL) process in the context of
 /// a particular distribution.
@@ -135,7 +133,7 @@ int WslLaunch(
     _WslLaunch(distributionName, command, useCurrentWorkingDirectory, stdIn,
         stdOut, stdErr, process);
 
-late final _WslLaunch = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+final _WslLaunch = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
@@ -175,7 +173,7 @@ int WslLaunchInteractive(
     _WslLaunchInteractive(
         distributionName, command, useCurrentWorkingDirectory, exitCode);
 
-late final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(Pointer<Utf16> distributionName, Pointer<Utf16> command,
         Int32 useCurrentWorkingDirectory, Pointer<Uint32> exitCode),
     int Function(
@@ -198,7 +196,7 @@ int WslRegisterDistribution(
         Pointer<Utf16> distributionName, Pointer<Utf16> tarGzFilename) =>
     _WslRegisterDistribution(distributionName, tarGzFilename);
 
-late final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
     Int32 Function(
         Pointer<Utf16> distributionName, Pointer<Utf16> tarGzFilename),
     int Function(Pointer<Utf16> distributionName,
@@ -215,8 +213,6 @@ late final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
 int WslUnregisterDistribution(Pointer<Utf16> distributionName) =>
     _WslUnregisterDistribution(distributionName);
 
-late final _WslUnregisterDistribution =
-    _api_ms_win_wsl_api_l1_1_0.lookupFunction<
-        Int32 Function(Pointer<Utf16> distributionName),
-        int Function(
-            Pointer<Utf16> distributionName)>('WslUnregisterDistribution');
+final _WslUnregisterDistribution = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
+    Int32 Function(Pointer<Utf16> distributionName),
+    int Function(Pointer<Utf16> distributionName)>('WslUnregisterDistribution');

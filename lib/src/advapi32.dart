@@ -36,7 +36,7 @@ final _advapi32 = DynamicLibrary.open('advapi32.dll');
 int CredDelete(Pointer<Utf16> TargetName, int Type, int Flags) =>
     _CredDelete(TargetName, Type, Flags);
 
-late final _CredDelete = _advapi32.lookupFunction<
+final _CredDelete = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags),
     int Function(
         Pointer<Utf16> TargetName, int Type, int Flags)>('CredDeleteW');
@@ -52,7 +52,7 @@ late final _CredDelete = _advapi32.lookupFunction<
 /// {@category advapi32}
 void CredFree(Pointer Buffer) => _CredFree(Buffer);
 
-late final _CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
+final _CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
     void Function(Pointer Buffer)>('CredFree');
 
 /// The CredRead function reads a credential from the user's credential
@@ -73,7 +73,7 @@ int CredRead(Pointer<Utf16> TargetName, int Type, int Flags,
         Pointer<Pointer<CREDENTIAL>> Credential) =>
     _CredRead(TargetName, Type, Flags, Credential);
 
-late final _CredRead = _advapi32.lookupFunction<
+final _CredRead = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags,
         Pointer<Pointer<CREDENTIAL>> Credential),
     int Function(Pointer<Utf16> TargetName, int Type, int Flags,
@@ -94,7 +94,7 @@ late final _CredRead = _advapi32.lookupFunction<
 int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) =>
     _CredWrite(Credential, Flags);
 
-late final _CredWrite = _advapi32.lookupFunction<
+final _CredWrite = _advapi32.lookupFunction<
     Int32 Function(Pointer<CREDENTIAL> Credential, Uint32 Flags),
     int Function(Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
 
@@ -110,7 +110,7 @@ late final _CredWrite = _advapi32.lookupFunction<
 int DecryptFile(Pointer<Utf16> lpFileName, int dwReserved) =>
     _DecryptFile(lpFileName, dwReserved);
 
-late final _DecryptFile = _advapi32.lookupFunction<
+final _DecryptFile = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwReserved),
     int Function(Pointer<Utf16> lpFileName, int dwReserved)>('DecryptFileW');
 
@@ -125,7 +125,7 @@ late final _DecryptFile = _advapi32.lookupFunction<
 /// {@category advapi32}
 int EncryptFile(Pointer<Utf16> lpFileName) => _EncryptFile(lpFileName);
 
-late final _EncryptFile = _advapi32.lookupFunction<
+final _EncryptFile = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName),
     int Function(Pointer<Utf16> lpFileName)>('EncryptFileW');
 
@@ -141,7 +141,7 @@ late final _EncryptFile = _advapi32.lookupFunction<
 int FileEncryptionStatus(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus) =>
     _FileEncryptionStatus(lpFileName, lpStatus);
 
-late final _FileEncryptionStatus = _advapi32.lookupFunction<
+final _FileEncryptionStatus = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus),
     int Function(Pointer<Utf16> lpFileName,
         Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
@@ -169,7 +169,7 @@ int GetTokenInformation(
     _GetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation,
         TokenInformationLength, ReturnLength);
 
-late final _GetTokenInformation = _advapi32.lookupFunction<
+final _GetTokenInformation = _advapi32.lookupFunction<
     Int32 Function(
         IntPtr TokenHandle,
         Int32 TokenInformationClass,
@@ -201,7 +201,7 @@ int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
     _InitiateShutdown(
         lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason);
 
-late final _InitiateShutdown = _advapi32.lookupFunction<
+final _InitiateShutdown = _advapi32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
         Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
     int Function(
@@ -226,7 +226,7 @@ int OpenProcessToken(
         int ProcessHandle, int DesiredAccess, Pointer<IntPtr> TokenHandle) =>
     _OpenProcessToken(ProcessHandle, DesiredAccess, TokenHandle);
 
-late final _OpenProcessToken = _advapi32.lookupFunction<
+final _OpenProcessToken = _advapi32.lookupFunction<
     Int32 Function(IntPtr ProcessHandle, Uint32 DesiredAccess,
         Pointer<IntPtr> TokenHandle),
     int Function(int ProcessHandle, int DesiredAccess,
@@ -248,7 +248,7 @@ int OpenThreadToken(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
         Pointer<IntPtr> TokenHandle) =>
     _OpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
 
-late final _OpenThreadToken = _advapi32.lookupFunction<
+final _OpenThreadToken = _advapi32.lookupFunction<
     Int32 Function(IntPtr ThreadHandle, Uint32 DesiredAccess, Int32 OpenAsSelf,
         Pointer<IntPtr> TokenHandle),
     int Function(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
@@ -264,7 +264,7 @@ late final _OpenThreadToken = _advapi32.lookupFunction<
 /// {@category advapi32}
 int RegCloseKey(int hKey) => _RegCloseKey(hKey);
 
-late final _RegCloseKey = _advapi32.lookupFunction<Uint32 Function(IntPtr hKey),
+final _RegCloseKey = _advapi32.lookupFunction<Uint32 Function(IntPtr hKey),
     int Function(int hKey)>('RegCloseKey');
 
 /// Establishes a connection to a predefined registry key on another
@@ -282,7 +282,7 @@ int RegConnectRegistry(
         Pointer<Utf16> lpMachineName, int hKey, Pointer<IntPtr> phkResult) =>
     _RegConnectRegistry(lpMachineName, hKey, phkResult);
 
-late final _RegConnectRegistry = _advapi32.lookupFunction<
+final _RegConnectRegistry = _advapi32.lookupFunction<
     Uint32 Function(
         Pointer<Utf16> lpMachineName, IntPtr hKey, Pointer<IntPtr> phkResult),
     int Function(Pointer<Utf16> lpMachineName, int hKey,
@@ -302,7 +302,7 @@ late final _RegConnectRegistry = _advapi32.lookupFunction<
 int RegCopyTree(int hKeySrc, Pointer<Utf16> lpSubKey, int hKeyDest) =>
     _RegCopyTree(hKeySrc, lpSubKey, hKeyDest);
 
-late final _RegCopyTree = _advapi32.lookupFunction<
+final _RegCopyTree = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKeySrc, Pointer<Utf16> lpSubKey, IntPtr hKeyDest),
     int Function(
         int hKeySrc, Pointer<Utf16> lpSubKey, int hKeyDest)>('RegCopyTreeW');
@@ -321,7 +321,7 @@ int RegCreateKey(
         int hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult) =>
     _RegCreateKey(hKey, lpSubKey, phkResult);
 
-late final _RegCreateKey = _advapi32.lookupFunction<
+final _RegCreateKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult),
     int Function(int hKey, Pointer<Utf16> lpSubKey,
@@ -357,7 +357,7 @@ int RegCreateKeyEx(
     _RegCreateKeyEx(hKey, lpSubKey, Reserved, lpClass, dwOptions, samDesired,
         lpSecurityAttributes, phkResult, lpdwDisposition);
 
-late final _RegCreateKeyEx = _advapi32.lookupFunction<
+final _RegCreateKeyEx = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpSubKey,
@@ -422,7 +422,7 @@ int RegCreateKeyTransacted(
         hTransaction,
         pExtendedParemeter);
 
-late final _RegCreateKeyTransacted = _advapi32.lookupFunction<
+final _RegCreateKeyTransacted = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpSubKey,
@@ -460,7 +460,7 @@ late final _RegCreateKeyTransacted = _advapi32.lookupFunction<
 int RegDeleteKey(int hKey, Pointer<Utf16> lpSubKey) =>
     _RegDeleteKey(hKey, lpSubKey);
 
-late final _RegDeleteKey = _advapi32.lookupFunction<
+final _RegDeleteKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
     int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegDeleteKeyW');
 
@@ -479,7 +479,7 @@ int RegDeleteKeyEx(
         int hKey, Pointer<Utf16> lpSubKey, int samDesired, int Reserved) =>
     _RegDeleteKeyEx(hKey, lpSubKey, samDesired, Reserved);
 
-late final _RegDeleteKeyEx = _advapi32.lookupFunction<
+final _RegDeleteKeyEx = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 samDesired,
         Uint32 Reserved),
     int Function(int hKey, Pointer<Utf16> lpSubKey, int samDesired,
@@ -504,7 +504,7 @@ int RegDeleteKeyTransacted(int hKey, Pointer<Utf16> lpSubKey, int samDesired,
     _RegDeleteKeyTransacted(
         hKey, lpSubKey, samDesired, Reserved, hTransaction, pExtendedParameter);
 
-late final _RegDeleteKeyTransacted = _advapi32.lookupFunction<
+final _RegDeleteKeyTransacted = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 samDesired,
         Uint32 Reserved, IntPtr hTransaction, Pointer pExtendedParameter),
     int Function(
@@ -528,7 +528,7 @@ int RegDeleteKeyValue(
         int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpValueName) =>
     _RegDeleteKeyValue(hKey, lpSubKey, lpValueName);
 
-late final _RegDeleteKeyValue = _advapi32.lookupFunction<
+final _RegDeleteKeyValue = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpValueName),
     int Function(int hKey, Pointer<Utf16> lpSubKey,
@@ -545,7 +545,7 @@ late final _RegDeleteKeyValue = _advapi32.lookupFunction<
 int RegDeleteTree(int hKey, Pointer<Utf16> lpSubKey) =>
     _RegDeleteTree(hKey, lpSubKey);
 
-late final _RegDeleteTree = _advapi32.lookupFunction<
+final _RegDeleteTree = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
     int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegDeleteTreeW');
 
@@ -561,7 +561,7 @@ late final _RegDeleteTree = _advapi32.lookupFunction<
 int RegDeleteValue(int hKey, Pointer<Utf16> lpValueName) =>
     _RegDeleteValue(hKey, lpValueName);
 
-late final _RegDeleteValue = _advapi32.lookupFunction<
+final _RegDeleteValue = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpValueName),
     int Function(int hKey, Pointer<Utf16> lpValueName)>('RegDeleteValueW');
 
@@ -575,7 +575,7 @@ late final _RegDeleteValue = _advapi32.lookupFunction<
 /// {@category advapi32}
 int RegDisablePredefinedCache() => _RegDisablePredefinedCache();
 
-late final _RegDisablePredefinedCache =
+final _RegDisablePredefinedCache =
     _advapi32.lookupFunction<Uint32 Function(), int Function()>(
         'RegDisablePredefinedCache');
 
@@ -588,7 +588,7 @@ late final _RegDisablePredefinedCache =
 /// {@category advapi32}
 int RegDisablePredefinedCacheEx() => _RegDisablePredefinedCacheEx();
 
-late final _RegDisablePredefinedCacheEx =
+final _RegDisablePredefinedCacheEx =
     _advapi32.lookupFunction<Uint32 Function(), int Function()>(
         'RegDisablePredefinedCacheEx');
 
@@ -602,7 +602,7 @@ late final _RegDisablePredefinedCacheEx =
 /// {@category advapi32}
 int RegDisableReflectionKey(int hBase) => _RegDisableReflectionKey(hBase);
 
-late final _RegDisableReflectionKey = _advapi32.lookupFunction<
+final _RegDisableReflectionKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hBase),
     int Function(int hBase)>('RegDisableReflectionKey');
 
@@ -616,7 +616,7 @@ late final _RegDisableReflectionKey = _advapi32.lookupFunction<
 /// {@category advapi32}
 int RegEnableReflectionKey(int hBase) => _RegEnableReflectionKey(hBase);
 
-late final _RegEnableReflectionKey = _advapi32.lookupFunction<
+final _RegEnableReflectionKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hBase),
     int Function(int hBase)>('RegEnableReflectionKey');
 
@@ -634,7 +634,7 @@ late final _RegEnableReflectionKey = _advapi32.lookupFunction<
 int RegEnumKey(int hKey, int dwIndex, Pointer<Utf16> lpName, int cchName) =>
     _RegEnumKey(hKey, dwIndex, lpName, cchName);
 
-late final _RegEnumKey = _advapi32.lookupFunction<
+final _RegEnumKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Uint32 dwIndex, Pointer<Utf16> lpName, Uint32 cchName),
     int Function(int hKey, int dwIndex, Pointer<Utf16> lpName,
@@ -667,7 +667,7 @@ int RegEnumKeyEx(
     _RegEnumKeyEx(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass,
         lpcchClass, lpftLastWriteTime);
 
-late final _RegEnumKeyEx = _advapi32.lookupFunction<
+final _RegEnumKeyEx = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Uint32 dwIndex,
@@ -715,7 +715,7 @@ int RegEnumValue(
     _RegEnumValue(hKey, dwIndex, lpValueName, lpcchValueName, lpReserved,
         lpType, lpData, lpcbData);
 
-late final _RegEnumValue = _advapi32.lookupFunction<
+final _RegEnumValue = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Uint32 dwIndex,
@@ -745,7 +745,7 @@ late final _RegEnumValue = _advapi32.lookupFunction<
 /// {@category advapi32}
 int RegFlushKey(int hKey) => _RegFlushKey(hKey);
 
-late final _RegFlushKey = _advapi32.lookupFunction<Uint32 Function(IntPtr hKey),
+final _RegFlushKey = _advapi32.lookupFunction<Uint32 Function(IntPtr hKey),
     int Function(int hKey)>('RegFlushKey');
 
 /// Retrieves the type and data for the specified registry value.
@@ -771,7 +771,7 @@ int RegGetValue(
         Pointer<Uint32> pcbData) =>
     _RegGetValue(hkey, lpSubKey, lpValue, dwFlags, pdwType, pvData, pcbData);
 
-late final _RegGetValue = _advapi32.lookupFunction<
+final _RegGetValue = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hkey,
         Pointer<Utf16> lpSubKey,
@@ -804,7 +804,7 @@ int RegLoadAppKey(Pointer<Utf16> lpFile, Pointer<IntPtr> phkResult,
         int samDesired, int dwOptions, int Reserved) =>
     _RegLoadAppKey(lpFile, phkResult, samDesired, dwOptions, Reserved);
 
-late final _RegLoadAppKey = _advapi32.lookupFunction<
+final _RegLoadAppKey = _advapi32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpFile, Pointer<IntPtr> phkResult,
         Uint32 samDesired, Uint32 dwOptions, Uint32 Reserved),
     int Function(Pointer<Utf16> lpFile, Pointer<IntPtr> phkResult,
@@ -823,7 +823,7 @@ late final _RegLoadAppKey = _advapi32.lookupFunction<
 int RegLoadKey(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpFile) =>
     _RegLoadKey(hKey, lpSubKey, lpFile);
 
-late final _RegLoadKey = _advapi32.lookupFunction<
+final _RegLoadKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpFile),
     int Function(int hKey, Pointer<Utf16> lpSubKey,
@@ -853,7 +853,7 @@ int RegLoadMUIString(
     _RegLoadMUIString(
         hKey, pszValue, pszOutBuf, cbOutBuf, pcbData, Flags, pszDirectory);
 
-late final _RegLoadMUIString = _advapi32.lookupFunction<
+final _RegLoadMUIString = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> pszValue,
@@ -888,7 +888,7 @@ int RegNotifyChangeKeyValue(int hKey, int bWatchSubtree, int dwNotifyFilter,
     _RegNotifyChangeKeyValue(
         hKey, bWatchSubtree, dwNotifyFilter, hEvent, fAsynchronous);
 
-late final _RegNotifyChangeKeyValue = _advapi32.lookupFunction<
+final _RegNotifyChangeKeyValue = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Int32 bWatchSubtree, Uint32 dwNotifyFilter,
         IntPtr hEvent, Int32 fAsynchronous),
     int Function(int hKey, int bWatchSubtree, int dwNotifyFilter, int hEvent,
@@ -906,7 +906,7 @@ late final _RegNotifyChangeKeyValue = _advapi32.lookupFunction<
 int RegOpenCurrentUser(int samDesired, Pointer<IntPtr> phkResult) =>
     _RegOpenCurrentUser(samDesired, phkResult);
 
-late final _RegOpenCurrentUser = _advapi32.lookupFunction<
+final _RegOpenCurrentUser = _advapi32.lookupFunction<
     Uint32 Function(Uint32 samDesired, Pointer<IntPtr> phkResult),
     int Function(
         int samDesired, Pointer<IntPtr> phkResult)>('RegOpenCurrentUser');
@@ -923,7 +923,7 @@ late final _RegOpenCurrentUser = _advapi32.lookupFunction<
 int RegOpenKey(int hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult) =>
     _RegOpenKey(hKey, lpSubKey, phkResult);
 
-late final _RegOpenKey = _advapi32.lookupFunction<
+final _RegOpenKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult),
     int Function(int hKey, Pointer<Utf16> lpSubKey,
@@ -946,7 +946,7 @@ int RegOpenKeyEx(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
         int samDesired, Pointer<IntPtr> phkResult) =>
     _RegOpenKeyEx(hKey, lpSubKey, ulOptions, samDesired, phkResult);
 
-late final _RegOpenKeyEx = _advapi32.lookupFunction<
+final _RegOpenKeyEx = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
         Uint32 samDesired, Pointer<IntPtr> phkResult),
     int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
@@ -977,7 +977,7 @@ int RegOpenKeyTransacted(
     _RegOpenKeyTransacted(hKey, lpSubKey, ulOptions, samDesired, phkResult,
         hTransaction, pExtendedParemeter);
 
-late final _RegOpenKeyTransacted = _advapi32.lookupFunction<
+final _RegOpenKeyTransacted = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpSubKey,
@@ -1010,7 +1010,7 @@ int RegOpenUserClassesRoot(
         int hToken, int dwOptions, int samDesired, Pointer<IntPtr> phkResult) =>
     _RegOpenUserClassesRoot(hToken, dwOptions, samDesired, phkResult);
 
-late final _RegOpenUserClassesRoot = _advapi32.lookupFunction<
+final _RegOpenUserClassesRoot = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hToken, Uint32 dwOptions, Uint32 samDesired,
         Pointer<IntPtr> phkResult),
     int Function(int hToken, int dwOptions, int samDesired,
@@ -1027,7 +1027,7 @@ late final _RegOpenUserClassesRoot = _advapi32.lookupFunction<
 int RegOverridePredefKey(int hKey, int hNewHKey) =>
     _RegOverridePredefKey(hKey, hNewHKey);
 
-late final _RegOverridePredefKey = _advapi32.lookupFunction<
+final _RegOverridePredefKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, IntPtr hNewHKey),
     int Function(int hKey, int hNewHKey)>('RegOverridePredefKey');
 
@@ -1076,7 +1076,7 @@ int RegQueryInfoKey(
         lpcbSecurityDescriptor,
         lpftLastWriteTime);
 
-late final _RegQueryInfoKey = _advapi32.lookupFunction<
+final _RegQueryInfoKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpClass,
@@ -1120,7 +1120,7 @@ int RegQueryMultipleValues(int hKey, Pointer<VALENT> val_list, int num_vals,
         Pointer<Utf16> lpValueBuf, Pointer<Uint32> ldwTotsize) =>
     _RegQueryMultipleValues(hKey, val_list, num_vals, lpValueBuf, ldwTotsize);
 
-late final _RegQueryMultipleValues = _advapi32.lookupFunction<
+final _RegQueryMultipleValues = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<VALENT> val_list, Uint32 num_vals,
         Pointer<Utf16> lpValueBuf, Pointer<Uint32> ldwTotsize),
     int Function(
@@ -1142,7 +1142,7 @@ late final _RegQueryMultipleValues = _advapi32.lookupFunction<
 int RegQueryReflectionKey(int hBase, Pointer<Int32> bIsReflectionDisabled) =>
     _RegQueryReflectionKey(hBase, bIsReflectionDisabled);
 
-late final _RegQueryReflectionKey = _advapi32.lookupFunction<
+final _RegQueryReflectionKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hBase, Pointer<Int32> bIsReflectionDisabled),
     int Function(int hBase,
         Pointer<Int32> bIsReflectionDisabled)>('RegQueryReflectionKey');
@@ -1162,7 +1162,7 @@ int RegQueryValue(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpData,
         Pointer<Int32> lpcbData) =>
     _RegQueryValue(hKey, lpSubKey, lpData, lpcbData);
 
-late final _RegQueryValue = _advapi32.lookupFunction<
+final _RegQueryValue = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpData,
         Pointer<Int32> lpcbData),
     int Function(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpData,
@@ -1193,7 +1193,7 @@ int RegQueryValueEx(
         Pointer<Uint32> lpcbData) =>
     _RegQueryValueEx(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
 
-late final _RegQueryValueEx = _advapi32.lookupFunction<
+final _RegQueryValueEx = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpValueName,
@@ -1223,7 +1223,7 @@ int RegRenameKey(
         int hKey, Pointer<Utf16> lpSubKeyName, Pointer<Utf16> lpNewKeyName) =>
     _RegRenameKey(hKey, lpSubKeyName, lpNewKeyName);
 
-late final _RegRenameKey = _advapi32.lookupFunction<
+final _RegRenameKey = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey, Pointer<Utf16> lpSubKeyName, Pointer<Utf16> lpNewKeyName),
     int Function(int hKey, Pointer<Utf16> lpSubKeyName,
@@ -1245,7 +1245,7 @@ int RegReplaceKey(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpNewFile,
         Pointer<Utf16> lpOldFile) =>
     _RegReplaceKey(hKey, lpSubKey, lpNewFile, lpOldFile);
 
-late final _RegReplaceKey = _advapi32.lookupFunction<
+final _RegReplaceKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey,
         Pointer<Utf16> lpNewFile, Pointer<Utf16> lpOldFile),
     int Function(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpNewFile,
@@ -1265,7 +1265,7 @@ late final _RegReplaceKey = _advapi32.lookupFunction<
 int RegRestoreKey(int hKey, Pointer<Utf16> lpFile, int dwFlags) =>
     _RegRestoreKey(hKey, lpFile, dwFlags);
 
-late final _RegRestoreKey = _advapi32.lookupFunction<
+final _RegRestoreKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpFile, Int32 dwFlags),
     int Function(
         int hKey, Pointer<Utf16> lpFile, int dwFlags)>('RegRestoreKeyW');
@@ -1284,7 +1284,7 @@ int RegSaveKey(int hKey, Pointer<Utf16> lpFile,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes) =>
     _RegSaveKey(hKey, lpFile, lpSecurityAttributes);
 
-late final _RegSaveKey = _advapi32.lookupFunction<
+final _RegSaveKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpFile,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
     int Function(int hKey, Pointer<Utf16> lpFile,
@@ -1305,7 +1305,7 @@ int RegSaveKeyEx(int hKey, Pointer<Utf16> lpFile,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes, int Flags) =>
     _RegSaveKeyEx(hKey, lpFile, lpSecurityAttributes, Flags);
 
-late final _RegSaveKeyEx = _advapi32.lookupFunction<
+final _RegSaveKeyEx = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpFile,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes, Uint32 Flags),
     int Function(
@@ -1331,7 +1331,7 @@ int RegSetKeyValue(int hKey, Pointer<Utf16> lpSubKey,
         Pointer<Utf16> lpValueName, int dwType, Pointer lpData, int cbData) =>
     _RegSetKeyValue(hKey, lpSubKey, lpValueName, dwType, lpData, cbData);
 
-late final _RegSetKeyValue = _advapi32.lookupFunction<
+final _RegSetKeyValue = _advapi32.lookupFunction<
     Uint32 Function(
         IntPtr hKey,
         Pointer<Utf16> lpSubKey,
@@ -1358,7 +1358,7 @@ int RegSetValue(int hKey, Pointer<Utf16> lpSubKey, int dwType,
         Pointer<Utf16> lpData, int cbData) =>
     _RegSetValue(hKey, lpSubKey, dwType, lpData, cbData);
 
-late final _RegSetValue = _advapi32.lookupFunction<
+final _RegSetValue = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 dwType,
         Pointer<Utf16> lpData, Uint32 cbData),
     int Function(int hKey, Pointer<Utf16> lpSubKey, int dwType,
@@ -1381,7 +1381,7 @@ int RegSetValueEx(int hKey, Pointer<Utf16> lpValueName, int Reserved,
         int dwType, Pointer<Uint8> lpData, int cbData) =>
     _RegSetValueEx(hKey, lpValueName, Reserved, dwType, lpData, cbData);
 
-late final _RegSetValueEx = _advapi32.lookupFunction<
+final _RegSetValueEx = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpValueName, Uint32 Reserved,
         Uint32 dwType, Pointer<Uint8> lpData, Uint32 cbData),
     int Function(int hKey, Pointer<Utf16> lpValueName, int Reserved, int dwType,
@@ -1398,7 +1398,7 @@ late final _RegSetValueEx = _advapi32.lookupFunction<
 int RegUnLoadKey(int hKey, Pointer<Utf16> lpSubKey) =>
     _RegUnLoadKey(hKey, lpSubKey);
 
-late final _RegUnLoadKey = _advapi32.lookupFunction<
+final _RegUnLoadKey = _advapi32.lookupFunction<
     Uint32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
     int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
 
@@ -1416,6 +1416,6 @@ late final _RegUnLoadKey = _advapi32.lookupFunction<
 int SetThreadToken(Pointer<IntPtr> Thread, int Token) =>
     _SetThreadToken(Thread, Token);
 
-late final _SetThreadToken = _advapi32.lookupFunction<
+final _SetThreadToken = _advapi32.lookupFunction<
     Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
     int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');

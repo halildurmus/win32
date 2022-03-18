@@ -35,7 +35,7 @@ int GetFileVersionInfo(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
         Pointer lpData) =>
     _GetFileVersionInfo(lptstrFilename, dwHandle, dwLen, lpData);
 
-late final _GetFileVersionInfo = _version.lookupFunction<
+final _GetFileVersionInfo = _version.lookupFunction<
     Int32 Function(Pointer<Utf16> lptstrFilename, Uint32 dwHandle, Uint32 dwLen,
         Pointer lpData),
     int Function(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
@@ -57,7 +57,7 @@ int GetFileVersionInfoEx(int dwFlags, Pointer<Utf16> lpwstrFilename,
         int dwHandle, int dwLen, Pointer lpData) =>
     _GetFileVersionInfoEx(dwFlags, lpwstrFilename, dwHandle, dwLen, lpData);
 
-late final _GetFileVersionInfoEx = _version.lookupFunction<
+final _GetFileVersionInfoEx = _version.lookupFunction<
     Int32 Function(Uint32 dwFlags, Pointer<Utf16> lpwstrFilename,
         Uint32 dwHandle, Uint32 dwLen, Pointer lpData),
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename, int dwHandle,
@@ -78,7 +78,7 @@ int GetFileVersionInfoSize(
         Pointer<Utf16> lptstrFilename, Pointer<Uint32> lpdwHandle) =>
     _GetFileVersionInfoSize(lptstrFilename, lpdwHandle);
 
-late final _GetFileVersionInfoSize = _version.lookupFunction<
+final _GetFileVersionInfoSize = _version.lookupFunction<
     Uint32 Function(Pointer<Utf16> lptstrFilename, Pointer<Uint32> lpdwHandle),
     int Function(Pointer<Utf16> lptstrFilename,
         Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeW');
@@ -100,7 +100,7 @@ int GetFileVersionInfoSizeEx(int dwFlags, Pointer<Utf16> lpwstrFilename,
         Pointer<Uint32> lpdwHandle) =>
     _GetFileVersionInfoSizeEx(dwFlags, lpwstrFilename, lpdwHandle);
 
-late final _GetFileVersionInfoSizeEx = _version.lookupFunction<
+final _GetFileVersionInfoSizeEx = _version.lookupFunction<
     Uint32 Function(Uint32 dwFlags, Pointer<Utf16> lpwstrFilename,
         Pointer<Uint32> lpdwHandle),
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename,
@@ -136,7 +136,7 @@ int VerFindFile(
     _VerFindFile(uFlags, szFileName, szWinDir, szAppDir, szCurDir, puCurDirLen,
         szDestDir, puDestDirLen);
 
-late final _VerFindFile = _version.lookupFunction<
+final _VerFindFile = _version.lookupFunction<
     Uint32 Function(
         Uint32 uFlags,
         Pointer<Utf16> szFileName,
@@ -186,7 +186,7 @@ int VerInstallFile(
     _VerInstallFile(uFlags, szSrcFileName, szDestFileName, szSrcDir, szDestDir,
         szCurDir, szTmpFile, puTmpFileLen);
 
-late final _VerInstallFile = _version.lookupFunction<
+final _VerInstallFile = _version.lookupFunction<
     Uint32 Function(
         Uint32 uFlags,
         Pointer<Utf16> szSrcFileName,
@@ -225,7 +225,7 @@ int VerQueryValue(Pointer pBlock, Pointer<Utf16> lpSubBlock,
         Pointer<Pointer> lplpBuffer, Pointer<Uint32> puLen) =>
     _VerQueryValue(pBlock, lpSubBlock, lplpBuffer, puLen);
 
-late final _VerQueryValue = _version.lookupFunction<
+final _VerQueryValue = _version.lookupFunction<
     Int32 Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
         Pointer<Pointer> lplpBuffer, Pointer<Uint32> puLen),
     int Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,

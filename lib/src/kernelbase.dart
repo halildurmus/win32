@@ -33,7 +33,7 @@ final _kernelbase = DynamicLibrary.open('kernelbase.dll');
 int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
     _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
 
-late final _CompareObjectHandles = _kernelbase.lookupFunction<
+final _CompareObjectHandles = _kernelbase.lookupFunction<
     Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
     int Function(int hFirstObjectHandle,
         int hSecondObjectHandle)>('CompareObjectHandles');
@@ -52,7 +52,7 @@ int GetCommPorts(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
         Pointer<Uint32> puPortNumbersFound) =>
     _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
 
-late final _GetCommPorts = _kernelbase.lookupFunction<
+final _GetCommPorts = _kernelbase.lookupFunction<
     Uint32 Function(Pointer<Uint32> lpPortNumbers, Uint32 uPortNumbersCount,
         Pointer<Uint32> puPortNumbersFound),
     int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
@@ -70,7 +70,7 @@ late final _GetCommPorts = _kernelbase.lookupFunction<
 int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) =>
     _GetIntegratedDisplaySize(sizeInInches);
 
-late final _GetIntegratedDisplaySize = _kernelbase.lookupFunction<
+final _GetIntegratedDisplaySize = _kernelbase.lookupFunction<
     Int32 Function(Pointer<Double> sizeInInches),
     int Function(Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
 
@@ -88,7 +88,7 @@ int OpenCommPort(
         int uPortNumber, int dwDesiredAccess, int dwFlagsAndAttributes) =>
     _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
 
-late final _OpenCommPort = _kernelbase.lookupFunction<
+final _OpenCommPort = _kernelbase.lookupFunction<
     IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
         Uint32 dwFlagsAndAttributes),
     int Function(int uPortNumber, int dwDesiredAccess,

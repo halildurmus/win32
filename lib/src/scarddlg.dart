@@ -32,6 +32,6 @@ final _scarddlg = DynamicLibrary.open('scarddlg.dll');
 int SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0) =>
     _SCardUIDlgSelectCard(param0);
 
-late final _SCardUIDlgSelectCard = _scarddlg.lookupFunction<
+final _SCardUIDlgSelectCard = _scarddlg.lookupFunction<
     Int32 Function(Pointer<OPENCARDNAME_EX> param0),
     int Function(Pointer<OPENCARDNAME_EX> param0)>('SCardUIDlgSelectCardW');

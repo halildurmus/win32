@@ -32,7 +32,7 @@ final _ole32 = DynamicLibrary.open('ole32.dll');
 int CLSIDFromProgID(Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid) =>
     _CLSIDFromProgID(lpszProgID, lpclsid);
 
-late final _CLSIDFromProgID = _ole32.lookupFunction<
+final _CLSIDFromProgID = _ole32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid),
     int Function(
         Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid)>('CLSIDFromProgID');
@@ -49,7 +49,7 @@ late final _CLSIDFromProgID = _ole32.lookupFunction<
 int CLSIDFromProgIDEx(Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid) =>
     _CLSIDFromProgIDEx(lpszProgID, lpclsid);
 
-late final _CLSIDFromProgIDEx = _ole32.lookupFunction<
+final _CLSIDFromProgIDEx = _ole32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid),
     int Function(
         Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid)>('CLSIDFromProgIDEx');
@@ -67,7 +67,7 @@ late final _CLSIDFromProgIDEx = _ole32.lookupFunction<
 int CLSIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> pclsid) =>
     _CLSIDFromString(lpsz, pclsid);
 
-late final _CLSIDFromString = _ole32.lookupFunction<
+final _CLSIDFromString = _ole32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> pclsid),
     int Function(Pointer<Utf16> lpsz, Pointer<GUID> pclsid)>('CLSIDFromString');
 
@@ -79,7 +79,7 @@ late final _CLSIDFromString = _ole32.lookupFunction<
 /// {@category ole32}
 int CoAddRefServerProcess() => _CoAddRefServerProcess();
 
-late final _CoAddRefServerProcess = _ole32
+final _CoAddRefServerProcess = _ole32
     .lookupFunction<Uint32 Function(), int Function()>('CoAddRefServerProcess');
 
 /// Creates a GUID, a unique 128-bit integer used for CLSIDs and interface
@@ -93,8 +93,7 @@ late final _CoAddRefServerProcess = _ole32
 /// {@category ole32}
 int CoCreateGuid(Pointer<GUID> pguid) => _CoCreateGuid(pguid);
 
-late final _CoCreateGuid = _ole32.lookupFunction<
-    Int32 Function(Pointer<GUID> pguid),
+final _CoCreateGuid = _ole32.lookupFunction<Int32 Function(Pointer<GUID> pguid),
     int Function(Pointer<GUID> pguid)>('CoCreateGuid');
 
 /// Creates a single uninitialized object of the class associated with a
@@ -117,7 +116,7 @@ int CoCreateInstance(Pointer<GUID> rclsid, Pointer<COMObject> pUnkOuter,
         int dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv);
 
-late final _CoCreateInstance = _ole32.lookupFunction<
+final _CoCreateInstance = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> rclsid, Pointer<COMObject> pUnkOuter,
         Uint32 dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv),
     int Function(
@@ -145,7 +144,7 @@ int CoGetClassObject(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
         Pointer<GUID> riid, Pointer<Pointer> ppv) =>
     _CoGetClassObject(rclsid, dwClsContext, pvReserved, riid, ppv);
 
-late final _CoGetClassObject = _ole32.lookupFunction<
+final _CoGetClassObject = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> rclsid, Uint32 dwClsContext,
         Pointer pvReserved, Pointer<GUID> riid, Pointer<Pointer> ppv),
     int Function(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
@@ -160,7 +159,7 @@ late final _CoGetClassObject = _ole32.lookupFunction<
 /// {@category ole32}
 int CoGetCurrentProcess() => _CoGetCurrentProcess();
 
-late final _CoGetCurrentProcess = _ole32
+final _CoGetCurrentProcess = _ole32
     .lookupFunction<Uint32 Function(), int Function()>('CoGetCurrentProcess');
 
 /// Initializes the COM library for use by the calling thread, sets the
@@ -177,7 +176,7 @@ late final _CoGetCurrentProcess = _ole32
 int CoInitializeEx(Pointer pvReserved, int dwCoInit) =>
     _CoInitializeEx(pvReserved, dwCoInit);
 
-late final _CoInitializeEx = _ole32.lookupFunction<
+final _CoInitializeEx = _ole32.lookupFunction<
     Int32 Function(Pointer pvReserved, Uint32 dwCoInit),
     int Function(Pointer pvReserved, int dwCoInit)>('CoInitializeEx');
 
@@ -211,7 +210,7 @@ int CoInitializeSecurity(
     _CoInitializeSecurity(pSecDesc, cAuthSvc, asAuthSvc, pReserved1,
         dwAuthnLevel, dwImpLevel, pAuthList, dwCapabilities, pReserved3);
 
-late final _CoInitializeSecurity = _ole32.lookupFunction<
+final _CoInitializeSecurity = _ole32.lookupFunction<
     Int32 Function(
         Pointer pSecDesc,
         Int32 cAuthSvc,
@@ -262,7 +261,7 @@ int CoSetProxyBlanket(
     _CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName,
         dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);
 
-late final _CoSetProxyBlanket = _ole32.lookupFunction<
+final _CoSetProxyBlanket = _ole32.lookupFunction<
     Int32 Function(
         Pointer<COMObject> pProxy,
         Uint32 dwAuthnSvc,
@@ -293,7 +292,7 @@ late final _CoSetProxyBlanket = _ole32.lookupFunction<
 /// {@category ole32}
 Pointer CoTaskMemAlloc(int cb) => _CoTaskMemAlloc(cb);
 
-late final _CoTaskMemAlloc = _ole32.lookupFunction<Pointer Function(IntPtr cb),
+final _CoTaskMemAlloc = _ole32.lookupFunction<Pointer Function(IntPtr cb),
     Pointer Function(int cb)>('CoTaskMemAlloc');
 
 /// Frees a block of task memory previously allocated through a call to the
@@ -307,7 +306,7 @@ late final _CoTaskMemAlloc = _ole32.lookupFunction<Pointer Function(IntPtr cb),
 /// {@category ole32}
 void CoTaskMemFree(Pointer pv) => _CoTaskMemFree(pv);
 
-late final _CoTaskMemFree =
+final _CoTaskMemFree =
     _ole32.lookupFunction<Void Function(Pointer pv), void Function(Pointer pv)>(
         'CoTaskMemFree');
 
@@ -322,7 +321,7 @@ late final _CoTaskMemFree =
 /// {@category ole32}
 Pointer CoTaskMemRealloc(Pointer pv, int cb) => _CoTaskMemRealloc(pv, cb);
 
-late final _CoTaskMemRealloc = _ole32.lookupFunction<
+final _CoTaskMemRealloc = _ole32.lookupFunction<
     Pointer Function(Pointer pv, IntPtr cb),
     Pointer Function(Pointer pv, int cb)>('CoTaskMemRealloc');
 
@@ -336,7 +335,7 @@ late final _CoTaskMemRealloc = _ole32.lookupFunction<
 /// {@category ole32}
 void CoUninitialize() => _CoUninitialize();
 
-late final _CoUninitialize =
+final _CoUninitialize =
     _ole32.lookupFunction<Void Function(), void Function()>('CoUninitialize');
 
 /// Waits for specified handles to be signaled or for a specified timeout
@@ -357,7 +356,7 @@ int CoWaitForMultipleHandles(int dwFlags, int dwTimeout, int cHandles,
     _CoWaitForMultipleHandles(
         dwFlags, dwTimeout, cHandles, pHandles, lpdwindex);
 
-late final _CoWaitForMultipleHandles = _ole32.lookupFunction<
+final _CoWaitForMultipleHandles = _ole32.lookupFunction<
     Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
         Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
     int Function(
@@ -386,7 +385,7 @@ int CoWaitForMultipleObjects(int dwFlags, int dwTimeout, int cHandles,
     _CoWaitForMultipleObjects(
         dwFlags, dwTimeout, cHandles, pHandles, lpdwindex);
 
-late final _CoWaitForMultipleObjects = _ole32.lookupFunction<
+final _CoWaitForMultipleObjects = _ole32.lookupFunction<
     Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
         Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
     int Function(
@@ -409,7 +408,7 @@ late final _CoWaitForMultipleObjects = _ole32.lookupFunction<
 int IIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> lpiid) =>
     _IIDFromString(lpsz, lpiid);
 
-late final _IIDFromString = _ole32.lookupFunction<
+final _IIDFromString = _ole32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid),
     int Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid)>('IIDFromString');
 
@@ -426,8 +425,7 @@ late final _IIDFromString = _ole32.lookupFunction<
 /// {@category ole32}
 int OleInitialize(Pointer pvReserved) => _OleInitialize(pvReserved);
 
-late final _OleInitialize = _ole32.lookupFunction<
-    Int32 Function(Pointer pvReserved),
+final _OleInitialize = _ole32.lookupFunction<Int32 Function(Pointer pvReserved),
     int Function(Pointer pvReserved)>('OleInitialize');
 
 /// Closes the COM library on the apartment, releases any class factories,
@@ -440,7 +438,7 @@ late final _OleInitialize = _ole32.lookupFunction<
 /// {@category ole32}
 void OleUninitialize() => _OleUninitialize();
 
-late final _OleUninitialize =
+final _OleUninitialize =
     _ole32.lookupFunction<Void Function(), void Function()>('OleUninitialize');
 
 /// Retrieves the ProgID for a given CLSID.
@@ -456,7 +454,7 @@ int ProgIDFromCLSID(
         Pointer<GUID> clsid, Pointer<Pointer<Utf16>> lplpszProgID) =>
     _ProgIDFromCLSID(clsid, lplpszProgID);
 
-late final _ProgIDFromCLSID = _ole32.lookupFunction<
+final _ProgIDFromCLSID = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> clsid, Pointer<Pointer<Utf16>> lplpszProgID),
     int Function(Pointer<GUID> clsid,
         Pointer<Pointer<Utf16>> lplpszProgID)>('ProgIDFromCLSID');
@@ -474,7 +472,7 @@ late final _ProgIDFromCLSID = _ole32.lookupFunction<
 int StringFromCLSID(Pointer<GUID> rclsid, Pointer<Pointer<Utf16>> lplpsz) =>
     _StringFromCLSID(rclsid, lplpsz);
 
-late final _StringFromCLSID = _ole32.lookupFunction<
+final _StringFromCLSID = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> rclsid, Pointer<Pointer<Utf16>> lplpsz),
     int Function(Pointer<GUID> rclsid,
         Pointer<Pointer<Utf16>> lplpsz)>('StringFromCLSID');
@@ -493,7 +491,7 @@ late final _StringFromCLSID = _ole32.lookupFunction<
 int StringFromGUID2(Pointer<GUID> rguid, Pointer<Utf16> lpsz, int cchMax) =>
     _StringFromGUID2(rguid, lpsz, cchMax);
 
-late final _StringFromGUID2 = _ole32.lookupFunction<
+final _StringFromGUID2 = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> rguid, Pointer<Utf16> lpsz, Int32 cchMax),
     int Function(Pointer<GUID> rguid, Pointer<Utf16> lpsz,
         int cchMax)>('StringFromGUID2');
@@ -510,7 +508,7 @@ late final _StringFromGUID2 = _ole32.lookupFunction<
 int StringFromIID(Pointer<GUID> rclsid, Pointer<Pointer<Utf16>> lplpsz) =>
     _StringFromIID(rclsid, lplpsz);
 
-late final _StringFromIID = _ole32.lookupFunction<
+final _StringFromIID = _ole32.lookupFunction<
     Int32 Function(Pointer<GUID> rclsid, Pointer<Pointer<Utf16>> lplpsz),
     int Function(
         Pointer<GUID> rclsid, Pointer<Pointer<Utf16>> lplpsz)>('StringFromIID');

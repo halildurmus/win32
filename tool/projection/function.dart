@@ -42,7 +42,7 @@ class FunctionProjection {
     ${safeTypenameForString(returnType.dartType)} $k32StrippedName($dartParams) =>
       _$nameWithoutEncoding(${parameters.map((param) => param.identifier).join(', ')});
 
-    late final _$nameWithoutEncoding = 
+    final _$nameWithoutEncoding = 
       _$lib.lookupFunction<$nativePrototype, $dartPrototype>('${method.name}');
 ''';
 }

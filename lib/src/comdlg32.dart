@@ -30,7 +30,7 @@ final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 /// {@category comdlg32}
 int ChooseColor(Pointer<CHOOSECOLOR> param0) => _ChooseColor(param0);
 
-late final _ChooseColor = _comdlg32.lookupFunction<
+final _ChooseColor = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSECOLOR> param0),
     int Function(Pointer<CHOOSECOLOR> param0)>('ChooseColorW');
 
@@ -47,7 +47,7 @@ late final _ChooseColor = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 int ChooseFont(Pointer<CHOOSEFONT> param0) => _ChooseFont(param0);
 
-late final _ChooseFont = _comdlg32.lookupFunction<
+final _ChooseFont = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSEFONT> param0),
     int Function(Pointer<CHOOSEFONT> param0)>('ChooseFontW');
 
@@ -63,7 +63,7 @@ late final _ChooseFont = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 int FindText(Pointer<FINDREPLACE> param0) => _FindText(param0);
 
-late final _FindText = _comdlg32.lookupFunction<
+final _FindText = _comdlg32.lookupFunction<
     IntPtr Function(Pointer<FINDREPLACE> param0),
     int Function(Pointer<FINDREPLACE> param0)>('FindTextW');
 
@@ -78,7 +78,7 @@ late final _FindText = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 int GetOpenFileName(Pointer<OPENFILENAME> param0) => _GetOpenFileName(param0);
 
-late final _GetOpenFileName = _comdlg32.lookupFunction<
+final _GetOpenFileName = _comdlg32.lookupFunction<
     Int32 Function(Pointer<OPENFILENAME> param0),
     int Function(Pointer<OPENFILENAME> param0)>('GetOpenFileNameW');
 
@@ -93,7 +93,7 @@ late final _GetOpenFileName = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 int GetSaveFileName(Pointer<OPENFILENAME> param0) => _GetSaveFileName(param0);
 
-late final _GetSaveFileName = _comdlg32.lookupFunction<
+final _GetSaveFileName = _comdlg32.lookupFunction<
     Int32 Function(Pointer<OPENFILENAME> param0),
     int Function(Pointer<OPENFILENAME> param0)>('GetSaveFileNameW');
 
@@ -109,6 +109,6 @@ late final _GetSaveFileName = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 int ReplaceText(Pointer<FINDREPLACE> param0) => _ReplaceText(param0);
 
-late final _ReplaceText = _comdlg32.lookupFunction<
+final _ReplaceText = _comdlg32.lookupFunction<
     IntPtr Function(Pointer<FINDREPLACE> param0),
     int Function(Pointer<FINDREPLACE> param0)>('ReplaceTextW');

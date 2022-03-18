@@ -32,7 +32,7 @@ final _dwmapi = DynamicLibrary.open('dwmapi.dll');
 int DwmEnableBlurBehindWindow(int hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind) =>
     _DwmEnableBlurBehindWindow(hWnd, pBlurBehind);
 
-late final _DwmEnableBlurBehindWindow = _dwmapi.lookupFunction<
+final _DwmEnableBlurBehindWindow = _dwmapi.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind),
     int Function(int hWnd,
         Pointer<DWM_BLURBEHIND> pBlurBehind)>('DwmEnableBlurBehindWindow');
@@ -49,7 +49,7 @@ late final _DwmEnableBlurBehindWindow = _dwmapi.lookupFunction<
 /// {@category dwmapi}
 int DwmEnableMMCSS(int fEnableMMCSS) => _DwmEnableMMCSS(fEnableMMCSS);
 
-late final _DwmEnableMMCSS = _dwmapi.lookupFunction<
+final _DwmEnableMMCSS = _dwmapi.lookupFunction<
     Int32 Function(Int32 fEnableMMCSS),
     int Function(int fEnableMMCSS)>('DwmEnableMMCSS');
 
@@ -65,7 +65,7 @@ late final _DwmEnableMMCSS = _dwmapi.lookupFunction<
 int DwmExtendFrameIntoClientArea(int hWnd, Pointer<MARGINS> pMarInset) =>
     _DwmExtendFrameIntoClientArea(hWnd, pMarInset);
 
-late final _DwmExtendFrameIntoClientArea = _dwmapi.lookupFunction<
+final _DwmExtendFrameIntoClientArea = _dwmapi.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<MARGINS> pMarInset),
     int Function(
         int hWnd, Pointer<MARGINS> pMarInset)>('DwmExtendFrameIntoClientArea');
@@ -81,7 +81,7 @@ late final _DwmExtendFrameIntoClientArea = _dwmapi.lookupFunction<
 /// {@category dwmapi}
 int DwmFlush() => _DwmFlush();
 
-late final _DwmFlush =
+final _DwmFlush =
     _dwmapi.lookupFunction<Int32 Function(), int Function()>('DwmFlush');
 
 /// Retrieves the current color used for Desktop Window Manager (DWM) glass
@@ -100,7 +100,7 @@ int DwmGetColorizationColor(
         Pointer<Uint32> pcrColorization, Pointer<Int32> pfOpaqueBlend) =>
     _DwmGetColorizationColor(pcrColorization, pfOpaqueBlend);
 
-late final _DwmGetColorizationColor = _dwmapi.lookupFunction<
+final _DwmGetColorizationColor = _dwmapi.lookupFunction<
     Int32 Function(
         Pointer<Uint32> pcrColorization, Pointer<Int32> pfOpaqueBlend),
     int Function(Pointer<Uint32> pcrColorization,
@@ -120,7 +120,7 @@ int DwmGetTransportAttributes(Pointer<Int32> pfIsRemoting,
         Pointer<Int32> pfIsConnected, Pointer<Uint32> pDwGeneration) =>
     _DwmGetTransportAttributes(pfIsRemoting, pfIsConnected, pDwGeneration);
 
-late final _DwmGetTransportAttributes = _dwmapi.lookupFunction<
+final _DwmGetTransportAttributes = _dwmapi.lookupFunction<
     Int32 Function(Pointer<Int32> pfIsRemoting, Pointer<Int32> pfIsConnected,
         Pointer<Uint32> pDwGeneration),
     int Function(Pointer<Int32> pfIsRemoting, Pointer<Int32> pfIsConnected,
@@ -142,7 +142,7 @@ int DwmGetWindowAttribute(
         int hwnd, int dwAttribute, Pointer pvAttribute, int cbAttribute) =>
     _DwmGetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
-late final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
+final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
     Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
         Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
@@ -160,7 +160,7 @@ late final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
 /// {@category dwmapi}
 int DwmInvalidateIconicBitmaps(int hwnd) => _DwmInvalidateIconicBitmaps(hwnd);
 
-late final _DwmInvalidateIconicBitmaps =
+final _DwmInvalidateIconicBitmaps =
     _dwmapi.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
         'DwmInvalidateIconicBitmaps');
 
@@ -181,7 +181,7 @@ int DwmRenderGesture(int gt, int cContacts, Pointer<Uint32> pdwPointerID,
         Pointer<POINT> pPoints) =>
     _DwmRenderGesture(gt, cContacts, pdwPointerID, pPoints);
 
-late final _DwmRenderGesture = _dwmapi.lookupFunction<
+final _DwmRenderGesture = _dwmapi.lookupFunction<
     Int32 Function(Int32 gt, Uint32 cContacts, Pointer<Uint32> pdwPointerID,
         Pointer<POINT> pPoints),
     int Function(int gt, int cContacts, Pointer<Uint32> pdwPointerID,
@@ -203,7 +203,7 @@ int DwmSetWindowAttribute(
         int hwnd, int dwAttribute, Pointer pvAttribute, int cbAttribute) =>
     _DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
-late final _DwmSetWindowAttribute = _dwmapi.lookupFunction<
+final _DwmSetWindowAttribute = _dwmapi.lookupFunction<
     Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
         Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
@@ -222,6 +222,6 @@ late final _DwmSetWindowAttribute = _dwmapi.lookupFunction<
 int DwmShowContact(int dwPointerID, int eShowContact) =>
     _DwmShowContact(dwPointerID, eShowContact);
 
-late final _DwmShowContact = _dwmapi.lookupFunction<
+final _DwmShowContact = _dwmapi.lookupFunction<
     Int32 Function(Uint32 dwPointerID, Uint32 eShowContact),
     int Function(int dwPointerID, int eShowContact)>('DwmShowContact');

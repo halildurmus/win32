@@ -37,7 +37,7 @@ int CallNtPowerInformation(int InformationLevel, Pointer InputBuffer,
     _CallNtPowerInformation(InformationLevel, InputBuffer, InputBufferLength,
         OutputBuffer, OutputBufferLength);
 
-late final _CallNtPowerInformation = _powrprof.lookupFunction<
+final _CallNtPowerInformation = _powrprof.lookupFunction<
     Int32 Function(
         Int32 InformationLevel,
         Pointer InputBuffer,

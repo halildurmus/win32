@@ -33,7 +33,7 @@ final _ws2_32 = DynamicLibrary.open('ws2_32.dll');
 int accept(int s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen) =>
     _accept(s, addr, addrlen);
 
-late final _accept = _ws2_32.lookupFunction<
+final _accept = _ws2_32.lookupFunction<
     IntPtr Function(IntPtr s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen),
     int Function(
         int s, Pointer<SOCKADDR> addr, Pointer<Int32> addrlen)>('accept');
@@ -50,7 +50,7 @@ late final _accept = _ws2_32.lookupFunction<
 /// {@category winsock}
 int bind(int s, Pointer<SOCKADDR> name, int namelen) => _bind(s, name, namelen);
 
-late final _bind = _ws2_32.lookupFunction<
+final _bind = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
     int Function(int s, Pointer<SOCKADDR> name, int namelen)>('bind');
 
@@ -64,7 +64,7 @@ late final _bind = _ws2_32.lookupFunction<
 /// {@category winsock}
 int closesocket(int s) => _closesocket(s);
 
-late final _closesocket =
+final _closesocket =
     _ws2_32.lookupFunction<Int32 Function(IntPtr s), int Function(int s)>(
         'closesocket');
 
@@ -81,7 +81,7 @@ late final _closesocket =
 int connect(int s, Pointer<SOCKADDR> name, int namelen) =>
     _connect(s, name, namelen);
 
-late final _connect = _ws2_32.lookupFunction<
+final _connect = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
     int Function(int s, Pointer<SOCKADDR> name, int namelen)>('connect');
 
@@ -101,7 +101,7 @@ int GetAddrInfo(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
         Pointer<addrinfo> pHints, Pointer<Pointer<addrinfo>> ppResult) =>
     _GetAddrInfo(pNodeName, pServiceName, pHints, ppResult);
 
-late final _GetAddrInfo = _ws2_32.lookupFunction<
+final _GetAddrInfo = _ws2_32.lookupFunction<
     Int32 Function(Pointer<Utf16> pNodeName, Pointer<Utf16> pServiceName,
         Pointer<addrinfo> pHints, Pointer<Pointer<addrinfo>> ppResult),
     int Function(
@@ -124,7 +124,7 @@ late final _GetAddrInfo = _ws2_32.lookupFunction<
 Pointer<hostent> gethostbyaddr(Pointer<Utf8> addr, int len, int type) =>
     _gethostbyaddr(addr, len, type);
 
-late final _gethostbyaddr = _ws2_32.lookupFunction<
+final _gethostbyaddr = _ws2_32.lookupFunction<
     Pointer<hostent> Function(Pointer<Utf8> addr, Int32 len, Int32 type),
     Pointer<hostent> Function(
         Pointer<Utf8> addr, int len, int type)>('gethostbyaddr');
@@ -140,7 +140,7 @@ late final _gethostbyaddr = _ws2_32.lookupFunction<
 /// {@category winsock}
 Pointer<hostent> gethostbyname(Pointer<Utf8> name) => _gethostbyname(name);
 
-late final _gethostbyname = _ws2_32.lookupFunction<
+final _gethostbyname = _ws2_32.lookupFunction<
     Pointer<hostent> Function(Pointer<Utf8> name),
     Pointer<hostent> Function(Pointer<Utf8> name)>('gethostbyname');
 
@@ -156,7 +156,7 @@ late final _gethostbyname = _ws2_32.lookupFunction<
 /// {@category winsock}
 int gethostname(Pointer<Utf8> name, int namelen) => _gethostname(name, namelen);
 
-late final _gethostname = _ws2_32.lookupFunction<
+final _gethostname = _ws2_32.lookupFunction<
     Int32 Function(Pointer<Utf8> name, Int32 namelen),
     int Function(Pointer<Utf8> name, int namelen)>('gethostname');
 
@@ -187,7 +187,7 @@ int getnameinfo(
     _getnameinfo(pSockaddr, SockaddrLength, pNodeBuffer, NodeBufferSize,
         pServiceBuffer, ServiceBufferSize, Flags);
 
-late final _getnameinfo = _ws2_32.lookupFunction<
+final _getnameinfo = _ws2_32.lookupFunction<
     Int32 Function(
         Pointer<SOCKADDR> pSockaddr,
         Int32 SockaddrLength,
@@ -219,7 +219,7 @@ late final _getnameinfo = _ws2_32.lookupFunction<
 int getpeername(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) =>
     _getpeername(s, name, namelen);
 
-late final _getpeername = _ws2_32.lookupFunction<
+final _getpeername = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
     int Function(
         int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen)>('getpeername');
@@ -235,7 +235,7 @@ late final _getpeername = _ws2_32.lookupFunction<
 /// {@category winsock}
 Pointer<protoent> getprotobyname(Pointer<Utf8> name) => _getprotobyname(name);
 
-late final _getprotobyname = _ws2_32.lookupFunction<
+final _getprotobyname = _ws2_32.lookupFunction<
     Pointer<protoent> Function(Pointer<Utf8> name),
     Pointer<protoent> Function(Pointer<Utf8> name)>('getprotobyname');
 
@@ -250,7 +250,7 @@ late final _getprotobyname = _ws2_32.lookupFunction<
 /// {@category winsock}
 Pointer<protoent> getprotobynumber(int number) => _getprotobynumber(number);
 
-late final _getprotobynumber = _ws2_32.lookupFunction<
+final _getprotobynumber = _ws2_32.lookupFunction<
     Pointer<protoent> Function(Int32 number),
     Pointer<protoent> Function(int number)>('getprotobynumber');
 
@@ -267,7 +267,7 @@ late final _getprotobynumber = _ws2_32.lookupFunction<
 Pointer<servent> getservbyname(Pointer<Utf8> name, Pointer<Utf8> proto) =>
     _getservbyname(name, proto);
 
-late final _getservbyname = _ws2_32.lookupFunction<
+final _getservbyname = _ws2_32.lookupFunction<
     Pointer<servent> Function(Pointer<Utf8> name, Pointer<Utf8> proto),
     Pointer<servent> Function(
         Pointer<Utf8> name, Pointer<Utf8> proto)>('getservbyname');
@@ -285,7 +285,7 @@ late final _getservbyname = _ws2_32.lookupFunction<
 Pointer<servent> getservbyport(int port, Pointer<Utf8> proto) =>
     _getservbyport(port, proto);
 
-late final _getservbyport = _ws2_32.lookupFunction<
+final _getservbyport = _ws2_32.lookupFunction<
     Pointer<servent> Function(Int32 port, Pointer<Utf8> proto),
     Pointer<servent> Function(int port, Pointer<Utf8> proto)>('getservbyport');
 
@@ -302,7 +302,7 @@ late final _getservbyport = _ws2_32.lookupFunction<
 int getsockname(int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen) =>
     _getsockname(s, name, namelen);
 
-late final _getsockname = _ws2_32.lookupFunction<
+final _getsockname = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Pointer<Int32> namelen),
     int Function(
         int s, Pointer<SOCKADDR> name, Pointer<Int32> namelen)>('getsockname');
@@ -323,7 +323,7 @@ int getsockopt(int s, int level, int optname, Pointer<Utf8> optval,
         Pointer<Int32> optlen) =>
     _getsockopt(s, level, optname, optval, optlen);
 
-late final _getsockopt = _ws2_32.lookupFunction<
+final _getsockopt = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Int32 level, Int32 optname, Pointer<Utf8> optval,
         Pointer<Int32> optlen),
     int Function(int s, int level, int optname, Pointer<Utf8> optval,
@@ -340,7 +340,7 @@ late final _getsockopt = _ws2_32.lookupFunction<
 /// {@category winsock}
 int htonl(int hostlong) => _htonl(hostlong);
 
-late final _htonl = _ws2_32.lookupFunction<Uint32 Function(Uint32 hostlong),
+final _htonl = _ws2_32.lookupFunction<Uint32 Function(Uint32 hostlong),
     int Function(int hostlong)>('htonl');
 
 /// The htons function converts a u_short from host to TCP/IP network byte
@@ -354,7 +354,7 @@ late final _htonl = _ws2_32.lookupFunction<Uint32 Function(Uint32 hostlong),
 /// {@category winsock}
 int htons(int hostshort) => _htons(hostshort);
 
-late final _htons = _ws2_32.lookupFunction<Uint16 Function(Uint16 hostshort),
+final _htons = _ws2_32.lookupFunction<Uint16 Function(Uint16 hostshort),
     int Function(int hostshort)>('htons');
 
 /// The inet_addr function converts a string containing an IPv4
@@ -368,8 +368,7 @@ late final _htons = _ws2_32.lookupFunction<Uint16 Function(Uint16 hostshort),
 /// {@category winsock}
 int inet_addr(Pointer<Utf8> cp) => _inet_addr(cp);
 
-late final _inet_addr = _ws2_32.lookupFunction<
-    Uint32 Function(Pointer<Utf8> cp),
+final _inet_addr = _ws2_32.lookupFunction<Uint32 Function(Pointer<Utf8> cp),
     int Function(Pointer<Utf8> cp)>('inet_addr');
 
 /// The inet_ntoa function converts an (Ipv4) Internet network address into
@@ -383,8 +382,7 @@ late final _inet_addr = _ws2_32.lookupFunction<
 /// {@category winsock}
 Pointer<Utf8> inet_ntoa(IN_ADDR $in) => _inet_ntoa($in);
 
-late final _inet_ntoa = _ws2_32.lookupFunction<
-    Pointer<Utf8> Function(IN_ADDR $in),
+final _inet_ntoa = _ws2_32.lookupFunction<Pointer<Utf8> Function(IN_ADDR $in),
     Pointer<Utf8> Function(IN_ADDR $in)>('inet_ntoa');
 
 /// The ioctlsocket function controls the I/O mode of a socket.
@@ -400,7 +398,7 @@ late final _inet_ntoa = _ws2_32.lookupFunction<
 int ioctlsocket(int s, int cmd, Pointer<Uint32> argp) =>
     _ioctlsocket(s, cmd, argp);
 
-late final _ioctlsocket = _ws2_32.lookupFunction<
+final _ioctlsocket = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Int32 cmd, Pointer<Uint32> argp),
     int Function(int s, int cmd, Pointer<Uint32> argp)>('ioctlsocket');
 
@@ -416,8 +414,7 @@ late final _ioctlsocket = _ws2_32.lookupFunction<
 /// {@category winsock}
 int listen(int s, int backlog) => _listen(s, backlog);
 
-late final _listen = _ws2_32.lookupFunction<
-    Int32 Function(IntPtr s, Int32 backlog),
+final _listen = _ws2_32.lookupFunction<Int32 Function(IntPtr s, Int32 backlog),
     int Function(int s, int backlog)>('listen');
 
 /// The ntohl function converts a u_long from TCP/IP network order to host
@@ -431,7 +428,7 @@ late final _listen = _ws2_32.lookupFunction<
 /// {@category winsock}
 int ntohl(int netlong) => _ntohl(netlong);
 
-late final _ntohl = _ws2_32.lookupFunction<Uint32 Function(Uint32 netlong),
+final _ntohl = _ws2_32.lookupFunction<Uint32 Function(Uint32 netlong),
     int Function(int netlong)>('ntohl');
 
 /// The ntohs function converts a u_short from TCP/IP network byte order to
@@ -445,7 +442,7 @@ late final _ntohl = _ws2_32.lookupFunction<Uint32 Function(Uint32 netlong),
 /// {@category winsock}
 int ntohs(int netshort) => _ntohs(netshort);
 
-late final _ntohs = _ws2_32.lookupFunction<Uint16 Function(Uint16 netshort),
+final _ntohs = _ws2_32.lookupFunction<Uint16 Function(Uint16 netshort),
     int Function(int netshort)>('ntohs');
 
 /// The recv function receives data from a connected socket or a bound
@@ -463,7 +460,7 @@ late final _ntohs = _ws2_32.lookupFunction<Uint16 Function(Uint16 netshort),
 int recv(int s, Pointer<Utf8> buf, int len, int flags) =>
     _recv(s, buf, len, flags);
 
-late final _recv = _ws2_32.lookupFunction<
+final _recv = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
     int Function(int s, Pointer<Utf8> buf, int len, int flags)>('recv');
 
@@ -485,7 +482,7 @@ int recvfrom(int s, Pointer<Utf8> buf, int len, int flags,
         Pointer<SOCKADDR> from, Pointer<Int32> fromlen) =>
     _recvfrom(s, buf, len, flags, from, fromlen);
 
-late final _recvfrom = _ws2_32.lookupFunction<
+final _recvfrom = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags,
         Pointer<SOCKADDR> from, Pointer<Int32> fromlen),
     int Function(int s, Pointer<Utf8> buf, int len, int flags,
@@ -508,7 +505,7 @@ int select(int nfds, Pointer<fd_set> readfds, Pointer<fd_set> writefds,
         Pointer<fd_set> exceptfds, Pointer<timeval> timeout) =>
     _select(nfds, readfds, writefds, exceptfds, timeout);
 
-late final _select = _ws2_32.lookupFunction<
+final _select = _ws2_32.lookupFunction<
     Int32 Function(
         Int32 nfds,
         Pointer<fd_set> readfds,
@@ -532,7 +529,7 @@ late final _select = _ws2_32.lookupFunction<
 int send(int s, Pointer<Utf8> buf, int len, int flags) =>
     _send(s, buf, len, flags);
 
-late final _send = _ws2_32.lookupFunction<
+final _send = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Uint32 flags),
     int Function(int s, Pointer<Utf8> buf, int len, int flags)>('send');
 
@@ -553,7 +550,7 @@ int sendto(int s, Pointer<Utf8> buf, int len, int flags, Pointer<SOCKADDR> to,
         int tolen) =>
     _sendto(s, buf, len, flags, to, tolen);
 
-late final _sendto = _ws2_32.lookupFunction<
+final _sendto = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags,
         Pointer<SOCKADDR> to, Int32 tolen),
     int Function(int s, Pointer<Utf8> buf, int len, int flags,
@@ -570,8 +567,7 @@ late final _sendto = _ws2_32.lookupFunction<
 /// {@category winsock}
 int shutdown(int s, int how) => _shutdown(s, how);
 
-late final _shutdown = _ws2_32.lookupFunction<
-    Int32 Function(IntPtr s, Int32 how),
+final _shutdown = _ws2_32.lookupFunction<Int32 Function(IntPtr s, Int32 how),
     int Function(int s, int how)>('shutdown');
 
 /// The socket function creates a socket that is bound to a specific
@@ -587,6 +583,6 @@ late final _shutdown = _ws2_32.lookupFunction<
 /// {@category winsock}
 int socket(int af, int type, int protocol) => _socket(af, type, protocol);
 
-late final _socket = _ws2_32.lookupFunction<
+final _socket = _ws2_32.lookupFunction<
     IntPtr Function(Int32 af, Int32 type, Int32 protocol),
     int Function(int af, int type, int protocol)>('socket');

@@ -33,25 +33,24 @@ final _api_ms_win_ro_typeresolution_l1_1_0 =
 /// ```
 /// {@category winrt}
 int RoGetMetaDataFile(
-    int name,
-    Pointer<IntPtr> metaDataDispenser,
-    Pointer<IntPtr> metaDataFilePath,
-    Pointer<Pointer> metaDataImport,
-    Pointer<Uint32> typeDefToken) {
-  final _RoGetMetaDataFile =
-      _api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
-          Int32 Function(
-              IntPtr name,
-              Pointer<IntPtr> metaDataDispenser,
-              Pointer<IntPtr> metaDataFilePath,
-              Pointer<Pointer> metaDataImport,
-              Pointer<Uint32> typeDefToken),
-          int Function(
-              int name,
-              Pointer<IntPtr> metaDataDispenser,
-              Pointer<IntPtr> metaDataFilePath,
-              Pointer<Pointer> metaDataImport,
-              Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
-  return _RoGetMetaDataFile(
-      name, metaDataDispenser, metaDataFilePath, metaDataImport, typeDefToken);
-}
+        int name,
+        Pointer<IntPtr> metaDataDispenser,
+        Pointer<IntPtr> metaDataFilePath,
+        Pointer<Pointer> metaDataImport,
+        Pointer<Uint32> typeDefToken) =>
+    _RoGetMetaDataFile(name, metaDataDispenser, metaDataFilePath,
+        metaDataImport, typeDefToken);
+
+final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
+    Int32 Function(
+        IntPtr name,
+        Pointer<IntPtr> metaDataDispenser,
+        Pointer<IntPtr> metaDataFilePath,
+        Pointer<Pointer> metaDataImport,
+        Pointer<Uint32> typeDefToken),
+    int Function(
+        int name,
+        Pointer<IntPtr> metaDataDispenser,
+        Pointer<IntPtr> metaDataFilePath,
+        Pointer<Pointer> metaDataImport,
+        Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');

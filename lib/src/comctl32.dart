@@ -36,7 +36,7 @@ final _comctl32 = DynamicLibrary.open('comctl32.dll');
 int DefSubclassProc(int hWnd, int uMsg, int wParam, int lParam) =>
     _DefSubclassProc(hWnd, uMsg, wParam, lParam);
 
-late final _DefSubclassProc = _comctl32.lookupFunction<
+final _DefSubclassProc = _comctl32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
     int Function(
         int hWnd, int uMsg, int wParam, int lParam)>('DefSubclassProc');
@@ -57,7 +57,7 @@ void DrawStatusText(
         int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText, int uFlags) =>
     _DrawStatusText(hDC, lprc, pszText, uFlags);
 
-late final _DrawStatusText = _comctl32.lookupFunction<
+final _DrawStatusText = _comctl32.lookupFunction<
     Void Function(
         IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText, Uint32 uFlags),
     void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
@@ -76,7 +76,7 @@ late final _DrawStatusText = _comctl32.lookupFunction<
 int InitCommonControlsEx(Pointer<INITCOMMONCONTROLSEX> picce) =>
     _InitCommonControlsEx(picce);
 
-late final _InitCommonControlsEx = _comctl32.lookupFunction<
+final _InitCommonControlsEx = _comctl32.lookupFunction<
     Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
     int Function(Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
 
@@ -94,7 +94,7 @@ int RemoveWindowSubclass(int hWnd,
         Pointer<NativeFunction<SubclassProc>> pfnSubclass, int uIdSubclass) =>
     _RemoveWindowSubclass(hWnd, pfnSubclass, uIdSubclass);
 
-late final _RemoveWindowSubclass = _comctl32.lookupFunction<
+final _RemoveWindowSubclass = _comctl32.lookupFunction<
     Int32 Function(IntPtr hWnd,
         Pointer<NativeFunction<SubclassProc>> pfnSubclass, IntPtr uIdSubclass),
     int Function(int hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
@@ -118,7 +118,7 @@ int SetWindowSubclass(
         int dwRefData) =>
     _SetWindowSubclass(hWnd, pfnSubclass, uIdSubclass, dwRefData);
 
-late final _SetWindowSubclass = _comctl32.lookupFunction<
+final _SetWindowSubclass = _comctl32.lookupFunction<
     Int32 Function(
         IntPtr hWnd,
         Pointer<NativeFunction<SubclassProc>> pfnSubclass,
@@ -158,7 +158,7 @@ int TaskDialog(
     _TaskDialog(hwndOwner, hInstance, pszWindowTitle, pszMainInstruction,
         pszContent, dwCommonButtons, pszIcon, pnButton);
 
-late final _TaskDialog = _comctl32.lookupFunction<
+final _TaskDialog = _comctl32.lookupFunction<
     Int32 Function(
         IntPtr hwndOwner,
         IntPtr hInstance,
@@ -201,7 +201,7 @@ int TaskDialogIndirect(
     _TaskDialogIndirect(
         pTaskConfig, pnButton, pnRadioButton, pfVerificationFlagChecked);
 
-late final _TaskDialogIndirect = _comctl32.lookupFunction<
+final _TaskDialogIndirect = _comctl32.lookupFunction<
     Int32 Function(
         Pointer<TASKDIALOGCONFIG> pTaskConfig,
         Pointer<Int32> pnButton,

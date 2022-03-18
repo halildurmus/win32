@@ -36,7 +36,7 @@ final _kernel32 = DynamicLibrary.open('kernel32.dll');
 int ActivateActCtx(int hActCtx, Pointer<IntPtr> lpCookie) =>
     _ActivateActCtx(hActCtx, lpCookie);
 
-late final _ActivateActCtx = _kernel32.lookupFunction<
+final _ActivateActCtx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hActCtx, Pointer<IntPtr> lpCookie),
     int Function(int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
 
@@ -51,7 +51,7 @@ late final _ActivateActCtx = _kernel32.lookupFunction<
 Pointer AddDllDirectory(Pointer<Utf16> NewDirectory) =>
     _AddDllDirectory(NewDirectory);
 
-late final _AddDllDirectory = _kernel32.lookupFunction<
+final _AddDllDirectory = _kernel32.lookupFunction<
     Pointer Function(Pointer<Utf16> NewDirectory),
     Pointer Function(Pointer<Utf16> NewDirectory)>('AddDllDirectory');
 
@@ -66,8 +66,8 @@ late final _AddDllDirectory = _kernel32.lookupFunction<
 /// {@category kernel32}
 void AddRefActCtx(int hActCtx) => _AddRefActCtx(hActCtx);
 
-late final _AddRefActCtx = _kernel32.lookupFunction<
-    Void Function(IntPtr hActCtx), void Function(int hActCtx)>('AddRefActCtx');
+final _AddRefActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
+    void Function(int hActCtx)>('AddRefActCtx');
 
 /// Allocates a new console for the calling process.
 ///
@@ -77,7 +77,7 @@ late final _AddRefActCtx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int AllocConsole() => _AllocConsole();
 
-late final _AllocConsole =
+final _AllocConsole =
     _kernel32.lookupFunction<Int32 Function(), int Function()>('AllocConsole');
 
 /// Attaches the calling process to the console of the specified process.
@@ -90,7 +90,7 @@ late final _AllocConsole =
 /// {@category kernel32}
 int AttachConsole(int dwProcessId) => _AttachConsole(dwProcessId);
 
-late final _AttachConsole = _kernel32.lookupFunction<
+final _AttachConsole = _kernel32.lookupFunction<
     Int32 Function(Uint32 dwProcessId),
     int Function(int dwProcessId)>('AttachConsole');
 
@@ -107,7 +107,7 @@ late final _AttachConsole = _kernel32.lookupFunction<
 /// {@category kernel32}
 int Beep(int dwFreq, int dwDuration) => _Beep(dwFreq, dwDuration);
 
-late final _Beep = _kernel32.lookupFunction<
+final _Beep = _kernel32.lookupFunction<
     Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
     int Function(int dwFreq, int dwDuration)>('Beep');
 
@@ -125,7 +125,7 @@ int BeginUpdateResource(
         Pointer<Utf16> pFileName, int bDeleteExistingResources) =>
     _BeginUpdateResource(pFileName, bDeleteExistingResources);
 
-late final _BeginUpdateResource = _kernel32.lookupFunction<
+final _BeginUpdateResource = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> pFileName, Int32 bDeleteExistingResources),
     int Function(Pointer<Utf16> pFileName,
         int bDeleteExistingResources)>('BeginUpdateResourceW');
@@ -144,7 +144,7 @@ late final _BeginUpdateResource = _kernel32.lookupFunction<
 int BuildCommDCB(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB) =>
     _BuildCommDCB(lpDef, lpDCB);
 
-late final _BuildCommDCB = _kernel32.lookupFunction<
+final _BuildCommDCB = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB),
     int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB)>('BuildCommDCBW');
 
@@ -166,7 +166,7 @@ int BuildCommDCBAndTimeouts(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
         Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
     _BuildCommDCBAndTimeouts(lpDef, lpDCB, lpCommTimeouts);
 
-late final _BuildCommDCBAndTimeouts = _kernel32.lookupFunction<
+final _BuildCommDCBAndTimeouts = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
         Pointer<COMMTIMEOUTS> lpCommTimeouts),
     int Function(Pointer<Utf16> lpDef, Pointer<DCB> lpDCB,
@@ -199,7 +199,7 @@ int CallNamedPipe(
     _CallNamedPipe(lpNamedPipeName, lpInBuffer, nInBufferSize, lpOutBuffer,
         nOutBufferSize, lpBytesRead, nTimeOut);
 
-late final _CallNamedPipe = _kernel32.lookupFunction<
+final _CallNamedPipe = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpNamedPipeName,
         Pointer lpInBuffer,
@@ -229,7 +229,7 @@ late final _CallNamedPipe = _kernel32.lookupFunction<
 /// {@category kernel32}
 int CancelIo(int hFile) => _CancelIo(hFile);
 
-late final _CancelIo = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+final _CancelIo = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
     int Function(int hFile)>('CancelIo');
 
 /// Marks any outstanding I/O operations for the specified file handle. The
@@ -246,7 +246,7 @@ late final _CancelIo = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
 int CancelIoEx(int hFile, Pointer<OVERLAPPED> lpOverlapped) =>
     _CancelIoEx(hFile, lpOverlapped);
 
-late final _CancelIoEx = _kernel32.lookupFunction<
+final _CancelIoEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<OVERLAPPED> lpOverlapped),
     int Function(int hFile, Pointer<OVERLAPPED> lpOverlapped)>('CancelIoEx');
 
@@ -261,7 +261,7 @@ late final _CancelIoEx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int CancelSynchronousIo(int hThread) => _CancelSynchronousIo(hThread);
 
-late final _CancelSynchronousIo = _kernel32.lookupFunction<
+final _CancelSynchronousIo = _kernel32.lookupFunction<
     Int32 Function(IntPtr hThread),
     int Function(int hThread)>('CancelSynchronousIo');
 
@@ -278,7 +278,7 @@ int CheckRemoteDebuggerPresent(
         int hProcess, Pointer<Int32> pbDebuggerPresent) =>
     _CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent);
 
-late final _CheckRemoteDebuggerPresent = _kernel32.lookupFunction<
+final _CheckRemoteDebuggerPresent = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<Int32> pbDebuggerPresent),
     int Function(int hProcess,
         Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
@@ -294,8 +294,8 @@ late final _CheckRemoteDebuggerPresent = _kernel32.lookupFunction<
 /// {@category kernel32}
 int ClearCommBreak(int hFile) => _ClearCommBreak(hFile);
 
-late final _ClearCommBreak = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFile), int Function(int hFile)>('ClearCommBreak');
+final _ClearCommBreak = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+    int Function(int hFile)>('ClearCommBreak');
 
 /// Retrieves information about a communications error and reports the
 /// current status of a communications device. The function is called when
@@ -314,7 +314,7 @@ int ClearCommError(
         int hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat) =>
     _ClearCommError(hFile, lpErrors, lpStat);
 
-late final _ClearCommError = _kernel32.lookupFunction<
+final _ClearCommError = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile, Pointer<Uint32> lpErrors, Pointer<COMSTAT> lpStat),
     int Function(int hFile, Pointer<Uint32> lpErrors,
@@ -330,8 +330,8 @@ late final _ClearCommError = _kernel32.lookupFunction<
 /// {@category kernel32}
 int CloseHandle(int hObject) => _CloseHandle(hObject);
 
-late final _CloseHandle = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hObject), int Function(int hObject)>('CloseHandle');
+final _CloseHandle = _kernel32.lookupFunction<Int32 Function(IntPtr hObject),
+    int Function(int hObject)>('CloseHandle');
 
 /// Closes a pseudoconsole from the given handle.
 ///
@@ -343,7 +343,7 @@ late final _CloseHandle = _kernel32.lookupFunction<
 /// {@category kernel32}
 void ClosePseudoConsole(int hPC) => _ClosePseudoConsole(hPC);
 
-late final _ClosePseudoConsole =
+final _ClosePseudoConsole =
     _kernel32.lookupFunction<Void Function(IntPtr hPC), void Function(int hPC)>(
         'ClosePseudoConsole');
 
@@ -361,7 +361,7 @@ int CommConfigDialog(
         Pointer<Utf16> lpszName, int hWnd, Pointer<COMMCONFIG> lpCC) =>
     _CommConfigDialog(lpszName, hWnd, lpCC);
 
-late final _CommConfigDialog = _kernel32.lookupFunction<
+final _CommConfigDialog = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpszName, IntPtr hWnd, Pointer<COMMCONFIG> lpCC),
     int Function(Pointer<Utf16> lpszName, int hWnd,
@@ -380,7 +380,7 @@ late final _CommConfigDialog = _kernel32.lookupFunction<
 int ConnectNamedPipe(int hNamedPipe, Pointer<OVERLAPPED> lpOverlapped) =>
     _ConnectNamedPipe(hNamedPipe, lpOverlapped);
 
-late final _ConnectNamedPipe = _kernel32.lookupFunction<
+final _ConnectNamedPipe = _kernel32.lookupFunction<
     Int32 Function(IntPtr hNamedPipe, Pointer<OVERLAPPED> lpOverlapped),
     int Function(
         int hNamedPipe, Pointer<OVERLAPPED> lpOverlapped)>('ConnectNamedPipe');
@@ -399,7 +399,7 @@ late final _ConnectNamedPipe = _kernel32.lookupFunction<
 int ContinueDebugEvent(int dwProcessId, int dwThreadId, int dwContinueStatus) =>
     _ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus);
 
-late final _ContinueDebugEvent = _kernel32.lookupFunction<
+final _ContinueDebugEvent = _kernel32.lookupFunction<
     Int32 Function(
         Uint32 dwProcessId, Uint32 dwThreadId, Uint32 dwContinueStatus),
     int Function(int dwProcessId, int dwThreadId,
@@ -415,7 +415,7 @@ late final _ContinueDebugEvent = _kernel32.lookupFunction<
 /// {@category kernel32}
 int CreateActCtx(Pointer<ACTCTX> pActCtx) => _CreateActCtx(pActCtx);
 
-late final _CreateActCtx = _kernel32.lookupFunction<
+final _CreateActCtx = _kernel32.lookupFunction<
     IntPtr Function(Pointer<ACTCTX> pActCtx),
     int Function(Pointer<ACTCTX> pActCtx)>('CreateActCtxW');
 
@@ -440,7 +440,7 @@ int CreateConsoleScreenBuffer(
     _CreateConsoleScreenBuffer(dwDesiredAccess, dwShareMode,
         lpSecurityAttributes, dwFlags, lpScreenBufferData);
 
-late final _CreateConsoleScreenBuffer = _kernel32.lookupFunction<
+final _CreateConsoleScreenBuffer = _kernel32.lookupFunction<
     IntPtr Function(
         Uint32 dwDesiredAccess,
         Uint32 dwShareMode,
@@ -469,7 +469,7 @@ int CreateDirectory(Pointer<Utf16> lpPathName,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes) =>
     _CreateDirectory(lpPathName, lpSecurityAttributes);
 
-late final _CreateDirectory = _kernel32.lookupFunction<
+final _CreateDirectory = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpPathName,
         Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
     int Function(Pointer<Utf16> lpPathName,
@@ -490,7 +490,7 @@ int CreateEvent(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
         int bManualReset, int bInitialState, Pointer<Utf16> lpName) =>
     _CreateEvent(lpEventAttributes, bManualReset, bInitialState, lpName);
 
-late final _CreateEvent = _kernel32.lookupFunction<
+final _CreateEvent = _kernel32.lookupFunction<
     IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
         Int32 bManualReset, Int32 bInitialState, Pointer<Utf16> lpName),
     int Function(
@@ -515,7 +515,7 @@ int CreateEventEx(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
         Pointer<Utf16> lpName, int dwFlags, int dwDesiredAccess) =>
     _CreateEventEx(lpEventAttributes, lpName, dwFlags, dwDesiredAccess);
 
-late final _CreateEventEx = _kernel32.lookupFunction<
+final _CreateEventEx = _kernel32.lookupFunction<
     IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpEventAttributes,
         Pointer<Utf16> lpName, Uint32 dwFlags, Uint32 dwDesiredAccess),
     int Function(
@@ -554,7 +554,7 @@ int CreateFile(
     _CreateFile(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes,
         dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 
-late final _CreateFile = _kernel32.lookupFunction<
+final _CreateFile = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<Utf16> lpFileName,
         Uint32 dwDesiredAccess,
@@ -591,7 +591,7 @@ int CreateIoCompletionPort(int FileHandle, int ExistingCompletionPort,
     _CreateIoCompletionPort(FileHandle, ExistingCompletionPort, CompletionKey,
         NumberOfConcurrentThreads);
 
-late final _CreateIoCompletionPort = _kernel32.lookupFunction<
+final _CreateIoCompletionPort = _kernel32.lookupFunction<
     IntPtr Function(IntPtr FileHandle, IntPtr ExistingCompletionPort,
         IntPtr CompletionKey, Uint32 NumberOfConcurrentThreads),
     int Function(int FileHandle, int ExistingCompletionPort, int CompletionKey,
@@ -626,7 +626,7 @@ int CreateNamedPipe(
     _CreateNamedPipe(lpName, dwOpenMode, dwPipeMode, nMaxInstances,
         nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes);
 
-late final _CreateNamedPipe = _kernel32.lookupFunction<
+final _CreateNamedPipe = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<Utf16> lpName,
         Uint32 dwOpenMode,
@@ -662,7 +662,7 @@ int CreatePipe(Pointer<IntPtr> hReadPipe, Pointer<IntPtr> hWritePipe,
         Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes, int nSize) =>
     _CreatePipe(hReadPipe, hWritePipe, lpPipeAttributes, nSize);
 
-late final _CreatePipe = _kernel32.lookupFunction<
+final _CreatePipe = _kernel32.lookupFunction<
     Int32 Function(Pointer<IntPtr> hReadPipe, Pointer<IntPtr> hWritePipe,
         Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes, Uint32 nSize),
     int Function(
@@ -712,7 +712,7 @@ int CreateProcess(
         lpStartupInfo,
         lpProcessInformation);
 
-late final _CreateProcess = _kernel32.lookupFunction<
+final _CreateProcess = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpApplicationName,
         Pointer<Utf16> lpCommandLine,
@@ -752,7 +752,7 @@ int CreatePseudoConsole(COORD size, int hInput, int hOutput, int dwFlags,
         Pointer<IntPtr> phPC) =>
     _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
 
-late final _CreatePseudoConsole = _kernel32.lookupFunction<
+final _CreatePseudoConsole = _kernel32.lookupFunction<
     Int32 Function(COORD size, IntPtr hInput, IntPtr hOutput, Uint32 dwFlags,
         Pointer<IntPtr> phPC),
     int Function(COORD size, int hInput, int hOutput, int dwFlags,
@@ -786,7 +786,7 @@ int CreateRemoteThread(
     _CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize,
         lpStartAddress, lpParameter, dwCreationFlags, lpThreadId);
 
-late final _CreateRemoteThread = _kernel32.lookupFunction<
+final _CreateRemoteThread = _kernel32.lookupFunction<
     IntPtr Function(
         IntPtr hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
@@ -840,7 +840,7 @@ int CreateRemoteThreadEx(
         lpAttributeList,
         lpThreadId);
 
-late final _CreateRemoteThreadEx = _kernel32.lookupFunction<
+final _CreateRemoteThreadEx = _kernel32.lookupFunction<
     IntPtr Function(
         IntPtr hProcess,
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
@@ -884,7 +884,7 @@ int CreateThread(
     _CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter,
         dwCreationFlags, lpThreadId);
 
-late final _CreateThread = _kernel32.lookupFunction<
+final _CreateThread = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
         IntPtr dwStackSize,
@@ -913,7 +913,7 @@ late final _CreateThread = _kernel32.lookupFunction<
 int DeactivateActCtx(int dwFlags, int ulCookie) =>
     _DeactivateActCtx(dwFlags, ulCookie);
 
-late final _DeactivateActCtx = _kernel32.lookupFunction<
+final _DeactivateActCtx = _kernel32.lookupFunction<
     Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
     int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
 
@@ -927,7 +927,7 @@ late final _DeactivateActCtx = _kernel32.lookupFunction<
 /// {@category kernel32}
 void DebugBreak() => _DebugBreak();
 
-late final _DebugBreak =
+final _DebugBreak =
     _kernel32.lookupFunction<Void Function(), void Function()>('DebugBreak');
 
 /// Causes a breakpoint exception to occur in the specified process. This
@@ -942,7 +942,7 @@ late final _DebugBreak =
 /// {@category kernel32}
 int DebugBreakProcess(int Process) => _DebugBreakProcess(Process);
 
-late final _DebugBreakProcess = _kernel32.lookupFunction<
+final _DebugBreakProcess = _kernel32.lookupFunction<
     Int32 Function(IntPtr Process),
     int Function(int Process)>('DebugBreakProcess');
 
@@ -957,7 +957,7 @@ late final _DebugBreakProcess = _kernel32.lookupFunction<
 int DebugSetProcessKillOnExit(int KillOnExit) =>
     _DebugSetProcessKillOnExit(KillOnExit);
 
-late final _DebugSetProcessKillOnExit = _kernel32.lookupFunction<
+final _DebugSetProcessKillOnExit = _kernel32.lookupFunction<
     Int32 Function(Int32 KillOnExit),
     int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
 
@@ -971,7 +971,7 @@ late final _DebugSetProcessKillOnExit = _kernel32.lookupFunction<
 /// {@category kernel32}
 int DeleteFile(Pointer<Utf16> lpFileName) => _DeleteFile(lpFileName);
 
-late final _DeleteFile = _kernel32.lookupFunction<
+final _DeleteFile = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName),
     int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
 
@@ -1003,7 +1003,7 @@ int DeviceIoControl(
     _DeviceIoControl(hDevice, dwIoControlCode, lpInBuffer, nInBufferSize,
         lpOutBuffer, nOutBufferSize, lpBytesReturned, lpOverlapped);
 
-late final _DeviceIoControl = _kernel32.lookupFunction<
+final _DeviceIoControl = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hDevice,
         Uint32 dwIoControlCode,
@@ -1033,7 +1033,7 @@ late final _DeviceIoControl = _kernel32.lookupFunction<
 /// {@category kernel32}
 int DisconnectNamedPipe(int hNamedPipe) => _DisconnectNamedPipe(hNamedPipe);
 
-late final _DisconnectNamedPipe = _kernel32.lookupFunction<
+final _DisconnectNamedPipe = _kernel32.lookupFunction<
     Int32 Function(IntPtr hNamedPipe),
     int Function(int hNamedPipe)>('DisconnectNamedPipe');
 
@@ -1051,7 +1051,7 @@ int DnsHostnameToComputerName(Pointer<Utf16> Hostname,
         Pointer<Utf16> ComputerName, Pointer<Uint32> nSize) =>
     _DnsHostnameToComputerName(Hostname, ComputerName, nSize);
 
-late final _DnsHostnameToComputerName = _kernel32.lookupFunction<
+final _DnsHostnameToComputerName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
         Pointer<Uint32> nSize),
     int Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
@@ -1071,7 +1071,7 @@ int DosDateTimeToFileTime(
         int wFatDate, int wFatTime, Pointer<FILETIME> lpFileTime) =>
     _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
 
-late final _DosDateTimeToFileTime = _kernel32.lookupFunction<
+final _DosDateTimeToFileTime = _kernel32.lookupFunction<
     Int32 Function(
         Uint16 wFatDate, Uint16 wFatTime, Pointer<FILETIME> lpFileTime),
     int Function(int wFatDate, int wFatTime,
@@ -1102,7 +1102,7 @@ int DuplicateHandle(
     _DuplicateHandle(hSourceProcessHandle, hSourceHandle, hTargetProcessHandle,
         lpTargetHandle, dwDesiredAccess, bInheritHandle, dwOptions);
 
-late final _DuplicateHandle = _kernel32.lookupFunction<
+final _DuplicateHandle = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hSourceProcessHandle,
         IntPtr hSourceHandle,
@@ -1132,7 +1132,7 @@ late final _DuplicateHandle = _kernel32.lookupFunction<
 int EndUpdateResource(int hUpdate, int fDiscard) =>
     _EndUpdateResource(hUpdate, fDiscard);
 
-late final _EndUpdateResource = _kernel32.lookupFunction<
+final _EndUpdateResource = _kernel32.lookupFunction<
     Int32 Function(IntPtr hUpdate, Int32 fDiscard),
     int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
 
@@ -1150,7 +1150,7 @@ int EnumProcesses(
         Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) =>
     _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
 
-late final _K32EnumProcesses = _kernel32.lookupFunction<
+final _K32EnumProcesses = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
     int Function(Pointer<Uint32> lpidProcess, int cb,
@@ -1171,7 +1171,7 @@ int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded) =>
     _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
 
-late final _K32EnumProcessModules = _kernel32.lookupFunction<
+final _K32EnumProcessModules = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded),
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
@@ -1194,7 +1194,7 @@ int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded, int dwFilterFlag) =>
     _K32EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 
-late final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
+final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
         Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
     int Function(
@@ -1225,7 +1225,7 @@ int EnumResourceNames(int hModule, Pointer<Utf16> lpType,
         Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, int lParam) =>
     _EnumResourceNames(hModule, lpType, lpEnumFunc, lParam);
 
-late final _EnumResourceNames = _kernel32.lookupFunction<
+final _EnumResourceNames = _kernel32.lookupFunction<
     Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
         Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, IntPtr lParam),
     int Function(
@@ -1254,7 +1254,7 @@ int EnumResourceTypes(int hModule,
         Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, int lParam) =>
     _EnumResourceTypes(hModule, lpEnumFunc, lParam);
 
-late final _EnumResourceTypes = _kernel32.lookupFunction<
+final _EnumResourceTypes = _kernel32.lookupFunction<
     Int32 Function(IntPtr hModule,
         Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, IntPtr lParam),
     int Function(
@@ -1275,7 +1275,7 @@ late final _EnumResourceTypes = _kernel32.lookupFunction<
 int EscapeCommFunction(int hFile, int dwFunc) =>
     _EscapeCommFunction(hFile, dwFunc);
 
-late final _EscapeCommFunction = _kernel32.lookupFunction<
+final _EscapeCommFunction = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint32 dwFunc),
     int Function(int hFile, int dwFunc)>('EscapeCommFunction');
 
@@ -1289,8 +1289,7 @@ late final _EscapeCommFunction = _kernel32.lookupFunction<
 /// {@category kernel32}
 void ExitProcess(int uExitCode) => _ExitProcess(uExitCode);
 
-late final _ExitProcess = _kernel32.lookupFunction<
-    Void Function(Uint32 uExitCode),
+final _ExitProcess = _kernel32.lookupFunction<Void Function(Uint32 uExitCode),
     void Function(int uExitCode)>('ExitProcess');
 
 /// Ends the calling thread.
@@ -1303,8 +1302,7 @@ late final _ExitProcess = _kernel32.lookupFunction<
 /// {@category kernel32}
 void ExitThread(int dwExitCode) => _ExitThread(dwExitCode);
 
-late final _ExitThread = _kernel32.lookupFunction<
-    Void Function(Uint32 dwExitCode),
+final _ExitThread = _kernel32.lookupFunction<Void Function(Uint32 dwExitCode),
     void Function(int dwExitCode)>('ExitThread');
 
 /// Converts a file time to MS-DOS date and time values.
@@ -1321,7 +1319,7 @@ int FileTimeToDosDateTime(Pointer<FILETIME> lpFileTime,
         Pointer<Uint16> lpFatDate, Pointer<Uint16> lpFatTime) =>
     _FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime);
 
-late final _FileTimeToDosDateTime = _kernel32.lookupFunction<
+final _FileTimeToDosDateTime = _kernel32.lookupFunction<
     Int32 Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
         Pointer<Uint16> lpFatTime),
     int Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
@@ -1341,7 +1339,7 @@ int FileTimeToSystemTime(
         Pointer<FILETIME> lpFileTime, Pointer<SYSTEMTIME> lpSystemTime) =>
     _FileTimeToSystemTime(lpFileTime, lpSystemTime);
 
-late final _FileTimeToSystemTime = _kernel32.lookupFunction<
+final _FileTimeToSystemTime = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<FILETIME> lpFileTime, Pointer<SYSTEMTIME> lpSystemTime),
     int Function(Pointer<FILETIME> lpFileTime,
@@ -1365,7 +1363,7 @@ int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
     _FillConsoleOutputAttribute(hConsoleOutput, wAttribute, nLength,
         dwWriteCoord, lpNumberOfAttrsWritten);
 
-late final _FillConsoleOutputAttribute = _kernel32.lookupFunction<
+final _FillConsoleOutputAttribute = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Uint16 wAttribute, Uint32 nLength,
         COORD dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten),
     int Function(
@@ -1393,7 +1391,7 @@ int FillConsoleOutputCharacter(int hConsoleOutput, int cCharacter, int nLength,
     _FillConsoleOutputCharacter(hConsoleOutput, cCharacter, nLength,
         dwWriteCoord, lpNumberOfCharsWritten);
 
-late final _FillConsoleOutputCharacter = _kernel32.lookupFunction<
+final _FillConsoleOutputCharacter = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Uint16 cCharacter, Uint32 nLength,
         COORD dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten),
     int Function(
@@ -1416,8 +1414,8 @@ late final _FillConsoleOutputCharacter = _kernel32.lookupFunction<
 /// {@category kernel32}
 int FindClose(int hFindFile) => _FindClose(hFindFile);
 
-late final _FindClose = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFindFile), int Function(int hFindFile)>('FindClose');
+final _FindClose = _kernel32.lookupFunction<Int32 Function(IntPtr hFindFile),
+    int Function(int hFindFile)>('FindClose');
 
 /// Stops change notification handle monitoring.
 ///
@@ -1430,7 +1428,7 @@ late final _FindClose = _kernel32.lookupFunction<
 int FindCloseChangeNotification(int hChangeHandle) =>
     _FindCloseChangeNotification(hChangeHandle);
 
-late final _FindCloseChangeNotification = _kernel32.lookupFunction<
+final _FindCloseChangeNotification = _kernel32.lookupFunction<
     Int32 Function(IntPtr hChangeHandle),
     int Function(int hChangeHandle)>('FindCloseChangeNotification');
 
@@ -1452,7 +1450,7 @@ int FindFirstChangeNotification(
         Pointer<Utf16> lpPathName, int bWatchSubtree, int dwNotifyFilter) =>
     _FindFirstChangeNotification(lpPathName, bWatchSubtree, dwNotifyFilter);
 
-late final _FindFirstChangeNotification = _kernel32.lookupFunction<
+final _FindFirstChangeNotification = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<Utf16> lpPathName, Int32 bWatchSubtree, Uint32 dwNotifyFilter),
     int Function(Pointer<Utf16> lpPathName, int bWatchSubtree,
@@ -1472,7 +1470,7 @@ int FindFirstFile(
         Pointer<Utf16> lpFileName, Pointer<WIN32_FIND_DATA> lpFindFileData) =>
     _FindFirstFile(lpFileName, lpFindFileData);
 
-late final _FindFirstFile = _kernel32.lookupFunction<
+final _FindFirstFile = _kernel32.lookupFunction<
     IntPtr Function(
         Pointer<Utf16> lpFileName, Pointer<WIN32_FIND_DATA> lpFindFileData),
     int Function(Pointer<Utf16> lpFileName,
@@ -1491,7 +1489,7 @@ late final _FindFirstFile = _kernel32.lookupFunction<
 int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) =>
     _FindFirstVolume(lpszVolumeName, cchBufferLength);
 
-late final _FindFirstVolume = _kernel32.lookupFunction<
+final _FindFirstVolume = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpszVolumeName, Uint32 cchBufferLength),
     int Function(Pointer<Utf16> lpszVolumeName,
         int cchBufferLength)>('FindFirstVolumeW');
@@ -1508,7 +1506,7 @@ late final _FindFirstVolume = _kernel32.lookupFunction<
 int FindNextChangeNotification(int hChangeHandle) =>
     _FindNextChangeNotification(hChangeHandle);
 
-late final _FindNextChangeNotification = _kernel32.lookupFunction<
+final _FindNextChangeNotification = _kernel32.lookupFunction<
     Int32 Function(IntPtr hChangeHandle),
     int Function(int hChangeHandle)>('FindNextChangeNotification');
 
@@ -1525,7 +1523,7 @@ late final _FindNextChangeNotification = _kernel32.lookupFunction<
 int FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) =>
     _FindNextFile(hFindFile, lpFindFileData);
 
-late final _FindNextFile = _kernel32.lookupFunction<
+final _FindNextFile = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData),
     int Function(int hFindFile,
         Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
@@ -1545,7 +1543,7 @@ int FindNextVolume(
         int hFindVolume, Pointer<Utf16> lpszVolumeName, int cchBufferLength) =>
     _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
 
-late final _FindNextVolume = _kernel32.lookupFunction<
+final _FindNextVolume = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFindVolume, Pointer<Utf16> lpszVolumeName,
         Uint32 cchBufferLength),
     int Function(int hFindVolume, Pointer<Utf16> lpszVolumeName,
@@ -1576,7 +1574,7 @@ int FindPackagesByPackageFamily(
     _FindPackagesByPackageFamily(packageFamilyName, packageFilters, count,
         packageFullNames, bufferLength, buffer, packageProperties);
 
-late final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
+final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
     Uint32 Function(
         Pointer<Utf16> packageFamilyName,
         Uint32 packageFilters,
@@ -1608,7 +1606,7 @@ late final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
 int FindResource(int hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType) =>
     _FindResource(hModule, lpName, lpType);
 
-late final _FindResource = _kernel32.lookupFunction<
+final _FindResource = _kernel32.lookupFunction<
     IntPtr Function(
         IntPtr hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType),
     int Function(int hModule, Pointer<Utf16> lpName,
@@ -1630,7 +1628,7 @@ int FindResourceEx(int hModule, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         int wLanguage) =>
     _FindResourceEx(hModule, lpType, lpName, wLanguage);
 
-late final _FindResourceEx = _kernel32.lookupFunction<
+final _FindResourceEx = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hModule, Pointer<Utf16> lpType,
         Pointer<Utf16> lpName, Uint16 wLanguage),
     int Function(int hModule, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
@@ -1647,7 +1645,7 @@ late final _FindResourceEx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int FindVolumeClose(int hFindVolume) => _FindVolumeClose(hFindVolume);
 
-late final _FindVolumeClose = _kernel32.lookupFunction<
+final _FindVolumeClose = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFindVolume),
     int Function(int hFindVolume)>('FindVolumeClose');
 
@@ -1663,7 +1661,7 @@ late final _FindVolumeClose = _kernel32.lookupFunction<
 int FlushConsoleInputBuffer(int hConsoleInput) =>
     _FlushConsoleInputBuffer(hConsoleInput);
 
-late final _FlushConsoleInputBuffer = _kernel32.lookupFunction<
+final _FlushConsoleInputBuffer = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleInput),
     int Function(int hConsoleInput)>('FlushConsoleInputBuffer');
 
@@ -1700,7 +1698,7 @@ int FormatMessage(
     _FormatMessage(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer,
         nSize, Arguments);
 
-late final _FormatMessage = _kernel32.lookupFunction<
+final _FormatMessage = _kernel32.lookupFunction<
     Uint32 Function(
         Uint32 dwFlags,
         Pointer lpSource,
@@ -1726,7 +1724,7 @@ late final _FormatMessage = _kernel32.lookupFunction<
 /// {@category kernel32}
 int FreeConsole() => _FreeConsole();
 
-late final _FreeConsole =
+final _FreeConsole =
     _kernel32.lookupFunction<Int32 Function(), int Function()>('FreeConsole');
 
 /// Frees the loaded dynamic-link library (DLL) module and, if necessary,
@@ -1742,8 +1740,7 @@ late final _FreeConsole =
 /// {@category kernel32}
 int FreeLibrary(int hLibModule) => _FreeLibrary(hLibModule);
 
-late final _FreeLibrary = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hLibModule),
+final _FreeLibrary = _kernel32.lookupFunction<Int32 Function(IntPtr hLibModule),
     int Function(int hLibModule)>('FreeLibrary');
 
 /// Decrements the reference count of a loaded dynamic-link library (DLL)
@@ -1760,7 +1757,7 @@ late final _FreeLibrary = _kernel32.lookupFunction<
 void FreeLibraryAndExitThread(int hLibModule, int dwExitCode) =>
     _FreeLibraryAndExitThread(hLibModule, dwExitCode);
 
-late final _FreeLibraryAndExitThread = _kernel32.lookupFunction<
+final _FreeLibraryAndExitThread = _kernel32.lookupFunction<
     Void Function(IntPtr hLibModule, Uint32 dwExitCode),
     void Function(int hLibModule, int dwExitCode)>('FreeLibraryAndExitThread');
 
@@ -1776,7 +1773,7 @@ late final _FreeLibraryAndExitThread = _kernel32.lookupFunction<
 int GetActiveProcessorCount(int GroupNumber) =>
     _GetActiveProcessorCount(GroupNumber);
 
-late final _GetActiveProcessorCount = _kernel32.lookupFunction<
+final _GetActiveProcessorCount = _kernel32.lookupFunction<
     Uint32 Function(Uint16 GroupNumber),
     int Function(int GroupNumber)>('GetActiveProcessorCount');
 
@@ -1788,7 +1785,7 @@ late final _GetActiveProcessorCount = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetActiveProcessorGroupCount() => _GetActiveProcessorGroupCount();
 
-late final _GetActiveProcessorGroupCount =
+final _GetActiveProcessorGroupCount =
     _kernel32.lookupFunction<Uint16 Function(), int Function()>(
         'GetActiveProcessorGroupCount');
 
@@ -1805,7 +1802,7 @@ int GetBinaryType(
         Pointer<Utf16> lpApplicationName, Pointer<Uint32> lpBinaryType) =>
     _GetBinaryType(lpApplicationName, lpBinaryType);
 
-late final _GetBinaryType = _kernel32.lookupFunction<
+final _GetBinaryType = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpApplicationName, Pointer<Uint32> lpBinaryType),
     int Function(Pointer<Utf16> lpApplicationName,
@@ -1821,7 +1818,7 @@ late final _GetBinaryType = _kernel32.lookupFunction<
 /// {@category kernel32}
 Pointer<Utf16> GetCommandLine() => _GetCommandLine();
 
-late final _GetCommandLine = _kernel32.lookupFunction<Pointer<Utf16> Function(),
+final _GetCommandLine = _kernel32.lookupFunction<Pointer<Utf16> Function(),
     Pointer<Utf16> Function()>('GetCommandLineW');
 
 /// Retrieves the current configuration of a communications device.
@@ -1838,7 +1835,7 @@ int GetCommConfig(
         int hCommDev, Pointer<COMMCONFIG> lpCC, Pointer<Uint32> lpdwSize) =>
     _GetCommConfig(hCommDev, lpCC, lpdwSize);
 
-late final _GetCommConfig = _kernel32.lookupFunction<
+final _GetCommConfig = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Pointer<Uint32> lpdwSize),
     int Function(int hCommDev, Pointer<COMMCONFIG> lpCC,
@@ -1857,7 +1854,7 @@ late final _GetCommConfig = _kernel32.lookupFunction<
 int GetCommMask(int hFile, Pointer<Uint32> lpEvtMask) =>
     _GetCommMask(hFile, lpEvtMask);
 
-late final _GetCommMask = _kernel32.lookupFunction<
+final _GetCommMask = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask),
     int Function(int hFile, Pointer<Uint32> lpEvtMask)>('GetCommMask');
 
@@ -1873,7 +1870,7 @@ late final _GetCommMask = _kernel32.lookupFunction<
 int GetCommModemStatus(int hFile, Pointer<Uint32> lpModemStat) =>
     _GetCommModemStatus(hFile, lpModemStat);
 
-late final _GetCommModemStatus = _kernel32.lookupFunction<
+final _GetCommModemStatus = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Uint32> lpModemStat),
     int Function(int hFile, Pointer<Uint32> lpModemStat)>('GetCommModemStatus');
 
@@ -1890,7 +1887,7 @@ late final _GetCommModemStatus = _kernel32.lookupFunction<
 int GetCommProperties(int hFile, Pointer<COMMPROP> lpCommProp) =>
     _GetCommProperties(hFile, lpCommProp);
 
-late final _GetCommProperties = _kernel32.lookupFunction<
+final _GetCommProperties = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<COMMPROP> lpCommProp),
     int Function(int hFile, Pointer<COMMPROP> lpCommProp)>('GetCommProperties');
 
@@ -1906,7 +1903,7 @@ late final _GetCommProperties = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetCommState(int hFile, Pointer<DCB> lpDCB) => _GetCommState(hFile, lpDCB);
 
-late final _GetCommState = _kernel32.lookupFunction<
+final _GetCommState = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
     int Function(int hFile, Pointer<DCB> lpDCB)>('GetCommState');
 
@@ -1923,7 +1920,7 @@ late final _GetCommState = _kernel32.lookupFunction<
 int GetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
     _GetCommTimeouts(hFile, lpCommTimeouts);
 
-late final _GetCommTimeouts = _kernel32.lookupFunction<
+final _GetCommTimeouts = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
     int Function(
         int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)>('GetCommTimeouts');
@@ -1946,7 +1943,7 @@ int GetCompressedFileSize(
         Pointer<Utf16> lpFileName, Pointer<Uint32> lpFileSizeHigh) =>
     _GetCompressedFileSize(lpFileName, lpFileSizeHigh);
 
-late final _GetCompressedFileSize = _kernel32.lookupFunction<
+final _GetCompressedFileSize = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpFileSizeHigh),
     int Function(Pointer<Utf16> lpFileName,
         Pointer<Uint32> lpFileSizeHigh)>('GetCompressedFileSizeW');
@@ -1965,7 +1962,7 @@ late final _GetCompressedFileSize = _kernel32.lookupFunction<
 int GetComputerName(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) =>
     _GetComputerName(lpBuffer, nSize);
 
-late final _GetComputerName = _kernel32.lookupFunction<
+final _GetComputerName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
     int Function(
         Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize)>('GetComputerNameW');
@@ -1986,7 +1983,7 @@ int GetComputerNameEx(
         int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) =>
     _GetComputerNameEx(NameType, lpBuffer, nSize);
 
-late final _GetComputerNameEx = _kernel32.lookupFunction<
+final _GetComputerNameEx = _kernel32.lookupFunction<
     Int32 Function(
         Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
     int Function(int NameType, Pointer<Utf16> lpBuffer,
@@ -2006,7 +2003,7 @@ int GetConsoleCursorInfo(
         int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo) =>
     _GetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
 
-late final _GetConsoleCursorInfo = _kernel32.lookupFunction<
+final _GetConsoleCursorInfo = _kernel32.lookupFunction<
         Int32 Function(IntPtr hConsoleOutput,
             Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
         int Function(int hConsoleOutput,
@@ -2026,7 +2023,7 @@ late final _GetConsoleCursorInfo = _kernel32.lookupFunction<
 int GetConsoleMode(int hConsoleHandle, Pointer<Uint32> lpMode) =>
     _GetConsoleMode(hConsoleHandle, lpMode);
 
-late final _GetConsoleMode = _kernel32.lookupFunction<
+final _GetConsoleMode = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleHandle, Pointer<Uint32> lpMode),
     int Function(int hConsoleHandle, Pointer<Uint32> lpMode)>('GetConsoleMode');
 
@@ -2043,7 +2040,7 @@ int GetConsoleScreenBufferInfo(int hConsoleOutput,
         Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo) =>
     _GetConsoleScreenBufferInfo(hConsoleOutput, lpConsoleScreenBufferInfo);
 
-late final _GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
+final _GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
         Int32 Function(IntPtr hConsoleOutput,
             Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo),
         int Function(int hConsoleOutput,
@@ -2062,7 +2059,7 @@ int GetConsoleSelectionInfo(
         Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo) =>
     _GetConsoleSelectionInfo(lpConsoleSelectionInfo);
 
-late final _GetConsoleSelectionInfo = _kernel32.lookupFunction<
+final _GetConsoleSelectionInfo = _kernel32.lookupFunction<
         Int32 Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo),
         int Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo)>(
     'GetConsoleSelectionInfo');
@@ -2079,7 +2076,7 @@ late final _GetConsoleSelectionInfo = _kernel32.lookupFunction<
 int GetConsoleTitle(Pointer<Utf16> lpConsoleTitle, int nSize) =>
     _GetConsoleTitle(lpConsoleTitle, nSize);
 
-late final _GetConsoleTitle = _kernel32.lookupFunction<
+final _GetConsoleTitle = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpConsoleTitle, Uint32 nSize),
     int Function(Pointer<Utf16> lpConsoleTitle, int nSize)>('GetConsoleTitleW');
 
@@ -2092,7 +2089,7 @@ late final _GetConsoleTitle = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetConsoleWindow() => _GetConsoleWindow();
 
-late final _GetConsoleWindow = _kernel32
+final _GetConsoleWindow = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
 
 /// The GetCurrentActCtx function returns the handle to the active
@@ -2106,7 +2103,7 @@ late final _GetConsoleWindow = _kernel32
 /// {@category kernel32}
 int GetCurrentActCtx(Pointer<IntPtr> lphActCtx) => _GetCurrentActCtx(lphActCtx);
 
-late final _GetCurrentActCtx = _kernel32.lookupFunction<
+final _GetCurrentActCtx = _kernel32.lookupFunction<
     Int32 Function(Pointer<IntPtr> lphActCtx),
     int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
 
@@ -2118,7 +2115,7 @@ late final _GetCurrentActCtx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetCurrentProcess() => _GetCurrentProcess();
 
-late final _GetCurrentProcess = _kernel32
+final _GetCurrentProcess = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
 
 /// Retrieves the process identifier of the calling process.
@@ -2129,7 +2126,7 @@ late final _GetCurrentProcess = _kernel32
 /// {@category kernel32}
 int GetCurrentProcessId() => _GetCurrentProcessId();
 
-late final _GetCurrentProcessId = _kernel32
+final _GetCurrentProcessId = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetCurrentProcessId');
 
 /// Retrieves the number of the processor the current thread was running on
@@ -2141,7 +2138,7 @@ late final _GetCurrentProcessId = _kernel32
 /// {@category kernel32}
 int GetCurrentProcessorNumber() => _GetCurrentProcessorNumber();
 
-late final _GetCurrentProcessorNumber =
+final _GetCurrentProcessorNumber =
     _kernel32.lookupFunction<Uint32 Function(), int Function()>(
         'GetCurrentProcessorNumber');
 
@@ -2153,7 +2150,7 @@ late final _GetCurrentProcessorNumber =
 /// {@category kernel32}
 int GetCurrentThread() => _GetCurrentThread();
 
-late final _GetCurrentThread = _kernel32
+final _GetCurrentThread = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetCurrentThread');
 
 /// Retrieves the thread identifier of the calling thread.
@@ -2164,7 +2161,7 @@ late final _GetCurrentThread = _kernel32
 /// {@category kernel32}
 int GetCurrentThreadId() => _GetCurrentThreadId();
 
-late final _GetCurrentThreadId = _kernel32
+final _GetCurrentThreadId = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetCurrentThreadId');
 
 /// Retrieves the default configuration for the specified communications
@@ -2182,7 +2179,7 @@ int GetDefaultCommConfig(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         Pointer<Uint32> lpdwSize) =>
     _GetDefaultCommConfig(lpszName, lpCC, lpdwSize);
 
-late final _GetDefaultCommConfig = _kernel32.lookupFunction<
+final _GetDefaultCommConfig = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         Pointer<Uint32> lpdwSize),
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
@@ -2210,7 +2207,7 @@ int GetDiskFreeSpace(
     _GetDiskFreeSpace(lpRootPathName, lpSectorsPerCluster, lpBytesPerSector,
         lpNumberOfFreeClusters, lpTotalNumberOfClusters);
 
-late final _GetDiskFreeSpace = _kernel32.lookupFunction<
+final _GetDiskFreeSpace = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpRootPathName,
         Pointer<Uint32> lpSectorsPerCluster,
@@ -2237,7 +2234,7 @@ late final _GetDiskFreeSpace = _kernel32.lookupFunction<
 int GetDllDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) =>
     _GetDllDirectory(nBufferLength, lpBuffer);
 
-late final _GetDllDirectory = _kernel32.lookupFunction<
+final _GetDllDirectory = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetDllDirectoryW');
@@ -2254,7 +2251,7 @@ late final _GetDllDirectory = _kernel32.lookupFunction<
 int GetDriveType(Pointer<Utf16> lpRootPathName) =>
     _GetDriveType(lpRootPathName);
 
-late final _GetDriveType = _kernel32.lookupFunction<
+final _GetDriveType = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpRootPathName),
     int Function(Pointer<Utf16> lpRootPathName)>('GetDriveTypeW');
 
@@ -2273,7 +2270,7 @@ int GetEnvironmentVariable(
         Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, int nSize) =>
     _GetEnvironmentVariable(lpName, lpBuffer, nSize);
 
-late final _GetEnvironmentVariable = _kernel32.lookupFunction<
+final _GetEnvironmentVariable = _kernel32.lookupFunction<
     Uint32 Function(
         Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer, Uint32 nSize),
     int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpBuffer,
@@ -2290,7 +2287,7 @@ late final _GetEnvironmentVariable = _kernel32.lookupFunction<
 int GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) =>
     _GetExitCodeProcess(hProcess, lpExitCode);
 
-late final _GetExitCodeProcess = _kernel32.lookupFunction<
+final _GetExitCodeProcess = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<Uint32> lpExitCode),
     int Function(
         int hProcess, Pointer<Uint32> lpExitCode)>('GetExitCodeProcess');
@@ -2306,7 +2303,7 @@ late final _GetExitCodeProcess = _kernel32.lookupFunction<
 int GetFileAttributes(Pointer<Utf16> lpFileName) =>
     _GetFileAttributes(lpFileName);
 
-late final _GetFileAttributes = _kernel32.lookupFunction<
+final _GetFileAttributes = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpFileName),
     int Function(Pointer<Utf16> lpFileName)>('GetFileAttributesW');
 
@@ -2324,7 +2321,7 @@ int GetFileAttributesEx(Pointer<Utf16> lpFileName, int fInfoLevelId,
         Pointer lpFileInformation) =>
     _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
 
-late final _GetFileAttributesEx = _kernel32.lookupFunction<
+final _GetFileAttributesEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
         Pointer lpFileInformation),
     int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
@@ -2343,7 +2340,7 @@ int GetFileInformationByHandle(
         int hFile, Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation) =>
     _GetFileInformationByHandle(hFile, lpFileInformation);
 
-late final _GetFileInformationByHandle = _kernel32.lookupFunction<
+final _GetFileInformationByHandle = _kernel32.lookupFunction<
         Int32 Function(IntPtr hFile,
             Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation),
         int Function(
@@ -2363,7 +2360,7 @@ late final _GetFileInformationByHandle = _kernel32.lookupFunction<
 int GetFileSize(int hFile, Pointer<Uint32> lpFileSizeHigh) =>
     _GetFileSize(hFile, lpFileSizeHigh);
 
-late final _GetFileSize = _kernel32.lookupFunction<
+final _GetFileSize = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hFile, Pointer<Uint32> lpFileSizeHigh),
     int Function(int hFile, Pointer<Uint32> lpFileSizeHigh)>('GetFileSize');
 
@@ -2379,7 +2376,7 @@ late final _GetFileSize = _kernel32.lookupFunction<
 int GetFileSizeEx(int hFile, Pointer<Int64> lpFileSize) =>
     _GetFileSizeEx(hFile, lpFileSize);
 
-late final _GetFileSizeEx = _kernel32.lookupFunction<
+final _GetFileSizeEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Int64> lpFileSize),
     int Function(int hFile, Pointer<Int64> lpFileSize)>('GetFileSizeEx');
 
@@ -2393,8 +2390,8 @@ late final _GetFileSizeEx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetFileType(int hFile) => _GetFileType(hFile);
 
-late final _GetFileType = _kernel32.lookupFunction<
-    Uint32 Function(IntPtr hFile), int Function(int hFile)>('GetFileType');
+final _GetFileType = _kernel32.lookupFunction<Uint32 Function(IntPtr hFile),
+    int Function(int hFile)>('GetFileType');
 
 /// Retrieves the final path for the specified file.
 ///
@@ -2411,7 +2408,7 @@ int GetFinalPathNameByHandle(
         int hFile, Pointer<Utf16> lpszFilePath, int cchFilePath, int dwFlags) =>
     _GetFinalPathNameByHandle(hFile, lpszFilePath, cchFilePath, dwFlags);
 
-late final _GetFinalPathNameByHandle = _kernel32.lookupFunction<
+final _GetFinalPathNameByHandle = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hFile, Pointer<Utf16> lpszFilePath,
         Uint32 cchFilePath, Uint32 dwFlags),
     int Function(int hFile, Pointer<Utf16> lpszFilePath, int cchFilePath,
@@ -2432,7 +2429,7 @@ int GetFullPathName(Pointer<Utf16> lpFileName, int nBufferLength,
         Pointer<Utf16> lpBuffer, Pointer<Pointer<Utf16>> lpFilePart) =>
     _GetFullPathName(lpFileName, nBufferLength, lpBuffer, lpFilePart);
 
-late final _GetFullPathName = _kernel32.lookupFunction<
+final _GetFullPathName = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpFileName, Uint32 nBufferLength,
         Pointer<Utf16> lpBuffer, Pointer<Pointer<Utf16>> lpFilePart),
     int Function(
@@ -2453,7 +2450,7 @@ late final _GetFullPathName = _kernel32.lookupFunction<
 int GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) =>
     _GetHandleInformation(hObject, lpdwFlags);
 
-late final _GetHandleInformation = _kernel32.lookupFunction<
+final _GetHandleInformation = _kernel32.lookupFunction<
     Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
     int Function(
         int hObject, Pointer<Uint32> lpdwFlags)>('GetHandleInformation');
@@ -2470,7 +2467,7 @@ late final _GetHandleInformation = _kernel32.lookupFunction<
 COORD GetLargestConsoleWindowSize(int hConsoleOutput) =>
     _GetLargestConsoleWindowSize(hConsoleOutput);
 
-late final _GetLargestConsoleWindowSize = _kernel32.lookupFunction<
+final _GetLargestConsoleWindowSize = _kernel32.lookupFunction<
     COORD Function(IntPtr hConsoleOutput),
     COORD Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
 
@@ -2484,7 +2481,7 @@ late final _GetLargestConsoleWindowSize = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetLastError() => _GetLastError();
 
-late final _GetLastError =
+final _GetLastError =
     _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetLastError');
 
 /// Retrieves information about a locale specified by name.
@@ -2502,7 +2499,7 @@ int GetLocaleInfoEx(Pointer<Utf16> lpLocaleName, int LCType,
         Pointer<Utf16> lpLCData, int cchData) =>
     _GetLocaleInfoEx(lpLocaleName, LCType, lpLCData, cchData);
 
-late final _GetLocaleInfoEx = _kernel32.lookupFunction<
+final _GetLocaleInfoEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpLocaleName, Uint32 LCType,
         Pointer<Utf16> lpLCData, Int32 cchData),
     int Function(Pointer<Utf16> lpLocaleName, int LCType,
@@ -2519,7 +2516,7 @@ late final _GetLocaleInfoEx = _kernel32.lookupFunction<
 void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetLocalTime(lpSystemTime);
 
-late final _GetLocalTime = _kernel32.lookupFunction<
+final _GetLocalTime = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEMTIME> lpSystemTime),
     void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
 
@@ -2531,7 +2528,7 @@ late final _GetLocalTime = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetLogicalDrives() => _GetLogicalDrives();
 
-late final _GetLogicalDrives = _kernel32
+final _GetLogicalDrives = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetLogicalDrives');
 
 /// Fills a buffer with strings that specify valid drives in the system.
@@ -2546,7 +2543,7 @@ late final _GetLogicalDrives = _kernel32
 int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) =>
     _GetLogicalDriveStrings(nBufferLength, lpBuffer);
 
-late final _GetLogicalDriveStrings = _kernel32.lookupFunction<
+final _GetLogicalDriveStrings = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
@@ -2566,7 +2563,7 @@ int GetMachineTypeAttributes(
         int Machine, Pointer<Uint32> MachineTypeAttributes) =>
     _GetMachineTypeAttributes(Machine, MachineTypeAttributes);
 
-late final _GetMachineTypeAttributes = _kernel32.lookupFunction<
+final _GetMachineTypeAttributes = _kernel32.lookupFunction<
     Int32 Function(Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
     int Function(int Machine,
         Pointer<Uint32> MachineTypeAttributes)>('GetMachineTypeAttributes');
@@ -2583,7 +2580,7 @@ late final _GetMachineTypeAttributes = _kernel32.lookupFunction<
 int GetMaximumProcessorCount(int GroupNumber) =>
     _GetMaximumProcessorCount(GroupNumber);
 
-late final _GetMaximumProcessorCount = _kernel32.lookupFunction<
+final _GetMaximumProcessorCount = _kernel32.lookupFunction<
     Uint32 Function(Uint16 GroupNumber),
     int Function(int GroupNumber)>('GetMaximumProcessorCount');
 
@@ -2596,7 +2593,7 @@ late final _GetMaximumProcessorCount = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetMaximumProcessorGroupCount() => _GetMaximumProcessorGroupCount();
 
-late final _GetMaximumProcessorGroupCount =
+final _GetMaximumProcessorGroupCount =
     _kernel32.lookupFunction<Uint16 Function(), int Function()>(
         'GetMaximumProcessorGroupCount');
 
@@ -2615,7 +2612,7 @@ int GetModuleBaseName(
         int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) =>
     _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
 
-late final _K32GetModuleBaseName = _kernel32.lookupFunction<
+final _K32GetModuleBaseName = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
@@ -2636,7 +2633,7 @@ late final _K32GetModuleBaseName = _kernel32.lookupFunction<
 int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) =>
     _GetModuleFileName(hModule, lpFilename, nSize);
 
-late final _GetModuleFileName = _kernel32.lookupFunction<
+final _GetModuleFileName = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
     int Function(int hModule, Pointer<Utf16> lpFilename,
         int nSize)>('GetModuleFileNameW');
@@ -2657,7 +2654,7 @@ int GetModuleFileNameEx(
         int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) =>
     _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
 
-late final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
+final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename,
         Uint32 nSize),
     int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
@@ -2675,7 +2672,7 @@ late final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
 int GetModuleHandle(Pointer<Utf16> lpModuleName) =>
     _GetModuleHandle(lpModuleName);
 
-late final _GetModuleHandle = _kernel32.lookupFunction<
+final _GetModuleHandle = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpModuleName),
     int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
 
@@ -2694,7 +2691,7 @@ int GetNamedPipeClientComputerName(int Pipe, Pointer<Utf16> ClientComputerName,
     _GetNamedPipeClientComputerName(
         Pipe, ClientComputerName, ClientComputerNameLength);
 
-late final _GetNamedPipeClientComputerName = _kernel32.lookupFunction<
+final _GetNamedPipeClientComputerName = _kernel32.lookupFunction<
     Int32 Function(IntPtr Pipe, Pointer<Utf16> ClientComputerName,
         Uint32 ClientComputerNameLength),
     int Function(int Pipe, Pointer<Utf16> ClientComputerName,
@@ -2712,7 +2709,7 @@ late final _GetNamedPipeClientComputerName = _kernel32.lookupFunction<
 int GetNamedPipeClientProcessId(int Pipe, Pointer<Uint32> ClientProcessId) =>
     _GetNamedPipeClientProcessId(Pipe, ClientProcessId);
 
-late final _GetNamedPipeClientProcessId = _kernel32.lookupFunction<
+final _GetNamedPipeClientProcessId = _kernel32.lookupFunction<
     Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientProcessId),
     int Function(int Pipe,
         Pointer<Uint32> ClientProcessId)>('GetNamedPipeClientProcessId');
@@ -2729,7 +2726,7 @@ late final _GetNamedPipeClientProcessId = _kernel32.lookupFunction<
 int GetNamedPipeClientSessionId(int Pipe, Pointer<Uint32> ClientSessionId) =>
     _GetNamedPipeClientSessionId(Pipe, ClientSessionId);
 
-late final _GetNamedPipeClientSessionId = _kernel32.lookupFunction<
+final _GetNamedPipeClientSessionId = _kernel32.lookupFunction<
     Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientSessionId),
     int Function(int Pipe,
         Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
@@ -2766,7 +2763,7 @@ int GetNamedPipeHandleState(
         lpUserName,
         nMaxUserNameSize);
 
-late final _GetNamedPipeHandleState = _kernel32.lookupFunction<
+final _GetNamedPipeHandleState = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hNamedPipe,
         Pointer<Uint32> lpState,
@@ -2804,7 +2801,7 @@ int GetNamedPipeInfo(
     _GetNamedPipeInfo(
         hNamedPipe, lpFlags, lpOutBufferSize, lpInBufferSize, lpMaxInstances);
 
-late final _GetNamedPipeInfo = _kernel32.lookupFunction<
+final _GetNamedPipeInfo = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hNamedPipe,
         Pointer<Uint32> lpFlags,
@@ -2833,7 +2830,7 @@ late final _GetNamedPipeInfo = _kernel32.lookupFunction<
 void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetNativeSystemInfo(lpSystemInfo);
 
-late final _GetNativeSystemInfo = _kernel32.lookupFunction<
+final _GetNativeSystemInfo = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
     void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
 
@@ -2855,7 +2852,7 @@ int GetOverlappedResult(int hFile, Pointer<OVERLAPPED> lpOverlapped,
     _GetOverlappedResult(
         hFile, lpOverlapped, lpNumberOfBytesTransferred, bWait);
 
-late final _GetOverlappedResult = _kernel32.lookupFunction<
+final _GetOverlappedResult = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<OVERLAPPED> lpOverlapped,
         Pointer<Uint32> lpNumberOfBytesTransferred, Int32 bWait),
     int Function(
@@ -2887,7 +2884,7 @@ int GetOverlappedResultEx(
     _GetOverlappedResultEx(hFile, lpOverlapped, lpNumberOfBytesTransferred,
         dwMilliseconds, bAlertable);
 
-late final _GetOverlappedResultEx = _kernel32.lookupFunction<
+final _GetOverlappedResultEx = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile,
         Pointer<OVERLAPPED> lpOverlapped,
@@ -2914,7 +2911,7 @@ int GetPhysicallyInstalledSystemMemory(
         Pointer<Uint64> TotalMemoryInKilobytes) =>
     _GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes);
 
-late final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
+final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
         Int32 Function(Pointer<Uint64> TotalMemoryInKilobytes),
         int Function(Pointer<Uint64> TotalMemoryInKilobytes)>(
     'GetPhysicallyInstalledSystemMemory');
@@ -2932,7 +2929,7 @@ late final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
 Pointer GetProcAddress(int hModule, Pointer<Utf8> lpProcName) =>
     _GetProcAddress(hModule, lpProcName);
 
-late final _GetProcAddress = _kernel32.lookupFunction<
+final _GetProcAddress = _kernel32.lookupFunction<
     Pointer Function(IntPtr hModule, Pointer<Utf8> lpProcName),
     Pointer Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
 
@@ -2945,7 +2942,7 @@ late final _GetProcAddress = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetProcessHeap() => _GetProcessHeap();
 
-late final _GetProcessHeap = _kernel32
+final _GetProcessHeap = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
 
 /// Returns the number of active heaps and retrieves handles to all of the
@@ -2961,7 +2958,7 @@ late final _GetProcessHeap = _kernel32
 int GetProcessHeaps(int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps) =>
     _GetProcessHeaps(NumberOfHeaps, ProcessHeaps);
 
-late final _GetProcessHeaps = _kernel32.lookupFunction<
+final _GetProcessHeaps = _kernel32.lookupFunction<
     Uint32 Function(Uint32 NumberOfHeaps, Pointer<IntPtr> ProcessHeaps),
     int Function(
         int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
@@ -2976,8 +2973,8 @@ late final _GetProcessHeaps = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetProcessId(int Process) => _GetProcessId(Process);
 
-late final _GetProcessId = _kernel32.lookupFunction<
-    Uint32 Function(IntPtr Process), int Function(int Process)>('GetProcessId');
+final _GetProcessId = _kernel32.lookupFunction<Uint32 Function(IntPtr Process),
+    int Function(int Process)>('GetProcessId');
 
 /// Retrieves the shutdown parameters for the currently calling process.
 ///
@@ -2992,7 +2989,7 @@ int GetProcessShutdownParameters(
         Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags) =>
     _GetProcessShutdownParameters(lpdwLevel, lpdwFlags);
 
-late final _GetProcessShutdownParameters = _kernel32.lookupFunction<
+final _GetProcessShutdownParameters = _kernel32.lookupFunction<
     Int32 Function(Pointer<Uint32> lpdwLevel, Pointer<Uint32> lpdwFlags),
     int Function(Pointer<Uint32> lpdwLevel,
         Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
@@ -3008,7 +3005,7 @@ late final _GetProcessShutdownParameters = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetProcessVersion(int ProcessId) => _GetProcessVersion(ProcessId);
 
-late final _GetProcessVersion = _kernel32.lookupFunction<
+final _GetProcessVersion = _kernel32.lookupFunction<
     Uint32 Function(Uint32 ProcessId),
     int Function(int ProcessId)>('GetProcessVersion');
 
@@ -3030,7 +3027,7 @@ int GetProcessWorkingSetSize(
     _GetProcessWorkingSetSize(
         hProcess, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize);
 
-late final _GetProcessWorkingSetSize = _kernel32.lookupFunction<
+final _GetProcessWorkingSetSize = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lpMinimumWorkingSetSize,
         Pointer<IntPtr> lpMaximumWorkingSetSize),
     int Function(int hProcess, Pointer<IntPtr> lpMinimumWorkingSetSize,
@@ -3059,7 +3056,7 @@ int GetProductInfo(
     _GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion,
         dwSpMinorVersion, pdwReturnedProductType);
 
-late final _GetProductInfo = _kernel32.lookupFunction<
+final _GetProductInfo = _kernel32.lookupFunction<
     Int32 Function(
         Uint32 dwOSMajorVersion,
         Uint32 dwOSMinorVersion,
@@ -3097,7 +3094,7 @@ int GetQueuedCompletionStatus(
     _GetQueuedCompletionStatus(CompletionPort, lpNumberOfBytesTransferred,
         lpCompletionKey, lpOverlapped, dwMilliseconds);
 
-late final _GetQueuedCompletionStatus = _kernel32.lookupFunction<
+final _GetQueuedCompletionStatus = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr CompletionPort,
         Pointer<Uint32> lpNumberOfBytesTransferred,
@@ -3136,7 +3133,7 @@ int GetQueuedCompletionStatusEx(
     _GetQueuedCompletionStatusEx(CompletionPort, lpCompletionPortEntries,
         ulCount, ulNumEntriesRemoved, dwMilliseconds, fAlertable);
 
-late final _GetQueuedCompletionStatusEx = _kernel32.lookupFunction<
+final _GetQueuedCompletionStatusEx = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr CompletionPort,
         Pointer<OVERLAPPED_ENTRY> lpCompletionPortEntries,
@@ -3164,7 +3161,7 @@ late final _GetQueuedCompletionStatusEx = _kernel32.lookupFunction<
 void GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo) =>
     _GetStartupInfo(lpStartupInfo);
 
-late final _GetStartupInfo = _kernel32.lookupFunction<
+final _GetStartupInfo = _kernel32.lookupFunction<
     Void Function(Pointer<STARTUPINFO> lpStartupInfo),
     void Function(Pointer<STARTUPINFO> lpStartupInfo)>('GetStartupInfoW');
 
@@ -3179,7 +3176,7 @@ late final _GetStartupInfo = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetStdHandle(int nStdHandle) => _GetStdHandle(nStdHandle);
 
-late final _GetStdHandle = _kernel32.lookupFunction<
+final _GetStdHandle = _kernel32.lookupFunction<
     IntPtr Function(Uint32 nStdHandle),
     int Function(int nStdHandle)>('GetStdHandle');
 
@@ -3191,7 +3188,7 @@ late final _GetStdHandle = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetSystemDefaultLangID() => _GetSystemDefaultLangID();
 
-late final _GetSystemDefaultLangID =
+final _GetSystemDefaultLangID =
     _kernel32.lookupFunction<Uint16 Function(), int Function()>(
         'GetSystemDefaultLangID');
 
@@ -3208,7 +3205,7 @@ int GetSystemDefaultLocaleName(
         Pointer<Utf16> lpLocaleName, int cchLocaleName) =>
     _GetSystemDefaultLocaleName(lpLocaleName, cchLocaleName);
 
-late final _GetSystemDefaultLocaleName = _kernel32.lookupFunction<
+final _GetSystemDefaultLocaleName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
     int Function(Pointer<Utf16> lpLocaleName,
         int cchLocaleName)>('GetSystemDefaultLocaleName');
@@ -3226,7 +3223,7 @@ late final _GetSystemDefaultLocaleName = _kernel32.lookupFunction<
 int GetSystemDirectory(Pointer<Utf16> lpBuffer, int uSize) =>
     _GetSystemDirectory(lpBuffer, uSize);
 
-late final _GetSystemDirectory = _kernel32.lookupFunction<
+final _GetSystemDirectory = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
     int Function(Pointer<Utf16> lpBuffer, int uSize)>('GetSystemDirectoryW');
 
@@ -3243,7 +3240,7 @@ late final _GetSystemDirectory = _kernel32.lookupFunction<
 void GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetSystemInfo(lpSystemInfo);
 
-late final _GetSystemInfo = _kernel32.lookupFunction<
+final _GetSystemInfo = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
     void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
 
@@ -3261,7 +3258,7 @@ late final _GetSystemInfo = _kernel32.lookupFunction<
 int GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) =>
     _GetSystemPowerStatus(lpSystemPowerStatus);
 
-late final _GetSystemPowerStatus = _kernel32.lookupFunction<
+final _GetSystemPowerStatus = _kernel32.lookupFunction<
         Int32 Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus),
         int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
     'GetSystemPowerStatus');
@@ -3277,7 +3274,7 @@ late final _GetSystemPowerStatus = _kernel32.lookupFunction<
 void GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetSystemTime(lpSystemTime);
 
-late final _GetSystemTime = _kernel32.lookupFunction<
+final _GetSystemTime = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEMTIME> lpSystemTime),
     void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
 
@@ -3297,7 +3294,7 @@ int GetSystemTimes(Pointer<FILETIME> lpIdleTime, Pointer<FILETIME> lpKernelTime,
         Pointer<FILETIME> lpUserTime) =>
     _GetSystemTimes(lpIdleTime, lpKernelTime, lpUserTime);
 
-late final _GetSystemTimes = _kernel32.lookupFunction<
+final _GetSystemTimes = _kernel32.lookupFunction<
     Int32 Function(Pointer<FILETIME> lpIdleTime, Pointer<FILETIME> lpKernelTime,
         Pointer<FILETIME> lpUserTime),
     int Function(Pointer<FILETIME> lpIdleTime, Pointer<FILETIME> lpKernelTime,
@@ -3315,7 +3312,7 @@ late final _GetSystemTimes = _kernel32.lookupFunction<
 int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) =>
     _GetTempPath(nBufferLength, lpBuffer);
 
-late final _GetTempPath = _kernel32.lookupFunction<
+final _GetTempPath = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
 
@@ -3329,8 +3326,8 @@ late final _GetTempPath = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetThreadId(int Thread) => _GetThreadId(Thread);
 
-late final _GetThreadId = _kernel32.lookupFunction<
-    Uint32 Function(IntPtr Thread), int Function(int Thread)>('GetThreadId');
+final _GetThreadId = _kernel32.lookupFunction<Uint32 Function(IntPtr Thread),
+    int Function(int Thread)>('GetThreadId');
 
 /// Returns the locale identifier of the current locale for the calling
 /// thread.
@@ -3341,7 +3338,7 @@ late final _GetThreadId = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetThreadLocale() => _GetThreadLocale();
 
-late final _GetThreadLocale = _kernel32
+final _GetThreadLocale = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
 
 /// Retrieves timing information for the specified thread.
@@ -3365,7 +3362,7 @@ int GetThreadTimes(
     _GetThreadTimes(
         hThread, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime);
 
-late final _GetThreadTimes = _kernel32.lookupFunction<
+final _GetThreadTimes = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hThread,
         Pointer<FILETIME> lpCreationTime,
@@ -3388,7 +3385,7 @@ late final _GetThreadTimes = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GetThreadUILanguage() => _GetThreadUILanguage();
 
-late final _GetThreadUILanguage = _kernel32
+final _GetThreadUILanguage = _kernel32
     .lookupFunction<Uint16 Function(), int Function()>('GetThreadUILanguage');
 
 /// Returns the language identifier of the Region Format setting for the
@@ -3400,7 +3397,7 @@ late final _GetThreadUILanguage = _kernel32
 /// {@category kernel32}
 int GetUserDefaultLangID() => _GetUserDefaultLangID();
 
-late final _GetUserDefaultLangID = _kernel32
+final _GetUserDefaultLangID = _kernel32
     .lookupFunction<Uint16 Function(), int Function()>('GetUserDefaultLangID');
 
 /// Returns the locale identifier for the user default locale.
@@ -3411,7 +3408,7 @@ late final _GetUserDefaultLangID = _kernel32
 /// {@category kernel32}
 int GetUserDefaultLCID() => _GetUserDefaultLCID();
 
-late final _GetUserDefaultLCID = _kernel32
+final _GetUserDefaultLCID = _kernel32
     .lookupFunction<Uint32 Function(), int Function()>('GetUserDefaultLCID');
 
 /// Retrieves the user default locale name.
@@ -3426,7 +3423,7 @@ late final _GetUserDefaultLCID = _kernel32
 int GetUserDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) =>
     _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
 
-late final _GetUserDefaultLocaleName = _kernel32.lookupFunction<
+final _GetUserDefaultLocaleName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
     int Function(Pointer<Utf16> lpLocaleName,
         int cchLocaleName)>('GetUserDefaultLocaleName');
@@ -3442,7 +3439,7 @@ late final _GetUserDefaultLocaleName = _kernel32.lookupFunction<
 int GetVersionEx(Pointer<OSVERSIONINFO> lpVersionInformation) =>
     _GetVersionEx(lpVersionInformation);
 
-late final _GetVersionEx = _kernel32.lookupFunction<
+final _GetVersionEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
     int Function(Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
 
@@ -3459,7 +3456,7 @@ int GetVolumePathName(Pointer<Utf16> lpszFileName,
         Pointer<Utf16> lpszVolumePathName, int cchBufferLength) =>
     _GetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength);
 
-late final _GetVolumePathName = _kernel32.lookupFunction<
+final _GetVolumePathName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpszFileName,
         Pointer<Utf16> lpszVolumePathName, Uint32 cchBufferLength),
     int Function(Pointer<Utf16> lpszFileName, Pointer<Utf16> lpszVolumePathName,
@@ -3485,7 +3482,7 @@ int GetVolumePathNamesForVolumeName(
     _GetVolumePathNamesForVolumeName(lpszVolumeName, lpszVolumePathNames,
         cchBufferLength, lpcchReturnLength);
 
-late final _GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
+final _GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpszVolumeName,
         Pointer<Utf16> lpszVolumePathNames,
@@ -3508,7 +3505,7 @@ late final _GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GlobalAlloc(int uFlags, int dwBytes) => _GlobalAlloc(uFlags, dwBytes);
 
-late final _GlobalAlloc = _kernel32.lookupFunction<
+final _GlobalAlloc = _kernel32.lookupFunction<
     IntPtr Function(Uint32 uFlags, IntPtr dwBytes),
     int Function(int uFlags, int dwBytes)>('GlobalAlloc');
 
@@ -3522,7 +3519,7 @@ late final _GlobalAlloc = _kernel32.lookupFunction<
 /// {@category kernel32}
 int GlobalFree(int hMem) => _GlobalFree(hMem);
 
-late final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
     int Function(int hMem)>('GlobalFree');
 
 /// Locks a global memory object and returns a pointer to the first byte of
@@ -3536,7 +3533,7 @@ late final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
 /// {@category kernel32}
 Pointer GlobalLock(int hMem) => _GlobalLock(hMem);
 
-late final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
+final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
     Pointer Function(int hMem)>('GlobalLock');
 
 /// Retrieves the current size of the specified global memory object, in
@@ -3550,7 +3547,7 @@ late final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
 /// {@category kernel32}
 int GlobalSize(int hMem) => _GlobalSize(hMem);
 
-late final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
     int Function(int hMem)>('GlobalSize');
 
 /// Decrements the lock count associated with a memory object that was
@@ -3565,7 +3562,7 @@ late final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
 /// {@category kernel32}
 int GlobalUnlock(int hMem) => _GlobalUnlock(hMem);
 
-late final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hMem),
+final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hMem),
     int Function(int hMem)>('GlobalUnlock');
 
 /// Allocates a block of memory from a heap. The allocated memory is not
@@ -3582,7 +3579,7 @@ late final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hMem),
 Pointer HeapAlloc(int hHeap, int dwFlags, int dwBytes) =>
     _HeapAlloc(hHeap, dwFlags, dwBytes);
 
-late final _HeapAlloc = _kernel32.lookupFunction<
+final _HeapAlloc = _kernel32.lookupFunction<
     Pointer Function(IntPtr hHeap, Uint32 dwFlags, IntPtr dwBytes),
     Pointer Function(int hHeap, int dwFlags, int dwBytes)>('HeapAlloc');
 
@@ -3599,7 +3596,7 @@ late final _HeapAlloc = _kernel32.lookupFunction<
 /// {@category kernel32}
 int HeapCompact(int hHeap, int dwFlags) => _HeapCompact(hHeap, dwFlags);
 
-late final _HeapCompact = _kernel32.lookupFunction<
+final _HeapCompact = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hHeap, Uint32 dwFlags),
     int Function(int hHeap, int dwFlags)>('HeapCompact');
 
@@ -3619,7 +3616,7 @@ late final _HeapCompact = _kernel32.lookupFunction<
 int HeapCreate(int flOptions, int dwInitialSize, int dwMaximumSize) =>
     _HeapCreate(flOptions, dwInitialSize, dwMaximumSize);
 
-late final _HeapCreate = _kernel32.lookupFunction<
+final _HeapCreate = _kernel32.lookupFunction<
     IntPtr Function(
         Uint32 flOptions, IntPtr dwInitialSize, IntPtr dwMaximumSize),
     int Function(
@@ -3637,7 +3634,7 @@ late final _HeapCreate = _kernel32.lookupFunction<
 /// {@category kernel32}
 int HeapDestroy(int hHeap) => _HeapDestroy(hHeap);
 
-late final _HeapDestroy = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+final _HeapDestroy = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
     int Function(int hHeap)>('HeapDestroy');
 
 /// Frees a memory block allocated from a heap by the HeapAlloc or
@@ -3654,7 +3651,7 @@ late final _HeapDestroy = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
 int HeapFree(int hHeap, int dwFlags, Pointer lpMem) =>
     _HeapFree(hHeap, dwFlags, lpMem);
 
-late final _HeapFree = _kernel32.lookupFunction<
+final _HeapFree = _kernel32.lookupFunction<
     Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
     int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
 
@@ -3669,7 +3666,7 @@ late final _HeapFree = _kernel32.lookupFunction<
 /// {@category kernel32}
 int HeapLock(int hHeap) => _HeapLock(hHeap);
 
-late final _HeapLock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+final _HeapLock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
     int Function(int hHeap)>('HeapLock');
 
 /// Retrieves information about the specified heap.
@@ -3693,7 +3690,7 @@ int HeapQueryInformation(
     _HeapQueryInformation(HeapHandle, HeapInformationClass, HeapInformation,
         HeapInformationLength, ReturnLength);
 
-late final _HeapQueryInformation = _kernel32.lookupFunction<
+final _HeapQueryInformation = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr HeapHandle,
         Int32 HeapInformationClass,
@@ -3721,7 +3718,7 @@ late final _HeapQueryInformation = _kernel32.lookupFunction<
 Pointer HeapReAlloc(int hHeap, int dwFlags, Pointer lpMem, int dwBytes) =>
     _HeapReAlloc(hHeap, dwFlags, lpMem, dwBytes);
 
-late final _HeapReAlloc = _kernel32.lookupFunction<
+final _HeapReAlloc = _kernel32.lookupFunction<
     Pointer Function(
         IntPtr hHeap, Uint32 dwFlags, Pointer lpMem, IntPtr dwBytes),
     Pointer Function(
@@ -3743,7 +3740,7 @@ int HeapSetInformation(int HeapHandle, int HeapInformationClass,
     _HeapSetInformation(HeapHandle, HeapInformationClass, HeapInformation,
         HeapInformationLength);
 
-late final _HeapSetInformation = _kernel32.lookupFunction<
+final _HeapSetInformation = _kernel32.lookupFunction<
     Int32 Function(IntPtr HeapHandle, Int32 HeapInformationClass,
         Pointer HeapInformation, IntPtr HeapInformationLength),
     int Function(
@@ -3766,7 +3763,7 @@ late final _HeapSetInformation = _kernel32.lookupFunction<
 int HeapSize(int hHeap, int dwFlags, Pointer lpMem) =>
     _HeapSize(hHeap, dwFlags, lpMem);
 
-late final _HeapSize = _kernel32.lookupFunction<
+final _HeapSize = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
     int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapSize');
 
@@ -3782,7 +3779,7 @@ late final _HeapSize = _kernel32.lookupFunction<
 /// {@category kernel32}
 int HeapUnlock(int hHeap) => _HeapUnlock(hHeap);
 
-late final _HeapUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+final _HeapUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
     int Function(int hHeap)>('HeapUnlock');
 
 /// Validates the specified heap. The function scans all the memory blocks
@@ -3802,7 +3799,7 @@ late final _HeapUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
 int HeapValidate(int hHeap, int dwFlags, Pointer lpMem) =>
     _HeapValidate(hHeap, dwFlags, lpMem);
 
-late final _HeapValidate = _kernel32.lookupFunction<
+final _HeapValidate = _kernel32.lookupFunction<
     Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
     int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapValidate');
 
@@ -3818,7 +3815,7 @@ late final _HeapValidate = _kernel32.lookupFunction<
 int HeapWalk(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) =>
     _HeapWalk(hHeap, lpEntry);
 
-late final _HeapWalk = _kernel32.lookupFunction<
+final _HeapWalk = _kernel32.lookupFunction<
     Int32 Function(IntPtr hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry),
     int Function(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry)>('HeapWalk');
 
@@ -3839,7 +3836,7 @@ int InitializeProcThreadAttributeList(Pointer lpAttributeList,
     _InitializeProcThreadAttributeList(
         lpAttributeList, dwAttributeCount, dwFlags, lpSize);
 
-late final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
+final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
     Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
         Uint32 dwFlags, Pointer<IntPtr> lpSize),
     int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
@@ -3854,7 +3851,7 @@ late final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
 /// {@category kernel32}
 int IsDebuggerPresent() => _IsDebuggerPresent();
 
-late final _IsDebuggerPresent = _kernel32
+final _IsDebuggerPresent = _kernel32
     .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
 
 /// Indicates if the OS was booted from a VHD container.
@@ -3868,7 +3865,7 @@ late final _IsDebuggerPresent = _kernel32
 int IsNativeVhdBoot(Pointer<Int32> NativeVhdBoot) =>
     _IsNativeVhdBoot(NativeVhdBoot);
 
-late final _IsNativeVhdBoot = _kernel32.lookupFunction<
+final _IsNativeVhdBoot = _kernel32.lookupFunction<
     Int32 Function(Pointer<Int32> NativeVhdBoot),
     int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
 
@@ -3880,7 +3877,7 @@ late final _IsNativeVhdBoot = _kernel32.lookupFunction<
 /// {@category kernel32}
 int IsSystemResumeAutomatic() => _IsSystemResumeAutomatic();
 
-late final _IsSystemResumeAutomatic =
+final _IsSystemResumeAutomatic =
     _kernel32.lookupFunction<Int32 Function(), int Function()>(
         'IsSystemResumeAutomatic');
 
@@ -3896,7 +3893,7 @@ late final _IsSystemResumeAutomatic =
 int IsValidLocaleName(Pointer<Utf16> lpLocaleName) =>
     _IsValidLocaleName(lpLocaleName);
 
-late final _IsValidLocaleName = _kernel32.lookupFunction<
+final _IsValidLocaleName = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpLocaleName),
     int Function(Pointer<Utf16> lpLocaleName)>('IsValidLocaleName');
 
@@ -3915,7 +3912,7 @@ int IsWow64Process2(int hProcess, Pointer<Uint16> pProcessMachine,
         Pointer<Uint16> pNativeMachine) =>
     _IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
 
-late final _IsWow64Process2 = _kernel32.lookupFunction<
+final _IsWow64Process2 = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<Uint16> pProcessMachine,
         Pointer<Uint16> pNativeMachine),
     int Function(int hProcess, Pointer<Uint16> pProcessMachine,
@@ -3932,7 +3929,7 @@ late final _IsWow64Process2 = _kernel32.lookupFunction<
 /// {@category kernel32}
 int LoadLibrary(Pointer<Utf16> lpLibFileName) => _LoadLibrary(lpLibFileName);
 
-late final _LoadLibrary = _kernel32.lookupFunction<
+final _LoadLibrary = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpLibFileName),
     int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
 
@@ -3950,7 +3947,7 @@ late final _LoadLibrary = _kernel32.lookupFunction<
 int LoadLibraryEx(Pointer<Utf16> lpLibFileName, int hFile, int dwFlags) =>
     _LoadLibraryEx(lpLibFileName, hFile, dwFlags);
 
-late final _LoadLibraryEx = _kernel32.lookupFunction<
+final _LoadLibraryEx = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpLibFileName, IntPtr hFile, Uint32 dwFlags),
     int Function(Pointer<Utf16> lpLibFileName, int hFile,
         int dwFlags)>('LoadLibraryExW');
@@ -3967,7 +3964,7 @@ late final _LoadLibraryEx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int LoadResource(int hModule, int hResInfo) => _LoadResource(hModule, hResInfo);
 
-late final _LoadResource = _kernel32.lookupFunction<
+final _LoadResource = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hModule, IntPtr hResInfo),
     int Function(int hModule, int hResInfo)>('LoadResource');
 
@@ -3981,7 +3978,7 @@ late final _LoadResource = _kernel32.lookupFunction<
 /// {@category kernel32}
 int LocalFree(int hMem) => _LocalFree(hMem);
 
-late final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
     int Function(int hMem)>('LocalFree');
 
 /// Retrieves a pointer to the specified resource in memory.
@@ -3994,7 +3991,7 @@ late final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
 /// {@category kernel32}
 Pointer LockResource(int hResData) => _LockResource(hResData);
 
-late final _LockResource = _kernel32.lookupFunction<
+final _LockResource = _kernel32.lookupFunction<
     Pointer Function(IntPtr hResData),
     Pointer Function(int hResData)>('LockResource');
 
@@ -4010,7 +4007,7 @@ late final _LockResource = _kernel32.lookupFunction<
 int MoveFile(Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName) =>
     _MoveFile(lpExistingFileName, lpNewFileName);
 
-late final _MoveFile = _kernel32.lookupFunction<
+final _MoveFile = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName),
     int Function(Pointer<Utf16> lpExistingFileName,
@@ -4029,7 +4026,7 @@ late final _MoveFile = _kernel32.lookupFunction<
 int OpenEvent(int dwDesiredAccess, int bInheritHandle, Pointer<Utf16> lpName) =>
     _OpenEvent(dwDesiredAccess, bInheritHandle, lpName);
 
-late final _OpenEvent = _kernel32.lookupFunction<
+final _OpenEvent = _kernel32.lookupFunction<
     IntPtr Function(
         Uint32 dwDesiredAccess, Int32 bInheritHandle, Pointer<Utf16> lpName),
     int Function(int dwDesiredAccess, int bInheritHandle,
@@ -4048,7 +4045,7 @@ late final _OpenEvent = _kernel32.lookupFunction<
 int OpenProcess(int dwDesiredAccess, int bInheritHandle, int dwProcessId) =>
     _OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
 
-late final _OpenProcess = _kernel32.lookupFunction<
+final _OpenProcess = _kernel32.lookupFunction<
     IntPtr Function(
         Uint32 dwDesiredAccess, Int32 bInheritHandle, Uint32 dwProcessId),
     int Function(int dwDesiredAccess, int bInheritHandle,
@@ -4065,7 +4062,7 @@ late final _OpenProcess = _kernel32.lookupFunction<
 void OutputDebugString(Pointer<Utf16> lpOutputString) =>
     _OutputDebugString(lpOutputString);
 
-late final _OutputDebugString = _kernel32.lookupFunction<
+final _OutputDebugString = _kernel32.lookupFunction<
     Void Function(Pointer<Utf16> lpOutputString),
     void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
 
@@ -4086,7 +4083,7 @@ int PackageFamilyNameFromFullName(
     _PackageFamilyNameFromFullName(
         packageFullName, packageFamilyNameLength, packageFamilyName);
 
-late final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
+final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
     Uint32 Function(
         Pointer<Utf16> packageFullName,
         Pointer<Uint32> packageFamilyNameLength,
@@ -4120,7 +4117,7 @@ int PeekNamedPipe(
     _PeekNamedPipe(hNamedPipe, lpBuffer, nBufferSize, lpBytesRead,
         lpTotalBytesAvail, lpBytesLeftThisMessage);
 
-late final _PeekNamedPipe = _kernel32.lookupFunction<
+final _PeekNamedPipe = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hNamedPipe,
         Pointer lpBuffer,
@@ -4155,7 +4152,7 @@ int PostQueuedCompletionStatus(
     _PostQueuedCompletionStatus(CompletionPort, dwNumberOfBytesTransferred,
         dwCompletionKey, lpOverlapped);
 
-late final _PostQueuedCompletionStatus = _kernel32.lookupFunction<
+final _PostQueuedCompletionStatus = _kernel32.lookupFunction<
     Int32 Function(IntPtr CompletionPort, Uint32 dwNumberOfBytesTransferred,
         IntPtr dwCompletionKey, Pointer<OVERLAPPED> lpOverlapped),
     int Function(
@@ -4177,7 +4174,7 @@ late final _PostQueuedCompletionStatus = _kernel32.lookupFunction<
 /// {@category kernel32}
 int PurgeComm(int hFile, int dwFlags) => _PurgeComm(hFile, dwFlags);
 
-late final _PurgeComm = _kernel32.lookupFunction<
+final _PurgeComm = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint32 dwFlags),
     int Function(int hFile, int dwFlags)>('PurgeComm');
 
@@ -4197,7 +4194,7 @@ int QueryDosDevice(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
         int ucchMax) =>
     _QueryDosDevice(lpDeviceName, lpTargetPath, ucchMax);
 
-late final _QueryDosDevice = _kernel32.lookupFunction<
+final _QueryDosDevice = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
         Uint32 ucchMax),
     int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
@@ -4216,7 +4213,7 @@ late final _QueryDosDevice = _kernel32.lookupFunction<
 int QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) =>
     _QueryPerformanceCounter(lpPerformanceCount);
 
-late final _QueryPerformanceCounter = _kernel32.lookupFunction<
+final _QueryPerformanceCounter = _kernel32.lookupFunction<
     Int32 Function(Pointer<Int64> lpPerformanceCount),
     int Function(Pointer<Int64> lpPerformanceCount)>('QueryPerformanceCounter');
 
@@ -4234,7 +4231,7 @@ late final _QueryPerformanceCounter = _kernel32.lookupFunction<
 int QueryPerformanceFrequency(Pointer<Int64> lpFrequency) =>
     _QueryPerformanceFrequency(lpFrequency);
 
-late final _QueryPerformanceFrequency = _kernel32.lookupFunction<
+final _QueryPerformanceFrequency = _kernel32.lookupFunction<
     Int32 Function(Pointer<Int64> lpFrequency),
     int Function(Pointer<Int64> lpFrequency)>('QueryPerformanceFrequency');
 
@@ -4260,7 +4257,7 @@ int ReadConsole(
     _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
         lpNumberOfCharsRead, pInputControl);
 
-late final _ReadConsole = _kernel32.lookupFunction<
+final _ReadConsole = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hConsoleInput,
         Pointer lpBuffer,
@@ -4297,7 +4294,7 @@ int ReadFile(
     _ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead,
         lpOverlapped);
 
-late final _ReadFile = _kernel32.lookupFunction<
+final _ReadFile = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer lpBuffer, Uint32 nNumberOfBytesToRead,
         Pointer<Uint32> lpNumberOfBytesRead, Pointer<OVERLAPPED> lpOverlapped),
     int Function(
@@ -4327,7 +4324,7 @@ int ReadProcessMemory(int hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
     _ReadProcessMemory(
         hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
 
-late final _ReadProcessMemory = _kernel32.lookupFunction<
+final _ReadProcessMemory = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
         IntPtr nSize, Pointer<IntPtr> lpNumberOfBytesRead),
     int Function(int hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
@@ -4344,8 +4341,8 @@ late final _ReadProcessMemory = _kernel32.lookupFunction<
 /// {@category kernel32}
 void ReleaseActCtx(int hActCtx) => _ReleaseActCtx(hActCtx);
 
-late final _ReleaseActCtx = _kernel32.lookupFunction<
-    Void Function(IntPtr hActCtx), void Function(int hActCtx)>('ReleaseActCtx');
+final _ReleaseActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
+    void Function(int hActCtx)>('ReleaseActCtx');
 
 /// Deletes an existing empty directory.
 ///
@@ -4357,7 +4354,7 @@ late final _ReleaseActCtx = _kernel32.lookupFunction<
 /// {@category kernel32}
 int RemoveDirectory(Pointer<Utf16> lpPathName) => _RemoveDirectory(lpPathName);
 
-late final _RemoveDirectory = _kernel32.lookupFunction<
+final _RemoveDirectory = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpPathName),
     int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
 
@@ -4372,7 +4369,7 @@ late final _RemoveDirectory = _kernel32.lookupFunction<
 /// {@category kernel32}
 int RemoveDllDirectory(Pointer Cookie) => _RemoveDllDirectory(Cookie);
 
-late final _RemoveDllDirectory = _kernel32.lookupFunction<
+final _RemoveDllDirectory = _kernel32.lookupFunction<
     Int32 Function(Pointer Cookie),
     int Function(Pointer Cookie)>('RemoveDllDirectory');
 
@@ -4392,7 +4389,7 @@ int ReOpenFile(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
     _ReOpenFile(
         hOriginalFile, dwDesiredAccess, dwShareMode, dwFlagsAndAttributes);
 
-late final _ReOpenFile = _kernel32.lookupFunction<
+final _ReOpenFile = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hOriginalFile, Uint32 dwDesiredAccess,
         Uint32 dwShareMode, Uint32 dwFlagsAndAttributes),
     int Function(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
@@ -4408,7 +4405,7 @@ late final _ReOpenFile = _kernel32.lookupFunction<
 /// {@category kernel32}
 int ResetEvent(int hEvent) => _ResetEvent(hEvent);
 
-late final _ResetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+final _ResetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
     int Function(int hEvent)>('ResetEvent');
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
@@ -4422,7 +4419,7 @@ late final _ResetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
 /// {@category kernel32}
 int ResizePseudoConsole(int hPC, COORD size) => _ResizePseudoConsole(hPC, size);
 
-late final _ResizePseudoConsole = _kernel32.lookupFunction<
+final _ResizePseudoConsole = _kernel32.lookupFunction<
     Int32 Function(IntPtr hPC, COORD size),
     int Function(int hPC, COORD size)>('ResizePseudoConsole');
 
@@ -4449,7 +4446,7 @@ int ScrollConsoleScreenBuffer(
     _ScrollConsoleScreenBuffer(hConsoleOutput, lpScrollRectangle,
         lpClipRectangle, dwDestinationOrigin, lpFill);
 
-late final _ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
+final _ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hConsoleOutput,
         Pointer<SMALL_RECT> lpScrollRectangle,
@@ -4475,8 +4472,8 @@ late final _ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetCommBreak(int hFile) => _SetCommBreak(hFile);
 
-late final _SetCommBreak = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFile), int Function(int hFile)>('SetCommBreak');
+final _SetCommBreak = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+    int Function(int hFile)>('SetCommBreak');
 
 /// Sets the current configuration of a communications device.
 ///
@@ -4491,7 +4488,7 @@ late final _SetCommBreak = _kernel32.lookupFunction<
 int SetCommConfig(int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize) =>
     _SetCommConfig(hCommDev, lpCC, dwSize);
 
-late final _SetCommConfig = _kernel32.lookupFunction<
+final _SetCommConfig = _kernel32.lookupFunction<
     Int32 Function(IntPtr hCommDev, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
     int Function(
         int hCommDev, Pointer<COMMCONFIG> lpCC, int dwSize)>('SetCommConfig');
@@ -4507,7 +4504,7 @@ late final _SetCommConfig = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetCommMask(int hFile, int dwEvtMask) => _SetCommMask(hFile, dwEvtMask);
 
-late final _SetCommMask = _kernel32.lookupFunction<
+final _SetCommMask = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint32 dwEvtMask),
     int Function(int hFile, int dwEvtMask)>('SetCommMask');
 
@@ -4525,7 +4522,7 @@ late final _SetCommMask = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetCommState(int hFile, Pointer<DCB> lpDCB) => _SetCommState(hFile, lpDCB);
 
-late final _SetCommState = _kernel32.lookupFunction<
+final _SetCommState = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<DCB> lpDCB),
     int Function(int hFile, Pointer<DCB> lpDCB)>('SetCommState');
 
@@ -4542,7 +4539,7 @@ late final _SetCommState = _kernel32.lookupFunction<
 int SetCommTimeouts(int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts) =>
     _SetCommTimeouts(hFile, lpCommTimeouts);
 
-late final _SetCommTimeouts = _kernel32.lookupFunction<
+final _SetCommTimeouts = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts),
     int Function(
         int hFile, Pointer<COMMTIMEOUTS> lpCommTimeouts)>('SetCommTimeouts');
@@ -4561,7 +4558,7 @@ int SetConsoleCtrlHandler(
         Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, int Add) =>
     _SetConsoleCtrlHandler(HandlerRoutine, Add);
 
-late final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
+final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine, Int32 Add),
     int Function(Pointer<NativeFunction<HandlerRoutine>> HandlerRoutine,
@@ -4581,7 +4578,7 @@ int SetConsoleCursorInfo(
         int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo) =>
     _SetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
 
-late final _SetConsoleCursorInfo = _kernel32.lookupFunction<
+final _SetConsoleCursorInfo = _kernel32.lookupFunction<
         Int32 Function(IntPtr hConsoleOutput,
             Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
         int Function(int hConsoleOutput,
@@ -4600,7 +4597,7 @@ late final _SetConsoleCursorInfo = _kernel32.lookupFunction<
 int SetConsoleCursorPosition(int hConsoleOutput, COORD dwCursorPosition) =>
     _SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
 
-late final _SetConsoleCursorPosition = _kernel32.lookupFunction<
+final _SetConsoleCursorPosition = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, COORD dwCursorPosition),
     int Function(int hConsoleOutput,
         COORD dwCursorPosition)>('SetConsoleCursorPosition');
@@ -4620,7 +4617,7 @@ int SetConsoleDisplayMode(int hConsoleOutput, int dwFlags,
     _SetConsoleDisplayMode(
         hConsoleOutput, dwFlags, lpNewScreenBufferDimensions);
 
-late final _SetConsoleDisplayMode = _kernel32.lookupFunction<
+final _SetConsoleDisplayMode = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Uint32 dwFlags,
         Pointer<COORD> lpNewScreenBufferDimensions),
     int Function(int hConsoleOutput, int dwFlags,
@@ -4639,7 +4636,7 @@ late final _SetConsoleDisplayMode = _kernel32.lookupFunction<
 int SetConsoleMode(int hConsoleHandle, int dwMode) =>
     _SetConsoleMode(hConsoleHandle, dwMode);
 
-late final _SetConsoleMode = _kernel32.lookupFunction<
+final _SetConsoleMode = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleHandle, Uint32 dwMode),
     int Function(int hConsoleHandle, int dwMode)>('SetConsoleMode');
 
@@ -4658,7 +4655,7 @@ late final _SetConsoleMode = _kernel32.lookupFunction<
 int SetConsoleTextAttribute(int hConsoleOutput, int wAttributes) =>
     _SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 
-late final _SetConsoleTextAttribute = _kernel32.lookupFunction<
+final _SetConsoleTextAttribute = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Uint16 wAttributes),
     int Function(
         int hConsoleOutput, int wAttributes)>('SetConsoleTextAttribute');
@@ -4677,7 +4674,7 @@ int SetConsoleWindowInfo(int hConsoleOutput, int bAbsolute,
         Pointer<SMALL_RECT> lpConsoleWindow) =>
     _SetConsoleWindowInfo(hConsoleOutput, bAbsolute, lpConsoleWindow);
 
-late final _SetConsoleWindowInfo = _kernel32.lookupFunction<
+final _SetConsoleWindowInfo = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Int32 bAbsolute,
         Pointer<SMALL_RECT> lpConsoleWindow),
     int Function(int hConsoleOutput, int bAbsolute,
@@ -4694,7 +4691,7 @@ late final _SetConsoleWindowInfo = _kernel32.lookupFunction<
 int SetCurrentDirectory(Pointer<Utf16> lpPathName) =>
     _SetCurrentDirectory(lpPathName);
 
-late final _SetCurrentDirectory = _kernel32.lookupFunction<
+final _SetCurrentDirectory = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpPathName),
     int Function(Pointer<Utf16> lpPathName)>('SetCurrentDirectoryW');
 
@@ -4712,7 +4709,7 @@ int SetDefaultCommConfig(
         Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, int dwSize) =>
     _SetDefaultCommConfig(lpszName, lpCC, dwSize);
 
-late final _SetDefaultCommConfig = _kernel32.lookupFunction<
+final _SetDefaultCommConfig = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC, Uint32 dwSize),
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
@@ -4731,7 +4728,7 @@ late final _SetDefaultCommConfig = _kernel32.lookupFunction<
 int SetDefaultDllDirectories(int DirectoryFlags) =>
     _SetDefaultDllDirectories(DirectoryFlags);
 
-late final _SetDefaultDllDirectories = _kernel32.lookupFunction<
+final _SetDefaultDllDirectories = _kernel32.lookupFunction<
     Int32 Function(Uint32 DirectoryFlags),
     int Function(int DirectoryFlags)>('SetDefaultDllDirectories');
 
@@ -4748,7 +4745,7 @@ late final _SetDefaultDllDirectories = _kernel32.lookupFunction<
 int SetEnvironmentVariable(Pointer<Utf16> lpName, Pointer<Utf16> lpValue) =>
     _SetEnvironmentVariable(lpName, lpValue);
 
-late final _SetEnvironmentVariable = _kernel32.lookupFunction<
+final _SetEnvironmentVariable = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpValue),
     int Function(Pointer<Utf16> lpName,
         Pointer<Utf16> lpValue)>('SetEnvironmentVariableW');
@@ -4763,7 +4760,7 @@ late final _SetEnvironmentVariable = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetEvent(int hEvent) => _SetEvent(hEvent);
 
-late final _SetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
+final _SetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
     int Function(int hEvent)>('SetEvent');
 
 /// Moves the file pointer of the specified file.
@@ -4781,7 +4778,7 @@ int SetFilePointer(int hFile, int lDistanceToMove,
         Pointer<Int32> lpDistanceToMoveHigh, int dwMoveMethod) =>
     _SetFilePointer(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod);
 
-late final _SetFilePointer = _kernel32.lookupFunction<
+final _SetFilePointer = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hFile, Int32 lDistanceToMove,
         Pointer<Int32> lpDistanceToMoveHigh, Uint32 dwMoveMethod),
     int Function(
@@ -4805,7 +4802,7 @@ int SetFilePointerEx(int hFile, int liDistanceToMove,
         Pointer<Int64> lpNewFilePointer, int dwMoveMethod) =>
     _SetFilePointerEx(hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod);
 
-late final _SetFilePointerEx = _kernel32.lookupFunction<
+final _SetFilePointerEx = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Int64 liDistanceToMove,
         Pointer<Int64> lpNewFilePointer, Uint32 dwMoveMethod),
     int Function(int hFile, int liDistanceToMove,
@@ -4823,7 +4820,7 @@ late final _SetFilePointerEx = _kernel32.lookupFunction<
 int SetFileShortName(int hFile, Pointer<Utf16> lpShortName) =>
     _SetFileShortName(hFile, lpShortName);
 
-late final _SetFileShortName = _kernel32.lookupFunction<
+final _SetFileShortName = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
     int Function(int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
 
@@ -4842,7 +4839,7 @@ int SetFirmwareEnvironmentVariable(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
         Pointer pValue, int nSize) =>
     _SetFirmwareEnvironmentVariable(lpName, lpGuid, pValue, nSize);
 
-late final _SetFirmwareEnvironmentVariable = _kernel32.lookupFunction<
+final _SetFirmwareEnvironmentVariable = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
         Uint32 nSize),
     int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
@@ -4866,7 +4863,7 @@ int SetFirmwareEnvironmentVariableEx(Pointer<Utf16> lpName,
     _SetFirmwareEnvironmentVariableEx(
         lpName, lpGuid, pValue, nSize, dwAttributes);
 
-late final _SetFirmwareEnvironmentVariableEx = _kernel32.lookupFunction<
+final _SetFirmwareEnvironmentVariableEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
         Uint32 nSize, Uint32 dwAttributes),
     int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
@@ -4885,7 +4882,7 @@ late final _SetFirmwareEnvironmentVariableEx = _kernel32.lookupFunction<
 int SetHandleInformation(int hObject, int dwMask, int dwFlags) =>
     _SetHandleInformation(hObject, dwMask, dwFlags);
 
-late final _SetHandleInformation = _kernel32.lookupFunction<
+final _SetHandleInformation = _kernel32.lookupFunction<
     Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
     int Function(int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
 
@@ -4910,7 +4907,7 @@ int SetNamedPipeHandleState(
     _SetNamedPipeHandleState(
         hNamedPipe, lpMode, lpMaxCollectionCount, lpCollectDataTimeout);
 
-late final _SetNamedPipeHandleState = _kernel32.lookupFunction<
+final _SetNamedPipeHandleState = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hNamedPipe,
         Pointer<Uint32> lpMode,
@@ -4935,7 +4932,7 @@ late final _SetNamedPipeHandleState = _kernel32.lookupFunction<
 int SetProcessAffinityMask(int hProcess, int dwProcessAffinityMask) =>
     _SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
 
-late final _SetProcessAffinityMask = _kernel32.lookupFunction<
+final _SetProcessAffinityMask = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, IntPtr dwProcessAffinityMask),
     int Function(
         int hProcess, int dwProcessAffinityMask)>('SetProcessAffinityMask');
@@ -4953,7 +4950,7 @@ late final _SetProcessAffinityMask = _kernel32.lookupFunction<
 int SetProcessPriorityBoost(int hProcess, int bDisablePriorityBoost) =>
     _SetProcessPriorityBoost(hProcess, bDisablePriorityBoost);
 
-late final _SetProcessPriorityBoost = _kernel32.lookupFunction<
+final _SetProcessPriorityBoost = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Int32 bDisablePriorityBoost),
     int Function(
         int hProcess, int bDisablePriorityBoost)>('SetProcessPriorityBoost');
@@ -4974,7 +4971,7 @@ int SetProcessWorkingSetSize(int hProcess, int dwMinimumWorkingSetSize,
     _SetProcessWorkingSetSize(
         hProcess, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize);
 
-late final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
+final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, IntPtr dwMinimumWorkingSetSize,
         IntPtr dwMaximumWorkingSetSize),
     int Function(int hProcess, int dwMinimumWorkingSetSize,
@@ -4993,7 +4990,7 @@ late final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
 int SetStdHandle(int nStdHandle, int hHandle) =>
     _SetStdHandle(nStdHandle, hHandle);
 
-late final _SetStdHandle = _kernel32.lookupFunction<
+final _SetStdHandle = _kernel32.lookupFunction<
     Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
     int Function(int nStdHandle, int hHandle)>('SetStdHandle');
 
@@ -5009,7 +5006,7 @@ late final _SetStdHandle = _kernel32.lookupFunction<
 int SetThreadAffinityMask(int hThread, int dwThreadAffinityMask) =>
     _SetThreadAffinityMask(hThread, dwThreadAffinityMask);
 
-late final _SetThreadAffinityMask = _kernel32.lookupFunction<
+final _SetThreadAffinityMask = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hThread, IntPtr dwThreadAffinityMask),
     int Function(
         int hThread, int dwThreadAffinityMask)>('SetThreadAffinityMask');
@@ -5026,7 +5023,7 @@ late final _SetThreadAffinityMask = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetThreadExecutionState(int esFlags) => _SetThreadExecutionState(esFlags);
 
-late final _SetThreadExecutionState = _kernel32.lookupFunction<
+final _SetThreadExecutionState = _kernel32.lookupFunction<
     Uint32 Function(Uint32 esFlags),
     int Function(int esFlags)>('SetThreadExecutionState');
 
@@ -5040,7 +5037,7 @@ late final _SetThreadExecutionState = _kernel32.lookupFunction<
 /// {@category kernel32}
 int SetThreadUILanguage(int LangId) => _SetThreadUILanguage(LangId);
 
-late final _SetThreadUILanguage = _kernel32.lookupFunction<
+final _SetThreadUILanguage = _kernel32.lookupFunction<
     Uint16 Function(Uint16 LangId),
     int Function(int LangId)>('SetThreadUILanguage');
 
@@ -5058,7 +5055,7 @@ late final _SetThreadUILanguage = _kernel32.lookupFunction<
 int SetupComm(int hFile, int dwInQueue, int dwOutQueue) =>
     _SetupComm(hFile, dwInQueue, dwOutQueue);
 
-late final _SetupComm = _kernel32.lookupFunction<
+final _SetupComm = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint32 dwInQueue, Uint32 dwOutQueue),
     int Function(int hFile, int dwInQueue, int dwOutQueue)>('SetupComm');
 
@@ -5074,7 +5071,7 @@ int SetVolumeLabel(
         Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName) =>
     _SetVolumeLabel(lpRootPathName, lpVolumeName);
 
-late final _SetVolumeLabel = _kernel32.lookupFunction<
+final _SetVolumeLabel = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName),
     int Function(Pointer<Utf16> lpRootPathName,
         Pointer<Utf16> lpVolumeName)>('SetVolumeLabelW');
@@ -5090,8 +5087,7 @@ late final _SetVolumeLabel = _kernel32.lookupFunction<
 /// {@category kernel32}
 void Sleep(int dwMilliseconds) => _Sleep(dwMilliseconds);
 
-late final _Sleep = _kernel32.lookupFunction<
-    Void Function(Uint32 dwMilliseconds),
+final _Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
     void Function(int dwMilliseconds)>('Sleep');
 
 /// Suspends the current thread until the specified condition is met.
@@ -5110,7 +5106,7 @@ late final _Sleep = _kernel32.lookupFunction<
 int SleepEx(int dwMilliseconds, int bAlertable) =>
     _SleepEx(dwMilliseconds, bAlertable);
 
-late final _SleepEx = _kernel32.lookupFunction<
+final _SleepEx = _kernel32.lookupFunction<
     Uint32 Function(Uint32 dwMilliseconds, Int32 bAlertable),
     int Function(int dwMilliseconds, int bAlertable)>('SleepEx');
 
@@ -5128,7 +5124,7 @@ int SystemTimeToFileTime(
         Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime) =>
     _SystemTimeToFileTime(lpSystemTime, lpFileTime);
 
-late final _SystemTimeToFileTime = _kernel32.lookupFunction<
+final _SystemTimeToFileTime = _kernel32.lookupFunction<
     Int32 Function(
         Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime),
     int Function(Pointer<SYSTEMTIME> lpSystemTime,
@@ -5145,7 +5141,7 @@ late final _SystemTimeToFileTime = _kernel32.lookupFunction<
 int TerminateProcess(int hProcess, int uExitCode) =>
     _TerminateProcess(hProcess, uExitCode);
 
-late final _TerminateProcess = _kernel32.lookupFunction<
+final _TerminateProcess = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Uint32 uExitCode),
     int Function(int hProcess, int uExitCode)>('TerminateProcess');
 
@@ -5161,7 +5157,7 @@ late final _TerminateProcess = _kernel32.lookupFunction<
 int TerminateThread(int hThread, int dwExitCode) =>
     _TerminateThread(hThread, dwExitCode);
 
-late final _TerminateThread = _kernel32.lookupFunction<
+final _TerminateThread = _kernel32.lookupFunction<
     Int32 Function(IntPtr hThread, Uint32 dwExitCode),
     int Function(int hThread, int dwExitCode)>('TerminateThread');
 
@@ -5190,7 +5186,7 @@ int TransactNamedPipe(
     _TransactNamedPipe(hNamedPipe, lpInBuffer, nInBufferSize, lpOutBuffer,
         nOutBufferSize, lpBytesRead, lpOverlapped);
 
-late final _TransactNamedPipe = _kernel32.lookupFunction<
+final _TransactNamedPipe = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hNamedPipe,
         Pointer lpInBuffer,
@@ -5220,7 +5216,7 @@ late final _TransactNamedPipe = _kernel32.lookupFunction<
 /// {@category kernel32}
 int TransmitCommChar(int hFile, int cChar) => _TransmitCommChar(hFile, cChar);
 
-late final _TransmitCommChar = _kernel32.lookupFunction<
+final _TransmitCommChar = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint8 cChar),
     int Function(int hFile, int cChar)>('TransmitCommChar');
 
@@ -5250,7 +5246,7 @@ int UpdateProcThreadAttribute(
     _UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute, lpValue,
         cbSize, lpPreviousValue, lpReturnSize);
 
-late final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
+final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
     Int32 Function(
         Pointer lpAttributeList,
         Uint32 dwFlags,
@@ -5286,7 +5282,7 @@ int UpdateResource(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         int wLanguage, Pointer lpData, int cb) =>
     _UpdateResource(hUpdate, lpType, lpName, wLanguage, lpData, cb);
 
-late final _UpdateResource = _kernel32.lookupFunction<
+final _UpdateResource = _kernel32.lookupFunction<
     Int32 Function(IntPtr hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         Uint16 wLanguage, Pointer lpData, Uint32 cb),
     int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
@@ -5308,7 +5304,7 @@ int VerifyVersionInfo(Pointer<OSVERSIONINFOEX> lpVersionInformation,
         int dwTypeMask, int dwlConditionMask) =>
     _VerifyVersionInfo(lpVersionInformation, dwTypeMask, dwlConditionMask);
 
-late final _VerifyVersionInfo = _kernel32.lookupFunction<
+final _VerifyVersionInfo = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFOEX> lpVersionInformation,
         Uint32 dwTypeMask, Uint64 dwlConditionMask),
     int Function(Pointer<OSVERSIONINFOEX> lpVersionInformation, int dwTypeMask,
@@ -5328,7 +5324,7 @@ late final _VerifyVersionInfo = _kernel32.lookupFunction<
 int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) =>
     _VerLanguageName(wLang, szLang, cchLang);
 
-late final _VerLanguageName = _kernel32.lookupFunction<
+final _VerLanguageName = _kernel32.lookupFunction<
     Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
     int Function(
         int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
@@ -5349,7 +5345,7 @@ late final _VerLanguageName = _kernel32.lookupFunction<
 int VerSetConditionMask(int ConditionMask, int TypeMask, int Condition) =>
     _VerSetConditionMask(ConditionMask, TypeMask, Condition);
 
-late final _VerSetConditionMask = _kernel32.lookupFunction<
+final _VerSetConditionMask = _kernel32.lookupFunction<
     Uint64 Function(Uint64 ConditionMask, Uint32 TypeMask, Uint8 Condition),
     int Function(
         int ConditionMask, int TypeMask, int Condition)>('VerSetConditionMask');
@@ -5371,7 +5367,7 @@ Pointer VirtualAlloc(
         Pointer lpAddress, int dwSize, int flAllocationType, int flProtect) =>
     _VirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
 
-late final _VirtualAlloc = _kernel32.lookupFunction<
+final _VirtualAlloc = _kernel32.lookupFunction<
     Pointer Function(Pointer lpAddress, IntPtr dwSize, Uint32 flAllocationType,
         Uint32 flProtect),
     Pointer Function(Pointer lpAddress, int dwSize, int flAllocationType,
@@ -5395,7 +5391,7 @@ Pointer VirtualAllocEx(int hProcess, Pointer lpAddress, int dwSize,
         int flAllocationType, int flProtect) =>
     _VirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect);
 
-late final _VirtualAllocEx = _kernel32.lookupFunction<
+final _VirtualAllocEx = _kernel32.lookupFunction<
     Pointer Function(IntPtr hProcess, Pointer lpAddress, IntPtr dwSize,
         Uint32 flAllocationType, Uint32 flProtect),
     Pointer Function(int hProcess, Pointer lpAddress, int dwSize,
@@ -5415,7 +5411,7 @@ late final _VirtualAllocEx = _kernel32.lookupFunction<
 int VirtualFree(Pointer lpAddress, int dwSize, int dwFreeType) =>
     _VirtualFree(lpAddress, dwSize, dwFreeType);
 
-late final _VirtualFree = _kernel32.lookupFunction<
+final _VirtualFree = _kernel32.lookupFunction<
     Int32 Function(Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
     int Function(Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
 
@@ -5435,7 +5431,7 @@ int VirtualFreeEx(
         int hProcess, Pointer lpAddress, int dwSize, int dwFreeType) =>
     _VirtualFreeEx(hProcess, lpAddress, dwSize, dwFreeType);
 
-late final _VirtualFreeEx = _kernel32.lookupFunction<
+final _VirtualFreeEx = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hProcess, Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
     int Function(int hProcess, Pointer lpAddress, int dwSize,
@@ -5455,7 +5451,7 @@ late final _VirtualFreeEx = _kernel32.lookupFunction<
 int VirtualLock(Pointer lpAddress, int dwSize) =>
     _VirtualLock(lpAddress, dwSize);
 
-late final _VirtualLock = _kernel32.lookupFunction<
+final _VirtualLock = _kernel32.lookupFunction<
     Int32 Function(Pointer lpAddress, IntPtr dwSize),
     int Function(Pointer lpAddress, int dwSize)>('VirtualLock');
 
@@ -5473,7 +5469,7 @@ late final _VirtualLock = _kernel32.lookupFunction<
 int VirtualUnlock(Pointer lpAddress, int dwSize) =>
     _VirtualUnlock(lpAddress, dwSize);
 
-late final _VirtualUnlock = _kernel32.lookupFunction<
+final _VirtualUnlock = _kernel32.lookupFunction<
     Int32 Function(Pointer lpAddress, IntPtr dwSize),
     int Function(Pointer lpAddress, int dwSize)>('VirtualUnlock');
 
@@ -5493,7 +5489,7 @@ int WaitCommEvent(int hFile, Pointer<Uint32> lpEvtMask,
         Pointer<OVERLAPPED> lpOverlapped) =>
     _WaitCommEvent(hFile, lpEvtMask, lpOverlapped);
 
-late final _WaitCommEvent = _kernel32.lookupFunction<
+final _WaitCommEvent = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Uint32> lpEvtMask,
         Pointer<OVERLAPPED> lpOverlapped),
     int Function(int hFile, Pointer<Uint32> lpEvtMask,
@@ -5512,7 +5508,7 @@ late final _WaitCommEvent = _kernel32.lookupFunction<
 int WaitForSingleObject(int hHandle, int dwMilliseconds) =>
     _WaitForSingleObject(hHandle, dwMilliseconds);
 
-late final _WaitForSingleObject = _kernel32.lookupFunction<
+final _WaitForSingleObject = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hHandle, Uint32 dwMilliseconds),
     int Function(int hHandle, int dwMilliseconds)>('WaitForSingleObject');
 
@@ -5544,7 +5540,7 @@ int WideCharToMultiByte(
     _WideCharToMultiByte(CodePage, dwFlags, lpWideCharStr, cchWideChar,
         lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar);
 
-late final _WideCharToMultiByte = _kernel32.lookupFunction<
+final _WideCharToMultiByte = _kernel32.lookupFunction<
     Int32 Function(
         Uint32 CodePage,
         Uint32 dwFlags,
@@ -5574,7 +5570,7 @@ late final _WideCharToMultiByte = _kernel32.lookupFunction<
 /// {@category kernel32}
 int Wow64SuspendThread(int hThread) => _Wow64SuspendThread(hThread);
 
-late final _Wow64SuspendThread = _kernel32.lookupFunction<
+final _Wow64SuspendThread = _kernel32.lookupFunction<
     Uint32 Function(IntPtr hThread),
     int Function(int hThread)>('Wow64SuspendThread');
 
@@ -5600,7 +5596,7 @@ int WriteConsole(
     _WriteConsole(hConsoleOutput, lpBuffer, nNumberOfCharsToWrite,
         lpNumberOfCharsWritten, lpReserved);
 
-late final _WriteConsole = _kernel32.lookupFunction<
+final _WriteConsole = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hConsoleOutput,
         Pointer lpBuffer,
@@ -5635,7 +5631,7 @@ int WriteFile(
     _WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, lpNumberOfBytesWritten,
         lpOverlapped);
 
-late final _WriteFile = _kernel32.lookupFunction<
+final _WriteFile = _kernel32.lookupFunction<
     Int32 Function(
         IntPtr hFile,
         Pointer lpBuffer,
@@ -5667,7 +5663,7 @@ int WriteProcessMemory(int hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
     _WriteProcessMemory(
         hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
 
-late final _WriteProcessMemory = _kernel32.lookupFunction<
+final _WriteProcessMemory = _kernel32.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
         IntPtr nSize, Pointer<IntPtr> lpNumberOfBytesWritten),
     int Function(

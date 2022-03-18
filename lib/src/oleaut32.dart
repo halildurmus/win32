@@ -35,7 +35,7 @@ int DosDateTimeToVariantTime(
         int wDosDate, int wDosTime, Pointer<Double> pvtime) =>
     _DosDateTimeToVariantTime(wDosDate, wDosTime, pvtime);
 
-late final _DosDateTimeToVariantTime = _oleaut32.lookupFunction<
+final _DosDateTimeToVariantTime = _oleaut32.lookupFunction<
     Int32 Function(Uint16 wDosDate, Uint16 wDosTime, Pointer<Double> pvtime),
     int Function(int wDosDate, int wDosTime,
         Pointer<Double> pvtime)>('DosDateTimeToVariantTime');
@@ -55,7 +55,7 @@ int GetActiveObject(Pointer<GUID> rclsid, Pointer pvReserved,
         Pointer<Pointer<COMObject>> ppunk) =>
     _GetActiveObject(rclsid, pvReserved, ppunk);
 
-late final _GetActiveObject = _oleaut32.lookupFunction<
+final _GetActiveObject = _oleaut32.lookupFunction<
     Int32 Function(Pointer<GUID> rclsid, Pointer pvReserved,
         Pointer<Pointer<COMObject>> ppunk),
     int Function(Pointer<GUID> rclsid, Pointer pvReserved,
@@ -71,7 +71,7 @@ late final _GetActiveObject = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 Pointer<Utf16> SysAllocString(Pointer<Utf16> psz) => _SysAllocString(psz);
 
-late final _SysAllocString = _oleaut32.lookupFunction<
+final _SysAllocString = _oleaut32.lookupFunction<
     Pointer<Utf16> Function(Pointer<Utf16> psz),
     Pointer<Utf16> Function(Pointer<Utf16> psz)>('SysAllocString');
 
@@ -88,7 +88,7 @@ late final _SysAllocString = _oleaut32.lookupFunction<
 Pointer<Utf16> SysAllocStringByteLen(Pointer<Utf8> psz, int len) =>
     _SysAllocStringByteLen(psz, len);
 
-late final _SysAllocStringByteLen = _oleaut32.lookupFunction<
+final _SysAllocStringByteLen = _oleaut32.lookupFunction<
     Pointer<Utf16> Function(Pointer<Utf8> psz, Uint32 len),
     Pointer<Utf16> Function(
         Pointer<Utf8> psz, int len)>('SysAllocStringByteLen');
@@ -106,7 +106,7 @@ late final _SysAllocStringByteLen = _oleaut32.lookupFunction<
 Pointer<Utf16> SysAllocStringLen(Pointer<Utf16> strIn, int ui) =>
     _SysAllocStringLen(strIn, ui);
 
-late final _SysAllocStringLen = _oleaut32.lookupFunction<
+final _SysAllocStringLen = _oleaut32.lookupFunction<
     Pointer<Utf16> Function(Pointer<Utf16> strIn, Uint32 ui),
     Pointer<Utf16> Function(Pointer<Utf16> strIn, int ui)>('SysAllocStringLen');
 
@@ -122,7 +122,7 @@ late final _SysAllocStringLen = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 void SysFreeString(Pointer<Utf16> bstrString) => _SysFreeString(bstrString);
 
-late final _SysFreeString = _oleaut32.lookupFunction<
+final _SysFreeString = _oleaut32.lookupFunction<
     Void Function(Pointer<Utf16> bstrString),
     void Function(Pointer<Utf16> bstrString)>('SysFreeString');
 
@@ -139,7 +139,7 @@ late final _SysFreeString = _oleaut32.lookupFunction<
 int SysReAllocString(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz) =>
     _SysReAllocString(pbstr, psz);
 
-late final _SysReAllocString = _oleaut32.lookupFunction<
+final _SysReAllocString = _oleaut32.lookupFunction<
     Int32 Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz),
     int Function(
         Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz)>('SysReAllocString');
@@ -159,7 +159,7 @@ int SysReAllocStringLen(
         Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz, int len) =>
     _SysReAllocStringLen(pbstr, psz, len);
 
-late final _SysReAllocStringLen = _oleaut32.lookupFunction<
+final _SysReAllocStringLen = _oleaut32.lookupFunction<
     Int32 Function(
         Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz, Uint32 len),
     int Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz,
@@ -178,7 +178,7 @@ late final _SysReAllocStringLen = _oleaut32.lookupFunction<
 void SysReleaseString(Pointer<Utf16> bstrString) =>
     _SysReleaseString(bstrString);
 
-late final _SysReleaseString = _oleaut32.lookupFunction<
+final _SysReleaseString = _oleaut32.lookupFunction<
     Void Function(Pointer<Utf16> bstrString),
     void Function(Pointer<Utf16> bstrString)>('SysReleaseString');
 
@@ -192,7 +192,7 @@ late final _SysReleaseString = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 int SysStringByteLen(Pointer<Utf16> bstr) => _SysStringByteLen(bstr);
 
-late final _SysStringByteLen = _oleaut32.lookupFunction<
+final _SysStringByteLen = _oleaut32.lookupFunction<
     Uint32 Function(Pointer<Utf16> bstr),
     int Function(Pointer<Utf16> bstr)>('SysStringByteLen');
 
@@ -206,7 +206,7 @@ late final _SysStringByteLen = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 int SysStringLen(Pointer<Utf16> pbstr) => _SysStringLen(pbstr);
 
-late final _SysStringLen = _oleaut32.lookupFunction<
+final _SysStringLen = _oleaut32.lookupFunction<
     Uint32 Function(Pointer<Utf16> pbstr),
     int Function(Pointer<Utf16> pbstr)>('SysStringLen');
 
@@ -225,7 +225,7 @@ int VariantChangeType(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
         int wFlags, int vt) =>
     _VariantChangeType(pvargDest, pvarSrc, wFlags, vt);
 
-late final _VariantChangeType = _oleaut32.lookupFunction<
+final _VariantChangeType = _oleaut32.lookupFunction<
     Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
         Uint16 wFlags, Uint16 vt),
     int Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
@@ -241,7 +241,7 @@ late final _VariantChangeType = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 int VariantClear(Pointer<VARIANT> pvarg) => _VariantClear(pvarg);
 
-late final _VariantClear = _oleaut32.lookupFunction<
+final _VariantClear = _oleaut32.lookupFunction<
     Int32 Function(Pointer<VARIANT> pvarg),
     int Function(Pointer<VARIANT> pvarg)>('VariantClear');
 
@@ -257,7 +257,7 @@ late final _VariantClear = _oleaut32.lookupFunction<
 int VariantCopy(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc) =>
     _VariantCopy(pvargDest, pvargSrc);
 
-late final _VariantCopy = _oleaut32.lookupFunction<
+final _VariantCopy = _oleaut32.lookupFunction<
     Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc),
     int Function(
         Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc)>('VariantCopy');
@@ -272,7 +272,7 @@ late final _VariantCopy = _oleaut32.lookupFunction<
 /// {@category oleaut32}
 void VariantInit(Pointer<VARIANT> pvarg) => _VariantInit(pvarg);
 
-late final _VariantInit = _oleaut32.lookupFunction<
+final _VariantInit = _oleaut32.lookupFunction<
     Void Function(Pointer<VARIANT> pvarg),
     void Function(Pointer<VARIANT> pvarg)>('VariantInit');
 
@@ -291,7 +291,7 @@ int VariantTimeToDosDateTime(
         double vtime, Pointer<Uint16> pwDosDate, Pointer<Uint16> pwDosTime) =>
     _VariantTimeToDosDateTime(vtime, pwDosDate, pwDosTime);
 
-late final _VariantTimeToDosDateTime = _oleaut32.lookupFunction<
+final _VariantTimeToDosDateTime = _oleaut32.lookupFunction<
     Int32 Function(
         Double vtime, Pointer<Uint16> pwDosDate, Pointer<Uint16> pwDosTime),
     int Function(double vtime, Pointer<Uint16> pwDosDate,
@@ -309,7 +309,7 @@ late final _VariantTimeToDosDateTime = _oleaut32.lookupFunction<
 int VariantTimeToSystemTime(double vtime, Pointer<SYSTEMTIME> lpSystemTime) =>
     _VariantTimeToSystemTime(vtime, lpSystemTime);
 
-late final _VariantTimeToSystemTime = _oleaut32.lookupFunction<
+final _VariantTimeToSystemTime = _oleaut32.lookupFunction<
     Int32 Function(Double vtime, Pointer<SYSTEMTIME> lpSystemTime),
     int Function(double vtime,
         Pointer<SYSTEMTIME> lpSystemTime)>('VariantTimeToSystemTime');
