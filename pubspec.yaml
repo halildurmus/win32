@@ -23,7 +23,7 @@ dev_dependencies:
   dart_style: ^2.2.1
 
   # Help ensure that the code is well-written.
-  lints: ^2.0.0
+  lints: ^1.0.1
 
   # Used for joining paths, as part of our path_provider integration test.
   path: ^1.8.1
