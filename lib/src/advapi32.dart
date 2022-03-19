@@ -183,6 +183,22 @@ final _GetTokenInformation = _advapi32.lookupFunction<
         int TokenInformationLength,
         Pointer<Uint32> ReturnLength)>('GetTokenInformation');
 
+/// Retrieves the name of the user associated with the current thread.
+///
+/// ```c
+/// BOOL GetUserNameW(
+///   LPWSTR  lpBuffer,
+///   LPDWORD pcbBuffer);
+/// ```
+/// {@category advapi32}
+int GetUserName(Pointer<Utf16> lpBuffer, Pointer<Uint32> pcbBuffer) =>
+    _GetUserName(lpBuffer, pcbBuffer);
+
+final _GetUserName = _advapi32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> pcbBuffer),
+    int Function(
+        Pointer<Utf16> lpBuffer, Pointer<Uint32> pcbBuffer)>('GetUserNameW');
+
 /// Initiates a shutdown and restart of the specified computer, and
 /// restarts any applications that have been registered for restart.
 ///

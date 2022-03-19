@@ -8596,6 +8596,14 @@ void main() {
               Pointer<Uint32> ReturnLength)>('GetTokenInformation');
       expect(GetTokenInformation, isA<Function>());
     });
+    test('Can instantiate GetUserName', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final GetUserName = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> pcbBuffer),
+          int Function(Pointer<Utf16> lpBuffer,
+              Pointer<Uint32> pcbBuffer)>('GetUserNameW');
+      expect(GetUserName, isA<Function>());
+    });
     test('Can instantiate InitiateShutdown', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final InitiateShutdown = advapi32.lookupFunction<

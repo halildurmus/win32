@@ -251,6 +251,24 @@ void printBatteryStatusInfo() {
   }
 }
 
+String getUserName() {
+  const UNLEN = 256;
+  final pcbBuffer = calloc<DWORD>()..value = UNLEN + 1;
+  final lpBuffer = wsalloc(UNLEN + 1);
+
+  try {
+    final result = GetUserName(lpBuffer, pcbBuffer);
+    if (result != 0) {
+      return lpBuffer.toDartString();
+    } else {
+      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+    }
+  } finally {
+    free(pcbBuffer);
+    free(lpBuffer);
+  }
+}
+
 void main() {
   print('This version of Windows supports the APIs in:');
   if (isWindowsXPOrGreater()) print(' - Windows XP');
@@ -276,7 +294,9 @@ void main() {
       '${getSystemMemoryInMegabytes()}MB');
 
   print('\nActive processors on the system: '
-      '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}');
+      '${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}\n');
+
+  print('User name is: ${getUserName()}');
   print('Computer name is: ${getComputerName()}\n');
 
   printPowerInfo();

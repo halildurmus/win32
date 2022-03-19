@@ -2849,6 +2849,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the user default locale name."
     },
+    "GetUserName": {
+        "prototype": "BOOL GetUserNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD pcbBuffer);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the name of the user associated with the current thread."
+    },
     "GetUserObjectInformation": {
         "prototype": "BOOL GetUserObjectInformationW(\n  HANDLE  hObj,\n  int     nIndex,\n  PVOID   pvInfo,\n  DWORD   nLength,\n  LPDWORD lpnLengthNeeded\n);",
         "dllLibrary": "user32",
