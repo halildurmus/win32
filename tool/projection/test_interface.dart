@@ -20,7 +20,7 @@ class TestInterfaceProjection {
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_local_variable, unnecessary_type_check
+// ignore_for_file: unused_local_variable
 
 @TestOn('windows')
 
@@ -36,12 +36,14 @@ import 'package:win32/win32.dart';
       MethodProjection methodProjection) {
     if (methodProjection.runtimeType == GetPropertyProjection ||
         methodProjection.runtimeType == SetPropertyProjection) {
-      final propertyType =
-          (methodProjection as PropertyProjection).returnType.dartType;
-      return '''
-      test('Can access property $interfaceName.${methodProjection.name}', () {
-        expect($instanceName.${methodProjection.exposedMethodName} is $propertyType, isTrue);
-      });''';
+      return '';
+      // TODO: Add this.
+      // final propertyType =
+      //     (methodProjection as PropertyProjection).returnType.dartType;
+      //     return '''
+      // test('Can access property $interfaceName.${methodProjection.name}', () {
+      //   expect($instanceName.${methodProjection.exposedMethodName}, isNot(isA<$propertyType>()));
+      // });''';
     } else {
       return '''
   test('Can instantiate $interfaceName.${methodProjection.name}', () {
