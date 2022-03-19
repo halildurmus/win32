@@ -18,11 +18,11 @@ jobs:
       # that tiles the space well.
       matrix:
         include:
-          - os: windows-2022
+          - os: windows-latest
             sdk: main
-          - os: windows-2019
+          - os: windows-2022
             sdk: beta
-          - os: windows-2016
+          - os: windows-2019
             sdk: stable
           - os: ubuntu-latest
             sdk: stable
