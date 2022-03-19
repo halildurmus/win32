@@ -16,5 +16,6 @@ void main() {
         TestInterfaceProjection(iEnumNetworkConnections, interfaceProjection);
     final projectionOutput = testInterfaceProjection.toString();
     expect(projectionOutput, contains('NewEnum'));
-  }, skip: 'Have not yet implemented COM property tests.');
+    expect(projectionOutput, contains('Pointer<COMObject>'));
+  });
 }
