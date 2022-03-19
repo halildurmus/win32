@@ -56,14 +56,18 @@ void main() {
     }
 
     print('\nNetworks (connected and disconnected) on this machine:');
-    final enumerator = IEnumNetworks(enumPtr);
+    final enumerator = IEnumNetworkConnections(enumPtr);
     hr = enumerator.Next(1, netPtr.cast(), elements);
     while (elements.value == 1) {
       final network = INetwork(netPtr);
       hr = network.GetDescription(descPtr);
       if (SUCCEEDED(hr)) {
-        print(descPtr.value.toDartString());
+        final networkName = descPtr.value.toDartString();
+        final isNetworkConnected = network.IsConnected == VARIANT_TRUE;
+        print(
+            '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}');
       }
+
       hr = enumerator.Next(1, netPtr.cast(), elements);
     }
   } finally {
