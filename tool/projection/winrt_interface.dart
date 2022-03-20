@@ -1,6 +1,8 @@
 import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
+import 'method.dart';
+import 'winrt_property.dart';
 
 class WinRTInterfaceProjection extends InterfaceProjection {
   WinRTInterfaceProjection(TypeDef typeDef) : super(typeDef);
@@ -14,6 +16,52 @@ class WinRTInterfaceProjection extends InterfaceProjection {
     } else {
       return 'IUnknown';
     }
+  }
+
+  @override
+  String get interfaceImport {
+    if (typeDef.interfaces.isEmpty) {
+      // Inherits from IInspectable, which is a traditional COM type.
+      return 'IInspectable.dart';
+    } else {
+      return getImportForTypeDef(typeDef.interfaces.first);
+    }
+  }
+
+  @override
+  String get importHeader {
+    final imports = {interfaceImport, ...importsForClass()}
+      ..removeWhere((item) => item == '');
+    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+  }
+
+  List<MethodProjection>? _methodProjections;
+
+  @override
+  List<MethodProjection> get methodProjections =>
+      _methodProjections ??= _cacheMethodProjections();
+
+  @override
+  String get category => 'winrt';
+
+  List<MethodProjection> _cacheMethodProjections() {
+    final projection = <MethodProjection>[];
+    var vtableOffset = vtableStart;
+    for (final method in typeDef.methods) {
+      if (method.isGetProperty) {
+        final getPropertyProjection =
+            WinRTGetPropertyProjection(method, vtableOffset++);
+        projection.add(getPropertyProjection);
+      } else if (method.isSetProperty) {
+        final setPropertyProjection =
+            WinRTSetPropertyProjection(method, vtableOffset++);
+        projection.add(setPropertyProjection);
+      } else {
+        final methodProjection = MethodProjection(method, vtableOffset++);
+        projection.add(methodProjection);
+      }
+    }
+    return projection;
   }
 
   /// Take a TypeDef and create a Dart projection of it.

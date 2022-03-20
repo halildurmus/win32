@@ -33,3 +33,7 @@ void generateWinRTApis() {
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
   }
 }
+
+void main() {
+  generateWinRTApis();
+}

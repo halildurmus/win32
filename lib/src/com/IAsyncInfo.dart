@@ -2,49 +2,32 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
-import '../winrt/winrt_constants.dart';
-
 import 'IInspectable.dart';
 
 /// @nodoc
 const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 
-typedef _get_Id_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
-typedef _get_Id_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _get_Status_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
-typedef _get_Status_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _get_ErrorCode_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
-typedef _get_ErrorCode_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _Cancel_Native = Int32 Function(Pointer obj);
-typedef _Cancel_Dart = int Function(Pointer obj);
-
-typedef _Close_Native = Int32 Function(Pointer obj);
-typedef _Close_Dart = int Function(Pointer obj);
-
 /// {@category Interface}
 /// {@category winrt}
 class IAsyncInfo extends IInspectable {
-  // vtable begins at 6, ends at 10
-
+  // vtable begins at 6, is 5 entries long.
   IAsyncInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int get Id {
@@ -53,9 +36,19 @@ class IAsyncInfo extends IInspectable {
     try {
       final hr = ptr.ref.lpVtbl.value
           .elementAt(6)
-          .cast<Pointer<NativeFunction<_get_Id_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Uint32 Function(
+            Pointer,
+            Pointer<Uint32>,
+          )>>>()
           .value
-          .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Uint32>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -67,14 +60,24 @@ class IAsyncInfo extends IInspectable {
   }
 
   int get Status {
-    final retValuePtr = calloc<Uint32>();
+    final retValuePtr = calloc<Int32>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
           .elementAt(7)
-          .cast<Pointer<NativeFunction<_get_Status_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32>,
+          )>>>()
           .value
-          .asFunction<_get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -86,14 +89,24 @@ class IAsyncInfo extends IInspectable {
   }
 
   int get ErrorCode {
-    final retValuePtr = calloc<Uint32>();
+    final retValuePtr = calloc<Int32>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
           .elementAt(8)
-          .cast<Pointer<NativeFunction<_get_ErrorCode_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+            Pointer,
+            Pointer<Int32>,
+          )>>>()
           .value
-          .asFunction<_get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -104,15 +117,35 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  int Cancel() => ptr.ref.lpVtbl.value
-      .elementAt(9)
-      .cast<Pointer<NativeFunction<_Cancel_Native>>>()
-      .value
-      .asFunction<_Cancel_Dart>()(ptr.ref.lpVtbl);
+  void Cancel() => ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Void Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              void Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 
-  int Close() => ptr.ref.lpVtbl.value
-      .elementAt(10)
-      .cast<Pointer<NativeFunction<_Close_Native>>>()
-      .value
-      .asFunction<_Close_Dart>()(ptr.ref.lpVtbl);
+  void Close() => ptr.ref.lpVtbl.value
+          .elementAt(10)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Void Function(
+            Pointer,
+          )>>>()
+          .value
+          .asFunction<
+              void Function(
+            Pointer,
+          )>()(
+        ptr.ref.lpVtbl,
+      );
 }

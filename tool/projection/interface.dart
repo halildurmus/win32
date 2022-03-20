@@ -170,6 +170,8 @@ class InterfaceProjection {
     }
   ''';
 
+  String get category => 'com';
+
   @override
   String toString() {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
@@ -184,7 +186,7 @@ class InterfaceProjection {
       $guidConstants
 
       /// {@category Interface}
-      /// {@category com}
+      /// {@category $category}
       class $shortName $extendsClause {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor
