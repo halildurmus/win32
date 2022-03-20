@@ -20,6 +20,7 @@ void generateComApis() {
     // In v2, we put classes and interfaces in the same file.
     final className = ClassProjection.generateClassName(typeDef);
     final classNameExists = scope.findTypeDef(className) != null;
+
     final comObject = classNameExists
         ? ClassProjection.fromInterface(typeDef)
         : interfaceProjection;

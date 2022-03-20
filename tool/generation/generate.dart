@@ -7,6 +7,7 @@ import 'generate_com_apis.dart';
 import 'generate_win32_functions.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
+import 'generate_winrt_apis.dart';
 
 void main() {
   final functionsToGenerate = loadFunctionsFromJson();
@@ -28,4 +29,7 @@ void main() {
 
   print('Generating COM interfaces and tests...');
   generateComApis();
+
+  print('Generating Windows Runtime interfaces...');
+  generateWinRTApis();
 }
