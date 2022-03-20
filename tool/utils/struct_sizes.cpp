@@ -248,6 +248,9 @@ void main()
     printf("  'SOCKADDR': %zu,\n", sizeof(SOCKADDR));
     printf("  'SOLE_AUTHENTICATION_SERVICE': %zu,\n", sizeof(SOLE_AUTHENTICATION_SERVICE));
     printf("  'SP_DEVINFO_DATA': %zu,\n", sizeof(SP_DEVINFO_DATA));
+    printf("  'SPEVENT': %zu,\n", sizeof(SPEVENT));
+    printf("  'SPEVENTSOURCEINFO': %zu,\n", sizeof(SPEVENTSOURCEINFO));
+    printf("  'SPVOICESTATUS': %zu,\n", sizeof(SPVOICESTATUS));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFOW));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEXW));
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));

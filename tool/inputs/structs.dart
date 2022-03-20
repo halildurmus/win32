@@ -400,6 +400,12 @@ const structsToGenerate = <String, String>{
       "Identifies an authentication service that a server is willing to use to communicate to a client.",
   "Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINFO_DATA":
       "An SP_DEVINFO_DATA structure defines a device instance that is a member of a device information set.",
+  "Windows.Win32.Media.Speech.SPEVENT":
+      "SPEVENT contains information about an event. Events are passed from the text-to-speech (TTS) or speech recognition (SR) engines or audio devices back to applications.",
+  "Windows.Win32.Media.Speech.SPEVENTSOURCEINFO":
+      "SPEVENTSOURCEINFO is used by ISpEventSource::GetInfo to pass back information about the event source. Event sources contain a queue, which hold events until a caller retrieves the events using ::GetEvents.",
+  "Windows.Win32.Media.Speech.SPVOICESTATUS":
+      "SPVOICESTATUS contains voice status information. This structure is returned by ISpVoice::GetStatus.",
   "Windows.Win32.System.Threading.STARTUPINFOW":
       "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time.",
   "Windows.Win32.System.Threading.STARTUPINFOEXW":

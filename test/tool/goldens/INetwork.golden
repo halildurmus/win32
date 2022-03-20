@@ -9,7 +9,8 @@
 
     import 'package:ffi/ffi.dart';
   
-          import '../combase.dart';
+          import '../callbacks.dart';
+    import '../combase.dart';
     import '../constants.dart';
     import '../exceptions.dart';
     import '../guid.dart';

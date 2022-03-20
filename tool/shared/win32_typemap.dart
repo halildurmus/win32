@@ -42,5 +42,6 @@ const callbackTypeMapping = win32Version == 2
             'Pointer<NativeFunction<WlanNotificationCallback>>',
         'PFTASKDIALOGCALLBACK':
             'Pointer<NativeFunction<TaskDialogCallbackProc>>',
+        'SPNOTIFYCALLBACK': 'Pointer<NativeFunction<SpNotifyCallback>>',
       }
     : <String, String>{};
