@@ -131,6 +131,7 @@ require Flutter.
 | `serial.dart`      | Demonstrates serial port management                       |
 | `shortcut.dart`    | Demonstrates creating a Windows shell link                |
 | `snake.dart`       | Snake game using various GDI features                     |
+| `speech.dart`      | Use Windows speech engine for text-to-speech              |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
 | `taskdialog.dart`  | Demonstrates using modern task dialog boxes               |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
