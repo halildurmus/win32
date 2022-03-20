@@ -9,6 +9,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';

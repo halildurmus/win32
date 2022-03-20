@@ -8317,3 +8317,42 @@ class WINDOWTHEMEATTRIBUTETYPE {
   /// Non-client area window attributes will be set.
   static const WTA_NONCLIENT = 1;
 }
+
+class SPEAKFLAGS {
+  /// Specifies that the default settings should be used.
+  static const SPF_DEFAULT = 0;
+
+  /// Specifies that the Speak call should be asynchronous. That is, it will
+  /// return immediately after the speak request is queued.
+  static const SPF_ASYNC = 1;
+
+  /// Purges all pending speak requests prior to this speak call.
+  static const SPF_PURGEBEFORESPEAK = 2;
+
+  /// The string passed to ISpVoice::Speak is a file name, and the file text
+  /// should be spoken.
+  static const SPF_IS_FILENAME = 4;
+
+  /// The input text will be parsed for XML markup.
+  static const SPF_IS_XML = 8;
+
+  /// The input text will not be parsed for XML markup.
+  static const SPF_IS_NOT_XML = 0x10;
+
+  /// Global state changes in the XML markup will persist across speak calls.
+  static const SPF_PERSIST_XML = 0x20;
+
+  /// Punctuation characters should be expanded into words (for example, "This
+  /// is a sentence." would become "This is a sentence period").
+  static const SPF_NLP_SPEAK_PUNC = 0x40;
+
+  /// Force XML parsing As MS SAPI.
+  static const SPF_PARSE_SAPI = 0x80;
+
+  /// Force XML parsing As W3C SSML.
+  static const SPF_PARSE_SSML = 0x100;
+
+  /// The TTS XML format is auto-detected. This is the default if none of these
+  /// TTS XML format values are present in the bit-field.
+  static const SPF_PARSE_AUTODETECT = 0;
+}

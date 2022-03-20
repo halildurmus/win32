@@ -1,4 +1,4 @@
-// IAppxManifestPackageDependency.dart
+// ISpEventSource.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -20,81 +20,92 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import 'ISpNotifySource.dart';
 
 /// @nodoc
-const IID_IAppxManifestPackageDependency =
-    '{E4946B59-733E-43F0-A724-3BDE4C1285A0}';
+const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
 
 /// {@category Interface}
 /// {@category com}
-class IAppxManifestPackageDependency extends IUnknown {
-  // vtable begins at 3, is 3 entries long.
-  IAppxManifestPackageDependency(Pointer<COMObject> ptr) : super(ptr);
+class ISpEventSource extends ISpNotifySource {
+  // vtable begins at 10, is 3 entries long.
+  ISpEventSource(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(
-    Pointer<Pointer<Utf16>> name,
+  int SetInterest(
+    int ullEventInterest,
+    int ullQueuedInterest,
   ) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
+          .elementAt(10)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<Pointer<Utf16>> name,
+            Uint64 ullEventInterest,
+            Uint64 ullQueuedInterest,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Pointer<Utf16>> name,
+            int ullEventInterest,
+            int ullQueuedInterest,
           )>()(
         ptr.ref.lpVtbl,
-        name,
+        ullEventInterest,
+        ullQueuedInterest,
       );
 
-  int GetPublisher(
-    Pointer<Pointer<Utf16>> publisher,
+  int GetEvents(
+    int ulCount,
+    Pointer<SPEVENT> pEventArray,
+    Pointer<Uint32> pulFetched,
   ) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
+          .elementAt(11)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<Pointer<Utf16>> publisher,
+            Uint32 ulCount,
+            Pointer<SPEVENT> pEventArray,
+            Pointer<Uint32> pulFetched,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Pointer<Utf16>> publisher,
+            int ulCount,
+            Pointer<SPEVENT> pEventArray,
+            Pointer<Uint32> pulFetched,
           )>()(
         ptr.ref.lpVtbl,
-        publisher,
+        ulCount,
+        pEventArray,
+        pulFetched,
       );
 
-  int GetMinVersion(
-    Pointer<Uint64> minVersion,
+  int GetInfo(
+    Pointer<SPEVENTSOURCEINFO> pInfo,
   ) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
+          .elementAt(12)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<Uint64> minVersion,
+            Pointer<SPEVENTSOURCEINFO> pInfo,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Uint64> minVersion,
+            Pointer<SPEVENTSOURCEINFO> pInfo,
           )>()(
         ptr.ref.lpVtbl,
-        minVersion,
+        pInfo,
       );
 }

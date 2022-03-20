@@ -130,6 +130,10 @@ typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
 /// placeholder for the application-defined function name.
 typedef SendAsyncProc = Void Function(IntPtr, Uint32, IntPtr, IntPtr);
 
+// Application-defined callback function used with SAPI clients to receive
+// notifications.
+typedef SpNotifyCallback = Void Function(WPARAM wParam, LPARAM lParam);
+
 /// Application-defined callback function used with the RemoveWindowSubclass
 /// and SetWindowSubclass functions.
 typedef SubclassProc = LRESULT Function(HWND hWnd, UINT uMsg, WPARAM wParam,

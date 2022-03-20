@@ -5306,6 +5306,90 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
   external int hr;
 }
 
+/// SPEVENT contains information about an event. Events are passed from the
+/// text-to-speech (TTS) or speech recognition (SR) engines or audio
+/// devices back to applications.
+///
+/// {@category Struct}
+class SPEVENT extends Struct {
+  @Int32()
+  external int bitfield;
+
+  @Uint32()
+  external int ulStreamNum;
+
+  @Uint64()
+  external int ullAudioStreamOffset;
+
+  @IntPtr()
+  external int wParam;
+
+  @IntPtr()
+  external int lParam;
+}
+
+/// SPEVENTSOURCEINFO is used by ISpEventSource::GetInfo to pass back
+/// information about the event source. Event sources contain a queue,
+/// which hold events until a caller retrieves the events using
+/// ::GetEvents.
+///
+/// {@category Struct}
+class SPEVENTSOURCEINFO extends Struct {
+  @Uint64()
+  external int ullEventInterest;
+
+  @Uint64()
+  external int ullQueuedInterest;
+
+  @Uint32()
+  external int ulCount;
+}
+
+/// SPVOICESTATUS contains voice status information. This structure is
+/// returned by ISpVoice::GetStatus.
+///
+/// {@category Struct}
+class SPVOICESTATUS extends Struct {
+  @Uint32()
+  external int ulCurrentStream;
+
+  @Uint32()
+  external int ulLastStreamQueued;
+
+  @Int32()
+  external int hrLastResult;
+
+  @Uint32()
+  external int dwRunningState;
+
+  @Uint32()
+  external int ulInputWordPos;
+
+  @Uint32()
+  external int ulInputWordLen;
+
+  @Uint32()
+  external int ulInputSentPos;
+
+  @Uint32()
+  external int ulInputSentLen;
+
+  @Int32()
+  external int lBookmarkId;
+
+  @Uint16()
+  external int PhonemeId;
+
+  @Int32()
+  external int VisemeId;
+
+  @Uint32()
+  external int dwReserved1;
+
+  @Uint32()
+  external int dwReserved2;
+}
+
 /// An SP_DEVINFO_DATA structure defines a device instance that is a member
 /// of a device information set.
 ///

@@ -1,4 +1,4 @@
-// IShellItemArray.dart
+// ISpNotifySource.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -23,19 +23,16 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IShellItemArray = '{B63EA76D-1F85-456F-A19C-48159EFA858B}';
+const IID_ISpNotifySource = '{5EFF4AEF-8487-11D2-961C-00C04F8EE628}';
 
 /// {@category Interface}
 /// {@category com}
-class IShellItemArray extends IUnknown {
+class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.
-  IShellItemArray(Pointer<COMObject> ptr) : super(ptr);
+  ISpNotifySource(Pointer<COMObject> ptr) : super(ptr);
 
-  int BindToHandler(
-    Pointer<COMObject> pbc,
-    Pointer<GUID> bhid,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppvOut,
+  int SetNotifySink(
+    Pointer<COMObject> pNotifySink,
   ) =>
       ptr.ref.lpVtbl.value
           .elementAt(3)
@@ -44,31 +41,23 @@ class IShellItemArray extends IUnknown {
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<COMObject> pbc,
-            Pointer<GUID> bhid,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppvOut,
+            Pointer<COMObject> pNotifySink,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<COMObject> pbc,
-            Pointer<GUID> bhid,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppvOut,
+            Pointer<COMObject> pNotifySink,
           )>()(
         ptr.ref.lpVtbl,
-        pbc,
-        bhid,
-        riid,
-        ppvOut,
+        pNotifySink,
       );
 
-  int GetPropertyStore(
-    int flags,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv,
+  int SetNotifyWindowMessage(
+    int hWnd,
+    int Msg,
+    int wParam,
+    int lParam,
   ) =>
       ptr.ref.lpVtbl.value
           .elementAt(4)
@@ -77,28 +66,31 @@ class IShellItemArray extends IUnknown {
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Uint32 flags,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppv,
+            IntPtr hWnd,
+            Uint32 Msg,
+            IntPtr wParam,
+            IntPtr lParam,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            int flags,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppv,
+            int hWnd,
+            int Msg,
+            int wParam,
+            int lParam,
           )>()(
         ptr.ref.lpVtbl,
-        flags,
-        riid,
-        ppv,
+        hWnd,
+        Msg,
+        wParam,
+        lParam,
       );
 
-  int GetPropertyDescriptionList(
-    Pointer<PROPERTYKEY> keyType,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppv,
+  int SetNotifyCallbackFunction(
+    Pointer<Pointer<NativeFunction<SpNotifyCallback>>> pfnCallback,
+    int wParam,
+    int lParam,
   ) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
@@ -107,28 +99,28 @@ class IShellItemArray extends IUnknown {
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<PROPERTYKEY> keyType,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppv,
+            Pointer<Pointer<NativeFunction<SpNotifyCallback>>> pfnCallback,
+            IntPtr wParam,
+            IntPtr lParam,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<PROPERTYKEY> keyType,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppv,
+            Pointer<Pointer<NativeFunction<SpNotifyCallback>>> pfnCallback,
+            int wParam,
+            int lParam,
           )>()(
         ptr.ref.lpVtbl,
-        keyType,
-        riid,
-        ppv,
+        pfnCallback,
+        wParam,
+        lParam,
       );
 
-  int GetAttributes(
-    int AttribFlags,
-    int sfgaoMask,
-    Pointer<Uint32> psfgaoAttribs,
+  int SetNotifyCallbackInterface(
+    Pointer<COMObject> pSpCallback,
+    int wParam,
+    int lParam,
   ) =>
       ptr.ref.lpVtbl.value
           .elementAt(6)
@@ -137,49 +129,42 @@ class IShellItemArray extends IUnknown {
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Int32 AttribFlags,
-            Uint32 sfgaoMask,
-            Pointer<Uint32> psfgaoAttribs,
+            Pointer<COMObject> pSpCallback,
+            IntPtr wParam,
+            IntPtr lParam,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            int AttribFlags,
-            int sfgaoMask,
-            Pointer<Uint32> psfgaoAttribs,
+            Pointer<COMObject> pSpCallback,
+            int wParam,
+            int lParam,
           )>()(
         ptr.ref.lpVtbl,
-        AttribFlags,
-        sfgaoMask,
-        psfgaoAttribs,
+        pSpCallback,
+        wParam,
+        lParam,
       );
 
-  int GetCount(
-    Pointer<Uint32> pdwNumItems,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int SetNotifyWin32Event() => ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Pointer<Uint32> pdwNumItems,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Uint32> pdwNumItems,
           )>()(
         ptr.ref.lpVtbl,
-        pdwNumItems,
       );
 
-  int GetItemAt(
-    int dwIndex,
-    Pointer<Pointer<COMObject>> ppsi,
+  int WaitForNotifyEvent(
+    int dwMilliseconds,
   ) =>
       ptr.ref.lpVtbl.value
           .elementAt(8)
@@ -188,40 +173,31 @@ class IShellItemArray extends IUnknown {
                   NativeFunction<
                       Int32 Function(
             Pointer,
-            Uint32 dwIndex,
-            Pointer<Pointer<COMObject>> ppsi,
+            Uint32 dwMilliseconds,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            int dwIndex,
-            Pointer<Pointer<COMObject>> ppsi,
+            int dwMilliseconds,
           )>()(
         ptr.ref.lpVtbl,
-        dwIndex,
-        ppsi,
+        dwMilliseconds,
       );
 
-  int EnumItems(
-    Pointer<Pointer<COMObject>> ppenumShellItems,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetNotifyEventHandle() => ptr.ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
+                      IntPtr Function(
             Pointer,
-            Pointer<Pointer<COMObject>> ppenumShellItems,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Pointer<COMObject>> ppenumShellItems,
           )>()(
         ptr.ref.lpVtbl,
-        ppenumShellItems,
       );
 }
