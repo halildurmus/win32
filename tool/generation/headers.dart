@@ -37,11 +37,7 @@ $copyrightHeader
 // ignore_for_file: unused_field, unused_import
 // ignore_for_file: non_constant_identifier_names
 
-// Dart 2.17 will introduce a new `Char` FFI type, which conflicts with
-// CHAR_INFO.Char. Hiding this in advance to prevent later conflict, but we need
-// to disable the lint since it's not in 2.16.
-// ignore: undefined_hidden_name
-import 'dart:ffi' hide Char;
+import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
