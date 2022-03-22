@@ -7,6 +7,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
+// ignore_for_file: non_constant_identifier_names
+
 @TestOn('windows')
 
 import 'dart:ffi';

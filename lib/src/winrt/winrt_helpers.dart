@@ -4,6 +4,8 @@
 
 // Helper functions to minimize ceremony when calling WinRT APIs.
 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

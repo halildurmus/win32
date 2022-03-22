@@ -9,6 +9,7 @@
 // ignore_for_file: camel_case_extensions, camel_case_types
 // ignore_for_file: directives_ordering, unnecessary_getters_setters
 // ignore_for_file: unused_field, unused_import
+// ignore_for_file: non_constant_identifier_names
 
 // Dart 2.17 will introduce a new `Char` FFI type, which conflicts with
 // CHAR_INFO.Char. Hiding this in advance to prevent later conflict, but we need

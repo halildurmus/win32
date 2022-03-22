@@ -4,7 +4,7 @@
 
 // Standard constants exposed by the Win32 API
 
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, constant_identifier_names
 
 import 'dart:ffi';
 

@@ -1,6 +1,6 @@
 // Windows Sockets library constants
 
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, constant_identifier_names
 
 // -----------------------------------------------------------------------------
 // Socket types
