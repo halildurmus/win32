@@ -262,6 +262,84 @@
         "dllLibrary": "bthprops",
         "comment": "The BluetoothFindRadioClose function closes the enumeration handle associated with finding Bluetooth radios."
     },
+    "BluetoothGATTAbortReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTAbortReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Specifies the end of reliable write procedures, and the writes should be aborted.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTBeginReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTBeginReliableWrite(\n  HANDLE                              hDevice,\n  PBTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                               Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "The BluetoothGATTBeginReliableWrite function specifies that reliable writes are about to begin.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTEndReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTEndReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Specifies the end of reliable writes, and the writes should be committed.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetCharacteristics": {
+        "prototype": "HRESULT BluetoothGATTGetCharacteristics(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_SERVICE        Service,\n  USHORT                      CharacteristicsBufferCount,\n  PBTH_LE_GATT_CHARACTERISTIC CharacteristicsBuffer,\n  USHORT                      *CharacteristicsBufferActual,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the characteristics available for the specified service.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetCharacteristicValue": {
+        "prototype": "HRESULT BluetoothGATTGetCharacteristicValue(\n  HANDLE                            hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC       Characteristic,\n  ULONG                             CharacteristicValueDataSize,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE CharacteristicValue,\n  USHORT                            *CharacteristicValueSizeRequired,\n  ULONG                             Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets the value of the specified characteristic.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetDescriptors": {
+        "prototype": "HRESULT BluetoothGATTGetDescriptors(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC Characteristic,\n  USHORT                      DescriptorsBufferCount,\n  PBTH_LE_GATT_DESCRIPTOR     DescriptorsBuffer,\n  USHORT                      *DescriptorsBufferActual,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the descriptors available for the specified characteristic.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetDescriptorValue": {
+        "prototype": "HRESULT BluetoothGATTGetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  ULONG                         DescriptorValueDataSize,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  USHORT                        *DescriptorValueSizeRequired,\n  ULONG                         Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets the value of the specified descriptor.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetIncludedServices": {
+        "prototype": "HRESULT BluetoothGATTGetIncludedServices(\n  HANDLE               hDevice,\n  PBTH_LE_GATT_SERVICE ParentService,\n  USHORT               IncludedServicesBufferCount,\n  PBTH_LE_GATT_SERVICE IncludedServicesBuffer,\n  USHORT               *IncludedServicesBufferActual,\n  ULONG                Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the included services available for a given service.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTGetServices": {
+        "prototype": "HRESULT BluetoothGATTGetServices(\n  HANDLE               hDevice,\n  USHORT               ServicesBufferCount,\n  PBTH_LE_GATT_SERVICE ServicesBuffer,\n  USHORT               *ServicesBufferActual,\n  ULONG                Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "The BluetoothGATTGetServices function gets all the primary services available for a server.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTRegisterEvent": {
+        "prototype": "HRESULT BluetoothGATTRegisterEvent(\n  HANDLE                           hService,\n  BTH_LE_GATT_EVENT_TYPE           EventType,\n  PVOID                            EventParameterIn,\n  PFNBLUETOOTH_GATT_EVENT_CALLBACK Callback,\n  PVOID                            CallbackContext,\n  BLUETOOTH_GATT_EVENT_HANDLE      *pEventHandle,\n  ULONG                            Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Registers a routine to be called back during a characteristic value change event on the given characteristic identified by its characteristic handle.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTSetCharacteristicValue": {
+        "prototype": "HRESULT BluetoothGATTSetCharacteristicValue(\n  HANDLE                             hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC        Characteristic,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE  CharacteristicValue,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Writes the specified characteristic value to the Bluetooth device.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTSetDescriptorValue": {
+        "prototype": "HRESULT BluetoothGATTSetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  ULONG                         Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Writes the specified descriptor value to the Bluetooth device.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "BluetoothGATTUnregisterEvent": {
+        "prototype": "HRESULT BluetoothGATTUnregisterEvent(\n  BLUETOOTH_GATT_EVENT_HANDLE EventHandle,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Unregisters the given characteristic value change event.",
+        "minimumWindowsVersion": "WIN8"
+    },
     "BluetoothGetRadioInfo": {
         "prototype": "DWORD BluetoothGetRadioInfo(\n  HANDLE                hRadio,\n  PBLUETOOTH_RADIO_INFO pRadioInfo\n);",
         "dllLibrary": "bthprops",

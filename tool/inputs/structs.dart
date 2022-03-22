@@ -43,6 +43,22 @@ const structsToGenerate = <String, String>{
       "The BLUETOOTH_RADIO_INFO structure provides information about a Bluetooth radio.",
   "Windows.Win32.System.StationsAndDesktops.BSMINFO":
       "Contains information about a window that denied a request from BroadcastSystemMessageEx.",
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_GATT_VALUE_CHANGED_EVENT":
+      "The BLUETOOTH_GATT_VALUE_CHANGED_EVENT structure describes a changed attribute value.",
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION":
+      "The BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION structure describes one or more characteristics that have changed.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_GATT_CHARACTERISTIC":
+      "The BTH_LE_GATT_CHARACTERISTIC structure describes a Bluetooth Low Energy (LE) generic attribute (GATT) profile characteristic.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_GATT_CHARACTERISTIC_VALUE":
+      "The BTH_LE_GATT_CHARACTERISTIC_VALUE structure describes a Bluetooth Low Energy (LE) generic attribute (GATT) profile characteristic value.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_GATT_DESCRIPTOR":
+      "The BTH_LE_GATT_DESCRIPTOR structure describes a Bluetooth Low Energy (LE) generic attribute (GATT) profile descriptor.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_GATT_DESCRIPTOR_VALUE":
+      "The BTH_LE_GATT_DESCRIPTOR_VALUE structure describes a parent characteristic.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_GATT_SERVICE":
+      "The BTH_LE_GATT_SERVICE structure describes a Bluetooth Low Energy (LE) generic attribute (GATT) profile service.",
+  "Windows.Win32.Devices.Bluetooth.BTH_LE_UUID":
+      "The BTH_LE_UUID structure contains information about a Bluetooth Low Energy (LE) Universally Unique Identifier (UUID).",
   "Windows.Win32.Storage.FileSystem.BY_HANDLE_FILE_INFORMATION":
       "Contains information that the GetFileInformationByHandle function retrieves.",
   "Windows.Win32.UI.WindowsAndMessaging.CBT_CREATEWNDW":
