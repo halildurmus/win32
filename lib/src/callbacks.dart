@@ -123,6 +123,12 @@ typedef OutputProc = Int32 Function(IntPtr Arg1, IntPtr Arg2, Int32 Arg3);
 typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
     Pointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS> pAuthCallbackParams);
 
+/// Application-defined callback function used with profile drivers to implement
+/// a Bluetooth GATT event callback to be called whenever the value of a
+/// specific characteristic changes.
+typedef PfnbluetoothGattEventCallback = Void Function(
+    Int32 EventType, Pointer EventOutParameter, Pointer Context);
+
 /// Application-defined callback function used with the SendMessageCallback
 /// function. The system passes the message to the callback function after
 /// passing the message to the destination window procedure. The SENDASYNCPROC

@@ -117,6 +117,7 @@ export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
 export 'src/advapi32.dart';
+export 'src/bluetoothapis.dart';
 export 'src/bthprops.dart';
 export 'src/combase.dart';
 export 'src/comctl32.dart';

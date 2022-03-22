@@ -1,6 +1,6 @@
-## Common Controls Library
+## Bluetooth Library
 
-Implements a wide variety of standard Windows controls, such as File Open, Save,
-and Save As dialogs, progress bars, and list views. It creates and manages the
-windows for these UI elements, places various graphic elements within them, and
-collects user input.
+Bluetooth is an industry-standard protocol that enables wireless connectivity
+for computers, handheld devices, mobile phones, and other devices. The Bluetooth
+application programming interface enables developers to use existing network
+programming knowledge to quickly develop or port applications.
