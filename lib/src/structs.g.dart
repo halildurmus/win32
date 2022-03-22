@@ -407,6 +407,32 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 }
 
+/// The BLUETOOTH_GATT_VALUE_CHANGED_EVENT structure describes a changed
+/// attribute value.
+///
+/// {@category Struct}
+class BLUETOOTH_GATT_VALUE_CHANGED_EVENT extends Struct {
+  @Uint16()
+  external int ChangedAttributeHandle;
+
+  @IntPtr()
+  external int CharacteristicValueDataSize;
+
+  external Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> CharacteristicValue;
+}
+
+/// The BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION structure describes
+/// one or more characteristics that have changed.
+///
+/// {@category Struct}
+class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
+  @Uint16()
+  external int NumCharacteristics;
+
+  @Array(1)
+  external Array<BTH_LE_GATT_CHARACTERISTIC> Characteristics;
+}
+
 /// The BLUETOOTH_OOB_DATA_INFO structure contains data used to
 /// authenticate prior to establishing an Out-of-Band device pairing.
 ///
@@ -484,6 +510,293 @@ class BSMINFO extends Struct {
   external int hwnd;
 
   external LUID luid;
+}
+
+/// The BTH_LE_GATT_CHARACTERISTIC structure describes a Bluetooth Low
+/// Energy (LE) generic attribute (GATT) profile characteristic.
+///
+/// {@category Struct}
+class BTH_LE_GATT_CHARACTERISTIC extends Struct {
+  @Uint16()
+  external int ServiceHandle;
+
+  external BTH_LE_UUID CharacteristicUuid;
+
+  @Uint16()
+  external int AttributeHandle;
+
+  @Uint16()
+  external int CharacteristicValueHandle;
+
+  @Uint8()
+  external int IsBroadcastable;
+
+  @Uint8()
+  external int IsReadable;
+
+  @Uint8()
+  external int IsWritable;
+
+  @Uint8()
+  external int IsWritableWithoutResponse;
+
+  @Uint8()
+  external int IsSignedWritable;
+
+  @Uint8()
+  external int IsNotifiable;
+
+  @Uint8()
+  external int IsIndicatable;
+
+  @Uint8()
+  external int HasExtendedProperties;
+}
+
+/// The BTH_LE_GATT_CHARACTERISTIC_VALUE structure describes a Bluetooth
+/// Low Energy (LE) generic attribute (GATT) profile characteristic value.
+///
+/// {@category Struct}
+class BTH_LE_GATT_CHARACTERISTIC_VALUE extends Struct {
+  @Uint32()
+  external int DataSize;
+
+  @Array(1)
+  external Array<Uint8> Data;
+}
+
+/// The BTH_LE_GATT_DESCRIPTOR structure describes a Bluetooth Low Energy
+/// (LE) generic attribute (GATT) profile descriptor.
+///
+/// {@category Struct}
+class BTH_LE_GATT_DESCRIPTOR extends Struct {
+  @Uint16()
+  external int ServiceHandle;
+
+  @Uint16()
+  external int CharacteristicHandle;
+
+  @Int32()
+  external int DescriptorType;
+
+  external BTH_LE_UUID DescriptorUuid;
+
+  @Uint16()
+  external int AttributeHandle;
+}
+
+/// The BTH_LE_GATT_DESCRIPTOR_VALUE structure describes a parent
+/// characteristic.
+///
+/// {@category Struct}
+class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
+  @Int32()
+  external int DescriptorType;
+
+  external BTH_LE_UUID DescriptorUuid;
+
+  external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union Anonymous;
+
+  @Uint32()
+  external int DataSize;
+
+  @Array(1)
+  external Array<Uint8> Data;
+}
+
+/// {@category Struct}
+class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union extends Union {
+  external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+      CharacteristicExtendedProperties;
+
+  external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+      ClientCharacteristicConfiguration;
+
+  external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+      ServerCharacteristicConfiguration;
+
+  external _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+      CharacteristicFormat;
+}
+
+/// {@category Struct}
+class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+    extends Struct {
+  @Uint8()
+  external int IsReliableWriteEnabled;
+
+  @Uint8()
+  external int IsAuxiliariesWritable;
+}
+
+extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension
+    on BTH_LE_GATT_DESCRIPTOR_VALUE {
+  int get IsReliableWriteEnabled =>
+      this.Anonymous.CharacteristicExtendedProperties.IsReliableWriteEnabled;
+  set IsReliableWriteEnabled(int value) =>
+      this.Anonymous.CharacteristicExtendedProperties.IsReliableWriteEnabled =
+          value;
+
+  int get IsAuxiliariesWritable =>
+      this.Anonymous.CharacteristicExtendedProperties.IsAuxiliariesWritable;
+  set IsAuxiliariesWritable(int value) =>
+      this.Anonymous.CharacteristicExtendedProperties.IsAuxiliariesWritable =
+          value;
+}
+
+/// {@category Struct}
+class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+    extends Struct {
+  @Uint8()
+  external int IsSubscribeToNotification;
+
+  @Uint8()
+  external int IsSubscribeToIndication;
+}
+
+extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_1
+    on BTH_LE_GATT_DESCRIPTOR_VALUE {
+  int get IsSubscribeToNotification => this
+      .Anonymous
+      .ClientCharacteristicConfiguration
+      .IsSubscribeToNotification;
+  set IsSubscribeToNotification(int value) => this
+      .Anonymous
+      .ClientCharacteristicConfiguration
+      .IsSubscribeToNotification = value;
+
+  int get IsSubscribeToIndication =>
+      this.Anonymous.ClientCharacteristicConfiguration.IsSubscribeToIndication;
+  set IsSubscribeToIndication(int value) =>
+      this.Anonymous.ClientCharacteristicConfiguration.IsSubscribeToIndication =
+          value;
+}
+
+/// {@category Struct}
+class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+    extends Struct {
+  @Uint8()
+  external int IsBroadcast;
+}
+
+extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_2
+    on BTH_LE_GATT_DESCRIPTOR_VALUE {
+  int get IsBroadcast =>
+      this.Anonymous.ServerCharacteristicConfiguration.IsBroadcast;
+  set IsBroadcast(int value) =>
+      this.Anonymous.ServerCharacteristicConfiguration.IsBroadcast = value;
+}
+
+/// {@category Struct}
+class _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+    extends Struct {
+  @Uint8()
+  external int Format;
+
+  @Uint8()
+  external int Exponent;
+
+  external BTH_LE_UUID Unit;
+
+  @Uint8()
+  external int NameSpace;
+
+  external BTH_LE_UUID Description;
+}
+
+extension BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union_Extension_3
+    on BTH_LE_GATT_DESCRIPTOR_VALUE {
+  int get Format => this.Anonymous.CharacteristicFormat.Format;
+  set Format(int value) => this.Anonymous.CharacteristicFormat.Format = value;
+
+  int get Exponent => this.Anonymous.CharacteristicFormat.Exponent;
+  set Exponent(int value) =>
+      this.Anonymous.CharacteristicFormat.Exponent = value;
+
+  BTH_LE_UUID get Unit => this.Anonymous.CharacteristicFormat.Unit;
+  set Unit(BTH_LE_UUID value) =>
+      this.Anonymous.CharacteristicFormat.Unit = value;
+
+  int get NameSpace => this.Anonymous.CharacteristicFormat.NameSpace;
+  set NameSpace(int value) =>
+      this.Anonymous.CharacteristicFormat.NameSpace = value;
+
+  BTH_LE_UUID get Description =>
+      this.Anonymous.CharacteristicFormat.Description;
+  set Description(BTH_LE_UUID value) =>
+      this.Anonymous.CharacteristicFormat.Description = value;
+}
+
+extension BTH_LE_GATT_DESCRIPTOR_VALUE_Extension
+    on BTH_LE_GATT_DESCRIPTOR_VALUE {
+  _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+      get CharacteristicExtendedProperties =>
+          this.Anonymous.CharacteristicExtendedProperties;
+  set CharacteristicExtendedProperties(
+          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct
+              value) =>
+      this.Anonymous.CharacteristicExtendedProperties = value;
+
+  _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+      get ClientCharacteristicConfiguration =>
+          this.Anonymous.ClientCharacteristicConfiguration;
+  set ClientCharacteristicConfiguration(
+          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct
+              value) =>
+      this.Anonymous.ClientCharacteristicConfiguration = value;
+
+  _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+      get ServerCharacteristicConfiguration =>
+          this.Anonymous.ServerCharacteristicConfiguration;
+  set ServerCharacteristicConfiguration(
+          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct
+              value) =>
+      this.Anonymous.ServerCharacteristicConfiguration = value;
+
+  _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+      get CharacteristicFormat => this.Anonymous.CharacteristicFormat;
+  set CharacteristicFormat(
+          _BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct
+              value) =>
+      this.Anonymous.CharacteristicFormat = value;
+}
+
+/// The BTH_LE_GATT_SERVICE structure describes a Bluetooth Low Energy (LE)
+/// generic attribute (GATT) profile service.
+///
+/// {@category Struct}
+class BTH_LE_GATT_SERVICE extends Struct {
+  external BTH_LE_UUID ServiceUuid;
+
+  @Uint16()
+  external int AttributeHandle;
+}
+
+/// The BTH_LE_UUID structure contains information about a Bluetooth Low
+/// Energy (LE) Universally Unique Identifier (UUID).
+///
+/// {@category Struct}
+class BTH_LE_UUID extends Struct {
+  @Uint8()
+  external int IsShortUuid;
+
+  external _BTH_LE_UUID__Value_e__Union Value;
+}
+
+/// {@category Struct}
+class _BTH_LE_UUID__Value_e__Union extends Union {
+  @Uint16()
+  external int ShortUuid;
+
+  external GUID LongUuid;
+}
+
+extension BTH_LE_UUID_Extension on BTH_LE_UUID {
+  int get ShortUuid => this.Value.ShortUuid;
+  set ShortUuid(int value) => this.Value.ShortUuid = value;
+
+  GUID get LongUuid => this.Value.LongUuid;
+  set LongUuid(GUID value) => this.Value.LongUuid = value;
 }
 
 /// Contains information that the GetFileInformationByHandle function

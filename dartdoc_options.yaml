@@ -2,8 +2,8 @@ dartdoc:
   categories:
     "advapi32":
       markdown: doc/advapi32.md
-    "bthprops":
-      markdown: doc/bthprops.md
+    "bluetooth":
+      markdown: doc/bluetooth.md
     "comctl32":
       markdown: doc/comctl32.md
     "comdlg32":
@@ -65,7 +65,7 @@ dartdoc:
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "shcore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bthprops", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "shcore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:

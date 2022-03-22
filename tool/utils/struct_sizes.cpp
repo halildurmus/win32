@@ -67,6 +67,14 @@ void main()
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BSMINFO': %zu,\n", sizeof(BSMINFO));
+    printf("  'BLUETOOTH_GATT_VALUE_CHANGED_EVENT': %zu,\n", sizeof(BLUETOOTH_GATT_VALUE_CHANGED_EVENT));
+    printf("  'BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION': %zu,\n", sizeof(BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION));
+    printf("  'BTH_LE_GATT_CHARACTERISTIC': %zu,\n", sizeof(BTH_LE_GATT_CHARACTERISTIC));
+    printf("  'BTH_LE_GATT_CHARACTERISTIC_VALUE': %zu,\n", sizeof(BTH_LE_GATT_CHARACTERISTIC_VALUE));
+    printf("  'BTH_LE_GATT_DESCRIPTOR': %zu,\n", sizeof(BTH_LE_GATT_DESCRIPTOR));
+    printf("  'BTH_LE_GATT_DESCRIPTOR_VALUE': %zu,\n", sizeof(BTH_LE_GATT_DESCRIPTOR_VALUE));
+    printf("  'BTH_LE_GATT_SERVICE': %zu,\n", sizeof(BTH_LE_GATT_SERVICE));
+    printf("  'BTH_LE_UUID': %zu,\n", sizeof(BTH_LE_UUID));
     printf("  'BY_HANDLE_FILE_INFORMATION': %zu,\n", sizeof(BY_HANDLE_FILE_INFORMATION));
     printf("  'CBT_CREATEWND': %zu,\n", sizeof(CBT_CREATEWNDW));
     printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
