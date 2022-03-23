@@ -173,6 +173,8 @@ class InterfaceProjection {
 
   String get category => 'com';
 
+  String get rootHeader => '';
+
   @override
   String toString() {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
@@ -183,6 +185,7 @@ class InterfaceProjection {
     return '''
       $header
       ${versionSpecificImports(pathToSrc, importHeader, typeDef.interfaces)}
+      $rootHeader
       ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
 
