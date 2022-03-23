@@ -4,6 +4,8 @@
 
 // Helpful utilities
 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -94,6 +96,6 @@ LPWSTR wsalloc(int wChars) => calloc<WCHAR>(wChars).cast();
 
 /// Frees allocated memory.
 ///
-/// [calloc.free] and [malloc.free] do the same thing, so this works regardless
+/// `calloc.free` and `malloc.free` do the same thing, so this works regardless
 /// of whether memory was zero-allocated on creation or not.
 void free(Pointer pointer) => calloc.free(pointer);

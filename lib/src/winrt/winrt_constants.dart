@@ -4,7 +4,7 @@
 
 // Enums and constants used by WinRT
 
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, constant_identifier_names
 
 /// @nodoc
 const CLSID_CorMetaDataDispenser = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';

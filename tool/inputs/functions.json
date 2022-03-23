@@ -215,97 +215,207 @@
     "BluetoothDisplayDeviceProperties": {
         "prototype": "BOOL BluetoothDisplayDeviceProperties(\n  HWND                  hwndParent,\n  BLUETOOTH_DEVICE_INFO *pbtdi\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothDisplayDeviceProperties function opens the Control Panel device information property sheet."
+        "comment": "The BluetoothDisplayDeviceProperties function opens the Control Panel device information property sheet.",
+        "category": "bluetooth"
     },
     "BluetoothEnableDiscovery": {
         "prototype": "BOOL BluetoothEnableDiscovery(\n  HANDLE hRadio,\n  BOOL   fEnabled\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothEnableDiscovery function changes the discovery state of a local Bluetooth radio or radios."
+        "comment": "The BluetoothEnableDiscovery function changes the discovery state of a local Bluetooth radio or radios.",
+        "category": "bluetooth"
     },
     "BluetoothEnableIncomingConnections": {
         "prototype": "BOOL BluetoothEnableIncomingConnections(\n  HANDLE hRadio,\n  BOOL   fEnabled\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothEnableIncomingConnections function modifies whether a local Bluetooth radio accepts incoming connections."
+        "comment": "The BluetoothEnableIncomingConnections function modifies whether a local Bluetooth radio accepts incoming connections.",
+        "category": "bluetooth"
     },
     "BluetoothEnumerateInstalledServices": {
         "prototype": "DWORD BluetoothEnumerateInstalledServices(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  DWORD                       *pcServiceInout,\n  GUID                        *pGuidServices\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothEnumerateInstalledServices function enumerates the services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device."
+        "comment": "The BluetoothEnumerateInstalledServices function enumerates the services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device.",
+        "category": "bluetooth"
     },
     "BluetoothFindDeviceClose": {
         "prototype": "BOOL BluetoothFindDeviceClose(\n  HBLUETOOTH_DEVICE_FIND hFind\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindDeviceClose function closes an enumeration handle associated with a device query."
+        "comment": "The BluetoothFindDeviceClose function closes an enumeration handle associated with a device query.",
+        "category": "bluetooth"
     },
     "BluetoothFindFirstDevice": {
         "prototype": "HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(\n  const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,\n  BLUETOOTH_DEVICE_INFO                *pbtdi\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindFirstDevice function begins the enumeration Bluetooth devices."
+        "comment": "The BluetoothFindFirstDevice function begins the enumeration Bluetooth devices.",
+        "category": "bluetooth"
     },
     "BluetoothFindFirstRadio": {
         "prototype": "HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(\n  const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,\n  HANDLE                            *phRadio\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindFirstRadio function begins the enumeration of local Bluetooth radios."
+        "comment": "The BluetoothFindFirstRadio function begins the enumeration of local Bluetooth radios.",
+        "category": "bluetooth"
     },
     "BluetoothFindNextDevice": {
         "prototype": "BOOL BluetoothFindNextDevice(\n  HBLUETOOTH_DEVICE_FIND hFind,\n  BLUETOOTH_DEVICE_INFO  *pbtdi\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindNextDevice function finds the next Bluetooth device."
+        "comment": "The BluetoothFindNextDevice function finds the next Bluetooth device.",
+        "category": "bluetooth"
     },
     "BluetoothFindNextRadio": {
         "prototype": "BOOL BluetoothFindNextRadio(\n  HBLUETOOTH_RADIO_FIND hFind,\n  HANDLE                *phRadio\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindNextRadio function finds the next Bluetooth radio."
+        "comment": "The BluetoothFindNextRadio function finds the next Bluetooth radio.",
+        "category": "bluetooth"
     },
     "BluetoothFindRadioClose": {
         "prototype": "BOOL BluetoothFindRadioClose(\n  HBLUETOOTH_RADIO_FIND hFind\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothFindRadioClose function closes the enumeration handle associated with finding Bluetooth radios."
+        "comment": "The BluetoothFindRadioClose function closes the enumeration handle associated with finding Bluetooth radios.",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTAbortReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTAbortReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Specifies the end of reliable write procedures, and the writes should be aborted.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTBeginReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTBeginReliableWrite(\n  HANDLE                              hDevice,\n  PBTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                               Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "The BluetoothGATTBeginReliableWrite function specifies that reliable writes are about to begin.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTEndReliableWrite": {
+        "prototype": "HRESULT BluetoothGATTEndReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Specifies the end of reliable writes, and the writes should be committed.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetCharacteristics": {
+        "prototype": "HRESULT BluetoothGATTGetCharacteristics(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_SERVICE        Service,\n  USHORT                      CharacteristicsBufferCount,\n  PBTH_LE_GATT_CHARACTERISTIC CharacteristicsBuffer,\n  USHORT                      *CharacteristicsBufferActual,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the characteristics available for the specified service.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetCharacteristicValue": {
+        "prototype": "HRESULT BluetoothGATTGetCharacteristicValue(\n  HANDLE                            hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC       Characteristic,\n  ULONG                             CharacteristicValueDataSize,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE CharacteristicValue,\n  USHORT                            *CharacteristicValueSizeRequired,\n  ULONG                             Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets the value of the specified characteristic.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetDescriptors": {
+        "prototype": "HRESULT BluetoothGATTGetDescriptors(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC Characteristic,\n  USHORT                      DescriptorsBufferCount,\n  PBTH_LE_GATT_DESCRIPTOR     DescriptorsBuffer,\n  USHORT                      *DescriptorsBufferActual,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the descriptors available for the specified characteristic.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetDescriptorValue": {
+        "prototype": "HRESULT BluetoothGATTGetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  ULONG                         DescriptorValueDataSize,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  USHORT                        *DescriptorValueSizeRequired,\n  ULONG                         Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets the value of the specified descriptor.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetIncludedServices": {
+        "prototype": "HRESULT BluetoothGATTGetIncludedServices(\n  HANDLE               hDevice,\n  PBTH_LE_GATT_SERVICE ParentService,\n  USHORT               IncludedServicesBufferCount,\n  PBTH_LE_GATT_SERVICE IncludedServicesBuffer,\n  USHORT               *IncludedServicesBufferActual,\n  ULONG                Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Gets all the included services available for a given service.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTGetServices": {
+        "prototype": "HRESULT BluetoothGATTGetServices(\n  HANDLE               hDevice,\n  USHORT               ServicesBufferCount,\n  PBTH_LE_GATT_SERVICE ServicesBuffer,\n  USHORT               *ServicesBufferActual,\n  ULONG                Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "The BluetoothGATTGetServices function gets all the primary services available for a server.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTRegisterEvent": {
+        "prototype": "HRESULT BluetoothGATTRegisterEvent(\n  HANDLE                           hService,\n  BTH_LE_GATT_EVENT_TYPE           EventType,\n  PVOID                            EventParameterIn,\n  PFNBLUETOOTH_GATT_EVENT_CALLBACK Callback,\n  PVOID                            CallbackContext,\n  BLUETOOTH_GATT_EVENT_HANDLE      *pEventHandle,\n  ULONG                            Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Registers a routine to be called back during a characteristic value change event on the given characteristic identified by its characteristic handle.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTSetCharacteristicValue": {
+        "prototype": "HRESULT BluetoothGATTSetCharacteristicValue(\n  HANDLE                             hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC        Characteristic,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE  CharacteristicValue,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Writes the specified characteristic value to the Bluetooth device.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTSetDescriptorValue": {
+        "prototype": "HRESULT BluetoothGATTSetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  ULONG                         Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Writes the specified descriptor value to the Bluetooth device.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
+    },
+    "BluetoothGATTUnregisterEvent": {
+        "prototype": "HRESULT BluetoothGATTUnregisterEvent(\n  BLUETOOTH_GATT_EVENT_HANDLE EventHandle,\n  ULONG                       Flags\n);",
+        "dllLibrary": "bluetoothapis",
+        "comment": "Unregisters the given characteristic value change event.",
+        "minimumWindowsVersion": "WIN8",
+        "category": "bluetooth"
     },
     "BluetoothGetRadioInfo": {
         "prototype": "DWORD BluetoothGetRadioInfo(\n  HANDLE                hRadio,\n  PBLUETOOTH_RADIO_INFO pRadioInfo\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothGetRadioInfo function obtains information about a Bluetooth radio."
+        "comment": "The BluetoothGetRadioInfo function obtains information about a Bluetooth radio.",
+        "category": "bluetooth"
     },
     "BluetoothIsConnectable": {
         "prototype": "BOOL BluetoothIsConnectable(\n  HANDLE hRadio\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothIsConnectable function determines whether a Bluetooth radio or radios is connectable."
+        "comment": "The BluetoothIsConnectable function determines whether a Bluetooth radio or radios is connectable.",
+        "category": "bluetooth"
     },
     "BluetoothIsDiscoverable": {
         "prototype": "BOOL BluetoothIsDiscoverable(\n  HANDLE hRadio\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothIsDiscoverable function determines whether a Bluetooth radio or radios is discoverable."
+        "comment": "The BluetoothIsDiscoverable function determines whether a Bluetooth radio or radios is discoverable.",
+        "category": "bluetooth"
     },
     "BluetoothIsVersionAvailable": {
         "prototype": "BOOL BluetoothIsVersionAvailable(\n  UCHAR MajorVersion,\n  UCHAR MinorVersion\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothIsVersionAvailable function indicates if the installed Bluetooth binary set supports the requested version."
+        "comment": "The BluetoothIsVersionAvailable function indicates if the installed Bluetooth binary set supports the requested version.",
+        "category": "bluetooth"
     },
     "BluetoothRegisterForAuthenticationEx": {
         "prototype": "DWORD BluetoothRegisterForAuthenticationEx(\n  const BLUETOOTH_DEVICE_INFO            *pbtdiIn,\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,\n  PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,\n  PVOID                                  pvParam\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothRegisterForAuthenticationEx function registers an application for a pin request, numeric comparison and callback function."
+        "comment": "The BluetoothRegisterForAuthenticationEx function registers an application for a pin request, numeric comparison and callback function.",
+        "category": "bluetooth"
     },
     "BluetoothRemoveDevice": {
         "prototype": "DWORD BluetoothRemoveDevice(\n  const BLUETOOTH_ADDRESS *pAddress\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device."
+        "comment": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device.",
+        "category": "bluetooth"
     },
     "BluetoothSetServiceState": {
         "prototype": "DWORD BluetoothSetServiceState(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  const GUID                  *pGuidService,\n  DWORD                       dwServiceFlags\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothSetServiceState function enables or disables services for a Bluetooth device."
+        "comment": "The BluetoothSetServiceState function enables or disables services for a Bluetooth device.",
+        "category": "bluetooth"
     },
     "BluetoothUnregisterAuthentication": {
         "prototype": "BOOL BluetoothUnregisterAuthentication(\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothUnregisterAuthentication function removes registration for a callback routine that was previously registered with a call to the BluetoothRegisterForAuthentication function."
+        "comment": "The BluetoothUnregisterAuthentication function removes registration for a callback routine that was previously registered with a call to the BluetoothRegisterForAuthentication function.",
+        "category": "bluetooth"
     },
     "BluetoothUpdateDeviceRecord": {
         "prototype": "DWORD BluetoothUpdateDeviceRecord(\n  const BLUETOOTH_DEVICE_INFO *pbtdi\n);",
         "dllLibrary": "bthprops",
-        "comment": "The BluetoothUpdateDeviceRecord function updates the local computer cache about a Bluetooth device."
+        "comment": "The BluetoothUpdateDeviceRecord function updates the local computer cache about a Bluetooth device.",
+        "category": "bluetooth"
     },
     "BringWindowToTop": {
         "prototype": "BOOL BringWindowToTop(\n  HWND hWnd\n);",

@@ -6,7 +6,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, non_constant_identifier_names
+// ignore_for_file: constant_identifier_names, camel_case_types
 
 import 'dart:ffi';
 
@@ -67,7 +68,7 @@ final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
 ///   BLUETOOTH_DEVICE_INFO *pbtdi
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothDisplayDeviceProperties(
         int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothDisplayDeviceProperties(hwndParent, pbtdi);
@@ -86,7 +87,7 @@ final _BluetoothDisplayDeviceProperties = _bthprops.lookupFunction<
 ///   BOOL   fEnabled
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothEnableDiscovery(int hRadio, int fEnabled) =>
     _BluetoothEnableDiscovery(hRadio, fEnabled);
 
@@ -103,7 +104,7 @@ final _BluetoothEnableDiscovery = _bthprops.lookupFunction<
 ///   BOOL   fEnabled
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothEnableIncomingConnections(int hRadio, int fEnabled) =>
     _BluetoothEnableIncomingConnections(hRadio, fEnabled);
 
@@ -124,7 +125,7 @@ final _BluetoothEnableIncomingConnections = _bthprops.lookupFunction<
 ///   GUID                        *pGuidServices
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothEnumerateInstalledServices(
         int hRadio,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
@@ -150,7 +151,7 @@ final _BluetoothEnumerateInstalledServices = _bthprops.lookupFunction<
 ///   HBLUETOOTH_DEVICE_FIND hFind
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindDeviceClose(int hFind) => _BluetoothFindDeviceClose(hFind);
 
 final _BluetoothFindDeviceClose = _bthprops.lookupFunction<
@@ -166,7 +167,7 @@ final _BluetoothFindDeviceClose = _bthprops.lookupFunction<
 ///   BLUETOOTH_DEVICE_INFO                *pbtdi
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindFirstDevice(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothFindFirstDevice(pbtsp, pbtdi);
@@ -186,7 +187,7 @@ final _BluetoothFindFirstDevice = _bthprops.lookupFunction<
 ///   HANDLE                            *phRadio
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindFirstRadio(
         Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio) =>
     _BluetoothFindFirstRadio(pbtfrp, phRadio);
@@ -205,7 +206,7 @@ final _BluetoothFindFirstRadio = _bthprops.lookupFunction<
 ///   BLUETOOTH_DEVICE_INFO  *pbtdi
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindNextDevice(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothFindNextDevice(hFind, pbtdi);
 
@@ -222,7 +223,7 @@ final _BluetoothFindNextDevice = _bthprops.lookupFunction<
 ///   HANDLE                *phRadio
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindNextRadio(int hFind, Pointer<IntPtr> phRadio) =>
     _BluetoothFindNextRadio(hFind, phRadio);
 
@@ -238,7 +239,7 @@ final _BluetoothFindNextRadio = _bthprops.lookupFunction<
 ///   HBLUETOOTH_RADIO_FIND hFind
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothFindRadioClose(int hFind) => _BluetoothFindRadioClose(hFind);
 
 final _BluetoothFindRadioClose = _bthprops.lookupFunction<
@@ -254,7 +255,7 @@ final _BluetoothFindRadioClose = _bthprops.lookupFunction<
 ///   PBLUETOOTH_RADIO_INFO pRadioInfo
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothGetRadioInfo(
         int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo) =>
     _BluetoothGetRadioInfo(hRadio, pRadioInfo);
@@ -272,7 +273,7 @@ final _BluetoothGetRadioInfo = _bthprops.lookupFunction<
 ///   HANDLE hRadio
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothIsConnectable(int hRadio) => _BluetoothIsConnectable(hRadio);
 
 final _BluetoothIsConnectable = _bthprops.lookupFunction<
@@ -287,7 +288,7 @@ final _BluetoothIsConnectable = _bthprops.lookupFunction<
 ///   HANDLE hRadio
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothIsDiscoverable(int hRadio) => _BluetoothIsDiscoverable(hRadio);
 
 final _BluetoothIsDiscoverable = _bthprops.lookupFunction<
@@ -303,7 +304,7 @@ final _BluetoothIsDiscoverable = _bthprops.lookupFunction<
 ///   UCHAR MinorVersion
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothIsVersionAvailable(int MajorVersion, int MinorVersion) =>
     _BluetoothIsVersionAvailable(MajorVersion, MinorVersion);
 
@@ -324,7 +325,7 @@ final _BluetoothIsVersionAvailable = _bthprops.lookupFunction<
 ///   PVOID                                  pvParam
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothRegisterForAuthenticationEx(
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
         Pointer<IntPtr> phRegHandleOut,
@@ -354,7 +355,7 @@ final _BluetoothRegisterForAuthenticationEx = _bthprops.lookupFunction<
 ///   const BLUETOOTH_ADDRESS *pAddress
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress) =>
     _BluetoothRemoveDevice(pAddress);
 
@@ -373,7 +374,7 @@ final _BluetoothRemoveDevice = _bthprops.lookupFunction<
 ///   DWORD                       dwServiceFlags
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothSetServiceState(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
         Pointer<GUID> pGuidService, int dwServiceFlags) =>
     _BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags);
@@ -396,7 +397,7 @@ final _BluetoothSetServiceState = _bthprops.lookupFunction<
 ///   HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothUnregisterAuthentication(int hRegHandle) =>
     _BluetoothUnregisterAuthentication(hRegHandle);
 
@@ -412,7 +413,7 @@ final _BluetoothUnregisterAuthentication = _bthprops.lookupFunction<
 ///   const BLUETOOTH_DEVICE_INFO *pbtdi
 /// );
 /// ```
-/// {@category bthprops}
+/// {@category bluetooth}
 int BluetoothUpdateDeviceRecord(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothUpdateDeviceRecord(pbtdi);
 

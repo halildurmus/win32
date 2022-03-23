@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 // Inline Win32 APIs that cannot be wrapped with FFI.
 
 import 'dart:ffi';

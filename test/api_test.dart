@@ -7,6 +7,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
+// ignore_for_file: non_constant_identifier_names
+
 @TestOn('windows')
 
 import 'dart:ffi';
@@ -7822,6 +7824,241 @@ void main() {
           'BluetoothUpdateDeviceRecord');
       expect(BluetoothUpdateDeviceRecord, isA<Function>());
     });
+  });
+
+  group('Test bluetoothapis functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTAbortReliableWrite', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTAbortReliableWrite = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice, Uint64 ReliableWriteContext, Uint32 Flags),
+            int Function(int hDevice, int ReliableWriteContext,
+                int Flags)>('BluetoothGATTAbortReliableWrite');
+        expect(BluetoothGATTAbortReliableWrite, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTBeginReliableWrite', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTBeginReliableWrite = bluetoothapis.lookupFunction<
+            Int32 Function(IntPtr hDevice, Pointer<Uint64> ReliableWriteContext,
+                Uint32 Flags),
+            int Function(int hDevice, Pointer<Uint64> ReliableWriteContext,
+                int Flags)>('BluetoothGATTBeginReliableWrite');
+        expect(BluetoothGATTBeginReliableWrite, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTEndReliableWrite', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTEndReliableWrite = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice, Uint64 ReliableWriteContext, Uint32 Flags),
+            int Function(int hDevice, int ReliableWriteContext,
+                int Flags)>('BluetoothGATTEndReliableWrite');
+        expect(BluetoothGATTEndReliableWrite, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetCharacteristics', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetCharacteristics = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Pointer<BTH_LE_GATT_SERVICE> Service,
+                Uint16 CharacteristicsBufferCount,
+                Pointer<BTH_LE_GATT_CHARACTERISTIC> CharacteristicsBuffer,
+                Pointer<Uint16> CharacteristicsBufferActual,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                Pointer<BTH_LE_GATT_SERVICE> Service,
+                int CharacteristicsBufferCount,
+                Pointer<BTH_LE_GATT_CHARACTERISTIC> CharacteristicsBuffer,
+                Pointer<Uint16> CharacteristicsBufferActual,
+                int Flags)>('BluetoothGATTGetCharacteristics');
+        expect(BluetoothGATTGetCharacteristics, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetCharacteristicValue', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetCharacteristicValue =
+            bluetoothapis.lookupFunction<
+                Int32 Function(
+                    IntPtr hDevice,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                    Uint32 CharacteristicValueDataSize,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>
+                        CharacteristicValue,
+                    Pointer<Uint16> CharacteristicValueSizeRequired,
+                    Uint32 Flags),
+                int Function(
+                    int hDevice,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                    int CharacteristicValueDataSize,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>
+                        CharacteristicValue,
+                    Pointer<Uint16> CharacteristicValueSizeRequired,
+                    int Flags)>('BluetoothGATTGetCharacteristicValue');
+        expect(BluetoothGATTGetCharacteristicValue, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetDescriptors', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetDescriptors = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                Uint16 DescriptorsBufferCount,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> DescriptorsBuffer,
+                Pointer<Uint16> DescriptorsBufferActual,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                int DescriptorsBufferCount,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> DescriptorsBuffer,
+                Pointer<Uint16> DescriptorsBufferActual,
+                int Flags)>('BluetoothGATTGetDescriptors');
+        expect(BluetoothGATTGetDescriptors, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetDescriptorValue', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetDescriptorValue = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
+                Uint32 DescriptorValueDataSize,
+                Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
+                Pointer<Uint16> DescriptorValueSizeRequired,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
+                int DescriptorValueDataSize,
+                Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
+                Pointer<Uint16> DescriptorValueSizeRequired,
+                int Flags)>('BluetoothGATTGetDescriptorValue');
+        expect(BluetoothGATTGetDescriptorValue, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetIncludedServices', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetIncludedServices = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Pointer<BTH_LE_GATT_SERVICE> ParentService,
+                Uint16 IncludedServicesBufferCount,
+                Pointer<BTH_LE_GATT_SERVICE> IncludedServicesBuffer,
+                Pointer<Uint16> IncludedServicesBufferActual,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                Pointer<BTH_LE_GATT_SERVICE> ParentService,
+                int IncludedServicesBufferCount,
+                Pointer<BTH_LE_GATT_SERVICE> IncludedServicesBuffer,
+                Pointer<Uint16> IncludedServicesBufferActual,
+                int Flags)>('BluetoothGATTGetIncludedServices');
+        expect(BluetoothGATTGetIncludedServices, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTGetServices', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTGetServices = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Uint16 ServicesBufferCount,
+                Pointer<BTH_LE_GATT_SERVICE> ServicesBuffer,
+                Pointer<Uint16> ServicesBufferActual,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                int ServicesBufferCount,
+                Pointer<BTH_LE_GATT_SERVICE> ServicesBuffer,
+                Pointer<Uint16> ServicesBufferActual,
+                int Flags)>('BluetoothGATTGetServices');
+        expect(BluetoothGATTGetServices, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTRegisterEvent', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTRegisterEvent = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hService,
+                Int32 EventType,
+                Pointer EventParameterIn,
+                Pointer<NativeFunction<PfnbluetoothGattEventCallback>> Callback,
+                Pointer CallbackContext,
+                Pointer<IntPtr> pEventHandle,
+                Uint32 Flags),
+            int Function(
+                int hService,
+                int EventType,
+                Pointer EventParameterIn,
+                Pointer<NativeFunction<PfnbluetoothGattEventCallback>> Callback,
+                Pointer CallbackContext,
+                Pointer<IntPtr> pEventHandle,
+                int Flags)>('BluetoothGATTRegisterEvent');
+        expect(BluetoothGATTRegisterEvent, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTSetCharacteristicValue', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTSetCharacteristicValue =
+            bluetoothapis.lookupFunction<
+                Int32 Function(
+                    IntPtr hDevice,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>
+                        CharacteristicValue,
+                    Uint64 ReliableWriteContext,
+                    Uint32 Flags),
+                int Function(
+                    int hDevice,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC> Characteristic,
+                    Pointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>
+                        CharacteristicValue,
+                    int ReliableWriteContext,
+                    int Flags)>('BluetoothGATTSetCharacteristicValue');
+        expect(BluetoothGATTSetCharacteristicValue, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTSetDescriptorValue', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTSetDescriptorValue = bluetoothapis.lookupFunction<
+            Int32 Function(
+                IntPtr hDevice,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
+                Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
+                Uint32 Flags),
+            int Function(
+                int hDevice,
+                Pointer<BTH_LE_GATT_DESCRIPTOR> Descriptor,
+                Pointer<BTH_LE_GATT_DESCRIPTOR_VALUE> DescriptorValue,
+                int Flags)>('BluetoothGATTSetDescriptorValue');
+        expect(BluetoothGATTSetDescriptorValue, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate BluetoothGATTUnregisterEvent', () {
+        final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+        final BluetoothGATTUnregisterEvent = bluetoothapis.lookupFunction<
+            Int32 Function(IntPtr EventHandle, Uint32 Flags),
+            int Function(
+                int EventHandle, int Flags)>('BluetoothGATTUnregisterEvent');
+        expect(BluetoothGATTUnregisterEvent, isA<Function>());
+      });
+    }
   });
 
   group('Test powrprof functions', () {

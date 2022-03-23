@@ -17,7 +17,7 @@
 // https://github.com/MicrosoftDocs/win32. Please move documented constants to
 // `constants.dart` as appropriate to ensure they are picked up by `dartdoc`.
 
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, constant_identifier_names
 
 import 'dart:ffi';
 
