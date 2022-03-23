@@ -1,3 +1,7 @@
+## 2.4.4
+
+- Fix broken doc links.
+
 ## 2.4.3
 
 - Add Bluetooth LE APIs
