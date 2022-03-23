@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
@@ -19,6 +20,7 @@ import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
+
 import 'IInspectable.dart';
 
 /// @nodoc
