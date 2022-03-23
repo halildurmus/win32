@@ -29,9 +29,9 @@
 /// version, which in the original header files are suffixed with a capital 'W'
 /// (e.g. `FormatMessageW`).
 ///
-/// You can use the [toNativeUtf16] function to convert a Dart string into a
-/// `Pointer<Utf16>`, which can be passed to any Windows API expecting a string,
-/// for example:
+/// You can use the `toNativeUtf16` String extension function (import
+/// `package:ffi`) to convert a Dart string into a `Pointer<Utf16>`, which can
+/// be passed to any Windows API expecting a string, for example:
 /// ```dart
 ///   final verb = 'open'.toNativeUtf16();
 ///   final process = 'notepad.exe'.toNativeUtf16();
@@ -56,7 +56,7 @@
 /// ```
 ///
 /// A small number of APIs offer no wide version (e.g. `GetProcAddress`), and so
-/// the [convertToANSIString] method may be of use to convert a Dart string to a
+/// the `toANSI` method may be of use to convert a Dart string to a
 /// `Pointer<Uint8>`, which represents this format:
 /// ```dart
 ///   final ansi = convertToANSIString('Beep');

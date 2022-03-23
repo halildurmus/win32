@@ -7926,34 +7926,35 @@ class DWMWINDOWATTRIBUTE {
   /// match the window's contents.
   static const DWMWA_FREEZE_REPRESENTATION = 15;
 
-  /// [Windows 11 and above.] Use with DwmSetWindowAttribute. Enables a non-UWP
-  /// window to use host backdrop brushes. If this flag is set, then a Win32 app
-  /// that calls Windows::UI::Composition APIs can build transparency effects
-  /// using the host backdrop brush (see Compositor.CreateHostBackdropBrush).
-  /// The retrieved value is of type BOOL. TRUE to enable host backdrop brushes
-  /// for the window; otherwise, FALSE.
+  /// Use with DwmSetWindowAttribute. Enables a non-UWP window to use host
+  /// backdrop brushes. If this flag is set, then a Win32 app that calls
+  /// Windows::UI::Composition APIs can build transparency effects using the
+  /// host backdrop brush (see Compositor.CreateHostBackdropBrush). The
+  /// retrieved value is of type BOOL. TRUE to enable host backdrop brushes for
+  /// the window; otherwise, FALSE. (Supported on Windows 11 and above.)
   static const DWMWA_USE_HOSTBACKDROPBRUSH = 17;
 
-  /// [Windows 11 and above.] Allows a window to either use the accent color, or
-  /// dark, according to the user Color Mode preferences.
+  /// Allows a window to either use the accent color, or
+  /// dark, according to the user Color Mode preferences. (Supported on
+  /// Windows 11 and above.)
   static const DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 
-  /// [Windows 11 and above.] Controls the policy that rounds top-level window
-  /// corners.
+  /// Controls the policy that rounds top-level window corners. (Supported on
+  /// Windows 11 and above.)
   static const DWMWA_WINDOW_CORNER_PREFERENCE = 33;
 
-  /// [Windows 11 and above.] The color of the thin border around a top-level
-  /// window.
+  /// The color of the thin border around a top-level window. (Supported on
+  /// Windows 11 and above.)
   static const DWMWA_BORDER_COLOR = 34;
 
-  /// [Windows 11 and above.] The color of the caption.
+  /// The color of the caption. (Supported on Windows 11 and above.)
   static const DWMWA_CAPTION_COLOR = 35;
 
-  /// [Windows 11 and above.] The color of the caption text.
+  /// The color of the caption text. (Supported on Windows 11 and above.)
   static const DWMWA_TEXT_COLOR = 36;
 
-  /// [Windows 11 and above.] Width of the visible border around a thick frame
-  /// window.
+  /// Width of the visible border around a thick frame window. (Supported on
+  /// Windows 11 and above.)
   static const DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37;
 }
 
