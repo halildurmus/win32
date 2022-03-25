@@ -135,6 +135,7 @@ export 'src/oleaut32.dart';
 export 'src/powrprof.dart';
 export 'src/rometadata.dart';
 export 'src/scarddlg.dart';
+export 'src/setupapi.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
 export 'src/spoolss.dart';
