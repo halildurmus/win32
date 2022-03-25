@@ -40,7 +40,7 @@ const windowsBuilds = <String, int>{
   'WIN11_21H2': 22000,
 };
 
-/// Converts to/from win32api.json
+/// Converts to/from functions.json
 class Win32Function {
   final List<String> prototype;
 
