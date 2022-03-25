@@ -11320,6 +11320,24 @@ void main() {
           'SetupDiEnumDeviceInfo');
       expect(SetupDiEnumDeviceInfo, isA<Function>());
     });
+    test('Can instantiate SetupDiEnumDeviceInterfaces', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiEnumDeviceInterfaces = setupapi.lookupFunction<
+              Int32 Function(
+                  Pointer DeviceInfoSet,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+                  Pointer<GUID> InterfaceClassGuid,
+                  Uint32 MemberIndex,
+                  Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData),
+              int Function(
+                  Pointer DeviceInfoSet,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+                  Pointer<GUID> InterfaceClassGuid,
+                  int MemberIndex,
+                  Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData)>(
+          'SetupDiEnumDeviceInterfaces');
+      expect(SetupDiEnumDeviceInterfaces, isA<Function>());
+    });
     test('Can instantiate SetupDiGetClassDevs', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiGetClassDevs = setupapi.lookupFunction<
@@ -11328,6 +11346,28 @@ void main() {
           Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
               int hwndParent, int Flags)>('SetupDiGetClassDevsW');
       expect(SetupDiGetClassDevs, isA<Function>());
+    });
+    test('Can instantiate SetupDiGetDeviceInterfaceDetail', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiGetDeviceInterfaceDetail = setupapi.lookupFunction<
+              Int32 Function(
+                  Pointer DeviceInfoSet,
+                  Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
+                  Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>
+                      DeviceInterfaceDetailData,
+                  Uint32 DeviceInterfaceDetailDataSize,
+                  Pointer<Uint32> RequiredSize,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData),
+              int Function(
+                  Pointer DeviceInfoSet,
+                  Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
+                  Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>
+                      DeviceInterfaceDetailData,
+                  int DeviceInterfaceDetailDataSize,
+                  Pointer<Uint32> RequiredSize,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData)>(
+          'SetupDiGetDeviceInterfaceDetailW');
+      expect(SetupDiGetDeviceInterfaceDetail, isA<Function>());
     });
     test('Can instantiate SetupDiOpenDevRegKey', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');

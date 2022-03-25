@@ -416,6 +416,10 @@ const structsToGenerate = <String, String>{
       "Identifies an authentication service that a server is willing to use to communicate to a client.",
   "Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINFO_DATA":
       "An SP_DEVINFO_DATA structure defines a device instance that is a member of a device information set.",
+  "Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVICE_INTERFACE_DATA":
+      "An SP_DEVICE_INTERFACE_DATA structure defines a device interface in a device information set.",
+  "Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVICE_INTERFACE_DETAIL_DATA_W":
+      "An SP_DEVICE_INTERFACE_DATA structure defines a device interface in a device information set.",
   "Windows.Win32.Media.Speech.SPEVENT":
       "SPEVENT contains information about an event. Events are passed from the text-to-speech (TTS) or speech recognition (SR) engines or audio devices back to applications.",
   "Windows.Win32.Media.Speech.SPEVENTSOURCEINFO":
