@@ -127,7 +127,7 @@ export 'src/dwmapi.dart';
 export 'src/dxva2.dart';
 export 'src/gdi32.dart';
 export 'src/inline.dart';
-export 'src/kernel32.dart';
+export 'src/kernel32.dart' hide GetLastError;
 export 'src/kernelbase.dart';
 export 'src/magnification.dart';
 export 'src/ole32.dart';
@@ -266,3 +266,8 @@ export 'src/com/IWbemLocator.dart';
 export 'src/com/IWbemServices.dart';
 export 'src/com/ToastNotification.dart';
 export 'src/com/UserDataPaths.dart';
+
+int GetLastError() {
+  // FIXME https://github.com/dart-lang/sdk/issues/38832
+  throw UnimplementedError();
+}
