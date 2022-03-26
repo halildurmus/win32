@@ -5407,10 +5407,20 @@
         "dllLibrary": "setupapi",
         "comment": "The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure that specifies a device information element in a device information set."
     },
+    "SetupDiEnumDeviceInterfaces": {
+        "prototype": "WINSETUPAPI BOOL SetupDiEnumDeviceInterfaces(\n  [in]           HDEVINFO                  DeviceInfoSet,\n  [in, optional] PSP_DEVINFO_DATA          DeviceInfoData,\n  [in]           const GUID                *InterfaceClassGuid,\n  [in]           DWORD                     MemberIndex,\n  [out]          PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiEnumDeviceInterfaces function enumerates the device interfaces that are contained in a device information set."
+    },
     "SetupDiGetClassDevs": {
         "prototype": "WINSETUPAPI HDEVINFO SetupDiGetClassDevsW(\n  const GUID *ClassGuid,\n  PCWSTR     Enumerator,\n  HWND       hwndParent,\n  DWORD      Flags\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetClassDevs function returns a handle to a device information set that contains requested device information elements for a local computer."
+    },
+    "SetupDiGetDeviceInterfaceDetail": {
+        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceInterfaceDetailW(\n  [in]            HDEVINFO                           DeviceInfoSet,\n  [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,\n  [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,\n  [in]            DWORD                              DeviceInterfaceDetailDataSize,\n  [out, optional] PDWORD                             RequiredSize,\n  [out, optional] PSP_DEVINFO_DATA                   DeviceInfoData\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiGetDeviceInterfaceDetail function returns details about a device interface."
     },
     "SetupDiOpenDevRegKey": {
         "prototype": "WINSETUPAPI HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",

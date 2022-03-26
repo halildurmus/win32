@@ -5700,6 +5700,50 @@ class SPVOICESTATUS extends Struct {
   external int dwReserved2;
 }
 
+/// An SP_DEVICE_INTERFACE_DATA structure defines a device interface in a
+/// device information set.
+///
+/// {@category Struct}
+class SP_DEVICE_INTERFACE_DATA extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external GUID InterfaceClassGuid;
+
+  @Uint32()
+  external int Flags;
+
+  @IntPtr()
+  external int Reserved;
+}
+
+/// An SP_DEVICE_INTERFACE_DATA structure defines a device interface in a
+/// device information set.
+///
+/// {@category Struct}
+class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Array(1)
+  external Array<Uint16> _DevicePath;
+
+  String get DevicePath {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_DevicePath[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set DevicePath(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _DevicePath[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// An SP_DEVINFO_DATA structure defines a device instance that is a member
 /// of a device information set.
 ///

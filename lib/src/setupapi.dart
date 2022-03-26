@@ -59,6 +59,43 @@ final _SetupDiEnumDeviceInfo = _setupapi.lookupFunction<
     int Function(Pointer DeviceInfoSet, int MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData)>('SetupDiEnumDeviceInfo');
 
+/// The SetupDiEnumDeviceInterfaces function enumerates the device
+/// interfaces that are contained in a device information set.
+///
+/// ```c
+/// WINSETUPAPI BOOL SetupDiEnumDeviceInterfaces(
+///   [in]           HDEVINFO                  DeviceInfoSet,
+///   [in, optional] PSP_DEVINFO_DATA          DeviceInfoData,
+///   [in]           const GUID                *InterfaceClassGuid,
+///   [in]           DWORD                     MemberIndex,
+///   [out]          PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData
+/// );
+/// ```
+/// {@category setupapi}
+int SetupDiEnumDeviceInterfaces(
+        Pointer DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        Pointer<GUID> InterfaceClassGuid,
+        int MemberIndex,
+        Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData) =>
+    _SetupDiEnumDeviceInterfaces(DeviceInfoSet, DeviceInfoData,
+        InterfaceClassGuid, MemberIndex, DeviceInterfaceData);
+
+final _SetupDiEnumDeviceInterfaces = _setupapi.lookupFunction<
+        Int32 Function(
+            Pointer DeviceInfoSet,
+            Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+            Pointer<GUID> InterfaceClassGuid,
+            Uint32 MemberIndex,
+            Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData),
+        int Function(
+            Pointer DeviceInfoSet,
+            Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+            Pointer<GUID> InterfaceClassGuid,
+            int MemberIndex,
+            Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData)>(
+    'SetupDiEnumDeviceInterfaces');
+
 /// The SetupDiGetClassDevs function returns a handle to a device
 /// information set that contains requested device information elements for
 /// a local computer.
@@ -81,6 +118,52 @@ final _SetupDiGetClassDevs = _setupapi.lookupFunction<
         IntPtr hwndParent, Uint32 Flags),
     Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         int hwndParent, int Flags)>('SetupDiGetClassDevsW');
+
+/// The SetupDiGetDeviceInterfaceDetail function returns details about a
+/// device interface.
+///
+/// ```c
+/// WINSETUPAPI BOOL SetupDiGetDeviceInterfaceDetailW(
+///   [in]            HDEVINFO                           DeviceInfoSet,
+///   [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,
+///   [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,
+///   [in]            DWORD                              DeviceInterfaceDetailDataSize,
+///   [out, optional] PDWORD                             RequiredSize,
+///   [out, optional] PSP_DEVINFO_DATA                   DeviceInfoData
+/// );
+/// ```
+/// {@category setupapi}
+int SetupDiGetDeviceInterfaceDetail(
+        Pointer DeviceInfoSet,
+        Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
+        Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
+        int DeviceInterfaceDetailDataSize,
+        Pointer<Uint32> RequiredSize,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData) =>
+    _SetupDiGetDeviceInterfaceDetail(
+        DeviceInfoSet,
+        DeviceInterfaceData,
+        DeviceInterfaceDetailData,
+        DeviceInterfaceDetailDataSize,
+        RequiredSize,
+        DeviceInfoData);
+
+final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
+        Int32 Function(
+            Pointer DeviceInfoSet,
+            Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
+            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
+            Uint32 DeviceInterfaceDetailDataSize,
+            Pointer<Uint32> RequiredSize,
+            Pointer<SP_DEVINFO_DATA> DeviceInfoData),
+        int Function(
+            Pointer DeviceInfoSet,
+            Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
+            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
+            int DeviceInterfaceDetailDataSize,
+            Pointer<Uint32> RequiredSize,
+            Pointer<SP_DEVINFO_DATA> DeviceInfoData)>(
+    'SetupDiGetDeviceInterfaceDetailW');
 
 /// The SetupDiOpenDevRegKey function opens a registry key for
 /// device-specific configuration information.
