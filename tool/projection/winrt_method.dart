@@ -33,7 +33,7 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String get identifiers => [
         'ptr.ref.lpVtbl',
-        'result',
+        if (!isVoidReturn) 'retValuePtr',
         ...parameters.map((param) => param.identifier)
       ].map((p) => '$p, ').join();
 
@@ -70,7 +70,7 @@ class WinRTMethodProjection extends MethodProjection {
 
           if (FAILED(hr)) throw WindowsException(hr);
 
-          final retVlaue = retValuePtr.$valRef;
+          final retValue = retValuePtr.$valRef;
           return retValue;
         } finally {
           free(retValuePtr);
