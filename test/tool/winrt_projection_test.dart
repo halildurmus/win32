@@ -52,8 +52,8 @@ void main() {
     final typeIdentifier = method!.returnType.typeIdentifier;
     final typeProjection = TypeProjection(typeIdentifier);
 
-    expect(typeProjection.dartType, equals('IntPtr'));
     expect(typeProjection.nativeType, equals('IntPtr'));
+    expect(typeProjection.dartType, equals('int'));
   });
 
   test('WinRT interface has right vtable start', () {
@@ -165,6 +165,7 @@ void main() {
             'HRESULT Function(Pointer, Pointer<IntPtr>,)'));
     expect(numeralSystemProperty.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>,)'));
+    expect(numeralSystemProperty.returnType.dartType, equals('int'));
   });
 
   test('WinRT get property successfully projects int', () {

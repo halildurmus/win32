@@ -209,7 +209,7 @@ class TypeProjection {
 
     // This is used by WinRT for an HSTRING
     if (isString) {
-      return const TypeTuple('IntPtr', 'IntPtr');
+      return const TypeTuple('IntPtr', 'int');
     }
 
     // Could be an enum like FOLDERFLAGS

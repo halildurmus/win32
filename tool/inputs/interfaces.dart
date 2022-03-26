@@ -103,7 +103,7 @@ final windowsRuntimeTypesToGenerate = [
   // 'Windows.Foundation.IPropertyValue',
   // 'Windows.Foundation.IStringable',
   // 'Windows.Gaming.Input.IGamepadStatics',
-  // 'Windows.Globalization.ICalendar',
+  'Windows.Globalization.ICalendar',
   // 'Windows.Storage.IUserDataPathsStatics',
   // 'Windows.Storage.Pickers.IFileOpenPicker',
   // 'Windows.UI.Notifications.IToastNotificationFactory',
