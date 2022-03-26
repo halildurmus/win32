@@ -73,7 +73,7 @@ class SaveFilePicker extends FileDialog {
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Show(NULL);
+    hr = fileDialog.Show(hWndOwner);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;

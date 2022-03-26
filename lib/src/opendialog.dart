@@ -104,7 +104,7 @@ class OpenFilePicker extends FileDialog {
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Show(NULL);
+    hr = fileDialog.Show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
