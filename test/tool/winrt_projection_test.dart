@@ -153,9 +153,9 @@ void main() {
     expect(
         dateTimeProjection.nativePrototype,
         equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
+            'HRESULT Function(Pointer, Pointer<Uint64>, )'));
     expect(dateTimeProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>, )'));
     expect(dateTimeProjection.returnType.dartType, equals('int'));
     expect(dateTimeProjection.toString().trimLeft(),
         startsWith('int GetDateTime'));

@@ -11,14 +11,14 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String get dartParams => [
         'Pointer',
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}',
+        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
         ...parameters.map((param) => param.dartProjection),
       ].map((p) => '$p, ').join();
 
   @override
   String get nativeParams => [
         'Pointer',
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}',
+        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
         ...parameters.map((param) => param.ffiProjection),
       ].map((p) => '$p, ').join();
 
