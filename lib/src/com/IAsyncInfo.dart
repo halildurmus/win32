@@ -19,6 +19,7 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 
 import 'IInspectable.dart';
@@ -41,7 +42,7 @@ class IAsyncInfo extends IInspectable {
           .cast<
               Pointer<
                   NativeFunction<
-                      Uint32 Function(
+                      HRESULT Function(
             Pointer,
             Pointer<Uint32>,
           )>>>()
@@ -70,7 +71,7 @@ class IAsyncInfo extends IInspectable {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
+                      HRESULT Function(
             Pointer,
             Pointer<Int32>,
           )>>>()
@@ -99,7 +100,7 @@ class IAsyncInfo extends IInspectable {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
+                      HRESULT Function(
             Pointer,
             Pointer<Int32>,
           )>>>()
