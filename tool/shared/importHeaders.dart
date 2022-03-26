@@ -13,7 +13,6 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
     import '../ole32.dart';
     import '../structs.dart';
     import '../structs.g.dart';
-    import '../types.dart';
     import '../utils.dart';
 ''';
 

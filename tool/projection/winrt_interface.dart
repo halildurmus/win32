@@ -98,6 +98,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
   String get extraHeaders => """
     import '../api-ms-win-core-winrt-string-l1-1-0.dart';
     import '../winrt/winrt_helpers.dart';
+    import '../types.dart';
   """;
 
   @override
