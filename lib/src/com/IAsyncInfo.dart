@@ -125,12 +125,12 @@ class IAsyncInfo extends IInspectable {
           .cast<
               Pointer<
                   NativeFunction<
-                      Void Function(
+                      HRESULT Function(
             Pointer,
           )>>>()
           .value
           .asFunction<
-              void Function(
+              int Function(
             Pointer,
           )>()(
         ptr.ref.lpVtbl,
@@ -141,12 +141,12 @@ class IAsyncInfo extends IInspectable {
           .cast<
               Pointer<
                   NativeFunction<
-                      Void Function(
+                      HRESULT Function(
             Pointer,
           )>>>()
           .value
           .asFunction<
-              void Function(
+              int Function(
             Pointer,
           )>()(
         ptr.ref.lpVtbl,

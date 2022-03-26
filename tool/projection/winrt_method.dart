@@ -45,10 +45,33 @@ class WinRTMethodProjection extends MethodProjection {
       .asFunction<$dartPrototype>()($identifiers);
 ''';
 
+  String stringMethodDeclaration() => '''
+      String $name($methodParams) {
+      final retValuePtr = calloc<HSTRING>();
+  
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()($identifiers);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+
+          final retValue = convertFromHString(retValuePtr.value);
+          return retValue;
+        } finally {
+          WindowsDeleteString(retValuePtr.value);
+          free(retValuePtr);
+        }
+      }
+''';
+
   @override
   String toString() {
     try {
       if (isVoidReturn) return voidMethodDeclaration();
+      if (returnType.isString) return stringMethodDeclaration();
 
       final valRef = returnType.dartType == 'double' ||
               returnType.dartType == 'int' ||
