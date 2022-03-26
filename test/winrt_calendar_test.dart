@@ -54,6 +54,33 @@ void main() {
       expect(calendar.Year, inInclusiveRange(1721, 1800));
     });
 
+    test('Add and delete days', () {
+      final original = calendar.Clone();
+      calendar
+        ..AddDays(1)
+        ..AddDays(-1);
+      final compare = calendar.Compare(original);
+      expect(compare, isZero);
+    });
+
+    test('Add and delete days 2', () {
+      final original = calendar.Clone();
+      calendar
+        ..AddDays(2)
+        ..AddDays(-1);
+      final compare = calendar.Compare(original);
+      expect(compare, isPositive);
+    });
+
+    test('Add and delete days 3', () {
+      final original = calendar.Clone();
+      calendar
+        ..AddDays(2)
+        ..AddDays(-3);
+      final compare = calendar.Compare(original);
+      expect(compare, isNegative);
+    });
+
     test('Calendar month as string', () {
       // Repeat to ensure that this doesn't fail because of some kind of memory
       // issue.
