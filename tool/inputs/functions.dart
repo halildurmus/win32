@@ -11,11 +11,10 @@ const dllLibraries = [
 
   // DLLs
   'advapi32', 'bthprops', 'bluetoothapis', 'comctl32', 'comdlg32', 'dbghelp',
-  'dwmapi', 'dxva2',
-  'gdi32', 'kernel32', 'kernelbase', 'magnification', 'ole32', 'oleaut32',
-  'powrprof', 'rometadata', 'scarddlg', 'shcore', 'shell32', 'spoolss',
-  'user32', 'uxtheme', 'version', 'xinput1_4', 'winmm', 'winscard',
-  'winspool', 'wlanapi', 'ws2_32'
+  'dwmapi', 'dxva2', 'gdi32', 'kernel32', 'kernelbase', 'magnification',
+  'ole32', 'oleaut32', 'powrprof', 'rometadata', 'scarddlg', 'setupapi',
+  'shcore', 'shell32', 'spoolss', 'user32', 'uxtheme', 'version', 'xinput1_4',
+  'winmm', 'winscard', 'winspool', 'wlanapi', 'ws2_32'
 ];
 
 /// Maps between Windows versions and the corresponding build numbers
@@ -41,7 +40,7 @@ const windowsBuilds = <String, int>{
   'WIN11_21H2': 22000,
 };
 
-/// Converts to/from win32api.json
+/// Converts to/from functions.json
 class Win32Function {
   final List<String> prototype;
 
