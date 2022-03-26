@@ -52,8 +52,8 @@ void main() {
     final typeIdentifier = method!.returnType.typeIdentifier;
     final typeProjection = TypeProjection(typeIdentifier);
 
-    expect(typeProjection.dartType, equals('Pointer<IntPtr>'));
-    expect(typeProjection.nativeType, equals('Pointer<IntPtr>'));
+    expect(typeProjection.dartType, equals('IntPtr'));
+    expect(typeProjection.nativeType, equals('IntPtr'));
   });
 
   test('WinRT interface has right vtable start', () {
@@ -149,6 +149,36 @@ void main() {
     final projection = WinRTInterfaceProjection(winTypeDef!);
     final output = projection.methodProjections.first.toString();
     expect(output, isNotEmpty);
+  });
+
+  test('WinRT get property successfully projects HSTRING', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final numeralSystemProperty = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_NumeralSystem');
+
+    expect(
+        numeralSystemProperty.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<IntPtr>,)'));
+    expect(numeralSystemProperty.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>,)'));
+  });
+
+  test('WinRT get property successfully projects int', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final numeralSystemProperty = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_NumberOfDaysInThisMonth');
+
+    expect(numeralSystemProperty.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Int32>,)'));
+    expect(numeralSystemProperty.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>,)'));
   });
 
   test('WinRT set property successfully projects something', () {

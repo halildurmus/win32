@@ -16,8 +16,16 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
   @override
   bool get convertBool => returnType.dartType == 'bool';
 
+  // WinRT properties always return an HRESULT
+  @override
+  String get nativePrototype => 'HRESULT Function($nativeParams)';
+
   @override
   String get nativeParams => 'Pointer, Pointer<${returnType.nativeType}>,';
+
+  // WinRT properties always return an HRESULT
+  @override
+  String get dartPrototype => 'int Function($nativeParams)';
 
   @override
   String get dartParams => nativeParams;
