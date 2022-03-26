@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
 import 'method.dart';
+import 'winrt_method.dart';
 import 'winrt_property.dart';
 
 class WinRTInterfaceProjection extends InterfaceProjection {
@@ -57,7 +58,7 @@ class WinRTInterfaceProjection extends InterfaceProjection {
             WinRTSetPropertyProjection(method, vtableOffset++);
         projection.add(setPropertyProjection);
       } else {
-        final methodProjection = MethodProjection(method, vtableOffset++);
+        final methodProjection = WinRTMethodProjection(method, vtableOffset++);
         projection.add(methodProjection);
       }
     }

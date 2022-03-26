@@ -142,6 +142,25 @@ void main() {
     expect(projection.importHeader, contains('IInspectable.dart'));
   });
 
+  test('WinRT GetDateTime returns an int, not a DateTime', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final dateTimeProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'GetDateTime');
+
+    expect(
+        dateTimeProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
+    expect(dateTimeProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+    expect(dateTimeProjection.returnType.dartType, equals('int'));
+    expect(dateTimeProjection.toString().trimLeft(),
+        startsWith('int GetDateTime'));
+  });
+
   test('WinRT get property successfully projects something', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker');

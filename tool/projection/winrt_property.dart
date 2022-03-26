@@ -35,6 +35,7 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
     try {
       final valRef = returnType.dartType == 'double' ||
               returnType.dartType == 'int' ||
+              returnType.dartType == 'bool' ||
               returnType.dartType.startsWith('Pointer')
           ? 'value'
           : 'ref';
@@ -52,7 +53,7 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
           if (FAILED(hr)) throw WindowsException(hr);
 
           final retValue = retValuePtr.$valRef;
-          return ${convertBool ? 'retValue == 0' : 'retValue'};
+          return retValue;
         } finally {
           free(retValuePtr);
         }
