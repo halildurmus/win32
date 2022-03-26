@@ -25,7 +25,7 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
 
   // WinRT properties always return an HRESULT
   @override
-  String get dartPrototype => 'int Function($nativeParams)';
+  String get dartPrototype => 'int Function($dartParams)';
 
   @override
   String get dartParams => nativeParams;
@@ -73,6 +73,20 @@ class WinRTSetPropertyProjection extends SetPropertyProjection {
   String get exposedMethodName => method.name.startsWith('put__')
       ? safeIdentifierForString(method.name.substring(5))
       : safeIdentifierForString(method.name.substring(4));
+
+  // WinRT properties always return an HRESULT
+  @override
+  String get nativePrototype => 'HRESULT Function($nativeParams)';
+
+  @override
+  String get nativeParams => 'Pointer, ${parameters.first.type.nativeType},';
+
+  // WinRT properties always return an HRESULT
+  @override
+  String get dartPrototype => 'int Function($dartParams)';
+
+  @override
+  String get dartParams => 'Pointer, ${parameters.first.type.dartType},';
 
   @override
   String toString() => '''
