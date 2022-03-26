@@ -4,8 +4,6 @@
 
 // Simple example of calling WinRT APIs
 
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
@@ -19,19 +17,15 @@ void main() {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');
 
-    final calendarSystem = calloc<HSTRING>();
-    calendar.GetCalendarSystem(calendarSystem);
-    print('The calendar system is ${calendarSystem.toDartString()}.');
-    free(calendarSystem);
+    final calendarSystem = calendar.GetCalendarSystem();
+    print('The calendar system is $calendarSystem.');
 
-    final dayOfWeek = calloc<HSTRING>();
-    calendar.DayOfWeekAsFullSoloString(dayOfWeek);
-    print('Today is ${dayOfWeek.toDartString()}.');
-    free(dayOfWeek);
+    final dayOfWeek = calendar.DayOfWeekAsFullSoloString();
+    print('Today is $dayOfWeek.');
 
     if (calendar.IsDaylightSavingTime) {
       print('Daylight Saving Time is in observance.');
-    } else if (calendar.IsDaylightSavingTime) {
+    } else {
       print('Daylight Savings Time is not in observance.');
     }
 

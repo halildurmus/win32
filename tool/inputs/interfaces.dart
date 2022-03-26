@@ -96,16 +96,16 @@ const comInterfacesToGenerate = <String>[
 ];
 
 final windowsRuntimeTypesToGenerate = [
-  'Windows.Foundation.IPropertyValue',
-  'Windows.Foundation.IAsyncAction',
+  // 'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncInfo',
-  'Windows.Foundation.IAsyncOperation`1',
-  'Windows.Foundation.IClosable',
-  'Windows.Foundation.IStringable',
+  // 'Windows.Foundation.IAsyncOperation`1',
+  // 'Windows.Foundation.IClosable',
+  // 'Windows.Foundation.IPropertyValue',
+  // 'Windows.Foundation.IStringable',
+  // 'Windows.Gaming.Input.IGamepadStatics',
   'Windows.Globalization.ICalendar',
-  'Windows.Storage.Pickers.IFileOpenPicker',
-  'Windows.Storage.IUserDataPathsStatics',
-  'Windows.Gaming.Input.IGamepadStatics',
-  'Windows.UI.Notifications.IToastNotificationFactory',
-  'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  // 'Windows.Storage.IUserDataPathsStatics',
+  // 'Windows.Storage.Pickers.IFileOpenPicker',
+  // 'Windows.UI.Notifications.IToastNotificationFactory',
+  // 'Windows.UI.Notifications.IToastNotificationManagerStatics',
 ];

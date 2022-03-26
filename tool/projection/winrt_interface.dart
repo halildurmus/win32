@@ -1,6 +1,9 @@
 import 'package:winmd/winmd.dart';
 
 import 'interface.dart';
+import 'method.dart';
+import 'winrt_method.dart';
+import 'winrt_property.dart';
 
 class WinRTInterfaceProjection extends InterfaceProjection {
   WinRTInterfaceProjection(TypeDef typeDef) : super(typeDef);
@@ -16,38 +19,50 @@ class WinRTInterfaceProjection extends InterfaceProjection {
     }
   }
 
-  /// Take a TypeDef and create a Dart projection of it.
-  void projection() {
-    // TODO: Refactor this into smaller pieces
-    // var parent = '';
+  @override
+  String get interfaceImport {
+    if (typeDef.interfaces.isEmpty) {
+      // Inherits from IInspectable, which is a traditional COM type.
+      return 'IInspectable.dart';
+    } else {
+      return getImportForTypeDef(typeDef.interfaces.first);
+    }
+  }
 
-    // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
-    // parent), but all WinRT interfaces have a base type of IInspectable as far
-    // as the COM vtable is concerned. They contain the functions of
-    // IInspectable (as well as IUnknown, from which IInspectable itself
-    // inherits).
+  @override
+  String get importHeader {
+    final imports = {interfaceImport, ...importsForClass()}
+      ..removeWhere((item) => item == '');
+    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+  }
 
-    // final classInheritsFrom = parent;
+  List<MethodProjection>? _methodProjections;
 
-    // // final interface = ClassProjection(
-    // //     sourceType: typeDef.name.startsWith('Windows.Win32')
-    // //         ? SourceType.com
-    // //         : SourceType.winrt,
-    // //     iid: typeDef.guid,
-    // //     name: stripAnsiUnicodeSuffix(typeDef.name),
-    // //     inherits: classInheritsFrom,
-    // //     vtableStart: _vtableStart(typeDef));
+  @override
+  List<MethodProjection> get methodProjections =>
+      _methodProjections ??= _cacheMethodProjections();
 
-    // if (typeDef.genericParams.isNotEmpty) {
-    //   final genericParams =
-    //       typeDef.genericParams.map<String>((p) => '${p.name}, ').join();
-    //   interface.shortNameWithGenericSpecifier =
-    //       '${interface.shortName}<$genericParams>';
-    // } else {
-    //   interface.shortNameWithGenericSpecifier = interface.shortName;
-    // }
+  @override
+  String get category => 'winrt';
 
-    // return interface;
+  List<MethodProjection> _cacheMethodProjections() {
+    final projection = <MethodProjection>[];
+    var vtableOffset = vtableStart;
+    for (final method in typeDef.methods) {
+      if (method.isGetProperty) {
+        final getPropertyProjection =
+            WinRTGetPropertyProjection(method, vtableOffset++);
+        projection.add(getPropertyProjection);
+      } else if (method.isSetProperty) {
+        final setPropertyProjection =
+            WinRTSetPropertyProjection(method, vtableOffset++);
+        projection.add(setPropertyProjection);
+      } else {
+        final methodProjection = WinRTMethodProjection(method, vtableOffset++);
+        projection.add(methodProjection);
+      }
+    }
+    return projection;
   }
 
   @override
@@ -71,28 +86,21 @@ class WinRTInterfaceProjection extends InterfaceProjection {
     return 0;
   }
 
+  // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
+  // parent), but all WinRT interfaces have a base type of IInspectable as far
+  // as the COM vtable is concerned. They contain the functions of
+  // IInspectable (as well as IUnknown, from which IInspectable itself
+  // inherits).
+  @override
+  String get rootHeader => "import 'IInspectable.dart';";
+
+  @override
+  String get extraHeaders => """
+    import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+    import '../winrt/winrt_helpers.dart';
+    import '../types.dart';
+  """;
+
   @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
-
-  void stuff() {
-    // WinRT methods always return an HRESULT, and provide the actual return
-    //   // value as an pointer
-    //   methodProjection.returnTypeNative = 'Int32';
-    //   methodProjection.returnTypeDart = 'int';
-    //   if (method.returnType.typeIdentifier.baseType != winmd.BaseType.Void) {
-    //     final typeBuilder = TypeProjection(method.returnType.typeIdentifier);
-
-    //     if (method.isSetProperty) {
-    //       final paramName = methodProjection.name.substring(4).toCamelCase();
-    //       methodProjection.parameters
-    //           .add(ParameterProjection(paramName, typeBuilder));
-    //     } else if (method.isGetProperty) {
-    //       methodProjection.parameters
-    //           .add(ParameterProjection('value', typeBuilder));
-    //     } else {
-    //       // TODO: needs wrapping in a Pointer<> when it's printed
-    //       methodProjection.parameters
-    //           .add(ParameterProjection('result', typeBuilder));
-    //     }
-  }
 }

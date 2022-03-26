@@ -24,10 +24,12 @@ import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
+///
 /// {@category winrt}
 void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
 /// Closes the Windows Runtime on the current thread.
+///
 /// {@category winrt}
 void winrtUninitialize() => RoUninitialize();
 
@@ -74,6 +76,7 @@ int convertToHString(String string) {
 /// final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
 /// final calendar = ICalendar(object.cast());
 /// ```
+///
 /// {@category winrt}
 Pointer<COMObject> CreateObject(String className, String iid) {
   final hstrClass = calloc<HSTRING>();

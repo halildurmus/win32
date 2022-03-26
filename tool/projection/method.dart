@@ -106,11 +106,22 @@ class MethodProjection {
 
   // TODO: Consider using technique to cache the function lookup.
   @override
-  String toString() => '''
+  String toString() {
+    try {
+      return '''
       ${returnType.dartType} $name($methodParams) => ptr.ref.lpVtbl.value
         .elementAt($vtableOffset)
         .cast<Pointer<NativeFunction<$nativePrototype>>>()
         .value
         .asFunction<$dartPrototype>()($identifiers);
     ''';
+    } on Exception {
+      // Print an error if we're unable to project a method, but don't
+      // completely bail out. The rest may be useful.
+
+      // TODO: Fix these errors as they occur.
+      print('Unable to project method: ${method.name}');
+      return '';
+    }
+  }
 }

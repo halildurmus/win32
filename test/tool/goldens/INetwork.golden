@@ -23,6 +23,8 @@
 
 import 'IDispatch.dart';
       
+      
+      
           /// @nodoc
     const IID_INetwork = '{DCB00002-570F-4A9B-8D69-199FDBA5723B}';
   

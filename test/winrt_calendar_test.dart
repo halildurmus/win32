@@ -46,52 +46,60 @@ void main() {
       calendar.AddYears(-100);
       // This test will start failing in 2100 :)
       expect(calendar.Year, inInclusiveRange(1921, 2000));
+      calendar.AddYears(-100);
+      // This test will start failing in 2100 :)
+      expect(calendar.Year, inInclusiveRange(1821, 1900));
+      calendar.AddYears(-100);
+      // This test will start failing in 2100 :)
+      expect(calendar.Year, inInclusiveRange(1721, 1800));
     });
 
     test('Calendar month as string', () {
-      final hstr = calloc<HSTRING>();
-      calendar.MonthAsFullString(hstr);
-      expect(
-          hstr.toDartString(),
-          isIn([
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-          ]));
-      WindowsDeleteString(hstr.value);
-      free(hstr);
+      // Repeat to ensure that this doesn't fail because of some kind of memory
+      // issue.
+      for (var i = 0; i < 10000; i++) {
+        final month = calendar.MonthAsFullString();
+        expect(
+            month,
+            isIn([
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December'
+            ]));
+      }
     });
 
     test('Calendar month as truncated string', () {
-      final hstr = calloc<HSTRING>();
-      calendar.MonthAsString(3, hstr);
-      expect(
-          hstr.toDartString(),
-          isIn([
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-          ]));
-      WindowsDeleteString(hstr.value);
-      free(hstr);
+      // Repeat to ensure that this doesn't fail because of some kind of memory
+      // issue.
+      for (var i = 0; i < 10000; i++) {
+        final month = calendar.MonthAsString(3);
+        expect(
+            month,
+            isIn([
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec'
+            ]));
+      }
     });
 
     test('Calendar resolved language', () {

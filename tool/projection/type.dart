@@ -40,6 +40,8 @@ const Map<String, TypeTuple> specialTypes = {
   'Windows.Win32.Foundation.ULARGE_INTEGER':
       TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
+  'Windows.Foundation.DateTime':
+      TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'Windows.Foundation.HResult':
       TypeTuple('Int32', 'int', attribute: '@Int32()'),
 };
@@ -209,7 +211,7 @@ class TypeProjection {
 
     // This is used by WinRT for an HSTRING
     if (isString) {
-      return const TypeTuple('Pointer<IntPtr>', 'Pointer<IntPtr>');
+      return const TypeTuple('IntPtr', 'int');
     }
 
     // Could be an enum like FOLDERFLAGS

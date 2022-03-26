@@ -543,4 +543,20 @@ void main() {
     expect(typeProjection.dartType, equals('WAVEFORMATEX'));
     expect(typeProjection.isDartPrimitive, isFalse);
   });
+
+  test('DateTime value types are projected correctly', () {
+    final scope =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+    final typeDef = scope.findMethod('GetDateTime')!;
+
+    // WAVEFORMATEX wfx;
+    final dateTime = typeDef.returnType.typeIdentifier;
+
+    final typeProjection = TypeProjection(dateTime);
+
+    // TODO: Test assumption that this is passed on the wire as a Uint64.
+    expect(typeProjection.dartType, equals('int'));
+    expect(typeProjection.nativeType, equals('Uint64'));
+    expect(typeProjection.isDartPrimitive, isTrue);
+  });
 }
