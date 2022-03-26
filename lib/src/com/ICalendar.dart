@@ -530,19 +530,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -757,19 +757,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 remainingDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int remainingDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         remainingDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -794,19 +794,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1021,19 +1021,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1090,19 +1090,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1159,19 +1159,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1408,19 +1408,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1506,19 +1506,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1575,19 +1575,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -1802,19 +1802,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 idealLength,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int idealLength,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         idealLength,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2029,19 +2029,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2169,19 +2169,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2309,19 +2309,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2449,19 +2449,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
             Int32 minDigits,
+            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
             int minDigits,
+            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         minDigits,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2486,19 +2486,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<Int32>,
             Pointer<COMObject> other,
+            Pointer<Int32>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Int32>,
             Pointer<COMObject> other,
+            Pointer<Int32>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         other,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -2523,19 +2523,19 @@ class ICalendar extends IInspectable {
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<Int32>,
             Uint64 other,
+            Pointer<Int32>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<Int32>,
             int other,
+            Pointer<Int32>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
         other,
+        retValuePtr,
       );
 
       if (FAILED(hr)) throw WindowsException(hr);

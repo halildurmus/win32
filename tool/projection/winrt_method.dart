@@ -11,15 +11,15 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String get dartParams => [
         'Pointer',
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
         ...parameters.map((param) => param.dartProjection),
+        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
 
   @override
   String get nativeParams => [
         'Pointer',
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
         ...parameters.map((param) => param.ffiProjection),
+        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
 
   // WinRT methods always return an HRESULT
@@ -33,8 +33,8 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String get identifiers => [
         'ptr.ref.lpVtbl',
+        ...parameters.map((param) => param.identifier),
         if (!isVoidReturn) 'retValuePtr',
-        ...parameters.map((param) => param.identifier)
       ].map((p) => '$p, ').join();
 
   String voidMethodDeclaration() => '''

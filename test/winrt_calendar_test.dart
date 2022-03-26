@@ -78,25 +78,29 @@ void main() {
       }
     });
 
-    // test('Calendar month as truncated string', () {
-    //   final month = calendar.MonthAsString(3);
-    //   expect(
-    //       month,
-    //       isIn([
-    //         'Jan',
-    //         'Feb',
-    //         'Mar',
-    //         'Apr',
-    //         'May',
-    //         'Jun',
-    //         'Jul',
-    //         'Aug',
-    //         'Sep',
-    //         'Oct',
-    //         'Nov',
-    //         'Dec'
-    //       ]));
-    // });
+    test('Calendar month as truncated string', () {
+      // Repeat to ensure that this doesn't fail because of some kind of memory
+      // issue.
+      for (var i = 0; i < 10000; i++) {
+        final month = calendar.MonthAsString(3);
+        expect(
+            month,
+            isIn([
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec'
+            ]));
+      }
+    });
 
     test('Calendar resolved language', () {
       final hstrPtr = calloc<HSTRING>()..value = calendar.ResolvedLanguage;
