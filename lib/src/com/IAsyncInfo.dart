@@ -22,6 +22,9 @@ import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../winrt/winrt_helpers.dart';
+
 import 'IInspectable.dart';
 
 /// @nodoc

@@ -58,10 +58,9 @@ class WinRTMethodProjection extends MethodProjection {
 
           if (FAILED(hr)) throw WindowsException(hr);
 
-          final retValue = convertFromHString(retValuePtr.value);
+          final retValue = retValuePtr.toDartString();
           return retValue;
         } finally {
-          WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
       }

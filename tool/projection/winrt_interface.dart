@@ -124,6 +124,12 @@ class WinRTInterfaceProjection extends InterfaceProjection {
   String get rootHeader => "import 'IInspectable.dart';";
 
   @override
+  String get extraHeaders => """
+    import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+    import '../winrt/winrt_helpers.dart';
+  """;
+
+  @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
 
   void stuff() {

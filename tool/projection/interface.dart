@@ -175,6 +175,8 @@ class InterfaceProjection {
 
   String get rootHeader => '';
 
+  String get extraHeaders => '';
+
   @override
   String toString() {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
@@ -185,6 +187,7 @@ class InterfaceProjection {
     return '''
       $header
       ${versionSpecificImports(pathToSrc, importHeader, typeDef.interfaces)}
+      $extraHeaders
       $rootHeader
       ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
