@@ -1,6 +1,7 @@
 ## 1.0.28
 
-- Update to Windows.Win32.winmd v19.0.3.39746
+- Add test for GetDateTime
+- Update to Windows.Win32.winmd v19.0.6.9593.
 
 ## 1.0.27
 

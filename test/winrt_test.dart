@@ -233,6 +233,19 @@ void main() {
     expect(method.parameters.length, equals(0));
   });
 
+  test('Calendar.GetDateTime() method is correct', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+    final method = winTypeDef.findMethod('GetDateTime')!;
+
+    expect(method.isProperty, isFalse);
+    expect(method.returnType.typeIdentifier.baseType,
+        equals(BaseType.ValueTypeModifier));
+    expect(method.returnType.typeIdentifier.name, endsWith('DateTime'));
+    expect(method.parameters.length, equals(0));
+  });
+
   test('Calendar.SetToNow() calling convention is correct', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
