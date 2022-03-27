@@ -4,14 +4,29 @@ import 'parameter.dart';
 import 'safenames.dart';
 import 'type.dart';
 
-/// A method.
+/// A generic class representing an entry in a COM function vtable.
+///
+/// This is the base class for a range of COM-based objects, including
+/// [ComMethodProjection], [ComGetPropertyProjection],
+/// [ComSetPropertyProjection], [WinRTMethodProjection],
+/// [WinRTGetPropertyProjection], and [WinRTSetPropertyProjection]. All of these
+/// map down to an entry in a COM vtable representing a method.
 ///
 /// Methods have names, a list of parameters, and may return a type.
-class MethodProjection {
+abstract class MethodProjection {
+  /// The retrieved Windows metadata for the method or property.
   final Method method;
+
+  /// Offset into the COM v-table that represents the method or property.
   final int vtableOffset;
+
+  /// The name, incorporating any overloads that may be required.
   final String name;
+
+  /// Projections for the parameters of the method.
   final List<ParameterProjection> parameters;
+
+  /// Projection for the return type.
   final TypeProjection returnType;
 
   MethodProjection(this.method, this.vtableOffset)
@@ -27,7 +42,7 @@ class MethodProjection {
   /// Dart doesn't allow overloaded methods, so we have to rename methods that
   /// are duplicated.
   static String uniquelyNameMethod(Method method) {
-    // Is it an overload with a name provided by the metadata?
+    // Is it a WinRT method overloaded with a name provided by the metadata?
     final overloadName = method
         .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
     if (overloadName.isNotEmpty) return overloadName;
@@ -72,56 +87,20 @@ class MethodProjection {
     return safeIdentifierForString(method.name);
   }
 
+  /// The parameters exposed by a projected Dart method.
   String get methodParams =>
       parameters.map((param) => '${param.dartProjection}, ').join();
 
-  String get nativeParams => [
-        'Pointer',
-        ...parameters.map((param) => param.ffiProjection),
-      ].map((p) => '$p, ').join();
+  /// The native prototype representing the method.
+  String get nativePrototype;
 
-  String get nativePrototype =>
-      '${returnType.nativeType} Function($nativeParams)';
+  /// The Dart prototype representing the method.
+  String get dartPrototype;
 
-  String get dartParams => [
-        'Pointer',
-        ...parameters.map((param) => param.dartProjection),
-      ].map((p) => '$p, ').join();
+  /// The names of the parameters to be passed through to the underlying COM
+  /// function.
+  String get identifiers;
 
-  String get dartPrototype => '${returnType.dartType} Function($dartParams)';
-
-  String get identifiers => [
-        'ptr.ref.lpVtbl',
-        ...parameters.map((param) => param.identifier)
-      ].map((p) => '$p, ').join();
-
-  // TODO: Check whether there's a better way to detect how methods like
-  // put_AutoDemodulate are declared (should this be a property?) Detect whether
-  // it's a property masquerading as a method.
-  //
-  // The test should be the use of the get_ prefix, combined with the
-  // specialname modifier, but win32metadata incorrectly marks some methods with
-  // this combination (https://github.com/microsoft/win32metadata/issues/707).
-  // So instead, we also need to check the number of parameters.
-
-  // TODO: Consider using technique to cache the function lookup.
-  @override
-  String toString() {
-    try {
-      return '''
-      ${returnType.dartType} $name($methodParams) => ptr.ref.lpVtbl.value
-        .elementAt($vtableOffset)
-        .cast<Pointer<NativeFunction<$nativePrototype>>>()
-        .value
-        .asFunction<$dartPrototype>()($identifiers);
-    ''';
-    } on Exception {
-      // Print an error if we're unable to project a method, but don't
-      // completely bail out. The rest may be useful.
-
-      // TODO: Fix these errors as they occur.
-      print('Unable to project method: ${method.name}');
-      return '';
-    }
-  }
+  String get nativeParams;
+  String get dartParams;
 }

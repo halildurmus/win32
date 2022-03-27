@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../tool/projection/interface.dart';
+import '../../tool/projection/com_interface.dart';
 
 void main() {
   // test('Windows Runtime golden', () {
@@ -25,7 +25,7 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final typeDef = scope.findTypeDef(typeToGenerate)!;
 
-    final dartClass = InterfaceProjection(typeDef).toString();
+    final dartClass = ComInterfaceProjection(typeDef).toString();
 
     File('test/tool/goldens/INetwork.comparison').writeAsStringSync(dartClass);
     final golden = File('test/tool/goldens/INetwork.golden').readAsStringSync();

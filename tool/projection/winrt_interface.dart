@@ -1,11 +1,11 @@
 import 'package:winmd/winmd.dart';
 
-import 'interface.dart';
+import 'com_interface.dart';
 import 'method.dart';
 import 'winrt_method.dart';
 import 'winrt_property.dart';
 
-class WinRTInterfaceProjection extends InterfaceProjection {
+class WinRTInterfaceProjection extends ComInterfaceProjection {
   WinRTInterfaceProjection(TypeDef typeDef) : super(typeDef);
 
   @override

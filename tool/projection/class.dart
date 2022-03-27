@@ -1,14 +1,14 @@
 import 'package:winmd/winmd.dart';
 
-import 'interface.dart';
+import 'com_interface.dart';
 import 'utils.dart';
 
-class ClassProjection extends InterfaceProjection {
-  final InterfaceProjection interface;
+class ComClassProjection extends ComInterfaceProjection {
+  final ComInterfaceProjection interface;
 
-  ClassProjection(TypeDef typeDef, this.interface) : super(typeDef);
+  ComClassProjection(TypeDef typeDef, this.interface) : super(typeDef);
 
-  factory ClassProjection.fromInterface(TypeDef interface) {
+  factory ComClassProjection.fromInterface(TypeDef interface) {
     final className = generateClassName(interface);
     final classTypeDef = interface.scope.findTypeDef(className);
 
@@ -16,7 +16,7 @@ class ClassProjection extends InterfaceProjection {
       throw Exception('Missing a matching class for ${interface.name}.');
     }
 
-    return ClassProjection(classTypeDef, InterfaceProjection(interface));
+    return ComClassProjection(classTypeDef, ComInterfaceProjection(interface));
   }
 
   /// Take a fully-qualified interface name (e.g.

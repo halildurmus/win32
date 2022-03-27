@@ -1,23 +1,23 @@
 import 'package:winmd/winmd.dart';
 
-import 'method.dart';
+import 'com_method.dart';
 import 'safenames.dart';
 import 'utils.dart';
 
 // TODO: Deal with fake properties like IUPnPServices.get_Item([In], [Out]).
 
-abstract class PropertyProjection extends MethodProjection {
-  PropertyProjection(Method method, int vtableOffset)
+abstract class ComPropertyProjection extends ComMethodProjection {
+  ComPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
   String get exposedMethodName;
-
-  bool get convertBool => parameters.first.type.dartType == 'bool';
 }
 
-class GetPropertyProjection extends PropertyProjection {
-  GetPropertyProjection(Method method, int vtableOffset)
+class ComGetPropertyProjection extends ComPropertyProjection {
+  ComGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
+
+  bool get convertBool => parameters.first.type.dartType == 'bool';
 
   /// Strip off all underscores, even if double underscores
   @override
@@ -56,8 +56,8 @@ class GetPropertyProjection extends PropertyProjection {
   }
 }
 
-class SetPropertyProjection extends PropertyProjection {
-  SetPropertyProjection(Method method, int vtableOffset)
+class ComSetPropertyProjection extends ComPropertyProjection {
+  ComSetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
   /// Strip off all underscores, even if double underscores

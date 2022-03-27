@@ -2,12 +2,13 @@ import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
 import '../shared/importHeaders.dart';
+import 'com_method.dart';
+import 'com_property.dart';
 import 'method.dart';
-import 'property.dart';
 import 'safenames.dart';
 import 'utils.dart';
 
-class InterfaceProjection {
+class ComInterfaceProjection {
   final TypeDef typeDef;
 
   // Lazily cached values, with matching property
@@ -18,7 +19,7 @@ class InterfaceProjection {
   List<MethodProjection> get methodProjections =>
       _methodProjections ??= _cacheMethodProjections();
 
-  InterfaceProjection(this.typeDef);
+  ComInterfaceProjection(this.typeDef);
 
   int cacheVtableStart(TypeDef? type) {
     if (type == null) {
@@ -44,16 +45,16 @@ class InterfaceProjection {
     for (final method in typeDef.methods) {
       if (method.isGetProperty && !isExcludedGetProperty(method)) {
         final getPropertyProjection =
-            GetPropertyProjection(method, vtableOffset++);
+            ComGetPropertyProjection(method, vtableOffset++);
         projection.add(getPropertyProjection);
       } else if (method.isSetProperty &&
           method.parameters.isNotEmpty &&
           !isExcludedSetProperty(method)) {
         final setPropertyProjection =
-            SetPropertyProjection(method, vtableOffset++);
+            ComSetPropertyProjection(method, vtableOffset++);
         projection.add(setPropertyProjection);
       } else {
-        final methodProjection = MethodProjection(method, vtableOffset++);
+        final methodProjection = ComMethodProjection(method, vtableOffset++);
         projection.add(methodProjection);
       }
     }
