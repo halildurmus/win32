@@ -64,7 +64,6 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -126,7 +125,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -185,6 +184,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -239,6 +239,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -293,7 +294,6 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -522,6 +522,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -559,6 +560,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -749,6 +751,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -786,6 +789,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -823,6 +827,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1013,6 +1018,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1050,6 +1056,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1082,6 +1089,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1119,6 +1127,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1151,6 +1160,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1188,6 +1198,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1400,6 +1411,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1437,6 +1449,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1498,6 +1511,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1535,6 +1549,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1567,6 +1582,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1604,6 +1620,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1794,6 +1811,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -1831,6 +1849,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2021,6 +2040,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2058,6 +2078,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2161,6 +2182,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2198,6 +2220,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2301,6 +2324,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2338,6 +2362,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2441,6 +2466,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2478,6 +2504,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2515,7 +2542,6 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2553,7 +2579,6 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2779,7 +2804,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
-      // WindowsDeleteString(retValuePtr.value);
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }

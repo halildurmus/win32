@@ -61,6 +61,7 @@ class WinRTMethodProjection extends MethodProjection {
           final retValue = retValuePtr.toDartString();
           return retValue;
         } finally {
+          WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
       }
@@ -95,7 +96,6 @@ class WinRTMethodProjection extends MethodProjection {
           final retValue = retValuePtr.$valRef;
           return retValue;
         } finally {
-          // WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
       }

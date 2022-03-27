@@ -46,7 +46,7 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
           final retValue = retValuePtr.toDartString();
           return retValue;
         } finally {
-          // WindowsDeleteString(retValuePtr.value);
+          WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
       }
