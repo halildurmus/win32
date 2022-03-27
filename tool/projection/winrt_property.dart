@@ -30,9 +30,33 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
   @override
   String get dartParams => nativeParams;
 
+  String stringPropertyDeclaration() => '''
+      String get $exposedMethodName {
+      final retValuePtr = calloc<HSTRING>();
+  
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+
+          final retValue = retValuePtr.toDartString();
+          return retValue;
+        } finally {
+          WindowsDeleteString(retValuePtr.value);
+          free(retValuePtr);
+        }
+      }
+''';
+
   @override
   String toString() {
     try {
+      if (returnType.isString) return stringPropertyDeclaration();
+
       final valRef = returnType.dartType == 'double' ||
               returnType.dartType == 'int' ||
               returnType.dartType == 'bool' ||
@@ -60,6 +84,11 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
       }
 ''';
     } on Exception {
+      // Print an error if we're unable to project a method, but don't
+      // completely bail out. The rest may be useful.
+
+      // TODO: Fix these errors as they occur.
+      print('Unable to project method: ${method.name}');
       return '';
     }
   }
@@ -89,8 +118,30 @@ class WinRTSetPropertyProjection extends SetPropertyProjection {
   @override
   String get dartParams => 'Pointer, ${parameters.first.type.dartType},';
 
+  String stringPropertyDeclaration() => '''
+      set $exposedMethodName(String value) {
+      final hstr = convertToHString(value);
+  
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, hstr);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+        } finally {
+          WindowsDeleteString(hstr);
+        }
+      }
+''';
+
   @override
-  String toString() => '''
+  String toString() {
+    try {
+      if (parameters.first.type.isString) return stringPropertyDeclaration();
+
+      return '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {
       final hr = ptr.ref.lpVtbl.value
         .elementAt($vtableOffset)
@@ -101,4 +152,13 @@ class WinRTSetPropertyProjection extends SetPropertyProjection {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 ''';
+    } on Exception {
+      // Print an error if we're unable to project a method, but don't
+      // completely bail out. The rest may be useful.
+
+      // TODO: Fix these errors as they occur.
+      print('Unable to project method: ${method.name}');
+      return '';
+    }
+  }
 }
