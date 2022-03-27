@@ -2,10 +2,10 @@ import 'package:winmd/winmd.dart' show MetadataStore;
 
 import 'callback.dart';
 import 'class.dart';
+import 'com_interface.dart';
+import 'com_method.dart';
+import 'com_property.dart';
 import 'function.dart';
-import 'interface.dart';
-import 'method.dart';
-import 'property.dart';
 import 'struct.dart';
 
 final scope = MetadataStore.getWin32Scope();
@@ -46,7 +46,7 @@ void printComMethod() {
   final method = interface?.findMethod('SetWallpaper');
 
   if (method != null) {
-    final methodProjection = MethodProjection(method, 3);
+    final methodProjection = ComMethodProjection(method, 3);
     print(methodProjection);
   }
 }
@@ -57,7 +57,7 @@ void printComGetProperty() {
   final method = interface?.findMethod('get_IncludeSubjectKeyID');
 
   if (method != null) {
-    final methodProjection = GetPropertyProjection(method, 122);
+    final methodProjection = ComGetPropertyProjection(method, 122);
     print(methodProjection);
   }
 }
@@ -68,7 +68,7 @@ void printComSetProperty() {
   final method = interface?.findMethod('put_Name');
 
   if (method != null) {
-    final methodProjection = SetPropertyProjection(method, 11);
+    final methodProjection = ComSetPropertyProjection(method, 11);
     print(methodProjection);
   }
 }
@@ -78,7 +78,7 @@ void printComInterface() {
       scope.findTypeDef('Windows.Win32.Media.DirectShow.ITuningSpace');
 
   if (interface != null) {
-    final interfaceProjection = InterfaceProjection(interface);
+    final interfaceProjection = ComInterfaceProjection(interface);
     print(interfaceProjection);
   }
 }
@@ -87,7 +87,7 @@ void printComClass() {
   final comClass = scope.findTypeDef('Windows.Win32.UI.Shell.IFileOpenDialog');
 
   if (comClass != null) {
-    final classProjection = ClassProjection.fromInterface(comClass);
+    final classProjection = ComClassProjection.fromInterface(comClass);
     print(classProjection);
   }
 }

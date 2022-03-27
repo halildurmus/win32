@@ -1,9 +1,9 @@
 import 'package:winmd/winmd.dart';
 
-import 'property.dart';
+import 'com_property.dart';
 import 'safenames.dart';
 
-class WinRTGetPropertyProjection extends GetPropertyProjection {
+class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   WinRTGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
@@ -94,7 +94,7 @@ class WinRTGetPropertyProjection extends GetPropertyProjection {
   }
 }
 
-class WinRTSetPropertyProjection extends SetPropertyProjection {
+class WinRTSetPropertyProjection extends ComSetPropertyProjection {
   WinRTSetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 

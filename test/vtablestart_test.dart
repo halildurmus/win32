@@ -7,7 +7,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../tool/projection/interface.dart';
+import '../tool/projection/com_interface.dart';
 import '../tool/projection/winrt_interface.dart';
 
 void main() {
@@ -69,7 +69,7 @@ void main() {
       final typeDef = scope.findTypeDef(type);
       expect(typeDef, isNotNull, reason: type);
       if (typeDef != null) {
-        final projectedClass = InterfaceProjection(typeDef);
+        final projectedClass = ComInterfaceProjection(typeDef);
         final calculatedVTableStart = projectedClass.vtableStart;
 
         expect(calculatedVTableStart, equals(testedTypes[type]),
