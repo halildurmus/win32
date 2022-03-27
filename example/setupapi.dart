@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
 
@@ -9,6 +10,7 @@ const GUID_DEVCLASS_NET = '{4D36E972-E325-11CE-BFC1-08002BE10318}';
 const GUID_DEVINTERFACE_HID = '{4D1E55B2-F16F-11CF-88CB-001111000030}';
 
 void main() {
+  // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-setup-classes
   using((Arena arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
@@ -24,6 +26,7 @@ void main() {
     }
   });
 
+  // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-interface-classes
   using((Arena arena) {
     final interfaceGuid = calloc<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
@@ -33,7 +36,7 @@ void main() {
       final interfacePaths =
           _iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
       for (final path in interfacePaths) {
-        print('hid interface ${path.length}'); // utf8.decode(path)
+        print('hid interface ${utf8.decode(path)}');
       }
     } finally {
       SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
