@@ -126,7 +126,7 @@ Iterable<Uint16List> _iterateInterfacePath(
     }
 
     final error = GetLastError();
-    if (error != ERROR_NO_MORE_ITEMS) {
+    if (error != S_OK && error != ERROR_NO_MORE_ITEMS) {
       throw WindowsException(error);
     }
   } finally {
