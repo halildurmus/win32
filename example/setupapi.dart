@@ -28,7 +28,7 @@ void main() {
 
   // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-interface-classes
   using((Arena arena) {
-    final interfaceGuid = calloc<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
+    final interfaceGuid = arena<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
     final deviceInfoSetPtr = SetupDiGetClassDevs(
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
