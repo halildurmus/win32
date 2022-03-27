@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
 @TestOn('windows')
-import 'package:ffi/ffi.dart';
+
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -81,6 +79,15 @@ void main() {
       expect(compare, isNegative);
     });
 
+    test('Change numeral system', () {
+      final arabicNumerals = '٠١٢٣٤٥٦٧٨٩'.split('');
+      calendar.NumeralSystem = 'arab';
+      final date = calendar.MonthAsPaddedNumericString(2);
+
+      expect(arabicNumerals, contains(date[0]));
+      expect(arabicNumerals, contains(date[1]));
+    });
+
     test('Calendar month as string', () {
       // Repeat to ensure that this doesn't fail because of some kind of memory
       // issue.
@@ -130,13 +137,11 @@ void main() {
     });
 
     test('Calendar resolved language', () {
-      final hstrPtr = calloc<HSTRING>()..value = calendar.ResolvedLanguage;
-      final lang = hstrPtr.toDartString();
+      final resolvedLanguage = calendar.ResolvedLanguage;
 
       // Should be something like en-US
-      expect(lang[2], equals('-'));
-      expect(lang.length, equals(5));
-      free(hstrPtr);
+      expect(resolvedLanguage[2], equals('-'));
+      expect(resolvedLanguage.length, equals(5));
     });
 
     tearDown(() {

@@ -64,6 +64,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -100,8 +101,8 @@ class ICalendar extends IInspectable {
         ptr.ref.lpVtbl,
       );
 
-  int get NumeralSystem {
-    final retValuePtr = calloc<IntPtr>();
+  String get NumeralSystem {
+    final retValuePtr = calloc<HSTRING>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -122,31 +123,38 @@ class ICalendar extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
+      final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
 
-  set NumeralSystem(int value) {
-    final hr = ptr.ref.lpVtbl.value
-        .elementAt(11)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-          IntPtr,
-        )>>>()
-        .value
-        .asFunction<
-            int Function(
-          Pointer,
-          int,
-        )>()(ptr.ref.lpVtbl, value);
+  set NumeralSystem(String value) {
+    final hstr = convertToHString(value);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            IntPtr,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int,
+          )>()(ptr.ref.lpVtbl, hstr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      WindowsDeleteString(hstr);
+    }
   }
 
   String GetCalendarSystem() {
@@ -285,6 +293,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2506,6 +2515,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2543,6 +2553,7 @@ class ICalendar extends IInspectable {
       final retValue = retValuePtr.value;
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
@@ -2743,8 +2754,8 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get ResolvedLanguage {
-    final retValuePtr = calloc<IntPtr>();
+  String get ResolvedLanguage {
+    final retValuePtr = calloc<HSTRING>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -2765,9 +2776,10 @@ class ICalendar extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
+      final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      // WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }

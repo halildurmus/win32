@@ -186,7 +186,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>,)'));
     expect(numeralSystemProjection.returnType.dartType, equals('int'));
     expect(numeralSystemProjection.toString().trimLeft(),
-        startsWith('int get NumeralSystem'));
+        startsWith('String get NumeralSystem'));
   });
 
   test('WinRT get property successfully projects int', () {

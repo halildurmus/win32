@@ -95,6 +95,7 @@ class WinRTMethodProjection extends MethodProjection {
           final retValue = retValuePtr.$valRef;
           return retValue;
         } finally {
+          // WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
       }
