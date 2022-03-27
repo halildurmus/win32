@@ -48,4 +48,5 @@ void main() {
       WindowsGetStringRawBuffer(hstrRoamingAppData, nullptr).toDartString();
 
   print('RoamingAppData: $roamingAppData');
+  RoUninitialize();
 }

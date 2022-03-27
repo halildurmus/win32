@@ -20,7 +20,7 @@ dev_dependencies:
   args: ^2.3.0
   
   # For formatting Dart code (APIs for performing dart format).
-  dart_style: ^2.2.1
+  dart_style: ^2.2.2
 
   # Help ensure that the code is well-written.
   lints: ^1.0.1

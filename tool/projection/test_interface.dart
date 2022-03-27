@@ -1,12 +1,12 @@
 import 'package:winmd/winmd.dart';
 
-import 'interface.dart';
+import 'com_interface.dart';
+import 'com_property.dart';
 import 'method.dart';
-import 'property.dart';
 
 class TestInterfaceProjection {
   final TypeDef typeDef;
-  final InterfaceProjection projection;
+  final ComInterfaceProjection projection;
 
   const TestInterfaceProjection(this.typeDef, this.projection);
 
@@ -34,8 +34,8 @@ import 'package:win32/win32.dart';
 
   String testMethod(String interfaceName, String instanceName,
       MethodProjection methodProjection) {
-    if (methodProjection.runtimeType == GetPropertyProjection ||
-        methodProjection.runtimeType == SetPropertyProjection) {
+    if (methodProjection.runtimeType == ComGetPropertyProjection ||
+        methodProjection.runtimeType == ComSetPropertyProjection) {
       return '';
       // TODO: Add this.
       // final propertyType =

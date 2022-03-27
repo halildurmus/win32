@@ -6,31 +6,39 @@
 
 import 'package:win32/win32.dart';
 
+String calendarData(ICalendar calendar) =>
+    'Calendar: ${calendar.GetCalendarSystem()}\n'
+    'Name of Month: ${calendar.MonthAsFullSoloString()}\n'
+    'Day of Month: ${calendar.DayAsPaddedString(2)}\n'
+    'Day of Week: ${calendar.DayOfWeekAsFullSoloString()}\n'
+    'Year: ${calendar.YearAsString()}\n';
+
 void main() {
   winrtInitialize();
+  final japaneseCalendar = convertToHString('JapaneseCalendar');
+  final hebrewCalendar = convertToHString('HebrewCalendar');
 
   try {
+    print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     final comObject =
         CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
     final calendar = ICalendar(comObject);
 
-    print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
-    print('The year is ${calendar.Year}.');
+    print(calendarData(calendar));
 
-    final calendarSystem = calendar.GetCalendarSystem();
-    print('The calendar system is $calendarSystem.');
+    calendar.ChangeCalendarSystem(japaneseCalendar);
+    print(calendarData(calendar));
 
-    final dayOfWeek = calendar.DayOfWeekAsFullSoloString();
-    print('Today is $dayOfWeek.');
+    calendar.ChangeCalendarSystem(hebrewCalendar);
+    print(calendarData(calendar));
 
-    if (calendar.IsDaylightSavingTime) {
-      print('Daylight Saving Time is in observance.');
-    } else {
-      print('Daylight Savings Time is not in observance.');
-    }
+    final dateTime = calendar.GetDateTime();
+    print(dateTime);
 
     free(comObject);
   } finally {
+    WindowsDeleteString(japaneseCalendar);
+    WindowsDeleteString(hebrewCalendar);
     winrtUninitialize();
   }
 }

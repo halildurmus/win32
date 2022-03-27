@@ -5,7 +5,7 @@ import 'package:winmd/winmd.dart';
 
 import '../inputs/interfaces.dart';
 import '../projection/class.dart';
-import '../projection/interface.dart';
+import '../projection/com_interface.dart';
 import '../projection/test_interface.dart';
 import '../projection/utils.dart';
 
@@ -15,14 +15,14 @@ void generateComApis() {
   for (final interface in comInterfacesToGenerate) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
-    final interfaceProjection = InterfaceProjection(typeDef);
+    final interfaceProjection = ComInterfaceProjection(typeDef);
 
     // In v2, we put classes and interfaces in the same file.
-    final className = ClassProjection.generateClassName(typeDef);
+    final className = ComClassProjection.generateClassName(typeDef);
     final classNameExists = scope.findTypeDef(className) != null;
 
     final comObject = classNameExists
-        ? ClassProjection.fromInterface(typeDef)
+        ? ComClassProjection.fromInterface(typeDef)
         : interfaceProjection;
 
     // Generate class
