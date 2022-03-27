@@ -67,11 +67,42 @@ class WinRTMethodProjection extends MethodProjection {
       }
 ''';
 
+  /// Return a method with a DateTime.
+  ///
+  /// In WinRT, DateTime is represented as a 64-bit signed integer that
+  /// represents a point in time as the number of 100-nanosecond intervals prior
+  /// to or after midnight on January 1, 1601 (according to the Gregorian
+  /// Calendar).
+  String dateTimeMethodDeclaration() => '''
+      DateTime $name($methodParams) {
+        final retValuePtr = calloc<Uint64>();
+  
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()($identifiers);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+
+          return DateTime
+            .utc(1601, 01, 01)
+            .add(Duration(microseconds: retValuePtr.value ~/ 10));
+        } finally {
+          free(retValuePtr);
+        }
+      }
+''';
+
   @override
   String toString() {
     try {
       if (isVoidReturn) return voidMethodDeclaration();
       if (returnType.isString) return stringMethodDeclaration();
+      if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {
+        return dateTimeMethodDeclaration();
+      }
 
       final valRef = returnType.dartType == 'double' ||
               returnType.dartType == 'int' ||

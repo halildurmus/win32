@@ -32,9 +32,8 @@ void main() {
     calendar.ChangeCalendarSystem(hebrewCalendar);
     print(calendarData(calendar));
 
-    print('Daylight Saving Time is '
-        '${calendar.IsDaylightSavingTime ? "in " : "not in "}'
-        'observance.');
+    final dateTime = calendar.GetDateTime();
+    print(dateTime);
 
     free(comObject);
   } finally {

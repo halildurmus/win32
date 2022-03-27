@@ -266,7 +266,7 @@ class ICalendar extends IInspectable {
         value,
       );
 
-  int GetDateTime() {
+  DateTime GetDateTime() {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -291,8 +291,8 @@ class ICalendar extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return DateTime.utc(1601, 01, 01)
+          .add(Duration(microseconds: retValuePtr.value ~/ 10));
     } finally {
       free(retValuePtr);
     }
