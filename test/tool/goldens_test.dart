@@ -20,7 +20,9 @@ void main() {
         .writeAsStringSync(formattedDartClass);
     final golden =
         File('test/tool/goldens/ICalendar.golden').readAsStringSync();
-    expect(formattedDartClass, equals(golden));
+
+    // Ignore whitespace to avoid \r\n vs. \n conflicts.
+    expect(formattedDartClass, equalsIgnoringWhitespace(golden));
   });
 
   test('COM golden', () {
@@ -36,6 +38,7 @@ void main() {
         .writeAsStringSync(formattedDartClass);
     final golden = File('test/tool/goldens/INetwork.golden').readAsStringSync();
 
-    expect(formattedDartClass, equals(golden));
+    // Ignore whitespace to avoid \r\n vs. \n conflicts.
+    expect(formattedDartClass, equalsIgnoringWhitespace(golden));
   });
 }
