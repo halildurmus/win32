@@ -12,7 +12,8 @@ void main() {
   using((Arena arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
-    final deviceInfoSetPtr = SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
+    final deviceInfoSetPtr =
+        SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
       final deviceHandles = _iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
       for (final handle in deviceHandles) {
@@ -26,9 +27,11 @@ void main() {
   using((Arena arena) {
     final interfaceGuid = calloc<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
-    final deviceInfoSetPtr = SetupDiGetClassDevs(interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
+    final deviceInfoSetPtr = SetupDiGetClassDevs(
+        interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
-      final interfacePaths = _iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
+      final interfacePaths =
+          _iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
       for (final path in interfacePaths) {
         print('hid interface ${path.length}'); // utf8.decode(path)
       }
@@ -47,11 +50,14 @@ const DIGCF_ALLCLASSES = 0x00000004;
 const DIGCF_PROFILE = 0x00000008;
 const DIGCF_DEVICEINTERFACE = 0x00000010;
 
-Iterable<int> _iterateDeviceHandle(Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
+Iterable<int> _iterateDeviceHandle(
+    Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
   try {
-    for (var index = 0; SetupDiEnumDeviceInfo(deviceInfoSetPtr, index, devInfoDataPtr) == TRUE; index++) {
+    for (var index = 0;
+        SetupDiEnumDeviceInfo(deviceInfoSetPtr, index, devInfoDataPtr) == TRUE;
+        index++) {
       yield devInfoDataPtr.ref.DevInst;
     }
     final error = GetLastError();
@@ -63,13 +69,19 @@ Iterable<int> _iterateDeviceHandle(Pointer deviceInfoSetPtr, Pointer<GUID> devic
   }
 }
 
-Iterable<Uint16List> _iterateInterfacePath(Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
+Iterable<Uint16List> _iterateInterfacePath(
+    Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<Uint32>();
   final devicInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
   try {
-    for (var index = 0; SetupDiEnumDeviceInterfaces(deviceInfoSetPtr, nullptr, interfaceGuid.cast(), index, devicInterfaceDataPtr) == TRUE; index++) {
-      final hr = SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr, devicInterfaceDataPtr, nullptr, 0, requiredSizePtr, nullptr);
+    for (var index = 0;
+        SetupDiEnumDeviceInterfaces(deviceInfoSetPtr, nullptr,
+                interfaceGuid.cast(), index, devicInterfaceDataPtr) ==
+            TRUE;
+        index++) {
+      final hr = SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr,
+          devicInterfaceDataPtr, nullptr, 0, requiredSizePtr, nullptr);
       // FIXME https://github.com/timsneath/win32/issues/384
       // if (hr != TRUE) {
       //   final error = GetLastError();
@@ -78,21 +90,32 @@ Iterable<Uint16List> _iterateInterfacePath(Pointer deviceInfoSetPtr, Pointer<GUI
       //     throw WindowsException(error);
       //   }
       // }
-    
+
       final detailDataMemoryPtr = calloc<Uint16>(requiredSizePtr.value);
-    
+
       try {
-        final deviceInterfaceDetailDataPtr = Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>.fromAddress(detailDataMemoryPtr.address);
-        deviceInterfaceDetailDataPtr.ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
-    
-        final hr = SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr, devicInterfaceDataPtr, deviceInterfaceDetailDataPtr, requiredSizePtr.value, nullptr, nullptr);
+        final deviceInterfaceDetailDataPtr =
+            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>.fromAddress(
+                detailDataMemoryPtr.address);
+        deviceInterfaceDetailDataPtr.ref.cbSize =
+            sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
+
+        final hr = SetupDiGetDeviceInterfaceDetail(
+            deviceInfoSetPtr,
+            devicInterfaceDataPtr,
+            deviceInterfaceDetailDataPtr,
+            requiredSizePtr.value,
+            nullptr,
+            nullptr);
         if (hr != TRUE) {
-          print('SetupDiGetDeviceInterfaceDetail - Get Data error ${GetLastError()}');
+          print(
+              'SetupDiGetDeviceInterfaceDetail - Get Data error ${GetLastError()}');
           continue;
         }
 
         // rawPathData would be freed with detailDataMemoryPtr
-        final rawPathData = deviceInterfaceDetailDataPtr.getDevicePathData(requiredSizePtr.value);
+        final rawPathData = deviceInterfaceDetailDataPtr
+            .getDevicePathData(requiredSizePtr.value);
         yield Uint16List.fromList(rawPathData);
       } finally {
         calloc.free(detailDataMemoryPtr);
@@ -111,7 +134,9 @@ Iterable<Uint16List> _iterateInterfacePath(Pointer deviceInfoSetPtr, Pointer<GUI
 }
 
 // ignore: camel_case_extensions
-extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_ on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
+extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
+    on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
   /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
-  Uint16List getDevicePathData(int requiredSize) => Pointer<Uint16>.fromAddress(address).asTypedList(requiredSize).sublist(2);
+  Uint16List getDevicePathData(int requiredSize) =>
+      Pointer<Uint16>.fromAddress(address).asTypedList(requiredSize).sublist(2);
 }
