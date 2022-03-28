@@ -8357,3 +8357,64 @@ class SPEAKFLAGS {
   /// TTS XML format values are present in the bit-field.
   static const SPF_PARSE_AUTODETECT = 0;
 }
+
+// -----------------------------------------------------------------------------
+// Bluetooth IDs
+// -----------------------------------------------------------------------------
+
+/// Bluetooth LE device interface GUID
+const GUID_BLUETOOTHLE_DEVICE_INTERFACE =
+    '{781aee18-7733-4ce4-add0-91f41c67b592}';
+
+/// Bluetooth LE Service device interface GUID
+const GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE =
+    '{6e3bb679-4372-40c8-9eaa-4509df260cd8}';
+
+/// The client does not have specific GATT requirements (default).
+const BLUETOOTH_GATT_FLAG_NONE = 0x00000000;
+
+/// The client requests the data to be transmitted over an encrypted channel.
+const BLUETOOTH_GATT_FLAG_CONNECTION_ENCRYPTED = 0x00000001;
+
+/// The client requests the data to be transmitted over an authenticated
+/// channel.
+const BLUETOOTH_GATT_FLAG_CONNECTION_AUTHENTICATED = 0x00000002;
+
+/// The characteristic value is to be read directly from the device. This
+/// overwrites the one in the cache if one is already present.
+const BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE = 0x00000004;
+
+/// The characteristic value is to be read from the cache (regardless of whether
+/// it is present in the cache or not).
+const BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_CACHE = 0x00000008;
+
+/// Signed write. Profile drivers must use with
+/// BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE in order to produce signed write
+/// without a response.
+const BLUETOOTH_GATT_FLAG_SIGNED_WRITE = 0x00000010;
+
+/// Write without response.
+const BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE = 0x00000020;
+const BLUETOOTH_GATT_FLAG_RETURN_ALL = 0x00000040;
+
+// -----------------------------------------------------------------------------
+// SetupDiGetClassDevs constants
+// -----------------------------------------------------------------------------
+
+/// Return only the device that is associated with the system default device
+/// interface, if one is set, for the specified device interface classes.
+const DIGCF_DEFAULT = 0x00000001;
+
+/// Return only devices that are currently present in a system.
+const DIGCF_PRESENT = 0x00000002;
+
+/// Return a list of installed devices for all device setup classes or all
+/// device interface classes.
+const DIGCF_ALLCLASSES = 0x00000004;
+
+/// Return only devices that are a part of the current hardware profile.
+const DIGCF_PROFILE = 0x00000008;
+
+/// Return devices that support device interfaces for the specified device
+/// interface classes.
+const DIGCF_DEVICEINTERFACE = 0x00000010;
