@@ -1,3 +1,17 @@
+## 2.5.0
+
+- [BREAKING CHANGE] Use new projection tooling for WinRT classes. WinRT APIs are
+  still in development and should be considered experimental; expect volatility
+  as the projection tools mature and map types like String and DateTime, as well
+  as WinRT primitives such as IVectorView, onto their Dart equivalents. (This
+  doesn't affect COM and Win32 APIs, which can largely be considered stable,
+  with the exception of changes to the underlying metadata exposed by
+  Microsoft.)
+- Add setupapi APIs, which were not being successfully projected. (#383, with
+  thanks to @Sunbreak.) Add test to prevent that happening again.
+- Add additional setup APIs (#386, with further thanks to @Sunbreak).
+- Remove `tools/` folder from published package to reduce download overhead.
+
 ## 2.4.4
 
 - Fix broken doc links.
