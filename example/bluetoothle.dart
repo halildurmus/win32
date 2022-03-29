@@ -31,7 +31,7 @@ void main() {
   }
 }
 
-Iterable<Uint16List> devicesByInterface(
+Iterable<String> devicesByInterface(
     Pointer hDevInfo, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
@@ -79,10 +79,10 @@ Iterable<Uint16List> devicesByInterface(
           continue;
         }
 
-        // rawPathData would be freed with detailDataMemoryPtr
-        final rawPathData = deviceInterfaceDetailDataPtr
-            .getDevicePathData(requiredSizePtr.value);
-        yield Uint16List.fromList(rawPathData);
+        yield deviceInterfaceDetailDataPtr
+            .getDevicePathData(requiredSizePtr.value)
+            .cast<Utf16>()
+            .toDartString();
       } finally {
         free(detailDataMemoryPtr);
       }
@@ -102,22 +102,16 @@ Iterable<Uint16List> devicesByInterface(
 extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
   /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
-  Uint16List getDevicePathData(int requiredSize) =>
-      Pointer<Uint16>.fromAddress(address).asTypedList(requiredSize).sublist(2);
+  Pointer<WCHAR> getDevicePathData(int requiredSize) =>
+      Pointer<Uint16>.fromAddress(address + 4);
 }
 
 // -----------------------------------------------------------------------------
 // GATT Security and Other Flag-related Facilities
 // -----------------------------------------------------------------------------
 
-void printServicesByDevice(Uint16List path) {
-  // TODO(sunbreak): if path was passed as a String, you could just call
-  // path.toNativeUtf16() to get yourself a Pointer<Utf16>.
-  final pathPtr = wsalloc(path.length);
-  pathPtr
-      .cast<Uint16>()
-      .asTypedList(path.length)
-      .setRange(0, path.length, path);
+void printServicesByDevice(String path) {
+  final pathPtr = TEXT(path);
 
   final hDevice = CreateFile(pathPtr.cast(), 0,
       FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, NULL);
