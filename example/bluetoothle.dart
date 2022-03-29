@@ -5,7 +5,6 @@
 // Enumerates device interfaces that support Bluetooth LE
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -27,7 +26,22 @@ void main() {
   });
 
   for (final path in devicePaths) {
-    printServicesByDevice(path);
+    final pathPtr = TEXT(path);
+    final hDevice = CreateFile(pathPtr.cast(), 0,
+        FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, NULL);
+    if (hDevice == INVALID_HANDLE_VALUE) {
+      final error = GetLastError();
+      print('CreateFile - Get Device Handle error: $error');
+      throw WindowsException(error);
+    }
+
+    try {
+      print('BLUETOOTHLE_DEVICE - $path');
+      printServicesByDevice(hDevice);
+    } finally {
+      CloseHandle(hDevice);
+      free(pathPtr);
+    }
   }
 }
 
@@ -110,44 +124,101 @@ extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
 // GATT Security and Other Flag-related Facilities
 // -----------------------------------------------------------------------------
 
-void printServicesByDevice(String path) {
-  final pathPtr = TEXT(path);
+void printServicesByDevice(int hDevice) {
+  int hr;
+  using((Arena arena) {
+    final bufferCountPtr = arena<USHORT>();
+    hr = BluetoothGATTGetServices(
+        hDevice, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+      print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
+      throw WindowsException(hr);
+    }
+  
+    final bufferPtr = arena<BTH_LE_GATT_SERVICE>(bufferCountPtr.value);
+    final numberPtr = arena<USHORT>();
+  
+    hr = BluetoothGATTGetServices(hDevice, bufferCountPtr.value,
+        bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+  
+    if (hr != S_OK) {
+      print('BluetoothGATTGetServices - Get Buffer Data error: $hr');
+      throw WindowsException(hr);
+    }
+  
+    for (var i = 0; i < numberPtr.value; i++) {
+      final servicePtr = Pointer<BTH_LE_GATT_SERVICE>.fromAddress(
+          bufferPtr.address + i * sizeOf<BTH_LE_GATT_SERVICE>());
+      print(
+          '└─BTH_LE_GATT_SERVICE - ${servicePtr.ref.ServiceUuid.LongUuid}');
+      printCharacteristicsByService(hDevice, servicePtr);
+    }
+  });
+}
 
-  final hDevice = CreateFile(pathPtr.cast(), 0,
-      FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, NULL);
-  if (hDevice == INVALID_HANDLE_VALUE) {
-    final error = GetLastError();
-    print('CreateFile - Get Device Handle error: $error');
-    throw WindowsException(error);
-  }
-  try {
-    int hr;
-    using((Arena arena) {
-      final bufferCountPtr = arena<USHORT>();
-      hr = BluetoothGATTGetServices(
-          hDevice, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
-      if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
-        print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
-        throw WindowsException(hr);
+void printCharacteristicsByService(int hDevice, Pointer<BTH_LE_GATT_SERVICE> servicePtr) {
+  int hr;
+  using((Arena arena) {
+    final bufferCountPtr = arena<USHORT>();
+    hr = BluetoothGATTGetCharacteristics(
+        hDevice, servicePtr, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
+        return;
       }
+      print('BluetoothGATTGetCharacteristics - Get Buffer Count error: $hr');
+      throw WindowsException(hr);
+    }
 
-      final serviceBufferPtr = arena<BTH_LE_GATT_SERVICE>(bufferCountPtr.value);
-      final numServicesPtr = arena<USHORT>();
+    final bufferPtr = arena<BTH_LE_GATT_CHARACTERISTIC>(bufferCountPtr.value);
+    final numberPtr = arena<USHORT>();
 
-      hr = BluetoothGATTGetServices(hDevice, bufferCountPtr.value,
-          serviceBufferPtr, numServicesPtr, BLUETOOTH_GATT_FLAG_NONE);
+    hr = BluetoothGATTGetCharacteristics(hDevice, servicePtr, bufferCountPtr.value,
+          bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+    if (hr != S_OK) {
+      print('BluetoothGATTGetCharacteristics - Get Buffer Data error: $hr');
+      throw WindowsException(hr);
+    }
 
-      if (hr != S_OK) {
-        print('BluetoothGATTGetServices - Get Service Buffer error: $hr');
-        throw WindowsException(hr);
+    for (var i = 0; i < numberPtr.value; i++) {
+      final characteristicPtr = Pointer<BTH_LE_GATT_CHARACTERISTIC>.fromAddress(
+          bufferPtr.address + i * sizeOf<BTH_LE_GATT_CHARACTERISTIC>());
+      print(
+          '  └─BTH_LE_GATT_CHARACTERISTIC - ${characteristicPtr.ref.CharacteristicUuid.LongUuid}');
+      printDescriptorsByCharacteristic(hDevice, characteristicPtr);
+    }
+  });
+}
+
+void printDescriptorsByCharacteristic(int hDevice, Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr) {
+  int hr;
+  using((Arena arena) {
+    final bufferCountPtr = arena<USHORT>();
+    hr = BluetoothGATTGetDescriptors(
+        hDevice, characteristicPtr, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
+    if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
+        return;
       }
-      for (var i = 0; i < numServicesPtr.value; i++) {
-        print(
-            'BluetoothGATTService - ${serviceBufferPtr[i].ServiceUuid.LongUuid}');
-      }
-    });
-  } finally {
-    CloseHandle(hDevice);
-    free(pathPtr);
-  }
+      print('BluetoothGATTGetDescriptors - Get Buffer Count error: $hr');
+      throw WindowsException(hr);
+    }
+
+    final bufferPtr = arena<BTH_LE_GATT_DESCRIPTOR>(bufferCountPtr.value);
+    final numberPtr = arena<USHORT>();
+
+    hr = BluetoothGATTGetDescriptors(hDevice, characteristicPtr, bufferCountPtr.value,
+          bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+    if (hr != S_OK) {
+      print('BluetoothGATTGetDescriptors - Get Buffer Data error: $hr');
+      throw WindowsException(hr);
+    }
+
+    for (var i = 0; i < numberPtr.value; i++) {
+      final descriptorPtr = Pointer<BTH_LE_GATT_DESCRIPTOR>.fromAddress(
+          bufferPtr.address + i * sizeOf<BTH_LE_GATT_DESCRIPTOR>());
+      print(
+          '    └─BTH_LE_GATT_DESCRIPTOR - ${descriptorPtr.ref.DescriptorUuid.LongUuid}');
+    }
+  });
 }
