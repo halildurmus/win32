@@ -57,9 +57,7 @@ Iterable<Uint16List> devicesByInterface(
       //   }
       // }
 
-      // TODO(sunbreak): requiredSizePtr is in bytes, no? I think you're
-      // allocating twice the size you need.`
-      final detailDataMemoryPtr = calloc<Uint16>(requiredSizePtr.value);
+      final detailDataMemoryPtr = calloc<Uint8>(requiredSizePtr.value);
 
       try {
         final deviceInterfaceDetailDataPtr =
