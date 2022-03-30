@@ -17,9 +17,9 @@ void main() {
     final deviceInfoSetPtr =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
-      for (final handle in deviceHandles) {
-        print('net device ${handle.toHexString(32)}');
+      final deviceHandles = deviceIntancesByClass(deviceInfoSetPtr, deviceGuid);
+      for (final instance in deviceHandles) {
+        print('net device instance ${instance.toHexString(32)}');
       }
     } finally {
       SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
@@ -33,10 +33,10 @@ void main() {
     final deviceInfoSetPtr = SetupDiGetClassDevs(
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
-      final interfacePaths =
-          iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
-      for (final path in interfacePaths) {
-        print('hid interface $path');
+      final devicePaths =
+          devicePathsByInterface(deviceInfoSetPtr, interfaceGuid);
+      for (final path in devicePaths) {
+        print('hid device path $path');
       }
     } finally {
       SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
@@ -44,7 +44,7 @@ void main() {
   });
 }
 
-Iterable<int> iterateDeviceHandle(
+Iterable<int> deviceIntancesByClass(
     Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
@@ -63,7 +63,7 @@ Iterable<int> iterateDeviceHandle(
   }
 }
 
-Iterable<String> iterateInterfacePath(
+Iterable<String> devicePathsByInterface(
     Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
