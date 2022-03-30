@@ -134,34 +134,34 @@ void printServicesByDevice(int hDevice) {
       print('BluetoothGATTGetServices - Get Buffer Count error: $hr');
       throw WindowsException(hr);
     }
-  
+
     final bufferPtr = arena<BTH_LE_GATT_SERVICE>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
-  
-    hr = BluetoothGATTGetServices(hDevice, bufferCountPtr.value,
-        bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
-  
+
+    hr = BluetoothGATTGetServices(hDevice, bufferCountPtr.value, bufferPtr,
+        numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+
     if (hr != S_OK) {
       print('BluetoothGATTGetServices - Get Buffer Data error: $hr');
       throw WindowsException(hr);
     }
-  
+
     for (var i = 0; i < numberPtr.value; i++) {
       final servicePtr = Pointer<BTH_LE_GATT_SERVICE>.fromAddress(
           bufferPtr.address + i * sizeOf<BTH_LE_GATT_SERVICE>());
-      print(
-          '└─BTH_LE_GATT_SERVICE - ${servicePtr.ref.ServiceUuid.LongUuid}');
+      print('└─BTH_LE_GATT_SERVICE - ${servicePtr.ref.ServiceUuid.LongUuid}');
       printCharacteristicsByService(hDevice, servicePtr);
     }
   });
 }
 
-void printCharacteristicsByService(int hDevice, Pointer<BTH_LE_GATT_SERVICE> servicePtr) {
+void printCharacteristicsByService(
+    int hDevice, Pointer<BTH_LE_GATT_SERVICE> servicePtr) {
   int hr;
   using((Arena arena) {
     final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetCharacteristics(
-        hDevice, servicePtr, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
+    hr = BluetoothGATTGetCharacteristics(hDevice, servicePtr, 0, nullptr,
+        bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
     if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
         return;
@@ -173,8 +173,8 @@ void printCharacteristicsByService(int hDevice, Pointer<BTH_LE_GATT_SERVICE> ser
     final bufferPtr = arena<BTH_LE_GATT_CHARACTERISTIC>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
 
-    hr = BluetoothGATTGetCharacteristics(hDevice, servicePtr, bufferCountPtr.value,
-          bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+    hr = BluetoothGATTGetCharacteristics(hDevice, servicePtr,
+        bufferCountPtr.value, bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
     if (hr != S_OK) {
       print('BluetoothGATTGetCharacteristics - Get Buffer Data error: $hr');
       throw WindowsException(hr);
@@ -190,12 +190,13 @@ void printCharacteristicsByService(int hDevice, Pointer<BTH_LE_GATT_SERVICE> ser
   });
 }
 
-void printDescriptorsByCharacteristic(int hDevice, Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr) {
+void printDescriptorsByCharacteristic(
+    int hDevice, Pointer<BTH_LE_GATT_CHARACTERISTIC> characteristicPtr) {
   int hr;
   using((Arena arena) {
     final bufferCountPtr = arena<USHORT>();
-    hr = BluetoothGATTGetDescriptors(
-        hDevice, characteristicPtr, 0, nullptr, bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
+    hr = BluetoothGATTGetDescriptors(hDevice, characteristicPtr, 0, nullptr,
+        bufferCountPtr, BLUETOOTH_GATT_FLAG_NONE);
     if (hr != HRESULT_FROM_WIN32(ERROR_MORE_DATA)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_NOT_FOUND)) {
         return;
@@ -207,8 +208,8 @@ void printDescriptorsByCharacteristic(int hDevice, Pointer<BTH_LE_GATT_CHARACTER
     final bufferPtr = arena<BTH_LE_GATT_DESCRIPTOR>(bufferCountPtr.value);
     final numberPtr = arena<USHORT>();
 
-    hr = BluetoothGATTGetDescriptors(hDevice, characteristicPtr, bufferCountPtr.value,
-          bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
+    hr = BluetoothGATTGetDescriptors(hDevice, characteristicPtr,
+        bufferCountPtr.value, bufferPtr, numberPtr, BLUETOOTH_GATT_FLAG_NONE);
     if (hr != S_OK) {
       print('BluetoothGATTGetDescriptors - Get Buffer Data error: $hr');
       throw WindowsException(hr);
