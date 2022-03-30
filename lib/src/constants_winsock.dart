@@ -16,7 +16,7 @@ const SOCK_STREAM = 1;
 
 /// Datagram socket.
 ///
-/// A socket type that supports datagrams, which are connectionless, unreliable
+/// A socket type that supports datagrams, which are connection-less, unreliable
 /// buffers of a fixed (typically small) maximum length. This socket type uses
 /// the User Datagram Protocol (UDP) for the Internet address family (AF_INET or
 /// AF_INET6).

@@ -26,7 +26,7 @@ class WindowsException extends COMException {
 
   /// Converts a Windows error into a friendly string.
   ///
-  /// Takes one numeric paramenter, which may be a general Windows error or an
+  /// Takes one numeric parameter, which may be a general Windows error or an
   /// HRESULT, and converts it into a String representation using the Win32
   /// `FormatMessage()` function. For example, `E_INVALIDARG` (0x80070057)
   /// converts to `The parameter is incorrect.`
