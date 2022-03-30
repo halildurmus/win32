@@ -2493,6 +2493,23 @@ void main() {
               Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
       expect(GetProcessShutdownParameters, isA<Function>());
     });
+    test('Can instantiate GetProcessTimes', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessTimes = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hProcess,
+              Pointer<FILETIME> lpCreationTime,
+              Pointer<FILETIME> lpExitTime,
+              Pointer<FILETIME> lpKernelTime,
+              Pointer<FILETIME> lpUserTime),
+          int Function(
+              int hProcess,
+              Pointer<FILETIME> lpCreationTime,
+              Pointer<FILETIME> lpExitTime,
+              Pointer<FILETIME> lpKernelTime,
+              Pointer<FILETIME> lpUserTime)>('GetProcessTimes');
+      expect(GetProcessTimes, isA<Function>());
+    });
     test('Can instantiate GetProcessVersion', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProcessVersion = kernel32.lookupFunction<
