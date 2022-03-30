@@ -134,6 +134,37 @@ void main() {
       expect(sizeOf<BSMINFO>(), equals(20));
     }
   });
+  test('Struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), equals(24));
+    } else {
+      expect(sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT>(), equals(12));
+    }
+  });
+  test(
+      'Struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION is the right size',
+      () {
+    expect(
+        sizeOf<BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION>(), equals(40));
+  });
+  test('Struct BTH_LE_GATT_CHARACTERISTIC is the right size', () {
+    expect(sizeOf<BTH_LE_GATT_CHARACTERISTIC>(), equals(36));
+  });
+  test('Struct BTH_LE_GATT_CHARACTERISTIC_VALUE is the right size', () {
+    expect(sizeOf<BTH_LE_GATT_CHARACTERISTIC_VALUE>(), equals(8));
+  });
+  test('Struct BTH_LE_GATT_DESCRIPTOR is the right size', () {
+    expect(sizeOf<BTH_LE_GATT_DESCRIPTOR>(), equals(32));
+  });
+  test('Struct BTH_LE_GATT_DESCRIPTOR_VALUE is the right size', () {
+    expect(sizeOf<BTH_LE_GATT_DESCRIPTOR_VALUE>(), equals(80));
+  });
+  test('Struct BTH_LE_GATT_SERVICE is the right size', () {
+    expect(sizeOf<BTH_LE_GATT_SERVICE>(), equals(24));
+  });
+  test('Struct BTH_LE_UUID is the right size', () {
+    expect(sizeOf<BTH_LE_UUID>(), equals(20));
+  });
   test('Struct BY_HANDLE_FILE_INFORMATION is the right size', () {
     expect(sizeOf<BY_HANDLE_FILE_INFORMATION>(), equals(52));
   });
@@ -1044,6 +1075,33 @@ void main() {
     } else {
       expect(sizeOf<SP_DEVINFO_DATA>(), equals(28));
     }
+  });
+  test('Struct SP_DEVICE_INTERFACE_DATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SP_DEVICE_INTERFACE_DATA>(), equals(32));
+    } else {
+      expect(sizeOf<SP_DEVICE_INTERFACE_DATA>(), equals(28));
+    }
+  });
+  test('Struct SP_DEVICE_INTERFACE_DETAIL_DATA_ is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>(), equals(8));
+    } else {
+      expect(sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>(), equals(6));
+    }
+  });
+  test('Struct SPEVENT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SPEVENT>(), equals(32));
+    } else {
+      expect(sizeOf<SPEVENT>(), equals(24));
+    }
+  });
+  test('Struct SPEVENTSOURCEINFO is the right size', () {
+    expect(sizeOf<SPEVENTSOURCEINFO>(), equals(24));
+  });
+  test('Struct SPVOICESTATUS is the right size', () {
+    expect(sizeOf<SPVOICESTATUS>(), equals(52));
   });
   test('Struct STARTUPINFO is the right size', () {
     if (is64bitOS) {

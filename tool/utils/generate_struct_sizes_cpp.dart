@@ -22,24 +22,31 @@ const header = '''
 //      tool\\utils\\struct_sizes.cpp
 
 #include <stdlib.h>
+#include <stdio.h>
+
+// winsock2.h should be before windows.h, since otherwise the older winsock.h
+// will be brought in by windows.h
 #include <winsock2.h>
 #include <windows.h>
-#include <stdio.h>
-#include <ShlObj_core.h>
-#include <netlistmgr.h>
-#include <bluetoothapis.h>
-#include <wincred.h>
-#include <Shlwapi.h>
-#include <physicalmonitorenumerationapi.h>
-#include <CorHdr.h>
-#include <DbgHelp.h>
-#include <ShellScalingApi.h>
+
 #include <AppxPackaging.h>
+#include <bluetoothapis.h>
+#include <bluetoothleapis.h>
+#include <DbgHelp.h>
 #include <dwmapi.h>
-#include <wlanapi.h>
-#include <SetupAPI.h>
 #include <magnification.h>
+#include <netlistmgr.h>
+#include <physicalmonitorenumerationapi.h>
+#include <sapi53.h>
+#include <SetupAPI.h>
+#include <ShellScalingApi.h>
+#include <ShlObj_core.h>
+#include <Shlwapi.h>
+#include <wincred.h>
+#include <wlanapi.h>
 #include <Xinput.h>
+
+#include <CorHdr.h>
 
 void main()
 {
