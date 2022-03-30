@@ -1,13 +1,13 @@
-import 'dart:convert';
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Enumerates device classes and interfaces
+
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
-
-const GUID_DEVCLASS_NET = '{4D36E972-E325-11CE-BFC1-08002BE10318}';
-
-const GUID_DEVINTERFACE_HID = '{4D1E55B2-F16F-11CF-88CB-001111000030}';
 
 void main() {
   // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-setup-classes
@@ -17,7 +17,7 @@ void main() {
     final deviceInfoSetPtr =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = _iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
+      final deviceHandles = iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
       for (final handle in deviceHandles) {
         print('net device ${handle.toHexString(32)}');
       }
@@ -34,9 +34,9 @@ void main() {
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
       final interfacePaths =
-          _iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
+          iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
       for (final path in interfacePaths) {
-        print('hid interface ${utf8.decode(path)}');
+        print('hid interface $path');
       }
     } finally {
       SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
@@ -44,16 +44,7 @@ void main() {
   });
 }
 
-// -----------------------------------------------------------------------------
-// SetupDiGetClassDevs constants
-// -----------------------------------------------------------------------------
-const DIGCF_DEFAULT = 0x00000001;
-const DIGCF_PRESENT = 0x00000002;
-const DIGCF_ALLCLASSES = 0x00000004;
-const DIGCF_PROFILE = 0x00000008;
-const DIGCF_DEVICEINTERFACE = 0x00000010;
-
-Iterable<int> _iterateDeviceHandle(
+Iterable<int> iterateDeviceHandle(
     Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
@@ -68,23 +59,23 @@ Iterable<int> _iterateDeviceHandle(
       throw WindowsException(error);
     }
   } finally {
-    calloc.free(devInfoDataPtr);
+    free(devInfoDataPtr);
   }
 }
 
-Iterable<Uint16List> _iterateInterfacePath(
+Iterable<String> iterateInterfacePath(
     Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
-  final requiredSizePtr = calloc<Uint32>();
-  final devicInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
+  final requiredSizePtr = calloc<DWORD>();
+  final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
   try {
     for (var index = 0;
         SetupDiEnumDeviceInterfaces(deviceInfoSetPtr, nullptr,
-                interfaceGuid.cast(), index, devicInterfaceDataPtr) ==
+                interfaceGuid.cast(), index, deviceInterfaceDataPtr) ==
             TRUE;
         index++) {
-      final hr = SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr,
-          devicInterfaceDataPtr, nullptr, 0, requiredSizePtr, nullptr);
+      SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr, deviceInterfaceDataPtr,
+          nullptr, 0, requiredSizePtr, nullptr);
       // FIXME https://github.com/timsneath/win32/issues/384
       // if (hr != TRUE) {
       //   final error = GetLastError();
@@ -94,18 +85,14 @@ Iterable<Uint16List> _iterateInterfacePath(
       //   }
       // }
 
-      final detailDataMemoryPtr = calloc<Uint16>(requiredSizePtr.value);
+      final deviceInterfaceDetailDataPtr = calloc<BYTE>(requiredSizePtr.value)
+          .cast<SP_DEVICE_INTERFACE_DETAIL_DATA_>()
+        ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
 
       try {
-        final deviceInterfaceDetailDataPtr =
-            Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>.fromAddress(
-                detailDataMemoryPtr.address);
-        deviceInterfaceDetailDataPtr.ref.cbSize =
-            sizeOf<SP_DEVICE_INTERFACE_DETAIL_DATA_>();
-
         final hr = SetupDiGetDeviceInterfaceDetail(
             deviceInfoSetPtr,
-            devicInterfaceDataPtr,
+            deviceInterfaceDataPtr,
             deviceInterfaceDetailDataPtr,
             requiredSizePtr.value,
             nullptr,
@@ -115,13 +102,12 @@ Iterable<Uint16List> _iterateInterfacePath(
               'SetupDiGetDeviceInterfaceDetail - Get Data error ${GetLastError()}');
           continue;
         }
-
-        // rawPathData would be freed with detailDataMemoryPtr
-        final rawPathData = deviceInterfaceDetailDataPtr
-            .getDevicePathData(requiredSizePtr.value);
-        yield Uint16List.fromList(rawPathData);
+        yield deviceInterfaceDetailDataPtr
+            .getDevicePathData(requiredSizePtr.value)
+            .cast<Utf16>()
+            .toDartString();
       } finally {
-        calloc.free(detailDataMemoryPtr);
+        free(deviceInterfaceDetailDataPtr);
       }
     }
 
@@ -130,9 +116,8 @@ Iterable<Uint16List> _iterateInterfacePath(
       throw WindowsException(error);
     }
   } finally {
-    calloc
-      ..free(requiredSizePtr)
-      ..free(devicInterfaceDataPtr);
+    free(requiredSizePtr);
+    free(deviceInterfaceDataPtr);
   }
 }
 
@@ -140,6 +125,6 @@ Iterable<Uint16List> _iterateInterfacePath(
 extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
   /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
-  Uint16List getDevicePathData(int requiredSize) =>
-      Pointer<Uint16>.fromAddress(address).asTypedList(requiredSize).sublist(2);
+  Pointer<WCHAR> getDevicePathData(int requiredSize) =>
+      Pointer<WCHAR>.fromAddress(address + 4);
 }
