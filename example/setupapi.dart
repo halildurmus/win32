@@ -126,7 +126,6 @@ Iterable<String> devicePathsByInterface(
 // ignore: camel_case_extensions
 extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
-  /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
   Pointer<WCHAR> getDevicePathData(int requiredSize) =>
       Pointer<WCHAR>.fromAddress(address + 4);
 }

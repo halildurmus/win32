@@ -14,8 +14,6 @@ void main() {
     final interfaceGuid = arena<GUID>()
       ..ref.setGUID(GUID_BLUETOOTHLE_DEVICE_INTERFACE);
 
-    // This should be defined to return a HDEVINFO (IntPtr). Waiting on
-    // https://github.com/microsoft/win32metadata/issues/856
     final hDevInfo = SetupDiGetClassDevs(
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
@@ -61,7 +59,9 @@ Iterable<String> devicesByInterface(
       SetupDiGetDeviceInterfaceDetail(hDevInfo, deviceInterfaceDataPtr, nullptr,
           0, requiredSizePtr, nullptr);
 
-      // FIXME https://github.com/timsneath/win32/issues/384
+      // TODO: Uncomment when https://github.com/timsneath/win32/issues/384 is
+      // successfully resolved.
+
       // if (hr != TRUE) {
       //   final error = GetLastError();
       //   if (error != ERROR_INSUFFICIENT_BUFFER) {
@@ -115,7 +115,6 @@ Iterable<String> devicesByInterface(
 // ignore: camel_case_extensions
 extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
-  /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
   Pointer<WCHAR> getDevicePathData(int requiredSize) =>
       Pointer<WCHAR>.fromAddress(address + 4);
 }
