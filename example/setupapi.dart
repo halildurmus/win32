@@ -17,9 +17,9 @@ void main() {
     final hDevInfo =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = iterateDeviceHandle(hDevInfo, deviceGuid);
-      for (final handle in deviceHandles) {
-        print('net device ${handle.toHexString(32)}');
+      final deviceHandles = deviceInstancesByClass(hDevInfo, deviceGuid);
+      for (final instance in deviceHandles) {
+        print('net device instance ${instance.toHexString(32)}');
       }
     } finally {
       SetupDiDestroyDeviceInfoList(hDevInfo);
@@ -30,21 +30,20 @@ void main() {
   using((Arena arena) {
     final interfaceGuid = arena<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
-    final deviceInfoSetPtr = SetupDiGetClassDevs(
+    final hDevInfo = SetupDiGetClassDevs(
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
-      final interfacePaths =
-          iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
-      for (final path in interfacePaths) {
-        print('hid interface $path');
+      final devicePaths = devicePathsByInterface(hDevInfo, interfaceGuid);
+      for (final path in devicePaths) {
+        print('hid device path $path');
       }
     } finally {
-      SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
+      SetupDiDestroyDeviceInfoList(hDevInfo);
     }
   });
 }
 
-Iterable<int> iterateDeviceHandle(
+Iterable<int> deviceInstancesByClass(
     int hDevInfo, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
@@ -63,7 +62,7 @@ Iterable<int> iterateDeviceHandle(
   }
 }
 
-Iterable<String> iterateInterfacePath(
+Iterable<String> devicePathsByInterface(
     int hDevInfo, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
@@ -76,7 +75,10 @@ Iterable<String> iterateInterfacePath(
         index++) {
       SetupDiGetDeviceInterfaceDetail(hDevInfo, deviceInterfaceDataPtr, nullptr,
           0, requiredSizePtr, nullptr);
-      // FIXME https://github.com/timsneath/win32/issues/384
+
+      // TODO: Uncomment when https://github.com/timsneath/win32/issues/384 is
+      // successfully resolved.
+
       // if (hr != TRUE) {
       //   final error = GetLastError();
       //   if (error != ERROR_INSUFFICIENT_BUFFER) {

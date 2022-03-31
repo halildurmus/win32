@@ -71,7 +71,7 @@ Iterable<String> devicesByInterface(
       //   }
       // }
 
-      final detailDataMemoryPtr = calloc<Uint8>(requiredSizePtr.value);
+      final detailDataMemoryPtr = calloc<BYTE>(requiredSizePtr.value);
 
       try {
         final deviceInterfaceDetailDataPtr =
@@ -117,7 +117,7 @@ extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
   /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
   Pointer<WCHAR> getDevicePathData(int requiredSize) =>
-      Pointer<Uint16>.fromAddress(address + 4);
+      Pointer<WCHAR>.fromAddress(address + 4);
 }
 
 // -----------------------------------------------------------------------------
