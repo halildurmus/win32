@@ -19,7 +19,7 @@ class Size {
 Size getMonitorSizeInMM() {
   final guidptr = calloc<GUID>();
 
-  guidptr.ref.setGUID(GUID_CLASS_MONITOR);
+  final guidptr = GUIDFromString(GUID_CLASS_MONITOR);
   // Get the handle for the first monitor.
   final ptr = SetupDiGetClassDevs(guidptr, nullptr, 0, DIGCF_PRESENT);
   var width = 0;
