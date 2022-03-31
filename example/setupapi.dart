@@ -17,7 +17,7 @@ void main() {
     final deviceInfoSetPtr =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = deviceIntancesByClass(deviceInfoSetPtr, deviceGuid);
+      final deviceHandles = deviceInstancesByClass(deviceInfoSetPtr, deviceGuid);
       for (final instance in deviceHandles) {
         print('net device instance ${instance.toHexString(32)}');
       }
