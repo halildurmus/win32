@@ -5436,11 +5436,9 @@ class SECURITY_DESCRIPTOR extends Struct {
   @Uint16()
   external int Control;
 
-  @IntPtr()
-  external int Owner;
+  external Pointer Owner;
 
-  @IntPtr()
-  external int Group;
+  external Pointer Group;
 
   external Pointer<ACL> Sacl;
 
@@ -6391,8 +6389,7 @@ class TITLEBARINFOEX extends Struct {
 ///
 /// {@category Struct}
 class TOKEN_APPCONTAINER_INFORMATION extends Struct {
-  @IntPtr()
-  external int TokenAppContainer;
+  external Pointer TokenAppContainer;
 }
 
 /// Encapsulates data for touch input.

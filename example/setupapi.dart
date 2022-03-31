@@ -14,15 +14,15 @@ void main() {
   using((Arena arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
-    final deviceInfoSetPtr =
+    final hDevInfo =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
+      final deviceHandles = iterateDeviceHandle(hDevInfo, deviceGuid);
       for (final handle in deviceHandles) {
         print('net device ${handle.toHexString(32)}');
       }
     } finally {
-      SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
+      SetupDiDestroyDeviceInfoList(hDevInfo);
     }
   });
 
@@ -45,12 +45,12 @@ void main() {
 }
 
 Iterable<int> iterateDeviceHandle(
-    Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
+    int hDevInfo, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
   try {
     for (var index = 0;
-        SetupDiEnumDeviceInfo(deviceInfoSetPtr, index, devInfoDataPtr) == TRUE;
+        SetupDiEnumDeviceInfo(hDevInfo, index, devInfoDataPtr) == TRUE;
         index++) {
       yield devInfoDataPtr.ref.DevInst;
     }
@@ -64,18 +64,18 @@ Iterable<int> iterateDeviceHandle(
 }
 
 Iterable<String> iterateInterfacePath(
-    Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
+    int hDevInfo, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
   try {
     for (var index = 0;
-        SetupDiEnumDeviceInterfaces(deviceInfoSetPtr, nullptr,
-                interfaceGuid.cast(), index, deviceInterfaceDataPtr) ==
+        SetupDiEnumDeviceInterfaces(hDevInfo, nullptr, interfaceGuid.cast(),
+                index, deviceInterfaceDataPtr) ==
             TRUE;
         index++) {
-      SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr, deviceInterfaceDataPtr,
-          nullptr, 0, requiredSizePtr, nullptr);
+      SetupDiGetDeviceInterfaceDetail(hDevInfo, deviceInterfaceDataPtr, nullptr,
+          0, requiredSizePtr, nullptr);
       // FIXME https://github.com/timsneath/win32/issues/384
       // if (hr != TRUE) {
       //   final error = GetLastError();
@@ -91,7 +91,7 @@ Iterable<String> iterateInterfacePath(
 
       try {
         final hr = SetupDiGetDeviceInterfaceDetail(
-            deviceInfoSetPtr,
+            hDevInfo,
             deviceInterfaceDataPtr,
             deviceInterfaceDetailDataPtr,
             requiredSizePtr.value,

@@ -46,7 +46,7 @@ void main() {
 }
 
 Iterable<String> devicesByInterface(
-    Pointer hDevInfo, Pointer<GUID> interfaceGuid) sync* {
+    int hDevInfo, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
