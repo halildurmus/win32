@@ -1,3 +1,7 @@
+## 1.0.29
+
+- Update to Windows.Win32.winmd v21.0.5.16515.
+
 ## 1.0.28
 
 - Add test for GetDateTime
