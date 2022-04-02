@@ -58,13 +58,15 @@ class TypeTuple {
         break;
 
       case BaseType.GenericTypeModifier:
+        // return a type with a generic
         final classTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
+        runtimeType.type = classTuple.typeIdentifier.type;
         runtimeType.name = classTuple.typeIdentifier.name;
-        final argsCount =
-            signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
-        dataLength =
-            classTuple.offsetLength + 2; // GENERICINST + class + argsCount
+        dataLength = 1 + classTuple.offsetLength;
+
+        final argsCount = signatureBlob[dataLength]; // GENERICINST + class
+        dataLength++; // skip over argsCount
 
         var argPtr = runtimeType;
         for (var idx = 0; idx < argsCount; idx++) {
