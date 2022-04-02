@@ -196,26 +196,11 @@ class Method extends TokenObject
   MethodImplementationFeatures get implFeatures =>
       MethodImplementationFeatures(implFlags);
 
-  // While the `isSpecialName` metadata is untrustworthy, we add extra caveats.
-  // TODO: Remove this check when
-  // https://github.com/microsoft/win32metadata/issues/707 is fixed
-  bool get _isFakeGetProperty =>
-      parent.name.startsWith('Windows.Win32') &&
-      (parameters.length != 1 || !parameters.first.isOutParam);
-
   /// Returns true if the method is a property getter
-  bool get isGetProperty =>
-      isSpecialName && name.startsWith('get_') && !_isFakeGetProperty;
-
-  // TODO: Remove this check when
-  // https://github.com/microsoft/win32metadata/issues/707 is fixed
-  bool get _isFakeSetProperty =>
-      parent.name.startsWith('Windows.Win32') &&
-      (parameters.length != 1 || !parameters.first.isInParam);
+  bool get isGetProperty => isSpecialName && name.startsWith('get_');
 
   /// Returns true if the method is a property setter
-  bool get isSetProperty =>
-      isSpecialName && name.startsWith('put_') && !_isFakeSetProperty;
+  bool get isSetProperty => isSpecialName && name.startsWith('put_');
 
   /// Returns true if the method is a property getter or setter.
   bool get isProperty => isGetProperty | isSetProperty;
