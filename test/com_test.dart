@@ -143,6 +143,15 @@ void main() {
     });
   });
 
+  test('COM methods of form get_*** are not interpreted as properties', () {
+    final scope = MetadataStore.getWin32Scope();
+    final iksTopologyInfo =
+        scope.findTypeDef('Windows.Win32.Media.DirectShow.IKsTopologyInfo')!;
+    final getNodeName = iksTopologyInfo.findMethod('get_NodeName')!;
+    expect(getNodeName.isProperty, isFalse);
+    expect(getNodeName.isGetProperty, isFalse);
+  });
+
   test('Multiple layers of interface inheritance are correct', () {
     final scope = MetadataStore.getWin32Scope();
     final iFactory2 = scope
