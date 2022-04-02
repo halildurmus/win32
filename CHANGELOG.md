@@ -1,3 +1,8 @@
+## 1.0.30
+
+- Fix GenericTypeModifier test
+- Update to Windows.Win32.winmd v22.0.3.46746.
+
 ## 1.0.29
 
 - Update to Windows.Win32.winmd v21.0.5.16515.

@@ -659,9 +659,13 @@ void main() {
     expect(putProgress.hasGenericParameters, isFalse);
 
     final handler = putProgress.parameters.first;
+    expect(handler.name, equals('handler'));
     expect(handler.typeIdentifier.type, isNotNull);
+    expect(handler.typeIdentifier.type!.name,
+        endsWith('AsyncActionProgressHandler`1'));
+    expect(handler.typeIdentifier.typeArg!.genericParameterSequence, equals(0));
 
     final aaph = handler.typeIdentifier.type!;
     expect(aaph.genericParams.length, equals(1));
-  }, skip: 'Need to implement GenericTypeModifier support');
+  });
 }
