@@ -6146,6 +6146,8 @@ const LOAD_LIBRARY_SAFE_CURRENT_DIRS = 0x00002000;
 // Monitor Configuration constants & enumerations
 // -----------------------------------------------------------------------------
 
+const GUID_CLASS_MONITOR = '{4d36e96e-e325-11ce-bfc1-08002be10318}';
+
 /// If the point is not contained within any display monitor, return NULL.
 const MONITOR_DEFAULTTONULL = 0x00000000;
 
@@ -8418,3 +8420,21 @@ const DIGCF_PROFILE = 0x00000008;
 /// Return devices that support device interfaces for the specified device
 /// interface classes.
 const DIGCF_DEVICEINTERFACE = 0x00000010;
+
+/// Make the change in all hardware profiles.
+const DICS_FLAG_GLOBAL = 0x00000001;
+
+/// Make the change in the specified profile only.
+const DICS_FLAG_CONFIGSPECIFIC = 0x00000002;
+
+/// (Obsolete. Do not use.)
+const DICS_FLAG_CONFIGGENERAL = 0x00000004;
+
+/// Hardware key for the device.
+const DIREG_DEV = 0x00000001;
+
+/// Software key for the device.
+const DIREG_DRV = 0x00000002;
+
+/// Both hardware and software keys.
+const DIREG_BOTH = 0x00000004;
