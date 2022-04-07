@@ -11,9 +11,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Size {
-  double width;
-  double height;
-  Size(this.width, this.height);
+  final int width;
+  final int height;
+  const Size({required this.width, required this.height});
 }
 
 Size getMonitorSizeInMM() {
@@ -72,14 +72,14 @@ Size getMonitorSizeInMM() {
 
   SetupDiDestroyDeviceInfoList(ptr);
   free(guidptr);
-  return Size(width.toDouble(), height.toDouble());
+  return Size(width: width, height: height);
 }
 
 Size getMonitorSizeInMMBackup() {
   final hdc = GetDC(NULL);
   final width = GetDeviceCaps(hdc, 4);
   final height = GetDeviceCaps(hdc, 6);
-  return Size(width.toDouble(), height.toDouble());
+  return Size(width: width, height: height);
 }
 
 void main() {
