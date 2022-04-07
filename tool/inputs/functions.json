@@ -2607,6 +2607,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the shutdown parameters for the currently calling process."
     },
+    "GetProcessTimes": {
+        "prototype": "BOOL GetProcessTimes(\n  HANDLE hProcess,\n  LPFILETIME lpCreationTime,\n  LPFILETIME lpExitTime,\n  LPFILETIME lpKernelTime,\n  LPFILETIME lpUserTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves timing information for the specified process."
+    },
     "GetProcessVersion": {
         "prototype": "DWORD GetProcessVersion(\n  DWORD ProcessId\n);",
         "dllLibrary": "kernel32",

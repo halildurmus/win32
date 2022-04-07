@@ -2995,6 +2995,41 @@ final _GetProcessShutdownParameters = _kernel32.lookupFunction<
     int Function(Pointer<Uint32> lpdwLevel,
         Pointer<Uint32> lpdwFlags)>('GetProcessShutdownParameters');
 
+/// Retrieves timing information for the specified process.
+///
+/// ```c
+/// BOOL GetProcessTimes(
+///   HANDLE hProcess,
+///   LPFILETIME lpCreationTime,
+///   LPFILETIME lpExitTime,
+///   LPFILETIME lpKernelTime,
+///   LPFILETIME lpUserTime
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessTimes(
+        int hProcess,
+        Pointer<FILETIME> lpCreationTime,
+        Pointer<FILETIME> lpExitTime,
+        Pointer<FILETIME> lpKernelTime,
+        Pointer<FILETIME> lpUserTime) =>
+    _GetProcessTimes(
+        hProcess, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime);
+
+final _GetProcessTimes = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hProcess,
+        Pointer<FILETIME> lpCreationTime,
+        Pointer<FILETIME> lpExitTime,
+        Pointer<FILETIME> lpKernelTime,
+        Pointer<FILETIME> lpUserTime),
+    int Function(
+        int hProcess,
+        Pointer<FILETIME> lpCreationTime,
+        Pointer<FILETIME> lpExitTime,
+        Pointer<FILETIME> lpKernelTime,
+        Pointer<FILETIME> lpUserTime)>('GetProcessTimes');
+
 /// Retrieves the major and minor version numbers of the system on which
 /// the specified process expects to run.
 ///

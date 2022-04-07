@@ -97,6 +97,7 @@ require Flutter.
 | ------------------ | --------------------------------------------------------- |
 | `hello.dart`       | Basic Petzoldian "hello world" Win32 app                  |
 | `bluetooth.dart`   | Demonstrate enumerating Bluetooth devices                 |
+| `bluetoothle.dart` | Enumerate Bluetooth LE (Low Energy) devices               |
 | `calendar.dart`    | Gets information about the calendar from a WinRT API      |
 | `console.dart`     | Shows usage of console APIs                               |
 | `credentials.dart` | Adds a credential to the store and retrieves it           |
@@ -129,6 +130,7 @@ require Flutter.
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `serial.dart`      | Demonstrates serial port management                       |
+| `setupapi.dart`    | Show using setup APIs to retrieve device interfaces       |
 | `shortcut.dart`    | Demonstrates creating a Windows shell link                |
 | `snake.dart`       | Snake game using various GDI features                     |
 | `speech.dart`      | Use Windows speech engine for text-to-speech              |

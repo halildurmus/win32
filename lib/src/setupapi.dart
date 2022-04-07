@@ -30,12 +30,12 @@ final _setupapi = DynamicLibrary.open('setupapi.dll');
 /// );
 /// ```
 /// {@category setupapi}
-int SetupDiDestroyDeviceInfoList(Pointer DeviceInfoSet) =>
+int SetupDiDestroyDeviceInfoList(int DeviceInfoSet) =>
     _SetupDiDestroyDeviceInfoList(DeviceInfoSet);
 
 final _SetupDiDestroyDeviceInfoList = _setupapi.lookupFunction<
-    Int32 Function(Pointer DeviceInfoSet),
-    int Function(Pointer DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
+    Int32 Function(IntPtr DeviceInfoSet),
+    int Function(int DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
 
 /// The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure
 /// that specifies a device information element in a device information
@@ -49,14 +49,14 @@ final _SetupDiDestroyDeviceInfoList = _setupapi.lookupFunction<
 /// );
 /// ```
 /// {@category setupapi}
-int SetupDiEnumDeviceInfo(Pointer DeviceInfoSet, int MemberIndex,
+int SetupDiEnumDeviceInfo(int DeviceInfoSet, int MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData) =>
     _SetupDiEnumDeviceInfo(DeviceInfoSet, MemberIndex, DeviceInfoData);
 
 final _SetupDiEnumDeviceInfo = _setupapi.lookupFunction<
-    Int32 Function(Pointer DeviceInfoSet, Uint32 MemberIndex,
+    Int32 Function(IntPtr DeviceInfoSet, Uint32 MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData),
-    int Function(Pointer DeviceInfoSet, int MemberIndex,
+    int Function(int DeviceInfoSet, int MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData)>('SetupDiEnumDeviceInfo');
 
 /// The SetupDiEnumDeviceInterfaces function enumerates the device
@@ -73,7 +73,7 @@ final _SetupDiEnumDeviceInfo = _setupapi.lookupFunction<
 /// ```
 /// {@category setupapi}
 int SetupDiEnumDeviceInterfaces(
-        Pointer DeviceInfoSet,
+        int DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         Pointer<GUID> InterfaceClassGuid,
         int MemberIndex,
@@ -83,13 +83,13 @@ int SetupDiEnumDeviceInterfaces(
 
 final _SetupDiEnumDeviceInterfaces = _setupapi.lookupFunction<
         Int32 Function(
-            Pointer DeviceInfoSet,
+            IntPtr DeviceInfoSet,
             Pointer<SP_DEVINFO_DATA> DeviceInfoData,
             Pointer<GUID> InterfaceClassGuid,
             Uint32 MemberIndex,
             Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData),
         int Function(
-            Pointer DeviceInfoSet,
+            int DeviceInfoSet,
             Pointer<SP_DEVINFO_DATA> DeviceInfoData,
             Pointer<GUID> InterfaceClassGuid,
             int MemberIndex,
@@ -109,14 +109,14 @@ final _SetupDiEnumDeviceInterfaces = _setupapi.lookupFunction<
 /// );
 /// ```
 /// {@category setupapi}
-Pointer SetupDiGetClassDevs(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+int SetupDiGetClassDevs(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         int hwndParent, int Flags) =>
     _SetupDiGetClassDevs(ClassGuid, Enumerator, hwndParent, Flags);
 
 final _SetupDiGetClassDevs = _setupapi.lookupFunction<
-    Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+    IntPtr Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         IntPtr hwndParent, Uint32 Flags),
-    Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+    int Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         int hwndParent, int Flags)>('SetupDiGetClassDevsW');
 
 /// The SetupDiGetDeviceInterfaceDetail function returns details about a
@@ -134,7 +134,7 @@ final _SetupDiGetClassDevs = _setupapi.lookupFunction<
 /// ```
 /// {@category setupapi}
 int SetupDiGetDeviceInterfaceDetail(
-        Pointer DeviceInfoSet,
+        int DeviceInfoSet,
         Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
         Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
         int DeviceInterfaceDetailDataSize,
@@ -150,14 +150,14 @@ int SetupDiGetDeviceInterfaceDetail(
 
 final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
         Int32 Function(
-            Pointer DeviceInfoSet,
+            IntPtr DeviceInfoSet,
             Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
             Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
             Uint32 DeviceInterfaceDetailDataSize,
             Pointer<Uint32> RequiredSize,
             Pointer<SP_DEVINFO_DATA> DeviceInfoData),
         int Function(
-            Pointer DeviceInfoSet,
+            int DeviceInfoSet,
             Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
             Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
             int DeviceInterfaceDetailDataSize,
@@ -180,7 +180,7 @@ final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
 /// ```
 /// {@category setupapi}
 int SetupDiOpenDevRegKey(
-        Pointer DeviceInfoSet,
+        int DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         int Scope,
         int HwProfile,
@@ -191,14 +191,14 @@ int SetupDiOpenDevRegKey(
 
 final _SetupDiOpenDevRegKey = _setupapi.lookupFunction<
     IntPtr Function(
-        Pointer DeviceInfoSet,
+        IntPtr DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         Uint32 Scope,
         Uint32 HwProfile,
         Uint32 KeyType,
         Uint32 samDesired),
     int Function(
-        Pointer DeviceInfoSet,
+        int DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         int Scope,
         int HwProfile,
