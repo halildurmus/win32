@@ -32,7 +32,7 @@ Size getMonitorSizeInMM() {
     final hDevRegKey = SetupDiOpenDevRegKey(ptr, data, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
 
     const nameSize = 128;
-    final lpValueName = calloc<Uint16>(nameSize).cast<Utf16>();
+    final lpValueName = wsalloc(nameSize);
     const edidDataSize = 256;
 
     final lpcchValueName = calloc<DWORD>()..value = nameSize;
