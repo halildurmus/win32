@@ -14,15 +14,15 @@ void main() {
   using((Arena arena) {
     final deviceGuid = arena<GUID>()..ref.setGUID(GUID_DEVCLASS_NET);
 
-    final deviceInfoSetPtr =
+    final hDevInfo =
         SetupDiGetClassDevs(deviceGuid, nullptr, NULL, DIGCF_PRESENT);
     try {
-      final deviceHandles = iterateDeviceHandle(deviceInfoSetPtr, deviceGuid);
-      for (final handle in deviceHandles) {
-        print('net device ${handle.toHexString(32)}');
+      final deviceHandles = deviceInstancesByClass(hDevInfo, deviceGuid);
+      for (final instance in deviceHandles) {
+        print('net device instance ${instance.toHexString(32)}');
       }
     } finally {
-      SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
+      SetupDiDestroyDeviceInfoList(hDevInfo);
     }
   });
 
@@ -30,27 +30,26 @@ void main() {
   using((Arena arena) {
     final interfaceGuid = arena<GUID>()..ref.setGUID(GUID_DEVINTERFACE_HID);
 
-    final deviceInfoSetPtr = SetupDiGetClassDevs(
+    final hDevInfo = SetupDiGetClassDevs(
         interfaceGuid, nullptr, NULL, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
     try {
-      final interfacePaths =
-          iterateInterfacePath(deviceInfoSetPtr, interfaceGuid);
-      for (final path in interfacePaths) {
-        print('hid interface $path');
+      final devicePaths = devicePathsByInterface(hDevInfo, interfaceGuid);
+      for (final path in devicePaths) {
+        print('hid device path $path');
       }
     } finally {
-      SetupDiDestroyDeviceInfoList(deviceInfoSetPtr);
+      SetupDiDestroyDeviceInfoList(hDevInfo);
     }
   });
 }
 
-Iterable<int> iterateDeviceHandle(
-    Pointer deviceInfoSetPtr, Pointer<GUID> deviceGuid) sync* {
+Iterable<int> deviceInstancesByClass(
+    int hDevInfo, Pointer<GUID> deviceGuid) sync* {
   final devInfoDataPtr = calloc<SP_DEVINFO_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVINFO_DATA>();
   try {
     for (var index = 0;
-        SetupDiEnumDeviceInfo(deviceInfoSetPtr, index, devInfoDataPtr) == TRUE;
+        SetupDiEnumDeviceInfo(hDevInfo, index, devInfoDataPtr) == TRUE;
         index++) {
       yield devInfoDataPtr.ref.DevInst;
     }
@@ -63,20 +62,23 @@ Iterable<int> iterateDeviceHandle(
   }
 }
 
-Iterable<String> iterateInterfacePath(
-    Pointer deviceInfoSetPtr, Pointer<GUID> interfaceGuid) sync* {
+Iterable<String> devicePathsByInterface(
+    int hDevInfo, Pointer<GUID> interfaceGuid) sync* {
   final requiredSizePtr = calloc<DWORD>();
   final deviceInterfaceDataPtr = calloc<SP_DEVICE_INTERFACE_DATA>()
     ..ref.cbSize = sizeOf<SP_DEVICE_INTERFACE_DATA>();
   try {
     for (var index = 0;
-        SetupDiEnumDeviceInterfaces(deviceInfoSetPtr, nullptr,
-                interfaceGuid.cast(), index, deviceInterfaceDataPtr) ==
+        SetupDiEnumDeviceInterfaces(hDevInfo, nullptr, interfaceGuid.cast(),
+                index, deviceInterfaceDataPtr) ==
             TRUE;
         index++) {
-      SetupDiGetDeviceInterfaceDetail(deviceInfoSetPtr, deviceInterfaceDataPtr,
-          nullptr, 0, requiredSizePtr, nullptr);
-      // FIXME https://github.com/timsneath/win32/issues/384
+      SetupDiGetDeviceInterfaceDetail(hDevInfo, deviceInterfaceDataPtr, nullptr,
+          0, requiredSizePtr, nullptr);
+
+      // TODO: Uncomment when https://github.com/timsneath/win32/issues/384 is
+      // successfully resolved.
+
       // if (hr != TRUE) {
       //   final error = GetLastError();
       //   if (error != ERROR_INSUFFICIENT_BUFFER) {
@@ -91,7 +93,7 @@ Iterable<String> iterateInterfacePath(
 
       try {
         final hr = SetupDiGetDeviceInterfaceDetail(
-            deviceInfoSetPtr,
+            hDevInfo,
             deviceInterfaceDataPtr,
             deviceInterfaceDetailDataPtr,
             requiredSizePtr.value,
@@ -124,7 +126,6 @@ Iterable<String> iterateInterfacePath(
 // ignore: camel_case_extensions
 extension Pointer_SP_DEVICE_INTERFACE_DETAIL_DATA_
     on Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> {
-  /// FIXME [SP_DEVICE_INTERFACE_DETAIL_DATA_.DevicePath]
   Pointer<WCHAR> getDevicePathData(int requiredSize) =>
       Pointer<WCHAR>.fromAddress(address + 4);
 }

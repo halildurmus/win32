@@ -1,3 +1,10 @@
+## 2.5.1
+
+- Add GetProcessTimes (#396, thanks to @halildurmus)
+- Add device interface and device class GUIDs
+- Add examples for Bluetooth LE and Setup APIs (#390, #392, thanks to @Sunbreak)
+- Fix setup APIs to project HDEVINFO correctly
+
 ## 2.5.0
 
 - [BREAKING CHANGE] Use new projection tooling for WinRT classes. WinRT APIs are

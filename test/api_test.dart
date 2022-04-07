@@ -11323,16 +11323,16 @@ void main() {
     test('Can instantiate SetupDiDestroyDeviceInfoList', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiDestroyDeviceInfoList = setupapi.lookupFunction<
-          Int32 Function(Pointer DeviceInfoSet),
-          int Function(Pointer DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
+          Int32 Function(IntPtr DeviceInfoSet),
+          int Function(int DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
       expect(SetupDiDestroyDeviceInfoList, isA<Function>());
     });
     test('Can instantiate SetupDiEnumDeviceInfo', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiEnumDeviceInfo = setupapi.lookupFunction<
-              Int32 Function(Pointer DeviceInfoSet, Uint32 MemberIndex,
+              Int32 Function(IntPtr DeviceInfoSet, Uint32 MemberIndex,
                   Pointer<SP_DEVINFO_DATA> DeviceInfoData),
-              int Function(Pointer DeviceInfoSet, int MemberIndex,
+              int Function(int DeviceInfoSet, int MemberIndex,
                   Pointer<SP_DEVINFO_DATA> DeviceInfoData)>(
           'SetupDiEnumDeviceInfo');
       expect(SetupDiEnumDeviceInfo, isA<Function>());
@@ -11341,13 +11341,13 @@ void main() {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiEnumDeviceInterfaces = setupapi.lookupFunction<
               Int32 Function(
-                  Pointer DeviceInfoSet,
+                  IntPtr DeviceInfoSet,
                   Pointer<SP_DEVINFO_DATA> DeviceInfoData,
                   Pointer<GUID> InterfaceClassGuid,
                   Uint32 MemberIndex,
                   Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData),
               int Function(
-                  Pointer DeviceInfoSet,
+                  int DeviceInfoSet,
                   Pointer<SP_DEVINFO_DATA> DeviceInfoData,
                   Pointer<GUID> InterfaceClassGuid,
                   int MemberIndex,
@@ -11358,9 +11358,9 @@ void main() {
     test('Can instantiate SetupDiGetClassDevs', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiGetClassDevs = setupapi.lookupFunction<
-          Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+          IntPtr Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
               IntPtr hwndParent, Uint32 Flags),
-          Pointer Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+          int Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
               int hwndParent, int Flags)>('SetupDiGetClassDevsW');
       expect(SetupDiGetClassDevs, isA<Function>());
     });
@@ -11368,7 +11368,7 @@ void main() {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiGetDeviceInterfaceDetail = setupapi.lookupFunction<
               Int32 Function(
-                  Pointer DeviceInfoSet,
+                  IntPtr DeviceInfoSet,
                   Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
                   Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>
                       DeviceInterfaceDetailData,
@@ -11376,7 +11376,7 @@ void main() {
                   Pointer<Uint32> RequiredSize,
                   Pointer<SP_DEVINFO_DATA> DeviceInfoData),
               int Function(
-                  Pointer DeviceInfoSet,
+                  int DeviceInfoSet,
                   Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
                   Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_>
                       DeviceInterfaceDetailData,
@@ -11390,14 +11390,14 @@ void main() {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiOpenDevRegKey = setupapi.lookupFunction<
           IntPtr Function(
-              Pointer DeviceInfoSet,
+              IntPtr DeviceInfoSet,
               Pointer<SP_DEVINFO_DATA> DeviceInfoData,
               Uint32 Scope,
               Uint32 HwProfile,
               Uint32 KeyType,
               Uint32 samDesired),
           int Function(
-              Pointer DeviceInfoSet,
+              int DeviceInfoSet,
               Pointer<SP_DEVINFO_DATA> DeviceInfoData,
               int Scope,
               int HwProfile,
