@@ -64,18 +64,43 @@ void findRadioInfo(int hRadio) {
   }
 }
 
+String convertBluetoothAddress(BLUETOOTH_ADDRESS address) {
+  final bytes = address.rgBytes;
+  final buffer = StringBuffer();
+  for (var idx = 0; idx < 6; idx++) {
+    buffer.write(bytes[idx].toRadixString(16).padLeft(2, '0').toUpperCase());
+    if (idx < 5) buffer.write(':');
+  }
+  return buffer.toString();
+}
+
+void printBluetoothDeviceInfo(BLUETOOTH_DEVICE_INFO info) {
+  print('Device address: ${convertBluetoothAddress(info.Address)}');
+  print('  Name: ${info.szName}');
+  print('  Authenticated: ${info.fAuthenticated != FALSE ? 'True' : 'False'}');
+  print('  Connected: ${info.fConnected != FALSE ? 'True' : 'False'}');
+  print('  Remembered: ${info.fRemembered != FALSE ? 'True' : 'False'}');
+}
+
 void findBluetoothDevices() {
   final params = calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
-  final info = calloc<BLUETOOTH_DEVICE_INFO>();
+    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+    ..ref.fReturnConnected = TRUE
+    ..ref.fReturnAuthenticated = TRUE
+    ..ref.fReturnRemembered = TRUE
+    ..ref.fReturnUnknown = TRUE
+    ..ref.fIssueInquiry = TRUE
+    ..ref.cTimeoutMultiplier = 1;
+  final info = calloc<BLUETOOTH_DEVICE_INFO>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_INFO>();
 
   try {
     final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
     if (firstDeviceHandle != NULL) {
-      print('Found device: ${info.ref.szName}');
+      printBluetoothDeviceInfo(info.ref);
       while (BluetoothFindNextDevice(firstDeviceHandle, info) == TRUE) {
-        print('Found device: ${info.ref.szName}');
+        printBluetoothDeviceInfo(info.ref);
       }
       BluetoothFindDeviceClose(firstDeviceHandle);
     } else {
