@@ -245,6 +245,8 @@ export 'src/com/IShellLinkDataList.dart';
 export 'src/com/IShellLinkDual.dart';
 export 'src/com/IShellService.dart';
 export 'src/com/ISimpleAudioVolume.dart';
+export 'src/com/ISpeechObjectToken.dart';
+export 'src/com/ISpeechObjectTokens.dart';
 export 'src/com/ISpEventSource.dart';
 export 'src/com/ISpNotifySource.dart';
 export 'src/com/ISpVoice.dart';

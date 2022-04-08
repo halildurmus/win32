@@ -18,6 +18,8 @@ const comInterfacesToGenerate = <String>[
   'Windows.Win32.Media.Speech.ISpEventSource',
   'Windows.Win32.Media.Speech.ISpNotifySource',
   'Windows.Win32.Media.Speech.ISpVoice',
+  'Windows.Win32.Media.Speech.ISpeechObjectToken',
+  'Windows.Win32.Media.Speech.ISpeechObjectTokens',
   'Windows.Win32.Networking.NetworkListManager.IEnumNetworkConnections',
   'Windows.Win32.Networking.NetworkListManager.IEnumNetworks',
   'Windows.Win32.Networking.NetworkListManager.INetwork',
