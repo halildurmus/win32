@@ -4,9 +4,25 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // https://stackoverflow.com/questions/36029230
+/// Converts FILETIME format to seconds.
 double fileTimeToSeconds(FILETIME fileTime) =>
-    // 4294967296 represents the value of 2^32
-    (fileTime.dwHighDateTime * 4294967296 + fileTime.dwLowDateTime) / 10E6;
+    ((fileTime.dwHighDateTime << 32) + fileTime.dwLowDateTime) / 10E6;
+
+/// Constructs a DateTime from SYSTEMTIME format.
+DateTime systemTimeToDateTime(SYSTEMTIME systemTime,
+    {bool convertToLocalTimeZone = true}) {
+  final dateTime = DateTime.utc(
+    systemTime.wYear,
+    systemTime.wMonth,
+    systemTime.wDay,
+    systemTime.wHour,
+    systemTime.wMinute,
+    systemTime.wSecond,
+    systemTime.wMilliseconds,
+  );
+
+  return convertToLocalTimeZone ? dateTime.toLocal() : dateTime;
+}
 
 void main() {
   final hProcess = GetCurrentProcess();
@@ -32,36 +48,25 @@ void main() {
       throw WindowsException(result);
     }
 
-    // Convert process exit time to SYSTEMTIME format
-    result = FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
-    if (result == FALSE) {
-      throw WindowsException(result);
-    }
-
-    // Construct a DateTime from SYSTEMTIME format
-    final creationTime = DateTime.utc(
-      pCreationTimeAsSystemTime.ref.wYear,
-      pCreationTimeAsSystemTime.ref.wMonth,
-      pCreationTimeAsSystemTime.ref.wDay,
-      pCreationTimeAsSystemTime.ref.wHour,
-      pCreationTimeAsSystemTime.ref.wMinute,
-      pCreationTimeAsSystemTime.ref.wSecond,
-      pCreationTimeAsSystemTime.ref.wMilliseconds,
-    ).toLocal();
-
-    final exitTime = DateTime.utc(
-      pExitTimeAsSystemTime.ref.wYear,
-      pExitTimeAsSystemTime.ref.wMonth,
-      pExitTimeAsSystemTime.ref.wDay,
-      pExitTimeAsSystemTime.ref.wHour,
-      pExitTimeAsSystemTime.ref.wMinute,
-      pExitTimeAsSystemTime.ref.wSecond,
-      pExitTimeAsSystemTime.ref.wMilliseconds,
-    ).toLocal();
-
-    print('Process creation time: $creationTime');
     final processExited =
         pExitTime.ref.dwLowDateTime != 0 && pExitTime.ref.dwHighDateTime != 0;
+
+    if (processExited) {
+      // Convert process exit time to SYSTEMTIME format
+      result = FileTimeToSystemTime(pExitTime, pExitTimeAsSystemTime);
+      if (result == FALSE) {
+        throw WindowsException(result);
+      }
+    }
+
+    final creationTime = systemTimeToDateTime(pCreationTimeAsSystemTime.ref);
+
+    DateTime? exitTime;
+    if (processExited) {
+      exitTime = systemTimeToDateTime(pExitTimeAsSystemTime.ref);
+    }
+
+    print('Process creation time: $creationTime');
     print(processExited
         ? 'Process exit time: $exitTime'
         : 'Process has not exited!');
