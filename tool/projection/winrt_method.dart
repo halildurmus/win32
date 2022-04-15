@@ -6,20 +6,29 @@ class WinRTMethodProjection extends MethodProjection {
   WinRTMethodProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
+  bool get isPointerCOMObjectReturn =>
+      returnType.dartType == 'Pointer<COMObject>';
+
   bool get isVoidReturn => returnType.dartType == 'void';
 
   @override
   String get dartParams => [
         'Pointer',
         ...parameters.map((param) => param.dartProjection),
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
+        if (!isVoidReturn)
+          isPointerCOMObjectReturn
+              ? 'Pointer<COMObject>'
+              : 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
 
   @override
   String get nativeParams => [
         'Pointer',
         ...parameters.map((param) => param.ffiProjection),
-        if (!isVoidReturn) 'Pointer<${returnType.nativeType}>',
+        if (!isVoidReturn)
+          isPointerCOMObjectReturn
+              ? 'Pointer<COMObject>'
+              : 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
 
   // WinRT methods always return an HRESULT
@@ -33,9 +42,29 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String get identifiers => [
         'ptr.ref.lpVtbl',
-        ...parameters.map((param) => param.identifier),
+        ...parameters.map(
+          (param) => param.type.dartType == 'Pointer<COMObject>'
+              ? 'Pointer<Pointer<COMObject>>.fromAddress(${param.identifier}.address).value'
+              : param.identifier,
+        ),
         if (!isVoidReturn) 'retValuePtr',
       ].map((p) => '$p, ').join();
+
+  String pointerCOMObjectMethodDeclaration() => '''
+    Pointer<COMObject> $name($methodParams) {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.vtable
+      .elementAt($vtableOffset)
+      .cast<Pointer<NativeFunction<$nativePrototype>>>()
+      .value
+      .asFunction<$dartPrototype>()($identifiers);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
+''';
 
   String voidMethodDeclaration() => '''
   void $name($methodParams) => ptr.ref.lpVtbl.value
@@ -48,7 +77,7 @@ class WinRTMethodProjection extends MethodProjection {
   String stringMethodDeclaration() => '''
       String $name($methodParams) {
       final retValuePtr = calloc<HSTRING>();
-  
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -76,7 +105,7 @@ class WinRTMethodProjection extends MethodProjection {
   String dateTimeMethodDeclaration() => '''
       DateTime $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
-  
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -98,6 +127,7 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String toString() {
     try {
+      if (isPointerCOMObjectReturn) return pointerCOMObjectMethodDeclaration();
       if (isVoidReturn) return voidMethodDeclaration();
       if (returnType.isString) return stringMethodDeclaration();
       if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {
@@ -114,7 +144,7 @@ class WinRTMethodProjection extends MethodProjection {
       return '''
       ${returnType.dartType} $name($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
-  
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)

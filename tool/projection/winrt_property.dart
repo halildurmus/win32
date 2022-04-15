@@ -7,6 +7,9 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   WinRTGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
+  bool get isPointerCOMObjectReturn =>
+      returnType.dartType == 'Pointer<COMObject>';
+
   /// Strip off all underscores, even if double underscores
   @override
   String get exposedMethodName => method.name.startsWith('get__')
@@ -21,7 +24,9 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   String get nativePrototype => 'HRESULT Function($nativeParams)';
 
   @override
-  String get nativeParams => 'Pointer, Pointer<${returnType.nativeType}>,';
+  String get nativeParams => isPointerCOMObjectReturn
+      ? 'Pointer, Pointer<COMObject>'
+      : 'Pointer, Pointer<${returnType.nativeType}>,';
 
   // WinRT properties always return an HRESULT
   @override
@@ -30,10 +35,26 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   @override
   String get dartParams => nativeParams;
 
+  String pointerCOMObjectPropertyDeclaration() => '''
+    Pointer<COMObject> get $exposedMethodName {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.vtable
+      .elementAt($vtableOffset)
+      .cast<Pointer<NativeFunction<$nativePrototype>>>()
+      .value
+      .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
+''';
+
   String stringPropertyDeclaration() => '''
       String get $exposedMethodName {
       final retValuePtr = calloc<HSTRING>();
-  
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -55,6 +76,9 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   @override
   String toString() {
     try {
+      if (isPointerCOMObjectReturn) {
+        return pointerCOMObjectPropertyDeclaration();
+      }
       if (returnType.isString) return stringPropertyDeclaration();
 
       final valRef = returnType.dartType == 'double' ||
@@ -66,7 +90,7 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
       return '''
       ${returnType.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnType.nativeType}>();
-        
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -121,7 +145,7 @@ class WinRTSetPropertyProjection extends ComSetPropertyProjection {
   String stringPropertyDeclaration() => '''
       set $exposedMethodName(String value) {
       final hstr = convertToHString(value);
-  
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
