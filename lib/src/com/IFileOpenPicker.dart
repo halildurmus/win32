@@ -2,93 +2,58 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
-
-import '../winrt/winrt_constants.dart';
-
+import '../winrt/winrt_helpers.dart';
 import 'IInspectable.dart';
+import 'IVector`1.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 
-typedef _get_ViewMode_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
-typedef _get_ViewMode_Dart = int Function(Pointer obj, Pointer<Uint32> value);
-
-typedef _put_ViewMode_Native = Int32 Function(Pointer obj, Uint32 value);
-typedef _put_ViewMode_Dart = int Function(Pointer obj, int value);
-
-typedef _get_SettingsIdentifier_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> value);
-typedef _get_SettingsIdentifier_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> value);
-
-typedef _put_SettingsIdentifier_Native = Int32 Function(
-    Pointer obj, IntPtr value);
-typedef _put_SettingsIdentifier_Dart = int Function(Pointer obj, int value);
-
-typedef _get_SuggestedStartLocation_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
-typedef _get_SuggestedStartLocation_Dart = int Function(
-    Pointer obj, Pointer<Uint32> value);
-
-typedef _put_SuggestedStartLocation_Native = Int32 Function(
-    Pointer obj, Uint32 value);
-typedef _put_SuggestedStartLocation_Dart = int Function(Pointer obj, int value);
-
-typedef _get_CommitButtonText_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> value);
-typedef _get_CommitButtonText_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> value);
-
-typedef _put_CommitButtonText_Native = Int32 Function(
-    Pointer obj, IntPtr value);
-typedef _put_CommitButtonText_Dart = int Function(Pointer obj, int value);
-
-typedef _get_FileTypeFilter_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> value);
-typedef _get_FileTypeFilter_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> value);
-
-typedef _PickSingleFileAsync_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> result);
-typedef _PickSingleFileAsync_Dart = int Function(
-    Pointer obj, Pointer<Pointer> result);
-
-typedef _PickMultipleFilesAsync_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> result);
-typedef _PickMultipleFilesAsync_Dart = int Function(
-    Pointer obj, Pointer<Pointer> result);
-
 /// {@category Interface}
 /// {@category winrt}
 class IFileOpenPicker extends IInspectable {
-  // vtable begins at 6, ends at 16
-
+  // vtable begins at 6, is 11 entries long.
   IFileOpenPicker(Pointer<COMObject> ptr) : super(ptr);
 
   int get ViewMode {
-    final retValuePtr = calloc<Uint32>();
+    final retValuePtr = calloc<Int32>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
           .elementAt(6)
-          .cast<Pointer<NativeFunction<_get_ViewMode_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            Pointer<Int32>,
+          )>>>()
           .value
-          .asFunction<_get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<Int32>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -102,53 +67,98 @@ class IFileOpenPicker extends IInspectable {
   set ViewMode(int value) {
     final hr = ptr.ref.lpVtbl.value
         .elementAt(7)
-        .cast<Pointer<NativeFunction<_put_ViewMode_Native>>>()
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32,
+        )>>>()
         .value
-        .asFunction<_put_ViewMode_Dart>()(ptr.ref.lpVtbl, value);
+        .asFunction<
+            int Function(
+          Pointer,
+          int,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get SettingsIdentifier {
-    final retValuePtr = calloc<IntPtr>();
+  String get SettingsIdentifier {
+    final retValuePtr = calloc<HSTRING>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(8)
-              .cast<Pointer<NativeFunction<_get_SettingsIdentifier_Native>>>()
-              .value
-              .asFunction<_get_SettingsIdentifier_Dart>()(
-          ptr.ref.lpVtbl, retValuePtr);
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            Pointer<IntPtr>,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<IntPtr>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
+      final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
 
-  set SettingsIdentifier(int value) {
-    final hr = ptr.ref.lpVtbl.value
-        .elementAt(9)
-        .cast<Pointer<NativeFunction<_put_SettingsIdentifier_Native>>>()
-        .value
-        .asFunction<_put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
+  set SettingsIdentifier(String value) {
+    final hstr = convertToHString(value);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            IntPtr,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int,
+          )>()(ptr.ref.lpVtbl, hstr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      WindowsDeleteString(hstr);
+    }
   }
 
   int get SuggestedStartLocation {
-    final retValuePtr = calloc<Uint32>();
+    final retValuePtr = calloc<Int32>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
           .elementAt(10)
-          .cast<Pointer<NativeFunction<_get_SuggestedStartLocation_Native>>>()
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            Pointer<Int32>,
+          )>>>()
           .value
           .asFunction<
-              _get_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(
+            Pointer,
+            Pointer<Int32>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -162,71 +172,157 @@ class IFileOpenPicker extends IInspectable {
   set SuggestedStartLocation(int value) {
     final hr = ptr.ref.lpVtbl.value
         .elementAt(11)
-        .cast<Pointer<NativeFunction<_put_SuggestedStartLocation_Native>>>()
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32,
+        )>>>()
         .value
-        .asFunction<_put_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, value);
+        .asFunction<
+            int Function(
+          Pointer,
+          int,
+        )>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get CommitButtonText {
-    final retValuePtr = calloc<IntPtr>();
+  String get CommitButtonText {
+    final retValuePtr = calloc<HSTRING>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
-              .elementAt(12)
-              .cast<Pointer<NativeFunction<_get_CommitButtonText_Native>>>()
-              .value
-              .asFunction<_get_CommitButtonText_Dart>()(
-          ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
-      free(retValuePtr);
-    }
-  }
-
-  set CommitButtonText(int value) {
-    final hr = ptr.ref.lpVtbl.value
-        .elementAt(13)
-        .cast<Pointer<NativeFunction<_put_CommitButtonText_Native>>>()
-        .value
-        .asFunction<_put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-  }
-
-  int get FileTypeFilter {
-    final retValuePtr = calloc<IntPtr>();
-
-    try {
-      final hr = ptr.ref.lpVtbl.value
-          .elementAt(14)
-          .cast<Pointer<NativeFunction<_get_FileTypeFilter_Native>>>()
+          .elementAt(12)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            Pointer<IntPtr>,
+          )>>>()
           .value
-          .asFunction<_get_FileTypeFilter_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(
+            Pointer,
+            Pointer<IntPtr>,
+          )>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
+      final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
+      WindowsDeleteString(retValuePtr.value);
       free(retValuePtr);
     }
   }
 
-  int PickSingleFileAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
-      .elementAt(15)
-      .cast<Pointer<NativeFunction<_PickSingleFileAsync_Native>>>()
-      .value
-      .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
+  set CommitButtonText(String value) {
+    final hstr = convertToHString(value);
 
-  int PickMultipleFilesAsync(Pointer<Pointer> result) => ptr.ref.lpVtbl.value
-      .elementAt(16)
-      .cast<Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>>()
-      .value
-      .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(13)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            IntPtr,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int,
+          )>()(ptr.ref.lpVtbl, hstr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      WindowsDeleteString(hstr);
+    }
+  }
+
+  Pointer<COMObject> FileTypeFilter() {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(14)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
+
+  Pointer<COMObject> PickSingleFileAsync() {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(15)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
+
+  Pointer<COMObject> PickMultipleFilesAsync() {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(16)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
 }
