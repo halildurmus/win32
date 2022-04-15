@@ -42,6 +42,8 @@ const Map<String, TypeTuple> specialTypes = {
   'System.Guid': TypeTuple('GUID', 'GUID'),
   'Windows.Foundation.IAsyncOperation`1':
       TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
+  'Windows.Foundation.Collections.IVector`1':
+      TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
   'Windows.Foundation.Collections.IVectorView`1':
       TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
   'Windows.Foundation.DateTime':

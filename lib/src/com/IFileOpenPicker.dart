@@ -24,7 +24,6 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt/winrt_helpers.dart';
 import 'IInspectable.dart';
-import 'IVector`1.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
@@ -245,10 +244,10 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  Pointer<COMObject> FileTypeFilter() {
+  Pointer<COMObject> get FileTypeFilter {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<
             Pointer<
@@ -262,10 +261,7 @@ class IFileOpenPicker extends IInspectable {
             int Function(
           Pointer,
           Pointer<COMObject>,
-        )>()(
-      ptr.ref.lpVtbl,
-      retValuePtr,
-    );
+        )>()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -275,7 +271,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickSingleFileAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<
             Pointer<
@@ -302,7 +298,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickMultipleFilesAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(16)
         .cast<
             Pointer<

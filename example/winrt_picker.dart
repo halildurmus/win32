@@ -32,7 +32,7 @@ void main() async {
     ..SuggestedStartLocation = PickerLocationId.Desktop
     ..ViewMode = PickerViewMode.Thumbnail;
 
-  final vector = IVector(picker.FileTypeFilter());
+  final vector = IVector(picker.FileTypeFilter);
 
   print('Vector has ${vector.Size} elements.');
   print('Adding ".jpg" to the vector...');
