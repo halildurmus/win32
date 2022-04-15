@@ -37,35 +37,30 @@ class ICalendar extends IInspectable {
   ICalendar(Pointer<COMObject> ptr) : super(ptr);
 
   Pointer<COMObject> Clone() {
-    final retValuePtr = calloc<Pointer<COMObject>>();
+    final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<Pointer<COMObject>>,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>>,
-          )>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+    final hr = ptr.ref.vtable
+        .elementAt(6)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>()(
+      ptr.ref.lpVtbl,
+      retValuePtr,
+    );
 
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    return retValuePtr;
   }
 
   void SetToMin() => ptr.ref.lpVtbl.value
@@ -99,6 +94,24 @@ class ICalendar extends IInspectable {
           )>()(
         ptr.ref.lpVtbl,
       );
+
+  Pointer<COMObject> get Languages {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.vtable
+            .elementAt(9)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
 
   String get NumeralSystem {
     final retValuePtr = calloc<HSTRING>();
@@ -2533,7 +2546,7 @@ class ICalendar extends IInspectable {
             Pointer<Int32>,
           )>()(
         ptr.ref.lpVtbl,
-        other,
+        Pointer<Pointer<COMObject>>.fromAddress(other.address).value,
         retValuePtr,
       );
 
@@ -2602,7 +2615,7 @@ class ICalendar extends IInspectable {
             Pointer<COMObject> other,
           )>()(
         ptr.ref.lpVtbl,
-        other,
+        Pointer<Pointer<COMObject>>.fromAddress(other.address).value,
       );
 
   int get FirstMinuteInThisHour {
