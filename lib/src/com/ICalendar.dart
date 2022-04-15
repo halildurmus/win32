@@ -10,6 +10,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
@@ -19,12 +20,9 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
-import '../utils.dart';
-
-import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../winrt/winrt_helpers.dart';
 import '../types.dart';
-
+import '../utils.dart';
+import '../winrt/winrt_helpers.dart';
 import 'IInspectable.dart';
 
 /// @nodoc
@@ -99,14 +97,20 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
-            .elementAt(9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        .elementAt(9)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject>,
+        )>()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
