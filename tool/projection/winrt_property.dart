@@ -25,7 +25,7 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
 
   @override
   String get nativeParams => isPointerCOMObjectReturn
-      ? 'Pointer, Pointer<COMObject>'
+      ? 'Pointer, Pointer<COMObject>,'
       : 'Pointer, Pointer<${returnType.nativeType}>,';
 
   // WinRT properties always return an HRESULT
