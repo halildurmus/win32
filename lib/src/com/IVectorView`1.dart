@@ -95,7 +95,7 @@ class IVectorView extends IInspectable {
 
   bool IndexOf(String value, Pointer<Uint32> index) {
     final retValuePtr = calloc<Bool>();
-    final hElement = convertToHString(value);
+    final hValue = convertToHString(value);
 
     try {
       final hr = ptr.ref.vtable
@@ -116,7 +116,7 @@ class IVectorView extends IInspectable {
             int,
             Pointer<Uint32>,
             Pointer<Bool>,
-          )>()(ptr.ref.lpVtbl, hElement, index, retValuePtr);
+          )>()(ptr.ref.lpVtbl, hValue, index, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -124,7 +124,7 @@ class IVectorView extends IInspectable {
       return retValue;
     } finally {
       free(retValuePtr);
-      WindowsDeleteString(hElement);
+      WindowsDeleteString(hValue);
     }
   }
 

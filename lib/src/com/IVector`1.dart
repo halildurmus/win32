@@ -120,7 +120,7 @@ class IVector extends IInspectable {
 
   bool IndexOf(String value, Pointer<Uint32> index) {
     final retValuePtr = calloc<Bool>();
-    final hElement = convertToHString(value);
+    final hValue = convertToHString(value);
 
     try {
       final hr = ptr.ref.vtable
@@ -141,7 +141,7 @@ class IVector extends IInspectable {
             int,
             Pointer<Uint32>,
             Pointer<Bool>,
-          )>()(ptr.ref.lpVtbl, hElement, index, retValuePtr);
+          )>()(ptr.ref.lpVtbl, hValue, index, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -149,7 +149,7 @@ class IVector extends IInspectable {
       return retValue;
     } finally {
       free(retValuePtr);
-      WindowsDeleteString(hElement);
+      WindowsDeleteString(hValue);
     }
   }
 
@@ -168,7 +168,12 @@ class IVector extends IInspectable {
             HSTRING,
           )>>>()
           .value
-          .asFunction<int Function(Pointer, int, int)>()(
+          .asFunction<
+              int Function(
+            Pointer,
+            int,
+            int,
+          )>()(
         ptr.ref.lpVtbl,
         index,
         hValue,
@@ -210,7 +215,13 @@ class IVector extends IInspectable {
   void RemoveAt(int index) {
     final hr = ptr.ref.vtable
         .elementAt(12)
-        .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Uint32)>>>()
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Uint32,
+        )>>>()
         .value
         .asFunction<int Function(Pointer, int)>()(
       ptr.ref.lpVtbl,
@@ -234,11 +245,7 @@ class IVector extends IInspectable {
             HSTRING,
           )>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int,
-          )>()(ptr.ref.lpVtbl, hValue);
+          .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, hValue);
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
