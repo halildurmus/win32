@@ -40,9 +40,15 @@ void main(List<String> args) {
 
     final spellChecker = ISpellChecker(spellCheckerPtr);
 
+    // While ISpellChecker works fine for the needs of this example,
+    // ISpellChecker2 extends it with the ability to remove words from the
+    // custom dictionary. We cast to that purely as an example.
+    final spellChecker2 =
+        ISpellChecker2(spellChecker.toInterface(IID_ISpellChecker2));
+
     final errorsPtr = calloc<COMObject>();
     final textPtr = text.toNativeUtf16();
-    spellChecker.Check(textPtr, errorsPtr.cast());
+    spellChecker2.Check(textPtr, errorsPtr.cast());
 
     final errors = IEnumSpellingError(errorsPtr);
     final errorPtr = calloc<COMObject>();
@@ -83,7 +89,7 @@ void main(List<String> args) {
 
           final wordPtr = word.toNativeUtf16();
           final suggestionsPtr = calloc<COMObject>();
-          spellChecker.Suggest(wordPtr, suggestionsPtr.cast());
+          spellChecker2.Suggest(wordPtr, suggestionsPtr.cast());
           final suggestions = IEnumString(suggestionsPtr);
 
           final suggestionPtr = calloc<Pointer<Utf16>>();
@@ -103,7 +109,9 @@ void main(List<String> args) {
 
     errors.Release();
     free(textPtr);
+    spellChecker2.Release();
     spellChecker.Release();
+    free(spellCheckerPtr);
   }
 
   free(supportedPtr);

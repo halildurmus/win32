@@ -251,6 +251,7 @@ export 'src/com/ISpEventSource.dart';
 export 'src/com/ISpNotifySource.dart';
 export 'src/com/ISpVoice.dart';
 export 'src/com/ISpellChecker.dart';
+export 'src/com/ISpellChecker2.dart';
 export 'src/com/ISpellCheckerChangedEventHandler.dart';
 export 'src/com/ISpellCheckerFactory.dart';
 export 'src/com/ISpellingError.dart';
