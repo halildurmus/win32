@@ -203,6 +203,24 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>,)'));
   });
 
+  test('WinRT Clone method successfully projects Pointer<COMObject>', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final numDaysProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'Clone');
+
+    expect(
+        numDaysProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>, )'));
+    expect(
+        numDaysProjection.dartPrototype,
+        equalsIgnoringWhitespace(
+            'int Function(Pointer, Pointer<COMObject>, )'));
+  });
+
   test('WinRT set property successfully projects something', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker');
