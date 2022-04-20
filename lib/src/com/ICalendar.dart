@@ -2552,7 +2552,7 @@ class ICalendar extends IInspectable {
             Pointer<Int32>,
           )>()(
         ptr.ref.lpVtbl,
-        Pointer<Pointer<COMObject>>.fromAddress(other.address).value,
+        other.cast<Pointer<COMObject>>().value,
         retValuePtr,
       );
 
@@ -2621,7 +2621,7 @@ class ICalendar extends IInspectable {
             Pointer<COMObject> other,
           )>()(
         ptr.ref.lpVtbl,
-        Pointer<Pointer<COMObject>>.fromAddress(other.address).value,
+        other.cast<Pointer<COMObject>>().value,
       );
 
   int get FirstMinuteInThisHour {

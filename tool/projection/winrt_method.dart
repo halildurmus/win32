@@ -44,7 +44,7 @@ class WinRTMethodProjection extends MethodProjection {
         'ptr.ref.lpVtbl',
         ...parameters.map(
           (param) => param.type.dartType == 'Pointer<COMObject>'
-              ? 'Pointer<Pointer<COMObject>>.fromAddress(${param.identifier}.address).value'
+              ? '${param.identifier}.cast<Pointer<COMObject>>().value'
               : param.identifier,
         ),
         if (!isVoidReturn) 'retValuePtr',
