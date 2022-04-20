@@ -247,7 +247,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> get FileTypeFilter {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(14)
         .cast<
             Pointer<
@@ -271,7 +271,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickSingleFileAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(15)
         .cast<
             Pointer<
@@ -298,7 +298,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickMultipleFilesAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(16)
         .cast<
             Pointer<

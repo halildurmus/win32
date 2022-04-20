@@ -37,7 +37,7 @@ class IVector extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
@@ -69,7 +69,7 @@ class IVector extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
@@ -97,7 +97,7 @@ class IVector extends IInspectable {
   IVectorView get GetView {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(8)
         .cast<
             Pointer<
@@ -123,7 +123,7 @@ class IVector extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
@@ -157,7 +157,7 @@ class IVector extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(10)
           .cast<
               Pointer<
@@ -189,7 +189,7 @@ class IVector extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(11)
           .cast<
               Pointer<
@@ -213,7 +213,7 @@ class IVector extends IInspectable {
   }
 
   void RemoveAt(int index) {
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(12)
         .cast<
             Pointer<
@@ -235,7 +235,7 @@ class IVector extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(13)
           .cast<
               Pointer<
@@ -254,7 +254,7 @@ class IVector extends IInspectable {
   }
 
   void RemoveAtEnd() {
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(14)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
@@ -264,7 +264,7 @@ class IVector extends IInspectable {
   }
 
   void Clear() {
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(15)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
@@ -277,7 +277,7 @@ class IVector extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(16)
           .cast<
               Pointer<
@@ -317,7 +317,7 @@ class IVector extends IInspectable {
     }
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(17)
           .cast<
               Pointer<

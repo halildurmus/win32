@@ -36,7 +36,7 @@ class IVectorView extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
@@ -68,7 +68,7 @@ class IVectorView extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
@@ -98,7 +98,7 @@ class IVectorView extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<
               Pointer<
@@ -132,7 +132,7 @@ class IVectorView extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = ptr.ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
