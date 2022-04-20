@@ -22,6 +22,11 @@ void main() {
       expect(calendar.Day, inInclusiveRange(1, 31));
     });
 
+    test('Set calendar day', () {
+      calendar.Day = 13;
+      expect(calendar.Day, equals(13));
+    });
+
     test('Calendar day of week', () {
       expect(calendar.DayOfWeek, inInclusiveRange(0, 6));
     });
@@ -278,6 +283,11 @@ void main() {
       expect(calendar.Year, inInclusiveRange(1821, 1900));
       calendar.AddYears(-100);
       expect(calendar.Year, inInclusiveRange(1721, 1800));
+    });
+
+    test('Calendar clone', () {
+      final calendar2 = ICalendar(calendar.Clone());
+      expect(calendar2.Year, equals(calendar.Year));
     });
 
     test('Add and delete days', () {
