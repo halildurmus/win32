@@ -39,7 +39,7 @@ class ICalendar extends IInspectable {
   Pointer<COMObject> Clone() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(6)
         .cast<
             Pointer<
@@ -98,7 +98,7 @@ class ICalendar extends IInspectable {
   Pointer<COMObject> get Languages {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
         .elementAt(9)
         .cast<
             Pointer<

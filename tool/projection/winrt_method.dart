@@ -54,7 +54,7 @@ class WinRTMethodProjection extends MethodProjection {
     Pointer<COMObject> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
@@ -77,7 +77,7 @@ class WinRTMethodProjection extends MethodProjection {
   String stringMethodDeclaration() => '''
       String $name($methodParams) {
       final retValuePtr = calloc<HSTRING>();
-
+  
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -105,7 +105,7 @@ class WinRTMethodProjection extends MethodProjection {
   String dateTimeMethodDeclaration() => '''
       DateTime $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
-
+  
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -144,7 +144,7 @@ class WinRTMethodProjection extends MethodProjection {
       return '''
       ${returnType.dartType} $name($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
-
+  
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)

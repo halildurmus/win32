@@ -39,7 +39,7 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
     Pointer<COMObject> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = ptr.ref.lpVtbl.value
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
