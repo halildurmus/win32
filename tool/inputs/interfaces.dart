@@ -1,6 +1,7 @@
 const comInterfacesToGenerate = <String>[
   'Windows.Win32.Globalization.IEnumSpellingError',
   'Windows.Win32.Globalization.ISpellChecker',
+  'Windows.Win32.Globalization.ISpellChecker2',
   'Windows.Win32.Globalization.ISpellCheckerChangedEventHandler',
   'Windows.Win32.Globalization.ISpellCheckerFactory',
   'Windows.Win32.Globalization.ISpellingError',
