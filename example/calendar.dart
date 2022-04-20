@@ -23,8 +23,11 @@ void main() {
     final comObject =
         CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
     final calendar = ICalendar(comObject);
-
     print(calendarData(calendar));
+
+    final clonedCalendar = ICalendar(calendar.Clone());
+    print(
+        'Comparison result of calendar and its clone: ${clonedCalendar.Compare(calendar.ptr)}');
 
     calendar.ChangeCalendarSystem(japaneseCalendar);
     print(calendarData(calendar));
@@ -36,6 +39,7 @@ void main() {
     print(dateTime);
 
     free(comObject);
+    free(clonedCalendar.ptr);
   } finally {
     WindowsDeleteString(japaneseCalendar);
     WindowsDeleteString(hebrewCalendar);

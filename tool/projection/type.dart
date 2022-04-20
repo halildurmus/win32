@@ -40,6 +40,8 @@ const Map<String, TypeTuple> specialTypes = {
   'Windows.Win32.Foundation.ULARGE_INTEGER':
       TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'System.Guid': TypeTuple('GUID', 'GUID'),
+  'Windows.Foundation.Collections.IVectorView`1':
+      TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
   'Windows.Foundation.DateTime':
       TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
   'Windows.Foundation.HResult':
