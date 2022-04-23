@@ -1444,6 +1444,238 @@ class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static const int TDCBF_CLOSE_BUTTON = 0x0020;
 }
 
+/// {@category Enum}
+class THEMESIZE {
+  static const int TS_MIN = 0;
+  static const int TS_TRUE = 1;
+  static const int TS_DRAW = 2;
+}
+
+/// {@category Enum}
+class WINDOWPARTS {
+  static const int WP_CAPTION = 1;
+  static const int WP_SMALLCAPTION = 2;
+  static const int WP_MINCAPTION = 3;
+  static const int WP_SMALLMINCAPTION = 4;
+  static const int WP_MAXCAPTION = 5;
+  static const int WP_SMALLMAXCAPTION = 6;
+  static const int WP_FRAMELEFT = 7;
+  static const int WP_FRAMERIGHT = 8;
+  static const int WP_FRAMEBOTTOM = 9;
+  static const int WP_SMALLFRAMELEFT = 10;
+  static const int WP_SMALLFRAMERIGHT = 11;
+  static const int WP_SMALLFRAMEBOTTOM = 12;
+  static const int WP_SYSBUTTON = 13;
+  static const int WP_MDISYSBUTTON = 14;
+  static const int WP_MINBUTTON = 15;
+  static const int WP_MDIMINBUTTON = 16;
+  static const int WP_MAXBUTTON = 17;
+  static const int WP_CLOSEBUTTON = 18;
+  static const int WP_SMALLCLOSEBUTTON = 19;
+  static const int WP_MDICLOSEBUTTON = 20;
+  static const int WP_RESTOREBUTTON = 21;
+  static const int WP_MDIRESTOREBUTTON = 22;
+  static const int WP_HELPBUTTON = 23;
+  static const int WP_MDIHELPBUTTON = 24;
+  static const int WP_HORZSCROLL = 25;
+  static const int WP_HORZTHUMB = 26;
+  static const int WP_VERTSCROLL = 27;
+  static const int WP_VERTTHUMB = 28;
+  static const int WP_DIALOG = 29;
+  static const int WP_CAPTIONSIZINGTEMPLATE = 30;
+  static const int WP_SMALLCAPTIONSIZINGTEMPLATE = 31;
+  static const int WP_FRAMELEFTSIZINGTEMPLATE = 32;
+  static const int WP_SMALLFRAMELEFTSIZINGTEMPLATE = 33;
+  static const int WP_FRAMERIGHTSIZINGTEMPLATE = 34;
+  static const int WP_SMALLFRAMERIGHTSIZINGTEMPLATE = 35;
+  static const int WP_FRAMEBOTTOMSIZINGTEMPLATE = 36;
+  static const int WP_SMALLFRAMEBOTTOMSIZINGTEMPLATE = 37;
+  static const int WP_FRAME = 38;
+  static const int WP_BORDER = 39;
+}
+
+/// {@category Enum}
+class FRAMESTATES {
+  static const int FS_ACTIVE = 1;
+  static const int FS_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class CAPTIONSTATES {
+  static const int CS_ACTIVE = 1;
+  static const int CS_INACTIVE = 2;
+  static const int CS_DISABLED = 3;
+}
+
+/// {@category Enum}
+class MAXCAPTIONSTATES {
+  static const int MXCS_ACTIVE = 1;
+  static const int MXCS_INACTIVE = 2;
+  static const int MXCS_DISABLED = 3;
+}
+
+/// {@category Enum}
+class MINCAPTIONSTATES {
+  static const int MNCS_ACTIVE = 1;
+  static const int MNCS_INACTIVE = 2;
+  static const int MNCS_DISABLED = 3;
+}
+
+/// {@category Enum}
+class HORZSCROLLSTATES {
+  static const int HSS_NORMAL = 1;
+  static const int HSS_HOT = 2;
+  static const int HSS_PUSHED = 3;
+  static const int HSS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class HORZTHUMBSTATES {
+  static const int HTS_NORMAL = 1;
+  static const int HTS_HOT = 2;
+  static const int HTS_PUSHED = 3;
+  static const int HTS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class VERTSCROLLSTATES {
+  static const int VSS_NORMAL = 1;
+  static const int VSS_HOT = 2;
+  static const int VSS_PUSHED = 3;
+  static const int VSS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class VERTTHUMBSTATES {
+  static const int VTS_NORMAL = 1;
+  static const int VTS_HOT = 2;
+  static const int VTS_PUSHED = 3;
+  static const int VTS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class SYSBUTTONSTATES {
+  static const int SBS_NORMAL = 1;
+  static const int SBS_HOT = 2;
+  static const int SBS_PUSHED = 3;
+  static const int SBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class MINBUTTONSTATES {
+  static const int MINBS_NORMAL = 1;
+  static const int MINBS_HOT = 2;
+  static const int MINBS_PUSHED = 3;
+  static const int MINBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class MAXBUTTONSTATES {
+  static const int MAXBS_NORMAL = 1;
+  static const int MAXBS_HOT = 2;
+  static const int MAXBS_PUSHED = 3;
+  static const int MAXBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class RESTOREBUTTONSTATES {
+  static const int RBS_NORMAL = 1;
+  static const int RBS_HOT = 2;
+  static const int RBS_PUSHED = 3;
+  static const int RBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class HELPBUTTONSTATES {
+  static const int HBS_NORMAL = 1;
+  static const int HBS_HOT = 2;
+  static const int HBS_PUSHED = 3;
+  static const int HBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class CLOSEBUTTONSTATES {
+  static const int CBS_NORMAL = 1;
+  static const int CBS_HOT = 2;
+  static const int CBS_PUSHED = 3;
+  static const int CBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class SMALLCLOSEBUTTONSTATES {
+  static const int SCBS_NORMAL = 1;
+  static const int SCBS_HOT = 2;
+  static const int SCBS_PUSHED = 3;
+  static const int SCBS_DISABLED = 4;
+}
+
+/// {@category Enum}
+class FRAMEBOTTOMSTATES {
+  static const int FRB_ACTIVE = 1;
+  static const int FRB_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class FRAMELEFTSTATES {
+  static const int FRL_ACTIVE = 1;
+  static const int FRL_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class FRAMERIGHTSTATES {
+  static const int FRR_ACTIVE = 1;
+  static const int FRR_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class SMALLCAPTIONSTATES {
+  static const int SCS_ACTIVE = 1;
+  static const int SCS_INACTIVE = 2;
+  static const int SCS_DISABLED = 3;
+}
+
+/// {@category Enum}
+class SMALLFRAMEBOTTOMSTATES {
+  static const int SFRB_ACTIVE = 1;
+  static const int SFRB_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class SMALLFRAMELEFTSTATES {
+  static const int SFRL_ACTIVE = 1;
+  static const int SFRL_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class SMALLFRAMERIGHTSTATES {
+  static const int SFRR_ACTIVE = 1;
+  static const int SFRR_INACTIVE = 2;
+}
+
+/// {@category Enum}
+class MDICLOSEBUTTONSTATES {
+  static const int MDCL_NORMAL = 1;
+  static const int MDCL_HOT = 2;
+  static const int MDCL_PUSHED = 3;
+  static const int MDCL_DISABLED = 4;
+}
+
+/// {@category Enum}
+class MDIMINBUTTONSTATES {
+  static const int MDMI_NORMAL = 1;
+  static const int MDMI_HOT = 2;
+  static const int MDMI_PUSHED = 3;
+  static const int MDMI_DISABLED = 4;
+}
+
+/// {@category Enum}
+class MDIRESTOREBUTTONSTATES {
+  static const int MDRE_NORMAL = 1;
+  static const int MDRE_HOT = 2;
+  static const int MDRE_PUSHED = 3;
+  static const int MDRE_DISABLED = 4;
+}
+
 // Multimedia constants
 const _MMSYSERR_BASE = 0;
 const MMSYSERR_NOERROR = 0;

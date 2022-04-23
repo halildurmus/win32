@@ -280,6 +280,8 @@ const structsToGenerate = <String, String>{
       "Contains message information from a thread's message queue.",
   "Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT":
       "Contains information about a low-level mouse input event.",
+  "Windows.Win32.UI.WindowsAndMessaging.NCCALCSIZE_PARAMS":
+      "Contains information that an application can use while processing the WM_NCCALCSIZE message to calculate the size, position, and valid contents of the client area of a window.",
   "Windows.Win32.NetworkManagement.Ndis.NDIS_OBJECT_HEADER":
       "The NDIS_OBJECT_HEADER structure packages the object type, version, and size information that is required in many NDIS 6.0 structures.",
   "Windows.Win32.Graphics.Gdi.NEWTEXTMETRICW":
@@ -495,6 +497,8 @@ const structsToGenerate = <String, String>{
       "Contains window information.",
   "Windows.Win32.UI.WindowsAndMessaging.WINDOWPLACEMENT":
       "Contains information about the placement of a window on the screen.",
+  "Windows.Win32.UI.WindowsAndMessaging.WINDOWPOS":
+      "Contains information about the size and position of a window.",
   "Windows.Win32.NetworkManagement.WiFi.WLAN_ASSOCIATION_ATTRIBUTES":
       "The WLAN_ASSOCIATION_ATTRIBUTES structure contains association attributes for a connection.",
   "Windows.Win32.NetworkManagement.WiFi.WLAN_AUTH_CIPHER_PAIR_LIST":

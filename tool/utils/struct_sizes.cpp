@@ -194,6 +194,7 @@ void main()
     printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MSG': %zu,\n", sizeof(MSG));
     printf("  'MSLLHOOKSTRUCT': %zu,\n", sizeof(MSLLHOOKSTRUCT));
+    printf("  'NCCALCSIZE_PARAMS': %zu,\n", sizeof(NCCALCSIZE_PARAMS));
     printf("  'NDIS_OBJECT_HEADER': %zu,\n", sizeof(NDIS_OBJECT_HEADER));
     printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
@@ -302,6 +303,7 @@ void main()
     printf("  'WIN32_FIND_DATA': %zu,\n", sizeof(WIN32_FIND_DATAW));
     printf("  'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
     printf("  'WINDOWPLACEMENT': %zu,\n", sizeof(WINDOWPLACEMENT));
+    printf("  'WINDOWPOS': %zu,\n", sizeof(WINDOWPOS));
     printf("  'WLAN_ASSOCIATION_ATTRIBUTES': %zu,\n", sizeof(WLAN_ASSOCIATION_ATTRIBUTES));
     printf("  'WLAN_AUTH_CIPHER_PAIR_LIST': %zu,\n", sizeof(WLAN_AUTH_CIPHER_PAIR_LIST));
     printf("  'WLAN_AVAILABLE_NETWORK': %zu,\n", sizeof(WLAN_AVAILABLE_NETWORK));

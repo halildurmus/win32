@@ -2997,6 +2997,10 @@ const SPI_SETMOUSEKEYS = 0x0037;
 /// Hides the window and activates another window.
 const SW_HIDE = 0;
 
+/// If the window is minimized or maximized, the system restores it to its
+/// original size and position.
+const SW_NORMAL = 1;
+
 /// Activates and displays a window.
 ///
 /// If the window is minimized or maximized, the system restores it to its
@@ -4518,6 +4522,91 @@ const DT_WORDBREAK = 0x0010;
 /// Displays text on a single line only. Carriage returns and line feeds do not
 /// break the line.
 const DT_SINGLELINE = 0x0020;
+
+/// Expands tab characters. The default number of characters per tab is eight.
+/// The DT_WORD_ELLIPSIS, DT_PATH_ELLIPSIS, and DT_END_ELLIPSIS values cannot be
+/// used with the DT_EXPANDTABS value.
+const DT_EXPANDTABS = 0x00000040;
+
+/// Sets tab stops. Bits 15-8 (high-order byte of the low-order word) of the
+/// uFormat parameter specify the number of characters for each tab. The default
+/// number of characters per tab is eight. The DT_CALCRECT, DT_EXTERNALLEADING,
+/// DT_INTERNAL, DT_NOCLIP, and DT_NOPREFIX values cannot be used with the
+/// DT_TABSTOP value.
+const DT_TABSTOP = 0x00000080;
+
+/// Draws without clipping. DrawText is somewhat faster when DT_NOCLIP is used.
+const DT_NOCLIP = 0x00000100;
+
+/// Includes the font external leading in line height. Normally, external
+/// leading is not included in the height of a line of text.
+const DT_EXTERNALLEADING = 0x00000200;
+
+/// Determines the width and height of the rectangle. If there are multiple
+/// lines of text, DrawText uses the width of the rectangle pointed to by the
+/// lpRect parameter and extends the base of the rectangle to bound the last
+/// line of text. If the largest word is wider than the rectangle, the width is
+/// expanded. If the text is less than the width of the rectangle, the width is
+/// reduced. If there is only one line of text, DrawText modifies the right side
+/// of the rectangle so that it bounds the last character in the line. In either
+/// case, DrawText returns the height of the formatted text but does not draw
+/// the text.
+const DT_CALCRECT = 0x00000400;
+
+/// Turns off processing of prefix characters. Normally, DrawText interprets the
+/// mnemonic-prefix character & as a directive to underscore the character that
+/// follows, and the mnemonic-prefix characters && as a directive to print a
+/// single &. By specifying DT_NOPREFIX, this processing is turned off.
+const DT_NOPREFIX = 0x00000800;
+
+/// Uses the system font to calculate text metrics.
+const DT_INTERNAL = 0x00001000;
+
+/// Duplicates the text-displaying characteristics of a multiline edit control.
+/// Specifically, the average character width is calculated in the same manner
+/// as for an edit control, and the function does not display a partially
+/// visible last line.
+const DT_EDITCONTROL = 0x00002000;
+
+/// For displayed text, replaces characters in the middle of the string with
+/// ellipses so that the result fits in the specified rectangle. If the string
+/// contains backslash (\\) characters, DT_PATH_ELLIPSIS preserves as much as
+/// possible of the text after the last backslash.
+const DT_PATH_ELLIPSIS = 0x00004000;
+
+/// For displayed text, if the end of a string does not fit in the rectangle, it
+/// is truncated and ellipses are added. If a word that is not at the end of the
+/// string goes beyond the limits of the rectangle, it is truncated without
+/// ellipses.
+const DT_END_ELLIPSIS = 0x00008000;
+
+/// Modifies the specified string to match the displayed text. This value has no
+/// effect unless DT_END_ELLIPSIS or DT_PATH_ELLIPSIS is specified.
+const DT_MODIFYSTRING = 0x00010000;
+
+/// Layout in right-to-left reading order for bidirectional text when the font
+/// selected into the hdc is a Hebrew or Arabic font. The default reading order
+/// for all text is left-to-right.
+const DT_RTLREADING = 0x00020000;
+
+/// Truncates any word that does not fit in the rectangle and adds ellipses.
+const DT_WORD_ELLIPSIS = 0x00040000;
+
+/// Prevents a line break at a DBCS (double-wide character string), so that the
+/// line breaking rule is equivalent to SBCS strings. For example, this can be
+/// used in Korean windows, for more readability of icon labels. This value has
+/// no effect unless DT_WORDBREAK is specified.
+const DT_NOFULLWIDTHCHARBREAK = 0x00080000;
+
+/// Ignores the ampersand (&) prefix character in the text. The letter that
+/// follows will not be underlined, but other mnemonic-prefix characters are
+/// still processed.
+const DT_HIDEPREFIX = 0x00100000;
+
+/// Draws only an underline at the position of the character following the
+/// ampersand (&) prefix character. Does not draw any other characters in the
+/// string.
+const DT_PREFIXONLY = 0x00200000;
 
 // -----------------------------------------------------------------------------
 // Class styles
@@ -6853,7 +6942,95 @@ const OFN_FORCESHOWHIDDEN = 0x10000000;
 const OFN_EX_NOPLACESBAR = 0x00000001;
 
 // -----------------------------------------------------------------------------
-/// High DPI constants & enumerations
+// Visual theming constants
+// -----------------------------------------------------------------------------
+
+/// The font used by window captions.
+const TMT_CAPTIONFONT = 801;
+
+/// The font used by window small captions.
+const TMT_SMALLCAPTIONFONT = 802;
+
+/// The font used by menus.
+const TMT_MENUFONT = 803;
+
+/// The font used in status messages.
+const TMT_STATUSFONT = 804;
+
+/// The font used to display messages in a message box.
+const TMT_MSGBOXFONT = 805;
+
+/// The font used for icons.
+const TMT_ICONTITLEFONT = 806;
+
+// -----------------------------------------------------------------------------
+// DTTOPS flags
+// -----------------------------------------------------------------------------
+
+/// The crText member value is valid.
+const DTT_TEXTCOLOR = 1 << 0;
+
+/// The crBorder member value is valid.
+const DTT_BORDERCOLOR = 1 << 1;
+
+/// The crShadow member value is valid.
+const DTT_SHADOWCOLOR = 1 << 2;
+
+/// The iTextShadowType member value is valid.
+const DTT_SHADOWTYPE = 1 << 3;
+
+/// The ptShadowOffset member value is valid.
+const DTT_SHADOWOFFSET = 1 << 4;
+
+/// The iBorderSize member value is valid.
+const DTT_BORDERSIZE = 1 << 5;
+
+/// The iFontPropId member value is valid.
+const DTT_FONTPROP = 1 << 6;
+
+/// The iColorPropId member value is valid.
+const DTT_COLORPROP = 1 << 7;
+
+/// The iStateId member value is valid.
+const DTT_STATEID = 1 << 8;
+
+/// The pRect parameter of the DrawThemeTextEx function that uses this structure
+/// will be used as both an in and an out parameter. After the function returns,
+/// the pRect parameter will contain the rectangle that corresponds to the
+/// region calculated to be drawn.
+const DTT_CALCRECT = 1 << 9;
+
+/// The fApplyOverlay member value is valid.
+const DTT_APPLYOVERLAY = 1 << 10;
+
+/// The iGlowSize member value is valid.
+const DTT_GLOWSIZE = 1 << 11;
+
+/// The pfnDrawTextCallback member value is valid.
+const DTT_CALLBACK = 1 << 12;
+
+/// Draws text with antialiased alpha. Use of this flag requires a top-down DIB
+/// section. This flag works only if the HDC passed to function DrawThemeTextEx
+/// has a top-down DIB section currently selected in it.
+const DTT_COMPOSITED = 1 << 13;
+
+/// All valid bits
+const DTT_VALIDBITS = DTT_TEXTCOLOR |
+    DTT_BORDERCOLOR |
+    DTT_SHADOWCOLOR |
+    DTT_SHADOWTYPE |
+    DTT_SHADOWOFFSET |
+    DTT_BORDERSIZE |
+    DTT_FONTPROP |
+    DTT_COLORPROP |
+    DTT_STATEID |
+    DTT_CALCRECT |
+    DTT_APPLYOVERLAY |
+    DTT_GLOWSIZE |
+    DTT_COMPOSITED;
+
+// -----------------------------------------------------------------------------
+// High DPI constants & enumerations
 // -----------------------------------------------------------------------------
 
 /// Describes per-monitor DPI scaling behavior overrides for child windows

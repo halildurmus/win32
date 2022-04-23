@@ -1238,10 +1238,30 @@
         "dllLibrary": "uxtheme",
         "comment": "Draws the border and fill defined by the visual style for the specified control part."
     },
+    "DrawThemeEdge": {
+        "prototype": "HRESULT DrawThemeEdge(\n  HTHEME  hTheme,\n  HDC     hdc,\n  int     iPartId,\n  int     iStateId,\n  LPCRECT pDestRect,\n  UINT    uEdge,\n  UINT    uFlags,\n  LPRECT  pContentRect\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Draws one or more edges defined by the visual style of a rectangle."
+    },
     "DrawThemeIcon": {
         "prototype": "HRESULT DrawThemeIcon(\n  HTHEME     hTheme,\n  HDC        hdc,\n  int        iPartId,\n  int        iStateId,\n  LPCRECT    pRect,\n  HIMAGELIST himl,\n  int        iImageIndex\n);",
         "dllLibrary": "uxtheme",
         "comment": "Draws an image from an image list with the icon effect defined by the visual style."
+    },
+    "DrawThemeParentBackground": {
+        "prototype": "HRESULT DrawThemeParentBackground(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *prc\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Draws the part of a parent control that is covered by a partially-transparent or alpha-blended child control."
+    },
+    "DrawThemeParentBackgroundEx": {
+        "prototype": "HRESULT DrawThemeParentBackgroundEx(\n  HWND       hwnd,\n  HDC        hdc,\n  DWORD      dwFlags,\n  const RECT *prc\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Used by partially-transparent or alpha-blended child controls to draw the part of their parent in front of which they appear. Sends a WM_ERASEBKGND message followed by a WM_PRINTCLIENT."
+    },
+    "DrawThemeTextEx": {
+        "prototype": "HRESULT DrawThemeTextEx(\n  HTHEME        hTheme,\n  HDC           hdc,\n  int           iPartId,\n  int           iStateId,\n  LPCWSTR       pszText,\n  int           cchText,\n  DWORD         dwTextFlags,\n  LPRECT        pRect,\n  const DTTOPTS *pOptions\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Draws text using the color and font defined by the visual style."
     },
     "DuplicateHandle": {
         "prototype": "BOOL DuplicateHandle(\n  HANDLE   hSourceProcessHandle,\n  HANDLE   hSourceHandle,\n  HANDLE   hTargetProcessHandle,\n  LPHANDLE lpTargetHandle,\n  DWORD    dwDesiredAccess,\n  BOOL     bInheritHandle,\n  DWORD    dwOptions\n);",
@@ -2852,6 +2872,11 @@
         "dllLibrary": "uxtheme",
         "comment": "Retrieves the value of a metric property."
     },
+    "GetThemePartSize": {
+        "prototype": "HRESULT GetThemePartSize(\n  HTHEME    hTheme,\n  HDC       hdc,\n  int       iPartId,\n  int       iStateId,\n  LPCRECT   prc,\n  THEMESIZE eSize,\n  SIZE      *psz\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Calculates the original size of the part defined by a visual style."
+    },
     "GetThemeRect": {
         "prototype": "HRESULT GetThemeRect(\n  HTHEME hTheme,\n  int    iPartId,\n  int    iStateId,\n  int    iPropId,\n  LPRECT pRect\n);",
         "dllLibrary": "uxtheme",
@@ -3367,6 +3392,11 @@
         "prototype": "BOOL IsThemeDialogTextureEnabled(\n  HWND hwnd\n);",
         "dllLibrary": "uxtheme",
         "comment": "Reports whether a specified dialog window supports background texturing."
+    },
+    "IsThemePartDefined": {
+        "prototype": "BOOL IsThemePartDefined(\n  HTHEME hTheme,\n  int    iPartId,\n  int    iStateId\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Retrieves whether a visual style has defined parameters for the specified part and state."
     },
     "IsTouchWindow": {
         "prototype": "BOOL IsTouchWindow(\n  HWND   hwnd,\n  PULONG pulFlags\n);",
@@ -5359,6 +5389,11 @@
         "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetTextColor function sets the text color for the specified device context to the specified color."
+    },
+    "SetThemeAppProperties": {
+        "prototype": "void SetThemeAppProperties(\n  DWORD dwFlags\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Sets the flags that determine how visual styles are implemented in the calling application."
     },
     "SetThreadAffinityMask": {
         "prototype": "DWORD_PTR SetThreadAffinityMask(\n  HANDLE    hThread,\n  DWORD_PTR dwThreadAffinityMask\n);",

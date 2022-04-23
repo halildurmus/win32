@@ -8165,6 +8165,29 @@ void main() {
               Pointer<RECT> pClipRect)>('DrawThemeBackground');
       expect(DrawThemeBackground, isA<Function>());
     });
+    test('Can instantiate DrawThemeEdge', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final DrawThemeEdge = uxtheme.lookupFunction<
+          Int32 Function(
+              IntPtr hTheme,
+              IntPtr hdc,
+              Int32 iPartId,
+              Int32 iStateId,
+              Pointer<RECT> pDestRect,
+              Uint32 uEdge,
+              Uint32 uFlags,
+              Pointer<RECT> pContentRect),
+          int Function(
+              int hTheme,
+              int hdc,
+              int iPartId,
+              int iStateId,
+              Pointer<RECT> pDestRect,
+              int uEdge,
+              int uFlags,
+              Pointer<RECT> pContentRect)>('DrawThemeEdge');
+      expect(DrawThemeEdge, isA<Function>());
+    });
     test('Can instantiate DrawThemeIcon', () {
       final uxtheme = DynamicLibrary.open('uxtheme.dll');
       final DrawThemeIcon = uxtheme.lookupFunction<
@@ -8179,6 +8202,48 @@ void main() {
           int Function(int hTheme, int hdc, int iPartId, int iStateId,
               Pointer<RECT> pRect, int himl, int iImageIndex)>('DrawThemeIcon');
       expect(DrawThemeIcon, isA<Function>());
+    });
+    test('Can instantiate DrawThemeParentBackground', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final DrawThemeParentBackground = uxtheme.lookupFunction<
+          Int32 Function(IntPtr hwnd, IntPtr hdc, Pointer<RECT> prc),
+          int Function(int hwnd, int hdc,
+              Pointer<RECT> prc)>('DrawThemeParentBackground');
+      expect(DrawThemeParentBackground, isA<Function>());
+    });
+    test('Can instantiate DrawThemeParentBackgroundEx', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final DrawThemeParentBackgroundEx = uxtheme.lookupFunction<
+          Int32 Function(
+              IntPtr hwnd, IntPtr hdc, Uint32 dwFlags, Pointer<RECT> prc),
+          int Function(int hwnd, int hdc, int dwFlags,
+              Pointer<RECT> prc)>('DrawThemeParentBackgroundEx');
+      expect(DrawThemeParentBackgroundEx, isA<Function>());
+    });
+    test('Can instantiate DrawThemeTextEx', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final DrawThemeTextEx = uxtheme.lookupFunction<
+          Int32 Function(
+              IntPtr hTheme,
+              IntPtr hdc,
+              Int32 iPartId,
+              Int32 iStateId,
+              Pointer<Utf16> pszText,
+              Int32 cchText,
+              Uint32 dwTextFlags,
+              Pointer<RECT> pRect,
+              Pointer<DTTOPTS> pOptions),
+          int Function(
+              int hTheme,
+              int hdc,
+              int iPartId,
+              int iStateId,
+              Pointer<Utf16> pszText,
+              int cchText,
+              int dwTextFlags,
+              Pointer<RECT> pRect,
+              Pointer<DTTOPTS> pOptions)>('DrawThemeTextEx');
+      expect(DrawThemeTextEx, isA<Function>());
     });
     test('Can instantiate EnableThemeDialogTexture', () {
       final uxtheme = DynamicLibrary.open('uxtheme.dll');
@@ -8214,6 +8279,27 @@ void main() {
           int Function(int hTheme, int hdc, int iPartId, int iStateId,
               int iPropId, Pointer<Int32> piVal)>('GetThemeMetric');
       expect(GetThemeMetric, isA<Function>());
+    });
+    test('Can instantiate GetThemePartSize', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final GetThemePartSize = uxtheme.lookupFunction<
+          Int32 Function(
+              IntPtr hTheme,
+              IntPtr hdc,
+              Int32 iPartId,
+              Int32 iStateId,
+              Pointer<RECT> prc,
+              Int32 eSize,
+              Pointer<SIZE> psz),
+          int Function(
+              int hTheme,
+              int hdc,
+              int iPartId,
+              int iStateId,
+              Pointer<RECT> prc,
+              int eSize,
+              Pointer<SIZE> psz)>('GetThemePartSize');
+      expect(GetThemePartSize, isA<Function>());
     });
     test('Can instantiate GetThemeRect', () {
       final uxtheme = DynamicLibrary.open('uxtheme.dll');
@@ -8294,6 +8380,14 @@ void main() {
           int Function(int hwnd)>('IsThemeDialogTextureEnabled');
       expect(IsThemeDialogTextureEnabled, isA<Function>());
     });
+    test('Can instantiate IsThemePartDefined', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final IsThemePartDefined = uxtheme.lookupFunction<
+          Int32 Function(IntPtr hTheme, Int32 iPartId, Int32 iStateId),
+          int Function(
+              int hTheme, int iPartId, int iStateId)>('IsThemePartDefined');
+      expect(IsThemePartDefined, isA<Function>());
+    });
     test('Can instantiate OpenThemeData', () {
       final uxtheme = DynamicLibrary.open('uxtheme.dll');
       final OpenThemeData = uxtheme.lookupFunction<
@@ -8321,6 +8415,13 @@ void main() {
         expect(OpenThemeDataForDpi, isA<Function>());
       });
     }
+    test('Can instantiate SetThemeAppProperties', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final SetThemeAppProperties = uxtheme.lookupFunction<
+          Void Function(Uint32 dwFlags),
+          void Function(int dwFlags)>('SetThemeAppProperties');
+      expect(SetThemeAppProperties, isA<Function>());
+    });
     test('Can instantiate SetWindowTheme', () {
       final uxtheme = DynamicLibrary.open('uxtheme.dll');
       final SetWindowTheme = uxtheme.lookupFunction<
