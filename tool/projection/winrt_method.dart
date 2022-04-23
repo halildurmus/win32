@@ -43,7 +43,8 @@ class WinRTMethodProjection extends MethodProjection {
   String get identifiers => [
         'ptr.ref.lpVtbl',
         ...parameters.map(
-          (param) => param.type.dartType == 'Pointer<COMObject>'
+          (param) => param.type.dartType == 'Pointer<COMObject>' &&
+                  !param.type.isReferenceType
               ? '${param.identifier}.cast<Pointer<COMObject>>().value'
               : param.identifier,
         ),
