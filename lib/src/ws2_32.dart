@@ -531,7 +531,7 @@ int send(int s, Pointer<Utf8> buf, int len, int flags) =>
     _send(s, buf, len, flags);
 
 final _send = _ws2_32.lookupFunction<
-    Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Uint32 flags),
+    Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
     int Function(int s, Pointer<Utf8> buf, int len, int flags)>('send');
 
 /// The sendto function sends data to a specific destination.

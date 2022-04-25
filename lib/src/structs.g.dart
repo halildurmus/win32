@@ -3736,7 +3736,7 @@ class MOUSEINPUT extends Struct {
   @Int32()
   external int dy;
 
-  @Uint32()
+  @Int32()
   external int mouseData;
 
   @Uint32()

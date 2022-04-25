@@ -1066,8 +1066,7 @@ void main() {
       test('Can instantiate send', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
         final send = ws2_32.lookupFunction<
-            Int32 Function(
-                IntPtr s, Pointer<Utf8> buf, Int32 len, Uint32 flags),
+            Int32 Function(IntPtr s, Pointer<Utf8> buf, Int32 len, Int32 flags),
             int Function(int s, Pointer<Utf8> buf, int len, int flags)>('send');
         expect(send, isA<Function>());
       });
