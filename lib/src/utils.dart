@@ -16,6 +16,20 @@ import 'kernel32.dart';
 import 'shell32.dart';
 import 'structs.g.dart';
 import 'types.dart';
+import 'user32.dart';
+
+/// Registers a traditional Win32 app process as supporting high-DPI.
+///
+/// Reduces blurriness but requires the app to provide necessary DPI awareness.
+void registerHighDPISupport() {
+  final result =
+      SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+  if (result == FALSE) {
+    final debugMessage = 'WARNING: could not set DPI awareness'.toNativeUtf16();
+    OutputDebugString(debugMessage);
+    free(debugMessage);
+  }
+}
 
 /// Sets up a WinMain function with all the relevant information.
 ///
@@ -45,6 +59,7 @@ void initApp(Function winMain) {
 
   final hInstance = GetModuleHandle(nullptr);
   GetStartupInfo(lpStartupInfo);
+
   try {
     winMain(
         hInstance,

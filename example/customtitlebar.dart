@@ -520,13 +520,7 @@ int mainWindowProc(int hwnd, int msg, int wParam, int lParam) {
 }
 
 void main() {
-  final result =
-      SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
-  if (result == FALSE) {
-    final debugMessage = 'WARNING: could not set DPI awareness'.toNativeUtf16();
-    OutputDebugString(debugMessage);
-    free(debugMessage);
-  }
+  registerHighDPISupport();
 
   // Register the window class.
   final windowClassName = 'WIN32_CUSTOM_TITLEBAR_EXAMPLE'.toNativeUtf16();

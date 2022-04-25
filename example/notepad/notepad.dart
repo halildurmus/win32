@@ -285,6 +285,8 @@ int dialogReturnProc(int hDlg, int msg, int wParam, int lParam) {
 }
 
 void main() {
+  registerHighDPISupport();
+
   // Register the window class.
   final className = TEXT(APP_NAME);
 
