@@ -142,7 +142,8 @@ require Flutter.
 | `wallpaper.dart`      | Shows what wallpaper and background color are set         |
 | `window.dart`         | Enumerates open windows and basic window manipulation     |
 | `winmd.dart`          | Interrogate Windows Runtime types                         |
-| `wmi.dart`            | Using WMI from COM to retrieve device/OS information      |
+| `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
+| `wmi_wql.dart`        | Uses WMI to retrieve information using WQL                |
 | `wsl.dart`            | Retrieve information from a WSL instance through APIs     |
 
 ## Packages built on win32
