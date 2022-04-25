@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // Demonstrates getting information from the Windows Management
-// Instrumentation (WMI) API
+// Instrumentation (WMI) API using the WMI Query Language (WQL).
 
 import 'dart:ffi';
 
