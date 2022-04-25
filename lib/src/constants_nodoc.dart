@@ -2307,6 +2307,12 @@ class WBEM_GENERIC_FLAG_TYPE {
 }
 
 /// {@category Enum}
+class WBEM_REFRESHER_FLAGS {
+  static const WBEM_FLAG_REFRESH_AUTO_RECONNECT = 0;
+  static const WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT = 1;
+}
+
+/// {@category Enum}
 class WBEM_TIMEOUT_TYPE {
   static const WBEM_NO_WAIT = 0;
   static const WBEM_INFINITE = 0xffffffff;
