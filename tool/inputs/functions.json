@@ -3581,12 +3581,14 @@
     "MagGetFullscreenColorEffect": {
         "prototype": "BOOL MagGetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
         "dllLibrary": "magnification",
-        "comment": "Retrieves the color transformation matrix associated with the full-screen magnifier."
+        "comment": "Retrieves the color transformation matrix associated with the full-screen magnifier.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagGetFullscreenTransform": {
         "prototype": "BOOL MagGetFullscreenTransform(\n  float *pMagLevel,\n  int   *pxOffset,\n  int   *pyOffset\n);",
         "dllLibrary": "magnification",
-        "comment": "Retrieves the magnification settings for the full-screen magnifier."
+        "comment": "Retrieves the magnification settings for the full-screen magnifier.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagGetImageScalingCallback": {
         "prototype": "MagImageScalingCallback MagGetImageScalingCallback(\n  HWND hwnd\n);",
@@ -3596,7 +3598,8 @@
     "MagGetInputTransform": {
         "prototype": "BOOL MagGetInputTransform(\n  BOOL   *pfEnabled,\n  LPRECT pRectSource,\n  LPRECT pRectDest\n);",
         "dllLibrary": "magnification",
-        "comment": "Retrieves the current input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+        "comment": "Retrieves the current input transformation for pen and touch input, represented as a source rectangle and a destination rectangle.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagGetWindowFilterList": {
         "prototype": "int MagGetWindowFilterList(\n  HWND  hwnd,\n  DWORD *pdwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
@@ -3626,12 +3629,14 @@
     "MagSetFullscreenColorEffect": {
         "prototype": "BOOL MagSetFullscreenColorEffect(\n  PMAGCOLOREFFECT pEffect\n);",
         "dllLibrary": "magnification",
-        "comment": "Changes the color transformation matrix associated with the full-screen magnifier."
+        "comment": "Changes the color transformation matrix associated with the full-screen magnifier.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagSetFullscreenTransform": {
         "prototype": "BOOL MagSetFullscreenTransform(\n  float magLevel,\n  int   xOffset,\n  int   yOffset\n);",
         "dllLibrary": "magnification",
-        "comment": "Changes the magnification settings for the full-screen magnifier."
+        "comment": "Changes the magnification settings for the full-screen magnifier.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagSetImageScalingCallback": {
         "prototype": "BOOL MagSetImageScalingCallback(\n  HWND                    hwnd,\n  MagImageScalingCallback callback\n);",
@@ -3641,7 +3646,8 @@
     "MagSetInputTransform": {
         "prototype": "BOOL MagSetInputTransform(\n  BOOL         fEnabled,\n  const LPRECT pRectSource,\n  const LPRECT pRectDest\n);",
         "dllLibrary": "magnification",
-        "comment": "Sets the current active input transformation for pen and touch input, represented as a source rectangle and a destination rectangle."
+        "comment": "Sets the current active input transformation for pen and touch input, represented as a source rectangle and a destination rectangle.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagSetWindowFilterList": {
         "prototype": "BOOL MagSetWindowFilterList(\n  HWND  hwnd,\n  DWORD dwFilterMode,\n  int   count,\n  HWND  *pHWND\n);",
@@ -3661,7 +3667,8 @@
     "MagShowSystemCursor": {
         "prototype": "BOOL MagShowSystemCursor(\n  BOOL fShowCursor\n);",
         "dllLibrary": "magnification",
-        "comment": "Shows or hides the system cursor."
+        "comment": "Shows or hides the system cursor.",
+        "minimumWindowsVersion": "WIN8"
     },
     "MagUninitialize": {
         "prototype": "BOOL MagUninitialize();",

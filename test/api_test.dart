@@ -10230,23 +10230,27 @@ void main() {
               int hwnd, Pointer<MAGCOLOREFFECT> pEffect)>('MagGetColorEffect');
       expect(MagGetColorEffect, isA<Function>());
     });
-    test('Can instantiate MagGetFullscreenColorEffect', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagGetFullscreenColorEffect = magnification.lookupFunction<
-          Int32 Function(Pointer<MAGCOLOREFFECT> pEffect),
-          int Function(
-              Pointer<MAGCOLOREFFECT> pEffect)>('MagGetFullscreenColorEffect');
-      expect(MagGetFullscreenColorEffect, isA<Function>());
-    });
-    test('Can instantiate MagGetFullscreenTransform', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagGetFullscreenTransform = magnification.lookupFunction<
-          Int32 Function(Pointer<Float> pMagLevel, Pointer<Int32> pxOffset,
-              Pointer<Int32> pyOffset),
-          int Function(Pointer<Float> pMagLevel, Pointer<Int32> pxOffset,
-              Pointer<Int32> pyOffset)>('MagGetFullscreenTransform');
-      expect(MagGetFullscreenTransform, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagGetFullscreenColorEffect', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagGetFullscreenColorEffect = magnification.lookupFunction<
+                Int32 Function(Pointer<MAGCOLOREFFECT> pEffect),
+                int Function(Pointer<MAGCOLOREFFECT> pEffect)>(
+            'MagGetFullscreenColorEffect');
+        expect(MagGetFullscreenColorEffect, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagGetFullscreenTransform', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagGetFullscreenTransform = magnification.lookupFunction<
+            Int32 Function(Pointer<Float> pMagLevel, Pointer<Int32> pxOffset,
+                Pointer<Int32> pyOffset),
+            int Function(Pointer<Float> pMagLevel, Pointer<Int32> pxOffset,
+                Pointer<Int32> pyOffset)>('MagGetFullscreenTransform');
+        expect(MagGetFullscreenTransform, isA<Function>());
+      });
+    }
     test('Can instantiate MagGetImageScalingCallback', () {
       final magnification = DynamicLibrary.open('magnification.dll');
       final MagGetImageScalingCallback = magnification.lookupFunction<
@@ -10256,15 +10260,17 @@ void main() {
               int hwnd)>('MagGetImageScalingCallback');
       expect(MagGetImageScalingCallback, isA<Function>());
     });
-    test('Can instantiate MagGetInputTransform', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagGetInputTransform = magnification.lookupFunction<
-          Int32 Function(Pointer<Int32> pfEnabled, Pointer<RECT> pRectSource,
-              Pointer<RECT> pRectDest),
-          int Function(Pointer<Int32> pfEnabled, Pointer<RECT> pRectSource,
-              Pointer<RECT> pRectDest)>('MagGetInputTransform');
-      expect(MagGetInputTransform, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagGetInputTransform', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagGetInputTransform = magnification.lookupFunction<
+            Int32 Function(Pointer<Int32> pfEnabled, Pointer<RECT> pRectSource,
+                Pointer<RECT> pRectDest),
+            int Function(Pointer<Int32> pfEnabled, Pointer<RECT> pRectSource,
+                Pointer<RECT> pRectDest)>('MagGetInputTransform');
+        expect(MagGetInputTransform, isA<Function>());
+      });
+    }
     test('Can instantiate MagGetWindowFilterList', () {
       final magnification = DynamicLibrary.open('magnification.dll');
       final MagGetWindowFilterList = magnification.lookupFunction<
@@ -10303,22 +10309,26 @@ void main() {
               int hwnd, Pointer<MAGCOLOREFFECT> pEffect)>('MagSetColorEffect');
       expect(MagSetColorEffect, isA<Function>());
     });
-    test('Can instantiate MagSetFullscreenColorEffect', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagSetFullscreenColorEffect = magnification.lookupFunction<
-          Int32 Function(Pointer<MAGCOLOREFFECT> pEffect),
-          int Function(
-              Pointer<MAGCOLOREFFECT> pEffect)>('MagSetFullscreenColorEffect');
-      expect(MagSetFullscreenColorEffect, isA<Function>());
-    });
-    test('Can instantiate MagSetFullscreenTransform', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagSetFullscreenTransform = magnification.lookupFunction<
-          Int32 Function(Float magLevel, Int32 xOffset, Int32 yOffset),
-          int Function(double magLevel, int xOffset,
-              int yOffset)>('MagSetFullscreenTransform');
-      expect(MagSetFullscreenTransform, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagSetFullscreenColorEffect', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagSetFullscreenColorEffect = magnification.lookupFunction<
+                Int32 Function(Pointer<MAGCOLOREFFECT> pEffect),
+                int Function(Pointer<MAGCOLOREFFECT> pEffect)>(
+            'MagSetFullscreenColorEffect');
+        expect(MagSetFullscreenColorEffect, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagSetFullscreenTransform', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagSetFullscreenTransform = magnification.lookupFunction<
+            Int32 Function(Float magLevel, Int32 xOffset, Int32 yOffset),
+            int Function(double magLevel, int xOffset,
+                int yOffset)>('MagSetFullscreenTransform');
+        expect(MagSetFullscreenTransform, isA<Function>());
+      });
+    }
     test('Can instantiate MagSetImageScalingCallback', () {
       final magnification = DynamicLibrary.open('magnification.dll');
       final MagSetImageScalingCallback = magnification.lookupFunction<
@@ -10329,15 +10339,17 @@ void main() {
           'MagSetImageScalingCallback');
       expect(MagSetImageScalingCallback, isA<Function>());
     });
-    test('Can instantiate MagSetInputTransform', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagSetInputTransform = magnification.lookupFunction<
-          Int32 Function(Int32 fEnabled, Pointer<RECT> pRectSource,
-              Pointer<RECT> pRectDest),
-          int Function(int fEnabled, Pointer<RECT> pRectSource,
-              Pointer<RECT> pRectDest)>('MagSetInputTransform');
-      expect(MagSetInputTransform, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagSetInputTransform', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagSetInputTransform = magnification.lookupFunction<
+            Int32 Function(Int32 fEnabled, Pointer<RECT> pRectSource,
+                Pointer<RECT> pRectDest),
+            int Function(int fEnabled, Pointer<RECT> pRectSource,
+                Pointer<RECT> pRectDest)>('MagSetInputTransform');
+        expect(MagSetInputTransform, isA<Function>());
+      });
+    }
     test('Can instantiate MagSetWindowFilterList', () {
       final magnification = DynamicLibrary.open('magnification.dll');
       final MagSetWindowFilterList = magnification.lookupFunction<
@@ -10362,13 +10374,15 @@ void main() {
               Pointer<MAGTRANSFORM> pTransform)>('MagSetWindowTransform');
       expect(MagSetWindowTransform, isA<Function>());
     });
-    test('Can instantiate MagShowSystemCursor', () {
-      final magnification = DynamicLibrary.open('magnification.dll');
-      final MagShowSystemCursor = magnification.lookupFunction<
-          Int32 Function(Int32 fShowCursor),
-          int Function(int fShowCursor)>('MagShowSystemCursor');
-      expect(MagShowSystemCursor, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate MagShowSystemCursor', () {
+        final magnification = DynamicLibrary.open('magnification.dll');
+        final MagShowSystemCursor = magnification.lookupFunction<
+            Int32 Function(Int32 fShowCursor),
+            int Function(int fShowCursor)>('MagShowSystemCursor');
+        expect(MagShowSystemCursor, isA<Function>());
+      });
+    }
     test('Can instantiate MagUninitialize', () {
       final magnification = DynamicLibrary.open('magnification.dll');
       final MagUninitialize = magnification
