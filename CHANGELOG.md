@@ -1,3 +1,18 @@
+## 2.5.2
+
+- Add example for monitor EDID data (#393, thanks to @krjw-eyev)
+- Expand Bluetooth example (#397, thanks to @Sunbreak)
+- Fix a comment typo (#398, thanks to @gaddlord)
+- Improve fidelity of WinRT Calendar class and more tests (#396, #404, #405,
+  #412 thanks to @halidurmus)
+- Add additional spell checker COM interfaces
+- Add example for an owner-draw (custom) titlebar
+- Add new Wbem WMI interfaces
+- Add example of WMI high-performance counters
+- Add new theming APIs
+- Update to latest Windows metadata (with a couple of minor changes to signed
+  ints in MOUSEDATA and send()).
+
 ## 2.5.1
 
 - Add GetProcessTimes (#396, thanks to @halildurmus)
