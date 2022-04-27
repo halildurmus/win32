@@ -11,8 +11,7 @@ import 'package:win32/win32.dart';
 
 void main() async {
   winrtInitialize();
-
-  final allocator = Arena();
+  final pIndex = calloc<Uint32>();
 
   final object = CreateObject(
       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
@@ -35,7 +34,6 @@ void main() async {
   final vectorView = filters.GetView;
   print('VectorView has ${vectorView.length} elements.');
 
-  final pIndex = allocator<Uint32>();
   var containsElement = filters.IndexOf('.jpeg', pIndex);
   print(containsElement
       ? 'The index of ".jpeg" is ${pIndex.value}.'
@@ -73,6 +71,7 @@ void main() async {
   filters.Clear();
   print('Vector has ${filters.Size} elements.');
 
+  free(pIndex);
   free(filters.ptr);
   winrtUninitialize();
 }
