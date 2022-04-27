@@ -26,8 +26,8 @@ void main() {
     print(calendarData(calendar));
 
     final clonedCalendar = ICalendar(calendar.Clone());
-    print(
-        'Comparison result of calendar and its clone: ${clonedCalendar.Compare(calendar.ptr)}');
+    final comparisonResult = clonedCalendar.Compare(calendar.ptr);
+    print('Comparison result of calendar and its clone: $comparisonResult');
 
     print('Languages: ${calendar.Languages}\n');
 
