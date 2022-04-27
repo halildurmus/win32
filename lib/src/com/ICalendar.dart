@@ -119,7 +119,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final vectorView = IVectorView(retValuePtr);
-    final pArray = calloc<HSTRING>(sizeOf<HSTRING>() * vectorView.Size);
+    final pArray = calloc<HSTRING>(vectorView.Size);
     try {
       final itemCount = vectorView.GetMany(0, pArray);
       final items = pArray.toList(length: itemCount);
