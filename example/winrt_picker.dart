@@ -21,15 +21,6 @@ void main() async {
     ..SuggestedStartLocation = PickerLocationId.Desktop
     ..ViewMode = PickerViewMode.Thumbnail;
 
-  // final pIID = convertToIID(IID_IInitializeWithWindow);
-  // final pObject = calloc<COMObject>();
-  // var hr = picker.QueryInterface(pIID, pObject.cast());
-  // if (FAILED(hr)) throw WindowsException(hr);
-  // final initializeWithWindow = IInitializeWithWindow(pObject);
-  // hr = initializeWithWindow.Initialize(GetForegroundWindow());
-  // if (FAILED(hr)) throw WindowsException(hr);
-  // free(pIID);
-
   final filters = picker.FileTypeFilter;
 
   print('Vector has ${filters.Size} elements.');
