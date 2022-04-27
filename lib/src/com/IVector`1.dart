@@ -13,6 +13,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../extensions/comobject_pointer.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -20,6 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
+import '../winrt/internal/winrt_vector_helper.dart';
 import '../winrt/winrt_helpers.dart';
 import 'IInspectable.dart';
 import 'IVectorView`1.dart';
@@ -29,11 +31,84 @@ const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IVector extends IInspectable {
-  // vtable begins at 6, is 12 entries long.
-  IVector(Pointer<COMObject> ptr) : super(ptr);
+class IVector<T> extends IInspectable {
+  T Function(Pointer<COMObject>)? creator;
+  final Allocator allocator;
 
-  String GetAt(int index) {
+  // vtable begins at 6, is 12 entries long.
+  /// Creates a `IVector<T>` from the `ptr`.
+  ///
+  /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
+  /// `IStorageFile` etc.
+  ///
+  /// ```dart
+  /// ...
+  /// final vector = IVector<String>(ptr);
+  /// ```
+  ///
+  /// `creator` must be specified if the `T` is a `WinRT` type.
+  /// e.g. `IHostName.new`, `IStorageFile.new` etc.
+  ///
+  /// ```dart
+  /// ...
+  /// final vector = IVector<IHostName>(ptr, IHostName.new);
+  /// ```
+  ///
+  /// It is the caller's responsibility to deallocate the returned pointers
+  /// from methods like `GetAt`, `GetView` when they are finished with it.
+  /// A FFI `Arena` may be passed as a  custom allocator for ease of memory
+  /// management.
+  ///
+  /// {@category winrt}
+  IVector(Pointer<COMObject> ptr, {this.creator, this.allocator = calloc})
+      : super(ptr) {
+    // TODO: Need to update this once we add support for types like `int`,
+    // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+    if (![String].contains(T) && creator == null) {
+      throw ArgumentError(
+          '`creator` parameter must be specified for WinRT types!');
+    }
+  }
+
+  T GetAt(int index) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _GetAt_String(index) as T;
+      // Handle WinRT types
+      default:
+        return creator!(_GetAt_COMObject(index));
+    }
+  }
+
+  Pointer<COMObject> _GetAt_COMObject(int index) {
+    final retValuePtr = allocator<COMObject>();
+
+    final hr = ptr.ref.vtable
+        .elementAt(6)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Uint32,
+          Pointer<COMObject>,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int,
+          Pointer<COMObject>,
+        )>()(ptr.ref.lpVtbl, index, retValuePtr);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    return retValuePtr;
+  }
+
+  String _GetAt_String(int index) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -94,8 +169,8 @@ class IVector extends IInspectable {
     }
   }
 
-  IVectorView get GetView {
-    final retValuePtr = calloc<COMObject>();
+  List<T> get GetView {
+    final retValuePtr = allocator<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
         .elementAt(8)
@@ -115,10 +190,61 @@ class IVector extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView(retValuePtr);
+    return IVectorView(retValuePtr, creator: creator, allocator: allocator)
+        .toList();
   }
 
-  bool IndexOf(String value, Pointer<Uint32> index) {
+  bool IndexOf(T value, Pointer<Uint32> index) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _IndexOf_String(value as String, index);
+      // Handle WinRT types
+      default:
+        return _IndexOf_COMObject(value, index);
+    }
+  }
+
+  bool _IndexOf_COMObject(T value, Pointer<Uint32> index) {
+    final retValuePtr = calloc<Bool>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            COMObject,
+            Pointer<Uint32>,
+            Pointer<Bool>,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            COMObject,
+            Pointer<Uint32>,
+            Pointer<Bool>,
+          )>()(
+        ptr.ref.lpVtbl,
+        (value as IInspectable).ptr.ref,
+        index,
+        retValuePtr,
+      );
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  bool _IndexOf_String(String value, Pointer<Uint32> index) {
     final retValuePtr = calloc<Bool>();
     final hValue = convertToHString(value);
 
@@ -153,7 +279,40 @@ class IVector extends IInspectable {
     }
   }
 
-  void SetAt(int index, String value) {
+  void SetAt(int index, T value) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _SetAt_String(index, value as String);
+      // Handle WinRT types
+      default:
+        return _SetAt_COMObject(index, value);
+    }
+  }
+
+  void _SetAt_COMObject(int index, T value) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(10)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Uint32,
+          COMObject,
+        )>>>()
+        .value
+        .asFunction<int Function(Pointer, int, COMObject)>()(
+      ptr.ref.lpVtbl,
+      index,
+      (value as IInspectable).ptr.ref,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void _SetAt_String(int index, String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -185,7 +344,40 @@ class IVector extends IInspectable {
     }
   }
 
-  void InsertAt(int index, String value) {
+  void InsertAt(int index, T value) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _InsertAt_String(index, value as String);
+      // Handle WinRT types
+      default:
+        return _InsertAt_COMObject(index, value);
+    }
+  }
+
+  void _InsertAt_COMObject(int index, T value) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(11)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Uint32,
+          COMObject,
+        )>>>()
+        .value
+        .asFunction<int Function(Pointer, int, COMObject)>()(
+      ptr.ref.lpVtbl,
+      index,
+      (value as IInspectable).ptr.ref,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void _InsertAt_String(int index, String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -231,7 +423,36 @@ class IVector extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void Append(String value) {
+  void Append(T value) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _Append_String(value as String);
+      // Handle WinRT types
+      default:
+        return _Append_COMObject(value);
+    }
+  }
+
+  void _Append_COMObject(T value) {
+    final hr = ptr.ref.lpVtbl.value
+            .elementAt(13)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(
+              Pointer,
+              COMObject,
+            )>>>()
+            .value
+            .asFunction<int Function(Pointer, COMObject)>()(
+        ptr.ref.lpVtbl, (value as IInspectable).ptr.ref);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void _Append_String(String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -273,31 +494,44 @@ class IVector extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int GetMany(int startIndex, Pointer<HSTRING> items) {
+  int GetMany(int startIndex, Pointer<NativeType> items) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _GetMany_String(startIndex, items.cast());
+      // Handle WinRT types
+      default:
+        return _GetMany_COMObject(startIndex, items.cast());
+    }
+  }
+
+  int _GetMany_COMObject(int startIndex, Pointer<COMObject> items) {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
-          .elementAt(16)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Uint32,
-            Uint32,
-            Pointer<HSTRING>,
-            Pointer<Uint32>,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int,
-            int,
-            Pointer<HSTRING>,
-            Pointer<Uint32>,
-          )>()(ptr.ref.lpVtbl, startIndex, Size, items, retValuePtr);
+      final hr = ptr.ref.vtable
+              .elementAt(16)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(
+                Pointer,
+                Uint32,
+                Uint32,
+                Pointer<COMObject>,
+                Pointer<Uint32>,
+              )>>>()
+              .value
+              .asFunction<
+                  int Function(
+                Pointer,
+                int,
+                int,
+                Pointer<COMObject>,
+                Pointer<Uint32>,
+              )>()(
+          ptr.ref.lpVtbl, startIndex, Size - startIndex, items, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -308,9 +542,89 @@ class IVector extends IInspectable {
     }
   }
 
-  void ReplaceAll(List<String> items) {
+  int _GetMany_String(int startIndex, Pointer<HSTRING> items) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(16)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(
+                Pointer,
+                Uint32,
+                Uint32,
+                Pointer<HSTRING>,
+                Pointer<Uint32>,
+              )>>>()
+              .value
+              .asFunction<
+                  int Function(
+                Pointer,
+                int,
+                int,
+                Pointer<HSTRING>,
+                Pointer<Uint32>,
+              )>()(
+          ptr.ref.lpVtbl, startIndex, Size - startIndex, items, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  void ReplaceAll(List<T> items) {
+    switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
+      case String:
+        return _ReplaceAll_String(items as List<String>);
+      // Handle WinRT types
+      default:
+        return _ReplaceAll_COMObject(items);
+    }
+  }
+
+  void _ReplaceAll_COMObject(List<T> items) {
+    final pArray = calloc<COMObject>(items.length);
+    for (var i = 0; i < items.length; i++) {
+      final pElement = (items.elementAt(i) as IInspectable).ptr;
+      pArray[i] = pElement.ref.lpVtbl;
+    }
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(17)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+            Pointer,
+            Uint32,
+            Pointer<COMObject>,
+          )>>>()
+          .value
+          .asFunction<
+              int Function(
+            Pointer,
+            int,
+            Pointer<COMObject>,
+          )>()(ptr.ref.lpVtbl, items.length, pArray);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(pArray);
+    }
+  }
+
+  void _ReplaceAll_String(List<String> items) {
     final handles = <int>[];
-    final pArray = calloc<HSTRING>(sizeOf<HSTRING>() * items.length);
+    final pArray = calloc<HSTRING>(items.length);
     for (var i = 0; i < items.length; i++) {
       pArray[i] = convertToHString(items.elementAt(i));
       handles.add(pArray[i]);
@@ -342,5 +656,13 @@ class IVector extends IInspectable {
         WindowsDeleteString(handle);
       }
     }
+  }
+
+  List<T> toList() {
+    if (Size == 0) {
+      return <T>[];
+    }
+
+    return VectorHelper(creator, GetMany, Size, allocator: allocator).toList();
   }
 }
