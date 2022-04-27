@@ -92,6 +92,7 @@ export 'src/structs.g.dart'
 export 'src/utils.dart';
 
 // Useful extension methods
+export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
 export 'src/extensions/hstring_array.dart';
 export 'src/extensions/iinspectable_query.dart';
