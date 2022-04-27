@@ -4,9 +4,6 @@
 
 // Simple example of calling WinRT APIs
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 String calendarData(ICalendar calendar) =>
@@ -15,19 +12,6 @@ String calendarData(ICalendar calendar) =>
     'Day of Month: ${calendar.DayAsPaddedString(2)}\n'
     'Day of Week: ${calendar.DayOfWeekAsFullSoloString()}\n'
     'Year: ${calendar.YearAsString()}\n';
-
-List<String> hStringArrayToList(Pointer<HSTRING> pHStringArray, int size) {
-  final list = <String>[];
-  for (var i = 0; i < size; i++) {
-    final element = pHStringArray[i];
-    if (element != 0) {
-      list.add(convertFromHString(pHStringArray[i]));
-      WindowsDeleteString(pHStringArray[i]);
-    }
-  }
-
-  return list;
-}
 
 void main() {
   winrtInitialize();
@@ -45,12 +29,7 @@ void main() {
     print(
         'Comparison result of calendar and its clone: ${clonedCalendar.Compare(calendar.ptr)}');
 
-    final vectorView = IVectorView(calendar.Languages);
-    final pArray = calloc<HSTRING>(sizeOf<HSTRING>() * vectorView.Size);
-    final items = vectorView.GetMany(0, pArray);
-    if (items > 0) {
-      print('Languages: ${hStringArrayToList(pArray, vectorView.Size)}\n');
-    }
+    print('Languages: ${calendar.Languages}\n');
 
     calendar.ChangeCalendarSystem(japaneseCalendar);
     print(calendarData(calendar));
@@ -63,8 +42,6 @@ void main() {
 
     free(comObject);
     free(clonedCalendar.ptr);
-    free(vectorView.ptr);
-    free(pArray);
   } finally {
     WindowsDeleteString(japaneseCalendar);
     WindowsDeleteString(hebrewCalendar);

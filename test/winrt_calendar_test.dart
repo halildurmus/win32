@@ -101,8 +101,8 @@ void main() {
     });
 
     test('Calendar languages', () {
-      // expect(calendar.Languages.length, isPositive);
-    }, skip: 'ICalendar.Languages is not implemented yet.');
+      expect(calendar.Languages.length, isPositive);
+    });
 
     test('Calendar last day in month', () {
       final gregorianCalendar = convertToHString('GregorianCalendar');
