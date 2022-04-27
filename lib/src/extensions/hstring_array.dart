@@ -11,6 +11,17 @@ import '../types.dart';
 import '../winrt/winrt_helpers.dart';
 
 extension HStringHelper on Pointer<HSTRING> {
+  /// Creates a `List<String>` from the `Pointer<HSTRING>`.
+  ///
+  /// `length` must be equal to the number of elements stored inside the
+  /// `Pointer<HSTRING>`.
+  ///
+  /// ```dart
+  /// ...
+  /// final list = pHString.toList(length: 5);
+  /// ```
+  ///
+  /// {@category winrt}
   List<String> toList({int length = 1}) {
     final list = <String>[];
     for (var i = 0; i < length; i++) {
