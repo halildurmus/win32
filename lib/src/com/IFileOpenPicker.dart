@@ -24,6 +24,7 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt/winrt_helpers.dart';
 import 'IInspectable.dart';
+import 'IVector%601.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
@@ -244,7 +245,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  Pointer<COMObject> get FileTypeFilter {
+  IVector<String> get FileTypeFilter {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
@@ -265,7 +266,7 @@ class IFileOpenPicker extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr;
+    return IVector(retValuePtr);
   }
 
   Pointer<COMObject> PickSingleFileAsync() {
