@@ -118,17 +118,8 @@ class ICalendar extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    final vectorView = IVectorView(retValuePtr);
-    final pArray = calloc<HSTRING>(vectorView.Size);
-    try {
-      final itemCount = vectorView.GetMany(0, pArray);
-      final items = pArray.toList(length: itemCount);
-
-      return items;
-    } finally {
-      free(pArray);
-      free(vectorView.ptr);
-    }
+    return using((allocator) =>
+        IVectorView<String>(retValuePtr, allocator: allocator).toList());
   }
 
   String get NumeralSystem {
