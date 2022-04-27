@@ -32,8 +32,11 @@ const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 /// {@category Interface}
 /// {@category winrt}
 class IFileOpenPicker extends IInspectable {
+  final Allocator allocator;
+
   // vtable begins at 6, is 11 entries long.
-  IFileOpenPicker(Pointer<COMObject> ptr) : super(ptr);
+  IFileOpenPicker(Pointer<COMObject> ptr, {this.allocator = calloc})
+      : super(ptr);
 
   int get ViewMode {
     final retValuePtr = calloc<Int32>();
@@ -246,7 +249,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   IVector<String> get FileTypeFilter {
-    final retValuePtr = calloc<COMObject>();
+    final retValuePtr = allocator<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
         .elementAt(14)
@@ -266,7 +269,7 @@ class IFileOpenPicker extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVector(retValuePtr);
+    return IVector(retValuePtr, allocator: allocator);
   }
 
   Pointer<COMObject> PickSingleFileAsync() {
