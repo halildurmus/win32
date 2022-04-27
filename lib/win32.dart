@@ -202,6 +202,7 @@ export 'src/com/IFileIsInUse.dart';
 export 'src/com/IFileOpenDialog.dart';
 export 'src/com/IFileOpenPicker.dart';
 export 'src/com/IFileSaveDialog.dart';
+export 'src/com/IHostName.dart';
 export 'src/com/IInspectable.dart';
 export 'src/com/IKnownFolder.dart';
 export 'src/com/IKnownFolderManager.dart';
