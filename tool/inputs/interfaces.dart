@@ -103,6 +103,7 @@ const comInterfacesToGenerate = <String>[
 ];
 
 final windowsRuntimeTypesToGenerate = [
+  'Windows.Networking.Connectivity.INetworkInformationStatics',
   'Windows.Networking.IHostName',
   // 'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncInfo',

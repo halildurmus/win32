@@ -212,6 +212,7 @@ export 'src/com/IModalWindow.dart';
 export 'src/com/IMoniker.dart';
 export 'src/com/INetwork.dart';
 export 'src/com/INetworkConnection.dart';
+export 'src/com/INetworkInformationStatics.dart';
 export 'src/com/INetworkListManager.dart';
 export 'src/com/INetworkListManagerEvents.dart';
 export 'src/com/IPersist.dart';
