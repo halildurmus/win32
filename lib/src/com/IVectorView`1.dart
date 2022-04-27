@@ -68,6 +68,8 @@ class IVectorView<T> extends IInspectable {
 
   T GetAt(int index) {
     switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
         return _GetAt_String(index) as T;
       // Handle WinRT types
@@ -165,6 +167,8 @@ class IVectorView<T> extends IInspectable {
 
   bool IndexOf(T value, Pointer<Uint32> index) {
     switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
         return _IndexOf_String(value as String, index);
       // Handle WinRT types
@@ -248,6 +252,8 @@ class IVectorView<T> extends IInspectable {
 
   int GetMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
+      // TODO: Need to update this once we add support for types like `int`,
+      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
         return _GetMany_String(startIndex, items.cast());
       // Handle WinRT types
