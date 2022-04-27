@@ -251,7 +251,6 @@ export 'src/com/IUnknown.dart';
 export 'src/com/IUri.dart';
 export 'src/com/IUserDataPathsStatics.dart';
 export 'src/com/IVector`1.dart';
-export 'src/com/IVectorView`1.dart';
 export 'src/com/IVirtualDesktopManager.dart';
 export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemConfigureRefresher.dart';
