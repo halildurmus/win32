@@ -98,8 +98,7 @@ class ICalendar extends IInspectable {
       );
 
   List<String> get Languages {
-    final allocator = Arena();
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
         .elementAt(9)
@@ -120,9 +119,9 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<String>(retValuePtr, allocator: allocator).toList();
+      return IVectorView<String>(retValuePtr).toList();
     } finally {
-      allocator.releaseAll();
+      free(retValuePtr);
     }
   }
 
