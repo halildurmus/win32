@@ -49,13 +49,14 @@ class IVectorView<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final vectorView = IVectorView<IHostName>(ptr, IHostName.new);
+  /// final allocator = Arena();
+  /// final vectorView = IVectorView<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
-  /// from methods like `GetAt`, `GetView` when they are finished with it.
-  /// A FFI `Arena` may be passed as a  custom allocator for ease of memory
-  /// management.
+  /// from methods like `GetAt`, `GetView` and `toList` when they are finished
+  /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
+  /// memory management.
   IVectorView(Pointer<COMObject> ptr, {this.creator, this.allocator = calloc})
       : super(ptr) {
     // TODO: Need to update this once we add support for types like `int`,

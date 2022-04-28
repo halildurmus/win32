@@ -51,13 +51,14 @@ class IVector<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final vector = IVector<IHostName>(ptr, IHostName.new);
+  /// final allocator = Arena();
+  /// final vector = IVector<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
-  /// from methods like `GetAt`, `GetView` when they are finished with it.
-  /// A FFI `Arena` may be passed as a  custom allocator for ease of memory
-  /// management.
+  /// from methods like `GetAt`, `GetView` and `toList` when they are finished
+  /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
+  /// memory management.
   ///
   /// {@category winrt}
   IVector(Pointer<COMObject> ptr, {this.creator, this.allocator = calloc})
