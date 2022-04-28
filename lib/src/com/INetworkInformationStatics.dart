@@ -33,8 +33,11 @@ const IID_INetworkInformationStatics = '{5074F851-950D-4165-9C15-365619481EEA}';
 /// {@category Interface}
 /// {@category winrt}
 class INetworkInformationStatics extends IInspectable {
+  final Allocator allocator;
+
   // vtable begins at 6, is 8 entries long.
-  INetworkInformationStatics(Pointer<COMObject> ptr) : super(ptr);
+  INetworkInformationStatics(Pointer<COMObject> ptr, {this.allocator = calloc})
+      : super(ptr);
 
   Pointer<COMObject> GetConnectionProfiles() {
     final retValuePtr = calloc<COMObject>();
@@ -118,7 +121,6 @@ class INetworkInformationStatics extends IInspectable {
   }
 
   List<IHostName> GetHostNames() {
-    final allocator = Arena();
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
@@ -143,11 +145,13 @@ class INetworkInformationStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<IHostName>(retValuePtr,
-              creator: IHostName.new, allocator: allocator)
-          .toList();
+      return IVectorView<IHostName>(
+        retValuePtr,
+        creator: IHostName.new,
+        allocator: allocator,
+      ).toList();
     } finally {
-      allocator.releaseAll();
+      free(retValuePtr);
     }
   }
 
