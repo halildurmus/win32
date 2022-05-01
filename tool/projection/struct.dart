@@ -4,7 +4,7 @@ import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
 import 'field.dart';
-import 'nestedStruct.dart';
+import 'nested_struct.dart';
 import 'safenames.dart';
 import 'type.dart';
 import 'utils.dart';
