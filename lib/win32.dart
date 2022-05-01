@@ -64,26 +64,6 @@
 ///   ...
 ///   free(ansi);
 /// ```
-///
-/// ## Strings (Windows Runtime)
-///
-/// Windows Runtime APIs use `HSTRING` as their native type. An HSTRING is an
-/// immutable string object, which is created with the [WindowsCreateString] API
-/// and deleted with the [WindowsDeleteString] API. The HSTRING itself is an
-/// integer value, just like other `HANDLE` objects in the Win32 programming
-/// interface.
-///
-/// A Dart function may be used to convert to and from `HSTRING`s, for example:
-/// ```dart
-///   final phCalendarSystem = calloc<HSTRING>();
-///   calendar.GetCalendarSystem(systemPtr);
-///   print('The calendar system is ${convertFromHString(phCalendarSystem)}.');
-///   WindowsDeleteString(phCalendarSystem.value);
-/// ```
-///
-/// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString`; you do
-/// not need to free the pointer itself, since Windows reference counts the
-/// backing store and frees the memory when the reference count reaches 0.
 library win32;
 
 // Core Win32 APIs, constants and macros
