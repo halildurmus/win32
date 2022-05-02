@@ -50,7 +50,8 @@ class IVectorView<T> extends IInspectable {
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final vectorView = IVectorView<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
+  /// final vectorView = IVectorView<IHostName>(ptr,
+  ///     creator: IHostName.new, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers

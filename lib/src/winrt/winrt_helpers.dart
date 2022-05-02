@@ -129,13 +129,15 @@ Pointer<COMObject> CreateObject(String className, String iid) {
 /// `className` and `iid`.
 ///
 /// ```dart
-/// final object = CreateActivationFactory('Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter', IID_IPhoneNumberFormatterStatics);
+/// final object = CreateActivationFactory(
+///     'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
+///     IID_IPhoneNumberFormatterStatics);
 /// final phoneNumberFormatter = IPhoneNumberFormatterStatics(object);
 /// ```
 ///
 /// It is the caller's responsibility to deallocate the returned pointer when
-/// they are finished with it. A FFI `Arena` may be passed as a
-/// custom allocator for ease of memory management.
+/// they are finished with it. A FFI `Arena` may be passed as a custom allocator
+/// for ease of memory management.
 ///
 /// {@category winrt}
 Pointer<COMObject> CreateActivationFactory(String className, String iid,
@@ -179,8 +181,8 @@ extension IInspectableExtension on IInspectable {
   /// Throws a `WindowsException` if the interface is not found.
   ///
   /// It is the caller's responsibility to deallocate the returned pointer when
-  /// they are finished with it. A FFI `Arena` may be passed as a
-  /// custom allocator for ease of memory management.
+  /// they are finished with it. A FFI `Arena` may be passed as a custom
+  /// allocator for ease of memory management.
   ///
   /// {@category winrt}
   Pointer<COMObject> query(String iid, {Allocator allocator = calloc}) {
@@ -188,7 +190,7 @@ extension IInspectableExtension on IInspectable {
     // Create an IID for the interface required
     final riid = convertToIID(iid, allocator: allocator);
     // Use IInspectable to navigate to the relevant interface
-    final hr = this.QueryInterface(riid, classPtr);
+    final hr = QueryInterface(riid, classPtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     // Return a pointer to the relevant class

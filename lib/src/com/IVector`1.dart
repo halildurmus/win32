@@ -52,7 +52,8 @@ class IVector<T> extends IInspectable {
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final vector = IVector<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
+  /// final vector =
+  ///     IVector<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
