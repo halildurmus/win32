@@ -36,7 +36,7 @@ class IVector<T> extends IInspectable {
   final Allocator allocator;
 
   // vtable begins at 6, is 12 entries long.
-  /// Creates a `IVector<T>` from the `ptr`.
+  /// Creates an instance of `IVector<T>` using the given `ptr`.
   ///
   /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
   /// `IStorageFile` etc.
@@ -660,6 +660,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Creates a `List<T>` from the `IVector<T>`.
   List<T> toList() {
     if (Size == 0) {
       return <T>[];
