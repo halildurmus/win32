@@ -44,5 +44,47 @@ void main() {
       free(object);
       winrtUninitialize();
     });
+
+    test('WinRT getRuntimeClassName test', () {
+      winrtInitialize();
+
+      const calendarClassName = 'Windows.Globalization.Calendar';
+
+      final object = CreateObject(calendarClassName, IID_ICalendar);
+      final calendar = ICalendar(object);
+
+      expect(calendar.runtimeClassName, equals(calendarClassName));
+
+      free(object);
+      winrtUninitialize();
+    });
+
+    test('WinRT getTrustLevel test of base trust class', () {
+      winrtInitialize();
+
+      const calendarClassName = 'Windows.Globalization.Calendar';
+
+      final object = CreateObject(calendarClassName, IID_ICalendar);
+      final calendar = ICalendar(object);
+
+      expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
+
+      free(object);
+      winrtUninitialize();
+    });
+
+    test('WinRT getTrustLevel test of partial trust class', () {
+      winrtInitialize();
+
+      const className = 'Windows.Storage.Pickers.FileOpenPicker';
+
+      final object = CreateObject(className, IID_IInspectable);
+      final inspectableObject = IInspectable(object);
+
+      expect(inspectableObject.trustLevel, equals(TrustLevel.partialTrust));
+
+      free(object);
+      winrtUninitialize();
+    });
   }
 }

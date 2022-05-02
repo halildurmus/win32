@@ -59,21 +59,6 @@ class CorOpenFlags {
   static const ofReserved = 0xffffff40;
 }
 
-/// Represents the trust level of an activatable class.
-///
-/// {@category Enum}
-class TrustLevel {
-  /// The component has access to resources that are not protected.
-  static const BaseTrust = 0;
-
-  /// The component has access to resources requested in the app manifest and
-  /// approved by the user.
-  static const PartialTrust = 1;
-
-  /// The component requires the full privileges of the user.
-  static const FullTrust = 2;
-}
-
 /// Specifies the status of an asynchronous operation.
 ///
 /// {@category Enum}

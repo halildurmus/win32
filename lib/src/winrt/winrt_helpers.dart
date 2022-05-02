@@ -124,3 +124,66 @@ Pointer<COMObject> CreateObject(String className, String iid) {
     free(hstrClass);
   }
 }
+
+/// Represents the trust level of an activatable class.
+///
+/// {@category Enum}
+enum TrustLevel {
+  /// The component has access to resources that are not protected.
+  baseTrust,
+
+  /// The component has access to resources requested in the app manifest and
+  /// approved by the user.
+  partialTrust,
+
+  /// The component requires the full privileges of the user.
+  fullTrust
+}
+
+extension IInspectableExtension on IInspectable {
+  // TODO: Add iids property when IVectorView`1 work lands.
+  List<String> get iids {
+    throw UnimplementedError();
+  }
+
+  /// Gets the fully qualified name of the current Windows Runtime object.
+  String get runtimeClassName {
+    final hstr = calloc<HSTRING>();
+
+    try {
+      final hr = GetRuntimeClassName(hstr);
+      if (SUCCEEDED(hr)) {
+        return convertFromHString(hstr.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(hstr);
+    }
+  }
+
+  /// Gets the trust level of the current Windows Runtime object.
+  TrustLevel get trustLevel {
+    final pTrustLevel = calloc<Int32>();
+
+    try {
+      final hr = GetTrustLevel(pTrustLevel);
+      if (SUCCEEDED(hr)) {
+        switch (pTrustLevel.value) {
+          case 0:
+            return TrustLevel.baseTrust;
+          case 1:
+            return TrustLevel.partialTrust;
+          case 2:
+            return TrustLevel.fullTrust;
+          default:
+            throw ArgumentError('GetTrustLevel returned an unexpected value.');
+        }
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(pTrustLevel);
+    }
+  }
+}
