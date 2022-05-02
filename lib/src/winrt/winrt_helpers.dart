@@ -125,6 +125,39 @@ Pointer<COMObject> CreateObject(String className, String iid) {
   }
 }
 
+/// Creates the activation factory for the specified runtime class using the
+/// `className` and `iid`.
+///
+/// ```dart
+/// final object = CreateActivationFactory('Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter', IID_IPhoneNumberFormatterStatics);
+/// final phoneNumberFormatter = IPhoneNumberFormatterStatics(object);
+/// ```
+///
+/// It is the caller's responsibility to deallocate the returned pointer when
+/// they are finished with it. A FFI `Arena` may be passed as a
+/// custom allocator for ease of memory management.
+///
+/// {@category winrt}
+Pointer<COMObject> CreateActivationFactory(String className, String iid,
+    {Allocator allocator = calloc}) {
+  final hClassName = convertToHString(className);
+  final pIID = calloc<GUID>()..ref.setGUID(iid);
+  final pActivationFactory = allocator<COMObject>();
+
+  try {
+    final hr =
+        RoGetActivationFactory(hClassName, pIID, pActivationFactory.cast());
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+
+    return pActivationFactory;
+  } finally {
+    WindowsDeleteString(hClassName);
+    free(pIID);
+  }
+}
+
 /// Represents the trust level of an activatable class.
 ///
 /// {@category Enum}
@@ -185,38 +218,5 @@ extension IInspectableExtension on IInspectable {
     } finally {
       free(pTrustLevel);
     }
-  }
-}
-
-/// Creates the activation factory for the specified runtime class using the
-/// `className` and `iid`.
-///
-/// ```dart
-/// final object = CreateActivationFactory('Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter', IID_IPhoneNumberFormatterStatics);
-/// final phoneNumberFormatter = IPhoneNumberFormatterStatics(object);
-/// ```
-///
-/// It is the caller's responsibility to deallocate the returned pointer when
-/// they are finished with it. A FFI `Arena` may be passed as a
-/// custom allocator for ease of memory management.
-///
-/// {@category winrt}
-Pointer<COMObject> CreateActivationFactory(String className, String iid,
-    {Allocator allocator = calloc}) {
-  final hClassName = convertToHString(className);
-  final pIID = calloc<GUID>()..ref.setGUID(iid);
-  final pActivationFactory = allocator<COMObject>();
-
-  try {
-    final hr =
-        RoGetActivationFactory(hClassName, pIID, pActivationFactory.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    return pActivationFactory;
-  } finally {
-    WindowsDeleteString(hClassName);
-    free(pIID);
   }
 }
