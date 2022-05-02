@@ -95,7 +95,6 @@ export 'src/utils.dart';
 export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
 export 'src/extensions/hstring_array.dart';
-export 'src/extensions/iinspectable_query.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
