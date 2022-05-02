@@ -33,7 +33,7 @@ extension COMObjectPointer on Pointer<COMObject> {
     final list = <T>[];
     for (var i = 0; i < length; i++) {
       final element = this[i];
-      if (element.ref.lpVtbl.address == 0) {
+      if (element.ref.lpVtbl == nullptr) {
         break;
       }
       list.add(creator(element));
