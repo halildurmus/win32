@@ -24,9 +24,9 @@ void main() {
   });
 
   for (final path in devicePaths) {
-    final pathPtr = TEXT(path);
-    final hDevice = CreateFile(pathPtr.cast(), 0,
-        FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, NULL);
+    final pathPtr = path.toNativeUtf16();
+    final hDevice = CreateFile(pathPtr, 0, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hDevice == INVALID_HANDLE_VALUE) {
       final error = GetLastError();
       print('CreateFile - Get Device Handle error: $error');

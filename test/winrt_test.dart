@@ -13,9 +13,11 @@ void main() {
 
     test('WinRT double initialization should succeed with warning', () {
       final hr = RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
+      expect(SUCCEEDED(hr), isTrue);
       expect(hr, equals(S_OK));
 
       final hr2 = RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
+      expect(SUCCEEDED(hr2), isTrue);
       expect(hr2, equals(S_FALSE));
 
       // Balance out uninitialization. This is deliberately called twice.
@@ -25,11 +27,15 @@ void main() {
 
     test('WinRT change of threading model should fail', () {
       final hr = RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
+      expect(SUCCEEDED(hr), isTrue);
       expect(hr, equals(S_OK));
 
       final hr2 = RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
+      expect(FAILED(hr2), isTrue);
       expect(hr2, equals(RPC_E_CHANGED_MODE));
 
+      // Balance out uninitialization. This is deliberately only called once,
+      // because it only succeeded once.
       RoUninitialize();
     });
 

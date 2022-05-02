@@ -13,6 +13,7 @@ void main() {
     final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     expect(outputHandle, isNot(INVALID_HANDLE_VALUE));
   });
+
   test('GetStdHandle() with invalid handle', () {
     final outputHandle = GetStdHandle(0xFFFF);
     expect(outputHandle, equals(INVALID_HANDLE_VALUE));
@@ -32,6 +33,8 @@ void main() {
       expect(bufferInfo.ref.dwCursorPosition.Y,
           lessThanOrEqualTo(bufferInfo.ref.dwSize.Y));
     }
+
+    free(bufferInfo);
   });
 
   test('SHGetKnownFolderPath', () {

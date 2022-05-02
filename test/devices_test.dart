@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Volume management API', () {
-    final volumeNamePtr = calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final volumeNamePtr = wsalloc(MAX_PATH);
 
     final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
     expect(hFindVolume, isNot(INVALID_HANDLE_VALUE));

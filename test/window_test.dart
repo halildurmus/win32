@@ -14,21 +14,26 @@ void main() {
     final outputHandle = GetModuleHandle(nullptr);
     expect(outputHandle, isNot(0));
   });
+
   test('RegisterClass()', () {
     final hInstance = GetModuleHandle(nullptr);
 
-    final CLASS_NAME = TEXT('CLASS_NAME');
+    final pClassName = 'CLASS_NAME'.toNativeUtf16();
 
     final wc = calloc<WNDCLASS>()
       ..ref.style = CS_HREDRAW | CS_VREDRAW
       ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0)
       ..ref.hInstance = hInstance
-      ..ref.lpszClassName = CLASS_NAME
+      ..ref.lpszClassName = pClassName
       ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
       ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
 
-    final result = RegisterClass(wc);
-
-    expect(result, isNot(0));
+    try {
+      final result = RegisterClass(wc);
+      expect(result, isNot(0));
+    } finally {
+      free(pClassName);
+      free(wc);
+    }
   });
 }
