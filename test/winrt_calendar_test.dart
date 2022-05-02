@@ -18,6 +18,12 @@ void main() {
       calendar = ICalendar(object);
     });
 
+    test('Calendar is a materialized object', () {
+      expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
+      expect(
+          calendar.runtimeClassName, equals('Windows.Globalization.Calendar'));
+    });
+
     test('Calendar day', () {
       expect(calendar.Day, inInclusiveRange(1, 31));
     });
@@ -287,6 +293,9 @@ void main() {
 
     test('Calendar clone', () {
       final calendar2 = ICalendar(calendar.Clone());
+
+      expect(
+          calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
       expect(calendar2.Year, equals(calendar.Year));
     });
 
