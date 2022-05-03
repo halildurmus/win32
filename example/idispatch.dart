@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+/// A helper object to work with IDispatch objects.
 class Dispatcher {
   final String progID;
   final IDispatch disp;
@@ -76,7 +77,7 @@ class Dispatcher {
     }
   }
 
-  void invokeMethod(int dispid, {Pointer<DISPPARAMS>? params}) {
+  void invokeMethod(int dispid, [Pointer<DISPPARAMS>? params]) {
     Pointer<DISPPARAMS> args;
     if (params == null) {
       args = calloc<DISPPARAMS>();
@@ -107,18 +108,33 @@ class Dispatcher {
 
 void main() {
   final hr = OleInitialize(nullptr);
+  if (FAILED(hr)) throw WindowsException(hr);
 
-  if (FAILED(hr)) {
-    print('Failed at OleInitialize.');
-    throw WindowsException(hr);
-  }
-
-  print('Minimizing all windows via Shell.Application Automation object');
   final dispatcher = Dispatcher.fromProgID('Shell.Application');
-  final dispid = dispatcher.getDispId('MinimizeAll');
 
-  dispatcher
-    ..invokeMethod(dispid)
-    ..dispose();
+  // Example of calling an automation method with no parameters
+  print('Minimizing all windows via Shell.Application Automation object');
+  final minimizeAllMethod = dispatcher.getDispId('MinimizeAll');
+  dispatcher.invokeMethod(minimizeAllMethod);
+
+  // Example of calling an automation method with a parameter
+  print(r'Launching the Windows Explorer, starting at the C:\ directory');
+  final folderLocation = BSTR.fromString(r'C:\');
+  final exploreMethod = dispatcher.getDispId('Explore');
+  final exploreParam = calloc<VARIANT>();
+  VariantInit(exploreParam);
+  exploreParam
+    ..ref.vt = VARENUM.VT_BSTR
+    ..ref.bstrVal = folderLocation.ptr;
+  final exploreParams = calloc<DISPPARAMS>()
+    ..ref.cArgs = 1
+    ..ref.rgvarg = exploreParam;
+  dispatcher.invokeMethod(exploreMethod, exploreParams);
+  free(exploreParams);
+  free(exploreParam);
+  folderLocation.free();
+
+  print('Cleaning up.');
+  dispatcher.dispose();
   OleUninitialize();
 }

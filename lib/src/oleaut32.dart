@@ -214,6 +214,47 @@ final _SysStringLen = _oleaut32.lookupFunction<
 /// Converts a variant from one type to another.
 ///
 /// ```c
+/// HRESULT VarBstrCat(
+///   [in]  BSTR   bstrLeft,
+///   [in]  BSTR   bstrRight,
+///   [out] LPBSTR pbstrResult
+/// );
+/// ```
+/// {@category oleaut32}
+int VarBstrCat(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+        Pointer<Pointer<Uint16>> pbstrResult) =>
+    _VarBstrCat(bstrLeft, bstrRight, pbstrResult);
+
+final _VarBstrCat = _oleaut32.lookupFunction<
+    Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+        Pointer<Pointer<Uint16>> pbstrResult),
+    int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+        Pointer<Pointer<Uint16>> pbstrResult)>('VarBstrCat');
+
+/// Compares two variants of type BSTR.
+///
+/// ```c
+/// HRESULT VarBstrCmp(
+///   [in] BSTR  bstrLeft,
+///   [in] BSTR  bstrRight,
+///   [in] LCID  lcid,
+///   [in] ULONG dwFlags
+/// );
+/// ```
+/// {@category oleaut32}
+int VarBstrCmp(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight, int lcid,
+        int dwFlags) =>
+    _VarBstrCmp(bstrLeft, bstrRight, lcid, dwFlags);
+
+final _VarBstrCmp = _oleaut32.lookupFunction<
+    Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+        Uint32 lcid, Uint32 dwFlags),
+    int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight, int lcid,
+        int dwFlags)>('VarBstrCmp');
+
+/// Converts a variant from one type to another.
+///
+/// ```c
 /// HRESULT VariantChangeType(
 ///   VARIANTARG       *pvargDest,
 ///   const VARIANTARG *pvarSrc,

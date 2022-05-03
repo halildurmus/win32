@@ -64,9 +64,14 @@
 ///   ...
 ///   free(ansi);
 /// ```
+///
+/// Automation interfaces and some COM methods take a different string type
+/// (`BSTR`). The Win32 package supplies a [BSTR] class which wraps the memory
+/// allocation functions needed to work with this string data type.
 library win32;
 
 // Core Win32 APIs, constants and macros
+export 'src/bstr.dart';
 export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
@@ -139,7 +144,6 @@ export 'src/winrt/winrt_constants.dart';
 export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
-
 export 'src/com/IApplicationActivationManager.dart';
 export 'src/com/IApplicationActivationManager.dart';
 export 'src/com/IAppxFactory.dart';

@@ -6030,6 +6030,16 @@
         "dllLibrary": "user32",
         "comment": "The ValidateRgn function validates the client area within a region by removing the region from the current update region of the specified window."
     },
+    "VarBstrCat": {
+        "prototype": "HRESULT VarBstrCat(\n  [in]  BSTR   bstrLeft,\n  [in]  BSTR   bstrRight,\n  [out] LPBSTR pbstrResult\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Converts a variant from one type to another."
+    },
+    "VarBstrCmp": {
+        "prototype": "HRESULT VarBstrCmp(\n  [in] BSTR  bstrLeft,\n  [in] BSTR  bstrRight,\n  [in] LCID  lcid,\n  [in] ULONG dwFlags\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Compares two variants of type BSTR."
+    },
     "VariantChangeType": {
         "prototype": "HRESULT VariantChangeType(\n  VARIANTARG       *pvargDest,\n  const VARIANTARG *pvarSrc,\n  USHORT           wFlags,\n  VARTYPE          vt\n);",
         "dllLibrary": "oleaut32",

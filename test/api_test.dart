@@ -9934,6 +9934,24 @@ void main() {
           int Function(Pointer<Utf16> pbstr)>('SysStringLen');
       expect(SysStringLen, isA<Function>());
     });
+    test('Can instantiate VarBstrCat', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VarBstrCat = oleaut32.lookupFunction<
+          Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+              Pointer<Pointer<Uint16>> pbstrResult),
+          int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+              Pointer<Pointer<Uint16>> pbstrResult)>('VarBstrCat');
+      expect(VarBstrCat, isA<Function>());
+    });
+    test('Can instantiate VarBstrCmp', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VarBstrCmp = oleaut32.lookupFunction<
+          Int32 Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+              Uint32 lcid, Uint32 dwFlags),
+          int Function(Pointer<Utf16> bstrLeft, Pointer<Utf16> bstrRight,
+              int lcid, int dwFlags)>('VarBstrCmp');
+      expect(VarBstrCmp, isA<Function>());
+    });
     test('Can instantiate VariantChangeType', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final VariantChangeType = oleaut32.lookupFunction<
