@@ -92,7 +92,9 @@ export 'src/structs.g.dart'
 export 'src/utils.dart';
 
 // Useful extension methods
+export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
+export 'src/extensions/hstring_array.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
@@ -199,6 +201,7 @@ export 'src/com/IFileIsInUse.dart';
 export 'src/com/IFileOpenDialog.dart';
 export 'src/com/IFileOpenPicker.dart';
 export 'src/com/IFileSaveDialog.dart';
+export 'src/com/IHostName.dart';
 export 'src/com/IInspectable.dart';
 export 'src/com/IKnownFolder.dart';
 export 'src/com/IKnownFolderManager.dart';
@@ -208,6 +211,7 @@ export 'src/com/IModalWindow.dart';
 export 'src/com/IMoniker.dart';
 export 'src/com/INetwork.dart';
 export 'src/com/INetworkConnection.dart';
+export 'src/com/INetworkInformationStatics.dart';
 export 'src/com/INetworkListManager.dart';
 export 'src/com/INetworkListManagerEvents.dart';
 export 'src/com/IPersist.dart';
@@ -247,6 +251,8 @@ export 'src/com/ITypeInfo.dart';
 export 'src/com/IUnknown.dart';
 export 'src/com/IUri.dart';
 export 'src/com/IUserDataPathsStatics.dart';
+export 'src/com/IVector`1.dart';
+export 'src/com/IVectorView`1.dart';
 export 'src/com/IVirtualDesktopManager.dart';
 export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemConfigureRefresher.dart';
