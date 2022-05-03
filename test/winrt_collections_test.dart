@@ -2,7 +2,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
-import 'package:win32/src/com/IVectorView%601.dart';
 import 'package:win32/win32.dart';
 
 // Exhaustively test the WinRT Collections to make sure constructors,
@@ -396,7 +395,7 @@ void main() {
       test('GetMany returns elements starting from index 0', () {
         final pCOMObject = allocator<COMObject>(vectorView.Size);
         expect(vectorView.GetMany(0, pCOMObject), greaterThanOrEqualTo(1));
-        final list = pCOMObject.toListOf<IHostName>(IHostName.new,
+        final list = pCOMObject.toList<IHostName>(IHostName.new,
             length: vectorView.Size);
         expect(list.length, greaterThanOrEqualTo(1));
       });

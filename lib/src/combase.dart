@@ -23,11 +23,6 @@ import 'utils.dart';
 class COMObject extends Struct {
   external Pointer<Pointer<IntPtr>> lpVtbl;
 
-  /// Sets the vtable's pointer to `ptr`.
-  void setLpVtbl(Pointer<Pointer<IntPtr>> ptr) {
-    lpVtbl = ptr;
-  }
-
   Pointer<IntPtr> get vtable => lpVtbl.value;
 
   /// Create an instance of a COM object using its class identifier, cast to the

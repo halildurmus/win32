@@ -49,6 +49,6 @@ class VectorHelper<T> {
     final pArray = allocator<COMObject>(length);
     getManyCallback(0, pArray);
 
-    return pArray.toListOf(creator!, length: length);
+    return pArray.toList(creator!, length: length);
   }
 }

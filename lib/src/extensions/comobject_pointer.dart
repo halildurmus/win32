@@ -10,7 +10,7 @@ extension COMObjectPointer on Pointer<COMObject> {
   Pointer<COMObject> operator [](int index) => this.elementAt(index);
 
   void operator []=(int index, Pointer<Pointer<IntPtr>> value) =>
-      this[index].ref.setLpVtbl(value);
+      this[index].ref.lpVtbl = value;
 
   /// Creates a `List<T>` from the `Pointer<COMObject>`.
   ///
@@ -24,12 +24,11 @@ extension COMObjectPointer on Pointer<COMObject> {
   ///
   /// ```dart
   /// ...
-  /// final list = pComObject.toListOf<IHostName>(IHostName.new, length: 4);
+  /// final list = pComObject.toList<IHostName>(IHostName.new, length: 4);
   /// ```
   ///
   /// {@category winrt}
-  List<T> toListOf<T>(T Function(Pointer<COMObject>) creator,
-      {int length = 1}) {
+  List<T> toList<T>(T Function(Pointer<COMObject>) creator, {int length = 1}) {
     final list = <T>[];
     for (var i = 0; i < length; i++) {
       final element = this[i];
