@@ -10,8 +10,9 @@ const TEST_RUNS = 500;
 
 void main() {
   test('BSTR allocation', () {
+    const testString = 'Hello world';
+
     for (var i = 0; i < TEST_RUNS; i++) {
-      const testString = 'Hello world';
       final bstr = BSTR.fromString(testString);
 
       // A BSTR should have a DWORD-length prefix containing its length.
@@ -30,10 +31,11 @@ void main() {
   });
 
   test('Long BSTRs', () {
+    final longString = 'A very long string with padding.' * 65536;
+
     // Ten allocations is probably enough for an expensive test like this.
     for (var i = 0; i < 10; i++) {
       // This string is 4MB (32 chars * 2 bytes * 65536)
-      final longString = 'A very long string with padding.' * 65536;
       final bstr = BSTR.fromString(longString);
 
       // A BSTR should have a DWORD-length prefix containing its length.
@@ -52,9 +54,10 @@ void main() {
   });
 
   test('BSTR lengths', () {
+    const testString = 'Longhorn is a bar in the village resort between the '
+        'Whistler and Blackcomb mountains';
+
     for (var i = 0; i < TEST_RUNS; i++) {
-      const testString = 'Longhorn is a bar in the village resort between the '
-          'Whistler and Blackcomb mountains';
       final bstr = BSTR.fromString(testString);
 
       expect(testString.length, equals(84));
@@ -68,8 +71,9 @@ void main() {
   });
 
   test('BSTR clone', () {
+    const testString = 'This message is not unique.';
+
     for (var i = 0; i < TEST_RUNS; i++) {
-      const testString = 'This message is not unique.';
       final original = BSTR.fromString(testString);
       final clone = original.clone();
 
