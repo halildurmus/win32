@@ -204,15 +204,17 @@ void main() {
   });
 
   test('WinRT get property successfully projects DateTime', () {
-    final winTypeDef =
-        MetadataStore.getMetadataForType('Windows.Storage.FileProperties.IBasicProperties');
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Storage.FileProperties.IBasicProperties');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
     final dateModifiedProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_DateModified');
 
-    expect(dateModifiedProjection.nativePrototype,
-        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Uint64>,)'));
+    expect(
+        dateModifiedProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
     expect(dateModifiedProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
   });
