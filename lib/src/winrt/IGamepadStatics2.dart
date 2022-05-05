@@ -17,7 +17,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import '../winrt/winrt_constants.dart';
+import '../winrt_constants.dart';
 
 import 'IGamepadStatics.dart';
 

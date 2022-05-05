@@ -22,9 +22,9 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
-import '../winrt/winrt_helpers.dart';
+import '../winrt_helpers.dart';
 import 'IHostName.dart';
-import 'IInspectable.dart';
+import '../com/IInspectable.dart';
 import 'IVectorView`1.dart';
 
 /// @nodoc

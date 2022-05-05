@@ -112,10 +112,16 @@ final windowsRuntimeTypesToGenerate = [
   // changes to the generation script.
   // 'Windows.Foundation.IAsyncAction',
   // 'Windows.Foundation.IAsyncOperation`1',
+  // 'Windows.Foundation.IPropertyValue',
   // 'Windows.Networking.Connectivity.INetworkInformationStatics',
   // 'Windows.Networking.IHostName',
+  // 'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  // 'Windows.UI.Notifications.IToastNotificationFactory',
+  // 'Windows.UI.Notifications.ToastNotification',
   // 'Windows.Storage.IUserDataPathsStatics',
   // 'Windows.Storage.Pickers.IFileOpenPicker',
+  // 'Windows.Gaming.Input.IGamepadStatics',
+  // 'Windows.Gaming.Input.IGamepadStatics2',
   //
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',

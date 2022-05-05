@@ -8,6 +8,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../com/IInspectable.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
@@ -16,10 +17,7 @@ import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
-import '../winrt/winrt_constants.dart';
-
-import 'IInspectable.dart';
+import '../winrt_constants.dart';
 
 /// @nodoc
 const IID_IToastNotificationManagerStatics =

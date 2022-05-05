@@ -1,7 +1,5 @@
 // IFileOpenPicker.dart
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
 // ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
@@ -22,9 +20,9 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
-import '../winrt/winrt_helpers.dart';
-import 'IInspectable.dart';
-import 'IVector%601.dart';
+import '../winrt_helpers.dart';
+import '../com/IInspectable.dart';
+import 'IVector`1.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';

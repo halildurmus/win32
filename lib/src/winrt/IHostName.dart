@@ -22,10 +22,10 @@ import '../structs.g.dart';
 import '../utils.dart';
 
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../winrt/winrt_helpers.dart';
+import '../winrt_helpers.dart';
 import '../types.dart';
 
-import 'IInspectable.dart';
+import '../com/IInspectable.dart';
 
 /// @nodoc
 const IID_IHostName = '{BF8ECAAD-ED96-49A7-9084-D416CAE88DCB}';
