@@ -1,4 +1,4 @@
-const comInterfacesToGenerate = <String>[
+const comInterfacesToGenerate = <String>{
   'Windows.Win32.Globalization.IEnumSpellingError',
   'Windows.Win32.Globalization.ISpellChecker',
   'Windows.Win32.Globalization.ISpellChecker2',
@@ -100,31 +100,31 @@ const comInterfacesToGenerate = <String>[
   'Windows.Win32.UI.Shell.IShellLinkW',
   'Windows.Win32.UI.Shell.IShellService',
   'Windows.Win32.UI.Shell.IVirtualDesktopManager',
-];
+};
 
-final windowsRuntimeTypesToGenerate = [
-  // These types are generated manually.
-  //
-  // 'Windows.Foundation.Collections.IVector`1',
-  // 'Windows.Foundation.Collections.IVectorView`1',
-  //
-  // TODO: These types can be generated automatically after making the necessary
-  // changes to the generation script.
-  // 'Windows.Foundation.IAsyncAction',
-  // 'Windows.Foundation.IAsyncOperation`1',
-  // 'Windows.Foundation.IPropertyValue',
-  // 'Windows.Networking.Connectivity.INetworkInformationStatics',
-  // 'Windows.Networking.IHostName',
-  // 'Windows.UI.Notifications.IToastNotificationManagerStatics',
-  // 'Windows.UI.Notifications.IToastNotificationFactory',
-  // 'Windows.UI.Notifications.ToastNotification',
-  // 'Windows.Storage.IUserDataPathsStatics',
-  // 'Windows.Storage.Pickers.IFileOpenPicker',
-  // 'Windows.Gaming.Input.IGamepadStatics',
-  // 'Windows.Gaming.Input.IGamepadStatics2',
-  //
+final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
-];
+
+  // These types are generated manually by design:
+  //   'Windows.Foundation.Collections.IVector`1',
+  //   'Windows.Foundation.Collections.IVectorView`1',
+  //
+  // TODO: These types are currently being generated manually. The goal is to
+  // generate them automatically after making appropriate changes to the
+  // generation script:
+  //   'Windows.Foundation.IAsyncAction',
+  //   'Windows.Foundation.IAsyncOperation`1',
+  //   'Windows.Foundation.IPropertyValue',
+  //   'Windows.Networking.Connectivity.INetworkInformationStatics',
+  //   'Windows.Networking.IHostName',
+  //   'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  //   'Windows.UI.Notifications.IToastNotificationFactory',
+  //   'Windows.UI.Notifications.ToastNotification',
+  //   'Windows.Storage.IUserDataPathsStatics',
+  //   'Windows.Storage.Pickers.IFileOpenPicker',
+  //   'Windows.Gaming.Input.IGamepadStatics',
+  //   'Windows.Gaming.Input.IGamepadStatics2',
+};
