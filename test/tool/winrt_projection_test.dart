@@ -217,6 +217,9 @@ void main() {
             'HRESULT Function(Pointer, Pointer<Uint64>,)'));
     expect(dateModifiedProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+    expect(dateModifiedProjection.returnType.dartType, equals('int'));
+    expect(dateModifiedProjection.toString().trimLeft(),
+        startsWith('DateTime get DateModified'));
   });
 
   test('WinRT get property successfully projects List<String>', () {
