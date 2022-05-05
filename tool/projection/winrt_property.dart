@@ -99,6 +99,28 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
       }
 ''';
 
+  String dateTimePropertyDeclaration() => '''
+      DateTime get $exposedMethodName {
+        final retValuePtr = calloc<Uint64>();
+
+        try {
+          final hr = ptr.ref.lpVtbl.value
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+
+          return DateTime
+            .utc(1601, 01, 01)
+            .add(Duration(microseconds: retValuePtr.value ~/ 10));
+        } finally {
+          free(retValuePtr);
+        }
+      }
+''';
+
   @override
   String toString() {
     try {
@@ -110,6 +132,9 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
         return pointerCOMObjectPropertyDeclaration();
       }
       if (returnType.isString) return stringPropertyDeclaration();
+      if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {
+        return dateTimePropertyDeclaration();
+      }
 
       final valRef = returnType.dartType == 'double' ||
               returnType.dartType == 'int' ||
