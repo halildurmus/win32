@@ -203,6 +203,22 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>,)'));
   });
 
+  test('WinRT get property successfully projects List<String>', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final languageProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_Languages');
+
+    expect(
+        languageProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>,)'));
+    expect(languageProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>,)'));
+  });
+
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');

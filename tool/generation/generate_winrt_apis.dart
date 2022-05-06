@@ -28,7 +28,7 @@ void generateWinRTApis() {
 
     final classOutputFilename =
         stripAnsiUnicodeSuffix(interface.split('.').last);
-    final classOutputPath = 'lib/src/com/$classOutputFilename.dart';
+    final classOutputPath = 'lib/src/winrt/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
   }

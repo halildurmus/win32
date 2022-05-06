@@ -22,8 +22,8 @@ import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
-import '../winrt/winrt_helpers.dart';
-import 'IInspectable.dart';
+import '../winrt_helpers.dart';
+import '../com/IInspectable.dart';
 import 'IVectorView`1.dart';
 
 /// @nodoc

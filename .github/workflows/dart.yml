@@ -17,15 +17,28 @@ jobs:
       # Free config supports up to five concurrent jobs, so pick a sparse matrix
       # that tiles the space well.
       matrix:
+      
+      # Until Dart 2.17 ships, just test on the latest main build.
+
+        # include:
+        #   - os: windows-latest
+        #     sdk: main
+        #   - os: windows-2022
+        #     sdk: beta
+        #   - os: windows-2019
+        #     sdk: stable
+        #   - os: ubuntu-latest
+        #     sdk: stable
+
         include:
           - os: windows-latest
             sdk: main
           - os: windows-2022
-            sdk: beta
+            sdk: main
           - os: windows-2019
-            sdk: stable
+            sdk: main
           - os: ubuntu-latest
-            sdk: stable
+            sdk: main
 
     steps:
       - name: Fetch sources

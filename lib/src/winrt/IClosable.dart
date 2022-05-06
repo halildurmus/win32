@@ -1,4 +1,4 @@
-// IStringable.dart
+// IClosable.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -22,50 +22,36 @@ import '../structs.g.dart';
 import '../utils.dart';
 
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../winrt/winrt_helpers.dart';
+import '../winrt_helpers.dart';
 import '../types.dart';
 
-import 'IInspectable.dart';
+import '../extensions/hstring_array.dart';
+import 'IVectorView`1.dart';
+
+import '../com/IInspectable.dart';
 
 /// @nodoc
-const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
+const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IStringable extends IInspectable {
+class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IStringable(Pointer<COMObject> ptr) : super(ptr);
+  IClosable(Pointer<COMObject> ptr) : super(ptr);
 
-  String ToString() {
-    final retValuePtr = calloc<HSTRING>();
-
-    try {
-      final hr = ptr.ref.lpVtbl.value
+  void Close() => ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
                       HRESULT Function(
             Pointer,
-            Pointer<IntPtr>,
           )>>>()
           .value
           .asFunction<
               int Function(
             Pointer,
-            Pointer<IntPtr>,
           )>()(
         ptr.ref.lpVtbl,
-        retValuePtr,
       );
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.toDartString();
-      return retValue;
-    } finally {
-      WindowsDeleteString(retValuePtr.value);
-      free(retValuePtr);
-    }
-  }
 }

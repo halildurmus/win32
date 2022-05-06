@@ -21,8 +21,8 @@ import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
-import '../winrt/winrt_helpers.dart';
-import 'IInspectable.dart';
+import '../winrt_helpers.dart';
+import '../com/IInspectable.dart';
 
 /// @nodoc
 const IID_IVectorView = '{BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}';

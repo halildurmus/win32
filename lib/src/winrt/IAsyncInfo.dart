@@ -22,10 +22,13 @@ import '../structs.g.dart';
 import '../utils.dart';
 
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../winrt/winrt_helpers.dart';
+import '../winrt_helpers.dart';
 import '../types.dart';
 
-import 'IInspectable.dart';
+import '../extensions/hstring_array.dart';
+import 'IVectorView`1.dart';
+
+import '../com/IInspectable.dart';
 
 /// @nodoc
 const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';

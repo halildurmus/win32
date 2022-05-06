@@ -43,15 +43,3 @@ linter:
 
     # Unnecessary in most cases, but avoids accidental name clashes.
     unnecessary_this: false
-
-    # Lints coming in lints 2.0 that we can turn on now
-    # TODO: Remove this section when we update to Dart 2.17
-    depend_on_referenced_packages: true
-    null_check_on_nullable_type_parameter: true
-    no_leading_underscores_for_library_prefixes: true
-    no_leading_underscores_for_local_identifiers: true
-    prefer_interpolation_to_compose_strings: true
-    unnecessary_constructor_name: true
-    unnecessary_late: true
-    unnecessary_null_aware_assignments: true
-    unnecessary_nullable_for_final_variable_declarations: true

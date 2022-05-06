@@ -20,9 +20,9 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import '../winrt/winrt_constants.dart';
+import '../winrt_constants.dart';
 
-import 'IInspectable.dart';
+import '../com/IInspectable.dart';
 
 /// @nodoc
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';

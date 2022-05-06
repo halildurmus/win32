@@ -10,17 +10,17 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../api-ms-win-core-winrt-l1-1-0.dart';
-import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../com/IInspectable.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../types.dart';
-import '../utils.dart';
+import 'api-ms-win-core-winrt-l1-1-0.dart';
+import 'api-ms-win-core-winrt-string-l1-1-0.dart';
+import 'com/IInspectable.dart';
+import 'combase.dart';
+import 'constants.dart';
+import 'exceptions.dart';
+import 'guid.dart';
+import 'macros.dart';
+import 'ole32.dart';
+import 'types.dart';
+import 'utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.

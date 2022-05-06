@@ -7,6 +7,12 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   WinRTGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
+  bool get isVectorReturn =>
+      method.returnType.typeIdentifier.baseType ==
+          BaseType.GenericTypeModifier &&
+      method.returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ==
+          true;
+
   bool get isPointerCOMObjectReturn =>
       returnType.dartType == 'Pointer<COMObject>';
 
@@ -34,6 +40,26 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
 
   @override
   String get dartParams => nativeParams;
+
+  String vectorPropertyDeclaration() => '''
+    List<String> get $exposedMethodName {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.lpVtbl.value
+      .elementAt($vtableOffset)
+      .cast<Pointer<NativeFunction<$nativePrototype>>>()
+      .value
+      .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    try {
+      return IVectorView<String>(retValuePtr).toList();
+    } finally {
+      free(retValuePtr);
+    }
+  }
+''';
 
   String pointerCOMObjectPropertyDeclaration() => '''
     Pointer<COMObject> get $exposedMethodName {
@@ -76,6 +102,10 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
   @override
   String toString() {
     try {
+      if (isVectorReturn) {
+        return vectorPropertyDeclaration();
+      }
+
       if (isPointerCOMObjectReturn) {
         return pointerCOMObjectPropertyDeclaration();
       }

@@ -6,15 +6,14 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../com/IInspectable.dart';
+import '../com/IUserDataPathsStatics.dart';
 import '../combase.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../utils.dart';
-import '../winrt/winrt_helpers.dart';
-
-import 'IInspectable.dart';
-import 'IUserDataPathsStatics.dart';
+import '../winrt_helpers.dart';
 
 const _className = 'Windows.Storage.UserDataPaths';
 
