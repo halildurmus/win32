@@ -1,12 +1,4 @@
 include: package:lints/recommended.yaml
-
-analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
-
-  errors:
-    todo: ignore
     
 linter:
   rules:

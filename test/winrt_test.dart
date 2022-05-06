@@ -285,6 +285,23 @@ void main() {
         equals(BaseType.Int32));
   });
 
+  test('Calendar.Languages getter property is correct', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+    final method = winTypeDef.findMethod('get_Languages')!;
+
+    expect(method.returnType.typeIdentifier.baseType,
+        equals(BaseType.GenericTypeModifier));
+    expect(method.returnType.typeIdentifier.type?.name,
+        equals('Windows.Foundation.Collections.IVectorView`1'));
+    expect(method.returnType.typeIdentifier.type?.isClass, isTrue);
+    expect(method.isProperty, isTrue);
+    expect(method.isSetProperty, isFalse);
+    expect(method.isGetProperty, isTrue);
+    expect(method.parameters.length, equals(0));
+  });
+
   test('Property setter for a class type is correct', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
