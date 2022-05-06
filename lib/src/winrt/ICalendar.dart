@@ -14,7 +14,6 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../extensions/hstring_array.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -26,8 +25,10 @@ import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../winrt_helpers.dart';
 import '../types.dart';
 
-import '../com/IInspectable.dart';
+import '../extensions/hstring_array.dart';
 import 'IVectorView`1.dart';
+
+import '../com/IInspectable.dart';
 
 /// @nodoc
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';

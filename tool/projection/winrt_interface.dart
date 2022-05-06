@@ -92,13 +92,16 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   // IInspectable (as well as IUnknown, from which IInspectable itself
   // inherits).
   @override
-  String get rootHeader => "import 'IInspectable.dart';";
+  String get rootHeader => "import '../com/IInspectable.dart';";
 
   @override
   String get extraHeaders => """
     import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-    import '../winrt/winrt_helpers.dart';
+    import '../winrt_helpers.dart';
     import '../types.dart';
+
+    import '../extensions/hstring_array.dart';
+    import 'IVectorView`1.dart';
   """;
 
   @override

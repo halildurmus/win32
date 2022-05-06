@@ -25,6 +25,9 @@ import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../winrt_helpers.dart';
 import '../types.dart';
 
+import '../extensions/hstring_array.dart';
+import 'IVectorView`1.dart';
+
 import '../com/IInspectable.dart';
 
 /// @nodoc
