@@ -7,10 +7,8 @@ enum RegistryHive {
   allUsers,
   classesRoot,
   currentConfig,
-  performanceData
-}
+  performanceData;
 
-extension ConvertRegistryHiveToWin32 on RegistryHive {
   int get win32Value {
     switch (this) {
       case RegistryHive.localMachine:

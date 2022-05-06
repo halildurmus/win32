@@ -43,10 +43,8 @@ enum RegistryValueType {
   string,
 
   /// An unsupported registry data type.
-  unknown
-}
+  unknown;
 
-extension ConvertRegistryValueKindToWin32 on RegistryValueType {
   /// Return the Win32 value that represents the stored type.
   int get win32Value {
     switch (this) {
