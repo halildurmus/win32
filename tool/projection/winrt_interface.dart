@@ -65,32 +65,17 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     return projection;
   }
 
-  @override
-  int cacheVtableStart(TypeDef? type) {
-    if (type == null) {
-      return 0;
-    }
-    // WinRT types inherit from IInspectable
-    if (type.interfaces.isEmpty) {
-      return 6;
-    }
-    if (type.isInterface && type.interfaces.isNotEmpty) {
-      var sum = 0;
-
-      for (final interface in type.interfaces) {
-        sum += interface.methods.length + cacheVtableStart(interface);
-      }
-
-      return sum;
-    }
-    return 0;
-  }
-
   // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
   // parent), but all WinRT interfaces have a base type of IInspectable as far
   // as the COM vtable is concerned. They contain the functions of
   // IInspectable (as well as IUnknown, from which IInspectable itself
   // inherits).
+  //
+  // For more information, see the Interfaces section of the documentation here:
+  // https://docs.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system
+  @override
+  int cacheVtableStart(TypeDef? type) => 6;
+
   @override
   String get rootHeader => "import '../com/IInspectable.dart';";
 

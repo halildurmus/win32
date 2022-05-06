@@ -82,7 +82,8 @@ void main() {
     const testedTypes = <String, int>{
       'Windows.Globalization.ICalendar': 6,
       'Windows.Foundation.IAsyncInfo': 6,
-      'Windows.Foundation.IAsyncAction': 11
+      'Windows.Foundation.IAsyncAction': 6,
+      'Windows.Foundation.Collections.IPropertySet': 6
     };
 
     for (final type in testedTypes.keys) {
