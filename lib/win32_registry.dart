@@ -7,6 +7,21 @@
 /// This library provides support for querying and accessing the registry from
 /// Dart, with idiomatic classes and collections of objects that facilitate
 /// reading and writing values.
+///
+/// For example:
+///
+/// ```dart
+/// import 'package:win32_registry/win32_registry.dart';
+///
+/// void main() {
+///   final key = Registry.openPath(RegistryHive.localMachine,
+///       path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
+///   final buildNumber = key.getValueAsString('CurrentBuild');
+///   if (buildNumber != null) {
+///     print('Windows build number: $buildNumber');
+///   }
+/// }
+/// ```
 library win32_registry;
 
 export 'src/access_rights.dart';
