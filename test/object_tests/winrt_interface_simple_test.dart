@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a WinRT interface representation.
+/// Exhaustively test a WinRT interface representation without generics
 void main() {
   // .class interface public auto ansi abstract import windowsruntime Windows.Foundation.IAsyncInfo
   // {
