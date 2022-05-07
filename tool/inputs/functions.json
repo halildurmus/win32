@@ -962,6 +962,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateSolidBrush function creates a logical brush that has the specified solid color."
     },
+    "CreateStreamOnHGlobal": {
+        "prototype": "HRESULT CreateStreamOnHGlobal(\n  [in]  HGLOBAL  hGlobal,\n  [in]  BOOL     fDeleteOnRelease,\n  [out] LPSTREAM *ppstm\n);",
+        "dllLibrary": "ole32",
+        "comment": "The CreateStreamOnHGlobal function creates a stream object that uses an HGLOBAL memory handle to store the stream contents. This object is the OLE-provided implementation of the IStream interface."
+    },
     "CreateThread": {
         "prototype": "HANDLE CreateThread(\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  SIZE_T dwStackSize,\n  LPTHREAD_START_ROUTINE lpStartAddress,\n  LPVOID lpParameter,\n  DWORD dwCreationFlags,\n  LPDWORD lpThreadId\n);",
         "dllLibrary": "kernel32",
@@ -2186,6 +2191,11 @@
         "prototype": "BOOL GetHandleInformation(\n  HANDLE  hObject,\n  LPDWORD lpdwFlags\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves certain properties of an object handle."
+    },
+    "GetHGlobalFromStream": {
+        "prototype": "HRESULT GetHGlobalFromStream(\n  [in]  LPSTREAM pstm,\n  [out] HGLOBAL  *phglobal\n);",
+        "dllLibrary": "ole32",
+        "comment": "The GetHGlobalFromStream function retrieves the global memory handle to a stream that was created through a call to the CreateStreamOnHGlobal function."
     },
     "gethostbyaddr": {
         "prototype": "hostent *WSAAPI gethostbyaddr(\n   const char *addr,\n   int        len,\n   int        type\n);",
@@ -5573,6 +5583,12 @@
         "prototype": "BOOL ShellExecuteExW(\n  SHELLEXECUTEINFOW *pExecInfo\n);",
         "dllLibrary": "shell32",
         "comment": "Performs an operation on a specified file."
+    },
+    "SHCreateMemStream": {
+        "prototype": "IStream * SHCreateMemStream(\n  [in, optional] const BYTE *pInit,\n  [in]           UINT       cbInit\n);",
+        "dllLibrary": "shlwapi",
+        "comment": "Creates a memory stream using a similar process to CreateStreamOnHGlobal.",
+        "category": "shell32"
     },
     "SHEmptyRecycleBin": {
         "prototype": "SHSTDAPI SHEmptyRecycleBinW(\n  HWND    hwnd,\n  LPCWSTR pszRootPath,\n  DWORD   dwFlags\n);",

@@ -8621,6 +8621,23 @@ void main() {
         expect(CoWaitForMultipleObjects, isA<Function>());
       });
     }
+    test('Can instantiate CreateStreamOnHGlobal', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CreateStreamOnHGlobal = ole32.lookupFunction<
+          Int32 Function(IntPtr hGlobal, Int32 fDeleteOnRelease,
+              Pointer<Pointer<COMObject>> ppstm),
+          int Function(int hGlobal, int fDeleteOnRelease,
+              Pointer<Pointer<COMObject>> ppstm)>('CreateStreamOnHGlobal');
+      expect(CreateStreamOnHGlobal, isA<Function>());
+    });
+    test('Can instantiate GetHGlobalFromStream', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final GetHGlobalFromStream = ole32.lookupFunction<
+          Int32 Function(Pointer<COMObject> pstm, Pointer<IntPtr> phglobal),
+          int Function(Pointer<COMObject> pstm,
+              Pointer<IntPtr> phglobal)>('GetHGlobalFromStream');
+      expect(GetHGlobalFromStream, isA<Function>());
+    });
     test('Can instantiate IIDFromString', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final IIDFromString = ole32.lookupFunction<
@@ -11536,6 +11553,17 @@ void main() {
               int KeyType,
               int samDesired)>('SetupDiOpenDevRegKey');
       expect(SetupDiOpenDevRegKey, isA<Function>());
+    });
+  });
+
+  group('Test shlwapi functions', () {
+    test('Can instantiate SHCreateMemStream', () {
+      final shlwapi = DynamicLibrary.open('shlwapi.dll');
+      final SHCreateMemStream = shlwapi.lookupFunction<
+          Pointer<COMObject> Function(Pointer<Uint8> pInit, Uint32 cbInit),
+          Pointer<COMObject> Function(
+              Pointer<Uint8> pInit, int cbInit)>('SHCreateMemStream');
+      expect(SHCreateMemStream, isA<Function>());
     });
   });
 
