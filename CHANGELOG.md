@@ -1,3 +1,3 @@
-## 0.1.2
+## 1.0.0
 
-- Prerelease version.
+- First stable release.
