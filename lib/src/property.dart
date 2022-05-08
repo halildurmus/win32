@@ -34,8 +34,8 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int _setterToken;
 
   Property(
-      Scope scope,
-      int token,
+      super.scope,
+      super.token,
       this._parentToken,
       this.name,
       this._attributes,
@@ -45,8 +45,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       this.defaultValue,
       this._setterToken,
       this._getterToken,
-      this.otherMethodTokens)
-      : super(scope, token);
+      this.otherMethodTokens);
 
   /// Creates a property object from a provided token.
   factory Property.fromToken(Scope scope, int token) => using((Arena arena) {

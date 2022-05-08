@@ -86,7 +86,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
 
   static const IID = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
 
-  IMetaDataDispenserEx(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataDispenserEx(super.ptr);
 
   int SetOption(Pointer<GUID> optionId, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_SetOption_Native>>.fromAddress(

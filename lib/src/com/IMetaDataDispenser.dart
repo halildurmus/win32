@@ -40,7 +40,7 @@ class IMetaDataDispenser extends IUnknown {
 
   static const IID = '{809C652E-7396-11D2-9771-00A0C9B4D50C}';
 
-  IMetaDataDispenser(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataDispenser(super.ptr);
 
   int DefineScope(Pointer<GUID> rclsid, int dwCreateFlags, Pointer<GUID> riid,
           Pointer<Pointer> ppIUnk) =>

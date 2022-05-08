@@ -77,9 +77,15 @@ class Method extends TokenObject
   int _attributes;
   int _parentToken;
 
-  Method(Scope scope, int token, this._parentToken, this.name, this._attributes,
-      this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
-      : super(scope, token) {
+  Method(
+      super.scope,
+      super.token,
+      this._parentToken,
+      this.name,
+      this._attributes,
+      this.signatureBlob,
+      this.relativeVirtualAddress,
+      this.implFlags) {
     _parseParameterNames();
     _parseSignatureBlob();
   }

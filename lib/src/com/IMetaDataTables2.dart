@@ -5,7 +5,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import 'IMetaDataTables.dart';
 
@@ -29,7 +28,7 @@ class IMetaDataTables2 extends IMetaDataTables {
 
   static const IID = '{BADB5F70-58DA-43a9-A1C6-D74819F19B15}';
 
-  IMetaDataTables2(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataTables2(super.ptr);
 
   int GetMetaDataStorage(Pointer<Pointer> ppvMd, Pointer<Uint32> pcbMd) =>
       Pointer<NativeFunction<_GetMetaDataStorage_Native>>.fromAddress(

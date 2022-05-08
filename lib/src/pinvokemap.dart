@@ -90,9 +90,8 @@ class PinvokeMap extends TokenObject {
 
   final int _attributes;
 
-  const PinvokeMap(Scope scope, int token, this._attributes, this.importName,
-      this.importDllToken, this.moduleName)
-      : super(scope, token);
+  const PinvokeMap(super.scope, super.token, this._attributes, this.importName,
+      this.importDllToken, this.moduleName);
 
   /// Creates a P/Invoke method representation object from a provided token.
   factory PinvokeMap.fromToken(Scope scope, int token) => using((Arena arena) {

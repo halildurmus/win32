@@ -15,7 +15,7 @@ import 'scope.dart';
 class ModuleRef extends TokenObject with CustomAttributesMixin {
   final String name;
 
-  ModuleRef(Scope scope, int token, this.name) : super(scope, token);
+  ModuleRef(super.scope, super.token, this.name);
 
   /// Creates a module object from a provided token.
   factory ModuleRef.fromToken(Scope scope, int token) => using((Arena arena) {

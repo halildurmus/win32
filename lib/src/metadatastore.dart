@@ -15,6 +15,7 @@ import 'dart:isolate';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'com/IMetaDataAssemblyImport.dart';
 import 'com/IMetaDataDispenser.dart';
 import 'com/IMetaDataImport2.dart';
 import 'com/constants.dart';
@@ -104,17 +105,20 @@ class MetadataStore {
       final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<COMObject>();
       final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
+      final pAssemblyImport = calloc<COMObject>();
+      final IID_IMetaDataAssemblyImport =
+          convertToIID(IMetaDataAssemblyImport.IID);
 
       try {
-        final hr = dispenser.OpenScope(
+        var hr = dispenser.OpenScope(
             szFile, CorOpenFlags.ofRead, IID_IMetaDataImport2, pReader.cast());
-        if (FAILED(hr)) {
-          throw WindowsException(hr);
-        } else {
-          final scope = Scope(IMetaDataImport2(pReader));
-          cache[filename] = scope;
-          return scope;
-        }
+        if (FAILED(hr)) throw WindowsException(hr);
+        hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
+            IID_IMetaDataAssemblyImport, pAssemblyImport.cast());
+        final scope = Scope(IMetaDataImport2(pReader),
+            IMetaDataAssemblyImport(pAssemblyImport));
+        cache[filename] = scope;
+        return scope;
       } finally {
         free(szFile);
         free(IID_IMetaDataImport2);

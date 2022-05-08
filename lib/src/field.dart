@@ -59,9 +59,16 @@ class Field extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final int _parentToken;
 
-  Field(Scope scope, int token, this._parentToken, this.name, this.value,
-      this.typeIdentifier, this.fieldType, this._attributes, this.signatureBlob)
-      : super(scope, token);
+  Field(
+      super.scope,
+      super.token,
+      this._parentToken,
+      this.name,
+      this.value,
+      this.typeIdentifier,
+      this.fieldType,
+      this._attributes,
+      this.signatureBlob);
 
   /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) => using((Arena arena) {

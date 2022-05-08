@@ -281,7 +281,8 @@ void main() {
         equals(BaseType.GenericTypeModifier));
     expect(method.returnType.typeIdentifier.type?.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
-    expect(method.returnType.typeIdentifier.type?.isClass, isTrue);
+    expect(method.returnType.typeIdentifier.type?.isClass, isFalse);
+    expect(method.returnType.typeIdentifier.type?.isInterface, isTrue);
     expect(method.isProperty, isTrue);
     expect(method.isSetProperty, isFalse);
     expect(method.isGetProperty, isTrue);

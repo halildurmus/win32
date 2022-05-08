@@ -7,7 +7,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'assemblyref.dart';
 import 'base.dart';
+import 'com/IMetaDataAssemblyImport.dart';
 import 'com/IMetaDataImport2.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
@@ -35,15 +37,17 @@ class Scope {
   late final String guid;
   late final String name;
   final IMetaDataImport2 reader;
+  final IMetaDataAssemblyImport assemblyImport;
 
   final _enums = <TypeDef>[];
   final _modules = <ModuleRef>[];
+  final _assemblies = <AssemblyRef>[];
   final _delegates = <TypeDef>[];
   final _userStrings = <String>[];
   final _typedefsByName = <String, List<TypeDef>>{};
   final _typedefs = <int, TypeDef>{};
 
-  Scope(this.reader) {
+  Scope(this.reader, this.assemblyImport) {
     using((Arena arena) {
       final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
       final pchName = arena<ULONG>();
@@ -150,6 +154,28 @@ class Scope {
     }
 
     return _modules;
+  }
+
+  List<AssemblyRef> get assemblyRefs {
+    if (_assemblies.isEmpty) {
+      using((Arena arena) {
+        final phEnum = arena<HCORENUM>();
+        final rAssemblyRefs = arena<mdModuleRef>();
+        final pcTokens = arena<ULONG>();
+
+        var hr =
+            assemblyImport.EnumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+        while (hr == S_OK) {
+          final assemblyToken = rAssemblyRefs.value;
+          _assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
+          hr = assemblyImport.EnumAssemblyRefs(
+              phEnum, rAssemblyRefs, 1, pcTokens);
+        }
+        assemblyImport.CloseEnum(phEnum.value);
+      });
+    }
+
+    return _assemblies;
   }
 
   /// Get an enumerated list of all hard-coded strings in this scope.

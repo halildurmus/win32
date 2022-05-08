@@ -27,9 +27,8 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final int _methodToken;
 
-  Parameter(Scope scope, int token, this._methodToken, this.sequence,
-      this._attributes, this.typeIdentifier, this.name, this.signatureBlob)
-      : super(scope, token);
+  Parameter(super.scope, super.token, this._methodToken, this.sequence,
+      this._attributes, this.typeIdentifier, this.name, this.signatureBlob);
 
   /// Creates a parameter object from a provided token.
   factory Parameter.fromToken(Scope scope, int token) => using((Arena arena) {

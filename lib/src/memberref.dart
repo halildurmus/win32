@@ -18,11 +18,12 @@ import 'type_aliases.dart';
 /// defined in another module or assembly. It represents either a `MethodRef` or
 /// a `FieldRef`.
 class MemberRef extends TokenObject {
+  final int referencedToken;
   final String name;
   final Uint8List signatureBlob;
 
-  const MemberRef(Scope scope, int token, this.name, this.signatureBlob)
-      : super(scope, token);
+  const MemberRef(super.scope, super.token, this.referencedToken, this.name,
+      this.signatureBlob);
 
   /// Creates a module object from a provided token.
   factory MemberRef.fromToken(Scope scope, int token) => using((Arena arena) {
@@ -37,7 +38,7 @@ class MemberRef extends TokenObject {
             MAX_STRING_SIZE, pchMember, ppvSigBlob, pcbSigBlob);
 
         if (SUCCEEDED(hr)) {
-          return MemberRef(scope, ptk.value, szMember.toDartString(),
+          return MemberRef(scope, token, ptk.value, szMember.toDartString(),
               ppvSigBlob.value.asTypedList(pcbSigBlob.value));
         } else {
           throw WindowsException(hr);

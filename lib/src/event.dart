@@ -29,8 +29,8 @@ class Event extends TokenObject with CustomAttributesMixin {
   final int _removeOnToken;
 
   Event(
-      Scope scope,
-      int token,
+      super.scope,
+      super.token,
       this._parentToken,
       this.name,
       this._attributes,
@@ -38,8 +38,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       this._addOnToken,
       this._removeOnToken,
       this._fireToken,
-      this.otherMethodTokens)
-      : super(scope, token);
+      this.otherMethodTokens);
 
   /// Creates an event object from a provided token.
   factory Event.fromToken(Scope scope, int token) => using((Arena arena) {

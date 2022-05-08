@@ -5,7 +5,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
 import 'IMetaDataImport.dart';
 
@@ -115,7 +114,7 @@ class IMetaDataImport2 extends IMetaDataImport {
 
   static const IID = '{FCE5EFA0-8BBA-4f8E-A036-8F2022B08466}';
 
-  IMetaDataImport2(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataImport2(super.ptr);
 
   int EnumGenericParams(
           Pointer<IntPtr> phEnum,
