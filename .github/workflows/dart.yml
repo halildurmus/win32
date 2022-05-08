@@ -15,7 +15,8 @@ jobs:
       fail-fast: false
 
       matrix:
-        sdk: [stable, beta, dev]
+        # sdk: [stable, beta, dev]
+        sdk: [dev]
 
     steps:
       - name: Fetch sources
@@ -38,26 +39,26 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-warnings
 
-      # For non-stable builds, we just do tests
+      # For non-dev builds, we just do tests
       - name: Run tests
-        if: ${{ matrix.sdk != 'stable' }}
+        if: ${{ matrix.sdk != 'dev' }}
         run: dart test
 
-      # For stable, we generate and upload code coverage along with tests 
+      # For dev, we generate and upload code coverage along with tests 
       - name: Add code coverage package
-        if: ${{ matrix.sdk == 'stable' }} 
+        if: ${{ matrix.sdk == 'dev' }} 
         run: dart pub global activate coverage
 
       - name: Generate code coverage
-        if: ${{ matrix.sdk == 'stable' }} 
+        if: ${{ matrix.sdk == 'dev' }} 
         run: dart test --coverage=coverage
 
       - name: Convert code coverage into lcov file
-        if: ${{ matrix.sdk == 'stable' }} 
+        if: ${{ matrix.sdk == 'dev' }} 
         run: dart pub global run coverage:format_coverage --lcov --check-ignore --in=coverage --out=lcov.info --packages=.packages --report-on=lib
 
       - name: Upload code coverage
-        if: ${{ matrix.sdk == 'stable' }} 
+        if: ${{ matrix.sdk == 'dev' }} 
         uses: codecov/codecov-action@v2.1.0
         with:
           files: lcov.info
