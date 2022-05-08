@@ -18,11 +18,12 @@ import 'typedef.dart';
 class CustomAttribute extends TokenObject {
   final int attributeType;
   final int modifiedObjectToken;
-  final String name;
   final Uint8List signatureBlob;
+  final MemberRef memberRef;
+  final TypeDef constructor;
 
-  const CustomAttribute(super.scope, super.token, this.name,
-      this.modifiedObjectToken, this.attributeType, this.signatureBlob);
+  const CustomAttribute(super.scope, super.token, this.modifiedObjectToken,
+      this.memberRef, this.constructor, this.attributeType, this.signatureBlob);
 
   /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) =>
@@ -36,14 +37,23 @@ class CustomAttribute extends TokenObject {
         final hr = reader.GetCustomAttributeProps(
             token, ptkObj, ptkType, ppBlob, pcbBlob);
         if (SUCCEEDED(hr)) {
-          final member = MemberRef.fromToken(scope, ptkType.value);
-          final memberParent = TypeDef.fromToken(scope, member.referencedToken);
-          return CustomAttribute(scope, token, memberParent.name, ptkObj.value,
-              ptkType.value, ppBlob.value.asTypedList(pcbBlob.value));
+          final memberRef = MemberRef.fromToken(scope, ptkType.value);
+          final constructorTypeDef =
+              TypeDef.fromToken(scope, memberRef.referencedToken);
+          return CustomAttribute(
+              scope,
+              token,
+              ptkObj.value,
+              memberRef,
+              constructorTypeDef,
+              ptkType.value,
+              ppBlob.value.asTypedList(pcbBlob.value));
         } else {
           throw WindowsException(hr);
         }
       });
+
+  String get name => constructor.name;
 
   @override
   String toString() => name;

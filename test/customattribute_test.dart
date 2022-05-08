@@ -34,8 +34,28 @@ void main() {
     expect(found!.length, equals(1));
 
     final deprecated = found.first;
-    // expect(deprecated.attributeType, equals(1));
     expect(
         deprecated.signatureBlob.sublist(0, 2), equals([0x01, 0x00])); // prolog
+
+    expect(deprecated.token,
+        equals(0x0C000F1E)); // custom attribute DeprecatedAttribute
+    expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
+
+    final ref = MemberRef.fromToken(deprecated.scope, 0x0A000015);
+    // expect(ref.referencedToken, equals(0x060002AA)); // method .ctor
+    // actually 0x0100069E // typeRef to Windows.Foundation.DeprecatedAttribute
+
+    final sig = UncompressedData.fromBlob(ref.signatureBlob);
+    expect(sig.data, equals(0x20));
+    expect(sig.dataLength, equals(1));
+    final sig2 = UncompressedData.fromBlob(ref.signatureBlob.sublist(1));
+    expect(sig2.data, equals(0x04));
+    expect(sig2.dataLength, equals(1));
+    // what is signature 9343?
+
+    expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
+    expect(deprecated.memberRef.name, equals('.ctor'));
+    expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
+    expect(deprecated.constructor.methods.length, equals(3));
   });
 }
