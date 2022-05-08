@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
+import 'com/IMetaDataAssemblyImport.dart';
 import 'com/IMetaDataImport2.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
@@ -35,6 +36,7 @@ class Scope {
   late final String guid;
   late final String name;
   final IMetaDataImport2 reader;
+  final IMetaDataAssemblyImport assemblyImport;
 
   final _enums = <TypeDef>[];
   final _modules = <ModuleRef>[];
@@ -43,7 +45,7 @@ class Scope {
   final _typedefsByName = <String, List<TypeDef>>{};
   final _typedefs = <int, TypeDef>{};
 
-  Scope(this.reader) {
+  Scope(this.reader, this.assemblyImport) {
     using((Arena arena) {
       final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
       final pchName = arena<ULONG>();

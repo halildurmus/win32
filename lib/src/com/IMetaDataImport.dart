@@ -794,7 +794,7 @@ class IMetaDataImport extends IUnknown {
 
   static const IID = '{7DAC8207-D3AE-4C75-9B67-92801A497D44}';
 
-  IMetaDataImport(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataImport(super.ptr);
 
   int CloseEnum(int hEnum) =>
       Pointer<NativeFunction<_CloseEnum_Native>>.fromAddress(

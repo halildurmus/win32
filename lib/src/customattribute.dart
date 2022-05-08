@@ -21,9 +21,8 @@ class CustomAttribute extends TokenObject {
   final String name;
   final Uint8List signatureBlob;
 
-  const CustomAttribute(Scope scope, int token, this.name,
-      this.modifiedObjectToken, this.attributeType, this.signatureBlob)
-      : super(scope, token);
+  const CustomAttribute(super.scope, super.token, this.name,
+      this.modifiedObjectToken, this.attributeType, this.signatureBlob);
 
   /// Creates a custom attribute object from a provided token.
   factory CustomAttribute.fromToken(Scope scope, int token) =>
@@ -38,7 +37,7 @@ class CustomAttribute extends TokenObject {
             token, ptkObj, ptkType, ppBlob, pcbBlob);
         if (SUCCEEDED(hr)) {
           final member = MemberRef.fromToken(scope, ptkType.value);
-          final memberParent = TypeDef.fromToken(scope, member.token);
+          final memberParent = TypeDef.fromToken(scope, member.referencedToken);
           return CustomAttribute(scope, token, memberParent.name, ptkObj.value,
               ptkType.value, ppBlob.value.asTypedList(pcbBlob.value));
         } else {

@@ -66,9 +66,8 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   final _constraints = <GenericParamConstraint>[];
   final int _parentToken;
 
-  GenericParam(Scope scope, int token, this.sequence, this._attributes,
-      this._parentToken, this.name)
-      : super(scope, token);
+  GenericParam(super.scope, super.token, this.sequence, this._attributes,
+      this._parentToken, this.name);
 
   /// Creates a generic parameter object from a provided token.
   factory GenericParam.fromToken(Scope scope, int token) =>

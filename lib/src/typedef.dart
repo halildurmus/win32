@@ -7,11 +7,13 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'assemblyref.dart';
 import 'base.dart';
 import 'classlayout.dart';
 import 'com/constants.dart';
 import 'event.dart';
 import 'field.dart';
+import 'metadatastore.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
@@ -262,8 +264,35 @@ class TypeDef extends TokenObject
                 scope, resolutionScopeToken, typeRefToken, typeName);
           }
 
-          // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
-          // OK, so we'll just return the type name.
+          // Is it an AssemblyRef that is not part of .NET? If so, we need to
+          // load the scope that contains it. Note that we are currently
+          // ignoring:
+          //
+          // (i) .NET types, since they are intrinsics like System.ValueType.
+          // They're also not loadable with getScopeForType, but that's moot;
+          //
+          // (ii) The Windows.Win32.Interop metadata file, which is shipped as
+          // part of the microsoft/win32metadata project. This is fixable if we
+          // distribute it with winmd or find another approach to locating it.
+          if (resolutionScopeToken & 0xFF000000 ==
+              CorTokenType.mdtAssemblyRef) {
+            final assemblyRef =
+                AssemblyRef.fromToken(scope, resolutionScopeToken);
+            if (assemblyRef.name != 'netstandard' && // .NET
+                assemblyRef.name != 'mscorlib' && // .NET Framework
+                assemblyRef.name != 'Windows.Win32.Interop') {
+              final newScope = MetadataStore.getScopeForType(typeName);
+              final typeDef = newScope.findTypeDef(typeName);
+              if (typeDef == null) {
+                throw WinmdException(
+                    'Can\'t find type $typeName in the ${newScope.name} scope.');
+              }
+
+              return typeDef;
+            }
+          }
+
+          // It might be a ModuleRef, so we'll just return the type name.
           return TypeDef(scope, 0, typeName);
         } else {
           throw WindowsException(hr);

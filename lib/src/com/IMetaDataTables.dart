@@ -133,7 +133,7 @@ class IMetaDataTables extends IUnknown {
 
   static const IID = '{D8F579AB-402D-4B8E-82D9-5D63B1065C68}';
 
-  IMetaDataTables(Pointer<COMObject> ptr) : super(ptr);
+  IMetaDataTables(super.ptr);
 
   int GetStringHeapSize(Pointer<Uint32> pcbStrings) =>
       Pointer<NativeFunction<_GetStringHeapSize_Native>>.fromAddress(
