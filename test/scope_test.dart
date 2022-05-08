@@ -11,7 +11,7 @@ void main() {
 
   test('Scope version string returns expected result', () {
     final scope = MetadataStore.getWin32Scope();
-    expect(scope.versionNumber, equals('v4.0.30319'));
+    expect(scope.version, equals('v4.0.30319'));
   });
 
   test('Scope toString() is as expected', () {

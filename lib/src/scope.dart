@@ -223,7 +223,7 @@ class Scope {
 
   PEKind get executableKind => PEKind(reader);
 
-  String get versionNumber => using((Arena arena) {
+  String get version => using((Arena arena) {
         final pwzBuf = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
         final pccBufSize = arena<DWORD>();
 
