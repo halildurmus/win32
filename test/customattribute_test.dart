@@ -57,5 +57,5 @@ void main() {
     expect(deprecated.memberRef.name, equals('.ctor'));
     expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
     expect(deprecated.constructor.methods.length, equals(3));
-  });
+  }, skip: 'Still experimenting.');
 }
