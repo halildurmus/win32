@@ -25,7 +25,7 @@ void main() {
         contains('Windows.Foundation.Metadata.DeprecatedAttribute'));
   });
 
-  test('Custom Attribute has a type', () {
+  test('Custom Attribute constructor can be found', () {
     final mc = MetadataStore.getMetadataForType('Windows.Media.MediaControl');
 
     final found = mc?.customAttributes
@@ -37,6 +37,8 @@ void main() {
     expect(
         deprecated.signatureBlob.sublist(0, 2), equals([0x01, 0x00])); // prolog
 
+    // These numbers will vary from version to version of Windows; they're here
+    // just for experimentation.
     expect(deprecated.token,
         equals(0x0C000F1E)); // custom attribute DeprecatedAttribute
     expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
