@@ -5,6 +5,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/constants.dart';
+import 'enums.dart';
 import 'genericparamconstraint.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
@@ -99,11 +100,12 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   /// [Method]. You can use the [TokenObject.tokenType] property to identify the
   /// parent type.
   TokenObject get parent {
-    if (_parentToken & 0xFF000000 == CorTokenType.mdtTypeDef) {
+    final tokenType = TokenType.fromToken(_parentToken);
+    if (tokenType == TokenType.TypeDef) {
       return TypeDef.fromToken(scope, _parentToken);
     }
 
-    if (_parentToken & 0xFF000000 == CorTokenType.mdtMethodDef) {
+    if (tokenType == TokenType.MethodDef) {
       return Method.fromToken(scope, _parentToken);
     }
 

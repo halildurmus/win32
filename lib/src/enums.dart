@@ -1,5 +1,10 @@
 // Enumerations used for returning or storing data.
 
+import 'package:win32/win32.dart';
+
+import '../winmd.dart';
+import 'com/constants.dart';
+
 /// Specifies a common language runtime Type, a type modifier, or information
 /// about a type in a metadata type signature.
 enum BaseType {
@@ -195,5 +200,66 @@ enum TokenType {
   /// A string that is passed to an MSIL instruction.
   String,
   Name,
-  BaseType
+  BaseType;
+
+  factory TokenType.fromToken(int token) {
+    /// Returns the type of the token.
+    switch (token & 0xFF000000) {
+      case CorTokenType.mdtModule:
+        return TokenType.Module;
+      case CorTokenType.mdtTypeRef:
+        return TokenType.TypeRef;
+      case CorTokenType.mdtTypeDef:
+        return TokenType.TypeDef;
+      case CorTokenType.mdtFieldDef:
+        return TokenType.FieldDef;
+      case CorTokenType.mdtMethodDef:
+        return TokenType.MethodDef;
+      case CorTokenType.mdtParamDef:
+        return TokenType.ParamDef;
+      case CorTokenType.mdtInterfaceImpl:
+        return TokenType.InterfaceImpl;
+      case CorTokenType.mdtMemberRef:
+        return TokenType.MemberRef;
+      case CorTokenType.mdtCustomAttribute:
+        return TokenType.CustomAttribute;
+      case CorTokenType.mdtPermission:
+        return TokenType.Permission;
+      case CorTokenType.mdtSignature:
+        return TokenType.Signature;
+      case CorTokenType.mdtEvent:
+        return TokenType.Event;
+      case CorTokenType.mdtProperty:
+        return TokenType.Property;
+      case CorTokenType.mdtModuleRef:
+        return TokenType.ModuleRef;
+      case CorTokenType.mdtTypeSpec:
+        return TokenType.TypeSpec;
+      case CorTokenType.mdtAssembly:
+        return TokenType.Assembly;
+      case CorTokenType.mdtAssemblyRef:
+        return TokenType.AssemblyRef;
+      case CorTokenType.mdtFile:
+        return TokenType.File;
+      case CorTokenType.mdtExportedType:
+        return TokenType.ExportedType;
+      case CorTokenType.mdtManifestResource:
+        return TokenType.ManifestResource;
+      case CorTokenType.mdtGenericParam:
+        return TokenType.GenericParam;
+      case CorTokenType.mdtMethodSpec:
+        return TokenType.MethodSpec;
+      case CorTokenType.mdtGenericParamConstraint:
+        return TokenType.GenericParamConstraint;
+      case CorTokenType.mdtString:
+        return TokenType.String;
+      case CorTokenType.mdtName:
+        return TokenType.Name;
+      case CorTokenType.mdtBaseType:
+        return TokenType.BaseType;
+      default:
+        throw WinmdException(
+            'Unrecognized token type ${(token & 0xFF000000).toHexString(32)}');
+    }
+  }
 }

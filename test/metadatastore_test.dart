@@ -71,7 +71,6 @@ void main() {
         throwsA(isA<WindowsException>()));
   });
 
-  // TODO: We could make this work, rather than throwing an exception...
   test('Appropriate response to search for namespace that is not a type', () {
     expect(() => MetadataStore.getScopeForType('Windows.Foundation'),
         throwsA(isA<WindowsException>()));

@@ -11,6 +11,7 @@ import 'assemblyref.dart';
 import 'base.dart';
 import 'classlayout.dart';
 import 'com/constants.dart';
+import 'enums.dart';
 import 'event.dart';
 import 'field.dart';
 import 'metadatastore.dart';
@@ -127,12 +128,12 @@ class TypeDef extends TokenObject
 
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
-    switch (token & 0xFF000000) {
-      case CorTokenType.mdtTypeRef:
+    switch (TokenType.fromToken(token)) {
+      case TokenType.TypeRef:
         return TypeDef.fromTypeRefToken(scope, token);
-      case CorTokenType.mdtTypeDef:
+      case TokenType.TypeDef:
         return TypeDef.fromTypeDefToken(scope, token);
-      case CorTokenType.mdtTypeSpec:
+      case TokenType.TypeSpec:
         return TypeDef.fromTypeSpecToken(scope, token);
       default:
         throw WinmdException('Unrecognized token ${token.toHexString(32)}');
@@ -259,7 +260,7 @@ class TypeDef extends TokenObject
 
           // Is it a nested type? If so, we find a type in the parent type that
           // matches its name, if one exists (which it presumably should).
-          if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtTypeRef) {
+          if (TokenType.fromToken(resolutionScopeToken) == TokenType.TypeRef) {
             return _resolveNestedType(
                 scope, resolutionScopeToken, typeRefToken, typeName);
           }
@@ -274,8 +275,8 @@ class TypeDef extends TokenObject
           // (ii) The Windows.Win32.Interop metadata file, which is shipped as
           // part of the microsoft/win32metadata project. This is fixable if we
           // distribute it with winmd or find another approach to locating it.
-          if (resolutionScopeToken & 0xFF000000 ==
-              CorTokenType.mdtAssemblyRef) {
+          if (TokenType.fromToken(resolutionScopeToken) ==
+              TokenType.AssemblyRef) {
             final assemblyRef =
                 AssemblyRef.fromToken(scope, resolutionScopeToken);
             if (assemblyRef.name != 'netstandard' && // .NET

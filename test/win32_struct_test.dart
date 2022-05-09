@@ -155,7 +155,6 @@ void main() {
   });
 
   test('Can distinguish global tokens', () {
-    // TODO: Find an example of a global token
     final scope = MetadataStore.getWin32Scope();
     final struct = scope.findTypeDef('Windows.Win32.System.Kernel.SLIST_HEADER',
         preferredArchitecture: PreferredArchitecture.x64);

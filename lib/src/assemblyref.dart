@@ -19,8 +19,9 @@ import 'scope.dart';
 /// AssemblyRef entry.
 class AssemblyRef extends TokenObject {
   final String name;
+  final String version;
 
-  const AssemblyRef(super.scope, super.token, this.name);
+  const AssemblyRef(super.scope, super.token, this.name, this.version);
 
   /// Creates a assembly ref object from a provided token.
   factory AssemblyRef.fromToken(Scope scope, int token) => using((Arena arena) {
@@ -46,7 +47,12 @@ class AssemblyRef extends TokenObject {
             pdwAssemblyRefFlags);
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return AssemblyRef(scope, token, szName.toDartString());
+        final versionString = '${pMetaData.ref.usMajorVersion.toString()}.'
+            '${pMetaData.ref.usMinorVersion.toString()}.'
+            '${pMetaData.ref.usBuildNumber.toString()}.'
+            '${pMetaData.ref.usRevisionNumber.toString()}';
+
+        return AssemblyRef(scope, token, szName.toDartString(), versionString);
       });
 
   @override

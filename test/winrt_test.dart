@@ -16,7 +16,7 @@ void main() {
   test('Scope version string returns expected result', () {
     final scope =
         MetadataStore.getScopeForType('Windows.Globalization.Calendar');
-    expect(scope.versionNumber, startsWith('WindowsRuntime'));
+    expect(scope.version, startsWith('WindowsRuntime'));
   });
 
   test('Scope modules contain expected user strings', () {
