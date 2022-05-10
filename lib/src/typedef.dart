@@ -8,7 +8,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'assemblyref.dart';
-import 'base.dart';
 import 'classlayout.dart';
 import 'com/constants.dart';
 import 'enums.dart';
@@ -21,6 +20,7 @@ import 'mixins/genericparams_mixin.dart';
 import 'mixins/supportedarchitectures_mixin.dart';
 import 'property.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils/exception.dart';

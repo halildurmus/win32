@@ -7,9 +7,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'base.dart';
 import 'com/structs.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 
 /// An assembly reference.
 ///

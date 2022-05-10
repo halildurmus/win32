@@ -49,7 +49,6 @@
 
 library winmd;
 
-export 'src/base.dart';
 export 'src/classlayout.dart';
 export 'src/customattribute.dart';
 export 'src/enums.dart';
@@ -70,6 +69,7 @@ export 'src/pekind.dart';
 export 'src/pinvokemap.dart';
 export 'src/property.dart';
 export 'src/scope.dart';
+export 'src/tokenObject.dart';
 export 'src/type_aliases.dart';
 export 'src/typedef.dart';
 export 'src/typeidentifier.dart';

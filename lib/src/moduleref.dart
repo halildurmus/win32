@@ -7,9 +7,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'base.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 
 /// A module reference.
 class ModuleRef extends TokenObject with CustomAttributesMixin {

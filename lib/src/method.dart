@@ -8,7 +8,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'base.dart';
 import 'com/constants.dart';
 import 'enums.dart';
 import 'methodimpls.dart';
@@ -19,6 +18,7 @@ import 'moduleref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';

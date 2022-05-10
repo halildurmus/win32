@@ -3,10 +3,10 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'base.dart';
 import 'genericparam.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 

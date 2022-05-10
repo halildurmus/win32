@@ -8,11 +8,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'assemblyref.dart';
-import 'base.dart';
 import 'com/IMetaDataAssemblyImport.dart';
 import 'com/IMetaDataImport2.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
+import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';

@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '../base.dart';
 import '../customattribute.dart';
+import '../tokenObject.dart';
 import '../type_aliases.dart';
 
 /// Represents an object that has custom (named) attributes associated with it.

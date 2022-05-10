@@ -8,9 +8,9 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'base.dart';
 import 'memberref.dart';
 import 'scope.dart';
+import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 
