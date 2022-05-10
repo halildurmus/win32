@@ -176,9 +176,27 @@ enum TrustLevel {
 }
 
 extension IInspectableExtension on IInspectable {
-  // TODO: Add iids property when IVectorView`1 work lands.
+  /// Returns the interface IIDs that are implemented by the current Windows
+  /// Runtime class.
+  ///
+  /// The `IUnknown` and `IInspectable` interfaces are excluded.
   List<String> get iids {
-    throw UnimplementedError();
+    final pIIDCount = calloc<Uint32>();
+    final pIIDs = calloc<Pointer<GUID>>();
+
+    try {
+      final hr = GetIids(pIIDCount, pIIDs);
+      if (SUCCEEDED(hr)) {
+        return [
+          for (var i = 0; i < pIIDCount.value; i++) pIIDs.value[i].toString()
+        ];
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(pIIDCount);
+      free(pIIDs);
+    }
   }
 
   /// Gets the fully qualified name of the current Windows Runtime object.
