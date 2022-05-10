@@ -13,6 +13,8 @@ import 'scope.dart';
 import 'tokenObject.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
+import 'typeidentifier.dart';
+import 'utils/typetuple.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
@@ -21,8 +23,9 @@ class CustomAttribute extends TokenObject {
   final Uint8List signatureBlob;
   final MemberRef memberRef;
   final TypeDef constructor;
+  final List<TypeIdentifier> _parameterTypes = <TypeIdentifier>[];
 
-  const CustomAttribute(super.scope, super.token, this.modifiedObjectToken,
+  CustomAttribute(super.scope, super.token, this.modifiedObjectToken,
       this.memberRef, this.constructor, this.attributeType, this.signatureBlob);
 
   /// Creates a custom attribute object from a provided token.
@@ -58,6 +61,33 @@ class CustomAttribute extends TokenObject {
   @override
   String toString() => name;
 
-  // TODO: Attributes can have types and constructors (e.g.
-  // Windows.Foundation.Metadata.DeprecatedAttribute)
+  List<TypeIdentifier> get parameterTypes {
+    final typeSignatureBlob = memberRef.signatureBlob;
+    if (_parameterTypes.isEmpty) {
+      // Parse through the signature blob, and map each recovered
+      // type to the corresponding parameter.
+      var blobPtr = 1; // skip prolog
+      final paramCount = typeSignatureBlob.elementAt(blobPtr++);
+
+      var paramsIndex = 0;
+      while (paramsIndex < paramCount + 1) {
+        final runtimeType =
+            TypeTuple.fromSignature(typeSignatureBlob.sublist(blobPtr), scope);
+        blobPtr += runtimeType.offsetLength;
+
+        // TODO: Deal with arrays. Code can be found in method.dart.
+
+        // if (runtimeType.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
+        //   blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
+        //   paramsIndex++; //we've added two parameters here
+        // } else {
+        _parameterTypes.add(runtimeType.typeIdentifier);
+        // }
+        paramsIndex++;
+      }
+      _parameterTypes.removeAt(0); // throw away return type
+    }
+
+    return _parameterTypes;
+  }
 }

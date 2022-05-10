@@ -44,20 +44,25 @@ void main() {
     expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
 
     final ref = MemberRef.fromToken(deprecated.scope, 0x0A000015);
-    // expect(ref.referencedToken, equals(0x060002AA)); // method .ctor
-    // actually 0x0100069E // typeRef to Windows.Foundation.DeprecatedAttribute
+    expect(
+        ref.referencedToken,
+        equals(
+            0x0100069E)); // typeRef to Windows.Foundation.Metadata.DeprecatedAttribute
 
-    final sig = UncompressedData.fromBlob(ref.signatureBlob);
-    expect(sig.data, equals(0x20));
-    expect(sig.dataLength, equals(1));
-    final sig2 = UncompressedData.fromBlob(ref.signatureBlob.sublist(1));
-    expect(sig2.data, equals(0x04));
-    expect(sig2.dataLength, equals(1));
-    // what is signature 9343?
+    expect(ref.signatureBlob.length, equals(9));
+    expect(ref.signatureBlob.toList(),
+        equals([0x20, 0x04, 0x01, 0x0e, 0x11, 0x9a, 0x75, 0x09, 0x0e]));
+
+    expect(deprecated.parameterTypes.length, equals(4));
+    expect(deprecated.parameterTypes[0].baseType, equals(BaseType.String));
+    expect(deprecated.parameterTypes[1].baseType,
+        equals(BaseType.ValueTypeModifier));
+    expect(deprecated.parameterTypes[2].baseType, equals(BaseType.Uint32));
+    expect(deprecated.parameterTypes[3].baseType, equals(BaseType.String));
 
     expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
     expect(deprecated.memberRef.name, equals('.ctor'));
     expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
     expect(deprecated.constructor.methods.length, equals(3));
-  }, skip: 'Still experimenting.');
+  });
 }
