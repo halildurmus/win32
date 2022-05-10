@@ -1,3 +1,13 @@
+## 1.1.0
+
+- Upgrade minimum required Dart version to 2.17, and take advantage of new
+  language features (enhanced enums, super constructors).
+- Add `memberRef` and `constructor` properties to `CustomAttributes`
+- Add `AssemblyRef` class that lists referenced assemblies
+- Expand `TypeRef` support to load referenced WinRT assemblies
+- Add new test that exhaustively verifies a WinRT interface with generics
+- Update to Windows.Win32.winmd v23.0.3.6210.
+
 ## 1.0.32
 
 - Update to Windows.Win32.winmd v23.0.0.18996.

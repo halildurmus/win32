@@ -5,22 +5,5 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
     },
-
-    "flutterStylizer": {
-        "groupAndSortGetterMethods": false,
-        "memberOrdering": [
-            "public-static-variables",
-            "public-instance-variables",
-            "public-override-variables",
-            "private-static-variables",
-            "private-instance-variables",
-            "public-constructor",
-            "named-constructors",
-            "public-override-methods",
-            "public-other-methods",
-            "build-method",
-        ],
-        "sortOtherMethods": false,
-    },
-    "dart.sdkPath": "c:\\flutter\\bin\\cache\\dart-sdk"
+    "dart.sdkPath": "c:\\src\\dart-sdk"
 }
