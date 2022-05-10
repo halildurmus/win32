@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
 
@@ -7,6 +8,7 @@ import 'package:win32/win32.dart';
 import '../customattribute.dart';
 import '../tokenObject.dart';
 import '../type_aliases.dart';
+import '../utils/blob.dart';
 
 /// Represents an object that has custom (named) attributes associated with it.
 mixin CustomAttributesMixin on TokenObject {
@@ -17,15 +19,21 @@ mixin CustomAttributesMixin on TokenObject {
         final szName = attrName.toNativeUtf16(allocator: arena);
         final ppData = arena<Pointer<BYTE>>();
         final pcbData = arena<ULONG>();
+
         final hr =
             reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
-        if (SUCCEEDED(hr)) {
-          if (pcbData.value <= 3) return '';
-          final sigList = ppData.value.elementAt(3).cast<Utf8>().toDartString();
-          return sigList;
-        } else {
-          throw WindowsException(hr);
-        }
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        const prologLength = 2;
+        final sig =
+            ppData.value.asTypedList(pcbData.value).sublist(prologLength);
+        final unpackedLength = UncompressedData.fromBlob(sig);
+        final startIndex = unpackedLength.dataLength;
+        final endIndex = startIndex + unpackedLength.data;
+
+        final stringValue =
+            const Utf8Decoder().convert(sig.sublist(startIndex, endIndex));
+        return stringValue;
       });
 
   /// Retrieve the blob associated with a specific attribute name.
