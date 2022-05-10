@@ -19,7 +19,7 @@ void main() {
     expect(scope.toString(), equals('Windows.Win32.winmd'));
   });
 
-  test('Scope executable kind is as expected', () {
+  test('Scope executable kind is as expected for Win32 metadata', () {
     final scope = MetadataStore.getWin32Scope();
     final peKind = scope.executableKind;
     expect(peKind.isPEFile, isTrue);
@@ -31,7 +31,7 @@ void main() {
     expect(peKind.runsOn64BitPlatform, isFalse);
   });
 
-  test('Scope executable kind is as expected', () {
+  test('Scope executable kind is as expected for WinRT metadata', () {
     final scope = MetadataStore.getScopeForType(
         'Windows.Foundation.Collections.IPropertySet');
     expect(scope.name, equals('Windows.Foundation.winmd'));
