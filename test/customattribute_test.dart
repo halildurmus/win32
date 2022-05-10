@@ -51,7 +51,7 @@ void main() {
 
     expect(ref.signatureBlob.length, equals(9));
     expect(ref.signatureBlob.toList(),
-        equals([0x20, 0x04, 0x01, 0x0e, 0x11, 0x9a, 0x75, 0x09, 0x0e]));
+        containsAllInOrder([0x20, 0x04, 0x01, 0x0e]));
 
     expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
     expect(deprecated.memberRef.name, equals('.ctor'));
