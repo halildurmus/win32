@@ -39,19 +39,23 @@ void main() {
 
     // These numbers will vary from version to version of Windows; they're here
     // just for experimentation.
-    expect(deprecated.token,
-        equals(0x0C000F1E)); // custom attribute DeprecatedAttribute
-    expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
+    // expect(deprecated.token,
+    //     equals(0x0C000F1E)); // custom attribute DeprecatedAttribute
+    // expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
 
     final ref = MemberRef.fromToken(deprecated.scope, 0x0A000015);
-    expect(
-        ref.referencedToken,
-        equals(
-            0x0100069E)); // typeRef to Windows.Foundation.Metadata.DeprecatedAttribute
+    // expect(
+    //     ref.referencedToken,
+    //     equals(
+    //         0x0100069E)); // typeRef to Windows.Foundation.Metadata.DeprecatedAttribute
 
     expect(ref.signatureBlob.length, equals(9));
     expect(ref.signatureBlob.toList(),
         equals([0x20, 0x04, 0x01, 0x0e, 0x11, 0x9a, 0x75, 0x09, 0x0e]));
+
+    expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
+    expect(deprecated.memberRef.name, equals('.ctor'));
+    expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
 
     expect(deprecated.parameterTypes.length, equals(4));
     expect(deprecated.parameterTypes[0].baseType, equals(BaseType.String));
@@ -59,10 +63,5 @@ void main() {
         equals(BaseType.ValueTypeModifier));
     expect(deprecated.parameterTypes[2].baseType, equals(BaseType.Uint32));
     expect(deprecated.parameterTypes[3].baseType, equals(BaseType.String));
-
-    expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
-    expect(deprecated.memberRef.name, equals('.ctor'));
-    expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
-    expect(deprecated.constructor.methods.length, equals(3));
   });
 }
