@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Correctly handle custom attributes with multiple parameters.
+
 ## 1.1.0
 
 - Upgrade minimum required Dart version to 2.17, and take advantage of new
