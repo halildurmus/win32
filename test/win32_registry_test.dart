@@ -10,6 +10,53 @@ void main() {
         path: r'Software\Microsoft\Windows NT\CurrentVersion');
 
     expect(key.values.length, greaterThan(0));
+    key.close();
+  });
+
+  test('Test key types 1', () {
+    // Uses key types that should exist in any standard Windows configuration.
+    final env =
+        Registry.openPath(RegistryHive.currentUser, path: 'Environment');
+    expect(
+        env.getValue('Path')?.type, equals(RegistryValueType.unexpandedString));
+    expect(env.getValue('PROMPT')?.type, equals(RegistryValueType.string));
+    env.close();
+  });
+
+  test('Test key types 2', () {
+    // Uses key types that should exist in any standard Windows configuration.
+    final console =
+        Registry.openPath(RegistryHive.currentUser, path: 'Console');
+    expect(
+        console.getValue('FullScreen')?.type, equals(RegistryValueType.int32));
+    console.close();
+  });
+
+  test('Test key types 3', () {
+    // Uses key types that should exist in any standard Windows configuration.
+    final windowMetrics = Registry.openPath(RegistryHive.currentUser,
+        path: r'Control Panel\Desktop\WindowMetrics');
+    expect(windowMetrics.getValue('IconFont')?.type,
+        equals(RegistryValueType.binary));
+    windowMetrics.close();
+  });
+
+  test('Test key types 4', () {
+    // Uses key types that should exist in any standard Windows configuration.
+    final currentVersion = Registry.openPath(RegistryHive.localMachine,
+        path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
+    expect(currentVersion.getValue('InstallTime')?.type,
+        equals(RegistryValueType.int64));
+    currentVersion.close();
+  });
+
+  test('Test missing key', () {
+    // Uses key that should be missing.
+    expect(
+        () => Registry.openPath(RegistryHive.localMachine,
+            path: r'SOFTWARE\Dart\Missing\Key'),
+        throwsA(isA<WindowsException>().having((ex) => ex.hr, 'hr',
+            equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)))));
   });
 
   test('Create a subkey', () {

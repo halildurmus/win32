@@ -11,4 +11,4 @@ pubspec.lock
 
 # Omit code coverage information.
 lcov.info
-coverage/test/win32_registry_test.dart.vm.json
+coverage/
