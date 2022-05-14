@@ -21,10 +21,6 @@ void main() {
         env.getValue('Path')?.type, equals(RegistryValueType.unexpandedString));
     expect(env.getValue('Path')?.type.win32Value, equals(REG_EXPAND_SZ));
     expect(env.getValue('Path')?.type.win32Type, equals('REG_EXPAND_SZ'));
-
-    expect(env.getValue('PROMPT')?.type, equals(RegistryValueType.string));
-    expect(env.getValue('PROMPT')?.type.win32Value, equals(REG_SZ));
-    expect(env.getValue('PROMPT')?.type.win32Type, equals('REG_SZ'));
     env.close();
   });
 
@@ -54,10 +50,27 @@ void main() {
 
   test('Test key types 4', () {
     // Uses key types that should exist in any standard Windows configuration.
-    final currentVersion = Registry.openPath(RegistryHive.localMachine,
+    final ntCurrentVersion = Registry.openPath(RegistryHive.localMachine,
         path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
-    expect(currentVersion.getValue('InstallTime')?.type,
+    expect(ntCurrentVersion.getValue('InstallTime')?.type,
         equals(RegistryValueType.int64));
+    expect(ntCurrentVersion.getValue('InstallTime')?.type.win32Value,
+        equals(REG_QWORD));
+    expect(ntCurrentVersion.getValue('InstallTime')?.type.win32Type,
+        equals('REG_QWORD'));
+    ntCurrentVersion.close();
+  });
+
+  test('Test key types 5', () {
+    // Uses key types that should exist in any standard Windows configuration.
+    final currentVersion = Registry.openPath(RegistryHive.localMachine,
+        path: r'SOFTWARE\Microsoft\Windows\CurrentVersion');
+    expect(currentVersion.getValue('ProgramFilesDir')?.type,
+        equals(RegistryValueType.string));
+    expect(currentVersion.getValue('ProgramFilesDir')?.type.win32Value,
+        equals(REG_SZ));
+    expect(currentVersion.getValue('ProgramFilesDir')?.type.win32Type,
+        equals('REG_SZ'));
     currentVersion.close();
   });
 
