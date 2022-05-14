@@ -18,7 +18,6 @@ linter:
     omit_local_variable_types: true
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
-    prefer_expression_function_bodies: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
     prefer_relative_imports: true

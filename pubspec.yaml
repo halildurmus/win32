@@ -17,7 +17,7 @@ dependencies:
 
 dev_dependencies:
   # Handle command-line arguments for development tooling.
-  args: ^2.3.0
+  args: ^2.3.1
   
   # For formatting Dart code (APIs for performing dart format).
   dart_style: ^2.2.3
