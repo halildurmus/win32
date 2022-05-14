@@ -19,7 +19,12 @@ void main() {
         Registry.openPath(RegistryHive.currentUser, path: 'Environment');
     expect(
         env.getValue('Path')?.type, equals(RegistryValueType.unexpandedString));
+    expect(env.getValue('Path')?.type.win32Value, equals(REG_EXPAND_SZ));
+    expect(env.getValue('Path')?.type.win32Type, equals('REG_EXPAND_SZ'));
+
     expect(env.getValue('PROMPT')?.type, equals(RegistryValueType.string));
+    expect(env.getValue('PROMPT')?.type.win32Value, equals(REG_SZ));
+    expect(env.getValue('PROMPT')?.type.win32Type, equals('REG_SZ'));
     env.close();
   });
 
@@ -29,6 +34,8 @@ void main() {
         Registry.openPath(RegistryHive.currentUser, path: 'Console');
     expect(
         console.getValue('FullScreen')?.type, equals(RegistryValueType.int32));
+    expect(console.getValue('FullScreen')?.type.win32Value, equals(REG_DWORD));
+    expect(console.getValue('FullScreen')?.type.win32Type, equals('REG_DWORD'));
     console.close();
   });
 
@@ -38,6 +45,10 @@ void main() {
         path: r'Control Panel\Desktop\WindowMetrics');
     expect(windowMetrics.getValue('IconFont')?.type,
         equals(RegistryValueType.binary));
+    expect(windowMetrics.getValue('IconFont')?.type.win32Value,
+        equals(REG_BINARY));
+    expect(windowMetrics.getValue('IconFont')?.type.win32Type,
+        equals('REG_BINARY'));
     windowMetrics.close();
   });
 
@@ -57,6 +68,13 @@ void main() {
             path: r'SOFTWARE\Dart\Missing\Key'),
         throwsA(isA<WindowsException>().having((ex) => ex.hr, 'hr',
             equals(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND)))));
+  });
+
+  test('Test missing value', () {
+    // Uses key that should be present and value that should be missing.
+    final currentVersion = Registry.openPath(RegistryHive.localMachine,
+        path: r'SOFTWARE\Microsoft\Windows NT\CurrentVersion');
+    expect(currentVersion.getValue('NotepadPlusPlus'), isNull);
   });
 
   test('Create a subkey', () {

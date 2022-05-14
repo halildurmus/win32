@@ -64,7 +64,7 @@ enum RegistryValueType {
         return REG_QWORD;
       case RegistryValueType.string:
         return REG_SZ;
-      case RegistryValueType.unknown:
+      default:
         throw ArgumentError.value(
             RegistryValueType.unknown, 'Unknown values cannot be stored.');
     }
@@ -89,7 +89,7 @@ enum RegistryValueType {
         return 'REG_QWORD';
       case RegistryValueType.string:
         return 'REG_SZ';
-      case RegistryValueType.unknown:
+      default:
         return '';
     }
   }
