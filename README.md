@@ -5,9 +5,9 @@ unmanaged APIs like Win32 or COM, or APIs like Windows Runtime that include
 their own metadata.
 
 [![pub package](https://img.shields.io/pub/v/winmd.svg)](https://pub.dev/packages/winmd)
-[![codecov](https://codecov.io/gh/timsneath/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW)](https://codecov.io/gh/timsneath/winmd)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Build](https://github.com/timsneath/winmd/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/timsneath/winmd/branch/main/graph/badge.svg?token=1ouz1Jr9nW)](https://codecov.io/gh/timsneath/winmd)
 
 ## Architecture
 
