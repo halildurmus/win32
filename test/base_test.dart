@@ -19,4 +19,9 @@ void main() {
     final file = MetadataStore.getWin32Scope();
     expect(file.moduleToken, equals(0x00000001));
   });
+
+  test('WinmdException', () {
+    final exception = WinmdException('Test message');
+    expect(exception.toString(), endsWith('Test message'));
+  });
 }
