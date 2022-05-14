@@ -63,5 +63,20 @@ void main() {
         equals(BaseType.ValueTypeModifier));
     expect(deprecated.parameterTypes[2].baseType, equals(BaseType.Uint32));
     expect(deprecated.parameterTypes[3].baseType, equals(BaseType.String));
+    expect(deprecated.parameterTypes.length, equals(4));
+
+    expect(deprecated.parameterValues[0], isA<String>());
+    expect(
+        deprecated.parameterValues[0],
+        equals('MediaControl may be altered or unavailable for releases after '
+            'Windows 8.1. Instead, use SystemMediaTransportControls.'));
+    expect(deprecated.parameterValues[1], isA<int>());
+    expect(deprecated.parameterValues[1], equals(0));
+    expect(deprecated.parameterValues[2], isA<int>());
+    expect(deprecated.parameterValues[2], equals(65536));
+    expect(deprecated.parameterValues[3], isA<String>());
+    expect(deprecated.parameterValues[3],
+        equals('Windows.Media.MediaControlContract'));
+    expect(deprecated.parameterValues.length, equals(4));
   });
 }
