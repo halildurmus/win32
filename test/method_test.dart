@@ -58,4 +58,21 @@ void main() {
     expect(method.implFeatures.isPreserveSig, isTrue);
     expect(method.implFeatures.isSynchronized, isFalse);
   });
+
+  test('Method properties 4', () {
+    const methodName = 'GetAltMonthNames';
+
+    final scope = MetadataStore.getWin32Scope();
+    final typeDef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
+    final method = typeDef!.findMethod(methodName)!;
+
+    expect(method.isPinvokeImpl, isTrue);
+    expect(method.pinvokeMap.isNoMangle, isTrue);
+    expect(method.pinvokeMap.importName, equals(methodName));
+    expect(method.pinvokeMap.stringMarshalConvention,
+        equals(StringMarshalConvention.notSpecified));
+    expect(method.pinvokeMap.bestFitConvention, equals(BestFit.useAssem));
+    expect(method.pinvokeMap.throwOnUnmappableCharConvention,
+        equals(ThrowOnUnmappableChar.useAssem));
+  });
 }
