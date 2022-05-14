@@ -32,7 +32,7 @@ jobs:
         run: dart test --coverage=coverage
 
       - name: Convert code coverage into lcov file
-        run: dart pub global run coverage:format_coverage --lcov --in=coverage --check-ignore --out=lcov.info --packages=.packages
+        run: dart pub global run coverage:format_coverage --lcov --in=coverage --check-ignore --out=lcov.info
 
       - name: Upload code coverage
         uses: codecov/codecov-action@v2
