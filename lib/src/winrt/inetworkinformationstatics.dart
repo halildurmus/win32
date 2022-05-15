@@ -12,6 +12,7 @@ import 'package:ffi/ffi.dart';
 
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../callbacks.dart';
+import '../com/iinspectable.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
@@ -24,7 +25,6 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt_helpers.dart';
 import 'ihostname.dart';
-import '../com/iinspectable.dart';
 import 'ivectorview.dart';
 
 /// @nodoc

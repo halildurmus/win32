@@ -18,7 +18,7 @@ import '../utils.dart';
 
 import '../winrt_constants.dart';
 
-import 'IInspectable.dart';
+import 'iinspectable.dart';
 
 /// @nodoc
 const IID_IUserDataPathsStatics = '{01B29DEF-E062-48A1-8B0C-F2C7A9CA56C0}';

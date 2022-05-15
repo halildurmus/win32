@@ -21,7 +21,7 @@ import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt_helpers.dart';
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 import 'ivector.dart';
 
 /// @nodoc
