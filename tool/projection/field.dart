@@ -28,6 +28,7 @@ class FieldProjection {
       String get $fieldName {
         final charCodes = <int>[];
         for (var i = 0; i < $dimensionsUpperBound; i++) {
+          if (_$fieldName[i] == 0x00) break;
           charCodes.add(_$fieldName[i]);
         }
         return String.fromCharCodes(charCodes);

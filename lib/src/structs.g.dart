@@ -352,6 +352,7 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   String get szName {
     final charCodes = <int>[];
     for (var i = 0; i < 248; i++) {
+      if (_szName[i] == 0x00) break;
       charCodes.add(_szName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -470,6 +471,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   String get szName {
     final charCodes = <int>[];
     for (var i = 0; i < 248; i++) {
+      if (_szName[i] == 0x00) break;
       charCodes.add(_szName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -1059,6 +1061,7 @@ class COMMCONFIG extends Struct {
   String get wcProviderData {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_wcProviderData[i] == 0x00) break;
       charCodes.add(_wcProviderData[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -1133,6 +1136,7 @@ class COMMPROP extends Struct {
   String get wcProvChar {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_wcProvChar[i] == 0x00) break;
       charCodes.add(_wcProvChar[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -1615,6 +1619,7 @@ class DEVMODE extends Struct {
   String get dmDeviceName {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_dmDeviceName[i] == 0x00) break;
       charCodes.add(_dmDeviceName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -1665,6 +1670,7 @@ class DEVMODE extends Struct {
   String get dmFormName {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_dmFormName[i] == 0x00) break;
       charCodes.add(_dmFormName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2234,6 +2240,7 @@ class ENUMLOGFONTEX extends Struct {
   String get elfFullName {
     final charCodes = <int>[];
     for (var i = 0; i < 64; i++) {
+      if (_elfFullName[i] == 0x00) break;
       charCodes.add(_elfFullName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2252,6 +2259,7 @@ class ENUMLOGFONTEX extends Struct {
   String get elfStyle {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_elfStyle[i] == 0x00) break;
       charCodes.add(_elfStyle[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2270,6 +2278,7 @@ class ENUMLOGFONTEX extends Struct {
   String get elfScript {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_elfScript[i] == 0x00) break;
       charCodes.add(_elfScript[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2583,6 +2592,7 @@ class ICONINFOEX extends Struct {
   String get szModName {
     final charCodes = <int>[];
     for (var i = 0; i < 260; i++) {
+      if (_szModName[i] == 0x00) break;
       charCodes.add(_szModName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2601,6 +2611,7 @@ class ICONINFOEX extends Struct {
   String get szResName {
     final charCodes = <int>[];
     for (var i = 0; i < 260; i++) {
+      if (_szResName[i] == 0x00) break;
       charCodes.add(_szResName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -2963,6 +2974,7 @@ class LOGFONT extends Struct {
   String get lfFaceName {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_lfFaceName[i] == 0x00) break;
       charCodes.add(_lfFaceName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -3211,6 +3223,7 @@ class MENUITEMTEMPLATE extends Struct {
   String get mtString {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_mtString[i] == 0x00) break;
       charCodes.add(_mtString[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -3325,6 +3338,7 @@ class MIDIINCAPS extends Struct {
   String get szPname {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_szPname[i] == 0x00) break;
       charCodes.add(_szPname[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -3362,6 +3376,7 @@ class MIDIOUTCAPS extends Struct {
   String get szPname {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_szPname[i] == 0x00) break;
       charCodes.add(_szPname[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -3925,6 +3940,7 @@ class NLM_SIMULATED_PROFILE_INFO extends Struct {
   String get ProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_ProfileName[i] == 0x00) break;
       charCodes.add(_ProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4027,6 +4043,7 @@ class NOTIFYICONDATA extends Struct {
   String get szTip {
     final charCodes = <int>[];
     for (var i = 0; i < 128; i++) {
+      if (_szTip[i] == 0x00) break;
       charCodes.add(_szTip[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4051,6 +4068,7 @@ class NOTIFYICONDATA extends Struct {
   String get szInfo {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_szInfo[i] == 0x00) break;
       charCodes.add(_szInfo[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4071,6 +4089,7 @@ class NOTIFYICONDATA extends Struct {
   String get szInfoTitle {
     final charCodes = <int>[];
     for (var i = 0; i < 64; i++) {
+      if (_szInfoTitle[i] == 0x00) break;
       charCodes.add(_szInfoTitle[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4367,6 +4386,7 @@ class OSVERSIONINFOEX extends Struct {
   String get szCSDVersion {
     final charCodes = <int>[];
     for (var i = 0; i < 128; i++) {
+      if (_szCSDVersion[i] == 0x00) break;
       charCodes.add(_szCSDVersion[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4423,6 +4443,7 @@ class OSVERSIONINFO extends Struct {
   String get szCSDVersion {
     final charCodes = <int>[];
     for (var i = 0; i < 128; i++) {
+      if (_szCSDVersion[i] == 0x00) break;
       charCodes.add(_szCSDVersion[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -4583,6 +4604,7 @@ class PHYSICAL_MONITOR extends Struct {
   String get szPhysicalMonitorDescription {
     final charCodes = <int>[];
     for (var i = 0; i < 128; i++) {
+      if (_szPhysicalMonitorDescription[i] == 0x00) break;
       charCodes.add(_szPhysicalMonitorDescription[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -5529,6 +5551,7 @@ class SHELL_ITEM_RESOURCE extends Struct {
   String get szName {
     final charCodes = <int>[];
     for (var i = 0; i < 260; i++) {
+      if (_szName[i] == 0x00) break;
       charCodes.add(_szName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -5741,6 +5764,7 @@ class SP_DEVICE_INTERFACE_DETAIL_DATA_ extends Struct {
   String get DevicePath {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_DevicePath[i] == 0x00) break;
       charCodes.add(_DevicePath[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6004,6 +6028,7 @@ class SYMBOL_INFO extends Struct {
   String get Name {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_Name[i] == 0x00) break;
       charCodes.add(_Name[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6760,6 +6785,7 @@ class WAVEOUTCAPS extends Struct {
   String get szPname {
     final charCodes = <int>[];
     for (var i = 0; i < 32; i++) {
+      if (_szPname[i] == 0x00) break;
       charCodes.add(_szPname[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6817,6 +6843,7 @@ class WIN32_FIND_DATA extends Struct {
   String get cFileName {
     final charCodes = <int>[];
     for (var i = 0; i < 260; i++) {
+      if (_cFileName[i] == 0x00) break;
       charCodes.add(_cFileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6835,6 +6862,7 @@ class WIN32_FIND_DATA extends Struct {
   String get cAlternateFileName {
     final charCodes = <int>[];
     for (var i = 0; i < 14; i++) {
+      if (_cAlternateFileName[i] == 0x00) break;
       charCodes.add(_cAlternateFileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -6979,6 +7007,7 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0x00) break;
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7132,6 +7161,7 @@ class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0x00) break;
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7163,6 +7193,7 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0x00) break;
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7195,6 +7226,7 @@ class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   String get strProfileXml {
     final charCodes = <int>[];
     for (var i = 0; i < 1; i++) {
+      if (_strProfileXml[i] == 0x00) break;
       charCodes.add(_strProfileXml[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7411,6 +7443,7 @@ class WLAN_INTERFACE_INFO extends Struct {
   String get strInterfaceDescription {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strInterfaceDescription[i] == 0x00) break;
       charCodes.add(_strInterfaceDescription[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7498,6 +7531,7 @@ class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0x00) break;
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
@@ -7617,6 +7651,7 @@ class WLAN_PROFILE_INFO extends Struct {
   String get strProfileName {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
+      if (_strProfileName[i] == 0x00) break;
       charCodes.add(_strProfileName[i]);
     }
     return String.fromCharCodes(charCodes);

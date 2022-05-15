@@ -27,4 +27,35 @@ void main() {
 
     free(pOverlapped);
   });
+
+  test('Test struct string packing with regular string', () {
+    const testString = 'Non-null terminated string';
+    final midiCaps = calloc<MIDIINCAPS>();
+
+    midiCaps.ref.szPname = testString;
+    expect(midiCaps.ref.szPname, equals(testString));
+
+    free(midiCaps);
+  });
+
+  test('Test struct string packing with null terminated string', () {
+    const testString = 'Null terminated string';
+    final midiCaps = calloc<MIDIINCAPS>();
+
+    midiCaps.ref.szPname = '$testString\x00';
+    expect(midiCaps.ref.szPname, equals(testString));
+
+    free(midiCaps);
+  });
+
+  test('Test struct string packing with garbage after null terminator', () {
+    const testString = 'Null terminated string';
+    final midiCaps = calloc<MIDIINCAPS>();
+
+    midiCaps.ref.szPname = '$testString\x00Garbage';
+    // Should trim at null terminator
+    expect(midiCaps.ref.szPname, equals(testString));
+
+    free(midiCaps);
+  });
 }
