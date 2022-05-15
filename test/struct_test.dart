@@ -713,6 +713,13 @@ void main() {
       expect(sizeOf<MSLLHOOKSTRUCT>(), equals(24));
     }
   });
+  test('Struct NCCALCSIZE_PARAMS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<NCCALCSIZE_PARAMS>(), equals(56));
+    } else {
+      expect(sizeOf<NCCALCSIZE_PARAMS>(), equals(52));
+    }
+  });
   test('Struct NDIS_OBJECT_HEADER is the right size', () {
     expect(sizeOf<NDIS_OBJECT_HEADER>(), equals(4));
   });
@@ -1250,6 +1257,9 @@ void main() {
   test('Struct WAVEFORMATEX is the right size', () {
     expect(sizeOf<WAVEFORMATEX>(), equals(18));
   });
+  test('Struct WAVEFORMATEXTENSIBLE is the right size', () {
+    expect(sizeOf<WAVEFORMATEXTENSIBLE>(), equals(40));
+  });
   test('Struct WAVEHDR is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<WAVEHDR>(), equals(48));
@@ -1268,6 +1278,13 @@ void main() {
   });
   test('Struct WINDOWPLACEMENT is the right size', () {
     expect(sizeOf<WINDOWPLACEMENT>(), equals(44));
+  });
+  test('Struct WINDOWPOS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WINDOWPOS>(), equals(40));
+    } else {
+      expect(sizeOf<WINDOWPOS>(), equals(28));
+    }
   });
   test('Struct WLAN_ASSOCIATION_ATTRIBUTES is the right size', () {
     expect(sizeOf<WLAN_ASSOCIATION_ATTRIBUTES>(), equals(68));

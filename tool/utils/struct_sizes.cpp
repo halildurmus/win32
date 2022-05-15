@@ -30,6 +30,7 @@
 #include <DbgHelp.h>
 #include <dwmapi.h>
 #include <magnification.h>
+#include <mmreg.h>
 #include <netlistmgr.h>
 #include <physicalmonitorenumerationapi.h>
 #include <sapi53.h>
@@ -298,6 +299,7 @@ void main()
     printf("  'VARDESC': %zu,\n", sizeof(VARDESC));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
     printf("  'WAVEFORMATEX': %zu,\n", sizeof(WAVEFORMATEX));
+    printf("  'WAVEFORMATEXTENSIBLE': %zu,\n", sizeof(WAVEFORMATEXTENSIBLE));
     printf("  'WAVEHDR': %zu,\n", sizeof(WAVEHDR));
     printf("  'WAVEOUTCAPS': %zu,\n", sizeof(WAVEOUTCAPSW));
     printf("  'WIN32_FIND_DATA': %zu,\n", sizeof(WIN32_FIND_DATAW));

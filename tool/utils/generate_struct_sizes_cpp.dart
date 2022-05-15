@@ -35,6 +35,7 @@ const header = '''
 #include <DbgHelp.h>
 #include <dwmapi.h>
 #include <magnification.h>
+#include <mmreg.h>
 #include <netlistmgr.h>
 #include <physicalmonitorenumerationapi.h>
 #include <sapi53.h>
