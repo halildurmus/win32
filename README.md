@@ -140,6 +140,7 @@ require Flutter.
 | `tetris\main.dart`    | Port of an open-source Tetris game to Dart                |
 | `vt.dart`             | Shows virtual terminal sequences                          |
 | `wallpaper.dart`      | Shows what wallpaper and background color are set         |
+| `wasapi.dart`         | Demonstrates sound generation with WASAPI library         |
 | `window.dart`         | Enumerates open windows and basic window manipulation     |
 | `winmd.dart`          | Interrogate Windows Runtime types                         |
 | `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
