@@ -1,3 +1,7 @@
+## 2.6.1
+
+- Improve pana compliance
+
 ## 2.6.0
 
 - Add support for returning vectors from Windows Runtime APIs (#406, thanks to
