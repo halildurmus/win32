@@ -16,6 +16,7 @@ import 'package:win32/win32.dart';
 // ignore_for_file: prefer_conditional_assignment
 // ignore_for_file: annotate_overrides
 // ignore_for_file: always_declare_return_types
+// ignore_for_file: non_constant_identifier_names
 
 /// A class containing the GUID references for each of the documented Windows
 /// known folders. A property of this class may be passed to the `getPath`

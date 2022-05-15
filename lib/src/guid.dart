@@ -1,3 +1,10 @@
+// guid.dart
+
+// TODO: Turn this into an extension helper
+
+// ignore_for_file: camel_case_types
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

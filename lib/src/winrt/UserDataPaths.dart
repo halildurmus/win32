@@ -1,5 +1,9 @@
 // UserDataPaths.dart
 
+// ignore_for_file: unused_import, directives_ordering, camel_case_types
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

@@ -10,6 +10,8 @@
 /// For more on Windows data types, see
 /// https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types.
 
+// ignore_for_file: camel_case_types
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
