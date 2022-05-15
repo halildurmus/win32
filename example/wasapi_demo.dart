@@ -1,238 +1,205 @@
 import 'dart:ffi';
-import 'dart:math';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-int WAVE_FORMAT_EXTENSIBLE = 0xFFFE;
-double REFTIMES_PER_SEC = 5000000;
-double REFTIMES_PER_MILLISEC = 10000;
+const WMMEDIASUBTYPE_Base = "{00000000-0000-0010-8000-00aa00389b71}";
 
-class AUDCLNT_SHAREMODE {
-  static int AUDCLNT_SHAREMODE_SHARED = 0;
-  static int AUDCLNT_SHAREMODE_EXCLUSIVE = 1;
-}
+const REFTIMES_PER_SEC = 5000000;
+const REFTIMES_PER_MILLISEC = 10000;
+const frequency = 510;
+const sampleCount = 96000 * 2;
 
-class AUDCLNT_BUFFERFLAGS {
-  static int AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 0x1;
-  static int AUDCLNT_BUFFERFLAGS_SILENT = 0x2;
-  static int AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4;
-}
+late Float32List pcmAudio;
 
-class SAMPLES extends Union {
-  @Uint16()
-  external int wValidBitsPerSample; /* bits of precision  */
-  @Uint16()
-  external int wSamplesPerBlock; /* valid if wBitsPerSample==0 */
-  @Uint16()
-  external int wReserved; /* If neither applies, set to zero. */
-  @Uint32()
-  external int dwChannelMask; /* which channels are present in stream  */
-}
+int bufferSize = 0;
+int pcmPos = 0;
+int bufferPos = 0;
 
-class WAVEFORMATEXTENSIBLE extends Struct {
-  external WAVEFORMATEX Format;
-  external SAMPLES Samples;
-  external GUID Guid;
-}
-
-class MyAudioSource {
-  double frequency;
-  late Float32List _pcmAudio;
-  static const int _sampleCount = 96000 * 2;
-  late WAVEFORMATEXTENSIBLE _format;
-  bool _initialised = false;
-  late int _bufferSize;
-  int _pcmPos = 0;
-  int _bufferPos = 0;
-
-  MyAudioSource(this.frequency);
-  void _init() {
-    _pcmAudio = Float32List(_sampleCount);
-    final radsPerSec =
-        2 * 3.1415926536 * frequency / _format.Format.nSamplesPerSec.toDouble();
-    for (var i = 0; i < _sampleCount; i++) {
-      final sampleValue = sin(radsPerSec * i);
-      _pcmAudio[i] = sampleValue;
-    }
-    _initialised = true;
+void initData(WAVEFORMATEXTENSIBLE waveFormat, int totalFrames) {
+  final sampleRate = waveFormat.Format.nSamplesPerSec.toDouble();
+  pcmAudio = Float32List(sampleCount);
+  final radsPerSec = 2 * math.pi * frequency / sampleRate;
+  for (var i = 0; i < sampleCount; i++) {
+    final sampleValue = math.sin(radsPerSec * i);
+    pcmAudio[i] = sampleValue;
   }
+  bufferSize = totalFrames * waveFormat.Format.nChannels;
+  print("bufferSize = $bufferSize");
+  print("sampsPerChan = ${totalFrames / waveFormat.Format.nChannels}");
+}
 
-  int SetFormat(Pointer<WAVEFORMATEX> wfex) {
-    if (wfex.ref.wFormatTag == WAVE_FORMAT_EXTENSIBLE) {
-      // ignore: omit_local_variable_types
-      final Pointer<WAVEFORMATEXTENSIBLE> format = wfex.cast();
-      _format = format.ref;
-    } else {
-      _format.Format = wfex.ref;
-      _format.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
-      _format.Guid = GUIDFromString("00000000-0000-0010-8000-00aa00389b71").ref;
-      _format.Guid.Data1 = wfex.ref.wFormatTag;
-      _format.Samples.wValidBitsPerSample = _format.Format.wBitsPerSample;
-      _format.Samples.dwChannelMask = 0;
-    }
-    print("Channel Count = ${_format.Format.nChannels}");
-    final formatTag = _format.Guid.Data1;
-    switch (formatTag) {
-      case 0x0003:
-        print("Audio Format = WAVE_FORMAT_IEEE_FLOAT");
-        break;
-      case 1:
-        print("Audio Format = WAVE_FORMAT_PCM");
-        break;
-      default:
-        print("Audio Format = Wave Format Unknown");
-        break;
-    }
-
-    return 0;
+/// Coerce a returned wave format into a consistent format.
+Pointer<WAVEFORMATEXTENSIBLE> convertFormat(Pointer<WAVEFORMATEX> waveFormat) {
+  if (waveFormat.ref.wFormatTag == WAVE_FORMAT_EXTENSIBLE) {
+    return waveFormat.cast();
+  } else {
+    final waveFormatEx = calloc<WAVEFORMATEXTENSIBLE>()
+      ..ref.Format = waveFormat.ref
+      ..ref.SubFormat = GUIDFromString(WMMEDIASUBTYPE_Base).ref
+      ..ref.SubFormat.Data1 = waveFormat.ref.wFormatTag
+      ..ref.Samples.wValidBitsPerSample = waveFormat.ref.wBitsPerSample
+      ..ref.dwChannelMask = 0
+      ..ref.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
+    return waveFormatEx;
   }
+}
 
-  int LoadData(int totalFrames, Pointer<BYTE> dataOut, Pointer<DWORD> flags) {
-    // ignore: omit_local_variable_types
-    final Pointer<FLOAT> fData = dataOut.cast();
-    final totalSamples = totalFrames * _format.Format.nChannels;
-    if (!_initialised) {
-      print("init");
-      _init();
-      _bufferSize = totalFrames * _format.Format.nChannels;
-      print("bufferSize = $_bufferSize");
-      print("sampsPerChan = ${totalFrames / _format.Format.nChannels}");
-    } else {
-      print("Frames to Fill = $totalFrames");
-      print("Samples to Fill = $totalSamples");
-      print("bufferPos = $_bufferPos");
-    }
+void printFormat(Pointer<WAVEFORMATEXTENSIBLE> waveFormat) {
+  print("Channel Count = ${waveFormat.ref.Format.nChannels}");
+  final formatTag = waveFormat.ref.SubFormat.Data1;
+  switch (formatTag) {
+    case WAVE_FORMAT_IEEE_FLOAT:
+      print("Audio Format = WAVE_FORMAT_IEEE_FLOAT");
+      break;
+    case WAVE_FORMAT_PCM:
+      print("Audio Format = WAVE_FORMAT_PCM");
+      break;
+    default:
+      print("Audio Format = Unknown");
+      break;
+  }
+}
 
-    if (_pcmPos < _sampleCount) {
-      for (var i = 0; i < totalSamples; i += _format.Format.nChannels) {
-        for (var chan = 0; chan < _format.Format.nChannels; chan++) {
-          fData[i + chan] = (_pcmPos < _sampleCount) ? _pcmAudio[_pcmPos] : 0.0;
-        }
-        _pcmPos++;
+/// Loads data into the memory buffer.
+///
+/// Returns true if there is data, else returns false (indicating silence).
+bool fillMemoryBuffer(
+    int totalFrames, Pointer<BYTE> dataOut, WAVEFORMATEXTENSIBLE waveFormat) {
+  final fData = dataOut.cast<FLOAT>();
+  final totalSamples = totalFrames * waveFormat.Format.nChannels;
+  print("Frames to Fill = $totalFrames");
+  print("Samples to Fill = $totalSamples");
+  print("bufferPos = $bufferPos");
+
+  if (pcmPos < sampleCount) {
+    for (var i = 0; i < totalSamples; i += waveFormat.Format.nChannels) {
+      for (var chan = 0; chan < waveFormat.Format.nChannels; chan++) {
+        fData[i + chan] = (pcmPos < sampleCount) ? pcmAudio[pcmPos] : 0.0;
       }
-      _bufferPos += totalSamples;
-      _bufferPos %= _bufferSize;
-    } else {
-      flags.value = AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT;
+      pcmPos++;
     }
-    return 0;
+    bufferPos += totalSamples;
+    bufferPos %= bufferSize;
+  } else {
+    // no more data
+    return false;
   }
+  return true;
 }
 
-void _check(int hr) {
+int getBufferFrameCount(IAudioClient pAudioClient) {
+  final pBufferFrameCount = calloc<UINT32>();
+  check(pAudioClient.GetBufferSize(pBufferFrameCount));
+  final bufferFrameCount = pBufferFrameCount.value;
+  free(pBufferFrameCount);
+
+  return bufferFrameCount;
+}
+
+void check(int hr) {
   if (FAILED(hr)) throw WindowsException(hr);
 }
 
 void main() {
   // Initialize COM
-  print("CoCreateInstance");
-  _check(CoInitializeEx(
-      nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE));
+  check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
 
-  final pDeviceEnumerator = IMMDeviceEnumerator(COMObject.createFromID(
-      CLSID_MMDeviceEnumerator, IID_IMMDeviceEnumerator));
-  print('Created deviceEnumerator.\n'
-      'deviceEnumerator.ptr is  ${pDeviceEnumerator.ptr.address.toHexString(64)}');
-  final eRender = 0;
-  final eConsole = 0;
-  final ppDevice = calloc<Pointer<COMObject>>();
-  print("GetDefaultAudioEndpoint");
-  _check(
-      pDeviceEnumerator.GetDefaultAudioEndpoint(eRender, eConsole, ppDevice));
+  // Retrieve the default audio output device.
+  final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
+  final ppEndpoint = calloc<Pointer<COMObject>>();
+  check(pDeviceEnumerator.GetDefaultAudioEndpoint(
+      0, // dataflow: rendering device
+      0, // role: system notification sound
+      ppEndpoint));
+  pDeviceEnumerator.Release();
+  free(pDeviceEnumerator.ptr);
 
-  final pDevice = IMMDevice(ppDevice.cast());
-  final iid = convertToIID(IID_IAudioClient);
+  // Activate an IAudioClient interface for the output device.
+  final pDevice = IMMDevice(ppEndpoint.cast());
+  final iidAudioClient = convertToIID(IID_IAudioClient);
   final ppAudioClient = calloc<Pointer<COMObject>>();
-  print("Activate");
-  _check(pDevice.Activate(iid, CLSCTX_ALL, nullptr, ppAudioClient));
+  check(pDevice.Activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient));
+  free(iidAudioClient);
+  final pAudioClient = IAudioClient(ppAudioClient.cast());
 
-  final pAudioRenderClient = IAudioClient(ppAudioClient.cast());
+  // Initialize the audio stream.
   final ppFormat = calloc<Pointer<WAVEFORMATEX>>();
-  print("GetMixFormat");
-  _check(pAudioRenderClient.GetMixFormat(ppFormat));
-  final waveFormat = ppFormat.value.ref;
-  print("Samples per second = ${waveFormat.nSamplesPerSec}");
-  final hnsRequestedDuration = 5000000;
-  print("Initialize");
-  _check(pAudioRenderClient.Initialize(
+  check(pAudioClient.GetMixFormat(ppFormat));
+  final pWaveFormat = ppFormat.value;
+  final sampleRate = pWaveFormat.ref.nSamplesPerSec;
+  check(pAudioClient.Initialize(
       AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
       0,
-      hnsRequestedDuration,
+      30000, // buffer capacity of 3s (30,000 * 100ns)
       0,
       ppFormat.value,
       nullptr));
 
-  // Get back the effective latency from AudioClient. On Windows 10 it can be 0
-  final phnsLatency = calloc<Int64>();
-  _check(pAudioRenderClient.GetStreamLatency(phnsLatency));
-  print("Latency = ${phnsLatency.value}");
+  // Tell the audio source which format to use.
+  final pWaveFormatExtensible = convertFormat(pWaveFormat);
+  printFormat(pWaveFormatExtensible);
 
-  final mySource = MyAudioSource(510)
-    // Tell the audio source which format to use.
-    ..SetFormat(ppFormat.value);
-
-  final pBufferFrameCount = calloc<Uint32>();
-  print("GetBufferSize");
-  _check(pAudioRenderClient.GetBufferSize(pBufferFrameCount));
-  final bufferFrameCount = pBufferFrameCount.value;
-  print("Buffer Size = $bufferFrameCount");
-
+  // Activate an IAudioRenderClient interface.
+  final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
   final ppAudioRenderClient = calloc<Pointer<COMObject>>();
-  print("GetService");
-  _check(pAudioRenderClient.GetService(
-      convertToIID(IID_IAudioRenderClient), ppAudioRenderClient));
+  check(pAudioClient.GetService(iidAudioRenderClient, ppAudioRenderClient));
+  free(iidAudioRenderClient);
   final pRenderClient = IAudioRenderClient(ppAudioRenderClient.cast());
 
   // Grab the entire buffer for the initial fill operation.
+  final bufferFrameCount = getBufferFrameCount(pAudioClient);
+  print("Buffer Size = $bufferFrameCount frames");
   final pData = calloc<Pointer<BYTE>>();
-  _check(pRenderClient.GetBuffer(bufferFrameCount, pData));
+  check(pRenderClient.GetBuffer(bufferFrameCount, pData));
 
-  final pFlags = calloc<DWORD>();
   // Load the initial data into the shared buffer.
-  _check(mySource.LoadData(bufferFrameCount, pData.value, pFlags));
-  _check(pRenderClient.ReleaseBuffer(bufferFrameCount, pFlags.value));
+  initData(pWaveFormatExtensible.ref, bufferFrameCount);
+  var dataLoaded = fillMemoryBuffer(
+      bufferFrameCount, pData.value, pWaveFormatExtensible.ref);
+  check(pRenderClient.ReleaseBuffer(bufferFrameCount,
+      dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
 
   // Calculate the actual duration of the allocated buffer.
-  final hnsActualDuration =
-      REFTIMES_PER_SEC * bufferFrameCount / waveFormat.nSamplesPerSec;
+  final hnsActualDuration = REFTIMES_PER_SEC * bufferFrameCount / sampleRate;
 
-  _check(pAudioRenderClient.Start()); // Start playing.
+  check(pAudioClient.Start()); // Start playing.
+
   final pNumFramesPadding = calloc<UINT32>();
-
-  while (pFlags.value != AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT) {
+  while (dataLoaded) {
     // Sleep for half the buffer duration.
     Sleep(hnsActualDuration / REFTIMES_PER_MILLISEC ~/ 2);
     // See how much buffer space is available.
-    _check(pAudioRenderClient.GetCurrentPadding(pNumFramesPadding));
+    check(pAudioClient.GetCurrentPadding(pNumFramesPadding));
     final numFramesAvailable = bufferFrameCount - pNumFramesPadding.value;
     // Grab all the available space in the shared buffer.
-    _check(pRenderClient.GetBuffer(numFramesAvailable, pData));
-    // Get next 1/2-second of data from the audio source.
-    _check(mySource.LoadData(numFramesAvailable, pData.value, pFlags));
-    _check(pRenderClient.ReleaseBuffer(numFramesAvailable, pFlags.value));
+    check(pRenderClient.GetBuffer(numFramesAvailable, pData));
+    // Get next half second of data from the audio source.
+    dataLoaded = fillMemoryBuffer(
+        numFramesAvailable, pData.value, pWaveFormatExtensible.ref);
+    check(pRenderClient.ReleaseBuffer(numFramesAvailable,
+        dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
   }
+  free(pNumFramesPadding);
 
   // Wait for last data in buffer to play before stopping.
   Sleep(hnsActualDuration / REFTIMES_PER_MILLISEC ~/ 2);
-  _check(pAudioRenderClient.Stop()); // Stop playing.
+  check(pAudioClient.Stop()); // Stop playing.
 
   // Clear up
-  pDeviceEnumerator.Release();
-  free(pDeviceEnumerator.ptr);
   pDevice.Release();
-  free(ppDevice);
-  pAudioRenderClient.Release();
+  free(ppEndpoint);
+
+  pAudioClient.Release();
   free(ppAudioClient);
+
   pRenderClient.Release();
   free(ppFormat);
-  free(pBufferFrameCount);
+
   free(ppAudioRenderClient);
   free(pData);
-  free(pFlags);
-  free(pNumFramesPadding);
-  free(phnsLatency);
 
   // Uninitialize COM now that we're done with it.
   CoUninitialize();
