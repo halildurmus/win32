@@ -10,25 +10,22 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../callbacks.dart';
+import '../com/iinspectable.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
+import '../extensions/hstring_array.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
-import '../utils.dart';
-
-import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
 import '../types.dart';
-
-import '../extensions/hstring_array.dart';
+import '../utils.dart';
+import '../winrt_helpers.dart';
 import 'ivectorview.dart';
-
-import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
