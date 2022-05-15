@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IModalWindow = '{B4DB1657-70D7-485E-8E3E-6FCB5A5C1802}';

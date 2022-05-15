@@ -26,9 +26,9 @@ import '../winrt_helpers.dart';
 import '../types.dart';
 
 import '../extensions/hstring_array.dart';
-import 'IVectorView`1.dart';
+import 'ivectorview.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';

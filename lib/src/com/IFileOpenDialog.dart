@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IFileDialog.dart';
+import 'ifiledialog.dart';
 
 /// @nodoc
 const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';

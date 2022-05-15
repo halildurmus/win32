@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IConnectionPoint = '{B196B286-BAB4-101A-B69C-00AA00341D07}';

@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IUnknown.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';

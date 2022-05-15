@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'ISpellChecker.dart';
+import 'ispellchecker.dart';
 
 /// @nodoc
 const IID_ISpellChecker2 = '{E7ED1C71-87F7-4378-A840-C9200DACEE47}';

@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IPersistStream.dart';
+import 'ipersiststream.dart';
 
 /// @nodoc
 const IID_IMoniker = '{0000000F-0000-0000-C000-000000000046}';

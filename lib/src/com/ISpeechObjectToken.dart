@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IDispatch.dart';
+import 'idispatch.dart';
 
 /// @nodoc
 const IID_ISpeechObjectToken = '{C74A3ADC-B727-4500-A84A-B526721C8B8C}';

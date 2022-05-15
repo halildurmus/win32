@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IModalWindow.dart';
+import 'imodalwindow.dart';
 
 /// @nodoc
 const IID_IFileDialog = '{42F85136-DB7E-439C-85F1-E4075D135FC8}';

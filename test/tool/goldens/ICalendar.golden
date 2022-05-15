@@ -26,9 +26,9 @@ import '../winrt_helpers.dart';
 import '../types.dart';
 
 import '../extensions/hstring_array.dart';
-import 'IVectorView`1.dart';
+import 'ivectorview.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';

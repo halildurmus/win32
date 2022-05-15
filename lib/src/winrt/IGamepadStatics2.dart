@@ -19,7 +19,7 @@ import '../utils.dart';
 
 import '../winrt_constants.dart';
 
-import 'IGamepadStatics.dart';
+import 'igamepadstatics.dart';
 
 /// @nodoc
 const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';

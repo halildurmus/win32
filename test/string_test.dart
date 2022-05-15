@@ -14,14 +14,14 @@ const testDartStringArray = ['heads', 'shoulders', 'knees', 'toes'];
 const testStringArray =
     'apples\x00hazelnuts\x00bananas\x00raisins\x00coconuts\x00sultanas\x00';
 
-const TEST_RUNS = 500;
-
 void main() {
   // Run these tests a large number of times to try and identify memory leaks or
   // buffer overruns
+  const testRuns = 500;
+
   group('Unicode', () {
     test('Can create string', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
+      for (var i = 0; i < testRuns; i++) {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.toDartString(length: 5),
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('Overflow string', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
+      for (var i = 0; i < testRuns; i++) {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.toDartString(), equals(testString));
@@ -40,7 +40,7 @@ void main() {
     });
 
     test('Empty string', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
+      for (var i = 0; i < testRuns; i++) {
         final stringPtr = TEXT('');
 
         expect(stringPtr.toDartString(), equals(''));
@@ -49,7 +49,7 @@ void main() {
     });
 
     test('String array unpacking', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
+      for (var i = 0; i < testRuns; i++) {
         final arrayPtr = TEXT(testStringArray);
 
         // 400 is an arbitrarily long length to try and force an overflow error,
@@ -65,7 +65,7 @@ void main() {
     });
 
     test('String array packing', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
+      for (var i = 0; i < testRuns; i++) {
         final lpStringArray = testDartStringArray.toWideCharArray();
 
         final outArray = lpStringArray.unpackStringArray(100);
@@ -80,7 +80,7 @@ void main() {
   if (isWindowsRuntimeAvailable()) {
     group('HSTRING tests', () {
       test('String to HSTRING conversion', () {
-        for (var i = 0; i < TEST_RUNS; i++) {
+        for (var i = 0; i < testRuns; i++) {
           const string = 'This is a string to convert.\n';
           final hstring = convertToHString(string);
 
@@ -91,7 +91,7 @@ void main() {
         }
       });
       test('String to HSTRING conversion -- more complex', () {
-        for (var i = 0; i < TEST_RUNS; i++) {
+        for (var i = 0; i < testRuns; i++) {
           const string = '''
 Some emojis: 💼📃👩🏾‍💻🛀🏼🤗
 Some Hangul: 이력서

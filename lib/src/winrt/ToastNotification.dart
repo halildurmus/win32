@@ -22,7 +22,7 @@ import '../structs.g.dart';
 import '../utils.dart';
 import '../winrt_constants.dart';
 import '../winrt_helpers.dart';
-import 'IToastNotificationFactory.dart';
+import 'itoastnotificationfactory.dart';
 
 const _className = 'Windows.UI.Notifications.ToastNotification';
 

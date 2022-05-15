@@ -23,9 +23,9 @@ import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt_helpers.dart';
-import 'IHostName.dart';
-import '../com/IInspectable.dart';
-import 'IVectorView`1.dart';
+import 'ihostname.dart';
+import '../com/iinspectable.dart';
+import 'ivectorview.dart';
 
 /// @nodoc
 const IID_INetworkInformationStatics = '{5074F851-950D-4165-9C15-365619481EEA}';

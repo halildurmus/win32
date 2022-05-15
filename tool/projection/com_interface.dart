@@ -1,7 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
-import '../shared/importHeaders.dart';
+import '../shared/import_headers.dart';
 import 'com_method.dart';
 import 'com_property.dart';
 import 'method.dart';
@@ -76,7 +76,7 @@ class ComInterfaceProjection {
     if (typeDef.isDelegate) {
       return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
     } else if (typeDef.isInterface) {
-      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(typeDef.name.split('.').last)}.dart';
+      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
     } else {
       return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
@@ -129,7 +129,10 @@ class ComInterfaceProjection {
       // TODO: Use exclusions.dart for these next two lines
       ..removeWhere((item) => item.endsWith('ICondition.dart'))
       ..removeWhere((item) => item.endsWith('IStemmer.dart'));
-    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+    return imports
+        .map((import) => "import '$pathToSrc$import';")
+        .join('\n')
+        .toLowerCase();
   }
 
   String get header => '''

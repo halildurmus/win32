@@ -27,7 +27,7 @@ void generateWinRTApis() {
     final dartClass = interfaceProjection.toString();
 
     final classOutputFilename =
-        stripAnsiUnicodeSuffix(interface.split('.').last);
+        stripAnsiUnicodeSuffix(interface.split('.').last).toLowerCase();
     final classOutputPath = 'lib/src/winrt/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));

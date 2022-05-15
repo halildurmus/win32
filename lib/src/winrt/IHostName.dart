@@ -25,7 +25,7 @@ import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../winrt_helpers.dart';
 import '../types.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IHostName = '{BF8ECAAD-ED96-49A7-9084-D416CAE88DCB}';

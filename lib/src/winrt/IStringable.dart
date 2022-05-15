@@ -26,9 +26,9 @@ import '../winrt_helpers.dart';
 import '../types.dart';
 
 import '../extensions/hstring_array.dart';
-import 'IVectorView`1.dart';
+import 'ivectorview.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';

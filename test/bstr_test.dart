@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 @TestOn('windows')
 
 import 'dart:ffi';
@@ -6,13 +8,13 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-const TEST_RUNS = 500;
-
 void main() {
+  const testRuns = 500;
+
   test('BSTR allocation', () {
     const testString = 'Hello world';
 
-    for (var i = 0; i < TEST_RUNS; i++) {
+    for (var i = 0; i < testRuns; i++) {
       final bstr = BSTR.fromString(testString);
 
       // A BSTR should have a DWORD-length prefix containing its length.
@@ -57,7 +59,7 @@ void main() {
     const testString = 'Longhorn is a bar in the village resort between the '
         'Whistler and Blackcomb mountains';
 
-    for (var i = 0; i < TEST_RUNS; i++) {
+    for (var i = 0; i < testRuns; i++) {
       final bstr = BSTR.fromString(testString);
 
       expect(testString.length, equals(84));
@@ -73,7 +75,7 @@ void main() {
   test('BSTR clone', () {
     const testString = 'This message is not unique.';
 
-    for (var i = 0; i < TEST_RUNS; i++) {
+    for (var i = 0; i < testRuns; i++) {
       final original = BSTR.fromString(testString);
       final clone = original.clone();
 
@@ -88,7 +90,7 @@ void main() {
   });
 
   test('BSTR concatenation', () {
-    for (var i = 0; i < TEST_RUNS; i++) {
+    for (var i = 0; i < testRuns; i++) {
       final first = BSTR.fromString('Windows');
       final second = BSTR.fromString(' and Dart');
       final matchInHeaven = first + second;

@@ -23,8 +23,8 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
 import '../winrt_helpers.dart';
-import '../com/IInspectable.dart';
-import 'IVectorView`1.dart';
+import '../com/iinspectable.dart';
+import 'ivectorview.dart';
 
 /// @nodoc
 const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';

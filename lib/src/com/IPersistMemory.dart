@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IPersist.dart';
+import 'ipersist.dart';
 
 /// @nodoc
 const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';

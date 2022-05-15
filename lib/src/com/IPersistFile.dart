@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IPersist.dart';
+import 'ipersist.dart';
 
 /// @nodoc
 const IID_IPersistFile = '{0000010B-0000-0000-C000-000000000046}';

@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IWbemClassObject.dart';
+import 'iwbemclassobject.dart';
 
 /// @nodoc
 const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';

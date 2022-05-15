@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IAppxManifestReader2.dart';
+import 'iappxmanifestreader2.dart';
 
 /// @nodoc
 const IID_IAppxManifestReader3 = '{C43825AB-69B7-400A-9709-CC37F5A72D24}';

@@ -17,7 +17,8 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
 ''';
 
   if (parentInterfaces.isNotEmpty) {
-    final interfaceName = parentInterfaces.first.name.split('.').last;
+    final interfaceName =
+        parentInterfaces.first.name.split('.').last.toLowerCase();
     if (interfaceName.isNotEmpty) {
       return "$v2StandardImports\nimport '$interfaceName.dart';";
     }

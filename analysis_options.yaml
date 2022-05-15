@@ -1,7 +1,7 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude: [example/explorer/**]
+  exclude: [example/**]
   language: 
     strict-casts: true
     strict-inference: true
@@ -31,14 +31,6 @@ linter:
     # https://github.com/microsoft/win32metadata/issues/99 makes it impossible
     # to resolve today.
     library_private_types_in_public_api: false
-
-    # We name Win32 constants for consistency with Win32, not Dart
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    camel_case_types: false
-
-    # COM interop classes are named for their contents
-    file_names: false
 
     # Unnecessary in most cases, but avoids accidental name clashes.
     unnecessary_this: false

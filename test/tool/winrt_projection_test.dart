@@ -131,7 +131,7 @@ void main() {
         'Windows.Storage.Pickers.IFileOpenPicker');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.interfaceImport, equals('IInspectable.dart'));
+    expect(projection.interfaceImport, equals('iinspectable.dart'));
   });
 
   test('WinRT interface import header is meaningful', () {
@@ -139,7 +139,7 @@ void main() {
         'Windows.Storage.Pickers.IFileOpenPicker');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.importHeader, contains('IInspectable.dart'));
+    expect(projection.importHeader, contains('iinspectable.dart'));
   });
 
   test('WinRT GetDateTime returns a DateTime', () {
@@ -307,6 +307,6 @@ void main() {
     final projection = WinRTInterfaceProjection(winTypeDef!);
     final output = projection.toString();
     expect(output, isNotEmpty);
-    expect(output, contains('IInspectable.dart'));
+    expect(output, contains('iinspectable.dart'));
   });
 }

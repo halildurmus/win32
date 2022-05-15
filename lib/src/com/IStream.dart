@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'ISequentialStream.dart';
+import 'isequentialstream.dart';
 
 /// @nodoc
 const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';

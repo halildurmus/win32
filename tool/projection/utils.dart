@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
-import '../shared/falseProperties.dart';
+import '../shared/false_properties.dart';
 import 'safenames.dart';
 import 'type.dart';
 

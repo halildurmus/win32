@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IDispatch.dart';
+import 'idispatch.dart';
 
 /// @nodoc
 const IID_IShellLinkDual = '{88A05C00-F000-11CE-8350-444553540000}';

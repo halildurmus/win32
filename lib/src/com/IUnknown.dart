@@ -3,7 +3,9 @@
 // This class is generated manually, since it includes additional helper
 // functions that are only for the base COM object.
 
-// ignore_for_file: camel_case_types, non_constant_identifier_names
+// ignore_for_file: camel_case_types
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: constant_identifier_names
 
 import 'dart:ffi';
 

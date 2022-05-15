@@ -26,9 +26,9 @@ import '../winrt_helpers.dart';
 import '../types.dart';
 
 import '../extensions/hstring_array.dart';
-import 'IVectorView`1.dart';
+import 'ivectorview.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';

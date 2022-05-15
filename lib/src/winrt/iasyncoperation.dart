@@ -19,7 +19,7 @@ import '../utils.dart';
 
 import '../winrt_constants.dart';
 
-import 'IAsyncInfo.dart';
+import 'iasyncinfo.dart';
 
 /// @nodoc
 const IID_IAsyncOperation = '{9FC2B0BB-E446-44E2-AA61-9CAB8F636AF2}';

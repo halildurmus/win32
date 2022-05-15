@@ -22,7 +22,7 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt_helpers.dart';
 import '../com/IInspectable.dart';
-import 'IVector`1.dart';
+import 'ivector.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';

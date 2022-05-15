@@ -21,7 +21,7 @@ import '../utils.dart';
 
 import '../winrt_constants.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';

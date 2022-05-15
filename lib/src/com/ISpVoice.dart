@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'ISpEventSource.dart';
+import 'ispeventsource.dart';
 
 /// @nodoc
 const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';

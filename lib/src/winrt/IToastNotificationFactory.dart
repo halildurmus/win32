@@ -8,7 +8,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../com/IInspectable.dart';
+import '../com/iinspectable.dart';
 import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';

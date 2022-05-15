@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import 'IShellItem.dart';
+import 'ishellitem.dart';
 
 /// @nodoc
 const IID_IShellItem2 = '{7E9FB0D3-919F-4307-AB2E-9B1860310C93}';
