@@ -9,10 +9,10 @@ class WindowRoundingSelector extends StatefulWidget {
   const WindowRoundingSelector({Key? key}) : super(key: key);
 
   @override
-  _WindowRoundingSelectorState createState() => _WindowRoundingSelectorState();
+  WindowRoundingSelectorState createState() => WindowRoundingSelectorState();
 }
 
-class _WindowRoundingSelectorState extends State<WindowRoundingSelector> {
+class WindowRoundingSelectorState extends State<WindowRoundingSelector> {
   bool _isWindowRounded = true;
 
   void setWindowRoundingEffect(bool isRounded) {

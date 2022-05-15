@@ -5,10 +5,10 @@ import 'models/volumes.dart';
 
 class VolumePanel extends StatefulWidget {
   @override
-  _VolumePanelState createState() => _VolumePanelState();
+  VolumePanelState createState() => VolumePanelState();
 }
 
-class _VolumePanelState extends State<VolumePanel> {
+class VolumePanelState extends State<VolumePanel> {
   final _volumes = <Volume>[];
 
   @override
@@ -49,10 +49,10 @@ class VolumeCard extends StatefulWidget {
   final Volume volume;
 
   @override
-  _VolumeCardState createState() => _VolumeCardState();
+  VolumeCardState createState() => VolumeCardState();
 }
 
-class _VolumeCardState extends State<VolumeCard> {
+class VolumeCardState extends State<VolumeCard> {
   @override
   Widget build(BuildContext context) => Card(
         child: Padding(
@@ -64,7 +64,7 @@ class _VolumeCardState extends State<VolumeCard> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const FaIcon(FontAwesomeIcons.hdd,
+                    const FaIcon(FontAwesomeIcons.hardDrive,
                         size: 32, color: Colors.blueGrey),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 5, 5, 5),

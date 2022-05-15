@@ -1,15 +1,15 @@
 name: win32_explorer
 description: Drive explorer, built with Flutter
-version: 1.0.0+6
+version: 1.1.0
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.17.0 <3.0.0'
 
 dependencies:
-  ffi: ^1.1.2
+  ffi: ^1.2.1
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^9.2.0
+  font_awesome_flutter: ^10.1.0
   menubar:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
@@ -19,7 +19,7 @@ dependencies:
     path: ../../
 
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.0.0
 
 ## This package is not intended for publishing; it's just an example.
 publish_to: none

@@ -1,7 +1,6 @@
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:menubar/menubar.dart' as menubar;
 import 'package:path_provider/path_provider.dart';
 import 'package:win32/win32.dart';
 
@@ -26,10 +25,10 @@ class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  MainPageState createState() => MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> {
   bool showRoundedCornerSwitch = false;
 
   @override
@@ -53,25 +52,34 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    menubar.setApplicationMenu([
-      menubar.Submenu(label: 'Explore', children: [
-        // This exists only to test that path_provider doesn't break with the
-        // latest Win32. It's entirely redundant to the point of this demo.
-        menubar.MenuItem(
-          label: 'Show Docs Path...',
-          shortcut: LogicalKeySet(LogicalKeyboardKey.control,
-              LogicalKeyboardKey.shift, LogicalKeyboardKey.keyP),
-          onClicked: () async => showDocumentsPath(),
-        ),
-      ]),
-    ]);
-
     return Scaffold(
-      body: Column(
-        children: [
-          if (showRoundedCornerSwitch) const WindowRoundingSelector(),
-          Expanded(child: VolumePanel()),
+      // Unsupported on Windows as of Flutter 3. Adding in preparation for later
+      // releases.
+      body: PlatformMenuBar(
+        menus: [
+          PlatformMenu(label: 'Explore', menus: [
+            PlatformMenuItemGroup(members: [
+              PlatformMenuItem(
+                label: 'Show Docs Path...',
+                shortcut: const SingleActivator(LogicalKeyboardKey.keyP,
+                    control: true, shift: true),
+                onSelected: () async => showDocumentsPath(),
+              )
+            ])
+          ])
         ],
+        body: Column(
+          children: [
+            if (showRoundedCornerSwitch) const WindowRoundingSelector(),
+            Expanded(child: VolumePanel()),
+
+            // Can be removed when PlatformMenuBar is supported on Windows.
+            FloatingActionButton(
+                mini: true,
+                child: const Icon(Icons.folder),
+                onPressed: () async => showDocumentsPath()),
+          ],
+        ),
       ),
     );
   }
