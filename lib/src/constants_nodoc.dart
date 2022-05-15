@@ -3388,3 +3388,12 @@ final IOCTL_STORAGE_REMOVE_ELEMENT_AND_TRUNCATE =
     CTL_CODE(IOCTL_STORAGE_BASE, 0x0730, METHOD_BUFFERED, FILE_ANY_ACCESS);
 final IOCTL_STORAGE_GET_DEVICE_INTERNAL_LOG =
     CTL_CODE(IOCTL_STORAGE_BASE, 0x0731, METHOD_BUFFERED, FILE_ANY_ACCESS);
+
+// -----------------------------------------------------------------------------
+// Wave format constants
+// -----------------------------------------------------------------------------
+const WAVE_FORMAT_UNKNOWN = 0x0000;
+const WAVE_FORMAT_PCM = 0x0001;
+const WAVE_FORMAT_ADPCM = 0x0002;
+const WAVE_FORMAT_IEEE_FLOAT = 0x0003;
+const WAVE_FORMAT_EXTENSIBLE = 0xFFFE;
