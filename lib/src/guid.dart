@@ -1,6 +1,16 @@
 // guid.dart
 
-// TODO: Turn this into an extension helper
+// GUID (Globally Unique Identifier).
+
+// Struct representing the GUID type. GUID is not represented in the Win32
+// metadata, which instead points at the .NET System.Guid. So we have to project
+// this manually.
+
+// For reference, the MIT-licensed implementation used in .NET can be found here:
+// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Guid.cs
+
+// The GUID structure as used in Win32 is documented here:
+// https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid
 
 // ignore_for_file: camel_case_types
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
@@ -78,20 +88,3 @@ class GUID extends Struct {
 }
 
 Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
-
-// typedef struct COR_FIELD_OFFSET
-//     {
-//     mdFieldDef ridOfField;
-//     ULONG32 ulOffset;
-//     } 	COR_FIELD_OFFSET;
-
-/// Stores the offset, within a class, of the specified field.
-///
-/// {@category Struct}
-class COR_FIELD_OFFSET extends Struct {
-  @Uint32()
-  external int ridOfField;
-
-  @Uint32()
-  external int ulOffset;
-}

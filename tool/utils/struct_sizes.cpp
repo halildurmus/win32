@@ -47,7 +47,6 @@
 void main()
 {
     // Manually generated structs
-    printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("  'GUID': %zu,\n", sizeof(GUID));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));

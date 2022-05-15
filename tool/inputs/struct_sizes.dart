@@ -8,7 +8,6 @@
 // resultant output directly into this file.
 
 const structSize64 = {
-  'COR_FIELD_OFFSET': 8,
   'GUID': 16,
   'PROPVARIANT': 24,
   'VARIANT': 24,
@@ -312,7 +311,6 @@ const structSize64 = {
 };
 
 const structSize32 = {
-  'COR_FIELD_OFFSET': 8,
   'GUID': 16,
   'PROPVARIANT': 16,
   'VARIANT': 16,

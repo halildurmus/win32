@@ -16,9 +16,6 @@ import 'package:win32/winsock2.dart';
 
 void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;
-  test('Struct COR_FIELD_OFFSET is the right size', () {
-    expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
-  });
   test('Struct GUID is the right size', () {
     expect(sizeOf<GUID>(), equals(16));
   });
