@@ -1,3 +1,15 @@
+## 2.6.0
+
+- Add support for returning vectors from Windows Runtime APIs (#406, thanks to
+  @halidurmus)
+- Automatically convert Windows Runtime date properties to Dart DateTime
+  equivalents (#418, thanks to @halidurmus)
+- Add additional documentation on Windows Runtime APIs
+- Update IDispatch sample to show how to supply parameters
+- Add example for Windows Audio Session API (#422, thanks to @postacik)
+- Fix an error with strings in structs (#425, thanks to @postacik)
+- Update contributor documentation
+
 ## 2.5.2
 
 - Add example for monitor EDID data (#393, thanks to @krjw-eyev)
