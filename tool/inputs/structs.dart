@@ -487,6 +487,8 @@ const structsToGenerate = <String, String>{
       "Contains version information for a file. This information is language and code page independent.",
   "Windows.Win32.Media.Audio.WAVEFORMATEX":
       "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information.",
+  "Windows.Win32.Media.Audio.WAVEFORMATEXTENSIBLE":
+      "The WAVEFORMATEXTENSIBLE structure defines the format of waveform-audio data for formats having more than two channels or higher sample resolutions than allowed by WAVEFORMATEX. It can also be used to define any format that can be defined by WAVEFORMATEX.",
   "Windows.Win32.Media.Audio.WAVEHDR":
       "The WAVEHDR structure defines the header used to identify a waveform-audio buffer.",
   "Windows.Win32.Media.Audio.WAVEOUTCAPSW":
