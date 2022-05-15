@@ -16,8 +16,8 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
-import 'com/IDispatch.dart';
-import 'com/IUnknown.dart';
+import 'com/idispatch.dart';
+import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';

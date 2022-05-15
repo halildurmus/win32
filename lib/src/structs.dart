@@ -11,8 +11,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'com/IDispatch.dart';
-import 'com/IUnknown.dart';
+import 'com/idispatch.dart';
+import 'com/iunknown.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'structs.g.dart';
