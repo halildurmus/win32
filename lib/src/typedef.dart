@@ -20,7 +20,7 @@ import 'mixins/genericparams_mixin.dart';
 import 'mixins/supportedarchitectures_mixin.dart';
 import 'property.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils/exception.dart';

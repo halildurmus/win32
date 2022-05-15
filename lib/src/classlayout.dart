@@ -4,8 +4,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/constants.dart';
+import 'com/structs.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 
 /// A tuple of a field and its byte offset within a parent struct.
 class FieldOffset extends TokenObject {

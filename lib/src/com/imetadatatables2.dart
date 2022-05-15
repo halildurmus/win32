@@ -2,11 +2,15 @@
 
 // coverage:ignore-file
 
+// ignore_for_file: camel_case_types
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IMetaDataTables.dart';
+import 'imetadatatables.dart';
 
 /// @nodoc
 const IID_IMetaDataTables2 = '{BADB5F70-58DA-43a9-A1C6-D74819F19B15}';

@@ -6,6 +6,7 @@ analyzer:
   language:
     strict-casts: true
     strict-inference: true
+    strict-raw-types: true
     
 linter:
   rules:
@@ -24,11 +25,4 @@ linter:
     unawaited_futures: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
-    
-    # We name Win32 constants for consistency with Win32, not Dart
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    camel_case_types: false
 
-    # COM interop classes are named for their contents
-    file_names: false

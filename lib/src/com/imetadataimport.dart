@@ -2,10 +2,16 @@
 
 // coverage:ignore-file
 
+// ignore_for_file: camel_case_types
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
+
+import 'structs.dart';
 
 typedef _CloseEnum_Native = Int32 Function(Pointer obj, IntPtr hEnum);
 typedef _CloseEnum_Dart = int Function(Pointer obj, int hEnum);

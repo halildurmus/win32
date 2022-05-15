@@ -6,7 +6,7 @@ import 'package:win32/win32.dart';
 import 'genericparam.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 

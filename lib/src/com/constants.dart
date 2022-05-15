@@ -5,6 +5,8 @@
 
 // coverage:ignore-file
 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import '../enums.dart';
 import '../utils/exception.dart';
 

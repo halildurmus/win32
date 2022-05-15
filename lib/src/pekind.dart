@@ -2,13 +2,15 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataImport2.dart';
 import 'com/constants.dart';
+import 'com/imetadataimport2.dart';
 import 'utils/exception.dart';
 
 const _IMAGE_FILE_MACHINE_I386 = 0x014C;
