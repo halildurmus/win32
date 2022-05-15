@@ -135,10 +135,10 @@ export 'src/winscard.dart';
 export 'src/winspool.dart';
 export 'src/wlanapi.dart';
 
-export 'src/api-ms-win-core-winrt-l1-1-0.dart';
-export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
-export 'src/api-ms-win-ro-typeresolution-l1-1-0.dart';
-export 'src/api-ms-win-wsl-api-l1-1-0.dart';
+export 'src/api_ms_win_core_winrt_l1_1_0.dart';
+export 'src/api_ms_win_core_winrt_string_l1_1_0.dart';
+export 'src/api_ms_win_ro_typeresolution_l1_1_0.dart';
+export 'src/api_ms_win_wsl_api_l1_1_0.dart';
 
 // COM and Windows Runtime foundational exports
 export 'src/combase.dart';

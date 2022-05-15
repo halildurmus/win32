@@ -6,7 +6,7 @@
 
 import 'dart:ffi';
 
-import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../types.dart';
 import '../winrt_helpers.dart';
 

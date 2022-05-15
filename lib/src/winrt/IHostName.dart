@@ -21,7 +21,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../winrt_helpers.dart';
 import '../types.dart';
 
