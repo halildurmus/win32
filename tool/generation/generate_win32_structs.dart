@@ -16,8 +16,8 @@ import 'headers.dart';
 
 const structFileImports = '''
 import 'callbacks.dart';
-import 'com/IDispatch.dart';
-import 'com/IUnknown.dart';
+import 'com/idispatch.dart';
+import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';

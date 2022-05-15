@@ -12,7 +12,7 @@ import 'package:ffi/ffi.dart';
 
 import 'api_ms_win_core_winrt_l1_1_0.dart';
 import 'api_ms_win_core_winrt_string_l1_1_0.dart';
-import 'com/IInspectable.dart';
+import 'com/iinspectable.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'exceptions.dart';

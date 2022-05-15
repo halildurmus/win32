@@ -23,7 +23,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String get interfaceImport {
     if (typeDef.interfaces.isEmpty) {
       // Inherits from IInspectable, which is a traditional COM type.
-      return 'IInspectable.dart';
+      return 'iinspectable.dart';
     } else {
       return getImportForTypeDef(typeDef.interfaces.first);
     }
@@ -77,7 +77,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   int cacheVtableStart(TypeDef? type) => 6;
 
   @override
-  String get rootHeader => "import '../com/IInspectable.dart';";
+  String get rootHeader => "import '../com/iinspectable.dart';";
 
   @override
   String get extraHeaders => """
@@ -86,7 +86,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     import '../types.dart';
 
     import '../extensions/hstring_array.dart';
-    import 'IVectorView`1.dart';
+    import 'ivectorview.dart';
   """;
 
   @override
