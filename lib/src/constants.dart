@@ -8615,3 +8615,57 @@ const DIREG_DRV = 0x00000002;
 
 /// Both hardware and software keys.
 const DIREG_BOTH = 0x00000004;
+
+// -----------------------------------------------------------------------------
+// IAudioClient constants
+// -----------------------------------------------------------------------------
+
+/// The AUDCLNT_SHAREMODE enumeration defines constants that indicate whether an
+/// audio stream will run in shared mode or in exclusive mode.
+///
+/// {@category Enum}
+class AUDCLNT_SHAREMODE {
+  /// The audio stream will run in shared mode.
+  static const AUDCLNT_SHAREMODE_SHARED = 0;
+
+  /// The audio stream will run in exclusive mode.
+  static const AUDCLNT_SHAREMODE_EXCLUSIVE = 1;
+}
+
+/// The AUDCLNT_BUFFERFLAGS enumeration defines flags that indicate the status
+/// of an audio endpoint buffer.
+///
+/// {@category Enum}
+class AUDCLNT_BUFFERFLAGS {
+  /// The data in the packet is not correlated with the previous packet's device
+  /// position; this is possibly due to a stream state transition or timing
+  /// glitch.
+  static const AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 0x1;
+
+  /// Treat all of the data in the packet as silence and ignore the actual data
+  /// values.
+  static const AUDCLNT_BUFFERFLAGS_SILENT = 0x2;
+
+  /// The time at which the device's stream position was recorded is uncertain.
+  /// Thus, the client might be unable to accurately set the time stamp for the
+  /// current data packet.
+  static const AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 0x4;
+}
+
+/// Defines values that describe the characteristics of an audio stream.
+///
+/// {@category Enum}
+class AUDCLNT_STREAMOPTIONS {
+  /// No stream options.
+  static const AUDCLNT_STREAMOPTIONS_NONE = 0;
+
+  /// The audio stream is a 'raw' stream that bypasses all signal processing
+  /// except for endpoint specific, always-on processing in the Audio Processing
+  /// Object (APO), driver, and hardware.
+  static const AUDCLNT_STREAMOPTIONS_RAW = 0x1;
+
+  /// The audio client is requesting that the audio engine match the format
+  /// proposed by the client.
+  static const AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2;
+  static const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
+}

@@ -6735,6 +6735,48 @@ class WAVEFORMATEX extends Struct {
   external int cbSize;
 }
 
+/// The WAVEFORMATEXTENSIBLE structure defines the format of waveform-audio
+/// data for formats having more than two channels or higher sample
+/// resolutions than allowed by WAVEFORMATEX. It can also be used to define
+/// any format that can be defined by WAVEFORMATEX.
+///
+/// {@category Struct}
+class WAVEFORMATEXTENSIBLE extends Struct {
+  external WAVEFORMATEX Format;
+
+  external _WAVEFORMATEXTENSIBLE__Samples_e__Union Samples;
+
+  @Uint32()
+  external int dwChannelMask;
+
+  external GUID SubFormat;
+}
+
+/// {@category Struct}
+@Packed(1)
+class _WAVEFORMATEXTENSIBLE__Samples_e__Union extends Union {
+  @Uint16()
+  external int wValidBitsPerSample;
+
+  @Uint16()
+  external int wSamplesPerBlock;
+
+  @Uint16()
+  external int wReserved;
+}
+
+extension WAVEFORMATEXTENSIBLE_Extension on WAVEFORMATEXTENSIBLE {
+  int get wValidBitsPerSample => this.Samples.wValidBitsPerSample;
+  set wValidBitsPerSample(int value) =>
+      this.Samples.wValidBitsPerSample = value;
+
+  int get wSamplesPerBlock => this.Samples.wSamplesPerBlock;
+  set wSamplesPerBlock(int value) => this.Samples.wSamplesPerBlock = value;
+
+  int get wReserved => this.Samples.wReserved;
+  set wReserved(int value) => this.Samples.wReserved = value;
+}
+
 /// The WAVEHDR structure defines the header used to identify a
 /// waveform-audio buffer.
 ///
