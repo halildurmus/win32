@@ -1,9 +1,9 @@
 ## 2.6.0
 
 - Add support for returning vectors from Windows Runtime APIs (#406, thanks to
-  @halidurmus)
+  @halildurmus)
 - Automatically convert Windows Runtime date properties to Dart DateTime
-  equivalents (#418, thanks to @halidurmus)
+  equivalents (#418, thanks to @halildurmus)
 - Add additional documentation on Windows Runtime APIs
 - Update IDispatch sample to show how to supply parameters
 - Add example for Windows Audio Session API (#422, thanks to @postacik)
@@ -16,7 +16,7 @@
 - Expand Bluetooth example (#397, thanks to @Sunbreak)
 - Fix a comment typo (#398, thanks to @gaddlord)
 - Improve fidelity of WinRT Calendar class and more tests (#396, #404, #405,
-  #412 thanks to @halidurmus)
+  #412 thanks to @halildurmus)
 - Add additional spell checker COM interfaces
 - Add example for an owner-draw (custom) titlebar
 - Add new Wbem WMI interfaces
