@@ -6,6 +6,10 @@
 
 // Dart representations of Win32 C macros
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
 import 'constants.dart';
 
 /// Creates a WORD value by concatenating the specified values.
@@ -19,6 +23,16 @@ int MAKEWORD(int a, int b) => a & 0xff | ((b & 0xff) << 8);
 // #define MAKELONG(a, b)   ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) |
 //                          ((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16))
 int MAKELONG(int a, int b) => a & 0xffff | ((b & 0xffff) << 16);
+
+/// Converts an integer value to a resource type compatible with the
+/// resource-management functions.
+///
+/// Although this creates a pointer, it doesn't allocate any memory, so there's
+/// no need to worry about calling calloc.free() on the Pointer when it's no
+/// longer in use.
+//
+// #define MAKEINTRESOURCEW(i) ((LPWSTR)((ULONG_PTR)((WORD)(i))))
+Pointer<Utf16> MAKEINTRESOURCE(int i) => Pointer.fromAddress(i);
 
 /// Retrieves the low-order word from the specified 32-bit value.
 //

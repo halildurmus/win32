@@ -1,3 +1,10 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+// Prints out information about one of a number of given Windows Subsystem for
+// Linux distributions.
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -94,6 +101,7 @@ int runCommand(String distributionName, String command) {
 }
 
 void main() {
+  print('WSL distributions registered:');
   for (final distributionName in ['Ubuntu', 'Debian', 'kali-linux']) {
     if (isDistributionRegistered(distributionName)) {
       final config = getDistributionConfiguration(distributionName);

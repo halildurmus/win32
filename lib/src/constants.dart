@@ -11,6 +11,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'macros.dart';
+
 // -----------------------------------------------------------------------------
 // General constants
 // -----------------------------------------------------------------------------
@@ -2110,6 +2112,73 @@ const HWND_MESSAGE = 0xFFFFFFFFFFFFFFFD; // (HWND) -3
 /// invisible unowned windows, overlapped windows, and pop-up windows; but the
 /// message is not sent to child windows.
 const HWND_BROADCAST = 0xffff;
+
+// -----------------------------------------------------------------------------
+// Pre-defined resource types
+// -----------------------------------------------------------------------------
+
+/// Hardware-dependent cursor resource.
+final RT_CURSOR = MAKEINTRESOURCE(1);
+
+/// Bitmap resource.
+final RT_BITMAP = MAKEINTRESOURCE(2);
+
+/// Hardware-dependent icon resource.
+final RT_ICON = MAKEINTRESOURCE(3);
+
+/// Menu resource.
+final RT_MENU = MAKEINTRESOURCE(4);
+
+/// Dialog box.
+final RT_DIALOG = MAKEINTRESOURCE(5);
+
+/// String-table entry.
+final RT_STRING = MAKEINTRESOURCE(6);
+
+/// Font directory resource.
+final RT_FONTDIR = MAKEINTRESOURCE(7);
+
+/// Font resource.
+final RT_FONT = MAKEINTRESOURCE(8);
+
+/// Accelerator table.
+final RT_ACCELERATOR = MAKEINTRESOURCE(9);
+
+/// Application-defined resource (raw data).
+final RT_RCDATA = MAKEINTRESOURCE(10);
+
+/// Message-table entry.
+final RT_MESSAGETABLE = MAKEINTRESOURCE(11);
+
+/// Hardware-independent cursor resource.
+final RT_GROUP_CURSOR = MAKEINTRESOURCE(11 + RT_CURSOR.address);
+
+/// Hardware-independent icon resource.
+final RT_GROUP_ICON = MAKEINTRESOURCE(11 + RT_ICON.address);
+
+/// Version resource.
+final RT_VERSION = MAKEINTRESOURCE(16);
+
+/// Allows a resource editing tool to associate a string with an .rc file.
+final RT_DLGINCLUDE = MAKEINTRESOURCE(17);
+
+/// Plug and Play resource.
+final RT_PLUGPLAY = MAKEINTRESOURCE(19);
+
+/// VXD.
+final RT_VXD = MAKEINTRESOURCE(20);
+
+/// Animated cursor.
+final RT_ANICURSOR = MAKEINTRESOURCE(21);
+
+/// Animated icon.
+final RT_ANIICON = MAKEINTRESOURCE(22);
+
+/// HTML resource.
+final RT_HTML = MAKEINTRESOURCE(23);
+
+/// Side-by-Side Assembly Manifest.
+final RT_MANIFEST = MAKEINTRESOURCE(24);
 
 // -----------------------------------------------------------------------------
 // SendMessageTimeout values

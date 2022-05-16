@@ -2,8 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Demonstrates getting information from the Windows Management
-// Instrumentation (WMI) API using the WMI Query Language (WQL).
+// Demonstrates getting information from the Windows Management Instrumentation
+// (WMI) API using the WMI Query Language (WQL).
 
 import 'dart:ffi';
 

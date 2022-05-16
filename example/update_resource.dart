@@ -1,11 +1,15 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+/// Updates a Dart executable with a manifest.
+
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
-
-final RT_MANIFEST = Pointer<Utf16>.fromAddress(24);
 
 void main(List<String> args) {
   if (args.length != 2) {
