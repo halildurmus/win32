@@ -222,6 +222,25 @@ void main() {
         startsWith('DateTime get DateModified'));
   });
 
+  test('WinRT get property successfully projects Duration', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.System.Power.IPowerManagerStatics');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final dischargeTimeProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_RemainingDischargeTime');
+
+    expect(
+        dischargeTimeProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
+    expect(dischargeTimeProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+    expect(dischargeTimeProjection.returnType.dartType, equals('int'));
+    expect(dischargeTimeProjection.toString().trimLeft(),
+        startsWith('Duration get RemainingDischargeTime'));
+  });
+
   test('WinRT get property successfully projects List<String>', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
