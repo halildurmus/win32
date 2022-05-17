@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'dart:math';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart' hide Point;
 
 import '_app.dart' as app;
 import '_tray.dart' as tray;

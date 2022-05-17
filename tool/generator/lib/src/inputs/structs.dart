@@ -590,3 +590,27 @@ const structsToGenerate = <String, String>{
   "Windows.Win32.UI.Input.XboxController.XINPUT_VIBRATION":
       "Specifies motor speed levels for the vibration function of a controller."
 };
+
+const windowsRuntimeStructsToGenerate = <String, String>{
+  "Windows.Foundation.Numerics.Matrix3x2":
+      "Describes a 3*2 floating point matrix.",
+  "Windows.Foundation.Numerics.Matrix4x4":
+      "Describes a 4*4 floating point matrix.",
+  "Windows.Foundation.Numerics.Plane":
+      "Describes a plane (a flat, two-dimensional surface).",
+  "Windows.Foundation.Numerics.Quaternion":
+      "Describes a quaternion, which is an abstract representation of an orientation in space that is based on complex numbers.",
+  "Windows.Foundation.Numerics.Rational":
+      "Describes a number that can be created by the division of 2 integers.",
+  "Windows.Foundation.Numerics.Vector2":
+      "Describes a vector of two floating-point components.",
+  "Windows.Foundation.Numerics.Vector3":
+      "Describes a vector of three floating-point components.",
+  "Windows.Foundation.Numerics.Vector4":
+      "Describes a vector of four floating-point components.",
+  "Windows.Foundation.Point":
+      "Represents an x- and y-coordinate pair in two-dimensional space. Can also represent a logical point for certain property usages.",
+  "Windows.Foundation.Rect":
+      "Describes the width, height, and point origin of a rectangle.",
+  "Windows.Foundation.Size": "Describes the width and height of an object.",
+};
