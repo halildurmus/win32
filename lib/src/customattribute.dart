@@ -67,8 +67,8 @@ class CustomAttribute extends TokenObject {
 
   /// Decode attribute parameter types
   List<TypeIdentifier> get parameterTypes {
-    final typeSignatureBlob = memberRef.signatureBlob;
     if (_parameterTypes.isEmpty) {
+      final typeSignatureBlob = memberRef.signatureBlob;
       // Parse through the signature blob, and map each recovered
       // type to the corresponding parameter.
       var blobPtr = 1; // skip prolog
@@ -81,11 +81,6 @@ class CustomAttribute extends TokenObject {
         blobPtr += runtimeType.offsetLength;
 
         // TODO: Deal with arrays. Code can be found in method.dart.
-
-        // if (runtimeType.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
-        //   blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
-        //   paramsIndex++; //we've added two parameters here
-        // } else {
         _parameterTypes.add(runtimeType.typeIdentifier);
         // }
         paramsIndex++;
@@ -98,10 +93,9 @@ class CustomAttribute extends TokenObject {
 
   /// Decode parameter values per §II.23.3 of ECMA-335.
   List<Object> get parameterValues {
-    final blob = signatureBlob.toList();
-    var blobIdx = 2; // skip two-byte 0x0001 prolog
-    print('Blob is ${blob.length} long');
     if (_parameterValues.isEmpty) {
+      final blob = signatureBlob.buffer.asByteData();
+      var blobIdx = 2; // skip two-byte 0x0001 prolog
       for (var paramIdx = 0; paramIdx < _parameterTypes.length; paramIdx++) {
         var baseType = _parameterTypes[paramIdx].baseType;
         if (_parameterTypes[paramIdx].type?.isEnum == true) {
@@ -117,37 +111,31 @@ class CustomAttribute extends TokenObject {
         switch (baseType) {
           case BaseType.String:
             // Get string length and move pointer forward
-            final packedLen = UncompressedData.fromBlob(blob.sublist(blobIdx));
+            final packedLen =
+                UncompressedData.fromBlob(blob.buffer.asUint8List(blobIdx, 4));
             final stringLength = packedLen.data;
             blobIdx += packedLen.dataLength;
 
             // Add decoded string value and move pointer forward
-            print('$blobIdx -> $stringLength for $paramIdx');
             _parameterValues.add(const Utf8Decoder()
-                .convert(blob, blobIdx, blobIdx + stringLength));
+                .convert(blob.buffer.asUint8List(blobIdx, stringLength)));
             blobIdx += stringLength;
-            print(_parameterValues[paramIdx]);
             break;
 
           case BaseType.Uint16:
-            _parameterValues
-                .add(Uint16List.fromList(blob.sublist(blobIdx)).first);
+            _parameterValues.add(blob.getUint16(blobIdx, Endian.little));
             blobIdx += 2;
             break;
           case BaseType.Int16:
-            _parameterValues
-                .add(Int16List.fromList(blob.sublist(blobIdx)).first);
+            _parameterValues.add(blob.getInt16(blobIdx, Endian.little));
             blobIdx += 2;
             break;
           case BaseType.Uint32:
-            print('Uint32 for $paramIdx');
-            _parameterValues
-                .add(Uint32List.fromList(blob.sublist(blobIdx)).first);
+            _parameterValues.add(blob.getUint32(blobIdx, Endian.little));
             blobIdx += 4;
             break;
           case BaseType.Int32:
-            _parameterValues
-                .add(Int32List.fromList(blob.sublist(blobIdx)).first);
+            _parameterValues.add(blob.getInt32(blobIdx, Endian.little));
             blobIdx += 4;
             break;
           default:

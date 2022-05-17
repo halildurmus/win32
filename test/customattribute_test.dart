@@ -37,18 +37,7 @@ void main() {
     expect(
         deprecated.signatureBlob.sublist(0, 2), equals([0x01, 0x00])); // prolog
 
-    // These numbers will vary from version to version of Windows; they're here
-    // just for experimentation.
-    // expect(deprecated.token,
-    //     equals(0x0C000F1E)); // custom attribute DeprecatedAttribute
-    // expect(deprecated.memberRef.token, equals(0x0A000015)); // memberref .ctor
-
     final ref = MemberRef.fromToken(deprecated.scope, 0x0A000015);
-    // expect(
-    //     ref.referencedToken,
-    //     equals(
-    //         0x0100069E)); // typeRef to Windows.Foundation.Metadata.DeprecatedAttribute
-
     expect(ref.signatureBlob.length, equals(9));
     expect(ref.signatureBlob.toList(),
         containsAllInOrder([0x20, 0x04, 0x01, 0x0e]));
