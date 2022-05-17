@@ -51,6 +51,26 @@ void main() {
       winrtUninitialize();
     });
 
+    test('WinRT getIids test', () {
+      winrtInitialize();
+
+      const calendarClassName = 'Windows.Globalization.Calendar';
+      const iids = [
+        '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}', // ICalendar
+        '{00000038-0000-0000-C000-000000000046}', // IWeakReferenceSource
+        '{BB3C25E5-46CF-4317-A3F5-02621AD54478}', // ITimeZoneOnCalendar
+        '{0CA51CC6-17CF-4642-B08E-473DCC3CA3EF}'
+      ];
+
+      final object = CreateObject(calendarClassName, IID_ICalendar);
+      final calendar = ICalendar(object);
+
+      expect(calendar.iids, equals(iids));
+
+      free(object);
+      winrtUninitialize();
+    });
+
     test('WinRT getRuntimeClassName test', () {
       winrtInitialize();
 
