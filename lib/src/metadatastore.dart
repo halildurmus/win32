@@ -5,7 +5,7 @@
 // waitFor is controversial, but necessary in the absence of a better mechanism
 // for non-Flutter packages to load binary assets.
 //
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, non_constant_identifier_names
 
 import 'dart:cli';
 import 'dart:ffi';
@@ -15,10 +15,10 @@ import 'dart:isolate';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataAssemblyImport.dart';
-import 'com/IMetaDataDispenser.dart';
-import 'com/IMetaDataImport2.dart';
 import 'com/constants.dart';
+import 'com/imetadataassemblyimport.dart';
+import 'com/imetadatadispenser.dart';
+import 'com/imetadataimport2.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';

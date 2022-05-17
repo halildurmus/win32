@@ -18,7 +18,7 @@ import 'moduleref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';

@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 import 'type_aliases.dart';
 
 /// A member reference.

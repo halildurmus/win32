@@ -98,146 +98,143 @@ void main() {
 
     expect(iaowp.methods.length, equals(5));
 
-    final put_Progress = iaowp.methods[0];
-    expect(put_Progress.memberAccess, equals(MemberAccess.public));
-    expect(put_Progress.isHideBySig, isTrue);
-    expect(put_Progress.isSpecialName, isTrue);
-    expect(put_Progress.vTableLayout, equals(VtableLayout.newSlot));
-    expect(put_Progress.isAbstract, isTrue);
-    expect(put_Progress.isVirtual, isTrue);
+    final putProgress = iaowp.methods[0];
+    expect(putProgress.memberAccess, equals(MemberAccess.public));
+    expect(putProgress.isHideBySig, isTrue);
+    expect(putProgress.isSpecialName, isTrue);
+    expect(putProgress.vTableLayout, equals(VtableLayout.newSlot));
+    expect(putProgress.isAbstract, isTrue);
+    expect(putProgress.isVirtual, isTrue);
     expect(
-        put_Progress.returnType.typeIdentifier.baseType, equals(BaseType.Void));
-    expect(put_Progress.name, equals('put_Progress'));
-    expect(put_Progress.isSetProperty, isTrue);
-    expect(put_Progress.parameters.length, equals(1));
-    expect(put_Progress.parameters.first.typeIdentifier.name,
+        putProgress.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(putProgress.name, equals('put_Progress'));
+    expect(putProgress.isSetProperty, isTrue);
+    expect(putProgress.parameters.length, equals(1));
+    expect(putProgress.parameters.first.typeIdentifier.name,
         equals('Windows.Foundation.AsyncOperationProgressHandler`2'));
-    expect(put_Progress.parameters.first.typeIdentifier.type?.name,
+    expect(putProgress.parameters.first.typeIdentifier.type?.name,
         equals('Windows.Foundation.AsyncOperationProgressHandler`2'));
     expect(
-        put_Progress.parameters.first.typeIdentifier.type?.genericParams.length,
+        putProgress.parameters.first.typeIdentifier.type?.genericParams.length,
         equals(2));
     expect(
-        put_Progress
+        putProgress
             .parameters.first.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));
     expect(
-        put_Progress
+        putProgress
             .parameters.first.typeIdentifier.type?.genericParams.last.name,
         equals('TProgress'));
-    expect(put_Progress.parameters.first.name, equals('handler'));
-    expect(put_Progress.implFeatures.codeType, equals(CodeType.runtime));
-    expect(put_Progress.implFeatures.isManaged, isTrue);
+    expect(putProgress.parameters.first.name, equals('handler'));
+    expect(putProgress.implFeatures.codeType, equals(CodeType.runtime));
+    expect(putProgress.implFeatures.isManaged, isTrue);
 
-    final get_Progress = iaowp.methods[1];
-    expect(get_Progress.memberAccess, equals(MemberAccess.public));
-    expect(get_Progress.isHideBySig, isTrue);
-    expect(get_Progress.isSpecialName, isTrue);
-    expect(get_Progress.vTableLayout, equals(VtableLayout.newSlot));
-    expect(get_Progress.isAbstract, isTrue);
-    expect(get_Progress.isVirtual, isTrue);
-    expect(get_Progress.name, equals('get_Progress'));
-    expect(get_Progress.returnType.typeIdentifier.name,
+    final getProgress = iaowp.methods[1];
+    expect(getProgress.memberAccess, equals(MemberAccess.public));
+    expect(getProgress.isHideBySig, isTrue);
+    expect(getProgress.isSpecialName, isTrue);
+    expect(getProgress.vTableLayout, equals(VtableLayout.newSlot));
+    expect(getProgress.isAbstract, isTrue);
+    expect(getProgress.isVirtual, isTrue);
+    expect(getProgress.name, equals('get_Progress'));
+    expect(getProgress.returnType.typeIdentifier.name,
         equals('Windows.Foundation.AsyncOperationProgressHandler`2'));
-    expect(get_Progress.returnType.typeIdentifier.type?.name,
+    expect(getProgress.returnType.typeIdentifier.type?.name,
         equals('Windows.Foundation.AsyncOperationProgressHandler`2'));
-    expect(get_Progress.returnType.typeIdentifier.type?.genericParams.length,
+    expect(getProgress.returnType.typeIdentifier.type?.genericParams.length,
         equals(2));
-    expect(
-        get_Progress.returnType.typeIdentifier.type?.genericParams.first.name,
+    expect(getProgress.returnType.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));
-    expect(get_Progress.returnType.typeIdentifier.type?.genericParams.last.name,
+    expect(getProgress.returnType.typeIdentifier.type?.genericParams.last.name,
         equals('TProgress'));
-    expect(get_Progress.isGetProperty, isTrue);
-    expect(get_Progress.parameters.length, isZero);
+    expect(getProgress.isGetProperty, isTrue);
+    expect(getProgress.parameters.length, isZero);
 
-    expect(get_Progress.implFeatures.codeType, equals(CodeType.runtime));
-    expect(get_Progress.implFeatures.isManaged, isTrue);
+    expect(getProgress.implFeatures.codeType, equals(CodeType.runtime));
+    expect(getProgress.implFeatures.isManaged, isTrue);
 
-    final put_Completed = iaowp.methods[2];
-    expect(put_Completed.memberAccess, equals(MemberAccess.public));
-    expect(put_Completed.isHideBySig, isTrue);
-    expect(put_Completed.isSpecialName, isTrue);
-    expect(put_Completed.vTableLayout, equals(VtableLayout.newSlot));
-    expect(put_Completed.isAbstract, isTrue);
-    expect(put_Completed.isVirtual, isTrue);
-    expect(put_Completed.returnType.typeIdentifier.baseType,
-        equals(BaseType.Void));
-    expect(put_Completed.name, equals('put_Completed'));
-    expect(put_Completed.isSetProperty, isTrue);
-    expect(put_Completed.parameters.length, equals(1));
+    final putCompleted = iaowp.methods[2];
+    expect(putCompleted.memberAccess, equals(MemberAccess.public));
+    expect(putCompleted.isHideBySig, isTrue);
+    expect(putCompleted.isSpecialName, isTrue);
+    expect(putCompleted.vTableLayout, equals(VtableLayout.newSlot));
+    expect(putCompleted.isAbstract, isTrue);
+    expect(putCompleted.isVirtual, isTrue);
     expect(
-        put_Completed.parameters.first.typeIdentifier.name,
+        putCompleted.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(putCompleted.name, equals('put_Completed'));
+    expect(putCompleted.isSetProperty, isTrue);
+    expect(putCompleted.parameters.length, equals(1));
+    expect(
+        putCompleted.parameters.first.typeIdentifier.name,
         equals(
             'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2'));
     expect(
-        put_Completed.parameters.first.typeIdentifier.type?.name,
+        putCompleted.parameters.first.typeIdentifier.type?.name,
         equals(
             'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2'));
     expect(
-        put_Completed
-            .parameters.first.typeIdentifier.type?.genericParams.length,
+        putCompleted.parameters.first.typeIdentifier.type?.genericParams.length,
         equals(2));
     expect(
-        put_Completed
+        putCompleted
             .parameters.first.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));
     expect(
-        put_Completed
+        putCompleted
             .parameters.first.typeIdentifier.type?.genericParams.last.name,
         equals('TProgress'));
-    expect(put_Completed.parameters.first.name, equals('handler'));
-    expect(put_Completed.implFeatures.codeType, equals(CodeType.runtime));
-    expect(put_Completed.implFeatures.isManaged, isTrue);
+    expect(putCompleted.parameters.first.name, equals('handler'));
+    expect(putCompleted.implFeatures.codeType, equals(CodeType.runtime));
+    expect(putCompleted.implFeatures.isManaged, isTrue);
 
-    final get_Completed = iaowp.methods[3];
-    expect(get_Completed.memberAccess, equals(MemberAccess.public));
-    expect(get_Completed.isHideBySig, isTrue);
-    expect(get_Completed.isSpecialName, isTrue);
-    expect(get_Completed.vTableLayout, equals(VtableLayout.newSlot));
-    expect(get_Completed.isAbstract, isTrue);
-    expect(get_Completed.isVirtual, isTrue);
-    expect(get_Completed.name, equals('get_Completed'));
+    final getCompleted = iaowp.methods[3];
+    expect(getCompleted.memberAccess, equals(MemberAccess.public));
+    expect(getCompleted.isHideBySig, isTrue);
+    expect(getCompleted.isSpecialName, isTrue);
+    expect(getCompleted.vTableLayout, equals(VtableLayout.newSlot));
+    expect(getCompleted.isAbstract, isTrue);
+    expect(getCompleted.isVirtual, isTrue);
+    expect(getCompleted.name, equals('get_Completed'));
     expect(
-        get_Completed.returnType.typeIdentifier.name,
+        getCompleted.returnType.typeIdentifier.name,
         equals(
             'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2'));
     expect(
-        get_Completed.returnType.typeIdentifier.type?.name,
+        getCompleted.returnType.typeIdentifier.type?.name,
         equals(
             'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2'));
-    expect(get_Completed.returnType.typeIdentifier.type?.genericParams.length,
+    expect(getCompleted.returnType.typeIdentifier.type?.genericParams.length,
         equals(2));
     expect(
-        get_Completed.returnType.typeIdentifier.type?.genericParams.first.name,
+        getCompleted.returnType.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));
-    expect(
-        get_Completed.returnType.typeIdentifier.type?.genericParams.last.name,
+    expect(getCompleted.returnType.typeIdentifier.type?.genericParams.last.name,
         equals('TProgress'));
-    expect(get_Completed.isGetProperty, isTrue);
-    expect(get_Completed.parameters.length, isZero);
+    expect(getCompleted.isGetProperty, isTrue);
+    expect(getCompleted.parameters.length, isZero);
 
-    expect(get_Completed.implFeatures.codeType, equals(CodeType.runtime));
-    expect(get_Completed.implFeatures.isManaged, isTrue);
+    expect(getCompleted.implFeatures.codeType, equals(CodeType.runtime));
+    expect(getCompleted.implFeatures.isManaged, isTrue);
 
-    final get_Results = iaowp.methods[4];
-    expect(get_Results.memberAccess, equals(MemberAccess.public));
-    expect(get_Results.isHideBySig, isTrue);
-    expect(get_Results.isSpecialName, isFalse);
-    expect(get_Results.vTableLayout, equals(VtableLayout.newSlot));
-    expect(get_Results.isAbstract, isTrue);
-    expect(get_Results.isVirtual, isTrue);
-    expect(get_Results.returnType.typeIdentifier.baseType,
+    final getResults = iaowp.methods[4];
+    expect(getResults.memberAccess, equals(MemberAccess.public));
+    expect(getResults.isHideBySig, isTrue);
+    expect(getResults.isSpecialName, isFalse);
+    expect(getResults.vTableLayout, equals(VtableLayout.newSlot));
+    expect(getResults.isAbstract, isTrue);
+    expect(getResults.isVirtual, isTrue);
+    expect(getResults.returnType.typeIdentifier.baseType,
         equals(BaseType.ClassVariableTypeModifier));
-    expect(get_Results.returnType.typeIdentifier.genericParameterSequence,
+    expect(getResults.returnType.typeIdentifier.genericParameterSequence,
         equals(0)); // TResult
-    expect(get_Results.name, equals('GetResults'));
-    expect(get_Results.isGetProperty, isFalse);
-    expect(get_Results.isSetProperty, isFalse);
-    expect(get_Results.parameters.length, isZero);
-    expect(get_Results.hasGenericParameters, isFalse);
-    expect(get_Results.implFeatures.codeType, equals(CodeType.runtime));
-    expect(get_Results.implFeatures.isManaged, isTrue);
+    expect(getResults.name, equals('GetResults'));
+    expect(getResults.isGetProperty, isFalse);
+    expect(getResults.isSetProperty, isFalse);
+    expect(getResults.parameters.length, isZero);
+    expect(getResults.hasGenericParameters, isFalse);
+    expect(getResults.implFeatures.codeType, equals(CodeType.runtime));
+    expect(getResults.implFeatures.isManaged, isTrue);
 
     expect(iaowp.properties.length, equals(2));
 
@@ -254,10 +251,10 @@ void main() {
     expect(progress.name, equals('Progress'));
     expect(progress.hasGetter, isTrue);
     expect(progress.getterMethod?.name, equals('get_Progress'));
-    expect(progress.getterMethod?.token, equals(get_Progress.token));
+    expect(progress.getterMethod?.token, equals(getProgress.token));
     expect(progress.hasSetter, isTrue);
     expect(progress.setterMethod?.name, equals('put_Progress'));
-    expect(progress.setterMethod?.token, equals(put_Progress.token));
+    expect(progress.setterMethod?.token, equals(putProgress.token));
 
     final completed = iaowp.properties[1];
     expect(
@@ -274,9 +271,9 @@ void main() {
     expect(completed.name, equals('Completed'));
     expect(completed.hasGetter, isTrue);
     expect(completed.getterMethod?.name, equals('get_Completed'));
-    expect(completed.getterMethod?.token, equals(get_Completed.token));
+    expect(completed.getterMethod?.token, equals(getCompleted.token));
     expect(completed.hasSetter, isTrue);
     expect(completed.setterMethod?.name, equals('put_Completed'));
-    expect(completed.setterMethod?.token, equals(put_Completed.token));
+    expect(completed.setterMethod?.token, equals(putCompleted.token));
   });
 }

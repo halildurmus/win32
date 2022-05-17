@@ -7,7 +7,7 @@ import 'com/constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 

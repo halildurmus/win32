@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
-import 'tokenObject.dart';
+import 'token_object.dart';
 
 /// A module reference.
 class ModuleRef extends TokenObject with CustomAttributesMixin {

@@ -6,10 +6,12 @@ analyzer:
   language:
     strict-casts: true
     strict-inference: true
+    strict-raw-types: true
     
 linter:
   rules:
     # Some additional lints we want to enforce
+    always_declare_return_types: true
     cascade_invocations: true
     directives_ordering: true
     omit_local_variable_types: true
@@ -17,17 +19,10 @@ linter:
     prefer_const_literals_to_create_immutables: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
-    prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
+    sort_child_properties_last: true
     sort_unnamed_constructors_first: true
+    unawaited_futures: true
     unnecessary_lambdas: true
-    unnecessary_null_aware_assignments: true
     unnecessary_parenthesis: true
-    
-    # We name Win32 constants for consistency with Win32, not Dart
-    constant_identifier_names: false
-    non_constant_identifier_names: false
-    camel_case_types: false
 
-    # COM interop classes are named for their contents
-    file_names: false

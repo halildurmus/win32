@@ -6,7 +6,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '../customattribute.dart';
-import '../tokenObject.dart';
+import '../token_object.dart';
 import '../type_aliases.dart';
 import '../utils/blob.dart';
 
@@ -23,6 +23,8 @@ mixin CustomAttributesMixin on TokenObject {
         final hr =
             reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
         if (FAILED(hr)) throw WindowsException(hr);
+
+        if (pcbData.value < 3) return '';
 
         const prologLength = 2;
         final sig =

@@ -69,7 +69,7 @@ export 'src/pekind.dart';
 export 'src/pinvokemap.dart';
 export 'src/property.dart';
 export 'src/scope.dart';
-export 'src/tokenObject.dart';
+export 'src/token_object.dart';
 export 'src/type_aliases.dart';
 export 'src/typedef.dart';
 export 'src/typeidentifier.dart';
