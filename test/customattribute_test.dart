@@ -25,7 +25,7 @@ void main() {
         contains('Windows.Foundation.Metadata.DeprecatedAttribute'));
   });
 
-  test('Custom attribute can be found', () {
+  test('Custom attribute in WinRT is correctly specified', () {
     final mc = MetadataStore.getMetadataForType('Windows.Media.MediaControl');
 
     final found = mc?.customAttributes
@@ -67,7 +67,7 @@ void main() {
         equals('Windows.Media.MediaControlContract'));
   });
 
-  test('Custom attribute can be found 2', () {
+  test('Custom attribute in Win32 is correctly specified', () {
     final scope = MetadataStore.getWin32Scope();
     final shexInfo =
         scope.findTypeDef('Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
@@ -107,5 +107,20 @@ void main() {
     expect(invalidHandleValues.last.parameters.first.type.baseType,
         equals(BaseType.Int64));
     expect(invalidHandleValues.last.parameters.first.value, isIn([-1, 0]));
+  });
+
+  test('Find a matching attribute', () {
+    final scope = MetadataStore.getWin32Scope();
+    final hwnd = scope.findTypeDef('Windows.Win32.Foundation.HWND')!;
+
+    expect(hwnd.existsAttribute('Windows.Win32.Interop.NativeTypedefAttribute'),
+        isTrue);
+  });
+
+  test('Missing attributes are not found', () {
+    final scope = MetadataStore.getWin32Scope();
+    final hwnd = scope.findTypeDef('Windows.Win32.Foundation.HWND')!;
+
+    expect(hwnd.existsAttribute('Windows.SparklesTheCatAttribute'), isFalse);
   });
 }

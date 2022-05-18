@@ -34,6 +34,9 @@ mixin CustomAttributesMixin on TokenObject {
     return attr.isEmpty ? null : attr.first;
   }
 
+  /// Tests whether this object has an attribute matching the given name.
+  bool existsAttribute(String attrName) => findAttribute(attrName) != null;
+
   /// Enumerate all attributes that this object has.
   List<CustomAttribute> get customAttributes {
     if (_customAttributes.isEmpty) {
