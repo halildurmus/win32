@@ -54,8 +54,10 @@ void main() {
     //         'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute'));
     // expect(wndProc.customAttributes[0].hasAttribute(CorAttributeAttr.aaInstance), isTrue);
     expect(
-        wndProc.customAttributeAsBytes(
-            'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute'),
+        wndProc
+            .findAttribute(
+                'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute')
+            ?.signatureBlob,
         equals([
           0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, //
         ]));

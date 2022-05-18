@@ -50,15 +50,11 @@ jobs:
 
       - name: Generate code coverage
         if: ${{ matrix.sdk == 'dev' }} 
-        run: dart test --coverage=coverage
-
-      - name: Convert code coverage into lcov file
-        if: ${{ matrix.sdk == 'dev' }} 
-        run: dart pub global run coverage:format_coverage --lcov --in=coverage --check-ignore --out=lcov.info
+        run: dart pub global run coverage:test_with_coverage
 
       - name: Upload code coverage
         if: ${{ matrix.sdk == 'dev' }} 
         uses: codecov/codecov-action@v3
         with:
-          files: lcov.info
+          files: coverage/lcov.info
 

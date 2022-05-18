@@ -38,7 +38,9 @@ void main() {
         equals('Windows.Win32.UI.Shell.IFileOperation'));
 
     expect(
-        ifop2.customAttributeAsBytes('Windows.Win32.Interop.GuidAttribute'),
+        ifop2
+            .findAttribute('Windows.Win32.Interop.GuidAttribute')
+            ?.signatureBlob,
         equals([
           0x01, 0x00, 0xc1, 0x23, 0x8f, 0xcd, 0x61, 0x8f, //
           0x16, 0x49, 0x90, 0x9d, 0x55, 0xbd, 0xd0, 0x91, //

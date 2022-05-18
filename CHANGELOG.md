@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Correctly handle custom attributes with multiple parameters.
+
 ## 1.1.1
 
 - Move COR_FIELD_OFFSET here from win32 (since it belongs here)
