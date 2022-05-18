@@ -42,9 +42,8 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
     // By default, this attribute is missing and it is assumed that types
     // support all valid platform architectures.
 
-    // TODO: Fix this to not require hard-coded blob reference.
     return supportedArchAttr == null
         ? Architecture.all()
-        : Architecture(supportedArchAttr.signatureBlob[2]);
+        : Architecture(supportedArchAttr.parameters.first.value as int);
   }
 }

@@ -17,6 +17,7 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils/blob.dart';
+import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
 /// A single parameter within a custom attribute.
@@ -67,6 +68,7 @@ class CustomAttribute extends TokenObject {
         }
       });
 
+  /// The name of the attribute
   String get name => constructor.name;
 
   @override
@@ -103,10 +105,7 @@ class CustomAttribute extends TokenObject {
       final runtimeType =
           TypeTuple.fromSignature(typeSignatureBlob.sublist(offset), scope);
       offset += runtimeType.offsetLength;
-
-      // TODO: Deal with arrays. Code can be found in method.dart.
       parameterTypes.add(runtimeType.typeIdentifier);
-      // }
       paramsIndex++;
     }
     parameterTypes.removeAt(0); // throw away return type
@@ -190,11 +189,10 @@ class CustomAttribute extends TokenObject {
           offset += 8;
           break;
         default:
-          // TODO: Need more exhaustive checking here
-          offset += 4; // most likely it's an enum
-          paramValues.add(0);
-          print('Unexpected attribute type for index $paramIdx. '
-              'Do not trust following values.');
+          // TODO: Need more exhaustive checking here for more esoteric
+          // parameter types that are specified in ECMA-335 but don't seem to
+          // occur in the Win32 or WinRT metadata (e.g. named arguments).
+          throw WinmdException('Unexpected parameter type in signature blob.');
       }
     }
 
