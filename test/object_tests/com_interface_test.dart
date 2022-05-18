@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test an interface representation.
+/// Exhaustively test a COM interface representation.
 void main() {
 // .class interface public auto ansi abstract Windows.Win32.UI.Shell.IFileOperation2
 // 	implements [Windows.Win32.winmd]Windows.Win32.UI.Shell.IFileOperation

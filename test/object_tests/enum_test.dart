@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test an enum representation.
+/// Exhaustively test a Win32 enum representation.
 void main() {
   // .class public auto ansi sealed Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS
   //   extends [netstandard]System.Enum
@@ -14,7 +14,7 @@ void main() {
   //   .field public static literal valuetype [Windows.Win32.winmd]Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS HANDEDNESS_RIGHT = int32(1)
 
   // } // end of class Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS
-  test('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS', () {
+  test('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS enum', () {
     final scope = MetadataStore.getWin32Scope();
     final hand =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS')!;
@@ -26,6 +26,7 @@ void main() {
     expect(
         hand.name, equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS'));
     expect(hand.parent?.name, equals('System.Enum'));
+    expect(hand.isEnum, isTrue);
 
     expect(hand.fields.length, equals(3));
 

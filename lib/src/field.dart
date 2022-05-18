@@ -29,19 +29,11 @@ class Field extends TokenObject with CustomAttributesMixin {
   final TypeIdentifier typeIdentifier;
   final int value;
 
-  final int _attributes;
+  final int _attribs;
   final int _parentToken;
 
-  Field(
-      super.scope,
-      super.token,
-      this._parentToken,
-      this.name,
-      this.value,
-      this.typeIdentifier,
-      this.fieldType,
-      this._attributes,
-      this.signatureBlob);
+  Field(super.scope, super.token, this._parentToken, this.name, this.value,
+      this.typeIdentifier, this.fieldType, this._attribs, this.signatureBlob);
 
   /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) => using((Arena arena) {
@@ -72,9 +64,8 @@ class Field extends TokenObject with CustomAttributesMixin {
         if (SUCCEEDED(hr)) {
           final fieldName = szField.toDartString();
 
-          // The first entry of the signature is its FieldAttribute (compare
-          // against the CorFieldAttr enumeration), and then follows a type
-          // identifier.
+          // The first entry of the signature is a FIELD attribute (0x06), per
+          // §II.23.2.4 of ECMA-335. Then follows a type identifier.
           final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
           final typeTuple =
               TypeTuple.fromSignature(signature.sublist(1), scope);
@@ -102,51 +93,49 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   /// Returns the visibility of the field (public, private, etc.)
   FieldAccess get fieldAccess =>
-      FieldAccess.values[_attributes & CorFieldAttr.fdFieldAccessMask];
+      FieldAccess.values[_attribs & CorFieldAttr.fdFieldAccessMask];
 
   /// Returns true if the field is a member of its type rather than an instance member.
   bool get isStatic =>
-      _attributes & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
+      _attribs & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
 
   /// Returns true if the field cannot be changed after it is initialized.
   bool get isInitOnly =>
-      _attributes & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
+      _attribs & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
 
   /// Returns true if the field value is a compile-time constant.
   bool get isLiteral =>
-      _attributes & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
+      _attribs & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
 
   /// Returns true if the field is not serialized when its type is remoted.
   bool get isNotSerialized =>
-      _attributes & CorFieldAttr.fdNotSerialized ==
-      CorFieldAttr.fdNotSerialized;
+      _attribs & CorFieldAttr.fdNotSerialized == CorFieldAttr.fdNotSerialized;
 
   /// Returns true if the field is special; its name describes how.
   bool get isSpecialName =>
-      _attributes & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
+      _attribs & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
 
   /// Returns true if the field implementation is forwarded through PInvoke.
   bool get isPinvokeImpl =>
-      _attributes & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
+      _attribs & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the name.
   bool get isRTSpecialName =>
-      _attributes & CorFieldAttr.fdRTSpecialName ==
-      CorFieldAttr.fdRTSpecialName;
+      _attribs & CorFieldAttr.fdRTSpecialName == CorFieldAttr.fdRTSpecialName;
 
   /// Returns true if the field contains marshaling information.
   bool get hasFieldMarshal =>
-      _attributes & CorFieldAttr.fdHasFieldMarshal ==
+      _attribs & CorFieldAttr.fdHasFieldMarshal ==
       CorFieldAttr.fdHasFieldMarshal;
 
   /// Returns true if the field has a default value.
   bool get hasDefault =>
-      _attributes & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
+      _attribs & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
 
   /// Returns true if the field has a relative virtual address.
   bool get hasFieldRVA =>
-      _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
+      _attribs & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
 
   /// Returns the P/Invoke mapping representation for the field.
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);

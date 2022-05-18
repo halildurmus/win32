@@ -3,7 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-/// Exhaustively test a class representation.
+/// Exhaustively test a Win32 class (struct) representation.
 void main() {
   // .class public sequential ansi sealed beforefieldinit Windows.Win32.UI.WindowsAndMessaging.ACCEL
   // 	extends [netstandard]System.ValueType
