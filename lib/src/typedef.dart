@@ -164,8 +164,7 @@ class TypeDef extends TokenObject
         final hr = scope.reader
             .FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
         if (SUCCEEDED(hr)) {
-          return scope.findTypeDefByToken(ptd.value)!;
-          // return TypeDef.fromToken(scope, ptd.value);
+          return TypeDef.fromToken(scope, ptd.value);
         } else if (hr == CLDB_E_RECORD_NOTFOUND) {
           return _resolveNestedTypeThroughIteration(
               scope, resolutionScopeToken, typeRefToken, typeName);
