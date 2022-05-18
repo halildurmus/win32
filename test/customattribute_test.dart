@@ -93,4 +93,21 @@ void main() {
     // TODO: Fix typeRef from Win32 to Win32.Interop so that this works.
     // expect(archAttr.parameters[0].value, isIn([0x01, 0x06]));
   });
+
+  test('Multiple custom attributes with same name', () {
+    final scope = MetadataStore.getWin32Scope();
+    final hrsrc = scope.findTypeDef('Windows.Win32.Foundation.HRSRC')!;
+
+    expect(hrsrc.customAttributes.length, equals(3));
+
+    final invalidHandleValues = hrsrc.customAttributes.where(
+        (element) => element.name.endsWith('InvalidHandleValueAttribute'));
+    expect(invalidHandleValues.length, equals(2));
+    expect(invalidHandleValues.first.parameters.first.type.baseType,
+        equals(BaseType.Int64));
+    expect(invalidHandleValues.first.parameters.first.value, isIn([-1, 0]));
+    expect(invalidHandleValues.last.parameters.first.type.baseType,
+        equals(BaseType.Int64));
+    expect(invalidHandleValues.last.parameters.first.value, isIn([-1, 0]));
+  });
 }

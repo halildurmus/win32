@@ -192,7 +192,7 @@ class CustomAttribute extends TokenObject {
           // TODO: Need more exhaustive checking here
           offset += 4; // most likely it's an enum
           paramValues.add(0);
-          print('Unexpected attribute type for index $paramIdx.'
+          print('Unexpected attribute type for index $paramIdx. '
               'Do not trust following values.');
       }
     }
