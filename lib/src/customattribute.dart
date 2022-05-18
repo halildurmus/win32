@@ -117,7 +117,7 @@ class CustomAttribute extends TokenObject {
   List<Object> parameterValues(List<TypeIdentifier> paramTypes) {
     final paramValues = <Object>[];
     final blob = signatureBlob.buffer.asByteData();
-    var blobIdx = 2; // skip two-byte 0x0001 prolog
+    var offset = 2; // skip two-byte 0x0001 prolog
     for (var paramIdx = 0; paramIdx < paramTypes.length; paramIdx++) {
       var baseType = paramTypes[paramIdx].baseType;
       if (paramTypes[paramIdx].type?.isEnum == true) {
@@ -128,38 +128,72 @@ class CustomAttribute extends TokenObject {
       }
       switch (baseType) {
         case BaseType.String:
+        case BaseType.ClassTypeModifier: // canonical name represented in value
           // Get string length and move pointer forward
           final packedLen =
-              UncompressedData.fromBlob(blob.buffer.asUint8List(blobIdx, 4));
+              UncompressedData.fromBlob(blob.buffer.asUint8List(offset, 4));
           final stringLength = packedLen.data;
-          blobIdx += packedLen.dataLength;
+          offset += packedLen.dataLength;
 
           // Add decoded string value and move pointer forward
           paramValues.add(const Utf8Decoder()
-              .convert(blob.buffer.asUint8List(blobIdx, stringLength)));
-          blobIdx += stringLength;
+              .convert(blob.buffer.asUint8List(offset, stringLength)));
+          offset += stringLength;
           break;
-
-        case BaseType.Uint16:
-          paramValues.add(blob.getUint16(blobIdx, Endian.little));
-          blobIdx += 2;
+        case BaseType.Boolean:
+          paramValues.add(blob.getUint8(offset) == 1);
+          offset += 1;
+          break;
+        case BaseType.Char:
+          paramValues.add(String.fromCharCode(blob.getUint16(offset)));
+          offset += 2;
+          break;
+        case BaseType.Float:
+          paramValues.add(blob.getFloat32(offset, Endian.little));
+          offset += 4;
+          break;
+        case BaseType.Double:
+          paramValues.add(blob.getFloat64(offset, Endian.little));
+          offset += 8;
+          break;
+        case BaseType.Int8:
+          paramValues.add(blob.getInt8(offset));
+          offset += 1;
           break;
         case BaseType.Int16:
-          paramValues.add(blob.getInt16(blobIdx, Endian.little));
-          blobIdx += 2;
-          break;
-        case BaseType.Uint32:
-          paramValues.add(blob.getUint32(blobIdx, Endian.little));
-          blobIdx += 4;
+          paramValues.add(blob.getInt16(offset, Endian.little));
+          offset += 2;
           break;
         case BaseType.Int32:
-          paramValues.add(blob.getInt32(blobIdx, Endian.little));
-          blobIdx += 4;
+          paramValues.add(blob.getInt32(offset, Endian.little));
+          offset += 4;
+          break;
+        case BaseType.Int64:
+          paramValues.add(blob.getInt64(offset, Endian.little));
+          offset += 8;
+          break;
+        case BaseType.Uint8:
+          paramValues.add(blob.getUint8(offset));
+          offset += 1;
+          break;
+        case BaseType.Uint16:
+          paramValues.add(blob.getUint16(offset, Endian.little));
+          offset += 2;
+          break;
+        case BaseType.Uint32:
+          paramValues.add(blob.getUint32(offset, Endian.little));
+          offset += 4;
+          break;
+        case BaseType.Uint64:
+          paramValues.add(blob.getUint64(offset, Endian.little));
+          offset += 8;
           break;
         default:
-          blobIdx += 4; // guess
+          // TODO: Need more exhaustive checking here
+          offset += 4; // most likely it's an enum
           paramValues.add(0);
-          print('Unexpected attribute type for index $paramIdx');
+          print('Unexpected attribute type for index $paramIdx.'
+              'Do not trust following values.');
       }
     }
 

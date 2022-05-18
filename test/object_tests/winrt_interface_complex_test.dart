@@ -82,22 +82,21 @@ void main() {
         iaowp.interfaces.first.name, equals('Windows.Foundation.IAsyncInfo'));
 
     expect(iaowp.customAttributes.length, equals(2));
+
+    expect(iaowp.findAttribute('Windows.Foundation.Metadata.GuidAttribute'),
+        isNotNull);
+    expect(iaowp.guid, equals('{B5D036D7-E297-498F-BA60-0289E76E23DD}'));
+
+    final contractAttr = iaowp
+        .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');
+    expect(contractAttr?.parameters.length, equals(2));
+    expect(contractAttr?.parameters.first.type.baseType,
+        equals(BaseType.ClassTypeModifier));
+    expect(contractAttr?.parameters.first.value,
+        equals('Windows.Foundation.FoundationContract'));
     expect(
-        iaowp
-            .findAttribute('Windows.Foundation.Metadata.GuidAttribute')
-            ?.signatureBlob,
-        equals([
-          0x01, 0x00, 0xd7, 0x36, 0xd0, 0xb5, 0x97, 0xe2, //
-          0x8f, 0x49, 0xba, 0x60, 0x02, 0x89, 0xe7, 0x6e, //
-          0x23, 0xdd, 0x00, 0x00
-        ]));
-    expect(
-        iaowp
-            .findAttribute(
-                'Windows.Foundation.Metadata.ContractVersionAttribute')
-            ?.signatureBlob,
-        containsAllInOrder(
-            <int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]));
+        contractAttr?.parameters.last.type.baseType, equals(BaseType.Uint32));
+    expect(contractAttr?.parameters.last.value, equals(65536));
 
     expect(iaowp.methods.length, equals(5));
 
