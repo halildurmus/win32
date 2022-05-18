@@ -71,50 +71,38 @@ class MetadataStore {
   /// time for generating types. It also reduces the risk of breaking changes
   /// being out of sync with the winmd library, since the two can be more
   /// tightly bound together.
-  static Scope getWin32Scope() {
-    const win32ScopeName = 'Windows.Win32.winmd';
+  static Scope getWin32Scope() => getScopeForAsset('Windows.Win32.winmd');
 
-    if (cache.containsKey(win32ScopeName)) {
-      return cache[win32ScopeName]!;
+  /// Return the scope that contains the Win32 interop metadata.
+  ///
+  /// This is a satellite file that supports the Win32 metadata. It primarily
+  /// contains attributes that are used by the main file.
+  static Scope getWin32InteropScope() =>
+      getScopeForAsset('Windows.Win32.Interop.dll');
+
+  /// Loads a scope for a file asset that is embedded in the package.
+  static Scope getScopeForAsset(String assetName) {
+    if (cache.containsKey(assetName)) {
+      return cache[assetName]!;
     } else {
-      final uri = Uri.parse('package:winmd/assets/$win32ScopeName');
+      final uri = Uri.parse('package:winmd/assets/$assetName');
       final future = Isolate.resolvePackageUri(uri);
+
+      // waitFor is strongly discouraged in general, but it is accepted as the
+      // only reasonable way to load package assets outside of Flutter.
       final package = waitFor(future, timeout: const Duration(seconds: 5));
       if (package != null) {
         final fileScope = File.fromUri(package);
         return getScopeForFile(fileScope);
       } else {
         // Last ditch attempt: look in local folder
-        final fileScope = File(win32ScopeName);
+        final fileScope = File(assetName);
         if (fileScope.existsSync()) {
           return getScopeForFile(fileScope);
         }
       }
     }
-    throw WinmdException('Could not find $win32ScopeName.');
-  }
-
-  static Scope getWin32InteropScope() {
-    const interopScopeName = 'Windows.Win32.Interop.dll';
-
-    if (cache.containsKey(interopScopeName)) {
-      return cache[interopScopeName]!;
-    } else {
-      final uri = Uri.parse('package:winmd/assets/$interopScopeName');
-      final future = Isolate.resolvePackageUri(uri);
-      final package = waitFor(future, timeout: const Duration(seconds: 5));
-      if (package != null) {
-        final fileScope = File.fromUri(package);
-        return getScopeForFile(fileScope);
-      } else {
-        // Last ditch attempt: look in local folder
-        final fileScope = File(interopScopeName);
-        if (fileScope.existsSync()) {
-          return getScopeForFile(fileScope);
-        }
-      }
-    }
-    throw WinmdException('Could not find $interopScopeName.');
+    throw WinmdException('Could not find $assetName.');
   }
 
   /// Takes a metadata file path and returns the matching scope.
@@ -146,6 +134,7 @@ class MetadataStore {
       } finally {
         free(szFile);
         free(IID_IMetaDataImport2);
+        free(IID_IMetaDataAssemblyImport);
       }
     }
   }
@@ -241,6 +230,7 @@ class MetadataStore {
 
     for (final scope in cache.values) {
       free(scope.reader.ptr);
+      free(scope.assemblyImport.ptr);
     }
     free(dispenser.ptr);
 

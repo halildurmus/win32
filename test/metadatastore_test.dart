@@ -46,9 +46,11 @@ void main() {
     MetadataStore.getScopeForType('Windows.Win32.Shell.Apis');
     expect(MetadataStore.cache.length, equals(1));
     expect(MetadataStore.cacheInfo, equals('[Windows.Win32.winmd]'));
+    MetadataStore.close();
   });
 
   test('MetadataStore can cache both WinRT and Win32 metadata', () {
+    MetadataStore.getWin32Scope();
     MetadataStore.getScopeForType('Windows.Globalization.Calendar');
     expect(MetadataStore.cache.length, equals(2));
     expect(
@@ -57,6 +59,28 @@ void main() {
           equals('[Windows.Globalization.winmd, Windows.Win32.winmd]'),
           equals('[Windows.Win32.winmd, Windows.Globalization.winmd]'),
         ));
+    MetadataStore.close();
+  });
+
+  test('MetadataStore scope grows organically', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(MetadataStore.cache.length, equals(1));
+
+    // Do some stuff that requires the Interop DLL to be loaded.
+    final shexInfo =
+        scope.findTypeDef('Windows.Win32.UI.Shell.SHELLEXECUTEINFOW')!;
+    final attrib = shexInfo
+        .findAttribute('Windows.Win32.Interop.SupportedArchitectureAttribute');
+    expect(attrib, isNotNull);
+    final interopValue = attrib?.parameters.first.value;
+    expect(interopValue, isNotNull);
+
+    expect(MetadataStore.cache.length, equals(2));
+    expect(MetadataStore.cacheInfo,
+        equals('[Windows.Win32.winmd, Windows.Win32.Interop.dll]'));
+
+    MetadataStore.close();
+    expect(MetadataStore.cache.length, isZero);
   });
 
   test('Appropriate response to failure to find type', () {
