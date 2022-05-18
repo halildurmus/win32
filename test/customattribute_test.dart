@@ -15,7 +15,7 @@ void main() {
             (e) => e is WindowsException && e.hr == CLDB_E_INDEX_NOTFOUND)));
   });
 
-  test('Custom Attribute has a name', () {
+  test('Custom attribute has a name', () {
     final mc = MetadataStore.getMetadataForType('Windows.Media.MediaControl');
 
     expect(mc?.customAttributes.length, equals(5));
@@ -25,7 +25,7 @@ void main() {
         contains('Windows.Foundation.Metadata.DeprecatedAttribute'));
   });
 
-  test('Custom Attribute constructor can be found', () {
+  test('Custom attribute can be found', () {
     final mc = MetadataStore.getMetadataForType('Windows.Media.MediaControl');
 
     final found = mc?.customAttributes
@@ -52,8 +52,8 @@ void main() {
         equals(BaseType.ValueTypeModifier));
     expect(deprecated.parameterTypes[2].baseType, equals(BaseType.Uint32));
     expect(deprecated.parameterTypes[3].baseType, equals(BaseType.String));
-    expect(deprecated.parameterTypes.length, equals(4));
 
+    expect(deprecated.parameterValues.length, equals(4));
     expect(deprecated.parameterValues[0], isA<String>());
     expect(
         deprecated.parameterValues[0],
@@ -66,6 +66,33 @@ void main() {
     expect(deprecated.parameterValues[3], isA<String>());
     expect(deprecated.parameterValues[3],
         equals('Windows.Media.MediaControlContract'));
-    expect(deprecated.parameterValues.length, equals(4));
+  });
+
+  test('Custom attribute can be found 2', () {
+    final scope = MetadataStore.getWin32Scope();
+    final shexInfo =
+        scope.findTypeDef('Windows.Win32.UI.Shell.SHELLEXECUTEINFOW');
+
+    final found = shexInfo?.customAttributes
+        .where((a) => a.name.endsWith('SupportedArchitectureAttribute'));
+    expect(found, isNotNull);
+    expect(found!.length, equals(1));
+
+    final archAttr = found.first;
+    expect(
+        archAttr.signatureBlob.sublist(0, 2), equals([0x01, 0x00])); // prolog
+
+    expect(archAttr.parameterTypes.length, equals(1));
+    expect(archAttr.parameterTypes[0].baseType,
+        equals(BaseType.ValueTypeModifier));
+    expect(archAttr.parameterTypes[0].name,
+        equals('Windows.Win32.Interop.Architecture'));
+
+    expect(archAttr.parameterValues.length, equals(1));
+    expect(archAttr.parameterValues[0], isA<int>());
+    // Depending on which one we get first, we'll either get ARM or X86/X64
+
+    // TODO: Fix typeRef from Win32 to Win32.Interop so that this works.
+    // expect(archAttr.parameterValues[0], isIn([0x01, 0x06]));
   });
 }

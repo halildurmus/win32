@@ -1,4 +1,3 @@
-import '../utils/exception.dart';
 import 'customattributes_mixin.dart';
 
 /// The architectures supported by a specific Win32 method or struct.
@@ -35,23 +34,17 @@ mixin SupportedArchitecturesMixin on CustomAttributesMixin {
       _supportedArchitectures ??= _calculateSupportedArchitectures();
 
   Architecture? _supportedArchitectures;
+
   Architecture _calculateSupportedArchitectures() {
+    final supportedArchAttr =
+        findAttribute('Windows.Win32.Interop.SupportedArchitectureAttribute');
+
     // By default, this attribute is missing and it is assumed that types
     // support all valid platform architectures.
-    if (customAttributes
-        .where((ca) =>
-            ca.name == 'Windows.Win32.Interop.SupportedArchitectureAttribute')
-        .isEmpty) {
-      return Architecture.all();
-    }
 
-    final supportedArchRaw = customAttributeAsBytes(
-        'Windows.Win32.Interop.SupportedArchitectureAttribute');
-
-    // [0x01, 00x00] prolog, then next digit is arch attribute.
-    if (supportedArchRaw.length < 3) {
-      throw WinmdException('SupportedArchitecture attribute is malformed.');
-    }
-    return Architecture(supportedArchRaw[2]);
+    // TODO: Fix this to not require hard-coded blob reference.
+    return supportedArchAttr == null
+        ? Architecture.all()
+        : Architecture(supportedArchAttr.signatureBlob[2]);
   }
 }
