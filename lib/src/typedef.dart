@@ -290,6 +290,16 @@ class TypeDef extends TokenObject
               }
 
               return typeDef;
+            } else if (assemblyRef.name == 'Windows.Win32.Interop') {
+              // dedupe with section above?
+              final interopScope = MetadataStore.getWin32InteropScope();
+              final typeDef = interopScope.findTypeDef(typeName);
+              if (typeDef == null) {
+                throw WinmdException(
+                    'Can\'t find type $typeName in the ${interopScope.name} scope.');
+              }
+
+              return typeDef;
             }
           }
 

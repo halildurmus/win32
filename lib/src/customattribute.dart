@@ -88,20 +88,21 @@ class CustomAttribute extends TokenObject {
     return _parameters!;
   }
 
-  /// Decode attribute parameter types
+  /// Decode parameter types, per §II.23.2.1 of ECMA-335 (MethodDefSig)
   List<TypeIdentifier> _parameterTypes() {
     final parameterTypes = <TypeIdentifier>[];
     final typeSignatureBlob = memberRef.signatureBlob;
     // Parse through the signature blob, and map each recovered
     // type to the corresponding parameter.
-    var blobPtr = 1; // skip prolog
-    final paramCount = typeSignatureBlob.elementAt(blobPtr++);
+    var offset = 1; // skip prolog
+    final paramCount = typeSignatureBlob.elementAt(offset++);
 
     var paramsIndex = 0;
+    // Signature
     while (paramsIndex < paramCount + 1) {
       final runtimeType =
-          TypeTuple.fromSignature(typeSignatureBlob.sublist(blobPtr), scope);
-      blobPtr += runtimeType.offsetLength;
+          TypeTuple.fromSignature(typeSignatureBlob.sublist(offset), scope);
+      offset += runtimeType.offsetLength;
 
       // TODO: Deal with arrays. Code can be found in method.dart.
       parameterTypes.add(runtimeType.typeIdentifier);

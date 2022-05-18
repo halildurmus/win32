@@ -73,6 +73,7 @@ class MetadataStore {
   /// tightly bound together.
   static Scope getWin32Scope() {
     const win32ScopeName = 'Windows.Win32.winmd';
+
     if (cache.containsKey(win32ScopeName)) {
       return cache[win32ScopeName]!;
     } else {
@@ -84,13 +85,36 @@ class MetadataStore {
         return getScopeForFile(fileScope);
       } else {
         // Last ditch attempt: look in local folder
-        final fileScope = File('Windows.Win32.winmd');
+        final fileScope = File(win32ScopeName);
         if (fileScope.existsSync()) {
           return getScopeForFile(fileScope);
         }
       }
     }
     throw WinmdException('Could not find $win32ScopeName.');
+  }
+
+  static Scope getWin32InteropScope() {
+    const interopScopeName = 'Windows.Win32.Interop.dll';
+
+    if (cache.containsKey(interopScopeName)) {
+      return cache[interopScopeName]!;
+    } else {
+      final uri = Uri.parse('package:winmd/assets/$interopScopeName');
+      final future = Isolate.resolvePackageUri(uri);
+      final package = waitFor(future, timeout: const Duration(seconds: 5));
+      if (package != null) {
+        final fileScope = File.fromUri(package);
+        return getScopeForFile(fileScope);
+      } else {
+        // Last ditch attempt: look in local folder
+        final fileScope = File(interopScopeName);
+        if (fileScope.existsSync()) {
+          return getScopeForFile(fileScope);
+        }
+      }
+    }
+    throw WinmdException('Could not find $interopScopeName.');
   }
 
   /// Takes a metadata file path and returns the matching scope.
@@ -167,7 +191,7 @@ class MetadataStore {
       // already loaded. This won't be a problem, so long as the original Win32
       // metadata scope was loaded with getScopeForFile.
       final cacheEntry =
-          cache.keys.firstWhere((entry) => entry.contains('Windows.Win32'));
+          cache.keys.firstWhere((entry) => entry == 'Windows.Win32.winmd');
 
       return cache[cacheEntry]!;
     } else {

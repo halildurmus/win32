@@ -89,9 +89,7 @@ void main() {
 
     expect(archAttr.parameters[0].value, isA<int>());
     // Depending on which one we get first, we'll either get ARM or X86/X64
-
-    // TODO: Fix typeRef from Win32 to Win32.Interop so that this works.
-    // expect(archAttr.parameters[0].value, isIn([0x01, 0x06]));
+    expect(archAttr.parameters[0].value, isIn([0x01, 0x06]));
   });
 
   test('Multiple custom attributes with same name', () {
