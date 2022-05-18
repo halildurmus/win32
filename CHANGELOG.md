@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Update enumerations to match Dart lint requirements (breaking change).
+
 ## 1.2.0
 
 - Correctly handle custom attributes with parameters.
