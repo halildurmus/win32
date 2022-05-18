@@ -91,11 +91,11 @@ void main() {
         .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');
     expect(contractAttr?.parameters.length, equals(2));
     expect(contractAttr?.parameters.first.type.baseType,
-        equals(BaseType.ClassTypeModifier));
+        equals(BaseType.classTypeModifier));
     expect(contractAttr?.parameters.first.value,
         equals('Windows.Foundation.FoundationContract'));
-    expect(
-        contractAttr?.parameters.last.type.baseType, equals(BaseType.Uint32));
+    expect(contractAttr?.parameters.last.type.baseType,
+        equals(BaseType.uint32Type));
     expect(contractAttr?.parameters.last.value, equals(65536));
 
     expect(iaowp.methods.length, equals(5));
@@ -107,8 +107,8 @@ void main() {
     expect(putProgress.vTableLayout, equals(VtableLayout.newSlot));
     expect(putProgress.isAbstract, isTrue);
     expect(putProgress.isVirtual, isTrue);
-    expect(
-        putProgress.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(putProgress.returnType.typeIdentifier.baseType,
+        equals(BaseType.voidType));
     expect(putProgress.name, equals('put_Progress'));
     expect(putProgress.isSetProperty, isTrue);
     expect(putProgress.parameters.length, equals(1));
@@ -162,8 +162,8 @@ void main() {
     expect(putCompleted.vTableLayout, equals(VtableLayout.newSlot));
     expect(putCompleted.isAbstract, isTrue);
     expect(putCompleted.isVirtual, isTrue);
-    expect(
-        putCompleted.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(putCompleted.returnType.typeIdentifier.baseType,
+        equals(BaseType.voidType));
     expect(putCompleted.name, equals('put_Completed'));
     expect(putCompleted.isSetProperty, isTrue);
     expect(putCompleted.parameters.length, equals(1));
@@ -227,7 +227,7 @@ void main() {
     expect(getResults.isAbstract, isTrue);
     expect(getResults.isVirtual, isTrue);
     expect(getResults.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassVariableTypeModifier));
+        equals(BaseType.classVariableTypeModifier));
     expect(getResults.returnType.typeIdentifier.genericParameterSequence,
         equals(0)); // TResult
     expect(getResults.name, equals('GetResults'));
@@ -244,7 +244,7 @@ void main() {
     expect(progress.typeIdentifier.name,
         equals('Windows.Foundation.AsyncOperationProgressHandler`2'));
     expect(
-        progress.typeIdentifier.baseType, equals(BaseType.GenericTypeModifier));
+        progress.typeIdentifier.baseType, equals(BaseType.genericTypeModifier));
     expect(progress.typeIdentifier.type?.genericParams.length, equals(2));
     expect(progress.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));
@@ -264,7 +264,7 @@ void main() {
         equals(
             'Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2'));
     expect(completed.typeIdentifier.baseType,
-        equals(BaseType.GenericTypeModifier));
+        equals(BaseType.genericTypeModifier));
     expect(completed.typeIdentifier.type?.genericParams.length, equals(2));
     expect(completed.typeIdentifier.type?.genericParams.first.name,
         equals('TResult'));

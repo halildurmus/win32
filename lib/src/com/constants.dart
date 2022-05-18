@@ -136,67 +136,67 @@ class CorElementType {
 BaseType parseCorElementType(int corElementTypeValue) {
   switch (corElementTypeValue) {
     case CorElementType.ELEMENT_TYPE_VOID:
-      return BaseType.Void;
+      return BaseType.voidType;
     case CorElementType.ELEMENT_TYPE_BOOLEAN:
-      return BaseType.Boolean;
+      return BaseType.booleanType;
     case CorElementType.ELEMENT_TYPE_CHAR:
-      return BaseType.Char;
+      return BaseType.charType;
     case CorElementType.ELEMENT_TYPE_I1:
-      return BaseType.Int8;
+      return BaseType.int8Type;
     case CorElementType.ELEMENT_TYPE_U1:
-      return BaseType.Uint8;
+      return BaseType.uint8Type;
     case CorElementType.ELEMENT_TYPE_I2:
-      return BaseType.Int16;
+      return BaseType.int16Type;
     case CorElementType.ELEMENT_TYPE_U2:
-      return BaseType.Uint16;
+      return BaseType.uint16Type;
     case CorElementType.ELEMENT_TYPE_I4:
-      return BaseType.Int32;
+      return BaseType.int32Type;
     case CorElementType.ELEMENT_TYPE_U4:
-      return BaseType.Uint32;
+      return BaseType.uint32Type;
     case CorElementType.ELEMENT_TYPE_I8:
-      return BaseType.Int64;
+      return BaseType.int64Type;
     case CorElementType.ELEMENT_TYPE_U8:
-      return BaseType.Uint64;
+      return BaseType.uint64Type;
     case CorElementType.ELEMENT_TYPE_R4:
-      return BaseType.Float;
+      return BaseType.floatType;
     case CorElementType.ELEMENT_TYPE_R8:
-      return BaseType.Double;
+      return BaseType.doubleType;
     case CorElementType.ELEMENT_TYPE_STRING:
-      return BaseType.String;
+      return BaseType.stringType;
     case CorElementType.ELEMENT_TYPE_PTR:
-      return BaseType.PointerTypeModifier;
+      return BaseType.pointerTypeModifier;
     case CorElementType.ELEMENT_TYPE_BYREF:
-      return BaseType.ReferenceTypeModifier;
+      return BaseType.referenceTypeModifier;
     case CorElementType.ELEMENT_TYPE_VALUETYPE:
-      return BaseType.ValueTypeModifier;
+      return BaseType.valueTypeModifier;
     case CorElementType.ELEMENT_TYPE_CLASS:
-      return BaseType.ClassTypeModifier;
+      return BaseType.classTypeModifier;
     case CorElementType.ELEMENT_TYPE_VAR:
-      return BaseType.ClassVariableTypeModifier;
+      return BaseType.classVariableTypeModifier;
     case CorElementType.ELEMENT_TYPE_ARRAY:
-      return BaseType.ArrayTypeModifier;
+      return BaseType.arrayTypeModifier;
     case CorElementType.ELEMENT_TYPE_GENERICINST:
-      return BaseType.GenericTypeModifier;
+      return BaseType.genericTypeModifier;
     case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
-      return BaseType.TypedReference;
+      return BaseType.typedReference;
     case CorElementType.ELEMENT_TYPE_I:
-      return BaseType.IntPtr;
+      return BaseType.intPtrType;
     case CorElementType.ELEMENT_TYPE_U:
-      return BaseType.UintPtr;
+      return BaseType.uintPtrType;
     case CorElementType.ELEMENT_TYPE_FNPTR:
-      return BaseType.FunctionPointer;
+      return BaseType.functionPointerType;
     case CorElementType.ELEMENT_TYPE_OBJECT:
-      return BaseType.Object;
+      return BaseType.objectType;
     case CorElementType.ELEMENT_TYPE_SZARRAY:
-      return BaseType.SimpleArray;
+      return BaseType.simpleArrayType;
     case CorElementType.ELEMENT_TYPE_MVAR:
-      return BaseType.MethodVariableTypeModifier;
+      return BaseType.methodVariableTypeModifier;
     case CorElementType.ELEMENT_TYPE_CMOD_REQD:
-      return BaseType.CLanguageRequiredModifier;
+      return BaseType.cLanguageRequiredModifier;
     case CorElementType.ELEMENT_TYPE_CMOD_OPT:
-      return BaseType.CLanguageOptionalModifier;
+      return BaseType.cLanguageOptionalModifier;
     case CorElementType.ELEMENT_TYPE_SENTINEL:
-      return BaseType.Sentinel;
+      return BaseType.sentinelTypeModifier;
     default:
       throw WinmdException(
           'Unrecognized or internal type $corElementTypeValue');

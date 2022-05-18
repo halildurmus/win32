@@ -14,7 +14,8 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final struct = scope.findTypeDef('Windows.Win32.Graphics.Gdi.XFORM')!;
     expect(struct.fields.first.name, equals('eM11'));
-    expect(struct.fields.first.typeIdentifier.baseType, equals(BaseType.Float));
+    expect(struct.fields.first.typeIdentifier.baseType,
+        equals(BaseType.floatType));
   });
 
   test('Struct valuetype field has expected name and type', () {
@@ -23,7 +24,7 @@ void main() {
         .findTypeDef('Windows.Win32.System.Threading.PROCESS_INFORMATION')!;
     expect(struct.fields.first.name, equals('hProcess'));
     expect(struct.fields.first.typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(struct.fields.first.typeIdentifier.name, endsWith('HANDLE'));
   });
 
@@ -32,7 +33,7 @@ void main() {
     final struct = scope.findTypeDef('Windows.Win32.Graphics.Gdi.BITMAPINFO')!;
     expect(struct.fields.last.name, equals('bmiColors'));
     expect(struct.fields.last.typeIdentifier.baseType,
-        equals(BaseType.ArrayTypeModifier));
+        equals(BaseType.arrayTypeModifier));
     expect(
         struct.fields.last.typeIdentifier.typeArg?.name, endsWith('RGBQUAD'));
   });
@@ -43,9 +44,9 @@ void main() {
         scope.findTypeDef('Windows.Win32.Graphics.Gdi.DESIGNVECTOR')!;
     expect(struct.fields.last.name, equals('dvValues'));
     expect(struct.fields.last.typeIdentifier.baseType,
-        equals(BaseType.ArrayTypeModifier));
+        equals(BaseType.arrayTypeModifier));
     expect(struct.fields.last.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
     expect(struct.fields.last.typeIdentifier.arrayDimensions, equals([16]));
   });
 
@@ -56,9 +57,9 @@ void main() {
     final szPhysicalMonitorDescription = struct.fields[1];
 
     expect(szPhysicalMonitorDescription.typeIdentifier.baseType,
-        equals(BaseType.ArrayTypeModifier));
+        equals(BaseType.arrayTypeModifier));
     expect(szPhysicalMonitorDescription.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.Char));
+        equals(BaseType.charType));
   });
 
   test('Small struct array fields have the correct dimensions', () {

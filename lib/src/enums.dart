@@ -1,7 +1,5 @@
 // Enumerations used for returning or storing data.
 
-// ignore_for_file: constant_identifier_names
-
 import 'package:win32/win32.dart';
 
 import 'com/constants.dart';
@@ -11,98 +9,281 @@ import 'utils/exception.dart';
 /// about a type in a metadata type signature.
 enum BaseType {
   /// A void type.
-  Void,
+  voidType,
 
   /// A Boolean type.
-  Boolean,
+  booleanType,
 
   /// A character type.
-  Char,
+  charType,
 
   /// A signed 1-byte integer.
-  Int8,
+  int8Type,
 
   /// An unsigned 1-byte integer.
-  Uint8,
+  uint8Type,
 
   /// A signed 2-byte integer.
-  Int16,
+  int16Type,
 
   /// An unsigned 2-byte integer.
-  Uint16,
+  uint16Type,
 
   /// A signed 4-byte integer.
-  Int32,
+  int32Type,
 
   /// An unsigned 4-byte integer.
-  Uint32,
+  uint32Type,
 
   /// A signed 8-byte integer.
-  Int64,
+  int64Type,
 
   /// An unsigned 8-byte integer.
-  Uint64,
+  uint64Type,
 
   /// A 4-byte floating point.
-  Float,
+  floatType,
 
   /// An 8-byte floating point.
-  Double,
+  doubleType,
 
   /// A System.String type.
-  String,
+  stringType,
 
   /// A pointer type modifier.
-  PointerTypeModifier,
+  pointerTypeModifier,
 
   /// A reference type modifier.
-  ReferenceTypeModifier,
+  referenceTypeModifier,
 
   /// A value type modifier.
-  ValueTypeModifier,
+  valueTypeModifier,
 
   /// A class type modifier.
-  ClassTypeModifier,
+  classTypeModifier,
 
   /// A class variable type modifier.
-  ClassVariableTypeModifier,
+  classVariableTypeModifier,
 
   /// A multi-dimensional array type modifier.
-  ArrayTypeModifier,
+  arrayTypeModifier,
 
   /// A type modifier for generic types.
-  GenericTypeModifier,
+  genericTypeModifier,
 
   /// A typed reference.
-  TypedReference,
+  typedReference,
 
   /// Size of a native integer.
-  IntPtr,
+  intPtrType,
 
   /// Size of an unsigned native integer.
-  UintPtr,
+  uintPtrType,
 
   /// A pointer to a function.
-  FunctionPointer,
+  functionPointerType,
 
   /// A System.Object type.
-  Object,
+  objectType,
 
   /// A single-dimensional, zero lower-bound array type modifier.
-  SimpleArray,
+  simpleArrayType,
 
   /// A method variable type modifier.
-  MethodVariableTypeModifier,
+  methodVariableTypeModifier,
 
   /// A C language required modifier.
-  CLanguageRequiredModifier,
+  cLanguageRequiredModifier,
 
   /// A C language optional modifier.
-  CLanguageOptionalModifier,
+  cLanguageOptionalModifier,
 
   /// A type modifier that is a sentinel for a list of a variable number of
   /// parameters.
-  Sentinel,
+  sentinelTypeModifier,
+}
+
+/// Convention for mapping Unicode characters in P/Invoke calls.
+enum BestFit {
+  /// Reserved.
+  useAssem,
+
+  /// Perform best-fit mapping of Unicode characters that lack an exact match in
+  /// the ANSI character set.
+  enabled,
+
+  /// Do not perform best-fit mapping of Unicode characters. In this case, all
+  /// unmappable characters will be replaced by a ‘?’.
+  disabled
+}
+
+/// Platform calling convention.
+enum CallingConvention {
+  /// Use the default platform calling convention. For example, on Windows the
+  /// default is StdCall and on Windows CE .NET it is Cdecl.
+  winApi,
+
+  /// Use the Cdecl calling convention. In this case, the caller cleans the
+  /// stack. This enables calling functions with varargs (that is, functions
+  /// that accept a variable number of parameters).
+  cdecl,
+
+  /// Use the StdCall calling convention. In this case, the callee cleans the
+  /// stack. This is the default convention for calling unmanaged functions with
+  /// platform invoke.
+  stdcall,
+
+  /// Use the ThisCall calling convention. In this case, the first parameter is
+  /// the this pointer and is stored in register ECX. Other parameters are
+  /// pushed on the stack. The ThisCall calling convention is used to call
+  /// methods on classes exported from an unmanaged DLL.
+  thiscall,
+
+  /// Reserved.
+  fastcall
+}
+
+/// Code type of contained code.
+enum CodeType {
+  /// Specifies that the method implementation is Microsoft intermediate
+  /// language (MSIL).
+  msil,
+
+  /// Specifies that the method implementation is native.
+  native,
+
+  /// Specifies that the method implementation is OPTIL.
+  optIL,
+
+  /// Specifies that the method implementation is provided by the common
+  /// language runtime.
+  runtime
+}
+
+/// Field accessibility information.
+enum FieldAccess {
+  /// Specifies that the field cannot be referenced.
+  privateScope,
+
+  /// Specifies that the field is accessible only by its parent type.
+  private,
+
+  /// Specifies that the field is accessible by derived classes in its assembly.
+  familyAndAssembly,
+
+  /// Specifies that the field is accessible by all types in its assembly.
+  assembly,
+
+  /// Specifies that the field is accessible only by its type and derived
+  /// classes.
+  family,
+
+  /// Specifies that the field is accessible by derived classes and by all types
+  /// in its assembly.
+  familyOrAssembly,
+
+  /// Specifies that the field is accessible by all types with visibility of
+  /// this scope.
+  public
+}
+
+/// The platform architecture targeted by an executable.
+enum ImageType {
+  /// x86
+  i386,
+
+  /// Intel Itanium
+  ia64,
+
+  /// x64
+  amd64
+}
+
+/// Specifies member access.
+enum MemberAccess {
+  /// Specifies that the member cannot be referenced.
+  privateScope,
+
+  /// Specifies that the member is accessible only by the parent type.
+  private,
+
+  /// Specifies that the member is accessible by subtypes only in this assembly.
+  familyAndAssembly,
+
+  /// Specifies that the member is accessibly by anyone in the assembly.
+  assembly,
+
+  /// Specifies that the member is accessible only by type and subtypes.
+  family,
+
+  /// Specifies that the member is accessible by derived classes and by other
+  /// types in its assembly.
+  familyOrAssembly,
+
+  /// Specifies that the member is accessible by all types with access to the
+  /// scope.
+  public
+}
+
+/// Indicates the preferred architecture for a requested [typeDef].
+enum PreferredArchitecture {
+  /// Prefer Intel 32-bit architecture.
+  x86,
+
+  /// Prefer Intel 64-bit architecture.
+  x64,
+
+  // Prefer ARM 64-bit architecture.
+  arm64
+}
+
+/// Specifies how string types are interpreted.
+enum StringFormat {
+  /// Specifies that this type interprets an LPTSTR as ANSI.
+  ansi,
+
+  /// Specifies that this type interprets an LPTSTR as Unicode.
+  unicode,
+
+  /// Specifies that this type interprets an LPTSTR automatically.
+  auto,
+
+  /// Specifies that the type has a non-standard encoding, as specified by
+  /// CustomFormatMask.
+  custom
+}
+
+/// Convention for marshalling P/Invoke function strings.
+enum StringMarshalConvention {
+  /// Reserved.
+  notSpecified,
+
+  /// Marshal strings as multiple-byte character strings.
+  ansi,
+
+  /// Marshal strings as Unicode 2-byte characters.
+  unicode,
+
+  /// Automatically marshal strings appropriately for the target operating
+  /// system. The default is Unicode on Windows NT, Windows 2000, Windows XP,
+  /// and the Windows Server 2003 family; the default is ANSI on Windows 98 and
+  /// Windows Me.
+  auto
+}
+
+/// Convention for how the interop marshaler should respond to an unmappable
+/// character.
+enum ThrowOnUnmappableChar {
+  /// Reserved.
+  useAssem,
+
+  /// Throw an exception when the interop marshaler encounters an unmappable
+  /// character.
+  enabled,
+
+  /// Do not throw an exception when the interop marshaler encounters an
+  /// unmappable character.
+  disabled
 }
 
 /// The type of object represented by a given token.
@@ -112,25 +293,25 @@ enum TokenType {
   ///
   /// It is possible (though not required) to declare attributes on the module
   /// as a whole, including a name, a GUID, custom attributes, and so forth.
-  Module,
+  module,
 
   /// Reference to either a runtime reference type or a value type.
   ///
   /// In a sense, the collection of type references in a module is the
   /// collection of compile-time import dependencies.
-  TypeRef,
+  typeRef,
 
   /// Declaration of either a runtime reference type (class or
   /// interface) or a value type.
-  TypeDef,
+  typeDef,
 
   /// Declaration of a variable as a data member of a class or interface, or
   /// declaration of a global, module-level variable.
-  FieldDef,
+  fieldDef,
 
   /// Definition of a method as a member of a class or interface, or as a global
   /// module-level method.
-  MethodDef,
+  methodDef,
 
   /// Definition of an optional data structure that stores additional metadata
   /// for the parameter.
@@ -139,14 +320,14 @@ enum TokenType {
   /// method. However, when there is additional metadata to persist for the
   /// parameter, such as marshaling or type-mapping information, an optional
   /// parameter data structure can be created.
-  ParamDef,
+  paramDef,
 
   /// A specific class’s implementation of a specific interface.
   ///
   /// This metadata abstraction enables the storing of information that is the
   /// intersection of that which is specific to neither the class nor the
   /// interface.
-  InterfaceImpl,
+  interfaceImpl,
 
   /// Reference to a method or field.
   ///
@@ -154,114 +335,189 @@ enum TokenType {
   /// field access that is made by any implementation in the current module, and
   /// a token is persisted in the Microsoft intermediate language (MSIL) stream.
   /// There is no runtime support for property or event references.
-  MemberRef,
+  memberRef,
 
   /// An arbitrary data structure associated with any metadata object that can
   /// be referenced with an mdToken.
   ///
   /// An exception is that custom attributes themselves cannot have custom
   /// attributes.
-  CustomAttribute,
+  customAttribute,
 
   /// A declarative security permission set associated with mdTypeDef,
   /// mdMethodDef, and mdAssembly.
-  Permission,
+  permission,
 
   /// A local variable signature in the portable executable (PE) file or a
   /// method signature that is passed to an MSIL instruction.
-  Signature,
+  signature,
 
   /// Declaration of a named event as a member of a class or interface.
-  Event,
+  event,
 
   /// Declaration of a property as a member of a class or interface.
-  Property,
+  property,
 
   /// A compile-time reference to a module, which records the source for type
   /// and member imports.
-  ModuleRef,
+  moduleRef,
 
   /// A type, such as a boxed value type, that can be used as input to any MSIL
   /// instruction that takes a type.
-  TypeSpec,
+  typeSpec,
 
   /// An assembly.
-  Assembly,
+  assembly,
 
   /// A reference to an assembly.
-  AssemblyRef,
+  assemblyRef,
 
   /// A file.
-  File,
-  ExportedType,
-  ManifestResource,
-  GenericParam,
-  MethodSpec,
-  GenericParamConstraint,
+  file,
+
+  // An exported type.
+  exportedType,
+
+  // A manifest resource.
+  manifestResource,
+
+  // A generic parameter.
+  genericParam,
+
+  /// A signature of an instantiated generic method.
+  methodSpec,
+
+  // A constraint for a generic parameter.
+  genericParamConstraint,
 
   /// A string that is passed to an MSIL instruction.
-  String,
-  Name,
-  BaseType;
+  string,
+
+  /// A name.
+  name,
+
+  /// A base type.
+  baseType;
 
   factory TokenType.fromToken(int token) {
     /// Returns the type of the token.
     switch (token & 0xFF000000) {
       case CorTokenType.mdtModule:
-        return TokenType.Module;
+        return TokenType.module;
       case CorTokenType.mdtTypeRef:
-        return TokenType.TypeRef;
+        return TokenType.typeRef;
       case CorTokenType.mdtTypeDef:
-        return TokenType.TypeDef;
+        return TokenType.typeDef;
       case CorTokenType.mdtFieldDef:
-        return TokenType.FieldDef;
+        return TokenType.fieldDef;
       case CorTokenType.mdtMethodDef:
-        return TokenType.MethodDef;
+        return TokenType.methodDef;
       case CorTokenType.mdtParamDef:
-        return TokenType.ParamDef;
+        return TokenType.paramDef;
       case CorTokenType.mdtInterfaceImpl:
-        return TokenType.InterfaceImpl;
+        return TokenType.interfaceImpl;
       case CorTokenType.mdtMemberRef:
-        return TokenType.MemberRef;
+        return TokenType.memberRef;
       case CorTokenType.mdtCustomAttribute:
-        return TokenType.CustomAttribute;
+        return TokenType.customAttribute;
       case CorTokenType.mdtPermission:
-        return TokenType.Permission;
+        return TokenType.permission;
       case CorTokenType.mdtSignature:
-        return TokenType.Signature;
+        return TokenType.signature;
       case CorTokenType.mdtEvent:
-        return TokenType.Event;
+        return TokenType.event;
       case CorTokenType.mdtProperty:
-        return TokenType.Property;
+        return TokenType.property;
       case CorTokenType.mdtModuleRef:
-        return TokenType.ModuleRef;
+        return TokenType.moduleRef;
       case CorTokenType.mdtTypeSpec:
-        return TokenType.TypeSpec;
+        return TokenType.typeSpec;
       case CorTokenType.mdtAssembly:
-        return TokenType.Assembly;
+        return TokenType.assembly;
       case CorTokenType.mdtAssemblyRef:
-        return TokenType.AssemblyRef;
+        return TokenType.assemblyRef;
       case CorTokenType.mdtFile:
-        return TokenType.File;
+        return TokenType.file;
       case CorTokenType.mdtExportedType:
-        return TokenType.ExportedType;
+        return TokenType.exportedType;
       case CorTokenType.mdtManifestResource:
-        return TokenType.ManifestResource;
+        return TokenType.manifestResource;
       case CorTokenType.mdtGenericParam:
-        return TokenType.GenericParam;
+        return TokenType.genericParam;
       case CorTokenType.mdtMethodSpec:
-        return TokenType.MethodSpec;
+        return TokenType.methodSpec;
       case CorTokenType.mdtGenericParamConstraint:
-        return TokenType.GenericParamConstraint;
+        return TokenType.genericParamConstraint;
       case CorTokenType.mdtString:
-        return TokenType.String;
+        return TokenType.string;
       case CorTokenType.mdtName:
-        return TokenType.Name;
+        return TokenType.name;
       case CorTokenType.mdtBaseType:
-        return TokenType.BaseType;
+        return TokenType.baseType;
       default:
         throw WinmdException(
             'Unrecognized token type ${(token & 0xFF000000).toHexString(32)}');
     }
   }
+}
+
+/// Specifies how fields are laid out in the type.
+enum TypeLayout {
+  /// Specifies that the fields of this type are laid out automatically.
+  auto,
+
+  /// Specifies that the fields of this type are laid out sequentially.
+  sequential,
+
+  /// Specifies that field layout is supplied explicitly.
+  explicit
+}
+
+/// Specifies visibility of a type to other types.
+enum TypeVisibility {
+  /// Specifies that the type is not in public scope.
+  notPublic,
+
+  /// Specifies that the type is in public scope.
+  public,
+
+  /// Specifies that the type is nested with public visibility.
+  nestedPublic,
+
+  /// Specifies that the type is nested with private visibility.
+  nestedPrivate,
+
+  /// Specifies that the type is nested with family visibility.
+  nestedFamily,
+
+  /// Specifies that the type is nested with assembly visibility.
+  nestedAssembly,
+
+  /// Specifies that the type is nested with family and assembly visibility.
+  nestedFamilyAndAssembly,
+
+  /// Specifies that the type is nested with family or assembly visibility.
+  nestedFamilyOrAssembly
+}
+
+/// Indicates the kind of variance for a delegate / interface generic parameter.
+enum Variance {
+  /// Indicates the absence of variance.
+  nonvariant,
+
+  /// Indicates covariance.
+  covariant,
+
+  /// Indicates contravariance.
+  contravariant
+}
+
+/// Specifies virtual table layout.
+enum VtableLayout {
+  /// Specifies that the slot used for this method in the virtual table be
+  /// reused. This is the default.
+  reuseSlot,
+
+  /// Specifies that the method always gets a new slot in the virtual table.
+  newSlot
 }

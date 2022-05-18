@@ -9,10 +9,8 @@ import 'package:win32/win32.dart';
 
 import 'com/constants.dart';
 import 'com/imetadataimport2.dart';
+import 'enums.dart';
 import 'utils/exception.dart';
-
-/// The platform targeted by an executable.
-enum ImageType { i386, ia64, amd64 }
 
 /// A representation of the assembly file's portable executable format.
 class PEKind {

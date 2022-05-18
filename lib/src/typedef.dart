@@ -26,61 +26,6 @@ import 'typeidentifier.dart';
 import 'utils/exception.dart';
 import 'utils/typetuple.dart';
 
-/// Specifies visibility of a type to other types.
-enum TypeVisibility {
-  /// Specifies that the type is not in public scope.
-  notPublic,
-
-  /// Specifies that the type is in public scope.
-  public,
-
-  /// Specifies that the type is nested with public visibility.
-  nestedPublic,
-
-  /// Specifies that the type is nested with private visibility.
-  nestedPrivate,
-
-  /// Specifies that the type is nested with family visibility.
-  nestedFamily,
-
-  /// Specifies that the type is nested with assembly visibility.
-  nestedAssembly,
-
-  /// Specifies that the type is nested with family and assembly visibility.
-  nestedFamilyAndAssembly,
-
-  /// Specifies that the type is nested with family or assembly visibility.
-  nestedFamilyOrAssembly
-}
-
-/// Specifies how fields are laid out in the type.
-enum TypeLayout {
-  /// Specifies that the fields of this type are laid out automatically.
-  auto,
-
-  /// Specifies that the fields of this type are laid out sequentially.
-  sequential,
-
-  /// Specifies that field layout is supplied explicitly.
-  explicit
-}
-
-/// Specifies how string types are interpreted.
-enum StringFormat {
-  /// Specifies that this type interprets an LPTSTR as ANSI.
-  ansi,
-
-  /// Specifies that this type interprets an LPTSTR as Unicode.
-  unicode,
-
-  /// Specifies that this type interprets an LPTSTR automatically.
-  auto,
-
-  /// Specifies that the type has a non-standard encoding, as specified by
-  /// CustomFormatMask.
-  custom
-}
-
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject
     with
@@ -129,11 +74,11 @@ class TypeDef extends TokenObject
   /// Creates a typedef object from a provided token.
   factory TypeDef.fromToken(Scope scope, int token) {
     switch (TokenType.fromToken(token)) {
-      case TokenType.TypeRef:
+      case TokenType.typeRef:
         return TypeDef.fromTypeRefToken(scope, token);
-      case TokenType.TypeDef:
+      case TokenType.typeDef:
         return TypeDef.fromTypeDefToken(scope, token);
-      case TokenType.TypeSpec:
+      case TokenType.typeSpec:
         return TypeDef.fromTypeSpecToken(scope, token);
       default:
         throw WinmdException('Unrecognized token ${token.toHexString(32)}');
@@ -260,7 +205,7 @@ class TypeDef extends TokenObject
 
           // Is it a nested type? If so, we find a type in the parent type that
           // matches its name, if one exists (which it presumably should).
-          if (TokenType.fromToken(resolutionScopeToken) == TokenType.TypeRef) {
+          if (TokenType.fromToken(resolutionScopeToken) == TokenType.typeRef) {
             return _resolveNestedType(
                 scope, resolutionScopeToken, typeRefToken, typeName);
           }
@@ -276,7 +221,7 @@ class TypeDef extends TokenObject
           // part of the microsoft/win32metadata project. This is fixable if we
           // distribute it with winmd or find another approach to locating it.
           if (TokenType.fromToken(resolutionScopeToken) ==
-              TokenType.AssemblyRef) {
+              TokenType.assemblyRef) {
             final assemblyRef =
                 AssemblyRef.fromToken(scope, resolutionScopeToken);
             if (assemblyRef.name != 'netstandard' && // .NET

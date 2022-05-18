@@ -14,18 +14,6 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
 
-/// Indicates the kind of variance for a delegate / interface generic parameter.
-enum Variance {
-  /// Indicates the absence of variance.
-  nonvariant,
-
-  /// Indicates covariance.
-  covariant,
-
-  /// Indicates contravariance.
-  contravariant
-}
-
 /// Identifies special constraints on a generic parameter.
 class SpecialConstraints {
   final int _attributes;
@@ -108,11 +96,11 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   /// parent type.
   TokenObject get parent {
     final tokenType = TokenType.fromToken(_parentToken);
-    if (tokenType == TokenType.TypeDef) {
+    if (tokenType == TokenType.typeDef) {
       return TypeDef.fromToken(scope, _parentToken);
     }
 
-    if (tokenType == TokenType.MethodDef) {
+    if (tokenType == TokenType.methodDef) {
       return Method.fromToken(scope, _parentToken);
     }
 

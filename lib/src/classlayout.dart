@@ -47,6 +47,8 @@ class ClassLayout extends TokenObject {
       final pcFieldOffset = arena<ULONG>();
       final pulClassSize = arena<ULONG>();
 
+      // An assumption is made here that there are no more than 256 fields in a
+      // struct. If that's not the case, this will fail and throw an exception.
       final hr = reader.GetClassLayout(classToken, pdwPackSize, rgFieldOffset,
           256, pcFieldOffset, pulClassSize);
       if (SUCCEEDED(hr)) {

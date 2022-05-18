@@ -39,8 +39,8 @@
 /// ```
 ///
 /// From here, you can interrogate the `scope` object for its children; in
-/// particular, the collection of [TypeDef] objects that in turn contain
-/// [Method], [Field], [Event] and [Property] members.
+/// particular, the collection of [typeDef] objects that in turn contain
+/// [Method], [Field], [event] and [property] members.
 ///
 /// In general, the model presented by this package is consistent with the APIs
 /// exposed by the

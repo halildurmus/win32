@@ -69,17 +69,17 @@ void main() {
     expect(wndProc.methods[0].isRTSpecialName, isTrue);
 
     expect(wndProc.methods[0].returnType.typeIdentifier.baseType,
-        equals(BaseType.Void));
+        equals(BaseType.voidType));
     expect(wndProc.methods[0].name, equals('.ctor'));
     expect(wndProc.methods[0].parameters.length, equals(2));
 
     expect(wndProc.methods[0].parameters[0].name, equals('object'));
     expect(wndProc.methods[0].parameters[0].typeIdentifier.baseType,
-        equals(BaseType.Object));
+        equals(BaseType.objectType));
 
     expect(wndProc.methods[0].parameters[1].name, equals('method'));
     expect(wndProc.methods[0].parameters[1].typeIdentifier.baseType,
-        equals(BaseType.IntPtr));
+        equals(BaseType.intPtrType));
     expect(wndProc.methods[0].implFeatures.codeType, equals(CodeType.runtime));
     expect(wndProc.methods[0].implFeatures.isManaged, isTrue);
 
@@ -96,26 +96,26 @@ void main() {
     expect(wndProc.methods[1].parameters[0].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[0].name, equals('param0'));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.name,
         equals('Windows.Win32.Foundation.HWND'));
 
     expect(wndProc.methods[1].parameters[1].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[1].name, equals('param1'));
     expect(wndProc.methods[1].parameters[1].typeIdentifier.baseType,
-        equals(BaseType.Uint32));
+        equals(BaseType.uint32Type));
 
     expect(wndProc.methods[1].parameters[2].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[2].name, equals('param2'));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.name,
         equals('Windows.Win32.Foundation.WPARAM'));
 
     expect(wndProc.methods[1].parameters[3].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[3].name, equals('param3'));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
         equals('Windows.Win32.Foundation.LPARAM'));
     expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.runtime));

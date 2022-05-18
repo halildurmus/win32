@@ -74,8 +74,15 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       Parameter(scope, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
 
   /// Creates a void parameter object.
-  factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(scope,
-      0, methodToken, 0, 0, TypeIdentifier(BaseType.Void), '', Uint8List(0));
+  factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
+      scope,
+      0,
+      methodToken,
+      0,
+      0,
+      TypeIdentifier(BaseType.voidType),
+      '',
+      Uint8List(0));
 
   @override
   String toString() => name;

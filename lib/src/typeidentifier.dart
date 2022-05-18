@@ -25,11 +25,11 @@ class TypeIdentifier {
   /// The name of the type (for example, `Windows.Storage.IStorageFile` or
   /// `LPWSTR`), if it is not a primitive type.
   ///
-  /// For a type like [BaseType.Int8], this is empty.
+  /// For a type like [BaseType.int8Type], this is empty.
   String name;
 
   /// The class or interface, if the type is (for example)
-  /// [BaseType.ClassTypeModifier].
+  /// [BaseType.classTypeModifier].
   TypeDef? type;
 
   /// Any arguments (for example, the `Uint16` in a `Pointer<Uint16>`).

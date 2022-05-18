@@ -42,16 +42,16 @@ void main() {
     expect(ref.signatureBlob.toList(),
         containsAllInOrder([0x20, 0x04, 0x01, 0x0e]));
 
-    expect(deprecated.memberRef.tokenType, equals(TokenType.MemberRef));
+    expect(deprecated.memberRef.tokenType, equals(TokenType.memberRef));
     expect(deprecated.memberRef.name, equals('.ctor'));
     expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
 
     expect(deprecated.parameters.length, equals(4));
-    expect(deprecated.parameters[0].type.baseType, equals(BaseType.String));
+    expect(deprecated.parameters[0].type.baseType, equals(BaseType.stringType));
     expect(deprecated.parameters[1].type.baseType,
-        equals(BaseType.ValueTypeModifier));
-    expect(deprecated.parameters[2].type.baseType, equals(BaseType.Uint32));
-    expect(deprecated.parameters[3].type.baseType, equals(BaseType.String));
+        equals(BaseType.valueTypeModifier));
+    expect(deprecated.parameters[2].type.baseType, equals(BaseType.uint32Type));
+    expect(deprecated.parameters[3].type.baseType, equals(BaseType.stringType));
 
     expect(deprecated.parameters[0].value, isA<String>());
     expect(
@@ -83,7 +83,7 @@ void main() {
 
     expect(archAttr.parameters.length, equals(1));
     expect(archAttr.parameters[0].type.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(archAttr.parameters[0].type.name,
         equals('Windows.Win32.Interop.Architecture'));
 
@@ -102,10 +102,10 @@ void main() {
         (element) => element.name.endsWith('InvalidHandleValueAttribute'));
     expect(invalidHandleValues.length, equals(2));
     expect(invalidHandleValues.first.parameters.first.type.baseType,
-        equals(BaseType.Int64));
+        equals(BaseType.int64Type));
     expect(invalidHandleValues.first.parameters.first.value, isIn([-1, 0]));
     expect(invalidHandleValues.last.parameters.first.type.baseType,
-        equals(BaseType.Int64));
+        equals(BaseType.int64Type));
     expect(invalidHandleValues.last.parameters.first.value, isIn([-1, 0]));
   });
 

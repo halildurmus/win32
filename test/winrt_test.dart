@@ -104,7 +104,7 @@ void main() {
 
     final method = winTypeDef?.methods.first;
     expect(method?.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassVariableTypeModifier));
+        equals(BaseType.classVariableTypeModifier));
   });
 
   test('Generic class can be parsed', () {
@@ -121,15 +121,16 @@ void main() {
 
     final interfaces = winTypeDef.interfaces;
     expect(interfaces.length, equals(3));
-    expect(interfaces[1].tokenType, equals(TokenType.TypeSpec));
+    expect(interfaces[1].tokenType, equals(TokenType.typeSpec));
 
     final idict = interfaces[1];
-    expect(idict.typeSpec?.baseType, equals(BaseType.GenericTypeModifier));
+    expect(idict.typeSpec?.baseType, equals(BaseType.genericTypeModifier));
     expect(idict.typeSpec?.name, contains('Collections.IMap'));
     expect(idict.typeSpec?.typeArg, isNotNull);
-    expect(idict.typeSpec?.typeArg?.baseType, equals(BaseType.String));
+    expect(idict.typeSpec?.typeArg?.baseType, equals(BaseType.stringType));
     expect(idict.typeSpec?.typeArg?.typeArg, isNotNull);
-    expect(idict.typeSpec?.typeArg?.typeArg?.baseType, equals(BaseType.Object));
+    expect(idict.typeSpec?.typeArg?.typeArg?.baseType,
+        equals(BaseType.objectType));
   });
 
   test('Find interfaces returns sane results with IEnumerable<class>', () {
@@ -176,10 +177,11 @@ void main() {
     final method = winTypeDef.findMethod('AddDays')!;
 
     expect(method.isProperty, isFalse);
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.voidType));
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
     expect(method.parameters.first.name, equals('days'));
   });
 
@@ -190,7 +192,8 @@ void main() {
     final method = winTypeDef.findMethod('YearAsString')!;
 
     expect(method.isProperty, isFalse);
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.String));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.stringType));
     expect(method.parameters.length, equals(0));
   });
 
@@ -201,10 +204,11 @@ void main() {
     final method = winTypeDef.findMethod('MonthAsPaddedNumericString')!;
 
     expect(method.isProperty, isFalse);
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.String));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.stringType));
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
     expect(method.parameters.first.name, equals('minDigits'));
   });
 
@@ -215,7 +219,8 @@ void main() {
     final method = winTypeDef.findMethod('SetToNow')!;
 
     expect(method.isProperty, isFalse);
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.voidType));
     expect(method.parameters.length, equals(0));
   });
 
@@ -227,7 +232,7 @@ void main() {
 
     expect(method.isProperty, isFalse);
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(method.returnType.typeIdentifier.name, endsWith('DateTime'));
     expect(method.parameters.length, equals(0));
   });
@@ -247,7 +252,8 @@ void main() {
 
     final method = winTypeDef.findMethod('get_Day')!;
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Int32));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.int32Type));
     expect(method.isSpecialName, isTrue);
     expect(method.isProperty, isTrue);
     expect(method.isSetProperty, isFalse);
@@ -261,14 +267,15 @@ void main() {
 
     final method = winTypeDef.findMethod('put_Day')!;
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.voidType));
     expect(method.isSpecialName, isTrue);
     expect(method.isProperty, isTrue);
     expect(method.isSetProperty, isTrue);
     expect(method.isGetProperty, isFalse);
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
   });
 
   test('Calendar.Languages getter property is correct', () {
@@ -278,7 +285,7 @@ void main() {
     final method = winTypeDef.findMethod('get_Languages')!;
 
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.GenericTypeModifier));
+        equals(BaseType.genericTypeModifier));
     expect(method.returnType.typeIdentifier.type?.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
     expect(method.returnType.typeIdentifier.type?.isClass, isFalse);
@@ -295,14 +302,15 @@ void main() {
 
     final method = winTypeDef.findMethod('put_ViewMode')!;
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.voidType));
     expect(method.isSpecialName, isTrue);
     expect(method.isProperty, isTrue);
     expect(method.isSetProperty, isTrue);
     expect(method.isGetProperty, isFalse);
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(method.parameters.first.typeIdentifier.name,
         equals('Windows.Storage.Pickers.PickerViewMode'));
   });
@@ -313,7 +321,7 @@ void main() {
 
     final method = winTypeDef.findMethod('get_Source')!;
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassTypeModifier));
+        equals(BaseType.classTypeModifier));
     expect(method.returnType.typeIdentifier.name,
         endsWith('IMediaPlaybackSource'));
   });
@@ -347,7 +355,7 @@ void main() {
     final method = winTypeDef.findMethod('ChangeCalendarSystem')!;
 
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.String));
+        equals(BaseType.stringType));
     expect(method.isSpecialName, isFalse);
     expect(method.isProperty, isFalse);
     expect(method.isSetProperty, isFalse);
@@ -362,7 +370,7 @@ void main() {
 
     expect(method.parameters.length, equals(0));
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassTypeModifier));
+        equals(BaseType.classTypeModifier));
     expect(method.returnType.typeIdentifier.name,
         equals('Windows.Globalization.Calendar'));
   });
@@ -375,12 +383,12 @@ void main() {
 
     expect(method.parameters.length, equals(0));
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.GenericTypeModifier));
+        equals(BaseType.genericTypeModifier));
     expect(method.returnType.typeIdentifier.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
     expect(method.returnType.typeIdentifier.typeArg, isNotNull);
     expect(method.returnType.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.String));
+        equals(BaseType.stringType));
   });
 
   test('Calendar.PeriodAsFullString overload is correctly represented', () {
@@ -403,13 +411,14 @@ void main() {
 
     final method = winTypeDef.findMethod('YearAsTruncatedString')!;
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.String));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.stringType));
     expect(method.isSpecialName, isFalse);
     expect(method.isProperty, isFalse);
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.name, equals('remainingDigits'));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
   });
 
   test('Method with one parameter and return value is correct', () {
@@ -423,13 +432,14 @@ void main() {
                 'Windows.Foundation.Metadata.OverloadAttribute') ==
             'MonthAsString');
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.String));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.stringType));
     expect(method.isSpecialName, isFalse);
     expect(method.isProperty, isFalse);
     expect(method.parameters.length, equals(1));
     expect(method.parameters.first.name, equals('idealLength'));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.Int32));
+        equals(BaseType.int32Type));
   });
 
   test('Method with multiple parameters and no return value is correct', () {
@@ -438,14 +448,15 @@ void main() {
 
     final method = winTypeDef.findMethod('SetUpdateInformation')!;
 
-    expect(method.returnType.typeIdentifier.baseType, equals(BaseType.Void));
+    expect(
+        method.returnType.typeIdentifier.baseType, equals(BaseType.voidType));
     expect(method.isProperty, isFalse);
     expect(method.parameters.length, equals(5));
     expect(method.parameters[0].typeIdentifier.name,
         equals('Windows.Storage.IStorageFile'));
     expect(method.parameters[0].name, equals('file'));
-    expect(
-        method.parameters[1].typeIdentifier.baseType, equals(BaseType.String));
+    expect(method.parameters[1].typeIdentifier.baseType,
+        equals(BaseType.stringType));
     expect(method.parameters[1].name, equals('contentId'));
     expect(method.parameters[2].typeIdentifier.name,
         equals('Windows.Storage.Provider.ReadActivationMode'));
@@ -471,7 +482,7 @@ void main() {
         equals('Windows.Globalization.JapanesePhoneme'));
     expect(method.parameters.first.name, equals('input'));
     expect(method.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.String));
+        equals(BaseType.stringType));
   });
 
   test('Calendar.Clone method is correct', () {
@@ -481,7 +492,7 @@ void main() {
     final method = winTypeDef.findMethod('Clone')!;
 
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassTypeModifier));
+        equals(BaseType.classTypeModifier));
     expect(method.returnType.name, equals('value'));
     expect(method.isSpecialName, isFalse);
     expect(method.isProperty, isFalse);
@@ -494,7 +505,7 @@ void main() {
     final method = winTypeDef.findMethod('get_Status')!;
 
     expect(method.returnType.typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(method.returnType.typeIdentifier.name,
         equals('Windows.Foundation.AsyncStatus'));
     expect(method.isSpecialName, isTrue);
@@ -553,17 +564,18 @@ void main() {
     final valueSizeParam = method.parameters.first;
     expect(valueSizeParam.name, equals('__valueSize'));
     expect(valueSizeParam.typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(valueSizeParam.typeIdentifier.typeArg, isNotNull);
     expect(valueSizeParam.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.Uint32));
+        equals(BaseType.uint32Type));
 
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     expect(valueParam.typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(valueParam.typeIdentifier.typeArg, isNotNull);
-    expect(valueParam.typeIdentifier.typeArg?.baseType, equals(BaseType.Uint8));
+    expect(valueParam.typeIdentifier.typeArg?.baseType,
+        equals(BaseType.uint8Type));
   });
 
   test('Can find generic types', () {
@@ -596,7 +608,7 @@ void main() {
     final getResults = winTypeDef.findMethod('GetResults')!;
     expect(getResults.parameters, isEmpty);
     expect(getResults.returnType.typeIdentifier.baseType,
-        equals(BaseType.ClassVariableTypeModifier));
+        equals(BaseType.classVariableTypeModifier));
     expect(getResults.returnType.typeIdentifier.genericParameterSequence,
         equals(0));
   });
@@ -609,7 +621,7 @@ void main() {
     expect(putCompleted.parameters.length, equals(1));
     expect(putCompleted.parameters.first.name, equals('handler'));
     expect(putCompleted.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.GenericTypeModifier));
+        equals(BaseType.genericTypeModifier));
     expect(putCompleted.parameters.first.typeIdentifier.name,
         endsWith('AsyncOperationCompletedHandler`1'));
   });
@@ -620,7 +632,7 @@ void main() {
 
     final getCompleted = winTypeDef.findMethod('get_Completed')!;
     expect(getCompleted.returnType.typeIdentifier.baseType,
-        equals(BaseType.GenericTypeModifier));
+        equals(BaseType.genericTypeModifier));
     expect(getCompleted.returnType.typeIdentifier.name,
         endsWith('AsyncOperationCompletedHandler`1'));
   });

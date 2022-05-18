@@ -96,7 +96,7 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.Int32));
+    expect(returnType.typeIdentifier.baseType, equals(BaseType.int32Type));
     expect(returnType.typeIdentifier.typeArg, isNull);
   });
 
@@ -112,7 +112,7 @@ void main() {
     expect(param.sequence, equals(1));
     expect(param.typeIdentifier.name, endsWith('PWSTR'));
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
     expect(param.typeIdentifier.typeArg, isNull);
   });
 
@@ -159,11 +159,11 @@ void main() {
     expect(api.parameters[2].name, equals('lprcSrc2'));
 
     expect(api.parameters[0].typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(api.parameters[1].typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(api.parameters[2].typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
   });
 
   test('Structs like RECT have the correct type args', () {
@@ -173,7 +173,7 @@ void main() {
 
     expect(api.parameters.first.name, equals('lprcDst'));
     expect(api.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
 
     expect(api.parameters.first.typeIdentifier.typeArg, isNotNull);
     expect(api.parameters.first.typeIdentifier.typeArg?.name, endsWith('RECT'));
@@ -186,7 +186,7 @@ void main() {
     final colorParam = api.parameters.last;
 
     expect(colorParam.name, equals('color'));
-    expect(colorParam.typeIdentifier.baseType, equals(BaseType.Uint32));
+    expect(colorParam.typeIdentifier.baseType, equals(BaseType.uint32Type));
   });
 
   test('DWORD typedefs like COLORREF have the correct return type', () {
@@ -195,7 +195,7 @@ void main() {
     final api = typedef.findMethod('SetBkColor')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.Uint32));
+    expect(returnType.typeIdentifier.baseType, equals(BaseType.uint32Type));
   });
 
   test('HANDLE-style parameters have the correct type', () {
@@ -206,7 +206,7 @@ void main() {
     final param = api.parameters.first;
 
     expect(param.name, endsWith('hWnd'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
     expect(param.typeIdentifier.name, endsWith('HWND'));
     expect(param.typeIdentifier.typeArg, isNull);
   });
@@ -219,12 +219,12 @@ void main() {
     final param = api.parameters.last;
 
     expect(param.name, endsWith('lpKids'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
     expect(param.typeIdentifier.name, isEmpty);
     expect(param.typeIdentifier.typeArg, isNotNull);
 
     final arg = param.typeIdentifier.typeArg!;
-    expect(arg.baseType, equals(BaseType.ValueTypeModifier));
+    expect(arg.baseType, equals(BaseType.valueTypeModifier));
     expect(arg.name, endsWith('HWND'));
     expect(arg.typeArg, isNull);
   });
@@ -236,7 +236,7 @@ void main() {
     final param = api.parameters[1];
 
     expect(param.name, equals('cCharacter'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.Char));
+    expect(param.typeIdentifier.baseType, equals(BaseType.charType));
   });
 
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
@@ -245,7 +245,7 @@ void main() {
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
     final param = api.parameters.first;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
     expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
   });
 
@@ -256,10 +256,10 @@ void main() {
     final param = api.parameters.first;
 
     expect(param.name, equals('rclsid'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
     expect(param.typeIdentifier.typeArg?.name, endsWith('System.Guid'));
     expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
   });
 
   test('APIs with empty parameters have an accurate return type', () {
@@ -269,7 +269,7 @@ void main() {
     final api = typedef.findMethod('CountClipboardFormats')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.Int32));
+    expect(returnType.typeIdentifier.baseType, equals(BaseType.int32Type));
   });
 
   test('Double pointer is interpreted correctly', () {
@@ -279,10 +279,10 @@ void main() {
     final api = typedef.findMethod('CredReadW')!;
     final param = api.parameters.last;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.PointerTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
     expect(param.typeIdentifier.typeArg, isNotNull);
     expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(
         param.typeIdentifier.typeArg?.typeArg?.name, endsWith('CREDENTIALW'));
   });
@@ -295,7 +295,7 @@ void main() {
     final returnType = api.returnType;
 
     expect(
-        returnType.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
+        returnType.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
     expect(returnType.typeIdentifier.name, endsWith('HRESULT'));
   });
 
@@ -305,7 +305,7 @@ void main() {
     final api = typedef.findMethod('CoSetProxyBlanket')!;
     final param = api.parameters.first;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.ClassTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
     expect(param.typeIdentifier.name, endsWith('IUnknown'));
   });
 
@@ -316,7 +316,7 @@ void main() {
     final param = api.parameters[2]; // FONTENUMPROCW
 
     expect(param.name, equals('lpProc'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.ClassTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
     expect(param.typeIdentifier.name, endsWith('FONTENUMPROCW'));
     expect(param.typeIdentifier.typeArg, isNull);
   });
@@ -329,7 +329,7 @@ void main() {
     final param = api.parameters[3]; // PSYM_ENUMERATESYMBOLS_CALLBACKW
 
     expect(param.name, equals('EnumSymbolsCallback'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.ClassTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
     expect(
         param.typeIdentifier.name, endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW'));
     expect(param.typeIdentifier.typeArg, isNull);
@@ -359,7 +359,7 @@ void main() {
     final param = api.parameters.first;
 
     expect(param.name, equals('lpAttributeList'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
+    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
     expect(param.typeIdentifier.name, endsWith('LPPROC_THREAD_ATTRIBUTE_LIST'));
     expect(param.typeIdentifier.typeArg, isNull);
   });
@@ -405,7 +405,7 @@ void main() {
 
     expect(param.name, equals('lpFlags'));
     expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(param.typeIdentifier.typeArg?.type?.parent?.name,
         equals('System.Enum'));
   });

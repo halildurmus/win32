@@ -24,42 +24,6 @@ import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils/typetuple.dart';
 
-/// Specifies member access.
-enum MemberAccess {
-  /// Specifies that the member cannot be referenced.
-  privateScope,
-
-  /// Specifies that the member is accessible only by the parent type.
-  private,
-
-  /// Specifies that the member is accessible by subtypes only in this assembly.
-  familyAndAssembly,
-
-  /// Specifies that the member is accessibly by anyone in the assembly.
-  assembly,
-
-  /// Specifies that the member is accessible only by type and subtypes.
-  family,
-
-  /// Specifies that the member is accessible by derived classes and by other
-  /// types in its assembly.
-  familyOrAssembly,
-
-  /// Specifies that the member is accessible by all types with access to the
-  /// scope.
-  public
-}
-
-/// Specifies virtual table layout.
-enum VtableLayout {
-  /// Specifies that the slot used for this method in the virtual table be
-  /// reused. This is the default.
-  reuseSlot,
-
-  /// Specifies that the method always gets a new slot in the virtual table.
-  newSlot
-}
-
 /// A method.
 class Method extends TokenObject
     with
@@ -315,7 +279,7 @@ class Method extends TokenObject
           TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
-      if (runtimeType.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
+      if (runtimeType.typeIdentifier.baseType == BaseType.arrayTypeModifier) {
         blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
         paramsIndex++; //we've added two parameters here
       } else {
@@ -348,14 +312,14 @@ class Method extends TokenObject
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.baseType =
-        BaseType.PointerTypeModifier;
+        BaseType.pointerTypeModifier;
     parameters[paramsIndex].typeIdentifier.typeArg =
-        TypeIdentifier(BaseType.Uint32);
+        TypeIdentifier(BaseType.uint32Type);
 
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.baseType =
-        BaseType.PointerTypeModifier;
+        BaseType.pointerTypeModifier;
     parameters[paramsIndex + 1].typeIdentifier.typeArg =
         typeTuple.typeIdentifier;
 

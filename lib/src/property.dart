@@ -85,7 +85,7 @@ class Property extends TokenObject with CustomAttributesMixin {
         if (SUCCEEDED(hr)) {
           final propName = szProperty.toDartString();
 
-          // PropertySig is defined in §II.23.2.5.
+          // PropertySig is defined in §II.23.2.5 of ECMA-335.
           final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
           final typeTuple =
               TypeTuple.fromSignature(signature.sublist(2), scope);

@@ -10,24 +10,13 @@ import 'package:win32/win32.dart';
 import 'assemblyref.dart';
 import 'com/imetadataassemblyimport.dart';
 import 'com/imetadataimport2.dart';
+import 'enums.dart';
 import 'moduleref.dart';
 import 'pekind.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils/exception.dart';
-
-/// Indicates the preferred architecture for a requested [TypeDef].
-enum PreferredArchitecture {
-  /// Prefer Intel 32-bit architecture.
-  x86,
-
-  /// Prefer Intel 64-bit architecture.
-  x64,
-
-  // Prefer ARM 64-bit architecture.
-  arm64
-}
 
 /// A metadata scope, which typically matches an on-disk file.
 ///

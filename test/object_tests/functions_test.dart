@@ -42,7 +42,7 @@ void main() {
     expect(awr.parameters[0].isOutParam, isTrue);
     expect(awr.parameters[0].name, equals('lpRect'));
     expect(awr.parameters[0].typeIdentifier.baseType,
-        equals(BaseType.PointerTypeModifier));
+        equals(BaseType.pointerTypeModifier));
     expect(awr.parameters[0].typeIdentifier.typeArg, isNotNull);
     expect(awr.parameters[0].typeIdentifier.typeArg?.name,
         equals('Windows.Win32.Foundation.RECT'));
@@ -50,14 +50,14 @@ void main() {
     expect(awr.parameters[1].isInParam, isTrue);
     expect(awr.parameters[1].name, equals('dwStyle'));
     expect(awr.parameters[1].typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(awr.parameters[1].typeIdentifier.name,
         equals('Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE'));
 
     expect(awr.parameters[2].isInParam, isTrue);
     expect(awr.parameters[2].name, equals('bMenu'));
     expect(awr.parameters[2].typeIdentifier.baseType,
-        equals(BaseType.ValueTypeModifier));
+        equals(BaseType.valueTypeModifier));
     expect(awr.parameters[2].typeIdentifier.name,
         equals('Windows.Win32.Foundation.BOOL'));
 

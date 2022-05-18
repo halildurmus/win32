@@ -127,8 +127,8 @@ class CustomAttribute extends TokenObject {
             paramTypes[paramIdx].type!.fields.first.typeIdentifier.baseType;
       }
       switch (baseType) {
-        case BaseType.String:
-        case BaseType.ClassTypeModifier: // canonical name represented in value
+        case BaseType.stringType:
+        case BaseType.classTypeModifier: // canonical name represented in value
           // Get string length and move pointer forward
           final packedLen =
               UncompressedData.fromBlob(blob.buffer.asUint8List(offset, 4));
@@ -140,51 +140,51 @@ class CustomAttribute extends TokenObject {
               .convert(blob.buffer.asUint8List(offset, stringLength)));
           offset += stringLength;
           break;
-        case BaseType.Boolean:
+        case BaseType.booleanType:
           paramValues.add(blob.getUint8(offset) == 1);
           offset += 1;
           break;
-        case BaseType.Char:
+        case BaseType.charType:
           paramValues.add(String.fromCharCode(blob.getUint16(offset)));
           offset += 2;
           break;
-        case BaseType.Float:
+        case BaseType.floatType:
           paramValues.add(blob.getFloat32(offset, Endian.little));
           offset += 4;
           break;
-        case BaseType.Double:
+        case BaseType.doubleType:
           paramValues.add(blob.getFloat64(offset, Endian.little));
           offset += 8;
           break;
-        case BaseType.Int8:
+        case BaseType.int8Type:
           paramValues.add(blob.getInt8(offset));
           offset += 1;
           break;
-        case BaseType.Int16:
+        case BaseType.int16Type:
           paramValues.add(blob.getInt16(offset, Endian.little));
           offset += 2;
           break;
-        case BaseType.Int32:
+        case BaseType.int32Type:
           paramValues.add(blob.getInt32(offset, Endian.little));
           offset += 4;
           break;
-        case BaseType.Int64:
+        case BaseType.int64Type:
           paramValues.add(blob.getInt64(offset, Endian.little));
           offset += 8;
           break;
-        case BaseType.Uint8:
+        case BaseType.uint8Type:
           paramValues.add(blob.getUint8(offset));
           offset += 1;
           break;
-        case BaseType.Uint16:
+        case BaseType.uint16Type:
           paramValues.add(blob.getUint16(offset, Endian.little));
           offset += 2;
           break;
-        case BaseType.Uint32:
+        case BaseType.uint32Type:
           paramValues.add(blob.getUint32(offset, Endian.little));
           offset += 4;
           break;
-        case BaseType.Uint64:
+        case BaseType.uint64Type:
           paramValues.add(blob.getUint64(offset, Endian.little));
           offset += 8;
           break;

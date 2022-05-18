@@ -31,8 +31,8 @@ class TypeTuple {
     var dataLength = 0;
 
     switch (runtimeType.baseType) {
-      case BaseType.ValueTypeModifier:
-      case BaseType.ClassTypeModifier:
+      case BaseType.valueTypeModifier:
+      case BaseType.classTypeModifier:
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));
         final token = _unencodeDefRefSpecToken(uncompressed.data);
@@ -43,21 +43,21 @@ class TypeTuple {
         runtimeType.type = tokenAsType;
         break;
 
-      case BaseType.ReferenceTypeModifier:
+      case BaseType.referenceTypeModifier:
         if (signatureBlob[1] == 0x1D) {
           // array
-          runtimeType.baseType = BaseType.ArrayTypeModifier;
+          runtimeType.baseType = BaseType.arrayTypeModifier;
         }
         break;
 
-      case BaseType.PointerTypeModifier:
+      case BaseType.pointerTypeModifier:
         final ptrTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         dataLength = 1 + ptrTuple.offsetLength;
         runtimeType.typeArg = ptrTuple.typeIdentifier;
         break;
 
-      case BaseType.GenericTypeModifier:
+      case BaseType.genericTypeModifier:
         // return a type with a generic
         final classTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
@@ -78,7 +78,7 @@ class TypeTuple {
         }
         break;
 
-      case BaseType.ArrayTypeModifier:
+      case BaseType.arrayTypeModifier:
         // Format is [Type ArrayShape] (see §II.23.2.13)
         final arrayTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
@@ -96,8 +96,8 @@ class TypeTuple {
         runtimeType.arrayDimensions = dimensionUpperBounds;
         break;
 
-      case BaseType.ClassVariableTypeModifier:
-      case BaseType.MethodVariableTypeModifier:
+      case BaseType.classVariableTypeModifier:
+      case BaseType.methodVariableTypeModifier:
         // Element is a generic parameter of a type or a method
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));

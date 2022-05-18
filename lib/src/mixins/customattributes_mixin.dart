@@ -20,7 +20,7 @@ mixin CustomAttributesMixin on TokenObject {
     final attr = findAttribute(attrName);
     if (attr == null ||
         attr.parameters.isEmpty ||
-        attr.parameters.first.type.baseType != BaseType.String) {
+        attr.parameters.first.type.baseType != BaseType.stringType) {
       return '';
     }
 

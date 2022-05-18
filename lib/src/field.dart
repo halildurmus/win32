@@ -19,33 +19,6 @@ import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils/typetuple.dart';
 
-/// Field accessibility information.
-enum FieldAccess {
-  /// Specifies that the field cannot be referenced.
-  privateScope,
-
-  /// Specifies that the field is accessible only by its parent type.
-  private,
-
-  /// Specifies that the field is accessible by derived classes in its assembly.
-  familyAndAssembly,
-
-  /// Specifies that the field is accessible by all types in its assembly.
-  assembly,
-
-  /// Specifies that the field is accessible only by its type and derived
-  /// classes.
-  family,
-
-  /// Specifies that the field is accessible by derived classes and by all types
-  /// in its assembly.
-  familyOrAssembly,
-
-  /// Specifies that the field is accessible by all types with visibility of
-  /// this scope.
-  public
-}
-
 /// A field.
 ///
 /// Fields are typed memory locations that store the data of a program.
