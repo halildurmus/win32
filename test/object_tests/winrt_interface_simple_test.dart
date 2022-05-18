@@ -71,15 +71,19 @@ void main() {
 
     expect(iai.customAttributes.length, equals(2));
     expect(
-        iai.customAttributeAsBytes('Windows.Foundation.Metadata.GuidAttribute'),
+        iai
+            .findAttribute('Windows.Foundation.Metadata.GuidAttribute')
+            ?.signatureBlob,
         equals([
           0x01, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, //
           0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, //
           0x00, 0x46, 0x00, 0x00
         ]));
     expect(
-        iai.customAttributeAsBytes(
-            'Windows.Foundation.Metadata.ContractVersionAttribute'),
+        iai
+            .findAttribute(
+                'Windows.Foundation.Metadata.ContractVersionAttribute')
+            ?.signatureBlob,
         containsAllInOrder(
             <int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]));
 

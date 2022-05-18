@@ -65,8 +65,9 @@ void main() {
     expect(awr.implFeatures.isManaged, isTrue);
 
     expect(
-        awr.customAttributeAsBytes(
-            'Windows.Win32.Interop.SupportedOSPlatformAttribute'),
+        awr
+            .findAttribute('Windows.Win32.Interop.SupportedOSPlatformAttribute')
+            ?.signatureBlob,
         equals([
           0x01, 0x00, 0x0a, 0x77, 0x69, 0x6e, 0x64, 0x6f, //
           0x77, 0x73, 0x35, 0x2e, 0x30, 0x00, 0x00
