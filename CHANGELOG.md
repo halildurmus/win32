@@ -1,6 +1,7 @@
 ## 1.2.0
 
 - Correctly handle custom attributes with parameters.
+- Add findAttribute() and existsAttribute() methods.
 - Add support for Windows.Win32.Interop.dll.
 - Remove customAttributeAsBytes in favor of customAttribute.signatureBlob.
 
