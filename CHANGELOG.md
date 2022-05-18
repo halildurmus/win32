@@ -1,6 +1,8 @@
 ## 1.2.0
 
-- Correctly handle custom attributes with multiple parameters.
+- Correctly handle custom attributes with parameters.
+- Add support for Windows.Win32.Interop.dll.
+- Remove customAttributeAsBytes in favor of customAttribute.signatureBlob.
 
 ## 1.1.1
 
