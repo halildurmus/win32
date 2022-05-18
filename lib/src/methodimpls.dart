@@ -1,12 +1,10 @@
-// ignore_for_file: constant_identifier_names
-
 import 'com/constants.dart';
 
 /// Code type of contained code.
 enum CodeType {
   /// Specifies that the method implementation is Microsoft intermediate
   /// language (MSIL).
-  IL,
+  msil,
 
   /// Specifies that the method implementation is native.
   native,

@@ -5,7 +5,7 @@
 // waitFor is controversial, but necessary in the absence of a better mechanism
 // for non-Flutter packages to load binary assets.
 //
-// ignore_for_file: deprecated_member_use, non_constant_identifier_names
+// ignore_for_file: deprecated_member_use
 
 import 'dart:cli';
 import 'dart:ffi';
@@ -39,13 +39,13 @@ class MetadataStore {
   static void initialize() {
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<COMObject>();
-    final CLSID_CorMetaDataDispenser =
+    final clsidCorMetaDataDispenser =
         convertToCLSID(CorMetaDataDispenser.CLSID);
-    final IID_IMetaDataDispenser = convertToIID(IMetaDataDispenser.IID);
+    final iidIMetaDataDispenser = convertToIID(IMetaDataDispenser.IID);
 
     try {
-      final hr = MetaDataGetDispenser(CLSID_CorMetaDataDispenser,
-          IID_IMetaDataDispenser, dispenserObject.cast());
+      final hr = MetaDataGetDispenser(clsidCorMetaDataDispenser,
+          iidIMetaDataDispenser, dispenserObject.cast());
 
       if (FAILED(hr)) {
         throw WindowsException(hr);
@@ -55,8 +55,8 @@ class MetadataStore {
 
       isInitialized = true;
     } finally {
-      free(CLSID_CorMetaDataDispenser);
-      free(IID_IMetaDataDispenser);
+      free(clsidCorMetaDataDispenser);
+      free(iidIMetaDataDispenser);
     }
   }
 
@@ -116,25 +116,25 @@ class MetadataStore {
     } else {
       final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<COMObject>();
-      final IID_IMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
+      final iidIMetaDataImport2 = convertToIID(IMetaDataImport2.IID);
       final pAssemblyImport = calloc<COMObject>();
-      final IID_IMetaDataAssemblyImport =
+      final iidIMetaDataAssemblyImport =
           convertToIID(IMetaDataAssemblyImport.IID);
 
       try {
         var hr = dispenser.OpenScope(
-            szFile, CorOpenFlags.ofRead, IID_IMetaDataImport2, pReader.cast());
+            szFile, CorOpenFlags.ofRead, iidIMetaDataImport2, pReader.cast());
         if (FAILED(hr)) throw WindowsException(hr);
         hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            IID_IMetaDataAssemblyImport, pAssemblyImport.cast());
+            iidIMetaDataAssemblyImport, pAssemblyImport.cast());
         final scope = Scope(IMetaDataImport2(pReader),
             IMetaDataAssemblyImport(pAssemblyImport));
         cache[filename] = scope;
         return scope;
       } finally {
         free(szFile);
-        free(IID_IMetaDataImport2);
-        free(IID_IMetaDataAssemblyImport);
+        free(iidIMetaDataImport2);
+        free(iidIMetaDataAssemblyImport);
       }
     }
   }

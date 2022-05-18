@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// ignore_for_file: constant_identifier_names
-
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -13,7 +11,14 @@ import 'com/imetadataimport2.dart';
 import 'enums.dart';
 import 'scope.dart';
 
-const MAX_STRING_SIZE = 256;
+/// Size used for Win32 string allocations.
+///
+/// A common pattern for Win32 string calls is to provide a buffer larger than
+/// the expected return value, along with an out parameter to be filled in with
+/// the actual size of the string returned. This constant is used to set a
+/// consistent value that is expected to be large enough to accommodate the
+/// return results.
+const stringBufferSize = 256;
 
 /// The base object for metadata objects.
 ///

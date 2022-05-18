@@ -93,7 +93,7 @@ class Method extends TokenObject
   /// Creates a method object from a provided token.
   factory Method.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptkClass = arena<mdTypeDef>();
-        final szMethod = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szMethod = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchMethod = arena<ULONG>();
         final pdwAttr = arena<DWORD>();
         final ppvSigBlob = arena<PCCOR_SIGNATURE>();
@@ -106,7 +106,7 @@ class Method extends TokenObject
             token,
             ptkClass,
             szMethod,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchMethod,
             pdwAttr,
             ppvSigBlob,
@@ -214,12 +214,12 @@ class Method extends TokenObject
   /// Returns the module that contains the method.
   ModuleRef get module => using((Arena arena) {
         final pdwMappingFlags = arena<DWORD>();
-        final szImportName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchImportName = arena<ULONG>();
         final ptkImportDLL = arena<mdModuleRef>();
 
         final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
-            MAX_STRING_SIZE, pchImportName, ptkImportDLL);
+            stringBufferSize, pchImportName, ptkImportDLL);
         if (SUCCEEDED(hr)) {
           return ModuleRef.fromToken(scope, ptkImportDLL.value);
         } else {

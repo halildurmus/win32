@@ -49,11 +49,11 @@ class Scope {
 
   Scope(this.reader, this.assemblyImport) {
     using((Arena arena) {
-      final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
       final pchName = arena<ULONG>();
       final pmvid = arena<GUID>();
 
-      final hr = reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, pmvid);
+      final hr = reader.GetScopeProps(szName, stringBufferSize, pchName, pmvid);
       if (SUCCEEDED(hr)) {
         name = szName.toDartString();
         guid = pmvid.ref.toString();
@@ -185,14 +185,14 @@ class Scope {
         final phEnum = arena<HCORENUM>();
         final rgStrings = arena<mdString>();
         final pcStrings = arena<ULONG>();
-        final szString = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szString = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchString = arena<ULONG>();
 
         var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
         while (hr == S_OK) {
           final stringToken = rgStrings.value;
           hr = reader.GetUserString(
-              stringToken, szString, MAX_STRING_SIZE, pchString);
+              stringToken, szString, stringBufferSize, pchString);
           if (hr == S_OK) {
             _userStrings.add(szString.toDartString());
           }
@@ -224,10 +224,11 @@ class Scope {
   PEKind get executableKind => PEKind(reader);
 
   String get version => using((Arena arena) {
-        final pwzBuf = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final pwzBuf = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pccBufSize = arena<DWORD>();
 
-        final hr = reader.GetVersionString(pwzBuf, MAX_STRING_SIZE, pccBufSize);
+        final hr =
+            reader.GetVersionString(pwzBuf, stringBufferSize, pccBufSize);
 
         if (SUCCEEDED(hr)) {
           return pwzBuf.toDartString();

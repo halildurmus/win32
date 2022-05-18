@@ -28,14 +28,14 @@ class MemberRef extends TokenObject {
   /// Creates a module object from a provided token.
   factory MemberRef.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptk = arena<mdToken>();
-        final szMember = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szMember = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchMember = arena<ULONG>();
         final ppvSigBlob = arena<PCCOR_SIGNATURE>();
         final pcbSigBlob = arena<ULONG>();
 
         final reader = scope.reader;
         final hr = reader.GetMemberRefProps(token, ptk, szMember,
-            MAX_STRING_SIZE, pchMember, ppvSigBlob, pcbSigBlob);
+            stringBufferSize, pchMember, ppvSigBlob, pcbSigBlob);
 
         if (SUCCEEDED(hr)) {
           return MemberRef(scope, token, ptk.value, szMember.toDartString(),

@@ -50,7 +50,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   /// Creates a property object from a provided token.
   factory Property.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptkTypeDef = arena<mdTypeDef>();
-        final szProperty = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szProperty = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchProperty = arena<ULONG>();
         final pdwPropFlags = arena<DWORD>();
         final ppvSigBlob = arena<PCCOR_SIGNATURE>();
@@ -68,7 +68,7 @@ class Property extends TokenObject with CustomAttributesMixin {
             token,
             ptkTypeDef,
             szProperty,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchProperty,
             pdwPropFlags,
             ppvSigBlob,

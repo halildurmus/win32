@@ -1,3 +1,5 @@
+// These type aliases are named to match the case of their Win32 signatures.
+//
 // ignore_for_file: camel_case_types
 
 import 'dart:ffi';

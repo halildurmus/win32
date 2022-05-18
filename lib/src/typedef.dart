@@ -143,14 +143,14 @@ class TypeDef extends TokenObject
   /// Instantiate a typedef from a TypeDef token.
   factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) =>
       using((Arena arena) {
-        final szTypeDef = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szTypeDef = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchTypeDef = arena<ULONG>();
         final pdwTypeDefFlags = arena<DWORD>();
         final ptkExtends = arena<mdToken>();
 
         final reader = scope.reader;
         final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
-            MAX_STRING_SIZE, pchTypeDef, pdwTypeDefFlags, ptkExtends);
+            stringBufferSize, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
         if (SUCCEEDED(hr)) {
           return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
@@ -163,10 +163,10 @@ class TypeDef extends TokenObject
   static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) =>
       using((Arena arena) {
         final ptkResolutionScope = arena<mdToken>();
-        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
-        final hr = scope.reader.GetTypeRefProps(
-            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
+        final hr = scope.reader.GetTypeRefProps(typeRefToken,
+            ptkResolutionScope, szName, stringBufferSize, pchName);
         if (SUCCEEDED(hr)) {
           return szName.toDartString();
         } else {
@@ -237,12 +237,12 @@ class TypeDef extends TokenObject
   factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) =>
       using((Arena arena) {
         final ptkResolutionScope = arena<mdToken>();
-        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
 
         final reader = scope.reader;
-        final hr = reader.GetTypeRefProps(
-            typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
+        final hr = reader.GetTypeRefProps(typeRefToken, ptkResolutionScope,
+            szName, stringBufferSize, pchName);
 
         if (SUCCEEDED(hr)) {
           final typeName = szName.toDartString();

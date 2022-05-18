@@ -43,7 +43,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   /// Creates an event object from a provided token.
   factory Event.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptkClass = arena<mdTypeDef>();
-        final szEvent = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szEvent = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchEvent = arena<ULONG>();
         final pdwEventFlags = arena<DWORD>();
         final ptkEventType = arena<mdToken>();
@@ -58,7 +58,7 @@ class Event extends TokenObject with CustomAttributesMixin {
             token,
             ptkClass,
             szEvent,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchEvent,
             pdwEventFlags,
             ptkEventType,

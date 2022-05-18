@@ -73,7 +73,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   /// Creates a field object from a provided token.
   factory Field.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptkTypeDef = arena<mdTypeDef>();
-        final szField = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szField = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchField = arena<ULONG>();
         final pdwAttr = arena<DWORD>();
         final ppvSigBlob = arena<PCCOR_SIGNATURE>();
@@ -87,7 +87,7 @@ class Field extends TokenObject with CustomAttributesMixin {
             token,
             ptkTypeDef,
             szField,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchField,
             pdwAttr,
             ppvSigBlob,

@@ -96,18 +96,18 @@ class PinvokeMap extends TokenObject {
   /// Creates a P/Invoke method representation object from a provided token.
   factory PinvokeMap.fromToken(Scope scope, int token) => using((Arena arena) {
         final pdwMappingFlags = arena<DWORD>();
-        final szImportName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchImportName = arena<ULONG>();
         final ptkImportDLL = arena<mdModuleRef>();
-        final szModuleName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szModuleName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchModuleName = arena<ULONG>();
 
         final reader = scope.reader;
         var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
-            MAX_STRING_SIZE, pchImportName, ptkImportDLL);
+            stringBufferSize, pchImportName, ptkImportDLL);
         if (SUCCEEDED(hr)) {
-          hr = reader.GetModuleRefProps(
-              ptkImportDLL.value, szModuleName, MAX_STRING_SIZE, pchModuleName);
+          hr = reader.GetModuleRefProps(ptkImportDLL.value, szModuleName,
+              stringBufferSize, pchModuleName);
 
           final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
 

@@ -61,7 +61,7 @@ void main() {
     expect(awr.parameters[2].typeIdentifier.name,
         equals('Windows.Win32.Foundation.BOOL'));
 
-    expect(awr.implFeatures.codeType, equals(CodeType.IL));
+    expect(awr.implFeatures.codeType, equals(CodeType.msil));
     expect(awr.implFeatures.isManaged, isTrue);
 
     expect(

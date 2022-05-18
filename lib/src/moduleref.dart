@@ -19,12 +19,12 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
 
   /// Creates a module object from a provided token.
   factory ModuleRef.fromToken(Scope scope, int token) => using((Arena arena) {
-        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
 
         final reader = scope.reader;
         final hr =
-            reader.GetModuleRefProps(token, szName, MAX_STRING_SIZE, pchName);
+            reader.GetModuleRefProps(token, szName, stringBufferSize, pchName);
 
         if (SUCCEEDED(hr)) {
           return ModuleRef(scope, token, szName.toDartString());

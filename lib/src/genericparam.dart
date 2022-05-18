@@ -76,12 +76,19 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
         final pdwParamFlags = arena<DWORD>();
         final ptOwner = arena<mdToken>();
         final reserved = arena<DWORD>();
-        final wzName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final wzName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
 
         final reader = scope.reader;
-        final hr = reader.GetGenericParamProps(token, pulParamSeq,
-            pdwParamFlags, ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
+        final hr = reader.GetGenericParamProps(
+            token,
+            pulParamSeq,
+            pdwParamFlags,
+            ptOwner,
+            reserved,
+            wzName,
+            stringBufferSize,
+            pchName);
 
         if (SUCCEEDED(hr)) {
           return GenericParam(scope, token, pulParamSeq.value,

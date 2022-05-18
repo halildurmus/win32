@@ -27,7 +27,7 @@ class AssemblyRef extends TokenObject {
   factory AssemblyRef.fromToken(Scope scope, int token) => using((Arena arena) {
         final ppbPublicKeyOrToken = arena<Pointer<BYTE>>();
         final pcbPublicKeyOrToken = arena<ULONG>();
-        final szName = arena<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
+        final szName = arena<Uint16>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
         final pMetaData = arena<ASSEMBLYDATA>();
         final ppbHashValue = arena<Pointer<BYTE>>();
@@ -39,7 +39,7 @@ class AssemblyRef extends TokenObject {
             ppbPublicKeyOrToken,
             pcbPublicKeyOrToken,
             szName,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchName,
             pMetaData,
             ppbHashValue,

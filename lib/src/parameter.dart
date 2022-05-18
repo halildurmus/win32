@@ -34,7 +34,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   factory Parameter.fromToken(Scope scope, int token) => using((Arena arena) {
         final ptkMethodDef = arena<mdMethodDef>();
         final pulSequence = arena<ULONG>();
-        final szName = arena<WCHAR>(MAX_STRING_SIZE).cast<Utf16>();
+        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
         final pchName = arena<ULONG>();
         final pdwAttr = arena<DWORD>();
         final pdwCPlusTypeFlag = arena<DWORD>();
@@ -47,7 +47,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
             ptkMethodDef,
             pulSequence,
             szName,
-            MAX_STRING_SIZE,
+            stringBufferSize,
             pchName,
             pdwAttr,
             pdwCPlusTypeFlag,

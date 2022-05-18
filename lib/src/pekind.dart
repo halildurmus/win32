@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// ignore_for_file: constant_identifier_names
-
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -12,10 +10,6 @@ import 'package:win32/win32.dart';
 import 'com/constants.dart';
 import 'com/imetadataimport2.dart';
 import 'utils/exception.dart';
-
-const _IMAGE_FILE_MACHINE_I386 = 0x014C;
-const _IMAGE_FILE_MACHINE_IA64 = 0x0200;
-const _IMAGE_FILE_MACHINE_AMD64 = 0x8664;
 
 /// The platform targeted by an executable.
 enum ImageType { i386, ia64, amd64 }
@@ -69,11 +63,11 @@ class PEKind {
   /// module.
   ImageType get imageType {
     switch (_machine) {
-      case _IMAGE_FILE_MACHINE_I386:
+      case IMAGE_FILE_MACHINE_I386:
         return ImageType.i386;
-      case _IMAGE_FILE_MACHINE_IA64:
+      case IMAGE_FILE_MACHINE_IA64:
         return ImageType.ia64;
-      case _IMAGE_FILE_MACHINE_AMD64:
+      case IMAGE_FILE_MACHINE_AMD64:
         return ImageType.amd64;
       default:
         throw WinmdException('Unrecognized image type.');

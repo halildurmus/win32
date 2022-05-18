@@ -69,7 +69,7 @@ void main() {
         equals('Windows.Win32.UI.Shell.FILE_OPERATION_FLAGS2'));
     expect(ifop2.methods[0].parameters[0].name, equals('operationFlags2'));
 
-    expect(ifop2.methods[0].implFeatures.codeType, equals(CodeType.IL));
+    expect(ifop2.methods[0].implFeatures.codeType, equals(CodeType.msil));
     expect(ifop2.methods[0].implFeatures.isManaged, isTrue);
   });
 }
