@@ -69,7 +69,7 @@ class NestedStructProjection extends StructProjection {
       // TODO: Need to figure out why this is needed at all. Shouldn't the type
       // projection figure out the difference here?
       final typeIsString = (dartTypeProjection == 'Array<Uint16>') &&
-          (field.typeIdentifier.typeArg!.baseType == BaseType.Char);
+          (field.typeIdentifier.typeArg!.baseType == BaseType.charType);
       final fieldType = typeIsString ? 'String' : dartTypeProjection;
 
       final safeFieldName = safeIdentifierForString(field.name);

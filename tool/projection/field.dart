@@ -45,8 +45,8 @@ class FieldProjection {
   }
 
   bool get _isCharArray =>
-      field.typeIdentifier.baseType == BaseType.ArrayTypeModifier &&
-      field.typeIdentifier.typeArg?.baseType == BaseType.Char;
+      field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
+      field.typeIdentifier.typeArg?.baseType == BaseType.charType;
 
   @override
   String toString() {

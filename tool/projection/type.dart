@@ -12,21 +12,21 @@ class TypeTuple {
 }
 
 const Map<BaseType, TypeTuple> baseNativeMapping = {
-  BaseType.Void: TypeTuple('Void', 'void'),
-  BaseType.Boolean: TypeTuple('Bool', 'bool', attribute: '@Bool()'),
-  BaseType.Int8: TypeTuple('Int8', 'int', attribute: '@Int8()'),
-  BaseType.Uint8: TypeTuple('Uint8', 'int', attribute: '@Uint8()'),
-  BaseType.Int16: TypeTuple('Int16', 'int', attribute: '@Int16()'),
-  BaseType.Uint16: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
-  BaseType.Int32: TypeTuple('Int32', 'int', attribute: '@Int32()'),
-  BaseType.Uint32: TypeTuple('Uint32', 'int', attribute: '@Uint32()'),
-  BaseType.Int64: TypeTuple('Int64', 'int', attribute: '@Int64()'),
-  BaseType.Uint64: TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
-  BaseType.IntPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
-  BaseType.Float: TypeTuple('Float', 'double', attribute: '@Float()'),
-  BaseType.Double: TypeTuple('Double', 'double', attribute: '@Double()'),
-  BaseType.UintPtr: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
-  BaseType.Char: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+  BaseType.voidType: TypeTuple('Void', 'void'),
+  BaseType.booleanType: TypeTuple('Bool', 'bool', attribute: '@Bool()'),
+  BaseType.int8Type: TypeTuple('Int8', 'int', attribute: '@Int8()'),
+  BaseType.uint8Type: TypeTuple('Uint8', 'int', attribute: '@Uint8()'),
+  BaseType.int16Type: TypeTuple('Int16', 'int', attribute: '@Int16()'),
+  BaseType.uint16Type: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
+  BaseType.int32Type: TypeTuple('Int32', 'int', attribute: '@Int32()'),
+  BaseType.uint32Type: TypeTuple('Uint32', 'int', attribute: '@Uint32()'),
+  BaseType.int64Type: TypeTuple('Int64', 'int', attribute: '@Int64()'),
+  BaseType.uint64Type: TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
+  BaseType.intPtrType: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.uintPtrType: TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
+  BaseType.floatType: TypeTuple('Float', 'double', attribute: '@Float()'),
+  BaseType.doubleType: TypeTuple('Double', 'double', attribute: '@Double()'),
+  BaseType.charType: TypeTuple('Uint16', 'int', attribute: '@Uint16()'),
 };
 
 const Map<String, TypeTuple> specialTypes = {
@@ -81,23 +81,23 @@ class TypeProjection {
   bool get isWin32SpecialType =>
       specialTypes.keys.contains(typeIdentifier.name);
 
-  bool get isString => typeIdentifier.baseType == BaseType.String;
+  bool get isString => typeIdentifier.baseType == BaseType.stringType;
 
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
 
   bool get isReferenceType =>
-      typeIdentifier.baseType == BaseType.ReferenceTypeModifier;
+      typeIdentifier.baseType == BaseType.referenceTypeModifier;
 
   bool get isWrappedValueType =>
-      typeIdentifier.baseType == BaseType.ValueTypeModifier;
+      typeIdentifier.baseType == BaseType.valueTypeModifier;
 
   bool get isPointerType =>
-      typeIdentifier.baseType == BaseType.PointerTypeModifier;
+      typeIdentifier.baseType == BaseType.pointerTypeModifier;
 
-  bool get isArrayType => typeIdentifier.baseType == BaseType.ArrayTypeModifier;
+  bool get isArrayType => typeIdentifier.baseType == BaseType.arrayTypeModifier;
 
   bool get isWin32Delegate =>
-      typeIdentifier.baseType == BaseType.ClassTypeModifier &&
+      typeIdentifier.baseType == BaseType.classTypeModifier &&
       typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
@@ -246,8 +246,8 @@ class TypeProjection {
 
     if (isInterface ||
         isReferenceType ||
-        typeIdentifier.baseType == BaseType.ClassTypeModifier ||
-        typeIdentifier.baseType == BaseType.Object) {
+        typeIdentifier.baseType == BaseType.classTypeModifier ||
+        typeIdentifier.baseType == BaseType.objectType) {
       return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 

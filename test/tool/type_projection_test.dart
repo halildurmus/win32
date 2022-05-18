@@ -337,7 +337,7 @@ void main() {
 
     final returnType = api!.returnType.typeIdentifier;
 
-    expect(returnType.baseType, equals(BaseType.ValueTypeModifier));
+    expect(returnType.baseType, equals(BaseType.valueTypeModifier));
     expect(returnType.name, equals('Windows.Win32.Foundation.HANDLE'));
 
     final projection = TypeProjection(returnType);

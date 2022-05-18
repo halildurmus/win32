@@ -9,7 +9,7 @@ class WinRTGetPropertyProjection extends ComGetPropertyProjection {
 
   bool get isVectorReturn =>
       method.returnType.typeIdentifier.baseType ==
-          BaseType.GenericTypeModifier &&
+          BaseType.genericTypeModifier &&
       method.returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ==
           true;
 

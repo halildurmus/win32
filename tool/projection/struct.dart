@@ -100,7 +100,7 @@ class StructProjection {
         final fieldPacking = calculatePackingAlignment(fieldTypeDef);
         alignment = min(fieldPacking, alignment);
       }
-      if (field.typeIdentifier.baseType == BaseType.ArrayTypeModifier &&
+      if (field.typeIdentifier.baseType == BaseType.arrayTypeModifier &&
           field.typeIdentifier.typeArg?.type != null) {
         final arrayPacking =
             calculatePackingAlignment(field.typeIdentifier.typeArg!.type!);
