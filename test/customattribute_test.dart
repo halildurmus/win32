@@ -46,25 +46,24 @@ void main() {
     expect(deprecated.memberRef.name, equals('.ctor'));
     expect(deprecated.constructor.name, endsWith('DeprecatedAttribute'));
 
-    expect(deprecated.parameterTypes.length, equals(4));
-    expect(deprecated.parameterTypes[0].baseType, equals(BaseType.String));
-    expect(deprecated.parameterTypes[1].baseType,
+    expect(deprecated.parameters.length, equals(4));
+    expect(deprecated.parameters[0].type.baseType, equals(BaseType.String));
+    expect(deprecated.parameters[1].type.baseType,
         equals(BaseType.ValueTypeModifier));
-    expect(deprecated.parameterTypes[2].baseType, equals(BaseType.Uint32));
-    expect(deprecated.parameterTypes[3].baseType, equals(BaseType.String));
+    expect(deprecated.parameters[2].type.baseType, equals(BaseType.Uint32));
+    expect(deprecated.parameters[3].type.baseType, equals(BaseType.String));
 
-    expect(deprecated.parameterValues.length, equals(4));
-    expect(deprecated.parameterValues[0], isA<String>());
+    expect(deprecated.parameters[0].value, isA<String>());
     expect(
-        deprecated.parameterValues[0],
+        deprecated.parameters[0].value,
         equals('MediaControl may be altered or unavailable for releases after '
             'Windows 8.1. Instead, use SystemMediaTransportControls.'));
-    expect(deprecated.parameterValues[1], isA<int>());
-    expect(deprecated.parameterValues[1], equals(0));
-    expect(deprecated.parameterValues[2], isA<int>());
-    expect(deprecated.parameterValues[2], equals(65536));
-    expect(deprecated.parameterValues[3], isA<String>());
-    expect(deprecated.parameterValues[3],
+    expect(deprecated.parameters[1].value, isA<int>());
+    expect(deprecated.parameters[1].value, equals(0));
+    expect(deprecated.parameters[2].value, isA<int>());
+    expect(deprecated.parameters[2].value, equals(65536));
+    expect(deprecated.parameters[3].value, isA<String>());
+    expect(deprecated.parameters[3].value,
         equals('Windows.Media.MediaControlContract'));
   });
 
@@ -82,17 +81,16 @@ void main() {
     expect(
         archAttr.signatureBlob.sublist(0, 2), equals([0x01, 0x00])); // prolog
 
-    expect(archAttr.parameterTypes.length, equals(1));
-    expect(archAttr.parameterTypes[0].baseType,
+    expect(archAttr.parameters.length, equals(1));
+    expect(archAttr.parameters[0].type.baseType,
         equals(BaseType.ValueTypeModifier));
-    expect(archAttr.parameterTypes[0].name,
+    expect(archAttr.parameters[0].type.name,
         equals('Windows.Win32.Interop.Architecture'));
 
-    expect(archAttr.parameterValues.length, equals(1));
-    expect(archAttr.parameterValues[0], isA<int>());
+    expect(archAttr.parameters[0].value, isA<int>());
     // Depending on which one we get first, we'll either get ARM or X86/X64
 
     // TODO: Fix typeRef from Win32 to Win32.Interop so that this works.
-    // expect(archAttr.parameterValues[0], isIn([0x01, 0x06]));
+    // expect(archAttr.parameters[0].value, isIn([0x01, 0x06]));
   });
 }

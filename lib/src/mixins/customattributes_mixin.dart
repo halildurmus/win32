@@ -19,12 +19,12 @@ mixin CustomAttributesMixin on TokenObject {
   String attributeAsString(String attrName) {
     final attr = findAttribute(attrName);
     if (attr == null ||
-        attr.parameterTypes.isEmpty ||
-        attr.parameterTypes.first.baseType != BaseType.String) {
+        attr.parameters.isEmpty ||
+        attr.parameters.first.type.baseType != BaseType.String) {
       return '';
     }
 
-    return attr.parameterValues.first as String;
+    return attr.parameters.first.value as String;
   }
 
   /// Returns the first attribute matching the given attribute name.
