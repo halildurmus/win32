@@ -42,6 +42,10 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
+      - name: Install dependencies for generation tool
+        working-directory: tool\generator
+        run: dart pub get
+
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
