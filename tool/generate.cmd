@@ -3,7 +3,7 @@
 if "%1"=="--help" goto help
 
 echo Loading...
-call dart %~dp0generation\generate.dart
+call dart %~dp0generator\bin\generate.dart
 
 if "%1"=="--no-test" goto end
 
