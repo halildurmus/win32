@@ -14,10 +14,10 @@ void main() {
     final dartClass = WinRTInterfaceProjection(typeDef).toString();
     final formattedDartClass = DartFormatter().format(dartClass);
 
-    File('test/tool/goldens/ICalendar.comparison')
+    File('../../test/tool/goldens/ICalendar.comparison')
         .writeAsStringSync(formattedDartClass);
     final golden =
-        File('test/tool/goldens/ICalendar.golden').readAsStringSync();
+        File('../../test/tool/goldens/ICalendar.golden').readAsStringSync();
 
     // Ignore whitespace to avoid \r\n vs. \n conflicts.
     expect(formattedDartClass, equalsIgnoringWhitespace(golden));
@@ -32,9 +32,10 @@ void main() {
     final dartClass = ComInterfaceProjection(typeDef).toString();
     final formattedDartClass = DartFormatter().format(dartClass);
 
-    File('test/tool/goldens/INetwork.comparison')
+    File('../../test/tool/goldens/INetwork.comparison')
         .writeAsStringSync(formattedDartClass);
-    final golden = File('test/tool/goldens/INetwork.golden').readAsStringSync();
+    final golden =
+        File('../../test/tool/goldens/INetwork.golden').readAsStringSync();
 
     // Ignore whitespace to avoid \r\n vs. \n conflicts.
     expect(formattedDartClass, equalsIgnoringWhitespace(golden));
