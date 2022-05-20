@@ -24,13 +24,13 @@ void generateComApis() {
     final dartClass = comObject.toString();
     final classOutputFilename =
         stripAnsiUnicodeSuffix(interface.split('.').last).toLowerCase();
-    final classOutputPath = 'lib/src/com/$classOutputFilename.dart';
+    final classOutputPath = '../../lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
 
     // Generate test
     final dartTest = TestInterfaceProjection(typeDef, interfaceProjection);
-    final testOutputPath = 'test/com/${classOutputFilename}_test.dart';
+    final testOutputPath = '../../test/com/${classOutputFilename}_test.dart';
 
     File(testOutputPath)
         .writeAsStringSync(DartFormatter().format(dartTest.toString()));

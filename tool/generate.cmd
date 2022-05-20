@@ -3,7 +3,10 @@
 if "%1"=="--help" goto help
 
 echo Loading...
-call dart %~dp0generator\bin\generate.dart
+
+rem Save current directory and start from the win32\tool\generator folder
+pushd tool\generator
+call dart bin\generate.dart
 
 if "%1"=="--no-test" goto end
 
@@ -23,3 +26,5 @@ echo Running the command without any flags generates all classes and runs all te
 echo.
 
 :end
+rem Restore old working directory
+popd

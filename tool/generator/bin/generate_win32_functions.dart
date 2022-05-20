@@ -74,7 +74,7 @@ ${FunctionProjection(method, libraryDartName).toString()}
       }
     }
 
-    File('lib/src/$libraryDartName.dart')
+    File('../../lib/src/$libraryDartName.dart')
         .writeAsStringSync(DartFormatter().format(buffer.toString()));
   }
 }

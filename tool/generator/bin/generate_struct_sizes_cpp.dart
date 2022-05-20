@@ -74,6 +74,5 @@ void generateStructSizeAnalyzer() {
 
   buffer.write(footer);
 
-  File('tool/struct_sizes/struct_sizes.cpp')
-      .writeAsStringSync(buffer.toString());
+  File('../struct_sizes/struct_sizes.cpp').writeAsStringSync(buffer.toString());
 }

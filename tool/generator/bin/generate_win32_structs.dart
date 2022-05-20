@@ -27,7 +27,7 @@ import 'structs.dart';
 int generateStructs(Map<String, String> structs) {
   final scope = MetadataStore.getWin32Scope();
 
-  final file = File('lib/src/structs.g.dart');
+  final file = File('../../lib/src/structs.g.dart');
 
   final typeDefs = scope.typeDefs
       .where((typeDef) => structs.keys.contains(typeDef.name))

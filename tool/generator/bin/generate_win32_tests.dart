@@ -133,7 +133,7 @@ void main() {
 
   buffer.write('}');
 
-  File('test/struct_test.dart')
+  File('../../test/struct_test.dart')
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
