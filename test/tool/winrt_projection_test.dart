@@ -4,8 +4,8 @@ import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 import '../../tool/projection/type.dart';
+import '../../tool/projection/winrt_get_property.dart';
 import '../../tool/projection/winrt_interface.dart';
-import '../../tool/projection/winrt_property.dart';
 
 void main() {
   test('Class valuetype is correctly identified', () {
