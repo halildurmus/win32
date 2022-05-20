@@ -1,5 +1,4 @@
 name: generator
-version: 1.0.0
 publish_to: none
 
 environment:
@@ -21,9 +20,6 @@ dependencies:
 
   # Help ensure that the code is well-written.
   lints: ^2.0.0
-
-  # Used for joining paths, as part of our path_provider integration test.
-  path: ^1.8.1
 
   # Running the test suite.
   test: ^1.21.1

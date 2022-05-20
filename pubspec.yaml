@@ -16,12 +16,6 @@ dependencies:
   ffi: ^1.1.2
 
 dev_dependencies:
-  # Handle command-line arguments for development tooling.
-  args: ^2.3.1
-  
-  # For formatting Dart code (APIs for performing dart format).
-  dart_style: ^2.2.3
-
   # Help ensure that the code is well-written.
   lints: ^2.0.0
 
@@ -30,9 +24,3 @@ dev_dependencies:
 
   # Running the test suite.
   test: ^1.21.1
-
-  # Windows metadata for automatically generating API signatures. The
-  # relationship between these two packages is tightly coupled, since this
-  # package includes a specific version of the Win32 metadata, so we pin the
-  # dependency by version to avoid surprising conflicts.
-  winmd: 2.0.0
