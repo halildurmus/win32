@@ -85,7 +85,7 @@ class Win32Function {
 }
 
 SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
-  final jsonFile = File('../lib/src/inputs/functions.json')
+  final jsonFile = File('tool/generator/lib/src/inputs/functions.json')
       .readAsStringSync()
       .replaceAll(r'\n', r'\\n');
   final decodedJson = json.decode(jsonFile) as Map<String, dynamic>;
