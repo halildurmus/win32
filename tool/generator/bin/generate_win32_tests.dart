@@ -94,7 +94,7 @@ void main() {
     buffer.write('});\n\n');
   }
   buffer.write('}');
-  File('test/api_test.dart')
+  File('../../test/api_test.dart')
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 
   return testsGenerated;
