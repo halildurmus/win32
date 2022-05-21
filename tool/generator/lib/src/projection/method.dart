@@ -81,10 +81,7 @@ abstract class MethodProjection {
     }
 
     // Otherwise the original name is fine.
-
-    // TODO: Can we remove safeIdentifierForString here? Do we apply it later
-    //  anyway?
-    return safeIdentifierForString(method.name);
+    return method.name;
   }
 
   /// The parameters exposed by a projected Dart method.
