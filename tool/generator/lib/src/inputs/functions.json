@@ -2566,6 +2566,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "GetPixel": {
+        "prototype": "COLORREF GetPixel(\n  HDC hdc,\n  int x,\n  int y);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetPixel function retrieves the red, green, blue (RGB) color value of the pixel at the specified coordinates."
+    },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
@@ -3050,6 +3055,16 @@
         "dllLibrary": "user32",
         "comment": "Returns the DPI_HOSTING_BEHAVIOR of the specified window.",
         "minimumWindowsVersion": "WIN10_RS4"
+    },
+    "GetWindowExtEx": {
+        "prototype": "BOOL GetWindowExtEx(\n  HDC    hdc,\n  LPSIZE lpsize\n);",
+        "dllLibrary": "gdi32",
+        "comment": "This function retrieves the x-extent and y-extent of the window for the specified device context."
+    },
+    "GetWindowOrgEx": {
+        "prototype": "BOOL GetWindowOrgEx(\n  HDC     hdc,\n  LPPOINT lppoint\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetWindowOrgEx function retrieves the x-coordinates and y-coordinates of the window origin for the specified device context."
     },
     "GetWindowInfo": {
         "prototype": "BOOL GetWindowInfo(\n  HWND hwnd,\n  PWINDOWINFO pwi\n);",

@@ -1,4 +1,5 @@
-// Retrieves the exported symbols from kernel32
+// Retrieves the exported symbols from a given library, and compares them with
+// what has been projected in the win32 library.
 
 import 'dart:ffi';
 import 'dart:io' show exit;

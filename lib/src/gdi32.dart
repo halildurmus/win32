@@ -816,6 +816,22 @@ final _GetPath = _gdi32.lookupFunction<
     int Function(
         int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('GetPath');
 
+/// The GetPixel function retrieves the red, green, blue (RGB) color value
+/// of the pixel at the specified coordinates.
+///
+/// ```c
+/// COLORREF GetPixel(
+///   HDC hdc,
+///   int x,
+///   int y);
+/// ```
+/// {@category gdi32}
+int GetPixel(int hdc, int x, int y) => _GetPixel(hdc, x, y);
+
+final _GetPixel = _gdi32.lookupFunction<
+    Uint32 Function(IntPtr hdc, Int32 x, Int32 y),
+    int Function(int hdc, int x, int y)>('GetPixel');
+
 /// The GetStockObject function retrieves a handle to one of the stock
 /// pens, brushes, fonts, or palettes.
 ///
@@ -847,6 +863,40 @@ int GetTextMetrics(int hdc, Pointer<TEXTMETRIC> lptm) =>
 final _GetTextMetrics = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Pointer<TEXTMETRIC> lptm),
     int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetricsW');
+
+/// This function retrieves the x-extent and y-extent of the window for the
+/// specified device context.
+///
+/// ```c
+/// BOOL GetWindowExtEx(
+///   HDC    hdc,
+///   LPSIZE lpsize
+/// );
+/// ```
+/// {@category gdi32}
+int GetWindowExtEx(int hdc, Pointer<SIZE> lpsize) =>
+    _GetWindowExtEx(hdc, lpsize);
+
+final _GetWindowExtEx = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Pointer<SIZE> lpsize),
+    int Function(int hdc, Pointer<SIZE> lpsize)>('GetWindowExtEx');
+
+/// The GetWindowOrgEx function retrieves the x-coordinates and
+/// y-coordinates of the window origin for the specified device context.
+///
+/// ```c
+/// BOOL GetWindowOrgEx(
+///   HDC     hdc,
+///   LPPOINT lppoint
+/// );
+/// ```
+/// {@category gdi32}
+int GetWindowOrgEx(int hdc, Pointer<POINT> lppoint) =>
+    _GetWindowOrgEx(hdc, lppoint);
+
+final _GetWindowOrgEx = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Pointer<POINT> lppoint),
+    int Function(int hdc, Pointer<POINT> lppoint)>('GetWindowOrgEx');
 
 /// The LineTo function draws a line from the current position up to, but
 /// not including, the specified point.

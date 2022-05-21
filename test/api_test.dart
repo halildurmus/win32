@@ -359,6 +359,13 @@ void main() {
               int cpt)>('GetPath');
       expect(GetPath, isA<Function>());
     });
+    test('Can instantiate GetPixel', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetPixel = gdi32.lookupFunction<
+          Uint32 Function(IntPtr hdc, Int32 x, Int32 y),
+          int Function(int hdc, int x, int y)>('GetPixel');
+      expect(GetPixel, isA<Function>());
+    });
     test('Can instantiate GetStockObject', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final GetStockObject =
@@ -372,6 +379,20 @@ void main() {
           Int32 Function(IntPtr hdc, Pointer<TEXTMETRIC> lptm),
           int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetricsW');
       expect(GetTextMetrics, isA<Function>());
+    });
+    test('Can instantiate GetWindowExtEx', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetWindowExtEx = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Pointer<SIZE> lpsize),
+          int Function(int hdc, Pointer<SIZE> lpsize)>('GetWindowExtEx');
+      expect(GetWindowExtEx, isA<Function>());
+    });
+    test('Can instantiate GetWindowOrgEx', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetWindowOrgEx = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Pointer<POINT> lppoint),
+          int Function(int hdc, Pointer<POINT> lppoint)>('GetWindowOrgEx');
+      expect(GetWindowOrgEx, isA<Function>());
     });
     test('Can instantiate LineTo', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
