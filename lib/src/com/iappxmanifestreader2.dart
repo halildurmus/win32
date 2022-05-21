@@ -32,25 +32,16 @@ class IAppxManifestReader2 extends IAppxManifestReader {
   // vtable begins at 12, is 1 entries long.
   IAppxManifestReader2(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetQualifiedResources(
-    Pointer<Pointer<COMObject>> resources,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
+          .ref.lpVtbl.value
           .elementAt(12)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> resources,
-          )>>>()
+                          Pointer, Pointer<Pointer<COMObject>> resources)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> resources,
-          )>()(
-        ptr.ref.lpVtbl,
-        resources,
-      );
+              int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
+      ptr.ref.lpVtbl, resources);
 }

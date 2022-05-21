@@ -37,20 +37,14 @@ class ISpeechObjectTokens extends IDispatch {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Int32> Count,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Int32> Count,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Int32> Count)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<Int32> Count)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -61,51 +55,35 @@ class ISpeechObjectTokens extends IDispatch {
     }
   }
 
-  int Item(
-    int Index,
-    Pointer<Pointer<COMObject>> Token,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int Item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 Index,
-            Pointer<Pointer<COMObject>> Token,
-          )>>>()
+                      Int32 Function(Pointer, Int32 Index,
+                          Pointer<Pointer<COMObject>> Token)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            int Index,
-            Pointer<Pointer<COMObject>> Token,
-          )>()(
-        ptr.ref.lpVtbl,
-        Index,
-        Token,
-      );
+                  Pointer, int Index, Pointer<Pointer<COMObject>> Token)>()(
+      ptr.ref.lpVtbl, Index, Token);
 
   Pointer<COMObject> get NewEnum {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumVARIANT,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumVARIANT,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> ppEnumVARIANT)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> ppEnumVARIANT)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

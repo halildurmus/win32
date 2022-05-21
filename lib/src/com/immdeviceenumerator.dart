@@ -32,135 +32,74 @@ class IMMDeviceEnumerator extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IMMDeviceEnumerator(Pointer<COMObject> ptr) : super(ptr);
 
-  int EnumAudioEndpoints(
-    int dataFlow,
-    int dwStateMask,
-    Pointer<Pointer<COMObject>> ppDevices,
-  ) =>
+  int EnumAudioEndpoints(int dataFlow, int dwStateMask,
+          Pointer<Pointer<COMObject>> ppDevices) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 dataFlow,
-            Uint32 dwStateMask,
-            Pointer<Pointer<COMObject>> ppDevices,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dataFlow,
-            int dwStateMask,
-            Pointer<Pointer<COMObject>> ppDevices,
-          )>()(
-        ptr.ref.lpVtbl,
-        dataFlow,
-        dwStateMask,
-        ppDevices,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Int32 dataFlow,
+                              Uint32 dwStateMask,
+                              Pointer<Pointer<COMObject>> ppDevices)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int dataFlow, int dwStateMask,
+                      Pointer<Pointer<COMObject>> ppDevices)>()(
+          ptr.ref.lpVtbl, dataFlow, dwStateMask, ppDevices);
 
   int GetDefaultAudioEndpoint(
-    int dataFlow,
-    int role,
-    Pointer<Pointer<COMObject>> ppEndpoint,
-  ) =>
+          int dataFlow, int role, Pointer<Pointer<COMObject>> ppEndpoint) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 dataFlow,
-            Int32 role,
-            Pointer<Pointer<COMObject>> ppEndpoint,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dataFlow,
-            int role,
-            Pointer<Pointer<COMObject>> ppEndpoint,
-          )>()(
-        ptr.ref.lpVtbl,
-        dataFlow,
-        role,
-        ppEndpoint,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Int32 dataFlow, Int32 role,
+                              Pointer<Pointer<COMObject>> ppEndpoint)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int dataFlow, int role,
+                      Pointer<Pointer<COMObject>> ppEndpoint)>()(
+          ptr.ref.lpVtbl, dataFlow, role, ppEndpoint);
 
-  int GetDevice(
-    Pointer<Utf16> pwstrId,
-    Pointer<Pointer<COMObject>> ppDevice,
-  ) =>
+  int GetDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> pwstrId,
-            Pointer<Pointer<COMObject>> ppDevice,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> pwstrId,
-            Pointer<Pointer<COMObject>> ppDevice,
-          )>()(
-        ptr.ref.lpVtbl,
-        pwstrId,
-        ppDevice,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> pwstrId,
+                              Pointer<Pointer<COMObject>> ppDevice)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> pwstrId,
+                      Pointer<Pointer<COMObject>> ppDevice)>()(
+          ptr.ref.lpVtbl, pwstrId, ppDevice);
 
-  int RegisterEndpointNotificationCallback(
-    Pointer<COMObject> pClient,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int RegisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
+          .ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pClient,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<COMObject> pClient)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pClient,
-          )>()(
-        ptr.ref.lpVtbl,
-        pClient,
-      );
+          .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
+      ptr.ref.lpVtbl, pClient);
 
-  int UnregisterEndpointNotificationCallback(
-    Pointer<COMObject> pClient,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int UnregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
+          .ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pClient,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<COMObject> pClient)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pClient,
-          )>()(
-        ptr.ref.lpVtbl,
-        pClient,
-      );
+          .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
+      ptr.ref.lpVtbl, pClient);
 }
 
 /// @nodoc

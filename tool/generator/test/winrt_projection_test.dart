@@ -148,12 +148,10 @@ void main() {
     final dateTimeProjection =
         projection.methodProjections.firstWhere((m) => m.name == 'GetDateTime');
 
-    expect(
-        dateTimeProjection.nativePrototype,
-        equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<Uint64>, )'));
+    expect(dateTimeProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Uint64>)'));
     expect(dateTimeProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>, )'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dateTimeProjection.returnType.dartType, equals('int'));
     expect(dateTimeProjection.toString().trimLeft(),
         startsWith('DateTime GetDateTime'));
@@ -176,12 +174,10 @@ void main() {
     final numeralSystemProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_NumeralSystem');
 
-    expect(
-        numeralSystemProjection.nativePrototype,
-        equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<IntPtr>,)'));
+    expect(numeralSystemProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<IntPtr>)'));
     expect(numeralSystemProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>)'));
     expect(numeralSystemProjection.returnType.dartType, equals('int'));
     expect(numeralSystemProjection.toString().trimLeft(),
         startsWith('String get NumeralSystem'));
@@ -196,9 +192,9 @@ void main() {
         .firstWhere((m) => m.name == 'get_NumberOfDaysInThisMonth');
 
     expect(numDaysProjection.nativePrototype,
-        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Int32>,)'));
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Int32>)'));
     expect(numDaysProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>)'));
   });
 
   test('WinRT get property successfully projects DateTime', () {
@@ -209,12 +205,10 @@ void main() {
     final dateModifiedProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_DateModified');
 
-    expect(
-        dateModifiedProjection.nativePrototype,
-        equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
+    expect(dateModifiedProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Uint64>)'));
     expect(dateModifiedProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dateModifiedProjection.returnType.dartType, equals('int'));
     expect(dateModifiedProjection.toString().trimLeft(),
         startsWith('DateTime get DateModified'));
@@ -228,12 +222,10 @@ void main() {
     final dischargeTimeProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_RemainingDischargeTime');
 
-    expect(
-        dischargeTimeProjection.nativePrototype,
-        equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<Uint64>,)'));
+    expect(dischargeTimeProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Uint64>)'));
     expect(dischargeTimeProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dischargeTimeProjection.returnType.dartType, equals('int'));
     expect(dischargeTimeProjection.toString().trimLeft(),
         startsWith('Duration get RemainingDischargeTime'));
@@ -250,9 +242,9 @@ void main() {
     expect(
         languageProjection.nativePrototype,
         equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<COMObject>,)'));
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
     expect(languageProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
   });
 
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {
@@ -266,11 +258,9 @@ void main() {
     expect(
         cloneProjection.nativePrototype,
         equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, Pointer<COMObject>, )'));
-    expect(
-        cloneProjection.dartPrototype,
-        equalsIgnoringWhitespace(
-            'int Function(Pointer, Pointer<COMObject>, )'));
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(cloneProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
   });
 
   test('WinRT TryCreate method successfully projects Pointer<COMObject>', () {
@@ -284,11 +274,11 @@ void main() {
     expect(
         tryCreateProjection.nativePrototype,
         equalsIgnoringWhitespace(
-            'HRESULT Function(Pointer, IntPtr regionCode, Pointer<COMObject> phoneNumber, )'));
+            'HRESULT Function(Pointer, IntPtr regionCode, Pointer<COMObject> phoneNumber)'));
     expect(
         tryCreateProjection.dartPrototype,
         equalsIgnoringWhitespace(
-            'int Function(Pointer, int regionCode, Pointer<COMObject> phoneNumber, )'));
+            'int Function(Pointer, int regionCode, Pointer<COMObject> phoneNumber)'));
   });
 
   test('WinRT set property successfully projects something', () {
@@ -309,9 +299,9 @@ void main() {
         projection.methodProjections.firstWhere((m) => m.name == 'put_Era');
 
     expect(setEraProjection.nativePrototype,
-        equalsIgnoringWhitespace('HRESULT Function(Pointer, Int32,)'));
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, Int32)'));
     expect(setEraProjection.dartPrototype,
-        equalsIgnoringWhitespace('int Function(Pointer, int,)'));
+        equalsIgnoringWhitespace('int Function(Pointer, int)'));
     expect(setEraProjection.returnType.dartType, equals('void'));
     expect(setEraProjection.toString().trimLeft(),
         startsWith('set Era(int value)'));

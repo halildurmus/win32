@@ -32,73 +32,42 @@ class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioClock(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetFrequency(
-    Pointer<Uint64> pu64Frequency,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint64> pu64Frequency,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint64> pu64Frequency,
-          )>()(
-        ptr.ref.lpVtbl,
-        pu64Frequency,
-      );
+  int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Uint64> pu64Frequency)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Uint64> pu64Frequency)>()(ptr.ref.lpVtbl, pu64Frequency);
 
   int GetPosition(
-    Pointer<Uint64> pu64Position,
-    Pointer<Uint64> pu64QPCPosition,
-  ) =>
+          Pointer<Uint64> pu64Position, Pointer<Uint64> pu64QPCPosition) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint64> pu64Position,
-            Pointer<Uint64> pu64QPCPosition,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint64> pu64Position,
-            Pointer<Uint64> pu64QPCPosition,
-          )>()(
-        ptr.ref.lpVtbl,
-        pu64Position,
-        pu64QPCPosition,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Uint64> pu64Position,
+                              Pointer<Uint64> pu64QPCPosition)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Uint64> pu64Position,
+                      Pointer<Uint64> pu64QPCPosition)>()(
+          ptr.ref.lpVtbl, pu64Position, pu64QPCPosition);
 
-  int GetCharacteristics(
-    Pointer<Uint32> pdwCharacteristics,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetCharacteristics(Pointer<Uint32> pdwCharacteristics) => ptr
+          .ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Uint32> pdwCharacteristics,
-          )>>>()
+                          Pointer, Pointer<Uint32> pdwCharacteristics)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint32> pdwCharacteristics,
-          )>()(
-        ptr.ref.lpVtbl,
-        pdwCharacteristics,
-      );
+              int Function(Pointer, Pointer<Uint32> pdwCharacteristics)>()(
+      ptr.ref.lpVtbl, pdwCharacteristics);
 }

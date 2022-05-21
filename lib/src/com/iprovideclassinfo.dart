@@ -32,25 +32,14 @@ class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassInfo(
-    Pointer<Pointer<COMObject>> ppTI,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppTI,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppTI,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppTI,
-      );
+  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Pointer<COMObject>> ppTI)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Pointer<COMObject>> ppTI)>()(ptr.ref.lpVtbl, ppTI);
 }

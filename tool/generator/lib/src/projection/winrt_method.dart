@@ -22,7 +22,7 @@ class WinRTMethodProjection extends MethodProjection {
           isCOMObjectReturn
               ? 'Pointer<COMObject>'
               : 'Pointer<${returnType.nativeType}>',
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   @override
   String get nativeParams => [
@@ -32,7 +32,7 @@ class WinRTMethodProjection extends MethodProjection {
           isCOMObjectReturn
               ? 'Pointer<COMObject>'
               : 'Pointer<${returnType.nativeType}>',
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   // WinRT methods always return an HRESULT
   @override
@@ -48,7 +48,7 @@ class WinRTMethodProjection extends MethodProjection {
         ...parameters.map(
             (param) => (param as WinRTParameterProjection).localIdentifier),
         if (!isVoidReturn) 'retValuePtr',
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   // Matcher properties
 
@@ -98,7 +98,6 @@ class WinRTMethodProjection extends MethodProjection {
     List<String> get $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
-
     ${ffiCall()}
 
     try {
@@ -123,9 +122,9 @@ class WinRTMethodProjection extends MethodProjection {
   String comObjectDeclaration() => '''
     Pointer<COMObject> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
-    
+    $parametersPreamble
     ${ffiCall()}
-
+    $parametersPostamble
     return retValuePtr;
   }
 ''';
@@ -133,9 +132,7 @@ class WinRTMethodProjection extends MethodProjection {
   String voidDeclaration() => '''
   void $name($methodParams) {
     $parametersPreamble
-    
     ${ffiCall()}
-  
     $parametersPostamble
     }
 ''';

@@ -9,10 +9,10 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   // WinRTPropertyProjection overrides
 
   @override
-  String get nativeParams => 'Pointer, ${parameters.first.type.nativeType},';
+  String get nativeParams => 'Pointer, ${parameters.first.type.nativeType}';
 
   @override
-  String get dartParams => 'Pointer, ${parameters.first.type.dartType},';
+  String get dartParams => 'Pointer, ${parameters.first.type.dartType}';
 
   // Declaration String templates
 

@@ -33,184 +33,123 @@ class IWbemConfigureRefresher extends IUnknown {
   IWbemConfigureRefresher(Pointer<COMObject> ptr) : super(ptr);
 
   int AddObjectByPath(
-    Pointer<COMObject> pNamespace,
-    Pointer<Utf16> wszPath,
-    int lFlags,
-    Pointer<COMObject> pContext,
-    Pointer<Pointer<COMObject>> ppRefreshable,
-    Pointer<Int32> plId,
-  ) =>
+          Pointer<COMObject> pNamespace,
+          Pointer<Utf16> wszPath,
+          int lFlags,
+          Pointer<COMObject> pContext,
+          Pointer<Pointer<COMObject>> ppRefreshable,
+          Pointer<Int32> plId) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<Utf16> wszPath,
-            Int32 lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppRefreshable,
-            Pointer<Int32> plId,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<Utf16> wszPath,
-            int lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppRefreshable,
-            Pointer<Int32> plId,
-          )>()(
-        ptr.ref.lpVtbl,
-        pNamespace,
-        wszPath,
-        lFlags,
-        pContext,
-        ppRefreshable,
-        plId,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<COMObject> pNamespace,
+                              Pointer<Utf16> wszPath,
+                              Int32 lFlags,
+                              Pointer<COMObject> pContext,
+                              Pointer<Pointer<COMObject>> ppRefreshable,
+                              Pointer<Int32> plId)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      Pointer<COMObject> pNamespace,
+                      Pointer<Utf16> wszPath,
+                      int lFlags,
+                      Pointer<COMObject> pContext,
+                      Pointer<Pointer<COMObject>> ppRefreshable,
+                      Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
+          wszPath, lFlags, pContext, ppRefreshable, plId);
 
   int AddObjectByTemplate(
-    Pointer<COMObject> pNamespace,
-    Pointer<COMObject> pTemplate,
-    int lFlags,
-    Pointer<COMObject> pContext,
-    Pointer<Pointer<COMObject>> ppRefreshable,
-    Pointer<Int32> plId,
-  ) =>
+          Pointer<COMObject> pNamespace,
+          Pointer<COMObject> pTemplate,
+          int lFlags,
+          Pointer<COMObject> pContext,
+          Pointer<Pointer<COMObject>> ppRefreshable,
+          Pointer<Int32> plId) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<COMObject> pTemplate,
-            Int32 lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppRefreshable,
-            Pointer<Int32> plId,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<COMObject> pTemplate,
-            int lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppRefreshable,
-            Pointer<Int32> plId,
-          )>()(
-        ptr.ref.lpVtbl,
-        pNamespace,
-        pTemplate,
-        lFlags,
-        pContext,
-        ppRefreshable,
-        plId,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<COMObject> pNamespace,
+                              Pointer<COMObject> pTemplate,
+                              Int32 lFlags,
+                              Pointer<COMObject> pContext,
+                              Pointer<Pointer<COMObject>> ppRefreshable,
+                              Pointer<Int32> plId)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      Pointer<COMObject> pNamespace,
+                      Pointer<COMObject> pTemplate,
+                      int lFlags,
+                      Pointer<COMObject> pContext,
+                      Pointer<Pointer<COMObject>> ppRefreshable,
+                      Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
+          pTemplate, lFlags, pContext, ppRefreshable, plId);
 
   int AddRefresher(
-    Pointer<COMObject> pRefresher,
-    int lFlags,
-    Pointer<Int32> plId,
-  ) =>
+          Pointer<COMObject> pRefresher, int lFlags, Pointer<Int32> plId) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pRefresher,
-            Int32 lFlags,
-            Pointer<Int32> plId,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pRefresher,
-            int lFlags,
-            Pointer<Int32> plId,
-          )>()(
-        ptr.ref.lpVtbl,
-        pRefresher,
-        lFlags,
-        plId,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<COMObject> pRefresher,
+                              Int32 lFlags, Pointer<Int32> plId)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> pRefresher,
+                      int lFlags, Pointer<Int32> plId)>()(
+          ptr.ref.lpVtbl, pRefresher, lFlags, plId);
 
-  int Remove(
-    int lId,
-    int lFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int Remove(int lId, int lFlags) => ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 lId,
-            Int32 lFlags,
-          )>>>()
+                      Int32 Function(Pointer, Int32 lId, Int32 lFlags)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int lId,
-            int lFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        lId,
-        lFlags,
-      );
+          .asFunction<int Function(Pointer, int lId, int lFlags)>()(
+      ptr.ref.lpVtbl, lId, lFlags);
 
   int AddEnum(
-    Pointer<COMObject> pNamespace,
-    Pointer<Utf16> wszClassName,
-    int lFlags,
-    Pointer<COMObject> pContext,
-    Pointer<Pointer<COMObject>> ppEnum,
-    Pointer<Int32> plId,
-  ) =>
+          Pointer<COMObject> pNamespace,
+          Pointer<Utf16> wszClassName,
+          int lFlags,
+          Pointer<COMObject> pContext,
+          Pointer<Pointer<COMObject>> ppEnum,
+          Pointer<Int32> plId) =>
       ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<Utf16> wszClassName,
-            Int32 lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppEnum,
-            Pointer<Int32> plId,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pNamespace,
-            Pointer<Utf16> wszClassName,
-            int lFlags,
-            Pointer<COMObject> pContext,
-            Pointer<Pointer<COMObject>> ppEnum,
-            Pointer<Int32> plId,
-          )>()(
-        ptr.ref.lpVtbl,
-        pNamespace,
-        wszClassName,
-        lFlags,
-        pContext,
-        ppEnum,
-        plId,
-      );
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<COMObject> pNamespace,
+                              Pointer<Utf16> wszClassName,
+                              Int32 lFlags,
+                              Pointer<COMObject> pContext,
+                              Pointer<Pointer<COMObject>> ppEnum,
+                              Pointer<Int32> plId)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      Pointer<COMObject> pNamespace,
+                      Pointer<Utf16> wszClassName,
+                      int lFlags,
+                      Pointer<COMObject> pContext,
+                      Pointer<Pointer<COMObject>> ppEnum,
+                      Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
+          wszClassName, lFlags, pContext, ppEnum, plId);
 }

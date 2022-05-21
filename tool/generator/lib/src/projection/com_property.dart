@@ -10,7 +10,11 @@ abstract class ComPropertyProjection extends ComMethodProjection {
   ComPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
-  String get exposedMethodName;
+  /// Strip off all underscores, even if double underscores
+  String get exposedMethodName =>
+      method.name.startsWith('get__') | method.name.startsWith('put__')
+          ? safeIdentifierForString(method.name.substring(5))
+          : safeIdentifierForString(method.name.substring(4));
 }
 
 class ComGetPropertyProjection extends ComPropertyProjection {
@@ -18,12 +22,6 @@ class ComGetPropertyProjection extends ComPropertyProjection {
       : super(method, vtableOffset);
 
   bool get convertBool => parameters.first.type.dartType == 'bool';
-
-  /// Strip off all underscores, even if double underscores
-  @override
-  String get exposedMethodName => method.name.startsWith('get__')
-      ? safeIdentifierForString(method.name.substring(5))
-      : safeIdentifierForString(method.name.substring(4));
 
   @override
   String toString() {
@@ -59,12 +57,6 @@ class ComGetPropertyProjection extends ComPropertyProjection {
 class ComSetPropertyProjection extends ComPropertyProjection {
   ComSetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
-
-  /// Strip off all underscores, even if double underscores
-  @override
-  String get exposedMethodName => method.name.startsWith('put__')
-      ? safeIdentifierForString(method.name.substring(5))
-      : safeIdentifierForString(method.name.substring(4));
 
   @override
   String toString() => '''

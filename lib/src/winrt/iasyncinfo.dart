@@ -48,17 +48,11 @@ class IAsyncInfo extends IInspectable {
           .elementAt(6)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<Uint32>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Uint32>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Uint32>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Uint32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -77,17 +71,11 @@ class IAsyncInfo extends IInspectable {
           .elementAt(7)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<Int32>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Int32>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -106,17 +94,11 @@ class IAsyncInfo extends IInspectable {
           .elementAt(8)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<Int32>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Int32>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -130,19 +112,9 @@ class IAsyncInfo extends IInspectable {
   void Cancel() {
     final hr = ptr.ref.vtable
         .elementAt(9)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-        )>>>()
+        .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<
-            int Function(
-          Pointer,
-        )>()(
-      ptr.ref.lpVtbl,
-    );
+        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -150,19 +122,9 @@ class IAsyncInfo extends IInspectable {
   void Close() {
     final hr = ptr.ref.vtable
         .elementAt(10)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-        )>>>()
+        .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<
-            int Function(
-          Pointer,
-        )>()(
-      ptr.ref.lpVtbl,
-    );
+        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

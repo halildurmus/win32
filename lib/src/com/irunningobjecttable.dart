@@ -32,181 +32,110 @@ class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   IRunningObjectTable(Pointer<COMObject> ptr) : super(ptr);
 
-  int Register(
-    int grfFlags,
-    Pointer<COMObject> punkObject,
-    Pointer<COMObject> pmkObjectName,
-    Pointer<Uint32> pdwRegister,
-  ) =>
+  int Register(int grfFlags, Pointer<COMObject> punkObject,
+          Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 grfFlags,
-            Pointer<COMObject> punkObject,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<Uint32> pdwRegister,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int grfFlags,
-            Pointer<COMObject> punkObject,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<Uint32> pdwRegister,
-          )>()(
-        ptr.ref.lpVtbl,
-        grfFlags,
-        punkObject,
-        pmkObjectName,
-        pdwRegister,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Uint32 grfFlags,
+                              Pointer<COMObject> punkObject,
+                              Pointer<COMObject> pmkObjectName,
+                              Pointer<Uint32> pdwRegister)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      int grfFlags,
+                      Pointer<COMObject> punkObject,
+                      Pointer<COMObject> pmkObjectName,
+                      Pointer<Uint32> pdwRegister)>()(
+          ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
-  int Revoke(
-    int dwRegister,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwRegister,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwRegister,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwRegister,
-      );
+  int Revoke(int dwRegister) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<
+          Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, int dwRegister)>()(ptr.ref.lpVtbl, dwRegister);
 
-  int IsRunning(
-    Pointer<COMObject> pmkObjectName,
-  ) =>
+  int IsRunning(Pointer<COMObject> pmkObjectName) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-          )>()(
-        ptr.ref.lpVtbl,
-        pmkObjectName,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<COMObject> pmkObjectName)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> pmkObjectName)>()(
+          ptr.ref.lpVtbl, pmkObjectName);
 
-  int GetObject(
-    Pointer<COMObject> pmkObjectName,
-    Pointer<Pointer<COMObject>> ppunkObject,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<Pointer<COMObject>> ppunkObject,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<Pointer<COMObject>> ppunkObject,
-          )>()(
-        ptr.ref.lpVtbl,
-        pmkObjectName,
-        ppunkObject,
-      );
+  int
+      GetObject(Pointer<COMObject> pmkObjectName,
+              Pointer<Pointer<COMObject>> ppunkObject) =>
+          ptr.ref.lpVtbl.value
+                  .elementAt(6)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              Int32 Function(
+                                  Pointer,
+                                  Pointer<COMObject> pmkObjectName,
+                                  Pointer<Pointer<COMObject>> ppunkObject)>>>()
+                  .value
+                  .asFunction<
+                      int Function(Pointer, Pointer<COMObject> pmkObjectName,
+                          Pointer<Pointer<COMObject>> ppunkObject)>()(
+              ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
-  int NoteChangeTime(
-    int dwRegister,
-    Pointer<FILETIME> pfiletime,
-  ) =>
+  int NoteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
       ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwRegister,
-            Pointer<FILETIME> pfiletime,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwRegister,
-            Pointer<FILETIME> pfiletime,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwRegister,
-        pfiletime,
-      );
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 dwRegister,
+                              Pointer<FILETIME> pfiletime)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int dwRegister, Pointer<FILETIME> pfiletime)>()(
+          ptr.ref.lpVtbl, dwRegister, pfiletime);
 
   int GetTimeOfLastChange(
-    Pointer<COMObject> pmkObjectName,
-    Pointer<FILETIME> pfiletime,
-  ) =>
+          Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime) =>
       ptr.ref.lpVtbl.value
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<FILETIME> pfiletime,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<COMObject> pmkObjectName,
+                          Pointer<FILETIME> pfiletime)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<COMObject> pmkObjectName,
-            Pointer<FILETIME> pfiletime,
-          )>()(
-        ptr.ref.lpVtbl,
-        pmkObjectName,
-        pfiletime,
-      );
+                  Pointer,
+                  Pointer<COMObject> pmkObjectName,
+                  Pointer<FILETIME>
+                      pfiletime)>()(ptr.ref.lpVtbl, pmkObjectName, pfiletime);
 
-  int EnumRunning(
-    Pointer<Pointer<COMObject>> ppenumMoniker,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int EnumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) => ptr
+          .ref.lpVtbl.value
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppenumMoniker,
-          )>>>()
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> ppenumMoniker)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppenumMoniker,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppenumMoniker,
-      );
+                  Pointer, Pointer<Pointer<COMObject>> ppenumMoniker)>()(
+      ptr.ref.lpVtbl, ppenumMoniker);
 }

@@ -32,55 +32,29 @@ class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestProperties(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetBoolValue(
-    Pointer<Utf16> name,
-    Pointer<Int32> value,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> name,
-            Pointer<Int32> value,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> name,
-            Pointer<Int32> value,
-          )>()(
-        ptr.ref.lpVtbl,
-        name,
-        value,
-      );
+  int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr
+      .ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(
+                      Pointer, Pointer<Utf16> name, Pointer<Int32> value)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<Utf16> name,
+              Pointer<Int32> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int GetStringValue(
-    Pointer<Utf16> name,
-    Pointer<Pointer<Utf16>> value,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> name,
-            Pointer<Pointer<Utf16>> value,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> name,
-            Pointer<Pointer<Utf16>> value,
-          )>()(
-        ptr.ref.lpVtbl,
-        name,
-        value,
-      );
+  int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
+      .ref.lpVtbl.value
+      .elementAt(4)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Utf16> name,
+                      Pointer<Pointer<Utf16>> value)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<Utf16> name,
+              Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
 }

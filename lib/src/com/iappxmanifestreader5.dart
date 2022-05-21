@@ -33,24 +33,19 @@ class IAppxManifestReader5 extends IUnknown {
   IAppxManifestReader5(Pointer<COMObject> ptr) : super(ptr);
 
   int GetMainPackageDependencies(
-    Pointer<Pointer<COMObject>> mainPackageDependencies,
-  ) =>
+          Pointer<Pointer<COMObject>> mainPackageDependencies) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> mainPackageDependencies,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> mainPackageDependencies,
-          )>()(
-        ptr.ref.lpVtbl,
-        mainPackageDependencies,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<Pointer<COMObject>>
+                                  mainPackageDependencies)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer,
+                      Pointer<Pointer<COMObject>> mainPackageDependencies)>()(
+          ptr.ref.lpVtbl, mainPackageDependencies);
 }

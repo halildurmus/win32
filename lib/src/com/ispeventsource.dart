@@ -32,81 +32,49 @@ class ISpEventSource extends ISpNotifySource {
   // vtable begins at 10, is 3 entries long.
   ISpEventSource(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetInterest(
-    int ullEventInterest,
-    int ullQueuedInterest,
-  ) =>
+  int SetInterest(int ullEventInterest, int ullQueuedInterest) =>
       ptr.ref.lpVtbl.value
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint64 ullEventInterest,
-            Uint64 ullQueuedInterest,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int ullEventInterest,
-            int ullQueuedInterest,
-          )>()(
-        ptr.ref.lpVtbl,
-        ullEventInterest,
-        ullQueuedInterest,
-      );
+              .elementAt(10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint64 ullEventInterest,
+                              Uint64 ullQueuedInterest)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int ullEventInterest, int ullQueuedInterest)>()(
+          ptr.ref.lpVtbl, ullEventInterest, ullQueuedInterest);
 
-  int GetEvents(
-    int ulCount,
-    Pointer<SPEVENT> pEventArray,
-    Pointer<Uint32> pulFetched,
-  ) =>
+  int GetEvents(int ulCount, Pointer<SPEVENT> pEventArray,
+          Pointer<Uint32> pulFetched) =>
       ptr.ref.lpVtbl.value
-          .elementAt(11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 ulCount,
-            Pointer<SPEVENT> pEventArray,
-            Pointer<Uint32> pulFetched,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int ulCount,
-            Pointer<SPEVENT> pEventArray,
-            Pointer<Uint32> pulFetched,
-          )>()(
-        ptr.ref.lpVtbl,
-        ulCount,
-        pEventArray,
-        pulFetched,
-      );
+              .elementAt(11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Uint32 ulCount,
+                              Pointer<SPEVENT> pEventArray,
+                              Pointer<Uint32> pulFetched)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      int ulCount,
+                      Pointer<SPEVENT> pEventArray,
+                      Pointer<Uint32> pulFetched)>()(
+          ptr.ref.lpVtbl, ulCount, pEventArray, pulFetched);
 
-  int GetInfo(
-    Pointer<SPEVENTSOURCEINFO> pInfo,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(12)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<SPEVENTSOURCEINFO> pInfo,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<SPEVENTSOURCEINFO> pInfo,
-          )>()(
-        ptr.ref.lpVtbl,
-        pInfo,
-      );
+  int GetInfo(Pointer<SPEVENTSOURCEINFO> pInfo) => ptr.ref.lpVtbl.value
+      .elementAt(12)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<SPEVENTSOURCEINFO> pInfo)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<SPEVENTSOURCEINFO> pInfo)>()(ptr.ref.lpVtbl, pInfo);
 }

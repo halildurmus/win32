@@ -32,25 +32,11 @@ class IModalWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IModalWindow(Pointer<COMObject> ptr) : super(ptr);
 
-  int Show(
-    int hwndOwner,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            IntPtr hwndOwner,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int hwndOwner,
-          )>()(
-        ptr.ref.lpVtbl,
-        hwndOwner,
-      );
+  int Show(int hwndOwner) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, int hwndOwner)>()(ptr.ref.lpVtbl, hwndOwner);
 }

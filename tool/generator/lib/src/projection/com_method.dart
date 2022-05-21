@@ -10,7 +10,7 @@ class ComMethodProjection extends MethodProjection {
   String get nativeParams => [
         'Pointer',
         ...parameters.map((param) => param.ffiProjection),
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   @override
   String get nativePrototype =>
@@ -20,7 +20,7 @@ class ComMethodProjection extends MethodProjection {
   String get dartParams => [
         'Pointer',
         ...parameters.map((param) => param.dartProjection),
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   @override
   String get dartPrototype => '${returnType.dartType} Function($dartParams)';
@@ -29,7 +29,7 @@ class ComMethodProjection extends MethodProjection {
   String get identifiers => [
         'ptr.ref.lpVtbl',
         ...parameters.map((param) => param.identifier)
-      ].map((p) => '$p, ').join();
+      ].join(', ');
 
   // TODO: Check whether there's a better way to detect how methods like
   // put_AutoDemodulate are declared (should this be a property?) Detect whether

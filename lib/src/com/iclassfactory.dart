@@ -32,55 +32,27 @@ class IClassFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IClassFactory(Pointer<COMObject> ptr) : super(ptr);
 
-  int CreateInstance(
-    Pointer<COMObject> pUnkOuter,
-    Pointer<GUID> riid,
-    Pointer<Pointer> ppvObject,
-  ) =>
+  int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
+          Pointer<Pointer> ppvObject) =>
       ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pUnkOuter,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppvObject,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<COMObject> pUnkOuter,
+                          Pointer<GUID> riid, Pointer<Pointer> ppvObject)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<COMObject> pUnkOuter,
-            Pointer<GUID> riid,
-            Pointer<Pointer> ppvObject,
-          )>()(
-        ptr.ref.lpVtbl,
-        pUnkOuter,
-        riid,
-        ppvObject,
-      );
+                  Pointer,
+                  Pointer<COMObject> pUnkOuter,
+                  Pointer<GUID> riid,
+                  Pointer<Pointer>
+                      ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
-  int LockServer(
-    int fLock,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 fLock,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int fLock,
-          )>()(
-        ptr.ref.lpVtbl,
-        fLock,
-      );
+  int LockServer(int fLock) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
+      .value
+      .asFunction<int Function(Pointer, int fLock)>()(ptr.ref.lpVtbl, fLock);
 }

@@ -32,27 +32,11 @@ class IWbemRefresher extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemRefresher(Pointer<COMObject> ptr) : super(ptr);
 
-  int Refresh(
-    int lFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 lFlags,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int lFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        lFlags,
-      );
+  int Refresh(int lFlags) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
+      .value
+      .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
 }
 
 /// @nodoc

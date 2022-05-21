@@ -32,137 +32,72 @@ class IChannelAudioVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IChannelAudioVolume(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetChannelCount(
-    Pointer<Uint32> pdwCount,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint32> pdwCount,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<Uint32> pdwCount)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint32> pdwCount,
-          )>()(
-        ptr.ref.lpVtbl,
-        pdwCount,
-      );
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwCount)>()(
+      ptr.ref.lpVtbl, pdwCount);
 
   int SetChannelVolume(
-    int dwIndex,
-    double fLevel,
-    Pointer<GUID> EventContext,
-  ) =>
+          int dwIndex, double fLevel, Pointer<GUID> EventContext) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwIndex,
-            Float fLevel,
-            Pointer<GUID> EventContext,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwIndex,
-            double fLevel,
-            Pointer<GUID> EventContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwIndex,
-        fLevel,
-        EventContext,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 dwIndex, Float fLevel,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int dwIndex, double fLevel,
+                      Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, dwIndex, fLevel, EventContext);
 
-  int GetChannelVolume(
-    int dwIndex,
-    Pointer<Float> pfLevel,
-  ) =>
+  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) =>
       ptr.ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Uint32 dwIndex,
-            Pointer<Float> pfLevel,
-          )>>>()
+                          Pointer, Uint32 dwIndex, Pointer<Float> pfLevel)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            int dwIndex,
-            Pointer<Float> pfLevel,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwIndex,
-        pfLevel,
-      );
+              int Function(Pointer, int dwIndex,
+                  Pointer<Float> pfLevel)>()(ptr.ref.lpVtbl, dwIndex, pfLevel);
 
   int SetAllVolumes(
-    int dwCount,
-    Pointer<Float> pfVolumes,
-    Pointer<GUID> EventContext,
-  ) =>
+          int dwCount, Pointer<Float> pfVolumes, Pointer<GUID> EventContext) =>
       ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwCount,
-            Pointer<Float> pfVolumes,
-            Pointer<GUID> EventContext,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwCount,
-            Pointer<Float> pfVolumes,
-            Pointer<GUID> EventContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwCount,
-        pfVolumes,
-        EventContext,
-      );
+              .elementAt(6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Uint32 dwCount,
+                              Pointer<Float> pfVolumes,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int dwCount, Pointer<Float> pfVolumes,
+                      Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, dwCount, pfVolumes, EventContext);
 
-  int GetAllVolumes(
-    int dwCount,
-    Pointer<Float> pfVolumes,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwCount,
-            Pointer<Float> pfVolumes,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwCount,
-            Pointer<Float> pfVolumes,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwCount,
-        pfVolumes,
-      );
+  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr
+      .ref.lpVtbl.value
+      .elementAt(7)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(
+                      Pointer, Uint32 dwCount, Pointer<Float> pfVolumes)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, int dwCount,
+              Pointer<Float> pfVolumes)>()(ptr.ref.lpVtbl, dwCount, pfVolumes);
 }

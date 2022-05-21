@@ -32,223 +32,110 @@ class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IWbemContext(Pointer<COMObject> ptr) : super(ptr);
 
-  int Clone(
-    Pointer<Pointer<COMObject>> ppNewCopy,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppNewCopy,
-          )>>>()
+                          Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppNewCopy,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppNewCopy,
-      );
+              int Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>()(
+      ptr.ref.lpVtbl, ppNewCopy);
 
-  int GetNames(
-    int lFlags,
-    Pointer<Pointer<SAFEARRAY>> pNames,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) => ptr
+          .ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 lFlags,
-            Pointer<Pointer<SAFEARRAY>> pNames,
-          )>>>()
+                      Int32 Function(Pointer, Int32 lFlags,
+                          Pointer<Pointer<SAFEARRAY>> pNames)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            int lFlags,
-            Pointer<Pointer<SAFEARRAY>> pNames,
-          )>()(
-        ptr.ref.lpVtbl,
-        lFlags,
-        pNames,
-      );
+                  Pointer, int lFlags, Pointer<Pointer<SAFEARRAY>> pNames)>()(
+      ptr.ref.lpVtbl, lFlags, pNames);
 
-  int BeginEnumeration(
-    int lFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 lFlags,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int lFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        lFlags,
-      );
+  int BeginEnumeration(int lFlags) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
+      .value
+      .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
 
-  int Next(
-    int lFlags,
-    Pointer<Pointer<Utf16>> pstrName,
-    Pointer<VARIANT> pValue,
-  ) =>
+  int Next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
+          Pointer<VARIANT> pValue) =>
       ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 lFlags,
-            Pointer<Pointer<Utf16>> pstrName,
-            Pointer<VARIANT> pValue,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int lFlags,
-            Pointer<Pointer<Utf16>> pstrName,
-            Pointer<VARIANT> pValue,
-          )>()(
-        ptr.ref.lpVtbl,
-        lFlags,
-        pstrName,
-        pValue,
-      );
+              .elementAt(6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Int32 lFlags,
+                              Pointer<Pointer<Utf16>> pstrName,
+                              Pointer<VARIANT> pValue)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      int lFlags,
+                      Pointer<Pointer<Utf16>> pstrName,
+                      Pointer<VARIANT> pValue)>()(
+          ptr.ref.lpVtbl, lFlags, pstrName, pValue);
 
   int EndEnumeration() => ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
+      .value
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int SetValue(
-    Pointer<Utf16> wszName,
-    int lFlags,
-    Pointer<VARIANT> pValue,
-  ) =>
+  int SetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       ptr.ref.lpVtbl.value
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            Int32 lFlags,
-            Pointer<VARIANT> pValue,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            int lFlags,
-            Pointer<VARIANT> pValue,
-          )>()(
-        ptr.ref.lpVtbl,
-        wszName,
-        lFlags,
-        pValue,
-      );
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> wszName,
+                              Int32 lFlags, Pointer<VARIANT> pValue)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> wszName, int lFlags,
+                      Pointer<VARIANT> pValue)>()(
+          ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int GetValue(
-    Pointer<Utf16> wszName,
-    int lFlags,
-    Pointer<VARIANT> pValue,
-  ) =>
+  int GetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            Int32 lFlags,
-            Pointer<VARIANT> pValue,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            int lFlags,
-            Pointer<VARIANT> pValue,
-          )>()(
-        ptr.ref.lpVtbl,
-        wszName,
-        lFlags,
-        pValue,
-      );
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<Utf16> wszName,
+                              Int32 lFlags, Pointer<VARIANT> pValue)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Utf16> wszName, int lFlags,
+                      Pointer<VARIANT> pValue)>()(
+          ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int DeleteValue(
-    Pointer<Utf16> wszName,
-    int lFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int DeleteValue(Pointer<Utf16> wszName, int lFlags) => ptr.ref.lpVtbl.value
           .elementAt(10)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            Int32 lFlags,
-          )>>>()
+                          Pointer, Pointer<Utf16> wszName, Int32 lFlags)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> wszName,
-            int lFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        wszName,
-        lFlags,
-      );
+              int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
+      ptr.ref.lpVtbl, wszName, lFlags);
 
   int DeleteAll() => ptr.ref.lpVtbl.value
-          .elementAt(11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
+      .value
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 }
 
 /// @nodoc

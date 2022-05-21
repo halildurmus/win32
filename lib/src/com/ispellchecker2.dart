@@ -32,25 +32,12 @@ class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.
   ISpellChecker2(Pointer<COMObject> ptr) : super(ptr);
 
-  int Remove(
-    Pointer<Utf16> word,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(17)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> word,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Utf16> word,
-          )>()(
-        ptr.ref.lpVtbl,
-        word,
-      );
+  int Remove(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
+      .elementAt(17)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Utf16> word)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
 }

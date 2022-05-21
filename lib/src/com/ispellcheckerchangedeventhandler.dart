@@ -33,25 +33,13 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(Pointer<COMObject> ptr) : super(ptr);
 
-  int Invoke(
-    Pointer<COMObject> sender,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int Invoke(Pointer<COMObject> sender) => ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> sender,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<COMObject> sender)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> sender,
-          )>()(
-        ptr.ref.lpVtbl,
-        sender,
-      );
+          .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
+      ptr.ref.lpVtbl, sender);
 }

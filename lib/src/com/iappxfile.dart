@@ -32,113 +32,61 @@ class IAppxFile extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFile(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetCompressionOption(
-    Pointer<Int32> compressionOption,
-  ) =>
+  int GetCompressionOption(Pointer<Int32> compressionOption) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Int32> compressionOption,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Int32> compressionOption,
-          )>()(
-        ptr.ref.lpVtbl,
-        compressionOption,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Int32> compressionOption)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Int32> compressionOption)>()(
+          ptr.ref.lpVtbl, compressionOption);
 
-  int GetContentType(
-    Pointer<Pointer<Utf16>> contentType,
-  ) =>
+  int GetContentType(Pointer<Pointer<Utf16>> contentType) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> contentType,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> contentType,
-          )>()(
-        ptr.ref.lpVtbl,
-        contentType,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<Utf16>> contentType)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<Utf16>> contentType)>()(
+          ptr.ref.lpVtbl, contentType);
 
-  int GetName(
-    Pointer<Pointer<Utf16>> fileName,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> fileName,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> fileName,
-          )>()(
-        ptr.ref.lpVtbl,
-        fileName,
-      );
+  int GetName(Pointer<Pointer<Utf16>> fileName) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Pointer<Utf16>> fileName)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Pointer<Utf16>> fileName)>()(ptr.ref.lpVtbl, fileName);
 
-  int GetSize(
-    Pointer<Uint64> size,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint64> size,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint64> size,
-          )>()(
-        ptr.ref.lpVtbl,
-        size,
-      );
+  int GetSize(Pointer<Uint64> size) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<Uint64> size)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<Uint64> size)>()(ptr.ref.lpVtbl, size);
 
-  int GetStream(
-    Pointer<Pointer<COMObject>> stream,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetStream(Pointer<Pointer<COMObject>> stream) => ptr.ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> stream,
-          )>>>()
+                          Pointer, Pointer<Pointer<COMObject>> stream)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> stream,
-          )>()(
-        ptr.ref.lpVtbl,
-        stream,
-      );
+              int Function(Pointer, Pointer<Pointer<COMObject>> stream)>()(
+      ptr.ref.lpVtbl, stream);
 }

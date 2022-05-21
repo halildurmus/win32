@@ -48,20 +48,11 @@ class IStringable extends IInspectable {
           .elementAt(6)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>()(
-        ptr.ref.lpVtbl,
-        retValuePtr,
-      );
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

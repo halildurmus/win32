@@ -32,213 +32,113 @@ class IAudioSessionControl extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAudioSessionControl(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetState(
-    Pointer<Int32> pRetVal,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetState(Pointer<Int32> pRetVal) => ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Int32> pRetVal,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<Int32> pRetVal)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Int32> pRetVal,
-          )>()(
-        ptr.ref.lpVtbl,
-        pRetVal,
-      );
+          .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
+      ptr.ref.lpVtbl, pRetVal);
 
-  int GetDisplayName(
-    Pointer<Pointer<Utf16>> pRetVal,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pRetVal,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pRetVal,
-          )>()(
-        ptr.ref.lpVtbl,
-        pRetVal,
-      );
+  int GetDisplayName(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.lpVtbl.value
+      .elementAt(4)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetDisplayName(
-    Pointer<Utf16> Value,
-    Pointer<GUID> EventContext,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int SetDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
+          .ref.lpVtbl.value
           .elementAt(5)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> Value,
-            Pointer<GUID> EventContext,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<Utf16> Value,
+                          Pointer<GUID> EventContext)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Utf16> Value,
-            Pointer<GUID> EventContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        Value,
-        EventContext,
-      );
+                  Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
+      ptr.ref.lpVtbl, Value, EventContext);
 
-  int GetIconPath(
-    Pointer<Pointer<Utf16>> pRetVal,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pRetVal,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pRetVal,
-          )>()(
-        ptr.ref.lpVtbl,
-        pRetVal,
-      );
+  int GetIconPath(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<Pointer<Utf16>> pRetVal)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer,
+              Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetIconPath(
-    Pointer<Utf16> Value,
-    Pointer<GUID> EventContext,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int SetIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
+          .ref.lpVtbl.value
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Utf16> Value,
-            Pointer<GUID> EventContext,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<Utf16> Value,
+                          Pointer<GUID> EventContext)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Utf16> Value,
-            Pointer<GUID> EventContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        Value,
-        EventContext,
-      );
+                  Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
+      ptr.ref.lpVtbl, Value, EventContext);
 
-  int GetGroupingParam(
-    Pointer<GUID> pRetVal,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<GUID> pRetVal,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<GUID> pRetVal,
-          )>()(
-        ptr.ref.lpVtbl,
-        pRetVal,
-      );
+  int GetGroupingParam(Pointer<GUID> pRetVal) => ptr.ref.lpVtbl.value
+      .elementAt(8)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pRetVal)>>>()
+      .value
+      .asFunction<
+          int Function(
+              Pointer, Pointer<GUID> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetGroupingParam(
-    Pointer<GUID> Override,
-    Pointer<GUID> EventContext,
-  ) =>
+  int SetGroupingParam(Pointer<GUID> Override, Pointer<GUID> EventContext) =>
       ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<GUID> Override,
-            Pointer<GUID> EventContext,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<GUID> Override,
-            Pointer<GUID> EventContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        Override,
-        EventContext,
-      );
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<GUID> Override,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<GUID> Override,
+                      Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, Override, EventContext);
 
-  int RegisterAudioSessionNotification(
-    Pointer<COMObject> NewNotifications,
-  ) =>
+  int RegisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
       ptr.ref.lpVtbl.value
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> NewNotifications,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> NewNotifications,
-          )>()(
-        ptr.ref.lpVtbl,
-        NewNotifications,
-      );
+              .elementAt(10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<COMObject> NewNotifications)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
+          ptr.ref.lpVtbl, NewNotifications);
 
-  int UnregisterAudioSessionNotification(
-    Pointer<COMObject> NewNotifications,
-  ) =>
+  int UnregisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
       ptr.ref.lpVtbl.value
-          .elementAt(11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> NewNotifications,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> NewNotifications,
-          )>()(
-        ptr.ref.lpVtbl,
-        NewNotifications,
-      );
+              .elementAt(11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<COMObject> NewNotifications)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
+          ptr.ref.lpVtbl, NewNotifications);
 }

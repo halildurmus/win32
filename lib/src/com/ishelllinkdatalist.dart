@@ -32,117 +32,49 @@ class IShellLinkDataList extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellLinkDataList(Pointer<COMObject> ptr) : super(ptr);
 
-  int AddDataBlock(
-    Pointer pDataBlock,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer pDataBlock,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer pDataBlock,
-          )>()(
-        ptr.ref.lpVtbl,
-        pDataBlock,
-      );
+  int AddDataBlock(Pointer pDataBlock) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer pDataBlock)>>>()
+      .value
+      .asFunction<
+          int Function(
+              Pointer, Pointer pDataBlock)>()(ptr.ref.lpVtbl, pDataBlock);
 
-  int CopyDataBlock(
-    int dwSig,
-    Pointer<Pointer> ppDataBlock,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int CopyDataBlock(int dwSig, Pointer<Pointer> ppDataBlock) => ptr
+          .ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwSig,
-            Pointer<Pointer> ppDataBlock,
-          )>>>()
+                      Int32 Function(Pointer, Uint32 dwSig,
+                          Pointer<Pointer> ppDataBlock)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            int dwSig,
-            Pointer<Pointer> ppDataBlock,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwSig,
-        ppDataBlock,
-      );
+              int Function(Pointer, int dwSig, Pointer<Pointer> ppDataBlock)>()(
+      ptr.ref.lpVtbl, dwSig, ppDataBlock);
 
-  int RemoveDataBlock(
-    int dwSig,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwSig,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwSig,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwSig,
-      );
+  int RemoveDataBlock(int dwSig) => ptr.ref.lpVtbl.value
+      .elementAt(5)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwSig)>>>()
+      .value
+      .asFunction<int Function(Pointer, int dwSig)>()(ptr.ref.lpVtbl, dwSig);
 
-  int GetFlags(
-    Pointer<Uint32> pdwFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetFlags(Pointer<Uint32> pdwFlags) => ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint32> pdwFlags,
-          )>>>()
+                      Int32 Function(Pointer, Pointer<Uint32> pdwFlags)>>>()
           .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint32> pdwFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        pdwFlags,
-      );
+          .asFunction<int Function(Pointer, Pointer<Uint32> pdwFlags)>()(
+      ptr.ref.lpVtbl, pdwFlags);
 
-  int SetFlags(
-    int dwFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwFlags,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwFlags,
-      );
+  int SetFlags(int dwFlags) => ptr.ref.lpVtbl.value
+      .elementAt(7)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwFlags)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, int dwFlags)>()(ptr.ref.lpVtbl, dwFlags);
 }

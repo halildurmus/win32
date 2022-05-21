@@ -32,55 +32,29 @@ class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioRenderClient(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetBuffer(
-    int NumFramesRequested,
-    Pointer<Pointer<Uint8>> ppData,
-  ) =>
+  int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 NumFramesRequested,
-            Pointer<Pointer<Uint8>> ppData,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int NumFramesRequested,
-            Pointer<Pointer<Uint8>> ppData,
-          )>()(
-        ptr.ref.lpVtbl,
-        NumFramesRequested,
-        ppData,
-      );
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Uint32 NumFramesRequested,
+                              Pointer<Pointer<Uint8>> ppData)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, int NumFramesRequested,
+                      Pointer<Pointer<Uint8>> ppData)>()(
+          ptr.ref.lpVtbl, NumFramesRequested, ppData);
 
-  int ReleaseBuffer(
-    int NumFramesWritten,
-    int dwFlags,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int ReleaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Uint32 NumFramesWritten,
-            Uint32 dwFlags,
-          )>>>()
+                          Pointer, Uint32 NumFramesWritten, Uint32 dwFlags)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            int NumFramesWritten,
-            int dwFlags,
-          )>()(
-        ptr.ref.lpVtbl,
-        NumFramesWritten,
-        dwFlags,
-      );
+              int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
+      ptr.ref.lpVtbl, NumFramesWritten, dwFlags);
 }

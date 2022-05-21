@@ -32,25 +32,13 @@ class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(Pointer<COMObject> ptr) : super(ptr);
 
-  int ConnectivityChanged(
-    int newConnectivity,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Int32 newConnectivity,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int newConnectivity,
-          )>()(
-        ptr.ref.lpVtbl,
-        newConnectivity,
-      );
+  int ConnectivityChanged(int newConnectivity) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Int32 newConnectivity)>>>()
+      .value
+      .asFunction<
+          int Function(
+              Pointer, int newConnectivity)>()(ptr.ref.lpVtbl, newConnectivity);
 }

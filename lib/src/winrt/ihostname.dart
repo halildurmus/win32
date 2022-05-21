@@ -44,20 +44,14 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
-        .elementAt(6)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-          Pointer<COMObject>,
-        )>>>()
-        .value
-        .asFunction<
-            int Function(
-          Pointer,
-          Pointer<COMObject>,
-        )>()(ptr.ref.lpVtbl, retValuePtr);
+            .elementAt(6)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -72,17 +66,11 @@ class IHostName extends IInspectable {
           .elementAt(7)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -102,17 +90,11 @@ class IHostName extends IInspectable {
           .elementAt(8)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -132,17 +114,11 @@ class IHostName extends IInspectable {
           .elementAt(9)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<IntPtr>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -162,17 +138,11 @@ class IHostName extends IInspectable {
           .elementAt(10)
           .cast<
               Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<Int32>,
-          )>>>()
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Int32>,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -183,33 +153,24 @@ class IHostName extends IInspectable {
     }
   }
 
-  bool IsEqual(
-    Pointer<COMObject> hostName,
-  ) {
+  bool IsEqual(Pointer<COMObject> hostName) {
     final retValuePtr = calloc<Bool>();
 
     try {
       final hr = ptr.ref.vtable
-          .elementAt(11)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<COMObject> hostName,
-            Pointer<Bool>,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> hostName,
-            Pointer<Bool>,
-          )>()(
-        ptr.ref.lpVtbl,
-        hostName.cast<Pointer<COMObject>>().value,
-        retValuePtr,
-      );
+              .elementAt(11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject> hostName,
+                              Pointer<Bool>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<COMObject> hostName, Pointer<Bool>)>()(
+          ptr.ref.lpVtbl,
+          hostName.cast<Pointer<COMObject>>().value,
+          retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

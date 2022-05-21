@@ -32,117 +32,59 @@ class IConnectionPoint extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IConnectionPoint(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetConnectionInterface(
-    Pointer<GUID> pIID,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<GUID> pIID,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<GUID> pIID,
-          )>()(
-        ptr.ref.lpVtbl,
-        pIID,
-      );
+  int GetConnectionInterface(Pointer<GUID> pIID) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pIID)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<GUID> pIID)>()(ptr.ref.lpVtbl, pIID);
 
-  int GetConnectionPointContainer(
-    Pointer<Pointer<COMObject>> ppCPC,
-  ) =>
+  int GetConnectionPointContainer(Pointer<Pointer<COMObject>> ppCPC) =>
       ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppCPC,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppCPC,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppCPC,
-      );
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppCPC)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppCPC)>()(
+          ptr.ref.lpVtbl, ppCPC);
 
-  int Advise(
-    Pointer<COMObject> pUnkSink,
-    Pointer<Uint32> pdwCookie,
-  ) =>
+  int Advise(Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<COMObject> pUnkSink,
-            Pointer<Uint32> pdwCookie,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> pUnkSink,
-            Pointer<Uint32> pdwCookie,
-          )>()(
-        ptr.ref.lpVtbl,
-        pUnkSink,
-        pdwCookie,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Pointer<COMObject> pUnkSink,
+                              Pointer<Uint32> pdwCookie)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<COMObject> pUnkSink,
+                      Pointer<Uint32> pdwCookie)>()(
+          ptr.ref.lpVtbl, pUnkSink, pdwCookie);
 
-  int Unadvise(
-    int dwCookie,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 dwCookie,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int dwCookie,
-          )>()(
-        ptr.ref.lpVtbl,
-        dwCookie,
-      );
+  int Unadvise(int dwCookie) => ptr.ref.lpVtbl.value
+      .elementAt(6)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwCookie)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, int dwCookie)>()(ptr.ref.lpVtbl, dwCookie);
 
-  int EnumConnections(
-    Pointer<Pointer<COMObject>> ppEnum,
-  ) =>
+  int EnumConnections(Pointer<Pointer<COMObject>> ppEnum) =>
       ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnum,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnum,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppEnum,
-      );
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+          ptr.ref.lpVtbl, ppEnum);
 }

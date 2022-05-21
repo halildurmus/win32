@@ -37,20 +37,17 @@ class IEnumNetworks extends IDispatch {
 
     try {
       final hr = ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumVar,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumVar,
-          )>()(ptr.ref.lpVtbl, retValuePtr);
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<COMObject>> ppEnumVar)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<COMObject>> ppEnumVar)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -61,93 +58,49 @@ class IEnumNetworks extends IDispatch {
     }
   }
 
-  int Next(
-    int celt,
-    Pointer<Pointer<COMObject>> rgelt,
-    Pointer<Uint32> pceltFetched,
-  ) =>
+  int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
+          Pointer<Uint32> pceltFetched) =>
       ptr.ref.lpVtbl.value
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 celt,
-            Pointer<Pointer<COMObject>> rgelt,
-            Pointer<Uint32> pceltFetched,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int celt,
-            Pointer<Pointer<COMObject>> rgelt,
-            Pointer<Uint32> pceltFetched,
-          )>()(
-        ptr.ref.lpVtbl,
-        celt,
-        rgelt,
-        pceltFetched,
-      );
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Uint32 celt,
+                              Pointer<Pointer<COMObject>> rgelt,
+                              Pointer<Uint32> pceltFetched)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer,
+                      int celt,
+                      Pointer<Pointer<COMObject>> rgelt,
+                      Pointer<Uint32> pceltFetched)>()(
+          ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(
-    int celt,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Uint32 celt,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int celt,
-          )>()(
-        ptr.ref.lpVtbl,
-        celt,
-      );
+  int Skip(int celt) => ptr.ref.lpVtbl.value
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
+      .value
+      .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
   int Reset() => ptr.ref.lpVtbl.value
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+      .elementAt(10)
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
+      .value
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Clone(
-    Pointer<Pointer<COMObject>> ppEnumNetwork,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppEnumNetwork) => ptr.ref.lpVtbl.value
           .elementAt(11)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumNetwork,
-          )>>>()
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> ppEnumNetwork)>>>()
           .value
           .asFunction<
               int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> ppEnumNetwork,
-          )>()(
-        ptr.ref.lpVtbl,
-        ppEnumNetwork,
-      );
+                  Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
+      ptr.ref.lpVtbl, ppEnumNetwork);
 }

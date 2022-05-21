@@ -32,69 +32,55 @@ class IAppxManifestReader7 extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestReader7(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetDriverDependencies(
-    Pointer<Pointer<COMObject>> driverDependencies,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> driverDependencies,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> driverDependencies,
-          )>()(
-        ptr.ref.lpVtbl,
-        driverDependencies,
-      );
+  int
+      GetDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
+          ptr.ref.lpVtbl.value
+                  .elementAt(3)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              Int32 Function(
+                                  Pointer,
+                                  Pointer<Pointer<COMObject>>
+                                      driverDependencies)>>>()
+                  .value
+                  .asFunction<
+                      int Function(Pointer,
+                          Pointer<Pointer<COMObject>> driverDependencies)>()(
+              ptr.ref.lpVtbl, driverDependencies);
 
   int GetOSPackageDependencies(
-    Pointer<Pointer<COMObject>> osPackageDependencies,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(4)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> osPackageDependencies,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> osPackageDependencies,
-          )>()(
-        ptr.ref.lpVtbl,
-        osPackageDependencies,
-      );
+          Pointer<Pointer<COMObject>> osPackageDependencies) =>
+      ptr
+              .ref.lpVtbl.value
+              .elementAt(4)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<Pointer<COMObject>>
+                                  osPackageDependencies)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer,
+                      Pointer<Pointer<COMObject>> osPackageDependencies)>()(
+          ptr.ref.lpVtbl, osPackageDependencies);
 
   int GetHostRuntimeDependencies(
-    Pointer<Pointer<COMObject>> hostRuntimeDependencies,
-  ) =>
+          Pointer<Pointer<COMObject>> hostRuntimeDependencies) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> hostRuntimeDependencies,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<COMObject>> hostRuntimeDependencies,
-          )>()(
-        ptr.ref.lpVtbl,
-        hostRuntimeDependencies,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer,
+                              Pointer<Pointer<COMObject>>
+                                  hostRuntimeDependencies)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer,
+                      Pointer<Pointer<COMObject>> hostRuntimeDependencies)>()(
+          ptr.ref.lpVtbl, hostRuntimeDependencies);
 }

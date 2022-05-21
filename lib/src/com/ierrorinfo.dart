@@ -32,113 +32,63 @@ class IErrorInfo extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IErrorInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetGUID(
-    Pointer<GUID> pGUID,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<GUID> pGUID,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<GUID> pGUID,
-          )>()(
-        ptr.ref.lpVtbl,
-        pGUID,
-      );
+  int GetGUID(Pointer<GUID> pGUID) => ptr.ref.lpVtbl.value
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<Int32 Function(Pointer, Pointer<GUID> pGUID)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<GUID> pGUID)>()(ptr.ref.lpVtbl, pGUID);
 
-  int GetSource(
-    Pointer<Pointer<Utf16>> pBstrSource,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetSource(Pointer<Pointer<Utf16>> pBstrSource) => ptr.ref.lpVtbl.value
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrSource,
-          )>>>()
+                          Pointer, Pointer<Pointer<Utf16>> pBstrSource)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrSource,
-          )>()(
-        ptr.ref.lpVtbl,
-        pBstrSource,
-      );
+              int Function(Pointer, Pointer<Pointer<Utf16>> pBstrSource)>()(
+      ptr.ref.lpVtbl, pBstrSource);
 
-  int GetDescription(
-    Pointer<Pointer<Utf16>> pBstrDescription,
-  ) =>
+  int GetDescription(Pointer<Pointer<Utf16>> pBstrDescription) =>
       ptr.ref.lpVtbl.value
-          .elementAt(5)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrDescription,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrDescription,
-          )>()(
-        ptr.ref.lpVtbl,
-        pBstrDescription,
-      );
+              .elementAt(5)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer,
+                              Pointer<Pointer<Utf16>> pBstrDescription)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, Pointer<Pointer<Utf16>> pBstrDescription)>()(
+          ptr.ref.lpVtbl, pBstrDescription);
 
-  int GetHelpFile(
-    Pointer<Pointer<Utf16>> pBstrHelpFile,
-  ) =>
-      ptr.ref.lpVtbl.value
+  int GetHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => ptr.ref.lpVtbl.value
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<
                       Int32 Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrHelpFile,
-          )>>>()
+                          Pointer, Pointer<Pointer<Utf16>> pBstrHelpFile)>>>()
           .value
           .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Pointer<Utf16>> pBstrHelpFile,
-          )>()(
-        ptr.ref.lpVtbl,
-        pBstrHelpFile,
-      );
+              int Function(Pointer, Pointer<Pointer<Utf16>> pBstrHelpFile)>()(
+      ptr.ref.lpVtbl, pBstrHelpFile);
 
-  int GetHelpContext(
-    Pointer<Uint32> pdwHelpContext,
-  ) =>
+  int GetHelpContext(Pointer<Uint32> pdwHelpContext) =>
       ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(
-            Pointer,
-            Pointer<Uint32> pdwHelpContext,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<Uint32> pdwHelpContext,
-          )>()(
-        ptr.ref.lpVtbl,
-        pdwHelpContext,
-      );
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(
+                              Pointer, Pointer<Uint32> pdwHelpContext)>>>()
+              .value
+              .asFunction<
+                  int Function(Pointer, Pointer<Uint32> pdwHelpContext)>()(
+          ptr.ref.lpVtbl, pdwHelpContext);
 }

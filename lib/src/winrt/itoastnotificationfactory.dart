@@ -40,32 +40,21 @@ class IToastNotificationFactory extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IToastNotificationFactory(Pointer<COMObject> ptr) : super(ptr);
 
-  Pointer<COMObject> CreateToastNotification(
-    Pointer<COMObject> content,
-  ) {
+  Pointer<COMObject> CreateToastNotification(Pointer<COMObject> content) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
-        .elementAt(6)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-          Pointer<COMObject> content,
-          Pointer<COMObject>,
-        )>>>()
-        .value
-        .asFunction<
-            int Function(
-          Pointer,
-          Pointer<COMObject> content,
-          Pointer<COMObject>,
-        )>()(
-      ptr.ref.lpVtbl,
-      content.cast<Pointer<COMObject>>().value,
-      retValuePtr,
-    );
+            .elementAt(6)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject> content,
+                            Pointer<COMObject>)>>>()
+            .value
+            .asFunction<
+                int Function(
+                    Pointer, Pointer<COMObject> content, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, content.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

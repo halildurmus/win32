@@ -43,19 +43,9 @@ class IClosable extends IInspectable {
   void Close() {
     final hr = ptr.ref.vtable
         .elementAt(6)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(
-          Pointer,
-        )>>>()
+        .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<
-            int Function(
-          Pointer,
-        )>()(
-      ptr.ref.lpVtbl,
-    );
+        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
