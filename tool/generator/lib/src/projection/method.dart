@@ -24,7 +24,7 @@ abstract class MethodProjection {
   final String name;
 
   /// Projections for the parameters of the method.
-  final List<ParameterProjection> parameters;
+  List<ParameterProjection> parameters;
 
   /// Projection for the return type.
   final TypeProjection returnType;
@@ -89,7 +89,7 @@ abstract class MethodProjection {
 
   /// The parameters exposed by a projected Dart method.
   String get methodParams =>
-      parameters.map((param) => '${param.dartProjection}, ').join();
+      parameters.map((param) => '${param.paramProjection}, ').join();
 
   /// The native prototype representing the method.
   String get nativePrototype;

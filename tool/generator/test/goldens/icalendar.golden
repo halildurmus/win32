@@ -66,37 +66,45 @@ class ICalendar extends IInspectable {
     return retValuePtr;
   }
 
-  void SetToMin() => ptr.ref.lpVtbl.value
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+  void SetToMin() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(7)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
 
-  void SetToMax() => ptr.ref.lpVtbl.value
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void SetToMax() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(8)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   List<String> get Languages {
     final retValuePtr = calloc<COMObject>();
@@ -216,26 +224,33 @@ class ICalendar extends IInspectable {
   }
 
   void ChangeCalendarSystem(
-    int value,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(13)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            IntPtr value,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int value,
-          )>()(
-        ptr.ref.lpVtbl,
-        value,
-      );
+    String value,
+  ) {
+    final valueHstring = convertToHString(value);
+
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(13)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          IntPtr value,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int value,
+        )>()(
+      ptr.ref.lpVtbl,
+      valueHstring,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    WindowsDeleteString(valueHstring);
+  }
 
   String GetClock() {
     final retValuePtr = calloc<HSTRING>();
@@ -271,26 +286,33 @@ class ICalendar extends IInspectable {
   }
 
   void ChangeClock(
-    int value,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(15)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            IntPtr value,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int value,
-          )>()(
-        ptr.ref.lpVtbl,
-        value,
-      );
+    String value,
+  ) {
+    final valueHstring = convertToHString(value);
+
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(15)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          IntPtr value,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int value,
+        )>()(
+      ptr.ref.lpVtbl,
+      valueHstring,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    WindowsDeleteString(valueHstring);
+  }
 
   DateTime GetDateTime() {
     final retValuePtr = calloc<Uint64>();
@@ -325,42 +347,52 @@ class ICalendar extends IInspectable {
   }
 
   void SetDateTime(
-    int value,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(17)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Uint64 value,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int value,
-          )>()(
-        ptr.ref.lpVtbl,
-        value,
-      );
+    DateTime value,
+  ) {
+    final valueDateTime =
+        value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
-  void SetToNow() => ptr.ref.lpVtbl.value
-          .elementAt(18)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(17)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Uint64 value,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int value,
+        )>()(
+      ptr.ref.lpVtbl,
+      valueDateTime,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void SetToNow() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(18)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   int get FirstEra {
     final retValuePtr = calloc<Int32>();
@@ -500,25 +532,28 @@ class ICalendar extends IInspectable {
 
   void AddEras(
     int eras,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(24)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 eras,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int eras,
-          )>()(
-        ptr.ref.lpVtbl,
-        eras,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(24)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 eras,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int eras,
+        )>()(
+      ptr.ref.lpVtbl,
+      eras,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String EraAsFullString() {
     final retValuePtr = calloc<HSTRING>();
@@ -729,25 +764,28 @@ class ICalendar extends IInspectable {
 
   void AddYears(
     int years,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(32)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 years,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int years,
-          )>()(
-        ptr.ref.lpVtbl,
-        years,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(32)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 years,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int years,
+        )>()(
+      ptr.ref.lpVtbl,
+      years,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String YearAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -996,25 +1034,28 @@ class ICalendar extends IInspectable {
 
   void AddMonths(
     int months,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(41)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 months,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int months,
-          )>()(
-        ptr.ref.lpVtbl,
-        months,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(41)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 months,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int months,
+        )>()(
+      ptr.ref.lpVtbl,
+      months,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String MonthAsFullString() {
     final retValuePtr = calloc<HSTRING>();
@@ -1231,25 +1272,28 @@ class ICalendar extends IInspectable {
 
   void AddWeeks(
     int weeks,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(48)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 weeks,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int weeks,
-          )>()(
-        ptr.ref.lpVtbl,
-        weeks,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(48)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 weeks,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int weeks,
+        )>()(
+      ptr.ref.lpVtbl,
+      weeks,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   int get FirstDayInThisMonth {
     final retValuePtr = calloc<Int32>();
@@ -1389,25 +1433,28 @@ class ICalendar extends IInspectable {
 
   void AddDays(
     int days,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(54)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 days,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int days,
-          )>()(
-        ptr.ref.lpVtbl,
-        days,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(54)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 days,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int days,
+        )>()(
+      ptr.ref.lpVtbl,
+      days,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String DayAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -1789,25 +1836,28 @@ class ICalendar extends IInspectable {
 
   void AddPeriods(
     int periods,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(67)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 periods,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int periods,
-          )>()(
-        ptr.ref.lpVtbl,
-        periods,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(67)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 periods,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int periods,
+        )>()(
+      ptr.ref.lpVtbl,
+      periods,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String PeriodAsFullString() {
     final retValuePtr = calloc<HSTRING>();
@@ -2018,25 +2068,28 @@ class ICalendar extends IInspectable {
 
   void AddHours(
     int hours,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(75)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 hours,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int hours,
-          )>()(
-        ptr.ref.lpVtbl,
-        hours,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(75)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 hours,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int hours,
+        )>()(
+      ptr.ref.lpVtbl,
+      hours,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String HourAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -2160,25 +2213,28 @@ class ICalendar extends IInspectable {
 
   void AddMinutes(
     int minutes,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(80)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 minutes,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int minutes,
-          )>()(
-        ptr.ref.lpVtbl,
-        minutes,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(80)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 minutes,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int minutes,
+        )>()(
+      ptr.ref.lpVtbl,
+      minutes,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String MinuteAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -2302,25 +2358,28 @@ class ICalendar extends IInspectable {
 
   void AddSeconds(
     int seconds,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(85)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 seconds,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int seconds,
-          )>()(
-        ptr.ref.lpVtbl,
-        seconds,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(85)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 seconds,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int seconds,
+        )>()(
+      ptr.ref.lpVtbl,
+      seconds,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String SecondAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -2444,25 +2503,28 @@ class ICalendar extends IInspectable {
 
   void AddNanoseconds(
     int nanoseconds,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(90)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Int32 nanoseconds,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            int nanoseconds,
-          )>()(
-        ptr.ref.lpVtbl,
-        nanoseconds,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(90)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Int32 nanoseconds,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          int nanoseconds,
+        )>()(
+      ptr.ref.lpVtbl,
+      nanoseconds,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   String NanosecondAsString() {
     final retValuePtr = calloc<HSTRING>();
@@ -2573,9 +2635,11 @@ class ICalendar extends IInspectable {
   }
 
   int CompareDateTime(
-    int other,
+    DateTime other,
   ) {
     final retValuePtr = calloc<Int32>();
+    final otherDateTime =
+        other.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -2596,7 +2660,7 @@ class ICalendar extends IInspectable {
             Pointer<Int32>,
           )>()(
         ptr.ref.lpVtbl,
-        other,
+        otherDateTime,
         retValuePtr,
       );
 
@@ -2611,25 +2675,28 @@ class ICalendar extends IInspectable {
 
   void CopyTo(
     Pointer<COMObject> other,
-  ) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(95)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-            Pointer<COMObject> other,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-            Pointer<COMObject> other,
-          )>()(
-        ptr.ref.lpVtbl,
-        other.cast<Pointer<COMObject>>().value,
-      );
+  ) {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(95)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+          Pointer<COMObject> other,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+          Pointer<COMObject> other,
+        )>()(
+      ptr.ref.lpVtbl,
+      other.cast<Pointer<COMObject>>().value,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 
   int get FirstMinuteInThisHour {
     final retValuePtr = calloc<Int32>();
