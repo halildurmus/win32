@@ -112,6 +112,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatterStatics',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
   'Windows.Networking.IHostName',
+  'Windows.Storage.IApplicationDataStatics',
   'Windows.Storage.IUserDataPathsStatics',
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.UI.Notifications.IToastNotificationFactory',
@@ -128,6 +129,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   //   Requires WinRT delegate support
   //   'Windows.Foundation.IAsyncAction',
   //   'Windows.Foundation.IAsyncOperation`1',
+  //   'Windows.Storage.IApplicationData',
   //
   //   Requires class support
   //   'Windows.UI.Notifications.ToastNotification',
