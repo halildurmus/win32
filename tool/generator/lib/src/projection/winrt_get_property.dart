@@ -29,7 +29,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     if (FAILED(hr)) throw WindowsException(hr);
 ''';
 
-  String vectorViewPropertyDeclaration() => '''
+  @override
+  String vectorViewDeclaration() => '''
     List<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
@@ -43,7 +44,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   }
 ''';
 
-  String vectorPropertyDeclaration() => '''
+  @override
+  String vectorDeclaration() => '''
     IVector<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
@@ -53,7 +55,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   }
 ''';
 
-  String comObjectPropertyDeclaration() => '''
+  @override
+  String comObjectDeclaration() => '''
     Pointer<COMObject> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
@@ -63,7 +66,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   }
 ''';
 
-  String stringPropertyDeclaration() => '''
+  @override
+  String stringDeclaration() => '''
       String get $exposedMethodName {
       final retValuePtr = calloc<HSTRING>();
 
@@ -79,7 +83,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  String dateTimePropertyDeclaration() => '''
+  @override
+  String dateTimeDeclaration() => '''
       DateTime get $exposedMethodName {
         final retValuePtr = calloc<Uint64>();
 
@@ -95,7 +100,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  String durationPropertyDeclaration() => '''
+  @override
+  String durationDeclaration() => '''
       Duration get $exposedMethodName {
         final retValuePtr = calloc<Uint64>();
 
@@ -109,7 +115,8 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  String defaultPropertyDeclaration() {
+  @override
+  String defaultDeclaration() {
     final valRef = returnType.dartType == 'double' ||
             returnType.dartType == 'int' ||
             returnType.dartType == 'bool' ||
@@ -130,26 +137,5 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         }
       }
 ''';
-  }
-
-  @override
-  String toString() {
-    try {
-      if (isVectorViewReturn) return vectorViewPropertyDeclaration();
-      if (isVectorReturn) return vectorPropertyDeclaration();
-      if (isCOMObjectReturn) return comObjectPropertyDeclaration();
-      if (isStringReturn) return stringPropertyDeclaration();
-      if (isDateTimeReturn) return dateTimePropertyDeclaration();
-      if (isTimeSpanReturn) return durationPropertyDeclaration();
-
-      return defaultPropertyDeclaration();
-    } on Exception {
-      // Print an error if we're unable to project a method, but don't
-      // completely bail out. The rest may be useful.
-
-      // TODO: Fix these errors as they occur.
-      print('Unable to project method: ${method.name}');
-      return '';
-    }
   }
 }

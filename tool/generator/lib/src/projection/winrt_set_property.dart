@@ -1,17 +1,12 @@
 import 'package:winmd/winmd.dart';
 
-import 'safenames.dart';
 import 'winrt_property.dart';
 
 class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   WinRTSetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
-  /// Strip off all underscores, even if double underscores
-  @override
-  String get exposedMethodName => method.name.startsWith('put__')
-      ? safeIdentifierForString(method.name.substring(5))
-      : safeIdentifierForString(method.name.substring(4));
+  // WinRTPropertyProjection overrides
 
   @override
   String get nativeParams => 'Pointer, ${parameters.first.type.nativeType},';
@@ -19,7 +14,14 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   @override
   String get dartParams => 'Pointer, ${parameters.first.type.dartType},';
 
-  String stringPropertyDeclaration() => '''
+  // Declaration String templates
+
+  // TODO: vectorViewDeclaration
+  // TODO: vectorDeclaration
+  // TODO: comObjectDeclaration
+
+  @override
+  String stringDeclaration() => '''
       set $exposedMethodName(String value) {
       final hstr = convertToHString(value);
 
@@ -37,7 +39,8 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  String dateTimePropertyDeclaration() => '''
+  @override
+  String dateTimeDeclaration() => '''
       set $exposedMethodName(DateTime value) {
         final dateTimeOffset =
           value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
@@ -52,7 +55,8 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  String durationPropertyDeclaration() => '''
+  @override
+  String durationDeclaration() => '''
       set $exposedMethodName(Duration value) {
         final duration = value.inMicroseconds * 10;
         
@@ -67,29 +71,28 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 ''';
 
   @override
+  String defaultDeclaration() => '''
+    set $exposedMethodName(${parameters.first.type.dartType} value) {
+        final hr = ptr.ref.lpVtbl.value
+          .elementAt($vtableOffset)
+          .cast<Pointer<NativeFunction<$nativePrototype>>>()
+          .value
+          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, value);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    }
+  ''';
+
+  @override
   String toString() {
     try {
-      if (parameters.first.type.isString) return stringPropertyDeclaration();
+      if (parameters.first.type.isString) return stringDeclaration();
       if (parameters.first.type.typeIdentifier.name ==
-          'Windows.Foundation.DateTime') {
-        return dateTimePropertyDeclaration();
-      }
+          'Windows.Foundation.DateTime') return dateTimeDeclaration();
       if (parameters.first.type.typeIdentifier.name ==
-          'Windows.Foundation.TimeSpan') {
-        return durationPropertyDeclaration();
-      }
+          'Windows.Foundation.TimeSpan') return durationDeclaration();
 
-      return '''
-    set $exposedMethodName(${parameters.first.type.dartType} value) {
-      final hr = ptr.ref.lpVtbl.value
-        .elementAt($vtableOffset)
-        .cast<Pointer<NativeFunction<$nativePrototype>>>()
-        .value
-        .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-  }
-''';
+      return defaultDeclaration();
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.
