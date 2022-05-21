@@ -1,3 +1,5 @@
+/// Generates Win32, COM and Windows Runtime APIs for the win32 package based on
+/// Windows metadata.
 library generator;
 
 export 'src/inputs/functions.dart';
