@@ -43,7 +43,7 @@ class IAsyncInfo extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class IAsyncInfo extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -101,7 +101,7 @@ class IAsyncInfo extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<

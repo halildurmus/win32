@@ -26,17 +26,21 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   @override
   String get dartParams => nativeParams;
 
-  String vectorPropertyDeclaration() => '''
-    List<String> get $exposedMethodName {
-    final retValuePtr = calloc<COMObject>();
-
-    final hr = ptr.ref.lpVtbl.value
+  String get ffiCall => '''
+    final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
       .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
+''';
+
+  String vectorPropertyDeclaration() => '''
+    List<String> get $exposedMethodName {
+    final retValuePtr = calloc<COMObject>();
+
+    $ffiCall
 
     try {
       return IVectorView<String>(retValuePtr).toList();
@@ -50,13 +54,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     Pointer<COMObject> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
-      .elementAt($vtableOffset)
-      .cast<Pointer<NativeFunction<$nativePrototype>>>()
-      .value
-      .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
+    $ffiCall
 
     return retValuePtr;
   }
@@ -67,13 +65,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       final retValuePtr = calloc<HSTRING>();
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           final retValue = retValuePtr.toDartString();
           return retValue;
@@ -89,13 +81,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<Uint64>();
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           return DateTime
             .utc(1601, 01, 01)
@@ -111,13 +97,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<Uint64>();
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           return Duration(microseconds: retValuePtr.value ~/ 10);
         } finally {
@@ -155,13 +135,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<${returnType.nativeType}>();
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           final retValue = retValuePtr.$valRef;
           return retValue;
