@@ -87,6 +87,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     import '../types.dart';
 
     import '../extensions/hstring_array.dart';
+    import 'ivector.dart';
     import 'ivectorview.dart';
   """;
 

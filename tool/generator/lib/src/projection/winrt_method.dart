@@ -10,17 +10,24 @@ class WinRTMethodProjection extends MethodProjection {
         .toList();
   }
 
-  bool get isPointerCOMObjectReturn =>
-      returnType.dartType == 'Pointer<COMObject>';
+  bool get isCOMObjectReturn => returnType.dartType == 'Pointer<COMObject>';
 
   bool get isVoidReturn => returnType.dartType == 'void';
+
+  bool get isStringReturn => returnType.isString;
+
+  bool get isDateTimeReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.DateTime';
+
+  bool get isTimeSpanReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
 
   @override
   String get dartParams => [
         'Pointer',
         ...parameters.map((param) => param.dartProjection),
         if (!isVoidReturn)
-          isPointerCOMObjectReturn
+          isCOMObjectReturn
               ? 'Pointer<COMObject>'
               : 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
@@ -30,7 +37,7 @@ class WinRTMethodProjection extends MethodProjection {
         'Pointer',
         ...parameters.map((param) => param.ffiProjection),
         if (!isVoidReturn)
-          isPointerCOMObjectReturn
+          isCOMObjectReturn
               ? 'Pointer<COMObject>'
               : 'Pointer<${returnType.nativeType}>',
       ].map((p) => '$p, ').join();
@@ -148,7 +155,7 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String toString() {
     try {
-      if (isPointerCOMObjectReturn) return pointerCOMObjectMethodDeclaration();
+      if (isCOMObjectReturn) return pointerCOMObjectMethodDeclaration();
       if (isVoidReturn) return voidMethodDeclaration();
       if (returnType.isString) return stringMethodDeclaration();
       if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {

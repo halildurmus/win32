@@ -6,25 +6,32 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   WinRTGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
-  bool get isVectorReturn =>
-      method.returnType.typeIdentifier.baseType ==
-          BaseType.genericTypeModifier &&
-      method.returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ==
-          true;
-
-  @override
-  bool get isPointerCOMObjectReturn =>
-      returnType.dartType == 'Pointer<COMObject>';
+  // Standard properties
 
   bool get convertBool => returnType.dartType == 'bool';
 
   @override
-  String get nativeParams => isPointerCOMObjectReturn
+  String get nativeParams => isCOMObjectReturn
       ? 'Pointer, Pointer<COMObject>,'
       : 'Pointer, Pointer<${returnType.nativeType}>,';
 
   @override
   String get dartParams => nativeParams;
+
+  // Matcher properties
+
+  bool get isVectorViewReturn =>
+      method.returnType.typeIdentifier.baseType ==
+          BaseType.genericTypeModifier &&
+      method.returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ==
+          true;
+
+  bool get isVectorReturn =>
+      method.returnType.typeIdentifier.baseType ==
+          BaseType.genericTypeModifier &&
+      method.returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
+
+  // Declaration String templates
 
   String get ffiCall => '''
     final hr = ptr.ref.vtable
@@ -36,7 +43,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     if (FAILED(hr)) throw WindowsException(hr);
 ''';
 
-  String vectorPropertyDeclaration() => '''
+  String vectorViewPropertyDeclaration() => '''
     List<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
@@ -50,7 +57,17 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   }
 ''';
 
-  String pointerCOMObjectPropertyDeclaration() => '''
+  String vectorPropertyDeclaration() => '''
+    IVector<String> get $exposedMethodName {
+    final retValuePtr = calloc<COMObject>();
+
+    $ffiCall
+
+    return IVector(retValuePtr);
+  }
+''';
+
+  String comObjectPropertyDeclaration() => '''
     Pointer<COMObject> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
@@ -106,31 +123,14 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
-  @override
-  String toString() {
-    try {
-      if (isVectorReturn) {
-        return vectorPropertyDeclaration();
-      }
-
-      if (isPointerCOMObjectReturn) {
-        return pointerCOMObjectPropertyDeclaration();
-      }
-      if (returnType.isString) return stringPropertyDeclaration();
-      if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {
-        return dateTimePropertyDeclaration();
-      }
-      if (returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan') {
-        return durationPropertyDeclaration();
-      }
-
-      final valRef = returnType.dartType == 'double' ||
-              returnType.dartType == 'int' ||
-              returnType.dartType == 'bool' ||
-              returnType.dartType.startsWith('Pointer')
-          ? 'value'
-          : 'ref';
-      return '''
+  String defaultPropertyDeclaration() {
+    final valRef = returnType.dartType == 'double' ||
+            returnType.dartType == 'int' ||
+            returnType.dartType == 'bool' ||
+            returnType.dartType.startsWith('Pointer')
+        ? 'value'
+        : 'ref';
+    return '''
       ${returnType.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnType.nativeType}>();
 
@@ -144,6 +144,19 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         }
       }
 ''';
+  }
+
+  @override
+  String toString() {
+    try {
+      if (isVectorViewReturn) return vectorViewPropertyDeclaration();
+      if (isVectorReturn) return vectorPropertyDeclaration();
+      if (isCOMObjectReturn) return comObjectPropertyDeclaration();
+      if (isStringReturn) return stringPropertyDeclaration();
+      if (isDateTimeReturn) return dateTimePropertyDeclaration();
+      if (isTimeSpanReturn) return durationPropertyDeclaration();
+
+      return defaultPropertyDeclaration();
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.

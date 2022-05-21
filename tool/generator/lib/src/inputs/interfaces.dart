@@ -104,9 +104,10 @@ const comInterfacesToGenerate = <String>{
 
 final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
-  'Windows.Foundation.IClosable',
-  'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
+  'Windows.Foundation.IClosable',
+  'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.Foundation.IStringable',
 
   // These types are generated manually by design:
   //   'Windows.Foundation.Collections.IVector`1',
@@ -124,7 +125,6 @@ final windowsRuntimeTypesToGenerate = <String>{
   //   'Windows.UI.Notifications.IToastNotificationFactory',
   //   'Windows.UI.Notifications.ToastNotification',
   //   'Windows.Storage.IUserDataPathsStatics',
-  //   'Windows.Storage.Pickers.IFileOpenPicker',
-  //   'Windows.Gaming.Input.IGamepadStatics',
+  // 'Windows.Gaming.Input.IGamepadStatics',
   //   'Windows.Gaming.Input.IGamepadStatics2',
 };

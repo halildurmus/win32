@@ -26,6 +26,7 @@ import '../winrt_helpers.dart';
 import '../types.dart';
 
 import '../extensions/hstring_array.dart';
+import 'ivector.dart';
 import 'ivectorview.dart';
 
 import '../com/iinspectable.dart';

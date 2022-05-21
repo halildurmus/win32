@@ -1,5 +1,7 @@
 // IFileOpenPicker.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
 // ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
@@ -8,7 +10,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../callbacks.dart';
 import '../combase.dart';
 import '../constants.dart';
@@ -18,11 +19,17 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../structs.g.dart';
-import '../types.dart';
 import '../utils.dart';
+
+import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../winrt_helpers.dart';
-import '../com/iinspectable.dart';
+import '../types.dart';
+
+import '../extensions/hstring_array.dart';
 import 'ivector.dart';
+import 'ivectorview.dart';
+
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
@@ -30,17 +37,14 @@ const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 /// {@category Interface}
 /// {@category winrt}
 class IFileOpenPicker extends IInspectable {
-  final Allocator allocator;
-
   // vtable begins at 6, is 11 entries long.
-  IFileOpenPicker(Pointer<COMObject> ptr, {this.allocator = calloc})
-      : super(ptr);
+  IFileOpenPicker(Pointer<COMObject> ptr) : super(ptr);
 
   int get ViewMode {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -89,7 +93,7 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -145,7 +149,7 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -194,7 +198,7 @@ class IFileOpenPicker extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -247,9 +251,9 @@ class IFileOpenPicker extends IInspectable {
   }
 
   IVector<String> get FileTypeFilter {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<
             Pointer<
@@ -267,7 +271,7 @@ class IFileOpenPicker extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVector(retValuePtr, allocator: allocator);
+    return IVector(retValuePtr);
   }
 
   Pointer<COMObject> PickSingleFileAsync() {
