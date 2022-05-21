@@ -257,6 +257,8 @@ export 'src/winrt/icalendar.dart';
 export 'src/winrt/ifileopenpicker.dart';
 export 'src/winrt/ihostname.dart';
 export 'src/winrt/inetworkinformationstatics.dart';
+export 'src/winrt/iphonenumberformatter.dart';
+export 'src/winrt/iphonenumberformatterstatics.dart';
 export 'src/winrt/ipropertyvalue.dart';
 export 'src/winrt/itoastnotificationfactory.dart';
 export 'src/winrt/itoastnotificationmanagerstatics.dart';
