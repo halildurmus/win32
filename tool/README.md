@@ -12,19 +12,26 @@ The metadata is extracted and parsed using the separate winmd package:
 
 Not every API is projected.
 
-- For Win32 APIs, the JSON file in the `inputs` directory is used to
-  determine which APIs to project.
-- For COM and WinRT APIs, the Dart files in the `inputs` directory explicitly
-  name the types that should be projected.
+- For Win32 APIs, the JSON file in the `generator\lib\src\inputs` directory is
+  used to determine which APIs to project.
+- For COM and WinRT APIs, the Dart files in the `generator\lib\src\inputs`
+  directory explicitly name the types that should be projected.
 
-During the build process, you should call `generate.cmd` to instantiate these
-types and generate the classes from them.
+During the build process, you should call `generate.cmd` from the project root
+to instantiate these types and generate the classes from them, for example:
+
+```terminal
+C:\src\win32> tool\generate.cmd
+```
+
+This tool will also test both the generation library and the generated output
+with unit tests.
 
 # Other utilities
 
 This folder also includes a few other small utilities of limited usefulness.
 
 - `build.cmd`. Generates EXE files for some of the Dart samples.
-- `struct_sizes.cpp`. Measures the size of structs in structs.dart on both
-  32-bit and 64-bit architectures so the appropriate unit tests can be
+- `struct_sizes\struct_sizes.cpp`. Measures the size of structs in structs.dart
+  on both 32-bit and 64-bit architectures so the appropriate unit tests can be
   generated.
