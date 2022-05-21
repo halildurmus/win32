@@ -219,6 +219,7 @@ export 'src/com/ishellitem.dart';
 export 'src/com/ishellitem2.dart';
 export 'src/com/ishellitemarray.dart';
 export 'src/com/ishellitemfilter.dart';
+export 'src/com/ishellitemimagefactory.dart';
 export 'src/com/ishellitemresources.dart';
 export 'src/com/ishelllink.dart';
 export 'src/com/ishelllinkdatalist.dart';

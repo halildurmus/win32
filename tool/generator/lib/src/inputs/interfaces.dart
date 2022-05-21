@@ -94,6 +94,7 @@ const comInterfacesToGenerate = <String>{
   'Windows.Win32.UI.Shell.IShellItem2',
   'Windows.Win32.UI.Shell.IShellItemArray',
   'Windows.Win32.UI.Shell.IShellItemFilter',
+  'Windows.Win32.UI.Shell.IShellItemImageFactory',
   'Windows.Win32.UI.Shell.IShellItemResources',
   'Windows.Win32.UI.Shell.IShellLinkDataList',
   'Windows.Win32.UI.Shell.IShellLinkDual',
