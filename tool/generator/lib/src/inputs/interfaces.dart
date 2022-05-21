@@ -109,6 +109,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Gaming.Input.IGamepadStatics2',
   'Windows.Globalization.ICalendar',
   'Windows.Networking.IHostName',
+  'Windows.Storage.IUserDataPathsStatics',
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
@@ -121,10 +122,11 @@ final windowsRuntimeTypesToGenerate = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
   // 'Windows.Foundation.IAsyncAction',
-  //   'Windows.Foundation.IAsyncOperation`1',
-  //   'Windows.Foundation.IPropertyValue',
-  //   'Windows.Networking.Connectivity.INetworkInformationStatics',
-  //   'Windows.UI.Notifications.ToastNotification',
-  //   'Windows.Storage.IUserDataPathsStatics',
+  // 'Windows.Foundation.IAsyncOperation`1',
+  // 'Windows.Foundation.IPropertyValue',
+  // 'Windows.UI.Notifications.ToastNotification',
+
+  // Requires WinRT event support
+  // 'Windows.Networking.Connectivity.INetworkInformationStatics',
   // 'Windows.Gaming.Input.IGamepadStatics',
 };

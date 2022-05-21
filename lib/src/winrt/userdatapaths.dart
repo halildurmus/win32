@@ -11,13 +11,13 @@ import 'package:ffi/ffi.dart';
 import '../api_ms_win_core_winrt_l1_1_0.dart';
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../com/iinspectable.dart';
-import '../com/iuserdatapathsstatics.dart';
 import '../combase.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../utils.dart';
 import '../winrt_helpers.dart';
+import '../winrt/iuserdatapathsstatics.dart';
 
 const _className = 'Windows.Storage.UserDataPaths';
 
@@ -422,13 +422,13 @@ class UserDataPaths extends IInspectable {
     final userDataDefaults = calloc<COMObject>();
 
     try {
-      var hr =
+      final hr =
           RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
       final userDataStatics = IUserDataPathsStatics(activationFactory);
-      hr = userDataStatics.GetForUser(user, userDataDefaults.cast());
+      final userDataDefaults = userDataStatics.GetForUser(user.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
@@ -449,13 +449,13 @@ class UserDataPaths extends IInspectable {
     final userDataDefaults = calloc<COMObject>();
 
     try {
-      var hr =
+      final hr =
           RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
       final userDataStatics = IUserDataPathsStatics(activationFactory);
-      hr = userDataStatics.GetDefault(userDataDefaults.cast());
+      final userDataDefaults = userDataStatics.GetDefault();
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
