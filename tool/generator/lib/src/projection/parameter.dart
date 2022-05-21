@@ -19,5 +19,8 @@ class ParameterProjection {
   String get dartProjection =>
       '${safeTypenameForString(type.dartType)} ${safeIdentifierForString(name)}';
 
+  String get paramProjection =>
+      '${safeTypenameForString(type.methodParamType)} ${safeIdentifierForString(name)}';
+
   String get identifier => safeIdentifierForString(name);
 }

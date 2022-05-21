@@ -39,19 +39,23 @@ class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IClosable(Pointer<COMObject> ptr) : super(ptr);
 
-  void Close() => ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+  void Close() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(6)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 }

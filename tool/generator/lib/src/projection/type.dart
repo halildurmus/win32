@@ -4,11 +4,20 @@ import '../shared/win32_typemap.dart';
 import 'utils.dart';
 
 class TypeTuple {
+  /// The type, as represented in the native function (e.g. `Uint64`)
   final String nativeType;
-  final String dartType;
-  final String attribute;
 
-  const TypeTuple(this.nativeType, this.dartType, {this.attribute = ''});
+  /// The type, as represented in the Dart function (e.g. `int`)
+  final String dartType;
+
+  /// The type, as represented as a struct attribute (e.g. `@Uint64()`)
+  final String? attribute;
+
+  /// The type, as represented in a method declaration prior to conversion (e.g. `DateTime`)
+  final String? methodParamType;
+
+  const TypeTuple(this.nativeType, this.dartType,
+      {this.attribute, this.methodParamType});
 }
 
 const Map<BaseType, TypeTuple> baseNativeMapping = {
@@ -46,8 +55,8 @@ const Map<String, TypeTuple> specialTypes = {
       TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
   'Windows.Foundation.Collections.IVectorView`1':
       TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>'),
-  'Windows.Foundation.DateTime':
-      TypeTuple('Uint64', 'int', attribute: '@Uint64()'),
+  'Windows.Foundation.DateTime': TypeTuple('Uint64', 'int',
+      attribute: '@Uint64()', methodParamType: 'DateTime'),
   'Windows.Foundation.HResult':
       TypeTuple('Int32', 'int', attribute: '@Int32()'),
   'Windows.Foundation.TimeSpan':
@@ -66,9 +75,11 @@ class TypeProjection {
 
   TypeProjection(this.typeIdentifier);
 
-  String get attribute => projection.attribute;
+  String get attribute => projection.attribute ?? '';
   String get nativeType => projection.nativeType;
   String get dartType => projection.dartType;
+  String get methodParamType =>
+      projection.methodParamType ?? projection.dartType;
   int? get arrayUpperBound => typeIdentifier.arrayDimensions?.first;
 
   /// Is the resultant Dart type atomic?

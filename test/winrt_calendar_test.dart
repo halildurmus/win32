@@ -220,6 +220,14 @@ void main() {
       expect(calendar.NumberOfSecondsInThisMinute, closeTo(60, 1));
     });
 
+    test('Calendar resolved language', () {
+      final resolvedLanguage = calendar.ResolvedLanguage;
+
+      // Should be something like en-US
+      expect(resolvedLanguage[2], equals('-'));
+      expect(resolvedLanguage.length, equals(5));
+    });
+
     test('Calendar number of years in this era', () {
       final japaneseCalendar = convertToHString('JapaneseCalendar');
       calendar
@@ -253,13 +261,6 @@ void main() {
       final gregorianCalendar = convertToHString('GregorianCalendar');
       calendar.ChangeCalendarSystem(gregorianCalendar);
       expect(calendar.Year, greaterThanOrEqualTo(2021));
-      WindowsDeleteString(gregorianCalendar);
-    });
-
-    test('Calendar era name', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
-      expect(calendar.EraAsFullString(), equals('A.D.'));
       WindowsDeleteString(gregorianCalendar);
     });
 
@@ -299,7 +300,7 @@ void main() {
       expect(calendar2.Year, equals(calendar.Year));
     });
 
-    test('Add and delete days', () {
+    test('Compare equality', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(1)
@@ -308,7 +309,7 @@ void main() {
       expect(compare, isZero);
     });
 
-    test('Add and delete days 2', () {
+    test('Compare positive', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(2)
@@ -317,13 +318,43 @@ void main() {
       expect(compare, isPositive);
     });
 
-    test('Add and delete days 3', () {
+    test('Compare negative', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(2)
         ..AddDays(-3);
       final compare = calendar.Compare(original);
       expect(compare, isNegative);
+    });
+
+    test('Get date / time', () {
+      final winrtDate = calendar.GetDateTime();
+      final dartDate = DateTime.now().toUtc();
+
+      expect(winrtDate.year, equals(dartDate.year));
+      expect(winrtDate.month, equals(dartDate.month));
+      expect(winrtDate.day, equals(dartDate.day));
+      expect(winrtDate.hour, equals(dartDate.hour));
+      expect(winrtDate.minute, equals(dartDate.minute));
+      expect(winrtDate.second, closeTo(dartDate.second, 2)); // allow flex
+    });
+
+    test('Set date / time', () {
+      final dartDate = DateTime.utc(2017, 9, 7, 17, 30);
+      calendar.SetDateTime(dartDate);
+      final winrtDate = calendar.GetDateTime();
+      expect(winrtDate.year, equals(2017));
+      expect(winrtDate.month, equals(9));
+      expect(winrtDate.day, equals(7));
+      expect(winrtDate.hour, equals(17));
+      expect(winrtDate.minute, equals(30));
+    });
+
+    test('Calendar era name', () {
+      final gregorianCalendar = convertToHString('GregorianCalendar');
+      calendar.ChangeCalendarSystem(gregorianCalendar);
+      expect(calendar.EraAsFullString(), equals('A.D.'));
+      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar month as string', () {
@@ -372,14 +403,6 @@ void main() {
               'Dec'
             ]));
       }
-    });
-
-    test('Calendar resolved language', () {
-      final resolvedLanguage = calendar.ResolvedLanguage;
-
-      // Should be something like en-US
-      expect(resolvedLanguage[2], equals('-'));
-      expect(resolvedLanguage.length, equals(5));
     });
 
     tearDown(() {
