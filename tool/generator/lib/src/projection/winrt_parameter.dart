@@ -11,6 +11,10 @@ class WinRTParameterProjection extends ParameterProjection {
       return 'final ${name}DateTime = $name.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;';
     }
 
+    if (type.typeIdentifier.name == 'Windows.Foundation.TimeSpan') {
+      return 'final ${name}Duration = $name.inMicroseconds * 10';
+    }
+
     return '';
   }
 
