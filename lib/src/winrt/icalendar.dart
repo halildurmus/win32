@@ -43,7 +43,7 @@ class ICalendar extends IInspectable {
   Pointer<COMObject> Clone() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<
             Pointer<
@@ -68,7 +68,7 @@ class ICalendar extends IInspectable {
   }
 
   void SetToMin() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
             Pointer<
@@ -88,7 +88,7 @@ class ICalendar extends IInspectable {
   }
 
   void SetToMax() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<
             Pointer<
@@ -169,7 +169,7 @@ class ICalendar extends IInspectable {
     final hstr = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -195,7 +195,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -229,7 +229,7 @@ class ICalendar extends IInspectable {
   ) {
     final valueHstring = convertToHString(value);
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(13)
         .cast<
             Pointer<
@@ -257,7 +257,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
@@ -291,7 +291,7 @@ class ICalendar extends IInspectable {
   ) {
     final valueHstring = convertToHString(value);
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<
             Pointer<
@@ -319,7 +319,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<Uint64>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(16)
           .cast<
               Pointer<
@@ -353,7 +353,7 @@ class ICalendar extends IInspectable {
     final valueDateTime =
         value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(17)
         .cast<
             Pointer<
@@ -376,7 +376,7 @@ class ICalendar extends IInspectable {
   }
 
   void SetToNow() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(18)
         .cast<
             Pointer<
@@ -512,7 +512,7 @@ class ICalendar extends IInspectable {
   }
 
   set Era(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(23)
         .cast<
             Pointer<
@@ -534,7 +534,7 @@ class ICalendar extends IInspectable {
   void AddEras(
     int eras,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(24)
         .cast<
             Pointer<
@@ -560,7 +560,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(25)
           .cast<
               Pointer<
@@ -595,7 +595,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(26)
           .cast<
               Pointer<
@@ -744,7 +744,7 @@ class ICalendar extends IInspectable {
   }
 
   set Year(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(31)
         .cast<
             Pointer<
@@ -766,7 +766,7 @@ class ICalendar extends IInspectable {
   void AddYears(
     int years,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(32)
         .cast<
             Pointer<
@@ -792,7 +792,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(33)
           .cast<
               Pointer<
@@ -827,7 +827,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(34)
           .cast<
               Pointer<
@@ -865,7 +865,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(35)
           .cast<
               Pointer<
@@ -1014,7 +1014,7 @@ class ICalendar extends IInspectable {
   }
 
   set Month(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(40)
         .cast<
             Pointer<
@@ -1036,7 +1036,7 @@ class ICalendar extends IInspectable {
   void AddMonths(
     int months,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(41)
         .cast<
             Pointer<
@@ -1062,7 +1062,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(42)
           .cast<
               Pointer<
@@ -1097,7 +1097,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(43)
           .cast<
               Pointer<
@@ -1133,7 +1133,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(44)
           .cast<
               Pointer<
@@ -1168,7 +1168,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(45)
           .cast<
               Pointer<
@@ -1204,7 +1204,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(46)
           .cast<
               Pointer<
@@ -1239,7 +1239,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(47)
           .cast<
               Pointer<
@@ -1274,7 +1274,7 @@ class ICalendar extends IInspectable {
   void AddWeeks(
     int weeks,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(48)
         .cast<
             Pointer<
@@ -1413,7 +1413,7 @@ class ICalendar extends IInspectable {
   }
 
   set Day(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(53)
         .cast<
             Pointer<
@@ -1435,7 +1435,7 @@ class ICalendar extends IInspectable {
   void AddDays(
     int days,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(54)
         .cast<
             Pointer<
@@ -1461,7 +1461,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(55)
           .cast<
               Pointer<
@@ -1496,7 +1496,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(56)
           .cast<
               Pointer<
@@ -1561,7 +1561,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(58)
           .cast<
               Pointer<
@@ -1596,7 +1596,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(59)
           .cast<
               Pointer<
@@ -1632,7 +1632,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(60)
           .cast<
               Pointer<
@@ -1667,7 +1667,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(61)
           .cast<
               Pointer<
@@ -1816,7 +1816,7 @@ class ICalendar extends IInspectable {
   }
 
   set Period(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(66)
         .cast<
             Pointer<
@@ -1838,7 +1838,7 @@ class ICalendar extends IInspectable {
   void AddPeriods(
     int periods,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(67)
         .cast<
             Pointer<
@@ -1864,7 +1864,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(68)
           .cast<
               Pointer<
@@ -1899,7 +1899,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(69)
           .cast<
               Pointer<
@@ -2048,7 +2048,7 @@ class ICalendar extends IInspectable {
   }
 
   set Hour(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(74)
         .cast<
             Pointer<
@@ -2070,7 +2070,7 @@ class ICalendar extends IInspectable {
   void AddHours(
     int hours,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(75)
         .cast<
             Pointer<
@@ -2096,7 +2096,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(76)
           .cast<
               Pointer<
@@ -2131,7 +2131,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(77)
           .cast<
               Pointer<
@@ -2193,7 +2193,7 @@ class ICalendar extends IInspectable {
   }
 
   set Minute(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(79)
         .cast<
             Pointer<
@@ -2215,7 +2215,7 @@ class ICalendar extends IInspectable {
   void AddMinutes(
     int minutes,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(80)
         .cast<
             Pointer<
@@ -2241,7 +2241,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(81)
           .cast<
               Pointer<
@@ -2276,7 +2276,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(82)
           .cast<
               Pointer<
@@ -2338,7 +2338,7 @@ class ICalendar extends IInspectable {
   }
 
   set Second(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(84)
         .cast<
             Pointer<
@@ -2360,7 +2360,7 @@ class ICalendar extends IInspectable {
   void AddSeconds(
     int seconds,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(85)
         .cast<
             Pointer<
@@ -2386,7 +2386,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(86)
           .cast<
               Pointer<
@@ -2421,7 +2421,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(87)
           .cast<
               Pointer<
@@ -2483,7 +2483,7 @@ class ICalendar extends IInspectable {
   }
 
   set Nanosecond(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(89)
         .cast<
             Pointer<
@@ -2505,7 +2505,7 @@ class ICalendar extends IInspectable {
   void AddNanoseconds(
     int nanoseconds,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(90)
         .cast<
             Pointer<
@@ -2531,7 +2531,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(91)
           .cast<
               Pointer<
@@ -2566,7 +2566,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(92)
           .cast<
               Pointer<
@@ -2604,7 +2604,7 @@ class ICalendar extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(93)
           .cast<
               Pointer<
@@ -2643,7 +2643,7 @@ class ICalendar extends IInspectable {
         other.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(94)
           .cast<
               Pointer<
@@ -2677,7 +2677,7 @@ class ICalendar extends IInspectable {
   void CopyTo(
     Pointer<COMObject> other,
   ) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(95)
         .cast<
             Pointer<

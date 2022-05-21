@@ -128,7 +128,7 @@ class IAsyncInfo extends IInspectable {
   }
 
   void Cancel() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<
             Pointer<
@@ -148,7 +148,7 @@ class IAsyncInfo extends IInspectable {
   }
 
   void Close() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
             Pointer<

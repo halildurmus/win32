@@ -21,18 +21,24 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   // TODO: comObjectDeclaration
 
   @override
+  String ffiCall([String params = '']) => '''
+          final hr = ptr.ref.vtable
+            .elementAt($vtableOffset)
+            .cast<Pointer<NativeFunction<$nativePrototype>>>()
+            .value
+            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $params);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+  ''';
+
+  @override
   String stringDeclaration() => '''
       set $exposedMethodName(String value) {
       final hstr = convertToHString(value);
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, hstr);
+          ${ffiCall('hstr')}
 
-          if (FAILED(hr)) throw WindowsException(hr);
         } finally {
           WindowsDeleteString(hstr);
         }
@@ -45,13 +51,7 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
         final dateTimeOffset =
           value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
         
-        final hr = ptr.ref.lpVtbl.value
-          .elementAt($vtableOffset)
-          .cast<Pointer<NativeFunction<$nativePrototype>>>()
-          .value
-          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, dateTimeOffset);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+        ${ffiCall('dateTimeOffset')}
       }
 ''';
 
@@ -60,26 +60,14 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       set $exposedMethodName(Duration value) {
         final duration = value.inMicroseconds * 10;
         
-        final hr = ptr.ref.lpVtbl.value
-          .elementAt($vtableOffset)
-          .cast<Pointer<NativeFunction<$nativePrototype>>>()
-          .value
-          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, duration);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+        ${ffiCall('duration')}
       }
 ''';
 
   @override
   String defaultDeclaration() => '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {
-        final hr = ptr.ref.lpVtbl.value
-          .elementAt($vtableOffset)
-          .cast<Pointer<NativeFunction<$nativePrototype>>>()
-          .value
-          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, value);
-
-      if (FAILED(hr)) throw WindowsException(hr);
+        ${ffiCall('value')}
     }
   ''';
 

@@ -25,6 +25,10 @@ import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../winrt_helpers.dart';
 import '../types.dart';
 
+import '../extensions/hstring_array.dart';
+import 'ivector.dart';
+import 'ivectorview.dart';
+
 import '../com/iinspectable.dart';
 
 /// @nodoc
@@ -39,7 +43,7 @@ class IHostName extends IInspectable {
   Pointer<COMObject> get IPInformation {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<
             Pointer<
@@ -64,7 +68,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -94,7 +98,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -124,7 +128,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -154,7 +158,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -185,7 +189,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<Bool>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<

@@ -41,7 +41,7 @@ class IClosable extends IInspectable {
   IClosable(Pointer<COMObject> ptr) : super(ptr);
 
   void Close() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<
             Pointer<

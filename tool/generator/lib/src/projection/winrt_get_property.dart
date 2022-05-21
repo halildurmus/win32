@@ -19,7 +19,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   // Declaration String templates
 
   @override
-  String get ffiCall => '''
+  String ffiCall([String params = '']) => '''
     final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
@@ -34,7 +34,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     List<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
-    $ffiCall
+    ${ffiCall()}
 
     try {
       return IVectorView<String>(retValuePtr).toList();
@@ -49,7 +49,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     IVector<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
-    $ffiCall
+    ${ffiCall()}
 
     return IVector(retValuePtr);
   }
@@ -60,7 +60,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     Pointer<COMObject> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
 
-    $ffiCall
+    ${ffiCall()}
 
     return retValuePtr;
   }
@@ -72,7 +72,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       final retValuePtr = calloc<HSTRING>();
 
         try {
-          $ffiCall
+          ${ffiCall()}
 
           final retValue = retValuePtr.toDartString();
           return retValue;
@@ -89,7 +89,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<Uint64>();
 
         try {
-          $ffiCall
+          ${ffiCall()}
 
           return DateTime
             .utc(1601, 01, 01)
@@ -106,7 +106,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<Uint64>();
 
         try {
-          $ffiCall
+          ${ffiCall()}
 
           return Duration(microseconds: retValuePtr.value ~/ 10);
         } finally {
@@ -128,7 +128,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         final retValuePtr = calloc<${returnType.nativeType}>();
 
         try {
-          $ffiCall
+          ${ffiCall()}
 
           final retValue = retValuePtr.$valRef;
           return retValue;

@@ -84,8 +84,8 @@ class WinRTMethodProjection extends MethodProjection {
 
   // Declaration String templates
 
-  String get ffiCall => '''
-    final hr = ptr.ref.lpVtbl.value
+  String ffiCall([String params = '']) => '''
+    final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
@@ -99,7 +99,7 @@ class WinRTMethodProjection extends MethodProjection {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
 
-    $ffiCall
+    ${ffiCall()}
 
     try {
       return IVectorView<String>(retValuePtr).toList();
@@ -114,7 +114,7 @@ class WinRTMethodProjection extends MethodProjection {
     IVector<String> get $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
-    $ffiCall
+    ${ffiCall()}
     $parametersPostamble
     return IVector(retValuePtr);
   }
@@ -124,7 +124,7 @@ class WinRTMethodProjection extends MethodProjection {
     Pointer<COMObject> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     
-    $ffiCall
+    ${ffiCall()}
 
     return retValuePtr;
   }
@@ -134,8 +134,8 @@ class WinRTMethodProjection extends MethodProjection {
   void $name($methodParams) {
     $parametersPreamble
     
-    $ffiCall
-    
+    ${ffiCall()}
+  
     $parametersPostamble
     }
 ''';
@@ -146,7 +146,7 @@ class WinRTMethodProjection extends MethodProjection {
         $parametersPreamble 
 
         try {
-          $ffiCall
+          ${ffiCall()}
 
           final retValue = retValuePtr.toDartString();
           return retValue;
@@ -170,7 +170,7 @@ class WinRTMethodProjection extends MethodProjection {
         $parametersPreamble
         
         try {
-          $ffiCall
+          ${ffiCall()}
 
           return DateTime
             .utc(1601, 01, 01)
@@ -188,7 +188,7 @@ class WinRTMethodProjection extends MethodProjection {
         $parametersPreamble
         
         try {
-          $ffiCall
+          ${ffiCall()}
 
           return Duration(microseconds: retValuePtr.value ~/ 10);
         } finally {
@@ -212,7 +212,7 @@ class WinRTMethodProjection extends MethodProjection {
         $parametersPreamble
   
         try {
-          $ffiCall
+          ${ffiCall()}
 
           final retValue = retValuePtr.$valRef;
           return retValue;

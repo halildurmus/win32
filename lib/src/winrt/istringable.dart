@@ -44,7 +44,7 @@ class IStringable extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

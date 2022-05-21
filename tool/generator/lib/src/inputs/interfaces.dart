@@ -104,10 +104,14 @@ const comInterfacesToGenerate = <String>{
 
 final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
-  'Windows.Globalization.ICalendar',
   'Windows.Foundation.IClosable',
-  'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Foundation.IStringable',
+  'Windows.Gaming.Input.IGamepadStatics2',
+  'Windows.Globalization.ICalendar',
+  'Windows.Networking.IHostName',
+  'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.UI.Notifications.IToastNotificationFactory',
+  'Windows.UI.Notifications.IToastNotificationManagerStatics',
 
   // These types are generated manually by design:
   //   'Windows.Foundation.Collections.IVector`1',
@@ -116,15 +120,11 @@ final windowsRuntimeTypesToGenerate = <String>{
   // TODO: These types are currently being generated manually. The goal is to
   // generate them automatically after making appropriate changes to the
   // generation script:
-  //   'Windows.Foundation.IAsyncAction',
+  // 'Windows.Foundation.IAsyncAction',
   //   'Windows.Foundation.IAsyncOperation`1',
   //   'Windows.Foundation.IPropertyValue',
   //   'Windows.Networking.Connectivity.INetworkInformationStatics',
-  //   'Windows.Networking.IHostName',
-  //   'Windows.UI.Notifications.IToastNotificationManagerStatics',
-  //   'Windows.UI.Notifications.IToastNotificationFactory',
   //   'Windows.UI.Notifications.ToastNotification',
   //   'Windows.Storage.IUserDataPathsStatics',
   // 'Windows.Gaming.Input.IGamepadStatics',
-  //   'Windows.Gaming.Input.IGamepadStatics2',
 };

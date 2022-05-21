@@ -70,7 +70,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set ViewMode(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
             Pointer<
@@ -123,7 +123,7 @@ class IFileOpenPicker extends IInspectable {
     final hstr = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -175,7 +175,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   set SuggestedStartLocation(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<
             Pointer<
@@ -228,7 +228,7 @@ class IFileOpenPicker extends IInspectable {
     final hstr = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -277,7 +277,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickSingleFileAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<
             Pointer<
@@ -304,7 +304,7 @@ class IFileOpenPicker extends IInspectable {
   Pointer<COMObject> PickMultipleFilesAsync() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(16)
         .cast<
             Pointer<
