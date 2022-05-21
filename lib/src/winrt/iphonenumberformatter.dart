@@ -36,15 +36,15 @@ const IID_IPhoneNumberFormatter = '{1556B49E-BAD4-4B4A-900D-4407ADB7C981}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IPhoneNumberFormatter extends IInspectable {
-  // vtable begins at 6, is 5 entries long.
-  IPhoneNumberFormatter(Pointer<COMObject> ptr) : super(ptr);
+mixin IPhoneNumberFormatter on IInspectable {
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IPhoneNumberFormatter);
 
   String Format(Pointer<COMObject> number) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -71,7 +71,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -99,7 +99,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -126,7 +126,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -153,7 +153,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<

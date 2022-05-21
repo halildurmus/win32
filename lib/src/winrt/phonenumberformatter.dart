@@ -36,8 +36,9 @@ import '../com/iinspectable.dart';
 
 /// {@category Interface}
 /// {@category winrt}
-class PhoneNumberFormatter extends IPhoneNumberFormatter {
-  PhoneNumberFormatter(super.ptr);
+class PhoneNumberFormatter extends IInspectable with IPhoneNumberFormatter {
+  PhoneNumberFormatter() : super(ActivateClass(_className));
+  PhoneNumberFormatter.fromPointer(super.ptr);
 
   static const _className =
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
@@ -60,7 +61,7 @@ class PhoneNumberFormatter extends IPhoneNumberFormatter {
       if (FAILED(hr)) {
         throw WindowsException(hr);
       }
-      return PhoneNumberFormatter(phoneNumberFormatter);
+      return PhoneNumberFormatter.fromPointer(phoneNumberFormatter);
     } finally {
       WindowsDeleteString(hClassName);
       free(pIID);

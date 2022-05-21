@@ -1,7 +1,6 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
-import 'package:win32/src/winrt/phonenumberformatter.dart';
 import 'package:win32/win32.dart';
 
 // Test the WinRT phone number formatter object to make sure overrides,
@@ -9,15 +8,11 @@ import 'package:win32/win32.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    late IPhoneNumberFormatter formatter;
+    late PhoneNumberFormatter formatter;
 
     setUp(() {
       winrtInitialize();
-
-      final object = CreateObject(
-          'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
-          IID_IPhoneNumberFormatter);
-      formatter = IPhoneNumberFormatter(object);
+      formatter = PhoneNumberFormatter();
     });
 
     test('Formatter is a materialized object', () {
