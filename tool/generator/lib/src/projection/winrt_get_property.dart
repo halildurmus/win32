@@ -6,33 +6,19 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   WinRTGetPropertyProjection(Method method, int vtableOffset)
       : super(method, vtableOffset);
 
-  // Standard properties
+  // WinRTPropertyProjection overrides
 
-  bool get convertBool => returnType.dartType == 'bool';
+  @override
+  String get dartParams => nativeParams;
 
   @override
   String get nativeParams => isCOMObjectReturn
       ? 'Pointer, Pointer<COMObject>,'
       : 'Pointer, Pointer<${returnType.nativeType}>,';
 
-  @override
-  String get dartParams => nativeParams;
-
-  // Matcher properties
-
-  bool get isVectorViewReturn =>
-      method.returnType.typeIdentifier.baseType ==
-          BaseType.genericTypeModifier &&
-      method.returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ==
-          true;
-
-  bool get isVectorReturn =>
-      method.returnType.typeIdentifier.baseType ==
-          BaseType.genericTypeModifier &&
-      method.returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
-
   // Declaration String templates
 
+  @override
   String get ffiCall => '''
     final hr = ptr.ref.vtable
       .elementAt($vtableOffset)

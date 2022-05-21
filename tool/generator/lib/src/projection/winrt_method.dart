@@ -1,3 +1,5 @@
+import 'package:winmd/winmd.dart';
+
 import 'method.dart';
 import 'type.dart';
 import 'winrt_parameter.dart';
@@ -10,17 +12,7 @@ class WinRTMethodProjection extends MethodProjection {
         .toList();
   }
 
-  bool get isCOMObjectReturn => returnType.dartType == 'Pointer<COMObject>';
-
-  bool get isVoidReturn => returnType.dartType == 'void';
-
-  bool get isStringReturn => returnType.isString;
-
-  bool get isDateTimeReturn =>
-      returnType.typeIdentifier.name == 'Windows.Foundation.DateTime';
-
-  bool get isTimeSpanReturn =>
-      returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
+  // MethodProjection overrides
 
   @override
   String get dartParams => [
@@ -58,6 +50,30 @@ class WinRTMethodProjection extends MethodProjection {
         if (!isVoidReturn) 'retValuePtr',
       ].map((p) => '$p, ').join();
 
+  // Matcher properties
+
+  bool get isBooleanReturn => returnType.dartType == 'bool';
+
+  bool get isCOMObjectReturn => returnType.dartType == 'Pointer<COMObject>';
+
+  bool get isVoidReturn => returnType.dartType == 'void';
+
+  bool get isStringReturn => returnType.isString;
+
+  bool get isDateTimeReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.DateTime';
+
+  bool get isTimeSpanReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
+
+  bool get isVectorViewReturn =>
+      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') == true;
+
+  bool get isVectorReturn =>
+      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
+
   String get parametersPreamble => parameters
       .map((param) => (param as WinRTParameterProjection).preamble)
       .join('\n');
@@ -66,10 +82,9 @@ class WinRTMethodProjection extends MethodProjection {
       .map((param) => (param as WinRTParameterProjection).postamble)
       .join('\n');
 
-  String pointerCOMObjectMethodDeclaration() => '''
-    Pointer<COMObject> $name($methodParams) {
-    final retValuePtr = calloc<COMObject>();
+  // Declaration String templates
 
+  String get ffiCall => '''
     final hr = ptr.ref.lpVtbl.value
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
@@ -77,40 +92,61 @@ class WinRTMethodProjection extends MethodProjection {
       .asFunction<$dartPrototype>()($identifiers);
 
     if (FAILED(hr)) throw WindowsException(hr);
+  ''';
+
+  String vectorViewDeclaration() => '''
+    List<String> get $name($methodParams) {
+    final retValuePtr = calloc<COMObject>();
+    $parametersPreamble
+
+    $ffiCall
+
+    try {
+      return IVectorView<String>(retValuePtr).toList();
+    } finally {
+      $parametersPostamble
+      free(retValuePtr);
+    }
+  }
+''';
+
+  String vectorDeclaration() => '''
+    IVector<String> get $name($methodParams) {
+    final retValuePtr = calloc<COMObject>();
+    $parametersPreamble
+    $ffiCall
+    $parametersPostamble
+    return IVector(retValuePtr);
+  }
+''';
+
+  String comObjectDeclaration() => '''
+    Pointer<COMObject> $name($methodParams) {
+    final retValuePtr = calloc<COMObject>();
+    
+    $ffiCall
 
     return retValuePtr;
   }
 ''';
 
-  String voidMethodDeclaration() => '''
+  String voidDeclaration() => '''
   void $name($methodParams) {
     $parametersPreamble
-
-    final hr = ptr.ref.lpVtbl.value
-      .elementAt($vtableOffset)
-      .cast<Pointer<NativeFunction<$nativePrototype>>>()
-      .value
-      .asFunction<$dartPrototype>()($identifiers);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      $parametersPostamble
+    
+    $ffiCall
+    
+    $parametersPostamble
     }
 ''';
 
-  String stringMethodDeclaration() => '''
+  String stringDeclaration() => '''
       String $name($methodParams) {
         final retValuePtr = calloc<HSTRING>();
         $parametersPreamble 
 
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()($identifiers);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           final retValue = retValuePtr.toDartString();
           return retValue;
@@ -128,19 +164,13 @@ class WinRTMethodProjection extends MethodProjection {
   /// represents a point in time as the number of 100-nanosecond intervals prior
   /// to or after midnight on January 1, 1601 (according to the Gregorian
   /// Calendar).
-  String dateTimeMethodDeclaration() => '''
+  String dateTimeDeclaration() => '''
       DateTime $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
         $parametersPreamble
         
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()($identifiers);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           return DateTime
             .utc(1601, 01, 01)
@@ -152,36 +182,37 @@ class WinRTMethodProjection extends MethodProjection {
       }
 ''';
 
-  @override
-  String toString() {
-    try {
-      if (isCOMObjectReturn) return pointerCOMObjectMethodDeclaration();
-      if (isVoidReturn) return voidMethodDeclaration();
-      if (returnType.isString) return stringMethodDeclaration();
-      if (returnType.typeIdentifier.name == 'Windows.Foundation.DateTime') {
-        return dateTimeMethodDeclaration();
+  String durationDeclaration() => '''
+      Duration $name($methodParams) {
+        final retValuePtr = calloc<Uint64>();
+        $parametersPreamble
+        
+        try {
+          $ffiCall
+
+          return Duration(microseconds: retValuePtr.value ~/ 10);
+        } finally {
+          $parametersPostamble
+          free(retValuePtr);
+        }
       }
+''';
 
-      final valRef = returnType.dartType == 'double' ||
-              returnType.dartType == 'int' ||
-              returnType.dartType == 'bool' ||
-              returnType.dartType.startsWith('Pointer')
-          ? 'value'
-          : 'ref';
+  String defaultDeclaration() {
+    final valRef = returnType.dartType == 'double' ||
+            returnType.dartType == 'int' ||
+            returnType.dartType == 'bool' ||
+            returnType.dartType.startsWith('Pointer')
+        ? 'value'
+        : 'ref';
 
-      return '''
+    return '''
       ${returnType.dartType} $name($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
         $parametersPreamble
   
         try {
-          final hr = ptr.ref.lpVtbl.value
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()($identifiers);
-
-          if (FAILED(hr)) throw WindowsException(hr);
+          $ffiCall
 
           final retValue = retValuePtr.$valRef;
           return retValue;
@@ -191,6 +222,20 @@ class WinRTMethodProjection extends MethodProjection {
         }
       }
 ''';
+  }
+
+  @override
+  String toString() {
+    try {
+      if (isVectorViewReturn) return vectorViewDeclaration();
+      if (isVectorReturn) return vectorDeclaration();
+      if (isCOMObjectReturn) return comObjectDeclaration();
+      if (isVoidReturn) return voidDeclaration();
+      if (isStringReturn) return stringDeclaration();
+      if (isDateTimeReturn) return dateTimeDeclaration();
+      if (isTimeSpanReturn) return durationDeclaration();
+
+      return defaultDeclaration();
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.
