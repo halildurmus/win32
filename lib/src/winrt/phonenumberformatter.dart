@@ -67,4 +67,55 @@ class PhoneNumberFormatter extends IPhoneNumberFormatter {
       free(activationFactory);
     }
   }
+
+  static int GetCountryCodeForRegion(String regionCode) {
+    final hClassName = convertToHString(_className);
+
+    final pIID = calloc<GUID>()..ref.setGUID(IID_IPhoneNumberFormatterStatics);
+    final activationFactory = calloc<COMObject>();
+
+    try {
+      final hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      final result = IPhoneNumberFormatterStatics(activationFactory)
+          .GetCountryCodeForRegion(regionCode);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      return result;
+    } finally {
+      WindowsDeleteString(hClassName);
+      free(pIID);
+      free(activationFactory);
+    }
+  }
+
+  static String GetNationalDirectDialingPrefixForRegion(
+      String regionCode, bool stripNonDigit) {
+    final hClassName = convertToHString(_className);
+
+    final pIID = calloc<GUID>()..ref.setGUID(IID_IPhoneNumberFormatterStatics);
+    final activationFactory = calloc<COMObject>();
+
+    try {
+      final hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      final result = IPhoneNumberFormatterStatics(activationFactory)
+          .GetNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      return result;
+    } finally {
+      WindowsDeleteString(hClassName);
+      free(pIID);
+      free(activationFactory);
+    }
+  }
 }

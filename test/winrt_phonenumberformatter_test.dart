@@ -43,6 +43,27 @@ void main() {
       expect(reading, equals('0118 496 0987'));
     });
 
+    test('Country codes for regions', () {
+      expect(PhoneNumberFormatter.GetCountryCodeForRegion('US'), equals(1));
+      expect(PhoneNumberFormatter.GetCountryCodeForRegion('GB'), equals(44));
+      expect(PhoneNumberFormatter.GetCountryCodeForRegion('UA'), equals(380));
+    });
+
+    test('Direct dialing prefix for regions', () {
+      expect(
+          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+              'US', false),
+          equals('1'));
+      expect(
+          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+              'TR', false),
+          equals('0'));
+      expect(
+          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+              'TZ', true),
+          equals('0'));
+    });
+
     tearDown(() {
       free(formatter.ptr);
       winrtUninitialize();
