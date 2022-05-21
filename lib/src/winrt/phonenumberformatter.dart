@@ -34,13 +34,13 @@ import 'ivectorview.dart';
 
 import '../com/iinspectable.dart';
 
-const _className =
-    'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
-
 /// {@category Interface}
 /// {@category winrt}
 class PhoneNumberFormatter extends IPhoneNumberFormatter {
   PhoneNumberFormatter(super.ptr);
+
+  static const _className =
+      'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
 
   static PhoneNumberFormatter TryCreate(String regionCode) {
     final hClassName = convertToHString(_className);
