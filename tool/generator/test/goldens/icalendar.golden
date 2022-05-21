@@ -224,8 +224,10 @@ class ICalendar extends IInspectable {
   }
 
   void ChangeCalendarSystem(
-    int value,
+    String value,
   ) {
+    final valueHstring = convertToHString(value);
+
     final hr = ptr.ref.lpVtbl.value
         .elementAt(13)
         .cast<
@@ -242,10 +244,12 @@ class ICalendar extends IInspectable {
           int value,
         )>()(
       ptr.ref.lpVtbl,
-      value,
+      valueHstring,
     );
 
     if (FAILED(hr)) throw WindowsException(hr);
+
+    WindowsDeleteString(valueHstring);
   }
 
   String GetClock() {
@@ -282,8 +286,10 @@ class ICalendar extends IInspectable {
   }
 
   void ChangeClock(
-    int value,
+    String value,
   ) {
+    final valueHstring = convertToHString(value);
+
     final hr = ptr.ref.lpVtbl.value
         .elementAt(15)
         .cast<
@@ -300,10 +306,12 @@ class ICalendar extends IInspectable {
           int value,
         )>()(
       ptr.ref.lpVtbl,
-      value,
+      valueHstring,
     );
 
     if (FAILED(hr)) throw WindowsException(hr);
+
+    WindowsDeleteString(valueHstring);
   }
 
   DateTime GetDateTime() {
