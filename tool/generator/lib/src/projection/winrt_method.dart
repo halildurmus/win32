@@ -1,10 +1,14 @@
-import 'package:winmd/winmd.dart';
-
 import 'method.dart';
+import 'type.dart';
+import 'winrt_parameter.dart';
 
 class WinRTMethodProjection extends MethodProjection {
-  WinRTMethodProjection(Method method, int vtableOffset)
-      : super(method, vtableOffset);
+  WinRTMethodProjection(super.method, super.vtableOffset) {
+    parameters = method.parameters
+        .map((param) => WinRTParameterProjection(
+            param.name, TypeProjection(param.typeIdentifier)))
+        .toList();
+  }
 
   bool get isPointerCOMObjectReturn =>
       returnType.dartType == 'Pointer<COMObject>';
@@ -43,13 +47,17 @@ class WinRTMethodProjection extends MethodProjection {
   String get identifiers => [
         'ptr.ref.lpVtbl',
         ...parameters.map(
-          (param) => param.type.dartType == 'Pointer<COMObject>' &&
-                  !param.type.isReferenceType
-              ? '${param.identifier}.cast<Pointer<COMObject>>().value'
-              : param.identifier,
-        ),
+            (param) => (param as WinRTParameterProjection).localIdentifier),
         if (!isVoidReturn) 'retValuePtr',
       ].map((p) => '$p, ').join();
+
+  String get parametersPreamble => parameters
+      .map((param) => (param as WinRTParameterProjection).preamble)
+      .join('\n');
+
+  String get parametersPostamble => parameters
+      .map((param) => (param as WinRTParameterProjection).postamble)
+      .join('\n');
 
   String pointerCOMObjectMethodDeclaration() => '''
     Pointer<COMObject> $name($methodParams) {
@@ -68,17 +76,26 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String voidMethodDeclaration() => '''
-  void $name($methodParams) => ptr.ref.lpVtbl.value
+  void $name($methodParams) {
+    $parametersPreamble
+
+    final hr = ptr.ref.lpVtbl.value
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
       .asFunction<$dartPrototype>()($identifiers);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      $parametersPostamble
+    }
 ''';
 
   String stringMethodDeclaration() => '''
       String $name($methodParams) {
-      final retValuePtr = calloc<HSTRING>();
-  
+        final retValuePtr = calloc<HSTRING>();
+        $parametersPreamble 
+
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -91,6 +108,7 @@ class WinRTMethodProjection extends MethodProjection {
           final retValue = retValuePtr.toDartString();
           return retValue;
         } finally {
+          $parametersPostamble
           WindowsDeleteString(retValuePtr.value);
           free(retValuePtr);
         }
@@ -106,7 +124,8 @@ class WinRTMethodProjection extends MethodProjection {
   String dateTimeMethodDeclaration() => '''
       DateTime $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
-  
+        $parametersPreamble
+        
         try {
           final hr = ptr.ref.lpVtbl.value
             .elementAt($vtableOffset)
@@ -120,6 +139,7 @@ class WinRTMethodProjection extends MethodProjection {
             .utc(1601, 01, 01)
             .add(Duration(microseconds: retValuePtr.value ~/ 10));
         } finally {
+          $parametersPostamble
           free(retValuePtr);
         }
       }
@@ -145,6 +165,7 @@ class WinRTMethodProjection extends MethodProjection {
       return '''
       ${returnType.dartType} $name($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
+        $parametersPreamble
   
         try {
           final hr = ptr.ref.lpVtbl.value
@@ -158,6 +179,7 @@ class WinRTMethodProjection extends MethodProjection {
           final retValue = retValuePtr.$valRef;
           return retValue;
         } finally {
+          $parametersPostamble
           free(retValuePtr);
         }
       }

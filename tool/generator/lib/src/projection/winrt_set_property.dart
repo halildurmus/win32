@@ -52,10 +52,32 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
+  String durationPropertyDeclaration() => '''
+      set $exposedMethodName(Duration value) {
+        final duration = value.inMicroseconds * 10;
+        
+        final hr = ptr.ref.lpVtbl.value
+          .elementAt($vtableOffset)
+          .cast<Pointer<NativeFunction<$nativePrototype>>>()
+          .value
+          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, duration);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+      }
+''';
+
   @override
   String toString() {
     try {
       if (parameters.first.type.isString) return stringPropertyDeclaration();
+      if (parameters.first.type.typeIdentifier.name ==
+          'Windows.Foundation.DateTime') {
+        return dateTimePropertyDeclaration();
+      }
+      if (parameters.first.type.typeIdentifier.name ==
+          'Windows.Foundation.TimeSpan') {
+        return durationPropertyDeclaration();
+      }
 
       return '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {

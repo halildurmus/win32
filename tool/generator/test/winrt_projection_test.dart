@@ -1,6 +1,7 @@
 @TestOn('windows')
 
 import 'package:generator/generator.dart';
+import 'package:generator/src/projection/winrt_parameter.dart';
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
@@ -314,6 +315,21 @@ void main() {
     expect(setEraProjection.returnType.dartType, equals('void'));
     expect(setEraProjection.toString().trimLeft(),
         startsWith('set Era(int value)'));
+  });
+
+  test('WinRT method projects DateTime parameter correctly', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final setDateTimeProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'SetDateTime') as WinRTMethodProjection;
+    final dateTimeParameter =
+        setDateTimeProjection.parameters.first as WinRTParameterProjection;
+
+    expect(dateTimeParameter.preamble, isNotEmpty);
+
+    expect(setDateTimeProjection.parametersPreamble, isNotEmpty);
   });
 
   test('WinRT interface successfully projects something', () {

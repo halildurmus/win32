@@ -126,35 +126,43 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  void Cancel() => ptr.ref.lpVtbl.value
-          .elementAt(9)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+  void Cancel() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(9)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
 
-  void Close() => ptr.ref.lpVtbl.value
-          .elementAt(10)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(
-            Pointer,
-          )>>>()
-          .value
-          .asFunction<
-              int Function(
-            Pointer,
-          )>()(
-        ptr.ref.lpVtbl,
-      );
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  void Close() {
+    final hr = ptr.ref.lpVtbl.value
+        .elementAt(10)
+        .cast<
+            Pointer<
+                NativeFunction<
+                    HRESULT Function(
+          Pointer,
+        )>>>()
+        .value
+        .asFunction<
+            int Function(
+          Pointer,
+        )>()(
+      ptr.ref.lpVtbl,
+    );
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
 }

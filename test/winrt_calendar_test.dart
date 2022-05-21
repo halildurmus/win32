@@ -38,35 +38,27 @@ void main() {
     });
 
     test('Calendar era', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.Era, equals(1));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar first day of month', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.FirstDayInThisMonth, equals(1));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar first era', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
 
       // Per Microsoft docs, the WinRT implementation only recognizes the
       // current era (A.D.). See:
       // https://docs.microsoft.com/en-us/uwp/api/windows.globalization.calendaridentifiers.gregorian
       expect(calendar.FirstEra, equals(1));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar first hour in this period', () {
-      final twelveHourClock = convertToHString('12HourClock');
-      calendar.ChangeClock(twelveHourClock);
+      calendar.ChangeClock('12HourClock');
       expect(calendar.FirstHourInThisPeriod, isIn([0, 12]));
-      WindowsDeleteString(twelveHourClock);
     });
 
     test('Calendar first minute in this hour', () {
@@ -86,10 +78,8 @@ void main() {
     });
 
     test('Calendar first year in the current era', () {
-      final hebrewCalendar = convertToHString('HebrewCalendar');
-      calendar.ChangeCalendarSystem(hebrewCalendar);
+      calendar.ChangeCalendarSystem('HebrewCalendar');
       expect(calendar.FirstYearInThisEra, equals(5343));
-      WindowsDeleteString(hebrewCalendar);
     });
 
     test('Calendar hour', () {
@@ -105,55 +95,41 @@ void main() {
     });
 
     test('Calendar last day in month', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.LastDayInThisMonth, isIn([28, 29, 30, 31]));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar last era', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.FirstEra, equals(1));
       expect(calendar.LastEra, equals(1));
-      WindowsDeleteString(gregorianCalendar);
 
       // Most systems should be in the Reiwa (令和) era, but a system without
       // the calendar update will be in the Heisei (平成) era. In either event,
       // there should be at least four Japanese eras registered by WinRT.
-      final japaneseCalendar = convertToHString('JapaneseCalendar');
-      calendar.ChangeCalendarSystem(japaneseCalendar);
+      calendar.ChangeCalendarSystem('JapaneseCalendar');
       expect(calendar.FirstEra, equals(1));
       expect(calendar.LastEra, greaterThanOrEqualTo(4));
-      WindowsDeleteString(japaneseCalendar);
     });
 
     test('Calendar last hour in this period', () {
-      final twelveHourClock = convertToHString('12HourClock');
-      calendar.ChangeClock(twelveHourClock);
+      calendar.ChangeClock('12HourClock');
       expect(calendar.LastHourInThisPeriod, equals(11));
-      WindowsDeleteString(twelveHourClock);
     });
 
     test('Calendar last minute in this hour', () {
-      final twelveHourClock = convertToHString('12HourClock');
-      calendar.ChangeClock(twelveHourClock);
+      calendar.ChangeClock('12HourClock');
       expect(calendar.LastMinuteInThisHour, equals(59));
-      WindowsDeleteString(twelveHourClock);
     });
 
     test('Calendar last month in this year', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.LastMonthInThisYear, equals(12));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar last period in this day', () {
-      final twelveHourClock = convertToHString('12HourClock');
-      calendar.ChangeClock(twelveHourClock);
+      calendar.ChangeClock('12HourClock');
       expect(calendar.LastPeriodInThisDay, equals(2));
-      WindowsDeleteString(twelveHourClock);
     });
 
     test('Calendar last second in this minute', () {
@@ -161,10 +137,8 @@ void main() {
     });
 
     test('Calendar last year in this era', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.LastYearInThisEra, equals(9999));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar minute', () {
@@ -180,24 +154,18 @@ void main() {
     });
 
     test('Calendar days in month', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.NumberOfDaysInThisMonth, isIn([28, 29, 30, 31]));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar number of eras', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.NumberOfEras, equals(1));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Calendar number of hours in this period', () {
-      final twentyFourHourClock = convertToHString('24HourClock');
-      calendar.ChangeClock(twentyFourHourClock);
+      calendar.ChangeClock('24HourClock');
       expect(calendar.NumberOfHoursInThisPeriod, equals(24));
-      WindowsDeleteString(twentyFourHourClock);
     });
 
     test('Calendar number of minutes in this hour', () {
@@ -209,10 +177,8 @@ void main() {
     });
 
     test('Calendar number of periods in this day', () {
-      final twentyFourHourClock = convertToHString('24HourClock');
-      calendar.ChangeClock(twentyFourHourClock);
+      calendar.ChangeClock('24HourClock');
       expect(calendar.NumberOfPeriodsInThisDay, equals(1));
-      WindowsDeleteString(twentyFourHourClock);
     });
 
     test('Calendar number of seconds in this minute', () {
@@ -220,13 +186,19 @@ void main() {
       expect(calendar.NumberOfSecondsInThisMinute, closeTo(60, 1));
     });
 
+    test('Calendar resolved language', () {
+      final resolvedLanguage = calendar.ResolvedLanguage;
+
+      // Should be something like en-US
+      expect(resolvedLanguage[2], equals('-'));
+      expect(resolvedLanguage.length, equals(5));
+    });
+
     test('Calendar number of years in this era', () {
-      final japaneseCalendar = convertToHString('JapaneseCalendar');
       calendar
-        ..ChangeCalendarSystem(japaneseCalendar)
+        ..ChangeCalendarSystem('JapaneseCalendar')
         ..Era = 3; // 昭和 (Showa)
       expect(calendar.NumberOfYearsInThisEra, equals(64));
-      WindowsDeleteString(japaneseCalendar);
     });
 
     test('Change numeral system', () {
@@ -239,10 +211,8 @@ void main() {
     });
 
     test('Calendar current period', () {
-      final twelveHourClock = convertToHString('12HourClock');
-      calendar.ChangeClock(twelveHourClock);
+      calendar.ChangeClock('12HourClock');
       expect(calendar.Period, isIn([1, 2]));
-      WindowsDeleteString(twelveHourClock);
     });
 
     test('Calendar second', () {
@@ -250,17 +220,8 @@ void main() {
     });
 
     test('Calendar year', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
+      calendar.ChangeCalendarSystem('GregorianCalendar');
       expect(calendar.Year, greaterThanOrEqualTo(2021));
-      WindowsDeleteString(gregorianCalendar);
-    });
-
-    test('Calendar era name', () {
-      final gregorianCalendar = convertToHString('GregorianCalendar');
-      calendar.ChangeCalendarSystem(gregorianCalendar);
-      expect(calendar.EraAsFullString(), equals('A.D.'));
-      WindowsDeleteString(gregorianCalendar);
     });
 
     test('Day of week for current month is the same across Dart and WinRT', () {
@@ -299,7 +260,7 @@ void main() {
       expect(calendar2.Year, equals(calendar.Year));
     });
 
-    test('Add and delete days', () {
+    test('Compare equality', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(1)
@@ -308,7 +269,7 @@ void main() {
       expect(compare, isZero);
     });
 
-    test('Add and delete days 2', () {
+    test('Compare positive', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(2)
@@ -317,13 +278,41 @@ void main() {
       expect(compare, isPositive);
     });
 
-    test('Add and delete days 3', () {
+    test('Compare negative', () {
       final original = calendar.Clone();
       calendar
         ..AddDays(2)
         ..AddDays(-3);
       final compare = calendar.Compare(original);
       expect(compare, isNegative);
+    });
+
+    test('Get date / time', () {
+      final winrtDate = calendar.GetDateTime();
+      final dartDate = DateTime.now().toUtc();
+
+      expect(winrtDate.year, equals(dartDate.year));
+      expect(winrtDate.month, equals(dartDate.month));
+      expect(winrtDate.day, equals(dartDate.day));
+      expect(winrtDate.hour, equals(dartDate.hour));
+      expect(winrtDate.minute, equals(dartDate.minute));
+      expect(winrtDate.second, closeTo(dartDate.second, 2)); // allow flex
+    });
+
+    test('Set date / time', () {
+      final dartDate = DateTime.utc(2017, 9, 7, 17, 30);
+      calendar.SetDateTime(dartDate);
+      final winrtDate = calendar.GetDateTime();
+      expect(winrtDate.year, equals(2017));
+      expect(winrtDate.month, equals(9));
+      expect(winrtDate.day, equals(7));
+      expect(winrtDate.hour, equals(17));
+      expect(winrtDate.minute, equals(30));
+    });
+
+    test('Calendar era name', () {
+      calendar.ChangeCalendarSystem('GregorianCalendar');
+      expect(calendar.EraAsFullString(), equals('A.D.'));
     });
 
     test('Calendar month as string', () {
@@ -372,14 +361,6 @@ void main() {
               'Dec'
             ]));
       }
-    });
-
-    test('Calendar resolved language', () {
-      final resolvedLanguage = calendar.ResolvedLanguage;
-
-      // Should be something like en-US
-      expect(resolvedLanguage[2], equals('-'));
-      expect(resolvedLanguage.length, equals(5));
     });
 
     tearDown(() {
