@@ -37,6 +37,21 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
 
+  String dateTimePropertyDeclaration() => '''
+      set $exposedMethodName(DateTime value) {
+        final dateTimeOffset =
+          value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
+        
+        final hr = ptr.ref.lpVtbl.value
+          .elementAt($vtableOffset)
+          .cast<Pointer<NativeFunction<$nativePrototype>>>()
+          .value
+          .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, dateTimeOffset);
+
+          if (FAILED(hr)) throw WindowsException(hr);
+      }
+''';
+
   @override
   String toString() {
     try {
