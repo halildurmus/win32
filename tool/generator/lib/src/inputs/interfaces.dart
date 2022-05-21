@@ -117,16 +117,22 @@ final windowsRuntimeTypesToGenerate = <String>{
   // These types are generated manually by design:
   //   'Windows.Foundation.Collections.IVector`1',
   //   'Windows.Foundation.Collections.IVectorView`1',
-  //
+
   // TODO: These types are currently being generated manually. The goal is to
   // generate them automatically after making appropriate changes to the
   // generation script:
-  // 'Windows.Foundation.IAsyncAction',
-  // 'Windows.Foundation.IAsyncOperation`1',
-  // 'Windows.Foundation.IPropertyValue',
-  // 'Windows.UI.Notifications.ToastNotification',
-
-  // Requires WinRT event support
-  // 'Windows.Networking.Connectivity.INetworkInformationStatics',
-  // 'Windows.Gaming.Input.IGamepadStatics',
+  //
+  //   Requires WinRT delegate support
+  //   'Windows.Foundation.IAsyncAction',
+  //   'Windows.Foundation.IAsyncOperation`1',
+  //
+  //   Requires class support
+  //   'Windows.UI.Notifications.ToastNotification',
+  //
+  //   Requires @halildurmus' WinRT struct support to land
+  //   'Windows.Foundation.IPropertyValue',
+  //
+  //   Requires WinRT event support
+  //   'Windows.Networking.Connectivity.INetworkInformationStatics',
+  //   'Windows.Gaming.Input.IGamepadStatics',
 };
