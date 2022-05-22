@@ -16,8 +16,7 @@ class FieldOffset extends TokenObject {
   /// the fields are aligned with the 0th index of the struct.
   final int offset;
 
-  const FieldOffset(Scope scope, int fieldToken, this.offset)
-      : super(scope, fieldToken);
+  const FieldOffset(super.scope, super.fieldToken, this.offset);
 }
 
 /// Layout information for the class referenced by a specified token.

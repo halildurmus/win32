@@ -25,4 +25,5 @@ linter:
     unawaited_futures: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
+    use_super_parameters: true
 
