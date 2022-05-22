@@ -30,7 +30,7 @@ const IID_IAudioRenderClient = '{F294ACFC-3146-4483-A7BF-ADDCA7C260E2}';
 /// {@category com}
 class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IAudioRenderClient(Pointer<COMObject> ptr) : super(ptr);
+  IAudioRenderClient(super.ptr);
 
   int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       ptr.ref.lpVtbl.value

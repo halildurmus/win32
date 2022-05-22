@@ -30,7 +30,7 @@ const IID_IAppxManifestProperties = '{03FAF64D-F26F-4B2C-AAF7-8FE7789B8BCA}';
 /// {@category com}
 class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IAppxManifestProperties(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestProperties(super.ptr);
 
   int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr
       .ref.lpVtbl.value

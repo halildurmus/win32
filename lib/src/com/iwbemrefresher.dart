@@ -30,7 +30,7 @@ const IID_IWbemRefresher = '{49353C99-516B-11D1-AEA6-00C04FB68820}';
 /// {@category com}
 class IWbemRefresher extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IWbemRefresher(Pointer<COMObject> ptr) : super(ptr);
+  IWbemRefresher(super.ptr);
 
   int Refresh(int lFlags) => ptr.ref.lpVtbl.value
       .elementAt(3)
@@ -44,7 +44,7 @@ const CLSID_WbemRefresher = '{C71566F2-561E-11D1-AD87-00C04FD8FDFF}';
 
 /// {@category com}
 class WbemRefresher extends IWbemRefresher {
-  WbemRefresher(Pointer<COMObject> ptr) : super(ptr);
+  WbemRefresher(super.ptr);
 
   factory WbemRefresher.createInstance() {
     final ptr = calloc<COMObject>();

@@ -30,7 +30,7 @@ const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 /// {@category com}
 class IWbemClassObject extends IUnknown {
   // vtable begins at 3, is 24 entries long.
-  IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+  IWbemClassObject(super.ptr);
 
   int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr
           .ref.lpVtbl.value
@@ -403,7 +403,7 @@ const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
 
 /// {@category com}
 class WbemClassObject extends IWbemClassObject {
-  WbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+  WbemClassObject(super.ptr);
 
   factory WbemClassObject.createInstance() {
     final ptr = calloc<COMObject>();

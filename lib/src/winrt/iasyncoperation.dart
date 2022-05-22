@@ -40,7 +40,7 @@ typedef _GetResults_Dart = int Function(Pointer obj, Pointer<Pointer> result);
 class IAsyncOperation<TResult> extends IAsyncInfo {
   // vtable begins at 11, ends at 13
 
-  IAsyncOperation(Pointer<COMObject> ptr) : super(ptr);
+  IAsyncOperation(super.ptr);
 
   set Completed(Pointer value) {
     final hr = ptr.ref.lpVtbl.value

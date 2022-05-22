@@ -30,7 +30,7 @@ const IID_IAudioCaptureClient = '{C8ADBD64-E71E-48A0-A4DE-185C395CD317}';
 /// {@category com}
 class IAudioCaptureClient extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IAudioCaptureClient(Pointer<COMObject> ptr) : super(ptr);
+  IAudioCaptureClient(super.ptr);
 
   int GetBuffer(
           Pointer<Pointer<Uint8>> ppData,

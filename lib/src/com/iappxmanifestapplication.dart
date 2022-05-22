@@ -30,7 +30,7 @@ const IID_IAppxManifestApplication = '{5DA89BF4-3773-46BE-B650-7E744863B7E8}';
 /// {@category com}
 class IAppxManifestApplication extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IAppxManifestApplication(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestApplication(super.ptr);
 
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
       .ref.lpVtbl.value

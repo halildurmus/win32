@@ -30,7 +30,7 @@ const IID_IWbemServices = '{9556DC99-828C-11CF-A37E-00AA003240C7}';
 /// {@category com}
 class IWbemServices extends IUnknown {
   // vtable begins at 3, is 23 entries long.
-  IWbemServices(Pointer<COMObject> ptr) : super(ptr);
+  IWbemServices(super.ptr);
 
   int OpenNamespace(
           Pointer<Utf16> strNamespace,

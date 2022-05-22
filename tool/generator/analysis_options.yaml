@@ -26,6 +26,7 @@ linter:
     unawaited_futures: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
+    use_super_parameters: true
 
     # This is a good lint, but
     # https://github.com/microsoft/win32metadata/issues/99 makes it impossible

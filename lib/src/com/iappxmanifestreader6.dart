@@ -30,7 +30,7 @@ const IID_IAppxManifestReader6 = '{34DEACA4-D3C0-4E3E-B312-E42625E3807E}';
 /// {@category com}
 class IAppxManifestReader6 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IAppxManifestReader6(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestReader6(super.ptr);
 
   int GetIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>

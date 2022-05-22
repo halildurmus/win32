@@ -30,7 +30,7 @@ const IID_IAppxManifestReader2 = '{D06F67BC-B31D-4EBA-A8AF-638E73E77B4D}';
 /// {@category com}
 class IAppxManifestReader2 extends IAppxManifestReader {
   // vtable begins at 12, is 1 entries long.
-  IAppxManifestReader2(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestReader2(super.ptr);
 
   int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
           .ref.lpVtbl.value

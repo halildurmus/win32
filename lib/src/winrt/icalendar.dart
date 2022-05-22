@@ -38,7 +38,7 @@ const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 /// {@category winrt}
 class ICalendar extends IInspectable {
   // vtable begins at 6, is 98 entries long.
-  ICalendar(Pointer<COMObject> ptr) : super(ptr);
+  ICalendar(super.ptr);
 
   Pointer<COMObject> Clone() {
     final retValuePtr = calloc<COMObject>();

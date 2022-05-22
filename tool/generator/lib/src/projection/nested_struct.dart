@@ -16,10 +16,9 @@ class NestedStructProjection extends StructProjection {
   final int rootTypePackingAlignment;
   final TypeDef rootType;
 
-  NestedStructProjection(TypeDef typeDef, String structName,
+  NestedStructProjection(super.typeDef, super.structName,
       {required this.suffix, required this.rootTypePackingAlignment})
-      : rootType = _getRootTypeDef(typeDef),
-        super(typeDef, structName);
+      : rootType = _getRootTypeDef(typeDef);
 
   /// Finds the topmost [TypeDef] in the nested tree. This is the one that
   /// should be extended.

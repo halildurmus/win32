@@ -30,7 +30,7 @@ const IID_IAudioStreamVolume = '{93014887-242D-4068-8A15-CF5E93B90FE3}';
 /// {@category com}
 class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IAudioStreamVolume(Pointer<COMObject> ptr) : super(ptr);
+  IAudioStreamVolume(super.ptr);
 
   int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.lpVtbl.value
           .elementAt(3)

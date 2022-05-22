@@ -30,7 +30,7 @@ const IID_IAudioSessionManager = '{BFA971F1-4D5E-40BB-935E-967039BFBEE4}';
 /// {@category com}
 class IAudioSessionManager extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IAudioSessionManager(Pointer<COMObject> ptr) : super(ptr);
+  IAudioSessionManager(super.ptr);
 
   int GetAudioSessionControl(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> SessionControl) =>

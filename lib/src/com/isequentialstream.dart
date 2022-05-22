@@ -30,7 +30,7 @@ const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
 /// {@category com}
 class ISequentialStream extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
+  ISequentialStream(super.ptr);
 
   int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.lpVtbl.value
       .elementAt(3)

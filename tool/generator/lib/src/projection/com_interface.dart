@@ -186,7 +186,7 @@ class ComInterfaceProjection {
     final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
     final constructor = inheritsFrom.isEmpty
         ? 'Pointer<COMObject> ptr;\n\n$shortName(this.ptr);'
-        : '$shortName(Pointer<COMObject> ptr) : super(ptr);';
+        : '$shortName(super.ptr);';
 
     return '''
       $header

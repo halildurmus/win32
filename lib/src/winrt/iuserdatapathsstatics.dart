@@ -38,7 +38,7 @@ const IID_IUserDataPathsStatics = '{01B29DEF-E062-48A1-8B0C-F2C7A9CA56C0}';
 /// {@category winrt}
 class IUserDataPathsStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  IUserDataPathsStatics(Pointer<COMObject> ptr) : super(ptr);
+  IUserDataPathsStatics(super.ptr);
 
   Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
     final retValuePtr = calloc<COMObject>();

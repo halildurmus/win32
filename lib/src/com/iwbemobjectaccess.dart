@@ -30,7 +30,7 @@ const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';
 /// {@category com}
 class IWbemObjectAccess extends IWbemClassObject {
   // vtable begins at 27, is 10 entries long.
-  IWbemObjectAccess(Pointer<COMObject> ptr) : super(ptr);
+  IWbemObjectAccess(super.ptr);
 
   int
       GetPropertyHandle(Pointer<Utf16> wszPropertyName, Pointer<Int32> pType,

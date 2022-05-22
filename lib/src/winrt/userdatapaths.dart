@@ -104,7 +104,7 @@ typedef _get_Videos_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 class UserDataPaths extends IInspectable {
   // vtable begins at 6, ends at 26
 
-  UserDataPaths(Pointer<COMObject> ptr) : super(ptr);
+  UserDataPaths(super.ptr);
 
   int get CameraRoll {
     final retValuePtr = calloc<IntPtr>();

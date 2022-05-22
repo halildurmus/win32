@@ -30,7 +30,7 @@ const IID_IAudioClock = '{CD63314F-3FBA-4A1B-812C-EF96358728E7}';
 /// {@category com}
 class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IAudioClock(Pointer<COMObject> ptr) : super(ptr);
+  IAudioClock(super.ptr);
 
   int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.lpVtbl.value
       .elementAt(3)

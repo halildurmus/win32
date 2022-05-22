@@ -30,7 +30,7 @@ const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';
 /// {@category com}
 class IFileIsInUse extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IFileIsInUse(Pointer<COMObject> ptr) : super(ptr);
+  IFileIsInUse(super.ptr);
 
   int GetAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.lpVtbl.value
       .elementAt(3)

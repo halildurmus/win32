@@ -30,7 +30,7 @@ const IID_ISpellChecker2 = '{E7ED1C71-87F7-4378-A840-C9200DACEE47}';
 /// {@category com}
 class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.
-  ISpellChecker2(Pointer<COMObject> ptr) : super(ptr);
+  ISpellChecker2(super.ptr);
 
   int Remove(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
       .elementAt(17)

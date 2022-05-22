@@ -30,7 +30,7 @@ const IID_IEnumMoniker = '{00000102-0000-0000-C000-000000000046}';
 /// {@category com}
 class IEnumMoniker extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IEnumMoniker(Pointer<COMObject> ptr) : super(ptr);
+  IEnumMoniker(super.ptr);
 
   int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
           Pointer<Uint32> pceltFetched) =>

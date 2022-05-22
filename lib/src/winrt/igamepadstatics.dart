@@ -48,7 +48,7 @@ typedef _get_Gamepads_Dart = int Function(Pointer obj, Pointer<Pointer> value);
 class IGamepadStatics extends IInspectable {
   // vtable begins at 6, ends at 10
 
-  IGamepadStatics(Pointer<COMObject> ptr) : super(ptr);
+  IGamepadStatics(super.ptr);
 
   int add_GamepadAdded(Pointer value, Pointer<Uint32> result) =>
       ptr.ref.lpVtbl.value

@@ -30,7 +30,7 @@ const IID_IDispatch = '{00020400-0000-0000-C000-000000000046}';
 /// {@category com}
 class IDispatch extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IDispatch(Pointer<COMObject> ptr) : super(ptr);
+  IDispatch(super.ptr);
 
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.lpVtbl.value
           .elementAt(3)
