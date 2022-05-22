@@ -194,7 +194,7 @@ const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
 
 /// {@category com}
 class KnownFolderManager extends IKnownFolderManager {
-  KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
+  KnownFolderManager(super.ptr);
 
   factory KnownFolderManager.createInstance() {
     final ptr = calloc<COMObject>();

@@ -113,7 +113,7 @@ const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
 
 /// {@category com}
 class ShellItem extends IShellItem {
-  ShellItem(Pointer<COMObject> ptr) : super(ptr);
+  ShellItem(super.ptr);
 
   factory ShellItem.createInstance() {
     final ptr = calloc<COMObject>();

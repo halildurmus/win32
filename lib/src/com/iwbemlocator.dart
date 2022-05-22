@@ -84,7 +84,7 @@ const CLSID_WbemLocator = '{4590F811-1D3A-11D0-891F-00AA004B2E24}';
 
 /// {@category com}
 class WbemLocator extends IWbemLocator {
-  WbemLocator(Pointer<COMObject> ptr) : super(ptr);
+  WbemLocator(super.ptr);
 
   factory WbemLocator.createInstance() {
     final ptr = calloc<COMObject>();

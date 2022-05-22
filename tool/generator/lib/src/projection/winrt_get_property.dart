@@ -1,10 +1,7 @@
-import 'package:winmd/winmd.dart';
-
 import 'winrt_property.dart';
 
 class WinRTGetPropertyProjection extends WinRTPropertyProjection {
-  WinRTGetPropertyProjection(Method method, int vtableOffset)
-      : super(method, vtableOffset);
+  WinRTGetPropertyProjection(super.method, super.vtableOffset);
 
   // WinRTPropertyProjection overrides
 

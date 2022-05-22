@@ -403,7 +403,7 @@ const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
 
 /// {@category com}
 class WbemClassObject extends IWbemClassObject {
-  WbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+  WbemClassObject(super.ptr);
 
   factory WbemClassObject.createInstance() {
     final ptr = calloc<COMObject>();

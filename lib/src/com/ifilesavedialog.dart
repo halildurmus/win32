@@ -106,7 +106,7 @@ const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 
 /// {@category com}
 class FileSaveDialog extends IFileSaveDialog {
-  FileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
+  FileSaveDialog(super.ptr);
 
   factory FileSaveDialog.createInstance() {
     final ptr = calloc<COMObject>();

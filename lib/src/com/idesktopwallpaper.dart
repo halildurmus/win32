@@ -217,7 +217,7 @@ const CLSID_DesktopWallpaper = '{C2CF3110-460E-4FC1-B9D0-8A1C0C9CC4BD}';
 
 /// {@category com}
 class DesktopWallpaper extends IDesktopWallpaper {
-  DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
+  DesktopWallpaper(super.ptr);
 
   factory DesktopWallpaper.createInstance() {
     final ptr = calloc<COMObject>();

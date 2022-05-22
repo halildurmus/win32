@@ -337,7 +337,7 @@ const CLSID_SpVoice = '{96749377-3391-11D2-9EE3-00C04F797396}';
 
 /// {@category com}
 class SpVoice extends ISpVoice {
-  SpVoice(Pointer<COMObject> ptr) : super(ptr);
+  SpVoice(super.ptr);
 
   factory SpVoice.createInstance() {
     final ptr = calloc<COMObject>();

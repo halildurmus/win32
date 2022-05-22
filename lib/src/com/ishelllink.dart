@@ -238,7 +238,7 @@ const CLSID_ShellLink = '{00021401-0000-0000-C000-000000000046}';
 
 /// {@category com}
 class ShellLink extends IShellLink {
-  ShellLink(Pointer<COMObject> ptr) : super(ptr);
+  ShellLink(super.ptr);
 
   factory ShellLink.createInstance() {
     final ptr = calloc<COMObject>();

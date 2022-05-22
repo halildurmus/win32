@@ -107,7 +107,7 @@ const CLSID_MMDeviceEnumerator = '{BCDE0395-E52F-467C-8E3D-C4579291692E}';
 
 /// {@category com}
 class MMDeviceEnumerator extends IMMDeviceEnumerator {
-  MMDeviceEnumerator(Pointer<COMObject> ptr) : super(ptr);
+  MMDeviceEnumerator(super.ptr);
 
   factory MMDeviceEnumerator.createInstance() {
     final ptr = calloc<COMObject>();

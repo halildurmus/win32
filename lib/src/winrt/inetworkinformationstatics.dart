@@ -36,8 +36,7 @@ class INetworkInformationStatics extends IInspectable {
   final Allocator allocator;
 
   // vtable begins at 6, is 8 entries long.
-  INetworkInformationStatics(Pointer<COMObject> ptr, {this.allocator = calloc})
-      : super(ptr);
+  INetworkInformationStatics(super.ptr, {this.allocator = calloc});
 
   Pointer<COMObject> GetConnectionProfiles() {
     final retValuePtr = calloc<COMObject>();

@@ -143,7 +143,7 @@ const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
 
 /// {@category com}
 class WbemContext extends IWbemContext {
-  WbemContext(Pointer<COMObject> ptr) : super(ptr);
+  WbemContext(super.ptr);
 
   factory WbemContext.createInstance() {
     final ptr = calloc<COMObject>();

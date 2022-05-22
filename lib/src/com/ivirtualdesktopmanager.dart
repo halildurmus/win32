@@ -81,7 +81,7 @@ const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
 
 /// {@category com}
 class VirtualDesktopManager extends IVirtualDesktopManager {
-  VirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
+  VirtualDesktopManager(super.ptr);
 
   factory VirtualDesktopManager.createInstance() {
     final ptr = calloc<COMObject>();

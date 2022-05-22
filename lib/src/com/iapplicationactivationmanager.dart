@@ -110,7 +110,7 @@ const CLSID_ApplicationActivationManager =
 
 /// {@category com}
 class ApplicationActivationManager extends IApplicationActivationManager {
-  ApplicationActivationManager(Pointer<COMObject> ptr) : super(ptr);
+  ApplicationActivationManager(super.ptr);
 
   factory ApplicationActivationManager.createInstance() {
     final ptr = calloc<COMObject>();

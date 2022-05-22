@@ -44,7 +44,7 @@ const CLSID_WbemRefresher = '{C71566F2-561E-11D1-AD87-00C04FD8FDFF}';
 
 /// {@category com}
 class WbemRefresher extends IWbemRefresher {
-  WbemRefresher(Pointer<COMObject> ptr) : super(ptr);
+  WbemRefresher(super.ptr);
 
   factory WbemRefresher.createInstance() {
     final ptr = calloc<COMObject>();

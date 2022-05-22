@@ -91,7 +91,7 @@ const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
 
 /// {@category com}
 class SpellCheckerFactory extends ISpellCheckerFactory {
-  SpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
+  SpellCheckerFactory(super.ptr);
 
   factory SpellCheckerFactory.createInstance() {
     final ptr = calloc<COMObject>();

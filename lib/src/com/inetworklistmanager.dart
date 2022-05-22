@@ -180,7 +180,7 @@ const CLSID_NetworkListManager = '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
 
 /// {@category com}
 class NetworkListManager extends INetworkListManager {
-  NetworkListManager(Pointer<COMObject> ptr) : super(ptr);
+  NetworkListManager(super.ptr);
 
   factory NetworkListManager.createInstance() {
     final ptr = calloc<COMObject>();

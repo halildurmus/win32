@@ -63,7 +63,7 @@ const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4DDE-A5A1-60F82A20AEF7}';
 
 /// {@category com}
 class FileOpenDialog extends IFileOpenDialog {
-  FileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
+  FileOpenDialog(super.ptr);
 
   factory FileOpenDialog.createInstance() {
     final ptr = calloc<COMObject>();

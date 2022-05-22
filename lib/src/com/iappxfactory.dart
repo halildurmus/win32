@@ -129,7 +129,7 @@ const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
 
 /// {@category com}
 class AppxFactory extends IAppxFactory {
-  AppxFactory(Pointer<COMObject> ptr) : super(ptr);
+  AppxFactory(super.ptr);
 
   factory AppxFactory.createInstance() {
     final ptr = calloc<COMObject>();

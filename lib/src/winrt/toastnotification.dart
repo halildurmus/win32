@@ -67,7 +67,7 @@ typedef _remove_Failed_Dart = int Function(Pointer obj, int token);
 class ToastNotification extends IInspectable {
   // vtable begins at 6, ends at 14
 
-  ToastNotification(Pointer<COMObject> ptr) : super(ptr);
+  ToastNotification(super.ptr);
 
   Pointer get Content {
     final retValuePtr = calloc<Pointer>();
