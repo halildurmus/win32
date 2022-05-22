@@ -30,7 +30,7 @@ const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
 /// {@category com}
 class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
-  IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
+  IFileOpenDialog(super.ptr);
 
   int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
           .elementAt(27)

@@ -30,7 +30,7 @@ const IID_IEnumWbemClassObject = '{027947E1-D731-11CE-A357-000000000001}';
 /// {@category com}
 class IEnumWbemClassObject extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IEnumWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+  IEnumWbemClassObject(super.ptr);
 
   int Reset() => ptr.ref.lpVtbl.value
       .elementAt(3)

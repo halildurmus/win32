@@ -39,7 +39,7 @@ const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';
 /// {@category winrt}
 class IGamepadStatics2 extends IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
-  IGamepadStatics2(Pointer<COMObject> ptr) : super(ptr);
+  IGamepadStatics2(super.ptr);
 
   Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {
     final retValuePtr = calloc<COMObject>();

@@ -30,7 +30,7 @@ const IID_ISpNotifySource = '{5EFF4AEF-8487-11D2-961C-00C04F8EE628}';
 /// {@category com}
 class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.
-  ISpNotifySource(Pointer<COMObject> ptr) : super(ptr);
+  ISpNotifySource(super.ptr);
 
   int SetNotifySink(Pointer<COMObject> pNotifySink) => ptr.ref.lpVtbl.value
       .elementAt(3)

@@ -30,7 +30,7 @@ const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 /// {@category com}
 class IWbemClassObject extends IUnknown {
   // vtable begins at 3, is 24 entries long.
-  IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+  IWbemClassObject(super.ptr);
 
   int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr
           .ref.lpVtbl.value

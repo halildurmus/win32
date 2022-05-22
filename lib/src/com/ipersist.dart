@@ -30,7 +30,7 @@ const IID_IPersist = '{0000010C-0000-0000-C000-000000000046}';
 /// {@category com}
 class IPersist extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IPersist(Pointer<COMObject> ptr) : super(ptr);
+  IPersist(super.ptr);
 
   int GetClassID(Pointer<GUID> pClassID) => ptr.ref.lpVtbl.value
           .elementAt(3)

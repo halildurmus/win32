@@ -30,7 +30,7 @@ const IID_IEnumVARIANT = '{00020404-0000-0000-C000-000000000046}';
 /// {@category com}
 class IEnumVARIANT extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IEnumVARIANT(Pointer<COMObject> ptr) : super(ptr);
+  IEnumVARIANT(super.ptr);
 
   int Next(int celt, Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched) =>
       ptr.ref.lpVtbl.value

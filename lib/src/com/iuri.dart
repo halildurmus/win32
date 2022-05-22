@@ -30,7 +30,7 @@ const IID_IUri = '{A39EE748-6A27-4817-A6F2-13914BEF5890}';
 /// {@category com}
 class IUri extends IUnknown {
   // vtable begins at 3, is 25 entries long.
-  IUri(Pointer<COMObject> ptr) : super(ptr);
+  IUri(super.ptr);
 
   int GetPropertyBSTR(
           int uriProp, Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags) =>

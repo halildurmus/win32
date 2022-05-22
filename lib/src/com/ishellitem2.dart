@@ -30,7 +30,7 @@ const IID_IShellItem2 = '{7E9FB0D3-919F-4307-AB2E-9B1860310C93}';
 /// {@category com}
 class IShellItem2 extends IShellItem {
   // vtable begins at 8, is 13 entries long.
-  IShellItem2(Pointer<COMObject> ptr) : super(ptr);
+  IShellItem2(super.ptr);
 
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.lpVtbl.value

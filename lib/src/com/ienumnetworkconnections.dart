@@ -30,7 +30,7 @@ const IID_IEnumNetworkConnections = '{DCB00006-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category com}
 class IEnumNetworkConnections extends IDispatch {
   // vtable begins at 7, is 5 entries long.
-  IEnumNetworkConnections(Pointer<COMObject> ptr) : super(ptr);
+  IEnumNetworkConnections(super.ptr);
 
   Pointer<COMObject> get NewEnum {
     final retValuePtr = calloc<Pointer<COMObject>>();

@@ -30,7 +30,7 @@ const IID_IMMDevice = '{D666063F-1587-4E43-81F1-B948E807363F}';
 /// {@category com}
 class IMMDevice extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IMMDevice(Pointer<COMObject> ptr) : super(ptr);
+  IMMDevice(super.ptr);
 
   int Activate(
           Pointer<GUID> iid,

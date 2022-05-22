@@ -30,7 +30,7 @@ const IID_IWbemLocator = '{DC12A687-737F-11CF-884D-00AA004B2E24}';
 /// {@category com}
 class IWbemLocator extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IWbemLocator(Pointer<COMObject> ptr) : super(ptr);
+  IWbemLocator(super.ptr);
 
   int ConnectServer(
           Pointer<Utf16> strNetworkResource,

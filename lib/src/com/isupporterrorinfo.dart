@@ -30,7 +30,7 @@ const IID_ISupportErrorInfo = '{DF0B3D60-548F-101B-8E65-08002B2BD119}';
 /// {@category com}
 class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  ISupportErrorInfo(Pointer<COMObject> ptr) : super(ptr);
+  ISupportErrorInfo(super.ptr);
 
   int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.lpVtbl.value
       .elementAt(3)

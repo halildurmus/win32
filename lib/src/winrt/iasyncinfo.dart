@@ -38,7 +38,7 @@ const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 /// {@category winrt}
 class IAsyncInfo extends IInspectable {
   // vtable begins at 6, is 5 entries long.
-  IAsyncInfo(Pointer<COMObject> ptr) : super(ptr);
+  IAsyncInfo(super.ptr);
 
   int get Id {
     final retValuePtr = calloc<Uint32>();

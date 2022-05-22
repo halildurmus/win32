@@ -31,8 +31,7 @@ const IID_IAppxManifestPackageDependenciesEnumerator =
 /// {@category com}
 class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IAppxManifestPackageDependenciesEnumerator(Pointer<COMObject> ptr)
-      : super(ptr);
+  IAppxManifestPackageDependenciesEnumerator(super.ptr);
 
   int GetCurrent(Pointer<Pointer<COMObject>> dependency) => ptr.ref.lpVtbl.value
           .elementAt(3)

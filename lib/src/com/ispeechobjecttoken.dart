@@ -30,7 +30,7 @@ const IID_ISpeechObjectToken = '{C74A3ADC-B727-4500-A84A-B526721C8B8C}';
 /// {@category com}
 class ISpeechObjectToken extends IDispatch {
   // vtable begins at 7, is 13 entries long.
-  ISpeechObjectToken(Pointer<COMObject> ptr) : super(ptr);
+  ISpeechObjectToken(super.ptr);
 
   Pointer<Utf16> get Id {
     final retValuePtr = calloc<Pointer<Utf16>>();

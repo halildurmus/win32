@@ -31,7 +31,7 @@ const IID_ISpellCheckerChangedEventHandler =
 /// {@category com}
 class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  ISpellCheckerChangedEventHandler(Pointer<COMObject> ptr) : super(ptr);
+  ISpellCheckerChangedEventHandler(super.ptr);
 
   int Invoke(Pointer<COMObject> sender) => ptr.ref.lpVtbl.value
           .elementAt(3)

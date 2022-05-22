@@ -30,7 +30,7 @@ const IID_IShellFolder = '{000214E6-0000-0000-C000-000000000046}';
 /// {@category com}
 class IShellFolder extends IUnknown {
   // vtable begins at 3, is 10 entries long.
-  IShellFolder(Pointer<COMObject> ptr) : super(ptr);
+  IShellFolder(super.ptr);
 
   int ParseDisplayName(
           int hwnd,

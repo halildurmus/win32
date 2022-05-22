@@ -30,7 +30,7 @@ const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
 /// {@category com}
 class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  ISpellCheckerFactory(Pointer<COMObject> ptr) : super(ptr);
+  ISpellCheckerFactory(super.ptr);
 
   Pointer<COMObject> get SupportedLanguages {
     final retValuePtr = calloc<Pointer<COMObject>>();

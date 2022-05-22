@@ -30,7 +30,7 @@ const IID_IBindCtx = '{0000000E-0000-0000-C000-000000000046}';
 /// {@category com}
 class IBindCtx extends IUnknown {
   // vtable begins at 3, is 10 entries long.
-  IBindCtx(Pointer<COMObject> ptr) : super(ptr);
+  IBindCtx(super.ptr);
 
   int RegisterObjectBound(Pointer<COMObject> punk) => ptr.ref.lpVtbl.value
           .elementAt(3)

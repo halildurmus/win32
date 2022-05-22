@@ -30,7 +30,7 @@ const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
 /// {@category com}
 class IDesktopWallpaper extends IUnknown {
   // vtable begins at 3, is 16 entries long.
-  IDesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
+  IDesktopWallpaper(super.ptr);
 
   int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
       ptr.ref.lpVtbl.value

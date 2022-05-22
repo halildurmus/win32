@@ -30,7 +30,7 @@ const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category com}
 class INetworkListManager extends IDispatch {
   // vtable begins at 7, is 9 entries long.
-  INetworkListManager(Pointer<COMObject> ptr) : super(ptr);
+  INetworkListManager(super.ptr);
 
   int GetNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
       ptr.ref.lpVtbl.value

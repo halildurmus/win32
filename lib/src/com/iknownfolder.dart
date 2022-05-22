@@ -30,7 +30,7 @@ const IID_IKnownFolder = '{3AA7AF7E-9B36-420C-A8E3-F77D4674A488}';
 /// {@category com}
 class IKnownFolder extends IUnknown {
   // vtable begins at 3, is 9 entries long.
-  IKnownFolder(Pointer<COMObject> ptr) : super(ptr);
+  IKnownFolder(super.ptr);
 
   int GetId(Pointer<GUID> pkfid) => ptr.ref.lpVtbl.value
       .elementAt(3)

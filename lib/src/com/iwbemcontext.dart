@@ -30,7 +30,7 @@ const IID_IWbemContext = '{44ACA674-E8FC-11D0-A07C-00C04FB68820}';
 /// {@category com}
 class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.
-  IWbemContext(Pointer<COMObject> ptr) : super(ptr);
+  IWbemContext(super.ptr);
 
   int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.lpVtbl.value
           .elementAt(3)

@@ -30,7 +30,7 @@ const IID_IAudioClient = '{1CB9AD4C-DBFA-4C32-B178-C2F568A703B2}';
 /// {@category com}
 class IAudioClient extends IUnknown {
   // vtable begins at 3, is 12 entries long.
-  IAudioClient(Pointer<COMObject> ptr) : super(ptr);
+  IAudioClient(super.ptr);
 
   int Initialize(
           int ShareMode,

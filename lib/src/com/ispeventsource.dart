@@ -30,7 +30,7 @@ const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
 /// {@category com}
 class ISpEventSource extends ISpNotifySource {
   // vtable begins at 10, is 3 entries long.
-  ISpEventSource(Pointer<COMObject> ptr) : super(ptr);
+  ISpEventSource(super.ptr);
 
   int SetInterest(int ullEventInterest, int ullQueuedInterest) =>
       ptr.ref.lpVtbl.value

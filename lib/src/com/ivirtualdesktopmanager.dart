@@ -30,7 +30,7 @@ const IID_IVirtualDesktopManager = '{A5CD92FF-29BE-454C-8D04-D82879FB3F1B}';
 /// {@category com}
 class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IVirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
+  IVirtualDesktopManager(super.ptr);
 
   int IsWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>

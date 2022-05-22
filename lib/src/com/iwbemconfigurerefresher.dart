@@ -30,7 +30,7 @@ const IID_IWbemConfigureRefresher = '{49353C92-516B-11D1-AEA6-00C04FB68820}';
 /// {@category com}
 class IWbemConfigureRefresher extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IWbemConfigureRefresher(Pointer<COMObject> ptr) : super(ptr);
+  IWbemConfigureRefresher(super.ptr);
 
   int AddObjectByPath(
           Pointer<COMObject> pNamespace,

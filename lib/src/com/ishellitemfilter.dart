@@ -30,7 +30,7 @@ const IID_IShellItemFilter = '{2659B475-EEB8-48B7-8F07-B378810F48CF}';
 /// {@category com}
 class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IShellItemFilter(Pointer<COMObject> ptr) : super(ptr);
+  IShellItemFilter(super.ptr);
 
   int IncludeItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
           .elementAt(3)

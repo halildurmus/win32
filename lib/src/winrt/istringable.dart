@@ -38,7 +38,7 @@ const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
 /// {@category winrt}
 class IStringable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IStringable(Pointer<COMObject> ptr) : super(ptr);
+  IStringable(super.ptr);
 
   String ToString() {
     final retValuePtr = calloc<HSTRING>();

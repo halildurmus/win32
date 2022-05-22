@@ -30,7 +30,7 @@ const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';
 /// {@category com}
 class ISpVoice extends ISpEventSource {
   // vtable begins at 13, is 25 entries long.
-  ISpVoice(Pointer<COMObject> ptr) : super(ptr);
+  ISpVoice(super.ptr);
 
   int SetOutput(Pointer<COMObject> pUnkOutput, int fAllowFormatChanges) =>
       ptr.ref.lpVtbl.value

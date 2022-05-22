@@ -38,7 +38,7 @@ const IID_IToastNotificationFactory = '{04124B20-82C6-4229-B109-FD9ED4662B53}';
 /// {@category winrt}
 class IToastNotificationFactory extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IToastNotificationFactory(Pointer<COMObject> ptr) : super(ptr);
+  IToastNotificationFactory(super.ptr);
 
   Pointer<COMObject> CreateToastNotification(Pointer<COMObject> content) {
     final retValuePtr = calloc<COMObject>();
