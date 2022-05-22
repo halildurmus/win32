@@ -1,4 +1,4 @@
-// ISpellCheckerChangedEventHandler.dart
+// IShellItemImageFactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -24,22 +24,24 @@ import '../utils.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpellCheckerChangedEventHandler =
-    '{0B83A5B0-792F-4EAB-9799-ACF52C5ED08A}';
+const IID_IShellItemImageFactory = '{BCC18B79-BA16-442F-80C4-8A59C30C463B}';
 
 /// {@category Interface}
 /// {@category com}
-class ISpellCheckerChangedEventHandler extends IUnknown {
+class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  ISpellCheckerChangedEventHandler(super.ptr);
+  IShellItemImageFactory(super.ptr);
 
-  int Invoke(Pointer<COMObject> sender) => ptr.ref.lpVtbl.value
+  int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) =>
+      ptr.ref.lpVtbl.value
           .elementAt(3)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<COMObject> sender)>>>()
+                      Int32 Function(Pointer, SIZE size, Int32 flags,
+                          Pointer<IntPtr> phbm)>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
-      ptr.ref.lpVtbl, sender);
+          .asFunction<
+              int Function(Pointer, SIZE size, int flags,
+                  Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
 }

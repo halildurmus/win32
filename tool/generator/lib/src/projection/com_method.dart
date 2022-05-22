@@ -1,10 +1,7 @@
-import 'package:winmd/winmd.dart';
-
 import 'method.dart';
 
 class ComMethodProjection extends MethodProjection {
-  ComMethodProjection(Method method, int vtableOffset)
-      : super(method, vtableOffset);
+  ComMethodProjection(super.method, super.vtableOffset);
 
   @override
   String get nativeParams => [

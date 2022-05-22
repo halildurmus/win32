@@ -30,7 +30,7 @@ const IID_IErrorInfo = '{1CF2B120-547D-101B-8E65-08002B2BD119}';
 /// {@category com}
 class IErrorInfo extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IErrorInfo(Pointer<COMObject> ptr) : super(ptr);
+  IErrorInfo(super.ptr);
 
   int GetGUID(Pointer<GUID> pGUID) => ptr.ref.lpVtbl.value
       .elementAt(3)

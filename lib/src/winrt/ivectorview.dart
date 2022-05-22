@@ -58,8 +58,7 @@ class IVectorView<T> extends IInspectable {
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
   /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
   /// memory management.
-  IVectorView(Pointer<COMObject> ptr, {this.creator, this.allocator = calloc})
-      : super(ptr) {
+  IVectorView(super.ptr, {this.creator, this.allocator = calloc}) {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {

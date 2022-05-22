@@ -30,7 +30,7 @@ const IID_IAppxManifestReader5 = '{8D7AE132-A690-4C00-B75A-6AAE1FEAAC80}';
 /// {@category com}
 class IAppxManifestReader5 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IAppxManifestReader5(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestReader5(super.ptr);
 
   int GetMainPackageDependencies(
           Pointer<Pointer<COMObject>> mainPackageDependencies) =>

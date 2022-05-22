@@ -30,7 +30,7 @@ const IID_IAppxFile = '{91DF827B-94FD-468F-827B-57F41B2F6F2E}';
 /// {@category com}
 class IAppxFile extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IAppxFile(Pointer<COMObject> ptr) : super(ptr);
+  IAppxFile(super.ptr);
 
   int GetCompressionOption(Pointer<Int32> compressionOption) =>
       ptr.ref.lpVtbl.value

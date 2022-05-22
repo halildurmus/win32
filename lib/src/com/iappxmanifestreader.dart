@@ -30,7 +30,7 @@ const IID_IAppxManifestReader = '{4E1BD148-55A0-4480-A3D1-15544710637C}';
 /// {@category com}
 class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.
-  IAppxManifestReader(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestReader(super.ptr);
 
   int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr
           .ref.lpVtbl.value

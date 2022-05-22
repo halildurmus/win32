@@ -30,7 +30,7 @@ const IID_IAudioSessionControl = '{F4B1A599-7266-4319-A8CA-E70ACB11E8CD}';
 /// {@category com}
 class IAudioSessionControl extends IUnknown {
   // vtable begins at 3, is 9 entries long.
-  IAudioSessionControl(Pointer<COMObject> ptr) : super(ptr);
+  IAudioSessionControl(super.ptr);
 
   int GetState(Pointer<Int32> pRetVal) => ptr.ref.lpVtbl.value
           .elementAt(3)

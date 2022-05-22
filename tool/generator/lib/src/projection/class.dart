@@ -6,7 +6,7 @@ import 'utils.dart';
 class ComClassProjection extends ComInterfaceProjection {
   final ComInterfaceProjection interface;
 
-  ComClassProjection(TypeDef typeDef, this.interface) : super(typeDef);
+  ComClassProjection(super.typeDef, this.interface);
 
   factory ComClassProjection.fromInterface(TypeDef interface) {
     final className = generateClassName(interface);
@@ -48,7 +48,7 @@ class ComClassProjection extends ComInterfaceProjection {
 
     /// {@category com}
     class $shortName extends ${interface.shortName} {
-      $shortName(Pointer<COMObject> ptr) : super(ptr);
+      $shortName(super.ptr);
 
       factory $shortName.createInstance() {
         final ptr = calloc<COMObject>();

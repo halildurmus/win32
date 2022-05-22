@@ -30,7 +30,7 @@ const IID_IKnownFolderManager = '{8BE2D872-86AA-4D47-B776-32CCA40C7018}';
 /// {@category com}
 class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, is 10 entries long.
-  IKnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
+  IKnownFolderManager(super.ptr);
 
   int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.lpVtbl.value
       .elementAt(3)
@@ -194,7 +194,7 @@ const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
 
 /// {@category com}
 class KnownFolderManager extends IKnownFolderManager {
-  KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
+  KnownFolderManager(super.ptr);
 
   factory KnownFolderManager.createInstance() {
     final ptr = calloc<COMObject>();

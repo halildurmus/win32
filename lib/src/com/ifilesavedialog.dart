@@ -30,7 +30,7 @@ const IID_IFileSaveDialog = '{84BCCD23-5FDE-4CDB-AEA4-AF64B83D78AB}';
 /// {@category com}
 class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, is 5 entries long.
-  IFileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
+  IFileSaveDialog(super.ptr);
 
   int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
           .elementAt(27)
@@ -106,7 +106,7 @@ const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 
 /// {@category com}
 class FileSaveDialog extends IFileSaveDialog {
-  FileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
+  FileSaveDialog(super.ptr);
 
   factory FileSaveDialog.createInstance() {
     final ptr = calloc<COMObject>();

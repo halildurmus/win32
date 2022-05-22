@@ -30,7 +30,7 @@ const IID_ISimpleAudioVolume = '{87CE5498-68D6-44E5-9215-6DA47EF883D8}';
 /// {@category com}
 class ISimpleAudioVolume extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  ISimpleAudioVolume(Pointer<COMObject> ptr) : super(ptr);
+  ISimpleAudioVolume(super.ptr);
 
   int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) => ptr
           .ref.lpVtbl.value

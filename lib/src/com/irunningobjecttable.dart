@@ -30,7 +30,7 @@ const IID_IRunningObjectTable = '{00000010-0000-0000-C000-000000000046}';
 /// {@category com}
 class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.
-  IRunningObjectTable(Pointer<COMObject> ptr) : super(ptr);
+  IRunningObjectTable(super.ptr);
 
   int Register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>

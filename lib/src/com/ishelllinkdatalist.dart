@@ -30,7 +30,7 @@ const IID_IShellLinkDataList = '{45E2B4AE-B1C3-11D0-B92F-00A0C90312E1}';
 /// {@category com}
 class IShellLinkDataList extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IShellLinkDataList(Pointer<COMObject> ptr) : super(ptr);
+  IShellLinkDataList(super.ptr);
 
   int AddDataBlock(Pointer pDataBlock) => ptr.ref.lpVtbl.value
       .elementAt(3)

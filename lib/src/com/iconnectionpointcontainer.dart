@@ -30,7 +30,7 @@ const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
 /// {@category com}
 class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IConnectionPointContainer(Pointer<COMObject> ptr) : super(ptr);
+  IConnectionPointContainer(super.ptr);
 
   int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) =>
       ptr.ref.lpVtbl.value

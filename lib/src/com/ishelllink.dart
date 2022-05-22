@@ -30,7 +30,7 @@ const IID_IShellLink = '{000214F9-0000-0000-C000-000000000046}';
 /// {@category com}
 class IShellLink extends IUnknown {
   // vtable begins at 3, is 18 entries long.
-  IShellLink(Pointer<COMObject> ptr) : super(ptr);
+  IShellLink(super.ptr);
 
   int GetPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>
@@ -238,7 +238,7 @@ const CLSID_ShellLink = '{00021401-0000-0000-C000-000000000046}';
 
 /// {@category com}
 class ShellLink extends IShellLink {
-  ShellLink(Pointer<COMObject> ptr) : super(ptr);
+  ShellLink(super.ptr);
 
   factory ShellLink.createInstance() {
     final ptr = calloc<COMObject>();

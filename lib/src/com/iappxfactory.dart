@@ -30,7 +30,7 @@ const IID_IAppxFactory = '{BEB94909-E451-438B-B5A7-D79E767B75D8}';
 /// {@category com}
 class IAppxFactory extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IAppxFactory(Pointer<COMObject> ptr) : super(ptr);
+  IAppxFactory(super.ptr);
 
   int CreatePackageWriter(
           Pointer<COMObject> outputStream,
@@ -129,7 +129,7 @@ const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
 
 /// {@category com}
 class AppxFactory extends IAppxFactory {
-  AppxFactory(Pointer<COMObject> ptr) : super(ptr);
+  AppxFactory(super.ptr);
 
   factory AppxFactory.createInstance() {
     final ptr = calloc<COMObject>();

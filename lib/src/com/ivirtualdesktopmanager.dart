@@ -30,7 +30,7 @@ const IID_IVirtualDesktopManager = '{A5CD92FF-29BE-454C-8D04-D82879FB3F1B}';
 /// {@category com}
 class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IVirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
+  IVirtualDesktopManager(super.ptr);
 
   int IsWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
@@ -81,7 +81,7 @@ const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
 
 /// {@category com}
 class VirtualDesktopManager extends IVirtualDesktopManager {
-  VirtualDesktopManager(Pointer<COMObject> ptr) : super(ptr);
+  VirtualDesktopManager(super.ptr);
 
   factory VirtualDesktopManager.createInstance() {
     final ptr = calloc<COMObject>();

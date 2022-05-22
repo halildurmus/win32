@@ -30,7 +30,7 @@ const IID_IMMDeviceEnumerator = '{A95664D2-9614-4F35-A746-DE8DB63617E6}';
 /// {@category com}
 class IMMDeviceEnumerator extends IUnknown {
   // vtable begins at 3, is 5 entries long.
-  IMMDeviceEnumerator(Pointer<COMObject> ptr) : super(ptr);
+  IMMDeviceEnumerator(super.ptr);
 
   int EnumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
@@ -107,7 +107,7 @@ const CLSID_MMDeviceEnumerator = '{BCDE0395-E52F-467C-8E3D-C4579291692E}';
 
 /// {@category com}
 class MMDeviceEnumerator extends IMMDeviceEnumerator {
-  MMDeviceEnumerator(Pointer<COMObject> ptr) : super(ptr);
+  MMDeviceEnumerator(super.ptr);
 
   factory MMDeviceEnumerator.createInstance() {
     final ptr = calloc<COMObject>();

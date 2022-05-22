@@ -30,7 +30,7 @@ const IID_IWbemHiPerfEnum = '{2705C288-79AE-11D2-B348-00105A1F8177}';
 /// {@category com}
 class IWbemHiPerfEnum extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IWbemHiPerfEnum(Pointer<COMObject> ptr) : super(ptr);
+  IWbemHiPerfEnum(super.ptr);
 
   int AddObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>

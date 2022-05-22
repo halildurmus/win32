@@ -30,7 +30,7 @@ const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 /// {@category com}
 class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.
-  INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
+  INetworkConnection(super.ptr);
 
   int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.lpVtbl.value
           .elementAt(7)

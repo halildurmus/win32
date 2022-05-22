@@ -30,7 +30,7 @@ const IID_IEnumIDList = '{000214F2-0000-0000-C000-000000000046}';
 /// {@category com}
 class IEnumIDList extends IUnknown {
   // vtable begins at 3, is 4 entries long.
-  IEnumIDList(Pointer<COMObject> ptr) : super(ptr);
+  IEnumIDList(super.ptr);
 
   int Next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
           Pointer<Uint32> pceltFetched) =>

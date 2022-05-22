@@ -22,7 +22,7 @@ class COMException implements Exception {
 
 /// Generalized Windows exception
 class WindowsException extends COMException {
-  WindowsException(int hr) : super(hr);
+  WindowsException(super.hr);
 
   /// Converts a Windows error into a friendly string.
   ///

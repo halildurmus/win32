@@ -31,7 +31,7 @@ const IID_IAppxManifestOSPackageDependency =
 /// {@category com}
 class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.
-  IAppxManifestOSPackageDependency(Pointer<COMObject> ptr) : super(ptr);
+  IAppxManifestOSPackageDependency(super.ptr);
 
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
           .elementAt(3)

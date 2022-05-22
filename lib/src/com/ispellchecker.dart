@@ -30,7 +30,7 @@ const IID_ISpellChecker = '{B6FD0B71-E2BC-4653-8D05-F197E412770B}';
 /// {@category com}
 class ISpellChecker extends IUnknown {
   // vtable begins at 3, is 14 entries long.
-  ISpellChecker(Pointer<COMObject> ptr) : super(ptr);
+  ISpellChecker(super.ptr);
 
   Pointer<Utf16> get LanguageTag {
     final retValuePtr = calloc<Pointer<Utf16>>();

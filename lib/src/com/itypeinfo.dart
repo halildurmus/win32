@@ -30,7 +30,7 @@ const IID_ITypeInfo = '{00020401-0000-0000-C000-000000000046}';
 /// {@category com}
 class ITypeInfo extends IUnknown {
   // vtable begins at 3, is 19 entries long.
-  ITypeInfo(Pointer<COMObject> ptr) : super(ptr);
+  ITypeInfo(super.ptr);
 
   int GetTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => ptr.ref.lpVtbl.value
           .elementAt(3)

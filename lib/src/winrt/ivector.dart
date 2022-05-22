@@ -62,8 +62,7 @@ class IVector<T> extends IInspectable {
   /// memory management.
   ///
   /// {@category winrt}
-  IVector(Pointer<COMObject> ptr, {this.creator, this.allocator = calloc})
-      : super(ptr) {
+  IVector(super.ptr, {this.creator, this.allocator = calloc}) {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {

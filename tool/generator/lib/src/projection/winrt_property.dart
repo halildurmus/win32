@@ -1,11 +1,8 @@
-import 'package:winmd/winmd.dart';
-
 import 'safenames.dart';
 import 'winrt_method.dart';
 
 abstract class WinRTPropertyProjection extends WinRTMethodProjection {
-  WinRTPropertyProjection(Method method, int vtableOffset)
-      : super(method, vtableOffset);
+  WinRTPropertyProjection(super.method, super.vtableOffset);
 
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName =>

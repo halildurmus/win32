@@ -31,7 +31,7 @@ const IID_IApplicationActivationManager =
 /// {@category com}
 class IApplicationActivationManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
-  IApplicationActivationManager(Pointer<COMObject> ptr) : super(ptr);
+  IApplicationActivationManager(super.ptr);
 
   int ActivateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
@@ -110,7 +110,7 @@ const CLSID_ApplicationActivationManager =
 
 /// {@category com}
 class ApplicationActivationManager extends IApplicationActivationManager {
-  ApplicationActivationManager(Pointer<COMObject> ptr) : super(ptr);
+  ApplicationActivationManager(super.ptr);
 
   factory ApplicationActivationManager.createInstance() {
     final ptr = calloc<COMObject>();
