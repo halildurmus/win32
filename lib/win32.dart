@@ -260,6 +260,7 @@ export 'src/winrt/inetworkinformationstatics.dart';
 export 'src/winrt/iphonenumberformatter.dart';
 export 'src/winrt/iphonenumberformatterstatics.dart';
 export 'src/winrt/ipropertyvalue.dart';
+export 'src/winrt/istorageitem.dart';
 export 'src/winrt/itoastnotificationfactory.dart';
 export 'src/winrt/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/iuserdatapathsstatics.dart';
