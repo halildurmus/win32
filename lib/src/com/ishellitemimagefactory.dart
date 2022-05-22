@@ -30,7 +30,7 @@ const IID_IShellItemImageFactory = '{BCC18B79-BA16-442F-80C4-8A59C30C463B}';
 /// {@category com}
 class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
-  IShellItemImageFactory(Pointer<COMObject> ptr) : super(ptr);
+  IShellItemImageFactory(super.ptr);
 
   int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) =>
       ptr.ref.lpVtbl.value
