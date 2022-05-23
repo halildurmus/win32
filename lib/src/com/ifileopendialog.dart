@@ -65,20 +65,6 @@ const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4DDE-A5A1-60F82A20AEF7}';
 class FileOpenDialog extends IFileOpenDialog {
   FileOpenDialog(super.ptr);
 
-  factory FileOpenDialog.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileOpenDialog);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IFileOpenDialog);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return FileOpenDialog(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory FileOpenDialog.createInstance() => FileOpenDialog(
+      COMObject.createFromID(CLSID_FileOpenDialog, IID_IFileOpenDialog));
 }

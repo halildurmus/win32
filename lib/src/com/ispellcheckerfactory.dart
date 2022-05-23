@@ -93,20 +93,7 @@ const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
 class SpellCheckerFactory extends ISpellCheckerFactory {
   SpellCheckerFactory(super.ptr);
 
-  factory SpellCheckerFactory.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_SpellCheckerFactory);
-    final iid = calloc<GUID>()..ref.setGUID(IID_ISpellCheckerFactory);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return SpellCheckerFactory(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory SpellCheckerFactory.createInstance() =>
+      SpellCheckerFactory(COMObject.createFromID(
+          CLSID_SpellCheckerFactory, IID_ISpellCheckerFactory));
 }

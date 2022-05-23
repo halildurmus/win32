@@ -115,20 +115,6 @@ const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
 class ShellItem extends IShellItem {
   ShellItem(super.ptr);
 
-  factory ShellItem.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellItem);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IShellItem);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ShellItem(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory ShellItem.createInstance() =>
+      ShellItem(COMObject.createFromID(CLSID_ShellItem, IID_IShellItem));
 }

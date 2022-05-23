@@ -109,20 +109,7 @@ const CLSID_MMDeviceEnumerator = '{BCDE0395-E52F-467C-8E3D-C4579291692E}';
 class MMDeviceEnumerator extends IMMDeviceEnumerator {
   MMDeviceEnumerator(super.ptr);
 
-  factory MMDeviceEnumerator.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_MMDeviceEnumerator);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IMMDeviceEnumerator);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return MMDeviceEnumerator(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory MMDeviceEnumerator.createInstance() =>
+      MMDeviceEnumerator(COMObject.createFromID(
+          CLSID_MMDeviceEnumerator, IID_IMMDeviceEnumerator));
 }

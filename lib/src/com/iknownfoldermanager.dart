@@ -196,20 +196,7 @@ const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
 class KnownFolderManager extends IKnownFolderManager {
   KnownFolderManager(super.ptr);
 
-  factory KnownFolderManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_KnownFolderManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IKnownFolderManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return KnownFolderManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory KnownFolderManager.createInstance() =>
+      KnownFolderManager(COMObject.createFromID(
+          CLSID_KnownFolderManager, IID_IKnownFolderManager));
 }

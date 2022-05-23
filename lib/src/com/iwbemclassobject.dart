@@ -405,20 +405,6 @@ const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
 class WbemClassObject extends IWbemClassObject {
   WbemClassObject(super.ptr);
 
-  factory WbemClassObject.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemClassObject);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemClassObject);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return WbemClassObject(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory WbemClassObject.createInstance() => WbemClassObject(
+      COMObject.createFromID(CLSID_WbemClassObject, IID_IWbemClassObject));
 }

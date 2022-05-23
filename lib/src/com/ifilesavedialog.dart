@@ -108,20 +108,6 @@ const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 class FileSaveDialog extends IFileSaveDialog {
   FileSaveDialog(super.ptr);
 
-  factory FileSaveDialog.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return FileSaveDialog(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory FileSaveDialog.createInstance() => FileSaveDialog(
+      COMObject.createFromID(CLSID_FileSaveDialog, IID_IFileSaveDialog));
 }

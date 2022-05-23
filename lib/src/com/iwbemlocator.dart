@@ -86,20 +86,6 @@ const CLSID_WbemLocator = '{4590F811-1D3A-11D0-891F-00AA004B2E24}';
 class WbemLocator extends IWbemLocator {
   WbemLocator(super.ptr);
 
-  factory WbemLocator.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return WbemLocator(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory WbemLocator.createInstance() =>
+      WbemLocator(COMObject.createFromID(CLSID_WbemLocator, IID_IWbemLocator));
 }

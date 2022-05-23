@@ -131,20 +131,6 @@ const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
 class AppxFactory extends IAppxFactory {
   AppxFactory(super.ptr);
 
-  factory AppxFactory.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_AppxFactory);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IAppxFactory);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return AppxFactory(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory AppxFactory.createInstance() =>
+      AppxFactory(COMObject.createFromID(CLSID_AppxFactory, IID_IAppxFactory));
 }

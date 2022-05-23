@@ -219,20 +219,6 @@ const CLSID_DesktopWallpaper = '{C2CF3110-460E-4FC1-B9D0-8A1C0C9CC4BD}';
 class DesktopWallpaper extends IDesktopWallpaper {
   DesktopWallpaper(super.ptr);
 
-  factory DesktopWallpaper.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_DesktopWallpaper);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IDesktopWallpaper);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return DesktopWallpaper(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory DesktopWallpaper.createInstance() => DesktopWallpaper(
+      COMObject.createFromID(CLSID_DesktopWallpaper, IID_IDesktopWallpaper));
 }
