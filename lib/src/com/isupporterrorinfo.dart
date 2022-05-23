@@ -1,4 +1,4 @@
-// ISupportErrorInfo.dart
+// isupporterrorinfo.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

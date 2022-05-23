@@ -1,4 +1,4 @@
-// IAppxManifestReader5.dart
+// iappxmanifestreader5.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

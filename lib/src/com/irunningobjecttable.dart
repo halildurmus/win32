@@ -1,4 +1,4 @@
-// IRunningObjectTable.dart
+// irunningobjecttable.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

@@ -1,4 +1,4 @@
-// IAppxManifestReader3.dart
+// iappxmanifestreader3.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

@@ -1,4 +1,4 @@
-// ISpellCheckerChangedEventHandler.dart
+// ispellcheckerchangedeventhandler.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

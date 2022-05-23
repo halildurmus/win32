@@ -1,4 +1,4 @@
-// IShellFolder.dart
+// ishellfolder.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

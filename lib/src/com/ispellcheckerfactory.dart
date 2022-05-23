@@ -1,4 +1,4 @@
-// ISpellCheckerFactory.dart
+// ispellcheckerfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

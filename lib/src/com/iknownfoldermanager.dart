@@ -1,4 +1,4 @@
-// IKnownFolderManager.dart
+// iknownfoldermanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

@@ -1,4 +1,4 @@
-// IWbemRefresher.dart
+// iwbemrefresher.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

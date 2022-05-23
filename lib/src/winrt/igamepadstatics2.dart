@@ -1,4 +1,4 @@
-// IGamepadStatics2.dart
+// igamepadstatics2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
