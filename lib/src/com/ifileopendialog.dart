@@ -32,7 +32,7 @@ class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileOpenDialog(super.ptr);
 
-  int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
+  int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -44,18 +44,17 @@ class IFileOpenDialog extends IFileDialog {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
 
-  int GetSelectedItems(Pointer<Pointer<COMObject>> ppsai) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(28)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
-          ptr.ref.lpVtbl, ppsai);
+  int GetSelectedItems(Pointer<Pointer<COMObject>> ppsai) => ptr.ref.vtable
+          .elementAt(28)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> ppsai)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
+      ptr.ref.lpVtbl, ppsai);
 }
 
 /// @nodoc

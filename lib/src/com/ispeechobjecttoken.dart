@@ -36,7 +36,7 @@ class ISpeechObjectToken extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class ISpeechObjectToken extends IDispatch {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -86,7 +86,7 @@ class ISpeechObjectToken extends IDispatch {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -109,7 +109,7 @@ class ISpeechObjectToken extends IDispatch {
   }
 
   int GetDescription(int Locale, Pointer<Pointer<Utf16>> Description) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -124,7 +124,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int SetId(
           Pointer<Utf16> Id, Pointer<Utf16> CategoryID, int CreateIfNotExist) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -142,7 +142,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int GetAttribute(Pointer<Utf16> AttributeName,
           Pointer<Pointer<Utf16>> AttributeValue) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(12)
               .cast<
                   Pointer<
@@ -157,7 +157,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int CreateInstance(Pointer<COMObject> pUnkOuter, int ClsContext,
           Pointer<Pointer<COMObject>> Object) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(13)
               .cast<
                   Pointer<
@@ -173,7 +173,7 @@ class ISpeechObjectToken extends IDispatch {
                       int ClsContext, Pointer<Pointer<COMObject>> Object)>()(
           ptr.ref.lpVtbl, pUnkOuter, ClsContext, Object);
 
-  int Remove(Pointer<Utf16> ObjectStorageCLSID) => ptr.ref.lpVtbl.value
+  int Remove(Pointer<Utf16> ObjectStorageCLSID) => ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
@@ -191,7 +191,7 @@ class ISpeechObjectToken extends IDispatch {
           Pointer<Utf16> FileName,
           int Folder,
           Pointer<Pointer<Utf16>> FilePath) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(15)
               .cast<
                   Pointer<
@@ -217,7 +217,7 @@ class ISpeechObjectToken extends IDispatch {
   int
       RemoveStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
               Pointer<Utf16> KeyName, int DeleteFileA) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(16)
                   .cast<
                       Pointer<
@@ -235,7 +235,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int IsUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
           Pointer<COMObject> Object, Pointer<Int16> Supported) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(17)
               .cast<
                   Pointer<
@@ -258,7 +258,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int DisplayUI(int hWnd, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
           Pointer<VARIANT> ExtraData, Pointer<COMObject> Object) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(18)
               .cast<
                   Pointer<
@@ -282,7 +282,7 @@ class ISpeechObjectToken extends IDispatch {
           ptr.ref.lpVtbl, hWnd, Title, TypeOfUI, ExtraData, Object);
 
   int MatchesAttributes(Pointer<Utf16> Attributes, Pointer<Int16> Matches) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(19)
               .cast<
                   Pointer<

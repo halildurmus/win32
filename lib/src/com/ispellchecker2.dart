@@ -32,7 +32,7 @@ class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.
   ISpellChecker2(super.ptr);
 
-  int Remove(Pointer<Utf16> word) => ptr.ref.lpVtbl.value
+  int Remove(Pointer<Utf16> word) => ptr.ref.vtable
       .elementAt(17)
       .cast<
           Pointer<

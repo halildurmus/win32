@@ -36,7 +36,7 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -59,7 +59,7 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -82,7 +82,7 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -105,7 +105,7 @@ class ISpellingError extends IUnknown {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<

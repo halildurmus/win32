@@ -34,7 +34,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int EnumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -52,7 +52,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int GetDefaultAudioEndpoint(
           int dataFlow, int role, Pointer<Pointer<COMObject>> ppEndpoint) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -66,7 +66,7 @@ class IMMDeviceEnumerator extends IUnknown {
           ptr.ref.lpVtbl, dataFlow, role, ppEndpoint);
 
   int GetDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -80,7 +80,7 @@ class IMMDeviceEnumerator extends IUnknown {
           ptr.ref.lpVtbl, pwstrId, ppDevice);
 
   int RegisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -91,7 +91,7 @@ class IMMDeviceEnumerator extends IUnknown {
       ptr.ref.lpVtbl, pClient);
 
   int UnregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

@@ -32,13 +32,13 @@ class IPersistFile extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistFile(super.ptr);
 
-  int IsDirty() => ptr.ref.lpVtbl.value
+  int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer<Utf16> pszFileName, int dwMode) => ptr.ref.lpVtbl.value
+  int Load(Pointer<Utf16> pszFileName, int dwMode) => ptr.ref.vtable
       .elementAt(5)
       .cast<
           Pointer<
@@ -50,7 +50,7 @@ class IPersistFile extends IPersist {
           int Function(Pointer, Pointer<Utf16> pszFileName,
               int dwMode)>()(ptr.ref.lpVtbl, pszFileName, dwMode);
 
-  int Save(Pointer<Utf16> pszFileName, int fRemember) => ptr.ref.lpVtbl.value
+  int Save(Pointer<Utf16> pszFileName, int fRemember) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -62,7 +62,7 @@ class IPersistFile extends IPersist {
           int Function(Pointer, Pointer<Utf16> pszFileName,
               int fRemember)>()(ptr.ref.lpVtbl, pszFileName, fRemember);
 
-  int SaveCompleted(Pointer<Utf16> pszFileName) => ptr.ref.lpVtbl.value
+  int SaveCompleted(Pointer<Utf16> pszFileName) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class IPersistFile extends IPersist {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszFileName)>()(
       ptr.ref.lpVtbl, pszFileName);
 
-  int GetCurFile(Pointer<Pointer<Utf16>> ppszFileName) => ptr.ref.lpVtbl.value
+  int GetCurFile(Pointer<Pointer<Utf16>> ppszFileName) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<

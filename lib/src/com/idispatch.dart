@@ -32,7 +32,7 @@ class IDispatch extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IDispatch(super.ptr);
 
-  int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.lpVtbl.value
+  int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +43,7 @@ class IDispatch extends IUnknown {
       ptr.ref.lpVtbl, pctinfo);
 
   int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -58,7 +58,7 @@ class IDispatch extends IUnknown {
 
   int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
           int cNames, int lcid, Pointer<Int32> rgDispId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -90,7 +90,7 @@ class IDispatch extends IUnknown {
           Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<

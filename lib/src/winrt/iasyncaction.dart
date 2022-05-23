@@ -42,7 +42,7 @@ class IAsyncAction extends IAsyncInfo {
   IAsyncAction(super.ptr);
 
   set Completed(Pointer value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<Pointer<NativeFunction<_put_Completed_Native>>>()
         .value
@@ -55,7 +55,7 @@ class IAsyncAction extends IAsyncInfo {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(12)
           .cast<Pointer<NativeFunction<_get_Completed_Native>>>()
           .value
@@ -70,7 +70,7 @@ class IAsyncAction extends IAsyncInfo {
     }
   }
 
-  int GetResults() => ptr.ref.lpVtbl.value
+  int GetResults() => ptr.ref.vtable
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetResults_Native>>>()
       .value

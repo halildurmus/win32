@@ -34,7 +34,7 @@ class IShellItemArray extends IUnknown {
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppvOut) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -56,7 +56,7 @@ class IShellItemArray extends IUnknown {
           ptr.ref.lpVtbl, pbc, bhid, riid, ppvOut);
 
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -70,7 +70,7 @@ class IShellItemArray extends IUnknown {
 
   int GetPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -88,7 +88,7 @@ class IShellItemArray extends IUnknown {
   int
       GetAttributes(
               int AttribFlags, int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(6)
                   .cast<
                       Pointer<
@@ -104,7 +104,7 @@ class IShellItemArray extends IUnknown {
                           Pointer<Uint32> psfgaoAttribs)>()(
               ptr.ref.lpVtbl, AttribFlags, sfgaoMask, psfgaoAttribs);
 
-  int GetCount(Pointer<Uint32> pdwNumItems) => ptr.ref.lpVtbl.value
+  int GetCount(Pointer<Uint32> pdwNumItems) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -114,8 +114,7 @@ class IShellItemArray extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwNumItems)>()(
       ptr.ref.lpVtbl, pdwNumItems);
 
-  int GetItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) => ptr
-          .ref.lpVtbl.value
+  int GetItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -128,17 +127,16 @@ class IShellItemArray extends IUnknown {
                   Pointer, int dwIndex, Pointer<Pointer<COMObject>> ppsi)>()(
       ptr.ref.lpVtbl, dwIndex, ppsi);
 
-  int EnumItems(Pointer<Pointer<COMObject>> ppenumShellItems) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> ppenumShellItems)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> ppenumShellItems)>()(
-          ptr.ref.lpVtbl, ppenumShellItems);
+  int EnumItems(Pointer<Pointer<COMObject>> ppenumShellItems) => ptr.ref.vtable
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> ppenumShellItems)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Pointer<COMObject>> ppenumShellItems)>()(
+      ptr.ref.lpVtbl, ppenumShellItems);
 }

@@ -32,7 +32,7 @@ class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(super.ptr);
 
-  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.lpVtbl.value
+  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

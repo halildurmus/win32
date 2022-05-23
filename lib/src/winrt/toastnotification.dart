@@ -73,7 +73,7 @@ class ToastNotification extends IInspectable {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<Pointer<NativeFunction<_get_Content_Native>>>()
           .value
@@ -89,7 +89,7 @@ class ToastNotification extends IInspectable {
   }
 
   set ExpirationTime(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<_put_ExpirationTime_Native>>>()
         .value
@@ -102,7 +102,7 @@ class ToastNotification extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<Pointer<NativeFunction<_get_ExpirationTime_Native>>>()
           .value
@@ -118,39 +118,39 @@ class ToastNotification extends IInspectable {
   }
 
   int add_Dismissed(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(9)
           .cast<Pointer<NativeFunction<_add_Dismissed_Native>>>()
           .value
           .asFunction<_add_Dismissed_Dart>()(ptr.ref.lpVtbl, handler, result);
 
-  int remove_Dismissed(int token) => ptr.ref.lpVtbl.value
+  int remove_Dismissed(int token) => ptr.ref.vtable
       .elementAt(10)
       .cast<Pointer<NativeFunction<_remove_Dismissed_Native>>>()
       .value
       .asFunction<_remove_Dismissed_Dart>()(ptr.ref.lpVtbl, token);
 
   int add_Activated(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(11)
           .cast<Pointer<NativeFunction<_add_Activated_Native>>>()
           .value
           .asFunction<_add_Activated_Dart>()(ptr.ref.lpVtbl, handler, result);
 
-  int remove_Activated(int token) => ptr.ref.lpVtbl.value
+  int remove_Activated(int token) => ptr.ref.vtable
       .elementAt(12)
       .cast<Pointer<NativeFunction<_remove_Activated_Native>>>()
       .value
       .asFunction<_remove_Activated_Dart>()(ptr.ref.lpVtbl, token);
 
   int add_Failed(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(13)
           .cast<Pointer<NativeFunction<_add_Failed_Native>>>()
           .value
           .asFunction<_add_Failed_Dart>()(ptr.ref.lpVtbl, handler, result);
 
-  int remove_Failed(int token) => ptr.ref.lpVtbl.value
+  int remove_Failed(int token) => ptr.ref.vtable
       .elementAt(14)
       .cast<Pointer<NativeFunction<_remove_Failed_Native>>>()
       .value

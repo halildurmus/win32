@@ -51,13 +51,13 @@ class IGamepadStatics extends IInspectable {
   IGamepadStatics(super.ptr);
 
   int add_GamepadAdded(Pointer value, Pointer<Uint32> result) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(6)
           .cast<Pointer<NativeFunction<_add_GamepadAdded_Native>>>()
           .value
           .asFunction<_add_GamepadAdded_Dart>()(ptr.ref.lpVtbl, value, result);
 
-  int remove_GamepadAdded(int token) => ptr.ref.lpVtbl.value
+  int remove_GamepadAdded(int token) => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<_remove_GamepadAdded_Native>>>()
       .value
@@ -70,7 +70,7 @@ class IGamepadStatics extends IInspectable {
       .value
       .asFunction<_add_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, value, result);
 
-  int remove_GamepadRemoved(int token) => ptr.ref.lpVtbl.value
+  int remove_GamepadRemoved(int token) => ptr.ref.vtable
       .elementAt(9)
       .cast<Pointer<NativeFunction<_remove_GamepadRemoved_Native>>>()
       .value
@@ -80,7 +80,7 @@ class IGamepadStatics extends IInspectable {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(10)
           .cast<Pointer<NativeFunction<_get_Gamepads_Native>>>()
           .value

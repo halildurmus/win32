@@ -36,7 +36,7 @@ class IAppxFactory extends IUnknown {
           Pointer<COMObject> outputStream,
           Pointer<APPX_PACKAGE_SETTINGS> settings,
           Pointer<Pointer<COMObject>> packageWriter) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -57,7 +57,7 @@ class IAppxFactory extends IUnknown {
 
   int CreatePackageReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> packageReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -72,7 +72,7 @@ class IAppxFactory extends IUnknown {
 
   int CreateManifestReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> manifestReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -87,7 +87,7 @@ class IAppxFactory extends IUnknown {
 
   int CreateBlockMapReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> blockMapReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -104,7 +104,7 @@ class IAppxFactory extends IUnknown {
           Pointer<COMObject> blockMapStream,
           Pointer<Utf16> signatureFileName,
           Pointer<Pointer<COMObject>> blockMapReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<

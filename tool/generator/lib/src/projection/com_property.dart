@@ -32,7 +32,7 @@ class ComGetPropertyProjection extends ComPropertyProjection {
         final retValuePtr = calloc<${returnValue.nativeType}>();
         
         try {
-          final hr = ptr.ref.lpVtbl.value
+          final hr = ptr.ref.vtable
             .elementAt($vtableOffset)
             .cast<Pointer<NativeFunction<$nativePrototype>>>()
             .value
@@ -56,7 +56,7 @@ class ComSetPropertyProjection extends ComPropertyProjection {
   @override
   String toString() => '''
     set $exposedMethodName(${parameters.first.type.dartType} value) {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
         .elementAt($vtableOffset)
         .cast<Pointer<NativeFunction<$nativePrototype>>>()
         .value

@@ -33,7 +33,7 @@ class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(super.ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +43,7 @@ class IAppxManifestOSPackageDependency extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int GetVersion(Pointer<Uint64> version) => ptr.ref.lpVtbl.value
+  int GetVersion(Pointer<Uint64> version) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

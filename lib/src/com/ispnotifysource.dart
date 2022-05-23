@@ -32,7 +32,7 @@ class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   ISpNotifySource(super.ptr);
 
-  int SetNotifySink(Pointer<COMObject> pNotifySink) => ptr.ref.lpVtbl.value
+  int SetNotifySink(Pointer<COMObject> pNotifySink) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -44,7 +44,7 @@ class ISpNotifySource extends IUnknown {
               Pointer<COMObject> pNotifySink)>()(ptr.ref.lpVtbl, pNotifySink);
 
   int SetNotifyWindowMessage(int hWnd, int Msg, int wParam, int lParam) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -60,7 +60,7 @@ class ISpNotifySource extends IUnknown {
           Pointer<Pointer<NativeFunction<SpNotifyCallback>>> pfnCallback,
           int wParam,
           int lParam) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -82,7 +82,7 @@ class ISpNotifySource extends IUnknown {
 
   int SetNotifyCallbackInterface(
           Pointer<COMObject> pSpCallback, int wParam, int lParam) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -94,13 +94,13 @@ class ISpNotifySource extends IUnknown {
               int Function(Pointer, Pointer<COMObject> pSpCallback, int wParam,
                   int lParam)>()(ptr.ref.lpVtbl, pSpCallback, wParam, lParam);
 
-  int SetNotifyWin32Event() => ptr.ref.lpVtbl.value
+  int SetNotifyWin32Event() => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int WaitForNotifyEvent(int dwMilliseconds) => ptr.ref.lpVtbl.value
+  int WaitForNotifyEvent(int dwMilliseconds) => ptr.ref.vtable
       .elementAt(8)
       .cast<
           Pointer<
@@ -110,7 +110,7 @@ class ISpNotifySource extends IUnknown {
           int Function(
               Pointer, int dwMilliseconds)>()(ptr.ref.lpVtbl, dwMilliseconds);
 
-  int GetNotifyEventHandle() => ptr.ref.lpVtbl.value
+  int GetNotifyEventHandle() => ptr.ref.vtable
       .elementAt(9)
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
       .value

@@ -34,7 +34,7 @@ class IRunningObjectTable extends IUnknown {
 
   int Register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -55,7 +55,7 @@ class IRunningObjectTable extends IUnknown {
                       Pointer<Uint32> pdwRegister)>()(
           ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
-  int Revoke(int dwRegister) => ptr.ref.lpVtbl.value
+  int Revoke(int dwRegister) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>>()
@@ -64,7 +64,7 @@ class IRunningObjectTable extends IUnknown {
           int Function(Pointer, int dwRegister)>()(ptr.ref.lpVtbl, dwRegister);
 
   int IsRunning(Pointer<COMObject> pmkObjectName) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -79,7 +79,7 @@ class IRunningObjectTable extends IUnknown {
   int
       GetObject(Pointer<COMObject> pmkObjectName,
               Pointer<Pointer<COMObject>> ppunkObject) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(6)
                   .cast<
                       Pointer<
@@ -95,7 +95,7 @@ class IRunningObjectTable extends IUnknown {
               ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
   int NoteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -110,7 +110,7 @@ class IRunningObjectTable extends IUnknown {
 
   int GetTimeOfLastChange(
           Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -125,8 +125,7 @@ class IRunningObjectTable extends IUnknown {
                   Pointer<FILETIME>
                       pfiletime)>()(ptr.ref.lpVtbl, pmkObjectName, pfiletime);
 
-  int EnumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) => ptr
-          .ref.lpVtbl.value
+  int EnumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<

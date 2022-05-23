@@ -39,7 +39,7 @@ class IAudioClient extends IUnknown {
           int hnsPeriodicity,
           Pointer<WAVEFORMATEX> pFormat,
           Pointer<GUID> AudioSessionGuid) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -71,7 +71,7 @@ class IAudioClient extends IUnknown {
           AudioSessionGuid);
 
   int GetBufferSize(Pointer<Uint32> pNumBufferFrames) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -83,7 +83,7 @@ class IAudioClient extends IUnknown {
                   int Function(Pointer, Pointer<Uint32> pNumBufferFrames)>()(
           ptr.ref.lpVtbl, pNumBufferFrames);
 
-  int GetStreamLatency(Pointer<Int64> phnsLatency) => ptr.ref.lpVtbl.value
+  int GetStreamLatency(Pointer<Int64> phnsLatency) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -93,23 +93,22 @@ class IAudioClient extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int64> phnsLatency)>()(
       ptr.ref.lpVtbl, phnsLatency);
 
-  int GetCurrentPadding(Pointer<Uint32> pNumPaddingFrames) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Uint32> pNumPaddingFrames)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Uint32> pNumPaddingFrames)>()(
-          ptr.ref.lpVtbl, pNumPaddingFrames);
+  int GetCurrentPadding(Pointer<Uint32> pNumPaddingFrames) => ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Uint32> pNumPaddingFrames)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Uint32> pNumPaddingFrames)>()(
+      ptr.ref.lpVtbl, pNumPaddingFrames);
 
   int
       IsFormatSupported(int ShareMode, Pointer<WAVEFORMATEX> pFormat,
               Pointer<Pointer<WAVEFORMATEX>> ppClosestMatch) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(7)
                   .cast<
                       Pointer<
@@ -130,7 +129,7 @@ class IAudioClient extends IUnknown {
               ptr.ref.lpVtbl, ShareMode, pFormat, ppClosestMatch);
 
   int GetMixFormat(Pointer<Pointer<WAVEFORMATEX>> ppDeviceFormat) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -145,7 +144,7 @@ class IAudioClient extends IUnknown {
 
   int GetDevicePeriod(Pointer<Int64> phnsDefaultDevicePeriod,
           Pointer<Int64> phnsMinimumDevicePeriod) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -160,25 +159,25 @@ class IAudioClient extends IUnknown {
                       Pointer<Int64> phnsMinimumDevicePeriod)>()(
           ptr.ref.lpVtbl, phnsDefaultDevicePeriod, phnsMinimumDevicePeriod);
 
-  int Start() => ptr.ref.lpVtbl.value
+  int Start() => ptr.ref.vtable
       .elementAt(10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Stop() => ptr.ref.lpVtbl.value
+  int Stop() => ptr.ref.vtable
       .elementAt(11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Reset() => ptr.ref.lpVtbl.value
+  int Reset() => ptr.ref.vtable
       .elementAt(12)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int SetEventHandle(int eventHandle) => ptr.ref.lpVtbl.value
+  int SetEventHandle(int eventHandle) => ptr.ref.vtable
       .elementAt(13)
       .cast<
           Pointer<
@@ -188,8 +187,7 @@ class IAudioClient extends IUnknown {
           int Function(
               Pointer, int eventHandle)>()(ptr.ref.lpVtbl, eventHandle);
 
-  int GetService(Pointer<GUID> riid, Pointer<Pointer> ppv) => ptr
-      .ref.lpVtbl.value
+  int GetService(Pointer<GUID> riid, Pointer<Pointer> ppv) => ptr.ref.vtable
       .elementAt(14)
       .cast<
           Pointer<
