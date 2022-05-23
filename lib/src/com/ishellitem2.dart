@@ -1,4 +1,4 @@
-// IShellItem2.dart
+// ishellitem2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

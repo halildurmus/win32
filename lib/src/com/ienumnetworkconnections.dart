@@ -1,4 +1,4 @@
-// IEnumNetworkConnections.dart
+// ienumnetworkconnections.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

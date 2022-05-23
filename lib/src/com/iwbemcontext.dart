@@ -1,4 +1,4 @@
-// IWbemContext.dart
+// iwbemcontext.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -145,20 +145,6 @@ const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
 class WbemContext extends IWbemContext {
   WbemContext(super.ptr);
 
-  factory WbemContext.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemContext);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemContext);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return WbemContext(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory WbemContext.createInstance() =>
+      WbemContext(COMObject.createFromID(CLSID_WbemContext, IID_IWbemContext));
 }

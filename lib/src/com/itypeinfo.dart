@@ -1,4 +1,4 @@
-// ITypeInfo.dart
+// itypeinfo.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

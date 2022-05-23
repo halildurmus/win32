@@ -1,4 +1,4 @@
-// ISpVoice.dart
+// ispvoice.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -339,20 +339,6 @@ const CLSID_SpVoice = '{96749377-3391-11D2-9EE3-00C04F797396}';
 class SpVoice extends ISpVoice {
   SpVoice(super.ptr);
 
-  factory SpVoice.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_SpVoice);
-    final iid = calloc<GUID>()..ref.setGUID(IID_ISpVoice);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return SpVoice(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory SpVoice.createInstance() =>
+      SpVoice(COMObject.createFromID(CLSID_SpVoice, IID_ISpVoice));
 }

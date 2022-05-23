@@ -1,4 +1,4 @@
-// IAudioClient.dart
+// iaudioclient.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

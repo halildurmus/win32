@@ -1,4 +1,4 @@
-// INetworkListManager.dart
+// inetworklistmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -182,20 +182,7 @@ const CLSID_NetworkListManager = '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
 class NetworkListManager extends INetworkListManager {
   NetworkListManager(super.ptr);
 
-  factory NetworkListManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_NetworkListManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_INetworkListManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return NetworkListManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory NetworkListManager.createInstance() =>
+      NetworkListManager(COMObject.createFromID(
+          CLSID_NetworkListManager, IID_INetworkListManager));
 }

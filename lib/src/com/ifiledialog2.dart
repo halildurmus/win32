@@ -1,4 +1,4 @@
-// IFileDialog2.dart
+// ifiledialog2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

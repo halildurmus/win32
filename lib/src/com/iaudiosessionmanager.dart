@@ -1,4 +1,4 @@
-// IAudioSessionManager.dart
+// iaudiosessionmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

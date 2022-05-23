@@ -1,4 +1,4 @@
-// IApplicationActivationManager.dart
+// iapplicationactivationmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -112,21 +112,8 @@ const CLSID_ApplicationActivationManager =
 class ApplicationActivationManager extends IApplicationActivationManager {
   ApplicationActivationManager(super.ptr);
 
-  factory ApplicationActivationManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()
-      ..ref.setGUID(CLSID_ApplicationActivationManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IApplicationActivationManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ApplicationActivationManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory ApplicationActivationManager.createInstance() =>
+      ApplicationActivationManager(COMObject.createFromID(
+          CLSID_ApplicationActivationManager,
+          IID_IApplicationActivationManager));
 }

@@ -1,4 +1,4 @@
-// IVirtualDesktopManager.dart
+// ivirtualdesktopmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -83,20 +83,7 @@ const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
 class VirtualDesktopManager extends IVirtualDesktopManager {
   VirtualDesktopManager(super.ptr);
 
-  factory VirtualDesktopManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_VirtualDesktopManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IVirtualDesktopManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return VirtualDesktopManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory VirtualDesktopManager.createInstance() =>
+      VirtualDesktopManager(COMObject.createFromID(
+          CLSID_VirtualDesktopManager, IID_IVirtualDesktopManager));
 }

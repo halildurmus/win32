@@ -1,4 +1,4 @@
-// IAppxManifestApplicationsEnumerator.dart
+// iappxmanifestapplicationsenumerator.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

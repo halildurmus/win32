@@ -1,4 +1,4 @@
-// IAppxManifestPackageId.dart
+// iappxmanifestpackageid.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

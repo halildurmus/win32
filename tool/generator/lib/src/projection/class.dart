@@ -50,22 +50,8 @@ class ComClassProjection extends ComInterfaceProjection {
     class $shortName extends ${interface.shortName} {
       $shortName(super.ptr);
 
-      factory $shortName.createInstance() {
-        final ptr = calloc<COMObject>();
-        final clsid = calloc<GUID>()..ref.setGUID(CLSID_$shortName);
-        final iid = calloc<GUID>()..ref.setGUID(IID_${interface.shortName});
-
-        try {
-          final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-          if (FAILED(hr)) throw WindowsException(hr);
-
-          return $shortName(ptr);
-        } finally {
-          free(clsid);
-          free(iid);
-        }
-      }
+      factory $shortName.createInstance() => $shortName(
+          COMObject.createFromID(CLSID_$shortName, IID_${interface.shortName}));
     }
 ''';
 }

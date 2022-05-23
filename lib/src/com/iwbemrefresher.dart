@@ -1,4 +1,4 @@
-// IWbemRefresher.dart
+// iwbemrefresher.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -46,20 +46,6 @@ const CLSID_WbemRefresher = '{C71566F2-561E-11D1-AD87-00C04FD8FDFF}';
 class WbemRefresher extends IWbemRefresher {
   WbemRefresher(super.ptr);
 
-  factory WbemRefresher.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemRefresher);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemRefresher);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return WbemRefresher(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory WbemRefresher.createInstance() => WbemRefresher(
+      COMObject.createFromID(CLSID_WbemRefresher, IID_IWbemRefresher));
 }

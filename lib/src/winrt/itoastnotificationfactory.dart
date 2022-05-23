@@ -1,4 +1,4 @@
-// IToastNotificationFactory.dart
+// itoastnotificationfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

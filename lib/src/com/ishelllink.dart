@@ -1,4 +1,4 @@
-// IShellLink.dart
+// ishelllink.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -240,20 +240,6 @@ const CLSID_ShellLink = '{00021401-0000-0000-C000-000000000046}';
 class ShellLink extends IShellLink {
   ShellLink(super.ptr);
 
-  factory ShellLink.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellLink);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IShellLink);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ShellLink(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory ShellLink.createInstance() =>
+      ShellLink(COMObject.createFromID(CLSID_ShellLink, IID_IShellLink));
 }
