@@ -117,12 +117,11 @@ class ToastNotification extends IInspectable {
     }
   }
 
-  int add_Dismissed(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.vtable
-          .elementAt(9)
-          .cast<Pointer<NativeFunction<_add_Dismissed_Native>>>()
-          .value
-          .asFunction<_add_Dismissed_Dart>()(ptr.ref.lpVtbl, handler, result);
+  int add_Dismissed(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
+      .elementAt(9)
+      .cast<Pointer<NativeFunction<_add_Dismissed_Native>>>()
+      .value
+      .asFunction<_add_Dismissed_Dart>()(ptr.ref.lpVtbl, handler, result);
 
   int remove_Dismissed(int token) => ptr.ref.vtable
       .elementAt(10)
@@ -130,12 +129,11 @@ class ToastNotification extends IInspectable {
       .value
       .asFunction<_remove_Dismissed_Dart>()(ptr.ref.lpVtbl, token);
 
-  int add_Activated(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.vtable
-          .elementAt(11)
-          .cast<Pointer<NativeFunction<_add_Activated_Native>>>()
-          .value
-          .asFunction<_add_Activated_Dart>()(ptr.ref.lpVtbl, handler, result);
+  int add_Activated(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
+      .elementAt(11)
+      .cast<Pointer<NativeFunction<_add_Activated_Native>>>()
+      .value
+      .asFunction<_add_Activated_Dart>()(ptr.ref.lpVtbl, handler, result);
 
   int remove_Activated(int token) => ptr.ref.vtable
       .elementAt(12)
@@ -143,12 +141,11 @@ class ToastNotification extends IInspectable {
       .value
       .asFunction<_remove_Activated_Dart>()(ptr.ref.lpVtbl, token);
 
-  int add_Failed(Pointer handler, Pointer<Uint32> result) =>
-      ptr.ref.vtable
-          .elementAt(13)
-          .cast<Pointer<NativeFunction<_add_Failed_Native>>>()
-          .value
-          .asFunction<_add_Failed_Dart>()(ptr.ref.lpVtbl, handler, result);
+  int add_Failed(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
+      .elementAt(13)
+      .cast<Pointer<NativeFunction<_add_Failed_Native>>>()
+      .value
+      .asFunction<_add_Failed_Dart>()(ptr.ref.lpVtbl, handler, result);
 
   int remove_Failed(int token) => ptr.ref.vtable
       .elementAt(14)
