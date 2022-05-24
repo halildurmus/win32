@@ -32,8 +32,7 @@ class IWbemClassObject extends IUnknown {
   // vtable begins at 3, is 24 entries long.
   IWbemClassObject(super.ptr);
 
-  int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr
-          .ref.lpVtbl.value
+  int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -47,7 +46,7 @@ class IWbemClassObject extends IUnknown {
 
   int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -72,7 +71,7 @@ class IWbemClassObject extends IUnknown {
 
   int Put(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
           int Type) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -88,7 +87,7 @@ class IWbemClassObject extends IUnknown {
                   Pointer<VARIANT> pVal,
                   int Type)>()(ptr.ref.lpVtbl, wszName, lFlags, pVal, Type);
 
-  int Delete(Pointer<Utf16> wszName) => ptr.ref.lpVtbl.value
+  int Delete(Pointer<Utf16> wszName) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -100,7 +99,7 @@ class IWbemClassObject extends IUnknown {
 
   int GetNames(Pointer<Utf16> wszQualifierName, int lFlags,
           Pointer<VARIANT> pQualifierVal, Pointer<Pointer<SAFEARRAY>> pNames) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -121,7 +120,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<SAFEARRAY>> pNames)>()(
           ptr.ref.lpVtbl, wszQualifierName, lFlags, pQualifierVal, pNames);
 
-  int BeginEnumeration(int lEnumFlags) => ptr.ref.lpVtbl.value
+  int BeginEnumeration(int lEnumFlags) => ptr.ref.vtable
       .elementAt(8)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>>()
@@ -131,7 +130,7 @@ class IWbemClassObject extends IUnknown {
 
   int Next(int lFlags, Pointer<Pointer<Utf16>> strName, Pointer<VARIANT> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -154,7 +153,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Int32> plFlavor)>()(
           ptr.ref.lpVtbl, lFlags, strName, pVal, pType, plFlavor);
 
-  int EndEnumeration() => ptr.ref.lpVtbl.value
+  int EndEnumeration() => ptr.ref.vtable
       .elementAt(10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
@@ -162,7 +161,7 @@ class IWbemClassObject extends IUnknown {
 
   int GetPropertyQualifierSet(
           Pointer<Utf16> wszProperty, Pointer<Pointer<COMObject>> ppQualSet) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -175,7 +174,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<COMObject>> ppQualSet)>()(
           ptr.ref.lpVtbl, wszProperty, ppQualSet);
 
-  int Clone(Pointer<Pointer<COMObject>> ppCopy) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppCopy) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -188,7 +187,7 @@ class IWbemClassObject extends IUnknown {
       ptr.ref.lpVtbl, ppCopy);
 
   int GetObjectText(int lFlags, Pointer<Pointer<Utf16>> pstrObjectText) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(13)
               .cast<
                   Pointer<
@@ -202,7 +201,7 @@ class IWbemClassObject extends IUnknown {
           ptr.ref.lpVtbl, lFlags, pstrObjectText);
 
   int SpawnDerivedClass(int lFlags, Pointer<Pointer<COMObject>> ppNewClass) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(14)
               .cast<
                   Pointer<
@@ -216,7 +215,7 @@ class IWbemClassObject extends IUnknown {
           ptr.ref.lpVtbl, lFlags, ppNewClass);
 
   int SpawnInstance(int lFlags, Pointer<Pointer<COMObject>> ppNewInstance) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(15)
               .cast<
                   Pointer<
@@ -229,23 +228,22 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<COMObject>> ppNewInstance)>()(
           ptr.ref.lpVtbl, lFlags, ppNewInstance);
 
-  int CompareTo(int lFlags, Pointer<COMObject> pCompareTo) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(16)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer, Int32 lFlags,
-                              Pointer<COMObject> pCompareTo)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, int lFlags, Pointer<COMObject> pCompareTo)>()(
-          ptr.ref.lpVtbl, lFlags, pCompareTo);
+  int CompareTo(int lFlags, Pointer<COMObject> pCompareTo) => ptr.ref.vtable
+          .elementAt(16)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer, Int32 lFlags,
+                          Pointer<COMObject> pCompareTo)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, int lFlags, Pointer<COMObject> pCompareTo)>()(
+      ptr.ref.lpVtbl, lFlags, pCompareTo);
 
   int GetPropertyOrigin(
           Pointer<Utf16> wszName, Pointer<Pointer<Utf16>> pstrClassName) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(17)
               .cast<
                   Pointer<
@@ -258,7 +256,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<Utf16>> pstrClassName)>()(
           ptr.ref.lpVtbl, wszName, pstrClassName);
 
-  int InheritsFrom(Pointer<Utf16> strAncestor) => ptr.ref.lpVtbl.value
+  int InheritsFrom(Pointer<Utf16> strAncestor) => ptr.ref.vtable
           .elementAt(18)
           .cast<
               Pointer<
@@ -273,7 +271,7 @@ class IWbemClassObject extends IUnknown {
           int lFlags,
           Pointer<Pointer<COMObject>> ppInSignature,
           Pointer<Pointer<COMObject>> ppOutSignature) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(19)
               .cast<
                   Pointer<
@@ -296,7 +294,7 @@ class IWbemClassObject extends IUnknown {
 
   int PutMethod(Pointer<Utf16> wszName, int lFlags,
           Pointer<COMObject> pInSignature, Pointer<COMObject> pOutSignature) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(20)
               .cast<
                   Pointer<
@@ -317,7 +315,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<COMObject> pOutSignature)>()(
           ptr.ref.lpVtbl, wszName, lFlags, pInSignature, pOutSignature);
 
-  int DeleteMethod(Pointer<Utf16> wszName) => ptr.ref.lpVtbl.value
+  int DeleteMethod(Pointer<Utf16> wszName) => ptr.ref.vtable
           .elementAt(21)
           .cast<
               Pointer<
@@ -327,7 +325,7 @@ class IWbemClassObject extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Utf16> wszName)>()(
       ptr.ref.lpVtbl, wszName);
 
-  int BeginMethodEnumeration(int lEnumFlags) => ptr.ref.lpVtbl.value
+  int BeginMethodEnumeration(int lEnumFlags) => ptr.ref.vtable
       .elementAt(22)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 lEnumFlags)>>>()
@@ -340,7 +338,7 @@ class IWbemClassObject extends IUnknown {
           Pointer<Pointer<Utf16>> pstrName,
           Pointer<Pointer<COMObject>> ppInSignature,
           Pointer<Pointer<COMObject>> ppOutSignature) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(23)
               .cast<
                   Pointer<
@@ -361,7 +359,7 @@ class IWbemClassObject extends IUnknown {
                       Pointer<Pointer<COMObject>> ppOutSignature)>()(
           ptr.ref.lpVtbl, lFlags, pstrName, ppInSignature, ppOutSignature);
 
-  int EndMethodEnumeration() => ptr.ref.lpVtbl.value
+  int EndMethodEnumeration() => ptr.ref.vtable
       .elementAt(24)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
@@ -369,7 +367,7 @@ class IWbemClassObject extends IUnknown {
 
   int GetMethodQualifierSet(
           Pointer<Utf16> wszMethod, Pointer<Pointer<COMObject>> ppQualSet) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(25)
               .cast<
                   Pointer<
@@ -384,7 +382,7 @@ class IWbemClassObject extends IUnknown {
 
   int GetMethodOrigin(Pointer<Utf16> wszMethodName,
           Pointer<Pointer<Utf16>> pstrClassName) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(26)
               .cast<
                   Pointer<

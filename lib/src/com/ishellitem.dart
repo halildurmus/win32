@@ -34,7 +34,7 @@ class IShellItem extends IUnknown {
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -55,7 +55,7 @@ class IShellItem extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.lpVtbl.value
+  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -67,7 +67,7 @@ class IShellItem extends IUnknown {
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
   int GetDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -81,7 +81,7 @@ class IShellItem extends IUnknown {
       ptr.ref.lpVtbl, sigdnName, ppszName);
 
   int GetAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -95,7 +95,7 @@ class IShellItem extends IUnknown {
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
   int Compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(7)
       .cast<
           Pointer<

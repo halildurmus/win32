@@ -38,7 +38,7 @@ class IAudioCaptureClient extends IUnknown {
           Pointer<Uint32> pdwFlags,
           Pointer<Uint64> pu64DevicePosition,
           Pointer<Uint64> pu64QPCPosition) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -66,7 +66,7 @@ class IAudioCaptureClient extends IUnknown {
           pu64DevicePosition,
           pu64QPCPosition);
 
-  int ReleaseBuffer(int NumFramesRead) => ptr.ref.lpVtbl.value
+  int ReleaseBuffer(int NumFramesRead) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -77,7 +77,7 @@ class IAudioCaptureClient extends IUnknown {
               Pointer, int NumFramesRead)>()(ptr.ref.lpVtbl, NumFramesRead);
 
   int GetNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

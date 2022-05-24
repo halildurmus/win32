@@ -37,7 +37,7 @@ class IMMDevice extends IUnknown {
           int dwClsCtx,
           Pointer<PROPVARIANT> pActivationParams,
           Pointer<Pointer> ppInterface) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class IMMDevice extends IUnknown {
   int OpenPropertyStore(
           int stgmAccess, Pointer<Pointer<COMObject>> ppProperties) =>
       ptr
-              .ref.lpVtbl.value
+              .ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -74,7 +74,7 @@ class IMMDevice extends IUnknown {
                       Pointer<Pointer<COMObject>> ppProperties)>()(
           ptr.ref.lpVtbl, stgmAccess, ppProperties);
 
-  int GetId(Pointer<Pointer<Utf16>> ppstrId) => ptr.ref.lpVtbl.value
+  int GetId(Pointer<Pointer<Utf16>> ppstrId) => ptr.ref.vtable
       .elementAt(5)
       .cast<
           Pointer<
@@ -85,7 +85,7 @@ class IMMDevice extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> ppstrId)>()(ptr.ref.lpVtbl, ppstrId);
 
-  int GetState(Pointer<Uint32> pdwState) => ptr.ref.lpVtbl.value
+  int GetState(Pointer<Uint32> pdwState) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

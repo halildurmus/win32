@@ -33,7 +33,7 @@ class INetworkListManager extends IDispatch {
   INetworkListManager(super.ptr);
 
   int GetNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -47,7 +47,7 @@ class INetworkListManager extends IDispatch {
           ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
   int GetNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class INetworkListManager extends IDispatch {
           ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
   int GetNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -76,7 +76,7 @@ class INetworkListManager extends IDispatch {
   int
       GetNetworkConnection(GUID gdNetworkConnectionId,
               Pointer<Pointer<COMObject>> ppNetworkConnection) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(10)
                   .cast<
                       Pointer<
@@ -96,7 +96,7 @@ class INetworkListManager extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -120,7 +120,7 @@ class INetworkListManager extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -140,7 +140,7 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -153,7 +153,7 @@ class INetworkListManager extends IDispatch {
   int SetSimulatedProfileInfo(
           Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
       ptr
-              .ref.lpVtbl.value
+              .ref.vtable
               .elementAt(14)
               .cast<
                   Pointer<
@@ -168,7 +168,7 @@ class INetworkListManager extends IDispatch {
                       Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo)>()(
           ptr.ref.lpVtbl, pSimulatedInfo);
 
-  int ClearSimulatedProfileInfo() => ptr.ref.lpVtbl.value
+  int ClearSimulatedProfileInfo() => ptr.ref.vtable
       .elementAt(15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

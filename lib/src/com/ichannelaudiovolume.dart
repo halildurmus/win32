@@ -32,7 +32,7 @@ class IChannelAudioVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IChannelAudioVolume(super.ptr);
 
-  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.lpVtbl.value
+  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +44,7 @@ class IChannelAudioVolume extends IUnknown {
 
   int SetChannelVolume(
           int dwIndex, double fLevel, Pointer<GUID> EventContext) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -57,8 +57,7 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwIndex, fLevel, EventContext);
 
-  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) =>
-      ptr.ref.lpVtbl.value
+  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -67,12 +66,12 @@ class IChannelAudioVolume extends IUnknown {
                           Pointer, Uint32 dwIndex, Pointer<Float> pfLevel)>>>()
           .value
           .asFunction<
-              int Function(Pointer, int dwIndex,
-                  Pointer<Float> pfLevel)>()(ptr.ref.lpVtbl, dwIndex, pfLevel);
+              int Function(Pointer, int dwIndex, Pointer<Float> pfLevel)>()(
+      ptr.ref.lpVtbl, dwIndex, pfLevel);
 
   int SetAllVolumes(
           int dwCount, Pointer<Float> pfVolumes, Pointer<GUID> EventContext) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -88,8 +87,7 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwCount, pfVolumes, EventContext);
 
-  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr
-      .ref.lpVtbl.value
+  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(7)
       .cast<
           Pointer<

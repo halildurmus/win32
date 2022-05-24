@@ -36,7 +36,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -57,7 +57,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Path(Pointer<Utf16> value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<
             Pointer<
@@ -73,7 +73,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -94,7 +94,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Description(Pointer<Utf16> value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
             Pointer<
@@ -110,7 +110,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -131,7 +131,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set WorkingDirectory(Pointer<Utf16> value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(12)
         .cast<
             Pointer<
@@ -147,7 +147,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -168,7 +168,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Arguments(Pointer<Utf16> value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<
             Pointer<
@@ -184,7 +184,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(15)
               .cast<
                   Pointer<
@@ -204,7 +204,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set Hotkey(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(16)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 iHK)>>>()
         .value
@@ -217,7 +217,7 @@ class IShellLinkDual extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(17)
           .cast<
               Pointer<
@@ -238,7 +238,7 @@ class IShellLinkDual extends IDispatch {
   }
 
   set ShowCommand(int value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(18)
         .cast<
             Pointer<
@@ -250,14 +250,14 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int Resolve(int fFlags) => ptr.ref.lpVtbl.value
+  int Resolve(int fFlags) => ptr.ref.vtable
       .elementAt(19)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int fFlags)>()(ptr.ref.lpVtbl, fFlags);
 
   int GetIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(20)
           .cast<
               Pointer<
@@ -269,7 +269,7 @@ class IShellLinkDual extends IDispatch {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbs,
                   Pointer<Int32> piIcon)>()(ptr.ref.lpVtbl, pbs, piIcon);
 
-  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.lpVtbl.value
+  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.vtable
       .elementAt(21)
       .cast<
           Pointer<
@@ -280,7 +280,7 @@ class IShellLinkDual extends IDispatch {
           int Function(Pointer, Pointer<Utf16> bs,
               int iIcon)>()(ptr.ref.lpVtbl, bs, iIcon);
 
-  int Save(VARIANT vWhere) => ptr.ref.lpVtbl.value
+  int Save(VARIANT vWhere) => ptr.ref.vtable
       .elementAt(22)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, VARIANT vWhere)>>>()
       .value

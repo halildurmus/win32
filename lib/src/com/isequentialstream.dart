@@ -32,7 +32,7 @@ class ISequentialStream extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   ISequentialStream(super.ptr);
 
-  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.lpVtbl.value
+  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -44,8 +44,7 @@ class ISequentialStream extends IUnknown {
           int Function(Pointer, Pointer pv, int cb,
               Pointer<Uint32> pcbRead)>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr
-          .ref.lpVtbl.value
+  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

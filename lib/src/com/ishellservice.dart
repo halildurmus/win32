@@ -32,7 +32,7 @@ class IShellService extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellService(super.ptr);
 
-  int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.lpVtbl.value
+  int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

@@ -32,7 +32,7 @@ class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(super.ptr);
 
-  int ConnectivityChanged(int newConnectivity) => ptr.ref.lpVtbl.value
+  int ConnectivityChanged(int newConnectivity) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

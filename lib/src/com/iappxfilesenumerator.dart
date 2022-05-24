@@ -32,7 +32,7 @@ class IAppxFilesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxFilesEnumerator(super.ptr);
 
-  int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.lpVtbl.value
+  int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -43,7 +43,7 @@ class IAppxFilesEnumerator extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<COMObject>> file)>()(ptr.ref.lpVtbl, file);
 
-  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.lpVtbl.value
+  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -53,7 +53,7 @@ class IAppxFilesEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
       ptr.ref.lpVtbl, hasCurrent);
 
-  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.lpVtbl.value
+  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

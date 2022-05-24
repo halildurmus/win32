@@ -32,13 +32,13 @@ class IPersistStream extends IPersist {
   // vtable begins at 4, is 4 entries long.
   IPersistStream(super.ptr);
 
-  int IsDirty() => ptr.ref.lpVtbl.value
+  int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer<COMObject> pStm) => ptr.ref.lpVtbl.value
+  int Load(Pointer<COMObject> pStm) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -48,7 +48,7 @@ class IPersistStream extends IPersist {
           .asFunction<int Function(Pointer, Pointer<COMObject> pStm)>()(
       ptr.ref.lpVtbl, pStm);
 
-  int Save(Pointer<COMObject> pStm, int fClearDirty) => ptr.ref.lpVtbl.value
+  int Save(Pointer<COMObject> pStm, int fClearDirty) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -60,7 +60,7 @@ class IPersistStream extends IPersist {
           int Function(Pointer, Pointer<COMObject> pStm,
               int fClearDirty)>()(ptr.ref.lpVtbl, pStm, fClearDirty);
 
-  int GetSizeMax(Pointer<Uint64> pcbSize) => ptr.ref.lpVtbl.value
+  int GetSizeMax(Pointer<Uint64> pcbSize) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

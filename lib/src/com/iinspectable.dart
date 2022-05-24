@@ -33,7 +33,7 @@ class IInspectable extends IUnknown {
   IInspectable(super.ptr);
 
   int GetIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -45,7 +45,7 @@ class IInspectable extends IUnknown {
           int Function(Pointer, Pointer<Uint32> iidCount,
               Pointer<Pointer<GUID>> iids)>()(ptr.ref.lpVtbl, iidCount, iids);
 
-  int GetRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.lpVtbl.value
+  int GetRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +55,7 @@ class IInspectable extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
       ptr.ref.lpVtbl, className);
 
-  int GetTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.lpVtbl.value
+  int GetTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

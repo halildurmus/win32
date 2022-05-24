@@ -32,7 +32,7 @@ class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioClock(super.ptr);
 
-  int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.lpVtbl.value
+  int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -45,7 +45,7 @@ class IAudioClock extends IUnknown {
 
   int GetPosition(
           Pointer<Uint64> pu64Position, Pointer<Uint64> pu64QPCPosition) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -58,8 +58,7 @@ class IAudioClock extends IUnknown {
                       Pointer<Uint64> pu64QPCPosition)>()(
           ptr.ref.lpVtbl, pu64Position, pu64QPCPosition);
 
-  int GetCharacteristics(Pointer<Uint32> pdwCharacteristics) => ptr
-          .ref.lpVtbl.value
+  int GetCharacteristics(Pointer<Uint32> pdwCharacteristics) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

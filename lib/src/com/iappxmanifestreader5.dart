@@ -34,7 +34,7 @@ class IAppxManifestReader5 extends IUnknown {
 
   int GetMainPackageDependencies(
           Pointer<Pointer<COMObject>> mainPackageDependencies) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<

@@ -32,7 +32,7 @@ class IWbemRefresher extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemRefresher(super.ptr);
 
-  int Refresh(int lFlags) => ptr.ref.lpVtbl.value
+  int Refresh(int lFlags) => ptr.ref.vtable
       .elementAt(3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value

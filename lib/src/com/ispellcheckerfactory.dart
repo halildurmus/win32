@@ -36,7 +36,7 @@ class ISpellCheckerFactory extends IUnknown {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -58,7 +58,7 @@ class ISpellCheckerFactory extends IUnknown {
   }
 
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class ISpellCheckerFactory extends IUnknown {
 
   int CreateSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<

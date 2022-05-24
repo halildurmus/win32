@@ -34,7 +34,7 @@ class IAppxManifestReader7 extends IUnknown {
 
   int
       GetDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(3)
                   .cast<
                       Pointer<
@@ -52,7 +52,7 @@ class IAppxManifestReader7 extends IUnknown {
   int GetOSPackageDependencies(
           Pointer<Pointer<COMObject>> osPackageDependencies) =>
       ptr
-              .ref.lpVtbl.value
+              .ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -69,7 +69,7 @@ class IAppxManifestReader7 extends IUnknown {
 
   int GetHostRuntimeDependencies(
           Pointer<Pointer<COMObject>> hostRuntimeDependencies) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<

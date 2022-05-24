@@ -35,7 +35,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int ActivateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class IApplicationActivationManager extends IUnknown {
           Pointer<COMObject> itemArray,
           Pointer<Utf16> verb,
           Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -84,7 +84,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int ActivateForProtocol(Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<

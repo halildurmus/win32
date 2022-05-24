@@ -113,7 +113,7 @@ class IVector<T> extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -145,7 +145,7 @@ class IVector<T> extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -173,7 +173,7 @@ class IVector<T> extends IInspectable {
   List<T> get GetView {
     final retValuePtr = allocator<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<
             Pointer<
@@ -250,7 +250,7 @@ class IVector<T> extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -293,7 +293,7 @@ class IVector<T> extends IInspectable {
   }
 
   void _SetAt_COMObject(int index, T value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
             Pointer<
@@ -317,7 +317,7 @@ class IVector<T> extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -358,7 +358,7 @@ class IVector<T> extends IInspectable {
   }
 
   void _InsertAt_COMObject(int index, T value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<
             Pointer<
@@ -382,7 +382,7 @@ class IVector<T> extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -406,7 +406,7 @@ class IVector<T> extends IInspectable {
   }
 
   void RemoveAt(int index) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(12)
         .cast<
             Pointer<
@@ -437,7 +437,7 @@ class IVector<T> extends IInspectable {
   }
 
   void _Append_COMObject(T value) {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
             .elementAt(13)
             .cast<
                 Pointer<
@@ -457,7 +457,7 @@ class IVector<T> extends IInspectable {
     final hValue = convertToHString(value);
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -476,7 +476,7 @@ class IVector<T> extends IInspectable {
   }
 
   void RemoveAtEnd() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
@@ -486,7 +486,7 @@ class IVector<T> extends IInspectable {
   }
 
   void Clear() {
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
@@ -547,7 +547,7 @@ class IVector<T> extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(16)
               .cast<
                   Pointer<
@@ -599,7 +599,7 @@ class IVector<T> extends IInspectable {
     }
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(17)
           .cast<
               Pointer<
@@ -632,7 +632,7 @@ class IVector<T> extends IInspectable {
     }
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(17)
           .cast<
               Pointer<

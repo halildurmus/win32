@@ -34,7 +34,7 @@ class IWbemHiPerfEnum extends IUnknown {
 
   int AddObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -56,7 +56,7 @@ class IWbemHiPerfEnum extends IUnknown {
           ptr.ref.lpVtbl, lFlags, uNumObjects, apIds, apObj);
 
   int RemoveObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -71,7 +71,7 @@ class IWbemHiPerfEnum extends IUnknown {
 
   int GetObjects(int lFlags, int uNumObjects, Pointer<Pointer<COMObject>> apObj,
           Pointer<Uint32> puReturned) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -92,7 +92,7 @@ class IWbemHiPerfEnum extends IUnknown {
                       Pointer<Uint32> puReturned)>()(
           ptr.ref.lpVtbl, lFlags, uNumObjects, apObj, puReturned);
 
-  int RemoveAll(int lFlags) => ptr.ref.lpVtbl.value
+  int RemoveAll(int lFlags) => ptr.ref.vtable
       .elementAt(6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value

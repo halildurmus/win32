@@ -33,7 +33,7 @@ class IEnumVARIANT extends IUnknown {
   IEnumVARIANT(super.ptr);
 
   int Next(int celt, Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -49,19 +49,19 @@ class IEnumVARIANT extends IUnknown {
                       Pointer<Uint32> pCeltFetched)>()(
           ptr.ref.lpVtbl, celt, rgVar, pCeltFetched);
 
-  int Skip(int celt) => ptr.ref.lpVtbl.value
+  int Skip(int celt) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => ptr.ref.lpVtbl.value
+  int Reset() => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

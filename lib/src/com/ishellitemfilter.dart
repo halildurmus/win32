@@ -32,7 +32,7 @@ class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IShellItemFilter(super.ptr);
 
-  int IncludeItem(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
+  int IncludeItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +43,7 @@ class IShellItemFilter extends IUnknown {
       ptr.ref.lpVtbl, psi);
 
   int GetEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

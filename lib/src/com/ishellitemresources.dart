@@ -32,7 +32,7 @@ class IShellItemResources extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellItemResources(super.ptr);
 
-  int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.lpVtbl.value
+  int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -43,7 +43,7 @@ class IShellItemResources extends IUnknown {
           int Function(Pointer,
               Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, pdwAttributes);
 
-  int GetSize(Pointer<Uint64> pullSize) => ptr.ref.lpVtbl.value
+  int GetSize(Pointer<Uint64> pullSize) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +55,7 @@ class IShellItemResources extends IUnknown {
 
   int GetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -76,7 +76,7 @@ class IShellItemResources extends IUnknown {
 
   int SetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -97,7 +97,7 @@ class IShellItemResources extends IUnknown {
 
   int GetResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
           Pointer<Pointer<Utf16>> ppszDescription) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -112,7 +112,7 @@ class IShellItemResources extends IUnknown {
                       Pointer<Pointer<Utf16>> ppszDescription)>()(
           ptr.ref.lpVtbl, pcsir, ppszDescription);
 
-  int EnumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.lpVtbl.value
+  int EnumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -124,22 +124,21 @@ class IShellItemResources extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
       ptr.ref.lpVtbl, ppenumr);
 
-  int SupportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
-          ptr.ref.lpVtbl, pcsir);
+  int SupportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => ptr.ref.vtable
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
+      ptr.ref.lpVtbl, pcsir);
 
   int OpenResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -159,7 +158,7 @@ class IShellItemResources extends IUnknown {
 
   int CreateResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -177,7 +176,7 @@ class IShellItemResources extends IUnknown {
                   Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
-  int MarkForDelete() => ptr.ref.lpVtbl.value
+  int MarkForDelete() => ptr.ref.vtable
       .elementAt(12)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
