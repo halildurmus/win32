@@ -274,6 +274,33 @@ void generateWinRTApis() {
   }
 }
 
+int generateWinRTStructs() {
+  final structs = windowsRuntimeStructsToGenerate;
+  final file = File('../../lib/src/winrt/structs.g.dart');
+  var structProjectionsLength = 0;
+
+  for (final typeName in structs.keys) {
+    final scope = MetadataStore.getScopeForType(typeName);
+
+    final typeDefs = scope.typeDefs
+        .where((typeDef) => structs.keys.contains(typeDef.name))
+        .where((typeDef) => typeDef.supportedArchitectures.x64)
+        .toList()
+      ..sort((a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)));
+
+    final structProjections = typeDefs.map((struct) => StructProjection(
+        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
+        comment: structs[struct.name]!));
+    structProjectionsLength += structProjections.length;
+
+    final structsFile = [winrtStructFileHeader, ...structProjections].join();
+
+    file.writeAsStringSync(DartFormatter().format(structsFile));
+  }
+
+  return structProjectionsLength;
+}
+
 void main() {
   final functionsToGenerate = loadFunctionsFromJson();
 
@@ -297,4 +324,7 @@ void main() {
 
   print('Generating Windows Runtime interfaces...');
   generateWinRTApis();
+
+  print('Generating Windows Runtime structs...');
+  generateWinRTStructs();
 }
