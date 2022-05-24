@@ -19,11 +19,11 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
   @override
   String ffiCall([String params = '']) => '''
-          final hr = ptr.ref.vtable
+          final hr = _thisPtr.ref.vtable
             .elementAt($vtableOffset)
             .cast<Pointer<NativeFunction<$nativePrototype>>>()
             .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $params);
+            .asFunction<$dartPrototype>()(_thisPtr.ref.lpVtbl, $params);
 
           if (FAILED(hr)) throw WindowsException(hr);
   ''';

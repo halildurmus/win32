@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -37,6 +30,7 @@ const IID_IPhoneNumberFormatter = '{1556B49E-BAD4-4B4A-900D-4407ADB7C981}';
 /// {@category Interface}
 /// {@category winrt}
 mixin IPhoneNumberFormatter on IInspectable {
+  // vtable begins at 6, is 5 entries long.
   late final Pointer<COMObject> _thisPtr =
       toInterface(IID_IPhoneNumberFormatter);
 
@@ -55,7 +49,9 @@ mixin IPhoneNumberFormatter on IInspectable {
               .asFunction<
                   int Function(
                       Pointer, Pointer<COMObject> number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, number.cast<Pointer<COMObject>>().value, retValuePtr);
+          _thisPtr.ref.lpVtbl,
+          number.cast<Pointer<COMObject>>().value,
+          retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -81,7 +77,7 @@ mixin IPhoneNumberFormatter on IInspectable {
               .value
               .asFunction<
                   int Function(Pointer, Pointer<COMObject> number,
-                      int numberFormat, Pointer<IntPtr>)>()(ptr.ref.lpVtbl,
+                      int numberFormat, Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl,
           number.cast<Pointer<COMObject>>().value, numberFormat, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -108,7 +104,7 @@ mixin IPhoneNumberFormatter on IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -135,7 +131,7 @@ mixin IPhoneNumberFormatter on IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -162,7 +158,7 @@ mixin IPhoneNumberFormatter on IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

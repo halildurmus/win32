@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -36,14 +29,15 @@ const IID_IToastNotificationFactory = '{04124B20-82C6-4229-B109-FD9ED4662B53}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IToastNotificationFactory extends IInspectable {
+mixin IToastNotificationFactory on IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IToastNotificationFactory(super.ptr);
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IToastNotificationFactory);
 
   Pointer<COMObject> CreateToastNotification(Pointer<COMObject> content) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -54,7 +48,9 @@ class IToastNotificationFactory extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, Pointer<COMObject> content, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, content.cast<Pointer<COMObject>>().value, retValuePtr);
+        _thisPtr.ref.lpVtbl,
+        content.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

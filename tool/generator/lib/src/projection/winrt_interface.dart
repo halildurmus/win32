@@ -83,8 +83,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get extraHeaders => """
     import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-    import '../winrt_helpers.dart';
+    import '../combase.dart';
+    import '../exceptions.dart';
+    import '../macros.dart';
+    import '../utils.dart';
     import '../types.dart';
+    import '../winrt_helpers.dart';
 
     import '../extensions/hstring_array.dart';
     import 'ivector.dart';
@@ -93,4 +97,25 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
+
+  @override
+  String toString() {
+    final onClause = inheritsFrom.isEmpty ? '' : 'on $inheritsFrom';
+
+    return '''
+      $header
+      $extraHeaders
+      $rootHeader
+      $guidConstants
+
+      /// {@category Interface}
+      /// {@category $category}
+      mixin $shortName $onClause {
+        // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
+        late final Pointer<COMObject> _thisPtr = toInterface(IID_$shortName);
+
+        ${methodProjections.map((p) => p.toString()).join('\n')}
+      }
+    ''';
+  }
 }

@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -36,14 +29,15 @@ const IID_IApplicationDataStatics = '{5612147B-E843-45E3-94D8-06169E3C8E17}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IApplicationDataStatics extends IInspectable {
+mixin IApplicationDataStatics on IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IApplicationDataStatics(super.ptr);
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IApplicationDataStatics);
 
   Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -51,7 +45,7 @@ class IApplicationDataStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        _thisPtr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

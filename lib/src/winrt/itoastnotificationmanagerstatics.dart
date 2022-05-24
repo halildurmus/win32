@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -37,14 +30,15 @@ const IID_IToastNotificationManagerStatics =
 
 /// {@category Interface}
 /// {@category winrt}
-class IToastNotificationManagerStatics extends IInspectable {
+mixin IToastNotificationManagerStatics on IInspectable {
   // vtable begins at 6, is 3 entries long.
-  IToastNotificationManagerStatics(super.ptr);
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IToastNotificationManagerStatics);
 
   Pointer<COMObject> CreateToastNotifier() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -52,7 +46,7 @@ class IToastNotificationManagerStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        _thisPtr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -62,7 +56,7 @@ class IToastNotificationManagerStatics extends IInspectable {
   Pointer<COMObject> CreateToastNotifierWithId(String applicationId) {
     final retValuePtr = calloc<COMObject>();
     final applicationIdHstring = convertToHString(applicationId);
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -72,7 +66,7 @@ class IToastNotificationManagerStatics extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, int applicationId, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, applicationIdHstring, retValuePtr);
+        _thisPtr.ref.lpVtbl, applicationIdHstring, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -83,7 +77,7 @@ class IToastNotificationManagerStatics extends IInspectable {
   Pointer<COMObject> GetTemplateContent(int type) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(8)
             .cast<
                 Pointer<
@@ -92,7 +86,7 @@ class IToastNotificationManagerStatics extends IInspectable {
                             Pointer, Int32 type, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, int type, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, type, retValuePtr);
+        _thisPtr.ref.lpVtbl, type, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

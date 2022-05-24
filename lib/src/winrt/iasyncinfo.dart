@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -36,23 +29,23 @@ const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IAsyncInfo extends IInspectable {
+mixin IAsyncInfo on IInspectable {
   // vtable begins at 6, is 5 entries long.
-  IAsyncInfo(super.ptr);
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_IAsyncInfo);
 
   int get Id {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<Uint32>)>>>()
           .value
           .asFunction<
-              int Function(
-                  Pointer, Pointer<Uint32>)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(Pointer,
+                  Pointer<Uint32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -67,7 +60,7 @@ class IAsyncInfo extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -75,7 +68,7 @@ class IAsyncInfo extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -90,7 +83,7 @@ class IAsyncInfo extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -98,7 +91,7 @@ class IAsyncInfo extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -110,21 +103,21 @@ class IAsyncInfo extends IInspectable {
   }
 
   void Cancel() {
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
         .elementAt(9)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+        .asFunction<int Function(Pointer)>()(_thisPtr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
   void Close() {
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
         .elementAt(10)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+        .asFunction<int Function(Pointer)>()(_thisPtr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

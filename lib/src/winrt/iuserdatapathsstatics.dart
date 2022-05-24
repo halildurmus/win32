@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -36,14 +29,15 @@ const IID_IUserDataPathsStatics = '{01B29DEF-E062-48A1-8B0C-F2C7A9CA56C0}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IUserDataPathsStatics extends IInspectable {
+mixin IUserDataPathsStatics on IInspectable {
   // vtable begins at 6, is 2 entries long.
-  IUserDataPathsStatics(super.ptr);
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IUserDataPathsStatics);
 
   Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -54,7 +48,9 @@ class IUserDataPathsStatics extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, Pointer<COMObject> user, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, user.cast<Pointer<COMObject>>().value, retValuePtr);
+        _thisPtr.ref.lpVtbl,
+        user.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -64,7 +60,7 @@ class IUserDataPathsStatics extends IInspectable {
   Pointer<COMObject> GetDefault() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -72,7 +68,7 @@ class IUserDataPathsStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+        _thisPtr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
