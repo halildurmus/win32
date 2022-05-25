@@ -17,12 +17,10 @@ void main() {
   winrtInitialize();
   try {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
-    final comObject =
-        CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-    final calendar = ICalendar(comObject);
+    final calendar = Calendar();
     print(calendarData(calendar));
 
-    final clonedCalendar = ICalendar(calendar.Clone());
+    final clonedCalendar = Calendar.fromPointer(calendar.Clone());
     final comparisonResult = clonedCalendar.Compare(calendar.ptr);
     print('Comparison result of calendar and its clone: $comparisonResult');
 
@@ -37,7 +35,7 @@ void main() {
     final dateTime = calendar.GetDateTime();
     print(dateTime);
 
-    free(comObject);
+    free(calendar.ptr);
     free(clonedCalendar.ptr);
   } finally {
     winrtUninitialize();
