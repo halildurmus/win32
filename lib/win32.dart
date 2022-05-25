@@ -252,6 +252,7 @@ export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
 
 // Windows Runtime interfaces
+export 'src/winrt/calendar.dart';
 export 'src/winrt/iapplicationdata.dart';
 export 'src/winrt/iapplicationdatastatics.dart';
 export 'src/winrt/iasyncaction.dart';
