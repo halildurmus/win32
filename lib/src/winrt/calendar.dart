@@ -4,15 +4,10 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../api_ms_win_core_winrt_l1_1_0.dart';
-import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../com/iinspectable.dart';
 import '../combase.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../utils.dart';
 import '../winrt_helpers.dart';
+
 import 'icalendar.dart';
 import 'icalendarfactory.dart';
 import 'icalendarfactory2.dart';
@@ -28,76 +23,27 @@ class Calendar extends IInspectable with ICalendar, ITimeZoneOnCalendar {
   // ICalendarFactory
   static Calendar CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
-    final hClassName = convertToHString(_className);
-
-    final pIID = calloc<GUID>()..ref.setGUID(IID_ICalendarFactory);
-    final activationFactory = calloc<COMObject>();
-
-    try {
-      final hr =
-          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final calendarFactory = ICalendarFactory(activationFactory);
-      final result =
-          calendarFactory.CreateCalendarDefaultCalendarAndClock(languages);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return Calendar.fromPointer(result);
-    } finally {
-      WindowsDeleteString(hClassName);
-      free(pIID);
-      free(activationFactory);
-    }
+    final factory = ICalendarFactory(
+        CreateActivationFactory(_className, IID_ICalendarFactory));
+    final result = factory.CreateCalendarDefaultCalendarAndClock(languages);
+    return Calendar.fromPointer(result);
   }
 
   static Calendar CreateCalendar(
       Pointer<COMObject> languages, String calendar, String clock) {
-    final hClassName = convertToHString(_className);
-
-    final pIID = calloc<GUID>()..ref.setGUID(IID_ICalendarFactory);
-    final activationFactory = calloc<COMObject>();
-
-    try {
-      final hr =
-          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final calendarFactory = ICalendarFactory(activationFactory);
-      final result = calendarFactory.CreateCalendar(languages, calendar, clock);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return Calendar.fromPointer(result);
-    } finally {
-      WindowsDeleteString(hClassName);
-      free(pIID);
-      free(activationFactory);
-    }
+    final factory = ICalendarFactory(
+        CreateActivationFactory(_className, IID_ICalendarFactory));
+    final result = factory.CreateCalendar(languages, calendar, clock);
+    return Calendar.fromPointer(result);
   }
 
   // ICalendarFactory2
   static Calendar CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {
-    final hClassName = convertToHString(_className);
-
-    final pIID = calloc<GUID>()..ref.setGUID(IID_ICalendarFactory2);
-    final activationFactory = calloc<COMObject>();
-
-    try {
-      final hr =
-          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final calendarFactory2 = ICalendarFactory2(activationFactory);
-      final result = calendarFactory2.CreateCalendarWithTimeZone(
-          languages, calendar, clock, timeZoneId);
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return Calendar.fromPointer(result);
-    } finally {
-      WindowsDeleteString(hClassName);
-      free(pIID);
-      free(activationFactory);
-    }
+    final factory = ICalendarFactory2(
+        CreateActivationFactory(_className, IID_ICalendarFactory2));
+    final result = factory.CreateCalendarWithTimeZone(
+        languages, calendar, clock, timeZoneId);
+    return Calendar.fromPointer(result);
   }
 }
