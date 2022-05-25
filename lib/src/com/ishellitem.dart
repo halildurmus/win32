@@ -1,4 +1,4 @@
-// IShellItem.dart
+// ishellitem.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IShellItem extends IUnknown {
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -55,7 +55,7 @@ class IShellItem extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.lpVtbl.value
+  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -67,7 +67,7 @@ class IShellItem extends IUnknown {
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
   int GetDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -81,7 +81,7 @@ class IShellItem extends IUnknown {
       ptr.ref.lpVtbl, sigdnName, ppszName);
 
   int GetAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -95,7 +95,7 @@ class IShellItem extends IUnknown {
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
   int Compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(7)
       .cast<
           Pointer<
@@ -115,20 +115,6 @@ const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
 class ShellItem extends IShellItem {
   ShellItem(super.ptr);
 
-  factory ShellItem.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellItem);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IShellItem);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ShellItem(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory ShellItem.createInstance() =>
+      ShellItem(COMObject.createFromID(CLSID_ShellItem, IID_IShellItem));
 }

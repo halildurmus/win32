@@ -1,4 +1,4 @@
-// IEnumString.dart
+// ienumstring.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IEnumString extends IUnknown {
 
   int Next(int celt, Pointer<Pointer<Utf16>> rgelt,
           Pointer<Uint32> pceltFetched) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -50,19 +50,19 @@ class IEnumString extends IUnknown {
                       Pointer<Uint32> pceltFetched)>()(
           ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(int celt) => ptr.ref.lpVtbl.value
+  int Skip(int celt) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => ptr.ref.lpVtbl.value
+  int Reset() => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

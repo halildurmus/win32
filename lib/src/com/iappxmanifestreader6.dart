@@ -1,4 +1,4 @@
-// IAppxManifestReader6.dart
+// iappxmanifestreader6.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IAppxManifestReader6 extends IUnknown {
 
   int GetIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<

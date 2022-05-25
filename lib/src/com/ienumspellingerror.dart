@@ -1,4 +1,4 @@
-// IEnumSpellingError.dart
+// ienumspellingerror.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IEnumSpellingError(super.ptr);
 
-  int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.lpVtbl.value
+  int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

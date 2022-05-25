@@ -1,4 +1,4 @@
-// IAppxManifestReader4.dart
+// iappxmanifestreader4.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
 
   int
       GetOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(15)
                   .cast<
                       Pointer<

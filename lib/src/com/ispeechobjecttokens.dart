@@ -1,4 +1,4 @@
-// ISpeechObjectTokens.dart
+// ispeechobjecttokens.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -36,7 +36,7 @@ class ISpeechObjectTokens extends IDispatch {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -55,7 +55,7 @@ class ISpeechObjectTokens extends IDispatch {
     }
   }
 
-  int Item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.lpVtbl.value
+  int Item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class ISpeechObjectTokens extends IDispatch {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<

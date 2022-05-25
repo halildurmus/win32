@@ -136,7 +136,7 @@ class ComInterfaceProjection {
   }
 
   String get header => '''
-    // $shortName.dart
+    // ${shortName.toLowerCase()}.dart
 
     // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 

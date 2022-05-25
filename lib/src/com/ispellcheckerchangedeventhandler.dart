@@ -1,4 +1,4 @@
-// ISpellCheckerChangedEventHandler.dart
+// ispellcheckerchangedeventhandler.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,7 +33,7 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(super.ptr);
 
-  int Invoke(Pointer<COMObject> sender) => ptr.ref.lpVtbl.value
+  int Invoke(Pointer<COMObject> sender) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

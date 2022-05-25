@@ -195,7 +195,7 @@ class IPropertyValue extends IInspectable {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<Pointer<NativeFunction<_get_Type_Native>>>()
           .value
@@ -214,7 +214,7 @@ class IPropertyValue extends IInspectable {
     final retValuePtr = calloc< /* Boolean */ Uint8>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<Pointer<NativeFunction<_get_IsNumericScalar_Native>>>()
           .value
@@ -229,109 +229,109 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetUInt8(Pointer<Uint8> result) => ptr.ref.lpVtbl.value
+  int GetUInt8(Pointer<Uint8> result) => ptr.ref.vtable
       .elementAt(8)
       .cast<Pointer<NativeFunction<_GetUInt8_Native>>>()
       .value
       .asFunction<_GetUInt8_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetInt16(Pointer<Int16> result) => ptr.ref.lpVtbl.value
+  int GetInt16(Pointer<Int16> result) => ptr.ref.vtable
       .elementAt(9)
       .cast<Pointer<NativeFunction<_GetInt16_Native>>>()
       .value
       .asFunction<_GetInt16_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetUInt16(Pointer<Uint16> result) => ptr.ref.lpVtbl.value
+  int GetUInt16(Pointer<Uint16> result) => ptr.ref.vtable
       .elementAt(10)
       .cast<Pointer<NativeFunction<_GetUInt16_Native>>>()
       .value
       .asFunction<_GetUInt16_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetInt32(Pointer<Int32> result) => ptr.ref.lpVtbl.value
+  int GetInt32(Pointer<Int32> result) => ptr.ref.vtable
       .elementAt(11)
       .cast<Pointer<NativeFunction<_GetInt32_Native>>>()
       .value
       .asFunction<_GetInt32_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetUInt32(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetUInt32(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(12)
       .cast<Pointer<NativeFunction<_GetUInt32_Native>>>()
       .value
       .asFunction<_GetUInt32_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetInt64(Pointer<Int64> result) => ptr.ref.lpVtbl.value
+  int GetInt64(Pointer<Int64> result) => ptr.ref.vtable
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetInt64_Native>>>()
       .value
       .asFunction<_GetInt64_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetUInt64(Pointer<Uint64> result) => ptr.ref.lpVtbl.value
+  int GetUInt64(Pointer<Uint64> result) => ptr.ref.vtable
       .elementAt(14)
       .cast<Pointer<NativeFunction<_GetUInt64_Native>>>()
       .value
       .asFunction<_GetUInt64_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetSingle(Pointer<Float> result) => ptr.ref.lpVtbl.value
+  int GetSingle(Pointer<Float> result) => ptr.ref.vtable
       .elementAt(15)
       .cast<Pointer<NativeFunction<_GetSingle_Native>>>()
       .value
       .asFunction<_GetSingle_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetDouble(Pointer<Double> result) => ptr.ref.lpVtbl.value
+  int GetDouble(Pointer<Double> result) => ptr.ref.vtable
       .elementAt(16)
       .cast<Pointer<NativeFunction<_GetDouble_Native>>>()
       .value
       .asFunction<_GetDouble_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetChar16(Pointer<Uint16> result) => ptr.ref.lpVtbl.value
+  int GetChar16(Pointer<Uint16> result) => ptr.ref.vtable
       .elementAt(17)
       .cast<Pointer<NativeFunction<_GetChar16_Native>>>()
       .value
       .asFunction<_GetChar16_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetBoolean(Pointer< /* Boolean */ Uint8> result) => ptr.ref.lpVtbl.value
+  int GetBoolean(Pointer< /* Boolean */ Uint8> result) => ptr.ref.vtable
       .elementAt(18)
       .cast<Pointer<NativeFunction<_GetBoolean_Native>>>()
       .value
       .asFunction<_GetBoolean_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetString(Pointer<IntPtr> result) => ptr.ref.lpVtbl.value
+  int GetString(Pointer<IntPtr> result) => ptr.ref.vtable
       .elementAt(19)
       .cast<Pointer<NativeFunction<_GetString_Native>>>()
       .value
       .asFunction<_GetString_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetGuid(Pointer<GUID> result) => ptr.ref.lpVtbl.value
+  int GetGuid(Pointer<GUID> result) => ptr.ref.vtable
       .elementAt(20)
       .cast<Pointer<NativeFunction<_GetGuid_Native>>>()
       .value
       .asFunction<_GetGuid_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetDateTime(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetDateTime(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(21)
       .cast<Pointer<NativeFunction<_GetDateTime_Native>>>()
       .value
       .asFunction<_GetDateTime_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetTimeSpan(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetTimeSpan(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(22)
       .cast<Pointer<NativeFunction<_GetTimeSpan_Native>>>()
       .value
       .asFunction<_GetTimeSpan_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetPoint(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetPoint(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(23)
       .cast<Pointer<NativeFunction<_GetPoint_Native>>>()
       .value
       .asFunction<_GetPoint_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetSize(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetSize(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(24)
       .cast<Pointer<NativeFunction<_GetSize_Native>>>()
       .value
       .asFunction<_GetSize_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetRect(Pointer<Uint32> result) => ptr.ref.lpVtbl.value
+  int GetRect(Pointer<Uint32> result) => ptr.ref.vtable
       .elementAt(25)
       .cast<Pointer<NativeFunction<_GetRect_Native>>>()
       .value
@@ -409,7 +409,7 @@ class IPropertyValue extends IInspectable {
 
   int GetBooleanArray(
           Pointer<Uint32> __valueSize, Pointer< /* Boolean */ Uint8> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(36)
               .cast<Pointer<NativeFunction<_GetBooleanArray_Native>>>()
               .value
@@ -425,7 +425,7 @@ class IPropertyValue extends IInspectable {
 
   int GetInspectableArray(
           Pointer<Uint32> __valueSize, Pointer<COMObject> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(38)
               .cast<Pointer<NativeFunction<_GetInspectableArray_Native>>>()
               .value
@@ -433,14 +433,14 @@ class IPropertyValue extends IInspectable {
           ptr.ref.lpVtbl, __valueSize, value);
 
   int GetGuidArray(Pointer<Uint32> __valueSize, Pointer<GUID> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(39)
           .cast<Pointer<NativeFunction<_GetGuidArray_Native>>>()
           .value
           .asFunction<_GetGuidArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
 
   int GetDateTimeArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(40)
               .cast<Pointer<NativeFunction<_GetDateTimeArray_Native>>>()
               .value
@@ -448,7 +448,7 @@ class IPropertyValue extends IInspectable {
           ptr.ref.lpVtbl, __valueSize, value);
 
   int GetTimeSpanArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(41)
               .cast<Pointer<NativeFunction<_GetTimeSpanArray_Native>>>()
               .value
@@ -463,14 +463,14 @@ class IPropertyValue extends IInspectable {
       .asFunction<_GetPointArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
 
   int GetSizeArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(43)
           .cast<Pointer<NativeFunction<_GetSizeArray_Native>>>()
           .value
           .asFunction<_GetSizeArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
 
   int GetRectArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(44)
           .cast<Pointer<NativeFunction<_GetRectArray_Native>>>()
           .value

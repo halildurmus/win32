@@ -1,4 +1,4 @@
-// IApplicationActivationManager.dart
+// iapplicationactivationmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -35,7 +35,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int ActivateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class IApplicationActivationManager extends IUnknown {
           Pointer<COMObject> itemArray,
           Pointer<Utf16> verb,
           Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -84,7 +84,7 @@ class IApplicationActivationManager extends IUnknown {
 
   int ActivateForProtocol(Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -112,21 +112,8 @@ const CLSID_ApplicationActivationManager =
 class ApplicationActivationManager extends IApplicationActivationManager {
   ApplicationActivationManager(super.ptr);
 
-  factory ApplicationActivationManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()
-      ..ref.setGUID(CLSID_ApplicationActivationManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IApplicationActivationManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ApplicationActivationManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory ApplicationActivationManager.createInstance() =>
+      ApplicationActivationManager(COMObject.createFromID(
+          CLSID_ApplicationActivationManager,
+          IID_IApplicationActivationManager));
 }

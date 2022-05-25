@@ -1,4 +1,4 @@
-// IKnownFolderManager.dart
+// iknownfoldermanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IKnownFolderManager(super.ptr);
 
-  int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.lpVtbl.value
+  int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -44,7 +44,7 @@ class IKnownFolderManager extends IUnknown {
               Pointer<GUID> pfid)>()(ptr.ref.lpVtbl, nCsidl, pfid);
 
   int FolderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -57,7 +57,7 @@ class IKnownFolderManager extends IUnknown {
               Pointer<Int32> pnCsidl)>()(ptr.ref.lpVtbl, rfid, pnCsidl);
 
   int GetFolderIds(Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -70,7 +70,7 @@ class IKnownFolderManager extends IUnknown {
                   Pointer<Uint32> pCount)>()(ptr.ref.lpVtbl, ppKFId, pCount);
 
   int GetFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -84,7 +84,7 @@ class IKnownFolderManager extends IUnknown {
 
   int GetFolderByName(
           Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -101,7 +101,7 @@ class IKnownFolderManager extends IUnknown {
 
   int RegisterFolder(
           Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -114,7 +114,7 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
           ptr.ref.lpVtbl, rfid, pKFD);
 
-  int UnregisterFolder(Pointer<GUID> rfid) => ptr.ref.lpVtbl.value
+  int UnregisterFolder(Pointer<GUID> rfid) => ptr.ref.vtable
       .elementAt(9)
       .cast<
           Pointer<
@@ -125,7 +125,7 @@ class IKnownFolderManager extends IUnknown {
 
   int FindFolderFromPath(
           Pointer<Utf16> pszPath, int mode, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -140,7 +140,7 @@ class IKnownFolderManager extends IUnknown {
 
   int FindFolderFromIDList(
           Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -161,7 +161,7 @@ class IKnownFolderManager extends IUnknown {
           int cFolders,
           Pointer<GUID> pExclusion,
           Pointer<Pointer<Utf16>> ppszError) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(12)
               .cast<
                   Pointer<
@@ -196,20 +196,7 @@ const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
 class KnownFolderManager extends IKnownFolderManager {
   KnownFolderManager(super.ptr);
 
-  factory KnownFolderManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_KnownFolderManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IKnownFolderManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return KnownFolderManager(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory KnownFolderManager.createInstance() =>
+      KnownFolderManager(COMObject.createFromID(
+          CLSID_KnownFolderManager, IID_IKnownFolderManager));
 }

@@ -1,4 +1,4 @@
-// IAppxManifestReader2.dart
+// iappxmanifestreader2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,7 +33,7 @@ class IAppxManifestReader2 extends IAppxManifestReader {
   IAppxManifestReader2(super.ptr);
 
   int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(12)
           .cast<
               Pointer<

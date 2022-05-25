@@ -1,4 +1,4 @@
-// IAppxManifestApplication.dart
+// iappxmanifestapplication.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,7 +33,7 @@ class IAppxManifestApplication extends IUnknown {
   IAppxManifestApplication(super.ptr);
 
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -46,7 +46,7 @@ class IAppxManifestApplication extends IUnknown {
               Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
 
   int GetAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

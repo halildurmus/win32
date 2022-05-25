@@ -1,4 +1,4 @@
-// ISimpleAudioVolume.dart
+// isimpleaudiovolume.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,21 +32,21 @@ class ISimpleAudioVolume extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   ISimpleAudioVolume(super.ptr);
 
-  int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) => ptr
-          .ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, Float fLevel,
-                          Pointer<GUID> EventContext)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, double fLevel, Pointer<GUID> EventContext)>()(
-      ptr.ref.lpVtbl, fLevel, EventContext);
+  int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
+      ptr.ref.vtable
+              .elementAt(3)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          Int32 Function(Pointer, Float fLevel,
+                              Pointer<GUID> EventContext)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, double fLevel, Pointer<GUID> EventContext)>()(
+          ptr.ref.lpVtbl, fLevel, EventContext);
 
-  int GetMasterVolume(Pointer<Float> pfLevel) => ptr.ref.lpVtbl.value
+  int GetMasterVolume(Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -56,7 +56,7 @@ class ISimpleAudioVolume extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Float> pfLevel)>()(
       ptr.ref.lpVtbl, pfLevel);
 
-  int SetMute(int bMute, Pointer<GUID> EventContext) => ptr.ref.lpVtbl.value
+  int SetMute(int bMute, Pointer<GUID> EventContext) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -68,7 +68,7 @@ class ISimpleAudioVolume extends IUnknown {
               int Function(Pointer, int bMute, Pointer<GUID> EventContext)>()(
       ptr.ref.lpVtbl, bMute, EventContext);
 
-  int GetMute(Pointer<Int32> pbMute) => ptr.ref.lpVtbl.value
+  int GetMute(Pointer<Int32> pbMute) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<

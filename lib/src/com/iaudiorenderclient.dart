@@ -1,4 +1,4 @@
-// IAudioRenderClient.dart
+// iaudiorenderclient.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,7 +33,7 @@ class IAudioRenderClient extends IUnknown {
   IAudioRenderClient(super.ptr);
 
   int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -46,7 +46,7 @@ class IAudioRenderClient extends IUnknown {
                       Pointer<Pointer<Uint8>> ppData)>()(
           ptr.ref.lpVtbl, NumFramesRequested, ppData);
 
-  int ReleaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.lpVtbl.value
+  int ReleaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

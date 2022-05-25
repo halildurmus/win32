@@ -41,7 +41,7 @@ class INetworkInformationStatics extends IInspectable {
   Pointer<COMObject> GetConnectionProfiles() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<
             Pointer<
@@ -68,7 +68,7 @@ class INetworkInformationStatics extends IInspectable {
   Pointer<COMObject> GetInternetConnectionProfile() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
             Pointer<
@@ -95,7 +95,7 @@ class INetworkInformationStatics extends IInspectable {
   Pointer<COMObject> GetLanIdentifiers() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<
             Pointer<
@@ -122,7 +122,7 @@ class INetworkInformationStatics extends IInspectable {
   List<IHostName> GetHostNames() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<
             Pointer<
@@ -159,7 +159,7 @@ class INetworkInformationStatics extends IInspectable {
   ) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
             Pointer<
@@ -192,7 +192,7 @@ class INetworkInformationStatics extends IInspectable {
   ) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
+    final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<
             Pointer<
@@ -229,7 +229,7 @@ class INetworkInformationStatics extends IInspectable {
   //   final retValuePtr = calloc<EventRegistrationToken>();
 
   //   try {
-  //     final hr = ptr.ref.lpVtbl.value
+  //     final hr = ptr.ref.vtable
   //         .elementAt(12)
   //         .cast<
   //             Pointer<
@@ -265,7 +265,7 @@ class INetworkInformationStatics extends IInspectable {
   // void remove_NetworkStatusChanged(
   //   EventRegistrationToken eventCookie,
   // ) =>
-  //     ptr.ref.lpVtbl.value
+  //     ptr.ref.vtable
   //         .elementAt(13)
   //         .cast<
   //             Pointer<

@@ -1,4 +1,4 @@
-// IAppxManifestReader3.dart
+// iappxmanifestreader3.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
 
   int GetCapabilitiesByCapabilityClass(
           int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(13)
               .cast<
                   Pointer<
@@ -50,7 +50,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
   int
       GetTargetDeviceFamilies(
               Pointer<Pointer<COMObject>> targetDeviceFamilies) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(14)
                   .cast<
                       Pointer<

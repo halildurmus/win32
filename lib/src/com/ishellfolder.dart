@@ -1,4 +1,4 @@
-// IShellFolder.dart
+// ishellfolder.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -39,7 +39,7 @@ class IShellFolder extends IUnknown {
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<ITEMIDLIST>> ppidl,
           Pointer<Uint32> pdwAttributes) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -66,7 +66,7 @@ class IShellFolder extends IUnknown {
 
   int EnumObjects(
           int hwnd, int grfFlags, Pointer<Pointer<COMObject>> ppenumIDList) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -81,7 +81,7 @@ class IShellFolder extends IUnknown {
 
   int BindToObject(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -104,7 +104,7 @@ class IShellFolder extends IUnknown {
 
   int BindToStorage(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -127,7 +127,7 @@ class IShellFolder extends IUnknown {
 
   int CompareIDs(
           int lParam, Pointer<ITEMIDLIST> pidl1, Pointer<ITEMIDLIST> pidl2) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -145,7 +145,7 @@ class IShellFolder extends IUnknown {
 
   int CreateViewObject(
           int hwndOwner, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -160,7 +160,7 @@ class IShellFolder extends IUnknown {
 
   int GetAttributesOf(int cidl, Pointer<Pointer<ITEMIDLIST>> apidl,
           Pointer<Uint32> rgfInOut) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -186,7 +186,7 @@ class IShellFolder extends IUnknown {
           Pointer<GUID> riid,
           Pointer<Uint32> rgfReserved,
           Pointer<Pointer> ppv) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -213,7 +213,7 @@ class IShellFolder extends IUnknown {
 
   int GetDisplayNameOf(
           Pointer<ITEMIDLIST> pidl, int uFlags, Pointer<STRRET> pName) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -228,7 +228,7 @@ class IShellFolder extends IUnknown {
 
   int SetNameOf(int hwnd, Pointer<ITEMIDLIST> pidl, Pointer<Utf16> pszName,
           int uFlags, Pointer<Pointer<ITEMIDLIST>> ppidlOut) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(12)
               .cast<
                   Pointer<

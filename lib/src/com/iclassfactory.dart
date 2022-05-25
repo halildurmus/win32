@@ -1,4 +1,4 @@
-// IClassFactory.dart
+// iclassfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IClassFactory extends IUnknown {
 
   int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -50,7 +50,7 @@ class IClassFactory extends IUnknown {
                   Pointer<Pointer>
                       ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
-  int LockServer(int fLock) => ptr.ref.lpVtbl.value
+  int LockServer(int fLock) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
       .value

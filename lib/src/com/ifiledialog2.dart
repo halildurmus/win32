@@ -1,4 +1,4 @@
-// IFileDialog2.dart
+// ifiledialog2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileDialog2(super.ptr);
 
-  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.lpVtbl.value
+  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -42,7 +42,7 @@ class IFileDialog2 extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, pszLabel);
 
-  int SetNavigationRoot(Pointer<COMObject> psi) => ptr.ref.lpVtbl.value
+  int SetNavigationRoot(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<

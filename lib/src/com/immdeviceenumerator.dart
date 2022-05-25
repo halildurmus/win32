@@ -1,4 +1,4 @@
-// IMMDeviceEnumerator.dart
+// immdeviceenumerator.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int EnumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -52,7 +52,7 @@ class IMMDeviceEnumerator extends IUnknown {
 
   int GetDefaultAudioEndpoint(
           int dataFlow, int role, Pointer<Pointer<COMObject>> ppEndpoint) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -66,7 +66,7 @@ class IMMDeviceEnumerator extends IUnknown {
           ptr.ref.lpVtbl, dataFlow, role, ppEndpoint);
 
   int GetDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -80,7 +80,7 @@ class IMMDeviceEnumerator extends IUnknown {
           ptr.ref.lpVtbl, pwstrId, ppDevice);
 
   int RegisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -91,7 +91,7 @@ class IMMDeviceEnumerator extends IUnknown {
       ptr.ref.lpVtbl, pClient);
 
   int UnregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -109,20 +109,7 @@ const CLSID_MMDeviceEnumerator = '{BCDE0395-E52F-467C-8E3D-C4579291692E}';
 class MMDeviceEnumerator extends IMMDeviceEnumerator {
   MMDeviceEnumerator(super.ptr);
 
-  factory MMDeviceEnumerator.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_MMDeviceEnumerator);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IMMDeviceEnumerator);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return MMDeviceEnumerator(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory MMDeviceEnumerator.createInstance() =>
+      MMDeviceEnumerator(COMObject.createFromID(
+          CLSID_MMDeviceEnumerator, IID_IMMDeviceEnumerator));
 }

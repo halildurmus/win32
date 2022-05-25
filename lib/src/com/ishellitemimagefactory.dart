@@ -1,4 +1,4 @@
-// IShellItemImageFactory.dart
+// ishellitemimagefactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,16 +32,15 @@ class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellItemImageFactory(super.ptr);
 
-  int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) =>
-      ptr.ref.lpVtbl.value
-          .elementAt(3)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      Int32 Function(Pointer, SIZE size, Int32 flags,
-                          Pointer<IntPtr> phbm)>>>()
-          .value
-          .asFunction<
-              int Function(Pointer, SIZE size, int flags,
-                  Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
+  int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
+      .elementAt(3)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, SIZE size, Int32 flags,
+                      Pointer<IntPtr> phbm)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, SIZE size, int flags,
+              Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
 }

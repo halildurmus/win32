@@ -1,4 +1,4 @@
-// IConnectionPointContainer.dart
+// iconnectionpointcontainer.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,22 +32,21 @@ class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IConnectionPointContainer(super.ptr);
 
-  int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(3)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(
-                              Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
-              .value
-              .asFunction<
-                  int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
-          ptr.ref.lpVtbl, ppEnum);
+  int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
+          .elementAt(3)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(
+                          Pointer, Pointer<Pointer<COMObject>> ppEnum)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
+      ptr.ref.lpVtbl, ppEnum);
 
   int FindConnectionPoint(
           Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppCP) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<

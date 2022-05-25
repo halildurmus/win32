@@ -1,4 +1,4 @@
-// IWbemServices.dart
+// iwbemservices.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -38,7 +38,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppWorkingNamespace,
           Pointer<Pointer<COMObject>> ppResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -61,7 +61,7 @@ class IWbemServices extends IUnknown {
                       Pointer<Pointer<COMObject>> ppResult)>()(ptr.ref.lpVtbl,
           strNamespace, lFlags, pCtx, ppWorkingNamespace, ppResult);
 
-  int CancelAsyncCall(Pointer<COMObject> pSink) => ptr.ref.lpVtbl.value
+  int CancelAsyncCall(Pointer<COMObject> pSink) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -74,7 +74,7 @@ class IWbemServices extends IUnknown {
   int
       QueryObjectSink(
               int lFlags, Pointer<Pointer<COMObject>> ppResponseHandler) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(5)
                   .cast<
                       Pointer<
@@ -96,7 +96,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppObject,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -121,7 +121,7 @@ class IWbemServices extends IUnknown {
 
   int GetObjectAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -144,7 +144,7 @@ class IWbemServices extends IUnknown {
 
   int PutClass(Pointer<COMObject> pObject, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -167,7 +167,7 @@ class IWbemServices extends IUnknown {
 
   int PutClassAsync(Pointer<COMObject> pObject, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -190,7 +190,7 @@ class IWbemServices extends IUnknown {
 
   int DeleteClass(Pointer<Utf16> strClass, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -213,7 +213,7 @@ class IWbemServices extends IUnknown {
 
   int DeleteClassAsync(Pointer<Utf16> strClass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -236,7 +236,7 @@ class IWbemServices extends IUnknown {
 
   int CreateClassEnum(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(12)
               .cast<
                   Pointer<
@@ -259,7 +259,7 @@ class IWbemServices extends IUnknown {
 
   int CreateClassEnumAsync(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(13)
               .cast<
                   Pointer<
@@ -282,7 +282,7 @@ class IWbemServices extends IUnknown {
 
   int PutInstance(Pointer<COMObject> pInst, int lFlags, Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(14)
               .cast<
                   Pointer<
@@ -305,7 +305,7 @@ class IWbemServices extends IUnknown {
 
   int PutInstanceAsync(Pointer<COMObject> pInst, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(15)
               .cast<
                   Pointer<
@@ -328,7 +328,7 @@ class IWbemServices extends IUnknown {
 
   int DeleteInstance(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(16)
               .cast<
                   Pointer<
@@ -351,7 +351,7 @@ class IWbemServices extends IUnknown {
 
   int DeleteInstanceAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(17)
               .cast<
                   Pointer<
@@ -374,7 +374,7 @@ class IWbemServices extends IUnknown {
 
   int CreateInstanceEnum(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(18)
               .cast<
                   Pointer<
@@ -397,7 +397,7 @@ class IWbemServices extends IUnknown {
 
   int CreateInstanceEnumAsync(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(19)
               .cast<
                   Pointer<
@@ -424,7 +424,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(20)
               .cast<
                   Pointer<
@@ -453,7 +453,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(21)
               .cast<
                   Pointer<
@@ -482,7 +482,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<Pointer<COMObject>> ppEnum) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(22)
               .cast<
                   Pointer<
@@ -511,7 +511,7 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(23)
               .cast<
                   Pointer<
@@ -542,7 +542,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pInParams,
           Pointer<Pointer<COMObject>> ppOutParams,
           Pointer<Pointer<COMObject>> ppCallResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(24)
               .cast<
                   Pointer<
@@ -583,7 +583,7 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pInParams,
           Pointer<COMObject> pResponseHandler) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(25)
               .cast<
                   Pointer<

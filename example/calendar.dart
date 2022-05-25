@@ -15,9 +15,6 @@ String calendarData(ICalendar calendar) =>
 
 void main() {
   winrtInitialize();
-  final japaneseCalendar = convertToHString('JapaneseCalendar');
-  final hebrewCalendar = convertToHString('HebrewCalendar');
-
   try {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     final comObject =
@@ -31,10 +28,10 @@ void main() {
 
     print('Languages: ${calendar.Languages}\n');
 
-    calendar.ChangeCalendarSystem(japaneseCalendar);
+    calendar.ChangeCalendarSystem('JapaneseCalendar');
     print(calendarData(calendar));
 
-    calendar.ChangeCalendarSystem(hebrewCalendar);
+    calendar.ChangeCalendarSystem('HebrewCalendar');
     print(calendarData(calendar));
 
     final dateTime = calendar.GetDateTime();
@@ -43,8 +40,6 @@ void main() {
     free(comObject);
     free(clonedCalendar.ptr);
   } finally {
-    WindowsDeleteString(japaneseCalendar);
-    WindowsDeleteString(hebrewCalendar);
     winrtUninitialize();
   }
 }

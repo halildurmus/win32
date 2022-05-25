@@ -1,4 +1,4 @@
-// ISpellCheckerFactory.dart
+// ispellcheckerfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -36,7 +36,7 @@ class ISpellCheckerFactory extends IUnknown {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -58,7 +58,7 @@ class ISpellCheckerFactory extends IUnknown {
   }
 
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class ISpellCheckerFactory extends IUnknown {
 
   int CreateSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -93,20 +93,7 @@ const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
 class SpellCheckerFactory extends ISpellCheckerFactory {
   SpellCheckerFactory(super.ptr);
 
-  factory SpellCheckerFactory.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_SpellCheckerFactory);
-    final iid = calloc<GUID>()..ref.setGUID(IID_ISpellCheckerFactory);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return SpellCheckerFactory(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory SpellCheckerFactory.createInstance() =>
+      SpellCheckerFactory(COMObject.createFromID(
+          CLSID_SpellCheckerFactory, IID_ISpellCheckerFactory));
 }

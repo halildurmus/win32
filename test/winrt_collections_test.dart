@@ -257,7 +257,7 @@ void main() {
           Pointer<COMObject> ptr, Allocator allocator) {
         final retValuePtr = allocator<COMObject>();
 
-        final hr = ptr.ref.lpVtbl.value
+        final hr = ptr.ref.vtable
             .elementAt(9)
             .cast<
                 Pointer<
@@ -339,7 +339,7 @@ void main() {
           Pointer<COMObject> ptr, Allocator allocator) {
         final retValuePtr = allocator<COMObject>();
 
-        final hr = ptr.ref.lpVtbl.value
+        final hr = ptr.ref.vtable
             .elementAt(9)
             .cast<
                 Pointer<

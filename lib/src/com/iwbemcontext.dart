@@ -1,4 +1,4 @@
-// IWbemContext.dart
+// iwbemcontext.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IWbemContext(super.ptr);
 
-  int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.lpVtbl.value
+  int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,8 +44,7 @@ class IWbemContext extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>()(
       ptr.ref.lpVtbl, ppNewCopy);
 
-  int GetNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) => ptr
-          .ref.lpVtbl.value
+  int GetNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -58,7 +57,7 @@ class IWbemContext extends IUnknown {
                   Pointer, int lFlags, Pointer<Pointer<SAFEARRAY>> pNames)>()(
       ptr.ref.lpVtbl, lFlags, pNames);
 
-  int BeginEnumeration(int lFlags) => ptr.ref.lpVtbl.value
+  int BeginEnumeration(int lFlags) => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
@@ -66,7 +65,7 @@ class IWbemContext extends IUnknown {
 
   int Next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
           Pointer<VARIANT> pValue) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -85,14 +84,14 @@ class IWbemContext extends IUnknown {
                       Pointer<VARIANT> pValue)>()(
           ptr.ref.lpVtbl, lFlags, pstrName, pValue);
 
-  int EndEnumeration() => ptr.ref.lpVtbl.value
+  int EndEnumeration() => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   int SetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -106,7 +105,7 @@ class IWbemContext extends IUnknown {
           ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
   int GetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -119,7 +118,7 @@ class IWbemContext extends IUnknown {
                       Pointer<VARIANT> pValue)>()(
           ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int DeleteValue(Pointer<Utf16> wszName, int lFlags) => ptr.ref.lpVtbl.value
+  int DeleteValue(Pointer<Utf16> wszName, int lFlags) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -131,7 +130,7 @@ class IWbemContext extends IUnknown {
               int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
       ptr.ref.lpVtbl, wszName, lFlags);
 
-  int DeleteAll() => ptr.ref.lpVtbl.value
+  int DeleteAll() => ptr.ref.vtable
       .elementAt(11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
@@ -145,20 +144,6 @@ const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
 class WbemContext extends IWbemContext {
   WbemContext(super.ptr);
 
-  factory WbemContext.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemContext);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemContext);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return WbemContext(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory WbemContext.createInstance() =>
+      WbemContext(COMObject.createFromID(CLSID_WbemContext, IID_IWbemContext));
 }

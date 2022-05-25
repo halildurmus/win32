@@ -1,4 +1,4 @@
-// IAppxFactory.dart
+// iappxfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -36,7 +36,7 @@ class IAppxFactory extends IUnknown {
           Pointer<COMObject> outputStream,
           Pointer<APPX_PACKAGE_SETTINGS> settings,
           Pointer<Pointer<COMObject>> packageWriter) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -57,7 +57,7 @@ class IAppxFactory extends IUnknown {
 
   int CreatePackageReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> packageReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
@@ -72,7 +72,7 @@ class IAppxFactory extends IUnknown {
 
   int CreateManifestReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> manifestReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(5)
               .cast<
                   Pointer<
@@ -87,7 +87,7 @@ class IAppxFactory extends IUnknown {
 
   int CreateBlockMapReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> blockMapReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -104,7 +104,7 @@ class IAppxFactory extends IUnknown {
           Pointer<COMObject> blockMapStream,
           Pointer<Utf16> signatureFileName,
           Pointer<Pointer<COMObject>> blockMapReader) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -131,20 +131,6 @@ const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
 class AppxFactory extends IAppxFactory {
   AppxFactory(super.ptr);
 
-  factory AppxFactory.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_AppxFactory);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IAppxFactory);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return AppxFactory(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
+  factory AppxFactory.createInstance() =>
+      AppxFactory(COMObject.createFromID(CLSID_AppxFactory, IID_IAppxFactory));
 }

@@ -1,4 +1,4 @@
-// IMoniker.dart
+// imoniker.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IMoniker extends IPersistStream {
 
   int BindToObject(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riidResult, Pointer<Pointer> ppvResult) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -57,7 +57,7 @@ class IMoniker extends IPersistStream {
 
   int BindToStorage(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riid, Pointer<Pointer> ppvObj) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -83,7 +83,7 @@ class IMoniker extends IPersistStream {
           int dwReduceHowFar,
           Pointer<Pointer<COMObject>> ppmkToLeft,
           Pointer<Pointer<COMObject>> ppmkReduced) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -106,7 +106,7 @@ class IMoniker extends IPersistStream {
 
   int ComposeWith(Pointer<COMObject> pmkRight, int fOnlyIfNotGeneric,
           Pointer<Pointer<COMObject>> ppmkComposite) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -126,7 +126,7 @@ class IMoniker extends IPersistStream {
           ptr.ref.lpVtbl, pmkRight, fOnlyIfNotGeneric, ppmkComposite);
 
   int Enum(int fForward, Pointer<Pointer<COMObject>> ppenumMoniker) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(12)
               .cast<
                   Pointer<
@@ -139,7 +139,7 @@ class IMoniker extends IPersistStream {
                       Pointer<Pointer<COMObject>> ppenumMoniker)>()(
           ptr.ref.lpVtbl, fForward, ppenumMoniker);
 
-  int IsEqual(Pointer<COMObject> pmkOtherMoniker) => ptr.ref.lpVtbl.value
+  int IsEqual(Pointer<COMObject> pmkOtherMoniker) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -151,7 +151,7 @@ class IMoniker extends IPersistStream {
               int Function(Pointer, Pointer<COMObject> pmkOtherMoniker)>()(
       ptr.ref.lpVtbl, pmkOtherMoniker);
 
-  int Hash(Pointer<Uint32> pdwHash) => ptr.ref.lpVtbl.value
+  int Hash(Pointer<Uint32> pdwHash) => ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
@@ -163,7 +163,7 @@ class IMoniker extends IPersistStream {
 
   int IsRunning(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<COMObject> pmkNewlyRunning) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(15)
               .cast<
                   Pointer<
@@ -184,7 +184,7 @@ class IMoniker extends IPersistStream {
 
   int GetTimeOfLastChange(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<FILETIME> pFileTime) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(16)
               .cast<
                   Pointer<
@@ -203,7 +203,7 @@ class IMoniker extends IPersistStream {
                       Pointer<FILETIME> pFileTime)>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pFileTime);
 
-  int Inverse(Pointer<Pointer<COMObject>> ppmk) => ptr.ref.lpVtbl.value
+  int Inverse(Pointer<Pointer<COMObject>> ppmk) => ptr.ref.vtable
       .elementAt(17)
       .cast<
           Pointer<
@@ -216,7 +216,7 @@ class IMoniker extends IPersistStream {
 
   int CommonPrefixWith(Pointer<COMObject> pmkOther,
           Pointer<Pointer<COMObject>> ppmkPrefix) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(18)
               .cast<
                   Pointer<
@@ -231,7 +231,7 @@ class IMoniker extends IPersistStream {
 
   int RelativePathTo(Pointer<COMObject> pmkOther,
           Pointer<Pointer<COMObject>> ppmkRelPath) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(19)
               .cast<
                   Pointer<
@@ -246,7 +246,7 @@ class IMoniker extends IPersistStream {
 
   int GetDisplayName(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<Pointer<Utf16>> ppszDisplayName) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(20)
               .cast<
                   Pointer<
@@ -271,7 +271,7 @@ class IMoniker extends IPersistStream {
           Pointer<Utf16> pszDisplayName,
           Pointer<Uint32> pchEaten,
           Pointer<Pointer<COMObject>> ppmkOut) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(21)
               .cast<
                   Pointer<
@@ -294,7 +294,7 @@ class IMoniker extends IPersistStream {
                       Pointer<Pointer<COMObject>> ppmkOut)>()(
           ptr.ref.lpVtbl, pbc, pmkToLeft, pszDisplayName, pchEaten, ppmkOut);
 
-  int IsSystemMoniker(Pointer<Uint32> pdwMksys) => ptr.ref.lpVtbl.value
+  int IsSystemMoniker(Pointer<Uint32> pdwMksys) => ptr.ref.vtable
           .elementAt(22)
           .cast<
               Pointer<

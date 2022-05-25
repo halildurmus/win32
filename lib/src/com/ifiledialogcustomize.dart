@@ -1,4 +1,4 @@
-// IFileDialogCustomize.dart
+// ifiledialogcustomize.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,14 +32,14 @@ class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, is 27 entries long.
   IFileDialogCustomize(super.ptr);
 
-  int EnableOpenDropDown(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int EnableOpenDropDown(int dwIDCtl) => ptr.ref.vtable
       .elementAt(3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
       .asFunction<
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
-  int AddMenu(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr.ref.lpVtbl.value
+  int AddMenu(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -51,8 +51,7 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int AddPushButton(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr
-          .ref.lpVtbl.value
+  int AddPushButton(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -64,14 +63,14 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int AddComboBox(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int AddComboBox(int dwIDCtl) => ptr.ref.vtable
       .elementAt(6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
       .asFunction<
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
-  int AddRadioButtonList(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int AddRadioButtonList(int dwIDCtl) => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
@@ -79,7 +78,7 @@ class IFileDialogCustomize extends IUnknown {
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
   int AddCheckButton(int dwIDCtl, Pointer<Utf16> pszLabel, int bChecked) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -91,7 +90,7 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszLabel,
                   int bChecked)>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel, bChecked);
 
-  int AddEditBox(int dwIDCtl, Pointer<Utf16> pszText) => ptr.ref.lpVtbl.value
+  int AddEditBox(int dwIDCtl, Pointer<Utf16> pszText) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -103,14 +102,14 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszText);
 
-  int AddSeparator(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int AddSeparator(int dwIDCtl) => ptr.ref.vtable
       .elementAt(10)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
       .asFunction<
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
-  int AddText(int dwIDCtl, Pointer<Utf16> pszText) => ptr.ref.lpVtbl.value
+  int AddText(int dwIDCtl, Pointer<Utf16> pszText) => ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -122,8 +121,7 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszText);
 
-  int SetControlLabel(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr
-          .ref.lpVtbl.value
+  int SetControlLabel(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -135,8 +133,7 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int GetControlState(int dwIDCtl, Pointer<Int32> pdwState) => ptr
-          .ref.lpVtbl.value
+  int GetControlState(int dwIDCtl, Pointer<Int32> pdwState) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -149,7 +146,7 @@ class IFileDialogCustomize extends IUnknown {
       ptr.ref.lpVtbl, dwIDCtl, pdwState);
 
   int SetControlState(int dwIDCtl, int dwState) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(14)
               .cast<
                   Pointer<
@@ -161,7 +158,7 @@ class IFileDialogCustomize extends IUnknown {
           ptr.ref.lpVtbl, dwIDCtl, dwState);
 
   int GetEditBoxText(int dwIDCtl, Pointer<Pointer<Uint16>> ppszText) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(15)
           .cast<
               Pointer<
@@ -174,8 +171,7 @@ class IFileDialogCustomize extends IUnknown {
                   Pointer, int dwIDCtl, Pointer<Pointer<Uint16>> ppszText)>()(
       ptr.ref.lpVtbl, dwIDCtl, ppszText);
 
-  int SetEditBoxText(int dwIDCtl, Pointer<Utf16> pszText) =>
-      ptr.ref.lpVtbl.value
+  int SetEditBoxText(int dwIDCtl, Pointer<Utf16> pszText) => ptr.ref.vtable
           .elementAt(16)
           .cast<
               Pointer<
@@ -184,11 +180,11 @@ class IFileDialogCustomize extends IUnknown {
                           Pointer, Uint32 dwIDCtl, Pointer<Utf16> pszText)>>>()
           .value
           .asFunction<
-              int Function(Pointer, int dwIDCtl,
-                  Pointer<Utf16> pszText)>()(ptr.ref.lpVtbl, dwIDCtl, pszText);
+              int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszText)>()(
+      ptr.ref.lpVtbl, dwIDCtl, pszText);
 
   int GetCheckButtonState(int dwIDCtl, Pointer<Int32> pbChecked) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(17)
       .cast<
           Pointer<
@@ -201,7 +197,7 @@ class IFileDialogCustomize extends IUnknown {
               Pointer<Int32> pbChecked)>()(ptr.ref.lpVtbl, dwIDCtl, pbChecked);
 
   int SetCheckButtonState(int dwIDCtl, int bChecked) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(18)
               .cast<
                   Pointer<
@@ -213,7 +209,7 @@ class IFileDialogCustomize extends IUnknown {
           ptr.ref.lpVtbl, dwIDCtl, bChecked);
 
   int AddControlItem(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(19)
           .cast<
               Pointer<
@@ -227,7 +223,7 @@ class IFileDialogCustomize extends IUnknown {
       ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
 
   int RemoveControlItem(int dwIDCtl, int dwIDItem) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(20)
               .cast<
                   Pointer<
@@ -238,7 +234,7 @@ class IFileDialogCustomize extends IUnknown {
               .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
           ptr.ref.lpVtbl, dwIDCtl, dwIDItem);
 
-  int RemoveAllControlItems(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int RemoveAllControlItems(int dwIDCtl) => ptr.ref.vtable
       .elementAt(21)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
@@ -246,7 +242,7 @@ class IFileDialogCustomize extends IUnknown {
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
   int GetControlItemState(int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(22)
           .cast<
               Pointer<
@@ -263,7 +259,7 @@ class IFileDialogCustomize extends IUnknown {
                       pdwState)>()(ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pdwState);
 
   int SetControlItemState(int dwIDCtl, int dwIDItem, int dwState) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(23)
           .cast<
               Pointer<
@@ -276,7 +272,7 @@ class IFileDialogCustomize extends IUnknown {
                   int dwState)>()(ptr.ref.lpVtbl, dwIDCtl, dwIDItem, dwState);
 
   int GetSelectedControlItem(int dwIDCtl, Pointer<Uint32> pdwIDItem) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(24)
       .cast<
           Pointer<
@@ -289,7 +285,7 @@ class IFileDialogCustomize extends IUnknown {
               Pointer<Uint32> pdwIDItem)>()(ptr.ref.lpVtbl, dwIDCtl, pdwIDItem);
 
   int SetSelectedControlItem(int dwIDCtl, int dwIDItem) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(25)
               .cast<
                   Pointer<
@@ -300,8 +296,7 @@ class IFileDialogCustomize extends IUnknown {
               .asFunction<int Function(Pointer, int dwIDCtl, int dwIDItem)>()(
           ptr.ref.lpVtbl, dwIDCtl, dwIDItem);
 
-  int StartVisualGroup(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr
-          .ref.lpVtbl.value
+  int StartVisualGroup(int dwIDCtl, Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(26)
           .cast<
               Pointer<
@@ -313,13 +308,13 @@ class IFileDialogCustomize extends IUnknown {
               int Function(Pointer, int dwIDCtl, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int EndVisualGroup() => ptr.ref.lpVtbl.value
+  int EndVisualGroup() => ptr.ref.vtable
       .elementAt(27)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int MakeProminent(int dwIDCtl) => ptr.ref.lpVtbl.value
+  int MakeProminent(int dwIDCtl) => ptr.ref.vtable
       .elementAt(28)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
       .value
@@ -327,7 +322,7 @@ class IFileDialogCustomize extends IUnknown {
           int Function(Pointer, int dwIDCtl)>()(ptr.ref.lpVtbl, dwIDCtl);
 
   int SetControlItemText(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(29)
           .cast<
               Pointer<

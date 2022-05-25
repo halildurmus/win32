@@ -1,4 +1,4 @@
-// IAppxManifestApplicationsEnumerator.dart
+// iappxmanifestapplicationsenumerator.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,8 +33,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestApplicationsEnumerator(super.ptr);
 
-  int GetCurrent(Pointer<Pointer<COMObject>> application) => ptr
-          .ref.lpVtbl.value
+  int GetCurrent(Pointer<Pointer<COMObject>> application) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -46,7 +45,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> application)>()(
       ptr.ref.lpVtbl, application);
 
-  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.lpVtbl.value
+  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -56,7 +55,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
       ptr.ref.lpVtbl, hasCurrent);
 
-  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.lpVtbl.value
+  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

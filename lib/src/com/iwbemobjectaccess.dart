@@ -1,4 +1,4 @@
-// IWbemObjectAccess.dart
+// iwbemobjectaccess.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -35,7 +35,7 @@ class IWbemObjectAccess extends IWbemClassObject {
   int
       GetPropertyHandle(Pointer<Utf16> wszPropertyName, Pointer<Int32> pType,
               Pointer<Int32> plHandle) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(27)
                   .cast<
                       Pointer<
@@ -52,7 +52,7 @@ class IWbemObjectAccess extends IWbemClassObject {
               ptr.ref.lpVtbl, wszPropertyName, pType, plHandle);
 
   int WritePropertyValue(int lHandle, int lNumBytes, Pointer<Uint8> aData) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<
@@ -71,7 +71,7 @@ class IWbemObjectAccess extends IWbemClassObject {
   int
       ReadPropertyValue(int lHandle, int lBufferSize, Pointer<Int32> plNumBytes,
               Pointer<Uint8> aData) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(29)
                   .cast<
                       Pointer<
@@ -88,7 +88,7 @@ class IWbemObjectAccess extends IWbemClassObject {
                           Pointer<Int32> plNumBytes, Pointer<Uint8> aData)>()(
               ptr.ref.lpVtbl, lHandle, lBufferSize, plNumBytes, aData);
 
-  int ReadDWORD(int lHandle, Pointer<Uint32> pdw) => ptr.ref.lpVtbl.value
+  int ReadDWORD(int lHandle, Pointer<Uint32> pdw) => ptr.ref.vtable
           .elementAt(30)
           .cast<
               Pointer<
@@ -100,7 +100,7 @@ class IWbemObjectAccess extends IWbemClassObject {
               int Function(Pointer, int lHandle, Pointer<Uint32> pdw)>()(
       ptr.ref.lpVtbl, lHandle, pdw);
 
-  int WriteDWORD(int lHandle, int dw) => ptr.ref.lpVtbl.value
+  int WriteDWORD(int lHandle, int dw) => ptr.ref.vtable
           .elementAt(31)
           .cast<
               Pointer<
@@ -110,7 +110,7 @@ class IWbemObjectAccess extends IWbemClassObject {
           .asFunction<int Function(Pointer, int lHandle, int dw)>()(
       ptr.ref.lpVtbl, lHandle, dw);
 
-  int ReadQWORD(int lHandle, Pointer<Uint64> pqw) => ptr.ref.lpVtbl.value
+  int ReadQWORD(int lHandle, Pointer<Uint64> pqw) => ptr.ref.vtable
           .elementAt(32)
           .cast<
               Pointer<
@@ -122,7 +122,7 @@ class IWbemObjectAccess extends IWbemClassObject {
               int Function(Pointer, int lHandle, Pointer<Uint64> pqw)>()(
       ptr.ref.lpVtbl, lHandle, pqw);
 
-  int WriteQWORD(int lHandle, int pw) => ptr.ref.lpVtbl.value
+  int WriteQWORD(int lHandle, int pw) => ptr.ref.vtable
           .elementAt(33)
           .cast<
               Pointer<
@@ -134,7 +134,7 @@ class IWbemObjectAccess extends IWbemClassObject {
 
   int GetPropertyInfoByHandle(int lHandle, Pointer<Pointer<Utf16>> pstrName,
           Pointer<Int32> pType) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(34)
               .cast<
                   Pointer<
@@ -153,13 +153,13 @@ class IWbemObjectAccess extends IWbemClassObject {
                       Pointer<Int32> pType)>()(
           ptr.ref.lpVtbl, lHandle, pstrName, pType);
 
-  int Lock(int lFlags) => ptr.ref.lpVtbl.value
+  int Lock(int lFlags) => ptr.ref.vtable
       .elementAt(35)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
 
-  int Unlock(int lFlags) => ptr.ref.lpVtbl.value
+  int Unlock(int lFlags) => ptr.ref.vtable
       .elementAt(36)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value

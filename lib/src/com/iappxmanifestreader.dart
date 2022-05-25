@@ -1,4 +1,4 @@
-// IAppxManifestReader.dart
+// iappxmanifestreader.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,8 +32,7 @@ class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAppxManifestReader(super.ptr);
 
-  int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr
-          .ref.lpVtbl.value
+  int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -46,7 +45,7 @@ class IAppxManifestReader extends IUnknown {
       ptr.ref.lpVtbl, packageId);
 
   int GetProperties(Pointer<Pointer<COMObject>> packageProperties) => ptr
-          .ref.lpVtbl.value
+          .ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -59,21 +58,21 @@ class IAppxManifestReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> packageProperties)>()(
       ptr.ref.lpVtbl, packageProperties);
 
-  int GetPackageDependencies(Pointer<Pointer<COMObject>> dependencies) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(5)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> dependencies)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
-          ptr.ref.lpVtbl, dependencies);
+  int GetPackageDependencies(Pointer<Pointer<COMObject>> dependencies) => ptr
+          .ref.vtable
+          .elementAt(5)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> dependencies)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
+      ptr.ref.lpVtbl, dependencies);
 
-  int GetCapabilities(Pointer<Uint32> capabilities) => ptr.ref.lpVtbl.value
+  int GetCapabilities(Pointer<Uint32> capabilities) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -83,8 +82,7 @@ class IAppxManifestReader extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> capabilities)>()(
       ptr.ref.lpVtbl, capabilities);
 
-  int GetResources(Pointer<Pointer<COMObject>> resources) => ptr
-          .ref.lpVtbl.value
+  int GetResources(Pointer<Pointer<COMObject>> resources) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -98,7 +96,7 @@ class IAppxManifestReader extends IUnknown {
 
   int
       GetDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
-          ptr.ref.lpVtbl.value
+          ptr.ref.vtable
                   .elementAt(8)
                   .cast<
                       Pointer<
@@ -114,7 +112,7 @@ class IAppxManifestReader extends IUnknown {
               ptr.ref.lpVtbl, deviceCapabilities);
 
   int GetPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(9)
       .cast<
           Pointer<
@@ -127,7 +125,7 @@ class IAppxManifestReader extends IUnknown {
               Pointer<Uint64> value)>()(ptr.ref.lpVtbl, name, value);
 
   int GetApplications(Pointer<Pointer<COMObject>> applications) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -140,17 +138,16 @@ class IAppxManifestReader extends IUnknown {
                       Pointer, Pointer<Pointer<COMObject>> applications)>()(
           ptr.ref.lpVtbl, applications);
 
-  int GetStream(Pointer<Pointer<COMObject>> manifestStream) =>
-      ptr.ref.lpVtbl.value
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          Int32 Function(Pointer,
-                              Pointer<Pointer<COMObject>> manifestStream)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<Pointer<COMObject>> manifestStream)>()(
-          ptr.ref.lpVtbl, manifestStream);
+  int GetStream(Pointer<Pointer<COMObject>> manifestStream) => ptr.ref.vtable
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      Int32 Function(Pointer,
+                          Pointer<Pointer<COMObject>> manifestStream)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Pointer<COMObject>> manifestStream)>()(
+      ptr.ref.lpVtbl, manifestStream);
 }

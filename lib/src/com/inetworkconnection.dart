@@ -1,4 +1,4 @@
-// INetworkConnection.dart
+// inetworkconnection.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.
   INetworkConnection(super.ptr);
 
-  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.lpVtbl.value
+  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -48,7 +48,7 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class INetworkConnection extends IDispatch {
     final retValuePtr = calloc<Int16>();
 
     try {
-      final hr = ptr.ref.lpVtbl.value
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -92,7 +92,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.lpVtbl.value
+  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -103,7 +103,7 @@ class INetworkConnection extends IDispatch {
       ptr.ref.lpVtbl, pConnectivity);
 
   int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -115,7 +115,7 @@ class INetworkConnection extends IDispatch {
                   int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
           ptr.ref.lpVtbl, pgdConnectionId);
 
-  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.lpVtbl.value
+  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -125,7 +125,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
       ptr.ref.lpVtbl, pgdAdapterId);
 
-  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.lpVtbl.value
+  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<

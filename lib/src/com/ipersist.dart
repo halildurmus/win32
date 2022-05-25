@@ -1,4 +1,4 @@
-// IPersist.dart
+// ipersist.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IPersist extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IPersist(super.ptr);
 
-  int GetClassID(Pointer<GUID> pClassID) => ptr.ref.lpVtbl.value
+  int GetClassID(Pointer<GUID> pClassID) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

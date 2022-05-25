@@ -1,4 +1,4 @@
-// IAppxManifestPackageDependency.dart
+// iappxmanifestpackagedependency.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -33,7 +33,7 @@ class IAppxManifestPackageDependency extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestPackageDependency(super.ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.lpVtbl.value
+  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +43,7 @@ class IAppxManifestPackageDependency extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.lpVtbl.value
+  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +55,7 @@ class IAppxManifestPackageDependency extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
       ptr.ref.lpVtbl, publisher);
 
-  int GetMinVersion(Pointer<Uint64> minVersion) => ptr.ref.lpVtbl.value
+  int GetMinVersion(Pointer<Uint64> minVersion) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

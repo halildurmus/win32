@@ -1,4 +1,4 @@
-// IAudioStreamVolume.dart
+// iaudiostreamvolume.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAudioStreamVolume(super.ptr);
 
-  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.lpVtbl.value
+  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -42,7 +42,7 @@ class IAudioStreamVolume extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCount)>()(
       ptr.ref.lpVtbl, pdwCount);
 
-  int SetChannelVolume(int dwIndex, double fLevel) => ptr.ref.lpVtbl.value
+  int SetChannelVolume(int dwIndex, double fLevel) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -52,8 +52,7 @@ class IAudioStreamVolume extends IUnknown {
           .asFunction<int Function(Pointer, int dwIndex, double fLevel)>()(
       ptr.ref.lpVtbl, dwIndex, fLevel);
 
-  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) =>
-      ptr.ref.lpVtbl.value
+  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -62,11 +61,10 @@ class IAudioStreamVolume extends IUnknown {
                           Pointer, Uint32 dwIndex, Pointer<Float> pfLevel)>>>()
           .value
           .asFunction<
-              int Function(Pointer, int dwIndex,
-                  Pointer<Float> pfLevel)>()(ptr.ref.lpVtbl, dwIndex, pfLevel);
+              int Function(Pointer, int dwIndex, Pointer<Float> pfLevel)>()(
+      ptr.ref.lpVtbl, dwIndex, pfLevel);
 
-  int SetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr
-      .ref.lpVtbl.value
+  int SetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -78,8 +76,7 @@ class IAudioStreamVolume extends IUnknown {
           int Function(Pointer, int dwCount,
               Pointer<Float> pfVolumes)>()(ptr.ref.lpVtbl, dwCount, pfVolumes);
 
-  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr
-      .ref.lpVtbl.value
+  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(7)
       .cast<
           Pointer<

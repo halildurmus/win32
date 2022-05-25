@@ -1,4 +1,4 @@
-// IModalWindow.dart
+// imodalwindow.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class IModalWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IModalWindow(super.ptr);
 
-  int Show(int hwndOwner) => ptr.ref.lpVtbl.value
+  int Show(int hwndOwner) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()

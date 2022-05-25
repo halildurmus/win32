@@ -1,4 +1,4 @@
-// IAppxManifestProperties.dart
+// iappxmanifestproperties.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,8 +32,7 @@ class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestProperties(super.ptr);
 
-  int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr
-      .ref.lpVtbl.value
+  int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -46,7 +45,7 @@ class IAppxManifestProperties extends IUnknown {
               Pointer<Int32> value)>()(ptr.ref.lpVtbl, name, value);
 
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
-      .ref.lpVtbl.value
+      .ref.vtable
       .elementAt(4)
       .cast<
           Pointer<

@@ -1,4 +1,4 @@
-// IPersistMemory.dart
+// ipersistmemory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,13 +32,13 @@ class IPersistMemory extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistMemory(super.ptr);
 
-  int IsDirty() => ptr.ref.lpVtbl.value
+  int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer pMem, int cbSize) => ptr.ref.lpVtbl.value
+  int Load(Pointer pMem, int cbSize) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -48,7 +48,7 @@ class IPersistMemory extends IPersist {
           .asFunction<int Function(Pointer, Pointer pMem, int cbSize)>()(
       ptr.ref.lpVtbl, pMem, cbSize);
 
-  int Save(Pointer pMem, int fClearDirty, int cbSize) => ptr.ref.lpVtbl.value
+  int Save(Pointer pMem, int fClearDirty, int cbSize) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -60,7 +60,7 @@ class IPersistMemory extends IPersist {
           int Function(Pointer, Pointer pMem, int fClearDirty,
               int cbSize)>()(ptr.ref.lpVtbl, pMem, fClearDirty, cbSize);
 
-  int GetSizeMax(Pointer<Uint32> pCbSize) => ptr.ref.lpVtbl.value
+  int GetSizeMax(Pointer<Uint32> pCbSize) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -70,7 +70,7 @@ class IPersistMemory extends IPersist {
           .asFunction<int Function(Pointer, Pointer<Uint32> pCbSize)>()(
       ptr.ref.lpVtbl, pCbSize);
 
-  int InitNew() => ptr.ref.lpVtbl.value
+  int InitNew() => ptr.ref.vtable
       .elementAt(8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

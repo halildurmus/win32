@@ -1,4 +1,4 @@
-// ISupportErrorInfo.dart
+// isupporterrorinfo.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -32,7 +32,7 @@ class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISupportErrorInfo(super.ptr);
 
-  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.lpVtbl.value
+  int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

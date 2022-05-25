@@ -1,4 +1,4 @@
-// IAudioSessionManager.dart
+// iaudiosessionmanager.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -34,7 +34,7 @@ class IAudioSessionManager extends IUnknown {
 
   int GetAudioSessionControl(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> SessionControl) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(3)
               .cast<
                   Pointer<
@@ -55,7 +55,7 @@ class IAudioSessionManager extends IUnknown {
 
   int GetSimpleAudioVolume(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> AudioVolume) =>
-      ptr.ref.lpVtbl.value
+      ptr.ref.vtable
               .elementAt(4)
               .cast<
                   Pointer<
