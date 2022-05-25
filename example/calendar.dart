@@ -6,12 +6,13 @@
 
 import 'package:win32/win32.dart';
 
-String calendarData(ICalendar calendar) =>
+String calendarData(Calendar calendar) =>
     'Calendar: ${calendar.GetCalendarSystem()}\n'
     'Name of Month: ${calendar.MonthAsFullSoloString()}\n'
     'Day of Month: ${calendar.DayAsPaddedString(2)}\n'
     'Day of Week: ${calendar.DayOfWeekAsFullSoloString()}\n'
-    'Year: ${calendar.YearAsString()}\n';
+    'Year: ${calendar.YearAsString()}\n'
+    'Time Zone: ${calendar.TimeZoneAsFullString()}\n';
 
 void main() {
   winrtInitialize();
