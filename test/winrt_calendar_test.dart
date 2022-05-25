@@ -1,5 +1,8 @@
 @TestOn('windows')
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -450,6 +453,17 @@ void main() {
             ]));
       }
     });
+
+    test('Calendar.CreateCalendarWithTimeZone constructor', () {
+      final vector = calloc<COMObject>(256); // arbitrarily large just in case
+      final languages = IVector<String>(vector)
+        ..Append('en-US')
+        ..Append('en-GB');
+      final customCal = Calendar.CreateCalendarWithTimeZone(languages.ptr,
+          'GregorianCalendar', '24HourClock', 'America/LosAngeles');
+
+      expect(customCal.TimeZoneAsFullString(), equals('now'));
+    }, skip: 'Crashes right now.');
 
     tearDown(() {
       free(calendar.ptr);
