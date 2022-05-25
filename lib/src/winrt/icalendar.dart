@@ -2042,3 +2042,7 @@ mixin ICalendar on IInspectable {
     }
   }
 }
+
+class Calendar extends IInspectable with ICalendar {
+  Calendar(super.ptr);
+}

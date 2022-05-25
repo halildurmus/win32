@@ -44,7 +44,7 @@ void main() {
 
       final object =
           CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      final calendar = ICalendar(object);
+      final calendar = Calendar(object);
 
       expect(calendar.Year, greaterThanOrEqualTo(2020));
       free(object);
@@ -63,7 +63,7 @@ void main() {
       ];
 
       final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = ICalendar(object);
+      final calendar = Calendar(object);
 
       expect(calendar.iids, equals(iids));
 
@@ -77,7 +77,7 @@ void main() {
       const calendarClassName = 'Windows.Globalization.Calendar';
 
       final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = ICalendar(object);
+      final calendar = Calendar(object);
 
       expect(calendar.runtimeClassName, equals(calendarClassName));
 
@@ -91,7 +91,7 @@ void main() {
       const calendarClassName = 'Windows.Globalization.Calendar';
 
       final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = ICalendar(object);
+      final calendar = Calendar(object);
 
       expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
 

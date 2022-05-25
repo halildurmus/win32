@@ -15,7 +15,7 @@ void main() {
 
       final object =
           CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      calendar = ICalendar(object);
+      calendar = Calendar(object);
     });
 
     test('Calendar is a materialized object', () {
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('Calendar.Clone', () {
-      final calendar2 = ICalendar(calendar.Clone());
+      final calendar2 = Calendar(calendar.Clone());
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));

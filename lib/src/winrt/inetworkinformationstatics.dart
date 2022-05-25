@@ -146,7 +146,7 @@ class INetworkInformationStatics extends IInspectable {
     try {
       return IVectorView<IHostName>(
         retValuePtr,
-        creator: IHostName.new,
+        creator: HostName.new,
         allocator: allocator,
       ).toList();
     } finally {

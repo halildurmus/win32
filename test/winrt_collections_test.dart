@@ -21,7 +21,7 @@ void main() {
 
         final object = CreateObject(
             'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-        picker = IFileOpenPicker(object);
+        picker = FileOpenPicker(object);
         allocator = Arena();
         vector = picker.FileTypeFilter;
       });
@@ -283,7 +283,7 @@ void main() {
 
         final object =
             CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-        calendar = ICalendar(object);
+        calendar = Calendar(object);
         allocator = Arena();
         vectorView = Languages(object, allocator);
       });
@@ -337,7 +337,7 @@ void main() {
       late IVectorView<IHostName> vectorView;
       late Arena allocator;
 
-      IVectorView<IHostName> GetHostNames(
+      IVectorView<HostName> GetHostNames(
           Pointer<COMObject> ptr, Allocator allocator) {
         final retValuePtr = allocator<COMObject>();
 
@@ -363,7 +363,7 @@ void main() {
         if (FAILED(hr)) throw WindowsException(hr);
 
         return IVectorView(retValuePtr,
-            creator: IHostName.new, allocator: allocator);
+            creator: HostName.new, allocator: allocator);
       }
 
       setUp(() {
@@ -397,8 +397,8 @@ void main() {
       test('GetMany returns elements starting from index 0', () {
         final pCOMObject = allocator<COMObject>(vectorView.Size);
         expect(vectorView.GetMany(0, pCOMObject), greaterThanOrEqualTo(1));
-        final list = pCOMObject.toList<IHostName>(IHostName.new,
-            length: vectorView.Size);
+        final list =
+            pCOMObject.toList<IHostName>(HostName.new, length: vectorView.Size);
         expect(list.length, greaterThanOrEqualTo(1));
       });
 

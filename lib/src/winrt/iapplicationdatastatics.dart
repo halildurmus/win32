@@ -29,10 +29,12 @@ const IID_IApplicationDataStatics = '{5612147B-E843-45E3-94D8-06169E3C8E17}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IApplicationDataStatics on IInspectable {
+class IApplicationDataStatics extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   late final Pointer<COMObject> _thisPtr =
       toInterface(IID_IApplicationDataStatics);
+
+  IApplicationDataStatics(super.ptr);
 
   Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();

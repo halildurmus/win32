@@ -174,3 +174,7 @@ mixin IHostName on IInspectable {
     }
   }
 }
+
+class HostName extends IInspectable with IHostName {
+  HostName(super.ptr);
+}
