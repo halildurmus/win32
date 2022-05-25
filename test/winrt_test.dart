@@ -1,5 +1,6 @@
 @TestOn('windows')
 
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -42,19 +43,16 @@ void main() {
     test('WinRT basic test', () {
       winrtInitialize();
 
-      final object =
-          CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      final calendar = Calendar(object);
+      final calendar = Calendar();
 
       expect(calendar.Year, greaterThanOrEqualTo(2020));
-      free(object);
+      free(calendar.ptr);
       winrtUninitialize();
     });
 
     test('WinRT getIids test', () {
       winrtInitialize();
 
-      const calendarClassName = 'Windows.Globalization.Calendar';
       const iids = [
         '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}', // ICalendar
         '{00000038-0000-0000-C000-000000000046}', // IWeakReferenceSource
@@ -62,12 +60,11 @@ void main() {
         '{0CA51CC6-17CF-4642-B08E-473DCC3CA3EF}'
       ];
 
-      final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = Calendar(object);
+      final calendar = Calendar();
 
       expect(calendar.iids, equals(iids));
 
-      free(object);
+      free(calendar.ptr);
       winrtUninitialize();
     });
 
@@ -76,26 +73,21 @@ void main() {
 
       const calendarClassName = 'Windows.Globalization.Calendar';
 
-      final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = Calendar(object);
+      using((Arena arena) {
+        final calendar = Calendar(allocator: arena);
+        expect(calendar.runtimeClassName, equals(calendarClassName));
+      });
 
-      expect(calendar.runtimeClassName, equals(calendarClassName));
-
-      free(object);
       winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of base trust class', () {
       winrtInitialize();
 
-      const calendarClassName = 'Windows.Globalization.Calendar';
-
-      final object = CreateObject(calendarClassName, IID_ICalendar);
-      final calendar = Calendar(object);
-
-      expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
-
-      free(object);
+      using((Arena arena) {
+        final calendar = Calendar(allocator: arena);
+        expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
+      });
       winrtUninitialize();
     });
 

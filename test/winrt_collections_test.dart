@@ -281,11 +281,9 @@ void main() {
       setUp(() {
         winrtInitialize();
 
-        final object =
-            CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-        calendar = Calendar(object);
+        calendar = Calendar();
         allocator = Arena();
-        vectorView = Languages(object, allocator);
+        vectorView = Languages(calendar.ptr, allocator);
       });
 
       test('GetAt throws exception if the index is out of bounds', () {

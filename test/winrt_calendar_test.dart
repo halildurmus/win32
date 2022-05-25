@@ -13,9 +13,7 @@ void main() {
     setUp(() {
       winrtInitialize();
 
-      final object =
-          CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      calendar = Calendar(object);
+      calendar = Calendar();
     });
 
     test('Calendar is a materialized object', () {
@@ -25,7 +23,7 @@ void main() {
     });
 
     test('Calendar.Clone', () {
-      final calendar2 = Calendar(calendar.Clone());
+      final calendar2 = Calendar.fromPointer(calendar.Clone());
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));

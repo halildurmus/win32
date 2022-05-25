@@ -2044,5 +2044,8 @@ mixin ICalendar on IInspectable {
 }
 
 class Calendar extends IInspectable with ICalendar {
-  Calendar(super.ptr);
+  Calendar({Allocator allocator = calloc})
+      : super(ActivateClass('Windows.Globalization.Calendar',
+            allocator: allocator));
+  Calendar.fromPointer(super.ptr);
 }
