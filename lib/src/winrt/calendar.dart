@@ -20,12 +20,12 @@ import 'itimezoneoncalendar.dart';
 
 class Calendar extends IInspectable with ICalendar, ITimeZoneOnCalendar {
   Calendar({Allocator allocator = calloc})
-      : super(ActivateClass('Windows.Globalization.Calendar',
-            allocator: allocator));
+      : super(ActivateClass(_className, allocator: allocator));
   Calendar.fromPointer(super.ptr);
 
-  static final _className = 'Windows.UI.Notifications.ToastNotification';
+  static final _className = 'Windows.Globalization.Calendar';
 
+  // ICalendarFactory
   static Calendar CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
     final hClassName = convertToHString(_className);
@@ -75,6 +75,7 @@ class Calendar extends IInspectable with ICalendar, ITimeZoneOnCalendar {
     }
   }
 
+  // ICalendarFactory2
   static Calendar CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {
     final hClassName = convertToHString(_className);
