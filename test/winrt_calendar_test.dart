@@ -1,8 +1,7 @@
+// ignore_for_file: constant_identifier_names
+
 @TestOn('windows')
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -455,15 +454,18 @@ void main() {
     });
 
     test('Calendar.CreateCalendarWithTimeZone constructor', () {
-      final vector = calloc<COMObject>(256); // arbitrarily large just in case
-      final languages = IVector<String>(vector)
-        ..Append('en-US')
-        ..Append('en-GB');
-      final customCal = Calendar.CreateCalendarWithTimeZone(languages.ptr,
-          'GregorianCalendar', '24HourClock', 'America/LosAngeles');
+      final pickerPtr = CreateObject(
+          'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
+      final picker = FileOpenPicker(pickerPtr);
+      final languages = picker.FileTypeFilter..ReplaceAll(['en-US', 'en-GB']);
 
-      expect(customCal.TimeZoneAsFullString(), equals('now'));
-    }, skip: 'Crashes right now.');
+      const IID_Iterable = '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}';
+      final pIterable = languages.toInterface(IID_Iterable);
+      final customCal = Calendar.CreateCalendarWithTimeZone(
+          pIterable, 'GregorianCalendar', '24HourClock', 'America/Los_Angeles');
+
+      expect(customCal.GetTimeZone(), equals('America/Los_Angeles'));
+    });
 
     tearDown(() {
       free(calendar.ptr);
