@@ -1,3 +1,15 @@
+## 2.7.0
+
+- [BREAKING CHANGE] Major work on Windows Runtime APIs, with huge thanks to
+  Halil İbrahim Durmuş (@halildurmus). Breaking changes are limited to WinRT
+  APIs, which are now more idiomatic for Dart. Includes full implementation of
+  System.Globalization.Calendar that is the new reference design for WinRT APIs.
+- Restructure generation code into a separate package in tool\generator.
+- Use super parameters introduced in Dart 2.17, with matching dependency
+  upgrade.
+- Tidy up examples to include consistent headers.
+- All files now have lower case names (e.g. IUnknown.dart -> iunknown.dart)
+
 ## 2.6.1
 
 - Improve pana compliance
