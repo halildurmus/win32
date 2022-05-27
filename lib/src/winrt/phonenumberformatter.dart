@@ -22,6 +22,8 @@ class PhoneNumberFormatter extends IInspectable
 
   static const _className =
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
+  late final _iphonenumberformatter =
+      IPhoneNumberFormatter(toInterface(IID_IPhoneNumberFormatter));
 
   static PhoneNumberFormatter TryCreate(String regionCode) {
     final activationFactory =
@@ -65,32 +67,22 @@ class PhoneNumberFormatter extends IInspectable
   }
 
   @override
-  String Format(Pointer<COMObject> number) {
-    // TODO: implement Format
-    throw UnimplementedError();
-  }
+  String Format(Pointer<COMObject> number) =>
+      _iphonenumberformatter.Format(number);
 
   @override
-  String FormatPartialString(String number) {
-    // TODO: implement FormatPartialString
-    throw UnimplementedError();
-  }
+  String FormatPartialString(String number) =>
+      _iphonenumberformatter.FormatPartialString(number);
 
   @override
-  String FormatString(String number) {
-    // TODO: implement FormatString
-    throw UnimplementedError();
-  }
+  String FormatString(String number) =>
+      _iphonenumberformatter.FormatString(number);
 
   @override
-  String FormatStringWithLeftToRightMarkers(String number) {
-    // TODO: implement FormatStringWithLeftToRightMarkers
-    throw UnimplementedError();
-  }
+  String FormatStringWithLeftToRightMarkers(String number) =>
+      _iphonenumberformatter.FormatStringWithLeftToRightMarkers(number);
 
   @override
-  String FormatWithOutputFormat(Pointer<COMObject> number, int numberFormat) {
-    // TODO: implement FormatWithOutputFormat
-    throw UnimplementedError();
-  }
+  String FormatWithOutputFormat(Pointer<COMObject> number, int numberFormat) =>
+      _iphonenumberformatter.FormatWithOutputFormat(number, numberFormat);
 }
