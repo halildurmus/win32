@@ -1,6 +1,7 @@
 ## 2.1.0
 
 - Update to package:ffi 2.0.0
+- Use super parameters
 
 ## 2.0.0
 
