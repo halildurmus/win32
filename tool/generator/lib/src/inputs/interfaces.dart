@@ -120,6 +120,11 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Storage.IApplicationDataStatics',
   'Windows.Storage.IUserDataPathsStatics',
   'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.UI.Notifications.IToastNotification',
+  'Windows.UI.Notifications.IToastNotification2',
+  'Windows.UI.Notifications.IToastNotification3',
+  'Windows.UI.Notifications.IToastNotification4',
+  'Windows.UI.Notifications.IToastNotification6',
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
 
@@ -136,13 +141,11 @@ final windowsRuntimeTypesToGenerate = <String>{
   //   'Windows.Foundation.IAsyncOperation`1',
   //   'Windows.Storage.IApplicationData',
   //
-  //   Requires class support
-  //   'Windows.UI.Notifications.ToastNotification',
-  //
   //   Requires @halildurmus' WinRT struct support to land
   //   'Windows.Foundation.IPropertyValue',
   //
   //   Requires WinRT event support
   //   'Windows.Networking.Connectivity.INetworkInformationStatics',
   //   'Windows.Gaming.Input.IGamepadStatics',
+  //   'Windows.UI.Notifications.ToastNotification',
 };

@@ -548,7 +548,6 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
     final typeDef = scope.findMethod('GetDateTime')!;
 
-    // WAVEFORMATEX wfx;
     final dateTime = typeDef.returnType.typeIdentifier;
 
     final typeProjection = TypeProjection(dateTime);
@@ -556,6 +555,20 @@ void main() {
     // TODO: Test assumption that this is passed on the wire as a Uint64.
     expect(typeProjection.dartType, equals('int'));
     expect(typeProjection.nativeType, equals('Uint64'));
+    expect(typeProjection.isDartPrimitive, isTrue);
+  });
+
+  test('EventRegistrationToken types are projected correctly', () {
+    final scope = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification')!;
+    final method = scope.findMethod('remove_Dismissed')!;
+
+    final token = method.parameters.first;
+
+    final typeProjection = TypeProjection(token.typeIdentifier);
+
+    expect(typeProjection.dartType, equals('int'));
+    expect(typeProjection.nativeType, equals('IntPtr'));
     expect(typeProjection.isDartPrimitive, isTrue);
   });
 }

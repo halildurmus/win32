@@ -61,6 +61,8 @@ const Map<String, TypeTuple> specialTypes = {
       TypeTuple('Int32', 'int', attribute: '@Int32()'),
   'Windows.Foundation.TimeSpan': TypeTuple('Uint64', 'int',
       attribute: '@Uint64()', methodParamType: 'Duration'),
+  'Windows.Foundation.EventRegistrationToken':
+      TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
 };
 
 class TypeProjection {
