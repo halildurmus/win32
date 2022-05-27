@@ -92,7 +92,7 @@ class Level {
     final disX = max(posX + current!.height - width, 0);
 
     // Go to next rotation state (0-3)
-    final rotation = (current!.rotation + 1) % PieceSet.NUM_ROTATIONS;
+    final rotation = (current!.rotation + 1) % PieceSet.numRotations;
 
     clear(current!);
     current = pieceSet.getPiece(current!.id, rotation);
@@ -152,7 +152,7 @@ class Level {
   }
 
   bool isHitBottom() {
-    final apt = current!.Skirt;
+    final apt = current!.skirt;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
@@ -165,7 +165,7 @@ class Level {
   }
 
   bool isHitLeft() {
-    final apt = current!.LeftSide;
+    final apt = current!.leftSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
@@ -181,7 +181,7 @@ class Level {
   }
 
   bool isHitRight() {
-    final apt = current!.RightSide;
+    final apt = current!.rightSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;

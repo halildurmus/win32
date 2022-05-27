@@ -4,6 +4,8 @@
 
 // Demonstrates using the COM IShellLink interface to create a shell shortcut.
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:args/args.dart';

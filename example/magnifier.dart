@@ -5,6 +5,8 @@
 // Implements a simple control that magnifies the screen, using the
 // Magnification API.
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 

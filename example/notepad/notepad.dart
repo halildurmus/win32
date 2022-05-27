@@ -2,6 +2,8 @@
 
 // Comprehensive example of Win32 APIs for a non-game scenario.
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

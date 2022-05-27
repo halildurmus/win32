@@ -11,6 +11,8 @@
 // translation of the C code. Nevertheless, it demonstrates some useful
 // concepts, including pointer arithmetic and use of virtual memory in Win32.
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 import 'dart:math' show Random;
 

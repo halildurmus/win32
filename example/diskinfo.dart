@@ -4,6 +4,8 @@
 
 // Prints information about the physical characteristics of a disk drive.
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

@@ -252,9 +252,9 @@ void printBatteryStatusInfo() {
 }
 
 String getUserName() {
-  const UNLEN = 256;
-  final pcbBuffer = calloc<DWORD>()..value = UNLEN + 1;
-  final lpBuffer = wsalloc(UNLEN + 1);
+  const usernameLength = 256;
+  final pcbBuffer = calloc<DWORD>()..value = usernameLength + 1;
+  final lpBuffer = wsalloc(usernameLength + 1);
 
   try {
     final result = GetUserName(lpBuffer, pcbBuffer);

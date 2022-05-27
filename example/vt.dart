@@ -6,6 +6,8 @@
 // more comprehensive library that uses these functions, check out dart_console
 // (https://pub.dev/packages/dart_console).
 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'dart:ffi';
 import 'dart:io';
 
@@ -24,7 +26,7 @@ class Coord {
   int Y = 0;
 }
 
-bool EnableVTMode() {
+bool enableVTMode() {
   // Set output mode to handle virtual terminal sequences
   final hOut = GetStdHandle(STD_OUTPUT_HANDLE);
   if (hOut == INVALID_HANDLE_VALUE) {
@@ -47,7 +49,7 @@ bool EnableVTMode() {
   }
 }
 
-void PrintVerticalBorder() {
+void printVerticalBorder() {
   ESC('(0'); // Enter Line drawing mode
   CSI('104;93m'); // bright yellow on bright blue
   printf('x'); // in line drawing mode, \x78 -> \u2502 "Vertical Bar"
@@ -55,7 +57,7 @@ void PrintVerticalBorder() {
   ESC('(B'); // exit line drawing mode
 }
 
-void PrintHorizontalBorder(Coord size, bool isTop) {
+void printHorizontalBorder(Coord size, bool isTop) {
   ESC("(0"); // Enter Line drawing mode
   CSI("104;93m"); // Make the border bright yellow on bright blue
   printf(isTop ? "l" : "m"); // print left corner
@@ -70,7 +72,7 @@ void PrintHorizontalBorder(Coord size, bool isTop) {
   ESC("(B"); // exit line drawing mode
 }
 
-void PrintStatusLine(String pszMessage, Coord Size) {
+void printStatusLine(String pszMessage, Coord Size) {
   CSI("${Size.Y};1H");
   CSI("K"); // clear the line
   printf(pszMessage);
@@ -78,7 +80,7 @@ void PrintStatusLine(String pszMessage, Coord Size) {
 
 void main() {
   //First, enable VT mode
-  final fSuccess = EnableVTMode();
+  final fSuccess = enableVTMode();
   if (!fSuccess) {
     printf("Unable to enter VT processing mode. Quitting.\n");
     exit(-1);
@@ -126,18 +128,18 @@ void main() {
 
   // Print a top border - Yellow
   CSI("2;1H");
-  PrintHorizontalBorder(size, true);
+  printHorizontalBorder(size, true);
 
   // // Print a bottom border
   CSI(
     "${size.Y - 1};1H",
   );
-  PrintHorizontalBorder(size, false);
+  printHorizontalBorder(size, false);
 
   // draw columns
   CSI("3;1H");
   for (var line = 0; line < numLines * tabStopCount; line++) {
-    PrintVerticalBorder();
+    printVerticalBorder();
 
     // don't advance to next line if this is the last line
     if (line + 1 != numLines * tabStopCount) {
@@ -145,24 +147,24 @@ void main() {
     }
   }
 
-  PrintStatusLine("Press enter to see text printed between tab stops.", size);
+  printStatusLine("Press enter to see text printed between tab stops.", size);
   stdin.readLineSync();
 
   // Fill columns with output
   CSI("3;1H");
   for (var line = 0; line < numLines; line++) {
     for (var tab = 0; tab < tabStopCount - 1; tab++) {
-      PrintVerticalBorder();
+      printVerticalBorder();
       printf("line=$line");
       printf("\t"); // advance to next tab stop
     }
-    PrintVerticalBorder(); // print border at right side
+    printVerticalBorder(); // print border at right side
     if (line + 1 != numLines) {
       printf("\t"); // advance to next tab stop, (on the next line)
     }
   }
 
-  PrintStatusLine("Press enter to demonstrate scroll margins", size);
+  printStatusLine("Press enter to demonstrate scroll margins", size);
   stdin.readLineSync();
 
   CSI("3;1H");
@@ -170,11 +172,11 @@ void main() {
     CSI("K"); // clear the line
     var tab = 0;
     for (tab = 0; tab < tabStopCount - 1; tab++) {
-      PrintVerticalBorder();
+      printVerticalBorder();
       printf("line=$line");
       printf("\t"); // advance to next tab stop
     }
-    PrintVerticalBorder(); // print border at right side
+    printVerticalBorder(); // print border at right side
     if (line + 1 != numLines * 2) {
       // Advance to next line. If we're at the bottom of the margins, the text
       // will scroll.
@@ -183,7 +185,7 @@ void main() {
     }
   }
 
-  PrintStatusLine("Press enter to exit", size);
+  printStatusLine("Press enter to exit", size);
   stdin.readLineSync();
 
   // Exit the alternate buffer

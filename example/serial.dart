@@ -15,7 +15,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void PrintCommState(DCB dcb) => print('BaudRate = ${dcb.BaudRate}, '
+void printCommState(DCB dcb) => print('BaudRate = ${dcb.BaudRate}, '
     'ByteSize = ${dcb.ByteSize}, '
     'Parity = ${dcb.Parity}, '
     'StopBits = ${dcb.StopBits}');
@@ -40,7 +40,7 @@ void main() {
       print('GetCommState failed.');
       exit(2);
     }
-    PrintCommState(dcb.ref);
+    printCommState(dcb.ref);
 
     dcb
       ..ref.BaudRate = CBR_57600
@@ -54,7 +54,7 @@ void main() {
       exit(3);
     }
 
-    PrintCommState(dcb.ref);
+    printCommState(dcb.ref);
   } finally {
     free(pcCommPort);
     free(dcb);

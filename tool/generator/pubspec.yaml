@@ -16,7 +16,7 @@ dependencies:
   dart_style: ^2.2.3
 
   # Foreign Function Interface extension methods
-  ffi: ^1.1.2
+  ffi: ^2.0.0
 
   # Help ensure that the code is well-written.
   lints: ^2.0.0
@@ -28,7 +28,7 @@ dependencies:
   # relationship between these two packages is tightly coupled, since this
   # package includes a specific version of the Win32 metadata, so we pin the
   # dependency by version to avoid surprising conflicts.
-  winmd: 2.0.0
+  winmd: 2.1.0
 
   # Win32 itself
   win32:
@@ -37,3 +37,6 @@ dependencies:
 dependency_overrides:
   win32:
     path: ../../
+
+  winmd:
+    path: ../../../winmd

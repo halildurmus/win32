@@ -72,7 +72,7 @@ class Piece {
   }
 
   /// Gets the bottom part of points of the piece
-  List<Point> get Skirt {
+  List<Point> get skirt {
     final points = <Point>[];
 
     for (var x = 0; x < width; x++) {
@@ -90,7 +90,7 @@ class Piece {
   }
 
   /// Gets the left part of points of the piece
-  List<Point> get LeftSide {
+  List<Point> get leftSide {
     final points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
@@ -107,7 +107,7 @@ class Piece {
   }
 
   /// Gets the right part of points of the piece
-  List<Point> get RightSide {
+  List<Point> get rightSide {
     final points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {

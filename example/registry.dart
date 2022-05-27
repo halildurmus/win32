@@ -6,6 +6,8 @@
 // uses these functions, check out win32_registry
 // (https://pub.dev/packages/win32_registry).
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

@@ -7,6 +7,8 @@
 // Installs a low-level keyboard hook that changes every 'A' keypress to 'B'.
 // Also adds a window that shows keystrokes entered.
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';

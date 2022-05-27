@@ -10,13 +10,13 @@ import 'piece.dart';
 // All 28 configurations are kept in memory after you new PieceSet(). To get
 // get piece, use the `getPiece()` method or the `randomPiece` property.
 class PieceSet {
-  static const NUM_ROTATIONS = 4;
-  static const NUM_PIECES = 7;
+  static const numRotations = 4;
+  static const numPieces = 7;
 
   final rng = Random();
 
-  List<List<Piece?>> pieces = List.generate(
-      NUM_PIECES, (i) => List<Piece?>.filled(NUM_ROTATIONS, null));
+  List<List<Piece?>> pieces =
+      List.generate(numPieces, (i) => List<Piece?>.filled(numRotations, null));
 
   PieceSet() {
     List<Point> tetrimino;
@@ -54,24 +54,21 @@ class PieceSet {
   }
 
   Piece? getPiece(int id, int rotation) {
-    if (id >= NUM_PIECES ||
-        id < 0 ||
-        rotation >= NUM_ROTATIONS ||
-        rotation < 0) {
+    if (id >= numPieces || id < 0 || rotation >= numRotations || rotation < 0) {
       return null;
     }
     return pieces[id][rotation];
   }
 
   Piece? get randomPiece =>
-      getPiece(rng.nextInt(NUM_PIECES), rng.nextInt(NUM_ROTATIONS));
+      getPiece(rng.nextInt(numPieces), rng.nextInt(numRotations));
 
   void rotateAll() {
-    for (var i = 0; i < NUM_PIECES; i++) {
+    for (var i = 0; i < numPieces; i++) {
       // clone the original piece
       var clone = pieces[i][0]!.body!.map((e) => e).toList();
 
-      for (var j = 1; j < NUM_ROTATIONS; j++) {
+      for (var j = 1; j < numRotations; j++) {
         clone = rotate(clone);
         if (pieces[i][j] != null) {
           pieces[i].removeAt(j);

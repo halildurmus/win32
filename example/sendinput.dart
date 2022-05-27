@@ -4,6 +4,8 @@
 
 // Demonstrates sending input to another window via SendInput()
 
+// ignore_for_file: constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

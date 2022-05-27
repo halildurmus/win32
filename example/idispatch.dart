@@ -5,6 +5,8 @@
 // Demonstrates the use of IDispatch for calling COM automation objects from
 // Dart.
 
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
