@@ -138,7 +138,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       $importHeader
       $rootHeader
 
-      /// {@category Interface}
+      /// {@category Class}
       /// {@category $category}
       class $shortName extends IInspectable implements $inheritsFrom {
         $shortName({Allocator allocator = calloc})
