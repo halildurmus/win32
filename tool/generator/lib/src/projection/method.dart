@@ -88,6 +88,13 @@ abstract class MethodProjection {
   String get methodParams =>
       parameters.map((param) => param.paramProjection).join(', ');
 
+  /// A shortened version of the method for use in mappers.
+  ///   e.g. `SetDateTime(value)` or `SetToNow()` (method)
+  ///   e.g. `Period` or `Second` (get property)
+  ///   e.g. `Second = value` (set property)
+  String get shortForm =>
+      '$name(${parameters.map((param) => param.identifier).join(', ')})';
+
   /// The native prototype representing the method.
   String get nativePrototype;
 

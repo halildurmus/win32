@@ -1,4 +1,4 @@
-// ICalendarFactory.dart
+// icalendarfactory.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -31,9 +31,9 @@ const IID_ICalendarFactory = '{83F58412-E56B-4C75-A66E-0F63D57758A6}';
 /// {@category winrt}
 class ICalendarFactory extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory);
-
   ICalendarFactory(super.ptr);
+
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory);
 
   Pointer<COMObject> CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {

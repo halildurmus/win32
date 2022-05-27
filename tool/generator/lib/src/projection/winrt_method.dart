@@ -95,7 +95,7 @@ class WinRTMethodProjection extends MethodProjection {
   ''';
 
   String vectorViewDeclaration() => '''
-    List<String> get $name($methodParams) {
+    List<String> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}
@@ -110,7 +110,7 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String vectorDeclaration() => '''
-    IVector<String> get $name($methodParams) {
+    IVector<String> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}

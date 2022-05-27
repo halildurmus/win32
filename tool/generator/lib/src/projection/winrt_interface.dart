@@ -33,18 +33,18 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
-  String get interfaceImport {
+  List<String> get interfaceImport {
     if (typeDef.interfaces.isEmpty) {
       // Inherits from IInspectable, which is a traditional COM type.
-      return 'iinspectable.dart';
+      return ['iinspectable.dart'];
     } else {
-      return getImportForTypeDef(typeDef.interfaces.first);
+      return typeDef.interfaces.map(getImportForTypeDef).toList();
     }
   }
 
   @override
   String get importHeader {
-    final imports = {interfaceImport, ...importsForClass()}
+    final imports = {...interfaceImport, ...importsForClass()}
       ..removeWhere((item) => item == 'iinspectable.dart');
     return imports.map((import) => "import '$import';").join('\n');
   }

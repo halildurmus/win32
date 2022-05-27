@@ -1,4 +1,4 @@
-// ITimeZoneOnCalendar.dart
+// itimezoneoncalendar.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -31,9 +31,9 @@ const IID_ITimeZoneOnCalendar = '{BB3C25E5-46CF-4317-A3F5-02621AD54478}';
 /// {@category winrt}
 class ITimeZoneOnCalendar extends IInspectable {
   // vtable begins at 6, is 4 entries long.
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ITimeZoneOnCalendar);
-
   ITimeZoneOnCalendar(super.ptr);
+
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_ITimeZoneOnCalendar);
 
   String GetTimeZone() {
     final retValuePtr = calloc<HSTRING>();

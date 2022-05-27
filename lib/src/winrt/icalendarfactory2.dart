@@ -1,4 +1,4 @@
-// ICalendarFactory2.dart
+// icalendarfactory2.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -31,9 +31,9 @@ const IID_ICalendarFactory2 = '{B44B378C-CA7E-4590-9E72-EA2BEC1A5115}';
 /// {@category winrt}
 class ICalendarFactory2 extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory2);
-
   ICalendarFactory2(super.ptr);
+
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory2);
 
   Pointer<COMObject> CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {

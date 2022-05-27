@@ -129,7 +129,7 @@ void main() {
         'Windows.Storage.Pickers.IFileOpenPicker');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.interfaceImport, equals('iinspectable.dart'));
+    expect(projection.interfaceImport, equals(['iinspectable.dart']));
   });
 
   test('WinRT interface import header is meaningful', () {

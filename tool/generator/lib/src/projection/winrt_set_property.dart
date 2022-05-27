@@ -87,4 +87,7 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       return '';
     }
   }
+
+  @override
+  String get shortForm => '$exposedMethodName = value';
 }
