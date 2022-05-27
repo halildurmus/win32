@@ -36,17 +36,16 @@ typedef _GetResults_Dart = int Function(Pointer obj);
 
 /// {@category Interface}
 /// {@category winrt}
-class IAsyncAction extends IAsyncInfo {
+mixin IAsyncAction on IAsyncInfo {
   // vtable begins at 11, ends at 13
-
-  IAsyncAction(super.ptr);
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_IAsyncAction);
 
   set Completed(Pointer value) {
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.lpVtbl.value
         .elementAt(11)
         .cast<Pointer<NativeFunction<_put_Completed_Native>>>()
         .value
-        .asFunction<_put_Completed_Dart>()(ptr.ref.lpVtbl, value);
+        .asFunction<_put_Completed_Dart>()(_thisPtr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -55,11 +54,11 @@ class IAsyncAction extends IAsyncInfo {
     final retValuePtr = calloc<Pointer>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.lpVtbl.value
           .elementAt(12)
           .cast<Pointer<NativeFunction<_get_Completed_Native>>>()
           .value
-          .asFunction<_get_Completed_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<_get_Completed_Dart>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -70,9 +69,9 @@ class IAsyncAction extends IAsyncInfo {
     }
   }
 
-  int GetResults() => ptr.ref.vtable
+  int GetResults() => _thisPtr.ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetResults_Native>>>()
       .value
-      .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_GetResults_Dart>()(_thisPtr.ref.lpVtbl);
 }

@@ -129,15 +129,15 @@ void main() {
         'Windows.Storage.Pickers.IFileOpenPicker');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.interfaceImport, equals('iinspectable.dart'));
+    expect(projection.interfaceImport, equals(['iinspectable.dart']));
   });
 
   test('WinRT interface import header is meaningful', () {
     final winTypeDef = MetadataStore.getMetadataForType(
-        'Windows.Storage.Pickers.IFileOpenPicker');
+        'Windows.Gaming.Input.IGamepadStatics2');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.importHeader, contains('iinspectable.dart'));
+    expect(projection.importHeader, contains("import 'igamepadstatics.dart'"));
   });
 
   test('WinRT GetDateTime returns a DateTime', () {

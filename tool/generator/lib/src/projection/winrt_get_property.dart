@@ -17,11 +17,11 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
   @override
   String ffiCall([String params = '']) => '''
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
-      .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
+      .asFunction<$dartPrototype>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 ''';
@@ -135,4 +135,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       }
 ''';
   }
+
+  @override
+  String get shortForm => exposedMethodName;
 }

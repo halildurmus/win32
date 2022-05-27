@@ -44,7 +44,7 @@ class WinRTMethodProjection extends MethodProjection {
 
   @override
   String get identifiers => [
-        'ptr.ref.lpVtbl',
+        '_thisPtr.ref.lpVtbl',
         ...parameters.map(
             (param) => (param as WinRTParameterProjection).localIdentifier),
         if (!isVoidReturn) 'retValuePtr',
@@ -74,6 +74,17 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
       returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
 
+  String get wrappedReturnType {
+    if (isCOMObjectReturn) return 'Pointer<COMObject>';
+    if (isStringReturn) return 'String';
+    if (isDateTimeReturn) return 'DateTime';
+    if (isTimeSpanReturn) return 'Duration';
+    if (isVectorViewReturn) return 'List<String>';
+    if (isVectorReturn) return 'IVector<String>';
+
+    return returnType.dartType;
+  }
+
   String get parametersPreamble => parameters
       .map((param) => (param as WinRTParameterProjection).preamble)
       .join('\n');
@@ -85,7 +96,7 @@ class WinRTMethodProjection extends MethodProjection {
   // Declaration String templates
 
   String ffiCall([String params = '']) => '''
-    final hr = ptr.ref.vtable
+    final hr = _thisPtr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
@@ -95,7 +106,7 @@ class WinRTMethodProjection extends MethodProjection {
   ''';
 
   String vectorViewDeclaration() => '''
-    List<String> get $name($methodParams) {
+    List<String> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}
@@ -110,7 +121,7 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String vectorDeclaration() => '''
-    IVector<String> get $name($methodParams) {
+    IVector<String> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}

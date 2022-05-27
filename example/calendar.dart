@@ -6,23 +6,22 @@
 
 import 'package:win32/win32.dart';
 
-String calendarData(ICalendar calendar) =>
+String calendarData(Calendar calendar) =>
     'Calendar: ${calendar.GetCalendarSystem()}\n'
     'Name of Month: ${calendar.MonthAsFullSoloString()}\n'
     'Day of Month: ${calendar.DayAsPaddedString(2)}\n'
     'Day of Week: ${calendar.DayOfWeekAsFullSoloString()}\n'
-    'Year: ${calendar.YearAsString()}\n';
+    'Year: ${calendar.YearAsString()}\n'
+    'Time Zone: ${calendar.TimeZoneAsFullString()}\n';
 
 void main() {
   winrtInitialize();
   try {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
-    final comObject =
-        CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-    final calendar = ICalendar(comObject);
+    final calendar = Calendar();
     print(calendarData(calendar));
 
-    final clonedCalendar = ICalendar(calendar.Clone());
+    final clonedCalendar = Calendar.fromPointer(calendar.Clone());
     final comparisonResult = clonedCalendar.Compare(calendar.ptr);
     print('Comparison result of calendar and its clone: $comparisonResult');
 
@@ -37,7 +36,7 @@ void main() {
     final dateTime = calendar.GetDateTime();
     print(dateTime);
 
-    free(comObject);
+    free(calendar.ptr);
     free(clonedCalendar.ptr);
   } finally {
     winrtUninitialize();

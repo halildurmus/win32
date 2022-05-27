@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -40,19 +33,21 @@ class IStringable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IStringable(super.ptr);
 
+  late final Pointer<COMObject> _thisPtr = toInterface(IID_IStringable);
+
   String ToString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(
-                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
+              int Function(Pointer,
+                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

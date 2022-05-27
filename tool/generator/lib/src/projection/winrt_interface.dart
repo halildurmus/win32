@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'com_interface.dart';
 import 'method.dart';
+import 'utils.dart';
 import 'winrt_get_property.dart';
 import 'winrt_method.dart';
 import 'winrt_set_property.dart';
@@ -21,20 +22,31 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
-  String get interfaceImport {
+  String getImportForTypeDef(TypeDef typeDef) {
+    if (typeDef.isDelegate) {
+      return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
+    } else if (typeDef.isInterface) {
+      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
+    } else {
+      return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
+    }
+  }
+
+  @override
+  List<String> get interfaceImport {
     if (typeDef.interfaces.isEmpty) {
       // Inherits from IInspectable, which is a traditional COM type.
-      return 'iinspectable.dart';
+      return ['iinspectable.dart'];
     } else {
-      return getImportForTypeDef(typeDef.interfaces.first);
+      return typeDef.interfaces.map(getImportForTypeDef).toList();
     }
   }
 
   @override
   String get importHeader {
-    final imports = {interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == '');
-    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
+    final imports = {...interfaceImport, ...importsForClass()}
+      ..removeWhere((item) => item == 'iinspectable.dart');
+    return imports.map((import) => "import '$import';").join('\n');
   }
 
   List<MethodProjection>? _methodProjections;
@@ -83,8 +95,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get extraHeaders => """
     import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-    import '../winrt_helpers.dart';
+    import '../combase.dart';
+    import '../exceptions.dart';
+    import '../macros.dart';
+    import '../utils.dart';
     import '../types.dart';
+    import '../winrt_helpers.dart';
 
     import '../extensions/hstring_array.dart';
     import 'ivector.dart';
@@ -93,4 +109,29 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
+
+  // TODO: Needs to vary depending on static vs. factory vs. interface
+  @override
+  String toString() {
+    final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
+
+    return '''
+      $header
+      $extraHeaders
+      $importHeader
+      $rootHeader
+      $guidConstants
+
+      /// {@category Interface}
+      /// {@category $category}
+      class $shortName $extendsClause {
+        // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
+        $shortName(super.ptr);
+
+        late final Pointer<COMObject> _thisPtr = toInterface(IID_$shortName);
+
+        ${methodProjections.map((p) => p.toString()).join('\n')}
+      }
+    ''';
+  }
 }

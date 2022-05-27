@@ -10,20 +10,13 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../callbacks.dart';
-import '../combase.dart';
-import '../constants.dart';
-import '../exceptions.dart';
-import '../guid.dart';
-import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
-import '../utils.dart';
-
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../winrt_helpers.dart';
+import '../combase.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../utils.dart';
 import '../types.dart';
+import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 import 'ivector.dart';
@@ -40,11 +33,14 @@ class IPhoneNumberFormatter extends IInspectable {
   // vtable begins at 6, is 5 entries long.
   IPhoneNumberFormatter(super.ptr);
 
+  late final Pointer<COMObject> _thisPtr =
+      toInterface(IID_IPhoneNumberFormatter);
+
   String Format(Pointer<COMObject> number) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(6)
               .cast<
                   Pointer<
@@ -55,7 +51,9 @@ class IPhoneNumberFormatter extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, Pointer<COMObject> number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, number.cast<Pointer<COMObject>>().value, retValuePtr);
+          _thisPtr.ref.lpVtbl,
+          number.cast<Pointer<COMObject>>().value,
+          retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -71,7 +69,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -81,7 +79,7 @@ class IPhoneNumberFormatter extends IInspectable {
               .value
               .asFunction<
                   int Function(Pointer, Pointer<COMObject> number,
-                      int numberFormat, Pointer<IntPtr>)>()(ptr.ref.lpVtbl,
+                      int numberFormat, Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl,
           number.cast<Pointer<COMObject>>().value, numberFormat, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -99,7 +97,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -108,7 +106,7 @@ class IPhoneNumberFormatter extends IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -126,7 +124,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -135,7 +133,7 @@ class IPhoneNumberFormatter extends IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -153,7 +151,7 @@ class IPhoneNumberFormatter extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = ptr.ref.vtable
+      final hr = _thisPtr.ref.vtable
               .elementAt(10)
               .cast<
                   Pointer<
@@ -162,7 +160,7 @@ class IPhoneNumberFormatter extends IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl, numberHstring, retValuePtr);
+          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

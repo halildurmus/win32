@@ -1,4 +1,4 @@
-// iuserdatapathsstatics.dart
+// iapplicationdatastatics.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -25,45 +25,22 @@ import 'ivectorview.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUserDataPathsStatics = '{01B29DEF-E062-48A1-8B0C-F2C7A9CA56C0}';
+const IID_IApplicationDataStatics = '{5612147B-E843-45E3-94D8-06169E3C8E17}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IUserDataPathsStatics extends IInspectable {
-  // vtable begins at 6, is 2 entries long.
-  IUserDataPathsStatics(super.ptr);
+class IApplicationDataStatics extends IInspectable {
+  // vtable begins at 6, is 1 entries long.
+  IApplicationDataStatics(super.ptr);
 
   late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IUserDataPathsStatics);
+      toInterface(IID_IApplicationDataStatics);
 
-  Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
+  Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();
 
     final hr = _thisPtr.ref.vtable
             .elementAt(6)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject> user,
-                            Pointer<COMObject>)>>>()
-            .value
-            .asFunction<
-                int Function(
-                    Pointer, Pointer<COMObject> user, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl,
-        user.cast<Pointer<COMObject>>().value,
-        retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    return retValuePtr;
-  }
-
-  Pointer<COMObject> GetDefault() {
-    final retValuePtr = calloc<COMObject>();
-
-    final hr = _thisPtr.ref.vtable
-            .elementAt(7)
             .cast<
                 Pointer<
                     NativeFunction<

@@ -120,11 +120,12 @@ class ComInterfaceProjection {
 
   late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
 
-  String get interfaceImport =>
-      inheritsFrom != '' ? getImportForTypeDef(typeDef.interfaces.first) : '';
+  // COM interfaces can only inherit from one parent
+  List<String> get interfaceImport =>
+      inheritsFrom != '' ? [getImportForTypeDef(typeDef.interfaces.first)] : [];
 
   String get importHeader {
-    final imports = {interfaceImport, ...importsForClass()}
+    final imports = {...interfaceImport, ...importsForClass()}
       ..removeWhere((item) => item == '')
       // TODO: Use exclusions.dart for these next two lines
       ..removeWhere((item) => item.endsWith('ICondition.dart'))

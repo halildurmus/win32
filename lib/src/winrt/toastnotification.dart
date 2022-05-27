@@ -158,7 +158,6 @@ class ToastNotification extends IInspectable {
 
     final pIID = calloc<GUID>()..ref.setGUID(IID_IToastNotificationFactory);
     final activationFactory = calloc<COMObject>();
-    final toastNotification = calloc<COMObject>();
 
     try {
       final hr =
@@ -178,7 +177,6 @@ class ToastNotification extends IInspectable {
       WindowsDeleteString(hClassName);
       free(pIID);
       free(activationFactory);
-      free(toastNotification);
     }
   }
 }

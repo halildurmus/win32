@@ -253,6 +253,9 @@ export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
 
 // Windows Runtime interfaces
+export 'src/winrt/calendar.dart';
+export 'src/winrt/iapplicationdata.dart';
+export 'src/winrt/iapplicationdatastatics.dart';
 export 'src/winrt/iasyncaction.dart';
 export 'src/winrt/iasyncinfo.dart';
 export 'src/winrt/icalendar.dart';
@@ -266,7 +269,8 @@ export 'src/winrt/istorageitem.dart';
 export 'src/winrt/itoastnotificationfactory.dart';
 export 'src/winrt/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/iuserdatapathsstatics.dart';
-export 'src/winrt/ivectorview.dart';
 export 'src/winrt/ivector.dart';
+export 'src/winrt/ivectorview.dart';
+export 'src/winrt/phonenumberformatter.dart';
 export 'src/winrt/toastnotification.dart';
 export 'src/winrt/userdatapaths.dart';

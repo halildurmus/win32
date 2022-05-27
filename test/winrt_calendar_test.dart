@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 @TestOn('windows')
 
 import 'package:test/test.dart';
@@ -13,9 +15,7 @@ void main() {
     setUp(() {
       winrtInitialize();
 
-      final object =
-          CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      calendar = ICalendar(object);
+      calendar = Calendar();
     });
 
     test('Calendar is a materialized object', () {
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('Calendar.Clone', () {
-      final calendar2 = ICalendar(calendar.Clone());
+      final calendar2 = Calendar.fromPointer(calendar.Clone());
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
@@ -452,6 +452,20 @@ void main() {
             ]));
       }
     });
+
+    // test('Calendar.CreateCalendarWithTimeZone constructor', () {
+    //   final pickerPtr = CreateObject(
+    //       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
+    //   final picker = IFileOpenPicker(pickerPtr);
+    //   final languages = picker.FileTypeFilter..ReplaceAll(['en-US', 'en-GB']);
+
+    //   const IID_Iterable = '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}';
+    //   final pIterable = languages.toInterface(IID_Iterable);
+    //   final customCal = Calendar.CreateCalendarWithTimeZone(
+    //       pIterable, 'GregorianCalendar', '24HourClock', 'America/Los_Angeles');
+
+    //   expect(customCal.GetTimeZone(), equals('America/Los_Angeles'));
+    // });
 
     tearDown(() {
       free(calendar.ptr);

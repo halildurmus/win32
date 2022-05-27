@@ -125,6 +125,25 @@ Pointer<COMObject> CreateObject(String className, String iid) {
   }
 }
 
+Pointer<COMObject> ActivateClass(String className,
+    {Allocator allocator = calloc}) {
+  final inspectablePtr = allocator<COMObject>();
+
+  final hClassName = convertToHString(className);
+  try {
+    // Create a HSTRING representing the object
+    // Activates the specified Windows Runtime class. This returns the WinRT
+    // IInspectable interface, which is a subclass of IUnknown.
+    final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    // Return a pointer to the relevant class
+    return inspectablePtr;
+  } finally {
+    WindowsDeleteString(hClassName);
+  }
+}
+
 /// Creates the activation factory for the specified runtime class using the
 /// `className` and `iid`.
 ///
