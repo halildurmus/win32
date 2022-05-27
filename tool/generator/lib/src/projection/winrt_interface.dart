@@ -128,8 +128,6 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $shortName(super.ptr);
 
-        late final Pointer<COMObject> _thisPtr = toInterface(IID_$shortName);
-
         ${methodProjections.map((p) => p.toString()).join('\n')}
       }
     ''';

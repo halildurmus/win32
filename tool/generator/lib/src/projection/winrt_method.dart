@@ -44,7 +44,7 @@ class WinRTMethodProjection extends MethodProjection {
 
   @override
   String get identifiers => [
-        '_thisPtr.ref.lpVtbl',
+        'ptr.ref.lpVtbl',
         ...parameters.map(
             (param) => (param as WinRTParameterProjection).localIdentifier),
         if (!isVoidReturn) 'retValuePtr',
@@ -96,7 +96,7 @@ class WinRTMethodProjection extends MethodProjection {
   // Declaration String templates
 
   String ffiCall([String params = '']) => '''
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
