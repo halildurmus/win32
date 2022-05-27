@@ -74,6 +74,17 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
       returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
 
+  String get wrappedReturnType {
+    if (isCOMObjectReturn) return 'Pointer<COMObject>';
+    if (isStringReturn) return 'String';
+    if (isDateTimeReturn) return 'DateTime';
+    if (isTimeSpanReturn) return 'Duration';
+    if (isVectorViewReturn) return 'List<String>';
+    if (isVectorReturn) return 'IVector<String>';
+
+    return returnType.dartType;
+  }
+
   String get parametersPreamble => parameters
       .map((param) => (param as WinRTParameterProjection).preamble)
       .join('\n');

@@ -115,6 +115,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Globalization.ITimeZoneOnCalendar',
   'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatter',
   'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatterStatics',
+  'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
   'Windows.Networking.IHostName',
   'Windows.Storage.IApplicationDataStatics',
   'Windows.Storage.IUserDataPathsStatics',

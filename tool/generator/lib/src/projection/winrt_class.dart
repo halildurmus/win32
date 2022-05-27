@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'utils.dart';
 import 'winrt_interface.dart';
+import 'winrt_method.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
@@ -40,6 +41,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     final imports = {
       ...interfaceImport,
       ...factoryInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
+      ...staticInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
       ...importsForClass()
     }..removeWhere((item) => item == 'iinspectable.dart');
     return imports.map((import) => "import '$import';").join('\n');
@@ -70,10 +72,14 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
             method.parameters.map((e) => e.name).join(', ');
         buffer.writeln('''
           static $shortName ${method.name}(${method.methodParams}) {
-            final factory = $interfaceName(
-              CreateActivationFactory(_className, IID_$interfaceName));
-            final result = factory.${method.name}($paramIdentifiers);
-            return $shortName.fromPointer(result);
+            final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
+
+            try {
+              final result = $interfaceName(activationFactory).${method.name}($paramIdentifiers);
+              return $shortName.fromPointer(result);
+            } finally {
+              free(activationFactory);
+            }
           }
         ''');
       }
@@ -81,7 +87,49 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  // TODO: Needs to vary depending on static vs. factory vs. interface
+  List<String> get staticInterfaces => typeDef.customAttributes
+      .where((element) => element.name.endsWith('StaticAttribute'))
+      .where((element) => element.parameters.length == 3)
+      .map((element) => element.parameters.first.value as String)
+      .toList()
+    ..sort();
+
+  String get staticMappers {
+    final buffer = StringBuffer();
+
+    for (final staticInterface in staticInterfaces) {
+      final interfaceName = lastComponent(staticInterface);
+      buffer.writeln('  // $interfaceName methods');
+      final staticTypeDef = MetadataStore.getMetadataForType(staticInterface);
+      if (staticTypeDef == null) {
+        throw Exception('Static typedef $staticInterface missing.');
+      }
+
+      final interfaceProjection = WinRTInterfaceProjection(staticTypeDef);
+      for (final method in interfaceProjection.methodProjections) {
+        final wrappedReturnType =
+            (method as WinRTMethodProjection).wrappedReturnType;
+
+        // TODO: move this into the parameters class
+        final paramIdentifiers =
+            method.parameters.map((e) => e.name).join(', ');
+        buffer.writeln('''
+          static $wrappedReturnType ${method.name}(${method.methodParams}) {
+            final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
+
+            try {
+              final result = $interfaceName(activationFactory).${method.name}($paramIdentifiers);
+              return result;
+            } finally {
+              free(activationFactory);
+            }
+          }
+        ''');
+      }
+    }
+    return buffer.toString();
+  }
+
   @override
   String toString() {
     return '''
@@ -94,13 +142,14 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       /// {@category Interface}
       /// {@category $category}
       class $shortName extends IInspectable implements $inheritsFrom {
-        Calendar({Allocator allocator = calloc})
+        $shortName({Allocator allocator = calloc})
             : super(ActivateClass(_className, allocator: allocator));
-        Calendar.fromPointer(super.ptr);
+        $shortName.fromPointer(super.ptr);
 
-        static const _className = 'Windows.Globalization.Calendar';
+        static const _className = '${typeDef.name}';
 
         $factoryMappers
+        $staticMappers
         $interfaceMappers
       }
     ''';

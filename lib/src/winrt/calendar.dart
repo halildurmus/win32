@@ -43,28 +43,45 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   // ICalendarFactory methods
   static Calendar CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
-    final factory = ICalendarFactory(
-        CreateActivationFactory(_className, IID_ICalendarFactory));
-    final result = factory.CreateCalendarDefaultCalendarAndClock(languages);
-    return Calendar.fromPointer(result);
+    final activationFactory =
+        CreateActivationFactory(_className, IID_ICalendarFactory);
+
+    try {
+      final result = ICalendarFactory(activationFactory)
+          .CreateCalendarDefaultCalendarAndClock(languages);
+      return Calendar.fromPointer(result);
+    } finally {
+      free(activationFactory);
+    }
   }
 
   static Calendar CreateCalendar(
       Pointer<COMObject> languages, String calendar, String clock) {
-    final factory = ICalendarFactory(
-        CreateActivationFactory(_className, IID_ICalendarFactory));
-    final result = factory.CreateCalendar(languages, calendar, clock);
-    return Calendar.fromPointer(result);
+    final activationFactory =
+        CreateActivationFactory(_className, IID_ICalendarFactory);
+
+    try {
+      final result = ICalendarFactory(activationFactory)
+          .CreateCalendar(languages, calendar, clock);
+      return Calendar.fromPointer(result);
+    } finally {
+      free(activationFactory);
+    }
   }
 
   // ICalendarFactory2 methods
   static Calendar CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {
-    final factory = ICalendarFactory2(
-        CreateActivationFactory(_className, IID_ICalendarFactory2));
-    final result = factory.CreateCalendarWithTimeZone(
-        languages, calendar, clock, timeZoneId);
-    return Calendar.fromPointer(result);
+    final activationFactory =
+        CreateActivationFactory(_className, IID_ICalendarFactory2);
+
+    try {
+      final result = ICalendarFactory2(activationFactory)
+          .CreateCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
+      return Calendar.fromPointer(result);
+    } finally {
+      free(activationFactory);
+    }
   }
 
   // ICalendar methods

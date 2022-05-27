@@ -1,5 +1,8 @@
 @TestOn('windows')
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -31,7 +34,9 @@ void main() {
     test('Create a formatter for a different region code', () {
       // Generated from UK "numbers for use in TV and radio drama"
       // https://www.ofcom.org.uk/phones-telecoms-and-internet/information-for-industry/numbering/numbers-for-drama
-      final ukFormatter = PhoneNumberFormatter.TryCreate('GB');
+      final formatterObject = calloc<COMObject>();
+      PhoneNumberFormatter.TryCreate('GB', formatterObject);
+      final ukFormatter = IPhoneNumberFormatter(formatterObject);
       final london = ukFormatter.FormatString('02079460123');
       expect(london, equals('020 7946 0123'));
       final reading = ukFormatter.FormatString('01184960987');
