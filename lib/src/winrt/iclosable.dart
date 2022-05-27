@@ -33,14 +33,12 @@ class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IClosable(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IClosable);
-
   void Close() {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
         .value
-        .asFunction<int Function(Pointer)>()(_thisPtr.ref.lpVtbl);
+        .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

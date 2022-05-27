@@ -33,13 +33,11 @@ class IToastNotification6 extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   IToastNotification6(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IToastNotification6);
-
   bool get ExpiresOnReboot {
     final retValuePtr = calloc<Bool>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -47,7 +45,7 @@ class IToastNotification6 extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Bool>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Bool>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -59,11 +57,11 @@ class IToastNotification6 extends IInspectable {
   }
 
   set ExpiresOnReboot(bool value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Bool)>>>()
         .value
-        .asFunction<int Function(Pointer, bool)>()(_thisPtr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, bool)>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

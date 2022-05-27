@@ -33,21 +33,19 @@ class ITimeZoneOnCalendar extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   ITimeZoneOnCalendar(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ITimeZoneOnCalendar);
-
   String GetTimeZone() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -61,15 +59,15 @@ class ITimeZoneOnCalendar extends IInspectable {
 
   void ChangeTimeZone(String timeZoneId) {
     final timeZoneIdHstring = convertToHString(timeZoneId);
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
             Pointer<
                 NativeFunction<HRESULT Function(Pointer, IntPtr timeZoneId)>>>()
         .value
         .asFunction<
-            int Function(Pointer,
-                int timeZoneId)>()(_thisPtr.ref.lpVtbl, timeZoneIdHstring);
+            int Function(
+                Pointer, int timeZoneId)>()(ptr.ref.lpVtbl, timeZoneIdHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -80,15 +78,15 @@ class ITimeZoneOnCalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -104,7 +102,7 @@ class ITimeZoneOnCalendar extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -114,7 +112,7 @@ class ITimeZoneOnCalendar extends IInspectable {
               .value
               .asFunction<
                   int Function(Pointer, int idealLength, Pointer<IntPtr>)>()(
-          _thisPtr.ref.lpVtbl, idealLength, retValuePtr);
+          ptr.ref.lpVtbl, idealLength, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

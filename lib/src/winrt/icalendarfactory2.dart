@@ -33,8 +33,6 @@ class ICalendarFactory2 extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   ICalendarFactory2(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory2);
-
   Pointer<COMObject> CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {
     final retValuePtr = calloc<COMObject>();
@@ -42,7 +40,7 @@ class ICalendarFactory2 extends IInspectable {
     final calendarHstring = convertToHString(calendar);
     final clockHstring = convertToHString(clock);
     final timeZoneIdHstring = convertToHString(timeZoneId);
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -63,7 +61,7 @@ class ICalendarFactory2 extends IInspectable {
                     int clock,
                     int timeZoneId,
                     Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl,
+        ptr.ref.lpVtbl,
         languages.cast<Pointer<COMObject>>().value,
         calendarHstring,
         clockHstring,

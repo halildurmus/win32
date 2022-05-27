@@ -33,13 +33,10 @@ class IUserDataPathsStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   IUserDataPathsStatics(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IUserDataPathsStatics);
-
   Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -50,9 +47,7 @@ class IUserDataPathsStatics extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, Pointer<COMObject> user, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl,
-        user.cast<Pointer<COMObject>>().value,
-        retValuePtr);
+        ptr.ref.lpVtbl, user.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -62,7 +57,7 @@ class IUserDataPathsStatics extends IInspectable {
   Pointer<COMObject> GetDefault() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -70,7 +65,7 @@ class IUserDataPathsStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

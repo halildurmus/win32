@@ -33,12 +33,10 @@ class IToastNotification extends IInspectable {
   // vtable begins at 6, is 9 entries long.
   IToastNotification(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IToastNotification);
-
   Pointer<COMObject> get Content {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -46,7 +44,7 @@ class IToastNotification extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -54,7 +52,7 @@ class IToastNotification extends IInspectable {
   }
 
   set ExpirationTime(Pointer<COMObject> value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -62,7 +60,7 @@ class IToastNotification extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, value);
+        ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -70,7 +68,7 @@ class IToastNotification extends IInspectable {
   Pointer<COMObject> get ExpirationTime {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(8)
             .cast<
                 Pointer<
@@ -78,7 +76,7 @@ class IToastNotification extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -86,37 +84,34 @@ class IToastNotification extends IInspectable {
   }
 
   void remove_Dismissed(int token) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
             Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr token)>>>()
         .value
-        .asFunction<
-            int Function(Pointer, int token)>()(_thisPtr.ref.lpVtbl, token);
+        .asFunction<int Function(Pointer, int token)>()(ptr.ref.lpVtbl, token);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
   void remove_Activated(int token) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(12)
         .cast<
             Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr token)>>>()
         .value
-        .asFunction<
-            int Function(Pointer, int token)>()(_thisPtr.ref.lpVtbl, token);
+        .asFunction<int Function(Pointer, int token)>()(ptr.ref.lpVtbl, token);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
   void remove_Failed(int token) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<
             Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr token)>>>()
         .value
-        .asFunction<
-            int Function(Pointer, int token)>()(_thisPtr.ref.lpVtbl, token);
+        .asFunction<int Function(Pointer, int token)>()(ptr.ref.lpVtbl, token);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

@@ -28,10 +28,7 @@ import 'icalendarfactory.dart';
 import 'icalendarfactory2.dart';
 import '../com/iinspectable.dart';
 
-/// @nodoc
-const IID_Calendar = 'null';
-
-/// {@category Interface}
+/// {@category Class}
 /// {@category winrt}
 class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   Calendar({Allocator allocator = calloc})

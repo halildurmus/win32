@@ -33,13 +33,11 @@ class ICalendarFactory extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   ICalendarFactory(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendarFactory);
-
   Pointer<COMObject> CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -49,7 +47,7 @@ class ICalendarFactory extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, Pointer<COMObject> languages,
-                    Pointer<COMObject>)>()(_thisPtr.ref.lpVtbl,
+                    Pointer<COMObject>)>()(ptr.ref.lpVtbl,
         languages.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -64,7 +62,7 @@ class ICalendarFactory extends IInspectable {
     final calendarHstring = convertToHString(calendar);
     final clockHstring = convertToHString(clock);
     final hr =
-        _thisPtr.ref.vtable
+        ptr.ref.vtable
                 .elementAt(7)
                 .cast<
                     Pointer<
@@ -79,7 +77,7 @@ class ICalendarFactory extends IInspectable {
                 .asFunction<
                     int Function(Pointer, Pointer<COMObject> languages,
                         int calendar, int clock, Pointer<COMObject>)>()(
-            _thisPtr.ref.lpVtbl,
+            ptr.ref.lpVtbl,
             languages.cast<Pointer<COMObject>>().value,
             calendarHstring,
             clockHstring,

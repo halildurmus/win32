@@ -34,13 +34,10 @@ class IToastNotificationManagerStatics extends IInspectable {
   // vtable begins at 6, is 3 entries long.
   IToastNotificationManagerStatics(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IToastNotificationManagerStatics);
-
   Pointer<COMObject> CreateToastNotifier() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -48,7 +45,7 @@ class IToastNotificationManagerStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -58,7 +55,7 @@ class IToastNotificationManagerStatics extends IInspectable {
   Pointer<COMObject> CreateToastNotifierWithId(String applicationId) {
     final retValuePtr = calloc<COMObject>();
     final applicationIdHstring = convertToHString(applicationId);
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -68,7 +65,7 @@ class IToastNotificationManagerStatics extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, int applicationId, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, applicationIdHstring, retValuePtr);
+        ptr.ref.lpVtbl, applicationIdHstring, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -79,7 +76,7 @@ class IToastNotificationManagerStatics extends IInspectable {
   Pointer<COMObject> GetTemplateContent(int type) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(8)
             .cast<
                 Pointer<
@@ -88,7 +85,7 @@ class IToastNotificationManagerStatics extends IInspectable {
                             Pointer, Int32 type, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, int type, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, type, retValuePtr);
+        ptr.ref.lpVtbl, type, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

@@ -33,21 +33,19 @@ class IStringable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IStringable(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IStringable);
-
   String ToString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
