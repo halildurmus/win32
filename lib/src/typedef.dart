@@ -9,7 +9,8 @@ import 'package:win32/win32.dart';
 
 import 'assemblyref.dart';
 import 'classlayout.dart';
-import 'com/constants.dart';
+import 'com/enums.dart';
+import 'constants.dart';
 import 'enums.dart';
 import 'event.dart';
 import 'field.dart';

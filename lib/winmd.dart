@@ -50,6 +50,7 @@
 library winmd;
 
 export 'src/classlayout.dart';
+export 'src/constants.dart';
 export 'src/customattribute.dart';
 export 'src/enums.dart';
 export 'src/event.dart';

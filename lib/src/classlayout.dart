@@ -3,8 +3,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/constants.dart';
 import 'com/structs.dart';
+import 'constants.dart';
 import 'scope.dart';
 import 'token_object.dart';
 

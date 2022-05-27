@@ -2,7 +2,7 @@
 
 import 'package:win32/win32.dart';
 
-import 'com/constants.dart';
+import 'com/enums.dart';
 import 'utils/exception.dart';
 
 /// Specifies a common language runtime Type, a type modifier, or information
@@ -456,7 +456,7 @@ enum TokenType {
         return TokenType.baseType;
       default:
         throw WinmdException(
-            'Unrecognized token type ${(token & 0xFF000000).toHexString(32)}');
+            'Unrecognized token type ${((token & 0xFF000000) >> 24).toHexString(8)}');
     }
   }
 }

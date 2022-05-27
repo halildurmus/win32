@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Update to package:ffi 2.0.0
+
 ## 2.0.0
 
 - Update enumerations to match Dart lint requirements (breaking change).

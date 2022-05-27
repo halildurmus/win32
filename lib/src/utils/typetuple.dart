@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import '../com/constants.dart';
+import '../com/enums.dart';
 import '../enums.dart';
 import '../scope.dart';
 import '../typedef.dart';

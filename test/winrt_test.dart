@@ -684,4 +684,19 @@ void main() {
     final aaph = handler.typeIdentifier.type!;
     expect(aaph.genericParams.length, equals(1));
   });
+
+  test('Calendar factory interfaces are present', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
+    final activatableAttrs = winTypeDef.customAttributes
+        .where((element) => element.name.endsWith('ActivatableAttribute'))
+        .where((element) => element.parameters.length == 3)
+        .map((element) => element.parameters.first.value as String);
+    expect(
+        activatableAttrs,
+        containsAll([
+          'Windows.Globalization.ICalendarFactory2',
+          'Windows.Globalization.ICalendarFactory'
+        ]));
+  });
 }

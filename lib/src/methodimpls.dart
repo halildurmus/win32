@@ -1,4 +1,4 @@
-import 'com/constants.dart';
+import 'com/enums.dart';
 import 'enums.dart';
 
 /// Contains values that describe method implementation features.

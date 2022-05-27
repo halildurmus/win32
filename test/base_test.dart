@@ -24,4 +24,18 @@ void main() {
     final exception = WinmdException('Test message');
     expect(exception.toString(), endsWith('Test message'));
   });
+
+  test('Architectures 1', () {
+    final arch = Architecture.all();
+    expect(arch.arm64, isTrue);
+    expect(arch.x86, isTrue);
+    expect(arch.x64, isTrue);
+  });
+
+  test('Architectures 2', () {
+    final arch = const Architecture(0);
+    expect(arch.arm64, isFalse);
+    expect(arch.x86, isFalse);
+    expect(arch.x64, isFalse);
+  });
 }
