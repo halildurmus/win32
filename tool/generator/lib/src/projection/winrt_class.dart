@@ -137,7 +137,6 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       $extraHeaders
       $importHeader
       $rootHeader
-      $guidConstants
 
       /// {@category Interface}
       /// {@category $category}
