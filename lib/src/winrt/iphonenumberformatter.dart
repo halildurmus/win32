@@ -29,8 +29,10 @@ const IID_IPhoneNumberFormatter = '{1556B49E-BAD4-4B4A-900D-4407ADB7C981}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IPhoneNumberFormatter on IInspectable {
+class IPhoneNumberFormatter extends IInspectable {
   // vtable begins at 6, is 5 entries long.
+  IPhoneNumberFormatter(super.ptr);
+
   late final Pointer<COMObject> _thisPtr =
       toInterface(IID_IPhoneNumberFormatter);
 

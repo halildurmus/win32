@@ -19,10 +19,10 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'igamepadstatics.dart';
 import 'ivector.dart';
 import 'ivectorview.dart';
 
+import 'igamepadstatics.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
@@ -30,8 +30,10 @@ const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IGamepadStatics2 on IGamepadStatics {
+class IGamepadStatics2 extends IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
+  IGamepadStatics2(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IGamepadStatics2);
 
   Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {

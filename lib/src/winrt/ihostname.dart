@@ -29,8 +29,10 @@ const IID_IHostName = '{BF8ECAAD-ED96-49A7-9084-D416CAE88DCB}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IHostName on IInspectable {
+class IHostName extends IInspectable {
   // vtable begins at 6, is 6 entries long.
+  IHostName(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IHostName);
 
   Pointer<COMObject> get IPInformation {
@@ -173,8 +175,4 @@ mixin IHostName on IInspectable {
       free(retValuePtr);
     }
   }
-}
-
-class HostName extends IInspectable with IHostName {
-  HostName(super.ptr);
 }

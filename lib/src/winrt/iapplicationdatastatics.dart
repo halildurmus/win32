@@ -1,4 +1,4 @@
-// IApplicationDataStatics.dart
+// iapplicationdatastatics.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -31,10 +31,10 @@ const IID_IApplicationDataStatics = '{5612147B-E843-45E3-94D8-06169E3C8E17}';
 /// {@category winrt}
 class IApplicationDataStatics extends IInspectable {
   // vtable begins at 6, is 1 entries long.
+  IApplicationDataStatics(super.ptr);
+
   late final Pointer<COMObject> _thisPtr =
       toInterface(IID_IApplicationDataStatics);
-
-  IApplicationDataStatics(super.ptr);
 
   Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();

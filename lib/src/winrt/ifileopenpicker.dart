@@ -11,7 +11,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../com/ifiledialog.dart';
 import '../combase.dart';
 import '../exceptions.dart';
 import '../macros.dart';
@@ -30,8 +29,10 @@ const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IFileOpenPicker on IInspectable {
+class IFileOpenPicker extends IInspectable {
   // vtable begins at 6, is 11 entries long.
+  IFileOpenPicker(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IFileOpenPicker);
 
   int get ViewMode {
@@ -233,8 +234,4 @@ mixin IFileOpenPicker on IInspectable {
 
     return retValuePtr;
   }
-}
-
-class FileOpenPicker extends IInspectable with IFileOpenPicker {
-  FileOpenPicker(super.ptr);
 }

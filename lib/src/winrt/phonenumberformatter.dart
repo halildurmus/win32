@@ -15,7 +15,8 @@ import 'iphonenumberformatterstatics.dart';
 import '../com/iinspectable.dart';
 
 /// {@category winrt}
-class PhoneNumberFormatter extends IInspectable with IPhoneNumberFormatter {
+class PhoneNumberFormatter extends IInspectable
+    implements IPhoneNumberFormatter {
   PhoneNumberFormatter() : super(ActivateClass(_className));
   PhoneNumberFormatter.fromPointer(super.ptr);
 
@@ -61,5 +62,35 @@ class PhoneNumberFormatter extends IInspectable with IPhoneNumberFormatter {
     } finally {
       free(activationFactory);
     }
+  }
+
+  @override
+  String Format(Pointer<COMObject> number) {
+    // TODO: implement Format
+    throw UnimplementedError();
+  }
+
+  @override
+  String FormatPartialString(String number) {
+    // TODO: implement FormatPartialString
+    throw UnimplementedError();
+  }
+
+  @override
+  String FormatString(String number) {
+    // TODO: implement FormatString
+    throw UnimplementedError();
+  }
+
+  @override
+  String FormatStringWithLeftToRightMarkers(String number) {
+    // TODO: implement FormatStringWithLeftToRightMarkers
+    throw UnimplementedError();
+  }
+
+  @override
+  String FormatWithOutputFormat(Pointer<COMObject> number, int numberFormat) {
+    // TODO: implement FormatWithOutputFormat
+    throw UnimplementedError();
   }
 }

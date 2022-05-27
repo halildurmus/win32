@@ -29,8 +29,10 @@ const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IStringable on IInspectable {
+class IStringable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
+  IStringable(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IStringable);
 
   String ToString() {

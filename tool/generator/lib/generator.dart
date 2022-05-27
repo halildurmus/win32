@@ -8,7 +8,7 @@ export 'src/inputs/struct_sizes.dart';
 export 'src/inputs/structs.dart';
 
 export 'src/projection/callback.dart';
-export 'src/projection/class.dart';
+export 'src/projection/com_class.dart';
 export 'src/projection/com_interface.dart';
 export 'src/projection/com_method.dart';
 export 'src/projection/com_property.dart';
@@ -23,6 +23,7 @@ export 'src/projection/struct.dart';
 export 'src/projection/test_interface.dart';
 export 'src/projection/type.dart';
 export 'src/projection/utils.dart';
+export 'src/projection/winrt_class.dart';
 export 'src/projection/winrt_get_property.dart';
 export 'src/projection/winrt_interface.dart';
 export 'src/projection/winrt_method.dart';

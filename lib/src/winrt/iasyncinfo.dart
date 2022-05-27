@@ -29,8 +29,10 @@ const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IAsyncInfo on IInspectable {
+class IAsyncInfo extends IInspectable {
   // vtable begins at 6, is 5 entries long.
+  IAsyncInfo(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IAsyncInfo);
 
   int get Id {

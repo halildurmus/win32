@@ -2,13 +2,12 @@ import 'package:winmd/winmd.dart';
 
 import 'com_interface.dart';
 import 'method.dart';
-import 'utils.dart';
 import 'winrt_get_property.dart';
 import 'winrt_method.dart';
 import 'winrt_set_property.dart';
 
-class WinRTInterfaceProjection extends ComInterfaceProjection {
-  WinRTInterfaceProjection(super.typeDef);
+class WinRTClassProjection extends ComInterfaceProjection {
+  WinRTClassProjection(super.typeDef);
 
   @override
   String get inheritsFrom {
@@ -18,17 +17,6 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       return 'IInspectable';
     } else {
       return 'IUnknown';
-    }
-  }
-
-  @override
-  String getImportForTypeDef(TypeDef typeDef) {
-    if (typeDef.isDelegate) {
-      return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
-    } else if (typeDef.isInterface) {
-      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
-    } else {
-      return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
   }
 
@@ -45,8 +33,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get importHeader {
     final imports = {interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == 'iinspectable.dart');
-    return imports.map((import) => "import '$import';").join('\n');
+      ..removeWhere((item) => item == '');
+    return imports.map((import) => "import '$pathToSrc$import';").join('\n');
   }
 
   List<MethodProjection>? _methodProjections;
@@ -118,7 +106,6 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     return '''
       $header
       $extraHeaders
-      $importHeader
       $rootHeader
       $guidConstants
 

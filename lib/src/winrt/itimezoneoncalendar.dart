@@ -29,9 +29,11 @@ const IID_ITimeZoneOnCalendar = '{BB3C25E5-46CF-4317-A3F5-02621AD54478}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin ITimeZoneOnCalendar on IInspectable {
+class ITimeZoneOnCalendar extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   late final Pointer<COMObject> _thisPtr = toInterface(IID_ITimeZoneOnCalendar);
+
+  ITimeZoneOnCalendar(super.ptr);
 
   String GetTimeZone() {
     final retValuePtr = calloc<HSTRING>();

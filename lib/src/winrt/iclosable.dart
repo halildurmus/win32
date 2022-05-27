@@ -29,8 +29,10 @@ const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IClosable on IInspectable {
+class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
+  IClosable(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IClosable);
 
   void Close() {

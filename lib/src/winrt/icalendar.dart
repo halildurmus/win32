@@ -29,8 +29,10 @@ const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 
 /// {@category Interface}
 /// {@category winrt}
-mixin ICalendar on IInspectable {
+class ICalendar extends IInspectable {
   // vtable begins at 6, is 98 entries long.
+  ICalendar(super.ptr);
+
   late final Pointer<COMObject> _thisPtr = toInterface(IID_ICalendar);
 
   Pointer<COMObject> Clone() {

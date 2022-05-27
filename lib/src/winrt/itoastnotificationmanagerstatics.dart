@@ -30,8 +30,10 @@ const IID_IToastNotificationManagerStatics =
 
 /// {@category Interface}
 /// {@category winrt}
-mixin IToastNotificationManagerStatics on IInspectable {
+class IToastNotificationManagerStatics extends IInspectable {
   // vtable begins at 6, is 3 entries long.
+  IToastNotificationManagerStatics(super.ptr);
+
   late final Pointer<COMObject> _thisPtr =
       toInterface(IID_IToastNotificationManagerStatics);
 
