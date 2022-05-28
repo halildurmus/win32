@@ -68,7 +68,7 @@ class MainPageState extends State<MainPage> {
             ])
           ])
         ],
-        body: Column(
+        child: Column(
           children: [
             if (showRoundedCornerSwitch) const WindowRoundingSelector(),
             Expanded(child: VolumePanel()),
