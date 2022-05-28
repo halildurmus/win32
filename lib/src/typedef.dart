@@ -542,7 +542,7 @@ class TypeDef extends TokenObject
   /// For nested types, the [enclosingClass] property may be of interest, which
   /// is the type in which the current type is embedded.
   TypeDef? get parent =>
-      token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
+      baseTypeToken == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
   /// Returns true if the type is nested in an enclosing class (e.g. a struct
   /// within a struct).
