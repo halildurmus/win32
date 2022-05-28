@@ -27,6 +27,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
     } else if (typeDef.isInterface) {
       return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
+    } else if (typeDef.name.isEmpty) {
+      return '';
     } else {
       return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
@@ -113,7 +115,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   // TODO: Needs to vary depending on static vs. factory vs. interface
   @override
   String toString() {
-    final extendsClause = inheritsFrom.isEmpty ? '' : 'extends $inheritsFrom';
+    final extendsClause =
+        inheritsFrom.isEmpty ? 'extends IInspectable' : 'extends $inheritsFrom';
 
     return '''
       $header
