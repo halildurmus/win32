@@ -23,4 +23,14 @@ void main() {
     final method = typeDef!.findMethod('PlaySoundVeryLoudly');
     expect(method, isNull);
   });
+
+  test('Test for parent field', () {
+    final typeDef =
+        MetadataStore.getMetadataForType('Windows.Data.Xml.Dom.IXmlNodeList');
+
+    expect(typeDef, isNotNull);
+    expect(typeDef!.parent, isNotNull);
+    expect(typeDef.parent!.name, endsWith('IInspectable'));
+    expect(typeDef.parent!.parent, isNull);
+  });
 }
