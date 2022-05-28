@@ -26,10 +26,7 @@ import 'iphonenumberformatter.dart';
 import 'iphonenumberformatterstatics.dart';
 import '../com/iinspectable.dart';
 
-/// @nodoc
-const IID_PhoneNumberFormatter = 'null';
-
-/// {@category Interface}
+/// {@category Class}
 /// {@category winrt}
 class PhoneNumberFormatter extends IInspectable
     implements IPhoneNumberFormatter {

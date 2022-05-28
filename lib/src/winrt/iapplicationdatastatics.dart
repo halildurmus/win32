@@ -33,13 +33,10 @@ class IApplicationDataStatics extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IApplicationDataStatics(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IApplicationDataStatics);
-
   Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -47,7 +44,7 @@ class IApplicationDataStatics extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

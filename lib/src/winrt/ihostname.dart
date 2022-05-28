@@ -33,12 +33,10 @@ class IHostName extends IInspectable {
   // vtable begins at 6, is 6 entries long.
   IHostName(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IHostName);
-
   Pointer<COMObject> get IPInformation {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -46,7 +44,7 @@ class IHostName extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -57,15 +55,15 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -81,15 +79,15 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -105,15 +103,15 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -129,7 +127,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -137,7 +135,7 @@ class IHostName extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Int32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -152,7 +150,7 @@ class IHostName extends IInspectable {
     final retValuePtr = calloc<Bool>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
               .elementAt(11)
               .cast<
                   Pointer<
@@ -163,7 +161,7 @@ class IHostName extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, Pointer<COMObject> hostName, Pointer<Bool>)>()(
-          _thisPtr.ref.lpVtbl,
+          ptr.ref.lpVtbl,
           hostName.cast<Pointer<COMObject>>().value,
           retValuePtr);
 

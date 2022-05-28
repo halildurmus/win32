@@ -331,4 +331,25 @@ void main() {
     expect(output, isNotEmpty);
     expect(output, contains('iinspectable.dart'));
   });
+
+  test('WinRT class successfully projects a default constructor', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Storage.Pickers.FileOpenPicker');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.hasDefaultConstructor, true);
+    expect(
+        projection.defaultConstructor,
+        equalsIgnoringWhitespace(
+            'FileOpenPicker({Allocator allocator = calloc}) : super(ActivateClass(_className, allocator: allocator));'));
+  });
+
+  test('WinRT class does not project a default constructor', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Networking.HostName');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.hasDefaultConstructor, false);
+    expect(projection.defaultConstructor, isEmpty);
+  });
 }

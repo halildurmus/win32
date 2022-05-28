@@ -33,13 +33,10 @@ class IToastNotificationFactory extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IToastNotificationFactory(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IToastNotificationFactory);
-
   Pointer<COMObject> CreateToastNotification(Pointer<COMObject> content) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -50,9 +47,7 @@ class IToastNotificationFactory extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, Pointer<COMObject> content, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl,
-        content.cast<Pointer<COMObject>>().value,
-        retValuePtr);
+        ptr.ref.lpVtbl, content.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

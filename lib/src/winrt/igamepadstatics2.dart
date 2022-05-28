@@ -34,13 +34,11 @@ class IGamepadStatics2 extends IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
   IGamepadStatics2(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IGamepadStatics2);
-
   Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =
-        _thisPtr.ref.vtable
+        ptr.ref.vtable
                 .elementAt(6)
                 .cast<
                     Pointer<
@@ -52,7 +50,7 @@ class IGamepadStatics2 extends IGamepadStatics {
                 .value
                 .asFunction<
                     int Function(Pointer, Pointer<COMObject> gameController,
-                        Pointer<COMObject>)>()(_thisPtr.ref.lpVtbl,
+                        Pointer<COMObject>)>()(ptr.ref.lpVtbl,
             gameController.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);

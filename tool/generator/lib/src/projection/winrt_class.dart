@@ -47,6 +47,11 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return imports.map((import) => "import '$import';").join('\n');
   }
 
+  bool get hasDefaultConstructor => typeDef.customAttributes
+      .where((element) => element.name.endsWith('ActivatableAttribute'))
+      .where((element) => element.parameters.length == 2)
+      .isNotEmpty;
+
   List<String> get factoryInterfaces => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
       .where((element) => element.parameters.length == 3)
@@ -130,6 +135,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
+  String get defaultConstructor => hasDefaultConstructor
+      ? '''
+      $shortName({Allocator allocator = calloc})
+          : super(ActivateClass(_className, allocator: allocator));'''
+      : '';
+
   @override
   String toString() {
     return '''
@@ -137,13 +148,11 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       $extraHeaders
       $importHeader
       $rootHeader
-      $guidConstants
 
-      /// {@category Interface}
+      /// {@category Class}
       /// {@category $category}
       class $shortName extends IInspectable implements $inheritsFrom {
-        $shortName({Allocator allocator = calloc})
-            : super(ActivateClass(_className, allocator: allocator));
+        $defaultConstructor
         $shortName.fromPointer(super.ptr);
 
         static const _className = '${typeDef.name}';

@@ -34,13 +34,10 @@ class IPhoneNumberFormatterStatics extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   IPhoneNumberFormatterStatics(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr =
-      toInterface(IID_IPhoneNumberFormatterStatics);
-
   void TryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
     final regionCodeHstring = convertToHString(regionCode);
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -51,7 +48,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, int regionCode, Pointer<COMObject> phoneNumber)>()(
-        _thisPtr.ref.lpVtbl, regionCodeHstring, phoneNumber);
+        ptr.ref.lpVtbl, regionCodeHstring, phoneNumber);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -63,7 +60,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     final regionCodeHstring = convertToHString(regionCode);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
               .elementAt(7)
               .cast<
                   Pointer<
@@ -73,7 +70,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
               .value
               .asFunction<
                   int Function(Pointer, int regionCode, Pointer<Int32>)>()(
-          _thisPtr.ref.lpVtbl, regionCodeHstring, retValuePtr);
+          ptr.ref.lpVtbl, regionCodeHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -91,7 +88,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     final regionCodeHstring = convertToHString(regionCode);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
               .elementAt(8)
               .cast<
                   Pointer<
@@ -102,7 +99,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
               .asFunction<
                   int Function(Pointer, int regionCode, bool stripNonDigit,
                       Pointer<IntPtr>)>()(
-          _thisPtr.ref.lpVtbl, regionCodeHstring, stripNonDigit, retValuePtr);
+          ptr.ref.lpVtbl, regionCodeHstring, stripNonDigit, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -121,7 +118,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     final numberHstring = convertToHString(number);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
               .elementAt(9)
               .cast<
                   Pointer<
@@ -130,7 +127,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
                               Pointer, IntPtr number, Pointer<IntPtr>)>>>()
               .value
               .asFunction<int Function(Pointer, int number, Pointer<IntPtr>)>()(
-          _thisPtr.ref.lpVtbl, numberHstring, retValuePtr);
+          ptr.ref.lpVtbl, numberHstring, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

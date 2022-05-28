@@ -33,12 +33,10 @@ class IToastNotification4 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   IToastNotification4(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IToastNotification4);
-
   Pointer<COMObject> get Data {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
@@ -46,7 +44,7 @@ class IToastNotification4 extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, retValuePtr);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -54,7 +52,7 @@ class IToastNotification4 extends IInspectable {
   }
 
   set Data(Pointer<COMObject> value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
                 Pointer<
@@ -62,7 +60,7 @@ class IToastNotification4 extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        _thisPtr.ref.lpVtbl, value);
+        ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -71,7 +69,7 @@ class IToastNotification4 extends IInspectable {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -79,7 +77,7 @@ class IToastNotification4 extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Int32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -91,11 +89,11 @@ class IToastNotification4 extends IInspectable {
   }
 
   set Priority(int value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(_thisPtr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

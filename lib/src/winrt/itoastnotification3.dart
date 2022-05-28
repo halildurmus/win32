@@ -33,13 +33,11 @@ class IToastNotification3 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   IToastNotification3(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IToastNotification3);
-
   int get NotificationMirroring {
     final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -47,7 +45,7 @@ class IToastNotification3 extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Int32>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -59,11 +57,11 @@ class IToastNotification3 extends IInspectable {
   }
 
   set NotificationMirroring(int value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(_thisPtr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -72,15 +70,15 @@ class IToastNotification3 extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -96,11 +94,11 @@ class IToastNotification3 extends IInspectable {
     final hstr = convertToHString(value);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr)>>>()
           .value
-          .asFunction<int Function(Pointer, int)>()(_thisPtr.ref.lpVtbl, hstr);
+          .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, hstr);
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {

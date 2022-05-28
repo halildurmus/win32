@@ -33,17 +33,15 @@ class IToastNotification2 extends IInspectable {
   // vtable begins at 6, is 6 entries long.
   IToastNotification2(super.ptr);
 
-  late final Pointer<COMObject> _thisPtr = toInterface(IID_IToastNotification2);
-
   set Tag(String value) {
     final hstr = convertToHString(value);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(6)
           .cast<Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr)>>>()
           .value
-          .asFunction<int Function(Pointer, int)>()(_thisPtr.ref.lpVtbl, hstr);
+          .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, hstr);
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
@@ -55,15 +53,15 @@ class IToastNotification2 extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -79,11 +77,11 @@ class IToastNotification2 extends IInspectable {
     final hstr = convertToHString(value);
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(8)
           .cast<Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr)>>>()
           .value
-          .asFunction<int Function(Pointer, int)>()(_thisPtr.ref.lpVtbl, hstr);
+          .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, hstr);
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
@@ -95,15 +93,15 @@ class IToastNotification2 extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
                   NativeFunction<HRESULT Function(Pointer, Pointer<IntPtr>)>>>()
           .value
           .asFunction<
-              int Function(Pointer,
-                  Pointer<IntPtr>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+              int Function(
+                  Pointer, Pointer<IntPtr>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -116,11 +114,11 @@ class IToastNotification2 extends IInspectable {
   }
 
   set SuppressPopup(bool value) {
-    final hr = _thisPtr.ref.vtable
+    final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Bool)>>>()
         .value
-        .asFunction<int Function(Pointer, bool)>()(_thisPtr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, bool)>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -129,7 +127,7 @@ class IToastNotification2 extends IInspectable {
     final retValuePtr = calloc<Bool>();
 
     try {
-      final hr = _thisPtr.ref.vtable
+      final hr = ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -137,7 +135,7 @@ class IToastNotification2 extends IInspectable {
           .value
           .asFunction<
               int Function(
-                  Pointer, Pointer<Bool>)>()(_thisPtr.ref.lpVtbl, retValuePtr);
+                  Pointer, Pointer<Bool>)>()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
