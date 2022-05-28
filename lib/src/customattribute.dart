@@ -80,7 +80,7 @@ class CustomAttribute extends TokenObject {
       _parameters = <CustomAttributeParameter>[];
 
       final paramTypes = _parameterTypes();
-      final paramValues = parameterValues(paramTypes);
+      final paramValues = _parameterValues(paramTypes);
 
       for (var idx = 0; idx < paramTypes.length; idx++) {
         _parameters!
@@ -114,7 +114,7 @@ class CustomAttribute extends TokenObject {
   }
 
   /// Decode parameter values per §II.23.3 of ECMA-335.
-  List<Object> parameterValues(List<TypeIdentifier> paramTypes) {
+  List<Object> _parameterValues(List<TypeIdentifier> paramTypes) {
     final paramValues = <Object>[];
     final blob = signatureBlob.buffer.asByteData();
     var offset = 2; // skip two-byte 0x0001 prolog
