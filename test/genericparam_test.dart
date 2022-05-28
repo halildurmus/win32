@@ -10,7 +10,6 @@ void main() {
 
     final typeDef = MetadataStore.getMetadataForType(interfaceName)!;
     expect(typeDef.genericParams.length, equals(2));
-    expect(typeDef.genericParams.first.name, equals('TResult'));
 
     final tr = typeDef.genericParams.first;
     expect(tr.constraints.length, isZero);
@@ -21,6 +20,8 @@ void main() {
     expect(tr.specialConstraints.referenceType, isFalse);
     expect(tr.specialConstraints.defaultConstructor, isFalse);
     expect(tr.variance, equals(Variance.nonvariant));
+    expect(tr.name, equals('TResult'));
+    expect(tr.toString(), tr.name);
 
     expect(tr.parent, isA<TypeDef>());
     final parentObject = tr.parent as TypeDef;

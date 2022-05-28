@@ -113,18 +113,6 @@ class TypeTuple {
     return TypeTuple(runtimeType, dataLength);
   }
 
-  @override
-  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      other is TypeTuple &&
-      other.typeIdentifier == typeIdentifier &&
-      other.offsetLength == offsetLength;
-
-  @override
-  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
-
   /// Decodes a single `TypeDef` / `TypeRef` / `TypeSpec` token.
   static int _unencodeDefRefSpecToken(int encoded) {
     final token = encoded >> 2;
