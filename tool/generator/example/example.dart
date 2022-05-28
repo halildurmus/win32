@@ -1,6 +1,5 @@
-import 'package:winmd/winmd.dart' show MetadataStore;
-
 import 'package:generator/generator.dart';
+import 'package:winmd/winmd.dart';
 
 final scope = MetadataStore.getWin32Scope();
 
