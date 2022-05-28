@@ -65,13 +65,103 @@ void main() {
                 startsWith('Error 0x80131124'))));
   });
 
+  test('Unknown token ClassLayout', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => ClassLayout(scope, 0x02FEDCBA), // not a class token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token Event', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => Event.fromToken(scope, 0x02FEDCBA), // not an event token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token Field', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => Field.fromToken(scope, 0x02FEDCBA), // not a field token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
   test('Unknown token GenericParam', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => GenericParam.fromToken(scope, 0x02FEDCBA), // typeDef missing type
+        () => GenericParam.fromToken(scope, 0x02FEDCBA), // not a generic param
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(META_E_BAD_INPUT_PARAMETER))
             .having((exc) => exc.toString(), 'toString()',
                 startsWith('Error 0x80131193'))));
+  });
+
+  test('Unknown token GenericParamConstraint', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => GenericParamConstraint.fromToken(scope, 0x02FEDCBA), // not GPC
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(META_E_BAD_INPUT_PARAMETER))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131193'))));
+  });
+
+  test('Unknown token MemberRef', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => MemberRef.fromToken(scope, 0x02FEDCBA), // not a memberref
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token Method', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => Method.fromToken(scope, 0x02FEDCBA), // not a method token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token Parameter', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => Parameter.fromToken(scope, 0x02FEDCBA), // not a param token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token PinvokeMap', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => PinvokeMap.fromToken(scope, 0x02FEDCBA), // not a pinvokemap token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_RECORD_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131130'))));
+  });
+
+  test('Unknown token Property', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => Property.fromToken(scope, 0x02FEDCBA), // not a property token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
   });
 }

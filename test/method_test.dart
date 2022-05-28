@@ -15,6 +15,7 @@ void main() {
     expect(method.vTableLayout, equals(VtableLayout.reuseSlot));
     expect(method.isAbstract, isFalse);
     expect(method.isVirtual, isFalse);
+    expect(method.parent, equals(typeDef));
   });
 
   test('Method properties 2', () {
@@ -26,6 +27,7 @@ void main() {
     expect(method.vTableLayout, equals(VtableLayout.newSlot));
     expect(method.isAbstract, isTrue);
     expect(method.isVirtual, isTrue);
+    expect(method.parent, equals(typeDef));
   });
 
   test('Method properties 3', () {
@@ -42,6 +44,7 @@ void main() {
     expect(method.isPinvokeImpl, isTrue);
     expect(method.pinvokeMap.isNoMangle, isTrue);
     expect(method.pinvokeMap.importName, equals(methodName));
+    expect(method.parent, equals(typeDef));
 
     final importDllToken = method.pinvokeMap.importDllToken;
     final moduleRef = ModuleRef.fromToken(scope, importDllToken);
