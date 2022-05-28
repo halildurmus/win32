@@ -68,11 +68,11 @@ class WinRTMethodProjection extends MethodProjection {
 
   bool get isVectorViewReturn =>
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
-      returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') == true;
+      (returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ?? false);
 
   bool get isVectorReturn =>
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
-      returnType.typeIdentifier.type?.name.endsWith('IVector`1') == true;
+      (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
 
   String get wrappedReturnType {
     if (isCOMObjectReturn) return 'Pointer<COMObject>';

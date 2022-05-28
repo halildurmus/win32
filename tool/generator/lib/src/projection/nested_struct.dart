@@ -60,7 +60,7 @@ class NestedStructProjection extends StructProjection {
       ..writeln('extension $extensionName on $rootTypeName {');
     for (final field in typeDef.fields) {
       final instanceName = _instanceName(field);
-      final dartTypeProjection = field.typeIdentifier.type?.isNested == true
+      final dartTypeProjection = field.typeIdentifier.type?.isNested ?? false
           ? TypeProjection(field.typeIdentifier).dartType
           : stripLeadingUnderscores(
               TypeProjection(field.typeIdentifier).dartType);

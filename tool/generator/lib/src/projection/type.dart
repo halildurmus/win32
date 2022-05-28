@@ -158,7 +158,7 @@ class TypeProjection {
 
     // Strip leading underscores (unless the type is nested, in which
     // case leave one behind).
-    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested ?? false
         ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
         : stripLeadingUnderscores(typeArg.projection.nativeType);
 
@@ -186,7 +186,7 @@ class TypeProjection {
 
     // Arrays of nested types have a private _ prefix. This is not a very
     // expensive operation.
-    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested == true
+    final typeArgNativeType = typeIdentifier.typeArg?.type?.isNested ?? false
         ? typeArg.nativeType
         : stripLeadingUnderscores(typeArg.nativeType);
 

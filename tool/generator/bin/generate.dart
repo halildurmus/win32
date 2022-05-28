@@ -166,7 +166,7 @@ void main() {
           (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
     for (final function in filteredFunctions.keys) {
-      if (filteredFunctions[function]!.test == false) continue;
+      if (!filteredFunctions[function]!.test) continue;
 
       late Method method;
       try {

@@ -65,10 +65,10 @@ class FieldProjection {
     var dartType =
         safeTypenameForString(stripLeadingUnderscores(typeProjection.dartType));
 
-    if (field.typeIdentifier.type?.isNested == true) {
+    if (field.typeIdentifier.type?.isNested ?? false) {
       dartType = '_${stripLeadingUnderscores(typeProjection.dartType)}';
     }
-    if (field.typeIdentifier.typeArg?.type?.isNested == true) {
+    if (field.typeIdentifier.typeArg?.type?.isNested ?? false) {
       dartType = typeProjection.dartType;
     }
 
