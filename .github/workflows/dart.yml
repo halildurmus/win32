@@ -46,10 +46,6 @@ jobs:
         working-directory: tool/generator
         run: dart pub get
 
-      - name: Install dependencies for example
-        working-directory: example/explorer
-        run: dart pub get
-
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
