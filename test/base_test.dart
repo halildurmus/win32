@@ -38,4 +38,40 @@ void main() {
     expect(arch.x86, isFalse);
     expect(arch.x64, isFalse);
   });
+
+  test('Unknown token TypeDef 1', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => TypeDef.fromToken(scope, 0xFF123456),
+        throwsA(isA<WinmdException>().having((exc) => exc.message, 'message',
+            equals('Unrecognized token type 0xff'))));
+  });
+
+  test('Unknown token TypeDef 2', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => TypeDef.fromToken(scope, 0x1A123456), // moduleRef type
+        throwsA(isA<WinmdException>().having((exc) => exc.message, 'message',
+            equals('Unrecognized token 0x1a123456'))));
+  });
+
+  test('Unknown token TypeDef 3', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => TypeDef.fromToken(scope, 0x02FEDCBA), // typeDef missing type
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
+  test('Unknown token GenericParam', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => GenericParam.fromToken(scope, 0x02FEDCBA), // typeDef missing type
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(META_E_BAD_INPUT_PARAMETER))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131193'))));
+  });
 }
