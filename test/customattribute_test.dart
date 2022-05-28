@@ -122,4 +122,18 @@ void main() {
 
     expect(hwnd.existsAttribute('Windows.SparklesTheCatAttribute'), isFalse);
   });
+
+  test('Uint16 and Uint8', () {
+    final itn = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification')!;
+    final guid =
+        itn.findAttribute('Windows.Foundation.Metadata.GuidAttribute')!;
+    expect(guid.parameters.length, equals(11));
+    expect(guid.parameters[0].value, equals(0x997e2675));
+    expect(guid.parameters[1].value, equals(0x059e));
+    expect(guid.parameters[2].value, equals(0x4e60));
+    expect(guid.parameters[3].value, equals(0x8b));
+    expect(guid.parameters[4].value, equals(0x06));
+    expect(guid.parameters[10].value, equals(0x80));
+  });
 }
