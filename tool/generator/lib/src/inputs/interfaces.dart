@@ -104,6 +104,7 @@ const comInterfacesToGenerate = <String>{
 };
 
 final windowsRuntimeTypesToGenerate = <String>{
+  'Windows.Data.Xml.Dom.IXmlNodeList',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
