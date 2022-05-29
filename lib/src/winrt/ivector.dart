@@ -26,7 +26,7 @@ const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IVector<T> extends IInspectable {
+class IVector<T> extends IInspectable implements IIterable<T> {
   // vtable begins at 6, is 12 entries long.
   final T Function(Pointer<COMObject>)? _creator;
   final Allocator _allocator;
@@ -675,4 +675,11 @@ class IVector<T> extends IInspectable {
     return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
         .toList();
   }
+
+  // IIterable IID is always the second one
+  late final _iIterable = IIterable<T>(toInterface(iids.elementAt(1)),
+      creator: _creator, length: Size);
+
+  @override
+  IIterator<T> First() => _iIterable.First();
 }

@@ -15,13 +15,15 @@ import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
 import '../winrt_helpers.dart';
+import 'iiterable.dart';
+import 'iiterator.dart';
 
 /// @nodoc
 const IID_IVectorView = '{BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IVectorView<T> extends IInspectable {
+class IVectorView<T> extends IInspectable implements IIterable<T> {
   // vtable begins at 6, is 4 entries long.
   final T Function(Pointer<COMObject>)? _creator;
   final Allocator _allocator;
@@ -351,4 +353,11 @@ class IVectorView<T> extends IInspectable {
     return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
         .toList();
   }
+
+  // IIterable IID is always the second one
+  late final _iIterable = IIterable<T>(toInterface(iids.elementAt(1)),
+      creator: _creator, length: Size);
+
+  @override
+  IIterator<T> First() => _iIterable.First();
 }
