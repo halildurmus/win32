@@ -30,10 +30,10 @@ const IID_IVectorView = '{BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}';
 /// {@category Interface}
 /// {@category winrt}
 class IVectorView<T> extends IInspectable {
-  T Function(Pointer<COMObject>)? creator;
-  final Allocator allocator;
-
   // vtable begins at 6, is 4 entries long.
+  final T Function(Pointer<COMObject>)? _creator;
+  final Allocator _allocator;
+
   /// Creates an instance of `IVectorView<T>` using the given `ptr`.
   ///
   /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
@@ -58,7 +58,10 @@ class IVectorView<T> extends IInspectable {
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
   /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
   /// memory management.
-  IVectorView(super.ptr, {this.creator, this.allocator = calloc}) {
+  IVectorView(super.ptr,
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
+      : _creator = creator,
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {
@@ -75,12 +78,12 @@ class IVectorView<T> extends IInspectable {
         return _GetAt_String(index) as T;
       // Handle WinRT types
       default:
-        return creator!(_GetAt_COMObject(index));
+        return _creator!(_GetAt_COMObject(index));
     }
   }
 
   Pointer<COMObject> _GetAt_COMObject(int index) {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(6)
@@ -347,10 +350,8 @@ class IVectorView<T> extends IInspectable {
 
   /// Creates a `List<T>` from the `IVectorView<T>`.
   List<T> toList() {
-    if (Size == 0) {
-      return [];
-    }
-
-    return VectorHelper(creator, GetMany, Size, allocator: allocator).toList();
+    if (Size == 0) return [];
+    return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
+        .toList();
   }
 }

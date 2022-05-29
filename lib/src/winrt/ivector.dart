@@ -32,10 +32,10 @@ const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';
 /// {@category Interface}
 /// {@category winrt}
 class IVector<T> extends IInspectable {
-  T Function(Pointer<COMObject>)? creator;
-  final Allocator allocator;
-
   // vtable begins at 6, is 12 entries long.
+  final T Function(Pointer<COMObject>)? _creator;
+  final Allocator _allocator;
+
   /// Creates an instance of `IVector<T>` using the given `ptr`.
   ///
   /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
@@ -62,10 +62,13 @@ class IVector<T> extends IInspectable {
   /// memory management.
   ///
   /// {@category winrt}
-  IVector(super.ptr, {this.creator, this.allocator = calloc}) {
+  IVector(super.ptr,
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
+      : _creator = creator,
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
-    if (![String].contains(T) && creator == null) {
+    if (![String].contains(T) && _creator == null) {
       throw ArgumentError(
           '`creator` parameter must be specified for WinRT types!');
     }
@@ -79,12 +82,12 @@ class IVector<T> extends IInspectable {
         return _GetAt_String(index) as T;
       // Handle WinRT types
       default:
-        return creator!(_GetAt_COMObject(index));
+        return _creator!(_GetAt_COMObject(index));
     }
   }
 
   Pointer<COMObject> _GetAt_COMObject(int index) {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(6)
@@ -171,7 +174,7 @@ class IVector<T> extends IInspectable {
   }
 
   List<T> get GetView {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(8)
@@ -191,7 +194,7 @@ class IVector<T> extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView(retValuePtr, creator: creator, allocator: allocator)
+    return IVectorView(retValuePtr, creator: _creator, allocator: _allocator)
         .toList();
   }
 
@@ -587,14 +590,14 @@ class IVector<T> extends IInspectable {
         return _ReplaceAll_String(items as List<String>);
       // Handle WinRT types
       default:
-        return _ReplaceAll_COMObject(items);
+        return _ReplaceAll_COMObject(items as List<IInspectable>);
     }
   }
 
-  void _ReplaceAll_COMObject(List<T> items) {
+  void _ReplaceAll_COMObject(List<IInspectable> items) {
     final pArray = calloc<COMObject>(items.length);
     for (var i = 0; i < items.length; i++) {
-      final pElement = (items.elementAt(i) as IInspectable).ptr;
+      final pElement = items.elementAt(i).ptr;
       pArray[i] = pElement.ref.lpVtbl;
     }
 
@@ -661,10 +664,8 @@ class IVector<T> extends IInspectable {
 
   /// Creates a `List<T>` from the `IVector<T>`.
   List<T> toList() {
-    if (Size == 0) {
-      return <T>[];
-    }
-
-    return VectorHelper(creator, GetMany, Size, allocator: allocator).toList();
+    if (Size == 0) return [];
+    return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
+        .toList();
   }
 }
