@@ -50,7 +50,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
-  /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
+  /// with it. A FFI `Arena` may be passed as a custom allocator for ease of
   /// memory management.
   IVectorView(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
