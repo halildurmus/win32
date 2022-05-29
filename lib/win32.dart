@@ -262,6 +262,8 @@ export 'src/winrt/iasyncinfo.dart';
 export 'src/winrt/icalendar.dart';
 export 'src/winrt/ifileopenpicker.dart';
 export 'src/winrt/ihostname.dart';
+export 'src/winrt/iiterable.dart';
+export 'src/winrt/iiterator.dart';
 export 'src/winrt/inetworkinformationstatics.dart';
 export 'src/winrt/iphonenumberformatter.dart';
 export 'src/winrt/iphonenumberformatterstatics.dart';
