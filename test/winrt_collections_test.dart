@@ -339,11 +339,16 @@ void main() {
       });
 
       test('First', () {
+        final list = vectorView.toList();
         final iterator = vectorView.First();
-        expect(iterator.HasCurrent, true);
-        // Should be something like en-US
-        expect(iterator.Current[2], equals('-'));
-        expect(iterator.MoveNext(), false);
+
+        for (var i = 0; i < list.length; i++) {
+          expect(iterator.HasCurrent, true);
+          // Should be something like en-US
+          expect(iterator.Current[2], equals('-'));
+          // MoveNext() should return true except for the last iteration
+          expect(iterator.MoveNext(), i < list.length - 1);
+        }
       });
 
       tearDown(() {
