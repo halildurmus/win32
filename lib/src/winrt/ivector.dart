@@ -69,6 +69,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Returns the item at the specified index in the vector.
   T GetAt(int index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -139,6 +140,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Gets the number of items in the vector.
   int get Size {
     final retValuePtr = calloc<Uint32>();
 
@@ -168,6 +170,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Returns an immutable view of the vector.
   List<T> get GetView {
     final retValuePtr = _allocator<COMObject>();
 
@@ -193,6 +196,7 @@ class IVector<T> extends IInspectable {
         .toList();
   }
 
+  /// Retrieves the index of a specified item in the vector.
   bool IndexOf(T value, Pointer<Uint32> index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -278,6 +282,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Sets the value at the specified index in the vector.
   void SetAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -343,6 +348,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Inserts an item at a specified index in the vector.
   void InsertAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -403,6 +409,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Removes the item at the specified index in the vector.
   void RemoveAt(int index) {
     final hr = ptr.ref.vtable
         .elementAt(12)
@@ -422,6 +429,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Appends an item to the end of the vector.
   void Append(T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -473,6 +481,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Removes the last item from the vector.
   void RemoveAtEnd() {
     final hr = ptr.ref.vtable
         .elementAt(14)
@@ -483,6 +492,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Removes all items from the vector.
   void Clear() {
     final hr = ptr.ref.vtable
         .elementAt(15)
@@ -493,6 +503,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Retrieves multiple items from the the vector beginning at the given index.
   int GetMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -577,6 +588,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Replaces all the items in the vector with the specified items.
   void ReplaceAll(List<T> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,

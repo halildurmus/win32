@@ -62,6 +62,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Returns the item at the specified index in the vector view.
   T GetAt(int index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -132,6 +133,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Gets the number of items in the vector view.
   int get Size {
     final retValuePtr = calloc<Uint32>();
 
@@ -161,6 +163,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Retrieves the index of a specified item in the vector view.
   bool IndexOf(T value, Pointer<Uint32> index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -246,6 +249,8 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Retrieves multiple items from the vector view beginning at the given
+  /// index.
   int GetMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
