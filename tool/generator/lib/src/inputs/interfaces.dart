@@ -130,6 +130,8 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
 
   // These types are generated manually by design:
+  //   'Windows.Foundation.Collections.IIterable`1',
+  //   'Windows.Foundation.Collections.IIterator`1',
   //   'Windows.Foundation.Collections.IVector`1',
   //   'Windows.Foundation.Collections.IVectorView`1',
 
