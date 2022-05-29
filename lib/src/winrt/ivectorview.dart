@@ -354,9 +354,9 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
         .toList();
   }
 
-  // IIterable IID is always the second one
-  late final _iIterable = IIterable<T>(toInterface(iids.elementAt(1)),
-      creator: _creator, length: Size);
+  // IID_IIterable is always the last item on the iids list for IVectorView
+  late final _iIterable =
+      IIterable<T>(toInterface(iids.last), creator: _creator, length: Size);
 
   @override
   IIterator<T> First() => _iIterable.First();
