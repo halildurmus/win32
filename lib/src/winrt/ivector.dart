@@ -677,8 +677,8 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   // IID_IIterable is always the second item on the iids list for IVector
-  late final _iIterable =
-      IIterable<T>(toInterface(iids[1]), creator: _creator, length: Size);
+  late final _iIterable = IIterable<T>(toInterface(iids[1]),
+      creator: _creator, allocator: _allocator);
 
   @override
   IIterator<T> First() => _iIterable.First();

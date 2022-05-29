@@ -21,7 +21,7 @@ const IID_IIterable_String = '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}';
 class IIterable<T> extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   final T Function(Pointer<COMObject>)? _creator;
-  final int _length;
+  final Allocator _allocator;
 
   /// Creates an instance of `IIterable<T>` using the given `ptr`.
   ///
@@ -38,8 +38,9 @@ class IIterable<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final iterable =
-  ///     IIterable<IHostName>(ptr, creator: IHostName.new, length: 5);
+  /// final allocator = Arena();
+  /// final iterable = IIterable<IHostName>(ptr, creator: IHostName.new,
+  ///     allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointer
@@ -48,9 +49,9 @@ class IIterable<T> extends IInspectable {
   ///
   /// {@category winrt}
   IIterable(super.ptr,
-      {T Function(Pointer<COMObject>)? creator, int length = 1})
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
-        _length = length {
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {
@@ -61,7 +62,7 @@ class IIterable<T> extends IInspectable {
 
   /// Returns an iterator for the items in the collection.
   IIterator<T> First() {
-    final retValuePtr = calloc<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -75,6 +76,6 @@ class IIterable<T> extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IIterator(retValuePtr, length: _length, creator: _creator);
+    return IIterator(retValuePtr, creator: _creator, allocator: _allocator);
   }
 }

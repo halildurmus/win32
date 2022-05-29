@@ -23,7 +23,7 @@ const IID_IIterator_String = '{8C304EBB-6615-50A4-8829-879ECD443236}';
 class IIterator<T> extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   final T Function(Pointer<COMObject>)? _creator;
-  final int _length;
+  final Allocator _allocator;
 
   /// Creates an instance of `Iterator<T>` using the given `ptr`.
   ///
@@ -40,8 +40,9 @@ class IIterator<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final iterator =
-  ///     IIterator<IHostName>(ptr, creator: IHostName.new, length: 5);
+  /// final allocator = Arena();
+  /// final iterator = IIterator<IHostName>(ptr, creator: IHostName.new,
+  ///     allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointer
@@ -50,9 +51,9 @@ class IIterator<T> extends IInspectable {
   ///
   /// {@category winrt}
   IIterator(super.ptr,
-      {T Function(Pointer<COMObject>)? creator, int length = 1})
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
-        _length = length {
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {
@@ -75,7 +76,7 @@ class IIterator<T> extends IInspectable {
   }
 
   Pointer<COMObject> _Current_COMObject() {
-    final retValuePtr = calloc<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
             .elementAt(6)
@@ -166,19 +167,21 @@ class IIterator<T> extends IInspectable {
   }
 
   /// Retrieves multiple items from the iterator.
-  int GetMany(Pointer<NativeType> items) {
+  ///
+  /// `capacity` must be equal to the capacity of the `items` pointer.
+  int GetMany(Pointer<NativeType> items, int capacity) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _GetMany_String(items.cast());
+        return _GetMany_String(items.cast(), capacity);
       // Handle WinRT types
       default:
-        return _GetMany_COMObject(items.cast());
+        return _GetMany_COMObject(items.cast(), capacity);
     }
   }
 
-  int _GetMany_COMObject(Pointer<COMObject> items) {
+  int _GetMany_COMObject(Pointer<COMObject> items, int capacity) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -193,7 +196,7 @@ class IIterator<T> extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, int, Pointer<COMObject>, Pointer<Uint32>)>()(
-          ptr.ref.lpVtbl, _length, items, retValuePtr);
+          ptr.ref.lpVtbl, capacity, items, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -204,7 +207,7 @@ class IIterator<T> extends IInspectable {
     }
   }
 
-  int _GetMany_String(Pointer<HSTRING> items) {
+  int _GetMany_String(Pointer<HSTRING> items, int capacity) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -219,7 +222,7 @@ class IIterator<T> extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, int, Pointer<HSTRING>, Pointer<Uint32>)>()(
-          ptr.ref.lpVtbl, _length, items, retValuePtr);
+          ptr.ref.lpVtbl, capacity, items, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
