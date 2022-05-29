@@ -352,4 +352,27 @@ void main() {
     expect(projection.hasDefaultConstructor, false);
     expect(projection.defaultConstructor, isEmpty);
   });
+
+  test('WinRT class includes implements keyword in class declaration', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Networking.HostName');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.inheritsFrom, isNotEmpty);
+    expect(
+        projection.classDeclaration,
+        equals(
+            'class HostName extends IInspectable implements IHostName, IStringable {'));
+  });
+
+  test('WinRT class does not include implements keyword in class declaration',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.System.Launcher');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.inheritsFrom, isEmpty);
+    expect(projection.classDeclaration,
+        equals('class Launcher extends IInspectable {'));
+  });
 }

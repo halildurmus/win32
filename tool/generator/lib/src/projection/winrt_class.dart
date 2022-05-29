@@ -135,6 +135,9 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
+  String get classDeclaration =>
+      '''class $shortName extends IInspectable${inheritsFrom.isEmpty ? '' : ' implements $inheritsFrom'} {''';
+
   String get defaultConstructor => hasDefaultConstructor
       ? '''
       $shortName({Allocator allocator = calloc})
@@ -151,7 +154,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
       /// {@category Class}
       /// {@category $category}
-      class $shortName extends IInspectable implements $inheritsFrom {
+      $classDeclaration
         $defaultConstructor
         $shortName.fromPointer(super.ptr);
 
