@@ -8,32 +8,10 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
 
   @override
-  String get inheritsFrom =>
-      typeDef.interfaces.map((i) => i.name.split('.').last).join(', ');
-
-  String get interfaceMappers {
-    final buffer = StringBuffer();
-    for (final interface in typeDef.interfaces) {
-      final interfaceName = lastComponent(interface.name);
-      buffer.writeln('  // $interfaceName methods');
-
-      // Write out the private field identifier for the interface
-      final fieldIdentifier = '_i${interfaceName.substring(1)}';
-      final iid = 'IID_$interfaceName';
-      buffer.writeln(
-          'late final $fieldIdentifier = $interfaceName(toInterface($iid));');
-
-      final projection = WinRTInterfaceProjection(interface);
-      for (final method in projection.methodProjections) {
-        buffer.writeln('\n@override');
-
-        // e.g. `int get Second` or `void AddHours(int hours)`
-        final declaration = method.toString().split('{').first;
-        buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
-      }
-    }
-    return buffer.toString();
-  }
+  String get inheritsFrom => implementsInterfaces
+      .map((i) => lastComponent(i.name))
+      .toList()
+      .join(', ');
 
   @override
   String get importHeader {
@@ -47,10 +25,19 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return imports.map((import) => "import '$import';").join('\n');
   }
 
+  String get classDeclaration => 'class $shortName extends IInspectable'
+      '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
+
   bool get hasDefaultConstructor => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
       .where((element) => element.parameters.length == 2)
       .isNotEmpty;
+
+  String get defaultConstructor => hasDefaultConstructor
+      ? '''
+      $shortName({Allocator allocator = calloc})
+          : super(ActivateClass(_className, allocator: allocator));'''
+      : '';
 
   List<String> get factoryInterfaces => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
@@ -135,13 +122,47 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  String get classDeclaration => 'class $shortName extends IInspectable '
-      '${inheritsFrom.isEmpty ? '' : 'implements $inheritsFrom'} {';
+  // Clone the list, otherwise isStringable will give unpredictable results.
+  List<TypeDef> get implementsInterfaces =>
+      [...typeDef.interfaces]..removeWhere(
+          (interface) => interface.name == 'Windows.Foundation.IStringable');
 
-  String get defaultConstructor => hasDefaultConstructor
+  String get implementsMappers {
+    final buffer = StringBuffer();
+    for (final interface in implementsInterfaces) {
+      final interfaceName = lastComponent(interface.name);
+      buffer.writeln('  // $interfaceName methods');
+
+      // Write out the private field identifier for the interface
+      final fieldIdentifier = '_i${interfaceName.substring(1)}';
+      final iid = 'IID_$interfaceName';
+      buffer.writeln(
+          'late final $fieldIdentifier = $interfaceName(toInterface($iid));');
+
+      final projection = WinRTInterfaceProjection(interface);
+      for (final method in projection.methodProjections) {
+        buffer.writeln('\n@override');
+
+        // e.g. `int get Second` or `void AddHours(int hours)`
+        final declaration = method.toString().split('{').first;
+        buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
+      }
+    }
+    return buffer.toString();
+  }
+
+  bool get isStringable => typeDef.interfaces
+      .map((i) => i.name)
+      .contains('Windows.Foundation.IStringable');
+
+  String get stringableMappers => isStringable
       ? '''
-      $shortName({Allocator allocator = calloc})
-          : super(ActivateClass(_className, allocator: allocator));'''
+    // IStringable methods
+    late final _iStringable = IStringable(toInterface(IID_IStringable));
+
+    @override
+    String toString() => _iStringable.ToString();
+  '''
       : '';
 
   @override
@@ -162,7 +183,8 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
         $factoryMappers
         $staticMappers
-        $interfaceMappers
+        $implementsMappers
+        $stringableMappers
       }
     ''';
   }

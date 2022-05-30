@@ -359,10 +359,8 @@ void main() {
 
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.inheritsFrom, isNotEmpty);
-    expect(
-        projection.classDeclaration,
-        equals(
-            'class HostName extends IInspectable implements IHostName, IStringable {'));
+    expect(projection.classDeclaration,
+        equals('class HostName extends IInspectable implements IHostName {'));
   });
 
   test('WinRT class does not include implements keyword in class declaration',
@@ -374,5 +372,29 @@ void main() {
     expect(projection.inheritsFrom, isEmpty);
     expect(projection.classDeclaration,
         equals('class Launcher extends IInspectable {'));
+  });
+
+  test('WinRT class that inherits IStringable has Dart toString()', () {
+    //
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.isStringable, isTrue);
+    expect(projection.inheritsFrom, isNot(contains('IStringable')));
+    expect(projection.stringableMappers, isNotEmpty);
+    expect(projection.stringableMappers, contains('String toString() => '));
+    expect(projection.interfaceImport, contains('istringable.dart'));
+  });
+
+  test('WinRT class that does not inherit IStringable', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.Calendar');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.isStringable, isFalse);
+    expect(projection.inheritsFrom, isNot(contains('IStringable')));
+    expect(projection.stringableMappers, isEmpty);
+    expect(projection.interfaceImport, isNot(contains('istringable.dart')));
   });
 }
