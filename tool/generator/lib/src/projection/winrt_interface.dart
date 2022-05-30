@@ -40,12 +40,18 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     }
 
     if (typeDef.isDelegate) {
+      // TODO: Update this once we generate WinRT delegates in their respective
+      // folders e.g. Windows.Foundation.AsyncActionCompletedHandler -> foundation/delegates.g.dart
       return '';
     } else if (typeDef.isEnum) {
+      // TODO: Update this once we generate WinRT enums in their respective
+      // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
       return '';
     } else if (typeDef.isClass || typeDef.isInterface) {
       return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last.split('`').first).toLowerCase()}.dart';
     } else {
+      // TODO: Update this once we generate WinRT structs in their respective
+      // folders e.g. Windows.Foundation.Point -> foundation/structs.g.dart
       return 'structs.g.dart';
     }
   }
