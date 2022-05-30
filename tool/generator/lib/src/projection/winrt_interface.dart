@@ -21,14 +21,28 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     }
   }
 
+  static const ignoredWinRTTypes = <String>{
+    // This is exposed as dart:core's DateTime
+    'Windows.Foundation.DateTime',
+
+    // These are exposed as int
+    'Windows.Foundation.EventRegistrationToken',
+    'Windows.Foundation.HResult',
+
+    // This is exposoed as dart:core's Duration
+    'Windows.Foundation.TimeSpan',
+  };
+
   @override
   String getImportForTypeDef(TypeDef typeDef) {
+    if (typeDef.name.isEmpty || ignoredWinRTTypes.contains(typeDef.name)) {
+      return '';
+    }
+
     if (typeDef.isDelegate) {
       return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
     } else if (typeDef.isInterface) {
       return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
-    } else if (typeDef.name.isEmpty) {
-      return '';
     } else {
       return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
