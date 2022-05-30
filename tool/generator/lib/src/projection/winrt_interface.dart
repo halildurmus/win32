@@ -69,7 +69,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get importHeader {
     final imports = {...interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == 'iinspectable.dart');
+      ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
     return imports.map((import) => "import '$import';").join('\n');
   }
 
