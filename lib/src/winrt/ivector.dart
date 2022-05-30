@@ -1,29 +1,24 @@
-// IVector.dart
+// ivector.dart
 
-// ignore_for_file: unused_import, directives_ordering
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names,
+// ignore_for_file: unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../callbacks.dart';
+import '../com/iinspectable.dart';
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
 import '../extensions/comobject_pointer.dart';
-import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
 import '../winrt_helpers.dart';
-import '../com/iinspectable.dart';
+import 'iiterable.dart';
+import 'iiterator.dart';
 import 'ivectorview.dart';
 
 /// @nodoc
@@ -31,11 +26,11 @@ const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IVector<T> extends IInspectable {
-  T Function(Pointer<COMObject>)? creator;
-  final Allocator allocator;
-
+class IVector<T> extends IInspectable implements IIterable<T> {
   // vtable begins at 6, is 12 entries long.
+  final T Function(Pointer<COMObject>)? _creator;
+  final Allocator _allocator;
+
   /// Creates an instance of `IVector<T>` using the given `ptr`.
   ///
   /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
@@ -58,19 +53,23 @@ class IVector<T> extends IInspectable {
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
-  /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
+  /// with it. A FFI `Arena` may be passed as a custom allocator for ease of
   /// memory management.
   ///
   /// {@category winrt}
-  IVector(super.ptr, {this.creator, this.allocator = calloc}) {
+  IVector(super.ptr,
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
+      : _creator = creator,
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
-    if (![String].contains(T) && creator == null) {
+    if (![String].contains(T) && _creator == null) {
       throw ArgumentError(
           '`creator` parameter must be specified for WinRT types!');
     }
   }
 
+  /// Returns the item at the specified index in the vector.
   T GetAt(int index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -79,12 +78,12 @@ class IVector<T> extends IInspectable {
         return _GetAt_String(index) as T;
       // Handle WinRT types
       default:
-        return creator!(_GetAt_COMObject(index));
+        return _creator!(_GetAt_COMObject(index));
     }
   }
 
   Pointer<COMObject> _GetAt_COMObject(int index) {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(6)
@@ -141,6 +140,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Gets the number of items in the vector.
   int get Size {
     final retValuePtr = calloc<Uint32>();
 
@@ -170,8 +170,9 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Returns an immutable view of the vector.
   List<T> get GetView {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(8)
@@ -191,10 +192,11 @@ class IVector<T> extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView(retValuePtr, creator: creator, allocator: allocator)
+    return IVectorView(retValuePtr, creator: _creator, allocator: _allocator)
         .toList();
   }
 
+  /// Retrieves the index of a specified item in the vector.
   bool IndexOf(T value, Pointer<Uint32> index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -280,6 +282,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Sets the value at the specified index in the vector.
   void SetAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -345,6 +348,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Inserts an item at a specified index in the vector.
   void InsertAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -405,6 +409,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Removes the item at the specified index in the vector.
   void RemoveAt(int index) {
     final hr = ptr.ref.vtable
         .elementAt(12)
@@ -424,6 +429,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Appends an item to the end of the vector.
   void Append(T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -475,6 +481,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Removes the last item from the vector.
   void RemoveAtEnd() {
     final hr = ptr.ref.vtable
         .elementAt(14)
@@ -485,6 +492,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Removes all items from the vector.
   void Clear() {
     final hr = ptr.ref.vtable
         .elementAt(15)
@@ -495,6 +503,7 @@ class IVector<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
+  /// Retrieves multiple items from the the vector beginning at the given index.
   int GetMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -579,6 +588,7 @@ class IVector<T> extends IInspectable {
     }
   }
 
+  /// Replaces all the items in the vector with the specified items.
   void ReplaceAll(List<T> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -587,14 +597,14 @@ class IVector<T> extends IInspectable {
         return _ReplaceAll_String(items as List<String>);
       // Handle WinRT types
       default:
-        return _ReplaceAll_COMObject(items);
+        return _ReplaceAll_COMObject(items as List<IInspectable>);
     }
   }
 
-  void _ReplaceAll_COMObject(List<T> items) {
+  void _ReplaceAll_COMObject(List<IInspectable> items) {
     final pArray = calloc<COMObject>(items.length);
     for (var i = 0; i < items.length; i++) {
-      final pElement = (items.elementAt(i) as IInspectable).ptr;
+      final pElement = items.elementAt(i).ptr;
       pArray[i] = pElement.ref.lpVtbl;
     }
 
@@ -661,10 +671,15 @@ class IVector<T> extends IInspectable {
 
   /// Creates a `List<T>` from the `IVector<T>`.
   List<T> toList() {
-    if (Size == 0) {
-      return <T>[];
-    }
-
-    return VectorHelper(creator, GetMany, Size, allocator: allocator).toList();
+    if (Size == 0) return [];
+    return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
+        .toList();
   }
+
+  // IID_IIterable is always the second item on the iids list for IVector
+  late final _iIterable = IIterable<T>(toInterface(iids[1]),
+      creator: _creator, allocator: _allocator);
+
+  @override
+  IIterator<T> First() => _iIterable.First();
 }

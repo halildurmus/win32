@@ -1,39 +1,33 @@
-// IVectorView.dart
+// ivectorview.dart
 
-// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../callbacks.dart';
+import '../com/iinspectable.dart';
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
-import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
 import '../types.dart';
 import '../utils.dart';
 import '../winrt/internal/winrt_vector_helper.dart';
 import '../winrt_helpers.dart';
-import '../com/iinspectable.dart';
+import 'iiterable.dart';
+import 'iiterator.dart';
 
 /// @nodoc
 const IID_IVectorView = '{BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IVectorView<T> extends IInspectable {
-  T Function(Pointer<COMObject>)? creator;
-  final Allocator allocator;
-
+class IVectorView<T> extends IInspectable implements IIterable<T> {
   // vtable begins at 6, is 4 entries long.
+  final T Function(Pointer<COMObject>)? _creator;
+  final Allocator _allocator;
+
   /// Creates an instance of `IVectorView<T>` using the given `ptr`.
   ///
   /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
@@ -56,9 +50,12 @@ class IVectorView<T> extends IInspectable {
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
-  /// with it. A FFI `Arena` may be passed as a  custom allocator for ease of
+  /// with it. A FFI `Arena` may be passed as a custom allocator for ease of
   /// memory management.
-  IVectorView(super.ptr, {this.creator, this.allocator = calloc}) {
+  IVectorView(super.ptr,
+      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
+      : _creator = creator,
+        _allocator = allocator {
     // TODO: Need to update this once we add support for types like `int`,
     // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
     if (![String].contains(T) && creator == null) {
@@ -67,6 +64,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Returns the item at the specified index in the vector view.
   T GetAt(int index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -75,12 +73,12 @@ class IVectorView<T> extends IInspectable {
         return _GetAt_String(index) as T;
       // Handle WinRT types
       default:
-        return creator!(_GetAt_COMObject(index));
+        return _creator!(_GetAt_COMObject(index));
     }
   }
 
   Pointer<COMObject> _GetAt_COMObject(int index) {
-    final retValuePtr = allocator<COMObject>();
+    final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
         .elementAt(6)
@@ -137,6 +135,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Gets the number of items in the vector view.
   int get Size {
     final retValuePtr = calloc<Uint32>();
 
@@ -166,6 +165,7 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Retrieves the index of a specified item in the vector view.
   bool IndexOf(T value, Pointer<Uint32> index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -251,6 +251,8 @@ class IVectorView<T> extends IInspectable {
     }
   }
 
+  /// Retrieves multiple items from the vector view beginning at the given
+  /// index.
   int GetMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
@@ -347,10 +349,15 @@ class IVectorView<T> extends IInspectable {
 
   /// Creates a `List<T>` from the `IVectorView<T>`.
   List<T> toList() {
-    if (Size == 0) {
-      return [];
-    }
-
-    return VectorHelper(creator, GetMany, Size, allocator: allocator).toList();
+    if (Size == 0) return [];
+    return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
+        .toList();
   }
+
+  // IID_IIterable is always the last item on the iids list for IVectorView
+  late final _iIterable = IIterable<T>(toInterface(iids.last),
+      creator: _creator, allocator: _allocator);
+
+  @override
+  IIterator<T> First() => _iIterable.First();
 }

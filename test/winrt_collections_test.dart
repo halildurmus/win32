@@ -241,6 +241,21 @@ void main() {
         expect(list.elementAt(2), equals('.png'));
       });
 
+      test('First', () {
+        vector
+          ..Append('.jpg')
+          ..Append('.jpeg')
+          ..Append('.png');
+        final iterator = vector.First();
+        expect(iterator.HasCurrent, true);
+        expect(iterator.Current, equals('.jpg'));
+        expect(iterator.MoveNext(), true);
+        expect(iterator.Current, equals('.jpeg'));
+        expect(iterator.MoveNext(), true);
+        expect(iterator.Current, equals('.png'));
+        expect(iterator.MoveNext(), false);
+      });
+
       tearDown(() {
         free(picker.ptr);
         allocator.releaseAll(reuse: true);
@@ -323,6 +338,19 @@ void main() {
         expect(list.first.length, equals(5));
       });
 
+      test('First', () {
+        final list = vectorView.toList();
+        final iterator = vectorView.First();
+
+        for (var i = 0; i < list.length; i++) {
+          expect(iterator.HasCurrent, true);
+          // Should be something like en-US
+          expect(iterator.Current[2], equals('-'));
+          // MoveNext() should return true except for the last iteration
+          expect(iterator.MoveNext(), i < list.length - 1);
+        }
+      });
+
       tearDown(() {
         free(calendar.ptr);
         allocator.releaseAll(reuse: true);
@@ -403,6 +431,18 @@ void main() {
       test('toList', () {
         final list = vectorView.toList();
         expect(list.length, greaterThanOrEqualTo(1));
+      });
+
+      test('First', () {
+        final list = vectorView.toList();
+        final iterator = vectorView.First();
+
+        for (var i = 0; i < list.length; i++) {
+          expect(iterator.HasCurrent, true);
+          expect(iterator.Current.RawName, equals(list[i].RawName));
+          // MoveNext() should return true except for the last iteration
+          expect(iterator.MoveNext(), i < list.length - 1);
+        }
       });
 
       tearDown(() {
