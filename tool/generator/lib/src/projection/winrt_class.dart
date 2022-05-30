@@ -43,7 +43,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       ...factoryInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
       ...staticInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
       ...importsForClass()
-    }..removeWhere((item) => item == 'iinspectable.dart');
+    }..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
     return imports.map((import) => "import '$import';").join('\n');
   }
 
@@ -135,8 +135,8 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  String get classDeclaration =>
-      '''class $shortName extends IInspectable${inheritsFrom.isEmpty ? '' : ' implements $inheritsFrom'} {''';
+  String get classDeclaration => 'class $shortName extends IInspectable '
+      '${inheritsFrom.isEmpty ? '' : 'implements $inheritsFrom'} {';
 
   String get defaultConstructor => hasDefaultConstructor
       ? '''

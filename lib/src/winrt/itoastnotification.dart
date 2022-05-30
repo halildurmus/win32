@@ -19,9 +19,12 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'ivector.dart';
-import 'ivectorview.dart';
 
+import 'xmldocument.dart';
+import 'ireference.dart';
+import 'toastnotification.dart';
+import 'toastdismissedeventargs.dart';
+import 'toastfailedeventargs.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc

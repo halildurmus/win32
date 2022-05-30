@@ -19,10 +19,10 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'ivector.dart';
-import 'ivectorview.dart';
 
 import 'igamepadstatics.dart';
+import 'igamecontroller.dart';
+import 'gamepad.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc

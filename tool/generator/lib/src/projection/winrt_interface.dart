@@ -21,16 +21,40 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     }
   }
 
+  static const ignoredWinRTTypes = <String>{
+    // This is exposed as dart:core's DateTime
+    'Windows.Foundation.DateTime',
+
+    // These are exposed as int
+    'Windows.Foundation.EventRegistrationToken',
+    'Windows.Foundation.HResult',
+
+    // This is exposed as dart:core's Duration
+    'Windows.Foundation.TimeSpan',
+  };
+
   @override
   String getImportForTypeDef(TypeDef typeDef) {
-    if (typeDef.isDelegate) {
-      return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
-    } else if (typeDef.isInterface) {
-      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
-    } else if (typeDef.name.isEmpty) {
+    if (typeDef.name.isEmpty ||
+        this.typeDef.name == typeDef.name ||
+        ignoredWinRTTypes.contains(typeDef.name)) {
       return '';
+    }
+
+    if (typeDef.isDelegate) {
+      // TODO: Update this once we generate WinRT delegates in their respective
+      // folders e.g. Windows.Foundation.AsyncActionCompletedHandler -> foundation/delegates.g.dart
+      return '';
+    } else if (typeDef.isEnum) {
+      // TODO: Update this once we generate WinRT enums in their respective
+      // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
+      return '';
+    } else if (typeDef.isClass || typeDef.isInterface) {
+      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last.split('`').first).toLowerCase()}.dart';
     } else {
-      return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
+      // TODO: Update this once we generate WinRT structs in their respective
+      // folders e.g. Windows.Foundation.Point -> foundation/structs.g.dart
+      return 'structs.g.dart';
     }
   }
 
@@ -47,7 +71,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get importHeader {
     final imports = {...interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == 'iinspectable.dart');
+      ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
     return imports.map((import) => "import '$import';").join('\n');
   }
 
@@ -105,14 +129,11 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     import '../winrt_helpers.dart';
 
     import '../extensions/hstring_array.dart';
-    import 'ivector.dart';
-    import 'ivectorview.dart';
   """;
 
   @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
 
-  // TODO: Needs to vary depending on static vs. factory vs. interface
   @override
   String toString() {
     final extendsClause =
