@@ -42,7 +42,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     if (typeDef.isDelegate) {
       return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
+      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last.split('`').first).toLowerCase()}.dart';
     } else {
       return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
