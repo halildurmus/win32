@@ -41,6 +41,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
     if (typeDef.isDelegate) {
       return '';
+    } else if (typeDef.isEnum) {
+      return '';
     } else if (typeDef.isClass || typeDef.isInterface) {
       return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last.split('`').first).toLowerCase()}.dart';
     } else {
