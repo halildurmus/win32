@@ -135,8 +135,8 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  String get classDeclaration =>
-      '''class $shortName extends IInspectable${inheritsFrom.isEmpty ? '' : ' implements $inheritsFrom'} {''';
+  String get classDeclaration => 'class $shortName extends IInspectable '
+      '${inheritsFrom.isEmpty ? '' : 'implements $inheritsFrom'} {';
 
   String get defaultConstructor => hasDefaultConstructor
       ? '''

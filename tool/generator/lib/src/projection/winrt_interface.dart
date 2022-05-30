@@ -112,7 +112,6 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get shortName => typeDef.name.split('.').last.split('`').first;
 
-  // TODO: Needs to vary depending on static vs. factory vs. interface
   @override
   String toString() {
     final extendsClause =

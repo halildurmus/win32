@@ -28,16 +28,6 @@ class ComMethodProjection extends MethodProjection {
         ...parameters.map((param) => param.identifier)
       ].join(', ');
 
-  // TODO: Check whether there's a better way to detect how methods like
-  // put_AutoDemodulate are declared (should this be a property?) Detect whether
-  // it's a property masquerading as a method.
-  //
-  // The test should be the use of the get_ prefix, combined with the
-  // specialname modifier, but win32metadata incorrectly marks some methods with
-  // this combination (https://github.com/microsoft/win32metadata/issues/707).
-  // So instead, we also need to check the number of parameters.
-
-  // TODO: Consider using technique to cache the function lookup.
   @override
   String toString() {
     try {
