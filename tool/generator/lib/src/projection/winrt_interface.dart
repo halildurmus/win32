@@ -29,7 +29,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     'Windows.Foundation.EventRegistrationToken',
     'Windows.Foundation.HResult',
 
-    // This is exposoed as dart:core's Duration
+    // This is exposed as dart:core's Duration
     'Windows.Foundation.TimeSpan',
   };
 
