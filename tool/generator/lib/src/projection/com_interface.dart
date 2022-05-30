@@ -87,7 +87,7 @@ class ComInterfaceProjection {
       return 'specialTypes.dart';
     }
 
-    if (typeIdentifier.name.startsWith('Windows.Win32')) {
+    if (typeIdentifier.name.startsWith('Windows')) {
       return getImportForTypeDef(typeIdentifier.type!);
     }
 
