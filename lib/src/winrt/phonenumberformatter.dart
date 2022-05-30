@@ -19,11 +19,10 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'ivector.dart';
-import 'ivectorview.dart';
 
 import 'iphonenumberformatter.dart';
 import 'iphonenumberformatterstatics.dart';
+import 'phonenumberinfo.dart';
 import '../com/iinspectable.dart';
 
 /// {@category Class}
