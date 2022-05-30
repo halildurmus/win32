@@ -35,7 +35,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String getImportForTypeDef(TypeDef typeDef) {
-    if (typeDef.name.isEmpty || ignoredWinRTTypes.contains(typeDef.name)) {
+    if (typeDef.name.isEmpty ||
+        this.typeDef.name == typeDef.name ||
+        ignoredWinRTTypes.contains(typeDef.name)) {
       return '';
     }
 
