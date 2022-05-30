@@ -87,6 +87,8 @@ class ComInterfaceProjection {
       return 'specialTypes.dart';
     }
 
+    if (typeIdentifier.name == 'System.Guid') return '../guid.dart';
+
     if (typeIdentifier.name.startsWith('Windows')) {
       return getImportForTypeDef(typeIdentifier.type!);
     }
