@@ -19,13 +19,14 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'ivector.dart';
-import 'ivectorview.dart';
 
 import 'icalendar.dart';
 import 'itimezoneoncalendar.dart';
 import 'icalendarfactory.dart';
 import 'icalendarfactory2.dart';
+import 'iiterable.dart';
+import 'calendar.dart';
+import 'ivectorview.dart';
 import '../com/iinspectable.dart';
 
 /// {@category Class}

@@ -19,9 +19,9 @@ import '../types.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
-import 'ivector.dart';
-import 'ivectorview.dart';
 
+import 'ipinformation.dart';
+import 'hostname.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
