@@ -39,6 +39,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
           : super(ActivateClass(_className, allocator: allocator));'''
       : '';
 
+  String get classNameDeclaration => (hasDefaultConstructor ||
+          factoryMappers.isNotEmpty ||
+          staticMappers.isNotEmpty)
+      ? "static const _className = '${typeDef.name}';"
+      : '';
+
   List<String> get factoryInterfaces => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
       .where((element) => element.parameters.length == 3)
@@ -179,7 +185,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
         $defaultConstructor
         $shortName.fromPointer(super.ptr);
 
-        static const _className = '${typeDef.name}';
+        $classNameDeclaration
 
         $factoryMappers
         $staticMappers
