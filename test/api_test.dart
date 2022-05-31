@@ -2749,6 +2749,52 @@ void main() {
               Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
       expect(GetVersionEx, isA<Function>());
     });
+    test('Can instantiate GetVolumeInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetVolumeInformation = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpRootPathName,
+              Pointer<Utf16> lpVolumeNameBuffer,
+              Uint32 nVolumeNameSize,
+              Pointer<Uint32> lpVolumeSerialNumber,
+              Pointer<Uint32> lpMaximumComponentLength,
+              Pointer<Uint32> lpFileSystemFlags,
+              Pointer<Utf16> lpFileSystemNameBuffer,
+              Uint32 nFileSystemNameSize),
+          int Function(
+              Pointer<Utf16> lpRootPathName,
+              Pointer<Utf16> lpVolumeNameBuffer,
+              int nVolumeNameSize,
+              Pointer<Uint32> lpVolumeSerialNumber,
+              Pointer<Uint32> lpMaximumComponentLength,
+              Pointer<Uint32> lpFileSystemFlags,
+              Pointer<Utf16> lpFileSystemNameBuffer,
+              int nFileSystemNameSize)>('GetVolumeInformationW');
+      expect(GetVolumeInformation, isA<Function>());
+    });
+    test('Can instantiate GetVolumeInformationByHandle', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetVolumeInformationByHandle = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hFile,
+              Pointer<Utf16> lpVolumeNameBuffer,
+              Uint32 nVolumeNameSize,
+              Pointer<Uint32> lpVolumeSerialNumber,
+              Pointer<Uint32> lpMaximumComponentLength,
+              Pointer<Uint32> lpFileSystemFlags,
+              Pointer<Utf16> lpFileSystemNameBuffer,
+              Uint32 nFileSystemNameSize),
+          int Function(
+              int hFile,
+              Pointer<Utf16> lpVolumeNameBuffer,
+              int nVolumeNameSize,
+              Pointer<Uint32> lpVolumeSerialNumber,
+              Pointer<Uint32> lpMaximumComponentLength,
+              Pointer<Uint32> lpFileSystemFlags,
+              Pointer<Utf16> lpFileSystemNameBuffer,
+              int nFileSystemNameSize)>('GetVolumeInformationByHandleW');
+      expect(GetVolumeInformationByHandle, isA<Function>());
+    });
     test('Can instantiate GetVolumePathName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetVolumePathName = kernel32.lookupFunction<
@@ -3365,6 +3411,13 @@ void main() {
               Pointer<Utf16> lpValue)>('SetEnvironmentVariableW');
       expect(SetEnvironmentVariable, isA<Function>());
     });
+    test('Can instantiate SetErrorMode', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetErrorMode = kernel32.lookupFunction<
+          Uint32 Function(Uint32 uMode),
+          int Function(int uMode)>('SetErrorMode');
+      expect(SetErrorMode, isA<Function>());
+    });
     test('Can instantiate SetEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetEvent = kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
@@ -3489,6 +3542,14 @@ void main() {
           int Function(
               int hThread, int dwThreadAffinityMask)>('SetThreadAffinityMask');
       expect(SetThreadAffinityMask, isA<Function>());
+    });
+    test('Can instantiate SetThreadErrorMode', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetThreadErrorMode = kernel32.lookupFunction<
+          Int32 Function(Uint32 dwNewMode, Pointer<Uint32> lpOldMode),
+          int Function(
+              int dwNewMode, Pointer<Uint32> lpOldMode)>('SetThreadErrorMode');
+      expect(SetThreadErrorMode, isA<Function>());
     });
     test('Can instantiate SetThreadExecutionState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

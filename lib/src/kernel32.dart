@@ -3479,6 +3479,116 @@ final _GetVersionEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
     int Function(Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
 
+/// Retrieves information about the file system and volume associated with
+/// the specified root directory.
+///
+/// ```c
+/// BOOL GetVolumeInformationW(
+///   LPCWSTR lpRootPathName,
+///   LPWSTR  lpVolumeNameBuffer,
+///   DWORD   nVolumeNameSize,
+///   LPDWORD lpVolumeSerialNumber,
+///   LPDWORD lpMaximumComponentLength,
+///   LPDWORD lpFileSystemFlags,
+///   LPWSTR  lpFileSystemNameBuffer,
+///   DWORD   nFileSystemNameSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetVolumeInformation(
+        Pointer<Utf16> lpRootPathName,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        int nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        int nFileSystemNameSize) =>
+    _GetVolumeInformation(
+        lpRootPathName,
+        lpVolumeNameBuffer,
+        nVolumeNameSize,
+        lpVolumeSerialNumber,
+        lpMaximumComponentLength,
+        lpFileSystemFlags,
+        lpFileSystemNameBuffer,
+        nFileSystemNameSize);
+
+final _GetVolumeInformation = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<Utf16> lpRootPathName,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        Uint32 nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        Uint32 nFileSystemNameSize),
+    int Function(
+        Pointer<Utf16> lpRootPathName,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        int nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        int nFileSystemNameSize)>('GetVolumeInformationW');
+
+/// Retrieves information about the file system and volume associated with
+/// the specified file.
+///
+/// ```c
+/// BOOL GetVolumeInformationByHandleW(
+///   HANDLE  hFile,
+///   LPWSTR  lpVolumeNameBuffer,
+///   DWORD   nVolumeNameSize,
+///   LPDWORD lpVolumeSerialNumber,
+///   LPDWORD lpMaximumComponentLength,
+///   LPDWORD lpFileSystemFlags,
+///   LPWSTR  lpFileSystemNameBuffer,
+///   DWORD   nFileSystemNameSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetVolumeInformationByHandle(
+        int hFile,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        int nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        int nFileSystemNameSize) =>
+    _GetVolumeInformationByHandle(
+        hFile,
+        lpVolumeNameBuffer,
+        nVolumeNameSize,
+        lpVolumeSerialNumber,
+        lpMaximumComponentLength,
+        lpFileSystemFlags,
+        lpFileSystemNameBuffer,
+        nFileSystemNameSize);
+
+final _GetVolumeInformationByHandle = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        Uint32 nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        Uint32 nFileSystemNameSize),
+    int Function(
+        int hFile,
+        Pointer<Utf16> lpVolumeNameBuffer,
+        int nVolumeNameSize,
+        Pointer<Uint32> lpVolumeSerialNumber,
+        Pointer<Uint32> lpMaximumComponentLength,
+        Pointer<Uint32> lpFileSystemFlags,
+        Pointer<Utf16> lpFileSystemNameBuffer,
+        int nFileSystemNameSize)>('GetVolumeInformationByHandleW');
+
 /// Retrieves the volume mount point where the specified path is mounted.
 ///
 /// ```c
@@ -4789,6 +4899,19 @@ final _SetEnvironmentVariable = _kernel32.lookupFunction<
 /// Sets the specified event object to the signaled state.
 ///
 /// ```c
+/// UINT SetErrorMode(
+///   UINT uMode
+/// );
+/// ```
+/// {@category kernel32}
+int SetErrorMode(int uMode) => _SetErrorMode(uMode);
+
+final _SetErrorMode = _kernel32.lookupFunction<Uint32 Function(Uint32 uMode),
+    int Function(int uMode)>('SetErrorMode');
+
+/// Sets the specified event object to the signaled state.
+///
+/// ```c
 /// BOOL SetEvent(
 ///   HANDLE hEvent
 /// );
@@ -5046,6 +5169,24 @@ final _SetThreadAffinityMask = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hThread, IntPtr dwThreadAffinityMask),
     int Function(
         int hThread, int dwThreadAffinityMask)>('SetThreadAffinityMask');
+
+/// Controls whether the system will handle the specified types of serious
+/// errors or whether the calling thread will handle them.
+///
+/// ```c
+/// BOOL SetThreadErrorMode(
+///   DWORD   dwNewMode,
+///   LPDWORD lpOldMode
+/// );
+/// ```
+/// {@category kernel32}
+int SetThreadErrorMode(int dwNewMode, Pointer<Uint32> lpOldMode) =>
+    _SetThreadErrorMode(dwNewMode, lpOldMode);
+
+final _SetThreadErrorMode = _kernel32.lookupFunction<
+    Int32 Function(Uint32 dwNewMode, Pointer<Uint32> lpOldMode),
+    int Function(
+        int dwNewMode, Pointer<Uint32> lpOldMode)>('SetThreadErrorMode');
 
 /// Enables an application to inform the system that it is in use, thereby
 /// preventing the system from entering sleep or turning off the display
