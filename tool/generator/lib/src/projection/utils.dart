@@ -75,7 +75,7 @@ String lastComponent(String fullyQualifiedType) =>
 
 /// Convert a nested type to a guaranteed-unique name.
 String mangleName(TypeDef typeDef) {
-  final name = typeDef.name.split('.').last;
+  final name = lastComponent(typeDef.name);
   if (!typeDef.isNested) {
     return '_$name';
   }

@@ -13,7 +13,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get inheritsFrom {
     if (typeDef.interfaces.isNotEmpty) {
-      return typeDef.interfaces.first.name.split('.').last;
+      return lastComponent(typeDef.interfaces.first.name);
     } else if (!typeDef.name.endsWith('IUnknown')) {
       return 'IInspectable';
     } else {
@@ -50,7 +50,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
       return '';
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return '${stripAnsiUnicodeSuffix(typeDef.name.split('.').last.split('`').first).toLowerCase()}.dart';
+      return '${stripAnsiUnicodeSuffix(stripGenerics(lastComponent(typeDef.name))).toLowerCase()}.dart';
     } else {
       // TODO: Update this once we generate WinRT structs in their respective
       // folders e.g. Windows.Foundation.Point -> foundation/structs.g.dart
@@ -133,7 +133,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   """;
 
   @override
-  String get shortName => typeDef.name.split('.').last.split('`').first;
+  String get shortName => stripGenerics(lastComponent(typeDef.name));
 
   @override
   String toString() {

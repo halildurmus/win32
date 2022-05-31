@@ -236,7 +236,7 @@ void generateComApis() {
     // Generate class
     final dartClass = comObject.toString();
     final classOutputFilename =
-        stripAnsiUnicodeSuffix(interface.split('.').last).toLowerCase();
+        stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
     final classOutputPath = '../../lib/src/com/$classOutputFilename.dart';
 
     File(classOutputPath).writeAsStringSync(DartFormatter().format(dartClass));
@@ -261,7 +261,7 @@ void generateWinRTApis() {
     final dartClass = interfaceProjection.toString();
 
     final classOutputFilename =
-        stripAnsiUnicodeSuffix(interface.split('.').last).toLowerCase();
+        stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
     final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
 
     try {

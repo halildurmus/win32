@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import '../projection/utils.dart';
 import 'version.dart';
 
 String v2ParentImport(List<TypeDef> parentInterfaces) {
@@ -18,7 +19,7 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
 
   if (parentInterfaces.isNotEmpty) {
     final interfaceName =
-        parentInterfaces.first.name.split('.').last.toLowerCase();
+        lastComponent(parentInterfaces.first.name).toLowerCase();
     if (interfaceName.isNotEmpty) {
       return "$v2StandardImports\nimport '$interfaceName.dart';";
     }
