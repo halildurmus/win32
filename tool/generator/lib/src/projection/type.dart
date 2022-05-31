@@ -113,6 +113,11 @@ class TypeProjection {
 
   bool get isWin32Delegate =>
       typeIdentifier.baseType == BaseType.classTypeModifier &&
+      typeIdentifier.name.startsWith('Windows.Win32') &&
+      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+
+  bool get isWinRTDelegate =>
+      (typeIdentifier.type?.isWindowsRuntime ?? false) &&
       typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
@@ -257,6 +262,14 @@ class TypeProjection {
 
     if (isWin32Delegate) {
       return unwrapCallbackType();
+    }
+
+    if (isWinRTDelegate) {
+      final delegateName = stripGenerics(
+          stripLeadingUnderscores(lastComponent(typeIdentifier.name)));
+
+      return TypeTuple('Pointer<NativeFunction<$delegateName>>',
+          'Pointer<NativeFunction<$delegateName>>');
     }
 
     if (isInterface ||

@@ -43,7 +43,7 @@ class ComMethodProjection extends MethodProjection {
       // completely bail out. The rest may be useful.
 
       // TODO: Fix these errors as they occur.
-      print('Unable to project method: ${method.name}');
+      print('Unable to project COM method: ${method.name}');
       return '';
     }
   }

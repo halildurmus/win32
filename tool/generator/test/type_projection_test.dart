@@ -571,4 +571,15 @@ void main() {
     expect(typeProjection.nativeType, equals('IntPtr'));
     expect(typeProjection.isDartPrimitive, isTrue);
   });
+
+  test('Event handler types are projected correctly', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.ToastNotification')!;
+    final method = winTypeDef.findMethod('add_Activated')!;
+    final param = method.parameters.first;
+    final projection = TypeProjection(param.typeIdentifier);
+    // TypedEventHandler<ToastNotification, object>
+    expect(projection.projection.dartType,
+        equals('Pointer<NativeFunction<TypedEventHandler>>'));
+  });
 }
