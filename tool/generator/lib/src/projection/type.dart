@@ -149,7 +149,7 @@ class TypeProjection {
       return TypeTuple(typeClass, typeClass);
     }
 
-    final typeClass = stripAnsiUnicodeSuffix(wrappedType.name.split('.').last);
+    final typeClass = stripAnsiUnicodeSuffix(lastComponent(wrappedType.name));
     return TypeTuple(typeClass, typeClass);
   }
 

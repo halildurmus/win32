@@ -76,7 +76,7 @@ class ComInterfaceProjection {
     if (typeDef.isDelegate) {
       return '${folderFromNamespace(typeDef.name)}/callbacks.g.dart';
     } else if (typeDef.isInterface) {
-      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(typeDef.name.split('.').last).toLowerCase()}.dart';
+      return '${folderFromNamespace(typeDef.name)}/${stripAnsiUnicodeSuffix(lastComponent(typeDef.name)).toLowerCase()}.dart';
     } else {
       return '${folderFromNamespace(typeDef.name)}/structs.g.dart';
     }
