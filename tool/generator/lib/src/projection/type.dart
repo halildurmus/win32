@@ -113,6 +113,11 @@ class TypeProjection {
 
   bool get isWin32Delegate =>
       typeIdentifier.baseType == BaseType.classTypeModifier &&
+      typeIdentifier.name.startsWith('Windows.Win32') &&
+      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+
+  bool get isWinRTDelegate =>
+      (typeIdentifier.type?.isWindowsRuntime ?? false) &&
       typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
@@ -257,6 +262,11 @@ class TypeProjection {
 
     if (isWin32Delegate) {
       return unwrapCallbackType();
+    }
+
+    if (isWinRTDelegate) {
+      // TODO: Need to figure this out properly, but this will do for now.
+      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
     }
 
     if (isInterface ||
