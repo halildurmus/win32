@@ -126,6 +126,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     import '../macros.dart';
     import '../utils.dart';
     import '../types.dart';
+    import '../winrt_callbacks.dart';
     import '../winrt_helpers.dart';
 
     import '../extensions/hstring_array.dart';

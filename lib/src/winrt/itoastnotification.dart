@@ -16,6 +16,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../utils.dart';
 import '../types.dart';
+import '../winrt_callbacks.dart';
 import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
@@ -86,24 +87,25 @@ class IToastNotification extends IInspectable {
     return retValuePtr;
   }
 
-  int add_Dismissed(Pointer<COMObject> handler) {
+  int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) {
     final retValuePtr = calloc<IntPtr>();
 
     try {
       final hr = ptr.ref.vtable
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject> handler,
-                              Pointer<IntPtr>)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> handler, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl,
-          handler.cast<Pointer<COMObject>>().value,
-          retValuePtr);
+          .elementAt(9)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+                          Pointer,
+                          Pointer<NativeFunction<TypedEventHandler>> handler,
+                          Pointer<IntPtr>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<NativeFunction<TypedEventHandler>> handler,
+                  Pointer<IntPtr>)>()(ptr.ref.lpVtbl, handler, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -125,24 +127,25 @@ class IToastNotification extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int add_Activated(Pointer<COMObject> handler) {
+  int add_Activated(Pointer<NativeFunction<TypedEventHandler>> handler) {
     final retValuePtr = calloc<IntPtr>();
 
     try {
       final hr = ptr.ref.vtable
-              .elementAt(11)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject> handler,
-                              Pointer<IntPtr>)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> handler, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl,
-          handler.cast<Pointer<COMObject>>().value,
-          retValuePtr);
+          .elementAt(11)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+                          Pointer,
+                          Pointer<NativeFunction<TypedEventHandler>> handler,
+                          Pointer<IntPtr>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<NativeFunction<TypedEventHandler>> handler,
+                  Pointer<IntPtr>)>()(ptr.ref.lpVtbl, handler, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -164,24 +167,25 @@ class IToastNotification extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int add_Failed(Pointer<COMObject> handler) {
+  int add_Failed(Pointer<NativeFunction<TypedEventHandler>> handler) {
     final retValuePtr = calloc<IntPtr>();
 
     try {
       final hr = ptr.ref.vtable
-              .elementAt(13)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject> handler,
-                              Pointer<IntPtr>)>>>()
-              .value
-              .asFunction<
-                  int Function(
-                      Pointer, Pointer<COMObject> handler, Pointer<IntPtr>)>()(
-          ptr.ref.lpVtbl,
-          handler.cast<Pointer<COMObject>>().value,
-          retValuePtr);
+          .elementAt(13)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+                          Pointer,
+                          Pointer<NativeFunction<TypedEventHandler>> handler,
+                          Pointer<IntPtr>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer,
+                  Pointer<NativeFunction<TypedEventHandler>> handler,
+                  Pointer<IntPtr>)>()(ptr.ref.lpVtbl, handler, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

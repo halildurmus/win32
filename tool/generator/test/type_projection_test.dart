@@ -579,6 +579,7 @@ void main() {
     final param = method.parameters.first;
     final projection = TypeProjection(param.typeIdentifier);
     // TypedEventHandler<ToastNotification, object>
-    expect(projection.projection.dartType, equals('Pointer<COMObject>'));
+    expect(projection.projection.dartType,
+        equals('Pointer<NativeFunction<TypedEventHandler>>'));
   });
 }
