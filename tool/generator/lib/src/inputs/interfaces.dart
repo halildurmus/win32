@@ -108,6 +108,12 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
+  'Windows.Gaming.Input.Gamepad',
+  'Windows.Gaming.Input.IGameController',
+  'Windows.Gaming.Input.IGameControllerBatteryInfo',
+  'Windows.Gaming.Input.IGamepad',
+  'Windows.Gaming.Input.IGamepad2',
+  'Windows.Gaming.Input.IGamepadStatics',
   'Windows.Gaming.Input.IGamepadStatics2',
   'Windows.Globalization.Calendar',
   'Windows.Globalization.ICalendar',
@@ -132,6 +138,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.UI.Notifications.IToastNotification6',
   'Windows.UI.Notifications.IToastNotificationFactory',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  'Windows.UI.Notifications.ToastNotification',
 
   // These types are generated manually by design:
   //   'Windows.Foundation.Collections.IIterable`1',
@@ -153,6 +160,4 @@ final windowsRuntimeTypesToGenerate = <String>{
   //
   //   Requires WinRT event support
   //   'Windows.Networking.Connectivity.INetworkInformationStatics',
-  //   'Windows.Gaming.Input.IGamepadStatics',
-  //   'Windows.UI.Notifications.ToastNotification',
 };
