@@ -16,6 +16,12 @@ void main() {
     expect(stripAnsiUnicodeSuffix('ENUMLOGFONTEXW'), equals('ENUMLOGFONTEX'));
   });
 
+  test('stripGenerics', () {
+    expect(stripGenerics('TypedEventHandler`2'), equals('TypedEventHandler'));
+    expect(stripGenerics('LicenseChangedEventHandler'),
+        equals('LicenseChangedEventHandler'));
+  });
+
   test('typedefIsAnsi', () {
     final scope = MetadataStore.getWin32Scope();
     final rgnData = scope.findTypeDef('Windows.Win32.Graphics.Gdi.RGNDATA')!;

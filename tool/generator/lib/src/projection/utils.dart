@@ -203,6 +203,13 @@ String stripLeadingUnderscores(String name) {
   return name;
 }
 
+/// Take a name like TypedEventHandler`2 and return TypedEventHandler.
+String stripGenerics(String name) {
+  final backtickIndex = name.indexOf('`');
+  if (backtickIndex == -1) return name;
+  return name.substring(0, backtickIndex);
+}
+
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a

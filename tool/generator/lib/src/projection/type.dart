@@ -265,8 +265,11 @@ class TypeProjection {
     }
 
     if (isWinRTDelegate) {
-      // TODO: Need to figure this out properly, but this will do for now.
-      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+      final delegateName = stripGenerics(
+          stripLeadingUnderscores(lastComponent(typeIdentifier.name)));
+
+      return TypeTuple('Pointer<NativeFunction<$delegateName>>',
+          'Pointer<NativeFunction<$delegateName>>');
     }
 
     if (isInterface ||
