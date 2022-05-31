@@ -3019,6 +3019,16 @@
         "dllLibrary": "kernel32",
         "comment": "Gets information about the operating system version."
     },
+    "GetVolumeInformation": {
+        "prototype": "BOOL GetVolumeInformationW(\n  LPCWSTR lpRootPathName,\n  LPWSTR  lpVolumeNameBuffer,\n  DWORD   nVolumeNameSize,\n  LPDWORD lpVolumeSerialNumber,\n  LPDWORD lpMaximumComponentLength,\n  LPDWORD lpFileSystemFlags,\n  LPWSTR  lpFileSystemNameBuffer,\n  DWORD   nFileSystemNameSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the file system and volume associated with the specified root directory."
+    },
+    "GetVolumeInformationByHandle": {
+        "prototype": "BOOL GetVolumeInformationByHandleW(\n  HANDLE  hFile,\n  LPWSTR  lpVolumeNameBuffer,\n  DWORD   nVolumeNameSize,\n  LPDWORD lpVolumeSerialNumber,\n  LPDWORD lpMaximumComponentLength,\n  LPDWORD lpFileSystemFlags,\n  LPWSTR  lpFileSystemNameBuffer,\n  DWORD   nFileSystemNameSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the file system and volume associated with the specified file."
+    },
     "GetVolumePathName": {
         "prototype": "BOOL GetVolumePathNameW(\n  LPCWSTR lpszFileName,\n  LPWSTR  lpszVolumePathName,\n  DWORD   cchBufferLength);",
         "dllLibrary": "kernel32",
@@ -5178,6 +5188,11 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the contents of the specified environment variable for the current process."
     },
+    "SetErrorMode": {
+        "prototype": "UINT SetErrorMode(\n  UINT uMode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the specified event object to the signaled state."
+    },
     "SetEvent": {
         "prototype": "BOOL SetEvent(\n  HANDLE hEvent\n);",
         "dllLibrary": "kernel32",
@@ -5443,6 +5458,11 @@
         "dllLibrary": "user32",
         "comment": "Sets the thread's DPI_HOSTING_BEHAVIOR. This behavior allows windows created in the thread to host child windows with a different DPI_AWARENESS_CONTEXT.",
         "minimumWindowsVersion": "WIN10_RS4"
+    },
+    "SetThreadErrorMode": {
+        "prototype": "BOOL SetThreadErrorMode(\n  DWORD   dwNewMode,\n  LPDWORD lpOldMode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Controls whether the system will handle the specified types of serious errors or whether the calling thread will handle them."
     },
     "SetThreadExecutionState": {
         "prototype": "EXECUTION_STATE SetThreadExecutionState(\n  EXECUTION_STATE esFlags\n  );",

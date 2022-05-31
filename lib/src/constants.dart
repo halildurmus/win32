@@ -5792,6 +5792,133 @@ const MEM_RELEASE = 0x00008000;
 const MEM_FREE = 0x00010000;
 
 // -----------------------------------------------------------------------------
+// Error model constants
+// -----------------------------------------------------------------------------
+
+/// The system does not display the critical-error-handler message box. Instead,
+/// the system sends the error to the calling thread.
+///
+/// Best practice is that all applications call the process-wide SetErrorMode
+/// function with a parameter of SEM_FAILCRITICALERRORS at startup. This is to
+/// prevent error mode dialogs from hanging the application.
+const SEM_FAILCRITICALERRORS = 0x0001;
+
+/// The system does not display the Windows Error Reporting dialog.
+const SEM_NOGPFAULTERRORBOX = 0x0002;
+
+/// The system automatically fixes memory alignment faults and makes them
+/// invisible to the application. It does this for the calling process and any
+/// descendant processes. This feature is only supported by certain processor
+/// architectures.
+const SEM_NOALIGNMENTFAULTEXCEPT = 0x0004;
+
+/// The OpenFile function does not display a message box when it fails to find a
+/// file. Instead, the error is returned to the caller. This error mode
+/// overrides the OF_PROMPT flag.
+const SEM_NOOPENFILEERRORBOX = 0x8000;
+
+// -----------------------------------------------------------------------------
+// Volume information constants
+// -----------------------------------------------------------------------------
+
+/// The file system supports case-sensitive file names.
+const FILE_CASE_SENSITIVE_SEARCH = 0x00000001;
+
+/// The file system supports preserved case of file names when it places a
+/// name on disk.
+const FILE_CASE_PRESERVED_NAMES = 0x00000002;
+
+/// The file system supports Unicode in file names as they appear on disk.
+const FILE_UNICODE_ON_DISK = 0x00000004;
+
+/// The file system preserves and enforces access control lists (ACL). For
+/// example, the NTFS file system preserves and enforces ACLs, and the FAT file
+/// system does not.
+const FILE_PERSISTENT_ACLS = 0x00000008;
+
+/// The file system supports file-based compression.
+const FILE_FILE_COMPRESSION = 0x00000010;
+
+/// The file system supports disk quotas.
+const FILE_VOLUME_QUOTAS = 0x00000020;
+
+/// The file system supports sparse files.
+const FILE_SUPPORTS_SPARSE_FILES = 0x00000040;
+
+/// The file system supports reparse points.
+const FILE_SUPPORTS_REPARSE_POINTS = 0x00000080;
+
+/// The file system supports remote storage.
+const FILE_SUPPORTS_REMOTE_STORAGE = 0x00000100;
+
+/// On a successful cleanup operation, the file system returns information that
+/// describes additional actions taken during cleanup, such as deleting the
+/// file. File system filters can examine this information in their post-cleanup
+/// callback.
+const FILE_RETURNS_CLEANUP_RESULT_INFO = 0x00000200;
+
+/// The file system supports POSIX-style delete and rename operations.
+const FILE_SUPPORTS_POSIX_UNLINK_RENAME = 0x00000400;
+
+/// The file system is a compressed volume. This does not affect how data is
+/// transferred over the network.
+const FILE_VOLUME_IS_COMPRESSED = 0x00008000;
+
+/// The specified volume supports object identifiers.
+const FILE_SUPPORTS_OBJECT_IDS = 0x00010000;
+
+/// The file system supports the Encrypted File System (EFS).
+const FILE_SUPPORTS_ENCRYPTION = 0x00020000;
+
+/// The file system supports named data streams for a file.
+const FILE_NAMED_STREAMS = 0x00040000;
+
+/// The specified volume is read-only.
+const FILE_READ_ONLY_VOLUME = 0x00080000;
+
+/// The specified volume can be written to one time only. The write must be
+/// performed in sequential order.
+const FILE_SEQUENTIAL_WRITE_ONCE = 0x00100000;
+
+/// The file system supports transaction processing.
+const FILE_SUPPORTS_TRANSACTIONS = 0x00200000;
+
+/// The file system supports direct links to other devices and partitions.
+const FILE_SUPPORTS_HARD_LINKS = 0x00400000;
+
+/// The specified volume supports extended attributes. An extended attribute is
+/// a piece of application-specific metadata that an application can associate
+/// with a file and is not part of the file's data.
+const FILE_SUPPORTS_EXTENDED_ATTRIBUTES = 0x00800000;
+
+/// The file system supports open by FileID.
+const FILE_SUPPORTS_OPEN_BY_FILE_ID = 0x01000000;
+
+/// The specified volume supports update sequence number (USN) journals.
+const FILE_SUPPORTS_USN_JOURNAL = 0x02000000;
+
+/// The file system supports integrity streams.
+const FILE_SUPPORTS_INTEGRITY_STREAMS = 0x04000000;
+
+/// The file system supports block cloning, that is, sharing logical clusters
+/// between files on the same volume. The file system reallocates on writes to
+/// shared clusters.
+const FILE_SUPPORTS_BLOCK_REFCOUNTING = 0x08000000;
+
+/// The file system tracks whether each cluster of a file contains valid data
+/// (either from explicit file writes or automatic zeros) or invalid data (has
+/// not yet been written to or zeroed). File systems that use sparse valid data
+/// length (VDL) do not store a valid data length and do not require that valid
+/// data be contiguous within a file.
+const FILE_SUPPORTS_SPARSE_VDL = 0x10000000;
+
+/// The specified volume is a direct access (DAX) volume.
+const FILE_DAX_VOLUME = 0x20000000;
+
+/// The file system supports ghosting.
+const FILE_SUPPORTS_GHOSTING = 0x40000000;
+
+// -----------------------------------------------------------------------------
 // Multimedia constants
 // -----------------------------------------------------------------------------
 /// Time in milliseconds.
