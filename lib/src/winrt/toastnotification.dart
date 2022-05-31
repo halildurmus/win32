@@ -1,6 +1,8 @@
-// IToastNotification.dart
+// toastnotification.dart
 
-// ignore_for_file: unused_import, directives_ordering, camel_case_types
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -8,175 +10,153 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../api_ms_win_core_winrt_l1_1_0.dart';
 import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../com/iinspectable.dart';
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
-import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
 import '../utils.dart';
-import '../winrt_constants.dart';
+import '../types.dart';
+import '../winrt_callbacks.dart';
 import '../winrt_helpers.dart';
+
+import '../extensions/hstring_array.dart';
+
+import 'itoastnotification.dart';
+import 'itoastnotification2.dart';
+import 'itoastnotification3.dart';
+import 'itoastnotification4.dart';
+import 'itoastnotification6.dart';
 import 'itoastnotificationfactory.dart';
+import 'xmldocument.dart';
+import 'ireference.dart';
+import 'toastdismissedeventargs.dart';
+import 'toastfailedeventargs.dart';
+import 'notificationdata.dart';
+import '../com/iinspectable.dart';
 
-const _className = 'Windows.UI.Notifications.ToastNotification';
-
-typedef _get_Content_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> value);
-typedef _get_Content_Dart = int Function(Pointer obj, Pointer<Pointer> value);
-
-typedef _put_ExpirationTime_Native = Int32 Function(Pointer obj, Uint32 value);
-typedef _put_ExpirationTime_Dart = int Function(Pointer obj, int value);
-
-typedef _get_ExpirationTime_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> value);
-typedef _get_ExpirationTime_Dart = int Function(
-    Pointer obj, Pointer<Uint32> value);
-
-typedef _add_Dismissed_Native = Int32 Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-typedef _add_Dismissed_Dart = int Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-
-typedef _remove_Dismissed_Native = Int32 Function(Pointer obj, Uint32 token);
-typedef _remove_Dismissed_Dart = int Function(Pointer obj, int token);
-
-typedef _add_Activated_Native = Int32 Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-typedef _add_Activated_Dart = int Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-
-typedef _remove_Activated_Native = Int32 Function(Pointer obj, Uint32 token);
-typedef _remove_Activated_Dart = int Function(Pointer obj, int token);
-
-typedef _add_Failed_Native = Int32 Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-typedef _add_Failed_Dart = int Function(
-    Pointer obj, Pointer handler, Pointer<Uint32> result);
-
-typedef _remove_Failed_Native = Int32 Function(Pointer obj, Uint32 token);
-typedef _remove_Failed_Dart = int Function(Pointer obj, int token);
-
-/// {@category Interface}
+/// {@category Class}
 /// {@category winrt}
-class ToastNotification extends IInspectable {
-  // vtable begins at 6, ends at 14
+class ToastNotification extends IInspectable
+    implements
+        IToastNotification,
+        IToastNotification2,
+        IToastNotification3,
+        IToastNotification4,
+        IToastNotification6 {
+  ToastNotification.fromPointer(super.ptr);
 
-  ToastNotification(super.ptr);
+  static const _className = 'Windows.UI.Notifications.ToastNotification';
 
-  Pointer get Content {
-    final retValuePtr = calloc<Pointer>();
-
-    try {
-      final hr = ptr.ref.vtable
-          .elementAt(6)
-          .cast<Pointer<NativeFunction<_get_Content_Native>>>()
-          .value
-          .asFunction<_get_Content_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
-    } finally {
-      free(retValuePtr);
-    }
-  }
-
-  set ExpirationTime(int value) {
-    final hr = ptr.ref.vtable
-        .elementAt(7)
-        .cast<Pointer<NativeFunction<_put_ExpirationTime_Native>>>()
-        .value
-        .asFunction<_put_ExpirationTime_Dart>()(ptr.ref.lpVtbl, value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-  }
-
-  int get ExpirationTime {
-    final retValuePtr = calloc<Uint32>();
+  // IToastNotificationFactory methods
+  static ToastNotification CreateToastNotification(Pointer<COMObject> content) {
+    final activationFactory =
+        CreateActivationFactory(_className, IID_IToastNotificationFactory);
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
-          .cast<Pointer<NativeFunction<_get_ExpirationTime_Native>>>()
-          .value
-          .asFunction<_get_ExpirationTime_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final retValue = retValuePtr.value;
-      return retValue;
+      final result = IToastNotificationFactory(activationFactory)
+          .CreateToastNotification(content);
+      return ToastNotification.fromPointer(result);
     } finally {
-      free(retValuePtr);
-    }
-  }
-
-  int add_Dismissed(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
-      .elementAt(9)
-      .cast<Pointer<NativeFunction<_add_Dismissed_Native>>>()
-      .value
-      .asFunction<_add_Dismissed_Dart>()(ptr.ref.lpVtbl, handler, result);
-
-  int remove_Dismissed(int token) => ptr.ref.vtable
-      .elementAt(10)
-      .cast<Pointer<NativeFunction<_remove_Dismissed_Native>>>()
-      .value
-      .asFunction<_remove_Dismissed_Dart>()(ptr.ref.lpVtbl, token);
-
-  int add_Activated(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
-      .elementAt(11)
-      .cast<Pointer<NativeFunction<_add_Activated_Native>>>()
-      .value
-      .asFunction<_add_Activated_Dart>()(ptr.ref.lpVtbl, handler, result);
-
-  int remove_Activated(int token) => ptr.ref.vtable
-      .elementAt(12)
-      .cast<Pointer<NativeFunction<_remove_Activated_Native>>>()
-      .value
-      .asFunction<_remove_Activated_Dart>()(ptr.ref.lpVtbl, token);
-
-  int add_Failed(Pointer handler, Pointer<Uint32> result) => ptr.ref.vtable
-      .elementAt(13)
-      .cast<Pointer<NativeFunction<_add_Failed_Native>>>()
-      .value
-      .asFunction<_add_Failed_Dart>()(ptr.ref.lpVtbl, handler, result);
-
-  int remove_Failed(int token) => ptr.ref.vtable
-      .elementAt(14)
-      .cast<Pointer<NativeFunction<_remove_Failed_Native>>>()
-      .value
-      .asFunction<_remove_Failed_Dart>()(ptr.ref.lpVtbl, token);
-
-  static ToastNotification Create(Pointer content) {
-    final hClassName = convertToHString(_className);
-
-    final pIID = calloc<GUID>()..ref.setGUID(IID_IToastNotificationFactory);
-    final activationFactory = calloc<COMObject>();
-
-    try {
-      final hr =
-          RoGetActivationFactory(hClassName, pIID, activationFactory.cast());
-      if (FAILED(hr)) {
-        throw WindowsException(hr);
-      }
-      final toastNotificationFactory =
-          IToastNotificationFactory(activationFactory);
-      final result =
-          toastNotificationFactory.CreateToastNotification(content.cast());
-      if (FAILED(hr)) {
-        throw WindowsException(hr);
-      }
-      return ToastNotification(result);
-    } finally {
-      WindowsDeleteString(hClassName);
-      free(pIID);
       free(activationFactory);
     }
   }
+
+  // IToastNotification methods
+  late final _iToastNotification =
+      IToastNotification(toInterface(IID_IToastNotification));
+
+  @override
+  Pointer<COMObject> get Content => _iToastNotification.Content;
+
+  @override
+  set ExpirationTime(Pointer<COMObject> value) =>
+      _iToastNotification.ExpirationTime = value;
+
+  @override
+  Pointer<COMObject> get ExpirationTime => _iToastNotification.ExpirationTime;
+
+  @override
+  int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) =>
+      _iToastNotification.add_Dismissed(handler);
+
+  @override
+  void remove_Dismissed(int token) =>
+      _iToastNotification.remove_Dismissed(token);
+
+  @override
+  int add_Activated(Pointer<NativeFunction<TypedEventHandler>> handler) =>
+      _iToastNotification.add_Activated(handler);
+
+  @override
+  void remove_Activated(int token) =>
+      _iToastNotification.remove_Activated(token);
+
+  @override
+  int add_Failed(Pointer<NativeFunction<TypedEventHandler>> handler) =>
+      _iToastNotification.add_Failed(handler);
+
+  @override
+  void remove_Failed(int token) => _iToastNotification.remove_Failed(token);
+  // IToastNotification2 methods
+  late final _iToastNotification2 =
+      IToastNotification2(toInterface(IID_IToastNotification2));
+
+  @override
+  set Tag(String value) => _iToastNotification2.Tag = value;
+
+  @override
+  String get Tag => _iToastNotification2.Tag;
+
+  @override
+  set Group(String value) => _iToastNotification2.Group = value;
+
+  @override
+  String get Group => _iToastNotification2.Group;
+
+  @override
+  set SuppressPopup(bool value) => _iToastNotification2.SuppressPopup = value;
+
+  @override
+  bool get SuppressPopup => _iToastNotification2.SuppressPopup;
+  // IToastNotification3 methods
+  late final _iToastNotification3 =
+      IToastNotification3(toInterface(IID_IToastNotification3));
+
+  @override
+  int get NotificationMirroring => _iToastNotification3.NotificationMirroring;
+
+  @override
+  set NotificationMirroring(int value) =>
+      _iToastNotification3.NotificationMirroring = value;
+
+  @override
+  String get RemoteId => _iToastNotification3.RemoteId;
+
+  @override
+  set RemoteId(String value) => _iToastNotification3.RemoteId = value;
+  // IToastNotification4 methods
+  late final _iToastNotification4 =
+      IToastNotification4(toInterface(IID_IToastNotification4));
+
+  @override
+  Pointer<COMObject> get Data => _iToastNotification4.Data;
+
+  @override
+  set Data(Pointer<COMObject> value) => _iToastNotification4.Data = value;
+
+  @override
+  int get Priority => _iToastNotification4.Priority;
+
+  @override
+  set Priority(int value) => _iToastNotification4.Priority = value;
+  // IToastNotification6 methods
+  late final _iToastNotification6 =
+      IToastNotification6(toInterface(IID_IToastNotification6));
+
+  @override
+  bool get ExpiresOnReboot => _iToastNotification6.ExpiresOnReboot;
+
+  @override
+  set ExpiresOnReboot(bool value) =>
+      _iToastNotification6.ExpiresOnReboot = value;
 }

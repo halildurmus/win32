@@ -613,4 +613,7 @@ const windowsRuntimeStructsToGenerate = <String, String>{
   "Windows.Foundation.Rect":
       "Describes the width, height, and point origin of a rectangle.",
   "Windows.Foundation.Size": "Describes the width and height of an object.",
+  "Windows.Gaming.Input.GamepadReading":
+      "Represents the current state of the gamepad.",
+  "Windows.Gaming.Input.GamepadVibration": "Describes the gamepad motor speed.",
 };

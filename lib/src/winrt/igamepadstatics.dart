@@ -1,6 +1,8 @@
-// IGamepadStatics.dart
+// igamepadstatics.dart
 
-// ignore_for_file: unused_import, directives_ordering, camel_case_types
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -8,87 +10,123 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../com/iinspectable.dart';
+import '../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
-import '../structs.g.dart';
 import '../utils.dart';
-import '../winrt_constants.dart';
+import '../types.dart';
+import '../winrt_callbacks.dart';
+import '../winrt_helpers.dart';
+
+import '../extensions/hstring_array.dart';
+
+import 'gamepad.dart';
+import 'ivectorview.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IGamepadStatics = '{8BBCE529-D49C-39E9-9560-E47DDE96B7C8}';
 
-typedef _add_GamepadAdded_Native = Int32 Function(
-    Pointer obj, Pointer value, Pointer<Uint32> result);
-typedef _add_GamepadAdded_Dart = int Function(
-    Pointer obj, Pointer value, Pointer<Uint32> result);
-
-typedef _remove_GamepadAdded_Native = Int32 Function(Pointer obj, Uint32 token);
-typedef _remove_GamepadAdded_Dart = int Function(Pointer obj, int token);
-
-typedef _add_GamepadRemoved_Native = Int32 Function(
-    Pointer obj, Pointer value, Pointer<Uint32> result);
-typedef _add_GamepadRemoved_Dart = int Function(
-    Pointer obj, Pointer value, Pointer<Uint32> result);
-
-typedef _remove_GamepadRemoved_Native = Int32 Function(
-    Pointer obj, Uint32 token);
-typedef _remove_GamepadRemoved_Dart = int Function(Pointer obj, int token);
-
-typedef _get_Gamepads_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> value);
-typedef _get_Gamepads_Dart = int Function(Pointer obj, Pointer<Pointer> value);
-
 /// {@category Interface}
 /// {@category winrt}
 class IGamepadStatics extends IInspectable {
-  // vtable begins at 6, ends at 10
-
+  // vtable begins at 6, is 5 entries long.
   IGamepadStatics(super.ptr);
 
-  int add_GamepadAdded(Pointer value, Pointer<Uint32> result) => ptr.ref.vtable
-      .elementAt(6)
-      .cast<Pointer<NativeFunction<_add_GamepadAdded_Native>>>()
-      .value
-      .asFunction<_add_GamepadAdded_Dart>()(ptr.ref.lpVtbl, value, result);
-
-  int remove_GamepadAdded(int token) => ptr.ref.vtable
-      .elementAt(7)
-      .cast<Pointer<NativeFunction<_remove_GamepadAdded_Native>>>()
-      .value
-      .asFunction<_remove_GamepadAdded_Dart>()(ptr.ref.lpVtbl, token);
-
-  int add_GamepadRemoved(Pointer value, Pointer<Uint32> result) => ptr
-      .ref.lpVtbl.value
-      .elementAt(8)
-      .cast<Pointer<NativeFunction<_add_GamepadRemoved_Native>>>()
-      .value
-      .asFunction<_add_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, value, result);
-
-  int remove_GamepadRemoved(int token) => ptr.ref.vtable
-      .elementAt(9)
-      .cast<Pointer<NativeFunction<_remove_GamepadRemoved_Native>>>()
-      .value
-      .asFunction<_remove_GamepadRemoved_Dart>()(ptr.ref.lpVtbl, token);
-
-  Pointer get Gamepads {
-    final retValuePtr = calloc<Pointer>();
+  int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) {
+    final retValuePtr = calloc<IntPtr>();
 
     try {
       final hr = ptr.ref.vtable
-          .elementAt(10)
-          .cast<Pointer<NativeFunction<_get_Gamepads_Native>>>()
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+                          Pointer,
+                          Pointer<NativeFunction<EventHandler>> value,
+                          Pointer<IntPtr>)>>>()
           .value
-          .asFunction<_get_Gamepads_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+          .asFunction<
+              int Function(Pointer, Pointer<NativeFunction<EventHandler>> value,
+                  Pointer<IntPtr>)>()(ptr.ref.lpVtbl, value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
       return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  void remove_GamepadAdded(int token) {
+    final hr = ptr.ref.vtable
+        .elementAt(7)
+        .cast<
+            Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr token)>>>()
+        .value
+        .asFunction<int Function(Pointer, int token)>()(ptr.ref.lpVtbl, token);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  int add_GamepadRemoved(Pointer<NativeFunction<EventHandler>> value) {
+    final retValuePtr = calloc<IntPtr>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(8)
+          .cast<
+              Pointer<
+                  NativeFunction<
+                      HRESULT Function(
+                          Pointer,
+                          Pointer<NativeFunction<EventHandler>> value,
+                          Pointer<IntPtr>)>>>()
+          .value
+          .asFunction<
+              int Function(Pointer, Pointer<NativeFunction<EventHandler>> value,
+                  Pointer<IntPtr>)>()(ptr.ref.lpVtbl, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  void remove_GamepadRemoved(int token) {
+    final hr = ptr.ref.vtable
+        .elementAt(9)
+        .cast<
+            Pointer<NativeFunction<HRESULT Function(Pointer, IntPtr token)>>>()
+        .value
+        .asFunction<int Function(Pointer, int token)>()(ptr.ref.lpVtbl, token);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+  }
+
+  List<String> get Gamepads {
+    final retValuePtr = calloc<COMObject>();
+
+    final hr = ptr.ref.vtable
+            .elementAt(10)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
+
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    try {
+      return IVectorView<String>(retValuePtr).toList();
     } finally {
       free(retValuePtr);
     }
