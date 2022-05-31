@@ -397,4 +397,27 @@ void main() {
     expect(projection.stringableMappers, isEmpty);
     expect(projection.interfaceImport, isNot(contains('istringable.dart')));
   });
+
+  test('WinRT class that includes _className property', () {
+    const namespace = 'Windows.Globalization.Calendar';
+    final winTypeDef = MetadataStore.getMetadataForType(namespace);
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.hasDefaultConstructor, true);
+    expect(projection.factoryMappers, isNotEmpty);
+    expect(projection.staticMappers, isEmpty);
+    expect(projection.classNameDeclaration,
+        equals("static const _className = '$namespace';"));
+  });
+
+  test('WinRT class that does not include _className property', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Storage.FileProperties.BasicProperties');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.hasDefaultConstructor, false);
+    expect(projection.factoryMappers, isEmpty);
+    expect(projection.staticMappers, isEmpty);
+    expect(projection.classNameDeclaration, isEmpty);
+  });
 }
