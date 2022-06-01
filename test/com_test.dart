@@ -122,9 +122,9 @@ void main() {
     setUp(() {
       final hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-      if (SUCCEEDED(hr)) {
-        dialog = FileOpenDialog.createInstance();
-      }
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      dialog = FileOpenDialog.createInstance();
     });
     test('Dialog object exists', () {
       expect(dialog.ptr.address, isNonZero);

@@ -6,6 +6,8 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
+const testRuns = 5000;
+
 void main() {
   test('Network manager', () {
     final hr = CoInitializeEx(
@@ -21,8 +23,9 @@ void main() {
 
   group('Network testing', () {
     setUp(() {
-      CoInitializeEx(
+      final hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
     });
 
     test('Network is connected', () {
@@ -32,9 +35,11 @@ void main() {
     });
 
     test('Network is connected to the internet', () {
-      final nlm = NetworkListManager.createInstance();
-      expect(nlm.IsConnectedToInternet, equals(VARIANT_TRUE));
-      free(nlm.ptr);
+      for (var i = 0; i < testRuns; i++) {
+        final nlm = NetworkListManager.createInstance();
+        expect(nlm.IsConnectedToInternet, equals(VARIANT_TRUE));
+        free(nlm.ptr);
+      }
     });
 
     test('Can enumerate a network connection', () {
