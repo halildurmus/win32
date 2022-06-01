@@ -52,9 +52,9 @@ final _AddFontResource = _gdi32.lookupFunction<
     Int32 Function(Pointer<Utf16> param0),
     int Function(Pointer<Utf16> param0)>('AddFontResourceW');
 
-/// The AddFontResourceEx function adds the font resource from the
-/// specified file to the system. Fonts added with the AddFontResourceEx
-/// function can be marked as private and not enumerable.
+/// The AddFontResourceEx function adds the font resource from the specified
+/// file to the system. Fonts added with the AddFontResourceEx function can
+/// be marked as private and not enumerable.
 ///
 /// ```c
 /// int AddFontResourceExW(
@@ -233,8 +233,7 @@ final _CancelDC =
 
 /// The Chord function draws a chord (a region bounded by the intersection
 /// of an ellipse and a line segment, called a secant). The chord is
-/// outlined by using the current pen and filled by using the current
-/// brush.
+/// outlined by using the current pen and filled by using the current brush.
 ///
 /// ```c
 /// BOOL Chord(
@@ -273,8 +272,8 @@ final _CloseFigure =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'CloseFigure');
 
-/// The CreateCompatibleBitmap function creates a bitmap compatible with
-/// the device that is associated with the specified device context.
+/// The CreateCompatibleBitmap function creates a bitmap compatible with the
+/// device that is associated with the specified device context.
 ///
 /// ```c
 /// HBITMAP CreateCompatibleBitmap(
@@ -328,8 +327,8 @@ final _CreateDC = _gdi32.lookupFunction<
     int Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
         Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm)>('CreateDCW');
 
-/// The CreateDIBitmap function creates a compatible bitmap (DDB) from a
-/// DIB and, optionally, sets the bitmap bits.
+/// The CreateDIBitmap function creates a compatible bitmap (DDB) from a DIB
+/// and, optionally, sets the bitmap bits.
 ///
 /// ```c
 /// HBITMAP CreateDIBitmap(
@@ -376,9 +375,9 @@ final _CreateDIBPatternBrushPt = _gdi32.lookupFunction<
 
 /// The CreateDIBSection function creates a DIB that applications can write
 /// to directly. The function gives you a pointer to the location of the
-/// bitmap bit values. You can supply a handle to a file-mapping object
-/// that the function will use to create the bitmap, or you can let the
-/// system allocate the memory for the bitmap.
+/// bitmap bit values. You can supply a handle to a file-mapping object that
+/// the function will use to create the bitmap, or you can let the system
+/// allocate the memory for the bitmap.
 ///
 /// ```c
 /// HBITMAP CreateDIBSection(
@@ -687,8 +686,8 @@ final _ExtTextOut = _gdi32.lookupFunction<
         Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx)>('ExtTextOutW');
 
 /// The FillPath function closes any open figures in the current path and
-/// fills the path's interior by using the current brush and
-/// polygon-filling mode.
+/// fills the path's interior by using the current brush and polygon-filling
+/// mode.
 ///
 /// ```c
 /// BOOL FillPath(
@@ -703,8 +702,8 @@ final _FillPath =
         'FillPath');
 
 /// The FlattenPath function transforms any curves in the path that is
-/// selected into the current device context (DC), turning each curve into
-/// a sequence of lines.
+/// selected into the current device context (DC), turning each curve into a
+/// sequence of lines.
 ///
 /// ```c
 /// BOOL FlattenPath(
@@ -718,8 +717,8 @@ final _FlattenPath =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'FlattenPath');
 
-/// The GetDeviceCaps function retrieves device-specific information for
-/// the specified device.
+/// The GetDeviceCaps function retrieves device-specific information for the
+/// specified device.
 ///
 /// ```c
 /// int GetDeviceCaps(
@@ -760,9 +759,9 @@ final _GetDIBits = _gdi32.lookupFunction<
     int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
         Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
 
-/// The GetNearestColor function retrieves a color value identifying a
-/// color from the system palette that will be displayed when the specified
-/// color value is used.
+/// The GetNearestColor function retrieves a color value identifying a color
+/// from the system palette that will be displayed when the specified color
+/// value is used.
 ///
 /// ```c
 /// COLORREF GetNearestColor(
@@ -794,8 +793,8 @@ final _GetObject = _gdi32.lookupFunction<
     Int32 Function(IntPtr h, Int32 c, Pointer pv),
     int Function(int h, int c, Pointer pv)>('GetObjectW');
 
-/// The GetPath function retrieves the coordinates defining the endpoints
-/// of lines and the control points of curves found in the path that is
+/// The GetPath function retrieves the coordinates defining the endpoints of
+/// lines and the control points of curves found in the path that is
 /// selected into the specified device context.
 ///
 /// ```c
@@ -832,8 +831,8 @@ final _GetPixel = _gdi32.lookupFunction<
     Uint32 Function(IntPtr hdc, Int32 x, Int32 y),
     int Function(int hdc, int x, int y)>('GetPixel');
 
-/// The GetStockObject function retrieves a handle to one of the stock
-/// pens, brushes, fonts, or palettes.
+/// The GetStockObject function retrieves a handle to one of the stock pens,
+/// brushes, fonts, or palettes.
 ///
 /// ```c
 /// HGDIOBJ GetStockObject(
@@ -934,9 +933,9 @@ final _MoveToEx = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
     int Function(int hdc, int x, int y, Pointer<POINT> lppt)>('MoveToEx');
 
-/// The Pie function draws a pie-shaped wedge bounded by the intersection
-/// of an ellipse and two radials. The pie is outlined by using the current
-/// pen and filled by using the current brush.
+/// The Pie function draws a pie-shaped wedge bounded by the intersection of
+/// an ellipse and two radials. The pie is outlined by using the current pen
+/// and filled by using the current brush.
 ///
 /// ```c
 /// BOOL Pie(
@@ -1018,8 +1017,7 @@ final _PolyDraw = _gdi32.lookupFunction<
 
 /// The Polygon function draws a polygon consisting of two or more vertices
 /// connected by straight lines. The polygon is outlined by using the
-/// current pen and filled by using the current brush and polygon fill
-/// mode.
+/// current pen and filled by using the current brush and polygon fill mode.
 ///
 /// ```c
 /// BOOL Polygon(
@@ -1069,10 +1067,10 @@ final _PolylineTo = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolylineTo');
 
-/// The PolyPolygon function draws a series of closed polygons. Each
-/// polygon is outlined by using the current pen and filled by using the
-/// current brush and polygon fill mode. The polygons drawn by this
-/// function can overlap.
+/// The PolyPolygon function draws a series of closed polygons. Each polygon
+/// is outlined by using the current pen and filled by using the current
+/// brush and polygon fill mode. The polygons drawn by this function can
+/// overlap.
 ///
 /// ```c
 /// BOOL PolyPolygon(
@@ -1113,8 +1111,8 @@ final _PolyPolyline = _gdi32.lookupFunction<
     int Function(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz,
         int csz)>('PolyPolyline');
 
-/// The PtInRegion function determines whether the specified point is
-/// inside the specified region.
+/// The PtInRegion function determines whether the specified point is inside
+/// the specified region.
 ///
 /// ```c
 /// BOOL PtInRegion(
@@ -1297,8 +1295,8 @@ final _SetMapMode = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Uint32 iMode),
     int Function(int hdc, int iMode)>('SetMapMode');
 
-/// The SetPixel function sets the pixel at the specified coordinates to
-/// the specified color.
+/// The SetPixel function sets the pixel at the specified coordinates to the
+/// specified color.
 ///
 /// ```c
 /// COLORREF SetPixel(
@@ -1462,10 +1460,10 @@ final _StretchBlt = _gdi32.lookupFunction<
 /// The StretchDIBits function copies the color data for a rectangle of
 /// pixels in a DIB, JPEG, or PNG image to the specified destination
 /// rectangle. If the destination rectangle is larger than the source
-/// rectangle, this function stretches the rows and columns of color data
-/// to fit the destination rectangle. If the destination rectangle is
-/// smaller than the source rectangle, this function compresses the rows
-/// and columns by using the specified raster operation.
+/// rectangle, this function stretches the rows and columns of color data to
+/// fit the destination rectangle. If the destination rectangle is smaller
+/// than the source rectangle, this function compresses the rows and columns
+/// by using the specified raster operation.
 ///
 /// ```c
 /// int StretchDIBits(
@@ -1586,9 +1584,9 @@ final _TextOut = _gdi32.lookupFunction<
     int Function(
         int hdc, int x, int y, Pointer<Utf16> lpString, int c)>('TextOutW');
 
-/// The WidenPath function redefines the current path as the area that
-/// would be painted if the path were stroked using the pen currently
-/// selected into the given device context.
+/// The WidenPath function redefines the current path as the area that would
+/// be painted if the path were stroked using the pen currently selected
+/// into the given device context.
 ///
 /// ```c
 /// BOOL WidenPath(

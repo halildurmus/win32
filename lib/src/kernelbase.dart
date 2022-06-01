@@ -59,8 +59,8 @@ final _GetCommPorts = _kernelbase.lookupFunction<
     int Function(Pointer<Uint32> lpPortNumbers, int uPortNumbersCount,
         Pointer<Uint32> puPortNumbersFound)>('GetCommPorts');
 
-/// Retrieves the best estimate of the diagonal size of the built-in
-/// screen, in inches.
+/// Retrieves the best estimate of the diagonal size of the built-in screen,
+/// in inches.
 ///
 /// ```c
 /// HRESULT GetIntegratedDisplaySize(

@@ -22,9 +22,9 @@ import 'structs.g.dart';
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
 /// The BluetoothAuthenticateDeviceEx function sends an authentication
-/// request to a remote Bluetooth device. Additionally, this function
-/// allows for out-of-band data to be passed into the function call for the
-/// device being authenticated.
+/// request to a remote Bluetooth device. Additionally, this function allows
+/// for out-of-band data to be passed into the function call for the device
+/// being authenticated.
 ///
 /// ```c
 /// DWORD BluetoothAuthenticateDeviceEx(
@@ -95,8 +95,8 @@ final _BluetoothEnableDiscovery = _bthprops.lookupFunction<
     Int32 Function(IntPtr hRadio, Int32 fEnabled),
     int Function(int hRadio, int fEnabled)>('BluetoothEnableDiscovery');
 
-/// The BluetoothEnableIncomingConnections function modifies whether a
-/// local Bluetooth radio accepts incoming connections.
+/// The BluetoothEnableIncomingConnections function modifies whether a local
+/// Bluetooth radio accepts incoming connections.
 ///
 /// ```c
 /// BOOL BluetoothEnableIncomingConnections(
@@ -113,9 +113,8 @@ final _BluetoothEnableIncomingConnections = _bthprops.lookupFunction<
     int Function(
         int hRadio, int fEnabled)>('BluetoothEnableIncomingConnections');
 
-/// The BluetoothEnumerateInstalledServices function enumerates the
-/// services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth
-/// device.
+/// The BluetoothEnumerateInstalledServices function enumerates the services
+/// GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device.
 ///
 /// ```c
 /// DWORD BluetoothEnumerateInstalledServices(
@@ -246,8 +245,8 @@ final _BluetoothFindRadioClose = _bthprops.lookupFunction<
     Int32 Function(IntPtr hFind),
     int Function(int hFind)>('BluetoothFindRadioClose');
 
-/// The BluetoothGetRadioInfo function obtains information about a
-/// Bluetooth radio.
+/// The BluetoothGetRadioInfo function obtains information about a Bluetooth
+/// radio.
 ///
 /// ```c
 /// DWORD BluetoothGetRadioInfo(
@@ -265,8 +264,8 @@ final _BluetoothGetRadioInfo = _bthprops.lookupFunction<
     int Function(int hRadio,
         Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)>('BluetoothGetRadioInfo');
 
-/// The BluetoothIsConnectable function determines whether a Bluetooth
-/// radio or radios is connectable.
+/// The BluetoothIsConnectable function determines whether a Bluetooth radio
+/// or radios is connectable.
 ///
 /// ```c
 /// BOOL BluetoothIsConnectable(
@@ -314,8 +313,7 @@ final _BluetoothIsVersionAvailable = _bthprops.lookupFunction<
         int MajorVersion, int MinorVersion)>('BluetoothIsVersionAvailable');
 
 /// The BluetoothRegisterForAuthenticationEx function registers an
-/// application for a pin request, numeric comparison and callback
-/// function.
+/// application for a pin request, numeric comparison and callback function.
 ///
 /// ```c
 /// DWORD BluetoothRegisterForAuthenticationEx(
@@ -363,8 +361,8 @@ final _BluetoothRemoveDevice = _bthprops.lookupFunction<
     Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
     int Function(Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
 
-/// The BluetoothSetServiceState function enables or disables services for
-/// a Bluetooth device.
+/// The BluetoothSetServiceState function enables or disables services for a
+/// Bluetooth device.
 ///
 /// ```c
 /// DWORD BluetoothSetServiceState(

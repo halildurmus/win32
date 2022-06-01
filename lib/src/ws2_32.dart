@@ -86,8 +86,8 @@ final _connect = _ws2_32.lookupFunction<
     Int32 Function(IntPtr s, Pointer<SOCKADDR> name, Int32 namelen),
     int Function(int s, Pointer<SOCKADDR> name, int namelen)>('connect');
 
-/// The GetAddrInfoW function provides protocol-independent translation
-/// from a Unicode host name to an address.
+/// The GetAddrInfoW function provides protocol-independent translation from
+/// a Unicode host name to an address.
 ///
 /// ```c
 /// INT WSAAPI GetAddrInfoW(
@@ -130,8 +130,8 @@ final _gethostbyaddr = _ws2_32.lookupFunction<
     Pointer<hostent> Function(
         Pointer<Utf8> addr, int len, int type)>('gethostbyaddr');
 
-/// The gethostbyname function retrieves host information corresponding to
-/// a host name from a host database.
+/// The gethostbyname function retrieves host information corresponding to a
+/// host name from a host database.
 ///
 /// ```c
 /// hostent *WSAAPI gethostbyname(

@@ -21,9 +21,8 @@ import 'structs.g.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
 
-/// Calls the next handler in a window's subclass chain. The last handler
-/// in the subclass chain calls the original window procedure for the
-/// window.
+/// Calls the next handler in a window's subclass chain. The last handler in
+/// the subclass chain calls the original window procedure for the window.
 ///
 /// ```c
 /// LRESULT DefSubclassProc(

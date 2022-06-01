@@ -84,8 +84,8 @@ final _WlanConnect = _wlanapi.lookupFunction<
         Pointer<WLAN_CONNECTION_PARAMETERS> pConnectionParameters,
         Pointer pReserved)>('WlanConnect');
 
-/// The WlanDeleteProfile function deletes a wireless profile for a
-/// wireless interface on the local computer.
+/// The WlanDeleteProfile function deletes a wireless profile for a wireless
+/// interface on the local computer.
 ///
 /// ```c
 /// DWORD WlanDeleteProfile(
@@ -267,8 +267,8 @@ void WlanFreeMemory(Pointer pMemory) => _WlanFreeMemory(pMemory);
 final _WlanFreeMemory = _wlanapi.lookupFunction<Void Function(Pointer pMemory),
     void Function(Pointer pMemory)>('WlanFreeMemory');
 
-/// The WlanGetAvailableNetworkList function retrieves the list of
-/// available networks on a wireless LAN interface.
+/// The WlanGetAvailableNetworkList function retrieves the list of available
+/// networks on a wireless LAN interface.
 ///
 /// ```c
 /// DWORD WlanGetAvailableNetworkList(
@@ -334,8 +334,8 @@ final _WlanGetFilterList = _wlanapi.lookupFunction<
         Pointer<Pointer<DOT11_NETWORK_LIST>>
             ppNetworkList)>('WlanGetFilterList');
 
-/// The WlanGetInterfaceCapability function retrieves the capabilities of
-/// an interface.
+/// The WlanGetInterfaceCapability function retrieves the capabilities of an
+/// interface.
 ///
 /// ```c
 /// DWORD WlanGetInterfaceCapability(
@@ -367,9 +367,9 @@ final _WlanGetInterfaceCapability = _wlanapi.lookupFunction<
             Pointer<Pointer<WLAN_INTERFACE_CAPABILITY>> ppCapability)>(
     'WlanGetInterfaceCapability');
 
-/// The WlanGetNetworkBssList function retrieves a list of the basic
-/// service set (BSS) entries of the wireless network or networks on a
-/// given wireless LAN interface.
+/// The WlanGetNetworkBssList function retrieves a list of the basic service
+/// set (BSS) entries of the wireless network or networks on a given
+/// wireless LAN interface.
 ///
 /// ```c
 /// DWORD WlanGetNetworkBssList(
@@ -591,9 +591,9 @@ final _WlanGetSupportedDeviceServices = _wlanapi.lookupFunction<
             Pointer<Pointer<WLAN_DEVICE_SERVICE_GUID_LIST>> ppDevSvcGuidList)>(
     'WlanGetSupportedDeviceServices');
 
-/// The WlanHostedNetworkForceStart function transitions the wireless
-/// Hosted Network to the wlan_hosted_network_active state without
-/// associating the request with the application's calling handle.
+/// The WlanHostedNetworkForceStart function transitions the wireless Hosted
+/// Network to the wlan_hosted_network_active state without associating the
+/// request with the application's calling handle.
 ///
 /// ```c
 /// DWORD WlanHostedNetworkForceStart(
@@ -637,8 +637,8 @@ final _WlanHostedNetworkForceStop = _wlanapi.lookupFunction<
 
 /// The WlanHostedNetworkInitSettings function configures and persists to
 /// storage the network connection settings (SSID and maximum number of
-/// peers, for example) on the wireless Hosted Network if these settings
-/// are not already configured.
+/// peers, for example) on the wireless Hosted Network if these settings are
+/// not already configured.
 ///
 /// ```c
 /// DWORD WlanHostedNetworkInitSettings(
@@ -1115,8 +1115,8 @@ final _WlanRegisterDeviceServiceNotification = _wlanapi.lookupFunction<
             Pointer<WLAN_DEVICE_SERVICE_GUID_LIST> pDevSvcGuidList)>(
     'WlanRegisterDeviceServiceNotification');
 
-/// The WlanRegisterNotification function is used to register and
-/// unregister notifications on all wireless interfaces.
+/// The WlanRegisterNotification function is used to register and unregister
+/// notifications on all wireless interfaces.
 ///
 /// ```c
 /// DWORD WlanRegisterNotification(

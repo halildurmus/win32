@@ -64,8 +64,8 @@ final _GetFileVersionInfoEx = _version.lookupFunction<
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename, int dwHandle,
         int dwLen, Pointer lpData)>('GetFileVersionInfoExW');
 
-/// Determines whether the operating system can retrieve version
-/// information for a specified file. If version information is available,
+/// Determines whether the operating system can retrieve version information
+/// for a specified file. If version information is available,
 /// GetFileVersionInfoSize returns the size, in bytes, of that information.
 ///
 /// ```c
@@ -84,8 +84,8 @@ final _GetFileVersionInfoSize = _version.lookupFunction<
     int Function(Pointer<Utf16> lptstrFilename,
         Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeW');
 
-/// Determines whether the operating system can retrieve version
-/// information for a specified file. If version information is available,
+/// Determines whether the operating system can retrieve version information
+/// for a specified file. If version information is available,
 /// GetFileVersionInfoSizeEx returns the size, in bytes, of that
 /// information.
 ///
@@ -108,9 +108,9 @@ final _GetFileVersionInfoSizeEx = _version.lookupFunction<
         Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeExW');
 
 /// Determines where to install a file based on whether it locates another
-/// version of the file in the system. The values VerFindFile returns in
-/// the specified buffers are used in a subsequent call to the
-/// VerInstallFile function.
+/// version of the file in the system. The values VerFindFile returns in the
+/// specified buffers are used in a subsequent call to the VerInstallFile
+/// function.
 ///
 /// ```c
 /// DWORD VerFindFileW(

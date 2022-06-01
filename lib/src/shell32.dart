@@ -324,8 +324,8 @@ final _SHGetKnownFolderPath = _shell32.lookupFunction<
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
 
-/// Retrieves the size of the Recycle Bin and the number of items in it,
-/// for a specified drive.
+/// Retrieves the size of the Recycle Bin and the number of items in it, for
+/// a specified drive.
 ///
 /// ```c
 /// SHSTDAPI SHQueryRecycleBinW(

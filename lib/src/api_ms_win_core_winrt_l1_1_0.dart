@@ -77,8 +77,8 @@ final _RoGetApartmentIdentifier = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
     int Function(
         Pointer<Uint64> apartmentIdentifier)>('RoGetApartmentIdentifier');
 
-/// Initializes the Windows Runtime on the current thread with the
-/// specified concurrency model.
+/// Initializes the Windows Runtime on the current thread with the specified
+/// concurrency model.
 ///
 /// ```c
 /// HRESULT RoInitialize(

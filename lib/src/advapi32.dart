@@ -56,10 +56,9 @@ void CredFree(Pointer Buffer) => _CredFree(Buffer);
 final _CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
     void Function(Pointer Buffer)>('CredFree');
 
-/// The CredRead function reads a credential from the user's credential
-/// set. The credential set used is the one associated with the logon
-/// session of the current token. The token must not have the user's SID
-/// disabled.
+/// The CredRead function reads a credential from the user's credential set.
+/// The credential set used is the one associated with the logon session of
+/// the current token. The token must not have the user's SID disabled.
 ///
 /// ```c
 /// BOOL CredReadW(
@@ -200,8 +199,8 @@ final _GetUserName = _advapi32.lookupFunction<
     int Function(
         Pointer<Utf16> lpBuffer, Pointer<Uint32> pcbBuffer)>('GetUserNameW');
 
-/// Initiates a shutdown and restart of the specified computer, and
-/// restarts any applications that have been registered for restart.
+/// Initiates a shutdown and restart of the specified computer, and restarts
+/// any applications that have been registered for restart.
 ///
 /// ```c
 /// DWORD InitiateShutdownW(
@@ -305,8 +304,8 @@ final _RegConnectRegistry = _advapi32.lookupFunction<
     int Function(Pointer<Utf16> lpMachineName, int hKey,
         Pointer<IntPtr> phkResult)>('RegConnectRegistryW');
 
-/// Copies the specified registry key, along with its values and subkeys,
-/// to the specified destination key.
+/// Copies the specified registry key, along with its values and subkeys, to
+/// the specified destination key.
 ///
 /// ```c
 /// LSTATUS RegCopyTreeW(
@@ -609,8 +608,8 @@ final _RegDisablePredefinedCacheEx =
     _advapi32.lookupFunction<Uint32 Function(), int Function()>(
         'RegDisablePredefinedCacheEx');
 
-/// Disables registry reflection for the specified key. Disabling
-/// reflection for a key does not affect reflection of any subkeys.
+/// Disables registry reflection for the specified key. Disabling reflection
+/// for a key does not affect reflection of any subkeys.
 ///
 /// ```c
 /// LONG RegDisableReflectionKey(
@@ -705,8 +704,8 @@ final _RegEnumKeyEx = _advapi32.lookupFunction<
         Pointer<FILETIME> lpftLastWriteTime)>('RegEnumKeyExW');
 
 /// Enumerates the values for the specified open registry key. The function
-/// copies one indexed value name and data block for the key each time it
-/// is called.
+/// copies one indexed value name and data block for the key each time it is
+/// called.
 ///
 /// ```c
 /// LSTATUS RegEnumValueW(
@@ -911,8 +910,8 @@ final _RegNotifyChangeKeyValue = _advapi32.lookupFunction<
     int Function(int hKey, int bWatchSubtree, int dwNotifyFilter, int hEvent,
         int fAsynchronous)>('RegNotifyChangeKeyValue');
 
-/// Retrieves a handle to the HKEY_CURRENT_USER key for the user the
-/// current thread is impersonating.
+/// Retrieves a handle to the HKEY_CURRENT_USER key for the user the current
+/// thread is impersonating.
 ///
 /// ```c
 /// LSTATUS RegOpenCurrentUser(
@@ -1121,8 +1120,8 @@ final _RegQueryInfoKey = _advapi32.lookupFunction<
         Pointer<Uint32> lpcbSecurityDescriptor,
         Pointer<FILETIME> lpftLastWriteTime)>('RegQueryInfoKeyW');
 
-/// Retrieves the type and data for a list of value names associated with
-/// an open registry key.
+/// Retrieves the type and data for a list of value names associated with an
+/// open registry key.
 ///
 /// ```c
 /// LSTATUS RegQueryMultipleValuesW(
@@ -1185,8 +1184,8 @@ final _RegQueryValue = _advapi32.lookupFunction<
     int Function(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpData,
         Pointer<Int32> lpcbData)>('RegQueryValueW');
 
-/// Retrieves the type and data for the specified value name associated
-/// with an open registry key. To ensure that any string values (REG_SZ,
+/// Retrieves the type and data for the specified value name associated with
+/// an open registry key. To ensure that any string values (REG_SZ,
 /// REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the
 /// RegGetValue function.
 ///
@@ -1269,8 +1268,8 @@ final _RegReplaceKey = _advapi32.lookupFunction<
         Pointer<Utf16> lpOldFile)>('RegReplaceKeyW');
 
 /// Reads the registry information in a specified file and copies it over
-/// the specified key. This registry information may be in the form of a
-/// key and multiple levels of subkeys.
+/// the specified key. This registry information may be in the form of a key
+/// and multiple levels of subkeys.
 ///
 /// ```c
 /// LSTATUS RegRestoreKeyW(
@@ -1287,8 +1286,8 @@ final _RegRestoreKey = _advapi32.lookupFunction<
     int Function(
         int hKey, Pointer<Utf16> lpFile, int dwFlags)>('RegRestoreKeyW');
 
-/// Saves the specified key and all of its subkeys and values to a new
-/// file, in the standard format.
+/// Saves the specified key and all of its subkeys and values to a new file,
+/// in the standard format.
 ///
 /// ```c
 /// LSTATUS RegSaveKeyW(

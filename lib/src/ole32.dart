@@ -100,8 +100,8 @@ final _CoCreateGuid = _ole32.lookupFunction<Int32 Function(Pointer<GUID> pguid),
 /// Creates a single uninitialized object of the class associated with a
 /// specified CLSID. Call CoCreateInstance when you want to create only one
 /// object on the local system. To create a single object on a remote
-/// system, call the CoCreateInstanceEx function. To create multiple
-/// objects based on a single CLSID, call the CoGetClassObject function.
+/// system, call the CoCreateInstanceEx function. To create multiple objects
+/// based on a single CLSID, call the CoGetClassObject function.
 ///
 /// ```c
 /// HRESULT CoCreateInstance(
@@ -128,8 +128,8 @@ final _CoCreateInstance = _ole32.lookupFunction<
         Pointer<Pointer> ppv)>('CoCreateInstance');
 
 /// Provides a pointer to an interface on a class object associated with a
-/// specified CLSID. CoGetClassObject locates, and if necessary,
-/// dynamically loads the executable code required to do this.
+/// specified CLSID. CoGetClassObject locates, and if necessary, dynamically
+/// loads the executable code required to do this.
 ///
 /// ```c
 /// HRESULT CoGetClassObject(
@@ -181,8 +181,7 @@ final _CoInitializeEx = _ole32.lookupFunction<
     Int32 Function(Pointer pvReserved, Uint32 dwCoInit),
     int Function(Pointer pvReserved, int dwCoInit)>('CoInitializeEx');
 
-/// Registers security and sets the default security values for the
-/// process.
+/// Registers security and sets the default security values for the process.
 ///
 /// ```c
 /// HRESULT CoInitializeSecurity(
@@ -326,8 +325,8 @@ final _CoTaskMemRealloc = _ole32.lookupFunction<
     Pointer Function(Pointer pv, IntPtr cb),
     Pointer Function(Pointer pv, int cb)>('CoTaskMemRealloc');
 
-/// Closes the COM library on the current thread, unloads all DLLs loaded
-/// by the thread, frees any other resources that the thread maintains, and
+/// Closes the COM library on the current thread, unloads all DLLs loaded by
+/// the thread, frees any other resources that the thread maintains, and
 /// forces all RPC connections on the thread to close.
 ///
 /// ```c
@@ -368,8 +367,7 @@ final _CoWaitForMultipleHandles = _ole32.lookupFunction<
         Pointer<Uint32> lpdwindex)>('CoWaitForMultipleHandles');
 
 /// A replacement for CoWaitForMultipleHandles. This replacement API hides
-/// the options for CoWaitForMultipleHandles that are not supported in
-/// ASTA.
+/// the options for CoWaitForMultipleHandles that are not supported in ASTA.
 ///
 /// ```c
 /// HRESULT CoWaitForMultipleObjects(
@@ -454,10 +452,10 @@ final _IIDFromString = _ole32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid),
     int Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid)>('IIDFromString');
 
-/// Initializes the COM library on the current apartment, and identifies
-/// the concurrency model as single-thread apartment (STA). Applications
-/// must initialize the COM library before they can call COM library
-/// functions other than CoGetMalloc and memory allocation functions.
+/// Initializes the COM library on the current apartment, and identifies the
+/// concurrency model as single-thread apartment (STA). Applications must
+/// initialize the COM library before they can call COM library functions
+/// other than CoGetMalloc and memory allocation functions.
 ///
 /// ```c
 /// HRESULT OleInitialize(
@@ -471,8 +469,8 @@ final _OleInitialize = _ole32.lookupFunction<Int32 Function(Pointer pvReserved),
     int Function(Pointer pvReserved)>('OleInitialize');
 
 /// Closes the COM library on the apartment, releases any class factories,
-/// other COM objects, or servers held by the apartment, disables RPC on
-/// the apartment, and frees any resources the apartment maintains.
+/// other COM objects, or servers held by the apartment, disables RPC on the
+/// apartment, and frees any resources the apartment maintains.
 ///
 /// ```c
 /// void OleUninitialize();
@@ -501,8 +499,8 @@ final _ProgIDFromCLSID = _ole32.lookupFunction<
     int Function(Pointer<GUID> clsid,
         Pointer<Pointer<Utf16>> lplpszProgID)>('ProgIDFromCLSID');
 
-/// Converts a CLSID into a string of printable characters. Different
-/// CLSIDs always convert to different strings.
+/// Converts a CLSID into a string of printable characters. Different CLSIDs
+/// always convert to different strings.
 ///
 /// ```c
 /// HRESULT StringFromCLSID(

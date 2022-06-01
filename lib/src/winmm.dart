@@ -73,8 +73,8 @@ final _mciGetErrorString = _winmm.lookupFunction<
     int Function(
         int mcierr, Pointer<Utf16> pszText, int cchText)>('mciGetErrorStringW');
 
-/// The mciSendCommand function sends a command message to the specified
-/// MCI device.
+/// The mciSendCommand function sends a command message to the specified MCI
+/// device.
 ///
 /// ```c
 /// MCIERROR mciSendCommandW(
@@ -171,8 +171,8 @@ final _midiInClose =
     _winmm.lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
         'midiInClose');
 
-/// The midiInGetDevCaps function determines the capabilities of a
-/// specified MIDI input device.
+/// The midiInGetDevCaps function determines the capabilities of a specified
+/// MIDI input device.
 ///
 /// ```c
 /// MMRESULT midiInGetDevCapsW(
@@ -226,8 +226,8 @@ final _midiInGetID = _winmm.lookupFunction<
     Uint32 Function(IntPtr hmi, Pointer<Uint32> puDeviceID),
     int Function(int hmi, Pointer<Uint32> puDeviceID)>('midiInGetID');
 
-/// The midiInGetNumDevs function retrieves the number of MIDI input
-/// devices in the system.
+/// The midiInGetNumDevs function retrieves the number of MIDI input devices
+/// in the system.
 ///
 /// ```c
 /// UINT midiInGetNumDevs();
@@ -418,8 +418,8 @@ final _midiOutClose =
     _winmm.lookupFunction<Uint32 Function(IntPtr hmo), int Function(int hmo)>(
         'midiOutClose');
 
-/// The midiOutGetDevCaps function queries a specified MIDI output device
-/// to determine its capabilities.
+/// The midiOutGetDevCaps function queries a specified MIDI output device to
+/// determine its capabilities.
 ///
 /// ```c
 /// MMRESULT midiOutGetDevCapsW(
@@ -502,8 +502,8 @@ final _midiOutGetVolume = _winmm.lookupFunction<
     Uint32 Function(IntPtr hmo, Pointer<Uint32> pdwVolume),
     int Function(int hmo, Pointer<Uint32> pdwVolume)>('midiOutGetVolume');
 
-/// The midiOutLongMsg function sends a system-exclusive MIDI message to
-/// the specified MIDI output device.
+/// The midiOutLongMsg function sends a system-exclusive MIDI message to the
+/// specified MIDI output device.
 ///
 /// ```c
 /// MMRESULT midiOutLongMsg(
@@ -611,8 +611,8 @@ final _midiOutSetVolume = _winmm.lookupFunction<
     Uint32 Function(IntPtr hmo, Uint32 dwVolume),
     int Function(int hmo, int dwVolume)>('midiOutSetVolume');
 
-/// The midiOutShortMsg function sends a short MIDI message to the
-/// specified MIDI output device.
+/// The midiOutShortMsg function sends a short MIDI message to the specified
+/// MIDI output device.
 ///
 /// ```c
 /// MMRESULT midiOutShortMsg(
@@ -664,8 +664,7 @@ final _PlaySound = _winmm.lookupFunction<
     int Function(
         Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
 
-/// The waveOutClose function closes the given waveform-audio output
-/// device.
+/// The waveOutClose function closes the given waveform-audio output device.
 ///
 /// ```c
 /// MMRESULT waveOutClose(
@@ -746,8 +745,8 @@ int waveOutGetNumDevs() => _waveOutGetNumDevs();
 final _waveOutGetNumDevs = _winmm
     .lookupFunction<Uint32 Function(), int Function()>('waveOutGetNumDevs');
 
-/// The waveOutGetPitch function retrieves the current pitch setting for
-/// the specified waveform-audio output device.
+/// The waveOutGetPitch function retrieves the current pitch setting for the
+/// specified waveform-audio output device.
 ///
 /// ```c
 /// MMRESULT waveOutGetPitch(
@@ -986,9 +985,9 @@ final _waveOutSetVolume = _winmm.lookupFunction<
     int Function(int hwo, int dwVolume)>('waveOutSetVolume');
 
 /// The waveOutUnprepareHeader function cleans up the preparation performed
-/// by the waveOutPrepareHeader function. This function must be called
-/// after the device driver is finished with a data block. You must call
-/// this function before freeing the buffer.
+/// by the waveOutPrepareHeader function. This function must be called after
+/// the device driver is finished with a data block. You must call this
+/// function before freeing the buffer.
 ///
 /// ```c
 /// MMRESULT waveOutUnprepareHeader(
@@ -1006,8 +1005,8 @@ final _waveOutUnprepareHeader = _winmm.lookupFunction<
     int Function(
         int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutUnprepareHeader');
 
-/// The waveOutWrite function sends a data block to the given
-/// waveform-audio output device.
+/// The waveOutWrite function sends a data block to the given waveform-audio
+/// output device.
 ///
 /// ```c
 /// MMRESULT waveOutWrite(

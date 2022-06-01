@@ -152,8 +152,7 @@ final _MagGetWindowSource = _magnification.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<RECT> pRect),
     int Function(int hwnd, Pointer<RECT> pRect)>('MagGetWindowSource');
 
-/// Retrieves the transformation matrix associated with a magnifier
-/// control.
+/// Retrieves the transformation matrix associated with a magnifier control.
 ///
 /// ```c
 /// BOOL MagGetWindowTransform(

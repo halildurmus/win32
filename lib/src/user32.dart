@@ -57,8 +57,8 @@ final _AddClipboardFormatListener =
 
 /// Calculates the required size of the window rectangle, based on the
 /// desired client-rectangle size. The window rectangle can then be passed
-/// to the CreateWindow function to create a window whose client area is
-/// the desired size.
+/// to the CreateWindow function to create a window whose client area is the
+/// desired size.
 ///
 /// ```c
 /// BOOL AdjustWindowRect(
@@ -174,9 +174,9 @@ int AnyPopup() => _AnyPopup();
 final _AnyPopup =
     _user32.lookupFunction<Int32 Function(), int Function()>('AnyPopup');
 
-/// Appends a new item to the end of the specified menu bar, drop-down
-/// menu, submenu, or shortcut menu. You can use this function to specify
-/// the content, appearance, and behavior of the menu item.
+/// Appends a new item to the end of the specified menu bar, drop-down menu,
+/// submenu, or shortcut menu. You can use this function to specify the
+/// content, appearance, and behavior of the menu item.
 ///
 /// ```c
 /// BOOL AppendMenuW(
@@ -400,9 +400,9 @@ final _CalculatePopupWindowPosition = _user32.lookupFunction<
 
 /// Passes the specified message and hook code to the hook procedures
 /// associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A
-/// WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an
-/// application-defined callback function that examines and, optionally,
-/// modifies messages for a dialog box, message box, menu, or scroll bar.
+/// WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined
+/// callback function that examines and, optionally, modifies messages for a
+/// dialog box, message box, menu, or scroll bar.
 ///
 /// ```c
 /// BOOL CallMsgFilterW(
@@ -597,8 +597,7 @@ final _CheckDlgButton = _user32.lookupFunction<
     int Function(int hDlg, int nIDButton, int uCheck)>('CheckDlgButton');
 
 /// Adds a check mark to (checks) a specified radio button in a group and
-/// removes a check mark from (clears) all other radio buttons in the
-/// group.
+/// removes a check mark from (clears) all other radio buttons in the group.
 ///
 /// ```c
 /// BOOL CheckRadioButton(
@@ -640,8 +639,8 @@ final _ChildWindowFromPoint = _user32.lookupFunction<
 
 /// Determines which, if any, of the child windows belonging to the
 /// specified parent window contains the specified point. The function can
-/// ignore invisible, disabled, and transparent child windows.
-/// Grandchildren and deeper descendants are not searched.
+/// ignore invisible, disabled, and transparent child windows. Grandchildren
+/// and deeper descendants are not searched.
 ///
 /// ```c
 /// HWND ChildWindowFromPointEx(
@@ -675,10 +674,10 @@ final _ClientToScreen = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
     int Function(int hWnd, Pointer<POINT> lpPoint)>('ClientToScreen');
 
-/// Confines the cursor to a rectangular area on the screen. If a
-/// subsequent cursor position (set by the SetCursorPos function or the
-/// mouse) lies outside the rectangle, the system automatically adjusts the
-/// position to keep the cursor inside the rectangular area.
+/// Confines the cursor to a rectangular area on the screen. If a subsequent
+/// cursor position (set by the SetCursorPos function or the mouse) lies
+/// outside the rectangle, the system automatically adjusts the position to
+/// keep the cursor inside the rectangular area.
 ///
 /// ```c
 /// BOOL ClipCursor(
@@ -1087,9 +1086,9 @@ final _CreateMenu =
     _user32.lookupFunction<IntPtr Function(), int Function()>('CreateMenu');
 
 /// Creates an overlapped, pop-up, or child window. It specifies the window
-/// class, window title, window style, and (optionally) the initial
-/// position and size of the window. The function also specifies the
-/// window's parent or owner, if any, and the window's menu.
+/// class, window title, window style, and (optionally) the initial position
+/// and size of the window. The function also specifies the window's parent
+/// or owner, if any, and the window's menu.
 ///
 /// ```c
 /// HWND CreateWindowExW(
@@ -1152,8 +1151,8 @@ final _CreateWindowEx = _user32.lookupFunction<
         int hInstance,
         Pointer lpParam)>('CreateWindowExW');
 
-/// Creates a window station object, associates it with the calling
-/// process, and assigns it to the current session.
+/// Creates a window station object, associates it with the calling process,
+/// and assigns it to the current session.
 ///
 /// ```c
 /// HWINSTA CreateWindowStationW(
@@ -1248,8 +1247,8 @@ final _DefRawInputProc = _user32.lookupFunction<
     int Function(Pointer<Pointer<RAWINPUT>> paRawInput, int nInput,
         int cbSizeHeader)>('DefRawInputProc');
 
-/// Calls the default window procedure to provide default processing for
-/// any window messages that an application does not process. This function
+/// Calls the default window procedure to provide default processing for any
+/// window messages that an application does not process. This function
 /// ensures that every message is processed. DefWindowProc is called with
 /// the same parameters received by the window procedure.
 ///
@@ -1270,8 +1269,8 @@ final _DefWindowProc = _user32.lookupFunction<
     int Function(int hWnd, int Msg, int wParam, int lParam)>('DefWindowProcW');
 
 /// Deletes an item from the specified menu. If the menu item opens a menu
-/// or submenu, this function destroys the handle to the menu or submenu
-/// and frees the memory used by the menu or submenu.
+/// or submenu, this function destroys the handle to the menu or submenu and
+/// frees the memory used by the menu or submenu.
 ///
 /// ```c
 /// BOOL DeleteMenu(
@@ -1315,8 +1314,7 @@ int DestroyIcon(int hIcon) => _DestroyIcon(hIcon);
 final _DestroyIcon = _user32.lookupFunction<Int32 Function(IntPtr hIcon),
     int Function(int hIcon)>('DestroyIcon');
 
-/// Destroys the specified menu and frees any memory that the menu
-/// occupies.
+/// Destroys the specified menu and frees any memory that the menu occupies.
 ///
 /// ```c
 /// BOOL DestroyMenu(
@@ -1387,10 +1385,9 @@ final _DialogBoxIndirectParam = _user32.lookupFunction<
         Pointer<NativeFunction<DlgProc>> lpDialogFunc,
         int dwInitParam)>('DialogBoxIndirectParamW');
 
-/// Disables the window ghosting feature for the calling GUI process.
-/// Window ghosting is a Windows Manager feature that lets the user
-/// minimize, move, or close the main window of an application that is not
-/// responding.
+/// Disables the window ghosting feature for the calling GUI process. Window
+/// ghosting is a Windows Manager feature that lets the user minimize, move,
+/// or close the main window of an application that is not responding.
 ///
 /// ```c
 /// void DisableProcessWindowsGhosting();
@@ -1622,8 +1619,7 @@ final _DrawText = _user32.lookupFunction<
     int Function(int hdc, Pointer<Utf16> lpchText, int cchText,
         Pointer<RECT> lprc, int format)>('DrawTextW');
 
-/// The DrawTextEx function draws formatted text in the specified
-/// rectangle.
+/// The DrawTextEx function draws formatted text in the specified rectangle.
 ///
 /// ```c
 /// int DrawTextExW(
@@ -1733,8 +1729,8 @@ final _EnableWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 bEnable),
     int Function(int hWnd, int bEnable)>('EnableWindow');
 
-/// Simultaneously updates the position and size of one or more windows in
-/// a single screen-refreshing cycle.
+/// Simultaneously updates the position and size of one or more windows in a
+/// single screen-refreshing cycle.
 ///
 /// ```c
 /// BOOL EndDeferWindowPos(
@@ -1775,9 +1771,9 @@ int EndMenu() => _EndMenu();
 final _EndMenu =
     _user32.lookupFunction<Int32 Function(), int Function()>('EndMenu');
 
-/// The EndPaint function marks the end of painting in the specified
-/// window. This function is required for each call to the BeginPaint
-/// function, but only after painting is complete.
+/// The EndPaint function marks the end of painting in the specified window.
+/// This function is required for each call to the BeginPaint function, but
+/// only after painting is complete.
 ///
 /// ```c
 /// BOOL EndPaint(
@@ -1948,8 +1944,8 @@ final _EqualRect = _user32.lookupFunction<
     Int32 Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2),
     int Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2)>('EqualRect');
 
-/// The ExcludeUpdateRgn function prevents drawing within invalid areas of
-/// a window by excluding an updated region in the window from a clipping
+/// The ExcludeUpdateRgn function prevents drawing within invalid areas of a
+/// window by excluding an updated region in the window from a clipping
 /// region.
 ///
 /// ```c
@@ -2027,8 +2023,8 @@ final _FindWindowEx = _user32.lookupFunction<
         Pointer<Utf16> lpszWindow)>('FindWindowExW');
 
 /// The FrameRect function draws a border around the specified rectangle by
-/// using the specified brush. The width and height of the border are
-/// always one logical unit.
+/// using the specified brush. The width and height of the border are always
+/// one logical unit.
 ///
 /// ```c
 /// int FrameRect(
@@ -2045,8 +2041,8 @@ final _FrameRect = _user32.lookupFunction<
     Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
     int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FrameRect');
 
-/// Retrieves the window handle to the active window attached to the
-/// calling thread's message queue.
+/// Retrieves the window handle to the active window attached to the calling
+/// thread's message queue.
 ///
 /// ```c
 /// HWND GetActiveWindow();
@@ -2201,10 +2197,10 @@ final _GetClassLongPtr = _user32.lookupFunction<
     int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
 
 /// Retrieves the coordinates of a window's client area. The client
-/// coordinates specify the upper-left and lower-right corners of the
-/// client area. Because client coordinates are relative to the upper-left
-/// corner of a window's client area, the coordinates of the upper-left
-/// corner are (0,0).
+/// coordinates specify the upper-left and lower-right corners of the client
+/// area. Because client coordinates are relative to the upper-left corner
+/// of a window's client area, the coordinates of the upper-left corner are
+/// (0,0).
 ///
 /// ```c
 /// BOOL GetClientRect(
@@ -2361,10 +2357,10 @@ int GetDC(int hWnd) => _GetDC(hWnd);
 final _GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('GetDC');
 
-/// The GetDCEx function retrieves a handle to a device context (DC) for
-/// the client area of a specified window or for the entire screen. You can
-/// use the returned handle in subsequent GDI functions to draw in the DC.
-/// The device context is an opaque data structure, whose values are used
+/// The GetDCEx function retrieves a handle to a device context (DC) for the
+/// client area of a specified window or for the entire screen. You can use
+/// the returned handle in subsequent GDI functions to draw in the DC. The
+/// device context is an opaque data structure, whose values are used
 /// internally by GDI.
 ///
 /// ```c
@@ -2399,9 +2395,8 @@ final _GetDesktopWindow = _user32
 /// and height of characters in the system font. For dialog boxes that use
 /// the system font, you can use these values to convert between dialog
 /// template units, as specified in dialog box templates, and pixels. For
-/// dialog boxes that do not use the system font, the conversion from
-/// dialog template units to pixels depends on the font used by the dialog
-/// box.
+/// dialog boxes that do not use the system font, the conversion from dialog
+/// template units to pixels depends on the font used by the dialog box.
 ///
 /// ```c
 /// long GetDialogBaseUnits();
@@ -2518,12 +2513,11 @@ final _GetDlgItemText = _user32.lookupFunction<
     int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString,
         int cchMax)>('GetDlgItemTextW');
 
-/// Retrieves the current double-click time for the mouse. A double-click
-/// is a series of two clicks of the mouse button, the second occurring
-/// within a specified time after the first. The double-click time is the
-/// maximum number of milliseconds that may occur between the first and
-/// second click of a double-click. The maximum double-click time is 5000
-/// milliseconds.
+/// Retrieves the current double-click time for the mouse. A double-click is
+/// a series of two clicks of the mouse button, the second occurring within
+/// a specified time after the first. The double-click time is the maximum
+/// number of milliseconds that may occur between the first and second click
+/// of a double-click. The maximum double-click time is 5000 milliseconds.
 ///
 /// ```c
 /// UINT GetDoubleClickTime();
@@ -2559,8 +2553,8 @@ final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
     int Function(int hwnd)>('GetDpiForWindow');
 
 /// Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This
-/// enables you to determine the DPI of a thread without needed to examine
-/// a window created within that thread.
+/// enables you to determine the DPI of a thread without needed to examine a
+/// window created within that thread.
 ///
 /// ```c
 /// UINT GetDpiFromDpiAwarenessContext(
@@ -2600,8 +2594,8 @@ int GetForegroundWindow() => _GetForegroundWindow();
 final _GetForegroundWindow = _user32
     .lookupFunction<IntPtr Function(), int Function()>('GetForegroundWindow');
 
-/// Retrieves the configuration for which Windows Touch gesture messages
-/// are sent from a window.
+/// Retrieves the configuration for which Windows Touch gesture messages are
+/// sent from a window.
 ///
 /// ```c
 /// BOOL GetGestureConfig(
@@ -2945,8 +2939,8 @@ final _GetMenuItemRect = _user32.lookupFunction<
     int Function(int hWnd, int hMenu, int uItem,
         Pointer<RECT> lprcItem)>('GetMenuItemRect');
 
-/// Retrieves the menu flags associated with the specified menu item. If
-/// the menu item opens a submenu, this function also returns the number of
+/// Retrieves the menu flags associated with the specified menu item. If the
+/// menu item opens a submenu, this function also returns the number of
 /// items in the submenu.
 ///
 /// ```c
@@ -3422,10 +3416,10 @@ int GetSysColorBrush(int nIndex) => _GetSysColorBrush(nIndex);
 final _GetSysColorBrush = _user32.lookupFunction<IntPtr Function(Int32 nIndex),
     int Function(int nIndex)>('GetSysColorBrush');
 
-/// Retrieves the system DPI associated with a given process. This is
-/// useful for avoiding compatibility issues that arise from sharing
-/// DPI-sensitive information between multiple system-aware processes with
-/// different system DPI values.
+/// Retrieves the system DPI associated with a given process. This is useful
+/// for avoiding compatibility issues that arise from sharing DPI-sensitive
+/// information between multiple system-aware processes with different
+/// system DPI values.
 ///
 /// ```c
 /// UINT GetSystemDpiForProcess(
@@ -3487,10 +3481,10 @@ final _GetSystemMetricsForDpi = _user32.lookupFunction<
     int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
 
 /// The GetTabbedTextExtent function computes the width and height of a
-/// character string. If the string contains one or more tab characters,
-/// the width of the string is based upon the specified tab stops. The
-/// GetTabbedTextExtent function uses the currently selected font to
-/// compute the dimensions of the string.
+/// character string. If the string contains one or more tab characters, the
+/// width of the string is based upon the specified tab stops. The
+/// GetTabbedTextExtent function uses the currently selected font to compute
+/// the dimensions of the string.
 ///
 /// ```c
 /// DWORD GetTabbedTextExtentW(
@@ -3630,9 +3624,9 @@ final _GetUpdatedClipboardFormats = _user32.lookupFunction<
 
 /// The GetUpdateRect function retrieves the coordinates of the smallest
 /// rectangle that completely encloses the update region of the specified
-/// window. GetUpdateRect retrieves the rectangle in logical coordinates.
-/// If there is no update region, GetUpdateRect retrieves an empty
-/// rectangle (sets all coordinates to zero).
+/// window. GetUpdateRect retrieves the rectangle in logical coordinates. If
+/// there is no update region, GetUpdateRect retrieves an empty rectangle
+/// (sets all coordinates to zero).
 ///
 /// ```c
 /// BOOL GetUpdateRect(
@@ -3710,9 +3704,9 @@ final _GetWindow = _user32.lookupFunction<
 
 /// The GetWindowDC function retrieves the device context (DC) for the
 /// entire window, including title bar, menus, and scroll bars. A window
-/// device context permits painting anywhere in a window, because the
-/// origin of the device context is the upper-left corner of the window
-/// instead of the client area.
+/// device context permits painting anywhere in a window, because the origin
+/// of the device context is the upper-left corner of the window instead of
+/// the client area.
 ///
 /// ```c
 /// HDC GetWindowDC(
@@ -3841,8 +3835,8 @@ final _GetWindowPlacement = _user32.lookupFunction<
         int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('GetWindowPlacement');
 
 /// Retrieves the dimensions of the bounding rectangle of the specified
-/// window. The dimensions are given in screen coordinates that are
-/// relative to the upper-left corner of the screen.
+/// window. The dimensions are given in screen coordinates that are relative
+/// to the upper-left corner of the screen.
 ///
 /// ```c
 /// BOOL GetWindowRect(
@@ -3859,10 +3853,10 @@ final _GetWindowRect = _user32.lookupFunction<
     int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
 
 /// The GetWindowRgn function obtains a copy of the window region of a
-/// window. The window region of a window is set by calling the
-/// SetWindowRgn function. The window region determines the area within the
-/// window where the system permits drawing. The system does not display
-/// any portion of a window that lies outside of the window region.
+/// window. The window region of a window is set by calling the SetWindowRgn
+/// function. The window region determines the area within the window where
+/// the system permits drawing. The system does not display any portion of a
+/// window that lies outside of the window region.
 ///
 /// ```c
 /// int GetWindowRgn(
@@ -3894,10 +3888,10 @@ final _GetWindowRgnBox = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<RECT> lprc),
     int Function(int hWnd, Pointer<RECT> lprc)>('GetWindowRgnBox');
 
-/// Copies the text of the specified window's title bar (if it has one)
-/// into a buffer. If the specified window is a control, the text of the
-/// control is copied. However, GetWindowText cannot retrieve the text of a
-/// control in another application.
+/// Copies the text of the specified window's title bar (if it has one) into
+/// a buffer. If the specified window is a control, the text of the control
+/// is copied. However, GetWindowText cannot retrieve the text of a control
+/// in another application.
 ///
 /// ```c
 /// int GetWindowTextW(
@@ -3915,8 +3909,8 @@ final _GetWindowText = _user32.lookupFunction<
     int Function(
         int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
 
-/// Retrieves the length, in characters, of the specified window's title
-/// bar text (if the window has a title bar). If the specified window is a
+/// Retrieves the length, in characters, of the specified window's title bar
+/// text (if the window has a title bar). If the specified window is a
 /// control, the function retrieves the length of the text within the
 /// control. However, GetWindowTextLength cannot retrieve the length of the
 /// text of an edit control in another application.
@@ -3933,9 +3927,8 @@ final _GetWindowTextLength =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'GetWindowTextLengthW');
 
-/// Retrieves the identifier of the thread that created the specified
-/// window and, optionally, the identifier of the process that created the
-/// window.
+/// Retrieves the identifier of the thread that created the specified window
+/// and, optionally, the identifier of the process that created the window.
 ///
 /// ```c
 /// DWORD GetWindowThreadProcessId(
@@ -4117,10 +4110,10 @@ final _InsertMenuItem = _user32.lookupFunction<
         Pointer<MENUITEMINFO> lpmi)>('InsertMenuItemW');
 
 /// The IntersectRect function calculates the intersection of two source
-/// rectangles and places the coordinates of the intersection rectangle
-/// into the destination rectangle. If the source rectangles do not
-/// intersect, an empty rectangle (in which all coordinates are set to
-/// zero) is placed into the destination rectangle.
+/// rectangles and places the coordinates of the intersection rectangle into
+/// the destination rectangle. If the source rectangles do not intersect, an
+/// empty rectangle (in which all coordinates are set to zero) is placed
+/// into the destination rectangle.
 ///
 /// ```c
 /// BOOL IntersectRect(
@@ -4161,8 +4154,8 @@ final _InvalidateRect = _user32.lookupFunction<
 
 /// The InvalidateRgn function invalidates the client area within the
 /// specified region by adding it to the current update region of a window.
-/// The invalidated region, along with all other areas in the update
-/// region, is marked for painting when the next WM_PAINT message occurs.
+/// The invalidated region, along with all other areas in the update region,
+/// is marked for painting when the next WM_PAINT message occurs.
 ///
 /// ```c
 /// BOOL InvalidateRgn(
@@ -4337,8 +4330,8 @@ int IsMenu(int hMenu) => _IsMenu(hMenu);
 final _IsMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
     int Function(int hMenu)>('IsMenu');
 
-/// Determines whether the current process is dots per inch (dpi) aware
-/// such that it adjusts the sizes of UI elements to compensate for the dpi
+/// Determines whether the current process is dots per inch (dpi) aware such
+/// that it adjusts the sizes of UI elements to compensate for the dpi
 /// setting.
 ///
 /// ```c
@@ -4454,8 +4447,8 @@ final _IsWindowVisible =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'IsWindowVisible');
 
-/// Determines whether the last message read from the current thread's
-/// queue originated from a WOW64 process.
+/// Determines whether the last message read from the current thread's queue
+/// originated from a WOW64 process.
 ///
 /// ```c
 /// BOOL IsWow64Message();
@@ -4961,9 +4954,9 @@ final _MonitorFromRect = _user32.lookupFunction<
     IntPtr Function(Pointer<RECT> lprc, Uint32 dwFlags),
     int Function(Pointer<RECT> lprc, int dwFlags)>('MonitorFromRect');
 
-/// The MonitorFromWindow function retrieves a handle to the display
-/// monitor that has the largest area of intersection with the bounding
-/// rectangle of a specified window.
+/// The MonitorFromWindow function retrieves a handle to the display monitor
+/// that has the largest area of intersection with the bounding rectangle of
+/// a specified window.
 ///
 /// ```c
 /// HMONITOR MonitorFromWindow(
@@ -5030,8 +5023,8 @@ final _MsgWaitForMultipleObjects = _user32.lookupFunction<
         int dwMilliseconds, int dwWakeMask)>('MsgWaitForMultipleObjects');
 
 /// Waits until one or all of the specified objects are in the signaled
-/// state, an I/O completion routine or asynchronous procedure call (APC)
-/// is queued to the thread, or the time-out interval elapses. The array of
+/// state, an I/O completion routine or asynchronous procedure call (APC) is
+/// queued to the thread, or the time-out interval elapses. The array of
 /// objects can include input event objects, which you specify using the
 /// dwWakeMask parameter.
 ///
@@ -5109,8 +5102,8 @@ final _OffsetRect = _user32.lookupFunction<
     Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
     int Function(Pointer<RECT> lprc, int dx, int dy)>('OffsetRect');
 
-/// Opens the clipboard for examination and prevents other applications
-/// from modifying the clipboard content.
+/// Opens the clipboard for examination and prevents other applications from
+/// modifying the clipboard content.
 ///
 /// ```c
 /// BOOL OpenClipboard(
@@ -5214,8 +5207,8 @@ final _PaintDesktop =
     _user32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'PaintDesktop');
 
-/// Dispatches incoming sent messages, checks the thread message queue for
-/// a posted message, and retrieves the message (if any exist).
+/// Dispatches incoming sent messages, checks the thread message queue for a
+/// posted message, and retrieves the message (if any exist).
 ///
 /// ```c
 /// BOOL PeekMessageW(
@@ -5273,9 +5266,9 @@ final _PhysicalToLogicalPointForPerMonitorDPI = _user32.lookupFunction<
     int Function(int hWnd,
         Pointer<POINT> lpPoint)>('PhysicalToLogicalPointForPerMonitorDPI');
 
-/// Places (posts) a message in the message queue associated with the
-/// thread that created the specified window and returns without waiting
-/// for the thread to process the message.
+/// Places (posts) a message in the message queue associated with the thread
+/// that created the specified window and returns without waiting for the
+/// thread to process the message.
 ///
 /// ```c
 /// BOOL PostMessageW(
@@ -5307,8 +5300,8 @@ void PostQuitMessage(int nExitCode) => _PostQuitMessage(nExitCode);
 final _PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
     void Function(int nExitCode)>('PostQuitMessage');
 
-/// Posts a message to the message queue of the specified thread. It
-/// returns without waiting for the thread to process the message.
+/// Posts a message to the message queue of the specified thread. It returns
+/// without waiting for the thread to process the message.
 ///
 /// ```c
 /// BOOL PostThreadMessageW(
@@ -5345,10 +5338,10 @@ final _PrintWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, IntPtr hdcBlt, Uint32 nFlags),
     int Function(int hwnd, int hdcBlt, int nFlags)>('PrintWindow');
 
-/// The PtInRect function determines whether the specified point lies
-/// within the specified rectangle. A point is within a rectangle if it
-/// lies on the left or top side or is within all four sides. A point on
-/// the right or bottom side is considered outside the rectangle.
+/// The PtInRect function determines whether the specified point lies within
+/// the specified rectangle. A point is within a rectangle if it lies on the
+/// left or top side or is within all four sides. A point on the right or
+/// bottom side is considered outside the rectangle.
 ///
 /// ```c
 /// BOOL PtInRect(
@@ -5363,8 +5356,8 @@ final _PtInRect = _user32.lookupFunction<
     Int32 Function(Pointer<RECT> lprc, POINT pt),
     int Function(Pointer<RECT> lprc, POINT pt)>('PtInRect');
 
-/// The RedrawWindow function updates the specified rectangle or region in
-/// a window's client area.
+/// The RedrawWindow function updates the specified rectangle or region in a
+/// window's client area.
 ///
 /// ```c
 /// BOOL RedrawWindow(
@@ -5385,8 +5378,8 @@ final _RedrawWindow = _user32.lookupFunction<
     int Function(int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate,
         int flags)>('RedrawWindow');
 
-/// Registers a window class for subsequent use in calls to the
-/// CreateWindow or CreateWindowEx function.
+/// Registers a window class for subsequent use in calls to the CreateWindow
+/// or CreateWindowEx function.
 ///
 /// ```c
 /// ATOM RegisterClassW(
@@ -5400,8 +5393,8 @@ final _RegisterClass = _user32.lookupFunction<
     Uint16 Function(Pointer<WNDCLASS> lpWndClass),
     int Function(Pointer<WNDCLASS> lpWndClass)>('RegisterClassW');
 
-/// Registers a window class for subsequent use in calls to the
-/// CreateWindow or CreateWindowEx function.
+/// Registers a window class for subsequent use in calls to the CreateWindow
+/// or CreateWindowEx function.
 ///
 /// ```c
 /// ATOM RegisterClassExW(
@@ -5448,8 +5441,8 @@ final _RegisterHotKey = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 id, Uint32 fsModifiers, Uint32 vk),
     int Function(int hWnd, int id, int fsModifiers, int vk)>('RegisterHotKey');
 
-/// Registers the application to receive power setting notifications for
-/// the specific power setting event.
+/// Registers the application to receive power setting notifications for the
+/// specific power setting event.
 ///
 /// ```c
 /// HPOWERNOTIFY RegisterPowerSettingNotification(
@@ -5555,8 +5548,8 @@ final _ReleaseCapture =
 
 /// The ReleaseDC function releases a device context (DC), freeing it for
 /// use by other applications. The effect of the ReleaseDC function depends
-/// on the type of DC. It frees only common and window DCs. It has no
-/// effect on class or private DCs.
+/// on the type of DC. It frees only common and window DCs. It has no effect
+/// on class or private DCs.
 ///
 /// ```c
 /// int ReleaseDC(
@@ -5687,8 +5680,8 @@ final _ScrollDC = _user32.lookupFunction<
         int hrgnUpdate,
         Pointer<RECT> lprcUpdate)>('ScrollDC');
 
-/// The ScrollWindow function scrolls the contents of the specified
-/// window's client area.
+/// The ScrollWindow function scrolls the contents of the specified window's
+/// client area.
 ///
 /// ```c
 /// BOOL ScrollWindow(
@@ -5818,11 +5811,11 @@ final _SendMessage = _user32.lookupFunction<
     int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
 
 /// Sends the specified message to a window or windows. It calls the window
-/// procedure for the specified window and returns immediately if the
-/// window belongs to another thread. After the window procedure processes
-/// the message, the system calls the specified callback function, passing
-/// the result of the message processing and an application-defined value
-/// to the callback function.
+/// procedure for the specified window and returns immediately if the window
+/// belongs to another thread. After the window procedure processes the
+/// message, the system calls the specified callback function, passing the
+/// result of the message processing and an application-defined value to the
+/// callback function.
 ///
 /// ```c
 /// BOOL SendMessageCallbackW(
@@ -5879,9 +5872,9 @@ final _SendMessageTimeout = _user32.lookupFunction<
 /// created by the calling thread, SendNotifyMessage calls the window
 /// procedure for the window and does not return until the window procedure
 /// has processed the message. If the window was created by a different
-/// thread, SendNotifyMessage passes the message to the window procedure
-/// and returns immediately; it does not wait for the window procedure to
-/// finish processing the message.
+/// thread, SendNotifyMessage passes the message to the window procedure and
+/// returns immediately; it does not wait for the window procedure to finish
+/// processing the message.
 ///
 /// ```c
 /// BOOL SendNotifyMessageW(
@@ -5964,9 +5957,9 @@ int SetCaretPos(int X, int Y) => _SetCaretPos(X, Y);
 final _SetCaretPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
     int Function(int X, int Y)>('SetCaretPos');
 
-/// Places data on the clipboard in a specified clipboard format. The
-/// window must be the current clipboard owner, and the application must
-/// have called the OpenClipboard function.
+/// Places data on the clipboard in a specified clipboard format. The window
+/// must be the current clipboard owner, and the application must have
+/// called the OpenClipboard function.
 ///
 /// ```c
 /// HANDLE SetClipboardData(
@@ -6052,8 +6045,8 @@ int SetCursorPos(int X, int Y) => _SetCursorPos(X, Y);
 final _SetCursorPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
     int Function(int X, int Y)>('SetCursorPos');
 
-/// Overrides the default per-monitor DPI scaling behavior of a child
-/// window in a dialog.
+/// Overrides the default per-monitor DPI scaling behavior of a child window
+/// in a dialog.
 ///
 /// ```c
 /// BOOL SetDialogControlDpiChangeBehavior(
@@ -6072,10 +6065,10 @@ final _SetDialogControlDpiChangeBehavior = _user32.lookupFunction<
         int hWnd, int mask, int values)>('SetDialogControlDpiChangeBehavior');
 
 /// Dialogs in Per-Monitor v2 contexts are automatically DPI scaled. This
-/// method lets you customize their DPI change behavior. This function
-/// works in conjunction with the DIALOG_DPI_CHANGE_BEHAVIORS enum in order
-/// to override the default DPI scaling behavior for dialogs. This function
-/// is called on a specified dialog, for which the specified flags are
+/// method lets you customize their DPI change behavior. This function works
+/// in conjunction with the DIALOG_DPI_CHANGE_BEHAVIORS enum in order to
+/// override the default DPI scaling behavior for dialogs. This function is
+/// called on a specified dialog, for which the specified flags are
 /// individually saved.
 ///
 /// ```c
@@ -6273,8 +6266,8 @@ final _SetMenuInfo = _user32.lookupFunction<
     int Function(int param0, Pointer<MENUINFO> param1)>('SetMenuInfo');
 
 /// Associates the specified bitmap with a menu item. Whether the menu item
-/// is selected or clear, the system displays the appropriate bitmap next
-/// to the menu item.
+/// is selected or clear, the system displays the appropriate bitmap next to
+/// the menu item.
 ///
 /// ```c
 /// BOOL SetMenuItemBitmaps(
@@ -6318,11 +6311,11 @@ final _SetMenuItemInfo = _user32.lookupFunction<
     int Function(int hmenu, int item, int fByPositon,
         Pointer<MENUITEMINFO> lpmii)>('SetMenuItemInfoW');
 
-/// Sets the extra message information for the current thread. Extra
-/// message information is an application- or driver-defined value
-/// associated with the current thread's message queue. An application can
-/// use the GetMessageExtraInfo function to retrieve a thread's extra
-/// message information.
+/// Sets the extra message information for the current thread. Extra message
+/// information is an application- or driver-defined value associated with
+/// the current thread's message queue. An application can use the
+/// GetMessageExtraInfo function to retrieve a thread's extra message
+/// information.
 ///
 /// ```c
 /// LPARAM SetMessageExtraInfo(
@@ -6464,9 +6457,9 @@ final _SetScrollInfo = _user32.lookupFunction<
     int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
         int redraw)>('SetScrollInfo');
 
-/// Sets the colors for the specified display elements. Display elements
-/// are the various parts of a window and the display that appear on the
-/// system display screen.
+/// Sets the colors for the specified display elements. Display elements are
+/// the various parts of a window and the display that appear on the system
+/// display screen.
 ///
 /// ```c
 /// BOOL SetSysColors(
@@ -6488,8 +6481,8 @@ final _SetSysColors = _user32.lookupFunction<
 
 /// Enables an application to customize the system cursors. It replaces the
 /// contents of the system cursor specified by the id parameter with the
-/// contents of the cursor specified by the hcur parameter and then
-/// destroys hcur.
+/// contents of the cursor specified by the hcur parameter and then destroys
+/// hcur.
 ///
 /// ```c
 /// BOOL SetSystemCursor(
@@ -6611,8 +6604,8 @@ final _SetWindowLongPtr = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
     int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
 
-/// Sets the show state and the restored, minimized, and maximized
-/// positions of the specified window.
+/// Sets the show state and the restored, minimized, and maximized positions
+/// of the specified window.
 ///
 /// ```c
 /// BOOL SetWindowPlacement(
@@ -6629,10 +6622,10 @@ final _SetWindowPlacement = _user32.lookupFunction<
     int Function(
         int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('SetWindowPlacement');
 
-/// Changes the size, position, and Z order of a child, pop-up, or
-/// top-level window. These windows are ordered according to their
-/// appearance on the screen. The topmost window receives the highest rank
-/// and is the first window in the Z order.
+/// Changes the size, position, and Z order of a child, pop-up, or top-level
+/// window. These windows are ordered according to their appearance on the
+/// screen. The topmost window receives the highest rank and is the first
+/// window in the Z order.
 ///
 /// ```c
 /// BOOL SetWindowPos(
@@ -6656,10 +6649,10 @@ final _SetWindowPos = _user32.lookupFunction<
     int Function(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy,
         int uFlags)>('SetWindowPos');
 
-/// The SetWindowRgn function sets the window region of a window. The
-/// window region determines the area within the window where the system
-/// permits drawing. The system does not display any portion of a window
-/// that lies outside of the window region
+/// The SetWindowRgn function sets the window region of a window. The window
+/// region determines the area within the window where the system permits
+/// drawing. The system does not display any portion of a window that lies
+/// outside of the window region
 ///
 /// ```c
 /// int SetWindowRgn(
@@ -6700,10 +6693,10 @@ final _SetWindowsHookEx = _user32.lookupFunction<
     int Function(int idHook, Pointer<NativeFunction<CallWndProc>> lpfn,
         int hmod, int dwThreadId)>('SetWindowsHookExW');
 
-/// Changes the text of the specified window's title bar (if it has one).
-/// If the specified window is a control, the text of the control is
-/// changed. However, SetWindowText cannot change the text of a control in
-/// another application.
+/// Changes the text of the specified window's title bar (if it has one). If
+/// the specified window is a control, the text of the control is changed.
+/// However, SetWindowText cannot change the text of a control in another
+/// application.
 ///
 /// ```c
 /// BOOL SetWindowTextW(
@@ -6916,9 +6909,9 @@ final _SystemParametersInfoForDpi = _user32.lookupFunction<
         int dpi)>('SystemParametersInfoForDpi');
 
 /// The TabbedTextOut function writes a character string at a specified
-/// location, expanding tabs to the values specified in an array of
-/// tab-stop positions. Text is written in the currently selected font,
-/// background color, and text color.
+/// location, expanding tabs to the values specified in an array of tab-stop
+/// positions. Text is written in the currently selected font, background
+/// color, and text color.
 ///
 /// ```c
 /// LONG TabbedTextOutW(
@@ -7193,8 +7186,8 @@ final _UnhookWindowsHookEx =
     _user32.lookupFunction<Int32 Function(IntPtr hhk), int Function(int hhk)>(
         'UnhookWindowsHookEx');
 
-/// The UnionRect function creates the union of two rectangles. The union
-/// is the smallest rectangle that contains both source rectangles.
+/// The UnionRect function creates the union of two rectangles. The union is
+/// the smallest rectangle that contains both source rectangles.
 ///
 /// ```c
 /// BOOL UnionRect(
@@ -7411,9 +7404,8 @@ final _WaitForInputIdle = _user32.lookupFunction<
     int Function(int hProcess, int dwMilliseconds)>('WaitForInputIdle');
 
 /// Yields control to other threads when a thread has no other messages in
-/// its message queue. The WaitMessage function suspends the thread and
-/// does not return until a new message is placed in the thread's message
-/// queue.
+/// its message queue. The WaitMessage function suspends the thread and does
+/// not return until a new message is placed in the thread's message queue.
 ///
 /// ```c
 /// BOOL WaitMessage();
@@ -7424,9 +7416,9 @@ int WaitMessage() => _WaitMessage();
 final _WaitMessage =
     _user32.lookupFunction<Int32 Function(), int Function()>('WaitMessage');
 
-/// The WindowFromDC function returns a handle to the window associated
-/// with the specified display device context (DC). Output functions that
-/// use the specified device context draw into this window.
+/// The WindowFromDC function returns a handle to the window associated with
+/// the specified display device context (DC). Output functions that use the
+/// specified device context draw into this window.
 ///
 /// ```c
 /// HWND WindowFromDC(

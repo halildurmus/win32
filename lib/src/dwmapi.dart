@@ -149,9 +149,9 @@ final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
         int cbAttribute)>('DwmGetWindowAttribute');
 
-/// Called by an application to indicate that all previously provided
-/// iconic bitmaps from a window, both thumbnails and peek representations,
-/// should be refreshed.
+/// Called by an application to indicate that all previously provided iconic
+/// bitmaps from a window, both thumbnails and peek representations, should
+/// be refreshed.
 ///
 /// ```c
 /// DWMAPI DwmInvalidateIconicBitmaps(

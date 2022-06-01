@@ -239,8 +239,8 @@ final _EnableThemeDialogTexture = _uxtheme.lookupFunction<
     Int32 Function(IntPtr hwnd, Uint32 dwFlags),
     int Function(int hwnd, int dwFlags)>('EnableThemeDialogTexture');
 
-/// Retrieves the name of the current visual style, and optionally
-/// retrieves the color scheme name and size name.
+/// Retrieves the name of the current visual style, and optionally retrieves
+/// the color scheme name and size name.
 ///
 /// ```c
 /// HRESULT GetCurrentThemeName(
@@ -482,8 +482,7 @@ final _IsThemeBackgroundPartiallyTransparent = _uxtheme.lookupFunction<
     int Function(int hTheme, int iPartId,
         int iStateId)>('IsThemeBackgroundPartiallyTransparent');
 
-/// Reports whether a specified dialog window supports background
-/// texturing.
+/// Reports whether a specified dialog window supports background texturing.
 ///
 /// ```c
 /// BOOL IsThemeDialogTextureEnabled(

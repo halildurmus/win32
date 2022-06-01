@@ -37,8 +37,8 @@ final _DestroyPhysicalMonitor = _dxva2.lookupFunction<
     Int32 Function(IntPtr hMonitor),
     int Function(int hMonitor)>('DestroyPhysicalMonitor');
 
-/// Closes an array of physical monitor handles. Call this function to
-/// close an array of monitor handles obtained from the
+/// Closes an array of physical monitor handles. Call this function to close
+/// an array of monitor handles obtained from the
 /// GetPhysicalMonitorsFromHMONITOR or
 /// GetPhysicalMonitorsFromIDirect3DDevice9 function.
 ///
@@ -60,8 +60,7 @@ final _DestroyPhysicalMonitors = _dxva2.lookupFunction<
             Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
     'DestroyPhysicalMonitors');
 
-/// Retrieves a monitor's minimum, maximum, and current brightness
-/// settings.
+/// Retrieves a monitor's minimum, maximum, and current brightness settings.
 ///
 /// ```c
 /// _BOOL GetMonitorBrightness(
@@ -371,8 +370,7 @@ final _GetPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<
             Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
     'GetPhysicalMonitorsFromHMONITOR');
 
-/// Saves the current monitor settings to the display's nonvolatile
-/// storage.
+/// Saves the current monitor settings to the display's nonvolatile storage.
 ///
 /// ```c
 /// _BOOL SaveCurrentMonitorSettings(
@@ -387,9 +385,9 @@ final _SaveCurrentMonitorSettings = _dxva2.lookupFunction<
     Int32 Function(IntPtr hMonitor),
     int Function(int hMonitor)>('SaveCurrentMonitorSettings');
 
-/// Sets a monitor's brightness value. Increasing the brightness value
-/// makes the display on the monitor brighter, and decreasing it makes the
-/// display dimmer.
+/// Sets a monitor's brightness value. Increasing the brightness value makes
+/// the display on the monitor brighter, and decreasing it makes the display
+/// dimmer.
 ///
 /// ```c
 /// _BOOL SetMonitorBrightness(
@@ -441,9 +439,9 @@ final _SetMonitorContrast = _dxva2.lookupFunction<
 /// Sets the horizontal or vertical position of a monitor's display area.
 /// Increasing the horizontal position moves the display area toward the
 /// right side of the screen; decreasing it moves the display area toward
-/// the left. Increasing the vertical position moves the display area
-/// toward the top of the screen; decreasing it moves the display area
-/// toward the bottom.
+/// the left. Increasing the vertical position moves the display area toward
+/// the top of the screen; decreasing it moves the display area toward the
+/// bottom.
 ///
 /// ```c
 /// _BOOL SetMonitorDisplayAreaPosition(

@@ -35,8 +35,8 @@ int AbortPrinter(int hPrinter) => _AbortPrinter(hPrinter);
 final _AbortPrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('AbortPrinter');
 
-/// The AddForm function adds a form to the list of available forms that
-/// can be selected for the specified printer.
+/// The AddForm function adds a form to the list of available forms that can
+/// be selected for the specified printer.
 ///
 /// ```c
 /// BOOL AddFormW(
@@ -108,8 +108,8 @@ final _EndPagePrinter = _spoolss.lookupFunction<Int32 Function(IntPtr hPrinter),
 
 /// The FindClosePrinterChangeNotification function closes a change
 /// notification object created by calling the
-/// FindFirstPrinterChangeNotification function. The printer or print
-/// server associated with the change notification object will no longer be
+/// FindFirstPrinterChangeNotification function. The printer or print server
+/// associated with the change notification object will no longer be
 /// monitored by that object.
 ///
 /// ```c
@@ -230,8 +230,8 @@ final _StartPagePrinter = _spoolss.lookupFunction<
     Int32 Function(IntPtr hPrinter),
     int Function(int hPrinter)>('StartPagePrinter');
 
-/// The WritePrinter function notifies the print spooler that data should
-/// be written to the specified printer.
+/// The WritePrinter function notifies the print spooler that data should be
+/// written to the specified printer.
 ///
 /// ```c
 /// BOOL WritePrinter(

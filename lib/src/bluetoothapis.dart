@@ -21,8 +21,8 @@ import 'structs.g.dart';
 
 final _bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
 
-/// Specifies the end of reliable write procedures, and the writes should
-/// be aborted.
+/// Specifies the end of reliable write procedures, and the writes should be
+/// aborted.
 ///
 /// ```c
 /// HRESULT BluetoothGATTAbortReliableWrite(

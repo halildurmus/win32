@@ -38,8 +38,7 @@ final _SetupDiDestroyDeviceInfoList = _setupapi.lookupFunction<
     int Function(int DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
 
 /// The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure
-/// that specifies a device information element in a device information
-/// set.
+/// that specifies a device information element in a device information set.
 ///
 /// ```c
 /// WINSETUPAPI BOOL SetupDiEnumDeviceInfo(
