@@ -121,6 +121,7 @@ const structsToGenerate = <String, String>{
       "The DEVMODE data structure contains information about the initialization and environment of a printer or a display device.",
   "Windows.Win32.Graphics.Gdi.DIBSECTION":
       "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function.",
+  "Windows.Win32.System.Ioctl.DISK_EXTENT": "Represents a disk extent.",
   "Windows.Win32.System.Ioctl.DISK_GEOMETRY":
       "Describes the geometry of disk devices and media.",
   "Windows.Win32.System.Ioctl.DISK_GEOMETRY_EX":
