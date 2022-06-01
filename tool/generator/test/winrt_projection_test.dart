@@ -140,6 +140,21 @@ void main() {
     expect(projection.importHeader, contains("import 'igamepadstatics.dart'"));
   });
 
+  test('WinRT class includes correct import file for structs', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Gaming.Input.Gamepad');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'structs.g.dart'"));
+  });
+  test('WinRT interface includes correct import file for structs', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'structs.g.dart"));
+  });
+
   test('WinRT GetDateTime returns a DateTime', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
