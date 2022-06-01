@@ -16,6 +16,52 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+/// Represents the current state of the gamepad.
+///
+/// {@category Struct}
+class GamepadReading extends Struct {
+  @Uint64()
+  external int Timestamp;
+
+  @Uint32()
+  external int Buttons;
+
+  @Double()
+  external double LeftTrigger;
+
+  @Double()
+  external double RightTrigger;
+
+  @Double()
+  external double LeftThumbstickX;
+
+  @Double()
+  external double LeftThumbstickY;
+
+  @Double()
+  external double RightThumbstickX;
+
+  @Double()
+  external double RightThumbstickY;
+}
+
+/// Describes the gamepad motor speed.
+///
+/// {@category Struct}
+class GamepadVibration extends Struct {
+  @Double()
+  external double LeftMotor;
+
+  @Double()
+  external double RightMotor;
+
+  @Double()
+  external double LeftTrigger;
+
+  @Double()
+  external double RightTrigger;
+}
+
 /// Describes a 3*2 floating point matrix.
 ///
 /// {@category Struct}
@@ -211,50 +257,4 @@ class Vector4 extends Struct {
 
   @Float()
   external double W;
-}
-
-/// Represents the current state of the gamepad.
-///
-/// {@category Struct}
-class GamepadReading extends Struct {
-  @Uint64()
-  external int Timestamp;
-
-  @Uint32()
-  external int Buttons;
-
-  @Double()
-  external double LeftTrigger;
-
-  @Double()
-  external double RightTrigger;
-
-  @Double()
-  external double LeftThumbstickX;
-
-  @Double()
-  external double LeftThumbstickY;
-
-  @Double()
-  external double RightThumbstickX;
-
-  @Double()
-  external double RightThumbstickY;
-}
-
-/// Describes the gamepad motor speed.
-///
-/// {@category Struct}
-class GamepadVibration extends Struct {
-  @Double()
-  external double LeftMotor;
-
-  @Double()
-  external double RightMotor;
-
-  @Double()
-  external double LeftTrigger;
-
-  @Double()
-  external double RightTrigger;
 }
