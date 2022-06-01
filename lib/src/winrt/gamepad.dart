@@ -28,7 +28,10 @@ import 'igamecontrollerbatteryinfo.dart';
 import 'igamepadstatics.dart';
 import 'igamepadstatics2.dart';
 import 'structs.g.dart';
+import 'headset.dart';
+import 'userchangedeventargs.dart';
 import 'user.dart';
+import 'batteryreport.dart';
 import 'ivectorview.dart';
 import '../com/iinspectable.dart';
 

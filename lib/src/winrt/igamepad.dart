@@ -22,9 +22,8 @@ import '../winrt_helpers.dart';
 import '../extensions/hstring_array.dart';
 
 import 'igamecontroller.dart';
-
-import '../com/iinspectable.dart';
 import 'structs.g.dart';
+import '../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IGamepad = '{BC7BB43C-0A69-3903-9E9D-A50F86A45DE5}';

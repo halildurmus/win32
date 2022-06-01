@@ -108,6 +108,10 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
+  'Windows.Gaming.Input.Gamepad',
+  'Windows.Gaming.Input.IGameController',
+  'Windows.Gaming.Input.IGameControllerBatteryInfo',
+  'Windows.Gaming.Input.IGamepad',
   'Windows.Gaming.Input.IGamepad2',
   'Windows.Gaming.Input.IGamepadStatics',
   'Windows.Gaming.Input.IGamepadStatics2',
@@ -146,10 +150,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
   //
-  //   Adds imports for enums incorrectly
-  //   'Windows.Gaming.Input.IGameController',
-  //   'Windows.Gaming.Input.IGameControllerBatteryInfo',
-  //   'Windows.Gaming.Input.IGamepad',
+  //   Static get properties incorrectly projected as methods
   //   'Windows.Gaming.Input.Gamepad',
   //
   //   Requires WinRT delegate support
