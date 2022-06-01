@@ -108,7 +108,6 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
-  'Windows.Gaming.Input.Gamepad',
   'Windows.Gaming.Input.IGameController',
   'Windows.Gaming.Input.IGameControllerBatteryInfo',
   'Windows.Gaming.Input.IGamepad',
