@@ -57,4 +57,62 @@ void main() {
         equals(
             '_PROPVARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union'));
   });
+
+  test('stripAnsiUnicodeSuffix', () {
+    expect(stripAnsiUnicodeSuffix('AREA'), equals('AREA'));
+    expect(stripAnsiUnicodeSuffix('Pointer<AREA>'), equals('Pointer<AREA>'));
+    expect(stripAnsiUnicodeSuffix('ADDJOB_INFO_1W'), equals('ADDJOB_INFO_1'));
+    expect(stripAnsiUnicodeSuffix('Pointer<ADDJOB_INFO_1W>'),
+        equals('Pointer<ADDJOB_INFO_1>'));
+  });
+
+  test('wrapCommentText', () {
+    expect(wrapCommentText('', 12), isEmpty);
+
+    expect(wrapCommentText('This is a short string', 8),
+        equals('/// This\n/// is a\n/// short\n/// string'));
+
+    expect(wrapCommentText('This is a short string', 12),
+        equals('/// This is\n/// a short\n/// string'));
+
+    expect(wrapCommentText('This is a short string', 20),
+        equals('/// This is a short\n/// string'));
+
+    expect(wrapCommentText('This is a short string', 200),
+        equals('/// This is a short string'));
+  });
+
+  test('classNameForInterfaceName', () {
+    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkW'),
+        equals('Windows.Win32.UI.Shell.ShellLink'));
+    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLinkA'),
+        equals('Windows.Win32.UI.Shell.ShellLink'));
+    expect(classNameForInterfaceName('Windows.Win32.UI.Shell.IShellLink'),
+        equals('Windows.Win32.UI.Shell.ShellLink'));
+  });
+
+  test('toCamelCase', () {
+    expect('TitleCase'.toCamelCase(), equals('titleCase'));
+    expect('camelCase'.toCamelCase(), equals('camelCase'));
+    expect(''.toCamelCase(), equals(''));
+  });
+
+  test('private', () {
+    expect(private('foo'), equals('_foo'));
+    expect(private('_foo'), equals('__foo'));
+  });
+
+  test('stripLeadingUnderscores', () {
+    expect(stripLeadingUnderscores('_leading'), equals('leading'));
+    expect(stripLeadingUnderscores('__leading'), equals('leading'));
+    expect(stripLeadingUnderscores('_2'), equals('x2'));
+    expect(stripLeadingUnderscores('noUnderscore'), equals('noUnderscore'));
+  });
+
+  test('libraryFromDllName', () {
+    expect(libraryFromDllName('kernel32'), equals('kernel32.dll'));
+    expect(libraryFromDllName('gdi32'), equals('gdi32.dll'));
+    expect(libraryFromDllName('bthprops'), equals('bthprops.cpl'));
+    expect(libraryFromDllName('winspool'), equals('winspool.drv'));
+  });
 }

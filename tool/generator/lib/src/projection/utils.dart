@@ -42,12 +42,6 @@ bool typePretendsToBeAnsi(String typeName) {
 bool typedefIsAnsi(TypeDef typeDef) =>
     typeDef.name.endsWith('A') && !typePretendsToBeAnsi(typeDef.name);
 
-bool typedefIsNotAnsi(TypeDef typeDef) => !typedefIsAnsi(typeDef);
-
-bool comInterfaceIsNotAnsi(TypeDef comInterface) =>
-    comInterface.name.endsWith('IEnumSTATDATA') ||
-    !comInterface.name.endsWith('A');
-
 /// Strip the Unicode / ANSI suffix from the name. For example, `MessageBoxW`
 /// should become `MessageBox`. Heuristic approach.
 String stripAnsiUnicodeSuffix(String typeName) {
@@ -101,7 +95,7 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   }
 
   final words = inputText.split(' ');
-  final textLine = StringBuffer('/// ');
+  final textLine = StringBuffer('///');
   final outputText = StringBuffer();
 
   for (final word in words) {
@@ -110,9 +104,9 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
       outputText.write(textLine);
       textLine
         ..clear()
-        ..write('/// $word ');
+        ..write('/// $word');
     } else {
-      textLine.write('$word ');
+      textLine.write(' $word');
     }
   }
 
