@@ -49,12 +49,21 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // TODO: Update this once we generate WinRT enums in their respective
       // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
       return '';
-    } else if (typeDef.isClass || typeDef.isInterface) {
+    } else if (
+        // TODO: Is there a better way to check if the type is WinRT class?
+        (typeDef.isClass && typeDef.parent!.name == 'System.Object') ||
+            typeDef.isInterface) {
       return '${stripAnsiUnicodeSuffix(stripGenerics(lastComponent(typeDef.name))).toLowerCase()}.dart';
-    } else {
+    } else
+    // TODO: Is there a better way to check if the type is struct?
+    if (typeDef.isClass && typeDef.parent!.name == 'System.ValueType') {
       // TODO: Update this once we generate WinRT structs in their respective
       // folders e.g. Windows.Foundation.Point -> foundation/structs.g.dart
       return 'structs.g.dart';
+    } else {
+      // TODO: Add support for these as they occur.
+      print('Unable to get import for typeDef: $typeDef');
+      return '';
     }
   }
 

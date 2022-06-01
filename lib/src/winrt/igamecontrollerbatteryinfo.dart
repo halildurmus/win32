@@ -21,6 +21,7 @@ import '../winrt_helpers.dart';
 
 import '../extensions/hstring_array.dart';
 
+import 'batteryreport.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
