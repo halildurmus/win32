@@ -114,6 +114,7 @@ void main()
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
+    printf("  'DISK_EXTENT': %zu,\n", sizeof(DISK_EXTENT));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
     printf("  'DISK_GEOMETRY_EX': %zu,\n", sizeof(DISK_GEOMETRY_EX));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
@@ -275,6 +276,7 @@ void main()
     printf("  'STATPROPSETSTG': %zu,\n", sizeof(STATPROPSETSTG));
     printf("  'STATPROPSTG': %zu,\n", sizeof(STATPROPSTG));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
+    printf("  'STORAGE_DEVICE_NUMBER': %zu,\n", sizeof(STORAGE_DEVICE_NUMBER));
     printf("  'STRRET': %zu,\n", sizeof(STRRET));
     printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFOW));
@@ -297,6 +299,7 @@ void main()
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
     printf("  'VARDESC': %zu,\n", sizeof(VARDESC));
+    printf("  'VOLUME_DISK_EXTENTS': %zu,\n", sizeof(VOLUME_DISK_EXTENTS));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
     printf("  'WAVEFORMATEX': %zu,\n", sizeof(WAVEFORMATEX));
     printf("  'WAVEFORMATEXTENSIBLE': %zu,\n", sizeof(WAVEFORMATEXTENSIBLE));
