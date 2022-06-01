@@ -279,28 +279,28 @@ void generateWinRTApis() {
 int generateWinRTStructs() {
   final structs = windowsRuntimeStructsToGenerate;
   final file = File('../../lib/src/winrt/structs.g.dart');
-  var structProjectionsLength = 0;
+  final structProjections = <StructProjection>[];
 
   for (final typeName in structs.keys) {
     final scope = MetadataStore.getScopeForType(typeName);
 
     final typeDefs = scope.typeDefs
-        .where((typeDef) => structs.keys.contains(typeDef.name))
-        .where((typeDef) => typeDef.supportedArchitectures.x64)
-        .toList()
-      ..sort((a, b) => lastComponent(a.name).compareTo(lastComponent(b.name)));
+        .where((typeDef) => typeName == typeDef.name)
+        .where((typeDef) => typeDef.supportedArchitectures.x64);
 
-    final structProjections = typeDefs.map((struct) => StructProjection(
+    structProjections.addAll(typeDefs.map((struct) => StructProjection(
         struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-        comment: structs[struct.name]!));
-    structProjectionsLength += structProjections.length;
-
-    final structsFile = [winrtStructFileHeader, ...structProjections].join();
-
-    file.writeAsStringSync(DartFormatter().format(structsFile));
+        comment: structs[struct.name]!)));
   }
 
-  return structProjectionsLength;
+  structProjections.sort((a, b) =>
+      lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+
+  final structsFile = [winrtStructFileHeader, ...structProjections].join();
+
+  file.writeAsStringSync(DartFormatter().format(structsFile));
+
+  return structProjections.length;
 }
 
 void main() {
