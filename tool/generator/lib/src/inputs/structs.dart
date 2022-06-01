@@ -438,6 +438,8 @@ const structsToGenerate = <String, String>{
       "The STATPROPSTG structure contains data about a single property in a property set. This data is the property ID and type tag, and the optional string name that may be associated with the property.",
   "Windows.Win32.System.Com.STATSTG":
       "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.",
+  "Windows.Win32.System.Ioctl.STORAGE_DEVICE_NUMBER":
+      "Contains information about a device. This structure is used by the IOCTL_STORAGE_GET_DEVICE_NUMBER control code.",
   "Windows.Win32.UI.Shell.Common.STRRET":
       "Contains strings returned from the IShellFolder interface methods.",
   "Windows.Win32.UI.WindowsAndMessaging.STYLESTRUCT":
@@ -483,6 +485,8 @@ const structsToGenerate = <String, String>{
       "Describes a variable, constant, or data member.",
   // "Windows.Win32.System.Com.VARIANT":
   //     "The VARIANT structure is a container for a large union that carries many types of data.",
+  "Windows.Win32.System.Ioctl.VOLUME_DISK_EXTENTS":
+      "Represents a physical location on a disk. It is the output buffer for the IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS control code.",
   "Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO":
       "Contains version information for a file. This information is language and code page independent.",
   "Windows.Win32.Media.Audio.WAVEFORMATEX":
