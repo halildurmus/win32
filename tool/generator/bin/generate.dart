@@ -251,17 +251,43 @@ void generateComApis() {
 }
 
 void generateWinRTApis() {
-  for (final interface in windowsRuntimeTypesToGenerate) {
-    final typeDef = MetadataStore.getMetadataForType(interface);
-    if (typeDef == null) throw Exception("Can't find $interface");
-    final interfaceProjection = typeDef.isInterface
+  final mainWindowsRuntimeTypesToGenerate = windowsRuntimeTypesToGenerate
+    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
+  final typesToGenerate = <String>{};
+
+  for (final type in mainWindowsRuntimeTypesToGenerate) {
+    print('Projecting $type and its dependencies...');
+    final typeDef = MetadataStore.getMetadataForType(type);
+    if (typeDef == null) throw Exception("Can't find $type");
+    final projection = typeDef.isInterface
         ? WinRTInterfaceProjection(typeDef)
         : WinRTClassProjection(typeDef);
 
-    final dartClass = interfaceProjection.toString();
+    typesToGenerate
+      ..addAll([
+        type,
+        if (projection is WinRTClassProjection) ...[
+          ...projection.factoryInterfaces,
+          ...projection.staticInterfaces,
+        ],
+        ...projection.typeDef.interfaces.map((interface) => interface.name),
+      ])
+      ..removeWhere((type) => type.isEmpty)
+      ..removeWhere((type) => type.contains('`')) // Remove generic interfaces
+      ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
+  }
 
+  for (final type in typesToGenerate) {
+    print('Writing $type to file...');
+    final typeDef = MetadataStore.getMetadataForType(type);
+    if (typeDef == null) throw Exception("Can't find $type");
+    final projection = typeDef.isInterface
+        ? WinRTInterfaceProjection(typeDef)
+        : WinRTClassProjection(typeDef);
+
+    final dartClass = projection.toString();
     final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(interface)).toLowerCase();
+        stripAnsiUnicodeSuffix(lastComponent(type)).toLowerCase();
     final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
 
     try {
