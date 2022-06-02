@@ -74,13 +74,14 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
 
+  // TODO: Can we remove this as it is not used anywhere?
   String get wrappedReturnType {
+    if (isVectorReturn) return 'IVector<String>';
+    if (isVectorViewReturn) return 'List<String>';
     if (isCOMObjectReturn) return 'Pointer<COMObject>';
     if (isStringReturn) return 'String';
     if (isDateTimeReturn) return 'DateTime';
     if (isTimeSpanReturn) return 'Duration';
-    if (isVectorViewReturn) return 'List<String>';
-    if (isVectorReturn) return 'IVector<String>';
 
     return returnType.dartType;
   }
@@ -105,6 +106,16 @@ class WinRTMethodProjection extends MethodProjection {
     if (FAILED(hr)) throw WindowsException(hr);
   ''';
 
+  String vectorDeclaration() => '''
+    IVector<String> $name($methodParams) {
+    final retValuePtr = calloc<COMObject>();
+    $parametersPreamble
+    ${ffiCall()}
+    $parametersPostamble
+    return IVector(retValuePtr);
+  }
+''';
+
   String vectorViewDeclaration() => '''
     List<String> $name($methodParams) {
     final retValuePtr = calloc<COMObject>();
@@ -117,16 +128,6 @@ class WinRTMethodProjection extends MethodProjection {
       $parametersPostamble
       free(retValuePtr);
     }
-  }
-''';
-
-  String vectorDeclaration() => '''
-    IVector<String> $name($methodParams) {
-    final retValuePtr = calloc<COMObject>();
-    $parametersPreamble
-    ${ffiCall()}
-    $parametersPostamble
-    return IVector(retValuePtr);
   }
 ''';
 
@@ -235,8 +236,8 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String toString() {
     try {
-      if (isVectorViewReturn) return vectorViewDeclaration();
       if (isVectorReturn) return vectorDeclaration();
+      if (isVectorViewReturn) return vectorViewDeclaration();
       if (isCOMObjectReturn) return comObjectDeclaration();
       if (isVoidReturn) return voidDeclaration();
       if (isStringReturn) return stringDeclaration();
