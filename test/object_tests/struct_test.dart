@@ -19,7 +19,8 @@ void main() {
     final accel =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.ACCEL')!;
 
-    expect(accel.isClass, isTrue);
+    expect(accel.representsAsClass, isTrue);
+    expect(accel.isStruct, isTrue);
     expect(accel.typeVisibility, equals(TypeVisibility.public));
     expect(accel.typeLayout, equals(TypeLayout.sequential));
     expect(accel.stringFormat, equals(StringFormat.ansi));

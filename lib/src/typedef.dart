@@ -292,8 +292,13 @@ class TypeDef extends TokenObject
     }
   }
 
-  /// Returns true if the type is a class.
-  bool get isClass =>
+  /// Returns true if the metadata for the object is represented as a class
+  /// type.
+  ///
+  /// Note that structs, enums and delegates are also represented as classes in
+  /// metadata. Use the [isClass], [isStruct] or [isDelegate] property to
+  /// validate the kind of class.
+  bool get representsAsClass =>
       _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
 
   /// Returns trus if the type is an interface.
@@ -357,10 +362,20 @@ class TypeDef extends TokenObject
       _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
 
   /// Returns true if the type is a delegate.
-  bool get isDelegate => parent?.name == 'System.MulticastDelegate';
+  bool get isDelegate =>
+      representsAsClass && parent?.name == 'System.MulticastDelegate';
+
+  /// Returns true if the type is a class.
+  bool get isClass => representsAsClass && !isDelegate && !isStruct && !isEnum;
 
   /// Returns true if the type is an enumeration.
-  bool get isEnum => parent?.name == 'System.Enum';
+  bool get isEnum => representsAsClass && parent?.name == 'System.Enum';
+
+  /// Returns true if the type is a struct.
+  bool get isStruct =>
+      representsAsClass &&
+      fields.isNotEmpty &&
+      parent?.name == 'System.ValueType';
 
   /// Returns true if the type is a union.
   ///
@@ -368,6 +383,7 @@ class TypeDef extends TokenObject
   /// sized to the largest field. An example is the Win32 `INPUT` union, which
   /// can contain a keyboard, mouse or other hardware input type.
   bool get isUnion =>
+      isStruct &&
       classLayout.fieldOffsets != null &&
       classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
 

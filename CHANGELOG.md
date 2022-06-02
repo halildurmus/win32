@@ -1,3 +1,14 @@
+## 2.2.0
+
+- Potential breaking change: semantics of `TypeDef.isClass` have changed.
+  `.isClass` is now only true for real classes (not delegates, structs, or other
+  objects that may be represented in the metadata as classes but are actually
+  different types). For old-style behavior, use `.representsAsClass` instead.
+
+## 2.1.1
+
+- Add extra guard for typeDef.parent
+
 ## 2.1.0
 
 - Update to package:ffi 2.0.0

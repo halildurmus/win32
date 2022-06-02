@@ -37,7 +37,8 @@ void main() {
     final wndProc =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.WNDPROC')!;
 
-    expect(wndProc.isClass, isTrue);
+    expect(wndProc.isDelegate, isTrue);
+    expect(wndProc.representsAsClass, isTrue);
     expect(wndProc.typeVisibility, equals(TypeVisibility.public));
     expect(wndProc.typeLayout, equals(TypeLayout.auto));
     expect(wndProc.stringFormat, equals(StringFormat.auto));

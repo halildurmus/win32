@@ -159,6 +159,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
     expect(winTypeDef.isInterface, isTrue);
+    expect(winTypeDef.representsAsClass, isFalse);
     expect(winTypeDef.isClass, isFalse);
   });
 
@@ -167,6 +168,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
 
     expect(winTypeDef.isInterface, isFalse);
+    expect(winTypeDef.representsAsClass, isTrue);
     expect(winTypeDef.isClass, isTrue);
   });
 
@@ -288,7 +290,7 @@ void main() {
         equals(BaseType.genericTypeModifier));
     expect(method.returnType.typeIdentifier.type?.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
-    expect(method.returnType.typeIdentifier.type?.isClass, isFalse);
+    expect(method.returnType.typeIdentifier.type?.representsAsClass, isFalse);
     expect(method.returnType.typeIdentifier.type?.isInterface, isTrue);
     expect(method.isProperty, isTrue);
     expect(method.isSetProperty, isFalse);
