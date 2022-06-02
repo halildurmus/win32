@@ -40,19 +40,13 @@ bool isAppContainer() {
 }
 
 void main() {
-  final hr = RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+  winrtInitialize();
 
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
-  final userData = UserDataPaths.GetDefault();
-  final hstrRoamingAppData = userData.RoamingAppData;
-
-  final roamingAppData =
-      WindowsGetStringRawBuffer(hstrRoamingAppData, nullptr).toDartString();
-
+  final userData = UserDataPaths.fromPointer(UserDataPaths.GetDefault());
+  final roamingAppData = userData.RoamingAppData;
   print('RoamingAppData: $roamingAppData');
-  RoUninitialize();
+
+  winrtUninitialize();
 }
