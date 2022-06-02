@@ -108,58 +108,13 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
-  'Windows.Gaming.Input.IGameController',
-  'Windows.Gaming.Input.IGameControllerBatteryInfo',
-  'Windows.Gaming.Input.IGamepad',
-  'Windows.Gaming.Input.IGamepad2',
-  'Windows.Gaming.Input.IGamepadStatics',
-  'Windows.Gaming.Input.IGamepadStatics2',
+  'Windows.Gaming.Input.Gamepad',
   'Windows.Globalization.Calendar',
-  'Windows.Globalization.ICalendar',
-  'Windows.Globalization.ICalendarFactory',
-  'Windows.Globalization.ICalendarFactory2',
-  'Windows.Globalization.ITimeZoneOnCalendar',
-  'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatter',
-  'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatterStatics',
-  'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberInfo',
-  'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberInfoFactory',
-  'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberInfoStatics',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo',
   'Windows.Networking.IHostName',
   'Windows.Storage.IApplicationDataStatics',
-  'Windows.Storage.IUserDataPathsStatics',
   'Windows.Storage.Pickers.IFileOpenPicker',
-  'Windows.UI.Notifications.IToastNotification',
-  'Windows.UI.Notifications.IToastNotification2',
-  'Windows.UI.Notifications.IToastNotification3',
-  'Windows.UI.Notifications.IToastNotification4',
-  'Windows.UI.Notifications.IToastNotification6',
-  'Windows.UI.Notifications.IToastNotificationFactory',
-  'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  'Windows.Storage.UserDataPaths',
   'Windows.UI.Notifications.ToastNotification',
-
-  // These types are generated manually by design:
-  //   'Windows.Foundation.Collections.IIterable`1',
-  //   'Windows.Foundation.Collections.IIterator`1',
-  //   'Windows.Foundation.Collections.IVector`1',
-  //   'Windows.Foundation.Collections.IVectorView`1',
-
-  // TODO: These types are currently being generated manually. The goal is to
-  // generate them automatically after making appropriate changes to the
-  // generation script:
-  //
-  //   Static get properties incorrectly projected as methods
-  //   'Windows.Gaming.Input.Gamepad',
-  //
-  //   Requires WinRT delegate support
-  //   'Windows.Foundation.IAsyncAction',
-  //   'Windows.Foundation.IAsyncOperation`1',
-  //   'Windows.Storage.IApplicationData',
-  //
-  //   Requires @halildurmus' WinRT struct support to land
-  //   'Windows.Foundation.IPropertyValue',
-  //
-  //   Requires WinRT event support
-  //   'Windows.Networking.Connectivity.INetworkInformationStatics',
 };
