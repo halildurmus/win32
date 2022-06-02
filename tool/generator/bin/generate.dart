@@ -256,7 +256,6 @@ void generateWinRTApis() {
   final typesToGenerate = <String>{};
 
   for (final type in mainWindowsRuntimeTypesToGenerate) {
-    print('Projecting $type and its dependencies...');
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
@@ -278,7 +277,6 @@ void generateWinRTApis() {
   }
 
   for (final type in typesToGenerate) {
-    print('Writing $type to file...');
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
