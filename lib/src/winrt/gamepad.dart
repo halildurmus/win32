@@ -99,7 +99,7 @@ class Gamepad extends IInspectable
     }
   }
 
-  static List<String> get_Gamepads() {
+  static List<String> get Gamepads {
     final activationFactory =
         CreateActivationFactory(_className, IID_IGamepadStatics);
 

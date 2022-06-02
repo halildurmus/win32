@@ -88,6 +88,12 @@ abstract class MethodProjection {
   String get methodParams =>
       parameters.map((param) => param.paramProjection).join(', ');
 
+  /// A shortened version of the method declaration for use in mappers.
+  ///   e.g. `void SetDateTime(DateTime value)` or `void SetToNow()` (method)
+  ///   e.g. `int get Period` or `int get Second` (get property)
+  ///   e.g. `set Second(int value)` (set property)
+  String get shortDeclaration => toString().split('{').first.trim();
+
   /// A shortened version of the method for use in mappers.
   ///   e.g. `SetDateTime(value)` or `SetToNow()` (method)
   ///   e.g. `Period` or `Second` (get property)

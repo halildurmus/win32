@@ -2,7 +2,6 @@ import 'package:winmd/winmd.dart';
 
 import 'utils.dart';
 import 'winrt_interface.dart';
-import 'winrt_method.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
@@ -65,15 +64,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
       final interfaceProjection = WinRTInterfaceProjection(factoryTypeDef);
       for (final method in interfaceProjection.methodProjections) {
-        // TODO: move this into the parameters class
-        final paramIdentifiers =
-            method.parameters.map((e) => e.name).join(', ');
         buffer.writeln('''
           static $shortName ${method.name}(${method.methodParams}) {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName(activationFactory).${method.name}($paramIdentifiers);
+              final result = $interfaceName(activationFactory).${method.shortForm};
               return $shortName.fromPointer(result);
             } finally {
               free(activationFactory);
@@ -105,18 +101,13 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
       final interfaceProjection = WinRTInterfaceProjection(staticTypeDef);
       for (final method in interfaceProjection.methodProjections) {
-        final wrappedReturnType =
-            (method as WinRTMethodProjection).wrappedReturnType;
-
-        // TODO: move this into the parameters class
-        final paramIdentifiers =
-            method.parameters.map((e) => e.name).join(', ');
+        final declaration = method.shortDeclaration;
         buffer.writeln('''
-          static $wrappedReturnType ${method.name}(${method.methodParams}) {
+          static $declaration {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName(activationFactory).${method.name}($paramIdentifiers);
+              final result = $interfaceName(activationFactory).${method.shortForm};
               return result;
             } finally {
               free(activationFactory);
@@ -150,7 +141,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
         buffer.writeln('\n@override');
 
         // e.g. `int get Second` or `void AddHours(int hours)`
-        final declaration = method.toString().split('{').first;
+        final declaration = method.shortDeclaration;
         buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
       }
     }
