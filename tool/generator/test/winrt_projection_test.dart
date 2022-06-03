@@ -67,7 +67,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.inheritsFrom, equals('IInspectable'));
+    expect(projection.inheritsFrom, equals(''));
   });
 
   test('WinRT interface has right short name', () {
