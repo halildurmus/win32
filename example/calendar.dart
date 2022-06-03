@@ -21,7 +21,7 @@ void main() {
     final calendar = Calendar();
     print(calendarData(calendar));
 
-    final clonedCalendar = Calendar.fromPointer(calendar.Clone());
+    final clonedCalendar = Calendar.from(calendar.Clone());
     final comparisonResult = clonedCalendar.Compare(calendar.ptr);
     print('Comparison result of calendar and its clone: $comparisonResult');
 
