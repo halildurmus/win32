@@ -30,7 +30,7 @@ const IID_IUserDataPaths = '{F9C53912-ABC4-46FF-8A2B-DC9D7FA6E52F}';
 /// {@category winrt}
 class IUserDataPaths extends IInspectable {
   // vtable begins at 6, is 19 entries long.
-  IUserDataPaths(super.ptr);
+  IUserDataPaths.from(super.ptr);
 
   String get CameraRoll {
     final retValuePtr = calloc<HSTRING>();

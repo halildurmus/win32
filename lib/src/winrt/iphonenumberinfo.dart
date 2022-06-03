@@ -31,7 +31,7 @@ const IID_IPhoneNumberInfo = '{1C7CE4DD-C8B4-4EA3-9AEF-B342E2C5B417}';
 /// {@category winrt}
 class IPhoneNumberInfo extends IInspectable {
   // vtable begins at 6, is 8 entries long.
-  IPhoneNumberInfo(super.ptr);
+  IPhoneNumberInfo.from(super.ptr);
 
   int get CountryCode {
     final retValuePtr = calloc<Int32>();

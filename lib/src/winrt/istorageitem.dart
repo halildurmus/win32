@@ -38,7 +38,7 @@ const IID_IStorageItem = '{4207A996-CA2F-42F7-BDE8-8B10457A7F30}';
 /// {@category winrt}
 class IStorageItem extends IInspectable {
   // vtable begins at 6, is 10 entries long.
-  IStorageItem(super.ptr);
+  IStorageItem.from(super.ptr);
 
   Pointer<COMObject> RenameAsyncOverloadDefaultOptions(String desiredName) {
     final retValuePtr = calloc<COMObject>();

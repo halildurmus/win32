@@ -30,7 +30,7 @@ const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';
 /// {@category winrt}
 class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IClosable(super.ptr);
+  IClosable.from(super.ptr);
 
   void Close() {
     final hr = ptr.ref.vtable

@@ -32,7 +32,7 @@ const IID_IHostName = '{BF8ECAAD-ED96-49A7-9084-D416CAE88DCB}';
 /// {@category winrt}
 class IHostName extends IInspectable {
   // vtable begins at 6, is 6 entries long.
-  IHostName(super.ptr);
+  IHostName.from(super.ptr);
 
   Pointer<COMObject> get IPInformation {
     final retValuePtr = calloc<COMObject>();

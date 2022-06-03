@@ -30,7 +30,7 @@ const IID_IApplicationData = '{C3DA6FB7-B744-4B45-B0B8-223A0938D0DC}';
 /// {@category winrt}
 class IApplicationData extends IInspectable {
   // vtable begins at 6, is 13 entries long.
-  IApplicationData(super.ptr);
+  IApplicationData.from(super.ptr);
 
   int get Version {
     final retValuePtr = calloc<Uint32>();

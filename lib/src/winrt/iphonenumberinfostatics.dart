@@ -30,7 +30,7 @@ const IID_IPhoneNumberInfoStatics = '{5B3F4F6A-86A9-40E9-8649-6D61161928D4}';
 /// {@category winrt}
 class IPhoneNumberInfoStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  IPhoneNumberInfoStatics(super.ptr);
+  IPhoneNumberInfoStatics.from(super.ptr);
 
   int TryParse(String input, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();

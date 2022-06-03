@@ -144,9 +144,9 @@ class INetworkInformationStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<IHostName>(
+      return IVectorView<IHostName>.from(
         retValuePtr,
-        creator: IHostName.new,
+        creator: IHostName.from,
         allocator: allocator,
       ).toList();
     } finally {

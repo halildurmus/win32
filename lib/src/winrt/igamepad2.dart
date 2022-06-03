@@ -36,7 +36,7 @@ const IID_IGamepad2 = '{3C1689BD-5915-4245-B0C0-C89FAE0308FF}';
 /// {@category winrt}
 class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   // vtable begins at 6, is 1 entries long.
-  IGamepad2(super.ptr);
+  IGamepad2.from(super.ptr);
 
   int GetButtonLabel(int button) {
     final retValuePtr = calloc<Int32>();
@@ -63,7 +63,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   }
 
   // IGamepad methods
-  late final _iGamepad = IGamepad(toInterface(IID_IGamepad));
+  late final _iGamepad = IGamepad.from(toInterface(IID_IGamepad));
 
   @override
   GamepadVibration get Vibration => _iGamepad.Vibration;
@@ -75,7 +75,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
   // IGameController methods
   late final _iGameController =
-      IGameController(toInterface(IID_IGameController));
+      IGameController.from(toInterface(IID_IGameController));
 
   @override
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>
