@@ -73,8 +73,8 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Foundation.IAsyncOperation`1',
   'Windows.Storage.ApplicationData',
 
-  //   IFileOpenPicker and IFileOpenPickerWithOperationId's pickSingleFileAsync()
-  // clashes with each other
+  //   IFileOpenPicker and IFileOpenPickerWithOperationId both have
+  //   pickSingleFileAsync(), which clash with each other.
   'Windows.Storage.Pickers.FileOpenPicker',
 
   //   Requires @halildurmus' WinRT struct support to land
@@ -91,9 +91,9 @@ const excludedTypes = win32Version == 2
 /// Used to manually add back in imports where needed.
 String specialHeaders(String pathToSrc, String interfaceName) {
   if (win32Version == 3) {
-    // WAVEFORMATEX and VIDEOINFOHEADER are duplicated in Media.DeviceManager, so
-    // we remove their generation above, and manually add back the right import in
-    // DeviceManager APIs.
+    // WAVEFORMATEX and VIDEOINFOHEADER are duplicated in Media.DeviceManager,
+    // so we remove their generation above, and manually add back the right
+    // import in DeviceManager APIs.
     if (interfaceName.startsWith('Windows.Win32.Media.DeviceManager')) {
       return "import '${pathToSrc}media/audio/structs.g.dart';\n"
           "import '${pathToSrc}media/directshow/structs.g.dart';\n";
@@ -132,8 +132,8 @@ const ignorePackingDirectives = win32Version == 3
         // From metadata.
 
         // TODO: Use most restrictive packing parent for child. For example,
-        //   Nesting the non-packed or less tightly packed struct 'JET_LOGTIME' in a
-        //   packed struct 'JET_SIGNATURE' is not supported.
+        // nesting the non-packed or less tightly packed struct 'JET_LOGTIME' in
+        // a packed struct 'JET_SIGNATURE' is not supported.
         'Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE',
         'Windows.Win32.Devices.Bluetooth.SOCKADDR_BTH',
         'Windows.Win32.Devices.DeviceAndDriverInstallation.CS_DES',
