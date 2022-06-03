@@ -23,6 +23,10 @@ import '../extensions/hstring_array.dart';
 
 import 'igamepad.dart';
 import 'igamecontroller.dart';
+import 'structs.g.dart';
+import 'headset.dart';
+import 'userchangedeventargs.dart';
+import 'user.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
@@ -30,7 +34,7 @@ const IID_IGamepad2 = '{3C1689BD-5915-4245-B0C0-C89FAE0308FF}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IGamepad2 extends IGamepad {
+class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   // vtable begins at 6, is 1 entries long.
   IGamepad2(super.ptr);
 
@@ -57,4 +61,53 @@ class IGamepad2 extends IGamepad {
       free(retValuePtr);
     }
   }
+
+  // IGamepad methods
+  late final _iGamepad = IGamepad(toInterface(IID_IGamepad));
+
+  @override
+  GamepadVibration get Vibration => _iGamepad.Vibration;
+
+  @override
+  set Vibration(GamepadVibration value) => _iGamepad.Vibration = value;
+
+  @override
+  GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
+  // IGameController methods
+  late final _iGameController =
+      IGameController(toInterface(IID_IGameController));
+
+  @override
+  int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_HeadsetConnected(value);
+
+  @override
+  void remove_HeadsetConnected(int token) =>
+      _iGameController.remove_HeadsetConnected(token);
+
+  @override
+  int add_HeadsetDisconnected(
+          Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_HeadsetDisconnected(value);
+
+  @override
+  void remove_HeadsetDisconnected(int token) =>
+      _iGameController.remove_HeadsetDisconnected(token);
+
+  @override
+  int add_UserChanged(Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_UserChanged(value);
+
+  @override
+  void remove_UserChanged(int token) =>
+      _iGameController.remove_UserChanged(token);
+
+  @override
+  Pointer<COMObject> get Headset => _iGameController.Headset;
+
+  @override
+  bool get IsWireless => _iGameController.IsWireless;
+
+  @override
+  Pointer<COMObject> get User => _iGameController.User;
 }

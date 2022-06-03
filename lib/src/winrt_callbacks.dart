@@ -10,6 +10,8 @@ import 'dart:ffi';
 
 import 'combase.dart';
 
+typedef ApplicationDataSetVersionHandler = Void Function(
+    Pointer<COMObject> setVersionRequest);
 typedef AsyncActionCompletedHandler = Void Function(
     Pointer<COMObject> asyncInfo, Int32 asyncStatus);
 typedef EventHandler = Void Function(
