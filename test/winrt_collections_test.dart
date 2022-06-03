@@ -21,7 +21,7 @@ void main() {
 
         final object = CreateObject(
             'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-        picker = IFileOpenPicker(object);
+        picker = IFileOpenPicker.from(object);
         allocator = Arena();
         vector = picker.FileTypeFilter;
       });
@@ -290,7 +290,7 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView(retValuePtr, allocator: allocator);
+        return IVectorView.from(retValuePtr, allocator: allocator);
       }
 
       setUp(() {
@@ -388,8 +388,8 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView(retValuePtr,
-            creator: IHostName.new, allocator: allocator);
+        return IVectorView.from(retValuePtr,
+            creator: IHostName.from, allocator: allocator);
       }
 
       setUp(() {
@@ -423,7 +423,7 @@ void main() {
       test('GetMany returns elements starting from index 0', () {
         final pCOMObject = allocator<COMObject>(vectorView.Size);
         expect(vectorView.GetMany(0, pCOMObject), greaterThanOrEqualTo(1));
-        final list = pCOMObject.toList<IHostName>(IHostName.new,
+        final list = pCOMObject.toList<IHostName>(IHostName.from,
             length: vectorView.Size);
         expect(list.length, greaterThanOrEqualTo(1));
       });
