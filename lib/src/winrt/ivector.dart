@@ -38,17 +38,17 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   ///
   /// ```dart
   /// ...
-  /// final vector = IVector<String>(ptr);
+  /// final vector = IVector<String>.from(ptr);
   /// ```
   ///
   /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.new`, `IStorageFile.new` etc.
+  /// e.g. `IHostName.from`, `IStorageFile.from` etc.
   ///
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final vector =
-  ///     IVector<IHostName>(ptr, creator: IHostName.new, allocator: allocator);
+  /// final vector = IVector<IHostName>.from(ptr,
+  ///     creator: IHostName.from, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
@@ -57,7 +57,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   /// memory management.
   ///
   /// {@category winrt}
-  IVector(super.ptr,
+  IVector.from(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
         _allocator = allocator {
@@ -192,7 +192,8 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView(retValuePtr, creator: _creator, allocator: _allocator)
+    return IVectorView.from(retValuePtr,
+            creator: _creator, allocator: _allocator)
         .toList();
   }
 
@@ -677,7 +678,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   // IID_IIterable is always the second item on the iids list for IVector
-  late final _iIterable = IIterable<T>(toInterface(iids[1]),
+  late final _iIterable = IIterable<T>.from(toInterface(iids[1]),
       creator: _creator, allocator: _allocator);
 
   @override

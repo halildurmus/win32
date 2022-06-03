@@ -34,7 +34,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     ${ffiCall()}
 
     try {
-      return IVectorView<String>(retValuePtr).toList();
+      return IVectorView<String>.from(retValuePtr).toList();
     } finally {
       free(retValuePtr);
     }
@@ -48,7 +48,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
     ${ffiCall()}
 
-    return IVector(retValuePtr);
+    return IVector.from(retValuePtr);
   }
 ''';
 

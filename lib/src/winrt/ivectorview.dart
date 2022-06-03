@@ -35,24 +35,24 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   ///
   /// ```dart
   /// ...
-  /// final vectorView = IVectorView<String>(ptr);
+  /// final vectorView = IVectorView<String>.from(ptr);
   /// ```
   ///
   /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.new`, `IStorageFile.new` etc.
+  /// e.g. `IHostName.from`, `IStorageFile.from` etc.
   ///
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final vectorView = IVectorView<IHostName>(ptr,
-  ///     creator: IHostName.new, allocator: allocator);
+  /// final vectorView = IVectorView<IHostName>.from(ptr,
+  ///     creator: IHostName.from, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
   /// from methods like `GetAt`, `GetView` and `toList` when they are finished
   /// with it. A FFI `Arena` may be passed as a custom allocator for ease of
   /// memory management.
-  IVectorView(super.ptr,
+  IVectorView.from(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
         _allocator = allocator {
@@ -355,7 +355,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   }
 
   // IID_IIterable is always the last item on the iids list for IVectorView
-  late final _iIterable = IIterable<T>(toInterface(iids.last),
+  late final _iIterable = IIterable<T>.from(toInterface(iids.last),
       creator: _creator, allocator: _allocator);
 
   @override
