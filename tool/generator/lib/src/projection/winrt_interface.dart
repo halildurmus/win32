@@ -138,7 +138,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
 
   List<TypeDef> get implementsInterfaces => typeDef.interfaces
-    // Generic collections' interface name returns empty and that breaks lots
+    // Generic collections' typeDef returns an empty name and that breaks lots
     // of things. We need to ignore them for now
     ..removeWhere((interface) => interface.name.isEmpty);
 

@@ -115,7 +115,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   List<TypeDef> get implementsInterfaces => [...typeDef.interfaces]
     ..removeWhere(
         (interface) => interface.name == 'Windows.Foundation.IStringable')
-    // Generic collections' interface name returns empty and that breaks lots
+    // Generic collections' typeDef returns an empty name and that breaks lots
     // of things. We need to ignore them for now
     ..removeWhere((interface) => interface.name.isEmpty);
 
