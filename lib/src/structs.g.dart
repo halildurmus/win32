@@ -5946,6 +5946,21 @@ class STATSTG extends Struct {
   external int reserved;
 }
 
+/// Contains information about a device. This structure is used by the
+/// IOCTL_STORAGE_GET_DEVICE_NUMBER control code.
+///
+/// {@category Struct}
+class STORAGE_DEVICE_NUMBER extends Struct {
+  @Uint32()
+  external int DeviceType;
+
+  @Uint32()
+  external int DeviceNumber;
+
+  @Uint32()
+  external int PartitionNumber;
+}
+
 /// Contains strings returned from the IShellFolder interface methods.
 ///
 /// {@category Struct}
@@ -6670,6 +6685,18 @@ extension VARDESC_Extension on VARDESC {
 
   Pointer<VARIANT> get lpvarValue => this.Anonymous.lpvarValue;
   set lpvarValue(Pointer<VARIANT> value) => this.Anonymous.lpvarValue = value;
+}
+
+/// Represents a physical location on a disk. It is the output buffer for
+/// the IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS control code.
+///
+/// {@category Struct}
+class VOLUME_DISK_EXTENTS extends Struct {
+  @Uint32()
+  external int NumberOfDiskExtents;
+
+  @Array(1)
+  external Array<DISK_EXTENT> Extents;
 }
 
 /// Contains version information for a file. This information is language
