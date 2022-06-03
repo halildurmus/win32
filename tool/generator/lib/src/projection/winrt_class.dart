@@ -112,9 +112,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
   // Clone the list, otherwise isStringable will give unpredictable results.
   @override
-  List<TypeDef> get implementsInterfaces =>
-      [...typeDef.interfaces]..removeWhere(
-          (interface) => interface.name == 'Windows.Foundation.IStringable');
+  List<TypeDef> get implementsInterfaces => [...typeDef.interfaces]
+    ..removeWhere(
+        (interface) => interface.name == 'Windows.Foundation.IStringable')
+    // Generic collections' interface name returns empty and that breaks lots
+    // of things. We need to ignore them for now
+    ..removeWhere((interface) => interface.name.isEmpty);
 
   bool get isStringable => typeDef.interfaces
       .map((i) => i.name)

@@ -137,8 +137,10 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String get classDeclaration => 'class $shortName extends IInspectable'
       '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
 
-  List<TypeDef> get implementsInterfaces =>
-      typeDef.interfaces..removeWhere((interface) => interface.name.isEmpty);
+  List<TypeDef> get implementsInterfaces => typeDef.interfaces
+    // Generic collections' interface name returns empty and that breaks lots
+    // of things. We need to ignore them for now
+    ..removeWhere((interface) => interface.name.isEmpty);
 
   String get implementsMappers {
     final buffer = StringBuffer();
