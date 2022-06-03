@@ -7,12 +7,6 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
 
   @override
-  String get inheritsFrom => implementsInterfaces
-      .map((i) => lastComponent(i.name))
-      .toList()
-      .join(', ');
-
-  @override
   String get importHeader {
     // TODO: should unify format -- FQDN
     final imports = {
@@ -23,9 +17,6 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     }..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
     return imports.map((import) => "import '$import';").join('\n');
   }
-
-  String get classDeclaration => 'class $shortName extends IInspectable'
-      '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
 
   bool get hasDefaultConstructor => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
@@ -120,33 +111,10 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   }
 
   // Clone the list, otherwise isStringable will give unpredictable results.
+  @override
   List<TypeDef> get implementsInterfaces =>
       [...typeDef.interfaces]..removeWhere(
           (interface) => interface.name == 'Windows.Foundation.IStringable');
-
-  String get implementsMappers {
-    final buffer = StringBuffer();
-    for (final interface in implementsInterfaces) {
-      final interfaceName = lastComponent(interface.name);
-      buffer.writeln('  // $interfaceName methods');
-
-      // Write out the private field identifier for the interface
-      final fieldIdentifier = '_i${interfaceName.substring(1)}';
-      final iid = 'IID_$interfaceName';
-      buffer.writeln(
-          'late final $fieldIdentifier = $interfaceName(toInterface($iid));');
-
-      final projection = WinRTInterfaceProjection(interface);
-      for (final method in projection.methodProjections) {
-        buffer.writeln('\n@override');
-
-        // e.g. `int get Second` or `void AddHours(int hours)`
-        final declaration = method.shortDeclaration;
-        buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
-      }
-    }
-    return buffer.toString();
-  }
 
   bool get isStringable => typeDef.interfaces
       .map((i) => i.name)

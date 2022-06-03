@@ -11,15 +11,10 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   WinRTInterfaceProjection(super.typeDef);
 
   @override
-  String get inheritsFrom {
-    if (typeDef.interfaces.isNotEmpty) {
-      return lastComponent(typeDef.interfaces.first.name);
-    } else if (!typeDef.name.endsWith('IUnknown')) {
-      return 'IInspectable';
-    } else {
-      return 'IUnknown';
-    }
-  }
+  String get inheritsFrom => implementsInterfaces
+      .map((i) => lastComponent(i.name))
+      .toList()
+      .join(', ');
 
   static const ignoredWinRTTypes = <String>{
     // This is exposed as dart:core's DateTime
@@ -139,11 +134,38 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String get shortName => stripGenerics(lastComponent(typeDef.name));
 
+  String get classDeclaration => 'class $shortName extends IInspectable'
+      '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
+
+  List<TypeDef> get implementsInterfaces =>
+      typeDef.interfaces..removeWhere((interface) => interface.name.isEmpty);
+
+  String get implementsMappers {
+    final buffer = StringBuffer();
+    for (final interface in implementsInterfaces) {
+      final interfaceName = lastComponent(interface.name);
+      buffer.writeln('  // $interfaceName methods');
+
+      // Write out the private field identifier for the interface
+      final fieldIdentifier = '_i${interfaceName.substring(1)}';
+      final iid = 'IID_$interfaceName';
+      buffer.writeln(
+          'late final $fieldIdentifier = $interfaceName(toInterface($iid));');
+
+      final projection = WinRTInterfaceProjection(interface);
+      for (final method in projection.methodProjections) {
+        buffer.writeln('\n@override');
+
+        // e.g. `int get Second` or `void AddHours(int hours)`
+        final declaration = method.shortDeclaration;
+        buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
+      }
+    }
+    return buffer.toString();
+  }
+
   @override
   String toString() {
-    final extendsClause =
-        inheritsFrom.isEmpty ? 'extends IInspectable' : 'extends $inheritsFrom';
-
     return '''
       $header
       $extraHeaders
@@ -153,11 +175,13 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
       /// {@category Interface}
       /// {@category $category}
-      class $shortName $extendsClause {
+      $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $shortName(super.ptr);
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
+
+        $implementsMappers
       }
     ''';
   }
