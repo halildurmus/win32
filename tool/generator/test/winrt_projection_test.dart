@@ -67,7 +67,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.inheritsFrom, equals('IInspectable'));
+    expect(projection.inheritsFrom, equals(''));
   });
 
   test('WinRT interface has right short name', () {
@@ -147,6 +147,7 @@ void main() {
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.importHeader, contains("import 'structs.g.dart'"));
   });
+
   test('WinRT interface includes correct import file for structs', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
@@ -389,6 +390,31 @@ void main() {
         equals('class Launcher extends IInspectable {'));
   });
 
+  test('WinRT interface that includes implements keyword in class declaration',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.inheritsFrom, isNotEmpty);
+    expect(
+        projection.classDeclaration,
+        equals(
+            'class IGamepad extends IInspectable implements IGameController {'));
+  });
+
+  test(
+      'WinRT interface that does not include implements keyword in class declaration',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.inheritsFrom, isEmpty);
+    expect(projection.classDeclaration,
+        equals('class ICalendar extends IInspectable {'));
+  });
+
   test('WinRT class that inherits IStringable has Dart toString()', () {
     //
     final winTypeDef = MetadataStore.getMetadataForType(
@@ -434,5 +460,17 @@ void main() {
     expect(projection.factoryMappers, isEmpty);
     expect(projection.staticMappers, isEmpty);
     expect(projection.classNameDeclaration, isEmpty);
+  });
+
+  test('WinRT interface includes imports for methods in implemented interfaces',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'headset.dart'"));
+    expect(projection.importHeader, contains("import 'user.dart'"));
+    expect(projection.importHeader,
+        contains("import 'userchangedeventargs.dart'"));
   });
 }

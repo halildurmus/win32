@@ -24,6 +24,7 @@ import '../extensions/hstring_array.dart';
 import 'igamepadstatics.dart';
 import 'igamecontroller.dart';
 import 'gamepad.dart';
+import 'ivectorview.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
@@ -31,7 +32,7 @@ const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IGamepadStatics2 extends IGamepadStatics {
+class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
   IGamepadStatics2(super.ptr);
 
@@ -58,4 +59,27 @@ class IGamepadStatics2 extends IGamepadStatics {
 
     return retValuePtr;
   }
+
+  // IGamepadStatics methods
+  late final _iGamepadStatics =
+      IGamepadStatics(toInterface(IID_IGamepadStatics));
+
+  @override
+  int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) =>
+      _iGamepadStatics.add_GamepadAdded(value);
+
+  @override
+  void remove_GamepadAdded(int token) =>
+      _iGamepadStatics.remove_GamepadAdded(token);
+
+  @override
+  int add_GamepadRemoved(Pointer<NativeFunction<EventHandler>> value) =>
+      _iGamepadStatics.add_GamepadRemoved(value);
+
+  @override
+  void remove_GamepadRemoved(int token) =>
+      _iGamepadStatics.remove_GamepadRemoved(token);
+
+  @override
+  List<String> get Gamepads => _iGamepadStatics.Gamepads;
 }

@@ -23,6 +23,9 @@ import '../extensions/hstring_array.dart';
 
 import 'igamecontroller.dart';
 import 'structs.g.dart';
+import 'headset.dart';
+import 'userchangedeventargs.dart';
+import 'user.dart';
 import '../com/iinspectable.dart';
 
 /// @nodoc
@@ -30,7 +33,7 @@ const IID_IGamepad = '{BC7BB43C-0A69-3903-9E9D-A50F86A45DE5}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IGamepad extends IGameController {
+class IGamepad extends IInspectable implements IGameController {
   // vtable begins at 6, is 3 entries long.
   IGamepad(super.ptr);
 
@@ -95,4 +98,42 @@ class IGamepad extends IGameController {
       free(retValuePtr);
     }
   }
+
+  // IGameController methods
+  late final _iGameController =
+      IGameController(toInterface(IID_IGameController));
+
+  @override
+  int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_HeadsetConnected(value);
+
+  @override
+  void remove_HeadsetConnected(int token) =>
+      _iGameController.remove_HeadsetConnected(token);
+
+  @override
+  int add_HeadsetDisconnected(
+          Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_HeadsetDisconnected(value);
+
+  @override
+  void remove_HeadsetDisconnected(int token) =>
+      _iGameController.remove_HeadsetDisconnected(token);
+
+  @override
+  int add_UserChanged(Pointer<NativeFunction<TypedEventHandler>> value) =>
+      _iGameController.add_UserChanged(value);
+
+  @override
+  void remove_UserChanged(int token) =>
+      _iGameController.remove_UserChanged(token);
+
+  @override
+  Pointer<COMObject> get Headset => _iGameController.Headset;
+
+  @override
+  bool get IsWireless => _iGameController.IsWireless;
+
+  @override
+  Pointer<COMObject> get User => _iGameController.User;
 }

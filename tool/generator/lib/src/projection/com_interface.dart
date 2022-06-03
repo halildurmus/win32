@@ -99,8 +99,13 @@ class ComInterfaceProjection {
   // TODO: Find duplicates. This is the "correct" one.
   Set<String> importsForClass() {
     final importList = <String>{};
+    final methods = {
+      ...typeDef.methods,
+      // Also add the methods in typeDef's interfaces
+      ...[for (var typeDef in typeDef.interfaces) ...typeDef.methods]
+    };
 
-    for (final method in typeDef.methods) {
+    for (final method in methods) {
       final paramsAndReturnType = [...method.parameters, method.returnType];
       for (final param in paramsAndReturnType) {
         // Add imports for a parameter itself (e.g. VARIANT)
