@@ -74,7 +74,7 @@ int convertToHString(String string) {
 ///
 /// ```dart
 /// final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-/// final calendar = ICalendar(object);
+/// final calendar = ICalendar.from(object);
 /// ```
 ///
 /// {@category winrt}
