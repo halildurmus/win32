@@ -74,18 +74,6 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
 
-  // TODO: Can we remove this as it is not used anywhere?
-  String get wrappedReturnType {
-    if (isVectorReturn) return 'IVector<String>';
-    if (isVectorViewReturn) return 'List<String>';
-    if (isCOMObjectReturn) return 'Pointer<COMObject>';
-    if (isStringReturn) return 'String';
-    if (isDateTimeReturn) return 'DateTime';
-    if (isTimeSpanReturn) return 'Duration';
-
-    return returnType.dartType;
-  }
-
   String get parametersPreamble => parameters
       .map((param) => (param as WinRTParameterProjection).preamble)
       .join('\n');
