@@ -29,7 +29,7 @@ import 'user.dart';
 /// {@category Class}
 /// {@category winrt}
 class ApplicationData extends IInspectable implements IApplicationData {
-  ApplicationData.fromPointer(super.ptr);
+  ApplicationData.from(super.ptr);
 
   static const _className = 'Windows.Storage.ApplicationData';
 
@@ -39,8 +39,8 @@ class ApplicationData extends IInspectable implements IApplicationData {
         CreateActivationFactory(_className, IID_IApplicationDataStatics);
 
     try {
-      final result = ApplicationData.fromPointer(
-          IApplicationDataStatics(activationFactory).Current);
+      final result = ApplicationData.from(
+          IApplicationDataStatics.from(activationFactory).Current);
       return result;
     } finally {
       free(activationFactory);
@@ -49,7 +49,7 @@ class ApplicationData extends IInspectable implements IApplicationData {
 
   // IApplicationData methods
   late final _iApplicationData =
-      IApplicationData(toInterface(IID_IApplicationData));
+      IApplicationData.from(toInterface(IID_IApplicationData));
 
   @override
   int get Version => _iApplicationData.Version;

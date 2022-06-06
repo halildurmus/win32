@@ -33,7 +33,7 @@ const IID_IToastNotificationManagerStatics =
 /// {@category winrt}
 class IToastNotificationManagerStatics extends IInspectable {
   // vtable begins at 6, is 3 entries long.
-  IToastNotificationManagerStatics(super.ptr);
+  IToastNotificationManagerStatics.from(super.ptr);
 
   Pointer<COMObject> CreateToastNotifier() {
     final retValuePtr = calloc<COMObject>();

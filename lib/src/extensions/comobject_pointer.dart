@@ -16,15 +16,15 @@ extension COMObjectPointer on Pointer<COMObject> {
   ///
   /// `T` must be a `WinRT` type. e.g. `IHostName`, `IStorageFile` ...
   ///
-  /// `creator` must be specified for the given `T`. e.g. `IHostName.new`,
-  /// `IStorageFile.new`
+  /// `creator` must be specified for the given `T`. e.g. `IHostName.from`,
+  /// `IStorageFile.from`
   ///
   /// `length` must be equal to the number of elements stored inside the
   /// `Pointer<COMObject>`.
   ///
   /// ```dart
   /// ...
-  /// final list = pComObject.toList<IHostName>(IHostName.new, length: 4);
+  /// final list = pComObject.toList<IHostName>(IHostName.from, length: 4);
   /// ```
   ///
   /// {@category winrt}

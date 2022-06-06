@@ -30,7 +30,7 @@ const IID_IToastNotification6 = '{43EBFE53-89AE-5C1E-A279-3AECFE9B6F54}';
 /// {@category winrt}
 class IToastNotification6 extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  IToastNotification6(super.ptr);
+  IToastNotification6.from(super.ptr);
 
   bool get ExpiresOnReboot {
     final retValuePtr = calloc<Bool>();

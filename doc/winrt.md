@@ -24,7 +24,7 @@ to the object type desired. For example:
 
 ```dart
 final comObject = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-final calendar = ICalendar(comObject);
+final calendar = ICalendar.from(comObject);
 ```
 
 The object should be disposed of when it is no longer in use, for example:

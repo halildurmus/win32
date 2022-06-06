@@ -189,7 +189,7 @@ typedef _GetRectArray_Dart = int Function(
 class IPropertyValue extends IInspectable {
   // vtable begins at 6, ends at 44
 
-  IPropertyValue(super.ptr);
+  IPropertyValue.from(super.ptr);
 
   int get Type {
     final retValuePtr = calloc<Uint32>();

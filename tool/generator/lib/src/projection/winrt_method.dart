@@ -123,7 +123,7 @@ class WinRTMethodProjection extends MethodProjection {
     ${ffiCall()}
 
     try {
-      return IVectorView<String>(retValuePtr).toList();
+      return IVectorView<String>.from(retValuePtr).toList();
     } finally {
       $parametersPostamble
       free(retValuePtr);

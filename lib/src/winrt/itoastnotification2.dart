@@ -30,7 +30,7 @@ const IID_IToastNotification2 = '{9DFB9FD1-143A-490E-90BF-B9FBA7132DE7}';
 /// {@category winrt}
 class IToastNotification2 extends IInspectable {
   // vtable begins at 6, is 6 entries long.
-  IToastNotification2(super.ptr);
+  IToastNotification2.from(super.ptr);
 
   set Tag(String value) {
     final hstr = convertToHString(value);

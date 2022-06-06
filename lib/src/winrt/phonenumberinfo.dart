@@ -30,7 +30,7 @@ import '../com/iinspectable.dart';
 /// {@category Class}
 /// {@category winrt}
 class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
-  PhoneNumberInfo.fromPointer(super.ptr);
+  PhoneNumberInfo.from(super.ptr);
 
   static const _className =
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo';
@@ -41,8 +41,9 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
         CreateActivationFactory(_className, IID_IPhoneNumberInfoFactory);
 
     try {
-      final result = IPhoneNumberInfoFactory(activationFactory).Create(number);
-      return PhoneNumberInfo.fromPointer(result);
+      final result =
+          IPhoneNumberInfoFactory.from(activationFactory).Create(number);
+      return PhoneNumberInfo.from(result);
     } finally {
       free(activationFactory);
     }
@@ -54,7 +55,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
-      final result = IPhoneNumberInfoStatics(activationFactory)
+      final result = IPhoneNumberInfoStatics.from(activationFactory)
           .TryParse(input, phoneNumber);
       return result;
     } finally {
@@ -68,7 +69,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
-      final result = IPhoneNumberInfoStatics(activationFactory)
+      final result = IPhoneNumberInfoStatics.from(activationFactory)
           .TryParseWithRegion(input, regionCode, phoneNumber);
       return result;
     } finally {
@@ -78,7 +79,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
 
   // IPhoneNumberInfo methods
   late final _iPhoneNumberInfo =
-      IPhoneNumberInfo(toInterface(IID_IPhoneNumberInfo));
+      IPhoneNumberInfo.from(toInterface(IID_IPhoneNumberInfo));
 
   @override
   int get CountryCode => _iPhoneNumberInfo.CountryCode;
@@ -110,7 +111,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
       _iPhoneNumberInfo.CheckNumberMatch(otherNumber);
 
   // IStringable methods
-  late final _iStringable = IStringable(toInterface(IID_IStringable));
+  late final _iStringable = IStringable.from(toInterface(IID_IStringable));
 
   @override
   String toString() => _iStringable.ToString();

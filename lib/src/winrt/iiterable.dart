@@ -30,16 +30,16 @@ class IIterable<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final iterable = IIterable<String>(ptr);
+  /// final iterable = IIterable<String>.from(ptr);
   /// ```
   ///
   /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.new`, `IStorageFile.new` etc.
+  /// e.g. `IHostName.from`, `IStorageFile.from` etc.
   ///
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final iterable = IIterable<IHostName>(ptr, creator: IHostName.new,
+  /// final iterable = IIterable<IHostName>.from(ptr, creator: IHostName.from,
   ///     allocator: allocator);
   /// ```
   ///
@@ -48,7 +48,7 @@ class IIterable<T> extends IInspectable {
   /// may be passed as a custom allocator for ease of memory management.
   ///
   /// {@category winrt}
-  IIterable(super.ptr,
+  IIterable.from(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
         _allocator = allocator {
@@ -76,6 +76,7 @@ class IIterable<T> extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IIterator(retValuePtr, creator: _creator, allocator: _allocator);
+    return IIterator.from(retValuePtr,
+        creator: _creator, allocator: _allocator);
   }
 }

@@ -60,8 +60,8 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName(activationFactory).${method.shortForm};
-              return $shortName.fromPointer(result);
+              final result = $interfaceName.from(activationFactory).${method.shortForm};
+              return $shortName.from(result);
             } finally {
               free(activationFactory);
             }
@@ -98,7 +98,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName(activationFactory).${method.shortForm};
+              final result = $interfaceName.from(activationFactory).${method.shortForm};
               return result;
             } finally {
               free(activationFactory);
@@ -126,7 +126,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   String get stringableMappers => isStringable
       ? '''
     // IStringable methods
-    late final _iStringable = IStringable(toInterface(IID_IStringable));
+    late final _iStringable = IStringable.from(toInterface(IID_IStringable));
 
     @override
     String toString() => _iStringable.ToString();
@@ -145,7 +145,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       /// {@category $category}
       $classDeclaration
         $defaultConstructor
-        $shortName.fromPointer(super.ptr);
+        $shortName.from(super.ptr);
 
         $classNameDeclaration
 

@@ -36,7 +36,7 @@ void main() {
       // https://www.ofcom.org.uk/phones-telecoms-and-internet/information-for-industry/numbering/numbers-for-drama
       final formatterObject = calloc<COMObject>();
       PhoneNumberFormatter.TryCreate('GB', formatterObject);
-      final ukFormatter = IPhoneNumberFormatter(formatterObject);
+      final ukFormatter = IPhoneNumberFormatter.from(formatterObject);
       final london = ukFormatter.FormatString('02079460123');
       expect(london, equals('020 7946 0123'));
       final reading = ukFormatter.FormatString('01184960987');
