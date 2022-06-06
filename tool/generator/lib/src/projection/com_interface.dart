@@ -201,7 +201,6 @@ class ComInterfaceProjection {
       ${versionSpecificImports(pathToSrc, importHeader, typeDef.interfaces)}
       $extraHeaders
       $rootHeader
-      ${specialHeaders(pathToSrc, typeDef.name)}
       $guidConstants
 
       /// {@category Interface}

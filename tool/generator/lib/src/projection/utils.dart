@@ -145,7 +145,7 @@ String relativePathToSrcDirectory(File file) {
 }
 
 String importForWin32Type(TypeIdentifier identifier) {
-  if (excludedStructs.contains(identifier.name)) {
+  if (excludedWin32Structs.contains(identifier.name)) {
     return 'specialTypes.dart';
   }
 
