@@ -10,7 +10,7 @@ environment:
 dependencies:
   filepicker_windows:
     path: ../
-  win32: ^2.3.1
+  win32: ^2.3.8
 
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.0.0
