@@ -20,8 +20,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  win32: ^2.3.8
+
 flutter:
   uses-material-design: true
 
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.0.0

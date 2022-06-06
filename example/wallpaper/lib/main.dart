@@ -14,7 +14,7 @@ class FilePickerExample extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -46,15 +46,16 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        final file = picker.OpenFilePicker();
-                        file.hidePinnedPlaces = true;
-                        file.forcePreviewPaneOn = true;
-                        file.filterSpecification = {
-                          'JPEG Files': '*.jpg;*.jpeg',
-                          'Bitmap Files': '*.bmp',
-                          'All Files (*.*)': '*.*'
-                        };
-                        file.title = 'Select an image';
+                        final file = picker.OpenFilePicker()
+                          ..hidePinnedPlaces = true
+                          ..forcePreviewPaneOn = true
+                          ..title = 'Select an image'
+                          ..filterSpecification = {
+                            'JPEG Files': '*.jpg;*.jpeg',
+                            'Bitmap Files': '*.bmp',
+                            'All Files (*.*)': '*.*'
+                          };
+
                         final result = file.getFile();
                         if (result != null) {
                           setState(() {

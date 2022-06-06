@@ -15,7 +15,7 @@ class CustomPlace {
 
 abstract class FileDialog {
   /// A mapping of known folders to GUID references.
-  final _KnownFolderMappings = {
+  final _knownFolderMappings = {
     WindowsKnownFolder.AdminTools: FOLDERID_AdminTools,
     WindowsKnownFolder.CDBurning: FOLDERID_CDBurning,
     WindowsKnownFolder.CommonAdminTools: FOLDERID_CommonAdminTools,
@@ -126,7 +126,7 @@ abstract class FileDialog {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    final folderGUID = _KnownFolderMappings[folder]!;
+    final folderGUID = _knownFolderMappings[folder]!;
     final knownFolderManager = KnownFolderManager.createInstance();
     final publicMusicFolder = calloc<GUID>()..ref.setGUID(folderGUID);
 
