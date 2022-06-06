@@ -263,16 +263,17 @@ void generateWinRTApis() {
         : WinRTClassProjection(typeDef);
 
     typesToGenerate
+      ..add(type)
       ..addAll([
-        type,
         if (projection is WinRTClassProjection) ...[
           ...projection.factoryInterfaces,
           ...projection.staticInterfaces,
         ],
         ...projection.typeDef.interfaces.map((interface) => interface.name),
-      ])
-      ..removeWhere((type) => type.isEmpty)
-      ..removeWhere((type) => type.contains('`')) // Remove generic interfaces
+      ]
+        ..removeWhere((type) => type.isEmpty)
+        // Remove generic interfaces
+        ..removeWhere((type) => type.contains('`')))
       ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
   }
 
