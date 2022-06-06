@@ -21,7 +21,7 @@ class WinRTParameterProjection extends ParameterProjection {
     }
 
     if (type.typeIdentifier.name == 'Windows.Foundation.TimeSpan') {
-      return 'final ${name}Duration = $name.inMicroseconds * 10';
+      return 'final ${name}Duration = $name.inMicroseconds * 10;';
     }
 
     if (type.isString) {
