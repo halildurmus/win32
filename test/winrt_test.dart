@@ -581,22 +581,17 @@ void main() {
 
     final method = winTypeDef.findMethod('GetUInt8Array')!;
     expect(method.isProperty, isFalse);
-    expect(method.parameters.length, equals(2));
-
-    final valueSizeParam = method.parameters.first;
-    expect(valueSizeParam.name, equals('__valueSize'));
-    expect(valueSizeParam.typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
-    expect(valueSizeParam.typeIdentifier.typeArg, isNotNull);
-    expect(valueSizeParam.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.uint32Type));
+    expect(method.parameters.length, equals(1));
 
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     expect(valueParam.typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
+        equals(BaseType.referenceTypeModifier));
     expect(valueParam.typeIdentifier.typeArg, isNotNull);
-    expect(valueParam.typeIdentifier.typeArg?.baseType,
+    expect(valueParam.typeIdentifier.typeArg!.baseType,
+        equals(BaseType.simpleArrayType));
+    expect(valueParam.typeIdentifier.typeArg!.typeArg, isNotNull);
+    expect(valueParam.typeIdentifier.typeArg!.typeArg!.baseType,
         equals(BaseType.uint8Type));
   });
 
