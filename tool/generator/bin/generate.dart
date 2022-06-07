@@ -262,18 +262,28 @@ void generateWinRTApis() {
         ? WinRTInterfaceProjection(typeDef)
         : WinRTClassProjection(typeDef);
 
+    // The main type e.g. 'Windows.Globalization.Calendar'
+    typesToGenerate.add(type);
+
+    // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
+    final implementsInterfaces = [
+      ...projection.typeDef.interfaces.map((interface) => interface.name)
+    ];
+    typesToGenerate.addAll(implementsInterfaces);
+
+    // The type's factory and static interfaces e.g. 'Windows.Globalization.ICalendarFactory'
+    if (projection is WinRTClassProjection) {
+      final factoryAndStaticInterfaces = [
+        ...projection.factoryInterfaces,
+        ...projection.staticInterfaces
+      ];
+      typesToGenerate.addAll(factoryAndStaticInterfaces);
+    }
+
     typesToGenerate
-      ..add(type)
-      ..addAll([
-        if (projection is WinRTClassProjection) ...[
-          ...projection.factoryInterfaces,
-          ...projection.staticInterfaces,
-        ],
-        ...projection.typeDef.interfaces.map((interface) => interface.name),
-      ]
-        ..removeWhere((type) => type.isEmpty)
-        // Remove generic interfaces
-        ..removeWhere((type) => type.contains('`')))
+      // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
+      ..removeWhere((type) => type.isEmpty)
+      // Remove excluded WinRT types
       ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
   }
 
