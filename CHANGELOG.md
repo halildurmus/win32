@@ -1,3 +1,7 @@
+## 2.2.1
+
+- Add support for reference types and fix simple array types.
+
 ## 2.2.0
 
 - Potential breaking change: semantics of `TypeDef.isClass` have changed.
