@@ -215,7 +215,7 @@ class Method extends TokenObject
     // Win32 properties are declared as such, but are represented as
     // MethodDefSig objects
     if (isGetProperty && signatureBlob[0] != 0x20) {
-      _parsePropertySig();
+      _parseGetPropertySig();
     } else {
       _parseMethodDefSig();
     }
@@ -225,17 +225,11 @@ class Method extends TokenObject
   /// format: [type | paramCount | customMod | type | param]
   ///
   /// `PropertySig` is defined in §II.23.2.5.
-  void _parsePropertySig() {
-    if (isGetProperty) {
-      // Type should begin at index 2
-      final typeIdentifier =
-          TypeTuple.fromSignature(signatureBlob.sublist(2), scope)
-              .typeIdentifier;
-      returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
-    } else if (isSetProperty) {
-      // set properties don't have a return type
-      returnType = Parameter.fromVoid(scope, token);
-    }
+  void _parseGetPropertySig() {
+    // Type should begin at index 2
+    final typeIdentifier =
+        TypeTuple.fromSignature(signatureBlob.sublist(2), scope).typeIdentifier;
+    returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
   }
 
   /// Parses the parameters and return type for this method from the
