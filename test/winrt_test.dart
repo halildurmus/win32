@@ -471,6 +471,26 @@ void main() {
     expect(method.parameters[4].name, equals('options'));
   });
 
+  test('Reference parameter is correct', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter')!;
+
+    final method = winTypeDef.findMethod('TryCreate')!;
+    final param = method.parameters.last;
+    // [out] class [Windows.Globalization.winmd]Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter& phoneNumber
+    expect(param.name, equals('phoneNumber'));
+    expect(
+        param.typeIdentifier.baseType, equals(BaseType.referenceTypeModifier));
+
+    final refType = param.typeIdentifier.typeArg;
+    expect(refType, isNotNull);
+    expect(
+        refType!.name,
+        equals(
+            'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter'));
+    expect(refType.type, equals(winTypeDef));
+  });
+
   test('Method with generic return value is correct', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Globalization.JapanesePhoneticAnalyzer')!;

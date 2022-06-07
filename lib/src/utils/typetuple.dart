@@ -45,16 +45,23 @@ class TypeTuple {
 
       case BaseType.referenceTypeModifier:
         if (signatureBlob[1] == 0x1D) {
-          // array
+          // ref to array
+          // TODO: is this if() clause necessary?
           runtimeType.baseType = BaseType.arrayTypeModifier;
+        } else {
+          // ELEMENT_TYPE_TYPEDBYREF
+          final typeArgTuple =
+              TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
+          dataLength = 1 + typeArgTuple.offsetLength;
+          runtimeType.typeArg = typeArgTuple.typeIdentifier;
         }
         break;
 
       case BaseType.pointerTypeModifier:
-        final ptrTuple =
+        final typeArgTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
-        dataLength = 1 + ptrTuple.offsetLength;
-        runtimeType.typeArg = ptrTuple.typeIdentifier;
+        dataLength = 1 + typeArgTuple.offsetLength;
+        runtimeType.typeArg = typeArgTuple.typeIdentifier;
         break;
 
       case BaseType.genericTypeModifier:
