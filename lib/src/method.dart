@@ -29,12 +29,21 @@ class Method extends TokenObject
         CustomAttributesMixin,
         GenericParamsMixin,
         SupportedArchitecturesMixin {
+  /// Any implementation flags defined by the method metadata.
   int implFlags;
 
+  /// The name of the method.
   String name;
+
+  /// The parameters defined by the method.
   List<Parameter> parameters = <Parameter>[];
   int relativeVirtualAddress;
+
+  /// The value returned by the method.
   late Parameter returnType;
+
+  /// The raw signature blob as defined in §II.23.2.1 (MethodDefSig) of
+  /// ECMA-335.
   Uint8List signatureBlob;
 
   int _attributes;
