@@ -471,6 +471,26 @@ void main() {
     expect(method.parameters[4].name, equals('options'));
   });
 
+  test('Reference parameter is correct', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter')!;
+
+    final method = winTypeDef.findMethod('TryCreate')!;
+    final param = method.parameters.last;
+    // [out] class [Windows.Globalization.winmd]Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter& phoneNumber
+    expect(param.name, equals('phoneNumber'));
+    expect(
+        param.typeIdentifier.baseType, equals(BaseType.referenceTypeModifier));
+
+    final refType = param.typeIdentifier.typeArg;
+    expect(refType, isNotNull);
+    expect(
+        refType!.name,
+        equals(
+            'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter'));
+    expect(refType.type, equals(winTypeDef));
+  });
+
   test('Method with generic return value is correct', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Globalization.JapanesePhoneticAnalyzer')!;
@@ -561,22 +581,17 @@ void main() {
 
     final method = winTypeDef.findMethod('GetUInt8Array')!;
     expect(method.isProperty, isFalse);
-    expect(method.parameters.length, equals(2));
-
-    final valueSizeParam = method.parameters.first;
-    expect(valueSizeParam.name, equals('__valueSize'));
-    expect(valueSizeParam.typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
-    expect(valueSizeParam.typeIdentifier.typeArg, isNotNull);
-    expect(valueSizeParam.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.uint32Type));
+    expect(method.parameters.length, equals(1));
 
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     expect(valueParam.typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
+        equals(BaseType.referenceTypeModifier));
     expect(valueParam.typeIdentifier.typeArg, isNotNull);
-    expect(valueParam.typeIdentifier.typeArg?.baseType,
+    expect(valueParam.typeIdentifier.typeArg!.baseType,
+        equals(BaseType.simpleArrayType));
+    expect(valueParam.typeIdentifier.typeArg!.typeArg, isNotNull);
+    expect(valueParam.typeIdentifier.typeArg!.typeArg!.baseType,
         equals(BaseType.uint8Type));
   });
 

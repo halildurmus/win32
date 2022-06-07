@@ -44,17 +44,12 @@ class TypeTuple {
         break;
 
       case BaseType.referenceTypeModifier:
-        if (signatureBlob[1] == 0x1D) {
-          // array
-          runtimeType.baseType = BaseType.arrayTypeModifier;
-        }
-        break;
-
       case BaseType.pointerTypeModifier:
-        final ptrTuple =
+      case BaseType.simpleArrayType:
+        final typeArgTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
-        dataLength = 1 + ptrTuple.offsetLength;
-        runtimeType.typeArg = ptrTuple.typeIdentifier;
+        dataLength = 1 + typeArgTuple.offsetLength;
+        runtimeType.typeArg = typeArgTuple.typeIdentifier;
         break;
 
       case BaseType.genericTypeModifier:

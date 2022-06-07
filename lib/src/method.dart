@@ -21,7 +21,6 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-import 'typeidentifier.dart';
 import 'utils/typetuple.dart';
 
 /// A method.
@@ -216,7 +215,7 @@ class Method extends TokenObject
     // Win32 properties are declared as such, but are represented as
     // MethodDefSig objects
     if (isGetProperty && signatureBlob[0] != 0x20) {
-      _parsePropertySig();
+      _parseGetPropertySig();
     } else {
       _parseMethodDefSig();
     }
@@ -226,17 +225,11 @@ class Method extends TokenObject
   /// format: [type | paramCount | customMod | type | param]
   ///
   /// `PropertySig` is defined in §II.23.2.5.
-  void _parsePropertySig() {
-    if (isGetProperty) {
-      // Type should begin at index 2
-      final typeIdentifier =
-          TypeTuple.fromSignature(signatureBlob.sublist(2), scope)
-              .typeIdentifier;
-      returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
-    } else if (isSetProperty) {
-      // set properties don't have a return type
-      returnType = Parameter.fromVoid(scope, token);
-    }
+  void _parseGetPropertySig() {
+    // Type should begin at index 2
+    final typeIdentifier =
+        TypeTuple.fromSignature(signatureBlob.sublist(2), scope).typeIdentifier;
+    returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
   }
 
   /// Parses the parameters and return type for this method from the
@@ -279,12 +272,7 @@ class Method extends TokenObject
           TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
-      if (runtimeType.typeIdentifier.baseType == BaseType.arrayTypeModifier) {
-        blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
-        paramsIndex++; //we've added two parameters here
-      } else {
-        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-      }
+      parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
       paramsIndex++;
     }
   }
@@ -303,26 +291,4 @@ class Method extends TokenObject
         }
         reader.CloseEnum(phEnum.value);
       });
-
-  // Various projections do smart things to mask this into a single array
-  // value. We're not that clever yet, so we project it in its raw state, which
-  // means a little work here to ensure that it comes out right.
-  int _parseArray(Uint8List sublist, int paramsIndex) {
-    final typeTuple = TypeTuple.fromSignature(sublist.sublist(2), scope);
-
-    parameters[paramsIndex].name = '__valueSize';
-    parameters[paramsIndex].typeIdentifier.baseType =
-        BaseType.pointerTypeModifier;
-    parameters[paramsIndex].typeIdentifier.typeArg =
-        TypeIdentifier(BaseType.uint32Type);
-
-    parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
-    parameters[paramsIndex + 1].name = 'value';
-    parameters[paramsIndex + 1].typeIdentifier.baseType =
-        BaseType.pointerTypeModifier;
-    parameters[paramsIndex + 1].typeIdentifier.typeArg =
-        typeTuple.typeIdentifier;
-
-    return typeTuple.offsetLength;
-  }
 }
