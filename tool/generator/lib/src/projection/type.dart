@@ -205,8 +205,8 @@ class TypeProjection {
     return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');
   }
 
-  /// Takes a type such as `SimpleArrayTypeModifier` -> `BaseType.Uint32` and
-  /// converts it to `Pointer<Uint32>.
+  /// Takes a type such as `simpleArrayType` -> `BaseType.Uint8` and converts
+  /// it to `Pointer<Uint8>.
   TypeTuple unwrapSimpleArrayType(TypeIdentifier type) {
     if (type.typeArg == null) {
       throw Exception('Pointer type missing for $type.');
