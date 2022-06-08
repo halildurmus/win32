@@ -603,6 +603,27 @@ void main() {
         equals(BaseType.uint8Type));
   });
 
+  test('IPropertyValueStatics array type', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IPropertyValueStatics')!;
+
+    final method = winTypeDef.findMethod('CreateUInt8Array')!;
+    expect(method.isProperty, isFalse);
+    expect(method.parameters.length, equals(2));
+
+    final valueSizeParam = method.parameters.first;
+    expect(valueSizeParam.name, equals('__valueSize'));
+    expect(valueSizeParam.typeIdentifier.baseType, equals(BaseType.uint32Type));
+
+    final valueParam = method.parameters.last;
+    expect(valueParam.name, equals('value'));
+    expect(
+        valueParam.typeIdentifier.baseType, equals(BaseType.simpleArrayType));
+    expect(valueParam.typeIdentifier.typeArg, isNotNull);
+    expect(valueParam.typeIdentifier.typeArg!.baseType,
+        equals(BaseType.uint8Type));
+  });
+
   test('Can find generic types', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.IAsyncOperation`1');
