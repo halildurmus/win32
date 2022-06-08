@@ -111,6 +111,9 @@ class TypeProjection {
 
   bool get isArrayType => typeIdentifier.baseType == BaseType.arrayTypeModifier;
 
+  bool get isSimpleArrayType =>
+      typeIdentifier.baseType == BaseType.simpleArrayType;
+
   bool get isWin32Delegate =>
       typeIdentifier.baseType == BaseType.classTypeModifier &&
       typeIdentifier.name.startsWith('Windows.Win32') &&
@@ -202,6 +205,31 @@ class TypeProjection {
     return TypeTuple(nativeType, dartType, attribute: '@Array($upperBound)');
   }
 
+  /// Takes a type such as `SimpleArrayTypeModifier` -> `BaseType.Uint32` and
+  /// converts it to `Pointer<Uint32>.
+  TypeTuple unwrapSimpleArrayType(TypeIdentifier type) {
+    if (type.typeArg == null) {
+      throw Exception('Pointer type missing for $type.');
+    }
+    final typeArg = TypeProjection(type.typeArg!);
+
+    // Strip leading underscores (unless the type is nested, in which
+    // case leave one behind).
+    final typeArgNativeType = type.typeArg?.type?.isNested ?? false
+        ? '_${stripLeadingUnderscores(typeArg.projection.nativeType)}'
+        : stripLeadingUnderscores(typeArg.projection.nativeType);
+
+    // Since this is already wrapped with 'Pointer', we can return it as is
+    if (typeArgNativeType.endsWith('Pointer<COMObject>')) {
+      return TypeTuple(typeArgNativeType, typeArgNativeType);
+    }
+
+    final nativeType = 'Pointer<$typeArgNativeType>';
+    final dartType = 'Pointer<$typeArgNativeType>';
+
+    return TypeTuple(nativeType, dartType);
+  }
+
   TypeTuple unwrapCallbackType() {
     const voidCallbackTypes = <String, String>{
       'FARPROC': 'Pointer',
@@ -228,14 +256,10 @@ class TypeProjection {
 
   TypeTuple projectType() {
     // Could be an intrinsic base type (e.g. Int32)
-    if (isBaseType) {
-      return baseNativeMapping[typeIdentifier.baseType]!;
-    }
+    if (isBaseType) return baseNativeMapping[typeIdentifier.baseType]!;
 
     // Could be a string or other special type that we want to custom-map
-    if (isWin32SpecialType) {
-      return specialTypes[typeIdentifier.name]!;
-    }
+    if (isWin32SpecialType) return specialTypes[typeIdentifier.name]!;
 
     // This is used by WinRT for an HSTRING
     if (isString) {
@@ -243,26 +267,15 @@ class TypeProjection {
     }
 
     // Could be an enum like FOLDERFLAGS
-    if (isEnumType) {
-      return unwrapEnumType();
-    }
+    if (isEnumType) return unwrapEnumType();
 
     // Could be a wrapped type (e.g. a HWND)
-    if (isWrappedValueType) {
-      return unwrapValueType();
-    }
+    if (isWrappedValueType) return unwrapValueType();
 
-    if (isPointerType) {
-      return unwrapPointerType();
-    }
-
-    if (isArrayType) {
-      return unwrapArrayType();
-    }
-
-    if (isWin32Delegate) {
-      return unwrapCallbackType();
-    }
+    if (isPointerType) return unwrapPointerType();
+    if (isArrayType) return unwrapArrayType();
+    if (isSimpleArrayType) return unwrapSimpleArrayType(typeIdentifier);
+    if (isWin32Delegate) return unwrapCallbackType();
 
     if (isWinRTDelegate) {
       final delegateName = stripGenerics(
@@ -272,8 +285,21 @@ class TypeProjection {
           'Pointer<NativeFunction<$delegateName>>');
     }
 
+    if (isReferenceType) {
+      if ((typeIdentifier.typeArg?.type?.isInterface ?? false) ||
+          typeIdentifier.typeArg?.baseType == BaseType.classTypeModifier) {
+        return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+      }
+
+      if (typeIdentifier.typeArg?.baseType == BaseType.simpleArrayType) {
+        return unwrapSimpleArrayType(typeIdentifier.typeArg!);
+      }
+
+      throw Exception(
+          'Could not unwrap reference type: ${typeIdentifier.typeArg}');
+    }
+
     if (isInterface ||
-        isReferenceType ||
         typeIdentifier.baseType == BaseType.classTypeModifier ||
         typeIdentifier.baseType == BaseType.objectType) {
       return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
