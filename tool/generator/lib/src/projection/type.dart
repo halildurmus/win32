@@ -206,10 +206,10 @@ class TypeProjection {
   }
 
   /// Takes a type such as `simpleArrayType` -> `BaseType.Uint8` and converts
-  /// it to `Pointer<Uint8>.
+  /// it to `Pointer<Uint8>`.
   TypeTuple unwrapSimpleArrayType(TypeIdentifier type) {
     if (type.typeArg == null) {
-      throw Exception('Pointer type missing for $type.');
+      throw Exception('Array type missing for $type.');
     }
     final typeArg = TypeProjection(type.typeArg!);
 
