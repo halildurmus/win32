@@ -690,8 +690,8 @@ class IPropertyValueStatics extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, int valueSize, Pointer<COMObject> value,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl, valueSize,
-        value.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
