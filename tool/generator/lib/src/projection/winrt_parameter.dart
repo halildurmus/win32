@@ -44,7 +44,9 @@ class WinRTParameterProjection extends ParameterProjection {
   /// The name of the converted variable that should be passed inside the method
   /// call (e.g. `today` -> `todayDateTime`)
   String get localIdentifier {
-    if (type.dartType == 'Pointer<COMObject>' && !type.isReferenceType) {
+    if (type.dartType == 'Pointer<COMObject>' &&
+        !type.isReferenceType &&
+        !type.isSimpleArrayType) {
       return '$identifier.cast<Pointer<COMObject>>().value';
     }
 
