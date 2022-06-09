@@ -65,6 +65,52 @@ void main() {
       expect(newArray.value[4], equals(500));
     });
 
+    test('Guid', () {
+      final guid = calloc<GUID>()..ref.setGUID(IID_ICalendar);
+      final pv = IPropertyValue.from(PropertyValue.CreateGuid(guid.ref));
+      expect(pv.Type, equals(16));
+      expect(pv.GetGuid().toString(), equals(IID_ICalendar));
+    });
+
+    test('GuidArray', () {
+      final array = calloc<GUID>(3);
+      array[0].setGUID(IID_ICalendar);
+      array[1].setGUID(IID_IFileOpenPicker);
+      array[2].setGUID(IID_IStorageItem);
+      final pv = IPropertyValue.from(PropertyValue.CreateGuidArray(3, array));
+      expect(pv.Type, equals(1040));
+
+      final arraySize = calloc<Uint32>();
+      final newArray = calloc<Pointer<GUID>>();
+
+      pv.GetGuidArray(arraySize, newArray);
+      expect(arraySize.value, equals(3));
+      expect(newArray.value[0].toString(), equals(IID_ICalendar));
+      expect(newArray.value[1].toString(), equals(IID_IFileOpenPicker));
+      expect(newArray.value[2].toString(), equals(IID_IStorageItem));
+    });
+
+    test('InspectableArray', () {
+      final array = calloc<COMObject>(2);
+      array[0].ref.lpVtbl = Calendar().ptr.ref.lpVtbl;
+      array[1].ref.lpVtbl = PhoneNumberFormatter().ptr.ref.lpVtbl;
+      final pv =
+          IPropertyValue.from(PropertyValue.CreateInspectableArray(2, array));
+      expect(pv.Type, equals(1037));
+
+      final arraySize = calloc<Uint32>();
+      final newArray = calloc<Pointer<COMObject>>();
+
+      pv.GetInspectableArray(arraySize, newArray);
+      expect(arraySize.value, equals(2));
+      expect(IInspectable(newArray.value[0]).runtimeClassName,
+          equals('Windows.Globalization.Calendar'));
+      expect(
+          IInspectable(newArray.value[1]).runtimeClassName,
+          equals(
+              'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter'));
+    });
+
     tearDown(winrtUninitialize);
   }
 }
