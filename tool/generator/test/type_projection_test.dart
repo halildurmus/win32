@@ -622,8 +622,8 @@ void main() {
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     final valueParamProjection = TypeProjection(valueParam.typeIdentifier);
-    expect(valueParamProjection.dartType, equals('Pointer<COMObject>'));
-    expect(valueParamProjection.nativeType, equals('Pointer<COMObject>'));
+    expect(valueParamProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
+    expect(valueParamProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
     expect(valueParamProjection.isDartPrimitive, isTrue);
   });
 }
