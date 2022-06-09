@@ -92,8 +92,8 @@ void main() {
 
     test('InspectableArray', () {
       final array = calloc<COMObject>(2);
-      array[0].ref.lpVtbl = Calendar().ptr.ref.lpVtbl;
-      array[1].ref.lpVtbl = PhoneNumberFormatter().ptr.ref.lpVtbl;
+      array[0] = Calendar().ptr.ref.lpVtbl;
+      array[1] = PhoneNumberFormatter().ptr.ref.lpVtbl;
       final pv =
           IPropertyValue.from(PropertyValue.CreateInspectableArray(2, array));
       expect(pv.Type, equals(1037));
