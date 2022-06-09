@@ -107,7 +107,9 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Data.Xml.Dom.IXmlNodeList',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
+  'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IStringable',
+  'Windows.Foundation.PropertyValue',
   'Windows.Gaming.Input.Gamepad',
   'Windows.Globalization.Calendar',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
@@ -117,5 +119,4 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Storage.UserDataPaths',
   'Windows.UI.Notifications.ToastNotification',
-  'Windows.Foundation.PropertyValue',
 };
