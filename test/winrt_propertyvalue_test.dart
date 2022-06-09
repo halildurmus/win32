@@ -6,8 +6,8 @@ import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-// Test the WinRT phone number formatter object to make sure overrides,
-// properties and methods are working correctly.
+// Test the WinRT PropertyValue object to make sure overrides, properties and
+// methods are working correctly.
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
@@ -15,6 +15,7 @@ void main() {
 
     test('UInt8', () {
       final pv = IPropertyValue.from(PropertyValue.CreateUInt8(30));
+      expect(pv.Type, equals(1));
       expect(pv.GetUInt8(), equals(30));
     });
 
@@ -24,6 +25,8 @@ void main() {
         array[idx] = (10 * idx) + 10;
       }
       final pv = IPropertyValue.from(PropertyValue.CreateUInt8Array(5, array));
+      expect(pv.Type, equals(1025));
+
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint8>>();
 
@@ -38,6 +41,7 @@ void main() {
 
     test('UInt16', () {
       final pv = IPropertyValue.from(PropertyValue.CreateUInt16(65534));
+      expect(pv.Type, equals(3));
       expect(pv.GetUInt16(), equals(65534));
     });
 
@@ -47,10 +51,12 @@ void main() {
         array[idx] = (100 * idx) + 100;
       }
       final pv = IPropertyValue.from(PropertyValue.CreateUInt16Array(5, array));
+      expect(pv.Type, equals(1027));
+
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint16>>();
 
-      pv.GetUInt16Array(arraySize, newArray.cast());
+      pv.GetUInt16Array(arraySize, newArray);
       expect(arraySize.value, equals(5));
       expect(newArray.value[0], equals(100));
       expect(newArray.value[1], equals(200));
