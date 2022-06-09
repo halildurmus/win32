@@ -494,307 +494,336 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  void GetUInt8Array(Pointer<Uint32> valueSize, Pointer<Uint8> value) {
+  void GetUInt8Array(Pointer<Uint32> valueSize, Pointer<Pointer<Uint8>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(26)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint8> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint8> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(26)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint8>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint8>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt16Array(Pointer<Uint32> valueSize, Pointer<Int16> value) {
+  void GetInt16Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int16>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(27)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Int16> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Int16> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(27)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Int16>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Int16>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt16Array(Pointer<Uint32> valueSize, Pointer<Uint16> value) {
+  void GetUInt16Array(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint16>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(28)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint16> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint16> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(28)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint16>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint16>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt32Array(Pointer<Uint32> valueSize, Pointer<Int32> value) {
+  void GetInt32Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int32>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(29)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Int32> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Int32> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(29)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Int32>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Int32>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt32Array(Pointer<Uint32> valueSize, Pointer<Uint32> value) {
+  void GetUInt32Array(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint32>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(30)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint32> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint32> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(30)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint32>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint32>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt64Array(Pointer<Uint32> valueSize, Pointer<Int64> value) {
+  void GetInt64Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int64>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(31)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Int64> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Int64> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(31)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Int64>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Int64>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt64Array(Pointer<Uint32> valueSize, Pointer<Uint64> value) {
+  void GetUInt64Array(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(32)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint64> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint64> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(32)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint64>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint64>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetSingleArray(Pointer<Uint32> valueSize, Pointer<Float> value) {
+  void GetSingleArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Float>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(33)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Float> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Float> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(33)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Float>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Float>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetDoubleArray(Pointer<Uint32> valueSize, Pointer<Double> value) {
+  void GetDoubleArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Double>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(34)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Double> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Double> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(34)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Double>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Double>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetChar16Array(Pointer<Uint32> valueSize, Pointer<Uint16> value) {
+  void GetChar16Array(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint16>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(35)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint16> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint16> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(35)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint16>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint16>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetBooleanArray(Pointer<Uint32> valueSize, Pointer<Bool> value) {
+  void GetBooleanArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Bool>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(36)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Bool> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Bool> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(36)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Bool>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Bool>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetStringArray(Pointer<Uint32> valueSize, Pointer<IntPtr> value) {
+  void GetStringArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<IntPtr>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(37)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<IntPtr> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<IntPtr> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(37)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<IntPtr>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<IntPtr>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
   void GetInspectableArray(
-      Pointer<Uint32> valueSize, Pointer<COMObject> value) {
+      Pointer<Uint32> valueSize, Pointer<Pointer<COMObject>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(38)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<COMObject> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<COMObject> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(38)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<COMObject>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<COMObject>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetGuidArray(Pointer<Uint32> valueSize, Pointer<GUID> value) {
+  void GetGuidArray(Pointer<Uint32> valueSize, Pointer<Pointer<GUID>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(39)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<GUID> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<GUID> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(39)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<GUID>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<GUID>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetDateTimeArray(Pointer<Uint32> valueSize, Pointer<Uint64> value) {
+  void GetDateTimeArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(40)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint64> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint64> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(40)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint64>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint64>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetTimeSpanArray(Pointer<Uint32> valueSize, Pointer<Uint64> value) {
+  void GetTimeSpanArray(
+      Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(41)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Uint64> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Uint64> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(41)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Uint64>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Uint64>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetPointArray(Pointer<Uint32> valueSize, Pointer<Point> value) {
+  void GetPointArray(Pointer<Uint32> valueSize, Pointer<Pointer<Point>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(42)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Point> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Point> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(42)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Point>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Point>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetSizeArray(Pointer<Uint32> valueSize, Pointer<Size> value) {
+  void GetSizeArray(Pointer<Uint32> valueSize, Pointer<Pointer<Size>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(43)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Size> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Size> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(43)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Size>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Size>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetRectArray(Pointer<Uint32> valueSize, Pointer<Rect> value) {
+  void GetRectArray(Pointer<Uint32> valueSize, Pointer<Pointer<Rect>> value) {
     final hr = ptr.ref.vtable
-        .elementAt(44)
-        .cast<
-            Pointer<
-                NativeFunction<
-                    HRESULT Function(Pointer, Pointer<Uint32> valueSize,
-                        Pointer<Rect> value)>>>()
-        .value
-        .asFunction<
-            int Function(Pointer, Pointer<Uint32> valueSize,
-                Pointer<Rect> value)>()(ptr.ref.lpVtbl, valueSize, value);
+            .elementAt(44)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<Uint32> valueSize,
+                            Pointer<Pointer<Rect>> value)>>>()
+            .value
+            .asFunction<
+                int Function(Pointer, Pointer<Uint32> valueSize,
+                    Pointer<Pointer<Rect>> value)>()(
+        ptr.ref.lpVtbl, valueSize, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
