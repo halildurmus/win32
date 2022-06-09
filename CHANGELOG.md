@@ -1,3 +1,7 @@
+## 2.2.2
+
+- Adjust simple array types (thanks @halildurmus).
+
 ## 2.2.1
 
 - Add support for reference types and fix simple array types.
