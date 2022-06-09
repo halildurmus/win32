@@ -30,7 +30,7 @@ void main() {
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint8>>();
 
-      pv.GetUInt8Array(arraySize, newArray.cast());
+      pv.GetUInt8Array(arraySize, newArray);
       expect(arraySize.value, equals(5));
       expect(newArray.value[0], equals(10));
       expect(newArray.value[1], equals(20));
