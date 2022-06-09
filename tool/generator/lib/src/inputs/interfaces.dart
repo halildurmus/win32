@@ -117,4 +117,5 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Storage.UserDataPaths',
   'Windows.UI.Notifications.ToastNotification',
+  'Windows.Foundation.PropertyValue',
 };

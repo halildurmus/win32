@@ -37,3 +37,6 @@ dependencies:
 dependency_overrides:
   win32:
     path: ../../
+
+  winmd:
+    path: ../../../winmd
