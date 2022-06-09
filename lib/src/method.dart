@@ -21,6 +21,7 @@ import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
+import 'typeidentifier.dart';
 import 'utils/typetuple.dart';
 
 /// A method.
@@ -281,7 +282,20 @@ class Method extends TokenObject
           TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
-      parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+      if (runtimeType.typeIdentifier.baseType == BaseType.simpleArrayType) {
+        blobPtr += _parseSimpleArray(runtimeType, paramsIndex) + 2;
+        paramsIndex++; // we've added two parameters here
+      } else if (runtimeType.typeIdentifier.baseType ==
+              BaseType.referenceTypeModifier &&
+          runtimeType.typeIdentifier.typeArg?.baseType ==
+              BaseType.simpleArrayType) {
+        blobPtr +=
+            _parseSimpleArray(runtimeType, paramsIndex, isReferenceType: true) +
+                2;
+        paramsIndex++; // we've added two parameters here
+      } else {
+        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+      }
       paramsIndex++;
     }
   }
@@ -300,4 +314,28 @@ class Method extends TokenObject
         }
         reader.CloseEnum(phEnum.value);
       });
+
+  // Various projections do smart things to mask this into a single array
+  // value. We're not that clever yet, so we project it in its raw state, which
+  // means a little work here to ensure that it comes out right.
+  int _parseSimpleArray(TypeTuple typeTuple, int paramsIndex,
+      {bool isReferenceType = false}) {
+    parameters[paramsIndex].name = '__valueSize';
+
+    if (isReferenceType) {
+      parameters[paramsIndex].typeIdentifier.baseType =
+          BaseType.pointerTypeModifier;
+      parameters[paramsIndex].typeIdentifier.typeArg =
+          TypeIdentifier(BaseType.uint32Type);
+    } else {
+      parameters[paramsIndex].typeIdentifier =
+          TypeIdentifier(BaseType.uint32Type);
+    }
+
+    parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
+    parameters[paramsIndex + 1].name = 'value';
+    parameters[paramsIndex + 1].typeIdentifier = typeTuple.typeIdentifier;
+
+    return typeTuple.offsetLength;
+  }
 }
