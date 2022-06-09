@@ -25,15 +25,15 @@ void main() {
       }
       final pv = IPropertyValue.from(PropertyValue.CreateUInt8Array(5, array));
       final arraySize = calloc<Uint32>();
-      final newArray = calloc<Uint8>(5);
+      final newArray = calloc<Pointer<Uint8>>();
 
-      pv.GetUInt8Array(arraySize, newArray);
+      pv.GetUInt8Array(arraySize, newArray.cast());
       expect(arraySize.value, equals(5));
-      expect(newArray[0], equals(10));
-      expect(newArray[1], equals(20));
-      expect(newArray[2], equals(30));
-      expect(newArray[3], equals(40));
-      expect(newArray[4], equals(50));
+      expect(newArray.value[0], equals(10));
+      expect(newArray.value[1], equals(20));
+      expect(newArray.value[2], equals(30));
+      expect(newArray.value[3], equals(40));
+      expect(newArray.value[4], equals(50));
     });
 
     test('UInt16', () {
@@ -48,15 +48,15 @@ void main() {
       }
       final pv = IPropertyValue.from(PropertyValue.CreateUInt16Array(5, array));
       final arraySize = calloc<Uint32>();
-      final newArray = calloc<Uint16>(5);
+      final newArray = calloc<Pointer<Uint16>>();
 
-      pv.GetUInt16Array(arraySize, newArray);
+      pv.GetUInt16Array(arraySize, newArray.cast());
       expect(arraySize.value, equals(5));
-      expect(newArray[0], equals(100));
-      expect(newArray[1], equals(200));
-      expect(newArray[2], equals(300));
-      expect(newArray[3], equals(400));
-      expect(newArray[4], equals(500));
+      expect(newArray.value[0], equals(100));
+      expect(newArray.value[1], equals(200));
+      expect(newArray.value[2], equals(300));
+      expect(newArray.value[3], equals(400));
+      expect(newArray.value[4], equals(500));
     });
 
     tearDown(winrtUninitialize);
