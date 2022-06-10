@@ -118,6 +118,42 @@ final _SetupDiGetClassDevs = _setupapi.lookupFunction<
     int Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         int hwndParent, int Flags)>('SetupDiGetClassDevsW');
 
+/// The SetupDiGetDeviceInstanceId function retrieves the device instance ID
+/// that is associated with a device information element.
+///
+/// ```c
+/// WINSETUPAPI BOOL SetupDiGetDeviceInstanceIdW(
+///   [in]            HDEVINFO         DeviceInfoSet,
+///   [in]            PSP_DEVINFO_DATA DeviceInfoData,
+///   [out, optional] PWSTR            DeviceInstanceId,
+///   [in]            DWORD            DeviceInstanceIdSize,
+///   [out, optional] PDWORD           RequiredSize
+/// );
+/// ```
+/// {@category setupapi}
+int SetupDiGetDeviceInstanceId(
+        int DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        Pointer<Utf16> DeviceInstanceId,
+        int DeviceInstanceIdSize,
+        Pointer<Uint32> RequiredSize) =>
+    _SetupDiGetDeviceInstanceId(DeviceInfoSet, DeviceInfoData, DeviceInstanceId,
+        DeviceInstanceIdSize, RequiredSize);
+
+final _SetupDiGetDeviceInstanceId = _setupapi.lookupFunction<
+    Int32 Function(
+        IntPtr DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        Pointer<Utf16> DeviceInstanceId,
+        Uint32 DeviceInstanceIdSize,
+        Pointer<Uint32> RequiredSize),
+    int Function(
+        int DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        Pointer<Utf16> DeviceInstanceId,
+        int DeviceInstanceIdSize,
+        Pointer<Uint32> RequiredSize)>('SetupDiGetDeviceInstanceIdW');
+
 /// The SetupDiGetDeviceInterfaceDetail function returns details about a
 /// device interface.
 ///

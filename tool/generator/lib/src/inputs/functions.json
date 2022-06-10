@@ -5509,6 +5509,11 @@
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetClassDevs function returns a handle to a device information set that contains requested device information elements for a local computer."
     },
+    "SetupDiGetDeviceInstanceId": {
+        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceInstanceIdW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [out, optional] PWSTR            DeviceInstanceId,\n  [in]            DWORD            DeviceInstanceIdSize,\n  [out, optional] PDWORD           RequiredSize\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiGetDeviceInstanceId function retrieves the device instance ID that is associated with a device information element."
+    },
     "SetupDiGetDeviceInterfaceDetail": {
         "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceInterfaceDetailW(\n  [in]            HDEVINFO                           DeviceInfoSet,\n  [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,\n  [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,\n  [in]            DWORD                              DeviceInterfaceDetailDataSize,\n  [out, optional] PDWORD                             RequiredSize,\n  [out, optional] PSP_DEVINFO_DATA                   DeviceInfoData\n);",
         "dllLibrary": "setupapi",
