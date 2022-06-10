@@ -21,7 +21,7 @@ void main() {
   final sampleDateTimeSensorCategory =
       GUIDFromString('{062A5C3B-44C1-4ad1-8EFC-0F65B2E4AD48}');
   final pSensorsColl = calloc<Pointer<COMObject>>();
-  var hr = sensorManager.GetSensorsByCategory(
+  final hr = sensorManager.GetSensorsByCategory(
       sampleDateTimeSensorCategory, pSensorsColl);
   if (FAILED(hr)) throw WindowsException(hr);
 
