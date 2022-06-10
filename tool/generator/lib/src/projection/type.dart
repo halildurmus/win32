@@ -224,6 +224,37 @@ class TypeProjection {
     return TypeTuple(nativeType, dartType);
   }
 
+  TypeTuple unwrapWinRTDelegate() {
+    final delegateName = stripGenerics(
+        stripLeadingUnderscores(lastComponent(typeIdentifier.name)));
+
+    return TypeTuple('Pointer<NativeFunction<$delegateName>>',
+        'Pointer<NativeFunction<$delegateName>>');
+  }
+
+  TypeTuple unwrapReferenceType() {
+    if ((typeIdentifier.typeArg?.type?.isInterface ?? false) ||
+        typeIdentifier.typeArg?.baseType == BaseType.classTypeModifier) {
+      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+    }
+
+    if (typeIdentifier.typeArg?.baseType == BaseType.simpleArrayType) {
+      // TODO: Handle PassArray and FillArray
+
+      // ReceiveArray. This style is used when the caller receives an array that
+      // was allocated by the method. In this style, the array size parameter
+      // and the array parameter are both out parameters. Additionally, the
+      // array parameter is passed by reference (that is, ArrayType**, rather
+      // than ArrayType*).
+      final refTuple = unwrapSimpleArrayType(typeIdentifier.typeArg!);
+      return TypeTuple(
+          'Pointer<${refTuple.nativeType}>', 'Pointer<${refTuple.dartType}>');
+    }
+
+    throw Exception(
+        'Could not unwrap reference type: ${typeIdentifier.typeArg}');
+  }
+
   TypeTuple unwrapCallbackType() {
     const voidCallbackTypes = <String, String>{
       'FARPROC': 'Pointer',
@@ -270,28 +301,8 @@ class TypeProjection {
     if (isArrayType) return unwrapArrayType();
     if (isSimpleArrayType) return unwrapSimpleArrayType(typeIdentifier);
     if (isWin32Delegate) return unwrapCallbackType();
-
-    if (isWinRTDelegate) {
-      final delegateName = stripGenerics(
-          stripLeadingUnderscores(lastComponent(typeIdentifier.name)));
-
-      return TypeTuple('Pointer<NativeFunction<$delegateName>>',
-          'Pointer<NativeFunction<$delegateName>>');
-    }
-
-    if (isReferenceType) {
-      if ((typeIdentifier.typeArg?.type?.isInterface ?? false) ||
-          typeIdentifier.typeArg?.baseType == BaseType.classTypeModifier) {
-        return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
-      }
-
-      if (typeIdentifier.typeArg?.baseType == BaseType.simpleArrayType) {
-        return unwrapSimpleArrayType(typeIdentifier.typeArg!);
-      }
-
-      throw Exception(
-          'Could not unwrap reference type: ${typeIdentifier.typeArg}');
-    }
+    if (isWinRTDelegate) return unwrapWinRTDelegate();
+    if (isReferenceType) return unwrapReferenceType();
 
     if (isInterface ||
         typeIdentifier.baseType == BaseType.classTypeModifier ||
