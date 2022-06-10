@@ -1,4 +1,8 @@
 const comInterfacesToGenerate = <String>{
+  'Windows.Win32.Devices.Sensors.ISensor',
+  'Windows.Win32.Devices.Sensors.ISensorCollection',
+  'Windows.Win32.Devices.Sensors.ISensorDataReport',
+  'Windows.Win32.Devices.Sensors.ISensorManager',
   'Windows.Win32.Globalization.IEnumSpellingError',
   'Windows.Win32.Globalization.ISpellChecker',
   'Windows.Win32.Globalization.ISpellChecker2',
