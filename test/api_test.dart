@@ -11595,6 +11595,23 @@ void main() {
               int hwndParent, int Flags)>('SetupDiGetClassDevsW');
       expect(SetupDiGetClassDevs, isA<Function>());
     });
+    test('Can instantiate SetupDiGetDeviceInstanceId', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiGetDeviceInstanceId = setupapi.lookupFunction<
+          Int32 Function(
+              IntPtr DeviceInfoSet,
+              Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+              Pointer<Utf16> DeviceInstanceId,
+              Uint32 DeviceInstanceIdSize,
+              Pointer<Uint32> RequiredSize),
+          int Function(
+              int DeviceInfoSet,
+              Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+              Pointer<Utf16> DeviceInstanceId,
+              int DeviceInstanceIdSize,
+              Pointer<Uint32> RequiredSize)>('SetupDiGetDeviceInstanceIdW');
+      expect(SetupDiGetDeviceInstanceId, isA<Function>());
+    });
     test('Can instantiate SetupDiGetDeviceInterfaceDetail', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiGetDeviceInterfaceDetail = setupapi.lookupFunction<
