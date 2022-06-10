@@ -605,7 +605,11 @@ void main() {
     expect(valueParamProjection.isDartPrimitive, isTrue);
   });
 
-  test('reference simple array types are projected correctly', () {
+  test('reference simple array COM types are projected correctly', () {
+    // virtual HRESULT STDMETHODCALLTYPE GetInspectableArray(
+    //   UINT32* valueLength,
+    //   IInspectable*** value
+    // )
     final scope =
         MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue')!;
     final method = scope.findMethod('GetInspectableArray')!;
@@ -622,8 +626,36 @@ void main() {
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     final valueParamProjection = TypeProjection(valueParam.typeIdentifier);
-    expect(valueParamProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
-    expect(valueParamProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
+    expect(
+        valueParamProjection.dartType, equals('Pointer<Pointer<COMObject>>'));
+    expect(
+        valueParamProjection.nativeType, equals('Pointer<Pointer<COMObject>>'));
+    expect(valueParamProjection.isDartPrimitive, isTrue);
+  });
+
+  test('reference simple array value types are projected correctly', () {
+    // virtual HRESULT STDMETHODCALLTYPE GetUInt8Array(
+    //   UINT32* valueLength,
+    //   BYTE** value
+    // )
+    final scope =
+        MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue')!;
+    final method = scope.findMethod('GetUInt8Array')!;
+    expect(method.parameters.length, equals(2));
+
+    final valueSizeParam = method.parameters.first;
+    expect(valueSizeParam.name, equals('__valueSize'));
+    final valueSizeParamProjection =
+        TypeProjection(valueSizeParam.typeIdentifier);
+    expect(valueSizeParamProjection.dartType, equals('Pointer<Uint32>'));
+    expect(valueSizeParamProjection.nativeType, equals('Pointer<Uint32>'));
+    expect(valueSizeParamProjection.isDartPrimitive, isTrue);
+
+    final valueParam = method.parameters.last;
+    expect(valueParam.name, equals('value'));
+    final valueParamProjection = TypeProjection(valueParam.typeIdentifier);
+    expect(valueParamProjection.dartType, equals('Pointer<Pointer<Uint8>>'));
+    expect(valueParamProjection.nativeType, equals('Pointer<Pointer<Uint8>>'));
     expect(valueParamProjection.isDartPrimitive, isTrue);
   });
 }
