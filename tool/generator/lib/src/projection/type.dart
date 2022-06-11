@@ -150,7 +150,7 @@ class TypeProjection {
     return TypeTuple(typeClass, typeClass);
   }
 
-  /// Takes a type such as `PointerTypeModifier` -> `BaseType.Uint32` and
+  /// Takes a type such as `pointerTypeModifier` -> `BaseType.Uint32` and
   /// converts it to `Pointer<Uint32>.
   TypeTuple unwrapPointerType() {
     if (typeIdentifier.typeArg == null) {
@@ -249,6 +249,10 @@ class TypeProjection {
       final refTuple = unwrapSimpleArrayType(typeIdentifier.typeArg!);
       return TypeTuple(
           'Pointer<${refTuple.nativeType}>', 'Pointer<${refTuple.dartType}>');
+    }
+
+    if (typeIdentifier.typeArg?.baseType == BaseType.uint32Type) {
+      return const TypeTuple('Pointer<Uint32>', 'Pointer<Uint32>');
     }
 
     throw Exception(
