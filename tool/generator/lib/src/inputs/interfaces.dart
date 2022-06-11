@@ -107,6 +107,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Data.Xml.Dom.IXmlNodeList',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
+  'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IStringable',
   'Windows.Foundation.PropertyValue',
   'Windows.Gaming.Input.Gamepad',
