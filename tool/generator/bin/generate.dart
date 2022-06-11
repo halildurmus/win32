@@ -279,13 +279,13 @@ void generateWinRTApis() {
       ];
       typesToGenerate.addAll(factoryAndStaticInterfaces);
     }
-
-    typesToGenerate
-      // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
-      ..removeWhere((type) => type.isEmpty)
-      // Remove excluded WinRT types
-      ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
   }
+
+  typesToGenerate
+    // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
+    ..removeWhere((type) => type.isEmpty)
+    // Remove excluded WinRT types
+    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
 
   for (final type in typesToGenerate) {
     final typeDef = MetadataStore.getMetadataForType(type);
