@@ -91,15 +91,19 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       }
 
       final interfaceProjection = WinRTInterfaceProjection(staticTypeDef);
-      for (final method in interfaceProjection.methodProjections) {
-        final declaration = method.shortDeclaration;
+      for (final methodProjection in interfaceProjection.methodProjections) {
+        final declaration = methodProjection.shortDeclaration;
+        final statement =
+            '$interfaceName.from(activationFactory).${methodProjection.shortForm}';
+        final returnStatement = methodProjection.method.isSetProperty
+            ? statement
+            : 'return $statement;';
         buffer.writeln('''
           static $declaration {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName.from(activationFactory).${method.shortForm};
-              return result;
+              $returnStatement
             } finally {
               free(activationFactory);
             }
