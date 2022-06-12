@@ -53,9 +53,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      final result =
-          IGamepadStatics.from(activationFactory).add_GamepadAdded(value);
-      return result;
+      return IGamepadStatics.from(activationFactory).add_GamepadAdded(value);
     } finally {
       free(activationFactory);
     }
@@ -66,9 +64,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      final result =
-          IGamepadStatics.from(activationFactory).remove_GamepadAdded(token);
-      return result;
+      return IGamepadStatics.from(activationFactory).remove_GamepadAdded(token);
     } finally {
       free(activationFactory);
     }
@@ -79,9 +75,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      final result =
-          IGamepadStatics.from(activationFactory).add_GamepadRemoved(value);
-      return result;
+      return IGamepadStatics.from(activationFactory).add_GamepadRemoved(value);
     } finally {
       free(activationFactory);
     }
@@ -92,9 +86,8 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      final result =
-          IGamepadStatics.from(activationFactory).remove_GamepadRemoved(token);
-      return result;
+      return IGamepadStatics.from(activationFactory)
+          .remove_GamepadRemoved(token);
     } finally {
       free(activationFactory);
     }
@@ -105,8 +98,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      final result = IGamepadStatics.from(activationFactory).Gamepads;
-      return result;
+      return IGamepadStatics.from(activationFactory).Gamepads;
     } finally {
       free(activationFactory);
     }
@@ -119,9 +111,8 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics2);
 
     try {
-      final result = IGamepadStatics2.from(activationFactory)
+      return IGamepadStatics2.from(activationFactory)
           .FromGameController(gameController);
-      return result;
     } finally {
       free(activationFactory);
     }

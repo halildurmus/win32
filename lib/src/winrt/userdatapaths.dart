@@ -39,9 +39,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
-      final result =
-          IUserDataPathsStatics.from(activationFactory).GetForUser(user);
-      return result;
+      return IUserDataPathsStatics.from(activationFactory).GetForUser(user);
     } finally {
       free(activationFactory);
     }
@@ -52,8 +50,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
-      final result = IUserDataPathsStatics.from(activationFactory).GetDefault();
-      return result;
+      return IUserDataPathsStatics.from(activationFactory).GetDefault();
     } finally {
       free(activationFactory);
     }
