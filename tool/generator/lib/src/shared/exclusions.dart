@@ -75,9 +75,6 @@ const excludedWindowsRuntimeTypes = <String>{
   //   pickSingleFileAsync(), which clash with each other.
   'Windows.Storage.Pickers.FileOpenPicker',
 
-  //   Requires @halildurmus' WinRT struct support to land
-  'Windows.Foundation.IPropertyValue',
-
   //   Requires WinRT event support
   'Windows.Networking.Connectivity.INetworkInformationStatics',
 };

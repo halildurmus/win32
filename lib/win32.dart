@@ -280,5 +280,6 @@ export 'src/winrt/ivector.dart';
 export 'src/winrt/ivectorview.dart';
 export 'src/winrt/ixmlnodelist.dart';
 export 'src/winrt/phonenumberformatter.dart';
+export 'src/winrt/propertyvalue.dart';
 export 'src/winrt/toastnotification.dart';
 export 'src/winrt/userdatapaths.dart';
