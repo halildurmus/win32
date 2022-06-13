@@ -17,7 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../ole32.dart';
-import '../structs.dart';
+import '../variant.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 

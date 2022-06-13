@@ -1,10 +1,12 @@
-const copyrightHeader = '''
+const copyrightHeader =
+    '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 ''';
 
-const functionsFileHeader = '''
+const functionsFileHeader =
+    '''
 $copyrightHeader
 
 // Maps FFI prototypes onto the corresponding Win32 API function calls
@@ -21,11 +23,12 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'structs.dart';
 import 'structs.g.dart';
+import 'variant.dart';
 ''';
 
-const structFileHeader = '''
+const structFileHeader =
+    '''
 $copyrightHeader
 
 // Dart representations of common structs used in the Win32 API.
@@ -48,10 +51,11 @@ import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';
-import 'structs.dart';
+import 'variant.dart';
 ''';
 
-const winrtStructFileHeader = '''
+const winrtStructFileHeader =
+    '''
 $copyrightHeader
 
 // Dart representations of common structs used in the Windows Runtime APIs.
@@ -69,7 +73,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 ''';
 
-const testFunctionsHeader = '''
+const testFunctionsHeader =
+    '''
 $copyrightHeader
 
 // Tests that Win32 API prototypes can be successfully loaded (i.e. that
@@ -89,7 +94,8 @@ import 'package:win32/win32.dart';
 import 'package:win32/winsock2.dart';
 ''';
 
-const testStructsHeader = '''
+const testStructsHeader =
+    '''
 $copyrightHeader
 
 // Tests that Win32 structs are the right size.

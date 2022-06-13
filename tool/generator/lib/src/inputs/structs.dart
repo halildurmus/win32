@@ -9,6 +9,8 @@ const structsToGenerate = <String, String>{
       "The ADDJOB_INFO_1 structure identifies a print job as well as the directory and file in which an application can store that job.",
   "Windows.Win32.Networking.WinSock.addrinfoW":
       "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information.",
+  "Windows.Win32.UI.WindowsAndMessaging.ALTTABINFO":
+      "Contains status information for the application-switching (ALT+TAB) window.",
   "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS":
       "Represents package settings used to create a package.",
   "Windows.Win32.System.Ole.ARRAYDESC":

@@ -58,6 +58,7 @@ void main()
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
     printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'ALTTABINFO': %zu,\n", sizeof(ALTTABINFO));
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));

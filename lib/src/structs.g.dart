@@ -22,7 +22,7 @@ import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';
-import 'structs.dart';
+import 'variant.dart';
 
 /// Defines an accelerator key used in an accelerator table.
 ///
@@ -98,6 +98,38 @@ class ADDJOB_INFO_1 extends Struct {
 
   @Uint32()
   external int JobId;
+}
+
+/// Contains status information for the application-switching (ALT+TAB)
+/// window.
+///
+/// {@category Struct}
+class ALTTABINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Int32()
+  external int cItems;
+
+  @Int32()
+  external int cColumns;
+
+  @Int32()
+  external int cRows;
+
+  @Int32()
+  external int iColFocus;
+
+  @Int32()
+  external int iRowFocus;
+
+  @Int32()
+  external int cxItem;
+
+  @Int32()
+  external int cyItem;
+
+  external POINT ptStart;
 }
 
 /// Represents package settings used to create a package.

@@ -4,7 +4,8 @@ import '../projection/utils.dart';
 import 'version.dart';
 
 String v2ParentImport(List<TypeDef> parentInterfaces) {
-  const v2StandardImports = '''
+  const v2StandardImports =
+      '''
     import '../callbacks.dart';
     import '../combase.dart';
     import '../constants.dart';
@@ -12,9 +13,9 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
     import '../guid.dart';
     import '../macros.dart';
     import '../ole32.dart';
-    import '../structs.dart';
     import '../structs.g.dart';
     import '../utils.dart';
+    import '../variant.dart';
 ''';
 
   if (parentInterfaces.isNotEmpty) {
