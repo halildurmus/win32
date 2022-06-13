@@ -142,7 +142,6 @@ export 'src/api_ms_win_wsl_api_l1_1_0.dart';
 
 // COM and Windows Runtime foundational exports
 export 'src/combase.dart';
-export 'src/winrt/structs.g.dart';
 export 'src/winrt_callbacks.dart';
 export 'src/winrt_constants.dart';
 export 'src/winrt_helpers.dart';
@@ -253,33 +252,38 @@ export 'src/com/iwbemobjectaccess.dart';
 export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
 
-// Windows Runtime interfaces
-export 'src/winrt/applicationdata.dart';
-export 'src/winrt/calendar.dart';
-export 'src/winrt/gamepad.dart';
-export 'src/winrt/iapplicationdata.dart';
-export 'src/winrt/iasyncaction.dart';
-export 'src/winrt/iasyncinfo.dart';
-export 'src/winrt/iasyncoperation.dart';
-export 'src/winrt/icalendar.dart';
-export 'src/winrt/ifileopenpicker.dart';
-export 'src/winrt/igamecontroller.dart';
-export 'src/winrt/igamecontrollerbatteryinfo.dart';
-export 'src/winrt/igamepad.dart';
-export 'src/winrt/ihostname.dart';
-export 'src/winrt/iiterable.dart';
-export 'src/winrt/iiterator.dart';
-export 'src/winrt/inetworkinformationstatics.dart';
-export 'src/winrt/iphonenumberformatter.dart';
-export 'src/winrt/ipropertyvalue.dart';
-export 'src/winrt/istorageitem.dart';
-export 'src/winrt/itoastnotificationfactory.dart';
-export 'src/winrt/itoastnotificationmanagerstatics.dart';
-export 'src/winrt/iuserdatapathsstatics.dart';
-export 'src/winrt/ivector.dart';
-export 'src/winrt/ivectorview.dart';
-export 'src/winrt/ixmlnodelist.dart';
-export 'src/winrt/phonenumberformatter.dart';
-export 'src/winrt/propertyvalue.dart';
-export 'src/winrt/toastnotification.dart';
-export 'src/winrt/userdatapaths.dart';
+// Windows Runtime classes and interfaces
+export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
+export 'src/winrt/foundation/collections/iiterable.dart';
+export 'src/winrt/foundation/collections/iiterator.dart';
+export 'src/winrt/foundation/collections/ivector.dart';
+export 'src/winrt/foundation/collections/ivectorview.dart';
+export 'src/winrt/foundation/iasyncaction.dart';
+export 'src/winrt/foundation/iasyncinfo.dart';
+export 'src/winrt/foundation/iasyncoperation.dart';
+export 'src/winrt/foundation/ipropertyvalue.dart';
+export 'src/winrt/foundation/propertyvalue.dart';
+export 'src/winrt/gaming/input/gamepad.dart';
+export 'src/winrt/gaming/input/igamecontroller.dart';
+export 'src/winrt/gaming/input/igamecontrollerbatteryinfo.dart';
+export 'src/winrt/gaming/input/igamepad.dart';
+export 'src/winrt/globalization/calendar.dart';
+export 'src/winrt/globalization/icalendar.dart';
+export 'src/winrt/globalization/phonenumberformatting/phonenumberformatter.dart';
+export 'src/winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
+export 'src/winrt/storage/applicationdata.dart';
+export 'src/winrt/storage/iapplicationdata.dart';
+export 'src/winrt/storage/istorageitem.dart';
+export 'src/winrt/storage/iuserdatapathsstatics.dart';
+export 'src/winrt/storage/pickers/ifileopenpicker.dart';
+export 'src/winrt/storage/userdatapaths.dart';
+export 'src/winrt/networking/connectivity/inetworkinformationstatics.dart';
+export 'src/winrt/networking/ihostname.dart';
+export 'src/winrt/ui/notifications/itoastnotificationfactory.dart';
+export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';
+export 'src/winrt/ui/notifications/toastnotification.dart';
+
+// Windows Runtime Structs
+export 'src/winrt/foundation/structs.g.dart';
+export 'src/winrt/foundation/numerics/structs.g.dart';
+export 'src/winrt/gaming/input/structs.g.dart';
