@@ -117,16 +117,13 @@ void main() {
   });
 
   test('folderFromNamespace', () {
-    expect(folderFromNamespace('Windows.Win32.Globalization.ISpellChecker'),
-        equals('globalization'));
     expect(
-        folderFromNamespace('Windows.Win32.System.Console.CONSOLE_FONT_INFO'),
-        equals('system/console'));
-    expect(folderFromNamespace('Windows.Win32.UI.Shell.Common.SHITEMID'),
-        equals('ui/shell/common'));
+        folderFromNamespace('Windows.Win32.System.Console'), equals('system'));
+    expect(folderFromNamespace('Windows.Win32.UI.Shell.Common'),
+        equals('ui/shell'));
   });
 
-  test('folderFromWinRTNamespace', () {
+  test('folderFromWinRTType', () {
     expect(folderFromWinRTType('Windows.Globalization.Calendar'),
         equals('globalization'));
     expect(folderFromWinRTType('Windows.Storage.Pickers.FileOpenPicker'),
@@ -136,7 +133,7 @@ void main() {
         equals('devices/geolocation/geofencing'));
   });
 
-  test('filePathFromWinRTNamespace', () {
+  test('filePathFromWinRTType', () {
     expect(filePathFromWinRTType('Windows.Globalization.Calendar'),
         equals('globalization/calendar.dart'));
     expect(filePathFromWinRTType('Windows.Storage.Pickers.FileOpenPicker'),
