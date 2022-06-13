@@ -310,28 +310,33 @@ void generateWinRTApis() {
   }
 }
 
-int generateWinRTStructs() {
+void generateWinRTStructs() {
   final structs = windowsRuntimeStructsToGenerate;
-  final file = File('../../lib/src/winrt/structs.g.dart');
-  final structProjections = <StructProjection>[];
+  final namespaceGroups =
+      groupTypesByParentNamespace(windowsRuntimeStructsToGenerate.keys);
 
-  for (final type in structs.keys) {
-    final typeDef = MetadataStore.getMetadataForType(type);
-    if (typeDef == null) throw Exception("Can't find $type");
+  for (final namespaceGroup in namespaceGroups) {
+    final structProjections = <StructProjection>[];
+    final folderPath = folderFromWinRTNamespace(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/structs.g.dart')
+      ..createSync(recursive: true);
 
-    final structProjection = StructProjection(
-        typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
-        comment: structs[typeDef.name]!);
-    structProjections.add(structProjection);
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
+
+      final structProjection = StructProjection(
+          typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+          comment: structs[typeDef.name]!);
+      structProjections.add(structProjection);
+    }
+
+    structProjections.sort((a, b) =>
+        lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+
+    final structsFile = [winrtStructFileHeader, ...structProjections].join();
+    file.writeAsStringSync(DartFormatter().format(structsFile));
   }
-
-  structProjections.sort((a, b) =>
-      lastComponent(a.structName).compareTo(lastComponent(b.structName)));
-
-  final structsFile = [winrtStructFileHeader, ...structProjections].join();
-  file.writeAsStringSync(DartFormatter().format(structsFile));
-
-  return structProjections.length;
 }
 
 void sortFunctions(Map<String, Win32Function> functions) {
