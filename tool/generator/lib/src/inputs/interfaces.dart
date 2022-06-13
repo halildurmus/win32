@@ -117,7 +117,9 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo',
   'Windows.Networking.IHostName',
   'Windows.Storage.IApplicationDataStatics',
+  'Windows.Storage.IStorageItem',
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Storage.UserDataPaths',
+  'Windows.UI.Notifications.IToastNotificationManagerStatics',
   'Windows.UI.Notifications.ToastNotification',
 };

@@ -137,7 +137,8 @@ void main() {
         'Windows.Gaming.Input.IGamepadStatics2');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.importHeader, contains("import 'igamepadstatics.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../../winrt/gaming/input/igamepadstatics.dart'"));
   });
 
   test('WinRT class includes correct import file for structs', () {
@@ -145,7 +146,8 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Gaming.Input.Gamepad');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.importHeader, contains("import 'structs.g.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../../winrt/gaming/input/structs.g.dart'"));
   });
 
   test('WinRT interface includes correct import file for structs', () {
@@ -153,7 +155,8 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.importHeader, contains("import 'structs.g.dart"));
+    expect(projection.importHeader,
+        contains("import '../../../winrt/gaming/input/structs.g.dart"));
   });
 
   test('WinRT GetDateTime returns a DateTime', () {
@@ -425,7 +428,8 @@ void main() {
     expect(projection.inheritsFrom, isNot(contains('IStringable')));
     expect(projection.stringableMappers, isNotEmpty);
     expect(projection.stringableMappers, contains('String toString() => '));
-    expect(projection.interfaceImport, contains('istringable.dart'));
+    expect(projection.interfaceImport,
+        contains('../../../winrt/foundation/istringable.dart'));
   });
 
   test('WinRT class that does not inherit IStringable', () {
@@ -436,7 +440,8 @@ void main() {
     expect(projection.isStringable, isFalse);
     expect(projection.inheritsFrom, isNot(contains('IStringable')));
     expect(projection.stringableMappers, isEmpty);
-    expect(projection.interfaceImport, isNot(contains('istringable.dart')));
+    expect(projection.interfaceImport,
+        isNot(contains('../../winrt/foundation/istringable.dart')));
   });
 
   test('WinRT class that includes _className property', () {
@@ -468,9 +473,11 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.importHeader, contains("import 'headset.dart'"));
-    expect(projection.importHeader, contains("import 'user.dart'"));
     expect(projection.importHeader,
-        contains("import 'userchangedeventargs.dart'"));
+        contains("import '../../../winrt/gaming/input/headset.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../../winrt/system/user.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../../winrt/system/userchangedeventargs.dart'"));
   });
 }

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
@@ -7,8 +6,8 @@ import 'package:winmd/winmd.dart';
 
 import 'generate_struct_sizes_cpp.dart';
 
-bool methodMatches(String methodName, List<String> rawPrototype) =>
-    rawPrototype.join('\n').contains(' $methodName(');
+bool methodMatches(String methodName, String rawPrototype) =>
+    rawPrototype.contains(' $methodName(');
 
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
@@ -22,7 +21,7 @@ String generateDocComment(Win32Function func) {
   comment
     ..writeln('/// ```c')
     ..write('/// ')
-    ..writeln(func.prototype.first.split('\\n').join('\n/// '))
+    ..writeln(func.prototype.split('\\n').join('\n/// '))
     ..writeln('/// ```')
     ..write('/// {@category ${func.category}}');
   return comment.toString();
@@ -160,9 +159,7 @@ void main() {
     buffer.write("group('Test $library functions', () {\n");
 
     final filteredFunctions = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library)
-      ..removeWhere(
-          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
+      ..removeWhere((key, value) => value.dllLibrary != library);
 
     for (final function in filteredFunctions.keys) {
       if (!filteredFunctions[function]!.test) continue;
@@ -294,56 +291,58 @@ void generateWinRTApis() {
         : WinRTClassProjection(typeDef);
 
     final dartClass = projection.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(type)).toLowerCase();
-    final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
+    final classOutputPath =
+        '../../lib/src/winrt/${filePathFromWinRTType(type)}';
 
     try {
       final formattedDartClass = DartFormatter().format(dartClass);
-      File(classOutputPath).writeAsStringSync(formattedDartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(formattedDartClass);
     } catch (_) {
       // Better to write even on failure, so we can figure out what syntax error
       // it was that thwarted DartFormatter.
       print('Unable to format class. Writing unformatted...');
-      File(classOutputPath).writeAsStringSync(dartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(dartClass);
     }
   }
 }
 
-int generateWinRTStructs() {
+void generateWinRTStructs() {
   final structs = windowsRuntimeStructsToGenerate;
-  final file = File('../../lib/src/winrt/structs.g.dart');
-  final structProjections = <StructProjection>[];
+  final namespaceGroups =
+      groupTypesByParentNamespace(windowsRuntimeStructsToGenerate.keys);
 
-  for (final type in structs.keys) {
-    final typeDef = MetadataStore.getMetadataForType(type);
-    if (typeDef == null) throw Exception("Can't find $type");
+  for (final namespaceGroup in namespaceGroups) {
+    final structProjections = <StructProjection>[];
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/structs.g.dart')
+      ..createSync(recursive: true);
 
-    final structProjection = StructProjection(
-        typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
-        comment: structs[typeDef.name]!);
-    structProjections.add(structProjection);
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
+
+      final structProjection = StructProjection(
+          typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+          comment: structs[typeDef.name]!);
+      structProjections.add(structProjection);
+    }
+
+    structProjections.sort((a, b) =>
+        lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+
+    final structsFile = [winrtStructFileHeader, ...structProjections].join();
+    file.writeAsStringSync(DartFormatter().format(structsFile));
   }
-
-  structProjections.sort((a, b) =>
-      lastComponent(a.structName).compareTo(lastComponent(b.structName)));
-
-  final structsFile = [winrtStructFileHeader, ...structProjections].join();
-  file.writeAsStringSync(DartFormatter().format(structsFile));
-
-  return structProjections.length;
-}
-
-void sortFunctions(Map<String, Win32Function> functions) {
-  final encoder = const JsonEncoder.withIndent('    ');
-  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
-  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
 }
 
 void main() {
   print('Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
-  sortFunctions(functionsToGenerate);
+  saveFunctionsToJson(functionsToGenerate);
 
   print('Generating struct_sizes.cpp...');
   generateStructSizeAnalyzer();
