@@ -160,8 +160,8 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
-/// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
-/// matching folder (e.g. `system/console`).
+/// Converts a namespace (e.g. `Windows.Win32.System.Console.CONSOLE_FONT_INFO`)
+/// and returns the matching folder (e.g. `system/console`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
 
