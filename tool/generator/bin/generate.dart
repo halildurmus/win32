@@ -294,18 +294,21 @@ void generateWinRTApis() {
         : WinRTClassProjection(typeDef);
 
     final dartClass = projection.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(type)).toLowerCase();
-    final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
+    final classOutputPath =
+        '../../lib/src/winrt/${filePathFromWinRTNamespace(type)}';
 
     try {
       final formattedDartClass = DartFormatter().format(dartClass);
-      File(classOutputPath).writeAsStringSync(formattedDartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(formattedDartClass);
     } catch (_) {
       // Better to write even on failure, so we can figure out what syntax error
       // it was that thwarted DartFormatter.
       print('Unable to format class. Writing unformatted...');
-      File(classOutputPath).writeAsStringSync(dartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(dartClass);
     }
   }
 }
