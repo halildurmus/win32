@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
@@ -7,8 +6,8 @@ import 'package:winmd/winmd.dart';
 
 import 'generate_struct_sizes_cpp.dart';
 
-bool methodMatches(String methodName, List<String> rawPrototype) =>
-    rawPrototype.join('\n').contains(' $methodName(');
+bool methodMatches(String methodName, String rawPrototype) =>
+    rawPrototype.contains(' $methodName(');
 
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
@@ -22,7 +21,7 @@ String generateDocComment(Win32Function func) {
   comment
     ..writeln('/// ```c')
     ..write('/// ')
-    ..writeln(func.prototype.first.split('\\n').join('\n/// '))
+    ..writeln(func.prototype.split('\\n').join('\n/// '))
     ..writeln('/// ```')
     ..write('/// {@category ${func.category}}');
   return comment.toString();
@@ -160,9 +159,7 @@ void main() {
     buffer.write("group('Test $library functions', () {\n");
 
     final filteredFunctions = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library)
-      ..removeWhere(
-          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
+      ..removeWhere((key, value) => value.dllLibrary != library);
 
     for (final function in filteredFunctions.keys) {
       if (!filteredFunctions[function]!.test) continue;
@@ -334,16 +331,10 @@ int generateWinRTStructs() {
   return structProjections.length;
 }
 
-void sortFunctions(Map<String, Win32Function> functions) {
-  final encoder = const JsonEncoder.withIndent('    ');
-  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
-  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
-}
-
 void main() {
   print('Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
-  sortFunctions(functionsToGenerate);
+  saveFunctionsToJson(functionsToGenerate);
 
   print('Generating struct_sizes.cpp...');
   generateStructSizeAnalyzer();

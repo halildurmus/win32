@@ -42,7 +42,7 @@ const windowsBuilds = <String, int>{
 
 /// Converts to/from functions.json
 class Win32Function {
-  final List<String> prototype;
+  final String prototype;
 
   final String dllLibrary;
   final bool _isApiSet;
@@ -54,7 +54,7 @@ class Win32Function {
   final bool test;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'prototype': prototype.first,
+        'prototype': prototype,
         if (!_isApiSet) 'dllLibrary': dllLibrary,
         if (_isApiSet) 'apiSet': dllLibrary,
         'comment': comment,
@@ -68,7 +68,7 @@ class Win32Function {
   Win32Function.fromJson(Map<String, dynamic> json)
       : assert(json['prototype'] != null),
         assert(json['comment'] != null),
-        prototype = [json['prototype'] as String],
+        prototype = json['prototype'] as String,
         dllLibrary = json['dllLibrary'] != null
             ? json['dllLibrary'] as String
             : json['apiSet'] as String,
@@ -97,4 +97,10 @@ SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
         Win32Function.fromJson(decodedJson[api] as Map<String, dynamic>);
   }
   return functions;
+}
+
+void saveFunctionsToJson(SplayTreeMap<String, Win32Function> functions) {
+  final encoder = const JsonEncoder.withIndent('    ');
+  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
+  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
 }
