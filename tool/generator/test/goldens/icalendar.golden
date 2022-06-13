@@ -10,20 +10,20 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../combase.dart';
-import '../exceptions.dart';
-import '../macros.dart';
-import '../utils.dart';
-import '../types.dart';
-import '../winrt_callbacks.dart';
-import '../winrt_helpers.dart';
+import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
+import '../../combase.dart';
+import '../../exceptions.dart';
+import '../../macros.dart';
+import '../../utils.dart';
+import '../../types.dart';
+import '../../winrt_callbacks.dart';
+import '../../winrt_helpers.dart';
 
-import '../extensions/hstring_array.dart';
+import '../../extensions/hstring_array.dart';
 
-import 'calendar.dart';
-import 'ivectorview.dart';
-import '../com/iinspectable.dart';
+import '../../winrt/globalization/calendar.dart';
+import '../../winrt/foundation/collections/ivectorview.dart';
+import '../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
