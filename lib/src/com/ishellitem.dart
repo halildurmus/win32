@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -106,6 +105,9 @@ class IShellItem extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<COMObject> psi, int hint,
               Pointer<Int32> piOrder)>()(ptr.ref.lpVtbl, psi, hint, piOrder);
+
+  factory IShellItem.from(IUnknown interface) =>
+      IShellItem(interface.toInterface(IID_IShellItem));
 }
 
 /// @nodoc

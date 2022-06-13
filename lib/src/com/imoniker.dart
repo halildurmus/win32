@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ipersiststream.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IMoniker = '{0000000F-0000-0000-C000-000000000046}';
@@ -303,4 +303,7 @@ class IMoniker extends IPersistStream {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwMksys)>()(
       ptr.ref.lpVtbl, pdwMksys);
+
+  factory IMoniker.from(IUnknown interface) =>
+      IMoniker(interface.toInterface(IID_IMoniker));
 }

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -141,4 +140,7 @@ class IAudioSessionControl extends IUnknown {
               .asFunction<
                   int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
           ptr.ref.lpVtbl, NewNotifications);
+
+  factory IAudioSessionControl.from(IUnknown interface) =>
+      IAudioSessionControl(interface.toInterface(IID_IAudioSessionControl));
 }

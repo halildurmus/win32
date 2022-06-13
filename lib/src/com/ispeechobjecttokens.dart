@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpeechObjectTokens = '{9285B776-2E7B-4BC0-B53E-580EB6FA967F}';
@@ -93,4 +93,7 @@ class ISpeechObjectTokens extends IDispatch {
       free(retValuePtr);
     }
   }
+
+  factory ISpeechObjectTokens.from(IUnknown interface) =>
+      ISpeechObjectTokens(interface.toInterface(IID_ISpeechObjectTokens));
 }

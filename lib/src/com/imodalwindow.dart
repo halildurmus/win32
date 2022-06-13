@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -39,4 +38,7 @@ class IModalWindow extends IUnknown {
       .value
       .asFunction<
           int Function(Pointer, int hwndOwner)>()(ptr.ref.lpVtbl, hwndOwner);
+
+  factory IModalWindow.from(IUnknown interface) =>
+      IModalWindow(interface.toInterface(IID_IModalWindow));
 }

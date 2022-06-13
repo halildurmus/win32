@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -41,4 +40,7 @@ class IShellService extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
       ptr.ref.lpVtbl, punkOwner);
+
+  factory IShellService.from(IUnknown interface) =>
+      IShellService(interface.toInterface(IID_IShellService));
 }

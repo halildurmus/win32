@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -229,6 +228,9 @@ class IShellLink extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Utf16> pszFile)>()(
       ptr.ref.lpVtbl, pszFile);
+
+  factory IShellLink.from(IUnknown interface) =>
+      IShellLink(interface.toInterface(IID_IShellLink));
 }
 
 /// @nodoc

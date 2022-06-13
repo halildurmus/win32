@@ -183,6 +183,11 @@ class ComInterfaceProjection {
     }
   ''';
 
+  String get fromCOMObjectHelper => '''
+  factory $shortName.from(IUnknown interface) =>
+      $shortName(interface.toInterface(IID_$shortName));
+  ''';
+
   String get category => 'com';
 
   String get rootHeader => '';
@@ -212,6 +217,7 @@ class ComInterfaceProjection {
         ${methodProjections.map((p) => p.toString()).join('\n')}
 
         $queryInterfaceHelper
+        $fromCOMObjectHelper
       }
     ''';
   }

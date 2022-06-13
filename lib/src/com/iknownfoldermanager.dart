@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -187,6 +186,9 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<GUID> pExclusion,
                       Pointer<Pointer<Utf16>> ppszError)>()(ptr.ref.lpVtbl,
           rfid, hwnd, flags, pszTargetPath, cFolders, pExclusion, ppszError);
+
+  factory IKnownFolderManager.from(IUnknown interface) =>
+      IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
 }
 
 /// @nodoc

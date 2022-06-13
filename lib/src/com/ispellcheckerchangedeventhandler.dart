@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -42,4 +41,8 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
       ptr.ref.lpVtbl, sender);
+
+  factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
+      ISpellCheckerChangedEventHandler(
+          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
 }

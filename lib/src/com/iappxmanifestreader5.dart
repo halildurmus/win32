@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -48,4 +47,7 @@ class IAppxManifestReader5 extends IUnknown {
                   int Function(Pointer,
                       Pointer<Pointer<COMObject>> mainPackageDependencies)>()(
           ptr.ref.lpVtbl, mainPackageDependencies);
+
+  factory IAppxManifestReader5.from(IUnknown interface) =>
+      IAppxManifestReader5(interface.toInterface(IID_IAppxManifestReader5));
 }

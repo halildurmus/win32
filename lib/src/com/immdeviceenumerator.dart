@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -100,6 +99,9 @@ class IMMDeviceEnumerator extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
       ptr.ref.lpVtbl, pClient);
+
+  factory IMMDeviceEnumerator.from(IUnknown interface) =>
+      IMMDeviceEnumerator(interface.toInterface(IID_IMMDeviceEnumerator));
 }
 
 /// @nodoc

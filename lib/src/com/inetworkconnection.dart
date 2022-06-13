@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
@@ -134,4 +134,7 @@ class INetworkConnection extends IDispatch {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> pDomainType)>()(
       ptr.ref.lpVtbl, pDomainType);
+
+  factory INetworkConnection.from(IUnknown interface) =>
+      INetworkConnection(interface.toInterface(IID_INetworkConnection));
 }

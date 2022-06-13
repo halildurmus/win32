@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -136,4 +135,7 @@ class IKnownFolder extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
       ptr.ref.lpVtbl, pKFD);
+
+  factory IKnownFolder.from(IUnknown interface) =>
+      IKnownFolder(interface.toInterface(IID_IKnownFolder));
 }

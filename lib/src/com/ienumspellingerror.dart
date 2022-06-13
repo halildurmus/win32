@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -43,4 +42,7 @@ class IEnumSpellingError extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
       ptr.ref.lpVtbl, value);
+
+  factory IEnumSpellingError.from(IUnknown interface) =>
+      IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
 }

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -181,4 +180,7 @@ class IShellItemResources extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+
+  factory IShellItemResources.from(IUnknown interface) =>
+      IShellItemResources(interface.toInterface(IID_IShellItemResources));
 }

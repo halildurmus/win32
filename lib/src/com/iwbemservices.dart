@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -613,4 +612,7 @@ class IWbemServices extends IUnknown {
           pCtx,
           pInParams,
           pResponseHandler);
+
+  factory IWbemServices.from(IUnknown interface) =>
+      IWbemServices(interface.toInterface(IID_IWbemServices));
 }

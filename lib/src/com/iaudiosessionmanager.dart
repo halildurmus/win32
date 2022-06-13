@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -73,4 +72,7 @@ class IAudioSessionManager extends IUnknown {
                       int StreamFlags,
                       Pointer<Pointer<COMObject>> AudioVolume)>()(
           ptr.ref.lpVtbl, AudioSessionGuid, StreamFlags, AudioVolume);
+
+  factory IAudioSessionManager.from(IUnknown interface) =>
+      IAudioSessionManager(interface.toInterface(IID_IAudioSessionManager));
 }

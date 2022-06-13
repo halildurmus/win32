@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileSaveDialog = '{84BCCD23-5FDE-4CDB-AEA4-AF64B83D78AB}';
@@ -99,6 +99,9 @@ class IFileSaveDialog extends IFileDialog {
                       int hwnd,
                       Pointer<COMObject> pSink)>()(
           ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
+
+  factory IFileSaveDialog.from(IUnknown interface) =>
+      IFileSaveDialog(interface.toInterface(IID_IFileSaveDialog));
 }
 
 /// @nodoc

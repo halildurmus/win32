@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -57,4 +56,7 @@ class IAudioRenderClient extends IUnknown {
           .asFunction<
               int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
       ptr.ref.lpVtbl, NumFramesWritten, dwFlags);
+
+  factory IAudioRenderClient.from(IUnknown interface) =>
+      IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
 }

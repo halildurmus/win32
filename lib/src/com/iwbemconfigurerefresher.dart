@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -152,4 +151,8 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Pointer<COMObject>> ppEnum,
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           wszClassName, lFlags, pContext, ppEnum, plId);
+
+  factory IWbemConfigureRefresher.from(IUnknown interface) =>
+      IWbemConfigureRefresher(
+          interface.toInterface(IID_IWbemConfigureRefresher));
 }

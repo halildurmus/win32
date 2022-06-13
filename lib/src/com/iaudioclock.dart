@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -69,4 +68,7 @@ class IAudioClock extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Uint32> pdwCharacteristics)>()(
       ptr.ref.lpVtbl, pdwCharacteristics);
+
+  factory IAudioClock.from(IUnknown interface) =>
+      IAudioClock(interface.toInterface(IID_IAudioClock));
 }

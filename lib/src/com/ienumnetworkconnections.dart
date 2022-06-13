@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IEnumNetworkConnections = '{DCB00006-570F-4A9B-8D69-199FDBA5723B}';
@@ -103,4 +103,8 @@ class IEnumNetworkConnections extends IDispatch {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
       ptr.ref.lpVtbl, ppEnumNetwork);
+
+  factory IEnumNetworkConnections.from(IUnknown interface) =>
+      IEnumNetworkConnections(
+          interface.toInterface(IID_IEnumNetworkConnections));
 }

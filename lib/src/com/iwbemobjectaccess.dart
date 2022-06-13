@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iwbemclassobject.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';
@@ -164,4 +164,7 @@ class IWbemObjectAccess extends IWbemClassObject {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
+
+  factory IWbemObjectAccess.from(IUnknown interface) =>
+      IWbemObjectAccess(interface.toInterface(IID_IWbemObjectAccess));
 }

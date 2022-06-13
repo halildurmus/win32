@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -56,4 +55,7 @@ class ISequentialStream extends IUnknown {
               int Function(
                   Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)>()(
       ptr.ref.lpVtbl, pv, cb, pcbWritten);
+
+  factory ISequentialStream.from(IUnknown interface) =>
+      ISequentialStream(interface.toInterface(IID_ISequentialStream));
 }

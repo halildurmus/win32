@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -90,4 +89,7 @@ class IErrorInfo extends IUnknown {
               .asFunction<
                   int Function(Pointer, Pointer<Uint32> pdwHelpContext)>()(
           ptr.ref.lpVtbl, pdwHelpContext);
+
+  factory IErrorInfo.from(IUnknown interface) =>
+      IErrorInfo(interface.toInterface(IID_IErrorInfo));
 }

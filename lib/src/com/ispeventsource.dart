@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ispnotifysource.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
@@ -76,4 +76,7 @@ class ISpEventSource extends ISpNotifySource {
       .asFunction<
           int Function(Pointer,
               Pointer<SPEVENTSOURCEINFO> pInfo)>()(ptr.ref.lpVtbl, pInfo);
+
+  factory ISpEventSource.from(IUnknown interface) =>
+      ISpEventSource(interface.toInterface(IID_ISpEventSource));
 }

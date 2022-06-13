@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -209,6 +208,9 @@ class IDesktopWallpaper extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 enable)>>>()
       .value
       .asFunction<int Function(Pointer, int enable)>()(ptr.ref.lpVtbl, enable);
+
+  factory IDesktopWallpaper.from(IUnknown interface) =>
+      IDesktopWallpaper(interface.toInterface(IID_IDesktopWallpaper));
 }
 
 /// @nodoc

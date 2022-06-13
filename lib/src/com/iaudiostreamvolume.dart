@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -87,4 +86,7 @@ class IAudioStreamVolume extends IUnknown {
       .asFunction<
           int Function(Pointer, int dwCount,
               Pointer<Float> pfVolumes)>()(ptr.ref.lpVtbl, dwCount, pfVolumes);
+
+  factory IAudioStreamVolume.from(IUnknown interface) =>
+      IAudioStreamVolume(interface.toInterface(IID_IAudioStreamVolume));
 }

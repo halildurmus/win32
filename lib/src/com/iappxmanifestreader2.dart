@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iappxmanifestreader.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IAppxManifestReader2 = '{D06F67BC-B31D-4EBA-A8AF-638E73E77B4D}';
@@ -44,4 +44,7 @@ class IAppxManifestReader2 extends IAppxManifestReader {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
       ptr.ref.lpVtbl, resources);
+
+  factory IAppxManifestReader2.from(IUnknown interface) =>
+      IAppxManifestReader2(interface.toInterface(IID_IAppxManifestReader2));
 }

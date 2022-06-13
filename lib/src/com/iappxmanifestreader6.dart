@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -46,4 +45,7 @@ class IAppxManifestReader6 extends IUnknown {
                   int Function(
                       Pointer, Pointer<Int32> isNonQualifiedResourcePackage)>()(
           ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
+
+  factory IAppxManifestReader6.from(IUnknown interface) =>
+      IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
 }

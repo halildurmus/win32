@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -198,4 +197,7 @@ class IAudioClient extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> riid,
               Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, riid, ppv);
+
+  factory IAudioClient.from(IUnknown interface) =>
+      IAudioClient(interface.toInterface(IID_IAudioClient));
 }

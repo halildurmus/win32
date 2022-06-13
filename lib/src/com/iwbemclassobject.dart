@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -394,6 +393,9 @@ class IWbemClassObject extends IUnknown {
                   int Function(Pointer, Pointer<Utf16> wszMethodName,
                       Pointer<Pointer<Utf16>> pstrClassName)>()(
           ptr.ref.lpVtbl, wszMethodName, pstrClassName);
+
+  factory IWbemClassObject.from(IUnknown interface) =>
+      IWbemClassObject(interface.toInterface(IID_IWbemClassObject));
 }
 
 /// @nodoc

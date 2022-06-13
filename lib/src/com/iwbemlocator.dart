@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -77,6 +76,9 @@ class IWbemLocator extends IUnknown {
           strAuthority,
           pCtx,
           ppNamespace);
+
+  factory IWbemLocator.from(IUnknown interface) =>
+      IWbemLocator(interface.toInterface(IID_IWbemLocator));
 }
 
 /// @nodoc

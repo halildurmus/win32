@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -88,4 +87,7 @@ class IAppxFile extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> stream)>()(
       ptr.ref.lpVtbl, stream);
+
+  factory IAppxFile.from(IUnknown interface) =>
+      IAppxFile(interface.toInterface(IID_IAppxFile));
 }

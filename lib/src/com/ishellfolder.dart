@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -250,4 +249,7 @@ class IShellFolder extends IUnknown {
                       int uFlags,
                       Pointer<Pointer<ITEMIDLIST>> ppidlOut)>()(
           ptr.ref.lpVtbl, hwnd, pidl, pszName, uFlags, ppidlOut);
+
+  factory IShellFolder.from(IUnknown interface) =>
+      IShellFolder(interface.toInterface(IID_IShellFolder));
 }

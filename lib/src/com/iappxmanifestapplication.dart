@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -57,4 +56,8 @@ class IAppxManifestApplication extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<Utf16>> appUserModelId)>()(
       ptr.ref.lpVtbl, appUserModelId);
+
+  factory IAppxManifestApplication.from(IUnknown interface) =>
+      IAppxManifestApplication(
+          interface.toInterface(IID_IAppxManifestApplication));
 }

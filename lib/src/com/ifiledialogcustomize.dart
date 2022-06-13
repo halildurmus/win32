@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -337,4 +336,7 @@ class IFileDialogCustomize extends IUnknown {
                   int dwIDItem,
                   Pointer<Utf16>
                       pszLabel)>()(ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
+
+  factory IFileDialogCustomize.from(IUnknown interface) =>
+      IFileDialogCustomize(interface.toInterface(IID_IFileDialogCustomize));
 }

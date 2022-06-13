@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -97,4 +96,7 @@ class IWbemHiPerfEnum extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
+
+  factory IWbemHiPerfEnum.from(IUnknown interface) =>
+      IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
 }

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -74,6 +73,9 @@ class IVirtualDesktopManager extends IUnknown {
               int Function(
                   Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
       ptr.ref.lpVtbl, topLevelWindow, desktopId);
+
+  factory IVirtualDesktopManager.from(IUnknown interface) =>
+      IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
 }
 
 /// @nodoc

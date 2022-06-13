@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -102,6 +101,10 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<COMObject> itemArray,
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, processId);
+
+  factory IApplicationActivationManager.from(IUnknown interface) =>
+      IApplicationActivationManager(
+          interface.toInterface(IID_IApplicationActivationManager));
 }
 
 /// @nodoc

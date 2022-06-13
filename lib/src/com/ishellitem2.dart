@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ishellitem.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IShellItem2 = '{7E9FB0D3-919F-4307-AB2E-9B1860310C93}';
@@ -218,4 +218,7 @@ class IShellItem2 extends IShellItem {
       .asFunction<
           int Function(Pointer, Pointer<PROPERTYKEY> key,
               Pointer<Int32> pf)>()(ptr.ref.lpVtbl, key, pf);
+
+  factory IShellItem2.from(IUnknown interface) =>
+      IShellItem2(interface.toInterface(IID_IShellItem2));
 }

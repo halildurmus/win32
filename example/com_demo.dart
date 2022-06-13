@@ -36,7 +36,7 @@ void main() {
 
   // QueryInterface for the IFileDialog2 interface, which is inherited from
   // IFileDialog
-  final fileDialog2 = IFileDialog2(fileDialog.toInterface(IID_IFileDialog2));
+  final fileDialog2 = IFileDialog2.from(fileDialog);
   print('Get IFileDialog2 interface.\n'
       'fileDialog2.ptr is ${fileDialog2.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(fileDialog2)}\n');
@@ -46,7 +46,7 @@ void main() {
   if (FAILED(hr)) throw WindowsException(hr);
 
   // QueryInterface for the IModalWindow interface, just to demonstrate it.
-  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+  final modalWindow = IModalWindow.from(fileDialog2);
   print('Get IModalWindow interface.\n'
       'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(modalWindow)}\n');
@@ -57,8 +57,7 @@ void main() {
       'refCount is now ${refCount(modalWindow)}\n');
 
   // Now get the IFileOpenDialog interface.
-  final fileOpenDialog =
-      IFileOpenDialog(modalWindow.toInterface(IID_IFileOpenDialog));
+  final fileOpenDialog = IFileOpenDialog.from(modalWindow);
 
   print('Get IFileOpenDialog interface.\n'
       'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');

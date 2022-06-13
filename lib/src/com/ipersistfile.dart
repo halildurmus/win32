@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ipersist.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IPersistFile = '{0000010B-0000-0000-C000-000000000046}';
@@ -83,4 +83,7 @@ class IPersistFile extends IPersist {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<Utf16>> ppszFileName)>()(
       ptr.ref.lpVtbl, ppszFileName);
+
+  factory IPersistFile.from(IUnknown interface) =>
+      IPersistFile(interface.toInterface(IID_IPersistFile));
 }

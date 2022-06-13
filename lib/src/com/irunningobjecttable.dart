@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -137,4 +136,7 @@ class IRunningObjectTable extends IUnknown {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> ppenumMoniker)>()(
       ptr.ref.lpVtbl, ppenumMoniker);
+
+  factory IRunningObjectTable.from(IUnknown interface) =>
+      IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
 }

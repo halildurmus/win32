@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -341,4 +340,7 @@ class ITypeInfo extends IUnknown {
           .value
           .asFunction<void Function(Pointer, Pointer<VARDESC> pVarDesc)>()(
       ptr.ref.lpVtbl, pVarDesc);
+
+  factory ITypeInfo.from(IUnknown interface) =>
+      ITypeInfo(interface.toInterface(IID_ITypeInfo));
 }

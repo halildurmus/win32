@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -338,4 +337,7 @@ class IUri extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<COMObject> pUri,
               Pointer<Int32> pfEqual)>()(ptr.ref.lpVtbl, pUri, pfEqual);
+
+  factory IUri.from(IUnknown interface) =>
+      IUri(interface.toInterface(IID_IUri));
 }

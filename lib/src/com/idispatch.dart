@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -118,4 +117,7 @@ class IDispatch extends IUnknown {
                       Pointer<EXCEPINFO> pExcepInfo,
                       Pointer<Uint32> puArgErr)>()(ptr.ref.lpVtbl, dispIdMember,
           riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
+
+  factory IDispatch.from(IUnknown interface) =>
+      IDispatch(interface.toInterface(IID_IDispatch));
 }

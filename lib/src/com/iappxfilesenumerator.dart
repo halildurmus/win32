@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -62,4 +61,7 @@ class IAppxFilesEnumerator extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
       ptr.ref.lpVtbl, hasNext);
+
+  factory IAppxFilesEnumerator.from(IUnknown interface) =>
+      IAppxFilesEnumerator(interface.toInterface(IID_IAppxFilesEnumerator));
 }

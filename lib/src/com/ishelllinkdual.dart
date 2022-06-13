@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IShellLinkDual = '{88A05C00-F000-11CE-8350-444553540000}';
@@ -286,4 +286,7 @@ class IShellLinkDual extends IDispatch {
       .value
       .asFunction<
           int Function(Pointer, VARIANT vWhere)>()(ptr.ref.lpVtbl, vWhere);
+
+  factory IShellLinkDual.from(IUnknown interface) =>
+      IShellLinkDual(interface.toInterface(IID_IShellLinkDual));
 }

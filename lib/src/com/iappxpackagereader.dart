@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -99,4 +98,7 @@ class IAppxPackageReader extends IUnknown {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> manifestReader)>()(
       ptr.ref.lpVtbl, manifestReader);
+
+  factory IAppxPackageReader.from(IUnknown interface) =>
+      IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
 }

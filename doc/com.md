@@ -57,18 +57,20 @@ supported interface.
 More information on COM interfaces may be found in the [Microsoft
 documentation](https://docs.microsoft.com/en-us/windows/win32/learnwin32/asking-an-object-for-an-interface).
 
-The Dart Win32 package supplies a method that wraps `QueryInterface`. If you
+COM interfaces supply a method that wraps `QueryInterface`. If you
 have an existing COM object, you can call it as follows:
 
 ```dart
-  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+  final modalWindow = IModalWindow.from(fileDialog2);
 ```
 
 Where `createFromID` creates a new COM object, `toInterface` casts an existing
-COM object to a new interface. Like `createFromID`, it returns a
-`Pointer<COMObject>`, which can be cast to the interface itself, and as with
-`createFromID`, it is the caller's responsibility to free the returned pointer
-when all interfaces that derive from it are released.
+COM object to a new interface. As with `createFromID`, it is the caller's
+responsibility to free the returned pointer when all interfaces that derive from
+it are released.
+
+Attempting to cast a COM object to an interface it does not support will fail,
+of course. A `WindowsException` will be thrown with an hr of `E_NOINTERFACE`.
 
 ### Calling a method on a COM object
 

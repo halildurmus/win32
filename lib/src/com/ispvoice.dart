@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ispeventsource.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';
@@ -329,6 +329,9 @@ class ISpVoice extends ISpEventSource {
                       Pointer pvExtraData,
                       int cbExtraData)>()(ptr.ref.lpVtbl, hwndParent, pszTitle,
           pszTypeOfUI, pvExtraData, cbExtraData);
+
+  factory ISpVoice.from(IUnknown interface) =>
+      ISpVoice(interface.toInterface(IID_ISpVoice));
 }
 
 /// @nodoc

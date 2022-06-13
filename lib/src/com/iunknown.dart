@@ -73,4 +73,7 @@ class IUnknown {
       free(pIID);
     }
   }
+
+  factory IUnknown.from(IUnknown interface) =>
+      IUnknown(interface.toInterface(IID_IUnknown));
 }

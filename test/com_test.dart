@@ -170,4 +170,38 @@ void main() {
       CoUninitialize();
     });
   });
+
+  group('COM object casting using methods', () {
+    late FileOpenDialog dialog;
+    setUp(() {
+      final hr = CoInitializeEx(
+          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      dialog = FileOpenDialog.createInstance();
+    });
+    test('Can cast to various supported interfaces', () {
+      expect(() => IUnknown.from(dialog), returnsNormally);
+      expect(() => IModalWindow.from(dialog), returnsNormally);
+      expect(() => IFileOpenDialog.from(dialog), returnsNormally);
+      expect(() => IFileDialog.from(dialog), returnsNormally);
+      expect(() => IFileDialog2.from(dialog), returnsNormally);
+    });
+
+    test('Cannot cast to various unsupported interfaces', () {
+      expect(
+          () => IShellItem.from(dialog),
+          throwsA(isA<WindowsException>()
+              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+      expect(
+          () => ISpeechObjectToken.from(dialog),
+          throwsA(isA<WindowsException>()
+              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+    });
+
+    tearDown(() {
+      free(dialog.ptr);
+      CoUninitialize();
+    });
+  });
 }

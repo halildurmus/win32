@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -125,4 +124,7 @@ class ISpellingError extends IUnknown {
       free(retValuePtr);
     }
   }
+
+  factory ISpellingError.from(IUnknown interface) =>
+      ISpellingError(interface.toInterface(IID_ISpellingError));
 }

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -40,4 +39,7 @@ class ISupportErrorInfo extends IUnknown {
       .value
       .asFunction<
           int Function(Pointer, Pointer<GUID> riid)>()(ptr.ref.lpVtbl, riid);
+
+  factory ISupportErrorInfo.from(IUnknown interface) =>
+      ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
 }

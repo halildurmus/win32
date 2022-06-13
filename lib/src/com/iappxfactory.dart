@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -122,6 +121,9 @@ class IAppxFactory extends IUnknown {
                       Pointer<Utf16> signatureFileName,
                       Pointer<Pointer<COMObject>> blockMapReader)>()(
           ptr.ref.lpVtbl, blockMapStream, signatureFileName, blockMapReader);
+
+  factory IAppxFactory.from(IUnknown interface) =>
+      IAppxFactory(interface.toInterface(IID_IAppxFactory));
 }
 
 /// @nodoc

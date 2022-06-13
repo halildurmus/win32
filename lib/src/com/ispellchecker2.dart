@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ispellchecker.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpellChecker2 = '{E7ED1C71-87F7-4378-A840-C9200DACEE47}';
@@ -40,4 +40,7 @@ class ISpellChecker2 extends ISpellChecker {
       .value
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
+
+  factory ISpellChecker2.from(IUnknown interface) =>
+      ISpellChecker2(interface.toInterface(IID_ISpellChecker2));
 }

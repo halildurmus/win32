@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iappxmanifestreader2.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IAppxManifestReader3 = '{C43825AB-69B7-400A-9709-CC37F5A72D24}';
@@ -64,4 +64,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
                       int Function(Pointer,
                           Pointer<Pointer<COMObject>> targetDeviceFamilies)>()(
               ptr.ref.lpVtbl, targetDeviceFamilies);
+
+  factory IAppxManifestReader3.from(IUnknown interface) =>
+      IAppxManifestReader3(interface.toInterface(IID_IAppxManifestReader3));
 }

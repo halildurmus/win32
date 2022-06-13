@@ -72,8 +72,7 @@ void main() {
     connectWMI(pLoc, ppNamespace);
 
     final refresher = WbemRefresher.createInstance();
-    final pConfig = IWbemConfigureRefresher(
-        refresher.toInterface(IID_IWbemConfigureRefresher));
+    final pConfig = IWbemConfigureRefresher.from(refresher);
     final ppRefreshable = arena<Pointer<COMObject>>();
 
     final pszQuery =
@@ -86,7 +85,7 @@ void main() {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final pObj = IWbemClassObject(ppRefreshable.cast());
-    final pAccess = IWbemObjectAccess(pObj.toInterface(IID_IWbemObjectAccess));
+    final pAccess = IWbemObjectAccess.from(pObj);
 
     final pszVirtualBytes = 'WorkingSet'.toNativeUtf16(allocator: arena);
     final cimType = arena<Int32>();

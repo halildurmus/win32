@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -41,4 +40,8 @@ class INetworkListManagerEvents extends IUnknown {
       .asFunction<
           int Function(
               Pointer, int newConnectivity)>()(ptr.ref.lpVtbl, newConnectivity);
+
+  factory INetworkListManagerEvents.from(IUnknown interface) =>
+      INetworkListManagerEvents(
+          interface.toInterface(IID_INetworkListManagerEvents));
 }

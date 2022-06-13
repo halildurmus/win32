@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -86,4 +85,7 @@ class IConnectionPoint extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
       ptr.ref.lpVtbl, ppEnum);
+
+  factory IConnectionPoint.from(IUnknown interface) =>
+      IConnectionPoint(interface.toInterface(IID_IConnectionPoint));
 }

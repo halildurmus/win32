@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -94,4 +93,7 @@ class IMMDevice extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
       ptr.ref.lpVtbl, pdwState);
+
+  factory IMMDevice.from(IUnknown interface) =>
+      IMMDevice(interface.toInterface(IID_IMMDevice));
 }

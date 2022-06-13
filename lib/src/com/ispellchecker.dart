@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -257,4 +256,7 @@ class ISpellChecker extends IUnknown {
                   int Function(Pointer, Pointer<Utf16> text,
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, text, value);
+
+  factory ISpellChecker.from(IUnknown interface) =>
+      ISpellChecker(interface.toInterface(IID_ISpellChecker));
 }

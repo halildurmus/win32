@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
@@ -55,6 +55,9 @@ class IFileOpenDialog extends IFileDialog {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
       ptr.ref.lpVtbl, ppsai);
+
+  factory IFileOpenDialog.from(IUnknown interface) =>
+      IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
 }
 
 /// @nodoc

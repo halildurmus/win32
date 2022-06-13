@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -115,4 +114,7 @@ class ISpNotifySource extends IUnknown {
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+
+  factory ISpNotifySource.from(IUnknown interface) =>
+      ISpNotifySource(interface.toInterface(IID_ISpNotifySource));
 }

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -77,4 +76,7 @@ class ISimpleAudioVolume extends IUnknown {
       .asFunction<
           int Function(
               Pointer, Pointer<Int32> pbMute)>()(ptr.ref.lpVtbl, pbMute);
+
+  factory ISimpleAudioVolume.from(IUnknown interface) =>
+      ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
 }

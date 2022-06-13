@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -77,4 +76,7 @@ class IFileIsInUse extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+
+  factory IFileIsInUse.from(IUnknown interface) =>
+      IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
 }

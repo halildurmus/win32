@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -43,4 +42,7 @@ class IShellItemImageFactory extends IUnknown {
       .asFunction<
           int Function(Pointer, SIZE size, int flags,
               Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
+
+  factory IShellItemImageFactory.from(IUnknown interface) =>
+      IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 }

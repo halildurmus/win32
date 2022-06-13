@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -41,4 +40,7 @@ class IPersist extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
       ptr.ref.lpVtbl, pClassID);
+
+  factory IPersist.from(IUnknown interface) =>
+      IPersist(interface.toInterface(IID_IPersist));
 }

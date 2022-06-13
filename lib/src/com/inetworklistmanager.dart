@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
@@ -173,6 +173,9 @@ class INetworkListManager extends IDispatch {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+
+  factory INetworkListManager.from(IUnknown interface) =>
+      INetworkListManager(interface.toInterface(IID_INetworkListManager));
 }
 
 /// @nodoc

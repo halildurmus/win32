@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -76,4 +75,7 @@ class IEnumIDList extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
+
+  factory IEnumIDList.from(IUnknown interface) =>
+      IEnumIDList(interface.toInterface(IID_IEnumIDList));
 }
