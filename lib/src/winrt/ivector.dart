@@ -605,8 +605,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   void _ReplaceAll_COMObject(List<IInspectable> items) {
     final pArray = calloc<COMObject>(items.length);
     for (var i = 0; i < items.length; i++) {
-      final pElement = items.elementAt(i).ptr;
-      pArray[i] = pElement.ref.lpVtbl;
+      pArray[i] = items.elementAt(i).ptr.ref;
     }
 
     try {
