@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:winmd/winmd.dart';
 
 import 'com_interface.dart';
@@ -15,6 +17,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       .map((i) => lastComponent(i.name))
       .toList()
       .join(', ');
+
+  String get relativePathToSrcDir => relativePathToSrcDirectory(File(
+      '../../lib/src/winrt/${folderFromWinRTNamespace(typeDef.name)}/$shortName.dart'));
 
   static const ignoredWinRTTypes = <String>{
     // This is exposed as dart:core's DateTime
@@ -45,11 +50,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
       return '';
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return '${stripAnsiUnicodeSuffix(stripGenerics(lastComponent(typeDef.name))).toLowerCase()}.dart';
+      return '${relativePathToSrcDir}winrt/${filePathFromWinRTNamespace(typeDef.name)}';
     } else if (typeDef.isStruct) {
-      // TODO: Update this once we generate WinRT structs in their respective
-      // folders e.g. Windows.Foundation.Point -> foundation/structs.g.dart
-      return 'structs.g.dart';
+      return '${relativePathToSrcDir}winrt/${folderFromWinRTNamespace(typeDef.name)}/structs.g.dart';
     } else {
       // TODO: Add support for these as they occur.
       print('Unable to get import for typeDef: $typeDef');
@@ -115,20 +118,21 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   int cacheVtableStart(TypeDef? type) => 6;
 
   @override
-  String get rootHeader => "import '../com/iinspectable.dart';";
+  String get rootHeader =>
+      "import '${relativePathToSrcDir}com/iinspectable.dart';";
 
   @override
   String get extraHeaders => """
-    import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-    import '../combase.dart';
-    import '../exceptions.dart';
-    import '../macros.dart';
-    import '../utils.dart';
-    import '../types.dart';
-    import '../winrt_callbacks.dart';
-    import '../winrt_helpers.dart';
+    import '${relativePathToSrcDir}api_ms_win_core_winrt_string_l1_1_0.dart';
+    import '${relativePathToSrcDir}combase.dart';
+    import '${relativePathToSrcDir}exceptions.dart';
+    import '${relativePathToSrcDir}macros.dart';
+    import '${relativePathToSrcDir}utils.dart';
+    import '${relativePathToSrcDir}types.dart';
+    import '${relativePathToSrcDir}winrt_callbacks.dart';
+    import '${relativePathToSrcDir}winrt_helpers.dart';
 
-    import '../extensions/hstring_array.dart';
+    import '${relativePathToSrcDir}extensions/hstring_array.dart';
   """;
 
   @override
