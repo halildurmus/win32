@@ -51,9 +51,7 @@ int generateStructs(Map<String, String> structs) {
 
 int generateStructSizeTests() {
   var testsGenerated = 0;
-  final buffer = StringBuffer()
-    ..write(
-        '''
+  final buffer = StringBuffer()..write('''
 $testStructsHeader
 
 void main() {
@@ -62,15 +60,13 @@ void main() {
 
   for (final struct in structSize64.keys) {
     if (structSize64[struct] == structSize32[struct]) {
-      buffer.write(
-          '''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
   });
     ''');
     } else {
-      buffer.write(
-          '''
+      buffer.write('''
   test('Struct $struct is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
@@ -106,8 +102,7 @@ void generateFunctions(Map<String, Win32Function> functions) {
     // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
 
-    buffer.write(
-        '''
+    buffer.write('''
 $functionsFileHeader
 
 final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
@@ -121,8 +116,7 @@ final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
       try {
         final method = methods.firstWhere((m) =>
             methodMatches(m.name, filteredFunctionList[function]!.prototype));
-        buffer.write(
-            '''
+        buffer.write('''
 ${generateDocComment(filteredFunctionList[function]!)}
 ${FunctionProjection(method, libraryDartName).toString()}
 ''');
@@ -144,9 +138,7 @@ int generateFunctionTests(Map<String, Win32Function> functions) {
     methods.addAll(api.methods);
   }
   var testsGenerated = 0;
-  final buffer = StringBuffer()
-    ..write(
-        '''
+  final buffer = StringBuffer()..write('''
 $testFunctionsHeader
 
 import 'helpers.dart';
@@ -194,8 +186,7 @@ void main() {
       final minimumWindowsVersion =
           filteredFunctions[function]!.minimumWindowsVersion;
 
-      final test =
-          '''
+      final test = '''
       test('Can instantiate $function', () {
         final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
         final $function = $libraryDartName.lookupFunction<\n
@@ -206,8 +197,7 @@ void main() {
       });''';
 
       if (minimumWindowsVersion > 0) {
-        buffer.write(
-            '''
+        buffer.write('''
         if (windowsBuildNumber >= $minimumWindowsVersion) {
           $test
         }''');

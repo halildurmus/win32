@@ -4,8 +4,7 @@ import '../projection/utils.dart';
 import 'version.dart';
 
 String v2ParentImport(List<TypeDef> parentInterfaces) {
-  const v2StandardImports =
-      '''
+  const v2StandardImports = '''
     import '../callbacks.dart';
     import '../combase.dart';
     import '../constants.dart';
