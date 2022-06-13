@@ -279,13 +279,13 @@ void generateWinRTApis() {
       ];
       typesToGenerate.addAll(factoryAndStaticInterfaces);
     }
-
-    typesToGenerate
-      // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
-      ..removeWhere((type) => type.isEmpty)
-      // Remove excluded WinRT types
-      ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
   }
+
+  typesToGenerate
+    // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
+    ..removeWhere((type) => type.isEmpty)
+    // Remove excluded WinRT types
+    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
 
   for (final type in typesToGenerate) {
     final typeDef = MetadataStore.getMetadataForType(type);
@@ -316,23 +316,20 @@ int generateWinRTStructs() {
   final file = File('../../lib/src/winrt/structs.g.dart');
   final structProjections = <StructProjection>[];
 
-  for (final typeName in structs.keys) {
-    final scope = MetadataStore.getScopeForType(typeName);
+  for (final type in structs.keys) {
+    final typeDef = MetadataStore.getMetadataForType(type);
+    if (typeDef == null) throw Exception("Can't find $type");
 
-    final typeDefs = scope.typeDefs
-        .where((typeDef) => typeName == typeDef.name)
-        .where((typeDef) => typeDef.supportedArchitectures.x64);
-
-    structProjections.addAll(typeDefs.map((struct) => StructProjection(
-        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-        comment: structs[struct.name]!)));
+    final structProjection = StructProjection(
+        typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+        comment: structs[typeDef.name]!);
+    structProjections.add(structProjection);
   }
 
   structProjections.sort((a, b) =>
       lastComponent(a.structName).compareTo(lastComponent(b.structName)));
 
   final structsFile = [winrtStructFileHeader, ...structProjections].join();
-
   file.writeAsStringSync(DartFormatter().format(structsFile));
 
   return structProjections.length;

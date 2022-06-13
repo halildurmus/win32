@@ -7,11 +7,6 @@ import 'dart:ffi';
 import '../combase.dart';
 
 extension COMObjectPointer on Pointer<COMObject> {
-  Pointer<COMObject> operator [](int index) => this.elementAt(index);
-
-  void operator []=(int index, Pointer<Pointer<IntPtr>> value) =>
-      this[index].ref.lpVtbl = value;
-
   /// Creates a `List<T>` from the `Pointer<COMObject>`.
   ///
   /// `T` must be a `WinRT` type. e.g. `IHostName`, `IStorageFile` ...
@@ -31,7 +26,7 @@ extension COMObjectPointer on Pointer<COMObject> {
   List<T> toList<T>(T Function(Pointer<COMObject>) creator, {int length = 1}) {
     final list = <T>[];
     for (var i = 0; i < length; i++) {
-      final element = this[i];
+      final element = this.elementAt(i);
       if (element.ref.lpVtbl == nullptr) {
         break;
       }
