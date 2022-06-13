@@ -127,23 +127,22 @@ void main() {
   });
 
   test('folderFromWinRTNamespace', () {
-    expect(folderFromWinRTNamespace('Windows.Globalization.Calendar'),
+    expect(folderFromWinRTType('Windows.Globalization.Calendar'),
         equals('globalization'));
-    expect(folderFromWinRTNamespace('Windows.Storage.Pickers.FileOpenPicker'),
+    expect(folderFromWinRTType('Windows.Storage.Pickers.FileOpenPicker'),
         equals('storage/pickers'));
     expect(
-        folderFromWinRTNamespace(
-            'Windows.Devices.Geolocation.Geofencing.Geofence'),
+        folderFromWinRTType('Windows.Devices.Geolocation.Geofencing.Geofence'),
         equals('devices/geolocation/geofencing'));
   });
 
   test('filePathFromWinRTNamespace', () {
-    expect(filePathFromWinRTNamespace('Windows.Globalization.Calendar'),
+    expect(filePathFromWinRTType('Windows.Globalization.Calendar'),
         equals('globalization/calendar.dart'));
-    expect(filePathFromWinRTNamespace('Windows.Storage.Pickers.FileOpenPicker'),
+    expect(filePathFromWinRTType('Windows.Storage.Pickers.FileOpenPicker'),
         equals('storage/pickers/fileopenpicker.dart'));
     expect(
-        filePathFromWinRTNamespace(
+        filePathFromWinRTType(
             'Windows.Devices.Geolocation.Geofencing.Geofence'),
         equals('devices/geolocation/geofencing/geofence.dart'));
   });

@@ -19,7 +19,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       .join(', ');
 
   String get relativePathToSrcDir => relativePathToSrcDirectory(File(
-      '../../lib/src/winrt/${folderFromWinRTNamespace(typeDef.name)}/$shortName.dart'));
+      '../../lib/src/winrt/${folderFromWinRTType(typeDef.name)}/$shortName.dart'));
 
   static const ignoredWinRTTypes = <String>{
     // This is exposed as dart:core's DateTime
@@ -50,9 +50,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
       return '';
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return '${relativePathToSrcDir}winrt/${filePathFromWinRTNamespace(typeDef.name)}';
+      return '${relativePathToSrcDir}winrt/${filePathFromWinRTType(typeDef.name)}';
     } else if (typeDef.isStruct) {
-      return '${relativePathToSrcDir}winrt/${folderFromWinRTNamespace(typeDef.name)}/structs.g.dart';
+      return '${relativePathToSrcDir}winrt/${folderFromWinRTType(typeDef.name)}/structs.g.dart';
     } else {
       // TODO: Add support for these as they occur.
       print('Unable to get import for typeDef: $typeDef');

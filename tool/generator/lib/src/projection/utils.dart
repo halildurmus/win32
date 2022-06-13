@@ -160,30 +160,33 @@ String importForWin32Type(TypeIdentifier identifier) {
   }
 }
 
-/// Converts a namespace (e.g. `Windows.Win32.System.Console.CONSOLE_FONT_INFO`)
-/// and returns the matching folder (e.g. `system/console`).
+/// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
+/// matching folder (e.g. `system`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
 
   return segments.join('/').toLowerCase();
 }
 
-/// Converts a namespace (e.g. `Windows.Storage.Pickers.FileOpenPicker`) and
-/// returns the matching folder (e.g. `storage/pickers`).
-String folderFromWinRTNamespace(String namespace) {
-  final segments = namespace.split('.').skip(1).toList()..removeLast();
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching folder
+/// (e.g. `storage/pickers`).
+String folderFromWinRTType(String fullyQualifiedType) {
+  final segments = fullyQualifiedType.split('.').skip(1).toList()..removeLast();
 
   return segments.join('/').toLowerCase();
 }
 
-/// Converts a namespace (e.g. `Windows.Storage.Pickers.FileOpenPicker`) and
-/// returns the matching file path (e.g. `storage/pickers/fileopenpicker.dart`).
-String filePathFromWinRTNamespace(String namespace) {
-  final fileName = stripGenerics(lastComponent(namespace)).toLowerCase();
-  return '${folderFromWinRTNamespace(stripGenerics(namespace))}/$fileName.dart';
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching file path
+/// (e.g. `storage/pickers/fileopenpicker.dart`).
+String filePathFromWinRTType(String fullyQualifiedType) {
+  final fileName =
+      stripGenerics(lastComponent(fullyQualifiedType)).toLowerCase();
+  return '${folderFromWinRTType(stripGenerics(fullyQualifiedType))}/$fileName.dart';
 }
 
-/// Return the parent namespace of a fully qualified name
+/// Return the parent namespace of a fully-qualified type
 /// (e.g. `Windows.Gaming.Input.Gamepad` becomes `Windows.Gaming.Input`).
 String parentNamespace(String fullyQualifiedType) =>
     (fullyQualifiedType.split('.')..removeLast()).join('.');

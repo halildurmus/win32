@@ -295,7 +295,7 @@ void generateWinRTApis() {
 
     final dartClass = projection.toString();
     final classOutputPath =
-        '../../lib/src/winrt/${filePathFromWinRTNamespace(type)}';
+        '../../lib/src/winrt/${filePathFromWinRTType(type)}';
 
     try {
       final formattedDartClass = DartFormatter().format(dartClass);
@@ -320,7 +320,7 @@ void generateWinRTStructs() {
 
   for (final namespaceGroup in namespaceGroups) {
     final structProjections = <StructProjection>[];
-    final folderPath = folderFromWinRTNamespace(namespaceGroup.types.first);
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
     final file = File('../../lib/src/winrt/$folderPath/structs.g.dart')
       ..createSync(recursive: true);
 
