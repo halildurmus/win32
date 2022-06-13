@@ -98,3 +98,9 @@ SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
   }
   return functions;
 }
+
+void saveFunctionsToJson(SplayTreeMap<String, Win32Function> functions) {
+  final encoder = const JsonEncoder.withIndent('    ');
+  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
+  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
+}
