@@ -92,8 +92,8 @@ void main() {
 
     test('InspectableArray', () {
       final array = calloc<COMObject>(2);
-      array[0] = Calendar().ptr.ref.lpVtbl;
-      array[1] = PhoneNumberFormatter().ptr.ref.lpVtbl;
+      array[0] = Calendar().ptr.ref;
+      array[1] = PhoneNumberFormatter().ptr.ref;
       final pv =
           IPropertyValue.from(PropertyValue.CreateInspectableArray(2, array));
       expect(pv.Type, equals(1037));
@@ -103,10 +103,10 @@ void main() {
 
       pv.GetInspectableArray(arraySize, newArray);
       expect(arraySize.value, equals(2));
-      expect(IInspectable(newArray.value[0]).runtimeClassName,
+      expect(IInspectable(newArray.value.elementAt(0)).runtimeClassName,
           equals('Windows.Globalization.Calendar'));
       expect(
-          IInspectable(newArray.value[1]).runtimeClassName,
+          IInspectable(newArray.value.elementAt(1)).runtimeClassName,
           equals(
               'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter'));
     });
