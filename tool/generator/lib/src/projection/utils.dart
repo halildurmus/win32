@@ -161,12 +161,35 @@ String importForWin32Type(TypeIdentifier identifier) {
 }
 
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
-/// matching folder (e.g. `system/console`).
+/// matching folder (e.g. `system`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
 
   return segments.join('/').toLowerCase();
 }
+
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching folder
+/// (e.g. `storage/pickers`).
+String folderFromWinRTType(String fullyQualifiedType) {
+  final segments = fullyQualifiedType.split('.').skip(1).toList()..removeLast();
+
+  return segments.join('/').toLowerCase();
+}
+
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching file path
+/// (e.g. `storage/pickers/fileopenpicker.dart`).
+String filePathFromWinRTType(String fullyQualifiedType) {
+  final fileName =
+      stripGenerics(lastComponent(fullyQualifiedType)).toLowerCase();
+  return '${folderFromWinRTType(stripGenerics(fullyQualifiedType))}/$fileName.dart';
+}
+
+/// Return the parent namespace of a fully-qualified type
+/// (e.g. `Windows.Gaming.Input.Gamepad` becomes `Windows.Gaming.Input`).
+String parentNamespace(String fullyQualifiedType) =>
+    (fullyQualifiedType.split('.')..removeLast()).join('.');
 
 /// Marks an identifier as private to the win32 library.
 String private(String identifier) => '_$identifier';
@@ -217,4 +240,52 @@ String libraryFromDllName(String dllName) {
     default:
       return '$dllName.dll';
   }
+}
+
+List<NamespaceGroup> groupTypesByParentNamespace(Iterable<String> types) {
+  types.toList().sort((a, b) => a.compareTo(b));
+  final namespaceGroups = <NamespaceGroup>[];
+  final namespaceGroup = NamespaceGroup(
+      namespace: parentNamespace(types.first), types: [types.first]);
+  namespaceGroups.add(namespaceGroup);
+
+  for (var i = 1; i < types.length; i++) {
+    final type = types.elementAt(i);
+    if (namespaceGroups
+        .where((e) => e.namespace == parentNamespace(type))
+        .isNotEmpty) {
+      final namespaceGroup = namespaceGroups
+          .firstWhere((e) => e.namespace == parentNamespace(type));
+      namespaceGroup.types.add(type);
+    } else {
+      final namespaceGroup =
+          NamespaceGroup(namespace: parentNamespace(type), types: [type]);
+      namespaceGroups.add(namespaceGroup);
+    }
+  }
+
+  return namespaceGroups;
+}
+
+class NamespaceGroup {
+  NamespaceGroup({required this.namespace, required this.types});
+
+  final String namespace;
+  final List<String> types;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is NamespaceGroup &&
+        other.namespace == namespace &&
+        other.types.length == types.length &&
+        other.types.every(types.contains);
+  }
+
+  @override
+  int get hashCode => namespace.hashCode ^ types.hashCode;
+
+  @override
+  String toString() => 'NamespaceGroup(namespace: $namespace, types: $types)';
 }

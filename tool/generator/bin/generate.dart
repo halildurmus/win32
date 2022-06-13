@@ -291,44 +291,52 @@ void generateWinRTApis() {
         : WinRTClassProjection(typeDef);
 
     final dartClass = projection.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(type)).toLowerCase();
-    final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
+    final classOutputPath =
+        '../../lib/src/winrt/${filePathFromWinRTType(type)}';
 
     try {
       final formattedDartClass = DartFormatter().format(dartClass);
-      File(classOutputPath).writeAsStringSync(formattedDartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(formattedDartClass);
     } catch (_) {
       // Better to write even on failure, so we can figure out what syntax error
       // it was that thwarted DartFormatter.
       print('Unable to format class. Writing unformatted...');
-      File(classOutputPath).writeAsStringSync(dartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(dartClass);
     }
   }
 }
 
-int generateWinRTStructs() {
+void generateWinRTStructs() {
   final structs = windowsRuntimeStructsToGenerate;
-  final file = File('../../lib/src/winrt/structs.g.dart');
-  final structProjections = <StructProjection>[];
+  final namespaceGroups =
+      groupTypesByParentNamespace(windowsRuntimeStructsToGenerate.keys);
 
-  for (final type in structs.keys) {
-    final typeDef = MetadataStore.getMetadataForType(type);
-    if (typeDef == null) throw Exception("Can't find $type");
+  for (final namespaceGroup in namespaceGroups) {
+    final structProjections = <StructProjection>[];
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/structs.g.dart')
+      ..createSync(recursive: true);
 
-    final structProjection = StructProjection(
-        typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
-        comment: structs[typeDef.name]!);
-    structProjections.add(structProjection);
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
+
+      final structProjection = StructProjection(
+          typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+          comment: structs[typeDef.name]!);
+      structProjections.add(structProjection);
+    }
+
+    structProjections.sort((a, b) =>
+        lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+
+    final structsFile = [winrtStructFileHeader, ...structProjections].join();
+    file.writeAsStringSync(DartFormatter().format(structsFile));
   }
-
-  structProjections.sort((a, b) =>
-      lastComponent(a.structName).compareTo(lastComponent(b.structName)));
-
-  final structsFile = [winrtStructFileHeader, ...structProjections].join();
-  file.writeAsStringSync(DartFormatter().format(structsFile));
-
-  return structProjections.length;
 }
 
 void main() {
