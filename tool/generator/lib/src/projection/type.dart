@@ -239,18 +239,17 @@ class TypeProjection {
     }
 
     if (typeIdentifier.typeArg?.baseType == BaseType.simpleArrayType) {
-      // TODO: Handle PassArray and FillArray
-
-      // ReceiveArray. This style is used when the caller receives an array that
-      // was allocated by the method. In this style, the array size parameter
-      // and the array parameter are both out parameters. Additionally, the
-      // array parameter is passed by reference (that is, ArrayType**, rather
-      // than ArrayType*).
+      // This form is used in WinRT methods when the caller receives an array
+      // that was allocated by the method. In this style, the array size
+      // parameter and the array parameter are both out parameters.
+      // Additionally, the array parameter is passed by reference (that is,
+      // ArrayType**, rather than ArrayType*).
       final refTuple = unwrapSimpleArrayType(typeIdentifier.typeArg!);
       return TypeTuple(
           'Pointer<${refTuple.nativeType}>', 'Pointer<${refTuple.dartType}>');
     }
 
+    // For example, `bool IndexOf(..., [Out] uint32_t & index)`.
     if (typeIdentifier.typeArg?.baseType == BaseType.uint32Type) {
       return const TypeTuple('Pointer<Uint32>', 'Pointer<Uint32>');
     }
