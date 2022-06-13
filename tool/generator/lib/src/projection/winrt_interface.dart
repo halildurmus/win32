@@ -61,6 +61,19 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
+  String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
+    if (typeIdentifier.name == 'System.Guid') {
+      return '${relativePathToSrcDir}guid.dart';
+    }
+
+    if (typeIdentifier.name.startsWith('Windows')) {
+      return getImportForTypeDef(typeIdentifier.type!);
+    }
+
+    return null;
+  }
+
+  @override
   List<String> get interfaceImport {
     if (typeDef.interfaces.isEmpty) {
       // Inherits from IInspectable, which is a traditional COM type.

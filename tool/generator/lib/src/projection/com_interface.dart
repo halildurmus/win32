@@ -83,10 +83,7 @@ class ComInterfaceProjection {
   }
 
   String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
-    if (excludedTypes.contains(typeIdentifier.name)) {
-      return 'specialTypes.dart';
-    }
-
+    if (excludedTypes.contains(typeIdentifier.name)) return 'specialTypes.dart';
     if (typeIdentifier.name == 'System.Guid') return '../guid.dart';
 
     if (typeIdentifier.name.startsWith('Windows')) {
