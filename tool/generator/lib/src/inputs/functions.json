@@ -276,92 +276,92 @@
         "prototype": "HRESULT BluetoothGATTAbortReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Specifies the end of reliable write procedures, and the writes should be aborted.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTBeginReliableWrite": {
         "prototype": "HRESULT BluetoothGATTBeginReliableWrite(\n  HANDLE                              hDevice,\n  PBTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                               Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "The BluetoothGATTBeginReliableWrite function specifies that reliable writes are about to begin.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTEndReliableWrite": {
         "prototype": "HRESULT BluetoothGATTEndReliableWrite(\n  HANDLE                             hDevice,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Specifies the end of reliable writes, and the writes should be committed.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetCharacteristics": {
         "prototype": "HRESULT BluetoothGATTGetCharacteristics(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_SERVICE        Service,\n  USHORT                      CharacteristicsBufferCount,\n  PBTH_LE_GATT_CHARACTERISTIC CharacteristicsBuffer,\n  USHORT                      *CharacteristicsBufferActual,\n  ULONG                       Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Gets all the characteristics available for the specified service.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetCharacteristicValue": {
         "prototype": "HRESULT BluetoothGATTGetCharacteristicValue(\n  HANDLE                            hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC       Characteristic,\n  ULONG                             CharacteristicValueDataSize,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE CharacteristicValue,\n  USHORT                            *CharacteristicValueSizeRequired,\n  ULONG                             Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Gets the value of the specified characteristic.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetDescriptors": {
         "prototype": "HRESULT BluetoothGATTGetDescriptors(\n  HANDLE                      hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC Characteristic,\n  USHORT                      DescriptorsBufferCount,\n  PBTH_LE_GATT_DESCRIPTOR     DescriptorsBuffer,\n  USHORT                      *DescriptorsBufferActual,\n  ULONG                       Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Gets all the descriptors available for the specified characteristic.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetDescriptorValue": {
         "prototype": "HRESULT BluetoothGATTGetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  ULONG                         DescriptorValueDataSize,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  USHORT                        *DescriptorValueSizeRequired,\n  ULONG                         Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Gets the value of the specified descriptor.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetIncludedServices": {
         "prototype": "HRESULT BluetoothGATTGetIncludedServices(\n  HANDLE               hDevice,\n  PBTH_LE_GATT_SERVICE ParentService,\n  USHORT               IncludedServicesBufferCount,\n  PBTH_LE_GATT_SERVICE IncludedServicesBuffer,\n  USHORT               *IncludedServicesBufferActual,\n  ULONG                Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Gets all the included services available for a given service.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTGetServices": {
         "prototype": "HRESULT BluetoothGATTGetServices(\n  HANDLE               hDevice,\n  USHORT               ServicesBufferCount,\n  PBTH_LE_GATT_SERVICE ServicesBuffer,\n  USHORT               *ServicesBufferActual,\n  ULONG                Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "The BluetoothGATTGetServices function gets all the primary services available for a server.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTRegisterEvent": {
         "prototype": "HRESULT BluetoothGATTRegisterEvent(\n  HANDLE                           hService,\n  BTH_LE_GATT_EVENT_TYPE           EventType,\n  PVOID                            EventParameterIn,\n  PFNBLUETOOTH_GATT_EVENT_CALLBACK Callback,\n  PVOID                            CallbackContext,\n  BLUETOOTH_GATT_EVENT_HANDLE      *pEventHandle,\n  ULONG                            Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Registers a routine to be called back during a characteristic value change event on the given characteristic identified by its characteristic handle.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTSetCharacteristicValue": {
         "prototype": "HRESULT BluetoothGATTSetCharacteristicValue(\n  HANDLE                             hDevice,\n  PBTH_LE_GATT_CHARACTERISTIC        Characteristic,\n  PBTH_LE_GATT_CHARACTERISTIC_VALUE  CharacteristicValue,\n  BTH_LE_GATT_RELIABLE_WRITE_CONTEXT ReliableWriteContext,\n  ULONG                              Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Writes the specified characteristic value to the Bluetooth device.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTSetDescriptorValue": {
         "prototype": "HRESULT BluetoothGATTSetDescriptorValue(\n  HANDLE                        hDevice,\n  PBTH_LE_GATT_DESCRIPTOR       Descriptor,\n  PBTH_LE_GATT_DESCRIPTOR_VALUE DescriptorValue,\n  ULONG                         Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Writes the specified descriptor value to the Bluetooth device.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGATTUnregisterEvent": {
         "prototype": "HRESULT BluetoothGATTUnregisterEvent(\n  BLUETOOTH_GATT_EVENT_HANDLE EventHandle,\n  ULONG                       Flags\n);",
         "dllLibrary": "bluetoothapis",
         "comment": "Unregisters the given characteristic value change event.",
-        "minimumWindowsVersion": "WIN8",
-        "category": "bluetooth"
+        "category": "bluetooth",
+        "minimumWindowsVersion": "WIN8"
     },
     "BluetoothGetRadioInfo": {
         "prototype": "DWORD BluetoothGetRadioInfo(\n  HANDLE                hRadio,\n  PBLUETOOTH_RADIO_INFO pRadioInfo\n);",
@@ -1747,6 +1747,11 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
+    "GetAltTabInfo": {
+        "prototype": "BOOL GetAltTabInfoW(\n  [in, optional]  HWND        hwnd,\n  [in]            int         iItem,\n  [in, out]       PALTTABINFO pati,\n  [out, optional] LPWSTR      pszItemText,\n  [in]            UINT        cchItemText\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves status information for the specified window if it is the application-switching (ALT+TAB) window."
+    },
     "GetAncestor": {
         "prototype": "HWND GetAncestor(\n  HWND hwnd,\n  UINT gaFlags\n);",
         "dllLibrary": "user32",
@@ -1797,6 +1802,11 @@
         "prototype": "ULONG_PTR GetClassLongPtrW(\n  HWND hWnd,\n  int  nIndex\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the specified value from the WNDCLASSEX structure associated with the specified window."
+    },
+    "GetClassName": {
+        "prototype": "int GetClassNameW(\n  [in]  HWND   hWnd,\n  [out] LPWSTR lpClassName,\n  [in]  int    nMaxCount\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the name of the class to which the specified window belongs."
     },
     "GetClientRect": {
         "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
@@ -2187,6 +2197,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a GESTUREINFO structure given a handle to the gesture information."
     },
+    "GetGUIThreadInfo": {
+        "prototype": "BOOL GetGUIThreadInfo(\n  [in]      DWORD          idThread,\n  [in, out] PGUITHREADINFO pgui\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the active window or a specified GUI thread."
+    },
     "GetHandleInformation": {
         "prototype": "BOOL GetHandleInformation(\n  HANDLE  hObject,\n  LPDWORD lpdwFlags\n);",
         "dllLibrary": "kernel32",
@@ -2566,11 +2581,6 @@
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
-    "GetPixel": {
-        "prototype": "COLORREF GetPixel(\n  HDC hdc,\n  int x,\n  int y);",
-        "dllLibrary": "gdi32",
-        "comment": "The GetPixel function retrieves the red, green, blue (RGB) color value of the pixel at the specified coordinates."
-    },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
@@ -2585,6 +2595,11 @@
         "prototype": "_BOOL GetPhysicalMonitorsFromHMONITOR(\n  HMONITOR           hMonitor,\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);",
         "dllLibrary": "dxva2",
         "comment": "Retrieves the physical monitors associated with an HMONITOR monitor handle."
+    },
+    "GetPixel": {
+        "prototype": "COLORREF GetPixel(\n  HDC hdc,\n  int x,\n  int y);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetPixel function retrieves the red, green, blue (RGB) color value of the pixel at the specified coordinates."
     },
     "GetPrinter": {
         "prototype": "BOOL GetPrinterW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pPrinter,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
@@ -3071,11 +3086,6 @@
         "dllLibrary": "gdi32",
         "comment": "This function retrieves the x-extent and y-extent of the window for the specified device context."
     },
-    "GetWindowOrgEx": {
-        "prototype": "BOOL GetWindowOrgEx(\n  HDC     hdc,\n  LPPOINT lppoint\n);",
-        "dllLibrary": "gdi32",
-        "comment": "The GetWindowOrgEx function retrieves the x-coordinates and y-coordinates of the window origin for the specified device context."
-    },
     "GetWindowInfo": {
         "prototype": "BOOL GetWindowInfo(\n  HWND hwnd,\n  PWINDOWINFO pwi\n);",
         "dllLibrary": "user32",
@@ -3090,6 +3100,11 @@
         "prototype": "UINT GetWindowModuleFileNameW(\n  HWND   hwnd,\n  LPWSTR pszFileName,\n  UINT   cchFileNameMax\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the full path and file name of the module associated with the specified window handle."
+    },
+    "GetWindowOrgEx": {
+        "prototype": "BOOL GetWindowOrgEx(\n  HDC     hdc,\n  LPPOINT lppoint\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetWindowOrgEx function retrieves the x-coordinates and y-coordinates of the window origin for the specified device context."
     },
     "GetWindowPlacement": {
         "prototype": "BOOL GetWindowPlacement(\n  HWND            hWnd,\n  WINDOWPLACEMENT *lpwndpl);",
@@ -5604,6 +5619,12 @@
         "dllLibrary": "shell32",
         "comment": "Creates and initializes a Shell item object from a parsing name."
     },
+    "SHCreateMemStream": {
+        "prototype": "IStream * SHCreateMemStream(\n  [in, optional] const BYTE *pInit,\n  [in]           UINT       cbInit\n);",
+        "dllLibrary": "shlwapi",
+        "comment": "Creates a memory stream using a similar process to CreateStreamOnHGlobal.",
+        "category": "shell32"
+    },
     "Shell_NotifyIcon": {
         "prototype": "BOOL Shell_NotifyIconW(\n  DWORD dwMessage,\n  NOTIFYICONDATA *lpData\n);",
         "dllLibrary": "shell32",
@@ -5623,12 +5644,6 @@
         "prototype": "BOOL ShellExecuteExW(\n  SHELLEXECUTEINFOW *pExecInfo\n);",
         "dllLibrary": "shell32",
         "comment": "Performs an operation on a specified file."
-    },
-    "SHCreateMemStream": {
-        "prototype": "IStream * SHCreateMemStream(\n  [in, optional] const BYTE *pInit,\n  [in]           UINT       cbInit\n);",
-        "dllLibrary": "shlwapi",
-        "comment": "Creates a memory stream using a similar process to CreateStreamOnHGlobal.",
-        "category": "shell32"
     },
     "SHEmptyRecycleBin": {
         "prototype": "SHSTDAPI SHEmptyRecycleBinW(\n  HWND    hwnd,\n  LPCWSTR pszRootPath,\n  DWORD   dwFlags\n);",
@@ -6131,6 +6146,11 @@
         "dllLibrary": "version",
         "comment": "Determines where to install a file based on whether it locates another version of the file in the system. The values VerFindFile returns in the specified buffers are used in a subsequent call to the VerInstallFile function."
     },
+    "VerifyVersionInfo": {
+        "prototype": "BOOL VerifyVersionInfoW(\n  [in] LPOSVERSIONINFOEXW lpVersionInformation,\n  [in] DWORD              dwTypeMask,\n  [in] DWORDLONG          dwlConditionMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Compares a set of operating system version requirements to the corresponding values for the currently running version of the system. This function is subject to manifest-based behavior."
+    },
     "VerInstallFile": {
         "prototype": "DWORD VerInstallFileW(\n  DWORD   uFlags,\n  LPCWSTR szSrcFileName,\n  LPCWSTR szDestFileName,\n  LPCWSTR szSrcDir,\n  LPCWSTR szDestDir,\n  LPCWSTR szCurDir,\n  LPWSTR  szTmpFile,\n  PUINT   puTmpFileLen\n);",
         "dllLibrary": "version",
@@ -6150,11 +6170,6 @@
         "prototype": "NTSYSAPI ULONGLONG VerSetConditionMask(  \n[in] ULONGLONG ConditionMask,  \n[in] DWORD     TypeMask,  \n[in] BYTE      Condition\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the bits of a 64-bit value to indicate the comparison operator to use for a specified operating system version attribute. This function is used to build the dwlConditionMask parameter of the VerifyVersionInfo function."
-    },
-    "VerifyVersionInfo": {
-        "prototype": "BOOL VerifyVersionInfoW(\n  [in] LPOSVERSIONINFOEXW lpVersionInformation,\n  [in] DWORD              dwTypeMask,\n  [in] DWORDLONG          dwlConditionMask\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Compares a set of operating system version requirements to the corresponding values for the currently running version of the system. This function is subject to manifest-based behavior."
     },
     "VirtualAlloc": {
         "prototype": "LPVOID VirtualAlloc(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flAllocationType,\n  DWORD  flProtect\n);",

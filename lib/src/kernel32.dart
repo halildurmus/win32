@@ -16,8 +16,8 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'structs.dart';
 import 'structs.g.dart';
+import 'variant.dart';
 
 final _kernel32 = DynamicLibrary.open('kernel32.dll');
 

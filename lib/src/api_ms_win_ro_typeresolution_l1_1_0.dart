@@ -14,7 +14,7 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'combase.dart';
-import 'structs.dart';
+import 'variant.dart';
 
 final _api_ms_win_ro_typeresolution_l1_1_0 =
     DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
