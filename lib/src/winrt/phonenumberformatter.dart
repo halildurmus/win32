@@ -43,9 +43,8 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      final result = IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.from(activationFactory)
           .TryCreate(regionCode, phoneNumber);
-      return result;
     } finally {
       free(activationFactory);
     }
@@ -56,9 +55,8 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      final result = IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.from(activationFactory)
           .GetCountryCodeForRegion(regionCode);
-      return result;
     } finally {
       free(activationFactory);
     }
@@ -70,9 +68,8 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      final result = IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.from(activationFactory)
           .GetNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
-      return result;
     } finally {
       free(activationFactory);
     }
@@ -83,9 +80,8 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      final result = IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.from(activationFactory)
           .WrapWithLeftToRightMarkers(number);
-      return result;
     } finally {
       free(activationFactory);
     }

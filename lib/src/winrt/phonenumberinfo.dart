@@ -55,9 +55,8 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
-      final result = IPhoneNumberInfoStatics.from(activationFactory)
+      return IPhoneNumberInfoStatics.from(activationFactory)
           .TryParse(input, phoneNumber);
-      return result;
     } finally {
       free(activationFactory);
     }
@@ -69,9 +68,8 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
-      final result = IPhoneNumberInfoStatics.from(activationFactory)
+      return IPhoneNumberInfoStatics.from(activationFactory)
           .TryParseWithRegion(input, regionCode, phoneNumber);
-      return result;
     } finally {
       free(activationFactory);
     }
