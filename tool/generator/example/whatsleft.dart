@@ -69,9 +69,9 @@ void main(List<String> args) {
   final projected = loadFunctionsFromJson();
 
   final projectedSymbols = projected.entries.map((e) {
-    var protoShard = e.value.prototype.first.split(' ')[1];
+    var protoShard = e.value.prototype.split(' ')[1];
     if (['WINAPI', 'IMAGEAPI'].contains(protoShard)) {
-      protoShard = e.value.prototype.first.split(' ')[2];
+      protoShard = e.value.prototype.split(' ')[2];
     }
     final protoName = protoShard.split('(').first;
     return protoName;
