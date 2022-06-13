@@ -16,8 +16,8 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'structs.dart';
 import 'structs.g.dart';
+import 'variant.dart';
 
 final _xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
 

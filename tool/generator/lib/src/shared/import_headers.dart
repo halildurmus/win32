@@ -12,9 +12,9 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
     import '../guid.dart';
     import '../macros.dart';
     import '../ole32.dart';
-    import '../structs.dart';
     import '../structs.g.dart';
     import '../utils.dart';
+    import '../variant.dart';
 ''';
 
   if (parentInterfaces.isNotEmpty) {

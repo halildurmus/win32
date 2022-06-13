@@ -1,5 +1,4 @@
-// ignore_for_file: unused_import
-
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
@@ -335,8 +334,16 @@ int generateWinRTStructs() {
   return structProjections.length;
 }
 
+void sortFunctions(Map<String, Win32Function> functions) {
+  final encoder = const JsonEncoder.withIndent('    ');
+  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
+  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
+}
+
 void main() {
+  print('Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
+  sortFunctions(functionsToGenerate);
 
   print('Generating struct_sizes.cpp...');
   generateStructSizeAnalyzer();

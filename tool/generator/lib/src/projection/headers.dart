@@ -21,8 +21,8 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'structs.dart';
 import 'structs.g.dart';
+import 'variant.dart';
 ''';
 
 const structFileHeader = '''
@@ -48,7 +48,7 @@ import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
 import 'oleaut32.dart';
-import 'structs.dart';
+import 'variant.dart';
 ''';
 
 const winrtStructFileHeader = '''

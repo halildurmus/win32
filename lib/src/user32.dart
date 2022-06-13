@@ -16,8 +16,8 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'structs.dart';
 import 'structs.g.dart';
+import 'variant.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 
@@ -2053,6 +2053,29 @@ int GetActiveWindow() => _GetActiveWindow();
 final _GetActiveWindow = _user32
     .lookupFunction<IntPtr Function(), int Function()>('GetActiveWindow');
 
+/// Retrieves status information for the specified window if it is the
+/// application-switching (ALT+TAB) window.
+///
+/// ```c
+/// BOOL GetAltTabInfoW(
+///   [in, optional]  HWND        hwnd,
+///   [in]            int         iItem,
+///   [in, out]       PALTTABINFO pati,
+///   [out, optional] LPWSTR      pszItemText,
+///   [in]            UINT        cchItemText
+/// );
+/// ```
+/// {@category user32}
+int GetAltTabInfo(int hwnd, int iItem, Pointer<ALTTABINFO> pati,
+        Pointer<Utf16> pszItemText, int cchItemText) =>
+    _GetAltTabInfo(hwnd, iItem, pati, pszItemText, cchItemText);
+
+final _GetAltTabInfo = _user32.lookupFunction<
+    Int32 Function(IntPtr hwnd, Int32 iItem, Pointer<ALTTABINFO> pati,
+        Pointer<Utf16> pszItemText, Uint32 cchItemText),
+    int Function(int hwnd, int iItem, Pointer<ALTTABINFO> pati,
+        Pointer<Utf16> pszItemText, int cchItemText)>('GetAltTabInfoW');
+
 /// Retrieves the handle to the ancestor of the specified window.
 ///
 /// ```c
@@ -2195,6 +2218,24 @@ int GetClassLongPtr(int hWnd, int nIndex) => _GetClassLongPtr(hWnd, nIndex);
 final _GetClassLongPtr = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Int32 nIndex),
     int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
+
+/// Retrieves the name of the class to which the specified window belongs.
+///
+/// ```c
+/// int GetClassNameW(
+///   [in]  HWND   hWnd,
+///   [out] LPWSTR lpClassName,
+///   [in]  int    nMaxCount
+/// );
+/// ```
+/// {@category user32}
+int GetClassName(int hWnd, Pointer<Utf16> lpClassName, int nMaxCount) =>
+    _GetClassName(hWnd, lpClassName, nMaxCount);
+
+final _GetClassName = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, Pointer<Utf16> lpClassName, Int32 nMaxCount),
+    int Function(
+        int hWnd, Pointer<Utf16> lpClassName, int nMaxCount)>('GetClassNameW');
 
 /// Retrieves the coordinates of a window's client area. The client
 /// coordinates specify the upper-left and lower-right corners of the client
@@ -2666,6 +2707,23 @@ final _GetGestureInfo = _user32.lookupFunction<
     Int32 Function(IntPtr hGestureInfo, Pointer<GESTUREINFO> pGestureInfo),
     int Function(
         int hGestureInfo, Pointer<GESTUREINFO> pGestureInfo)>('GetGestureInfo');
+
+/// Retrieves information about the active window or a specified GUI thread.
+///
+/// ```c
+/// BOOL GetGUIThreadInfo(
+///   [in]      DWORD          idThread,
+///   [in, out] PGUITHREADINFO pgui
+/// );
+/// ```
+/// {@category user32}
+int GetGUIThreadInfo(int idThread, Pointer<GUITHREADINFO> pgui) =>
+    _GetGUIThreadInfo(idThread, pgui);
+
+final _GetGUIThreadInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 idThread, Pointer<GUITHREADINFO> pgui),
+    int Function(
+        int idThread, Pointer<GUITHREADINFO> pgui)>('GetGUIThreadInfo');
 
 /// Retrieves information about the specified icon or cursor.
 ///

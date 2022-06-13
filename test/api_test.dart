@@ -4778,6 +4778,15 @@ void main() {
           .lookupFunction<IntPtr Function(), int Function()>('GetActiveWindow');
       expect(GetActiveWindow, isA<Function>());
     });
+    test('Can instantiate GetAltTabInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetAltTabInfo = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Int32 iItem, Pointer<ALTTABINFO> pati,
+              Pointer<Utf16> pszItemText, Uint32 cchItemText),
+          int Function(int hwnd, int iItem, Pointer<ALTTABINFO> pati,
+              Pointer<Utf16> pszItemText, int cchItemText)>('GetAltTabInfoW');
+      expect(GetAltTabInfo, isA<Function>());
+    });
     test('Can instantiate GetAncestor', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetAncestor = user32.lookupFunction<
@@ -4844,6 +4853,15 @@ void main() {
           IntPtr Function(IntPtr hWnd, Int32 nIndex),
           int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
       expect(GetClassLongPtr, isA<Function>());
+    });
+    test('Can instantiate GetClassName', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetClassName = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hWnd, Pointer<Utf16> lpClassName, Int32 nMaxCount),
+          int Function(int hWnd, Pointer<Utf16> lpClassName,
+              int nMaxCount)>('GetClassNameW');
+      expect(GetClassName, isA<Function>());
     });
     test('Can instantiate GetClientRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -5079,6 +5097,14 @@ void main() {
           int Function(int hGestureInfo,
               Pointer<GESTUREINFO> pGestureInfo)>('GetGestureInfo');
       expect(GetGestureInfo, isA<Function>());
+    });
+    test('Can instantiate GetGUIThreadInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetGUIThreadInfo = user32.lookupFunction<
+          Int32 Function(Uint32 idThread, Pointer<GUITHREADINFO> pgui),
+          int Function(
+              int idThread, Pointer<GUITHREADINFO> pgui)>('GetGUIThreadInfo');
+      expect(GetGUIThreadInfo, isA<Function>());
     });
     test('Can instantiate GetIconInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
