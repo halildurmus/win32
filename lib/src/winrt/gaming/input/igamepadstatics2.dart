@@ -36,6 +36,10 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
   IGamepadStatics2.fromRawPointer(super.ptr);
 
+  factory IGamepadStatics2.from(IInspectable interface) =>
+      IGamepadStatics2.fromRawPointer(
+          interface.toInterface(IID_IGamepadStatics2));
+
   Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {
     final retValuePtr = calloc<COMObject>();
 
@@ -61,8 +65,7 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
   }
 
   // IGamepadStatics methods
-  late final _iGamepadStatics =
-      IGamepadStatics.fromRawPointer(toInterface(IID_IGamepadStatics));
+  late final _iGamepadStatics = IGamepadStatics.from(this);
 
   @override
   int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) =>

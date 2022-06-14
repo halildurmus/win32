@@ -122,7 +122,7 @@ class Gamepad extends IInspectable
   }
 
   // IGamepad methods
-  late final _iGamepad = IGamepad.fromRawPointer(toInterface(IID_IGamepad));
+  late final _iGamepad = IGamepad.from(this);
 
   @override
   GamepadVibration get Vibration => _iGamepad.Vibration;
@@ -133,8 +133,7 @@ class Gamepad extends IInspectable
   @override
   GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
   // IGameController methods
-  late final _iGameController =
-      IGameController.fromRawPointer(toInterface(IID_IGameController));
+  late final _iGameController = IGameController.from(this);
 
   @override
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>
@@ -170,14 +169,13 @@ class Gamepad extends IInspectable
   @override
   Pointer<COMObject> get User => _iGameController.User;
   // IGamepad2 methods
-  late final _iGamepad2 = IGamepad2.fromRawPointer(toInterface(IID_IGamepad2));
+  late final _iGamepad2 = IGamepad2.from(this);
 
   @override
   int GetButtonLabel(int button) => _iGamepad2.GetButtonLabel(button);
   // IGameControllerBatteryInfo methods
   late final _iGameControllerBatteryInfo =
-      IGameControllerBatteryInfo.fromRawPointer(
-          toInterface(IID_IGameControllerBatteryInfo));
+      IGameControllerBatteryInfo.from(this);
 
   @override
   Pointer<COMObject> TryGetBatteryReport() =>

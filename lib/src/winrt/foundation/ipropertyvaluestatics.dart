@@ -34,6 +34,10 @@ class IPropertyValueStatics extends IInspectable {
   // vtable begins at 6, is 39 entries long.
   IPropertyValueStatics.fromRawPointer(super.ptr);
 
+  factory IPropertyValueStatics.from(IInspectable interface) =>
+      IPropertyValueStatics.fromRawPointer(
+          interface.toInterface(IID_IPropertyValueStatics));
+
   Pointer<COMObject> CreateEmpty() {
     final retValuePtr = calloc<COMObject>();
 

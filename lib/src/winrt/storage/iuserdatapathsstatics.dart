@@ -34,6 +34,10 @@ class IUserDataPathsStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   IUserDataPathsStatics.fromRawPointer(super.ptr);
 
+  factory IUserDataPathsStatics.from(IInspectable interface) =>
+      IUserDataPathsStatics.fromRawPointer(
+          interface.toInterface(IID_IUserDataPathsStatics));
+
   Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
     final retValuePtr = calloc<COMObject>();
 

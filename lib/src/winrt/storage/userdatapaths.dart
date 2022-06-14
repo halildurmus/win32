@@ -59,8 +59,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
   }
 
   // IUserDataPaths methods
-  late final _iUserDataPaths =
-      IUserDataPaths.fromRawPointer(toInterface(IID_IUserDataPaths));
+  late final _iUserDataPaths = IUserDataPaths.from(this);
 
   @override
   String get CameraRoll => _iUserDataPaths.CameraRoll;

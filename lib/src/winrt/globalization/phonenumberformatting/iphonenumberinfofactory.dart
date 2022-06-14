@@ -33,6 +33,10 @@ class IPhoneNumberInfoFactory extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IPhoneNumberInfoFactory.fromRawPointer(super.ptr);
 
+  factory IPhoneNumberInfoFactory.from(IInspectable interface) =>
+      IPhoneNumberInfoFactory.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberInfoFactory));
+
   Pointer<COMObject> Create(String number) {
     final retValuePtr = calloc<COMObject>();
     final numberHstring = convertToHString(number);

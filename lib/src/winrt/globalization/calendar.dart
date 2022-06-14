@@ -83,7 +83,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   }
 
   // ICalendar methods
-  late final _iCalendar = ICalendar.fromRawPointer(toInterface(IID_ICalendar));
+  late final _iCalendar = ICalendar.from(this);
 
   @override
   Pointer<COMObject> Clone() => _iCalendar.Clone();
@@ -394,8 +394,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   @override
   bool get IsDaylightSavingTime => _iCalendar.IsDaylightSavingTime;
   // ITimeZoneOnCalendar methods
-  late final _iTimeZoneOnCalendar =
-      ITimeZoneOnCalendar.fromRawPointer(toInterface(IID_ITimeZoneOnCalendar));
+  late final _iTimeZoneOnCalendar = ITimeZoneOnCalendar.from(this);
 
   @override
   String GetTimeZone() => _iTimeZoneOnCalendar.GetTimeZone();

@@ -101,7 +101,8 @@ class IAsyncAction extends IInspectable implements IAsyncInfo {
   }
 
   // IAsyncInfo methods
-  late final _iAsyncInfo = IAsyncInfo.fromRawPointer(toInterface(IID_IAsyncInfo));
+  late final _iAsyncInfo =
+      IAsyncInfo.fromRawPointer(toInterface(IID_IAsyncInfo));
 
   @override
   int get Id => _iAsyncInfo.Id;

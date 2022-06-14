@@ -33,6 +33,10 @@ class IApplicationDataStatics extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IApplicationDataStatics.fromRawPointer(super.ptr);
 
+  factory IApplicationDataStatics.from(IInspectable interface) =>
+      IApplicationDataStatics.fromRawPointer(
+          interface.toInterface(IID_IApplicationDataStatics));
+
   Pointer<COMObject> get Current {
     final retValuePtr = calloc<COMObject>();
 

@@ -103,8 +103,7 @@ class IGamepad extends IInspectable implements IGameController {
   }
 
   // IGameController methods
-  late final _iGameController =
-      IGameController.fromRawPointer(toInterface(IID_IGameController));
+  late final _iGameController = IGameController.from(this);
 
   @override
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>

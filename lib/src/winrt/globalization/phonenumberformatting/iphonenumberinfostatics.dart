@@ -33,6 +33,10 @@ class IPhoneNumberInfoStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   IPhoneNumberInfoStatics.fromRawPointer(super.ptr);
 
+  factory IPhoneNumberInfoStatics.from(IInspectable interface) =>
+      IPhoneNumberInfoStatics.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberInfoStatics));
+
   int TryParse(String input, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);

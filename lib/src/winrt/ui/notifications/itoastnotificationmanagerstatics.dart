@@ -35,6 +35,10 @@ class IToastNotificationManagerStatics extends IInspectable {
   // vtable begins at 6, is 3 entries long.
   IToastNotificationManagerStatics.fromRawPointer(super.ptr);
 
+  factory IToastNotificationManagerStatics.from(IInspectable interface) =>
+      IToastNotificationManagerStatics.fromRawPointer(
+          interface.toInterface(IID_IToastNotificationManagerStatics));
+
   Pointer<COMObject> CreateToastNotifier() {
     final retValuePtr = calloc<COMObject>();
 

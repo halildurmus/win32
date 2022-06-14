@@ -66,7 +66,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   }
 
   // IGamepad methods
-  late final _iGamepad = IGamepad.fromRawPointer(toInterface(IID_IGamepad));
+  late final _iGamepad = IGamepad.from(this);
 
   @override
   GamepadVibration get Vibration => _iGamepad.Vibration;
@@ -77,8 +77,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   @override
   GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
   // IGameController methods
-  late final _iGameController =
-      IGameController.fromRawPointer(toInterface(IID_IGameController));
+  late final _iGameController = IGameController.from(this);
 
   @override
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>

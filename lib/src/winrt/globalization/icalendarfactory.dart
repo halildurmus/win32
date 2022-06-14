@@ -34,6 +34,10 @@ class ICalendarFactory extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   ICalendarFactory.fromRawPointer(super.ptr);
 
+  factory ICalendarFactory.from(IInspectable interface) =>
+      ICalendarFactory.fromRawPointer(
+          interface.toInterface(IID_ICalendarFactory));
+
   Pointer<COMObject> CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
     final retValuePtr = calloc<COMObject>();

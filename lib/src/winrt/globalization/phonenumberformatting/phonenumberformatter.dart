@@ -88,8 +88,7 @@ class PhoneNumberFormatter extends IInspectable
   }
 
   // IPhoneNumberFormatter methods
-  late final _iPhoneNumberFormatter = IPhoneNumberFormatter.fromRawPointer(
-      toInterface(IID_IPhoneNumberFormatter));
+  late final _iPhoneNumberFormatter = IPhoneNumberFormatter.from(this);
 
   @override
   String Format(Pointer<COMObject> number) =>

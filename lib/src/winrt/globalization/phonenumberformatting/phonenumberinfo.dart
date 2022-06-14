@@ -76,8 +76,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
   }
 
   // IPhoneNumberInfo methods
-  late final _iPhoneNumberInfo =
-      IPhoneNumberInfo.fromRawPointer(toInterface(IID_IPhoneNumberInfo));
+  late final _iPhoneNumberInfo = IPhoneNumberInfo.from(this);
 
   @override
   int get CountryCode => _iPhoneNumberInfo.CountryCode;
@@ -109,8 +108,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
       _iPhoneNumberInfo.CheckNumberMatch(otherNumber);
 
   // IStringable methods
-  late final _iStringable =
-      IStringable.fromRawPointer(toInterface(IID_IStringable));
+  late final _iStringable = IStringable.from(this);
 
   @override
   String toString() => _iStringable.ToString();
