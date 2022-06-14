@@ -173,9 +173,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
       // Write out the private field identifier for the interface
       final fieldIdentifier = '_i${interfaceName.substring(1)}';
-      final iid = 'IID_$interfaceName';
-      buffer.writeln(
-          'late final $fieldIdentifier = $interfaceName.fromRawPointer(toInterface($iid));');
+      buffer
+          .writeln('late final $fieldIdentifier = $interfaceName.from(this);');
 
       final projection = WinRTInterfaceProjection(interface);
       for (final method in projection.methodProjections) {

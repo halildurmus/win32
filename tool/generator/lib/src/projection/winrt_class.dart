@@ -130,7 +130,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   String get stringableMappers => isStringable
       ? '''
     // IStringable methods
-    late final _iStringable = IStringable.fromRawPointer(toInterface(IID_IStringable));
+    late final _iStringable = IStringable.from(this);
 
     @override
     String toString() => _iStringable.ToString();
