@@ -32,7 +32,7 @@ const IID_IPropertyValueStatics = '{629BDBC8-D932-4FF4-96B9-8D96C5C1E858}';
 /// {@category winrt}
 class IPropertyValueStatics extends IInspectable {
   // vtable begins at 6, is 39 entries long.
-  IPropertyValueStatics.from(super.ptr);
+  IPropertyValueStatics.fromRawPointer(super.ptr);
 
   Pointer<COMObject> CreateEmpty() {
     final retValuePtr = calloc<COMObject>();

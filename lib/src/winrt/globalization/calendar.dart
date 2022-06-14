@@ -34,7 +34,7 @@ import '../../com/iinspectable.dart';
 class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   Calendar({Allocator allocator = calloc})
       : super(ActivateClass(_className, allocator: allocator));
-  Calendar.from(super.ptr);
+  Calendar.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Globalization.Calendar';
 
@@ -45,9 +45,9 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
         CreateActivationFactory(_className, IID_ICalendarFactory);
 
     try {
-      final result = ICalendarFactory.from(activationFactory)
+      final result = ICalendarFactory.fromRawPointer(activationFactory)
           .CreateCalendarDefaultCalendarAndClock(languages);
-      return Calendar.from(result);
+      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
@@ -59,9 +59,9 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
         CreateActivationFactory(_className, IID_ICalendarFactory);
 
     try {
-      final result = ICalendarFactory.from(activationFactory)
+      final result = ICalendarFactory.fromRawPointer(activationFactory)
           .CreateCalendar(languages, calendar, clock);
-      return Calendar.from(result);
+      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
@@ -74,16 +74,16 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
         CreateActivationFactory(_className, IID_ICalendarFactory2);
 
     try {
-      final result = ICalendarFactory2.from(activationFactory)
+      final result = ICalendarFactory2.fromRawPointer(activationFactory)
           .CreateCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
-      return Calendar.from(result);
+      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
   }
 
   // ICalendar methods
-  late final _iCalendar = ICalendar.from(toInterface(IID_ICalendar));
+  late final _iCalendar = ICalendar.fromRawPointer(toInterface(IID_ICalendar));
 
   @override
   Pointer<COMObject> Clone() => _iCalendar.Clone();
@@ -395,7 +395,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   bool get IsDaylightSavingTime => _iCalendar.IsDaylightSavingTime;
   // ITimeZoneOnCalendar methods
   late final _iTimeZoneOnCalendar =
-      ITimeZoneOnCalendar.from(toInterface(IID_ITimeZoneOnCalendar));
+      ITimeZoneOnCalendar.fromRawPointer(toInterface(IID_ITimeZoneOnCalendar));
 
   @override
   String GetTimeZone() => _iTimeZoneOnCalendar.GetTimeZone();

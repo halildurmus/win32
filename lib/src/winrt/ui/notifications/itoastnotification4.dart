@@ -31,7 +31,7 @@ const IID_IToastNotification4 = '{15154935-28EA-4727-88E9-C58680E2D118}';
 /// {@category winrt}
 class IToastNotification4 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
-  IToastNotification4.from(super.ptr);
+  IToastNotification4.fromRawPointer(super.ptr);
 
   Pointer<COMObject> get Data {
     final retValuePtr = calloc<COMObject>();

@@ -32,7 +32,7 @@ const IID_IGamepadStatics = '{8BBCE529-D49C-39E9-9560-E47DDE96B7C8}';
 /// {@category winrt}
 class IGamepadStatics extends IInspectable {
   // vtable begins at 6, is 5 entries long.
-  IGamepadStatics.from(super.ptr);
+  IGamepadStatics.fromRawPointer(super.ptr);
 
   int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) {
     final retValuePtr = calloc<IntPtr>();
@@ -126,7 +126,7 @@ class IGamepadStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<String>.from(retValuePtr).toList();
+      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
     } finally {
       free(retValuePtr);
     }

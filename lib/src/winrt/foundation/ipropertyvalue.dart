@@ -32,7 +32,7 @@ const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';
 /// {@category winrt}
 class IPropertyValue extends IInspectable {
   // vtable begins at 6, is 39 entries long.
-  IPropertyValue.from(super.ptr);
+  IPropertyValue.fromRawPointer(super.ptr);
 
   int get Type {
     final retValuePtr = calloc<Int32>();

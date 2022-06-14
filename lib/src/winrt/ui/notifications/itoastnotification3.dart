@@ -30,7 +30,7 @@ const IID_IToastNotification3 = '{31E8AED8-8141-4F99-BC0A-C4ED21297D77}';
 /// {@category winrt}
 class IToastNotification3 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
-  IToastNotification3.from(super.ptr);
+  IToastNotification3.fromRawPointer(super.ptr);
 
   int get NotificationMirroring {
     final retValuePtr = calloc<Int32>();

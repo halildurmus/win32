@@ -31,7 +31,7 @@ const IID_IGameControllerBatteryInfo = '{DCECC681-3963-4DA6-955D-553F3B6F6161}';
 /// {@category winrt}
 class IGameControllerBatteryInfo extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IGameControllerBatteryInfo.from(super.ptr);
+  IGameControllerBatteryInfo.fromRawPointer(super.ptr);
 
   Pointer<COMObject> TryGetBatteryReport() {
     final retValuePtr = calloc<COMObject>();

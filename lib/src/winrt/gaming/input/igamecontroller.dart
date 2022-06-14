@@ -33,7 +33,7 @@ const IID_IGameController = '{1BAF6522-5F64-42C5-8267-B9FE2215BFBD}';
 /// {@category winrt}
 class IGameController extends IInspectable {
   // vtable begins at 6, is 9 entries long.
-  IGameController.from(super.ptr);
+  IGameController.fromRawPointer(super.ptr);
 
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) {
     final retValuePtr = calloc<IntPtr>();

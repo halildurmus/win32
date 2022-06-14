@@ -32,7 +32,7 @@ const IID_IXmlNodeList = '{8C60AD77-83A4-4EC1-9C54-7BA429E13DA6}';
 /// {@category winrt}
 class IXmlNodeList extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  IXmlNodeList.from(super.ptr);
+  IXmlNodeList.fromRawPointer(super.ptr);
 
   int get Length {
     final retValuePtr = calloc<Uint32>();

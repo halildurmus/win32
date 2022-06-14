@@ -169,7 +169,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       final fieldIdentifier = '_i${interfaceName.substring(1)}';
       final iid = 'IID_$interfaceName';
       buffer.writeln(
-          'late final $fieldIdentifier = $interfaceName.from(toInterface($iid));');
+          'late final $fieldIdentifier = $interfaceName.fromRawPointer(toInterface($iid));');
 
       final projection = WinRTInterfaceProjection(interface);
       for (final method in projection.methodProjections) {
@@ -196,7 +196,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       /// {@category $category}
       $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
-        $shortName.from(super.ptr);
+        $shortName.fromRawPointer(super.ptr);
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
 

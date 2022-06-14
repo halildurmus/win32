@@ -27,6 +27,17 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 ''';
 
   @override
+  String vectorDeclaration() => '''
+    IVector<String> get $exposedMethodName {
+    final retValuePtr = calloc<COMObject>();
+
+    ${ffiCall()}
+
+    return IVector.fromRawPointer(retValuePtr);
+  }
+''';
+
+  @override
   String vectorViewDeclaration() => '''
     List<String> get $exposedMethodName {
     final retValuePtr = calloc<COMObject>();
@@ -34,21 +45,10 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     ${ffiCall()}
 
     try {
-      return IVectorView<String>.from(retValuePtr).toList();
+      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
     } finally {
       free(retValuePtr);
     }
-  }
-''';
-
-  @override
-  String vectorDeclaration() => '''
-    IVector<String> get $exposedMethodName {
-    final retValuePtr = calloc<COMObject>();
-
-    ${ffiCall()}
-
-    return IVector.from(retValuePtr);
   }
 ''';
 

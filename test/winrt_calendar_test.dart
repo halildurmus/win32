@@ -25,7 +25,7 @@ void main() {
     });
 
     test('Calendar.Clone', () {
-      final calendar2 = Calendar.from(calendar.Clone());
+      final calendar2 = Calendar.fromRawPointer(calendar.Clone());
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
@@ -456,7 +456,7 @@ void main() {
     // test('Calendar.CreateCalendarWithTimeZone constructor', () {
     //   final pickerPtr = CreateObject(
     //       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-    //   final picker = IFileOpenPicker.from(pickerPtr);
+    //   final picker = IFileOpenPicker.fromRawPointer(pickerPtr);
     //   final languages = picker.FileTypeFilter..ReplaceAll(['en-US', 'en-GB']);
 
     //   const IID_Iterable = '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}';

@@ -43,7 +43,7 @@ class ToastNotification extends IInspectable
         IToastNotification3,
         IToastNotification4,
         IToastNotification6 {
-  ToastNotification.from(super.ptr);
+  ToastNotification.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.UI.Notifications.ToastNotification';
 
@@ -53,9 +53,9 @@ class ToastNotification extends IInspectable
         CreateActivationFactory(_className, IID_IToastNotificationFactory);
 
     try {
-      final result = IToastNotificationFactory.from(activationFactory)
+      final result = IToastNotificationFactory.fromRawPointer(activationFactory)
           .CreateToastNotification(content);
-      return ToastNotification.from(result);
+      return ToastNotification.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
@@ -63,7 +63,7 @@ class ToastNotification extends IInspectable
 
   // IToastNotification methods
   late final _iToastNotification =
-      IToastNotification.from(toInterface(IID_IToastNotification));
+      IToastNotification.fromRawPointer(toInterface(IID_IToastNotification));
 
   @override
   Pointer<COMObject> get Content => _iToastNotification.Content;
@@ -99,7 +99,7 @@ class ToastNotification extends IInspectable
   void remove_Failed(int token) => _iToastNotification.remove_Failed(token);
   // IToastNotification2 methods
   late final _iToastNotification2 =
-      IToastNotification2.from(toInterface(IID_IToastNotification2));
+      IToastNotification2.fromRawPointer(toInterface(IID_IToastNotification2));
 
   @override
   set Tag(String value) => _iToastNotification2.Tag = value;
@@ -120,7 +120,7 @@ class ToastNotification extends IInspectable
   bool get SuppressPopup => _iToastNotification2.SuppressPopup;
   // IToastNotification3 methods
   late final _iToastNotification3 =
-      IToastNotification3.from(toInterface(IID_IToastNotification3));
+      IToastNotification3.fromRawPointer(toInterface(IID_IToastNotification3));
 
   @override
   int get NotificationMirroring => _iToastNotification3.NotificationMirroring;
@@ -136,7 +136,7 @@ class ToastNotification extends IInspectable
   set RemoteId(String value) => _iToastNotification3.RemoteId = value;
   // IToastNotification4 methods
   late final _iToastNotification4 =
-      IToastNotification4.from(toInterface(IID_IToastNotification4));
+      IToastNotification4.fromRawPointer(toInterface(IID_IToastNotification4));
 
   @override
   Pointer<COMObject> get Data => _iToastNotification4.Data;
@@ -151,7 +151,7 @@ class ToastNotification extends IInspectable
   set Priority(int value) => _iToastNotification4.Priority = value;
   // IToastNotification6 methods
   late final _iToastNotification6 =
-      IToastNotification6.from(toInterface(IID_IToastNotification6));
+      IToastNotification6.fromRawPointer(toInterface(IID_IToastNotification6));
 
   @override
   bool get ExpiresOnReboot => _iToastNotification6.ExpiresOnReboot;

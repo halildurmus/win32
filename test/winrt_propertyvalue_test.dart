@@ -14,7 +14,7 @@ void main() {
     setUp(winrtInitialize);
 
     test('UInt8', () {
-      final pv = IPropertyValue.from(PropertyValue.CreateUInt8(30));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateUInt8(30));
       expect(pv.Type, equals(1));
       expect(pv.GetUInt8(), equals(30));
     });
@@ -24,7 +24,7 @@ void main() {
       for (var idx = 0; idx < 5; idx++) {
         array[idx] = (10 * idx) + 10;
       }
-      final pv = IPropertyValue.from(PropertyValue.CreateUInt8Array(5, array));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateUInt8Array(5, array));
       expect(pv.Type, equals(1025));
 
       final arraySize = calloc<Uint32>();
@@ -40,7 +40,7 @@ void main() {
     });
 
     test('UInt16', () {
-      final pv = IPropertyValue.from(PropertyValue.CreateUInt16(65534));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateUInt16(65534));
       expect(pv.Type, equals(3));
       expect(pv.GetUInt16(), equals(65534));
     });
@@ -50,7 +50,7 @@ void main() {
       for (var idx = 0; idx < 5; idx++) {
         array[idx] = (100 * idx) + 100;
       }
-      final pv = IPropertyValue.from(PropertyValue.CreateUInt16Array(5, array));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateUInt16Array(5, array));
       expect(pv.Type, equals(1027));
 
       final arraySize = calloc<Uint32>();
@@ -67,7 +67,7 @@ void main() {
 
     test('Guid', () {
       final guid = calloc<GUID>()..ref.setGUID(IID_ICalendar);
-      final pv = IPropertyValue.from(PropertyValue.CreateGuid(guid.ref));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateGuid(guid.ref));
       expect(pv.Type, equals(16));
       expect(pv.GetGuid().toString(), equals(IID_ICalendar));
     }, skip: 'Flaky due to retValuePtr being freed in GetGuid()');
@@ -77,7 +77,7 @@ void main() {
       array[0].setGUID(IID_ICalendar);
       array[1].setGUID(IID_IFileOpenPicker);
       array[2].setGUID(IID_IStorageItem);
-      final pv = IPropertyValue.from(PropertyValue.CreateGuidArray(3, array));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateGuidArray(3, array));
       expect(pv.Type, equals(1040));
 
       final arraySize = calloc<Uint32>();
@@ -95,7 +95,7 @@ void main() {
       array[0] = Calendar().ptr.ref;
       array[1] = PhoneNumberFormatter().ptr.ref;
       final pv =
-          IPropertyValue.from(PropertyValue.CreateInspectableArray(2, array));
+          IPropertyValue.fromRawPointer(PropertyValue.CreateInspectableArray(2, array));
       expect(pv.Type, equals(1037));
 
       final arraySize = calloc<Uint32>();

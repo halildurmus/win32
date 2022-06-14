@@ -29,7 +29,7 @@ import '../../com/iinspectable.dart';
 /// {@category Class}
 /// {@category winrt}
 class PropertyValue extends IInspectable {
-  PropertyValue.from(super.ptr);
+  PropertyValue.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.PropertyValue';
 
@@ -39,7 +39,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateEmpty();
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateEmpty();
     } finally {
       free(activationFactory);
     }
@@ -50,7 +51,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateUInt8(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateUInt8(value);
     } finally {
       free(activationFactory);
     }
@@ -61,7 +63,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateInt16(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateInt16(value);
     } finally {
       free(activationFactory);
     }
@@ -72,7 +75,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateUInt16(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateUInt16(value);
     } finally {
       free(activationFactory);
     }
@@ -83,7 +87,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateInt32(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateInt32(value);
     } finally {
       free(activationFactory);
     }
@@ -94,7 +99,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateUInt32(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateUInt32(value);
     } finally {
       free(activationFactory);
     }
@@ -105,7 +111,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateInt64(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateInt64(value);
     } finally {
       free(activationFactory);
     }
@@ -116,7 +123,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateUInt64(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateUInt64(value);
     } finally {
       free(activationFactory);
     }
@@ -127,7 +135,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateSingle(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateSingle(value);
     } finally {
       free(activationFactory);
     }
@@ -138,7 +147,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateDouble(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateDouble(value);
     } finally {
       free(activationFactory);
     }
@@ -149,7 +159,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateChar16(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateChar16(value);
     } finally {
       free(activationFactory);
     }
@@ -160,7 +171,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateBoolean(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateBoolean(value);
     } finally {
       free(activationFactory);
     }
@@ -171,7 +183,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateString(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateString(value);
     } finally {
       free(activationFactory);
     }
@@ -182,7 +195,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateInspectable(value);
     } finally {
       free(activationFactory);
@@ -194,7 +207,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateGuid(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateGuid(value);
     } finally {
       free(activationFactory);
     }
@@ -205,7 +219,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateDateTime(value);
     } finally {
       free(activationFactory);
@@ -217,7 +231,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateTimeSpan(value);
     } finally {
       free(activationFactory);
@@ -229,7 +243,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreatePoint(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreatePoint(value);
     } finally {
       free(activationFactory);
     }
@@ -240,7 +255,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateSize(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateSize(value);
     } finally {
       free(activationFactory);
     }
@@ -251,7 +267,8 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory).CreateRect(value);
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
+          .CreateRect(value);
     } finally {
       free(activationFactory);
     }
@@ -263,7 +280,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateUInt8Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -276,7 +293,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateInt16Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -289,7 +306,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateUInt16Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -302,7 +319,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateInt32Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -315,7 +332,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateUInt32Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -328,7 +345,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateInt64Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -341,7 +358,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateUInt64Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -354,7 +371,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateSingleArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -367,7 +384,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateDoubleArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -380,7 +397,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateChar16Array(valueSize, value);
     } finally {
       free(activationFactory);
@@ -393,7 +410,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateBooleanArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -406,7 +423,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateStringArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -419,7 +436,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateInspectableArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -432,7 +449,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateGuidArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -445,7 +462,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateDateTimeArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -458,7 +475,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateTimeSpanArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -471,7 +488,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreatePointArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -484,7 +501,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateSizeArray(valueSize, value);
     } finally {
       free(activationFactory);
@@ -497,7 +514,7 @@ class PropertyValue extends IInspectable {
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
-      return IPropertyValueStatics.from(activationFactory)
+      return IPropertyValueStatics.fromRawPointer(activationFactory)
           .CreateRectArray(valueSize, value);
     } finally {
       free(activationFactory);

@@ -38,17 +38,17 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   ///
   /// ```dart
   /// ...
-  /// final vector = IVector<String>.from(ptr);
+  /// final vector = IVector<String>.fromRawPointer(ptr);
   /// ```
   ///
   /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.from`, `IStorageFile.from` etc.
+  /// e.g. `IHostName.fromRawPointer`, `IStorageFile.fromRawPointer` etc.
   ///
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final vector = IVector<IHostName>.from(ptr,
-  ///     creator: IHostName.from, allocator: allocator);
+  /// final vector = IVector<IHostName>.fromRawPointer(ptr,
+  ///     creator: IHostName.fromRawPointer, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointers
@@ -57,7 +57,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   /// memory management.
   ///
   /// {@category winrt}
-  IVector.from(super.ptr,
+  IVector.fromRawPointer(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
         _allocator = allocator {
@@ -192,7 +192,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView.from(retValuePtr,
+    return IVectorView.fromRawPointer(retValuePtr,
             creator: _creator, allocator: _allocator)
         .toList();
   }
@@ -677,7 +677,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   // IID_IIterable is always the second item on the iids list for IVector
-  late final _iIterable = IIterable<T>.from(toInterface(iids[1]),
+  late final _iIterable = IIterable<T>.fromRawPointer(toInterface(iids[1]),
       creator: _creator, allocator: _allocator);
 
   @override

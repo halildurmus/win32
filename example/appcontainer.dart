@@ -44,7 +44,7 @@ void main() {
 
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
-  final userData = UserDataPaths.from(UserDataPaths.GetDefault());
+  final userData = UserDataPaths.fromRawPointer(UserDataPaths.GetDefault());
   final roamingAppData = userData.RoamingAppData;
   print('RoamingAppData: $roamingAppData');
 

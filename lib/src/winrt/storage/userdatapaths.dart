@@ -29,7 +29,7 @@ import '../../com/iinspectable.dart';
 /// {@category Class}
 /// {@category winrt}
 class UserDataPaths extends IInspectable implements IUserDataPaths {
-  UserDataPaths.from(super.ptr);
+  UserDataPaths.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Storage.UserDataPaths';
 
@@ -39,7 +39,8 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
-      return IUserDataPathsStatics.from(activationFactory).GetForUser(user);
+      return IUserDataPathsStatics.fromRawPointer(activationFactory)
+          .GetForUser(user);
     } finally {
       free(activationFactory);
     }
@@ -50,7 +51,8 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
-      return IUserDataPathsStatics.from(activationFactory).GetDefault();
+      return IUserDataPathsStatics.fromRawPointer(activationFactory)
+          .GetDefault();
     } finally {
       free(activationFactory);
     }
@@ -58,7 +60,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
 
   // IUserDataPaths methods
   late final _iUserDataPaths =
-      IUserDataPaths.from(toInterface(IID_IUserDataPaths));
+      IUserDataPaths.fromRawPointer(toInterface(IID_IUserDataPaths));
 
   @override
   String get CameraRoll => _iUserDataPaths.CameraRoll;

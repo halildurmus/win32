@@ -32,7 +32,7 @@ class PhoneNumberFormatter extends IInspectable
     implements IPhoneNumberFormatter {
   PhoneNumberFormatter({Allocator allocator = calloc})
       : super(ActivateClass(_className, allocator: allocator));
-  PhoneNumberFormatter.from(super.ptr);
+  PhoneNumberFormatter.fromRawPointer(super.ptr);
 
   static const _className =
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
@@ -43,7 +43,7 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      return IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
           .TryCreate(regionCode, phoneNumber);
     } finally {
       free(activationFactory);
@@ -55,7 +55,7 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      return IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
           .GetCountryCodeForRegion(regionCode);
     } finally {
       free(activationFactory);
@@ -68,7 +68,7 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      return IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
           .GetNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
     } finally {
       free(activationFactory);
@@ -80,7 +80,7 @@ class PhoneNumberFormatter extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
-      return IPhoneNumberFormatterStatics.from(activationFactory)
+      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
           .WrapWithLeftToRightMarkers(number);
     } finally {
       free(activationFactory);
@@ -88,8 +88,8 @@ class PhoneNumberFormatter extends IInspectable
   }
 
   // IPhoneNumberFormatter methods
-  late final _iPhoneNumberFormatter =
-      IPhoneNumberFormatter.from(toInterface(IID_IPhoneNumberFormatter));
+  late final _iPhoneNumberFormatter = IPhoneNumberFormatter.fromRawPointer(
+      toInterface(IID_IPhoneNumberFormatter));
 
   @override
   String Format(Pointer<COMObject> number) =>

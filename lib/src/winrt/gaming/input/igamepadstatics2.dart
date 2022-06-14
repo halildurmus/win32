@@ -34,7 +34,7 @@ const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';
 /// {@category winrt}
 class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
   // vtable begins at 6, is 1 entries long.
-  IGamepadStatics2.from(super.ptr);
+  IGamepadStatics2.fromRawPointer(super.ptr);
 
   Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {
     final retValuePtr = calloc<COMObject>();
@@ -62,7 +62,7 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
 
   // IGamepadStatics methods
   late final _iGamepadStatics =
-      IGamepadStatics.from(toInterface(IID_IGamepadStatics));
+      IGamepadStatics.fromRawPointer(toInterface(IID_IGamepadStatics));
 
   @override
   int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) =>

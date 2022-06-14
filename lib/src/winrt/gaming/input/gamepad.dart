@@ -43,7 +43,7 @@ class Gamepad extends IInspectable
         IGameController,
         IGamepad2,
         IGameControllerBatteryInfo {
-  Gamepad.from(super.ptr);
+  Gamepad.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Gaming.Input.Gamepad';
 
@@ -53,7 +53,8 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.from(activationFactory).add_GamepadAdded(value);
+      return IGamepadStatics.fromRawPointer(activationFactory)
+          .add_GamepadAdded(value);
     } finally {
       free(activationFactory);
     }
@@ -64,7 +65,8 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.from(activationFactory).remove_GamepadAdded(token);
+      return IGamepadStatics.fromRawPointer(activationFactory)
+          .remove_GamepadAdded(token);
     } finally {
       free(activationFactory);
     }
@@ -75,7 +77,8 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.from(activationFactory).add_GamepadRemoved(value);
+      return IGamepadStatics.fromRawPointer(activationFactory)
+          .add_GamepadRemoved(value);
     } finally {
       free(activationFactory);
     }
@@ -86,7 +89,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.from(activationFactory)
+      return IGamepadStatics.fromRawPointer(activationFactory)
           .remove_GamepadRemoved(token);
     } finally {
       free(activationFactory);
@@ -98,7 +101,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.from(activationFactory).Gamepads;
+      return IGamepadStatics.fromRawPointer(activationFactory).Gamepads;
     } finally {
       free(activationFactory);
     }
@@ -111,7 +114,7 @@ class Gamepad extends IInspectable
         CreateActivationFactory(_className, IID_IGamepadStatics2);
 
     try {
-      return IGamepadStatics2.from(activationFactory)
+      return IGamepadStatics2.fromRawPointer(activationFactory)
           .FromGameController(gameController);
     } finally {
       free(activationFactory);
@@ -119,7 +122,7 @@ class Gamepad extends IInspectable
   }
 
   // IGamepad methods
-  late final _iGamepad = IGamepad.from(toInterface(IID_IGamepad));
+  late final _iGamepad = IGamepad.fromRawPointer(toInterface(IID_IGamepad));
 
   @override
   GamepadVibration get Vibration => _iGamepad.Vibration;
@@ -131,7 +134,7 @@ class Gamepad extends IInspectable
   GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
   // IGameController methods
   late final _iGameController =
-      IGameController.from(toInterface(IID_IGameController));
+      IGameController.fromRawPointer(toInterface(IID_IGameController));
 
   @override
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) =>
@@ -167,13 +170,14 @@ class Gamepad extends IInspectable
   @override
   Pointer<COMObject> get User => _iGameController.User;
   // IGamepad2 methods
-  late final _iGamepad2 = IGamepad2.from(toInterface(IID_IGamepad2));
+  late final _iGamepad2 = IGamepad2.fromRawPointer(toInterface(IID_IGamepad2));
 
   @override
   int GetButtonLabel(int button) => _iGamepad2.GetButtonLabel(button);
   // IGameControllerBatteryInfo methods
-  late final _iGameControllerBatteryInfo = IGameControllerBatteryInfo.from(
-      toInterface(IID_IGameControllerBatteryInfo));
+  late final _iGameControllerBatteryInfo =
+      IGameControllerBatteryInfo.fromRawPointer(
+          toInterface(IID_IGameControllerBatteryInfo));
 
   @override
   Pointer<COMObject> TryGetBatteryReport() =>

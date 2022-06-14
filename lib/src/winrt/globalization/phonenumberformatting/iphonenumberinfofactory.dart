@@ -31,7 +31,7 @@ const IID_IPhoneNumberInfoFactory = '{8202B964-ADAA-4CFF-8FCF-17E7516A28FF}';
 /// {@category winrt}
 class IPhoneNumberInfoFactory extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IPhoneNumberInfoFactory.from(super.ptr);
+  IPhoneNumberInfoFactory.fromRawPointer(super.ptr);
 
   Pointer<COMObject> Create(String number) {
     final retValuePtr = calloc<COMObject>();
