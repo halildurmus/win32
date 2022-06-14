@@ -24,13 +24,21 @@ import '../variant.dart';
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
 
+final _processSymbols = DynamicLibrary.open('ole32.dll');
+final _winFree = _processSymbols
+    .lookup<NativeFunction<Void Function(Pointer pv)>>('CoTaskMemFree');
+
 /// {@category Interface}
 /// {@category com}
-class IUnknown {
+class IUnknown implements Finalizable {
+  static final NativeFinalizer _finalizer = NativeFinalizer(_winFree);
+
   // vtable begins at 0, is 3 entries long.
   Pointer<COMObject> ptr;
 
-  IUnknown(this.ptr);
+  IUnknown(this.ptr) {
+    _finalizer.attach(this, ptr.cast(), detach: this, externalSize: 8);
+  }
 
   int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
       .ref.vtable
@@ -70,7 +78,7 @@ class IUnknown {
       if (FAILED(hr)) throw WindowsException(hr);
       return pObject;
     } finally {
-      free(pIID);
+      calloc.free(pIID);
     }
   }
 
