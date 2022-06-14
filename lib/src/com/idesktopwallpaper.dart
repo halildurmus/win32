@@ -31,6 +31,9 @@ class IDesktopWallpaper extends IUnknown {
   // vtable begins at 3, is 16 entries long.
   IDesktopWallpaper(super.ptr);
 
+  factory IDesktopWallpaper.from(IUnknown interface) =>
+      IDesktopWallpaper(interface.toInterface(IID_IDesktopWallpaper));
+
   int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) => ptr
           .ref.vtable
           .elementAt(3)
@@ -208,9 +211,6 @@ class IDesktopWallpaper extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 enable)>>>()
       .value
       .asFunction<int Function(Pointer, int enable)>()(ptr.ref.lpVtbl, enable);
-
-  factory IDesktopWallpaper.from(IUnknown interface) =>
-      IDesktopWallpaper(interface.toInterface(IID_IDesktopWallpaper));
 }
 
 /// @nodoc

@@ -31,6 +31,9 @@ class IEnumVARIANT extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumVARIANT(super.ptr);
 
+  factory IEnumVARIANT.from(IUnknown interface) =>
+      IEnumVARIANT(interface.toInterface(IID_IEnumVARIANT));
+
   int Next(int celt, Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -71,7 +74,4 @@ class IEnumVARIANT extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
       ptr.ref.lpVtbl, ppEnum);
-
-  factory IEnumVARIANT.from(IUnknown interface) =>
-      IEnumVARIANT(interface.toInterface(IID_IEnumVARIANT));
 }

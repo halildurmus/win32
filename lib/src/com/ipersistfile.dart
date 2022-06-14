@@ -32,6 +32,9 @@ class IPersistFile extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistFile(super.ptr);
 
+  factory IPersistFile.from(IUnknown interface) =>
+      IPersistFile(interface.toInterface(IID_IPersistFile));
+
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -83,7 +86,4 @@ class IPersistFile extends IPersist {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<Utf16>> ppszFileName)>()(
       ptr.ref.lpVtbl, ppszFileName);
-
-  factory IPersistFile.from(IUnknown interface) =>
-      IPersistFile(interface.toInterface(IID_IPersistFile));
 }

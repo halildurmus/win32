@@ -31,6 +31,9 @@ class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   IRunningObjectTable(super.ptr);
 
+  factory IRunningObjectTable.from(IUnknown interface) =>
+      IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
+
   int Register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
       ptr.ref.vtable
@@ -136,7 +139,4 @@ class IRunningObjectTable extends IUnknown {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> ppenumMoniker)>()(
       ptr.ref.lpVtbl, ppenumMoniker);
-
-  factory IRunningObjectTable.from(IUnknown interface) =>
-      IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
 }

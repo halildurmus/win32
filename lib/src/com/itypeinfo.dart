@@ -31,6 +31,9 @@ class ITypeInfo extends IUnknown {
   // vtable begins at 3, is 19 entries long.
   ITypeInfo(super.ptr);
 
+  factory ITypeInfo.from(IUnknown interface) =>
+      ITypeInfo(interface.toInterface(IID_ITypeInfo));
+
   int GetTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -340,7 +343,4 @@ class ITypeInfo extends IUnknown {
           .value
           .asFunction<void Function(Pointer, Pointer<VARDESC> pVarDesc)>()(
       ptr.ref.lpVtbl, pVarDesc);
-
-  factory ITypeInfo.from(IUnknown interface) =>
-      ITypeInfo(interface.toInterface(IID_ITypeInfo));
 }

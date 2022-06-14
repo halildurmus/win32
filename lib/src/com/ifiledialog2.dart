@@ -32,6 +32,9 @@ class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileDialog2(super.ptr);
 
+  factory IFileDialog2.from(IUnknown interface) =>
+      IFileDialog2(interface.toInterface(IID_IFileDialog2));
+
   int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(27)
           .cast<
@@ -51,7 +54,4 @@ class IFileDialog2 extends IFileDialog {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
-
-  factory IFileDialog2.from(IUnknown interface) =>
-      IFileDialog2(interface.toInterface(IID_IFileDialog2));
 }

@@ -32,6 +32,10 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestApplicationsEnumerator(super.ptr);
 
+  factory IAppxManifestApplicationsEnumerator.from(IUnknown interface) =>
+      IAppxManifestApplicationsEnumerator(
+          interface.toInterface(IID_IAppxManifestApplicationsEnumerator));
+
   int GetCurrent(Pointer<Pointer<COMObject>> application) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -63,8 +67,4 @@ class IAppxManifestApplicationsEnumerator extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
       ptr.ref.lpVtbl, hasNext);
-
-  factory IAppxManifestApplicationsEnumerator.from(IUnknown interface) =>
-      IAppxManifestApplicationsEnumerator(
-          interface.toInterface(IID_IAppxManifestApplicationsEnumerator));
 }

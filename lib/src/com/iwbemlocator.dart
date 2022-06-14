@@ -31,6 +31,9 @@ class IWbemLocator extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemLocator(super.ptr);
 
+  factory IWbemLocator.from(IUnknown interface) =>
+      IWbemLocator(interface.toInterface(IID_IWbemLocator));
+
   int ConnectServer(
           Pointer<Utf16> strNetworkResource,
           Pointer<Utf16> strUser,
@@ -76,9 +79,6 @@ class IWbemLocator extends IUnknown {
           strAuthority,
           pCtx,
           ppNamespace);
-
-  factory IWbemLocator.from(IUnknown interface) =>
-      IWbemLocator(interface.toInterface(IID_IWbemLocator));
 }
 
 /// @nodoc

@@ -31,6 +31,10 @@ class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestProperties(super.ptr);
 
+  factory IAppxManifestProperties.from(IUnknown interface) =>
+      IAppxManifestProperties(
+          interface.toInterface(IID_IAppxManifestProperties));
+
   int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -55,8 +59,4 @@ class IAppxManifestProperties extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Utf16> name,
               Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
-
-  factory IAppxManifestProperties.from(IUnknown interface) =>
-      IAppxManifestProperties(
-          interface.toInterface(IID_IAppxManifestProperties));
 }

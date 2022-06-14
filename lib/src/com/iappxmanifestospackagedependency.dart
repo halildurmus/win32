@@ -32,6 +32,10 @@ class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(super.ptr);
 
+  factory IAppxManifestOSPackageDependency.from(IUnknown interface) =>
+      IAppxManifestOSPackageDependency(
+          interface.toInterface(IID_IAppxManifestOSPackageDependency));
+
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -51,8 +55,4 @@ class IAppxManifestOSPackageDependency extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint64> version)>()(
       ptr.ref.lpVtbl, version);
-
-  factory IAppxManifestOSPackageDependency.from(IUnknown interface) =>
-      IAppxManifestOSPackageDependency(
-          interface.toInterface(IID_IAppxManifestOSPackageDependency));
 }

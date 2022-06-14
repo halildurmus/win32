@@ -31,6 +31,9 @@ class IEnumIDList extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumIDList(super.ptr);
 
+  factory IEnumIDList.from(IUnknown interface) =>
+      IEnumIDList(interface.toInterface(IID_IEnumIDList));
+
   int Next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
           Pointer<Uint32> pceltFetched) =>
       ptr.ref.vtable
@@ -75,7 +78,4 @@ class IEnumIDList extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
-
-  factory IEnumIDList.from(IUnknown interface) =>
-      IEnumIDList(interface.toInterface(IID_IEnumIDList));
 }

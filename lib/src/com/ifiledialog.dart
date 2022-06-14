@@ -32,6 +32,9 @@ class IFileDialog extends IModalWindow {
   // vtable begins at 4, is 23 entries long.
   IFileDialog(super.ptr);
 
+  factory IFileDialog.from(IUnknown interface) =>
+      IFileDialog(interface.toInterface(IID_IFileDialog));
+
   int SetFileTypes(int cFileTypes, Pointer<COMDLG_FILTERSPEC> rgFilterSpec) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -257,7 +260,4 @@ class IFileDialog extends IModalWindow {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> pFilter)>()(
       ptr.ref.lpVtbl, pFilter);
-
-  factory IFileDialog.from(IUnknown interface) =>
-      IFileDialog(interface.toInterface(IID_IFileDialog));
 }

@@ -32,6 +32,9 @@ class IShellLinkDual extends IDispatch {
   // vtable begins at 7, is 16 entries long.
   IShellLinkDual(super.ptr);
 
+  factory IShellLinkDual.from(IUnknown interface) =>
+      IShellLinkDual(interface.toInterface(IID_IShellLinkDual));
+
   Pointer<Utf16> get Path {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
@@ -286,7 +289,4 @@ class IShellLinkDual extends IDispatch {
       .value
       .asFunction<
           int Function(Pointer, VARIANT vWhere)>()(ptr.ref.lpVtbl, vWhere);
-
-  factory IShellLinkDual.from(IUnknown interface) =>
-      IShellLinkDual(interface.toInterface(IID_IShellLinkDual));
 }

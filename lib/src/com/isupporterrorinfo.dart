@@ -31,6 +31,9 @@ class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISupportErrorInfo(super.ptr);
 
+  factory ISupportErrorInfo.from(IUnknown interface) =>
+      ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
+
   int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -39,7 +42,4 @@ class ISupportErrorInfo extends IUnknown {
       .value
       .asFunction<
           int Function(Pointer, Pointer<GUID> riid)>()(ptr.ref.lpVtbl, riid);
-
-  factory ISupportErrorInfo.from(IUnknown interface) =>
-      ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
 }

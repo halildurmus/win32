@@ -32,6 +32,9 @@ class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileOpenDialog(super.ptr);
 
+  factory IFileOpenDialog.from(IUnknown interface) =>
+      IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
+
   int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(27)
           .cast<
@@ -55,9 +58,6 @@ class IFileOpenDialog extends IFileDialog {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppsai)>()(
       ptr.ref.lpVtbl, ppsai);
-
-  factory IFileOpenDialog.from(IUnknown interface) =>
-      IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
 }
 
 /// @nodoc

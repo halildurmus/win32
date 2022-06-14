@@ -32,6 +32,9 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
   // vtable begins at 15, is 1 entries long.
   IAppxManifestReader4(super.ptr);
 
+  factory IAppxManifestReader4.from(IUnknown interface) =>
+      IAppxManifestReader4(interface.toInterface(IID_IAppxManifestReader4));
+
   int
       GetOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
           ptr.ref.vtable
@@ -48,7 +51,4 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
                       int Function(Pointer,
                           Pointer<Pointer<COMObject>> optionalPackageInfo)>()(
               ptr.ref.lpVtbl, optionalPackageInfo);
-
-  factory IAppxManifestReader4.from(IUnknown interface) =>
-      IAppxManifestReader4(interface.toInterface(IID_IAppxManifestReader4));
 }

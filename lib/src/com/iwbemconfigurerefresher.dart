@@ -31,6 +31,10 @@ class IWbemConfigureRefresher extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IWbemConfigureRefresher(super.ptr);
 
+  factory IWbemConfigureRefresher.from(IUnknown interface) =>
+      IWbemConfigureRefresher(
+          interface.toInterface(IID_IWbemConfigureRefresher));
+
   int AddObjectByPath(
           Pointer<COMObject> pNamespace,
           Pointer<Utf16> wszPath,
@@ -151,8 +155,4 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Pointer<COMObject>> ppEnum,
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           wszClassName, lFlags, pContext, ppEnum, plId);
-
-  factory IWbemConfigureRefresher.from(IUnknown interface) =>
-      IWbemConfigureRefresher(
-          interface.toInterface(IID_IWbemConfigureRefresher));
 }

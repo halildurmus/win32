@@ -31,6 +31,10 @@ class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IConnectionPointContainer(super.ptr);
 
+  factory IConnectionPointContainer.from(IUnknown interface) =>
+      IConnectionPointContainer(
+          interface.toInterface(IID_IConnectionPointContainer));
+
   int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -57,8 +61,4 @@ class IConnectionPointContainer extends IUnknown {
                   int Function(Pointer, Pointer<GUID> riid,
                       Pointer<Pointer<COMObject>> ppCP)>()(
           ptr.ref.lpVtbl, riid, ppCP);
-
-  factory IConnectionPointContainer.from(IUnknown interface) =>
-      IConnectionPointContainer(
-          interface.toInterface(IID_IConnectionPointContainer));
 }

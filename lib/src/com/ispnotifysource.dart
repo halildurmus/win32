@@ -31,6 +31,9 @@ class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   ISpNotifySource(super.ptr);
 
+  factory ISpNotifySource.from(IUnknown interface) =>
+      ISpNotifySource(interface.toInterface(IID_ISpNotifySource));
+
   int SetNotifySink(Pointer<COMObject> pNotifySink) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -114,7 +117,4 @@ class ISpNotifySource extends IUnknown {
       .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory ISpNotifySource.from(IUnknown interface) =>
-      ISpNotifySource(interface.toInterface(IID_ISpNotifySource));
 }

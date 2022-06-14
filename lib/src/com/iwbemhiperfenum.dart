@@ -31,6 +31,9 @@ class IWbemHiPerfEnum extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IWbemHiPerfEnum(super.ptr);
 
+  factory IWbemHiPerfEnum.from(IUnknown interface) =>
+      IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
+
   int AddObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>
       ptr.ref.vtable
@@ -96,7 +99,4 @@ class IWbemHiPerfEnum extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
-
-  factory IWbemHiPerfEnum.from(IUnknown interface) =>
-      IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
 }

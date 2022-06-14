@@ -31,6 +31,9 @@ class IPersist extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IPersist(super.ptr);
 
+  factory IPersist.from(IUnknown interface) =>
+      IPersist(interface.toInterface(IID_IPersist));
+
   int GetClassID(Pointer<GUID> pClassID) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -40,7 +43,4 @@ class IPersist extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<GUID> pClassID)>()(
       ptr.ref.lpVtbl, pClassID);
-
-  factory IPersist.from(IUnknown interface) =>
-      IPersist(interface.toInterface(IID_IPersist));
 }

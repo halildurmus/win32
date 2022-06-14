@@ -31,6 +31,9 @@ class IDispatch extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IDispatch(super.ptr);
 
+  factory IDispatch.from(IUnknown interface) =>
+      IDispatch(interface.toInterface(IID_IDispatch));
+
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -117,7 +120,4 @@ class IDispatch extends IUnknown {
                       Pointer<EXCEPINFO> pExcepInfo,
                       Pointer<Uint32> puArgErr)>()(ptr.ref.lpVtbl, dispIdMember,
           riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
-
-  factory IDispatch.from(IUnknown interface) =>
-      IDispatch(interface.toInterface(IID_IDispatch));
 }

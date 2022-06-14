@@ -31,6 +31,9 @@ class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IShellItemFilter(super.ptr);
 
+  factory IShellItemFilter.from(IUnknown interface) =>
+      IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
+
   int IncludeItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -53,7 +56,4 @@ class IShellItemFilter extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<COMObject> psi,
                   Pointer<Uint32> pgrfFlags)>()(ptr.ref.lpVtbl, psi, pgrfFlags);
-
-  factory IShellItemFilter.from(IUnknown interface) =>
-      IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
 }

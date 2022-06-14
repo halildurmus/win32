@@ -32,6 +32,9 @@ class IUnknown {
 
   IUnknown(this.ptr);
 
+  factory IUnknown.from(IUnknown interface) =>
+      IUnknown(interface.toInterface(IID_IUnknown));
+
   int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
       .ref.vtable
       .elementAt(0)
@@ -73,7 +76,4 @@ class IUnknown {
       free(pIID);
     }
   }
-
-  factory IUnknown.from(IUnknown interface) =>
-      IUnknown(interface.toInterface(IID_IUnknown));
 }

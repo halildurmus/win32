@@ -31,6 +31,9 @@ class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   ISpellCheckerFactory(super.ptr);
 
+  factory ISpellCheckerFactory.from(IUnknown interface) =>
+      ISpellCheckerFactory(interface.toInterface(IID_ISpellCheckerFactory));
+
   Pointer<COMObject> get SupportedLanguages {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
@@ -83,9 +86,6 @@ class ISpellCheckerFactory extends IUnknown {
                   int Function(Pointer, Pointer<Utf16> languageTag,
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, languageTag, value);
-
-  factory ISpellCheckerFactory.from(IUnknown interface) =>
-      ISpellCheckerFactory(interface.toInterface(IID_ISpellCheckerFactory));
 }
 
 /// @nodoc

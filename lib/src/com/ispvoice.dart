@@ -32,6 +32,9 @@ class ISpVoice extends ISpEventSource {
   // vtable begins at 13, is 25 entries long.
   ISpVoice(super.ptr);
 
+  factory ISpVoice.from(IUnknown interface) =>
+      ISpVoice(interface.toInterface(IID_ISpVoice));
+
   int SetOutput(Pointer<COMObject> pUnkOutput, int fAllowFormatChanges) =>
       ptr.ref.vtable
               .elementAt(13)
@@ -329,9 +332,6 @@ class ISpVoice extends ISpEventSource {
                       Pointer pvExtraData,
                       int cbExtraData)>()(ptr.ref.lpVtbl, hwndParent, pszTitle,
           pszTypeOfUI, pvExtraData, cbExtraData);
-
-  factory ISpVoice.from(IUnknown interface) =>
-      ISpVoice(interface.toInterface(IID_ISpVoice));
 }
 
 /// @nodoc

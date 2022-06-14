@@ -31,6 +31,9 @@ class IClassFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IClassFactory(super.ptr);
 
+  factory IClassFactory.from(IUnknown interface) =>
+      IClassFactory(interface.toInterface(IID_IClassFactory));
+
   int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>
       ptr.ref.vtable
@@ -54,7 +57,4 @@ class IClassFactory extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
       .value
       .asFunction<int Function(Pointer, int fLock)>()(ptr.ref.lpVtbl, fLock);
-
-  factory IClassFactory.from(IUnknown interface) =>
-      IClassFactory(interface.toInterface(IID_IClassFactory));
 }

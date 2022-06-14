@@ -32,6 +32,9 @@ class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.
   INetworkConnection(super.ptr);
 
+  factory INetworkConnection.from(IUnknown interface) =>
+      INetworkConnection(interface.toInterface(IID_INetworkConnection));
+
   int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
           .elementAt(7)
           .cast<
@@ -134,7 +137,4 @@ class INetworkConnection extends IDispatch {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> pDomainType)>()(
       ptr.ref.lpVtbl, pDomainType);
-
-  factory INetworkConnection.from(IUnknown interface) =>
-      INetworkConnection(interface.toInterface(IID_INetworkConnection));
 }

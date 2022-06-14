@@ -31,6 +31,9 @@ class IModalWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IModalWindow(super.ptr);
 
+  factory IModalWindow.from(IUnknown interface) =>
+      IModalWindow(interface.toInterface(IID_IModalWindow));
+
   int Show(int hwndOwner) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -38,7 +41,4 @@ class IModalWindow extends IUnknown {
       .value
       .asFunction<
           int Function(Pointer, int hwndOwner)>()(ptr.ref.lpVtbl, hwndOwner);
-
-  factory IModalWindow.from(IUnknown interface) =>
-      IModalWindow(interface.toInterface(IID_IModalWindow));
 }

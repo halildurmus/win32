@@ -31,6 +31,10 @@ class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(super.ptr);
 
+  factory INetworkListManagerEvents.from(IUnknown interface) =>
+      INetworkListManagerEvents(
+          interface.toInterface(IID_INetworkListManagerEvents));
+
   int ConnectivityChanged(int newConnectivity) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -40,8 +44,4 @@ class INetworkListManagerEvents extends IUnknown {
       .asFunction<
           int Function(
               Pointer, int newConnectivity)>()(ptr.ref.lpVtbl, newConnectivity);
-
-  factory INetworkListManagerEvents.from(IUnknown interface) =>
-      INetworkListManagerEvents(
-          interface.toInterface(IID_INetworkListManagerEvents));
 }

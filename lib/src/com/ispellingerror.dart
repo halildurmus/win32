@@ -31,6 +31,9 @@ class ISpellingError extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   ISpellingError(super.ptr);
 
+  factory ISpellingError.from(IUnknown interface) =>
+      ISpellingError(interface.toInterface(IID_ISpellingError));
+
   int get StartIndex {
     final retValuePtr = calloc<Uint32>();
 
@@ -124,7 +127,4 @@ class ISpellingError extends IUnknown {
       free(retValuePtr);
     }
   }
-
-  factory ISpellingError.from(IUnknown interface) =>
-      ISpellingError(interface.toInterface(IID_ISpellingError));
 }

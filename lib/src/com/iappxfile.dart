@@ -31,6 +31,9 @@ class IAppxFile extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFile(super.ptr);
 
+  factory IAppxFile.from(IUnknown interface) =>
+      IAppxFile(interface.toInterface(IID_IAppxFile));
+
   int GetCompressionOption(Pointer<Int32> compressionOption) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -87,7 +90,4 @@ class IAppxFile extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> stream)>()(
       ptr.ref.lpVtbl, stream);
-
-  factory IAppxFile.from(IUnknown interface) =>
-      IAppxFile(interface.toInterface(IID_IAppxFile));
 }

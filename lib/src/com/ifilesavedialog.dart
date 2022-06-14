@@ -32,6 +32,9 @@ class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, is 5 entries long.
   IFileSaveDialog(super.ptr);
 
+  factory IFileSaveDialog.from(IUnknown interface) =>
+      IFileSaveDialog(interface.toInterface(IID_IFileSaveDialog));
+
   int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(27)
           .cast<
@@ -99,9 +102,6 @@ class IFileSaveDialog extends IFileDialog {
                       int hwnd,
                       Pointer<COMObject> pSink)>()(
           ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
-
-  factory IFileSaveDialog.from(IUnknown interface) =>
-      IFileSaveDialog(interface.toInterface(IID_IFileSaveDialog));
 }
 
 /// @nodoc

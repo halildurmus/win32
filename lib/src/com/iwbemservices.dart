@@ -31,6 +31,9 @@ class IWbemServices extends IUnknown {
   // vtable begins at 3, is 23 entries long.
   IWbemServices(super.ptr);
 
+  factory IWbemServices.from(IUnknown interface) =>
+      IWbemServices(interface.toInterface(IID_IWbemServices));
+
   int OpenNamespace(
           Pointer<Utf16> strNamespace,
           int lFlags,
@@ -612,7 +615,4 @@ class IWbemServices extends IUnknown {
           pCtx,
           pInParams,
           pResponseHandler);
-
-  factory IWbemServices.from(IUnknown interface) =>
-      IWbemServices(interface.toInterface(IID_IWbemServices));
 }

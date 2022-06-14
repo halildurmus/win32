@@ -31,6 +31,9 @@ class IAppxManifestReader5 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IAppxManifestReader5(super.ptr);
 
+  factory IAppxManifestReader5.from(IUnknown interface) =>
+      IAppxManifestReader5(interface.toInterface(IID_IAppxManifestReader5));
+
   int GetMainPackageDependencies(
           Pointer<Pointer<COMObject>> mainPackageDependencies) =>
       ptr.ref.vtable
@@ -47,7 +50,4 @@ class IAppxManifestReader5 extends IUnknown {
                   int Function(Pointer,
                       Pointer<Pointer<COMObject>> mainPackageDependencies)>()(
           ptr.ref.lpVtbl, mainPackageDependencies);
-
-  factory IAppxManifestReader5.from(IUnknown interface) =>
-      IAppxManifestReader5(interface.toInterface(IID_IAppxManifestReader5));
 }

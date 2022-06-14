@@ -32,6 +32,9 @@ class INetwork extends IDispatch {
   // vtable begins at 7, is 13 entries long.
   INetwork(super.ptr);
 
+  factory INetwork.from(IUnknown interface) =>
+      INetwork(interface.toInterface(IID_INetwork));
+
   int GetName(Pointer<Pointer<Utf16>> pszNetworkName) => ptr.ref.vtable
           .elementAt(7)
           .cast<
@@ -226,7 +229,4 @@ class INetwork extends IDispatch {
       .asFunction<
           int Function(
               Pointer, int NewCategory)>()(ptr.ref.lpVtbl, NewCategory);
-
-  factory INetwork.from(IUnknown interface) =>
-      INetwork(interface.toInterface(IID_INetwork));
 }

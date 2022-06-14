@@ -31,6 +31,9 @@ class IKnownFolder extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IKnownFolder(super.ptr);
 
+  factory IKnownFolder.from(IUnknown interface) =>
+      IKnownFolder(interface.toInterface(IID_IKnownFolder));
+
   int GetId(Pointer<GUID> pkfid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -135,7 +138,4 @@ class IKnownFolder extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
       ptr.ref.lpVtbl, pKFD);
-
-  factory IKnownFolder.from(IUnknown interface) =>
-      IKnownFolder(interface.toInterface(IID_IKnownFolder));
 }

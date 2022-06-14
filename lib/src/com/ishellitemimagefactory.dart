@@ -31,6 +31,9 @@ class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellItemImageFactory(super.ptr);
 
+  factory IShellItemImageFactory.from(IUnknown interface) =>
+      IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
+
   int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -42,7 +45,4 @@ class IShellItemImageFactory extends IUnknown {
       .asFunction<
           int Function(Pointer, SIZE size, int flags,
               Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
-
-  factory IShellItemImageFactory.from(IUnknown interface) =>
-      IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 }

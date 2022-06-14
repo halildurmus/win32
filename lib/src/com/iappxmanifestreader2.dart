@@ -32,6 +32,9 @@ class IAppxManifestReader2 extends IAppxManifestReader {
   // vtable begins at 12, is 1 entries long.
   IAppxManifestReader2(super.ptr);
 
+  factory IAppxManifestReader2.from(IUnknown interface) =>
+      IAppxManifestReader2(interface.toInterface(IID_IAppxManifestReader2));
+
   int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
           .ref.vtable
           .elementAt(12)
@@ -44,7 +47,4 @@ class IAppxManifestReader2 extends IAppxManifestReader {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> resources)>()(
       ptr.ref.lpVtbl, resources);
-
-  factory IAppxManifestReader2.from(IUnknown interface) =>
-      IAppxManifestReader2(interface.toInterface(IID_IAppxManifestReader2));
 }

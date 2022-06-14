@@ -31,6 +31,9 @@ class IFileIsInUse extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IFileIsInUse(super.ptr);
 
+  factory IFileIsInUse.from(IUnknown interface) =>
+      IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
+
   int GetAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -76,7 +79,4 @@ class IFileIsInUse extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory IFileIsInUse.from(IUnknown interface) =>
-      IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
 }

@@ -31,6 +31,9 @@ class ISequentialStream extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   ISequentialStream(super.ptr);
 
+  factory ISequentialStream.from(IUnknown interface) =>
+      ISequentialStream(interface.toInterface(IID_ISequentialStream));
+
   int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -55,7 +58,4 @@ class ISequentialStream extends IUnknown {
               int Function(
                   Pointer, Pointer pv, int cb, Pointer<Uint32> pcbWritten)>()(
       ptr.ref.lpVtbl, pv, cb, pcbWritten);
-
-  factory ISequentialStream.from(IUnknown interface) =>
-      ISequentialStream(interface.toInterface(IID_ISequentialStream));
 }

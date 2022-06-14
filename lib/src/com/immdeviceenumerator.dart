@@ -31,6 +31,9 @@ class IMMDeviceEnumerator extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IMMDeviceEnumerator(super.ptr);
 
+  factory IMMDeviceEnumerator.from(IUnknown interface) =>
+      IMMDeviceEnumerator(interface.toInterface(IID_IMMDeviceEnumerator));
+
   int EnumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
       ptr.ref.vtable
@@ -99,9 +102,6 @@ class IMMDeviceEnumerator extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
       ptr.ref.lpVtbl, pClient);
-
-  factory IMMDeviceEnumerator.from(IUnknown interface) =>
-      IMMDeviceEnumerator(interface.toInterface(IID_IMMDeviceEnumerator));
 }
 
 /// @nodoc

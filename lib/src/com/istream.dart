@@ -32,6 +32,9 @@ class IStream extends ISequentialStream {
   // vtable begins at 5, is 9 entries long.
   IStream(super.ptr);
 
+  factory IStream.from(IUnknown interface) =>
+      IStream(interface.toInterface(IID_IStream));
+
   int Seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) => ptr
           .ref.vtable
           .elementAt(5)
@@ -136,7 +139,4 @@ class IStream extends ISequentialStream {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppstm)>()(
       ptr.ref.lpVtbl, ppstm);
-
-  factory IStream.from(IUnknown interface) =>
-      IStream(interface.toInterface(IID_IStream));
 }

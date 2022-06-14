@@ -31,6 +31,9 @@ class IShellLinkDataList extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellLinkDataList(super.ptr);
 
+  factory IShellLinkDataList.from(IUnknown interface) =>
+      IShellLinkDataList(interface.toInterface(IID_IShellLinkDataList));
+
   int AddDataBlock(Pointer pDataBlock) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -75,7 +78,4 @@ class IShellLinkDataList extends IUnknown {
       .value
       .asFunction<
           int Function(Pointer, int dwFlags)>()(ptr.ref.lpVtbl, dwFlags);
-
-  factory IShellLinkDataList.from(IUnknown interface) =>
-      IShellLinkDataList(interface.toInterface(IID_IShellLinkDataList));
 }

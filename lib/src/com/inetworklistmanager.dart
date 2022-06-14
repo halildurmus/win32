@@ -32,6 +32,9 @@ class INetworkListManager extends IDispatch {
   // vtable begins at 7, is 9 entries long.
   INetworkListManager(super.ptr);
 
+  factory INetworkListManager.from(IUnknown interface) =>
+      INetworkListManager(interface.toInterface(IID_INetworkListManager));
+
   int GetNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
       ptr.ref.vtable
               .elementAt(7)
@@ -173,9 +176,6 @@ class INetworkListManager extends IDispatch {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory INetworkListManager.from(IUnknown interface) =>
-      INetworkListManager(interface.toInterface(IID_INetworkListManager));
 }
 
 /// @nodoc

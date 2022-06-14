@@ -32,6 +32,9 @@ class ISpeechObjectToken extends IDispatch {
   // vtable begins at 7, is 13 entries long.
   ISpeechObjectToken(super.ptr);
 
+  factory ISpeechObjectToken.from(IUnknown interface) =>
+      ISpeechObjectToken(interface.toInterface(IID_ISpeechObjectToken));
+
   Pointer<Utf16> get Id {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
@@ -294,7 +297,4 @@ class ISpeechObjectToken extends IDispatch {
                   int Function(Pointer, Pointer<Utf16> Attributes,
                       Pointer<Int16> Matches)>()(
           ptr.ref.lpVtbl, Attributes, Matches);
-
-  factory ISpeechObjectToken.from(IUnknown interface) =>
-      ISpeechObjectToken(interface.toInterface(IID_ISpeechObjectToken));
 }

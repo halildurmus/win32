@@ -31,6 +31,9 @@ class IUri extends IUnknown {
   // vtable begins at 3, is 25 entries long.
   IUri(super.ptr);
 
+  factory IUri.from(IUnknown interface) =>
+      IUri(interface.toInterface(IID_IUri));
+
   int GetPropertyBSTR(
           int uriProp, Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags) =>
       ptr.ref.vtable
@@ -337,7 +340,4 @@ class IUri extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<COMObject> pUri,
               Pointer<Int32> pfEqual)>()(ptr.ref.lpVtbl, pUri, pfEqual);
-
-  factory IUri.from(IUnknown interface) =>
-      IUri(interface.toInterface(IID_IUri));
 }

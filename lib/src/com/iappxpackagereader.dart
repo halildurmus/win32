@@ -31,6 +31,9 @@ class IAppxPackageReader extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxPackageReader(super.ptr);
 
+  factory IAppxPackageReader.from(IUnknown interface) =>
+      IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
+
   int GetBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -98,7 +101,4 @@ class IAppxPackageReader extends IUnknown {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> manifestReader)>()(
       ptr.ref.lpVtbl, manifestReader);
-
-  factory IAppxPackageReader.from(IUnknown interface) =>
-      IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
 }

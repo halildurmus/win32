@@ -31,6 +31,9 @@ class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioRenderClient(super.ptr);
 
+  factory IAudioRenderClient.from(IUnknown interface) =>
+      IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
+
   int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -56,7 +59,4 @@ class IAudioRenderClient extends IUnknown {
           .asFunction<
               int Function(Pointer, int NumFramesWritten, int dwFlags)>()(
       ptr.ref.lpVtbl, NumFramesWritten, dwFlags);
-
-  factory IAudioRenderClient.from(IUnknown interface) =>
-      IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
 }
