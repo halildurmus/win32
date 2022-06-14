@@ -32,6 +32,10 @@ class IApplicationData extends IInspectable {
   // vtable begins at 6, is 13 entries long.
   IApplicationData.fromRawPointer(super.ptr);
 
+  factory IApplicationData.from(IInspectable interface) =>
+      IApplicationData.fromRawPointer(
+          interface.toInterface(IID_IApplicationData));
+
   int get Version {
     final retValuePtr = calloc<Uint32>();
 

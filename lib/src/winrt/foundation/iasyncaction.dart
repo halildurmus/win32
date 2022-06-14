@@ -33,6 +33,9 @@ class IAsyncAction extends IInspectable implements IAsyncInfo {
   // vtable begins at 6, is 3 entries long.
   IAsyncAction.fromRawPointer(super.ptr);
 
+  factory IAsyncAction.from(IInspectable interface) =>
+      IAsyncAction.fromRawPointer(interface.toInterface(IID_IAsyncAction));
+
   set Completed(Pointer<NativeFunction<AsyncActionCompletedHandler>> value) {
     final hr =
         ptr.ref.vtable

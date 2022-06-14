@@ -398,7 +398,7 @@ void main() {
         final object = CreateActivationFactory(
             'Windows.Networking.Connectivity.NetworkInformation',
             IID_INetworkInformationStatics);
-        networkInformation = INetworkInformationStatics(object);
+        networkInformation = INetworkInformationStatics.fromRawPointer(object);
         allocator = Arena();
         vectorView = GetHostNames(object, allocator);
       });
