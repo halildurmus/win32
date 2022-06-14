@@ -34,6 +34,9 @@ class IHostName extends IInspectable {
   // vtable begins at 6, is 6 entries long.
   IHostName.fromRawPointer(super.ptr);
 
+  factory IHostName.from(IInspectable interface) =>
+      IHostName.fromRawPointer(interface.toInterface(IID_IHostName));
+
   Pointer<COMObject> get IPInformation {
     final retValuePtr = calloc<COMObject>();
 

@@ -33,6 +33,10 @@ class IGameControllerBatteryInfo extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IGameControllerBatteryInfo.fromRawPointer(super.ptr);
 
+  factory IGameControllerBatteryInfo.from(IInspectable interface) =>
+      IGameControllerBatteryInfo.fromRawPointer(
+          interface.toInterface(IID_IGameControllerBatteryInfo));
+
   Pointer<COMObject> TryGetBatteryReport() {
     final retValuePtr = calloc<COMObject>();
 

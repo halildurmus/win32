@@ -34,6 +34,9 @@ class ICalendar extends IInspectable {
   // vtable begins at 6, is 98 entries long.
   ICalendar.fromRawPointer(super.ptr);
 
+  factory ICalendar.from(IInspectable interface) =>
+      ICalendar.fromRawPointer(interface.toInterface(IID_ICalendar));
+
   Pointer<COMObject> Clone() {
     final retValuePtr = calloc<COMObject>();
 

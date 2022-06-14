@@ -33,6 +33,10 @@ class IPhoneNumberFormatter extends IInspectable {
   // vtable begins at 6, is 5 entries long.
   IPhoneNumberFormatter.fromRawPointer(super.ptr);
 
+  factory IPhoneNumberFormatter.from(IInspectable interface) =>
+      IPhoneNumberFormatter.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberFormatter));
+
   String Format(Pointer<COMObject> number) {
     final retValuePtr = calloc<HSTRING>();
 

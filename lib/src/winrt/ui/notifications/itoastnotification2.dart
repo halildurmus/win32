@@ -32,6 +32,10 @@ class IToastNotification2 extends IInspectable {
   // vtable begins at 6, is 6 entries long.
   IToastNotification2.fromRawPointer(super.ptr);
 
+  factory IToastNotification2.from(IInspectable interface) =>
+      IToastNotification2.fromRawPointer(
+          interface.toInterface(IID_IToastNotification2));
+
   set Tag(String value) {
     final hstr = convertToHString(value);
 

@@ -35,6 +35,10 @@ class IGameController extends IInspectable {
   // vtable begins at 6, is 9 entries long.
   IGameController.fromRawPointer(super.ptr);
 
+  factory IGameController.from(IInspectable interface) =>
+      IGameController.fromRawPointer(
+          interface.toInterface(IID_IGameController));
+
   int add_HeadsetConnected(Pointer<NativeFunction<TypedEventHandler>> value) {
     final retValuePtr = calloc<IntPtr>();
 

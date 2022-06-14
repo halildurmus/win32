@@ -33,6 +33,10 @@ class IPhoneNumberInfo extends IInspectable {
   // vtable begins at 6, is 8 entries long.
   IPhoneNumberInfo.fromRawPointer(super.ptr);
 
+  factory IPhoneNumberInfo.from(IInspectable interface) =>
+      IPhoneNumberInfo.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberInfo));
+
   int get CountryCode {
     final retValuePtr = calloc<Int32>();
 

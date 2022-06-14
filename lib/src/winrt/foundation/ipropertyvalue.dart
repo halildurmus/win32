@@ -34,6 +34,9 @@ class IPropertyValue extends IInspectable {
   // vtable begins at 6, is 39 entries long.
   IPropertyValue.fromRawPointer(super.ptr);
 
+  factory IPropertyValue.from(IInspectable interface) =>
+      IPropertyValue.fromRawPointer(interface.toInterface(IID_IPropertyValue));
+
   int get Type {
     final retValuePtr = calloc<Int32>();
 

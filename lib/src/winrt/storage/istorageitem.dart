@@ -35,6 +35,9 @@ class IStorageItem extends IInspectable {
   // vtable begins at 6, is 10 entries long.
   IStorageItem.fromRawPointer(super.ptr);
 
+  factory IStorageItem.from(IInspectable interface) =>
+      IStorageItem.fromRawPointer(interface.toInterface(IID_IStorageItem));
+
   Pointer<COMObject> RenameAsyncOverloadDefaultOptions(String desiredName) {
     final retValuePtr = calloc<COMObject>();
     final desiredNameHstring = convertToHString(desiredName);

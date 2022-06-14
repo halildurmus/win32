@@ -32,6 +32,10 @@ class ITimeZoneOnCalendar extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   ITimeZoneOnCalendar.fromRawPointer(super.ptr);
 
+  factory ITimeZoneOnCalendar.from(IInspectable interface) =>
+      ITimeZoneOnCalendar.fromRawPointer(
+          interface.toInterface(IID_ITimeZoneOnCalendar));
+
   String GetTimeZone() {
     final retValuePtr = calloc<HSTRING>();
 

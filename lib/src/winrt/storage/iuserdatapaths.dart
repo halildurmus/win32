@@ -32,6 +32,9 @@ class IUserDataPaths extends IInspectable {
   // vtable begins at 6, is 19 entries long.
   IUserDataPaths.fromRawPointer(super.ptr);
 
+  factory IUserDataPaths.from(IInspectable interface) =>
+      IUserDataPaths.fromRawPointer(interface.toInterface(IID_IUserDataPaths));
+
   String get CameraRoll {
     final retValuePtr = calloc<HSTRING>();
 

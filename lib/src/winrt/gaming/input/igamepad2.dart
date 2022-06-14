@@ -38,6 +38,9 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   // vtable begins at 6, is 1 entries long.
   IGamepad2.fromRawPointer(super.ptr);
 
+  factory IGamepad2.from(IInspectable interface) =>
+      IGamepad2.fromRawPointer(interface.toInterface(IID_IGamepad2));
+
   int GetButtonLabel(int button) {
     final retValuePtr = calloc<Int32>();
 

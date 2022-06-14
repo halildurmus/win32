@@ -36,6 +36,10 @@ class IFileOpenPicker extends IInspectable {
   // vtable begins at 6, is 11 entries long.
   IFileOpenPicker.fromRawPointer(super.ptr);
 
+  factory IFileOpenPicker.from(IInspectable interface) =>
+      IFileOpenPicker.fromRawPointer(
+          interface.toInterface(IID_IFileOpenPicker));
+
   int get ViewMode {
     final retValuePtr = calloc<Int32>();
 

@@ -32,6 +32,10 @@ class IToastNotification3 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   IToastNotification3.fromRawPointer(super.ptr);
 
+  factory IToastNotification3.from(IInspectable interface) =>
+      IToastNotification3.fromRawPointer(
+          interface.toInterface(IID_IToastNotification3));
+
   int get NotificationMirroring {
     final retValuePtr = calloc<Int32>();
 

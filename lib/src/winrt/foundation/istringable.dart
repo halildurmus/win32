@@ -32,6 +32,9 @@ class IStringable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IStringable.fromRawPointer(super.ptr);
 
+  factory IStringable.from(IInspectable interface) =>
+      IStringable.fromRawPointer(interface.toInterface(IID_IStringable));
+
   String ToString() {
     final retValuePtr = calloc<HSTRING>();
 

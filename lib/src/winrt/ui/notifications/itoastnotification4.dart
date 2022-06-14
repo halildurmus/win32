@@ -33,6 +33,10 @@ class IToastNotification4 extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   IToastNotification4.fromRawPointer(super.ptr);
 
+  factory IToastNotification4.from(IInspectable interface) =>
+      IToastNotification4.fromRawPointer(
+          interface.toInterface(IID_IToastNotification4));
+
   Pointer<COMObject> get Data {
     final retValuePtr = calloc<COMObject>();
 

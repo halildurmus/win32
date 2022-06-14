@@ -34,6 +34,9 @@ class IXmlNodeList extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   IXmlNodeList.fromRawPointer(super.ptr);
 
+  factory IXmlNodeList.from(IInspectable interface) =>
+      IXmlNodeList.fromRawPointer(interface.toInterface(IID_IXmlNodeList));
+
   int get Length {
     final retValuePtr = calloc<Uint32>();
 

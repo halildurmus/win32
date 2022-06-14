@@ -37,6 +37,9 @@ class IGamepad extends IInspectable implements IGameController {
   // vtable begins at 6, is 3 entries long.
   IGamepad.fromRawPointer(super.ptr);
 
+  factory IGamepad.from(IInspectable interface) =>
+      IGamepad.fromRawPointer(interface.toInterface(IID_IGamepad));
+
   GamepadVibration get Vibration {
     final retValuePtr = calloc<GamepadVibration>();
 

@@ -32,6 +32,9 @@ class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
   IClosable.fromRawPointer(super.ptr);
 
+  factory IClosable.from(IInspectable interface) =>
+      IClosable.fromRawPointer(interface.toInterface(IID_IClosable));
+
   void Close() {
     final hr = ptr.ref.vtable
         .elementAt(6)

@@ -32,6 +32,9 @@ class IAsyncInfo extends IInspectable {
   // vtable begins at 6, is 5 entries long.
   IAsyncInfo.fromRawPointer(super.ptr);
 
+  factory IAsyncInfo.from(IInspectable interface) =>
+      IAsyncInfo.fromRawPointer(interface.toInterface(IID_IAsyncInfo));
+
   int get Id {
     final retValuePtr = calloc<Uint32>();
 
