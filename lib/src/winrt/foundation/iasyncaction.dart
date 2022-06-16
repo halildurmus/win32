@@ -31,7 +31,10 @@ const IID_IAsyncAction = '{5A648006-843A-4DA9-865B-9D26E5DFAD7B}';
 /// {@category winrt}
 class IAsyncAction extends IInspectable implements IAsyncInfo {
   // vtable begins at 6, is 3 entries long.
-  IAsyncAction.from(super.ptr);
+  IAsyncAction.fromRawPointer(super.ptr);
+
+  factory IAsyncAction.from(IInspectable interface) =>
+      IAsyncAction.fromRawPointer(interface.toInterface(IID_IAsyncAction));
 
   set Completed(Pointer<NativeFunction<AsyncActionCompletedHandler>> value) {
     final hr =
@@ -101,7 +104,8 @@ class IAsyncAction extends IInspectable implements IAsyncInfo {
   }
 
   // IAsyncInfo methods
-  late final _iAsyncInfo = IAsyncInfo.from(toInterface(IID_IAsyncInfo));
+  late final _iAsyncInfo =
+      IAsyncInfo.fromRawPointer(toInterface(IID_IAsyncInfo));
 
   @override
   int get Id => _iAsyncInfo.Id;

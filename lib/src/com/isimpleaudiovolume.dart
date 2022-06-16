@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISimpleAudioVolume = '{87CE5498-68D6-44E5-9215-6DA47EF883D8}';
 class ISimpleAudioVolume extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   ISimpleAudioVolume(super.ptr);
+
+  factory ISimpleAudioVolume.from(IUnknown interface) =>
+      ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
 
   int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
       ptr.ref.vtable

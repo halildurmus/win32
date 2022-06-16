@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
 class IDesktopWallpaper extends IUnknown {
   // vtable begins at 3, is 16 entries long.
   IDesktopWallpaper(super.ptr);
+
+  factory IDesktopWallpaper.from(IUnknown interface) =>
+      IDesktopWallpaper(interface.toInterface(IID_IDesktopWallpaper));
 
   int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) => ptr
           .ref.vtable

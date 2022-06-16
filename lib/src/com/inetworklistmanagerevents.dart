@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,10 @@ const IID_INetworkListManagerEvents = '{DCB00001-570F-4A9B-8D69-199FDBA5723B}';
 class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(super.ptr);
+
+  factory INetworkListManagerEvents.from(IUnknown interface) =>
+      INetworkListManagerEvents(
+          interface.toInterface(IID_INetworkListManagerEvents));
 
   int ConnectivityChanged(int newConnectivity) => ptr.ref.vtable
       .elementAt(3)

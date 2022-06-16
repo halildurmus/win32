@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IMMDevice = '{D666063F-1587-4E43-81F1-B948E807363F}';
 class IMMDevice extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IMMDevice(super.ptr);
+
+  factory IMMDevice.from(IUnknown interface) =>
+      IMMDevice(interface.toInterface(IID_IMMDevice));
 
   int Activate(
           Pointer<GUID> iid,

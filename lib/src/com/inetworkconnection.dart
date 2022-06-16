@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
@@ -31,6 +31,9 @@ const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.
   INetworkConnection(super.ptr);
+
+  factory INetworkConnection.from(IUnknown interface) =>
+      INetworkConnection(interface.toInterface(IID_INetworkConnection));
 
   int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
           .elementAt(7)

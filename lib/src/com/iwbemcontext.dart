@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IWbemContext = '{44ACA674-E8FC-11D0-A07C-00C04FB68820}';
 class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IWbemContext(super.ptr);
+
+  factory IWbemContext.from(IUnknown interface) =>
+      IWbemContext(interface.toInterface(IID_IWbemContext));
 
   int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.vtable
           .elementAt(3)

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,6 +31,10 @@ const IID_ISpellCheckerChangedEventHandler =
 class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(super.ptr);
+
+  factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
+      ISpellCheckerChangedEventHandler(
+          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
 
   int Invoke(Pointer<COMObject> sender) => ptr.ref.vtable
           .elementAt(3)

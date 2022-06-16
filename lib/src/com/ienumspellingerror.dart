@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IEnumSpellingError = '{803E3BD4-2828-4410-8290-418D1D73C762}';
 class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IEnumSpellingError(super.ptr);
+
+  factory IEnumSpellingError.from(IUnknown interface) =>
+      IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
 
   int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
           .elementAt(3)

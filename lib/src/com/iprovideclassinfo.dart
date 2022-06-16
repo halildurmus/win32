@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IProvideClassInfo = '{B196B283-BAB4-101A-B69C-00AA00341D07}';
 class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(super.ptr);
+
+  factory IProvideClassInfo.from(IUnknown interface) =>
+      IProvideClassInfo(interface.toInterface(IID_IProvideClassInfo));
 
   int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
       .elementAt(3)

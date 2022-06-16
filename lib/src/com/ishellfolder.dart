@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellFolder = '{000214E6-0000-0000-C000-000000000046}';
 class IShellFolder extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellFolder(super.ptr);
+
+  factory IShellFolder.from(IUnknown interface) =>
+      IShellFolder(interface.toInterface(IID_IShellFolder));
 
   int ParseDisplayName(
           int hwnd,

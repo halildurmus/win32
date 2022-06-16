@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IFileDialogCustomize = '{E6FDD21A-163F-4975-9C8C-A69F1BA37034}';
 class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, is 27 entries long.
   IFileDialogCustomize(super.ptr);
+
+  factory IFileDialogCustomize.from(IUnknown interface) =>
+      IFileDialogCustomize(interface.toInterface(IID_IFileDialogCustomize));
 
   int EnableOpenDropDown(int dwIDCtl) => ptr.ref.vtable
       .elementAt(3)

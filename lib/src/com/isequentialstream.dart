@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
 class ISequentialStream extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   ISequentialStream(super.ptr);
+
+  factory ISequentialStream.from(IUnknown interface) =>
+      ISequentialStream(interface.toInterface(IID_ISequentialStream));
 
   int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
       .elementAt(3)

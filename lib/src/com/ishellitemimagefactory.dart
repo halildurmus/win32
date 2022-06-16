@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellItemImageFactory = '{BCC18B79-BA16-442F-80C4-8A59C30C463B}';
 class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellItemImageFactory(super.ptr);
+
+  factory IShellItemImageFactory.from(IUnknown interface) =>
+      IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 
   int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
       .elementAt(3)

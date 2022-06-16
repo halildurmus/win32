@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxManifestReader6 = '{34DEACA4-D3C0-4E3E-B312-E42625E3807E}';
 class IAppxManifestReader6 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IAppxManifestReader6(super.ptr);
+
+  factory IAppxManifestReader6.from(IUnknown interface) =>
+      IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
 
   int GetIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>

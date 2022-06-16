@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IWbemServices = '{9556DC99-828C-11CF-A37E-00AA003240C7}';
 class IWbemServices extends IUnknown {
   // vtable begins at 3, is 23 entries long.
   IWbemServices(super.ptr);
+
+  factory IWbemServices.from(IUnknown interface) =>
+      IWbemServices(interface.toInterface(IID_IWbemServices));
 
   int OpenNamespace(
           Pointer<Utf16> strNamespace,

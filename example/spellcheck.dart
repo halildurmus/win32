@@ -43,8 +43,7 @@ void main(List<String> args) {
     // While ISpellChecker works fine for the needs of this example,
     // ISpellChecker2 extends it with the ability to remove words from the
     // custom dictionary. We cast to that purely as an example.
-    final spellChecker2 =
-        ISpellChecker2(spellChecker.toInterface(IID_ISpellChecker2));
+    final spellChecker2 = ISpellChecker2.from(spellChecker);
 
     final errorsPtr = calloc<COMObject>();
     final textPtr = text.toNativeUtf16();

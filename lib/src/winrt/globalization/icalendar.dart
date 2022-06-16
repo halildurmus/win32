@@ -32,7 +32,10 @@ const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 /// {@category winrt}
 class ICalendar extends IInspectable {
   // vtable begins at 6, is 98 entries long.
-  ICalendar.from(super.ptr);
+  ICalendar.fromRawPointer(super.ptr);
+
+  factory ICalendar.from(IInspectable interface) =>
+      ICalendar.fromRawPointer(interface.toInterface(IID_ICalendar));
 
   Pointer<COMObject> Clone() {
     final retValuePtr = calloc<COMObject>();
@@ -88,7 +91,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<String>.from(retValuePtr).toList();
+      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
     } finally {
       free(retValuePtr);
     }

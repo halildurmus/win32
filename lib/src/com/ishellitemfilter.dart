@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellItemFilter = '{2659B475-EEB8-48B7-8F07-B378810F48CF}';
 class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IShellItemFilter(super.ptr);
+
+  factory IShellItemFilter.from(IUnknown interface) =>
+      IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
 
   int IncludeItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(3)

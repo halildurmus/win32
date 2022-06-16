@@ -6,7 +6,7 @@ void main() {
   // Requires a package identity.
   final currAppData = ApplicationData.Current;
   print(currAppData.trustLevel);
-  final localFolder = IStorageItem.from(currAppData.LocalFolder);
+  final localFolder = IStorageItem.fromRawPointer(currAppData.LocalFolder);
   final localPath = localFolder.Path;
 
   print('Local folder path: $localPath');

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,10 @@ const IID_IAppxManifestProperties = '{03FAF64D-F26F-4B2C-AAF7-8FE7789B8BCA}';
 class IAppxManifestProperties extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestProperties(super.ptr);
+
+  factory IAppxManifestProperties.from(IUnknown interface) =>
+      IAppxManifestProperties(
+          interface.toInterface(IID_IAppxManifestProperties));
 
   int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
       .elementAt(3)

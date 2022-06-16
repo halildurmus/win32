@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,6 +31,10 @@ const IID_IAppxManifestApplicationsEnumerator =
 class IAppxManifestApplicationsEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestApplicationsEnumerator(super.ptr);
+
+  factory IAppxManifestApplicationsEnumerator.from(IUnknown interface) =>
+      IAppxManifestApplicationsEnumerator(
+          interface.toInterface(IID_IAppxManifestApplicationsEnumerator));
 
   int GetCurrent(Pointer<Pointer<COMObject>> application) => ptr.ref.vtable
           .elementAt(3)

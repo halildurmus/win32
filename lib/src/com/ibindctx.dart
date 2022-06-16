@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IBindCtx = '{0000000E-0000-0000-C000-000000000046}';
 class IBindCtx extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IBindCtx(super.ptr);
+
+  factory IBindCtx.from(IUnknown interface) =>
+      IBindCtx(interface.toInterface(IID_IBindCtx));
 
   int RegisterObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
           .elementAt(3)

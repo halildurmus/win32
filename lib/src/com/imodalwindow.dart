@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IModalWindow = '{B4DB1657-70D7-485E-8E3E-6FCB5A5C1802}';
 class IModalWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IModalWindow(super.ptr);
+
+  factory IModalWindow.from(IUnknown interface) =>
+      IModalWindow(interface.toInterface(IID_IModalWindow));
 
   int Show(int hwndOwner) => ptr.ref.vtable
       .elementAt(3)

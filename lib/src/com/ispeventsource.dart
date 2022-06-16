@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ispnotifysource.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
@@ -31,6 +31,9 @@ const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
 class ISpEventSource extends ISpNotifySource {
   // vtable begins at 10, is 3 entries long.
   ISpEventSource(super.ptr);
+
+  factory ISpEventSource.from(IUnknown interface) =>
+      ISpEventSource(interface.toInterface(IID_ISpEventSource));
 
   int SetInterest(int ullEventInterest, int ullQueuedInterest) => ptr.ref.vtable
           .elementAt(10)

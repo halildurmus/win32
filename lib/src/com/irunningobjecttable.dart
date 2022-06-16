@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IRunningObjectTable = '{00000010-0000-0000-C000-000000000046}';
 class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   IRunningObjectTable(super.ptr);
+
+  factory IRunningObjectTable.from(IUnknown interface) =>
+      IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
 
   int Register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>

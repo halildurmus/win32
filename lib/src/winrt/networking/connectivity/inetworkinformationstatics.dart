@@ -36,7 +36,12 @@ class INetworkInformationStatics extends IInspectable {
   final Allocator allocator;
 
   // vtable begins at 6, is 8 entries long.
-  INetworkInformationStatics(super.ptr, {this.allocator = calloc});
+  INetworkInformationStatics.fromRawPointer(super.ptr,
+      {this.allocator = calloc});
+
+  factory INetworkInformationStatics.from(IInspectable interface) =>
+      INetworkInformationStatics.fromRawPointer(
+          interface.toInterface(IID_INetworkInformationStatics));
 
   Pointer<COMObject> GetConnectionProfiles() {
     final retValuePtr = calloc<COMObject>();
@@ -144,9 +149,9 @@ class INetworkInformationStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<IHostName>.from(
+      return IVectorView<IHostName>.fromRawPointer(
         retValuePtr,
-        creator: IHostName.from,
+        creator: IHostName.fromRawPointer,
         allocator: allocator,
       ).toList();
     } finally {

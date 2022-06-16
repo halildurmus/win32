@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 class IWbemClassObject extends IUnknown {
   // vtable begins at 3, is 24 entries long.
   IWbemClassObject(super.ptr);
+
+  factory IWbemClassObject.from(IUnknown interface) =>
+      IWbemClassObject(interface.toInterface(IID_IWbemClassObject));
 
   int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr.ref.vtable
           .elementAt(3)

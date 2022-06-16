@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IDispatch = '{00020400-0000-0000-C000-000000000046}';
 class IDispatch extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IDispatch(super.ptr);
+
+  factory IDispatch.from(IUnknown interface) =>
+      IDispatch(interface.toInterface(IID_IDispatch));
 
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.vtable
           .elementAt(3)

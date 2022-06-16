@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxPackageReader = '{B5C49650-99BC-481C-9A34-3D53A4106708}';
 class IAppxPackageReader extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxPackageReader(super.ptr);
+
+  factory IAppxPackageReader.from(IUnknown interface) =>
+      IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
 
   int GetBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
           .elementAt(3)

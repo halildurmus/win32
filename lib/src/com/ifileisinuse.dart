@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';
 class IFileIsInUse extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IFileIsInUse(super.ptr);
+
+  factory IFileIsInUse.from(IUnknown interface) =>
+      IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
 
   int GetAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.vtable
       .elementAt(3)

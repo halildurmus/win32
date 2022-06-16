@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'isequentialstream.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';
@@ -31,6 +31,9 @@ const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';
 class IStream extends ISequentialStream {
   // vtable begins at 5, is 9 entries long.
   IStream(super.ptr);
+
+  factory IStream.from(IUnknown interface) =>
+      IStream(interface.toInterface(IID_IStream));
 
   int Seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) => ptr
           .ref.vtable

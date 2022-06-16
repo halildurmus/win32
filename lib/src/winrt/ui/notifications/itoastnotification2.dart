@@ -30,7 +30,11 @@ const IID_IToastNotification2 = '{9DFB9FD1-143A-490E-90BF-B9FBA7132DE7}';
 /// {@category winrt}
 class IToastNotification2 extends IInspectable {
   // vtable begins at 6, is 6 entries long.
-  IToastNotification2.from(super.ptr);
+  IToastNotification2.fromRawPointer(super.ptr);
+
+  factory IToastNotification2.from(IInspectable interface) =>
+      IToastNotification2.fromRawPointer(
+          interface.toInterface(IID_IToastNotification2));
 
   set Tag(String value) {
     final hstr = convertToHString(value);

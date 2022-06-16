@@ -60,6 +60,7 @@ const comInterfacesToGenerate = <String>{
   'Windows.Win32.System.Com.IPersistStream',
   'Windows.Win32.System.Ole.IProvideClassInfo',
   'Windows.Win32.System.Com.IRunningObjectTable',
+  'Windows.Win32.System.Com.IUnknown',
   'Windows.Win32.System.Com.IUri',
   'Windows.Win32.System.Com.IDispatch',
   'Windows.Win32.System.Ole.IEnumVARIANT',

@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ispeventsource.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';
@@ -31,6 +31,9 @@ const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';
 class ISpVoice extends ISpEventSource {
   // vtable begins at 13, is 25 entries long.
   ISpVoice(super.ptr);
+
+  factory ISpVoice.from(IUnknown interface) =>
+      ISpVoice(interface.toInterface(IID_ISpVoice));
 
   int SetOutput(Pointer<COMObject> pUnkOutput, int fAllowFormatChanges) =>
       ptr.ref.vtable

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IWbemHiPerfEnum = '{2705C288-79AE-11D2-B348-00105A1F8177}';
 class IWbemHiPerfEnum extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IWbemHiPerfEnum(super.ptr);
+
+  factory IWbemHiPerfEnum.from(IUnknown interface) =>
+      IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
 
   int AddObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>

@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpeechObjectToken = '{C74A3ADC-B727-4500-A84A-B526721C8B8C}';
@@ -31,6 +31,9 @@ const IID_ISpeechObjectToken = '{C74A3ADC-B727-4500-A84A-B526721C8B8C}';
 class ISpeechObjectToken extends IDispatch {
   // vtable begins at 7, is 13 entries long.
   ISpeechObjectToken(super.ptr);
+
+  factory ISpeechObjectToken.from(IUnknown interface) =>
+      ISpeechObjectToken(interface.toInterface(IID_ISpeechObjectToken));
 
   Pointer<Utf16> get Id {
     final retValuePtr = calloc<Pointer<Utf16>>();

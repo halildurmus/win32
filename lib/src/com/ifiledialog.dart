@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'imodalwindow.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileDialog = '{42F85136-DB7E-439C-85F1-E4075D135FC8}';
@@ -31,6 +31,9 @@ const IID_IFileDialog = '{42F85136-DB7E-439C-85F1-E4075D135FC8}';
 class IFileDialog extends IModalWindow {
   // vtable begins at 4, is 23 entries long.
   IFileDialog(super.ptr);
+
+  factory IFileDialog.from(IUnknown interface) =>
+      IFileDialog(interface.toInterface(IID_IFileDialog));
 
   int SetFileTypes(int cFileTypes, Pointer<COMDLG_FILTERSPEC> rgFilterSpec) =>
       ptr.ref.vtable

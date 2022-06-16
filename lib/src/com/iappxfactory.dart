@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxFactory = '{BEB94909-E451-438B-B5A7-D79E767B75D8}';
 class IAppxFactory extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFactory(super.ptr);
+
+  factory IAppxFactory.from(IUnknown interface) =>
+      IAppxFactory(interface.toInterface(IID_IAppxFactory));
 
   int CreatePackageWriter(
           Pointer<COMObject> outputStream,

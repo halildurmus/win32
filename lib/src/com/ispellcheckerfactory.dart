@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
 class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   ISpellCheckerFactory(super.ptr);
+
+  factory ISpellCheckerFactory.from(IUnknown interface) =>
+      ISpellCheckerFactory(interface.toInterface(IID_ISpellCheckerFactory));
 
   Pointer<COMObject> get SupportedLanguages {
     final retValuePtr = calloc<Pointer<COMObject>>();

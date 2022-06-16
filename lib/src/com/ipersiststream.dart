@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ipersist.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IPersistStream = '{00000109-0000-0000-C000-000000000046}';
@@ -31,6 +31,9 @@ const IID_IPersistStream = '{00000109-0000-0000-C000-000000000046}';
 class IPersistStream extends IPersist {
   // vtable begins at 4, is 4 entries long.
   IPersistStream(super.ptr);
+
+  factory IPersistStream.from(IUnknown interface) =>
+      IPersistStream(interface.toInterface(IID_IPersistStream));
 
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)

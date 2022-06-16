@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ipersist.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IPersistFile = '{0000010B-0000-0000-C000-000000000046}';
@@ -31,6 +31,9 @@ const IID_IPersistFile = '{0000010B-0000-0000-C000-000000000046}';
 class IPersistFile extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistFile(super.ptr);
+
+  factory IPersistFile.from(IUnknown interface) =>
+      IPersistFile(interface.toInterface(IID_IPersistFile));
 
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)

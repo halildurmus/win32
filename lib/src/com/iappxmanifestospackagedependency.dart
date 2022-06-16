@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,6 +31,10 @@ const IID_IAppxManifestOSPackageDependency =
 class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(super.ptr);
+
+  factory IAppxManifestOSPackageDependency.from(IUnknown interface) =>
+      IAppxManifestOSPackageDependency(
+          interface.toInterface(IID_IAppxManifestOSPackageDependency));
 
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)

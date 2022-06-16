@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxFile = '{91DF827B-94FD-468F-827B-57F41B2F6F2E}';
 class IAppxFile extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFile(super.ptr);
+
+  factory IAppxFile.from(IUnknown interface) =>
+      IAppxFile(interface.toInterface(IID_IAppxFile));
 
   int GetCompressionOption(Pointer<Int32> compressionOption) =>
       ptr.ref.vtable

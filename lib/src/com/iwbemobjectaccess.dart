@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iwbemclassobject.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';
@@ -31,6 +31,9 @@ const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';
 class IWbemObjectAccess extends IWbemClassObject {
   // vtable begins at 27, is 10 entries long.
   IWbemObjectAccess(super.ptr);
+
+  factory IWbemObjectAccess.from(IUnknown interface) =>
+      IWbemObjectAccess(interface.toInterface(IID_IWbemObjectAccess));
 
   int
       GetPropertyHandle(Pointer<Utf16> wszPropertyName, Pointer<Int32> pType,

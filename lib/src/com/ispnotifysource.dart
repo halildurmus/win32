@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISpNotifySource = '{5EFF4AEF-8487-11D2-961C-00C04F8EE628}';
 class ISpNotifySource extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   ISpNotifySource(super.ptr);
+
+  factory ISpNotifySource.from(IUnknown interface) =>
+      ISpNotifySource(interface.toInterface(IID_ISpNotifySource));
 
   int SetNotifySink(Pointer<COMObject> pNotifySink) => ptr.ref.vtable
       .elementAt(3)

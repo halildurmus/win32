@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxManifestReader5 = '{8D7AE132-A690-4C00-B75A-6AAE1FEAAC80}';
 class IAppxManifestReader5 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IAppxManifestReader5(super.ptr);
+
+  factory IAppxManifestReader5.from(IUnknown interface) =>
+      IAppxManifestReader5(interface.toInterface(IID_IAppxManifestReader5));
 
   int GetMainPackageDependencies(
           Pointer<Pointer<COMObject>> mainPackageDependencies) =>

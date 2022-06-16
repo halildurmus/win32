@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxManifestReader7 = '{8EFE6F27-0CE0-4988-B32D-738EB63DB3B7}';
 class IAppxManifestReader7 extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestReader7(super.ptr);
+
+  factory IAppxManifestReader7.from(IUnknown interface) =>
+      IAppxManifestReader7(interface.toInterface(IID_IAppxManifestReader7));
 
   int
       GetDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISupportErrorInfo = '{DF0B3D60-548F-101B-8E65-08002B2BD119}';
 class ISupportErrorInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISupportErrorInfo(super.ptr);
+
+  factory ISupportErrorInfo.from(IUnknown interface) =>
+      ISupportErrorInfo(interface.toInterface(IID_ISupportErrorInfo));
 
   int InterfaceSupportsErrorInfo(Pointer<GUID> riid) => ptr.ref.vtable
       .elementAt(3)

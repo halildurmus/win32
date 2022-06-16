@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IVirtualDesktopManager = '{A5CD92FF-29BE-454C-8D04-D82879FB3F1B}';
 class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IVirtualDesktopManager(super.ptr);
+
+  factory IVirtualDesktopManager.from(IUnknown interface) =>
+      IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
 
   int IsWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>

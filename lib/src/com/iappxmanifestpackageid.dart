@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxManifestPackageId = '{283CE2D7-7153-4A91-9649-7A0F7240945F}';
 class IAppxManifestPackageId extends IUnknown {
   // vtable begins at 3, is 8 entries long.
   IAppxManifestPackageId(super.ptr);
+
+  factory IAppxManifestPackageId.from(IUnknown interface) =>
+      IAppxManifestPackageId(interface.toInterface(IID_IAppxManifestPackageId));
 
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)

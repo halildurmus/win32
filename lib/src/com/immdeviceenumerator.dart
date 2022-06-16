@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IMMDeviceEnumerator = '{A95664D2-9614-4F35-A746-DE8DB63617E6}';
 class IMMDeviceEnumerator extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IMMDeviceEnumerator(super.ptr);
+
+  factory IMMDeviceEnumerator.from(IUnknown interface) =>
+      IMMDeviceEnumerator(interface.toInterface(IID_IMMDeviceEnumerator));
 
   int EnumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ITypeInfo = '{00020401-0000-0000-C000-000000000046}';
 class ITypeInfo extends IUnknown {
   // vtable begins at 3, is 19 entries long.
   ITypeInfo(super.ptr);
+
+  factory ITypeInfo.from(IUnknown interface) =>
+      ITypeInfo(interface.toInterface(IID_ITypeInfo));
 
   int GetTypeAttr(Pointer<Pointer<TYPEATTR>> ppTypeAttr) => ptr.ref.vtable
           .elementAt(3)

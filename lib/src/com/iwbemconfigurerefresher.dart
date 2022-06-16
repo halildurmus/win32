@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,10 @@ const IID_IWbemConfigureRefresher = '{49353C92-516B-11D1-AEA6-00C04FB68820}';
 class IWbemConfigureRefresher extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IWbemConfigureRefresher(super.ptr);
+
+  factory IWbemConfigureRefresher.from(IUnknown interface) =>
+      IWbemConfigureRefresher(
+          interface.toInterface(IID_IWbemConfigureRefresher));
 
   int AddObjectByPath(
           Pointer<COMObject> pNamespace,

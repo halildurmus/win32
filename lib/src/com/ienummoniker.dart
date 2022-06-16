@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IEnumMoniker = '{00000102-0000-0000-C000-000000000046}';
 class IEnumMoniker extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumMoniker(super.ptr);
+
+  factory IEnumMoniker.from(IUnknown interface) =>
+      IEnumMoniker(interface.toInterface(IID_IEnumMoniker));
 
   int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
           Pointer<Uint32> pceltFetched) =>

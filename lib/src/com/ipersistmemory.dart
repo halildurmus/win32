@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ipersist.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';
@@ -31,6 +31,9 @@ const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';
 class IPersistMemory extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistMemory(super.ptr);
+
+  factory IPersistMemory.from(IUnknown interface) =>
+      IPersistMemory(interface.toInterface(IID_IPersistMemory));
 
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)

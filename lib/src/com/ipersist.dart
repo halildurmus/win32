@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IPersist = '{0000010C-0000-0000-C000-000000000046}';
 class IPersist extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IPersist(super.ptr);
+
+  factory IPersist.from(IUnknown interface) =>
+      IPersist(interface.toInterface(IID_IPersist));
 
   int GetClassID(Pointer<GUID> pClassID) => ptr.ref.vtable
           .elementAt(3)

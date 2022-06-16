@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IWbemLocator = '{DC12A687-737F-11CF-884D-00AA004B2E24}';
 class IWbemLocator extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemLocator(super.ptr);
+
+  factory IWbemLocator.from(IUnknown interface) =>
+      IWbemLocator(interface.toInterface(IID_IWbemLocator));
 
   int ConnectServer(
           Pointer<Utf16> strNetworkResource,

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IClassFactory = '{00000001-0000-0000-C000-000000000046}';
 class IClassFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IClassFactory(super.ptr);
+
+  factory IClassFactory.from(IUnknown interface) =>
+      IClassFactory(interface.toInterface(IID_IClassFactory));
 
   int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>

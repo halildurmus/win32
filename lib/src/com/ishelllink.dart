@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellLink = '{000214F9-0000-0000-C000-000000000046}';
 class IShellLink extends IUnknown {
   // vtable begins at 3, is 18 entries long.
   IShellLink(super.ptr);
+
+  factory IShellLink.from(IUnknown interface) =>
+      IShellLink(interface.toInterface(IID_IShellLink));
 
   int GetPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>

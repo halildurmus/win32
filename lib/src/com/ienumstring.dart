@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IEnumString = '{00000101-0000-0000-C000-000000000046}';
 class IEnumString extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumString(super.ptr);
+
+  factory IEnumString.from(IUnknown interface) =>
+      IEnumString(interface.toInterface(IID_IEnumString));
 
   int Next(int celt, Pointer<Pointer<Utf16>> rgelt,
           Pointer<Uint32> pceltFetched) =>

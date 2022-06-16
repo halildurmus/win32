@@ -20,8 +20,8 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileDialog2 = '{61744FC7-85B5-4791-A9B0-272276309B13}';
@@ -31,6 +31,9 @@ const IID_IFileDialog2 = '{61744FC7-85B5-4791-A9B0-272276309B13}';
 class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileDialog2(super.ptr);
+
+  factory IFileDialog2.from(IUnknown interface) =>
+      IFileDialog2(interface.toInterface(IID_IFileDialog2));
 
   int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(27)

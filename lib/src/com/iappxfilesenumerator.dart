@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxFilesEnumerator = '{F007EEAF-9831-411C-9847-917CDC62D1FE}';
 class IAppxFilesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxFilesEnumerator(super.ptr);
+
+  factory IAppxFilesEnumerator.from(IUnknown interface) =>
+      IAppxFilesEnumerator(interface.toInterface(IID_IAppxFilesEnumerator));
 
   int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.vtable
       .elementAt(3)

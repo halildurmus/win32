@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioCaptureClient = '{C8ADBD64-E71E-48A0-A4DE-185C395CD317}';
 class IAudioCaptureClient extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioCaptureClient(super.ptr);
+
+  factory IAudioCaptureClient.from(IUnknown interface) =>
+      IAudioCaptureClient(interface.toInterface(IID_IAudioCaptureClient));
 
   int GetBuffer(
           Pointer<Pointer<Uint8>> ppData,

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAppxManifestReader = '{4E1BD148-55A0-4480-A3D1-15544710637C}';
 class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAppxManifestReader(super.ptr);
+
+  factory IAppxManifestReader.from(IUnknown interface) =>
+      IAppxManifestReader(interface.toInterface(IID_IAppxManifestReader));
 
   int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr.ref.vtable
           .elementAt(3)

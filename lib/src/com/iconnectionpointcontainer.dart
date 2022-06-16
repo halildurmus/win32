@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,10 @@ const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
 class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IConnectionPointContainer(super.ptr);
+
+  factory IConnectionPointContainer.from(IUnknown interface) =>
+      IConnectionPointContainer(
+          interface.toInterface(IID_IConnectionPointContainer));
 
   int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
           .elementAt(3)

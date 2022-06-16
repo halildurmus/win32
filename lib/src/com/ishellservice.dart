@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellService = '{5836FB00-8187-11CF-A12B-00AA004AE837}';
 class IShellService extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellService(super.ptr);
+
+  factory IShellService.from(IUnknown interface) =>
+      IShellService(interface.toInterface(IID_IShellService));
 
   int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.vtable
           .elementAt(3)

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioRenderClient = '{F294ACFC-3146-4483-A7BF-ADDCA7C260E2}';
 class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioRenderClient(super.ptr);
+
+  factory IAudioRenderClient.from(IUnknown interface) =>
+      IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
 
   int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       ptr.ref.vtable

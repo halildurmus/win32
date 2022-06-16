@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellItem = '{43826D1E-E718-42EE-BC55-A1E261C37BFE}';
 class IShellItem extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellItem(super.ptr);
+
+  factory IShellItem.from(IUnknown interface) =>
+      IShellItem(interface.toInterface(IID_IShellItem));
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>

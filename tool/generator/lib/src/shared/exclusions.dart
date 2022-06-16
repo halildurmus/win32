@@ -32,9 +32,6 @@ const excludedWin32Structs = <String>{
 };
 
 const excludedComInterfaces = <String>{
-  // TODO: We may be able to remove this from the list.
-  'Windows.Win32.System.Com.IUnknown',
-
   // COM Interfaces that are weirdly named or internal artifacts.
   // TODO: Revisit these.
   'Windows.Win32.System.Mmc._AppEvents',

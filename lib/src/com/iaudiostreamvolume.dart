@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioStreamVolume = '{93014887-242D-4068-8A15-CF5E93B90FE3}';
 class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAudioStreamVolume(super.ptr);
+
+  factory IAudioStreamVolume.from(IUnknown interface) =>
+      IAudioStreamVolume(interface.toInterface(IID_IAudioStreamVolume));
 
   int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IConnectionPoint = '{B196B286-BAB4-101A-B69C-00AA00341D07}';
 class IConnectionPoint extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IConnectionPoint(super.ptr);
+
+  factory IConnectionPoint.from(IUnknown interface) =>
+      IConnectionPoint(interface.toInterface(IID_IConnectionPoint));
 
   int GetConnectionInterface(Pointer<GUID> pIID) => ptr.ref.vtable
       .elementAt(3)

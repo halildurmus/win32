@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioClient = '{1CB9AD4C-DBFA-4C32-B178-C2F568A703B2}';
 class IAudioClient extends IUnknown {
   // vtable begins at 3, is 12 entries long.
   IAudioClient(super.ptr);
+
+  factory IAudioClient.from(IUnknown interface) =>
+      IAudioClient(interface.toInterface(IID_IAudioClient));
 
   int Initialize(
           int ShareMode,

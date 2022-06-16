@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IKnownFolder = '{3AA7AF7E-9B36-420C-A8E3-F77D4674A488}';
 class IKnownFolder extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IKnownFolder(super.ptr);
+
+  factory IKnownFolder.from(IUnknown interface) =>
+      IKnownFolder(interface.toInterface(IID_IKnownFolder));
 
   int GetId(Pointer<GUID> pkfid) => ptr.ref.vtable
       .elementAt(3)

@@ -30,17 +30,17 @@ class IIterable<T> extends IInspectable {
   ///
   /// ```dart
   /// ...
-  /// final iterable = IIterable<String>.from(ptr);
+  /// final iterable = IIterable<String>.fromRawPointer(ptr);
   /// ```
   ///
   /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.from`, `IStorageFile.from` etc.
+  /// e.g. `IHostName.fromRawPointer`, `IStorageFile.fromRawPointer` etc.
   ///
   /// ```dart
   /// ...
   /// final allocator = Arena();
-  /// final iterable = IIterable<IHostName>.from(ptr, creator: IHostName.from,
-  ///     allocator: allocator);
+  /// final iterable = IIterable<IHostName>.fromRawPointer(ptr,
+  ///     creator: IHostName.fromRawPointer, allocator: allocator);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointer
@@ -48,7 +48,7 @@ class IIterable<T> extends IInspectable {
   /// may be passed as a custom allocator for ease of memory management.
   ///
   /// {@category winrt}
-  IIterable.from(super.ptr,
+  IIterable.fromRawPointer(super.ptr,
       {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
       : _creator = creator,
         _allocator = allocator {
@@ -76,7 +76,7 @@ class IIterable<T> extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IIterator.from(retValuePtr,
+    return IIterator.fromRawPointer(retValuePtr,
         creator: _creator, allocator: _allocator);
   }
 }

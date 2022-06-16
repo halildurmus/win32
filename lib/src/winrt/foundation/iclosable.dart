@@ -30,7 +30,10 @@ const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';
 /// {@category winrt}
 class IClosable extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IClosable.from(super.ptr);
+  IClosable.fromRawPointer(super.ptr);
+
+  factory IClosable.from(IInspectable interface) =>
+      IClosable.fromRawPointer(interface.toInterface(IID_IClosable));
 
   void Close() {
     final hr = ptr.ref.vtable

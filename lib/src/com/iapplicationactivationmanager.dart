@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,6 +31,10 @@ const IID_IApplicationActivationManager =
 class IApplicationActivationManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IApplicationActivationManager(super.ptr);
+
+  factory IApplicationActivationManager.from(IUnknown interface) =>
+      IApplicationActivationManager(
+          interface.toInterface(IID_IApplicationActivationManager));
 
   int ActivateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>

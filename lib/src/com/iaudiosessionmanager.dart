@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioSessionManager = '{BFA971F1-4D5E-40BB-935E-967039BFBEE4}';
 class IAudioSessionManager extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioSessionManager(super.ptr);
+
+  factory IAudioSessionManager.from(IUnknown interface) =>
+      IAudioSessionManager(interface.toInterface(IID_IAudioSessionManager));
 
   int GetAudioSessionControl(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> SessionControl) =>

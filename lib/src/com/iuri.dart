@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IUri = '{A39EE748-6A27-4817-A6F2-13914BEF5890}';
 class IUri extends IUnknown {
   // vtable begins at 3, is 25 entries long.
   IUri(super.ptr);
+
+  factory IUri.from(IUnknown interface) =>
+      IUri(interface.toInterface(IID_IUri));
 
   int GetPropertyBSTR(
           int uriProp, Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags) =>

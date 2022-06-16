@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IAudioClock = '{CD63314F-3FBA-4A1B-812C-EF96358728E7}';
 class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioClock(super.ptr);
+
+  factory IAudioClock.from(IUnknown interface) =>
+      IAudioClock(interface.toInterface(IID_IAudioClock));
 
   int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.vtable
       .elementAt(3)

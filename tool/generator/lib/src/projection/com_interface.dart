@@ -159,6 +159,11 @@ class ComInterfaceProjection {
     const IID_$shortName = '${typeDef.guid}';
   ''';
 
+  String get fromCOMObjectHelper => '''
+  factory $shortName.from(IUnknown interface) =>
+      $shortName(interface.toInterface(IID_$shortName));
+  ''';
+
   String get queryInterfaceHelper => shortName != 'IUnknown'
       ? ''
       : '''
@@ -205,6 +210,8 @@ class ComInterfaceProjection {
       class $shortName $extendsClause {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor
+
+        $fromCOMObjectHelper
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
 

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_ISpellChecker = '{B6FD0B71-E2BC-4653-8D05-F197E412770B}';
 class ISpellChecker extends IUnknown {
   // vtable begins at 3, is 14 entries long.
   ISpellChecker(super.ptr);
+
+  factory ISpellChecker.from(IUnknown interface) =>
+      ISpellChecker(interface.toInterface(IID_ISpellChecker));
 
   Pointer<Utf16> get LanguageTag {
     final retValuePtr = calloc<Pointer<Utf16>>();

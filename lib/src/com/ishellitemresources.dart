@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellItemResources = '{FF5693BE-2CE0-4D48-B5C5-40817D1ACDB9}';
 class IShellItemResources extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellItemResources(super.ptr);
+
+  factory IShellItemResources.from(IUnknown interface) =>
+      IShellItemResources(interface.toInterface(IID_IShellItemResources));
 
   int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
       .elementAt(3)

@@ -20,7 +20,6 @@ import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
-
 import 'iunknown.dart';
 
 /// @nodoc
@@ -31,6 +30,9 @@ const IID_IShellLinkDataList = '{45E2B4AE-B1C3-11D0-B92F-00A0C90312E1}';
 class IShellLinkDataList extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellLinkDataList(super.ptr);
+
+  factory IShellLinkDataList.from(IUnknown interface) =>
+      IShellLinkDataList(interface.toInterface(IID_IShellLinkDataList));
 
   int AddDataBlock(Pointer pDataBlock) => ptr.ref.vtable
       .elementAt(3)
