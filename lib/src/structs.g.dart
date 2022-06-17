@@ -2802,6 +2802,680 @@ extension IN_ADDR_Extension on IN_ADDR {
   set S_addr(int value) => this.S_un.S_addr = value;
 }
 
+/// The IP_ADAPTER_ADDRESSES structure is the header node for a linked list
+/// of addresses for a particular adapter. This structure can simultaneously
+/// be used as part of a linked list of IP_ADAPTER_ADDRESSES structures.
+///
+/// {@category Struct}
+class IP_ADAPTER_ADDRESSES_LH extends Struct {
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union Anonymous1;
+
+  external Pointer<IP_ADAPTER_ADDRESSES_LH> Next;
+
+  external Pointer<Utf8> AdapterName;
+
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> FirstUnicastAddress;
+
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> FirstAnycastAddress;
+
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> FirstMulticastAddress;
+
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> FirstDnsServerAddress;
+
+  external Pointer<Utf16> DnsSuffix;
+
+  external Pointer<Utf16> Description;
+
+  external Pointer<Utf16> FriendlyName;
+
+  @Array(8)
+  external Array<Uint8> PhysicalAddress;
+
+  @Uint32()
+  external int PhysicalAddressLength;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union Anonymous2;
+
+  @Uint32()
+  external int Mtu;
+
+  @Uint32()
+  external int IfType;
+
+  @Int32()
+  external int OperStatus;
+
+  @Uint32()
+  external int Ipv6IfIndex;
+
+  @Array(16)
+  external Array<Uint32> ZoneIndices;
+
+  external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
+
+  @Uint64()
+  external int TransmitLinkSpeed;
+
+  @Uint64()
+  external int ReceiveLinkSpeed;
+
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> FirstWinsServerAddress;
+
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> FirstGatewayAddress;
+
+  @Uint32()
+  external int Ipv4Metric;
+
+  @Uint32()
+  external int Ipv6Metric;
+
+  external NET_LUID_LH Luid;
+
+  external SOCKET_ADDRESS Dhcpv4Server;
+
+  @Uint32()
+  external int CompartmentId;
+
+  external GUID NetworkGuid;
+
+  @Int32()
+  external int ConnectionType;
+
+  @Int32()
+  external int TunnelType;
+
+  external SOCKET_ADDRESS Dhcpv6Server;
+
+  @Array(130)
+  external Array<Uint8> Dhcpv6ClientDuid;
+
+  @Uint32()
+  external int Dhcpv6ClientDuidLength;
+
+  @Uint32()
+  external int Dhcpv6Iaid;
+
+  external Pointer<IP_ADAPTER_DNS_SUFFIX> FirstDnsSuffix;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int IfIndex;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union_Extension
+    on IP_ADAPTER_ADDRESSES_LH {
+  int get Length => this.Anonymous1.Anonymous.Length;
+  set Length(int value) => this.Anonymous1.Anonymous.Length = value;
+
+  int get IfIndex => this.Anonymous1.Anonymous.IfIndex;
+  set IfIndex(int value) => this.Anonymous1.Anonymous.IfIndex = value;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH_Extension on IP_ADAPTER_ADDRESSES_LH {
+  int get Alignment => this.Anonymous1.Alignment;
+  set Alignment(int value) => this.Anonymous1.Alignment = value;
+
+  _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous1.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous1.Anonymous = value;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
+  @Uint32()
+  external int Flags;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int bitfield;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union_Extension
+    on IP_ADAPTER_ADDRESSES_LH {
+  int get bitfield => this.Anonymous2.Anonymous.bitfield;
+  set bitfield(int value) => this.Anonymous2.Anonymous.bitfield = value;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH_Extension_1 on IP_ADAPTER_ADDRESSES_LH {
+  int get Flags => this.Anonymous2.Flags;
+  set Flags(int value) => this.Anonymous2.Flags = value;
+
+  _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous2.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous2.Anonymous = value;
+}
+
+/// The IP_ADAPTER_ANYCAST_ADDRESS structure stores a single anycast IP
+/// address in a linked list of addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_ANYCAST_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_ANYCAST_ADDRESS_XP_Extension
+    on IP_ADAPTER_ANYCAST_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_DNS_SERVER_ADDRESS structure stores a single DNS server
+/// address in a linked list of DNS server addresses for a particular
+/// adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Extension
+    on IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_DNS_SUFFIX structure stores a DNS suffix in a linked list
+/// of DNS suffixes for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_DNS_SUFFIX extends Struct {
+  external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
+
+  @Array(256)
+  external Array<Uint16> _$String;
+
+  String get $String {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      if (_$String[i] == 0x00) break;
+      charCodes.add(_$String[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set $String(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _$String[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The IP_ADAPTER_GATEWAY_ADDRESS structure stores a single gateway address
+/// in a linked list of gateway addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_GATEWAY_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_GATEWAY_ADDRESS_LH_Extension
+    on IP_ADAPTER_GATEWAY_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_INDEX_MAP structure stores the interface index associated
+/// with a network adapter with IPv4 enabled together with the name of the
+/// network adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_INDEX_MAP extends Struct {
+  @Uint32()
+  external int Index;
+
+  @Array(128)
+  external Array<Uint16> _Name;
+
+  String get Name {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      if (_Name[i] == 0x00) break;
+      charCodes.add(_Name[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set Name(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _Name[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The IP_ADAPTER_MULTICAST_ADDRESS structure stores a single multicast
+/// address in a linked-list of addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_MULTICAST_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_MULTICAST_ADDRESS_XP_Extension
+    on IP_ADAPTER_MULTICAST_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_PREFIX structure stores an IP address prefix.
+///
+/// {@category Struct}
+class IP_ADAPTER_PREFIX_XP extends Struct {
+  external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_PREFIX_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+
+  @Uint32()
+  external int PrefixLength;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_PREFIX_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_PREFIX_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_PREFIX_XP_Extension on IP_ADAPTER_PREFIX_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_UNICAST_ADDRESS structure stores a single unicast IP
+/// address in a linked list of IP addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+
+  @Int32()
+  external int PrefixOrigin;
+
+  @Int32()
+  external int SuffixOrigin;
+
+  @Int32()
+  external int DadState;
+
+  @Uint32()
+  external int ValidLifetime;
+
+  @Uint32()
+  external int PreferredLifetime;
+
+  @Uint32()
+  external int LeaseLifetime;
+
+  @Uint8()
+  external int OnLinkPrefixLength;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_UNICAST_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_UNICAST_ADDRESS_LH_Extension
+    on IP_ADAPTER_UNICAST_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_WINS_SERVER_ADDRESS structure stores a single Windows
+/// Internet Name Service (WINS) server address in a linked list of WINS
+/// server addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Extension
+    on IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADDRESS_STRING structure stores an IPv4 address in dotted decimal
+/// notation. The IP_ADDRESS_STRING structure definition is also the type
+/// definition for the IP_MASK_STRING structure.
+///
+/// {@category Struct}
+class IP_ADDRESS_STRING extends Struct {
+  @Array(16)
+  external Array<Uint8> $String;
+}
+
+/// The IP_ADDR_STRING structure represents a node in a linked-list of IPv4
+/// addresses.
+///
+/// {@category Struct}
+class IP_ADDR_STRING extends Struct {
+  external Pointer<IP_ADDR_STRING> Next;
+
+  external IP_ADDRESS_STRING IpAddress;
+
+  external IP_ADDRESS_STRING IpMask;
+
+  @Uint32()
+  external int Context;
+}
+
+/// The IP_INTERFACE_INFO structure contains a list of the network interface
+/// adapters with IPv4 enabled on the local system.
+///
+/// {@category Struct}
+class IP_INTERFACE_INFO extends Struct {
+  @Int32()
+  external int NumAdapters;
+
+  @Array(1)
+  external Array<IP_ADAPTER_INDEX_MAP> Adapter;
+}
+
+/// The IP_PER_ADAPTER_INFO structure contains information specific to a
+/// particular adapter.
+///
+/// {@category Struct}
+class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
+  @Uint32()
+  external int AutoconfigEnabled;
+
+  @Uint32()
+  external int AutoconfigActive;
+
+  external Pointer<IP_ADDR_STRING> CurrentDnsServer;
+
+  external IP_ADDR_STRING DnsServerList;
+}
+
 /// Contains a list of item identifiers.
 ///
 /// {@category Struct}
@@ -3893,6 +4567,28 @@ class NDIS_OBJECT_HEADER extends Struct {
 
   @Uint16()
   external int Size;
+}
+
+/// The NET_LUID union is the locally unique identifier (LUID) for a network
+/// interface.
+///
+/// {@category Struct}
+class NET_LUID_LH extends Union {
+  @Uint64()
+  external int Value;
+
+  external _NET_LUID_LH__Info_e__Struct Info;
+}
+
+/// {@category Struct}
+class _NET_LUID_LH__Info_e__Struct extends Struct {
+  @Uint64()
+  external int bitfield;
+}
+
+extension NET_LUID_LH_Extension on NET_LUID_LH {
+  int get bitfield => this.Info.bitfield;
+  set bitfield(int value) => this.Info.bitfield = value;
 }
 
 /// The NEWTEXTMETRIC structure contains data that describes a physical
@@ -5676,6 +6372,17 @@ class SOCKADDR extends Struct {
 
   @Array(14)
   external Array<Uint8> sa_data;
+}
+
+/// The SOCKET_ADDRESS structure stores protocol-specific address
+/// information.
+///
+/// {@category Struct}
+class SOCKET_ADDRESS extends Struct {
+  external Pointer<SOCKADDR> lpSockaddr;
+
+  @Int32()
+  external int iSockaddrLength;
 }
 
 /// Identifies an authentication service that a server is willing to use to

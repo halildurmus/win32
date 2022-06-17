@@ -53,6 +53,11 @@
         "comment": "The AddForm function adds a form to the list of available forms that can be selected for the specified printer.",
         "category": "winspool"
     },
+    "AddIPAddress": {
+        "prototype": "DWORD AddIPAddress(\n  IPAddr Address,\n  IPMask IpMask,\n  DWORD  IfIndex,\n  PULONG NTEContext,\n  PULONG NTEInstance\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The AddIPAddress function adds the specified IPv4 address to the specified adapter."
+    },
     "AddJob": {
         "prototype": "BOOL AddJobW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
         "dllLibrary": "winspool",
@@ -1067,6 +1072,11 @@
         "dllLibrary": "winspool",
         "comment": "The DeleteForm function removes a form name from the list of supported forms."
     },
+    "DeleteIPAddress": {
+        "prototype": "DWORD DeleteIPAddress(\n  ULONG NTEContext\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The DeleteIPAddress function deletes an IP address previously added using AddIPAddress."
+    },
     "DeleteMenu": {
         "prototype": "BOOL DeleteMenu(\n  HMENU hMenu,\n  UINT  uPosition,\n  UINT  uFlags\n);",
         "dllLibrary": "user32",
@@ -1740,6 +1750,16 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the window handle to the active window attached to the calling thread's message queue."
     },
+    "GetAdapterIndex": {
+        "prototype": "DWORD GetAdapterIndex(\n  LPWSTR AdapterName,\n  PULONG IfIndex\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The GetAdapterIndex function obtains the index of an adapter, given its name."
+    },
+    "GetAdaptersAddresses": {
+        "prototype": "ULONG GetAdaptersAddresses(\n  ULONG                 Family,\n  ULONG                 Flags,\n  PVOID                 Reserved,\n  PIP_ADAPTER_ADDRESSES AdapterAddresses,\n  PULONG                SizePointer\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The GetAdaptersAddresses function retrieves the addresses associated with the adapters on the local computer."
+    },
     "GetAddrInfoW": {
         "prototype": "INT WSAAPI GetAddrInfoW(\n  PCWSTR          pNodeName,\n  PCWSTR          pServiceName,\n  const ADDRINFOW *pHints,\n  PADDRINFOW      *ppResult\n);",
         "dllLibrary": "ws2_32",
@@ -2255,6 +2275,11 @@
         "category": "kernel32",
         "minimumWindowsVersion": "WIN10_TH1"
     },
+    "GetInterfaceInfo": {
+        "prototype": "DWORD GetInterfaceInfo(\n  PIP_INTERFACE_INFO pIfTable,\n  PULONG             dwOutBufLen\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The GetInterfaceInfo function obtains the list of the network interface adapters with IPv4 enabled on the local system."
+    },
     "GetJob": {
         "prototype": "BOOL GetJobW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   JobId,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
         "dllLibrary": "winspool",
@@ -2580,6 +2605,11 @@
         "comment": "The getpeername function retrieves the address of the peer to which a socket is connected.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "GetPerAdapterInfo": {
+        "prototype": "DWORD GetPerAdapterInfo(\n  ULONG                IfIndex,\n  PIP_PER_ADAPTER_INFO pPerAdapterInfo,\n  PULONG               pOutBufLen\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The GetPerAdapterInfo function retrieves information about the adapter corresponding to the specified interface."
     },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
@@ -3345,6 +3375,16 @@
         "comment": "The ioctlsocket function controls the I/O mode of a socket.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "IpReleaseAddress": {
+        "prototype": "DWORD IpReleaseAddress(\n  PIP_ADAPTER_INDEX_MAP AdapterInfo\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The IpReleaseAddress function releases an IPv4 address previously obtained through the Dynamic Host Configuration Protocol (DHCP)."
+    },
+    "IpRenewAddress": {
+        "prototype": "DWORD IpRenewAddress(\n  PIP_ADAPTER_INDEX_MAP AdapterInfo\n);",
+        "dllLibrary": "iphlpapi",
+        "comment": "The IpRenewAddress function renews a lease on an IPv4 address previously obtained through Dynamic Host Configuration Protocol (DHCP)."
     },
     "IsAppThemed": {
         "prototype": "BOOL IsAppThemed();",

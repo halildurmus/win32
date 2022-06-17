@@ -30,6 +30,7 @@
 #include <bluetoothleapis.h>
 #include <DbgHelp.h>
 #include <dwmapi.h>
+#include <iphlpapi.h>
 #include <magnification.h>
 #include <mmreg.h>
 #include <netlistmgr.h>
@@ -154,6 +155,22 @@ void main()
     printf("  'IN_ADDR': %zu,\n", sizeof(IN_ADDR));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
+    printf("  'IP_ADAPTER_INDEX_MAP': %zu,\n", sizeof(IP_ADAPTER_INDEX_MAP));
+    printf("  'IP_ADAPTER_ADDRESSES_LH': %zu,\n", sizeof(IP_ADAPTER_ADDRESSES_LH));
+    printf("  'IP_INTERFACE_INFO': %zu,\n", sizeof(IP_INTERFACE_INFO));
+    printf("  'IP_PER_ADAPTER_INFO_W2KSP1': %zu,\n", sizeof(IP_PER_ADAPTER_INFO_W2KSP1));
+    printf("  'IP_ADAPTER_UNICAST_ADDRESS_LH': %zu,\n", sizeof(IP_ADAPTER_UNICAST_ADDRESS_LH));
+    printf("  'IP_ADAPTER_ANYCAST_ADDRESS_XP': %zu,\n", sizeof(IP_ADAPTER_ANYCAST_ADDRESS_XP));
+    printf("  'IP_ADAPTER_MULTICAST_ADDRESS_XP': %zu,\n", sizeof(IP_ADAPTER_MULTICAST_ADDRESS_XP));
+    printf("  'IP_ADAPTER_DNS_SERVER_ADDRESS_XP': %zu,\n", sizeof(IP_ADAPTER_DNS_SERVER_ADDRESS_XP));
+    printf("  'IP_ADAPTER_PREFIX_XP': %zu,\n", sizeof(IP_ADAPTER_PREFIX_XP));
+    printf("  'IP_ADAPTER_WINS_SERVER_ADDRESS_LH': %zu,\n", sizeof(IP_ADAPTER_WINS_SERVER_ADDRESS_LH));
+    printf("  'IP_ADAPTER_GATEWAY_ADDRESS_LH': %zu,\n", sizeof(IP_ADAPTER_GATEWAY_ADDRESS_LH));
+    printf("  'NET_LUID_LH': %zu,\n", sizeof(NET_LUID_LH));
+    printf("  'SOCKET_ADDRESS': %zu,\n", sizeof(SOCKET_ADDRESS));
+    printf("  'IP_ADDR_STRING': %zu,\n", sizeof(IP_ADDR_STRING));
+    printf("  'IP_ADAPTER_DNS_SUFFIX': %zu,\n", sizeof(IP_ADAPTER_DNS_SUFFIX));
+    printf("  'IP_ADDRESS_STRING': %zu,\n", sizeof(IP_ADDRESS_STRING));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
     printf("  'KBDLLHOOKSTRUCT': %zu,\n", sizeof(KBDLLHOOKSTRUCT));

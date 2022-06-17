@@ -7240,6 +7240,92 @@ void main() {
     });
   });
 
+  group('Test iphlpapi functions', () {
+    test('Can instantiate AddIPAddress', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final AddIPAddress = iphlpapi.lookupFunction<
+          Uint32 Function(Uint32 Address, Uint32 IpMask, Uint32 IfIndex,
+              Pointer<Uint32> NTEContext, Pointer<Uint32> NTEInstance),
+          int Function(
+              int Address,
+              int IpMask,
+              int IfIndex,
+              Pointer<Uint32> NTEContext,
+              Pointer<Uint32> NTEInstance)>('AddIPAddress');
+      expect(AddIPAddress, isA<Function>());
+    });
+    test('Can instantiate DeleteIPAddress', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final DeleteIPAddress = iphlpapi.lookupFunction<
+          Uint32 Function(Uint32 NTEContext),
+          int Function(int NTEContext)>('DeleteIPAddress');
+      expect(DeleteIPAddress, isA<Function>());
+    });
+    test('Can instantiate GetAdapterIndex', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final GetAdapterIndex = iphlpapi.lookupFunction<
+          Uint32 Function(Pointer<Utf16> AdapterName, Pointer<Uint32> IfIndex),
+          int Function(Pointer<Utf16> AdapterName,
+              Pointer<Uint32> IfIndex)>('GetAdapterIndex');
+      expect(GetAdapterIndex, isA<Function>());
+    });
+    test('Can instantiate GetAdaptersAddresses', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final GetAdaptersAddresses = iphlpapi.lookupFunction<
+          Uint32 Function(
+              Uint32 Family,
+              Uint32 Flags,
+              Pointer Reserved,
+              Pointer<IP_ADAPTER_ADDRESSES_LH> AdapterAddresses,
+              Pointer<Uint32> SizePointer),
+          int Function(
+              int Family,
+              int Flags,
+              Pointer Reserved,
+              Pointer<IP_ADAPTER_ADDRESSES_LH> AdapterAddresses,
+              Pointer<Uint32> SizePointer)>('GetAdaptersAddresses');
+      expect(GetAdaptersAddresses, isA<Function>());
+    });
+    test('Can instantiate GetInterfaceInfo', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final GetInterfaceInfo = iphlpapi.lookupFunction<
+          Uint32 Function(
+              Pointer<IP_INTERFACE_INFO> pIfTable, Pointer<Uint32> dwOutBufLen),
+          int Function(Pointer<IP_INTERFACE_INFO> pIfTable,
+              Pointer<Uint32> dwOutBufLen)>('GetInterfaceInfo');
+      expect(GetInterfaceInfo, isA<Function>());
+    });
+    test('Can instantiate GetPerAdapterInfo', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final GetPerAdapterInfo = iphlpapi.lookupFunction<
+          Uint32 Function(
+              Uint32 IfIndex,
+              Pointer<IP_PER_ADAPTER_INFO_W2KSP1> pPerAdapterInfo,
+              Pointer<Uint32> pOutBufLen),
+          int Function(
+              int IfIndex,
+              Pointer<IP_PER_ADAPTER_INFO_W2KSP1> pPerAdapterInfo,
+              Pointer<Uint32> pOutBufLen)>('GetPerAdapterInfo');
+      expect(GetPerAdapterInfo, isA<Function>());
+    });
+    test('Can instantiate IpReleaseAddress', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final IpReleaseAddress = iphlpapi.lookupFunction<
+          Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP> AdapterInfo),
+          int Function(
+              Pointer<IP_ADAPTER_INDEX_MAP> AdapterInfo)>('IpReleaseAddress');
+      expect(IpReleaseAddress, isA<Function>());
+    });
+    test('Can instantiate IpRenewAddress', () {
+      final iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+      final IpRenewAddress = iphlpapi.lookupFunction<
+          Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP> AdapterInfo),
+          int Function(
+              Pointer<IP_ADAPTER_INDEX_MAP> AdapterInfo)>('IpRenewAddress');
+      expect(IpRenewAddress, isA<Function>());
+    });
+  });
+
   group('Test winspool functions', () {
     test('Can instantiate AddJob', () {
       final winspool = DynamicLibrary.open('winspool.drv');
