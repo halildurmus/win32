@@ -31,6 +31,9 @@ class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IKnownFolderManager(super.ptr);
 
+  factory IKnownFolderManager.from(IUnknown interface) =>
+      IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
+
   int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -186,9 +189,6 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<GUID> pExclusion,
                       Pointer<Pointer<Utf16>> ppszError)>()(ptr.ref.lpVtbl,
           rfid, hwnd, flags, pszTargetPath, cFolders, pExclusion, ppszError);
-
-  factory IKnownFolderManager.from(IUnknown interface) =>
-      IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
 }
 
 /// @nodoc

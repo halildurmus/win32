@@ -32,6 +32,9 @@ class ISpeechObjectTokens extends IDispatch {
   // vtable begins at 7, is 3 entries long.
   ISpeechObjectTokens(super.ptr);
 
+  factory ISpeechObjectTokens.from(IUnknown interface) =>
+      ISpeechObjectTokens(interface.toInterface(IID_ISpeechObjectTokens));
+
   int get Count {
     final retValuePtr = calloc<Int32>();
 
@@ -93,7 +96,4 @@ class ISpeechObjectTokens extends IDispatch {
       free(retValuePtr);
     }
   }
-
-  factory ISpeechObjectTokens.from(IUnknown interface) =>
-      ISpeechObjectTokens(interface.toInterface(IID_ISpeechObjectTokens));
 }

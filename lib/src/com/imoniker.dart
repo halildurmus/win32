@@ -32,6 +32,9 @@ class IMoniker extends IPersistStream {
   // vtable begins at 8, is 15 entries long.
   IMoniker(super.ptr);
 
+  factory IMoniker.from(IUnknown interface) =>
+      IMoniker(interface.toInterface(IID_IMoniker));
+
   int BindToObject(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riidResult, Pointer<Pointer> ppvResult) =>
       ptr.ref.vtable
@@ -303,7 +306,4 @@ class IMoniker extends IPersistStream {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwMksys)>()(
       ptr.ref.lpVtbl, pdwMksys);
-
-  factory IMoniker.from(IUnknown interface) =>
-      IMoniker(interface.toInterface(IID_IMoniker));
 }

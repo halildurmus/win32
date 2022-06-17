@@ -31,6 +31,9 @@ class IAppxFilesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxFilesEnumerator(super.ptr);
 
+  factory IAppxFilesEnumerator.from(IUnknown interface) =>
+      IAppxFilesEnumerator(interface.toInterface(IID_IAppxFilesEnumerator));
+
   int GetCurrent(Pointer<Pointer<COMObject>> file) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -61,7 +64,4 @@ class IAppxFilesEnumerator extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> hasNext)>()(
       ptr.ref.lpVtbl, hasNext);
-
-  factory IAppxFilesEnumerator.from(IUnknown interface) =>
-      IAppxFilesEnumerator(interface.toInterface(IID_IAppxFilesEnumerator));
 }

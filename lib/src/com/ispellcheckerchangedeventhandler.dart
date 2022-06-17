@@ -32,6 +32,10 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(super.ptr);
 
+  factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
+      ISpellCheckerChangedEventHandler(
+          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
+
   int Invoke(Pointer<COMObject> sender) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -41,8 +45,4 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> sender)>()(
       ptr.ref.lpVtbl, sender);
-
-  factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
-      ISpellCheckerChangedEventHandler(
-          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
 }

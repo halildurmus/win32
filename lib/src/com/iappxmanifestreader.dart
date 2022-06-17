@@ -31,6 +31,9 @@ class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAppxManifestReader(super.ptr);
 
+  factory IAppxManifestReader.from(IUnknown interface) =>
+      IAppxManifestReader(interface.toInterface(IID_IAppxManifestReader));
+
   int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -149,7 +152,4 @@ class IAppxManifestReader extends IUnknown {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> manifestStream)>()(
       ptr.ref.lpVtbl, manifestStream);
-
-  factory IAppxManifestReader.from(IUnknown interface) =>
-      IAppxManifestReader(interface.toInterface(IID_IAppxManifestReader));
 }

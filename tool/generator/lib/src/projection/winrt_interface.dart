@@ -154,6 +154,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String get classDeclaration => 'class $shortName extends IInspectable'
       '${inheritsFrom.isNotEmpty ? ' implements $inheritsFrom {' : ' {'}';
 
+  @override
+  String get fromCOMObjectHelper => '''
+  factory $shortName.from(IInspectable interface) =>
+      $shortName.fromRawPointer(interface.toInterface(IID_$shortName));
+  ''';
+
   List<TypeDef> get implementsInterfaces => typeDef.interfaces
     // Generic collections' typeDef returns an empty name and that breaks lots
     // of things. We need to ignore them for now
@@ -167,9 +173,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
       // Write out the private field identifier for the interface
       final fieldIdentifier = '_i${interfaceName.substring(1)}';
-      final iid = 'IID_$interfaceName';
-      buffer.writeln(
-          'late final $fieldIdentifier = $interfaceName.from(toInterface($iid));');
+      buffer
+          .writeln('late final $fieldIdentifier = $interfaceName.from(this);');
 
       final projection = WinRTInterfaceProjection(interface);
       for (final method in projection.methodProjections) {
@@ -196,7 +201,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       /// {@category $category}
       $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
-        $shortName.from(super.ptr);
+        $shortName.fromRawPointer(super.ptr);
+
+        $fromCOMObjectHelper
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
 

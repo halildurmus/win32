@@ -31,7 +31,11 @@ const IID_IPhoneNumberFormatter = '{1556B49E-BAD4-4B4A-900D-4407ADB7C981}';
 /// {@category winrt}
 class IPhoneNumberFormatter extends IInspectable {
   // vtable begins at 6, is 5 entries long.
-  IPhoneNumberFormatter.from(super.ptr);
+  IPhoneNumberFormatter.fromRawPointer(super.ptr);
+
+  factory IPhoneNumberFormatter.from(IInspectable interface) =>
+      IPhoneNumberFormatter.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberFormatter));
 
   String Format(Pointer<COMObject> number) {
     final retValuePtr = calloc<HSTRING>();

@@ -32,6 +32,9 @@ class ISpEventSource extends ISpNotifySource {
   // vtable begins at 10, is 3 entries long.
   ISpEventSource(super.ptr);
 
+  factory ISpEventSource.from(IUnknown interface) =>
+      ISpEventSource(interface.toInterface(IID_ISpEventSource));
+
   int SetInterest(int ullEventInterest, int ullQueuedInterest) => ptr.ref.vtable
           .elementAt(10)
           .cast<
@@ -76,7 +79,4 @@ class ISpEventSource extends ISpNotifySource {
       .asFunction<
           int Function(Pointer,
               Pointer<SPEVENTSOURCEINFO> pInfo)>()(ptr.ref.lpVtbl, pInfo);
-
-  factory ISpEventSource.from(IUnknown interface) =>
-      ISpEventSource(interface.toInterface(IID_ISpEventSource));
 }

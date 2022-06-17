@@ -31,6 +31,9 @@ class IBindCtx extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IBindCtx(super.ptr);
 
+  factory IBindCtx.from(IUnknown interface) =>
+      IBindCtx(interface.toInterface(IID_IBindCtx));
+
   int RegisterObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -138,7 +141,4 @@ class IBindCtx extends IUnknown {
       .asFunction<
           int Function(
               Pointer, Pointer<Utf16> pszKey)>()(ptr.ref.lpVtbl, pszKey);
-
-  factory IBindCtx.from(IUnknown interface) =>
-      IBindCtx(interface.toInterface(IID_IBindCtx));
 }

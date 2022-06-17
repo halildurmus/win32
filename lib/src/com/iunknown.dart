@@ -40,6 +40,9 @@ class IUnknown implements Finalizable {
     _finalizer.attach(this, ptr.cast(), detach: this, externalSize: 8);
   }
 
+  factory IUnknown.from(IUnknown interface) =>
+      IUnknown(interface.toInterface(IID_IUnknown));
+
   int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
       .ref.vtable
       .elementAt(0)
@@ -81,7 +84,4 @@ class IUnknown implements Finalizable {
       calloc.free(pIID);
     }
   }
-
-  factory IUnknown.from(IUnknown interface) =>
-      IUnknown(interface.toInterface(IID_IUnknown));
 }

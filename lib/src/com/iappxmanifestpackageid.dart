@@ -31,6 +31,9 @@ class IAppxManifestPackageId extends IUnknown {
   // vtable begins at 3, is 8 entries long.
   IAppxManifestPackageId(super.ptr);
 
+  factory IAppxManifestPackageId.from(IUnknown interface) =>
+      IAppxManifestPackageId(interface.toInterface(IID_IAppxManifestPackageId));
+
   int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -127,7 +130,4 @@ class IAppxManifestPackageId extends IUnknown {
                   int Function(
                       Pointer, Pointer<Pointer<Utf16>> packageFamilyName)>()(
           ptr.ref.lpVtbl, packageFamilyName);
-
-  factory IAppxManifestPackageId.from(IUnknown interface) =>
-      IAppxManifestPackageId(interface.toInterface(IID_IAppxManifestPackageId));
 }

@@ -31,6 +31,9 @@ class IEnumResources extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumResources(super.ptr);
 
+  factory IEnumResources.from(IUnknown interface) =>
+      IEnumResources(interface.toInterface(IID_IEnumResources));
+
   int Next(int celt, Pointer<SHELL_ITEM_RESOURCE> psir,
           Pointer<Uint32> pceltFetched) =>
       ptr.ref.vtable
@@ -75,7 +78,4 @@ class IEnumResources extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
       ptr.ref.lpVtbl, ppenumr);
-
-  factory IEnumResources.from(IUnknown interface) =>
-      IEnumResources(interface.toInterface(IID_IEnumResources));
 }

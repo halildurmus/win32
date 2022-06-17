@@ -31,6 +31,9 @@ class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAudioStreamVolume(super.ptr);
 
+  factory IAudioStreamVolume.from(IUnknown interface) =>
+      IAudioStreamVolume(interface.toInterface(IID_IAudioStreamVolume));
+
   int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -86,7 +89,4 @@ class IAudioStreamVolume extends IUnknown {
       .asFunction<
           int Function(Pointer, int dwCount,
               Pointer<Float> pfVolumes)>()(ptr.ref.lpVtbl, dwCount, pfVolumes);
-
-  factory IAudioStreamVolume.from(IUnknown interface) =>
-      IAudioStreamVolume(interface.toInterface(IID_IAudioStreamVolume));
 }

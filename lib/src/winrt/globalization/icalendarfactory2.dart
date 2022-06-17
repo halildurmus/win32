@@ -32,7 +32,11 @@ const IID_ICalendarFactory2 = '{B44B378C-CA7E-4590-9E72-EA2BEC1A5115}';
 /// {@category winrt}
 class ICalendarFactory2 extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  ICalendarFactory2.from(super.ptr);
+  ICalendarFactory2.fromRawPointer(super.ptr);
+
+  factory ICalendarFactory2.from(IInspectable interface) =>
+      ICalendarFactory2.fromRawPointer(
+          interface.toInterface(IID_ICalendarFactory2));
 
   Pointer<COMObject> CreateCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {

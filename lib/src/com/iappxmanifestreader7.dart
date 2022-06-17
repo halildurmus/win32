@@ -31,6 +31,9 @@ class IAppxManifestReader7 extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestReader7(super.ptr);
 
+  factory IAppxManifestReader7.from(IUnknown interface) =>
+      IAppxManifestReader7(interface.toInterface(IID_IAppxManifestReader7));
+
   int
       GetDriverDependencies(Pointer<Pointer<COMObject>> driverDependencies) =>
           ptr.ref.vtable
@@ -82,7 +85,4 @@ class IAppxManifestReader7 extends IUnknown {
                   int Function(Pointer,
                       Pointer<Pointer<COMObject>> hostRuntimeDependencies)>()(
           ptr.ref.lpVtbl, hostRuntimeDependencies);
-
-  factory IAppxManifestReader7.from(IUnknown interface) =>
-      IAppxManifestReader7(interface.toInterface(IID_IAppxManifestReader7));
 }

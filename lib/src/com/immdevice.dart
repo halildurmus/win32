@@ -31,6 +31,9 @@ class IMMDevice extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IMMDevice(super.ptr);
 
+  factory IMMDevice.from(IUnknown interface) =>
+      IMMDevice(interface.toInterface(IID_IMMDevice));
+
   int Activate(
           Pointer<GUID> iid,
           int dwClsCtx,
@@ -93,7 +96,4 @@ class IMMDevice extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwState)>()(
       ptr.ref.lpVtbl, pdwState);
-
-  factory IMMDevice.from(IUnknown interface) =>
-      IMMDevice(interface.toInterface(IID_IMMDevice));
 }

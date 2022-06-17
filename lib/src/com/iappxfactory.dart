@@ -31,6 +31,9 @@ class IAppxFactory extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFactory(super.ptr);
 
+  factory IAppxFactory.from(IUnknown interface) =>
+      IAppxFactory(interface.toInterface(IID_IAppxFactory));
+
   int CreatePackageWriter(
           Pointer<COMObject> outputStream,
           Pointer<APPX_PACKAGE_SETTINGS> settings,
@@ -121,9 +124,6 @@ class IAppxFactory extends IUnknown {
                       Pointer<Utf16> signatureFileName,
                       Pointer<Pointer<COMObject>> blockMapReader)>()(
           ptr.ref.lpVtbl, blockMapStream, signatureFileName, blockMapReader);
-
-  factory IAppxFactory.from(IUnknown interface) =>
-      IAppxFactory(interface.toInterface(IID_IAppxFactory));
 }
 
 /// @nodoc

@@ -31,6 +31,9 @@ class IWbemClassObject extends IUnknown {
   // vtable begins at 3, is 24 entries long.
   IWbemClassObject(super.ptr);
 
+  factory IWbemClassObject.from(IUnknown interface) =>
+      IWbemClassObject(interface.toInterface(IID_IWbemClassObject));
+
   int GetQualifierSet(Pointer<Pointer<COMObject>> ppQualSet) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -393,9 +396,6 @@ class IWbemClassObject extends IUnknown {
                   int Function(Pointer, Pointer<Utf16> wszMethodName,
                       Pointer<Pointer<Utf16>> pstrClassName)>()(
           ptr.ref.lpVtbl, wszMethodName, pstrClassName);
-
-  factory IWbemClassObject.from(IUnknown interface) =>
-      IWbemClassObject(interface.toInterface(IID_IWbemClassObject));
 }
 
 /// @nodoc

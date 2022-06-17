@@ -31,6 +31,9 @@ class IShellItem extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellItem(super.ptr);
 
+  factory IShellItem.from(IUnknown interface) =>
+      IShellItem(interface.toInterface(IID_IShellItem));
+
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
@@ -105,9 +108,6 @@ class IShellItem extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<COMObject> psi, int hint,
               Pointer<Int32> piOrder)>()(ptr.ref.lpVtbl, psi, hint, piOrder);
-
-  factory IShellItem.from(IUnknown interface) =>
-      IShellItem(interface.toInterface(IID_IShellItem));
 }
 
 /// @nodoc

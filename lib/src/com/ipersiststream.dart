@@ -32,6 +32,9 @@ class IPersistStream extends IPersist {
   // vtable begins at 4, is 4 entries long.
   IPersistStream(super.ptr);
 
+  factory IPersistStream.from(IUnknown interface) =>
+      IPersistStream(interface.toInterface(IID_IPersistStream));
+
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -69,7 +72,4 @@ class IPersistStream extends IPersist {
           .value
           .asFunction<int Function(Pointer, Pointer<Uint64> pcbSize)>()(
       ptr.ref.lpVtbl, pcbSize);
-
-  factory IPersistStream.from(IUnknown interface) =>
-      IPersistStream(interface.toInterface(IID_IPersistStream));
 }

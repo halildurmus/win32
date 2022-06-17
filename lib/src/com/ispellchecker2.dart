@@ -32,6 +32,9 @@ class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.
   ISpellChecker2(super.ptr);
 
+  factory ISpellChecker2.from(IUnknown interface) =>
+      ISpellChecker2(interface.toInterface(IID_ISpellChecker2));
+
   int Remove(Pointer<Utf16> word) => ptr.ref.vtable
       .elementAt(17)
       .cast<
@@ -40,7 +43,4 @@ class ISpellChecker2 extends ISpellChecker {
       .value
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
-
-  factory ISpellChecker2.from(IUnknown interface) =>
-      ISpellChecker2(interface.toInterface(IID_ISpellChecker2));
 }

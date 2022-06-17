@@ -32,6 +32,9 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
   // vtable begins at 13, is 2 entries long.
   IAppxManifestReader3(super.ptr);
 
+  factory IAppxManifestReader3.from(IUnknown interface) =>
+      IAppxManifestReader3(interface.toInterface(IID_IAppxManifestReader3));
+
   int GetCapabilitiesByCapabilityClass(
           int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
       ptr.ref.vtable
@@ -64,7 +67,4 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
                       int Function(Pointer,
                           Pointer<Pointer<COMObject>> targetDeviceFamilies)>()(
               ptr.ref.lpVtbl, targetDeviceFamilies);
-
-  factory IAppxManifestReader3.from(IUnknown interface) =>
-      IAppxManifestReader3(interface.toInterface(IID_IAppxManifestReader3));
 }

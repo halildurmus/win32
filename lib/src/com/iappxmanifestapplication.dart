@@ -31,6 +31,10 @@ class IAppxManifestApplication extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestApplication(super.ptr);
 
+  factory IAppxManifestApplication.from(IUnknown interface) =>
+      IAppxManifestApplication(
+          interface.toInterface(IID_IAppxManifestApplication));
+
   int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
       .ref.vtable
       .elementAt(3)
@@ -56,8 +60,4 @@ class IAppxManifestApplication extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<Utf16>> appUserModelId)>()(
       ptr.ref.lpVtbl, appUserModelId);
-
-  factory IAppxManifestApplication.from(IUnknown interface) =>
-      IAppxManifestApplication(
-          interface.toInterface(IID_IAppxManifestApplication));
 }

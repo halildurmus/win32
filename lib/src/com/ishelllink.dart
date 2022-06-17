@@ -31,6 +31,9 @@ class IShellLink extends IUnknown {
   // vtable begins at 3, is 18 entries long.
   IShellLink(super.ptr);
 
+  factory IShellLink.from(IUnknown interface) =>
+      IShellLink(interface.toInterface(IID_IShellLink));
+
   int GetPath(Pointer<Utf16> pszFile, int cch, Pointer<WIN32_FIND_DATA> pfd,
           int fFlags) =>
       ptr.ref.vtable
@@ -228,9 +231,6 @@ class IShellLink extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Utf16> pszFile)>()(
       ptr.ref.lpVtbl, pszFile);
-
-  factory IShellLink.from(IUnknown interface) =>
-      IShellLink(interface.toInterface(IID_IShellLink));
 }
 
 /// @nodoc

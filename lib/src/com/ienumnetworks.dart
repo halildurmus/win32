@@ -32,6 +32,9 @@ class IEnumNetworks extends IDispatch {
   // vtable begins at 7, is 5 entries long.
   IEnumNetworks(super.ptr);
 
+  factory IEnumNetworks.from(IUnknown interface) =>
+      IEnumNetworks(interface.toInterface(IID_IEnumNetworks));
+
   Pointer<COMObject> get NewEnum {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
@@ -103,7 +106,4 @@ class IEnumNetworks extends IDispatch {
               int Function(
                   Pointer, Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
       ptr.ref.lpVtbl, ppEnumNetwork);
-
-  factory IEnumNetworks.from(IUnknown interface) =>
-      IEnumNetworks(interface.toInterface(IID_IEnumNetworks));
 }

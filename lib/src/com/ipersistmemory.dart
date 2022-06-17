@@ -32,6 +32,9 @@ class IPersistMemory extends IPersist {
   // vtable begins at 4, is 5 entries long.
   IPersistMemory(super.ptr);
 
+  factory IPersistMemory.from(IUnknown interface) =>
+      IPersistMemory(interface.toInterface(IID_IPersistMemory));
+
   int IsDirty() => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -75,7 +78,4 @@ class IPersistMemory extends IPersist {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory IPersistMemory.from(IUnknown interface) =>
-      IPersistMemory(interface.toInterface(IID_IPersistMemory));
 }

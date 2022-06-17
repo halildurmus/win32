@@ -31,6 +31,9 @@ class IShellService extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellService(super.ptr);
 
+  factory IShellService.from(IUnknown interface) =>
+      IShellService(interface.toInterface(IID_IShellService));
+
   int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -40,7 +43,4 @@ class IShellService extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<COMObject> punkOwner)>()(
       ptr.ref.lpVtbl, punkOwner);
-
-  factory IShellService.from(IUnknown interface) =>
-      IShellService(interface.toInterface(IID_IShellService));
 }

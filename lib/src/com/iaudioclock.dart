@@ -31,6 +31,9 @@ class IAudioClock extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioClock(super.ptr);
 
+  factory IAudioClock.from(IUnknown interface) =>
+      IAudioClock(interface.toInterface(IID_IAudioClock));
+
   int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -68,7 +71,4 @@ class IAudioClock extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Uint32> pdwCharacteristics)>()(
       ptr.ref.lpVtbl, pdwCharacteristics);
-
-  factory IAudioClock.from(IUnknown interface) =>
-      IAudioClock(interface.toInterface(IID_IAudioClock));
 }

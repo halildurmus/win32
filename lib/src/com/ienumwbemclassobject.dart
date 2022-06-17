@@ -31,6 +31,9 @@ class IEnumWbemClassObject extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IEnumWbemClassObject(super.ptr);
 
+  factory IEnumWbemClassObject.from(IUnknown interface) =>
+      IEnumWbemClassObject(interface.toInterface(IID_IEnumWbemClassObject));
+
   int Reset() => ptr.ref.vtable
       .elementAt(3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
@@ -95,7 +98,4 @@ class IEnumWbemClassObject extends IUnknown {
               .value
               .asFunction<int Function(Pointer, int lTimeout, int nCount)>()(
           ptr.ref.lpVtbl, lTimeout, nCount);
-
-  factory IEnumWbemClassObject.from(IUnknown interface) =>
-      IEnumWbemClassObject(interface.toInterface(IID_IEnumWbemClassObject));
 }

@@ -100,7 +100,7 @@ class WinRTMethodProjection extends MethodProjection {
     $parametersPreamble
     ${ffiCall()}
     $parametersPostamble
-    return IVector(retValuePtr);
+    return IVector.fromRawPointer(retValuePtr);
   }
 ''';
 
@@ -111,7 +111,7 @@ class WinRTMethodProjection extends MethodProjection {
     ${ffiCall()}
 
     try {
-      return IVectorView<String>.from(retValuePtr).toList();
+      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
     } finally {
       $parametersPostamble
       free(retValuePtr);
@@ -140,7 +140,7 @@ class WinRTMethodProjection extends MethodProjection {
   String stringDeclaration() => '''
       String $name($methodParams) {
         final retValuePtr = calloc<HSTRING>();
-        $parametersPreamble 
+        $parametersPreamble
 
         try {
           ${ffiCall()}
@@ -165,7 +165,7 @@ class WinRTMethodProjection extends MethodProjection {
       DateTime $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
         $parametersPreamble
-        
+
         try {
           ${ffiCall()}
 
@@ -183,7 +183,7 @@ class WinRTMethodProjection extends MethodProjection {
       Duration $name($methodParams) {
         final retValuePtr = calloc<Uint64>();
         $parametersPreamble
-        
+
         try {
           ${ffiCall()}
 
@@ -207,7 +207,7 @@ class WinRTMethodProjection extends MethodProjection {
       ${returnType.dartType} $name($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
         $parametersPreamble
-  
+
         try {
           ${ffiCall()}
 

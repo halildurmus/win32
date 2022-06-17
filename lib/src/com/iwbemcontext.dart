@@ -31,6 +31,9 @@ class IWbemContext extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IWbemContext(super.ptr);
 
+  factory IWbemContext.from(IUnknown interface) =>
+      IWbemContext(interface.toInterface(IID_IWbemContext));
+
   int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -134,9 +137,6 @@ class IWbemContext extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory IWbemContext.from(IUnknown interface) =>
-      IWbemContext(interface.toInterface(IID_IWbemContext));
 }
 
 /// @nodoc

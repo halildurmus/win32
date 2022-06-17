@@ -31,6 +31,9 @@ class IAppxManifestReader6 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IAppxManifestReader6(super.ptr);
 
+  factory IAppxManifestReader6.from(IUnknown interface) =>
+      IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
+
   int GetIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>
       ptr.ref.vtable
@@ -45,7 +48,4 @@ class IAppxManifestReader6 extends IUnknown {
                   int Function(
                       Pointer, Pointer<Int32> isNonQualifiedResourcePackage)>()(
           ptr.ref.lpVtbl, isNonQualifiedResourcePackage);
-
-  factory IAppxManifestReader6.from(IUnknown interface) =>
-      IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
 }

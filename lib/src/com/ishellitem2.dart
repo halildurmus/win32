@@ -32,6 +32,9 @@ class IShellItem2 extends IShellItem {
   // vtable begins at 8, is 13 entries long.
   IShellItem2(super.ptr);
 
+  factory IShellItem2.from(IUnknown interface) =>
+      IShellItem2(interface.toInterface(IID_IShellItem2));
+
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(8)
@@ -218,7 +221,4 @@ class IShellItem2 extends IShellItem {
       .asFunction<
           int Function(Pointer, Pointer<PROPERTYKEY> key,
               Pointer<Int32> pf)>()(ptr.ref.lpVtbl, key, pf);
-
-  factory IShellItem2.from(IUnknown interface) =>
-      IShellItem2(interface.toInterface(IID_IShellItem2));
 }

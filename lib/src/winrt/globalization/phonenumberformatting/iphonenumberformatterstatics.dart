@@ -32,7 +32,11 @@ const IID_IPhoneNumberFormatterStatics =
 /// {@category winrt}
 class IPhoneNumberFormatterStatics extends IInspectable {
   // vtable begins at 6, is 4 entries long.
-  IPhoneNumberFormatterStatics.from(super.ptr);
+  IPhoneNumberFormatterStatics.fromRawPointer(super.ptr);
+
+  factory IPhoneNumberFormatterStatics.from(IInspectable interface) =>
+      IPhoneNumberFormatterStatics.fromRawPointer(
+          interface.toInterface(IID_IPhoneNumberFormatterStatics));
 
   void TryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
     final regionCodeHstring = convertToHString(regionCode);

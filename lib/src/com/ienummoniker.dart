@@ -31,6 +31,9 @@ class IEnumMoniker extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumMoniker(super.ptr);
 
+  factory IEnumMoniker.from(IUnknown interface) =>
+      IEnumMoniker(interface.toInterface(IID_IEnumMoniker));
+
   int Next(int celt, Pointer<Pointer<COMObject>> rgelt,
           Pointer<Uint32> pceltFetched) =>
       ptr.ref.vtable
@@ -75,7 +78,4 @@ class IEnumMoniker extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
-
-  factory IEnumMoniker.from(IUnknown interface) =>
-      IEnumMoniker(interface.toInterface(IID_IEnumMoniker));
 }

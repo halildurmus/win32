@@ -31,6 +31,9 @@ class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, is 27 entries long.
   IFileDialogCustomize(super.ptr);
 
+  factory IFileDialogCustomize.from(IUnknown interface) =>
+      IFileDialogCustomize(interface.toInterface(IID_IFileDialogCustomize));
+
   int EnableOpenDropDown(int dwIDCtl) => ptr.ref.vtable
       .elementAt(3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwIDCtl)>>>()
@@ -336,7 +339,4 @@ class IFileDialogCustomize extends IUnknown {
                   int dwIDItem,
                   Pointer<Utf16>
                       pszLabel)>()(ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
-
-  factory IFileDialogCustomize.from(IUnknown interface) =>
-      IFileDialogCustomize(interface.toInterface(IID_IFileDialogCustomize));
 }

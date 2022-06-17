@@ -31,6 +31,9 @@ class IInspectable extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IInspectable(super.ptr);
 
+  factory IInspectable.from(IUnknown interface) =>
+      IInspectable(interface.toInterface(IID_IInspectable));
+
   int GetIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
       .ref.vtable
       .elementAt(3)
@@ -63,7 +66,4 @@ class IInspectable extends IUnknown {
           .value
           .asFunction<int Function(Pointer, Pointer<Int32> trustLevel)>()(
       ptr.ref.lpVtbl, trustLevel);
-
-  factory IInspectable.from(IUnknown interface) =>
-      IInspectable(interface.toInterface(IID_IInspectable));
 }

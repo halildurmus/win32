@@ -31,6 +31,9 @@ class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(super.ptr);
 
+  factory IProvideClassInfo.from(IUnknown interface) =>
+      IProvideClassInfo(interface.toInterface(IID_IProvideClassInfo));
+
   int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -41,7 +44,4 @@ class IProvideClassInfo extends IUnknown {
       .asFunction<
           int Function(Pointer,
               Pointer<Pointer<COMObject>> ppTI)>()(ptr.ref.lpVtbl, ppTI);
-
-  factory IProvideClassInfo.from(IUnknown interface) =>
-      IProvideClassInfo(interface.toInterface(IID_IProvideClassInfo));
 }

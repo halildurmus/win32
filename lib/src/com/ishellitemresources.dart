@@ -31,6 +31,9 @@ class IShellItemResources extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellItemResources(super.ptr);
 
+  factory IShellItemResources.from(IUnknown interface) =>
+      IShellItemResources(interface.toInterface(IID_IShellItemResources));
+
   int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -180,7 +183,4 @@ class IShellItemResources extends IUnknown {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-
-  factory IShellItemResources.from(IUnknown interface) =>
-      IShellItemResources(interface.toInterface(IID_IShellItemResources));
 }

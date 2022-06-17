@@ -31,6 +31,9 @@ class IAudioCaptureClient extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAudioCaptureClient(super.ptr);
 
+  factory IAudioCaptureClient.from(IUnknown interface) =>
+      IAudioCaptureClient(interface.toInterface(IID_IAudioCaptureClient));
+
   int GetBuffer(
           Pointer<Pointer<Uint8>> ppData,
           Pointer<Uint32> pNumFramesToRead,
@@ -87,7 +90,4 @@ class IAudioCaptureClient extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Uint32> pNumFramesInNextPacket)>()(
       ptr.ref.lpVtbl, pNumFramesInNextPacket);
-
-  factory IAudioCaptureClient.from(IUnknown interface) =>
-      IAudioCaptureClient(interface.toInterface(IID_IAudioCaptureClient));
 }

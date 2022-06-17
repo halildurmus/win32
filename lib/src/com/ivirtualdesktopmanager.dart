@@ -31,6 +31,9 @@ class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IVirtualDesktopManager(super.ptr);
 
+  factory IVirtualDesktopManager.from(IUnknown interface) =>
+      IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
+
   int IsWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
       ptr.ref.vtable
@@ -73,9 +76,6 @@ class IVirtualDesktopManager extends IUnknown {
               int Function(
                   Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
       ptr.ref.lpVtbl, topLevelWindow, desktopId);
-
-  factory IVirtualDesktopManager.from(IUnknown interface) =>
-      IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
 }
 
 /// @nodoc

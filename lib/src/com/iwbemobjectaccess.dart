@@ -32,6 +32,9 @@ class IWbemObjectAccess extends IWbemClassObject {
   // vtable begins at 27, is 10 entries long.
   IWbemObjectAccess(super.ptr);
 
+  factory IWbemObjectAccess.from(IUnknown interface) =>
+      IWbemObjectAccess(interface.toInterface(IID_IWbemObjectAccess));
+
   int
       GetPropertyHandle(Pointer<Utf16> wszPropertyName, Pointer<Int32> pType,
               Pointer<Int32> plHandle) =>
@@ -164,7 +167,4 @@ class IWbemObjectAccess extends IWbemClassObject {
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
-
-  factory IWbemObjectAccess.from(IUnknown interface) =>
-      IWbemObjectAccess(interface.toInterface(IID_IWbemObjectAccess));
 }

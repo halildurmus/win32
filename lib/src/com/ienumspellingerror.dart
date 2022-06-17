@@ -31,6 +31,9 @@ class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IEnumSpellingError(super.ptr);
 
+  factory IEnumSpellingError.from(IUnknown interface) =>
+      IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
+
   int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -42,7 +45,4 @@ class IEnumSpellingError extends IUnknown {
           .asFunction<
               int Function(Pointer, Pointer<Pointer<COMObject>> value)>()(
       ptr.ref.lpVtbl, value);
-
-  factory IEnumSpellingError.from(IUnknown interface) =>
-      IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
 }

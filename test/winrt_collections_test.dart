@@ -21,7 +21,7 @@ void main() {
 
         final object = CreateObject(
             'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-        picker = IFileOpenPicker.from(object);
+        picker = IFileOpenPicker.fromRawPointer(object);
         allocator = Arena();
         vector = picker.FileTypeFilter;
       });
@@ -290,7 +290,7 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView.from(retValuePtr, allocator: allocator);
+        return IVectorView.fromRawPointer(retValuePtr, allocator: allocator);
       }
 
       setUp(() {
@@ -388,8 +388,8 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView.from(retValuePtr,
-            creator: IHostName.from, allocator: allocator);
+        return IVectorView.fromRawPointer(retValuePtr,
+            creator: IHostName.fromRawPointer, allocator: allocator);
       }
 
       setUp(() {
@@ -398,7 +398,7 @@ void main() {
         final object = CreateActivationFactory(
             'Windows.Networking.Connectivity.NetworkInformation',
             IID_INetworkInformationStatics);
-        networkInformation = INetworkInformationStatics(object);
+        networkInformation = INetworkInformationStatics.fromRawPointer(object);
         allocator = Arena();
         vectorView = GetHostNames(object, allocator);
       });
@@ -423,7 +423,7 @@ void main() {
       test('GetMany returns elements starting from index 0', () {
         final pCOMObject = allocator<COMObject>(vectorView.Size);
         expect(vectorView.GetMany(0, pCOMObject), greaterThanOrEqualTo(1));
-        final list = pCOMObject.toList<IHostName>(IHostName.from,
+        final list = pCOMObject.toList<IHostName>(IHostName.fromRawPointer,
             length: vectorView.Size);
         expect(list.length, greaterThanOrEqualTo(1));
       });

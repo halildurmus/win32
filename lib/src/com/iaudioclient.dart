@@ -31,6 +31,9 @@ class IAudioClient extends IUnknown {
   // vtable begins at 3, is 12 entries long.
   IAudioClient(super.ptr);
 
+  factory IAudioClient.from(IUnknown interface) =>
+      IAudioClient(interface.toInterface(IID_IAudioClient));
+
   int Initialize(
           int ShareMode,
           int StreamFlags,
@@ -197,7 +200,4 @@ class IAudioClient extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> riid,
               Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, riid, ppv);
-
-  factory IAudioClient.from(IUnknown interface) =>
-      IAudioClient(interface.toInterface(IID_IAudioClient));
 }

@@ -31,6 +31,9 @@ class IErrorInfo extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IErrorInfo(super.ptr);
 
+  factory IErrorInfo.from(IUnknown interface) =>
+      IErrorInfo(interface.toInterface(IID_IErrorInfo));
+
   int GetGUID(Pointer<GUID> pGUID) => ptr.ref.vtable
       .elementAt(3)
       .cast<
@@ -89,7 +92,4 @@ class IErrorInfo extends IUnknown {
               .asFunction<
                   int Function(Pointer, Pointer<Uint32> pdwHelpContext)>()(
           ptr.ref.lpVtbl, pdwHelpContext);
-
-  factory IErrorInfo.from(IUnknown interface) =>
-      IErrorInfo(interface.toInterface(IID_IErrorInfo));
 }

@@ -31,6 +31,9 @@ class IShellFolder extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellFolder(super.ptr);
 
+  factory IShellFolder.from(IUnknown interface) =>
+      IShellFolder(interface.toInterface(IID_IShellFolder));
+
   int ParseDisplayName(
           int hwnd,
           Pointer<COMObject> pbc,
@@ -249,7 +252,4 @@ class IShellFolder extends IUnknown {
                       int uFlags,
                       Pointer<Pointer<ITEMIDLIST>> ppidlOut)>()(
           ptr.ref.lpVtbl, hwnd, pidl, pszName, uFlags, ppidlOut);
-
-  factory IShellFolder.from(IUnknown interface) =>
-      IShellFolder(interface.toInterface(IID_IShellFolder));
 }

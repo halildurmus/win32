@@ -32,7 +32,11 @@ const IID_ICalendarFactory = '{83F58412-E56B-4C75-A66E-0F63D57758A6}';
 /// {@category winrt}
 class ICalendarFactory extends IInspectable {
   // vtable begins at 6, is 2 entries long.
-  ICalendarFactory.from(super.ptr);
+  ICalendarFactory.fromRawPointer(super.ptr);
+
+  factory ICalendarFactory.from(IInspectable interface) =>
+      ICalendarFactory.fromRawPointer(
+          interface.toInterface(IID_ICalendarFactory));
 
   Pointer<COMObject> CreateCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {

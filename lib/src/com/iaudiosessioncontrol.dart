@@ -31,6 +31,9 @@ class IAudioSessionControl extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAudioSessionControl(super.ptr);
 
+  factory IAudioSessionControl.from(IUnknown interface) =>
+      IAudioSessionControl(interface.toInterface(IID_IAudioSessionControl));
+
   int GetState(Pointer<Int32> pRetVal) => ptr.ref.vtable
           .elementAt(3)
           .cast<
@@ -140,7 +143,4 @@ class IAudioSessionControl extends IUnknown {
               .asFunction<
                   int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
           ptr.ref.lpVtbl, NewNotifications);
-
-  factory IAudioSessionControl.from(IUnknown interface) =>
-      IAudioSessionControl(interface.toInterface(IID_IAudioSessionControl));
 }

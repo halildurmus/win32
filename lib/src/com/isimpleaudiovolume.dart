@@ -31,6 +31,9 @@ class ISimpleAudioVolume extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   ISimpleAudioVolume(super.ptr);
 
+  factory ISimpleAudioVolume.from(IUnknown interface) =>
+      ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
+
   int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -76,7 +79,4 @@ class ISimpleAudioVolume extends IUnknown {
       .asFunction<
           int Function(
               Pointer, Pointer<Int32> pbMute)>()(ptr.ref.lpVtbl, pbMute);
-
-  factory ISimpleAudioVolume.from(IUnknown interface) =>
-      ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
 }
