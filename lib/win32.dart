@@ -113,6 +113,7 @@ export 'src/dwmapi.dart';
 export 'src/dxva2.dart';
 export 'src/gdi32.dart';
 export 'src/inline.dart';
+export 'src/iphlpapi.dart';
 export 'src/kernel32.dart';
 export 'src/kernelbase.dart';
 export 'src/magnification.dart';

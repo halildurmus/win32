@@ -34,6 +34,7 @@ const header = '''
 #include <bluetoothleapis.h>
 #include <DbgHelp.h>
 #include <dwmapi.h>
+#include <iphlpapi.h>
 #include <magnification.h>
 #include <mmreg.h>
 #include <netlistmgr.h>
