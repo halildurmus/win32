@@ -198,34 +198,34 @@ const structsToGenerate = <String, String>{
       "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function.",
   "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT":
       "Used by SendInput to store information for synthesizing input events such as keystrokes, mouse movement, and mouse clicks.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_INDEX_MAP":
-      "The IP_ADAPTER_INDEX_MAP structure stores the interface index associated with a network adapter with IPv4 enabled together with the name of the network adapter.",
   "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ADDRESSES_LH":
       "The IP_ADAPTER_ADDRESSES structure is the header node for a linked list of addresses for a particular adapter. This structure can simultaneously be used as part of a linked list of IP_ADAPTER_ADDRESSES structures.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ANYCAST_ADDRESS_XP":
+      "The IP_ADAPTER_ANYCAST_ADDRESS structure stores a single anycast IP address in a linked list of addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_DNS_SERVER_ADDRESS_XP":
+      "The IP_ADAPTER_DNS_SERVER_ADDRESS structure stores a single DNS server address in a linked list of DNS server addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_DNS_SUFFIX":
+      "The IP_ADAPTER_DNS_SUFFIX structure stores a DNS suffix in a linked list of DNS suffixes for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_GATEWAY_ADDRESS_LH":
+      "The IP_ADAPTER_GATEWAY_ADDRESS structure stores a single gateway address in a linked list of gateway addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_INDEX_MAP":
+      "The IP_ADAPTER_INDEX_MAP structure stores the interface index associated with a network adapter with IPv4 enabled together with the name of the network adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_MULTICAST_ADDRESS_XP":
+      "The IP_ADAPTER_MULTICAST_ADDRESS structure stores a single multicast address in a linked-list of addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_PREFIX_XP":
+      "The IP_ADAPTER_PREFIX structure stores an IP address prefix.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_UNICAST_ADDRESS_LH":
+      "The IP_ADAPTER_UNICAST_ADDRESS structure stores a single unicast IP address in a linked list of IP addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_WINS_SERVER_ADDRESS_LH":
+      "The IP_ADAPTER_WINS_SERVER_ADDRESS structure stores a single Windows Internet Name Service (WINS) server address in a linked list of WINS server addresses for a particular adapter.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADDR_STRING":
+      "The IP_ADDR_STRING structure represents a node in a linked-list of IPv4 addresses.",
+  "Windows.Win32.NetworkManagement.IpHelper.IP_ADDRESS_STRING":
+      "The IP_ADDRESS_STRING structure stores an IPv4 address in dotted decimal notation. The IP_ADDRESS_STRING structure definition is also the type definition for the IP_MASK_STRING structure.",
   "Windows.Win32.NetworkManagement.IpHelper.IP_INTERFACE_INFO":
       "The IP_INTERFACE_INFO structure contains a list of the network interface adapters with IPv4 enabled on the local system.",
   "Windows.Win32.NetworkManagement.IpHelper.IP_PER_ADAPTER_INFO_W2KSP1":
       "The IP_PER_ADAPTER_INFO structure contains information specific to a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_UNICAST_ADDRESS_LH":
-      "The IP_ADAPTER_UNICAST_ADDRESS structure stores a single unicast IP address in a linked list of IP addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ANYCAST_ADDRESS_XP":
-      "The IP_ADAPTER_ANYCAST_ADDRESS structure stores a single anycast IP address in a linked list of addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_MULTICAST_ADDRESS_XP":
-      "The IP_ADAPTER_MULTICAST_ADDRESS structure stores a single multicast address in a linked-list of addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_DNS_SERVER_ADDRESS_XP":
-      "The IP_ADAPTER_DNS_SERVER_ADDRESS structure stores a single DNS server address in a linked list of DNS server addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_PREFIX_XP":
-      "The IP_ADAPTER_PREFIX structure stores an IP address prefix.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_WINS_SERVER_ADDRESS_LH":
-      "The IP_ADAPTER_WINS_SERVER_ADDRESS structure stores a single Windows Internet Name Service (WINS) server address in a linked list of WINS server addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_GATEWAY_ADDRESS_LH":
-      "The IP_ADAPTER_GATEWAY_ADDRESS structure stores a single gateway address in a linked list of gateway addresses for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADDR_STRING":
-      "The IP_ADDR_STRING structure represents a node in a linked-list of IPv4 addresses.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_DNS_SUFFIX":
-      "The IP_ADAPTER_DNS_SUFFIX structure stores a DNS suffix in a linked list of DNS suffixes for a particular adapter.",
-  "Windows.Win32.NetworkManagement.IpHelper.IP_ADDRESS_STRING":
-      "The IP_ADDRESS_STRING structure stores an IPv4 address in dotted decimal notation. The IP_ADDRESS_STRING structure definition is also the type definition for the IP_MASK_STRING structure.",
   "Windows.Win32.UI.Shell.Common.ITEMIDLIST":
       "Contains a list of item identifiers.",
   "Windows.Win32.Graphics.Printing.JOB_INFO_1W":
