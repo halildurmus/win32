@@ -2,6 +2,7 @@
 /// Windows metadata.
 library generator;
 
+export 'src/inputs/enums.dart';
 export 'src/inputs/functions.dart';
 export 'src/inputs/interfaces.dart';
 export 'src/inputs/struct_sizes.dart';
@@ -12,6 +13,7 @@ export 'src/projection/com_class.dart';
 export 'src/projection/com_interface.dart';
 export 'src/projection/com_method.dart';
 export 'src/projection/com_property.dart';
+export 'src/projection/enum.dart';
 export 'src/projection/field.dart';
 export 'src/projection/function.dart';
 export 'src/projection/headers.dart';

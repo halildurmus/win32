@@ -51,6 +51,17 @@ import 'oleaut32.dart';
 import 'variant.dart';
 ''';
 
+const winrtEnumFileHeader = '''
+$copyrightHeader
+
+// Dart representations of common enumerations used in the Windows Runtime APIs.
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: constant_identifier_names
+
+''';
+
 const winrtStructFileHeader = '''
 $copyrightHeader
 
