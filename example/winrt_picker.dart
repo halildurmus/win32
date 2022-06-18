@@ -17,8 +17,8 @@ void main() async {
       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
 
   final picker = IFileOpenPicker.fromRawPointer(object)
-    ..suggestedStartLocation = PickerLocationId.Desktop
-    ..viewMode = PickerViewMode.Thumbnail;
+    ..SuggestedStartLocation = PickerLocationId.Desktop.value
+    ..ViewMode = PickerViewMode.Thumbnail.value;
 
   final filters = picker.fileTypeFilter;
 
