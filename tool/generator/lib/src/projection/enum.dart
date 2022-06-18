@@ -26,7 +26,7 @@ class EnumProjection {
   bool get hasFlagsAttribute =>
       typeDef.existsAttribute('System.FlagsAttribute');
 
-  String get _fields {
+  String get fields {
     final buffer = StringBuffer();
     // The first field is always the special field _value
     final fields = typeDef.fields.skip(1).toList()
@@ -35,8 +35,9 @@ class EnumProjection {
     for (final field in fields) {
       final fieldName = field.name;
       final fieldValue = field.value;
-      buffer.writeln('$fieldName($fieldValue)');
-      field != fields.last ? buffer.write(',') : buffer.write(';');
+      buffer
+        ..write('$fieldName($fieldValue)')
+        ..write(field != fields.last ? ',\n' : ';');
     }
 
     return buffer.toString();
@@ -53,7 +54,7 @@ class EnumProjection {
               value, 'value', 'No enum value with that value'));
     ''';
 
-  String get _enumSetHelper => hasFlagsAttribute
+  String get enumSetHelper => hasFlagsAttribute
       ? '''
     static Set<$enumName> createSetFrom(int value) => Set.unmodifiable(
       $enumName.values.where((e) => value & e.value == e.value));
@@ -64,7 +65,7 @@ class EnumProjection {
   String toString() => '''
         $classPreamble
         enum $_projectedName {
-          $_fields
+          $fields
 
           $_enumVariable
 
@@ -72,7 +73,7 @@ class EnumProjection {
 
           $_factoryConstructor
 
-          $_enumSetHelper
+          $enumSetHelper
         }
       ''';
 }
