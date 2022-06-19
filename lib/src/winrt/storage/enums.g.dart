@@ -29,6 +29,7 @@ enum FileAttributes {
               value, 'value', 'No enum value with that value'));
 
   static Set<FileAttributes> createSetFrom(int value) {
+    if (value == 0) return {FileAttributes.values.first};
     final values =
         FileAttributes.values.skip(1).where((e) => value & e.value == e.value);
     return Set.unmodifiable(
@@ -93,6 +94,7 @@ enum StorageItemTypes {
               value, 'value', 'No enum value with that value'));
 
   static Set<StorageItemTypes> createSetFrom(int value) {
+    if (value == 0) return {StorageItemTypes.values.first};
     final values = StorageItemTypes.values
         .skip(1)
         .where((e) => value & e.value == e.value);
