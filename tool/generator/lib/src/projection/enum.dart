@@ -51,14 +51,17 @@ class EnumProjection {
     factory $enumName.from(int value) =>
       $enumName.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
-    ''';
+              value, 'value', 'No enum value with that value'));''';
 
   String get enumSetHelper => hasFlagsAttribute
       ? '''
-    static Set<$enumName> createSetFrom(int value) => Set.unmodifiable(
-      $enumName.values.where((e) => value & e.value == e.value));
-    '''
+    static Set<$enumName> createSetFrom(int value) {
+      final values = $enumName.values
+        .skip(1)
+        .where((e) => value & e.value == e.value);
+      return Set.unmodifiable(
+          values.isEmpty ? [$enumName.values.first] : values);
+    }'''
       : '';
 
   @override

@@ -28,8 +28,12 @@ enum FileAttributes {
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<FileAttributes> createSetFrom(int value) => Set.unmodifiable(
-      FileAttributes.values.where((e) => value & e.value == e.value));
+  static Set<FileAttributes> createSetFrom(int value) {
+    final values =
+        FileAttributes.values.skip(1).where((e) => value & e.value == e.value);
+    return Set.unmodifiable(
+        values.isEmpty ? [FileAttributes.values.first] : values);
+  }
 }
 
 /// Specifies what to do if a file or folder with the specified name already
@@ -88,6 +92,11 @@ enum StorageItemTypes {
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<StorageItemTypes> createSetFrom(int value) => Set.unmodifiable(
-      StorageItemTypes.values.where((e) => value & e.value == e.value));
+  static Set<StorageItemTypes> createSetFrom(int value) {
+    final values = StorageItemTypes.values
+        .skip(1)
+        .where((e) => value & e.value == e.value);
+    return Set.unmodifiable(
+        values.isEmpty ? [StorageItemTypes.values.first] : values);
+  }
 }

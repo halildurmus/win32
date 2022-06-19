@@ -125,6 +125,10 @@ enum GamepadButtons {
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<GamepadButtons> createSetFrom(int value) => Set.unmodifiable(
-      GamepadButtons.values.where((e) => value & e.value == e.value));
+  static Set<GamepadButtons> createSetFrom(int value) {
+    final values =
+        GamepadButtons.values.skip(1).where((e) => value & e.value == e.value);
+    return Set.unmodifiable(
+        values.isEmpty ? [GamepadButtons.values.first] : values);
+  }
 }
