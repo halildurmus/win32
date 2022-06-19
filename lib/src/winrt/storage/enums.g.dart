@@ -32,8 +32,7 @@ enum FileAttributes {
     if (value == 0) return {FileAttributes.values.first};
     final values =
         FileAttributes.values.skip(1).where((e) => value & e.value == e.value);
-    return Set.unmodifiable(
-        values.isEmpty ? [FileAttributes.values.first] : values);
+    return Set.unmodifiable(values);
   }
 }
 
@@ -98,7 +97,6 @@ enum StorageItemTypes {
     final values = StorageItemTypes.values
         .skip(1)
         .where((e) => value & e.value == e.value);
-    return Set.unmodifiable(
-        values.isEmpty ? [StorageItemTypes.values.first] : values);
+    return Set.unmodifiable(values);
   }
 }

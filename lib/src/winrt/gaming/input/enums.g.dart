@@ -129,7 +129,6 @@ enum GamepadButtons {
     if (value == 0) return {GamepadButtons.values.first};
     final values =
         GamepadButtons.values.skip(1).where((e) => value & e.value == e.value);
-    return Set.unmodifiable(
-        values.isEmpty ? [GamepadButtons.values.first] : values);
+    return Set.unmodifiable(values);
   }
 }

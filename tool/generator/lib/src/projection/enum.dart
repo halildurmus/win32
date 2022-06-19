@@ -57,11 +57,8 @@ class EnumProjection {
       ? '''
     static Set<$enumName> createSetFrom(int value) {
       if (value == 0) return {$enumName.values.first};
-      final values = $enumName.values
-        .skip(1)
-        .where((e) => value & e.value == e.value);
-      return Set.unmodifiable(
-          values.isEmpty ? [$enumName.values.first] : values);
+      final values = $enumName.values.skip(1).where((e) => value & e.value == e.value);
+      return Set.unmodifiable(values);
     }'''
       : '';
 
