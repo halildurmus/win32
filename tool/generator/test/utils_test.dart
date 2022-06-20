@@ -153,30 +153,6 @@ void main() {
         equals('Windows.Devices.Display.Core'));
   });
 
-  // test('parseTypeDefName 1', () {
-  //   final nodeList =
-  //       MetadataStore.getMetadataForType('Windows.Data.Xml.Dom.IXmlNodeList')!;
-
-  //   expect(parseTypeDefName(nodeList), equals('IXmlNodeList'));
-  //   expect(parseTypeDefName(nodeList.interfaces.first),
-  //       equals('IVectorView<IXmlNode>'));
-  //   expect(parseTypeDefName(nodeList.interfaces.last),
-  //       equals('IIterable<IXmlNode>'));
-  // });
-
-  // test('parseTypeDefName 2', () {
-  //   final filePicker = MetadataStore.getMetadataForType(
-  //       'Windows.Storage.Pickers.IFileOpenPicker')!;
-
-  //   expect(
-  //       parseTypeDefName(filePicker
-  //           .findMethod('get_FileTypeFilter')!
-  //           .returnType
-  //           .typeIdentifier
-  //           .type!),
-  //       equals('IVector<String>'));
-  // });
-
   test('groupTypesByParentNamespace', () {
     expect(
         groupTypesByParentNamespace([

@@ -227,23 +227,6 @@ String stripGenerics(String name) {
   return name.substring(0, backtickIndex);
 }
 
-/// Unpack a nested TypeDef into a single name.
-///
-/// For example, transform a nested TypeDef representing:
-/// `Windows.Foundation.IVectorView`1<Windows.Data.Xml.Dom.IXmlNode>`
-/// to:
-/// `IVectorView<IXmlNode>`
-String parseTypeDefName(TypeDef td) {
-  if (td.typeSpec?.baseType == BaseType.genericTypeModifier) {
-    final typeSpecName = stripGenerics(lastComponent(td.typeSpec!.type!.name));
-    final genericType = parseTypeDefName(td.typeSpec!.typeArg!.type!);
-    return '$typeSpecName<$genericType>';
-  }
-
-  if (td.name.isNotEmpty) return stripGenerics(lastComponent(td.name));
-  return 'undefined';
-}
-
 /// Qualify the DLL with an extension.
 ///
 /// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
