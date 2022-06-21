@@ -109,7 +109,10 @@ const CLSCTX_REMOTE_SERVER = 0x10;
 
 /// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
 /// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
-const CLSCTX_ALL = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER;
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
+    CLSCTX_INPROC_HANDLER |
+    CLSCTX_LOCAL_SERVER |
+    CLSCTX_REMOTE_SERVER;
 
 // -----------------------------------------------------------------------------
 // IDispatch constants
@@ -529,7 +532,10 @@ const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 
 /// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
 /// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
-const TOKEN_WRITE = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
+const TOKEN_WRITE = STANDARD_RIGHTS_WRITE |
+    TOKEN_ADJUST_PRIVILEGES |
+    TOKEN_ADJUST_GROUPS |
+    TOKEN_ADJUST_DEFAULT;
 
 /// Same as STANDARD_RIGHTS_EXECUTE.
 const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
@@ -1067,7 +1073,12 @@ const WS_MINIMIZEBOX = 0x00020000;
 const WS_OVERLAPPED = 0x00000000;
 
 /// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
-const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
+    WS_CAPTION |
+    WS_SYSMENU |
+    WS_THICKFRAME |
+    WS_MINIMIZEBOX |
+    WS_MAXIMIZEBOX;
 
 /// The window is a pop-up window. This style cannot be used with the WS_CHILD
 /// style.
@@ -2315,10 +2326,16 @@ const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
 /// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
-const QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+const QS_ALLEVENTS =
+    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// Any message is in the queue.
-const QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
+const QS_ALLINPUT = QS_INPUT |
+    QS_POSTMESSAGE |
+    QS_TIMER |
+    QS_PAINT |
+    QS_HOTKEY |
+    QS_SENDMESSAGE;
 
 // -----------------------------------------------------------------------------
 // Hook constants
@@ -8722,10 +8739,12 @@ class SPEAKFLAGS {
 // -----------------------------------------------------------------------------
 
 /// Bluetooth LE device interface GUID
-const GUID_BLUETOOTHLE_DEVICE_INTERFACE = '{781aee18-7733-4ce4-add0-91f41c67b592}';
+const GUID_BLUETOOTHLE_DEVICE_INTERFACE =
+    '{781aee18-7733-4ce4-add0-91f41c67b592}';
 
 /// Bluetooth LE Service device interface GUID
-const GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = '{6e3bb679-4372-40c8-9eaa-4509df260cd8}';
+const GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE =
+    '{6e3bb679-4372-40c8-9eaa-4509df260cd8}';
 
 /// The client does not have specific GATT requirements (default).
 const BLUETOOTH_GATT_FLAG_NONE = 0x00000000;
