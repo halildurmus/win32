@@ -42,6 +42,8 @@ dartdoc:
       markdown: doc/dwmapi.md
     "magnification":
       markdown: doc/magnification.md
+    "onecore":
+      markdown: doc/onecore.md
     "setupapi":
       markdown: doc/setupapi.md
     "version":
@@ -65,7 +67,7 @@ dartdoc:
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "shcore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "onecore", "shcore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:

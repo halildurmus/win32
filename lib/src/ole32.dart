@@ -416,6 +416,23 @@ final _CreateStreamOnHGlobal = _ole32.lookupFunction<
     int Function(int hGlobal, int fDeleteOnRelease,
         Pointer<Pointer<COMObject>> ppstm)>('CreateStreamOnHGlobal');
 
+/// Returns the CLSID associated with the specified file name.
+///
+/// ```c
+/// HRESULT GetClassFile(
+///   LPCOLESTR szFilename,
+///   CLSID     *pclsid
+/// );
+/// ```
+/// {@category ole32}
+int GetClassFile(Pointer<Utf16> szFilename, Pointer<GUID> pclsid) =>
+    _GetClassFile(szFilename, pclsid);
+
+final _GetClassFile = _ole32.lookupFunction<
+    Int32 Function(Pointer<Utf16> szFilename, Pointer<GUID> pclsid),
+    int Function(
+        Pointer<Utf16> szFilename, Pointer<GUID> pclsid)>('GetClassFile');
+
 /// The GetHGlobalFromStream function retrieves the global memory handle to
 /// a stream that was created through a call to the CreateStreamOnHGlobal
 /// function.

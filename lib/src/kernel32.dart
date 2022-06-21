@@ -1023,6 +1023,23 @@ final _DeviceIoControl = _kernel32.lookupFunction<
         Pointer<Uint32> lpBytesReturned,
         Pointer<OVERLAPPED> lpOverlapped)>('DeviceIoControl');
 
+/// Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for
+/// the specified dynamic-link library (DLL). This can reduce the size of
+/// the working set for some applications.
+///
+/// ```c
+/// BOOL DisableThreadLibraryCalls(
+///   HMODULE hLibModule
+/// );
+/// ```
+/// {@category kernel32}
+int DisableThreadLibraryCalls(int hLibModule) =>
+    _DisableThreadLibraryCalls(hLibModule);
+
+final _DisableThreadLibraryCalls = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hLibModule),
+    int Function(int hLibModule)>('DisableThreadLibraryCalls');
+
 /// Disconnects the server end of a named pipe instance from a client
 /// process.
 ///
@@ -1634,6 +1651,46 @@ final _FindResourceEx = _kernel32.lookupFunction<
     int Function(int hModule, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         int wLanguage)>('FindResourceExW');
 
+/// Locates a Unicode string (wide characters) in another Unicode string for
+/// a non-linguistic comparison.
+///
+/// ```c
+/// int FindStringOrdinal(
+///   [in] DWORD   dwFindStringOrdinalFlags,
+///   [in] LPCWSTR lpStringSource,
+///   [in] int     cchSource,
+///   [in] LPCWSTR lpStringValue,
+///   [in] int     cchValue,
+///   [in] BOOL    bIgnoreCase
+/// );
+/// ```
+/// {@category kernel32}
+int FindStringOrdinal(
+        int dwFindStringOrdinalFlags,
+        Pointer<Utf16> lpStringSource,
+        int cchSource,
+        Pointer<Utf16> lpStringValue,
+        int cchValue,
+        int bIgnoreCase) =>
+    _FindStringOrdinal(dwFindStringOrdinalFlags, lpStringSource, cchSource,
+        lpStringValue, cchValue, bIgnoreCase);
+
+final _FindStringOrdinal = _kernel32.lookupFunction<
+    Int32 Function(
+        Uint32 dwFindStringOrdinalFlags,
+        Pointer<Utf16> lpStringSource,
+        Int32 cchSource,
+        Pointer<Utf16> lpStringValue,
+        Int32 cchValue,
+        Int32 bIgnoreCase),
+    int Function(
+        int dwFindStringOrdinalFlags,
+        Pointer<Utf16> lpStringSource,
+        int cchSource,
+        Pointer<Utf16> lpStringValue,
+        int cchValue,
+        int bIgnoreCase)>('FindStringOrdinal');
+
 /// Closes the specified volume search handle. The FindFirstVolume and
 /// FindNextVolume functions use this search handle to locate volumes.
 ///
@@ -1989,6 +2046,19 @@ final _GetComputerNameEx = _kernel32.lookupFunction<
     int Function(int NameType, Pointer<Utf16> lpBuffer,
         Pointer<Uint32> nSize)>('GetComputerNameExW');
 
+/// Retrieves the input code page used by the console associated with the
+/// calling process. A console uses its input code page to translate
+/// keyboard input into the corresponding character value.
+///
+/// ```c
+/// UINT WINAPI GetConsoleCP(void);
+/// ```
+/// {@category kernel32}
+int GetConsoleCP() => _GetConsoleCP();
+
+final _GetConsoleCP =
+    _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetConsoleCP');
+
 /// Retrieves information about the size and visibility of the cursor for
 /// the specified console screen buffer.
 ///
@@ -2026,6 +2096,20 @@ int GetConsoleMode(int hConsoleHandle, Pointer<Uint32> lpMode) =>
 final _GetConsoleMode = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleHandle, Pointer<Uint32> lpMode),
     int Function(int hConsoleHandle, Pointer<Uint32> lpMode)>('GetConsoleMode');
+
+/// Retrieves the output code page used by the console associated with the
+/// calling process. A console uses its output code page to translate the
+/// character values written by the various output functions into the images
+/// displayed in the console window.
+///
+/// ```c
+/// UINT WINAPI GetConsoleOutputCP(void);
+/// ```
+/// {@category kernel32}
+int GetConsoleOutputCP() => _GetConsoleOutputCP();
+
+final _GetConsoleOutputCP = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetConsoleOutputCP');
 
 /// Retrieves information about the specified console screen buffer.
 ///
@@ -2675,6 +2759,29 @@ final _GetModuleHandle = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpModuleName),
     int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
 
+/// Retrieves a module handle for the specified module and increments the
+/// module's reference count unless
+/// GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT is specified. The module
+/// must have been loaded by the calling process.
+///
+/// ```c
+/// BOOL GetModuleHandleExW(
+///   [in]           DWORD   dwFlags,
+///   [in, optional] LPCWSTR lpModuleName,
+///   [out]          HMODULE *phModule
+/// );
+/// ```
+/// {@category kernel32}
+int GetModuleHandleEx(
+        int dwFlags, Pointer<Utf16> lpModuleName, Pointer<IntPtr> phModule) =>
+    _GetModuleHandleEx(dwFlags, lpModuleName, phModule);
+
+final _GetModuleHandleEx = _kernel32.lookupFunction<
+    Int32 Function(
+        Uint32 dwFlags, Pointer<Utf16> lpModuleName, Pointer<IntPtr> phModule),
+    int Function(int dwFlags, Pointer<Utf16> lpModuleName,
+        Pointer<IntPtr> phModule)>('GetModuleHandleExW');
+
 /// Retrieves the client computer name for the specified named pipe.
 ///
 /// ```c
@@ -2831,6 +2938,25 @@ void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
 final _GetNativeSystemInfo = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
     void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
+
+/// Retrieves the number of unread input records in the console's input
+/// buffer.
+///
+/// ```c
+/// BOOL WINAPI GetNumberOfConsoleInputEvents(
+///   HANDLE hConsoleInput,
+///   LPDWORD lpcNumberOfEvents
+/// );
+/// ```
+/// {@category kernel32}
+int GetNumberOfConsoleInputEvents(
+        int hConsoleInput, Pointer<Uint32> lpNumberOfEvents) =>
+    _GetNumberOfConsoleInputEvents(hConsoleInput, lpNumberOfEvents);
+
+final _GetNumberOfConsoleInputEvents = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleInput, Pointer<Uint32> lpNumberOfEvents),
+    int Function(int hConsoleInput,
+        Pointer<Uint32> lpNumberOfEvents)>('GetNumberOfConsoleInputEvents');
 
 /// Retrieves the results of an overlapped operation on the specified file,
 /// named pipe, or communications device. To specify a timeout interval or
@@ -4236,6 +4362,28 @@ final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
         Pointer<Uint32> packageFamilyNameLength,
         Pointer<Utf16> packageFamilyName)>('PackageFamilyNameFromFullName');
 
+/// Reads data from the specified console input buffer without removing it
+/// from the buffer.
+///
+/// ```c
+/// BOOL WINAPI PeekConsoleInputW(
+///   HANDLE        hConsoleInput,
+///   PINPUT_RECORD lpBuffer,
+///   DWORD         nLength,
+///   LPDWORD       lpNumberOfEventsRead
+/// );
+/// ```
+/// {@category kernel32}
+int PeekConsoleInput(int hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+        int nLength, Pointer<Uint32> lpNumberOfEventsRead) =>
+    _PeekConsoleInput(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead);
+
+final _PeekConsoleInput = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+        Uint32 nLength, Pointer<Uint32> lpNumberOfEventsRead),
+    int Function(int hConsoleInput, Pointer<INPUT_RECORD> lpBuffer, int nLength,
+        Pointer<Uint32> lpNumberOfEventsRead)>('PeekConsoleInputW');
+
 /// Copies data from a named or anonymous pipe into a buffer without
 /// removing it from the pipe. It also returns information about data in the
 /// pipe.
@@ -4413,6 +4561,27 @@ final _ReadConsole = _kernel32.lookupFunction<
         int nNumberOfCharsToRead,
         Pointer<Uint32> lpNumberOfCharsRead,
         Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl)>('ReadConsoleW');
+
+/// Reads data from a console input buffer and removes it from the buffer.
+///
+/// ```c
+/// BOOL WINAPI ReadConsoleInputW(
+///   HANDLE        hConsoleInput,
+///   PINPUT_RECORD lpBuffer,
+///   DWORD         nLength,
+///   LPDWORD       lpNumberOfEventsRead
+/// );
+/// ```
+/// {@category kernel32}
+int ReadConsoleInput(int hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+        int nLength, Pointer<Uint32> lpNumberOfEventsRead) =>
+    _ReadConsoleInput(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead);
+
+final _ReadConsoleInput = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+        Uint32 nLength, Pointer<Uint32> lpNumberOfEventsRead),
+    int Function(int hConsoleInput, Pointer<INPUT_RECORD> lpBuffer, int nLength,
+        Pointer<Uint32> lpNumberOfEventsRead)>('ReadConsoleInputW');
 
 /// Reads data from the specified file or input/output (I/O) device. Reads
 /// occur at the position specified by the file pointer if supported by the
@@ -5248,6 +5417,22 @@ final _SetVolumeLabel = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName),
     int Function(Pointer<Utf16> lpRootPathName,
         Pointer<Utf16> lpVolumeName)>('SetVolumeLabelW');
+
+/// Retrieves the size, in bytes, of the specified resource.
+///
+/// ```c
+/// DWORD SizeofResource(
+///   [in, optional] HMODULE hModule,
+///   [in]           HRSRC   hResInfo
+/// );
+/// ```
+/// {@category kernel32}
+int SizeofResource(int hModule, int hResInfo) =>
+    _SizeofResource(hModule, hResInfo);
+
+final _SizeofResource = _kernel32.lookupFunction<
+    Uint32 Function(IntPtr hModule, IntPtr hResInfo),
+    int Function(int hModule, int hResInfo)>('SizeofResource');
 
 /// Suspends the execution of the current thread until the time-out interval
 /// elapses.
