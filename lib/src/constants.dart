@@ -109,10 +109,7 @@ const CLSCTX_REMOTE_SERVER = 0x10;
 
 /// The combination of `CLSCTX_INPROC_SERVER`, `CLSCTX_INPROC_HANDLER`,
 /// `CLSCTX_LOCAL_SERVER`, and `CLSCTX_REMOTE_SERVER`.
-const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
-    CLSCTX_INPROC_HANDLER |
-    CLSCTX_LOCAL_SERVER |
-    CLSCTX_REMOTE_SERVER;
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER;
 
 // -----------------------------------------------------------------------------
 // IDispatch constants
@@ -532,10 +529,7 @@ const TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 
 /// Combines STANDARD_RIGHTS_WRITE, TOKEN_ADJUST_PRIVILEGES,
 /// TOKEN_ADJUST_GROUPS, and TOKEN_ADJUST_DEFAULT.
-const TOKEN_WRITE = STANDARD_RIGHTS_WRITE |
-    TOKEN_ADJUST_PRIVILEGES |
-    TOKEN_ADJUST_GROUPS |
-    TOKEN_ADJUST_DEFAULT;
+const TOKEN_WRITE = STANDARD_RIGHTS_WRITE | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT;
 
 /// Same as STANDARD_RIGHTS_EXECUTE.
 const TOKEN_EXECUTE = STANDARD_RIGHTS_EXECUTE;
@@ -1073,12 +1067,7 @@ const WS_MINIMIZEBOX = 0x00020000;
 const WS_OVERLAPPED = 0x00000000;
 
 /// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
-const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
-    WS_CAPTION |
-    WS_SYSMENU |
-    WS_THICKFRAME |
-    WS_MINIMIZEBOX |
-    WS_MAXIMIZEBOX;
+const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 
 /// The window is a pop-up window. This style cannot be used with the WS_CHILD
 /// style.
@@ -2326,16 +2315,10 @@ const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
 /// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
-const QS_ALLEVENTS =
-    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+const QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// Any message is in the queue.
-const QS_ALLINPUT = QS_INPUT |
-    QS_POSTMESSAGE |
-    QS_TIMER |
-    QS_PAINT |
-    QS_HOTKEY |
-    QS_SENDMESSAGE;
+const QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 
 // -----------------------------------------------------------------------------
 // Hook constants
@@ -8739,12 +8722,10 @@ class SPEAKFLAGS {
 // -----------------------------------------------------------------------------
 
 /// Bluetooth LE device interface GUID
-const GUID_BLUETOOTHLE_DEVICE_INTERFACE =
-    '{781aee18-7733-4ce4-add0-91f41c67b592}';
+const GUID_BLUETOOTHLE_DEVICE_INTERFACE = '{781aee18-7733-4ce4-add0-91f41c67b592}';
 
 /// Bluetooth LE Service device interface GUID
-const GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE =
-    '{6e3bb679-4372-40c8-9eaa-4509df260cd8}';
+const GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = '{6e3bb679-4372-40c8-9eaa-4509df260cd8}';
 
 /// The client does not have specific GATT requirements (default).
 const BLUETOOTH_GATT_FLAG_NONE = 0x00000000;
@@ -8865,4 +8846,116 @@ class AUDCLNT_STREAMOPTIONS {
   /// proposed by the client.
   static const AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 0x2;
   static const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
+}
+
+/// Device registry property codes
+/// {@category Enum}
+class SPDRP {
+  /// DeviceDesc (R/W)
+  static const SPDRP_DEVICEDESC = 0x00000000;
+
+  /// HardwareID (R/W)
+  static const SPDRP_HARDWAREID = 0x00000001;
+
+  /// CompatibleIDs (R/W)
+  static const SPDRP_COMPATIBLEIDS = 0x00000002;
+
+  /// unused
+  static const SPDRP_UNUSED0 = 0x00000003;
+
+  /// Service (R/W)
+  static const SPDRP_SERVICE = 0x00000004;
+
+  /// unused
+  static const SPDRP_UNUSED1 = 0x00000005;
+
+  /// unused
+  static const SPDRP_UNUSED2 = 0x00000006;
+
+  /// Class (R--tied to ClassGUID)
+  static const SPDRP_CLASS = 0x00000007;
+
+  /// ClassGUID (R/W)
+  static const SPDRP_CLASSGUID = 0x00000008;
+
+  /// Driver (R/W)
+  static const SPDRP_DRIVER = 0x00000009;
+
+  /// ConfigFlags (R/W)
+  static const SPDRP_CONFIGFLAGS = 0x0000000A;
+
+  /// Mfg (R/W)
+  static const SPDRP_MFG = 0x0000000B;
+
+  /// FriendlyName (R/W)
+  static const SPDRP_FRIENDLYNAME = 0x0000000C;
+
+  /// LocationInformation (R/W)
+  static const SPDRP_LOCATION_INFORMATION = 0x0000000D;
+
+  /// PhysicalDeviceObjectName (R)
+  static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = 0x0000000E;
+
+  /// Capabilities (R)
+  static const SPDRP_CAPABILITIES = 0x0000000F;
+
+  /// UiNumber (R)
+  static const SPDRP_UI_NUMBER = 0x00000010;
+
+  /// UpperFilters (R/W)
+  static const SPDRP_UPPERFILTERS = 0x00000011;
+
+  /// LowerFilters (R/W)
+  static const SPDRP_LOWERFILTERS = 0x00000012;
+
+  /// BusTypeGUID (R)
+  static const SPDRP_BUSTYPEGUID = 0x00000013;
+
+  /// LegacyBusType (R)
+  static const SPDRP_LEGACYBUSTYPE = 0x00000014;
+
+  /// BusNumber (R)
+  static const SPDRP_BUSNUMBER = 0x00000015;
+
+  /// Enumerator Name (R)
+  static const SPDRP_ENUMERATOR_NAME = 0x00000016;
+
+  /// Security (R/W, binary form)
+  static const SPDRP_SECURITY = 0x00000017;
+
+  /// Security (W, SDS form)
+  static const SPDRP_SECURITY_SDS = 0x00000018;
+
+  /// Device Type (R/W)
+  static const SPDRP_DEVTYPE = 0x00000019;
+
+  /// Device is exclusive-access (R/W)
+  static const SPDRP_EXCLUSIVE = 0x0000001A;
+
+  /// Device Characteristics (R/W)
+  static const SPDRP_CHARACTERISTICS = 0x0000001B;
+
+  /// Device Address (R)
+  static const SPDRP_ADDRESS = 0x0000001C;
+
+  /// UiNumberDescFormat (R/W)
+  static const SPDRP_UI_NUMBER_DESC_FORMAT = 0X0000001D;
+
+  /// Device Power Data (R)
+  static const SPDRP_DEVICE_POWER_DATA = 0x0000001E;
+
+  /// Removal Policy (R)
+  static const SPDRP_REMOVAL_POLICY = 0x0000001F;
+
+  /// Hardware Removal Policy (R)
+  static const SPDRP_REMOVAL_POLICY_HW_DEFAULT = 0x00000020;
+
+  /// Removal Policy Override (RW)
+  static const SPDRP_REMOVAL_POLICY_OVERRIDE = 0x00000021;
+
+  /// Device Install State (R)
+  static const SPDRP_INSTALL_STATE = 0x00000022;
+
+  /// Device Location Paths (R)
+  static const SPDRP_LOCATION_PATHS = 0x00000023;
 }
