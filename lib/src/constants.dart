@@ -2105,9 +2105,7 @@ const WM_USER = 0x0400;
 /// A message-only window enables you to send and receive messages. It is not
 /// visible, has no z-order, cannot be enumerated, and does not receive
 /// broadcast messages. The window simply dispatches messages.
-const HWND_MESSAGE = 0xFFFFFFFFFFFFFFFD;
-
-/// (HWND) -3
+const HWND_MESSAGE = 0xFFFFFFFFFFFFFFFD; // (HWND) -3
 
 /// Special HWND value for use with PostMessage() and SendMessage(). The message
 /// is sent to all top-level windows in the system, including disabled or
