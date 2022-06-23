@@ -37,7 +37,7 @@ class IGameControllerBatteryInfo extends IInspectable {
       IGameControllerBatteryInfo.fromRawPointer(
           interface.toInterface(IID_IGameControllerBatteryInfo));
 
-  Pointer<COMObject> TryGetBatteryReport() {
+  Pointer<COMObject> tryGetBatteryReport() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

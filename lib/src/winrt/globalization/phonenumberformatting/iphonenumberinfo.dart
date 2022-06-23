@@ -37,7 +37,7 @@ class IPhoneNumberInfo extends IInspectable {
       IPhoneNumberInfo.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberInfo));
 
-  int get CountryCode {
+  int get countryCode {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -60,7 +60,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  String get PhoneNumber {
+  String get phoneNumber {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -84,7 +84,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int GetLengthOfGeographicalAreaCode() {
+  int getLengthOfGeographicalAreaCode() {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -107,7 +107,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  String GetNationalSignificantNumber() {
+  String getNationalSignificantNumber() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -131,7 +131,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int GetLengthOfNationalDestinationCode() {
+  int getLengthOfNationalDestinationCode() {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -154,7 +154,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int PredictNumberKind() {
+  int predictNumberKind() {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -177,7 +177,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  String GetGeographicRegionCode() {
+  String getGeographicRegionCode() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -201,7 +201,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int CheckNumberMatch(Pointer<COMObject> otherNumber) {
+  int checkNumberMatch(Pointer<COMObject> otherNumber) {
     final retValuePtr = calloc<Int32>();
 
     try {

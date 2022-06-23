@@ -37,7 +37,7 @@ class IXmlNodeList extends IInspectable {
   factory IXmlNodeList.from(IInspectable interface) =>
       IXmlNodeList.fromRawPointer(interface.toInterface(IID_IXmlNodeList));
 
-  int get Length {
+  int get length {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -60,7 +60,7 @@ class IXmlNodeList extends IInspectable {
     }
   }
 
-  Pointer<COMObject> Item(int index) {
+  Pointer<COMObject> item(int index) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

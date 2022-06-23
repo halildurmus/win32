@@ -40,7 +40,7 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
       IGamepadStatics2.fromRawPointer(
           interface.toInterface(IID_IGamepadStatics2));
 
-  Pointer<COMObject> FromGameController(Pointer<COMObject> gameController) {
+  Pointer<COMObject> fromGameController(Pointer<COMObject> gameController) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =
@@ -84,5 +84,5 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
       _iGamepadStatics.remove_GamepadRemoved(token);
 
   @override
-  List<String> get Gamepads => _iGamepadStatics.Gamepads;
+  List<String> get gamepads => _iGamepadStatics.gamepads;
 }

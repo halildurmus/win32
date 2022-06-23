@@ -36,7 +36,7 @@ class IToastNotification3 extends IInspectable {
       IToastNotification3.fromRawPointer(
           interface.toInterface(IID_IToastNotification3));
 
-  int get NotificationMirroring {
+  int get notificationMirroring {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -59,7 +59,7 @@ class IToastNotification3 extends IInspectable {
     }
   }
 
-  set NotificationMirroring(int value) {
+  set notificationMirroring(int value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -69,7 +69,7 @@ class IToastNotification3 extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String get RemoteId {
+  String get remoteId {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -93,7 +93,7 @@ class IToastNotification3 extends IInspectable {
     }
   }
 
-  set RemoteId(String value) {
+  set remoteId(String value) {
     final hstr = convertToHString(value);
 
     try {

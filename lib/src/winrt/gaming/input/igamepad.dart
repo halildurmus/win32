@@ -40,7 +40,7 @@ class IGamepad extends IInspectable implements IGameController {
   factory IGamepad.from(IInspectable interface) =>
       IGamepad.fromRawPointer(interface.toInterface(IID_IGamepad));
 
-  GamepadVibration get Vibration {
+  GamepadVibration get vibration {
     final retValuePtr = calloc<GamepadVibration>();
 
     try {
@@ -64,7 +64,7 @@ class IGamepad extends IInspectable implements IGameController {
     }
   }
 
-  set Vibration(GamepadVibration value) {
+  set vibration(GamepadVibration value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
@@ -77,7 +77,7 @@ class IGamepad extends IInspectable implements IGameController {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  GamepadReading GetCurrentReading() {
+  GamepadReading getCurrentReading() {
     final retValuePtr = calloc<GamepadReading>();
 
     try {
@@ -131,11 +131,11 @@ class IGamepad extends IInspectable implements IGameController {
       _iGameController.remove_UserChanged(token);
 
   @override
-  Pointer<COMObject> get Headset => _iGameController.Headset;
+  Pointer<COMObject> get headset => _iGameController.headset;
 
   @override
-  bool get IsWireless => _iGameController.IsWireless;
+  bool get isWireless => _iGameController.isWireless;
 
   @override
-  Pointer<COMObject> get User => _iGameController.User;
+  Pointer<COMObject> get user => _iGameController.user;
 }

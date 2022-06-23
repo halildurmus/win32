@@ -35,7 +35,8 @@ class IStringable extends IInspectable {
   factory IStringable.from(IInspectable interface) =>
       IStringable.fromRawPointer(interface.toInterface(IID_IStringable));
 
-  String ToString() {
+  @override
+  String toString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {

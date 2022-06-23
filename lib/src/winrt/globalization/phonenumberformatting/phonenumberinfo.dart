@@ -29,7 +29,8 @@ import '../../../com/iinspectable.dart';
 
 /// {@category Class}
 /// {@category winrt}
-class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
+class PhoneNumberInfo extends IInspectable
+    implements IPhoneNumberInfo, IStringable {
   PhoneNumberInfo.fromRawPointer(super.ptr);
 
   static const _className =
@@ -42,7 +43,7 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
 
     try {
       final result = IPhoneNumberInfoFactory.fromRawPointer(activationFactory)
-          .Create(number);
+          .create(number);
       return PhoneNumberInfo.fromRawPointer(result);
     } finally {
       free(activationFactory);
@@ -50,26 +51,26 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
   }
 
   // IPhoneNumberInfoStatics methods
-  static int TryParse(String input, Pointer<COMObject> phoneNumber) {
+  static int tryParse(String input, Pointer<COMObject> phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
       return IPhoneNumberInfoStatics.fromRawPointer(activationFactory)
-          .TryParse(input, phoneNumber);
+          .tryParse(input, phoneNumber);
     } finally {
       free(activationFactory);
     }
   }
 
-  static int TryParseWithRegion(
+  static int tryParseWithRegion(
       String input, String regionCode, Pointer<COMObject> phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
     try {
       return IPhoneNumberInfoStatics.fromRawPointer(activationFactory)
-          .TryParseWithRegion(input, regionCode, phoneNumber);
+          .tryParseWithRegion(input, regionCode, phoneNumber);
     } finally {
       free(activationFactory);
     }
@@ -79,37 +80,36 @@ class PhoneNumberInfo extends IInspectable implements IPhoneNumberInfo {
   late final _iPhoneNumberInfo = IPhoneNumberInfo.from(this);
 
   @override
-  int get CountryCode => _iPhoneNumberInfo.CountryCode;
+  int get countryCode => _iPhoneNumberInfo.countryCode;
 
   @override
-  String get PhoneNumber => _iPhoneNumberInfo.PhoneNumber;
+  String get phoneNumber => _iPhoneNumberInfo.phoneNumber;
 
   @override
-  int GetLengthOfGeographicalAreaCode() =>
-      _iPhoneNumberInfo.GetLengthOfGeographicalAreaCode();
+  int getLengthOfGeographicalAreaCode() =>
+      _iPhoneNumberInfo.getLengthOfGeographicalAreaCode();
 
   @override
-  String GetNationalSignificantNumber() =>
-      _iPhoneNumberInfo.GetNationalSignificantNumber();
+  String getNationalSignificantNumber() =>
+      _iPhoneNumberInfo.getNationalSignificantNumber();
 
   @override
-  int GetLengthOfNationalDestinationCode() =>
-      _iPhoneNumberInfo.GetLengthOfNationalDestinationCode();
+  int getLengthOfNationalDestinationCode() =>
+      _iPhoneNumberInfo.getLengthOfNationalDestinationCode();
 
   @override
-  int PredictNumberKind() => _iPhoneNumberInfo.PredictNumberKind();
+  int predictNumberKind() => _iPhoneNumberInfo.predictNumberKind();
 
   @override
-  String GetGeographicRegionCode() =>
-      _iPhoneNumberInfo.GetGeographicRegionCode();
+  String getGeographicRegionCode() =>
+      _iPhoneNumberInfo.getGeographicRegionCode();
 
   @override
-  int CheckNumberMatch(Pointer<COMObject> otherNumber) =>
-      _iPhoneNumberInfo.CheckNumberMatch(otherNumber);
-
+  int checkNumberMatch(Pointer<COMObject> otherNumber) =>
+      _iPhoneNumberInfo.checkNumberMatch(otherNumber);
   // IStringable methods
   late final _iStringable = IStringable.from(this);
 
   @override
-  String toString() => _iStringable.ToString();
+  String toString() => _iStringable.toString();
 }

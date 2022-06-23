@@ -39,7 +39,7 @@ class IToastNotificationManagerStatics extends IInspectable {
       IToastNotificationManagerStatics.fromRawPointer(
           interface.toInterface(IID_IToastNotificationManagerStatics));
 
-  Pointer<COMObject> CreateToastNotifier() {
+  Pointer<COMObject> createToastNotifier() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -57,7 +57,7 @@ class IToastNotificationManagerStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateToastNotifierWithId(String applicationId) {
+  Pointer<COMObject> createToastNotifierWithId(String applicationId) {
     final retValuePtr = calloc<COMObject>();
     final applicationIdHstring = convertToHString(applicationId);
     final hr = ptr.ref.vtable
@@ -78,7 +78,7 @@ class IToastNotificationManagerStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> GetTemplateContent(int type) {
+  Pointer<COMObject> getTemplateContent(int type) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

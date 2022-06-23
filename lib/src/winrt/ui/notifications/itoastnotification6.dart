@@ -36,7 +36,7 @@ class IToastNotification6 extends IInspectable {
       IToastNotification6.fromRawPointer(
           interface.toInterface(IID_IToastNotification6));
 
-  bool get ExpiresOnReboot {
+  bool get expiresOnReboot {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -59,7 +59,7 @@ class IToastNotification6 extends IInspectable {
     }
   }
 
-  set ExpiresOnReboot(bool value) {
+  set expiresOnReboot(bool value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Bool)>>>()

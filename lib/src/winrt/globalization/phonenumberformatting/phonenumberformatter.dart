@@ -38,50 +38,50 @@ class PhoneNumberFormatter extends IInspectable
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
 
   // IPhoneNumberFormatterStatics methods
-  static void TryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
+  static void tryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
       return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .TryCreate(regionCode, phoneNumber);
+          .tryCreate(regionCode, phoneNumber);
     } finally {
       free(activationFactory);
     }
   }
 
-  static int GetCountryCodeForRegion(String regionCode) {
+  static int getCountryCodeForRegion(String regionCode) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
       return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .GetCountryCodeForRegion(regionCode);
+          .getCountryCodeForRegion(regionCode);
     } finally {
       free(activationFactory);
     }
   }
 
-  static String GetNationalDirectDialingPrefixForRegion(
+  static String getNationalDirectDialingPrefixForRegion(
       String regionCode, bool stripNonDigit) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
       return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .GetNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
+          .getNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
     } finally {
       free(activationFactory);
     }
   }
 
-  static String WrapWithLeftToRightMarkers(String number) {
+  static String wrapWithLeftToRightMarkers(String number) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
     try {
       return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .WrapWithLeftToRightMarkers(number);
+          .wrapWithLeftToRightMarkers(number);
     } finally {
       free(activationFactory);
     }
@@ -91,22 +91,22 @@ class PhoneNumberFormatter extends IInspectable
   late final _iPhoneNumberFormatter = IPhoneNumberFormatter.from(this);
 
   @override
-  String Format(Pointer<COMObject> number) =>
-      _iPhoneNumberFormatter.Format(number);
+  String format(Pointer<COMObject> number) =>
+      _iPhoneNumberFormatter.format(number);
 
   @override
-  String FormatWithOutputFormat(Pointer<COMObject> number, int numberFormat) =>
-      _iPhoneNumberFormatter.FormatWithOutputFormat(number, numberFormat);
+  String formatWithOutputFormat(Pointer<COMObject> number, int numberFormat) =>
+      _iPhoneNumberFormatter.formatWithOutputFormat(number, numberFormat);
 
   @override
-  String FormatPartialString(String number) =>
-      _iPhoneNumberFormatter.FormatPartialString(number);
+  String formatPartialString(String number) =>
+      _iPhoneNumberFormatter.formatPartialString(number);
 
   @override
-  String FormatString(String number) =>
-      _iPhoneNumberFormatter.FormatString(number);
+  String formatString(String number) =>
+      _iPhoneNumberFormatter.formatString(number);
 
   @override
-  String FormatStringWithLeftToRightMarkers(String number) =>
-      _iPhoneNumberFormatter.FormatStringWithLeftToRightMarkers(number);
+  String formatStringWithLeftToRightMarkers(String number) =>
+      _iPhoneNumberFormatter.formatStringWithLeftToRightMarkers(number);
 }

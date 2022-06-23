@@ -160,7 +160,7 @@ class IGameController extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer<COMObject> get Headset {
+  Pointer<COMObject> get headset {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -178,7 +178,7 @@ class IGameController extends IInspectable {
     return retValuePtr;
   }
 
-  bool get IsWireless {
+  bool get isWireless {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -201,7 +201,7 @@ class IGameController extends IInspectable {
     }
   }
 
-  Pointer<COMObject> get User {
+  Pointer<COMObject> get user {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

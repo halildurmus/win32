@@ -108,17 +108,17 @@ class IAsyncAction extends IInspectable implements IAsyncInfo {
       IAsyncInfo.fromRawPointer(toInterface(IID_IAsyncInfo));
 
   @override
-  int get Id => _iAsyncInfo.Id;
+  int get id => _iAsyncInfo.id;
 
   @override
-  int get Status => _iAsyncInfo.Status;
+  int get status => _iAsyncInfo.status;
 
   @override
-  int get ErrorCode => _iAsyncInfo.ErrorCode;
+  int get errorCode => _iAsyncInfo.errorCode;
 
   @override
-  void Cancel() => _iAsyncInfo.Cancel();
+  void cancel() => _iAsyncInfo.cancel();
 
   @override
-  void Close() => _iAsyncInfo.Close();
+  void close() => _iAsyncInfo.close();
 }

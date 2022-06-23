@@ -63,19 +63,19 @@ class IIterator<T> extends IInspectable {
   }
 
   /// Gets the current item in the collection.
-  T get Current {
+  T get current {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _Current_String() as T;
+        return _current_String() as T;
       // Handle WinRT types
       default:
-        return _creator!(_Current_COMObject());
+        return _creator!(_current_COMObject());
     }
   }
 
-  Pointer<COMObject> _Current_COMObject() {
+  Pointer<COMObject> _current_COMObject() {
     final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -93,7 +93,7 @@ class IIterator<T> extends IInspectable {
     return retValuePtr;
   }
 
-  String _Current_String() {
+  String _current_String() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -119,7 +119,7 @@ class IIterator<T> extends IInspectable {
 
   /// Gets a value that indicates whether the iterator refers to a current item
   /// or is at the end of the collection.
-  bool get HasCurrent {
+  bool get hasCurrent {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -143,7 +143,7 @@ class IIterator<T> extends IInspectable {
   }
 
   /// Advances the iterator to the next item in the collection.
-  bool MoveNext() {
+  bool moveNext() {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -169,19 +169,19 @@ class IIterator<T> extends IInspectable {
   /// Retrieves multiple items from the iterator.
   ///
   /// `capacity` must be equal to the capacity of the `items` pointer.
-  int GetMany(Pointer<NativeType> items, int capacity) {
+  int getMany(Pointer<NativeType> items, int capacity) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _GetMany_String(items.cast(), capacity);
+        return _getMany_String(items.cast(), capacity);
       // Handle WinRT types
       default:
-        return _GetMany_COMObject(items.cast(), capacity);
+        return _getMany_COMObject(items.cast(), capacity);
     }
   }
 
-  int _GetMany_COMObject(Pointer<COMObject> items, int capacity) {
+  int _getMany_COMObject(Pointer<COMObject> items, int capacity) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -207,7 +207,7 @@ class IIterator<T> extends IInspectable {
     }
   }
 
-  int _GetMany_String(Pointer<HSTRING> items, int capacity) {
+  int _getMany_String(Pointer<HSTRING> items, int capacity) {
     final retValuePtr = calloc<Uint32>();
 
     try {

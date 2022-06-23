@@ -61,7 +61,7 @@ class IIterable<T> extends IInspectable {
   }
 
   /// Returns an iterator for the items in the collection.
-  IIterator<T> First() {
+  IIterator<T> first() {
     final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value

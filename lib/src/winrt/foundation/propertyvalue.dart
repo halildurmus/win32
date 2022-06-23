@@ -34,488 +34,488 @@ class PropertyValue extends IInspectable {
   static const _className = 'Windows.Foundation.PropertyValue';
 
   // IPropertyValueStatics methods
-  static Pointer<COMObject> CreateEmpty() {
+  static Pointer<COMObject> createEmpty() {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateEmpty();
+          .createEmpty();
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt8(int value) {
+  static Pointer<COMObject> createUInt8(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt8(value);
+          .createUInt8(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt16(int value) {
+  static Pointer<COMObject> createInt16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt16(value);
+          .createInt16(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt16(int value) {
+  static Pointer<COMObject> createUInt16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt16(value);
+          .createUInt16(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt32(int value) {
+  static Pointer<COMObject> createInt32(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt32(value);
+          .createInt32(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt32(int value) {
+  static Pointer<COMObject> createUInt32(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt32(value);
+          .createUInt32(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt64(int value) {
+  static Pointer<COMObject> createInt64(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt64(value);
+          .createInt64(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt64(int value) {
+  static Pointer<COMObject> createUInt64(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt64(value);
+          .createUInt64(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateSingle(double value) {
+  static Pointer<COMObject> createSingle(double value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateSingle(value);
+          .createSingle(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateDouble(double value) {
+  static Pointer<COMObject> createDouble(double value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateDouble(value);
+          .createDouble(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateChar16(int value) {
+  static Pointer<COMObject> createChar16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateChar16(value);
+          .createChar16(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateBoolean(bool value) {
+  static Pointer<COMObject> createBoolean(bool value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateBoolean(value);
+          .createBoolean(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateString(String value) {
+  static Pointer<COMObject> createString(String value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateString(value);
+          .createString(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInspectable(Pointer<COMObject> value) {
+  static Pointer<COMObject> createInspectable(Pointer<COMObject> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInspectable(value);
+          .createInspectable(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateGuid(GUID value) {
+  static Pointer<COMObject> createGuid(GUID value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateGuid(value);
+          .createGuid(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateDateTime(DateTime value) {
+  static Pointer<COMObject> createDateTime(DateTime value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateDateTime(value);
+          .createDateTime(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateTimeSpan(Duration value) {
+  static Pointer<COMObject> createTimeSpan(Duration value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateTimeSpan(value);
+          .createTimeSpan(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreatePoint(Point value) {
+  static Pointer<COMObject> createPoint(Point value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreatePoint(value);
+          .createPoint(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateSize(Size value) {
+  static Pointer<COMObject> createSize(Size value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateSize(value);
+          .createSize(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateRect(Rect value) {
+  static Pointer<COMObject> createRect(Rect value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateRect(value);
+          .createRect(value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt8Array(
+  static Pointer<COMObject> createUInt8Array(
       int valueSize, Pointer<Uint8> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt8Array(valueSize, value);
+          .createUInt8Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt16Array(
+  static Pointer<COMObject> createInt16Array(
       int valueSize, Pointer<Int16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt16Array(valueSize, value);
+          .createInt16Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt16Array(
+  static Pointer<COMObject> createUInt16Array(
       int valueSize, Pointer<Uint16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt16Array(valueSize, value);
+          .createUInt16Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt32Array(
+  static Pointer<COMObject> createInt32Array(
       int valueSize, Pointer<Int32> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt32Array(valueSize, value);
+          .createInt32Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt32Array(
+  static Pointer<COMObject> createUInt32Array(
       int valueSize, Pointer<Uint32> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt32Array(valueSize, value);
+          .createUInt32Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInt64Array(
+  static Pointer<COMObject> createInt64Array(
       int valueSize, Pointer<Int64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInt64Array(valueSize, value);
+          .createInt64Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateUInt64Array(
+  static Pointer<COMObject> createUInt64Array(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateUInt64Array(valueSize, value);
+          .createUInt64Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateSingleArray(
+  static Pointer<COMObject> createSingleArray(
       int valueSize, Pointer<Float> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateSingleArray(valueSize, value);
+          .createSingleArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateDoubleArray(
+  static Pointer<COMObject> createDoubleArray(
       int valueSize, Pointer<Double> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateDoubleArray(valueSize, value);
+          .createDoubleArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateChar16Array(
+  static Pointer<COMObject> createChar16Array(
       int valueSize, Pointer<Uint16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateChar16Array(valueSize, value);
+          .createChar16Array(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateBooleanArray(
+  static Pointer<COMObject> createBooleanArray(
       int valueSize, Pointer<Bool> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateBooleanArray(valueSize, value);
+          .createBooleanArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateStringArray(
+  static Pointer<COMObject> createStringArray(
       int valueSize, Pointer<IntPtr> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateStringArray(valueSize, value);
+          .createStringArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateInspectableArray(
+  static Pointer<COMObject> createInspectableArray(
       int valueSize, Pointer<COMObject> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateInspectableArray(valueSize, value);
+          .createInspectableArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateGuidArray(
+  static Pointer<COMObject> createGuidArray(
       int valueSize, Pointer<GUID> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateGuidArray(valueSize, value);
+          .createGuidArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateDateTimeArray(
+  static Pointer<COMObject> createDateTimeArray(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateDateTimeArray(valueSize, value);
+          .createDateTimeArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateTimeSpanArray(
+  static Pointer<COMObject> createTimeSpanArray(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateTimeSpanArray(valueSize, value);
+          .createTimeSpanArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreatePointArray(
+  static Pointer<COMObject> createPointArray(
       int valueSize, Pointer<Point> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreatePointArray(valueSize, value);
+          .createPointArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateSizeArray(
+  static Pointer<COMObject> createSizeArray(
       int valueSize, Pointer<Size> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateSizeArray(valueSize, value);
+          .createSizeArray(valueSize, value);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> CreateRectArray(
+  static Pointer<COMObject> createRectArray(
       int valueSize, Pointer<Rect> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
     try {
       return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .CreateRectArray(valueSize, value);
+          .createRectArray(valueSize, value);
     } finally {
       free(activationFactory);
     }

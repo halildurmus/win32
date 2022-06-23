@@ -36,7 +36,7 @@ class IToastNotification2 extends IInspectable {
       IToastNotification2.fromRawPointer(
           interface.toInterface(IID_IToastNotification2));
 
-  set Tag(String value) {
+  set tag(String value) {
     final hstr = convertToHString(value);
 
     try {
@@ -52,7 +52,7 @@ class IToastNotification2 extends IInspectable {
     }
   }
 
-  String get Tag {
+  String get tag {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -76,7 +76,7 @@ class IToastNotification2 extends IInspectable {
     }
   }
 
-  set Group(String value) {
+  set group(String value) {
     final hstr = convertToHString(value);
 
     try {
@@ -92,7 +92,7 @@ class IToastNotification2 extends IInspectable {
     }
   }
 
-  String get Group {
+  String get group {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -116,7 +116,7 @@ class IToastNotification2 extends IInspectable {
     }
   }
 
-  set SuppressPopup(bool value) {
+  set suppressPopup(bool value) {
     final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Bool)>>>()
@@ -126,7 +126,7 @@ class IToastNotification2 extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  bool get SuppressPopup {
+  bool get suppressPopup {
     final retValuePtr = calloc<Bool>();
 
     try {

@@ -38,7 +38,7 @@ class ICalendarFactory extends IInspectable {
       ICalendarFactory.fromRawPointer(
           interface.toInterface(IID_ICalendarFactory));
 
-  Pointer<COMObject> CreateCalendarDefaultCalendarAndClock(
+  Pointer<COMObject> createCalendarDefaultCalendarAndClock(
       Pointer<COMObject> languages) {
     final retValuePtr = calloc<COMObject>();
 
@@ -60,7 +60,7 @@ class ICalendarFactory extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateCalendar(
+  Pointer<COMObject> createCalendar(
       Pointer<COMObject> languages, String calendar, String clock) {
     final retValuePtr = calloc<COMObject>();
 

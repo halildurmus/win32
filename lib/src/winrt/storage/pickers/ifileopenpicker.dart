@@ -40,7 +40,7 @@ class IFileOpenPicker extends IInspectable {
       IFileOpenPicker.fromRawPointer(
           interface.toInterface(IID_IFileOpenPicker));
 
-  int get ViewMode {
+  int get viewMode {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -63,7 +63,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  set ViewMode(int value) {
+  set viewMode(int value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -73,7 +73,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String get SettingsIdentifier {
+  String get settingsIdentifier {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -97,7 +97,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  set SettingsIdentifier(String value) {
+  set settingsIdentifier(String value) {
     final hstr = convertToHString(value);
 
     try {
@@ -113,7 +113,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  int get SuggestedStartLocation {
+  int get suggestedStartLocation {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -136,7 +136,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  set SuggestedStartLocation(int value) {
+  set suggestedStartLocation(int value) {
     final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -146,7 +146,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String get CommitButtonText {
+  String get commitButtonText {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -170,7 +170,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  set CommitButtonText(String value) {
+  set commitButtonText(String value) {
     final hstr = convertToHString(value);
 
     try {
@@ -186,7 +186,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  IVector<String> get FileTypeFilter {
+  IVector<String> get fileTypeFilter {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -204,7 +204,7 @@ class IFileOpenPicker extends IInspectable {
     return IVector.fromRawPointer(retValuePtr);
   }
 
-  Pointer<COMObject> PickSingleFileAsync() {
+  Pointer<COMObject> pickSingleFileAsync() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -222,7 +222,7 @@ class IFileOpenPicker extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> PickMultipleFilesAsync() {
+  Pointer<COMObject> pickMultipleFilesAsync() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

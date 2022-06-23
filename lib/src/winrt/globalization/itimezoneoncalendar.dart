@@ -36,7 +36,7 @@ class ITimeZoneOnCalendar extends IInspectable {
       ITimeZoneOnCalendar.fromRawPointer(
           interface.toInterface(IID_ITimeZoneOnCalendar));
 
-  String GetTimeZone() {
+  String getTimeZone() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -60,7 +60,7 @@ class ITimeZoneOnCalendar extends IInspectable {
     }
   }
 
-  void ChangeTimeZone(String timeZoneId) {
+  void changeTimeZone(String timeZoneId) {
     final timeZoneIdHstring = convertToHString(timeZoneId);
     final hr = ptr.ref.vtable
         .elementAt(7)
@@ -77,7 +77,7 @@ class ITimeZoneOnCalendar extends IInspectable {
     WindowsDeleteString(timeZoneIdHstring);
   }
 
-  String TimeZoneAsFullString() {
+  String timeZoneAsFullString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -101,7 +101,7 @@ class ITimeZoneOnCalendar extends IInspectable {
     }
   }
 
-  String TimeZoneAsString(int idealLength) {
+  String timeZoneAsString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
