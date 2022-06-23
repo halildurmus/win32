@@ -114,29 +114,6 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  // Clone the list, otherwise isStringable will give unpredictable results.
-  @override
-  List<TypeDef> get implementsInterfaces => [...typeDef.interfaces]
-    ..removeWhere(
-        (interface) => interface.name == 'Windows.Foundation.IStringable')
-    // Generic collections' typeDef returns an empty name and that breaks lots
-    // of things. We need to ignore them for now
-    ..removeWhere((interface) => interface.name.isEmpty);
-
-  bool get isStringable => typeDef.interfaces
-      .map((i) => i.name)
-      .contains('Windows.Foundation.IStringable');
-
-  String get stringableMappers => isStringable
-      ? '''
-    // IStringable methods
-    late final _iStringable = IStringable.from(this);
-
-    @override
-    String toString() => _iStringable.ToString();
-  '''
-      : '';
-
   @override
   String toString() {
     return '''
@@ -156,7 +133,6 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
         $factoryMappers
         $staticMappers
         $implementsMappers
-        $stringableMappers
       }
     ''';
   }

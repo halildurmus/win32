@@ -3,6 +3,7 @@ import 'package:winmd/winmd.dart';
 import 'parameter.dart';
 import 'safenames.dart';
 import 'type.dart';
+import 'utils.dart';
 
 /// A generic class representing an entry in a COM function vtable.
 ///
@@ -89,17 +90,17 @@ abstract class MethodProjection {
       parameters.map((param) => param.paramProjection).join(', ');
 
   /// A shortened version of the method declaration for use in mappers.
-  ///   e.g. `void SetDateTime(DateTime value)` or `void SetToNow()` (method)
-  ///   e.g. `int get Period` or `int get Second` (get property)
-  ///   e.g. `set Second(int value)` (set property)
+  ///   e.g. `void setDateTime(DateTime value)` or `void setToNow()` (method)
+  ///   e.g. `int get period` or `int get second` (get property)
+  ///   e.g. `set second(int value)` (set property)
   String get shortDeclaration => toString().split('{').first.trim();
 
   /// A shortened version of the method for use in mappers.
-  ///   e.g. `SetDateTime(value)` or `SetToNow()` (method)
-  ///   e.g. `Period` or `Second` (get property)
-  ///   e.g. `Second = value` (set property)
+  ///   e.g. `setDateTime(value)` or `setToNow()` (method)
+  ///   e.g. `period` or `second` (get property)
+  ///   e.g. `second = value` (set property)
   String get shortForm =>
-      '$name(${parameters.map((param) => param.identifier).join(', ')})';
+      '${name.toCamelCase()}(${parameters.map((param) => param.identifier).join(', ')})';
 
   /// The native prototype representing the method.
   String get nativePrototype;
