@@ -27,7 +27,7 @@ void main() {
     });
 
     test('Format a US number', () {
-      final phone = formatter.FormatString('4255550123');
+      final phone = formatter.formatString('4255550123');
       expect(phone, equals('(425) 555-0123'));
     });
 
@@ -35,31 +35,31 @@ void main() {
       // Generated from UK "numbers for use in TV and radio drama"
       // https://www.ofcom.org.uk/phones-telecoms-and-internet/information-for-industry/numbering/numbers-for-drama
       final formatterObject = calloc<COMObject>();
-      PhoneNumberFormatter.TryCreate('GB', formatterObject);
+      PhoneNumberFormatter.tryCreate('GB', formatterObject);
       final ukFormatter = IPhoneNumberFormatter.fromRawPointer(formatterObject);
-      final london = ukFormatter.FormatString('02079460123');
+      final london = ukFormatter.formatString('02079460123');
       expect(london, equals('020 7946 0123'));
-      final reading = ukFormatter.FormatString('01184960987');
+      final reading = ukFormatter.formatString('01184960987');
       expect(reading, equals('0118 496 0987'));
     });
 
     test('Country codes for regions', () {
-      expect(PhoneNumberFormatter.GetCountryCodeForRegion('US'), equals(1));
-      expect(PhoneNumberFormatter.GetCountryCodeForRegion('GB'), equals(44));
-      expect(PhoneNumberFormatter.GetCountryCodeForRegion('UA'), equals(380));
+      expect(PhoneNumberFormatter.getCountryCodeForRegion('US'), equals(1));
+      expect(PhoneNumberFormatter.getCountryCodeForRegion('GB'), equals(44));
+      expect(PhoneNumberFormatter.getCountryCodeForRegion('UA'), equals(380));
     });
 
     test('Direct dialing prefix for regions', () {
       expect(
-          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+          PhoneNumberFormatter.getNationalDirectDialingPrefixForRegion(
               'US', false),
           equals('1'));
       expect(
-          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+          PhoneNumberFormatter.getNationalDirectDialingPrefixForRegion(
               'TR', false),
           equals('0'));
       expect(
-          PhoneNumberFormatter.GetNationalDirectDialingPrefixForRegion(
+          PhoneNumberFormatter.getNationalDirectDialingPrefixForRegion(
               'TZ', true),
           equals('0'));
     });
