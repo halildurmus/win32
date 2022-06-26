@@ -8,15 +8,18 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../../winrt/foundation/winrt_enum.dart';
+
 /// Lists phone number formats supported by this API.
 ///
 /// {@category Enum}
-enum PhoneNumberFormat {
+enum PhoneNumberFormat implements WinRTEnum {
   E164(0),
   International(1),
   National(2),
   Rfc3966(3);
 
+  @override
   final int value;
 
   const PhoneNumberFormat(this.value);
@@ -30,12 +33,13 @@ enum PhoneNumberFormat {
 /// The result of calling the PhoneNumberInfo.CheckNumberMatch method.
 ///
 /// {@category Enum}
-enum PhoneNumberMatchResult {
+enum PhoneNumberMatchResult implements WinRTEnum {
   NoMatch(0),
   ShortNationalSignificantNumberMatch(1),
   NationalSignificantNumberMatch(2),
   ExactMatch(3);
 
+  @override
   final int value;
 
   const PhoneNumberMatchResult(this.value);
@@ -49,13 +53,14 @@ enum PhoneNumberMatchResult {
 /// Describes the results of trying to parse a string into a phone number.
 ///
 /// {@category Enum}
-enum PhoneNumberParseResult {
+enum PhoneNumberParseResult implements WinRTEnum {
   Valid(0),
   NotANumber(1),
   InvalidCountryCode(2),
   TooShort(3),
   TooLong(4);
 
+  @override
   final int value;
 
   const PhoneNumberParseResult(this.value);
@@ -70,7 +75,7 @@ enum PhoneNumberParseResult {
 /// PhoneNumberInfo.PredictNumberKind.
 ///
 /// {@category Enum}
-enum PredictedPhoneNumberKind {
+enum PredictedPhoneNumberKind implements WinRTEnum {
   FixedLine(0),
   Mobile(1),
   FixedLineOrMobile(2),
@@ -84,6 +89,7 @@ enum PredictedPhoneNumberKind {
   Voicemail(10),
   Unknown(11);
 
+  @override
   final int value;
 
   const PredictedPhoneNumberKind(this.value);

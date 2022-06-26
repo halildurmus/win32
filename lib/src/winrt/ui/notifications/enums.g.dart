@@ -8,14 +8,17 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../../winrt/foundation/winrt_enum.dart';
+
 /// Specifies whether notification mirroring is allowed. Mirroring enables a
 /// notification to be displayed on multiple devices.
 ///
 /// {@category Enum}
-enum NotificationMirroring {
+enum NotificationMirroring implements WinRTEnum {
   Allowed(0),
   Disabled(1);
 
+  @override
   final int value;
 
   const NotificationMirroring(this.value);
@@ -29,10 +32,11 @@ enum NotificationMirroring {
 /// Specifies the priority of a ToastNotification.
 ///
 /// {@category Enum}
-enum ToastNotificationPriority {
+enum ToastNotificationPriority implements WinRTEnum {
   Default(0),
   High(1);
 
+  @override
   final int value;
 
   const ToastNotificationPriority(this.value);
@@ -46,7 +50,7 @@ enum ToastNotificationPriority {
 /// Specifies the template to use in a toast notification.
 ///
 /// {@category Enum}
-enum ToastTemplateType {
+enum ToastTemplateType implements WinRTEnum {
   ToastImageAndText01(0),
   ToastImageAndText02(1),
   ToastImageAndText03(2),
@@ -56,6 +60,7 @@ enum ToastTemplateType {
   ToastText03(6),
   ToastText04(7);
 
+  @override
   final int value;
 
   const ToastTemplateType(this.value);

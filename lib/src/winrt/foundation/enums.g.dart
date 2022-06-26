@@ -8,15 +8,18 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../winrt/foundation/winrt_enum.dart';
+
 /// Specifies the status of an asynchronous operation.
 ///
 /// {@category Enum}
-enum AsyncStatus {
+enum AsyncStatus implements WinRTEnum {
   Started(0),
   Completed(1),
   Canceled(2),
   Error(3);
 
+  @override
   final int value;
 
   const AsyncStatus(this.value);
@@ -30,7 +33,7 @@ enum AsyncStatus {
 /// Specifies property value types.
 ///
 /// {@category Enum}
-enum PropertyType {
+enum PropertyType implements WinRTEnum {
   Empty(0),
   UInt8(1),
   Int16(2),
@@ -73,6 +76,7 @@ enum PropertyType {
   RectArray(1043),
   OtherTypeArray(1044);
 
+  @override
   final int value;
 
   const PropertyType(this.value);

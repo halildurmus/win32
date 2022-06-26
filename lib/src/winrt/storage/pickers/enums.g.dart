@@ -8,11 +8,13 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../../winrt/foundation/winrt_enum.dart';
+
 /// Identifies the storage location that the file picker presents to the
 /// user.
 ///
 /// {@category Enum}
-enum PickerLocationId {
+enum PickerLocationId implements WinRTEnum {
   DocumentsLibrary(0),
   ComputerFolder(1),
   Desktop(2),
@@ -24,6 +26,7 @@ enum PickerLocationId {
   Objects3D(8),
   Unspecified(9);
 
+  @override
   final int value;
 
   const PickerLocationId(this.value);
@@ -37,10 +40,11 @@ enum PickerLocationId {
 /// Indicates the view mode that the file picker is using to present items.
 ///
 /// {@category Enum}
-enum PickerViewMode {
+enum PickerViewMode implements WinRTEnum {
   List(0),
   Thumbnail(1);
 
+  @override
   final int value;
 
   const PickerViewMode(this.value);

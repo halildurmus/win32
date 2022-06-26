@@ -23,7 +23,7 @@ class EnumProjection {
 
   String get _projectedName => safeTypenameForString(enumName);
 
-  String get classDeclaration => 'enum $_projectedName {';
+  String get classDeclaration => 'enum $_projectedName implements WinRTEnum {';
 
   // The first field is always the special field _value
   List<Field> get _fields => typeDef.fields.skip(1).toList()
@@ -41,7 +41,10 @@ class EnumProjection {
     return buffer.toString();
   }
 
-  String get _enumValueVariable => 'final int value;';
+  String get _enumValueVariable => '''
+    @override
+    final int value;
+  ''';
 
   String get _constructor => 'const $enumName(this.value);';
 
@@ -49,7 +52,8 @@ class EnumProjection {
     factory $enumName.from(int value) =>
       $enumName.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));''';
+              value, 'value', 'No enum value with that value'));
+  ''';
 
   @override
   String toString() => '''
@@ -71,7 +75,7 @@ class FlagsEnumProjection extends EnumProjection {
   FlagsEnumProjection(super.typeDef, super.enumName, {super.comment});
 
   @override
-  String get classDeclaration => 'class $_projectedName extends FlagsEnum {';
+  String get classDeclaration => 'class $_projectedName extends WinRTEnum {';
 
   @override
   String get _constructor => 'const $enumName(super.value, {super.name});';

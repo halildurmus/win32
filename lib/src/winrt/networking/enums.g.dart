@@ -8,15 +8,18 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../winrt/foundation/winrt_enum.dart';
+
 /// The type of a HostName object.
 ///
 /// {@category Enum}
-enum HostNameType {
+enum HostNameType implements WinRTEnum {
   DomainName(0),
   Ipv4(1),
   Ipv6(2),
   Bluetooth(3);
 
+  @override
   final int value;
 
   const HostNameType(this.value);

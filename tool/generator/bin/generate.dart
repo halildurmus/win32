@@ -319,7 +319,6 @@ void generateWinRTEnumerations() {
     final folderPath = folderFromWinRTType(namespaceGroup.types.first);
     final file = File('../../lib/src/winrt/$folderPath/enums.g.dart')
       ..createSync(recursive: true);
-    var hasFlagsEnum = false;
 
     for (final type in namespaceGroup.types) {
       final typeDef = MetadataStore.getMetadataForType(type);
@@ -327,9 +326,6 @@ void generateWinRTEnumerations() {
 
       EnumProjection enumProjection;
       if (typeDef.existsAttribute('System.FlagsAttribute')) {
-        if (!hasFlagsEnum) {
-          hasFlagsEnum = true;
-        }
         enumProjection = FlagsEnumProjection(
             typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
             comment: enums[typeDef.name]!);
@@ -344,9 +340,8 @@ void generateWinRTEnumerations() {
     enumProjections.sort((a, b) =>
         lastComponent(a.enumName).compareTo(lastComponent(b.enumName)));
 
-    final import = hasFlagsEnum
-        ? "import '${relativePathToSrcDirectory(file)}winrt/internal/flags_enum.dart';"
-        : '';
+    final import =
+        "import '${relativePathToSrcDirectory(file)}winrt/foundation/winrt_enum.dart';";
     final enumsFile = [winrtEnumFileHeader, import, ...enumProjections].join();
     file.writeAsStringSync(DartFormatter().format(enumsFile));
   }

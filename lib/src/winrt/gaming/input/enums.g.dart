@@ -8,12 +8,12 @@
 
 // ignore_for_file: constant_identifier_names
 
-import '../../../winrt/internal/flags_enum.dart';
+import '../../../winrt/foundation/winrt_enum.dart';
 
 /// Label that appears on the physical controller button.
 ///
 /// {@category Enum}
-enum GameControllerButtonLabel {
+enum GameControllerButtonLabel implements WinRTEnum {
   None(0),
   XboxBack(1),
   XboxStart(2),
@@ -84,6 +84,7 @@ enum GameControllerButtonLabel {
   DialRight(67),
   Suspension(68);
 
+  @override
   final int value;
 
   const GameControllerButtonLabel(this.value);
@@ -97,7 +98,7 @@ enum GameControllerButtonLabel {
 /// Specifies the button type.
 ///
 /// {@category Enum}
-class GamepadButtons extends FlagsEnum {
+class GamepadButtons extends WinRTEnum {
   const GamepadButtons(super.value, {super.name});
 
   factory GamepadButtons.from(int value) =>

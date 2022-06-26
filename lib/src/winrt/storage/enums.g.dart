@@ -8,12 +8,12 @@
 
 // ignore_for_file: constant_identifier_names
 
-import '../../winrt/internal/flags_enum.dart';
+import '../../winrt/foundation/winrt_enum.dart';
 
 /// Describes the attributes of a file or folder.
 ///
 /// {@category Enum}
-class FileAttributes extends FlagsEnum {
+class FileAttributes extends WinRTEnum {
   const FileAttributes(super.value, {super.name});
 
   factory FileAttributes.from(int value) =>
@@ -65,11 +65,12 @@ class FileAttributes extends FlagsEnum {
 /// folder.
 ///
 /// {@category Enum}
-enum NameCollisionOption {
+enum NameCollisionOption implements WinRTEnum {
   GenerateUniqueName(0),
   ReplaceExisting(1),
   FailIfExists(2);
 
+  @override
   final int value;
 
   const NameCollisionOption(this.value);
@@ -84,10 +85,11 @@ enum NameCollisionOption {
 /// permanently deleted.
 ///
 /// {@category Enum}
-enum StorageDeleteOption {
+enum StorageDeleteOption implements WinRTEnum {
   Default(0),
   PermanentDelete(1);
 
+  @override
   final int value;
 
   const StorageDeleteOption(this.value);
@@ -102,7 +104,7 @@ enum StorageDeleteOption {
 /// a file or a folder.
 ///
 /// {@category Enum}
-class StorageItemTypes extends FlagsEnum {
+class StorageItemTypes extends WinRTEnum {
   const StorageItemTypes(super.value, {super.name});
 
   factory StorageItemTypes.from(int value) =>

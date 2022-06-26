@@ -8,10 +8,12 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../winrt/foundation/winrt_enum.dart';
+
 /// Identifies the day of the week.
 ///
 /// {@category Enum}
-enum DayOfWeek {
+enum DayOfWeek implements WinRTEnum {
   Sunday(0),
   Monday(1),
   Tuesday(2),
@@ -20,6 +22,7 @@ enum DayOfWeek {
   Friday(5),
   Saturday(6);
 
+  @override
   final int value;
 
   const DayOfWeek(this.value);
