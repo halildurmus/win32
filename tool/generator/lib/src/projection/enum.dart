@@ -104,6 +104,14 @@ class FlagsEnumProjection extends EnumProjection {
   String get _hasFlag => '''
     /// Determines whether one or more bit fields are set in the current enum
     /// value.
+    ///
+    /// ```dart
+    /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
+    /// print(fileAttributes.hasFlag(FileAttributes.ReadOnly)); // prints `true`
+    /// print(fileAttributes.hasFlag(FileAttributes.Temporary)); // prints `false`
+    /// print(fileAttributes.hasFlag(
+    ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // prints `true`
+    /// ```
     bool hasFlag($_projectedName flag) {
       if (value != 0 && flag.value == 0) return false;
       return value & flag.value == flag.value;
