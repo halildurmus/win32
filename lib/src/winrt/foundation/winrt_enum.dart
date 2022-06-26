@@ -1,10 +1,10 @@
-/// The base class that all WinRT Flags Enumerations extend.
-class FlagsEnum {
+/// The base class that all WinRT Enumerations extend.
+class WinRTEnum {
   final String? _name;
 
   final int value;
 
-  const FlagsEnum(this.value, {String? name}) : _name = name;
+  const WinRTEnum(this.value, {String? name}) : _name = name;
 
   @override
   String toString() =>
