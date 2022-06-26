@@ -10,7 +10,8 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Foundation.AsyncStatus');
 
     final enumProjection = EnumProjection(winTypeDef!, 'AsyncStatus');
-    expect(enumProjection.classDeclaration, equals('enum AsyncStatus {'));
+    expect(enumProjection.classDeclaration,
+        equals('enum AsyncStatus implements WinRTEnum {'));
     expect(enumProjection.identifiers, equalsIgnoringWhitespace('''
       Started(0),\n
       Completed(1),\n
@@ -25,7 +26,7 @@ void main() {
     final flagsEnumProjection =
         FlagsEnumProjection(winTypeDef!, 'FileAttributes');
     expect(flagsEnumProjection.classDeclaration,
-        equals('class FileAttributes extends FlagsEnum {'));
+        equals('class FileAttributes extends WinRTEnum {'));
     expect(flagsEnumProjection.identifiers, equalsIgnoringWhitespace('''
       static const Normal = FileAttributes(0, name: 'Normal');\n
       static const ReadOnly = FileAttributes(1, name: 'ReadOnly');\n
