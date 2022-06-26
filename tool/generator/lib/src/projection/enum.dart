@@ -101,15 +101,13 @@ class FlagsEnumProjection extends EnumProjection {
         $_projectedName(value | other.value);
   ''';
 
-  String get _contains => '''
-    bool contains($_projectedName enumValue) {
-      if (value != 0 && enumValue == $_projectedName.${_fields.first.name}) return false;
-      return value & enumValue.value == enumValue.value;
+  String get _hasFlag => '''
+    /// Determines whether one or more bit fields are set in the current enum
+    /// value.
+    bool hasFlag($_projectedName flag) {
+      if (value != 0 && flag == $_projectedName.${_fields.first.name}) return false;
+      return value & flag.value == flag.value;
     }
-  ''';
-
-  String get _containsAll => '''
-    bool containsAll(List<$_projectedName> other) => other.every(contains);
   ''';
 
   @override
@@ -128,9 +126,7 @@ class FlagsEnumProjection extends EnumProjection {
 
       $_orOperator
 
-      $_contains
-
-      $_containsAll
+      $_hasFlag
     }
   ''';
 }

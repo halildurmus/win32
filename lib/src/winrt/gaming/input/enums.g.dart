@@ -153,10 +153,10 @@ class GamepadButtons extends FlagsEnum {
   GamepadButtons operator |(GamepadButtons other) =>
       GamepadButtons(value | other.value);
 
-  bool contains(GamepadButtons enumValue) {
-    if (value != 0 && enumValue == GamepadButtons.None) return false;
-    return value & enumValue.value == enumValue.value;
+  /// Determines whether one or more bit fields are set in the current enum
+  /// value.
+  bool hasFlag(GamepadButtons flag) {
+    if (value != 0 && flag == GamepadButtons.None) return false;
+    return value & flag.value == flag.value;
   }
-
-  bool containsAll(List<GamepadButtons> other) => other.every(contains);
 }

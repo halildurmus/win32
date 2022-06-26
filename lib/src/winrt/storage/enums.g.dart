@@ -44,12 +44,12 @@ class FileAttributes extends FlagsEnum {
   FileAttributes operator |(FileAttributes other) =>
       FileAttributes(value | other.value);
 
-  bool contains(FileAttributes enumValue) {
-    if (value != 0 && enumValue == FileAttributes.Normal) return false;
-    return value & enumValue.value == enumValue.value;
+  /// Determines whether one or more bit fields are set in the current enum
+  /// value.
+  bool hasFlag(FileAttributes flag) {
+    if (value != 0 && flag == FileAttributes.Normal) return false;
+    return value & flag.value == flag.value;
   }
-
-  bool containsAll(List<FileAttributes> other) => other.every(contains);
 }
 
 /// Specifies what to do if a file or folder with the specified name already
@@ -114,10 +114,10 @@ class StorageItemTypes extends FlagsEnum {
   StorageItemTypes operator |(StorageItemTypes other) =>
       StorageItemTypes(value | other.value);
 
-  bool contains(StorageItemTypes enumValue) {
-    if (value != 0 && enumValue == StorageItemTypes.None) return false;
-    return value & enumValue.value == enumValue.value;
+  /// Determines whether one or more bit fields are set in the current enum
+  /// value.
+  bool hasFlag(StorageItemTypes flag) {
+    if (value != 0 && flag == StorageItemTypes.None) return false;
+    return value & flag.value == flag.value;
   }
-
-  bool containsAll(List<StorageItemTypes> other) => other.every(contains);
 }
