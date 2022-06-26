@@ -8,6 +8,8 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../../winrt/internal/flags_enum.dart';
+
 /// Label that appears on the physical controller button.
 ///
 /// {@category Enum}
@@ -95,40 +97,66 @@ enum GameControllerButtonLabel {
 /// Specifies the button type.
 ///
 /// {@category Enum}
-enum GamepadButtons {
-  None(0),
-  Menu(1),
-  View(2),
-  A(4),
-  B(8),
-  X(16),
-  Y(32),
-  DPadUp(64),
-  DPadDown(128),
-  DPadLeft(256),
-  DPadRight(512),
-  LeftShoulder(1024),
-  RightShoulder(2048),
-  LeftThumbstick(4096),
-  RightThumbstick(8192),
-  Paddle1(16384),
-  Paddle2(32768),
-  Paddle3(65536),
-  Paddle4(131072);
-
-  final int value;
-
-  const GamepadButtons(this.value);
+class GamepadButtons extends FlagsEnum {
+  const GamepadButtons(super.value, {super.name});
 
   factory GamepadButtons.from(int value) =>
       GamepadButtons.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<GamepadButtons> createSetFrom(int value) {
-    if (value == 0) return {GamepadButtons.values.first};
-    final values =
-        GamepadButtons.values.skip(1).where((e) => value & e.value == e.value);
-    return Set.unmodifiable(values);
+  static const None = GamepadButtons(0, name: 'None');
+  static const Menu = GamepadButtons(1, name: 'Menu');
+  static const View = GamepadButtons(2, name: 'View');
+  static const A = GamepadButtons(4, name: 'A');
+  static const B = GamepadButtons(8, name: 'B');
+  static const X = GamepadButtons(16, name: 'X');
+  static const Y = GamepadButtons(32, name: 'Y');
+  static const DPadUp = GamepadButtons(64, name: 'DPadUp');
+  static const DPadDown = GamepadButtons(128, name: 'DPadDown');
+  static const DPadLeft = GamepadButtons(256, name: 'DPadLeft');
+  static const DPadRight = GamepadButtons(512, name: 'DPadRight');
+  static const LeftShoulder = GamepadButtons(1024, name: 'LeftShoulder');
+  static const RightShoulder = GamepadButtons(2048, name: 'RightShoulder');
+  static const LeftThumbstick = GamepadButtons(4096, name: 'LeftThumbstick');
+  static const RightThumbstick = GamepadButtons(8192, name: 'RightThumbstick');
+  static const Paddle1 = GamepadButtons(16384, name: 'Paddle1');
+  static const Paddle2 = GamepadButtons(32768, name: 'Paddle2');
+  static const Paddle3 = GamepadButtons(65536, name: 'Paddle3');
+  static const Paddle4 = GamepadButtons(131072, name: 'Paddle4');
+
+  static const List<GamepadButtons> values = [
+    None,
+    Menu,
+    View,
+    A,
+    B,
+    X,
+    Y,
+    DPadUp,
+    DPadDown,
+    DPadLeft,
+    DPadRight,
+    LeftShoulder,
+    RightShoulder,
+    LeftThumbstick,
+    RightThumbstick,
+    Paddle1,
+    Paddle2,
+    Paddle3,
+    Paddle4
+  ];
+
+  GamepadButtons operator &(GamepadButtons other) =>
+      GamepadButtons(value & other.value);
+
+  GamepadButtons operator |(GamepadButtons other) =>
+      GamepadButtons(value | other.value);
+
+  bool contains(GamepadButtons enumValue) {
+    if (value != 0 && enumValue == GamepadButtons.None) return false;
+    return value & enumValue.value == enumValue.value;
   }
+
+  bool containsAll(List<GamepadButtons> other) => other.every(contains);
 }

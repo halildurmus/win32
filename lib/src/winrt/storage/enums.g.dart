@@ -8,32 +8,48 @@
 
 // ignore_for_file: constant_identifier_names
 
+import '../../winrt/internal/flags_enum.dart';
+
 /// Describes the attributes of a file or folder.
 ///
 /// {@category Enum}
-enum FileAttributes {
-  Normal(0),
-  ReadOnly(1),
-  Directory(16),
-  Archive(32),
-  Temporary(256),
-  LocallyIncomplete(512);
-
-  final int value;
-
-  const FileAttributes(this.value);
+class FileAttributes extends FlagsEnum {
+  const FileAttributes(super.value, {super.name});
 
   factory FileAttributes.from(int value) =>
       FileAttributes.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<FileAttributes> createSetFrom(int value) {
-    if (value == 0) return {FileAttributes.values.first};
-    final values =
-        FileAttributes.values.skip(1).where((e) => value & e.value == e.value);
-    return Set.unmodifiable(values);
+  static const Normal = FileAttributes(0, name: 'Normal');
+  static const ReadOnly = FileAttributes(1, name: 'ReadOnly');
+  static const Directory = FileAttributes(16, name: 'Directory');
+  static const Archive = FileAttributes(32, name: 'Archive');
+  static const Temporary = FileAttributes(256, name: 'Temporary');
+  static const LocallyIncomplete =
+      FileAttributes(512, name: 'LocallyIncomplete');
+
+  static const List<FileAttributes> values = [
+    Normal,
+    ReadOnly,
+    Directory,
+    Archive,
+    Temporary,
+    LocallyIncomplete
+  ];
+
+  FileAttributes operator &(FileAttributes other) =>
+      FileAttributes(value & other.value);
+
+  FileAttributes operator |(FileAttributes other) =>
+      FileAttributes(value | other.value);
+
+  bool contains(FileAttributes enumValue) {
+    if (value != 0 && enumValue == FileAttributes.Normal) return false;
+    return value & enumValue.value == enumValue.value;
   }
+
+  bool containsAll(List<FileAttributes> other) => other.every(contains);
 }
 
 /// Specifies what to do if a file or folder with the specified name already
@@ -78,25 +94,30 @@ enum StorageDeleteOption {
 /// a file or a folder.
 ///
 /// {@category Enum}
-enum StorageItemTypes {
-  None(0),
-  File(1),
-  Folder(2);
-
-  final int value;
-
-  const StorageItemTypes(this.value);
+class StorageItemTypes extends FlagsEnum {
+  const StorageItemTypes(super.value, {super.name});
 
   factory StorageItemTypes.from(int value) =>
       StorageItemTypes.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 
-  static Set<StorageItemTypes> createSetFrom(int value) {
-    if (value == 0) return {StorageItemTypes.values.first};
-    final values = StorageItemTypes.values
-        .skip(1)
-        .where((e) => value & e.value == e.value);
-    return Set.unmodifiable(values);
+  static const None = StorageItemTypes(0, name: 'None');
+  static const File = StorageItemTypes(1, name: 'File');
+  static const Folder = StorageItemTypes(2, name: 'Folder');
+
+  static const List<StorageItemTypes> values = [None, File, Folder];
+
+  StorageItemTypes operator &(StorageItemTypes other) =>
+      StorageItemTypes(value & other.value);
+
+  StorageItemTypes operator |(StorageItemTypes other) =>
+      StorageItemTypes(value | other.value);
+
+  bool contains(StorageItemTypes enumValue) {
+    if (value != 0 && enumValue == StorageItemTypes.None) return false;
+    return value & enumValue.value == enumValue.value;
   }
+
+  bool containsAll(List<StorageItemTypes> other) => other.every(contains);
 }

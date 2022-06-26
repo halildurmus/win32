@@ -23,27 +23,25 @@ class EnumProjection {
 
   String get _projectedName => safeTypenameForString(enumName);
 
-  bool get hasFlagsAttribute =>
-      typeDef.existsAttribute('System.FlagsAttribute');
+  String get classDeclaration => 'enum $_projectedName {';
 
-  String get fields {
+  // The first field is always the special field _value
+  List<Field> get _fields => typeDef.fields.skip(1).toList()
+    ..sort((a, b) => a.value.compareTo(b.value));
+
+  String get identifiers {
     final buffer = StringBuffer();
-    // The first field is always the special field _value
-    final fields = typeDef.fields.skip(1).toList()
-      ..sort((a, b) => a.value.compareTo(b.value));
 
-    for (final field in fields) {
-      final fieldName = field.name;
-      final fieldValue = field.value;
+    for (final field in _fields) {
       buffer
-        ..write('$fieldName($fieldValue)')
-        ..write(field != fields.last ? ',\n' : ';');
+        ..write('${field.name}(${field.value})')
+        ..write(field != _fields.last ? ',\n' : ';');
     }
 
     return buffer.toString();
   }
 
-  String get _enumVariable => 'final int value;';
+  String get _enumValueVariable => 'final int value;';
 
   String get _constructor => 'const $enumName(this.value);';
 
@@ -53,28 +51,86 @@ class EnumProjection {
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));''';
 
-  String get enumSetHelper => hasFlagsAttribute
-      ? '''
-    static Set<$enumName> createSetFrom(int value) {
-      if (value == 0) return {$enumName.values.first};
-      final values = $enumName.values.skip(1).where((e) => value & e.value == e.value);
-      return Set.unmodifiable(values);
-    }'''
-      : '';
+  @override
+  String toString() => '''
+    $classPreamble
+    $classDeclaration
+      $identifiers
+
+      $_enumValueVariable
+
+      $_constructor
+
+      $_factoryConstructor
+    }
+  ''';
+}
+
+/// Represents a Dart projection of a Flags enumeration typedef.
+class FlagsEnumProjection extends EnumProjection {
+  FlagsEnumProjection(super.typeDef, super.enumName, {super.comment});
+
+  @override
+  String get classDeclaration => 'class $_projectedName extends FlagsEnum {';
+
+  @override
+  String get _constructor => 'const $enumName(super.value, {super.name});';
+
+  @override
+  String get identifiers {
+    final buffer = StringBuffer();
+
+    for (final field in _fields) {
+      buffer.writeln(
+          "static const ${field.name} = $_projectedName(${field.value}, name: '${field.name}');");
+    }
+
+    return buffer.toString();
+  }
+
+  String get _values =>
+      'static const List<$enumName> values = [${_fields.map((e) => e.name).join(',')}];';
+
+  String get _andOperator => '''
+    $_projectedName operator &($_projectedName other) =>
+        $_projectedName(value & other.value);
+  ''';
+
+  String get _orOperator => '''
+    $_projectedName operator |($_projectedName other) =>
+        $_projectedName(value | other.value);
+  ''';
+
+  String get _contains => '''
+    bool contains($_projectedName enumValue) {
+      if (value != 0 && enumValue == $_projectedName.${_fields.first.name}) return false;
+      return value & enumValue.value == enumValue.value;
+    }
+  ''';
+
+  String get _containsAll => '''
+    bool containsAll(List<$_projectedName> other) => other.every(contains);
+  ''';
 
   @override
   String toString() => '''
-        $classPreamble
-        enum $_projectedName {
-          $fields
+    $classPreamble
+    $classDeclaration
+      $_constructor
 
-          $_enumVariable
+      $_factoryConstructor
 
-          $_constructor
+      $identifiers
 
-          $_factoryConstructor
+      $_values
 
-          $enumSetHelper
-        }
-      ''';
+      $_andOperator
+
+      $_orOperator
+
+      $_contains
+
+      $_containsAll
+    }
+  ''';
 }
