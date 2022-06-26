@@ -47,7 +47,7 @@ class FileAttributes extends FlagsEnum {
   /// Determines whether one or more bit fields are set in the current enum
   /// value.
   bool hasFlag(FileAttributes flag) {
-    if (value != 0 && flag == FileAttributes.Normal) return false;
+    if (value != 0 && flag.value == 0) return false;
     return value & flag.value == flag.value;
   }
 }
@@ -117,7 +117,7 @@ class StorageItemTypes extends FlagsEnum {
   /// Determines whether one or more bit fields are set in the current enum
   /// value.
   bool hasFlag(StorageItemTypes flag) {
-    if (value != 0 && flag == StorageItemTypes.None) return false;
+    if (value != 0 && flag.value == 0) return false;
     return value & flag.value == flag.value;
   }
 }

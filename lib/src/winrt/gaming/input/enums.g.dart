@@ -156,7 +156,7 @@ class GamepadButtons extends FlagsEnum {
   /// Determines whether one or more bit fields are set in the current enum
   /// value.
   bool hasFlag(GamepadButtons flag) {
-    if (value != 0 && flag == GamepadButtons.None) return false;
+    if (value != 0 && flag.value == 0) return false;
     return value & flag.value == flag.value;
   }
 }

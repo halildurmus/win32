@@ -105,7 +105,7 @@ class FlagsEnumProjection extends EnumProjection {
     /// Determines whether one or more bit fields are set in the current enum
     /// value.
     bool hasFlag($_projectedName flag) {
-      if (value != 0 && flag == $_projectedName.${_fields.first.name}) return false;
+      if (value != 0 && flag.value == 0) return false;
       return value & flag.value == flag.value;
     }
   ''';
