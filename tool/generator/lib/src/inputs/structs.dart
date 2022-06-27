@@ -198,6 +198,18 @@ const structsToGenerate = <String, String>{
       "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function.",
   "Windows.Win32.UI.Input.KeyboardAndMouse.INPUT":
       "Used by SendInput to store information for synthesizing input events such as keystrokes, mouse movement, and mouse clicks.",
+  "Windows.Win32.System.Console.INPUT_RECORD":
+      "Describes an input event in the console input buffer. These records can be read from the input buffer by using the ReadConsoleInput or PeekConsoleInput function, or written to the input buffer by using the WriteConsoleInput function.",
+  "Windows.Win32.System.Console.KEY_EVENT_RECORD":
+      "Describes a keyboard input event in a console INPUT_RECORD structure.",
+  "Windows.Win32.System.Console.MOUSE_EVENT_RECORD":
+      "Describes a mouse input event in a console INPUT_RECORD structure.",
+  "Windows.Win32.System.Console.WINDOW_BUFFER_SIZE_RECORD":
+      "Describes a change in the size of the console screen buffer.",
+  "Windows.Win32.System.Console.MENU_EVENT_RECORD":
+      "Describes a menu event in a console INPUT_RECORD structure. These events are used internally and should be ignored.",
+  "Windows.Win32.System.Console.FOCUS_EVENT_RECORD":
+      "Describes a focus event in a console INPUT_RECORD structure. These events are used internally and should be ignored.",
   "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ADDRESSES_LH":
       "The IP_ADAPTER_ADDRESSES structure is the header node for a linked list of addresses for a particular adapter. This structure can simultaneously be used as part of a linked list of IP_ADAPTER_ADDRESSES structures.",
   "Windows.Win32.NetworkManagement.IpHelper.IP_ADAPTER_ANYCAST_ADDRESS_XP":

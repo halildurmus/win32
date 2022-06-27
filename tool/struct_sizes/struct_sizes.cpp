@@ -155,6 +155,12 @@ void main()
     printf("  'IN_ADDR': %zu,\n", sizeof(IN_ADDR));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
+    printf("  'INPUT_RECORD': %zu,\n", sizeof(INPUT_RECORD));
+    printf("  'KEY_EVENT_RECORD': %zu,\n", sizeof(KEY_EVENT_RECORD));
+    printf("  'MOUSE_EVENT_RECORD': %zu,\n", sizeof(MOUSE_EVENT_RECORD));
+    printf("  'WINDOW_BUFFER_SIZE_RECORD': %zu,\n", sizeof(WINDOW_BUFFER_SIZE_RECORD));
+    printf("  'MENU_EVENT_RECORD': %zu,\n", sizeof(MENU_EVENT_RECORD));
+    printf("  'FOCUS_EVENT_RECORD': %zu,\n", sizeof(FOCUS_EVENT_RECORD));
     printf("  'IP_ADAPTER_ADDRESSES_LH': %zu,\n", sizeof(IP_ADAPTER_ADDRESSES_LH));
     printf("  'IP_ADAPTER_ANYCAST_ADDRESS_XP': %zu,\n", sizeof(IP_ADAPTER_ANYCAST_ADDRESS_XP));
     printf("  'IP_ADAPTER_DNS_SERVER_ADDRESS_XP': %zu,\n", sizeof(IP_ADAPTER_DNS_SERVER_ADDRESS_XP));

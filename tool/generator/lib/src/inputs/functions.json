@@ -1158,6 +1158,11 @@
         "dllLibrary": "user32",
         "comment": "Disables the window ghosting feature for the calling GUI process. Window ghosting is a Windows Manager feature that lets the user minimize, move, or close the main window of an application that is not responding."
     },
+    "DisableThreadLibraryCalls": {
+        "prototype": "BOOL DisableThreadLibraryCalls(\n  HMODULE hLibModule\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the specified dynamic-link library (DLL). This can reduce the size of the working set for some applications."
+    },
     "DisconnectNamedPipe": {
         "prototype": "BOOL DisconnectNamedPipe(\n  HANDLE hNamedPipe);",
         "dllLibrary": "kernel32",
@@ -1665,6 +1670,11 @@
         "dllLibrary": "kernel32",
         "comment": "Determines the location of the resource with the specified type, name, and language in the specified module."
     },
+    "FindStringOrdinal": {
+        "prototype": "int FindStringOrdinal(\n  [in] DWORD   dwFindStringOrdinalFlags,\n  [in] LPCWSTR lpStringSource,\n  [in] int     cchSource,\n  [in] LPCWSTR lpStringValue,\n  [in] int     cchValue,\n  [in] BOOL    bIgnoreCase\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locates a Unicode string (wide characters) in another Unicode string for a non-linguistic comparison."
+    },
     "FindText": {
         "prototype": "HWND FindTextW(\n  LPFINDREPLACEW Arg1\n);",
         "dllLibrary": "comdlg32",
@@ -1808,6 +1818,11 @@
         "dllLibrary": "user32",
         "comment": "Copies the caret's position to the specified POINT structure."
     },
+    "GetClassFile": {
+        "prototype": "HRESULT GetClassFile(\n  LPCOLESTR szFilename,\n  CLSID     *pclsid\n);",
+        "dllLibrary": "ole32",
+        "comment": "Returns the CLSID associated with the specified file name."
+    },
     "GetClassInfo": {
         "prototype": "BOOL GetClassInfoW(\n  HINSTANCE   hInstance,\n  LPCWSTR     lpClassName,\n  LPWNDCLASSW lpWndClass\n);",
         "dllLibrary": "user32",
@@ -1920,6 +1935,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a NetBIOS or DNS name associated with the local computer. The names are established at system startup, when the system reads them from the registry."
     },
+    "GetConsoleCP": {
+        "prototype": "UINT WINAPI GetConsoleCP(void);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the input code page used by the console associated with the calling process. A console uses its input code page to translate keyboard input into the corresponding character value."
+    },
     "GetConsoleCursorInfo": {
         "prototype": "BOOL WINAPI GetConsoleCursorInfo(\n  _In_  HANDLE               hConsoleOutput,\n  _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo\n);",
         "dllLibrary": "kernel32",
@@ -1929,6 +1949,11 @@
         "prototype": "BOOL WINAPI GetConsoleMode(\n  _In_  HANDLE  hConsoleHandle,\n  _Out_ LPDWORD lpMode\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current input mode of a console's input buffer or the current output mode of a console screen buffer."
+    },
+    "GetConsoleOutputCP": {
+        "prototype": "UINT WINAPI GetConsoleOutputCP(void);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the output code page used by the console associated with the calling process. A console uses its output code page to translate the character values written by the various output functions into the images displayed in the console window."
     },
     "GetConsoleScreenBufferInfo": {
         "prototype": "BOOL WINAPI GetConsoleScreenBufferInfo(\n  _In_  HANDLE                      hConsoleOutput,\n  _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo\n);",
@@ -2451,6 +2476,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a module handle for the specified module. The module must have been loaded by the calling process."
     },
+    "GetModuleHandleEx": {
+        "prototype": "BOOL GetModuleHandleExW(\n  [in]           DWORD   dwFlags,\n  [in, optional] LPCWSTR lpModuleName,\n  [out]          HMODULE *phModule\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a module handle for the specified module and increments the module's reference count unless GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT is specified. The module must have been loaded by the calling process."
+    },
     "GetMonitorBrightness": {
         "prototype": "_BOOL GetMonitorBrightness(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumBrightness,\n  LPDWORD pdwCurrentBrightness,\n  LPDWORD pdwMaximumBrightness\n);",
         "dllLibrary": "dxva2",
@@ -2557,6 +2587,11 @@
         "prototype": "HWND GetNextDlgTabItem(\n  HWND hDlg,\n  HWND hCtl,\n  BOOL bPrevious\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the first control that has the WS_TABSTOP style that precedes (or follows) the specified control."
+    },
+    "GetNumberOfConsoleInputEvents": {
+        "prototype": "BOOL WINAPI GetNumberOfConsoleInputEvents(\n  HANDLE hConsoleInput,\n  LPDWORD lpcNumberOfEvents\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the number of unread input records in the console's input buffer."
     },
     "GetNumberOfPhysicalMonitorsFromHMONITOR": {
         "prototype": "_BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(\n  HMONITOR hMonitor,\n  LPDWORD  pdwNumberOfPhysicalMonitors\n);",
@@ -3386,6 +3421,13 @@
         "dllLibrary": "iphlpapi",
         "comment": "The IpRenewAddress function renews a lease on an IPv4 address previously obtained through Dynamic Host Configuration Protocol (DHCP)."
     },
+    "IsApiSetImplemented": {
+        "prototype": "APICONTRACT BOOL IsApiSetImplemented(\n  PCSTR Contract\n);",
+        "apiSet": "api-ms-win-core-apiquery-l2-1-0",
+        "comment": "The IsApiSetImplemented function tests if a specified API set is present on the computer.",
+        "category": "onecore",
+        "minimumWindowsVersion": "WIN10_TH1"
+    },
     "IsAppThemed": {
         "prototype": "BOOL IsAppThemed();",
         "dllLibrary": "uxtheme",
@@ -4161,6 +4203,11 @@
         "dllLibrary": "user32",
         "comment": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops."
     },
+    "PeekConsoleInput": {
+        "prototype": "BOOL WINAPI PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads data from the specified console input buffer without removing it from the buffer."
+    },
     "PeekMessage": {
         "prototype": "BOOL PeekMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax,\n  UINT  wRemoveMsg\n);",
         "dllLibrary": "user32",
@@ -4301,6 +4348,11 @@
         "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads character input from the console input buffer and removes it from the buffer."
+    },
+    "ReadConsoleInput": {
+        "prototype": "BOOL WINAPI ReadConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads data from a console input buffer and removes it from the buffer."
     },
     "ReadFile": {
         "prototype": "BOOL ReadFile(\n  HANDLE       hFile,\n  LPVOID       lpBuffer,\n  DWORD        nNumberOfBytesToRead,\n  LPDWORD      lpNumberOfBytesRead,\n  LPOVERLAPPED lpOverlapped\n);",
@@ -5756,6 +5808,11 @@
         "comment": "The shutdown function disables sends or receives on a socket.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
+    },
+    "SizeofResource": {
+        "prototype": "DWORD SizeofResource(\n  [in, optional] HMODULE hModule,\n  [in]           HRSRC   hResInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the size, in bytes, of the specified resource."
     },
     "Sleep": {
         "prototype": "void Sleep(\n  DWORD dwMilliseconds\n);",

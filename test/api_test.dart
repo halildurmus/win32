@@ -1587,6 +1587,13 @@ void main() {
               Pointer<OVERLAPPED> lpOverlapped)>('DeviceIoControl');
       expect(DeviceIoControl, isA<Function>());
     });
+    test('Can instantiate DisableThreadLibraryCalls', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DisableThreadLibraryCalls = kernel32.lookupFunction<
+          Int32 Function(IntPtr hLibModule),
+          int Function(int hLibModule)>('DisableThreadLibraryCalls');
+      expect(DisableThreadLibraryCalls, isA<Function>());
+    });
     test('Can instantiate DisconnectNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final DisconnectNamedPipe = kernel32.lookupFunction<
@@ -1874,6 +1881,25 @@ void main() {
               Pointer<Utf16> lpName, int wLanguage)>('FindResourceExW');
       expect(FindResourceEx, isA<Function>());
     });
+    test('Can instantiate FindStringOrdinal', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindStringOrdinal = kernel32.lookupFunction<
+          Int32 Function(
+              Uint32 dwFindStringOrdinalFlags,
+              Pointer<Utf16> lpStringSource,
+              Int32 cchSource,
+              Pointer<Utf16> lpStringValue,
+              Int32 cchValue,
+              Int32 bIgnoreCase),
+          int Function(
+              int dwFindStringOrdinalFlags,
+              Pointer<Utf16> lpStringSource,
+              int cchSource,
+              Pointer<Utf16> lpStringValue,
+              int cchValue,
+              int bIgnoreCase)>('FindStringOrdinal');
+      expect(FindStringOrdinal, isA<Function>());
+    });
     test('Can instantiate FindVolumeClose', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindVolumeClose = kernel32.lookupFunction<
@@ -2032,6 +2058,12 @@ void main() {
               Pointer<Uint32> nSize)>('GetComputerNameExW');
       expect(GetComputerNameEx, isA<Function>());
     });
+    test('Can instantiate GetConsoleCP', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetConsoleCP = kernel32
+          .lookupFunction<Uint32 Function(), int Function()>('GetConsoleCP');
+      expect(GetConsoleCP, isA<Function>());
+    });
     test('Can instantiate GetConsoleCursorInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetConsoleCursorInfo = kernel32.lookupFunction<
@@ -2049,6 +2081,13 @@ void main() {
           int Function(
               int hConsoleHandle, Pointer<Uint32> lpMode)>('GetConsoleMode');
       expect(GetConsoleMode, isA<Function>());
+    });
+    test('Can instantiate GetConsoleOutputCP', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetConsoleOutputCP =
+          kernel32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetConsoleOutputCP');
+      expect(GetConsoleOutputCP, isA<Function>());
     });
     test('Can instantiate GetConsoleScreenBufferInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -2366,6 +2405,15 @@ void main() {
           int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
       expect(GetModuleHandle, isA<Function>());
     });
+    test('Can instantiate GetModuleHandleEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetModuleHandleEx = kernel32.lookupFunction<
+          Int32 Function(Uint32 dwFlags, Pointer<Utf16> lpModuleName,
+              Pointer<IntPtr> phModule),
+          int Function(int dwFlags, Pointer<Utf16> lpModuleName,
+              Pointer<IntPtr> phModule)>('GetModuleHandleExW');
+      expect(GetModuleHandleEx, isA<Function>());
+    });
     test('Can instantiate GetNamedPipeClientComputerName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetNamedPipeClientComputerName = kernel32.lookupFunction<
@@ -2436,6 +2484,16 @@ void main() {
           void Function(
               Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
       expect(GetNativeSystemInfo, isA<Function>());
+    });
+    test('Can instantiate GetNumberOfConsoleInputEvents', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNumberOfConsoleInputEvents = kernel32.lookupFunction<
+              Int32 Function(
+                  IntPtr hConsoleInput, Pointer<Uint32> lpNumberOfEvents),
+              int Function(
+                  int hConsoleInput, Pointer<Uint32> lpNumberOfEvents)>(
+          'GetNumberOfConsoleInputEvents');
+      expect(GetNumberOfConsoleInputEvents, isA<Function>());
     });
     test('Can instantiate GetOverlappedResult', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3100,6 +3158,18 @@ void main() {
         expect(PackageFamilyNameFromFullName, isA<Function>());
       });
     }
+    test('Can instantiate PeekConsoleInput', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final PeekConsoleInput = kernel32.lookupFunction<
+          Int32 Function(IntPtr hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+              Uint32 nLength, Pointer<Uint32> lpNumberOfEventsRead),
+          int Function(
+              int hConsoleInput,
+              Pointer<INPUT_RECORD> lpBuffer,
+              int nLength,
+              Pointer<Uint32> lpNumberOfEventsRead)>('PeekConsoleInputW');
+      expect(PeekConsoleInput, isA<Function>());
+    });
     test('Can instantiate PeekNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final PeekNamedPipe = kernel32.lookupFunction<
@@ -3183,6 +3253,18 @@ void main() {
                   Pointer<CONSOLE_READCONSOLE_CONTROL> pInputControl)>(
           'ReadConsoleW');
       expect(ReadConsole, isA<Function>());
+    });
+    test('Can instantiate ReadConsoleInput', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ReadConsoleInput = kernel32.lookupFunction<
+          Int32 Function(IntPtr hConsoleInput, Pointer<INPUT_RECORD> lpBuffer,
+              Uint32 nLength, Pointer<Uint32> lpNumberOfEventsRead),
+          int Function(
+              int hConsoleInput,
+              Pointer<INPUT_RECORD> lpBuffer,
+              int nLength,
+              Pointer<Uint32> lpNumberOfEventsRead)>('ReadConsoleInputW');
+      expect(ReadConsoleInput, isA<Function>());
     });
     test('Can instantiate ReadFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3580,6 +3662,13 @@ void main() {
           int Function(Pointer<Utf16> lpRootPathName,
               Pointer<Utf16> lpVolumeName)>('SetVolumeLabelW');
       expect(SetVolumeLabel, isA<Function>());
+    });
+    test('Can instantiate SizeofResource', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SizeofResource = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hModule, IntPtr hResInfo),
+          int Function(int hModule, int hResInfo)>('SizeofResource');
+      expect(SizeofResource, isA<Function>());
     });
     test('Can instantiate Sleep', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -8824,6 +8913,14 @@ void main() {
               Pointer<Pointer<COMObject>> ppstm)>('CreateStreamOnHGlobal');
       expect(CreateStreamOnHGlobal, isA<Function>());
     });
+    test('Can instantiate GetClassFile', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final GetClassFile = ole32.lookupFunction<
+          Int32 Function(Pointer<Utf16> szFilename, Pointer<GUID> pclsid),
+          int Function(
+              Pointer<Utf16> szFilename, Pointer<GUID> pclsid)>('GetClassFile');
+      expect(GetClassFile, isA<Function>());
+    });
     test('Can instantiate GetHGlobalFromStream', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final GetHGlobalFromStream = ole32.lookupFunction<
@@ -10448,6 +10545,20 @@ void main() {
               Pointer<Uint32> puLen)>('VerQueryValueW');
       expect(VerQueryValue, isA<Function>());
     });
+  });
+
+  group('Test api-ms-win-core-apiquery-l2-1-0 functions', () {
+    if (windowsBuildNumber >= 10240) {
+      test('Can instantiate IsApiSetImplemented', () {
+        final api_ms_win_core_apiquery_l2_1_0 =
+            DynamicLibrary.open('api-ms-win-core-apiquery-l2-1-0.dll');
+        final IsApiSetImplemented =
+            api_ms_win_core_apiquery_l2_1_0.lookupFunction<
+                Int32 Function(Pointer<Utf8> Contract),
+                int Function(Pointer<Utf8> Contract)>('IsApiSetImplemented');
+        expect(IsApiSetImplemented, isA<Function>());
+      });
+    }
   });
 
   group('Test magnification functions', () {

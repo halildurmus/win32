@@ -2436,6 +2436,15 @@ class FINDREPLACE extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// Describes a focus event in a console INPUT_RECORD structure. These
+/// events are used internally and should be ignored.
+///
+/// {@category Struct}
+class FOCUS_EVENT_RECORD extends Struct {
+  @Int32()
+  external int bSetFocus;
+}
+
 /// Describes a function.
 ///
 /// {@category Struct}
@@ -2724,6 +2733,51 @@ extension INPUT_Extension on INPUT {
 
   HARDWAREINPUT get hi => this.Anonymous.hi;
   set hi(HARDWAREINPUT value) => this.Anonymous.hi = value;
+}
+
+/// Describes an input event in the console input buffer. These records can
+/// be read from the input buffer by using the ReadConsoleInput or
+/// PeekConsoleInput function, or written to the input buffer by using the
+/// WriteConsoleInput function.
+///
+/// {@category Struct}
+class INPUT_RECORD extends Struct {
+  @Uint16()
+  external int EventType;
+
+  external _INPUT_RECORD__Event_e__Union Event;
+}
+
+/// {@category Struct}
+class _INPUT_RECORD__Event_e__Union extends Union {
+  external KEY_EVENT_RECORD KeyEvent;
+
+  external MOUSE_EVENT_RECORD MouseEvent;
+
+  external WINDOW_BUFFER_SIZE_RECORD WindowBufferSizeEvent;
+
+  external MENU_EVENT_RECORD MenuEvent;
+
+  external FOCUS_EVENT_RECORD FocusEvent;
+}
+
+extension INPUT_RECORD_Extension on INPUT_RECORD {
+  KEY_EVENT_RECORD get KeyEvent => this.Event.KeyEvent;
+  set KeyEvent(KEY_EVENT_RECORD value) => this.Event.KeyEvent = value;
+
+  MOUSE_EVENT_RECORD get MouseEvent => this.Event.MouseEvent;
+  set MouseEvent(MOUSE_EVENT_RECORD value) => this.Event.MouseEvent = value;
+
+  WINDOW_BUFFER_SIZE_RECORD get WindowBufferSizeEvent =>
+      this.Event.WindowBufferSizeEvent;
+  set WindowBufferSizeEvent(WINDOW_BUFFER_SIZE_RECORD value) =>
+      this.Event.WindowBufferSizeEvent = value;
+
+  MENU_EVENT_RECORD get MenuEvent => this.Event.MenuEvent;
+  set MenuEvent(MENU_EVENT_RECORD value) => this.Event.MenuEvent = value;
+
+  FOCUS_EVENT_RECORD get FocusEvent => this.Event.FocusEvent;
+  set FocusEvent(FOCUS_EVENT_RECORD value) => this.Event.FocusEvent = value;
 }
 
 /// The IN_ADDR structure represents an IPv4 Internet address.
@@ -3564,6 +3618,45 @@ class KEYBDINPUT extends Struct {
   external int dwExtraInfo;
 }
 
+/// Describes a keyboard input event in a console INPUT_RECORD structure.
+///
+/// {@category Struct}
+class KEY_EVENT_RECORD extends Struct {
+  @Int32()
+  external int bKeyDown;
+
+  @Uint16()
+  external int wRepeatCount;
+
+  @Uint16()
+  external int wVirtualKeyCode;
+
+  @Uint16()
+  external int wVirtualScanCode;
+
+  external _KEY_EVENT_RECORD__uChar_e__Union uChar;
+
+  @Uint32()
+  external int dwControlKeyState;
+}
+
+/// {@category Struct}
+class _KEY_EVENT_RECORD__uChar_e__Union extends Union {
+  @Uint16()
+  external int UnicodeChar;
+
+  @Uint8()
+  external int AsciiChar;
+}
+
+extension KEY_EVENT_RECORD_Extension on KEY_EVENT_RECORD {
+  int get UnicodeChar => this.uChar.UnicodeChar;
+  set UnicodeChar(int value) => this.uChar.UnicodeChar = value;
+
+  int get AsciiChar => this.uChar.AsciiChar;
+  set AsciiChar(int value) => this.uChar.AsciiChar = value;
+}
+
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
@@ -3967,6 +4060,15 @@ class MENUITEMTEMPLATEHEADER extends Struct {
 
   @Uint16()
   external int offset;
+}
+
+/// Describes a menu event in a console INPUT_RECORD structure. These events
+/// are used internally and should be ignored.
+///
+/// {@category Struct}
+class MENU_EVENT_RECORD extends Struct {
+  @Uint32()
+  external int dwCommandId;
 }
 
 /// Defines the metafile picture format used for exchanging metafile data
@@ -4499,6 +4601,22 @@ class MOUSEMOVEPOINT extends Struct {
 
   @IntPtr()
   external int dwExtraInfo;
+}
+
+/// Describes a mouse input event in a console INPUT_RECORD structure.
+///
+/// {@category Struct}
+class MOUSE_EVENT_RECORD extends Struct {
+  external COORD dwMousePosition;
+
+  @Uint32()
+  external int dwButtonState;
+
+  @Uint32()
+  external int dwControlKeyState;
+
+  @Uint32()
+  external int dwEventFlags;
 }
 
 /// Contains message information from a thread's message queue.
@@ -7774,6 +7892,13 @@ class WINDOWPOS extends Struct {
 
   @Uint32()
   external int flags;
+}
+
+/// Describes a change in the size of the console screen buffer.
+///
+/// {@category Struct}
+class WINDOW_BUFFER_SIZE_RECORD extends Struct {
+  external COORD dwSize;
 }
 
 /// The WLAN_ASSOCIATION_ATTRIBUTES structure contains association
