@@ -49,10 +49,10 @@ class FileAttributes extends WinRTEnum {
   ///
   /// ```dart
   /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-  /// print(fileAttributes.hasFlag(FileAttributes.ReadOnly)); // prints `true`
-  /// print(fileAttributes.hasFlag(FileAttributes.Temporary)); // prints `false`
-  /// print(fileAttributes.hasFlag(
-  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // prints `true`
+  /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
+  /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+  /// fileAttributes.hasFlag(
+  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
   /// ```
   bool hasFlag(FileAttributes flag) {
     if (value != 0 && flag.value == 0) return false;
@@ -129,10 +129,10 @@ class StorageItemTypes extends WinRTEnum {
   ///
   /// ```dart
   /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-  /// print(fileAttributes.hasFlag(FileAttributes.ReadOnly)); // prints `true`
-  /// print(fileAttributes.hasFlag(FileAttributes.Temporary)); // prints `false`
-  /// print(fileAttributes.hasFlag(
-  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // prints `true`
+  /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
+  /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+  /// fileAttributes.hasFlag(
+  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
   /// ```
   bool hasFlag(StorageItemTypes flag) {
     if (value != 0 && flag.value == 0) return false;

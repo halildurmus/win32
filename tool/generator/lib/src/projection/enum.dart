@@ -111,10 +111,10 @@ class FlagsEnumProjection extends EnumProjection {
     ///
     /// ```dart
     /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-    /// print(fileAttributes.hasFlag(FileAttributes.ReadOnly)); // prints `true`
-    /// print(fileAttributes.hasFlag(FileAttributes.Temporary)); // prints `false`
-    /// print(fileAttributes.hasFlag(
-    ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // prints `true`
+    /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
+    /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+    /// fileAttributes.hasFlag(
+    ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
     /// ```
     bool hasFlag($_projectedName flag) {
       if (value != 0 && flag.value == 0) return false;
