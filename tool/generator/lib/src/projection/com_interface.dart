@@ -96,11 +96,14 @@ class ComInterfaceProjection {
   // TODO: Find duplicates. This is the "correct" one.
   Set<String> importsForClass() {
     final importList = <String>{};
-    final methods = {
-      ...typeDef.methods,
-      // Also add the methods in typeDef's interfaces
-      ...[for (var typeDef in typeDef.interfaces) ...typeDef.methods]
-    };
+    // Methods from interfaces that this type implements.
+    final implementedMethods = [
+      for (var typeDef in typeDef.interfaces
+          // Ignore generic typeDefs for now as they return incorrect methods
+          .where((i) => i.name.isNotEmpty))
+        ...typeDef.methods
+    ];
+    final methods = {...typeDef.methods, ...implementedMethods};
 
     for (final method in methods) {
       final paramsAndReturnType = [...method.parameters, method.returnType];
