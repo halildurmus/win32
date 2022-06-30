@@ -22,6 +22,7 @@ import '../../../winrt_helpers.dart';
 import '../../../extensions/hstring_array.dart';
 
 import '../../../winrt/ui/notifications/toastnotifier.dart';
+import '../../../winrt/ui/notifications/enums.g.dart';
 import '../../../winrt/data/xml/dom/xmldocument.dart';
 import '../../../com/iinspectable.dart';
 
@@ -78,7 +79,7 @@ class IToastNotificationManagerStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> getTemplateContent(int type) {
+  Pointer<COMObject> getTemplateContent(ToastTemplateType type) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -90,7 +91,7 @@ class IToastNotificationManagerStatics extends IInspectable {
                             Pointer, Int32 type, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, int type, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, type, retValuePtr);
+        ptr.ref.lpVtbl, type.value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

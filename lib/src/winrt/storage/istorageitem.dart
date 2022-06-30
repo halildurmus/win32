@@ -22,6 +22,7 @@ import '../../winrt_helpers.dart';
 import '../../extensions/hstring_array.dart';
 
 import '../../winrt/foundation/iasyncaction.dart';
+import '../../winrt/storage/enums.g.dart';
 import '../../winrt/foundation/iasyncoperation.dart';
 import '../../winrt/storage/fileproperties/basicproperties.dart';
 import '../../com/iinspectable.dart';
@@ -59,7 +60,8 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> renameAsync(String desiredName, int option) {
+  Pointer<COMObject> renameAsync(
+      String desiredName, NameCollisionOption option) {
     final retValuePtr = calloc<COMObject>();
     final desiredNameHstring = convertToHString(desiredName);
 
@@ -75,7 +77,7 @@ class IStorageItem extends IInspectable {
                 .asFunction<
                     int Function(Pointer, int desiredName, int option,
                         Pointer<COMObject>)>()(
-            ptr.ref.lpVtbl, desiredNameHstring, option, retValuePtr);
+            ptr.ref.lpVtbl, desiredNameHstring, option.value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -102,7 +104,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> deleteAsync(int option) {
+  Pointer<COMObject> deleteAsync(StorageDeleteOption option) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -115,7 +117,7 @@ class IStorageItem extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, int option, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, option, retValuePtr);
+        ptr.ref.lpVtbl, option.value, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -188,7 +190,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  int get attributes {
+  FileAttributes get attributes {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -204,8 +206,7 @@ class IStorageItem extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return FileAttributes.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
@@ -234,7 +235,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  bool isOfType(int type) {
+  bool isOfType(StorageItemTypes type) {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -248,7 +249,7 @@ class IStorageItem extends IInspectable {
                                   Pointer, Uint32 type, Pointer<Bool>)>>>()
                   .value
                   .asFunction<int Function(Pointer, int type, Pointer<Bool>)>()(
-              ptr.ref.lpVtbl, type, retValuePtr);
+              ptr.ref.lpVtbl, type.value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

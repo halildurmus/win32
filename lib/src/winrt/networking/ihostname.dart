@@ -22,6 +22,7 @@ import '../../winrt_helpers.dart';
 import '../../extensions/hstring_array.dart';
 
 import '../../winrt/networking/connectivity/ipinformation.dart';
+import '../../winrt/networking/enums.g.dart';
 import '../../winrt/networking/hostname.dart';
 import '../../com/iinspectable.dart';
 
@@ -127,7 +128,7 @@ class IHostName extends IInspectable {
     }
   }
 
-  int get type {
+  HostNameType get type {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -143,8 +144,7 @@ class IHostName extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return HostNameType.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

@@ -31,6 +31,7 @@ import '../../../winrt/gaming/input/structs.g.dart';
 import '../../../winrt/gaming/input/headset.dart';
 import '../../../winrt/system/userchangedeventargs.dart';
 import '../../../winrt/system/user.dart';
+import '../../../winrt/gaming/input/enums.g.dart';
 import '../../../winrt/devices/power/batteryreport.dart';
 import '../../../winrt/foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
@@ -172,7 +173,8 @@ class Gamepad extends IInspectable
   late final _iGamepad2 = IGamepad2.from(this);
 
   @override
-  int getButtonLabel(int button) => _iGamepad2.getButtonLabel(button);
+  GameControllerButtonLabel getButtonLabel(GamepadButtons button) =>
+      _iGamepad2.getButtonLabel(button);
   // IGameControllerBatteryInfo methods
   late final _iGameControllerBatteryInfo =
       IGameControllerBatteryInfo.from(this);

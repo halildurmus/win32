@@ -92,7 +92,11 @@ class TypeProjection {
 
   bool get isString => typeIdentifier.baseType == BaseType.stringType;
 
+  bool get isWinRT => typeIdentifier.type?.isWindowsRuntime ?? false;
+
   bool get isEnumType => typeIdentifier.type?.parent?.name == 'System.Enum';
+
+  bool get isWinRTEnum => isWinRT && isEnumType;
 
   bool get isReferenceType =>
       typeIdentifier.baseType == BaseType.referenceTypeModifier;
@@ -108,16 +112,38 @@ class TypeProjection {
   bool get isSimpleArrayType =>
       typeIdentifier.baseType == BaseType.simpleArrayType;
 
+  bool get _isDelegate =>
+      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+
   bool get isWin32Delegate =>
       typeIdentifier.baseType == BaseType.classTypeModifier &&
       typeIdentifier.name.startsWith('Windows.Win32') &&
-      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+      _isDelegate;
 
-  bool get isWinRTDelegate =>
-      (typeIdentifier.type?.isWindowsRuntime ?? false) &&
-      typeIdentifier.type?.parent?.name == 'System.MulticastDelegate';
+  bool get isWinRTDelegate => isWinRT && _isDelegate;
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
+
+  TypeTuple unwrapWinRTEnum() {
+    final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;
+    if (fieldType == null) {
+      throw Exception('Enum $typeIdentifier is missing value__');
+    }
+
+    final enumName = lastComponent(typeIdentifier.type!.name);
+
+    if (fieldType.baseType == BaseType.int32Type) {
+      return TypeTuple('Int32', 'int',
+          attribute: '@Int32()', methodParamType: enumName);
+    }
+
+    if (fieldType.baseType == BaseType.uint32Type) {
+      return TypeTuple('Uint32', 'int',
+          attribute: '@Uint32()', methodParamType: enumName);
+    }
+
+    return TypeProjection(fieldType).projection;
+  }
 
   TypeTuple unwrapEnumType() {
     final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;
@@ -293,6 +319,9 @@ class TypeProjection {
     if (isString) {
       return const TypeTuple('IntPtr', 'int', methodParamType: 'String');
     }
+
+    // Could be a WinRT enum like AsyncStatus
+    if (isWinRTEnum) return unwrapWinRTEnum();
 
     // Could be an enum like FOLDERFLAGS
     if (isEnumType) return unwrapEnumType();

@@ -54,6 +54,8 @@ class WinRTMethodProjection extends MethodProjection {
 
   bool get isBooleanReturn => returnType.dartType == 'bool';
 
+  bool get isEnumReturn => returnType.isWinRTEnum;
+
   bool get isCOMObjectReturn => returnType.dartType == 'Pointer<COMObject>';
 
   bool get isVoidReturn => returnType.dartType == 'void';
@@ -95,46 +97,46 @@ class WinRTMethodProjection extends MethodProjection {
   ''';
 
   String vectorDeclaration() => '''
-    IVector<String> $camelCasedName($methodParams) {
-    final retValuePtr = calloc<COMObject>();
-    $parametersPreamble
-    ${ffiCall()}
-    $parametersPostamble
-    return IVector.fromRawPointer(retValuePtr);
-  }
+      IVector<String> $camelCasedName($methodParams) {
+        final retValuePtr = calloc<COMObject>();
+        $parametersPreamble
+        ${ffiCall()}
+        $parametersPostamble
+        return IVector.fromRawPointer(retValuePtr);
+      }
 ''';
 
   String vectorViewDeclaration() => '''
-    List<String> $camelCasedName($methodParams) {
-    final retValuePtr = calloc<COMObject>();
-    $parametersPreamble
-    ${ffiCall()}
+      List<String> $camelCasedName($methodParams) {
+        final retValuePtr = calloc<COMObject>();
+        $parametersPreamble
+        ${ffiCall()}
 
-    try {
-      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
-    } finally {
-      $parametersPostamble
-      free(retValuePtr);
+        try {
+          return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+        } finally {
+        $parametersPostamble
+        free(retValuePtr);
+      }
     }
-  }
 ''';
 
   String comObjectDeclaration() => '''
-    Pointer<COMObject> $camelCasedName($methodParams) {
-    final retValuePtr = calloc<COMObject>();
-    $parametersPreamble
-    ${ffiCall()}
-    $parametersPostamble
-    return retValuePtr;
-  }
+      Pointer<COMObject> $camelCasedName($methodParams) {
+        final retValuePtr = calloc<COMObject>();
+        $parametersPreamble
+        ${ffiCall()}
+        $parametersPostamble
+        return retValuePtr;
+      }
 ''';
 
   String voidDeclaration() => '''
-  void $camelCasedName($methodParams) {
-    $parametersPreamble
-    ${ffiCall()}
-    $parametersPostamble
-    }
+      void $camelCasedName($methodParams) {
+        $parametersPreamble
+        ${ffiCall()}
+        $parametersPostamble
+      }
 ''';
 
   String stringDeclaration() {
@@ -199,6 +201,22 @@ class WinRTMethodProjection extends MethodProjection {
       }
 ''';
 
+  String enumDeclaration() => '''
+      ${returnType.methodParamType} $camelCasedName($methodParams) {
+        final retValuePtr = calloc<${returnType.nativeType}>();
+        $parametersPreamble
+
+        try {
+          ${ffiCall()}
+
+          return ${returnType.methodParamType}.from(retValuePtr.value);
+        } finally {
+          $parametersPostamble
+          free(retValuePtr);
+        }
+      }
+  ''';
+
   String defaultDeclaration() {
     final valRef = returnType.dartType == 'double' ||
             returnType.dartType == 'int' ||
@@ -235,6 +253,7 @@ class WinRTMethodProjection extends MethodProjection {
       if (isStringReturn) return stringDeclaration();
       if (isDateTimeReturn) return dateTimeDeclaration();
       if (isTimeSpanReturn) return durationDeclaration();
+      if (isEnumReturn) return enumDeclaration();
 
       return defaultDeclaration();
     } on Exception {

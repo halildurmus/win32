@@ -24,6 +24,7 @@ import '../../../extensions/hstring_array.dart';
 import '../../../winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
 import 'iphonenumberformatterstatics.dart';
 import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
+import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}
@@ -95,7 +96,8 @@ class PhoneNumberFormatter extends IInspectable
       _iPhoneNumberFormatter.format(number);
 
   @override
-  String formatWithOutputFormat(Pointer<COMObject> number, int numberFormat) =>
+  String formatWithOutputFormat(
+          Pointer<COMObject> number, PhoneNumberFormat numberFormat) =>
       _iPhoneNumberFormatter.formatWithOutputFormat(number, numberFormat);
 
   @override

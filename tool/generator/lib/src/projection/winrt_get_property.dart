@@ -28,45 +28,45 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
   @override
   String vectorDeclaration() => '''
-    IVector<String> get $exposedMethodName {
-    final retValuePtr = calloc<COMObject>();
+      IVector<String> get $exposedMethodName {
+        final retValuePtr = calloc<COMObject>();
 
-    ${ffiCall()}
+        ${ffiCall()}
 
-    return IVector.fromRawPointer(retValuePtr);
-  }
+        return IVector.fromRawPointer(retValuePtr);
+      }
 ''';
 
   @override
   String vectorViewDeclaration() => '''
-    List<String> get $exposedMethodName {
-    final retValuePtr = calloc<COMObject>();
+      List<String> get $exposedMethodName {
+        final retValuePtr = calloc<COMObject>();
 
-    ${ffiCall()}
+        ${ffiCall()}
 
-    try {
-      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
-    } finally {
-      free(retValuePtr);
-    }
-  }
+        try {
+          return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+        } finally {
+          free(retValuePtr);
+        }
+      }
 ''';
 
   @override
   String comObjectDeclaration() => '''
-    Pointer<COMObject> get $exposedMethodName {
-    final retValuePtr = calloc<COMObject>();
+      Pointer<COMObject> get $exposedMethodName {
+        final retValuePtr = calloc<COMObject>();
 
-    ${ffiCall()}
+        ${ffiCall()}
 
-    return retValuePtr;
-  }
+        return retValuePtr;
+      }
 ''';
 
   @override
   String stringDeclaration() => '''
       String get $exposedMethodName {
-      final retValuePtr = calloc<HSTRING>();
+        final retValuePtr = calloc<HSTRING>();
 
         try {
           ${ffiCall()}
@@ -111,6 +111,21 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
         }
       }
 ''';
+
+  @override
+  String enumDeclaration() => '''
+      ${returnType.methodParamType} get $exposedMethodName {
+        final retValuePtr = calloc<${returnType.nativeType}>();
+
+        try {
+          ${ffiCall()}
+
+          return ${returnType.methodParamType}.from(retValuePtr.value);
+        } finally {
+          free(retValuePtr);
+        }
+      }
+  ''';
 
   @override
   String defaultDeclaration() {

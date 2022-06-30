@@ -21,6 +21,7 @@ import '../../../winrt_helpers.dart';
 
 import '../../../extensions/hstring_array.dart';
 
+import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
 import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
 import '../../../com/iinspectable.dart';
 
@@ -154,7 +155,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int predictNumberKind() {
+  PredictedPhoneNumberKind predictNumberKind() {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -170,8 +171,7 @@ class IPhoneNumberInfo extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PredictedPhoneNumberKind.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
@@ -201,7 +201,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  int checkNumberMatch(Pointer<COMObject> otherNumber) {
+  PhoneNumberMatchResult checkNumberMatch(Pointer<COMObject> otherNumber) {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -223,8 +223,7 @@ class IPhoneNumberInfo extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PhoneNumberMatchResult.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

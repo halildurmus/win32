@@ -23,6 +23,7 @@ import '../../extensions/hstring_array.dart';
 
 import '../../winrt/foundation/iasyncinfo.dart';
 import '../../com/iinspectable.dart';
+import 'enums.g.dart';
 
 /// @nodoc
 const IID_IAsyncAction = '{5A648006-843A-4DA9-865B-9D26E5DFAD7B}';
@@ -111,7 +112,7 @@ class IAsyncAction extends IInspectable implements IAsyncInfo {
   int get id => _iAsyncInfo.id;
 
   @override
-  int get status => _iAsyncInfo.status;
+  AsyncStatus get status => _iAsyncInfo.status;
 
   @override
   int get errorCode => _iAsyncInfo.errorCode;

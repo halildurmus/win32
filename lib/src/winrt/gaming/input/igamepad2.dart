@@ -23,6 +23,7 @@ import '../../../extensions/hstring_array.dart';
 
 import '../../../winrt/gaming/input/igamepad.dart';
 import '../../../winrt/gaming/input/igamecontroller.dart';
+import '../../../winrt/gaming/input/enums.g.dart';
 import '../../../winrt/gaming/input/structs.g.dart';
 import '../../../winrt/gaming/input/headset.dart';
 import '../../../winrt/system/userchangedeventargs.dart';
@@ -41,7 +42,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
   factory IGamepad2.from(IInspectable interface) =>
       IGamepad2.fromRawPointer(interface.toInterface(IID_IGamepad2));
 
-  int getButtonLabel(int button) {
+  GameControllerButtonLabel getButtonLabel(GamepadButtons button) {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -54,12 +55,11 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
                               Pointer, Uint32 button, Pointer<Int32>)>>>()
               .value
               .asFunction<int Function(Pointer, int button, Pointer<Int32>)>()(
-          ptr.ref.lpVtbl, button, retValuePtr);
+          ptr.ref.lpVtbl, button.value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return GameControllerButtonLabel.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

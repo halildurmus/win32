@@ -21,6 +21,7 @@ import '../../../winrt_helpers.dart';
 
 import '../../../extensions/hstring_array.dart';
 
+import '../../../winrt/storage/pickers/enums.g.dart';
 import '../../../winrt/foundation/collections/ivector.dart';
 import '../../../winrt/foundation/iasyncoperation.dart';
 import '../../../winrt/storage/storagefile.dart';
@@ -40,7 +41,7 @@ class IFileOpenPicker extends IInspectable {
       IFileOpenPicker.fromRawPointer(
           interface.toInterface(IID_IFileOpenPicker));
 
-  int get viewMode {
+  PickerViewMode get viewMode {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -56,19 +57,18 @@ class IFileOpenPicker extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PickerViewMode.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
   }
 
-  set viewMode(int value) {
+  set viewMode(PickerViewMode value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
@@ -113,7 +113,7 @@ class IFileOpenPicker extends IInspectable {
     }
   }
 
-  int get suggestedStartLocation {
+  PickerLocationId get suggestedStartLocation {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -129,19 +129,18 @@ class IFileOpenPicker extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PickerLocationId.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
   }
 
-  set suggestedStartLocation(int value) {
+  set suggestedStartLocation(PickerLocationId value) {
     final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

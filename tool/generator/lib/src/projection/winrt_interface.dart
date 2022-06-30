@@ -46,9 +46,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncActionCompletedHandler -> foundation/delegates.g.dart
       return '';
     } else if (typeDef.isEnum) {
-      // TODO: Update this once we generate WinRT enums in their respective
-      // folders e.g. Windows.Foundation.AsyncStatus -> foundation/enums.g.dart
-      return '';
+      return '${relativePathToSrcDir}winrt/${folderFromWinRTType(typeDef.name)}/enums.g.dart';
     } else if (typeDef.isClass || typeDef.isInterface) {
       return '${relativePathToSrcDir}winrt/${filePathFromWinRTType(typeDef.name)}';
     } else if (typeDef.isStruct) {

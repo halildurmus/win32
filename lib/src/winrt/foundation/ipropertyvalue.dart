@@ -21,6 +21,7 @@ import '../../winrt_helpers.dart';
 
 import '../../extensions/hstring_array.dart';
 
+import '../../winrt/foundation/enums.g.dart';
 import '../../guid.dart';
 import '../../winrt/foundation/structs.g.dart';
 import '../../com/iinspectable.dart';
@@ -37,7 +38,7 @@ class IPropertyValue extends IInspectable {
   factory IPropertyValue.from(IInspectable interface) =>
       IPropertyValue.fromRawPointer(interface.toInterface(IID_IPropertyValue));
 
-  int get type {
+  PropertyType get type {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -53,8 +54,7 @@ class IPropertyValue extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PropertyType.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

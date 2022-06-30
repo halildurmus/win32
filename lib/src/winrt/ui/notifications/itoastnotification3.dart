@@ -21,6 +21,7 @@ import '../../../winrt_helpers.dart';
 
 import '../../../extensions/hstring_array.dart';
 
+import '../../../winrt/ui/notifications/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -36,7 +37,7 @@ class IToastNotification3 extends IInspectable {
       IToastNotification3.fromRawPointer(
           interface.toInterface(IID_IToastNotification3));
 
-  int get notificationMirroring {
+  NotificationMirroring get notificationMirroring {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -52,19 +53,18 @@ class IToastNotification3 extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return NotificationMirroring.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
   }
 
-  set notificationMirroring(int value) {
+  set notificationMirroring(NotificationMirroring value) {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }
