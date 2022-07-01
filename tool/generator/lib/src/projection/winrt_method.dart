@@ -2,7 +2,6 @@ import 'package:winmd/winmd.dart';
 
 import 'method.dart';
 import 'type.dart';
-import 'utils.dart';
 import 'winrt_parameter.dart';
 
 class WinRTMethodProjection extends MethodProjection {
