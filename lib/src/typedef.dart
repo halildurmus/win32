@@ -284,7 +284,7 @@ class TypeDef extends TokenObject
 
       if (SUCCEEDED(hr)) {
         return TypeDef(
-            scope, typeSpecToken, '[typeSpec]', 0, 0, typeTuple.typeIdentifier);
+            scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
       } else {
         throw WindowsException(hr);
       }
