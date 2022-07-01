@@ -86,38 +86,44 @@ class TypeDef extends TokenObject
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) =>
-      using((Arena arena) {
-        final szTypeDef = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchTypeDef = arena<ULONG>();
-        final pdwTypeDefFlags = arena<DWORD>();
-        final ptkExtends = arena<mdToken>();
+  factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
+    assert(TokenType.fromToken(typeDefToken) == TokenType.typeDef);
 
-        final reader = scope.reader;
-        final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
-            stringBufferSize, pchTypeDef, pdwTypeDefFlags, ptkExtends);
+    return using((Arena arena) {
+      final szTypeDef = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchTypeDef = arena<ULONG>();
+      final pdwTypeDefFlags = arena<DWORD>();
+      final ptkExtends = arena<mdToken>();
 
-        if (SUCCEEDED(hr)) {
-          return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
-              pdwTypeDefFlags.value, ptkExtends.value);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
+          stringBufferSize, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
-  static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) =>
-      using((Arena arena) {
-        final ptkResolutionScope = arena<mdToken>();
-        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchName = arena<ULONG>();
-        final hr = scope.reader.GetTypeRefProps(typeRefToken,
-            ptkResolutionScope, szName, stringBufferSize, pchName);
-        if (SUCCEEDED(hr)) {
-          return szName.toDartString();
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      if (SUCCEEDED(hr)) {
+        return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
+            pdwTypeDefFlags.value, ptkExtends.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
+
+  static String _resolveTypeNameForTypeRef(Scope scope, int typeRefToken) {
+    assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
+
+    return using((Arena arena) {
+      final ptkResolutionScope = arena<mdToken>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      final hr = scope.reader.GetTypeRefProps(
+          typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
+      if (SUCCEEDED(hr)) {
+        return szName.toDartString();
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Resolve nested type by iterating through all typedefs looking for a match.
   ///
@@ -126,152 +132,164 @@ class TypeDef extends TokenObject
   /// to a parent type that has multiple versions with different platform
   /// architectures.
   static TypeDef _resolveNestedTypeThroughIteration(Scope scope,
-          int resolutionScopeToken, int typeRefToken, String typeName) =>
-      using((Arena arena) {
-        // Find the name of the parent type
-        final parentTypeName =
-            _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
+      int resolutionScopeToken, int typeRefToken, String typeName) {
+    assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-        // Get the matching typedef that matches the preferred architecture
-        final parentTypeDef = scope.findTypeDef(parentTypeName,
-            preferredArchitecture: PreferredArchitecture.x64);
-        if (parentTypeDef == null) {
-          throw WinmdException('Cannot find matching typeDef');
-        }
+    return using((Arena arena) {
+      // Find the name of the parent type
+      final parentTypeName =
+          _resolveTypeNameForTypeRef(scope, resolutionScopeToken);
 
-        // Now find the nested type that matches the name _and_ is enclosed in
-        // the parent's token.
-        final matchingTypes = scope.typeDefs
-            .where((t) => t.name == typeName)
-            .where((t) => t._enclosingClassToken == parentTypeDef.token);
+      // Get the matching typedef that matches the preferred architecture
+      final parentTypeDef = scope.findTypeDef(parentTypeName,
+          preferredArchitecture: PreferredArchitecture.x64);
+      if (parentTypeDef == null) {
+        throw WinmdException('Cannot find matching typeDef');
+      }
 
-        if (matchingTypes.length == 1) {
-          return matchingTypes.first;
-        } else {
-          print('${matchingTypes.length} types found for $typeName');
-          return TypeDef(scope, 0, typeName);
-        }
-      });
+      // Now find the nested type that matches the name _and_ is enclosed in
+      // the parent's token.
+      final matchingTypes = scope.typeDefs
+          .where((t) => t.name == typeName)
+          .where((t) => t._enclosingClassToken == parentTypeDef.token);
+
+      if (matchingTypes.length == 1) {
+        return matchingTypes.first;
+      } else {
+        print('${matchingTypes.length} types found for $typeName');
+        return TypeDef(scope, 0, typeName);
+      }
+    });
+  }
 
   /// Attempt to find a nested type using FindTypeDefByName.
   ///
   /// If this doesn't work, we then have to try a more labor-intensive approach.
   static TypeDef _resolveNestedType(Scope scope, int resolutionScopeToken,
-          int typeRefToken, String typeName) =>
-      using((Arena arena) {
-        final szTypeDef = typeName.toNativeUtf16(allocator: arena);
-        final ptd = arena<mdTypeDef>();
-        final hr = scope.reader
-            .FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
-        if (SUCCEEDED(hr)) {
-          return TypeDef.fromToken(scope, ptd.value);
-        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-          return _resolveNestedTypeThroughIteration(
-              scope, resolutionScopeToken, typeRefToken, typeName);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      int typeRefToken, String typeName) {
+    assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
+
+    return using((Arena arena) {
+      final szTypeDef = typeName.toNativeUtf16(allocator: arena);
+      final ptd = arena<mdTypeDef>();
+      final hr =
+          scope.reader.FindTypeDefByName(szTypeDef, resolutionScopeToken, ptd);
+      if (SUCCEEDED(hr)) {
+        return TypeDef.fromToken(scope, ptd.value);
+      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+        return _resolveNestedTypeThroughIteration(
+            scope, resolutionScopeToken, typeRefToken, typeName);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Instantiate a typedef from a TypeRef token.
   ///
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) =>
-      using((Arena arena) {
-        final ptkResolutionScope = arena<mdToken>();
-        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchName = arena<ULONG>();
+  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
+    assert(TokenType.fromToken(typeRefToken) == TokenType.typeRef);
 
-        final reader = scope.reader;
-        final hr = reader.GetTypeRefProps(typeRefToken, ptkResolutionScope,
-            szName, stringBufferSize, pchName);
+    return using((Arena arena) {
+      final ptkResolutionScope = arena<mdToken>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
 
-        if (SUCCEEDED(hr)) {
-          final typeName = szName.toDartString();
-          final resolutionScopeToken = ptkResolutionScope.value;
+      final reader = scope.reader;
+      final hr = reader.GetTypeRefProps(
+          typeRefToken, ptkResolutionScope, szName, stringBufferSize, pchName);
 
-          // Special case for WinRT base type
-          if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
-            return TypeDef(scope, 0, 'IInspectable');
-          }
+      if (SUCCEEDED(hr)) {
+        final typeName = szName.toDartString();
+        final resolutionScopeToken = ptkResolutionScope.value;
 
-          // If it's the same scope, just look it up based on the returned name.
-          if (resolutionScopeToken == scope.moduleToken) {
-            return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
-          }
-
-          // Is it a nested type? If so, we find a type in the parent type that
-          // matches its name, if one exists (which it presumably should).
-          if (TokenType.fromToken(resolutionScopeToken) == TokenType.typeRef) {
-            return _resolveNestedType(
-                scope, resolutionScopeToken, typeRefToken, typeName);
-          }
-
-          // Is it an AssemblyRef that is not part of .NET? If so, we need to
-          // load the scope that contains it. Note that we are currently
-          // ignoring:
-          //
-          // (i) .NET types, since they are intrinsics like System.ValueType.
-          // They're also not loadable with getScopeForType, but that's moot;
-          //
-          // (ii) The Windows.Win32.Interop metadata file, which is shipped as
-          // part of the microsoft/win32metadata project. This is fixable if we
-          // distribute it with winmd or find another approach to locating it.
-          if (TokenType.fromToken(resolutionScopeToken) ==
-              TokenType.assemblyRef) {
-            final assemblyRef =
-                AssemblyRef.fromToken(scope, resolutionScopeToken);
-            if (assemblyRef.name != 'netstandard' && // .NET
-                assemblyRef.name != 'mscorlib' && // .NET Framework
-                assemblyRef.name != 'Windows.Win32.Interop') {
-              final newScope = MetadataStore.getScopeForType(typeName);
-              final typeDef = newScope.findTypeDef(typeName);
-              if (typeDef == null) {
-                throw WinmdException(
-                    'Can\'t find type $typeName in the ${newScope.name} scope.');
-              }
-
-              return typeDef;
-            } else if (assemblyRef.name == 'Windows.Win32.Interop') {
-              // dedupe with section above?
-              final interopScope = MetadataStore.getWin32InteropScope();
-              final typeDef = interopScope.findTypeDef(typeName);
-              if (typeDef == null) {
-                throw WinmdException(
-                    'Can\'t find type $typeName in the ${interopScope.name} scope.');
-              }
-
-              return typeDef;
-            }
-          }
-
-          // It might be a ModuleRef, so we'll just return the type name.
-          return TypeDef(scope, 0, typeName);
-        } else {
-          throw WindowsException(hr);
+        // Special case for WinRT base type
+        if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
+          return TypeDef(scope, 0, 'IInspectable');
         }
-      });
+
+        // If it's the same scope, just look it up based on the returned name.
+        if (resolutionScopeToken == scope.moduleToken) {
+          return scope.findTypeDef(typeName) ?? TypeDef(scope, 0, typeName);
+        }
+
+        // Is it a nested type? If so, we find a type in the parent type that
+        // matches its name, if one exists (which it presumably should).
+        if (TokenType.fromToken(resolutionScopeToken) == TokenType.typeRef) {
+          return _resolveNestedType(
+              scope, resolutionScopeToken, typeRefToken, typeName);
+        }
+
+        // Is it an AssemblyRef that is not part of .NET? If so, we need to
+        // load the scope that contains it. Note that we are currently
+        // ignoring:
+        //
+        // (i) .NET types, since they are intrinsics like System.ValueType.
+        // They're also not loadable with getScopeForType, but that's moot;
+        //
+        // (ii) The Windows.Win32.Interop metadata file, which is shipped as
+        // part of the microsoft/win32metadata project. This is fixable if we
+        // distribute it with winmd or find another approach to locating it.
+        if (TokenType.fromToken(resolutionScopeToken) ==
+            TokenType.assemblyRef) {
+          final assemblyRef =
+              AssemblyRef.fromToken(scope, resolutionScopeToken);
+          if (assemblyRef.name != 'netstandard' && // .NET
+              assemblyRef.name != 'mscorlib' && // .NET Framework
+              assemblyRef.name != 'Windows.Win32.Interop') {
+            final newScope = MetadataStore.getScopeForType(typeName);
+            final typeDef = newScope.findTypeDef(typeName);
+            if (typeDef == null) {
+              throw WinmdException(
+                  'Can\'t find type $typeName in the ${newScope.name} scope.');
+            }
+
+            return typeDef;
+          } else if (assemblyRef.name == 'Windows.Win32.Interop') {
+            // dedupe with section above?
+            final interopScope = MetadataStore.getWin32InteropScope();
+            final typeDef = interopScope.findTypeDef(typeName);
+            if (typeDef == null) {
+              throw WinmdException(
+                  'Can\'t find type $typeName in the ${interopScope.name} scope.');
+            }
+
+            return typeDef;
+          }
+        }
+
+        // It might be a ModuleRef, so we'll just return the type name.
+        return TypeDef(scope, 0, typeName);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Instantiate a typedef from a TypeSpec token.
-  factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) =>
-      using((Arena arena) {
-        final ppvSig = arena<PCCOR_SIGNATURE>();
-        final pcbSig = arena<ULONG>();
+  factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) {
+    assert(TokenType.fromToken(typeSpecToken) == TokenType.typeSpec);
 
-        final reader = scope.reader;
-        final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
-        final signature = ppvSig.value.asTypedList(pcbSig.value);
-        final typeTuple = TypeTuple.fromSignature(signature, scope);
+    return using((Arena arena) {
+      final ppvSig = arena<PCCOR_SIGNATURE>();
+      final pcbSig = arena<ULONG>();
 
-        if (SUCCEEDED(hr)) {
-          return TypeDef(
-              scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
+      final signature = ppvSig.value.asTypedList(pcbSig.value);
+      final typeTuple = TypeTuple.fromSignature(signature, scope);
+
+      if (SUCCEEDED(hr)) {
+        return TypeDef(
+            scope, typeSpecToken, '[typeSpec]', 0, 0, typeTuple.typeIdentifier);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;
@@ -393,28 +411,37 @@ class TypeDef extends TokenObject
   /// layout (e.g. for sparsely or overlapping structs).
   ClassLayout get classLayout => ClassLayout(scope, token);
 
-  /// Converts an individual interface into a type.
-  TypeDef processInterfaceToken(int token) => using((Arena arena) {
-        final ptkClass = arena<mdTypeDef>();
-        final ptkIface = arena<mdToken>();
+  /// Converts an interface implementation token (0x09) into a type.
+  TypeDef processInterfaceToken(int token) {
+    assert(TokenType.fromToken(token) == TokenType.interfaceImpl);
 
-        final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
-        if (SUCCEEDED(hr)) {
-          final interfaceToken = ptkIface.value;
-          return TypeDef.fromToken(scope, interfaceToken);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+    return using((Arena arena) {
+      final ptkClass = arena<mdTypeDef>();
+      final ptkIface = arena<mdToken>();
+
+      final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
+      if (SUCCEEDED(hr)) {
+        final interfaceToken = ptkIface.value;
+        return TypeDef.fromToken(scope, interfaceToken);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Enumerate all interfaces that this type implements.
   List<TypeDef> get interfaces {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
     if (_interfaces.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
         final rImpls = arena<mdInterfaceImpl>();
         final pcImpls = arena<ULONG>();
 
+        // The enumeration returns a collection of mdInterfaceImpl tokens for
+        // each interface implemented by the specified TypeDef.
         var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
         while (hr == S_OK) {
           final interfaceToken = rImpls.value;
@@ -431,6 +458,9 @@ class TypeDef extends TokenObject
 
   /// Enumerate all fields contained within this type.
   List<Field> get fields {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
     if (_fields.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
@@ -453,6 +483,9 @@ class TypeDef extends TokenObject
 
   /// Enumerate all methods contained within this type.
   List<Method> get methods {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
     if (_methods.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
@@ -475,6 +508,9 @@ class TypeDef extends TokenObject
 
   /// Enumerate all properties contained within this type.
   List<Property> get properties {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
     if (_properties.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
@@ -498,6 +534,9 @@ class TypeDef extends TokenObject
 
   /// Enumerate all events contained within this type.
   List<Event> get events {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
     if (_events.isEmpty) {
       using((Arena arena) {
         final phEnum = arena<HCORENUM>();
@@ -521,36 +560,46 @@ class TypeDef extends TokenObject
   /// Get a field matching the name, if one exists.
   ///
   /// Returns null if the field is not found.
-  Field? findField(String fieldName) => using((Arena arena) {
-        final szName = fieldName.toNativeUtf16(allocator: arena);
-        final ptkFieldDef = arena<mdFieldDef>();
+  Field? findField(String fieldName) {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return null;
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-        final hr = reader.FindField(token, szName, nullptr, 0, ptkFieldDef);
-        if (SUCCEEDED(hr)) {
-          return Field.fromToken(scope, ptkFieldDef.value);
-        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-          return null;
-        } else {
-          throw COMException(hr);
-        }
-      });
+    return using((Arena arena) {
+      final szName = fieldName.toNativeUtf16(allocator: arena);
+      final ptkFieldDef = arena<mdFieldDef>();
+
+      final hr = reader.FindField(token, szName, nullptr, 0, ptkFieldDef);
+      if (SUCCEEDED(hr)) {
+        return Field.fromToken(scope, ptkFieldDef.value);
+      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+        return null;
+      } else {
+        throw COMException(hr);
+      }
+    });
+  }
 
   /// Get a method matching the name, if one exists.
   ///
   /// Returns null if the method is not found.
-  Method? findMethod(String methodName) => using((Arena arena) {
-        final szName = methodName.toNativeUtf16(allocator: arena);
-        final pmb = arena<mdMethodDef>();
+  Method? findMethod(String methodName) {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return null;
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-        final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
-        if (SUCCEEDED(hr)) {
-          return Method.fromToken(scope, pmb.value);
-        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-          return null;
-        } else {
-          throw COMException(hr);
-        }
-      });
+    return using((Arena arena) {
+      final szName = methodName.toNativeUtf16(allocator: arena);
+      final pmb = arena<mdMethodDef>();
+
+      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
+      if (SUCCEEDED(hr)) {
+        return Method.fromToken(scope, pmb.value);
+      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+        return null;
+      } else {
+        throw COMException(hr);
+      }
+    });
+  }
 
   /// Gets the type referencing this type's superclass (the class this type
   /// inherits from).
@@ -582,26 +631,27 @@ class TypeDef extends TokenObject
       : null;
 
   /// Gets a named custom attribute that is stored as a GUID.
-  String? getCustomGUIDAttribute(String guidAttributeName) =>
-      using((Arena arena) {
-        final ptrAttributeName =
-            guidAttributeName.toNativeUtf16(allocator: arena);
-        final ppData = arena<Pointer<BYTE>>();
-        final pcbData = arena<ULONG>();
+  String? getCustomGUIDAttribute(String guidAttributeName) {
+    return using((Arena arena) {
+      final ptrAttributeName =
+          guidAttributeName.toNativeUtf16(allocator: arena);
+      final ppData = arena<Pointer<BYTE>>();
+      final pcbData = arena<ULONG>();
 
-        final hr = reader.GetCustomAttributeByName(
-            token, ptrAttributeName, ppData, pcbData);
-        if (SUCCEEDED(hr)) {
-          final blob = ppData.value;
-          if (pcbData.value > 0) {
-            final returnValue = blob.elementAt(2).cast<GUID>();
-            return returnValue.ref.toString();
-          }
+      final hr = reader.GetCustomAttributeByName(
+          token, ptrAttributeName, ppData, pcbData);
+      if (SUCCEEDED(hr)) {
+        final blob = ppData.value;
+        if (pcbData.value > 0) {
+          final returnValue = blob.elementAt(2).cast<GUID>();
+          return returnValue.ref.toString();
         }
+      }
 
-        // If this fails or no data is returned, return a null value.
-        return null;
-      });
+      // If this fails or no data is returned, return a null value.
+      return null;
+    });
+  }
 
   /// Get the GUID for this type.
   ///
