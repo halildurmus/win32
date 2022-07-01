@@ -11857,6 +11857,28 @@ void main() {
           'SetupDiGetDeviceInterfaceDetailW');
       expect(SetupDiGetDeviceInterfaceDetail, isA<Function>());
     });
+    test('Can instantiate SetupDiGetDeviceRegistryProperty', () {
+      final setupapi = DynamicLibrary.open('setupapi.dll');
+      final SetupDiGetDeviceRegistryProperty = setupapi.lookupFunction<
+              Int32 Function(
+                  IntPtr DeviceInfoSet,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+                  Uint32 Property,
+                  Pointer<Uint32> PropertyRegDataType,
+                  Pointer<Uint8> PropertyBuffer,
+                  Uint32 PropertyBufferSize,
+                  Pointer<Uint32> RequiredSize),
+              int Function(
+                  int DeviceInfoSet,
+                  Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+                  int Property,
+                  Pointer<Uint32> PropertyRegDataType,
+                  Pointer<Uint8> PropertyBuffer,
+                  int PropertyBufferSize,
+                  Pointer<Uint32> RequiredSize)>(
+          'SetupDiGetDeviceRegistryPropertyW');
+      expect(SetupDiGetDeviceRegistryProperty, isA<Function>());
+    });
     test('Can instantiate SetupDiOpenDevRegKey', () {
       final setupapi = DynamicLibrary.open('setupapi.dll');
       final SetupDiOpenDevRegKey = setupapi.lookupFunction<

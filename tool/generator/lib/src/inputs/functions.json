@@ -5626,6 +5626,11 @@
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetDeviceInterfaceDetail function returns details about a device interface."
     },
+    "SetupDiGetDeviceRegistryProperty": {
+        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceRegistryPropertyW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [in]            DWORD            Property,\n  [out, optional] PDWORD           PropertyRegDataType,\n  [out, optional] PBYTE            PropertyBuffer,\n  [in]            DWORD            PropertyBufferSize,\n [out, optional] PDWORD           RequiredSize\n);",
+        "dllLibrary": "setupapi",
+        "comment": "The SetupDiGetDeviceRegistryProperty function retrieves a specified Plug and Play device property."
+    },
     "SetupDiOpenDevRegKey": {
         "prototype": "WINSETUPAPI HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",
         "dllLibrary": "setupapi",

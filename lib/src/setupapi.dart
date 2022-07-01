@@ -200,6 +200,50 @@ final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
             Pointer<SP_DEVINFO_DATA> DeviceInfoData)>(
     'SetupDiGetDeviceInterfaceDetailW');
 
+/// The SetupDiGetDeviceRegistryProperty function retrieves a specified Plug
+/// and Play device property.
+///
+/// ```c
+/// WINSETUPAPI BOOL SetupDiGetDeviceRegistryPropertyW(
+///   [in]            HDEVINFO         DeviceInfoSet,
+///   [in]            PSP_DEVINFO_DATA DeviceInfoData,
+///   [in]            DWORD            Property,
+///   [out, optional] PDWORD           PropertyRegDataType,
+///   [out, optional] PBYTE            PropertyBuffer,
+///   [in]            DWORD            PropertyBufferSize,
+///  [out, optional] PDWORD           RequiredSize
+/// );
+/// ```
+/// {@category setupapi}
+int SetupDiGetDeviceRegistryProperty(
+        int DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        int Property,
+        Pointer<Uint32> PropertyRegDataType,
+        Pointer<Uint8> PropertyBuffer,
+        int PropertyBufferSize,
+        Pointer<Uint32> RequiredSize) =>
+    _SetupDiGetDeviceRegistryProperty(DeviceInfoSet, DeviceInfoData, Property,
+        PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize);
+
+final _SetupDiGetDeviceRegistryProperty = _setupapi.lookupFunction<
+    Int32 Function(
+        IntPtr DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        Uint32 Property,
+        Pointer<Uint32> PropertyRegDataType,
+        Pointer<Uint8> PropertyBuffer,
+        Uint32 PropertyBufferSize,
+        Pointer<Uint32> RequiredSize),
+    int Function(
+        int DeviceInfoSet,
+        Pointer<SP_DEVINFO_DATA> DeviceInfoData,
+        int Property,
+        Pointer<Uint32> PropertyRegDataType,
+        Pointer<Uint8> PropertyBuffer,
+        int PropertyBufferSize,
+        Pointer<Uint32> RequiredSize)>('SetupDiGetDeviceRegistryPropertyW');
+
 /// The SetupDiOpenDevRegKey function opens a registry key for
 /// device-specific configuration information.
 ///
