@@ -1,3 +1,7 @@
+## 2.2.3
+
+- Update to Windows.Win32.winmd v24.0.6.19647.
+
 ## 2.2.2
 
 - Adjust simple array types (thanks @halildurmus).
