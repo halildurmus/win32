@@ -13,8 +13,6 @@ class WinRTMethodProjection extends MethodProjection {
         .toList();
   }
 
-  String get camelCasedName => name.toCamelCase();
-
   // MethodProjection overrides
 
   @override

@@ -85,6 +85,13 @@ abstract class MethodProjection {
     return method.name;
   }
 
+  /// The method name without uppercased first letter.
+  ///
+  /// COM and Windows Runtime methods and properties are typically named in
+  /// TitleCase, but the Dart idiom is camelCase. This also has the significant
+  /// advantage of making it easier to avoid name conflicts.
+  String get camelCasedName => name.toCamelCase();
+
   /// The parameters exposed by a projected Dart method.
   String get methodParams =>
       parameters.map((param) => param.paramProjection).join(', ');
@@ -100,7 +107,7 @@ abstract class MethodProjection {
   ///   e.g. `period` or `second` (get property)
   ///   e.g. `second = value` (set property)
   String get shortForm =>
-      '${name.toCamelCase()}(${parameters.map((param) => param.identifier).join(', ')})';
+      '$camelCasedName(${parameters.map((param) => param.identifier).join(', ')})';
 
   /// The native prototype representing the method.
   String get nativePrototype;
