@@ -1,3 +1,12 @@
+## 3.0.0
+
+- [BREAKING CHANGE] COM and Windows Runtime methods and properties are now
+  camelCased, not TitleCased. This is inconvenient, but it avoids a whole class
+  of name clashes and aligns COM and WinRT APIs more closely with Dart idioms.
+  As the projections get smarter with more helpers, we think this is the right
+  call for the future and worth a one-time tax to fix.
+- TODO: Add other changes.
+
 ## 2.7.0
 
 - [BREAKING CHANGE] Major work on Windows Runtime APIs, with huge thanks to
