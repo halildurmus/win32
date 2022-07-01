@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/structs.dart';
+import 'enums.dart';
 import 'scope.dart';
 import 'token_object.dart';
 
@@ -24,36 +25,40 @@ class AssemblyRef extends TokenObject {
   const AssemblyRef(super.scope, super.token, this.name, this.version);
 
   /// Creates a assembly ref object from a provided token.
-  factory AssemblyRef.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ppbPublicKeyOrToken = arena<Pointer<BYTE>>();
-        final pcbPublicKeyOrToken = arena<ULONG>();
-        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchName = arena<ULONG>();
-        final pMetaData = arena<ASSEMBLYDATA>();
-        final ppbHashValue = arena<Pointer<BYTE>>();
-        final pcbHashValue = arena<ULONG>();
-        final pdwAssemblyRefFlags = arena<DWORD>();
+  factory AssemblyRef.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.assemblyRef);
 
-        final hr = scope.assemblyImport.GetAssemblyRefProps(
-            token,
-            ppbPublicKeyOrToken,
-            pcbPublicKeyOrToken,
-            szName,
-            stringBufferSize,
-            pchName,
-            pMetaData,
-            ppbHashValue,
-            pcbHashValue,
-            pdwAssemblyRefFlags);
-        if (FAILED(hr)) throw WindowsException(hr);
+    return using((Arena arena) {
+      final ppbPublicKeyOrToken = arena<Pointer<BYTE>>();
+      final pcbPublicKeyOrToken = arena<ULONG>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      final pMetaData = arena<ASSEMBLYDATA>();
+      final ppbHashValue = arena<Pointer<BYTE>>();
+      final pcbHashValue = arena<ULONG>();
+      final pdwAssemblyRefFlags = arena<DWORD>();
 
-        final versionString = '${pMetaData.ref.usMajorVersion.toString()}.'
-            '${pMetaData.ref.usMinorVersion.toString()}.'
-            '${pMetaData.ref.usBuildNumber.toString()}.'
-            '${pMetaData.ref.usRevisionNumber.toString()}';
+      final hr = scope.assemblyImport.GetAssemblyRefProps(
+          token,
+          ppbPublicKeyOrToken,
+          pcbPublicKeyOrToken,
+          szName,
+          stringBufferSize,
+          pchName,
+          pMetaData,
+          ppbHashValue,
+          pcbHashValue,
+          pdwAssemblyRefFlags);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-        return AssemblyRef(scope, token, szName.toDartString(), versionString);
-      });
+      final versionString = '${pMetaData.ref.usMajorVersion.toString()}.'
+          '${pMetaData.ref.usMinorVersion.toString()}.'
+          '${pMetaData.ref.usBuildNumber.toString()}.'
+          '${pMetaData.ref.usRevisionNumber.toString()}';
+
+      return AssemblyRef(scope, token, szName.toDartString(), versionString);
+    });
+  }
 
   @override
   String toString() => name;

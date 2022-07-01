@@ -64,37 +64,41 @@ class Method extends TokenObject
   }
 
   /// Creates a method object from a provided token.
-  factory Method.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptkClass = arena<mdTypeDef>();
-        final szMethod = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchMethod = arena<ULONG>();
-        final pdwAttr = arena<DWORD>();
-        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
-        final pcbSigBlob = arena<ULONG>();
-        final pulCodeRVA = arena<ULONG>();
-        final pdwImplFlags = arena<DWORD>();
+  factory Method.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.methodDef);
 
-        final reader = scope.reader;
-        final hr = reader.GetMethodProps(
-            token,
-            ptkClass,
-            szMethod,
-            stringBufferSize,
-            pchMethod,
-            pdwAttr,
-            ppvSigBlob,
-            pcbSigBlob,
-            pulCodeRVA,
-            pdwImplFlags);
+    return using((Arena arena) {
+      final ptkClass = arena<mdTypeDef>();
+      final szMethod = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchMethod = arena<ULONG>();
+      final pdwAttr = arena<DWORD>();
+      final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+      final pcbSigBlob = arena<ULONG>();
+      final pulCodeRVA = arena<ULONG>();
+      final pdwImplFlags = arena<DWORD>();
 
-        if (SUCCEEDED(hr)) {
-          final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-          return Method(scope, token, ptkClass.value, szMethod.toDartString(),
-              pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr = reader.GetMethodProps(
+          token,
+          ptkClass,
+          szMethod,
+          stringBufferSize,
+          pchMethod,
+          pdwAttr,
+          ppvSigBlob,
+          pcbSigBlob,
+          pulCodeRVA,
+          pdwImplFlags);
+
+      if (SUCCEEDED(hr)) {
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+        return Method(scope, token, ptkClass.value, szMethod.toDartString(),
+            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;

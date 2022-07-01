@@ -75,10 +75,20 @@ void main() {
                 startsWith('Error 0x80131124'))));
   });
 
+  test('Unknown token CustomAttribute', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => CustomAttribute.fromToken(scope, 0x0CFEDCBA), // invalid cust attr
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
   test('Unknown token Event', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => Event.fromToken(scope, 0x02FEDCBA), // not an event token
+        () => Event.fromToken(scope, 0x14FEDCBA), // invalid event token
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -88,7 +98,7 @@ void main() {
   test('Unknown token Field', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => Field.fromToken(scope, 0x02FEDCBA), // not a field token
+        () => Field.fromToken(scope, 0x04FEDCBA), // invalid field token
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -98,27 +108,27 @@ void main() {
   test('Unknown token GenericParam', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => GenericParam.fromToken(scope, 0x02FEDCBA), // not a generic param
+        () => GenericParam.fromToken(scope, 0x2AFEDCBA), // invalid gen param
         throwsA(isA<WindowsException>()
-            .having((exc) => exc.hr, 'hr', equals(META_E_BAD_INPUT_PARAMETER))
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
-                startsWith('Error 0x80131193'))));
+                startsWith('Error 0x80131124'))));
   });
 
   test('Unknown token GenericParamConstraint', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => GenericParamConstraint.fromToken(scope, 0x02FEDCBA), // not GPC
+        () => GenericParamConstraint.fromToken(scope, 0x2CFEDCBA), // invalid
         throwsA(isA<WindowsException>()
-            .having((exc) => exc.hr, 'hr', equals(META_E_BAD_INPUT_PARAMETER))
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
-                startsWith('Error 0x80131193'))));
+                startsWith('Error 0x80131124'))));
   });
 
   test('Unknown token MemberRef', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => MemberRef.fromToken(scope, 0x02FEDCBA), // not a memberref
+        () => MemberRef.fromToken(scope, 0x0AFEDCBA), // invalid memberref
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -128,7 +138,7 @@ void main() {
   test('Unknown token Method', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => Method.fromToken(scope, 0x02FEDCBA), // not a method token
+        () => Method.fromToken(scope, 0x06FEDCBA), // invalid method token
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -138,7 +148,7 @@ void main() {
   test('Unknown token Parameter', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => Parameter.fromToken(scope, 0x02FEDCBA), // not a param token
+        () => Parameter.fromToken(scope, 0x08FEDCBA), // invalid param token
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -148,7 +158,7 @@ void main() {
   test('Unknown token PinvokeMap', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => PinvokeMap.fromToken(scope, 0x02FEDCBA), // not a pinvokemap token
+        () => PinvokeMap.fromToken(scope, 0x06FEDCBA), // invalid methoddef
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_RECORD_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',
@@ -158,7 +168,7 @@ void main() {
   test('Unknown token Property', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
-        () => Property.fromToken(scope, 0x02FEDCBA), // not a property token
+        () => Property.fromToken(scope, 0x17FEDCBA), // invalid property token
         throwsA(isA<WindowsException>()
             .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
             .having((exc) => exc.toString(), 'toString()',

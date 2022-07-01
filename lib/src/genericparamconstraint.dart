@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
 import 'genericparam.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
@@ -24,22 +25,25 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       super.scope, super.token, this._parentToken, this._constraintType);
 
   /// Creates a generic parameter constraint object from a provided token.
-  factory GenericParamConstraint.fromToken(Scope scope, int token) =>
-      using((Arena arena) {
-        final ptGenericParam = arena<mdGenericParam>();
-        final ptkConstraintType = arena<mdToken>();
+  factory GenericParamConstraint.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.genericParamConstraint);
 
-        final reader = scope.reader;
-        final hr = reader.GetGenericParamConstraintProps(
-            token, ptGenericParam, ptkConstraintType);
+    return using((Arena arena) {
+      final ptGenericParam = arena<mdGenericParam>();
+      final ptkConstraintType = arena<mdToken>();
 
-        if (SUCCEEDED(hr)) {
-          return GenericParamConstraint(
-              scope, token, ptGenericParam.value, ptkConstraintType.value);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr = reader.GetGenericParamConstraintProps(
+          token, ptGenericParam, ptkConstraintType);
+
+      if (SUCCEEDED(hr)) {
+        return GenericParamConstraint(
+            scope, token, ptGenericParam.value, ptkConstraintType.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// The generic parameter that is constrained by this object.
   GenericParam get parent => GenericParam.fromToken(scope, _parentToken);

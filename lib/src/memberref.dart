@@ -8,6 +8,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
 import 'scope.dart';
 import 'token_object.dart';
 import 'type_aliases.dart';
@@ -26,24 +27,28 @@ class MemberRef extends TokenObject {
       this.signatureBlob);
 
   /// Creates a module object from a provided token.
-  factory MemberRef.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptk = arena<mdToken>();
-        final szMember = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchMember = arena<ULONG>();
-        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
-        final pcbSigBlob = arena<ULONG>();
+  factory MemberRef.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.memberRef);
 
-        final reader = scope.reader;
-        final hr = reader.GetMemberRefProps(token, ptk, szMember,
-            stringBufferSize, pchMember, ppvSigBlob, pcbSigBlob);
+    return using((Arena arena) {
+      final ptk = arena<mdToken>();
+      final szMember = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchMember = arena<ULONG>();
+      final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+      final pcbSigBlob = arena<ULONG>();
 
-        if (SUCCEEDED(hr)) {
-          return MemberRef(scope, token, ptk.value, szMember.toDartString(),
-              ppvSigBlob.value.asTypedList(pcbSigBlob.value));
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr = reader.GetMemberRefProps(token, ptk, szMember,
+          stringBufferSize, pchMember, ppvSigBlob, pcbSigBlob);
+
+      if (SUCCEEDED(hr)) {
+        return MemberRef(scope, token, ptk.value, szMember.toDartString(),
+            ppvSigBlob.value.asTypedList(pcbSigBlob.value));
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;
