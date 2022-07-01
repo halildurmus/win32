@@ -381,10 +381,10 @@ final _inet_addr = _ws2_32.lookupFunction<Uint32 Function(Pointer<Utf8> cp),
 /// );
 /// ```
 /// {@category winsock}
-Pointer<Utf8> inet_ntoa(IN_ADDR $in) => _inet_ntoa($in);
+Pointer<Utf8> inet_ntoa(IN_ADDR in_) => _inet_ntoa(in_);
 
-final _inet_ntoa = _ws2_32.lookupFunction<Pointer<Utf8> Function(IN_ADDR $in),
-    Pointer<Utf8> Function(IN_ADDR $in)>('inet_ntoa');
+final _inet_ntoa = _ws2_32.lookupFunction<Pointer<Utf8> Function(IN_ADDR in_),
+    Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
 
 /// The ioctlsocket function controls the I/O mode of a socket.
 ///

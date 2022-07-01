@@ -3141,21 +3141,21 @@ class IP_ADAPTER_DNS_SUFFIX extends Struct {
   external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
 
   @Array(256)
-  external Array<Uint16> _$String;
+  external Array<Uint16> _String_;
 
-  String get $String {
+  String get String_ {
     final charCodes = <int>[];
     for (var i = 0; i < 256; i++) {
-      if (_$String[i] == 0x00) break;
-      charCodes.add(_$String[i]);
+      if (_String_[i] == 0x00) break;
+      charCodes.add(_String_[i]);
     }
     return String.fromCharCodes(charCodes);
   }
 
-  set $String(String value) {
+  set String_(String value) {
     final stringToStore = value.padRight(256, '\x00');
     for (var i = 0; i < 256; i++) {
-      _$String[i] = stringToStore.codeUnitAt(i);
+      _String_[i] = stringToStore.codeUnitAt(i);
     }
   }
 }
@@ -3484,7 +3484,7 @@ extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Extension
 /// {@category Struct}
 class IP_ADDRESS_STRING extends Struct {
   @Array(16)
-  external Array<Uint8> $String;
+  external Array<Uint8> String_;
 }
 
 /// The IP_ADDR_STRING structure represents a node in a linked-list of IPv4
@@ -5338,7 +5338,7 @@ class OVERLAPPED extends Struct {
 class _OVERLAPPED__Anonymous_e__Union extends Union {
   external _OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
 
-  external Pointer $Pointer;
+  external Pointer Pointer_;
 }
 
 /// {@category Struct}
@@ -5364,8 +5364,8 @@ extension OVERLAPPED_Extension on OVERLAPPED {
   set Anonymous(_OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct value) =>
       this.Anonymous.Anonymous = value;
 
-  Pointer get $Pointer => this.Anonymous.$Pointer;
-  set $Pointer(Pointer value) => this.Anonymous.$Pointer = value;
+  Pointer get Pointer_ => this.Anonymous.Pointer_;
+  set Pointer_(Pointer value) => this.Anonymous.Pointer_ = value;
 }
 
 /// Contains the information returned by a call to the

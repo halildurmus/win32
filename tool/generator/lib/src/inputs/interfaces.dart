@@ -53,7 +53,7 @@ const comInterfacesToGenerate = <String>{
   'Windows.Win32.System.Com.IConnectionPointContainer',
   'Windows.Win32.System.Com.IEnumMoniker',
   'Windows.Win32.System.Com.IEnumString',
-  // 'Windows.Win32.System.Com.IMoniker',
+  'Windows.Win32.System.Com.IMoniker',
   'Windows.Win32.System.Com.IPersist',
   'Windows.Win32.System.Com.IPersistFile',
   'Windows.Win32.System.Com.IPersistMemory',
