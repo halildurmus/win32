@@ -145,6 +145,16 @@ void main() {
                 startsWith('Error 0x80131124'))));
   });
 
+  test('Unknown token ModuleRef', () {
+    final scope = MetadataStore.getWin32Scope();
+    expect(
+        () => ModuleRef.fromToken(scope, 0x1AFEDCBA), // invalid moduleref token
+        throwsA(isA<WindowsException>()
+            .having((exc) => exc.hr, 'hr', equals(CLDB_E_INDEX_NOTFOUND))
+            .having((exc) => exc.toString(), 'toString()',
+                startsWith('Error 0x80131124'))));
+  });
+
   test('Unknown token Parameter', () {
     final scope = MetadataStore.getWin32Scope();
     expect(
