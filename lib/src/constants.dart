@@ -8867,7 +8867,8 @@ class AUDCLNT_STREAMOPTIONS {
   static const AUDCLNT_STREAMOPTIONS_AMBISONICS = 0x4;
 }
 
-/// Device registry property codes
+/// Device registry property codes.
+///
 /// {@category Enum}
 class SPDRP {
   /// The function retrieves a REG_SZ string that contains the description of a
@@ -8875,13 +8876,11 @@ class SPDRP {
   static const SPDRP_DEVICEDESC = 0x00000000;
 
   /// The function retrieves a REG_MULTI_SZ string that contains the list of
-  /// hardware IDs for a device. For information about hardware IDs, see
-  /// Device Identification Strings.
+  /// hardware IDs for a device.
   static const SPDRP_HARDWAREID = 0x00000001;
 
   /// The function retrieves a REG_MULTI_SZ string that contains the list of
-  /// compatible IDs for a device. For information about compatible IDs, see
-  /// Device Identification Strings.
+  /// compatible IDs for a device.
   static const SPDRP_COMPATIBLEIDS = 0x00000002;
 
   /// The function retrieves a REG_SZ string that contains the service name for
@@ -8897,8 +8896,7 @@ class SPDRP {
   static const SPDRP_CLASSGUID = 0x00000008;
 
   /// The function retrieves a string that identifies the device's software key
-  /// (sometimes called the driver key). For more information about driver keys,
-  /// see Registry Trees and Keys for Devices and Drivers.
+  /// (sometimes called the driver key).
   static const SPDRP_DRIVER = 0x00000009;
 
   /// The function retrieves a bitwise OR of a device's configuration flags in a
@@ -8919,15 +8917,13 @@ class SPDRP {
   static const SPDRP_LOCATION_INFORMATION = 0x0000000D;
 
   /// The function retrieves a REG_SZ string that contains the name that is
-  /// associated with the device's PDO. For more information, see
-  /// IoCreateDevice.
+  /// associated with the device's PDO.
   static const SPDRP_PHYSICAL_DEVICE_OBJECT_NAME = 0x0000000E;
 
   /// The function retrieves a bitwise OR of the following CM_DEVCAP_Xxx flags
   /// in a DWORD. The device capabilities that are represented by these flags
   /// correspond to the device capabilities that are represented by the members
-  /// of the DEVICE_CAPABILITIES structure. The CM_DEVCAP_Xxx constants are
-  /// defined in Cfgmgr32.h. Capabilities (R)
+  /// of the DEVICE_CAPABILITIES structure.
   static const SPDRP_CAPABILITIES = 0x0000000F;
 
   /// The function retrieves a DWORD value set to the value of the UINumber
@@ -8936,21 +8932,6 @@ class SPDRP {
 
   /// The function retrieves a REG_MULTI_SZ string that contains the names of a
   /// device's upper filter drivers.
-  /// [out, optional] PropertyRegDataType
-  /// A pointer to a variable that receives the data type of the property that
-  /// is being retrieved. This is one of the standard registry data types. This
-  /// parameter is optional and can be NULL.
-  /// [out, optional] PropertyBuffer
-  /// A pointer to a buffer that receives the property that is being retrieved.
-  /// If this parameter is set to NULL, and PropertyBufferSize is also set to
-  /// zero, the function returns the required size for the buffer in
-  /// RequiredSize.
-  /// [in] PropertyBufferSize
-  /// The size, in bytes, of the PropertyBuffer buffer.
-  /// [out, optional] RequiredSize
-  /// A pointer to a variable of type DWORD that receives the required size,
-  /// in bytes, of the PropertyBuffer buffer that is required to hold the data
-  /// for the requested property. This parameter is optional and can be NULL.
   static const SPDRP_UPPERFILTERS = 0x00000011;
 
   /// The function retrieves a REG_MULTI_SZ string that contains the names of a
@@ -8975,10 +8956,7 @@ class SPDRP {
   static const SPDRP_SECURITY = 0x00000017;
 
   /// The function retrieves a REG_SZ string that contains the device's security
-  /// descriptor. For information about security descriptor strings, see
-  /// Security Descriptor Definition Language (Windows). For information about
-  /// the format of security descriptor strings, see Security Descriptor
-  /// Definition Language (Windows).
+  /// descriptor.
   static const SPDRP_SECURITY_SDS = 0x00000018;
 
   /// The function retrieves a DWORD value that represents the device's type.
@@ -8987,14 +8965,11 @@ class SPDRP {
 
   /// The function retrieves a DWORD value that indicates whether a user can
   /// obtain exclusive use of the device. The returned value is one if exclusive
-  /// use is allowed, or zero otherwise. For more information, see
-  /// IoCreateDevice.
+  /// use is allowed, or zero otherwise.
   static const SPDRP_EXCLUSIVE = 0x0000001A;
 
   /// The function retrieves a bitwise OR of a device's characteristics flags in
-  /// a DWORD. For a description of these flags, which are defined in Wdm.h and
-  /// Ntddk.h, see the DeviceCharacteristics parameter of the IoCreateDevice
-  /// function.
+  /// a DWORD.
   static const SPDRP_CHARACTERISTICS = 0x0000001B;
 
   /// The function retrieves the device's address.
@@ -9004,33 +8979,33 @@ class SPDRP {
   /// UINumber value.
   static const SPDRP_UI_NUMBER_DESC_FORMAT = 0X0000001D;
 
-  /// (Windows XP and later) The function retrieves a CM_POWER_DATA structure
-  /// that contains the device's power management information.
+  /// The function retrieves a CM_POWER_DATA structure that contains the
+  /// device's power management information.
   static const SPDRP_DEVICE_POWER_DATA = 0x0000001E;
 
-  /// (Windows XP and later) The function retrieves the device's current removal
-  /// policy as a DWORD that contains one of the CM_REMOVAL_POLICY_Xxx values
-  /// that are defined in Cfgmgr32.h.
+  /// The function retrieves the device's current removal policy as a DWORD that
+  /// contains one of the CM_REMOVAL_POLICY_Xxx values that are defined in
+  /// Cfgmgr32.h.
   static const SPDRP_REMOVAL_POLICY = 0x0000001F;
 
-  /// (Windows XP and later) The function retrieves the device's
-  /// hardware-specified default removal policy as a DWORD that contains one of
-  /// the CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
+  /// The function retrieves the device's hardware-specified default removal
+  /// policy as a DWORD that contains one of the CM_REMOVAL_POLICY_Xxx values
+  /// that are defined in Cfgmgr32.h.
   static const SPDRP_REMOVAL_POLICY_HW_DEFAULT = 0x00000020;
 
-  /// (Windows XP and later) The function retrieves the device's override
-  /// removal policy (if it exists) from the registry, as a DWORD that contains
-  /// one of the CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
+  /// The function retrieves the device's override removal policy (if it exists)
+  /// from the registry, as a DWORD that contains one of the
+  /// CM_REMOVAL_POLICY_Xxx values that are defined in Cfgmgr32.h.
   static const SPDRP_REMOVAL_POLICY_OVERRIDE = 0x00000021;
 
-  /// (Windows XP and later) The function retrieves a DWORD value that indicates
-  /// the installation state of a device. The installation state is represented
-  /// by one of the CM_INSTALL_STATE_Xxx values that are defined in Cfgmgr32.h.
-  /// The CM_INSTALL_STATE_Xxx values correspond to the DEVICE_INSTALL_STATE
+  /// The function retrieves a DWORD value that indicates the installation state
+  /// of a device. The installation state is represented by one of the
+  /// CM_INSTALL_STATE_Xxx values that are defined in Cfgmgr32.h. The
+  /// CM_INSTALL_STATE_Xxx values correspond to the DEVICE_INSTALL_STATE
   /// enumeration values.
   static const SPDRP_INSTALL_STATE = 0x00000022;
 
-  /// (Windows Server 2003 and later) The function retrieves a REG_MULTI_SZ
-  /// string that represents the location of the device in the device tree.
+  /// The function retrieves a REG_MULTI_SZ string that represents the location
+  /// of the device in the device tree.
   static const SPDRP_LOCATION_PATHS = 0x00000023;
 }
