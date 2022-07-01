@@ -35,7 +35,7 @@ class INetwork extends IDispatch {
   factory INetwork.from(IUnknown interface) =>
       INetwork(interface.toInterface(IID_INetwork));
 
-  int GetName(Pointer<Pointer<Utf16>> pszNetworkName) => ptr.ref.vtable
+  int getName(Pointer<Pointer<Utf16>> pszNetworkName) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -47,7 +47,7 @@ class INetwork extends IDispatch {
               int Function(Pointer, Pointer<Pointer<Utf16>> pszNetworkName)>()(
       ptr.ref.lpVtbl, pszNetworkName);
 
-  int SetName(Pointer<Utf16> szNetworkNewName) =>
+  int setName(Pointer<Utf16> szNetworkNewName) =>
       ptr.ref.vtable
               .elementAt(8)
               .cast<
@@ -60,7 +60,7 @@ class INetwork extends IDispatch {
                   int Function(Pointer, Pointer<Utf16> szNetworkNewName)>()(
           ptr.ref.lpVtbl, szNetworkNewName);
 
-  int GetDescription(Pointer<Pointer<Utf16>> pszDescription) => ptr.ref.vtable
+  int getDescription(Pointer<Pointer<Utf16>> pszDescription) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -72,7 +72,7 @@ class INetwork extends IDispatch {
               int Function(Pointer, Pointer<Pointer<Utf16>> pszDescription)>()(
       ptr.ref.lpVtbl, pszDescription);
 
-  int SetDescription(Pointer<Utf16> szDescription) => ptr.ref.vtable
+  int setDescription(Pointer<Utf16> szDescription) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -82,7 +82,7 @@ class INetwork extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Utf16> szDescription)>()(
       ptr.ref.lpVtbl, szDescription);
 
-  int GetNetworkId(Pointer<GUID> pgdGuidNetworkId) =>
+  int getNetworkId(Pointer<GUID> pgdGuidNetworkId) =>
       ptr.ref.vtable
               .elementAt(11)
               .cast<
@@ -95,7 +95,7 @@ class INetwork extends IDispatch {
                   int Function(Pointer, Pointer<GUID> pgdGuidNetworkId)>()(
           ptr.ref.lpVtbl, pgdGuidNetworkId);
 
-  int GetDomainType(Pointer<Int32> pNetworkType) => ptr.ref.vtable
+  int getDomainType(Pointer<Int32> pNetworkType) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -105,7 +105,7 @@ class INetwork extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pNetworkType)>()(
       ptr.ref.lpVtbl, pNetworkType);
 
-  int GetNetworkConnections(
+  int getNetworkConnections(
           Pointer<Pointer<COMObject>> ppEnumNetworkConnection) =>
       ptr
               .ref.vtable
@@ -123,7 +123,7 @@ class INetwork extends IDispatch {
                       Pointer<Pointer<COMObject>> ppEnumNetworkConnection)>()(
           ptr.ref.lpVtbl, ppEnumNetworkConnection);
 
-  int GetTimeCreatedAndConnected(
+  int getTimeCreatedAndConnected(
           Pointer<Uint32> pdwLowDateTimeCreated,
           Pointer<Uint32> pdwHighDateTimeCreated,
           Pointer<Uint32> pdwLowDateTimeConnected,
@@ -153,7 +153,7 @@ class INetwork extends IDispatch {
           pdwLowDateTimeConnected,
           pdwHighDateTimeConnected);
 
-  int get IsConnectedToInternet {
+  int get isConnectedToInternet {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -177,7 +177,7 @@ class INetwork extends IDispatch {
     }
   }
 
-  int get IsConnected {
+  int get isConnected {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -201,7 +201,7 @@ class INetwork extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
+  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(17)
           .cast<
               Pointer<
@@ -211,7 +211,7 @@ class INetwork extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
       ptr.ref.lpVtbl, pConnectivity);
 
-  int GetCategory(Pointer<Int32> pCategory) => ptr.ref.vtable
+  int getCategory(Pointer<Int32> pCategory) => ptr.ref.vtable
           .elementAt(18)
           .cast<
               Pointer<
@@ -221,7 +221,7 @@ class INetwork extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
       ptr.ref.lpVtbl, pCategory);
 
-  int SetCategory(int NewCategory) => ptr.ref.vtable
+  int setCategory(int NewCategory) => ptr.ref.vtable
       .elementAt(19)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Int32 NewCategory)>>>()
