@@ -31,11 +31,11 @@ void main(List<String> args) {
   final supportedPtr = calloc<Int32>();
   final languageTagPtr = Platform.localeName.toNativeUtf16();
 
-  spellCheckerFactory.IsSupported(languageTagPtr, supportedPtr);
+  spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
 
   if (supportedPtr.value == 1) {
     final spellCheckerPtr = calloc<COMObject>();
-    spellCheckerFactory.CreateSpellChecker(
+    spellCheckerFactory.createSpellChecker(
         languageTagPtr, spellCheckerPtr.cast());
 
     final spellChecker = ISpellChecker(spellCheckerPtr);
@@ -47,7 +47,7 @@ void main(List<String> args) {
 
     final errorsPtr = calloc<COMObject>();
     final textPtr = text.toNativeUtf16();
-    spellChecker2.Check(textPtr, errorsPtr.cast());
+    spellChecker2.check(textPtr, errorsPtr.cast());
 
     final errors = IEnumSpellingError(errorsPtr);
     final errorPtr = calloc<COMObject>();
@@ -57,18 +57,18 @@ void main(List<String> args) {
 
     var errorCount = 0;
 
-    while (errors.Next(errorPtr.cast()) == S_OK) {
+    while (errors.next(errorPtr.cast()) == S_OK) {
       errorCount++;
 
       final error = ISpellingError(errorPtr);
       final word = text.substring(
-        error.StartIndex,
-        error.StartIndex + error.Length,
+        error.startIndex,
+        error.startIndex + error.length,
       );
 
       stdout.write('$errorCount. $word');
 
-      switch (error.CorrectiveAction) {
+      switch (error.correctiveAction) {
         case CORRECTIVE_ACTION.DELETE:
           print(' - delete');
           break;
@@ -78,7 +78,7 @@ void main(List<String> args) {
           break;
 
         case CORRECTIVE_ACTION.REPLACE:
-          final replacment = error.Replacement;
+          final replacment = error.replacement;
           print(' - replace with "${replacment.toDartString()}"');
           WindowsDeleteString(replacment.address);
           break;
@@ -88,14 +88,14 @@ void main(List<String> args) {
 
           final wordPtr = word.toNativeUtf16();
           final suggestionsPtr = calloc<COMObject>();
-          spellChecker2.Suggest(wordPtr, suggestionsPtr.cast());
+          spellChecker2.suggest(wordPtr, suggestionsPtr.cast());
           final suggestions = IEnumString(suggestionsPtr);
 
           final suggestionPtr = calloc<Pointer<Utf16>>();
           final suggestionResultPtr = calloc<Uint32>();
 
           while (
-              suggestions.Next(1, suggestionPtr, suggestionResultPtr) == S_OK) {
+              suggestions.next(1, suggestionPtr, suggestionResultPtr) == S_OK) {
             print('\t${suggestionPtr.value.toDartString()}');
             WindowsDeleteString(suggestionPtr.value.address);
           }
