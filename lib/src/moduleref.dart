@@ -7,6 +7,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'token_object.dart';
@@ -18,20 +19,24 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
   ModuleRef(super.scope, super.token, this.name);
 
   /// Creates a module object from a provided token.
-  factory ModuleRef.fromToken(Scope scope, int token) => using((Arena arena) {
-        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchName = arena<ULONG>();
+  factory ModuleRef.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.moduleRef);
 
-        final reader = scope.reader;
-        final hr =
-            reader.GetModuleRefProps(token, szName, stringBufferSize, pchName);
+    return using((Arena arena) {
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
 
-        if (SUCCEEDED(hr)) {
-          return ModuleRef(scope, token, szName.toDartString());
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+      final reader = scope.reader;
+      final hr =
+          reader.GetModuleRefProps(token, szName, stringBufferSize, pchName);
+
+      if (SUCCEEDED(hr)) {
+        return ModuleRef(scope, token, szName.toDartString());
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;

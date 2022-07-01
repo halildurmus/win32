@@ -86,7 +86,8 @@ class Scope {
 
   /// Return the typedef matching the given token.
   ///
-  /// Returns null if no typedefs match the token.
+  /// Returns null if no typedefs match the token. Note that this does not
+  /// resolve `TypeRef`s or `TypeSpec`s.
   TypeDef? findTypeDefByToken(int token) => _typedefs[token];
 
   /// Get an enumerated list of typedefs for this scope.

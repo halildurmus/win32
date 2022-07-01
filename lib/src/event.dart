@@ -4,6 +4,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/enums.dart';
+import 'enums.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
@@ -41,50 +42,54 @@ class Event extends TokenObject with CustomAttributesMixin {
       this.otherMethodTokens);
 
   /// Creates an event object from a provided token.
-  factory Event.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptkClass = arena<mdTypeDef>();
-        final szEvent = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchEvent = arena<ULONG>();
-        final pdwEventFlags = arena<DWORD>();
-        final ptkEventType = arena<mdToken>();
-        final ptkAddOn = arena<mdMethodDef>();
-        final ptkRemoveOn = arena<mdMethodDef>();
-        final tkkFire = arena<mdMethodDef>();
-        final rgOtherMethod = arena<mdMethodDef>(16);
-        final pcOtherMethod = arena<ULONG>();
+  factory Event.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.event);
 
-        final reader = scope.reader;
-        final hr = reader.GetEventProps(
+    return using((Arena arena) {
+      final ptkClass = arena<mdTypeDef>();
+      final szEvent = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchEvent = arena<ULONG>();
+      final pdwEventFlags = arena<DWORD>();
+      final ptkEventType = arena<mdToken>();
+      final ptkAddOn = arena<mdMethodDef>();
+      final ptkRemoveOn = arena<mdMethodDef>();
+      final tkkFire = arena<mdMethodDef>();
+      final rgOtherMethod = arena<mdMethodDef>(16);
+      final pcOtherMethod = arena<ULONG>();
+
+      final reader = scope.reader;
+      final hr = reader.GetEventProps(
+          token,
+          ptkClass,
+          szEvent,
+          stringBufferSize,
+          pchEvent,
+          pdwEventFlags,
+          ptkEventType,
+          ptkAddOn,
+          ptkRemoveOn,
+          tkkFire,
+          rgOtherMethod,
+          16,
+          pcOtherMethod);
+
+      if (SUCCEEDED(hr)) {
+        return Event(
+            scope,
             token,
-            ptkClass,
-            szEvent,
-            stringBufferSize,
-            pchEvent,
-            pdwEventFlags,
-            ptkEventType,
-            ptkAddOn,
-            ptkRemoveOn,
-            tkkFire,
-            rgOtherMethod,
-            16,
-            pcOtherMethod);
-
-        if (SUCCEEDED(hr)) {
-          return Event(
-              scope,
-              token,
-              ptkClass.value,
-              szEvent.toDartString(),
-              pdwEventFlags.value,
-              ptkEventType.value,
-              ptkAddOn.value,
-              ptkRemoveOn.value,
-              tkkFire.value,
-              rgOtherMethod.asTypedList(pcOtherMethod.value));
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+            ptkClass.value,
+            szEvent.toDartString(),
+            pdwEventFlags.value,
+            ptkEventType.value,
+            ptkAddOn.value,
+            ptkRemoveOn.value,
+            tkkFire.value,
+            rgOtherMethod.asTypedList(pcOtherMethod.value));
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;

@@ -48,69 +48,72 @@ class Property extends TokenObject with CustomAttributesMixin {
       this.otherMethodTokens);
 
   /// Creates a property object from a provided token.
-  factory Property.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptkTypeDef = arena<mdTypeDef>();
-        final szProperty = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchProperty = arena<ULONG>();
-        final pdwPropFlags = arena<DWORD>();
-        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
-        final pcbSigBlob = arena<ULONG>();
-        final pdwCPlusTypeFlag = arena<DWORD>();
-        final ppDefaultValue = arena<UVCP_CONSTANT>();
-        final pcchDefaultValue = arena<ULONG>();
-        final ptkSetter = arena<mdMethodDef>();
-        final ptkGetter = arena<mdMethodDef>();
-        final rgOtherMethod = arena<mdMethodDef>(256);
-        final pcOtherMethod = arena<ULONG>();
+  factory Property.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.property);
 
-        final reader = scope.reader;
-        final hr = reader.GetPropertyProps(
+    return using((Arena arena) {
+      final ptkTypeDef = arena<mdTypeDef>();
+      final szProperty = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchProperty = arena<ULONG>();
+      final pdwPropFlags = arena<DWORD>();
+      final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+      final pcbSigBlob = arena<ULONG>();
+      final pdwCPlusTypeFlag = arena<DWORD>();
+      final ppDefaultValue = arena<UVCP_CONSTANT>();
+      final pcchDefaultValue = arena<ULONG>();
+      final ptkSetter = arena<mdMethodDef>();
+      final ptkGetter = arena<mdMethodDef>();
+      final rgOtherMethod = arena<mdMethodDef>(256);
+      final pcOtherMethod = arena<ULONG>();
+
+      final reader = scope.reader;
+      final hr = reader.GetPropertyProps(
+          token,
+          ptkTypeDef,
+          szProperty,
+          stringBufferSize,
+          pchProperty,
+          pdwPropFlags,
+          ppvSigBlob,
+          pcbSigBlob,
+          pdwCPlusTypeFlag,
+          ppDefaultValue,
+          pcchDefaultValue,
+          ptkSetter,
+          ptkGetter,
+          rgOtherMethod,
+          256,
+          pcOtherMethod);
+
+      if (SUCCEEDED(hr)) {
+        final propName = szProperty.toDartString();
+
+        // PropertySig is defined in §II.23.2.5 of ECMA-335.
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+        final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
+        final defaultValue =
+            ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
+        final otherMethodTokens =
+            rgOtherMethod.asTypedList(pcOtherMethod.value);
+
+        return Property(
+            scope,
             token,
-            ptkTypeDef,
-            szProperty,
-            stringBufferSize,
-            pchProperty,
-            pdwPropFlags,
-            ppvSigBlob,
-            pcbSigBlob,
-            pdwCPlusTypeFlag,
-            ppDefaultValue,
-            pcchDefaultValue,
-            ptkSetter,
-            ptkGetter,
-            rgOtherMethod,
-            256,
-            pcOtherMethod);
-
-        if (SUCCEEDED(hr)) {
-          final propName = szProperty.toDartString();
-
-          // PropertySig is defined in §II.23.2.5 of ECMA-335.
-          final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-          final typeTuple =
-              TypeTuple.fromSignature(signature.sublist(2), scope);
-          final defaultValue =
-              ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
-          final otherMethodTokens =
-              rgOtherMethod.asTypedList(pcOtherMethod.value);
-
-          return Property(
-              scope,
-              token,
-              ptkTypeDef.value,
-              propName,
-              pdwPropFlags.value,
-              signature,
-              typeTuple.typeIdentifier,
-              parseCorElementType(pdwCPlusTypeFlag.value),
-              defaultValue,
-              ptkSetter.value,
-              ptkGetter.value,
-              otherMethodTokens);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+            ptkTypeDef.value,
+            propName,
+            pdwPropFlags.value,
+            signature,
+            typeTuple.typeIdentifier,
+            parseCorElementType(pdwCPlusTypeFlag.value),
+            defaultValue,
+            ptkSetter.value,
+            ptkGetter.value,
+            otherMethodTokens);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;

@@ -22,29 +22,34 @@ class PinvokeMap extends TokenObject {
       this.importDllToken, this.moduleName);
 
   /// Creates a P/Invoke method representation object from a provided token.
-  factory PinvokeMap.fromToken(Scope scope, int token) => using((Arena arena) {
-        final pdwMappingFlags = arena<DWORD>();
-        final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchImportName = arena<ULONG>();
-        final ptkImportDLL = arena<mdModuleRef>();
-        final szModuleName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchModuleName = arena<ULONG>();
+  factory PinvokeMap.fromToken(Scope scope, int token) {
+    assert([TokenType.fieldDef, TokenType.methodDef]
+        .contains(TokenType.fromToken(token)));
 
-        final reader = scope.reader;
-        var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
-            stringBufferSize, pchImportName, ptkImportDLL);
-        if (SUCCEEDED(hr)) {
-          hr = reader.GetModuleRefProps(ptkImportDLL.value, szModuleName,
-              stringBufferSize, pchModuleName);
+    return using((Arena arena) {
+      final pdwMappingFlags = arena<DWORD>();
+      final szImportName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchImportName = arena<ULONG>();
+      final ptkImportDLL = arena<mdModuleRef>();
+      final szModuleName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchModuleName = arena<ULONG>();
 
-          final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
+      final reader = scope.reader;
+      var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+          stringBufferSize, pchImportName, ptkImportDLL);
+      if (SUCCEEDED(hr)) {
+        hr = reader.GetModuleRefProps(
+            ptkImportDLL.value, szModuleName, stringBufferSize, pchModuleName);
 
-          return PinvokeMap(scope, token, pdwMappingFlags.value,
-              szImportName.toDartString(), ptkImportDLL.value, moduleName);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+        final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
+
+        return PinvokeMap(scope, token, pdwMappingFlags.value,
+            szImportName.toDartString(), ptkImportDLL.value, moduleName);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Returns true if each member name is used as specified.
   bool get isNoMangle =>

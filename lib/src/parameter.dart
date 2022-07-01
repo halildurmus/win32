@@ -31,42 +31,46 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       this._attributes, this.typeIdentifier, this.name, this.signatureBlob);
 
   /// Creates a parameter object from a provided token.
-  factory Parameter.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptkMethodDef = arena<mdMethodDef>();
-        final pulSequence = arena<ULONG>();
-        final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchName = arena<ULONG>();
-        final pdwAttr = arena<DWORD>();
-        final pdwCPlusTypeFlag = arena<DWORD>();
-        final ppValue = arena<UVCP_CONSTANT>();
-        final pcchValue = arena<ULONG>();
+  factory Parameter.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.paramDef);
 
-        final reader = scope.reader;
-        final hr = reader.GetParamProps(
+    return using((Arena arena) {
+      final ptkMethodDef = arena<mdMethodDef>();
+      final pulSequence = arena<ULONG>();
+      final szName = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchName = arena<ULONG>();
+      final pdwAttr = arena<DWORD>();
+      final pdwCPlusTypeFlag = arena<DWORD>();
+      final ppValue = arena<UVCP_CONSTANT>();
+      final pcchValue = arena<ULONG>();
+
+      final reader = scope.reader;
+      final hr = reader.GetParamProps(
+          token,
+          ptkMethodDef,
+          pulSequence,
+          szName,
+          stringBufferSize,
+          pchName,
+          pdwAttr,
+          pdwCPlusTypeFlag,
+          ppValue,
+          pcchValue);
+      if (SUCCEEDED(hr)) {
+        return Parameter(
+            scope,
             token,
-            ptkMethodDef,
-            pulSequence,
-            szName,
-            stringBufferSize,
-            pchName,
-            pdwAttr,
-            pdwCPlusTypeFlag,
-            ppValue,
-            pcchValue);
-        if (SUCCEEDED(hr)) {
-          return Parameter(
-              scope,
-              token,
-              ptkMethodDef.value,
-              pulSequence.value,
-              pdwAttr.value,
-              TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
-              szName.toDartString(),
-              ppValue.value.asTypedList(pcchValue.value));
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+            ptkMethodDef.value,
+            pulSequence.value,
+            pdwAttr.value,
+            TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
+            szName.toDartString(),
+            ppValue.value.asTypedList(pcchValue.value));
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// Creates a parameter object from a provided type identifier.
   factory Parameter.fromTypeIdentifier(

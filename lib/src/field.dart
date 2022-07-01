@@ -36,54 +36,57 @@ class Field extends TokenObject with CustomAttributesMixin {
       this.typeIdentifier, this.fieldType, this._attribs, this.signatureBlob);
 
   /// Creates a field object from a provided token.
-  factory Field.fromToken(Scope scope, int token) => using((Arena arena) {
-        final ptkTypeDef = arena<mdTypeDef>();
-        final szField = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchField = arena<ULONG>();
-        final pdwAttr = arena<DWORD>();
-        final ppvSigBlob = arena<PCCOR_SIGNATURE>();
-        final pcbSigBlob = arena<ULONG>();
-        final pdwCPlusTypeFlag = arena<DWORD>();
-        final ppValue = arena<Pointer<Uint32>>();
-        final pcchValue = arena<ULONG>();
+  factory Field.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.fieldDef);
 
-        final reader = scope.reader;
-        final hr = reader.GetFieldProps(
+    return using((Arena arena) {
+      final ptkTypeDef = arena<mdTypeDef>();
+      final szField = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchField = arena<ULONG>();
+      final pdwAttr = arena<DWORD>();
+      final ppvSigBlob = arena<PCCOR_SIGNATURE>();
+      final pcbSigBlob = arena<ULONG>();
+      final pdwCPlusTypeFlag = arena<DWORD>();
+      final ppValue = arena<Pointer<Uint32>>();
+      final pcchValue = arena<ULONG>();
+
+      final reader = scope.reader;
+      final hr = reader.GetFieldProps(
+          token,
+          ptkTypeDef,
+          szField,
+          stringBufferSize,
+          pchField,
+          pdwAttr,
+          ppvSigBlob,
+          pcbSigBlob,
+          pdwCPlusTypeFlag,
+          ppValue,
+          pcchValue);
+
+      if (SUCCEEDED(hr)) {
+        final fieldName = szField.toDartString();
+
+        // The first entry of the signature is a FIELD attribute (0x06), per
+        // §II.23.2.4 of ECMA-335. Then follows a type identifier.
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+        final typeTuple = TypeTuple.fromSignature(signature.sublist(1), scope);
+
+        return Field(
+            scope,
             token,
-            ptkTypeDef,
-            szField,
-            stringBufferSize,
-            pchField,
-            pdwAttr,
-            ppvSigBlob,
-            pcbSigBlob,
-            pdwCPlusTypeFlag,
-            ppValue,
-            pcchValue);
-
-        if (SUCCEEDED(hr)) {
-          final fieldName = szField.toDartString();
-
-          // The first entry of the signature is a FIELD attribute (0x06), per
-          // §II.23.2.4 of ECMA-335. Then follows a type identifier.
-          final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-          final typeTuple =
-              TypeTuple.fromSignature(signature.sublist(1), scope);
-
-          return Field(
-              scope,
-              token,
-              ptkTypeDef.value,
-              fieldName,
-              ppValue.value != nullptr ? ppValue.value.value : 0,
-              typeTuple.typeIdentifier,
-              parseCorElementType(pdwCPlusTypeFlag.value),
-              pdwAttr.value,
-              signature);
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+            ptkTypeDef.value,
+            fieldName,
+            ppValue.value != nullptr ? ppValue.value.value : 0,
+            typeTuple.typeIdentifier,
+            parseCorElementType(pdwCPlusTypeFlag.value),
+            pdwAttr.value,
+            signature);
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   @override
   String toString() => name;

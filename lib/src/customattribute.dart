@@ -41,32 +41,35 @@ class CustomAttribute extends TokenObject {
       this.memberRef, this.constructor, this.attributeType, this.signatureBlob);
 
   /// Creates a custom attribute object from a provided token.
-  factory CustomAttribute.fromToken(Scope scope, int token) =>
-      using((Arena arena) {
-        final ptkObj = arena<mdToken>();
-        final ptkType = arena<mdToken>();
-        final ppBlob = arena<UVCP_CONSTANT>();
-        final pcbBlob = arena<ULONG>();
+  factory CustomAttribute.fromToken(Scope scope, int token) {
+    assert(TokenType.fromToken(token) == TokenType.customAttribute);
 
-        final reader = scope.reader;
-        final hr = reader.GetCustomAttributeProps(
-            token, ptkObj, ptkType, ppBlob, pcbBlob);
-        if (SUCCEEDED(hr)) {
-          final memberRef = MemberRef.fromToken(scope, ptkType.value);
-          final constructorTypeDef =
-              TypeDef.fromToken(scope, memberRef.referencedToken);
-          return CustomAttribute(
-              scope,
-              token,
-              ptkObj.value,
-              memberRef,
-              constructorTypeDef,
-              ptkType.value,
-              ppBlob.value.asTypedList(pcbBlob.value));
-        } else {
-          throw WindowsException(hr);
-        }
-      });
+    return using((Arena arena) {
+      final ptkObj = arena<mdToken>();
+      final ptkType = arena<mdToken>();
+      final ppBlob = arena<UVCP_CONSTANT>();
+      final pcbBlob = arena<ULONG>();
+
+      final reader = scope.reader;
+      final hr = reader.GetCustomAttributeProps(
+          token, ptkObj, ptkType, ppBlob, pcbBlob);
+      if (SUCCEEDED(hr)) {
+        final memberRef = MemberRef.fromToken(scope, ptkType.value);
+        final constructorTypeDef =
+            TypeDef.fromToken(scope, memberRef.referencedToken);
+        return CustomAttribute(
+            scope,
+            token,
+            ptkObj.value,
+            memberRef,
+            constructorTypeDef,
+            ptkType.value,
+            ppBlob.value.asTypedList(pcbBlob.value));
+      } else {
+        throw WindowsException(hr);
+      }
+    });
+  }
 
   /// The name of the attribute
   String get name => constructor.name;
