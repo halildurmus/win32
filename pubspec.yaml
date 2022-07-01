@@ -26,4 +26,4 @@ dev_dependencies:
   path: ^1.8.2
 
   # Running the test suite.
-  test: ^1.21.1
+  test: ^1.21.3
