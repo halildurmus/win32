@@ -22,35 +22,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellfolder = IShellFolder(ptr);
-  test('Can instantiate IShellFolder.ParseDisplayName', () {
-    expect(shellfolder.ParseDisplayName, isA<Function>());
+  test('Can instantiate IShellFolder.parseDisplayName', () {
+    expect(shellfolder.parseDisplayName, isA<Function>());
   });
-  test('Can instantiate IShellFolder.EnumObjects', () {
-    expect(shellfolder.EnumObjects, isA<Function>());
+  test('Can instantiate IShellFolder.enumObjects', () {
+    expect(shellfolder.enumObjects, isA<Function>());
   });
-  test('Can instantiate IShellFolder.BindToObject', () {
-    expect(shellfolder.BindToObject, isA<Function>());
+  test('Can instantiate IShellFolder.bindToObject', () {
+    expect(shellfolder.bindToObject, isA<Function>());
   });
-  test('Can instantiate IShellFolder.BindToStorage', () {
-    expect(shellfolder.BindToStorage, isA<Function>());
+  test('Can instantiate IShellFolder.bindToStorage', () {
+    expect(shellfolder.bindToStorage, isA<Function>());
   });
-  test('Can instantiate IShellFolder.CompareIDs', () {
-    expect(shellfolder.CompareIDs, isA<Function>());
+  test('Can instantiate IShellFolder.compareIDs', () {
+    expect(shellfolder.compareIDs, isA<Function>());
   });
-  test('Can instantiate IShellFolder.CreateViewObject', () {
-    expect(shellfolder.CreateViewObject, isA<Function>());
+  test('Can instantiate IShellFolder.createViewObject', () {
+    expect(shellfolder.createViewObject, isA<Function>());
   });
-  test('Can instantiate IShellFolder.GetAttributesOf', () {
-    expect(shellfolder.GetAttributesOf, isA<Function>());
+  test('Can instantiate IShellFolder.getAttributesOf', () {
+    expect(shellfolder.getAttributesOf, isA<Function>());
   });
-  test('Can instantiate IShellFolder.GetUIObjectOf', () {
-    expect(shellfolder.GetUIObjectOf, isA<Function>());
+  test('Can instantiate IShellFolder.getUIObjectOf', () {
+    expect(shellfolder.getUIObjectOf, isA<Function>());
   });
-  test('Can instantiate IShellFolder.GetDisplayNameOf', () {
-    expect(shellfolder.GetDisplayNameOf, isA<Function>());
+  test('Can instantiate IShellFolder.getDisplayNameOf', () {
+    expect(shellfolder.getDisplayNameOf, isA<Function>());
   });
-  test('Can instantiate IShellFolder.SetNameOf', () {
-    expect(shellfolder.SetNameOf, isA<Function>());
+  test('Can instantiate IShellFolder.setNameOf', () {
+    expect(shellfolder.setNameOf, isA<Function>());
   });
   free(ptr);
 }

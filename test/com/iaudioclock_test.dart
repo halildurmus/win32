@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audioclock = IAudioClock(ptr);
-  test('Can instantiate IAudioClock.GetFrequency', () {
-    expect(audioclock.GetFrequency, isA<Function>());
+  test('Can instantiate IAudioClock.getFrequency', () {
+    expect(audioclock.getFrequency, isA<Function>());
   });
-  test('Can instantiate IAudioClock.GetPosition', () {
-    expect(audioclock.GetPosition, isA<Function>());
+  test('Can instantiate IAudioClock.getPosition', () {
+    expect(audioclock.getPosition, isA<Function>());
   });
-  test('Can instantiate IAudioClock.GetCharacteristics', () {
-    expect(audioclock.GetCharacteristics, isA<Function>());
+  test('Can instantiate IAudioClock.getCharacteristics', () {
+    expect(audioclock.getCharacteristics, isA<Function>());
   });
   free(ptr);
 }

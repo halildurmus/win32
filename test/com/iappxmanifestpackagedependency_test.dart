@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestpackagedependency = IAppxManifestPackageDependency(ptr);
-  test('Can instantiate IAppxManifestPackageDependency.GetName', () {
-    expect(appxmanifestpackagedependency.GetName, isA<Function>());
+  test('Can instantiate IAppxManifestPackageDependency.getName', () {
+    expect(appxmanifestpackagedependency.getName, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageDependency.GetPublisher', () {
-    expect(appxmanifestpackagedependency.GetPublisher, isA<Function>());
+  test('Can instantiate IAppxManifestPackageDependency.getPublisher', () {
+    expect(appxmanifestpackagedependency.getPublisher, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageDependency.GetMinVersion', () {
-    expect(appxmanifestpackagedependency.GetMinVersion, isA<Function>());
+  test('Can instantiate IAppxManifestPackageDependency.getMinVersion', () {
+    expect(appxmanifestpackagedependency.getMinVersion, isA<Function>());
   });
   free(ptr);
 }

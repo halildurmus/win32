@@ -34,7 +34,7 @@ class IChannelAudioVolume extends IUnknown {
   factory IChannelAudioVolume.from(IUnknown interface) =>
       IChannelAudioVolume(interface.toInterface(IID_IChannelAudioVolume));
 
-  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
+  int getChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +44,7 @@ class IChannelAudioVolume extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCount)>()(
       ptr.ref.lpVtbl, pdwCount);
 
-  int SetChannelVolume(
+  int setChannelVolume(
           int dwIndex, double fLevel, Pointer<GUID> EventContext) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -59,7 +59,7 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwIndex, fLevel, EventContext);
 
-  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
+  int getChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -71,7 +71,7 @@ class IChannelAudioVolume extends IUnknown {
               int Function(Pointer, int dwIndex, Pointer<Float> pfLevel)>()(
       ptr.ref.lpVtbl, dwIndex, pfLevel);
 
-  int SetAllVolumes(
+  int setAllVolumes(
           int dwCount, Pointer<Float> pfVolumes, Pointer<GUID> EventContext) =>
       ptr.ref.vtable
               .elementAt(6)
@@ -89,7 +89,7 @@ class IChannelAudioVolume extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, dwCount, pfVolumes, EventContext);
 
-  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
+  int getAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(7)
       .cast<
           Pointer<

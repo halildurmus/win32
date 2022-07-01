@@ -35,7 +35,7 @@ class IUnknown {
   factory IUnknown.from(IUnknown interface) =>
       IUnknown(interface.toInterface(IID_IUnknown));
 
-  int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
+  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
       .ref.vtable
       .elementAt(0)
       .cast<
@@ -48,13 +48,13 @@ class IUnknown {
           int Function(Pointer, Pointer<GUID> riid,
               Pointer<Pointer> ppvObject)>()(ptr.ref.lpVtbl, riid, ppvObject);
 
-  int AddRef() => ptr.ref.vtable
+  int addRef() => ptr.ref.vtable
       .elementAt(1)
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Release() => ptr.ref.vtable
+  int release() => ptr.ref.vtable
       .elementAt(2)
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
@@ -69,7 +69,7 @@ class IUnknown {
     final pIID = convertToIID(iid);
     final pObject = calloc<COMObject>();
     try {
-      final hr = QueryInterface(pIID, pObject.cast());
+      final hr = queryInterface(pIID, pObject.cast());
       if (FAILED(hr)) throw WindowsException(hr);
       return pObject;
     } finally {

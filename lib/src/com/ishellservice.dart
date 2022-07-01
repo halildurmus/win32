@@ -34,7 +34,7 @@ class IShellService extends IUnknown {
   factory IShellService.from(IUnknown interface) =>
       IShellService(interface.toInterface(IID_IShellService));
 
-  int SetOwner(Pointer<COMObject> punkOwner) => ptr.ref.vtable
+  int setOwner(Pointer<COMObject> punkOwner) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

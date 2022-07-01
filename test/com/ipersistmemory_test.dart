@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final persistmemory = IPersistMemory(ptr);
-  test('Can instantiate IPersistMemory.IsDirty', () {
-    expect(persistmemory.IsDirty, isA<Function>());
+  test('Can instantiate IPersistMemory.isDirty', () {
+    expect(persistmemory.isDirty, isA<Function>());
   });
-  test('Can instantiate IPersistMemory.Load', () {
-    expect(persistmemory.Load, isA<Function>());
+  test('Can instantiate IPersistMemory.load', () {
+    expect(persistmemory.load, isA<Function>());
   });
-  test('Can instantiate IPersistMemory.Save', () {
-    expect(persistmemory.Save, isA<Function>());
+  test('Can instantiate IPersistMemory.save', () {
+    expect(persistmemory.save, isA<Function>());
   });
-  test('Can instantiate IPersistMemory.GetSizeMax', () {
-    expect(persistmemory.GetSizeMax, isA<Function>());
+  test('Can instantiate IPersistMemory.getSizeMax', () {
+    expect(persistmemory.getSizeMax, isA<Function>());
   });
-  test('Can instantiate IPersistMemory.InitNew', () {
-    expect(persistmemory.InitNew, isA<Function>());
+  test('Can instantiate IPersistMemory.initNew', () {
+    expect(persistmemory.initNew, isA<Function>());
   });
   free(ptr);
 }

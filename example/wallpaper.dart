@@ -15,7 +15,7 @@ void printWallpaper() {
   final pathPtr = calloc<Pointer<Utf16>>();
 
   try {
-    final hr = wallpaper.GetWallpaper(nullptr, pathPtr);
+    final hr = wallpaper.getWallpaper(nullptr, pathPtr);
 
     switch (hr) {
       case S_OK:
@@ -41,7 +41,7 @@ void printBackgroundColor() {
   final colorPtr = calloc<COLORREF>();
 
   try {
-    final hr = wallpaper.GetBackgroundColor(colorPtr);
+    final hr = wallpaper.getBackgroundColor(colorPtr);
 
     if (SUCCEEDED(hr)) {
       final color = colorPtr.value;

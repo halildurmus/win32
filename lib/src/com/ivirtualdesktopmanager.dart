@@ -34,7 +34,7 @@ class IVirtualDesktopManager extends IUnknown {
   factory IVirtualDesktopManager.from(IUnknown interface) =>
       IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
 
-  int IsWindowOnCurrentVirtualDesktop(
+  int isWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -49,7 +49,7 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer<Int32> onCurrentDesktop)>()(
           ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
 
-  int GetWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
+  int getWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
       ptr.ref.vtable
               .elementAt(4)
               .cast<
@@ -63,7 +63,7 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 
-  int MoveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) => ptr
+  int moveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<

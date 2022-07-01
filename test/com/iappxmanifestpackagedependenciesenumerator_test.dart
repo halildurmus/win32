@@ -23,20 +23,20 @@ void main() {
 
   final appxmanifestpackagedependenciesenumerator =
       IAppxManifestPackageDependenciesEnumerator(ptr);
-  test('Can instantiate IAppxManifestPackageDependenciesEnumerator.GetCurrent',
+  test('Can instantiate IAppxManifestPackageDependenciesEnumerator.getCurrent',
       () {
     expect(
-        appxmanifestpackagedependenciesenumerator.GetCurrent, isA<Function>());
+        appxmanifestpackagedependenciesenumerator.getCurrent, isA<Function>());
   });
   test(
-      'Can instantiate IAppxManifestPackageDependenciesEnumerator.GetHasCurrent',
+      'Can instantiate IAppxManifestPackageDependenciesEnumerator.getHasCurrent',
       () {
-    expect(appxmanifestpackagedependenciesenumerator.GetHasCurrent,
+    expect(appxmanifestpackagedependenciesenumerator.getHasCurrent,
         isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageDependenciesEnumerator.MoveNext',
+  test('Can instantiate IAppxManifestPackageDependenciesEnumerator.moveNext',
       () {
-    expect(appxmanifestpackagedependenciesenumerator.MoveNext, isA<Function>());
+    expect(appxmanifestpackagedependenciesenumerator.moveNext, isA<Function>());
   });
   free(ptr);
 }

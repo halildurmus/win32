@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final classfactory = IClassFactory(ptr);
-  test('Can instantiate IClassFactory.CreateInstance', () {
-    expect(classfactory.CreateInstance, isA<Function>());
+  test('Can instantiate IClassFactory.createInstance', () {
+    expect(classfactory.createInstance, isA<Function>());
   });
-  test('Can instantiate IClassFactory.LockServer', () {
-    expect(classfactory.LockServer, isA<Function>());
+  test('Can instantiate IClassFactory.lockServer', () {
+    expect(classfactory.lockServer, isA<Function>());
   });
   free(ptr);
 }

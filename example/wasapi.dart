@@ -90,7 +90,7 @@ void main() {
       0, // dataflow: rendering device
       0, // role: system notification sound
       ppDevice));
-  pDeviceEnumerator.Release();
+  pDeviceEnumerator.release();
   free(pDeviceEnumerator.ptr);
 
   // Activate an IAudioClient interface for the output device.
@@ -163,13 +163,13 @@ void main() {
   // Clear up
   free(pData);
 
-  pDevice.Release();
+  pDevice.release();
   free(ppDevice);
 
-  pAudioClient.Release();
+  pAudioClient.release();
   free(ppAudioClient);
 
-  pAudioRenderClient.Release();
+  pAudioRenderClient.release();
   free(ppAudioRenderClient);
 
   free(ppFormat);

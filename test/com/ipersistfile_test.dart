@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final persistfile = IPersistFile(ptr);
-  test('Can instantiate IPersistFile.IsDirty', () {
-    expect(persistfile.IsDirty, isA<Function>());
+  test('Can instantiate IPersistFile.isDirty', () {
+    expect(persistfile.isDirty, isA<Function>());
   });
-  test('Can instantiate IPersistFile.Load', () {
-    expect(persistfile.Load, isA<Function>());
+  test('Can instantiate IPersistFile.load', () {
+    expect(persistfile.load, isA<Function>());
   });
-  test('Can instantiate IPersistFile.Save', () {
-    expect(persistfile.Save, isA<Function>());
+  test('Can instantiate IPersistFile.save', () {
+    expect(persistfile.save, isA<Function>());
   });
-  test('Can instantiate IPersistFile.SaveCompleted', () {
-    expect(persistfile.SaveCompleted, isA<Function>());
+  test('Can instantiate IPersistFile.saveCompleted', () {
+    expect(persistfile.saveCompleted, isA<Function>());
   });
-  test('Can instantiate IPersistFile.GetCurFile', () {
-    expect(persistfile.GetCurFile, isA<Function>());
+  test('Can instantiate IPersistFile.getCurFile', () {
+    expect(persistfile.getCurFile, isA<Function>());
   });
   free(ptr);
 }

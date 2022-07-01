@@ -35,7 +35,7 @@ class INetworkConnection extends IDispatch {
   factory INetworkConnection.from(IUnknown interface) =>
       INetworkConnection(interface.toInterface(IID_INetworkConnection));
 
-  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
+  int getNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -47,7 +47,7 @@ class INetworkConnection extends IDispatch {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppNetwork)>()(
       ptr.ref.lpVtbl, ppNetwork);
 
-  int get IsConnectedToInternet {
+  int get isConnectedToInternet {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -71,7 +71,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int get IsConnected {
+  int get isConnected {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -95,7 +95,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
+  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -105,7 +105,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
       ptr.ref.lpVtbl, pConnectivity);
 
-  int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
+  int getConnectionId(Pointer<GUID> pgdConnectionId) =>
       ptr.ref.vtable
               .elementAt(11)
               .cast<
@@ -118,7 +118,7 @@ class INetworkConnection extends IDispatch {
                   int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
           ptr.ref.lpVtbl, pgdConnectionId);
 
-  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
+  int getAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -128,7 +128,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
       ptr.ref.lpVtbl, pgdAdapterId);
 
-  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
+  int getDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<

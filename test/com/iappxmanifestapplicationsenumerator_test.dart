@@ -23,14 +23,14 @@ void main() {
 
   final appxmanifestapplicationsenumerator =
       IAppxManifestApplicationsEnumerator(ptr);
-  test('Can instantiate IAppxManifestApplicationsEnumerator.GetCurrent', () {
-    expect(appxmanifestapplicationsenumerator.GetCurrent, isA<Function>());
+  test('Can instantiate IAppxManifestApplicationsEnumerator.getCurrent', () {
+    expect(appxmanifestapplicationsenumerator.getCurrent, isA<Function>());
   });
-  test('Can instantiate IAppxManifestApplicationsEnumerator.GetHasCurrent', () {
-    expect(appxmanifestapplicationsenumerator.GetHasCurrent, isA<Function>());
+  test('Can instantiate IAppxManifestApplicationsEnumerator.getHasCurrent', () {
+    expect(appxmanifestapplicationsenumerator.getHasCurrent, isA<Function>());
   });
-  test('Can instantiate IAppxManifestApplicationsEnumerator.MoveNext', () {
-    expect(appxmanifestapplicationsenumerator.MoveNext, isA<Function>());
+  test('Can instantiate IAppxManifestApplicationsEnumerator.moveNext', () {
+    expect(appxmanifestapplicationsenumerator.moveNext, isA<Function>());
   });
   free(ptr);
 }

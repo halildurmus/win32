@@ -58,18 +58,18 @@ void main() {
           final replacment = error.replacement;
           expect(replacment.toDartString(), equals('have'));
           WindowsDeleteString(replacment.address);
-          error.Release();
+          error.release();
         }
 
-        errors.Release();
+        errors.release();
         free(textPtr);
-        spellChecker.Release();
+        spellChecker.release();
       }
 
       free(supportedPtr);
       free(languageTagPtr);
 
-      spellCheckerFactory.Release();
+      spellCheckerFactory.release();
 
       CoUninitialize();
     }

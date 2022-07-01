@@ -34,7 +34,7 @@ class ISpellCheckerFactory extends IUnknown {
   factory ISpellCheckerFactory.from(IUnknown interface) =>
       ISpellCheckerFactory(interface.toInterface(IID_ISpellCheckerFactory));
 
-  Pointer<COMObject> get SupportedLanguages {
+  Pointer<COMObject> get supportedLanguages {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
@@ -59,7 +59,7 @@ class ISpellCheckerFactory extends IUnknown {
     }
   }
 
-  int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
+  int isSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
       ptr.ref.vtable
           .elementAt(4)
           .cast<
@@ -72,7 +72,7 @@ class ISpellCheckerFactory extends IUnknown {
               int Function(Pointer, Pointer<Utf16> languageTag,
                   Pointer<Int32> value)>()(ptr.ref.lpVtbl, languageTag, value);
 
-  int CreateSpellChecker(
+  int createSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(5)

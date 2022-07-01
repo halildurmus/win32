@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enummoniker = IEnumMoniker(ptr);
-  test('Can instantiate IEnumMoniker.Next', () {
-    expect(enummoniker.Next, isA<Function>());
+  test('Can instantiate IEnumMoniker.next', () {
+    expect(enummoniker.next, isA<Function>());
   });
-  test('Can instantiate IEnumMoniker.Skip', () {
-    expect(enummoniker.Skip, isA<Function>());
+  test('Can instantiate IEnumMoniker.skip', () {
+    expect(enummoniker.skip, isA<Function>());
   });
-  test('Can instantiate IEnumMoniker.Reset', () {
-    expect(enummoniker.Reset, isA<Function>());
+  test('Can instantiate IEnumMoniker.reset', () {
+    expect(enummoniker.reset, isA<Function>());
   });
-  test('Can instantiate IEnumMoniker.Clone', () {
-    expect(enummoniker.Clone, isA<Function>());
+  test('Can instantiate IEnumMoniker.clone', () {
+    expect(enummoniker.clone, isA<Function>());
   });
   free(ptr);
 }

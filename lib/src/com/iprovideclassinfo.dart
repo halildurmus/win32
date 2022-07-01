@@ -34,7 +34,7 @@ class IProvideClassInfo extends IUnknown {
   factory IProvideClassInfo.from(IUnknown interface) =>
       IProvideClassInfo(interface.toInterface(IID_IProvideClassInfo));
 
-  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
+  int getClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

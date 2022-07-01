@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemhiperfenum = IWbemHiPerfEnum(ptr);
-  test('Can instantiate IWbemHiPerfEnum.AddObjects', () {
-    expect(wbemhiperfenum.AddObjects, isA<Function>());
+  test('Can instantiate IWbemHiPerfEnum.addObjects', () {
+    expect(wbemhiperfenum.addObjects, isA<Function>());
   });
-  test('Can instantiate IWbemHiPerfEnum.RemoveObjects', () {
-    expect(wbemhiperfenum.RemoveObjects, isA<Function>());
+  test('Can instantiate IWbemHiPerfEnum.removeObjects', () {
+    expect(wbemhiperfenum.removeObjects, isA<Function>());
   });
-  test('Can instantiate IWbemHiPerfEnum.GetObjects', () {
-    expect(wbemhiperfenum.GetObjects, isA<Function>());
+  test('Can instantiate IWbemHiPerfEnum.getObjects', () {
+    expect(wbemhiperfenum.getObjects, isA<Function>());
   });
-  test('Can instantiate IWbemHiPerfEnum.RemoveAll', () {
-    expect(wbemhiperfenum.RemoveAll, isA<Function>());
+  test('Can instantiate IWbemHiPerfEnum.removeAll', () {
+    expect(wbemhiperfenum.removeAll, isA<Function>());
   });
   free(ptr);
 }

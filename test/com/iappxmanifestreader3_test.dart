@@ -22,13 +22,13 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader3 = IAppxManifestReader3(ptr);
-  test('Can instantiate IAppxManifestReader3.GetCapabilitiesByCapabilityClass',
+  test('Can instantiate IAppxManifestReader3.getCapabilitiesByCapabilityClass',
       () {
     expect(
-        appxmanifestreader3.GetCapabilitiesByCapabilityClass, isA<Function>());
+        appxmanifestreader3.getCapabilitiesByCapabilityClass, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader3.GetTargetDeviceFamilies', () {
-    expect(appxmanifestreader3.GetTargetDeviceFamilies, isA<Function>());
+  test('Can instantiate IAppxManifestReader3.getTargetDeviceFamilies', () {
+    expect(appxmanifestreader3.getTargetDeviceFamilies, isA<Function>());
   });
   free(ptr);
 }

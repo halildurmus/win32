@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final speechobjecttokens = ISpeechObjectTokens(ptr);
-  test('Can instantiate ISpeechObjectTokens.Item', () {
-    expect(speechobjecttokens.Item, isA<Function>());
+  test('Can instantiate ISpeechObjectTokens.item', () {
+    expect(speechobjecttokens.item, isA<Function>());
   });
   free(ptr);
 }

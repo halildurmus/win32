@@ -22,35 +22,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final speechobjecttoken = ISpeechObjectToken(ptr);
-  test('Can instantiate ISpeechObjectToken.GetDescription', () {
-    expect(speechobjecttoken.GetDescription, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.getDescription', () {
+    expect(speechobjecttoken.getDescription, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.SetId', () {
-    expect(speechobjecttoken.SetId, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.setId', () {
+    expect(speechobjecttoken.setId, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.GetAttribute', () {
-    expect(speechobjecttoken.GetAttribute, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.getAttribute', () {
+    expect(speechobjecttoken.getAttribute, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.CreateInstance', () {
-    expect(speechobjecttoken.CreateInstance, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.createInstance', () {
+    expect(speechobjecttoken.createInstance, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.Remove', () {
-    expect(speechobjecttoken.Remove, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.remove', () {
+    expect(speechobjecttoken.remove, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.GetStorageFileName', () {
-    expect(speechobjecttoken.GetStorageFileName, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.getStorageFileName', () {
+    expect(speechobjecttoken.getStorageFileName, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.RemoveStorageFileName', () {
-    expect(speechobjecttoken.RemoveStorageFileName, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.removeStorageFileName', () {
+    expect(speechobjecttoken.removeStorageFileName, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.IsUISupported', () {
-    expect(speechobjecttoken.IsUISupported, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.isUISupported', () {
+    expect(speechobjecttoken.isUISupported, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.DisplayUI', () {
-    expect(speechobjecttoken.DisplayUI, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.displayUI', () {
+    expect(speechobjecttoken.displayUI, isA<Function>());
   });
-  test('Can instantiate ISpeechObjectToken.MatchesAttributes', () {
-    expect(speechobjecttoken.MatchesAttributes, isA<Function>());
+  test('Can instantiate ISpeechObjectToken.matchesAttributes', () {
+    expect(speechobjecttoken.matchesAttributes, isA<Function>());
   });
   free(ptr);
 }

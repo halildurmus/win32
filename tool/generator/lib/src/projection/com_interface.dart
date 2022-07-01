@@ -176,7 +176,7 @@ class ComInterfaceProjection {
       final pIID = convertToIID(iid);
       final pObject = calloc<COMObject>();
       try {
-        final hr = QueryInterface(pIID, pObject.cast());
+        final hr = queryInterface(pIID, pObject.cast());
         if (FAILED(hr)) throw WindowsException(hr);
         return pObject;
       } finally {

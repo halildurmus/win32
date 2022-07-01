@@ -34,7 +34,7 @@ class IAudioClock extends IUnknown {
   factory IAudioClock.from(IUnknown interface) =>
       IAudioClock(interface.toInterface(IID_IAudioClock));
 
-  int GetFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.vtable
+  int getFrequency(Pointer<Uint64> pu64Frequency) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -45,7 +45,7 @@ class IAudioClock extends IUnknown {
           int Function(Pointer,
               Pointer<Uint64> pu64Frequency)>()(ptr.ref.lpVtbl, pu64Frequency);
 
-  int GetPosition(
+  int getPosition(
           Pointer<Uint64> pu64Position, Pointer<Uint64> pu64QPCPosition) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -60,7 +60,7 @@ class IAudioClock extends IUnknown {
                       Pointer<Uint64> pu64QPCPosition)>()(
           ptr.ref.lpVtbl, pu64Position, pu64QPCPosition);
 
-  int GetCharacteristics(Pointer<Uint32> pdwCharacteristics) => ptr.ref.vtable
+  int getCharacteristics(Pointer<Uint32> pdwCharacteristics) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

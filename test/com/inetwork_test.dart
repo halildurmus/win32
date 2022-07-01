@@ -22,38 +22,38 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final network = INetwork(ptr);
-  test('Can instantiate INetwork.GetName', () {
-    expect(network.GetName, isA<Function>());
+  test('Can instantiate INetwork.getName', () {
+    expect(network.getName, isA<Function>());
   });
-  test('Can instantiate INetwork.SetName', () {
-    expect(network.SetName, isA<Function>());
+  test('Can instantiate INetwork.setName', () {
+    expect(network.setName, isA<Function>());
   });
-  test('Can instantiate INetwork.GetDescription', () {
-    expect(network.GetDescription, isA<Function>());
+  test('Can instantiate INetwork.getDescription', () {
+    expect(network.getDescription, isA<Function>());
   });
-  test('Can instantiate INetwork.SetDescription', () {
-    expect(network.SetDescription, isA<Function>());
+  test('Can instantiate INetwork.setDescription', () {
+    expect(network.setDescription, isA<Function>());
   });
-  test('Can instantiate INetwork.GetNetworkId', () {
-    expect(network.GetNetworkId, isA<Function>());
+  test('Can instantiate INetwork.getNetworkId', () {
+    expect(network.getNetworkId, isA<Function>());
   });
-  test('Can instantiate INetwork.GetDomainType', () {
-    expect(network.GetDomainType, isA<Function>());
+  test('Can instantiate INetwork.getDomainType', () {
+    expect(network.getDomainType, isA<Function>());
   });
-  test('Can instantiate INetwork.GetNetworkConnections', () {
-    expect(network.GetNetworkConnections, isA<Function>());
+  test('Can instantiate INetwork.getNetworkConnections', () {
+    expect(network.getNetworkConnections, isA<Function>());
   });
-  test('Can instantiate INetwork.GetTimeCreatedAndConnected', () {
-    expect(network.GetTimeCreatedAndConnected, isA<Function>());
+  test('Can instantiate INetwork.getTimeCreatedAndConnected', () {
+    expect(network.getTimeCreatedAndConnected, isA<Function>());
   });
-  test('Can instantiate INetwork.GetConnectivity', () {
-    expect(network.GetConnectivity, isA<Function>());
+  test('Can instantiate INetwork.getConnectivity', () {
+    expect(network.getConnectivity, isA<Function>());
   });
-  test('Can instantiate INetwork.GetCategory', () {
-    expect(network.GetCategory, isA<Function>());
+  test('Can instantiate INetwork.getCategory', () {
+    expect(network.getCategory, isA<Function>());
   });
-  test('Can instantiate INetwork.SetCategory', () {
-    expect(network.SetCategory, isA<Function>());
+  test('Can instantiate INetwork.setCategory', () {
+    expect(network.setCategory, isA<Function>());
   });
   free(ptr);
 }

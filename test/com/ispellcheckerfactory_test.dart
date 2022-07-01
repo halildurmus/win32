@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spellcheckerfactory = ISpellCheckerFactory(ptr);
-  test('Can instantiate ISpellCheckerFactory.IsSupported', () {
-    expect(spellcheckerfactory.IsSupported, isA<Function>());
+  test('Can instantiate ISpellCheckerFactory.isSupported', () {
+    expect(spellcheckerfactory.isSupported, isA<Function>());
   });
-  test('Can instantiate ISpellCheckerFactory.CreateSpellChecker', () {
-    expect(spellcheckerfactory.CreateSpellChecker, isA<Function>());
+  test('Can instantiate ISpellCheckerFactory.createSpellChecker', () {
+    expect(spellcheckerfactory.createSpellChecker, isA<Function>());
   });
   free(ptr);
 }

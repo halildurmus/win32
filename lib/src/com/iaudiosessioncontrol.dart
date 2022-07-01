@@ -34,7 +34,7 @@ class IAudioSessionControl extends IUnknown {
   factory IAudioSessionControl.from(IUnknown interface) =>
       IAudioSessionControl(interface.toInterface(IID_IAudioSessionControl));
 
-  int GetState(Pointer<Int32> pRetVal) => ptr.ref.vtable
+  int getState(Pointer<Int32> pRetVal) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +44,7 @@ class IAudioSessionControl extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> pRetVal)>()(
       ptr.ref.lpVtbl, pRetVal);
 
-  int GetDisplayName(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
+  int getDisplayName(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -55,7 +55,7 @@ class IAudioSessionControl extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
+  int setDisplayName(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<
@@ -69,7 +69,7 @@ class IAudioSessionControl extends IUnknown {
                   Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
       ptr.ref.lpVtbl, Value, EventContext);
 
-  int GetIconPath(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
+  int getIconPath(Pointer<Pointer<Utf16>> pRetVal) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -80,7 +80,7 @@ class IAudioSessionControl extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
+  int setIconPath(Pointer<Utf16> Value, Pointer<GUID> EventContext) => ptr
           .ref.vtable
           .elementAt(7)
           .cast<
@@ -94,7 +94,7 @@ class IAudioSessionControl extends IUnknown {
                   Pointer, Pointer<Utf16> Value, Pointer<GUID> EventContext)>()(
       ptr.ref.lpVtbl, Value, EventContext);
 
-  int GetGroupingParam(Pointer<GUID> pRetVal) => ptr.ref.vtable
+  int getGroupingParam(Pointer<GUID> pRetVal) => ptr.ref.vtable
       .elementAt(8)
       .cast<
           Pointer<
@@ -104,7 +104,7 @@ class IAudioSessionControl extends IUnknown {
           int Function(
               Pointer, Pointer<GUID> pRetVal)>()(ptr.ref.lpVtbl, pRetVal);
 
-  int SetGroupingParam(Pointer<GUID> Override, Pointer<GUID> EventContext) =>
+  int setGroupingParam(Pointer<GUID> Override, Pointer<GUID> EventContext) =>
       ptr.ref.vtable
               .elementAt(9)
               .cast<
@@ -118,7 +118,7 @@ class IAudioSessionControl extends IUnknown {
                       Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, Override, EventContext);
 
-  int RegisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
+  int registerAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
       ptr.ref.vtable
               .elementAt(10)
               .cast<
@@ -131,7 +131,7 @@ class IAudioSessionControl extends IUnknown {
                   int Function(Pointer, Pointer<COMObject> NewNotifications)>()(
           ptr.ref.lpVtbl, NewNotifications);
 
-  int UnregisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
+  int unregisterAudioSessionNotification(Pointer<COMObject> NewNotifications) =>
       ptr.ref.vtable
               .elementAt(11)
               .cast<

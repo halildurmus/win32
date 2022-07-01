@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final simpleaudiovolume = ISimpleAudioVolume(ptr);
-  test('Can instantiate ISimpleAudioVolume.SetMasterVolume', () {
-    expect(simpleaudiovolume.SetMasterVolume, isA<Function>());
+  test('Can instantiate ISimpleAudioVolume.setMasterVolume', () {
+    expect(simpleaudiovolume.setMasterVolume, isA<Function>());
   });
-  test('Can instantiate ISimpleAudioVolume.GetMasterVolume', () {
-    expect(simpleaudiovolume.GetMasterVolume, isA<Function>());
+  test('Can instantiate ISimpleAudioVolume.getMasterVolume', () {
+    expect(simpleaudiovolume.getMasterVolume, isA<Function>());
   });
-  test('Can instantiate ISimpleAudioVolume.SetMute', () {
-    expect(simpleaudiovolume.SetMute, isA<Function>());
+  test('Can instantiate ISimpleAudioVolume.setMute', () {
+    expect(simpleaudiovolume.setMute, isA<Function>());
   });
-  test('Can instantiate ISimpleAudioVolume.GetMute', () {
-    expect(simpleaudiovolume.GetMute, isA<Function>());
+  test('Can instantiate ISimpleAudioVolume.getMute', () {
+    expect(simpleaudiovolume.getMute, isA<Function>());
   });
   free(ptr);
 }

@@ -34,7 +34,7 @@ class IShellItemImageFactory extends IUnknown {
   factory IShellItemImageFactory.from(IUnknown interface) =>
       IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 
-  int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
+  int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

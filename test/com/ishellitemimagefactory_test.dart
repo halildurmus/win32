@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitemimagefactory = IShellItemImageFactory(ptr);
-  test('Can instantiate IShellItemImageFactory.GetImage', () {
-    expect(shellitemimagefactory.GetImage, isA<Function>());
+  test('Can instantiate IShellItemImageFactory.getImage', () {
+    expect(shellitemimagefactory.getImage, isA<Function>());
   });
   free(ptr);
 }

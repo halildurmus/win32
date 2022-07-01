@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitemfilter = IShellItemFilter(ptr);
-  test('Can instantiate IShellItemFilter.IncludeItem', () {
-    expect(shellitemfilter.IncludeItem, isA<Function>());
+  test('Can instantiate IShellItemFilter.includeItem', () {
+    expect(shellitemfilter.includeItem, isA<Function>());
   });
-  test('Can instantiate IShellItemFilter.GetEnumFlagsForItem', () {
-    expect(shellitemfilter.GetEnumFlagsForItem, isA<Function>());
+  test('Can instantiate IShellItemFilter.getEnumFlagsForItem', () {
+    expect(shellitemfilter.getEnumFlagsForItem, isA<Function>());
   });
   free(ptr);
 }

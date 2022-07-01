@@ -35,7 +35,7 @@ class ISpEventSource extends ISpNotifySource {
   factory ISpEventSource.from(IUnknown interface) =>
       ISpEventSource(interface.toInterface(IID_ISpEventSource));
 
-  int SetInterest(int ullEventInterest, int ullQueuedInterest) => ptr.ref.vtable
+  int setInterest(int ullEventInterest, int ullQueuedInterest) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -48,7 +48,7 @@ class ISpEventSource extends ISpNotifySource {
                   Pointer, int ullEventInterest, int ullQueuedInterest)>()(
       ptr.ref.lpVtbl, ullEventInterest, ullQueuedInterest);
 
-  int GetEvents(int ulCount, Pointer<SPEVENT> pEventArray,
+  int getEvents(int ulCount, Pointer<SPEVENT> pEventArray,
           Pointer<Uint32> pulFetched) =>
       ptr.ref.vtable
               .elementAt(11)
@@ -69,7 +69,7 @@ class ISpEventSource extends ISpNotifySource {
                       Pointer<Uint32> pulFetched)>()(
           ptr.ref.lpVtbl, ulCount, pEventArray, pulFetched);
 
-  int GetInfo(Pointer<SPEVENTSOURCEINFO> pInfo) => ptr.ref.vtable
+  int getInfo(Pointer<SPEVENTSOURCEINFO> pInfo) => ptr.ref.vtable
       .elementAt(12)
       .cast<
           Pointer<

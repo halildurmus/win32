@@ -34,7 +34,7 @@ class IAppxManifestReader6 extends IUnknown {
   factory IAppxManifestReader6.from(IUnknown interface) =>
       IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
 
-  int GetIsNonQualifiedResourcePackage(
+  int getIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>
       ptr.ref.vtable
               .elementAt(3)

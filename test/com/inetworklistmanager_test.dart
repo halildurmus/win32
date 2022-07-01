@@ -22,26 +22,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final networklistmanager = INetworkListManager(ptr);
-  test('Can instantiate INetworkListManager.GetNetworks', () {
-    expect(networklistmanager.GetNetworks, isA<Function>());
+  test('Can instantiate INetworkListManager.getNetworks', () {
+    expect(networklistmanager.getNetworks, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.GetNetwork', () {
-    expect(networklistmanager.GetNetwork, isA<Function>());
+  test('Can instantiate INetworkListManager.getNetwork', () {
+    expect(networklistmanager.getNetwork, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.GetNetworkConnections', () {
-    expect(networklistmanager.GetNetworkConnections, isA<Function>());
+  test('Can instantiate INetworkListManager.getNetworkConnections', () {
+    expect(networklistmanager.getNetworkConnections, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.GetNetworkConnection', () {
-    expect(networklistmanager.GetNetworkConnection, isA<Function>());
+  test('Can instantiate INetworkListManager.getNetworkConnection', () {
+    expect(networklistmanager.getNetworkConnection, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.GetConnectivity', () {
-    expect(networklistmanager.GetConnectivity, isA<Function>());
+  test('Can instantiate INetworkListManager.getConnectivity', () {
+    expect(networklistmanager.getConnectivity, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.SetSimulatedProfileInfo', () {
-    expect(networklistmanager.SetSimulatedProfileInfo, isA<Function>());
+  test('Can instantiate INetworkListManager.setSimulatedProfileInfo', () {
+    expect(networklistmanager.setSimulatedProfileInfo, isA<Function>());
   });
-  test('Can instantiate INetworkListManager.ClearSimulatedProfileInfo', () {
-    expect(networklistmanager.ClearSimulatedProfileInfo, isA<Function>());
+  test('Can instantiate INetworkListManager.clearSimulatedProfileInfo', () {
+    expect(networklistmanager.clearSimulatedProfileInfo, isA<Function>());
   });
   free(ptr);
 }

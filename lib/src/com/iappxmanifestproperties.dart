@@ -35,7 +35,7 @@ class IAppxManifestProperties extends IUnknown {
       IAppxManifestProperties(
           interface.toInterface(IID_IAppxManifestProperties));
 
-  int GetBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
+  int getBoolValue(Pointer<Utf16> name, Pointer<Int32> value) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -47,7 +47,7 @@ class IAppxManifestProperties extends IUnknown {
           int Function(Pointer, Pointer<Utf16> name,
               Pointer<Int32> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
+  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
       .ref.vtable
       .elementAt(4)
       .cast<

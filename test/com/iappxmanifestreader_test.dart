@@ -22,32 +22,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader = IAppxManifestReader(ptr);
-  test('Can instantiate IAppxManifestReader.GetPackageId', () {
-    expect(appxmanifestreader.GetPackageId, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getPackageId', () {
+    expect(appxmanifestreader.getPackageId, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetProperties', () {
-    expect(appxmanifestreader.GetProperties, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getProperties', () {
+    expect(appxmanifestreader.getProperties, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetPackageDependencies', () {
-    expect(appxmanifestreader.GetPackageDependencies, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getPackageDependencies', () {
+    expect(appxmanifestreader.getPackageDependencies, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetCapabilities', () {
-    expect(appxmanifestreader.GetCapabilities, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getCapabilities', () {
+    expect(appxmanifestreader.getCapabilities, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetResources', () {
-    expect(appxmanifestreader.GetResources, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getResources', () {
+    expect(appxmanifestreader.getResources, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetDeviceCapabilities', () {
-    expect(appxmanifestreader.GetDeviceCapabilities, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getDeviceCapabilities', () {
+    expect(appxmanifestreader.getDeviceCapabilities, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetPrerequisite', () {
-    expect(appxmanifestreader.GetPrerequisite, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getPrerequisite', () {
+    expect(appxmanifestreader.getPrerequisite, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetApplications', () {
-    expect(appxmanifestreader.GetApplications, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getApplications', () {
+    expect(appxmanifestreader.getApplications, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader.GetStream', () {
-    expect(appxmanifestreader.GetStream, isA<Function>());
+  test('Can instantiate IAppxManifestReader.getStream', () {
+    expect(appxmanifestreader.getStream, isA<Function>());
   });
   free(ptr);
 }

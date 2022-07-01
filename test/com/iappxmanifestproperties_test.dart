@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestproperties = IAppxManifestProperties(ptr);
-  test('Can instantiate IAppxManifestProperties.GetBoolValue', () {
-    expect(appxmanifestproperties.GetBoolValue, isA<Function>());
+  test('Can instantiate IAppxManifestProperties.getBoolValue', () {
+    expect(appxmanifestproperties.getBoolValue, isA<Function>());
   });
-  test('Can instantiate IAppxManifestProperties.GetStringValue', () {
-    expect(appxmanifestproperties.GetStringValue, isA<Function>());
+  test('Can instantiate IAppxManifestProperties.getStringValue', () {
+    expect(appxmanifestproperties.getStringValue, isA<Function>());
   });
   free(ptr);
 }

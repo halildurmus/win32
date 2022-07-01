@@ -22,25 +22,25 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final mmdeviceenumerator = IMMDeviceEnumerator(ptr);
-  test('Can instantiate IMMDeviceEnumerator.EnumAudioEndpoints', () {
-    expect(mmdeviceenumerator.EnumAudioEndpoints, isA<Function>());
+  test('Can instantiate IMMDeviceEnumerator.enumAudioEndpoints', () {
+    expect(mmdeviceenumerator.enumAudioEndpoints, isA<Function>());
   });
-  test('Can instantiate IMMDeviceEnumerator.GetDefaultAudioEndpoint', () {
-    expect(mmdeviceenumerator.GetDefaultAudioEndpoint, isA<Function>());
+  test('Can instantiate IMMDeviceEnumerator.getDefaultAudioEndpoint', () {
+    expect(mmdeviceenumerator.getDefaultAudioEndpoint, isA<Function>());
   });
-  test('Can instantiate IMMDeviceEnumerator.GetDevice', () {
-    expect(mmdeviceenumerator.GetDevice, isA<Function>());
+  test('Can instantiate IMMDeviceEnumerator.getDevice', () {
+    expect(mmdeviceenumerator.getDevice, isA<Function>());
   });
   test(
-      'Can instantiate IMMDeviceEnumerator.RegisterEndpointNotificationCallback',
+      'Can instantiate IMMDeviceEnumerator.registerEndpointNotificationCallback',
       () {
-    expect(mmdeviceenumerator.RegisterEndpointNotificationCallback,
+    expect(mmdeviceenumerator.registerEndpointNotificationCallback,
         isA<Function>());
   });
   test(
-      'Can instantiate IMMDeviceEnumerator.UnregisterEndpointNotificationCallback',
+      'Can instantiate IMMDeviceEnumerator.unregisterEndpointNotificationCallback',
       () {
-    expect(mmdeviceenumerator.UnregisterEndpointNotificationCallback,
+    expect(mmdeviceenumerator.unregisterEndpointNotificationCallback,
         isA<Function>());
   });
   free(ptr);

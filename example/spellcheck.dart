@@ -103,20 +103,20 @@ void main(List<String> args) {
           break;
       }
 
-      error.Release();
+      error.release();
     }
 
-    errors.Release();
+    errors.release();
     free(textPtr);
-    spellChecker2.Release();
-    spellChecker.Release();
+    spellChecker2.release();
+    spellChecker.release();
     free(spellCheckerPtr);
   }
 
   free(supportedPtr);
   free(languageTagPtr);
 
-  spellCheckerFactory.Release();
+  spellCheckerFactory.release();
 
   CoUninitialize();
 }

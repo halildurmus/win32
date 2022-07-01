@@ -34,7 +34,7 @@ class IEnumIDList extends IUnknown {
   factory IEnumIDList.from(IUnknown interface) =>
       IEnumIDList(interface.toInterface(IID_IEnumIDList));
 
-  int Next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
+  int next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
           Pointer<Uint32> pceltFetched) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -55,19 +55,19 @@ class IEnumIDList extends IUnknown {
                       Pointer<Uint32> pceltFetched)>()(
           ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(int celt) => ptr.ref.vtable
+  int skip(int celt) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => ptr.ref.vtable
+  int reset() => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
+  int clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

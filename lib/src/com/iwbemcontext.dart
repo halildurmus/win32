@@ -34,7 +34,7 @@ class IWbemContext extends IUnknown {
   factory IWbemContext.from(IUnknown interface) =>
       IWbemContext(interface.toInterface(IID_IWbemContext));
 
-  int Clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.vtable
+  int clone(Pointer<Pointer<COMObject>> ppNewCopy) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -46,7 +46,7 @@ class IWbemContext extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppNewCopy)>()(
       ptr.ref.lpVtbl, ppNewCopy);
 
-  int GetNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) => ptr.ref.vtable
+  int getNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -59,13 +59,13 @@ class IWbemContext extends IUnknown {
                   Pointer, int lFlags, Pointer<Pointer<SAFEARRAY>> pNames)>()(
       ptr.ref.lpVtbl, lFlags, pNames);
 
-  int BeginEnumeration(int lFlags) => ptr.ref.vtable
+  int beginEnumeration(int lFlags) => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int lFlags)>()(ptr.ref.lpVtbl, lFlags);
 
-  int Next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
+  int next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
           Pointer<VARIANT> pValue) =>
       ptr.ref.vtable
               .elementAt(6)
@@ -86,13 +86,13 @@ class IWbemContext extends IUnknown {
                       Pointer<VARIANT> pValue)>()(
           ptr.ref.lpVtbl, lFlags, pstrName, pValue);
 
-  int EndEnumeration() => ptr.ref.vtable
+  int endEnumeration() => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int SetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
+  int setValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       ptr.ref.vtable
               .elementAt(8)
               .cast<
@@ -106,7 +106,7 @@ class IWbemContext extends IUnknown {
                       Pointer<VARIANT> pValue)>()(
           ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int GetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
+  int getValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       ptr.ref.vtable
               .elementAt(9)
               .cast<
@@ -120,7 +120,7 @@ class IWbemContext extends IUnknown {
                       Pointer<VARIANT> pValue)>()(
           ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int DeleteValue(Pointer<Utf16> wszName, int lFlags) => ptr.ref.vtable
+  int deleteValue(Pointer<Utf16> wszName, int lFlags) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -132,7 +132,7 @@ class IWbemContext extends IUnknown {
               int Function(Pointer, Pointer<Utf16> wszName, int lFlags)>()(
       ptr.ref.lpVtbl, wszName, lFlags);
 
-  int DeleteAll() => ptr.ref.vtable
+  int deleteAll() => ptr.ref.vtable
       .elementAt(11)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

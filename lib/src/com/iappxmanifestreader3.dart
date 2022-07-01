@@ -35,7 +35,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
   factory IAppxManifestReader3.from(IUnknown interface) =>
       IAppxManifestReader3(interface.toInterface(IID_IAppxManifestReader3));
 
-  int GetCapabilitiesByCapabilityClass(
+  int getCapabilitiesByCapabilityClass(
           int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
       ptr.ref.vtable
               .elementAt(13)
@@ -51,7 +51,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
           ptr.ref.lpVtbl, capabilityClass, capabilities);
 
   int
-      GetTargetDeviceFamilies(
+      getTargetDeviceFamilies(
               Pointer<Pointer<COMObject>> targetDeviceFamilies) =>
           ptr.ref.vtable
                   .elementAt(14)

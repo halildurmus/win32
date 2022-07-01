@@ -34,7 +34,7 @@ class IAppxManifestPackageId extends IUnknown {
   factory IAppxManifestPackageId.from(IUnknown interface) =>
       IAppxManifestPackageId(interface.toInterface(IID_IAppxManifestPackageId));
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
+  int getName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +44,7 @@ class IAppxManifestPackageId extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int GetArchitecture(Pointer<Int32> architecture) => ptr.ref.vtable
+  int getArchitecture(Pointer<Int32> architecture) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -54,7 +54,7 @@ class IAppxManifestPackageId extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> architecture)>()(
       ptr.ref.lpVtbl, architecture);
 
-  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
+  int getPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -66,7 +66,7 @@ class IAppxManifestPackageId extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
       ptr.ref.lpVtbl, publisher);
 
-  int GetVersion(Pointer<Uint64> packageVersion) =>
+  int getVersion(Pointer<Uint64> packageVersion) =>
       ptr.ref.vtable
               .elementAt(6)
               .cast<
@@ -79,7 +79,7 @@ class IAppxManifestPackageId extends IUnknown {
                   int Function(Pointer, Pointer<Uint64> packageVersion)>()(
           ptr.ref.lpVtbl, packageVersion);
 
-  int GetResourceId(Pointer<Pointer<Utf16>> resourceId) => ptr.ref.vtable
+  int getResourceId(Pointer<Pointer<Utf16>> resourceId) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -91,7 +91,7 @@ class IAppxManifestPackageId extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> resourceId)>()(
       ptr.ref.lpVtbl, resourceId);
 
-  int ComparePublisher(Pointer<Utf16> other, Pointer<Int32> isSame) => ptr
+  int comparePublisher(Pointer<Utf16> other, Pointer<Int32> isSame) => ptr
       .ref.vtable
       .elementAt(8)
       .cast<
@@ -104,7 +104,7 @@ class IAppxManifestPackageId extends IUnknown {
           int Function(Pointer, Pointer<Utf16> other,
               Pointer<Int32> isSame)>()(ptr.ref.lpVtbl, other, isSame);
 
-  int GetPackageFullName(Pointer<Pointer<Utf16>> packageFullName) => ptr
+  int getPackageFullName(Pointer<Pointer<Utf16>> packageFullName) => ptr
           .ref.vtable
           .elementAt(9)
           .cast<
@@ -117,7 +117,7 @@ class IAppxManifestPackageId extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> packageFullName)>()(
       ptr.ref.lpVtbl, packageFullName);
 
-  int GetPackageFamilyName(Pointer<Pointer<Utf16>> packageFamilyName) =>
+  int getPackageFamilyName(Pointer<Pointer<Utf16>> packageFamilyName) =>
       ptr.ref.vtable
               .elementAt(10)
               .cast<

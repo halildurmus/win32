@@ -22,32 +22,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemcontext = IWbemContext(ptr);
-  test('Can instantiate IWbemContext.Clone', () {
-    expect(wbemcontext.Clone, isA<Function>());
+  test('Can instantiate IWbemContext.clone', () {
+    expect(wbemcontext.clone, isA<Function>());
   });
-  test('Can instantiate IWbemContext.GetNames', () {
-    expect(wbemcontext.GetNames, isA<Function>());
+  test('Can instantiate IWbemContext.getNames', () {
+    expect(wbemcontext.getNames, isA<Function>());
   });
-  test('Can instantiate IWbemContext.BeginEnumeration', () {
-    expect(wbemcontext.BeginEnumeration, isA<Function>());
+  test('Can instantiate IWbemContext.beginEnumeration', () {
+    expect(wbemcontext.beginEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemContext.Next', () {
-    expect(wbemcontext.Next, isA<Function>());
+  test('Can instantiate IWbemContext.next', () {
+    expect(wbemcontext.next, isA<Function>());
   });
-  test('Can instantiate IWbemContext.EndEnumeration', () {
-    expect(wbemcontext.EndEnumeration, isA<Function>());
+  test('Can instantiate IWbemContext.endEnumeration', () {
+    expect(wbemcontext.endEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemContext.SetValue', () {
-    expect(wbemcontext.SetValue, isA<Function>());
+  test('Can instantiate IWbemContext.setValue', () {
+    expect(wbemcontext.setValue, isA<Function>());
   });
-  test('Can instantiate IWbemContext.GetValue', () {
-    expect(wbemcontext.GetValue, isA<Function>());
+  test('Can instantiate IWbemContext.getValue', () {
+    expect(wbemcontext.getValue, isA<Function>());
   });
-  test('Can instantiate IWbemContext.DeleteValue', () {
-    expect(wbemcontext.DeleteValue, isA<Function>());
+  test('Can instantiate IWbemContext.deleteValue', () {
+    expect(wbemcontext.deleteValue, isA<Function>());
   });
-  test('Can instantiate IWbemContext.DeleteAll', () {
-    expect(wbemcontext.DeleteAll, isA<Function>());
+  test('Can instantiate IWbemContext.deleteAll', () {
+    expect(wbemcontext.deleteAll, isA<Function>());
   });
   free(ptr);
 }

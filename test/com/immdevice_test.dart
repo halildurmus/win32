@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final mmdevice = IMMDevice(ptr);
-  test('Can instantiate IMMDevice.Activate', () {
-    expect(mmdevice.Activate, isA<Function>());
+  test('Can instantiate IMMDevice.activate', () {
+    expect(mmdevice.activate, isA<Function>());
   });
-  test('Can instantiate IMMDevice.OpenPropertyStore', () {
-    expect(mmdevice.OpenPropertyStore, isA<Function>());
+  test('Can instantiate IMMDevice.openPropertyStore', () {
+    expect(mmdevice.openPropertyStore, isA<Function>());
   });
-  test('Can instantiate IMMDevice.GetId', () {
-    expect(mmdevice.GetId, isA<Function>());
+  test('Can instantiate IMMDevice.getId', () {
+    expect(mmdevice.getId, isA<Function>());
   });
-  test('Can instantiate IMMDevice.GetState', () {
-    expect(mmdevice.GetState, isA<Function>());
+  test('Can instantiate IMMDevice.getState', () {
+    expect(mmdevice.getState, isA<Function>());
   });
   free(ptr);
 }

@@ -22,32 +22,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final knownfolder = IKnownFolder(ptr);
-  test('Can instantiate IKnownFolder.GetId', () {
-    expect(knownfolder.GetId, isA<Function>());
+  test('Can instantiate IKnownFolder.getId', () {
+    expect(knownfolder.getId, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetCategory', () {
-    expect(knownfolder.GetCategory, isA<Function>());
+  test('Can instantiate IKnownFolder.getCategory', () {
+    expect(knownfolder.getCategory, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetShellItem', () {
-    expect(knownfolder.GetShellItem, isA<Function>());
+  test('Can instantiate IKnownFolder.getShellItem', () {
+    expect(knownfolder.getShellItem, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetPath', () {
-    expect(knownfolder.GetPath, isA<Function>());
+  test('Can instantiate IKnownFolder.getPath', () {
+    expect(knownfolder.getPath, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.SetPath', () {
-    expect(knownfolder.SetPath, isA<Function>());
+  test('Can instantiate IKnownFolder.setPath', () {
+    expect(knownfolder.setPath, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetIDList', () {
-    expect(knownfolder.GetIDList, isA<Function>());
+  test('Can instantiate IKnownFolder.getIDList', () {
+    expect(knownfolder.getIDList, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetFolderType', () {
-    expect(knownfolder.GetFolderType, isA<Function>());
+  test('Can instantiate IKnownFolder.getFolderType', () {
+    expect(knownfolder.getFolderType, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetRedirectionCapabilities', () {
-    expect(knownfolder.GetRedirectionCapabilities, isA<Function>());
+  test('Can instantiate IKnownFolder.getRedirectionCapabilities', () {
+    expect(knownfolder.getRedirectionCapabilities, isA<Function>());
   });
-  test('Can instantiate IKnownFolder.GetFolderDefinition', () {
-    expect(knownfolder.GetFolderDefinition, isA<Function>());
+  test('Can instantiate IKnownFolder.getFolderDefinition', () {
+    expect(knownfolder.getFolderDefinition, isA<Function>());
   });
   free(ptr);
 }

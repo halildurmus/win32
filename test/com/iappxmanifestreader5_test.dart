@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader5 = IAppxManifestReader5(ptr);
-  test('Can instantiate IAppxManifestReader5.GetMainPackageDependencies', () {
-    expect(appxmanifestreader5.GetMainPackageDependencies, isA<Function>());
+  test('Can instantiate IAppxManifestReader5.getMainPackageDependencies', () {
+    expect(appxmanifestreader5.getMainPackageDependencies, isA<Function>());
   });
   free(ptr);
 }

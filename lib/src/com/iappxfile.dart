@@ -34,7 +34,7 @@ class IAppxFile extends IUnknown {
   factory IAppxFile.from(IUnknown interface) =>
       IAppxFile(interface.toInterface(IID_IAppxFile));
 
-  int GetCompressionOption(Pointer<Int32> compressionOption) =>
+  int getCompressionOption(Pointer<Int32> compressionOption) =>
       ptr.ref.vtable
               .elementAt(3)
               .cast<
@@ -47,7 +47,7 @@ class IAppxFile extends IUnknown {
                   int Function(Pointer, Pointer<Int32> compressionOption)>()(
           ptr.ref.lpVtbl, compressionOption);
 
-  int GetContentType(Pointer<Pointer<Utf16>> contentType) => ptr.ref.vtable
+  int getContentType(Pointer<Pointer<Utf16>> contentType) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -59,7 +59,7 @@ class IAppxFile extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> contentType)>()(
       ptr.ref.lpVtbl, contentType);
 
-  int GetName(Pointer<Pointer<Utf16>> fileName) => ptr.ref.vtable
+  int getName(Pointer<Pointer<Utf16>> fileName) => ptr.ref.vtable
       .elementAt(5)
       .cast<
           Pointer<
@@ -70,7 +70,7 @@ class IAppxFile extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> fileName)>()(ptr.ref.lpVtbl, fileName);
 
-  int GetSize(Pointer<Uint64> size) => ptr.ref.vtable
+  int getSize(Pointer<Uint64> size) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -79,7 +79,7 @@ class IAppxFile extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Uint64> size)>()(ptr.ref.lpVtbl, size);
 
-  int GetStream(Pointer<Pointer<COMObject>> stream) => ptr.ref.vtable
+  int getStream(Pointer<Pointer<COMObject>> stream) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

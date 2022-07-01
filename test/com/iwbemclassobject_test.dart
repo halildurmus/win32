@@ -22,77 +22,77 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemclassobject = IWbemClassObject(ptr);
-  test('Can instantiate IWbemClassObject.GetQualifierSet', () {
-    expect(wbemclassobject.GetQualifierSet, isA<Function>());
+  test('Can instantiate IWbemClassObject.getQualifierSet', () {
+    expect(wbemclassobject.getQualifierSet, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.Get', () {
-    expect(wbemclassobject.Get, isA<Function>());
+  test('Can instantiate IWbemClassObject.get', () {
+    expect(wbemclassobject.get, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.Put', () {
-    expect(wbemclassobject.Put, isA<Function>());
+  test('Can instantiate IWbemClassObject.put', () {
+    expect(wbemclassobject.put, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.Delete', () {
-    expect(wbemclassobject.Delete, isA<Function>());
+  test('Can instantiate IWbemClassObject.delete', () {
+    expect(wbemclassobject.delete, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetNames', () {
-    expect(wbemclassobject.GetNames, isA<Function>());
+  test('Can instantiate IWbemClassObject.getNames', () {
+    expect(wbemclassobject.getNames, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.BeginEnumeration', () {
-    expect(wbemclassobject.BeginEnumeration, isA<Function>());
+  test('Can instantiate IWbemClassObject.beginEnumeration', () {
+    expect(wbemclassobject.beginEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.Next', () {
-    expect(wbemclassobject.Next, isA<Function>());
+  test('Can instantiate IWbemClassObject.next', () {
+    expect(wbemclassobject.next, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.EndEnumeration', () {
-    expect(wbemclassobject.EndEnumeration, isA<Function>());
+  test('Can instantiate IWbemClassObject.endEnumeration', () {
+    expect(wbemclassobject.endEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetPropertyQualifierSet', () {
-    expect(wbemclassobject.GetPropertyQualifierSet, isA<Function>());
+  test('Can instantiate IWbemClassObject.getPropertyQualifierSet', () {
+    expect(wbemclassobject.getPropertyQualifierSet, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.Clone', () {
-    expect(wbemclassobject.Clone, isA<Function>());
+  test('Can instantiate IWbemClassObject.clone', () {
+    expect(wbemclassobject.clone, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetObjectText', () {
-    expect(wbemclassobject.GetObjectText, isA<Function>());
+  test('Can instantiate IWbemClassObject.getObjectText', () {
+    expect(wbemclassobject.getObjectText, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.SpawnDerivedClass', () {
-    expect(wbemclassobject.SpawnDerivedClass, isA<Function>());
+  test('Can instantiate IWbemClassObject.spawnDerivedClass', () {
+    expect(wbemclassobject.spawnDerivedClass, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.SpawnInstance', () {
-    expect(wbemclassobject.SpawnInstance, isA<Function>());
+  test('Can instantiate IWbemClassObject.spawnInstance', () {
+    expect(wbemclassobject.spawnInstance, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.CompareTo', () {
-    expect(wbemclassobject.CompareTo, isA<Function>());
+  test('Can instantiate IWbemClassObject.compareTo', () {
+    expect(wbemclassobject.compareTo, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetPropertyOrigin', () {
-    expect(wbemclassobject.GetPropertyOrigin, isA<Function>());
+  test('Can instantiate IWbemClassObject.getPropertyOrigin', () {
+    expect(wbemclassobject.getPropertyOrigin, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.InheritsFrom', () {
-    expect(wbemclassobject.InheritsFrom, isA<Function>());
+  test('Can instantiate IWbemClassObject.inheritsFrom', () {
+    expect(wbemclassobject.inheritsFrom, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetMethod', () {
-    expect(wbemclassobject.GetMethod, isA<Function>());
+  test('Can instantiate IWbemClassObject.getMethod', () {
+    expect(wbemclassobject.getMethod, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.PutMethod', () {
-    expect(wbemclassobject.PutMethod, isA<Function>());
+  test('Can instantiate IWbemClassObject.putMethod', () {
+    expect(wbemclassobject.putMethod, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.DeleteMethod', () {
-    expect(wbemclassobject.DeleteMethod, isA<Function>());
+  test('Can instantiate IWbemClassObject.deleteMethod', () {
+    expect(wbemclassobject.deleteMethod, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.BeginMethodEnumeration', () {
-    expect(wbemclassobject.BeginMethodEnumeration, isA<Function>());
+  test('Can instantiate IWbemClassObject.beginMethodEnumeration', () {
+    expect(wbemclassobject.beginMethodEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.NextMethod', () {
-    expect(wbemclassobject.NextMethod, isA<Function>());
+  test('Can instantiate IWbemClassObject.nextMethod', () {
+    expect(wbemclassobject.nextMethod, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.EndMethodEnumeration', () {
-    expect(wbemclassobject.EndMethodEnumeration, isA<Function>());
+  test('Can instantiate IWbemClassObject.endMethodEnumeration', () {
+    expect(wbemclassobject.endMethodEnumeration, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetMethodQualifierSet', () {
-    expect(wbemclassobject.GetMethodQualifierSet, isA<Function>());
+  test('Can instantiate IWbemClassObject.getMethodQualifierSet', () {
+    expect(wbemclassobject.getMethodQualifierSet, isA<Function>());
   });
-  test('Can instantiate IWbemClassObject.GetMethodOrigin', () {
-    expect(wbemclassobject.GetMethodOrigin, isA<Function>());
+  test('Can instantiate IWbemClassObject.getMethodOrigin', () {
+    expect(wbemclassobject.getMethodOrigin, isA<Function>());
   });
   free(ptr);
 }

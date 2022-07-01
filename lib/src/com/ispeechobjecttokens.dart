@@ -35,7 +35,7 @@ class ISpeechObjectTokens extends IDispatch {
   factory ISpeechObjectTokens.from(IUnknown interface) =>
       ISpeechObjectTokens(interface.toInterface(IID_ISpeechObjectTokens));
 
-  int get Count {
+  int get count {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -58,7 +58,7 @@ class ISpeechObjectTokens extends IDispatch {
     }
   }
 
-  int Item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
+  int item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -71,7 +71,7 @@ class ISpeechObjectTokens extends IDispatch {
                   Pointer, int Index, Pointer<Pointer<COMObject>> Token)>()(
       ptr.ref.lpVtbl, Index, Token);
 
-  Pointer<COMObject> get NewEnum {
+  Pointer<COMObject> get newEnum {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
