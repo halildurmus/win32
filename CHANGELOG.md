@@ -1,6 +1,7 @@
 ## 2.2.3
 
 - Update to Windows.Win32.winmd v24.0.6.19647.
+- Add protection to ensure typeSpecs don't produce erroneous results.
 
 ## 2.2.2
 
