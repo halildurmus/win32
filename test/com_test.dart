@@ -93,7 +93,7 @@ void main() {
     expect(ptrFactory.address, isNonZero);
 
     final classFactory = IClassFactory(ptrFactory);
-    hr = classFactory.CreateInstance(
+    hr = classFactory.createInstance(
         nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
     expect(hr, equals(S_OK));
     expect(ptrSaveDialog.address, isNonZero);
