@@ -43,7 +43,7 @@ class INetworkInformationStatics extends IInspectable {
       INetworkInformationStatics.fromRawPointer(
           interface.toInterface(IID_INetworkInformationStatics));
 
-  Pointer<COMObject> GetConnectionProfiles() {
+  Pointer<COMObject> getConnectionProfiles() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -70,7 +70,7 @@ class INetworkInformationStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> GetInternetConnectionProfile() {
+  Pointer<COMObject> getInternetConnectionProfile() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -97,7 +97,7 @@ class INetworkInformationStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> GetLanIdentifiers() {
+  Pointer<COMObject> getLanIdentifiers() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -124,7 +124,7 @@ class INetworkInformationStatics extends IInspectable {
     return retValuePtr;
   }
 
-  List<IHostName> GetHostNames() {
+  List<IHostName> getHostNames() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -159,7 +159,7 @@ class INetworkInformationStatics extends IInspectable {
     }
   }
 
-  Pointer<COMObject> GetProxyConfigurationAsync(
+  Pointer<COMObject> getProxyConfigurationAsync(
     Pointer<COMObject> uri,
   ) {
     final retValuePtr = calloc<COMObject>();
@@ -191,7 +191,7 @@ class INetworkInformationStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> GetSortedEndpointPairs(
+  Pointer<COMObject> getSortedEndpointPairs(
     Pointer<COMObject> destinationList,
     int sortOptions,
   ) {

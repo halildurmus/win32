@@ -22,10 +22,10 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader6 = IAppxManifestReader6(ptr);
-  test('Can instantiate IAppxManifestReader6.GetIsNonQualifiedResourcePackage',
+  test('Can instantiate IAppxManifestReader6.getIsNonQualifiedResourcePackage',
       () {
     expect(
-        appxmanifestreader6.GetIsNonQualifiedResourcePackage, isA<Function>());
+        appxmanifestreader6.getIsNonQualifiedResourcePackage, isA<Function>());
   });
   free(ptr);
 }

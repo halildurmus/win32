@@ -114,7 +114,7 @@ class IGamepadStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  List<String> get Gamepads {
+  List<String> get gamepads {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

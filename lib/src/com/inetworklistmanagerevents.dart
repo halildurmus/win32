@@ -35,7 +35,7 @@ class INetworkListManagerEvents extends IUnknown {
       INetworkListManagerEvents(
           interface.toInterface(IID_INetworkListManagerEvents));
 
-  int ConnectivityChanged(int newConnectivity) => ptr.ref.vtable
+  int connectivityChanged(int newConnectivity) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumstring = IEnumString(ptr);
-  test('Can instantiate IEnumString.Next', () {
-    expect(enumstring.Next, isA<Function>());
+  test('Can instantiate IEnumString.next', () {
+    expect(enumstring.next, isA<Function>());
   });
-  test('Can instantiate IEnumString.Skip', () {
-    expect(enumstring.Skip, isA<Function>());
+  test('Can instantiate IEnumString.skip', () {
+    expect(enumstring.skip, isA<Function>());
   });
-  test('Can instantiate IEnumString.Reset', () {
-    expect(enumstring.Reset, isA<Function>());
+  test('Can instantiate IEnumString.reset', () {
+    expect(enumstring.reset, isA<Function>());
   });
-  test('Can instantiate IEnumString.Clone', () {
-    expect(enumstring.Clone, isA<Function>());
+  test('Can instantiate IEnumString.clone', () {
+    expect(enumstring.clone, isA<Function>());
   });
   free(ptr);
 }

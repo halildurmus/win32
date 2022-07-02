@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final dispatch = IDispatch(ptr);
-  test('Can instantiate IDispatch.GetTypeInfoCount', () {
-    expect(dispatch.GetTypeInfoCount, isA<Function>());
+  test('Can instantiate IDispatch.getTypeInfoCount', () {
+    expect(dispatch.getTypeInfoCount, isA<Function>());
   });
-  test('Can instantiate IDispatch.GetTypeInfo', () {
-    expect(dispatch.GetTypeInfo, isA<Function>());
+  test('Can instantiate IDispatch.getTypeInfo', () {
+    expect(dispatch.getTypeInfo, isA<Function>());
   });
-  test('Can instantiate IDispatch.GetIDsOfNames', () {
-    expect(dispatch.GetIDsOfNames, isA<Function>());
+  test('Can instantiate IDispatch.getIDsOfNames', () {
+    expect(dispatch.getIDsOfNames, isA<Function>());
   });
-  test('Can instantiate IDispatch.Invoke', () {
-    expect(dispatch.Invoke, isA<Function>());
+  test('Can instantiate IDispatch.invoke', () {
+    expect(dispatch.invoke, isA<Function>());
   });
   free(ptr);
 }

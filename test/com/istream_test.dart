@@ -22,32 +22,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final stream = IStream(ptr);
-  test('Can instantiate IStream.Seek', () {
-    expect(stream.Seek, isA<Function>());
+  test('Can instantiate IStream.seek', () {
+    expect(stream.seek, isA<Function>());
   });
-  test('Can instantiate IStream.SetSize', () {
-    expect(stream.SetSize, isA<Function>());
+  test('Can instantiate IStream.setSize', () {
+    expect(stream.setSize, isA<Function>());
   });
-  test('Can instantiate IStream.CopyTo', () {
-    expect(stream.CopyTo, isA<Function>());
+  test('Can instantiate IStream.copyTo', () {
+    expect(stream.copyTo, isA<Function>());
   });
-  test('Can instantiate IStream.Commit', () {
-    expect(stream.Commit, isA<Function>());
+  test('Can instantiate IStream.commit', () {
+    expect(stream.commit, isA<Function>());
   });
-  test('Can instantiate IStream.Revert', () {
-    expect(stream.Revert, isA<Function>());
+  test('Can instantiate IStream.revert', () {
+    expect(stream.revert, isA<Function>());
   });
-  test('Can instantiate IStream.LockRegion', () {
-    expect(stream.LockRegion, isA<Function>());
+  test('Can instantiate IStream.lockRegion', () {
+    expect(stream.lockRegion, isA<Function>());
   });
-  test('Can instantiate IStream.UnlockRegion', () {
-    expect(stream.UnlockRegion, isA<Function>());
+  test('Can instantiate IStream.unlockRegion', () {
+    expect(stream.unlockRegion, isA<Function>());
   });
-  test('Can instantiate IStream.Stat', () {
-    expect(stream.Stat, isA<Function>());
+  test('Can instantiate IStream.stat', () {
+    expect(stream.stat, isA<Function>());
   });
-  test('Can instantiate IStream.Clone', () {
-    expect(stream.Clone, isA<Function>());
+  test('Can instantiate IStream.clone', () {
+    expect(stream.clone, isA<Function>());
   });
   free(ptr);
 }

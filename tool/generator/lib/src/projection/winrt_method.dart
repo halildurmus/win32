@@ -95,7 +95,7 @@ class WinRTMethodProjection extends MethodProjection {
   ''';
 
   String vectorDeclaration() => '''
-    IVector<String> $name($methodParams) {
+    IVector<String> $camelCasedName($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}
@@ -105,7 +105,7 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String vectorViewDeclaration() => '''
-    List<String> $name($methodParams) {
+    List<String> $camelCasedName($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}
@@ -120,7 +120,7 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String comObjectDeclaration() => '''
-    Pointer<COMObject> $name($methodParams) {
+    Pointer<COMObject> $camelCasedName($methodParams) {
     final retValuePtr = calloc<COMObject>();
     $parametersPreamble
     ${ffiCall()}
@@ -130,15 +130,18 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String voidDeclaration() => '''
-  void $name($methodParams) {
+  void $camelCasedName($methodParams) {
     $parametersPreamble
     ${ffiCall()}
     $parametersPostamble
     }
 ''';
 
-  String stringDeclaration() => '''
-      String $name($methodParams) {
+  String stringDeclaration() {
+    final overrideAnnotation = camelCasedName == 'toString' ? '@override' : '';
+    return '''
+      $overrideAnnotation
+      String $camelCasedName($methodParams) {
         final retValuePtr = calloc<HSTRING>();
         $parametersPreamble
 
@@ -153,7 +156,8 @@ class WinRTMethodProjection extends MethodProjection {
           free(retValuePtr);
         }
       }
-''';
+  ''';
+  }
 
   /// Return a method with a DateTime.
   ///
@@ -162,7 +166,7 @@ class WinRTMethodProjection extends MethodProjection {
   /// to or after midnight on January 1, 1601 (according to the Gregorian
   /// Calendar).
   String dateTimeDeclaration() => '''
-      DateTime $name($methodParams) {
+      DateTime $camelCasedName($methodParams) {
         final retValuePtr = calloc<Uint64>();
         $parametersPreamble
 
@@ -180,7 +184,7 @@ class WinRTMethodProjection extends MethodProjection {
 ''';
 
   String durationDeclaration() => '''
-      Duration $name($methodParams) {
+      Duration $camelCasedName($methodParams) {
         final retValuePtr = calloc<Uint64>();
         $parametersPreamble
 
@@ -204,7 +208,7 @@ class WinRTMethodProjection extends MethodProjection {
         : 'ref';
 
     return '''
-      ${returnType.dartType} $name($methodParams) {
+      ${returnType.dartType} $camelCasedName($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
         $parametersPreamble
 

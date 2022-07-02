@@ -35,7 +35,7 @@ class IAppxManifestReader2 extends IAppxManifestReader {
   factory IAppxManifestReader2.from(IUnknown interface) =>
       IAppxManifestReader2(interface.toInterface(IID_IAppxManifestReader2));
 
-  int GetQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
+  int getQualifiedResources(Pointer<Pointer<COMObject>> resources) => ptr
           .ref.vtable
           .elementAt(12)
           .cast<

@@ -46,7 +46,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
 
     try {
       final result = ICalendarFactory.fromRawPointer(activationFactory)
-          .CreateCalendarDefaultCalendarAndClock(languages);
+          .createCalendarDefaultCalendarAndClock(languages);
       return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
@@ -60,7 +60,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
 
     try {
       final result = ICalendarFactory.fromRawPointer(activationFactory)
-          .CreateCalendar(languages, calendar, clock);
+          .createCalendar(languages, calendar, clock);
       return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
@@ -75,7 +75,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
 
     try {
       final result = ICalendarFactory2.fromRawPointer(activationFactory)
-          .CreateCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
+          .createCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
       return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
@@ -86,327 +86,327 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   late final _iCalendar = ICalendar.from(this);
 
   @override
-  Pointer<COMObject> Clone() => _iCalendar.Clone();
+  Pointer<COMObject> clone() => _iCalendar.clone();
 
   @override
-  void SetToMin() => _iCalendar.SetToMin();
+  void setToMin() => _iCalendar.setToMin();
 
   @override
-  void SetToMax() => _iCalendar.SetToMax();
+  void setToMax() => _iCalendar.setToMax();
 
   @override
-  List<String> get Languages => _iCalendar.Languages;
+  List<String> get languages => _iCalendar.languages;
 
   @override
-  String get NumeralSystem => _iCalendar.NumeralSystem;
+  String get numeralSystem => _iCalendar.numeralSystem;
 
   @override
-  set NumeralSystem(String value) => _iCalendar.NumeralSystem = value;
+  set numeralSystem(String value) => _iCalendar.numeralSystem = value;
 
   @override
-  String GetCalendarSystem() => _iCalendar.GetCalendarSystem();
+  String getCalendarSystem() => _iCalendar.getCalendarSystem();
 
   @override
-  void ChangeCalendarSystem(String value) =>
-      _iCalendar.ChangeCalendarSystem(value);
+  void changeCalendarSystem(String value) =>
+      _iCalendar.changeCalendarSystem(value);
 
   @override
-  String GetClock() => _iCalendar.GetClock();
+  String getClock() => _iCalendar.getClock();
 
   @override
-  void ChangeClock(String value) => _iCalendar.ChangeClock(value);
+  void changeClock(String value) => _iCalendar.changeClock(value);
 
   @override
-  DateTime GetDateTime() => _iCalendar.GetDateTime();
+  DateTime getDateTime() => _iCalendar.getDateTime();
 
   @override
-  void SetDateTime(DateTime value) => _iCalendar.SetDateTime(value);
+  void setDateTime(DateTime value) => _iCalendar.setDateTime(value);
 
   @override
-  void SetToNow() => _iCalendar.SetToNow();
+  void setToNow() => _iCalendar.setToNow();
 
   @override
-  int get FirstEra => _iCalendar.FirstEra;
+  int get firstEra => _iCalendar.firstEra;
 
   @override
-  int get LastEra => _iCalendar.LastEra;
+  int get lastEra => _iCalendar.lastEra;
 
   @override
-  int get NumberOfEras => _iCalendar.NumberOfEras;
+  int get numberOfEras => _iCalendar.numberOfEras;
 
   @override
-  int get Era => _iCalendar.Era;
+  int get era => _iCalendar.era;
 
   @override
-  set Era(int value) => _iCalendar.Era = value;
+  set era(int value) => _iCalendar.era = value;
 
   @override
-  void AddEras(int eras) => _iCalendar.AddEras(eras);
+  void addEras(int eras) => _iCalendar.addEras(eras);
 
   @override
-  String EraAsFullString() => _iCalendar.EraAsFullString();
+  String eraAsFullString() => _iCalendar.eraAsFullString();
 
   @override
-  String EraAsString(int idealLength) => _iCalendar.EraAsString(idealLength);
+  String eraAsString(int idealLength) => _iCalendar.eraAsString(idealLength);
 
   @override
-  int get FirstYearInThisEra => _iCalendar.FirstYearInThisEra;
+  int get firstYearInThisEra => _iCalendar.firstYearInThisEra;
 
   @override
-  int get LastYearInThisEra => _iCalendar.LastYearInThisEra;
+  int get lastYearInThisEra => _iCalendar.lastYearInThisEra;
 
   @override
-  int get NumberOfYearsInThisEra => _iCalendar.NumberOfYearsInThisEra;
+  int get numberOfYearsInThisEra => _iCalendar.numberOfYearsInThisEra;
 
   @override
-  int get Year => _iCalendar.Year;
+  int get year => _iCalendar.year;
 
   @override
-  set Year(int value) => _iCalendar.Year = value;
+  set year(int value) => _iCalendar.year = value;
 
   @override
-  void AddYears(int years) => _iCalendar.AddYears(years);
+  void addYears(int years) => _iCalendar.addYears(years);
 
   @override
-  String YearAsString() => _iCalendar.YearAsString();
+  String yearAsString() => _iCalendar.yearAsString();
 
   @override
-  String YearAsTruncatedString(int remainingDigits) =>
-      _iCalendar.YearAsTruncatedString(remainingDigits);
+  String yearAsTruncatedString(int remainingDigits) =>
+      _iCalendar.yearAsTruncatedString(remainingDigits);
 
   @override
-  String YearAsPaddedString(int minDigits) =>
-      _iCalendar.YearAsPaddedString(minDigits);
+  String yearAsPaddedString(int minDigits) =>
+      _iCalendar.yearAsPaddedString(minDigits);
 
   @override
-  int get FirstMonthInThisYear => _iCalendar.FirstMonthInThisYear;
+  int get firstMonthInThisYear => _iCalendar.firstMonthInThisYear;
 
   @override
-  int get LastMonthInThisYear => _iCalendar.LastMonthInThisYear;
+  int get lastMonthInThisYear => _iCalendar.lastMonthInThisYear;
 
   @override
-  int get NumberOfMonthsInThisYear => _iCalendar.NumberOfMonthsInThisYear;
+  int get numberOfMonthsInThisYear => _iCalendar.numberOfMonthsInThisYear;
 
   @override
-  int get Month => _iCalendar.Month;
+  int get month => _iCalendar.month;
 
   @override
-  set Month(int value) => _iCalendar.Month = value;
+  set month(int value) => _iCalendar.month = value;
 
   @override
-  void AddMonths(int months) => _iCalendar.AddMonths(months);
+  void addMonths(int months) => _iCalendar.addMonths(months);
 
   @override
-  String MonthAsFullString() => _iCalendar.MonthAsFullString();
+  String monthAsFullString() => _iCalendar.monthAsFullString();
 
   @override
-  String MonthAsString(int idealLength) =>
-      _iCalendar.MonthAsString(idealLength);
+  String monthAsString(int idealLength) =>
+      _iCalendar.monthAsString(idealLength);
 
   @override
-  String MonthAsFullSoloString() => _iCalendar.MonthAsFullSoloString();
+  String monthAsFullSoloString() => _iCalendar.monthAsFullSoloString();
 
   @override
-  String MonthAsSoloString(int idealLength) =>
-      _iCalendar.MonthAsSoloString(idealLength);
+  String monthAsSoloString(int idealLength) =>
+      _iCalendar.monthAsSoloString(idealLength);
 
   @override
-  String MonthAsNumericString() => _iCalendar.MonthAsNumericString();
+  String monthAsNumericString() => _iCalendar.monthAsNumericString();
 
   @override
-  String MonthAsPaddedNumericString(int minDigits) =>
-      _iCalendar.MonthAsPaddedNumericString(minDigits);
+  String monthAsPaddedNumericString(int minDigits) =>
+      _iCalendar.monthAsPaddedNumericString(minDigits);
 
   @override
-  void AddWeeks(int weeks) => _iCalendar.AddWeeks(weeks);
+  void addWeeks(int weeks) => _iCalendar.addWeeks(weeks);
 
   @override
-  int get FirstDayInThisMonth => _iCalendar.FirstDayInThisMonth;
+  int get firstDayInThisMonth => _iCalendar.firstDayInThisMonth;
 
   @override
-  int get LastDayInThisMonth => _iCalendar.LastDayInThisMonth;
+  int get lastDayInThisMonth => _iCalendar.lastDayInThisMonth;
 
   @override
-  int get NumberOfDaysInThisMonth => _iCalendar.NumberOfDaysInThisMonth;
+  int get numberOfDaysInThisMonth => _iCalendar.numberOfDaysInThisMonth;
 
   @override
-  int get Day => _iCalendar.Day;
+  int get day => _iCalendar.day;
 
   @override
-  set Day(int value) => _iCalendar.Day = value;
+  set day(int value) => _iCalendar.day = value;
 
   @override
-  void AddDays(int days) => _iCalendar.AddDays(days);
+  void addDays(int days) => _iCalendar.addDays(days);
 
   @override
-  String DayAsString() => _iCalendar.DayAsString();
+  String dayAsString() => _iCalendar.dayAsString();
 
   @override
-  String DayAsPaddedString(int minDigits) =>
-      _iCalendar.DayAsPaddedString(minDigits);
+  String dayAsPaddedString(int minDigits) =>
+      _iCalendar.dayAsPaddedString(minDigits);
 
   @override
-  int get DayOfWeek => _iCalendar.DayOfWeek;
+  int get dayOfWeek => _iCalendar.dayOfWeek;
 
   @override
-  String DayOfWeekAsFullString() => _iCalendar.DayOfWeekAsFullString();
+  String dayOfWeekAsFullString() => _iCalendar.dayOfWeekAsFullString();
 
   @override
-  String DayOfWeekAsString(int idealLength) =>
-      _iCalendar.DayOfWeekAsString(idealLength);
+  String dayOfWeekAsString(int idealLength) =>
+      _iCalendar.dayOfWeekAsString(idealLength);
 
   @override
-  String DayOfWeekAsFullSoloString() => _iCalendar.DayOfWeekAsFullSoloString();
+  String dayOfWeekAsFullSoloString() => _iCalendar.dayOfWeekAsFullSoloString();
 
   @override
-  String DayOfWeekAsSoloString(int idealLength) =>
-      _iCalendar.DayOfWeekAsSoloString(idealLength);
+  String dayOfWeekAsSoloString(int idealLength) =>
+      _iCalendar.dayOfWeekAsSoloString(idealLength);
 
   @override
-  int get FirstPeriodInThisDay => _iCalendar.FirstPeriodInThisDay;
+  int get firstPeriodInThisDay => _iCalendar.firstPeriodInThisDay;
 
   @override
-  int get LastPeriodInThisDay => _iCalendar.LastPeriodInThisDay;
+  int get lastPeriodInThisDay => _iCalendar.lastPeriodInThisDay;
 
   @override
-  int get NumberOfPeriodsInThisDay => _iCalendar.NumberOfPeriodsInThisDay;
+  int get numberOfPeriodsInThisDay => _iCalendar.numberOfPeriodsInThisDay;
 
   @override
-  int get Period => _iCalendar.Period;
+  int get period => _iCalendar.period;
 
   @override
-  set Period(int value) => _iCalendar.Period = value;
+  set period(int value) => _iCalendar.period = value;
 
   @override
-  void AddPeriods(int periods) => _iCalendar.AddPeriods(periods);
+  void addPeriods(int periods) => _iCalendar.addPeriods(periods);
 
   @override
-  String PeriodAsFullString() => _iCalendar.PeriodAsFullString();
+  String periodAsFullString() => _iCalendar.periodAsFullString();
 
   @override
-  String PeriodAsString(int idealLength) =>
-      _iCalendar.PeriodAsString(idealLength);
+  String periodAsString(int idealLength) =>
+      _iCalendar.periodAsString(idealLength);
 
   @override
-  int get FirstHourInThisPeriod => _iCalendar.FirstHourInThisPeriod;
+  int get firstHourInThisPeriod => _iCalendar.firstHourInThisPeriod;
 
   @override
-  int get LastHourInThisPeriod => _iCalendar.LastHourInThisPeriod;
+  int get lastHourInThisPeriod => _iCalendar.lastHourInThisPeriod;
 
   @override
-  int get NumberOfHoursInThisPeriod => _iCalendar.NumberOfHoursInThisPeriod;
+  int get numberOfHoursInThisPeriod => _iCalendar.numberOfHoursInThisPeriod;
 
   @override
-  int get Hour => _iCalendar.Hour;
+  int get hour => _iCalendar.hour;
 
   @override
-  set Hour(int value) => _iCalendar.Hour = value;
+  set hour(int value) => _iCalendar.hour = value;
 
   @override
-  void AddHours(int hours) => _iCalendar.AddHours(hours);
+  void addHours(int hours) => _iCalendar.addHours(hours);
 
   @override
-  String HourAsString() => _iCalendar.HourAsString();
+  String hourAsString() => _iCalendar.hourAsString();
 
   @override
-  String HourAsPaddedString(int minDigits) =>
-      _iCalendar.HourAsPaddedString(minDigits);
+  String hourAsPaddedString(int minDigits) =>
+      _iCalendar.hourAsPaddedString(minDigits);
 
   @override
-  int get Minute => _iCalendar.Minute;
+  int get minute => _iCalendar.minute;
 
   @override
-  set Minute(int value) => _iCalendar.Minute = value;
+  set minute(int value) => _iCalendar.minute = value;
 
   @override
-  void AddMinutes(int minutes) => _iCalendar.AddMinutes(minutes);
+  void addMinutes(int minutes) => _iCalendar.addMinutes(minutes);
 
   @override
-  String MinuteAsString() => _iCalendar.MinuteAsString();
+  String minuteAsString() => _iCalendar.minuteAsString();
 
   @override
-  String MinuteAsPaddedString(int minDigits) =>
-      _iCalendar.MinuteAsPaddedString(minDigits);
+  String minuteAsPaddedString(int minDigits) =>
+      _iCalendar.minuteAsPaddedString(minDigits);
 
   @override
-  int get Second => _iCalendar.Second;
+  int get second => _iCalendar.second;
 
   @override
-  set Second(int value) => _iCalendar.Second = value;
+  set second(int value) => _iCalendar.second = value;
 
   @override
-  void AddSeconds(int seconds) => _iCalendar.AddSeconds(seconds);
+  void addSeconds(int seconds) => _iCalendar.addSeconds(seconds);
 
   @override
-  String SecondAsString() => _iCalendar.SecondAsString();
+  String secondAsString() => _iCalendar.secondAsString();
 
   @override
-  String SecondAsPaddedString(int minDigits) =>
-      _iCalendar.SecondAsPaddedString(minDigits);
+  String secondAsPaddedString(int minDigits) =>
+      _iCalendar.secondAsPaddedString(minDigits);
 
   @override
-  int get Nanosecond => _iCalendar.Nanosecond;
+  int get nanosecond => _iCalendar.nanosecond;
 
   @override
-  set Nanosecond(int value) => _iCalendar.Nanosecond = value;
+  set nanosecond(int value) => _iCalendar.nanosecond = value;
 
   @override
-  void AddNanoseconds(int nanoseconds) =>
-      _iCalendar.AddNanoseconds(nanoseconds);
+  void addNanoseconds(int nanoseconds) =>
+      _iCalendar.addNanoseconds(nanoseconds);
 
   @override
-  String NanosecondAsString() => _iCalendar.NanosecondAsString();
+  String nanosecondAsString() => _iCalendar.nanosecondAsString();
 
   @override
-  String NanosecondAsPaddedString(int minDigits) =>
-      _iCalendar.NanosecondAsPaddedString(minDigits);
+  String nanosecondAsPaddedString(int minDigits) =>
+      _iCalendar.nanosecondAsPaddedString(minDigits);
 
   @override
-  int Compare(Pointer<COMObject> other) => _iCalendar.Compare(other);
+  int compare(Pointer<COMObject> other) => _iCalendar.compare(other);
 
   @override
-  int CompareDateTime(DateTime other) => _iCalendar.CompareDateTime(other);
+  int compareDateTime(DateTime other) => _iCalendar.compareDateTime(other);
 
   @override
-  void CopyTo(Pointer<COMObject> other) => _iCalendar.CopyTo(other);
+  void copyTo(Pointer<COMObject> other) => _iCalendar.copyTo(other);
 
   @override
-  int get FirstMinuteInThisHour => _iCalendar.FirstMinuteInThisHour;
+  int get firstMinuteInThisHour => _iCalendar.firstMinuteInThisHour;
 
   @override
-  int get LastMinuteInThisHour => _iCalendar.LastMinuteInThisHour;
+  int get lastMinuteInThisHour => _iCalendar.lastMinuteInThisHour;
 
   @override
-  int get NumberOfMinutesInThisHour => _iCalendar.NumberOfMinutesInThisHour;
+  int get numberOfMinutesInThisHour => _iCalendar.numberOfMinutesInThisHour;
 
   @override
-  int get FirstSecondInThisMinute => _iCalendar.FirstSecondInThisMinute;
+  int get firstSecondInThisMinute => _iCalendar.firstSecondInThisMinute;
 
   @override
-  int get LastSecondInThisMinute => _iCalendar.LastSecondInThisMinute;
+  int get lastSecondInThisMinute => _iCalendar.lastSecondInThisMinute;
 
   @override
-  int get NumberOfSecondsInThisMinute => _iCalendar.NumberOfSecondsInThisMinute;
+  int get numberOfSecondsInThisMinute => _iCalendar.numberOfSecondsInThisMinute;
 
   @override
-  String get ResolvedLanguage => _iCalendar.ResolvedLanguage;
+  String get resolvedLanguage => _iCalendar.resolvedLanguage;
 
   @override
-  bool get IsDaylightSavingTime => _iCalendar.IsDaylightSavingTime;
+  bool get isDaylightSavingTime => _iCalendar.isDaylightSavingTime;
   // ITimeZoneOnCalendar methods
   late final _iTimeZoneOnCalendar = ITimeZoneOnCalendar.from(this);
 
   @override
-  String GetTimeZone() => _iTimeZoneOnCalendar.GetTimeZone();
+  String getTimeZone() => _iTimeZoneOnCalendar.getTimeZone();
 
   @override
-  void ChangeTimeZone(String timeZoneId) =>
-      _iTimeZoneOnCalendar.ChangeTimeZone(timeZoneId);
+  void changeTimeZone(String timeZoneId) =>
+      _iTimeZoneOnCalendar.changeTimeZone(timeZoneId);
 
   @override
-  String TimeZoneAsFullString() => _iTimeZoneOnCalendar.TimeZoneAsFullString();
+  String timeZoneAsFullString() => _iTimeZoneOnCalendar.timeZoneAsFullString();
 
   @override
-  String TimeZoneAsString(int idealLength) =>
-      _iTimeZoneOnCalendar.TimeZoneAsString(idealLength);
+  String timeZoneAsString(int idealLength) =>
+      _iTimeZoneOnCalendar.timeZoneAsString(idealLength);
 }

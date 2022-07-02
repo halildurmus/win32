@@ -22,16 +22,16 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final virtualdesktopmanager = IVirtualDesktopManager(ptr);
-  test('Can instantiate IVirtualDesktopManager.IsWindowOnCurrentVirtualDesktop',
+  test('Can instantiate IVirtualDesktopManager.isWindowOnCurrentVirtualDesktop',
       () {
     expect(
-        virtualdesktopmanager.IsWindowOnCurrentVirtualDesktop, isA<Function>());
+        virtualdesktopmanager.isWindowOnCurrentVirtualDesktop, isA<Function>());
   });
-  test('Can instantiate IVirtualDesktopManager.GetWindowDesktopId', () {
-    expect(virtualdesktopmanager.GetWindowDesktopId, isA<Function>());
+  test('Can instantiate IVirtualDesktopManager.getWindowDesktopId', () {
+    expect(virtualdesktopmanager.getWindowDesktopId, isA<Function>());
   });
-  test('Can instantiate IVirtualDesktopManager.MoveWindowToDesktop', () {
-    expect(virtualdesktopmanager.MoveWindowToDesktop, isA<Function>());
+  test('Can instantiate IVirtualDesktopManager.moveWindowToDesktop', () {
+    expect(virtualdesktopmanager.moveWindowToDesktop, isA<Function>());
   });
   free(ptr);
 }

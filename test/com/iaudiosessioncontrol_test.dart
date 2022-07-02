@@ -22,36 +22,36 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audiosessioncontrol = IAudioSessionControl(ptr);
-  test('Can instantiate IAudioSessionControl.GetState', () {
-    expect(audiosessioncontrol.GetState, isA<Function>());
+  test('Can instantiate IAudioSessionControl.getState', () {
+    expect(audiosessioncontrol.getState, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.GetDisplayName', () {
-    expect(audiosessioncontrol.GetDisplayName, isA<Function>());
+  test('Can instantiate IAudioSessionControl.getDisplayName', () {
+    expect(audiosessioncontrol.getDisplayName, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.SetDisplayName', () {
-    expect(audiosessioncontrol.SetDisplayName, isA<Function>());
+  test('Can instantiate IAudioSessionControl.setDisplayName', () {
+    expect(audiosessioncontrol.setDisplayName, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.GetIconPath', () {
-    expect(audiosessioncontrol.GetIconPath, isA<Function>());
+  test('Can instantiate IAudioSessionControl.getIconPath', () {
+    expect(audiosessioncontrol.getIconPath, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.SetIconPath', () {
-    expect(audiosessioncontrol.SetIconPath, isA<Function>());
+  test('Can instantiate IAudioSessionControl.setIconPath', () {
+    expect(audiosessioncontrol.setIconPath, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.GetGroupingParam', () {
-    expect(audiosessioncontrol.GetGroupingParam, isA<Function>());
+  test('Can instantiate IAudioSessionControl.getGroupingParam', () {
+    expect(audiosessioncontrol.getGroupingParam, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.SetGroupingParam', () {
-    expect(audiosessioncontrol.SetGroupingParam, isA<Function>());
+  test('Can instantiate IAudioSessionControl.setGroupingParam', () {
+    expect(audiosessioncontrol.setGroupingParam, isA<Function>());
   });
-  test('Can instantiate IAudioSessionControl.RegisterAudioSessionNotification',
+  test('Can instantiate IAudioSessionControl.registerAudioSessionNotification',
       () {
     expect(
-        audiosessioncontrol.RegisterAudioSessionNotification, isA<Function>());
+        audiosessioncontrol.registerAudioSessionNotification, isA<Function>());
   });
   test(
-      'Can instantiate IAudioSessionControl.UnregisterAudioSessionNotification',
+      'Can instantiate IAudioSessionControl.unregisterAudioSessionNotification',
       () {
-    expect(audiosessioncontrol.UnregisterAudioSessionNotification,
+    expect(audiosessioncontrol.unregisterAudioSessionNotification,
         isA<Function>());
   });
   free(ptr);

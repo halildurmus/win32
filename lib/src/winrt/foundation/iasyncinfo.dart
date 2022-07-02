@@ -35,7 +35,7 @@ class IAsyncInfo extends IInspectable {
   factory IAsyncInfo.from(IInspectable interface) =>
       IAsyncInfo.fromRawPointer(interface.toInterface(IID_IAsyncInfo));
 
-  int get Id {
+  int get id {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -58,7 +58,7 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  int get Status {
+  int get status {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -81,7 +81,7 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  int get ErrorCode {
+  int get errorCode {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -104,7 +104,7 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  void Cancel() {
+  void cancel() {
     final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -114,7 +114,7 @@ class IAsyncInfo extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void Close() {
+  void close() {
     final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()

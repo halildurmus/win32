@@ -35,7 +35,7 @@ class IStream extends ISequentialStream {
   factory IStream.from(IUnknown interface) =>
       IStream(interface.toInterface(IID_IStream));
 
-  int Seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) => ptr
+  int seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<
@@ -49,7 +49,7 @@ class IStream extends ISequentialStream {
                   Pointer<Uint64> plibNewPosition)>()(
       ptr.ref.lpVtbl, dlibMove, dwOrigin, plibNewPosition);
 
-  int SetSize(int libNewSize) => ptr.ref.vtable
+  int setSize(int libNewSize) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint64 libNewSize)>>>()
@@ -57,7 +57,7 @@ class IStream extends ISequentialStream {
       .asFunction<
           int Function(Pointer, int libNewSize)>()(ptr.ref.lpVtbl, libNewSize);
 
-  int CopyTo(Pointer<COMObject> pstm, int cb, Pointer<Uint64> pcbRead,
+  int copyTo(Pointer<COMObject> pstm, int cb, Pointer<Uint64> pcbRead,
           Pointer<Uint64> pcbWritten) =>
       ptr.ref.vtable
               .elementAt(7)
@@ -76,7 +76,7 @@ class IStream extends ISequentialStream {
                       Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten)>()(
           ptr.ref.lpVtbl, pstm, cb, pcbRead, pcbWritten);
 
-  int Commit(int grfCommitFlags) => ptr.ref.vtable
+  int commit(int grfCommitFlags) => ptr.ref.vtable
       .elementAt(8)
       .cast<
           Pointer<
@@ -86,13 +86,13 @@ class IStream extends ISequentialStream {
           int Function(
               Pointer, int grfCommitFlags)>()(ptr.ref.lpVtbl, grfCommitFlags);
 
-  int Revert() => ptr.ref.vtable
+  int revert() => ptr.ref.vtable
       .elementAt(9)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int LockRegion(int libOffset, int cb, int dwLockType) => ptr.ref.vtable
+  int lockRegion(int libOffset, int cb, int dwLockType) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -104,7 +104,7 @@ class IStream extends ISequentialStream {
               int Function(Pointer, int libOffset, int cb, int dwLockType)>()(
       ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
-  int UnlockRegion(int libOffset, int cb, int dwLockType) => ptr.ref.vtable
+  int unlockRegion(int libOffset, int cb, int dwLockType) => ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -116,7 +116,7 @@ class IStream extends ISequentialStream {
               int Function(Pointer, int libOffset, int cb, int dwLockType)>()(
       ptr.ref.lpVtbl, libOffset, cb, dwLockType);
 
-  int Stat(Pointer<STATSTG> pstatstg, int grfStatFlag) => ptr.ref.vtable
+  int stat(Pointer<STATSTG> pstatstg, int grfStatFlag) => ptr.ref.vtable
       .elementAt(12)
       .cast<
           Pointer<
@@ -128,7 +128,7 @@ class IStream extends ISequentialStream {
           int Function(Pointer, Pointer<STATSTG> pstatstg,
               int grfStatFlag)>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
 
-  int Clone(Pointer<Pointer<COMObject>> ppstm) => ptr.ref.vtable
+  int clone(Pointer<Pointer<COMObject>> ppstm) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<

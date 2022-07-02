@@ -34,13 +34,13 @@ class ApplicationData extends IInspectable implements IApplicationData {
   static const _className = 'Windows.Storage.ApplicationData';
 
   // IApplicationDataStatics methods
-  static ApplicationData get Current {
+  static ApplicationData get current {
     final activationFactory =
         CreateActivationFactory(_className, IID_IApplicationDataStatics);
 
     try {
       final result = ApplicationData.fromRawPointer(
-          IApplicationDataStatics.fromRawPointer(activationFactory).Current);
+          IApplicationDataStatics.fromRawPointer(activationFactory).current);
       return result;
     } finally {
       free(activationFactory);
@@ -52,34 +52,34 @@ class ApplicationData extends IInspectable implements IApplicationData {
       IApplicationData.fromRawPointer(toInterface(IID_IApplicationData));
 
   @override
-  int get Version => _iApplicationData.Version;
+  int get version => _iApplicationData.version;
 
   @override
-  Pointer<COMObject> SetVersionAsync(int desiredVersion,
+  Pointer<COMObject> setVersionAsync(int desiredVersion,
           Pointer<NativeFunction<ApplicationDataSetVersionHandler>> handler) =>
-      _iApplicationData.SetVersionAsync(desiredVersion, handler);
+      _iApplicationData.setVersionAsync(desiredVersion, handler);
 
   @override
-  Pointer<COMObject> ClearAllAsync() => _iApplicationData.ClearAllAsync();
+  Pointer<COMObject> clearAllAsync() => _iApplicationData.clearAllAsync();
 
   @override
-  Pointer<COMObject> ClearAsync(int locality) =>
-      _iApplicationData.ClearAsync(locality);
+  Pointer<COMObject> clearAsync(int locality) =>
+      _iApplicationData.clearAsync(locality);
 
   @override
-  Pointer<COMObject> get LocalSettings => _iApplicationData.LocalSettings;
+  Pointer<COMObject> get localSettings => _iApplicationData.localSettings;
 
   @override
-  Pointer<COMObject> get RoamingSettings => _iApplicationData.RoamingSettings;
+  Pointer<COMObject> get roamingSettings => _iApplicationData.roamingSettings;
 
   @override
-  Pointer<COMObject> get LocalFolder => _iApplicationData.LocalFolder;
+  Pointer<COMObject> get localFolder => _iApplicationData.localFolder;
 
   @override
-  Pointer<COMObject> get RoamingFolder => _iApplicationData.RoamingFolder;
+  Pointer<COMObject> get roamingFolder => _iApplicationData.roamingFolder;
 
   @override
-  Pointer<COMObject> get TemporaryFolder => _iApplicationData.TemporaryFolder;
+  Pointer<COMObject> get temporaryFolder => _iApplicationData.temporaryFolder;
 
   @override
   int add_DataChanged(Pointer<NativeFunction<TypedEventHandler>> handler) =>
@@ -90,8 +90,8 @@ class ApplicationData extends IInspectable implements IApplicationData {
       _iApplicationData.remove_DataChanged(token);
 
   @override
-  void SignalDataChanged() => _iApplicationData.SignalDataChanged();
+  void signalDataChanged() => _iApplicationData.signalDataChanged();
 
   @override
-  int get RoamingStorageQuota => _iApplicationData.RoamingStorageQuota;
+  int get roamingStorageQuota => _iApplicationData.roamingStorageQuota;
 }

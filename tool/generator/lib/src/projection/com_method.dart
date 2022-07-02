@@ -32,7 +32,7 @@ class ComMethodProjection extends MethodProjection {
   String toString() {
     try {
       return '''
-      ${returnType.dartType} $name($methodParams) => ptr.ref.vtable
+      ${returnType.dartType} $camelCasedName($methodParams) => ptr.ref.vtable
         .elementAt($vtableOffset)
         .cast<Pointer<NativeFunction<$nativePrototype>>>()
         .value

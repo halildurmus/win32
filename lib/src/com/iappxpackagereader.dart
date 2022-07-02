@@ -34,7 +34,7 @@ class IAppxPackageReader extends IUnknown {
   factory IAppxPackageReader.from(IUnknown interface) =>
       IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
 
-  int GetBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
+  int getBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -47,7 +47,7 @@ class IAppxPackageReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> blockMapReader)>()(
       ptr.ref.lpVtbl, blockMapReader);
 
-  int GetFootprintFile(int type, Pointer<Pointer<COMObject>> file) => ptr
+  int getFootprintFile(int type, Pointer<Pointer<COMObject>> file) => ptr
       .ref.vtable
       .elementAt(4)
       .cast<
@@ -60,7 +60,7 @@ class IAppxPackageReader extends IUnknown {
           int Function(Pointer, int type,
               Pointer<Pointer<COMObject>> file)>()(ptr.ref.lpVtbl, type, file);
 
-  int GetPayloadFile(
+  int getPayloadFile(
           Pointer<Utf16> fileName, Pointer<Pointer<COMObject>> file) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -75,7 +75,7 @@ class IAppxPackageReader extends IUnknown {
                       Pointer<Pointer<COMObject>> file)>()(
           ptr.ref.lpVtbl, fileName, file);
 
-  int GetPayloadFiles(Pointer<Pointer<COMObject>> filesEnumerator) => ptr
+  int getPayloadFiles(Pointer<Pointer<COMObject>> filesEnumerator) => ptr
           .ref.vtable
           .elementAt(6)
           .cast<
@@ -89,7 +89,7 @@ class IAppxPackageReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> filesEnumerator)>()(
       ptr.ref.lpVtbl, filesEnumerator);
 
-  int GetManifest(Pointer<Pointer<COMObject>> manifestReader) => ptr.ref.vtable
+  int getManifest(Pointer<Pointer<COMObject>> manifestReader) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

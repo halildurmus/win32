@@ -54,7 +54,7 @@ class ToastNotification extends IInspectable
 
     try {
       final result = IToastNotificationFactory.fromRawPointer(activationFactory)
-          .CreateToastNotification(content);
+          .createToastNotification(content);
       return ToastNotification.fromRawPointer(result);
     } finally {
       free(activationFactory);
@@ -65,14 +65,14 @@ class ToastNotification extends IInspectable
   late final _iToastNotification = IToastNotification.from(this);
 
   @override
-  Pointer<COMObject> get Content => _iToastNotification.Content;
+  Pointer<COMObject> get content => _iToastNotification.content;
 
   @override
-  set ExpirationTime(Pointer<COMObject> value) =>
-      _iToastNotification.ExpirationTime = value;
+  set expirationTime(Pointer<COMObject> value) =>
+      _iToastNotification.expirationTime = value;
 
   @override
-  Pointer<COMObject> get ExpirationTime => _iToastNotification.ExpirationTime;
+  Pointer<COMObject> get expirationTime => _iToastNotification.expirationTime;
 
   @override
   int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) =>
@@ -100,58 +100,58 @@ class ToastNotification extends IInspectable
   late final _iToastNotification2 = IToastNotification2.from(this);
 
   @override
-  set Tag(String value) => _iToastNotification2.Tag = value;
+  set tag(String value) => _iToastNotification2.tag = value;
 
   @override
-  String get Tag => _iToastNotification2.Tag;
+  String get tag => _iToastNotification2.tag;
 
   @override
-  set Group(String value) => _iToastNotification2.Group = value;
+  set group(String value) => _iToastNotification2.group = value;
 
   @override
-  String get Group => _iToastNotification2.Group;
+  String get group => _iToastNotification2.group;
 
   @override
-  set SuppressPopup(bool value) => _iToastNotification2.SuppressPopup = value;
+  set suppressPopup(bool value) => _iToastNotification2.suppressPopup = value;
 
   @override
-  bool get SuppressPopup => _iToastNotification2.SuppressPopup;
+  bool get suppressPopup => _iToastNotification2.suppressPopup;
   // IToastNotification3 methods
   late final _iToastNotification3 = IToastNotification3.from(this);
 
   @override
-  int get NotificationMirroring => _iToastNotification3.NotificationMirroring;
+  int get notificationMirroring => _iToastNotification3.notificationMirroring;
 
   @override
-  set NotificationMirroring(int value) =>
-      _iToastNotification3.NotificationMirroring = value;
+  set notificationMirroring(int value) =>
+      _iToastNotification3.notificationMirroring = value;
 
   @override
-  String get RemoteId => _iToastNotification3.RemoteId;
+  String get remoteId => _iToastNotification3.remoteId;
 
   @override
-  set RemoteId(String value) => _iToastNotification3.RemoteId = value;
+  set remoteId(String value) => _iToastNotification3.remoteId = value;
   // IToastNotification4 methods
   late final _iToastNotification4 = IToastNotification4.from(this);
 
   @override
-  Pointer<COMObject> get Data => _iToastNotification4.Data;
+  Pointer<COMObject> get data => _iToastNotification4.data;
 
   @override
-  set Data(Pointer<COMObject> value) => _iToastNotification4.Data = value;
+  set data(Pointer<COMObject> value) => _iToastNotification4.data = value;
 
   @override
-  int get Priority => _iToastNotification4.Priority;
+  int get priority => _iToastNotification4.priority;
 
   @override
-  set Priority(int value) => _iToastNotification4.Priority = value;
+  set priority(int value) => _iToastNotification4.priority = value;
   // IToastNotification6 methods
   late final _iToastNotification6 = IToastNotification6.from(this);
 
   @override
-  bool get ExpiresOnReboot => _iToastNotification6.ExpiresOnReboot;
+  bool get expiresOnReboot => _iToastNotification6.expiresOnReboot;
 
   @override
-  set ExpiresOnReboot(bool value) =>
-      _iToastNotification6.ExpiresOnReboot = value;
+  set expiresOnReboot(bool value) =>
+      _iToastNotification6.expiresOnReboot = value;
 }

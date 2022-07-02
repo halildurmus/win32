@@ -35,7 +35,7 @@ class IFileDialog2 extends IFileDialog {
   factory IFileDialog2.from(IUnknown interface) =>
       IFileDialog2(interface.toInterface(IID_IFileDialog2));
 
-  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
+  int setCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -45,7 +45,7 @@ class IFileDialog2 extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, pszLabel);
 
-  int SetNavigationRoot(Pointer<COMObject> psi) => ptr.ref.vtable
+  int setNavigationRoot(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<

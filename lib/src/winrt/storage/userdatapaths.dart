@@ -34,25 +34,25 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
   static const _className = 'Windows.Storage.UserDataPaths';
 
   // IUserDataPathsStatics methods
-  static Pointer<COMObject> GetForUser(Pointer<COMObject> user) {
+  static Pointer<COMObject> getForUser(Pointer<COMObject> user) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
       return IUserDataPathsStatics.fromRawPointer(activationFactory)
-          .GetForUser(user);
+          .getForUser(user);
     } finally {
       free(activationFactory);
     }
   }
 
-  static Pointer<COMObject> GetDefault() {
+  static Pointer<COMObject> getDefault() {
     final activationFactory =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
     try {
       return IUserDataPathsStatics.fromRawPointer(activationFactory)
-          .GetDefault();
+          .getDefault();
     } finally {
       free(activationFactory);
     }
@@ -62,59 +62,59 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
   late final _iUserDataPaths = IUserDataPaths.from(this);
 
   @override
-  String get CameraRoll => _iUserDataPaths.CameraRoll;
+  String get cameraRoll => _iUserDataPaths.cameraRoll;
 
   @override
-  String get Cookies => _iUserDataPaths.Cookies;
+  String get cookies => _iUserDataPaths.cookies;
 
   @override
-  String get Desktop => _iUserDataPaths.Desktop;
+  String get desktop => _iUserDataPaths.desktop;
 
   @override
-  String get Documents => _iUserDataPaths.Documents;
+  String get documents => _iUserDataPaths.documents;
 
   @override
-  String get Downloads => _iUserDataPaths.Downloads;
+  String get downloads => _iUserDataPaths.downloads;
 
   @override
-  String get Favorites => _iUserDataPaths.Favorites;
+  String get favorites => _iUserDataPaths.favorites;
 
   @override
-  String get History => _iUserDataPaths.History;
+  String get history => _iUserDataPaths.history;
 
   @override
-  String get InternetCache => _iUserDataPaths.InternetCache;
+  String get internetCache => _iUserDataPaths.internetCache;
 
   @override
-  String get LocalAppData => _iUserDataPaths.LocalAppData;
+  String get localAppData => _iUserDataPaths.localAppData;
 
   @override
-  String get LocalAppDataLow => _iUserDataPaths.LocalAppDataLow;
+  String get localAppDataLow => _iUserDataPaths.localAppDataLow;
 
   @override
-  String get Music => _iUserDataPaths.Music;
+  String get music => _iUserDataPaths.music;
 
   @override
-  String get Pictures => _iUserDataPaths.Pictures;
+  String get pictures => _iUserDataPaths.pictures;
 
   @override
-  String get Profile => _iUserDataPaths.Profile;
+  String get profile => _iUserDataPaths.profile;
 
   @override
-  String get Recent => _iUserDataPaths.Recent;
+  String get recent => _iUserDataPaths.recent;
 
   @override
-  String get RoamingAppData => _iUserDataPaths.RoamingAppData;
+  String get roamingAppData => _iUserDataPaths.roamingAppData;
 
   @override
-  String get SavedPictures => _iUserDataPaths.SavedPictures;
+  String get savedPictures => _iUserDataPaths.savedPictures;
 
   @override
-  String get Screenshots => _iUserDataPaths.Screenshots;
+  String get screenshots => _iUserDataPaths.screenshots;
 
   @override
-  String get Templates => _iUserDataPaths.Templates;
+  String get templates => _iUserDataPaths.templates;
 
   @override
-  String get Videos => _iUserDataPaths.Videos;
+  String get videos => _iUserDataPaths.videos;
 }

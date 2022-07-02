@@ -34,7 +34,7 @@ class IShellItemResources extends IUnknown {
   factory IShellItemResources.from(IUnknown interface) =>
       IShellItemResources(interface.toInterface(IID_IShellItemResources));
 
-  int GetAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
+  int getAttributes(Pointer<Uint32> pdwAttributes) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -45,7 +45,7 @@ class IShellItemResources extends IUnknown {
           int Function(Pointer,
               Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, pdwAttributes);
 
-  int GetSize(Pointer<Uint64> pullSize) => ptr.ref.vtable
+  int getSize(Pointer<Uint64> pullSize) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +55,7 @@ class IShellItemResources extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint64> pullSize)>()(
       ptr.ref.lpVtbl, pullSize);
 
-  int GetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
+  int getTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -76,7 +76,7 @@ class IShellItemResources extends IUnknown {
                       Pointer<FILETIME> pftAccess)>()(
           ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
-  int SetTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
+  int setTimes(Pointer<FILETIME> pftCreation, Pointer<FILETIME> pftWrite,
           Pointer<FILETIME> pftAccess) =>
       ptr.ref.vtable
               .elementAt(6)
@@ -97,7 +97,7 @@ class IShellItemResources extends IUnknown {
                       Pointer<FILETIME> pftAccess)>()(
           ptr.ref.lpVtbl, pftCreation, pftWrite, pftAccess);
 
-  int GetResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
+  int getResourceDescription(Pointer<SHELL_ITEM_RESOURCE> pcsir,
           Pointer<Pointer<Utf16>> ppszDescription) =>
       ptr.ref.vtable
               .elementAt(7)
@@ -114,7 +114,7 @@ class IShellItemResources extends IUnknown {
                       Pointer<Pointer<Utf16>> ppszDescription)>()(
           ptr.ref.lpVtbl, pcsir, ppszDescription);
 
-  int EnumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.vtable
+  int enumResources(Pointer<Pointer<COMObject>> ppenumr) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -126,7 +126,7 @@ class IShellItemResources extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenumr)>()(
       ptr.ref.lpVtbl, ppenumr);
 
-  int SupportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => ptr.ref.vtable
+  int supportsResource(Pointer<SHELL_ITEM_RESOURCE> pcsir) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<
@@ -138,7 +138,7 @@ class IShellItemResources extends IUnknown {
               int Function(Pointer, Pointer<SHELL_ITEM_RESOURCE> pcsir)>()(
       ptr.ref.lpVtbl, pcsir);
 
-  int OpenResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
+  int openResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(10)
@@ -158,7 +158,7 @@ class IShellItemResources extends IUnknown {
                   Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
-  int CreateResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
+  int createResource(Pointer<SHELL_ITEM_RESOURCE> pcsir, Pointer<GUID> riid,
           Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(11)
@@ -178,7 +178,7 @@ class IShellItemResources extends IUnknown {
                   Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, pcsir, riid, ppv);
 
-  int MarkForDelete() => ptr.ref.vtable
+  int markForDelete() => ptr.ref.vtable
       .elementAt(12)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

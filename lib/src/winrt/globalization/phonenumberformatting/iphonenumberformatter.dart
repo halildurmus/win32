@@ -37,7 +37,7 @@ class IPhoneNumberFormatter extends IInspectable {
       IPhoneNumberFormatter.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberFormatter));
 
-  String Format(Pointer<COMObject> number) {
+  String format(Pointer<COMObject> number) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -64,7 +64,7 @@ class IPhoneNumberFormatter extends IInspectable {
     }
   }
 
-  String FormatWithOutputFormat(Pointer<COMObject> number, int numberFormat) {
+  String formatWithOutputFormat(Pointer<COMObject> number, int numberFormat) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -91,7 +91,7 @@ class IPhoneNumberFormatter extends IInspectable {
     }
   }
 
-  String FormatPartialString(String number) {
+  String formatPartialString(String number) {
     final retValuePtr = calloc<HSTRING>();
     final numberHstring = convertToHString(number);
 
@@ -118,7 +118,7 @@ class IPhoneNumberFormatter extends IInspectable {
     }
   }
 
-  String FormatString(String number) {
+  String formatString(String number) {
     final retValuePtr = calloc<HSTRING>();
     final numberHstring = convertToHString(number);
 
@@ -145,7 +145,7 @@ class IPhoneNumberFormatter extends IInspectable {
     }
   }
 
-  String FormatStringWithLeftToRightMarkers(String number) {
+  String formatStringWithLeftToRightMarkers(String number) {
     final retValuePtr = calloc<HSTRING>();
     final numberHstring = convertToHString(number);
 

@@ -17,30 +17,30 @@ void main() {
     final fileDialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = fileDialog.GetOptions(pfos);
+    hr = fileDialog.getOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     final options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
-    hr = fileDialog.SetOptions(options);
+    hr = fileDialog.setOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     final defaultExtensions = TEXT('txt;csv');
-    hr = fileDialog.SetDefaultExtension(defaultExtensions);
+    hr = fileDialog.setDefaultExtension(defaultExtensions);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
     free(defaultExtensions);
 
     final fileNameLabel = TEXT('Custom Label:');
-    hr = fileDialog.SetFileNameLabel(fileNameLabel);
+    hr = fileDialog.setFileNameLabel(fileNameLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
     free(fileNameLabel);
 
     final title = TEXT('Custom Title');
-    hr = fileDialog.SetTitle(title);
+    hr = fileDialog.setTitle(title);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
     free(title);
 
     final okButtonLabel = TEXT('Go');
-    hr = fileDialog.SetOkButtonLabel(okButtonLabel);
+    hr = fileDialog.setOkButtonLabel(okButtonLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
     free(okButtonLabel);
 
@@ -54,10 +54,10 @@ void main() {
     rgSpec[2]
       ..pszName = TEXT('All Files (*.*)')
       ..pszSpec = TEXT('*.*');
-    hr = fileDialog.SetFileTypes(3, rgSpec);
+    hr = fileDialog.setFileTypes(3, rgSpec);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.Show(NULL);
+    hr = fileDialog.show(NULL);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         print('Dialog cancelled.');
@@ -66,12 +66,12 @@ void main() {
       }
     } else {
       final ppsi = calloc<COMObject>();
-      hr = fileDialog.GetResult(ppsi.cast());
+      hr = fileDialog.getResult(ppsi.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi);
       final pathPtr = calloc<Pointer<Utf16>>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
+      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       // MAX_PATH may truncate early if long filename support is enabled
@@ -79,11 +79,11 @@ void main() {
 
       print('Result: $path');
 
-      hr = item.Release();
+      hr = item.release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Release();
+    hr = fileDialog.release();
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
   } else {
     throw WindowsException(hr);

@@ -36,7 +36,7 @@ class IApplicationData extends IInspectable {
       IApplicationData.fromRawPointer(
           interface.toInterface(IID_IApplicationData));
 
-  int get Version {
+  int get version {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -59,7 +59,7 @@ class IApplicationData extends IInspectable {
     }
   }
 
-  Pointer<COMObject> SetVersionAsync(int desiredVersion,
+  Pointer<COMObject> setVersionAsync(int desiredVersion,
       Pointer<NativeFunction<ApplicationDataSetVersionHandler>> handler) {
     final retValuePtr = calloc<COMObject>();
 
@@ -91,7 +91,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> ClearAllAsync() {
+  Pointer<COMObject> clearAllAsync() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -109,7 +109,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> ClearAsync(int locality) {
+  Pointer<COMObject> clearAsync(int locality) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -129,7 +129,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> get LocalSettings {
+  Pointer<COMObject> get localSettings {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -147,7 +147,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> get RoamingSettings {
+  Pointer<COMObject> get roamingSettings {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -165,7 +165,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> get LocalFolder {
+  Pointer<COMObject> get localFolder {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -183,7 +183,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> get RoamingFolder {
+  Pointer<COMObject> get roamingFolder {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -201,7 +201,7 @@ class IApplicationData extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> get TemporaryFolder {
+  Pointer<COMObject> get temporaryFolder {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -259,7 +259,7 @@ class IApplicationData extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void SignalDataChanged() {
+  void signalDataChanged() {
     final hr = ptr.ref.vtable
         .elementAt(17)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -269,7 +269,7 @@ class IApplicationData extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get RoamingStorageQuota {
+  int get roamingStorageQuota {
     final retValuePtr = calloc<Uint64>();
 
     try {

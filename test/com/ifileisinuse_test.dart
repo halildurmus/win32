@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final fileisinuse = IFileIsInUse(ptr);
-  test('Can instantiate IFileIsInUse.GetAppName', () {
-    expect(fileisinuse.GetAppName, isA<Function>());
+  test('Can instantiate IFileIsInUse.getAppName', () {
+    expect(fileisinuse.getAppName, isA<Function>());
   });
-  test('Can instantiate IFileIsInUse.GetUsage', () {
-    expect(fileisinuse.GetUsage, isA<Function>());
+  test('Can instantiate IFileIsInUse.getUsage', () {
+    expect(fileisinuse.getUsage, isA<Function>());
   });
-  test('Can instantiate IFileIsInUse.GetCapabilities', () {
-    expect(fileisinuse.GetCapabilities, isA<Function>());
+  test('Can instantiate IFileIsInUse.getCapabilities', () {
+    expect(fileisinuse.getCapabilities, isA<Function>());
   });
-  test('Can instantiate IFileIsInUse.GetSwitchToHWND', () {
-    expect(fileisinuse.GetSwitchToHWND, isA<Function>());
+  test('Can instantiate IFileIsInUse.getSwitchToHWND', () {
+    expect(fileisinuse.getSwitchToHWND, isA<Function>());
   });
-  test('Can instantiate IFileIsInUse.CloseFile', () {
-    expect(fileisinuse.CloseFile, isA<Function>());
+  test('Can instantiate IFileIsInUse.closeFile', () {
+    expect(fileisinuse.closeFile, isA<Function>());
   });
   free(ptr);
 }

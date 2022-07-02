@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumspellingerror = IEnumSpellingError(ptr);
-  test('Can instantiate IEnumSpellingError.Next', () {
-    expect(enumspellingerror.Next, isA<Function>());
+  test('Can instantiate IEnumSpellingError.next', () {
+    expect(enumspellingerror.next, isA<Function>());
   });
   free(ptr);
 }

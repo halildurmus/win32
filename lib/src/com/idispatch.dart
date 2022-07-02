@@ -34,7 +34,7 @@ class IDispatch extends IUnknown {
   factory IDispatch.from(IUnknown interface) =>
       IDispatch(interface.toInterface(IID_IDispatch));
 
-  int GetTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.vtable
+  int getTypeInfoCount(Pointer<Uint32> pctinfo) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +44,7 @@ class IDispatch extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pctinfo)>()(
       ptr.ref.lpVtbl, pctinfo);
 
-  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
+  int getTypeInfo(int iTInfo, int lcid, Pointer<Pointer<COMObject>> ppTInfo) =>
       ptr.ref.vtable
               .elementAt(4)
               .cast<
@@ -58,7 +58,7 @@ class IDispatch extends IUnknown {
                       Pointer<Pointer<COMObject>> ppTInfo)>()(
           ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
-  int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
+  int getIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
           int cNames, int lcid, Pointer<Int32> rgDispId) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -83,7 +83,7 @@ class IDispatch extends IUnknown {
                       Pointer<Int32> rgDispId)>()(
           ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId);
 
-  int Invoke(
+  int invoke(
           int dispIdMember,
           Pointer<GUID> riid,
           int lcid,

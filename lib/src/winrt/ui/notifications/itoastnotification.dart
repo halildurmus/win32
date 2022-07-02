@@ -41,7 +41,7 @@ class IToastNotification extends IInspectable {
       IToastNotification.fromRawPointer(
           interface.toInterface(IID_IToastNotification));
 
-  Pointer<COMObject> get Content {
+  Pointer<COMObject> get content {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -59,7 +59,7 @@ class IToastNotification extends IInspectable {
     return retValuePtr;
   }
 
-  set ExpirationTime(Pointer<COMObject> value) {
+  set expirationTime(Pointer<COMObject> value) {
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -73,7 +73,7 @@ class IToastNotification extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer<COMObject> get ExpirationTime {
+  Pointer<COMObject> get expirationTime {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

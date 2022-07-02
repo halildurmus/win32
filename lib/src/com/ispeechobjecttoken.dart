@@ -35,7 +35,7 @@ class ISpeechObjectToken extends IDispatch {
   factory ISpeechObjectToken.from(IUnknown interface) =>
       ISpeechObjectToken(interface.toInterface(IID_ISpeechObjectToken));
 
-  Pointer<Utf16> get Id {
+  Pointer<Utf16> get id {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -60,7 +60,7 @@ class ISpeechObjectToken extends IDispatch {
     }
   }
 
-  Pointer<COMObject> get DataKey {
+  Pointer<COMObject> get dataKey {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
@@ -85,7 +85,7 @@ class ISpeechObjectToken extends IDispatch {
     }
   }
 
-  Pointer<COMObject> get Category {
+  Pointer<COMObject> get category {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
@@ -111,7 +111,7 @@ class ISpeechObjectToken extends IDispatch {
     }
   }
 
-  int GetDescription(int Locale, Pointer<Pointer<Utf16>> Description) => ptr
+  int getDescription(int Locale, Pointer<Pointer<Utf16>> Description) => ptr
           .ref.vtable
           .elementAt(10)
           .cast<
@@ -125,7 +125,7 @@ class ISpeechObjectToken extends IDispatch {
                   Pointer, int Locale, Pointer<Pointer<Utf16>> Description)>()(
       ptr.ref.lpVtbl, Locale, Description);
 
-  int SetId(
+  int setId(
           Pointer<Utf16> Id, Pointer<Utf16> CategoryID, int CreateIfNotExist) =>
       ptr.ref.vtable
               .elementAt(11)
@@ -143,7 +143,7 @@ class ISpeechObjectToken extends IDispatch {
                       Pointer<Utf16> CategoryID, int CreateIfNotExist)>()(
           ptr.ref.lpVtbl, Id, CategoryID, CreateIfNotExist);
 
-  int GetAttribute(Pointer<Utf16> AttributeName,
+  int getAttribute(Pointer<Utf16> AttributeName,
           Pointer<Pointer<Utf16>> AttributeValue) =>
       ptr.ref.vtable
               .elementAt(12)
@@ -158,7 +158,7 @@ class ISpeechObjectToken extends IDispatch {
                       Pointer<Pointer<Utf16>> AttributeValue)>()(
           ptr.ref.lpVtbl, AttributeName, AttributeValue);
 
-  int CreateInstance(Pointer<COMObject> pUnkOuter, int ClsContext,
+  int createInstance(Pointer<COMObject> pUnkOuter, int ClsContext,
           Pointer<Pointer<COMObject>> Object) =>
       ptr.ref.vtable
               .elementAt(13)
@@ -176,7 +176,7 @@ class ISpeechObjectToken extends IDispatch {
                       int ClsContext, Pointer<Pointer<COMObject>> Object)>()(
           ptr.ref.lpVtbl, pUnkOuter, ClsContext, Object);
 
-  int Remove(Pointer<Utf16> ObjectStorageCLSID) => ptr.ref.vtable
+  int remove(Pointer<Utf16> ObjectStorageCLSID) => ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
@@ -188,7 +188,7 @@ class ISpeechObjectToken extends IDispatch {
               int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID)>()(
       ptr.ref.lpVtbl, ObjectStorageCLSID);
 
-  int GetStorageFileName(
+  int getStorageFileName(
           Pointer<Utf16> ObjectStorageCLSID,
           Pointer<Utf16> KeyName,
           Pointer<Utf16> FileName,
@@ -218,7 +218,7 @@ class ISpeechObjectToken extends IDispatch {
           ObjectStorageCLSID, KeyName, FileName, Folder, FilePath);
 
   int
-      RemoveStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
+      removeStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
               Pointer<Utf16> KeyName, int DeleteFileA) =>
           ptr.ref.vtable
                   .elementAt(16)
@@ -236,7 +236,7 @@ class ISpeechObjectToken extends IDispatch {
                           Pointer<Utf16> KeyName, int DeleteFileA)>()(
               ptr.ref.lpVtbl, ObjectStorageCLSID, KeyName, DeleteFileA);
 
-  int IsUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
+  int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
           Pointer<COMObject> Object, Pointer<Int16> Supported) =>
       ptr.ref.vtable
               .elementAt(17)
@@ -259,7 +259,7 @@ class ISpeechObjectToken extends IDispatch {
                       Pointer<Int16> Supported)>()(
           ptr.ref.lpVtbl, TypeOfUI, ExtraData, Object, Supported);
 
-  int DisplayUI(int hWnd, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
+  int displayUI(int hWnd, Pointer<Utf16> Title, Pointer<Utf16> TypeOfUI,
           Pointer<VARIANT> ExtraData, Pointer<COMObject> Object) =>
       ptr.ref.vtable
               .elementAt(18)
@@ -284,7 +284,7 @@ class ISpeechObjectToken extends IDispatch {
                       Pointer<COMObject> Object)>()(
           ptr.ref.lpVtbl, hWnd, Title, TypeOfUI, ExtraData, Object);
 
-  int MatchesAttributes(Pointer<Utf16> Attributes, Pointer<Int16> Matches) =>
+  int matchesAttributes(Pointer<Utf16> Attributes, Pointer<Int16> Matches) =>
       ptr.ref.vtable
               .elementAt(19)
               .cast<

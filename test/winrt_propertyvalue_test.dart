@@ -14,9 +14,9 @@ void main() {
     setUp(winrtInitialize);
 
     test('UInt8', () {
-      final pv = IPropertyValue.fromRawPointer(PropertyValue.CreateUInt8(30));
-      expect(pv.Type, equals(1));
-      expect(pv.GetUInt8(), equals(30));
+      final pv = IPropertyValue.fromRawPointer(PropertyValue.createUInt8(30));
+      expect(pv.type, equals(1));
+      expect(pv.getUInt8(), equals(30));
     });
 
     test('UInt8Array', () {
@@ -25,13 +25,13 @@ void main() {
         array[idx] = (10 * idx) + 10;
       }
       final pv = IPropertyValue.fromRawPointer(
-          PropertyValue.CreateUInt8Array(5, array));
-      expect(pv.Type, equals(1025));
+          PropertyValue.createUInt8Array(5, array));
+      expect(pv.type, equals(1025));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint8>>();
 
-      pv.GetUInt8Array(arraySize, newArray);
+      pv.getUInt8Array(arraySize, newArray);
       expect(arraySize.value, equals(5));
       expect(newArray.value[0], equals(10));
       expect(newArray.value[1], equals(20));
@@ -42,9 +42,9 @@ void main() {
 
     test('UInt16', () {
       final pv =
-          IPropertyValue.fromRawPointer(PropertyValue.CreateUInt16(65534));
-      expect(pv.Type, equals(3));
-      expect(pv.GetUInt16(), equals(65534));
+          IPropertyValue.fromRawPointer(PropertyValue.createUInt16(65534));
+      expect(pv.type, equals(3));
+      expect(pv.getUInt16(), equals(65534));
     });
 
     test('UInt16Array', () {
@@ -53,13 +53,13 @@ void main() {
         array[idx] = (100 * idx) + 100;
       }
       final pv = IPropertyValue.fromRawPointer(
-          PropertyValue.CreateUInt16Array(5, array));
-      expect(pv.Type, equals(1027));
+          PropertyValue.createUInt16Array(5, array));
+      expect(pv.type, equals(1027));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint16>>();
 
-      pv.GetUInt16Array(arraySize, newArray);
+      pv.getUInt16Array(arraySize, newArray);
       expect(arraySize.value, equals(5));
       expect(newArray.value[0], equals(100));
       expect(newArray.value[1], equals(200));
@@ -71,9 +71,9 @@ void main() {
     test('Guid', () {
       final guid = calloc<GUID>()..ref.setGUID(IID_ICalendar);
       final pv =
-          IPropertyValue.fromRawPointer(PropertyValue.CreateGuid(guid.ref));
-      expect(pv.Type, equals(16));
-      expect(pv.GetGuid().toString(), equals(IID_ICalendar));
+          IPropertyValue.fromRawPointer(PropertyValue.createGuid(guid.ref));
+      expect(pv.type, equals(16));
+      expect(pv.getGuid().toString(), equals(IID_ICalendar));
     }, skip: 'Flaky due to retValuePtr being freed in GetGuid()');
 
     test('GuidArray', () {
@@ -82,13 +82,13 @@ void main() {
       array[1].setGUID(IID_IFileOpenPicker);
       array[2].setGUID(IID_IStorageItem);
       final pv = IPropertyValue.fromRawPointer(
-          PropertyValue.CreateGuidArray(3, array));
-      expect(pv.Type, equals(1040));
+          PropertyValue.createGuidArray(3, array));
+      expect(pv.type, equals(1040));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<GUID>>();
 
-      pv.GetGuidArray(arraySize, newArray);
+      pv.getGuidArray(arraySize, newArray);
       expect(arraySize.value, equals(3));
       expect(newArray.value[0].toString(), equals(IID_ICalendar));
       expect(newArray.value[1].toString(), equals(IID_IFileOpenPicker));
@@ -100,13 +100,13 @@ void main() {
       array[0] = Calendar().ptr.ref;
       array[1] = PhoneNumberFormatter().ptr.ref;
       final pv = IPropertyValue.fromRawPointer(
-          PropertyValue.CreateInspectableArray(2, array));
-      expect(pv.Type, equals(1037));
+          PropertyValue.createInspectableArray(2, array));
+      expect(pv.type, equals(1037));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<COMObject>>();
 
-      pv.GetInspectableArray(arraySize, newArray);
+      pv.getInspectableArray(arraySize, newArray);
       expect(arraySize.value, equals(2));
       expect(IInspectable(newArray.value.elementAt(0)).runtimeClassName,
           equals('Windows.Globalization.Calendar'));

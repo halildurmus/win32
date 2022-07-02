@@ -38,7 +38,7 @@ class IStorageItem extends IInspectable {
   factory IStorageItem.from(IInspectable interface) =>
       IStorageItem.fromRawPointer(interface.toInterface(IID_IStorageItem));
 
-  Pointer<COMObject> RenameAsyncOverloadDefaultOptions(String desiredName) {
+  Pointer<COMObject> renameAsyncOverloadDefaultOptions(String desiredName) {
     final retValuePtr = calloc<COMObject>();
     final desiredNameHstring = convertToHString(desiredName);
     final hr = ptr.ref.vtable
@@ -59,7 +59,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> RenameAsync(String desiredName, int option) {
+  Pointer<COMObject> renameAsync(String desiredName, int option) {
     final retValuePtr = calloc<COMObject>();
     final desiredNameHstring = convertToHString(desiredName);
 
@@ -84,7 +84,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> DeleteAsyncOverloadDefaultOptions() {
+  Pointer<COMObject> deleteAsyncOverloadDefaultOptions() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -102,7 +102,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> DeleteAsync(int option) {
+  Pointer<COMObject> deleteAsync(int option) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -122,7 +122,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> GetBasicPropertiesAsync() {
+  Pointer<COMObject> getBasicPropertiesAsync() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -140,7 +140,7 @@ class IStorageItem extends IInspectable {
     return retValuePtr;
   }
 
-  String get Name {
+  String get name {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -164,7 +164,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  String get Path {
+  String get path {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -188,7 +188,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  int get Attributes {
+  int get attributes {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -211,7 +211,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  DateTime get DateCreated {
+  DateTime get dateCreated {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -234,7 +234,7 @@ class IStorageItem extends IInspectable {
     }
   }
 
-  bool IsOfType(int type) {
+  bool isOfType(int type) {
     final retValuePtr = calloc<Bool>();
 
     try {

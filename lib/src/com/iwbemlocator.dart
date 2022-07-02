@@ -34,7 +34,7 @@ class IWbemLocator extends IUnknown {
   factory IWbemLocator.from(IUnknown interface) =>
       IWbemLocator(interface.toInterface(IID_IWbemLocator));
 
-  int ConnectServer(
+  int connectServer(
           Pointer<Utf16> strNetworkResource,
           Pointer<Utf16> strUser,
           Pointer<Utf16> strPassword,

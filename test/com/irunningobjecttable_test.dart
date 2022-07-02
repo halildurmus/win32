@@ -22,26 +22,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final runningobjecttable = IRunningObjectTable(ptr);
-  test('Can instantiate IRunningObjectTable.Register', () {
-    expect(runningobjecttable.Register, isA<Function>());
+  test('Can instantiate IRunningObjectTable.register', () {
+    expect(runningobjecttable.register, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.Revoke', () {
-    expect(runningobjecttable.Revoke, isA<Function>());
+  test('Can instantiate IRunningObjectTable.revoke', () {
+    expect(runningobjecttable.revoke, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.IsRunning', () {
-    expect(runningobjecttable.IsRunning, isA<Function>());
+  test('Can instantiate IRunningObjectTable.isRunning', () {
+    expect(runningobjecttable.isRunning, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.GetObject', () {
-    expect(runningobjecttable.GetObject, isA<Function>());
+  test('Can instantiate IRunningObjectTable.getObject', () {
+    expect(runningobjecttable.getObject, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.NoteChangeTime', () {
-    expect(runningobjecttable.NoteChangeTime, isA<Function>());
+  test('Can instantiate IRunningObjectTable.noteChangeTime', () {
+    expect(runningobjecttable.noteChangeTime, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.GetTimeOfLastChange', () {
-    expect(runningobjecttable.GetTimeOfLastChange, isA<Function>());
+  test('Can instantiate IRunningObjectTable.getTimeOfLastChange', () {
+    expect(runningobjecttable.getTimeOfLastChange, isA<Function>());
   });
-  test('Can instantiate IRunningObjectTable.EnumRunning', () {
-    expect(runningobjecttable.EnumRunning, isA<Function>());
+  test('Can instantiate IRunningObjectTable.enumRunning', () {
+    expect(runningobjecttable.enumRunning, isA<Function>());
   });
   free(ptr);
 }

@@ -36,7 +36,7 @@ class IAppxManifestReader4 extends IAppxManifestReader3 {
       IAppxManifestReader4(interface.toInterface(IID_IAppxManifestReader4));
 
   int
-      GetOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
+      getOptionalPackageInfo(Pointer<Pointer<COMObject>> optionalPackageInfo) =>
           ptr.ref.vtable
                   .elementAt(15)
                   .cast<

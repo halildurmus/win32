@@ -96,26 +96,26 @@ class Gamepad extends IInspectable
     }
   }
 
-  static List<String> get Gamepads {
+  static List<String> get gamepads {
     final activationFactory =
         CreateActivationFactory(_className, IID_IGamepadStatics);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory).Gamepads;
+      return IGamepadStatics.fromRawPointer(activationFactory).gamepads;
     } finally {
       free(activationFactory);
     }
   }
 
   // IGamepadStatics2 methods
-  static Pointer<COMObject> FromGameController(
+  static Pointer<COMObject> fromGameController(
       Pointer<COMObject> gameController) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IGamepadStatics2);
 
     try {
       return IGamepadStatics2.fromRawPointer(activationFactory)
-          .FromGameController(gameController);
+          .fromGameController(gameController);
     } finally {
       free(activationFactory);
     }
@@ -125,13 +125,13 @@ class Gamepad extends IInspectable
   late final _iGamepad = IGamepad.from(this);
 
   @override
-  GamepadVibration get Vibration => _iGamepad.Vibration;
+  GamepadVibration get vibration => _iGamepad.vibration;
 
   @override
-  set Vibration(GamepadVibration value) => _iGamepad.Vibration = value;
+  set vibration(GamepadVibration value) => _iGamepad.vibration = value;
 
   @override
-  GamepadReading GetCurrentReading() => _iGamepad.GetCurrentReading();
+  GamepadReading getCurrentReading() => _iGamepad.getCurrentReading();
   // IGameController methods
   late final _iGameController = IGameController.from(this);
 
@@ -161,23 +161,23 @@ class Gamepad extends IInspectable
       _iGameController.remove_UserChanged(token);
 
   @override
-  Pointer<COMObject> get Headset => _iGameController.Headset;
+  Pointer<COMObject> get headset => _iGameController.headset;
 
   @override
-  bool get IsWireless => _iGameController.IsWireless;
+  bool get isWireless => _iGameController.isWireless;
 
   @override
-  Pointer<COMObject> get User => _iGameController.User;
+  Pointer<COMObject> get user => _iGameController.user;
   // IGamepad2 methods
   late final _iGamepad2 = IGamepad2.from(this);
 
   @override
-  int GetButtonLabel(int button) => _iGamepad2.GetButtonLabel(button);
+  int getButtonLabel(int button) => _iGamepad2.getButtonLabel(button);
   // IGameControllerBatteryInfo methods
   late final _iGameControllerBatteryInfo =
       IGameControllerBatteryInfo.from(this);
 
   @override
-  Pointer<COMObject> TryGetBatteryReport() =>
-      _iGameControllerBatteryInfo.TryGetBatteryReport();
+  Pointer<COMObject> tryGetBatteryReport() =>
+      _iGameControllerBatteryInfo.tryGetBatteryReport();
 }

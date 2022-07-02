@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader4 = IAppxManifestReader4(ptr);
-  test('Can instantiate IAppxManifestReader4.GetOptionalPackageInfo', () {
-    expect(appxmanifestreader4.GetOptionalPackageInfo, isA<Function>());
+  test('Can instantiate IAppxManifestReader4.getOptionalPackageInfo', () {
+    expect(appxmanifestreader4.getOptionalPackageInfo, isA<Function>());
   });
   free(ptr);
 }

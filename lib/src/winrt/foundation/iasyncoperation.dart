@@ -42,7 +42,7 @@ mixin IAsyncOperation<TResult> on IAsyncInfo {
 
   late final Pointer<COMObject> _thisPtr = toInterface(IID_IAsyncOperation);
 
-  set Completed(Pointer value) {
+  set completed(Pointer value) {
     final hr = _thisPtr.ref.lpVtbl.value
         .elementAt(11)
         .cast<Pointer<NativeFunction<_put_Completed_Native>>>()
@@ -52,7 +52,7 @@ mixin IAsyncOperation<TResult> on IAsyncInfo {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer get Completed {
+  Pointer get completed {
     final retValuePtr = calloc<Pointer>();
 
     try {
@@ -71,7 +71,7 @@ mixin IAsyncOperation<TResult> on IAsyncInfo {
     }
   }
 
-  int GetResults(Pointer<Pointer> result) => _thisPtr.ref.lpVtbl.value
+  int getResults(Pointer<Pointer> result) => _thisPtr.ref.lpVtbl.value
       .elementAt(13)
       .cast<Pointer<NativeFunction<_GetResults_Native>>>()
       .value

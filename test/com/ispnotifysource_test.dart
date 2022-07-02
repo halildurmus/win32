@@ -22,26 +22,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spnotifysource = ISpNotifySource(ptr);
-  test('Can instantiate ISpNotifySource.SetNotifySink', () {
-    expect(spnotifysource.SetNotifySink, isA<Function>());
+  test('Can instantiate ISpNotifySource.setNotifySink', () {
+    expect(spnotifysource.setNotifySink, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.SetNotifyWindowMessage', () {
-    expect(spnotifysource.SetNotifyWindowMessage, isA<Function>());
+  test('Can instantiate ISpNotifySource.setNotifyWindowMessage', () {
+    expect(spnotifysource.setNotifyWindowMessage, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.SetNotifyCallbackFunction', () {
-    expect(spnotifysource.SetNotifyCallbackFunction, isA<Function>());
+  test('Can instantiate ISpNotifySource.setNotifyCallbackFunction', () {
+    expect(spnotifysource.setNotifyCallbackFunction, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.SetNotifyCallbackInterface', () {
-    expect(spnotifysource.SetNotifyCallbackInterface, isA<Function>());
+  test('Can instantiate ISpNotifySource.setNotifyCallbackInterface', () {
+    expect(spnotifysource.setNotifyCallbackInterface, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.SetNotifyWin32Event', () {
-    expect(spnotifysource.SetNotifyWin32Event, isA<Function>());
+  test('Can instantiate ISpNotifySource.setNotifyWin32Event', () {
+    expect(spnotifysource.setNotifyWin32Event, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.WaitForNotifyEvent', () {
-    expect(spnotifysource.WaitForNotifyEvent, isA<Function>());
+  test('Can instantiate ISpNotifySource.waitForNotifyEvent', () {
+    expect(spnotifysource.waitForNotifyEvent, isA<Function>());
   });
-  test('Can instantiate ISpNotifySource.GetNotifyEventHandle', () {
-    expect(spnotifysource.GetNotifyEventHandle, isA<Function>());
+  test('Can instantiate ISpNotifySource.getNotifyEventHandle', () {
+    expect(spnotifysource.getNotifyEventHandle, isA<Function>());
   });
   free(ptr);
 }

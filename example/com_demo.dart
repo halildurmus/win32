@@ -14,8 +14,8 @@ int refCount(IUnknown unk) {
   // the refcount after the operation, so by adding a reference and immediately
   // removing it, we can get the original refcount.
 
-  unk.AddRef();
-  final refCount = unk.Release();
+  unk.addRef();
+  final refCount = unk.release();
 
   return refCount;
 }
@@ -42,7 +42,7 @@ void main() {
   print('refCount is now ${refCount(fileDialog2)}\n');
 
   // Use IFileDialog2.SetTitle
-  hr = fileDialog2.SetTitle(pTitle);
+  hr = fileDialog2.setTitle(pTitle);
   if (FAILED(hr)) throw WindowsException(hr);
 
   // QueryInterface for the IModalWindow interface, just to demonstrate it.
@@ -51,7 +51,7 @@ void main() {
       'modalWindow.ptr is ${modalWindow.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(modalWindow)}\n');
 
-  fileDialog2.Release();
+  fileDialog2.release();
   free(fileDialog2.ptr);
   print('Release fileDialog2.\n'
       'refCount is now ${refCount(modalWindow)}\n');
@@ -63,13 +63,13 @@ void main() {
       'fileOpenDialog.ptr is ${fileOpenDialog.ptr.address.toHexString(64)}');
   print('refCount is now ${refCount(fileOpenDialog)}\n');
 
-  modalWindow.Release();
+  modalWindow.release();
   free(modalWindow.ptr);
   print('Release modalWindow.\n'
       'refCount is now ${refCount(fileOpenDialog)}\n');
 
   // Use IFileOpenDialog.Show, which is inherited from IModalWindow
-  hr = fileOpenDialog.Show(NULL);
+  hr = fileOpenDialog.show(NULL);
   if (FAILED(hr)) {
     if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
       print('Dialog cancelled.');
@@ -78,7 +78,7 @@ void main() {
     }
   }
 
-  fileOpenDialog.Release();
+  fileOpenDialog.release();
   free(fileOpenDialog.ptr);
   print('Released fileOpenDialog.');
 

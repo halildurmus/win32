@@ -34,7 +34,7 @@ class ISimpleAudioVolume extends IUnknown {
   factory ISimpleAudioVolume.from(IUnknown interface) =>
       ISimpleAudioVolume(interface.toInterface(IID_ISimpleAudioVolume));
 
-  int SetMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
+  int setMasterVolume(double fLevel, Pointer<GUID> EventContext) =>
       ptr.ref.vtable
               .elementAt(3)
               .cast<
@@ -48,7 +48,7 @@ class ISimpleAudioVolume extends IUnknown {
                       Pointer, double fLevel, Pointer<GUID> EventContext)>()(
           ptr.ref.lpVtbl, fLevel, EventContext);
 
-  int GetMasterVolume(Pointer<Float> pfLevel) => ptr.ref.vtable
+  int getMasterVolume(Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -58,7 +58,7 @@ class ISimpleAudioVolume extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Float> pfLevel)>()(
       ptr.ref.lpVtbl, pfLevel);
 
-  int SetMute(int bMute, Pointer<GUID> EventContext) => ptr.ref.vtable
+  int setMute(int bMute, Pointer<GUID> EventContext) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -70,7 +70,7 @@ class ISimpleAudioVolume extends IUnknown {
               int Function(Pointer, int bMute, Pointer<GUID> EventContext)>()(
       ptr.ref.lpVtbl, bMute, EventContext);
 
-  int GetMute(Pointer<Int32> pbMute) => ptr.ref.vtable
+  int getMute(Pointer<Int32> pbMute) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<

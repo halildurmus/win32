@@ -37,7 +37,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
       IPhoneNumberInfoStatics.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberInfoStatics));
 
-  int TryParse(String input, Pointer<COMObject> phoneNumber) {
+  int tryParse(String input, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);
 
@@ -70,7 +70,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
     }
   }
 
-  int TryParseWithRegion(
+  int tryParseWithRegion(
       String input, String regionCode, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);

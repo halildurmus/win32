@@ -22,62 +22,62 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final typeinfo = ITypeInfo(ptr);
-  test('Can instantiate ITypeInfo.GetTypeAttr', () {
-    expect(typeinfo.GetTypeAttr, isA<Function>());
+  test('Can instantiate ITypeInfo.getTypeAttr', () {
+    expect(typeinfo.getTypeAttr, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetTypeComp', () {
-    expect(typeinfo.GetTypeComp, isA<Function>());
+  test('Can instantiate ITypeInfo.getTypeComp', () {
+    expect(typeinfo.getTypeComp, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetFuncDesc', () {
-    expect(typeinfo.GetFuncDesc, isA<Function>());
+  test('Can instantiate ITypeInfo.getFuncDesc', () {
+    expect(typeinfo.getFuncDesc, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetVarDesc', () {
-    expect(typeinfo.GetVarDesc, isA<Function>());
+  test('Can instantiate ITypeInfo.getVarDesc', () {
+    expect(typeinfo.getVarDesc, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetNames', () {
-    expect(typeinfo.GetNames, isA<Function>());
+  test('Can instantiate ITypeInfo.getNames', () {
+    expect(typeinfo.getNames, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetRefTypeOfImplType', () {
-    expect(typeinfo.GetRefTypeOfImplType, isA<Function>());
+  test('Can instantiate ITypeInfo.getRefTypeOfImplType', () {
+    expect(typeinfo.getRefTypeOfImplType, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetImplTypeFlags', () {
-    expect(typeinfo.GetImplTypeFlags, isA<Function>());
+  test('Can instantiate ITypeInfo.getImplTypeFlags', () {
+    expect(typeinfo.getImplTypeFlags, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetIDsOfNames', () {
-    expect(typeinfo.GetIDsOfNames, isA<Function>());
+  test('Can instantiate ITypeInfo.getIDsOfNames', () {
+    expect(typeinfo.getIDsOfNames, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.Invoke', () {
-    expect(typeinfo.Invoke, isA<Function>());
+  test('Can instantiate ITypeInfo.invoke', () {
+    expect(typeinfo.invoke, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetDocumentation', () {
-    expect(typeinfo.GetDocumentation, isA<Function>());
+  test('Can instantiate ITypeInfo.getDocumentation', () {
+    expect(typeinfo.getDocumentation, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetDllEntry', () {
-    expect(typeinfo.GetDllEntry, isA<Function>());
+  test('Can instantiate ITypeInfo.getDllEntry', () {
+    expect(typeinfo.getDllEntry, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetRefTypeInfo', () {
-    expect(typeinfo.GetRefTypeInfo, isA<Function>());
+  test('Can instantiate ITypeInfo.getRefTypeInfo', () {
+    expect(typeinfo.getRefTypeInfo, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.AddressOfMember', () {
-    expect(typeinfo.AddressOfMember, isA<Function>());
+  test('Can instantiate ITypeInfo.addressOfMember', () {
+    expect(typeinfo.addressOfMember, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.CreateInstance', () {
-    expect(typeinfo.CreateInstance, isA<Function>());
+  test('Can instantiate ITypeInfo.createInstance', () {
+    expect(typeinfo.createInstance, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetMops', () {
-    expect(typeinfo.GetMops, isA<Function>());
+  test('Can instantiate ITypeInfo.getMops', () {
+    expect(typeinfo.getMops, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.GetContainingTypeLib', () {
-    expect(typeinfo.GetContainingTypeLib, isA<Function>());
+  test('Can instantiate ITypeInfo.getContainingTypeLib', () {
+    expect(typeinfo.getContainingTypeLib, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.ReleaseTypeAttr', () {
-    expect(typeinfo.ReleaseTypeAttr, isA<Function>());
+  test('Can instantiate ITypeInfo.releaseTypeAttr', () {
+    expect(typeinfo.releaseTypeAttr, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.ReleaseFuncDesc', () {
-    expect(typeinfo.ReleaseFuncDesc, isA<Function>());
+  test('Can instantiate ITypeInfo.releaseFuncDesc', () {
+    expect(typeinfo.releaseFuncDesc, isA<Function>());
   });
-  test('Can instantiate ITypeInfo.ReleaseVarDesc', () {
-    expect(typeinfo.ReleaseVarDesc, isA<Function>());
+  test('Can instantiate ITypeInfo.releaseVarDesc', () {
+    expect(typeinfo.releaseVarDesc, isA<Function>());
   });
   free(ptr);
 }

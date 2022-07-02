@@ -35,7 +35,7 @@ class IClosable extends IInspectable {
   factory IClosable.from(IInspectable interface) =>
       IClosable.fromRawPointer(interface.toInterface(IID_IClosable));
 
-  void Close() {
+  void close() {
     final hr = ptr.ref.vtable
         .elementAt(6)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()

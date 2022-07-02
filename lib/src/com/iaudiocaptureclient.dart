@@ -34,7 +34,7 @@ class IAudioCaptureClient extends IUnknown {
   factory IAudioCaptureClient.from(IUnknown interface) =>
       IAudioCaptureClient(interface.toInterface(IID_IAudioCaptureClient));
 
-  int GetBuffer(
+  int getBuffer(
           Pointer<Pointer<Uint8>> ppData,
           Pointer<Uint32> pNumFramesToRead,
           Pointer<Uint32> pdwFlags,
@@ -68,7 +68,7 @@ class IAudioCaptureClient extends IUnknown {
           pu64DevicePosition,
           pu64QPCPosition);
 
-  int ReleaseBuffer(int NumFramesRead) => ptr.ref.vtable
+  int releaseBuffer(int NumFramesRead) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -78,7 +78,7 @@ class IAudioCaptureClient extends IUnknown {
           int Function(
               Pointer, int NumFramesRead)>()(ptr.ref.lpVtbl, NumFramesRead);
 
-  int GetNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) => ptr
+  int getNextPacketSize(Pointer<Uint32> pNumFramesInNextPacket) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<

@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader7 = IAppxManifestReader7(ptr);
-  test('Can instantiate IAppxManifestReader7.GetDriverDependencies', () {
-    expect(appxmanifestreader7.GetDriverDependencies, isA<Function>());
+  test('Can instantiate IAppxManifestReader7.getDriverDependencies', () {
+    expect(appxmanifestreader7.getDriverDependencies, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader7.GetOSPackageDependencies', () {
-    expect(appxmanifestreader7.GetOSPackageDependencies, isA<Function>());
+  test('Can instantiate IAppxManifestReader7.getOSPackageDependencies', () {
+    expect(appxmanifestreader7.getOSPackageDependencies, isA<Function>());
   });
-  test('Can instantiate IAppxManifestReader7.GetHostRuntimeDependencies', () {
-    expect(appxmanifestreader7.GetHostRuntimeDependencies, isA<Function>());
+  test('Can instantiate IAppxManifestReader7.getHostRuntimeDependencies', () {
+    expect(appxmanifestreader7.getHostRuntimeDependencies, isA<Function>());
   });
   free(ptr);
 }

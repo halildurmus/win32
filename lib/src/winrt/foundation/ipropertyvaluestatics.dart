@@ -38,7 +38,7 @@ class IPropertyValueStatics extends IInspectable {
       IPropertyValueStatics.fromRawPointer(
           interface.toInterface(IID_IPropertyValueStatics));
 
-  Pointer<COMObject> CreateEmpty() {
+  Pointer<COMObject> createEmpty() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -56,7 +56,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt8(int value) {
+  Pointer<COMObject> createUInt8(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -75,7 +75,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt16(int value) {
+  Pointer<COMObject> createInt16(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -94,7 +94,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt16(int value) {
+  Pointer<COMObject> createUInt16(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -113,7 +113,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt32(int value) {
+  Pointer<COMObject> createInt32(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -132,7 +132,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt32(int value) {
+  Pointer<COMObject> createUInt32(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -151,7 +151,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt64(int value) {
+  Pointer<COMObject> createInt64(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -170,7 +170,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt64(int value) {
+  Pointer<COMObject> createUInt64(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -189,7 +189,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateSingle(double value) {
+  Pointer<COMObject> createSingle(double value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -209,7 +209,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateDouble(double value) {
+  Pointer<COMObject> createDouble(double value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -229,7 +229,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateChar16(int value) {
+  Pointer<COMObject> createChar16(int value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -248,7 +248,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateBoolean(bool value) {
+  Pointer<COMObject> createBoolean(bool value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -268,7 +268,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateString(String value) {
+  Pointer<COMObject> createString(String value) {
     final retValuePtr = calloc<COMObject>();
     final valueHstring = convertToHString(value);
     final hr = ptr.ref.vtable
@@ -288,7 +288,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInspectable(Pointer<COMObject> value) {
+  Pointer<COMObject> createInspectable(Pointer<COMObject> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -309,7 +309,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateGuid(GUID value) {
+  Pointer<COMObject> createGuid(GUID value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -329,7 +329,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateDateTime(DateTime value) {
+  Pointer<COMObject> createDateTime(DateTime value) {
     final retValuePtr = calloc<COMObject>();
     final valueDateTime =
         value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
@@ -349,7 +349,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateTimeSpan(Duration value) {
+  Pointer<COMObject> createTimeSpan(Duration value) {
     final retValuePtr = calloc<COMObject>();
     final valueDuration = value.inMicroseconds * 10;
     final hr = ptr.ref.vtable
@@ -368,7 +368,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreatePoint(Point value) {
+  Pointer<COMObject> createPoint(Point value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -388,7 +388,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateSize(Size value) {
+  Pointer<COMObject> createSize(Size value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -408,7 +408,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateRect(Rect value) {
+  Pointer<COMObject> createRect(Rect value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -428,7 +428,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt8Array(int valueSize, Pointer<Uint8> value) {
+  Pointer<COMObject> createUInt8Array(int valueSize, Pointer<Uint8> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -449,7 +449,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt16Array(int valueSize, Pointer<Int16> value) {
+  Pointer<COMObject> createInt16Array(int valueSize, Pointer<Int16> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -470,7 +470,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt16Array(int valueSize, Pointer<Uint16> value) {
+  Pointer<COMObject> createUInt16Array(int valueSize, Pointer<Uint16> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -491,7 +491,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt32Array(int valueSize, Pointer<Int32> value) {
+  Pointer<COMObject> createInt32Array(int valueSize, Pointer<Int32> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -512,7 +512,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt32Array(int valueSize, Pointer<Uint32> value) {
+  Pointer<COMObject> createUInt32Array(int valueSize, Pointer<Uint32> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -533,7 +533,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInt64Array(int valueSize, Pointer<Int64> value) {
+  Pointer<COMObject> createInt64Array(int valueSize, Pointer<Int64> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -554,7 +554,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateUInt64Array(int valueSize, Pointer<Uint64> value) {
+  Pointer<COMObject> createUInt64Array(int valueSize, Pointer<Uint64> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -575,7 +575,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateSingleArray(int valueSize, Pointer<Float> value) {
+  Pointer<COMObject> createSingleArray(int valueSize, Pointer<Float> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -596,7 +596,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateDoubleArray(int valueSize, Pointer<Double> value) {
+  Pointer<COMObject> createDoubleArray(int valueSize, Pointer<Double> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -617,7 +617,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateChar16Array(int valueSize, Pointer<Uint16> value) {
+  Pointer<COMObject> createChar16Array(int valueSize, Pointer<Uint16> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -638,7 +638,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateBooleanArray(int valueSize, Pointer<Bool> value) {
+  Pointer<COMObject> createBooleanArray(int valueSize, Pointer<Bool> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -659,7 +659,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateStringArray(int valueSize, Pointer<IntPtr> value) {
+  Pointer<COMObject> createStringArray(int valueSize, Pointer<IntPtr> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -680,7 +680,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateInspectableArray(
+  Pointer<COMObject> createInspectableArray(
       int valueSize, Pointer<COMObject> value) {
     final retValuePtr = calloc<COMObject>();
 
@@ -702,7 +702,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateGuidArray(int valueSize, Pointer<GUID> value) {
+  Pointer<COMObject> createGuidArray(int valueSize, Pointer<GUID> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -723,7 +723,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateDateTimeArray(int valueSize, Pointer<Uint64> value) {
+  Pointer<COMObject> createDateTimeArray(int valueSize, Pointer<Uint64> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -744,7 +744,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateTimeSpanArray(int valueSize, Pointer<Uint64> value) {
+  Pointer<COMObject> createTimeSpanArray(int valueSize, Pointer<Uint64> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -765,7 +765,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreatePointArray(int valueSize, Pointer<Point> value) {
+  Pointer<COMObject> createPointArray(int valueSize, Pointer<Point> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -786,7 +786,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateSizeArray(int valueSize, Pointer<Size> value) {
+  Pointer<COMObject> createSizeArray(int valueSize, Pointer<Size> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -807,7 +807,7 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  Pointer<COMObject> CreateRectArray(int valueSize, Pointer<Rect> value) {
+  Pointer<COMObject> createRectArray(int valueSize, Pointer<Rect> value) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

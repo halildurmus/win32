@@ -35,7 +35,7 @@ class IAppxManifestApplication extends IUnknown {
       IAppxManifestApplication(
           interface.toInterface(IID_IAppxManifestApplication));
 
-  int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
+  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
       .ref.vtable
       .elementAt(3)
       .cast<
@@ -48,7 +48,7 @@ class IAppxManifestApplication extends IUnknown {
           int Function(Pointer, Pointer<Utf16> name,
               Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int GetAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
+  int getAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
           .ref.vtable
           .elementAt(4)
           .cast<

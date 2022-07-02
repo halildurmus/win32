@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemrefresher = IWbemRefresher(ptr);
-  test('Can instantiate IWbemRefresher.Refresh', () {
-    expect(wbemrefresher.Refresh, isA<Function>());
+  test('Can instantiate IWbemRefresher.refresh', () {
+    expect(wbemrefresher.refresh, isA<Function>());
   });
   free(ptr);
 }

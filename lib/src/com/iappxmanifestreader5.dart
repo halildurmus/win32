@@ -34,7 +34,7 @@ class IAppxManifestReader5 extends IUnknown {
   factory IAppxManifestReader5.from(IUnknown interface) =>
       IAppxManifestReader5(interface.toInterface(IID_IAppxManifestReader5));
 
-  int GetMainPackageDependencies(
+  int getMainPackageDependencies(
           Pointer<Pointer<COMObject>> mainPackageDependencies) =>
       ptr.ref.vtable
               .elementAt(3)

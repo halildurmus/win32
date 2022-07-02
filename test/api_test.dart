@@ -1005,8 +1005,8 @@ void main() {
       test('Can instantiate inet_ntoa', () {
         final ws2_32 = DynamicLibrary.open('ws2_32.dll');
         final inet_ntoa = ws2_32.lookupFunction<
-            Pointer<Utf8> Function(IN_ADDR $in),
-            Pointer<Utf8> Function(IN_ADDR $in)>('inet_ntoa');
+            Pointer<Utf8> Function(IN_ADDR in_),
+            Pointer<Utf8> Function(IN_ADDR in_)>('inet_ntoa');
         expect(inet_ntoa, isA<Function>());
       });
     }
@@ -7240,8 +7240,8 @@ void main() {
     test('Can instantiate UnregisterPowerSettingNotification', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final UnregisterPowerSettingNotification = user32.lookupFunction<
-          Int32 Function(IntPtr $Handle),
-          int Function(int $Handle)>('UnregisterPowerSettingNotification');
+          Int32 Function(IntPtr Handle),
+          int Function(int Handle)>('UnregisterPowerSettingNotification');
       expect(UnregisterPowerSettingNotification, isA<Function>());
     });
     test('Can instantiate UnregisterTouchWindow', () {

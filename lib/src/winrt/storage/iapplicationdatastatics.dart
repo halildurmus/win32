@@ -37,7 +37,7 @@ class IApplicationDataStatics extends IInspectable {
       IApplicationDataStatics.fromRawPointer(
           interface.toInterface(IID_IApplicationDataStatics));
 
-  Pointer<COMObject> get Current {
+  Pointer<COMObject> get current {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

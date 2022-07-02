@@ -37,7 +37,7 @@ class IToastNotification4 extends IInspectable {
       IToastNotification4.fromRawPointer(
           interface.toInterface(IID_IToastNotification4));
 
-  Pointer<COMObject> get Data {
+  Pointer<COMObject> get data {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -55,7 +55,7 @@ class IToastNotification4 extends IInspectable {
     return retValuePtr;
   }
 
-  set Data(Pointer<COMObject> value) {
+  set data(Pointer<COMObject> value) {
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -69,7 +69,7 @@ class IToastNotification4 extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get Priority {
+  int get priority {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -92,7 +92,7 @@ class IToastNotification4 extends IInspectable {
     }
   }
 
-  set Priority(int value) {
+  set priority(int value) {
     final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()

@@ -37,7 +37,7 @@ class IPropertyValue extends IInspectable {
   factory IPropertyValue.from(IInspectable interface) =>
       IPropertyValue.fromRawPointer(interface.toInterface(IID_IPropertyValue));
 
-  int get Type {
+  int get type {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -60,7 +60,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  bool get IsNumericScalar {
+  bool get isNumericScalar {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -83,7 +83,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetUInt8() {
+  int getUInt8() {
     final retValuePtr = calloc<Uint8>();
 
     try {
@@ -106,7 +106,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetInt16() {
+  int getInt16() {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -129,7 +129,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetUInt16() {
+  int getUInt16() {
     final retValuePtr = calloc<Uint16>();
 
     try {
@@ -152,7 +152,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetInt32() {
+  int getInt32() {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -175,7 +175,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetUInt32() {
+  int getUInt32() {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -198,7 +198,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetInt64() {
+  int getInt64() {
     final retValuePtr = calloc<Int64>();
 
     try {
@@ -221,7 +221,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetUInt64() {
+  int getUInt64() {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -244,7 +244,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  double GetSingle() {
+  double getSingle() {
     final retValuePtr = calloc<Float>();
 
     try {
@@ -267,7 +267,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  double GetDouble() {
+  double getDouble() {
     final retValuePtr = calloc<Double>();
 
     try {
@@ -290,7 +290,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  int GetChar16() {
+  int getChar16() {
     final retValuePtr = calloc<Uint16>();
 
     try {
@@ -313,7 +313,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  bool GetBoolean() {
+  bool getBoolean() {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -336,7 +336,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  String GetString() {
+  String getString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -360,7 +360,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  GUID GetGuid() {
+  GUID getGuid() {
     final retValuePtr = calloc<GUID>();
 
     try {
@@ -383,7 +383,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  DateTime GetDateTime() {
+  DateTime getDateTime() {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -406,7 +406,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  Duration GetTimeSpan() {
+  Duration getTimeSpan() {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -428,7 +428,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  Point GetPoint() {
+  Point getPoint() {
     final retValuePtr = calloc<Point>();
 
     try {
@@ -451,7 +451,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  Size GetSize() {
+  Size getSize() {
     final retValuePtr = calloc<Size>();
 
     try {
@@ -474,7 +474,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  Rect GetRect() {
+  Rect getRect() {
     final retValuePtr = calloc<Rect>();
 
     try {
@@ -497,7 +497,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  void GetUInt8Array(Pointer<Uint32> valueSize, Pointer<Pointer<Uint8>> value) {
+  void getUInt8Array(Pointer<Uint32> valueSize, Pointer<Pointer<Uint8>> value) {
     final hr = ptr.ref.vtable
             .elementAt(26)
             .cast<
@@ -514,7 +514,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt16Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int16>> value) {
+  void getInt16Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int16>> value) {
     final hr = ptr.ref.vtable
             .elementAt(27)
             .cast<
@@ -531,7 +531,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt16Array(
+  void getUInt16Array(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint16>> value) {
     final hr = ptr.ref.vtable
             .elementAt(28)
@@ -549,7 +549,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt32Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int32>> value) {
+  void getInt32Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int32>> value) {
     final hr = ptr.ref.vtable
             .elementAt(29)
             .cast<
@@ -566,7 +566,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt32Array(
+  void getUInt32Array(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint32>> value) {
     final hr = ptr.ref.vtable
             .elementAt(30)
@@ -584,7 +584,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInt64Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int64>> value) {
+  void getInt64Array(Pointer<Uint32> valueSize, Pointer<Pointer<Int64>> value) {
     final hr = ptr.ref.vtable
             .elementAt(31)
             .cast<
@@ -601,7 +601,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetUInt64Array(
+  void getUInt64Array(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
             .elementAt(32)
@@ -619,7 +619,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetSingleArray(
+  void getSingleArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<Float>> value) {
     final hr = ptr.ref.vtable
             .elementAt(33)
@@ -637,7 +637,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetDoubleArray(
+  void getDoubleArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<Double>> value) {
     final hr = ptr.ref.vtable
             .elementAt(34)
@@ -655,7 +655,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetChar16Array(
+  void getChar16Array(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint16>> value) {
     final hr = ptr.ref.vtable
             .elementAt(35)
@@ -673,7 +673,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetBooleanArray(
+  void getBooleanArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<Bool>> value) {
     final hr = ptr.ref.vtable
             .elementAt(36)
@@ -691,7 +691,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetStringArray(
+  void getStringArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<IntPtr>> value) {
     final hr = ptr.ref.vtable
             .elementAt(37)
@@ -709,7 +709,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetInspectableArray(
+  void getInspectableArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<COMObject>> value) {
     final hr = ptr.ref.vtable
             .elementAt(38)
@@ -727,7 +727,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetGuidArray(Pointer<Uint32> valueSize, Pointer<Pointer<GUID>> value) {
+  void getGuidArray(Pointer<Uint32> valueSize, Pointer<Pointer<GUID>> value) {
     final hr = ptr.ref.vtable
             .elementAt(39)
             .cast<
@@ -744,7 +744,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetDateTimeArray(
+  void getDateTimeArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
             .elementAt(40)
@@ -762,7 +762,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetTimeSpanArray(
+  void getTimeSpanArray(
       Pointer<Uint32> valueSize, Pointer<Pointer<Uint64>> value) {
     final hr = ptr.ref.vtable
             .elementAt(41)
@@ -780,7 +780,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetPointArray(Pointer<Uint32> valueSize, Pointer<Pointer<Point>> value) {
+  void getPointArray(Pointer<Uint32> valueSize, Pointer<Pointer<Point>> value) {
     final hr = ptr.ref.vtable
             .elementAt(42)
             .cast<
@@ -797,7 +797,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetSizeArray(Pointer<Uint32> valueSize, Pointer<Pointer<Size>> value) {
+  void getSizeArray(Pointer<Uint32> valueSize, Pointer<Pointer<Size>> value) {
     final hr = ptr.ref.vtable
             .elementAt(43)
             .cast<
@@ -814,7 +814,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void GetRectArray(Pointer<Uint32> valueSize, Pointer<Pointer<Rect>> value) {
+  void getRectArray(Pointer<Uint32> valueSize, Pointer<Pointer<Rect>> value) {
     final hr = ptr.ref.vtable
             .elementAt(44)
             .cast<

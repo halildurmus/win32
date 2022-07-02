@@ -37,7 +37,7 @@ class IPhoneNumberInfoFactory extends IInspectable {
       IPhoneNumberInfoFactory.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberInfoFactory));
 
-  Pointer<COMObject> Create(String number) {
+  Pointer<COMObject> create(String number) {
     final retValuePtr = calloc<COMObject>();
     final numberHstring = convertToHString(number);
     final hr = ptr.ref.vtable

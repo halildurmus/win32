@@ -36,7 +36,7 @@ class IApplicationActivationManager extends IUnknown {
       IApplicationActivationManager(
           interface.toInterface(IID_IApplicationActivationManager));
 
-  int ActivateApplication(Pointer<Utf16> appUserModelId,
+  int activateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -59,7 +59,7 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, arguments, options, processId);
 
-  int ActivateForFile(
+  int activateForFile(
           Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray,
           Pointer<Utf16> verb,
@@ -85,7 +85,7 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, verb, processId);
 
-  int ActivateForProtocol(Pointer<Utf16> appUserModelId,
+  int activateForProtocol(Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
       ptr.ref.vtable
               .elementAt(5)

@@ -38,7 +38,7 @@ class ICalendarFactory2 extends IInspectable {
       ICalendarFactory2.fromRawPointer(
           interface.toInterface(IID_ICalendarFactory2));
 
-  Pointer<COMObject> CreateCalendarWithTimeZone(Pointer<COMObject> languages,
+  Pointer<COMObject> createCalendarWithTimeZone(Pointer<COMObject> languages,
       String calendar, String clock, String timeZoneId) {
     final retValuePtr = calloc<COMObject>();
 

@@ -22,80 +22,80 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final uri = IUri(ptr);
-  test('Can instantiate IUri.GetPropertyBSTR', () {
-    expect(uri.GetPropertyBSTR, isA<Function>());
+  test('Can instantiate IUri.getPropertyBSTR', () {
+    expect(uri.getPropertyBSTR, isA<Function>());
   });
-  test('Can instantiate IUri.GetPropertyLength', () {
-    expect(uri.GetPropertyLength, isA<Function>());
+  test('Can instantiate IUri.getPropertyLength', () {
+    expect(uri.getPropertyLength, isA<Function>());
   });
-  test('Can instantiate IUri.GetPropertyDWORD', () {
-    expect(uri.GetPropertyDWORD, isA<Function>());
+  test('Can instantiate IUri.getPropertyDWORD', () {
+    expect(uri.getPropertyDWORD, isA<Function>());
   });
-  test('Can instantiate IUri.HasProperty', () {
-    expect(uri.HasProperty, isA<Function>());
+  test('Can instantiate IUri.hasProperty', () {
+    expect(uri.hasProperty, isA<Function>());
   });
-  test('Can instantiate IUri.GetAbsoluteUri', () {
-    expect(uri.GetAbsoluteUri, isA<Function>());
+  test('Can instantiate IUri.getAbsoluteUri', () {
+    expect(uri.getAbsoluteUri, isA<Function>());
   });
-  test('Can instantiate IUri.GetAuthority', () {
-    expect(uri.GetAuthority, isA<Function>());
+  test('Can instantiate IUri.getAuthority', () {
+    expect(uri.getAuthority, isA<Function>());
   });
-  test('Can instantiate IUri.GetDisplayUri', () {
-    expect(uri.GetDisplayUri, isA<Function>());
+  test('Can instantiate IUri.getDisplayUri', () {
+    expect(uri.getDisplayUri, isA<Function>());
   });
-  test('Can instantiate IUri.GetDomain', () {
-    expect(uri.GetDomain, isA<Function>());
+  test('Can instantiate IUri.getDomain', () {
+    expect(uri.getDomain, isA<Function>());
   });
-  test('Can instantiate IUri.GetExtension', () {
-    expect(uri.GetExtension, isA<Function>());
+  test('Can instantiate IUri.getExtension', () {
+    expect(uri.getExtension, isA<Function>());
   });
-  test('Can instantiate IUri.GetFragment', () {
-    expect(uri.GetFragment, isA<Function>());
+  test('Can instantiate IUri.getFragment', () {
+    expect(uri.getFragment, isA<Function>());
   });
-  test('Can instantiate IUri.GetHost', () {
-    expect(uri.GetHost, isA<Function>());
+  test('Can instantiate IUri.getHost', () {
+    expect(uri.getHost, isA<Function>());
   });
-  test('Can instantiate IUri.GetPassword', () {
-    expect(uri.GetPassword, isA<Function>());
+  test('Can instantiate IUri.getPassword', () {
+    expect(uri.getPassword, isA<Function>());
   });
-  test('Can instantiate IUri.GetPath', () {
-    expect(uri.GetPath, isA<Function>());
+  test('Can instantiate IUri.getPath', () {
+    expect(uri.getPath, isA<Function>());
   });
-  test('Can instantiate IUri.GetPathAndQuery', () {
-    expect(uri.GetPathAndQuery, isA<Function>());
+  test('Can instantiate IUri.getPathAndQuery', () {
+    expect(uri.getPathAndQuery, isA<Function>());
   });
-  test('Can instantiate IUri.GetQuery', () {
-    expect(uri.GetQuery, isA<Function>());
+  test('Can instantiate IUri.getQuery', () {
+    expect(uri.getQuery, isA<Function>());
   });
-  test('Can instantiate IUri.GetRawUri', () {
-    expect(uri.GetRawUri, isA<Function>());
+  test('Can instantiate IUri.getRawUri', () {
+    expect(uri.getRawUri, isA<Function>());
   });
-  test('Can instantiate IUri.GetSchemeName', () {
-    expect(uri.GetSchemeName, isA<Function>());
+  test('Can instantiate IUri.getSchemeName', () {
+    expect(uri.getSchemeName, isA<Function>());
   });
-  test('Can instantiate IUri.GetUserInfo', () {
-    expect(uri.GetUserInfo, isA<Function>());
+  test('Can instantiate IUri.getUserInfo', () {
+    expect(uri.getUserInfo, isA<Function>());
   });
-  test('Can instantiate IUri.GetUserName', () {
-    expect(uri.GetUserName, isA<Function>());
+  test('Can instantiate IUri.getUserName', () {
+    expect(uri.getUserName, isA<Function>());
   });
-  test('Can instantiate IUri.GetHostType', () {
-    expect(uri.GetHostType, isA<Function>());
+  test('Can instantiate IUri.getHostType', () {
+    expect(uri.getHostType, isA<Function>());
   });
-  test('Can instantiate IUri.GetPort', () {
-    expect(uri.GetPort, isA<Function>());
+  test('Can instantiate IUri.getPort', () {
+    expect(uri.getPort, isA<Function>());
   });
-  test('Can instantiate IUri.GetScheme', () {
-    expect(uri.GetScheme, isA<Function>());
+  test('Can instantiate IUri.getScheme', () {
+    expect(uri.getScheme, isA<Function>());
   });
-  test('Can instantiate IUri.GetZone', () {
-    expect(uri.GetZone, isA<Function>());
+  test('Can instantiate IUri.getZone', () {
+    expect(uri.getZone, isA<Function>());
   });
-  test('Can instantiate IUri.GetProperties', () {
-    expect(uri.GetProperties, isA<Function>());
+  test('Can instantiate IUri.getProperties', () {
+    expect(uri.getProperties, isA<Function>());
   });
-  test('Can instantiate IUri.IsEqual', () {
-    expect(uri.IsEqual, isA<Function>());
+  test('Can instantiate IUri.isEqual', () {
+    expect(uri.isEqual, isA<Function>());
   });
   free(ptr);
 }

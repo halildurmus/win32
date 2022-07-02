@@ -57,7 +57,7 @@ class Dispatcher {
     final dispid = calloc<Int32>();
 
     try {
-      final hr = disp.GetIDsOfNames(
+      final hr = disp.getIDsOfNames(
           IID_NULL, ptName.cast(), 1, LOCALE_USER_DEFAULT, dispid);
       if (FAILED(hr)) {
         throw WindowsException(hr);
@@ -75,7 +75,7 @@ class Dispatcher {
     final count = calloc<Uint32>();
 
     try {
-      final hr = disp.GetTypeInfoCount(count);
+      final hr = disp.getTypeInfoCount(count);
       if (SUCCEEDED(hr)) {
         return count.value;
       } else {
@@ -95,7 +95,7 @@ class Dispatcher {
     }
 
     try {
-      final hr = disp.Invoke(dispid, IID_NULL, LOCALE_SYSTEM_DEFAULT,
+      final hr = disp.invoke(dispid, IID_NULL, LOCALE_SYSTEM_DEFAULT,
           DISPATCH_METHOD, args, nullptr, nullptr, nullptr);
       if (FAILED(hr)) {
         throw WindowsException(hr);

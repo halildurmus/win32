@@ -22,35 +22,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemobjectaccess = IWbemObjectAccess(ptr);
-  test('Can instantiate IWbemObjectAccess.GetPropertyHandle', () {
-    expect(wbemobjectaccess.GetPropertyHandle, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.getPropertyHandle', () {
+    expect(wbemobjectaccess.getPropertyHandle, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.WritePropertyValue', () {
-    expect(wbemobjectaccess.WritePropertyValue, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.writePropertyValue', () {
+    expect(wbemobjectaccess.writePropertyValue, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.ReadPropertyValue', () {
-    expect(wbemobjectaccess.ReadPropertyValue, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.readPropertyValue', () {
+    expect(wbemobjectaccess.readPropertyValue, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.ReadDWORD', () {
-    expect(wbemobjectaccess.ReadDWORD, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.readDWORD', () {
+    expect(wbemobjectaccess.readDWORD, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.WriteDWORD', () {
-    expect(wbemobjectaccess.WriteDWORD, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.writeDWORD', () {
+    expect(wbemobjectaccess.writeDWORD, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.ReadQWORD', () {
-    expect(wbemobjectaccess.ReadQWORD, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.readQWORD', () {
+    expect(wbemobjectaccess.readQWORD, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.WriteQWORD', () {
-    expect(wbemobjectaccess.WriteQWORD, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.writeQWORD', () {
+    expect(wbemobjectaccess.writeQWORD, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.GetPropertyInfoByHandle', () {
-    expect(wbemobjectaccess.GetPropertyInfoByHandle, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.getPropertyInfoByHandle', () {
+    expect(wbemobjectaccess.getPropertyInfoByHandle, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.Lock', () {
-    expect(wbemobjectaccess.Lock, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.lock', () {
+    expect(wbemobjectaccess.lock, isA<Function>());
   });
-  test('Can instantiate IWbemObjectAccess.Unlock', () {
-    expect(wbemobjectaccess.Unlock, isA<Function>());
+  test('Can instantiate IWbemObjectAccess.unlock', () {
+    expect(wbemobjectaccess.unlock, isA<Function>());
   });
   free(ptr);
 }

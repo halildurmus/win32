@@ -34,7 +34,7 @@ class IMMDeviceEnumerator extends IUnknown {
   factory IMMDeviceEnumerator.from(IUnknown interface) =>
       IMMDeviceEnumerator(interface.toInterface(IID_IMMDeviceEnumerator));
 
-  int EnumAudioEndpoints(int dataFlow, int dwStateMask,
+  int enumAudioEndpoints(int dataFlow, int dwStateMask,
           Pointer<Pointer<COMObject>> ppDevices) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -52,7 +52,7 @@ class IMMDeviceEnumerator extends IUnknown {
                       Pointer<Pointer<COMObject>> ppDevices)>()(
           ptr.ref.lpVtbl, dataFlow, dwStateMask, ppDevices);
 
-  int GetDefaultAudioEndpoint(
+  int getDefaultAudioEndpoint(
           int dataFlow, int role, Pointer<Pointer<COMObject>> ppEndpoint) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -67,7 +67,7 @@ class IMMDeviceEnumerator extends IUnknown {
                       Pointer<Pointer<COMObject>> ppEndpoint)>()(
           ptr.ref.lpVtbl, dataFlow, role, ppEndpoint);
 
-  int GetDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
+  int getDevice(Pointer<Utf16> pwstrId, Pointer<Pointer<COMObject>> ppDevice) =>
       ptr.ref.vtable
               .elementAt(5)
               .cast<
@@ -81,7 +81,7 @@ class IMMDeviceEnumerator extends IUnknown {
                       Pointer<Pointer<COMObject>> ppDevice)>()(
           ptr.ref.lpVtbl, pwstrId, ppDevice);
 
-  int RegisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
+  int registerEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
           .ref.vtable
           .elementAt(6)
           .cast<
@@ -92,7 +92,7 @@ class IMMDeviceEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pClient)>()(
       ptr.ref.lpVtbl, pClient);
 
-  int UnregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
+  int unregisterEndpointNotificationCallback(Pointer<COMObject> pClient) => ptr
           .ref.vtable
           .elementAt(7)
           .cast<

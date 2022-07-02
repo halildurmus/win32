@@ -23,217 +23,217 @@ void main() {
             'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
         picker = IFileOpenPicker.fromRawPointer(object);
         allocator = Arena();
-        vector = picker.FileTypeFilter;
+        vector = picker.fileTypeFilter;
       });
 
-      test('GetAt fails if the vector is empty', () {
-        expect(() => vector.GetAt(0), throwsException);
+      test('getAt fails if the vector is empty', () {
+        expect(() => vector.getAt(0), throwsException);
       });
 
-      test('GetAt throws exception if the index is out of bounds', () {
+      test('getAt throws exception if the index is out of bounds', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(() => vector.GetAt(2), throwsException);
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(() => vector.getAt(2), throwsException);
       });
 
-      test('GetAt returns elements', () {
+      test('getAt returns elements', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(vector.GetAt(0), equals('.jpg'));
-        expect(vector.GetAt(1), equals('.jpeg'));
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(vector.getAt(0), equals('.jpg'));
+        expect(vector.getAt(1), equals('.jpeg'));
       });
 
-      test('GetView', () {
+      test('getView', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        final list = vector.GetView;
+          ..append('.jpg')
+          ..append('.jpeg');
+        final list = vector.getView;
         expect(list.length, equals(2));
       });
 
-      test('IndexOf finds element', () {
+      test('indexOf finds element', () {
         final pIndex = allocator<Uint32>();
 
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        final containsElement = vector.IndexOf('.jpeg', pIndex);
+          ..append('.jpg')
+          ..append('.jpeg');
+        final containsElement = vector.indexOf('.jpeg', pIndex);
         expect(containsElement, true);
         expect(pIndex.value, equals(1));
       });
 
-      test('IndexOf returns 0 if the element is not found', () {
+      test('indexOf returns 0 if the element is not found', () {
         final pIndex = allocator<Uint32>();
 
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        final containsElement = vector.IndexOf('.png', pIndex);
+          ..append('.jpg')
+          ..append('.jpeg');
+        final containsElement = vector.indexOf('.png', pIndex);
         expect(containsElement, false);
         expect(pIndex.value, equals(0));
       });
 
-      test('SetAt throws exception if the vector is empty', () {
-        expect(() => vector.SetAt(0, '.jpg'), throwsException);
+      test('setAt throws exception if the vector is empty', () {
+        expect(() => vector.setAt(0, '.jpg'), throwsException);
       });
 
-      test('SetAt throws exception if the index is out of bounds', () {
+      test('setAt throws exception if the index is out of bounds', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(() => vector.SetAt(3, '.png'), throwsException);
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(() => vector.setAt(3, '.png'), throwsException);
       });
 
-      test('SetAt', () {
+      test('setAt', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(vector.Size, equals(2));
-        vector.SetAt(0, '.png');
-        expect(vector.Size, equals(2));
-        vector.SetAt(1, '.gif');
-        expect(vector.Size, equals(2));
-        expect(vector.GetAt(0), equals('.png'));
-        expect(vector.GetAt(1), equals('.gif'));
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(vector.size, equals(2));
+        vector.setAt(0, '.png');
+        expect(vector.size, equals(2));
+        vector.setAt(1, '.gif');
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals('.png'));
+        expect(vector.getAt(1), equals('.gif'));
       });
 
-      test('InsertAt throws exception if the index is out of bounds', () {
+      test('insertAt throws exception if the index is out of bounds', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(() => vector.InsertAt(3, '.png'), throwsException);
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(() => vector.insertAt(3, '.png'), throwsException);
       });
 
-      test('InsertAt', () {
+      test('insertAt', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(vector.Size, equals(2));
-        vector.InsertAt(0, '.png');
-        expect(vector.Size, equals(3));
-        vector.InsertAt(2, '.gif');
-        expect(vector.Size, equals(4));
-        expect(vector.GetAt(0), equals('.png'));
-        expect(vector.GetAt(1), equals('.jpg'));
-        expect(vector.GetAt(2), equals('.gif'));
-        expect(vector.GetAt(3), equals('.jpeg'));
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(vector.size, equals(2));
+        vector.insertAt(0, '.png');
+        expect(vector.size, equals(3));
+        vector.insertAt(2, '.gif');
+        expect(vector.size, equals(4));
+        expect(vector.getAt(0), equals('.png'));
+        expect(vector.getAt(1), equals('.jpg'));
+        expect(vector.getAt(2), equals('.gif'));
+        expect(vector.getAt(3), equals('.jpeg'));
       });
 
-      test('RemoveAt throws exception if the vector is empty', () {
-        expect(() => vector.RemoveAt(0), throwsException);
+      test('removeAt throws exception if the vector is empty', () {
+        expect(() => vector.removeAt(0), throwsException);
       });
 
-      test('RemoveAt throws exception if the index is out of bounds', () {
+      test('removeAt throws exception if the index is out of bounds', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(() => vector.RemoveAt(3), throwsException);
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(() => vector.removeAt(3), throwsException);
       });
 
-      test('RemoveAt', () {
+      test('removeAt', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg')
-          ..Append('.png')
-          ..Append('.gif');
-        expect(vector.Size, equals(4));
-        vector.RemoveAt(2);
-        expect(vector.Size, equals(3));
-        expect(vector.GetAt(2), equals('.gif'));
-        vector.RemoveAt(0);
-        expect(vector.Size, equals(2));
-        expect(vector.GetAt(0), equals('.jpeg'));
-        vector.RemoveAt(1);
-        expect(vector.Size, equals(1));
-        expect(vector.GetAt(0), equals('.jpeg'));
-        vector.RemoveAt(0);
-        expect(vector.Size, equals(0));
+          ..append('.jpg')
+          ..append('.jpeg')
+          ..append('.png')
+          ..append('.gif');
+        expect(vector.size, equals(4));
+        vector.removeAt(2);
+        expect(vector.size, equals(3));
+        expect(vector.getAt(2), equals('.gif'));
+        vector.removeAt(0);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals('.jpeg'));
+        vector.removeAt(1);
+        expect(vector.size, equals(1));
+        expect(vector.getAt(0), equals('.jpeg'));
+        vector.removeAt(0);
+        expect(vector.size, equals(0));
       });
 
-      test('Append', () {
-        expect(vector.Size, equals(0));
-        vector.Append('.jpg');
-        expect(vector.Size, equals(1));
-        vector.Append('.jpeg');
-        expect(vector.Size, equals(2));
+      test('append', () {
+        expect(vector.size, equals(0));
+        vector.append('.jpg');
+        expect(vector.size, equals(1));
+        vector.append('.jpeg');
+        expect(vector.size, equals(2));
       });
 
-      test('RemoveAtEnd throws exception if the vector is empty', () {
-        expect(() => vector.RemoveAtEnd(), throwsException);
+      test('removeAtEnd throws exception if the vector is empty', () {
+        expect(() => vector.removeAtEnd(), throwsException);
       });
 
-      test('RemoveAtEnd', () {
+      test('removeAtEnd', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(vector.Size, equals(2));
-        vector.RemoveAtEnd();
-        expect(vector.Size, equals(1));
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(vector.size, equals(2));
+        vector.removeAtEnd();
+        expect(vector.size, equals(1));
       });
 
-      test('Clear', () {
+      test('clear', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg');
-        expect(vector.Size, equals(2));
-        vector.Clear();
-        expect(vector.Size, equals(0));
+          ..append('.jpg')
+          ..append('.jpeg');
+        expect(vector.size, equals(2));
+        vector.clear();
+        expect(vector.size, equals(0));
       });
 
-      test('GetMany returns 0 if the vector is empty', () {
+      test('getMany returns 0 if the vector is empty', () {
         final pHString = allocator<HSTRING>(1);
 
-        expect(vector.GetMany(0, pHString), equals(0));
+        expect(vector.getMany(0, pHString), equals(0));
       });
 
-      test('GetMany returns elements starting from index 0', () {
+      test('getMany returns elements starting from index 0', () {
         final pHString = allocator<HSTRING>(3);
 
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg')
-          ..Append('.png');
-        expect(vector.GetMany(0, pHString), equals(3));
-        final list = pHString.toList(length: vector.Size);
+          ..append('.jpg')
+          ..append('.jpeg')
+          ..append('.png');
+        expect(vector.getMany(0, pHString), equals(3));
+        final list = pHString.toList(length: vector.size);
         expect(list.length, equals(3));
         expect(list.elementAt(0), equals('.jpg'));
         expect(list.elementAt(1), equals('.jpeg'));
         expect(list.elementAt(2), equals('.png'));
       });
 
-      test('GetMany returns elements starting from index 1', () {
+      test('getMany returns elements starting from index 1', () {
         final pHString = allocator<HSTRING>(2);
 
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg')
-          ..Append('.png');
-        expect(vector.GetMany(1, pHString), equals(2));
+          ..append('.jpg')
+          ..append('.jpeg')
+          ..append('.png');
+        expect(vector.getMany(1, pHString), equals(2));
         final list = pHString.toList(length: 2);
         expect(list.length, equals(2));
         expect(list.elementAt(0), equals('.jpeg'));
         expect(list.elementAt(1), equals('.png'));
       });
 
-      test('ReplaceAll', () {
-        expect(vector.Size, equals(0));
-        vector.ReplaceAll(['.jpg', '.jpeg']);
-        expect(vector.Size, equals(2));
-        expect(vector.GetAt(0), equals('.jpg'));
-        expect(vector.GetAt(1), equals('.jpeg'));
-        vector.ReplaceAll(['.png', '.gif']);
-        expect(vector.Size, equals(2));
-        expect(vector.GetAt(0), equals('.png'));
-        expect(vector.GetAt(1), equals('.gif'));
+      test('replaceAll', () {
+        expect(vector.size, equals(0));
+        vector.replaceAll(['.jpg', '.jpeg']);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals('.jpg'));
+        expect(vector.getAt(1), equals('.jpeg'));
+        vector.replaceAll(['.png', '.gif']);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals('.png'));
+        expect(vector.getAt(1), equals('.gif'));
       });
 
       test('toList', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg')
-          ..Append('.png');
+          ..append('.jpg')
+          ..append('.jpeg')
+          ..append('.png');
         final list = vector.toList();
         expect(list.length, equals(3));
         expect(list.elementAt(0), equals('.jpg'));
@@ -241,19 +241,19 @@ void main() {
         expect(list.elementAt(2), equals('.png'));
       });
 
-      test('First', () {
+      test('first', () {
         vector
-          ..Append('.jpg')
-          ..Append('.jpeg')
-          ..Append('.png');
-        final iterator = vector.First();
-        expect(iterator.HasCurrent, true);
-        expect(iterator.Current, equals('.jpg'));
-        expect(iterator.MoveNext(), true);
-        expect(iterator.Current, equals('.jpeg'));
-        expect(iterator.MoveNext(), true);
-        expect(iterator.Current, equals('.png'));
-        expect(iterator.MoveNext(), false);
+          ..append('.jpg')
+          ..append('.jpeg')
+          ..append('.png');
+        final iterator = vector.first();
+        expect(iterator.hasCurrent, true);
+        expect(iterator.current, equals('.jpg'));
+        expect(iterator.moveNext(), true);
+        expect(iterator.current, equals('.jpeg'));
+        expect(iterator.moveNext(), true);
+        expect(iterator.current, equals('.png'));
+        expect(iterator.moveNext(), false);
       });
 
       tearDown(() {
@@ -301,29 +301,29 @@ void main() {
         vectorView = Languages(calendar.ptr, allocator);
       });
 
-      test('GetAt throws exception if the index is out of bounds', () {
-        expect(() => vectorView.GetAt(20), throwsException);
+      test('getAt throws exception if the index is out of bounds', () {
+        expect(() => vectorView.getAt(20), throwsException);
       });
 
-      test('GetAt returns elements', () {
-        final element = vectorView.GetAt(0);
+      test('getAt returns elements', () {
+        final element = vectorView.getAt(0);
         // Should be something like en-US
         expect(element[2], equals('-'));
         expect(element.length, equals(5));
       });
 
-      test('IndexOf returns 0 if the element is not found', () {
+      test('indexOf returns 0 if the element is not found', () {
         final pIndex = allocator<Uint32>();
-        final containsElement = vectorView.IndexOf('xx-xx', pIndex);
+        final containsElement = vectorView.indexOf('xx-xx', pIndex);
         expect(containsElement, false);
         expect(pIndex.value, equals(0));
       });
 
-      test('GetMany returns elements starting from index 0', () {
-        final pHString = allocator<HSTRING>(vectorView.Size);
+      test('getMany returns elements starting from index 0', () {
+        final pHString = allocator<HSTRING>(vectorView.size);
 
-        expect(vectorView.GetMany(0, pHString), greaterThanOrEqualTo(1));
-        final list = pHString.toList(length: vectorView.Size);
+        expect(vectorView.getMany(0, pHString), greaterThanOrEqualTo(1));
+        final list = pHString.toList(length: vectorView.size);
         expect(list.length, greaterThanOrEqualTo(1));
         // Should be something like en-US
         expect(list.first[2], equals('-'));
@@ -338,16 +338,16 @@ void main() {
         expect(list.first.length, equals(5));
       });
 
-      test('First', () {
+      test('first', () {
         final list = vectorView.toList();
-        final iterator = vectorView.First();
+        final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.HasCurrent, true);
+          expect(iterator.hasCurrent, true);
           // Should be something like en-US
-          expect(iterator.Current[2], equals('-'));
+          expect(iterator.current[2], equals('-'));
           // MoveNext() should return true except for the last iteration
-          expect(iterator.MoveNext(), i < list.length - 1);
+          expect(iterator.moveNext(), i < list.length - 1);
         }
       });
 
@@ -403,28 +403,28 @@ void main() {
         vectorView = GetHostNames(object, allocator);
       });
 
-      test('GetAt throws exception if the index is out of bounds', () {
-        expect(() => vectorView.GetAt(20), throwsException);
+      test('getAt throws exception if the index is out of bounds', () {
+        expect(() => vectorView.getAt(20), throwsException);
       });
 
-      test('GetAt returns elements', () {
-        final element = vectorView.GetAt(0);
-        expect(element.DisplayName, isNotEmpty);
+      test('getAt returns elements', () {
+        final element = vectorView.getAt(0);
+        expect(element.displayName, isNotEmpty);
       });
 
-      test('IndexOf finds element', () {
+      test('indexOf finds element', () {
         final pIndex = allocator<Uint32>();
-        final hostName = vectorView.GetAt(0);
-        final containsElement = vectorView.IndexOf(hostName, pIndex);
+        final hostName = vectorView.getAt(0);
+        final containsElement = vectorView.indexOf(hostName, pIndex);
         expect(containsElement, true);
         expect(pIndex.value, greaterThanOrEqualTo(0));
       });
 
       test('GetMany returns elements starting from index 0', () {
-        final pCOMObject = allocator<COMObject>(vectorView.Size);
-        expect(vectorView.GetMany(0, pCOMObject), greaterThanOrEqualTo(1));
+        final pCOMObject = allocator<COMObject>(vectorView.size);
+        expect(vectorView.getMany(0, pCOMObject), greaterThanOrEqualTo(1));
         final list = pCOMObject.toList<IHostName>(IHostName.fromRawPointer,
-            length: vectorView.Size);
+            length: vectorView.size);
         expect(list.length, greaterThanOrEqualTo(1));
       });
 
@@ -435,13 +435,13 @@ void main() {
 
       test('First', () {
         final list = vectorView.toList();
-        final iterator = vectorView.First();
+        final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.HasCurrent, true);
-          expect(iterator.Current.RawName, equals(list[i].RawName));
+          expect(iterator.hasCurrent, true);
+          expect(iterator.current.rawName, equals(list[i].rawName));
           // MoveNext() should return true except for the last iteration
-          expect(iterator.MoveNext(), i < list.length - 1);
+          expect(iterator.moveNext(), i < list.length - 1);
         }
       });
 

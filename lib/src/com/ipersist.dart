@@ -34,7 +34,7 @@ class IPersist extends IUnknown {
   factory IPersist.from(IUnknown interface) =>
       IPersist(interface.toInterface(IID_IPersist));
 
-  int GetClassID(Pointer<GUID> pClassID) => ptr.ref.vtable
+  int getClassID(Pointer<GUID> pClassID) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

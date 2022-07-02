@@ -35,7 +35,7 @@ class IUserDataPaths extends IInspectable {
   factory IUserDataPaths.from(IInspectable interface) =>
       IUserDataPaths.fromRawPointer(interface.toInterface(IID_IUserDataPaths));
 
-  String get CameraRoll {
+  String get cameraRoll {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -59,7 +59,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Cookies {
+  String get cookies {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -83,7 +83,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Desktop {
+  String get desktop {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -107,7 +107,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Documents {
+  String get documents {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -131,7 +131,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Downloads {
+  String get downloads {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -155,7 +155,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Favorites {
+  String get favorites {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -179,7 +179,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get History {
+  String get history {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -203,7 +203,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get InternetCache {
+  String get internetCache {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -227,7 +227,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get LocalAppData {
+  String get localAppData {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -251,7 +251,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get LocalAppDataLow {
+  String get localAppDataLow {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -275,7 +275,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Music {
+  String get music {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -299,7 +299,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Pictures {
+  String get pictures {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -323,7 +323,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Profile {
+  String get profile {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -347,7 +347,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Recent {
+  String get recent {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -371,7 +371,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get RoamingAppData {
+  String get roamingAppData {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -395,7 +395,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get SavedPictures {
+  String get savedPictures {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -419,7 +419,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Screenshots {
+  String get screenshots {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -443,7 +443,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Templates {
+  String get templates {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -467,7 +467,7 @@ class IUserDataPaths extends IInspectable {
     }
   }
 
-  String get Videos {
+  String get videos {
     final retValuePtr = calloc<HSTRING>();
 
     try {

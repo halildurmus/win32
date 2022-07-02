@@ -62,7 +62,7 @@ void main() {
   // current user and obtain pointer pSvc
   // to make IWbemServices calls.
 
-  hr = pLoc.ConnectServer(
+  hr = pLoc.connectServer(
       TEXT('ROOT\\CIMV2'), // WMI namespace
       nullptr, // User name
       nullptr, // User password
@@ -77,7 +77,7 @@ void main() {
     final exception = WindowsException(hr);
     print(exception.toString());
 
-    pLoc.Release();
+    pLoc.release();
     CoUninitialize();
     throw exception; // Program has failed.
   }
@@ -102,8 +102,8 @@ void main() {
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
     print(exception.toString());
-    pSvc.Release();
-    pLoc.Release();
+    pSvc.release();
+    pLoc.release();
     CoUninitialize();
     throw exception; // Program has failed.
   }
@@ -114,7 +114,7 @@ void main() {
   IEnumWbemClassObject enumerator;
 
   // For example, query for all the running processes
-  hr = pSvc.ExecQuery(
+  hr = pSvc.execQuery(
       TEXT('WQL'),
       TEXT('SELECT * FROM Win32_Process'),
       WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
@@ -126,8 +126,8 @@ void main() {
     final exception = WindowsException(hr);
     print(exception.toString());
 
-    pSvc.Release();
-    pLoc.Release();
+    pSvc.release();
+    pLoc.release();
     CoUninitialize();
 
     throw exception;
@@ -140,7 +140,7 @@ void main() {
     while (enumerator.ptr.address > 0) {
       final pClsObj = calloc<IntPtr>();
 
-      hr = enumerator.Next(
+      hr = enumerator.next(
           WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
 
       // Break out of the while loop if we've run out of processes to inspect
@@ -151,7 +151,7 @@ void main() {
       final clsObj = IWbemClassObject(pClsObj.cast());
 
       final vtProp = calloc<VARIANT>();
-      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
+      hr = clsObj.get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
         print('Process: ${vtProp.ref.bstrVal.toDartString()}');
       }
@@ -159,14 +159,14 @@ void main() {
       VariantClear(vtProp);
       free(vtProp);
 
-      clsObj.Release();
+      clsObj.release();
     }
     print('$idx processes found.');
   }
 
-  pSvc.Release();
-  pLoc.Release();
-  enumerator.Release();
+  pSvc.release();
+  pLoc.release();
+  enumerator.release();
 
   CoUninitialize();
 }

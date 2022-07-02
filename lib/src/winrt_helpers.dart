@@ -108,7 +108,7 @@ Pointer<COMObject> CreateObject(String className, String iid) {
 
     // Now use IInspectable to navigate to the relevant interface
     final inspectable = IInspectable(inspectablePtr);
-    hr = inspectable.QueryInterface(riid, classPtr);
+    hr = inspectable.queryInterface(riid, classPtr);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
@@ -204,7 +204,7 @@ extension IInspectableExtension on IInspectable {
     final pIIDs = calloc<Pointer<GUID>>();
 
     try {
-      final hr = GetIids(pIIDCount, pIIDs);
+      final hr = getIids(pIIDCount, pIIDs);
       if (SUCCEEDED(hr)) {
         return [
           for (var i = 0; i < pIIDCount.value; i++) pIIDs.value[i].toString()
@@ -223,7 +223,7 @@ extension IInspectableExtension on IInspectable {
     final hstr = calloc<HSTRING>();
 
     try {
-      final hr = GetRuntimeClassName(hstr);
+      final hr = getRuntimeClassName(hstr);
       if (SUCCEEDED(hr)) {
         return convertFromHString(hstr.value);
       } else {
@@ -239,7 +239,7 @@ extension IInspectableExtension on IInspectable {
     final pTrustLevel = calloc<Int32>();
 
     try {
-      final hr = GetTrustLevel(pTrustLevel);
+      final hr = getTrustLevel(pTrustLevel);
       if (SUCCEEDED(hr)) {
         switch (pTrustLevel.value) {
           case 0:

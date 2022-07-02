@@ -44,8 +44,8 @@ void main() {
 
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
-  final userData = UserDataPaths.fromRawPointer(UserDataPaths.GetDefault());
-  final roamingAppData = userData.RoamingAppData;
+  final userData = UserDataPaths.fromRawPointer(UserDataPaths.getDefault());
+  final roamingAppData = userData.roamingAppData;
   print('RoamingAppData: $roamingAppData');
 
   winrtUninitialize();

@@ -51,13 +51,13 @@ COM allows objects to implement multiple interfaces, but it does not let you
 merely cast an object to a different interface. Instead, returned pointers are
 to a specific interface. However, every COM interface in the Dart Win32 package
 derives from `IUnknown`, so as in other language implementations of COM, you may
-call `QueryInterface` on any object to retrieve a pointer to a different
+call `queryInterface` on any object to retrieve a pointer to a different
 supported interface.
 
 More information on COM interfaces may be found in the [Microsoft
 documentation](https://docs.microsoft.com/en-us/windows/win32/learnwin32/asking-an-object-for-an-interface).
 
-COM interfaces supply a method that wraps `QueryInterface`. If you
+COM interfaces supply a method that wraps `queryInterface`. If you
 have an existing COM object, you can call it as follows:
 
 ```dart
@@ -79,7 +79,7 @@ return value to a variable and test it for success or failure. You can use the
 `SUCCEEDED()` or `FAILED()` top-level functions to do this, for example:
 
 ```dart
-final hr = fileOpenDialog.Show(NULL);
+final hr = fileOpenDialog.show(NULL);
 if (SUCCEEDED(hr)) {
   // Do something with the returned dialog box values
 }
@@ -90,7 +90,7 @@ Win32 error code is converted to an `HRESULT`, as in the case where a user
 cancels a common dialog box:
 
 ```dart
-final hr = fileOpenDialog.Show(NULL);
+final hr = fileOpenDialog.show(NULL);
 if (FAILED(hr) && hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
   // User clicked cancel
 }
@@ -98,10 +98,10 @@ if (FAILED(hr) && hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
 
 ### Releasing COM objects
 
-When you have finished using a COM interface, you should release it with the `Release` method:
+When you have finished using a COM interface, you should release it with the `release` method:
 
 ```dart
-fileOpenDialog.Release(); // Release the interface
+fileOpenDialog.release(); // Release the interface
 free(fileOpenDialog.ptr); // Release the pointer to the interface
 ```
 

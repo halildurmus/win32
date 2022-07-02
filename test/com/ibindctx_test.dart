@@ -22,35 +22,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final bindctx = IBindCtx(ptr);
-  test('Can instantiate IBindCtx.RegisterObjectBound', () {
-    expect(bindctx.RegisterObjectBound, isA<Function>());
+  test('Can instantiate IBindCtx.registerObjectBound', () {
+    expect(bindctx.registerObjectBound, isA<Function>());
   });
-  test('Can instantiate IBindCtx.RevokeObjectBound', () {
-    expect(bindctx.RevokeObjectBound, isA<Function>());
+  test('Can instantiate IBindCtx.revokeObjectBound', () {
+    expect(bindctx.revokeObjectBound, isA<Function>());
   });
-  test('Can instantiate IBindCtx.ReleaseBoundObjects', () {
-    expect(bindctx.ReleaseBoundObjects, isA<Function>());
+  test('Can instantiate IBindCtx.releaseBoundObjects', () {
+    expect(bindctx.releaseBoundObjects, isA<Function>());
   });
-  test('Can instantiate IBindCtx.SetBindOptions', () {
-    expect(bindctx.SetBindOptions, isA<Function>());
+  test('Can instantiate IBindCtx.setBindOptions', () {
+    expect(bindctx.setBindOptions, isA<Function>());
   });
-  test('Can instantiate IBindCtx.GetBindOptions', () {
-    expect(bindctx.GetBindOptions, isA<Function>());
+  test('Can instantiate IBindCtx.getBindOptions', () {
+    expect(bindctx.getBindOptions, isA<Function>());
   });
-  test('Can instantiate IBindCtx.GetRunningObjectTable', () {
-    expect(bindctx.GetRunningObjectTable, isA<Function>());
+  test('Can instantiate IBindCtx.getRunningObjectTable', () {
+    expect(bindctx.getRunningObjectTable, isA<Function>());
   });
-  test('Can instantiate IBindCtx.RegisterObjectParam', () {
-    expect(bindctx.RegisterObjectParam, isA<Function>());
+  test('Can instantiate IBindCtx.registerObjectParam', () {
+    expect(bindctx.registerObjectParam, isA<Function>());
   });
-  test('Can instantiate IBindCtx.GetObjectParam', () {
-    expect(bindctx.GetObjectParam, isA<Function>());
+  test('Can instantiate IBindCtx.getObjectParam', () {
+    expect(bindctx.getObjectParam, isA<Function>());
   });
-  test('Can instantiate IBindCtx.EnumObjectParam', () {
-    expect(bindctx.EnumObjectParam, isA<Function>());
+  test('Can instantiate IBindCtx.enumObjectParam', () {
+    expect(bindctx.enumObjectParam, isA<Function>());
   });
-  test('Can instantiate IBindCtx.RevokeObjectParam', () {
-    expect(bindctx.RevokeObjectParam, isA<Function>());
+  test('Can instantiate IBindCtx.revokeObjectParam', () {
+    expect(bindctx.revokeObjectParam, isA<Function>());
   });
   free(ptr);
 }

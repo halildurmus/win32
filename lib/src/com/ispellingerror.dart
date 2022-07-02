@@ -34,7 +34,7 @@ class ISpellingError extends IUnknown {
   factory ISpellingError.from(IUnknown interface) =>
       ISpellingError(interface.toInterface(IID_ISpellingError));
 
-  int get StartIndex {
+  int get startIndex {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -57,7 +57,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  int get Length {
+  int get length {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -80,7 +80,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  int get CorrectiveAction {
+  int get correctiveAction {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -103,7 +103,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  Pointer<Utf16> get Replacement {
+  Pointer<Utf16> get replacement {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {

@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final networkconnection = INetworkConnection(ptr);
-  test('Can instantiate INetworkConnection.GetNetwork', () {
-    expect(networkconnection.GetNetwork, isA<Function>());
+  test('Can instantiate INetworkConnection.getNetwork', () {
+    expect(networkconnection.getNetwork, isA<Function>());
   });
-  test('Can instantiate INetworkConnection.GetConnectivity', () {
-    expect(networkconnection.GetConnectivity, isA<Function>());
+  test('Can instantiate INetworkConnection.getConnectivity', () {
+    expect(networkconnection.getConnectivity, isA<Function>());
   });
-  test('Can instantiate INetworkConnection.GetConnectionId', () {
-    expect(networkconnection.GetConnectionId, isA<Function>());
+  test('Can instantiate INetworkConnection.getConnectionId', () {
+    expect(networkconnection.getConnectionId, isA<Function>());
   });
-  test('Can instantiate INetworkConnection.GetAdapterId', () {
-    expect(networkconnection.GetAdapterId, isA<Function>());
+  test('Can instantiate INetworkConnection.getAdapterId', () {
+    expect(networkconnection.getAdapterId, isA<Function>());
   });
-  test('Can instantiate INetworkConnection.GetDomainType', () {
-    expect(networkconnection.GetDomainType, isA<Function>());
+  test('Can instantiate INetworkConnection.getDomainType', () {
+    expect(networkconnection.getDomainType, isA<Function>());
   });
   free(ptr);
 }

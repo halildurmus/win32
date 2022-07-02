@@ -35,7 +35,7 @@ class IWbemConfigureRefresher extends IUnknown {
       IWbemConfigureRefresher(
           interface.toInterface(IID_IWbemConfigureRefresher));
 
-  int AddObjectByPath(
+  int addObjectByPath(
           Pointer<COMObject> pNamespace,
           Pointer<Utf16> wszPath,
           int lFlags,
@@ -67,7 +67,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           wszPath, lFlags, pContext, ppRefreshable, plId);
 
-  int AddObjectByTemplate(
+  int addObjectByTemplate(
           Pointer<COMObject> pNamespace,
           Pointer<COMObject> pTemplate,
           int lFlags,
@@ -99,7 +99,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           pTemplate, lFlags, pContext, ppRefreshable, plId);
 
-  int AddRefresher(
+  int addRefresher(
           Pointer<COMObject> pRefresher, int lFlags, Pointer<Int32> plId) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -114,7 +114,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       int lFlags, Pointer<Int32> plId)>()(
           ptr.ref.lpVtbl, pRefresher, lFlags, plId);
 
-  int Remove(int lId, int lFlags) => ptr.ref.vtable
+  int remove(int lId, int lFlags) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -124,7 +124,7 @@ class IWbemConfigureRefresher extends IUnknown {
           .asFunction<int Function(Pointer, int lId, int lFlags)>()(
       ptr.ref.lpVtbl, lId, lFlags);
 
-  int AddEnum(
+  int addEnum(
           Pointer<COMObject> pNamespace,
           Pointer<Utf16> wszClassName,
           int lFlags,

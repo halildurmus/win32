@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxfilesenumerator = IAppxFilesEnumerator(ptr);
-  test('Can instantiate IAppxFilesEnumerator.GetCurrent', () {
-    expect(appxfilesenumerator.GetCurrent, isA<Function>());
+  test('Can instantiate IAppxFilesEnumerator.getCurrent', () {
+    expect(appxfilesenumerator.getCurrent, isA<Function>());
   });
-  test('Can instantiate IAppxFilesEnumerator.GetHasCurrent', () {
-    expect(appxfilesenumerator.GetHasCurrent, isA<Function>());
+  test('Can instantiate IAppxFilesEnumerator.getHasCurrent', () {
+    expect(appxfilesenumerator.getHasCurrent, isA<Function>());
   });
-  test('Can instantiate IAppxFilesEnumerator.MoveNext', () {
-    expect(appxfilesenumerator.MoveNext, isA<Function>());
+  test('Can instantiate IAppxFilesEnumerator.moveNext', () {
+    expect(appxfilesenumerator.moveNext, isA<Function>());
   });
   free(ptr);
 }

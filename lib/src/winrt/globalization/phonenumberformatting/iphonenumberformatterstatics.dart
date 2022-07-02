@@ -38,7 +38,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
       IPhoneNumberFormatterStatics.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberFormatterStatics));
 
-  void TryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
+  void tryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
     final regionCodeHstring = convertToHString(regionCode);
 
     final hr = ptr.ref.vtable
@@ -59,7 +59,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     WindowsDeleteString(regionCodeHstring);
   }
 
-  int GetCountryCodeForRegion(String regionCode) {
+  int getCountryCodeForRegion(String regionCode) {
     final retValuePtr = calloc<Int32>();
     final regionCodeHstring = convertToHString(regionCode);
 
@@ -86,7 +86,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     }
   }
 
-  String GetNationalDirectDialingPrefixForRegion(
+  String getNationalDirectDialingPrefixForRegion(
       String regionCode, bool stripNonDigit) {
     final retValuePtr = calloc<HSTRING>();
     final regionCodeHstring = convertToHString(regionCode);
@@ -117,7 +117,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
     }
   }
 
-  String WrapWithLeftToRightMarkers(String number) {
+  String wrapWithLeftToRightMarkers(String number) {
     final retValuePtr = calloc<HSTRING>();
     final numberHstring = convertToHString(number);
 

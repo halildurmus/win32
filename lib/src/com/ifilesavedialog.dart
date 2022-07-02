@@ -35,7 +35,7 @@ class IFileSaveDialog extends IFileDialog {
   factory IFileSaveDialog.from(IUnknown interface) =>
       IFileSaveDialog(interface.toInterface(IID_IFileSaveDialog));
 
-  int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.vtable
+  int setSaveAsItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -45,7 +45,7 @@ class IFileSaveDialog extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
 
-  int SetProperties(Pointer<COMObject> pStore) => ptr.ref.vtable
+  int setProperties(Pointer<COMObject> pStore) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<
@@ -55,7 +55,7 @@ class IFileSaveDialog extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<COMObject> pStore)>()(
       ptr.ref.lpVtbl, pStore);
 
-  int SetCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
+  int setCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
       ptr.ref.vtable
           .elementAt(29)
           .cast<
@@ -68,7 +68,7 @@ class IFileSaveDialog extends IFileDialog {
               int Function(Pointer, Pointer<COMObject> pList,
                   int fAppendDefault)>()(ptr.ref.lpVtbl, pList, fAppendDefault);
 
-  int GetProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.vtable
+  int getProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.vtable
           .elementAt(30)
           .cast<
               Pointer<
@@ -80,7 +80,7 @@ class IFileSaveDialog extends IFileDialog {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppStore)>()(
       ptr.ref.lpVtbl, ppStore);
 
-  int ApplyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
+  int applyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
           int hwnd, Pointer<COMObject> pSink) =>
       ptr.ref.vtable
               .elementAt(31)

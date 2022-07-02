@@ -178,11 +178,13 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
       final projection = WinRTInterfaceProjection(interface);
       for (final method in projection.methodProjections) {
-        buffer.writeln('\n@override');
-
         // e.g. `int get Second` or `void AddHours(int hours)`
         final declaration = method.shortDeclaration;
-        buffer.writeln('$declaration => $fieldIdentifier.${method.shortForm};');
+        final overrideAnnotation =
+            declaration.contains('@override') ? '\n' : '\n@override';
+        buffer
+          ..writeln(overrideAnnotation)
+          ..writeln('$declaration => $fieldIdentifier.${method.shortForm};');
       }
     }
     return buffer.toString();

@@ -37,7 +37,7 @@ class ICalendar extends IInspectable {
   factory ICalendar.from(IInspectable interface) =>
       ICalendar.fromRawPointer(interface.toInterface(IID_ICalendar));
 
-  Pointer<COMObject> Clone() {
+  Pointer<COMObject> clone() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -55,7 +55,7 @@ class ICalendar extends IInspectable {
     return retValuePtr;
   }
 
-  void SetToMin() {
+  void setToMin() {
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -65,7 +65,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void SetToMax() {
+  void setToMax() {
     final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -75,7 +75,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  List<String> get Languages {
+  List<String> get languages {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -97,7 +97,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String get NumeralSystem {
+  String get numeralSystem {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -121,7 +121,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set NumeralSystem(String value) {
+  set numeralSystem(String value) {
     final hstr = convertToHString(value);
 
     try {
@@ -137,7 +137,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String GetCalendarSystem() {
+  String getCalendarSystem() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -161,7 +161,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  void ChangeCalendarSystem(String value) {
+  void changeCalendarSystem(String value) {
     final valueHstring = convertToHString(value);
     final hr = ptr.ref.vtable
         .elementAt(13)
@@ -176,7 +176,7 @@ class ICalendar extends IInspectable {
     WindowsDeleteString(valueHstring);
   }
 
-  String GetClock() {
+  String getClock() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -200,7 +200,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  void ChangeClock(String value) {
+  void changeClock(String value) {
     final valueHstring = convertToHString(value);
     final hr = ptr.ref.vtable
         .elementAt(15)
@@ -215,7 +215,7 @@ class ICalendar extends IInspectable {
     WindowsDeleteString(valueHstring);
   }
 
-  DateTime GetDateTime() {
+  DateTime getDateTime() {
     final retValuePtr = calloc<Uint64>();
 
     try {
@@ -238,7 +238,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  void SetDateTime(DateTime value) {
+  void setDateTime(DateTime value) {
     final valueDateTime =
         value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
     final hr = ptr.ref.vtable
@@ -252,7 +252,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void SetToNow() {
+  void setToNow() {
     final hr = ptr.ref.vtable
         .elementAt(18)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -262,7 +262,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get FirstEra {
+  int get firstEra {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -285,7 +285,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastEra {
+  int get lastEra {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -308,7 +308,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfEras {
+  int get numberOfEras {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -331,7 +331,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Era {
+  int get era {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -354,7 +354,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Era(int value) {
+  set era(int value) {
     final hr = ptr.ref.vtable
         .elementAt(23)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -364,7 +364,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddEras(int eras) {
+  void addEras(int eras) {
     final hr = ptr.ref.vtable
         .elementAt(24)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32 eras)>>>()
@@ -374,7 +374,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String EraAsFullString() {
+  String eraAsFullString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -398,7 +398,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String EraAsString(int idealLength) {
+  String eraAsString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -424,7 +424,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get FirstYearInThisEra {
+  int get firstYearInThisEra {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -447,7 +447,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastYearInThisEra {
+  int get lastYearInThisEra {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -470,7 +470,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfYearsInThisEra {
+  int get numberOfYearsInThisEra {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -493,7 +493,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Year {
+  int get year {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -516,7 +516,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Year(int value) {
+  set year(int value) {
     final hr = ptr.ref.vtable
         .elementAt(31)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -526,7 +526,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddYears(int years) {
+  void addYears(int years) {
     final hr = ptr.ref.vtable
         .elementAt(32)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32 years)>>>()
@@ -536,7 +536,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String YearAsString() {
+  String yearAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -560,7 +560,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String YearAsTruncatedString(int remainingDigits) {
+  String yearAsTruncatedString(int remainingDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -587,7 +587,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String YearAsPaddedString(int minDigits) {
+  String yearAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -613,7 +613,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get FirstMonthInThisYear {
+  int get firstMonthInThisYear {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -636,7 +636,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastMonthInThisYear {
+  int get lastMonthInThisYear {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -659,7 +659,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfMonthsInThisYear {
+  int get numberOfMonthsInThisYear {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -682,7 +682,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Month {
+  int get month {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -705,7 +705,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Month(int value) {
+  set month(int value) {
     final hr = ptr.ref.vtable
         .elementAt(40)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -715,7 +715,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddMonths(int months) {
+  void addMonths(int months) {
     final hr = ptr.ref.vtable
         .elementAt(41)
         .cast<
@@ -727,7 +727,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String MonthAsFullString() {
+  String monthAsFullString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -751,7 +751,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MonthAsString(int idealLength) {
+  String monthAsString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -777,7 +777,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MonthAsFullSoloString() {
+  String monthAsFullSoloString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -801,7 +801,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MonthAsSoloString(int idealLength) {
+  String monthAsSoloString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -827,7 +827,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MonthAsNumericString() {
+  String monthAsNumericString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -851,7 +851,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MonthAsPaddedNumericString(int minDigits) {
+  String monthAsPaddedNumericString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -877,7 +877,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  void AddWeeks(int weeks) {
+  void addWeeks(int weeks) {
     final hr = ptr.ref.vtable
         .elementAt(48)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32 weeks)>>>()
@@ -887,7 +887,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get FirstDayInThisMonth {
+  int get firstDayInThisMonth {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -910,7 +910,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastDayInThisMonth {
+  int get lastDayInThisMonth {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -933,7 +933,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfDaysInThisMonth {
+  int get numberOfDaysInThisMonth {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -956,7 +956,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Day {
+  int get day {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -979,7 +979,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Day(int value) {
+  set day(int value) {
     final hr = ptr.ref.vtable
         .elementAt(53)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -989,7 +989,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddDays(int days) {
+  void addDays(int days) {
     final hr = ptr.ref.vtable
         .elementAt(54)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32 days)>>>()
@@ -999,7 +999,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String DayAsString() {
+  String dayAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1023,7 +1023,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String DayAsPaddedString(int minDigits) {
+  String dayAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1049,7 +1049,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get DayOfWeek {
+  int get dayOfWeek {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1072,7 +1072,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String DayOfWeekAsFullString() {
+  String dayOfWeekAsFullString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1096,7 +1096,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String DayOfWeekAsString(int idealLength) {
+  String dayOfWeekAsString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1122,7 +1122,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String DayOfWeekAsFullSoloString() {
+  String dayOfWeekAsFullSoloString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1146,7 +1146,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String DayOfWeekAsSoloString(int idealLength) {
+  String dayOfWeekAsSoloString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1172,7 +1172,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get FirstPeriodInThisDay {
+  int get firstPeriodInThisDay {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1195,7 +1195,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastPeriodInThisDay {
+  int get lastPeriodInThisDay {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1218,7 +1218,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfPeriodsInThisDay {
+  int get numberOfPeriodsInThisDay {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1241,7 +1241,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Period {
+  int get period {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1264,7 +1264,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Period(int value) {
+  set period(int value) {
     final hr = ptr.ref.vtable
         .elementAt(66)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -1274,7 +1274,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddPeriods(int periods) {
+  void addPeriods(int periods) {
     final hr = ptr.ref.vtable
         .elementAt(67)
         .cast<
@@ -1286,7 +1286,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String PeriodAsFullString() {
+  String periodAsFullString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1310,7 +1310,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String PeriodAsString(int idealLength) {
+  String periodAsString(int idealLength) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1336,7 +1336,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get FirstHourInThisPeriod {
+  int get firstHourInThisPeriod {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1359,7 +1359,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastHourInThisPeriod {
+  int get lastHourInThisPeriod {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1382,7 +1382,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfHoursInThisPeriod {
+  int get numberOfHoursInThisPeriod {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1405,7 +1405,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Hour {
+  int get hour {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1428,7 +1428,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Hour(int value) {
+  set hour(int value) {
     final hr = ptr.ref.vtable
         .elementAt(74)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -1438,7 +1438,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddHours(int hours) {
+  void addHours(int hours) {
     final hr = ptr.ref.vtable
         .elementAt(75)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32 hours)>>>()
@@ -1448,7 +1448,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String HourAsString() {
+  String hourAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1472,7 +1472,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String HourAsPaddedString(int minDigits) {
+  String hourAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1498,7 +1498,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Minute {
+  int get minute {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1521,7 +1521,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Minute(int value) {
+  set minute(int value) {
     final hr = ptr.ref.vtable
         .elementAt(79)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -1531,7 +1531,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddMinutes(int minutes) {
+  void addMinutes(int minutes) {
     final hr = ptr.ref.vtable
         .elementAt(80)
         .cast<
@@ -1543,7 +1543,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String MinuteAsString() {
+  String minuteAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1567,7 +1567,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String MinuteAsPaddedString(int minDigits) {
+  String minuteAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1593,7 +1593,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Second {
+  int get second {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1616,7 +1616,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Second(int value) {
+  set second(int value) {
     final hr = ptr.ref.vtable
         .elementAt(84)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -1626,7 +1626,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddSeconds(int seconds) {
+  void addSeconds(int seconds) {
     final hr = ptr.ref.vtable
         .elementAt(85)
         .cast<
@@ -1638,7 +1638,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String SecondAsString() {
+  String secondAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1662,7 +1662,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String SecondAsPaddedString(int minDigits) {
+  String secondAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1688,7 +1688,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get Nanosecond {
+  int get nanosecond {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1711,7 +1711,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  set Nanosecond(int value) {
+  set nanosecond(int value) {
     final hr = ptr.ref.vtable
         .elementAt(89)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
@@ -1721,7 +1721,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void AddNanoseconds(int nanoseconds) {
+  void addNanoseconds(int nanoseconds) {
     final hr = ptr.ref.vtable
         .elementAt(90)
         .cast<
@@ -1735,7 +1735,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  String NanosecondAsString() {
+  String nanosecondAsString() {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1759,7 +1759,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String NanosecondAsPaddedString(int minDigits) {
+  String nanosecondAsPaddedString(int minDigits) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -1785,7 +1785,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int Compare(Pointer<COMObject> other) {
+  int compare(Pointer<COMObject> other) {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1811,7 +1811,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int CompareDateTime(DateTime other) {
+  int compareDateTime(DateTime other) {
     final retValuePtr = calloc<Int32>();
     final otherDateTime =
         other.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
@@ -1837,7 +1837,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  void CopyTo(Pointer<COMObject> other) {
+  void copyTo(Pointer<COMObject> other) {
     final hr = ptr.ref.vtable
             .elementAt(95)
             .cast<
@@ -1851,7 +1851,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get FirstMinuteInThisHour {
+  int get firstMinuteInThisHour {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1874,7 +1874,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastMinuteInThisHour {
+  int get lastMinuteInThisHour {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1897,7 +1897,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfMinutesInThisHour {
+  int get numberOfMinutesInThisHour {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1920,7 +1920,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get FirstSecondInThisMinute {
+  int get firstSecondInThisMinute {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1943,7 +1943,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get LastSecondInThisMinute {
+  int get lastSecondInThisMinute {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1966,7 +1966,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get NumberOfSecondsInThisMinute {
+  int get numberOfSecondsInThisMinute {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1989,7 +1989,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  String get ResolvedLanguage {
+  String get resolvedLanguage {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -2013,7 +2013,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  bool get IsDaylightSavingTime {
+  bool get isDaylightSavingTime {
     final retValuePtr = calloc<Bool>();
 
     try {

@@ -34,7 +34,7 @@ class IClassFactory extends IUnknown {
   factory IClassFactory.from(IUnknown interface) =>
       IClassFactory(interface.toInterface(IID_IClassFactory));
 
-  int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
+  int createInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>
       ptr.ref.vtable
           .elementAt(3)
@@ -52,7 +52,7 @@ class IClassFactory extends IUnknown {
                   Pointer<Pointer>
                       ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
-  int LockServer(int fLock) => ptr.ref.vtable
+  int lockServer(int fLock) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
       .value

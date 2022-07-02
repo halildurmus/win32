@@ -70,19 +70,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Returns the item at the specified index in the vector.
-  T GetAt(int index) {
+  T getAt(int index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _GetAt_String(index) as T;
+        return _getAt_String(index) as T;
       // Handle WinRT types
       default:
-        return _creator!(_GetAt_COMObject(index));
+        return _creator!(_getAt_COMObject(index));
     }
   }
 
-  Pointer<COMObject> _GetAt_COMObject(int index) {
+  Pointer<COMObject> _getAt_COMObject(int index) {
     final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -108,7 +108,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     return retValuePtr;
   }
 
-  String _GetAt_String(int index) {
+  String _getAt_String(int index) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -141,7 +141,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Gets the number of items in the vector.
-  int get Size {
+  int get size {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -171,7 +171,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Returns an immutable view of the vector.
-  List<T> get GetView {
+  List<T> get getView {
     final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -198,19 +198,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Retrieves the index of a specified item in the vector.
-  bool IndexOf(T value, Pointer<Uint32> index) {
+  bool indexOf(T value, Pointer<Uint32> index) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _IndexOf_String(value as String, index);
+        return _indexOf_String(value as String, index);
       // Handle WinRT types
       default:
-        return _IndexOf_COMObject(value, index);
+        return _indexOf_COMObject(value, index);
     }
   }
 
-  bool _IndexOf_COMObject(T value, Pointer<Uint32> index) {
+  bool _indexOf_COMObject(T value, Pointer<Uint32> index) {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -248,7 +248,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
-  bool _IndexOf_String(String value, Pointer<Uint32> index) {
+  bool _indexOf_String(String value, Pointer<Uint32> index) {
     final retValuePtr = calloc<Bool>();
     final hValue = convertToHString(value);
 
@@ -284,19 +284,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Sets the value at the specified index in the vector.
-  void SetAt(int index, T value) {
+  void setAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _SetAt_String(index, value as String);
+        return _setAt_String(index, value as String);
       // Handle WinRT types
       default:
-        return _SetAt_COMObject(index, value);
+        return _setAt_COMObject(index, value);
     }
   }
 
-  void _SetAt_COMObject(int index, T value) {
+  void _setAt_COMObject(int index, T value) {
     final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
@@ -317,7 +317,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void _SetAt_String(int index, String value) {
+  void _setAt_String(int index, String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -350,19 +350,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Inserts an item at a specified index in the vector.
-  void InsertAt(int index, T value) {
+  void insertAt(int index, T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _InsertAt_String(index, value as String);
+        return _insertAt_String(index, value as String);
       // Handle WinRT types
       default:
-        return _InsertAt_COMObject(index, value);
+        return _insertAt_COMObject(index, value);
     }
   }
 
-  void _InsertAt_COMObject(int index, T value) {
+  void _insertAt_COMObject(int index, T value) {
     final hr = ptr.ref.vtable
         .elementAt(11)
         .cast<
@@ -383,7 +383,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void _InsertAt_String(int index, String value) {
+  void _insertAt_String(int index, String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -411,7 +411,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Removes the item at the specified index in the vector.
-  void RemoveAt(int index) {
+  void removeAt(int index) {
     final hr = ptr.ref.vtable
         .elementAt(12)
         .cast<
@@ -431,19 +431,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Appends an item to the end of the vector.
-  void Append(T value) {
+  void append(T value) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _Append_String(value as String);
+        return _append_String(value as String);
       // Handle WinRT types
       default:
-        return _Append_COMObject(value);
+        return _append_COMObject(value);
     }
   }
 
-  void _Append_COMObject(T value) {
+  void _append_COMObject(T value) {
     final hr = ptr.ref.vtable
             .elementAt(13)
             .cast<
@@ -460,7 +460,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  void _Append_String(String value) {
+  void _append_String(String value) {
     final hValue = convertToHString(value);
 
     try {
@@ -483,7 +483,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Removes the last item from the vector.
-  void RemoveAtEnd() {
+  void removeAtEnd() {
     final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -494,7 +494,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Removes all items from the vector.
-  void Clear() {
+  void clear() {
     final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer)>>>()
@@ -505,19 +505,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Retrieves multiple items from the the vector beginning at the given index.
-  int GetMany(int startIndex, Pointer<NativeType> items) {
+  int getMany(int startIndex, Pointer<NativeType> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _GetMany_String(startIndex, items.cast());
+        return _getMany_String(startIndex, items.cast());
       // Handle WinRT types
       default:
-        return _GetMany_COMObject(startIndex, items.cast());
+        return _getMany_COMObject(startIndex, items.cast());
     }
   }
 
-  int _GetMany_COMObject(int startIndex, Pointer<COMObject> items) {
+  int _getMany_COMObject(int startIndex, Pointer<COMObject> items) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -542,7 +542,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
                 Pointer<COMObject>,
                 Pointer<Uint32>,
               )>()(
-          ptr.ref.lpVtbl, startIndex, Size - startIndex, items, retValuePtr);
+          ptr.ref.lpVtbl, startIndex, size - startIndex, items, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -553,7 +553,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
-  int _GetMany_String(int startIndex, Pointer<HSTRING> items) {
+  int _getMany_String(int startIndex, Pointer<HSTRING> items) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -578,7 +578,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
                 Pointer<HSTRING>,
                 Pointer<Uint32>,
               )>()(
-          ptr.ref.lpVtbl, startIndex, Size - startIndex, items, retValuePtr);
+          ptr.ref.lpVtbl, startIndex, size - startIndex, items, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -590,19 +590,19 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Replaces all the items in the vector with the specified items.
-  void ReplaceAll(List<T> items) {
+  void replaceAll(List<T> items) {
     switch (T) {
       // TODO: Need to update this once we add support for types like `int`,
       // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
       case String:
-        return _ReplaceAll_String(items as List<String>);
+        return _replaceAll_String(items as List<String>);
       // Handle WinRT types
       default:
-        return _ReplaceAll_COMObject(items as List<IInspectable>);
+        return _replaceAll_COMObject(items as List<IInspectable>);
     }
   }
 
-  void _ReplaceAll_COMObject(List<IInspectable> items) {
+  void _replaceAll_COMObject(List<IInspectable> items) {
     final pArray = calloc<COMObject>(items.length);
     for (var i = 0; i < items.length; i++) {
       pArray[i] = items.elementAt(i).ptr.ref;
@@ -633,7 +633,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
-  void _ReplaceAll_String(List<String> items) {
+  void _replaceAll_String(List<String> items) {
     final handles = <int>[];
     final pArray = calloc<HSTRING>(items.length);
     for (var i = 0; i < items.length; i++) {
@@ -671,8 +671,8 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
   /// Creates a `List<T>` from the `IVector<T>`.
   List<T> toList() {
-    if (Size == 0) return [];
-    return VectorHelper(_creator, GetMany, Size, allocator: _allocator)
+    if (size == 0) return [];
+    return VectorHelper(_creator, getMany, size, allocator: _allocator)
         .toList();
   }
 
@@ -681,5 +681,5 @@ class IVector<T> extends IInspectable implements IIterable<T> {
       creator: _creator, allocator: _allocator);
 
   @override
-  IIterator<T> First() => _iIterable.First();
+  IIterator<T> first() => _iIterable.first();
 }

@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final supporterrorinfo = ISupportErrorInfo(ptr);
-  test('Can instantiate ISupportErrorInfo.InterfaceSupportsErrorInfo', () {
-    expect(supporterrorinfo.InterfaceSupportsErrorInfo, isA<Function>());
+  test('Can instantiate ISupportErrorInfo.interfaceSupportsErrorInfo', () {
+    expect(supporterrorinfo.interfaceSupportsErrorInfo, isA<Function>());
   });
   free(ptr);
 }
