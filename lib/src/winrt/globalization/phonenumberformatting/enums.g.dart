@@ -14,10 +14,10 @@ import '../../../winrt/foundation/winrt_enum.dart';
 ///
 /// {@category Enum}
 enum PhoneNumberFormat implements WinRTEnum {
-  E164(0),
-  International(1),
-  National(2),
-  Rfc3966(3);
+  e164(0),
+  international(1),
+  national(2),
+  rfc3966(3);
 
   @override
   final int value;
@@ -34,10 +34,10 @@ enum PhoneNumberFormat implements WinRTEnum {
 ///
 /// {@category Enum}
 enum PhoneNumberMatchResult implements WinRTEnum {
-  NoMatch(0),
-  ShortNationalSignificantNumberMatch(1),
-  NationalSignificantNumberMatch(2),
-  ExactMatch(3);
+  noMatch(0),
+  shortNationalSignificantNumberMatch(1),
+  nationalSignificantNumberMatch(2),
+  exactMatch(3);
 
   @override
   final int value;
@@ -54,11 +54,11 @@ enum PhoneNumberMatchResult implements WinRTEnum {
 ///
 /// {@category Enum}
 enum PhoneNumberParseResult implements WinRTEnum {
-  Valid(0),
-  NotANumber(1),
-  InvalidCountryCode(2),
-  TooShort(3),
-  TooLong(4);
+  valid(0),
+  notANumber(1),
+  invalidCountryCode(2),
+  tooShort(3),
+  tooLong(4);
 
   @override
   final int value;
@@ -76,18 +76,18 @@ enum PhoneNumberParseResult implements WinRTEnum {
 ///
 /// {@category Enum}
 enum PredictedPhoneNumberKind implements WinRTEnum {
-  FixedLine(0),
-  Mobile(1),
-  FixedLineOrMobile(2),
-  TollFree(3),
-  PremiumRate(4),
-  SharedCost(5),
-  Voip(6),
-  PersonalNumber(7),
-  Pager(8),
-  UniversalAccountNumber(9),
-  Voicemail(10),
-  Unknown(11);
+  fixedLine(0),
+  mobile(1),
+  fixedLineOrMobile(2),
+  tollFree(3),
+  premiumRate(4),
+  sharedCost(5),
+  voip(6),
+  personalNumber(7),
+  pager(8),
+  universalAccountNumber(9),
+  voicemail(10),
+  unknown(11);
 
   @override
   final int value;

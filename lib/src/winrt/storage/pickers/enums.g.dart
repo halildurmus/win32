@@ -15,16 +15,16 @@ import '../../../winrt/foundation/winrt_enum.dart';
 ///
 /// {@category Enum}
 enum PickerLocationId implements WinRTEnum {
-  DocumentsLibrary(0),
-  ComputerFolder(1),
-  Desktop(2),
-  Downloads(3),
-  HomeGroup(4),
-  MusicLibrary(5),
-  PicturesLibrary(6),
-  VideosLibrary(7),
-  Objects3D(8),
-  Unspecified(9);
+  documentsLibrary(0),
+  computerFolder(1),
+  desktop(2),
+  downloads(3),
+  homeGroup(4),
+  musicLibrary(5),
+  picturesLibrary(6),
+  videosLibrary(7),
+  objects3D(8),
+  unspecified(9);
 
   @override
   final int value;
@@ -41,8 +41,8 @@ enum PickerLocationId implements WinRTEnum {
 ///
 /// {@category Enum}
 enum PickerViewMode implements WinRTEnum {
-  List(0),
-  Thumbnail(1);
+  list(0),
+  thumbnail(1);
 
   @override
   final int value;

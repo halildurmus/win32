@@ -19,21 +19,21 @@ class FileAttributes extends WinRTEnum {
   factory FileAttributes.from(int value) => FileAttributes.values
       .firstWhere((e) => e.value == value, orElse: () => FileAttributes(value));
 
-  static const Normal = FileAttributes(0, name: 'Normal');
-  static const ReadOnly = FileAttributes(1, name: 'ReadOnly');
-  static const Directory = FileAttributes(16, name: 'Directory');
-  static const Archive = FileAttributes(32, name: 'Archive');
-  static const Temporary = FileAttributes(256, name: 'Temporary');
-  static const LocallyIncomplete =
-      FileAttributes(512, name: 'LocallyIncomplete');
+  static const normal = FileAttributes(0, name: 'normal');
+  static const readOnly = FileAttributes(1, name: 'readOnly');
+  static const directory = FileAttributes(16, name: 'directory');
+  static const archive = FileAttributes(32, name: 'archive');
+  static const temporary = FileAttributes(256, name: 'temporary');
+  static const locallyIncomplete =
+      FileAttributes(512, name: 'locallyIncomplete');
 
   static const List<FileAttributes> values = [
-    Normal,
-    ReadOnly,
-    Directory,
-    Archive,
-    Temporary,
-    LocallyIncomplete
+    normal,
+    readOnly,
+    directory,
+    archive,
+    temporary,
+    locallyIncomplete
   ];
 
   FileAttributes operator &(FileAttributes other) =>
@@ -46,11 +46,11 @@ class FileAttributes extends WinRTEnum {
   /// value.
   ///
   /// ```dart
-  /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-  /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
-  /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+  /// final fileAttributes = FileAttributes.readOnly | FileAttributes.archive;
+  /// fileAttributes.hasFlag(FileAttributes.readOnly)); // `true`
+  /// fileAttributes.hasFlag(FileAttributes.temporary)); // `false`
   /// fileAttributes.hasFlag(
-  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
+  ///     FileAttributes.readOnly | FileAttributes.archive)); // `true`
   /// ```
   bool hasFlag(FileAttributes flag) {
     if (value != 0 && flag.value == 0) return false;
@@ -64,9 +64,9 @@ class FileAttributes extends WinRTEnum {
 ///
 /// {@category Enum}
 enum NameCollisionOption implements WinRTEnum {
-  GenerateUniqueName(0),
-  ReplaceExisting(1),
-  FailIfExists(2);
+  generateUniqueName(0),
+  replaceExisting(1),
+  failIfExists(2);
 
   @override
   final int value;
@@ -84,8 +84,8 @@ enum NameCollisionOption implements WinRTEnum {
 ///
 /// {@category Enum}
 enum StorageDeleteOption implements WinRTEnum {
-  Default(0),
-  PermanentDelete(1);
+  default_(0),
+  permanentDelete(1);
 
   @override
   final int value;
@@ -109,11 +109,11 @@ class StorageItemTypes extends WinRTEnum {
       StorageItemTypes.values.firstWhere((e) => e.value == value,
           orElse: () => StorageItemTypes(value));
 
-  static const None = StorageItemTypes(0, name: 'None');
-  static const File = StorageItemTypes(1, name: 'File');
-  static const Folder = StorageItemTypes(2, name: 'Folder');
+  static const none = StorageItemTypes(0, name: 'none');
+  static const file = StorageItemTypes(1, name: 'file');
+  static const folder = StorageItemTypes(2, name: 'folder');
 
-  static const List<StorageItemTypes> values = [None, File, Folder];
+  static const List<StorageItemTypes> values = [none, file, folder];
 
   StorageItemTypes operator &(StorageItemTypes other) =>
       StorageItemTypes(value & other.value);
@@ -125,11 +125,11 @@ class StorageItemTypes extends WinRTEnum {
   /// value.
   ///
   /// ```dart
-  /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-  /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
-  /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+  /// final fileAttributes = FileAttributes.readOnly | FileAttributes.archive;
+  /// fileAttributes.hasFlag(FileAttributes.readOnly)); // `true`
+  /// fileAttributes.hasFlag(FileAttributes.temporary)); // `false`
   /// fileAttributes.hasFlag(
-  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
+  ///     FileAttributes.readOnly | FileAttributes.archive)); // `true`
   /// ```
   bool hasFlag(StorageItemTypes flag) {
     if (value != 0 && flag.value == 0) return false;

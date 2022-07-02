@@ -33,8 +33,9 @@ class EnumProjection {
     final buffer = StringBuffer();
 
     for (final field in _fields) {
+      final fieldName = safeIdentifierForString(field.name.toCamelCase());
       buffer
-        ..write('${field.name}(${field.value})')
+        ..write('$fieldName(${field.value})')
         ..write(field != _fields.last ? ',\n' : ';');
     }
 
@@ -92,15 +93,16 @@ class FlagsEnumProjection extends EnumProjection {
     final buffer = StringBuffer();
 
     for (final field in _fields) {
+      final fieldName = safeIdentifierForString(field.name.toCamelCase());
       buffer.writeln(
-          "static const ${field.name} = $_projectedName(${field.value}, name: '${field.name}');");
+          "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');");
     }
 
     return buffer.toString();
   }
 
   String get _values =>
-      'static const List<$enumName> values = [${_fields.map((e) => e.name).join(',')}];';
+      'static const List<$enumName> values = [${_fields.map((f) => safeIdentifierForString(f.name.toCamelCase())).join(',')}];';
 
   String get _andOperator => '''
     $_projectedName operator &($_projectedName other) =>
@@ -117,11 +119,11 @@ class FlagsEnumProjection extends EnumProjection {
     /// value.
     ///
     /// ```dart
-    /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-    /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
-    /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+    /// final fileAttributes = FileAttributes.readOnly | FileAttributes.archive;
+    /// fileAttributes.hasFlag(FileAttributes.readOnly)); // `true`
+    /// fileAttributes.hasFlag(FileAttributes.temporary)); // `false`
     /// fileAttributes.hasFlag(
-    ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
+    ///     FileAttributes.readOnly | FileAttributes.archive)); // `true`
     /// ```
     bool hasFlag($_projectedName flag) {
       if (value != 0 && flag.value == 0) return false;

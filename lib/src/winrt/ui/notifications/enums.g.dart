@@ -15,8 +15,8 @@ import '../../../winrt/foundation/winrt_enum.dart';
 ///
 /// {@category Enum}
 enum NotificationMirroring implements WinRTEnum {
-  Allowed(0),
-  Disabled(1);
+  allowed(0),
+  disabled(1);
 
   @override
   final int value;
@@ -33,8 +33,8 @@ enum NotificationMirroring implements WinRTEnum {
 ///
 /// {@category Enum}
 enum ToastNotificationPriority implements WinRTEnum {
-  Default(0),
-  High(1);
+  default_(0),
+  high(1);
 
   @override
   final int value;
@@ -51,14 +51,14 @@ enum ToastNotificationPriority implements WinRTEnum {
 ///
 /// {@category Enum}
 enum ToastTemplateType implements WinRTEnum {
-  ToastImageAndText01(0),
-  ToastImageAndText02(1),
-  ToastImageAndText03(2),
-  ToastImageAndText04(3),
-  ToastText01(4),
-  ToastText02(5),
-  ToastText03(6),
-  ToastText04(7);
+  toastImageAndText01(0),
+  toastImageAndText02(1),
+  toastImageAndText03(2),
+  toastImageAndText04(3),
+  toastText01(4),
+  toastText02(5),
+  toastText03(6),
+  toastText04(7);
 
   @override
   final int value;

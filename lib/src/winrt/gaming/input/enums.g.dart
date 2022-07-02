@@ -14,75 +14,75 @@ import '../../../winrt/foundation/winrt_enum.dart';
 ///
 /// {@category Enum}
 enum GameControllerButtonLabel implements WinRTEnum {
-  None(0),
-  XboxBack(1),
-  XboxStart(2),
-  XboxMenu(3),
-  XboxView(4),
-  XboxUp(5),
-  XboxDown(6),
-  XboxLeft(7),
-  XboxRight(8),
-  XboxA(9),
-  XboxB(10),
-  XboxX(11),
-  XboxY(12),
-  XboxLeftBumper(13),
-  XboxLeftTrigger(14),
-  XboxLeftStickButton(15),
-  XboxRightBumper(16),
-  XboxRightTrigger(17),
-  XboxRightStickButton(18),
-  XboxPaddle1(19),
-  XboxPaddle2(20),
-  XboxPaddle3(21),
-  XboxPaddle4(22),
-  Mode(23),
-  Select(24),
-  Menu(25),
-  View(26),
-  Back(27),
-  Start(28),
-  Options(29),
-  Share(30),
-  Up(31),
-  Down(32),
-  Left(33),
-  Right(34),
-  LetterA(35),
-  LetterB(36),
-  LetterC(37),
-  LetterL(38),
-  LetterR(39),
-  LetterX(40),
-  LetterY(41),
-  LetterZ(42),
-  Cross(43),
-  Circle(44),
-  Square(45),
-  Triangle(46),
-  LeftBumper(47),
-  LeftTrigger(48),
-  LeftStickButton(49),
-  Left1(50),
-  Left2(51),
-  Left3(52),
-  RightBumper(53),
-  RightTrigger(54),
-  RightStickButton(55),
-  Right1(56),
-  Right2(57),
-  Right3(58),
-  Paddle1(59),
-  Paddle2(60),
-  Paddle3(61),
-  Paddle4(62),
-  Plus(63),
-  Minus(64),
-  DownLeftArrow(65),
-  DialLeft(66),
-  DialRight(67),
-  Suspension(68);
+  none(0),
+  xboxBack(1),
+  xboxStart(2),
+  xboxMenu(3),
+  xboxView(4),
+  xboxUp(5),
+  xboxDown(6),
+  xboxLeft(7),
+  xboxRight(8),
+  xboxA(9),
+  xboxB(10),
+  xboxX(11),
+  xboxY(12),
+  xboxLeftBumper(13),
+  xboxLeftTrigger(14),
+  xboxLeftStickButton(15),
+  xboxRightBumper(16),
+  xboxRightTrigger(17),
+  xboxRightStickButton(18),
+  xboxPaddle1(19),
+  xboxPaddle2(20),
+  xboxPaddle3(21),
+  xboxPaddle4(22),
+  mode(23),
+  select(24),
+  menu(25),
+  view(26),
+  back(27),
+  start(28),
+  options(29),
+  share(30),
+  up(31),
+  down(32),
+  left(33),
+  right(34),
+  letterA(35),
+  letterB(36),
+  letterC(37),
+  letterL(38),
+  letterR(39),
+  letterX(40),
+  letterY(41),
+  letterZ(42),
+  cross(43),
+  circle(44),
+  square(45),
+  triangle(46),
+  leftBumper(47),
+  leftTrigger(48),
+  leftStickButton(49),
+  left1(50),
+  left2(51),
+  left3(52),
+  rightBumper(53),
+  rightTrigger(54),
+  rightStickButton(55),
+  right1(56),
+  right2(57),
+  right3(58),
+  paddle1(59),
+  paddle2(60),
+  paddle3(61),
+  paddle4(62),
+  plus(63),
+  minus(64),
+  downLeftArrow(65),
+  dialLeft(66),
+  dialRight(67),
+  suspension(68);
 
   @override
   final int value;
@@ -104,46 +104,46 @@ class GamepadButtons extends WinRTEnum {
   factory GamepadButtons.from(int value) => GamepadButtons.values
       .firstWhere((e) => e.value == value, orElse: () => GamepadButtons(value));
 
-  static const None = GamepadButtons(0, name: 'None');
-  static const Menu = GamepadButtons(1, name: 'Menu');
-  static const View = GamepadButtons(2, name: 'View');
+  static const none = GamepadButtons(0, name: 'none');
+  static const menu = GamepadButtons(1, name: 'menu');
+  static const view = GamepadButtons(2, name: 'view');
   static const A = GamepadButtons(4, name: 'A');
   static const B = GamepadButtons(8, name: 'B');
   static const X = GamepadButtons(16, name: 'X');
   static const Y = GamepadButtons(32, name: 'Y');
-  static const DPadUp = GamepadButtons(64, name: 'DPadUp');
-  static const DPadDown = GamepadButtons(128, name: 'DPadDown');
-  static const DPadLeft = GamepadButtons(256, name: 'DPadLeft');
-  static const DPadRight = GamepadButtons(512, name: 'DPadRight');
-  static const LeftShoulder = GamepadButtons(1024, name: 'LeftShoulder');
-  static const RightShoulder = GamepadButtons(2048, name: 'RightShoulder');
-  static const LeftThumbstick = GamepadButtons(4096, name: 'LeftThumbstick');
-  static const RightThumbstick = GamepadButtons(8192, name: 'RightThumbstick');
-  static const Paddle1 = GamepadButtons(16384, name: 'Paddle1');
-  static const Paddle2 = GamepadButtons(32768, name: 'Paddle2');
-  static const Paddle3 = GamepadButtons(65536, name: 'Paddle3');
-  static const Paddle4 = GamepadButtons(131072, name: 'Paddle4');
+  static const dPadUp = GamepadButtons(64, name: 'dPadUp');
+  static const dPadDown = GamepadButtons(128, name: 'dPadDown');
+  static const dPadLeft = GamepadButtons(256, name: 'dPadLeft');
+  static const dPadRight = GamepadButtons(512, name: 'dPadRight');
+  static const leftShoulder = GamepadButtons(1024, name: 'leftShoulder');
+  static const rightShoulder = GamepadButtons(2048, name: 'rightShoulder');
+  static const leftThumbstick = GamepadButtons(4096, name: 'leftThumbstick');
+  static const rightThumbstick = GamepadButtons(8192, name: 'rightThumbstick');
+  static const paddle1 = GamepadButtons(16384, name: 'paddle1');
+  static const paddle2 = GamepadButtons(32768, name: 'paddle2');
+  static const paddle3 = GamepadButtons(65536, name: 'paddle3');
+  static const paddle4 = GamepadButtons(131072, name: 'paddle4');
 
   static const List<GamepadButtons> values = [
-    None,
-    Menu,
-    View,
+    none,
+    menu,
+    view,
     A,
     B,
     X,
     Y,
-    DPadUp,
-    DPadDown,
-    DPadLeft,
-    DPadRight,
-    LeftShoulder,
-    RightShoulder,
-    LeftThumbstick,
-    RightThumbstick,
-    Paddle1,
-    Paddle2,
-    Paddle3,
-    Paddle4
+    dPadUp,
+    dPadDown,
+    dPadLeft,
+    dPadRight,
+    leftShoulder,
+    rightShoulder,
+    leftThumbstick,
+    rightThumbstick,
+    paddle1,
+    paddle2,
+    paddle3,
+    paddle4
   ];
 
   GamepadButtons operator &(GamepadButtons other) =>
@@ -156,11 +156,11 @@ class GamepadButtons extends WinRTEnum {
   /// value.
   ///
   /// ```dart
-  /// final fileAttributes = FileAttributes.ReadOnly | FileAttributes.Archive;
-  /// fileAttributes.hasFlag(FileAttributes.ReadOnly)); // `true`
-  /// fileAttributes.hasFlag(FileAttributes.Temporary)); // `false`
+  /// final fileAttributes = FileAttributes.readOnly | FileAttributes.archive;
+  /// fileAttributes.hasFlag(FileAttributes.readOnly)); // `true`
+  /// fileAttributes.hasFlag(FileAttributes.temporary)); // `false`
   /// fileAttributes.hasFlag(
-  ///     FileAttributes.ReadOnly | FileAttributes.Archive)); // `true`
+  ///     FileAttributes.readOnly | FileAttributes.archive)); // `true`
   /// ```
   bool hasFlag(GamepadButtons flag) {
     if (value != 0 && flag.value == 0) return false;
