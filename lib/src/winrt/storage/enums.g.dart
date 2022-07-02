@@ -16,10 +16,8 @@ import '../../winrt/foundation/winrt_enum.dart';
 class FileAttributes extends WinRTEnum {
   const FileAttributes(super.value, {super.name});
 
-  factory FileAttributes.from(int value) =>
-      FileAttributes.values.firstWhere((e) => e.value == value,
-          orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
+  factory FileAttributes.from(int value) => FileAttributes.values
+      .firstWhere((e) => e.value == value, orElse: () => FileAttributes(value));
 
   static const Normal = FileAttributes(0, name: 'Normal');
   static const ReadOnly = FileAttributes(1, name: 'ReadOnly');
@@ -109,8 +107,7 @@ class StorageItemTypes extends WinRTEnum {
 
   factory StorageItemTypes.from(int value) =>
       StorageItemTypes.values.firstWhere((e) => e.value == value,
-          orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
+          orElse: () => StorageItemTypes(value));
 
   static const None = StorageItemTypes(0, name: 'None');
   static const File = StorageItemTypes(1, name: 'File');

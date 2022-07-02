@@ -81,6 +81,13 @@ class FlagsEnumProjection extends EnumProjection {
   String get _constructor => 'const $enumName(super.value, {super.name});';
 
   @override
+  String get _factoryConstructor => '''
+    factory $enumName.from(int value) =>
+        $enumName.values.firstWhere((e) => e.value == value,
+            orElse: () => $enumName(value));
+  ''';
+
+  @override
   String get identifiers {
     final buffer = StringBuffer();
 

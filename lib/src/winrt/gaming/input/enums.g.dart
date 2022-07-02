@@ -101,10 +101,8 @@ enum GameControllerButtonLabel implements WinRTEnum {
 class GamepadButtons extends WinRTEnum {
   const GamepadButtons(super.value, {super.name});
 
-  factory GamepadButtons.from(int value) =>
-      GamepadButtons.values.firstWhere((e) => e.value == value,
-          orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
+  factory GamepadButtons.from(int value) => GamepadButtons.values
+      .firstWhere((e) => e.value == value, orElse: () => GamepadButtons(value));
 
   static const None = GamepadButtons(0, name: 'None');
   static const Menu = GamepadButtons(1, name: 'Menu');
