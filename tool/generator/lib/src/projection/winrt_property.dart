@@ -8,8 +8,8 @@ abstract class WinRTPropertyProjection extends WinRTMethodProjection {
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName =>
       method.name.startsWith('get__') || method.name.startsWith('put__')
-          ? safeIdentifierForString(method.name.substring(5).toCamelCase())
-          : safeIdentifierForString(method.name.substring(4).toCamelCase());
+          ? safeIdentifierForString(method.name.substring(5)).toCamelCase()
+          : safeIdentifierForString(method.name.substring(4)).toCamelCase();
 
   // WinRT properties always return an HRESULT
   @override
