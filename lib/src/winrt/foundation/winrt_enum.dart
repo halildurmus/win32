@@ -1,4 +1,4 @@
-/// The base class that all WinRT Enumerations extend.
+/// The base class that all WinRT Enumerations extend or implement.
 class WinRTEnum {
   final String? _name;
 
