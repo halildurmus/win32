@@ -33,7 +33,9 @@ class EnumProjection {
     final buffer = StringBuffer();
 
     for (final field in _fields) {
-      final fieldName = safeIdentifierForString(field.name.toCamelCase());
+      final fieldName = safeIdentifierForString(field.name.length == 1
+          ? field.name.toLowerCase()
+          : field.name.toCamelCase());
       buffer
         ..write('$fieldName(${field.value})')
         ..write(field != _fields.last ? ',\n' : ';');
@@ -93,7 +95,9 @@ class FlagsEnumProjection extends EnumProjection {
     final buffer = StringBuffer();
 
     for (final field in _fields) {
-      final fieldName = safeIdentifierForString(field.name.toCamelCase());
+      final fieldName = safeIdentifierForString(field.name.length == 1
+          ? field.name.toLowerCase()
+          : field.name.toCamelCase());
       buffer.writeln(
           "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');");
     }
@@ -101,8 +105,13 @@ class FlagsEnumProjection extends EnumProjection {
     return buffer.toString();
   }
 
-  String get _values =>
-      'static const List<$enumName> values = [${_fields.map((f) => safeIdentifierForString(f.name.toCamelCase())).join(',')}];';
+  String get _values {
+    final fields = _fields
+        .map((f) => safeIdentifierForString(
+            f.name.length == 1 ? f.name.toLowerCase() : f.name.toCamelCase()))
+        .join(',');
+    return 'static const List<$enumName> values = [$fields];';
+  }
 
   String get _andOperator => '''
     $_projectedName operator &($_projectedName other) =>

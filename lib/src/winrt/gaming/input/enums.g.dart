@@ -107,10 +107,10 @@ class GamepadButtons extends WinRTEnum {
   static const none = GamepadButtons(0, name: 'none');
   static const menu = GamepadButtons(1, name: 'menu');
   static const view = GamepadButtons(2, name: 'view');
-  static const A = GamepadButtons(4, name: 'A');
-  static const B = GamepadButtons(8, name: 'B');
-  static const X = GamepadButtons(16, name: 'X');
-  static const Y = GamepadButtons(32, name: 'Y');
+  static const a = GamepadButtons(4, name: 'a');
+  static const b = GamepadButtons(8, name: 'b');
+  static const x = GamepadButtons(16, name: 'x');
+  static const y = GamepadButtons(32, name: 'y');
   static const dPadUp = GamepadButtons(64, name: 'dPadUp');
   static const dPadDown = GamepadButtons(128, name: 'dPadDown');
   static const dPadLeft = GamepadButtons(256, name: 'dPadLeft');
@@ -128,10 +128,10 @@ class GamepadButtons extends WinRTEnum {
     none,
     menu,
     view,
-    A,
-    B,
-    X,
-    Y,
+    a,
+    b,
+    x,
+    y,
     dPadUp,
     dPadDown,
     dPadLeft,
