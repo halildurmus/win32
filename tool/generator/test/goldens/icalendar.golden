@@ -23,6 +23,7 @@ import '../../extensions/hstring_array.dart';
 
 import '../../winrt/globalization/calendar.dart';
 import '../../winrt/foundation/collections/ivectorview.dart';
+import '../../winrt/globalization/enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
@@ -1049,7 +1050,7 @@ class ICalendar extends IInspectable {
     }
   }
 
-  int get dayOfWeek {
+  DayOfWeek get dayOfWeek {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -1065,8 +1066,7 @@ class ICalendar extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return DayOfWeek.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
