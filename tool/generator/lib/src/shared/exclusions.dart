@@ -20,12 +20,6 @@ const excludedWin32Structs = <String>{
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V3',
   'Windows.Win32.Media.Audio.DirectMusic.DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA',
 
-  // Can be removed when https://github.com/microsoft/win32metadata/issues/954
-  // is fixed.
-  'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
-  'Windows.Win32.Media.DeviceManager._VIDEOINFOHEADER',
-  'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
-
   // Can be removed when https://github.com/microsoft/win32metadata/issues/955
   // is fixed.
   'Windows.Win32.Devices.Fax.IStiDeviceW',
