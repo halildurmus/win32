@@ -21,6 +21,7 @@ import '../../winrt_helpers.dart';
 
 import '../../extensions/hstring_array.dart';
 
+import '../../winrt/foundation/enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
@@ -58,7 +59,7 @@ class IAsyncInfo extends IInspectable {
     }
   }
 
-  int get status {
+  AsyncStatus get status {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -74,8 +75,7 @@ class IAsyncInfo extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return AsyncStatus.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

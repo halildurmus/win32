@@ -213,7 +213,7 @@ void main() {
     });
 
     test('Calendar.dayOfWeek getter', () {
-      expect(calendar.dayOfWeek, inInclusiveRange(0, 6));
+      expect(calendar.dayOfWeek.value, inInclusiveRange(0, 6));
     });
 
     test('Calendar.firstDayInThisMonth getter', () {
@@ -353,7 +353,7 @@ void main() {
 
       // WinRT day of week goes [0..6] for [Sun..Sat]
       calendar.addDays(-calendar.day + 1);
-      final winrtDay = calendar.dayOfWeek;
+      final winrtDay = calendar.dayOfWeek.value;
 
       expect(winrtDay, equals(dartDay));
     });

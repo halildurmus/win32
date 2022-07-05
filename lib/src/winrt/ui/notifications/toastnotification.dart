@@ -31,6 +31,7 @@ import '../../../winrt/data/xml/dom/xmldocument.dart';
 import '../../../winrt/foundation/ireference.dart';
 import '../../../winrt/ui/notifications/toastdismissedeventargs.dart';
 import '../../../winrt/ui/notifications/toastfailedeventargs.dart';
+import '../../../winrt/ui/notifications/enums.g.dart';
 import '../../../winrt/ui/notifications/notificationdata.dart';
 import '../../../com/iinspectable.dart';
 
@@ -120,10 +121,11 @@ class ToastNotification extends IInspectable
   late final _iToastNotification3 = IToastNotification3.from(this);
 
   @override
-  int get notificationMirroring => _iToastNotification3.notificationMirroring;
+  NotificationMirroring get notificationMirroring =>
+      _iToastNotification3.notificationMirroring;
 
   @override
-  set notificationMirroring(int value) =>
+  set notificationMirroring(NotificationMirroring value) =>
       _iToastNotification3.notificationMirroring = value;
 
   @override
@@ -141,10 +143,11 @@ class ToastNotification extends IInspectable
   set data(Pointer<COMObject> value) => _iToastNotification4.data = value;
 
   @override
-  int get priority => _iToastNotification4.priority;
+  ToastNotificationPriority get priority => _iToastNotification4.priority;
 
   @override
-  set priority(int value) => _iToastNotification4.priority = value;
+  set priority(ToastNotificationPriority value) =>
+      _iToastNotification4.priority = value;
   // IToastNotification6 methods
   late final _iToastNotification6 = IToastNotification6.from(this);
 

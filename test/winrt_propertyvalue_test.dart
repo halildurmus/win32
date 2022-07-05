@@ -15,7 +15,7 @@ void main() {
 
     test('UInt8', () {
       final pv = IPropertyValue.fromRawPointer(PropertyValue.createUInt8(30));
-      expect(pv.type, equals(1));
+      expect(pv.type, equals(PropertyType.uInt8));
       expect(pv.getUInt8(), equals(30));
     });
 
@@ -26,7 +26,7 @@ void main() {
       }
       final pv = IPropertyValue.fromRawPointer(
           PropertyValue.createUInt8Array(5, array));
-      expect(pv.type, equals(1025));
+      expect(pv.type, equals(PropertyType.uInt8Array));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint8>>();
@@ -43,7 +43,7 @@ void main() {
     test('UInt16', () {
       final pv =
           IPropertyValue.fromRawPointer(PropertyValue.createUInt16(65534));
-      expect(pv.type, equals(3));
+      expect(pv.type, equals(PropertyType.uInt16));
       expect(pv.getUInt16(), equals(65534));
     });
 
@@ -54,7 +54,7 @@ void main() {
       }
       final pv = IPropertyValue.fromRawPointer(
           PropertyValue.createUInt16Array(5, array));
-      expect(pv.type, equals(1027));
+      expect(pv.type, equals(PropertyType.uInt16Array));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint16>>();
@@ -72,7 +72,7 @@ void main() {
       final guid = calloc<GUID>()..ref.setGUID(IID_ICalendar);
       final pv =
           IPropertyValue.fromRawPointer(PropertyValue.createGuid(guid.ref));
-      expect(pv.type, equals(16));
+      expect(pv.type, equals(PropertyType.guid));
       expect(pv.getGuid().toString(), equals(IID_ICalendar));
     }, skip: 'Flaky due to retValuePtr being freed in GetGuid()');
 
@@ -83,7 +83,7 @@ void main() {
       array[2].setGUID(IID_IStorageItem);
       final pv = IPropertyValue.fromRawPointer(
           PropertyValue.createGuidArray(3, array));
-      expect(pv.type, equals(1040));
+      expect(pv.type, equals(PropertyType.guidArray));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<GUID>>();
@@ -101,7 +101,7 @@ void main() {
       array[1] = PhoneNumberFormatter().ptr.ref;
       final pv = IPropertyValue.fromRawPointer(
           PropertyValue.createInspectableArray(2, array));
-      expect(pv.type, equals(1037));
+      expect(pv.type, equals(PropertyType.inspectableArray));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<COMObject>>();

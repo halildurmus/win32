@@ -22,6 +22,7 @@ import '../../../winrt_helpers.dart';
 import '../../../extensions/hstring_array.dart';
 
 import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
+import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -37,7 +38,8 @@ class IPhoneNumberInfoStatics extends IInspectable {
       IPhoneNumberInfoStatics.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberInfoStatics));
 
-  int tryParse(String input, Pointer<COMObject> phoneNumber) {
+  PhoneNumberParseResult tryParse(
+      String input, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);
 
@@ -61,8 +63,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PhoneNumberParseResult.from(retValuePtr.value);
     } finally {
       WindowsDeleteString(inputHstring);
 
@@ -70,7 +71,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
     }
   }
 
-  int tryParseWithRegion(
+  PhoneNumberParseResult tryParseWithRegion(
       String input, String regionCode, Pointer<COMObject> phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);
@@ -101,8 +102,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return PhoneNumberParseResult.from(retValuePtr.value);
     } finally {
       WindowsDeleteString(inputHstring);
       WindowsDeleteString(regionCodeHstring);

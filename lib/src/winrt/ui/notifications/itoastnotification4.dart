@@ -22,6 +22,7 @@ import '../../../winrt_helpers.dart';
 import '../../../extensions/hstring_array.dart';
 
 import '../../../winrt/ui/notifications/notificationdata.dart';
+import '../../../winrt/ui/notifications/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -69,7 +70,7 @@ class IToastNotification4 extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get priority {
+  ToastNotificationPriority get priority {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -85,19 +86,18 @@ class IToastNotification4 extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return ToastNotificationPriority.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }
   }
 
-  set priority(int value) {
+  set priority(ToastNotificationPriority value) {
     final hr = ptr.ref.vtable
         .elementAt(9)
         .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
         .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value);
+        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

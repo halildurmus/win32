@@ -25,6 +25,7 @@ import '../../../winrt/globalization/phonenumberformatting/iphonenumberinfo.dart
 import '../../../winrt/foundation/istringable.dart';
 import 'iphonenumberinfofactory.dart';
 import 'iphonenumberinfostatics.dart';
+import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}
@@ -51,7 +52,8 @@ class PhoneNumberInfo extends IInspectable
   }
 
   // IPhoneNumberInfoStatics methods
-  static int tryParse(String input, Pointer<COMObject> phoneNumber) {
+  static PhoneNumberParseResult tryParse(
+      String input, Pointer<COMObject> phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
@@ -63,7 +65,7 @@ class PhoneNumberInfo extends IInspectable
     }
   }
 
-  static int tryParseWithRegion(
+  static PhoneNumberParseResult tryParseWithRegion(
       String input, String regionCode, Pointer<COMObject> phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
@@ -98,14 +100,15 @@ class PhoneNumberInfo extends IInspectable
       _iPhoneNumberInfo.getLengthOfNationalDestinationCode();
 
   @override
-  int predictNumberKind() => _iPhoneNumberInfo.predictNumberKind();
+  PredictedPhoneNumberKind predictNumberKind() =>
+      _iPhoneNumberInfo.predictNumberKind();
 
   @override
   String getGeographicRegionCode() =>
       _iPhoneNumberInfo.getGeographicRegionCode();
 
   @override
-  int checkNumberMatch(Pointer<COMObject> otherNumber) =>
+  PhoneNumberMatchResult checkNumberMatch(Pointer<COMObject> otherNumber) =>
       _iPhoneNumberInfo.checkNumberMatch(otherNumber);
   // IStringable methods
   late final _iStringable = IStringable.from(this);

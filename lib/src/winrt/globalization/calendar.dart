@@ -27,6 +27,7 @@ import 'icalendarfactory.dart';
 import 'icalendarfactory2.dart';
 import '../../winrt/foundation/collections/iiterable.dart';
 import '../../winrt/foundation/collections/ivectorview.dart';
+import '../../winrt/globalization/enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// {@category Class}
@@ -246,7 +247,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
       _iCalendar.dayAsPaddedString(minDigits);
 
   @override
-  int get dayOfWeek => _iCalendar.dayOfWeek;
+  DayOfWeek get dayOfWeek => _iCalendar.dayOfWeek;
 
   @override
   String dayOfWeekAsFullString() => _iCalendar.dayOfWeekAsFullString();

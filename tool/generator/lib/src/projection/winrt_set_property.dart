@@ -19,19 +19,19 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
   @override
   String ffiCall([String params = '']) => '''
-          final hr = ptr.ref.vtable
-            .elementAt($vtableOffset)
-            .cast<Pointer<NativeFunction<$nativePrototype>>>()
-            .value
-            .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $params);
+    final hr = ptr.ref.vtable
+      .elementAt($vtableOffset)
+      .cast<Pointer<NativeFunction<$nativePrototype>>>()
+      .value
+      .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, $params);
 
-          if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
   ''';
 
   @override
   String stringDeclaration() => '''
       set $exposedMethodName(String value) {
-      final hstr = convertToHString(value);
+        final hstr = convertToHString(value);
 
         try {
           ${ffiCall('hstr')}
@@ -47,7 +47,7 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       set $exposedMethodName(DateTime value) {
         final dateTimeOffset =
           value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
-        
+
         ${ffiCall('dateTimeOffset')}
       }
 ''';
@@ -56,16 +56,23 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   String durationDeclaration() => '''
       set $exposedMethodName(Duration value) {
         final duration = value.inMicroseconds * 10;
-        
+
         ${ffiCall('duration')}
       }
 ''';
 
   @override
+  String enumDeclaration() => '''
+      set $exposedMethodName(${parameters.first.type.methodParamType} value) {
+        ${ffiCall('value.value')}
+      }
+  ''';
+
+  @override
   String defaultDeclaration() => '''
-    set $exposedMethodName(${parameters.first.type.dartType} value) {
+      set $exposedMethodName(${parameters.first.type.dartType} value) {
         ${ffiCall('value')}
-    }
+      }
   ''';
 
   @override
@@ -76,6 +83,7 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
           'Windows.Foundation.DateTime') return dateTimeDeclaration();
       if (parameters.first.type.typeIdentifier.name ==
           'Windows.Foundation.TimeSpan') return durationDeclaration();
+      if (parameters.first.type.isWinRTEnum) return enumDeclaration();
 
       return defaultDeclaration();
     } on Exception {

@@ -310,10 +310,46 @@ void generateWinRTApis() {
   }
 }
 
+void generateWinRTEnumerations() {
+  final enums = windowsRuntimeEnumsToGenerate;
+  final namespaceGroups = groupTypesByParentNamespace(enums.keys);
+
+  for (final namespaceGroup in namespaceGroups) {
+    final enumProjections = <EnumProjection>[];
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/enums.g.dart')
+      ..createSync(recursive: true);
+
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
+
+      EnumProjection enumProjection;
+      if (typeDef.existsAttribute('System.FlagsAttribute')) {
+        enumProjection = FlagsEnumProjection(
+            typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+            comment: enums[typeDef.name]!);
+      } else {
+        enumProjection = EnumProjection(
+            typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+            comment: enums[typeDef.name]!);
+      }
+      enumProjections.add(enumProjection);
+    }
+
+    enumProjections.sort((a, b) =>
+        lastComponent(a.enumName).compareTo(lastComponent(b.enumName)));
+
+    final import =
+        "import '${relativePathToSrcDirectory(file)}winrt/foundation/winrt_enum.dart';";
+    final enumsFile = [winrtEnumFileHeader, import, ...enumProjections].join();
+    file.writeAsStringSync(DartFormatter().format(enumsFile));
+  }
+}
+
 void generateWinRTStructs() {
   final structs = windowsRuntimeStructsToGenerate;
-  final namespaceGroups =
-      groupTypesByParentNamespace(windowsRuntimeStructsToGenerate.keys);
+  final namespaceGroups = groupTypesByParentNamespace(structs.keys);
 
   for (final namespaceGroup in namespaceGroups) {
     final structProjections = <StructProjection>[];
@@ -364,6 +400,9 @@ void main() {
 
   print('Generating Windows Runtime interfaces...');
   generateWinRTApis();
+
+  print('Generating Windows Runtime enumerations...');
+  generateWinRTEnumerations();
 
   print('Generating Windows Runtime structs...');
   generateWinRTStructs();

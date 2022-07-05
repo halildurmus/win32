@@ -22,6 +22,7 @@ import '../../../winrt_helpers.dart';
 import '../../../extensions/hstring_array.dart';
 
 import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
+import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -64,7 +65,8 @@ class IPhoneNumberFormatter extends IInspectable {
     }
   }
 
-  String formatWithOutputFormat(Pointer<COMObject> number, int numberFormat) {
+  String formatWithOutputFormat(
+      Pointer<COMObject> number, PhoneNumberFormat numberFormat) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -78,8 +80,11 @@ class IPhoneNumberFormatter extends IInspectable {
               .value
               .asFunction<
                   int Function(Pointer, Pointer<COMObject> number,
-                      int numberFormat, Pointer<IntPtr>)>()(ptr.ref.lpVtbl,
-          number.cast<Pointer<COMObject>>().value, numberFormat, retValuePtr);
+                      int numberFormat, Pointer<IntPtr>)>()(
+          ptr.ref.lpVtbl,
+          number.cast<Pointer<COMObject>>().value,
+          numberFormat.value,
+          retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
