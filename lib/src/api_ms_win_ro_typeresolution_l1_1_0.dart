@@ -57,7 +57,8 @@ final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
         Pointer<Pointer> metaDataImport,
         Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
 
-/// Returns true or false to indicate whether the API contract with the specified name and major version number is present.
+/// Returns true or false to indicate whether the API contract with the
+/// specified name and major version number is present.
 ///
 /// ```c
 /// HRESULT RoIsApiContractMajorVersionPresent(
@@ -78,7 +79,8 @@ final _RoIsApiContractMajorVersionPresent =
         int Function(PWSTR name, int majorVersion,
             Pointer<BOOL> present)>('RoIsApiContractMajorVersionPresent');
 
-/// Returns true or false to indicate whether the API contract with the specified name and major and minor version number is present.
+/// Returns true or false to indicate whether the API contract with the
+/// specified name and major and minor version number is present.
 ///
 /// ```c
 /// HRESULT RoIsApiContractPresent(
