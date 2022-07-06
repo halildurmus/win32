@@ -274,6 +274,8 @@ export 'src/winrt/globalization/calendar.dart';
 export 'src/winrt/globalization/icalendar.dart';
 export 'src/winrt/globalization/phonenumberformatting/phonenumberformatter.dart';
 export 'src/winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
+export 'src/winrt/graphics/printing3d/iprinting3dmultiplepropertymaterial.dart';
+export 'src/winrt/graphics/printing3d/printing3dmultiplepropertymaterial.dart';
 export 'src/winrt/storage/applicationdata.dart';
 export 'src/winrt/storage/iapplicationdata.dart';
 export 'src/winrt/storage/istorageitem.dart';

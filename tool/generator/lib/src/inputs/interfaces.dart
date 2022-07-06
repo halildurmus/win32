@@ -115,6 +115,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Globalization.Calendar',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
   'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo',
+  'Windows.Graphics.Printing3D.Printing3DMultiplePropertyMaterial',
   'Windows.Networking.IHostName',
   'Windows.Storage.IApplicationDataStatics',
   'Windows.Storage.IStorageItem',
