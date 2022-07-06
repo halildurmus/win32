@@ -146,7 +146,7 @@ export 'src/api_ms_win_wsl_api_l1_1_0.dart';
 // COM and Windows Runtime foundational exports
 export 'src/combase.dart';
 export 'src/winrt_callbacks.dart';
-export 'src/winrt_constants.dart';
+export 'src/winrt_constants.dart' hide mapIterableIids, vectorIterableIids;
 export 'src/winrt_helpers.dart';
 
 // COM interfaces
