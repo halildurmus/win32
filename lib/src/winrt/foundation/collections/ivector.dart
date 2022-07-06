@@ -1049,7 +1049,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
-  /// Creates an unmodifiable [List] from the current [IVector] instance.
+  /// Creates a [List] from the current [IVector] instance.
   List<T> toList() {
     if (size == 0) return [];
     return VectorHelper(
