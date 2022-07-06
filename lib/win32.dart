@@ -257,6 +257,10 @@ export 'src/com/iwbemservices.dart';
 
 // Windows Runtime classes and interfaces
 export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
+export 'src/winrt/devices/enumeration/devicepicker.dart';
+export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
+export 'src/winrt/devices/enumeration/idevicepicker.dart';
+export 'src/winrt/devices/enumeration/idevicepickerfilter.dart';
 export 'src/winrt/foundation/collections/iiterable.dart';
 export 'src/winrt/foundation/collections/iiterator.dart';
 export 'src/winrt/foundation/collections/ivector.dart';

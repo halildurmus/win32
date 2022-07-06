@@ -57,6 +57,9 @@ const excludedWindowsRuntimeTypes = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
 
+  'Windows.Devices.Enumeration.DevicePicker',
+  'Windows.Devices.Enumeration.DevicePickerFilter',
+
   //   Requires WinRT delegate support
   'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncOperation`1',
