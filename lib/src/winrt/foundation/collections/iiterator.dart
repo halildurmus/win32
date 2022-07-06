@@ -15,64 +15,74 @@ import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 
-/// @nodoc
-const IID_IIterator_String = '{8C304EBB-6615-50A4-8829-879ECD443236}';
-
+/// Supports simple iteration over a collection.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IIterator<T> extends IInspectable {
   // vtable begins at 6, is 4 entries long.
   final T Function(Pointer<COMObject>)? _creator;
+  final T Function(int)? _enumCreator;
+  final Type? _intType;
   final Allocator _allocator;
 
-  /// Creates an instance of `Iterator<T>` using the given `ptr`.
+  /// Creates an instance of [IIterator] using the given [ptr].
   ///
-  /// `T` must be a either a `String` or a `WinRT` type. e.g. `IHostName`,
-  /// `IStorageFile` etc.
+  /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
+  /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
+  /// [intType] must be specified if [T] is `int`.
   /// ```dart
-  /// ...
-  /// final iterator = IIterator<String>.fromRawPointer(ptr);
+  /// final iterator = IIterator<int>.fromRawPointer(ptr, intType: Uint64);
   /// ```
   ///
-  /// `creator` must be specified if the `T` is a `WinRT` type.
-  /// e.g. `IHostName.fromRawPointer`, `IStorageFile.fromRawPointer` etc.
-  ///
+  /// [creator] must be specified if [T] is a `WinRT` type.
   /// ```dart
-  /// ...
-  /// final allocator = Arena();
-  /// final iterator = IIterator<IHostName>.fromRawPointer(ptr,
-  ///     creator: IHostName.fromRawPointer, allocator: allocator);
+  /// final iterator = IIterator<StorageFile>.fromRawPointer(ptr,
+  ///    creator: StorageFile.fromRawPointer);
+  /// ```
+  ///
+  /// [enumCreator] and [intType] must be specified if [T] is a `WinRTEnum`.
+  /// ```dart
+  /// final iterator = IIterator<DeviceClass>.fromRawPointer(ptr,
+  ///     enumCreator: DeviceClass.from, intType: Int32);
   /// ```
   ///
   /// It is the caller's responsibility to deallocate the returned pointer
   /// from the `Current` method when they are finished with it. A FFI `Arena`
   /// may be passed as a custom allocator for ease of memory management.
-  ///
-  /// {@category winrt}
-  IIterator.fromRawPointer(super.ptr,
-      {T Function(Pointer<COMObject>)? creator, Allocator allocator = calloc})
-      : _creator = creator,
+  IIterator.fromRawPointer(
+    super.ptr, {
+    T Function(Pointer<COMObject>)? creator,
+    T Function(int)? enumCreator,
+    Type? intType = Int32,
+    Allocator allocator = calloc,
+  })  : _creator = creator,
+        _enumCreator = enumCreator,
+        _intType = intType,
         _allocator = allocator {
-    // TODO: Need to update this once we add support for types like `int`,
-    // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
-    if (![String].contains(T) && creator == null) {
-      throw ArgumentError(
-          '`creator` parameter must be specified for WinRT types!');
+    if (!isSameType<T, int>() &&
+        !isSameType<T, String>() &&
+        !isSubtypeOfInspectable<T>() &&
+        !isSubtypeOfWinRTEnum<T>()) {
+      throw ArgumentError.value(T, 'T', 'Unsupported type');
+    }
+
+    if (isSubtypeOfInspectable<T>() && creator == null) {
+      throw ArgumentError.notNull('creator');
+    }
+
+    if (isSubtypeOfWinRTEnum<T>() && enumCreator == null) {
+      throw ArgumentError.notNull('enumCreator');
     }
   }
 
   /// Gets the current item in the collection.
   T get current {
-    switch (T) {
-      // TODO: Need to update this once we add support for types like `int`,
-      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
-      case String:
-        return _current_String() as T;
-      // Handle WinRT types
-      default:
-        return _creator!(_current_COMObject());
-    }
+    if (isSameType<T, int>()) return _current_int() as T;
+    if (isSameType<T, String>()) return _current_String() as T;
+    if (isSubtypeOfWinRTEnum<T>()) return _enumCreator!(_current_int());
+    return _creator!(_current_COMObject());
   }
 
   Pointer<COMObject> _current_COMObject() {
@@ -91,6 +101,28 @@ class IIterator<T> extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     return retValuePtr;
+  }
+
+  int _current_int() {
+    final retValuePtr = _allocator<Uint64>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Uint64>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Uint64>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   String _current_String() {
@@ -135,8 +167,7 @@ class IIterator<T> extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return retValuePtr.value;
     } finally {
       free(retValuePtr);
     }
@@ -159,29 +190,23 @@ class IIterator<T> extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return retValuePtr.value;
     } finally {
       free(retValuePtr);
     }
   }
 
   /// Retrieves multiple items from the iterator.
-  ///
-  /// `capacity` must be equal to the capacity of the `items` pointer.
-  int getMany(Pointer<NativeType> items, int capacity) {
-    switch (T) {
-      // TODO: Need to update this once we add support for types like `int`,
-      // `bool`, `double`, `GUID`, `DateTime`, `Point`, `Size` etc.
-      case String:
-        return _getMany_String(items.cast(), capacity);
-      // Handle WinRT types
-      default:
-        return _getMany_COMObject(items.cast(), capacity);
+  int getMany(int capacity, Pointer<NativeType> value) {
+    if (isSameType<T, int>() || isSubtypeOfWinRTEnum<T>()) {
+      return _getMany_int(capacity, value);
     }
+
+    if (isSameType<T, String>()) return _getMany_String(capacity, value.cast());
+    return _getMany_COMObject(capacity, value.cast());
   }
 
-  int _getMany_COMObject(Pointer<COMObject> items, int capacity) {
+  int _getMany_COMObject(int capacity, Pointer<COMObject> value) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -196,18 +221,211 @@ class IIterator<T> extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, int, Pointer<COMObject>, Pointer<Uint32>)>()(
-          ptr.ref.lpVtbl, capacity, items, retValuePtr);
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return retValuePtr.value;
     } finally {
       free(retValuePtr);
     }
   }
 
-  int _getMany_String(Pointer<HSTRING> items, int capacity) {
+  int _getMany_int(int capacity, Pointer<NativeType> value) {
+    switch (_intType) {
+      case Int16:
+        return _getMany_Int16(capacity, value.cast());
+      case Int64:
+        return _getMany_Int64(capacity, value.cast());
+      case Uint8:
+        return _getMany_Uint8(capacity, value.cast());
+      case Uint16:
+        return _getMany_Uint16(capacity, value.cast());
+      case Uint32:
+        return _getMany_Uint32(capacity, value.cast());
+      case Uint64:
+        return _getMany_Uint64(capacity, value.cast());
+      default:
+        return _getMany_Int32(capacity, value.cast());
+    }
+  }
+
+  int _getMany_Int16(int capacity, Pointer<Int16> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Int16>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Int16>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Int32(int capacity, Pointer<Int32> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Int32>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Int32>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Int64(int capacity, Pointer<Int64> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Int64>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Int64>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Uint8(int capacity, Pointer<Uint8> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Uint8>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Uint8>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Uint16(int capacity, Pointer<Uint16> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Uint16>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Uint16>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Uint32(int capacity, Pointer<Uint32> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Uint32>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Uint32>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_Uint64(int capacity, Pointer<Uint64> value) {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, Pointer<Uint64>,
+                              Pointer<Uint32>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, int, Pointer<Uint64>, Pointer<Uint32>)>()(
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _getMany_String(int capacity, Pointer<HSTRING> value) {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -222,12 +440,11 @@ class IIterator<T> extends IInspectable {
               .asFunction<
                   int Function(
                       Pointer, int, Pointer<HSTRING>, Pointer<Uint32>)>()(
-          ptr.ref.lpVtbl, capacity, items, retValuePtr);
+          ptr.ref.lpVtbl, capacity, value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      return retValue;
+      return retValuePtr.value;
     } finally {
       free(retValuePtr);
     }
