@@ -60,7 +60,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
     super.ptr, {
     T Function(Pointer<COMObject>)? creator,
     T Function(int)? enumCreator,
-    Type? intType = Int32,
+    Type? intType,
     Allocator allocator = calloc,
   })  : _creator = creator,
         _enumCreator = enumCreator,
@@ -73,12 +73,17 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
       throw ArgumentError.value(T, 'T', 'Unsupported type');
     }
 
+    if (isSameType<T, int>() && intType == null) {
+      throw ArgumentError.notNull('intType');
+    }
+
     if (isSubtypeOfInspectable<T>() && creator == null) {
       throw ArgumentError.notNull('creator');
     }
 
-    if (isSubtypeOfWinRTEnum<T>() && enumCreator == null) {
-      throw ArgumentError.notNull('enumCreator');
+    if (isSubtypeOfWinRTEnum<T>()) {
+      if (enumCreator == null) throw ArgumentError.notNull('enumCreator');
+      if (intType == null) throw ArgumentError.notNull('intType');
     }
   }
 
