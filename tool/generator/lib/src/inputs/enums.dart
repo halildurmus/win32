@@ -1,4 +1,8 @@
 final windowsRuntimeEnumsToGenerate = <String, String>{
+  'Windows.Devices.Enumeration.DeviceClass':
+      'Indicates the type of devices that the user wants to enumerate.',
+  'Windows.Devices.Enumeration.DevicePickerDisplayStatusOptions':
+      "Indicates what you'd like the device picker to show about a given device. Used with the SetDisplayStatus method on the DevicePicker object.",
   'Windows.Foundation.AsyncStatus':
       'Specifies the status of an asynchronous operation.',
   'Windows.Foundation.PropertyType': 'Specifies property value types.',
@@ -33,4 +37,6 @@ final windowsRuntimeEnumsToGenerate = <String, String>{
       'Specifies the priority of a ToastNotification.',
   'Windows.UI.Notifications.ToastTemplateType':
       'Specifies the template to use in a toast notification.',
+  'Windows.UI.Popups.Placement':
+      'Specifies where the context menu should be positioned relative to the selection rectangle.',
 };

@@ -286,6 +286,7 @@ export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/ui/notifications/toastnotification.dart';
 
 // Windows Runtime Enumerations
+export 'src/winrt/devices/enumeration/enums.g.dart';
 export 'src/winrt/foundation/enums.g.dart';
 export 'src/winrt/gaming/input/enums.g.dart';
 export 'src/winrt/globalization/enums.g.dart';
@@ -294,6 +295,7 @@ export 'src/winrt/networking/enums.g.dart';
 export 'src/winrt/storage/enums.g.dart';
 export 'src/winrt/storage/pickers/enums.g.dart';
 export 'src/winrt/ui/notifications/enums.g.dart';
+export 'src/winrt/ui/popups/enums.g.dart';
 
 // Windows Runtime Structs
 export 'src/winrt/foundation/structs.g.dart';
