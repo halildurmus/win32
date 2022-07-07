@@ -85,6 +85,10 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
       if (enumCreator == null) throw ArgumentError.notNull('enumCreator');
       if (intType == null) throw ArgumentError.notNull('intType');
     }
+
+    if (intType != null && !supportedIntTypes.contains(intType)) {
+      throw ArgumentError.value(intType, 'intType', 'Unsupported type');
+    }
   }
 
   /// Returns the item at the specified index in the vector view.

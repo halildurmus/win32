@@ -12,6 +12,7 @@ import '../../../exceptions.dart';
 import '../../../macros.dart';
 import '../../../types.dart';
 import '../../../winrt_helpers.dart';
+import '../../internal/vector_helper.dart';
 import 'iiterator.dart';
 
 /// Exposes an iterator that supports simple iteration over a collection of a
@@ -79,6 +80,10 @@ class IIterable<T> extends IInspectable {
     if (isSubtypeOfWinRTEnum<T>()) {
       if (enumCreator == null) throw ArgumentError.notNull('enumCreator');
       if (intType == null) throw ArgumentError.notNull('intType');
+    }
+
+    if (intType != null && !supportedIntTypes.contains(intType)) {
+      throw ArgumentError.value(intType, 'intType', 'Unsupported type');
     }
   }
 

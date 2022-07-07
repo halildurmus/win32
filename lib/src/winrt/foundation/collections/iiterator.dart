@@ -14,6 +14,7 @@ import '../../../macros.dart';
 import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
+import '../../internal/vector_helper.dart';
 
 /// Supports simple iteration over a collection.
 ///
@@ -79,6 +80,10 @@ class IIterator<T> extends IInspectable {
     if (isSubtypeOfWinRTEnum<T>()) {
       if (enumCreator == null) throw ArgumentError.notNull('enumCreator');
       if (intType == null) throw ArgumentError.notNull('intType');
+    }
+
+    if (intType != null && !supportedIntTypes.contains(intType)) {
+      throw ArgumentError.value(intType, 'intType', 'Unsupported type');
     }
   }
 
