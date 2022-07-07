@@ -109,7 +109,158 @@ class IIterator<T> extends IInspectable {
   }
 
   int _current_int() {
-    final retValuePtr = _allocator<Uint64>();
+    switch (_intType) {
+      case Int16:
+        return _current_Int16();
+      case Int64:
+        return _current_Int64();
+      case Uint8:
+        return _current_Uint8();
+      case Uint16:
+        return _current_Uint16();
+      case Uint32:
+        return _current_Uint32();
+      case Uint64:
+        return _current_Uint64();
+      default:
+        return _current_Int32();
+    }
+  }
+
+  int _current_Int16() {
+    final retValuePtr = calloc<Int16>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int16>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Int16>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Int32() {
+    final retValuePtr = calloc<Int32>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Int64() {
+    final retValuePtr = calloc<Int64>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int64>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Int64>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Uint8() {
+    final retValuePtr = calloc<Uint8>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Uint8>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Uint8>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Uint16() {
+    final retValuePtr = calloc<Uint16>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Uint16>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Uint16>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Uint32() {
+    final retValuePtr = calloc<Uint32>();
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Uint32>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Uint32>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int _current_Uint64() {
+    final retValuePtr = calloc<Uint64>();
 
     try {
       final hr = ptr.ref.vtable

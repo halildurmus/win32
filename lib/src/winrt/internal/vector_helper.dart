@@ -148,46 +148,4 @@ class VectorHelper<T> {
   }
 }
 
-typedef GetMany_Int16_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Int16>, Pointer<Uint32>)>>;
-typedef GetMany_Int32_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Int32>, Pointer<Uint32>)>>;
-typedef GetMany_Int64_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Int64>, Pointer<Uint32>)>>;
-typedef GetMany_Uint8_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Uint8>, Pointer<Uint32>)>>;
-typedef GetMany_Uint16_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Uint16>, Pointer<Uint32>)>>;
-typedef GetMany_Uint32_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Uint32>, Pointer<Uint32>)>>;
-typedef GetMany_Uint64_Native = Pointer<
-    NativeFunction<
-        HRESULT Function(
-            Pointer, Uint32, Uint32, Pointer<Uint64>, Pointer<Uint32>)>>;
-
-typedef GetMany_Int16_Dart = int Function(
-    Pointer, int, int, Pointer<Int16>, Pointer<Uint32>);
-typedef GetMany_Int32_Dart = int Function(
-    Pointer, int, int, Pointer<Int32>, Pointer<Uint32>);
-typedef GetMany_Int64_Dart = int Function(
-    Pointer, int, int, Pointer<Int64>, Pointer<Uint32>);
-typedef GetMany_Uint8_Dart = int Function(
-    Pointer, int, int, Pointer<Uint8>, Pointer<Uint32>);
-typedef GetMany_Uint16_Dart = int Function(
-    Pointer, int, int, Pointer<Uint16>, Pointer<Uint32>);
-typedef GetMany_Uint32_Dart = int Function(
-    Pointer, int, int, Pointer<Uint32>, Pointer<Uint32>);
-typedef GetMany_Uint64_Dart = int Function(
-    Pointer, int, int, Pointer<Uint64>, Pointer<Uint32>);
+const supportedIntTypes = [Int16, Int32, Int64, Uint8, Uint16, Uint32, Uint64];
