@@ -35,7 +35,8 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
-  /// [intType] must be specified if [T] is `int`.
+  /// [intType] must be specified if [T] is `int`. Supported types are: [Int16],
+  /// [Int32], [Int64], [Uint8], [Uint16], [Uint32], [Uint64].
   /// ```dart
   /// final vectorView = IVectorView<int>.fromRawPointer(ptr, intType: Uint64);
   /// ```
