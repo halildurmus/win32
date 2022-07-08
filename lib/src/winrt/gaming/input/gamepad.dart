@@ -97,7 +97,7 @@ class Gamepad extends IInspectable
     }
   }
 
-  static List<Pointer<COMObject>> get gamepads {
+  static List<Gamepad> get gamepads {
     final activationFactory =
         CreateActivationFactory(_className, IID_IGamepadStatics);
 

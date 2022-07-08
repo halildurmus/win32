@@ -100,7 +100,9 @@ class WinRTMethodProjection extends MethodProjection {
   String get vectorType {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
     if (typeProjection.isString) return 'String';
-    if (typeProjection.isWinRTEnum) {
+    if (typeProjection.isClass ||
+        typeProjection.isInterface ||
+        typeProjection.isWinRTEnum) {
       return lastComponent(typeProjection.typeIdentifier.name);
     }
 
@@ -109,6 +111,9 @@ class WinRTMethodProjection extends MethodProjection {
 
   String get vectorArgs {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
+    final creator = typeProjection.isClass || typeProjection.isInterface
+        ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
+        : null;
     final enumCreator = typeProjection.isWinRTEnum
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
         : null;
@@ -117,7 +122,9 @@ class WinRTMethodProjection extends MethodProjection {
         : null;
 
     final args = <String>[];
-    if (enumCreator != null) {
+    if (creator != null) {
+      args.add('creator: $creator');
+    } else if (enumCreator != null) {
       args.add('enumCreator: $enumCreator');
     }
     if (intType != null) {
