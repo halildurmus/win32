@@ -22,7 +22,7 @@ import 'ole32.dart';
 import 'types.dart';
 import 'utils.dart';
 import 'winrt/foundation/winrt_enum.dart';
-import 'winrt_constants.dart';
+import 'winrt/internal/iterable_iids.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
