@@ -8,7 +8,9 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 extension Uint8Helper on Pointer<Uint8> {
-  /// Creates a [List] from `Pointer<Uint8>`.
+  /// Creates a [List] from `Pointer<Uint8>` by copying the [List] backed by the
+  /// native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint8>`.
@@ -19,7 +21,9 @@ extension Uint8Helper on Pointer<Uint8> {
 }
 
 extension Int16Helper on Pointer<Int16> {
-  /// Creates a [List] from `Pointer<Int16>`.
+  /// Creates a [List] from `Pointer<Int16>` by copying the [List] backed by the
+  /// native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int16>`.
@@ -30,7 +34,9 @@ extension Int16Helper on Pointer<Int16> {
 }
 
 extension UInt16Helper on Pointer<Uint16> {
-  /// Creates a [List] from `Pointer<Uint16>`.
+  /// Creates a [List] from `Pointer<Uint16>` by copying the [List] backed by
+  /// the native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint16>`.
@@ -41,7 +47,9 @@ extension UInt16Helper on Pointer<Uint16> {
 }
 
 extension Int32Helper on Pointer<Int32> {
-  /// Creates a [List] from `Pointer<Int32>`.
+  /// Creates a [List] from `Pointer<Int32>` by copying the [List] backed by the
+  /// native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int32>`.
@@ -52,7 +60,9 @@ extension Int32Helper on Pointer<Int32> {
 }
 
 extension UInt32Helper on Pointer<Uint32> {
-  /// Creates a [List] from `Pointer<Uint32>`.
+  /// Creates a [List] from `Pointer<Uint32>` by copying the [List] backed by
+  /// the native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint32>`.
@@ -63,7 +73,9 @@ extension UInt32Helper on Pointer<Uint32> {
 }
 
 extension Int64Helper on Pointer<Int64> {
-  /// Creates a [List] from `Pointer<Int64>`.
+  /// Creates a [List] from `Pointer<Int64>` by copying the [List] backed by the
+  /// native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int64>`.
@@ -74,7 +86,9 @@ extension Int64Helper on Pointer<Int64> {
 }
 
 extension UInt64Helper on Pointer<Uint64> {
-  /// Creates a [List] from `Pointer<Uint64>`.
+  /// Creates a [List] from `Pointer<Uint64>` by copying the [List] backed by
+  /// the native memory to Dart memory so that it's safe to use even after the
+  /// memory allocated on the native side is released.
   ///
   /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint64>`.

@@ -201,7 +201,7 @@ void main() {
           ..append(DeviceClass.audioRender)
           ..append(DeviceClass.imageScanner);
         expect(vector.getMany(0, 3, pInt32), equals(3));
-        final list = pInt32.toList(length: vector.size);
+        final list = pInt32.asTypedList(3);
         expect(list.length, equals(3));
         expect(list.elementAt(0), equals(DeviceClass.audioCapture.value));
         expect(list.elementAt(1), equals(DeviceClass.audioRender.value));
@@ -216,7 +216,7 @@ void main() {
           ..append(DeviceClass.audioRender)
           ..append(DeviceClass.imageScanner);
         expect(vector.getMany(1, 2, pInt32), equals(2));
-        final list = pInt32.toList(length: 2);
+        final list = pInt32.asTypedList(2);
         expect(list.length, equals(2));
         expect(list.elementAt(0), equals(DeviceClass.audioRender.value));
         expect(list.elementAt(1), equals(DeviceClass.imageScanner.value));
@@ -453,7 +453,7 @@ void main() {
           ..append(259)
           ..append(666);
         expect(vector.getMany(0, 3, pUint32), equals(3));
-        final list = pUint32.toList(length: vector.size);
+        final list = pUint32.asTypedList(vector.size);
         expect(list.length, equals(3));
         expect(list.elementAt(0), equals(5));
         expect(list.elementAt(1), equals(259));
@@ -468,7 +468,7 @@ void main() {
           ..append(259)
           ..append(666);
         expect(vector.getMany(1, 2, pUint32), equals(2));
-        final list = pUint32.toList(length: 2);
+        final list = pUint32.asTypedList(2);
         expect(list.length, equals(2));
         expect(list.elementAt(0), equals(259));
         expect(list.elementAt(1), equals(666));
@@ -706,11 +706,10 @@ void main() {
           ..append('.jpeg')
           ..append('.png');
         expect(vector.getMany(0, 3, pHString), equals(3));
-        final list = pHString.toList(length: vector.size);
-        expect(list.length, equals(3));
-        expect(list.elementAt(0), equals('.jpg'));
-        expect(list.elementAt(1), equals('.jpeg'));
-        expect(list.elementAt(2), equals('.png'));
+        // final list = pHString.toList(length: vector.size);
+        expect(convertFromHString(pHString[0]), equals('.jpg'));
+        expect(convertFromHString(pHString[1]), equals('.jpeg'));
+        expect(convertFromHString(pHString[2]), equals('.png'));
       });
 
       test('getMany returns elements starting from index 1', () {
@@ -721,10 +720,8 @@ void main() {
           ..append('.jpeg')
           ..append('.png');
         expect(vector.getMany(1, 2, pHString), equals(2));
-        final list = pHString.toList(length: 2);
-        expect(list.length, equals(2));
-        expect(list.elementAt(0), equals('.jpeg'));
-        expect(list.elementAt(1), equals('.png'));
+        expect(convertFromHString(pHString[0]), equals('.jpeg'));
+        expect(convertFromHString(pHString[1]), equals('.png'));
       });
 
       test('replaceAll', () {
@@ -835,11 +832,9 @@ void main() {
 
         expect(vectorView.getMany(0, vectorView.size, pHString),
             greaterThanOrEqualTo(1));
-        final list = pHString.toList(length: vectorView.size);
-        expect(list.length, greaterThanOrEqualTo(1));
         // Should be something like en-US
-        expect(list.first[2], equals('-'));
-        expect(list.first.length, equals(5));
+        expect(convertFromHString(pHString[0])[2], equals('-'));
+        expect(convertFromHString(pHString[0]).length, equals(5));
       });
 
       test('toList', () {
@@ -937,9 +932,6 @@ void main() {
         final pCOMObject = allocator<COMObject>(vectorView.size);
         expect(vectorView.getMany(0, vectorView.size, pCOMObject),
             greaterThanOrEqualTo(1));
-        final list = pCOMObject.toList<IHostName>(IHostName.fromRawPointer,
-            length: vectorView.size);
-        expect(list.length, greaterThanOrEqualTo(1));
       });
 
       test('toList', () {

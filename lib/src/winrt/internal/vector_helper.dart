@@ -9,12 +9,12 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../../combase.dart';
-import '../../extensions/comobject_pointer.dart';
-import '../../extensions/hstring_array.dart';
-import '../../extensions/int_array.dart';
 import '../../types.dart';
 import '../../utils.dart';
 import '../../winrt_helpers.dart';
+import 'comobject_pointer.dart';
+import 'hstring_array.dart';
+import 'int_array.dart';
 
 class VectorHelper<T> {
   const VectorHelper(
@@ -34,11 +34,11 @@ class VectorHelper<T> {
   final int length;
 
   List<T> toList() {
+    // Since the returned list is a fixed-length list, we return it as is.
+    if (isSameType<T, int>()) return _toList_int() as List<T>;
+
     final List<T> list;
-    if (isSameType<T, int>()) {
-      // Since the returned list is a fixed-length list, we return it as is.
-      return _toList_int() as List<T>;
-    } else if (isSameType<T, String>()) {
+    if (isSameType<T, String>()) {
       list = _toList_String() as List<T>;
     } else if (isSubtypeOfWinRTEnum<T>()) {
       list = _toList_enum();

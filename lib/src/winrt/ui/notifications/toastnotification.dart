@@ -19,7 +19,7 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../extensions/hstring_array.dart';
+import '../../../winrt/internal/hstring_array.dart';
 
 import '../../../winrt/ui/notifications/itoastnotification.dart';
 import '../../../winrt/ui/notifications/itoastnotification2.dart';

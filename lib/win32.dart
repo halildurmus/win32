@@ -92,10 +92,7 @@ export 'src/variant.dart';
 export 'src/utils.dart';
 
 // Useful extension methods
-export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
-export 'src/extensions/hstring_array.dart';
-export 'src/extensions/int_array.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';

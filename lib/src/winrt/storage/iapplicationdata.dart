@@ -14,7 +14,7 @@ import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../../com/iinspectable.dart';
 import '../../combase.dart';
 import '../../exceptions.dart';
-import '../../extensions/hstring_array.dart';
+import '../internal/hstring_array.dart';
 import '../../macros.dart';
 import '../../types.dart';
 import '../../utils.dart';

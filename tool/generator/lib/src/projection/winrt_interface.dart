@@ -143,7 +143,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     import '${relativePathToSrcDir}winrt_callbacks.dart';
     import '${relativePathToSrcDir}winrt_helpers.dart';
 
-    import '${relativePathToSrcDir}extensions/hstring_array.dart';
+    import '${relativePathToSrcDir}winrt/internal/hstring_array.dart';
   """;
 
   @override

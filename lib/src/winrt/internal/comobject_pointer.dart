@@ -6,7 +6,7 @@
 
 import 'dart:ffi';
 
-import '../combase.dart';
+import '../../combase.dart';
 
 extension COMObjectPointer on Pointer<COMObject> {
   /// Creates a [List] from `Pointer<COMObject>`.
