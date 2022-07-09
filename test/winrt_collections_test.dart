@@ -706,7 +706,6 @@ void main() {
           ..append('.jpeg')
           ..append('.png');
         expect(vector.getMany(0, 3, pHString), equals(3));
-        // final list = pHString.toList(length: vector.size);
         expect(convertFromHString(pHString[0]), equals('.jpg'));
         expect(convertFromHString(pHString[1]), equals('.jpeg'));
         expect(convertFromHString(pHString[2]), equals('.png'));
