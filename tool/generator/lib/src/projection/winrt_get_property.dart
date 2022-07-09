@@ -28,29 +28,29 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
   @override
   String vectorDeclaration() => '''
-      IVector<String> get $exposedMethodName {
+      IVector<$vectorType> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
-        return IVector.fromRawPointer(retValuePtr);
+        return IVector.fromRawPointer(retValuePtr$vectorArgs);
       }
-''';
+  ''';
 
   @override
   String vectorViewDeclaration() => '''
-      List<String> get $exposedMethodName {
+      List<$vectorType> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
         try {
-          return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+          return IVectorView<$vectorType>.fromRawPointer(retValuePtr$vectorArgs).toList();
         } finally {
           free(retValuePtr);
         }
       }
-''';
+  ''';
 
   @override
   String comObjectDeclaration() => '''

@@ -2,24 +2,27 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// Extension method to convert COMObject arrays to List<T>
+
 import 'dart:ffi';
 
-import '../combase.dart';
+import '../../combase.dart';
 
 extension COMObjectPointer on Pointer<COMObject> {
-  /// Creates a `List<T>` from the `Pointer<COMObject>`.
+  /// Creates a [List] from `Pointer<COMObject>`.
   ///
-  /// `T` must be a `WinRT` type. e.g. `IHostName`, `IStorageFile` ...
+  /// [T] must be a `WinRT` type (e.g. `IHostName`, `StorageFile`).
   ///
-  /// `creator` must be specified for the given `T`. e.g. `IHostName.from`,
-  /// `IStorageFile.from`
+  /// [creator] must be specified for [T] (e.g. `IHostName.fromRawPointer`,
+  /// `StorageFile.fromRawPointer`).
   ///
-  /// `length` must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<COMObject>`.
   ///
   /// ```dart
-  /// ...
-  /// final list = pComObject.toList<IHostName>(IHostName.from, length: 4);
+  /// final pComObject = ...
+  /// final list = pComObject.toList<IHostName>(IHostName.fromRawPointer,
+  ///     length: 4);
   /// ```
   ///
   /// {@category winrt}

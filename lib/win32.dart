@@ -92,9 +92,7 @@ export 'src/variant.dart';
 export 'src/utils.dart';
 
 // Useful extension methods
-export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
-export 'src/extensions/hstring_array.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
@@ -256,6 +254,10 @@ export 'src/com/iwbemservices.dart';
 
 // Windows Runtime classes and interfaces
 export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
+export 'src/winrt/devices/enumeration/devicepicker.dart';
+export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
+export 'src/winrt/devices/enumeration/idevicepicker.dart';
+export 'src/winrt/devices/enumeration/idevicepickerfilter.dart';
 export 'src/winrt/foundation/collections/iiterable.dart';
 export 'src/winrt/foundation/collections/iiterator.dart';
 export 'src/winrt/foundation/collections/ivector.dart';
@@ -273,6 +275,8 @@ export 'src/winrt/globalization/calendar.dart';
 export 'src/winrt/globalization/icalendar.dart';
 export 'src/winrt/globalization/phonenumberformatting/phonenumberformatter.dart';
 export 'src/winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
+export 'src/winrt/graphics/printing3d/iprinting3dmultiplepropertymaterial.dart';
+export 'src/winrt/graphics/printing3d/printing3dmultiplepropertymaterial.dart';
 export 'src/winrt/storage/applicationdata.dart';
 export 'src/winrt/storage/iapplicationdata.dart';
 export 'src/winrt/storage/istorageitem.dart';
@@ -286,6 +290,7 @@ export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/ui/notifications/toastnotification.dart';
 
 // Windows Runtime Enumerations
+export 'src/winrt/devices/enumeration/enums.g.dart';
 export 'src/winrt/foundation/enums.g.dart';
 export 'src/winrt/gaming/input/enums.g.dart';
 export 'src/winrt/globalization/enums.g.dart';
@@ -294,6 +299,7 @@ export 'src/winrt/networking/enums.g.dart';
 export 'src/winrt/storage/enums.g.dart';
 export 'src/winrt/storage/pickers/enums.g.dart';
 export 'src/winrt/ui/notifications/enums.g.dart';
+export 'src/winrt/ui/popups/enums.g.dart';
 
 // Windows Runtime Structs
 export 'src/winrt/foundation/structs.g.dart';

@@ -19,7 +19,7 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../extensions/hstring_array.dart';
+import '../../../winrt/internal/hstring_array.dart';
 
 import '../../../winrt/gaming/input/gamepad.dart';
 import '../../../winrt/foundation/collections/ivectorview.dart';
@@ -114,7 +114,7 @@ class IGamepadStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  List<String> get gamepads {
+  List<Gamepad> get gamepads {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -130,7 +130,9 @@ class IGamepadStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+      return IVectorView<Gamepad>.fromRawPointer(retValuePtr,
+              creator: Gamepad.fromRawPointer)
+          .toList();
     } finally {
       free(retValuePtr);
     }

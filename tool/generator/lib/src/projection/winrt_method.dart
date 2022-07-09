@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import 'method.dart';
 import 'type.dart';
+import 'utils.dart';
 import 'winrt_parameter.dart';
 
 class WinRTMethodProjection extends MethodProjection {
@@ -96,30 +97,67 @@ class WinRTMethodProjection extends MethodProjection {
     if (FAILED(hr)) throw WindowsException(hr);
   ''';
 
+  String get vectorType {
+    final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
+    if (typeProjection.isString) return 'String';
+    if (typeProjection.isClass ||
+        typeProjection.isInterface ||
+        typeProjection.isWinRTEnum) {
+      return lastComponent(typeProjection.typeIdentifier.name);
+    }
+
+    return typeProjection.dartType;
+  }
+
+  String get vectorArgs {
+    final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
+    final creator = typeProjection.isClass || typeProjection.isInterface
+        ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
+        : null;
+    final enumCreator = typeProjection.isWinRTEnum
+        ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
+        : null;
+    final intType = typeProjection.isWinRTEnum || vectorType == 'int'
+        ? typeProjection.nativeType
+        : null;
+
+    final args = <String>[];
+    if (creator != null) {
+      args.add('creator: $creator');
+    } else if (enumCreator != null) {
+      args.add('enumCreator: $enumCreator');
+    }
+    if (intType != null) {
+      args.add('intType: $intType');
+    }
+
+    return args.isEmpty ? '' : ', ${args.join(', ')}';
+  }
+
   String vectorDeclaration() => '''
-      IVector<String> $camelCasedName($methodParams) {
+      IVector<$vectorType> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
         $parametersPostamble
-        return IVector.fromRawPointer(retValuePtr);
+        return IVector.fromRawPointer(retValuePtr$vectorArgs);
       }
-''';
+  ''';
 
   String vectorViewDeclaration() => '''
-      List<String> $camelCasedName($methodParams) {
+      List<$vectorType> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
 
         try {
-          return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+          return IVectorView<$vectorType>.fromRawPointer(retValuePtr$vectorArgs).toList();
         } finally {
         $parametersPostamble
         free(retValuePtr);
       }
     }
-''';
+  ''';
 
   String comObjectDeclaration() => '''
       Pointer<COMObject> $camelCasedName($methodParams) {

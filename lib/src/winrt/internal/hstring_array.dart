@@ -6,18 +6,18 @@
 
 import 'dart:ffi';
 
-import '../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../types.dart';
-import '../winrt_helpers.dart';
+import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
+import '../../types.dart';
+import '../../winrt_helpers.dart';
 
 extension HStringHelper on Pointer<HSTRING> {
-  /// Creates a `List<String>` from the `Pointer<HSTRING>`.
+  /// Creates a [List] from `Pointer<HSTRING>`.
   ///
-  /// `length` must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<HSTRING>`.
   ///
   /// ```dart
-  /// ...
+  /// final pHString = ...
   /// final list = pHString.toList(length: 5);
   /// ```
   ///

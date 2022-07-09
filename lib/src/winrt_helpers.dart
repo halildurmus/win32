@@ -21,6 +21,8 @@ import 'macros.dart';
 import 'ole32.dart';
 import 'types.dart';
 import 'utils.dart';
+import 'winrt/foundation/winrt_enum.dart';
+import 'winrt/internal/iterable_iids.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -177,6 +179,53 @@ Pointer<COMObject> CreateActivationFactory(String className, String iid,
     WindowsDeleteString(hClassName);
     free(pIID);
   }
+}
+
+/// Determines whether [S] is the same type as [T].
+///
+/// ```dart
+/// isSameType<String, String>(); // true
+/// isSameType<String?, String>(); // false
+/// ```
+bool isSameType<S, T>() {
+  void func<X extends S>() {}
+  return func is void Function<X extends T>();
+}
+
+/// Determines whether [S] is a subtype of [T] or [T?].
+///
+/// ```dart
+/// isSubtype<Calendar, IInspectable>(); // true
+/// isSubtype<IUnknown, IInspectable>(); // false
+/// ```
+bool isSubtype<S, T>() => <S>[] is List<T> || <S>[] is List<T?>;
+
+/// Determines whether [T] is a subtype of `WinRTEnum`.
+///
+/// ```dart
+/// isSubtypeOfWinRTEnum<AsyncStatus>(); // true
+/// isSubtypeOfWinRTEnum<FileAttributes>(); // true
+/// ```
+bool isSubtypeOfWinRTEnum<T>() => isSubtype<T, WinRTEnum>();
+
+/// Determines whether [T] is a subtype of `IInspectable`.
+///
+/// ```dart
+/// isSubtypeOfInspectable<FileOpenPicker>(); // true
+/// isSubtypeOfInspectable<INetwork>(); // false
+/// ```
+bool isSubtypeOfInspectable<T>() => isSubtype<T, IInspectable>();
+
+/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
+/// `IIterable`.
+String iterableIidFromIids(List<String> iids) {
+  final iterableIid = iids.firstWhere((iid) => mapIterableIids.contains(iid),
+      orElse: () => 'null');
+  if (iterableIid != 'null') return iterableIid;
+
+  return iids.firstWhere((iid) => vectorIterableIids.contains(iid),
+      orElse: () =>
+          throw Exception('No IIterable IID found in the given iids: $iids'));
 }
 
 /// Represents the trust level of an activatable class.

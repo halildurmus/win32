@@ -122,6 +122,8 @@ class TypeProjection {
 
   bool get isWinRTDelegate => isWinRT && _isDelegate;
 
+  bool get isClass => typeIdentifier.type?.isClass ?? false;
+
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
 
   TypeTuple unwrapWinRTEnum() {

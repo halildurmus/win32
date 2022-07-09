@@ -19,7 +19,7 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../extensions/hstring_array.dart';
+import '../../../winrt/internal/hstring_array.dart';
 
 import '../../../winrt/gaming/input/igamepadstatics.dart';
 import '../../../winrt/gaming/input/igamecontroller.dart';
@@ -84,5 +84,5 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
       _iGamepadStatics.remove_GamepadRemoved(token);
 
   @override
-  List<String> get gamepads => _iGamepadStatics.gamepads;
+  List<Gamepad> get gamepads => _iGamepadStatics.gamepads;
 }

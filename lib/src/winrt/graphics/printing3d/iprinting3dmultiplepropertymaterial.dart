@@ -1,4 +1,4 @@
-// iphonenumberinfofactory.dart
+// iprinting3dmultiplepropertymaterial.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,40 +21,38 @@ import '../../../winrt_helpers.dart';
 
 import '../../../winrt/internal/hstring_array.dart';
 
-import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
+import '../../../winrt/foundation/collections/ivector.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPhoneNumberInfoFactory = '{8202B964-ADAA-4CFF-8FCF-17E7516A28FF}';
+const IID_IPrinting3DMultiplePropertyMaterial =
+    '{25A6254B-C6E9-484D-A214-A25E5776BA62}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IPhoneNumberInfoFactory extends IInspectable {
+class IPrinting3DMultiplePropertyMaterial extends IInspectable {
   // vtable begins at 6, is 1 entries long.
-  IPhoneNumberInfoFactory.fromRawPointer(super.ptr);
+  IPrinting3DMultiplePropertyMaterial.fromRawPointer(super.ptr);
 
-  factory IPhoneNumberInfoFactory.from(IInspectable interface) =>
-      IPhoneNumberInfoFactory.fromRawPointer(
-          interface.toInterface(IID_IPhoneNumberInfoFactory));
+  factory IPrinting3DMultiplePropertyMaterial.from(IInspectable interface) =>
+      IPrinting3DMultiplePropertyMaterial.fromRawPointer(
+          interface.toInterface(IID_IPrinting3DMultiplePropertyMaterial));
 
-  Pointer<COMObject> create(String number) {
+  IVector<int> get materialIndices {
     final retValuePtr = calloc<COMObject>();
-    final numberHstring = convertToHString(number);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
                 Pointer<
                     NativeFunction<
-                        HRESULT Function(
-                            Pointer, IntPtr number, Pointer<COMObject>)>>>()
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
-            .asFunction<
-                int Function(Pointer, int number, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, numberHstring, retValuePtr);
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    WindowsDeleteString(numberHstring);
-    return retValuePtr;
+    return IVector.fromRawPointer(retValuePtr, intType: Uint32);
   }
 }

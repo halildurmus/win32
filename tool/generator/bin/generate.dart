@@ -324,7 +324,7 @@ void generateWinRTEnumerations() {
       final typeDef = MetadataStore.getMetadataForType(type);
       if (typeDef == null) throw Exception("Can't find $type");
 
-      EnumProjection enumProjection;
+      final EnumProjection enumProjection;
       if (typeDef.existsAttribute('System.FlagsAttribute')) {
         enumProjection = FlagsEnumProjection(
             typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),

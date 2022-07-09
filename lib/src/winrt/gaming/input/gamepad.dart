@@ -19,7 +19,7 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../extensions/hstring_array.dart';
+import '../../../winrt/internal/hstring_array.dart';
 
 import '../../../winrt/gaming/input/igamepad.dart';
 import '../../../winrt/gaming/input/igamecontroller.dart';
@@ -97,7 +97,7 @@ class Gamepad extends IInspectable
     }
   }
 
-  static List<String> get gamepads {
+  static List<Gamepad> get gamepads {
     final activationFactory =
         CreateActivationFactory(_className, IID_IGamepadStatics);
 

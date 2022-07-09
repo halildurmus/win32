@@ -1,4 +1,4 @@
-// itoastnotification4.dart
+// idevicepickerfilter.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,24 +21,24 @@ import '../../../winrt_helpers.dart';
 
 import '../../../winrt/internal/hstring_array.dart';
 
-import '../../../winrt/ui/notifications/notificationdata.dart';
-import '../../../winrt/ui/notifications/enums.g.dart';
+import '../../../winrt/foundation/collections/ivector.dart';
+import '../../../winrt/devices/enumeration/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotification4 = '{15154935-28EA-4727-88E9-C58680E2D118}';
+const IID_IDevicePickerFilter = '{91DB92A2-57CB-48F1-9B59-A59B7A1F02A2}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IToastNotification4 extends IInspectable {
-  // vtable begins at 6, is 4 entries long.
-  IToastNotification4.fromRawPointer(super.ptr);
+class IDevicePickerFilter extends IInspectable {
+  // vtable begins at 6, is 2 entries long.
+  IDevicePickerFilter.fromRawPointer(super.ptr);
 
-  factory IToastNotification4.from(IInspectable interface) =>
-      IToastNotification4.fromRawPointer(
-          interface.toInterface(IID_IToastNotification4));
+  factory IDevicePickerFilter.from(IInspectable interface) =>
+      IDevicePickerFilter.fromRawPointer(
+          interface.toInterface(IID_IDevicePickerFilter));
 
-  Pointer<COMObject> get data {
+  IVector<DeviceClass> get supportedDeviceClasses {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -53,10 +53,13 @@ class IToastNotification4 extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr;
+    return IVector.fromRawPointer(retValuePtr,
+        enumCreator: DeviceClass.from, intType: Int32);
   }
 
-  set data(Pointer<COMObject> value) {
+  IVector<String> get supportedDeviceSelectors {
+    final retValuePtr = calloc<COMObject>();
+
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -65,40 +68,10 @@ class IToastNotification4 extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, value);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
-  }
 
-  ToastNotificationPriority get priority {
-    final retValuePtr = calloc<Int32>();
-
-    try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ToastNotificationPriority.from(retValuePtr.value);
-    } finally {
-      free(retValuePtr);
-    }
-  }
-
-  set priority(ToastNotificationPriority value) {
-    final hr = ptr.ref.vtable
-        .elementAt(9)
-        .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
-        .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
+    return IVector.fromRawPointer(retValuePtr);
   }
 }
