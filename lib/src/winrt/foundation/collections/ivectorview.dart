@@ -884,7 +884,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
       getMany,
       size,
       allocator: _allocator,
-    ).toList(unmodifiable: true);
+    ).toList();
   }
 
   late final _iIterable = IIterable<T>.fromRawPointer(

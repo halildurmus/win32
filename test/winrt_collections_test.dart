@@ -244,7 +244,7 @@ void main() {
         expect(list.elementAt(0), equals(DeviceClass.audioCapture));
         expect(list.elementAt(1), equals(DeviceClass.audioRender));
         expect(list.elementAt(2), equals(DeviceClass.imageScanner));
-        expect(() => list..clear(), returnsNormally);
+        expect(() => list..clear(), throwsUnsupportedError);
       });
 
       test('first', () {
@@ -496,7 +496,7 @@ void main() {
         expect(list.elementAt(0), equals(5));
         expect(list.elementAt(1), equals(259));
         expect(list.elementAt(2), equals(666));
-        expect(() => list..clear(), returnsNormally);
+        expect(() => list..clear(), throwsUnsupportedError);
       });
 
       test('first', () {
@@ -749,7 +749,7 @@ void main() {
         expect(list.elementAt(0), equals('.jpg'));
         expect(list.elementAt(1), equals('.jpeg'));
         expect(list.elementAt(2), equals('.png'));
-        expect(() => list..clear(), returnsNormally);
+        expect(() => list..clear(), throwsUnsupportedError);
       });
 
       test('first', () {

@@ -33,10 +33,11 @@ class VectorHelper<T> {
   final void Function(int, int, Pointer<NativeType>) getManyCallback;
   final int length;
 
-  List<T> toList({bool unmodifiable = false}) {
+  List<T> toList() {
     final List<T> list;
     if (isSameType<T, int>()) {
-      list = _toList_int() as List<T>;
+      // Since the returned list is a fixed-length list, we return it as is.
+      return _toList_int() as List<T>;
     } else if (isSameType<T, String>()) {
       list = _toList_String() as List<T>;
     } else if (isSubtypeOfWinRTEnum<T>()) {
@@ -45,7 +46,7 @@ class VectorHelper<T> {
       list = _toList_COMObject();
     }
 
-    return unmodifiable ? List.unmodifiable(list) : list;
+    return List.unmodifiable(list);
   }
 
   List<String> _toList_String() {
