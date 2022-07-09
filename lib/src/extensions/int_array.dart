@@ -5,6 +5,7 @@
 // Extension methods to convert integer arrays to List<int>
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 extension Uint8Helper on Pointer<Uint8> {
   /// Creates a [List] from `Pointer<Uint8>`.
@@ -14,7 +15,7 @@ extension Uint8Helper on Pointer<Uint8> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Uint8List.fromList(this.asTypedList(length));
 }
 
 extension Int16Helper on Pointer<Int16> {
@@ -25,7 +26,7 @@ extension Int16Helper on Pointer<Int16> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Int16List.fromList(this.asTypedList(length));
 }
 
 extension UInt16Helper on Pointer<Uint16> {
@@ -36,7 +37,7 @@ extension UInt16Helper on Pointer<Uint16> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Uint16List.fromList(this.asTypedList(length));
 }
 
 extension Int32Helper on Pointer<Int32> {
@@ -47,7 +48,7 @@ extension Int32Helper on Pointer<Int32> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Int32List.fromList(this.asTypedList(length));
 }
 
 extension UInt32Helper on Pointer<Uint32> {
@@ -58,7 +59,7 @@ extension UInt32Helper on Pointer<Uint32> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Uint32List.fromList(this.asTypedList(length));
 }
 
 extension Int64Helper on Pointer<Int64> {
@@ -69,7 +70,7 @@ extension Int64Helper on Pointer<Int64> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Int64List.fromList(this.asTypedList(length));
 }
 
 extension UInt64Helper on Pointer<Uint64> {
@@ -80,5 +81,5 @@ extension UInt64Helper on Pointer<Uint64> {
   ///
   /// {@category winrt}
   List<int> toList({int length = 1}) =>
-      [for (var i = 0; i < length; i++) this[i]];
+      Uint64List.fromList(this.asTypedList(length));
 }
