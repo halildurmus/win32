@@ -19,7 +19,7 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../extensions/hstring_array.dart';
+import '../../winrt/internal/hstring_array.dart';
 
 import '../../winrt/globalization/calendar.dart';
 import '../../winrt/foundation/collections/ivectorview.dart';
