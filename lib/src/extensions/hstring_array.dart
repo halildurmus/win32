@@ -13,7 +13,7 @@ import '../winrt_helpers.dart';
 extension HStringHelper on Pointer<HSTRING> {
   /// Creates a [List] from `Pointer<HSTRING>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<HSTRING>`.
   ///
   /// ```dart

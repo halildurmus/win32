@@ -9,7 +9,7 @@ import 'dart:ffi';
 extension Uint8Helper on Pointer<Uint8> {
   /// Creates a [List] from `Pointer<Uint8>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint8>`.
   ///
   /// {@category winrt}
@@ -20,7 +20,7 @@ extension Uint8Helper on Pointer<Uint8> {
 extension Int16Helper on Pointer<Int16> {
   /// Creates a [List] from `Pointer<Int16>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int16>`.
   ///
   /// {@category winrt}
@@ -31,7 +31,7 @@ extension Int16Helper on Pointer<Int16> {
 extension UInt16Helper on Pointer<Uint16> {
   /// Creates a [List] from `Pointer<Uint16>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint16>`.
   ///
   /// {@category winrt}
@@ -42,7 +42,7 @@ extension UInt16Helper on Pointer<Uint16> {
 extension Int32Helper on Pointer<Int32> {
   /// Creates a [List] from `Pointer<Int32>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int32>`.
   ///
   /// {@category winrt}
@@ -53,7 +53,7 @@ extension Int32Helper on Pointer<Int32> {
 extension UInt32Helper on Pointer<Uint32> {
   /// Creates a [List] from `Pointer<Uint32>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint32>`.
   ///
   /// {@category winrt}
@@ -64,7 +64,7 @@ extension UInt32Helper on Pointer<Uint32> {
 extension Int64Helper on Pointer<Int64> {
   /// Creates a [List] from `Pointer<Int64>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Int64>`.
   ///
   /// {@category winrt}
@@ -75,7 +75,7 @@ extension Int64Helper on Pointer<Int64> {
 extension UInt64Helper on Pointer<Uint64> {
   /// Creates a [List] from `Pointer<Uint64>`.
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<Uint64>`.
   ///
   /// {@category winrt}

@@ -16,7 +16,7 @@ extension COMObjectPointer on Pointer<COMObject> {
   /// [creator] must be specified for [T] (e.g. `IHostName.fromRawPointer`,
   /// `StorageFile.fromRawPointer`).
   ///
-  /// [length] must be equal to the number of elements stored inside the
+  /// [length] must not be greater than the number of elements stored inside the
   /// `Pointer<COMObject>`.
   ///
   /// ```dart

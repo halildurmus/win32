@@ -66,6 +66,8 @@ class VectorHelper<T> {
   }
 
   List<T> _toList_enum() {
+    // The only valid WinRT types for enums are Int32 or UInt32.
+    // See https://docs.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#enums
     switch (intType) {
       case Uint32:
         return _toList_enum_Uint32();
@@ -76,14 +78,24 @@ class VectorHelper<T> {
 
   List<T> _toList_enum_Int32() {
     final pArray = allocator<Int32>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length).map((e) => enumCreator!(e)).toList();
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length).map((e) => enumCreator!(e)).toList();
+    } finally {
+      free(pArray);
+    }
   }
 
   List<T> _toList_enum_Uint32() {
     final pArray = allocator<Uint32>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length).map((e) => enumCreator!(e)).toList();
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length).map((e) => enumCreator!(e)).toList();
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int() {
@@ -107,45 +119,82 @@ class VectorHelper<T> {
 
   List<int> _toList_int_Int16() {
     final pArray = allocator<Int16>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Int32() {
     final pArray = allocator<Int32>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Int64() {
     final pArray = allocator<Int64>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Uint8() {
     final pArray = allocator<Uint8>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Uint16() {
     final pArray = allocator<Uint16>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Uint32() {
     final pArray = allocator<Uint32>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<int> _toList_int_Uint64() {
     final pArray = allocator<Uint64>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(length: length);
+    } finally {
+      free(pArray);
+    }
   }
 }
 
+// WinRT Type system does not support Int8 types.
+// See https://docs.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#fundamental-types
 const supportedIntTypes = [Int16, Int32, Int64, Uint8, Uint16, Uint32, Uint64];
