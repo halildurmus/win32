@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import 'utils.dart';
+import '../utils.dart';
 import 'winrt_interface.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {

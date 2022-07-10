@@ -1,5 +1,5 @@
-import 'safenames.dart';
-import 'utils.dart';
+import '../safenames.dart';
+import '../utils.dart';
 import 'winrt_method.dart';
 
 abstract class WinRTPropertyProjection extends WinRTMethodProjection {
