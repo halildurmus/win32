@@ -1,18 +1,19 @@
 import '../../../../generator.dart';
 
-class DefaultMethod extends WinRTMethodProjection {
+mixin DefaultMethodProjection on WinRTMethodProjection {
+  String get valRef => returnType.dartType == 'double' ||
+          returnType.dartType == 'int' ||
+          returnType.dartType == 'bool' ||
+          returnType.dartType.startsWith('Pointer')
+      ? 'value'
+      : 'ref';
+}
+
+class DefaultMethod extends WinRTMethodProjection with DefaultMethodProjection {
   DefaultMethod(super.method, super.vtableOffset);
 
   @override
-  String toString() {
-    final valRef = returnType.dartType == 'double' ||
-            returnType.dartType == 'int' ||
-            returnType.dartType == 'bool' ||
-            returnType.dartType.startsWith('Pointer')
-        ? 'value'
-        : 'ref';
-
-    return '''
+  String toString() => '''
       ${returnType.dartType} $camelCasedName($methodParams) {
         final retValuePtr = calloc<${returnType.nativeType}>();
         $parametersPreamble
@@ -28,21 +29,14 @@ class DefaultMethod extends WinRTMethodProjection {
         }
       }
 ''';
-  }
 }
 
-class DefaultGetProperty extends WinRTGetPropertyProjection {
+class DefaultGetProperty extends WinRTGetPropertyProjection
+    with DefaultMethodProjection {
   DefaultGetProperty(super.method, super.vtableOffset);
 
   @override
-  String toString() {
-    final valRef = returnType.dartType == 'double' ||
-            returnType.dartType == 'int' ||
-            returnType.dartType == 'bool' ||
-            returnType.dartType.startsWith('Pointer')
-        ? 'value'
-        : 'ref';
-    return '''
+  String toString() => '''
       ${returnType.dartType} get $exposedMethodName {
         final retValuePtr = calloc<${returnType.nativeType}>();
 
@@ -56,5 +50,4 @@ class DefaultGetProperty extends WinRTGetPropertyProjection {
         }
       }
 ''';
-  }
 }
