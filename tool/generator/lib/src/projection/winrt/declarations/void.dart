@@ -12,14 +12,3 @@ class VoidMethod extends WinRTMethodProjection {
       }
   ''';
 }
-
-class VoidSetProperty extends WinRTSetPropertyProjection {
-  VoidSetProperty(super.method, super.vtableOffset);
-
-  @override
-  String toString() => '''
-      set $exposedMethodName(${parameters.first.type.dartType} value) {
-        ${ffiCall('value')}
-      }
-  ''';
-}

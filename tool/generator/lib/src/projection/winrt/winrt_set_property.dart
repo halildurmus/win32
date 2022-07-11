@@ -1,8 +1,8 @@
 import 'declarations/datetime.dart';
+import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
 import 'declarations/string.dart';
-import 'declarations/void.dart';
 import 'winrt_property.dart';
 
 class WinRTSetPropertyProjection extends WinRTPropertyProjection {
@@ -55,7 +55,7 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       if (isDateTimeProperty) return declarationFor(DateTimeSetProperty.new);
       if (isTimeSpanProperty) return declarationFor(DurationSetProperty.new);
 
-      return declarationFor(VoidSetProperty.new);
+      return declarationFor(DefaultSetProperty.new);
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.

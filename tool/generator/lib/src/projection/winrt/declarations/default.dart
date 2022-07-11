@@ -51,3 +51,14 @@ class DefaultGetProperty extends WinRTGetPropertyProjection
       }
 ''';
 }
+
+class DefaultSetProperty extends WinRTSetPropertyProjection {
+  DefaultSetProperty(super.method, super.vtableOffset);
+
+  @override
+  String toString() => '''
+      set $exposedMethodName(${parameters.first.type.dartType} value) {
+        ${ffiCall('value')}
+      }
+  ''';
+}
