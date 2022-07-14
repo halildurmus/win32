@@ -106,8 +106,9 @@ class WinRTMethodProjection extends MethodProjection {
   /// specified in [creator].
   ///
   /// [creator] must be the constructor of a WinRT method or property
-  /// declaration class (e.g. `VectorMethod.new`, `StringGetProperty.new`,
-  /// `EnumSetProperty.new`).
+  /// declaration class (e.g. `WinRTMethodReturningVectorProjection.new`,
+  /// `WinRTGetPropertyReturningStringProjection.new`,
+  /// `WinRTSetPropertyReturningEnumProjection.new`).
   String declarationFor(WinRTMethodProjection Function(Method, int) creator) =>
       creator(method, vtableOffset).toString();
 
