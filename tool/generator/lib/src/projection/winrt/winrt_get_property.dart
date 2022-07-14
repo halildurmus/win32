@@ -37,15 +37,36 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
   @override
   String toString() {
     try {
-      if (isEnumReturn) return declarationFor(EnumGetProperty.new);
-      if (isVectorReturn) return declarationFor(VectorGetProperty.new);
-      if (isVectorViewReturn) return declarationFor(VectorViewGetProperty.new);
-      if (isCOMObjectReturn) return declarationFor(COMObjectGetProperty.new);
-      if (isStringReturn) return declarationFor(StringGetProperty.new);
-      if (isDateTimeReturn) return declarationFor(DateTimeGetProperty.new);
-      if (isTimeSpanReturn) return declarationFor(DurationGetProperty.new);
+      if (isEnumReturn) {
+        return declarationFor(WinRTGetPropertyReturningEnumProjection.new);
+      }
 
-      return declarationFor(DefaultGetProperty.new);
+      if (isVectorReturn) {
+        return declarationFor(WinRTGetPropertyReturningVectorProjection.new);
+      }
+
+      if (isVectorViewReturn) {
+        return declarationFor(
+            WinRTGetPropertyReturningVectorViewProjection.new);
+      }
+
+      if (isCOMObjectReturn) {
+        return declarationFor(WinRTGetPropertyReturningComObjectProjection.new);
+      }
+
+      if (isStringReturn) {
+        return declarationFor(WinRTGetPropertyReturningStringProjection.new);
+      }
+
+      if (isDateTimeReturn) {
+        return declarationFor(WinRTGetPropertyReturningDateTimeProjection.new);
+      }
+
+      if (isTimeSpanReturn) {
+        return declarationFor(WinRTGetPropertyReturningDurationProjection.new);
+      }
+
+      return declarationFor(WinRTGetPropertyReturningDefaultProjection.new);
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.

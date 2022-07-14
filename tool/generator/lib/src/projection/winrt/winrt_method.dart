@@ -114,16 +114,39 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String toString() {
     try {
-      if (isEnumReturn) return declarationFor(EnumMethod.new);
-      if (isVectorReturn) return declarationFor(VectorMethod.new);
-      if (isVectorViewReturn) return declarationFor(VectorViewMethod.new);
-      if (isCOMObjectReturn) return declarationFor(COMObjectMethod.new);
-      if (isVoidReturn) return declarationFor(VoidMethod.new);
-      if (isStringReturn) return declarationFor(StringMethod.new);
-      if (isDateTimeReturn) return declarationFor(DateTimeMethod.new);
-      if (isTimeSpanReturn) return declarationFor(DurationMethod.new);
+      if (isEnumReturn) {
+        return declarationFor(WinRTMethodReturningEnumProjection.new);
+      }
 
-      return declarationFor(DefaultMethod.new);
+      if (isVectorReturn) {
+        return declarationFor(WinRTMethodReturningVectorProjection.new);
+      }
+
+      if (isVectorViewReturn) {
+        return declarationFor(WinRTMethodReturningVectorViewProjection.new);
+      }
+
+      if (isCOMObjectReturn) {
+        return declarationFor(WinRTMethodReturningComObjectProjection.new);
+      }
+
+      if (isVoidReturn) {
+        return declarationFor(WinRTMethodReturningVoidProjection.new);
+      }
+
+      if (isStringReturn) {
+        return declarationFor(WinRTMethodReturningStringProjection.new);
+      }
+
+      if (isDateTimeReturn) {
+        return declarationFor(WinRTMethodReturningDateTimeProjection.new);
+      }
+
+      if (isTimeSpanReturn) {
+        return declarationFor(WinRTMethodReturningDurationProjection.new);
+      }
+
+      return declarationFor(WinRTMethodReturningDefaultProjection.new);
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.

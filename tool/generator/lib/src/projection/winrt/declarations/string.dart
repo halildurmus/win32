@@ -1,7 +1,7 @@
 import '../../../../generator.dart';
 
-class StringMethod extends WinRTMethodProjection {
-  StringMethod(super.method, super.vtableOffset);
+class WinRTMethodReturningStringProjection extends WinRTMethodProjection {
+  WinRTMethodReturningStringProjection(super.method, super.vtableOffset);
 
   @override
   String toString() {
@@ -27,8 +27,9 @@ class StringMethod extends WinRTMethodProjection {
   }
 }
 
-class StringGetProperty extends WinRTGetPropertyProjection {
-  StringGetProperty(super.method, super.vtableOffset);
+class WinRTGetPropertyReturningStringProjection
+    extends WinRTGetPropertyProjection {
+  WinRTGetPropertyReturningStringProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -48,8 +49,9 @@ class StringGetProperty extends WinRTGetPropertyProjection {
 ''';
 }
 
-class StringSetProperty extends WinRTSetPropertyProjection {
-  StringSetProperty(super.method, super.vtableOffset);
+class WinRTSetPropertyReturningStringProjection
+    extends WinRTSetPropertyProjection {
+  WinRTSetPropertyReturningStringProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''

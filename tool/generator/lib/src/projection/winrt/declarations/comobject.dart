@@ -1,7 +1,7 @@
 import '../../../../generator.dart';
 
-class COMObjectMethod extends WinRTMethodProjection {
-  COMObjectMethod(super.method, super.vtableOffset);
+class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection {
+  WinRTMethodReturningComObjectProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -15,8 +15,10 @@ class COMObjectMethod extends WinRTMethodProjection {
 ''';
 }
 
-class COMObjectGetProperty extends WinRTGetPropertyProjection {
-  COMObjectGetProperty(super.method, super.vtableOffset);
+class WinRTGetPropertyReturningComObjectProjection
+    extends WinRTGetPropertyProjection {
+  WinRTGetPropertyReturningComObjectProjection(
+      super.method, super.vtableOffset);
 
   @override
   String toString() => '''

@@ -1,7 +1,7 @@
 import '../../../../generator.dart';
 
-class EnumMethod extends WinRTMethodProjection {
-  EnumMethod(super.method, super.vtableOffset);
+class WinRTMethodReturningEnumProjection extends WinRTMethodProjection {
+  WinRTMethodReturningEnumProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -21,8 +21,9 @@ class EnumMethod extends WinRTMethodProjection {
   ''';
 }
 
-class EnumGetProperty extends WinRTGetPropertyProjection {
-  EnumGetProperty(super.method, super.vtableOffset);
+class WinRTGetPropertyReturningEnumProjection
+    extends WinRTGetPropertyProjection {
+  WinRTGetPropertyReturningEnumProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -40,8 +41,9 @@ class EnumGetProperty extends WinRTGetPropertyProjection {
   ''';
 }
 
-class EnumSetProperty extends WinRTSetPropertyProjection {
-  EnumSetProperty(super.method, super.vtableOffset);
+class WinRTSetPropertyReturningEnumProjection
+    extends WinRTSetPropertyProjection {
+  WinRTSetPropertyReturningEnumProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''

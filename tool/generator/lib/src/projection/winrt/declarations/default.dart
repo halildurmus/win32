@@ -9,8 +9,9 @@ mixin DefaultMethodProjection on WinRTMethodProjection {
       : 'ref';
 }
 
-class DefaultMethod extends WinRTMethodProjection with DefaultMethodProjection {
-  DefaultMethod(super.method, super.vtableOffset);
+class WinRTMethodReturningDefaultProjection extends WinRTMethodProjection
+    with DefaultMethodProjection {
+  WinRTMethodReturningDefaultProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -31,9 +32,9 @@ class DefaultMethod extends WinRTMethodProjection with DefaultMethodProjection {
 ''';
 }
 
-class DefaultGetProperty extends WinRTGetPropertyProjection
-    with DefaultMethodProjection {
-  DefaultGetProperty(super.method, super.vtableOffset);
+class WinRTGetPropertyReturningDefaultProjection
+    extends WinRTGetPropertyProjection with DefaultMethodProjection {
+  WinRTGetPropertyReturningDefaultProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -52,8 +53,9 @@ class DefaultGetProperty extends WinRTGetPropertyProjection
 ''';
 }
 
-class DefaultSetProperty extends WinRTSetPropertyProjection {
-  DefaultSetProperty(super.method, super.vtableOffset);
+class WinRTSetPropertyReturningDefaultProjection
+    extends WinRTSetPropertyProjection {
+  WinRTSetPropertyReturningDefaultProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''

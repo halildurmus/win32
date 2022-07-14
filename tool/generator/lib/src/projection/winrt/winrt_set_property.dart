@@ -47,15 +47,26 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   @override
   String toString() {
     try {
-      // TODO: declarationFor(VectorSetProperty.new)
-      // TODO: declarationFor(VectorViewSetProperty.new)
-      // TODO: declarationFor(COMObjectSetProperty.new)
-      if (isEnumProperty) return declarationFor(EnumSetProperty.new);
-      if (isStringProperty) return declarationFor(StringSetProperty.new);
-      if (isDateTimeProperty) return declarationFor(DateTimeSetProperty.new);
-      if (isTimeSpanProperty) return declarationFor(DurationSetProperty.new);
+      // TODO: declarationFor(WinRTSetPropertyReturningVectorProjection.new)
+      // TODO: declarationFor(WinRTSetPropertyReturningVectorViewProjection.new)
+      // TODO: declarationFor(WinRTSetPropertyReturningCOMObjectProjection.new)
+      if (isEnumProperty) {
+        return declarationFor(WinRTSetPropertyReturningEnumProjection.new);
+      }
 
-      return declarationFor(DefaultSetProperty.new);
+      if (isStringProperty) {
+        return declarationFor(WinRTSetPropertyReturningStringProjection.new);
+      }
+
+      if (isDateTimeProperty) {
+        return declarationFor(WinRTSetPropertyReturningDateTimeProjection.new);
+      }
+
+      if (isTimeSpanProperty) {
+        return declarationFor(WinRTSetPropertyReturningDurationProjection.new);
+      }
+
+      return declarationFor(WinRTSetPropertyReturningDefaultProjection.new);
     } on Exception {
       // Print an error if we're unable to project a method, but don't
       // completely bail out. The rest may be useful.

@@ -1,7 +1,7 @@
 import '../../../../generator.dart';
 
-class DurationMethod extends WinRTMethodProjection {
-  DurationMethod(super.method, super.vtableOffset);
+class WinRTMethodReturningDurationProjection extends WinRTMethodProjection {
+  WinRTMethodReturningDurationProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -21,8 +21,9 @@ class DurationMethod extends WinRTMethodProjection {
 ''';
 }
 
-class DurationGetProperty extends WinRTGetPropertyProjection {
-  DurationGetProperty(super.method, super.vtableOffset);
+class WinRTGetPropertyReturningDurationProjection
+    extends WinRTGetPropertyProjection {
+  WinRTGetPropertyReturningDurationProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
@@ -40,8 +41,9 @@ class DurationGetProperty extends WinRTGetPropertyProjection {
 ''';
 }
 
-class DurationSetProperty extends WinRTSetPropertyProjection {
-  DurationSetProperty(super.method, super.vtableOffset);
+class WinRTSetPropertyReturningDurationProjection
+    extends WinRTSetPropertyProjection {
+  WinRTSetPropertyReturningDurationProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
