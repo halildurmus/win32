@@ -17,12 +17,15 @@ import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
 import '../../internal/map_helpers.dart';
+import '../../media/mediaproperties/mediapropertyset.dart';
 import '../ipropertyvalue.dart';
 import '../winrt_enum.dart';
 import 'iiterable.dart';
 import 'iiterator.dart';
 import 'ikeyvaluepair.dart';
 import 'imapview.dart';
+import 'propertyset.dart';
+import 'stringmap.dart';
 
 /// Represents an associative collection, also known as a map or a dictionary.
 ///
@@ -34,6 +37,28 @@ class IMap<K, V> extends IInspectable
   late final IKeyValuePair<K, V> Function(Pointer<COMObject>) _iterableCreator;
   final V Function(Pointer<COMObject>)? _creator;
   final V Function(int)? _enumCreator;
+
+  /// Creates an empty [IMap].
+  ///
+  /// [K] must be of type `GUID` or `String` and [V] must be of type
+  /// `Object?` or `String?`.
+  factory IMap() {
+    if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
+      return IMap.fromRawPointer(MediaPropertySet().ptr);
+    }
+
+    if (isSameType<K, String>()) {
+      if (isSimilarType<V, String>()) {
+        return IMap.fromRawPointer(StringMap().ptr);
+      }
+
+      if (isSimilarType<V, Object>()) {
+        return IMap.fromRawPointer(PropertySet().ptr);
+      }
+    }
+
+    throw ArgumentError('Unsupported types: IMap<$K, $V>');
+  }
 
   /// Creates an instance of [IMap] using the given [ptr].
   ///
@@ -85,6 +110,34 @@ class IMap<K, V> extends IInspectable
         ptr,
         creator: _creator,
         enumCreator: _enumCreator);
+  }
+
+  /// Creates an [IMap] with the same keys and values as [other].
+  ///
+  /// [other] must be of type `Map<GUID, Object?>`, `Map<String, Object?>`,
+  /// or `Map<String, String?>`.
+  factory IMap.fromMap(Map<K, V> other) {
+    if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
+      final iMap = MediaPropertySet();
+      other.cast<GUID, Object?>().forEach(iMap.insert);
+      return IMap.fromRawPointer(iMap.ptr);
+    }
+
+    if (isSameType<K, String>()) {
+      if (isSimilarType<V, String>()) {
+        final iMap = StringMap();
+        other.cast<String, String?>().forEach(iMap.insert);
+        return IMap.fromRawPointer(iMap.ptr);
+      }
+
+      if (isSimilarType<V, Object>()) {
+        final iMap = PropertySet();
+        other.cast<String, Object?>().forEach(iMap.insert);
+        return IMap.fromRawPointer(iMap.ptr);
+      }
+    }
+
+    throw ArgumentError.value(other, 'other', 'Unsupported map');
   }
 
   /// Returns the item at the specified key in the map.
