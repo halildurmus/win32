@@ -85,10 +85,10 @@ class WinRTMethodReturningVectorViewProjection extends WinRTMethodProjection
         try {
           return IVectorView<$vectorType>.fromRawPointer(retValuePtr$vectorArgs).toList();
         } finally {
-        $parametersPostamble
-        free(retValuePtr);
+          $parametersPostamble
+          free(retValuePtr);
+        }
       }
-    }
   ''';
 }
 
