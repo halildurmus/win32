@@ -126,6 +126,8 @@ class TypeProjection {
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
 
+  bool get isObject => typeIdentifier.baseType == BaseType.objectType;
+
   TypeTuple unwrapWinRTEnum() {
     final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;
     if (fieldType == null) {
