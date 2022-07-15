@@ -87,4 +87,5 @@ class GUID extends Struct {
   }
 }
 
-Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
+Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = calloc}) =>
+    allocator<GUID>()..ref.setGUID(guid);
