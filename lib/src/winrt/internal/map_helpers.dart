@@ -13,11 +13,30 @@ import '../../guid.dart';
 import '../../types.dart';
 import '../../utils.dart';
 import '../../winrt_helpers.dart';
+import '../foundation/collections/ikeyvaluepair.dart';
 import '../foundation/propertyvalue.dart';
 import '../foundation/structs.g.dart';
 import 'comobject_pointer.dart';
 import 'hstring_array.dart';
 import 'int_array.dart';
+
+class MapHelper {
+  static Map<K, V> toMap<K, V>(
+    int Function(int, Pointer<NativeType>) getManyCallback, {
+    IKeyValuePair<K, V> Function(Pointer<COMObject>)? creator,
+    int length = 1,
+  }) {
+    final pArray = calloc<COMObject>(length);
+    getManyCallback(length, pArray);
+    final keyValuePairs = pArray.toList<IKeyValuePair<K, V>>(
+        creator ?? IKeyValuePair.fromRawPointer,
+        length: length);
+    final map = Map.fromEntries(
+        keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
+
+    return Map.unmodifiable(map);
+  }
+}
 
 List<bool> boolListFromArray(
     void Function(Pointer<Uint32>, Pointer<Pointer<Bool>>) getArrayCallback) {
