@@ -149,7 +149,6 @@ export 'src/winrt_helpers.dart';
 // COM interfaces
 export 'src/com/iapplicationactivationmanager.dart';
 export 'src/com/iappxfactory.dart';
-export 'src/com/iappxfactory.dart';
 export 'src/com/iappxfile.dart';
 export 'src/com/iappxfilesenumerator.dart';
 export 'src/com/iappxmanifestapplication.dart';
