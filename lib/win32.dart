@@ -290,6 +290,7 @@ export 'src/winrt/ui/notifications/toastnotification.dart';
 
 // Windows Runtime Enumerations
 export 'src/winrt/devices/enumeration/enums.g.dart';
+export 'src/winrt/devices/sensors/enums.g.dart';
 export 'src/winrt/foundation/enums.g.dart';
 export 'src/winrt/gaming/input/enums.g.dart';
 export 'src/winrt/globalization/enums.g.dart';
