@@ -13,6 +13,15 @@ void main() {
     expect(isSameType<String?, String>(), isFalse);
   });
 
+  test('isSimilarType', () {
+    expect(isSimilarType<GUID, GUID>(), isTrue);
+    expect(isSimilarType<int?, int>(), isTrue);
+    expect(isSimilarType<int?, int?>(), isTrue);
+    expect(isSimilarType<Object, Object>(), isTrue);
+    expect(isSimilarType<String, String>(), isTrue);
+    expect(isSimilarType<String?, String?>(), isTrue);
+  });
+
   test('isSubtype', () {
     expect(isSubtype<Calendar, IInspectable>(), isTrue);
     expect(isSubtype<IFileOpenPicker, IInspectable>(), isTrue);
