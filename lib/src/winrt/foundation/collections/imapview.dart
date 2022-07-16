@@ -41,16 +41,18 @@ class IMapView<K, V> extends IInspectable
   /// [V] must be of type `Object`, `String`, or `WinRT` (e.g. `IJsonValue`,
   /// `ProductLicense`).
   ///
-  /// [creator] must be specified if [V] is a `WinRT` (e.g.
+  /// [creator] must be specified if [V] is a `WinRT` type (e.g.
   /// `IJsonValue.fromRawPointer`).
+  /// ```dart
+  /// final mapView = IMapView<String, IJsonValue?>.fromRawPointer(ptr,
+  ///     creator: IJsonValue.fromRawPointer);
+  /// ```
   ///
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type (e.g.
-  /// `PedometerStepKind.from`).
-  ///
+  /// `ChatMessageStatus.from`).
   /// ```dart
-  /// final mapView =
-  ///     IMapView<PedometerStepKind, PedometerReading>.fromRawPointer(ptr,
-  ///         creator: PedometerReading.fromRawPointer);
+  /// final mapView = IMapView<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  ///     enumCreator: ChatMessageStatus.from);
   /// ```
   IMapView.fromRawPointer(
     super.ptr, {
