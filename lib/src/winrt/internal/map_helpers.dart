@@ -13,6 +13,7 @@ import '../../guid.dart';
 import '../../types.dart';
 import '../../utils.dart';
 import '../../winrt_helpers.dart';
+import '../devices/sensors/enums.g.dart';
 import '../foundation/collections/ikeyvaluepair.dart';
 import '../foundation/propertyvalue.dart';
 import '../foundation/structs.g.dart';
@@ -36,6 +37,54 @@ class MapHelper {
 
     return Map.unmodifiable(map);
   }
+}
+
+/// Determines whether [K] and [V] key-value pair is supported.
+///
+/// Supported key-value pairs are: `IKeyValuePair<int, IInspectable?>`,
+/// `IKeyValuePair<GUID, IInspectable?>`, `IKeyValuePair<GUID, Object?>`,
+/// `IKeyValuePair<PedometerStepKind, IInspectable?>`,
+/// `IKeyValuePair<Object, Object?>`,
+/// `IKeyValuePair<String, Object?>`, `IKeyValuePair<String, String?>`,
+/// `IKeyValuePair<String, IInspectable?>`, `IKeyValuePair<String, WinRTEnum?>`.
+///
+/// ```dart
+/// isSupportedKeyValuePair<GUID, SpatialSurfaceInfo?>(); // true
+/// isSupportedKeyValuePair<String, Object?>(); // true
+/// ```
+bool isSupportedKeyValuePair<K, V>() {
+  // e.g. IKeyValuePair<int, IBuffer>
+  if (isSameType<K, int>() && isSubtypeOfInspectable<V>()) {
+    return true;
+  }
+
+  // e.g. IKeyValuePair<GUID, SpatialSurfaceInfo>, IKeyValuePair<GUID, Object?>
+  if (isSameType<K, GUID>() &&
+      (isSubtypeOfInspectable<V>() || isSimilarType<V, Object>())) {
+    return true;
+  }
+
+  // e.g. IKeyValuePair<PedometerStepKind, PedometerReading>
+  if (isSameType<K, PedometerStepKind>() && isSubtypeOfInspectable<V>()) {
+    return true;
+  }
+
+  // e.g. IKeyValuePair<Object, Object?>
+  if (isSameType<K, Object>() && isSimilarType<V, Object>()) {
+    return true;
+  }
+
+  // e.g. IKeyValuePair<String, Object?>, IKeyValuePair<String, String?>,
+  // IKeyValuePair<String, IJsonValue?>, IKeyValuePair<String, ChatMessageStatus?>
+  if (isSameType<K, String>() &&
+      (isSimilarType<V, Object?>() ||
+          isSimilarType<V, String?>() ||
+          isSubtypeOfInspectable<V>() ||
+          isSubtypeOfWinRTEnum<V>())) {
+    return true;
+  }
+
+  return false;
 }
 
 List<bool> boolListFromArray(

@@ -57,7 +57,7 @@ class IMap<K, V> extends IInspectable
       }
     }
 
-    throw ArgumentError('Unsupported types: IMap<$K, $V>');
+    throw ArgumentError('Unsupported key-value pair: IMap<$K, $V>');
   }
 
   /// Creates an instance of [IMap] using the given [ptr].
@@ -84,18 +84,8 @@ class IMap<K, V> extends IInspectable
     V Function(int)? enumCreator,
   })  : _creator = creator,
         _enumCreator = enumCreator {
-    if (!isSameType<K, GUID>() &&
-        !isSameType<K, int>() &&
-        !isSameType<K, Object>() &&
-        !isSameType<K, String>()) {
-      throw ArgumentError.value(K, 'K', 'Unsupported type');
-    }
-
-    if (!isSimilarType<V, Object>() &&
-        !isSimilarType<V, String>() &&
-        !isSubtypeOfInspectable<V>() &&
-        !isSubtypeOfWinRTEnum<V>()) {
-      throw ArgumentError.value(V, 'V', 'Unsupported type');
+    if (!isSupportedKeyValuePair<K, V>()) {
+      throw ArgumentError('Unsupported key-value pair: IMap<$K, $V>');
     }
 
     if (isSubtypeOfInspectable<V>() && creator == null) {
