@@ -1023,6 +1023,88 @@ void main() {
       tearDown(winrtUninitialize);
     });
 
+    group('IMapView<String, String?> (StringMap)', () {
+      late IMapView<String, String?> mapView;
+
+      IMapView<String, String?> getView(Pointer<COMObject> ptr) {
+        final retValuePtr = calloc<COMObject>();
+
+        final hr = ptr.ref.lpVtbl.value
+                .elementAt(9)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, retValuePtr);
+
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        return IMapView.fromRawPointer(retValuePtr);
+      }
+
+      setUp(() {
+        winrtInitialize();
+        final map = IMap<String, String?>()
+          ..insert('key1', 'value1')
+          ..insert('key2', null)
+          ..insert('key3', 'value3');
+        mapView = getView(map.ptr);
+      });
+
+      test('lookup fails if the map is empty', () {
+        final map = IMap<String, String?>();
+        mapView = getView(map.ptr);
+        expect(() => mapView.lookup('key1'), throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(() => mapView.lookup('key4'), throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(mapView.lookup('key1'), equals('value1'));
+        expect(mapView.lookup('key2'), isNull);
+        expect(mapView.lookup('key3'), equals('value3'));
+      });
+
+      test('hasKey finds items', () {
+        expect(mapView.hasKey('key1'), isTrue);
+        expect(mapView.hasKey('key2'), isTrue);
+        expect(mapView.hasKey('key3'), isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(mapView.hasKey('key4'), isFalse);
+      });
+
+      test('toMap', () {
+        final dartMap = mapView.toMap();
+        expect(dartMap.length, equals(3));
+        expect(dartMap['key1'], equals('value1'));
+        expect(dartMap['key2'], isNull);
+        expect(dartMap['key3'], equals('value3'));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        final iterator = mapView.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals('key3'));
+        expect(iterator.current.value, equals('value3'));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key2'));
+        expect(iterator.current.value, isNull);
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key1'));
+        expect(iterator.current.value, equals('value1'));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(winrtUninitialize);
+    });
+
     group('IVector<DeviceClass>', () {
       late DevicePicker picker;
       late DevicePickerFilter pickerFilter;
