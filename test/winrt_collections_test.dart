@@ -61,7 +61,7 @@ void main() {
           ..append(DeviceClass.audioCapture)
           ..append(DeviceClass.audioRender);
         final containsElement = vector.indexOf(DeviceClass.audioRender, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -73,7 +73,7 @@ void main() {
           ..append(DeviceClass.audioRender);
         final containsElement =
             vector.indexOf(DeviceClass.imageScanner, pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -253,13 +253,13 @@ void main() {
           ..append(DeviceClass.audioRender)
           ..append(DeviceClass.imageScanner);
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals(DeviceClass.audioCapture));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(DeviceClass.audioRender));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(DeviceClass.imageScanner));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -317,7 +317,7 @@ void main() {
           ..append(5)
           ..append(259);
         final containsElement = vector.indexOf(259, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -328,7 +328,7 @@ void main() {
           ..append(5)
           ..append(259);
         final containsElement = vector.indexOf(666, pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -505,13 +505,13 @@ void main() {
           ..append(259)
           ..append(666);
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals(5));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(259));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(666));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -570,7 +570,7 @@ void main() {
           ..append('.jpg')
           ..append('.jpeg');
         final containsElement = vector.indexOf('.jpeg', pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -581,7 +581,7 @@ void main() {
           ..append('.jpg')
           ..append('.jpeg');
         final containsElement = vector.indexOf('.png', pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -754,13 +754,13 @@ void main() {
           ..append('.jpeg')
           ..append('.png');
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals('.jpg'));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals('.jpeg'));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals('.png'));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -822,7 +822,7 @@ void main() {
       test('indexOf returns 0 if the element is not found', () {
         final pIndex = allocator<Uint32>();
         final containsElement = vectorView.indexOf('xx-xx', pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -850,7 +850,7 @@ void main() {
         final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.hasCurrent, true);
+          expect(iterator.hasCurrent, isTrue);
           // Should be something like en-US
           expect(iterator.current[2], equals('-'));
           // MoveNext() should return true except for the last iteration
@@ -923,7 +923,7 @@ void main() {
         final pIndex = allocator<Uint32>();
         final hostName = vectorView.getAt(0);
         final containsElement = vectorView.indexOf(hostName, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, greaterThanOrEqualTo(0));
       });
 
@@ -944,7 +944,7 @@ void main() {
         final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.hasCurrent, true);
+          expect(iterator.hasCurrent, isTrue);
           expect(iterator.current.rawName, equals(list[i].rawName));
           // MoveNext() should return true except for the last iteration
           expect(iterator.moveNext(), i < list.length - 1);
