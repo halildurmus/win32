@@ -40,16 +40,14 @@ class IKeyValuePair<K, V> extends IInspectable {
   /// [V] must be of type `Object`, `String`, or `WinRT` (e.g. `IJsonValue`,
   /// `ProductLicense`).
   ///
-  /// [creator] must be specified if [V] is a `WinRT` type (e.g.
-  /// `IJsonValue.fromRawPointer`).
+  /// [creator] must be specified if [V] is a `WinRT` type.
   /// ```dart
   /// final keyValuePair =
   ///     IKeyValuePair<String, IJsonValue?>.fromRawPointer(ptr,
   ///         creator: IJsonValue.fromRawPointer);
   /// ```
   ///
-  /// [enumCreator] must be specified if [V] is a `WinRTEnum` type (e.g.
-  /// `ChatMessageStatus.from`).
+  /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
   /// final keyValuePair =
   ///     IKeyValuePair<String, ChatMessageStatus?>.fromRawPointer(ptr,
