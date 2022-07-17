@@ -1,7 +1,6 @@
 @TestOn('windows')
 
 import 'package:generator/generator.dart';
-import 'package:generator/src/projection/winrt_parameter.dart';
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 

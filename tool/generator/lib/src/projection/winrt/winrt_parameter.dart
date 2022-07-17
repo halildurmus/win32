@@ -1,4 +1,4 @@
-import 'parameter.dart';
+import '../parameter.dart';
 
 /// A WinRT parameter.
 ///

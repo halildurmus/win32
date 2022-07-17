@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import 'com_interface.dart';
-import 'method.dart';
-import 'utils.dart';
+import '../com_interface.dart';
+import '../method.dart';
+import '../utils.dart';
 import 'winrt_get_property.dart';
 import 'winrt_method.dart';
 import 'winrt_set_property.dart';
