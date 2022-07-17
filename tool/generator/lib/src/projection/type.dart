@@ -98,6 +98,9 @@ class TypeProjection {
 
   bool get isWinRTEnum => isWinRT && isEnumType;
 
+  bool get isGenericType =>
+      typeIdentifier.baseType == BaseType.genericTypeModifier;
+
   bool get isReferenceType =>
       typeIdentifier.baseType == BaseType.referenceTypeModifier;
 

@@ -78,19 +78,19 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
 
   bool get isMapReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IMap`2') ?? false);
 
   bool get isMapViewReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IMapView`2') ?? false);
 
   bool get isVectorReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
 
   bool get isVectorViewReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ?? false);
 
   String get parametersPreamble => parameters
