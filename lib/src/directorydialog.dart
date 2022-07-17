@@ -63,7 +63,7 @@ class DirectoryPicker extends FileDialog {
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = dialog.Show(NULL);
+    hr = dialog.Show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
