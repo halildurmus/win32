@@ -252,6 +252,13 @@ export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
 
 // Windows Runtime classes and interfaces
+export 'src/winrt/data/json/ijsonarray.dart';
+export 'src/winrt/data/json/ijsonobject.dart';
+export 'src/winrt/data/json/ijsonobjectwithdefaultvalues.dart';
+export 'src/winrt/data/json/ijsonvalue.dart';
+export 'src/winrt/data/json/jsonarray.dart';
+export 'src/winrt/data/json/jsonobject.dart';
+export 'src/winrt/data/json/jsonvalue.dart';
 export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
 export 'src/winrt/devices/enumeration/devicepicker.dart';
 export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
