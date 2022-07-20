@@ -14,6 +14,7 @@ import '../../types.dart';
 import '../../utils.dart';
 import '../../winrt_helpers.dart';
 import '../devices/sensors/enums.g.dart';
+import '../devices/sensors/pedometerreading.dart';
 import '../foundation/collections/ikeyvaluepair.dart';
 import '../foundation/propertyvalue.dart';
 import '../foundation/structs.g.dart';
@@ -43,7 +44,7 @@ class MapHelper {
 ///
 /// Supported key-value pairs are: `IKeyValuePair<int, IInspectable?>`,
 /// `IKeyValuePair<GUID, IInspectable?>`, `IKeyValuePair<GUID, Object?>`,
-/// `IKeyValuePair<PedometerStepKind, IInspectable?>`,
+/// `IKeyValuePair<PedometerStepKind, PedometerReading?>`,
 /// `IKeyValuePair<Object, Object?>`,
 /// `IKeyValuePair<String, Object?>`, `IKeyValuePair<String, String?>`,
 /// `IKeyValuePair<String, IInspectable?>`, `IKeyValuePair<String, WinRTEnum?>`.
@@ -65,7 +66,7 @@ bool isSupportedKeyValuePair<K, V>() {
   }
 
   // e.g. IKeyValuePair<PedometerStepKind, PedometerReading>
-  if (isSameType<K, PedometerStepKind>() && isSubtypeOfInspectable<V>()) {
+  if (isSameType<K, PedometerStepKind>() && isSameType<V, PedometerReading>()) {
     return true;
   }
 

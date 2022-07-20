@@ -257,6 +257,8 @@ export 'src/winrt/devices/enumeration/devicepicker.dart';
 export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
 export 'src/winrt/devices/enumeration/idevicepicker.dart';
 export 'src/winrt/devices/enumeration/idevicepickerfilter.dart';
+export 'src/winrt/devices/sensors/ipedometerreading.dart';
+export 'src/winrt/devices/sensors/pedometerreading.dart';
 export 'src/winrt/foundation/collections/iiterable.dart';
 export 'src/winrt/foundation/collections/iiterator.dart';
 export 'src/winrt/foundation/collections/ikeyvaluepair.dart';
