@@ -16,6 +16,7 @@ import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
+import '../../internal/ipropertyvalue_helper.dart';
 import '../../internal/map_helpers.dart';
 import '../ipropertyvalue.dart';
 

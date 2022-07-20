@@ -360,8 +360,7 @@ List<int> uint8ListFromArray(
 /// Boxes [value] so that it can be passed to the WinRT APIs that take
 /// `IPropertyValue` interface as a parameter.
 ///
-/// This is mostly used when working with `IMap`, `IMapView`, `IReference`, and
-/// `IReferenceArray` types.
+/// This is mostly used when working with `IMap` and `IMapView` types.
 Pointer<COMObject> boxValue(Object? value) {
   if (value == null) return PropertyValue.createEmpty();
 

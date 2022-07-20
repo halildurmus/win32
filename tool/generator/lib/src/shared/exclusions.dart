@@ -48,7 +48,6 @@ const excludedComInterfaces = <String>{
 
 const excludedWindowsRuntimeTypes = <String>{
   // These types are generated manually by design
-  'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
   'Windows.Foundation.Collections.IKeyValuePair`2',

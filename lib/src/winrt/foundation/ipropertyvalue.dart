@@ -1,29 +1,34 @@
 // ipropertyvalue.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../../com/iinspectable.dart';
 import '../../combase.dart';
 import '../../exceptions.dart';
-import '../../guid.dart';
 import '../../macros.dart';
-import '../../types.dart';
 import '../../utils.dart';
-import '../../winrt/foundation/structs.g.dart';
+import '../../types.dart';
+import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
-import '../internal/map_helpers.dart';
-import 'enums.g.dart';
+
+import '../../winrt/internal/hstring_array.dart';
+
+import '../../winrt/foundation/enums.g.dart';
+import '../../guid.dart';
+import '../../winrt/foundation/structs.g.dart';
+import '../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';
 
-/// Represents a value in a property store.
-///
 /// {@category Interface}
 /// {@category winrt}
 class IPropertyValue extends IInspectable {
@@ -32,93 +37,6 @@ class IPropertyValue extends IInspectable {
 
   factory IPropertyValue.from(IInspectable interface) =>
       IPropertyValue.fromRawPointer(interface.toInterface(IID_IPropertyValue));
-
-  Object? get value {
-    if (ptr.ref.lpVtbl == nullptr) return null;
-
-    // If the object does not implement the IPropertyValue interface, return it
-    // as an `IInspectable` object.
-    if (!iids.contains(IID_IPropertyValue)) return IInspectable(ptr);
-
-    switch (this.type) {
-      case PropertyType.boolean:
-        return getBoolean();
-      case PropertyType.booleanArray:
-        return boolListFromArray(getBooleanArray);
-      case PropertyType.char16:
-        return getChar16();
-      case PropertyType.char16Array:
-        return char16ListFromArray(getChar16Array);
-      case PropertyType.dateTime:
-        return getDateTime();
-      case PropertyType.dateTimeArray:
-        return dateTimeListFromArray(getDateTimeArray);
-      case PropertyType.double_:
-        return getDouble();
-      case PropertyType.doubleArray:
-        return doubleListFromArray(getDoubleArray);
-      case PropertyType.guid:
-        return getGuid();
-      case PropertyType.guidArray:
-        return guidListFromArray(getGuidArray);
-      case PropertyType.inspectableArray:
-        return inspectableListFromArray(getInspectableArray);
-      case PropertyType.int16:
-        return getInt16();
-      case PropertyType.int16Array:
-        return int16ListFromArray(getInt16Array);
-      case PropertyType.int32:
-        return getInt32();
-      case PropertyType.int32Array:
-        return int32ListFromArray(getInt32Array);
-      case PropertyType.int64:
-        return getInt64();
-      case PropertyType.int64Array:
-        return int64ListFromArray(getInt64Array);
-      case PropertyType.point:
-        return getPoint();
-      case PropertyType.pointArray:
-        return pointListFromArray(getPointArray);
-      case PropertyType.rect:
-        return getRect();
-      case PropertyType.rectArray:
-        return rectListFromArray(getRectArray);
-      case PropertyType.single:
-        return getSingle();
-      case PropertyType.singleArray:
-        return singleListFromArray(getSingleArray);
-      case PropertyType.size:
-        return getSize();
-      case PropertyType.sizeArray:
-        return sizeListFromArray(getSizeArray);
-      case PropertyType.string:
-        return getString();
-      case PropertyType.stringArray:
-        return stringListFromArray(getStringArray);
-      case PropertyType.timeSpan:
-        return getTimeSpan();
-      case PropertyType.timeSpanArray:
-        return durationListFromArray(getTimeSpanArray);
-      case PropertyType.uInt16:
-        return getUInt16();
-      case PropertyType.uInt16Array:
-        return uint16ListFromArray(getUInt16Array);
-      case PropertyType.uInt32:
-        return getUInt32();
-      case PropertyType.uInt32Array:
-        return uint32ListFromArray(getUInt32Array);
-      case PropertyType.uInt64:
-        return getUInt64();
-      case PropertyType.uInt64Array:
-        return uint64ListFromArray(getUInt64Array);
-      case PropertyType.uInt8:
-        return getUInt8();
-      case PropertyType.uInt8Array:
-        return uint8ListFromArray(getUInt8Array);
-      default:
-        throw UnsupportedError('Unsupported type: ${this.type}');
-    }
-  }
 
   PropertyType get type {
     final retValuePtr = calloc<Int32>();
@@ -445,18 +363,22 @@ class IPropertyValue extends IInspectable {
   GUID getGuid() {
     final retValuePtr = calloc<GUID>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(20)
-        .cast<
-            Pointer<NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(20)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr.ref;
+      final retValue = retValuePtr.ref;
+      return retValue;
+    } finally {}
   }
 
   DateTime getDateTime() {
@@ -507,53 +429,64 @@ class IPropertyValue extends IInspectable {
   Point getPoint() {
     final retValuePtr = calloc<Point>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(23)
-        .cast<
-            Pointer<
-                NativeFunction<HRESULT Function(Pointer, Pointer<Point>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<Point>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(23)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Point>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Point>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr.ref;
+      final retValue = retValuePtr.ref;
+      return retValue;
+    } finally {}
   }
 
   Size getSize() {
     final retValuePtr = calloc<Size>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(24)
-        .cast<
-            Pointer<NativeFunction<HRESULT Function(Pointer, Pointer<Size>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<Size>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(24)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Size>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Size>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr.ref;
+      final retValue = retValuePtr.ref;
+      return retValue;
+    } finally {}
   }
 
   Rect getRect() {
     final retValuePtr = calloc<Rect>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(25)
-        .cast<
-            Pointer<NativeFunction<HRESULT Function(Pointer, Pointer<Rect>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<Rect>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(25)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Rect>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Rect>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr.ref;
+      final retValue = retValuePtr.ref;
+      return retValue;
+    } finally {}
   }
 
   void getUInt8Array(Pointer<Uint32> valueSize, Pointer<Pointer<Uint8>> value) {
