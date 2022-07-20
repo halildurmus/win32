@@ -122,6 +122,8 @@ class TypeProjection {
 
   bool get isWinRTDelegate => isWinRT && _isDelegate;
 
+  bool get isWinRTStruct => isWinRT && (typeIdentifier.type?.isStruct ?? false);
+
   bool get isClass => typeIdentifier.type?.isClass ?? false;
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
