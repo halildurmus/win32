@@ -16,6 +16,7 @@ import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
+import '../../devices/sensors/pedometerstepkind_helpers.dart';
 import '../../internal/ipropertyvalue_helper.dart';
 import '../../internal/map_helpers.dart';
 import '../ipropertyvalue.dart';
@@ -77,9 +78,7 @@ class IKeyValuePair<K, V> extends IInspectable {
   K get key {
     if (isSameType<K, GUID>()) return _key_GUID as K;
     if (isSameType<K, int>()) return _key_Uint32 as K;
-    if (isSameType<K, PedometerStepKind>()) {
-      return _key_PedometerStepKind as K;
-    }
+    if (isSameType<K, PedometerStepKind>()) return keyAsPedometerStepKind as K;
     if (isSameType<K, String>()) return _key_String as K;
 
     return _key_Object;
@@ -119,28 +118,6 @@ class IKeyValuePair<K, V> extends IInspectable {
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
-    } finally {
-      free(retValuePtr);
-    }
-  }
-
-  PedometerStepKind get _key_PedometerStepKind {
-    final retValuePtr = calloc<Int32>();
-
-    try {
-      final hr = ptr.ref.lpVtbl.value
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return PedometerStepKind.from(retValuePtr.value);
     } finally {
       free(retValuePtr);
     }

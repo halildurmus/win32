@@ -19,7 +19,8 @@ void main() {
     expect(isSupportedKeyValuePair<GUID, String?>(), isFalse);
     expect(isSupportedKeyValuePair<GUID, WinRTEnum?>(), isFalse);
 
-    expect(isSupportedKeyValuePair<PedometerStepKind, IInspectable?>(), isTrue);
+    expect(isSupportedKeyValuePair<PedometerStepKind, PedometerReading?>(),
+        isTrue);
     expect(isSupportedKeyValuePair<PedometerStepKind, Object?>(), isFalse);
     expect(isSupportedKeyValuePair<PedometerStepKind, String?>(), isFalse);
     expect(isSupportedKeyValuePair<PedometerStepKind, WinRTEnum?>(), isFalse);

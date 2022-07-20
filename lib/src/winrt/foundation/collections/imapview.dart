@@ -16,6 +16,7 @@ import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
+import '../../devices/sensors/pedometerstepkind_helpers.dart';
 import '../../internal/ipropertyvalue_helper.dart';
 import '../../internal/map_helpers.dart';
 import '../ipropertyvalue.dart';
@@ -92,7 +93,7 @@ class IMapView<K, V> extends IInspectable
     }
 
     if (isSameType<K, PedometerStepKind>()) {
-      return _lookup_PedometerStepKind_COMObject(key as PedometerStepKind);
+      return lookupByPedometerStepKind(key as PedometerStepKind) as V;
     }
 
     if (isSameType<K, String>()) {
@@ -187,26 +188,6 @@ class IMapView<K, V> extends IInspectable
     if (FAILED(hr)) throw WindowsException(hr);
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
-  }
-
-  V _lookup_PedometerStepKind_COMObject(PedometerStepKind key) {
-    final retValuePtr = calloc<COMObject>();
-
-    final hr =
-        ptr.ref.lpVtbl.value
-                .elementAt(6)
-                .cast<
-                    Pointer<
-                        NativeFunction<
-                            HRESULT Function(
-                                Pointer, Int32, Pointer<COMObject>)>>>()
-                .value
-                .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
-            ptr.ref.lpVtbl, key.value, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    return _creator!(retValuePtr);
   }
 
   V _lookup_String_COMObject(String key) {
@@ -341,7 +322,7 @@ class IMapView<K, V> extends IInspectable
     if (isSameType<K, GUID>()) return _hasKey_GUID(value as GUID);
     if (isSameType<K, int>()) return _hasKey_Uint32(value as int);
     if (isSameType<K, PedometerStepKind>()) {
-      return _hasKey_PedometerStepKind(value as PedometerStepKind);
+      return hasKeyByPedometerStepKind(value as PedometerStepKind);
     }
     if (isSameType<K, String>()) return _hasKey_String(value as String);
 
@@ -406,28 +387,6 @@ class IMapView<K, V> extends IInspectable
           .asFunction<
               int Function(Pointer, COMObject,
                   Pointer<Bool>)>()(ptr.ref.lpVtbl, value.ptr.ref, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return retValuePtr.value;
-    } finally {
-      free(retValuePtr);
-    }
-  }
-
-  bool _hasKey_PedometerStepKind(PedometerStepKind value) {
-    final retValuePtr = calloc<Bool>();
-
-    try {
-      final hr = ptr.ref.lpVtbl.value
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Int32, Pointer<Bool>)>>>()
-              .value
-              .asFunction<int Function(Pointer, int, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, value.value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

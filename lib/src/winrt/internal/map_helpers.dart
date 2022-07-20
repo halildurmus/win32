@@ -66,7 +66,8 @@ bool isSupportedKeyValuePair<K, V>() {
   }
 
   // e.g. IKeyValuePair<PedometerStepKind, PedometerReading>
-  if (isSameType<K, PedometerStepKind>() && isSameType<V, PedometerReading>()) {
+  if (isSameType<K, PedometerStepKind>() &&
+      isSimilarType<V, PedometerReading>()) {
     return true;
   }
 
