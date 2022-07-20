@@ -4,9 +4,10 @@ mixin VectorProjection on WinRTMethodProjection {
   String get vectorType {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
     if (typeProjection.isString) return 'String';
-    if (typeProjection.isClass ||
-        typeProjection.isInterface ||
-        typeProjection.isWinRTEnum) {
+    if (typeProjection.isWinRT &&
+        (typeProjection.isClass ||
+            typeProjection.isInterface ||
+            typeProjection.isWinRTEnum)) {
       return lastComponent(typeProjection.typeIdentifier.name);
     }
 
@@ -15,7 +16,8 @@ mixin VectorProjection on WinRTMethodProjection {
 
   String get vectorArgs {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
-    final creator = typeProjection.isClass || typeProjection.isInterface
+    final creator = typeProjection.isWinRT &&
+            (typeProjection.isClass || typeProjection.isInterface)
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
         : null;
     final enumCreator = typeProjection.isWinRTEnum

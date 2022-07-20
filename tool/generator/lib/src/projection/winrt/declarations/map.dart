@@ -7,9 +7,10 @@ mixin MapProjection on WinRTMethodProjection {
     final typeProjection = TypeProjection(typeIdentifier);
     if (typeProjection.isObject) return 'Object';
     if (typeProjection.isString) return 'String';
-    if (typeProjection.isClass ||
-        typeProjection.isInterface ||
-        typeProjection.isWinRTEnum) {
+    if (typeProjection.isWinRT &&
+        (typeProjection.isClass ||
+            typeProjection.isInterface ||
+            typeProjection.isWinRTEnum)) {
       return lastComponent(typeProjection.typeIdentifier.name);
     }
 
@@ -27,7 +28,8 @@ mixin MapProjection on WinRTMethodProjection {
   String get mapArgs {
     final typeProjection =
         TypeProjection(returnType.typeIdentifier.typeArg!.typeArg!);
-    final creator = typeProjection.isClass || typeProjection.isInterface
+    final creator = typeProjection.isWinRT &&
+            (typeProjection.isClass || typeProjection.isInterface)
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
         : null;
     final enumCreator = typeProjection.isWinRTEnum
