@@ -56,7 +56,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       final interfaceProjection = WinRTInterfaceProjection(factoryTypeDef);
       for (final method in interfaceProjection.methodProjections) {
         buffer.writeln('''
-          static $shortName ${method.name}(${method.methodParams}) {
+          static $shortName ${method.camelCasedName}(${method.methodParams}) {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
