@@ -49,7 +49,7 @@ class ToastNotification extends IInspectable
   static const _className = 'Windows.UI.Notifications.ToastNotification';
 
   // IToastNotificationFactory methods
-  static ToastNotification CreateToastNotification(Pointer<COMObject> content) {
+  static ToastNotification createToastNotification(Pointer<COMObject> content) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IToastNotificationFactory);
 

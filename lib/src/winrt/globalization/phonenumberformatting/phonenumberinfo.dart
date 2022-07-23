@@ -38,7 +38,7 @@ class PhoneNumberInfo extends IInspectable
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo';
 
   // IPhoneNumberInfoFactory methods
-  static PhoneNumberInfo Create(String number) {
+  static PhoneNumberInfo create(String number) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoFactory);
 
