@@ -2,6 +2,10 @@
 
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
 import '../../../com/iinspectable.dart';
 import '../../../winrt_constants.dart';
 import '../../../winrt_helpers.dart';
@@ -18,7 +22,8 @@ const IID_PropertySet = '{D0204E8D-5F1D-4F95-A6E2-BE7B29830342}';
 /// {@category Class}
 /// {@category winrt}
 class PropertySet extends IInspectable implements IMap<String, Object?> {
-  PropertySet() : super(ActivateClass(_className));
+  PropertySet({Allocator allocator = calloc})
+      : super(ActivateClass(_className, allocator: allocator));
   PropertySet.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.PropertySet';
