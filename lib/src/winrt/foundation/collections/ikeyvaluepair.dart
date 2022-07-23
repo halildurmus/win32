@@ -17,7 +17,7 @@ import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
 import '../../devices/sensors/pedometerstepkind_helpers.dart';
-import '../../internal/ipropertyvalue_helper.dart';
+import '../../internal/ipropertyvalue_helpers.dart';
 import '../../internal/map_helpers.dart';
 import '../ipropertyvalue.dart';
 
