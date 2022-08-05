@@ -74,7 +74,7 @@ void main() {
           IPropertyValue.fromRawPointer(PropertyValue.createGuid(guid.ref));
       expect(pv.type, equals(PropertyType.guid));
       expect(pv.getGuid().toString(), equals(IID_ICalendar));
-    }, skip: 'Flaky due to retValuePtr being freed in GetGuid()');
+    });
 
     test('GuidArray', () {
       final array = calloc<GUID>(3);

@@ -70,6 +70,12 @@ class WinRTMethodProjection extends MethodProjection {
 
   bool get isStringReturn => returnType.isString;
 
+  bool get isStructReturn =>
+      returnType.dartType == 'GUID' ||
+      // Exclude special types (e.g. DateTime, EventRegistrationToken, HResult,
+      // TimeSpan) as we don't expose them as structs.
+      (returnType.isWinRTStruct && !returnType.isWin32SpecialType);
+
   bool get isDateTimeReturn =>
       returnType.typeIdentifier.name == 'Windows.Foundation.DateTime';
 
