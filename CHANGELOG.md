@@ -1,3 +1,7 @@
+## 2.2.4
+
+- Update to Windows.Win32.winmd v25.0.28.17102.
+
 ## 2.2.3
 
 - Update to Windows.Win32.winmd v24.0.6.19647.
