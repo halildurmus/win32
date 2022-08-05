@@ -19,10 +19,6 @@ const excludedWin32Structs = <String>{
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V2',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V3',
   'Windows.Win32.Media.Audio.DirectMusic.DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA',
-
-  // Can be removed when https://github.com/microsoft/win32metadata/issues/955
-  // is fixed.
-  'Windows.Win32.Devices.Fax.IStiDeviceW',
 };
 
 const excludedComInterfaces = <String>{
@@ -33,6 +29,7 @@ const excludedComInterfaces = <String>{
   'Windows.Win32.System.Mmc.Document',
 
   // The "real" versions of these are prefixed with _.
+  // See https://github.com/microsoft/win32metadata/issues/1031.
   'Windows.Win32.Devices.Fax.IFaxAccountNotify',
   'Windows.Win32.Devices.Fax.IFaxServerNotify2',
 
@@ -80,10 +77,13 @@ const excludedTypes = <String>[
 
 // Working around https://github.com/dart-lang/sdk/issues/46644
 const ignorePackingDirectives = <String>[
-  'Windows.Win32.System.SystemServices.DEVICEDUMP_SECTION_HEADER',
-  'Windows.Win32.System.SystemServices.DEVICEDUMP_STORAGEDEVICE_DATA',
-  'Windows.Win32.System.SystemServices.SENDCMDINPARAMS',
-  'Windows.Win32.Media.Multimedia.AUXCAPS2W',
+  'Windows.Win32.Media.Audio.AUXCAPS2W',
+  'Windows.Win32.Media.Audio.MIDIINCAPS2W',
+  'Windows.Win32.Media.Audio.MIDIOUTCAPS2W',
+  'Windows.Win32.Media.Audio.MIXERCAPS2W',
+  'Windows.Win32.Media.Audio.WAVEFORMATEXTENSIBLE',
+  'Windows.Win32.Media.Audio.WAVEINCAPS2W',
+  'Windows.Win32.Media.Audio.WAVEOUTCAPS2W',
   'Windows.Win32.Media.Multimedia.EXBMINFOHEADER',
   'Windows.Win32.Media.Multimedia.JOYCAPS2W',
   'Windows.Win32.Media.Multimedia.MCI_DGV_CAPTURE_PARMSW',
@@ -96,13 +96,9 @@ const ignorePackingDirectives = <String>[
   'Windows.Win32.Media.Multimedia.MCI_DGV_RESTORE_PARMSW',
   'Windows.Win32.Media.Multimedia.MCI_DGV_SAVE_PARMSW',
   'Windows.Win32.Media.Multimedia.MCI_DGV_UPDATE_PARMS',
-  'Windows.Win32.Media.Multimedia.MIDIINCAPS2W',
-  'Windows.Win32.Media.Multimedia.MIDIOUTCAPS2W',
-  'Windows.Win32.Media.Multimedia.MIXERCAPS2W',
-  'Windows.Win32.Media.Multimedia.WAVEFORMATEXTENSIBLE',
-  'Windows.Win32.Media.Multimedia.WAVEINCAPS2W',
-  'Windows.Win32.Media.Multimedia.WAVEOUTCAPS2W',
-  'Windows.Win32.Media.Multimedia.joyreguservalues_tag',
+  'Windows.Win32.System.Ioctl.DEVICEDUMP_SECTION_HEADER',
+  'Windows.Win32.System.Ioctl.DEVICEDUMP_STORAGEDEVICE_DATA',
+  'Windows.Win32.System.Ioctl.SENDCMDINPARAMS',
 
   // From metadata.
 
@@ -122,11 +118,11 @@ const ignorePackingDirectives = <String>[
   'Windows.Win32.Devices.Tapi.PHONECAPS',
   'Windows.Win32.NetworkManagement.Rras.RASCONN',
   'Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO',
-  'Windows.Win32.Security.Authentication.Identity.Core.MSV_1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL',
-  'Windows.Win32.Security.Authentication.Identity.Core.USER_ALL_INFORMATION',
+  'Windows.Win32.Security.Authentication.Identity.MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL',
+  'Windows.Win32.Security.Authentication.Identity.USER_ALL_INFORMATION',
   'Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE',
-  'Windows.Win32.Ui.Shell.FILEDESCRIPTOR',
-  'Windows.Win32.Ui.Shell.AUTO_SCROLL_DATA',
-  'Windows.Win32.Ui.Shell.DROPFILES',
-  'Windows.Win32.Storage.StructuredStorage.JET_SIGNATURE',
+  'Windows.Win32.UI.Shell.FILEDESCRIPTOR',
+  'Windows.Win32.UI.Shell.AUTO_SCROLL_DATA',
+  'Windows.Win32.UI.Shell.DROPFILES',
+  'Windows.Win32.Storage.Jet.JET_SIGNATURE',
 ];
