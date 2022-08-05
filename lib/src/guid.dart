@@ -85,6 +85,22 @@ class GUID extends Struct {
     Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
         int.parse(rawString.substring(4, 16), radix: 16);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is GUID &&
+        other.Data1 == Data1 &&
+        other.Data2 == Data2 &&
+        other.Data3 == Data3 &&
+        other.Data4 == Data4;
+  }
+
+  @override
+  int get hashCode =>
+      Data1.hashCode ^ Data2.hashCode ^ Data3.hashCode ^ Data4.hashCode;
 }
 
-Pointer<GUID> GUIDFromString(String guid) => calloc<GUID>()..ref.setGUID(guid);
+Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = calloc}) =>
+    allocator<GUID>()..ref.setGUID(guid);

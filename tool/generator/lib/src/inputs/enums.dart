@@ -3,6 +3,8 @@ final windowsRuntimeEnumsToGenerate = <String, String>{
       'Indicates the type of devices that the user wants to enumerate.',
   'Windows.Devices.Enumeration.DevicePickerDisplayStatusOptions':
       "Indicates what you'd like the device picker to show about a given device. Used with the SetDisplayStatus method on the DevicePicker object.",
+  'Windows.Devices.Sensors.PedometerStepKind':
+      'The type of step taken according to the pedometer.',
   'Windows.Foundation.AsyncStatus':
       'Specifies the status of an asynchronous operation.',
   'Windows.Foundation.PropertyType': 'Specifies property value types.',

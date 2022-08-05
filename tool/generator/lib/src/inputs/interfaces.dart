@@ -106,6 +106,7 @@ const comInterfacesToGenerate = <String>{
 
 final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Data.Xml.Dom.IXmlNodeList',
+  'Windows.Devices.Sensors.PedometerReading',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IPropertyValue',
@@ -122,5 +123,6 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Storage.Pickers.IFileOpenPicker',
   'Windows.Storage.UserDataPaths',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  'Windows.UI.Notifications.NotificationData',
   'Windows.UI.Notifications.ToastNotification',
 };

@@ -98,6 +98,9 @@ class TypeProjection {
 
   bool get isWinRTEnum => isWinRT && isEnumType;
 
+  bool get isGenericType =>
+      typeIdentifier.baseType == BaseType.genericTypeModifier;
+
   bool get isReferenceType =>
       typeIdentifier.baseType == BaseType.referenceTypeModifier;
 
@@ -127,6 +130,8 @@ class TypeProjection {
   bool get isClass => typeIdentifier.type?.isClass ?? false;
 
   bool get isInterface => typeIdentifier.type?.isInterface ?? false;
+
+  bool get isObject => typeIdentifier.baseType == BaseType.objectType;
 
   TypeTuple unwrapWinRTEnum() {
     final fieldType = typeIdentifier.type?.findField('value__')?.typeIdentifier;

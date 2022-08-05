@@ -7,6 +7,7 @@ import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
+import 'declarations/map.dart';
 import 'declarations/string.dart';
 import 'declarations/vector.dart';
 import 'declarations/void.dart';
@@ -82,12 +83,20 @@ class WinRTMethodProjection extends MethodProjection {
   bool get isTimeSpanReturn =>
       returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
 
+  bool get isMapReturn =>
+      returnType.isGenericType &&
+      (returnType.typeIdentifier.type?.name.endsWith('IMap`2') ?? false);
+
+  bool get isMapViewReturn =>
+      returnType.isGenericType &&
+      (returnType.typeIdentifier.type?.name.endsWith('IMapView`2') ?? false);
+
   bool get isVectorReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
 
   bool get isVectorViewReturn =>
-      returnType.typeIdentifier.baseType == BaseType.genericTypeModifier &&
+      returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ?? false);
 
   String get parametersPreamble => parameters
@@ -123,6 +132,14 @@ class WinRTMethodProjection extends MethodProjection {
     try {
       if (isEnumReturn) {
         return declarationFor(WinRTMethodReturningEnumProjection.new);
+      }
+
+      if (isMapReturn) {
+        return declarationFor(WinRTMethodReturningMapProjection.new);
+      }
+
+      if (isMapViewReturn) {
+        return declarationFor(WinRTMethodReturningMapViewProjection.new);
       }
 
       if (isVectorReturn) {

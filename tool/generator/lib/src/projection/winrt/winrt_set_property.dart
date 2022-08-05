@@ -47,6 +47,8 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
   @override
   String toString() {
     try {
+      // TODO: declarationFor(WinRTSetPropertyReturningMapProjection.new)
+      // TODO: declarationFor(WinRTSetPropertyReturningMapViewProjection.new)
       // TODO: declarationFor(WinRTSetPropertyReturningVectorProjection.new)
       // TODO: declarationFor(WinRTSetPropertyReturningVectorViewProjection.new)
       // TODO: declarationFor(WinRTSetPropertyReturningCOMObjectProjection.new)

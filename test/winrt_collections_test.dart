@@ -11,6 +11,1100 @@ import 'package:win32/win32.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
+    group('IMap<GUID, Object?> (MediaPropertySet)', () {
+      late IMap<GUID, Object?> map;
+      late Arena allocator;
+
+      setUp(() {
+        winrtInitialize();
+        allocator = Arena();
+        final pPoint = allocator<Point>()
+          ..ref.X = 3
+          ..ref.Y = -3;
+        final pRect = allocator<Rect>()
+          ..ref.Height = 100
+          ..ref.Width = 200
+          ..ref.X = 2
+          ..ref.Y = -2;
+        final pSize = allocator<Size>()
+          ..ref.Height = 1500
+          ..ref.Width = 300;
+
+        map = IMap()
+          ..insert(
+              GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref,
+              null)
+          ..insert(GUIDFromString(IID_ICalendar, allocator: allocator).ref,
+              Calendar(allocator: allocator))
+          ..insert(
+              GUIDFromString(IID_IStorageItem, allocator: allocator).ref, true)
+          ..insert(
+              GUIDFromString(IID_IPhoneNumberFormatter, allocator: allocator)
+                  .ref,
+              DateTime(2022, 7, 11, 17, 30))
+          ..insert(
+              GUIDFromString(IID_ISpellChecker, allocator: allocator).ref, 0.5)
+          ..insert(GUIDFromString(IID_IShellLink, allocator: allocator).ref,
+              const Duration(seconds: 30))
+          ..insert(GUIDFromString(IID_IShellService, allocator: allocator).ref,
+              GUIDFromString(IID_ISpVoice, allocator: allocator).ref)
+          ..insert(
+              GUIDFromString(IID_IShellFolder, allocator: allocator).ref, 259)
+          ..insert(GUIDFromString(IID_IShellItem, allocator: allocator).ref,
+              pPoint.ref)
+          ..insert(GUIDFromString(IID_IShellItem2, allocator: allocator).ref,
+              pRect.ref)
+          ..insert(
+              GUIDFromString(IID_IShellItemArray, allocator: allocator).ref,
+              pSize.ref)
+          ..insert(
+              GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref,
+              'strVal')
+          ..insert(GUIDFromString(IID_IUnknown, allocator: allocator).ref,
+              [true, false])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader, allocator: allocator).ref,
+              [DateTime(2020, 7, 11, 17, 30), DateTime(2022, 7, 11, 17, 30)])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader2, allocator: allocator)
+                  .ref,
+              [2.5, 0.99])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader3, allocator: allocator)
+                  .ref,
+              const [Duration(hours: 1), Duration(minutes: 60)])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader4, allocator: allocator)
+                  .ref,
+              [GUIDFromString(IID_IShellItem, allocator: allocator).ref])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader5, allocator: allocator)
+                  .ref,
+              [
+                Calendar(allocator: allocator),
+              ])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader6, allocator: allocator)
+                  .ref,
+              [2022, -2022])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestReader7, allocator: allocator)
+                  .ref,
+              [pPoint.ref])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestProperties, allocator: allocator)
+                  .ref,
+              [pRect.ref])
+          ..insert(
+              GUIDFromString(IID_IAppxManifestPackageId, allocator: allocator)
+                  .ref,
+              [pSize.ref])
+          ..insert(GUIDFromString(IID_IAppxFile, allocator: allocator).ref,
+              ['str1', 'str2']);
+      });
+
+      test('fromMap', () {
+        final calendarGuid =
+            GUIDFromString(IID_ICalendar, allocator: allocator).ref;
+        final pickerGuid =
+            GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref;
+        final storageItemGuid =
+            GUIDFromString(IID_IStorageItem, allocator: allocator).ref;
+        map = IMap.fromMap({
+          calendarGuid: Calendar(allocator: allocator),
+          pickerGuid: 259,
+          storageItemGuid: 'strVal',
+        });
+
+        final calendarVal = map.lookup(calendarGuid);
+        expect(calendarVal, isA<IInspectable>());
+        final calendar =
+            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
+        expect(calendar.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+        expect(map.lookup(pickerGuid), equals(259));
+        expect(map.lookup(storageItemGuid), equals('strVal'));
+      });
+
+      test('lookup fails if the map is empty', () {
+        map.clear();
+        expect(
+            () => map.lookup(
+                GUIDFromString(IID_ICalendar, allocator: allocator).ref),
+            throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(
+            () => map.lookup(
+                GUIDFromString(IID_IInspectable, allocator: allocator).ref),
+            throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref),
+            isNull);
+
+        final calendarVal =
+            map.lookup(GUIDFromString(IID_ICalendar, allocator: allocator).ref);
+        expect(calendarVal, isA<IInspectable>());
+        final calendar =
+            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
+        expect(calendar.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IStorageItem, allocator: allocator).ref),
+            isTrue);
+
+        final dateTimeVal = map.lookup(
+            GUIDFromString(IID_IPhoneNumberFormatter, allocator: allocator)
+                .ref);
+        expect(dateTimeVal, isA<DateTime>());
+        final dateTime = dateTimeVal as DateTime;
+        expect(dateTime.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_ISpellChecker, allocator: allocator).ref),
+            equals(0.5));
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IShellLink, allocator: allocator).ref),
+            equals(const Duration(seconds: 30)));
+
+        final guidVal = map.lookup(
+            GUIDFromString(IID_IShellService, allocator: allocator).ref);
+        expect(guidVal, isA<GUID>());
+        final guid = guidVal as GUID;
+        expect(guid.toString(), equals(IID_ISpVoice));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IShellFolder, allocator: allocator).ref),
+            equals(259));
+
+        final pointVal = map
+            .lookup(GUIDFromString(IID_IShellItem, allocator: allocator).ref);
+        expect(pointVal, isA<Point>());
+        final point = pointVal as Point;
+        expect(point.X, equals(3));
+        expect(point.Y, equals(-3));
+
+        final rectVal = map
+            .lookup(GUIDFromString(IID_IShellItem2, allocator: allocator).ref);
+        expect(rectVal, isA<Rect>());
+        final rect = rectVal as Rect;
+        expect(rect.Height, equals(100));
+        expect(rect.Width, equals(200));
+        expect(rect.X, equals(2));
+        expect(rect.Y, equals(-2));
+
+        final sizeVal = map.lookup(
+            GUIDFromString(IID_IShellItemArray, allocator: allocator).ref);
+        expect(sizeVal, isA<Size>());
+        final size = sizeVal as Size;
+        expect(size.Height, equals(1500));
+        expect(size.Width, equals(300));
+
+        expect(map.lookup(GUIDFromString(IID_IShellItemFilter).ref),
+            equals('strVal'));
+
+        expect(
+            map.lookup(GUIDFromString(IID_IUnknown, allocator: allocator).ref),
+            equals([true, false]));
+
+        final dateTimeListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestReader, allocator: allocator).ref);
+        expect(dateTimeListVal, isA<List<DateTime>>());
+        final dateTimeList = dateTimeListVal as List<DateTime>;
+        expect(dateTimeList.first.millisecondsSinceEpoch,
+            equals(DateTime(2020, 7, 11, 17, 30).millisecondsSinceEpoch));
+        expect(dateTimeList.last.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IAppxManifestReader2, allocator: allocator)
+                    .ref),
+            equals([2.5, 0.99]));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IAppxManifestReader3, allocator: allocator)
+                    .ref),
+            equals(const [Duration(hours: 1), Duration(minutes: 60)]));
+
+        final guidListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestReader4, allocator: allocator).ref);
+        expect(guidListVal, isA<List<GUID>>());
+        final guidList = guidListVal as List<GUID>;
+        expect(guidList.first.toString(), equals(IID_IShellItem));
+
+        final calendarListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestReader5, allocator: allocator).ref);
+        expect(calendarListVal, isA<List<IInspectable>>());
+        final calendarList = calendarListVal as List<IInspectable>;
+        final calendar_ = Calendar.fromRawPointer(calendarList.first.ptr);
+        expect(calendar_.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+
+        expect(
+            map.lookup(
+                GUIDFromString(IID_IAppxManifestReader6, allocator: allocator)
+                    .ref),
+            equals([2022, -2022]));
+
+        final pointListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestReader7, allocator: allocator).ref);
+        expect(pointListVal, isA<List<Point>>());
+        final pointList = pointListVal as List<Point>;
+        expect(pointList.first.X, equals(3));
+        expect(pointList.first.Y, equals(-3));
+
+        final rectListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestProperties, allocator: allocator)
+                .ref);
+        expect(rectListVal, isA<List<Rect>>());
+        final rectList = rectListVal as List<Rect>;
+        expect(rectList.first.Height, equals(100));
+        expect(rectList.first.Width, equals(200));
+        expect(rectList.first.X, equals(2));
+        expect(rectList.first.Y, equals(-2));
+
+        final sizeListVal = map.lookup(
+            GUIDFromString(IID_IAppxManifestPackageId, allocator: allocator)
+                .ref);
+        expect(sizeListVal, isA<List<Size>>());
+        final sizeList = sizeListVal as List<Size>;
+        expect(sizeList.first.Height, equals(1500));
+        expect(sizeList.first.Width, equals(300));
+
+        expect(
+            map.lookup(GUIDFromString(IID_IAppxFile, allocator: allocator).ref),
+            equals(['str1', 'str2']));
+      });
+
+      test('hasKey finds items', () {
+        expect(
+            map.hasKey(GUIDFromString(IID_ICalendar, allocator: allocator).ref),
+            isTrue);
+        expect(
+            map.hasKey(
+                GUIDFromString(IID_IShellLink, allocator: allocator).ref),
+            isTrue);
+        expect(
+            map.hasKey(
+                GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref),
+            isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(
+            map.hasKey(
+                GUIDFromString(IID_IInspectable, allocator: allocator).ref),
+            isFalse);
+      });
+
+      test('getView', () {
+        final unmodifiableMap = map.getView();
+        expect(unmodifiableMap.length, equals(23));
+        expect(() => unmodifiableMap..clear(), throwsUnsupportedError);
+      });
+
+      test('insert replaces an existing item', () {
+        final guid =
+            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
+        expect(map.size, equals(23));
+        expect(map.insert(guid, 'strValNew'), isTrue);
+        expect(map.size, equals(23));
+        expect(map.lookup(guid), equals('strValNew'));
+      });
+
+      test('insert inserts a new item', () {
+        final guid =
+            GUIDFromString(IID_IDevicePicker, allocator: allocator).ref;
+        expect(map.size, equals(23));
+        expect(map.insert(guid, 'idevicepicker'), isFalse);
+        expect(map.size, equals(24));
+        expect(map.lookup(guid), equals('idevicepicker'));
+      });
+
+      test('remove throws exception if the map is empty', () {
+        map.clear();
+        final guid = GUIDFromString(IID_ICalendar, allocator: allocator).ref;
+        expect(() => map.remove(guid), throwsException);
+      });
+
+      test('remove throws exception if the item does not exists', () {
+        final guid = GUIDFromString(IID_IInspectable, allocator: allocator).ref;
+        expect(() => map.remove(guid), throwsException);
+      });
+
+      test('remove', () {
+        final guid1 =
+            GUIDFromString(IID_IShellFolder, allocator: allocator).ref;
+        final guid2 =
+            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
+        expect(map.size, equals(23));
+
+        map.remove(guid1);
+        expect(map.size, equals(22));
+        expect(() => map.lookup(guid1), throwsException);
+
+        map.remove(guid2);
+        expect(map.size, equals(21));
+        expect(() => map.lookup(guid2), throwsException);
+      });
+
+      test('clear', () {
+        expect(map.size, equals(23));
+        map.clear();
+        expect(map.size, equals(0));
+      });
+
+      test('toMap', () {
+        final guid1 =
+            GUIDFromString(IID_IShellFolder, allocator: allocator).ref;
+        final guid2 =
+            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
+        final guid3 =
+            GUIDFromString(IID_IAppxManifestReader2, allocator: allocator).ref;
+        final dartMap = map.toMap();
+        expect(dartMap.length, equals(23));
+        expect(dartMap[guid1], equals(259));
+        expect(dartMap[guid2], equals('strVal'));
+        expect(dartMap[guid3], equals([2.5, 0.99]));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        final calendarGuid =
+            GUIDFromString(IID_ICalendar, allocator: allocator).ref;
+        final storageItemGuid =
+            GUIDFromString(IID_IStorageItem, allocator: allocator).ref;
+        map = IMap.fromMap({calendarGuid: 'icalendar', storageItemGuid: 259});
+
+        final iterator = map.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals(calendarGuid));
+        expect(iterator.current.value, equals('icalendar'));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals(storageItemGuid));
+        expect(iterator.current.value, equals(259));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(() {
+        allocator.releaseAll(reuse: true);
+        winrtUninitialize();
+      });
+    });
+
+    group('IMap<String, Object?> (PropertySet)', () {
+      late IMap<String, Object?> map;
+      late Arena allocator;
+
+      setUp(() {
+        winrtInitialize();
+        allocator = Arena();
+        final guid = GUIDFromString(IID_ISpVoice, allocator: allocator).ref;
+        final pPoint = allocator<Point>()
+          ..ref.X = 3
+          ..ref.Y = -3;
+        final pRect = allocator<Rect>()
+          ..ref.Height = 100
+          ..ref.Width = 200
+          ..ref.X = 2
+          ..ref.Y = -2;
+        final pSize = allocator<Size>()
+          ..ref.Height = 1500
+          ..ref.Width = 300;
+
+        map = IMap()
+          ..insert('key1', null)
+          ..insert('key2', Calendar(allocator: allocator))
+          ..insert('key3', true)
+          ..insert('key4', DateTime(2022, 7, 11, 17, 30))
+          ..insert('key5', 0.5)
+          ..insert('key6', const Duration(seconds: 30))
+          ..insert('key7', guid)
+          ..insert('key8', 259)
+          ..insert('key9', pPoint.ref)
+          ..insert('key10', pRect.ref)
+          ..insert('key11', pSize.ref)
+          ..insert('key12', 'strVal')
+          ..insert('key13', [true, false])
+          ..insert('key14',
+              [DateTime(2020, 7, 11, 17, 30), DateTime(2022, 7, 11, 17, 30)])
+          ..insert('key15', [2.5, 0.99])
+          ..insert('key16', const [Duration(hours: 1), Duration(minutes: 60)])
+          ..insert('key17', [guid])
+          ..insert('key18', [Calendar(allocator: allocator)])
+          ..insert('key19', [2022, -2022])
+          ..insert('key20', [pPoint.ref])
+          ..insert('key21', [pRect.ref])
+          ..insert('key22', [pSize.ref])
+          ..insert('key23', ['str1', 'str2']);
+      });
+
+      test('fromMap', () {
+        map = IMap.fromMap({
+          'key1': Calendar(allocator: allocator),
+          'key2': 259,
+          'key3': 'strVal',
+        });
+
+        final calendarVal = map.lookup('key1');
+        expect(calendarVal, isA<IInspectable>());
+        final calendar =
+            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
+        expect(calendar.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+        expect(map.lookup('key2'), equals(259));
+        expect(map.lookup('key3'), equals('strVal'));
+      });
+
+      test('lookup fails if the map is empty', () {
+        map.clear();
+        expect(() => map.lookup('key1'), throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(() => map.lookup('key0'), throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(map.lookup('key1'), isNull);
+
+        final calendarVal = map.lookup('key2');
+        expect(calendarVal, isA<IInspectable>());
+        final calendar =
+            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
+        expect(calendar.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+
+        expect(map.lookup('key3'), isTrue);
+
+        final dateTimeVal = map.lookup('key4');
+        expect(dateTimeVal, isA<DateTime>());
+        final dateTime = dateTimeVal as DateTime;
+        expect(dateTime.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(map.lookup('key5'), equals(0.5));
+        expect(map.lookup('key6'), equals(const Duration(seconds: 30)));
+
+        final guidVal = map.lookup('key7');
+        expect(guidVal, isA<GUID>());
+        final guid = guidVal as GUID;
+        expect(guid.toString(), equals(IID_ISpVoice));
+
+        expect(map.lookup('key8'), equals(259));
+
+        final pointVal = map.lookup('key9');
+        expect(pointVal, isA<Point>());
+        final point = pointVal as Point;
+        expect(point.X, equals(3));
+        expect(point.Y, equals(-3));
+
+        final rectVal = map.lookup('key10');
+        expect(rectVal, isA<Rect>());
+        final rect = rectVal as Rect;
+        expect(rect.Height, equals(100));
+        expect(rect.Width, equals(200));
+        expect(rect.X, equals(2));
+        expect(rect.Y, equals(-2));
+
+        final sizeVal = map.lookup('key11');
+        expect(sizeVal, isA<Size>());
+        final size = sizeVal as Size;
+        expect(size.Height, equals(1500));
+        expect(size.Width, equals(300));
+
+        expect(map.lookup('key12'), equals('strVal'));
+
+        expect(map.lookup('key13'), equals([true, false]));
+
+        final dateTimeListVal = map.lookup('key14');
+        expect(dateTimeListVal, isA<List<DateTime>>());
+        final dateTimeList = dateTimeListVal as List<DateTime>;
+        expect(dateTimeList.first.millisecondsSinceEpoch,
+            equals(DateTime(2020, 7, 11, 17, 30).millisecondsSinceEpoch));
+        expect(dateTimeList.last.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(map.lookup('key15'), equals([2.5, 0.99]));
+
+        expect(map.lookup('key16'),
+            equals(const [Duration(hours: 1), Duration(minutes: 60)]));
+
+        final guidListVal = map.lookup('key17');
+        expect(guidListVal, isA<List<GUID>>());
+        final guidList = guidListVal as List<GUID>;
+        expect(guidList.first.toString(), equals(IID_ISpVoice));
+
+        final calendarListVal = map.lookup('key18');
+        expect(calendarListVal, isA<List<IInspectable>>());
+        final calendarList = calendarListVal as List<IInspectable>;
+        final calendar_ = Calendar.fromRawPointer(calendarList.first.ptr);
+        expect(calendar_.runtimeClassName,
+            equals('Windows.Globalization.Calendar'));
+
+        expect(map.lookup('key19'), equals([2022, -2022]));
+
+        final pointListVal = map.lookup('key20');
+        expect(pointListVal, isA<List<Point>>());
+        final pointList = pointListVal as List<Point>;
+        expect(pointList.first.X, equals(3));
+        expect(pointList.first.Y, equals(-3));
+
+        final rectListVal = map.lookup('key21');
+        expect(rectListVal, isA<List<Rect>>());
+        final rectList = rectListVal as List<Rect>;
+        expect(rectList.first.Height, equals(100));
+        expect(rectList.first.Width, equals(200));
+        expect(rectList.first.X, equals(2));
+        expect(rectList.first.Y, equals(-2));
+
+        final sizeListVal = map.lookup('key22');
+        expect(sizeListVal, isA<List<Size>>());
+        final sizeList = sizeListVal as List<Size>;
+        expect(sizeList.first.Height, equals(1500));
+        expect(sizeList.first.Width, equals(300));
+
+        expect(map.lookup('key23'), equals(['str1', 'str2']));
+      });
+
+      test('hasKey finds items', () {
+        expect(map.hasKey('key1'), isTrue);
+        expect(map.hasKey('key11'), isTrue);
+        expect(map.hasKey('key23'), isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(map.hasKey('key0'), isFalse);
+      });
+
+      test('getView', () {
+        final unmodifiableMap = map.getView();
+        expect(unmodifiableMap.length, equals(23));
+        expect(() => unmodifiableMap..clear(), throwsUnsupportedError);
+      });
+
+      test('insert replaces an existing item', () {
+        expect(map.size, equals(23));
+        expect(map.insert('key12', 'strValNew'), isTrue);
+        expect(map.size, equals(23));
+        expect(map.lookup('key12'), equals('strValNew'));
+      });
+
+      test('insert inserts a new item', () {
+        expect(map.size, equals(23));
+        expect(map.insert('key24', null), isFalse);
+        expect(map.size, equals(24));
+        expect(map.lookup('key24'), isNull);
+      });
+
+      test('remove throws exception if the map is empty', () {
+        map.clear();
+        expect(() => map.remove('key1'), throwsException);
+      });
+
+      test('remove throws exception if the item does not exists', () {
+        expect(() => map.remove('key0'), throwsException);
+      });
+
+      test('remove', () {
+        expect(map.size, equals(23));
+
+        map.remove('key1');
+        expect(map.size, equals(22));
+        expect(() => map.lookup('key1'), throwsException);
+
+        map.remove('key6');
+        expect(map.size, equals(21));
+        expect(() => map.lookup('key6'), throwsException);
+      });
+
+      test('clear', () {
+        expect(map.size, equals(23));
+        map.clear();
+        expect(map.size, equals(0));
+      });
+
+      test('toMap', () {
+        final dartMap = map.toMap();
+        expect(dartMap.length, equals(23));
+        expect(dartMap['key8'], equals(259));
+        expect(dartMap['key12'], equals('strVal'));
+        expect(dartMap['key15'], equals([2.5, 0.99]));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        map = IMap.fromMap({'key1': 'icalendar', 'key2': 259});
+
+        final iterator = map.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals('key2'));
+        expect(iterator.current.value, equals(259));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key1'));
+        expect(iterator.current.value, equals('icalendar'));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(() {
+        allocator.releaseAll(reuse: true);
+        winrtUninitialize();
+      });
+    });
+
+    group('IMap<String, Object?> (ValueSet)', () {
+      late IMap<String, Object?> map;
+      late Arena allocator;
+
+      setUp(() {
+        winrtInitialize();
+        allocator = Arena();
+        final guid = GUIDFromString(IID_ISpVoice, allocator: allocator).ref;
+        final valueSet = ValueSet(allocator: allocator)
+          ..insert('key1', null)
+          ..insert('key2', 'strVal');
+        final pPoint = allocator<Point>()
+          ..ref.X = 3
+          ..ref.Y = -3;
+        final pRect = allocator<Rect>()
+          ..ref.Height = 100
+          ..ref.Width = 200
+          ..ref.X = 2
+          ..ref.Y = -2;
+        final pSize = allocator<Size>()
+          ..ref.Height = 1500
+          ..ref.Width = 300;
+
+        map = ValueSet(allocator: allocator)
+          ..insert('key1', null)
+          ..insert('key2', valueSet)
+          ..insert('key3', true)
+          ..insert('key4', DateTime(2022, 7, 11, 17, 30))
+          ..insert('key5', 0.5)
+          ..insert('key6', const Duration(seconds: 30))
+          ..insert('key7', guid)
+          ..insert('key8', 259)
+          ..insert('key9', pPoint.ref)
+          ..insert('key10', pRect.ref)
+          ..insert('key11', pSize.ref)
+          ..insert('key12', 'strVal')
+          ..insert('key13', [true, false])
+          ..insert('key14',
+              [DateTime(2020, 7, 11, 17, 30), DateTime(2022, 7, 11, 17, 30)])
+          ..insert('key15', [2.5, 0.99])
+          ..insert('key16', const [Duration(hours: 1), Duration(minutes: 60)])
+          ..insert('key17', [guid])
+          ..insert('key18', [2022, -2022])
+          ..insert('key19', [pPoint.ref])
+          ..insert('key20', [pRect.ref])
+          ..insert('key21', [pSize.ref])
+          ..insert('key22', ['str1', 'str2']);
+      });
+
+      test('lookup fails if the map is empty', () {
+        map.clear();
+        expect(() => map.lookup('key1'), throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(() => map.lookup('key0'), throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(map.lookup('key1'), isNull);
+
+        final valueSetVal = map.lookup('key2');
+        expect(valueSetVal, isA<IInspectable>());
+        final valueSet =
+            ValueSet.fromRawPointer((valueSetVal as IInspectable).ptr);
+        expect(valueSet.runtimeClassName,
+            equals('Windows.Foundation.Collections.ValueSet'));
+        expect(valueSet.size, equals(2));
+        expect(valueSet.lookup('key1'), isNull);
+        expect(valueSet.lookup('key2'), equals('strVal'));
+
+        expect(map.lookup('key3'), isTrue);
+
+        final dateTimeVal = map.lookup('key4');
+        expect(dateTimeVal, isA<DateTime>());
+        final dateTime = dateTimeVal as DateTime;
+        expect(dateTime.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(map.lookup('key5'), equals(0.5));
+        expect(map.lookup('key6'), equals(const Duration(seconds: 30)));
+
+        final guidVal = map.lookup('key7');
+        expect(guidVal, isA<GUID>());
+        final guid = guidVal as GUID;
+        expect(guid.toString(), equals(IID_ISpVoice));
+
+        expect(map.lookup('key8'), equals(259));
+
+        final pointVal = map.lookup('key9');
+        expect(pointVal, isA<Point>());
+        final point = pointVal as Point;
+        expect(point.X, equals(3));
+        expect(point.Y, equals(-3));
+
+        final rectVal = map.lookup('key10');
+        expect(rectVal, isA<Rect>());
+        final rect = rectVal as Rect;
+        expect(rect.Height, equals(100));
+        expect(rect.Width, equals(200));
+        expect(rect.X, equals(2));
+        expect(rect.Y, equals(-2));
+
+        final sizeVal = map.lookup('key11');
+        expect(sizeVal, isA<Size>());
+        final size = sizeVal as Size;
+        expect(size.Height, equals(1500));
+        expect(size.Width, equals(300));
+
+        expect(map.lookup('key12'), equals('strVal'));
+
+        expect(map.lookup('key13'), equals([true, false]));
+
+        final dateTimeListVal = map.lookup('key14');
+        expect(dateTimeListVal, isA<List<DateTime>>());
+        final dateTimeList = dateTimeListVal as List<DateTime>;
+        expect(dateTimeList.first.millisecondsSinceEpoch,
+            equals(DateTime(2020, 7, 11, 17, 30).millisecondsSinceEpoch));
+        expect(dateTimeList.last.millisecondsSinceEpoch,
+            equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
+
+        expect(map.lookup('key15'), equals([2.5, 0.99]));
+
+        expect(map.lookup('key16'),
+            equals(const [Duration(hours: 1), Duration(minutes: 60)]));
+
+        final guidListVal = map.lookup('key17');
+        expect(guidListVal, isA<List<GUID>>());
+        final guidList = guidListVal as List<GUID>;
+        expect(guidList.first.toString(), equals(IID_ISpVoice));
+
+        expect(map.lookup('key18'), equals([2022, -2022]));
+
+        final pointListVal = map.lookup('key19');
+        expect(pointListVal, isA<List<Point>>());
+        final pointList = pointListVal as List<Point>;
+        expect(pointList.first.X, equals(3));
+        expect(pointList.first.Y, equals(-3));
+
+        final rectListVal = map.lookup('key20');
+        expect(rectListVal, isA<List<Rect>>());
+        final rectList = rectListVal as List<Rect>;
+        expect(rectList.first.Height, equals(100));
+        expect(rectList.first.Width, equals(200));
+        expect(rectList.first.X, equals(2));
+        expect(rectList.first.Y, equals(-2));
+
+        final sizeListVal = map.lookup('key21');
+        expect(sizeListVal, isA<List<Size>>());
+        final sizeList = sizeListVal as List<Size>;
+        expect(sizeList.first.Height, equals(1500));
+        expect(sizeList.first.Width, equals(300));
+
+        expect(map.lookup('key22'), equals(['str1', 'str2']));
+      });
+
+      test('hasKey finds items', () {
+        expect(map.hasKey('key1'), isTrue);
+        expect(map.hasKey('key11'), isTrue);
+        expect(map.hasKey('key22'), isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(map.hasKey('key0'), isFalse);
+      });
+
+      test('getView', () {
+        final unmodifiableMap = map.getView();
+        expect(unmodifiableMap.length, equals(22));
+        expect(() => unmodifiableMap..clear(), throwsUnsupportedError);
+      });
+
+      test('insert replaces an existing item', () {
+        expect(map.size, equals(22));
+        expect(map.insert('key12', 'strValNew'), isTrue);
+        expect(map.size, equals(22));
+        expect(map.lookup('key12'), equals('strValNew'));
+      });
+
+      test('insert inserts a new item', () {
+        expect(map.size, equals(22));
+        expect(map.insert('key23', null), isFalse);
+        expect(map.size, equals(23));
+        expect(map.lookup('key23'), isNull);
+      });
+
+      test('remove throws exception if the map is empty', () {
+        map.clear();
+        expect(() => map.remove('key1'), throwsException);
+      });
+
+      test('remove throws exception if the item does not exists', () {
+        expect(() => map.remove('key0'), throwsException);
+      });
+
+      test('remove', () {
+        expect(map.size, equals(22));
+
+        map.remove('key1');
+        expect(map.size, equals(21));
+        expect(() => map.lookup('key1'), throwsException);
+
+        map.remove('key6');
+        expect(map.size, equals(20));
+        expect(() => map.lookup('key6'), throwsException);
+      });
+
+      test('clear', () {
+        expect(map.size, equals(22));
+        map.clear();
+        expect(map.size, equals(0));
+      });
+
+      test('toMap', () {
+        final dartMap = map.toMap();
+        expect(dartMap.length, equals(22));
+        expect(dartMap['key8'], equals(259));
+        expect(dartMap['key12'], equals('strVal'));
+        expect(dartMap['key15'], equals([2.5, 0.99]));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        map = ValueSet(allocator: allocator)
+          ..insert('key1', 'icalendar')
+          ..insert('key2', 259);
+
+        final iterator = map.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals('key2'));
+        expect(iterator.current.value, equals(259));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key1'));
+        expect(iterator.current.value, equals('icalendar'));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(() {
+        allocator.releaseAll(reuse: true);
+        winrtUninitialize();
+      });
+    });
+
+    group('IMap<String, String?> (StringMap)', () {
+      late IMap<String, String?> map;
+
+      setUp(() {
+        winrtInitialize();
+        map = IMap()
+          ..insert('key1', 'value1')
+          ..insert('key2', null)
+          ..insert('key3', 'value3');
+      });
+
+      test('fromMap', () {
+        map = IMap.fromMap({'key1': 'value1', 'key2': null, 'key3': 'value3'});
+        expect(map.lookup('key1'), equals('value1'));
+        expect(map.lookup('key2'), isNull);
+        expect(map.lookup('key3'), equals('value3'));
+      });
+
+      test('lookup fails if the map is empty', () {
+        map.clear();
+        expect(() => map.lookup('key1'), throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(() => map.lookup('key4'), throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(map.lookup('key1'), equals('value1'));
+        expect(map.lookup('key2'), isNull);
+        expect(map.lookup('key3'), equals('value3'));
+      });
+
+      test('hasKey finds items', () {
+        expect(map.hasKey('key1'), isTrue);
+        expect(map.hasKey('key2'), isTrue);
+        expect(map.hasKey('key3'), isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(map.hasKey('key4'), isFalse);
+      });
+
+      test('getView', () {
+        final unmodifiableMap = map.getView();
+        expect(unmodifiableMap.length, equals(3));
+        expect(() => unmodifiableMap..clear(), throwsUnsupportedError);
+      });
+
+      test('insert replaces an existing item', () {
+        expect(map.size, equals(3));
+        expect(map.insert('key1', 'value1New'), isTrue);
+        expect(map.size, equals(3));
+        expect(map.lookup('key1'), equals('value1New'));
+      });
+
+      test('insert inserts a new item', () {
+        expect(map.size, equals(3));
+        expect(map.insert('key4', 'value4'), isFalse);
+        expect(map.size, equals(4));
+        expect(map.lookup('key4'), equals('value4'));
+      });
+
+      test('remove throws exception if the map is empty', () {
+        map.clear();
+        expect(() => map.remove('key0'), throwsException);
+      });
+
+      test('remove throws exception if the item does not exists', () {
+        expect(() => map.remove('key4'), throwsException);
+      });
+
+      test('remove', () {
+        expect(map.size, equals(3));
+        map.remove('key1');
+        expect(map.size, equals(2));
+        expect(() => map.lookup('key1'), throwsException);
+
+        map.remove('key2');
+        expect(map.size, equals(1));
+        expect(() => map.lookup('key2'), throwsException);
+      });
+
+      test('clear', () {
+        expect(map.size, equals(3));
+        map.clear();
+        expect(map.size, equals(0));
+      });
+
+      test('toMap', () {
+        final dartMap = map.toMap();
+        expect(dartMap.length, equals(3));
+        expect(dartMap['key1'], equals('value1'));
+        expect(dartMap['key2'], isNull);
+        expect(dartMap['key3'], equals('value3'));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        final iterator = map.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals('key3'));
+        expect(iterator.current.value, equals('value3'));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key2'));
+        expect(iterator.current.value, isNull);
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key1'));
+        expect(iterator.current.value, equals('value1'));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(winrtUninitialize);
+    });
+
+    group('IMapView<String, String?> (StringMap)', () {
+      late IMapView<String, String?> mapView;
+
+      IMapView<String, String?> getView(Pointer<COMObject> ptr) {
+        final retValuePtr = calloc<COMObject>();
+
+        final hr = ptr.ref.lpVtbl.value
+                .elementAt(9)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, retValuePtr);
+
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        return IMapView.fromRawPointer(retValuePtr);
+      }
+
+      setUp(() {
+        winrtInitialize();
+        final map = IMap<String, String?>()
+          ..insert('key1', 'value1')
+          ..insert('key2', null)
+          ..insert('key3', 'value3');
+        mapView = getView(map.ptr);
+      });
+
+      test('lookup fails if the map is empty', () {
+        final map = IMap<String, String?>();
+        mapView = getView(map.ptr);
+        expect(() => mapView.lookup('key1'), throwsException);
+      });
+
+      test('lookup throws exception if the item does not exists', () {
+        expect(() => mapView.lookup('key4'), throwsException);
+      });
+
+      test('lookup returns items', () {
+        expect(mapView.lookup('key1'), equals('value1'));
+        expect(mapView.lookup('key2'), isNull);
+        expect(mapView.lookup('key3'), equals('value3'));
+      });
+
+      test('hasKey finds items', () {
+        expect(mapView.hasKey('key1'), isTrue);
+        expect(mapView.hasKey('key2'), isTrue);
+        expect(mapView.hasKey('key3'), isTrue);
+      });
+
+      test('hasKey returns false if the item does not exists', () {
+        expect(mapView.hasKey('key4'), isFalse);
+      });
+
+      test('toMap', () {
+        final dartMap = mapView.toMap();
+        expect(dartMap.length, equals(3));
+        expect(dartMap['key1'], equals('value1'));
+        expect(dartMap['key2'], isNull);
+        expect(dartMap['key3'], equals('value3'));
+        expect(() => dartMap..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        final iterator = mapView.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(iterator.current.key, equals('key3'));
+        expect(iterator.current.value, equals('value3'));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key2'));
+        expect(iterator.current.value, isNull);
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current.key, equals('key1'));
+        expect(iterator.current.value, equals('value1'));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(winrtUninitialize);
+    });
+
     group('IVector<DeviceClass>', () {
       late DevicePicker picker;
       late DevicePickerFilter pickerFilter;
@@ -61,7 +1155,7 @@ void main() {
           ..append(DeviceClass.audioCapture)
           ..append(DeviceClass.audioRender);
         final containsElement = vector.indexOf(DeviceClass.audioRender, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -73,7 +1167,7 @@ void main() {
           ..append(DeviceClass.audioRender);
         final containsElement =
             vector.indexOf(DeviceClass.imageScanner, pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -253,13 +1347,13 @@ void main() {
           ..append(DeviceClass.audioRender)
           ..append(DeviceClass.imageScanner);
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals(DeviceClass.audioCapture));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(DeviceClass.audioRender));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(DeviceClass.imageScanner));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -317,7 +1411,7 @@ void main() {
           ..append(5)
           ..append(259);
         final containsElement = vector.indexOf(259, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -328,7 +1422,7 @@ void main() {
           ..append(5)
           ..append(259);
         final containsElement = vector.indexOf(666, pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -505,13 +1599,13 @@ void main() {
           ..append(259)
           ..append(666);
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals(5));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(259));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals(666));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -570,7 +1664,7 @@ void main() {
           ..append('.jpg')
           ..append('.jpeg');
         final containsElement = vector.indexOf('.jpeg', pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, equals(1));
       });
 
@@ -581,7 +1675,7 @@ void main() {
           ..append('.jpg')
           ..append('.jpeg');
         final containsElement = vector.indexOf('.png', pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -754,13 +1848,13 @@ void main() {
           ..append('.jpeg')
           ..append('.png');
         final iterator = vector.first();
-        expect(iterator.hasCurrent, true);
+        expect(iterator.hasCurrent, isTrue);
         expect(iterator.current, equals('.jpg'));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals('.jpeg'));
-        expect(iterator.moveNext(), true);
+        expect(iterator.moveNext(), isTrue);
         expect(iterator.current, equals('.png'));
-        expect(iterator.moveNext(), false);
+        expect(iterator.moveNext(), isFalse);
       });
 
       tearDown(() {
@@ -822,7 +1916,7 @@ void main() {
       test('indexOf returns 0 if the element is not found', () {
         final pIndex = allocator<Uint32>();
         final containsElement = vectorView.indexOf('xx-xx', pIndex);
-        expect(containsElement, false);
+        expect(containsElement, isFalse);
         expect(pIndex.value, equals(0));
       });
 
@@ -850,7 +1944,7 @@ void main() {
         final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.hasCurrent, true);
+          expect(iterator.hasCurrent, isTrue);
           // Should be something like en-US
           expect(iterator.current[2], equals('-'));
           // MoveNext() should return true except for the last iteration
@@ -923,7 +2017,7 @@ void main() {
         final pIndex = allocator<Uint32>();
         final hostName = vectorView.getAt(0);
         final containsElement = vectorView.indexOf(hostName, pIndex);
-        expect(containsElement, true);
+        expect(containsElement, isTrue);
         expect(pIndex.value, greaterThanOrEqualTo(0));
       });
 
@@ -944,7 +2038,7 @@ void main() {
         final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
-          expect(iterator.hasCurrent, true);
+          expect(iterator.hasCurrent, isTrue);
           expect(iterator.current.rawName, equals(list[i].rawName));
           // MoveNext() should return true except for the last iteration
           expect(iterator.moveNext(), i < list.length - 1);

@@ -192,6 +192,14 @@ bool isSameType<S, T>() {
   return func is void Function<X extends T>();
 }
 
+/// Determines whether [S] is the same type as [T] or [T?].
+///
+/// ```dart
+/// isSimilarType<String?, String>(); // true
+/// isSimilarType<String?, String?>(); // true
+/// ```
+bool isSimilarType<S, T>() => isSameType<S, T>() || isSameType<S, T?>();
+
 /// Determines whether [S] is a subtype of [T] or [T?].
 ///
 /// ```dart
