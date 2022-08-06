@@ -38,7 +38,7 @@ class NotificationData extends IInspectable implements INotificationData {
   static const _className = 'Windows.UI.Notifications.NotificationData';
 
   // INotificationDataFactory methods
-  static NotificationData CreateNotificationDataWithValuesAndSequenceNumber(
+  static NotificationData createNotificationDataWithValuesAndSequenceNumber(
       Pointer<COMObject> initialValues, int sequenceNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
@@ -53,7 +53,7 @@ class NotificationData extends IInspectable implements INotificationData {
     }
   }
 
-  static NotificationData CreateNotificationDataWithValues(
+  static NotificationData createNotificationDataWithValues(
       Pointer<COMObject> initialValues) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
