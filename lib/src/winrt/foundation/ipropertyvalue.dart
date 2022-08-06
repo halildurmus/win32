@@ -378,9 +378,7 @@ class IPropertyValue extends IInspectable {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   DateTime getDateTime() {
@@ -446,9 +444,7 @@ class IPropertyValue extends IInspectable {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   Size getSize() {
@@ -469,9 +465,7 @@ class IPropertyValue extends IInspectable {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   Rect getRect() {
@@ -492,9 +486,7 @@ class IPropertyValue extends IInspectable {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   void getUInt8Array(Pointer<Uint32> valueSize, Pointer<Pointer<Uint8>> value) {

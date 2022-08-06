@@ -7,6 +7,8 @@ mixin DefaultMethodProjection on WinRTMethodProjection {
           returnType.dartType.startsWith('Pointer')
       ? 'value'
       : 'ref';
+
+  String get freePointer => isStructReturn ? '' : 'free(retValuePtr);';
 }
 
 class WinRTMethodReturningDefaultProjection extends WinRTMethodProjection
@@ -26,7 +28,7 @@ class WinRTMethodReturningDefaultProjection extends WinRTMethodProjection
           return retValue;
         } finally {
           $parametersPostamble
-          free(retValuePtr);
+          $freePointer
         }
       }
 ''';
@@ -47,7 +49,7 @@ class WinRTGetPropertyReturningDefaultProjection
           final retValue = retValuePtr.$valRef;
           return retValue;
         } finally {
-          free(retValuePtr);
+          $freePointer
         }
       }
 ''';

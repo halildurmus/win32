@@ -59,9 +59,7 @@ class IGamepad extends IInspectable implements IGameController {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   set vibration(GamepadVibration value) {
@@ -97,9 +95,7 @@ class IGamepad extends IInspectable implements IGameController {
 
       final retValue = retValuePtr.ref;
       return retValue;
-    } finally {
-      free(retValuePtr);
-    }
+    } finally {}
   }
 
   // IGameController methods

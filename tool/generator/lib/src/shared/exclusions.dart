@@ -47,6 +47,9 @@ const excludedWindowsRuntimeTypes = <String>{
   // These types are generated manually by design
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
+  'Windows.Foundation.Collections.IKeyValuePair`2',
+  'Windows.Foundation.Collections.IMap`2',
+  'Windows.Foundation.Collections.IMapView`2',
   'Windows.Foundation.Collections.IVector`1',
   'Windows.Foundation.Collections.IVectorView`1',
 
@@ -56,6 +59,12 @@ const excludedWindowsRuntimeTypes = <String>{
 
   'Windows.Devices.Enumeration.DevicePicker',
   'Windows.Devices.Enumeration.DevicePickerFilter',
+
+  //   Depends on https://github.com/timsneath/win32/issues/480
+  'Windows.Foundation.Collections.PropertySet',
+  'Windows.Foundation.Collections.StringMap',
+  'Windows.Foundation.Collections.ValueSet',
+  'Windows.Media.MediaProperties.MediaPropertySet',
 
   //   Requires WinRT delegate support
   'Windows.Foundation.IAsyncAction',
