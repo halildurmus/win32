@@ -1,4 +1,8 @@
 final windowsRuntimeEnumsToGenerate = <String, String>{
+  'Windows.Data.Json.JsonErrorStatus':
+      'Defines errors encountered while parsing JSON data.',
+  'Windows.Data.Json.JsonValueType':
+      'Specifies the JSON value type of a JsonValue object.',
   'Windows.Devices.Enumeration.DeviceClass':
       'Indicates the type of devices that the user wants to enumerate.',
   'Windows.Devices.Enumeration.DevicePickerDisplayStatusOptions':
