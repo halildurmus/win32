@@ -1,3 +1,9 @@
+## 2.3.0
+
+- Potential breaking change: `Method` and `TypeIdentifier` offer more friendly
+  `.toString()` values.
+- Make `TypeIdentifier` const.
+
 ## 2.2.4
 
 - Update to Windows.Win32.winmd v25.0.28.17102.
