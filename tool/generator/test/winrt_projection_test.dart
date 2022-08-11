@@ -265,6 +265,26 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
   });
 
+  test('WinRT get property successfully projects nullable types', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final expirationTimeSystemProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_ExpirationTime');
+
+    expect(
+        expirationTimeSystemProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(expirationTimeSystemProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(expirationTimeSystemProjection.returnType.dartType,
+        equals('COMObject'));
+    expect(expirationTimeSystemProjection.toString().trimLeft(),
+        startsWith('DateTime? get expirationTime'));
+  });
+
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
@@ -323,6 +343,23 @@ void main() {
     expect(setEraProjection.returnType.dartType, equals('void'));
     expect(setEraProjection.toString().trimLeft(),
         startsWith('set era(int value)'));
+  });
+
+  test('WinRT set property successfully projects nullable types', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final expirationTimeSystemProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'put_ExpirationTime');
+
+    expect(expirationTimeSystemProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, COMObject)'));
+    expect(expirationTimeSystemProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, COMObject)'));
+    expect(expirationTimeSystemProjection.returnType.dartType, equals('void'));
+    expect(expirationTimeSystemProjection.toString().trimLeft(),
+        startsWith('set expirationTime(DateTime? value)'));
   });
 
   test('WinRT method projects DateTime parameter correctly', () {
