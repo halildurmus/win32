@@ -69,11 +69,11 @@ class ToastNotification extends IInspectable
   Pointer<COMObject> get content => _iToastNotification.content;
 
   @override
-  set expirationTime(Pointer<COMObject> value) =>
+  set expirationTime(DateTime? value) =>
       _iToastNotification.expirationTime = value;
 
   @override
-  Pointer<COMObject> get expirationTime => _iToastNotification.expirationTime;
+  DateTime? get expirationTime => _iToastNotification.expirationTime;
 
   @override
   int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) =>

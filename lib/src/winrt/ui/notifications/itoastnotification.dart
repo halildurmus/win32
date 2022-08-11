@@ -26,6 +26,7 @@ import '../../../winrt/foundation/ireference.dart';
 import '../../../winrt/ui/notifications/toastnotification.dart';
 import '../../../winrt/ui/notifications/toastdismissedeventargs.dart';
 import '../../../winrt/ui/notifications/toastfailedeventargs.dart';
+import '../../../winrt/internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -59,21 +60,23 @@ class IToastNotification extends IInspectable {
     return retValuePtr;
   }
 
-  set expirationTime(Pointer<COMObject> value) {
+  set expirationTime(DateTime? value) {
+    final referencePtr = boxValue(value, convertToIReference: true);
+
     final hr = ptr.ref.vtable
-            .elementAt(7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, value);
+        .elementAt(7)
+        .cast<Pointer<NativeFunction<HRESULT Function(Pointer, COMObject)>>>()
+        .value
+        .asFunction<
+            int Function(
+                Pointer, COMObject)>()(ptr.ref.lpVtbl, referencePtr.ref);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
+    free(referencePtr);
   }
 
-  Pointer<COMObject> get expirationTime {
+  DateTime? get expirationTime {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -88,7 +91,11 @@ class IToastNotification extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr;
+    try {
+      return IReference<DateTime>.fromRawPointer(retValuePtr).value;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) {
