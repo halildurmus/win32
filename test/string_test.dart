@@ -90,6 +90,18 @@ void main() {
           WindowsDeleteString(hstring);
         }
       });
+
+      test('String to HSTRING conversion (null string)', () {
+        for (var i = 0; i < testRuns; i++) {
+          final hstring = convertToHString(null);
+
+          final string2 = convertFromHString(hstring);
+          expect('', equals(string2));
+
+          WindowsDeleteString(hstring);
+        }
+      });
+
       test('String to HSTRING conversion -- more complex', () {
         for (var i = 0; i < testRuns; i++) {
           const string = '''

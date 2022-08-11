@@ -661,7 +661,7 @@ class IMap<K, V> extends IInspectable
   bool _insert_String_String(String key, String? value) {
     final retValuePtr = calloc<Bool>();
     final hKey = convertToHString(key);
-    final hValue = value != null ? convertToHString(value) : 0;
+    final hValue = convertToHString(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value

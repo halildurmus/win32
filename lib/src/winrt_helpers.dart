@@ -56,12 +56,12 @@ String convertFromHString(int hstring) =>
 /// reaches 0, the Windows Runtime deallocates the buffer.
 ///
 /// {@category winrt}
-int convertToHString(String string) {
+int convertToHString(String? string) {
   final hString = calloc<HSTRING>();
-  final stringPtr = string.toNativeUtf16();
+  final stringPtr = string?.toNativeUtf16() ?? nullptr;
   // Create a HSTRING representing the object
   try {
-    final hr = WindowsCreateString(stringPtr, string.length, hString);
+    final hr = WindowsCreateString(stringPtr, string?.length ?? 0, hString);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     } else {
