@@ -952,5 +952,68 @@ const IID_IMap_String_String = '{F6D1F700-49C2-52AE-8154-826F9908773C}';
 const IID_IMap_String_Object = '{1B0D3570-0877-5EC2-8A2C-3B9539506ACA}';
 const IID_IMap_String_IJsonValue = '{C9D9A725-786B-5113-B4B7-9B61764C220B}';
 
+// IReference<T> IIDs
+const IID_IReference_AdaptiveMediaSourceResourceType =
+    '{74C8C3AA-DE03-5BF0-AAE8-AA8B692066B3}';
+const IID_IReference_BasicGeoposition =
+    '{E4D5DDA6-F57C-57CC-B67F-2939A901DABE}';
+const IID_IReference_BitmapBounds = '{AA19DA70-DEE6-5B42-B562-2FCD218C34CA}';
+const IID_IReference_BluetoothLEAdvertisementFlags =
+    '{91C0BA96-9E69-5B82-BF1D-83AB2A509C53}';
+const IID_IReference_Boolean = '{3C00FD60-2950-5939-A21A-2D12C5A01B8A}';
+const IID_IReference_CaptureSceneMode =
+    '{E20596AA-0BBE-5203-BE6B-6B71FF5B0843}';
+const IID_IReference_DateTime = '{5541D8A7-497C-5AA4-86FC-7713ADBF2A2C}';
+const IID_IReference_DisplayPresentationRate =
+    '{08882DDB-A981-5887-B751-106993D66229}';
+const IID_IReference_Double = '{2F2D6C29-5473-5F3E-92E7-96572BB990E2}';
+const IID_IReference_EmailMailboxSmimeEncryptionAlgorithm =
+    '{433B124D-60E6-5B7A-96BC-8681DE5F5E75}';
+const IID_IReference_EmailMailboxSmimeSigningAlgorithm =
+    '{E498A622-F168-5104-A53B-FAF996F51632}';
+const IID_IReference_Float = '{719CC2BA-3E76-5DEF-9F1A-38D85A145EA8}';
+const IID_IReference_GUID = '{7D50F649-632C-51F9-849A-EE49428933EA}';
+const IID_IReference_HdcpProtection = '{8E330979-2FEF-5D68-88AA-A9EE6697D117}';
+const IID_IReference_HolographicStereoTransform =
+    '{6E67CE78-CC67-52C0-B635-991DB0BFF5CA}';
+const IID_IReference_Int16 = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
+const IID_IReference_Int32 = '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}';
+const IID_IReference_Int64 = '{4DDA9E24-E69F-5C6A-A0A6-93427365AF2A}';
+const IID_IReference_ManualFocusDistance =
+    '{B0060B8A-1105-5AD4-963D-F6CF1905D349}';
+const IID_IReference_Matrix4x4 = '{DACBFFDC-68EF-5FD0-B657-782D0AC9807E}';
+const IID_IReference_MediaCaptureFocusState =
+    '{58820185-5DA0-5FAA-86DA-9BD9F03974FA}';
+const IID_IReference_MediaPlaybackAutoRepeatMode =
+    '{50A7F41F-58D5-5C4D-9475-8DD1ACD65836}';
+const IID_IReference_MediaPlaybackType =
+    '{E289F7D8-6BA7-50AB-9F13-6E4E51D15CA4}';
+const IID_IReference_MseTimeRange = '{2FFFD101-16F8-596D-A88E-659B6F584641}';
+const IID_IReference_Point = '{84F14C22-A00A-5272-8D3D-82112E66DF00}';
+const IID_IReference_Quaternion = '{B27004BB-C014-5DCE-9A21-799C5A3C1461}';
+const IID_IReference_Rect = '{80423F11-054F-5EAC-AFD3-63B6CE15E77B}';
+const IID_IReference_Size = '{61723086-8E53-5276-9F36-2A4BB93E2B75}';
+const IID_IReference_SizeInt32 = '{B77AA86D-2D6E-55F1-8F99-64AC5C05328B}';
+const IID_IReference_SpatialBoundingBox =
+    '{AB3274D9-9B82-5396-BB00-D70C539796B3}';
+const IID_IReference_SpatialBoundingFrustum =
+    '{F434FACE-0C36-5749-A8A0-0BB6CE78A614}';
+const IID_IReference_SpatialBoundingOrientedBox =
+    '{09F88309-9F81-5207-BDB2-ABEF926DB18F}';
+const IID_IReference_SpatialRay = '{44DD686B-C7D8-582C-91C2-D98E604DCFD4}';
+const IID_IReference_TimeSpan = '{604D0C4C-91DE-5C2A-935F-362F13EAF800}';
+const IID_IReference_Uint8 = '{E5198CC8-2873-55F5-B0A1-84FF9E4AAD62}';
+const IID_IReference_Uint32 = '{513EF3AF-E784-5325-A91E-97C2B8111CF3}';
+const IID_IReference_Uint64 = '{6755E376-53BB-568B-A11D-17239868309E}';
+const IID_IReference_UserDataTaskDaysOfWeek =
+    '{903861C5-D29D-5083-A03D-6B2A0233DCCA}';
+const IID_IReference_UserDataTaskWeekOfMonth =
+    '{5246FA7F-F9E9-5574-80F7-4AA359B0023D}';
+const IID_IReference_Vector2 = '{48F6A69E-8465-57AE-9400-9764087F65AD}';
+const IID_IReference_Vector3 = '{1EE770FF-C954-59CA-A754-6199A9BE282C}';
+const IID_IReference_WebErrorStatus = '{F2B26336-6A9D-54DE-8ECA-00D6C871E469}';
+const IID_IReference_WhiteBalanceGain =
+    '{79C7838A-39E2-5287-AC3B-B118DB251002}';
+
 // IVector<T> IIDs
 const IID_IVector_IJsonValue = '{D44662BC-DCE3-59A8-9272-4B210F33908B}';
