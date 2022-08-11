@@ -9,7 +9,12 @@ void main() {
         'Windows.Foundation.Diagnostics.AsyncCausalityTracer');
     final method = typeDef!.findMethod('TraceSynchronousWorkCompletion')!;
 
-    expect(method.toString(), equals('TraceSynchronousWorkCompletion'));
+    expect(
+        method.toString(),
+        equals('[voidType] TraceSynchronousWorkCompletion'
+            '(CausalityTraceLevel traceLevel, '
+            'CausalitySource source, '
+            'CausalitySynchronousWork work)'));
     expect(method.isHideBySig, isTrue);
     expect(method.isStatic, isTrue);
     expect(method.vTableLayout, equals(VtableLayout.reuseSlot));

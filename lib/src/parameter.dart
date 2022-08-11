@@ -57,13 +57,14 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           ppValue,
           pcchValue);
       if (SUCCEEDED(hr)) {
+        final baseType = parseCorElementType(pdwCPlusTypeFlag.value);
         return Parameter(
             scope,
             token,
             ptkMethodDef.value,
             pulSequence.value,
             pdwAttr.value,
-            TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
+            TypeIdentifier(baseType),
             szName.toDartString(),
             ppValue.value.asTypedList(pcchValue.value));
       } else {
@@ -84,7 +85,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       methodToken,
       0,
       0,
-      TypeIdentifier(BaseType.voidType),
+      const TypeIdentifier(BaseType.voidType),
       '',
       Uint8List(0));
 

@@ -27,10 +27,11 @@ class TypeTuple {
   /// ECMA-335.
   factory TypeTuple.fromSignature(Uint8List signatureBlob, Scope scope) {
     final paramType = signatureBlob.first;
-    final runtimeType = TypeIdentifier.fromValue(paramType);
+    final baseType = parseCorElementType(paramType);
+    // final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 
-    switch (runtimeType.baseType) {
+    switch (baseType) {
       case BaseType.valueTypeModifier:
       case BaseType.classTypeModifier:
         final uncompressed =
@@ -39,9 +40,9 @@ class TypeTuple {
         final tokenAsType = TypeDef.fromToken(scope, token);
 
         dataLength = uncompressed.dataLength + 1;
-        runtimeType.name = tokenAsType.name;
-        runtimeType.type = tokenAsType;
-        break;
+        return TypeTuple(
+            TypeIdentifier(baseType, name: tokenAsType.name, type: tokenAsType),
+            dataLength);
 
       case BaseType.referenceTypeModifier:
       case BaseType.pointerTypeModifier:
@@ -49,36 +50,46 @@ class TypeTuple {
         final typeArgTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         dataLength = 1 + typeArgTuple.offsetLength;
-        runtimeType.typeArg = typeArgTuple.typeIdentifier;
-        break;
+        return TypeTuple(
+            TypeIdentifier(baseType, typeArg: typeArgTuple.typeIdentifier),
+            dataLength);
 
       case BaseType.genericTypeModifier:
         // return a type with a generic
         final classTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
-        runtimeType.type = classTuple.typeIdentifier.type;
-        runtimeType.name = classTuple.typeIdentifier.name;
+        final runtimeType = TypeIdentifier(baseType,
+            name: classTuple.typeIdentifier.name,
+            type: classTuple.typeIdentifier.type);
         dataLength = 1 + classTuple.offsetLength;
 
         final argsCount = signatureBlob[dataLength]; // GENERICINST + class
         dataLength++; // skip over argsCount
 
-        var argPtr = runtimeType;
+        // Build up a stack of type identifiers, since this could be
+        // Foo<Bar<T>>. Start with Foo, and then work through the arguments.
+        final typeIdentifiers = <TypeIdentifier>[runtimeType];
         for (var idx = 0; idx < argsCount; idx++) {
           final arg =
               TypeTuple.fromSignature(signatureBlob.sublist(dataLength), scope);
+          typeIdentifiers.add(arg.typeIdentifier);
           dataLength += arg.offsetLength;
-          argPtr.typeArg = arg.typeIdentifier;
-          argPtr = argPtr.typeArg!;
         }
-        break;
+
+        // Unwrap them into a parent
+        var type = typeIdentifiers.last;
+        for (var idx = typeIdentifiers.length - 2; idx >= 0; idx--) {
+          final newType = typeIdentifiers[idx].copyWith(typeArg: type);
+          type = newType;
+        }
+        return TypeTuple(type, dataLength);
 
       case BaseType.arrayTypeModifier:
         // Format is [Type ArrayShape] (see §II.23.2.13)
         final arrayTuple =
             TypeTuple.fromSignature(signatureBlob.sublist(1), scope);
         dataLength = 1 + arrayTuple.offsetLength;
-        runtimeType.typeArg = arrayTuple.typeIdentifier;
+
         final dimensionsCount = signatureBlob[dataLength++]; // rank
         final dimensionUpperBounds = List<int>.filled(dimensionsCount, 0);
         final numSizes = signatureBlob[dataLength++];
@@ -88,24 +99,27 @@ class TypeTuple {
           dataLength += uncompressed.dataLength;
           dimensionUpperBounds[i] = uncompressed.data;
         }
-        runtimeType.arrayDimensions = dimensionUpperBounds;
-        break;
+        return TypeTuple(
+            TypeIdentifier(baseType,
+                typeArg: arrayTuple.typeIdentifier,
+                arrayDimensions: dimensionUpperBounds),
+            dataLength);
 
       case BaseType.classVariableTypeModifier:
       case BaseType.methodVariableTypeModifier:
         // Element is a generic parameter of a type or a method
         final uncompressed =
             UncompressedData.fromBlob(signatureBlob.sublist(1));
-        runtimeType.genericParameterSequence = uncompressed.data;
         dataLength = 2; // modifier + seq
-        runtimeType.name = runtimeType.toString();
-        break;
+        return TypeTuple(
+            TypeIdentifier(baseType,
+                name: TypeIdentifier(baseType).toString(), // TODO: Clean up
+                genericParameterSequence: uncompressed.data),
+            dataLength);
 
       default:
-        dataLength = 1;
+        return TypeTuple(TypeIdentifier(baseType), 1);
     }
-
-    return TypeTuple(runtimeType, dataLength);
   }
 
   /// Decodes a single `TypeDef` / `TypeRef` / `TypeSpec` token.
