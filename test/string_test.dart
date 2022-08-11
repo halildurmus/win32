@@ -94,9 +94,10 @@ void main() {
       test('String to HSTRING conversion (null string)', () {
         for (var i = 0; i < testRuns; i++) {
           final hstring = convertToHString(null);
+          expect(hstring, equals(0));
 
           final string2 = convertFromHString(hstring);
-          expect('', equals(string2));
+          expect(string2, isEmpty);
 
           WindowsDeleteString(hstring);
         }
