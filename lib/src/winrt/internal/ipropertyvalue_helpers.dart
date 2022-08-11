@@ -479,7 +479,7 @@ Pointer<COMObject> boxValue(
 }) {
   if (value == null) return PropertyValue.createEmpty();
 
-  final propertyValuePtr = _boxValue(value);
+  final propertyValuePtr = _boxValue(value, nativeType: nativeType);
   if (!convertToIReference) return propertyValuePtr;
 
   final iid = _referenceIidFromValue(value, nativeType);
