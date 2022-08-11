@@ -2,6 +2,7 @@ import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
+import 'declarations/reference.dart';
 import 'declarations/string.dart';
 import 'winrt_property.dart';
 
@@ -35,6 +36,11 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       parameters.first.type.typeIdentifier.name ==
       'Windows.Foundation.DateTime';
 
+  bool get isReferenceProperty =>
+      parameters.first.type.typeIdentifier.type?.name
+          .endsWith('IReference`1') ??
+      false;
+
   bool get isTimeSpanProperty =>
       parameters.first.type.typeIdentifier.name ==
       'Windows.Foundation.TimeSpan';
@@ -54,6 +60,10 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       // TODO: declarationFor(WinRTSetPropertyReturningCOMObjectProjection.new)
       if (isEnumProperty) {
         return declarationFor(WinRTSetPropertyReturningEnumProjection.new);
+      }
+
+      if (isReferenceProperty) {
+        return declarationFor(WinRTSetPropertyReturningReferenceProjection.new);
       }
 
       if (isStringProperty) {

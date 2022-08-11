@@ -8,6 +8,7 @@ import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
 import 'declarations/map.dart';
+import 'declarations/reference.dart';
 import 'declarations/string.dart';
 import 'declarations/vector.dart';
 import 'declarations/void.dart';
@@ -91,6 +92,10 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IMapView`2') ?? false);
 
+  bool get isReferenceReturn =>
+      returnType.isGenericType &&
+      (returnType.typeIdentifier.type?.name.endsWith('IReference`1') ?? false);
+
   bool get isVectorReturn =>
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
@@ -140,6 +145,10 @@ class WinRTMethodProjection extends MethodProjection {
 
       if (isMapViewReturn) {
         return declarationFor(WinRTMethodReturningMapViewProjection.new);
+      }
+
+      if (isReferenceReturn) {
+        return declarationFor(WinRTMethodReturningReferenceProjection.new);
       }
 
       if (isVectorReturn) {

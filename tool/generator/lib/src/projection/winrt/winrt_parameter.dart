@@ -1,4 +1,5 @@
 import '../parameter.dart';
+import '../type.dart';
 
 /// A WinRT parameter.
 ///
@@ -9,24 +10,46 @@ import '../parameter.dart';
 class WinRTParameterProjection extends ParameterProjection {
   const WinRTParameterProjection(super.name, super.type);
 
+  // Matcher properties
+
+  bool get isCOMObject => type.dartType == 'Pointer<COMObject>';
+
+  bool get isDateTime =>
+      type.typeIdentifier.name == 'Windows.Foundation.DateTime';
+
+  bool get isEnum => type.isWinRTEnum;
+
+  bool get isReference =>
+      type.typeIdentifier.type?.name.endsWith('IReference`1') ?? false;
+
+  bool get isString => type.isString;
+
+  bool get isTimeSpan =>
+      type.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
+
   /// Code to be inserted prior to the function call to set up the variable
   /// conversion.
   ///
   /// Any preamble that allocates memory should have a matching postamble that
   /// frees the memory.
   String get preamble {
-    if (type.typeIdentifier.name == 'Windows.Foundation.DateTime') {
+    if (isDateTime) {
       return 'final ${name}DateTime = '
           '$name.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;';
     }
 
-    if (type.typeIdentifier.name == 'Windows.Foundation.TimeSpan') {
-      return 'final ${name}Duration = $name.inMicroseconds * 10;';
+    if (isReference) {
+      final typeProjection = TypeProjection(type.typeIdentifier.typeArg!);
+      final args = <String>['convertToIReference: true'];
+      if (['double', 'int'].contains(typeProjection.methodParamType)) {
+        args.add('nativeType: ${typeProjection.nativeType}');
+      }
+
+      return 'final ${name}ReferencePtr = boxValue(value, ${args.join(', ')});';
     }
 
-    if (type.isString) {
-      return 'final ${name}Hstring = convertToHString($name);';
-    }
+    if (isString) return 'final ${name}Hstring = convertToHString($name);';
+    if (isTimeSpan) return 'final ${name}Duration = $name.inMicroseconds * 10;';
 
     return '';
   }
@@ -34,9 +57,8 @@ class WinRTParameterProjection extends ParameterProjection {
   /// Code to be inserted prior to the function call to tear down allocated
   /// memory.
   String get postamble {
-    if (type.isString) {
-      return 'WindowsDeleteString(${name}Hstring);';
-    }
+    if (isReference) return 'free(${name}ReferencePtr);';
+    if (isString) return 'WindowsDeleteString(${name}Hstring);';
 
     return '';
   }
@@ -44,11 +66,10 @@ class WinRTParameterProjection extends ParameterProjection {
   /// The name of the converted variable that should be passed inside the method
   /// call (e.g. `today` -> `todayDateTime`)
   String get localIdentifier {
-    if (type.isWinRTEnum) return '$identifier.value';
+    if (isEnum) return '$identifier.value';
+    if (isReference) return '${name}ReferencePtr.ref';
 
-    if (type.dartType == 'Pointer<COMObject>' &&
-        !type.isReferenceType &&
-        !type.isSimpleArrayType) {
+    if (isCOMObject && !type.isReferenceType && !type.isSimpleArrayType) {
       return '$identifier.cast<Pointer<COMObject>>().value';
     }
 

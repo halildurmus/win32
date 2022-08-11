@@ -85,6 +85,14 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String get importHeader {
     final imports = {...interfaceImport, ...importsForClass()}
       ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
+
+    final containsIReferenceImport =
+        imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
+    if (containsIReferenceImport) {
+      imports.add(
+          '${relativePathToSrcDir}winrt/internal/ipropertyvalue_helpers.dart');
+    }
+
     return imports.map((import) => "import '$import';").join('\n');
   }
 
