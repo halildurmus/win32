@@ -280,6 +280,7 @@ export 'src/winrt/foundation/iasyncaction.dart';
 export 'src/winrt/foundation/iasyncinfo.dart';
 export 'src/winrt/foundation/iasyncoperation.dart';
 export 'src/winrt/foundation/ipropertyvalue.dart';
+export 'src/winrt/foundation/ireference.dart';
 export 'src/winrt/foundation/propertyvalue.dart';
 export 'src/winrt/gaming/input/gamepad.dart';
 export 'src/winrt/gaming/input/igamecontroller.dart';
