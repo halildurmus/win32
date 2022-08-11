@@ -101,7 +101,12 @@ class Method extends TokenObject
   }
 
   @override
-  String toString() => name;
+  String toString() {
+    final params = parameters
+        .map((param) => '${param.typeIdentifier} ${param.name}')
+        .join(', ');
+    return '${returnType.typeIdentifier} $name($params)';
+  }
 
   /// The method's parent type.
   TypeDef get parent => scope.findTypeDefByToken(_parentToken)!;
@@ -327,13 +332,14 @@ class Method extends TokenObject
     parameters[paramsIndex].name = '__valueSize';
 
     if (isReferenceType) {
-      parameters[paramsIndex].typeIdentifier.baseType =
-          BaseType.pointerTypeModifier;
-      parameters[paramsIndex].typeIdentifier.typeArg =
-          TypeIdentifier(BaseType.uint32Type);
+      parameters[paramsIndex].typeIdentifier = parameters[paramsIndex]
+          .typeIdentifier
+          .copyWith(
+              baseType: BaseType.pointerTypeModifier,
+              typeArg: const TypeIdentifier(BaseType.uint32Type));
     } else {
       parameters[paramsIndex].typeIdentifier =
-          TypeIdentifier(BaseType.uint32Type);
+          const TypeIdentifier(BaseType.uint32Type);
     }
 
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));

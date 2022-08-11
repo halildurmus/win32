@@ -63,4 +63,9 @@ class TypeIdentifier {
       typeArg: typeArg ?? this.typeArg,
     );
   }
+
+  @override
+  String toString() => name.isNotEmpty
+      ? name.split('.').last
+      : '[${baseType.toString().split('.').last}]';
 }
