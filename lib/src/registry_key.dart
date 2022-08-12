@@ -45,15 +45,30 @@ class RegistryKey {
   }
 
   /// Deletes a subkey and its values from the specified platform-specific view
-  /// of the registry. Note that key names are not case sensitive.
-  void deleteKey(String keyName) {
+  /// of the registry. Set [recursive] to `true` if you want to delete subkey
+  /// with all its subkeys. Note that key names are not case sensitive.
+  void deleteKey(String keyName, {bool recursive = false}) {
     final lpSubKey = keyName.toNativeUtf16();
 
     try {
       final retcode = RegDeleteKey(hkey, lpSubKey);
 
       if (retcode != ERROR_SUCCESS) {
-        throw WindowsException(HRESULT_FROM_WIN32(retcode));
+        if (!recursive) {
+          throw WindowsException(HRESULT_FROM_WIN32(retcode));
+        } else {
+          final key = createKey(keyName);
+
+          try {
+            for (final subKeyName in key.subkeyNames.toList()) {
+              key.deleteKey(subKeyName, recursive: true);
+            }
+          } finally {
+            key.close();
+          }
+
+          deleteKey(keyName, recursive: false);
+        }
       }
     } finally {
       free(lpSubKey);
