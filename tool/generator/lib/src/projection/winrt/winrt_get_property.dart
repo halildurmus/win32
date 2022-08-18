@@ -4,6 +4,7 @@ import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
 import 'declarations/map.dart';
+import 'declarations/reference.dart';
 import 'declarations/string.dart';
 import 'declarations/vector.dart';
 import 'winrt_property.dart';
@@ -48,6 +49,10 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
       if (isMapViewReturn) {
         return declarationFor(WinRTGetPropertyReturningMapViewProjection.new);
+      }
+
+      if (isReferenceReturn) {
+        return declarationFor(WinRTGetPropertyReturningReferenceProjection.new);
       }
 
       if (isVectorReturn) {

@@ -345,6 +345,12 @@ class TypeProjection {
     if (isWinRTDelegate) return unwrapWinRTDelegate();
     if (isReferenceType) return unwrapReferenceType();
 
+    // IReference<T> parameters accept COMObject instead of Pointer<COMObject>
+    if (isGenericType &&
+        (typeIdentifier.type?.name.endsWith('IReference`1') ?? false)) {
+      return const TypeTuple('COMObject', 'COMObject');
+    }
+
     if (isInterface ||
         typeIdentifier.baseType == BaseType.classTypeModifier ||
         typeIdentifier.baseType == BaseType.objectType) {

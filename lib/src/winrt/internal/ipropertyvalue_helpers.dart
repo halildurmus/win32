@@ -12,6 +12,7 @@ import '../../combase.dart';
 import '../../guid.dart';
 import '../../types.dart';
 import '../../utils.dart';
+import '../../winrt_constants.dart';
 import '../../winrt_helpers.dart';
 import '../foundation/enums.g.dart';
 import '../foundation/ipropertyvalue.dart';
@@ -381,13 +382,7 @@ List<int> _uint8ListFromArray(
   }
 }
 
-/// Boxes [value] so that it can be passed to the WinRT APIs that take
-/// `IPropertyValue` interface as a parameter.
-///
-/// This is used when working with `IMap` and `IReference` types.
-Pointer<COMObject> boxValue(Object? value) {
-  if (value == null) return PropertyValue.createEmpty();
-
+Pointer<COMObject> _boxValue(Object value, {Type? nativeType}) {
   // There is no need to box IInspectable objects since .createInspectable()
   // returns the object provided without modification.
   // See https://docs.microsoft.com/en-us/uwp/api/windows.foundation.PropertyValue.createinspectable
@@ -395,10 +390,26 @@ Pointer<COMObject> boxValue(Object? value) {
 
   if (value is bool) return PropertyValue.createBoolean(value);
   if (value is DateTime) return PropertyValue.createDateTime(value);
-  if (value is double) return PropertyValue.createDouble(value);
+
+  if (value is double) {
+    if (nativeType == Float) return PropertyValue.createSingle(value);
+    return PropertyValue.createDouble(value);
+  }
+
   if (value is Duration) return PropertyValue.createTimeSpan(value);
   if (value is GUID) return PropertyValue.createGuid(value);
-  if (value is int) return PropertyValue.createInt64(value);
+
+  if (value is int) {
+    if (nativeType == Int16) return PropertyValue.createInt16(value);
+    if (nativeType == Int32) return PropertyValue.createInt32(value);
+    if (nativeType == Uint8) return PropertyValue.createUInt8(value);
+    if (nativeType == Uint16) return PropertyValue.createUInt16(value);
+    if (nativeType == Uint32) return PropertyValue.createUInt32(value);
+    if (nativeType == Uint64) return PropertyValue.createUInt64(value);
+
+    return PropertyValue.createInt64(value);
+  }
+
   if (value is Point) return PropertyValue.createPoint(value);
   if (value is Rect) return PropertyValue.createRect(value);
   if (value is Size) return PropertyValue.createSize(value);
@@ -417,6 +428,62 @@ Pointer<COMObject> boxValue(Object? value) {
   if (value is List<String>) return _boxStringList(value);
 
   throw ArgumentError.value(value, 'value', 'Unsupported value');
+}
+
+/// Returns the relevant IID for the given [value].
+String _referenceIidFromValue(Object value, Type? nativeType) {
+  if (value is bool) return IID_IReference_Boolean;
+  if (value is DateTime) return IID_IReference_DateTime;
+
+  if (value is double) {
+    return nativeType == Float ? IID_IReference_Float : IID_IReference_Double;
+  }
+
+  if (value is Duration) return IID_IReference_TimeSpan;
+  if (value is GUID) return IID_IReference_GUID;
+
+  if (value is int) {
+    if (nativeType == Int16) return IID_IReference_Int16;
+    if (nativeType == Int32) return IID_IReference_Int32;
+    if (nativeType == Uint8) return IID_IReference_Uint8;
+    if (nativeType == Uint32) return IID_IReference_Uint32;
+    if (nativeType == Uint64) return IID_IReference_Uint64;
+
+    return IID_IReference_Int64;
+  }
+
+  if (value is Point) return IID_IReference_Point;
+  if (value is Rect) return IID_IReference_Rect;
+  if (value is Size) return IID_IReference_Size;
+
+  throw ArgumentError.value(value, 'value', 'Unsupported value');
+}
+
+/// Boxes [value] so that it can be passed to the WinRT APIs that take
+/// `IPropertyValue` interface as a parameter.
+///
+/// This is used when working with `IMap<K, V>` and `IReference<T>` types.
+///
+/// [nativeType] must be specified if [value] is a `double` or `int`.
+///
+/// If [nativeType] is not specified, `Double` is used for `double` types, and
+/// `Int64` is used for `int` values.
+///
+/// [convertToIReference] must be set to `true` if the boxed [value] is to be
+/// passed to APIs that take `IReference` interface as a parameter (e.g.
+/// `ToastNotification.expirationTime` setter).
+Pointer<COMObject> boxValue(
+  Object? value, {
+  bool convertToIReference = false,
+  Type? nativeType,
+}) {
+  if (value == null) return PropertyValue.createEmpty();
+
+  final propertyValuePtr = _boxValue(value, nativeType: nativeType);
+  if (!convertToIReference) return propertyValuePtr;
+
+  final iid = _referenceIidFromValue(value, nativeType);
+  return IInspectable(propertyValuePtr).toInterface(iid);
 }
 
 Pointer<COMObject> _boxBoolList(List<bool> list) {

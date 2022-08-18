@@ -23,6 +23,7 @@ import 'types.dart';
 import 'utils.dart';
 import 'winrt/foundation/winrt_enum.dart';
 import 'winrt/internal/iterable_iids.dart';
+import 'winrt/internal/reference_iids.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -235,6 +236,13 @@ String iterableIidFromIids(List<String> iids) {
       orElse: () =>
           throw Exception('No IIterable IID found in the given iids: $iids'));
 }
+
+/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
+/// `IReference`.
+String referenceIidFromIids(List<String> iids) => iids.firstWhere(
+    (iid) => referenceIids.contains(iid),
+    orElse: () =>
+        throw Exception('No IReference IID found in the given iids: $iids'));
 
 /// Represents the trust level of an activatable class.
 ///
