@@ -12,6 +12,9 @@ class NotepadFont {
   late int hFont;
 
   NotepadFont(int hwndEdit) {
+    // TODO: Per
+    // https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-getstockobject#remarks,
+    // use a different approach here.
     final hSysFont = GetStockObject(SYSTEM_FONT);
     GetObject(hSysFont, sizeOf<LOGFONT>(), logfont);
 
