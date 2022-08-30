@@ -36,10 +36,9 @@ Map<String, int> getExports(String module) {
   }
 
   final modulePtr = module.toNativeUtf16();
-  final mask = '*'.toNativeUtf16();
 
   final baseOfDll =
-      SymLoadModuleEx(hProcess, 0, modulePtr, nullptr, 0, 0, nullptr, 0);
+      SymLoadModuleEx(hProcess, NULL, modulePtr, nullptr, 0, 0, nullptr, 0);
 
   if (baseOfDll == 0) {
     print('SymLoadModuleEx failed.');
@@ -48,6 +47,7 @@ Map<String, int> getExports(String module) {
     exit(1);
   }
 
+  final mask = '*'.toNativeUtf16();
   if (SymEnumSymbols(
           hProcess,
           baseOfDll,

@@ -1,7 +1,5 @@
 import 'package:test/test.dart';
-import 'package:win32/src/winrt/foundation/winrt_enum.dart';
-import 'package:win32/src/winrt/internal/map_helpers.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 // Test the WinRT map helper functions to make sure everything is working
 // correctly.

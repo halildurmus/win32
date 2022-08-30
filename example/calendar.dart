@@ -4,7 +4,7 @@
 
 // Simple example of calling WinRT APIs
 
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 String calendarData(Calendar calendar) =>
     'Calendar: ${calendar.getCalendarSystem()}\n'

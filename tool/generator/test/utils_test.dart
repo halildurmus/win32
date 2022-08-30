@@ -167,10 +167,9 @@ void main() {
           'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter',
           'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo',
           'Windows.Networking.IHostName',
-          'Windows.Storage.IApplicationDataStatics',
           'Windows.Storage.IStorageItem',
-          'Windows.Storage.Pickers.IFileOpenPicker',
           'Windows.Storage.UserDataPaths',
+          'Windows.Storage.Pickers.IFileOpenPicker',
           'Windows.UI.Notifications.IToastNotificationManagerStatics',
           'Windows.UI.Notifications.ToastNotification',
         ]),
@@ -211,7 +210,6 @@ void main() {
           NamespaceGroup(
             namespace: 'Windows.Storage',
             types: [
-              'Windows.Storage.IApplicationDataStatics',
               'Windows.Storage.IStorageItem',
               'Windows.Storage.UserDataPaths'
             ],

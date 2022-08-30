@@ -3,7 +3,7 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 // Exhaustively test the WinRT calendar object to make sure overrides,
 // properties and methods are working correctly.

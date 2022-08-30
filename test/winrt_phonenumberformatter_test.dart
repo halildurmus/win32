@@ -4,7 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 // Test the WinRT phone number formatter object to make sure overrides,
 // properties and methods are working correctly.

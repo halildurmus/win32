@@ -10,9 +10,12 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'api_ms_win_core_winrt_string_l1_1_0.dart';
 import 'constants.dart';
+import 'exceptions.dart';
 import 'extensions/int_to_hexstring.dart';
 import 'kernel32.dart';
+import 'macros.dart';
 import 'shell32.dart';
 import 'structs.g.dart';
 import 'types.dart';
@@ -101,6 +104,38 @@ void printStruct(Pointer struct, int sizeInBytes) {
 /// The receiver is responsible for disposing its memory, typically by calling
 /// [free] when it has been used.
 LPWSTR TEXT(String string) => string.toNativeUtf16();
+
+/// Takes a `HSTRING` (a WinRT String handle), and converts it to a Dart
+/// `String`.
+///
+/// {@category winrt}
+String convertFromHString(int hstring) =>
+    WindowsGetStringRawBuffer(hstring, nullptr).toDartString();
+
+/// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
+/// returning an integer handle.
+///
+/// The caller is responsible for deleting the `HSTRING` when it is no longer
+/// used, through a call to `WindowsDeleteString(HSTRING hstr)`, which
+/// decrements the reference count of that string. If the reference count
+/// reaches 0, the Windows Runtime deallocates the buffer.
+///
+/// {@category winrt}
+int convertToHString(String string) {
+  final hString = calloc<HSTRING>();
+  final stringPtr = string.toNativeUtf16();
+  // Create a HSTRING representing the object
+  try {
+    final hr = WindowsCreateString(stringPtr, string.length, hString);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    } else {
+      return hString.value;
+    }
+  } finally {
+    free(stringPtr);
+  }
+}
 
 /// Allocates memory for a Unicode string and returns a pointer.
 ///
