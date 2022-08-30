@@ -90,6 +90,7 @@ export 'src/structs.g.dart'
         servent;
 export 'src/variant.dart';
 export 'src/utils.dart';
+export 'src/winmd_constants.dart';
 
 // Useful extension methods
 export 'src/extensions/dialogs.dart';
