@@ -169,7 +169,6 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       // Save the position for comparison later on.
       yPos = si.ref.nPos;
       switch (LOWORD(wParam)) {
-
         // User clicked the HOME keyboard key.
         case SB_TOP:
           si.ref.nPos = si.ref.nMin;
