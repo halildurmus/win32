@@ -105,7 +105,6 @@ const comInterfacesToGenerate = <String>{
 };
 
 final windowsRuntimeTypesToGenerate = <String>{
-  'Windows.Data.Xml.Dom.IXmlNodeList',
   'Windows.Devices.Sensors.PedometerReading',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',

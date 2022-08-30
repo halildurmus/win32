@@ -28,7 +28,6 @@ export 'src/winrt/data/json/ijsonvalue.dart';
 export 'src/winrt/data/json/jsonarray.dart';
 export 'src/winrt/data/json/jsonobject.dart';
 export 'src/winrt/data/json/jsonvalue.dart';
-export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
 export 'src/winrt/devices/enumeration/devicepicker.dart';
 export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
 export 'src/winrt/devices/enumeration/idevicepicker.dart';
