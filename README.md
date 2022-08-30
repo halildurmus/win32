@@ -12,8 +12,8 @@ instructive examples for more complex FFI usage scenarios.
 
 By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
-Win32 developer. Other Dart packages may build on these primitives to provide a
-friendly API for Dart and Flutter developers. A good example of that is
+Windows developer. Other Dart packages may build on these primitives to provide
+a friendly API for Dart and Flutter developers. A good example of that is
 [filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers
 a common item dialog suitable for incorporation into an existing Flutter app.
 
@@ -87,73 +87,19 @@ manipulation](https://pub.dev/documentation/win32/latest/win32/win32-library.htm
 and [COM
 objects](https://pub.dev/documentation/win32/latest/topics/com-topic.html).
 
-## Samples
+## Examples
 
-The package includes a number of examples in the `example` subdirectory. These
-examples use the Win32 API for all UI display and (unless mentioned) do not
-require Flutter.
-
-| Example               | Description                                               |
-| --------------------- | --------------------------------------------------------- |
-| `hello.dart`          | Basic Petzoldian "hello world" Win32 app                  |
-| `bluetooth.dart`      | Demonstrate enumerating Bluetooth devices                 |
-| `bluetoothle.dart`    | Enumerate Bluetooth LE (Low Energy) devices               |
-| `calendar.dart`       | Gets information about the calendar from a WinRT API      |
-| `console.dart`        | Shows usage of console APIs                               |
-| `credentials.dart`    | Adds a credential to the store and retrieves it           |
-| `customtitlebar.dart` | Demonstrates creation of owner-draw title bar region      |
-| `customwin.dart`      | Displays a non-rectangular window                         |
-| `devices.dart`        | Uses volume management APIs to list all disk devices      |
-| `dialog.dart`         | Create a custom dialog box in code                        |
-| `dialogshow.dart`     | Creates a common item dialog (file picker) using COM      |
-| `diskinfo.dart`       | Use `DeviceIoControl()` for direct device operations      |
-| `dump.dart`           | Use debugger libraries to print DLL exported functions    |
-| `dynamic_load.dart`   | Demonstrate loading a DLL and calling it at runtime       |
-| `explorer\`           | Example Flutter app that uses Win32 file picker APIs      |
-| `filever.dart`        | Getting file version information from the file resource   |
-| `gamepad.dart`        | Show which gamepads are connected                         |
-| `guid.dart`           | Creates a globally unique identifier (GUID)               |
-| `idispatch.dart`      | Demonstrates calling a method using `IDispatch`           |
-| `knownfolder.dart`    | Retrieves known folders from the current user profile     |
-| `magnifier.dart`      | Provides a magnifier window using the Magnification API   |
-| `manifest\`           | Demonstrates the use of app manifests for compiled apps   |
-| `midi.dart`           | Demonstrates MIDI playback using MCI commands             |
-| `modules.dart`        | Enumerates all loaded modules on the current system       |
-| `monitor.dart`        | Uses DDC and monitor-config API to get monitor caps       |
-| `msgbox.dart`         | Demonstrates a MessageBox from the console                |
-| `notepad\`            | Lightweight replica of the Windows notepad applet         |
-| `paint.dart`          | Demonstrates simple GDI drawing and min/max window sizing |
-| `pipe.dart`           | Shows use of named pipes for interprocess communication   |
-| `play_sound.dart`     | Plays a WAV file through the Windows `PlaySound` API      |
-| `printer_list.dart`   | Enumerate available printers on the Windows system        |
-| `registry.dart`       | Demonstrates querying the registry for values             |
-| `screenshot.dart`     | Takes a screenshot of the current desktop                 |
-| `scroll.dart`         | Example of horizontal and vertical scrolling text window  |
-| `sendinput.dart`      | Sends keyboard and mouse input to another window          |
-| `serial.dart`         | Demonstrates serial port management                       |
-| `setupapi.dart`       | Show using setup APIs to retrieve device interfaces       |
-| `shortcut.dart`       | Demonstrates creating a Windows shell link                |
-| `snake.dart`          | Snake game using various GDI features                     |
-| `speech.dart`         | Use Windows speech engine for text-to-speech              |
-| `sysinfo.dart`        | Examples of getting device information from native C APIs |
-| `taskdialog.dart`     | Demonstrates using modern task dialog boxes               |
-| `tetris\main.dart`    | Port of an open-source Tetris game to Dart                |
-| `vt.dart`             | Shows virtual terminal sequences                          |
-| `wallpaper.dart`      | Shows what wallpaper and background color are set         |
-| `wasapi.dart`         | Demonstrates sound generation with WASAPI library         |
-| `window.dart`         | Enumerates open windows and basic window manipulation     |
-| `winmd.dart`          | Interrogate Windows Runtime types                         |
-| `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
-| `wmi_wql.dart`        | Uses WMI to retrieve information using WQL                |
-| `wsl.dart`            | Retrieve information from a WSL instance through APIs     |
+There are many examples included with this package that demonstrate calling
+various Win32, COM and WinRT APIs. These can be found in the `example\` folder;
+a short description of each example can be found [here](
+https://pub.dev/packages/win32/example).
 
 ## Packages built on win32
 
-There are a small but growing set of packages that build on the relatively
-low-level APIs exposed by the Dart win32 package to provide more idiomatic class
-wrappers. These packages typically don't require any knowledge of Windows
-programming models or FFI, and are ideal for incorporation into Flutter apps for
-Windows.
+There are a growing set of packages that build on the relatively low-level APIs
+exposed by the Dart win32 package to provide more idiomatic class wrappers.
+These packages typically don't require any knowledge of Windows programming
+models or FFI, and are ideal for incorporation into Flutter apps for Windows.
 
 Specifically, this includes:
 
@@ -178,9 +124,9 @@ Specifically, this includes:
 
 This package assumes the [Dart 64-bit compiler](https://dart.dev/get-dart),
 running on Windows. Many commands are tested on 32-bit Windows, but due to the
-lack of a compiler for 32-bit executables and the increasing lack of machines
-running 32-bit OSes, this is inevitably a low priority. The package is also
-tested on Windows-on-ARM architecture, running in x64 emulation mode.
+lack of a Dart compiler for 32-bit executables and the ever diminishing number
+of machines running 32-bit OSes, this is inevitably a low priority. The package
+is also tested on ARM architecture, running in x64 emulation mode.
 
 ## Features and bugs
 
@@ -195,8 +141,8 @@ The library version tries to model semver, but you should not assume a strict
 guarantee of no breaking changes between minor versions. That guarantee is not
 possible to make, for several reasons:
 
-- Several times, my fixing a bug in the fidelity of the Win32 API has tightened
-  the constraints over a parameter (for example, `Pointer` becomes
+- Several times, fixing a bug in the fidelity of the Win32 API has tightened the
+  constraints over a parameter (for example, `Pointer` becomes
   `Pointer<INPUT>`). These changes should be signalled in the log.
 - Adding new features may itself cause a breaking change. For example, if you
   declare a missing Windows constant in your own code that is then added, Dart
