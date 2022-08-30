@@ -45,7 +45,7 @@ extension WinRTStringConversion on Pointer<HSTRING> {
 ///
 /// ```dart
 /// final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-/// final calendar = ICalendar.from(object);
+/// final calendar = ICalendar.fromRawPointer(object);
 /// ```
 ///
 /// {@category winrt}
