@@ -4,12 +4,18 @@
   described below. Apps and packages that call traditional Win32 APIs should not
   require changes, but apps that use COM or the highly-experimental WinRT APIs
   should expect to make changes.
+- [BREAKING CHANGE] WinRT APIs have been moved to a separate library. This
+  provides isolation for apps that only use traditional APIs (Win32/COM) from
+  the more experimental WinRT APIs. To use WinRT from your code, change your
+  import statement to `import 'package:win32/winrt.dart';`. The WinRT library
+  also exports all Win32 APIs, so you don't have to import both libraries.
 - [BREAKING CHANGE] COM and Windows Runtime methods and properties are now
   camelCased, not TitleCased. This is inconvenient, but it avoids a whole class
   of name clashes and aligns COM and WinRT APIs more closely with Dart idioms.
   As the projections get smarter with more helpers, we think this is the right
   call for the future and worth a one-time tax to fix.
-- [BREAKING CHANGE] You can now cast to a new COM interface without needing the IID for the target interface. Instead of:
+- [BREAKING CHANGE] You can now cast to a new COM interface without needing the
+  IID for the target interface. Instead of:
 
 ```dart
   final modalWindow = IModalWindow(fileDialog.toInterface(IID_IModalWindow));
@@ -26,11 +32,20 @@ write:
 - [BREAKING CHANGE] The WinRT `fromPointer` method is now `fromRawPointer`.
 - `GUIDFromString` now supports an optional custom allocator parameter.
 - Added various APIs from iphlpapi.dll for tracking and renewing IP addresses.
-- Added `DisableThreadLibraryCalls`, `FindStringOrdinal`, `GetConsoleCP`, `GetConsoleOutputCP`, `GetModuleHandleExW`, `GetNumberOfConsoleInputEvents`, `GetVolumeInformation`, `GetVolumeInformationByHandle`, `PeekConsoleInput`, `ReadConsoleInputW`, `SetErrorMode`, `SetThreadErrorMode`, `SizeofResource` APIs from kernel32.dll
+- Added `DisableThreadLibraryCalls`, `FindStringOrdinal`, `GetConsoleCP`,
+  `GetConsoleOutputCP`, `GetModuleHandleExW`, `GetNumberOfConsoleInputEvents`,
+  `GetVolumeInformation`, `GetVolumeInformationByHandle`, `PeekConsoleInput`,
+  `ReadConsoleInputW`, `SetErrorMode`, `SetThreadErrorMode`, `SizeofResource`
+  APIs from kernel32.dll
 - Added `GetClassFile` API from ole32.dll
-- Added `SetupDiGetDeviceInstanceId`, `SetupDiGetDeviceRegistryPropertyW` APIs from setupapi.dll
-- Added `GetAltTabInfoW`, `GetClassNameW`, `GetGUIThreadInfo` APIs from user32.dll
-- Added various foundational WinRT types, including `IIterable`, `IIterator`, `IKeyValuePair`, `IMapView`, `IVector`, `IVectorView`, `IPropertyValue`, `IReference`, with tremendous thanks again to @halildurmus, who has driven much of the recent WinRT work.
+- Added `SetupDiGetDeviceInstanceId`, `SetupDiGetDeviceRegistryPropertyW` APIs
+  from setupapi.dll
+- Added `GetAltTabInfoW`, `GetClassNameW`, `GetGUIThreadInfo` APIs from
+  user32.dll
+- Added various foundational WinRT types, including `IIterable`, `IIterator`,
+  `IKeyValuePair`, `IMapView`, `IVector`, `IVectorView`, `IPropertyValue`,
+  `IReference`, with tremendous thanks again to @halildurmus, who has driven
+  much of the recent WinRT work.
 - Major reworking of the WinRT generation code, thanks to @halildurmus.
 
 ## 2.7.0

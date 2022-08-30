@@ -6,7 +6,7 @@
 
 /// Support for programming against the WinRT API on Windows operating systems.
 ///
-///
+/// The WinRT API is unstable, experimental and under active development.
 library winrt;
 
 // The WinRT API builds on the underlying Win32 API, and so it is also exported
