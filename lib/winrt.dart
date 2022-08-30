@@ -17,9 +17,8 @@ export 'win32.dart';
 export 'src/winrt_callbacks.dart';
 export 'src/winrt_constants.dart';
 export 'src/winrt_helpers.dart';
-
-// Windows Runtime enumerations
-export 'src/winrt/data/json/enums.g.dart';
+export 'src/winrt/foundation/winrt_enum.dart';
+export 'src/winrt/internal/map_helpers.dart';
 
 // Windows Runtime classes and interfaces
 export 'src/winrt/data/json/ijsonarray.dart';
@@ -32,10 +31,8 @@ export 'src/winrt/data/json/jsonvalue.dart';
 export 'src/winrt/data/xml/dom/ixmlnodelist.dart';
 export 'src/winrt/devices/enumeration/devicepicker.dart';
 export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
-export 'src/winrt/devices/enumeration/enums.g.dart';
 export 'src/winrt/devices/enumeration/idevicepicker.dart';
 export 'src/winrt/devices/enumeration/idevicepickerfilter.dart';
-export 'src/winrt/devices/sensors/enums.g.dart';
 export 'src/winrt/devices/sensors/ipedometerreading.dart';
 export 'src/winrt/devices/sensors/pedometerreading.dart';
 export 'src/winrt/foundation/collections/iiterable.dart';
@@ -48,45 +45,48 @@ export 'src/winrt/foundation/collections/ivectorview.dart';
 export 'src/winrt/foundation/collections/propertyset.dart';
 export 'src/winrt/foundation/collections/stringmap.dart';
 export 'src/winrt/foundation/collections/valueset.dart';
-export 'src/winrt/foundation/enums.g.dart';
 export 'src/winrt/foundation/iasyncaction.dart';
 export 'src/winrt/foundation/iasyncinfo.dart';
 export 'src/winrt/foundation/iasyncoperation.dart';
 export 'src/winrt/foundation/ipropertyvalue.dart';
 export 'src/winrt/foundation/ireference.dart';
-export 'src/winrt/foundation/numerics/structs.g.dart';
 export 'src/winrt/foundation/propertyvalue.dart';
-
-// Windows Runtime structs
-export 'src/winrt/foundation/structs.g.dart';
-export 'src/winrt/foundation/winrt_enum.dart';
-export 'src/winrt/gaming/input/enums.g.dart';
 export 'src/winrt/gaming/input/gamepad.dart';
 export 'src/winrt/gaming/input/igamecontroller.dart';
 export 'src/winrt/gaming/input/igamecontrollerbatteryinfo.dart';
 export 'src/winrt/gaming/input/igamepad.dart';
-export 'src/winrt/gaming/input/structs.g.dart';
 export 'src/winrt/globalization/calendar.dart';
-export 'src/winrt/globalization/enums.g.dart';
 export 'src/winrt/globalization/icalendar.dart';
-export 'src/winrt/globalization/phonenumberformatting/enums.g.dart';
 export 'src/winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
 export 'src/winrt/globalization/phonenumberformatting/phonenumberformatter.dart';
 export 'src/winrt/graphics/printing3d/iprinting3dmultiplepropertymaterial.dart';
 export 'src/winrt/graphics/printing3d/printing3dmultiplepropertymaterial.dart';
-export 'src/winrt/internal/map_helpers.dart';
 export 'src/winrt/media/mediaproperties/mediapropertyset.dart';
 export 'src/winrt/networking/connectivity/inetworkinformationstatics.dart';
-export 'src/winrt/networking/enums.g.dart';
 export 'src/winrt/networking/ihostname.dart';
-export 'src/winrt/storage/enums.g.dart';
 export 'src/winrt/storage/istorageitem.dart';
 export 'src/winrt/storage/iuserdatapathsstatics.dart';
-export 'src/winrt/storage/pickers/enums.g.dart';
 export 'src/winrt/storage/pickers/ifileopenpicker.dart';
 export 'src/winrt/storage/userdatapaths.dart';
-export 'src/winrt/ui/notifications/enums.g.dart';
 export 'src/winrt/ui/notifications/itoastnotificationfactory.dart';
 export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/ui/notifications/toastnotification.dart';
+
+// Windows Runtime enumerations
+export 'src/winrt/data/json/enums.g.dart';
+export 'src/winrt/devices/enumeration/enums.g.dart';
+export 'src/winrt/devices/sensors/enums.g.dart';
+export 'src/winrt/foundation/enums.g.dart';
+export 'src/winrt/gaming/input/enums.g.dart';
+export 'src/winrt/globalization/enums.g.dart';
+export 'src/winrt/globalization/phonenumberformatting/enums.g.dart';
+export 'src/winrt/networking/enums.g.dart';
+export 'src/winrt/storage/enums.g.dart';
+export 'src/winrt/storage/pickers/enums.g.dart';
+export 'src/winrt/ui/notifications/enums.g.dart';
 export 'src/winrt/ui/popups/enums.g.dart';
+
+// Windows Runtime structs
+export 'src/winrt/foundation/structs.g.dart';
+export 'src/winrt/foundation/numerics/structs.g.dart';
+export 'src/winrt/gaming/input/structs.g.dart';
