@@ -9,7 +9,6 @@ require Flutter.
 | `bluetoothle.dart`    | Enumerate Bluetooth LE (Low Energy) devices               |
 | `calendar.dart`       | Gets information about the calendar from a WinRT API      |
 | `commdlg.dart`        | Demonstrates using the color chooser common dialog box    |
-| `console.dart`        | Shows usage of console APIs                               |
 | `credentials.dart`    | Adds a credential to the store and retrieves it           |
 | `customtitlebar.dart` | Demonstrates creation of owner-draw title bar region      |
 | `customwin.dart`      | Displays a non-rectangular window                         |
