@@ -119,7 +119,7 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Networking.IHostName',
   'Windows.Storage.IStorageItem',
   'Windows.Storage.UserDataPaths',
-  'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.Storage.Pickers.FileOpenPicker',
   'Windows.UI.Notifications.IToastNotificationManagerStatics',
   'Windows.UI.Notifications.NotificationData',
   'Windows.UI.Notifications.ToastNotification',
