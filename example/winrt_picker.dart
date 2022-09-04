@@ -13,10 +13,7 @@ void main() async {
   winrtInitialize();
   final pIndex = calloc<Uint32>();
 
-  final object = CreateObject(
-      'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-
-  final picker = IFileOpenPicker.fromRawPointer(object)
+  final picker = FileOpenPicker()
     ..suggestedStartLocation = PickerLocationId.desktop
     ..viewMode = PickerViewMode.thumbnail;
 
