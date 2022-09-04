@@ -1,4 +1,3 @@
-
 The package includes a number of examples in the `example` subdirectory. These
 examples use the Win32 API for all UI display and (unless mentioned) do not
 require Flutter.
@@ -10,7 +9,6 @@ require Flutter.
 | `bluetoothle.dart`    | Enumerate Bluetooth LE (Low Energy) devices               |
 | `calendar.dart`       | Gets information about the calendar from a WinRT API      |
 | `commdlg.dart`        | Demonstrates using the color chooser common dialog box    |
-| `console.dart`        | Shows usage of console APIs                               |
 | `credentials.dart`    | Adds a credential to the store and retrieves it           |
 | `customtitlebar.dart` | Demonstrates creation of owner-draw title bar region      |
 | `customwin.dart`      | Displays a non-rectangular window                         |
@@ -37,6 +35,7 @@ require Flutter.
 | `pipe.dart`           | Shows use of named pipes for interprocess communication   |
 | `play_sound.dart`     | Plays a WAV file through the Windows `PlaySound` API      |
 | `printer_list.dart`   | Enumerate available printers on the Windows system        |
+| `printer_raw.dart`    | Sends RAW data directly to a Windows Printer              |
 | `registry.dart`       | Demonstrates querying the registry for values             |
 | `screenshot.dart`     | Takes a screenshot of the current desktop                 |
 | `scroll.dart`         | Example of horizontal and vertical scrolling text window  |
