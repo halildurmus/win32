@@ -44,6 +44,9 @@ const excludedComInterfaces = <String>{
 };
 
 const excludedWindowsRuntimeTypes = <String>{
+  ...excludedWindowsRuntimeInterfaces,
+  ...excludedWindowsRuntimeStaticInterfaces,
+
   // These types are generated manually by design
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
@@ -52,17 +55,6 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Foundation.Collections.IMapView`2',
   'Windows.Foundation.Collections.IVector`1',
   'Windows.Foundation.Collections.IVectorView`1',
-
-  // These types consist of deprecated APIs
-  'Windows.Storage.Pickers.IFileOpenPicker2',
-  'Windows.Storage.Pickers.IFileOpenPickerStatics',
-
-  // INumberFormatter2's methods conflict with INumberFormatter's methods
-  'Windows.Globalization.NumberFormatting.INumberFormatter2',
-
-  // IFileOpenPickerWithOperationId's pickSingleFileAsync(String operationId)
-  // method conflicts with IFileOpenPicker's pickSingleFileAsync() method
-  'Windows.Storage.Pickers.IFileOpenPickerWithOperationId',
 
   // TODO: These types are currently being generated manually. The goal is to
   // generate them automatically after making appropriate changes to the
