@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import '../../shared/exclusions.dart';
 import '../utils.dart';
 import 'winrt_interface.dart';
 
@@ -72,18 +73,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     return buffer.toString();
   }
 
-  /// The WinRT static interfaces to exclude when generating the static mappers.
-  static const excludedStaticInterfaces = <String>{
-    // Contains deprecated APIs
-    'Windows.Storage.Pickers.IFileOpenPickerStatics',
-  };
-
   List<String> get staticInterfaces => typeDef.customAttributes
       .where((element) => element.name.endsWith('StaticAttribute'))
       .where((element) => element.parameters.length == 3)
       .map((element) => element.parameters.first.value as String)
       .toList()
-    ..removeWhere(excludedStaticInterfaces.contains)
+    ..removeWhere(excludedWindowsRuntimeStaticInterfaces.contains)
     ..sort();
 
   String get staticMappers {

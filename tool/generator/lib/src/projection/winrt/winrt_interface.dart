@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../../shared/exclusions.dart';
 import '../com_interface.dart';
 import '../method.dart';
 import '../utils.dart';
@@ -33,18 +34,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     // This is exposed as dart:core's Duration
     'Windows.Foundation.TimeSpan',
 
-    ...excludedInterfaces,
-  };
-
-  /// The WinRT interfaces to exclude when generating the implements mappers.
-  static const excludedInterfaces = <String>{
-    // INumberFormatter2's methods conflict with INumberFormatter's methods
-    'Windows.Globalization.NumberFormatting.INumberFormatter2',
-    // Contains deprecated APIs
-    'Windows.Storage.Pickers.IFileOpenPicker2',
-    // IFileOpenPickerWithOperationId's pickSingleFileAsync(String operationId)
-    // method conflicts with IFileOpenPicker's pickSingleFileAsync() method
-    'Windows.Storage.Pickers.IFileOpenPickerWithOperationId',
+    ...excludedWindowsRuntimeInterfaces,
   };
 
   @override
@@ -181,7 +171,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   ''';
 
   List<TypeDef> get implementsInterfaces => typeDef.interfaces
-    ..removeWhere((interface) => excludedInterfaces.contains(interface.name))
+    ..removeWhere((interface) =>
+        excludedWindowsRuntimeInterfaces.contains(interface.name))
     // Generic collections' typeDef returns an empty name and that breaks lots
     // of things. We need to ignore them for now
     ..removeWhere((interface) => interface.name.isEmpty);
