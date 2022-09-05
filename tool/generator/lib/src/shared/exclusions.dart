@@ -44,6 +44,9 @@ const excludedComInterfaces = <String>{
 };
 
 const excludedWindowsRuntimeTypes = <String>{
+  ...excludedWindowsRuntimeInterfaces,
+  ...excludedWindowsRuntimeStaticInterfaces,
+
   // These types are generated manually by design
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
@@ -82,12 +85,25 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Foundation.IAsyncOperation`1',
   'Windows.Storage.ApplicationData',
 
-  //   IFileOpenPicker and IFileOpenPickerWithOperationId both have
-  //   pickSingleFileAsync(), which clash with each other.
-  'Windows.Storage.Pickers.FileOpenPicker',
-
   //   Requires WinRT event support
   'Windows.Networking.Connectivity.INetworkInformationStatics',
+};
+
+/// WinRT interfaces to exclude when generating the implements mappers.
+const excludedWindowsRuntimeInterfaces = <String>{
+  // INumberFormatter2's methods conflict with INumberFormatter's methods
+  'Windows.Globalization.NumberFormatting.INumberFormatter2',
+  // Contains deprecated APIs
+  'Windows.Storage.Pickers.IFileOpenPicker2',
+  // IFileOpenPickerWithOperationId's pickSingleFileAsync(String operationId)
+  // method conflicts with IFileOpenPicker's pickSingleFileAsync() method
+  'Windows.Storage.Pickers.IFileOpenPickerWithOperationId',
+};
+
+/// WinRT static interfaces to exclude when generating the static mappers.
+const excludedWindowsRuntimeStaticInterfaces = <String>{
+  // Contains deprecated APIs
+  'Windows.Storage.Pickers.IFileOpenPickerStatics',
 };
 
 const excludedTypes = <String>[

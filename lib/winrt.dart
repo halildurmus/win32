@@ -66,6 +66,7 @@ export 'src/winrt/networking/connectivity/inetworkinformationstatics.dart';
 export 'src/winrt/storage/istorageitem.dart';
 export 'src/winrt/storage/iuserdatapathsstatics.dart';
 export 'src/winrt/storage/userdatapaths.dart';
+export 'src/winrt/storage/pickers/fileopenpicker.dart';
 export 'src/winrt/storage/pickers/ifileopenpicker.dart';
 export 'src/winrt/ui/notifications/itoastnotificationfactory.dart';
 export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';

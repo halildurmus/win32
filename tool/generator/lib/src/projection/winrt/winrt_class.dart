@@ -1,5 +1,6 @@
 import 'package:winmd/winmd.dart';
 
+import '../../shared/exclusions.dart';
 import '../utils.dart';
 import 'winrt_interface.dart';
 
@@ -77,6 +78,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       .where((element) => element.parameters.length == 3)
       .map((element) => element.parameters.first.value as String)
       .toList()
+    ..removeWhere(excludedWindowsRuntimeStaticInterfaces.contains)
     ..sort();
 
   String get staticMappers {

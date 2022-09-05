@@ -156,7 +156,6 @@ void main() {
   test('groupTypesByParentNamespace', () {
     expect(
         groupTypesByParentNamespace([
-          'Windows.Data.Xml.Dom.IXmlNodeList',
           'Windows.Foundation.IAsyncInfo',
           'Windows.Foundation.IClosable',
           'Windows.Foundation.IPropertyValue',
@@ -169,15 +168,11 @@ void main() {
           'Windows.Networking.IHostName',
           'Windows.Storage.IStorageItem',
           'Windows.Storage.UserDataPaths',
-          'Windows.Storage.Pickers.IFileOpenPicker',
+          'Windows.Storage.Pickers.FileOpenPicker',
           'Windows.UI.Notifications.IToastNotificationManagerStatics',
           'Windows.UI.Notifications.ToastNotification',
         ]),
         equals([
-          NamespaceGroup(
-            namespace: 'Windows.Data.Xml.Dom',
-            types: ['Windows.Data.Xml.Dom.IXmlNodeList'],
-          ),
           NamespaceGroup(
             namespace: 'Windows.Foundation',
             types: [
@@ -216,7 +211,7 @@ void main() {
           ),
           NamespaceGroup(
             namespace: 'Windows.Storage.Pickers',
-            types: ['Windows.Storage.Pickers.IFileOpenPicker'],
+            types: ['Windows.Storage.Pickers.FileOpenPicker'],
           ),
           NamespaceGroup(
             namespace: 'Windows.UI.Notifications',

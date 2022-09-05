@@ -4,7 +4,10 @@ import 'package:generator/generator.dart';
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
+import 'helpers.dart';
+
 void main() {
+  final windowsBuildNumber = getWindowsBuildNumber();
   test('Class valuetype is correctly identified', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
@@ -66,7 +69,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.inheritsFrom, equals(''));
+    expect(projection.inheritsFrom, isEmpty);
   });
 
   test('WinRT interface has right short name', () {
@@ -392,7 +395,7 @@ void main() {
         'Windows.Storage.Pickers.FileOpenPicker');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, true);
+    expect(projection.hasDefaultConstructor, isTrue);
     expect(
         projection.defaultConstructor,
         equalsIgnoringWhitespace(
@@ -404,7 +407,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Networking.HostName');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, false);
+    expect(projection.hasDefaultConstructor, isFalse);
     expect(projection.defaultConstructor, isEmpty);
   });
 
@@ -481,7 +484,7 @@ void main() {
     final winTypeDef = MetadataStore.getMetadataForType(namespace);
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, true);
+    expect(projection.hasDefaultConstructor, isTrue);
     expect(projection.factoryMappers, isNotEmpty);
     expect(projection.staticMappers, isEmpty);
     expect(projection.classNameDeclaration,
@@ -493,7 +496,7 @@ void main() {
         'Windows.Storage.FileProperties.BasicProperties');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, false);
+    expect(projection.hasDefaultConstructor, isFalse);
     expect(projection.factoryMappers, isEmpty);
     expect(projection.staticMappers, isEmpty);
     expect(projection.classNameDeclaration, isEmpty);
@@ -512,4 +515,39 @@ void main() {
     expect(projection.importHeader,
         contains("import '../../../winrt/system/userchangedeventargs.dart'"));
   });
+
+  if (windowsBuildNumber >= 18362) {
+    test('WinRT class does not include excluded interfaces in the imports', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.FileOpenPicker');
+
+      final projection = WinRTClassProjection(winTypeDef!);
+      expect(projection.importHeader.contains('ifileopenpicker.dart'), isTrue);
+      expect(
+          projection.importHeader.contains('ifileopenpicker2.dart'), isFalse);
+      expect(projection.importHeader.contains('ifileopenpicker3.dart'), isTrue);
+      expect(projection.importHeader.contains('ifileopenpickerstatics.dart'),
+          isFalse);
+      expect(projection.importHeader.contains('ifileopenpickerstatics2.dart'),
+          isTrue);
+      expect(
+          projection.importHeader
+              .contains('ifileopenpickerwithoperationid.dart'),
+          isFalse);
+    });
+    test(
+        'WinRT class does not include excluded interfaces in the implements keyword',
+        () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.FileOpenPicker');
+
+      final projection = WinRTClassProjection(winTypeDef!);
+      expect(
+          projection.inheritsFrom, equals('IFileOpenPicker, IFileOpenPicker3'));
+      expect(
+          projection.classDeclaration,
+          equals(
+              'class FileOpenPicker extends IInspectable implements IFileOpenPicker, IFileOpenPicker3 {'));
+    });
+  }
 }

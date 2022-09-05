@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import '../../shared/exclusions.dart';
 import '../com_interface.dart';
 import '../method.dart';
 import '../utils.dart';
@@ -21,7 +22,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String get relativePathToSrcDir => relativePathToSrcDirectory(File(
       '../../lib/src/winrt/${folderFromWinRTType(typeDef.name)}/$shortName.dart'));
 
-  static const ignoredWinRTTypes = <String>{
+  /// The WinRT types to ignore when generating the imports.
+  static const ignoredWindowsRuntimeTypes = <String>{
     // This is exposed as dart:core's DateTime
     'Windows.Foundation.DateTime',
 
@@ -31,13 +33,15 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
     // This is exposed as dart:core's Duration
     'Windows.Foundation.TimeSpan',
+
+    ...excludedWindowsRuntimeInterfaces,
   };
 
   @override
   String getImportForTypeDef(TypeDef typeDef) {
     if (typeDef.name.isEmpty ||
         this.typeDef.name == typeDef.name ||
-        ignoredWinRTTypes.contains(typeDef.name)) {
+        ignoredWindowsRuntimeTypes.contains(typeDef.name)) {
       return '';
     }
 
@@ -167,6 +171,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   ''';
 
   List<TypeDef> get implementsInterfaces => typeDef.interfaces
+    ..removeWhere((interface) =>
+        excludedWindowsRuntimeInterfaces.contains(interface.name))
     // Generic collections' typeDef returns an empty name and that breaks lots
     // of things. We need to ignore them for now
     ..removeWhere((interface) => interface.name.isEmpty);
