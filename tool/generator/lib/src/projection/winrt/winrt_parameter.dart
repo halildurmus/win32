@@ -38,14 +38,25 @@ class WinRTParameterProjection extends ParameterProjection {
           '$name.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;';
     }
 
+    // Nullable parameters must be passed to WinRT APIs as 'IReference' interfaces
+    // by calling the 'boxValue' function with the 'convertToIReference' flag
+    // set to true
     if (isReference) {
       final typeProjection = TypeProjection(type.typeIdentifier.typeArg!);
       final args = <String>['convertToIReference: true'];
-      if (['double', 'int'].contains(typeProjection.methodParamType)) {
+
+      // If the nullable parameter is an enum, a double or an int, it's native
+      // type (e.g. Double, Float, Int32, Uint32) must be passed in the `nativeType`
+      // parameter so that the 'boxValue' function can use the appropriate
+      // native type for the parameter
+      if (typeProjection.isWinRTEnum ||
+          ['double', 'int'].contains(typeProjection.methodParamType)) {
         args.add('nativeType: ${typeProjection.nativeType}');
       }
 
-      return 'final ${name}ReferencePtr = boxValue(value, ${args.join(', ')});';
+      return typeProjection.isWinRTEnum
+          ? 'final ${name}ReferencePtr = boxValue(value.value, ${args.join(', ')});'
+          : 'final ${name}ReferencePtr = boxValue(value, ${args.join(', ')});';
     }
 
     if (isString) return 'final ${name}Hstring = convertToHString($name);';
