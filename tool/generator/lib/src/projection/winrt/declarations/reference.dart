@@ -2,14 +2,9 @@ import 'package:winmd/winmd.dart';
 
 import '../../../../generator.dart';
 
-mixin ReferenceProjection on WinRTMethodProjection {
-  String get referenceType =>
-      referenceTypeFromTypeIdentifier(returnType.typeIdentifier.typeArg!);
-
-  String get referenceTypeFromParameter => referenceTypeFromTypeIdentifier(
-      parameters.first.type.typeIdentifier.typeArg!);
-
-  String referenceTypeFromTypeIdentifier(TypeIdentifier typeIdentifier) {
+mixin _ReferenceProjection on WinRTMethodProjection {
+  /// Returns the type argument, as represented in the [typeIdentifier].
+  String referenceTypeArgFromTypeIdentifier(TypeIdentifier typeIdentifier) {
     final typeProjection = TypeProjection(typeIdentifier);
     if (typeProjection.isString) return 'String';
     if (typeProjection.isWinRTEnum) {
@@ -19,22 +14,52 @@ mixin ReferenceProjection on WinRTMethodProjection {
     return typeProjection.methodParamType;
   }
 
-  String get boxValue {
+  /// The type argument of `IReference`, as represented in the [returnType]'s
+  /// [TypeIdentifier] (e.g. `DateTime`, `int`, `String`).
+  String get referenceTypeArg =>
+      referenceTypeArgFromTypeIdentifier(returnType.typeIdentifier.typeArg!);
+
+  /// The type argument of `IReference`, as represented in the [TypeIdentifier]
+  /// of the method's first parameter.
+  String get referenceTypeArgFromParameter =>
+      referenceTypeArgFromTypeIdentifier(
+          parameters.first.type.typeIdentifier.typeArg!);
+
+  /// Method call to `boxValue` function.
+  ///
+  /// Nullable parameters must be passed to WinRT APIs as `IReference` interfaces
+  /// by calling the `boxValue` function with the `convertToIReference` flag set
+  /// to `true`.
+  String get boxValueMethodCall {
     final typeProjection =
         TypeProjection(parameters.first.type.typeIdentifier.typeArg!);
     final args = <String>['convertToIReference: true'];
-    if (['double', 'int'].contains(typeProjection.methodParamType)) {
+
+    // If the nullable parameter is an enum, a double or an int, it's native
+    // type (e.g. Double, Float, Int32, Uint32) must be passed in the `nativeType`
+    // parameter so that the 'boxValue' function can use the appropriate native
+    // type for the parameter
+    if (typeProjection.isWinRTEnum ||
+        ['double', 'int'].contains(typeProjection.methodParamType)) {
       args.add('nativeType: ${typeProjection.nativeType}');
     }
 
-    return 'boxValue(value, ${args.join(', ')});';
+    return typeProjection.isWinRTEnum
+        ? 'boxValue(value.value, ${args.join(', ')});'
+        : 'boxValue(value, ${args.join(', ')});';
   }
 
-  String get referenceArgs {
+  /// The constructor arguments passed to the constructor of `IReference`.
+  String get referenceConstructorArgs {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
+
+    // If the type argument is an enum, the constructor of the enum class must
+    // be passed in the 'enumCreator' parameter so that the 'IReference'
+    // implementation can instantiate the object
     final enumCreator = typeProjection.isWinRTEnum
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
         : null;
+
     final args = <String>[];
     if (enumCreator != null) {
       args.add('enumCreator: $enumCreator');
@@ -45,18 +70,18 @@ mixin ReferenceProjection on WinRTMethodProjection {
 }
 
 class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
-    with ReferenceProjection {
+    with _ReferenceProjection {
   WinRTMethodReturningReferenceProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      $referenceType? $camelCasedName($methodParams) {
+      $referenceTypeArg? $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
 
         try {
-          return IReference<$referenceType>.fromRawPointer(retValuePtr$referenceArgs).value;
+          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -66,19 +91,19 @@ class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
 }
 
 class WinRTGetPropertyReturningReferenceProjection
-    extends WinRTGetPropertyProjection with ReferenceProjection {
+    extends WinRTGetPropertyProjection with _ReferenceProjection {
   WinRTGetPropertyReturningReferenceProjection(
       super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      $referenceType? get $exposedMethodName {
+      $referenceTypeArg? get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
         try {
-          return IReference<$referenceType>.fromRawPointer(retValuePtr$referenceArgs).value;
+          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
         } finally {
           free(retValuePtr);
         }
@@ -87,14 +112,14 @@ class WinRTGetPropertyReturningReferenceProjection
 }
 
 class WinRTSetPropertyReturningReferenceProjection
-    extends WinRTSetPropertyProjection with ReferenceProjection {
+    extends WinRTSetPropertyProjection with _ReferenceProjection {
   WinRTSetPropertyReturningReferenceProjection(
       super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      set $exposedMethodName($referenceTypeFromParameter? value) {
-        final referencePtr = $boxValue
+      set $exposedMethodName($referenceTypeArgFromParameter? value) {
+        final referencePtr = $boxValueMethodCall
 
         ${ffiCall('referencePtr.ref')}
 

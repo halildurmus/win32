@@ -2,8 +2,9 @@ import 'package:winmd/winmd.dart';
 
 import '../../../../generator.dart';
 
-mixin MapProjection on WinRTMethodProjection {
-  String _mapTypeFromTypeIdentifier(TypeIdentifier typeIdentifier) {
+mixin _MapProjection on WinRTMethodProjection {
+  /// Returns the type argument, as represented in the [typeIdentifier].
+  String mapTypeArgFromTypeIdentifier(TypeIdentifier typeIdentifier) {
     final typeProjection = TypeProjection(typeIdentifier);
     if (typeProjection.isObject) return 'Object';
     if (typeProjection.isString) return 'String';
@@ -17,21 +18,33 @@ mixin MapProjection on WinRTMethodProjection {
     return typeProjection.dartType;
   }
 
-  String get mapTypes {
-    final keyType =
-        _mapTypeFromTypeIdentifier(returnType.typeIdentifier.typeArg!);
-    final valueType =
-        _mapTypeFromTypeIdentifier(returnType.typeIdentifier.typeArg!.typeArg!);
-    return '$keyType, $valueType?';
+  /// The type arguments of `IMap` and `IMapView`, as represented in the
+  /// [returnType]'s [TypeIdentifier] (e.g. `String, Object?`, `String, String?`).
+  String get mapTypeArgs {
+    final keyTypeArg =
+        mapTypeArgFromTypeIdentifier(returnType.typeIdentifier.typeArg!);
+    final valueTypeArg = mapTypeArgFromTypeIdentifier(
+        returnType.typeIdentifier.typeArg!.typeArg!);
+    return '$keyTypeArg, $valueTypeArg?';
   }
 
-  String get mapArgs {
+  /// The constructor arguments passed to the constructors of `IMap` and
+  /// `IMapView`.
+  String get mapConstructorArgs {
     final typeProjection =
         TypeProjection(returnType.typeIdentifier.typeArg!.typeArg!);
+
+    // If the type argument is a WinRT Class or Interface (e.g. IJsonValue),
+    // the constructor of that class must be passed in the 'creator' parameter
+    // so that the 'IMap' and 'IMapView' implementations can instantiate the
+    // object
     final creator = typeProjection.isWinRT &&
             (typeProjection.isClass || typeProjection.isInterface)
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
         : null;
+
+    // Similar to the 'creator' parameter above, the constructor of the enum
+    // class must be passed in the 'enumCreator' parameter
     final enumCreator = typeProjection.isWinRTEnum
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
         : null;
@@ -48,50 +61,50 @@ mixin MapProjection on WinRTMethodProjection {
 }
 
 class WinRTMethodReturningMapProjection extends WinRTMethodProjection
-    with MapProjection {
+    with _MapProjection {
   WinRTMethodReturningMapProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      IMap<$mapTypes> $camelCasedName($methodParams) {
+      IMap<$mapTypeArgs> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
         $parametersPostamble
-        return IMap.fromRawPointer(retValuePtr$mapArgs);
+        return IMap.fromRawPointer(retValuePtr$mapConstructorArgs);
       }
   ''';
 }
 
 class WinRTGetPropertyReturningMapProjection extends WinRTGetPropertyProjection
-    with MapProjection {
+    with _MapProjection {
   WinRTGetPropertyReturningMapProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      IMap<$mapTypes> get $exposedMethodName {
+      IMap<$mapTypeArgs> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
-        return IMap.fromRawPointer(retValuePtr$mapArgs);
+        return IMap.fromRawPointer(retValuePtr$mapConstructorArgs);
       }
   ''';
 }
 
 class WinRTMethodReturningMapViewProjection extends WinRTMethodProjection
-    with MapProjection {
+    with _MapProjection {
   WinRTMethodReturningMapViewProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      Map<$mapTypes> $camelCasedName($methodParams) {
+      Map<$mapTypeArgs> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
 
         try {
-          return IMapView<$mapTypes>.fromRawPointer(retValuePtr$mapArgs).toMap();
+          return IMapView<$mapTypeArgs>.fromRawPointer(retValuePtr$mapConstructorArgs).toMap();
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -101,18 +114,18 @@ class WinRTMethodReturningMapViewProjection extends WinRTMethodProjection
 }
 
 class WinRTGetPropertyReturningMapViewProjection
-    extends WinRTGetPropertyProjection with MapProjection {
+    extends WinRTGetPropertyProjection with _MapProjection {
   WinRTGetPropertyReturningMapViewProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      Map<$mapTypes> get $exposedMethodName {
+      Map<$mapTypeArgs> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
         try {
-          return IMapView<$mapTypes>.fromRawPointer(retValuePtr$mapArgs).toMap();
+          return IMapView<$mapTypeArgs>.fromRawPointer(retValuePtr$mapConstructorArgs).toMap();
         } finally {
           free(retValuePtr);
         }

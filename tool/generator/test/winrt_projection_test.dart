@@ -348,21 +348,47 @@ void main() {
         startsWith('set era(int value)'));
   });
 
-  test('WinRT set property successfully projects nullable types', () {
+  test('WinRT set property successfully projects nullable DateTime parameter',
+      () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.IToastNotification');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    final expirationTimeSystemProjection = projection.methodProjections
+    final expirationTimeProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'put_ExpirationTime');
 
-    expect(expirationTimeSystemProjection.nativePrototype,
+    expect(expirationTimeProjection.nativePrototype,
         equalsIgnoringWhitespace('HRESULT Function(Pointer, COMObject)'));
-    expect(expirationTimeSystemProjection.dartPrototype,
+    expect(expirationTimeProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, COMObject)'));
-    expect(expirationTimeSystemProjection.returnType.dartType, equals('void'));
-    expect(expirationTimeSystemProjection.toString().trimLeft(),
+    expect(expirationTimeProjection.returnType.dartType, equals('void'));
+    expect(expirationTimeProjection.toString().trimLeft(),
         startsWith('set expirationTime(DateTime? value)'));
+    expect(
+        expirationTimeProjection.toString(),
+        contains(
+            'final referencePtr = boxValue(value, convertToIReference: true);'));
+  });
+
+  test('WinRT set property successfully projects nullable enum parameter', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisement');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final flagsProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'put_Flags');
+
+    expect(flagsProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, COMObject)'));
+    expect(flagsProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, COMObject)'));
+    expect(flagsProjection.returnType.dartType, equals('void'));
+    expect(flagsProjection.toString().trimLeft(),
+        startsWith('set flags(BluetoothLEAdvertisementFlags? value)'));
+    expect(
+        flagsProjection.toString(),
+        contains(
+            'final referencePtr = boxValue(value.value, convertToIReference: true, nativeType: Uint32);'));
   });
 
   test('WinRT method projects DateTime parameter correctly', () {
