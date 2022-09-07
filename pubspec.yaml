@@ -7,6 +7,10 @@ issue_tracker: https://github.com/timsneath/winmd/issues
 environment:
   sdk: '>=2.17.0 <3.0.0'
 
+# Declare that this package only works on Windows.
+platforms:
+  windows:
+
 dependencies:
   ffi: ^2.0.1
   win32: '>=2.7.0 <4.0.0'
