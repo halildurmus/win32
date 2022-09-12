@@ -27,7 +27,10 @@ void main() {
     });
 
     test('Format a US number', () {
-      final phone = formatter.formatString('4255550123');
+      final formatterObject = calloc<COMObject>();
+      PhoneNumberFormatter.tryCreate('US', formatterObject);
+      final usFormatter = IPhoneNumberFormatter.fromRawPointer(formatterObject);
+      final phone = usFormatter.formatString('4255550123');
       expect(phone, equals('(425) 555-0123'));
     });
 
