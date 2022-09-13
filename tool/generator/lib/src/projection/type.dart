@@ -69,7 +69,10 @@ class TypeProjection {
     return _projection!;
   }
 
-  TypeProjection(this.typeIdentifier);
+  TypeProjection(TypeIdentifier ti)
+      : typeIdentifier = ti.baseType == BaseType.genericTypeModifier
+            ? ti.copyWith(name: parseGenericTypeIdentifierName(ti))
+            : ti;
 
   String get attribute => projection.attribute ?? '';
   String get nativeType => projection.nativeType;
@@ -260,8 +263,8 @@ class TypeProjection {
   }
 
   TypeTuple unwrapWinRTDelegate() {
-    final delegateName = stripGenerics(
-        stripLeadingUnderscores(lastComponent(typeIdentifier.name)));
+    final delegateName = outerType(stripGenerics(
+        stripLeadingUnderscores(lastComponent(typeIdentifier.name))));
 
     return TypeTuple('Pointer<NativeFunction<$delegateName>>',
         'Pointer<NativeFunction<$delegateName>>');
@@ -270,7 +273,8 @@ class TypeProjection {
   TypeTuple unwrapReferenceType() {
     if ((typeIdentifier.typeArg?.type?.isInterface ?? false) ||
         typeIdentifier.typeArg?.baseType == BaseType.classTypeModifier) {
-      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+      return TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>',
+          methodParamType: lastComponent(typeIdentifier.typeArg!.name));
     }
 
     if (typeIdentifier.typeArg?.baseType == BaseType.simpleArrayType) {
@@ -348,13 +352,20 @@ class TypeProjection {
     // IReference<T> parameters accept COMObject instead of Pointer<COMObject>
     if (isGenericType &&
         (typeIdentifier.type?.name.endsWith('IReference`1') ?? false)) {
-      return const TypeTuple('COMObject', 'COMObject');
+      return TypeTuple('COMObject', 'COMObject',
+          methodParamType: lastComponent(typeIdentifier.name));
     }
 
     if (isInterface ||
         typeIdentifier.baseType == BaseType.classTypeModifier ||
         typeIdentifier.baseType == BaseType.objectType) {
-      return const TypeTuple('Pointer<COMObject>', 'Pointer<COMObject>');
+      return TypeTuple(
+        'Pointer<COMObject>',
+        'Pointer<COMObject>',
+        methodParamType: typeIdentifier.baseType == BaseType.objectType
+            ? null
+            : lastComponent(typeIdentifier.name),
+      );
     }
 
     // default: return the name as returned by metadata
