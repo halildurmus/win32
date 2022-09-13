@@ -2,7 +2,10 @@ import '../../../../generator.dart';
 
 mixin _ComObjectProjection on WinRTMethodProjection {
   String get retType {
-    // TODO(halildurmus): Explain why we need to do this
+    // The return types of methods in the IPropertyValueStatics are specified
+    // as 'object' in WinMD. However, these methods actually return the
+    // IPropertyValue interface (except for the CreateEmpty() and
+    // CreateInspectable() methods, which return Pointer<COMObject>).
     final isMethodFromPropertyValueStatics =
         method.parent.name == 'Windows.Foundation.IPropertyValueStatics';
     if (isMethodFromPropertyValueStatics) {
@@ -12,7 +15,7 @@ mixin _ComObjectProjection on WinRTMethodProjection {
     }
 
     final typeIdentifierName = lastComponent(returnType.typeIdentifier.name);
-    // TODO: Remove this once the asynchronous methods are supported
+    // TODO: Remove this once asynchronous methods are supported
     if (typeIdentifierName.startsWith('IAsync')) return 'Pointer<COMObject>';
 
     return typeIdentifierName;

@@ -275,7 +275,7 @@ String parseGenericCreatorParameter(TypeIdentifier ti) {
   return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(ptr, $creatorParamName: $creator)';
 }
 
-/// TODO(halildurmus): Add documentation
+/// Returns the appropriate Dart primitive type name for the given [baseType].
 String primitiveTypeNameFromBaseType(BaseType baseType) {
   switch (baseType) {
     case BaseType.booleanType:
@@ -299,7 +299,7 @@ String primitiveTypeNameFromBaseType(BaseType baseType) {
   }
 }
 
-/// TODO(halildurmus): Add documentation
+/// Returns the appropriate type name for the given [ti].
 String parseTypeIdentifierName(TypeIdentifier ti) {
   switch (ti.baseType) {
     case BaseType.classTypeModifier:
