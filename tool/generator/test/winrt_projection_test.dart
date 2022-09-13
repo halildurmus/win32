@@ -27,6 +27,7 @@ void main() {
     final typeProjection = TypeProjection(method.returnType.typeIdentifier);
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
+    expect(typeProjection.methodParamType, equals('IMediaPlaybackSource'));
   });
 
   test('Property setter projects appropriate results for delegate.', () {
@@ -120,7 +121,6 @@ void main() {
     expect(projection.methodProjections.first.returnType.typeIdentifier.name,
         endsWith('PickerViewMode'));
     expect(projection.methodProjections.first.parameters, isEmpty);
-
     expect(
         (getPropertyProjection as WinRTGetPropertyProjection).exposedMethodName,
         equals('viewMode'));
@@ -216,6 +216,8 @@ void main() {
         equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Int32>)'));
     expect(numDaysProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>)'));
+    expect(numDaysProjection.toString().trimLeft(),
+        startsWith('int get numberOfDaysInThisMonth'));
   });
 
   test('WinRT get property successfully projects DateTime', () {
@@ -257,15 +259,17 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    final languageProjection = projection.methodProjections
+    final languagesProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_Languages');
 
     expect(
-        languageProjection.nativePrototype,
+        languagesProjection.nativePrototype,
         equalsIgnoringWhitespace(
             'HRESULT Function(Pointer, Pointer<COMObject>)'));
-    expect(languageProjection.dartPrototype,
+    expect(languagesProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(languagesProjection.toString().trimLeft(),
+        startsWith('List<String> get languages'));
   });
 
   test('WinRT get property successfully projects nullable types', () {
@@ -302,6 +306,9 @@ void main() {
             'HRESULT Function(Pointer, Pointer<COMObject>)'));
     expect(cloneProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(cloneProjection.returnType.dartType, equals('Pointer<COMObject>'));
+    expect(
+        cloneProjection.toString().trimLeft(), startsWith('Calendar clone()'));
   });
 
   test('WinRT TryCreate method successfully projects Pointer<COMObject>', () {
@@ -320,6 +327,10 @@ void main() {
         tryCreateProjection.dartPrototype,
         equalsIgnoringWhitespace(
             'int Function(Pointer, int regionCode, Pointer<COMObject> phoneNumber)'));
+    expect(
+        tryCreateProjection.toString().trimLeft(),
+        startsWith(
+            'void tryCreate(String regionCode, PhoneNumberFormatter phoneNumber)'));
   });
 
   test('WinRT set property successfully projects something', () {
@@ -402,8 +413,40 @@ void main() {
         setDateTimeProjection.parameters.first as WinRTParameterProjection;
 
     expect(dateTimeParameter.preamble, isNotEmpty);
-
     expect(setDateTimeProjection.parametersPreamble, isNotEmpty);
+  });
+
+  test('WinRT method projects nested type correctly', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.StringMap');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    final firstProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'First') as WinRTMethodProjection;
+
+    expect(firstProjection.returnType.methodParamType,
+        equals('IIterator<IKeyValuePair<String, String?>>'));
+    expect(firstProjection.toString().trimLeft(),
+        startsWith('IIterator<IKeyValuePair<String, String?>> first()'));
+  });
+
+  test('WinRT method projects parameter with nested type correctly', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.INotificationDataFactory');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final createNotificationDataProjection = projection.methodProjections
+            .firstWhere((m) => m.name == 'CreateNotificationDataWithValues')
+        as WinRTMethodProjection;
+    final initialValuesParameter = createNotificationDataProjection
+        .parameters.first as WinRTParameterProjection;
+
+    expect(initialValuesParameter.preamble, isEmpty);
+    expect(initialValuesParameter.postamble, isEmpty);
+    expect(initialValuesParameter.localIdentifier,
+        equals('initialValues.ptr.cast<Pointer<COMObject>>().value'));
+    expect(initialValuesParameter.type.methodParamType,
+        equals('IIterable<IKeyValuePair<String, String?>>'));
   });
 
   test('WinRT interface successfully projects something', () {
