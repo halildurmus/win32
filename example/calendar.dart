@@ -21,8 +21,8 @@ void main() {
     final calendar = Calendar();
     print(calendarData(calendar));
 
-    final clonedCalendar = Calendar.fromRawPointer(calendar.clone());
-    final comparisonResult = clonedCalendar.compare(calendar.ptr);
+    final clonedCalendar = calendar.clone();
+    final comparisonResult = clonedCalendar.compare(calendar);
     print('Comparison result of calendar and its clone: $comparisonResult');
 
     print('Languages: ${calendar.languages}\n');
