@@ -3,7 +3,7 @@ import '../../../../generator.dart';
 mixin _VectorProjection on WinRTMethodProjection {
   /// The type argument of `IVector` and `IVectorView`, as represented in the
   /// [returnType]'s [TypeIdentifier] (e.g. `int`, `String`, `StorageFile`).
-  String get vectorTypeArg => innerType(returnType.typeIdentifier.name);
+  String get vectorTypeArg => typeArgs(returnType.typeIdentifier.name);
 
   /// The constructor arguments passed to the constructors of `IVector` and
   /// `IVectorView`.
@@ -14,7 +14,8 @@ mixin _VectorProjection on WinRTMethodProjection {
     // constructor of that class must be passed in the 'enumCreator' parameter
     // for enums, 'creator' parameter for WinRT Objects so that the 'IVector'
     // and 'IVectorView' implementations can instantiate the object
-    final creator = parseCreatorParameter(returnType.typeIdentifier.typeArg!);
+    final creator =
+        parseArgumentForCreatorParameter(returnType.typeIdentifier.typeArg!);
 
     // If the type argument is an enum or int, it's native type (e.g. Int32,
     // Uint32) must be passed in the 'intType' parameter so that the 'IVector'

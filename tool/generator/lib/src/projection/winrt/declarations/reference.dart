@@ -5,12 +5,12 @@ import '../../../../generator.dart';
 mixin _ReferenceProjection on WinRTMethodProjection {
   /// The type argument of `IReference`, as represented in the [returnType]'s
   /// [TypeIdentifier] (e.g. `DateTime`, `int`, `String`).
-  String get referenceTypeArg => innerType(returnType.typeIdentifier.name);
+  String get referenceTypeArg => typeArgs(returnType.typeIdentifier.name);
 
   /// The type argument of `IReference`, as represented in the [TypeIdentifier]
   /// of the method's first parameter.
   String get referenceTypeArgFromParameter =>
-      innerType(parameters.first.type.typeIdentifier.name);
+      typeArgs(parameters.first.type.typeIdentifier.name);
 
   /// Method call to `boxValue` function.
   ///

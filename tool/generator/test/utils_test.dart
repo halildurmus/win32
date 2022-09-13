@@ -16,9 +16,9 @@ void main() {
     expect(stripAnsiUnicodeSuffix('ENUMLOGFONTEXW'), equals('ENUMLOGFONTEX'));
   });
 
-  test('innerType', () {
-    expect(innerType('IAsyncOperation<StorageFile>'), equals('StorageFile'));
-    expect(innerType('IMap<String, Object?>'), equals('String, Object?'));
+  test('typeArgs', () {
+    expect(typeArgs('IAsyncOperation<StorageFile>'), equals('StorageFile'));
+    expect(typeArgs('IMap<String, Object?>'), equals('String, Object?'));
   });
 
   test('outerType', () {
@@ -104,6 +104,15 @@ void main() {
   });
 
   test('parseGenericTypeIdentifierName', () {
+    final calendarFactory = MetadataStore.getMetadataForType(
+        'Windows.Globalization.ICalendarFactory')!;
+    expect(
+        () => parseGenericTypeIdentifierName(calendarFactory
+            .findMethod('CreateCalendar')!
+            .returnType
+            .typeIdentifier),
+        throwsArgumentError);
+
     final stringMap = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.StringMap')!;
     expect(parseGenericTypeIdentifierName(stringMap.interfaces[0].typeSpec!),
@@ -161,11 +170,11 @@ void main() {
         equals('IMapView<PedometerStepKind, PedometerReading?>'));
   });
 
-  test('parseCreatorParameter', () {
+  test('parseArgumentForCreatorParameter', () {
     final calendarFactory = MetadataStore.getMetadataForType(
         'Windows.Globalization.ICalendarFactory')!;
     expect(
-        parseCreatorParameter(calendarFactory
+        parseArgumentForCreatorParameter(calendarFactory
             .findMethod('CreateCalendar')!
             .returnType
             .typeIdentifier),
@@ -174,21 +183,21 @@ void main() {
     final propertyValueStatics = MetadataStore.getMetadataForType(
         'Windows.Foundation.IPropertyValueStatics')!;
     expect(
-        parseCreatorParameter(propertyValueStatics
+        parseArgumentForCreatorParameter(propertyValueStatics
             .findMethod('CreateGuid')!
             .parameters
             .first
             .typeIdentifier),
         isNull);
     expect(
-        parseCreatorParameter(propertyValueStatics
+        parseArgumentForCreatorParameter(propertyValueStatics
             .findMethod('CreatePoint')!
             .parameters
             .first
             .typeIdentifier),
         isNull);
     expect(
-        parseCreatorParameter(propertyValueStatics
+        parseArgumentForCreatorParameter(propertyValueStatics
             .findMethod('CreateTimeSpan')!
             .parameters
             .first
@@ -198,25 +207,25 @@ void main() {
     final jsonObject =
         MetadataStore.getMetadataForType('Windows.Data.Json.JsonObject')!;
     expect(
-        parseCreatorParameter(jsonObject.interfaces[2].typeSpec!),
+        parseArgumentForCreatorParameter(jsonObject.interfaces[2].typeSpec!),
         equals(
             '(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: IJsonValue.fromRawPointer)'));
     expect(
-        parseCreatorParameter(jsonObject.interfaces[3].typeSpec!),
+        parseArgumentForCreatorParameter(jsonObject.interfaces[3].typeSpec!),
         equals(
             '(Pointer<COMObject> ptr) => IIterable.fromRawPointer(ptr, creator: (Pointer<COMObject> ptr) => IKeyValuePair.fromRawPointer(ptr, creator: IJsonValue.fromRawPointer))'));
 
     final propertySet = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.PropertySet')!;
     expect(
-        parseCreatorParameter(
+        parseArgumentForCreatorParameter(
             propertySet.findMethod('Insert')!.parameters.last.typeIdentifier),
         isNull);
 
     final phoneNumberFormatterStatics = MetadataStore.getMetadataForType(
         'Windows.Globalization.PhoneNumberFormatting.IPhoneNumberFormatterStatics')!;
     expect(
-        parseCreatorParameter(phoneNumberFormatterStatics
+        parseArgumentForCreatorParameter(phoneNumberFormatterStatics
             .findMethod('TryCreate')!
             .parameters
             .last
@@ -224,44 +233,59 @@ void main() {
         equals('PhoneNumberFormatter.fromRawPointer'));
   });
 
-  test('parseGenericCreatorParameter', () {
+  test('parseArgumentForCreatorParameterFromGenericTypeIdentifier', () {
+    final calendarFactory = MetadataStore.getMetadataForType(
+        'Windows.Globalization.ICalendarFactory')!;
+    expect(
+        () => parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+            calendarFactory
+                .findMethod('CreateCalendar')!
+                .returnType
+                .typeIdentifier),
+        throwsArgumentError);
+
     final stringMap = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.StringMap')!;
-    expect(parseGenericCreatorParameter(stringMap.interfaces[0].typeSpec!),
+    expect(
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+            stringMap.interfaces[0].typeSpec!),
         equals('IMap.fromRawPointer'));
     expect(
-        parseGenericCreatorParameter(stringMap.interfaces[1].typeSpec!),
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+            stringMap.interfaces[1].typeSpec!),
         equals(
             '(Pointer<COMObject> ptr) => IIterable.fromRawPointer(ptr, creator: IKeyValuePair.fromRawPointer)'));
-    expect(parseGenericCreatorParameter(stringMap.interfaces[2].typeSpec!),
+    expect(
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+            stringMap.interfaces[2].typeSpec!),
         equals('IObservableMap.fromRawPointer'));
     expect(
-        parseGenericCreatorParameter(
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
             stringMap.findMethod('First')!.returnType.typeIdentifier),
         equals(
             '(Pointer<COMObject> ptr) => IIterator.fromRawPointer(ptr, creator: IKeyValuePair.fromRawPointer)'));
     expect(
-        parseGenericCreatorParameter(
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
             stringMap.findMethod('GetView')!.returnType.typeIdentifier),
         equals('IMapView.fromRawPointer'));
 
     final fileOpenPicker = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
     expect(
-        parseGenericCreatorParameter(fileOpenPicker
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(fileOpenPicker
             .findMethod('get_FileTypeFilter')!
             .returnType
             .typeIdentifier),
         equals('IVector.fromRawPointer'));
     expect(
-        parseGenericCreatorParameter(fileOpenPicker
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(fileOpenPicker
             .findMethod('PickSingleFileAsync')!
             .returnType
             .typeIdentifier),
         equals(
             '(Pointer<COMObject> ptr) => IAsyncOperation.fromRawPointer(ptr, creator: StorageFile.fromRawPointer)'));
     expect(
-        parseGenericCreatorParameter(fileOpenPicker
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(fileOpenPicker
             .findMethod('PickMultipleFilesAsync')!
             .returnType
             .typeIdentifier),
@@ -271,17 +295,18 @@ void main() {
     final storageFileQueryResult2 = MetadataStore.getMetadataForType(
         'Windows.Storage.Search.IStorageFileQueryResult2')!;
     expect(
-        parseGenericCreatorParameter(storageFileQueryResult2
-            .findMethod('GetMatchingPropertiesWithRanges')!
-            .returnType
-            .typeIdentifier),
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+            storageFileQueryResult2
+                .findMethod('GetMatchingPropertiesWithRanges')!
+                .returnType
+                .typeIdentifier),
         equals(
             '(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: IVectorView.fromRawPointer)'));
 
     final pedometer2 = MetadataStore.getMetadataForType(
         'Windows.Devices.Sensors.IPedometer2')!;
     expect(
-        parseGenericCreatorParameter(pedometer2
+        parseArgumentForCreatorParameterFromGenericTypeIdentifier(pedometer2
             .findMethod('GetCurrentReadings')!
             .returnType
             .typeIdentifier),

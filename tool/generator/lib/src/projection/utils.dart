@@ -220,8 +220,9 @@ String stripLeadingUnderscores(String name) {
   return name;
 }
 
-/// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile`.
-String innerType(String name) {
+/// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile` or
+/// `String, String?` for a name like `IMap<String, String?>`.
+String typeArgs(String name) {
   if (!name.contains('<')) return name;
   return name.substring(name.indexOf('<') + 1, name.length - 1);
 }
@@ -232,8 +233,8 @@ String outerType(String name) {
   return name.substring(0, name.indexOf('<'));
 }
 
-/// TODO(halildurmus): Add documentation
-String? parseCreatorParameter(TypeIdentifier ti) {
+/// Parses the argument to be passed to the `creator` parameter from [ti].
+String? parseArgumentForCreatorParameter(TypeIdentifier ti) {
   final typeProjection = TypeProjection(ti);
   if (typeProjection.isWinRTStruct ||
       ['bool', 'DateTime', 'double', 'Duration', 'int', 'String']
@@ -245,9 +246,9 @@ String? parseCreatorParameter(TypeIdentifier ti) {
     case BaseType.classTypeModifier:
       return '${lastComponent(ti.name)}.fromRawPointer';
     case BaseType.genericTypeModifier:
-      return parseGenericCreatorParameter(ti);
+      return parseArgumentForCreatorParameterFromGenericTypeIdentifier(ti);
     case BaseType.referenceTypeModifier:
-      return parseCreatorParameter(ti.typeArg!);
+      return parseArgumentForCreatorParameter(ti.typeArg!);
     case BaseType.valueTypeModifier:
       if (ti.type?.isEnum ?? false) return '${lastComponent(ti.name)}.from';
       return null;
@@ -256,8 +257,13 @@ String? parseCreatorParameter(TypeIdentifier ti) {
   }
 }
 
-/// TODO(halildurmus): Add documentation
-String parseGenericCreatorParameter(TypeIdentifier ti) {
+/// Parses the argument to be passed to the `creator` parameter from generic [ti].
+String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+    TypeIdentifier ti) {
+  if (ti.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
   final typeIdentifierName = stripGenerics(lastComponent(outerType(ti.name)));
   final typeArg = ['IKeyValuePair', 'IMap', 'IMapView']
           .contains(typeIdentifierName)
@@ -266,7 +272,7 @@ String parseGenericCreatorParameter(TypeIdentifier ti) {
       ? ti.typeArg!.typeArg!
       : ti.typeArg;
 
-  final creator = parseCreatorParameter(typeArg!);
+  final creator = parseArgumentForCreatorParameter(typeArg!);
   if (creator == null) return '$typeIdentifierName.fromRawPointer';
 
   final isTypeArgEnum = typeArg.type?.isEnum ?? false;
@@ -320,6 +326,10 @@ String parseTypeIdentifierName(TypeIdentifier ti) {
 
 /// Unpack a nested [typeIdentifier] into a single name.
 String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
+  if (typeIdentifier.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
   // If the typeIdentifier's name is already parsed, return it as is
   if (typeIdentifier.name.contains('<')) return typeIdentifier.name;
 
