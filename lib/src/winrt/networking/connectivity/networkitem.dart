@@ -1,4 +1,4 @@
-// headset.dart
+// networkitem.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,30 +21,22 @@ import '../../../winrt_helpers.dart';
 
 import '../../../winrt/internal/hstring_array.dart';
 
-import '../../../winrt/gaming/input/iheadset.dart';
-import '../../../winrt/gaming/input/igamecontrollerbatteryinfo.dart';
-import '../../../winrt/devices/power/batteryreport.dart';
+import '../../../winrt/networking/connectivity/inetworkitem.dart';
+import '../../../guid.dart';
+import '../../../winrt/networking/connectivity/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}
 /// {@category winrt}
-class Headset extends IInspectable
-    implements IHeadset, IGameControllerBatteryInfo {
-  Headset.fromRawPointer(super.ptr);
+class NetworkItem extends IInspectable implements INetworkItem {
+  NetworkItem.fromRawPointer(super.ptr);
 
-  // IHeadset methods
-  late final _iHeadset = IHeadset.from(this);
-
-  @override
-  String get captureDeviceId => _iHeadset.captureDeviceId;
+  // INetworkItem methods
+  late final _iNetworkItem = INetworkItem.from(this);
 
   @override
-  String get renderDeviceId => _iHeadset.renderDeviceId;
-  // IGameControllerBatteryInfo methods
-  late final _iGameControllerBatteryInfo =
-      IGameControllerBatteryInfo.from(this);
+  GUID get networkId => _iNetworkItem.networkId;
 
   @override
-  BatteryReport tryGetBatteryReport() =>
-      _iGameControllerBatteryInfo.tryGetBatteryReport();
+  NetworkTypes getNetworkTypes() => _iNetworkItem.getNetworkTypes();
 }

@@ -34,7 +34,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
   static const _className = 'Windows.Storage.UserDataPaths';
 
   // IUserDataPathsStatics methods
-  static Pointer<COMObject> getForUser(Pointer<COMObject> user) {
+  static UserDataPaths getForUser(User user) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 
@@ -46,7 +46,7 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
     }
   }
 
-  static Pointer<COMObject> getDefault() {
+  static UserDataPaths getDefault() {
     final activationFactory =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
 

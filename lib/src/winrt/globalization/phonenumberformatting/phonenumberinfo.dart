@@ -43,9 +43,8 @@ class PhoneNumberInfo extends IInspectable
         CreateActivationFactory(_className, IID_IPhoneNumberInfoFactory);
 
     try {
-      final result = IPhoneNumberInfoFactory.fromRawPointer(activationFactory)
+      return IPhoneNumberInfoFactory.fromRawPointer(activationFactory)
           .create(number);
-      return PhoneNumberInfo.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
@@ -53,7 +52,7 @@ class PhoneNumberInfo extends IInspectable
 
   // IPhoneNumberInfoStatics methods
   static PhoneNumberParseResult tryParse(
-      String input, Pointer<COMObject> phoneNumber) {
+      String input, PhoneNumberInfo phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
@@ -66,7 +65,7 @@ class PhoneNumberInfo extends IInspectable
   }
 
   static PhoneNumberParseResult tryParseWithRegion(
-      String input, String regionCode, Pointer<COMObject> phoneNumber) {
+      String input, String regionCode, PhoneNumberInfo phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
 
@@ -108,7 +107,7 @@ class PhoneNumberInfo extends IInspectable
       _iPhoneNumberInfo.getGeographicRegionCode();
 
   @override
-  PhoneNumberMatchResult checkNumberMatch(Pointer<COMObject> otherNumber) =>
+  PhoneNumberMatchResult checkNumberMatch(PhoneNumberInfo otherNumber) =>
       _iPhoneNumberInfo.checkNumberMatch(otherNumber);
   // IStringable methods
   late final _iStringable = IStringable.from(this);

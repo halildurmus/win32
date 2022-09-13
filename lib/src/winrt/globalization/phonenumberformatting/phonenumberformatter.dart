@@ -39,7 +39,7 @@ class PhoneNumberFormatter extends IInspectable
       'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter';
 
   // IPhoneNumberFormatterStatics methods
-  static void tryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
+  static void tryCreate(String regionCode, PhoneNumberFormatter phoneNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
 
@@ -92,12 +92,12 @@ class PhoneNumberFormatter extends IInspectable
   late final _iPhoneNumberFormatter = IPhoneNumberFormatter.from(this);
 
   @override
-  String format(Pointer<COMObject> number) =>
+  String format(PhoneNumberInfo number) =>
       _iPhoneNumberFormatter.format(number);
 
   @override
   String formatWithOutputFormat(
-          Pointer<COMObject> number, PhoneNumberFormat numberFormat) =>
+          PhoneNumberInfo number, PhoneNumberFormat numberFormat) =>
       _iPhoneNumberFormatter.formatWithOutputFormat(number, numberFormat);
 
   @override

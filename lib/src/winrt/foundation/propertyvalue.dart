@@ -24,6 +24,7 @@ import '../../winrt/internal/hstring_array.dart';
 import 'ipropertyvaluestatics.dart';
 import '../../guid.dart';
 import '../../winrt/foundation/structs.g.dart';
+import 'ipropertyvalue.dart';
 import '../../com/iinspectable.dart';
 
 /// {@category Class}
@@ -46,7 +47,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt8(int value) {
+  static IPropertyValue createUInt8(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -58,7 +59,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt16(int value) {
+  static IPropertyValue createInt16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -70,7 +71,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt16(int value) {
+  static IPropertyValue createUInt16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -82,7 +83,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt32(int value) {
+  static IPropertyValue createInt32(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -94,7 +95,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt32(int value) {
+  static IPropertyValue createUInt32(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -106,7 +107,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt64(int value) {
+  static IPropertyValue createInt64(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -118,7 +119,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt64(int value) {
+  static IPropertyValue createUInt64(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -130,7 +131,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createSingle(double value) {
+  static IPropertyValue createSingle(double value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -142,7 +143,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createDouble(double value) {
+  static IPropertyValue createDouble(double value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -154,7 +155,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createChar16(int value) {
+  static IPropertyValue createChar16(int value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -166,7 +167,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createBoolean(bool value) {
+  static IPropertyValue createBoolean(bool value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -178,7 +179,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createString(String value) {
+  static IPropertyValue createString(String value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -202,7 +203,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createGuid(GUID value) {
+  static IPropertyValue createGuid(GUID value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -214,7 +215,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createDateTime(DateTime value) {
+  static IPropertyValue createDateTime(DateTime value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -226,7 +227,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createTimeSpan(Duration value) {
+  static IPropertyValue createTimeSpan(Duration value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -238,7 +239,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createPoint(Point value) {
+  static IPropertyValue createPoint(Point value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -250,7 +251,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createSize(Size value) {
+  static IPropertyValue createSize(Size value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -262,7 +263,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createRect(Rect value) {
+  static IPropertyValue createRect(Rect value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -274,8 +275,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt8Array(
-      int valueSize, Pointer<Uint8> value) {
+  static IPropertyValue createUInt8Array(int valueSize, Pointer<Uint8> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -287,8 +287,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt16Array(
-      int valueSize, Pointer<Int16> value) {
+  static IPropertyValue createInt16Array(int valueSize, Pointer<Int16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -300,7 +299,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt16Array(
+  static IPropertyValue createUInt16Array(
       int valueSize, Pointer<Uint16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -313,8 +312,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt32Array(
-      int valueSize, Pointer<Int32> value) {
+  static IPropertyValue createInt32Array(int valueSize, Pointer<Int32> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -326,7 +324,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt32Array(
+  static IPropertyValue createUInt32Array(
       int valueSize, Pointer<Uint32> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -339,8 +337,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInt64Array(
-      int valueSize, Pointer<Int64> value) {
+  static IPropertyValue createInt64Array(int valueSize, Pointer<Int64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -352,7 +349,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createUInt64Array(
+  static IPropertyValue createUInt64Array(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -365,8 +362,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createSingleArray(
-      int valueSize, Pointer<Float> value) {
+  static IPropertyValue createSingleArray(int valueSize, Pointer<Float> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -378,7 +374,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createDoubleArray(
+  static IPropertyValue createDoubleArray(
       int valueSize, Pointer<Double> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -391,7 +387,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createChar16Array(
+  static IPropertyValue createChar16Array(
       int valueSize, Pointer<Uint16> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -404,8 +400,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createBooleanArray(
-      int valueSize, Pointer<Bool> value) {
+  static IPropertyValue createBooleanArray(int valueSize, Pointer<Bool> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -417,7 +412,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createStringArray(
+  static IPropertyValue createStringArray(
       int valueSize, Pointer<IntPtr> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -430,7 +425,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createInspectableArray(
+  static IPropertyValue createInspectableArray(
       int valueSize, Pointer<COMObject> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -443,8 +438,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createGuidArray(
-      int valueSize, Pointer<GUID> value) {
+  static IPropertyValue createGuidArray(int valueSize, Pointer<GUID> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -456,7 +450,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createDateTimeArray(
+  static IPropertyValue createDateTimeArray(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -469,7 +463,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createTimeSpanArray(
+  static IPropertyValue createTimeSpanArray(
       int valueSize, Pointer<Uint64> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
@@ -482,8 +476,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createPointArray(
-      int valueSize, Pointer<Point> value) {
+  static IPropertyValue createPointArray(int valueSize, Pointer<Point> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -495,8 +488,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createSizeArray(
-      int valueSize, Pointer<Size> value) {
+  static IPropertyValue createSizeArray(int valueSize, Pointer<Size> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
@@ -508,8 +500,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static Pointer<COMObject> createRectArray(
-      int valueSize, Pointer<Rect> value) {
+  static IPropertyValue createRectArray(int valueSize, Pointer<Rect> value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 

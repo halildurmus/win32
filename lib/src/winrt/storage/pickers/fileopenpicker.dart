@@ -44,7 +44,7 @@ class FileOpenPicker extends IInspectable
   static const _className = 'Windows.Storage.Pickers.FileOpenPicker';
 
   // IFileOpenPickerStatics2 methods
-  static Pointer<COMObject> createForUser(Pointer<COMObject> user) {
+  static FileOpenPicker createForUser(User user) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IFileOpenPickerStatics2);
 
@@ -101,5 +101,5 @@ class FileOpenPicker extends IInspectable
   late final _iFileOpenPicker3 = IFileOpenPicker3.from(this);
 
   @override
-  Pointer<COMObject> get user => _iFileOpenPicker3.user;
+  User get user => _iFileOpenPicker3.user;
 }

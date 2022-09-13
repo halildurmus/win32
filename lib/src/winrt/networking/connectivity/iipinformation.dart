@@ -1,4 +1,4 @@
-// itoastnotification4.dart
+// iipinformation.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,24 +21,24 @@ import '../../../winrt_helpers.dart';
 
 import '../../../winrt/internal/hstring_array.dart';
 
-import '../../../winrt/ui/notifications/notificationdata.dart';
-import '../../../winrt/ui/notifications/enums.g.dart';
+import '../../../winrt/networking/connectivity/networkadapter.dart';
+import '../../../winrt/foundation/ireference.dart';
+import '../../../winrt/internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotification4 = '{15154935-28EA-4727-88E9-C58680E2D118}';
+const IID_IIPInformation = '{D85145E0-138F-47D7-9B3A-36BB488CEF33}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IToastNotification4 extends IInspectable {
-  // vtable begins at 6, is 4 entries long.
-  IToastNotification4.fromRawPointer(super.ptr);
+class IIPInformation extends IInspectable {
+  // vtable begins at 6, is 2 entries long.
+  IIPInformation.fromRawPointer(super.ptr);
 
-  factory IToastNotification4.from(IInspectable interface) =>
-      IToastNotification4.fromRawPointer(
-          interface.toInterface(IID_IToastNotification4));
+  factory IIPInformation.from(IInspectable interface) =>
+      IIPInformation.fromRawPointer(interface.toInterface(IID_IIPInformation));
 
-  NotificationData get data {
+  NetworkAdapter get networkAdapter {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -53,10 +53,12 @@ class IToastNotification4 extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return NotificationData.fromRawPointer(retValuePtr);
+    return NetworkAdapter.fromRawPointer(retValuePtr);
   }
 
-  set data(NotificationData value) {
+  int? get prefixLength {
+    final retValuePtr = calloc<COMObject>();
+
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -65,40 +67,14 @@ class IToastNotification4 extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, value.ptr.cast<Pointer<COMObject>>().value);
+        ptr.ref.lpVtbl, retValuePtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
-  }
-
-  ToastNotificationPriority get priority {
-    final retValuePtr = calloc<Int32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(8)
-          .cast<
-              Pointer<
-                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
-          .value
-          .asFunction<
-              int Function(
-                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return ToastNotificationPriority.from(retValuePtr.value);
+      return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
     }
-  }
-
-  set priority(ToastNotificationPriority value) {
-    final hr = ptr.ref.vtable
-        .elementAt(9)
-        .cast<Pointer<NativeFunction<HRESULT Function(Pointer, Int32)>>>()
-        .value
-        .asFunction<int Function(Pointer, int)>()(ptr.ref.lpVtbl, value.value);
-
-    if (FAILED(hr)) throw WindowsException(hr);
   }
 }

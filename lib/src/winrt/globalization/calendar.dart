@@ -41,43 +41,40 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
 
   // ICalendarFactory methods
   static Calendar createCalendarDefaultCalendarAndClock(
-      Pointer<COMObject> languages) {
+      IIterable<String> languages) {
     final activationFactory =
         CreateActivationFactory(_className, IID_ICalendarFactory);
 
     try {
-      final result = ICalendarFactory.fromRawPointer(activationFactory)
+      return ICalendarFactory.fromRawPointer(activationFactory)
           .createCalendarDefaultCalendarAndClock(languages);
-      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
   }
 
   static Calendar createCalendar(
-      Pointer<COMObject> languages, String calendar, String clock) {
+      IIterable<String> languages, String calendar, String clock) {
     final activationFactory =
         CreateActivationFactory(_className, IID_ICalendarFactory);
 
     try {
-      final result = ICalendarFactory.fromRawPointer(activationFactory)
+      return ICalendarFactory.fromRawPointer(activationFactory)
           .createCalendar(languages, calendar, clock);
-      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
   }
 
   // ICalendarFactory2 methods
-  static Calendar createCalendarWithTimeZone(Pointer<COMObject> languages,
+  static Calendar createCalendarWithTimeZone(IIterable<String> languages,
       String calendar, String clock, String timeZoneId) {
     final activationFactory =
         CreateActivationFactory(_className, IID_ICalendarFactory2);
 
     try {
-      final result = ICalendarFactory2.fromRawPointer(activationFactory)
+      return ICalendarFactory2.fromRawPointer(activationFactory)
           .createCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
-      return Calendar.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
@@ -87,7 +84,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   late final _iCalendar = ICalendar.from(this);
 
   @override
-  Pointer<COMObject> clone() => _iCalendar.clone();
+  Calendar clone() => _iCalendar.clone();
 
   @override
   void setToMin() => _iCalendar.setToMin();
@@ -363,13 +360,13 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
       _iCalendar.nanosecondAsPaddedString(minDigits);
 
   @override
-  int compare(Pointer<COMObject> other) => _iCalendar.compare(other);
+  int compare(Calendar other) => _iCalendar.compare(other);
 
   @override
   int compareDateTime(DateTime other) => _iCalendar.compareDateTime(other);
 
   @override
-  void copyTo(Pointer<COMObject> other) => _iCalendar.copyTo(other);
+  void copyTo(Calendar other) => _iCalendar.copyTo(other);
 
   @override
   int get firstMinuteInThisHour => _iCalendar.firstMinuteInThisHour;

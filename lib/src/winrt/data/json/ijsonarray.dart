@@ -1,23 +1,31 @@
 // ijsonarray.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
 import '../../../api_ms_win_core_winrt_string_l1_1_0.dart';
-import '../../../com/iinspectable.dart';
 import '../../../combase.dart';
 import '../../../exceptions.dart';
 import '../../../macros.dart';
-import '../../../types.dart';
 import '../../../utils.dart';
-import '../../../winrt/data/json/ijsonvalue.dart';
-import '../../../winrt/data/json/jsonarray.dart';
-import '../../../winrt/data/json/jsonobject.dart';
+import '../../../types.dart';
+import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
-import 'enums.g.dart';
+
+import '../../../winrt/internal/hstring_array.dart';
+
+import '../../../winrt/data/json/ijsonvalue.dart';
+import '../../../winrt/data/json/jsonobject.dart';
+import '../../../winrt/data/json/jsonarray.dart';
+import '../../../winrt/data/json/enums.g.dart';
+import '../../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IJsonArray = '{08C1DDB6-0CBD-4A9A-B5D3-2F852DC37E81}';

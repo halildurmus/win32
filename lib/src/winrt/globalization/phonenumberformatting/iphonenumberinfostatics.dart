@@ -38,8 +38,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
       IPhoneNumberInfoStatics.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberInfoStatics));
 
-  PhoneNumberParseResult tryParse(
-      String input, Pointer<COMObject> phoneNumber) {
+  PhoneNumberParseResult tryParse(String input, PhoneNumberInfo phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);
 
@@ -59,7 +58,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
                   .asFunction<
                       int Function(Pointer, int input,
                           Pointer<COMObject> phoneNumber, Pointer<Int32>)>()(
-              ptr.ref.lpVtbl, inputHstring, phoneNumber, retValuePtr);
+              ptr.ref.lpVtbl, inputHstring, phoneNumber.ptr, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -72,7 +71,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
   }
 
   PhoneNumberParseResult tryParseWithRegion(
-      String input, String regionCode, Pointer<COMObject> phoneNumber) {
+      String input, String regionCode, PhoneNumberInfo phoneNumber) {
     final retValuePtr = calloc<Int32>();
     final inputHstring = convertToHString(input);
     final regionCodeHstring = convertToHString(regionCode);
@@ -97,7 +96,7 @@ class IPhoneNumberInfoStatics extends IInspectable {
               ptr.ref.lpVtbl,
               inputHstring,
               regionCodeHstring,
-              phoneNumber,
+              phoneNumber.ptr,
               retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);

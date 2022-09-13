@@ -1,19 +1,38 @@
 // jsonvalue.dart
 
-import '../../../com/iinspectable.dart';
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
+import '../../../api_ms_win_core_winrt_string_l1_1_0.dart';
+import '../../../combase.dart';
+import '../../../exceptions.dart';
+import '../../../macros.dart';
 import '../../../utils.dart';
-import '../../../winrt/data/json/ijsonvalue.dart';
-import '../../../winrt/data/json/jsonarray.dart';
-import '../../../winrt/data/json/jsonobject.dart';
-import '../../../winrt/foundation/istringable.dart';
+import '../../../types.dart';
+import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
-import 'enums.g.dart';
+
+import '../../../winrt/internal/hstring_array.dart';
+
+import '../../../winrt/data/json/ijsonvalue.dart';
+import '../../../winrt/foundation/istringable.dart';
 import 'ijsonvaluestatics.dart';
 import 'ijsonvaluestatics2.dart';
+import '../../../winrt/data/json/enums.g.dart';
+import '../../../winrt/data/json/jsonarray.dart';
+import '../../../winrt/data/json/jsonobject.dart';
+import '../../../com/iinspectable.dart';
 
 /// {@category Class}
 /// {@category winrt}
-class JsonValue extends IInspectable implements IJsonValue {
+class JsonValue extends IInspectable implements IJsonValue, IStringable {
   JsonValue.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Data.Json.JsonValue';
@@ -114,7 +133,6 @@ class JsonValue extends IInspectable implements IJsonValue {
 
   @override
   JsonObject getObject() => _iJsonValue.getObject();
-
   // IStringable methods
   late final _iStringable = IStringable.from(this);
 
