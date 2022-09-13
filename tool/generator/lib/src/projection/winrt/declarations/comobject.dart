@@ -1,33 +1,70 @@
 import '../../../../generator.dart';
 
-class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection {
+mixin _ComObjectProjection on WinRTMethodProjection {
+  String get retType {
+    // TODO(halildurmus): Explain why we need to do this
+    final isMethodFromPropertyValueStatics =
+        method.parent.name == 'Windows.Foundation.IPropertyValueStatics';
+    if (isMethodFromPropertyValueStatics) {
+      return ['CreateEmpty', 'CreateInspectable'].contains(method.name)
+          ? 'Pointer<COMObject>'
+          : 'IPropertyValue';
+    }
+
+    final typeIdentifierName = lastComponent(returnType.typeIdentifier.name);
+    // TODO: Remove this once the asynchronous methods are supported
+    if (typeIdentifierName.startsWith('IAsync')) return 'Pointer<COMObject>';
+
+    return typeIdentifierName;
+  }
+
+  String get returnStatement => retType == 'Pointer<COMObject>'
+      ? 'return retValuePtr;'
+      : 'return $retType.fromRawPointer(retValuePtr);';
+}
+
+class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection
+    with _ComObjectProjection {
   WinRTMethodReturningComObjectProjection(super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      Pointer<COMObject> $camelCasedName($methodParams) {
+      $retType $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
         ${ffiCall()}
         $parametersPostamble
-        return retValuePtr;
+        $returnStatement
       }
 ''';
 }
 
 class WinRTGetPropertyReturningComObjectProjection
-    extends WinRTGetPropertyProjection {
+    extends WinRTGetPropertyProjection with _ComObjectProjection {
   WinRTGetPropertyReturningComObjectProjection(
       super.method, super.vtableOffset);
 
   @override
   String toString() => '''
-      Pointer<COMObject> get $exposedMethodName {
+      $retType get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall()}
 
-        return retValuePtr;
+        $returnStatement
       }
 ''';
+}
+
+class WinRTSetPropertyReturningComObjectProjection
+    extends WinRTSetPropertyProjection with _ComObjectProjection {
+  WinRTSetPropertyReturningComObjectProjection(
+      super.method, super.vtableOffset);
+
+  @override
+  String toString() => '''
+      set $exposedMethodName(${parameters.first.type.methodParamType} value) {
+        ${ffiCall('value.ptr.cast<Pointer<COMObject>>().value')}
+      }
+  ''';
 }

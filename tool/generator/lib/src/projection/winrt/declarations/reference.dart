@@ -3,27 +3,14 @@ import 'package:winmd/winmd.dart';
 import '../../../../generator.dart';
 
 mixin _ReferenceProjection on WinRTMethodProjection {
-  /// Returns the type argument, as represented in the [typeIdentifier].
-  String referenceTypeArgFromTypeIdentifier(TypeIdentifier typeIdentifier) {
-    final typeProjection = TypeProjection(typeIdentifier);
-    if (typeProjection.isString) return 'String';
-    if (typeProjection.isWinRTEnum) {
-      return lastComponent(typeProjection.typeIdentifier.name);
-    }
-
-    return typeProjection.methodParamType;
-  }
-
   /// The type argument of `IReference`, as represented in the [returnType]'s
   /// [TypeIdentifier] (e.g. `DateTime`, `int`, `String`).
-  String get referenceTypeArg =>
-      referenceTypeArgFromTypeIdentifier(returnType.typeIdentifier.typeArg!);
+  String get referenceTypeArg => innerType(returnType.typeIdentifier.name);
 
   /// The type argument of `IReference`, as represented in the [TypeIdentifier]
   /// of the method's first parameter.
   String get referenceTypeArgFromParameter =>
-      referenceTypeArgFromTypeIdentifier(
-          parameters.first.type.typeIdentifier.typeArg!);
+      innerType(parameters.first.type.typeIdentifier.name);
 
   /// Method call to `boxValue` function.
   ///
@@ -60,12 +47,7 @@ mixin _ReferenceProjection on WinRTMethodProjection {
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
         : null;
 
-    final args = <String>[];
-    if (enumCreator != null) {
-      args.add('enumCreator: $enumCreator');
-    }
-
-    return args.isEmpty ? '' : ', ${args.join(', ')}';
+    return enumCreator == null ? '' : ', enumCreator: $enumCreator';
   }
 }
 

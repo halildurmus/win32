@@ -3,38 +3,18 @@ import '../../../../generator.dart';
 mixin _VectorProjection on WinRTMethodProjection {
   /// The type argument of `IVector` and `IVectorView`, as represented in the
   /// [returnType]'s [TypeIdentifier] (e.g. `int`, `String`, `StorageFile`).
-  String get vectorTypeArg {
-    final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
-    if (typeProjection.isString) return 'String';
-    if (typeProjection.isWinRT &&
-        (typeProjection.isClass ||
-            typeProjection.isInterface ||
-            typeProjection.isWinRTEnum)) {
-      return lastComponent(typeProjection.typeIdentifier.name);
-    }
-
-    return typeProjection.dartType;
-  }
+  String get vectorTypeArg => innerType(returnType.typeIdentifier.name);
 
   /// The constructor arguments passed to the constructors of `IVector` and
   /// `IVectorView`.
   String get vectorConstructorArgs {
     final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
 
-    // If the type argument is a WinRT Class or Interface (e.g. StorageFile),
-    // the constructor of that class must be passed in the 'creator' parameter
-    // so that the 'IVector' and 'IVectorView' implementations can instantiate
-    // the object
-    final creator = typeProjection.isWinRT &&
-            (typeProjection.isClass || typeProjection.isInterface)
-        ? '${lastComponent(typeProjection.typeIdentifier.name)}.fromRawPointer'
-        : null;
-
-    // Similar to the 'creator' parameter above, the constructor of the enum
-    // class must be passed in the 'enumCreator' parameter
-    final enumCreator = typeProjection.isWinRTEnum
-        ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
-        : null;
+    // If the type argument is an enum or a WinRT Object (e.g. StorageFile), the
+    // constructor of that class must be passed in the 'enumCreator' parameter
+    // for enums, 'creator' parameter for WinRT Objects so that the 'IVector'
+    // and 'IVectorView' implementations can instantiate the object
+    final creator = parseCreatorParameter(returnType.typeIdentifier.typeArg!);
 
     // If the type argument is an enum or int, it's native type (e.g. Int32,
     // Uint32) must be passed in the 'intType' parameter so that the 'IVector'
@@ -44,10 +24,10 @@ mixin _VectorProjection on WinRTMethodProjection {
         : null;
 
     final args = <String>[];
-    if (creator != null) {
+    if (typeProjection.isWinRTEnum) {
+      args.add('enumCreator: $creator');
+    } else if (creator != null) {
       args.add('creator: $creator');
-    } else if (enumCreator != null) {
-      args.add('enumCreator: $enumCreator');
     }
     if (intType != null) {
       args.add('intType: $intType');
