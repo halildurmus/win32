@@ -60,19 +60,9 @@ const excludedWindowsRuntimeTypes = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
 
-  //   Depends on https://github.com/timsneath/win32/issues/480 and return
-  //   types needs to be exposed correctly for COMObject types.
-  'Windows.Data.Json.IJsonArray',
-  'Windows.Data.Json.IJsonArrayStatics',
-  'Windows.Data.Json.IJsonObject',
-  'Windows.Data.Json.IJsonObjectStatics',
-  'Windows.Data.Json.IJsonObjectWithDefaultValues',
-  'Windows.Data.Json.IJsonValue',
-  'Windows.Data.Json.IJsonValueStatics',
-  'Windows.Data.Json.IJsonValueStatics2',
+  //   Depends on https://github.com/timsneath/win32/issues/480
   'Windows.Data.Json.JsonArray',
   'Windows.Data.Json.JsonObject',
-  'Windows.Data.Json.JsonValue',
   'Windows.Devices.Enumeration.DevicePicker',
   'Windows.Devices.Enumeration.DevicePickerFilter',
   'Windows.Foundation.Collections.PropertySet',
@@ -87,6 +77,10 @@ const excludedWindowsRuntimeTypes = <String>{
 
   //   Requires WinRT event support
   'Windows.Networking.Connectivity.INetworkInformationStatics',
+
+  //   Requires XmlDocument support
+  'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  'Windows.UI.Notifications.ToastNotification',
 };
 
 /// WinRT interfaces to exclude when generating the implements mappers.
