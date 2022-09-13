@@ -137,7 +137,7 @@ class ToastNotification extends IInspectable
   late final _iToastNotification4 = IToastNotification4.from(this);
 
   @override
- NotificationData get data => _iToastNotification4.data;
+  NotificationData get data => _iToastNotification4.data;
 
   @override
   set data(NotificationData value) => _iToastNotification4.data = value;
