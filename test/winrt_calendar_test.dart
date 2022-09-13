@@ -25,7 +25,7 @@ void main() {
     });
 
     test('Calendar.clone', () {
-      final calendar2 = Calendar.fromRawPointer(calendar.clone());
+      final calendar2 = calendar.clone();
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
