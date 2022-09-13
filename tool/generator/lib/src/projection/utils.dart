@@ -220,6 +220,127 @@ String stripLeadingUnderscores(String name) {
   return name;
 }
 
+/// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile`.
+String innerType(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(name.indexOf('<') + 1, name.length - 1);
+}
+
+/// Take a name like `IAsyncOperation<StorageFile>` and return `IAsyncOperation`.
+String outerType(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(0, name.indexOf('<'));
+}
+
+/// TODO(halildurmus): Add documentation
+String? parseCreatorParameter(TypeIdentifier ti) {
+  final typeProjection = TypeProjection(ti);
+  if (typeProjection.isWinRTStruct ||
+      ['bool', 'DateTime', 'double', 'Duration', 'int', 'String']
+          .contains(typeProjection.methodParamType)) {
+    return null;
+  }
+
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+      return '${lastComponent(ti.name)}.fromRawPointer';
+    case BaseType.genericTypeModifier:
+      return parseGenericCreatorParameter(ti);
+    case BaseType.referenceTypeModifier:
+      return parseCreatorParameter(ti.typeArg!);
+    case BaseType.valueTypeModifier:
+      if (ti.type?.isEnum ?? false) return '${lastComponent(ti.name)}.from';
+      return null;
+    default:
+      return null;
+  }
+}
+
+/// TODO(halildurmus): Add documentation
+String parseGenericCreatorParameter(TypeIdentifier ti) {
+  final typeIdentifierName = stripGenerics(lastComponent(outerType(ti.name)));
+  final typeArg = ['IKeyValuePair', 'IMap', 'IMapView']
+          .contains(typeIdentifierName)
+      // 'creator' parameter does not need to be created for the key typeArg of
+      // the above types so we skip over to their value typeArgs
+      ? ti.typeArg!.typeArg!
+      : ti.typeArg;
+
+  final creator = parseCreatorParameter(typeArg!);
+  if (creator == null) return '$typeIdentifierName.fromRawPointer';
+
+  final isTypeArgEnum = typeArg.type?.isEnum ?? false;
+  final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
+
+  return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(ptr, $creatorParamName: $creator)';
+}
+
+/// TODO(halildurmus): Add documentation
+String primitiveTypeNameFromBaseType(BaseType baseType) {
+  switch (baseType) {
+    case BaseType.booleanType:
+      return 'bool';
+    case BaseType.doubleType:
+    case BaseType.floatType:
+      return 'double';
+    case BaseType.int8Type:
+    case BaseType.int16Type:
+    case BaseType.int32Type:
+    case BaseType.int64Type:
+    case BaseType.uint8Type:
+    case BaseType.uint16Type:
+    case BaseType.uint32Type:
+    case BaseType.uint64Type:
+      return 'int';
+    case BaseType.stringType:
+      return 'String';
+    default:
+      return 'undefined';
+  }
+}
+
+/// TODO(halildurmus): Add documentation
+String parseTypeIdentifierName(TypeIdentifier ti) {
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+    case BaseType.valueTypeModifier:
+      if (ti.name == 'System.Guid') return 'GUID';
+      if (ti.name == 'Windows.Foundation.TimeSpan') return 'Duration';
+      return lastComponent(ti.name);
+    case BaseType.genericTypeModifier:
+      return parseGenericTypeIdentifierName(ti);
+    case BaseType.objectType:
+      return 'Object';
+    case BaseType.referenceTypeModifier:
+      return parseTypeIdentifierName(ti.typeArg!);
+    default:
+      return primitiveTypeNameFromBaseType(ti.baseType);
+  }
+}
+
+/// Unpack a nested [typeIdentifier] into a single name.
+String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
+  // If the typeIdentifier's name is already parsed, return it as is
+  if (typeIdentifier.name.contains('<')) return typeIdentifier.name;
+
+  final parentTypeName = stripGenerics(lastComponent(typeIdentifier.name));
+
+  if (typeIdentifier.type?.genericParams.length == 2) {
+    final isSecondArgMustBeNullable = [
+      'Windows.Foundation.Collections.IKeyValuePair`2',
+      'Windows.Foundation.Collections.IMap`2',
+      'Windows.Foundation.Collections.IMapView`2',
+      'Windows.Foundation.Collections.IObservableMap`2',
+    ].contains(typeIdentifier.type?.name);
+    final firstArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
+    final secondArg = parseTypeIdentifierName(typeIdentifier.typeArg!.typeArg!);
+    final questionMark = isSecondArgMustBeNullable ? '?' : '';
+    return '$parentTypeName<$firstArg, $secondArg$questionMark>';
+  }
+
+  return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';
+}
+
 /// Take a name like TypedEventHandler`2 and return TypedEventHandler.
 String stripGenerics(String name) {
   final backtickIndex = name.indexOf('`');
