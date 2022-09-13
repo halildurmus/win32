@@ -1278,7 +1278,7 @@ void main() {
         vector
           ..append(DeviceClass.audioCapture)
           ..append(DeviceClass.audioRender);
-        final list = vector.getView;
+        final list = vector.getView();
         expect(list.length, equals(2));
         expect(() => list..clear(), throwsUnsupportedError);
       });
@@ -1534,7 +1534,7 @@ void main() {
         vector
           ..append(5)
           ..append(259);
-        final list = vector.getView;
+        final list = vector.getView();
         expect(list.length, equals(2));
         expect(() => list..clear(), throwsUnsupportedError);
       });
@@ -1787,7 +1787,7 @@ void main() {
         vector
           ..append('.jpg')
           ..append('.jpeg');
-        final list = vector.getView;
+        final list = vector.getView();
         expect(list.length, equals(2));
         expect(() => list..clear(), throwsUnsupportedError);
       });

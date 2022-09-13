@@ -115,7 +115,7 @@ class JsonArray extends IInspectable
       _iVector.getMany(startIndex, capacity, value);
 
   @override
-  List<IJsonValue> get getView => _iVector.getView;
+  List<IJsonValue> getView() => _iVector.getView();
 
   @override
   bool indexOf(IJsonValue value, Pointer<Uint32> index) =>

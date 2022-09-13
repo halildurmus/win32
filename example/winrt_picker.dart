@@ -28,7 +28,7 @@ void main() async {
   filters.append('.jpeg');
   print('Vector\'s second element is ${filters.getAt(1)}.');
 
-  final vectorView = filters.getView;
+  final vectorView = filters.getView();
   print('VectorView has ${vectorView.length} elements.');
 
   var containsElement = filters.indexOf('.jpeg', pIndex);
@@ -55,13 +55,13 @@ void main() async {
   print('Vector has ${filters.size} elements.');
   print('Vector\'s last element is ${filters.getAt(filters.size - 1)}.');
 
-  var list = filters.getView;
+  var list = filters.getView();
   print(list.isNotEmpty ? 'Vector elements: $list' : 'Vector is empty!');
 
   print('Replacing vector\'s elements with [".jpg", ".jpeg", ".png"]...');
   filters.replaceAll(['.jpg', '.jpeg', '.png']);
 
-  list = filters.getView;
+  list = filters.getView();
   print(list.isNotEmpty ? 'Vector elements: $list' : 'Vector is empty!');
 
   print('Clearing the vector...');
