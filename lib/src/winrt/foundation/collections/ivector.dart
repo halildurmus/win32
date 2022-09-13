@@ -350,7 +350,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Returns an immutable view of the vector.
-  List<T> get getView {
+  List<T> getView() {
     final retValuePtr = _allocator<COMObject>();
 
     final hr = ptr.ref.vtable
