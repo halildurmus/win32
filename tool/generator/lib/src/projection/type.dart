@@ -362,9 +362,10 @@ class TypeProjection {
       return TypeTuple(
         'Pointer<COMObject>',
         'Pointer<COMObject>',
-        methodParamType: typeIdentifier.baseType == BaseType.objectType
-            ? null
-            : lastComponent(typeIdentifier.name),
+        methodParamType:
+            !isWinRT || typeIdentifier.baseType == BaseType.objectType
+                ? null
+                : lastComponent(typeIdentifier.name),
       );
     }
 
