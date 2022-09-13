@@ -16,6 +16,12 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       ...staticInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
       ...importsForClass()
     }..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
+
+    // TODO(halildurmus): Explain why we need to do this
+    if (shortName == 'PropertyValue') {
+      imports.add('ipropertyvalue.dart');
+    }
+
     return imports.map((import) => "import '$import';").join('\n');
   }
 
@@ -61,8 +67,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
             final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
 
             try {
-              final result = $interfaceName.fromRawPointer(activationFactory).${method.shortForm};
-              return $shortName.fromRawPointer(result);
+              return $interfaceName.fromRawPointer(activationFactory).${method.shortForm};
             } finally {
               free(activationFactory);
             }

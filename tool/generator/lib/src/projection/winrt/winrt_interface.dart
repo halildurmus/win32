@@ -90,6 +90,11 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final imports = {...interfaceImport, ...importsForClass()}
       ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
 
+    // TODO(halildurmus): Explain why we need to do this
+    if (shortName == 'IPropertyValueStatics') {
+      imports.add('ipropertyvalue.dart');
+    }
+
     final containsIReferenceImport =
         imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
     if (containsIReferenceImport) {
