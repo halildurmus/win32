@@ -80,8 +80,16 @@ class WinRTParameterProjection extends ParameterProjection {
     if (isEnum) return '$identifier.value';
     if (isReference) return '${name}ReferencePtr.ref';
 
-    if (isCOMObject && !type.isReferenceType && !type.isSimpleArrayType) {
-      return '$identifier.cast<Pointer<COMObject>>().value';
+    if (isCOMObject) {
+      if (type.isReferenceType || type.isSimpleArrayType) {
+        return type.methodParamType == 'Pointer<COMObject>'
+            ? identifier
+            : '$identifier.ptr';
+      }
+
+      return type.methodParamType == 'Pointer<COMObject>'
+          ? '$identifier.cast<Pointer<COMObject>>().value'
+          : '$identifier.ptr.cast<Pointer<COMObject>>().value';
     }
 
     return preamble.isEmpty ? identifier : preamble.split(' ')[1];
