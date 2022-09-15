@@ -3,7 +3,7 @@ import '../../../../generator.dart';
 mixin _VectorProjection on WinRTMethodProjection {
   /// The type argument of `IVector` and `IVectorView`, as represented in the
   /// [returnType]'s [TypeIdentifier] (e.g. `int`, `String`, `StorageFile`).
-  String get vectorTypeArg => typeArgs(returnType.typeIdentifier.name);
+  String get vectorTypeArg => typeArguments(returnType.typeIdentifier.name);
 
   /// The constructor arguments passed to the constructors of `IVector` and
   /// `IVectorView`.

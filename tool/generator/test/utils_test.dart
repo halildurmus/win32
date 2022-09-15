@@ -16,9 +16,10 @@ void main() {
     expect(stripAnsiUnicodeSuffix('ENUMLOGFONTEXW'), equals('ENUMLOGFONTEX'));
   });
 
-  test('typeArgs', () {
-    expect(typeArgs('IAsyncOperation<StorageFile>'), equals('StorageFile'));
-    expect(typeArgs('IMap<String, Object?>'), equals('String, Object?'));
+  test('typeArguments', () {
+    expect(
+        typeArguments('IAsyncOperation<StorageFile>'), equals('StorageFile'));
+    expect(typeArguments('IMap<String, Object?>'), equals('String, Object?'));
   });
 
   test('outerType', () {

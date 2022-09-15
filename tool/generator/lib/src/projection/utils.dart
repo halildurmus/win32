@@ -222,7 +222,7 @@ String stripLeadingUnderscores(String name) {
 
 /// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile` or
 /// `String, String?` for a name like `IMap<String, String?>`.
-String typeArgs(String name) {
+String typeArguments(String name) {
   if (!name.contains('<')) return name;
   return name.substring(name.indexOf('<') + 1, name.length - 1);
 }

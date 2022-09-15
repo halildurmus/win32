@@ -5,7 +5,7 @@ import '../../../../generator.dart';
 mixin _MapProjection on WinRTMethodProjection {
   /// The type arguments of `IMap` and `IMapView`, as represented in the
   /// [returnType]'s [TypeIdentifier] (e.g. `String, Object?`, `String, String?`).
-  String get mapTypeArgs => typeArgs(returnType.typeIdentifier.name);
+  String get mapTypeArgs => typeArguments(returnType.typeIdentifier.name);
 
   /// The constructor arguments passed to the constructors of `IMap` and
   /// `IMapView`.
