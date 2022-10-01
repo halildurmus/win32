@@ -20,12 +20,16 @@ void main() {
     expect(
         typeArguments('IAsyncOperation<StorageFile>'), equals('StorageFile'));
     expect(typeArguments('IMap<String, Object?>'), equals('String, Object?'));
+    expect(typeArguments('IMapView<String, IVectorView<TextSegment>?>'),
+        equals('String, IVectorView<TextSegment>?'));
   });
 
   test('outerType', () {
     expect(
         outerType('IAsyncOperation<StorageFile>'), equals('IAsyncOperation'));
     expect(outerType('IMap<String, Object?>'), equals('IMap'));
+    expect(outerType('IMapView<String, IVectorView<TextSegment>?>'),
+        equals('IMapView'));
   });
 
   test('primitiveTypeNameFromBaseType', () {
