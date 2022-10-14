@@ -1,4 +1,14 @@
 const structsToGenerate = <String, String>{
+  "Windows.Win32.UI.Input.Pointer.POINTER_PEN_INFO":
+      "Defines basic pen information common to all pointer types.",
+  "Windows.Win32.UI.Input.Pointer.POINTER_INFO":
+      "Contains basic pointer information common to all pointer types. Applications can retrieve this information using the GetPointerInfo, GetPointerFrameInfo, GetPointerInfoHistory and GetPointerFrameInfoHistory functions.",
+  "Windows.Win32.UI.Input.Pointer.POINTER_TOUCH_INFO":
+      "Defines basic touch information common to all pointer types.",
+  "Windows.Win32.UI.Input.Pointer.INPUT_TRANSFORM":
+      "Defines the matrix that represents a transform on a message consumer. This matrix can be used to transform pointer input data from client coordinates to screen coordinates, while the inverse can be used to transform pointer input data from screen coordinates to client coordinates.",
+  "Windows.Win32.UI.WindowsAndMessaging.TouchPredictionParameters":
+      "Contains hardware input details that can be used to predict touch targets and help compensate for hardware latency when processing touch and gesture input that contains distance and velocity data.",
   "Windows.Win32.UI.WindowsAndMessaging.ACCEL":
       "Defines an accelerator key used in an accelerator table.",
   "Windows.Win32.Security.ACL":
