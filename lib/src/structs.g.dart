@@ -7677,6 +7677,25 @@ extension TYPEDESC_Extension on TYPEDESC {
   set hreftype(int value) => this.Anonymous.hreftype = value;
 }
 
+/// Contains hardware input details that can be used to predict touch
+/// targets and help compensate for hardware latency when processing touch
+/// and gesture input that contains distance and velocity data.
+///
+/// {@category Struct}
+class TouchPredictionParameters extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwLatency;
+
+  @Uint32()
+  external int dwSampleTime;
+
+  @Uint32()
+  external int bUseHWTimeStamp;
+}
+
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
 /// represents a generic ratio and is used for different purposes and units
 /// even within a single API.

@@ -1360,6 +1360,12 @@
         "dllLibrary": "user32",
         "comment": "Enables, disables, or grays the specified menu item."
     },
+    "EnableMouseInPointer": {
+        "prototype": "BOOL EnableMouseInPointer(\n  [in] BOOL fEnable\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables the mouse to act as a pointer input device and send WM_POINTER messages.",
+        "minimumWindowsVersion": "WIN8"
+    },
     "EnableNonClientDpiScaling": {
         "prototype": "BOOL EnableNonClientDpiScaling(\n  HWND hwnd\n);",
         "dllLibrary": "user32",
@@ -2666,10 +2672,94 @@
         "dllLibrary": "gdi32",
         "comment": "The GetPixel function retrieves the red, green, blue (RGB) color value of the pixel at the specified coordinates."
     },
+    "GetPointerCursorId": {
+        "prototype": "BOOL GetPointerCursorId(\n  [in]  UINT32 pointerId,\n  [out] UINT32 *cursorId\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the cursor identifier associated with the specified pointer.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFrameInfo": {
+        "prototype": "BOOL GetPointerFrameInfo(\n  [in]      UINT32       pointerId,\n  [in, out] UINT32       *pointerCount,\n  [out]     POINTER_INFO *pointerInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of information for the specified pointers associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFrameInfoHistory": {
+        "prototype": "BOOL GetPointerFrameInfoHistory(\n  [in]      UINT32       pointerId,\n  [in, out] UINT32       *entriesCount,\n  [in, out] UINT32       *pointerCount,\n  [out]     POINTER_INFO *pointerInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of information (including coalesced input frames) for the specified pointers associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFramePenInfo": {
+        "prototype": "BOOL GetPointerFramePenInfo(\n  [in]      UINT32           pointerId,\n  [in, out] UINT32           *pointerCount,\n  [out]     POINTER_PEN_INFO *penInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of pen-based information for the specified pointers (of type PT_PEN) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFramePenInfoHistory": {
+        "prototype": "BOOL GetPointerFramePenInfoHistory(\n  [in]            UINT32           pointerId,\n  [in, out]       UINT32           *entriesCount,\n  [in, out]       UINT32           *pointerCount,\n  [out, optional] POINTER_PEN_INFO *penInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of pen-based information (including coalesced input frames) for the specified pointers (of type PT_PEN) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFrameTouchInfo": {
+        "prototype": "BOOL GetPointerFrameTouchInfo(\n  [in]      UINT32             pointerId,\n  [in, out] UINT32             *pointerCount,\n  [out]     POINTER_TOUCH_INFO *touchInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of touch-based information for the specified pointers (of type PT_TOUCH) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerFrameTouchInfoHistory": {
+        "prototype": "BOOL GetPointerFrameTouchInfoHistory(\n  [in]      UINT32             pointerId,\n  [in, out] UINT32             *entriesCount,\n  [in, out] UINT32             *pointerCount,\n  [out]     POINTER_TOUCH_INFO *touchInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the entire frame of touch-based information (including coalesced input frames) for the specified pointers (of type PT_TOUCH) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerInfo": {
+        "prototype": "BOOL GetPointerInfo(\n  [in]  UINT32       pointerId,\n  [out] POINTER_INFO *pointerInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the information for the specified pointer associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerInfoHistory": {
+        "prototype": "BOOL GetPointerInfoHistory(\n  [in]            UINT32       pointerId,\n  [in, out]       UINT32       *entriesCount,\n  [out, optional] POINTER_INFO *pointerInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the information associated with the individual inputs, if any, that were coalesced into the current message for the specified pointer. The most recent input is included in the returned history and is the same as the most recent input returned by the GetPointerInfo function.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerInputTransform": {
+        "prototype": "BOOL GetPointerInputTransform(\n  [in]  UINT32          pointerId,\n  [in]  UINT32          historyCount,\n  [out] INPUT_TRANSFORM *inputTransform\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets one or more transforms for the pointer information coordinates associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
     "GetPointerPenInfo": {
         "prototype": "BOOL GetPointerPenInfo(\n  [in]  UINT32           pointerId,\n  [out] POINTER_PEN_INFO *penInfo\n);",
         "dllLibrary": "user32",
         "comment": "Gets the pen-based information for the specified pointer (of type PT_PEN) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerPenInfoHistory": {
+        "prototype": "BOOL GetPointerPenInfoHistory(\n  [in]            UINT32           pointerId,\n  [in, out]       UINT32           *entriesCount,\n  [out, optional] POINTER_PEN_INFO *penInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the pen-based information associated with the individual inputs, if any, that were coalesced into the current message for the specified pointer (of type PT_PEN). The most recent input is included in the returned history and is the same as the most recent input returned by the GetPointerPenInfo function.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerTouchInfo": {
+        "prototype": "BOOL GetPointerTouchInfo(\n  [in]  UINT32             pointerId,\n  [out] POINTER_TOUCH_INFO *touchInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the touch-based information for the specified pointer (of type PT_TOUCH) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerTouchInfoHistory": {
+        "prototype": "BOOL GetPointerTouchInfoHistory(\n  [in]            UINT32             pointerId,\n  [in, out]       UINT32             *entriesCount,\n  [out, optional] POINTER_TOUCH_INFO *touchInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the touch-based information associated with the individual inputs, if any, that were coalesced into the current message for the specified pointer (of type PT_TOUCH). The most recent input is included in the returned history and is the same as the most recent input returned by the GetPointerTouchInfo function.",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "GetPointerType": {
+        "prototype": "BOOL GetPointerType(\n  [in]  UINT32             pointerId,\n  [out] POINTER_INPUT_TYPE *pointerType\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the pointer type for a specified pointer.",
         "minimumWindowsVersion": "WIN8"
     },
     "GetPrinter": {
@@ -3059,6 +3149,12 @@
         "prototype": "BOOL GetTouchInputInfo(\n  HTOUCHINPUT hTouchInput,\n  UINT        cInputs,\n  PTOUCHINPUT pInputs,\n  int         cbSize\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves detailed information about touch inputs associated with a particular touch input handle."
+    },
+    "GetUnpredictedMessagePos": {
+        "prototype": "DWORD GetUnpredictedMessagePos();",
+        "dllLibrary": "user32",
+        "comment": "Gets pointer data before it has gone through touch prediction processing.",
+        "minimumWindowsVersion": "WIN8"
     },
     "GetUpdatedClipboardFormats": {
         "prototype": "BOOL GetUpdatedClipboardFormats(\n  PUINT lpuiFormats,\n  UINT  cFormats,\n  PUINT pcFormatsOut\n);",
@@ -3494,6 +3590,12 @@
         "prototype": "BOOL IsMenu(\n  HMENU hMenu\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether a handle is a menu handle."
+    },
+    "IsMouseInPointerEnabled": {
+        "prototype": "BOOL IsMouseInPointerEnabled();",
+        "dllLibrary": "user32",
+        "comment": "Indicates whether EnableMouseInPointer is set for the mouse to act as a pointer input device and send WM_POINTER messages.",
+        "minimumWindowsVersion": "WIN8"
     },
     "IsNativeVhdBoot": {
         "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
@@ -5819,6 +5921,12 @@
         "prototype": "DWORD SizeofResource(\n  [in, optional] HMODULE hModule,\n  [in]           HRSRC   hResInfo\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the size, in bytes, of the specified resource."
+    },
+    "SkipPointerFrameMessages": {
+        "prototype": "BOOL SkipPointerFrameMessages(\n  [in] UINT32 pointerId\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines which pointer input frame generated the most recently retrieved message for the specified pointer and discards any queued (unretrieved) pointer input messages generated from the same pointer input frame. If an application has retrieved information for an entire frame using the GetPointerFrameInfo function, the GetPointerFrameInfoHistory function or one of their type-specific variants, it can use this function to avoid retrieving and discarding remaining messages from that frame one by one.",
+        "minimumWindowsVersion": "WIN8"
     },
     "Sleep": {
         "prototype": "void Sleep(\n  DWORD dwMilliseconds\n);",
