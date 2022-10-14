@@ -1,3 +1,14 @@
+## 3.0.1
+
+- Improve projection of Map, Vector, and reference Windows Runtime types, with
+  thanks as ever to Halil İbrahim Durmuş (@halildurmus).
+- Add CryptoAPI functions (`CryptProtectData`, `CryptProtectMemory` etc.)
+- Add pointer and touch APIs
+- Fix WinRT FilePicker demo
+- Add raw printer API example
+- Remove console example `console.dart` (use
+  <https://pub.dev/packages/dart_console> instead).
+
 ## 3.0.0
 
 - This release includes an overhaul of the COM and WinRT API generation, as
