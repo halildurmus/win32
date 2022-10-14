@@ -54,6 +54,10 @@ void main()
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
     // Automatically generated structs
+    printf("  'POINTER_PEN_INFO': %zu,\n", sizeof(POINTER_PEN_INFO));
+    printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
+    printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));
+    printf("  'INPUT_TRANSFORM': %zu,\n", sizeof(INPUT_TRANSFORM));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));

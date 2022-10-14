@@ -3223,6 +3223,24 @@ final _GetPhysicalCursorPos = _user32.lookupFunction<
     Int32 Function(Pointer<POINT> lpPoint),
     int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
 
+/// Gets the pen-based information for the specified pointer (of type
+/// PT_PEN) associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerPenInfo(
+///   [in]  UINT32           pointerId,
+///   [out] POINTER_PEN_INFO *penInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerPenInfo(int pointerId, Pointer<POINTER_PEN_INFO> penInfo) =>
+    _GetPointerPenInfo(pointerId, penInfo);
+
+final _GetPointerPenInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
+    int Function(
+        int pointerId, Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfo');
+
 /// Retrieves the first available clipboard format in the specified list.
 ///
 /// ```c

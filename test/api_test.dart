@@ -5424,6 +5424,14 @@ void main() {
           int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
       expect(GetPhysicalCursorPos, isA<Function>());
     });
+    test('Can instantiate GetPointerPenInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetPointerPenInfo = user32.lookupFunction<
+          Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
+          int Function(int pointerId,
+              Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfo');
+      expect(GetPointerPenInfo, isA<Function>());
+    });
     test('Can instantiate GetPriorityClipboardFormat', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetPriorityClipboardFormat = user32.lookupFunction<

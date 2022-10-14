@@ -2666,6 +2666,12 @@
         "dllLibrary": "gdi32",
         "comment": "The GetPixel function retrieves the red, green, blue (RGB) color value of the pixel at the specified coordinates."
     },
+    "GetPointerPenInfo": {
+        "prototype": "BOOL GetPointerPenInfo(\n  [in]  UINT32           pointerId,\n  [out] POINTER_PEN_INFO *penInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Gets the pen-based information for the specified pointer (of type PT_PEN) associated with the current message.",
+        "minimumWindowsVersion": "WIN8"
+    },
     "GetPrinter": {
         "prototype": "BOOL GetPrinterW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pPrinter,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded\n);",
         "dllLibrary": "winspool",
