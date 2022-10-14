@@ -1007,6 +1007,31 @@
         "dllLibrary": "advapi32",
         "comment": "The CredWrite function creates a new credential or modifies an existing credential in the user's credential set. The new credential is associated with the logon session of the current token. The token must not have the user's security identifier (SID) disabled."
     },
+    "CryptProtectData": {
+        "prototype": "DPAPI_IMP BOOL CryptProtectData(\n  [in]           DATA_BLOB                 *pDataIn,\n  [in, optional] LPCWSTR                   szDataDescr,\n  [in, optional] DATA_BLOB                 *pOptionalEntropy,\n  [in]           PVOID                     pvReserved,\n  [in, optional] CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]           DWORD                     dwFlags,\n  [out]          DATA_BLOB                 *pDataOut\n);",
+        "dllLibrary": "crypt32",
+        "comment": "The CryptProtectData function performs encryption on the data in a DATA_BLOB structure. Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data. In addition, the encryption and decryption usually must be done on the same computer."
+    },
+    "CryptProtectMemory": {
+        "prototype": "DPAPI_IMP BOOL CryptProtectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
+        "dllLibrary": "crypt32",
+        "comment": "The CryptProtectMemory function encrypts memory to prevent others from viewing sensitive information in your process. For example, use the CryptProtectMemory function to encrypt memory that contains a password. Encrypting the password prevents others from viewing it when the process is paged out to the swap file. Otherwise, the password is in plaintext and viewable by others."
+    },
+    "CryptUnprotectData": {
+        "prototype": "DPAPI_IMP BOOL CryptUnprotectData(\n  [in]            DATA_BLOB                 *pDataIn,\n  [out, optional] LPWSTR                    *ppszDataDescr,\n  [in, optional]  DATA_BLOB                 *pOptionalEntropy,\n                  PVOID                     pvReserved,\n  [in, optional]  CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]            DWORD                     dwFlags,\n  [out]           DATA_BLOB                 *pDataOut\n);",
+        "dllLibrary": "crypt32",
+        "comment": "The CryptUnprotectData function decrypts and does an integrity check of the data in a DATA_BLOB structure. Usually, the only user who can decrypt the data is a user with the same logon credentials as the user who encrypted the data. In addition, the encryption and decryption must be done on the same computer."
+    },
+    "CryptUnprotectMemory": {
+        "prototype": "DPAPI_IMP BOOL CryptUnprotectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
+        "dllLibrary": "crypt32",
+        "comment": "The CryptUnprotectMemory function decrypts memory that was encrypted using the CryptProtectMemory function."
+    },
+    "CryptUpdateProtectedState": {
+        "prototype": "DPAPI_IMP BOOL CryptUpdateProtectedState(\n  [in]  PSID    pOldSid,\n  [in]  LPCWSTR pwszOldPassword,\n  [in]  DWORD   dwFlags,\n  [out] DWORD   *pdwSuccessCount,\n  [out] DWORD   *pdwFailureCount\n);",
+        "dllLibrary": "crypt32",
+        "comment": "The CryptUpdateProtectedState function migrates the current user's master keys after the user's security identifier (SID) has changed. This function can be used to preserve encrypted data after a user has been moved from one domain to another."
+    },
     "DeactivateActCtx": {
         "prototype": "BOOL DeactivateActCtx(\n  DWORD     dwFlags,\n  ULONG_PTR ulCookie\n);",
         "dllLibrary": "kernel32",
