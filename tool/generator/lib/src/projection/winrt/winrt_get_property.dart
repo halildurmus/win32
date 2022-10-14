@@ -23,7 +23,7 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       : 'Pointer, Pointer<${returnType.nativeType}>';
 
   @override
-  String ffiCall([String params = '', bool freeRetValOnFailure = false]) {
+  String ffiCall({String params = '', bool freeRetValOnFailure = false}) {
     return [
       '''
     final hr = ptr.ref.vtable

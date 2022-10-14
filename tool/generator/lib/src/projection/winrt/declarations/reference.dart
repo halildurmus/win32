@@ -121,7 +121,7 @@ class WinRTSetPropertyReturningReferenceProjection
       set $exposedMethodName($referenceTypeArgFromParameter? value) {
         final referencePtr = $boxValueMethodCall
 
-        ${ffiCall('referencePtr.ref')}
+        ${ffiCall(params: 'referencePtr.ref')}
 
         free(referencePtr);
       }

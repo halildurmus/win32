@@ -62,7 +62,7 @@ class WinRTSetPropertyReturningDefaultProjection
   @override
   String toString() => '''
       set $exposedMethodName(${parameters.first.type.dartType} value) {
-        ${ffiCall('value')}
+        ${ffiCall(params: 'value')}
       }
   ''';
 }

@@ -66,7 +66,7 @@ class WinRTMethodReturningVectorProjection extends WinRTMethodProjection
       IVector<$vectorTypeArg> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
-        ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
         $parametersPostamble
         return IVector.fromRawPointer(retValuePtr$vectorConstructorArgs);
       }
@@ -82,7 +82,7 @@ class WinRTGetPropertyReturningVectorProjection
       IVector<$vectorTypeArg> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
 
         return IVector.fromRawPointer(retValuePtr$vectorConstructorArgs);
       }
