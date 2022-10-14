@@ -11,6 +11,8 @@ const structsToGenerate = <String, String>{
       "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information.",
   "Windows.Win32.UI.WindowsAndMessaging.ALTTABINFO":
       "Contains status information for the application-switching (ALT+TAB) window.",
+  "Windows.Win32.Security.Cryptography.CRYPTPROTECT_PROMPTSTRUCT":
+      "The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt and information about when and where that prompt is to be displayed when using the CryptProtectData and CryptUnprotectData functions.",
   "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS":
       "Represents package settings used to create a package.",
   "Windows.Win32.System.Ole.ARRAYDESC":
@@ -103,6 +105,8 @@ const structsToGenerate = <String, String>{
       "The CREDENTIAL structure contains an individual credential.",
   "Windows.Win32.Security.Credentials.CREDENTIAL_ATTRIBUTEW":
       "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute.",
+  "Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB":
+      "Contains an arbitrary array of bytes. The structure definition includes aliases appropriate to the various functions that use it.",
   "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO":
       "Contains global cursor information.",
   "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT":

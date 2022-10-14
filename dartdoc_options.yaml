@@ -8,6 +8,8 @@ dartdoc:
       markdown: doc/comctl32.md
     "comdlg32":
       markdown: doc/comdlg32.md
+    "crypt32": 
+      markdown: doc/crypt32.md
     "dxva2":
       markdown: doc/dxva2.md
     "gdi32":

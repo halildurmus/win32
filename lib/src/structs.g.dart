@@ -1380,6 +1380,35 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 }
 
+/// Contains an arbitrary array of bytes. The structure definition includes
+/// aliases appropriate to the various functions that use it.
+///
+/// {@category Struct}
+class CRYPTOAPI_BLOB extends Struct {
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pbData;
+}
+
+/// The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt
+/// and information about when and where that prompt is to be displayed when
+/// using the CryptProtectData and CryptUnprotectData functions.
+///
+/// {@category Struct}
+class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwPromptFlags;
+
+  @IntPtr()
+  external int hwndApp;
+
+  external Pointer<Utf16> szPrompt;
+}
+
 /// Contains global cursor information.
 ///
 /// {@category Struct}
