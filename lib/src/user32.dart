@@ -1677,6 +1677,21 @@ final _EnableMenuItem = _user32.lookupFunction<
     Int32 Function(IntPtr hMenu, Uint32 uIDEnableItem, Uint32 uEnable),
     int Function(int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
 
+/// Enables the mouse to act as a pointer input device and send WM_POINTER
+/// messages.
+///
+/// ```c
+/// BOOL EnableMouseInPointer(
+///   [in] BOOL fEnable
+/// );
+/// ```
+/// {@category user32}
+int EnableMouseInPointer(int fEnable) => _EnableMouseInPointer(fEnable);
+
+final _EnableMouseInPointer = _user32.lookupFunction<
+    Int32 Function(Int32 fEnable),
+    int Function(int fEnable)>('EnableMouseInPointer');
+
 /// In high-DPI displays, enables automatic display scaling of the
 /// non-client area portions of the specified top-level window. Must be
 /// called during the initialization of that window.
@@ -3223,6 +3238,329 @@ final _GetPhysicalCursorPos = _user32.lookupFunction<
     Int32 Function(Pointer<POINT> lpPoint),
     int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
 
+/// Retrieves the cursor identifier associated with the specified pointer.
+///
+/// ```c
+/// BOOL GetPointerCursorId(
+///   [in]  UINT32 pointerId,
+///   [out] UINT32 *cursorId
+/// );
+/// ```
+/// {@category user32}
+int GetPointerCursorId(int pointerId, Pointer<Uint32> cursorId) =>
+    _GetPointerCursorId(pointerId, cursorId);
+
+final _GetPointerCursorId = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> cursorId),
+    int Function(
+        int pointerId, Pointer<Uint32> cursorId)>('GetPointerCursorId');
+
+/// Gets the entire frame of information for the specified pointers
+/// associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerFrameInfo(
+///   [in]      UINT32       pointerId,
+///   [in, out] UINT32       *pointerCount,
+///   [out]     POINTER_INFO *pointerInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFrameInfo(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_INFO> pointerInfo) =>
+    _GetPointerFrameInfo(pointerId, pointerCount, pointerInfo);
+
+final _GetPointerFrameInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_INFO> pointerInfo),
+    int Function(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_INFO> pointerInfo)>('GetPointerFrameInfo');
+
+/// Gets the entire frame of information (including coalesced input frames)
+/// for the specified pointers associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerFrameInfoHistory(
+///   [in]      UINT32       pointerId,
+///   [in, out] UINT32       *entriesCount,
+///   [in, out] UINT32       *pointerCount,
+///   [out]     POINTER_INFO *pointerInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFrameInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_INFO> pointerInfo) =>
+    _GetPointerFrameInfoHistory(
+        pointerId, entriesCount, pointerCount, pointerInfo);
+
+final _GetPointerFrameInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_INFO> pointerInfo),
+    int Function(
+        int pointerId,
+        Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount,
+        Pointer<POINTER_INFO> pointerInfo)>('GetPointerFrameInfoHistory');
+
+/// Gets the entire frame of pen-based information for the specified
+/// pointers (of type PT_PEN) associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerFramePenInfo(
+///   [in]      UINT32           pointerId,
+///   [in, out] UINT32           *pointerCount,
+///   [out]     POINTER_PEN_INFO *penInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFramePenInfo(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_PEN_INFO> penInfo) =>
+    _GetPointerFramePenInfo(pointerId, pointerCount, penInfo);
+
+final _GetPointerFramePenInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_PEN_INFO> penInfo),
+    int Function(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerFramePenInfo');
+
+/// Gets the entire frame of pen-based information (including coalesced
+/// input frames) for the specified pointers (of type PT_PEN) associated
+/// with the current message.
+///
+/// ```c
+/// BOOL GetPointerFramePenInfoHistory(
+///   [in]            UINT32           pointerId,
+///   [in, out]       UINT32           *entriesCount,
+///   [in, out]       UINT32           *pointerCount,
+///   [out, optional] POINTER_PEN_INFO *penInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFramePenInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_PEN_INFO> penInfo) =>
+    _GetPointerFramePenInfoHistory(
+        pointerId, entriesCount, pointerCount, penInfo);
+
+final _GetPointerFramePenInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_PEN_INFO> penInfo),
+    int Function(
+        int pointerId,
+        Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount,
+        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerFramePenInfoHistory');
+
+/// Gets the entire frame of touch-based information for the specified
+/// pointers (of type PT_TOUCH) associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerFrameTouchInfo(
+///   [in]      UINT32             pointerId,
+///   [in, out] UINT32             *pointerCount,
+///   [out]     POINTER_TOUCH_INFO *touchInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFrameTouchInfo(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo) =>
+    _GetPointerFrameTouchInfo(pointerId, pointerCount, touchInfo);
+
+final _GetPointerFrameTouchInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo),
+    int Function(int pointerId, Pointer<Uint32> pointerCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerFrameTouchInfo');
+
+/// Gets the entire frame of touch-based information (including coalesced
+/// input frames) for the specified pointers (of type PT_TOUCH) associated
+/// with the current message.
+///
+/// ```c
+/// BOOL GetPointerFrameTouchInfoHistory(
+///   [in]      UINT32             pointerId,
+///   [in, out] UINT32             *entriesCount,
+///   [in, out] UINT32             *pointerCount,
+///   [out]     POINTER_TOUCH_INFO *touchInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerFrameTouchInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_TOUCH_INFO> touchInfo) =>
+    _GetPointerFrameTouchInfoHistory(
+        pointerId, entriesCount, pointerCount, touchInfo);
+
+final _GetPointerFrameTouchInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount, Pointer<POINTER_TOUCH_INFO> touchInfo),
+    int Function(
+        int pointerId,
+        Pointer<Uint32> entriesCount,
+        Pointer<Uint32> pointerCount,
+        Pointer<POINTER_TOUCH_INFO>
+            touchInfo)>('GetPointerFrameTouchInfoHistory');
+
+/// Gets the information for the specified pointer associated with the
+/// current message.
+///
+/// ```c
+/// BOOL GetPointerInfo(
+///   [in]  UINT32       pointerId,
+///   [out] POINTER_INFO *pointerInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerInfo(int pointerId, Pointer<POINTER_INFO> pointerInfo) =>
+    _GetPointerInfo(pointerId, pointerInfo);
+
+final _GetPointerInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<POINTER_INFO> pointerInfo),
+    int Function(
+        int pointerId, Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfo');
+
+/// Gets the information associated with the individual inputs, if any, that
+/// were coalesced into the current message for the specified pointer. The
+/// most recent input is included in the returned history and is the same as
+/// the most recent input returned by the GetPointerInfo function.
+///
+/// ```c
+/// BOOL GetPointerInfoHistory(
+///   [in]            UINT32       pointerId,
+///   [in, out]       UINT32       *entriesCount,
+///   [out, optional] POINTER_INFO *pointerInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_INFO> pointerInfo) =>
+    _GetPointerInfoHistory(pointerId, entriesCount, pointerInfo);
+
+final _GetPointerInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_INFO> pointerInfo),
+    int Function(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfoHistory');
+
+/// Gets one or more transforms for the pointer information coordinates
+/// associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerInputTransform(
+///   [in]  UINT32          pointerId,
+///   [in]  UINT32          historyCount,
+///   [out] INPUT_TRANSFORM *inputTransform
+/// );
+/// ```
+/// {@category user32}
+int GetPointerInputTransform(int pointerId, int historyCount,
+        Pointer<INPUT_TRANSFORM> inputTransform) =>
+    _GetPointerInputTransform(pointerId, historyCount, inputTransform);
+
+final _GetPointerInputTransform = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Uint32 historyCount,
+        Pointer<INPUT_TRANSFORM> inputTransform),
+    int Function(int pointerId, int historyCount,
+        Pointer<INPUT_TRANSFORM> inputTransform)>('GetPointerInputTransform');
+
+/// Gets the pen-based information for the specified pointer (of type
+/// PT_PEN) associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerPenInfo(
+///   [in]  UINT32           pointerId,
+///   [out] POINTER_PEN_INFO *penInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerPenInfo(int pointerId, Pointer<POINTER_PEN_INFO> penInfo) =>
+    _GetPointerPenInfo(pointerId, penInfo);
+
+final _GetPointerPenInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
+    int Function(
+        int pointerId, Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfo');
+
+/// Gets the pen-based information associated with the individual inputs, if
+/// any, that were coalesced into the current message for the specified
+/// pointer (of type PT_PEN). The most recent input is included in the
+/// returned history and is the same as the most recent input returned by
+/// the GetPointerPenInfo function.
+///
+/// ```c
+/// BOOL GetPointerPenInfoHistory(
+///   [in]            UINT32           pointerId,
+///   [in, out]       UINT32           *entriesCount,
+///   [out, optional] POINTER_PEN_INFO *penInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerPenInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_PEN_INFO> penInfo) =>
+    _GetPointerPenInfoHistory(pointerId, entriesCount, penInfo);
+
+final _GetPointerPenInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_PEN_INFO> penInfo),
+    int Function(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfoHistory');
+
+/// Gets the touch-based information for the specified pointer (of type
+/// PT_TOUCH) associated with the current message.
+///
+/// ```c
+/// BOOL GetPointerTouchInfo(
+///   [in]  UINT32             pointerId,
+///   [out] POINTER_TOUCH_INFO *touchInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerTouchInfo(int pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo) =>
+    _GetPointerTouchInfo(pointerId, touchInfo);
+
+final _GetPointerTouchInfo = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo),
+    int Function(int pointerId,
+        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerTouchInfo');
+
+/// Gets the touch-based information associated with the individual inputs,
+/// if any, that were coalesced into the current message for the specified
+/// pointer (of type PT_TOUCH). The most recent input is included in the
+/// returned history and is the same as the most recent input returned by
+/// the GetPointerTouchInfo function.
+///
+/// ```c
+/// BOOL GetPointerTouchInfoHistory(
+///   [in]            UINT32             pointerId,
+///   [in, out]       UINT32             *entriesCount,
+///   [out, optional] POINTER_TOUCH_INFO *touchInfo
+/// );
+/// ```
+/// {@category user32}
+int GetPointerTouchInfoHistory(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo) =>
+    _GetPointerTouchInfoHistory(pointerId, entriesCount, touchInfo);
+
+final _GetPointerTouchInfoHistory = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo),
+    int Function(int pointerId, Pointer<Uint32> entriesCount,
+        Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerTouchInfoHistory');
+
+/// Retrieves the pointer type for a specified pointer.
+///
+/// ```c
+/// BOOL GetPointerType(
+///   [in]  UINT32             pointerId,
+///   [out] POINTER_INPUT_TYPE *pointerType
+/// );
+/// ```
+/// {@category user32}
+int GetPointerType(int pointerId, Pointer<Int32> pointerType) =>
+    _GetPointerType(pointerId, pointerType);
+
+final _GetPointerType = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId, Pointer<Int32> pointerType),
+    int Function(int pointerId, Pointer<Int32> pointerType)>('GetPointerType');
+
 /// Retrieves the first available clipboard format in the specified list.
 ///
 /// ```c
@@ -3659,6 +3997,19 @@ final _GetTouchInputInfo = _user32.lookupFunction<
         Pointer<TOUCHINPUT> pInputs, Int32 cbSize),
     int Function(int hTouchInput, int cInputs, Pointer<TOUCHINPUT> pInputs,
         int cbSize)>('GetTouchInputInfo');
+
+/// Gets pointer data before it has gone through touch prediction
+/// processing.
+///
+/// ```c
+/// DWORD GetUnpredictedMessagePos();
+/// ```
+/// {@category user32}
+int GetUnpredictedMessagePos() => _GetUnpredictedMessagePos();
+
+final _GetUnpredictedMessagePos =
+    _user32.lookupFunction<Uint32 Function(), int Function()>(
+        'GetUnpredictedMessagePos');
 
 /// Retrieves the currently supported clipboard formats.
 ///
@@ -4387,6 +4738,19 @@ int IsMenu(int hMenu) => _IsMenu(hMenu);
 
 final _IsMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
     int Function(int hMenu)>('IsMenu');
+
+/// Indicates whether EnableMouseInPointer is set for the mouse to act as a
+/// pointer input device and send WM_POINTER messages.
+///
+/// ```c
+/// BOOL IsMouseInPointerEnabled();
+/// ```
+/// {@category user32}
+int IsMouseInPointerEnabled() => _IsMouseInPointerEnabled();
+
+final _IsMouseInPointerEnabled =
+    _user32.lookupFunction<Int32 Function(), int Function()>(
+        'IsMouseInPointerEnabled');
 
 /// Determines whether the current process is dots per inch (dpi) aware such
 /// that it adjusts the sizes of UI elements to compensate for the dpi
@@ -6843,6 +7207,28 @@ int ShowWindowAsync(int hWnd, int nCmdShow) => _ShowWindowAsync(hWnd, nCmdShow);
 final _ShowWindowAsync = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
     int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
+
+/// Determines which pointer input frame generated the most recently
+/// retrieved message for the specified pointer and discards any queued
+/// (unretrieved) pointer input messages generated from the same pointer
+/// input frame. If an application has retrieved information for an entire
+/// frame using the GetPointerFrameInfo function, the
+/// GetPointerFrameInfoHistory function or one of their type-specific
+/// variants, it can use this function to avoid retrieving and discarding
+/// remaining messages from that frame one by one.
+///
+/// ```c
+/// BOOL SkipPointerFrameMessages(
+///   [in] UINT32 pointerId
+/// );
+/// ```
+/// {@category user32}
+int SkipPointerFrameMessages(int pointerId) =>
+    _SkipPointerFrameMessages(pointerId);
+
+final _SkipPointerFrameMessages = _user32.lookupFunction<
+    Int32 Function(Uint32 pointerId),
+    int Function(int pointerId)>('SkipPointerFrameMessages');
 
 /// Triggers a visual signal to indicate that a sound is playing.
 ///
