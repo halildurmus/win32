@@ -54,12 +54,18 @@ void main()
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
     // Automatically generated structs
+    printf("  'POINTER_PEN_INFO': %zu,\n", sizeof(POINTER_PEN_INFO));
+    printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
+    printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));
+    printf("  'INPUT_TRANSFORM': %zu,\n", sizeof(INPUT_TRANSFORM));
+    printf("  'TouchPredictionParameters': %zu,\n", sizeof(TouchPredictionParameters));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
     printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
     printf("  'ALTTABINFO': %zu,\n", sizeof(ALTTABINFO));
+    printf("  'CRYPTPROTECT_PROMPTSTRUCT': %zu,\n", sizeof(CRYPTPROTECT_PROMPTSTRUCT));
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
     printf("  'ARRAYDESC': %zu,\n", sizeof(ARRAYDESC));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
@@ -106,6 +112,7 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCTW));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
+    printf("  'CRYPTOAPI_BLOB': %zu,\n", sizeof(CRYPTOAPI_BLOB));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));

@@ -1380,6 +1380,35 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 }
 
+/// Contains an arbitrary array of bytes. The structure definition includes
+/// aliases appropriate to the various functions that use it.
+///
+/// {@category Struct}
+class CRYPTOAPI_BLOB extends Struct {
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pbData;
+}
+
+/// The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt
+/// and information about when and where that prompt is to be displayed when
+/// using the CryptProtectData and CryptUnprotectData functions.
+///
+/// {@category Struct}
+class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwPromptFlags;
+
+  @IntPtr()
+  external int hwndApp;
+
+  external Pointer<Utf16> szPrompt;
+}
+
 /// Contains global cursor information.
 ///
 /// {@category Struct}
@@ -2778,6 +2807,137 @@ extension INPUT_RECORD_Extension on INPUT_RECORD {
 
   FOCUS_EVENT_RECORD get FocusEvent => this.Event.FocusEvent;
   set FocusEvent(FOCUS_EVENT_RECORD value) => this.Event.FocusEvent = value;
+}
+
+/// Defines the matrix that represents a transform on a message consumer.
+/// This matrix can be used to transform pointer input data from client
+/// coordinates to screen coordinates, while the inverse can be used to
+/// transform pointer input data from screen coordinates to client
+/// coordinates.
+///
+/// {@category Struct}
+class INPUT_TRANSFORM extends Struct {
+  external _INPUT_TRANSFORM__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _INPUT_TRANSFORM__Anonymous_e__Union extends Union {
+  external _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
+
+  @Array(16)
+  external Array<Float> m;
+}
+
+/// {@category Struct}
+class _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x13;
+
+  @Float()
+  external double x14;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x23;
+
+  @Float()
+  external double x24;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  @Float()
+  external double x33;
+
+  @Float()
+  external double x34;
+
+  @Float()
+  external double x41;
+
+  @Float()
+  external double x42;
+
+  @Float()
+  external double x43;
+
+  @Float()
+  external double x44;
+}
+
+extension INPUT_TRANSFORM__Anonymous_e__Union_Extension on INPUT_TRANSFORM {
+  double get x11 => this.Anonymous.Anonymous.x11;
+  set x11(double value) => this.Anonymous.Anonymous.x11 = value;
+
+  double get x12 => this.Anonymous.Anonymous.x12;
+  set x12(double value) => this.Anonymous.Anonymous.x12 = value;
+
+  double get x13 => this.Anonymous.Anonymous.x13;
+  set x13(double value) => this.Anonymous.Anonymous.x13 = value;
+
+  double get x14 => this.Anonymous.Anonymous.x14;
+  set x14(double value) => this.Anonymous.Anonymous.x14 = value;
+
+  double get x21 => this.Anonymous.Anonymous.x21;
+  set x21(double value) => this.Anonymous.Anonymous.x21 = value;
+
+  double get x22 => this.Anonymous.Anonymous.x22;
+  set x22(double value) => this.Anonymous.Anonymous.x22 = value;
+
+  double get x23 => this.Anonymous.Anonymous.x23;
+  set x23(double value) => this.Anonymous.Anonymous.x23 = value;
+
+  double get x24 => this.Anonymous.Anonymous.x24;
+  set x24(double value) => this.Anonymous.Anonymous.x24 = value;
+
+  double get x31 => this.Anonymous.Anonymous.x31;
+  set x31(double value) => this.Anonymous.Anonymous.x31 = value;
+
+  double get x32 => this.Anonymous.Anonymous.x32;
+  set x32(double value) => this.Anonymous.Anonymous.x32 = value;
+
+  double get x33 => this.Anonymous.Anonymous.x33;
+  set x33(double value) => this.Anonymous.Anonymous.x33 = value;
+
+  double get x34 => this.Anonymous.Anonymous.x34;
+  set x34(double value) => this.Anonymous.Anonymous.x34 = value;
+
+  double get x41 => this.Anonymous.Anonymous.x41;
+  set x41(double value) => this.Anonymous.Anonymous.x41 = value;
+
+  double get x42 => this.Anonymous.Anonymous.x42;
+  set x42(double value) => this.Anonymous.Anonymous.x42 = value;
+
+  double get x43 => this.Anonymous.Anonymous.x43;
+  set x43(double value) => this.Anonymous.Anonymous.x43 = value;
+
+  double get x44 => this.Anonymous.Anonymous.x44;
+  set x44(double value) => this.Anonymous.Anonymous.x44 = value;
+}
+
+extension INPUT_TRANSFORM_Extension on INPUT_TRANSFORM {
+  _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct get Anonymous =>
+      this.Anonymous.Anonymous;
+  set Anonymous(
+          _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct value) =>
+      this.Anonymous.Anonymous = value;
+
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
 }
 
 /// The IN_ADDR structure represents an IPv4 Internet address.
@@ -5489,6 +5649,106 @@ class POINT extends Struct {
   external int y;
 }
 
+/// Contains basic pointer information common to all pointer types.
+/// Applications can retrieve this information using the GetPointerInfo,
+/// GetPointerFrameInfo, GetPointerInfoHistory and
+/// GetPointerFrameInfoHistory functions.
+///
+/// {@category Struct}
+class POINTER_INFO extends Struct {
+  @Int32()
+  external int pointerType;
+
+  @Uint32()
+  external int pointerId;
+
+  @Uint32()
+  external int frameId;
+
+  @Uint32()
+  external int pointerFlags;
+
+  @IntPtr()
+  external int sourceDevice;
+
+  @IntPtr()
+  external int hwndTarget;
+
+  external POINT ptPixelLocation;
+
+  external POINT ptHimetricLocation;
+
+  external POINT ptPixelLocationRaw;
+
+  external POINT ptHimetricLocationRaw;
+
+  @Uint32()
+  external int dwTime;
+
+  @Uint32()
+  external int historyCount;
+
+  @Int32()
+  external int InputData;
+
+  @Uint32()
+  external int dwKeyStates;
+
+  @Uint64()
+  external int PerformanceCount;
+
+  @Int32()
+  external int ButtonChangeType;
+}
+
+/// Defines basic pen information common to all pointer types.
+///
+/// {@category Struct}
+class POINTER_PEN_INFO extends Struct {
+  external POINTER_INFO pointerInfo;
+
+  @Uint32()
+  external int penFlags;
+
+  @Uint32()
+  external int penMask;
+
+  @Uint32()
+  external int pressure;
+
+  @Uint32()
+  external int rotation;
+
+  @Int32()
+  external int tiltX;
+
+  @Int32()
+  external int tiltY;
+}
+
+/// Defines basic touch information common to all pointer types.
+///
+/// {@category Struct}
+class POINTER_TOUCH_INFO extends Struct {
+  external POINTER_INFO pointerInfo;
+
+  @Uint32()
+  external int touchFlags;
+
+  @Uint32()
+  external int touchMask;
+
+  external RECT rcContact;
+
+  external RECT rcContactRaw;
+
+  @Uint32()
+  external int orientation;
+
+  @Uint32()
+  external int pressure;
+}
+
 /// The POINTL structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
@@ -7444,6 +7704,25 @@ extension TYPEDESC_Extension on TYPEDESC {
 
   int get hreftype => this.Anonymous.hreftype;
   set hreftype(int value) => this.Anonymous.hreftype = value;
+}
+
+/// Contains hardware input details that can be used to predict touch
+/// targets and help compensate for hardware latency when processing touch
+/// and gesture input that contains distance and velocity data.
+///
+/// {@category Struct}
+class TouchPredictionParameters extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwLatency;
+
+  @Uint32()
+  external int dwSampleTime;
+
+  @Uint32()
+  external int bUseHWTimeStamp;
 }
 
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It

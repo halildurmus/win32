@@ -1,4 +1,14 @@
 const structsToGenerate = <String, String>{
+  "Windows.Win32.UI.Input.Pointer.POINTER_PEN_INFO":
+      "Defines basic pen information common to all pointer types.",
+  "Windows.Win32.UI.Input.Pointer.POINTER_INFO":
+      "Contains basic pointer information common to all pointer types. Applications can retrieve this information using the GetPointerInfo, GetPointerFrameInfo, GetPointerInfoHistory and GetPointerFrameInfoHistory functions.",
+  "Windows.Win32.UI.Input.Pointer.POINTER_TOUCH_INFO":
+      "Defines basic touch information common to all pointer types.",
+  "Windows.Win32.UI.Input.Pointer.INPUT_TRANSFORM":
+      "Defines the matrix that represents a transform on a message consumer. This matrix can be used to transform pointer input data from client coordinates to screen coordinates, while the inverse can be used to transform pointer input data from screen coordinates to client coordinates.",
+  "Windows.Win32.UI.WindowsAndMessaging.TouchPredictionParameters":
+      "Contains hardware input details that can be used to predict touch targets and help compensate for hardware latency when processing touch and gesture input that contains distance and velocity data.",
   "Windows.Win32.UI.WindowsAndMessaging.ACCEL":
       "Defines an accelerator key used in an accelerator table.",
   "Windows.Win32.Security.ACL":
@@ -11,6 +21,8 @@ const structsToGenerate = <String, String>{
       "The addrinfoW structure is used by the GetAddrInfoW function to hold host address information.",
   "Windows.Win32.UI.WindowsAndMessaging.ALTTABINFO":
       "Contains status information for the application-switching (ALT+TAB) window.",
+  "Windows.Win32.Security.Cryptography.CRYPTPROTECT_PROMPTSTRUCT":
+      "The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt and information about when and where that prompt is to be displayed when using the CryptProtectData and CryptUnprotectData functions.",
   "Windows.Win32.Storage.Packaging.Appx.APPX_PACKAGE_SETTINGS":
       "Represents package settings used to create a package.",
   "Windows.Win32.System.Ole.ARRAYDESC":
@@ -103,6 +115,8 @@ const structsToGenerate = <String, String>{
       "The CREDENTIAL structure contains an individual credential.",
   "Windows.Win32.Security.Credentials.CREDENTIAL_ATTRIBUTEW":
       "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute.",
+  "Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB":
+      "Contains an arbitrary array of bytes. The structure definition includes aliases appropriate to the various functions that use it.",
   "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO":
       "Contains global cursor information.",
   "Windows.Win32.UI.WindowsAndMessaging.CWPRETSTRUCT":

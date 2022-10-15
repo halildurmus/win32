@@ -4699,6 +4699,15 @@ void main() {
               int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
       expect(EnableMenuItem, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate EnableMouseInPointer', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final EnableMouseInPointer = user32.lookupFunction<
+            Int32 Function(Int32 fEnable),
+            int Function(int fEnable)>('EnableMouseInPointer');
+        expect(EnableMouseInPointer, isA<Function>());
+      });
+    }
     if (windowsBuildNumber >= 14393) {
       test('Can instantiate EnableNonClientDpiScaling', () {
         final user32 = DynamicLibrary.open('user32.dll');
@@ -5424,6 +5433,191 @@ void main() {
           int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
       expect(GetPhysicalCursorPos, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerCursorId', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerCursorId = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Uint32> cursorId),
+            int Function(
+                int pointerId, Pointer<Uint32> cursorId)>('GetPointerCursorId');
+        expect(GetPointerCursorId, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFrameInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFrameInfo = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+                Pointer<POINTER_INFO> pointerInfo),
+            int Function(int pointerId, Pointer<Uint32> pointerCount,
+                Pointer<POINTER_INFO> pointerInfo)>('GetPointerFrameInfo');
+        expect(GetPointerFrameInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFrameInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFrameInfoHistory = user32.lookupFunction<
+                Int32 Function(
+                    Uint32 pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_INFO> pointerInfo),
+                int Function(
+                    int pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_INFO> pointerInfo)>(
+            'GetPointerFrameInfoHistory');
+        expect(GetPointerFrameInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFramePenInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFramePenInfo = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+                Pointer<POINTER_PEN_INFO> penInfo),
+            int Function(int pointerId, Pointer<Uint32> pointerCount,
+                Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerFramePenInfo');
+        expect(GetPointerFramePenInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFramePenInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFramePenInfoHistory = user32.lookupFunction<
+                Int32 Function(
+                    Uint32 pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_PEN_INFO> penInfo),
+                int Function(
+                    int pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_PEN_INFO> penInfo)>(
+            'GetPointerFramePenInfoHistory');
+        expect(GetPointerFramePenInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFrameTouchInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFrameTouchInfo = user32.lookupFunction<
+                Int32 Function(Uint32 pointerId, Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo),
+                int Function(int pointerId, Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo)>(
+            'GetPointerFrameTouchInfo');
+        expect(GetPointerFrameTouchInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerFrameTouchInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerFrameTouchInfoHistory = user32.lookupFunction<
+                Int32 Function(
+                    Uint32 pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo),
+                int Function(
+                    int pointerId,
+                    Pointer<Uint32> entriesCount,
+                    Pointer<Uint32> pointerCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo)>(
+            'GetPointerFrameTouchInfoHistory');
+        expect(GetPointerFrameTouchInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerInfo = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<POINTER_INFO> pointerInfo),
+            int Function(int pointerId,
+                Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfo');
+        expect(GetPointerInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerInfoHistory = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+                Pointer<POINTER_INFO> pointerInfo),
+            int Function(int pointerId, Pointer<Uint32> entriesCount,
+                Pointer<POINTER_INFO> pointerInfo)>('GetPointerInfoHistory');
+        expect(GetPointerInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerInputTransform', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerInputTransform = user32.lookupFunction<
+                Int32 Function(Uint32 pointerId, Uint32 historyCount,
+                    Pointer<INPUT_TRANSFORM> inputTransform),
+                int Function(int pointerId, int historyCount,
+                    Pointer<INPUT_TRANSFORM> inputTransform)>(
+            'GetPointerInputTransform');
+        expect(GetPointerInputTransform, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerPenInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerPenInfo = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<POINTER_PEN_INFO> penInfo),
+            int Function(int pointerId,
+                Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfo');
+        expect(GetPointerPenInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerPenInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerPenInfoHistory = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+                Pointer<POINTER_PEN_INFO> penInfo),
+            int Function(int pointerId, Pointer<Uint32> entriesCount,
+                Pointer<POINTER_PEN_INFO> penInfo)>('GetPointerPenInfoHistory');
+        expect(GetPointerPenInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerTouchInfo', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerTouchInfo = user32.lookupFunction<
+            Int32 Function(
+                Uint32 pointerId, Pointer<POINTER_TOUCH_INFO> touchInfo),
+            int Function(int pointerId,
+                Pointer<POINTER_TOUCH_INFO> touchInfo)>('GetPointerTouchInfo');
+        expect(GetPointerTouchInfo, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerTouchInfoHistory', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerTouchInfoHistory = user32.lookupFunction<
+                Int32 Function(Uint32 pointerId, Pointer<Uint32> entriesCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo),
+                int Function(int pointerId, Pointer<Uint32> entriesCount,
+                    Pointer<POINTER_TOUCH_INFO> touchInfo)>(
+            'GetPointerTouchInfoHistory');
+        expect(GetPointerTouchInfoHistory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetPointerType', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetPointerType = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId, Pointer<Int32> pointerType),
+            int Function(
+                int pointerId, Pointer<Int32> pointerType)>('GetPointerType');
+        expect(GetPointerType, isA<Function>());
+      });
+    }
     test('Can instantiate GetPriorityClipboardFormat', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetPriorityClipboardFormat = user32.lookupFunction<
@@ -5630,6 +5824,15 @@ void main() {
               Pointer<TOUCHINPUT> pInputs, int cbSize)>('GetTouchInputInfo');
       expect(GetTouchInputInfo, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate GetUnpredictedMessagePos', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetUnpredictedMessagePos =
+            user32.lookupFunction<Uint32 Function(), int Function()>(
+                'GetUnpredictedMessagePos');
+        expect(GetUnpredictedMessagePos, isA<Function>());
+      });
+    }
     test('Can instantiate GetUpdatedClipboardFormats', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetUpdatedClipboardFormats = user32.lookupFunction<
@@ -5938,6 +6141,15 @@ void main() {
           int Function(int hMenu)>('IsMenu');
       expect(IsMenu, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate IsMouseInPointerEnabled', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final IsMouseInPointerEnabled =
+            user32.lookupFunction<Int32 Function(), int Function()>(
+                'IsMouseInPointerEnabled');
+        expect(IsMouseInPointerEnabled, isA<Function>());
+      });
+    }
     test('Can instantiate IsProcessDPIAware', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final IsProcessDPIAware =
@@ -7022,6 +7234,15 @@ void main() {
           int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
       expect(ShowWindowAsync, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate SkipPointerFrameMessages', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SkipPointerFrameMessages = user32.lookupFunction<
+            Int32 Function(Uint32 pointerId),
+            int Function(int pointerId)>('SkipPointerFrameMessages');
+        expect(SkipPointerFrameMessages, isA<Function>());
+      });
+    }
     test('Can instantiate SoundSentry', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SoundSentry = user32
@@ -9858,6 +10079,84 @@ void main() {
           Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
           int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');
       expect(SetThreadToken, isA<Function>());
+    });
+  });
+
+  group('Test crypt32 functions', () {
+    test('Can instantiate CryptProtectData', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptProtectData = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Utf16> szDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              Uint32 dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut),
+          int Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Utf16> szDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              int dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptProtectData');
+      expect(CryptProtectData, isA<Function>());
+    });
+    test('Can instantiate CryptProtectMemory', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptProtectMemory = crypt32.lookupFunction<
+          Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+          int Function(Pointer pDataIn, int cbDataIn,
+              int dwFlags)>('CryptProtectMemory');
+      expect(CryptProtectMemory, isA<Function>());
+    });
+    test('Can instantiate CryptUnprotectData', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUnprotectData = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Pointer<Utf16>> ppszDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              Uint32 dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut),
+          int Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Pointer<Utf16>> ppszDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              int dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptUnprotectData');
+      expect(CryptUnprotectData, isA<Function>());
+    });
+    test('Can instantiate CryptUnprotectMemory', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUnprotectMemory = crypt32.lookupFunction<
+          Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+          int Function(Pointer pDataIn, int cbDataIn,
+              int dwFlags)>('CryptUnprotectMemory');
+      expect(CryptUnprotectMemory, isA<Function>());
+    });
+    test('Can instantiate CryptUpdateProtectedState', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUpdateProtectedState = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer pOldSid,
+              Pointer<Utf16> pwszOldPassword,
+              Uint32 dwFlags,
+              Pointer<Uint32> pdwSuccessCount,
+              Pointer<Uint32> pdwFailureCount),
+          int Function(
+              Pointer pOldSid,
+              Pointer<Utf16> pwszOldPassword,
+              int dwFlags,
+              Pointer<Uint32> pdwSuccessCount,
+              Pointer<Uint32> pdwFailureCount)>('CryptUpdateProtectedState');
+      expect(CryptUpdateProtectedState, isA<Function>());
     });
   });
 
