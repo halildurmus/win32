@@ -90,9 +90,7 @@ String stripPointer(String typeName) =>
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  if (inputText.isEmpty) {
-    return '';
-  }
+  if (inputText.isEmpty) return '';
 
   final words = inputText.split(' ');
   final textLine = StringBuffer('///');
@@ -140,7 +138,6 @@ extension CamelCaseConversion on String {
 String relativePathToSrcDirectory(File file) {
   // Find out how many parents there are to the lib/src directory
   final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
-
   return '../' * pathDepth;
 }
 
@@ -164,7 +161,6 @@ String importForWin32Type(TypeIdentifier identifier) {
 /// matching folder (e.g. `system`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
-
   return segments.join('/').toLowerCase();
 }
 
@@ -173,7 +169,6 @@ String folderFromNamespace(String namespace) {
 /// (e.g. `storage/pickers`).
 String folderFromWinRTType(String fullyQualifiedType) {
   final segments = fullyQualifiedType.split('.').skip(1).toList()..removeLast();
-
   return segments.join('/').toLowerCase();
 }
 
@@ -267,8 +262,8 @@ String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
   final typeIdentifierName = stripGenerics(lastComponent(outerType(ti.name)));
   final typeArg = ['IKeyValuePair', 'IMap', 'IMapView']
           .contains(typeIdentifierName)
-      // 'creator' parameter does not need to be created for the key typeArg of
-      // the above types so we skip over to their value typeArgs
+      // Skip over to the value typeArg since the `creator` parameter does not
+      // need to be created for the key typeArg of the above types.
       ? ti.typeArg!.typeArg!
       : ti.typeArg;
 
@@ -305,7 +300,7 @@ String primitiveTypeNameFromBaseType(BaseType baseType) {
   }
 }
 
-/// Returns the appropriate type name for the given [ti].
+/// Returns the appropriate Dart type name for the given [ti].
 String parseTypeIdentifierName(TypeIdentifier ti) {
   switch (ti.baseType) {
     case BaseType.classTypeModifier:
