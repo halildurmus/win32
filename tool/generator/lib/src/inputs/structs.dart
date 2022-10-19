@@ -1,4 +1,6 @@
 const structsToGenerate = <String, String>{
+  "Windows.Win32.Storage.FileSystem.CREATEFILE2_EXTENDED_PARAMETERS":
+      "Contains optional extended parameters for CreateFile2.",
   "Windows.Win32.UI.Input.Pointer.POINTER_PEN_INFO":
       "Defines basic pen information common to all pointer types.",
   "Windows.Win32.UI.Input.Pointer.POINTER_INFO":

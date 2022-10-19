@@ -1289,6 +1289,28 @@ class COORD extends Struct {
   external int Y;
 }
 
+/// Contains optional extended parameters for CreateFile2.
+///
+/// {@category Struct}
+class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
+  @Uint32()
+  external int dwSize;
+
+  @Uint32()
+  external int dwFileAttributes;
+
+  @Uint32()
+  external int dwFileFlags;
+
+  @Uint32()
+  external int dwSecurityQosFlags;
+
+  external Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes;
+
+  @IntPtr()
+  external int hTemplateFile;
+}
+
 /// Defines the initialization parameters passed to the window procedure of
 /// an application. These members are identical to the parameters of the
 /// CreateWindowEx function.

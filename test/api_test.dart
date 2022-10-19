@@ -1152,6 +1152,12 @@ void main() {
           .lookupFunction<Int32 Function(), int Function()>('AllocConsole');
       expect(AllocConsole, isA<Function>());
     });
+    test('Can instantiate AreFileApisANSI', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final AreFileApisANSI = kernel32
+          .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
+      expect(AreFileApisANSI, isA<Function>());
+    });
     test('Can instantiate AttachConsole', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final AttachConsole = kernel32.lookupFunction<
@@ -1380,6 +1386,26 @@ void main() {
               int hTemplateFile)>('CreateFileW');
       expect(CreateFile, isA<Function>());
     });
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate CreateFile2', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final CreateFile2 = kernel32.lookupFunction<
+                IntPtr Function(
+                    Pointer<Utf16> lpFileName,
+                    Uint32 dwDesiredAccess,
+                    Uint32 dwShareMode,
+                    Uint32 dwCreationDisposition,
+                    Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams),
+                int Function(
+                    Pointer<Utf16> lpFileName,
+                    int dwDesiredAccess,
+                    int dwShareMode,
+                    int dwCreationDisposition,
+                    Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams)>(
+            'CreateFile2');
+        expect(CreateFile2, isA<Function>());
+      });
+    }
     test('Can instantiate CreateIoCompletionPort', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateIoCompletionPort = kernel32.lookupFunction<
@@ -1557,12 +1583,29 @@ void main() {
           int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
       expect(DebugSetProcessKillOnExit, isA<Function>());
     });
+    test('Can instantiate DefineDosDevice', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DefineDosDevice = kernel32.lookupFunction<
+          Int32 Function(Uint32 dwFlags, Pointer<Utf16> lpDeviceName,
+              Pointer<Utf16> lpTargetPath),
+          int Function(int dwFlags, Pointer<Utf16> lpDeviceName,
+              Pointer<Utf16> lpTargetPath)>('DefineDosDeviceW');
+      expect(DefineDosDevice, isA<Function>());
+    });
     test('Can instantiate DeleteFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final DeleteFile = kernel32.lookupFunction<
           Int32 Function(Pointer<Utf16> lpFileName),
           int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
       expect(DeleteFile, isA<Function>());
+    });
+    test('Can instantiate DeleteVolumeMountPoint', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DeleteVolumeMountPoint = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszVolumeMountPoint),
+          int Function(
+              Pointer<Utf16> lpszVolumeMountPoint)>('DeleteVolumeMountPointW');
+      expect(DeleteVolumeMountPoint, isA<Function>());
     });
     test('Can instantiate DeviceIoControl', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1805,6 +1848,46 @@ void main() {
               Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW');
       expect(FindFirstFile, isA<Function>());
     });
+    test('Can instantiate FindFirstFileEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindFirstFileEx = kernel32.lookupFunction<
+          IntPtr Function(
+              Pointer<Utf16> lpFileName,
+              Int32 fInfoLevelId,
+              Pointer lpFindFileData,
+              Int32 fSearchOp,
+              Pointer lpSearchFilter,
+              Uint32 dwAdditionalFlags),
+          int Function(
+              Pointer<Utf16> lpFileName,
+              int fInfoLevelId,
+              Pointer lpFindFileData,
+              int fSearchOp,
+              Pointer lpSearchFilter,
+              int dwAdditionalFlags)>('FindFirstFileExW');
+      expect(FindFirstFileEx, isA<Function>());
+    });
+    test('Can instantiate FindFirstFileName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindFirstFileName = kernel32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> lpFileName, Uint32 dwFlags,
+              Pointer<Uint32> StringLength, Pointer<Utf16> LinkName),
+          int Function(
+              Pointer<Utf16> lpFileName,
+              int dwFlags,
+              Pointer<Uint32> StringLength,
+              Pointer<Utf16> LinkName)>('FindFirstFileNameW');
+      expect(FindFirstFileName, isA<Function>());
+    });
+    test('Can instantiate FindFirstStream', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindFirstStream = kernel32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> lpFileName, Int32 InfoLevel,
+              Pointer lpFindStreamData, Uint32 dwFlags),
+          int Function(Pointer<Utf16> lpFileName, int InfoLevel,
+              Pointer lpFindStreamData, int dwFlags)>('FindFirstStreamW');
+      expect(FindFirstStream, isA<Function>());
+    });
     test('Can instantiate FindFirstVolume', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindFirstVolume = kernel32.lookupFunction<
@@ -1829,6 +1912,23 @@ void main() {
           int Function(int hFindFile,
               Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
       expect(FindNextFile, isA<Function>());
+    });
+    test('Can instantiate FindNextFileName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindNextFileName = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFindStream, Pointer<Uint32> StringLength,
+              Pointer<Utf16> LinkName),
+          int Function(int hFindStream, Pointer<Uint32> StringLength,
+              Pointer<Utf16> LinkName)>('FindNextFileNameW');
+      expect(FindNextFileName, isA<Function>());
+    });
+    test('Can instantiate FindNextStream', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindNextStream = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFindStream, Pointer lpFindStreamData),
+          int Function(
+              int hFindStream, Pointer lpFindStreamData)>('FindNextStreamW');
+      expect(FindNextStream, isA<Function>());
     });
     test('Can instantiate FindNextVolume', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -2192,6 +2292,21 @@ void main() {
               Pointer<Uint32> lpNumberOfFreeClusters,
               Pointer<Uint32> lpTotalNumberOfClusters)>('GetDiskFreeSpaceW');
       expect(GetDiskFreeSpace, isA<Function>());
+    });
+    test('Can instantiate GetDiskFreeSpaceEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetDiskFreeSpaceEx = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpDirectoryName,
+              Pointer<Uint64> lpFreeBytesAvailableToCaller,
+              Pointer<Uint64> lpTotalNumberOfBytes,
+              Pointer<Uint64> lpTotalNumberOfFreeBytes),
+          int Function(
+              Pointer<Utf16> lpDirectoryName,
+              Pointer<Uint64> lpFreeBytesAvailableToCaller,
+              Pointer<Uint64> lpTotalNumberOfBytes,
+              Pointer<Uint64> lpTotalNumberOfFreeBytes)>('GetDiskFreeSpaceExW');
+      expect(GetDiskFreeSpaceEx, isA<Function>());
     });
     test('Can instantiate GetDllDirectory', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

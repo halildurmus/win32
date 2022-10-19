@@ -155,6 +155,11 @@
         "comment": "Determines whether two DPI_AWARENESS_CONTEXT values are identical.",
         "minimumWindowsVersion": "WIN10_RS1"
     },
+    "AreFileApisANSI": {
+        "prototype": "BOOL AreFileApisANSI();",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether the file I/O functions are using the ANSI or OEM character set code page. This function is useful for 8-bit console input and output operations."
+    },
     "ArrangeIconicWindows": {
         "prototype": "UINT ArrangeIconicWindows(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -891,6 +896,12 @@
         "dllLibrary": "kernel32",
         "comment": "Creates or opens a file or I/O device. The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe. The function returns a handle that can be used to access the file or device for various types of I/O depending on the file or device and the flags and attributes specified."
     },
+    "CreateFile2": {
+        "prototype": "HANDLE CreateFile2(\n  [in]           LPCWSTR                           lpFileName,\n  [in]           DWORD                             dwDesiredAccess,\n  [in]           DWORD                             dwShareMode,\n  [in]           DWORD                             dwCreationDisposition,\n  [in, optional] LPCREATEFILE2_EXTENDED_PARAMETERS pCreateExParams\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a file or I/O device. The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe. The function returns a handle that can be used to access the file or device for various types of I/O depending on the file or device and the flags and attributes specified.",
+        "minimumWindowsVersion": "WIN81"
+    },
     "CreateFontIndirect": {
         "prototype": "HFONT CreateFontIndirectW(\n  const LOGFONTW *lplf\n);",
         "dllLibrary": "gdi32",
@@ -1062,6 +1073,11 @@
         "dllLibrary": "user32",
         "comment": "Updates the specified multiple-window – position structure for the specified window. The function then returns a handle to the updated structure. The EndDeferWindowPos function uses the information in this structure to change the position and size of a number of windows simultaneously. The BeginDeferWindowPos function creates the structure."
     },
+    "DefineDosDevice": {
+        "prototype": "BOOL DefineDosDeviceW(\n  [in]           DWORD   dwFlags,\n  [in]           LPCWSTR lpDeviceName,\n  [in, optional] LPCWSTR lpTargetPath\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Defines, redefines, or deletes MS-DOS device names."
+    },
     "DefMDIChildProc": {
         "prototype": "LRESULT LRESULT DefMDIChildProcW(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
@@ -1137,6 +1153,11 @@
         "prototype": "DWORD DeletePrinterKeyW(\n  _In_ HANDLE  hPrinter,\n  _In_ LPCTSTR pKeyName\n);",
         "dllLibrary": "winspool",
         "comment": "The DeletePrinterKey function deletes a specified key and all its subkeys for a specified printer."
+    },
+    "DeleteVolumeMountPoint": {
+        "prototype": "BOOL DeleteVolumeMountPointW(\n  [in] LPCWSTR lpszVolumeMountPoint\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Deletes a drive letter or mounted folder."
     },
     "DestroyCursor": {
         "prototype": "BOOL DestroyCursor(\n  HCURSOR hCursor\n);",
@@ -1655,10 +1676,25 @@
         "dllLibrary": "kernel32",
         "comment": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)."
     },
+    "FindFirstFileEx": {
+        "prototype": "HANDLE FindFirstFileExW(\n  [in]  LPCWSTR            lpFileName,\n  [in]  FINDEX_INFO_LEVELS fInfoLevelId,\n  [out] LPVOID             lpFindFileData,\n  [in]  FINDEX_SEARCH_OPS  fSearchOp,\n        LPVOID             lpSearchFilter,\n  [in]  DWORD              dwAdditionalFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Searches a directory for a file or subdirectory with a name and attributes that match those specified."
+    },
+    "FindFirstFileName": {
+        "prototype": "HANDLE FindFirstFileNameW(\n  [in]      LPCWSTR lpFileName,\n  [in]      DWORD   dwFlags,\n  [in, out] LPDWORD StringLength,\n  [in, out] PWSTR   LinkName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates an enumeration of all the hard links to the specified file. The FindFirstFileNameW function returns a handle to the enumeration that can be used on subsequent calls to the FindNextFileNameW function."
+    },
     "FindFirstPrinterChangeNotification": {
         "prototype": "HANDLE FindFirstPrinterChangeNotification(\n  _In_     HANDLE hPrinter,\n           DWORD  fdwFilter,\n           DWORD  fdwOptions,\n  _In_opt_ LPVOID pPrinterNotifyOptions\n);",
         "dllLibrary": "winspool",
         "comment": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server."
+    },
+    "FindFirstStream": {
+        "prototype": "HANDLE FindFirstStreamW(\n  [in]  LPCWSTR            lpFileName,\n  [in]  STREAM_INFO_LEVELS InfoLevel,\n  [out] LPVOID             lpFindStreamData,\n        DWORD              dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Enumerates the first stream with a ::$DATA stream type in the specified file or directory."
     },
     "FindFirstVolume": {
         "prototype": "HANDLE FindFirstVolumeW(\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -1675,10 +1711,20 @@
         "dllLibrary": "kernel32",
         "comment": "Continues a file search from a previous call to the FindFirstFile, FindFirstFileEx, or FindFirstFileTransacted functions."
     },
+    "FindNextFileName": {
+        "prototype": "BOOL FindNextFileNameW(\n  [in]      HANDLE  hFindStream,\n  [in, out] LPDWORD StringLength,\n  [in, out] PWSTR   LinkName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Continues enumerating the hard links to a file using the handle returned by a successful call to the FindFirstFileNameW function."
+    },
     "FindNextPrinterChangeNotification": {
         "prototype": "BOOL FindNextPrinterChangeNotification(\n  _In_      HANDLE hChange,\n  _Out_opt_ PDWORD pdwChange,\n  _In_opt_  LPVOID pPrinterNotifyOptions,\n  _Out_opt_ LPVOID *ppPrinterNotifyInfo\n);",
         "dllLibrary": "winspool",
         "comment": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied."
+    },
+    "FindNextStream": {
+        "prototype": "BOOL FindNextStreamW(\n  [in]  HANDLE hFindStream,\n  [out] LPVOID lpFindStreamData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Continues a stream search started by a previous call to the FindFirstStreamW function."
     },
     "FindNextVolume": {
         "prototype": "BOOL FindNextVolumeW(\n  HANDLE hFindVolume,\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -2112,6 +2158,11 @@
         "prototype": "BOOL GetDiskFreeSpaceW(\n  LPCWSTR lpRootPathName,\n  LPDWORD lpSectorsPerCluster,\n  LPDWORD lpBytesPerSector,\n  LPDWORD lpNumberOfFreeClusters,\n  LPDWORD lpTotalNumberOfClusters\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the specified disk, including the amount of free space on the disk."
+    },
+    "GetDiskFreeSpaceEx": {
+        "prototype": "BOOL GetDiskFreeSpaceExW(\n  [in, optional]  LPCWSTR         lpDirectoryName,\n  [out, optional] PULARGE_INTEGER lpFreeBytesAvailableToCaller,\n  [out, optional] PULARGE_INTEGER lpTotalNumberOfBytes,\n  [out, optional] PULARGE_INTEGER lpTotalNumberOfFreeBytes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the amount of space that is available on a disk volume, which is the total amount of space, the total amount of free space, and the total amount of free space available to the user that is associated with the calling thread."
     },
     "GetDisplayAutoRotationPreferences": {
         "prototype": "BOOL GetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE *pOrientation\n);",

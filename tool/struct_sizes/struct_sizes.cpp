@@ -54,6 +54,7 @@ void main()
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
     // Automatically generated structs
+    printf("  'CREATEFILE2_EXTENDED_PARAMETERS': %zu,\n", sizeof(CREATEFILE2_EXTENDED_PARAMETERS));
     printf("  'POINTER_PEN_INFO': %zu,\n", sizeof(POINTER_PEN_INFO));
     printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
     printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));

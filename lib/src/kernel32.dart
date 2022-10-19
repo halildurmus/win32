@@ -81,6 +81,19 @@ int AllocConsole() => _AllocConsole();
 final _AllocConsole =
     _kernel32.lookupFunction<Int32 Function(), int Function()>('AllocConsole');
 
+/// Determines whether the file I/O functions are using the ANSI or OEM
+/// character set code page. This function is useful for 8-bit console input
+/// and output operations.
+///
+/// ```c
+/// BOOL AreFileApisANSI();
+/// ```
+/// {@category kernel32}
+int AreFileApisANSI() => _AreFileApisANSI();
+
+final _AreFileApisANSI = _kernel32
+    .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
+
 /// Attaches the calling process to the console of the specified process.
 ///
 /// ```c
@@ -573,6 +586,47 @@ final _CreateFile = _kernel32.lookupFunction<
         int dwFlagsAndAttributes,
         int hTemplateFile)>('CreateFileW');
 
+/// Creates or opens a file or I/O device. The most commonly used I/O
+/// devices are as follows: file, file stream, directory, physical disk,
+/// volume, console buffer, tape drive, communications resource, mailslot,
+/// and pipe. The function returns a handle that can be used to access the
+/// file or device for various types of I/O depending on the file or device
+/// and the flags and attributes specified.
+///
+/// ```c
+/// HANDLE CreateFile2(
+///   [in]           LPCWSTR                           lpFileName,
+///   [in]           DWORD                             dwDesiredAccess,
+///   [in]           DWORD                             dwShareMode,
+///   [in]           DWORD                             dwCreationDisposition,
+///   [in, optional] LPCREATEFILE2_EXTENDED_PARAMETERS pCreateExParams
+/// );
+/// ```
+/// {@category kernel32}
+int CreateFile2(
+        Pointer<Utf16> lpFileName,
+        int dwDesiredAccess,
+        int dwShareMode,
+        int dwCreationDisposition,
+        Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams) =>
+    _CreateFile2(lpFileName, dwDesiredAccess, dwShareMode,
+        dwCreationDisposition, pCreateExParams);
+
+final _CreateFile2 = _kernel32.lookupFunction<
+        IntPtr Function(
+            Pointer<Utf16> lpFileName,
+            Uint32 dwDesiredAccess,
+            Uint32 dwShareMode,
+            Uint32 dwCreationDisposition,
+            Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams),
+        int Function(
+            Pointer<Utf16> lpFileName,
+            int dwDesiredAccess,
+            int dwShareMode,
+            int dwCreationDisposition,
+            Pointer<CREATEFILE2_EXTENDED_PARAMETERS> pCreateExParams)>(
+    'CreateFile2');
+
 /// Creates an input/output (I/O) completion port and associates it with a
 /// specified file handle, or creates an I/O completion port that is not yet
 /// associated with a file handle, allowing association at a later time.
@@ -961,6 +1015,26 @@ final _DebugSetProcessKillOnExit = _kernel32.lookupFunction<
     Int32 Function(Int32 KillOnExit),
     int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
 
+/// Defines, redefines, or deletes MS-DOS device names.
+///
+/// ```c
+/// BOOL DefineDosDeviceW(
+///   [in]           DWORD   dwFlags,
+///   [in]           LPCWSTR lpDeviceName,
+///   [in, optional] LPCWSTR lpTargetPath
+/// );
+/// ```
+/// {@category kernel32}
+int DefineDosDevice(int dwFlags, Pointer<Utf16> lpDeviceName,
+        Pointer<Utf16> lpTargetPath) =>
+    _DefineDosDevice(dwFlags, lpDeviceName, lpTargetPath);
+
+final _DefineDosDevice = _kernel32.lookupFunction<
+    Int32 Function(Uint32 dwFlags, Pointer<Utf16> lpDeviceName,
+        Pointer<Utf16> lpTargetPath),
+    int Function(int dwFlags, Pointer<Utf16> lpDeviceName,
+        Pointer<Utf16> lpTargetPath)>('DefineDosDeviceW');
+
 /// Deletes an existing file.
 ///
 /// ```c
@@ -974,6 +1048,22 @@ int DeleteFile(Pointer<Utf16> lpFileName) => _DeleteFile(lpFileName);
 final _DeleteFile = _kernel32.lookupFunction<
     Int32 Function(Pointer<Utf16> lpFileName),
     int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
+
+/// Deletes a drive letter or mounted folder.
+///
+/// ```c
+/// BOOL DeleteVolumeMountPointW(
+///   [in] LPCWSTR lpszVolumeMountPoint
+/// );
+/// ```
+/// {@category kernel32}
+int DeleteVolumeMountPoint(Pointer<Utf16> lpszVolumeMountPoint) =>
+    _DeleteVolumeMountPoint(lpszVolumeMountPoint);
+
+final _DeleteVolumeMountPoint = _kernel32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszVolumeMountPoint),
+    int Function(
+        Pointer<Utf16> lpszVolumeMountPoint)>('DeleteVolumeMountPointW');
 
 /// Sends a control code directly to a specified device driver, causing the
 /// corresponding device to perform the corresponding operation.
@@ -1493,6 +1583,94 @@ final _FindFirstFile = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpFileName,
         Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW');
 
+/// Searches a directory for a file or subdirectory with a name and
+/// attributes that match those specified.
+///
+/// ```c
+/// HANDLE FindFirstFileExW(
+///   [in]  LPCWSTR            lpFileName,
+///   [in]  FINDEX_INFO_LEVELS fInfoLevelId,
+///   [out] LPVOID             lpFindFileData,
+///   [in]  FINDEX_SEARCH_OPS  fSearchOp,
+///         LPVOID             lpSearchFilter,
+///   [in]  DWORD              dwAdditionalFlags
+/// );
+/// ```
+/// {@category kernel32}
+int FindFirstFileEx(
+        Pointer<Utf16> lpFileName,
+        int fInfoLevelId,
+        Pointer lpFindFileData,
+        int fSearchOp,
+        Pointer lpSearchFilter,
+        int dwAdditionalFlags) =>
+    _FindFirstFileEx(lpFileName, fInfoLevelId, lpFindFileData, fSearchOp,
+        lpSearchFilter, dwAdditionalFlags);
+
+final _FindFirstFileEx = _kernel32.lookupFunction<
+    IntPtr Function(
+        Pointer<Utf16> lpFileName,
+        Int32 fInfoLevelId,
+        Pointer lpFindFileData,
+        Int32 fSearchOp,
+        Pointer lpSearchFilter,
+        Uint32 dwAdditionalFlags),
+    int Function(
+        Pointer<Utf16> lpFileName,
+        int fInfoLevelId,
+        Pointer lpFindFileData,
+        int fSearchOp,
+        Pointer lpSearchFilter,
+        int dwAdditionalFlags)>('FindFirstFileExW');
+
+/// Creates an enumeration of all the hard links to the specified file. The
+/// FindFirstFileNameW function returns a handle to the enumeration that can
+/// be used on subsequent calls to the FindNextFileNameW function.
+///
+/// ```c
+/// HANDLE FindFirstFileNameW(
+///   [in]      LPCWSTR lpFileName,
+///   [in]      DWORD   dwFlags,
+///   [in, out] LPDWORD StringLength,
+///   [in, out] PWSTR   LinkName
+/// );
+/// ```
+/// {@category kernel32}
+int FindFirstFileName(Pointer<Utf16> lpFileName, int dwFlags,
+        Pointer<Uint32> StringLength, Pointer<Utf16> LinkName) =>
+    _FindFirstFileName(lpFileName, dwFlags, StringLength, LinkName);
+
+final _FindFirstFileName = _kernel32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> lpFileName, Uint32 dwFlags,
+        Pointer<Uint32> StringLength, Pointer<Utf16> LinkName),
+    int Function(
+        Pointer<Utf16> lpFileName,
+        int dwFlags,
+        Pointer<Uint32> StringLength,
+        Pointer<Utf16> LinkName)>('FindFirstFileNameW');
+
+/// Enumerates the first stream with a ::$DATA stream type in the specified
+/// file or directory.
+///
+/// ```c
+/// HANDLE FindFirstStreamW(
+///   [in]  LPCWSTR            lpFileName,
+///   [in]  STREAM_INFO_LEVELS InfoLevel,
+///   [out] LPVOID             lpFindStreamData,
+///         DWORD              dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int FindFirstStream(Pointer<Utf16> lpFileName, int InfoLevel,
+        Pointer lpFindStreamData, int dwFlags) =>
+    _FindFirstStream(lpFileName, InfoLevel, lpFindStreamData, dwFlags);
+
+final _FindFirstStream = _kernel32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> lpFileName, Int32 InfoLevel,
+        Pointer lpFindStreamData, Uint32 dwFlags),
+    int Function(Pointer<Utf16> lpFileName, int InfoLevel,
+        Pointer lpFindStreamData, int dwFlags)>('FindFirstStreamW');
+
 /// Retrieves the name of a volume on a computer. FindFirstVolume is used to
 /// begin scanning the volumes of a computer.
 ///
@@ -1544,6 +1722,44 @@ final _FindNextFile = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData),
     int Function(int hFindFile,
         Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
+
+/// Continues enumerating the hard links to a file using the handle returned
+/// by a successful call to the FindFirstFileNameW function.
+///
+/// ```c
+/// BOOL FindNextFileNameW(
+///   [in]      HANDLE  hFindStream,
+///   [in, out] LPDWORD StringLength,
+///   [in, out] PWSTR   LinkName
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextFileName(int hFindStream, Pointer<Uint32> StringLength,
+        Pointer<Utf16> LinkName) =>
+    _FindNextFileName(hFindStream, StringLength, LinkName);
+
+final _FindNextFileName = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hFindStream, Pointer<Uint32> StringLength,
+        Pointer<Utf16> LinkName),
+    int Function(int hFindStream, Pointer<Uint32> StringLength,
+        Pointer<Utf16> LinkName)>('FindNextFileNameW');
+
+/// Continues a stream search started by a previous call to the
+/// FindFirstStreamW function.
+///
+/// ```c
+/// BOOL FindNextStreamW(
+///   [in]  HANDLE hFindStream,
+///   [out] LPVOID lpFindStreamData
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextStream(int hFindStream, Pointer lpFindStreamData) =>
+    _FindNextStream(hFindStream, lpFindStreamData);
+
+final _FindNextStream = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hFindStream, Pointer lpFindStreamData),
+    int Function(int hFindStream, Pointer lpFindStreamData)>('FindNextStreamW');
 
 /// Continues a volume search started by a call to the FindFirstVolume
 /// function. FindNextVolume finds one volume per call.
@@ -2304,6 +2520,40 @@ final _GetDiskFreeSpace = _kernel32.lookupFunction<
         Pointer<Uint32> lpBytesPerSector,
         Pointer<Uint32> lpNumberOfFreeClusters,
         Pointer<Uint32> lpTotalNumberOfClusters)>('GetDiskFreeSpaceW');
+
+/// Retrieves information about the amount of space that is available on a
+/// disk volume, which is the total amount of space, the total amount of
+/// free space, and the total amount of free space available to the user
+/// that is associated with the calling thread.
+///
+/// ```c
+/// BOOL GetDiskFreeSpaceExW(
+///   [in, optional]  LPCWSTR         lpDirectoryName,
+///   [out, optional] PULARGE_INTEGER lpFreeBytesAvailableToCaller,
+///   [out, optional] PULARGE_INTEGER lpTotalNumberOfBytes,
+///   [out, optional] PULARGE_INTEGER lpTotalNumberOfFreeBytes
+/// );
+/// ```
+/// {@category kernel32}
+int GetDiskFreeSpaceEx(
+        Pointer<Utf16> lpDirectoryName,
+        Pointer<Uint64> lpFreeBytesAvailableToCaller,
+        Pointer<Uint64> lpTotalNumberOfBytes,
+        Pointer<Uint64> lpTotalNumberOfFreeBytes) =>
+    _GetDiskFreeSpaceEx(lpDirectoryName, lpFreeBytesAvailableToCaller,
+        lpTotalNumberOfBytes, lpTotalNumberOfFreeBytes);
+
+final _GetDiskFreeSpaceEx = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<Utf16> lpDirectoryName,
+        Pointer<Uint64> lpFreeBytesAvailableToCaller,
+        Pointer<Uint64> lpTotalNumberOfBytes,
+        Pointer<Uint64> lpTotalNumberOfFreeBytes),
+    int Function(
+        Pointer<Utf16> lpDirectoryName,
+        Pointer<Uint64> lpFreeBytesAvailableToCaller,
+        Pointer<Uint64> lpTotalNumberOfBytes,
+        Pointer<Uint64> lpTotalNumberOfFreeBytes)>('GetDiskFreeSpaceExW');
 
 /// Retrieves the application-specific portion of the search path used to
 /// locate DLLs for the application.
