@@ -2450,6 +2450,16 @@ class FILETIME extends Struct {
   external int dwHighDateTime;
 }
 
+/// Union that contains a 64-bit value that points to a page of data.
+///
+/// {@category Struct}
+class FILE_SEGMENT_ELEMENT extends Union {
+  external Pointer Buffer;
+
+  @Uint64()
+  external int Alignment;
+}
+
 /// Contains information that the FindText and ReplaceText functions use to
 /// initialize the Find and Replace dialog boxes. The FINDMSGSTRING
 /// registered message uses this structure to pass the user's search or

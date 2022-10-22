@@ -26,6 +26,8 @@ const callbackTypeMapping = win32Version == 2
         'SUBCLASSPROC': 'Pointer<NativeFunction<SubclassProc>>',
         'DTT_CALLBACK_PROC': 'Pointer<NativeFunction<DrawTextCallback>>',
         'PHANDLER_ROUTINE': 'Pointer<NativeFunction<HandlerRoutine>>',
+        'LPOVERLAPPED_COMPLETION_ROUTINE':
+            'Pointer<NativeFunction<LpoverlappedCompletionRoutine>>',
         'LPOCNCHKPROC': 'Pointer<NativeFunction<OpenCardCheckProc>>',
         'LPOCNCONNPROCW': 'Pointer<NativeFunction<OpenCardConnProc>>',
         'LPOCNDSCPROC': 'Pointer<NativeFunction<OpenCardDisconnProc>>',

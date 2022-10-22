@@ -2882,6 +2882,26 @@ final _GetLogicalDriveStrings = _kernel32.lookupFunction<
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
 
+/// Converts the specified path to its long form.
+///
+/// ```c
+/// DWORD GetLongPathNameW(
+///   [in]  LPCWSTR lpszShortPath,
+///   [out] LPWSTR  lpszLongPath,
+///   [in]  DWORD   cchBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetLongPathName(Pointer<Utf16> lpszShortPath, Pointer<Utf16> lpszLongPath,
+        int cchBuffer) =>
+    _GetLongPathName(lpszShortPath, lpszLongPath, cchBuffer);
+
+final _GetLongPathName = _kernel32.lookupFunction<
+    Uint32 Function(Pointer<Utf16> lpszShortPath, Pointer<Utf16> lpszLongPath,
+        Uint32 cchBuffer),
+    int Function(Pointer<Utf16> lpszShortPath, Pointer<Utf16> lpszLongPath,
+        int cchBuffer)>('GetLongPathNameW');
+
 /// Queries if the specified architecture is supported on the current
 /// system, either natively or by any form of compatibility or emulation
 /// layer.
@@ -3558,6 +3578,26 @@ final _GetQueuedCompletionStatusEx = _kernel32.lookupFunction<
         int dwMilliseconds,
         int fAlertable)>('GetQueuedCompletionStatusEx');
 
+/// Retrieves the short path form of the specified path.
+///
+/// ```c
+/// DWORD GetShortPathNameW(
+///   [in]  LPCWSTR lpszLongPath,
+///   [out] LPWSTR  lpszShortPath,
+///   [in]  DWORD   cchBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetShortPathName(Pointer<Utf16> lpszLongPath, Pointer<Utf16> lpszShortPath,
+        int cchBuffer) =>
+    _GetShortPathName(lpszLongPath, lpszShortPath, cchBuffer);
+
+final _GetShortPathName = _kernel32.lookupFunction<
+    Uint32 Function(Pointer<Utf16> lpszLongPath, Pointer<Utf16> lpszShortPath,
+        Uint32 cchBuffer),
+    int Function(Pointer<Utf16> lpszLongPath, Pointer<Utf16> lpszShortPath,
+        int cchBuffer)>('GetShortPathNameW');
+
 /// Retrieves the contents of the STARTUPINFO structure that was specified
 /// when the calling process was created.
 ///
@@ -3709,6 +3749,29 @@ final _GetSystemTimes = _kernel32.lookupFunction<
     int Function(Pointer<FILETIME> lpIdleTime, Pointer<FILETIME> lpKernelTime,
         Pointer<FILETIME> lpUserTime)>('GetSystemTimes');
 
+/// Creates a name for a temporary file. If a unique file name is generated,
+/// an empty file is created and the handle to it is released; otherwise,
+/// only a file name is generated.
+///
+/// ```c
+/// UINT GetTempFileNameW(
+///   [in]  LPCWSTR lpPathName,
+///   [in]  LPCWSTR lpPrefixString,
+///   [in]  UINT    uUnique,
+///   [out] LPWSTR  lpTempFileName
+/// );
+/// ```
+/// {@category kernel32}
+int GetTempFileName(Pointer<Utf16> lpPathName, Pointer<Utf16> lpPrefixString,
+        int uUnique, Pointer<Utf16> lpTempFileName) =>
+    _GetTempFileName(lpPathName, lpPrefixString, uUnique, lpTempFileName);
+
+final _GetTempFileName = _kernel32.lookupFunction<
+    Uint32 Function(Pointer<Utf16> lpPathName, Pointer<Utf16> lpPrefixString,
+        Uint32 uUnique, Pointer<Utf16> lpTempFileName),
+    int Function(Pointer<Utf16> lpPathName, Pointer<Utf16> lpPrefixString,
+        int uUnique, Pointer<Utf16> lpTempFileName)>('GetTempFileNameW');
+
 /// Retrieves the path of the directory designated for temporary files.
 ///
 /// ```c
@@ -3724,6 +3787,23 @@ int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) =>
 final _GetTempPath = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
+
+/// Retrieves the path of the directory designated for temporary files,
+/// based on the privileges of the calling process.
+///
+/// ```c
+/// DWORD GetTempPath2W(
+///   [in]  DWORD  BufferLength,
+///   [out] LPWSTR Buffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetTempPath2(int BufferLength, Pointer<Utf16> Buffer) =>
+    _GetTempPath2(BufferLength, Buffer);
+
+final _GetTempPath2 = _kernel32.lookupFunction<
+    Uint32 Function(Uint32 BufferLength, Pointer<Utf16> Buffer),
+    int Function(int BufferLength, Pointer<Utf16> Buffer)>('GetTempPath2W');
 
 /// Retrieves the thread identifier of the specified thread.
 ///
@@ -3961,6 +4041,31 @@ final _GetVolumeInformationByHandle = _kernel32.lookupFunction<
         Pointer<Uint32> lpFileSystemFlags,
         Pointer<Utf16> lpFileSystemNameBuffer,
         int nFileSystemNameSize)>('GetVolumeInformationByHandleW');
+
+/// Retrieves a volume GUID path for the volume that is associated with the
+/// specified volume mount point (drive letter, volume GUID path, or mounted
+/// folder).
+///
+/// ```c
+/// BOOL GetVolumeNameForVolumeMountPointW(
+///   [in]  LPCWSTR lpszVolumeMountPoint,
+///   [out] LPWSTR  lpszVolumeName,
+///   [in]  DWORD   cchBufferLength
+/// );
+/// ```
+/// {@category kernel32}
+int GetVolumeNameForVolumeMountPoint(Pointer<Utf16> lpszVolumeMountPoint,
+        Pointer<Utf16> lpszVolumeName, int cchBufferLength) =>
+    _GetVolumeNameForVolumeMountPoint(
+        lpszVolumeMountPoint, lpszVolumeName, cchBufferLength);
+
+final _GetVolumeNameForVolumeMountPoint = _kernel32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszVolumeMountPoint,
+        Pointer<Utf16> lpszVolumeName, Uint32 cchBufferLength),
+    int Function(
+        Pointer<Utf16> lpszVolumeMountPoint,
+        Pointer<Utf16> lpszVolumeName,
+        int cchBufferLength)>('GetVolumeNameForVolumeMountPointW');
 
 /// Retrieves the volume mount point where the specified path is mounted.
 ///
@@ -4500,6 +4605,74 @@ int LocalFree(int hMem) => _LocalFree(hMem);
 final _LocalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
     int Function(int hMem)>('LocalFree');
 
+/// Locks the specified file for exclusive access by the calling process.
+///
+/// ```c
+/// BOOL LockFile(
+///   [in] HANDLE hFile,
+///   [in] DWORD  dwFileOffsetLow,
+///   [in] DWORD  dwFileOffsetHigh,
+///   [in] DWORD  nNumberOfBytesToLockLow,
+///   [in] DWORD  nNumberOfBytesToLockHigh
+/// );
+/// ```
+/// {@category kernel32}
+int LockFile(int hFile, int dwFileOffsetLow, int dwFileOffsetHigh,
+        int nNumberOfBytesToLockLow, int nNumberOfBytesToLockHigh) =>
+    _LockFile(hFile, dwFileOffsetLow, dwFileOffsetHigh, nNumberOfBytesToLockLow,
+        nNumberOfBytesToLockHigh);
+
+final _LockFile = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Uint32 dwFileOffsetLow,
+        Uint32 dwFileOffsetHigh,
+        Uint32 nNumberOfBytesToLockLow,
+        Uint32 nNumberOfBytesToLockHigh),
+    int Function(int hFile, int dwFileOffsetLow, int dwFileOffsetHigh,
+        int nNumberOfBytesToLockLow, int nNumberOfBytesToLockHigh)>('LockFile');
+
+/// Locks the specified file for exclusive access by the calling process.
+/// This function can operate either synchronously or asynchronously and can
+/// request either an exclusive or a shared lock.
+///
+/// ```c
+/// BOOL LockFileEx(
+///   [in]      HANDLE       hFile,
+///   [in]      DWORD        dwFlags,
+///             DWORD        dwReserved,
+///   [in]      DWORD        nNumberOfBytesToLockLow,
+///   [in]      DWORD        nNumberOfBytesToLockHigh,
+///   [in, out] LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int LockFileEx(
+        int hFile,
+        int dwFlags,
+        int dwReserved,
+        int nNumberOfBytesToLockLow,
+        int nNumberOfBytesToLockHigh,
+        Pointer<OVERLAPPED> lpOverlapped) =>
+    _LockFileEx(hFile, dwFlags, dwReserved, nNumberOfBytesToLockLow,
+        nNumberOfBytesToLockHigh, lpOverlapped);
+
+final _LockFileEx = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Uint32 dwFlags,
+        Uint32 dwReserved,
+        Uint32 nNumberOfBytesToLockLow,
+        Uint32 nNumberOfBytesToLockHigh,
+        Pointer<OVERLAPPED> lpOverlapped),
+    int Function(
+        int hFile,
+        int dwFlags,
+        int dwReserved,
+        int nNumberOfBytesToLockLow,
+        int nNumberOfBytesToLockHigh,
+        Pointer<OVERLAPPED> lpOverlapped)>('LockFileEx');
+
 /// Retrieves a pointer to the specified resource in memory.
 ///
 /// ```c
@@ -4617,10 +4790,10 @@ final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI PeekConsoleInputW(
-///   HANDLE        hConsoleInput,
+///   HANDLE        hConsoleInput,
 ///   PINPUT_RECORD lpBuffer,
-///   DWORD         nLength,
-///   LPDWORD       lpNumberOfEventsRead
+///   DWORD         nLength,
+///   LPDWORD       lpNumberOfEventsRead
 /// );
 /// ```
 /// {@category kernel32}
@@ -4816,10 +4989,10 @@ final _ReadConsole = _kernel32.lookupFunction<
 ///
 /// ```c
 /// BOOL WINAPI ReadConsoleInputW(
-///   HANDLE        hConsoleInput,
+///   HANDLE        hConsoleInput,
 ///   PINPUT_RECORD lpBuffer,
-///   DWORD         nLength,
-///   LPDWORD       lpNumberOfEventsRead
+///   DWORD         nLength,
+///   LPDWORD       lpNumberOfEventsRead
 /// );
 /// ```
 /// {@category kernel32}
@@ -4865,6 +5038,85 @@ final _ReadFile = _kernel32.lookupFunction<
         int nNumberOfBytesToRead,
         Pointer<Uint32> lpNumberOfBytesRead,
         Pointer<OVERLAPPED> lpOverlapped)>('ReadFile');
+
+/// Reads data from the specified file or input/output (I/O) device. It
+/// reports its completion status asynchronously, calling the specified
+/// completion routine when reading is completed or canceled and the calling
+/// thread is in an alertable wait state.
+///
+/// ```c
+/// BOOL ReadFileEx(
+///   [in]            HANDLE                          hFile,
+///   [out, optional] LPVOID                          lpBuffer,
+///   [in]            DWORD                           nNumberOfBytesToRead,
+///   [in, out]       LPOVERLAPPED                    lpOverlapped,
+///   [in]            LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+/// );
+/// ```
+/// {@category kernel32}
+int ReadFileEx(
+        int hFile,
+        Pointer lpBuffer,
+        int nNumberOfBytesToRead,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine) =>
+    _ReadFileEx(hFile, lpBuffer, nNumberOfBytesToRead, lpOverlapped,
+        lpCompletionRoutine);
+
+final _ReadFileEx = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Pointer lpBuffer,
+        Uint32 nNumberOfBytesToRead,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine),
+    int Function(
+        int hFile,
+        Pointer lpBuffer,
+        int nNumberOfBytesToRead,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine)>('ReadFileEx');
+
+/// Reads data from a file and stores it in an array of buffers. The
+/// function starts reading data from the file at a position that is
+/// specified by an OVERLAPPED structure. The ReadFileScatter function
+/// operates asynchronously.
+///
+/// ```c
+/// BOOL ReadFileScatter(
+///   [in]      HANDLE                  hFile,
+///   [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,
+///   [in]      DWORD                   nNumberOfBytesToRead,
+///             LPDWORD                 lpReserved,
+///   [in, out] LPOVERLAPPED            lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int ReadFileScatter(
+        int hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        int nNumberOfBytesToRead,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped) =>
+    _ReadFileScatter(
+        hFile, aSegmentArray, nNumberOfBytesToRead, lpReserved, lpOverlapped);
+
+final _ReadFileScatter = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        Uint32 nNumberOfBytesToRead,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped),
+    int Function(
+        int hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        int nNumberOfBytesToRead,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped)>('ReadFileScatter');
 
 /// ReadProcessMemory copies the data in the specified address range from
 /// the address space of the specified process into the specified buffer of
@@ -5294,6 +5546,20 @@ final _SetDefaultDllDirectories = _kernel32.lookupFunction<
     Int32 Function(Uint32 DirectoryFlags),
     int Function(int DirectoryFlags)>('SetDefaultDllDirectories');
 
+/// Sets the physical file size for the specified file to the current
+/// position of the file pointer.
+///
+/// ```c
+/// BOOL SetEndOfFile(
+///   [in] HANDLE hFile
+/// );
+/// ```
+/// {@category kernel32}
+int SetEndOfFile(int hFile) => _SetEndOfFile(hFile);
+
+final _SetEndOfFile = _kernel32.lookupFunction<Int32 Function(IntPtr hFile),
+    int Function(int hFile)>('SetEndOfFile');
+
 /// Sets the contents of the specified environment variable for the current
 /// process.
 ///
@@ -5337,6 +5603,94 @@ int SetEvent(int hEvent) => _SetEvent(hEvent);
 
 final _SetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
     int Function(int hEvent)>('SetEvent');
+
+/// Causes the file I/O functions to use the ANSI character set code page
+/// for the current process.
+///
+/// ```c
+/// void SetFileApisToANSI();
+/// ```
+/// {@category kernel32}
+void SetFileApisToANSI() => _SetFileApisToANSI();
+
+final _SetFileApisToANSI = _kernel32
+    .lookupFunction<Void Function(), void Function()>('SetFileApisToANSI');
+
+/// Causes the file I/O functions for the process to use the OEM character
+/// set code page.
+///
+/// ```c
+/// void SetFileApisToOEM();
+/// ```
+/// {@category kernel32}
+void SetFileApisToOEM() => _SetFileApisToOEM();
+
+final _SetFileApisToOEM = _kernel32
+    .lookupFunction<Void Function(), void Function()>('SetFileApisToOEM');
+
+/// Sets the attributes for a file or directory.
+///
+/// ```c
+/// BOOL SetFileAttributesW(
+///   [in] LPCWSTR lpFileName,
+///   [in] DWORD   dwFileAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int SetFileAttributes(Pointer<Utf16> lpFileName, int dwFileAttributes) =>
+    _SetFileAttributes(lpFileName, dwFileAttributes);
+
+final _SetFileAttributes = _kernel32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwFileAttributes),
+    int Function(
+        Pointer<Utf16> lpFileName, int dwFileAttributes)>('SetFileAttributesW');
+
+/// Sets the file information for the specified file.
+///
+/// ```c
+/// BOOL SetFileInformationByHandle(
+///   [in] HANDLE                    hFile,
+///   [in] FILE_INFO_BY_HANDLE_CLASS FileInformationClass,
+///   [in] LPVOID                    lpFileInformation,
+///   [in] DWORD                     dwBufferSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetFileInformationByHandle(int hFile, int FileInformationClass,
+        Pointer lpFileInformation, int dwBufferSize) =>
+    _SetFileInformationByHandle(
+        hFile, FileInformationClass, lpFileInformation, dwBufferSize);
+
+final _SetFileInformationByHandle = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hFile, Int32 FileInformationClass,
+        Pointer lpFileInformation, Uint32 dwBufferSize),
+    int Function(int hFile, int FileInformationClass, Pointer lpFileInformation,
+        int dwBufferSize)>('SetFileInformationByHandle');
+
+/// Associates a virtual address range with the specified file handle. This
+/// indicates that the kernel should optimize any further asynchronous I/O
+/// requests with overlapped structures inside this range. The overlapped
+/// range is locked in memory, and then unlocked when the file is closed.
+/// After a range is associated with a file handle, it cannot be
+/// disassociated.
+///
+/// ```c
+/// BOOL SetFileIoOverlappedRange(
+///   [in] HANDLE FileHandle,
+///   [in] PUCHAR OverlappedRangeStart,
+///   [in] ULONG  Length
+/// );
+/// ```
+/// {@category kernel32}
+int SetFileIoOverlappedRange(
+        int FileHandle, Pointer<Uint8> OverlappedRangeStart, int Length) =>
+    _SetFileIoOverlappedRange(FileHandle, OverlappedRangeStart, Length);
+
+final _SetFileIoOverlappedRange = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr FileHandle, Pointer<Uint8> OverlappedRangeStart, Uint32 Length),
+    int Function(int FileHandle, Pointer<Uint8> OverlappedRangeStart,
+        int Length)>('SetFileIoOverlappedRange');
 
 /// Moves the file pointer of the specified file.
 ///
@@ -5398,6 +5752,23 @@ int SetFileShortName(int hFile, Pointer<Utf16> lpShortName) =>
 final _SetFileShortName = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
     int Function(int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
+
+/// Sets the valid data length of the specified file. This function is
+/// useful in very limited scenarios.
+///
+/// ```c
+/// BOOL SetFileValidData(
+///   [in] HANDLE   hFile,
+///   [in] LONGLONG ValidDataLength
+/// );
+/// ```
+/// {@category kernel32}
+int SetFileValidData(int hFile, int ValidDataLength) =>
+    _SetFileValidData(hFile, ValidDataLength);
+
+final _SetFileValidData = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hFile, Int64 ValidDataLength),
+    int Function(int hFile, int ValidDataLength)>('SetFileValidData');
 
 /// Sets the value of the specified firmware environment variable.
 ///
@@ -5827,6 +6198,70 @@ final _TransmitCommChar = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFile, Uint8 cChar),
     int Function(int hFile, int cChar)>('TransmitCommChar');
 
+/// Unlocks a region in an open file. Unlocking a region enables other
+/// processes to access the region.
+///
+/// ```c
+/// BOOL UnlockFile(
+///   [in] HANDLE hFile,
+///   [in] DWORD  dwFileOffsetLow,
+///   [in] DWORD  dwFileOffsetHigh,
+///   [in] DWORD  nNumberOfBytesToUnlockLow,
+///   [in] DWORD  nNumberOfBytesToUnlockHigh
+/// );
+/// ```
+/// {@category kernel32}
+int UnlockFile(int hFile, int dwFileOffsetLow, int dwFileOffsetHigh,
+        int nNumberOfBytesToUnlockLow, int nNumberOfBytesToUnlockHigh) =>
+    _UnlockFile(hFile, dwFileOffsetLow, dwFileOffsetHigh,
+        nNumberOfBytesToUnlockLow, nNumberOfBytesToUnlockHigh);
+
+final _UnlockFile = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Uint32 dwFileOffsetLow,
+        Uint32 dwFileOffsetHigh,
+        Uint32 nNumberOfBytesToUnlockLow,
+        Uint32 nNumberOfBytesToUnlockHigh),
+    int Function(
+        int hFile,
+        int dwFileOffsetLow,
+        int dwFileOffsetHigh,
+        int nNumberOfBytesToUnlockLow,
+        int nNumberOfBytesToUnlockHigh)>('UnlockFile');
+
+/// Unlocks a region in the specified file. This function can operate either
+/// synchronously or asynchronously.
+///
+/// ```c
+/// BOOL UnlockFileEx(
+///   [in]      HANDLE       hFile,
+///             DWORD        dwReserved,
+///   [in]      DWORD        nNumberOfBytesToUnlockLow,
+///   [in]      DWORD        nNumberOfBytesToUnlockHigh,
+///   [in, out] LPOVERLAPPED lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int UnlockFileEx(int hFile, int dwReserved, int nNumberOfBytesToUnlockLow,
+        int nNumberOfBytesToUnlockHigh, Pointer<OVERLAPPED> lpOverlapped) =>
+    _UnlockFileEx(hFile, dwReserved, nNumberOfBytesToUnlockLow,
+        nNumberOfBytesToUnlockHigh, lpOverlapped);
+
+final _UnlockFileEx = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Uint32 dwReserved,
+        Uint32 nNumberOfBytesToUnlockLow,
+        Uint32 nNumberOfBytesToUnlockHigh,
+        Pointer<OVERLAPPED> lpOverlapped),
+    int Function(
+        int hFile,
+        int dwReserved,
+        int nNumberOfBytesToUnlockLow,
+        int nNumberOfBytesToUnlockHigh,
+        Pointer<OVERLAPPED> lpOverlapped)>('UnlockFileEx');
+
 /// Updates the specified attribute in a list of attributes for process and
 /// thread creation.
 ///
@@ -6251,6 +6686,85 @@ final _WriteFile = _kernel32.lookupFunction<
         int nNumberOfBytesToWrite,
         Pointer<Uint32> lpNumberOfBytesWritten,
         Pointer<OVERLAPPED> lpOverlapped)>('WriteFile');
+
+/// Writes data to the specified file or input/output (I/O) device. It
+/// reports its completion status asynchronously, calling the specified
+/// completion routine when writing is completed or canceled and the calling
+/// thread is in an alertable wait state.
+///
+/// ```c
+/// BOOL WriteFileEx(
+///   [in]           HANDLE                          hFile,
+///   [in, optional] LPCVOID                         lpBuffer,
+///   [in]           DWORD                           nNumberOfBytesToWrite,
+///   [in, out]      LPOVERLAPPED                    lpOverlapped,
+///   [in]           LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+/// );
+/// ```
+/// {@category kernel32}
+int WriteFileEx(
+        int hFile,
+        Pointer lpBuffer,
+        int nNumberOfBytesToWrite,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine) =>
+    _WriteFileEx(hFile, lpBuffer, nNumberOfBytesToWrite, lpOverlapped,
+        lpCompletionRoutine);
+
+final _WriteFileEx = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Pointer lpBuffer,
+        Uint32 nNumberOfBytesToWrite,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine),
+    int Function(
+        int hFile,
+        Pointer lpBuffer,
+        int nNumberOfBytesToWrite,
+        Pointer<OVERLAPPED> lpOverlapped,
+        Pointer<NativeFunction<LpoverlappedCompletionRoutine>>
+            lpCompletionRoutine)>('WriteFileEx');
+
+/// Retrieves data from an array of buffers and writes the data to a file.
+/// The function starts writing data to the file at a position that is
+/// specified by an OVERLAPPED structure. The WriteFileGather function
+/// operates asynchronously.
+///
+/// ```c
+/// BOOL WriteFileGather(
+///   [in]      HANDLE                  hFile,
+///   [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,
+///   [in]      DWORD                   nNumberOfBytesToWrite,
+///             LPDWORD                 lpReserved,
+///   [in, out] LPOVERLAPPED            lpOverlapped
+/// );
+/// ```
+/// {@category kernel32}
+int WriteFileGather(
+        int hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        int nNumberOfBytesToWrite,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped) =>
+    _WriteFileGather(
+        hFile, aSegmentArray, nNumberOfBytesToWrite, lpReserved, lpOverlapped);
+
+final _WriteFileGather = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        Uint32 nNumberOfBytesToWrite,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped),
+    int Function(
+        int hFile,
+        Pointer<FILE_SEGMENT_ELEMENT> aSegmentArray,
+        int nNumberOfBytesToWrite,
+        Pointer<Uint32> lpReserved,
+        Pointer<OVERLAPPED> lpOverlapped)>('WriteFileGather');
 
 /// Writes data to an area of memory in a specified process. The entire area
 /// to be written to must be accessible or the operation fails.

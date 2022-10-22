@@ -2467,6 +2467,11 @@
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
     },
+    "GetLongPathName": {
+        "prototype": "DWORD GetLongPathNameW(\n  [in]  LPCWSTR lpszShortPath,\n  [out] LPWSTR  lpszLongPath,\n  [in]  DWORD   cchBuffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts the specified path to its long form."
+    },
     "GetMachineTypeAttributes": {
         "prototype": "HRESULT GetMachineTypeAttributes(\n  USHORT Machine,\n  MACHINE_ATTRIBUTES *MachineTypeAttributes\n);",
         "dllLibrary": "kernel32",
@@ -3013,6 +3018,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the Shell's desktop window."
     },
+    "GetShortPathName": {
+        "prototype": "DWORD GetShortPathNameW(\n  [in]  LPCWSTR lpszLongPath,\n  [out] LPWSTR  lpszShortPath,\n  [in]  DWORD   cchBuffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the short path form of the specified path."
+    },
     "getsockname": {
         "prototype": "int getsockname(\n  SOCKET   s,\n  sockaddr *name,\n  int      *namelen\n);",
         "dllLibrary": "ws2_32",
@@ -3124,10 +3134,20 @@
         "dllLibrary": "user32",
         "comment": "The GetTabbedTextExtent function computes the width and height of a character string. If the string contains one or more tab characters, the width of the string is based upon the specified tab stops. The GetTabbedTextExtent function uses the currently selected font to compute the dimensions of the string."
     },
+    "GetTempFileName": {
+        "prototype": "UINT GetTempFileNameW(\n  [in]  LPCWSTR lpPathName,\n  [in]  LPCWSTR lpPrefixString,\n  [in]  UINT    uUnique,\n  [out] LPWSTR  lpTempFileName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a name for a temporary file. If a unique file name is generated, an empty file is created and the handle to it is released; otherwise, only a file name is generated."
+    },
     "GetTempPath": {
         "prototype": "DWORD GetTempPathW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the path of the directory designated for temporary files."
+    },
+    "GetTempPath2": {
+        "prototype": "DWORD GetTempPath2W(\n  [in]  DWORD  BufferLength,\n  [out] LPWSTR Buffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the path of the directory designated for temporary files, based on the privileges of the calling process."
     },
     "GetTextMetrics": {
         "prototype": "BOOL GetTextMetricsW(\n  HDC          hdc,\n  LPTEXTMETRICW lptm\n);",
@@ -3286,6 +3306,11 @@
         "prototype": "BOOL GetVolumeInformationByHandleW(\n  HANDLE  hFile,\n  LPWSTR  lpVolumeNameBuffer,\n  DWORD   nVolumeNameSize,\n  LPDWORD lpVolumeSerialNumber,\n  LPDWORD lpMaximumComponentLength,\n  LPDWORD lpFileSystemFlags,\n  LPWSTR  lpFileSystemNameBuffer,\n  DWORD   nFileSystemNameSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the file system and volume associated with the specified file."
+    },
+    "GetVolumeNameForVolumeMountPoint": {
+        "prototype": "BOOL GetVolumeNameForVolumeMountPointW(\n  [in]  LPCWSTR lpszVolumeMountPoint,\n  [out] LPWSTR  lpszVolumeName,\n  [in]  DWORD   cchBufferLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a volume GUID path for the volume that is associated with the specified volume mount point (drive letter, volume GUID path, or mounted folder)."
     },
     "GetVolumePathName": {
         "prototype": "BOOL GetVolumePathNameW(\n  LPCWSTR lpszFileName,\n  LPWSTR  lpszVolumePathName,\n  DWORD   cchBufferLength);",
@@ -3848,6 +3873,16 @@
         "dllLibrary": "kernel32",
         "comment": "Frees the specified local memory object and invalidates its handle."
     },
+    "LockFile": {
+        "prototype": "BOOL LockFile(\n  [in] HANDLE hFile,\n  [in] DWORD  dwFileOffsetLow,\n  [in] DWORD  dwFileOffsetHigh,\n  [in] DWORD  nNumberOfBytesToLockLow,\n  [in] DWORD  nNumberOfBytesToLockHigh\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locks the specified file for exclusive access by the calling process."
+    },
+    "LockFileEx": {
+        "prototype": "BOOL LockFileEx(\n  [in]      HANDLE       hFile,\n  [in]      DWORD        dwFlags,\n            DWORD        dwReserved,\n  [in]      DWORD        nNumberOfBytesToLockLow,\n  [in]      DWORD        nNumberOfBytesToLockHigh,\n  [in, out] LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locks the specified file for exclusive access by the calling process. This function can operate either synchronously or asynchronously and can request either an exclusive or a shared lock."
+    },
     "LockResource": {
         "prototype": "LPVOID LockResource(\n  HGLOBAL hResData\n);",
         "dllLibrary": "kernel32",
@@ -4388,7 +4423,7 @@
         "comment": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops."
     },
     "PeekConsoleInput": {
-        "prototype": "BOOL WINAPI PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "prototype": "BOOL WINAPI PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from the specified console input buffer without removing it from the buffer."
     },
@@ -4534,7 +4569,7 @@
         "comment": "Reads character input from the console input buffer and removes it from the buffer."
     },
     "ReadConsoleInput": {
-        "prototype": "BOOL WINAPI ReadConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "prototype": "BOOL WINAPI ReadConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from a console input buffer and removes it from the buffer."
     },
@@ -4542,6 +4577,16 @@
         "prototype": "BOOL ReadFile(\n  HANDLE       hFile,\n  LPVOID       lpBuffer,\n  DWORD        nNumberOfBytesToRead,\n  LPDWORD      lpNumberOfBytesRead,\n  LPOVERLAPPED lpOverlapped\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from the specified file or input/output (I/O) device. Reads occur at the position specified by the file pointer if supported by the device."
+    },
+    "ReadFileEx": {
+        "prototype": "BOOL ReadFileEx(\n  [in]            HANDLE                          hFile,\n  [out, optional] LPVOID                          lpBuffer,\n  [in]            DWORD                           nNumberOfBytesToRead,\n  [in, out]       LPOVERLAPPED                    lpOverlapped,\n  [in]            LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads data from the specified file or input/output (I/O) device. It reports its completion status asynchronously, calling the specified completion routine when reading is completed or canceled and the calling thread is in an alertable wait state."
+    },
+    "ReadFileScatter": {
+        "prototype": "BOOL ReadFileScatter(\n  [in]      HANDLE                  hFile,\n  [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,\n  [in]      DWORD                   nNumberOfBytesToRead,\n            LPDWORD                 lpReserved,\n  [in, out] LPOVERLAPPED            lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads data from a file and stores it in an array of buffers. The function starts reading data from the file at a position that is specified by an OVERLAPPED structure. The ReadFileScatter function operates asynchronously."
     },
     "ReadPrinter": {
         "prototype": "BOOL ReadPrinter(\n  _In_  HANDLE  hPrinter,\n  _Out_ LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pNoBytesRead\n);",
@@ -5474,6 +5519,11 @@
         "dllLibrary": "user32",
         "comment": "Sets the double-click time for the mouse. A double-click is a series of two clicks of a mouse button, the second occurring within a specified time after the first. The double-click time is the maximum number of milliseconds that may occur between the first and second clicks of a double-click."
     },
+    "SetEndOfFile": {
+        "prototype": "BOOL SetEndOfFile(\n  [in] HANDLE hFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the physical file size for the specified file to the current position of the file pointer."
+    },
     "SetEnvironmentVariable": {
         "prototype": "BOOL SetEnvironmentVariableW(\n  LPCWSTR lpName,\n  LPCWSTR lpValue\n);",
         "dllLibrary": "kernel32",
@@ -5489,6 +5539,31 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the specified event object to the signaled state."
     },
+    "SetFileApisToANSI": {
+        "prototype": "void SetFileApisToANSI();",
+        "dllLibrary": "kernel32",
+        "comment": "Causes the file I/O functions to use the ANSI character set code page for the current process."
+    },
+    "SetFileApisToOEM": {
+        "prototype": "void SetFileApisToOEM();",
+        "dllLibrary": "kernel32",
+        "comment": "Causes the file I/O functions for the process to use the OEM character set code page."
+    },
+    "SetFileAttributes": {
+        "prototype": "BOOL SetFileAttributesW(\n  [in] LPCWSTR lpFileName,\n  [in] DWORD   dwFileAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the attributes for a file or directory."
+    },
+    "SetFileInformationByHandle": {
+        "prototype": "BOOL SetFileInformationByHandle(\n  [in] HANDLE                    hFile,\n  [in] FILE_INFO_BY_HANDLE_CLASS FileInformationClass,\n  [in] LPVOID                    lpFileInformation,\n  [in] DWORD                     dwBufferSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the file information for the specified file."
+    },
+    "SetFileIoOverlappedRange": {
+        "prototype": "BOOL SetFileIoOverlappedRange(\n  [in] HANDLE FileHandle,\n  [in] PUCHAR OverlappedRangeStart,\n  [in] ULONG  Length\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Associates a virtual address range with the specified file handle. This indicates that the kernel should optimize any further asynchronous I/O requests with overlapped structures inside this range. The overlapped range is locked in memory, and then unlocked when the file is closed. After a range is associated with a file handle, it cannot be disassociated."
+    },
     "SetFilePointer": {
         "prototype": "DWORD SetFilePointer(\n  HANDLE hFile,\n  LONG   lDistanceToMove,\n  PLONG  lpDistanceToMoveHigh,\n  DWORD  dwMoveMethod\n);",
         "dllLibrary": "kernel32",
@@ -5503,6 +5578,11 @@
         "prototype": "BOOL SetFileShortNameW(\n  HANDLE  hFile,\n  LPCWSTR lpShortName);",
         "dllLibrary": "kernel32",
         "comment": "Sets the short name for the specified file. The file must be on an NTFS file system volume."
+    },
+    "SetFileValidData": {
+        "prototype": "BOOL SetFileValidData(\n  [in] HANDLE   hFile,\n  [in] LONGLONG ValidDataLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the valid data length of the specified file. This function is useful in very limited scenarios."
     },
     "SetFirmwareEnvironmentVariable": {
         "prototype": "BOOL SetFirmwareEnvironmentVariableW(\n  LPCWSTR lpName,\n  LPCWSTR lpGuid,\n  PVOID   pValue,\n  DWORD   nSize\n);",
@@ -6343,6 +6423,16 @@
         "dllLibrary": "user32",
         "comment": "Unloads an input locale identifier (formerly called a keyboard layout)."
     },
+    "UnlockFile": {
+        "prototype": "BOOL UnlockFile(\n  [in] HANDLE hFile,\n  [in] DWORD  dwFileOffsetLow,\n  [in] DWORD  dwFileOffsetHigh,\n  [in] DWORD  nNumberOfBytesToUnlockLow,\n  [in] DWORD  nNumberOfBytesToUnlockHigh\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Unlocks a region in an open file. Unlocking a region enables other processes to access the region."
+    },
+    "UnlockFileEx": {
+        "prototype": "BOOL UnlockFileEx(\n  [in]      HANDLE       hFile,\n            DWORD        dwReserved,\n  [in]      DWORD        nNumberOfBytesToUnlockLow,\n  [in]      DWORD        nNumberOfBytesToUnlockHigh,\n  [in, out] LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Unlocks a region in the specified file. This function can operate either synchronously or asynchronously."
+    },
     "UnregisterClass": {
         "prototype": "BOOL UnregisterClassW(\n  LPCWSTR   lpClassName,\n  HINSTANCE hInstance\n);",
         "dllLibrary": "user32",
@@ -7036,6 +7126,16 @@
         "prototype": "BOOL WriteFile(\n  HANDLE       hFile,\n  LPCVOID      lpBuffer,\n  DWORD        nNumberOfBytesToWrite,\n  LPDWORD      lpNumberOfBytesWritten,\n  LPOVERLAPPED lpOverlapped\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to the specified file or input/output (I/O) device."
+    },
+    "WriteFileEx": {
+        "prototype": "BOOL WriteFileEx(\n  [in]           HANDLE                          hFile,\n  [in, optional] LPCVOID                         lpBuffer,\n  [in]           DWORD                           nNumberOfBytesToWrite,\n  [in, out]      LPOVERLAPPED                    lpOverlapped,\n  [in]           LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes data to the specified file or input/output (I/O) device. It reports its completion status asynchronously, calling the specified completion routine when writing is completed or canceled and the calling thread is in an alertable wait state."
+    },
+    "WriteFileGather": {
+        "prototype": "BOOL WriteFileGather(\n  [in]      HANDLE                  hFile,\n  [in]      FILE_SEGMENT_ELEMENT [] aSegmentArray,\n  [in]      DWORD                   nNumberOfBytesToWrite,\n            LPDWORD                 lpReserved,\n  [in, out] LPOVERLAPPED            lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves data from an array of buffers and writes the data to a file. The function starts writing data to the file at a position that is specified by an OVERLAPPED structure. The WriteFileGather function operates asynchronously."
     },
     "WritePrinter": {
         "prototype": "BOOL WritePrinter(\n  _In_  HANDLE  hPrinter,\n  _In_  LPVOID  pBuf,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcWritten\n);",
