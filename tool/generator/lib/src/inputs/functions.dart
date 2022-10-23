@@ -11,8 +11,8 @@ const dllLibraries = [
   'api-ms-win-wsl-api-l1-1-0',
 
   // DLLs
-  'advapi32', 'bthprops', 'bluetoothapis', 'comctl32', 'comdlg32', 'dbghelp',
-  'dwmapi', 'dxva2', 'gdi32', 'iphlpapi', 'kernel32', 'kernelbase',
+  'advapi32', 'bthprops', 'bluetoothapis', 'comctl32', 'comdlg32', 'crypt32',
+  'dbghelp', 'dwmapi', 'dxva2', 'gdi32', 'iphlpapi', 'kernel32', 'kernelbase',
   'magnification', 'ole32', 'oleaut32', 'powrprof', 'rometadata', 'scarddlg',
   'setupapi', 'shcore', 'shell32', 'shlwapi', 'spoolss', 'user32', 'uxtheme',
   'version', 'xinput1_4', 'winmm', 'winscard', 'winspool', 'wlanapi', 'ws2_32'

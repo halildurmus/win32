@@ -10082,6 +10082,84 @@ void main() {
     });
   });
 
+  group('Test crypt32 functions', () {
+    test('Can instantiate CryptProtectData', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptProtectData = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Utf16> szDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              Uint32 dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut),
+          int Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Utf16> szDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              int dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptProtectData');
+      expect(CryptProtectData, isA<Function>());
+    });
+    test('Can instantiate CryptProtectMemory', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptProtectMemory = crypt32.lookupFunction<
+          Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+          int Function(Pointer pDataIn, int cbDataIn,
+              int dwFlags)>('CryptProtectMemory');
+      expect(CryptProtectMemory, isA<Function>());
+    });
+    test('Can instantiate CryptUnprotectData', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUnprotectData = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Pointer<Utf16>> ppszDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              Uint32 dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut),
+          int Function(
+              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<Pointer<Utf16>> ppszDataDescr,
+              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer pvReserved,
+              Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
+              int dwFlags,
+              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptUnprotectData');
+      expect(CryptUnprotectData, isA<Function>());
+    });
+    test('Can instantiate CryptUnprotectMemory', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUnprotectMemory = crypt32.lookupFunction<
+          Int32 Function(Pointer pDataIn, Uint32 cbDataIn, Uint32 dwFlags),
+          int Function(Pointer pDataIn, int cbDataIn,
+              int dwFlags)>('CryptUnprotectMemory');
+      expect(CryptUnprotectMemory, isA<Function>());
+    });
+    test('Can instantiate CryptUpdateProtectedState', () {
+      final crypt32 = DynamicLibrary.open('crypt32.dll');
+      final CryptUpdateProtectedState = crypt32.lookupFunction<
+          Int32 Function(
+              Pointer pOldSid,
+              Pointer<Utf16> pwszOldPassword,
+              Uint32 dwFlags,
+              Pointer<Uint32> pdwSuccessCount,
+              Pointer<Uint32> pdwFailureCount),
+          int Function(
+              Pointer pOldSid,
+              Pointer<Utf16> pwszOldPassword,
+              int dwFlags,
+              Pointer<Uint32> pdwSuccessCount,
+              Pointer<Uint32> pdwFailureCount)>('CryptUpdateProtectedState');
+      expect(CryptUpdateProtectedState, isA<Function>());
+    });
+  });
+
   group('Test comctl32 functions', () {
     test('Can instantiate DefSubclassProc', () {
       final comctl32 = DynamicLibrary.open('comctl32.dll');
