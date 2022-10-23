@@ -3147,7 +3147,8 @@
     "GetTempPath2": {
         "prototype": "DWORD GetTempPath2W(\n  [in]  DWORD  BufferLength,\n  [out] LPWSTR Buffer\n);",
         "dllLibrary": "kernel32",
-        "comment": "Retrieves the path of the directory designated for temporary files, based on the privileges of the calling process."
+        "comment": "Retrieves the path of the directory designated for temporary files, based on the privileges of the calling process.",
+        "minimumWindowsVersion": "WIN2022"
     },
     "GetTextMetrics": {
         "prototype": "BOOL GetTextMetricsW(\n  HDC          hdc,\n  LPTEXTMETRICW lptm\n);",
