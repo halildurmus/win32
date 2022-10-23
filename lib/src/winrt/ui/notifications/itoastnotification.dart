@@ -94,7 +94,6 @@ class IToastNotification extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-
       return IReference<DateTime>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
