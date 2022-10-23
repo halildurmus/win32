@@ -2887,14 +2887,16 @@ void main() {
               int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
       expect(GetTempPath, isA<Function>());
     });
-    test('Can instantiate GetTempPath2', () {
-      final kernel32 = DynamicLibrary.open('kernel32.dll');
-      final GetTempPath2 = kernel32.lookupFunction<
-          Uint32 Function(Uint32 BufferLength, Pointer<Utf16> Buffer),
-          int Function(
-              int BufferLength, Pointer<Utf16> Buffer)>('GetTempPath2W');
-      expect(GetTempPath2, isA<Function>());
-    });
+    if (windowsBuildNumber >= 20348) {
+      test('Can instantiate GetTempPath2', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final GetTempPath2 = kernel32.lookupFunction<
+            Uint32 Function(Uint32 BufferLength, Pointer<Utf16> Buffer),
+            int Function(
+                int BufferLength, Pointer<Utf16> Buffer)>('GetTempPath2W');
+        expect(GetTempPath2, isA<Function>());
+      });
+    }
     test('Can instantiate GetThreadId', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetThreadId = kernel32.lookupFunction<
