@@ -81,7 +81,8 @@ class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
         try {
           $parametersPreamble
           ${ffiCall()}
-          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
+          return IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs).value;
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -102,8 +103,8 @@ class WinRTGetPropertyReturningReferenceProjection
 
         try {
           ${ffiCall()}
-
-          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
+          return IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs).value;
         } finally {
           free(retValuePtr);
         }

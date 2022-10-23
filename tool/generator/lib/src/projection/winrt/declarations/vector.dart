@@ -98,10 +98,11 @@ class WinRTMethodReturningVectorViewProjection extends WinRTMethodProjection
       List<$vectorTypeArg> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
-        ${ffiCall()}
 
         try {
-          return IVectorView<$vectorTypeArg>.fromRawPointer(retValuePtr$vectorConstructorArgs).toList();
+          ${ffiCall()}
+          return IVectorView<$vectorTypeArg>.fromRawPointer
+            (retValuePtr$vectorConstructorArgs).toList();
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -120,10 +121,10 @@ class WinRTGetPropertyReturningVectorViewProjection
       List<$vectorTypeArg> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall()}
-
         try {
-          return IVectorView<$vectorTypeArg>.fromRawPointer(retValuePtr$vectorConstructorArgs).toList();
+          ${ffiCall()}
+          return IVectorView<$vectorTypeArg>.fromRawPointer
+            (retValuePtr$vectorConstructorArgs).toList();
         } finally {
           free(retValuePtr);
         }

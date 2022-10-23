@@ -101,9 +101,9 @@ class WinRTMethodReturningMapViewProjection extends WinRTMethodProjection
       Map<$mapTypeArgs> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
-        ${ffiCall()}
 
         try {
+          ${ffiCall()}
           return IMapView<$mapTypeArgs>.fromRawPointer
             (retValuePtr$mapConstructorArgs).toMap();
         } finally {
