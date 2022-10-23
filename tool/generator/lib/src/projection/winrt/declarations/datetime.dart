@@ -59,7 +59,7 @@ class WinRTSetPropertyReturningDateTimeProjection
         final dateTimeOffset =
           value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
-        ${ffiCall('dateTimeOffset')}
+        ${ffiCall(params: 'dateTimeOffset')}
       }
 ''';
 }

@@ -112,7 +112,7 @@ class WinRTMethodProjection extends MethodProjection {
       .map((param) => (param as WinRTParameterProjection).postamble)
       .join('\n');
 
-  String ffiCall([String params = '']) => '''
+  String ffiCall({String params = '', bool freeRetValOnFailure = false}) => '''
     final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()

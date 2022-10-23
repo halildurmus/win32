@@ -77,11 +77,12 @@ class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
   String toString() => '''
       $referenceTypeArg? $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
-        $parametersPreamble
-        ${ffiCall()}
 
         try {
-          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
+          $parametersPreamble
+          ${ffiCall()}
+          return IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs).value;
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -100,10 +101,10 @@ class WinRTGetPropertyReturningReferenceProjection
       $referenceTypeArg? get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall()}
-
         try {
-          return IReference<$referenceTypeArg>.fromRawPointer(retValuePtr$referenceConstructorArgs).value;
+          ${ffiCall()}
+          return IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs).value;
         } finally {
           free(retValuePtr);
         }
@@ -121,7 +122,7 @@ class WinRTSetPropertyReturningReferenceProjection
       set $exposedMethodName($referenceTypeArgFromParameter? value) {
         final referencePtr = $boxValueMethodCall
 
-        ${ffiCall('referencePtr.ref')}
+        ${ffiCall(params: 'referencePtr.ref')}
 
         free(referencePtr);
       }

@@ -48,7 +48,7 @@ class WinRTSetPropertyReturningEnumProjection
   @override
   String toString() => '''
       set $exposedMethodName(${parameters.first.type.methodParamType} value) {
-        ${ffiCall('value.value')}
+        ${ffiCall(params: 'value.value')}
       }
   ''';
 }
