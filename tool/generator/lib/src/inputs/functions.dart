@@ -38,7 +38,10 @@ const windowsBuilds = <String, int>{
   'WIN10_20H2': 19042,
   'WIN10_21H1': 19043,
   'WIN10_21H2': 19044,
+  'WIN10_22H2': 19045,
+  'WIN2022': 20348, // Windows Server 2022 LTSC
   'WIN11_21H2': 22000,
+  'WIN11_22H2': 22621,
 };
 
 /// Converts to/from functions.json
