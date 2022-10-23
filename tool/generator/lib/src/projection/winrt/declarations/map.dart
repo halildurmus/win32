@@ -123,9 +123,13 @@ class WinRTGetPropertyReturningMapViewProjection
       Map<$mapTypeArgs> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall(freeRetValOnFailure: true)}
-        return IMapView<$mapTypeArgs>.fromRawPointer
-          (retValuePtr$mapConstructorArgs).toMap();
+        try {
+          ${ffiCall()}
+          return IMapView<$mapTypeArgs>.fromRawPointer
+            (retValuePtr$mapConstructorArgs).toMap();
+        } finally {
+          free(retValuePtr);
+        }
       }
   ''';
 }
