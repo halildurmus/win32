@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 
 import '../../combase.dart';
 import '../../guid.dart';
+import '../../utils.dart';
 import '../../winrt_helpers.dart';
 import '../devices/sensors/enums.g.dart';
 import '../devices/sensors/pedometerreading.dart';
@@ -20,15 +21,20 @@ class MapHelper {
     IKeyValuePair<K, V> Function(Pointer<COMObject>)? creator,
     int length = 1,
   }) {
-    final pArray = calloc<COMObject>(length);
-    getManyCallback(length, pArray);
-    final keyValuePairs = pArray.toList<IKeyValuePair<K, V>>(
-        creator ?? IKeyValuePair.fromRawPointer,
-        length: length);
-    final map = Map.fromEntries(
-        keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
+    final pKeyValuePairArray = calloc<COMObject>(length);
 
-    return Map.unmodifiable(map);
+    try {
+      getManyCallback(length, pKeyValuePairArray);
+      final keyValuePairs = pKeyValuePairArray.toList<IKeyValuePair<K, V>>(
+          creator ?? IKeyValuePair.fromRawPointer,
+          length: length);
+      final map = Map.fromEntries(
+          keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
+
+      return Map.unmodifiable(map);
+    } finally {
+      free(pKeyValuePairArray);
+    }
   }
 }
 
