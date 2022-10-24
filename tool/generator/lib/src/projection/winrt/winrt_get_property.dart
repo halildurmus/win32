@@ -23,15 +23,21 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
       : 'Pointer, Pointer<${returnType.nativeType}>';
 
   @override
-  String ffiCall([String params = '']) => '''
+  String ffiCall({String params = '', bool freeRetValOnFailure = false}) {
+    return [
+      '''
     final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
       .asFunction<$dartPrototype>()(ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-''';
+''',
+      if (freeRetValOnFailure)
+        'if (FAILED(hr)) { free(retValuePtr); throw WindowsException(hr); }'
+      else
+        'if (FAILED(hr)) throw WindowsException(hr);'
+    ].join('\n');
+  }
 
   @override
   String get shortForm => exposedMethodName;

@@ -1,4 +1,6 @@
 const structsToGenerate = <String, String>{
+  "Windows.Win32.Storage.FileSystem.CREATEFILE2_EXTENDED_PARAMETERS":
+      "Contains optional extended parameters for CreateFile2.",
   "Windows.Win32.UI.Input.Pointer.POINTER_PEN_INFO":
       "Defines basic pen information common to all pointer types.",
   "Windows.Win32.UI.Input.Pointer.POINTER_INFO":
@@ -11,6 +13,8 @@ const structsToGenerate = <String, String>{
       "Contains hardware input details that can be used to predict touch targets and help compensate for hardware latency when processing touch and gesture input that contains distance and velocity data.",
   "Windows.Win32.UI.WindowsAndMessaging.ACCEL":
       "Defines an accelerator key used in an accelerator table.",
+  "Windows.Win32.Storage.FileSystem.FILE_SEGMENT_ELEMENT":
+      "Union that contains a 64-bit value that points to a page of data.",
   "Windows.Win32.Security.ACL":
       "The ACL structure is the header of an access control list (ACL). A complete ACL consists of an ACL structure followed by an ordered list of zero or more access control entries (ACEs).",
   "Windows.Win32.System.ApplicationInstallationAndServicing.ACTCTXW":

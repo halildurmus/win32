@@ -79,6 +79,15 @@ typedef FRHookProc = UINT_PTR Function(HWND, UINT, WPARAM, LPARAM);
 /// new thread in the process to execute the function.
 typedef HandlerRoutine = BOOL Function(DWORD dwCtrlType);
 
+/// Application-defined callback function used with the ReadFileEx and
+/// WriteFileEx functions. It is called when the asynchronous input and output
+/// (I/O) operation is completed or canceled and the calling thread is in an
+/// alertable state (by using the SleepEx, MsgWaitForMultipleObjectsEx,
+/// WaitForSingleObjectEx, or WaitForMultipleObjectsEx function with the
+/// fAlertable parameter set to TRUE).
+typedef LpoverlappedCompletionRoutine = Void Function(DWORD dwErrorCode,
+    DWORD dwNumberOfBytesTransfered, OVERLAPPED lpOverlapped);
+
 /// Application-defined callback function implements a custom transform for
 /// image scaling.
 typedef MagImageScalingCallback = BOOL Function(
