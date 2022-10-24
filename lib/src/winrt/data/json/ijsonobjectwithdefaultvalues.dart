@@ -64,8 +64,10 @@ class IJsonObjectWithDefaultValues extends IInspectable
                     Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
         defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
 
     return JsonValue.fromRawPointer(retValuePtr);
@@ -91,8 +93,10 @@ class IJsonObjectWithDefaultValues extends IInspectable
                     Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
         defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
 
     return JsonObject.fromRawPointer(retValuePtr);
@@ -149,8 +153,10 @@ class IJsonObjectWithDefaultValues extends IInspectable
                     Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
         defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
 
     return JsonArray.fromRawPointer(retValuePtr);

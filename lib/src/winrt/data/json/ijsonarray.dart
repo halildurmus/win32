@@ -53,7 +53,10 @@ class IJsonArray extends IInspectable implements IJsonValue {
             .asFunction<int Function(Pointer, int index, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, index, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return JsonObject.fromRawPointer(retValuePtr);
   }
@@ -72,7 +75,10 @@ class IJsonArray extends IInspectable implements IJsonValue {
             .asFunction<int Function(Pointer, int index, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, index, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return JsonArray.fromRawPointer(retValuePtr);
   }

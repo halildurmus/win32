@@ -51,8 +51,10 @@ class IJsonArrayStatics extends IInspectable {
             .asFunction<int Function(Pointer, int input, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, inputHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(inputHstring);
     return JsonArray.fromRawPointer(retValuePtr);
   }

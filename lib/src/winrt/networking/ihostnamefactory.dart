@@ -52,8 +52,10 @@ class IHostNameFactory extends IInspectable {
                 int Function(Pointer, int hostName, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, hostNameHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(hostNameHstring);
     return HostName.fromRawPointer(retValuePtr);
   }

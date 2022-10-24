@@ -54,8 +54,10 @@ class IJsonObject extends IInspectable implements IJsonValue {
             .asFunction<int Function(Pointer, int name, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, nameHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -78,7 +80,6 @@ class IJsonObject extends IInspectable implements IJsonValue {
         value.ptr.cast<Pointer<COMObject>>().value);
 
     if (FAILED(hr)) throw WindowsException(hr);
-
     WindowsDeleteString(nameHstring);
   }
 
@@ -96,8 +97,10 @@ class IJsonObject extends IInspectable implements IJsonValue {
             .asFunction<int Function(Pointer, int name, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, nameHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
     return JsonObject.fromRawPointer(retValuePtr);
   }
@@ -116,8 +119,10 @@ class IJsonObject extends IInspectable implements IJsonValue {
             .asFunction<int Function(Pointer, int name, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, nameHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(nameHstring);
     return JsonArray.fromRawPointer(retValuePtr);
   }
