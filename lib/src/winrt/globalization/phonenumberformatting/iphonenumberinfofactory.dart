@@ -52,8 +52,10 @@ class IPhoneNumberInfoFactory extends IInspectable {
                 int Function(Pointer, int number, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, numberHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(numberHstring);
     return retValuePtr;
   }

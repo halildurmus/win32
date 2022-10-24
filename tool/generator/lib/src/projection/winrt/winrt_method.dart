@@ -112,15 +112,21 @@ class WinRTMethodProjection extends MethodProjection {
       .map((param) => (param as WinRTParameterProjection).postamble)
       .join('\n');
 
-  String ffiCall({String params = '', bool freeRetValOnFailure = false}) => '''
+  String ffiCall({String params = '', bool freeRetValOnFailure = false}) {
+    return [
+      '''
     final hr = ptr.ref.vtable
       .elementAt($vtableOffset)
       .cast<Pointer<NativeFunction<$nativePrototype>>>()
       .value
       .asFunction<$dartPrototype>()($identifiers);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-  ''';
+''',
+      if (freeRetValOnFailure)
+        'if (FAILED(hr)) { free(retValuePtr); throw WindowsException(hr); }'
+      else
+        'if (FAILED(hr)) throw WindowsException(hr);'
+    ].join('\n');
+  }
 
   /// Returns the method declaration for a method or property declaration class
   /// specified in [creator].

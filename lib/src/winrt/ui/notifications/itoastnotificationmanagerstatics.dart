@@ -53,7 +53,10 @@ class IToastNotificationManagerStatics extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -73,8 +76,10 @@ class IToastNotificationManagerStatics extends IInspectable {
                 int Function(Pointer, int applicationId, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, applicationIdHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(applicationIdHstring);
     return retValuePtr;
   }
@@ -93,7 +98,10 @@ class IToastNotificationManagerStatics extends IInspectable {
             .asFunction<int Function(Pointer, int type, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, type.value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
