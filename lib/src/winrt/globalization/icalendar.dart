@@ -51,7 +51,10 @@ class ICalendar extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return Calendar.fromRawPointer(retValuePtr);
   }
@@ -172,7 +175,6 @@ class ICalendar extends IInspectable {
             int Function(Pointer, int value)>()(ptr.ref.lpVtbl, valueHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
-
     WindowsDeleteString(valueHstring);
   }
 
@@ -211,7 +213,6 @@ class ICalendar extends IInspectable {
             int Function(Pointer, int value)>()(ptr.ref.lpVtbl, valueHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
-
     WindowsDeleteString(valueHstring);
   }
 

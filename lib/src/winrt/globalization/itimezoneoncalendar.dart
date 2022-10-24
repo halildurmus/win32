@@ -73,7 +73,6 @@ class ITimeZoneOnCalendar extends IInspectable {
                 Pointer, int timeZoneId)>()(ptr.ref.lpVtbl, timeZoneIdHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
-
     WindowsDeleteString(timeZoneIdHstring);
   }
 

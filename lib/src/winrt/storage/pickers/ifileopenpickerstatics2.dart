@@ -54,7 +54,10 @@ class IFileOpenPickerStatics2 extends IInspectable {
                     Pointer, Pointer<COMObject> user, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, user.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return FileOpenPicker.fromRawPointer(retValuePtr);
   }

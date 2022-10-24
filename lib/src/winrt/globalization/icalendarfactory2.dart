@@ -73,7 +73,10 @@ class ICalendarFactory2 extends IInspectable {
         timeZoneIdHstring,
         retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     WindowsDeleteString(calendarHstring);
     WindowsDeleteString(clockHstring);

@@ -54,7 +54,10 @@ class ICalendarFactory extends IInspectable {
                     Pointer<COMObject>)>()(ptr.ref.lpVtbl,
         languages.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return Calendar.fromRawPointer(retValuePtr);
   }
@@ -87,7 +90,10 @@ class ICalendarFactory extends IInspectable {
             clockHstring,
             retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     WindowsDeleteString(calendarHstring);
     WindowsDeleteString(clockHstring);

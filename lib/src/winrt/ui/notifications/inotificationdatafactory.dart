@@ -64,7 +64,10 @@ class INotificationDataFactory extends IInspectable {
             sequenceNumber,
             retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return NotificationData.fromRawPointer(retValuePtr);
   }
@@ -89,7 +92,10 @@ class INotificationDataFactory extends IInspectable {
                         Pointer<COMObject>)>()(ptr.ref.lpVtbl,
             initialValues.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return NotificationData.fromRawPointer(retValuePtr);
   }

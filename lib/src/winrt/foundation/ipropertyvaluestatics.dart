@@ -52,7 +52,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -71,7 +74,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -90,7 +96,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -109,7 +118,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -128,7 +140,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -147,7 +162,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -166,7 +184,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -185,7 +206,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -205,7 +229,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, double value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -225,7 +252,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, double value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -244,7 +274,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -264,7 +297,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, bool value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -283,8 +319,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(valueHstring);
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -305,7 +343,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer, Pointer<COMObject> value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -325,7 +366,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, GUID value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -345,7 +389,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueDateTime, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -364,7 +411,10 @@ class IPropertyValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueDuration, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -384,7 +434,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, Point value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -404,7 +457,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, Size value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -424,7 +480,10 @@ class IPropertyValueStatics extends IInspectable {
                 int Function(Pointer, Rect value, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -445,7 +504,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -466,7 +528,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -487,7 +552,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -508,7 +576,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -529,7 +600,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -550,7 +624,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -571,7 +648,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -592,7 +672,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -613,7 +696,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -634,7 +720,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -655,7 +744,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -676,7 +768,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -698,7 +793,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -719,7 +817,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -740,7 +841,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -761,7 +865,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -782,7 +889,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -803,7 +913,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
@@ -824,7 +937,10 @@ class IPropertyValueStatics extends IInspectable {
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, valueSize, value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr);
   }

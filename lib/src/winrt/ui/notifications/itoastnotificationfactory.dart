@@ -54,7 +54,10 @@ class IToastNotificationFactory extends IInspectable {
                     Pointer, Pointer<COMObject> content, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, content.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
