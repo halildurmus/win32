@@ -758,8 +758,7 @@ class IMap<K, V> extends IInspectable
   /// Creates an unmodifiable [Map] from the current [IMap] instance.
   Map<K, V> toMap() => size == 0
       ? Map.unmodifiable(<K, V>{})
-      : MapHelper.toMap<K, V>(first().getMany,
-          length: size, creator: _iterableCreator);
+      : MapHelper.toMap<K, V>(first(), length: size, creator: _iterableCreator);
 
   late final _iIterable = IIterable<IKeyValuePair<K, V>>.fromRawPointer(
       toInterface(iterableIidFromIids(iids)),
