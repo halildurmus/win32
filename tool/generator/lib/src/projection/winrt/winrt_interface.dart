@@ -90,6 +90,15 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final imports = {...interfaceImport, ...importsForClass()}
       ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
 
+    // The return types of methods in the IPropertyValueStatics are specified
+    // as 'object' in WinMD. However, these methods actually return the
+    // IPropertyValue interface (except for the CreateEmpty() and
+    // CreateInspectable() methods, which return Pointer<COMObject>). Therefore,
+    // the IProperyValue import is manually added here.
+    if (shortName == 'IPropertyValueStatics') {
+      imports.add('ipropertyvalue.dart');
+    }
+
     final containsIReferenceImport =
         imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
     if (containsIReferenceImport) {

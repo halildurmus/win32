@@ -44,7 +44,7 @@ void main() {
 
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
-  final userData = UserDataPaths.fromRawPointer(UserDataPaths.getDefault());
+  final userData = UserDataPaths.getDefault();
   final roamingAppData = userData.roamingAppData;
   print('RoamingAppData: $roamingAppData');
 

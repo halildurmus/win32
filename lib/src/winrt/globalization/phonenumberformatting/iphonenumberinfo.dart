@@ -201,7 +201,7 @@ class IPhoneNumberInfo extends IInspectable {
     }
   }
 
-  PhoneNumberMatchResult checkNumberMatch(Pointer<COMObject> otherNumber) {
+  PhoneNumberMatchResult checkNumberMatch(PhoneNumberInfo otherNumber) {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -219,7 +219,7 @@ class IPhoneNumberInfo extends IInspectable {
                   .asFunction<
                       int Function(Pointer, Pointer<COMObject> otherNumber,
                           Pointer<Int32>)>()(ptr.ref.lpVtbl,
-              otherNumber.cast<Pointer<COMObject>>().value, retValuePtr);
+              otherNumber.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

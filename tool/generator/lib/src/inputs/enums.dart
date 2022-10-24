@@ -25,6 +25,8 @@ final windowsRuntimeEnumsToGenerate = <String, String>{
   'Windows.Globalization.PhoneNumberFormatting.PredictedPhoneNumberKind':
       'The kinds of phone numbers returned by PhoneNumberInfo.PredictNumberKind.',
   'Windows.Networking.HostNameType': 'The type of a HostName object.',
+  'Windows.Networking.Connectivity.NetworkTypes':
+      'Defines the network connection types.',
   'Windows.Storage.FileAttributes':
       'Describes the attributes of a file or folder.',
   'Windows.Storage.NameCollisionOption':
@@ -37,6 +39,7 @@ final windowsRuntimeEnumsToGenerate = <String, String>{
       'Identifies the storage location that the file picker presents to the user.',
   'Windows.Storage.Pickers.PickerViewMode':
       'Indicates the view mode that the file picker is using to present items.',
+  'Windows.System.Power.BatteryStatus': 'Indicates the status of the battery.',
   'Windows.UI.Notifications.NotificationMirroring':
       'Specifies whether notification mirroring is allowed. Mirroring enables a notification to be displayed on multiple devices.',
   'Windows.UI.Notifications.ToastNotificationPriority':

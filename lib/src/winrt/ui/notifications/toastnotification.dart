@@ -137,10 +137,10 @@ class ToastNotification extends IInspectable
   late final _iToastNotification4 = IToastNotification4.from(this);
 
   @override
-  Pointer<COMObject> get data => _iToastNotification4.data;
+  NotificationData get data => _iToastNotification4.data;
 
   @override
-  set data(Pointer<COMObject> value) => _iToastNotification4.data = value;
+  set data(NotificationData value) => _iToastNotification4.data = value;
 
   @override
   ToastNotificationPriority get priority => _iToastNotification4.priority;

@@ -38,7 +38,7 @@ class ICalendarFactory2 extends IInspectable {
       ICalendarFactory2.fromRawPointer(
           interface.toInterface(IID_ICalendarFactory2));
 
-  Pointer<COMObject> createCalendarWithTimeZone(Pointer<COMObject> languages,
+  Calendar createCalendarWithTimeZone(IIterable<String> languages,
       String calendar, String clock, String timeZoneId) {
     final retValuePtr = calloc<COMObject>();
 
@@ -67,7 +67,7 @@ class ICalendarFactory2 extends IInspectable {
                     int timeZoneId,
                     Pointer<COMObject>)>()(
         ptr.ref.lpVtbl,
-        languages.cast<Pointer<COMObject>>().value,
+        languages.ptr.cast<Pointer<COMObject>>().value,
         calendarHstring,
         clockHstring,
         timeZoneIdHstring,
@@ -81,6 +81,6 @@ class ICalendarFactory2 extends IInspectable {
     WindowsDeleteString(calendarHstring);
     WindowsDeleteString(clockHstring);
     WindowsDeleteString(timeZoneIdHstring);
-    return retValuePtr;
+    return Calendar.fromRawPointer(retValuePtr);
   }
 }

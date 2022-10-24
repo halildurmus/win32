@@ -1,4 +1,4 @@
-// igamecontrollerbatteryinfo.dart
+// iipinformation.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,23 +21,24 @@ import '../../../winrt_helpers.dart';
 
 import '../../../winrt/internal/hstring_array.dart';
 
-import '../../../winrt/devices/power/batteryreport.dart';
+import '../../../winrt/networking/connectivity/networkadapter.dart';
+import '../../../winrt/foundation/ireference.dart';
+import '../../../winrt/internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGameControllerBatteryInfo = '{DCECC681-3963-4DA6-955D-553F3B6F6161}';
+const IID_IIPInformation = '{D85145E0-138F-47D7-9B3A-36BB488CEF33}';
 
 /// {@category Interface}
 /// {@category winrt}
-class IGameControllerBatteryInfo extends IInspectable {
-  // vtable begins at 6, is 1 entries long.
-  IGameControllerBatteryInfo.fromRawPointer(super.ptr);
+class IIPInformation extends IInspectable {
+  // vtable begins at 6, is 2 entries long.
+  IIPInformation.fromRawPointer(super.ptr);
 
-  factory IGameControllerBatteryInfo.from(IInspectable interface) =>
-      IGameControllerBatteryInfo.fromRawPointer(
-          interface.toInterface(IID_IGameControllerBatteryInfo));
+  factory IIPInformation.from(IInspectable interface) =>
+      IIPInformation.fromRawPointer(interface.toInterface(IID_IIPInformation));
 
-  BatteryReport tryGetBatteryReport() {
+  NetworkAdapter get networkAdapter {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -55,6 +56,27 @@ class IGameControllerBatteryInfo extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return BatteryReport.fromRawPointer(retValuePtr);
+    return NetworkAdapter.fromRawPointer(retValuePtr);
+  }
+
+  int? get prefixLength {
+    final retValuePtr = calloc<COMObject>();
+
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+      return IReference<int>.fromRawPointer(retValuePtr).value;
+    } finally {
+      free(retValuePtr);
+    }
   }
 }

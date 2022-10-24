@@ -39,29 +39,28 @@ class NotificationData extends IInspectable implements INotificationData {
 
   // INotificationDataFactory methods
   static NotificationData createNotificationDataWithValuesAndSequenceNumber(
-      Pointer<COMObject> initialValues, int sequenceNumber) {
+      IIterable<IKeyValuePair<String, String?>> initialValues,
+      int sequenceNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
 
     try {
-      final result = INotificationDataFactory.fromRawPointer(activationFactory)
+      return INotificationDataFactory.fromRawPointer(activationFactory)
           .createNotificationDataWithValuesAndSequenceNumber(
               initialValues, sequenceNumber);
-      return NotificationData.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }
   }
 
   static NotificationData createNotificationDataWithValues(
-      Pointer<COMObject> initialValues) {
+      IIterable<IKeyValuePair<String, String?>> initialValues) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
 
     try {
-      final result = INotificationDataFactory.fromRawPointer(activationFactory)
+      return INotificationDataFactory.fromRawPointer(activationFactory)
           .createNotificationDataWithValues(initialValues);
-      return NotificationData.fromRawPointer(result);
     } finally {
       free(activationFactory);
     }

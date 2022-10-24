@@ -388,32 +388,32 @@ Pointer<COMObject> _boxValue(Object value, {Type? nativeType}) {
   // See https://docs.microsoft.com/en-us/uwp/api/windows.foundation.PropertyValue.createinspectable
   if (value is IInspectable) return value.ptr;
 
-  if (value is bool) return PropertyValue.createBoolean(value);
-  if (value is DateTime) return PropertyValue.createDateTime(value);
+  if (value is bool) return PropertyValue.createBoolean(value).ptr;
+  if (value is DateTime) return PropertyValue.createDateTime(value).ptr;
 
   if (value is double) {
-    if (nativeType == Float) return PropertyValue.createSingle(value);
-    return PropertyValue.createDouble(value);
+    if (nativeType == Float) return PropertyValue.createSingle(value).ptr;
+    return PropertyValue.createDouble(value).ptr;
   }
 
-  if (value is Duration) return PropertyValue.createTimeSpan(value);
-  if (value is GUID) return PropertyValue.createGuid(value);
+  if (value is Duration) return PropertyValue.createTimeSpan(value).ptr;
+  if (value is GUID) return PropertyValue.createGuid(value).ptr;
 
   if (value is int) {
-    if (nativeType == Int16) return PropertyValue.createInt16(value);
-    if (nativeType == Int32) return PropertyValue.createInt32(value);
-    if (nativeType == Uint8) return PropertyValue.createUInt8(value);
-    if (nativeType == Uint16) return PropertyValue.createUInt16(value);
-    if (nativeType == Uint32) return PropertyValue.createUInt32(value);
-    if (nativeType == Uint64) return PropertyValue.createUInt64(value);
+    if (nativeType == Int16) return PropertyValue.createInt16(value).ptr;
+    if (nativeType == Int32) return PropertyValue.createInt32(value).ptr;
+    if (nativeType == Uint8) return PropertyValue.createUInt8(value).ptr;
+    if (nativeType == Uint16) return PropertyValue.createUInt16(value).ptr;
+    if (nativeType == Uint32) return PropertyValue.createUInt32(value).ptr;
+    if (nativeType == Uint64) return PropertyValue.createUInt64(value).ptr;
 
-    return PropertyValue.createInt64(value);
+    return PropertyValue.createInt64(value).ptr;
   }
 
-  if (value is Point) return PropertyValue.createPoint(value);
-  if (value is Rect) return PropertyValue.createRect(value);
-  if (value is Size) return PropertyValue.createSize(value);
-  if (value is String) return PropertyValue.createString(value);
+  if (value is Point) return PropertyValue.createPoint(value).ptr;
+  if (value is Rect) return PropertyValue.createRect(value).ptr;
+  if (value is Size) return PropertyValue.createSize(value).ptr;
+  if (value is String) return PropertyValue.createString(value).ptr;
 
   if (value is List<bool>) return _boxBoolList(value);
   if (value is List<DateTime>) return _boxDateTimeList(value);
@@ -493,7 +493,7 @@ Pointer<COMObject> _boxBoolList(List<bool> list) {
   }
 
   try {
-    return PropertyValue.createBooleanArray(list.length, pArray);
+    return PropertyValue.createBooleanArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -511,7 +511,7 @@ Pointer<COMObject> _boxDateTimeList(List<DateTime> list) {
   }
 
   try {
-    return PropertyValue.createDateTimeArray(list.length, pArray);
+    return PropertyValue.createDateTimeArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -524,7 +524,7 @@ Pointer<COMObject> _boxDoubleList(List<double> list) {
   }
 
   try {
-    return PropertyValue.createDoubleArray(list.length, pArray);
+    return PropertyValue.createDoubleArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -537,7 +537,7 @@ Pointer<COMObject> _boxDurationList(List<Duration> list) {
   }
 
   try {
-    return PropertyValue.createTimeSpanArray(list.length, pArray);
+    return PropertyValue.createTimeSpanArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -550,7 +550,7 @@ Pointer<COMObject> _boxGuidList(List<GUID> list) {
   }
 
   try {
-    return PropertyValue.createGuidArray(list.length, pArray);
+    return PropertyValue.createGuidArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -563,7 +563,7 @@ Pointer<COMObject> _boxPointList(List<Point> list) {
   }
 
   try {
-    return PropertyValue.createPointArray(list.length, pArray);
+    return PropertyValue.createPointArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -576,7 +576,7 @@ Pointer<COMObject> _boxRectList(List<Rect> list) {
   }
 
   try {
-    return PropertyValue.createRectArray(list.length, pArray);
+    return PropertyValue.createRectArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -589,7 +589,7 @@ Pointer<COMObject> _boxSizeList(List<Size> list) {
   }
 
   try {
-    return PropertyValue.createSizeArray(list.length, pArray);
+    return PropertyValue.createSizeArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -602,7 +602,7 @@ Pointer<COMObject> _boxIntList(List<int> list) {
   }
 
   try {
-    return PropertyValue.createInt64Array(list.length, pArray);
+    return PropertyValue.createInt64Array(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }
@@ -617,7 +617,7 @@ Pointer<COMObject> _boxStringList(List<String> list) {
   }
 
   try {
-    return PropertyValue.createStringArray(list.length, pArray);
+    return PropertyValue.createStringArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
     handles.forEach(WindowsDeleteString);
@@ -631,7 +631,7 @@ Pointer<COMObject> _boxInspectableList(List<IInspectable> list) {
   }
 
   try {
-    return PropertyValue.createInspectableArray(list.length, pArray);
+    return PropertyValue.createInspectableArray(list.length, pArray).ptr;
   } finally {
     free(pArray);
   }

@@ -39,8 +39,9 @@ class INotificationDataFactory extends IInspectable {
       INotificationDataFactory.fromRawPointer(
           interface.toInterface(IID_INotificationDataFactory));
 
-  Pointer<COMObject> createNotificationDataWithValuesAndSequenceNumber(
-      Pointer<COMObject> initialValues, int sequenceNumber) {
+  NotificationData createNotificationDataWithValuesAndSequenceNumber(
+      IIterable<IKeyValuePair<String, String?>> initialValues,
+      int sequenceNumber) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =
@@ -59,7 +60,7 @@ class INotificationDataFactory extends IInspectable {
                     int Function(Pointer, Pointer<COMObject> initialValues,
                         int sequenceNumber, Pointer<COMObject>)>()(
             ptr.ref.lpVtbl,
-            initialValues.cast<Pointer<COMObject>>().value,
+            initialValues.ptr.cast<Pointer<COMObject>>().value,
             sequenceNumber,
             retValuePtr);
 
@@ -68,11 +69,11 @@ class INotificationDataFactory extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    return NotificationData.fromRawPointer(retValuePtr);
   }
 
-  Pointer<COMObject> createNotificationDataWithValues(
-      Pointer<COMObject> initialValues) {
+  NotificationData createNotificationDataWithValues(
+      IIterable<IKeyValuePair<String, String?>> initialValues) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =
@@ -89,13 +90,13 @@ class INotificationDataFactory extends IInspectable {
                 .asFunction<
                     int Function(Pointer, Pointer<COMObject> initialValues,
                         Pointer<COMObject>)>()(ptr.ref.lpVtbl,
-            initialValues.cast<Pointer<COMObject>>().value, retValuePtr);
+            initialValues.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    return NotificationData.fromRawPointer(retValuePtr);
   }
 }

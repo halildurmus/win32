@@ -60,7 +60,6 @@ class WinRTSetPropertyReturningStringProjection
 
         try {
           ${ffiCall(params: 'hstr')}
-
         } finally {
           WindowsDeleteString(hstr);
         }

@@ -90,9 +90,7 @@ String stripPointer(String typeName) =>
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  if (inputText.isEmpty) {
-    return '';
-  }
+  if (inputText.isEmpty) return '';
 
   final words = inputText.split(' ');
   final textLine = StringBuffer('///');
@@ -140,7 +138,6 @@ extension CamelCaseConversion on String {
 String relativePathToSrcDirectory(File file) {
   // Find out how many parents there are to the lib/src directory
   final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
-
   return '../' * pathDepth;
 }
 
@@ -164,7 +161,6 @@ String importForWin32Type(TypeIdentifier identifier) {
 /// matching folder (e.g. `system`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
-
   return segments.join('/').toLowerCase();
 }
 
@@ -173,7 +169,6 @@ String folderFromNamespace(String namespace) {
 /// (e.g. `storage/pickers`).
 String folderFromWinRTType(String fullyQualifiedType) {
   final segments = fullyQualifiedType.split('.').skip(1).toList()..removeLast();
-
   return segments.join('/').toLowerCase();
 }
 
@@ -218,6 +213,137 @@ String stripLeadingUnderscores(String name) {
     }
   }
   return name;
+}
+
+/// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile` or
+/// `String, String?` for a name like `IMap<String, String?>`.
+String typeArguments(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(name.indexOf('<') + 1, name.length - 1);
+}
+
+/// Take a name like `IAsyncOperation<StorageFile>` and return `IAsyncOperation`.
+String outerType(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(0, name.indexOf('<'));
+}
+
+/// Parses the argument to be passed to the `creator` parameter from [ti].
+String? parseArgumentForCreatorParameter(TypeIdentifier ti) {
+  final typeProjection = TypeProjection(ti);
+  if (typeProjection.isWinRTStruct ||
+      ['bool', 'DateTime', 'double', 'Duration', 'int', 'String']
+          .contains(typeProjection.methodParamType)) {
+    return null;
+  }
+
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+      return '${lastComponent(ti.name)}.fromRawPointer';
+    case BaseType.genericTypeModifier:
+      return parseArgumentForCreatorParameterFromGenericTypeIdentifier(ti);
+    case BaseType.referenceTypeModifier:
+      return parseArgumentForCreatorParameter(ti.typeArg!);
+    case BaseType.valueTypeModifier:
+      if (ti.type?.isEnum ?? false) return '${lastComponent(ti.name)}.from';
+      return null;
+    default:
+      return null;
+  }
+}
+
+/// Parses the argument to be passed to the `creator` parameter from generic [ti].
+String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+    TypeIdentifier ti) {
+  if (ti.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
+  final typeIdentifierName = stripGenerics(lastComponent(outerType(ti.name)));
+  final typeArg = ['IKeyValuePair', 'IMap', 'IMapView']
+          .contains(typeIdentifierName)
+      // Skip over to the value typeArg since the `creator` parameter does not
+      // need to be created for the key typeArg of the above types.
+      ? ti.typeArg!.typeArg!
+      : ti.typeArg;
+
+  final creator = parseArgumentForCreatorParameter(typeArg!);
+  if (creator == null) return '$typeIdentifierName.fromRawPointer';
+
+  final isTypeArgEnum = typeArg.type?.isEnum ?? false;
+  final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
+
+  return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(ptr, $creatorParamName: $creator)';
+}
+
+/// Returns the appropriate Dart primitive type name for the given [baseType].
+String primitiveTypeNameFromBaseType(BaseType baseType) {
+  switch (baseType) {
+    case BaseType.booleanType:
+      return 'bool';
+    case BaseType.doubleType:
+    case BaseType.floatType:
+      return 'double';
+    case BaseType.int8Type:
+    case BaseType.int16Type:
+    case BaseType.int32Type:
+    case BaseType.int64Type:
+    case BaseType.uint8Type:
+    case BaseType.uint16Type:
+    case BaseType.uint32Type:
+    case BaseType.uint64Type:
+      return 'int';
+    case BaseType.stringType:
+      return 'String';
+    default:
+      return 'undefined';
+  }
+}
+
+/// Returns the appropriate Dart type name for the given [ti].
+String parseTypeIdentifierName(TypeIdentifier ti) {
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+    case BaseType.valueTypeModifier:
+      if (ti.name == 'System.Guid') return 'GUID';
+      if (ti.name == 'Windows.Foundation.TimeSpan') return 'Duration';
+      return lastComponent(ti.name);
+    case BaseType.genericTypeModifier:
+      return parseGenericTypeIdentifierName(ti);
+    case BaseType.objectType:
+      return 'Object';
+    case BaseType.referenceTypeModifier:
+      return parseTypeIdentifierName(ti.typeArg!);
+    default:
+      return primitiveTypeNameFromBaseType(ti.baseType);
+  }
+}
+
+/// Unpack a nested [typeIdentifier] into a single name.
+String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
+  if (typeIdentifier.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
+  // If the typeIdentifier's name is already parsed, return it as is
+  if (typeIdentifier.name.contains('<')) return typeIdentifier.name;
+
+  final parentTypeName = stripGenerics(lastComponent(typeIdentifier.name));
+
+  if (typeIdentifier.type?.genericParams.length == 2) {
+    final secondArgMustBeNullable = [
+      'Windows.Foundation.Collections.IKeyValuePair`2',
+      'Windows.Foundation.Collections.IMap`2',
+      'Windows.Foundation.Collections.IMapView`2',
+      'Windows.Foundation.Collections.IObservableMap`2',
+    ].contains(typeIdentifier.type?.name);
+    final firstArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
+    final secondArg = parseTypeIdentifierName(typeIdentifier.typeArg!.typeArg!);
+    final questionMark = secondArgMustBeNullable ? '?' : '';
+    return '$parentTypeName<$firstArg, $secondArg$questionMark>';
+  }
+
+  return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';
 }
 
 /// Take a name like TypedEventHandler`2 and return TypedEventHandler.

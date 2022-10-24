@@ -1,3 +1,4 @@
+import 'declarations/comobject.dart';
 import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
@@ -30,6 +31,9 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
   // Matcher properties
 
+  bool get isComObjectProperty =>
+      parameters.first.type.dartType == 'Pointer<COMObject>';
+
   bool get isStringProperty => parameters.first.type.isString;
 
   bool get isDateTimeProperty =>
@@ -57,13 +61,17 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
       // TODO: declarationFor(WinRTSetPropertyReturningMapViewProjection.new)
       // TODO: declarationFor(WinRTSetPropertyReturningVectorProjection.new)
       // TODO: declarationFor(WinRTSetPropertyReturningVectorViewProjection.new)
-      // TODO: declarationFor(WinRTSetPropertyReturningCOMObjectProjection.new)
+
       if (isEnumProperty) {
         return declarationFor(WinRTSetPropertyReturningEnumProjection.new);
       }
 
       if (isReferenceProperty) {
         return declarationFor(WinRTSetPropertyReturningReferenceProjection.new);
+      }
+
+      if (isComObjectProperty) {
+        return declarationFor(WinRTSetPropertyReturningComObjectProjection.new);
       }
 
       if (isStringProperty) {

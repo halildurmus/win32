@@ -38,7 +38,7 @@ class IHostName extends IInspectable {
   factory IHostName.from(IInspectable interface) =>
       IHostName.fromRawPointer(interface.toInterface(IID_IHostName));
 
-  Pointer<COMObject> get iPInformation {
+  IPInformation get iPInformation {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -56,7 +56,7 @@ class IHostName extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    return IPInformation.fromRawPointer(retValuePtr);
   }
 
   String get rawName {
@@ -153,7 +153,7 @@ class IHostName extends IInspectable {
     }
   }
 
-  bool isEqual(Pointer<COMObject> hostName) {
+  bool isEqual(HostName hostName) {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -169,7 +169,7 @@ class IHostName extends IInspectable {
                   int Function(
                       Pointer, Pointer<COMObject> hostName, Pointer<Bool>)>()(
           ptr.ref.lpVtbl,
-          hostName.cast<Pointer<COMObject>>().value,
+          hostName.ptr.cast<Pointer<COMObject>>().value,
           retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);

@@ -38,7 +38,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
       IPhoneNumberFormatterStatics.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberFormatterStatics));
 
-  void tryCreate(String regionCode, Pointer<COMObject> phoneNumber) {
+  void tryCreate(String regionCode, PhoneNumberFormatter phoneNumber) {
     final regionCodeHstring = convertToHString(regionCode);
 
     final hr = ptr.ref.vtable
@@ -52,7 +52,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, int regionCode, Pointer<COMObject> phoneNumber)>()(
-        ptr.ref.lpVtbl, regionCodeHstring, phoneNumber);
+        ptr.ref.lpVtbl, regionCodeHstring, phoneNumber.ptr);
 
     if (FAILED(hr)) throw WindowsException(hr);
     WindowsDeleteString(regionCodeHstring);
