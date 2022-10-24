@@ -69,7 +69,7 @@ class WinRTMethodReturningMapProjection extends WinRTMethodProjection
       IMap<$mapTypeArgs> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
-        ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
         $parametersPostamble
         return IMap.fromRawPointer(retValuePtr$mapConstructorArgs);
       }
@@ -85,7 +85,7 @@ class WinRTGetPropertyReturningMapProjection extends WinRTGetPropertyProjection
       IMap<$mapTypeArgs> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
 
         return IMap.fromRawPointer(retValuePtr$mapConstructorArgs);
       }
@@ -101,10 +101,11 @@ class WinRTMethodReturningMapViewProjection extends WinRTMethodProjection
       Map<$mapTypeArgs> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
-        ${ffiCall()}
 
         try {
-          return IMapView<$mapTypeArgs>.fromRawPointer(retValuePtr$mapConstructorArgs).toMap();
+          ${ffiCall()}
+          return IMapView<$mapTypeArgs>.fromRawPointer
+            (retValuePtr$mapConstructorArgs).toMap();
         } finally {
           $parametersPostamble
           free(retValuePtr);
@@ -122,10 +123,10 @@ class WinRTGetPropertyReturningMapViewProjection
       Map<$mapTypeArgs> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        ${ffiCall()}
-
         try {
-          return IMapView<$mapTypeArgs>.fromRawPointer(retValuePtr$mapConstructorArgs).toMap();
+          ${ffiCall()}
+          return IMapView<$mapTypeArgs>.fromRawPointer
+            (retValuePtr$mapConstructorArgs).toMap();
         } finally {
           free(retValuePtr);
         }

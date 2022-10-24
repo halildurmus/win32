@@ -54,12 +54,14 @@ void main()
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
 
     // Automatically generated structs
+    printf("  'CREATEFILE2_EXTENDED_PARAMETERS': %zu,\n", sizeof(CREATEFILE2_EXTENDED_PARAMETERS));
     printf("  'POINTER_PEN_INFO': %zu,\n", sizeof(POINTER_PEN_INFO));
     printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
     printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));
     printf("  'INPUT_TRANSFORM': %zu,\n", sizeof(INPUT_TRANSFORM));
     printf("  'TouchPredictionParameters': %zu,\n", sizeof(TouchPredictionParameters));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
+    printf("  'FILE_SEGMENT_ELEMENT': %zu,\n", sizeof(FILE_SEGMENT_ELEMENT));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));

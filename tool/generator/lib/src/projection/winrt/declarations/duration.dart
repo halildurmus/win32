@@ -50,7 +50,7 @@ class WinRTSetPropertyReturningDurationProjection
       set $exposedMethodName(Duration value) {
         final duration = value.inMicroseconds * 10;
 
-        ${ffiCall('duration')}
+        ${ffiCall(params: 'duration')}
       }
 ''';
 }

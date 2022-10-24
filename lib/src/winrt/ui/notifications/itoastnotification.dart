@@ -55,7 +55,10 @@ class IToastNotification extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -79,19 +82,18 @@ class IToastNotification extends IInspectable {
   DateTime? get expirationTime {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<DateTime>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
