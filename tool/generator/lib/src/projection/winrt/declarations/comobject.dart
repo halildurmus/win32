@@ -67,7 +67,7 @@ class WinRTSetPropertyReturningComObjectProjection
   @override
   String toString() => '''
       set $exposedMethodName(${parameters.first.type.methodParamType} value) {
-        ${ffiCall('value.ptr.cast<Pointer<COMObject>>().value')}
+        ${ffiCall(params: 'value.ptr.cast<Pointer<COMObject>>().value')}
       }
   ''';
 }

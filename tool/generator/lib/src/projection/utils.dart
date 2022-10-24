@@ -331,7 +331,7 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
   final parentTypeName = stripGenerics(lastComponent(typeIdentifier.name));
 
   if (typeIdentifier.type?.genericParams.length == 2) {
-    final isSecondArgMustBeNullable = [
+    final secondArgMustBeNullable = [
       'Windows.Foundation.Collections.IKeyValuePair`2',
       'Windows.Foundation.Collections.IMap`2',
       'Windows.Foundation.Collections.IMapView`2',
@@ -339,7 +339,7 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
     ].contains(typeIdentifier.type?.name);
     final firstArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
     final secondArg = parseTypeIdentifierName(typeIdentifier.typeArg!.typeArg!);
-    final questionMark = isSecondArgMustBeNullable ? '?' : '';
+    final questionMark = secondArgMustBeNullable ? '?' : '';
     return '$parentTypeName<$firstArg, $secondArg$questionMark>';
   }
 
