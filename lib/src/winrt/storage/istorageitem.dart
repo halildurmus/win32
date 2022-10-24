@@ -54,8 +54,10 @@ class IStorageItem extends IInspectable {
                 int Function(Pointer, int desiredName, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, desiredNameHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(desiredNameHstring);
     return retValuePtr;
   }
@@ -79,8 +81,10 @@ class IStorageItem extends IInspectable {
                         Pointer<COMObject>)>()(
             ptr.ref.lpVtbl, desiredNameHstring, option.value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(desiredNameHstring);
 
     return retValuePtr;
@@ -99,7 +103,10 @@ class IStorageItem extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -119,7 +126,10 @@ class IStorageItem extends IInspectable {
                 int Function(Pointer, int option, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, option.value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -137,7 +147,10 @@ class IStorageItem extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }

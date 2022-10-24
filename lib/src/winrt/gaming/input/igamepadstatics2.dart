@@ -59,7 +59,10 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
                         Pointer<COMObject>)>()(ptr.ref.lpVtbl,
             gameController.cast<Pointer<COMObject>>().value, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
