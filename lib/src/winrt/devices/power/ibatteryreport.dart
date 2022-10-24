@@ -41,19 +41,18 @@ class IBatteryReport extends IInspectable {
   int? get chargeRateInMilliwatts {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(6)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
@@ -63,19 +62,18 @@ class IBatteryReport extends IInspectable {
   int? get designCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
@@ -85,19 +83,18 @@ class IBatteryReport extends IInspectable {
   int? get fullChargeCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
@@ -107,19 +104,18 @@ class IBatteryReport extends IInspectable {
   int? get remainingCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);

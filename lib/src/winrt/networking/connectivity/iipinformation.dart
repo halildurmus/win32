@@ -51,7 +51,10 @@ class IIPInformation extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return NetworkAdapter.fromRawPointer(retValuePtr);
   }
@@ -59,19 +62,18 @@ class IIPInformation extends IInspectable {
   int? get prefixLength {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw WindowsException(hr);
-
     try {
+      final hr = ptr.ref.vtable
+              .elementAt(7)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr).value;
     } finally {
       free(retValuePtr);
