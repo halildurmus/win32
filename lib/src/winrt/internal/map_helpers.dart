@@ -8,27 +8,35 @@ import 'package:ffi/ffi.dart';
 
 import '../../combase.dart';
 import '../../guid.dart';
+import '../../utils.dart';
 import '../../winrt_helpers.dart';
 import '../devices/sensors/enums.g.dart';
 import '../devices/sensors/pedometerreading.dart';
+import '../foundation/collections/iiterator.dart';
 import '../foundation/collections/ikeyvaluepair.dart';
 import 'comobject_pointer.dart';
 
 class MapHelper {
   static Map<K, V> toMap<K, V>(
-    int Function(int, Pointer<NativeType>) getManyCallback, {
+    IIterator<IKeyValuePair<K, V>> iterator, {
     IKeyValuePair<K, V> Function(Pointer<COMObject>)? creator,
     int length = 1,
   }) {
-    final pArray = calloc<COMObject>(length);
-    getManyCallback(length, pArray);
-    final keyValuePairs = pArray.toList<IKeyValuePair<K, V>>(
-        creator ?? IKeyValuePair.fromRawPointer,
-        length: length);
-    final map = Map.fromEntries(
-        keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
+    final pKeyValuePairArray = calloc<COMObject>(length);
 
-    return Map.unmodifiable(map);
+    try {
+      iterator.getMany(length, pKeyValuePairArray);
+      final keyValuePairs = pKeyValuePairArray.toList<IKeyValuePair<K, V>>(
+          creator ?? IKeyValuePair.fromRawPointer,
+          length: length);
+      final map = Map.fromEntries(
+          keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
+
+      return Map.unmodifiable(map);
+    } finally {
+      free(pKeyValuePairArray);
+      free(iterator.ptr);
+    }
   }
 }
 
