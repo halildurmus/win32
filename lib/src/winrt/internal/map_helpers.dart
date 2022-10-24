@@ -35,6 +35,7 @@ class MapHelper {
       return Map.unmodifiable(map);
     } finally {
       free(pKeyValuePairArray);
+      free(iterator.ptr);
     }
   }
 }
