@@ -17,12 +17,14 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       .toList()
       .join(', ');
 
-  /// Returns the path to the directory where the current interface is located.
-  String get _currentDirectory => 'winrt/${folderFromWinRTType(typeDef.name)}';
+  /// Returns the path to the folder where the current interface is located.
+  ///
+  /// e.g. `winrt/storage/pickers`
+  String get _currentFolderPath => 'winrt/${folderFromWinRTType(typeDef.name)}';
 
-  /// Converts [path] to an equivalent relative path from the [_currentDirectory].
+  /// Converts [path] to an equivalent relative path from the [_currentFolderPath].
   String _relativePathTo(String path) =>
-      relativePath(path, start: _currentDirectory);
+      relativePath(path, start: _currentFolderPath);
 
   /// The WinRT types to ignore when generating the imports.
   static const ignoredWindowsRuntimeTypes = <String>{
