@@ -19,12 +19,12 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/networking/connectivity/networkitem.dart';
+import 'networkitem.dart';
 import '../../../guid.dart';
-import '../../../winrt/foundation/iasyncoperation.dart';
-import '../../../winrt/networking/connectivity/connectionprofile.dart';
+import '../../foundation/iasyncoperation.dart';
+import 'connectionprofile.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

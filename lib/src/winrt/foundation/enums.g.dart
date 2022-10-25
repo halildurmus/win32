@@ -8,7 +8,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-import '../../winrt/foundation/winrt_enum.dart';
+import 'winrt_enum.dart';
 
 /// Specifies the status of an asynchronous operation.
 ///

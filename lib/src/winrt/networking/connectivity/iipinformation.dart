@@ -19,11 +19,11 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/networking/connectivity/networkadapter.dart';
-import '../../../winrt/foundation/ireference.dart';
-import '../../../winrt/internal/ipropertyvalue_helpers.dart';
+import 'networkadapter.dart';
+import '../../foundation/ireference.dart';
+import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

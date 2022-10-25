@@ -19,12 +19,12 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/globalization/phonenumberformatting/iphonenumberformatter.dart';
+import 'iphonenumberformatter.dart';
 import 'iphonenumberformatterstatics.dart';
-import '../../../winrt/globalization/phonenumberformatting/phonenumberinfo.dart';
-import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
+import 'phonenumberinfo.dart';
+import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

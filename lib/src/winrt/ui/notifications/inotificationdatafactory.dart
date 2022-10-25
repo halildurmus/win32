@@ -19,11 +19,11 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/foundation/collections/iiterable.dart';
-import '../../../winrt/foundation/collections/ikeyvaluepair.dart';
-import '../../../winrt/ui/notifications/notificationdata.dart';
+import '../../foundation/collections/iiterable.dart';
+import '../../foundation/collections/ikeyvaluepair.dart';
+import 'notificationdata.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

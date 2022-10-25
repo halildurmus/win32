@@ -19,10 +19,10 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/system/user.dart';
-import '../../winrt/storage/userdatapaths.dart';
+import '../system/user.dart';
+import 'userdatapaths.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc

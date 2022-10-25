@@ -19,10 +19,10 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/devices/sensors/ipedometerreading.dart';
-import '../../../winrt/devices/sensors/enums.g.dart';
+import 'ipedometerreading.dart';
+import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

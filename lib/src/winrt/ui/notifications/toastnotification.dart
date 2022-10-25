@@ -19,20 +19,20 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/ui/notifications/itoastnotification.dart';
-import '../../../winrt/ui/notifications/itoastnotification2.dart';
-import '../../../winrt/ui/notifications/itoastnotification3.dart';
-import '../../../winrt/ui/notifications/itoastnotification4.dart';
-import '../../../winrt/ui/notifications/itoastnotification6.dart';
+import 'itoastnotification.dart';
+import 'itoastnotification2.dart';
+import 'itoastnotification3.dart';
+import 'itoastnotification4.dart';
+import 'itoastnotification6.dart';
 import 'itoastnotificationfactory.dart';
-import '../../../winrt/data/xml/dom/xmldocument.dart';
-import '../../../winrt/foundation/ireference.dart';
-import '../../../winrt/ui/notifications/toastdismissedeventargs.dart';
-import '../../../winrt/ui/notifications/toastfailedeventargs.dart';
-import '../../../winrt/ui/notifications/enums.g.dart';
-import '../../../winrt/ui/notifications/notificationdata.dart';
+import '../../data/xml/dom/xmldocument.dart';
+import '../../foundation/ireference.dart';
+import 'toastdismissedeventargs.dart';
+import 'toastfailedeventargs.dart';
+import 'enums.g.dart';
+import 'notificationdata.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

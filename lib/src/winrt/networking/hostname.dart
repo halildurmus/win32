@@ -19,14 +19,14 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/networking/ihostname.dart';
-import '../../winrt/foundation/istringable.dart';
+import 'ihostname.dart';
+import '../foundation/istringable.dart';
 import 'ihostnamefactory.dart';
 import 'ihostnamestatics.dart';
-import '../../winrt/networking/connectivity/ipinformation.dart';
-import '../../winrt/networking/enums.g.dart';
+import 'connectivity/ipinformation.dart';
+import 'enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// {@category Class}

@@ -19,11 +19,11 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
 import 'ipropertyvaluestatics.dart';
 import '../../guid.dart';
-import '../../winrt/foundation/structs.g.dart';
+import 'structs.g.dart';
 import 'ipropertyvalue.dart';
 import '../../com/iinspectable.dart';
 
