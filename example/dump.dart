@@ -17,18 +17,17 @@ extension SymbolInfoHelper on Pointer<SYMBOL_INFO> {
 
 final _exportedSymbols = <String, int>{};
 
+/// Callback called once for each enumerated symbol by SymEnumSymbols.
 int _enumSymbolProc(Pointer<SYMBOL_INFO> pSymInfo, int size, Pointer ctx) {
+  // Only include symbols from the export table
   if (pSymInfo.ref.Flags & SYMFLAG_EXPORT == SYMFLAG_EXPORT) {
     _exportedSymbols[pSymInfo.name] = pSymInfo.virtAddress;
   }
 
-  return TRUE;
+  return TRUE; // Keep enumerating
 }
 
-Map<String, int> getExports(String module) {
-  _exportedSymbols.clear();
-  final hProcess = GetCurrentProcess();
-
+Map<String, int> getExports(int hProcess, String module) {
   final status = SymInitialize(hProcess, nullptr, FALSE);
   if (status == FALSE) {
     print('SymInitialize failed.');
@@ -65,7 +64,27 @@ Map<String, int> getExports(String module) {
   return _exportedSymbols;
 }
 
+/// Test which processor architecture Windows is running
+bool isWindowsOnArm(int hProcess) {
+  final pProcessMachine = calloc<USHORT>();
+  final pNativeMachine = calloc<USHORT>();
+
+  try {
+    IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+    return pNativeMachine.value == IMAGE_FILE_MACHINE_ARM64;
+  } finally {
+    free(pProcessMachine);
+    free(pNativeMachine);
+  }
+}
+
 void main() {
-  getExports(r'c:\windows\system32\kernel32.dll')
+  final hProcess = GetCurrentProcess();
+
+  final kernel32 = isWindowsOnArm(hProcess)
+      ? r'c:\windows\SysArm32\kernel32.dll'
+      : r'c:\windows\system32\kernel32.dll';
+
+  getExports(hProcess, kernel32)
       .forEach((name, address) => print('[${address.toHexString(32)}] $name'));
 }
