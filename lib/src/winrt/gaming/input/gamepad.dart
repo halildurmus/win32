@@ -19,21 +19,21 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/gaming/input/igamepad.dart';
-import '../../../winrt/gaming/input/igamecontroller.dart';
-import '../../../winrt/gaming/input/igamepad2.dart';
-import '../../../winrt/gaming/input/igamecontrollerbatteryinfo.dart';
+import 'igamepad.dart';
+import 'igamecontroller.dart';
+import 'igamepad2.dart';
+import 'igamecontrollerbatteryinfo.dart';
 import 'igamepadstatics.dart';
 import 'igamepadstatics2.dart';
-import '../../../winrt/gaming/input/structs.g.dart';
-import '../../../winrt/gaming/input/headset.dart';
-import '../../../winrt/system/userchangedeventargs.dart';
-import '../../../winrt/system/user.dart';
-import '../../../winrt/gaming/input/enums.g.dart';
-import '../../../winrt/devices/power/batteryreport.dart';
-import '../../../winrt/foundation/collections/ivectorview.dart';
+import 'structs.g.dart';
+import 'headset.dart';
+import '../../system/userchangedeventargs.dart';
+import '../../system/user.dart';
+import 'enums.g.dart';
+import '../../devices/power/batteryreport.dart';
+import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

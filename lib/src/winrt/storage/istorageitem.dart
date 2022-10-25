@@ -19,12 +19,12 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/foundation/iasyncaction.dart';
-import '../../winrt/storage/enums.g.dart';
-import '../../winrt/foundation/iasyncoperation.dart';
-import '../../winrt/storage/fileproperties/basicproperties.dart';
+import '../foundation/iasyncaction.dart';
+import 'enums.g.dart';
+import '../foundation/iasyncoperation.dart';
+import 'fileproperties/basicproperties.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc

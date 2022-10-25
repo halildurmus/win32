@@ -19,13 +19,13 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/storage/pickers/enums.g.dart';
-import '../../../winrt/foundation/collections/ivector.dart';
-import '../../../winrt/foundation/iasyncoperation.dart';
-import '../../../winrt/storage/storagefile.dart';
-import '../../../winrt/foundation/collections/ivectorview.dart';
+import 'enums.g.dart';
+import '../../foundation/collections/ivector.dart';
+import '../../foundation/iasyncoperation.dart';
+import '../storagefile.dart';
+import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

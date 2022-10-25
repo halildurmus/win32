@@ -19,15 +19,15 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/globalization/icalendar.dart';
-import '../../winrt/globalization/itimezoneoncalendar.dart';
+import 'icalendar.dart';
+import 'itimezoneoncalendar.dart';
 import 'icalendarfactory.dart';
 import 'icalendarfactory2.dart';
-import '../../winrt/foundation/collections/iiterable.dart';
-import '../../winrt/foundation/collections/ivectorview.dart';
-import '../../winrt/globalization/enums.g.dart';
+import '../foundation/collections/iiterable.dart';
+import '../foundation/collections/ivectorview.dart';
+import 'enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// {@category Class}

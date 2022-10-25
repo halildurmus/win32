@@ -419,6 +419,26 @@ void main() {
     expect(libraryFromDllName('winspool'), equals('winspool.drv'));
   });
 
+  test('relativePath', () {
+    expect(relativePath('winrt_helpers.dart', start: 'winrt/foundation'),
+        equals('../../winrt_helpers.dart'));
+    expect(
+        relativePath('winrt/globalization/calendar.dart',
+            start: 'winrt/globalization'),
+        equals('calendar.dart'));
+    expect(relativePath('com/iinspectable.dart', start: 'winrt/storage'),
+        equals('../../com/iinspectable.dart'));
+    expect(
+        relativePath('winrt/foundation/collections/ivector.dart',
+            start: 'winrt/globalization'),
+        equals('../foundation/collections/ivector.dart'));
+    expect(
+        relativePath(
+            'winrt/globalization/phonenumberformatting/phonenumberformatter.dart',
+            start: 'winrt/globalization'),
+        equals('phonenumberformatting/phonenumberformatter.dart'));
+  });
+
   test('folderFromNamespace', () {
     expect(
         folderFromNamespace('Windows.Win32.System.Console'), equals('system'));

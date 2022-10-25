@@ -19,11 +19,11 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/ui/notifications/toastnotifier.dart';
-import '../../../winrt/ui/notifications/enums.g.dart';
-import '../../../winrt/data/xml/dom/xmldocument.dart';
+import 'toastnotifier.dart';
+import 'enums.g.dart';
+import '../../data/xml/dom/xmldocument.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

@@ -19,11 +19,11 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/gaming/input/iheadset.dart';
-import '../../../winrt/gaming/input/igamecontrollerbatteryinfo.dart';
-import '../../../winrt/devices/power/batteryreport.dart';
+import 'iheadset.dart';
+import 'igamecontrollerbatteryinfo.dart';
+import '../../devices/power/batteryreport.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

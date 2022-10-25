@@ -19,15 +19,15 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/gaming/input/igamepad.dart';
-import '../../../winrt/gaming/input/igamecontroller.dart';
-import '../../../winrt/gaming/input/enums.g.dart';
-import '../../../winrt/gaming/input/structs.g.dart';
-import '../../../winrt/gaming/input/headset.dart';
-import '../../../winrt/system/userchangedeventargs.dart';
-import '../../../winrt/system/user.dart';
+import 'igamepad.dart';
+import 'igamecontroller.dart';
+import 'enums.g.dart';
+import 'structs.g.dart';
+import 'headset.dart';
+import '../../system/userchangedeventargs.dart';
+import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

@@ -8,7 +8,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-import '../../../winrt/foundation/winrt_enum.dart';
+import '../../foundation/winrt_enum.dart';
 
 /// Lists phone number formats supported by this API.
 ///

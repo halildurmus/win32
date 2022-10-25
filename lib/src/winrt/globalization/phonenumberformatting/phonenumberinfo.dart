@@ -19,13 +19,13 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/globalization/phonenumberformatting/iphonenumberinfo.dart';
-import '../../../winrt/foundation/istringable.dart';
+import 'iphonenumberinfo.dart';
+import '../../foundation/istringable.dart';
 import 'iphonenumberinfofactory.dart';
 import 'iphonenumberinfostatics.dart';
-import '../../../winrt/globalization/phonenumberformatting/enums.g.dart';
+import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

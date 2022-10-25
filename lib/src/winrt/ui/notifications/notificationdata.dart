@@ -19,13 +19,13 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/ui/notifications/inotificationdata.dart';
+import 'inotificationdata.dart';
 import 'inotificationdatafactory.dart';
-import '../../../winrt/foundation/collections/iiterable.dart';
-import '../../../winrt/foundation/collections/ikeyvaluepair.dart';
-import '../../../winrt/foundation/collections/imap.dart';
+import '../../foundation/collections/iiterable.dart';
+import '../../foundation/collections/ikeyvaluepair.dart';
+import '../../foundation/collections/imap.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

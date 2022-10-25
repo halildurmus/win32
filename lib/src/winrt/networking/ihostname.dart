@@ -19,11 +19,11 @@ import '../../types.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/networking/connectivity/ipinformation.dart';
-import '../../winrt/networking/enums.g.dart';
-import '../../winrt/networking/hostname.dart';
+import 'connectivity/ipinformation.dart';
+import 'enums.g.dart';
+import 'hostname.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc

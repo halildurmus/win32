@@ -19,12 +19,12 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/gaming/input/igamepadstatics.dart';
-import '../../../winrt/gaming/input/igamecontroller.dart';
-import '../../../winrt/gaming/input/gamepad.dart';
-import '../../../winrt/foundation/collections/ivectorview.dart';
+import 'igamepadstatics.dart';
+import 'igamecontroller.dart';
+import 'gamepad.dart';
+import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

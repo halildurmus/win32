@@ -19,15 +19,15 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/data/json/ijsonvalue.dart';
-import '../../../winrt/foundation/istringable.dart';
+import 'ijsonvalue.dart';
+import '../../foundation/istringable.dart';
 import 'ijsonvaluestatics.dart';
 import 'ijsonvaluestatics2.dart';
-import '../../../winrt/data/json/enums.g.dart';
-import '../../../winrt/data/json/jsonarray.dart';
-import '../../../winrt/data/json/jsonobject.dart';
+import 'enums.g.dart';
+import 'jsonarray.dart';
+import 'jsonobject.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

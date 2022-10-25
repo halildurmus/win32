@@ -19,10 +19,10 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/data/xml/dom/xmldocument.dart';
-import '../../../winrt/ui/notifications/toastnotification.dart';
+import '../../data/xml/dom/xmldocument.dart';
+import 'toastnotification.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc

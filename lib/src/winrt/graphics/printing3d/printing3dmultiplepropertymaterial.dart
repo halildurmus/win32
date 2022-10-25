@@ -19,10 +19,10 @@ import '../../../types.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/graphics/printing3d/iprinting3dmultiplepropertymaterial.dart';
-import '../../../winrt/foundation/collections/ivector.dart';
+import 'iprinting3dmultiplepropertymaterial.dart';
+import '../../foundation/collections/ivector.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}
