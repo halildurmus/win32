@@ -340,9 +340,10 @@ void generateWinRTEnumerations() {
     enumProjections.sort((a, b) =>
         lastComponent(a.enumName).compareTo(lastComponent(b.enumName)));
 
-    final import =
-        "import '${relativePathToSrcDirectory(file)}winrt/foundation/winrt_enum.dart';";
-    final enumsFile = [winrtEnumFileHeader, import, ...enumProjections].join();
+    final winrtEnumFileImport =
+        "import '${relativePath('winrt/foundation/winrt_enum.dart', start: 'winrt/$folderPath')}';";
+    final enumsFile =
+        [winrtEnumFileHeader, winrtEnumFileImport, ...enumProjections].join();
     file.writeAsStringSync(DartFormatter().format(enumsFile));
   }
 }

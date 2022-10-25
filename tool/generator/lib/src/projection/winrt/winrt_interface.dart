@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:winmd/winmd.dart';
 
 import '../../shared/exclusions.dart';
@@ -19,8 +17,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       .toList()
       .join(', ');
 
-  String get relativePathToSrcDir => relativePathToSrcDirectory(File(
-      '../../lib/src/winrt/${folderFromWinRTType(typeDef.name)}/$shortName.dart'));
+  /// Returns the path to the directory where the current interface is located.
+  String get _currentDirectory => 'winrt/${folderFromWinRTType(typeDef.name)}';
+
+  /// Converts [path] to an equivalent relative path from the [_currentDirectory].
+  String _relativePathTo(String path) =>
+      relativePath(path, start: _currentDirectory);
 
   /// The WinRT types to ignore when generating the imports.
   static const ignoredWindowsRuntimeTypes = <String>{
@@ -50,11 +52,13 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncActionCompletedHandler -> foundation/delegates.g.dart
       return '';
     } else if (typeDef.isEnum) {
-      return '${relativePathToSrcDir}winrt/${folderFromWinRTType(typeDef.name)}/enums.g.dart';
+      return _relativePathTo(
+          'winrt/${folderFromWinRTType(typeDef.name)}/enums.g.dart');
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return '${relativePathToSrcDir}winrt/${filePathFromWinRTType(typeDef.name)}';
+      return _relativePathTo('winrt/${filePathFromWinRTType(typeDef.name)}');
     } else if (typeDef.isStruct) {
-      return '${relativePathToSrcDir}winrt/${folderFromWinRTType(typeDef.name)}/structs.g.dart';
+      return _relativePathTo(
+          'winrt/${folderFromWinRTType(typeDef.name)}/structs.g.dart');
     } else {
       // TODO: Add support for these as they occur.
       print('Unable to get import for typeDef: $typeDef');
@@ -65,7 +69,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
     if (typeIdentifier.name == 'System.Guid') {
-      return '${relativePathToSrcDir}guid.dart';
+      return _relativePathTo('guid.dart');
     }
 
     if (typeIdentifier.name.startsWith('Windows')) {
@@ -102,8 +106,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final containsIReferenceImport =
         imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
     if (containsIReferenceImport) {
-      imports.add(
-          '${relativePathToSrcDir}winrt/internal/ipropertyvalue_helpers.dart');
+      imports
+          .add(_relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
     }
 
     return imports.map((import) => "import '$import';").join('\n');
@@ -151,20 +155,20 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String get rootHeader =>
-      "import '${relativePathToSrcDir}com/iinspectable.dart';";
+      "import '${_relativePathTo('com/iinspectable.dart')}';";
 
   @override
   String get extraHeaders => """
-    import '${relativePathToSrcDir}api_ms_win_core_winrt_string_l1_1_0.dart';
-    import '${relativePathToSrcDir}combase.dart';
-    import '${relativePathToSrcDir}exceptions.dart';
-    import '${relativePathToSrcDir}macros.dart';
-    import '${relativePathToSrcDir}utils.dart';
-    import '${relativePathToSrcDir}types.dart';
-    import '${relativePathToSrcDir}winrt_callbacks.dart';
-    import '${relativePathToSrcDir}winrt_helpers.dart';
+    import '${_relativePathTo('api_ms_win_core_winrt_string_l1_1_0.dart')}';
+    import '${_relativePathTo('combase.dart')}';
+    import '${_relativePathTo('exceptions.dart')}';
+    import '${_relativePathTo('macros.dart')}';
+    import '${_relativePathTo('utils.dart')}';
+    import '${_relativePathTo('types.dart')}';
+    import '${_relativePathTo('winrt_callbacks.dart')}';
+    import '${_relativePathTo('winrt_helpers.dart')}';
 
-    import '${relativePathToSrcDir}winrt/internal/hstring_array.dart';
+    import '${_relativePathTo('winrt/internal/hstring_array.dart')}';
   """;
 
   @override

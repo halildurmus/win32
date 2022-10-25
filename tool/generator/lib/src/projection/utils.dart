@@ -1,7 +1,6 @@
 // Useful utilities
 
-import 'dart:io';
-
+import 'package:path/path.dart' as p;
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
@@ -133,13 +132,9 @@ extension CamelCaseConversion on String {
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
 }
 
-/// Given a known file of arbitrary depth in the lib/src hierarchy, return the
-/// relative path to the src parent directory.
-String relativePathToSrcDirectory(File file) {
-  // Find out how many parents there are to the lib/src directory
-  final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
-  return '../' * pathDepth;
-}
+/// Converts [path] to an equivalent relative path from the [start] directory.
+String relativePath(String path, {required String start}) =>
+    p.relative(path, from: start).replaceAll(r'\', '/');
 
 String importForWin32Type(TypeIdentifier identifier) {
   if (excludedWin32Structs.contains(identifier.name)) {
