@@ -51,8 +51,10 @@ class IJsonValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int input, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, inputHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(inputHstring);
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -101,7 +103,10 @@ class IJsonValueStatics extends IInspectable {
                 int Function(Pointer, bool input, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, input, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -121,7 +126,10 @@ class IJsonValueStatics extends IInspectable {
                 int Function(Pointer, double input, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, input, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -140,8 +148,10 @@ class IJsonValueStatics extends IInspectable {
             .asFunction<int Function(Pointer, int input, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, inputHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(inputHstring);
     return JsonValue.fromRawPointer(retValuePtr);
   }
