@@ -17,14 +17,13 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       .toList()
       .join(', ');
 
-  /// Returns the path to the folder where the current interface is located.
-  ///
-  /// e.g. `winrt/storage/pickers`
-  String get _currentFolderPath => 'winrt/${folderFromWinRTType(typeDef.name)}';
+  /// Returns the path to the folder where the current interface is located
+  /// (e.g. `winrt/storage/pickers` for `Windows.Storage.Pickers.IFileOpenPicker`).
+  String get currentFolderPath => 'winrt/${folderFromWinRTType(typeDef.name)}';
 
-  /// Converts [path] to an equivalent relative path from the [_currentFolderPath].
-  String _relativePathTo(String path) =>
-      relativePath(path, start: _currentFolderPath);
+  /// Converts [path] to an equivalent relative path from the [currentFolderPath].
+  String relativePathTo(String path) =>
+      relativePath(path, start: currentFolderPath);
 
   /// The WinRT types to ignore when generating the imports.
   static const ignoredWindowsRuntimeTypes = <String>{
@@ -54,12 +53,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       // folders e.g. Windows.Foundation.AsyncActionCompletedHandler -> foundation/delegates.g.dart
       return '';
     } else if (typeDef.isEnum) {
-      return _relativePathTo(
+      return relativePathTo(
           'winrt/${folderFromWinRTType(typeDef.name)}/enums.g.dart');
     } else if (typeDef.isClass || typeDef.isInterface) {
-      return _relativePathTo('winrt/${filePathFromWinRTType(typeDef.name)}');
+      return relativePathTo('winrt/${filePathFromWinRTType(typeDef.name)}');
     } else if (typeDef.isStruct) {
-      return _relativePathTo(
+      return relativePathTo(
           'winrt/${folderFromWinRTType(typeDef.name)}/structs.g.dart');
     } else {
       // TODO: Add support for these as they occur.
@@ -71,7 +70,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   @override
   String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
     if (typeIdentifier.name == 'System.Guid') {
-      return _relativePathTo('guid.dart');
+      return relativePathTo('guid.dart');
     }
 
     if (typeIdentifier.name.startsWith('Windows')) {
@@ -108,8 +107,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final containsIReferenceImport =
         imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
     if (containsIReferenceImport) {
-      imports
-          .add(_relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
+      imports.add(relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
     }
 
     return imports.map((import) => "import '$import';").join('\n');
@@ -157,20 +155,20 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String get rootHeader =>
-      "import '${_relativePathTo('com/iinspectable.dart')}';";
+      "import '${relativePathTo('com/iinspectable.dart')}';";
 
   @override
   String get extraHeaders => """
-    import '${_relativePathTo('api_ms_win_core_winrt_string_l1_1_0.dart')}';
-    import '${_relativePathTo('combase.dart')}';
-    import '${_relativePathTo('exceptions.dart')}';
-    import '${_relativePathTo('macros.dart')}';
-    import '${_relativePathTo('utils.dart')}';
-    import '${_relativePathTo('types.dart')}';
-    import '${_relativePathTo('winrt_callbacks.dart')}';
-    import '${_relativePathTo('winrt_helpers.dart')}';
+    import '${relativePathTo('api_ms_win_core_winrt_string_l1_1_0.dart')}';
+    import '${relativePathTo('combase.dart')}';
+    import '${relativePathTo('exceptions.dart')}';
+    import '${relativePathTo('macros.dart')}';
+    import '${relativePathTo('utils.dart')}';
+    import '${relativePathTo('types.dart')}';
+    import '${relativePathTo('winrt_callbacks.dart')}';
+    import '${relativePathTo('winrt_helpers.dart')}';
 
-    import '${_relativePathTo('winrt/internal/hstring_array.dart')}';
+    import '${relativePathTo('winrt/internal/hstring_array.dart')}';
   """;
 
   @override
