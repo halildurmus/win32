@@ -10,7 +10,7 @@ void main() {
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.module.name, equalsIgnoringCase('gdi32'));
-    expect(api.module.toString(), equalsIgnoringCase('gdi32'));
+    expect(api.module.name, equalsIgnoringCase('gdi32.dll'));
+    expect(api.module.toString(), equalsIgnoringCase('gdi32.dll'));
   });
 }

@@ -53,7 +53,7 @@ void main() {
 
     final importDllToken = method.pinvokeMap.importDllToken;
     final moduleRef = ModuleRef.fromToken(scope, importDllToken);
-    expect(moduleRef.name, equals('OLE32'));
+    expect(moduleRef.name, equals('OLE32.dll'));
 
     expect(
         method.pinvokeMap.callingConvention, equals(CallingConvention.winApi));
@@ -63,7 +63,7 @@ void main() {
     expect(method.implFeatures.isManaged, isTrue);
     expect(method.implFeatures.isNoInlining, isFalse);
     expect(method.implFeatures.isNoOptimization, isFalse);
-    expect(method.implFeatures.isPreserveSig, isTrue);
+    expect(method.implFeatures.isPreserveSig, isFalse);
     expect(method.implFeatures.isSynchronized, isFalse);
   });
 
