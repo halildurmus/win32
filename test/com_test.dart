@@ -139,8 +139,10 @@ void main() {
       expect(
           param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
       expect(param.typeIdentifier.typeArg, isNotNull);
-      expect(
-          param.typeIdentifier.typeArg?.baseType, equals(BaseType.int16Type));
+      expect(param.typeIdentifier.typeArg?.baseType,
+          equals(BaseType.valueTypeModifier));
+      expect(param.typeIdentifier.typeArg?.type?.name,
+          equals('Windows.Win32.Foundation.VARIANT_BOOL'));
     });
   });
 

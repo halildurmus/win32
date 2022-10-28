@@ -27,7 +27,7 @@ void main() {
     expect(awr.isStatic, isTrue);
 
     expect(awr.isPinvokeImpl, isTrue);
-    expect(awr.pinvokeMap.moduleName, equals('USER32'));
+    expect(awr.pinvokeMap.moduleName, equals('USER32.dll'));
     expect(awr.pinvokeMap.isNoMangle, isTrue);
     expect(awr.pinvokeMap.supportsLastError, isTrue);
     expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.winApi));

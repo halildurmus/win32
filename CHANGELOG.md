@@ -1,3 +1,11 @@
+## 2.4.0
+
+- Update to Windows.Win32.winmd v37.0.19.10366.
+- Notable metadata changes:
+  - Win32 modules now contain extensions (e.g. `gdi32` -> `gdi32.dll`)
+  - Win32 preservesig values updated
+  - More strong value types (e.g. `COLORREF` is no longer a generic `Uint32`)
+
 ## 2.3.0
 
 - Potential breaking change: `Method` and `TypeIdentifier` offer more friendly

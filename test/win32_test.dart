@@ -6,8 +6,10 @@ import 'package:winmd/winmd.dart';
 void main() {
   test('Scope modules contain expected DLLs', () {
     final scope = MetadataStore.getWin32Scope();
-    expect(scope.moduleRefs.map((module) => module.name),
-        containsAll(<String>['KERNEL32', 'USER32', 'GDI32', 'd3d12']));
+    expect(
+        scope.moduleRefs.map((module) => module.name),
+        containsAll(
+            <String>['KERNEL32.dll', 'USER32.dll', 'GDI32.dll', 'd3d12.dll']));
   });
 
   test('Scope modules contain expected user strings', () {
@@ -186,7 +188,12 @@ void main() {
     final colorParam = api.parameters.last;
 
     expect(colorParam.name, equals('color'));
-    expect(colorParam.typeIdentifier.baseType, equals(BaseType.uint32Type));
+    expect(
+        colorParam.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
+    expect(colorParam.typeIdentifier.type?.name,
+        equals('Windows.Win32.Foundation.COLORREF'));
+    expect(colorParam.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
+        equals(BaseType.uint32Type));
   });
 
   test('DWORD typedefs like COLORREF have the correct return type', () {
@@ -195,7 +202,12 @@ void main() {
     final api = typedef.findMethod('SetBkColor')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.uint32Type));
+    expect(
+        returnType.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
+    expect(returnType.typeIdentifier.type?.name,
+        equals('Windows.Win32.Foundation.COLORREF'));
+    expect(returnType.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
+        equals(BaseType.uint32Type));
   });
 
   test('HANDLE-style parameters have the correct type', () {

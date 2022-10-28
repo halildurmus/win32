@@ -32,7 +32,10 @@ void main() {
 
     expect(accel.fields.length, equals(3));
     expect(accel.fields[0].name, equals('fVirt'));
-    expect(accel.fields[0].typeIdentifier.baseType, equals(BaseType.uint8Type));
+    expect(accel.fields[0].typeIdentifier.baseType,
+        equals(BaseType.valueTypeModifier));
+    expect(accel.fields[0].typeIdentifier.type?.name,
+        equals('Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS'));
     expect(accel.fields[0].fieldAccess, equals(FieldAccess.public));
 
     expect(accel.fields[1].name, equals('key'));
