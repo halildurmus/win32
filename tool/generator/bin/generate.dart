@@ -104,7 +104,7 @@ void generateFunctions(Map<String, Win32Function> functions) {
     buffer.write('''
 $functionsFileHeader
 
-final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
+final _$libraryDartName = DynamicLibrary.open('$library');\n
 ''');
 
     // Subset of functions that belong to the library we're projecting.
@@ -185,7 +185,7 @@ void main() {
 
       final test = '''
       test('Can instantiate $function', () {
-        final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
+        final $libraryDartName = DynamicLibrary.open('$library');
         final $function = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(${prototype.nativeParams}),
           $returnDartType Function(${prototype.dartParams})>

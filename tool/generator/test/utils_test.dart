@@ -412,13 +412,6 @@ void main() {
     expect(stripLeadingUnderscores('noUnderscore'), equals('noUnderscore'));
   });
 
-  test('libraryFromDllName', () {
-    expect(libraryFromDllName('kernel32'), equals('kernel32.dll'));
-    expect(libraryFromDllName('gdi32'), equals('gdi32.dll'));
-    expect(libraryFromDllName('bthprops'), equals('bthprops.cpl'));
-    expect(libraryFromDllName('winspool'), equals('winspool.drv'));
-  });
-
   test('relativePath', () {
     expect(relativePath('winrt_helpers.dart', start: 'winrt/foundation'),
         equals('../../winrt_helpers.dart'));
