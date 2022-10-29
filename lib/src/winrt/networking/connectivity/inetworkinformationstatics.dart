@@ -33,11 +33,8 @@ const IID_INetworkInformationStatics = '{5074F851-950D-4165-9C15-365619481EEA}';
 /// {@category Interface}
 /// {@category winrt}
 class INetworkInformationStatics extends IInspectable {
-  final Allocator allocator;
-
   // vtable begins at 6, is 8 entries long.
-  INetworkInformationStatics.fromRawPointer(super.ptr,
-      {this.allocator = calloc});
+  INetworkInformationStatics.fromRawPointer(super.ptr);
 
   factory INetworkInformationStatics.from(IInspectable interface) =>
       INetworkInformationStatics.fromRawPointer(
@@ -152,7 +149,6 @@ class INetworkInformationStatics extends IInspectable {
       return IVectorView<IHostName>.fromRawPointer(
         retValuePtr,
         creator: IHostName.fromRawPointer,
-        allocator: allocator,
       ).toList();
     } finally {
       free(retValuePtr);
