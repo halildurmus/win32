@@ -93,8 +93,10 @@ void generateDllFile(String library, List<Method> filteredMethods,
 
   final buffer = StringBuffer();
 
-  // API set names aren't legal Dart identifiers, so we rename them
-  final libraryDartName = library.replaceAll('-', '_');
+  // API set names aren't legal Dart identifiers, so we rename them.
+  // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+  final libraryDartName =
+      library.replaceAll('-', '_').split('.').first.toLowerCase();
 
   buffer.write('''
   $functionsFileHeader
