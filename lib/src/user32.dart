@@ -1209,7 +1209,7 @@ final _DeferWindowPos = _user32.lookupFunction<
 /// function.
 ///
 /// ```c
-/// LRESULT LRESULT DefMDIChildProcW(
+/// LRESULT DefMDIChildProcW(
 ///   HWND   hWnd,
 ///   UINT   uMsg,
 ///   WPARAM wParam,
@@ -3795,7 +3795,7 @@ final _GetSubMenu = _user32.lookupFunction<
 /// {@category user32}
 int GetSysColor(int nIndex) => _GetSysColor(nIndex);
 
-final _GetSysColor = _user32.lookupFunction<Uint32 Function(Uint32 nIndex),
+final _GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
     int Function(int nIndex)>('GetSysColor');
 
 /// The GetSysColorBrush function retrieves a handle identifying a logical
@@ -3873,7 +3873,7 @@ int GetSystemMetricsForDpi(int nIndex, int dpi) =>
     _GetSystemMetricsForDpi(nIndex, dpi);
 
 final _GetSystemMetricsForDpi = _user32.lookupFunction<
-    Int32 Function(Int32 nIndex, Uint32 dpi),
+    Int32 Function(Uint32 nIndex, Uint32 dpi),
     int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
 
 /// The GetTabbedTextExtent function computes the width and height of a
@@ -7730,7 +7730,7 @@ final _UnregisterTouchWindow =
 /// layered window.
 ///
 /// ```c
-/// BOOL WINAPI UpdateLayeredWindowIndirect(
+/// BOOL UpdateLayeredWindowIndirect(
 ///   HWND hwnd,
 ///   const UPDATELAYEREDWINDOWINFO *pULWInfo
 /// );

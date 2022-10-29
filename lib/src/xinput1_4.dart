@@ -85,7 +85,7 @@ int XInputGetBatteryInformation(int dwUserIndex, int devType,
     _XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation);
 
 final _XInputGetBatteryInformation = _xinput1_4.lookupFunction<
-        Uint32 Function(Uint32 dwUserIndex, Uint8 devType,
+        Uint32 Function(Uint32 dwUserIndex, Uint32 devType,
             Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation),
         int Function(int dwUserIndex, int devType,
             Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation)>(

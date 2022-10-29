@@ -28,7 +28,7 @@ final _crypt32 = DynamicLibrary.open('crypt32.dll');
 /// computer.
 ///
 /// ```c
-/// DPAPI_IMP BOOL CryptProtectData(
+/// BOOL CryptProtectData(
 ///   [in]           DATA_BLOB                 *pDataIn,
 ///   [in, optional] LPCWSTR                   szDataDescr,
 ///   [in, optional] DATA_BLOB                 *pOptionalEntropy,
@@ -76,7 +76,7 @@ final _CryptProtectData = _crypt32.lookupFunction<
 /// and viewable by others.
 ///
 /// ```c
-/// DPAPI_IMP BOOL CryptProtectMemory(
+/// BOOL CryptProtectMemory(
 ///   [in, out] LPVOID pDataIn,
 ///   [in]      DWORD  cbDataIn,
 ///   [in]      DWORD  dwFlags
@@ -98,7 +98,7 @@ final _CryptProtectMemory = _crypt32.lookupFunction<
 /// be done on the same computer.
 ///
 /// ```c
-/// DPAPI_IMP BOOL CryptUnprotectData(
+/// BOOL CryptUnprotectData(
 ///   [in]            DATA_BLOB                 *pDataIn,
 ///   [out, optional] LPWSTR                    *ppszDataDescr,
 ///   [in, optional]  DATA_BLOB                 *pOptionalEntropy,
@@ -142,7 +142,7 @@ final _CryptUnprotectData = _crypt32.lookupFunction<
 /// using the CryptProtectMemory function.
 ///
 /// ```c
-/// DPAPI_IMP BOOL CryptUnprotectMemory(
+/// BOOL CryptUnprotectMemory(
 ///   [in, out] LPVOID pDataIn,
 ///   [in]      DWORD  cbDataIn,
 ///   [in]      DWORD  dwFlags
@@ -163,7 +163,7 @@ final _CryptUnprotectMemory = _crypt32.lookupFunction<
 /// moved from one domain to another.
 ///
 /// ```c
-/// DPAPI_IMP BOOL CryptUpdateProtectedState(
+/// BOOL CryptUpdateProtectedState(
 ///   [in]  PSID    pOldSid,
 ///   [in]  LPCWSTR pwszOldPassword,
 ///   [in]  DWORD   dwFlags,

@@ -21,6 +21,38 @@ import 'variant.dart';
 
 final _winspool = DynamicLibrary.open('winspool.drv');
 
+/// The AbortPrinter function deletes a printer's spool file if the printer
+/// is configured for spooling.
+///
+/// ```c
+/// BOOL AbortPrinter(
+///   _In_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int AbortPrinter(int hPrinter) => _AbortPrinter(hPrinter);
+
+final _AbortPrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('AbortPrinter');
+
+/// The AddForm function adds a form to the list of available forms that can
+/// be selected for the specified printer.
+///
+/// ```c
+/// BOOL AddFormW(
+///   _In_ HANDLE hPrinter,
+///   _In_ DWORD  Level,
+///   _In_ LPBYTE pForm
+/// );
+/// ```
+/// {@category winspool}
+int AddForm(int hPrinter, int Level, Pointer<Uint8> pForm) =>
+    _AddForm(hPrinter, Level, pForm);
+
+final _AddForm = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm),
+    int Function(int hPrinter, int Level, Pointer<Uint8> pForm)>('AddFormW');
+
 /// The AddJob function adds a print job to the list of print jobs that can
 /// be scheduled by the print spooler. The function retrieves the name of
 /// the file you can use to store the job.
@@ -135,6 +167,19 @@ final _AdvancedDocumentProperties = _winspool.lookupFunction<
         Pointer<DEVMODE> pDevModeOutput,
         Pointer<DEVMODE> pDevModeInput)>('AdvancedDocumentPropertiesW');
 
+/// The ClosePrinter function closes the specified printer object.
+///
+/// ```c
+/// BOOL ClosePrinter(
+///   _In_ HANDLE hPrinter
+///   );
+/// ```
+/// {@category winspool}
+int ClosePrinter(int hPrinter) => _ClosePrinter(hPrinter);
+
+final _ClosePrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('ClosePrinter');
+
 /// The CloseSpoolFileHandle function closes a handle to a spool file
 /// associated with the print job currently submitted by the application.
 ///
@@ -227,6 +272,19 @@ int DeleteForm(int hPrinter, Pointer<Utf16> pFormName) =>
 final _DeleteForm = _winspool.lookupFunction<
     Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName),
     int Function(int hPrinter, Pointer<Utf16> pFormName)>('DeleteFormW');
+
+/// The DeletePrinter function deletes the specified printer object.
+///
+/// ```c
+/// BOOL DeletePrinter(
+///   _Inout_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int DeletePrinter(int hPrinter) => _DeletePrinter(hPrinter);
+
+final _DeletePrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('DeletePrinter');
 
 /// The DeletePrinterConnection function deletes a connection to a printer
 /// that was established by a call to AddPrinterConnection or
@@ -346,6 +404,34 @@ final _DocumentProperties = _winspool.lookupFunction<
         Pointer<DEVMODE> pDevModeOutput,
         Pointer<DEVMODE> pDevModeInput,
         int fMode)>('DocumentPropertiesW');
+
+/// The EndDocPrinter function ends a print job for the specified printer.
+///
+/// ```c
+/// BOOL EndDocPrinter(
+///   _In_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int EndDocPrinter(int hPrinter) => _EndDocPrinter(hPrinter);
+
+final _EndDocPrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('EndDocPrinter');
+
+/// The EndPagePrinter function notifies the print spooler that the
+/// application is at the end of a page in a print job.
+///
+/// ```c
+/// BOOL EndPagePrinter(
+///   _In_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int EndPagePrinter(int hPrinter) => _EndPagePrinter(hPrinter);
+
+final _EndPagePrinter = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('EndPagePrinter');
 
 /// The EnumForms function enumerates the forms supported by the specified
 /// printer.
@@ -577,6 +663,25 @@ final _EnumPrinters = _winspool.lookupFunction<
         int cbBuf,
         Pointer<Uint32> pcbNeeded,
         Pointer<Uint32> pcReturned)>('EnumPrintersW');
+
+/// The FindClosePrinterChangeNotification function closes a change
+/// notification object created by calling the
+/// FindFirstPrinterChangeNotification function. The printer or print server
+/// associated with the change notification object will no longer be
+/// monitored by that object.
+///
+/// ```c
+/// BOOL FindClosePrinterChangeNotification(
+///   _In_ HANDLE hChange
+/// );
+/// ```
+/// {@category winspool}
+int FindClosePrinterChangeNotification(int hChange) =>
+    _FindClosePrinterChangeNotification(hChange);
+
+final _FindClosePrinterChangeNotification = _winspool.lookupFunction<
+    Int32 Function(IntPtr hChange),
+    int Function(int hChange)>('FindClosePrinterChangeNotification');
 
 /// The FindFirstPrinterChangeNotification function creates a change
 /// notification object and returns a handle to the object. You can then use
@@ -849,7 +954,7 @@ final _GetPrinterDataEx = _winspool.lookupFunction<
 /// The GetPrintExecutionData retrieves the current print context.
 ///
 /// ```c
-/// BOOL WINAPI GetPrintExecutionData(
+/// BOOL GetPrintExecutionData(
 ///   _Out_ PRINT_EXECUTION_DATA *pData
 /// );
 /// ```
@@ -915,6 +1020,35 @@ final _OpenPrinter = _winspool.lookupFunction<
     int Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault)>('OpenPrinterW');
 
+/// Retrieves a handle to the specified printer, print server, or other
+/// types of handles in the print subsystem, while setting some of the
+/// printer options.
+///
+/// ```c
+/// BOOL OpenPrinter2W(
+///   _In_  LPCTSTR            pPrinterName,
+///   _Out_ LPHANDLE           phPrinter,
+///   _In_  LPPRINTER_DEFAULTS pDefault,
+///   _In_  PPRINTER_OPTIONS   pOptions
+/// );
+/// ```
+/// {@category winspool}
+int OpenPrinter2(
+        Pointer<Utf16> pPrinterName,
+        Pointer<IntPtr> phPrinter,
+        Pointer<PRINTER_DEFAULTS> pDefault,
+        Pointer<PRINTER_OPTIONS> pOptions) =>
+    _OpenPrinter2(pPrinterName, phPrinter, pDefault, pOptions);
+
+final _OpenPrinter2 = _winspool.lookupFunction<
+    Int32 Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+        Pointer<PRINTER_DEFAULTS> pDefault, Pointer<PRINTER_OPTIONS> pOptions),
+    int Function(
+        Pointer<Utf16> pPrinterName,
+        Pointer<IntPtr> phPrinter,
+        Pointer<PRINTER_DEFAULTS> pDefault,
+        Pointer<PRINTER_OPTIONS> pOptions)>('OpenPrinter2W');
+
 /// The PrinterProperties function displays a printer-properties property
 /// sheet for the specified printer.
 ///
@@ -931,6 +1065,51 @@ int PrinterProperties(int hWnd, int hPrinter) =>
 final _PrinterProperties = _winspool.lookupFunction<
     Int32 Function(IntPtr hWnd, IntPtr hPrinter),
     int Function(int hWnd, int hPrinter)>('PrinterProperties');
+
+/// The ReadPrinter function retrieves data from the specified printer.
+///
+/// ```c
+/// BOOL ReadPrinter(
+///   _In_  HANDLE  hPrinter,
+///   _Out_ LPVOID  pBuf,
+///   _In_  DWORD   cbBuf,
+///   _Out_ LPDWORD pNoBytesRead
+/// );
+/// ```
+/// {@category winspool}
+int ReadPrinter(
+        int hPrinter, Pointer pBuf, int cbBuf, Pointer<Uint32> pNoBytesRead) =>
+    _ReadPrinter(hPrinter, pBuf, cbBuf, pNoBytesRead);
+
+final _ReadPrinter = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+        Pointer<Uint32> pNoBytesRead),
+    int Function(int hPrinter, Pointer pBuf, int cbBuf,
+        Pointer<Uint32> pNoBytesRead)>('ReadPrinter');
+
+/// Reports to the Print Spooler service whether an XPS print job is in the
+/// spooling or the rendering phase and what part of the processing is
+/// currently underway.
+///
+/// ```c
+/// HRESULT ReportJobProcessingProgress(
+///   _In_ HANDLE                printerHandle,
+///   _In_ ULONG                 jobId,
+///        EPrintXPSJobOperation jobOperation,
+///        EPrintXPSJobProgress  jobProgress
+/// );
+/// ```
+/// {@category winspool}
+int ReportJobProcessingProgress(
+        int printerHandle, int jobId, int jobOperation, int jobProgress) =>
+    _ReportJobProcessingProgress(
+        printerHandle, jobId, jobOperation, jobProgress);
+
+final _ReportJobProcessingProgress = _winspool.lookupFunction<
+    Int32 Function(IntPtr printerHandle, Uint32 jobId, Int32 jobOperation,
+        Int32 jobProgress),
+    int Function(int printerHandle, int jobId, int jobOperation,
+        int jobProgress)>('ReportJobProcessingProgress');
 
 /// The ResetPrinter function specifies the data type and device mode values
 /// to be used for printing documents submitted by the StartDocPrinter
@@ -951,6 +1130,22 @@ final _ResetPrinter = _winspool.lookupFunction<
     Int32 Function(IntPtr hPrinter, Pointer<PRINTER_DEFAULTS> pDefault),
     int Function(
         int hPrinter, Pointer<PRINTER_DEFAULTS> pDefault)>('ResetPrinterW');
+
+/// The ScheduleJob function requests that the print spooler schedule a
+/// specified print job for printing.
+///
+/// ```c
+/// BOOL ScheduleJob(
+///   _In_ HANDLE hPrinter,
+///   _In_ DWORD  dwJobID
+/// );
+/// ```
+/// {@category winspool}
+int ScheduleJob(int hPrinter, int JobId) => _ScheduleJob(hPrinter, JobId);
+
+final _ScheduleJob = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter, Uint32 JobId),
+    int Function(int hPrinter, int JobId)>('ScheduleJob');
 
 /// The SetDefaultPrinter function sets the printer name of the default
 /// printer for the current user on the local computer.
@@ -1139,3 +1334,40 @@ final _StartDocPrinter = _winspool.lookupFunction<
         IntPtr hPrinter, Uint32 Level, Pointer<DOC_INFO_1> pDocInfo),
     int Function(int hPrinter, int Level,
         Pointer<DOC_INFO_1> pDocInfo)>('StartDocPrinterW');
+
+/// The StartPagePrinter function notifies the spooler that a page is about
+/// to be printed on the specified printer.
+///
+/// ```c
+/// BOOL StartPagePrinter(
+///   _In_ HANDLE hPrinter
+/// );
+/// ```
+/// {@category winspool}
+int StartPagePrinter(int hPrinter) => _StartPagePrinter(hPrinter);
+
+final _StartPagePrinter = _winspool.lookupFunction<
+    Int32 Function(IntPtr hPrinter),
+    int Function(int hPrinter)>('StartPagePrinter');
+
+/// The WritePrinter function notifies the print spooler that data should be
+/// written to the specified printer.
+///
+/// ```c
+/// BOOL WritePrinter(
+///   _In_  HANDLE  hPrinter,
+///   _In_  LPVOID  pBuf,
+///   _In_  DWORD   cbBuf,
+///   _Out_ LPDWORD pcWritten
+/// );
+/// ```
+/// {@category winspool}
+int WritePrinter(
+        int hPrinter, Pointer pBuf, int cbBuf, Pointer<Uint32> pcWritten) =>
+    _WritePrinter(hPrinter, pBuf, cbBuf, pcWritten);
+
+final _WritePrinter = _winspool.lookupFunction<
+    Int32 Function(
+        IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf, Pointer<Uint32> pcWritten),
+    int Function(int hPrinter, Pointer pBuf, int cbBuf,
+        Pointer<Uint32> pcWritten)>('WritePrinter');

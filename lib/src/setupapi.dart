@@ -25,7 +25,7 @@ final _setupapi = DynamicLibrary.open('setupapi.dll');
 /// set and frees all associated memory.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiDestroyDeviceInfoList(
+/// BOOL SetupDiDestroyDeviceInfoList(
 ///   HDEVINFO DeviceInfoSet
 /// );
 /// ```
@@ -41,7 +41,7 @@ final _SetupDiDestroyDeviceInfoList = _setupapi.lookupFunction<
 /// that specifies a device information element in a device information set.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiEnumDeviceInfo(
+/// BOOL SetupDiEnumDeviceInfo(
 ///   HDEVINFO         DeviceInfoSet,
 ///   DWORD            MemberIndex,
 ///   PSP_DEVINFO_DATA DeviceInfoData
@@ -62,7 +62,7 @@ final _SetupDiEnumDeviceInfo = _setupapi.lookupFunction<
 /// interfaces that are contained in a device information set.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiEnumDeviceInterfaces(
+/// BOOL SetupDiEnumDeviceInterfaces(
 ///   [in]           HDEVINFO                  DeviceInfoSet,
 ///   [in, optional] PSP_DEVINFO_DATA          DeviceInfoData,
 ///   [in]           const GUID                *InterfaceClassGuid,
@@ -100,7 +100,7 @@ final _SetupDiEnumDeviceInterfaces = _setupapi.lookupFunction<
 /// a local computer.
 ///
 /// ```c
-/// WINSETUPAPI HDEVINFO SetupDiGetClassDevsW(
+/// HDEVINFO SetupDiGetClassDevsW(
 ///   const GUID *ClassGuid,
 ///   PCWSTR     Enumerator,
 ///   HWND       hwndParent,
@@ -122,7 +122,7 @@ final _SetupDiGetClassDevs = _setupapi.lookupFunction<
 /// that is associated with a device information element.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiGetDeviceInstanceIdW(
+/// BOOL SetupDiGetDeviceInstanceIdW(
 ///   [in]            HDEVINFO         DeviceInfoSet,
 ///   [in]            PSP_DEVINFO_DATA DeviceInfoData,
 ///   [out, optional] PWSTR            DeviceInstanceId,
@@ -158,7 +158,7 @@ final _SetupDiGetDeviceInstanceId = _setupapi.lookupFunction<
 /// device interface.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiGetDeviceInterfaceDetailW(
+/// BOOL SetupDiGetDeviceInterfaceDetailW(
 ///   [in]            HDEVINFO                           DeviceInfoSet,
 ///   [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,
 ///   [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,
@@ -204,7 +204,7 @@ final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
 /// and Play device property.
 ///
 /// ```c
-/// WINSETUPAPI BOOL SetupDiGetDeviceRegistryPropertyW(
+/// BOOL SetupDiGetDeviceRegistryPropertyW(
 ///   [in]            HDEVINFO         DeviceInfoSet,
 ///   [in]            PSP_DEVINFO_DATA DeviceInfoData,
 ///   [in]            DWORD            Property,
@@ -248,7 +248,7 @@ final _SetupDiGetDeviceRegistryProperty = _setupapi.lookupFunction<
 /// device-specific configuration information.
 ///
 /// ```c
-/// WINSETUPAPI HKEY SetupDiOpenDevRegKey(
+/// HKEY SetupDiOpenDevRegKey(
 ///   HDEVINFO         DeviceInfoSet,
 ///   PSP_DEVINFO_DATA DeviceInfoData,
 ///   DWORD            Scope,

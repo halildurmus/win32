@@ -25,7 +25,7 @@ final _shlwapi = DynamicLibrary.open('shlwapi.dll');
 /// CreateStreamOnHGlobal.
 ///
 /// ```c
-/// IStream * SHCreateMemStream(
+/// IStream* SHCreateMemStream(
 ///   [in, optional] const BYTE *pInit,
 ///   [in]           UINT       cbInit
 /// );

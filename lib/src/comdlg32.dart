@@ -24,7 +24,7 @@ final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 /// Creates a Color dialog box that enables the user to select a color.
 ///
 /// ```c
-/// BOOL WINAPI ChooseColorW(
+/// BOOL ChooseColorW(
 ///   _Inout_ LPCHOOSECOLOR lpcc
 /// );
 /// ```
@@ -41,7 +41,7 @@ final _ChooseColor = _comdlg32.lookupFunction<
 /// color), and a script (or character set).
 ///
 /// ```c
-/// BOOL WINAPI ChooseFontW(
+/// BOOL ChooseFontW(
 ///   _Inout_ LPCHOOSEFONT lpcf
 /// );
 /// ```

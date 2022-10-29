@@ -24,7 +24,7 @@ final _dbghelp = DynamicLibrary.open('dbghelp.dll');
 /// Deallocates all resources associated with the process handle.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymCleanup(
+/// BOOL SymCleanup(
 ///   HANDLE hProcess);
 /// ```
 /// {@category dbghelp}
@@ -36,7 +36,7 @@ final _SymCleanup = _dbghelp.lookupFunction<Int32 Function(IntPtr hProcess),
 /// Enumerates all symbols in a process.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymEnumSymbolsW(
+/// BOOL SymEnumSymbolsW(
 ///   HANDLE                          hProcess,
 ///   ULONG64                         BaseOfDll,
 ///   PCWSTR                          Mask,
@@ -71,7 +71,7 @@ final _SymEnumSymbols = _dbghelp.lookupFunction<
 /// Retrieves symbol information for the specified address.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymFromAddrW(
+/// BOOL SymFromAddrW(
 ///   HANDLE        hProcess,
 ///   DWORD64       Address,
 ///   PDWORD64      Displacement,
@@ -92,7 +92,7 @@ final _SymFromAddr = _dbghelp.lookupFunction<
 /// Retrieves symbol information for the specified managed code token.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymFromTokenW(
+/// BOOL SymFromTokenW(
 ///   HANDLE        hProcess,
 ///   DWORD64       Base,
 ///   DWORD         Token,
@@ -113,7 +113,7 @@ final _SymFromToken = _dbghelp.lookupFunction<
 /// Gets whether the specified extended symbol option on or off.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymGetExtendedOption(
+/// BOOL SymGetExtendedOption(
 ///   IMAGEHLP_EXTENDED_OPTIONS option
 /// );
 /// ```
@@ -127,7 +127,7 @@ final _SymGetExtendedOption = _dbghelp.lookupFunction<
 /// Initializes the symbol handler for a process.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymInitializeW(
+/// BOOL SymInitializeW(
 ///   HANDLE hProcess,
 ///   PCWSTR UserSearchPath,
 ///   BOOL   fInvadeProcess
@@ -147,7 +147,7 @@ final _SymInitialize = _dbghelp.lookupFunction<
 /// Loads the symbol table for the specified module.
 ///
 /// ```c
-/// DWORD64 IMAGEAPI SymLoadModuleExW(
+/// DWORD64 SymLoadModuleExW(
 ///   HANDLE        hProcess,
 ///   HANDLE        hFile,
 ///   PCWSTR        ImageName,
@@ -193,7 +193,7 @@ final _SymLoadModuleEx = _dbghelp.lookupFunction<
 /// Turns the specified extended symbol option on or off.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetExtendedOption(
+/// BOOL SymSetExtendedOption(
 ///   IMAGEHLP_EXTENDED_OPTIONS option,
 ///   BOOL                      value
 /// );
@@ -209,7 +209,7 @@ final _SymSetExtendedOption = _dbghelp.lookupFunction<
 /// Sets the options mask.
 ///
 /// ```c
-/// DWORD IMAGEAPI SymSetOptions(
+/// DWORD SymSetOptions(
 ///   DWORD SymOptions
 /// );
 /// ```
@@ -223,7 +223,7 @@ final _SymSetOptions = _dbghelp.lookupFunction<
 /// Sets the window that the caller will use to display a user interface.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetParentWindow(
+/// BOOL SymSetParentWindow(
 ///   HWND hwnd
 /// );
 /// ```
@@ -236,7 +236,7 @@ final _SymSetParentWindow = _dbghelp.lookupFunction<Int32 Function(IntPtr hwnd),
 /// Sets the local scope to the symbol that matches the specified address.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetScopeFromAddr(
+/// BOOL SymSetScopeFromAddr(
 ///   HANDLE  hProcess,
 ///   ULONG64 Address
 /// );
@@ -252,7 +252,7 @@ final _SymSetScopeFromAddr = _dbghelp.lookupFunction<
 /// Sets the local scope to the symbol that matches the specified index.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetScopeFromIndex(
+/// BOOL SymSetScopeFromIndex(
 ///   HANDLE  hProcess,
 ///   ULONG64 BaseOfDll,
 ///   DWORD   Index
@@ -271,7 +271,7 @@ final _SymSetScopeFromIndex = _dbghelp.lookupFunction<
 /// and inline context.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetScopeFromInlineContext(
+/// BOOL SymSetScopeFromInlineContext(
 ///   HANDLE  hProcess,
 ///   ULONG64 Address,
 ///   ULONG   InlineContext
@@ -290,7 +290,7 @@ final _SymSetScopeFromInlineContext = _dbghelp.lookupFunction<
 /// Sets the search path for the specified process.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymSetSearchPathW(
+/// BOOL SymSetSearchPathW(
 ///   HANDLE hProcess,
 ///   PCWSTR SearchPath
 /// );
@@ -307,7 +307,7 @@ final _SymSetSearchPath = _dbghelp.lookupFunction<
 /// Unloads the symbol table.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymUnloadModule(
+/// BOOL SymUnloadModule(
 ///   HANDLE hProcess,
 ///   DWORD  BaseOfDll
 /// );
@@ -323,7 +323,7 @@ final _SymUnloadModule = _dbghelp.lookupFunction<
 /// Unloads the symbol table.
 ///
 /// ```c
-/// BOOL IMAGEAPI SymUnloadModule64(
+/// BOOL SymUnloadModule64(
 ///   HANDLE  hProcess,
 ///   DWORD64 BaseOfDll
 /// );
@@ -339,7 +339,7 @@ final _SymUnloadModule64 = _dbghelp.lookupFunction<
 /// Undecorates the specified decorated C++ symbol name.
 ///
 /// ```c
-/// DWORD IMAGEAPI UnDecorateSymbolNameW(
+/// DWORD UnDecorateSymbolNameW(
 ///   PCWSTR name,
 ///   PWSTR  outputString,
 ///   DWORD  maxStringLength,

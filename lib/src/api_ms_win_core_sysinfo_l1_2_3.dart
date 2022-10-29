@@ -19,21 +19,22 @@ import 'guid.dart';
 import 'structs.g.dart';
 import 'variant.dart';
 
-final _api_ms_win_core_apiquery_l2_1_0 =
-    DynamicLibrary.open('api-ms-win-core-apiquery-l2-1-0.dll');
+final _api_ms_win_core_sysinfo_l1_2_3 =
+    DynamicLibrary.open('api-ms-win-core-sysinfo-l1-2-3.dll');
 
-/// The IsApiSetImplemented function tests if a specified API set is present
-/// on the computer.
+/// Retrieves the best estimate of the diagonal size of the built-in screen,
+/// in inches.
 ///
 /// ```c
-/// BOOL IsApiSetImplemented(
-///   PCSTR Contract
+/// HRESULT GetIntegratedDisplaySize(
+///   double *sizeInInches
 /// );
 /// ```
-/// {@category onecore}
-int IsApiSetImplemented(Pointer<Utf8> Contract) =>
-    _IsApiSetImplemented(Contract);
+/// {@category kernel32}
+int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) =>
+    _GetIntegratedDisplaySize(sizeInInches);
 
-final _IsApiSetImplemented = _api_ms_win_core_apiquery_l2_1_0.lookupFunction<
-    Int32 Function(Pointer<Utf8> Contract),
-    int Function(Pointer<Utf8> Contract)>('IsApiSetImplemented');
+final _GetIntegratedDisplaySize =
+    _api_ms_win_core_sysinfo_l1_2_3.lookupFunction<
+        Int32 Function(Pointer<Double> sizeInInches),
+        int Function(Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');

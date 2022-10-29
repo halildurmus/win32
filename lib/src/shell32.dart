@@ -24,7 +24,7 @@ final _shell32 = DynamicLibrary.open('shell32.dll');
 /// Retrieves the command-line string for the current process.
 ///
 /// ```c
-/// LPWSTR * CommandLineToArgvW(
+/// LPWSTR CommandLineToArgvW(
 ///   LPCWSTR lpCmdLine,
 ///   int     *pNumArgs
 /// );
@@ -174,7 +174,7 @@ final _ShellExecute = _shell32.lookupFunction<
         Pointer<Utf16> lpFile,
         Pointer<Utf16> lpParameters,
         Pointer<Utf16> lpDirectory,
-        Int32 nShowCmd),
+        Uint32 nShowCmd),
     int Function(
         int hwnd,
         Pointer<Utf16> lpOperation,
@@ -319,7 +319,7 @@ int SHGetKnownFolderPath(Pointer<GUID> rfid, int dwFlags, int hToken,
     _SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath);
 
 final _SHGetKnownFolderPath = _shell32.lookupFunction<
-    Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
+    Int32 Function(Pointer<GUID> rfid, Int32 dwFlags, IntPtr hToken,
         Pointer<Pointer<Utf16>> ppszPath),
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');

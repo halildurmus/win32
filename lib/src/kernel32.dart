@@ -73,7 +73,7 @@ final _AddRefActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
 /// Allocates a new console for the calling process.
 ///
 /// ```c
-/// BOOL WINAPI AllocConsole(void);
+/// BOOL AllocConsole(void);
 /// ```
 /// {@category kernel32}
 int AllocConsole() => _AllocConsole();
@@ -97,7 +97,7 @@ final _AreFileApisANSI = _kernel32
 /// Attaches the calling process to the console of the specified process.
 ///
 /// ```c
-/// BOOL WINAPI AttachConsole(
+/// BOOL AttachConsole(
 ///   _In_ DWORD dwProcessId
 /// );
 /// ```
@@ -350,7 +350,7 @@ final _CloseHandle = _kernel32.lookupFunction<Int32 Function(IntPtr hObject),
 /// Closes a pseudoconsole from the given handle.
 ///
 /// ```c
-/// void WINAPI ClosePseudoConsole(
+/// void ClosePseudoConsole(
 ///   _In_ HPCON hPC
 /// );
 /// ```
@@ -436,7 +436,7 @@ final _CreateActCtx = _kernel32.lookupFunction<
 /// Creates a console screen buffer.
 ///
 /// ```c
-/// HANDLE WINAPI CreateConsoleScreenBuffer(
+/// HANDLE CreateConsoleScreenBuffer(
 ///   _In_             DWORD               dwDesiredAccess,
 ///   _In_             DWORD               dwShareMode,
 ///   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
@@ -793,7 +793,7 @@ final _CreateProcess = _kernel32.lookupFunction<
 /// Creates a new pseudoconsole object for the calling process.
 ///
 /// ```c
-/// HRESULT WINAPI CreatePseudoConsole(
+/// HRESULT CreatePseudoConsole(
 ///   _In_ COORD size,
 ///   _In_ HANDLE hInput,
 ///   _In_ HANDLE hOutput,
@@ -1456,7 +1456,7 @@ final _FileTimeToSystemTime = _kernel32.lookupFunction<
 /// beginning at the specified coordinates in a screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI FillConsoleOutputAttribute(
+/// BOOL FillConsoleOutputAttribute(
 ///   _In_  HANDLE  hConsoleOutput,
 ///   _In_  WORD    wAttribute,
 ///   _In_  DWORD   nLength,
@@ -1484,7 +1484,7 @@ final _FillConsoleOutputAttribute = _kernel32.lookupFunction<
 /// times, beginning at the specified coordinates.
 ///
 /// ```c
-/// BOOL WINAPI FillConsoleOutputCharacterW(
+/// BOOL FillConsoleOutputCharacterW(
 ///   _In_  HANDLE  hConsoleOutput,
 ///   _In_  WCHAR   cCharacter,
 ///   _In_  DWORD   nLength,
@@ -1926,7 +1926,7 @@ final _FindVolumeClose = _kernel32.lookupFunction<
 /// input buffer are discarded.
 ///
 /// ```c
-/// BOOL WINAPI FlushConsoleInputBuffer(
+/// BOOL FlushConsoleInputBuffer(
 ///   _In_ HANDLE hConsoleInput
 /// );
 /// ```
@@ -1992,7 +1992,7 @@ final _FormatMessage = _kernel32.lookupFunction<
 /// Detaches the calling process from its console.
 ///
 /// ```c
-/// BOOL WINAPI FreeConsole(void);
+/// BOOL FreeConsole(void);
 /// ```
 /// {@category kernel32}
 int FreeConsole() => _FreeConsole();
@@ -2267,7 +2267,7 @@ final _GetComputerNameEx = _kernel32.lookupFunction<
 /// keyboard input into the corresponding character value.
 ///
 /// ```c
-/// UINT WINAPI GetConsoleCP(void);
+/// UINT GetConsoleCP(void);
 /// ```
 /// {@category kernel32}
 int GetConsoleCP() => _GetConsoleCP();
@@ -2279,7 +2279,7 @@ final _GetConsoleCP =
 /// the specified console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI GetConsoleCursorInfo(
+/// BOOL GetConsoleCursorInfo(
 ///   _In_  HANDLE               hConsoleOutput,
 ///   _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo
 /// );
@@ -2300,7 +2300,7 @@ final _GetConsoleCursorInfo = _kernel32.lookupFunction<
 /// current output mode of a console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI GetConsoleMode(
+/// BOOL GetConsoleMode(
 ///   _In_  HANDLE  hConsoleHandle,
 ///   _Out_ LPDWORD lpMode
 /// );
@@ -2319,7 +2319,7 @@ final _GetConsoleMode = _kernel32.lookupFunction<
 /// displayed in the console window.
 ///
 /// ```c
-/// UINT WINAPI GetConsoleOutputCP(void);
+/// UINT GetConsoleOutputCP(void);
 /// ```
 /// {@category kernel32}
 int GetConsoleOutputCP() => _GetConsoleOutputCP();
@@ -2330,7 +2330,7 @@ final _GetConsoleOutputCP = _kernel32
 /// Retrieves information about the specified console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI GetConsoleScreenBufferInfo(
+/// BOOL GetConsoleScreenBufferInfo(
 ///   _In_  HANDLE                      hConsoleOutput,
 ///   _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
 /// );
@@ -2350,7 +2350,7 @@ final _GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
 /// Retrieves information about the current console selection.
 ///
 /// ```c
-/// BOOL WINAPI GetConsoleSelectionInfo(
+/// BOOL GetConsoleSelectionInfo(
 ///   _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo
 /// );
 /// ```
@@ -2367,7 +2367,7 @@ final _GetConsoleSelectionInfo = _kernel32.lookupFunction<
 /// Retrieves the title for the current console window.
 ///
 /// ```c
-/// DWORD WINAPI GetConsoleTitleW(
+/// DWORD GetConsoleTitleW(
 ///   _Out_ LPTSTR lpConsoleTitle,
 ///   _In_  DWORD  nSize
 /// );
@@ -2384,7 +2384,7 @@ final _GetConsoleTitle = _kernel32.lookupFunction<
 /// calling process.
 ///
 /// ```c
-/// HWND WINAPI GetConsoleWindow(void);
+/// HWND GetConsoleWindow(void);
 /// ```
 /// {@category kernel32}
 int GetConsoleWindow() => _GetConsoleWindow();
@@ -2793,7 +2793,7 @@ final _GetHandleInformation = _kernel32.lookupFunction<
 /// current font and the size of the display.
 ///
 /// ```c
-/// COORD WINAPI GetLargestConsoleWindowSize(
+/// COORD GetLargestConsoleWindowSize(
 ///   _In_ HANDLE hConsoleOutput
 /// );
 /// ```
@@ -3213,7 +3213,7 @@ final _GetNativeSystemInfo = _kernel32.lookupFunction<
 /// buffer.
 ///
 /// ```c
-/// BOOL WINAPI GetNumberOfConsoleInputEvents(
+/// BOOL GetNumberOfConsoleInputEvents(
 ///   HANDLE hConsoleInput,
 ///   LPDWORD lpcNumberOfEvents
 /// );
@@ -3618,7 +3618,7 @@ final _GetStartupInfo = _kernel32.lookupFunction<
 /// standard output, or standard error).
 ///
 /// ```c
-/// HANDLE WINAPI GetStdHandle(
+/// HANDLE GetStdHandle(
 ///   _In_ DWORD nStdHandle
 /// );
 /// ```
@@ -4331,7 +4331,7 @@ final _HeapQueryInformation = _kernel32.lookupFunction<
 /// Retrieves information about the specified heap.
 ///
 /// ```c
-/// DECLSPEC_ALLOCATOR LPVOID HeapReAlloc(
+/// LPVOID HeapReAlloc(
 ///   HANDLE                 hHeap,
 ///   DWORD                  dwFlags,
 ///   _Frees_ptr_opt_ LPVOID lpMem,
@@ -4789,7 +4789,7 @@ final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
 /// from the buffer.
 ///
 /// ```c
-/// BOOL WINAPI PeekConsoleInputW(
+/// BOOL PeekConsoleInputW(
 ///   HANDLE        hConsoleInput,
 ///   PINPUT_RECORD lpBuffer,
 ///   DWORD         nLength,
@@ -4953,7 +4953,7 @@ final _QueryPerformanceFrequency = _kernel32.lookupFunction<
 /// the buffer.
 ///
 /// ```c
-/// BOOL WINAPI ReadConsoleW(
+/// BOOL ReadConsoleW(
 ///   _In_     HANDLE  hConsoleInput,
 ///   _Out_    LPVOID  lpBuffer,
 ///   _In_     DWORD   nNumberOfCharsToRead,
@@ -4988,7 +4988,7 @@ final _ReadConsole = _kernel32.lookupFunction<
 /// Reads data from a console input buffer and removes it from the buffer.
 ///
 /// ```c
-/// BOOL WINAPI ReadConsoleInputW(
+/// BOOL ReadConsoleInputW(
 ///   HANDLE        hConsoleInput,
 ///   PINPUT_RECORD lpBuffer,
 ///   DWORD         nLength,
@@ -5225,7 +5225,7 @@ final _ResetEvent = _kernel32.lookupFunction<Int32 Function(IntPtr hEvent),
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
 /// ```c
-/// HRESULT WINAPI ResizePseudoConsole(
+/// HRESULT ResizePseudoConsole(
 ///   _In_ HPCON hPC ,
 ///   _In_ COORD size
 /// );
@@ -5242,7 +5242,7 @@ final _ResizePseudoConsole = _kernel32.lookupFunction<
 /// console screen buffer outside the clipping rectangle are unchanged.
 ///
 /// ```c
-/// BOOL WINAPI ScrollConsoleScreenBufferW(
+/// BOOL ScrollConsoleScreenBufferW(
 ///   _In_           HANDLE     hConsoleOutput,
 ///   _In_     const SMALL_RECT *lpScrollRectangle,
 ///   _In_opt_ const SMALL_RECT *lpClipRectangle,
@@ -5362,7 +5362,7 @@ final _SetCommTimeouts = _kernel32.lookupFunction<
 /// list of handler functions for the calling process.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleCtrlHandler(
+/// BOOL SetConsoleCtrlHandler(
 ///   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
 ///   _In_     BOOL             Add
 /// );
@@ -5382,7 +5382,7 @@ final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
 /// screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleCursorInfo(
+/// BOOL SetConsoleCursorInfo(
 ///   _In_       HANDLE              hConsoleOutput,
 ///   _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo
 /// );
@@ -5402,7 +5402,7 @@ final _SetConsoleCursorInfo = _kernel32.lookupFunction<
 /// Sets the cursor position in the specified console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleCursorPosition(
+/// BOOL SetConsoleCursorPosition(
 ///   _In_ HANDLE hConsoleOutput,
 ///   _In_ COORD  dwCursorPosition
 /// );
@@ -5419,7 +5419,7 @@ final _SetConsoleCursorPosition = _kernel32.lookupFunction<
 /// Sets the display mode of the specified console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleDisplayMode(
+/// BOOL SetConsoleDisplayMode(
 ///   _In_      HANDLE hConsoleOutput,
 ///   _In_      DWORD  dwFlags,
 ///   _Out_opt_ PCOORD lpNewScreenBufferDimensions
@@ -5441,7 +5441,7 @@ final _SetConsoleDisplayMode = _kernel32.lookupFunction<
 /// console screen buffer.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleMode(
+/// BOOL SetConsoleMode(
 ///   _In_ HANDLE hConsoleHandle,
 ///   _In_ DWORD  dwMode
 /// );
@@ -5460,7 +5460,7 @@ final _SetConsoleMode = _kernel32.lookupFunction<
 /// function call.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleTextAttribute(
+/// BOOL SetConsoleTextAttribute(
 ///   _In_ HANDLE hConsoleOutput,
 ///   _In_ WORD   wAttributes
 /// );
@@ -5477,7 +5477,7 @@ final _SetConsoleTextAttribute = _kernel32.lookupFunction<
 /// Sets the current size and position of a console screen buffer's window.
 ///
 /// ```c
-/// BOOL WINAPI SetConsoleWindowInfo(
+/// BOOL SetConsoleWindowInfo(
 ///   _In_       HANDLE     hConsoleOutput,
 ///   _In_       BOOL       bAbsolute,
 ///   _In_ const SMALL_RECT *lpConsoleWindow
@@ -5926,7 +5926,7 @@ final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
 /// standard output, or standard error).
 ///
 /// ```c
-/// BOOL WINAPI SetStdHandle(
+/// BOOL SetStdHandle(
 ///   _In_ DWORD  nStdHandle,
 ///   _In_ HANDLE hHandle
 /// );
@@ -6377,7 +6377,7 @@ final _VerLanguageName = _kernel32.lookupFunction<
 /// function.
 ///
 /// ```c
-/// NTSYSAPI ULONGLONG VerSetConditionMask(
+/// ULONGLONG VerSetConditionMask(
 /// [in] ULONGLONG ConditionMask,
 /// [in] DWORD     TypeMask,
 /// [in] BYTE      Condition
@@ -6620,7 +6620,7 @@ final _Wow64SuspendThread = _kernel32.lookupFunction<
 /// current cursor location.
 ///
 /// ```c
-/// BOOL WINAPI WriteConsoleW(
+/// BOOL WriteConsoleW(
 ///   _In_             HANDLE  hConsoleOutput,
 ///   _In_       const VOID    *lpBuffer,
 ///   _In_             DWORD   nNumberOfCharsToWrite,

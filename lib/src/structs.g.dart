@@ -100,6 +100,33 @@ class ADDJOB_INFO_1 extends Struct {
   external int JobId;
 }
 
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class ADDRINFO extends Struct {
+  @Int32()
+  external int ai_flags;
+
+  @Int32()
+  external int ai_family;
+
+  @Int32()
+  external int ai_socktype;
+
+  @Int32()
+  external int ai_protocol;
+
+  @IntPtr()
+  external int ai_addrlen;
+
+  external Pointer<Utf16> ai_canonname;
+
+  external Pointer<SOCKADDR> ai_addr;
+
+  external Pointer<ADDRINFO> ai_next;
+}
+
 /// Contains status information for the application-switching (ALT+TAB)
 /// window.
 ///
@@ -251,7 +278,7 @@ class BITMAPINFOHEADER extends Struct {
   @Uint16()
   external int biBitCount;
 
-  @Uint32()
+  @Int32()
   external int biCompression;
 
   @Uint32()
@@ -292,12 +319,12 @@ class BLENDFUNCTION extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class BLUETOOTH_ADDRESS extends Struct {
-  external _BLUETOOTH_ADDRESS__Anonymous_e__Union Anonymous;
+class BLUETOOTH_ADDRESS_STRUCT extends Struct {
+  external _BLUETOOTH_ADDRESS_STRUCT__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
+class _BLUETOOTH_ADDRESS_STRUCT__Anonymous_e__Union extends Union {
   @Uint64()
   external int ullLong;
 
@@ -305,7 +332,7 @@ class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
   external Array<Uint8> rgBytes;
 }
 
-extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
+extension BLUETOOTH_ADDRESS_STRUCT_Extension on BLUETOOTH_ADDRESS_STRUCT {
   int get ullLong => this.Anonymous.ullLong;
   set ullLong(int value) => this.Anonymous.ullLong = value;
 
@@ -319,7 +346,7 @@ extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
 ///
 /// {@category Struct}
 class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
-  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  external BLUETOOTH_DEVICE_INFO_STRUCT deviceInfo;
 
   @Int32()
   external int authenticationMethod;
@@ -357,11 +384,11 @@ extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
 /// Bluetooth device.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_INFO extends Struct {
+class BLUETOOTH_DEVICE_INFO_STRUCT extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS Address;
+  external BLUETOOTH_ADDRESS_STRUCT Address;
 
   @Uint32()
   external int ulClassofDevice;
@@ -496,7 +523,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS address;
+  external BLUETOOTH_ADDRESS_STRUCT address;
 
   @Array(248)
   external Array<Uint16> _szName;
@@ -1733,19 +1760,19 @@ class DEVMODE extends Struct {
 
   external _DEVMODEW__Anonymous1_e__Union Anonymous1;
 
-  @Int16()
+  @Uint16()
   external int dmColor;
 
-  @Int16()
+  @Uint16()
   external int dmDuplex;
 
   @Int16()
   external int dmYResolution;
 
-  @Int16()
+  @Uint16()
   external int dmTTOption;
 
-  @Int16()
+  @Uint16()
   external int dmCollate;
 
   @Array(32)
@@ -2438,6 +2465,20 @@ class EXCEPINFO extends Struct {
   external int scode;
 }
 
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for readability
+/// using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class FD_SET extends Struct {
+  @Uint32()
+  external int fd_count;
+
+  @Array(64)
+  external Array<IntPtr> fd_array;
+}
+
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -2654,6 +2695,29 @@ class HARDWAREINPUT extends Struct {
 
   @Uint16()
   external int wParamH;
+}
+
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free any
+/// of its components. Furthermore, only one copy of the hostent structure
+/// is allocated per thread, and an application should therefore copy any
+/// information that it needs before issuing any other Windows Sockets API
+/// calls.
+///
+/// {@category Struct}
+class HOSTENT extends Struct {
+  external Pointer<Utf8> h_name;
+
+  external Pointer<Pointer<Int8>> h_aliases;
+
+  @Int16()
+  external int h_addrtype;
+
+  @Int16()
+  external int h_length;
+
+  external Pointer<Pointer<Int8>> h_addr_list;
 }
 
 /// Contains information about an icon or a cursor.
@@ -4749,7 +4813,7 @@ class MOUSEHOOKSTRUCT extends Struct {
 ///
 /// {@category Struct}
 class MOUSEHOOKSTRUCTEX extends Struct {
-  external MOUSEHOOKSTRUCT AnonymousBase_winuser_L1166_C46;
+  external MOUSEHOOKSTRUCT Base;
 
   @Uint32()
   external int mouseData;
@@ -6245,6 +6309,23 @@ extension PROPSPEC_Extension on PROPSPEC {
   set lpwstr(Pointer<Utf16> value) => this.Anonymous.lpwstr = value;
 }
 
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class PROTOENT extends Struct {
+  external Pointer<Utf8> p_name;
+
+  external Pointer<Pointer<Int8>> p_aliases;
+
+  @Int16()
+  external int p_proto;
+}
+
 /// Describes the format of the raw input from a Human Interface Device
 /// (HID).
 ///
@@ -6629,6 +6710,21 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Sacl;
 
   external Pointer<ACL> Dacl;
+}
+
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class SERVENT extends Struct {
+  external Pointer<Utf8> s_name;
+
+  external Pointer<Pointer<Int8>> s_aliases;
+
+  external Pointer<Utf8> s_proto;
+
+  @Int16()
+  external int s_port;
 }
 
 /// Contains information used by ShellExecuteEx.
@@ -7083,7 +7179,7 @@ class STATSTG extends Struct {
   @Uint32()
   external int grfMode;
 
-  @Uint32()
+  @Int32()
   external int grfLocksSupported;
 
   external GUID clsid;
@@ -7567,6 +7663,19 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class TIMEVAL extends Struct {
+  @Int32()
+  external int tv_sec;
+
+  @Int32()
+  external int tv_usec;
+}
+
 /// Contains title bar information.
 ///
 /// {@category Struct}
@@ -7639,6 +7748,25 @@ class TOUCHINPUT extends Struct {
 
   @Uint32()
   external int cyContact;
+}
+
+/// Contains hardware input details that can be used to predict touch
+/// targets and help compensate for hardware latency when processing touch
+/// and gesture input that contains distance and velocity data.
+///
+/// {@category Struct}
+class TOUCHPREDICTIONPARAMETERS extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwLatency;
+
+  @Uint32()
+  external int dwSampleTime;
+
+  @Uint32()
+  external int bUseHWTimeStamp;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.
@@ -7736,25 +7864,6 @@ extension TYPEDESC_Extension on TYPEDESC {
 
   int get hreftype => this.Anonymous.hreftype;
   set hreftype(int value) => this.Anonymous.hreftype = value;
-}
-
-/// Contains hardware input details that can be used to predict touch
-/// targets and help compensate for hardware latency when processing touch
-/// and gesture input that contains distance and velocity data.
-///
-/// {@category Struct}
-class TouchPredictionParameters extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @Uint32()
-  external int dwLatency;
-
-  @Uint32()
-  external int dwSampleTime;
-
-  @Uint32()
-  external int bUseHWTimeStamp;
 }
 
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
@@ -9157,10 +9266,10 @@ class XFORM extends Struct {
 ///
 /// {@category Struct}
 class XINPUT_BATTERY_INFORMATION extends Struct {
-  @Uint8()
+  @Uint32()
   external int BatteryType;
 
-  @Uint8()
+  @Uint32()
   external int BatteryLevel;
 }
 
@@ -9169,10 +9278,10 @@ class XINPUT_BATTERY_INFORMATION extends Struct {
 ///
 /// {@category Struct}
 class XINPUT_CAPABILITIES extends Struct {
-  @Uint8()
+  @Uint32()
   external int Type;
 
-  @Uint8()
+  @Uint32()
   external int SubType;
 
   @Uint16()
@@ -9248,113 +9357,4 @@ class XINPUT_VIBRATION extends Struct {
 
   @Uint16()
   external int wRightMotorSpeed;
-}
-
-/// The addrinfoW structure is used by the GetAddrInfoW function to hold
-/// host address information.
-///
-/// {@category Struct}
-class addrinfo extends Struct {
-  @Int32()
-  external int ai_flags;
-
-  @Int32()
-  external int ai_family;
-
-  @Int32()
-  external int ai_socktype;
-
-  @Int32()
-  external int ai_protocol;
-
-  @IntPtr()
-  external int ai_addrlen;
-
-  external Pointer<Utf16> ai_canonname;
-
-  external Pointer<SOCKADDR> ai_addr;
-
-  external Pointer<addrinfo> ai_next;
-}
-
-/// The fd_set structure is used by various Windows Sockets functions and
-/// service providers, such as the select function, to place sockets into a
-/// set for various purposes, such as testing a given socket for readability
-/// using the readfds parameter of the select function.
-///
-/// {@category Struct}
-class fd_set extends Struct {
-  @Uint32()
-  external int fd_count;
-
-  @Array(64)
-  external Array<IntPtr> fd_array;
-}
-
-/// The hostent structure is used by functions to store information about a
-/// given host, such as host name, IPv4 address, and so forth. An
-/// application should never attempt to modify this structure or to free any
-/// of its components. Furthermore, only one copy of the hostent structure
-/// is allocated per thread, and an application should therefore copy any
-/// information that it needs before issuing any other Windows Sockets API
-/// calls.
-///
-/// {@category Struct}
-class hostent extends Struct {
-  external Pointer<Utf8> h_name;
-
-  external Pointer<Pointer<Int8>> h_aliases;
-
-  @Int16()
-  external int h_addrtype;
-
-  @Int16()
-  external int h_length;
-
-  external Pointer<Pointer<Int8>> h_addr_list;
-}
-
-/// The protoent structure contains the name and protocol numbers that
-/// correspond to a given protocol name. Applications must never attempt to
-/// modify this structure or to free any of its components. Furthermore,
-/// only one copy of this structure is allocated per thread, and therefore,
-/// the application should copy any information it needs before issuing any
-/// other Windows Sockets function calls.
-///
-/// {@category Struct}
-class protoent extends Struct {
-  external Pointer<Utf8> p_name;
-
-  external Pointer<Pointer<Int8>> p_aliases;
-
-  @Int16()
-  external int p_proto;
-}
-
-/// The servent structure is used to store or return the name and service
-/// number for a given service name.
-///
-/// {@category Struct}
-class servent extends Struct {
-  external Pointer<Utf8> s_name;
-
-  external Pointer<Pointer<Int8>> s_aliases;
-
-  external Pointer<Utf8> s_proto;
-
-  @Int16()
-  external int s_port;
-}
-
-/// The timeval structure is used to specify a time interval. It is
-/// associated with the Berkeley Software Distribution (BSD) Time.h header
-/// file.
-///
-/// {@category Struct}
-class timeval extends Struct {
-  @Int32()
-  external int tv_sec;
-
-  @Int32()
-  external int tv_usec;
 }
