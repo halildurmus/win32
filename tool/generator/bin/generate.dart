@@ -7,7 +7,9 @@ import 'package:winmd/winmd.dart';
 bool methodMatches(String methodName, String rawPrototype) =>
     rawPrototype.contains(' $methodName(');
 
-String generateDocComment(Win32Function func) {
+String generateDocComment(Win32Function func, String libraryDartName) {
+  final category = func.category.isNotEmpty ? func.category : libraryDartName;
+
   final comment = StringBuffer();
 
   if (func.comment.isNotEmpty) {
@@ -21,7 +23,7 @@ String generateDocComment(Win32Function func) {
     ..write('/// ')
     ..writeln(func.prototype.split('\\n').join('\n/// '))
     ..writeln('/// ```')
-    ..write('/// {@category ${func.category}}');
+    ..write('/// {@category $category}');
   return comment.toString();
 }
 
@@ -108,7 +110,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
     final function =
         functions.firstWhere((f) => f.functionSymbol == method.name);
     buffer.write('''
-  ${generateDocComment(function)}
+  ${generateDocComment(function, libraryDartName)}
   ${FunctionProjection(method, libraryDartName).toString()}
   ''');
   }
