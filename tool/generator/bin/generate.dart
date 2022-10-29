@@ -405,8 +405,8 @@ void main() {
   // print('Generating struct_sizes.cpp...');
   // generateStructSizeAnalyzer();
 
-  // print('Generating structs...');
-  // generateStructs(structsToGenerate);
+  print('Generating structs...');
+  generateStructs(structsToGenerate);
 
   // print('Generating struct tests...');
   // generateStructSizeTests();
