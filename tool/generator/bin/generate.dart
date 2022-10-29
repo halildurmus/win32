@@ -177,6 +177,38 @@ void main() {
       .writeAsStringSync(DartFormatter().format(testFile.toString()));
 }
 
+// Merge when https://github.com/microsoft/win32metadata/issues/1341 is fixed
+int getMinimumWindowsVersion(Method method) {
+  final minVersion = method
+      .findAttribute('Windows.Win32.Interop.SupportedOSPlatformAttribute');
+
+  // No minimum OS version specified
+  if (minVersion == null) return 0;
+
+  if (minVersion.parameters.length != 1 ||
+      minVersion.parameters.first.value is! String) {
+    throw StateError('SupportedOSPlatformAttribute contents unexpected.');
+  }
+
+  final version = minVersion.parameters.first.value as String;
+  switch (version) {
+    // We don't worry if the version is older than Windows 8.0. Dart is
+    // unsupported on Windows NT 4.0 ;)
+    case 'windows5.0':
+    case 'windows5.1.2600':
+    case 'windows6.0.6000':
+    case 'windows6.1':
+      return 0;
+    case 'windows8.0':
+      return 9200;
+    case 'windows8.1':
+      return 9600;
+    default:
+      // Windows 10 or higher. Should be of the format 'windows10.0.17134'
+      return int.parse(version.split('.').last);
+  }
+}
+
 String generateFunctionTests(String library, Iterable<Method> methods,
     Iterable<Win32Function> functions) {
   final buffer = StringBuffer();
@@ -222,9 +254,10 @@ String generateFunctionTests(String library, Iterable<Method> methods,
         expect($methodDartName, isA<Function>());
       });''';
 
-    if (function.minimumWindowsVersion > 0) {
+    final minimumWindowsVersion = getMinimumWindowsVersion(method);
+    if (minimumWindowsVersion > 0) {
       buffer.writeln('''
-          if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
+          if (windowsBuildNumber >= $minimumWindowsVersion) {
             $test
           }''');
     } else {
