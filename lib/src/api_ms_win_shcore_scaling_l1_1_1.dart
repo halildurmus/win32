@@ -32,7 +32,7 @@ final _api_ms_win_shcore_scaling_l1_1_1 =
 ///   UINT             *dpiY
 ///   );
 /// ```
-/// {@category api_ms_win_shcore_scaling_l1_1_1}
+/// {@category user32}
 int GetDpiForMonitor(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY) =>
     _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
@@ -51,7 +51,7 @@ final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1.lookupFunction<
 ///   PROCESS_DPI_AWARENESS *value
 /// );
 /// ```
-/// {@category api_ms_win_shcore_scaling_l1_1_1}
+/// {@category user32}
 int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) =>
     _GetProcessDpiAwareness(hprocess, value);
 
@@ -69,7 +69,7 @@ final _GetProcessDpiAwareness =
 ///   DEVICE_SCALE_FACTOR *pScale
 /// );
 /// ```
-/// {@category api_ms_win_shcore_scaling_l1_1_1}
+/// {@category user32}
 int GetScaleFactorForMonitor(int hMon, Pointer<Int32> pScale) =>
     _GetScaleFactorForMonitor(hMon, pScale);
 
@@ -88,7 +88,7 @@ final _GetScaleFactorForMonitor =
 ///   PROCESS_DPI_AWARENESS value
 /// );
 /// ```
-/// {@category api_ms_win_shcore_scaling_l1_1_1}
+/// {@category user32}
 int SetProcessDpiAwareness(int value) => _SetProcessDpiAwareness(value);
 
 final _SetProcessDpiAwareness = _api_ms_win_shcore_scaling_l1_1_1
