@@ -29,7 +29,6 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   final T Function(Pointer<COMObject>)? _creator;
   final T Function(int)? _enumCreator;
   final Type? _intType;
-  final Allocator _allocator;
 
   /// Creates an instance of [IVector] using the given [ptr].
   ///
@@ -53,21 +52,14 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   /// final vector = IVector<DeviceClass>.fromRawPointer(ptr,
   ///     enumCreator: DeviceClass.from, intType: Int32);
   /// ```
-  ///
-  /// It is the caller's responsibility to deallocate the returned pointers
-  /// from methods like `GetAt`, `GetView` and `toList` when they are finished
-  /// with it. A FFI `Arena` may be passed as a custom allocator for ease of
-  /// memory management.
   IVector.fromRawPointer(
     super.ptr, {
     T Function(Pointer<COMObject>)? creator,
     T Function(int)? enumCreator,
     Type? intType,
-    Allocator allocator = calloc,
   })  : _creator = creator,
         _enumCreator = enumCreator,
-        _intType = intType,
-        _allocator = allocator {
+        _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
         !isSubtypeOfInspectable<T>() &&
@@ -102,7 +94,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   Pointer<COMObject> _getAt_COMObject(int index) {
-    final retValuePtr = _allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
     final hr =
         ptr.ref.vtable
@@ -116,7 +108,10 @@ class IVector<T> extends IInspectable implements IIterable<T> {
                 .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
             ptr.ref.lpVtbl, index, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
@@ -351,34 +346,36 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
   /// Returns an immutable view of the vector.
   List<T> getView() {
-    final retValuePtr = _allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(8)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVectorView.fromRawPointer(
-      retValuePtr,
-      creator: _creator,
-      enumCreator: _enumCreator,
-      intType: _intType,
-      allocator: _allocator,
-    ).toList();
+      return IVectorView.fromRawPointer(
+        retValuePtr,
+        creator: _creator,
+        enumCreator: _enumCreator,
+        intType: _intType,
+      ).toList();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   /// Retrieves the index of a specified item in the vector.
   bool indexOf(T value, Pointer<Uint32> index) {
     if (isSameType<T, int>()) return _indexOf_int(value as int, index);
     if (isSameType<T, String>()) return _indexOf_String(value as String, index);
-
     if (isSubtypeOfWinRTEnum<T>()) {
       return _indexOf_enum(value as WinRTEnum, index);
     }
@@ -637,7 +634,6 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   void setAt(int index, T value) {
     if (isSameType<T, int>()) return _setAt_int(index, value as int);
     if (isSameType<T, String>()) return _setAt_String(index, value as String);
-
     if (isSubtypeOfWinRTEnum<T>()) {
       return _setAt_enum(index, value as WinRTEnum);
     }
@@ -1662,7 +1658,6 @@ class IVector<T> extends IInspectable implements IIterable<T> {
       _intType,
       getMany,
       size,
-      allocator: _allocator,
     ).toList();
   }
 
@@ -1671,7 +1666,6 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     creator: _creator,
     enumCreator: _enumCreator,
     intType: _intType,
-    allocator: _allocator,
   );
 
   @override

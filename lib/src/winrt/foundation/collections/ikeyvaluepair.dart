@@ -96,7 +96,10 @@ class IKeyValuePair<K, V> extends IInspectable {
             int Function(
                 Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr.ref;
   }
@@ -160,7 +163,10 @@ class IKeyValuePair<K, V> extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value as K;
   }
@@ -187,7 +193,10 @@ class IKeyValuePair<K, V> extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return _creator!(retValuePtr);
   }
@@ -195,19 +204,23 @@ class IKeyValuePair<K, V> extends IInspectable {
   V get _value_enum {
     final retValuePtr = calloc<Int32>();
 
-    final hr = ptr.ref.lpVtbl.value
-        .elementAt(7)
-        .cast<
-            Pointer<
-                NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(7)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return _enumCreator!(retValuePtr.value);
+      return _enumCreator!(retValuePtr.value);
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   Object? get _value_Object {
@@ -223,7 +236,10 @@ class IKeyValuePair<K, V> extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
