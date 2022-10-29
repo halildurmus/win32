@@ -13147,7 +13147,7 @@ void main() {
       test('Can instantiate XInputGetBatteryInformation', () {
         final xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
         final XInputGetBatteryInformation = xinput1_4.lookupFunction<
-                Uint32 Function(Uint32 dwUserIndex, Uint32 devType,
+                Uint32 Function(Uint32 dwUserIndex, Uint8 devType,
                     Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation),
                 int Function(int dwUserIndex, int devType,
                     Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation)>(

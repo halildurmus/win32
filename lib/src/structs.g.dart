@@ -9266,10 +9266,10 @@ class XFORM extends Struct {
 ///
 /// {@category Struct}
 class XINPUT_BATTERY_INFORMATION extends Struct {
-  @Uint32()
+  @Uint8()
   external int BatteryType;
 
-  @Uint32()
+  @Uint8()
   external int BatteryLevel;
 }
 
@@ -9278,10 +9278,10 @@ class XINPUT_BATTERY_INFORMATION extends Struct {
 ///
 /// {@category Struct}
 class XINPUT_CAPABILITIES extends Struct {
-  @Uint32()
+  @Uint8()
   external int Type;
 
-  @Uint32()
+  @Uint8()
   external int SubType;
 
   @Uint16()
