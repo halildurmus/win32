@@ -60,6 +60,10 @@ void main() {
 ''');
 
   for (final struct in structSize64.keys) {
+    // Work around https://github.com/microsoft/win32metadata/issues/1340
+    if (struct == 'XINPUT_BATTERY_INFORMATION' ||
+        struct == 'XINPUT_CAPABILITIES') continue;
+
     if (structSize64[struct] == structSize32[struct]) {
       buffer.write('''
   test('Struct $struct is the right size', () {
