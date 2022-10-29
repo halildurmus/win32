@@ -1,5 +1,3 @@
-@TestOn('windows')
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
@@ -125,5 +123,16 @@ void main() {
     expect(guid.parameters[3].value, equals(0x8b));
     expect(guid.parameters[4].value, equals(0x06));
     expect(guid.parameters[10].value, equals(0x80));
+  });
+
+  test('Minimum Windows version', () {
+    final scope = MetadataStore.getWin32Scope();
+    final commApis =
+        scope.findTypeDef('Windows.Win32.Devices.Communication.Apis')!;
+    final getCommPorts = commApis.findMethod('GetCommPorts')!;
+    final minVersion = getCommPorts
+        .findAttribute('Windows.Win32.Interop.SupportedOSPlatformAttribute')!;
+    expect(minVersion.parameters.length, equals(1));
+    expect(minVersion.parameters.first.value, equals('windows10.0.17134'));
   });
 }
