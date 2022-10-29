@@ -150,7 +150,8 @@ void generateFunctions(Map<String, Win32Function> functions) {
 
   for (final library in dllLibraries) {
     generateDllFile(library, filteredMethods, functions.values);
-    tests.add(generateFunctionTests(library, filteredMethods));
+    tests
+        .add(generateFunctionTests(library, filteredMethods, functions.values));
   }
 
   writeFunctionTests(tests);
@@ -164,9 +165,7 @@ import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
-
   ${tests.join('\n')}
-
 }
 ''';
 
@@ -174,25 +173,31 @@ void main() {
       .writeAsStringSync(DartFormatter().format(testFile.toString()));
 }
 
-String generateFunctionTests(String library, Iterable<Method> methods) {
+String generateFunctionTests(String library, Iterable<Method> methods,
+    Iterable<Win32Function> functions) {
   final buffer = StringBuffer();
 
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  if (library == 'wlanapi') return '';
+  if (library == 'wlanapi.dll') return '';
 
-    /// Methods we're trying to project
-  final filteredMethods = methods
-      .where((method) => method.module.name.toLowerCase() == library);
+  /// Methods we're trying to project
+  final filteredMethods =
+      methods.where((method) => method.module.name.toLowerCase() == library);
 
-  buffer.write("group('Test $library functions', () {\n");
+  buffer.write("group('Test ${library.split('.').first} functions', () {\n");
 
   for (final method in filteredMethods) {
     // API set names aren't legal Dart identifiers, so we rename them.
     // Also strip off the trailing .dll (or .cpl, .drv, etc.).
     final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
-    //     if (!filteredFunctions[function]!.test) continue;
+    final function =
+        functions.firstWhere((f) => f.functionSymbol == method.name);
+
+    // Some functions (e.g. TaskDialog APIs) can only be loaded if the EXE has a
+    // manifest, so we ignore those for the purpose of test generation.
+    if (!function.test) continue;
 
     final projection = FunctionProjection(method, libraryDartName);
 
@@ -203,10 +208,7 @@ String generateFunctionTests(String library, Iterable<Method> methods) {
 
     final methodDartName = stripAnsiUnicodeSuffix(method.name);
 
-    // final minimumWindowsVersion =
-    //     filteredFunctions[function]!.minimumWindowsVersion;
-
-    buffer.writeln('''
+    final test = '''
       test('Can instantiate $methodDartName', () {
         final $libraryDartName = DynamicLibrary.open('$library');
         final $methodDartName = $libraryDartName.lookupFunction<\n
@@ -214,20 +216,16 @@ String generateFunctionTests(String library, Iterable<Method> methods) {
           $returnDartType Function(${projection.dartParams})>
           ('${method.name}');
         expect($methodDartName, isA<Function>());
-      });
-    ''');
+      });''';
 
-    //     // if (minimumWindowsVersion > 0) {
-    //     //   buffer.write('''
-    //     //   if (windowsBuildNumber >= $minimumWindowsVersion) {
-    //     //     $test
-    //     //   }''');
-    //     // } else {
-    //     //   buffer.write(test);
-    //     // }
-    //     buffer.writeln();
-    //     testsGenerated++;
-    //   }
+    if (function.minimumWindowsVersion > 0) {
+      buffer.writeln('''
+          if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
+            $test
+          }''');
+    } else {
+      buffer.writeln(test);
+    }
   }
   buffer.write('});\n\n');
 
