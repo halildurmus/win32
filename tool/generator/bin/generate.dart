@@ -181,9 +181,13 @@ String generateFunctionTests(String library, Iterable<Method> methods) {
   // wlanapi manually to prevent test failures.
   if (library == 'wlanapi') return '';
 
+    /// Methods we're trying to project
+  final filteredMethods = methods
+      .where((method) => method.module.name.toLowerCase() == library);
+
   buffer.write("group('Test $library functions', () {\n");
 
-  for (final method in methods) {
+  for (final method in filteredMethods) {
     // API set names aren't legal Dart identifiers, so we rename them.
     // Also strip off the trailing .dll (or .cpl, .drv, etc.).
     final libraryDartName = library.replaceAll('-', '_').split('.').first;
@@ -409,9 +413,6 @@ void main() {
 
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
-
-  // print('Generating FFI function tests...');
-  // generateFunctionTests(functionsToGenerate);
 
   // print('Generating COM interfaces and tests...');
   // generateComApis();
