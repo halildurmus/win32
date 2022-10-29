@@ -59,13 +59,13 @@ void main()
     printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
     printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));
     printf("  'INPUT_TRANSFORM': %zu,\n", sizeof(INPUT_TRANSFORM));
-    printf("  'TouchPredictionParameters': %zu,\n", sizeof(TouchPredictionParameters));
+    printf("  'TOUCHPREDICTIONPARAMETERS': %zu,\n", sizeof(TOUCHPREDICTIONPARAMETERS));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'FILE_SEGMENT_ELEMENT': %zu,\n", sizeof(FILE_SEGMENT_ELEMENT));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
-    printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'ADDRINFO': %zu,\n", sizeof(ADDRINFOW));
     printf("  'ALTTABINFO': %zu,\n", sizeof(ALTTABINFO));
     printf("  'CRYPTPROTECT_PROMPTSTRUCT': %zu,\n", sizeof(CRYPTPROTECT_PROMPTSTRUCT));
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
@@ -76,9 +76,9 @@ void main()
     printf("  'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("  'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
     printf("  'BLENDFUNCTION': %zu,\n", sizeof(BLENDFUNCTION));
-    printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
+    printf("  'BLUETOOTH_ADDRESS_STRUCT': %zu,\n", sizeof(BLUETOOTH_ADDRESS_STRUCT));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
-    printf("  'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
+    printf("  'BLUETOOTH_DEVICE_INFO_STRUCT': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
     printf("  'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("  'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
@@ -114,7 +114,7 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCTW));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
-    printf("  'CRYPTOAPI_BLOB': %zu,\n", sizeof(CRYPTOAPI_BLOB));
+    printf("  'CRYPTOAPI_BLOB': %zu,\n", sizeof(_CRYPTOAPI_BLOB));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));
@@ -148,7 +148,7 @@ void main()
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
-    printf("  'fd_set': %zu,\n", sizeof(fd_set));
+    printf("  'FD_SET': %zu,\n", sizeof(FD_SET));
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACEW));
     printf("  'FUNCDESC': %zu,\n", sizeof(FUNCDESC));
@@ -157,7 +157,7 @@ void main()
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
     printf("  'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
-    printf("  'hostent': %zu,\n", sizeof(hostent));
+    printf("  'HOSTENT': %zu,\n", sizeof(HOSTENT));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
@@ -269,7 +269,7 @@ void main()
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
-    printf("  'protoent': %zu,\n", sizeof(protoent));
+    printf("  'PROTOENT': %zu,\n", sizeof(PROTOENT));
     printf("  'RAWHID': %zu,\n", sizeof(RAWHID));
     printf("  'RAWINPUT': %zu,\n", sizeof(RAWINPUT));
     printf("  'RAWINPUTDEVICE': %zu,\n", sizeof(RAWINPUTDEVICE));
@@ -288,7 +288,7 @@ void main()
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
-    printf("  'servent': %zu,\n", sizeof(servent));
+    printf("  'SERVENT': %zu,\n", sizeof(SERVENT));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFOW));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
@@ -320,7 +320,7 @@ void main()
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRICW));
-    printf("  'timeval': %zu,\n", sizeof(timeval));
+    printf("  'TIMEVAL': %zu,\n", sizeof(TIMEVAL));
     printf("  'TITLEBARINFO': %zu,\n", sizeof(TITLEBARINFO));
     printf("  'TITLEBARINFOEX': %zu,\n", sizeof(TITLEBARINFOEX));
     printf("  'TOKEN_APPCONTAINER_INFORMATION': %zu,\n", sizeof(TOKEN_APPCONTAINER_INFORMATION));

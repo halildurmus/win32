@@ -4,6 +4,8 @@ import 'package:dart_style/dart_style.dart';
 import 'package:generator/generator.dart';
 import 'package:winmd/winmd.dart';
 
+import 'generate_struct_sizes_cpp.dart';
+
 bool methodMatches(String methodName, String rawPrototype) =>
     rawPrototype.contains(' $methodName(');
 
@@ -402,14 +404,14 @@ void main() {
   final functionsToGenerate = loadFunctionsFromJson();
   saveFunctionsToJson(functionsToGenerate);
 
-  // print('Generating struct_sizes.cpp...');
-  // generateStructSizeAnalyzer();
+  print('Generating struct_sizes.cpp...');
+  generateStructSizeAnalyzer();
 
   print('Generating structs...');
   generateStructs(structsToGenerate);
 
-  // print('Generating struct tests...');
-  // generateStructSizeTests();
+  print('Generating struct tests...');
+  generateStructSizeTests();
 
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
