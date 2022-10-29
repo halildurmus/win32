@@ -62,9 +62,7 @@ class Win32Function {
         prototype = json['prototype'] as String,
         functionSymbol = functionNameFromPrototype(json['prototype'] as String),
         comment = json['comment'] as String,
-        category = json['category'] != null
-            ? json['category'] as String
-            : json['dllLibrary'] as String,
+        category = json['category'] != null ? json['category'] as String : '',
         _isCustomCategorySet = json['category'] != null,
         minimumWindowsVersion = json['minimumWindowsVersion'] != null
             ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
