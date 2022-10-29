@@ -13,9 +13,10 @@
 // tool\generator\lib\src\inputs\struct_sizes.dart as input to the test
 // harness.
 
-// Compile with:
-//    cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt" \
-//      tool\struct_sizes\struct_sizes.cpp
+// Compile with something like the following (replace xxxxx with Windows SDK 
+// build installed):
+//   cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.xxxxx.0\winrt" \
+//     tool\struct_sizes\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -43,8 +44,6 @@
 #include <wincred.h>
 #include <wlanapi.h>
 #include <Xinput.h>
-
-#include <CorHdr.h>
 
 void main()
 {
