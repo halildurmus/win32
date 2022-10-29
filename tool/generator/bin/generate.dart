@@ -146,94 +146,88 @@ void generateFunctions(Map<String, Win32Function> functions) {
   final dllLibraries =
       filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
 
+  final tests = <String>[];
+
   for (final library in dllLibraries) {
     generateDllFile(library, filteredMethods, functions.values);
+    tests.add(generateFunctionTests(library, filteredMethods));
   }
+
+  writeFunctionTests(tests);
 }
 
-int generateFunctionTests(Map<String, Win32Function> functions) {
-  return 0;
-//   final methods = <Method>[];
-//   final scope = MetadataStore.getWin32Scope();
-//   final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
-//   for (final api in apis) {
-//     methods.addAll(api.methods);
-//   }
-//   var testsGenerated = 0;
-//   final buffer = StringBuffer()..write('''
-// $testFunctionsHeader
+void writeFunctionTests(Iterable<String> tests) {
+  final testFile = '''
+$testFunctionsHeader
 
-// import 'helpers.dart';
+import 'helpers.dart';
 
-// void main() {
-//   final windowsBuildNumber = getWindowsBuildNumber();
-// ''');
-  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
-  // The .toSet() removes duplicates.
+void main() {
+  final windowsBuildNumber = getWindowsBuildNumber();
+
+  ${tests.join('\n')}
+
+}
+''';
+
+  File('../../test/api_test.dart')
+      .writeAsStringSync(DartFormatter().format(testFile.toString()));
+}
+
+String generateFunctionTests(String library, Iterable<Method> methods) {
+  final buffer = StringBuffer();
+
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  // final libraries = functions.values.map((e) => e.dllLibrary).toSet().toList()
-  // ..removeWhere((library) => library == 'wlanapi');
+  if (library == 'wlanapi') return '';
 
-  // for (final library in libraries) {
-  //   // API set names aren't legal Dart identifiers, so we rename them
-  //   final libraryDartName = library.replaceAll('-', '_');
+  buffer.write("group('Test $library functions', () {\n");
 
-  //   buffer.write("group('Test $library functions', () {\n");
+  for (final method in methods) {
+    // API set names aren't legal Dart identifiers, so we rename them.
+    // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+    final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
-  //   final filteredFunctions = Map<String, Win32Function>.of(functions);
-  //   // ..removeWhere((key, value) => value.dllLibrary != library);
+    //     if (!filteredFunctions[function]!.test) continue;
 
-  //   for (final function in filteredFunctions.keys) {
-  //     if (!filteredFunctions[function]!.test) continue;
+    final projection = FunctionProjection(method, libraryDartName);
 
-  //     late Method method;
-  //     try {
-  //       method = methods.firstWhere((m) =>
-  //           methodMatches(m.name, filteredFunctions[function]!.prototype));
-  //     } on StateError {
-  //       print("Couldn't find $function");
-  //       continue;
-  //     }
+    final returnFFIType =
+        TypeProjection(method.returnType.typeIdentifier).nativeType;
+    final returnDartType =
+        TypeProjection(method.returnType.typeIdentifier).dartType;
 
-  //     // final prototype = FunctionProjection(method, libraryDartName);
+    final methodDartName = stripAnsiUnicodeSuffix(method.name);
 
-  //     final returnFFIType =
-  //         TypeProjection(method.returnType.typeIdentifier).nativeType;
-  //     final returnDartType =
-  //         TypeProjection(method.returnType.typeIdentifier).dartType;
+    // final minimumWindowsVersion =
+    //     filteredFunctions[function]!.minimumWindowsVersion;
 
-  //     final minimumWindowsVersion =
-  //         filteredFunctions[function]!.minimumWindowsVersion;
+    buffer.writeln('''
+      test('Can instantiate $methodDartName', () {
+        final $libraryDartName = DynamicLibrary.open('$library');
+        final $methodDartName = $libraryDartName.lookupFunction<\n
+          $returnFFIType Function(${projection.nativeParams}),
+          $returnDartType Function(${projection.dartParams})>
+          ('${method.name}');
+        expect($methodDartName, isA<Function>());
+      });
+    ''');
 
-  //     // final test = '''
-  //     // test('Can instantiate $function', () {
-  //     //   final $libraryDartName = DynamicLibrary.open('$library');
-  //     //   final $function = $libraryDartName.lookupFunction<\n
-  //     //     $returnFFIType Function(${prototype.nativeParams}),
-  //     //     $returnDartType Function(${prototype.dartParams})>
-  //     //     ('${method.name}');
-  //     //   expect($function, isA<Function>());
-  //     // });''';
+    //     // if (minimumWindowsVersion > 0) {
+    //     //   buffer.write('''
+    //     //   if (windowsBuildNumber >= $minimumWindowsVersion) {
+    //     //     $test
+    //     //   }''');
+    //     // } else {
+    //     //   buffer.write(test);
+    //     // }
+    //     buffer.writeln();
+    //     testsGenerated++;
+    //   }
+  }
+  buffer.write('});\n\n');
 
-  //     // if (minimumWindowsVersion > 0) {
-  //     //   buffer.write('''
-  //     //   if (windowsBuildNumber >= $minimumWindowsVersion) {
-  //     //     $test
-  //     //   }''');
-  //     // } else {
-  //     //   buffer.write(test);
-  //     // }
-  //     buffer.writeln();
-  //     testsGenerated++;
-  //   }
-  //   buffer.write('});\n\n');
-  // }
-  // buffer.write('}');
-  // File('../../test/api_test.dart')
-  //     .writeAsStringSync(DartFormatter().format(buffer.toString()));
-
-  // return testsGenerated;
+  return buffer.toString();
 }
 
 void generateComApis() {
