@@ -114,7 +114,6 @@ export 'src/gdi32.dart';
 export 'src/inline.dart';
 export 'src/iphlpapi.dart';
 export 'src/kernel32.dart';
-// export 'src/kernelbase.dart';
 export 'src/magnification.dart';
 export 'src/ole32.dart';
 export 'src/oleaut32.dart';
@@ -122,9 +121,7 @@ export 'src/powrprof.dart';
 export 'src/rometadata.dart';
 export 'src/scarddlg.dart';
 export 'src/setupapi.dart';
-// export 'src/shcore.dart';
 export 'src/shell32.dart';
-// export 'src/spoolss.dart';
 export 'src/types.dart';
 export 'src/user32.dart';
 export 'src/uxtheme.dart';
@@ -135,6 +132,7 @@ export 'src/winspool.dart';
 export 'src/wlanapi.dart';
 export 'src/xinput1_4.dart';
 
+// API sets are used to export recent C-style APIs
 export 'src/api_ms_win_core_apiquery_l2_1_0.dart';
 export 'src/api_ms_win_core_comm_l1_1_1.dart';
 export 'src/api_ms_win_core_comm_l1_1_2.dart';

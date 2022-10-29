@@ -1775,6 +1775,7 @@
     "GetDpiForMonitor": {
         "prototype": "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );",
         "comment": "Queries the dots per inch (dpi) of a display.",
+        "category": "user32",
         "minimumWindowsVersion": "WIN81"
     },
     "GetDpiForSystem": {
@@ -2324,6 +2325,7 @@
     "GetProcessDpiAwareness": {
         "prototype": "HRESULT GetProcessDpiAwareness(\n  HANDLE                hprocess,\n  PROCESS_DPI_AWARENESS *value\n);",
         "comment": "Retrieves the dots per inch (dpi) awareness of the specified process.",
+        "category": "user32",
         "minimumWindowsVersion": "WIN81"
     },
     "GetProcessHeap": {
@@ -2413,6 +2415,7 @@
     "GetScaleFactorForMonitor": {
         "prototype": "HRESULT GetScaleFactorForMonitor(\n  HMONITOR            hMon,\n  DEVICE_SCALE_FACTOR *pScale\n);",
         "comment": "Gets the scale factor of a specific monitor.",
+        "category": "user32",
         "minimumWindowsVersion": "WIN81"
     },
     "GetScrollBarInfo": {
@@ -4638,6 +4641,7 @@
     "SetProcessDpiAwareness": {
         "prototype": "HRESULT SetProcessDpiAwareness(\n  PROCESS_DPI_AWARENESS value\n);",
         "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value.",
+        "category": "user32",
         "minimumWindowsVersion": "WIN81"
     },
     "SetProcessDpiAwarenessContext": {
