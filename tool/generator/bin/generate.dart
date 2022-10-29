@@ -412,15 +412,15 @@ void main() {
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
 
-  // print('Generating COM interfaces and tests...');
-  // generateComApis();
+  print('Generating COM interfaces and tests...');
+  generateComApis();
 
-  // print('Generating Windows Runtime interfaces...');
-  // generateWinRTApis();
+  print('Generating Windows Runtime interfaces...');
+  generateWinRTApis();
 
-  // print('Generating Windows Runtime enumerations...');
-  // generateWinRTEnumerations();
+  print('Generating Windows Runtime enumerations...');
+  generateWinRTEnumerations();
 
-  // print('Generating Windows Runtime structs...');
-  // generateWinRTStructs();
+  print('Generating Windows Runtime structs...');
+  generateWinRTStructs();
 }
