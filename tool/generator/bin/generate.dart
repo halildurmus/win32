@@ -90,8 +90,6 @@ void generateDllFile(String library, List<Method> filteredMethods,
   /// Methods we're trying to project
   final libraryMethods =
       filteredMethods.where((method) => method.module.name == library);
-  final libraryFunctions =
-      functions.where((function) => function.functionSymbol == library);
 
   final buffer = StringBuffer();
 
@@ -106,7 +104,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
 
   for (final method in libraryMethods) {
     final function =
-        libraryFunctions.firstWhere((f) => f.functionSymbol == method.name);
+        functions.firstWhere((f) => f.functionSymbol == method.name);
     buffer.write('''
   ${generateDocComment(function)}
   ${FunctionProjection(method, libraryDartName).toString()}
@@ -403,8 +401,8 @@ void main() {
   // print('Generating struct_sizes.cpp...');
   // generateStructSizeAnalyzer();
 
-  print('Generating structs...');
-  generateStructs(structsToGenerate);
+  // print('Generating structs...');
+  // generateStructs(structsToGenerate);
 
   // print('Generating struct tests...');
   // generateStructSizeTests();
