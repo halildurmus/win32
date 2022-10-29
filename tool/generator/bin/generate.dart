@@ -92,20 +92,19 @@ void main() {
 void generateDllFile(String library, List<Method> filteredMethods,
     Iterable<Win32Function> functions) {
   /// Methods we're trying to project
-  final libraryMethods =
-      filteredMethods.where((method) => method.module.name == library);
+  final libraryMethods = filteredMethods
+      .where((method) => method.module.name.toLowerCase() == library);
 
   final buffer = StringBuffer();
 
   // API set names aren't legal Dart identifiers, so we rename them.
   // Also strip off the trailing .dll (or .cpl, .drv, etc.).
-  final libraryDartName =
-      library.replaceAll('-', '_').split('.').first.toLowerCase();
+  final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
   buffer.write('''
   $functionsFileHeader
   
-  final _$libraryDartName = DynamicLibrary.open('${library.toLowerCase()}');\n
+  final _$libraryDartName = DynamicLibrary.open('$library');\n
   ''');
 
   for (final method in libraryMethods) {
@@ -144,7 +143,8 @@ void generateFunctions(Map<String, Win32Function> functions) {
   }
 
   // Gather a list of all the affected libraries
-  final dllLibraries = filteredMethods.map((m) => m.module.name).toSet();
+  final dllLibraries =
+      filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
 
   for (final library in dllLibraries) {
     generateDllFile(library, filteredMethods, functions.values);
