@@ -43,11 +43,11 @@ const structsToGenerate = <String, String>{
       "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB).",
   "Windows.Win32.Graphics.Gdi.BLENDFUNCTION":
       "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps.",
-  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS":
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT":
       "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.",
   "Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS":
       "The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific configuration information about the Bluetooth device responding to an authentication request.",
-  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO":
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT":
       "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device.",
   "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS":
       "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches.",
