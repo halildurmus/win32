@@ -11,7 +11,7 @@
         "category": "winspool"
     },
     "accept": {
-        "prototype": "SOCKET WSAAPI accept(\n  SOCKET   s,\n  sockaddr *addr,\n  int      *addrlen\n);",
+        "prototype": "SOCKET accept(\n  SOCKET   s,\n  sockaddr *addr,\n  int      *addrlen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The accept function permits an incoming connection attempt on a socket.",
         "category": "winsock",
@@ -105,7 +105,7 @@
         "comment": "The AdvancedDocumentProperties function displays a printer-configuration dialog box for the specified printer, allowing the user to configure that printer."
     },
     "AllocConsole": {
-        "prototype": "BOOL WINAPI AllocConsole(void);",
+        "prototype": "BOOL AllocConsole(void);",
         "dllLibrary": "kernel32",
         "comment": "Allocates a new console for the calling process."
     },
@@ -166,7 +166,7 @@
         "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
     "AttachConsole": {
-        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
+        "prototype": "BOOL AttachConsole(\n  _In_ DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
         "comment": "Attaches the calling process to the console of the specified process."
     },
@@ -201,7 +201,7 @@
         "comment": "Retrieves a handle that can be used by the UpdateResource function to add, delete, or replace resources in a binary module."
     },
     "bind": {
-        "prototype": "int WSAAPI bind(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "prototype": "int bind(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The bind function associates a local address with a socket.",
         "category": "winsock",
@@ -558,12 +558,12 @@
         "comment": "Determines which, if any, of the child windows belonging to the specified parent window contains the specified point. The function can ignore invisible, disabled, and transparent child windows. Grandchildren and deeper descendants are not searched."
     },
     "ChooseColor": {
-        "prototype": "BOOL WINAPI ChooseColorW(\n  _Inout_ LPCHOOSECOLOR lpcc\n);",
+        "prototype": "BOOL ChooseColorW(\n  _Inout_ LPCHOOSECOLOR lpcc\n);",
         "dllLibrary": "comdlg32",
         "comment": "Creates a Color dialog box that enables the user to select a color."
     },
     "ChooseFont": {
-        "prototype": "BOOL WINAPI ChooseFontW(\n  _Inout_ LPCHOOSEFONT lpcf\n);",
+        "prototype": "BOOL ChooseFontW(\n  _Inout_ LPCHOOSEFONT lpcf\n);",
         "dllLibrary": "comdlg32",
         "comment": "Creates a Font dialog box that enables the user to choose attributes for a logical font. These attributes include a font family and associated font style, a point size, effects (underline, strikeout, and text color), and a script (or character set)."
     },
@@ -619,13 +619,13 @@
         "category": "winspool"
     },
     "ClosePseudoConsole": {
-        "prototype": "void WINAPI ClosePseudoConsole(\n  _In_ HPCON hPC\n);",
+        "prototype": "void ClosePseudoConsole(\n  _In_ HPCON hPC\n);",
         "dllLibrary": "kernel32",
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
     "closesocket": {
-        "prototype": "int WSAAPI closesocket(\n  SOCKET s\n);",
+        "prototype": "int closesocket(\n  SOCKET s\n);",
         "dllLibrary": "ws2_32",
         "comment": "The closesocket function closes an existing socket.",
         "category": "winsock",
@@ -702,7 +702,7 @@
         "comment": "Registers security and sets the default security values for the process."
     },
     "CommandLineToArgvW": {
-        "prototype": "LPWSTR * CommandLineToArgvW(\n  LPCWSTR lpCmdLine,\n  int     *pNumArgs\n);",
+        "prototype": "LPWSTR CommandLineToArgvW(\n  LPCWSTR lpCmdLine,\n  int     *pNumArgs\n);",
         "dllLibrary": "shell32",
         "comment": "Retrieves the command-line string for the current process."
     },
@@ -729,7 +729,7 @@
         "comment": "The ConfigurePort function displays the port-configuration dialog box for a port on the specified server."
     },
     "connect": {
-        "prototype": "int WSAAPI connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
+        "prototype": "int connect(\n  SOCKET         s,\n  const sockaddr *name,\n  int            namelen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The connect function establishes a connection to a specified socket.",
         "category": "winsock",
@@ -832,7 +832,7 @@
         "comment": "The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device."
     },
     "CreateConsoleScreenBuffer": {
-        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
+        "prototype": "HANDLE CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
         "dllLibrary": "kernel32",
         "comment": "Creates a console screen buffer."
     },
@@ -958,7 +958,7 @@
         "comment": "Creates a new process and its primary thread. The new process runs in the security context of the calling process."
     },
     "CreatePseudoConsole": {
-        "prototype": "HRESULT WINAPI CreatePseudoConsole(\n  _In_ COORD size,\n  _In_ HANDLE hInput,\n  _In_ HANDLE hOutput,\n  _In_ DWORD dwFlags,\n  _Out_ HPCON* phPC\n);",
+        "prototype": "HRESULT CreatePseudoConsole(\n  _In_ COORD size,\n  _In_ HANDLE hInput,\n  _In_ HANDLE hOutput,\n  _In_ DWORD dwFlags,\n  _Out_ HPCON* phPC\n);",
         "dllLibrary": "kernel32",
         "comment": "Creates a new pseudoconsole object for the calling process.",
         "minimumWindowsVersion": "WIN10_RS5"
@@ -1019,27 +1019,27 @@
         "comment": "The CredWrite function creates a new credential or modifies an existing credential in the user's credential set. The new credential is associated with the logon session of the current token. The token must not have the user's security identifier (SID) disabled."
     },
     "CryptProtectData": {
-        "prototype": "DPAPI_IMP BOOL CryptProtectData(\n  [in]           DATA_BLOB                 *pDataIn,\n  [in, optional] LPCWSTR                   szDataDescr,\n  [in, optional] DATA_BLOB                 *pOptionalEntropy,\n  [in]           PVOID                     pvReserved,\n  [in, optional] CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]           DWORD                     dwFlags,\n  [out]          DATA_BLOB                 *pDataOut\n);",
+        "prototype": "BOOL CryptProtectData(\n  [in]           DATA_BLOB                 *pDataIn,\n  [in, optional] LPCWSTR                   szDataDescr,\n  [in, optional] DATA_BLOB                 *pOptionalEntropy,\n  [in]           PVOID                     pvReserved,\n  [in, optional] CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]           DWORD                     dwFlags,\n  [out]          DATA_BLOB                 *pDataOut\n);",
         "dllLibrary": "crypt32",
         "comment": "The CryptProtectData function performs encryption on the data in a DATA_BLOB structure. Typically, only a user with the same logon credential as the user who encrypted the data can decrypt the data. In addition, the encryption and decryption usually must be done on the same computer."
     },
     "CryptProtectMemory": {
-        "prototype": "DPAPI_IMP BOOL CryptProtectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
+        "prototype": "BOOL CryptProtectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
         "dllLibrary": "crypt32",
         "comment": "The CryptProtectMemory function encrypts memory to prevent others from viewing sensitive information in your process. For example, use the CryptProtectMemory function to encrypt memory that contains a password. Encrypting the password prevents others from viewing it when the process is paged out to the swap file. Otherwise, the password is in plaintext and viewable by others."
     },
     "CryptUnprotectData": {
-        "prototype": "DPAPI_IMP BOOL CryptUnprotectData(\n  [in]            DATA_BLOB                 *pDataIn,\n  [out, optional] LPWSTR                    *ppszDataDescr,\n  [in, optional]  DATA_BLOB                 *pOptionalEntropy,\n                  PVOID                     pvReserved,\n  [in, optional]  CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]            DWORD                     dwFlags,\n  [out]           DATA_BLOB                 *pDataOut\n);",
+        "prototype": "BOOL CryptUnprotectData(\n  [in]            DATA_BLOB                 *pDataIn,\n  [out, optional] LPWSTR                    *ppszDataDescr,\n  [in, optional]  DATA_BLOB                 *pOptionalEntropy,\n                  PVOID                     pvReserved,\n  [in, optional]  CRYPTPROTECT_PROMPTSTRUCT *pPromptStruct,\n  [in]            DWORD                     dwFlags,\n  [out]           DATA_BLOB                 *pDataOut\n);",
         "dllLibrary": "crypt32",
         "comment": "The CryptUnprotectData function decrypts and does an integrity check of the data in a DATA_BLOB structure. Usually, the only user who can decrypt the data is a user with the same logon credentials as the user who encrypted the data. In addition, the encryption and decryption must be done on the same computer."
     },
     "CryptUnprotectMemory": {
-        "prototype": "DPAPI_IMP BOOL CryptUnprotectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
+        "prototype": "BOOL CryptUnprotectMemory(\n  [in, out] LPVOID pDataIn,\n  [in]      DWORD  cbDataIn,\n  [in]      DWORD  dwFlags\n);",
         "dllLibrary": "crypt32",
         "comment": "The CryptUnprotectMemory function decrypts memory that was encrypted using the CryptProtectMemory function."
     },
     "CryptUpdateProtectedState": {
-        "prototype": "DPAPI_IMP BOOL CryptUpdateProtectedState(\n  [in]  PSID    pOldSid,\n  [in]  LPCWSTR pwszOldPassword,\n  [in]  DWORD   dwFlags,\n  [out] DWORD   *pdwSuccessCount,\n  [out] DWORD   *pdwFailureCount\n);",
+        "prototype": "BOOL CryptUpdateProtectedState(\n  [in]  PSID    pOldSid,\n  [in]  LPCWSTR pwszOldPassword,\n  [in]  DWORD   dwFlags,\n  [out] DWORD   *pdwSuccessCount,\n  [out] DWORD   *pdwFailureCount\n);",
         "dllLibrary": "crypt32",
         "comment": "The CryptUpdateProtectedState function migrates the current user's master keys after the user's security identifier (SID) has changed. This function can be used to preserve encrypted data after a user has been moved from one domain to another."
     },
@@ -1079,7 +1079,7 @@
         "comment": "Defines, redefines, or deletes MS-DOS device names."
     },
     "DefMDIChildProc": {
-        "prototype": "LRESULT LRESULT DefMDIChildProcW(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "prototype": "LRESULT DefMDIChildProcW(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
         "comment": "Provides default processing for any window message that the window procedure of a multiple-document interface (MDI) child window does not process. A window message not processed by the window procedure must be passed to the DefMDIChildProc function, not to the DefWindowProc function."
     },
@@ -1626,12 +1626,12 @@
         "comment": "Converts a file time to system time format. System time is based on Coordinated Universal Time (UTC)."
     },
     "FillConsoleOutputAttribute": {
-        "prototype": "BOOL WINAPI FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
+        "prototype": "BOOL FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the character attributes for a specified number of character cells, beginning at the specified coordinates in a screen buffer."
     },
     "FillConsoleOutputCharacter": {
-        "prototype": "BOOL WINAPI FillConsoleOutputCharacterW(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WCHAR   cCharacter,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfCharsWritten\n);",
+        "prototype": "BOOL FillConsoleOutputCharacterW(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WCHAR   cCharacter,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfCharsWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates."
     },
@@ -1778,7 +1778,7 @@
         "comment": "The FlattenPath function transforms any curves in the path that is selected into the current device context (DC), turning each curve into a sequence of lines."
     },
     "FlushConsoleInputBuffer": {
-        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
+        "prototype": "BOOL FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
         "dllLibrary": "kernel32",
         "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
     },
@@ -1798,7 +1798,7 @@
         "comment": "The FrameRect function draws a border around the specified rectangle by using the specified brush. The width and height of the border are always one logical unit."
     },
     "FreeConsole": {
-        "prototype": "BOOL WINAPI FreeConsole(void);",
+        "prototype": "BOOL FreeConsole(void);",
         "dllLibrary": "kernel32",
         "comment": "Detaches the calling process from its console."
     },
@@ -1848,7 +1848,7 @@
         "comment": "The GetAdaptersAddresses function retrieves the addresses associated with the adapters on the local computer."
     },
     "GetAddrInfoW": {
-        "prototype": "INT WSAAPI GetAddrInfoW(\n  PCWSTR          pNodeName,\n  PCWSTR          pServiceName,\n  const ADDRINFOW *pHints,\n  PADDRINFOW      *ppResult\n);",
+        "prototype": "INT GetAddrInfoW(\n  PCWSTR          pNodeName,\n  PCWSTR          pServiceName,\n  const ADDRINFOW *pHints,\n  PADDRINFOW      *ppResult\n);",
         "dllLibrary": "ws2_32",
         "comment": "The GetAddrInfoW function provides protocol-independent translation from a Unicode host name to an address.",
         "category": "winsock",
@@ -2013,42 +2013,42 @@
         "comment": "Retrieves a NetBIOS or DNS name associated with the local computer. The names are established at system startup, when the system reads them from the registry."
     },
     "GetConsoleCP": {
-        "prototype": "UINT WINAPI GetConsoleCP(void);",
+        "prototype": "UINT GetConsoleCP(void);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the input code page used by the console associated with the calling process. A console uses its input code page to translate keyboard input into the corresponding character value."
     },
     "GetConsoleCursorInfo": {
-        "prototype": "BOOL WINAPI GetConsoleCursorInfo(\n  _In_  HANDLE               hConsoleOutput,\n  _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo\n);",
+        "prototype": "BOOL GetConsoleCursorInfo(\n  _In_  HANDLE               hConsoleOutput,\n  _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the size and visibility of the cursor for the specified console screen buffer."
     },
     "GetConsoleMode": {
-        "prototype": "BOOL WINAPI GetConsoleMode(\n  _In_  HANDLE  hConsoleHandle,\n  _Out_ LPDWORD lpMode\n);",
+        "prototype": "BOOL GetConsoleMode(\n  _In_  HANDLE  hConsoleHandle,\n  _Out_ LPDWORD lpMode\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current input mode of a console's input buffer or the current output mode of a console screen buffer."
     },
     "GetConsoleOutputCP": {
-        "prototype": "UINT WINAPI GetConsoleOutputCP(void);",
+        "prototype": "UINT GetConsoleOutputCP(void);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the output code page used by the console associated with the calling process. A console uses its output code page to translate the character values written by the various output functions into the images displayed in the console window."
     },
     "GetConsoleScreenBufferInfo": {
-        "prototype": "BOOL WINAPI GetConsoleScreenBufferInfo(\n  _In_  HANDLE                      hConsoleOutput,\n  _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo\n);",
+        "prototype": "BOOL GetConsoleScreenBufferInfo(\n  _In_  HANDLE                      hConsoleOutput,\n  _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the specified console screen buffer."
     },
     "GetConsoleSelectionInfo": {
-        "prototype": "BOOL WINAPI GetConsoleSelectionInfo(\n  _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo\n);",
+        "prototype": "BOOL GetConsoleSelectionInfo(\n  _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the current console selection."
     },
     "GetConsoleTitle": {
-        "prototype": "DWORD WINAPI GetConsoleTitleW(\n  _Out_ LPTSTR lpConsoleTitle,\n  _In_  DWORD  nSize\n);",
+        "prototype": "DWORD GetConsoleTitleW(\n  _Out_ LPTSTR lpConsoleTitle,\n  _In_  DWORD  nSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the title for the current console window."
     },
     "GetConsoleWindow": {
-        "prototype": "HWND WINAPI GetConsoleWindow(void);",
+        "prototype": "HWND GetConsoleWindow(void);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the window handle used by the console associated with the calling process."
     },
@@ -2340,21 +2340,21 @@
         "comment": "The GetHGlobalFromStream function retrieves the global memory handle to a stream that was created through a call to the CreateStreamOnHGlobal function."
     },
     "gethostbyaddr": {
-        "prototype": "hostent *WSAAPI gethostbyaddr(\n   const char *addr,\n   int        len,\n   int        type\n);",
+        "prototype": "hostent* gethostbyaddr(\n   const char *addr,\n   int        len,\n   int        type\n);",
         "dllLibrary": "ws2_32",
         "comment": "The gethostbyaddr function retrieves the host information corresponding to a network address.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
     "gethostbyname": {
-        "prototype": "hostent *WSAAPI gethostbyname(\n  const char *name\n);",
+        "prototype": "hostent* gethostbyname(\n  const char *name\n);",
         "dllLibrary": "ws2_32",
         "comment": "The gethostbyname function retrieves host information corresponding to a host name from a host database.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
     "gethostname": {
-        "prototype": "int WSAAPI gethostname(\n  char *name,\n  int  namelen\n);",
+        "prototype": "int gethostname(\n  char *name,\n  int  namelen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The gethostname function retrieves the standard host name for the local computer.",
         "category": "winsock",
@@ -2428,7 +2428,7 @@
         "comment": "Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, off—alternating each time the key is pressed)."
     },
     "GetLargestConsoleWindowSize": {
-        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
+        "prototype": "COORD GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the size of the largest possible console window, based on the current font and the size of the display."
     },
@@ -2649,7 +2649,7 @@
         "comment": "Retrieves information about the specified named pipe."
     },
     "getnameinfo": {
-        "prototype": "INT WSAAPI getnameinfo(\n  const SOCKADDR *pSockaddr,\n  socklen_t      SockaddrLength,\n  PCHAR          pNodeBuffer,\n  DWORD          NodeBufferSize,\n  PCHAR          pServiceBuffer,\n  DWORD          ServiceBufferSize,\n  INT            Flags\n);",
+        "prototype": "INT getnameinfo(\n  const SOCKADDR *pSockaddr,\n  socklen_t      SockaddrLength,\n  PCHAR          pNodeBuffer,\n  DWORD          NodeBufferSize,\n  PCHAR          pServiceBuffer,\n  DWORD          ServiceBufferSize,\n  INT            Flags\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getnameinfo function provides protocol-independent name resolution from an address to an ANSI host name and from a port number to the ANSI service name.",
         "category": "winsock",
@@ -2676,7 +2676,7 @@
         "comment": "Retrieves a handle to the first control that has the WS_TABSTOP style that precedes (or follows) the specified control."
     },
     "GetNumberOfConsoleInputEvents": {
-        "prototype": "BOOL WINAPI GetNumberOfConsoleInputEvents(\n  HANDLE hConsoleInput,\n  LPDWORD lpcNumberOfEvents\n);",
+        "prototype": "BOOL GetNumberOfConsoleInputEvents(\n  HANDLE hConsoleInput,\n  LPDWORD lpcNumberOfEvents\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the number of unread input records in the console's input buffer."
     },
@@ -2859,7 +2859,7 @@
         "comment": "The GetPrinterDataEx function retrieves configuration data for the specified printer or print server. GetPrinterDataEx can retrieve values that the SetPrinterData function stored. In addition, GetPrinterDataEx can retrieve values that the SetPrinterDataEx function stored under a specified key."
     },
     "GetPrintExecutionData": {
-        "prototype": "BOOL WINAPI GetPrintExecutionData(\n  _Out_ PRINT_EXECUTION_DATA *pData\n);",
+        "prototype": "BOOL GetPrintExecutionData(\n  _Out_ PRINT_EXECUTION_DATA *pData\n);",
         "dllLibrary": "winspool",
         "comment": "The GetPrintExecutionData retrieves the current print context."
     },
@@ -2930,14 +2930,14 @@
         "comment": "Retrieves a data handle from the property list of the specified window. The character string identifies the handle to be retrieved. The string and handle must have been added to the property list by a previous call to the SetProp function."
     },
     "getprotobyname": {
-        "prototype": "protoent *WSAAPI getprotobyname(\n  const char *name\n);",
+        "prototype": "protoent* getprotobyname(\n  const char *name\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getprotobyname function retrieves the protocol information corresponding to a protocol name.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
     "getprotobynumber": {
-        "prototype": "protoent *WSAAPI getprotobynumber(\n  int number\n);",
+        "prototype": "protoent* getprotobynumber(\n  int number\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getprotobynumber function retrieves protocol information corresponding to a protocol number.",
         "category": "winsock",
@@ -3000,14 +3000,14 @@
         "comment": "The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb)."
     },
     "getservbyname": {
-        "prototype": "servent *WSAAPI getservbyname(\n  const char *name,\n  const char *proto\n);",
+        "prototype": "servent* getservbyname(\n  const char *name,\n  const char *proto\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getservbyname function retrieves service information corresponding to a service name and protocol.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
     "getservbyport": {
-        "prototype": "servent *WSAAPI getservbyport(\n  int        port,\n  const char *proto\n);",
+        "prototype": "servent* getservbyport(\n  int        port,\n  const char *proto\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getservbyport function retrieves service information corresponding to a port and protocol.",
         "category": "winsock",
@@ -3031,7 +3031,7 @@
         "minimumWindowsVersion": "WIN81"
     },
     "getsockopt": {
-        "prototype": "int WSAAPI getsockopt(\n  SOCKET s,\n  int    level,\n  int    optname,\n  char   *optval,\n  int    *optlen\n);",
+        "prototype": "int getsockopt(\n  SOCKET s,\n  int    level,\n  int    optname,\n  char   *optval,\n  int    *optlen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The getsockopt function retrieves a socket option.",
         "category": "winsock",
@@ -3048,7 +3048,7 @@
         "comment": "Retrieves the contents of the STARTUPINFO structure that was specified when the calling process was created."
     },
     "GetStdHandle": {
-        "prototype": "HANDLE WINAPI GetStdHandle(\n  _In_ DWORD nStdHandle\n);",
+        "prototype": "HANDLE GetStdHandle(\n  _In_ DWORD nStdHandle\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves a handle to the specified standard device (standard input, standard output, or standard error)."
     },
@@ -3481,7 +3481,7 @@
         "comment": "Retrieves information about the specified heap."
     },
     "HeapReAlloc": {
-        "prototype": "DECLSPEC_ALLOCATOR LPVOID HeapReAlloc(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem,\n  SIZE_T                 dwBytes\n);",
+        "prototype": "LPVOID HeapReAlloc(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem,\n  SIZE_T                 dwBytes\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves information about the specified heap."
     },
@@ -3542,7 +3542,7 @@
         "minimumWindowsVersion": "WIN81"
     },
     "inet_ntoa": {
-        "prototype": "char * inet_ntoa(\n  in_addr in\n);",
+        "prototype": "char* inet_ntoa(\n  in_addr in\n);",
         "dllLibrary": "ws2_32",
         "comment": "The inet_ntoa function converts an (Ipv4) Internet network address into an ASCII string in Internet standard dotted-decimal format.",
         "category": "winsock",
@@ -3609,7 +3609,7 @@
         "comment": "The InvertRect function inverts a rectangle in a window by performing a logical NOT operation on the color values for each pixel in the rectangle's interior."
     },
     "ioctlsocket": {
-        "prototype": "int WSAAPI ioctlsocket(\n  SOCKET s,\n  long   cmd,\n  u_long *argp\n);",
+        "prototype": "int ioctlsocket(\n  SOCKET s,\n  long   cmd,\n  u_long *argp\n);",
         "dllLibrary": "ws2_32",
         "comment": "The ioctlsocket function controls the I/O mode of a socket.",
         "category": "winsock",
@@ -3626,7 +3626,7 @@
         "comment": "The IpRenewAddress function renews a lease on an IPv4 address previously obtained through Dynamic Host Configuration Protocol (DHCP)."
     },
     "IsApiSetImplemented": {
-        "prototype": "APICONTRACT BOOL IsApiSetImplemented(\n  PCSTR Contract\n);",
+        "prototype": "BOOL IsApiSetImplemented(\n  PCSTR Contract\n);",
         "apiSet": "api-ms-win-core-apiquery-l2-1-0",
         "comment": "The IsApiSetImplemented function tests if a specified API set is present on the computer.",
         "category": "onecore",
@@ -3808,7 +3808,7 @@
         "comment": "The LineTo function draws a line from the current position up to, but not including, the specified point."
     },
     "listen": {
-        "prototype": "int WSAAPI listen(\n  SOCKET s,\n  int    backlog\n);",
+        "prototype": "int listen(\n  SOCKET s,\n  int    backlog\n);",
         "dllLibrary": "ws2_32",
         "comment": "The listen function places a socket in a state in which it is listening for an incoming connection.",
         "category": "winsock",
@@ -4424,7 +4424,7 @@
         "comment": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops."
     },
     "PeekConsoleInput": {
-        "prototype": "BOOL WINAPI PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "prototype": "BOOL PeekConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from the specified console input buffer without removing it from the buffer."
     },
@@ -4565,12 +4565,12 @@
         "comment": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached."
     },
     "ReadConsole": {
-        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
+        "prototype": "BOOL ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads character input from the console input buffer and removes it from the buffer."
     },
     "ReadConsoleInput": {
-        "prototype": "BOOL WINAPI ReadConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
+        "prototype": "BOOL ReadConsoleInputW(\n  HANDLE        hConsoleInput,\n  PINPUT_RECORD lpBuffer,\n  DWORD         nLength,\n  LPDWORD       lpNumberOfEventsRead\n);",
         "dllLibrary": "kernel32",
         "comment": "Reads data from a console input buffer and removes it from the buffer."
     },
@@ -4611,14 +4611,14 @@
         "comment": "The RectInRegion function determines whether any part of the specified rectangle is within the boundaries of a region."
     },
     "recv": {
-        "prototype": "int WSAAPI recv(\n  SOCKET s,\n  char   *buf,\n  int    len,\n  int    flags\n);",
+        "prototype": "int recv(\n  SOCKET s,\n  char   *buf,\n  int    len,\n  int    flags\n);",
         "dllLibrary": "ws2_32",
         "comment": "The recv function receives data from a connected socket or a bound connectionless socket.",
         "category": "winsock",
         "minimumWindowsVersion": "WIN81"
     },
     "recvfrom": {
-        "prototype": "int WSAAPI recvfrom(\n  SOCKET   s,\n  char     *buf,\n  int      len,\n  int      flags,\n  sockaddr *from,\n  int      *fromlen\n);",
+        "prototype": "int recvfrom(\n  SOCKET   s,\n  char     *buf,\n  int      len,\n  int      flags,\n  sockaddr *from,\n  int      *fromlen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The recvfrom function receives a datagram, and stores the source address.",
         "category": "winsock",
@@ -4977,7 +4977,7 @@
         "comment": "The ResetPrinter function specifies the data type and device mode values to be used for printing documents submitted by the StartDocPrinter function. These values can be overridden by using the SetJob function after document printing has started."
     },
     "ResizePseudoConsole": {
-        "prototype": "HRESULT WINAPI ResizePseudoConsole(\n  _In_ HPCON hPC ,\n  _In_ COORD size\n);",
+        "prototype": "HRESULT ResizePseudoConsole(\n  _In_ HPCON hPC ,\n  _In_ COORD size\n);",
         "dllLibrary": "kernel32",
         "comment": "Resizes the internal buffers for a pseudoconsole to the given size.",
         "minimumWindowsVersion": "WIN10_RS5"
@@ -5270,7 +5270,7 @@
         "comment": "The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates."
     },
     "ScrollConsoleScreenBuffer": {
-        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
+        "prototype": "BOOL ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
         "dllLibrary": "kernel32",
         "comment": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged."
     },
@@ -5290,7 +5290,7 @@
         "comment": "The ScrollWindowEx function scrolls the contents of the specified window's client area."
     },
     "select": {
-        "prototype": "int WSAAPI select(\n  int           nfds,\n  fd_set        *readfds,\n  fd_set        *writefds,\n  fd_set        *exceptfds,\n  const timeval *timeout\n);",
+        "prototype": "int select(\n  int           nfds,\n  fd_set        *readfds,\n  fd_set        *writefds,\n  fd_set        *exceptfds,\n  const timeval *timeout\n);",
         "dllLibrary": "ws2_32",
         "comment": "The select function determines the status of one or more sockets, waiting if necessary, to perform synchronous I/O.",
         "category": "winsock",
@@ -5307,7 +5307,7 @@
         "comment": "The SelectObject function selects an object into the specified device context (DC). The new object replaces the previous object of the same type."
     },
     "send": {
-        "prototype": "int WSAAPI send(\n  SOCKET     s,\n  const char *buf,\n  int        len,\n  int        flags\n);",
+        "prototype": "int send(\n  SOCKET     s,\n  const char *buf,\n  int        len,\n  int        flags\n);",
         "dllLibrary": "ws2_32",
         "comment": "The send function sends data on a connected socket.",
         "category": "winsock",
@@ -5344,7 +5344,7 @@
         "comment": "Sends the specified message to a window or windows. If the window was created by the calling thread, SendNotifyMessage calls the window procedure for the window and does not return until the window procedure has processed the message. If the window was created by a different thread, SendNotifyMessage passes the message to the window procedure and returns immediately; it does not wait for the window procedure to finish processing the message."
     },
     "sendto": {
-        "prototype": "int WSAAPI sendto(\n  SOCKET         s,\n  const char     *buf,\n  int            len,\n  int            flags,\n  const sockaddr *to,\n  int            tolen\n);",
+        "prototype": "int sendto(\n  SOCKET         s,\n  const char     *buf,\n  int            len,\n  int            flags,\n  const sockaddr *to,\n  int            tolen\n);",
         "dllLibrary": "ws2_32",
         "comment": "The sendto function sends data to a specific destination.",
         "category": "winsock",
@@ -5422,37 +5422,37 @@
         "comment": "Sets the time-out parameters for all read and write operations on a specified communications device."
     },
     "SetConsoleCtrlHandler": {
-        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
+        "prototype": "BOOL SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
         "dllLibrary": "kernel32",
         "comment": "Adds or removes an application-defined HandlerRoutine function from the list of handler functions for the calling process."
     },
     "SetConsoleCursorInfo": {
-        "prototype": "BOOL WINAPI SetConsoleCursorInfo(\n  _In_       HANDLE              hConsoleOutput,\n  _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo\n);",
+        "prototype": "BOOL SetConsoleCursorInfo(\n  _In_       HANDLE              hConsoleOutput,\n  _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the size and visibility of the cursor for the specified console screen buffer."
     },
     "SetConsoleCursorPosition": {
-        "prototype": "BOOL WINAPI SetConsoleCursorPosition(\n  _In_ HANDLE hConsoleOutput,\n  _In_ COORD  dwCursorPosition\n);",
+        "prototype": "BOOL SetConsoleCursorPosition(\n  _In_ HANDLE hConsoleOutput,\n  _In_ COORD  dwCursorPosition\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the cursor position in the specified console screen buffer."
     },
     "SetConsoleDisplayMode": {
-        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
+        "prototype": "BOOL SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the display mode of the specified console screen buffer."
     },
     "SetConsoleMode": {
-        "prototype": "BOOL WINAPI SetConsoleMode(\n  _In_ HANDLE hConsoleHandle,\n  _In_ DWORD  dwMode\n);",
+        "prototype": "BOOL SetConsoleMode(\n  _In_ HANDLE hConsoleHandle,\n  _In_ DWORD  dwMode\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the input mode of a console's input buffer or the output mode of a console screen buffer."
     },
     "SetConsoleTextAttribute": {
-        "prototype": "BOOL WINAPI SetConsoleTextAttribute(\n  _In_ HANDLE hConsoleOutput,\n  _In_ WORD   wAttributes\n);",
+        "prototype": "BOOL SetConsoleTextAttribute(\n  _In_ HANDLE hConsoleOutput,\n  _In_ WORD   wAttributes\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the attributes of characters written to the console screen buffer by the WriteFile or WriteConsole function, or echoed by the ReadFile or ReadConsole function. This function affects text written after the function call."
     },
     "SetConsoleWindowInfo": {
-        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
+        "prototype": "BOOL SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the current size and position of a console screen buffer's window."
     },
@@ -5785,7 +5785,7 @@
         "comment": "The SetScrollInfo function sets the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb). The function also redraws the scroll bar, if requested."
     },
     "SetStdHandle": {
-        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
+        "prototype": "BOOL SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the handle for the specified standard device (standard input, standard output, or standard error)."
     },
@@ -5862,42 +5862,42 @@
         "comment": "Initializes the communications parameters for a specified communications device."
     },
     "SetupDiDestroyDeviceInfoList": {
-        "prototype": "WINSETUPAPI BOOL SetupDiDestroyDeviceInfoList(\n  HDEVINFO DeviceInfoSet\n);",
+        "prototype": "BOOL SetupDiDestroyDeviceInfoList(\n  HDEVINFO DeviceInfoSet\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiDestroyDeviceInfoList function deletes a device information set and frees all associated memory."
     },
     "SetupDiEnumDeviceInfo": {
-        "prototype": "WINSETUPAPI BOOL SetupDiEnumDeviceInfo(\n  HDEVINFO         DeviceInfoSet,\n  DWORD            MemberIndex,\n  PSP_DEVINFO_DATA DeviceInfoData\n);",
+        "prototype": "BOOL SetupDiEnumDeviceInfo(\n  HDEVINFO         DeviceInfoSet,\n  DWORD            MemberIndex,\n  PSP_DEVINFO_DATA DeviceInfoData\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure that specifies a device information element in a device information set."
     },
     "SetupDiEnumDeviceInterfaces": {
-        "prototype": "WINSETUPAPI BOOL SetupDiEnumDeviceInterfaces(\n  [in]           HDEVINFO                  DeviceInfoSet,\n  [in, optional] PSP_DEVINFO_DATA          DeviceInfoData,\n  [in]           const GUID                *InterfaceClassGuid,\n  [in]           DWORD                     MemberIndex,\n  [out]          PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData\n);",
+        "prototype": "BOOL SetupDiEnumDeviceInterfaces(\n  [in]           HDEVINFO                  DeviceInfoSet,\n  [in, optional] PSP_DEVINFO_DATA          DeviceInfoData,\n  [in]           const GUID                *InterfaceClassGuid,\n  [in]           DWORD                     MemberIndex,\n  [out]          PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiEnumDeviceInterfaces function enumerates the device interfaces that are contained in a device information set."
     },
     "SetupDiGetClassDevs": {
-        "prototype": "WINSETUPAPI HDEVINFO SetupDiGetClassDevsW(\n  const GUID *ClassGuid,\n  PCWSTR     Enumerator,\n  HWND       hwndParent,\n  DWORD      Flags\n);",
+        "prototype": "HDEVINFO SetupDiGetClassDevsW(\n  const GUID *ClassGuid,\n  PCWSTR     Enumerator,\n  HWND       hwndParent,\n  DWORD      Flags\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetClassDevs function returns a handle to a device information set that contains requested device information elements for a local computer."
     },
     "SetupDiGetDeviceInstanceId": {
-        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceInstanceIdW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [out, optional] PWSTR            DeviceInstanceId,\n  [in]            DWORD            DeviceInstanceIdSize,\n  [out, optional] PDWORD           RequiredSize\n);",
+        "prototype": "BOOL SetupDiGetDeviceInstanceIdW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [out, optional] PWSTR            DeviceInstanceId,\n  [in]            DWORD            DeviceInstanceIdSize,\n  [out, optional] PDWORD           RequiredSize\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetDeviceInstanceId function retrieves the device instance ID that is associated with a device information element."
     },
     "SetupDiGetDeviceInterfaceDetail": {
-        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceInterfaceDetailW(\n  [in]            HDEVINFO                           DeviceInfoSet,\n  [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,\n  [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,\n  [in]            DWORD                              DeviceInterfaceDetailDataSize,\n  [out, optional] PDWORD                             RequiredSize,\n  [out, optional] PSP_DEVINFO_DATA                   DeviceInfoData\n);",
+        "prototype": "BOOL SetupDiGetDeviceInterfaceDetailW(\n  [in]            HDEVINFO                           DeviceInfoSet,\n  [in]            PSP_DEVICE_INTERFACE_DATA          DeviceInterfaceData,\n  [out, optional] PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,\n  [in]            DWORD                              DeviceInterfaceDetailDataSize,\n  [out, optional] PDWORD                             RequiredSize,\n  [out, optional] PSP_DEVINFO_DATA                   DeviceInfoData\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetDeviceInterfaceDetail function returns details about a device interface."
     },
     "SetupDiGetDeviceRegistryProperty": {
-        "prototype": "WINSETUPAPI BOOL SetupDiGetDeviceRegistryPropertyW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [in]            DWORD            Property,\n  [out, optional] PDWORD           PropertyRegDataType,\n  [out, optional] PBYTE            PropertyBuffer,\n  [in]            DWORD            PropertyBufferSize,\n [out, optional] PDWORD           RequiredSize\n);",
+        "prototype": "BOOL SetupDiGetDeviceRegistryPropertyW(\n  [in]            HDEVINFO         DeviceInfoSet,\n  [in]            PSP_DEVINFO_DATA DeviceInfoData,\n  [in]            DWORD            Property,\n  [out, optional] PDWORD           PropertyRegDataType,\n  [out, optional] PBYTE            PropertyBuffer,\n  [in]            DWORD            PropertyBufferSize,\n [out, optional] PDWORD           RequiredSize\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiGetDeviceRegistryProperty function retrieves a specified Plug and Play device property."
     },
     "SetupDiOpenDevRegKey": {
-        "prototype": "WINSETUPAPI HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",
+        "prototype": "HKEY SetupDiOpenDevRegKey(\n  HDEVINFO         DeviceInfoSet,\n  PSP_DEVINFO_DATA DeviceInfoData,\n  DWORD            Scope,\n  DWORD            HwProfile,\n  DWORD            KeyType,\n  REGSAM           samDesired\n);",
         "dllLibrary": "setupapi",
         "comment": "The SetupDiOpenDevRegKey function opens a registry key for device-specific configuration information."
     },
@@ -5982,7 +5982,7 @@
         "comment": "Creates and initializes a Shell item object from a parsing name."
     },
     "SHCreateMemStream": {
-        "prototype": "IStream * SHCreateMemStream(\n  [in, optional] const BYTE *pInit,\n  [in]           UINT       cbInit\n);",
+        "prototype": "IStream* SHCreateMemStream(\n  [in, optional] const BYTE *pInit,\n  [in]           UINT       cbInit\n);",
         "dllLibrary": "shlwapi",
         "comment": "Creates a memory stream using a similar process to CreateStreamOnHGlobal.",
         "category": "shell32"
@@ -6068,7 +6068,7 @@
         "comment": "Retrieves the size of the Recycle Bin and the number of items in it, for a specified drive."
     },
     "shutdown": {
-        "prototype": "int WSAAPI shutdown(\n  SOCKET s,\n  int    how\n);",
+        "prototype": "int shutdown(\n  SOCKET s,\n  int    how\n);",
         "dllLibrary": "ws2_32",
         "comment": "The shutdown function disables sends or receives on a socket.",
         "category": "winsock",
@@ -6096,7 +6096,7 @@
         "comment": "Suspends the current thread until the specified condition is met. Execution resumes when one of the following occurs: (i) an I/O completion callback function is called; (ii) an asynchronous procedure call (APC) is queued to the thread; (iii) the time-out interval elapses."
     },
     "socket": {
-        "prototype": "SOCKET WSAAPI socket(\n  int af,\n  int type,\n  int protocol\n);",
+        "prototype": "SOCKET socket(\n  int af,\n  int type,\n  int protocol\n);",
         "dllLibrary": "ws2_32",
         "comment": "The socket function creates a socket that is bound to a specific transport service provider.",
         "category": "winsock",
@@ -6174,85 +6174,85 @@
         "comment": "Switches focus to the specified window and brings it to the foreground."
     },
     "SymCleanup": {
-        "prototype": "BOOL IMAGEAPI SymCleanup(\n  HANDLE hProcess);",
+        "prototype": "BOOL SymCleanup(\n  HANDLE hProcess);",
         "dllLibrary": "dbghelp",
         "comment": "Deallocates all resources associated with the process handle."
     },
     "SymEnumSymbols": {
-        "prototype": "BOOL IMAGEAPI SymEnumSymbolsW(\n  HANDLE                          hProcess,\n  ULONG64                         BaseOfDll,\n  PCWSTR                          Mask,\n  PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,\n  PVOID                           UserContext\n);",
+        "prototype": "BOOL SymEnumSymbolsW(\n  HANDLE                          hProcess,\n  ULONG64                         BaseOfDll,\n  PCWSTR                          Mask,\n  PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,\n  PVOID                           UserContext\n);",
         "dllLibrary": "dbghelp",
         "comment": "Enumerates all symbols in a process."
     },
     "SymFromAddr": {
-        "prototype": "BOOL IMAGEAPI SymFromAddrW(\n  HANDLE        hProcess,\n  DWORD64       Address,\n  PDWORD64      Displacement,\n  PSYMBOL_INFOW Symbol\n);",
+        "prototype": "BOOL SymFromAddrW(\n  HANDLE        hProcess,\n  DWORD64       Address,\n  PDWORD64      Displacement,\n  PSYMBOL_INFOW Symbol\n);",
         "dllLibrary": "dbghelp",
         "comment": "Retrieves symbol information for the specified address."
     },
     "SymFromToken": {
-        "prototype": "BOOL IMAGEAPI SymFromTokenW(\n  HANDLE        hProcess,\n  DWORD64       Base,\n  DWORD         Token,\n  PSYMBOL_INFOW Symbol\n);",
+        "prototype": "BOOL SymFromTokenW(\n  HANDLE        hProcess,\n  DWORD64       Base,\n  DWORD         Token,\n  PSYMBOL_INFOW Symbol\n);",
         "dllLibrary": "dbghelp",
         "comment": "Retrieves symbol information for the specified managed code token."
     },
     "SymGetExtendedOption": {
-        "prototype": "BOOL IMAGEAPI SymGetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option\n);",
+        "prototype": "BOOL SymGetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option\n);",
         "dllLibrary": "dbghelp",
         "comment": "Gets whether the specified extended symbol option on or off.",
         "minimumWindowsVersion": "WIN10_RS4"
     },
     "SymInitialize": {
-        "prototype": "BOOL IMAGEAPI SymInitializeW(\n  HANDLE hProcess,\n  PCWSTR UserSearchPath,\n  BOOL   fInvadeProcess\n);",
+        "prototype": "BOOL SymInitializeW(\n  HANDLE hProcess,\n  PCWSTR UserSearchPath,\n  BOOL   fInvadeProcess\n);",
         "dllLibrary": "dbghelp",
         "comment": "Initializes the symbol handler for a process."
     },
     "SymLoadModuleEx": {
-        "prototype": "DWORD64 IMAGEAPI SymLoadModuleExW(\n  HANDLE        hProcess,\n  HANDLE        hFile,\n  PCWSTR        ImageName,\n  PCWSTR        ModuleName,\n  DWORD64       BaseOfDll,\n  DWORD         DllSize,\n  PMODLOAD_DATA Data,\n  DWORD         Flags);",
+        "prototype": "DWORD64 SymLoadModuleExW(\n  HANDLE        hProcess,\n  HANDLE        hFile,\n  PCWSTR        ImageName,\n  PCWSTR        ModuleName,\n  DWORD64       BaseOfDll,\n  DWORD         DllSize,\n  PMODLOAD_DATA Data,\n  DWORD         Flags);",
         "dllLibrary": "dbghelp",
         "comment": "Loads the symbol table for the specified module."
     },
     "SymSetExtendedOption": {
-        "prototype": "BOOL IMAGEAPI SymSetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option,\n  BOOL                      value\n);",
+        "prototype": "BOOL SymSetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option,\n  BOOL                      value\n);",
         "dllLibrary": "dbghelp",
         "comment": "Turns the specified extended symbol option on or off.",
         "minimumWindowsVersion": "WIN10_RS4"
     },
     "SymSetOptions": {
-        "prototype": "DWORD IMAGEAPI SymSetOptions(\n  DWORD SymOptions\n);",
+        "prototype": "DWORD SymSetOptions(\n  DWORD SymOptions\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the options mask."
     },
     "SymSetParentWindow": {
-        "prototype": "BOOL IMAGEAPI SymSetParentWindow(\n  HWND hwnd\n);",
+        "prototype": "BOOL SymSetParentWindow(\n  HWND hwnd\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the window that the caller will use to display a user interface."
     },
     "SymSetScopeFromAddr": {
-        "prototype": "BOOL IMAGEAPI SymSetScopeFromAddr(\n  HANDLE  hProcess,\n  ULONG64 Address\n);",
+        "prototype": "BOOL SymSetScopeFromAddr(\n  HANDLE  hProcess,\n  ULONG64 Address\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the local scope to the symbol that matches the specified address."
     },
     "SymSetScopeFromIndex": {
-        "prototype": "BOOL IMAGEAPI SymSetScopeFromIndex(\n  HANDLE  hProcess,\n  ULONG64 BaseOfDll,\n  DWORD   Index\n);",
+        "prototype": "BOOL SymSetScopeFromIndex(\n  HANDLE  hProcess,\n  ULONG64 BaseOfDll,\n  DWORD   Index\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the local scope to the symbol that matches the specified index."
     },
     "SymSetScopeFromInlineContext": {
-        "prototype": "BOOL IMAGEAPI SymSetScopeFromInlineContext(\n  HANDLE  hProcess,\n  ULONG64 Address,\n  ULONG   InlineContext\n);",
+        "prototype": "BOOL SymSetScopeFromInlineContext(\n  HANDLE  hProcess,\n  ULONG64 Address,\n  ULONG   InlineContext\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the local scope to the symbol that matches the specified address and inline context.",
         "minimumWindowsVersion": "WIN8"
     },
     "SymSetSearchPath": {
-        "prototype": "BOOL IMAGEAPI SymSetSearchPathW(\n  HANDLE hProcess,\n  PCWSTR SearchPath\n);",
+        "prototype": "BOOL SymSetSearchPathW(\n  HANDLE hProcess,\n  PCWSTR SearchPath\n);",
         "dllLibrary": "dbghelp",
         "comment": "Sets the search path for the specified process."
     },
     "SymUnloadModule": {
-        "prototype": "BOOL IMAGEAPI SymUnloadModule(\n  HANDLE hProcess,\n  DWORD  BaseOfDll\n);",
+        "prototype": "BOOL SymUnloadModule(\n  HANDLE hProcess,\n  DWORD  BaseOfDll\n);",
         "dllLibrary": "dbghelp",
         "comment": "Unloads the symbol table."
     },
     "SymUnloadModule64": {
-        "prototype": "BOOL IMAGEAPI SymUnloadModule64(\n  HANDLE  hProcess,\n  DWORD64 BaseOfDll\n);",
+        "prototype": "BOOL SymUnloadModule64(\n  HANDLE  hProcess,\n  DWORD64 BaseOfDll\n);",
         "dllLibrary": "dbghelp",
         "comment": "Unloads the symbol table."
     },
@@ -6405,7 +6405,7 @@
         "comment": "Transmits a specified character ahead of any pending data in the output buffer of the specified communications device."
     },
     "UnDecorateSymbolName": {
-        "prototype": "DWORD IMAGEAPI UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
+        "prototype": "DWORD UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
         "dllLibrary": "dbghelp",
         "comment": "Undecorates the specified decorated C++ symbol name."
     },
@@ -6455,7 +6455,7 @@
         "comment": "Registers a window as no longer being touch-capable."
     },
     "UpdateLayeredWindowIndirect": {
-        "prototype": "BOOL WINAPI UpdateLayeredWindowIndirect(\n  HWND hwnd,\n  const UPDATELAYEREDWINDOWINFO *pULWInfo\n);",
+        "prototype": "BOOL UpdateLayeredWindowIndirect(\n  HWND hwnd,\n  const UPDATELAYEREDWINDOWINFO *pULWInfo\n);",
         "dllLibrary": "user32",
         "comment": "Updates the position, size, shape, content, and translucency of a layered window."
     },
@@ -6550,7 +6550,7 @@
         "comment": "Retrieves specified version information from the specified version-information resource. To retrieve the appropriate resource, before you call VerQueryValue, you must first call the GetFileVersionInfoSize function, and then the GetFileVersionInfo function."
     },
     "VerSetConditionMask": {
-        "prototype": "NTSYSAPI ULONGLONG VerSetConditionMask(  \n[in] ULONGLONG ConditionMask,  \n[in] DWORD     TypeMask,  \n[in] BYTE      Condition\n);",
+        "prototype": "ULONGLONG VerSetConditionMask(  \n[in] ULONGLONG ConditionMask,  \n[in] DWORD     TypeMask,  \n[in] BYTE      Condition\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the bits of a 64-bit value to indicate the comparison operator to use for a specified operating system version attribute. This function is used to build the dwlConditionMask parameter of the VerifyVersionInfo function."
     },
@@ -7119,7 +7119,7 @@
         "comment": "Suspends the specified WOW64 thread."
     },
     "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "prototype": "BOOL WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
     },
