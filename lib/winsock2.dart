@@ -29,14 +29,14 @@ library winsock2;
 // Core Win32 APIs, constants and macros
 export 'src/structs.g.dart'
     show
-        addrinfo,
-        fd_set,
+        ADDRINFO,
+        FD_SET,
         IN_ADDR,
         SOCKADDR,
-        timeval,
-        hostent,
-        protoent,
-        servent;
+        TIMEVAL,
+        HOSTENT,
+        PROTOENT,
+        SERVENT;
 export 'src/constants_winsock.dart';
 
 // Traditional C-style Windows APIs

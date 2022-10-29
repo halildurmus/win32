@@ -80,14 +80,14 @@ export 'src/guid.dart';
 export 'src/macros.dart';
 export 'src/structs.g.dart'
     hide
-        addrinfo,
-        fd_set,
+        ADDRINFO,
+        FD_SET,
         IN_ADDR,
         SOCKADDR,
-        timeval,
-        hostent,
-        protoent,
-        servent;
+        TIMEVAL,
+        HOSTENT,
+        PROTOENT,
+        SERVENT;
 export 'src/variant.dart';
 export 'src/utils.dart';
 export 'src/winmd_constants.dart';
