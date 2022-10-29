@@ -2026,7 +2026,7 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView.fromRawPointer(retValuePtr, allocator: allocator);
+        return IVectorView.fromRawPointer(retValuePtr);
       }
 
       setUp(() {
@@ -2125,7 +2125,7 @@ void main() {
         if (FAILED(hr)) throw WindowsException(hr);
 
         return IVectorView.fromRawPointer(retValuePtr,
-            creator: IHostName.fromRawPointer, allocator: allocator);
+            creator: IHostName.fromRawPointer);
       }
 
       setUp(() {

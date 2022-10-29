@@ -25,7 +25,6 @@ class IIterator<T> extends IInspectable {
   final T Function(Pointer<COMObject>)? _creator;
   final T Function(int)? _enumCreator;
   final Type? _intType;
-  final Allocator _allocator;
 
   /// Creates an instance of [IIterator] using the given [ptr].
   ///
@@ -49,20 +48,14 @@ class IIterator<T> extends IInspectable {
   /// final iterator = IIterator<DeviceClass>.fromRawPointer(ptr,
   ///     enumCreator: DeviceClass.from, intType: Int32);
   /// ```
-  ///
-  /// It is the caller's responsibility to deallocate the returned pointer
-  /// from the `Current` method when they are finished with it. A FFI `Arena`
-  /// may be passed as a custom allocator for ease of memory management.
   IIterator.fromRawPointer(
     super.ptr, {
     T Function(Pointer<COMObject>)? creator,
     T Function(int)? enumCreator,
     Type? intType,
-    Allocator allocator = calloc,
   })  : _creator = creator,
         _enumCreator = enumCreator,
-        _intType = intType,
-        _allocator = allocator {
+        _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
         !isSubtypeOfInspectable<T>() &&
@@ -97,7 +90,7 @@ class IIterator<T> extends IInspectable {
   }
 
   Pointer<COMObject> _current_COMObject() {
-    final retValuePtr = _allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
             .elementAt(6)
@@ -109,7 +102,10 @@ class IIterator<T> extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return retValuePtr;
   }
