@@ -183,7 +183,10 @@ class IMap<K, V> extends IInspectable
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return _creator!(retValuePtr);
   }
@@ -201,7 +204,10 @@ class IMap<K, V> extends IInspectable
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -221,7 +227,10 @@ class IMap<K, V> extends IInspectable
                 .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
             ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return _creator!(retValuePtr);
   }
@@ -240,7 +249,10 @@ class IMap<K, V> extends IInspectable
             .asFunction<int Function(Pointer, COMObject, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key.ptr.ref, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -261,7 +273,10 @@ class IMap<K, V> extends IInspectable
               .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
           ptr.ref.lpVtbl, hKey, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) {
+        free(retValuePtr);
+        throw WindowsException(hr);
+      }
 
       return _creator!(retValuePtr);
     } finally {
@@ -311,7 +326,10 @@ class IMap<K, V> extends IInspectable
               .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
           ptr.ref.lpVtbl, hKey, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) {
+        free(retValuePtr);
+        throw WindowsException(hr);
+      }
 
       return IPropertyValue.fromRawPointer(retValuePtr).value;
     } finally {
@@ -479,21 +497,25 @@ class IMap<K, V> extends IInspectable
   Map<K, V> getView() {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.lpVtbl.value
-            .elementAt(9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-            .value
-            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return IMapView<K, V>.fromRawPointer(retValuePtr,
-            creator: _creator, enumCreator: _enumCreator)
-        .toMap();
+      return IMapView<K, V>.fromRawPointer(retValuePtr,
+              creator: _creator, enumCreator: _enumCreator)
+          .toMap();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   /// Inserts or replaces an item in the map.

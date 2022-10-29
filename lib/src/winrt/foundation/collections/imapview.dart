@@ -128,7 +128,10 @@ class IMapView<K, V> extends IInspectable
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return _creator!(retValuePtr);
   }
@@ -146,7 +149,10 @@ class IMapView<K, V> extends IInspectable
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -166,7 +172,10 @@ class IMapView<K, V> extends IInspectable
                 .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
             ptr.ref.lpVtbl, key, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return _creator!(retValuePtr);
   }
@@ -185,7 +194,10 @@ class IMapView<K, V> extends IInspectable
             .asFunction<int Function(Pointer, COMObject, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, key.ptr.ref, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -206,7 +218,10 @@ class IMapView<K, V> extends IInspectable
               .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
           ptr.ref.lpVtbl, hKey, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) {
+        free(retValuePtr);
+        throw WindowsException(hr);
+      }
 
       return _creator!(retValuePtr);
     } finally {
@@ -256,7 +271,10 @@ class IMapView<K, V> extends IInspectable
               .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
           ptr.ref.lpVtbl, hKey, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) {
+        free(retValuePtr);
+        throw WindowsException(hr);
+      }
 
       return IPropertyValue.fromRawPointer(retValuePtr).value;
     } finally {

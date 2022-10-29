@@ -11,6 +11,7 @@ import '../../../combase.dart';
 import '../../../exceptions.dart';
 import '../../../macros.dart';
 import '../../../types.dart';
+import '../../../utils.dart';
 import '../../../winrt_helpers.dart';
 import '../../internal/vector_helper.dart';
 import 'iiterator.dart';
@@ -25,7 +26,6 @@ class IIterable<T> extends IInspectable {
   final T Function(Pointer<COMObject>)? _creator;
   final T Function(int)? _enumCreator;
   final Type? _intType;
-  final Allocator _allocator;
 
   /// Creates an instance of [IIterable] using the given [ptr].
   ///
@@ -49,20 +49,14 @@ class IIterable<T> extends IInspectable {
   /// final iterable = IIterable<DeviceClass>.fromRawPointer(ptr,
   ///     enumCreator: DeviceClass.from, intType: Int32);
   /// ```
-  ///
-  /// It is the caller's responsibility to deallocate the returned pointer
-  /// from the `First` method when they are finished with it. A FFI `Arena`
-  /// may be passed as a custom allocator for ease of memory management.
   IIterable.fromRawPointer(
     super.ptr, {
     T Function(Pointer<COMObject>)? creator,
     T Function(int)? enumCreator,
     Type? intType,
-    Allocator allocator = calloc,
   })  : _creator = creator,
         _enumCreator = enumCreator,
-        _intType = intType,
-        _allocator = allocator {
+        _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
         !isSubtypeOfInspectable<T>() &&
@@ -90,7 +84,7 @@ class IIterable<T> extends IInspectable {
 
   /// Returns an iterator for the items in the collection.
   IIterator<T> first() {
-    final retValuePtr = _allocator<COMObject>();
+    final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -102,14 +96,16 @@ class IIterable<T> extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IIterator.fromRawPointer(
       retValuePtr,
       creator: _creator,
       enumCreator: _enumCreator,
       intType: _intType,
-      allocator: _allocator,
     );
   }
 }

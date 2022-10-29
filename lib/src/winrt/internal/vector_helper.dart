@@ -17,16 +17,9 @@ import 'hstring_array.dart';
 import 'int_array.dart';
 
 class VectorHelper<T> {
-  const VectorHelper(
-    this.creator,
-    this.enumCreator,
-    this.intType,
-    this.getManyCallback,
-    this.length, {
-    this.allocator = calloc,
-  });
+  const VectorHelper(this.creator, this.enumCreator, this.intType,
+      this.getManyCallback, this.length);
 
-  final Allocator allocator;
   final T Function(Pointer<COMObject>)? creator;
   final T Function(int)? enumCreator;
   final Type? intType;
@@ -61,7 +54,7 @@ class VectorHelper<T> {
   }
 
   List<T> _toList_COMObject() {
-    final pArray = allocator<COMObject>(length);
+    final pArray = calloc<COMObject>(length);
     getManyCallback(0, length, pArray);
     return pArray.toList(creator!, length: length);
   }
@@ -78,7 +71,7 @@ class VectorHelper<T> {
   }
 
   List<T> _toList_enum_Int32() {
-    final pArray = allocator<Int32>(length);
+    final pArray = calloc<Int32>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -89,7 +82,7 @@ class VectorHelper<T> {
   }
 
   List<T> _toList_enum_Uint32() {
-    final pArray = allocator<Uint32>(length);
+    final pArray = calloc<Uint32>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -119,7 +112,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Int16() {
-    final pArray = allocator<Int16>(length);
+    final pArray = calloc<Int16>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -130,7 +123,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Int32() {
-    final pArray = allocator<Int32>(length);
+    final pArray = calloc<Int32>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -141,7 +134,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Int64() {
-    final pArray = allocator<Int64>(length);
+    final pArray = calloc<Int64>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -152,7 +145,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Uint8() {
-    final pArray = allocator<Uint8>(length);
+    final pArray = calloc<Uint8>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -163,7 +156,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Uint16() {
-    final pArray = allocator<Uint16>(length);
+    final pArray = calloc<Uint16>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -174,7 +167,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Uint32() {
-    final pArray = allocator<Uint32>(length);
+    final pArray = calloc<Uint32>(length);
 
     try {
       getManyCallback(0, length, pArray);
@@ -185,7 +178,7 @@ class VectorHelper<T> {
   }
 
   List<int> _toList_int_Uint64() {
-    final pArray = allocator<Uint64>(length);
+    final pArray = calloc<Uint64>(length);
 
     try {
       getManyCallback(0, length, pArray);
