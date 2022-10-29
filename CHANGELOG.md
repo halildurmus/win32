@@ -1,3 +1,7 @@
+## 2.4.1
+
+- Update to Windows.Win32.winmd v37.0.24.13458.
+
 ## 2.4.0
 
 - Update to Windows.Win32.winmd v37.0.19.10366.
