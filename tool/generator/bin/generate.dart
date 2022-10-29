@@ -103,7 +103,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
   buffer.write('''
   $functionsFileHeader
   
-  final _$libraryDartName = DynamicLibrary.open('$library');\n
+  final _$libraryDartName = DynamicLibrary.open('${library.toLowerCase()}');\n
   ''');
 
   for (final method in libraryMethods) {
