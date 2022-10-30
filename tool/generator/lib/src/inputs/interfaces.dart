@@ -118,6 +118,8 @@ final windowsRuntimeTypesToGenerate = <String>{
   'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IStringable',
   'Windows.Foundation.PropertyValue',
+  'Windows.Foundation.Uri',
+  'Windows.Foundation.WwwFormUrlDecoderEntry',
   'Windows.Gaming.Input.Gamepad',
   'Windows.Gaming.Input.Headset',
   'Windows.Globalization.Calendar',

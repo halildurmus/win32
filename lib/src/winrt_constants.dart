@@ -964,3 +964,7 @@ const IID_IReference_WhiteBalanceGain =
 
 // IVector<T> IIDs
 const IID_IVector_IJsonValue = '{D44662BC-DCE3-59A8-9272-4B210F33908B}';
+
+// IVectorView<T> IIDs
+const IID_IVectorView_IWwwFormUrlDecoderEntry =
+    '{B1F00D3B-1F06-5117-93EA-2A0D79116701}';
