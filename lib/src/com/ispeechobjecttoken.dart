@@ -219,7 +219,7 @@ class ISpeechObjectToken extends IDispatch {
 
   int
       removeStorageFileName(Pointer<Utf16> ObjectStorageCLSID,
-              Pointer<Utf16> KeyName, int DeleteFileA) =>
+              Pointer<Utf16> KeyName, int DeleteFile) =>
           ptr.ref.vtable
                   .elementAt(16)
                   .cast<
@@ -229,12 +229,12 @@ class ISpeechObjectToken extends IDispatch {
                                   Pointer,
                                   Pointer<Utf16> ObjectStorageCLSID,
                                   Pointer<Utf16> KeyName,
-                                  Int16 DeleteFileA)>>>()
+                                  Int16 DeleteFile)>>>()
                   .value
                   .asFunction<
                       int Function(Pointer, Pointer<Utf16> ObjectStorageCLSID,
-                          Pointer<Utf16> KeyName, int DeleteFileA)>()(
-              ptr.ref.lpVtbl, ObjectStorageCLSID, KeyName, DeleteFileA);
+                          Pointer<Utf16> KeyName, int DeleteFile)>()(
+              ptr.ref.lpVtbl, ObjectStorageCLSID, KeyName, DeleteFile);
 
   int isUISupported(Pointer<Utf16> TypeOfUI, Pointer<VARIANT> ExtraData,
           Pointer<COMObject> Object, Pointer<Int16> Supported) =>
