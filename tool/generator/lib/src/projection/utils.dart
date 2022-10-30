@@ -227,7 +227,7 @@ String outerType(String name) {
 String? parseArgumentForCreatorParameter(TypeIdentifier ti) {
   final typeProjection = TypeProjection(ti);
   if (typeProjection.isWinRTStruct ||
-      ['bool', 'DateTime', 'double', 'Duration', 'int', 'String']
+      ['bool', 'DateTime', 'double', 'Duration', 'int', 'String', 'Uri']
           .contains(typeProjection.methodParamType)) {
     return null;
   }
@@ -357,9 +357,7 @@ List<NamespaceGroup> groupTypesByParentNamespace(Iterable<String> types) {
 
   for (var i = 1; i < types.length; i++) {
     final type = types.elementAt(i);
-    if (namespaceGroups
-        .where((e) => e.namespace == parentNamespace(type))
-        .isNotEmpty) {
+    if (namespaceGroups.any((e) => e.namespace == parentNamespace(type))) {
       final namespaceGroup = namespaceGroups
           .firstWhere((e) => e.namespace == parentNamespace(type));
       namespaceGroup.types.add(type);

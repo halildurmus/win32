@@ -8,26 +8,16 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
 
   @override
-  String get importHeader {
-    // TODO: should unify format -- FQDN
-    final imports = {
-      ...interfaceImport,
-      ...factoryInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
-      ...staticInterfaces.map((i) => '${lastComponent(i).toLowerCase()}.dart'),
-      ...importsForClass()
-    }..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
-
-    // The return types of methods in the IPropertyValueStatics are specified
-    // as 'object' in WinMD. However, these methods actually return the
-    // IPropertyValue interface (except for the CreateEmpty() and
-    // CreateInspectable() methods, which return Pointer<COMObject>). Therefore,
-    // the IProperyValue import is manually added here.
-    if (shortName == 'PropertyValue') {
-      imports.add('ipropertyvalue.dart');
-    }
-
-    return imports.map((import) => "import '$import';").join('\n');
-  }
+  Set<String> get coreImports => {
+        // TODO: should unify format -- FQDN
+        ...interfaceImport,
+        ...factoryInterfaces.map(
+            (interface) => '${lastComponent(interface).toLowerCase()}.dart'),
+        ...staticInterfaces.map(
+            (interface) => '${lastComponent(interface).toLowerCase()}.dart'),
+        ...importsForClass()
+      }..removeWhere(
+          (import) => import == 'iinspectable.dart' || import.isEmpty);
 
   bool get hasDefaultConstructor => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
