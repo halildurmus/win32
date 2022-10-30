@@ -15,6 +15,7 @@ import '../../../utils.dart';
 import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_helpers.dart';
 import '../../internal/vector_helper.dart';
+import '../uri.dart' as winrt_uri;
 import '../winrt_enum.dart';
 import 'iiterable.dart';
 import 'iiterator.dart';
@@ -32,7 +33,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
   /// Creates an instance of [IVector] using the given [ptr].
   ///
-  /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
+  /// [T] must be of type `int`, `String`, `Uri`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
   /// [intType] must be specified if [T] is `int`. Supported types are: [Int16],
@@ -62,6 +63,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
         _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
+        !isSameType<T, Uri>() &&
         !isSubtypeOfInspectable<T>() &&
         !isSubtypeOfWinRTEnum<T>()) {
       throw ArgumentError.value(T, 'T', 'Unsupported type');
@@ -89,6 +91,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   T getAt(int index) {
     if (isSameType<T, int>()) return _getAt_int(index) as T;
     if (isSameType<T, String>()) return _getAt_String(index) as T;
+    if (isSameType<T, Uri>()) return _getAt_Uri(index) as T;
     if (isSubtypeOfWinRTEnum<T>()) return _enumCreator!(_getAt_int(index));
     return _creator!(_getAt_COMObject(index));
   }
@@ -321,6 +324,31 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
+  Uri _getAt_Uri(int index) {
+    final retValuePtr = calloc<COMObject>();
+
+    try {
+      final hr =
+          ptr.ref.vtable
+                  .elementAt(6)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              HRESULT Function(
+                                  Pointer, Uint32, Pointer<COMObject>)>>>()
+                  .value
+                  .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
+              ptr.ref.lpVtbl, index, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+      return Uri.parse(winrtUri.toString());
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
   /// Gets the number of items in the vector.
   int get size {
     final retValuePtr = calloc<Uint32>();
@@ -376,6 +404,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   bool indexOf(T value, Pointer<Uint32> index) {
     if (isSameType<T, int>()) return _indexOf_int(value as int, index);
     if (isSameType<T, String>()) return _indexOf_String(value as String, index);
+    if (isSameType<T, Uri>()) return _indexOf_Uri(value as Uri, index);
     if (isSubtypeOfWinRTEnum<T>()) {
       return _indexOf_enum(value as WinRTEnum, index);
     }
@@ -630,10 +659,38 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
+  bool _indexOf_Uri(Uri value, Pointer<Uint32> index) {
+    final retValuePtr = calloc<Bool>();
+    final winrtUri = winrt_uri.Uri.createUri(value.toString());
+
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(9)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, COMObject, Pointer<Uint32>,
+                              Pointer<Bool>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, COMObject, Pointer<Uint32>, Pointer<Bool>)>()(
+          ptr.ref.lpVtbl, winrtUri.ptr.ref, index, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(winrtUri.ptr);
+      free(retValuePtr);
+    }
+  }
+
   /// Sets the value at the specified index in the vector.
   void setAt(int index, T value) {
     if (isSameType<T, int>()) return _setAt_int(index, value as int);
     if (isSameType<T, String>()) return _setAt_String(index, value as String);
+    if (isSameType<T, Uri>()) return _setAt_Uri(index, value as Uri);
     if (isSubtypeOfWinRTEnum<T>()) {
       return _setAt_enum(index, value as WinRTEnum);
     }
@@ -790,12 +847,36 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
+  void _setAt_Uri(int index, Uri value) {
+    final winrtUri = winrt_uri.Uri.createUri(value.toString());
+
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(10)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, COMObject)>>>()
+              .value
+              .asFunction<int Function(Pointer, int, COMObject)>()(
+          ptr.ref.lpVtbl, index, winrtUri.ptr.ref);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(winrtUri.ptr);
+    }
+  }
+
   /// Inserts an item at a specified index in the vector.
   void insertAt(int index, T value) {
     if (isSameType<T, int>()) return _insertAt_int(index, value as int);
 
     if (isSameType<T, String>()) {
       return _insertAt_String(index, value as String);
+    }
+
+    if (isSameType<T, Uri>()) {
+      return _insertAt_Uri(index, value as Uri);
     }
 
     if (isSubtypeOfWinRTEnum<T>()) {
@@ -954,6 +1035,26 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     }
   }
 
+  void _insertAt_Uri(int index, Uri value) {
+    final winrtUri = winrt_uri.Uri.createUri(value.toString());
+
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(11)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Uint32, COMObject)>>>()
+              .value
+              .asFunction<int Function(Pointer, int, COMObject)>()(
+          ptr.ref.lpVtbl, index, winrtUri.ptr.ref);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(winrtUri.ptr);
+    }
+  }
+
   /// Removes the item at the specified index in the vector.
   void removeAt(int index) {
     final hr = ptr.ref.vtable
@@ -969,6 +1070,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   void append(T value) {
     if (isSameType<T, int>()) return _append_int(value as int);
     if (isSameType<T, String>()) return _append_String(value as String);
+    if (isSameType<T, Uri>()) return _append_Uri(value as Uri);
     if (isSubtypeOfWinRTEnum<T>()) return _append_enum(value as WinRTEnum);
     return _append_COMObject(value);
   }
@@ -1096,6 +1198,24 @@ class IVector<T> extends IInspectable implements IIterable<T> {
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
       WindowsDeleteString(hValue);
+    }
+  }
+
+  void _append_Uri(Uri value) {
+    final winrtUri = winrt_uri.Uri.createUri(value.toString());
+
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(13)
+          .cast<Pointer<NativeFunction<HRESULT Function(Pointer, COMObject)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, COMObject)>()(ptr.ref.lpVtbl, winrtUri.ptr.ref);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(winrtUri.ptr);
     }
   }
 
@@ -1394,6 +1514,10 @@ class IVector<T> extends IInspectable implements IIterable<T> {
       return _replaceAll_String(value as List<String>);
     }
 
+    if (isSameType<T, Uri>()) {
+      return _replaceAll_Uri(value as List<Uri>);
+    }
+
     if (isSubtypeOfWinRTEnum<T>()) {
       return _replaceAll_enum(value as List<WinRTEnum>);
     }
@@ -1646,6 +1770,35 @@ class IVector<T> extends IInspectable implements IIterable<T> {
     } finally {
       free(pArray);
       handles.forEach(WindowsDeleteString);
+    }
+  }
+
+  void _replaceAll_Uri(List<Uri> value) {
+    final handles = <Pointer<COMObject>>[];
+    final pArray = calloc<COMObject>(value.length);
+    for (var i = 0; i < value.length; i++) {
+      final winrtUri = winrt_uri.Uri.createUri(value[i].toString());
+      pArray[i] = winrtUri.ptr.ref;
+      handles.add(winrtUri.ptr);
+    }
+
+    try {
+      final hr =
+          ptr.ref.vtable
+                  .elementAt(17)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              HRESULT Function(
+                                  Pointer, Uint32, Pointer<COMObject>)>>>()
+                  .value
+                  .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
+              ptr.ref.lpVtbl, value.length, pArray);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(pArray);
+      handles.forEach(free);
     }
   }
 

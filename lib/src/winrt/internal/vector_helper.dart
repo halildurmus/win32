@@ -12,6 +12,7 @@ import '../../combase.dart';
 import '../../types.dart';
 import '../../utils.dart';
 import '../../winrt_helpers.dart';
+import '../foundation/uri.dart' as winrt_uri;
 import 'comobject_pointer.dart';
 import 'hstring_array.dart';
 import 'int_array.dart';
@@ -31,7 +32,9 @@ class VectorHelper<T> {
     if (isSameType<T, int>()) return _toList_int() as List<T>;
 
     final List<T> list;
-    if (isSameType<T, String>()) {
+    if (isSameType<T, Uri>()) {
+      list = _toList_Uri() as List<T>;
+    } else if (isSameType<T, String>()) {
       list = _toList_String() as List<T>;
     } else if (isSubtypeOfWinRTEnum<T>()) {
       list = _toList_enum();
@@ -40,6 +43,20 @@ class VectorHelper<T> {
     }
 
     return List.unmodifiable(list);
+  }
+
+  List<Uri> _toList_Uri() {
+    final pArray = calloc<COMObject>(length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray
+          .toList(winrt_uri.Uri.fromRawPointer, length: length)
+          .map((e) => Uri.parse(e.toString()))
+          .toList();
+    } finally {
+      free(pArray);
+    }
   }
 
   List<String> _toList_String() {
