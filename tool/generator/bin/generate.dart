@@ -9,6 +9,15 @@ import 'generate_struct_sizes_cpp.dart';
 bool methodMatches(String methodName, String rawPrototype) =>
     rawPrototype.contains(' $methodName(');
 
+String fixFile(String file) {
+  // Temporary fix for https://github.com/microsoft/win32metadata/issues/1335
+  return file
+      .replaceAll('BLUETOOTH_ADDRESS_STRUCT', 'BLUETOOTH_ADDRESS')
+      .replaceAll('BLUETOOTH_DEVICE_INFO_STRUCT', 'BLUETOOTH_DEVICE_INFO')
+      .replaceAll('BLUETOOTH_LOCAL_SERVICE_INFO_STRUCT',
+          'BLUETOOTH_LOCAL_SERVICE_INFO');
+}
+
 String generateDocComment(Win32Function func, String libraryDartName) {
   final category = func.category.isNotEmpty ? func.category : libraryDartName;
 
@@ -46,7 +55,7 @@ int generateStructs(Map<String, String> structs) {
 
   final structsFile = [structFileHeader, ...structProjections].join();
 
-  file.writeAsStringSync(DartFormatter().format(structsFile));
+  file.writeAsStringSync(DartFormatter().format(fixFile(structsFile)));
   return structProjections.length;
 }
 
@@ -84,7 +93,7 @@ void main() {
   buffer.write('}');
 
   File('../../test/struct_test.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
+      .writeAsStringSync(DartFormatter().format(fixFile(buffer.toString())));
 
   return testsGenerated;
 }
@@ -117,7 +126,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
   }
 
   File('../../lib/src/$libraryDartName.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
+      .writeAsStringSync(DartFormatter().format(fixFile(buffer.toString())));
 }
 
 void generateFunctions(Map<String, Win32Function> functions) {
@@ -170,7 +179,7 @@ void main() {
 ''';
 
   File('../../test/api_test.dart')
-      .writeAsStringSync(DartFormatter().format(testFile.toString()));
+      .writeAsStringSync(DartFormatter().format(fixFile(testFile)));
 }
 
 String generateFunctionTests(String library, Iterable<Method> methods,

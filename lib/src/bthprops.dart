@@ -39,7 +39,7 @@ final _bthprops = DynamicLibrary.open('bthprops.cpl');
 int BluetoothAuthenticateDeviceEx(
         int hwndParentIn,
         int hRadioIn,
-        Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiInout,
+        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
         Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
         int authenticationRequirement) =>
     _BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout,
@@ -49,13 +49,13 @@ final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
     Uint32 Function(
         IntPtr hwndParentIn,
         IntPtr hRadioIn,
-        Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiInout,
+        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
         Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
         Int32 authenticationRequirement),
     int Function(
         int hwndParentIn,
         int hRadioIn,
-        Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiInout,
+        Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
         Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
         int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
 
@@ -70,12 +70,10 @@ final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
 /// ```
 /// {@category bluetooth}
 int BluetoothDisplayDeviceProperties(
-        int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi) =>
+        int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
     _BluetoothDisplayDeviceProperties(hwndParent, pbtdi);
 
 final _BluetoothDisplayDeviceProperties = _bthprops.lookupFunction<
-        Int32 Function(
-            IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi),
-        int Function(
-            int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi)>(
+        Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+        int Function(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
     'BluetoothDisplayDeviceProperties');

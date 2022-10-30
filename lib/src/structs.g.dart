@@ -319,12 +319,12 @@ class BLENDFUNCTION extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class BLUETOOTH_ADDRESS_STRUCT extends Struct {
-  external _BLUETOOTH_ADDRESS_STRUCT__Anonymous_e__Union Anonymous;
+class BLUETOOTH_ADDRESS extends Struct {
+  external _BLUETOOTH_ADDRESS__Anonymous_e__Union Anonymous;
 }
 
 /// {@category Struct}
-class _BLUETOOTH_ADDRESS_STRUCT__Anonymous_e__Union extends Union {
+class _BLUETOOTH_ADDRESS__Anonymous_e__Union extends Union {
   @Uint64()
   external int ullLong;
 
@@ -332,7 +332,7 @@ class _BLUETOOTH_ADDRESS_STRUCT__Anonymous_e__Union extends Union {
   external Array<Uint8> rgBytes;
 }
 
-extension BLUETOOTH_ADDRESS_STRUCT_Extension on BLUETOOTH_ADDRESS_STRUCT {
+extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
   int get ullLong => this.Anonymous.ullLong;
   set ullLong(int value) => this.Anonymous.ullLong = value;
 
@@ -346,7 +346,7 @@ extension BLUETOOTH_ADDRESS_STRUCT_Extension on BLUETOOTH_ADDRESS_STRUCT {
 ///
 /// {@category Struct}
 class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
-  external BLUETOOTH_DEVICE_INFO_STRUCT deviceInfo;
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
 
   @Int32()
   external int authenticationMethod;
@@ -384,11 +384,11 @@ extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
 /// Bluetooth device.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_INFO_STRUCT extends Struct {
+class BLUETOOTH_DEVICE_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS_STRUCT Address;
+  external BLUETOOTH_ADDRESS Address;
 
   @Uint32()
   external int ulClassofDevice;
@@ -523,7 +523,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS_STRUCT address;
+  external BLUETOOTH_ADDRESS address;
 
   @Array(248)
   external Array<Uint16> _szName;
