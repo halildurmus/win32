@@ -17,12 +17,14 @@ import 'utils.dart';
 class COMException implements Exception {
   int hr;
 
-  COMException(this.hr);
+  String? message;
+
+  COMException(this.hr, {this.message});
 }
 
 /// Generalized Windows exception
 class WindowsException extends COMException {
-  WindowsException(super.hr);
+  WindowsException(super.hr, {super.message});
 
   /// Converts a Windows error into a friendly string.
   ///
@@ -66,5 +68,5 @@ class WindowsException extends COMException {
 
   @override
   String toString() =>
-      'Error ${hr.toHexString(32)}: ${convertWindowsErrorToString(hr)}';
+      'Error ${hr.toHexString(32)}: ${message ?? convertWindowsErrorToString(hr)}';
 }
