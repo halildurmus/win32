@@ -106,6 +106,28 @@ void main() {
       expect(param.typeIdentifier.typeArg, isNull);
     });
 
+    test('COM method parameters are represented accurately', () {
+      final scope = MetadataStore.getWin32Scope();
+      final iShellItem =
+          scope.findTypeDef('Windows.Win32.UI.Shell.IShellItem')!;
+      final getAttributes = iShellItem.findMethod('GetAttributes')!;
+      expect(getAttributes.parameters.length, equals(2));
+
+      final sfgaoMask = getAttributes.parameters.first;
+      expect(sfgaoMask.name, equals('sfgaoMask'));
+      expect(sfgaoMask.typeIdentifier.baseType,
+          equals(BaseType.valueTypeModifier));
+      expect(sfgaoMask.typeIdentifier.type!.name,
+          equals('Windows.Win32.System.SystemServices.SFGAO_FLAGS'));
+
+      final psfgaoAttribs = getAttributes.parameters.last;
+      expect(psfgaoAttribs.name, equals('psfgaoAttribs'));
+      expect(psfgaoAttribs.typeIdentifier.baseType,
+          equals(BaseType.pointerTypeModifier));
+      expect(psfgaoAttribs.typeIdentifier.typeArg!.type!.name,
+          equals('Windows.Win32.System.SystemServices.SFGAO_FLAGS'));
+    });
+
     test('GUIDs are represented accurately', () {
       final scope = MetadataStore.getWin32Scope();
       final iNetwork = scope
