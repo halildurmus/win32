@@ -142,6 +142,8 @@ class MetadataStore {
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata file that contains the type.
   static File winmdFileContainingType(String typeName) {
+    if (typeName.isEmpty) throw WinmdException('Type cannot be empty.');
+
     File path;
 
     final hstrTypeName = convertToHString(typeName);
@@ -157,6 +159,18 @@ class MetadataStore {
       if (SUCCEEDED(hr)) {
         path = File(convertFromHString(hstrMetaDataFilePath.value));
       } else {
+        final errorCode = hr.toHexString(32);
+        if (errorCode == RO_E_METADATA_INVALID_TYPE_FORMAT.toHexString(32)) {
+          throw WindowsException(hr,
+              message: "'$typeName' is not a valid Windows Runtime type.");
+        } else if (errorCode ==
+            RO_E_METADATA_NAME_IS_NAMESPACE.toHexString(32)) {
+          throw WindowsException(hr,
+              message: "'$typeName' is a namespace, not a type.");
+        } else if (errorCode == RO_E_METADATA_NAME_NOT_FOUND.toHexString(32)) {
+          throw WindowsException(hr,
+              message: "Could not find type '$typeName'.");
+        }
         throw WindowsException(hr);
       }
     } finally {
@@ -172,6 +186,8 @@ class MetadataStore {
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
   static Scope getScopeForType(String typeName) {
+    if (typeName.isEmpty) throw WinmdException('Type cannot be empty.');
+
     if (typeName.startsWith('Windows.Win32')) {
       // It's a Win32 type.
 
@@ -201,6 +217,19 @@ class MetadataStore {
           final filePath = convertFromHString(hstrMetaDataFilePath.value);
           return getScopeForFile(File(filePath));
         } else {
+          final errorCode = hr.toHexString(32);
+          if (errorCode == RO_E_METADATA_INVALID_TYPE_FORMAT.toHexString(32)) {
+            throw WindowsException(hr,
+                message: "'$typeName' is not a valid Windows Runtime type.");
+          } else if (errorCode ==
+              RO_E_METADATA_NAME_IS_NAMESPACE.toHexString(32)) {
+            throw WindowsException(hr,
+                message: "'$typeName' is a namespace, not a type.");
+          } else if (errorCode ==
+              RO_E_METADATA_NAME_NOT_FOUND.toHexString(32)) {
+            throw WindowsException(hr,
+                message: "Could not find type '$typeName'.");
+          }
           throw WindowsException(hr);
         }
       } finally {
@@ -214,6 +243,7 @@ class MetadataStore {
 
   /// Find a matching typedef, if one exists, for a Windows Runtime type.
   static TypeDef? getMetadataForType(String typeName) {
+    if (typeName.isEmpty) throw WinmdException('Type cannot be empty.');
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
