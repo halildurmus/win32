@@ -430,8 +430,8 @@ void main() {
     expect(param.name, equals('pAddress'));
     final projection = TypeProjection(param.typeIdentifier);
 
-    expect(projection.nativeType, equals('Pointer<BLUETOOTH_ADDRESS_STRUCT>'));
-    expect(projection.dartType, equals('Pointer<BLUETOOTH_ADDRESS_STRUCT>'));
+    expect(projection.nativeType, equals('Pointer<BLUETOOTH_ADDRESS>'));
+    expect(projection.dartType, equals('Pointer<BLUETOOTH_ADDRESS>'));
   });
 
   test('Array is projected correctly 1', () {

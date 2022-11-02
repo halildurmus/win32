@@ -10419,21 +10419,21 @@ void main() {
       final crypt32 = DynamicLibrary.open('crypt32.dll');
       final CryptProtectData = crypt32.lookupFunction<
           Int32 Function(
-              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<CRYPT_INTEGER_BLOB> pDataIn,
               Pointer<Utf16> szDataDescr,
-              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
               Pointer pvReserved,
               Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
               Uint32 dwFlags,
-              Pointer<CRYPTOAPI_BLOB> pDataOut),
+              Pointer<CRYPT_INTEGER_BLOB> pDataOut),
           int Function(
-              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<CRYPT_INTEGER_BLOB> pDataIn,
               Pointer<Utf16> szDataDescr,
-              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
               Pointer pvReserved,
               Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
               int dwFlags,
-              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptProtectData');
+              Pointer<CRYPT_INTEGER_BLOB> pDataOut)>('CryptProtectData');
       expect(CryptProtectData, isA<Function>());
     });
     test('Can instantiate CryptProtectMemory', () {
@@ -10448,21 +10448,21 @@ void main() {
       final crypt32 = DynamicLibrary.open('crypt32.dll');
       final CryptUnprotectData = crypt32.lookupFunction<
           Int32 Function(
-              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<CRYPT_INTEGER_BLOB> pDataIn,
               Pointer<Pointer<Utf16>> ppszDataDescr,
-              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
               Pointer pvReserved,
               Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
               Uint32 dwFlags,
-              Pointer<CRYPTOAPI_BLOB> pDataOut),
+              Pointer<CRYPT_INTEGER_BLOB> pDataOut),
           int Function(
-              Pointer<CRYPTOAPI_BLOB> pDataIn,
+              Pointer<CRYPT_INTEGER_BLOB> pDataIn,
               Pointer<Pointer<Utf16>> ppszDataDescr,
-              Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+              Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
               Pointer pvReserved,
               Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
               int dwFlags,
-              Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptUnprotectData');
+              Pointer<CRYPT_INTEGER_BLOB> pDataOut)>('CryptUnprotectData');
       expect(CryptUnprotectData, isA<Function>());
     });
     test('Can instantiate CryptUnprotectMemory', () {

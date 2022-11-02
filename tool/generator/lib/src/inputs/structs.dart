@@ -43,11 +43,11 @@ const structsToGenerate = <String, String>{
       "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB).",
   "Windows.Win32.Graphics.Gdi.BLENDFUNCTION":
       "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps.",
-  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT":
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS":
       "The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.",
   "Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS":
       "The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific configuration information about the Bluetooth device responding to an authentication request.",
-  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT":
+  "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO":
       "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device.",
   "Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS":
       "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches.",
@@ -119,7 +119,7 @@ const structsToGenerate = <String, String>{
       "The CREDENTIAL structure contains an individual credential.",
   "Windows.Win32.Security.Credentials.CREDENTIAL_ATTRIBUTEW":
       "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute.",
-  "Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB":
+  "Windows.Win32.Security.Cryptography.CRYPT_INTEGER_BLOB":
       "Contains an arbitrary array of bytes. The structure definition includes aliases appropriate to the various functions that use it.",
   "Windows.Win32.UI.WindowsAndMessaging.CURSORINFO":
       "Contains global cursor information.",

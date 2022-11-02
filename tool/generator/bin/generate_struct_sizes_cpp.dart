@@ -12,12 +12,11 @@ const header = '''
 
 // Development utility to confirm the width of various Win32 structs.
 
-// This code not used by the package itself, but is just a helper to inspect
+// This code is not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures. The results are pasted into
-// tool\\generator\\lib\\src\\inputs\\struct_sizes.dart as input to the test
-// harness.
+// tool\\generator\\lib\\src\\inputs\\struct_sizes.dart as input to the test harness.
 
-// Compile with something like the following (replace xxxxx with Windows SDK 
+// Compile with something like the following (replace xxxxx with Windows SDK
 // build installed):
 //   cl /I "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.xxxxx.0\\winrt" \\
 //     tool\\struct_sizes\\struct_sizes.cpp
@@ -71,7 +70,7 @@ void generateStructSizeAnalyzer() {
     final dartStructName = stripAnsiUnicodeSuffix(cStructName);
 
     buffer.write(
-        '    printf("  \'$dartStructName\': %zu,\\n", sizeof($dartStructName));\n');
+        '    printf("  \'$dartStructName\': %zu,\\n", sizeof($cStructName));\n');
   }
 
   buffer.write(footer);

@@ -304,11 +304,11 @@ void main() {
       expect(sizeOf<CREDENTIAL_ATTRIBUTE>(), equals(16));
     }
   });
-  test('Struct CRYPTOAPI_BLOB is the right size', () {
+  test('Struct CRYPT_INTEGER_BLOB is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<CRYPTOAPI_BLOB>(), equals(16));
+      expect(sizeOf<CRYPT_INTEGER_BLOB>(), equals(16));
     } else {
-      expect(sizeOf<CRYPTOAPI_BLOB>(), equals(8));
+      expect(sizeOf<CRYPT_INTEGER_BLOB>(), equals(8));
     }
   });
   test('Struct CURSORINFO is the right size', () {

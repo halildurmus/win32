@@ -40,33 +40,33 @@ final _crypt32 = DynamicLibrary.open('crypt32.dll');
 /// ```
 /// {@category crypt32}
 int CryptProtectData(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Utf16> szDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         int dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut) =>
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut) =>
     _CryptProtectData(pDataIn, szDataDescr, pOptionalEntropy, pvReserved,
         pPromptStruct, dwFlags, pDataOut);
 
 final _CryptProtectData = _crypt32.lookupFunction<
     Int32 Function(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Utf16> szDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         Uint32 dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut),
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut),
     int Function(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Utf16> szDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         int dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptProtectData');
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut)>('CryptProtectData');
 
 /// The CryptProtectMemory function encrypts memory to prevent others from
 /// viewing sensitive information in your process. For example, use the
@@ -110,33 +110,33 @@ final _CryptProtectMemory = _crypt32.lookupFunction<
 /// ```
 /// {@category crypt32}
 int CryptUnprotectData(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Pointer<Utf16>> ppszDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         int dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut) =>
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut) =>
     _CryptUnprotectData(pDataIn, ppszDataDescr, pOptionalEntropy, pvReserved,
         pPromptStruct, dwFlags, pDataOut);
 
 final _CryptUnprotectData = _crypt32.lookupFunction<
     Int32 Function(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Pointer<Utf16>> ppszDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         Uint32 dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut),
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut),
     int Function(
-        Pointer<CRYPTOAPI_BLOB> pDataIn,
+        Pointer<CRYPT_INTEGER_BLOB> pDataIn,
         Pointer<Pointer<Utf16>> ppszDataDescr,
-        Pointer<CRYPTOAPI_BLOB> pOptionalEntropy,
+        Pointer<CRYPT_INTEGER_BLOB> pOptionalEntropy,
         Pointer pvReserved,
         Pointer<CRYPTPROTECT_PROMPTSTRUCT> pPromptStruct,
         int dwFlags,
-        Pointer<CRYPTOAPI_BLOB> pDataOut)>('CryptUnprotectData');
+        Pointer<CRYPT_INTEGER_BLOB> pDataOut)>('CryptUnprotectData');
 
 /// The CryptUnprotectMemory function decrypts memory that was encrypted
 /// using the CryptProtectMemory function.

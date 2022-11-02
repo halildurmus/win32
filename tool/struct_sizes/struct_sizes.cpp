@@ -8,12 +8,11 @@
 
 // Development utility to confirm the width of various Win32 structs.
 
-// This code not used by the package itself, but is just a helper to inspect
+// This code is not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures. The results are pasted into
-// tool\generator\lib\src\inputs\struct_sizes.dart as input to the test
-// harness.
+// tool\generator\lib\src\inputs\struct_sizes.dart as input to the test harness.
 
-// Compile with something like the following (replace xxxxx with Windows SDK 
+// Compile with something like the following (replace xxxxx with Windows SDK
 // build installed):
 //   cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.xxxxx.0\winrt" \
 //     tool\struct_sizes\struct_sizes.cpp
@@ -75,9 +74,9 @@ void main()
     printf("  'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("  'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
     printf("  'BLENDFUNCTION': %zu,\n", sizeof(BLENDFUNCTION));
-    printf("  'BLUETOOTH_ADDRESS_STRUCT': %zu,\n", sizeof(BLUETOOTH_ADDRESS_STRUCT));
+    printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
-    printf("  'BLUETOOTH_DEVICE_INFO_STRUCT': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
+    printf("  'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
     printf("  'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("  'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
@@ -113,7 +112,7 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCTW));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
-    printf("  'CRYPTOAPI_BLOB': %zu,\n", sizeof(_CRYPTOAPI_BLOB));
+    printf("  'CRYPT_INTEGER_BLOB': %zu,\n", sizeof(CRYPT_INTEGER_BLOB));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));
