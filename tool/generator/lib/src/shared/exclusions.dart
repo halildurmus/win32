@@ -28,11 +28,6 @@ const excludedComInterfaces = <String>{
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',
 
-  // The "real" versions of these are prefixed with _.
-  // See https://github.com/microsoft/win32metadata/issues/1031.
-  'Windows.Win32.Devices.Fax.IFaxAccountNotify',
-  'Windows.Win32.Devices.Fax.IFaxServerNotify2',
-
   // These are incorrectly declared in the metadata as interfaces.
   'Windows.Win32.System.ComponentServices.ObjectContext',
   'Windows.Win32.System.ComponentServices.ObjectControl',

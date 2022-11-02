@@ -16,10 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -435,7 +435,7 @@ class IWbemServices extends IUnknown {
                               Pointer,
                               Pointer<Utf16> strQueryLanguage,
                               Pointer<Utf16> strQuery,
-                              Int32 lFlags,
+                              Uint32 lFlags,
                               Pointer<COMObject> pCtx,
                               Pointer<Pointer<COMObject>> ppEnum)>>>()
               .value

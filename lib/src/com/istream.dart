@@ -16,10 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'isequentialstream.dart';
 import 'iunknown.dart';
 
@@ -98,7 +98,7 @@ class IStream extends ISequentialStream {
               Pointer<
                   NativeFunction<
                       Int32 Function(Pointer, Uint64 libOffset, Uint64 cb,
-                          Uint32 dwLockType)>>>()
+                          Int32 dwLockType)>>>()
           .value
           .asFunction<
               int Function(Pointer, int libOffset, int cb, int dwLockType)>()(
@@ -122,7 +122,7 @@ class IStream extends ISequentialStream {
           Pointer<
               NativeFunction<
                   Int32 Function(Pointer, Pointer<STATSTG> pstatstg,
-                      Uint32 grfStatFlag)>>>()
+                      Int32 grfStatFlag)>>>()
       .value
       .asFunction<
           int Function(Pointer, Pointer<STATSTG> pstatstg,

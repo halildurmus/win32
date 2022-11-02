@@ -1,3 +1,12 @@
+## 3.1.0
+
+- Fixed memory leaks in COM and WinRT code when an exception is generated.
+- Update to the latest Win32 metadata from Microsoft.
+- [BREAKING CHANGE] The WinSock APIs now use upper cased naming for structs. For
+  example, `hostent` is now `HOSTENT`. This will only affect you if you
+  explicitly imported `win32/winsock2.dart`.
+- [BREAKING CHANGE] TouchInputParameters is now upper-cased in the metadata.
+
 ## 3.0.1
 
 - Improve projection of Map, Vector, and reference Windows Runtime types, with

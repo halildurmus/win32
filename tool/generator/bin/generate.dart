@@ -9,7 +9,9 @@ import 'generate_struct_sizes_cpp.dart';
 bool methodMatches(String methodName, String rawPrototype) =>
     rawPrototype.contains(' $methodName(');
 
-String generateDocComment(Win32Function func) {
+String generateDocComment(Win32Function func, String libraryDartName) {
+  final category = func.category.isNotEmpty ? func.category : libraryDartName;
+
   final comment = StringBuffer();
 
   if (func.comment.isNotEmpty) {
@@ -23,7 +25,7 @@ String generateDocComment(Win32Function func) {
     ..write('/// ')
     ..writeln(func.prototype.split('\\n').join('\n/// '))
     ..writeln('/// ```')
-    ..write('/// {@category ${func.category}}');
+    ..write('/// {@category $category}');
   return comment.toString();
 }
 
@@ -87,130 +89,147 @@ void main() {
   return testsGenerated;
 }
 
-void generateFunctions(Map<String, Win32Function> functions) {
-  final methods = <Method>[];
-  final scope = MetadataStore.getWin32Scope();
-  final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
-  for (final api in apis) {
-    methods.addAll(api.methods);
-  }
+void generateDllFile(String library, List<Method> filteredMethods,
+    Iterable<Win32Function> functions) {
+  /// Methods we're trying to project
+  final libraryMethods = filteredMethods
+      .where((method) => method.module.name.toLowerCase() == library);
 
-  for (final library in dllLibraries) {
-    final buffer = StringBuffer();
+  final buffer = StringBuffer();
 
-    // API set names aren't legal Dart identifiers, so we rename them
-    final libraryDartName = library.replaceAll('-', '_');
+  // API set names aren't legal Dart identifiers, so we rename them.
+  // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+  final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
+  buffer.write('''
+  $functionsFileHeader
+  
+  final _$libraryDartName = DynamicLibrary.open('$library');\n
+  ''');
+
+  for (final method in libraryMethods) {
+    final function =
+        functions.firstWhere((f) => f.functionSymbol == method.name);
     buffer.write('''
-$functionsFileHeader
-
-final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
-''');
-
-    // Subset of functions that belong to the library we're projecting.
-    final filteredFunctionList = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library);
-
-    for (final function in filteredFunctionList.keys) {
-      try {
-        final method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctionList[function]!.prototype));
-        buffer.write('''
-${generateDocComment(filteredFunctionList[function]!)}
-${FunctionProjection(method, libraryDartName).toString()}
-''');
-      } on StateError {
-        continue;
-      }
-    }
-
-    File('../../lib/src/$libraryDartName.dart')
-        .writeAsStringSync(DartFormatter().format(buffer.toString()));
+  ${generateDocComment(function, libraryDartName)}
+  ${FunctionProjection(method, libraryDartName).toString()}
+  ''');
   }
+
+  File('../../lib/src/win32/$libraryDartName.g.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 }
 
-int generateFunctionTests(Map<String, Win32Function> functions) {
-  final methods = <Method>[];
+void generateFunctions(Map<String, Win32Function> functions) {
   final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+
+  final methods = <Method>[];
+  final filteredMethods = <Method>[];
+
+  // Create a flat list for every method in the Win32 metadata, and a set
+  // containing all the modules (DLLs) referenced.
   for (final api in apis) {
     methods.addAll(api.methods);
   }
-  var testsGenerated = 0;
-  final buffer = StringBuffer()..write('''
+
+  // Gather metadata for all the functions in the JSON file
+  for (final function in functions.values) {
+    final method = methods.where((m) => m.name == function.functionSymbol);
+    if (method.length != 1) {
+      throw Exception('${function.functionSymbol} metadata match error.');
+    }
+    filteredMethods.add(method.first);
+  }
+
+  // Gather a list of all the affected libraries
+  final dllLibraries =
+      filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
+
+  final tests = <String>[];
+
+  for (final library in dllLibraries) {
+    generateDllFile(library, filteredMethods, functions.values);
+    tests
+        .add(generateFunctionTests(library, filteredMethods, functions.values));
+  }
+
+  writeFunctionTests(tests);
+}
+
+void writeFunctionTests(Iterable<String> tests) {
+  final testFile = '''
 $testFunctionsHeader
 
 import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
-''');
-  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
-  // The .toSet() removes duplicates.
+  ${tests.join('\n')}
+}
+''';
+
+  File('../../test/api_test.dart')
+      .writeAsStringSync(DartFormatter().format(testFile));
+}
+
+String generateFunctionTests(String library, Iterable<Method> methods,
+    Iterable<Win32Function> functions) {
+  final buffer = StringBuffer();
+
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  final libraries = functions.values.map((e) => e.dllLibrary).toSet().toList()
-    ..removeWhere((library) => library == 'wlanapi');
+  if (library == 'wlanapi.dll') return '';
 
-  for (final library in libraries) {
-    // API set names aren't legal Dart identifiers, so we rename them
-    final libraryDartName = library.replaceAll('-', '_');
+  /// Methods we're trying to project
+  final filteredMethods =
+      methods.where((method) => method.module.name.toLowerCase() == library);
 
-    buffer.write("group('Test $library functions', () {\n");
+  buffer.write("group('Test ${library.split('.').first} functions', () {\n");
 
-    final filteredFunctions = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library);
+  for (final method in filteredMethods) {
+    // API set names aren't legal Dart identifiers, so we rename them.
+    // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+    final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
-    for (final function in filteredFunctions.keys) {
-      if (!filteredFunctions[function]!.test) continue;
+    final function =
+        functions.firstWhere((f) => f.functionSymbol == method.name);
 
-      late Method method;
-      try {
-        method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctions[function]!.prototype));
-      } on StateError {
-        print("Couldn't find $function");
-        continue;
-      }
+    // Some functions (e.g. TaskDialog APIs) can only be loaded if the EXE has a
+    // manifest, so we ignore those for the purpose of test generation.
+    if (!function.test) continue;
 
-      final prototype = FunctionProjection(method, libraryDartName);
+    final projection = FunctionProjection(method, libraryDartName);
 
-      final returnFFIType =
-          TypeProjection(method.returnType.typeIdentifier).nativeType;
-      final returnDartType =
-          TypeProjection(method.returnType.typeIdentifier).dartType;
+    final returnFFIType =
+        TypeProjection(method.returnType.typeIdentifier).nativeType;
+    final returnDartType =
+        TypeProjection(method.returnType.typeIdentifier).dartType;
 
-      final minimumWindowsVersion =
-          filteredFunctions[function]!.minimumWindowsVersion;
+    final methodDartName = stripAnsiUnicodeSuffix(method.name);
 
-      final test = '''
-      test('Can instantiate $function', () {
-        final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
-        final $function = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function(${prototype.nativeParams}),
-          $returnDartType Function(${prototype.dartParams})>
+    final test = '''
+      test('Can instantiate $methodDartName', () {
+        final $libraryDartName = DynamicLibrary.open('$library');
+        final $methodDartName = $libraryDartName.lookupFunction<\n
+          $returnFFIType Function(${projection.nativeParams}),
+          $returnDartType Function(${projection.dartParams})>
           ('${method.name}');
-        expect($function, isA<Function>());
+        expect($methodDartName, isA<Function>());
       });''';
 
-      if (minimumWindowsVersion > 0) {
-        buffer.write('''
-        if (windowsBuildNumber >= $minimumWindowsVersion) {
-          $test
-        }''');
-      } else {
-        buffer.write(test);
-      }
-      buffer.writeln();
-      testsGenerated++;
+    if (function.minimumWindowsVersion > 0) {
+      buffer.writeln('''
+          if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
+            $test
+          }''');
+    } else {
+      buffer.writeln(test);
     }
-    buffer.write('});\n\n');
   }
-  buffer.write('}');
-  File('../../test/api_test.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
+  buffer.write('});\n\n');
 
-  return testsGenerated;
+  return buffer.toString();
 }
 
 void generateComApis() {
@@ -392,9 +411,6 @@ void main() {
 
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
-
-  print('Generating FFI function tests...');
-  generateFunctionTests(functionsToGenerate);
 
   print('Generating COM interfaces and tests...');
   generateComApis();

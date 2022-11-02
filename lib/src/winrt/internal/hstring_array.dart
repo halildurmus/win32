@@ -6,9 +6,9 @@
 
 import 'dart:ffi';
 
-import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../../types.dart';
 import '../../utils.dart';
+import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 
 extension HStringHelper on Pointer<HSTRING> {
   /// Creates a [List] from `Pointer<HSTRING>`.

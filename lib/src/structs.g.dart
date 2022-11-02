@@ -8,20 +8,16 @@
 
 // ignore_for_file: camel_case_extensions, camel_case_types
 // ignore_for_file: directives_ordering, unnecessary_getters_setters
-// ignore_for_file: unused_field, unused_import
+// ignore_for_file: unused_field
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/idispatch.dart';
-import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'oleaut32.dart';
 import 'variant.dart';
 
 /// Defines an accelerator key used in an accelerator table.
@@ -98,6 +94,33 @@ class ADDJOB_INFO_1 extends Struct {
 
   @Uint32()
   external int JobId;
+}
+
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class ADDRINFO extends Struct {
+  @Int32()
+  external int ai_flags;
+
+  @Int32()
+  external int ai_family;
+
+  @Int32()
+  external int ai_socktype;
+
+  @Int32()
+  external int ai_protocol;
+
+  @IntPtr()
+  external int ai_addrlen;
+
+  external Pointer<Utf16> ai_canonname;
+
+  external Pointer<SOCKADDR> ai_addr;
+
+  external Pointer<ADDRINFO> ai_next;
 }
 
 /// Contains status information for the application-switching (ALT+TAB)
@@ -251,7 +274,7 @@ class BITMAPINFOHEADER extends Struct {
   @Uint16()
   external int biBitCount;
 
-  @Uint32()
+  @Int32()
   external int biCompression;
 
   @Uint32()
@@ -1402,17 +1425,6 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 }
 
-/// Contains an arbitrary array of bytes. The structure definition includes
-/// aliases appropriate to the various functions that use it.
-///
-/// {@category Struct}
-class CRYPTOAPI_BLOB extends Struct {
-  @Uint32()
-  external int cbData;
-
-  external Pointer<Uint8> pbData;
-}
-
 /// The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt
 /// and information about when and where that prompt is to be displayed when
 /// using the CryptProtectData and CryptUnprotectData functions.
@@ -1429,6 +1441,17 @@ class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
   external int hwndApp;
 
   external Pointer<Utf16> szPrompt;
+}
+
+/// Contains an arbitrary array of bytes. The structure definition includes
+/// aliases appropriate to the various functions that use it.
+///
+/// {@category Struct}
+class CRYPT_INTEGER_BLOB extends Struct {
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pbData;
 }
 
 /// Contains global cursor information.
@@ -1733,19 +1756,19 @@ class DEVMODE extends Struct {
 
   external _DEVMODEW__Anonymous1_e__Union Anonymous1;
 
-  @Int16()
+  @Uint16()
   external int dmColor;
 
-  @Int16()
+  @Uint16()
   external int dmDuplex;
 
   @Int16()
   external int dmYResolution;
 
-  @Int16()
+  @Uint16()
   external int dmTTOption;
 
-  @Int16()
+  @Uint16()
   external int dmCollate;
 
   @Array(32)
@@ -2438,6 +2461,20 @@ class EXCEPINFO extends Struct {
   external int scode;
 }
 
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for readability
+/// using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class FD_SET extends Struct {
+  @Uint32()
+  external int fd_count;
+
+  @Array(64)
+  external Array<IntPtr> fd_array;
+}
+
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -2654,6 +2691,29 @@ class HARDWAREINPUT extends Struct {
 
   @Uint16()
   external int wParamH;
+}
+
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free any
+/// of its components. Furthermore, only one copy of the hostent structure
+/// is allocated per thread, and an application should therefore copy any
+/// information that it needs before issuing any other Windows Sockets API
+/// calls.
+///
+/// {@category Struct}
+class HOSTENT extends Struct {
+  external Pointer<Utf8> h_name;
+
+  external Pointer<Pointer<Int8>> h_aliases;
+
+  @Int16()
+  external int h_addrtype;
+
+  @Int16()
+  external int h_length;
+
+  external Pointer<Pointer<Int8>> h_addr_list;
 }
 
 /// Contains information about an icon or a cursor.
@@ -4749,7 +4809,7 @@ class MOUSEHOOKSTRUCT extends Struct {
 ///
 /// {@category Struct}
 class MOUSEHOOKSTRUCTEX extends Struct {
-  external MOUSEHOOKSTRUCT AnonymousBase_winuser_L1166_C46;
+  external MOUSEHOOKSTRUCT Base;
 
   @Uint32()
   external int mouseData;
@@ -6245,6 +6305,23 @@ extension PROPSPEC_Extension on PROPSPEC {
   set lpwstr(Pointer<Utf16> value) => this.Anonymous.lpwstr = value;
 }
 
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class PROTOENT extends Struct {
+  external Pointer<Utf8> p_name;
+
+  external Pointer<Pointer<Int8>> p_aliases;
+
+  @Int16()
+  external int p_proto;
+}
+
 /// Describes the format of the raw input from a Human Interface Device
 /// (HID).
 ///
@@ -6629,6 +6706,21 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Sacl;
 
   external Pointer<ACL> Dacl;
+}
+
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class SERVENT extends Struct {
+  external Pointer<Utf8> s_name;
+
+  external Pointer<Pointer<Int8>> s_aliases;
+
+  external Pointer<Utf8> s_proto;
+
+  @Int16()
+  external int s_port;
 }
 
 /// Contains information used by ShellExecuteEx.
@@ -7083,7 +7175,7 @@ class STATSTG extends Struct {
   @Uint32()
   external int grfMode;
 
-  @Uint32()
+  @Int32()
   external int grfLocksSupported;
 
   external GUID clsid;
@@ -7567,6 +7659,19 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class TIMEVAL extends Struct {
+  @Int32()
+  external int tv_sec;
+
+  @Int32()
+  external int tv_usec;
+}
+
 /// Contains title bar information.
 ///
 /// {@category Struct}
@@ -7639,6 +7744,25 @@ class TOUCHINPUT extends Struct {
 
   @Uint32()
   external int cyContact;
+}
+
+/// Contains hardware input details that can be used to predict touch
+/// targets and help compensate for hardware latency when processing touch
+/// and gesture input that contains distance and velocity data.
+///
+/// {@category Struct}
+class TOUCHPREDICTIONPARAMETERS extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwLatency;
+
+  @Uint32()
+  external int dwSampleTime;
+
+  @Uint32()
+  external int bUseHWTimeStamp;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.
@@ -7736,25 +7860,6 @@ extension TYPEDESC_Extension on TYPEDESC {
 
   int get hreftype => this.Anonymous.hreftype;
   set hreftype(int value) => this.Anonymous.hreftype = value;
-}
-
-/// Contains hardware input details that can be used to predict touch
-/// targets and help compensate for hardware latency when processing touch
-/// and gesture input that contains distance and velocity data.
-///
-/// {@category Struct}
-class TouchPredictionParameters extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @Uint32()
-  external int dwLatency;
-
-  @Uint32()
-  external int dwSampleTime;
-
-  @Uint32()
-  external int bUseHWTimeStamp;
 }
 
 /// Defines a data type used by the Desktop Window Manager (DWM) APIs. It
@@ -9248,113 +9353,4 @@ class XINPUT_VIBRATION extends Struct {
 
   @Uint16()
   external int wRightMotorSpeed;
-}
-
-/// The addrinfoW structure is used by the GetAddrInfoW function to hold
-/// host address information.
-///
-/// {@category Struct}
-class addrinfo extends Struct {
-  @Int32()
-  external int ai_flags;
-
-  @Int32()
-  external int ai_family;
-
-  @Int32()
-  external int ai_socktype;
-
-  @Int32()
-  external int ai_protocol;
-
-  @IntPtr()
-  external int ai_addrlen;
-
-  external Pointer<Utf16> ai_canonname;
-
-  external Pointer<SOCKADDR> ai_addr;
-
-  external Pointer<addrinfo> ai_next;
-}
-
-/// The fd_set structure is used by various Windows Sockets functions and
-/// service providers, such as the select function, to place sockets into a
-/// set for various purposes, such as testing a given socket for readability
-/// using the readfds parameter of the select function.
-///
-/// {@category Struct}
-class fd_set extends Struct {
-  @Uint32()
-  external int fd_count;
-
-  @Array(64)
-  external Array<IntPtr> fd_array;
-}
-
-/// The hostent structure is used by functions to store information about a
-/// given host, such as host name, IPv4 address, and so forth. An
-/// application should never attempt to modify this structure or to free any
-/// of its components. Furthermore, only one copy of the hostent structure
-/// is allocated per thread, and an application should therefore copy any
-/// information that it needs before issuing any other Windows Sockets API
-/// calls.
-///
-/// {@category Struct}
-class hostent extends Struct {
-  external Pointer<Utf8> h_name;
-
-  external Pointer<Pointer<Int8>> h_aliases;
-
-  @Int16()
-  external int h_addrtype;
-
-  @Int16()
-  external int h_length;
-
-  external Pointer<Pointer<Int8>> h_addr_list;
-}
-
-/// The protoent structure contains the name and protocol numbers that
-/// correspond to a given protocol name. Applications must never attempt to
-/// modify this structure or to free any of its components. Furthermore,
-/// only one copy of this structure is allocated per thread, and therefore,
-/// the application should copy any information it needs before issuing any
-/// other Windows Sockets function calls.
-///
-/// {@category Struct}
-class protoent extends Struct {
-  external Pointer<Utf8> p_name;
-
-  external Pointer<Pointer<Int8>> p_aliases;
-
-  @Int16()
-  external int p_proto;
-}
-
-/// The servent structure is used to store or return the name and service
-/// number for a given service name.
-///
-/// {@category Struct}
-class servent extends Struct {
-  external Pointer<Utf8> s_name;
-
-  external Pointer<Pointer<Int8>> s_aliases;
-
-  external Pointer<Utf8> s_proto;
-
-  @Int16()
-  external int s_port;
-}
-
-/// The timeval structure is used to specify a time interval. It is
-/// associated with the Berkeley Software Distribution (BSD) Time.h header
-/// file.
-///
-/// {@category Struct}
-class timeval extends Struct {
-  @Int32()
-  external int tv_sec;
-
-  @Int32()
-  external int tv_usec;
 }

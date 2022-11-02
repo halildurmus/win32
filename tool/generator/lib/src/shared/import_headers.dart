@@ -11,10 +11,10 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
     '../exceptions.dart',
     '../guid.dart',
     '../macros.dart',
-    '../ole32.dart',
     '../structs.g.dart',
     '../utils.dart',
-    '../variant.dart'
+    '../variant.dart',
+    '../win32/ole32.g.dart'
   };
 
   if (parentInterfaces.isNotEmpty) {
@@ -39,7 +39,7 @@ String versionSpecificImports(String pathToSrc, String importHeader,
     import '${pathToSrc}exceptions.dart';
     import '${pathToSrc}guid.dart';
     import '${pathToSrc}macros.dart';
-    import '${pathToSrc}ole32.dart';
     import '${pathToSrc}utils.dart';
+    import '${pathToSrc}win32/ole32.g.dart';
 
     $importHeader''';

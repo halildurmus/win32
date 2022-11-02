@@ -10,7 +10,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../../api_ms_win_core_winrt_string_l1_1_0.dart';
+import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+
 import '../../../callbacks.dart';
 import '../../../com/iinspectable.dart';
 import '../../../combase.dart';
@@ -18,7 +19,7 @@ import '../../../constants.dart';
 import '../../../exceptions.dart';
 import '../../../guid.dart';
 import '../../../macros.dart';
-import '../../../ole32.dart';
+import '../../../win32/ole32.g.dart';
 import '../../../variant.dart';
 import '../../../structs.g.dart';
 import '../../../types.dart';

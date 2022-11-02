@@ -8,14 +8,14 @@
 
 // Development utility to confirm the width of various Win32 structs.
 
-// This code not used by the package itself, but is just a helper to inspect
+// This code is not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures. The results are pasted into
-// tool\generator\lib\src\inputs\struct_sizes.dart as input to the test
-// harness.
+// tool\generator\lib\src\inputs\struct_sizes.dart as input to the test harness.
 
-// Compile with:
-//    cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt" \
-//      tool\struct_sizes\struct_sizes.cpp
+// Compile with something like the following (replace xxxxx with Windows SDK
+// build installed):
+//   cl /I "C:\Program Files (x86)\Windows Kits\10\Include\10.0.xxxxx.0\winrt" \
+//     tool\struct_sizes\struct_sizes.cpp
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,8 +44,6 @@
 #include <wlanapi.h>
 #include <Xinput.h>
 
-#include <CorHdr.h>
-
 void main()
 {
     // Manually generated structs
@@ -59,13 +57,13 @@ void main()
     printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));
     printf("  'POINTER_TOUCH_INFO': %zu,\n", sizeof(POINTER_TOUCH_INFO));
     printf("  'INPUT_TRANSFORM': %zu,\n", sizeof(INPUT_TRANSFORM));
-    printf("  'TouchPredictionParameters': %zu,\n", sizeof(TouchPredictionParameters));
+    printf("  'TOUCHPREDICTIONPARAMETERS': %zu,\n", sizeof(TOUCHPREDICTIONPARAMETERS));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'FILE_SEGMENT_ELEMENT': %zu,\n", sizeof(FILE_SEGMENT_ELEMENT));
     printf("  'ACL': %zu,\n", sizeof(ACL));
     printf("  'ACTCTX': %zu,\n", sizeof(ACTCTXW));
     printf("  'ADDJOB_INFO_1': %zu,\n", sizeof(ADDJOB_INFO_1W));
-    printf("  'addrinfo': %zu,\n", sizeof(addrinfoW));
+    printf("  'ADDRINFO': %zu,\n", sizeof(ADDRINFOW));
     printf("  'ALTTABINFO': %zu,\n", sizeof(ALTTABINFO));
     printf("  'CRYPTPROTECT_PROMPTSTRUCT': %zu,\n", sizeof(CRYPTPROTECT_PROMPTSTRUCT));
     printf("  'APPX_PACKAGE_SETTINGS': %zu,\n", sizeof(APPX_PACKAGE_SETTINGS));
@@ -114,7 +112,7 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCTW));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIALW));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTEW));
-    printf("  'CRYPTOAPI_BLOB': %zu,\n", sizeof(CRYPTOAPI_BLOB));
+    printf("  'CRYPT_INTEGER_BLOB': %zu,\n", sizeof(CRYPT_INTEGER_BLOB));
     printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'CWPRETSTRUCT': %zu,\n", sizeof(CWPRETSTRUCT));
     printf("  'CWPSTRUCT': %zu,\n", sizeof(CWPSTRUCT));
@@ -148,7 +146,7 @@ void main()
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
-    printf("  'fd_set': %zu,\n", sizeof(fd_set));
+    printf("  'FD_SET': %zu,\n", sizeof(FD_SET));
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACEW));
     printf("  'FUNCDESC': %zu,\n", sizeof(FUNCDESC));
@@ -157,7 +155,7 @@ void main()
     printf("  'GESTURENOTIFYSTRUCT': %zu,\n", sizeof(GESTURENOTIFYSTRUCT));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
     printf("  'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
-    printf("  'hostent': %zu,\n", sizeof(hostent));
+    printf("  'HOSTENT': %zu,\n", sizeof(HOSTENT));
     printf("  'ICONINFO': %zu,\n", sizeof(ICONINFO));
     printf("  'ICONINFOEX': %zu,\n", sizeof(ICONINFOEXW));
     printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
@@ -269,7 +267,7 @@ void main()
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPSPEC': %zu,\n", sizeof(PROPSPEC));
-    printf("  'protoent': %zu,\n", sizeof(protoent));
+    printf("  'PROTOENT': %zu,\n", sizeof(PROTOENT));
     printf("  'RAWHID': %zu,\n", sizeof(RAWHID));
     printf("  'RAWINPUT': %zu,\n", sizeof(RAWINPUT));
     printf("  'RAWINPUTDEVICE': %zu,\n", sizeof(RAWINPUTDEVICE));
@@ -288,7 +286,7 @@ void main()
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SECURITY_ATTRIBUTES': %zu,\n", sizeof(SECURITY_ATTRIBUTES));
     printf("  'SECURITY_DESCRIPTOR': %zu,\n", sizeof(SECURITY_DESCRIPTOR));
-    printf("  'servent': %zu,\n", sizeof(servent));
+    printf("  'SERVENT': %zu,\n", sizeof(SERVENT));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFOW));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
@@ -320,7 +318,7 @@ void main()
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRICW));
-    printf("  'timeval': %zu,\n", sizeof(timeval));
+    printf("  'TIMEVAL': %zu,\n", sizeof(TIMEVAL));
     printf("  'TITLEBARINFO': %zu,\n", sizeof(TITLEBARINFO));
     printf("  'TITLEBARINFOEX': %zu,\n", sizeof(TITLEBARINFOEX));
     printf("  'TOKEN_APPCONTAINER_INFORMATION': %zu,\n", sizeof(TOKEN_APPCONTAINER_INFORMATION));
