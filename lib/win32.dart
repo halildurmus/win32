@@ -90,8 +90,8 @@ export 'src/structs.g.dart'
         PROTOENT,
         SERVENT;
 export 'src/types.dart';
-export 'src/variant.dart';
 export 'src/utils.dart';
+export 'src/variant.dart';
 export 'src/winmd_constants.dart';
 
 // Useful extension methods
