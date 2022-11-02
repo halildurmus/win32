@@ -16,10 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../win32/ole32.g.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
+import '../win32/ole32.g.dart';
 
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
