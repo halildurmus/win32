@@ -10,16 +10,16 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'api_ms_win_core_winrt_string_l1_1_0.dart';
 import 'constants.dart';
 import 'exceptions.dart';
 import 'extensions/int_to_hexstring.dart';
-import 'kernel32.dart';
 import 'macros.dart';
-import 'shell32.dart';
 import 'structs.g.dart';
 import 'types.dart';
-import 'user32.dart';
+import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import 'win32/kernel32.g.dart';
+import 'win32/shell32.g.dart';
+import 'win32/user32.g.dart';
 
 /// Registers a traditional Win32 app process as supporting high-DPI.
 ///

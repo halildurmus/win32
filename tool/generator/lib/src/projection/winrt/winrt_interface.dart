@@ -159,12 +159,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
   @override
   String get extraHeaders => """
-    import '${relativePathTo('api_ms_win_core_winrt_string_l1_1_0.dart')}';
     import '${relativePathTo('combase.dart')}';
     import '${relativePathTo('exceptions.dart')}';
     import '${relativePathTo('macros.dart')}';
     import '${relativePathTo('utils.dart')}';
     import '${relativePathTo('types.dart')}';
+    import '${relativePathTo('win32/api_ms_win_core_winrt_string_l1_1_0.g.dart')}';
     import '${relativePathTo('winrt_callbacks.dart')}';
     import '${relativePathTo('winrt_helpers.dart')}';
 

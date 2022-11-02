@@ -6,12 +6,12 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../api_ms_win_core_winrt_string_l1_1_0.dart';
 import '../../com/iinspectable.dart';
 import '../../combase.dart';
 import '../../guid.dart';
 import '../../types.dart';
 import '../../utils.dart';
+import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../winrt_constants.dart';
 import '../../winrt_helpers.dart';
 import '../foundation/enums.g.dart';

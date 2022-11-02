@@ -18,11 +18,11 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'callbacks.dart';
-import 'combase.dart';
-import 'guid.dart';
-import 'structs.g.dart';
-import 'variant.dart';
+import '../callbacks.dart';
+import '../combase.dart';
+import '../guid.dart';
+import '../structs.g.dart';
+import '../variant.dart';
 ''';
 
 const structFileHeader = '''
@@ -38,16 +38,12 @@ $copyrightHeader
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/idispatch.dart';
-import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'oleaut32.dart';
 import 'variant.dart';
 ''';
 

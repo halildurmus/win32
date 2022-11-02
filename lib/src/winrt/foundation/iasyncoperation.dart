@@ -12,7 +12,7 @@ import '../../combase.dart';
 import '../../constants.dart';
 import '../../exceptions.dart';
 import '../../macros.dart';
-import '../../ole32.dart';
+import '../../win32/ole32.g.dart';
 import '../../variant.dart';
 import '../../structs.g.dart';
 import '../../utils.dart';

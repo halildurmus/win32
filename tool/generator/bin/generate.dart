@@ -116,7 +116,7 @@ void generateDllFile(String library, List<Method> filteredMethods,
   ''');
   }
 
-  File('../../lib/src/$libraryDartName.dart')
+  File('../../lib/src/win32/$libraryDartName.g.dart')
       .writeAsStringSync(DartFormatter().format(buffer.toString()));
 }
 

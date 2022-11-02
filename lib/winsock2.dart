@@ -40,4 +40,4 @@ export 'src/structs.g.dart'
 export 'src/constants_winsock.dart';
 
 // Traditional C-style Windows APIs
-export 'src/ws2_32.dart';
+export 'src/win32/ws2_32.g.dart';
