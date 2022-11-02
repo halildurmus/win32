@@ -70,12 +70,8 @@ void generateStructSizeAnalyzer() {
     final cStructName = lastComponent(struct);
     final dartStructName = stripAnsiUnicodeSuffix(cStructName);
 
-    // Workaround for https://github.com/microsoft/win32metadata/issues/1339
-    final cFixedStructName =
-        cStructName == 'CRYPTOAPI_BLOB' ? '_CRYPTOAPI_BLOB' : cStructName;
-
     buffer.write(
-        '    printf("  \'$dartStructName\': %zu,\\n", sizeof($cFixedStructName));\n');
+        '    printf("  \'$dartStructName\': %zu,\\n", sizeof($dartStructName));\n');
   }
 
   buffer.write(footer);
