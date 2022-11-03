@@ -401,6 +401,8 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Retrieves the index of a specified item in the vector.
+  ///
+  /// Does not work for `Uri` [value]s.
   bool indexOf(T value, Pointer<Uint32> index) {
     if (isSameType<T, int>()) return _indexOf_int(value as int, index);
     if (isSameType<T, String>()) return _indexOf_String(value as String, index);
