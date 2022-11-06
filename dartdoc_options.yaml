@@ -61,7 +61,7 @@ dartdoc:
     "struct":
       name: "Structures"
       markdown: doc/struct.md
-    "enum
+    "enum":
       name: "Enumerations"
       markdown: doc/enum.md
     "examples":
