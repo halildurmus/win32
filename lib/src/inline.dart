@@ -13,12 +13,12 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
-import 'kernel32.dart';
 import 'macros.dart';
 import 'structs.g.dart';
-import 'user32.dart';
 import 'utils.dart';
-import 'uxtheme.dart';
+import 'win32/kernel32.g.dart';
+import 'win32/user32.g.dart';
+import 'win32/uxtheme.g.dart';
 
 /// Creates an overlapped, pop-up, or child window. It specifies the window
 /// class, window title, window style, and (optionally) the initial position and

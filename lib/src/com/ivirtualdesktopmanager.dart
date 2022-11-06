@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IVirtualDesktopManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IVirtualDesktopManager(super.ptr);
 
-  int IsWindowOnCurrentVirtualDesktop(
+  factory IVirtualDesktopManager.from(IUnknown interface) =>
+      IVirtualDesktopManager(interface.toInterface(IID_IVirtualDesktopManager));
+
+  int isWindowOnCurrentVirtualDesktop(
           int topLevelWindow, Pointer<Int32> onCurrentDesktop) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -47,7 +49,7 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer<Int32> onCurrentDesktop)>()(
           ptr.ref.lpVtbl, topLevelWindow, onCurrentDesktop);
 
-  int GetWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
+  int getWindowDesktopId(int topLevelWindow, Pointer<GUID> desktopId) =>
       ptr.ref.vtable
               .elementAt(4)
               .cast<
@@ -61,7 +63,7 @@ class IVirtualDesktopManager extends IUnknown {
                       Pointer, int topLevelWindow, Pointer<GUID> desktopId)>()(
           ptr.ref.lpVtbl, topLevelWindow, desktopId);
 
-  int MoveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) => ptr
+  int moveWindowToDesktop(int topLevelWindow, Pointer<GUID> desktopId) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<

@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpeechObjectTokens = '{9285B776-2E7B-4BC0-B53E-580EB6FA967F}';
@@ -32,7 +32,10 @@ class ISpeechObjectTokens extends IDispatch {
   // vtable begins at 7, is 3 entries long.
   ISpeechObjectTokens(super.ptr);
 
-  int get Count {
+  factory ISpeechObjectTokens.from(IUnknown interface) =>
+      ISpeechObjectTokens(interface.toInterface(IID_ISpeechObjectTokens));
+
+  int get count {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -55,7 +58,7 @@ class ISpeechObjectTokens extends IDispatch {
     }
   }
 
-  int Item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
+  int item(int Index, Pointer<Pointer<COMObject>> Token) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -68,7 +71,7 @@ class ISpeechObjectTokens extends IDispatch {
                   Pointer, int Index, Pointer<Pointer<COMObject>> Token)>()(
       ptr.ref.lpVtbl, Index, Token);
 
-  Pointer<COMObject> get NewEnum {
+  Pointer<COMObject> get newEnum {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {

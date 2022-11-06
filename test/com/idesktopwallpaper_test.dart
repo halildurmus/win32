@@ -22,53 +22,53 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final desktopwallpaper = IDesktopWallpaper(ptr);
-  test('Can instantiate IDesktopWallpaper.SetWallpaper', () {
-    expect(desktopwallpaper.SetWallpaper, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.setWallpaper', () {
+    expect(desktopwallpaper.setWallpaper, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetWallpaper', () {
-    expect(desktopwallpaper.GetWallpaper, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getWallpaper', () {
+    expect(desktopwallpaper.getWallpaper, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetMonitorDevicePathAt', () {
-    expect(desktopwallpaper.GetMonitorDevicePathAt, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getMonitorDevicePathAt', () {
+    expect(desktopwallpaper.getMonitorDevicePathAt, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetMonitorDevicePathCount', () {
-    expect(desktopwallpaper.GetMonitorDevicePathCount, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getMonitorDevicePathCount', () {
+    expect(desktopwallpaper.getMonitorDevicePathCount, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetMonitorRECT', () {
-    expect(desktopwallpaper.GetMonitorRECT, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getMonitorRECT', () {
+    expect(desktopwallpaper.getMonitorRECT, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.SetBackgroundColor', () {
-    expect(desktopwallpaper.SetBackgroundColor, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.setBackgroundColor', () {
+    expect(desktopwallpaper.setBackgroundColor, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetBackgroundColor', () {
-    expect(desktopwallpaper.GetBackgroundColor, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getBackgroundColor', () {
+    expect(desktopwallpaper.getBackgroundColor, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.SetPosition', () {
-    expect(desktopwallpaper.SetPosition, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.setPosition', () {
+    expect(desktopwallpaper.setPosition, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetPosition', () {
-    expect(desktopwallpaper.GetPosition, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getPosition', () {
+    expect(desktopwallpaper.getPosition, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.SetSlideshow', () {
-    expect(desktopwallpaper.SetSlideshow, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.setSlideshow', () {
+    expect(desktopwallpaper.setSlideshow, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetSlideshow', () {
-    expect(desktopwallpaper.GetSlideshow, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getSlideshow', () {
+    expect(desktopwallpaper.getSlideshow, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.SetSlideshowOptions', () {
-    expect(desktopwallpaper.SetSlideshowOptions, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.setSlideshowOptions', () {
+    expect(desktopwallpaper.setSlideshowOptions, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetSlideshowOptions', () {
-    expect(desktopwallpaper.GetSlideshowOptions, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getSlideshowOptions', () {
+    expect(desktopwallpaper.getSlideshowOptions, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.AdvanceSlideshow', () {
-    expect(desktopwallpaper.AdvanceSlideshow, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.advanceSlideshow', () {
+    expect(desktopwallpaper.advanceSlideshow, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.GetStatus', () {
-    expect(desktopwallpaper.GetStatus, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.getStatus', () {
+    expect(desktopwallpaper.getStatus, isA<Function>());
   });
-  test('Can instantiate IDesktopWallpaper.Enable', () {
-    expect(desktopwallpaper.Enable, isA<Function>());
+  test('Can instantiate IDesktopWallpaper.enable', () {
+    expect(desktopwallpaper.enable, isA<Function>());
   });
   free(ptr);
 }

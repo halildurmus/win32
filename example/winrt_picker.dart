@@ -7,69 +7,66 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 void main() async {
   winrtInitialize();
   final pIndex = calloc<Uint32>();
 
-  final object = CreateObject(
-      'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
+  final picker = FileOpenPicker()
+    ..suggestedStartLocation = PickerLocationId.desktop
+    ..viewMode = PickerViewMode.thumbnail;
 
-  final picker = IFileOpenPicker.from(object)
-    ..SuggestedStartLocation = PickerLocationId.Desktop
-    ..ViewMode = PickerViewMode.Thumbnail;
+  final filters = picker.fileTypeFilter;
 
-  final filters = picker.FileTypeFilter;
-
-  print('Vector has ${filters.Size} elements.');
+  print('Vector has ${filters.size} elements.');
   print('Adding ".jpg" to the vector...');
-  filters.Append('.jpg');
-  print('Vector has ${filters.Size} elements.');
-  print('Vector\'s first element is ${filters.GetAt(0)}.');
+  filters.append('.jpg');
+  print('Vector has ${filters.size} elements.');
+  print('Vector\'s first element is ${filters.getAt(0)}.');
   print('Adding ".jpeg" to the vector...');
-  filters.Append('.jpeg');
-  print('Vector\'s second element is ${filters.GetAt(1)}.');
+  filters.append('.jpeg');
+  print('Vector\'s second element is ${filters.getAt(1)}.');
 
-  final vectorView = filters.GetView;
+  final vectorView = filters.getView();
   print('VectorView has ${vectorView.length} elements.');
 
-  var containsElement = filters.IndexOf('.jpeg', pIndex);
+  var containsElement = filters.indexOf('.jpeg', pIndex);
   print(containsElement
       ? 'The index of ".jpeg" is ${pIndex.value}.'
       : 'The ".jpeg" does not exists in the vector!');
 
-  containsElement = filters.IndexOf('.txt', pIndex);
+  containsElement = filters.indexOf('.txt', pIndex);
   print(containsElement
       ? 'The index of ".txt" is ${pIndex.value}.'
       : 'The ".txt" does not exists in the vector!');
 
   print('Setting vector\'s first element to ".png"...');
-  filters.SetAt(0, '.png');
-  print('Vector\'s first element is ${filters.GetAt(0)}.');
+  filters.setAt(0, '.png');
+  print('Vector\'s first element is ${filters.getAt(0)}.');
 
   print('Inserting ".gif" to the vector\'s first index...');
-  filters.InsertAt(0, '.gif');
-  print('Vector has ${filters.Size} elements.');
-  print('Vector\'s first element is ${filters.GetAt(0)}.');
+  filters.insertAt(0, '.gif');
+  print('Vector has ${filters.size} elements.');
+  print('Vector\'s first element is ${filters.getAt(0)}.');
 
   print('Removing the vector\'s last element...');
-  filters.RemoveAtEnd();
-  print('Vector has ${filters.Size} elements.');
-  print('Vector\'s last element is ${filters.GetAt(filters.Size - 1)}.');
+  filters.removeAtEnd();
+  print('Vector has ${filters.size} elements.');
+  print('Vector\'s last element is ${filters.getAt(filters.size - 1)}.');
 
-  var list = filters.GetView;
+  var list = filters.getView();
   print(list.isNotEmpty ? 'Vector elements: $list' : 'Vector is empty!');
 
   print('Replacing vector\'s elements with [".jpg", ".jpeg", ".png"]...');
-  filters.ReplaceAll(['.jpg', '.jpeg', '.png']);
+  filters.replaceAll(['.jpg', '.jpeg', '.png']);
 
-  list = filters.GetView;
+  list = filters.getView();
   print(list.isNotEmpty ? 'Vector elements: $list' : 'Vector is empty!');
 
   print('Clearing the vector...');
-  filters.Clear();
-  print('Vector has ${filters.Size} elements.');
+  filters.clear();
+  print('Vector has ${filters.size} elements.');
 
   free(pIndex);
   free(filters.ptr);

@@ -67,7 +67,7 @@ bool fillMemoryBuffer(
 /// Retrieve the number of frames that the audio buffer can hold.
 int getBufferFrameCount(IAudioClient pAudioClient) {
   final pBufferFrameCount = calloc<UINT32>();
-  check(pAudioClient.GetBufferSize(pBufferFrameCount));
+  check(pAudioClient.getBufferSize(pBufferFrameCount));
   final bufferFrameCount = pBufferFrameCount.value;
   free(pBufferFrameCount);
 
@@ -86,27 +86,27 @@ void main() {
   // Retrieve the default audio output device.
   final pDeviceEnumerator = MMDeviceEnumerator.createInstance();
   final ppDevice = calloc<Pointer<COMObject>>();
-  check(pDeviceEnumerator.GetDefaultAudioEndpoint(
+  check(pDeviceEnumerator.getDefaultAudioEndpoint(
       0, // dataflow: rendering device
       0, // role: system notification sound
       ppDevice));
-  pDeviceEnumerator.Release();
+  pDeviceEnumerator.release();
   free(pDeviceEnumerator.ptr);
 
   // Activate an IAudioClient interface for the output device.
   final pDevice = IMMDevice(ppDevice.cast());
   final iidAudioClient = convertToIID(IID_IAudioClient);
   final ppAudioClient = calloc<Pointer<COMObject>>();
-  check(pDevice.Activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient));
+  check(pDevice.activate(iidAudioClient, CLSCTX_ALL, nullptr, ppAudioClient));
   free(iidAudioClient);
   final pAudioClient = IAudioClient(ppAudioClient.cast());
 
   // Initialize the audio stream.
   final ppFormat = calloc<Pointer<WAVEFORMATEX>>();
-  check(pAudioClient.GetMixFormat(ppFormat));
+  check(pAudioClient.getMixFormat(ppFormat));
   final pWaveFormat = ppFormat.value;
   final sampleRate = pWaveFormat.ref.nSamplesPerSec;
-  check(pAudioClient.Initialize(
+  check(pAudioClient.initialize(
       AUDCLNT_SHAREMODE.AUDCLNT_SHAREMODE_SHARED,
       0,
       30000, // buffer capacity of 3s (30,000 * 100ns)
@@ -117,7 +117,7 @@ void main() {
   // Activate an IAudioRenderClient interface.
   final iidAudioRenderClient = convertToIID(IID_IAudioRenderClient);
   final ppAudioRenderClient = calloc<Pointer<COMObject>>();
-  check(pAudioClient.GetService(iidAudioRenderClient, ppAudioRenderClient));
+  check(pAudioClient.getService(iidAudioRenderClient, ppAudioRenderClient));
   free(iidAudioRenderClient);
   final pAudioRenderClient = IAudioRenderClient(ppAudioRenderClient.cast());
 
@@ -125,51 +125,51 @@ void main() {
   final bufferFrameCount = getBufferFrameCount(pAudioClient);
   print("Buffer Size = $bufferFrameCount frames");
   final pData = calloc<Pointer<BYTE>>();
-  check(pAudioRenderClient.GetBuffer(bufferFrameCount, pData));
+  check(pAudioRenderClient.getBuffer(bufferFrameCount, pData));
 
   // Load the initial data into the shared buffer.
   initData(pWaveFormat.ref, bufferFrameCount);
   var dataLoaded =
       fillMemoryBuffer(bufferFrameCount, pData.value, pWaveFormat.ref);
-  check(pAudioRenderClient.ReleaseBuffer(bufferFrameCount,
+  check(pAudioRenderClient.releaseBuffer(bufferFrameCount,
       dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
 
   // Calculate the actual duration of the allocated buffer.
   final hnsActualDuration = refTimesPerSecond * bufferFrameCount / sampleRate;
 
-  check(pAudioClient.Start()); // Start playing.
+  check(pAudioClient.start()); // Start playing.
 
   final pNumFramesPadding = calloc<UINT32>();
   while (dataLoaded) {
     // Sleep for half the buffer duration.
     Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
     // See how much buffer space is available.
-    check(pAudioClient.GetCurrentPadding(pNumFramesPadding));
+    check(pAudioClient.getCurrentPadding(pNumFramesPadding));
     final numFramesAvailable = bufferFrameCount - pNumFramesPadding.value;
     // Grab all the available space in the shared buffer.
-    check(pAudioRenderClient.GetBuffer(numFramesAvailable, pData));
+    check(pAudioRenderClient.getBuffer(numFramesAvailable, pData));
     // Get next half second of data from the audio source.
     dataLoaded =
         fillMemoryBuffer(numFramesAvailable, pData.value, pWaveFormat.ref);
-    check(pAudioRenderClient.ReleaseBuffer(numFramesAvailable,
+    check(pAudioRenderClient.releaseBuffer(numFramesAvailable,
         dataLoaded ? 0 : AUDCLNT_BUFFERFLAGS.AUDCLNT_BUFFERFLAGS_SILENT));
   }
   free(pNumFramesPadding);
 
   // Wait for last data in buffer to play before stopping.
   Sleep(hnsActualDuration / refTimesPerMillisecond ~/ 2);
-  check(pAudioClient.Stop()); // Stop playing.
+  check(pAudioClient.stop()); // Stop playing.
 
   // Clear up
   free(pData);
 
-  pDevice.Release();
+  pDevice.release();
   free(ppDevice);
 
-  pAudioClient.Release();
+  pAudioClient.release();
   free(ppAudioClient);
 
-  pAudioRenderClient.Release();
+  pAudioRenderClient.release();
   free(ppAudioRenderClient);
 
   free(ppFormat);

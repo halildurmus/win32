@@ -22,26 +22,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitemarray = IShellItemArray(ptr);
-  test('Can instantiate IShellItemArray.BindToHandler', () {
-    expect(shellitemarray.BindToHandler, isA<Function>());
+  test('Can instantiate IShellItemArray.bindToHandler', () {
+    expect(shellitemarray.bindToHandler, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.GetPropertyStore', () {
-    expect(shellitemarray.GetPropertyStore, isA<Function>());
+  test('Can instantiate IShellItemArray.getPropertyStore', () {
+    expect(shellitemarray.getPropertyStore, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.GetPropertyDescriptionList', () {
-    expect(shellitemarray.GetPropertyDescriptionList, isA<Function>());
+  test('Can instantiate IShellItemArray.getPropertyDescriptionList', () {
+    expect(shellitemarray.getPropertyDescriptionList, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.GetAttributes', () {
-    expect(shellitemarray.GetAttributes, isA<Function>());
+  test('Can instantiate IShellItemArray.getAttributes', () {
+    expect(shellitemarray.getAttributes, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.GetCount', () {
-    expect(shellitemarray.GetCount, isA<Function>());
+  test('Can instantiate IShellItemArray.getCount', () {
+    expect(shellitemarray.getCount, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.GetItemAt', () {
-    expect(shellitemarray.GetItemAt, isA<Function>());
+  test('Can instantiate IShellItemArray.getItemAt', () {
+    expect(shellitemarray.getItemAt, isA<Function>());
   });
-  test('Can instantiate IShellItemArray.EnumItems', () {
-    expect(shellitemarray.EnumItems, isA<Function>());
+  test('Can instantiate IShellItemArray.enumItems', () {
+    expect(shellitemarray.enumItems, isA<Function>());
   });
   free(ptr);
 }

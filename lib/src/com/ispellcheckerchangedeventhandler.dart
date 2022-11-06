@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -33,7 +32,11 @@ class ISpellCheckerChangedEventHandler extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   ISpellCheckerChangedEventHandler(super.ptr);
 
-  int Invoke(Pointer<COMObject> sender) => ptr.ref.vtable
+  factory ISpellCheckerChangedEventHandler.from(IUnknown interface) =>
+      ISpellCheckerChangedEventHandler(
+          interface.toInterface(IID_ISpellCheckerChangedEventHandler));
+
+  int invoke(Pointer<COMObject> sender) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

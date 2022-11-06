@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumnetworkconnections = IEnumNetworkConnections(ptr);
-  test('Can instantiate IEnumNetworkConnections.Next', () {
-    expect(enumnetworkconnections.Next, isA<Function>());
+  test('Can instantiate IEnumNetworkConnections.next', () {
+    expect(enumnetworkconnections.next, isA<Function>());
   });
-  test('Can instantiate IEnumNetworkConnections.Skip', () {
-    expect(enumnetworkconnections.Skip, isA<Function>());
+  test('Can instantiate IEnumNetworkConnections.skip', () {
+    expect(enumnetworkconnections.skip, isA<Function>());
   });
-  test('Can instantiate IEnumNetworkConnections.Reset', () {
-    expect(enumnetworkconnections.Reset, isA<Function>());
+  test('Can instantiate IEnumNetworkConnections.reset', () {
+    expect(enumnetworkconnections.reset, isA<Function>());
   });
-  test('Can instantiate IEnumNetworkConnections.Clone', () {
-    expect(enumnetworkconnections.Clone, isA<Function>());
+  test('Can instantiate IEnumNetworkConnections.clone', () {
+    expect(enumnetworkconnections.clone, isA<Function>());
   });
   free(ptr);
 }

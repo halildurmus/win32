@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IProvideClassInfo extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IProvideClassInfo(super.ptr);
 
-  int GetClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
+  factory IProvideClassInfo.from(IUnknown interface) =>
+      IProvideClassInfo(interface.toInterface(IID_IProvideClassInfo));
+
+  int getClassInfo(Pointer<Pointer<COMObject>> ppTI) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

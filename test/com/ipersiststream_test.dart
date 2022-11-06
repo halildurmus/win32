@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final persiststream = IPersistStream(ptr);
-  test('Can instantiate IPersistStream.IsDirty', () {
-    expect(persiststream.IsDirty, isA<Function>());
+  test('Can instantiate IPersistStream.isDirty', () {
+    expect(persiststream.isDirty, isA<Function>());
   });
-  test('Can instantiate IPersistStream.Load', () {
-    expect(persiststream.Load, isA<Function>());
+  test('Can instantiate IPersistStream.load', () {
+    expect(persiststream.load, isA<Function>());
   });
-  test('Can instantiate IPersistStream.Save', () {
-    expect(persiststream.Save, isA<Function>());
+  test('Can instantiate IPersistStream.save', () {
+    expect(persiststream.save, isA<Function>());
   });
-  test('Can instantiate IPersistStream.GetSizeMax', () {
-    expect(persiststream.GetSizeMax, isA<Function>());
+  test('Can instantiate IPersistStream.getSizeMax', () {
+    expect(persiststream.getSizeMax, isA<Function>());
   });
   free(ptr);
 }

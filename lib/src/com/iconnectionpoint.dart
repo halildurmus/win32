@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IConnectionPoint extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IConnectionPoint(super.ptr);
 
-  int GetConnectionInterface(Pointer<GUID> pIID) => ptr.ref.vtable
+  factory IConnectionPoint.from(IUnknown interface) =>
+      IConnectionPoint(interface.toInterface(IID_IConnectionPoint));
+
+  int getConnectionInterface(Pointer<GUID> pIID) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -41,7 +43,7 @@ class IConnectionPoint extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> pIID)>()(ptr.ref.lpVtbl, pIID);
 
-  int GetConnectionPointContainer(Pointer<Pointer<COMObject>> ppCPC) =>
+  int getConnectionPointContainer(Pointer<Pointer<COMObject>> ppCPC) =>
       ptr.ref.vtable
               .elementAt(4)
               .cast<
@@ -54,7 +56,7 @@ class IConnectionPoint extends IUnknown {
                   int Function(Pointer, Pointer<Pointer<COMObject>> ppCPC)>()(
           ptr.ref.lpVtbl, ppCPC);
 
-  int Advise(Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie) =>
+  int advise(Pointer<COMObject> pUnkSink, Pointer<Uint32> pdwCookie) =>
       ptr.ref.vtable
               .elementAt(5)
               .cast<
@@ -68,14 +70,14 @@ class IConnectionPoint extends IUnknown {
                       Pointer<Uint32> pdwCookie)>()(
           ptr.ref.lpVtbl, pUnkSink, pdwCookie);
 
-  int Unadvise(int dwCookie) => ptr.ref.vtable
+  int unadvise(int dwCookie) => ptr.ref.vtable
       .elementAt(6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwCookie)>>>()
       .value
       .asFunction<
           int Function(Pointer, int dwCookie)>()(ptr.ref.lpVtbl, dwCookie);
 
-  int EnumConnections(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
+  int enumConnections(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

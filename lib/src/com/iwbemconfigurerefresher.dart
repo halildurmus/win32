@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,11 @@ class IWbemConfigureRefresher extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IWbemConfigureRefresher(super.ptr);
 
-  int AddObjectByPath(
+  factory IWbemConfigureRefresher.from(IUnknown interface) =>
+      IWbemConfigureRefresher(
+          interface.toInterface(IID_IWbemConfigureRefresher));
+
+  int addObjectByPath(
           Pointer<COMObject> pNamespace,
           Pointer<Utf16> wszPath,
           int lFlags,
@@ -64,7 +67,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           wszPath, lFlags, pContext, ppRefreshable, plId);
 
-  int AddObjectByTemplate(
+  int addObjectByTemplate(
           Pointer<COMObject> pNamespace,
           Pointer<COMObject> pTemplate,
           int lFlags,
@@ -96,7 +99,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       Pointer<Int32> plId)>()(ptr.ref.lpVtbl, pNamespace,
           pTemplate, lFlags, pContext, ppRefreshable, plId);
 
-  int AddRefresher(
+  int addRefresher(
           Pointer<COMObject> pRefresher, int lFlags, Pointer<Int32> plId) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -111,7 +114,7 @@ class IWbemConfigureRefresher extends IUnknown {
                       int lFlags, Pointer<Int32> plId)>()(
           ptr.ref.lpVtbl, pRefresher, lFlags, plId);
 
-  int Remove(int lId, int lFlags) => ptr.ref.vtable
+  int remove(int lId, int lFlags) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -121,7 +124,7 @@ class IWbemConfigureRefresher extends IUnknown {
           .asFunction<int Function(Pointer, int lId, int lFlags)>()(
       ptr.ref.lpVtbl, lId, lFlags);
 
-  int AddEnum(
+  int addEnum(
           Pointer<COMObject> pNamespace,
           Pointer<Utf16> wszClassName,
           int lFlags,

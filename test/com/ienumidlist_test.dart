@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumidlist = IEnumIDList(ptr);
-  test('Can instantiate IEnumIDList.Next', () {
-    expect(enumidlist.Next, isA<Function>());
+  test('Can instantiate IEnumIDList.next', () {
+    expect(enumidlist.next, isA<Function>());
   });
-  test('Can instantiate IEnumIDList.Skip', () {
-    expect(enumidlist.Skip, isA<Function>());
+  test('Can instantiate IEnumIDList.skip', () {
+    expect(enumidlist.skip, isA<Function>());
   });
-  test('Can instantiate IEnumIDList.Reset', () {
-    expect(enumidlist.Reset, isA<Function>());
+  test('Can instantiate IEnumIDList.reset', () {
+    expect(enumidlist.reset, isA<Function>());
   });
-  test('Can instantiate IEnumIDList.Clone', () {
-    expect(enumidlist.Clone, isA<Function>());
+  test('Can instantiate IEnumIDList.clone', () {
+    expect(enumidlist.clone, isA<Function>());
   });
   free(ptr);
 }

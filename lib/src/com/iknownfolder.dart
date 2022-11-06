@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IKnownFolder extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IKnownFolder(super.ptr);
 
-  int GetId(Pointer<GUID> pkfid) => ptr.ref.vtable
+  factory IKnownFolder.from(IUnknown interface) =>
+      IKnownFolder(interface.toInterface(IID_IKnownFolder));
+
+  int getId(Pointer<GUID> pkfid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -41,7 +43,7 @@ class IKnownFolder extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> pkfid)>()(ptr.ref.lpVtbl, pkfid);
 
-  int GetCategory(Pointer<Int32> pCategory) => ptr.ref.vtable
+  int getCategory(Pointer<Int32> pCategory) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -51,7 +53,7 @@ class IKnownFolder extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> pCategory)>()(
       ptr.ref.lpVtbl, pCategory);
 
-  int GetShellItem(int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+  int getShellItem(int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(5)
           .cast<
@@ -64,7 +66,7 @@ class IKnownFolder extends IUnknown {
               int Function(Pointer, int dwFlags, Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, dwFlags, riid, ppv);
 
-  int GetPath(int dwFlags, Pointer<Pointer<Utf16>> ppszPath) => ptr.ref.vtable
+  int getPath(int dwFlags, Pointer<Pointer<Utf16>> ppszPath) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -77,7 +79,7 @@ class IKnownFolder extends IUnknown {
                   Pointer, int dwFlags, Pointer<Pointer<Utf16>> ppszPath)>()(
       ptr.ref.lpVtbl, dwFlags, ppszPath);
 
-  int SetPath(int dwFlags, Pointer<Utf16> pszPath) => ptr.ref.vtable
+  int setPath(int dwFlags, Pointer<Utf16> pszPath) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -89,7 +91,7 @@ class IKnownFolder extends IUnknown {
               int Function(Pointer, int dwFlags, Pointer<Utf16> pszPath)>()(
       ptr.ref.lpVtbl, dwFlags, pszPath);
 
-  int GetIDList(int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) => ptr
+  int getIDList(int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) => ptr
           .ref.vtable
           .elementAt(8)
           .cast<
@@ -103,7 +105,7 @@ class IKnownFolder extends IUnknown {
                   Pointer, int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl)>()(
       ptr.ref.lpVtbl, dwFlags, ppidl);
 
-  int GetFolderType(Pointer<GUID> pftid) => ptr.ref.vtable
+  int getFolderType(Pointer<GUID> pftid) => ptr.ref.vtable
       .elementAt(9)
       .cast<
           Pointer<
@@ -112,7 +114,7 @@ class IKnownFolder extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> pftid)>()(ptr.ref.lpVtbl, pftid);
 
-  int GetRedirectionCapabilities(Pointer<Uint32> pCapabilities) => ptr
+  int getRedirectionCapabilities(Pointer<Uint32> pCapabilities) => ptr
       .ref.vtable
       .elementAt(10)
       .cast<
@@ -124,7 +126,7 @@ class IKnownFolder extends IUnknown {
           int Function(Pointer,
               Pointer<Uint32> pCapabilities)>()(ptr.ref.lpVtbl, pCapabilities);
 
-  int GetFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) => ptr
+  int getFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) => ptr
           .ref.vtable
           .elementAt(11)
           .cast<

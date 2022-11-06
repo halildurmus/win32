@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audiosessionmanager = IAudioSessionManager(ptr);
-  test('Can instantiate IAudioSessionManager.GetAudioSessionControl', () {
-    expect(audiosessionmanager.GetAudioSessionControl, isA<Function>());
+  test('Can instantiate IAudioSessionManager.getAudioSessionControl', () {
+    expect(audiosessionmanager.getAudioSessionControl, isA<Function>());
   });
-  test('Can instantiate IAudioSessionManager.GetSimpleAudioVolume', () {
-    expect(audiosessionmanager.GetSimpleAudioVolume, isA<Function>());
+  test('Can instantiate IAudioSessionManager.getSimpleAudioVolume', () {
+    expect(audiosessionmanager.getSimpleAudioVolume, isA<Function>());
   });
   free(ptr);
 }

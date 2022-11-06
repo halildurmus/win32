@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IKnownFolderManager(super.ptr);
 
-  int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.vtable
+  factory IKnownFolderManager.from(IUnknown interface) =>
+      IKnownFolderManager(interface.toInterface(IID_IKnownFolderManager));
+
+  int folderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -43,7 +45,7 @@ class IKnownFolderManager extends IUnknown {
           int Function(Pointer, int nCsidl,
               Pointer<GUID> pfid)>()(ptr.ref.lpVtbl, nCsidl, pfid);
 
-  int FolderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) => ptr
+  int folderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) => ptr
       .ref.vtable
       .elementAt(4)
       .cast<
@@ -56,7 +58,7 @@ class IKnownFolderManager extends IUnknown {
           int Function(Pointer, Pointer<GUID> rfid,
               Pointer<Int32> pnCsidl)>()(ptr.ref.lpVtbl, rfid, pnCsidl);
 
-  int GetFolderIds(Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount) =>
+  int getFolderIds(Pointer<Pointer<GUID>> ppKFId, Pointer<Uint32> pCount) =>
       ptr.ref.vtable
           .elementAt(5)
           .cast<
@@ -69,7 +71,7 @@ class IKnownFolderManager extends IUnknown {
               int Function(Pointer, Pointer<Pointer<GUID>> ppKFId,
                   Pointer<Uint32> pCount)>()(ptr.ref.lpVtbl, ppKFId, pCount);
 
-  int GetFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) => ptr
+  int getFolder(Pointer<GUID> rfid, Pointer<Pointer<COMObject>> ppkf) => ptr
       .ref.vtable
       .elementAt(6)
       .cast<
@@ -82,7 +84,7 @@ class IKnownFolderManager extends IUnknown {
           int Function(Pointer, Pointer<GUID> rfid,
               Pointer<Pointer<COMObject>> ppkf)>()(ptr.ref.lpVtbl, rfid, ppkf);
 
-  int GetFolderByName(
+  int getFolderByName(
           Pointer<Utf16> pszCanonicalName, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.vtable
           .elementAt(7)
@@ -99,7 +101,7 @@ class IKnownFolderManager extends IUnknown {
                   Pointer<Pointer<COMObject>>
                       ppkf)>()(ptr.ref.lpVtbl, pszCanonicalName, ppkf);
 
-  int RegisterFolder(
+  int registerFolder(
           Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
       ptr.ref.vtable
               .elementAt(8)
@@ -114,7 +116,7 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<KNOWNFOLDER_DEFINITION> pKFD)>()(
           ptr.ref.lpVtbl, rfid, pKFD);
 
-  int UnregisterFolder(Pointer<GUID> rfid) => ptr.ref.vtable
+  int unregisterFolder(Pointer<GUID> rfid) => ptr.ref.vtable
       .elementAt(9)
       .cast<
           Pointer<
@@ -123,7 +125,7 @@ class IKnownFolderManager extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> rfid)>()(ptr.ref.lpVtbl, rfid);
 
-  int FindFolderFromPath(
+  int findFolderFromPath(
           Pointer<Utf16> pszPath, int mode, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.vtable
               .elementAt(10)
@@ -138,7 +140,7 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppkf)>()(
           ptr.ref.lpVtbl, pszPath, mode, ppkf);
 
-  int FindFolderFromIDList(
+  int findFolderFromIDList(
           Pointer<ITEMIDLIST> pidl, Pointer<Pointer<COMObject>> ppkf) =>
       ptr.ref.vtable
               .elementAt(11)
@@ -153,7 +155,7 @@ class IKnownFolderManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppkf)>()(
           ptr.ref.lpVtbl, pidl, ppkf);
 
-  int Redirect(
+  int redirect(
           Pointer<GUID> rfid,
           int hwnd,
           int flags,

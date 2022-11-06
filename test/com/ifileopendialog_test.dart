@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final fileopendialog = IFileOpenDialog(ptr);
-  test('Can instantiate IFileOpenDialog.GetResults', () {
-    expect(fileopendialog.GetResults, isA<Function>());
+  test('Can instantiate IFileOpenDialog.getResults', () {
+    expect(fileopendialog.getResults, isA<Function>());
   });
-  test('Can instantiate IFileOpenDialog.GetSelectedItems', () {
-    expect(fileopendialog.GetSelectedItems, isA<Function>());
+  test('Can instantiate IFileOpenDialog.getSelectedItems', () {
+    expect(fileopendialog.getSelectedItems, isA<Function>());
   });
   free(ptr);
 }

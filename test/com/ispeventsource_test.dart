@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final speventsource = ISpEventSource(ptr);
-  test('Can instantiate ISpEventSource.SetInterest', () {
-    expect(speventsource.SetInterest, isA<Function>());
+  test('Can instantiate ISpEventSource.setInterest', () {
+    expect(speventsource.setInterest, isA<Function>());
   });
-  test('Can instantiate ISpEventSource.GetEvents', () {
-    expect(speventsource.GetEvents, isA<Function>());
+  test('Can instantiate ISpEventSource.getEvents', () {
+    expect(speventsource.getEvents, isA<Function>());
   });
-  test('Can instantiate ISpEventSource.GetInfo', () {
-    expect(speventsource.GetInfo, isA<Function>());
+  test('Can instantiate ISpEventSource.getInfo', () {
+    expect(speventsource.getInfo, isA<Function>());
   });
   free(ptr);
 }

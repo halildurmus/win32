@@ -26,19 +26,19 @@ void main() {
       var languageTagPtr =
           Platform.localeName.replaceAll('_', '-').toNativeUtf16();
 
-      hr = spellCheckerFactory.IsSupported(languageTagPtr, supportedPtr);
+      hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
       expect(hr, equals(S_OK));
       expect(supportedPtr.value, equals(1));
 
       free(languageTagPtr);
 
       languageTagPtr = 'en-US'.toNativeUtf16();
-      hr = spellCheckerFactory.IsSupported(languageTagPtr, supportedPtr);
+      hr = spellCheckerFactory.isSupported(languageTagPtr, supportedPtr);
       expect(hr, equals(S_OK));
 
       if (supportedPtr.value == 1) {
         final spellCheckerPtr = calloc<COMObject>();
-        hr = spellCheckerFactory.CreateSpellChecker(
+        hr = spellCheckerFactory.createSpellChecker(
             languageTagPtr, spellCheckerPtr.cast());
         expect(hr, equals(S_OK));
 
@@ -46,30 +46,30 @@ void main() {
 
         final errorsPtr = calloc<COMObject>();
         final textPtr = 'haev'.toNativeUtf16();
-        hr = spellChecker.Check(textPtr, errorsPtr.cast());
+        hr = spellChecker.check(textPtr, errorsPtr.cast());
         expect(hr, equals(S_OK));
 
         final errors = IEnumSpellingError(errorsPtr);
         final errorPtr = calloc<COMObject>();
 
-        while (errors.Next(errorPtr.cast()) == S_OK) {
+        while (errors.next(errorPtr.cast()) == S_OK) {
           final error = ISpellingError(errorPtr);
-          expect(error.CorrectiveAction, equals(CORRECTIVE_ACTION.REPLACE));
-          final replacment = error.Replacement;
+          expect(error.correctiveAction, equals(CORRECTIVE_ACTION.REPLACE));
+          final replacment = error.replacement;
           expect(replacment.toDartString(), equals('have'));
           WindowsDeleteString(replacment.address);
-          error.Release();
+          error.release();
         }
 
-        errors.Release();
+        errors.release();
         free(textPtr);
-        spellChecker.Release();
+        spellChecker.release();
       }
 
       free(supportedPtr);
       free(languageTagPtr);
 
-      spellCheckerFactory.Release();
+      spellCheckerFactory.release();
 
       CoUninitialize();
     }

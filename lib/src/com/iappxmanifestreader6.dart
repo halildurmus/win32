@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAppxManifestReader6 extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IAppxManifestReader6(super.ptr);
 
-  int GetIsNonQualifiedResourcePackage(
+  factory IAppxManifestReader6.from(IUnknown interface) =>
+      IAppxManifestReader6(interface.toInterface(IID_IAppxManifestReader6));
+
+  int getIsNonQualifiedResourcePackage(
           Pointer<Int32> isNonQualifiedResourcePackage) =>
       ptr.ref.vtable
               .elementAt(3)

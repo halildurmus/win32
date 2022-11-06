@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spellcheckerchangedeventhandler = ISpellCheckerChangedEventHandler(ptr);
-  test('Can instantiate ISpellCheckerChangedEventHandler.Invoke', () {
-    expect(spellcheckerchangedeventhandler.Invoke, isA<Function>());
+  test('Can instantiate ISpellCheckerChangedEventHandler.invoke', () {
+    expect(spellcheckerchangedeventhandler.invoke, isA<Function>());
   });
   free(ptr);
 }

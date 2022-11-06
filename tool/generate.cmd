@@ -8,7 +8,7 @@ rem Save current directory and start from the win32\tool\generator folder
 pushd %~dp0generator
 call dart bin\generate.dart
 
-if "%1"=="--no-test" goto notest
+if "%1"=="--no-test" goto end
 
 :dart_test
 echo Running generator tests...

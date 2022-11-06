@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final filesavedialog = IFileSaveDialog(ptr);
-  test('Can instantiate IFileSaveDialog.SetSaveAsItem', () {
-    expect(filesavedialog.SetSaveAsItem, isA<Function>());
+  test('Can instantiate IFileSaveDialog.setSaveAsItem', () {
+    expect(filesavedialog.setSaveAsItem, isA<Function>());
   });
-  test('Can instantiate IFileSaveDialog.SetProperties', () {
-    expect(filesavedialog.SetProperties, isA<Function>());
+  test('Can instantiate IFileSaveDialog.setProperties', () {
+    expect(filesavedialog.setProperties, isA<Function>());
   });
-  test('Can instantiate IFileSaveDialog.SetCollectedProperties', () {
-    expect(filesavedialog.SetCollectedProperties, isA<Function>());
+  test('Can instantiate IFileSaveDialog.setCollectedProperties', () {
+    expect(filesavedialog.setCollectedProperties, isA<Function>());
   });
-  test('Can instantiate IFileSaveDialog.GetProperties', () {
-    expect(filesavedialog.GetProperties, isA<Function>());
+  test('Can instantiate IFileSaveDialog.getProperties', () {
+    expect(filesavedialog.getProperties, isA<Function>());
   });
-  test('Can instantiate IFileSaveDialog.ApplyProperties', () {
-    expect(filesavedialog.ApplyProperties, isA<Function>());
+  test('Can instantiate IFileSaveDialog.applyProperties', () {
+    expect(filesavedialog.applyProperties, isA<Function>());
   });
   free(ptr);
 }

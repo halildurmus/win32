@@ -1,11 +1,13 @@
 @TestOn('windows')
 
 import 'package:generator/generator.dart';
-import 'package:generator/src/projection/winrt_parameter.dart';
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
+import 'helpers.dart';
+
 void main() {
+  final windowsBuildNumber = getWindowsBuildNumber();
   test('Class valuetype is correctly identified', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
@@ -25,6 +27,7 @@ void main() {
     final typeProjection = TypeProjection(method.returnType.typeIdentifier);
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
+    expect(typeProjection.methodParamType, equals('IMediaPlaybackSource'));
   });
 
   test('Property setter projects appropriate results for delegate.', () {
@@ -67,7 +70,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Foundation.IPropertyValue');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.inheritsFrom, equals(''));
+    expect(projection.inheritsFrom, isEmpty);
   });
 
   test('WinRT interface has right short name', () {
@@ -118,10 +121,9 @@ void main() {
     expect(projection.methodProjections.first.returnType.typeIdentifier.name,
         endsWith('PickerViewMode'));
     expect(projection.methodProjections.first.parameters, isEmpty);
-
     expect(
         (getPropertyProjection as WinRTGetPropertyProjection).exposedMethodName,
-        equals('ViewMode'));
+        equals('viewMode'));
   });
 
   test('WinRT interface import is meaningful', () {
@@ -170,7 +172,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dateTimeProjection.returnType.dartType, equals('int'));
     expect(dateTimeProjection.toString().trimLeft(),
-        startsWith('DateTime GetDateTime'));
+        startsWith('DateTime getDateTime'));
   });
 
   test('WinRT get property successfully projects something', () {
@@ -196,7 +198,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<IntPtr>)'));
     expect(numeralSystemProjection.returnType.dartType, equals('int'));
     expect(numeralSystemProjection.toString().trimLeft(),
-        startsWith('String get NumeralSystem'));
+        startsWith('String get numeralSystem'));
   });
 
   test('WinRT get property successfully projects int', () {
@@ -211,6 +213,8 @@ void main() {
         equalsIgnoringWhitespace('HRESULT Function(Pointer, Pointer<Int32>)'));
     expect(numDaysProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Int32>)'));
+    expect(numDaysProjection.toString().trimLeft(),
+        startsWith('int get numberOfDaysInThisMonth'));
   });
 
   test('WinRT get property successfully projects DateTime', () {
@@ -227,7 +231,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dateModifiedProjection.returnType.dartType, equals('int'));
     expect(dateModifiedProjection.toString().trimLeft(),
-        startsWith('DateTime get DateModified'));
+        startsWith('DateTime get dateModified'));
   });
 
   test('WinRT get property successfully projects Duration', () {
@@ -244,7 +248,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<Uint64>)'));
     expect(dischargeTimeProjection.returnType.dartType, equals('int'));
     expect(dischargeTimeProjection.toString().trimLeft(),
-        startsWith('Duration get RemainingDischargeTime'));
+        startsWith('Duration get remainingDischargeTime'));
   });
 
   test('WinRT get property successfully projects List<String>', () {
@@ -252,15 +256,37 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    final languageProjection = projection.methodProjections
+    final languagesProjection = projection.methodProjections
         .firstWhere((m) => m.name == 'get_Languages');
 
     expect(
-        languageProjection.nativePrototype,
+        languagesProjection.nativePrototype,
         equalsIgnoringWhitespace(
             'HRESULT Function(Pointer, Pointer<COMObject>)'));
-    expect(languageProjection.dartPrototype,
+    expect(languagesProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(languagesProjection.toString().trimLeft(),
+        startsWith('List<String> get languages'));
+  });
+
+  test('WinRT get property successfully projects nullable types', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final expirationTimeSystemProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_ExpirationTime');
+
+    expect(
+        expirationTimeSystemProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(expirationTimeSystemProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(expirationTimeSystemProjection.returnType.dartType,
+        equals('COMObject'));
+    expect(expirationTimeSystemProjection.toString().trimLeft(),
+        startsWith('DateTime? get expirationTime'));
   });
 
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {
@@ -277,6 +303,9 @@ void main() {
             'HRESULT Function(Pointer, Pointer<COMObject>)'));
     expect(cloneProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(cloneProjection.returnType.dartType, equals('Pointer<COMObject>'));
+    expect(
+        cloneProjection.toString().trimLeft(), startsWith('Calendar clone()'));
   });
 
   test('WinRT TryCreate method successfully projects Pointer<COMObject>', () {
@@ -295,6 +324,10 @@ void main() {
         tryCreateProjection.dartPrototype,
         equalsIgnoringWhitespace(
             'int Function(Pointer, int regionCode, Pointer<COMObject> phoneNumber)'));
+    expect(
+        tryCreateProjection.toString().trimLeft(),
+        startsWith(
+            'void tryCreate(String regionCode, PhoneNumberFormatter phoneNumber)'));
   });
 
   test('WinRT set property successfully projects something', () {
@@ -320,7 +353,50 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, int)'));
     expect(setEraProjection.returnType.dartType, equals('void'));
     expect(setEraProjection.toString().trimLeft(),
-        startsWith('set Era(int value)'));
+        startsWith('set era(int value)'));
+  });
+
+  test('WinRT set property successfully projects nullable DateTime parameter',
+      () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final expirationTimeProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'put_ExpirationTime');
+
+    expect(expirationTimeProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, COMObject)'));
+    expect(expirationTimeProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, COMObject)'));
+    expect(expirationTimeProjection.returnType.dartType, equals('void'));
+    expect(expirationTimeProjection.toString().trimLeft(),
+        startsWith('set expirationTime(DateTime? value)'));
+    expect(
+        expirationTimeProjection.toString(),
+        contains(
+            'final referencePtr = boxValue(value, convertToIReference: true);'));
+  });
+
+  test('WinRT set property successfully projects nullable enum parameter', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisement');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final flagsProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'put_Flags');
+
+    expect(flagsProjection.nativePrototype,
+        equalsIgnoringWhitespace('HRESULT Function(Pointer, COMObject)'));
+    expect(flagsProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, COMObject)'));
+    expect(flagsProjection.returnType.dartType, equals('void'));
+    expect(flagsProjection.toString().trimLeft(),
+        startsWith('set flags(BluetoothLEAdvertisementFlags? value)'));
+    expect(
+        flagsProjection.toString(),
+        contains(
+            'final referencePtr = boxValue(value.value, convertToIReference: true, nativeType: Uint32);'));
   });
 
   test('WinRT method projects DateTime parameter correctly', () {
@@ -334,8 +410,40 @@ void main() {
         setDateTimeProjection.parameters.first as WinRTParameterProjection;
 
     expect(dateTimeParameter.preamble, isNotEmpty);
-
     expect(setDateTimeProjection.parametersPreamble, isNotEmpty);
+  });
+
+  test('WinRT method projects nested type correctly', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.StringMap');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    final firstProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'First') as WinRTMethodProjection;
+
+    expect(firstProjection.returnType.methodParamType,
+        equals('IIterator<IKeyValuePair<String, String?>>'));
+    expect(firstProjection.toString().trimLeft(),
+        startsWith('IIterator<IKeyValuePair<String, String?>> first()'));
+  });
+
+  test('WinRT method projects parameter with nested type correctly', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.INotificationDataFactory');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final createNotificationDataProjection = projection.methodProjections
+            .firstWhere((m) => m.name == 'CreateNotificationDataWithValues')
+        as WinRTMethodProjection;
+    final initialValuesParameter = createNotificationDataProjection
+        .parameters.first as WinRTParameterProjection;
+
+    expect(initialValuesParameter.preamble, isEmpty);
+    expect(initialValuesParameter.postamble, isEmpty);
+    expect(initialValuesParameter.localIdentifier,
+        equals('initialValues.ptr.cast<Pointer<COMObject>>().value'));
+    expect(initialValuesParameter.type.methodParamType,
+        equals('IIterable<IKeyValuePair<String, String?>>'));
   });
 
   test('WinRT interface successfully projects something', () {
@@ -353,7 +461,7 @@ void main() {
         'Windows.Storage.Pickers.FileOpenPicker');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, true);
+    expect(projection.hasDefaultConstructor, isTrue);
     expect(
         projection.defaultConstructor,
         equalsIgnoringWhitespace(
@@ -365,7 +473,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Networking.HostName');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, false);
+    expect(projection.hasDefaultConstructor, isFalse);
     expect(projection.defaultConstructor, isEmpty);
   });
 
@@ -375,8 +483,10 @@ void main() {
 
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.inheritsFrom, isNotEmpty);
-    expect(projection.classDeclaration,
-        equals('class HostName extends IInspectable implements IHostName {'));
+    expect(
+        projection.classDeclaration,
+        equals(
+            'class HostName extends IInspectable implements IHostName, IStringable {'));
   });
 
   test('WinRT class does not include implements keyword in class declaration',
@@ -416,16 +526,13 @@ void main() {
   });
 
   test('WinRT class that inherits IStringable has Dart toString()', () {
-    //
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Globalization.PhoneNumberFormatting.PhoneNumberInfo');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.isStringable, isTrue);
-    expect(projection.inheritsFrom, isNot(contains('IStringable')));
-    expect(projection.stringableMappers, isNotEmpty);
-    expect(projection.stringableMappers, contains('String toString() => '));
-    expect(projection.interfaceImport, contains('istringable.dart'));
+    expect(projection.inheritsFrom, contains('IStringable'));
+    expect(projection.interfaceImport,
+        contains('../../foundation/istringable.dart'));
   });
 
   test('WinRT class that does not inherit IStringable', () {
@@ -433,10 +540,9 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.Calendar');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.isStringable, isFalse);
     expect(projection.inheritsFrom, isNot(contains('IStringable')));
-    expect(projection.stringableMappers, isEmpty);
-    expect(projection.interfaceImport, isNot(contains('istringable.dart')));
+    expect(projection.interfaceImport,
+        isNot(contains('../foundation/istringable.dart')));
   });
 
   test('WinRT class that includes _className property', () {
@@ -444,7 +550,7 @@ void main() {
     final winTypeDef = MetadataStore.getMetadataForType(namespace);
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, true);
+    expect(projection.hasDefaultConstructor, isTrue);
     expect(projection.factoryMappers, isNotEmpty);
     expect(projection.staticMappers, isEmpty);
     expect(projection.classNameDeclaration,
@@ -456,7 +562,7 @@ void main() {
         'Windows.Storage.FileProperties.BasicProperties');
 
     final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.hasDefaultConstructor, false);
+    expect(projection.hasDefaultConstructor, isFalse);
     expect(projection.factoryMappers, isEmpty);
     expect(projection.staticMappers, isEmpty);
     expect(projection.classNameDeclaration, isEmpty);
@@ -469,8 +575,44 @@ void main() {
 
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.importHeader, contains("import 'headset.dart'"));
-    expect(projection.importHeader, contains("import 'user.dart'"));
+    expect(
+        projection.importHeader, contains("import '../../system/user.dart'"));
     expect(projection.importHeader,
-        contains("import 'userchangedeventargs.dart'"));
+        contains("import '../../system/userchangedeventargs.dart'"));
   });
+
+  if (windowsBuildNumber >= 18362) {
+    test('WinRT class does not include excluded interfaces in the imports', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.FileOpenPicker');
+
+      final projection = WinRTClassProjection(winTypeDef!);
+      expect(projection.importHeader.contains('ifileopenpicker.dart'), isTrue);
+      expect(
+          projection.importHeader.contains('ifileopenpicker2.dart'), isFalse);
+      expect(projection.importHeader.contains('ifileopenpicker3.dart'), isTrue);
+      expect(projection.importHeader.contains('ifileopenpickerstatics.dart'),
+          isFalse);
+      expect(projection.importHeader.contains('ifileopenpickerstatics2.dart'),
+          isTrue);
+      expect(
+          projection.importHeader
+              .contains('ifileopenpickerwithoperationid.dart'),
+          isFalse);
+    });
+    test(
+        'WinRT class does not include excluded interfaces in the implements keyword',
+        () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.FileOpenPicker');
+
+      final projection = WinRTClassProjection(winTypeDef!);
+      expect(
+          projection.inheritsFrom, equals('IFileOpenPicker, IFileOpenPicker3'));
+      expect(
+          projection.classDeclaration,
+          equals(
+              'class FileOpenPicker extends IInspectable implements IFileOpenPicker, IFileOpenPicker3 {'));
+    });
+  }
 }

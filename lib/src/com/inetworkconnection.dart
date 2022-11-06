@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
@@ -32,7 +32,10 @@ class INetworkConnection extends IDispatch {
   // vtable begins at 7, is 7 entries long.
   INetworkConnection(super.ptr);
 
-  int GetNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
+  factory INetworkConnection.from(IUnknown interface) =>
+      INetworkConnection(interface.toInterface(IID_INetworkConnection));
+
+  int getNetwork(Pointer<Pointer<COMObject>> ppNetwork) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -44,7 +47,7 @@ class INetworkConnection extends IDispatch {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppNetwork)>()(
       ptr.ref.lpVtbl, ppNetwork);
 
-  int get IsConnectedToInternet {
+  int get isConnectedToInternet {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -68,7 +71,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int get IsConnected {
+  int get isConnected {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -92,7 +95,7 @@ class INetworkConnection extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
+  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -102,7 +105,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
       ptr.ref.lpVtbl, pConnectivity);
 
-  int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
+  int getConnectionId(Pointer<GUID> pgdConnectionId) =>
       ptr.ref.vtable
               .elementAt(11)
               .cast<
@@ -115,7 +118,7 @@ class INetworkConnection extends IDispatch {
                   int Function(Pointer, Pointer<GUID> pgdConnectionId)>()(
           ptr.ref.lpVtbl, pgdConnectionId);
 
-  int GetAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
+  int getAdapterId(Pointer<GUID> pgdAdapterId) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -125,7 +128,7 @@ class INetworkConnection extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<GUID> pgdAdapterId)>()(
       ptr.ref.lpVtbl, pgdAdapterId);
 
-  int GetDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
+  int getDomainType(Pointer<Int32> pDomainType) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<

@@ -4,15 +4,15 @@
 
 // Simple example of calling WinRT APIs
 
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 String calendarData(Calendar calendar) =>
-    'Calendar: ${calendar.GetCalendarSystem()}\n'
-    'Name of Month: ${calendar.MonthAsFullSoloString()}\n'
-    'Day of Month: ${calendar.DayAsPaddedString(2)}\n'
-    'Day of Week: ${calendar.DayOfWeekAsFullSoloString()}\n'
-    'Year: ${calendar.YearAsString()}\n'
-    'Time Zone: ${calendar.TimeZoneAsFullString()}\n';
+    'Calendar: ${calendar.getCalendarSystem()}\n'
+    'Name of Month: ${calendar.monthAsFullSoloString()}\n'
+    'Day of Month: ${calendar.dayAsPaddedString(2)}\n'
+    'Day of Week: ${calendar.dayOfWeekAsFullSoloString()}\n'
+    'Year: ${calendar.yearAsString()}\n'
+    'Time Zone: ${calendar.timeZoneAsFullString()}\n';
 
 void main() {
   winrtInitialize();
@@ -21,19 +21,19 @@ void main() {
     final calendar = Calendar();
     print(calendarData(calendar));
 
-    final clonedCalendar = Calendar.from(calendar.Clone());
-    final comparisonResult = clonedCalendar.Compare(calendar.ptr);
+    final clonedCalendar = calendar.clone();
+    final comparisonResult = clonedCalendar.compare(calendar);
     print('Comparison result of calendar and its clone: $comparisonResult');
 
-    print('Languages: ${calendar.Languages}\n');
+    print('Languages: ${calendar.languages}\n');
 
-    calendar.ChangeCalendarSystem('JapaneseCalendar');
+    calendar.changeCalendarSystem('JapaneseCalendar');
     print(calendarData(calendar));
 
-    calendar.ChangeCalendarSystem('HebrewCalendar');
+    calendar.changeCalendarSystem('HebrewCalendar');
     print(calendarData(calendar));
 
-    final dateTime = calendar.GetDateTime();
+    final dateTime = calendar.getDateTime();
     print(dateTime);
 
     free(calendar.ptr);

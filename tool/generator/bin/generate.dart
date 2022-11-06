@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
@@ -8,10 +6,12 @@ import 'package:winmd/winmd.dart';
 
 import 'generate_struct_sizes_cpp.dart';
 
-bool methodMatches(String methodName, List<String> rawPrototype) =>
-    rawPrototype.join('\n').contains(' $methodName(');
+bool methodMatches(String methodName, String rawPrototype) =>
+    rawPrototype.contains(' $methodName(');
 
-String generateDocComment(Win32Function func) {
+String generateDocComment(Win32Function func, String libraryDartName) {
+  final category = func.category.isNotEmpty ? func.category : libraryDartName;
+
   final comment = StringBuffer();
 
   if (func.comment.isNotEmpty) {
@@ -23,9 +23,9 @@ String generateDocComment(Win32Function func) {
   comment
     ..writeln('/// ```c')
     ..write('/// ')
-    ..writeln(func.prototype.first.split('\\n').join('\n/// '))
+    ..writeln(func.prototype.split('\\n').join('\n/// '))
     ..writeln('/// ```')
-    ..write('/// {@category ${func.category}}');
+    ..write('/// {@category $category}');
   return comment.toString();
 }
 
@@ -89,132 +89,147 @@ void main() {
   return testsGenerated;
 }
 
-void generateFunctions(Map<String, Win32Function> functions) {
-  final methods = <Method>[];
-  final scope = MetadataStore.getWin32Scope();
-  final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
-  for (final api in apis) {
-    methods.addAll(api.methods);
-  }
+void generateDllFile(String library, List<Method> filteredMethods,
+    Iterable<Win32Function> functions) {
+  /// Methods we're trying to project
+  final libraryMethods = filteredMethods
+      .where((method) => method.module.name.toLowerCase() == library);
 
-  for (final library in dllLibraries) {
-    final buffer = StringBuffer();
+  final buffer = StringBuffer();
 
-    // API set names aren't legal Dart identifiers, so we rename them
-    final libraryDartName = library.replaceAll('-', '_');
+  // API set names aren't legal Dart identifiers, so we rename them.
+  // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+  final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
+  buffer.write('''
+  $functionsFileHeader
+  
+  final _$libraryDartName = DynamicLibrary.open('$library');\n
+  ''');
+
+  for (final method in libraryMethods) {
+    final function =
+        functions.firstWhere((f) => f.functionSymbol == method.name);
     buffer.write('''
-$functionsFileHeader
-
-final _$libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');\n
-''');
-
-    // Subset of functions that belong to the library we're projecting.
-    final filteredFunctionList = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library);
-
-    for (final function in filteredFunctionList.keys) {
-      try {
-        final method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctionList[function]!.prototype));
-        buffer.write('''
-${generateDocComment(filteredFunctionList[function]!)}
-${FunctionProjection(method, libraryDartName).toString()}
-''');
-      } on StateError {
-        continue;
-      }
-    }
-
-    File('../../lib/src/$libraryDartName.dart')
-        .writeAsStringSync(DartFormatter().format(buffer.toString()));
+  ${generateDocComment(function, libraryDartName)}
+  ${FunctionProjection(method, libraryDartName).toString()}
+  ''');
   }
+
+  File('../../lib/src/win32/$libraryDartName.g.dart')
+      .writeAsStringSync(DartFormatter().format(buffer.toString()));
 }
 
-int generateFunctionTests(Map<String, Win32Function> functions) {
-  final methods = <Method>[];
+void generateFunctions(Map<String, Win32Function> functions) {
   final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((typeDef) => typeDef.name.endsWith('Apis'));
+
+  final methods = <Method>[];
+  final filteredMethods = <Method>[];
+
+  // Create a flat list for every method in the Win32 metadata, and a set
+  // containing all the modules (DLLs) referenced.
   for (final api in apis) {
     methods.addAll(api.methods);
   }
-  var testsGenerated = 0;
-  final buffer = StringBuffer()..write('''
+
+  // Gather metadata for all the functions in the JSON file
+  for (final function in functions.values) {
+    final method = methods.where((m) => m.name == function.functionSymbol);
+    if (method.length != 1) {
+      throw Exception('${function.functionSymbol} metadata match error.');
+    }
+    filteredMethods.add(method.first);
+  }
+
+  // Gather a list of all the affected libraries
+  final dllLibraries =
+      filteredMethods.map((m) => m.module.name.toLowerCase()).toSet();
+
+  final tests = <String>[];
+
+  for (final library in dllLibraries) {
+    generateDllFile(library, filteredMethods, functions.values);
+    tests
+        .add(generateFunctionTests(library, filteredMethods, functions.values));
+  }
+
+  writeFunctionTests(tests);
+}
+
+void writeFunctionTests(Iterable<String> tests) {
+  final testFile = '''
 $testFunctionsHeader
 
 import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
-''');
-  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
-  // The .toSet() removes duplicates.
+  ${tests.join('\n')}
+}
+''';
+
+  File('../../test/api_test.dart')
+      .writeAsStringSync(DartFormatter().format(testFile));
+}
+
+String generateFunctionTests(String library, Iterable<Method> methods,
+    Iterable<Win32Function> functions) {
+  final buffer = StringBuffer();
+
   // GitHub Actions doesn't install Native Wifi API on runners, so we remove
   // wlanapi manually to prevent test failures.
-  final libraries = functions.values.map((e) => e.dllLibrary).toSet().toList()
-    ..removeWhere((library) => library == 'wlanapi');
+  if (library == 'wlanapi.dll') return '';
 
-  for (final library in libraries) {
-    // API set names aren't legal Dart identifiers, so we rename them
-    final libraryDartName = library.replaceAll('-', '_');
+  /// Methods we're trying to project
+  final filteredMethods =
+      methods.where((method) => method.module.name.toLowerCase() == library);
 
-    buffer.write("group('Test $library functions', () {\n");
+  buffer.write("group('Test ${library.split('.').first} functions', () {\n");
 
-    final filteredFunctions = Map<String, Win32Function>.of(functions)
-      ..removeWhere((key, value) => value.dllLibrary != library)
-      ..removeWhere(
-          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
+  for (final method in filteredMethods) {
+    // API set names aren't legal Dart identifiers, so we rename them.
+    // Also strip off the trailing .dll (or .cpl, .drv, etc.).
+    final libraryDartName = library.replaceAll('-', '_').split('.').first;
 
-    for (final function in filteredFunctions.keys) {
-      if (!filteredFunctions[function]!.test) continue;
+    final function =
+        functions.firstWhere((f) => f.functionSymbol == method.name);
 
-      late Method method;
-      try {
-        method = methods.firstWhere((m) =>
-            methodMatches(m.name, filteredFunctions[function]!.prototype));
-      } on StateError {
-        print("Couldn't find $function");
-        continue;
-      }
+    // Some functions (e.g. TaskDialog APIs) can only be loaded if the EXE has a
+    // manifest, so we ignore those for the purpose of test generation.
+    if (!function.test) continue;
 
-      final prototype = FunctionProjection(method, libraryDartName);
+    final projection = FunctionProjection(method, libraryDartName);
 
-      final returnFFIType =
-          TypeProjection(method.returnType.typeIdentifier).nativeType;
-      final returnDartType =
-          TypeProjection(method.returnType.typeIdentifier).dartType;
+    final returnFFIType =
+        TypeProjection(method.returnType.typeIdentifier).nativeType;
+    final returnDartType =
+        TypeProjection(method.returnType.typeIdentifier).dartType;
 
-      final minimumWindowsVersion =
-          filteredFunctions[function]!.minimumWindowsVersion;
+    final methodDartName = stripAnsiUnicodeSuffix(method.name);
 
-      final test = '''
-      test('Can instantiate $function', () {
-        final $libraryDartName = DynamicLibrary.open('${libraryFromDllName(library)}');
-        final $function = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function(${prototype.nativeParams}),
-          $returnDartType Function(${prototype.dartParams})>
+    final test = '''
+      test('Can instantiate $methodDartName', () {
+        final $libraryDartName = DynamicLibrary.open('$library');
+        final $methodDartName = $libraryDartName.lookupFunction<\n
+          $returnFFIType Function(${projection.nativeParams}),
+          $returnDartType Function(${projection.dartParams})>
           ('${method.name}');
-        expect($function, isA<Function>());
+        expect($methodDartName, isA<Function>());
       });''';
 
-      if (minimumWindowsVersion > 0) {
-        buffer.write('''
-        if (windowsBuildNumber >= $minimumWindowsVersion) {
-          $test
-        }''');
-      } else {
-        buffer.write(test);
-      }
-      buffer.writeln();
-      testsGenerated++;
+    if (function.minimumWindowsVersion > 0) {
+      buffer.writeln('''
+          if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
+            $test
+          }''');
+    } else {
+      buffer.writeln(test);
     }
-    buffer.write('});\n\n');
   }
-  buffer.write('}');
-  File('../../test/api_test.dart')
-      .writeAsStringSync(DartFormatter().format(buffer.toString()));
+  buffer.write('});\n\n');
 
-  return testsGenerated;
+  return buffer.toString();
 }
 
 void generateComApis() {
@@ -279,13 +294,13 @@ void generateWinRTApis() {
       ];
       typesToGenerate.addAll(factoryAndStaticInterfaces);
     }
-
-    typesToGenerate
-      // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
-      ..removeWhere((type) => type.isEmpty)
-      // Remove excluded WinRT types
-      ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
   }
+
+  typesToGenerate
+    // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
+    ..removeWhere((type) => type.isEmpty)
+    // Remove excluded WinRT types
+    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
 
   for (final type in typesToGenerate) {
     final typeDef = MetadataStore.getMetadataForType(type);
@@ -295,51 +310,95 @@ void generateWinRTApis() {
         : WinRTClassProjection(typeDef);
 
     final dartClass = projection.toString();
-    final classOutputFilename =
-        stripAnsiUnicodeSuffix(lastComponent(type)).toLowerCase();
-    final classOutputPath = '../../lib/src/winrt/$classOutputFilename.dart';
+    final classOutputPath =
+        '../../lib/src/winrt/${filePathFromWinRTType(type)}';
 
     try {
       final formattedDartClass = DartFormatter().format(dartClass);
-      File(classOutputPath).writeAsStringSync(formattedDartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(formattedDartClass);
     } catch (_) {
       // Better to write even on failure, so we can figure out what syntax error
       // it was that thwarted DartFormatter.
       print('Unable to format class. Writing unformatted...');
-      File(classOutputPath).writeAsStringSync(dartClass);
+      File(classOutputPath)
+        ..createSync(recursive: true)
+        ..writeAsStringSync(dartClass);
     }
   }
 }
 
-int generateWinRTStructs() {
-  final structs = windowsRuntimeStructsToGenerate;
-  final file = File('../../lib/src/winrt/structs.g.dart');
-  final structProjections = <StructProjection>[];
+void generateWinRTEnumerations() {
+  final enums = windowsRuntimeEnumsToGenerate;
+  final namespaceGroups = groupTypesByParentNamespace(enums.keys);
 
-  for (final typeName in structs.keys) {
-    final scope = MetadataStore.getScopeForType(typeName);
+  for (final namespaceGroup in namespaceGroups) {
+    final enumProjections = <EnumProjection>[];
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/enums.g.dart')
+      ..createSync(recursive: true);
 
-    final typeDefs = scope.typeDefs
-        .where((typeDef) => typeName == typeDef.name)
-        .where((typeDef) => typeDef.supportedArchitectures.x64);
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
 
-    structProjections.addAll(typeDefs.map((struct) => StructProjection(
-        struct, stripAnsiUnicodeSuffix(lastComponent(struct.name)),
-        comment: structs[struct.name]!)));
+      final EnumProjection enumProjection;
+      if (typeDef.existsAttribute('System.FlagsAttribute')) {
+        enumProjection = FlagsEnumProjection(
+            typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+            comment: enums[typeDef.name]!);
+      } else {
+        enumProjection = EnumProjection(
+            typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+            comment: enums[typeDef.name]!);
+      }
+      enumProjections.add(enumProjection);
+    }
+
+    enumProjections.sort((a, b) =>
+        lastComponent(a.enumName).compareTo(lastComponent(b.enumName)));
+
+    final winrtEnumFileImport =
+        "import '${relativePath('winrt/foundation/winrt_enum.dart', start: 'winrt/$folderPath')}';";
+    final enumsFile =
+        [winrtEnumFileHeader, winrtEnumFileImport, ...enumProjections].join();
+    file.writeAsStringSync(DartFormatter().format(enumsFile));
   }
+}
 
-  structProjections.sort((a, b) =>
-      lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+void generateWinRTStructs() {
+  final structs = windowsRuntimeStructsToGenerate;
+  final namespaceGroups = groupTypesByParentNamespace(structs.keys);
 
-  final structsFile = [winrtStructFileHeader, ...structProjections].join();
+  for (final namespaceGroup in namespaceGroups) {
+    final structProjections = <StructProjection>[];
+    final folderPath = folderFromWinRTType(namespaceGroup.types.first);
+    final file = File('../../lib/src/winrt/$folderPath/structs.g.dart')
+      ..createSync(recursive: true);
 
-  file.writeAsStringSync(DartFormatter().format(structsFile));
+    for (final type in namespaceGroup.types) {
+      final typeDef = MetadataStore.getMetadataForType(type);
+      if (typeDef == null) throw Exception("Can't find $type");
 
-  return structProjections.length;
+      final structProjection = StructProjection(
+          typeDef, stripAnsiUnicodeSuffix(lastComponent(typeDef.name)),
+          comment: structs[typeDef.name]!);
+      structProjections.add(structProjection);
+    }
+
+    structProjections.sort((a, b) =>
+        lastComponent(a.structName).compareTo(lastComponent(b.structName)));
+
+    final structsFile = [winrtStructFileHeader, ...structProjections].join();
+    file.writeAsStringSync(DartFormatter().format(structsFile));
+  }
 }
 
 void main() {
+  print('Loading and sorting functions...');
   final functionsToGenerate = loadFunctionsFromJson();
+  saveFunctionsToJson(functionsToGenerate);
 
   print('Generating struct_sizes.cpp...');
   generateStructSizeAnalyzer();
@@ -353,14 +412,14 @@ void main() {
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
 
-  print('Generating FFI function tests...');
-  generateFunctionTests(functionsToGenerate);
-
   print('Generating COM interfaces and tests...');
   generateComApis();
 
   print('Generating Windows Runtime interfaces...');
   generateWinRTApis();
+
+  print('Generating Windows Runtime enumerations...');
+  generateWinRTEnumerations();
 
   print('Generating Windows Runtime structs...');
   generateWinRTStructs();

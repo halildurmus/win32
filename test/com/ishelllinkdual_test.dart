@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shelllinkdual = IShellLinkDual(ptr);
-  test('Can instantiate IShellLinkDual.Resolve', () {
-    expect(shelllinkdual.Resolve, isA<Function>());
+  test('Can instantiate IShellLinkDual.resolve', () {
+    expect(shelllinkdual.resolve, isA<Function>());
   });
-  test('Can instantiate IShellLinkDual.GetIconLocation', () {
-    expect(shelllinkdual.GetIconLocation, isA<Function>());
+  test('Can instantiate IShellLinkDual.getIconLocation', () {
+    expect(shelllinkdual.getIconLocation, isA<Function>());
   });
-  test('Can instantiate IShellLinkDual.SetIconLocation', () {
-    expect(shelllinkdual.SetIconLocation, isA<Function>());
+  test('Can instantiate IShellLinkDual.setIconLocation', () {
+    expect(shelllinkdual.setIconLocation, isA<Function>());
   });
-  test('Can instantiate IShellLinkDual.Save', () {
-    expect(shelllinkdual.Save, isA<Function>());
+  test('Can instantiate IShellLinkDual.save', () {
+    expect(shelllinkdual.save, isA<Function>());
   });
   free(ptr);
 }

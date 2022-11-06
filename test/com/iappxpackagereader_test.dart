@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxpackagereader = IAppxPackageReader(ptr);
-  test('Can instantiate IAppxPackageReader.GetBlockMap', () {
-    expect(appxpackagereader.GetBlockMap, isA<Function>());
+  test('Can instantiate IAppxPackageReader.getBlockMap', () {
+    expect(appxpackagereader.getBlockMap, isA<Function>());
   });
-  test('Can instantiate IAppxPackageReader.GetFootprintFile', () {
-    expect(appxpackagereader.GetFootprintFile, isA<Function>());
+  test('Can instantiate IAppxPackageReader.getFootprintFile', () {
+    expect(appxpackagereader.getFootprintFile, isA<Function>());
   });
-  test('Can instantiate IAppxPackageReader.GetPayloadFile', () {
-    expect(appxpackagereader.GetPayloadFile, isA<Function>());
+  test('Can instantiate IAppxPackageReader.getPayloadFile', () {
+    expect(appxpackagereader.getPayloadFile, isA<Function>());
   });
-  test('Can instantiate IAppxPackageReader.GetPayloadFiles', () {
-    expect(appxpackagereader.GetPayloadFiles, isA<Function>());
+  test('Can instantiate IAppxPackageReader.getPayloadFiles', () {
+    expect(appxpackagereader.getPayloadFiles, isA<Function>());
   });
-  test('Can instantiate IAppxPackageReader.GetManifest', () {
-    expect(appxpackagereader.GetManifest, isA<Function>());
+  test('Can instantiate IAppxPackageReader.getManifest', () {
+    expect(appxpackagereader.getManifest, isA<Function>());
   });
   free(ptr);
 }

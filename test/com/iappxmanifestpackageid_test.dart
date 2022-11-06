@@ -22,29 +22,29 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestpackageid = IAppxManifestPackageId(ptr);
-  test('Can instantiate IAppxManifestPackageId.GetName', () {
-    expect(appxmanifestpackageid.GetName, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getName', () {
+    expect(appxmanifestpackageid.getName, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetArchitecture', () {
-    expect(appxmanifestpackageid.GetArchitecture, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getArchitecture', () {
+    expect(appxmanifestpackageid.getArchitecture, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetPublisher', () {
-    expect(appxmanifestpackageid.GetPublisher, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getPublisher', () {
+    expect(appxmanifestpackageid.getPublisher, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetVersion', () {
-    expect(appxmanifestpackageid.GetVersion, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getVersion', () {
+    expect(appxmanifestpackageid.getVersion, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetResourceId', () {
-    expect(appxmanifestpackageid.GetResourceId, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getResourceId', () {
+    expect(appxmanifestpackageid.getResourceId, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.ComparePublisher', () {
-    expect(appxmanifestpackageid.ComparePublisher, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.comparePublisher', () {
+    expect(appxmanifestpackageid.comparePublisher, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetPackageFullName', () {
-    expect(appxmanifestpackageid.GetPackageFullName, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getPackageFullName', () {
+    expect(appxmanifestpackageid.getPackageFullName, isA<Function>());
   });
-  test('Can instantiate IAppxManifestPackageId.GetPackageFamilyName', () {
-    expect(appxmanifestpackageid.GetPackageFamilyName, isA<Function>());
+  test('Can instantiate IAppxManifestPackageId.getPackageFamilyName', () {
+    expect(appxmanifestpackageid.getPackageFamilyName, isA<Function>());
   });
   free(ptr);
 }

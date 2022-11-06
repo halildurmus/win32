@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IEnumSpellingError extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IEnumSpellingError(super.ptr);
 
-  int Next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
+  factory IEnumSpellingError.from(IUnknown interface) =>
+      IEnumSpellingError(interface.toInterface(IID_IEnumSpellingError));
+
+  int next(Pointer<Pointer<COMObject>> value) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<

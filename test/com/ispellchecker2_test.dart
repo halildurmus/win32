@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spellchecker2 = ISpellChecker2(ptr);
-  test('Can instantiate ISpellChecker2.Remove', () {
-    expect(spellchecker2.Remove, isA<Function>());
+  test('Can instantiate ISpellChecker2.remove', () {
+    expect(spellchecker2.remove, isA<Function>());
   });
   free(ptr);
 }

@@ -22,86 +22,86 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final filedialogcustomize = IFileDialogCustomize(ptr);
-  test('Can instantiate IFileDialogCustomize.EnableOpenDropDown', () {
-    expect(filedialogcustomize.EnableOpenDropDown, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.enableOpenDropDown', () {
+    expect(filedialogcustomize.enableOpenDropDown, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddMenu', () {
-    expect(filedialogcustomize.AddMenu, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addMenu', () {
+    expect(filedialogcustomize.addMenu, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddPushButton', () {
-    expect(filedialogcustomize.AddPushButton, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addPushButton', () {
+    expect(filedialogcustomize.addPushButton, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddComboBox', () {
-    expect(filedialogcustomize.AddComboBox, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addComboBox', () {
+    expect(filedialogcustomize.addComboBox, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddRadioButtonList', () {
-    expect(filedialogcustomize.AddRadioButtonList, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addRadioButtonList', () {
+    expect(filedialogcustomize.addRadioButtonList, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddCheckButton', () {
-    expect(filedialogcustomize.AddCheckButton, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addCheckButton', () {
+    expect(filedialogcustomize.addCheckButton, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddEditBox', () {
-    expect(filedialogcustomize.AddEditBox, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addEditBox', () {
+    expect(filedialogcustomize.addEditBox, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddSeparator', () {
-    expect(filedialogcustomize.AddSeparator, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addSeparator', () {
+    expect(filedialogcustomize.addSeparator, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddText', () {
-    expect(filedialogcustomize.AddText, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addText', () {
+    expect(filedialogcustomize.addText, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetControlLabel', () {
-    expect(filedialogcustomize.SetControlLabel, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setControlLabel', () {
+    expect(filedialogcustomize.setControlLabel, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.GetControlState', () {
-    expect(filedialogcustomize.GetControlState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.getControlState', () {
+    expect(filedialogcustomize.getControlState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetControlState', () {
-    expect(filedialogcustomize.SetControlState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setControlState', () {
+    expect(filedialogcustomize.setControlState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.GetEditBoxText', () {
-    expect(filedialogcustomize.GetEditBoxText, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.getEditBoxText', () {
+    expect(filedialogcustomize.getEditBoxText, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetEditBoxText', () {
-    expect(filedialogcustomize.SetEditBoxText, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setEditBoxText', () {
+    expect(filedialogcustomize.setEditBoxText, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.GetCheckButtonState', () {
-    expect(filedialogcustomize.GetCheckButtonState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.getCheckButtonState', () {
+    expect(filedialogcustomize.getCheckButtonState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetCheckButtonState', () {
-    expect(filedialogcustomize.SetCheckButtonState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setCheckButtonState', () {
+    expect(filedialogcustomize.setCheckButtonState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.AddControlItem', () {
-    expect(filedialogcustomize.AddControlItem, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.addControlItem', () {
+    expect(filedialogcustomize.addControlItem, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.RemoveControlItem', () {
-    expect(filedialogcustomize.RemoveControlItem, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.removeControlItem', () {
+    expect(filedialogcustomize.removeControlItem, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.RemoveAllControlItems', () {
-    expect(filedialogcustomize.RemoveAllControlItems, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.removeAllControlItems', () {
+    expect(filedialogcustomize.removeAllControlItems, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.GetControlItemState', () {
-    expect(filedialogcustomize.GetControlItemState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.getControlItemState', () {
+    expect(filedialogcustomize.getControlItemState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetControlItemState', () {
-    expect(filedialogcustomize.SetControlItemState, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setControlItemState', () {
+    expect(filedialogcustomize.setControlItemState, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.GetSelectedControlItem', () {
-    expect(filedialogcustomize.GetSelectedControlItem, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.getSelectedControlItem', () {
+    expect(filedialogcustomize.getSelectedControlItem, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetSelectedControlItem', () {
-    expect(filedialogcustomize.SetSelectedControlItem, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setSelectedControlItem', () {
+    expect(filedialogcustomize.setSelectedControlItem, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.StartVisualGroup', () {
-    expect(filedialogcustomize.StartVisualGroup, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.startVisualGroup', () {
+    expect(filedialogcustomize.startVisualGroup, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.EndVisualGroup', () {
-    expect(filedialogcustomize.EndVisualGroup, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.endVisualGroup', () {
+    expect(filedialogcustomize.endVisualGroup, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.MakeProminent', () {
-    expect(filedialogcustomize.MakeProminent, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.makeProminent', () {
+    expect(filedialogcustomize.makeProminent, isA<Function>());
   });
-  test('Can instantiate IFileDialogCustomize.SetControlItemText', () {
-    expect(filedialogcustomize.SetControlItemText, isA<Function>());
+  test('Can instantiate IFileDialogCustomize.setControlItemText', () {
+    expect(filedialogcustomize.setControlItemText, isA<Function>());
   });
   free(ptr);
 }

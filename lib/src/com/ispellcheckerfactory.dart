@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISpellCheckerFactory extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   ISpellCheckerFactory(super.ptr);
 
-  Pointer<COMObject> get SupportedLanguages {
+  factory ISpellCheckerFactory.from(IUnknown interface) =>
+      ISpellCheckerFactory(interface.toInterface(IID_ISpellCheckerFactory));
+
+  Pointer<COMObject> get supportedLanguages {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
@@ -57,7 +59,7 @@ class ISpellCheckerFactory extends IUnknown {
     }
   }
 
-  int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
+  int isSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>
       ptr.ref.vtable
           .elementAt(4)
           .cast<
@@ -70,7 +72,7 @@ class ISpellCheckerFactory extends IUnknown {
               int Function(Pointer, Pointer<Utf16> languageTag,
                   Pointer<Int32> value)>()(ptr.ref.lpVtbl, languageTag, value);
 
-  int CreateSpellChecker(
+  int createSpellChecker(
           Pointer<Utf16> languageTag, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(5)

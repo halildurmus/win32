@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAppxFactory extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxFactory(super.ptr);
 
-  int CreatePackageWriter(
+  factory IAppxFactory.from(IUnknown interface) =>
+      IAppxFactory(interface.toInterface(IID_IAppxFactory));
+
+  int createPackageWriter(
           Pointer<COMObject> outputStream,
           Pointer<APPX_PACKAGE_SETTINGS> settings,
           Pointer<Pointer<COMObject>> packageWriter) =>
@@ -55,7 +57,7 @@ class IAppxFactory extends IUnknown {
                       Pointer<Pointer<COMObject>> packageWriter)>()(
           ptr.ref.lpVtbl, outputStream, settings, packageWriter);
 
-  int CreatePackageReader(Pointer<COMObject> inputStream,
+  int createPackageReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> packageReader) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -70,7 +72,7 @@ class IAppxFactory extends IUnknown {
                       Pointer<Pointer<COMObject>> packageReader)>()(
           ptr.ref.lpVtbl, inputStream, packageReader);
 
-  int CreateManifestReader(Pointer<COMObject> inputStream,
+  int createManifestReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> manifestReader) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -85,7 +87,7 @@ class IAppxFactory extends IUnknown {
                       Pointer<Pointer<COMObject>> manifestReader)>()(
           ptr.ref.lpVtbl, inputStream, manifestReader);
 
-  int CreateBlockMapReader(Pointer<COMObject> inputStream,
+  int createBlockMapReader(Pointer<COMObject> inputStream,
           Pointer<Pointer<COMObject>> blockMapReader) =>
       ptr.ref.vtable
               .elementAt(6)
@@ -100,7 +102,7 @@ class IAppxFactory extends IUnknown {
                       Pointer<Pointer<COMObject>> blockMapReader)>()(
           ptr.ref.lpVtbl, inputStream, blockMapReader);
 
-  int CreateValidatedBlockMapReader(
+  int createValidatedBlockMapReader(
           Pointer<COMObject> blockMapStream,
           Pointer<Utf16> signatureFileName,
           Pointer<Pointer<COMObject>> blockMapReader) =>

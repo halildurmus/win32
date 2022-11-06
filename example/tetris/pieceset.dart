@@ -1,6 +1,6 @@
 import 'dart:math' show Random;
 
-import 'package:win32/win32.dart' hide Point;
+import 'package:win32/win32.dart';
 
 import 'piece.dart';
 

@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final persist = IPersist(ptr);
-  test('Can instantiate IPersist.GetClassID', () {
-    expect(persist.GetClassID, isA<Function>());
+  test('Can instantiate IPersist.getClassID', () {
+    expect(persist.getClassID, isA<Function>());
   });
   free(ptr);
 }

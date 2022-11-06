@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestapplication = IAppxManifestApplication(ptr);
-  test('Can instantiate IAppxManifestApplication.GetStringValue', () {
-    expect(appxmanifestapplication.GetStringValue, isA<Function>());
+  test('Can instantiate IAppxManifestApplication.getStringValue', () {
+    expect(appxmanifestapplication.getStringValue, isA<Function>());
   });
-  test('Can instantiate IAppxManifestApplication.GetAppUserModelId', () {
-    expect(appxmanifestapplication.GetAppUserModelId, isA<Function>());
+  test('Can instantiate IAppxManifestApplication.getAppUserModelId', () {
+    expect(appxmanifestapplication.getAppUserModelId, isA<Function>());
   });
   free(ptr);
 }

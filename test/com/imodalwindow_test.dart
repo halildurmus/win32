@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final modalwindow = IModalWindow(ptr);
-  test('Can instantiate IModalWindow.Show', () {
-    expect(modalwindow.Show, isA<Function>());
+  test('Can instantiate IModalWindow.show', () {
+    expect(modalwindow.show, isA<Function>());
   });
   free(ptr);
 }

@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,11 @@ class IAppxManifestApplication extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestApplication(super.ptr);
 
-  int GetStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
+  factory IAppxManifestApplication.from(IUnknown interface) =>
+      IAppxManifestApplication(
+          interface.toInterface(IID_IAppxManifestApplication));
+
+  int getStringValue(Pointer<Utf16> name, Pointer<Pointer<Utf16>> value) => ptr
       .ref.vtable
       .elementAt(3)
       .cast<
@@ -45,7 +48,7 @@ class IAppxManifestApplication extends IUnknown {
           int Function(Pointer, Pointer<Utf16> name,
               Pointer<Pointer<Utf16>> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int GetAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
+  int getAppUserModelId(Pointer<Pointer<Utf16>> appUserModelId) => ptr
           .ref.vtable
           .elementAt(4)
           .cast<

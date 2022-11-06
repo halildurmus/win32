@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IShellItemImageFactory extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IShellItemImageFactory(super.ptr);
 
-  int GetImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
+  factory IShellItemImageFactory.from(IUnknown interface) =>
+      IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
+
+  int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

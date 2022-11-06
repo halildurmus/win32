@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audiorenderclient = IAudioRenderClient(ptr);
-  test('Can instantiate IAudioRenderClient.GetBuffer', () {
-    expect(audiorenderclient.GetBuffer, isA<Function>());
+  test('Can instantiate IAudioRenderClient.getBuffer', () {
+    expect(audiorenderclient.getBuffer, isA<Function>());
   });
-  test('Can instantiate IAudioRenderClient.ReleaseBuffer', () {
-    expect(audiorenderclient.ReleaseBuffer, isA<Function>());
+  test('Can instantiate IAudioRenderClient.releaseBuffer', () {
+    expect(audiorenderclient.releaseBuffer, isA<Function>());
   });
   free(ptr);
 }

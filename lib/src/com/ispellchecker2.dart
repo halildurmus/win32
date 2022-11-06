@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'ispellchecker.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpellChecker2 = '{E7ED1C71-87F7-4378-A840-C9200DACEE47}';
@@ -32,7 +32,10 @@ class ISpellChecker2 extends ISpellChecker {
   // vtable begins at 17, is 1 entries long.
   ISpellChecker2(super.ptr);
 
-  int Remove(Pointer<Utf16> word) => ptr.ref.vtable
+  factory ISpellChecker2.from(IUnknown interface) =>
+      ISpellChecker2(interface.toInterface(IID_ISpellChecker2));
+
+  int remove(Pointer<Utf16> word) => ptr.ref.vtable
       .elementAt(17)
       .cast<
           Pointer<

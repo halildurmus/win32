@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISequentialStream extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   ISequentialStream(super.ptr);
 
-  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
+  factory ISequentialStream.from(IUnknown interface) =>
+      ISequentialStream(interface.toInterface(IID_ISequentialStream));
+
+  int read(Pointer pv, int cb, Pointer<Uint32> pcbRead) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -44,7 +46,7 @@ class ISequentialStream extends IUnknown {
           int Function(Pointer, Pointer pv, int cb,
               Pointer<Uint32> pcbRead)>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr.ref.vtable
+  int write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

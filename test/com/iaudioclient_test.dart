@@ -22,41 +22,41 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audioclient = IAudioClient(ptr);
-  test('Can instantiate IAudioClient.Initialize', () {
-    expect(audioclient.Initialize, isA<Function>());
+  test('Can instantiate IAudioClient.initialize', () {
+    expect(audioclient.initialize, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetBufferSize', () {
-    expect(audioclient.GetBufferSize, isA<Function>());
+  test('Can instantiate IAudioClient.getBufferSize', () {
+    expect(audioclient.getBufferSize, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetStreamLatency', () {
-    expect(audioclient.GetStreamLatency, isA<Function>());
+  test('Can instantiate IAudioClient.getStreamLatency', () {
+    expect(audioclient.getStreamLatency, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetCurrentPadding', () {
-    expect(audioclient.GetCurrentPadding, isA<Function>());
+  test('Can instantiate IAudioClient.getCurrentPadding', () {
+    expect(audioclient.getCurrentPadding, isA<Function>());
   });
-  test('Can instantiate IAudioClient.IsFormatSupported', () {
-    expect(audioclient.IsFormatSupported, isA<Function>());
+  test('Can instantiate IAudioClient.isFormatSupported', () {
+    expect(audioclient.isFormatSupported, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetMixFormat', () {
-    expect(audioclient.GetMixFormat, isA<Function>());
+  test('Can instantiate IAudioClient.getMixFormat', () {
+    expect(audioclient.getMixFormat, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetDevicePeriod', () {
-    expect(audioclient.GetDevicePeriod, isA<Function>());
+  test('Can instantiate IAudioClient.getDevicePeriod', () {
+    expect(audioclient.getDevicePeriod, isA<Function>());
   });
-  test('Can instantiate IAudioClient.Start', () {
-    expect(audioclient.Start, isA<Function>());
+  test('Can instantiate IAudioClient.start', () {
+    expect(audioclient.start, isA<Function>());
   });
-  test('Can instantiate IAudioClient.Stop', () {
-    expect(audioclient.Stop, isA<Function>());
+  test('Can instantiate IAudioClient.stop', () {
+    expect(audioclient.stop, isA<Function>());
   });
-  test('Can instantiate IAudioClient.Reset', () {
-    expect(audioclient.Reset, isA<Function>());
+  test('Can instantiate IAudioClient.reset', () {
+    expect(audioclient.reset, isA<Function>());
   });
-  test('Can instantiate IAudioClient.SetEventHandle', () {
-    expect(audioclient.SetEventHandle, isA<Function>());
+  test('Can instantiate IAudioClient.setEventHandle', () {
+    expect(audioclient.setEventHandle, isA<Function>());
   });
-  test('Can instantiate IAudioClient.GetService', () {
-    expect(audioclient.GetService, isA<Function>());
+  test('Can instantiate IAudioClient.getService', () {
+    expect(audioclient.getService, isA<Function>());
   });
   free(ptr);
 }

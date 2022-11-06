@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileSaveDialog = '{84BCCD23-5FDE-4CDB-AEA4-AF64B83D78AB}';
@@ -32,7 +32,10 @@ class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, is 5 entries long.
   IFileSaveDialog(super.ptr);
 
-  int SetSaveAsItem(Pointer<COMObject> psi) => ptr.ref.vtable
+  factory IFileSaveDialog.from(IUnknown interface) =>
+      IFileSaveDialog(interface.toInterface(IID_IFileSaveDialog));
+
+  int setSaveAsItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -42,7 +45,7 @@ class IFileSaveDialog extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
 
-  int SetProperties(Pointer<COMObject> pStore) => ptr.ref.vtable
+  int setProperties(Pointer<COMObject> pStore) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<
@@ -52,7 +55,7 @@ class IFileSaveDialog extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<COMObject> pStore)>()(
       ptr.ref.lpVtbl, pStore);
 
-  int SetCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
+  int setCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
       ptr.ref.vtable
           .elementAt(29)
           .cast<
@@ -65,7 +68,7 @@ class IFileSaveDialog extends IFileDialog {
               int Function(Pointer, Pointer<COMObject> pList,
                   int fAppendDefault)>()(ptr.ref.lpVtbl, pList, fAppendDefault);
 
-  int GetProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.vtable
+  int getProperties(Pointer<Pointer<COMObject>> ppStore) => ptr.ref.vtable
           .elementAt(30)
           .cast<
               Pointer<
@@ -77,7 +80,7 @@ class IFileSaveDialog extends IFileDialog {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppStore)>()(
       ptr.ref.lpVtbl, ppStore);
 
-  int ApplyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
+  int applyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
           int hwnd, Pointer<COMObject> pSink) =>
       ptr.ref.vtable
               .elementAt(31)

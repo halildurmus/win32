@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumvariant = IEnumVARIANT(ptr);
-  test('Can instantiate IEnumVARIANT.Next', () {
-    expect(enumvariant.Next, isA<Function>());
+  test('Can instantiate IEnumVARIANT.next', () {
+    expect(enumvariant.next, isA<Function>());
   });
-  test('Can instantiate IEnumVARIANT.Skip', () {
-    expect(enumvariant.Skip, isA<Function>());
+  test('Can instantiate IEnumVARIANT.skip', () {
+    expect(enumvariant.skip, isA<Function>());
   });
-  test('Can instantiate IEnumVARIANT.Reset', () {
-    expect(enumvariant.Reset, isA<Function>());
+  test('Can instantiate IEnumVARIANT.reset', () {
+    expect(enumvariant.reset, isA<Function>());
   });
-  test('Can instantiate IEnumVARIANT.Clone', () {
-    expect(enumvariant.Clone, isA<Function>());
+  test('Can instantiate IEnumVARIANT.clone', () {
+    expect(enumvariant.clone, isA<Function>());
   });
   free(ptr);
 }

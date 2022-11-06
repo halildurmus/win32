@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAudioSessionManager extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioSessionManager(super.ptr);
 
-  int GetAudioSessionControl(Pointer<GUID> AudioSessionGuid, int StreamFlags,
+  factory IAudioSessionManager.from(IUnknown interface) =>
+      IAudioSessionManager(interface.toInterface(IID_IAudioSessionManager));
+
+  int getAudioSessionControl(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> SessionControl) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -53,7 +55,7 @@ class IAudioSessionManager extends IUnknown {
                       Pointer<Pointer<COMObject>> SessionControl)>()(
           ptr.ref.lpVtbl, AudioSessionGuid, StreamFlags, SessionControl);
 
-  int GetSimpleAudioVolume(Pointer<GUID> AudioSessionGuid, int StreamFlags,
+  int getSimpleAudioVolume(Pointer<GUID> AudioSessionGuid, int StreamFlags,
           Pointer<Pointer<COMObject>> AudioVolume) =>
       ptr.ref.vtable
               .elementAt(4)

@@ -8,7 +8,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 bool isAppContainer() {
   final phToken = calloc<HANDLE>();
@@ -44,8 +44,8 @@ void main() {
 
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
-  final userData = UserDataPaths.from(UserDataPaths.GetDefault());
-  final roamingAppData = userData.RoamingAppData;
+  final userData = UserDataPaths.getDefault();
+  final roamingAppData = userData.roamingAppData;
   print('RoamingAppData: $roamingAppData');
 
   winrtUninitialize();

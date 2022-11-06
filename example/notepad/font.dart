@@ -9,11 +9,11 @@ import 'package:win32/win32.dart';
 
 class NotepadFont {
   final logfont = calloc<LOGFONT>();
-  late int hFont;
+  final int hwndEdit;
+  int hFont = NULL;
 
-  NotepadFont(int hwndEdit) {
-    final hSysFont = GetStockObject(SYSTEM_FONT);
-    GetObject(hSysFont, sizeOf<LOGFONT>(), logfont);
+  NotepadFont(this.hwndEdit) {
+    GetThemeSysFont(NULL, TMT_MENUFONT, logfont);
 
     hFont = CreateFontIndirect(logfont);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
@@ -27,10 +27,12 @@ class NotepadFont {
       ..ref.Flags = CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS | CF_EFFECTS;
 
     final result = ChooseFont(cf);
+    free(cf);
+
     return result == TRUE;
   }
 
-  void notepadSetFont(int hwndEdit) {
+  void notepadSetFont() {
     int hFontNew;
     final rect = calloc<RECT>();
 

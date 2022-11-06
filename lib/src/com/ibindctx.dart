@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IBindCtx extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IBindCtx(super.ptr);
 
-  int RegisterObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
+  factory IBindCtx.from(IUnknown interface) =>
+      IBindCtx(interface.toInterface(IID_IBindCtx));
+
+  int registerObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -42,7 +44,7 @@ class IBindCtx extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> punk)>()(
       ptr.ref.lpVtbl, punk);
 
-  int RevokeObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
+  int revokeObjectBound(Pointer<COMObject> punk) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -52,13 +54,13 @@ class IBindCtx extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> punk)>()(
       ptr.ref.lpVtbl, punk);
 
-  int ReleaseBoundObjects() => ptr.ref.vtable
+  int releaseBoundObjects() => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int SetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.vtable
+  int setBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -68,7 +70,7 @@ class IBindCtx extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<BIND_OPTS> pbindopts)>()(
       ptr.ref.lpVtbl, pbindopts);
 
-  int GetBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.vtable
+  int getBindOptions(Pointer<BIND_OPTS> pbindopts) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -78,7 +80,7 @@ class IBindCtx extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<BIND_OPTS> pbindopts)>()(
       ptr.ref.lpVtbl, pbindopts);
 
-  int GetRunningObjectTable(Pointer<Pointer<COMObject>> pprot) => ptr.ref.vtable
+  int getRunningObjectTable(Pointer<Pointer<COMObject>> pprot) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -90,7 +92,7 @@ class IBindCtx extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> pprot)>()(
       ptr.ref.lpVtbl, pprot);
 
-  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer<COMObject> punk) =>
+  int registerObjectParam(Pointer<Utf16> pszKey, Pointer<COMObject> punk) =>
       ptr.ref.vtable
           .elementAt(9)
           .cast<
@@ -103,7 +105,7 @@ class IBindCtx extends IUnknown {
               int Function(Pointer, Pointer<Utf16> pszKey,
                   Pointer<COMObject> punk)>()(ptr.ref.lpVtbl, pszKey, punk);
 
-  int GetObjectParam(
+  int getObjectParam(
           Pointer<Utf16> pszKey, Pointer<Pointer<COMObject>> ppunk) =>
       ptr.ref.vtable
               .elementAt(10)
@@ -118,7 +120,7 @@ class IBindCtx extends IUnknown {
                       Pointer<Pointer<COMObject>> ppunk)>()(
           ptr.ref.lpVtbl, pszKey, ppunk);
 
-  int EnumObjectParam(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
+  int enumObjectParam(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -130,7 +132,7 @@ class IBindCtx extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
 
-  int RevokeObjectParam(Pointer<Utf16> pszKey) => ptr.ref.vtable
+  int revokeObjectParam(Pointer<Utf16> pszKey) => ptr.ref.vtable
       .elementAt(12)
       .cast<
           Pointer<

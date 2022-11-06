@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IClassFactory extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IClassFactory(super.ptr);
 
-  int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
+  factory IClassFactory.from(IUnknown interface) =>
+      IClassFactory(interface.toInterface(IID_IClassFactory));
+
+  int createInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<Pointer> ppvObject) =>
       ptr.ref.vtable
           .elementAt(3)
@@ -50,7 +52,7 @@ class IClassFactory extends IUnknown {
                   Pointer<Pointer>
                       ppvObject)>()(ptr.ref.lpVtbl, pUnkOuter, riid, ppvObject);
 
-  int LockServer(int fLock) => ptr.ref.vtable
+  int lockServer(int fLock) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fLock)>>>()
       .value

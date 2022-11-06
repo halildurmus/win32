@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final networklistmanagerevents = INetworkListManagerEvents(ptr);
-  test('Can instantiate INetworkListManagerEvents.ConnectivityChanged', () {
-    expect(networklistmanagerevents.ConnectivityChanged, isA<Function>());
+  test('Can instantiate INetworkListManagerEvents.connectivityChanged', () {
+    expect(networklistmanagerevents.connectivityChanged, isA<Function>());
   });
   free(ptr);
 }

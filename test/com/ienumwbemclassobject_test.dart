@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumwbemclassobject = IEnumWbemClassObject(ptr);
-  test('Can instantiate IEnumWbemClassObject.Reset', () {
-    expect(enumwbemclassobject.Reset, isA<Function>());
+  test('Can instantiate IEnumWbemClassObject.reset', () {
+    expect(enumwbemclassobject.reset, isA<Function>());
   });
-  test('Can instantiate IEnumWbemClassObject.Next', () {
-    expect(enumwbemclassobject.Next, isA<Function>());
+  test('Can instantiate IEnumWbemClassObject.next', () {
+    expect(enumwbemclassobject.next, isA<Function>());
   });
-  test('Can instantiate IEnumWbemClassObject.NextAsync', () {
-    expect(enumwbemclassobject.NextAsync, isA<Function>());
+  test('Can instantiate IEnumWbemClassObject.nextAsync', () {
+    expect(enumwbemclassobject.nextAsync, isA<Function>());
   });
-  test('Can instantiate IEnumWbemClassObject.Clone', () {
-    expect(enumwbemclassobject.Clone, isA<Function>());
+  test('Can instantiate IEnumWbemClassObject.clone', () {
+    expect(enumwbemclassobject.clone, isA<Function>());
   });
-  test('Can instantiate IEnumWbemClassObject.Skip', () {
-    expect(enumwbemclassobject.Skip, isA<Function>());
+  test('Can instantiate IEnumWbemClassObject.skip', () {
+    expect(enumwbemclassobject.skip, isA<Function>());
   });
   free(ptr);
 }

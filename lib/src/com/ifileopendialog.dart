@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
@@ -32,7 +32,10 @@ class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileOpenDialog(super.ptr);
 
-  int GetResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
+  factory IFileOpenDialog.from(IUnknown interface) =>
+      IFileOpenDialog(interface.toInterface(IID_IFileOpenDialog));
+
+  int getResults(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -44,7 +47,7 @@ class IFileOpenDialog extends IFileDialog {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppenum)>()(
       ptr.ref.lpVtbl, ppenum);
 
-  int GetSelectedItems(Pointer<Pointer<COMObject>> ppsai) => ptr.ref.vtable
+  int getSelectedItems(Pointer<Pointer<COMObject>> ppsai) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<

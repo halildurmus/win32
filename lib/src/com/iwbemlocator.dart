@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IWbemLocator extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemLocator(super.ptr);
 
-  int ConnectServer(
+  factory IWbemLocator.from(IUnknown interface) =>
+      IWbemLocator(interface.toInterface(IID_IWbemLocator));
+
+  int connectServer(
           Pointer<Utf16> strNetworkResource,
           Pointer<Utf16> strUser,
           Pointer<Utf16> strPassword,

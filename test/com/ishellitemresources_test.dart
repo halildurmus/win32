@@ -22,35 +22,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitemresources = IShellItemResources(ptr);
-  test('Can instantiate IShellItemResources.GetAttributes', () {
-    expect(shellitemresources.GetAttributes, isA<Function>());
+  test('Can instantiate IShellItemResources.getAttributes', () {
+    expect(shellitemresources.getAttributes, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.GetSize', () {
-    expect(shellitemresources.GetSize, isA<Function>());
+  test('Can instantiate IShellItemResources.getSize', () {
+    expect(shellitemresources.getSize, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.GetTimes', () {
-    expect(shellitemresources.GetTimes, isA<Function>());
+  test('Can instantiate IShellItemResources.getTimes', () {
+    expect(shellitemresources.getTimes, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.SetTimes', () {
-    expect(shellitemresources.SetTimes, isA<Function>());
+  test('Can instantiate IShellItemResources.setTimes', () {
+    expect(shellitemresources.setTimes, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.GetResourceDescription', () {
-    expect(shellitemresources.GetResourceDescription, isA<Function>());
+  test('Can instantiate IShellItemResources.getResourceDescription', () {
+    expect(shellitemresources.getResourceDescription, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.EnumResources', () {
-    expect(shellitemresources.EnumResources, isA<Function>());
+  test('Can instantiate IShellItemResources.enumResources', () {
+    expect(shellitemresources.enumResources, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.SupportsResource', () {
-    expect(shellitemresources.SupportsResource, isA<Function>());
+  test('Can instantiate IShellItemResources.supportsResource', () {
+    expect(shellitemresources.supportsResource, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.OpenResource', () {
-    expect(shellitemresources.OpenResource, isA<Function>());
+  test('Can instantiate IShellItemResources.openResource', () {
+    expect(shellitemresources.openResource, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.CreateResource', () {
-    expect(shellitemresources.CreateResource, isA<Function>());
+  test('Can instantiate IShellItemResources.createResource', () {
+    expect(shellitemresources.createResource, isA<Function>());
   });
-  test('Can instantiate IShellItemResources.MarkForDelete', () {
-    expect(shellitemresources.MarkForDelete, isA<Function>());
+  test('Can instantiate IShellItemResources.markForDelete', () {
+    expect(shellitemresources.markForDelete, isA<Function>());
   });
   free(ptr);
 }

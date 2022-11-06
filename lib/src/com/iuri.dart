@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IUri extends IUnknown {
   // vtable begins at 3, is 25 entries long.
   IUri(super.ptr);
 
-  int GetPropertyBSTR(
+  factory IUri.from(IUnknown interface) =>
+      IUri(interface.toInterface(IID_IUri));
+
+  int getPropertyBSTR(
           int uriProp, Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -50,7 +52,7 @@ class IUri extends IUnknown {
                       Pointer<Pointer<Utf16>> pbstrProperty, int dwFlags)>()(
           ptr.ref.lpVtbl, uriProp, pbstrProperty, dwFlags);
 
-  int GetPropertyLength(
+  int getPropertyLength(
           int uriProp, Pointer<Uint32> pcchProperty, int dwFlags) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -65,7 +67,7 @@ class IUri extends IUnknown {
                       Pointer<Uint32> pcchProperty, int dwFlags)>()(
           ptr.ref.lpVtbl, uriProp, pcchProperty, dwFlags);
 
-  int GetPropertyDWORD(int uriProp, Pointer<Uint32> pdwProperty, int dwFlags) =>
+  int getPropertyDWORD(int uriProp, Pointer<Uint32> pdwProperty, int dwFlags) =>
       ptr.ref.vtable
               .elementAt(5)
               .cast<
@@ -79,7 +81,7 @@ class IUri extends IUnknown {
                       Pointer<Uint32> pdwProperty, int dwFlags)>()(
           ptr.ref.lpVtbl, uriProp, pdwProperty, dwFlags);
 
-  int HasProperty(int uriProp, Pointer<Int32> pfHasProperty) => ptr.ref.vtable
+  int hasProperty(int uriProp, Pointer<Int32> pfHasProperty) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -92,7 +94,7 @@ class IUri extends IUnknown {
                   Pointer, int uriProp, Pointer<Int32> pfHasProperty)>()(
       ptr.ref.lpVtbl, uriProp, pfHasProperty);
 
-  int GetAbsoluteUri(Pointer<Pointer<Utf16>> pbstrAbsoluteUri) => ptr.ref.vtable
+  int getAbsoluteUri(Pointer<Pointer<Utf16>> pbstrAbsoluteUri) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -105,7 +107,7 @@ class IUri extends IUnknown {
                   Pointer, Pointer<Pointer<Utf16>> pbstrAbsoluteUri)>()(
       ptr.ref.lpVtbl, pbstrAbsoluteUri);
 
-  int GetAuthority(Pointer<Pointer<Utf16>> pbstrAuthority) => ptr.ref.vtable
+  int getAuthority(Pointer<Pointer<Utf16>> pbstrAuthority) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -117,7 +119,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrAuthority)>()(
       ptr.ref.lpVtbl, pbstrAuthority);
 
-  int GetDisplayUri(Pointer<Pointer<Utf16>> pbstrDisplayString) =>
+  int getDisplayUri(Pointer<Pointer<Utf16>> pbstrDisplayString) =>
       ptr.ref.vtable
               .elementAt(9)
               .cast<
@@ -131,7 +133,7 @@ class IUri extends IUnknown {
                       Pointer, Pointer<Pointer<Utf16>> pbstrDisplayString)>()(
           ptr.ref.lpVtbl, pbstrDisplayString);
 
-  int GetDomain(Pointer<Pointer<Utf16>> pbstrDomain) => ptr.ref.vtable
+  int getDomain(Pointer<Pointer<Utf16>> pbstrDomain) => ptr.ref.vtable
           .elementAt(10)
           .cast<
               Pointer<
@@ -143,7 +145,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrDomain)>()(
       ptr.ref.lpVtbl, pbstrDomain);
 
-  int GetExtension(Pointer<Pointer<Utf16>> pbstrExtension) => ptr.ref.vtable
+  int getExtension(Pointer<Pointer<Utf16>> pbstrExtension) => ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<
@@ -155,7 +157,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrExtension)>()(
       ptr.ref.lpVtbl, pbstrExtension);
 
-  int GetFragment(Pointer<Pointer<Utf16>> pbstrFragment) => ptr.ref.vtable
+  int getFragment(Pointer<Pointer<Utf16>> pbstrFragment) => ptr.ref.vtable
           .elementAt(12)
           .cast<
               Pointer<
@@ -167,7 +169,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrFragment)>()(
       ptr.ref.lpVtbl, pbstrFragment);
 
-  int GetHost(Pointer<Pointer<Utf16>> pbstrHost) => ptr.ref.vtable
+  int getHost(Pointer<Pointer<Utf16>> pbstrHost) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -179,7 +181,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrHost)>()(
       ptr.ref.lpVtbl, pbstrHost);
 
-  int GetPassword(Pointer<Pointer<Utf16>> pbstrPassword) => ptr.ref.vtable
+  int getPassword(Pointer<Pointer<Utf16>> pbstrPassword) => ptr.ref.vtable
           .elementAt(14)
           .cast<
               Pointer<
@@ -191,7 +193,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrPassword)>()(
       ptr.ref.lpVtbl, pbstrPassword);
 
-  int GetPath(Pointer<Pointer<Utf16>> pbstrPath) => ptr.ref.vtable
+  int getPath(Pointer<Pointer<Utf16>> pbstrPath) => ptr.ref.vtable
           .elementAt(15)
           .cast<
               Pointer<
@@ -203,7 +205,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrPath)>()(
       ptr.ref.lpVtbl, pbstrPath);
 
-  int GetPathAndQuery(Pointer<Pointer<Utf16>> pbstrPathAndQuery) =>
+  int getPathAndQuery(Pointer<Pointer<Utf16>> pbstrPathAndQuery) =>
       ptr.ref.vtable
               .elementAt(16)
               .cast<
@@ -217,7 +219,7 @@ class IUri extends IUnknown {
                       Pointer, Pointer<Pointer<Utf16>> pbstrPathAndQuery)>()(
           ptr.ref.lpVtbl, pbstrPathAndQuery);
 
-  int GetQuery(Pointer<Pointer<Utf16>> pbstrQuery) => ptr.ref.vtable
+  int getQuery(Pointer<Pointer<Utf16>> pbstrQuery) => ptr.ref.vtable
           .elementAt(17)
           .cast<
               Pointer<
@@ -229,7 +231,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrQuery)>()(
       ptr.ref.lpVtbl, pbstrQuery);
 
-  int GetRawUri(Pointer<Pointer<Utf16>> pbstrRawUri) => ptr.ref.vtable
+  int getRawUri(Pointer<Pointer<Utf16>> pbstrRawUri) => ptr.ref.vtable
           .elementAt(18)
           .cast<
               Pointer<
@@ -241,7 +243,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrRawUri)>()(
       ptr.ref.lpVtbl, pbstrRawUri);
 
-  int GetSchemeName(Pointer<Pointer<Utf16>> pbstrSchemeName) => ptr.ref.vtable
+  int getSchemeName(Pointer<Pointer<Utf16>> pbstrSchemeName) => ptr.ref.vtable
           .elementAt(19)
           .cast<
               Pointer<
@@ -253,7 +255,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrSchemeName)>()(
       ptr.ref.lpVtbl, pbstrSchemeName);
 
-  int GetUserInfo(Pointer<Pointer<Utf16>> pbstrUserInfo) => ptr.ref.vtable
+  int getUserInfo(Pointer<Pointer<Utf16>> pbstrUserInfo) => ptr.ref.vtable
           .elementAt(20)
           .cast<
               Pointer<
@@ -265,7 +267,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrUserInfo)>()(
       ptr.ref.lpVtbl, pbstrUserInfo);
 
-  int GetUserName(Pointer<Pointer<Utf16>> pbstrUserName) => ptr.ref.vtable
+  int getUserName(Pointer<Pointer<Utf16>> pbstrUserName) => ptr.ref.vtable
           .elementAt(21)
           .cast<
               Pointer<
@@ -277,7 +279,7 @@ class IUri extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbstrUserName)>()(
       ptr.ref.lpVtbl, pbstrUserName);
 
-  int GetHostType(Pointer<Uint32> pdwHostType) => ptr.ref.vtable
+  int getHostType(Pointer<Uint32> pdwHostType) => ptr.ref.vtable
           .elementAt(22)
           .cast<
               Pointer<
@@ -287,7 +289,7 @@ class IUri extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwHostType)>()(
       ptr.ref.lpVtbl, pdwHostType);
 
-  int GetPort(Pointer<Uint32> pdwPort) => ptr.ref.vtable
+  int getPort(Pointer<Uint32> pdwPort) => ptr.ref.vtable
           .elementAt(23)
           .cast<
               Pointer<
@@ -297,7 +299,7 @@ class IUri extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwPort)>()(
       ptr.ref.lpVtbl, pdwPort);
 
-  int GetScheme(Pointer<Uint32> pdwScheme) => ptr.ref.vtable
+  int getScheme(Pointer<Uint32> pdwScheme) => ptr.ref.vtable
           .elementAt(24)
           .cast<
               Pointer<
@@ -307,7 +309,7 @@ class IUri extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwScheme)>()(
       ptr.ref.lpVtbl, pdwScheme);
 
-  int GetZone(Pointer<Uint32> pdwZone) => ptr.ref.vtable
+  int getZone(Pointer<Uint32> pdwZone) => ptr.ref.vtable
           .elementAt(25)
           .cast<
               Pointer<
@@ -317,7 +319,7 @@ class IUri extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwZone)>()(
       ptr.ref.lpVtbl, pdwZone);
 
-  int GetProperties(Pointer<Uint32> pdwFlags) => ptr.ref.vtable
+  int getProperties(Pointer<Uint32> pdwFlags) => ptr.ref.vtable
           .elementAt(26)
           .cast<
               Pointer<
@@ -327,7 +329,7 @@ class IUri extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwFlags)>()(
       ptr.ref.lpVtbl, pdwFlags);
 
-  int IsEqual(Pointer<COMObject> pUri, Pointer<Int32> pfEqual) => ptr.ref.vtable
+  int isEqual(Pointer<COMObject> pUri, Pointer<Int32> pfEqual) => ptr.ref.vtable
       .elementAt(27)
       .cast<
           Pointer<

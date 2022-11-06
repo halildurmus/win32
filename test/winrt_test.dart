@@ -2,7 +2,7 @@
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
@@ -45,7 +45,7 @@ void main() {
 
       final calendar = Calendar();
 
-      expect(calendar.Year, greaterThanOrEqualTo(2020));
+      expect(calendar.year, greaterThanOrEqualTo(2020));
       free(calendar.ptr);
       winrtUninitialize();
     });

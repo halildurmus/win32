@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAppxPackageReader extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAppxPackageReader(super.ptr);
 
-  int GetBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
+  factory IAppxPackageReader.from(IUnknown interface) =>
+      IAppxPackageReader(interface.toInterface(IID_IAppxPackageReader));
+
+  int getBlockMap(Pointer<Pointer<COMObject>> blockMapReader) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -45,7 +47,7 @@ class IAppxPackageReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> blockMapReader)>()(
       ptr.ref.lpVtbl, blockMapReader);
 
-  int GetFootprintFile(int type, Pointer<Pointer<COMObject>> file) => ptr
+  int getFootprintFile(int type, Pointer<Pointer<COMObject>> file) => ptr
       .ref.vtable
       .elementAt(4)
       .cast<
@@ -58,7 +60,7 @@ class IAppxPackageReader extends IUnknown {
           int Function(Pointer, int type,
               Pointer<Pointer<COMObject>> file)>()(ptr.ref.lpVtbl, type, file);
 
-  int GetPayloadFile(
+  int getPayloadFile(
           Pointer<Utf16> fileName, Pointer<Pointer<COMObject>> file) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -73,7 +75,7 @@ class IAppxPackageReader extends IUnknown {
                       Pointer<Pointer<COMObject>> file)>()(
           ptr.ref.lpVtbl, fileName, file);
 
-  int GetPayloadFiles(Pointer<Pointer<COMObject>> filesEnumerator) => ptr
+  int getPayloadFiles(Pointer<Pointer<COMObject>> filesEnumerator) => ptr
           .ref.vtable
           .elementAt(6)
           .cast<
@@ -87,7 +89,7 @@ class IAppxPackageReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> filesEnumerator)>()(
       ptr.ref.lpVtbl, filesEnumerator);
 
-  int GetManifest(Pointer<Pointer<COMObject>> manifestReader) => ptr.ref.vtable
+  int getManifest(Pointer<Pointer<COMObject>> manifestReader) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<

@@ -8,21 +8,17 @@
 
 // ignore_for_file: camel_case_extensions, camel_case_types
 // ignore_for_file: directives_ordering, unnecessary_getters_setters
-// ignore_for_file: unused_field, unused_import
+// ignore_for_file: unused_field
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/idispatch.dart';
-import 'com/iunknown.dart';
 import 'combase.dart';
 import 'guid.dart';
-import 'oleaut32.dart';
-import 'structs.dart';
+import 'variant.dart';
 
 /// Defines an accelerator key used in an accelerator table.
 ///
@@ -98,6 +94,65 @@ class ADDJOB_INFO_1 extends Struct {
 
   @Uint32()
   external int JobId;
+}
+
+/// The addrinfoW structure is used by the GetAddrInfoW function to hold
+/// host address information.
+///
+/// {@category Struct}
+class ADDRINFO extends Struct {
+  @Int32()
+  external int ai_flags;
+
+  @Int32()
+  external int ai_family;
+
+  @Int32()
+  external int ai_socktype;
+
+  @Int32()
+  external int ai_protocol;
+
+  @IntPtr()
+  external int ai_addrlen;
+
+  external Pointer<Utf16> ai_canonname;
+
+  external Pointer<SOCKADDR> ai_addr;
+
+  external Pointer<ADDRINFO> ai_next;
+}
+
+/// Contains status information for the application-switching (ALT+TAB)
+/// window.
+///
+/// {@category Struct}
+class ALTTABINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Int32()
+  external int cItems;
+
+  @Int32()
+  external int cColumns;
+
+  @Int32()
+  external int cRows;
+
+  @Int32()
+  external int iColFocus;
+
+  @Int32()
+  external int iRowFocus;
+
+  @Int32()
+  external int cxItem;
+
+  @Int32()
+  external int cyItem;
+
+  external POINT ptStart;
 }
 
 /// Represents package settings used to create a package.
@@ -219,7 +274,7 @@ class BITMAPINFOHEADER extends Struct {
   @Uint16()
   external int biBitCount;
 
-  @Uint32()
+  @Int32()
   external int biCompression;
 
   @Uint32()
@@ -1257,6 +1312,28 @@ class COORD extends Struct {
   external int Y;
 }
 
+/// Contains optional extended parameters for CreateFile2.
+///
+/// {@category Struct}
+class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
+  @Uint32()
+  external int dwSize;
+
+  @Uint32()
+  external int dwFileAttributes;
+
+  @Uint32()
+  external int dwFileFlags;
+
+  @Uint32()
+  external int dwSecurityQosFlags;
+
+  external Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes;
+
+  @IntPtr()
+  external int hTemplateFile;
+}
+
 /// Defines the initialization parameters passed to the window procedure of
 /// an application. These members are identical to the parameters of the
 /// CreateWindowEx function.
@@ -1346,6 +1423,35 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external int ValueSize;
 
   external Pointer<Uint8> Value;
+}
+
+/// The CRYPTPROTECT_PROMPTSTRUCT structure provides the text of a prompt
+/// and information about when and where that prompt is to be displayed when
+/// using the CryptProtectData and CryptUnprotectData functions.
+///
+/// {@category Struct}
+class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwPromptFlags;
+
+  @IntPtr()
+  external int hwndApp;
+
+  external Pointer<Utf16> szPrompt;
+}
+
+/// Contains an arbitrary array of bytes. The structure definition includes
+/// aliases appropriate to the various functions that use it.
+///
+/// {@category Struct}
+class CRYPT_INTEGER_BLOB extends Struct {
+  @Uint32()
+  external int cbData;
+
+  external Pointer<Uint8> pbData;
 }
 
 /// Contains global cursor information.
@@ -1650,19 +1756,19 @@ class DEVMODE extends Struct {
 
   external _DEVMODEW__Anonymous1_e__Union Anonymous1;
 
-  @Int16()
+  @Uint16()
   external int dmColor;
 
-  @Int16()
+  @Uint16()
   external int dmDuplex;
 
   @Int16()
   external int dmYResolution;
 
-  @Int16()
+  @Uint16()
   external int dmTTOption;
 
-  @Int16()
+  @Uint16()
   external int dmCollate;
 
   @Array(32)
@@ -2355,6 +2461,20 @@ class EXCEPINFO extends Struct {
   external int scode;
 }
 
+/// The fd_set structure is used by various Windows Sockets functions and
+/// service providers, such as the select function, to place sockets into a
+/// set for various purposes, such as testing a given socket for readability
+/// using the readfds parameter of the select function.
+///
+/// {@category Struct}
+class FD_SET extends Struct {
+  @Uint32()
+  external int fd_count;
+
+  @Array(64)
+  external Array<IntPtr> fd_array;
+}
+
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -2365,6 +2485,16 @@ class FILETIME extends Struct {
 
   @Uint32()
   external int dwHighDateTime;
+}
+
+/// Union that contains a 64-bit value that points to a page of data.
+///
+/// {@category Struct}
+class FILE_SEGMENT_ELEMENT extends Union {
+  external Pointer Buffer;
+
+  @Uint64()
+  external int Alignment;
 }
 
 /// Contains information that the FindText and ReplaceText functions use to
@@ -2402,6 +2532,15 @@ class FINDREPLACE extends Struct {
   external Pointer<NativeFunction<FRHookProc>> lpfnHook;
 
   external Pointer<Utf16> lpTemplateName;
+}
+
+/// Describes a focus event in a console INPUT_RECORD structure. These
+/// events are used internally and should be ignored.
+///
+/// {@category Struct}
+class FOCUS_EVENT_RECORD extends Struct {
+  @Int32()
+  external int bSetFocus;
 }
 
 /// Describes a function.
@@ -2554,6 +2693,29 @@ class HARDWAREINPUT extends Struct {
   external int wParamH;
 }
 
+/// The hostent structure is used by functions to store information about a
+/// given host, such as host name, IPv4 address, and so forth. An
+/// application should never attempt to modify this structure or to free any
+/// of its components. Furthermore, only one copy of the hostent structure
+/// is allocated per thread, and an application should therefore copy any
+/// information that it needs before issuing any other Windows Sockets API
+/// calls.
+///
+/// {@category Struct}
+class HOSTENT extends Struct {
+  external Pointer<Utf8> h_name;
+
+  external Pointer<Pointer<Int8>> h_aliases;
+
+  @Int16()
+  external int h_addrtype;
+
+  @Int16()
+  external int h_length;
+
+  external Pointer<Pointer<Int8>> h_addr_list;
+}
+
 /// Contains information about an icon or a cursor.
 ///
 /// {@category Struct}
@@ -2694,6 +2856,182 @@ extension INPUT_Extension on INPUT {
   set hi(HARDWAREINPUT value) => this.Anonymous.hi = value;
 }
 
+/// Describes an input event in the console input buffer. These records can
+/// be read from the input buffer by using the ReadConsoleInput or
+/// PeekConsoleInput function, or written to the input buffer by using the
+/// WriteConsoleInput function.
+///
+/// {@category Struct}
+class INPUT_RECORD extends Struct {
+  @Uint16()
+  external int EventType;
+
+  external _INPUT_RECORD__Event_e__Union Event;
+}
+
+/// {@category Struct}
+class _INPUT_RECORD__Event_e__Union extends Union {
+  external KEY_EVENT_RECORD KeyEvent;
+
+  external MOUSE_EVENT_RECORD MouseEvent;
+
+  external WINDOW_BUFFER_SIZE_RECORD WindowBufferSizeEvent;
+
+  external MENU_EVENT_RECORD MenuEvent;
+
+  external FOCUS_EVENT_RECORD FocusEvent;
+}
+
+extension INPUT_RECORD_Extension on INPUT_RECORD {
+  KEY_EVENT_RECORD get KeyEvent => this.Event.KeyEvent;
+  set KeyEvent(KEY_EVENT_RECORD value) => this.Event.KeyEvent = value;
+
+  MOUSE_EVENT_RECORD get MouseEvent => this.Event.MouseEvent;
+  set MouseEvent(MOUSE_EVENT_RECORD value) => this.Event.MouseEvent = value;
+
+  WINDOW_BUFFER_SIZE_RECORD get WindowBufferSizeEvent =>
+      this.Event.WindowBufferSizeEvent;
+  set WindowBufferSizeEvent(WINDOW_BUFFER_SIZE_RECORD value) =>
+      this.Event.WindowBufferSizeEvent = value;
+
+  MENU_EVENT_RECORD get MenuEvent => this.Event.MenuEvent;
+  set MenuEvent(MENU_EVENT_RECORD value) => this.Event.MenuEvent = value;
+
+  FOCUS_EVENT_RECORD get FocusEvent => this.Event.FocusEvent;
+  set FocusEvent(FOCUS_EVENT_RECORD value) => this.Event.FocusEvent = value;
+}
+
+/// Defines the matrix that represents a transform on a message consumer.
+/// This matrix can be used to transform pointer input data from client
+/// coordinates to screen coordinates, while the inverse can be used to
+/// transform pointer input data from screen coordinates to client
+/// coordinates.
+///
+/// {@category Struct}
+class INPUT_TRANSFORM extends Struct {
+  external _INPUT_TRANSFORM__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _INPUT_TRANSFORM__Anonymous_e__Union extends Union {
+  external _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
+
+  @Array(16)
+  external Array<Float> m;
+}
+
+/// {@category Struct}
+class _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct extends Struct {
+  @Float()
+  external double x11;
+
+  @Float()
+  external double x12;
+
+  @Float()
+  external double x13;
+
+  @Float()
+  external double x14;
+
+  @Float()
+  external double x21;
+
+  @Float()
+  external double x22;
+
+  @Float()
+  external double x23;
+
+  @Float()
+  external double x24;
+
+  @Float()
+  external double x31;
+
+  @Float()
+  external double x32;
+
+  @Float()
+  external double x33;
+
+  @Float()
+  external double x34;
+
+  @Float()
+  external double x41;
+
+  @Float()
+  external double x42;
+
+  @Float()
+  external double x43;
+
+  @Float()
+  external double x44;
+}
+
+extension INPUT_TRANSFORM__Anonymous_e__Union_Extension on INPUT_TRANSFORM {
+  double get x11 => this.Anonymous.Anonymous.x11;
+  set x11(double value) => this.Anonymous.Anonymous.x11 = value;
+
+  double get x12 => this.Anonymous.Anonymous.x12;
+  set x12(double value) => this.Anonymous.Anonymous.x12 = value;
+
+  double get x13 => this.Anonymous.Anonymous.x13;
+  set x13(double value) => this.Anonymous.Anonymous.x13 = value;
+
+  double get x14 => this.Anonymous.Anonymous.x14;
+  set x14(double value) => this.Anonymous.Anonymous.x14 = value;
+
+  double get x21 => this.Anonymous.Anonymous.x21;
+  set x21(double value) => this.Anonymous.Anonymous.x21 = value;
+
+  double get x22 => this.Anonymous.Anonymous.x22;
+  set x22(double value) => this.Anonymous.Anonymous.x22 = value;
+
+  double get x23 => this.Anonymous.Anonymous.x23;
+  set x23(double value) => this.Anonymous.Anonymous.x23 = value;
+
+  double get x24 => this.Anonymous.Anonymous.x24;
+  set x24(double value) => this.Anonymous.Anonymous.x24 = value;
+
+  double get x31 => this.Anonymous.Anonymous.x31;
+  set x31(double value) => this.Anonymous.Anonymous.x31 = value;
+
+  double get x32 => this.Anonymous.Anonymous.x32;
+  set x32(double value) => this.Anonymous.Anonymous.x32 = value;
+
+  double get x33 => this.Anonymous.Anonymous.x33;
+  set x33(double value) => this.Anonymous.Anonymous.x33 = value;
+
+  double get x34 => this.Anonymous.Anonymous.x34;
+  set x34(double value) => this.Anonymous.Anonymous.x34 = value;
+
+  double get x41 => this.Anonymous.Anonymous.x41;
+  set x41(double value) => this.Anonymous.Anonymous.x41 = value;
+
+  double get x42 => this.Anonymous.Anonymous.x42;
+  set x42(double value) => this.Anonymous.Anonymous.x42 = value;
+
+  double get x43 => this.Anonymous.Anonymous.x43;
+  set x43(double value) => this.Anonymous.Anonymous.x43 = value;
+
+  double get x44 => this.Anonymous.Anonymous.x44;
+  set x44(double value) => this.Anonymous.Anonymous.x44 = value;
+}
+
+extension INPUT_TRANSFORM_Extension on INPUT_TRANSFORM {
+  _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct get Anonymous =>
+      this.Anonymous.Anonymous;
+  set Anonymous(
+          _INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct value) =>
+      this.Anonymous.Anonymous = value;
+
+  Array<Float> get m => this.Anonymous.m;
+  set m(Array<Float> value) => this.Anonymous.m = value;
+}
+
 /// The IN_ADDR structure represents an IPv4 Internet address.
 ///
 /// {@category Struct}
@@ -2768,6 +3106,680 @@ extension IN_ADDR_Extension on IN_ADDR {
 
   int get S_addr => this.S_un.S_addr;
   set S_addr(int value) => this.S_un.S_addr = value;
+}
+
+/// The IP_ADAPTER_ADDRESSES structure is the header node for a linked list
+/// of addresses for a particular adapter. This structure can simultaneously
+/// be used as part of a linked list of IP_ADAPTER_ADDRESSES structures.
+///
+/// {@category Struct}
+class IP_ADAPTER_ADDRESSES_LH extends Struct {
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union Anonymous1;
+
+  external Pointer<IP_ADAPTER_ADDRESSES_LH> Next;
+
+  external Pointer<Utf8> AdapterName;
+
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> FirstUnicastAddress;
+
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> FirstAnycastAddress;
+
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> FirstMulticastAddress;
+
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> FirstDnsServerAddress;
+
+  external Pointer<Utf16> DnsSuffix;
+
+  external Pointer<Utf16> Description;
+
+  external Pointer<Utf16> FriendlyName;
+
+  @Array(8)
+  external Array<Uint8> PhysicalAddress;
+
+  @Uint32()
+  external int PhysicalAddressLength;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union Anonymous2;
+
+  @Uint32()
+  external int Mtu;
+
+  @Uint32()
+  external int IfType;
+
+  @Int32()
+  external int OperStatus;
+
+  @Uint32()
+  external int Ipv6IfIndex;
+
+  @Array(16)
+  external Array<Uint32> ZoneIndices;
+
+  external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
+
+  @Uint64()
+  external int TransmitLinkSpeed;
+
+  @Uint64()
+  external int ReceiveLinkSpeed;
+
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> FirstWinsServerAddress;
+
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> FirstGatewayAddress;
+
+  @Uint32()
+  external int Ipv4Metric;
+
+  @Uint32()
+  external int Ipv6Metric;
+
+  external NET_LUID_LH Luid;
+
+  external SOCKET_ADDRESS Dhcpv4Server;
+
+  @Uint32()
+  external int CompartmentId;
+
+  external GUID NetworkGuid;
+
+  @Int32()
+  external int ConnectionType;
+
+  @Int32()
+  external int TunnelType;
+
+  external SOCKET_ADDRESS Dhcpv6Server;
+
+  @Array(130)
+  external Array<Uint8> Dhcpv6ClientDuid;
+
+  @Uint32()
+  external int Dhcpv6ClientDuidLength;
+
+  @Uint32()
+  external int Dhcpv6Iaid;
+
+  external Pointer<IP_ADAPTER_DNS_SUFFIX> FirstDnsSuffix;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int IfIndex;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union_Extension
+    on IP_ADAPTER_ADDRESSES_LH {
+  int get Length => this.Anonymous1.Anonymous.Length;
+  set Length(int value) => this.Anonymous1.Anonymous.Length = value;
+
+  int get IfIndex => this.Anonymous1.Anonymous.IfIndex;
+  set IfIndex(int value) => this.Anonymous1.Anonymous.IfIndex = value;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH_Extension on IP_ADAPTER_ADDRESSES_LH {
+  int get Alignment => this.Anonymous1.Alignment;
+  set Alignment(int value) => this.Anonymous1.Alignment = value;
+
+  _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous1.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ADDRESSES_LH__Anonymous1_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous1.Anonymous = value;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union extends Union {
+  @Uint32()
+  external int Flags;
+
+  external _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int bitfield;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union_Extension
+    on IP_ADAPTER_ADDRESSES_LH {
+  int get bitfield => this.Anonymous2.Anonymous.bitfield;
+  set bitfield(int value) => this.Anonymous2.Anonymous.bitfield = value;
+}
+
+extension IP_ADAPTER_ADDRESSES_LH_Extension_1 on IP_ADAPTER_ADDRESSES_LH {
+  int get Flags => this.Anonymous2.Flags;
+  set Flags(int value) => this.Anonymous2.Flags = value;
+
+  _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous2.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ADDRESSES_LH__Anonymous2_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous2.Anonymous = value;
+}
+
+/// The IP_ADAPTER_ANYCAST_ADDRESS structure stores a single anycast IP
+/// address in a linked list of addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_ANYCAST_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_ANYCAST_ADDRESS_XP_Extension
+    on IP_ADAPTER_ANYCAST_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_ANYCAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_DNS_SERVER_ADDRESS structure stores a single DNS server
+/// address in a linked list of DNS server addresses for a particular
+/// adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Extension
+    on IP_ADAPTER_DNS_SERVER_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_DNS_SERVER_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_DNS_SUFFIX structure stores a DNS suffix in a linked list
+/// of DNS suffixes for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_DNS_SUFFIX extends Struct {
+  external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
+
+  @Array(256)
+  external Array<Uint16> _String_;
+
+  String get String_ {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      if (_String_[i] == 0x00) break;
+      charCodes.add(_String_[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set String_(String value) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _String_[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The IP_ADAPTER_GATEWAY_ADDRESS structure stores a single gateway address
+/// in a linked list of gateway addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_GATEWAY_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_GATEWAY_ADDRESS_LH_Extension
+    on IP_ADAPTER_GATEWAY_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_GATEWAY_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_INDEX_MAP structure stores the interface index associated
+/// with a network adapter with IPv4 enabled together with the name of the
+/// network adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_INDEX_MAP extends Struct {
+  @Uint32()
+  external int Index;
+
+  @Array(128)
+  external Array<Uint16> _Name;
+
+  String get Name {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      if (_Name[i] == 0x00) break;
+      charCodes.add(_Name[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set Name(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _Name[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// The IP_ADAPTER_MULTICAST_ADDRESS structure stores a single multicast
+/// address in a linked-list of addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
+  external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_MULTICAST_ADDRESS_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_MULTICAST_ADDRESS_XP_Extension
+    on IP_ADAPTER_MULTICAST_ADDRESS_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_MULTICAST_ADDRESS_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_PREFIX structure stores an IP address prefix.
+///
+/// {@category Struct}
+class IP_ADAPTER_PREFIX_XP extends Struct {
+  external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_PREFIX_XP> Next;
+
+  external SOCKET_ADDRESS Address;
+
+  @Uint32()
+  external int PrefixLength;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_PREFIX_XP__Anonymous_e__Union_Extension
+    on IP_ADAPTER_PREFIX_XP {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_PREFIX_XP_Extension on IP_ADAPTER_PREFIX_XP {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_PREFIX_XP__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_UNICAST_ADDRESS structure stores a single unicast IP
+/// address in a linked list of IP addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+
+  @Int32()
+  external int PrefixOrigin;
+
+  @Int32()
+  external int SuffixOrigin;
+
+  @Int32()
+  external int DadState;
+
+  @Uint32()
+  external int ValidLifetime;
+
+  @Uint32()
+  external int PreferredLifetime;
+
+  @Uint32()
+  external int LeaseLifetime;
+
+  @Uint8()
+  external int OnLinkPrefixLength;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Flags;
+}
+
+extension IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_UNICAST_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Flags => this.Anonymous.Anonymous.Flags;
+  set Flags(int value) => this.Anonymous.Anonymous.Flags = value;
+}
+
+extension IP_ADAPTER_UNICAST_ADDRESS_LH_Extension
+    on IP_ADAPTER_UNICAST_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_UNICAST_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADAPTER_WINS_SERVER_ADDRESS structure stores a single Windows
+/// Internet Name Service (WINS) server address in a linked list of WINS
+/// server addresses for a particular adapter.
+///
+/// {@category Struct}
+class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
+  external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union Anonymous;
+
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> Next;
+
+  external SOCKET_ADDRESS Address;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union extends Union {
+  @Uint64()
+  external int Alignment;
+
+  external _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int Length;
+
+  @Uint32()
+  external int Reserved;
+}
+
+extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union_Extension
+    on IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
+  int get Length => this.Anonymous.Anonymous.Length;
+  set Length(int value) => this.Anonymous.Anonymous.Length = value;
+
+  int get Reserved => this.Anonymous.Anonymous.Reserved;
+  set Reserved(int value) => this.Anonymous.Anonymous.Reserved = value;
+}
+
+extension IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Extension
+    on IP_ADAPTER_WINS_SERVER_ADDRESS_LH {
+  int get Alignment => this.Anonymous.Alignment;
+  set Alignment(int value) => this.Anonymous.Alignment = value;
+
+  _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _IP_ADAPTER_WINS_SERVER_ADDRESS_LH__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The IP_ADDRESS_STRING structure stores an IPv4 address in dotted decimal
+/// notation. The IP_ADDRESS_STRING structure definition is also the type
+/// definition for the IP_MASK_STRING structure.
+///
+/// {@category Struct}
+class IP_ADDRESS_STRING extends Struct {
+  @Array(16)
+  external Array<Uint8> String_;
+}
+
+/// The IP_ADDR_STRING structure represents a node in a linked-list of IPv4
+/// addresses.
+///
+/// {@category Struct}
+class IP_ADDR_STRING extends Struct {
+  external Pointer<IP_ADDR_STRING> Next;
+
+  external IP_ADDRESS_STRING IpAddress;
+
+  external IP_ADDRESS_STRING IpMask;
+
+  @Uint32()
+  external int Context;
+}
+
+/// The IP_INTERFACE_INFO structure contains a list of the network interface
+/// adapters with IPv4 enabled on the local system.
+///
+/// {@category Struct}
+class IP_INTERFACE_INFO extends Struct {
+  @Int32()
+  external int NumAdapters;
+
+  @Array(1)
+  external Array<IP_ADAPTER_INDEX_MAP> Adapter;
+}
+
+/// The IP_PER_ADAPTER_INFO structure contains information specific to a
+/// particular adapter.
+///
+/// {@category Struct}
+class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
+  @Uint32()
+  external int AutoconfigEnabled;
+
+  @Uint32()
+  external int AutoconfigActive;
+
+  external Pointer<IP_ADDR_STRING> CurrentDnsServer;
+
+  external IP_ADDR_STRING DnsServerList;
 }
 
 /// Contains a list of item identifiers.
@@ -2856,6 +3868,45 @@ class KEYBDINPUT extends Struct {
 
   @IntPtr()
   external int dwExtraInfo;
+}
+
+/// Describes a keyboard input event in a console INPUT_RECORD structure.
+///
+/// {@category Struct}
+class KEY_EVENT_RECORD extends Struct {
+  @Int32()
+  external int bKeyDown;
+
+  @Uint16()
+  external int wRepeatCount;
+
+  @Uint16()
+  external int wVirtualKeyCode;
+
+  @Uint16()
+  external int wVirtualScanCode;
+
+  external _KEY_EVENT_RECORD__uChar_e__Union uChar;
+
+  @Uint32()
+  external int dwControlKeyState;
+}
+
+/// {@category Struct}
+class _KEY_EVENT_RECORD__uChar_e__Union extends Union {
+  @Uint16()
+  external int UnicodeChar;
+
+  @Uint8()
+  external int AsciiChar;
+}
+
+extension KEY_EVENT_RECORD_Extension on KEY_EVENT_RECORD {
+  int get UnicodeChar => this.uChar.UnicodeChar;
+  set UnicodeChar(int value) => this.uChar.UnicodeChar = value;
+
+  int get AsciiChar => this.uChar.AsciiChar;
+  set AsciiChar(int value) => this.uChar.AsciiChar = value;
 }
 
 /// Defines the specifics of a known folder.
@@ -3261,6 +4312,15 @@ class MENUITEMTEMPLATEHEADER extends Struct {
 
   @Uint16()
   external int offset;
+}
+
+/// Describes a menu event in a console INPUT_RECORD structure. These events
+/// are used internally and should be ignored.
+///
+/// {@category Struct}
+class MENU_EVENT_RECORD extends Struct {
+  @Uint32()
+  external int dwCommandId;
 }
 
 /// Defines the metafile picture format used for exchanging metafile data
@@ -3749,7 +4809,7 @@ class MOUSEHOOKSTRUCT extends Struct {
 ///
 /// {@category Struct}
 class MOUSEHOOKSTRUCTEX extends Struct {
-  external MOUSEHOOKSTRUCT AnonymousBase_winuser_L1166_C46;
+  external MOUSEHOOKSTRUCT Base;
 
   @Uint32()
   external int mouseData;
@@ -3793,6 +4853,22 @@ class MOUSEMOVEPOINT extends Struct {
 
   @IntPtr()
   external int dwExtraInfo;
+}
+
+/// Describes a mouse input event in a console INPUT_RECORD structure.
+///
+/// {@category Struct}
+class MOUSE_EVENT_RECORD extends Struct {
+  external COORD dwMousePosition;
+
+  @Uint32()
+  external int dwButtonState;
+
+  @Uint32()
+  external int dwControlKeyState;
+
+  @Uint32()
+  external int dwEventFlags;
 }
 
 /// Contains message information from a thread's message queue.
@@ -3861,6 +4937,28 @@ class NDIS_OBJECT_HEADER extends Struct {
 
   @Uint16()
   external int Size;
+}
+
+/// The NET_LUID union is the locally unique identifier (LUID) for a network
+/// interface.
+///
+/// {@category Struct}
+class NET_LUID_LH extends Union {
+  @Uint64()
+  external int Value;
+
+  external _NET_LUID_LH__Info_e__Struct Info;
+}
+
+/// {@category Struct}
+class _NET_LUID_LH__Info_e__Struct extends Struct {
+  @Uint64()
+  external int bitfield;
+}
+
+extension NET_LUID_LH_Extension on NET_LUID_LH {
+  int get bitfield => this.Info.bitfield;
+  set bitfield(int value) => this.Info.bitfield = value;
 }
 
 /// The NEWTEXTMETRIC structure contains data that describes a physical
@@ -4492,7 +5590,7 @@ class OVERLAPPED extends Struct {
 class _OVERLAPPED__Anonymous_e__Union extends Union {
   external _OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct Anonymous;
 
-  external Pointer $Pointer;
+  external Pointer Pointer_;
 }
 
 /// {@category Struct}
@@ -4518,8 +5616,8 @@ extension OVERLAPPED_Extension on OVERLAPPED {
   set Anonymous(_OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct value) =>
       this.Anonymous.Anonymous = value;
 
-  Pointer get $Pointer => this.Anonymous.$Pointer;
-  set $Pointer(Pointer value) => this.Anonymous.$Pointer = value;
+  Pointer get Pointer_ => this.Anonymous.Pointer_;
+  set Pointer_(Pointer value) => this.Anonymous.Pointer_ = value;
 }
 
 /// Contains the information returned by a call to the
@@ -4641,6 +5739,106 @@ class POINT extends Struct {
 
   @Int32()
   external int y;
+}
+
+/// Contains basic pointer information common to all pointer types.
+/// Applications can retrieve this information using the GetPointerInfo,
+/// GetPointerFrameInfo, GetPointerInfoHistory and
+/// GetPointerFrameInfoHistory functions.
+///
+/// {@category Struct}
+class POINTER_INFO extends Struct {
+  @Int32()
+  external int pointerType;
+
+  @Uint32()
+  external int pointerId;
+
+  @Uint32()
+  external int frameId;
+
+  @Uint32()
+  external int pointerFlags;
+
+  @IntPtr()
+  external int sourceDevice;
+
+  @IntPtr()
+  external int hwndTarget;
+
+  external POINT ptPixelLocation;
+
+  external POINT ptHimetricLocation;
+
+  external POINT ptPixelLocationRaw;
+
+  external POINT ptHimetricLocationRaw;
+
+  @Uint32()
+  external int dwTime;
+
+  @Uint32()
+  external int historyCount;
+
+  @Int32()
+  external int InputData;
+
+  @Uint32()
+  external int dwKeyStates;
+
+  @Uint64()
+  external int PerformanceCount;
+
+  @Int32()
+  external int ButtonChangeType;
+}
+
+/// Defines basic pen information common to all pointer types.
+///
+/// {@category Struct}
+class POINTER_PEN_INFO extends Struct {
+  external POINTER_INFO pointerInfo;
+
+  @Uint32()
+  external int penFlags;
+
+  @Uint32()
+  external int penMask;
+
+  @Uint32()
+  external int pressure;
+
+  @Uint32()
+  external int rotation;
+
+  @Int32()
+  external int tiltX;
+
+  @Int32()
+  external int tiltY;
+}
+
+/// Defines basic touch information common to all pointer types.
+///
+/// {@category Struct}
+class POINTER_TOUCH_INFO extends Struct {
+  external POINTER_INFO pointerInfo;
+
+  @Uint32()
+  external int touchFlags;
+
+  @Uint32()
+  external int touchMask;
+
+  external RECT rcContact;
+
+  external RECT rcContactRaw;
+
+  @Uint32()
+  external int orientation;
+
+  @Uint32()
+  external int pressure;
 }
 
 /// The POINTL structure defines the x- and y-coordinates of a point.
@@ -5107,6 +6305,23 @@ extension PROPSPEC_Extension on PROPSPEC {
   set lpwstr(Pointer<Utf16> value) => this.Anonymous.lpwstr = value;
 }
 
+/// The protoent structure contains the name and protocol numbers that
+/// correspond to a given protocol name. Applications must never attempt to
+/// modify this structure or to free any of its components. Furthermore,
+/// only one copy of this structure is allocated per thread, and therefore,
+/// the application should copy any information it needs before issuing any
+/// other Windows Sockets function calls.
+///
+/// {@category Struct}
+class PROTOENT extends Struct {
+  external Pointer<Utf8> p_name;
+
+  external Pointer<Pointer<Int8>> p_aliases;
+
+  @Int16()
+  external int p_proto;
+}
+
 /// Describes the format of the raw input from a Human Interface Device
 /// (HID).
 ///
@@ -5493,6 +6708,21 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Dacl;
 }
 
+/// The servent structure is used to store or return the name and service
+/// number for a given service name.
+///
+/// {@category Struct}
+class SERVENT extends Struct {
+  external Pointer<Utf8> s_name;
+
+  external Pointer<Pointer<Int8>> s_aliases;
+
+  external Pointer<Utf8> s_proto;
+
+  @Int16()
+  external int s_port;
+}
+
 /// Contains information used by ShellExecuteEx.
 ///
 /// {@category Struct}
@@ -5644,6 +6874,17 @@ class SOCKADDR extends Struct {
 
   @Array(14)
   external Array<Uint8> sa_data;
+}
+
+/// The SOCKET_ADDRESS structure stores protocol-specific address
+/// information.
+///
+/// {@category Struct}
+class SOCKET_ADDRESS extends Struct {
+  external Pointer<SOCKADDR> lpSockaddr;
+
+  @Int32()
+  external int iSockaddrLength;
 }
 
 /// Identifies an authentication service that a server is willing to use to
@@ -5934,7 +7175,7 @@ class STATSTG extends Struct {
   @Uint32()
   external int grfMode;
 
-  @Uint32()
+  @Int32()
   external int grfLocksSupported;
 
   external GUID clsid;
@@ -6418,6 +7659,19 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// The timeval structure is used to specify a time interval. It is
+/// associated with the Berkeley Software Distribution (BSD) Time.h header
+/// file.
+///
+/// {@category Struct}
+class TIMEVAL extends Struct {
+  @Int32()
+  external int tv_sec;
+
+  @Int32()
+  external int tv_usec;
+}
+
 /// Contains title bar information.
 ///
 /// {@category Struct}
@@ -6490,6 +7744,25 @@ class TOUCHINPUT extends Struct {
 
   @Uint32()
   external int cyContact;
+}
+
+/// Contains hardware input details that can be used to predict touch
+/// targets and help compensate for hardware latency when processing touch
+/// and gesture input that contains distance and velocity data.
+///
+/// {@category Struct}
+class TOUCHPREDICTIONPARAMETERS extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwLatency;
+
+  @Uint32()
+  external int dwSampleTime;
+
+  @Uint32()
+  external int bUseHWTimeStamp;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.
@@ -7035,6 +8308,13 @@ class WINDOWPOS extends Struct {
 
   @Uint32()
   external int flags;
+}
+
+/// Describes a change in the size of the console screen buffer.
+///
+/// {@category Struct}
+class WINDOW_BUFFER_SIZE_RECORD extends Struct {
+  external COORD dwSize;
 }
 
 /// The WLAN_ASSOCIATION_ATTRIBUTES structure contains association
@@ -8073,113 +9353,4 @@ class XINPUT_VIBRATION extends Struct {
 
   @Uint16()
   external int wRightMotorSpeed;
-}
-
-/// The addrinfoW structure is used by the GetAddrInfoW function to hold
-/// host address information.
-///
-/// {@category Struct}
-class addrinfo extends Struct {
-  @Int32()
-  external int ai_flags;
-
-  @Int32()
-  external int ai_family;
-
-  @Int32()
-  external int ai_socktype;
-
-  @Int32()
-  external int ai_protocol;
-
-  @IntPtr()
-  external int ai_addrlen;
-
-  external Pointer<Utf16> ai_canonname;
-
-  external Pointer<SOCKADDR> ai_addr;
-
-  external Pointer<addrinfo> ai_next;
-}
-
-/// The fd_set structure is used by various Windows Sockets functions and
-/// service providers, such as the select function, to place sockets into a
-/// set for various purposes, such as testing a given socket for readability
-/// using the readfds parameter of the select function.
-///
-/// {@category Struct}
-class fd_set extends Struct {
-  @Uint32()
-  external int fd_count;
-
-  @Array(64)
-  external Array<IntPtr> fd_array;
-}
-
-/// The hostent structure is used by functions to store information about a
-/// given host, such as host name, IPv4 address, and so forth. An
-/// application should never attempt to modify this structure or to free any
-/// of its components. Furthermore, only one copy of the hostent structure
-/// is allocated per thread, and an application should therefore copy any
-/// information that it needs before issuing any other Windows Sockets API
-/// calls.
-///
-/// {@category Struct}
-class hostent extends Struct {
-  external Pointer<Utf8> h_name;
-
-  external Pointer<Pointer<Int8>> h_aliases;
-
-  @Int16()
-  external int h_addrtype;
-
-  @Int16()
-  external int h_length;
-
-  external Pointer<Pointer<Int8>> h_addr_list;
-}
-
-/// The protoent structure contains the name and protocol numbers that
-/// correspond to a given protocol name. Applications must never attempt to
-/// modify this structure or to free any of its components. Furthermore,
-/// only one copy of this structure is allocated per thread, and therefore,
-/// the application should copy any information it needs before issuing any
-/// other Windows Sockets function calls.
-///
-/// {@category Struct}
-class protoent extends Struct {
-  external Pointer<Utf8> p_name;
-
-  external Pointer<Pointer<Int8>> p_aliases;
-
-  @Int16()
-  external int p_proto;
-}
-
-/// The servent structure is used to store or return the name and service
-/// number for a given service name.
-///
-/// {@category Struct}
-class servent extends Struct {
-  external Pointer<Utf8> s_name;
-
-  external Pointer<Pointer<Int8>> s_aliases;
-
-  external Pointer<Utf8> s_proto;
-
-  @Int16()
-  external int s_port;
-}
-
-/// The timeval structure is used to specify a time interval. It is
-/// associated with the Berkeley Software Distribution (BSD) Time.h header
-/// file.
-///
-/// {@category Struct}
-class timeval extends Struct {
-  @Int32()
-  external int tv_sec;
-
-  @Int32()
-  external int tv_usec;
 }

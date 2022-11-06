@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final applicationactivationmanager = IApplicationActivationManager(ptr);
-  test('Can instantiate IApplicationActivationManager.ActivateApplication', () {
-    expect(applicationactivationmanager.ActivateApplication, isA<Function>());
+  test('Can instantiate IApplicationActivationManager.activateApplication', () {
+    expect(applicationactivationmanager.activateApplication, isA<Function>());
   });
-  test('Can instantiate IApplicationActivationManager.ActivateForFile', () {
-    expect(applicationactivationmanager.ActivateForFile, isA<Function>());
+  test('Can instantiate IApplicationActivationManager.activateForFile', () {
+    expect(applicationactivationmanager.activateForFile, isA<Function>());
   });
-  test('Can instantiate IApplicationActivationManager.ActivateForProtocol', () {
-    expect(applicationactivationmanager.ActivateForProtocol, isA<Function>());
+  test('Can instantiate IApplicationActivationManager.activateForProtocol', () {
+    expect(applicationactivationmanager.activateForProtocol, isA<Function>());
   });
   free(ptr);
 }

@@ -22,80 +22,80 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spvoice = ISpVoice(ptr);
-  test('Can instantiate ISpVoice.SetOutput', () {
-    expect(spvoice.SetOutput, isA<Function>());
+  test('Can instantiate ISpVoice.setOutput', () {
+    expect(spvoice.setOutput, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetOutputObjectToken', () {
-    expect(spvoice.GetOutputObjectToken, isA<Function>());
+  test('Can instantiate ISpVoice.getOutputObjectToken', () {
+    expect(spvoice.getOutputObjectToken, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetOutputStream', () {
-    expect(spvoice.GetOutputStream, isA<Function>());
+  test('Can instantiate ISpVoice.getOutputStream', () {
+    expect(spvoice.getOutputStream, isA<Function>());
   });
-  test('Can instantiate ISpVoice.Pause', () {
-    expect(spvoice.Pause, isA<Function>());
+  test('Can instantiate ISpVoice.pause', () {
+    expect(spvoice.pause, isA<Function>());
   });
-  test('Can instantiate ISpVoice.Resume', () {
-    expect(spvoice.Resume, isA<Function>());
+  test('Can instantiate ISpVoice.resume', () {
+    expect(spvoice.resume, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetVoice', () {
-    expect(spvoice.SetVoice, isA<Function>());
+  test('Can instantiate ISpVoice.setVoice', () {
+    expect(spvoice.setVoice, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetVoice', () {
-    expect(spvoice.GetVoice, isA<Function>());
+  test('Can instantiate ISpVoice.getVoice', () {
+    expect(spvoice.getVoice, isA<Function>());
   });
-  test('Can instantiate ISpVoice.Speak', () {
-    expect(spvoice.Speak, isA<Function>());
+  test('Can instantiate ISpVoice.speak', () {
+    expect(spvoice.speak, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SpeakStream', () {
-    expect(spvoice.SpeakStream, isA<Function>());
+  test('Can instantiate ISpVoice.speakStream', () {
+    expect(spvoice.speakStream, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetStatus', () {
-    expect(spvoice.GetStatus, isA<Function>());
+  test('Can instantiate ISpVoice.getStatus', () {
+    expect(spvoice.getStatus, isA<Function>());
   });
-  test('Can instantiate ISpVoice.Skip', () {
-    expect(spvoice.Skip, isA<Function>());
+  test('Can instantiate ISpVoice.skip', () {
+    expect(spvoice.skip, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetPriority', () {
-    expect(spvoice.SetPriority, isA<Function>());
+  test('Can instantiate ISpVoice.setPriority', () {
+    expect(spvoice.setPriority, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetPriority', () {
-    expect(spvoice.GetPriority, isA<Function>());
+  test('Can instantiate ISpVoice.getPriority', () {
+    expect(spvoice.getPriority, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetAlertBoundary', () {
-    expect(spvoice.SetAlertBoundary, isA<Function>());
+  test('Can instantiate ISpVoice.setAlertBoundary', () {
+    expect(spvoice.setAlertBoundary, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetAlertBoundary', () {
-    expect(spvoice.GetAlertBoundary, isA<Function>());
+  test('Can instantiate ISpVoice.getAlertBoundary', () {
+    expect(spvoice.getAlertBoundary, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetRate', () {
-    expect(spvoice.SetRate, isA<Function>());
+  test('Can instantiate ISpVoice.setRate', () {
+    expect(spvoice.setRate, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetRate', () {
-    expect(spvoice.GetRate, isA<Function>());
+  test('Can instantiate ISpVoice.getRate', () {
+    expect(spvoice.getRate, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetVolume', () {
-    expect(spvoice.SetVolume, isA<Function>());
+  test('Can instantiate ISpVoice.setVolume', () {
+    expect(spvoice.setVolume, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetVolume', () {
-    expect(spvoice.GetVolume, isA<Function>());
+  test('Can instantiate ISpVoice.getVolume', () {
+    expect(spvoice.getVolume, isA<Function>());
   });
-  test('Can instantiate ISpVoice.WaitUntilDone', () {
-    expect(spvoice.WaitUntilDone, isA<Function>());
+  test('Can instantiate ISpVoice.waitUntilDone', () {
+    expect(spvoice.waitUntilDone, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SetSyncSpeakTimeout', () {
-    expect(spvoice.SetSyncSpeakTimeout, isA<Function>());
+  test('Can instantiate ISpVoice.setSyncSpeakTimeout', () {
+    expect(spvoice.setSyncSpeakTimeout, isA<Function>());
   });
-  test('Can instantiate ISpVoice.GetSyncSpeakTimeout', () {
-    expect(spvoice.GetSyncSpeakTimeout, isA<Function>());
+  test('Can instantiate ISpVoice.getSyncSpeakTimeout', () {
+    expect(spvoice.getSyncSpeakTimeout, isA<Function>());
   });
-  test('Can instantiate ISpVoice.SpeakCompleteEvent', () {
-    expect(spvoice.SpeakCompleteEvent, isA<Function>());
+  test('Can instantiate ISpVoice.speakCompleteEvent', () {
+    expect(spvoice.speakCompleteEvent, isA<Function>());
   });
-  test('Can instantiate ISpVoice.IsUISupported', () {
-    expect(spvoice.IsUISupported, isA<Function>());
+  test('Can instantiate ISpVoice.isUISupported', () {
+    expect(spvoice.isUISupported, isA<Function>());
   });
-  test('Can instantiate ISpVoice.DisplayUI', () {
-    expect(spvoice.DisplayUI, isA<Function>());
+  test('Can instantiate ISpVoice.displayUI', () {
+    expect(spvoice.displayUI, isA<Function>());
   });
   free(ptr);
 }

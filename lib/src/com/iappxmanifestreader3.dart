@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iappxmanifestreader2.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IAppxManifestReader3 = '{C43825AB-69B7-400A-9709-CC37F5A72D24}';
@@ -32,7 +32,10 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
   // vtable begins at 13, is 2 entries long.
   IAppxManifestReader3(super.ptr);
 
-  int GetCapabilitiesByCapabilityClass(
+  factory IAppxManifestReader3.from(IUnknown interface) =>
+      IAppxManifestReader3(interface.toInterface(IID_IAppxManifestReader3));
+
+  int getCapabilitiesByCapabilityClass(
           int capabilityClass, Pointer<Pointer<COMObject>> capabilities) =>
       ptr.ref.vtable
               .elementAt(13)
@@ -48,7 +51,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2 {
           ptr.ref.lpVtbl, capabilityClass, capabilities);
 
   int
-      GetTargetDeviceFamilies(
+      getTargetDeviceFamilies(
               Pointer<Pointer<COMObject>> targetDeviceFamilies) =>
           ptr.ref.vtable
                   .elementAt(14)

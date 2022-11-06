@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAppxManifestReader extends IUnknown {
   // vtable begins at 3, is 9 entries long.
   IAppxManifestReader(super.ptr);
 
-  int GetPackageId(Pointer<Pointer<COMObject>> packageId) => ptr.ref.vtable
+  factory IAppxManifestReader.from(IUnknown interface) =>
+      IAppxManifestReader(interface.toInterface(IID_IAppxManifestReader));
+
+  int getPackageId(Pointer<Pointer<COMObject>> packageId) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +46,7 @@ class IAppxManifestReader extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> packageId)>()(
       ptr.ref.lpVtbl, packageId);
 
-  int GetProperties(Pointer<Pointer<COMObject>> packageProperties) => ptr
+  int getProperties(Pointer<Pointer<COMObject>> packageProperties) => ptr
           .ref.vtable
           .elementAt(4)
           .cast<
@@ -58,7 +60,7 @@ class IAppxManifestReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> packageProperties)>()(
       ptr.ref.lpVtbl, packageProperties);
 
-  int GetPackageDependencies(Pointer<Pointer<COMObject>> dependencies) => ptr
+  int getPackageDependencies(Pointer<Pointer<COMObject>> dependencies) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<
@@ -72,7 +74,7 @@ class IAppxManifestReader extends IUnknown {
                   Pointer, Pointer<Pointer<COMObject>> dependencies)>()(
       ptr.ref.lpVtbl, dependencies);
 
-  int GetCapabilities(Pointer<Uint32> capabilities) => ptr.ref.vtable
+  int getCapabilities(Pointer<Uint32> capabilities) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -82,7 +84,7 @@ class IAppxManifestReader extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> capabilities)>()(
       ptr.ref.lpVtbl, capabilities);
 
-  int GetResources(Pointer<Pointer<COMObject>> resources) => ptr.ref.vtable
+  int getResources(Pointer<Pointer<COMObject>> resources) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -95,7 +97,7 @@ class IAppxManifestReader extends IUnknown {
       ptr.ref.lpVtbl, resources);
 
   int
-      GetDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
+      getDeviceCapabilities(Pointer<Pointer<COMObject>> deviceCapabilities) =>
           ptr.ref.vtable
                   .elementAt(8)
                   .cast<
@@ -111,7 +113,7 @@ class IAppxManifestReader extends IUnknown {
                           Pointer<Pointer<COMObject>> deviceCapabilities)>()(
               ptr.ref.lpVtbl, deviceCapabilities);
 
-  int GetPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) => ptr
+  int getPrerequisite(Pointer<Utf16> name, Pointer<Uint64> value) => ptr
       .ref.vtable
       .elementAt(9)
       .cast<
@@ -124,7 +126,7 @@ class IAppxManifestReader extends IUnknown {
           int Function(Pointer, Pointer<Utf16> name,
               Pointer<Uint64> value)>()(ptr.ref.lpVtbl, name, value);
 
-  int GetApplications(Pointer<Pointer<COMObject>> applications) =>
+  int getApplications(Pointer<Pointer<COMObject>> applications) =>
       ptr.ref.vtable
               .elementAt(10)
               .cast<
@@ -138,7 +140,7 @@ class IAppxManifestReader extends IUnknown {
                       Pointer, Pointer<Pointer<COMObject>> applications)>()(
           ptr.ref.lpVtbl, applications);
 
-  int GetStream(Pointer<Pointer<COMObject>> manifestStream) => ptr.ref.vtable
+  int getStream(Pointer<Pointer<COMObject>> manifestStream) => ptr.ref.vtable
           .elementAt(11)
           .cast<
               Pointer<

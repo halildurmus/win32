@@ -21,16 +21,16 @@ void createShortcut(String path, String pathLink, String? description) {
   final ppf = calloc<COMObject>();
 
   try {
-    shellLink.SetPath(lpPath);
-    if (description != null) shellLink.SetDescription(lpDescription);
+    shellLink.setPath(lpPath);
+    if (description != null) shellLink.setDescription(lpDescription);
 
-    final hr = shellLink.QueryInterface(ptrIID_IPersistFile, ppf.cast());
+    final hr = shellLink.queryInterface(ptrIID_IPersistFile, ppf.cast());
     if (SUCCEEDED(hr)) {
       IPersistFile(ppf)
-        ..Save(lpPathLink, TRUE)
-        ..Release();
+        ..save(lpPathLink, TRUE)
+        ..release();
     }
-    shellLink.Release();
+    shellLink.release();
   } finally {
     free(lpPath);
     free(lpPathLink);
