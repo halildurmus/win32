@@ -5,7 +5,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/src/winrt/foundation/uri.dart' as winrt_uri;
-import 'package:win32/winrt.dart';
+import 'package:win32/winrt.dart' hide Uri;
 
 // Exhaustively test the WinRT Collections to make sure constructors,
 // properties and methods are working correctly.

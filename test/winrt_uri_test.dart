@@ -2,7 +2,7 @@
 
 import 'package:test/test.dart';
 import 'package:win32/src/winrt/foundation/uri.dart' as winrt_uri;
-import 'package:win32/winrt.dart';
+import 'package:win32/winrt.dart' hide Uri;
 
 // Test the WinRT Uri object to make sure overrides, properties and
 // methods are working correctly.
