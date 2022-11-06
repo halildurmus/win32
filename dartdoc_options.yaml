@@ -32,8 +32,6 @@ dartdoc:
       markdown: doc/winspool.md
     "wlanapi":
       markdown: doc/wlanapi.md
-    "shcore":
-      markdown: doc/shcore.md
     "shell32":
       markdown: doc/shell32.md
     "user32":
@@ -63,13 +61,13 @@ dartdoc:
     "struct":
       name: "Structures"
       markdown: doc/struct.md
-    "enum":
+    "enum
       name: "Enumerations"
       markdown: doc/enum.md
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "onecore", "shcore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "dwmapi", "magnification", "onecore", "psapi", "setupapi", "version", "xinput", "advapi32", "winsock", "bluetooth", "powrprof", "winscard", "winspool", "wlanapi", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:
