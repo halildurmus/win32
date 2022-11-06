@@ -22,23 +22,23 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final sensorcollection = ISensorCollection(ptr);
-  test('Can instantiate ISensorCollection.GetAt', () {
-    expect(sensorcollection.GetAt, isA<Function>());
+  test('Can instantiate ISensorCollection.getAt', () {
+    expect(sensorcollection.getAt, isA<Function>());
   });
-  test('Can instantiate ISensorCollection.GetCount', () {
-    expect(sensorcollection.GetCount, isA<Function>());
+  test('Can instantiate ISensorCollection.getCount', () {
+    expect(sensorcollection.getCount, isA<Function>());
   });
-  test('Can instantiate ISensorCollection.Add', () {
-    expect(sensorcollection.Add, isA<Function>());
+  test('Can instantiate ISensorCollection.add', () {
+    expect(sensorcollection.add, isA<Function>());
   });
-  test('Can instantiate ISensorCollection.Remove', () {
-    expect(sensorcollection.Remove, isA<Function>());
+  test('Can instantiate ISensorCollection.remove', () {
+    expect(sensorcollection.remove, isA<Function>());
   });
-  test('Can instantiate ISensorCollection.RemoveByID', () {
-    expect(sensorcollection.RemoveByID, isA<Function>());
+  test('Can instantiate ISensorCollection.removeByID', () {
+    expect(sensorcollection.removeByID, isA<Function>());
   });
-  test('Can instantiate ISensorCollection.Clear', () {
-    expect(sensorcollection.Clear, isA<Function>());
+  test('Can instantiate ISensorCollection.clear', () {
+    expect(sensorcollection.clear, isA<Function>());
   });
   free(ptr);
 }

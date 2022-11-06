@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISensorManager extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   ISensorManager(super.ptr);
 
-  int GetSensorsByCategory(Pointer<GUID> sensorCategory,
+  factory ISensorManager.from(IUnknown interface) =>
+      ISensorManager(interface.toInterface(IID_ISensorManager));
+
+  int getSensorsByCategory(Pointer<GUID> sensorCategory,
           Pointer<Pointer<COMObject>> ppSensorsFound) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -47,7 +49,7 @@ class ISensorManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppSensorsFound)>()(
           ptr.ref.lpVtbl, sensorCategory, ppSensorsFound);
 
-  int GetSensorsByType(Pointer<GUID> sensorType,
+  int getSensorsByType(Pointer<GUID> sensorType,
           Pointer<Pointer<COMObject>> ppSensorsFound) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -62,7 +64,7 @@ class ISensorManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppSensorsFound)>()(
           ptr.ref.lpVtbl, sensorType, ppSensorsFound);
 
-  int GetSensorByID(
+  int getSensorByID(
           Pointer<GUID> sensorID, Pointer<Pointer<COMObject>> ppSensor) =>
       ptr
               .ref.vtable
@@ -78,7 +80,7 @@ class ISensorManager extends IUnknown {
                       Pointer<Pointer<COMObject>> ppSensor)>()(
           ptr.ref.lpVtbl, sensorID, ppSensor);
 
-  int SetEventSink(Pointer<COMObject> pEvents) => ptr.ref.vtable
+  int setEventSink(Pointer<COMObject> pEvents) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -88,7 +90,7 @@ class ISensorManager extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pEvents)>()(
       ptr.ref.lpVtbl, pEvents);
 
-  int RequestPermissions(
+  int requestPermissions(
           int hParent, Pointer<COMObject> pSensors, int fModal) =>
       ptr.ref.vtable
           .elementAt(7)

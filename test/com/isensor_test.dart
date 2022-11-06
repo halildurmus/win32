@@ -22,50 +22,50 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final sensor = ISensor(ptr);
-  test('Can instantiate ISensor.GetID', () {
-    expect(sensor.GetID, isA<Function>());
+  test('Can instantiate ISensor.getID', () {
+    expect(sensor.getID, isA<Function>());
   });
-  test('Can instantiate ISensor.GetCategory', () {
-    expect(sensor.GetCategory, isA<Function>());
+  test('Can instantiate ISensor.getCategory', () {
+    expect(sensor.getCategory, isA<Function>());
   });
-  test('Can instantiate ISensor.GetType', () {
-    expect(sensor.GetType, isA<Function>());
+  test('Can instantiate ISensor.getType', () {
+    expect(sensor.getType, isA<Function>());
   });
-  test('Can instantiate ISensor.GetFriendlyName', () {
-    expect(sensor.GetFriendlyName, isA<Function>());
+  test('Can instantiate ISensor.getFriendlyName', () {
+    expect(sensor.getFriendlyName, isA<Function>());
   });
-  test('Can instantiate ISensor.GetProperty', () {
-    expect(sensor.GetProperty, isA<Function>());
+  test('Can instantiate ISensor.getProperty', () {
+    expect(sensor.getProperty, isA<Function>());
   });
-  test('Can instantiate ISensor.GetProperties', () {
-    expect(sensor.GetProperties, isA<Function>());
+  test('Can instantiate ISensor.getProperties', () {
+    expect(sensor.getProperties, isA<Function>());
   });
-  test('Can instantiate ISensor.GetSupportedDataFields', () {
-    expect(sensor.GetSupportedDataFields, isA<Function>());
+  test('Can instantiate ISensor.getSupportedDataFields', () {
+    expect(sensor.getSupportedDataFields, isA<Function>());
   });
-  test('Can instantiate ISensor.SetProperties', () {
-    expect(sensor.SetProperties, isA<Function>());
+  test('Can instantiate ISensor.setProperties', () {
+    expect(sensor.setProperties, isA<Function>());
   });
-  test('Can instantiate ISensor.SupportsDataField', () {
-    expect(sensor.SupportsDataField, isA<Function>());
+  test('Can instantiate ISensor.supportsDataField', () {
+    expect(sensor.supportsDataField, isA<Function>());
   });
-  test('Can instantiate ISensor.GetState', () {
-    expect(sensor.GetState, isA<Function>());
+  test('Can instantiate ISensor.getState', () {
+    expect(sensor.getState, isA<Function>());
   });
-  test('Can instantiate ISensor.GetData', () {
-    expect(sensor.GetData, isA<Function>());
+  test('Can instantiate ISensor.getData', () {
+    expect(sensor.getData, isA<Function>());
   });
-  test('Can instantiate ISensor.SupportsEvent', () {
-    expect(sensor.SupportsEvent, isA<Function>());
+  test('Can instantiate ISensor.supportsEvent', () {
+    expect(sensor.supportsEvent, isA<Function>());
   });
-  test('Can instantiate ISensor.GetEventInterest', () {
-    expect(sensor.GetEventInterest, isA<Function>());
+  test('Can instantiate ISensor.getEventInterest', () {
+    expect(sensor.getEventInterest, isA<Function>());
   });
-  test('Can instantiate ISensor.SetEventInterest', () {
-    expect(sensor.SetEventInterest, isA<Function>());
+  test('Can instantiate ISensor.setEventInterest', () {
+    expect(sensor.setEventInterest, isA<Function>());
   });
-  test('Can instantiate ISensor.SetEventSink', () {
-    expect(sensor.SetEventSink, isA<Function>());
+  test('Can instantiate ISensor.setEventSink', () {
+    expect(sensor.setEventSink, isA<Function>());
   });
   free(ptr);
 }

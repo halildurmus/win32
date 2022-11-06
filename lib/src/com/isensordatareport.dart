@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISensorDataReport extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   ISensorDataReport(super.ptr);
 
-  int GetTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => ptr.ref.vtable
+  factory ISensorDataReport.from(IUnknown interface) =>
+      ISensorDataReport(interface.toInterface(IID_ISensorDataReport));
+
+  int getTimestamp(Pointer<SYSTEMTIME> pTimeStamp) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -43,7 +45,7 @@ class ISensorDataReport extends IUnknown {
           int Function(Pointer,
               Pointer<SYSTEMTIME> pTimeStamp)>()(ptr.ref.lpVtbl, pTimeStamp);
 
-  int GetSensorValue(Pointer<PROPERTYKEY> pKey, Pointer<PROPVARIANT> pValue) =>
+  int getSensorValue(Pointer<PROPERTYKEY> pKey, Pointer<PROPVARIANT> pValue) =>
       ptr.ref.vtable
           .elementAt(4)
           .cast<
@@ -56,7 +58,7 @@ class ISensorDataReport extends IUnknown {
               int Function(Pointer, Pointer<PROPERTYKEY> pKey,
                   Pointer<PROPVARIANT> pValue)>()(ptr.ref.lpVtbl, pKey, pValue);
 
-  int GetSensorValues(
+  int getSensorValues(
           Pointer<COMObject> pKeys, Pointer<Pointer<COMObject>> ppValues) =>
       ptr.ref.vtable
               .elementAt(5)

@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISensorCollection extends IUnknown {
   // vtable begins at 3, is 6 entries long.
   ISensorCollection(super.ptr);
 
-  int GetAt(int ulIndex, Pointer<Pointer<COMObject>> ppSensor) => ptr.ref.vtable
+  factory ISensorCollection.from(IUnknown interface) =>
+      ISensorCollection(interface.toInterface(IID_ISensorCollection));
+
+  int getAt(int ulIndex, Pointer<Pointer<COMObject>> ppSensor) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -45,7 +47,7 @@ class ISensorCollection extends IUnknown {
                   Pointer<Pointer<COMObject>> ppSensor)>()(
       ptr.ref.lpVtbl, ulIndex, ppSensor);
 
-  int GetCount(Pointer<Uint32> pCount) => ptr.ref.vtable
+  int getCount(Pointer<Uint32> pCount) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +57,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pCount)>()(
       ptr.ref.lpVtbl, pCount);
 
-  int Add(Pointer<COMObject> pSensor) => ptr.ref.vtable
+  int add(Pointer<COMObject> pSensor) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -65,7 +67,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
       ptr.ref.lpVtbl, pSensor);
 
-  int Remove(Pointer<COMObject> pSensor) => ptr.ref.vtable
+  int remove(Pointer<COMObject> pSensor) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -75,7 +77,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> pSensor)>()(
       ptr.ref.lpVtbl, pSensor);
 
-  int RemoveByID(Pointer<GUID> sensorID) => ptr.ref.vtable
+  int removeByID(Pointer<GUID> sensorID) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -85,7 +87,7 @@ class ISensorCollection extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<GUID> sensorID)>()(
       ptr.ref.lpVtbl, sensorID);
 
-  int Clear() => ptr.ref.vtable
+  int clear() => ptr.ref.vtable
       .elementAt(8)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

@@ -21,13 +21,13 @@ void main() {
   final sampleDateTimeSensorCategory =
       GUIDFromString('{062A5C3B-44C1-4ad1-8EFC-0F65B2E4AD48}');
   final pSensorsColl = calloc<Pointer<COMObject>>();
-  final hr = sensorManager.GetSensorsByCategory(
+  final hr = sensorManager.getSensorsByCategory(
       sampleDateTimeSensorCategory, pSensorsColl);
   if (FAILED(hr)) throw WindowsException(hr);
 
   final coll = ISensorCollection(pSensorsColl.cast());
   final pCount = calloc<Uint32>();
-  if (coll.GetCount(pCount) > 1) {
+  if (coll.getCount(pCount) > 1) {
     print('Found items');
   }
 

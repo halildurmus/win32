@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final sensormanager = ISensorManager(ptr);
-  test('Can instantiate ISensorManager.GetSensorsByCategory', () {
-    expect(sensormanager.GetSensorsByCategory, isA<Function>());
+  test('Can instantiate ISensorManager.getSensorsByCategory', () {
+    expect(sensormanager.getSensorsByCategory, isA<Function>());
   });
-  test('Can instantiate ISensorManager.GetSensorsByType', () {
-    expect(sensormanager.GetSensorsByType, isA<Function>());
+  test('Can instantiate ISensorManager.getSensorsByType', () {
+    expect(sensormanager.getSensorsByType, isA<Function>());
   });
-  test('Can instantiate ISensorManager.GetSensorByID', () {
-    expect(sensormanager.GetSensorByID, isA<Function>());
+  test('Can instantiate ISensorManager.getSensorByID', () {
+    expect(sensormanager.getSensorByID, isA<Function>());
   });
-  test('Can instantiate ISensorManager.SetEventSink', () {
-    expect(sensormanager.SetEventSink, isA<Function>());
+  test('Can instantiate ISensorManager.setEventSink', () {
+    expect(sensormanager.setEventSink, isA<Function>());
   });
-  test('Can instantiate ISensorManager.RequestPermissions', () {
-    expect(sensormanager.RequestPermissions, isA<Function>());
+  test('Can instantiate ISensorManager.requestPermissions', () {
+    expect(sensormanager.requestPermissions, isA<Function>());
   });
   free(ptr);
 }

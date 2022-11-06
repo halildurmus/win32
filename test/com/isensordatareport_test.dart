@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final sensordatareport = ISensorDataReport(ptr);
-  test('Can instantiate ISensorDataReport.GetTimestamp', () {
-    expect(sensordatareport.GetTimestamp, isA<Function>());
+  test('Can instantiate ISensorDataReport.getTimestamp', () {
+    expect(sensordatareport.getTimestamp, isA<Function>());
   });
-  test('Can instantiate ISensorDataReport.GetSensorValue', () {
-    expect(sensordatareport.GetSensorValue, isA<Function>());
+  test('Can instantiate ISensorDataReport.getSensorValue', () {
+    expect(sensordatareport.getSensorValue, isA<Function>());
   });
-  test('Can instantiate ISensorDataReport.GetSensorValues', () {
-    expect(sensordatareport.GetSensorValues, isA<Function>());
+  test('Can instantiate ISensorDataReport.getSensorValues', () {
+    expect(sensordatareport.getSensorValues, isA<Function>());
   });
   free(ptr);
 }
