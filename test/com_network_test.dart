@@ -30,14 +30,14 @@ void main() {
 
     test('Network is connected', () {
       final nlm = NetworkListManager.createInstance();
-      expect(nlm.IsConnected, equals(VARIANT_TRUE));
+      expect(nlm.isConnected, equals(VARIANT_TRUE));
       free(nlm.ptr);
     });
 
     test('Network is connected to the internet', () {
       for (var i = 0; i < testRuns; i++) {
         final nlm = NetworkListManager.createInstance();
-        expect(nlm.IsConnectedToInternet, equals(VARIANT_TRUE));
+        expect(nlm.isConnectedToInternet, equals(VARIANT_TRUE));
         free(nlm.ptr);
       }
     });
@@ -48,17 +48,17 @@ void main() {
       final netPtr = calloc<COMObject>();
 
       expect(
-          nlm.GetNetworks(
+          nlm.getNetworks(
               NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
           equals(S_OK));
 
       final enumerator = IEnumNetworks(enumPtr);
-      expect(enumerator.Next(1, netPtr.cast(), nullptr), equals(S_OK));
+      expect(enumerator.next(1, netPtr.cast(), nullptr), equals(S_OK));
 
       final network = INetwork(netPtr);
 
       // network should be connected, given the filter
-      expect(network.IsConnected,
+      expect(network.isConnected,
           anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
 
       free(netPtr);
@@ -73,15 +73,15 @@ void main() {
       final descPtr = calloc<Pointer<Utf16>>();
 
       expect(
-          nlm.GetNetworks(
+          nlm.getNetworks(
               NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED, enumPtr.cast()),
           equals(S_OK));
 
       final enumerator = IEnumNetworks(enumPtr);
-      expect(enumerator.Next(1, netPtr.cast(), nullptr), equals(S_OK));
+      expect(enumerator.next(1, netPtr.cast(), nullptr), equals(S_OK));
 
       final network = INetwork(netPtr);
-      expect(network.GetDescription(descPtr), equals(S_OK));
+      expect(network.getDescription(descPtr), equals(S_OK));
 
       // This is a wireless network or Ethernet network name. Assume that it's
       // more than one character long, and test for that.

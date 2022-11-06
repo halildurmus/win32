@@ -19,31 +19,14 @@ const excludedWin32Structs = <String>{
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V2',
   'Windows.Win32.UI.Controls.PROPSHEETPAGEA_V3',
   'Windows.Win32.Media.Audio.DirectMusic.DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA',
-
-  // Can be removed when https://github.com/microsoft/win32metadata/issues/954
-  // is fixed.
-  'Windows.Win32.Media.DeviceManager._BITMAPINFOHEADER',
-  'Windows.Win32.Media.DeviceManager._VIDEOINFOHEADER',
-  'Windows.Win32.Media.DeviceManager._WAVEFORMATEX',
-
-  // Can be removed when https://github.com/microsoft/win32metadata/issues/955
-  // is fixed.
-  'Windows.Win32.Devices.Fax.IStiDeviceW',
 };
 
 const excludedComInterfaces = <String>{
-  // TODO: We may be able to remove this from the list.
-  'Windows.Win32.System.Com.IUnknown',
-
   // COM Interfaces that are weirdly named or internal artifacts.
   // TODO: Revisit these.
   'Windows.Win32.System.Mmc._AppEvents',
   'Windows.Win32.System.Mmc._Application',
   'Windows.Win32.System.Mmc.Document',
-
-  // The "real" versions of these are prefixed with _.
-  'Windows.Win32.Devices.Fax.IFaxAccountNotify',
-  'Windows.Win32.Devices.Fax.IFaxServerNotify2',
 
   // These are incorrectly declared in the metadata as interfaces.
   'Windows.Win32.System.ComponentServices.ObjectContext',
@@ -56,9 +39,15 @@ const excludedComInterfaces = <String>{
 };
 
 const excludedWindowsRuntimeTypes = <String>{
+  ...excludedWindowsRuntimeInterfaces,
+  ...excludedWindowsRuntimeStaticInterfaces,
+
   // These types are generated manually by design
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
+  'Windows.Foundation.Collections.IKeyValuePair`2',
+  'Windows.Foundation.Collections.IMap`2',
+  'Windows.Foundation.Collections.IMapView`2',
   'Windows.Foundation.Collections.IVector`1',
   'Windows.Foundation.Collections.IVectorView`1',
 
@@ -66,20 +55,44 @@ const excludedWindowsRuntimeTypes = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
 
+  //   Depends on https://github.com/timsneath/win32/issues/480
+  'Windows.Data.Json.JsonArray',
+  'Windows.Data.Json.JsonObject',
+  'Windows.Devices.Enumeration.DevicePicker',
+  'Windows.Devices.Enumeration.DevicePickerFilter',
+  'Windows.Foundation.Collections.PropertySet',
+  'Windows.Foundation.Collections.StringMap',
+  'Windows.Foundation.Collections.ValueSet',
+  'Windows.Media.MediaProperties.MediaPropertySet',
+
   //   Requires WinRT delegate support
   'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncOperation`1',
   'Windows.Storage.ApplicationData',
 
-  //   IFileOpenPicker and IFileOpenPickerWithOperationId both have
-  //   pickSingleFileAsync(), which clash with each other.
-  'Windows.Storage.Pickers.FileOpenPicker',
-
-  //   Requires @halildurmus' WinRT struct support to land
-  'Windows.Foundation.IPropertyValue',
-
   //   Requires WinRT event support
   'Windows.Networking.Connectivity.INetworkInformationStatics',
+
+  //   Requires XmlDocument support
+  'Windows.UI.Notifications.IToastNotificationManagerStatics',
+  'Windows.UI.Notifications.ToastNotification',
+};
+
+/// WinRT interfaces to exclude when generating the implements mappers.
+const excludedWindowsRuntimeInterfaces = <String>{
+  // INumberFormatter2's methods conflict with INumberFormatter's methods
+  'Windows.Globalization.NumberFormatting.INumberFormatter2',
+  // Contains deprecated APIs
+  'Windows.Storage.Pickers.IFileOpenPicker2',
+  // IFileOpenPickerWithOperationId's pickSingleFileAsync(String operationId)
+  // method conflicts with IFileOpenPicker's pickSingleFileAsync() method
+  'Windows.Storage.Pickers.IFileOpenPickerWithOperationId',
+};
+
+/// WinRT static interfaces to exclude when generating the static mappers.
+const excludedWindowsRuntimeStaticInterfaces = <String>{
+  // Contains deprecated APIs
+  'Windows.Storage.Pickers.IFileOpenPickerStatics',
 };
 
 const excludedTypes = <String>[
@@ -89,10 +102,13 @@ const excludedTypes = <String>[
 
 // Working around https://github.com/dart-lang/sdk/issues/46644
 const ignorePackingDirectives = <String>[
-  'Windows.Win32.System.SystemServices.DEVICEDUMP_SECTION_HEADER',
-  'Windows.Win32.System.SystemServices.DEVICEDUMP_STORAGEDEVICE_DATA',
-  'Windows.Win32.System.SystemServices.SENDCMDINPARAMS',
-  'Windows.Win32.Media.Multimedia.AUXCAPS2W',
+  'Windows.Win32.Media.Audio.AUXCAPS2W',
+  'Windows.Win32.Media.Audio.MIDIINCAPS2W',
+  'Windows.Win32.Media.Audio.MIDIOUTCAPS2W',
+  'Windows.Win32.Media.Audio.MIXERCAPS2W',
+  'Windows.Win32.Media.Audio.WAVEFORMATEXTENSIBLE',
+  'Windows.Win32.Media.Audio.WAVEINCAPS2W',
+  'Windows.Win32.Media.Audio.WAVEOUTCAPS2W',
   'Windows.Win32.Media.Multimedia.EXBMINFOHEADER',
   'Windows.Win32.Media.Multimedia.JOYCAPS2W',
   'Windows.Win32.Media.Multimedia.MCI_DGV_CAPTURE_PARMSW',
@@ -105,13 +121,9 @@ const ignorePackingDirectives = <String>[
   'Windows.Win32.Media.Multimedia.MCI_DGV_RESTORE_PARMSW',
   'Windows.Win32.Media.Multimedia.MCI_DGV_SAVE_PARMSW',
   'Windows.Win32.Media.Multimedia.MCI_DGV_UPDATE_PARMS',
-  'Windows.Win32.Media.Multimedia.MIDIINCAPS2W',
-  'Windows.Win32.Media.Multimedia.MIDIOUTCAPS2W',
-  'Windows.Win32.Media.Multimedia.MIXERCAPS2W',
-  'Windows.Win32.Media.Multimedia.WAVEFORMATEXTENSIBLE',
-  'Windows.Win32.Media.Multimedia.WAVEINCAPS2W',
-  'Windows.Win32.Media.Multimedia.WAVEOUTCAPS2W',
-  'Windows.Win32.Media.Multimedia.joyreguservalues_tag',
+  'Windows.Win32.System.Ioctl.DEVICEDUMP_SECTION_HEADER',
+  'Windows.Win32.System.Ioctl.DEVICEDUMP_STORAGEDEVICE_DATA',
+  'Windows.Win32.System.Ioctl.SENDCMDINPARAMS',
 
   // From metadata.
 
@@ -131,11 +143,11 @@ const ignorePackingDirectives = <String>[
   'Windows.Win32.Devices.Tapi.PHONECAPS',
   'Windows.Win32.NetworkManagement.Rras.RASCONN',
   'Windows.Win32.NetworkManagement.Rras.RASIKEV2_PROJECTION_INFO',
-  'Windows.Win32.Security.Authentication.Identity.Core.MSV_1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL',
-  'Windows.Win32.Security.Authentication.Identity.Core.USER_ALL_INFORMATION',
+  'Windows.Win32.Security.Authentication.Identity.MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL',
+  'Windows.Win32.Security.Authentication.Identity.USER_ALL_INFORMATION',
   'Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE',
-  'Windows.Win32.Ui.Shell.FILEDESCRIPTOR',
-  'Windows.Win32.Ui.Shell.AUTO_SCROLL_DATA',
-  'Windows.Win32.Ui.Shell.DROPFILES',
-  'Windows.Win32.Storage.StructuredStorage.JET_SIGNATURE',
+  'Windows.Win32.UI.Shell.FILEDESCRIPTOR',
+  'Windows.Win32.UI.Shell.AUTO_SCROLL_DATA',
+  'Windows.Win32.UI.Shell.DROPFILES',
+  'Windows.Win32.Storage.Jet.JET_SIGNATURE',
 ];

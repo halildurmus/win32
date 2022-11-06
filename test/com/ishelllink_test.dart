@@ -22,59 +22,59 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shelllink = IShellLink(ptr);
-  test('Can instantiate IShellLink.GetPath', () {
-    expect(shelllink.GetPath, isA<Function>());
+  test('Can instantiate IShellLink.getPath', () {
+    expect(shelllink.getPath, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetIDList', () {
-    expect(shelllink.GetIDList, isA<Function>());
+  test('Can instantiate IShellLink.getIDList', () {
+    expect(shelllink.getIDList, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetIDList', () {
-    expect(shelllink.SetIDList, isA<Function>());
+  test('Can instantiate IShellLink.setIDList', () {
+    expect(shelllink.setIDList, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetDescription', () {
-    expect(shelllink.GetDescription, isA<Function>());
+  test('Can instantiate IShellLink.getDescription', () {
+    expect(shelllink.getDescription, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetDescription', () {
-    expect(shelllink.SetDescription, isA<Function>());
+  test('Can instantiate IShellLink.setDescription', () {
+    expect(shelllink.setDescription, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetWorkingDirectory', () {
-    expect(shelllink.GetWorkingDirectory, isA<Function>());
+  test('Can instantiate IShellLink.getWorkingDirectory', () {
+    expect(shelllink.getWorkingDirectory, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetWorkingDirectory', () {
-    expect(shelllink.SetWorkingDirectory, isA<Function>());
+  test('Can instantiate IShellLink.setWorkingDirectory', () {
+    expect(shelllink.setWorkingDirectory, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetArguments', () {
-    expect(shelllink.GetArguments, isA<Function>());
+  test('Can instantiate IShellLink.getArguments', () {
+    expect(shelllink.getArguments, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetArguments', () {
-    expect(shelllink.SetArguments, isA<Function>());
+  test('Can instantiate IShellLink.setArguments', () {
+    expect(shelllink.setArguments, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetHotkey', () {
-    expect(shelllink.GetHotkey, isA<Function>());
+  test('Can instantiate IShellLink.getHotkey', () {
+    expect(shelllink.getHotkey, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetHotkey', () {
-    expect(shelllink.SetHotkey, isA<Function>());
+  test('Can instantiate IShellLink.setHotkey', () {
+    expect(shelllink.setHotkey, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetShowCmd', () {
-    expect(shelllink.GetShowCmd, isA<Function>());
+  test('Can instantiate IShellLink.getShowCmd', () {
+    expect(shelllink.getShowCmd, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetShowCmd', () {
-    expect(shelllink.SetShowCmd, isA<Function>());
+  test('Can instantiate IShellLink.setShowCmd', () {
+    expect(shelllink.setShowCmd, isA<Function>());
   });
-  test('Can instantiate IShellLink.GetIconLocation', () {
-    expect(shelllink.GetIconLocation, isA<Function>());
+  test('Can instantiate IShellLink.getIconLocation', () {
+    expect(shelllink.getIconLocation, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetIconLocation', () {
-    expect(shelllink.SetIconLocation, isA<Function>());
+  test('Can instantiate IShellLink.setIconLocation', () {
+    expect(shelllink.setIconLocation, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetRelativePath', () {
-    expect(shelllink.SetRelativePath, isA<Function>());
+  test('Can instantiate IShellLink.setRelativePath', () {
+    expect(shelllink.setRelativePath, isA<Function>());
   });
-  test('Can instantiate IShellLink.Resolve', () {
-    expect(shelllink.Resolve, isA<Function>());
+  test('Can instantiate IShellLink.resolve', () {
+    expect(shelllink.resolve, isA<Function>());
   });
-  test('Can instantiate IShellLink.SetPath', () {
-    expect(shelllink.SetPath, isA<Function>());
+  test('Can instantiate IShellLink.setPath', () {
+    expect(shelllink.setPath, isA<Function>());
   });
   free(ptr);
 }

@@ -1,7 +1,6 @@
 // Useful utilities
 
-import 'dart:io';
-
+import 'package:path/path.dart' as path;
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
@@ -90,9 +89,7 @@ String stripPointer(String typeName) =>
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
-  if (inputText.isEmpty) {
-    return '';
-  }
+  if (inputText.isEmpty) return '';
 
   final words = inputText.split(' ');
   final textLine = StringBuffer('///');
@@ -135,14 +132,9 @@ extension CamelCaseConversion on String {
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
 }
 
-/// Given a known file of arbitrary depth in the lib/src hierarchy, return the
-/// relative path to the src parent directory.
-String relativePathToSrcDirectory(File file) {
-  // Find out how many parents there are to the lib/src directory
-  final pathDepth = file.path.split('/').reversed.toList().indexOf('src') - 1;
-
-  return '../' * pathDepth;
-}
+/// Converts [targetPath] to an equivalent relative path from the [start] directory.
+String relativePath(String targetPath, {required String start}) =>
+    path.relative(targetPath, from: start).replaceAll(r'\', '/');
 
 String importForWin32Type(TypeIdentifier identifier) {
   if (excludedWin32Structs.contains(identifier.name)) {
@@ -161,12 +153,33 @@ String importForWin32Type(TypeIdentifier identifier) {
 }
 
 /// Converts a namespace (e.g. `Windows.Win32.System.Console`) and returns the
-/// matching folder (e.g. `system/console`).
+/// matching folder (e.g. `system`).
 String folderFromNamespace(String namespace) {
   final segments = namespace.split('.').skip(2).toList()..removeLast();
-
   return segments.join('/').toLowerCase();
 }
+
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching folder
+/// (e.g. `storage/pickers`).
+String folderFromWinRTType(String fullyQualifiedType) {
+  final segments = fullyQualifiedType.split('.').skip(1).toList()..removeLast();
+  return segments.join('/').toLowerCase();
+}
+
+/// Converts a fully-qualified type (e.g.
+/// `Windows.Storage.Pickers.FileOpenPicker`) and returns the matching file path
+/// (e.g. `storage/pickers/fileopenpicker.dart`).
+String filePathFromWinRTType(String fullyQualifiedType) {
+  final fileName =
+      stripGenerics(lastComponent(fullyQualifiedType)).toLowerCase();
+  return '${folderFromWinRTType(stripGenerics(fullyQualifiedType))}/$fileName.dart';
+}
+
+/// Return the parent namespace of a fully-qualified type
+/// (e.g. `Windows.Gaming.Input.Gamepad` becomes `Windows.Gaming.Input`).
+String parentNamespace(String fullyQualifiedType) =>
+    (fullyQualifiedType.split('.')..removeLast()).join('.');
 
 /// Marks an identifier as private to the win32 library.
 String private(String identifier) => '_$identifier';
@@ -197,6 +210,137 @@ String stripLeadingUnderscores(String name) {
   return name;
 }
 
+/// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile` or
+/// `String, String?` for a name like `IMap<String, String?>`.
+String typeArguments(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(name.indexOf('<') + 1, name.length - 1);
+}
+
+/// Take a name like `IAsyncOperation<StorageFile>` and return `IAsyncOperation`.
+String outerType(String name) {
+  if (!name.contains('<')) return name;
+  return name.substring(0, name.indexOf('<'));
+}
+
+/// Parses the argument to be passed to the `creator` parameter from [ti].
+String? parseArgumentForCreatorParameter(TypeIdentifier ti) {
+  final typeProjection = TypeProjection(ti);
+  if (typeProjection.isWinRTStruct ||
+      ['bool', 'DateTime', 'double', 'Duration', 'int', 'String']
+          .contains(typeProjection.methodParamType)) {
+    return null;
+  }
+
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+      return '${lastComponent(ti.name)}.fromRawPointer';
+    case BaseType.genericTypeModifier:
+      return parseArgumentForCreatorParameterFromGenericTypeIdentifier(ti);
+    case BaseType.referenceTypeModifier:
+      return parseArgumentForCreatorParameter(ti.typeArg!);
+    case BaseType.valueTypeModifier:
+      if (ti.type?.isEnum ?? false) return '${lastComponent(ti.name)}.from';
+      return null;
+    default:
+      return null;
+  }
+}
+
+/// Parses the argument to be passed to the `creator` parameter from generic [ti].
+String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
+    TypeIdentifier ti) {
+  if (ti.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
+  final typeIdentifierName = stripGenerics(lastComponent(outerType(ti.name)));
+  final typeArg = ['IKeyValuePair', 'IMap', 'IMapView']
+          .contains(typeIdentifierName)
+      // Skip over to the value typeArg since the `creator` parameter does not
+      // need to be created for the key typeArg of the above types.
+      ? ti.typeArg!.typeArg!
+      : ti.typeArg;
+
+  final creator = parseArgumentForCreatorParameter(typeArg!);
+  if (creator == null) return '$typeIdentifierName.fromRawPointer';
+
+  final isTypeArgEnum = typeArg.type?.isEnum ?? false;
+  final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
+
+  return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(ptr, $creatorParamName: $creator)';
+}
+
+/// Returns the appropriate Dart primitive type name for the given [baseType].
+String primitiveTypeNameFromBaseType(BaseType baseType) {
+  switch (baseType) {
+    case BaseType.booleanType:
+      return 'bool';
+    case BaseType.doubleType:
+    case BaseType.floatType:
+      return 'double';
+    case BaseType.int8Type:
+    case BaseType.int16Type:
+    case BaseType.int32Type:
+    case BaseType.int64Type:
+    case BaseType.uint8Type:
+    case BaseType.uint16Type:
+    case BaseType.uint32Type:
+    case BaseType.uint64Type:
+      return 'int';
+    case BaseType.stringType:
+      return 'String';
+    default:
+      return 'undefined';
+  }
+}
+
+/// Returns the appropriate Dart type name for the given [ti].
+String parseTypeIdentifierName(TypeIdentifier ti) {
+  switch (ti.baseType) {
+    case BaseType.classTypeModifier:
+    case BaseType.valueTypeModifier:
+      if (ti.name == 'System.Guid') return 'GUID';
+      if (ti.name == 'Windows.Foundation.TimeSpan') return 'Duration';
+      return lastComponent(ti.name);
+    case BaseType.genericTypeModifier:
+      return parseGenericTypeIdentifierName(ti);
+    case BaseType.objectType:
+      return 'Object';
+    case BaseType.referenceTypeModifier:
+      return parseTypeIdentifierName(ti.typeArg!);
+    default:
+      return primitiveTypeNameFromBaseType(ti.baseType);
+  }
+}
+
+/// Unpack a nested [typeIdentifier] into a single name.
+String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
+  if (typeIdentifier.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
+  // If the typeIdentifier's name is already parsed, return it as is
+  if (typeIdentifier.name.contains('<')) return typeIdentifier.name;
+
+  final parentTypeName = stripGenerics(lastComponent(typeIdentifier.name));
+
+  if (typeIdentifier.type?.genericParams.length == 2) {
+    final secondArgMustBeNullable = [
+      'Windows.Foundation.Collections.IKeyValuePair`2',
+      'Windows.Foundation.Collections.IMap`2',
+      'Windows.Foundation.Collections.IMapView`2',
+      'Windows.Foundation.Collections.IObservableMap`2',
+    ].contains(typeIdentifier.type?.name);
+    final firstArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
+    final secondArg = parseTypeIdentifierName(typeIdentifier.typeArg!.typeArg!);
+    final questionMark = secondArgMustBeNullable ? '?' : '';
+    return '$parentTypeName<$firstArg, $secondArg$questionMark>';
+  }
+
+  return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';
+}
+
 /// Take a name like TypedEventHandler`2 and return TypedEventHandler.
 String stripGenerics(String name) {
   final backtickIndex = name.indexOf('`');
@@ -204,17 +348,50 @@ String stripGenerics(String name) {
   return name.substring(0, backtickIndex);
 }
 
-/// Qualify the DLL with an extension.
-///
-/// While most libraries have a DLL extension (e.g. `kernel32.dll`), there are a
-/// couple of exceptions. We hardcode them here, since there are so few.
-String libraryFromDllName(String dllName) {
-  switch (dllName) {
-    case 'bthprops':
-      return 'bthprops.cpl';
-    case 'winspool':
-      return 'winspool.drv';
-    default:
-      return '$dllName.dll';
+List<NamespaceGroup> groupTypesByParentNamespace(Iterable<String> types) {
+  types.toList().sort((a, b) => a.compareTo(b));
+  final namespaceGroups = <NamespaceGroup>[];
+  final namespaceGroup = NamespaceGroup(
+      namespace: parentNamespace(types.first), types: [types.first]);
+  namespaceGroups.add(namespaceGroup);
+
+  for (var i = 1; i < types.length; i++) {
+    final type = types.elementAt(i);
+    if (namespaceGroups
+        .where((e) => e.namespace == parentNamespace(type))
+        .isNotEmpty) {
+      final namespaceGroup = namespaceGroups
+          .firstWhere((e) => e.namespace == parentNamespace(type));
+      namespaceGroup.types.add(type);
+    } else {
+      final namespaceGroup =
+          NamespaceGroup(namespace: parentNamespace(type), types: [type]);
+      namespaceGroups.add(namespaceGroup);
+    }
   }
+
+  return namespaceGroups;
+}
+
+class NamespaceGroup {
+  NamespaceGroup({required this.namespace, required this.types});
+
+  final String namespace;
+  final List<String> types;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is NamespaceGroup &&
+        other.namespace == namespace &&
+        other.types.length == types.length &&
+        other.types.every(types.contains);
+  }
+
+  @override
+  int get hashCode => namespace.hashCode ^ types.hashCode;
+
+  @override
+  String toString() => 'NamespaceGroup(namespace: $namespace, types: $types)';
 }

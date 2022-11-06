@@ -1,56 +1,64 @@
-// IUnknown.dart
+// iunknown.dart
 
-// This class is generated manually, since it includes additional helper
-// functions that are only for the base COM object.
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: non_constant_identifier_names
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../callbacks.dart';
 import '../combase.dart';
+import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
+import '../structs.g.dart';
 import '../utils.dart';
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
 
-typedef _QueryInterface_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppvObject);
-typedef _QueryInterface_Dart = int Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppvObject);
-
-typedef _AddRef_Native = Uint32 Function(Pointer obj);
-typedef _AddRef_Dart = int Function(Pointer obj);
-
-typedef _Release_Native = Uint32 Function(Pointer obj);
-typedef _Release_Dart = int Function(Pointer obj);
-
 /// {@category Interface}
 /// {@category com}
 class IUnknown {
-  // vtable begins at 0, ends at 2
+  // vtable begins at 0, is 3 entries long.
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);
 
-  int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
-      Pointer<NativeFunction<_QueryInterface_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(0).value)
-          .asFunction<_QueryInterface_Dart>()(ptr.ref.lpVtbl, riid, ppvObject);
+  factory IUnknown.from(IUnknown interface) =>
+      IUnknown(interface.toInterface(IID_IUnknown));
 
-  int AddRef() => Pointer<NativeFunction<_AddRef_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(1).value)
-      .asFunction<_AddRef_Dart>()(ptr.ref.lpVtbl);
+  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
+      .ref.vtable
+      .elementAt(0)
+      .cast<
+          Pointer<
+              NativeFunction<
+                  Int32 Function(Pointer, Pointer<GUID> riid,
+                      Pointer<Pointer> ppvObject)>>>()
+      .value
+      .asFunction<
+          int Function(Pointer, Pointer<GUID> riid,
+              Pointer<Pointer> ppvObject)>()(ptr.ref.lpVtbl, riid, ppvObject);
 
-  int Release() => Pointer<NativeFunction<_Release_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(2).value)
-      .asFunction<_Release_Dart>()(ptr.ref.lpVtbl);
+  int addRef() => ptr.ref.vtable
+      .elementAt(1)
+      .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
+      .value
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+
+  int release() => ptr.ref.vtable
+      .elementAt(2)
+      .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
+      .value
+      .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
   /// Cast an existing COM object to a specified interface.
   ///
@@ -61,7 +69,7 @@ class IUnknown {
     final pIID = convertToIID(iid);
     final pObject = calloc<COMObject>();
     try {
-      final hr = QueryInterface(pIID, pObject.cast());
+      final hr = queryInterface(pIID, pObject.cast());
       if (FAILED(hr)) throw WindowsException(hr);
       return pObject;
     } finally {

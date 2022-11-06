@@ -24,7 +24,7 @@ void main() {
   final elements = calloc<Uint32>();
 
   try {
-    hr = netManager.GetConnectivity(nlmConnectivity);
+    hr = netManager.getConnectivity(nlmConnectivity);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
@@ -49,7 +49,7 @@ void main() {
       print('Not connected to the Internet.');
     }
 
-    hr = netManager.GetNetworks(
+    hr = netManager.getNetworks(
         NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
@@ -57,18 +57,18 @@ void main() {
 
     print('\nNetworks (connected and disconnected) on this machine:');
     final enumerator = IEnumNetworkConnections(enumPtr);
-    hr = enumerator.Next(1, netPtr.cast(), elements);
+    hr = enumerator.next(1, netPtr.cast(), elements);
     while (elements.value == 1) {
       final network = INetwork(netPtr);
-      hr = network.GetDescription(descPtr);
+      hr = network.getDescription(descPtr);
       if (SUCCEEDED(hr)) {
         final networkName = descPtr.value.toDartString();
-        final isNetworkConnected = network.IsConnected == VARIANT_TRUE;
+        final isNetworkConnected = network.isConnected == VARIANT_TRUE;
         print(
             '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}');
       }
 
-      hr = enumerator.Next(1, netPtr.cast(), elements);
+      hr = enumerator.next(1, netPtr.cast(), elements);
     }
   } finally {
     free(elements);

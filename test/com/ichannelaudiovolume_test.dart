@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final channelaudiovolume = IChannelAudioVolume(ptr);
-  test('Can instantiate IChannelAudioVolume.GetChannelCount', () {
-    expect(channelaudiovolume.GetChannelCount, isA<Function>());
+  test('Can instantiate IChannelAudioVolume.getChannelCount', () {
+    expect(channelaudiovolume.getChannelCount, isA<Function>());
   });
-  test('Can instantiate IChannelAudioVolume.SetChannelVolume', () {
-    expect(channelaudiovolume.SetChannelVolume, isA<Function>());
+  test('Can instantiate IChannelAudioVolume.setChannelVolume', () {
+    expect(channelaudiovolume.setChannelVolume, isA<Function>());
   });
-  test('Can instantiate IChannelAudioVolume.GetChannelVolume', () {
-    expect(channelaudiovolume.GetChannelVolume, isA<Function>());
+  test('Can instantiate IChannelAudioVolume.getChannelVolume', () {
+    expect(channelaudiovolume.getChannelVolume, isA<Function>());
   });
-  test('Can instantiate IChannelAudioVolume.SetAllVolumes', () {
-    expect(channelaudiovolume.SetAllVolumes, isA<Function>());
+  test('Can instantiate IChannelAudioVolume.setAllVolumes', () {
+    expect(channelaudiovolume.setAllVolumes, isA<Function>());
   });
-  test('Can instantiate IChannelAudioVolume.GetAllVolumes', () {
-    expect(channelaudiovolume.GetAllVolumes, isA<Function>());
+  test('Can instantiate IChannelAudioVolume.getAllVolumes', () {
+    expect(channelaudiovolume.getAllVolumes, isA<Function>());
   });
   free(ptr);
 }

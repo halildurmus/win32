@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IInspectable extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IInspectable(super.ptr);
 
-  int GetIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
+  factory IInspectable.from(IUnknown interface) =>
+      IInspectable(interface.toInterface(IID_IInspectable));
+
+  int getIids(Pointer<Uint32> iidCount, Pointer<Pointer<GUID>> iids) => ptr
       .ref.vtable
       .elementAt(3)
       .cast<
@@ -45,7 +47,7 @@ class IInspectable extends IUnknown {
           int Function(Pointer, Pointer<Uint32> iidCount,
               Pointer<Pointer<GUID>> iids)>()(ptr.ref.lpVtbl, iidCount, iids);
 
-  int GetRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.vtable
+  int getRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +57,7 @@ class IInspectable extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
       ptr.ref.lpVtbl, className);
 
-  int GetTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.vtable
+  int getTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

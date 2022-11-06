@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IShellItemArray extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   IShellItemArray(super.ptr);
 
-  int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
+  factory IShellItemArray.from(IUnknown interface) =>
+      IShellItemArray(interface.toInterface(IID_IShellItemArray));
+
+  int bindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppvOut) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -55,7 +57,7 @@ class IShellItemArray extends IUnknown {
                       Pointer<Pointer> ppvOut)>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppvOut);
 
-  int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
+  int getPropertyStore(int flags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(4)
           .cast<
@@ -68,7 +70,7 @@ class IShellItemArray extends IUnknown {
               int Function(Pointer, int flags, Pointer<GUID> riid,
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, flags, riid, ppv);
 
-  int GetPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
+  int getPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
           .elementAt(5)
@@ -86,7 +88,7 @@ class IShellItemArray extends IUnknown {
                   Pointer<Pointer> ppv)>()(ptr.ref.lpVtbl, keyType, riid, ppv);
 
   int
-      GetAttributes(
+      getAttributes(
               int AttribFlags, int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
           ptr.ref.vtable
                   .elementAt(6)
@@ -104,7 +106,7 @@ class IShellItemArray extends IUnknown {
                           Pointer<Uint32> psfgaoAttribs)>()(
               ptr.ref.lpVtbl, AttribFlags, sfgaoMask, psfgaoAttribs);
 
-  int GetCount(Pointer<Uint32> pdwNumItems) => ptr.ref.vtable
+  int getCount(Pointer<Uint32> pdwNumItems) => ptr.ref.vtable
           .elementAt(7)
           .cast<
               Pointer<
@@ -114,7 +116,7 @@ class IShellItemArray extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwNumItems)>()(
       ptr.ref.lpVtbl, pdwNumItems);
 
-  int GetItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
+  int getItemAt(int dwIndex, Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -127,7 +129,7 @@ class IShellItemArray extends IUnknown {
                   Pointer, int dwIndex, Pointer<Pointer<COMObject>> ppsi)>()(
       ptr.ref.lpVtbl, dwIndex, ppsi);
 
-  int EnumItems(Pointer<Pointer<COMObject>> ppenumShellItems) => ptr.ref.vtable
+  int enumItems(Pointer<Pointer<COMObject>> ppenumShellItems) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<

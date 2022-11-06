@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAudioStreamVolume extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IAudioStreamVolume(super.ptr);
 
-  int GetChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
+  factory IAudioStreamVolume.from(IUnknown interface) =>
+      IAudioStreamVolume(interface.toInterface(IID_IAudioStreamVolume));
+
+  int getChannelCount(Pointer<Uint32> pdwCount) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -42,7 +44,7 @@ class IAudioStreamVolume extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCount)>()(
       ptr.ref.lpVtbl, pdwCount);
 
-  int SetChannelVolume(int dwIndex, double fLevel) => ptr.ref.vtable
+  int setChannelVolume(int dwIndex, double fLevel) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -52,7 +54,7 @@ class IAudioStreamVolume extends IUnknown {
           .asFunction<int Function(Pointer, int dwIndex, double fLevel)>()(
       ptr.ref.lpVtbl, dwIndex, fLevel);
 
-  int GetChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
+  int getChannelVolume(int dwIndex, Pointer<Float> pfLevel) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -64,7 +66,7 @@ class IAudioStreamVolume extends IUnknown {
               int Function(Pointer, int dwIndex, Pointer<Float> pfLevel)>()(
       ptr.ref.lpVtbl, dwIndex, pfLevel);
 
-  int SetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
+  int setAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -76,7 +78,7 @@ class IAudioStreamVolume extends IUnknown {
           int Function(Pointer, int dwCount,
               Pointer<Float> pfVolumes)>()(ptr.ref.lpVtbl, dwCount, pfVolumes);
 
-  int GetAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
+  int getAllVolumes(int dwCount, Pointer<Float> pfVolumes) => ptr.ref.vtable
       .elementAt(7)
       .cast<
           Pointer<

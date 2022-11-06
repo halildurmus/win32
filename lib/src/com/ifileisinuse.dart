@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IFileIsInUse extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IFileIsInUse(super.ptr);
 
-  int GetAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.vtable
+  factory IFileIsInUse.from(IUnknown interface) =>
+      IFileIsInUse(interface.toInterface(IID_IFileIsInUse));
+
+  int getAppName(Pointer<Pointer<Utf16>> ppszName) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -43,7 +45,7 @@ class IFileIsInUse extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> ppszName)>()(ptr.ref.lpVtbl, ppszName);
 
-  int GetUsage(Pointer<Int32> pfut) => ptr.ref.vtable
+  int getUsage(Pointer<Int32> pfut) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -52,7 +54,7 @@ class IFileIsInUse extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Int32> pfut)>()(ptr.ref.lpVtbl, pfut);
 
-  int GetCapabilities(Pointer<Uint32> pdwCapFlags) => ptr.ref.vtable
+  int getCapabilities(Pointer<Uint32> pdwCapFlags) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -62,7 +64,7 @@ class IFileIsInUse extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCapFlags)>()(
       ptr.ref.lpVtbl, pdwCapFlags);
 
-  int GetSwitchToHWND(Pointer<IntPtr> phwnd) => ptr.ref.vtable
+  int getSwitchToHWND(Pointer<IntPtr> phwnd) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -72,7 +74,7 @@ class IFileIsInUse extends IUnknown {
           int Function(
               Pointer, Pointer<IntPtr> phwnd)>()(ptr.ref.lpVtbl, phwnd);
 
-  int CloseFile() => ptr.ref.vtable
+  int closeFile() => ptr.ref.vtable
       .elementAt(7)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

@@ -4,27 +4,29 @@ import '../projection/utils.dart';
 import 'version.dart';
 
 String v2ParentImport(List<TypeDef> parentInterfaces) {
-  const v2StandardImports = '''
-    import '../callbacks.dart';
-    import '../combase.dart';
-    import '../constants.dart';
-    import '../exceptions.dart';
-    import '../guid.dart';
-    import '../macros.dart';
-    import '../ole32.dart';
-    import '../structs.dart';
-    import '../structs.g.dart';
-    import '../utils.dart';
-''';
+  final imports = <String>{
+    '../callbacks.dart',
+    '../combase.dart',
+    '../constants.dart',
+    '../exceptions.dart',
+    '../guid.dart',
+    '../macros.dart',
+    '../structs.g.dart',
+    '../utils.dart',
+    '../variant.dart',
+    '../win32/ole32.g.dart'
+  };
 
   if (parentInterfaces.isNotEmpty) {
     final interfaceName =
         lastComponent(parentInterfaces.first.name).toLowerCase();
     if (interfaceName.isNotEmpty) {
-      return "$v2StandardImports\nimport '$interfaceName.dart';";
+      imports
+        ..add('$interfaceName.dart')
+        ..add('iunknown.dart');
     }
   }
-  return v2StandardImports;
+  return imports.map((import) => "import '$import';").join('\n');
 }
 
 String versionSpecificImports(String pathToSrc, String importHeader,
@@ -37,7 +39,7 @@ String versionSpecificImports(String pathToSrc, String importHeader,
     import '${pathToSrc}exceptions.dart';
     import '${pathToSrc}guid.dart';
     import '${pathToSrc}macros.dart';
-    import '${pathToSrc}ole32.dart';
     import '${pathToSrc}utils.dart';
+    import '${pathToSrc}win32/ole32.g.dart';
 
     $importHeader''';

@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemconfigurerefresher = IWbemConfigureRefresher(ptr);
-  test('Can instantiate IWbemConfigureRefresher.AddObjectByPath', () {
-    expect(wbemconfigurerefresher.AddObjectByPath, isA<Function>());
+  test('Can instantiate IWbemConfigureRefresher.addObjectByPath', () {
+    expect(wbemconfigurerefresher.addObjectByPath, isA<Function>());
   });
-  test('Can instantiate IWbemConfigureRefresher.AddObjectByTemplate', () {
-    expect(wbemconfigurerefresher.AddObjectByTemplate, isA<Function>());
+  test('Can instantiate IWbemConfigureRefresher.addObjectByTemplate', () {
+    expect(wbemconfigurerefresher.addObjectByTemplate, isA<Function>());
   });
-  test('Can instantiate IWbemConfigureRefresher.AddRefresher', () {
-    expect(wbemconfigurerefresher.AddRefresher, isA<Function>());
+  test('Can instantiate IWbemConfigureRefresher.addRefresher', () {
+    expect(wbemconfigurerefresher.addRefresher, isA<Function>());
   });
-  test('Can instantiate IWbemConfigureRefresher.Remove', () {
-    expect(wbemconfigurerefresher.Remove, isA<Function>());
+  test('Can instantiate IWbemConfigureRefresher.remove', () {
+    expect(wbemconfigurerefresher.remove, isA<Function>());
   });
-  test('Can instantiate IWbemConfigureRefresher.AddEnum', () {
-    expect(wbemconfigurerefresher.AddEnum, isA<Function>());
+  test('Can instantiate IWbemConfigureRefresher.addEnum', () {
+    expect(wbemconfigurerefresher.addEnum, isA<Function>());
   });
   free(ptr);
 }

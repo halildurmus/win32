@@ -12,8 +12,8 @@ import 'constants.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
-import 'ole32.dart';
 import 'utils.dart';
+import 'win32/ole32.g.dart';
 
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.

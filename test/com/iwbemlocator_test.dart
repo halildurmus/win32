@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemlocator = IWbemLocator(ptr);
-  test('Can instantiate IWbemLocator.ConnectServer', () {
-    expect(wbemlocator.ConnectServer, isA<Function>());
+  test('Can instantiate IWbemLocator.connectServer', () {
+    expect(wbemlocator.connectServer, isA<Function>());
   });
   free(ptr);
 }

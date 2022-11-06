@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IMMDevice extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IMMDevice(super.ptr);
 
-  int Activate(
+  factory IMMDevice.from(IUnknown interface) =>
+      IMMDevice(interface.toInterface(IID_IMMDevice));
+
+  int activate(
           Pointer<GUID> iid,
           int dwClsCtx,
           Pointer<PROPVARIANT> pActivationParams,
@@ -58,7 +60,7 @@ class IMMDevice extends IUnknown {
                       Pointer<Pointer> ppInterface)>()(
           ptr.ref.lpVtbl, iid, dwClsCtx, pActivationParams, ppInterface);
 
-  int OpenPropertyStore(
+  int openPropertyStore(
           int stgmAccess, Pointer<Pointer<COMObject>> ppProperties) =>
       ptr
               .ref.vtable
@@ -74,7 +76,7 @@ class IMMDevice extends IUnknown {
                       Pointer<Pointer<COMObject>> ppProperties)>()(
           ptr.ref.lpVtbl, stgmAccess, ppProperties);
 
-  int GetId(Pointer<Pointer<Utf16>> ppstrId) => ptr.ref.vtable
+  int getId(Pointer<Pointer<Utf16>> ppstrId) => ptr.ref.vtable
       .elementAt(5)
       .cast<
           Pointer<
@@ -85,7 +87,7 @@ class IMMDevice extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<Utf16>> ppstrId)>()(ptr.ref.lpVtbl, ppstrId);
 
-  int GetState(Pointer<Uint32> pdwState) => ptr.ref.vtable
+  int getState(Pointer<Uint32> pdwState) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

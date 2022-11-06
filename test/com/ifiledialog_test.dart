@@ -22,74 +22,74 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final filedialog = IFileDialog(ptr);
-  test('Can instantiate IFileDialog.SetFileTypes', () {
-    expect(filedialog.SetFileTypes, isA<Function>());
+  test('Can instantiate IFileDialog.setFileTypes', () {
+    expect(filedialog.setFileTypes, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetFileTypeIndex', () {
-    expect(filedialog.SetFileTypeIndex, isA<Function>());
+  test('Can instantiate IFileDialog.setFileTypeIndex', () {
+    expect(filedialog.setFileTypeIndex, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetFileTypeIndex', () {
-    expect(filedialog.GetFileTypeIndex, isA<Function>());
+  test('Can instantiate IFileDialog.getFileTypeIndex', () {
+    expect(filedialog.getFileTypeIndex, isA<Function>());
   });
-  test('Can instantiate IFileDialog.Advise', () {
-    expect(filedialog.Advise, isA<Function>());
+  test('Can instantiate IFileDialog.advise', () {
+    expect(filedialog.advise, isA<Function>());
   });
-  test('Can instantiate IFileDialog.Unadvise', () {
-    expect(filedialog.Unadvise, isA<Function>());
+  test('Can instantiate IFileDialog.unadvise', () {
+    expect(filedialog.unadvise, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetOptions', () {
-    expect(filedialog.SetOptions, isA<Function>());
+  test('Can instantiate IFileDialog.setOptions', () {
+    expect(filedialog.setOptions, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetOptions', () {
-    expect(filedialog.GetOptions, isA<Function>());
+  test('Can instantiate IFileDialog.getOptions', () {
+    expect(filedialog.getOptions, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetDefaultFolder', () {
-    expect(filedialog.SetDefaultFolder, isA<Function>());
+  test('Can instantiate IFileDialog.setDefaultFolder', () {
+    expect(filedialog.setDefaultFolder, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetFolder', () {
-    expect(filedialog.SetFolder, isA<Function>());
+  test('Can instantiate IFileDialog.setFolder', () {
+    expect(filedialog.setFolder, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetFolder', () {
-    expect(filedialog.GetFolder, isA<Function>());
+  test('Can instantiate IFileDialog.getFolder', () {
+    expect(filedialog.getFolder, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetCurrentSelection', () {
-    expect(filedialog.GetCurrentSelection, isA<Function>());
+  test('Can instantiate IFileDialog.getCurrentSelection', () {
+    expect(filedialog.getCurrentSelection, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetFileName', () {
-    expect(filedialog.SetFileName, isA<Function>());
+  test('Can instantiate IFileDialog.setFileName', () {
+    expect(filedialog.setFileName, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetFileName', () {
-    expect(filedialog.GetFileName, isA<Function>());
+  test('Can instantiate IFileDialog.getFileName', () {
+    expect(filedialog.getFileName, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetTitle', () {
-    expect(filedialog.SetTitle, isA<Function>());
+  test('Can instantiate IFileDialog.setTitle', () {
+    expect(filedialog.setTitle, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetOkButtonLabel', () {
-    expect(filedialog.SetOkButtonLabel, isA<Function>());
+  test('Can instantiate IFileDialog.setOkButtonLabel', () {
+    expect(filedialog.setOkButtonLabel, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetFileNameLabel', () {
-    expect(filedialog.SetFileNameLabel, isA<Function>());
+  test('Can instantiate IFileDialog.setFileNameLabel', () {
+    expect(filedialog.setFileNameLabel, isA<Function>());
   });
-  test('Can instantiate IFileDialog.GetResult', () {
-    expect(filedialog.GetResult, isA<Function>());
+  test('Can instantiate IFileDialog.getResult', () {
+    expect(filedialog.getResult, isA<Function>());
   });
-  test('Can instantiate IFileDialog.AddPlace', () {
-    expect(filedialog.AddPlace, isA<Function>());
+  test('Can instantiate IFileDialog.addPlace', () {
+    expect(filedialog.addPlace, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetDefaultExtension', () {
-    expect(filedialog.SetDefaultExtension, isA<Function>());
+  test('Can instantiate IFileDialog.setDefaultExtension', () {
+    expect(filedialog.setDefaultExtension, isA<Function>());
   });
-  test('Can instantiate IFileDialog.Close', () {
-    expect(filedialog.Close, isA<Function>());
+  test('Can instantiate IFileDialog.close', () {
+    expect(filedialog.close, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetClientGuid', () {
-    expect(filedialog.SetClientGuid, isA<Function>());
+  test('Can instantiate IFileDialog.setClientGuid', () {
+    expect(filedialog.setClientGuid, isA<Function>());
   });
-  test('Can instantiate IFileDialog.ClearClientData', () {
-    expect(filedialog.ClearClientData, isA<Function>());
+  test('Can instantiate IFileDialog.clearClientData', () {
+    expect(filedialog.clearClientData, isA<Function>());
   });
-  test('Can instantiate IFileDialog.SetFilter', () {
-    expect(filedialog.SetFilter, isA<Function>());
+  test('Can instantiate IFileDialog.setFilter', () {
+    expect(filedialog.setFilter, isA<Function>());
   });
   free(ptr);
 }

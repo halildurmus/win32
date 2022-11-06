@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IShellItem extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IShellItem(super.ptr);
 
-  int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
+  factory IShellItem.from(IUnknown interface) =>
+      IShellItem(interface.toInterface(IID_IShellItem));
+
+  int bindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -55,7 +57,7 @@ class IShellItem extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
+  int getParent(Pointer<Pointer<COMObject>> ppsi) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<
@@ -66,7 +68,7 @@ class IShellItem extends IUnknown {
           int Function(Pointer,
               Pointer<Pointer<COMObject>> ppsi)>()(ptr.ref.lpVtbl, ppsi);
 
-  int GetDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
+  int getDisplayName(int sigdnName, Pointer<Pointer<Utf16>> ppszName) => ptr
           .ref.vtable
           .elementAt(5)
           .cast<
@@ -80,7 +82,7 @@ class IShellItem extends IUnknown {
                   Pointer, int sigdnName, Pointer<Pointer<Utf16>> ppszName)>()(
       ptr.ref.lpVtbl, sigdnName, ppszName);
 
-  int GetAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
+  int getAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
       ptr.ref.vtable
               .elementAt(6)
               .cast<
@@ -94,7 +96,7 @@ class IShellItem extends IUnknown {
                       Pointer, int sfgaoMask, Pointer<Uint32> psfgaoAttribs)>()(
           ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
-  int Compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) => ptr
+  int compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) => ptr
       .ref.vtable
       .elementAt(7)
       .cast<

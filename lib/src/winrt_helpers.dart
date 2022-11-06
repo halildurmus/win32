@@ -10,17 +10,20 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'api_ms_win_core_winrt_l1_1_0.dart';
-import 'api_ms_win_core_winrt_string_l1_1_0.dart';
 import 'com/iinspectable.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
-import 'ole32.dart';
 import 'types.dart';
 import 'utils.dart';
+import 'win32/api_ms_win_core_winrt_l1_1_0.g.dart';
+import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import 'win32/ole32.g.dart';
+import 'winrt/foundation/winrt_enum.dart';
+import 'winrt/internal/iterable_iids.dart';
+import 'winrt/internal/reference_iids.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -38,43 +41,11 @@ extension WinRTStringConversion on Pointer<HSTRING> {
   String toDartString() => convertFromHString(value);
 }
 
-/// Takes a `HSTRING` (a WinRT String handle), and converts it to a Dart
-/// `String`.
-///
-/// {@category winrt}
-String convertFromHString(int hstring) =>
-    WindowsGetStringRawBuffer(hstring, nullptr).toDartString();
-
-/// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
-/// returning an integer handle.
-///
-/// The caller is responsible for deleting the `HSTRING` when it is no longer
-/// used, through a call to `WindowsDeleteString(HSTRING hstr)`, which
-/// decrements the reference count of that string. If the reference count
-/// reaches 0, the Windows Runtime deallocates the buffer.
-///
-/// {@category winrt}
-int convertToHString(String string) {
-  final hString = calloc<HSTRING>();
-  final stringPtr = string.toNativeUtf16();
-  // Create a HSTRING representing the object
-  try {
-    final hr = WindowsCreateString(stringPtr, string.length, hString);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    } else {
-      return hString.value;
-    }
-  } finally {
-    free(stringPtr);
-  }
-}
-
 /// Creates a WinRT object.
 ///
 /// ```dart
 /// final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-/// final calendar = ICalendar.from(object);
+/// final calendar = ICalendar.fromRawPointer(object);
 /// ```
 ///
 /// {@category winrt}
@@ -108,7 +79,7 @@ Pointer<COMObject> CreateObject(String className, String iid) {
 
     // Now use IInspectable to navigate to the relevant interface
     final inspectable = IInspectable(inspectablePtr);
-    hr = inspectable.QueryInterface(riid, classPtr);
+    hr = inspectable.queryInterface(riid, classPtr);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
@@ -179,6 +150,68 @@ Pointer<COMObject> CreateActivationFactory(String className, String iid,
   }
 }
 
+/// Determines whether [S] is the same type as [T].
+///
+/// ```dart
+/// isSameType<String, String>(); // true
+/// isSameType<String?, String>(); // false
+/// ```
+bool isSameType<S, T>() {
+  void func<X extends S>() {}
+  return func is void Function<X extends T>();
+}
+
+/// Determines whether [S] is the same type as [T] or [T?].
+///
+/// ```dart
+/// isSimilarType<String?, String>(); // true
+/// isSimilarType<String?, String?>(); // true
+/// ```
+bool isSimilarType<S, T>() => isSameType<S, T>() || isSameType<S, T?>();
+
+/// Determines whether [S] is a subtype of [T] or [T?].
+///
+/// ```dart
+/// isSubtype<Calendar, IInspectable>(); // true
+/// isSubtype<IUnknown, IInspectable>(); // false
+/// ```
+bool isSubtype<S, T>() => <S>[] is List<T> || <S>[] is List<T?>;
+
+/// Determines whether [T] is a subtype of `WinRTEnum`.
+///
+/// ```dart
+/// isSubtypeOfWinRTEnum<AsyncStatus>(); // true
+/// isSubtypeOfWinRTEnum<FileAttributes>(); // true
+/// ```
+bool isSubtypeOfWinRTEnum<T>() => isSubtype<T, WinRTEnum>();
+
+/// Determines whether [T] is a subtype of `IInspectable`.
+///
+/// ```dart
+/// isSubtypeOfInspectable<FileOpenPicker>(); // true
+/// isSubtypeOfInspectable<INetwork>(); // false
+/// ```
+bool isSubtypeOfInspectable<T>() => isSubtype<T, IInspectable>();
+
+/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
+/// `IIterable`.
+String iterableIidFromIids(List<String> iids) {
+  final iterableIid = iids.firstWhere((iid) => mapIterableIids.contains(iid),
+      orElse: () => 'null');
+  if (iterableIid != 'null') return iterableIid;
+
+  return iids.firstWhere((iid) => vectorIterableIids.contains(iid),
+      orElse: () =>
+          throw Exception('No IIterable IID found in the given iids: $iids'));
+}
+
+/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
+/// `IReference`.
+String referenceIidFromIids(List<String> iids) => iids.firstWhere(
+    (iid) => referenceIids.contains(iid),
+    orElse: () =>
+        throw Exception('No IReference IID found in the given iids: $iids'));
+
 /// Represents the trust level of an activatable class.
 ///
 /// {@category Enum}
@@ -204,7 +237,7 @@ extension IInspectableExtension on IInspectable {
     final pIIDs = calloc<Pointer<GUID>>();
 
     try {
-      final hr = GetIids(pIIDCount, pIIDs);
+      final hr = getIids(pIIDCount, pIIDs);
       if (SUCCEEDED(hr)) {
         return [
           for (var i = 0; i < pIIDCount.value; i++) pIIDs.value[i].toString()
@@ -223,7 +256,7 @@ extension IInspectableExtension on IInspectable {
     final hstr = calloc<HSTRING>();
 
     try {
-      final hr = GetRuntimeClassName(hstr);
+      final hr = getRuntimeClassName(hstr);
       if (SUCCEEDED(hr)) {
         return convertFromHString(hstr.value);
       } else {
@@ -239,7 +272,7 @@ extension IInspectableExtension on IInspectable {
     final pTrustLevel = calloc<Int32>();
 
     try {
-      final hr = GetTrustLevel(pTrustLevel);
+      final hr = getTrustLevel(pTrustLevel);
       if (SUCCEEDED(hr)) {
         switch (pTrustLevel.value) {
           case 0:

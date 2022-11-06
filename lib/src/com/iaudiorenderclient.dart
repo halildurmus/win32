@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IAudioRenderClient extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAudioRenderClient(super.ptr);
 
-  int GetBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
+  factory IAudioRenderClient.from(IUnknown interface) =>
+      IAudioRenderClient(interface.toInterface(IID_IAudioRenderClient));
+
+  int getBuffer(int NumFramesRequested, Pointer<Pointer<Uint8>> ppData) =>
       ptr.ref.vtable
               .elementAt(3)
               .cast<
@@ -46,7 +48,7 @@ class IAudioRenderClient extends IUnknown {
                       Pointer<Pointer<Uint8>> ppData)>()(
           ptr.ref.lpVtbl, NumFramesRequested, ppData);
 
-  int ReleaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.vtable
+  int releaseBuffer(int NumFramesWritten, int dwFlags) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

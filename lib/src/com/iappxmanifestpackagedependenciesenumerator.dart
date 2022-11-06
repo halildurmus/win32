@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -33,7 +32,11 @@ class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestPackageDependenciesEnumerator(super.ptr);
 
-  int GetCurrent(Pointer<Pointer<COMObject>> dependency) => ptr.ref.vtable
+  factory IAppxManifestPackageDependenciesEnumerator.from(IUnknown interface) =>
+      IAppxManifestPackageDependenciesEnumerator(interface
+          .toInterface(IID_IAppxManifestPackageDependenciesEnumerator));
+
+  int getCurrent(Pointer<Pointer<COMObject>> dependency) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -45,7 +48,7 @@ class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> dependency)>()(
       ptr.ref.lpVtbl, dependency);
 
-  int GetHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.vtable
+  int getHasCurrent(Pointer<Int32> hasCurrent) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +58,7 @@ class IAppxManifestPackageDependenciesEnumerator extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Int32> hasCurrent)>()(
       ptr.ref.lpVtbl, hasCurrent);
 
-  int MoveNext(Pointer<Int32> hasNext) => ptr.ref.vtable
+  int moveNext(Pointer<Int32> hasNext) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

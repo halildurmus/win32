@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxfile = IAppxFile(ptr);
-  test('Can instantiate IAppxFile.GetCompressionOption', () {
-    expect(appxfile.GetCompressionOption, isA<Function>());
+  test('Can instantiate IAppxFile.getCompressionOption', () {
+    expect(appxfile.getCompressionOption, isA<Function>());
   });
-  test('Can instantiate IAppxFile.GetContentType', () {
-    expect(appxfile.GetContentType, isA<Function>());
+  test('Can instantiate IAppxFile.getContentType', () {
+    expect(appxfile.getContentType, isA<Function>());
   });
-  test('Can instantiate IAppxFile.GetName', () {
-    expect(appxfile.GetName, isA<Function>());
+  test('Can instantiate IAppxFile.getName', () {
+    expect(appxfile.getName, isA<Function>());
   });
-  test('Can instantiate IAppxFile.GetSize', () {
-    expect(appxfile.GetSize, isA<Function>());
+  test('Can instantiate IAppxFile.getSize', () {
+    expect(appxfile.getSize, isA<Function>());
   });
-  test('Can instantiate IAppxFile.GetStream', () {
-    expect(appxfile.GetStream, isA<Function>());
+  test('Can instantiate IAppxFile.getStream', () {
+    expect(appxfile.getStream, isA<Function>());
   });
   free(ptr);
 }

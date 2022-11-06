@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IModalWindow extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IModalWindow(super.ptr);
 
-  int Show(int hwndOwner) => ptr.ref.vtable
+  factory IModalWindow.from(IUnknown interface) =>
+      IModalWindow(interface.toInterface(IID_IModalWindow));
+
+  int show(int hwndOwner) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()

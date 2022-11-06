@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxmanifestreader2 = IAppxManifestReader2(ptr);
-  test('Can instantiate IAppxManifestReader2.GetQualifiedResources', () {
-    expect(appxmanifestreader2.GetQualifiedResources, isA<Function>());
+  test('Can instantiate IAppxManifestReader2.getQualifiedResources', () {
+    expect(appxmanifestreader2.getQualifiedResources, isA<Function>());
   });
   free(ptr);
 }

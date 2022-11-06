@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final appxfactory = IAppxFactory(ptr);
-  test('Can instantiate IAppxFactory.CreatePackageWriter', () {
-    expect(appxfactory.CreatePackageWriter, isA<Function>());
+  test('Can instantiate IAppxFactory.createPackageWriter', () {
+    expect(appxfactory.createPackageWriter, isA<Function>());
   });
-  test('Can instantiate IAppxFactory.CreatePackageReader', () {
-    expect(appxfactory.CreatePackageReader, isA<Function>());
+  test('Can instantiate IAppxFactory.createPackageReader', () {
+    expect(appxfactory.createPackageReader, isA<Function>());
   });
-  test('Can instantiate IAppxFactory.CreateManifestReader', () {
-    expect(appxfactory.CreateManifestReader, isA<Function>());
+  test('Can instantiate IAppxFactory.createManifestReader', () {
+    expect(appxfactory.createManifestReader, isA<Function>());
   });
-  test('Can instantiate IAppxFactory.CreateBlockMapReader', () {
-    expect(appxfactory.CreateBlockMapReader, isA<Function>());
+  test('Can instantiate IAppxFactory.createBlockMapReader', () {
+    expect(appxfactory.createBlockMapReader, isA<Function>());
   });
-  test('Can instantiate IAppxFactory.CreateValidatedBlockMapReader', () {
-    expect(appxfactory.CreateValidatedBlockMapReader, isA<Function>());
+  test('Can instantiate IAppxFactory.createValidatedBlockMapReader', () {
+    expect(appxfactory.createValidatedBlockMapReader, isA<Function>());
   });
   free(ptr);
 }

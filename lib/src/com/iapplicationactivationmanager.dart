@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -33,7 +32,11 @@ class IApplicationActivationManager extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IApplicationActivationManager(super.ptr);
 
-  int ActivateApplication(Pointer<Utf16> appUserModelId,
+  factory IApplicationActivationManager.from(IUnknown interface) =>
+      IApplicationActivationManager(
+          interface.toInterface(IID_IApplicationActivationManager));
+
+  int activateApplication(Pointer<Utf16> appUserModelId,
           Pointer<Utf16> arguments, int options, Pointer<Uint32> processId) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -56,7 +59,7 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, arguments, options, processId);
 
-  int ActivateForFile(
+  int activateForFile(
           Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray,
           Pointer<Utf16> verb,
@@ -82,7 +85,7 @@ class IApplicationActivationManager extends IUnknown {
                       Pointer<Uint32> processId)>()(
           ptr.ref.lpVtbl, appUserModelId, itemArray, verb, processId);
 
-  int ActivateForProtocol(Pointer<Utf16> appUserModelId,
+  int activateForProtocol(Pointer<Utf16> appUserModelId,
           Pointer<COMObject> itemArray, Pointer<Uint32> processId) =>
       ptr.ref.vtable
               .elementAt(5)

@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IWbemHiPerfEnum extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IWbemHiPerfEnum(super.ptr);
 
-  int AddObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
+  factory IWbemHiPerfEnum.from(IUnknown interface) =>
+      IWbemHiPerfEnum(interface.toInterface(IID_IWbemHiPerfEnum));
+
+  int addObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds,
           Pointer<Pointer<COMObject>> apObj) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -55,7 +57,7 @@ class IWbemHiPerfEnum extends IUnknown {
                       Pointer<Pointer<COMObject>> apObj)>()(
           ptr.ref.lpVtbl, lFlags, uNumObjects, apIds, apObj);
 
-  int RemoveObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) => ptr
+  int removeObjects(int lFlags, int uNumObjects, Pointer<Int32> apIds) => ptr
           .ref.vtable
           .elementAt(4)
           .cast<
@@ -69,7 +71,7 @@ class IWbemHiPerfEnum extends IUnknown {
                   Pointer<Int32> apIds)>()(
       ptr.ref.lpVtbl, lFlags, uNumObjects, apIds);
 
-  int GetObjects(int lFlags, int uNumObjects, Pointer<Pointer<COMObject>> apObj,
+  int getObjects(int lFlags, int uNumObjects, Pointer<Pointer<COMObject>> apObj,
           Pointer<Uint32> puReturned) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -92,7 +94,7 @@ class IWbemHiPerfEnum extends IUnknown {
                       Pointer<Uint32> puReturned)>()(
           ptr.ref.lpVtbl, lFlags, uNumObjects, apObj, puReturned);
 
-  int RemoveAll(int lFlags) => ptr.ref.vtable
+  int removeAll(int lFlags) => ptr.ref.vtable
       .elementAt(6)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value

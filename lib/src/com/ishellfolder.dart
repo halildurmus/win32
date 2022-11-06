@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IShellFolder extends IUnknown {
   // vtable begins at 3, is 10 entries long.
   IShellFolder(super.ptr);
 
-  int ParseDisplayName(
+  factory IShellFolder.from(IUnknown interface) =>
+      IShellFolder(interface.toInterface(IID_IShellFolder));
+
+  int parseDisplayName(
           int hwnd,
           Pointer<COMObject> pbc,
           Pointer<Utf16> pszDisplayName,
@@ -64,7 +66,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Uint32> pdwAttributes)>()(ptr.ref.lpVtbl, hwnd,
           pbc, pszDisplayName, pchEaten, ppidl, pdwAttributes);
 
-  int EnumObjects(
+  int enumObjects(
           int hwnd, int grfFlags, Pointer<Pointer<COMObject>> ppenumIDList) =>
       ptr.ref.vtable
               .elementAt(4)
@@ -79,7 +81,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Pointer<COMObject>> ppenumIDList)>()(
           ptr.ref.lpVtbl, hwnd, grfFlags, ppenumIDList);
 
-  int BindToObject(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
+  int bindToObject(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
               .elementAt(5)
@@ -102,7 +104,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pidl, pbc, riid, ppv);
 
-  int BindToStorage(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
+  int bindToStorage(Pointer<ITEMIDLIST> pidl, Pointer<COMObject> pbc,
           Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
               .elementAt(6)
@@ -125,7 +127,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, pidl, pbc, riid, ppv);
 
-  int CompareIDs(
+  int compareIDs(
           int lParam, Pointer<ITEMIDLIST> pidl1, Pointer<ITEMIDLIST> pidl2) =>
       ptr.ref.vtable
               .elementAt(7)
@@ -143,7 +145,7 @@ class IShellFolder extends IUnknown {
                       Pointer<ITEMIDLIST> pidl2)>()(
           ptr.ref.lpVtbl, lParam, pidl1, pidl2);
 
-  int CreateViewObject(
+  int createViewObject(
           int hwndOwner, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       ptr.ref.vtable
               .elementAt(8)
@@ -158,7 +160,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, hwndOwner, riid, ppv);
 
-  int GetAttributesOf(int cidl, Pointer<Pointer<ITEMIDLIST>> apidl,
+  int getAttributesOf(int cidl, Pointer<Pointer<ITEMIDLIST>> apidl,
           Pointer<Uint32> rgfInOut) =>
       ptr.ref.vtable
               .elementAt(9)
@@ -179,7 +181,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Uint32> rgfInOut)>()(
           ptr.ref.lpVtbl, cidl, apidl, rgfInOut);
 
-  int GetUIObjectOf(
+  int getUIObjectOf(
           int hwndOwner,
           int cidl,
           Pointer<Pointer<ITEMIDLIST>> apidl,
@@ -211,7 +213,7 @@ class IShellFolder extends IUnknown {
                       Pointer<Pointer> ppv)>()(
           ptr.ref.lpVtbl, hwndOwner, cidl, apidl, riid, rgfReserved, ppv);
 
-  int GetDisplayNameOf(
+  int getDisplayNameOf(
           Pointer<ITEMIDLIST> pidl, int uFlags, Pointer<STRRET> pName) =>
       ptr.ref.vtable
               .elementAt(11)
@@ -226,7 +228,7 @@ class IShellFolder extends IUnknown {
                       Pointer<STRRET> pName)>()(
           ptr.ref.lpVtbl, pidl, uFlags, pName);
 
-  int SetNameOf(int hwnd, Pointer<ITEMIDLIST> pidl, Pointer<Utf16> pszName,
+  int setNameOf(int hwnd, Pointer<ITEMIDLIST> pidl, Pointer<Utf16> pszName,
           int uFlags, Pointer<Pointer<ITEMIDLIST>> ppidlOut) =>
       ptr.ref.vtable
               .elementAt(12)

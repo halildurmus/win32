@@ -30,7 +30,13 @@ const ffiTypes = <String>{
   'Uint8', 'Uint16', 'Uint32', 'Uint64',
   'Double', 'Float', 'Array', 'IntPtr',
   'Pointer', 'Union', 'Opaque', 'Struct',
-  'Unsized', 'Void', 'Packed', 'Handle',
+  'Unsized', 'Void', 'Packed',
+
+  // While `Handle` is an FFI type, in practice, it doesn't seem to be a
+  // problem, and since it's used by user32.dart, we're manually excluding it
+  // from this list.
+  //
+  // 'Handle',
 
   // TODO: Add named prefix to use of dart:ffi so that this is a non-issue
 };
@@ -78,7 +84,7 @@ String safeIdentifierForTypeDef(TypeDef typeDef) {
 /// For example, `VARIANT var` should be converted to `VARIANT $var`, and
 /// `_XmlWriterProperty` should be converted to `XmlWriterProperty`.
 String safeIdentifierForString(String name) => badIdentifierNames.contains(name)
-    ? r'$' + name
+    ? '${name}_'
     : stripLeadingUnderscores(name);
 
 String safeTypenameForTypeDef(TypeDef typeDef) =>

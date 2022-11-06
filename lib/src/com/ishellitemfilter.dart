@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IShellItemFilter extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IShellItemFilter(super.ptr);
 
-  int IncludeItem(Pointer<COMObject> psi) => ptr.ref.vtable
+  factory IShellItemFilter.from(IUnknown interface) =>
+      IShellItemFilter(interface.toInterface(IID_IShellItemFilter));
+
+  int includeItem(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -42,7 +44,7 @@ class IShellItemFilter extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<COMObject> psi)>()(
       ptr.ref.lpVtbl, psi);
 
-  int GetEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
+  int getEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
       ptr.ref.vtable
           .elementAt(4)
           .cast<

@@ -22,23 +22,23 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final spellchecker = ISpellChecker(ptr);
-  test('Can instantiate ISpellChecker.Check', () {
-    expect(spellchecker.Check, isA<Function>());
+  test('Can instantiate ISpellChecker.check', () {
+    expect(spellchecker.check, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.Suggest', () {
-    expect(spellchecker.Suggest, isA<Function>());
+  test('Can instantiate ISpellChecker.suggest', () {
+    expect(spellchecker.suggest, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.Add', () {
-    expect(spellchecker.Add, isA<Function>());
+  test('Can instantiate ISpellChecker.add', () {
+    expect(spellchecker.add, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.Ignore', () {
-    expect(spellchecker.Ignore, isA<Function>());
+  test('Can instantiate ISpellChecker.ignore', () {
+    expect(spellchecker.ignore, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.AutoCorrect', () {
-    expect(spellchecker.AutoCorrect, isA<Function>());
+  test('Can instantiate ISpellChecker.autoCorrect', () {
+    expect(spellchecker.autoCorrect, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.GetOptionValue', () {
-    expect(spellchecker.GetOptionValue, isA<Function>());
+  test('Can instantiate ISpellChecker.getOptionValue', () {
+    expect(spellchecker.getOptionValue, isA<Function>());
   });
   test('Can instantiate ISpellChecker.add_SpellCheckerChanged', () {
     expect(spellchecker.add_SpellCheckerChanged, isA<Function>());
@@ -46,11 +46,11 @@ void main() {
   test('Can instantiate ISpellChecker.remove_SpellCheckerChanged', () {
     expect(spellchecker.remove_SpellCheckerChanged, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.GetOptionDescription', () {
-    expect(spellchecker.GetOptionDescription, isA<Function>());
+  test('Can instantiate ISpellChecker.getOptionDescription', () {
+    expect(spellchecker.getOptionDescription, isA<Function>());
   });
-  test('Can instantiate ISpellChecker.ComprehensiveCheck', () {
-    expect(spellchecker.ComprehensiveCheck, isA<Function>());
+  test('Can instantiate ISpellChecker.comprehensiveCheck', () {
+    expect(spellchecker.comprehensiveCheck, isA<Function>());
   });
   free(ptr);
 }

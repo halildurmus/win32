@@ -93,7 +93,7 @@ void main() {
     expect(ptrFactory.address, isNonZero);
 
     final classFactory = IClassFactory(ptrFactory);
-    hr = classFactory.CreateInstance(
+    hr = classFactory.createInstance(
         nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
     expect(hr, equals(S_OK));
     expect(ptrSaveDialog.address, isNonZero);
@@ -133,7 +133,7 @@ void main() {
       final riid = convertToIID(IID_IUnknown);
 
       final classPtr = calloc<Pointer>();
-      final hr = dialog.QueryInterface(riid.cast(), classPtr);
+      final hr = dialog.queryInterface(riid.cast(), classPtr);
       expect(hr, equals(S_OK));
 
       final unk = IUnknown(classPtr.cast());
@@ -146,25 +146,59 @@ void main() {
       final riid = convertToIID(IID_IDesktopWallpaper);
 
       final classPtr = calloc<Pointer>();
-      final hr = dialog.QueryInterface(riid.cast(), classPtr);
+      final hr = dialog.queryInterface(riid.cast(), classPtr);
       expect(hr, equals(E_NOINTERFACE));
 
       free(classPtr);
       free(riid);
     });
     test('AddRef / Release', () {
-      var refs = dialog.AddRef();
+      var refs = dialog.addRef();
       expect(refs, equals(2));
 
-      refs = dialog.AddRef();
+      refs = dialog.addRef();
       expect(refs, equals(3));
 
-      refs = dialog.Release();
+      refs = dialog.release();
       expect(refs, equals(2));
 
-      refs = dialog.Release();
+      refs = dialog.release();
       expect(refs, equals(1));
     });
+    tearDown(() {
+      free(dialog.ptr);
+      CoUninitialize();
+    });
+  });
+
+  group('COM object casting using methods', () {
+    late FileOpenDialog dialog;
+    setUp(() {
+      final hr = CoInitializeEx(
+          nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      dialog = FileOpenDialog.createInstance();
+    });
+    test('Can cast to various supported interfaces', () {
+      expect(() => IUnknown.from(dialog), returnsNormally);
+      expect(() => IModalWindow.from(dialog), returnsNormally);
+      expect(() => IFileOpenDialog.from(dialog), returnsNormally);
+      expect(() => IFileDialog.from(dialog), returnsNormally);
+      expect(() => IFileDialog2.from(dialog), returnsNormally);
+    });
+
+    test('Cannot cast to various unsupported interfaces', () {
+      expect(
+          () => IShellItem.from(dialog),
+          throwsA(isA<WindowsException>()
+              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+      expect(
+          () => ISpeechObjectToken.from(dialog),
+          throwsA(isA<WindowsException>()
+              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))));
+    });
+
     tearDown(() {
       free(dialog.ptr);
       CoUninitialize();

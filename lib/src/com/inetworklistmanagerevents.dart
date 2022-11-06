@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,11 @@ class INetworkListManagerEvents extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   INetworkListManagerEvents(super.ptr);
 
-  int ConnectivityChanged(int newConnectivity) => ptr.ref.vtable
+  factory INetworkListManagerEvents.from(IUnknown interface) =>
+      INetworkListManagerEvents(
+          interface.toInterface(IID_INetworkListManagerEvents));
+
+  int connectivityChanged(int newConnectivity) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<

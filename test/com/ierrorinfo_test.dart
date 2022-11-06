@@ -22,20 +22,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final errorinfo = IErrorInfo(ptr);
-  test('Can instantiate IErrorInfo.GetGUID', () {
-    expect(errorinfo.GetGUID, isA<Function>());
+  test('Can instantiate IErrorInfo.getGUID', () {
+    expect(errorinfo.getGUID, isA<Function>());
   });
-  test('Can instantiate IErrorInfo.GetSource', () {
-    expect(errorinfo.GetSource, isA<Function>());
+  test('Can instantiate IErrorInfo.getSource', () {
+    expect(errorinfo.getSource, isA<Function>());
   });
-  test('Can instantiate IErrorInfo.GetDescription', () {
-    expect(errorinfo.GetDescription, isA<Function>());
+  test('Can instantiate IErrorInfo.getDescription', () {
+    expect(errorinfo.getDescription, isA<Function>());
   });
-  test('Can instantiate IErrorInfo.GetHelpFile', () {
-    expect(errorinfo.GetHelpFile, isA<Function>());
+  test('Can instantiate IErrorInfo.getHelpFile', () {
+    expect(errorinfo.getHelpFile, isA<Function>());
   });
-  test('Can instantiate IErrorInfo.GetHelpContext', () {
-    expect(errorinfo.GetHelpContext, isA<Function>());
+  test('Can instantiate IErrorInfo.getHelpContext', () {
+    expect(errorinfo.getHelpContext, isA<Function>());
   });
   free(ptr);
 }

@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISpellingError extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   ISpellingError(super.ptr);
 
-  int get StartIndex {
+  factory ISpellingError.from(IUnknown interface) =>
+      ISpellingError(interface.toInterface(IID_ISpellingError));
+
+  int get startIndex {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -55,7 +57,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  int get Length {
+  int get length {
     final retValuePtr = calloc<Uint32>();
 
     try {
@@ -78,7 +80,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  int get CorrectiveAction {
+  int get correctiveAction {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -101,7 +103,7 @@ class ISpellingError extends IUnknown {
     }
   }
 
-  Pointer<Utf16> get Replacement {
+  Pointer<Utf16> get replacement {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {

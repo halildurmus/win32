@@ -46,8 +46,8 @@ import 'package:win32/win32.dart';
       // });''';
     } else {
       return '''
-  test('Can instantiate $interfaceName.${methodProjection.name}', () {
-    expect($instanceName.${methodProjection.name}, isA<Function>());
+  test('Can instantiate $interfaceName.${methodProjection.camelCasedName}', () {
+    expect($instanceName.${methodProjection.camelCasedName}, isA<Function>());
   });''';
     }
   }

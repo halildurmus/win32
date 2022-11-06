@@ -22,11 +22,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final connectionpointcontainer = IConnectionPointContainer(ptr);
-  test('Can instantiate IConnectionPointContainer.EnumConnectionPoints', () {
-    expect(connectionpointcontainer.EnumConnectionPoints, isA<Function>());
+  test('Can instantiate IConnectionPointContainer.enumConnectionPoints', () {
+    expect(connectionpointcontainer.enumConnectionPoints, isA<Function>());
   });
-  test('Can instantiate IConnectionPointContainer.FindConnectionPoint', () {
-    expect(connectionpointcontainer.FindConnectionPoint, isA<Function>());
+  test('Can instantiate IConnectionPointContainer.findConnectionPoint', () {
+    expect(connectionpointcontainer.findConnectionPoint, isA<Function>());
   });
   free(ptr);
 }

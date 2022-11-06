@@ -22,17 +22,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumresources = IEnumResources(ptr);
-  test('Can instantiate IEnumResources.Next', () {
-    expect(enumresources.Next, isA<Function>());
+  test('Can instantiate IEnumResources.next', () {
+    expect(enumresources.next, isA<Function>());
   });
-  test('Can instantiate IEnumResources.Skip', () {
-    expect(enumresources.Skip, isA<Function>());
+  test('Can instantiate IEnumResources.skip', () {
+    expect(enumresources.skip, isA<Function>());
   });
-  test('Can instantiate IEnumResources.Reset', () {
-    expect(enumresources.Reset, isA<Function>());
+  test('Can instantiate IEnumResources.reset', () {
+    expect(enumresources.reset, isA<Function>());
   });
-  test('Can instantiate IEnumResources.Clone', () {
-    expect(enumresources.Clone, isA<Function>());
+  test('Can instantiate IEnumResources.clone', () {
+    expect(enumresources.clone, isA<Function>());
   });
   free(ptr);
 }

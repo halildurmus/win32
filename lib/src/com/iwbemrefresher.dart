@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IWbemRefresher extends IUnknown {
   // vtable begins at 3, is 1 entries long.
   IWbemRefresher(super.ptr);
 
-  int Refresh(int lFlags) => ptr.ref.vtable
+  factory IWbemRefresher.from(IUnknown interface) =>
+      IWbemRefresher(interface.toInterface(IID_IWbemRefresher));
+
+  int refresh(int lFlags) => ptr.ref.vtable
       .elementAt(3)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 lFlags)>>>()
       .value

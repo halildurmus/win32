@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class ISpellChecker extends IUnknown {
   // vtable begins at 3, is 14 entries long.
   ISpellChecker(super.ptr);
 
-  Pointer<Utf16> get LanguageTag {
+  factory ISpellChecker.from(IUnknown interface) =>
+      ISpellChecker(interface.toInterface(IID_ISpellChecker));
+
+  Pointer<Utf16> get languageTag {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -57,7 +59,7 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  int Check(Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
+  int check(Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(4)
               .cast<
@@ -71,7 +73,7 @@ class ISpellChecker extends IUnknown {
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, text, value);
 
-  int Suggest(Pointer<Utf16> word, Pointer<Pointer<COMObject>> value) =>
+  int suggest(Pointer<Utf16> word, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(5)
               .cast<
@@ -85,7 +87,7 @@ class ISpellChecker extends IUnknown {
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, word, value);
 
-  int Add(Pointer<Utf16> word) => ptr.ref.vtable
+  int add(Pointer<Utf16> word) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
@@ -94,7 +96,7 @@ class ISpellChecker extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
 
-  int Ignore(Pointer<Utf16> word) => ptr.ref.vtable
+  int ignore(Pointer<Utf16> word) => ptr.ref.vtable
       .elementAt(7)
       .cast<
           Pointer<
@@ -103,7 +105,7 @@ class ISpellChecker extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<Utf16> word)>()(ptr.ref.lpVtbl, word);
 
-  int AutoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) => ptr.ref.vtable
+  int autoCorrect(Pointer<Utf16> from, Pointer<Utf16> to) => ptr.ref.vtable
           .elementAt(8)
           .cast<
               Pointer<
@@ -115,7 +117,7 @@ class ISpellChecker extends IUnknown {
               int Function(Pointer, Pointer<Utf16> from, Pointer<Utf16> to)>()(
       ptr.ref.lpVtbl, from, to);
 
-  int GetOptionValue(Pointer<Utf16> optionId, Pointer<Uint8> value) =>
+  int getOptionValue(Pointer<Utf16> optionId, Pointer<Uint8> value) =>
       ptr.ref.vtable
           .elementAt(9)
           .cast<
@@ -128,7 +130,7 @@ class ISpellChecker extends IUnknown {
               int Function(Pointer, Pointer<Utf16> optionId,
                   Pointer<Uint8> value)>()(ptr.ref.lpVtbl, optionId, value);
 
-  Pointer<COMObject> get OptionIds {
+  Pointer<COMObject> get optionIds {
     final retValuePtr = calloc<Pointer<COMObject>>();
 
     try {
@@ -153,7 +155,7 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  Pointer<Utf16> get Id {
+  Pointer<Utf16> get id {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -178,7 +180,7 @@ class ISpellChecker extends IUnknown {
     }
   }
 
-  Pointer<Utf16> get LocalizedName {
+  Pointer<Utf16> get localizedName {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -228,7 +230,7 @@ class ISpellChecker extends IUnknown {
           int Function(
               Pointer, int eventCookie)>()(ptr.ref.lpVtbl, eventCookie);
 
-  int GetOptionDescription(
+  int getOptionDescription(
           Pointer<Utf16> optionId, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(15)
@@ -243,7 +245,7 @@ class ISpellChecker extends IUnknown {
                       Pointer<Pointer<COMObject>> value)>()(
           ptr.ref.lpVtbl, optionId, value);
 
-  int ComprehensiveCheck(
+  int comprehensiveCheck(
           Pointer<Utf16> text, Pointer<Pointer<COMObject>> value) =>
       ptr.ref.vtable
               .elementAt(16)

@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -33,7 +32,11 @@ class IAppxManifestOSPackageDependency extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IAppxManifestOSPackageDependency(super.ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
+  factory IAppxManifestOSPackageDependency.from(IUnknown interface) =>
+      IAppxManifestOSPackageDependency(
+          interface.toInterface(IID_IAppxManifestOSPackageDependency));
+
+  int getName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +46,7 @@ class IAppxManifestOSPackageDependency extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int GetVersion(Pointer<Uint64> version) => ptr.ref.vtable
+  int getVersion(Pointer<Uint64> version) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<

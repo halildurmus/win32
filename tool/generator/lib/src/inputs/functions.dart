@@ -2,21 +2,6 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
-/// DLL libraries and API sets for which we will generate FFI bindings. These
-/// are the only ones we cover; anything missing here won't be generated.
-const dllLibraries = [
-  // API sets
-  'api-ms-win-core-winrt-l1-1-0', 'api-ms-win-core-winrt-string-l1-1-0',
-  'api-ms-win-wsl-api-l1-1-0',
-
-  // DLLs
-  'advapi32', 'bthprops', 'bluetoothapis', 'comctl32', 'comdlg32', 'dbghelp',
-  'dwmapi', 'dxva2', 'gdi32', 'kernel32', 'kernelbase', 'magnification',
-  'ole32', 'oleaut32', 'powrprof', 'rometadata', 'scarddlg', 'setupapi',
-  'shcore', 'shell32', 'shlwapi', 'spoolss', 'user32', 'uxtheme', 'version',
-  'xinput1_4', 'winmm', 'winscard', 'winspool', 'wlanapi', 'ws2_32'
-];
-
 /// Maps between Windows versions and the corresponding build numbers
 ///
 /// Details from:
@@ -37,26 +22,32 @@ const windowsBuilds = <String, int>{
   'WIN10_20H2': 19042,
   'WIN10_21H1': 19043,
   'WIN10_21H2': 19044,
+  'WIN10_22H2': 19045,
+  'WIN2022': 20348, // Windows Server 2022 LTSC
   'WIN11_21H2': 22000,
+  'WIN11_22H2': 22621,
 };
 
 /// Converts to/from functions.json
 class Win32Function {
-  final List<String> prototype;
-
-  final String dllLibrary;
-  final bool _isApiSet;
+  final String prototype;
   final String comment;
+  final String functionSymbol;
+
   final String category;
   final bool _isCustomCategorySet;
 
   final int minimumWindowsVersion;
   final bool test;
 
+  static String functionNameFromPrototype(String prototype) {
+    final funcPreamble = prototype.split('(').first;
+    final firstSpace = funcPreamble.lastIndexOf(' ');
+    return funcPreamble.substring(firstSpace + 1);
+  }
+
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'prototype': prototype.first,
-        if (!_isApiSet) 'dllLibrary': dllLibrary,
-        if (_isApiSet) 'apiSet': dllLibrary,
+        'prototype': prototype,
         'comment': comment,
         if (_isCustomCategorySet) 'category': category,
         if (minimumWindowsVersion != 0)
@@ -68,15 +59,10 @@ class Win32Function {
   Win32Function.fromJson(Map<String, dynamic> json)
       : assert(json['prototype'] != null),
         assert(json['comment'] != null),
-        prototype = [json['prototype'] as String],
-        dllLibrary = json['dllLibrary'] != null
-            ? json['dllLibrary'] as String
-            : json['apiSet'] as String,
-        _isApiSet = json['dllLibrary'] == null,
+        prototype = json['prototype'] as String,
+        functionSymbol = functionNameFromPrototype(json['prototype'] as String),
         comment = json['comment'] as String,
-        category = json['category'] != null
-            ? json['category'] as String
-            : json['dllLibrary'] as String,
+        category = json['category'] != null ? json['category'] as String : '',
         _isCustomCategorySet = json['category'] != null,
         minimumWindowsVersion = json['minimumWindowsVersion'] != null
             ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
@@ -97,4 +83,10 @@ SplayTreeMap<String, Win32Function> loadFunctionsFromJson() {
         Win32Function.fromJson(decodedJson[api] as Map<String, dynamic>);
   }
   return functions;
+}
+
+void saveFunctionsToJson(SplayTreeMap<String, Win32Function> functions) {
+  final encoder = const JsonEncoder.withIndent('    ');
+  final outputText = encoder.convert(functions).replaceAll(r'\\n', r'\n');
+  File('lib/src/inputs/functions.json').writeAsStringSync(outputText);
 }

@@ -83,10 +83,7 @@ class ComInterfaceProjection {
   }
 
   String? getImportForTypeIdentifier(TypeIdentifier typeIdentifier) {
-    if (excludedTypes.contains(typeIdentifier.name)) {
-      return 'specialTypes.dart';
-    }
-
+    if (excludedTypes.contains(typeIdentifier.name)) return 'specialTypes.dart';
     if (typeIdentifier.name == 'System.Guid') return '../guid.dart';
 
     if (typeIdentifier.name.startsWith('Windows')) {
@@ -162,6 +159,11 @@ class ComInterfaceProjection {
     const IID_$shortName = '${typeDef.guid}';
   ''';
 
+  String get fromCOMObjectHelper => '''
+  factory $shortName.from(IUnknown interface) =>
+      $shortName(interface.toInterface(IID_$shortName));
+  ''';
+
   String get queryInterfaceHelper => shortName != 'IUnknown'
       ? ''
       : '''
@@ -174,7 +176,7 @@ class ComInterfaceProjection {
       final pIID = convertToIID(iid);
       final pObject = calloc<COMObject>();
       try {
-        final hr = QueryInterface(pIID, pObject.cast());
+        final hr = queryInterface(pIID, pObject.cast());
         if (FAILED(hr)) throw WindowsException(hr);
         return pObject;
       } finally {
@@ -208,6 +210,8 @@ class ComInterfaceProjection {
       class $shortName $extendsClause {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor
+
+        $fromCOMObjectHelper
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
 

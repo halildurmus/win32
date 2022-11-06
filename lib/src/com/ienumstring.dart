@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IEnumString extends IUnknown {
   // vtable begins at 3, is 4 entries long.
   IEnumString(super.ptr);
 
-  int Next(int celt, Pointer<Pointer<Utf16>> rgelt,
+  factory IEnumString.from(IUnknown interface) =>
+      IEnumString(interface.toInterface(IID_IEnumString));
+
+  int next(int celt, Pointer<Pointer<Utf16>> rgelt,
           Pointer<Uint32> pceltFetched) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -50,19 +52,19 @@ class IEnumString extends IUnknown {
                       Pointer<Uint32> pceltFetched)>()(
           ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(int celt) => ptr.ref.vtable
+  int skip(int celt) => ptr.ref.vtable
       .elementAt(4)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Uint32 celt)>>>()
       .value
       .asFunction<int Function(Pointer, int celt)>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => ptr.ref.vtable
+  int reset() => ptr.ref.vtable
       .elementAt(5)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
+  int clone(Pointer<Pointer<COMObject>> ppenum) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<

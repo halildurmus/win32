@@ -2,7 +2,7 @@
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 
 const testString = "If my grandmother had wheels, she'd be a motorbike";
 

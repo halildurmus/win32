@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'ifiledialog.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IFileDialog2 = '{61744FC7-85B5-4791-A9B0-272276309B13}';
@@ -32,7 +32,10 @@ class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, is 2 entries long.
   IFileDialog2(super.ptr);
 
-  int SetCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
+  factory IFileDialog2.from(IUnknown interface) =>
+      IFileDialog2(interface.toInterface(IID_IFileDialog2));
+
+  int setCancelButtonLabel(Pointer<Utf16> pszLabel) => ptr.ref.vtable
           .elementAt(27)
           .cast<
               Pointer<
@@ -42,7 +45,7 @@ class IFileDialog2 extends IFileDialog {
           .asFunction<int Function(Pointer, Pointer<Utf16> pszLabel)>()(
       ptr.ref.lpVtbl, pszLabel);
 
-  int SetNavigationRoot(Pointer<COMObject> psi) => ptr.ref.vtable
+  int setNavigationRoot(Pointer<COMObject> psi) => ptr.ref.vtable
           .elementAt(28)
           .cast<
               Pointer<

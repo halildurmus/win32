@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IErrorInfo extends IUnknown {
   // vtable begins at 3, is 5 entries long.
   IErrorInfo(super.ptr);
 
-  int GetGUID(Pointer<GUID> pGUID) => ptr.ref.vtable
+  factory IErrorInfo.from(IUnknown interface) =>
+      IErrorInfo(interface.toInterface(IID_IErrorInfo));
+
+  int getGUID(Pointer<GUID> pGUID) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
@@ -41,7 +43,7 @@ class IErrorInfo extends IUnknown {
       .asFunction<
           int Function(Pointer, Pointer<GUID> pGUID)>()(ptr.ref.lpVtbl, pGUID);
 
-  int GetSource(Pointer<Pointer<Utf16>> pBstrSource) => ptr.ref.vtable
+  int getSource(Pointer<Pointer<Utf16>> pBstrSource) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -53,7 +55,7 @@ class IErrorInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pBstrSource)>()(
       ptr.ref.lpVtbl, pBstrSource);
 
-  int GetDescription(Pointer<Pointer<Utf16>> pBstrDescription) => ptr.ref.vtable
+  int getDescription(Pointer<Pointer<Utf16>> pBstrDescription) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<
@@ -66,7 +68,7 @@ class IErrorInfo extends IUnknown {
                   Pointer, Pointer<Pointer<Utf16>> pBstrDescription)>()(
       ptr.ref.lpVtbl, pBstrDescription);
 
-  int GetHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => ptr.ref.vtable
+  int getHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) => ptr.ref.vtable
           .elementAt(6)
           .cast<
               Pointer<
@@ -78,7 +80,7 @@ class IErrorInfo extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> pBstrHelpFile)>()(
       ptr.ref.lpVtbl, pBstrHelpFile);
 
-  int GetHelpContext(Pointer<Uint32> pdwHelpContext) =>
+  int getHelpContext(Pointer<Uint32> pdwHelpContext) =>
       ptr.ref.vtable
               .elementAt(7)
               .cast<

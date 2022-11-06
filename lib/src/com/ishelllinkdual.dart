@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_IShellLinkDual = '{88A05C00-F000-11CE-8350-444553540000}';
@@ -32,7 +32,10 @@ class IShellLinkDual extends IDispatch {
   // vtable begins at 7, is 16 entries long.
   IShellLinkDual(super.ptr);
 
-  Pointer<Utf16> get Path {
+  factory IShellLinkDual.from(IUnknown interface) =>
+      IShellLinkDual(interface.toInterface(IID_IShellLinkDual));
+
+  Pointer<Utf16> get path {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -56,7 +59,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set Path(Pointer<Utf16> value) {
+  set path(Pointer<Utf16> value) {
     final hr = ptr.ref.vtable
         .elementAt(8)
         .cast<
@@ -69,7 +72,7 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer<Utf16> get Description {
+  Pointer<Utf16> get description {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -93,7 +96,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set Description(Pointer<Utf16> value) {
+  set description(Pointer<Utf16> value) {
     final hr = ptr.ref.vtable
         .elementAt(10)
         .cast<
@@ -106,7 +109,7 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer<Utf16> get WorkingDirectory {
+  Pointer<Utf16> get workingDirectory {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -130,7 +133,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set WorkingDirectory(Pointer<Utf16> value) {
+  set workingDirectory(Pointer<Utf16> value) {
     final hr = ptr.ref.vtable
         .elementAt(12)
         .cast<
@@ -143,7 +146,7 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Pointer<Utf16> get Arguments {
+  Pointer<Utf16> get arguments {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
     try {
@@ -167,7 +170,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set Arguments(Pointer<Utf16> value) {
+  set arguments(Pointer<Utf16> value) {
     final hr = ptr.ref.vtable
         .elementAt(14)
         .cast<
@@ -180,7 +183,7 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get Hotkey {
+  int get hotkey {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -203,7 +206,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set Hotkey(int value) {
+  set hotkey(int value) {
     final hr = ptr.ref.vtable
         .elementAt(16)
         .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 iHK)>>>()
@@ -213,7 +216,7 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int get ShowCommand {
+  int get showCommand {
     final retValuePtr = calloc<Int32>();
 
     try {
@@ -237,7 +240,7 @@ class IShellLinkDual extends IDispatch {
     }
   }
 
-  set ShowCommand(int value) {
+  set showCommand(int value) {
     final hr = ptr.ref.vtable
         .elementAt(18)
         .cast<
@@ -250,13 +253,13 @@ class IShellLinkDual extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int Resolve(int fFlags) => ptr.ref.vtable
+  int resolve(int fFlags) => ptr.ref.vtable
       .elementAt(19)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, Int32 fFlags)>>>()
       .value
       .asFunction<int Function(Pointer, int fFlags)>()(ptr.ref.lpVtbl, fFlags);
 
-  int GetIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
+  int getIconLocation(Pointer<Pointer<Utf16>> pbs, Pointer<Int32> piIcon) =>
       ptr.ref.vtable
           .elementAt(20)
           .cast<
@@ -269,7 +272,7 @@ class IShellLinkDual extends IDispatch {
               int Function(Pointer, Pointer<Pointer<Utf16>> pbs,
                   Pointer<Int32> piIcon)>()(ptr.ref.lpVtbl, pbs, piIcon);
 
-  int SetIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.vtable
+  int setIconLocation(Pointer<Utf16> bs, int iIcon) => ptr.ref.vtable
       .elementAt(21)
       .cast<
           Pointer<
@@ -280,7 +283,7 @@ class IShellLinkDual extends IDispatch {
           int Function(Pointer, Pointer<Utf16> bs,
               int iIcon)>()(ptr.ref.lpVtbl, bs, iIcon);
 
-  int Save(VARIANT vWhere) => ptr.ref.vtable
+  int save(VARIANT vWhere) => ptr.ref.vtable
       .elementAt(22)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer, VARIANT vWhere)>>>()
       .value

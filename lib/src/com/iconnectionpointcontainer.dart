@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,11 @@ class IConnectionPointContainer extends IUnknown {
   // vtable begins at 3, is 2 entries long.
   IConnectionPointContainer(super.ptr);
 
-  int EnumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
+  factory IConnectionPointContainer.from(IUnknown interface) =>
+      IConnectionPointContainer(
+          interface.toInterface(IID_IConnectionPointContainer));
+
+  int enumConnectionPoints(Pointer<Pointer<COMObject>> ppEnum) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -44,7 +47,7 @@ class IConnectionPointContainer extends IUnknown {
               int Function(Pointer, Pointer<Pointer<COMObject>> ppEnum)>()(
       ptr.ref.lpVtbl, ppEnum);
 
-  int FindConnectionPoint(
+  int findConnectionPoint(
           Pointer<GUID> riid, Pointer<Pointer<COMObject>> ppCP) =>
       ptr.ref.vtable
               .elementAt(4)

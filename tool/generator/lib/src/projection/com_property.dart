@@ -10,8 +10,8 @@ abstract class ComPropertyProjection extends ComMethodProjection {
   /// Strip off all underscores, even if double underscores
   String get exposedMethodName =>
       method.name.startsWith('get__') | method.name.startsWith('put__')
-          ? safeIdentifierForString(method.name.substring(5))
-          : safeIdentifierForString(method.name.substring(4));
+          ? safeIdentifierForString(method.name.substring(5)).toCamelCase()
+          : safeIdentifierForString(method.name.substring(4)).toCamelCase();
 }
 
 class ComGetPropertyProjection extends ComPropertyProjection {

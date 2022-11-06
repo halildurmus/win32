@@ -22,14 +22,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final audiocaptureclient = IAudioCaptureClient(ptr);
-  test('Can instantiate IAudioCaptureClient.GetBuffer', () {
-    expect(audiocaptureclient.GetBuffer, isA<Function>());
+  test('Can instantiate IAudioCaptureClient.getBuffer', () {
+    expect(audiocaptureclient.getBuffer, isA<Function>());
   });
-  test('Can instantiate IAudioCaptureClient.ReleaseBuffer', () {
-    expect(audiocaptureclient.ReleaseBuffer, isA<Function>());
+  test('Can instantiate IAudioCaptureClient.releaseBuffer', () {
+    expect(audiocaptureclient.releaseBuffer, isA<Function>());
   });
-  test('Can instantiate IAudioCaptureClient.GetNextPacketSize', () {
-    expect(audiocaptureclient.GetNextPacketSize, isA<Function>());
+  test('Can instantiate IAudioCaptureClient.getNextPacketSize', () {
+    expect(audiocaptureclient.getNextPacketSize, isA<Function>());
   });
   free(ptr);
 }

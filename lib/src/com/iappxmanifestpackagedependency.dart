@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -33,7 +32,11 @@ class IAppxManifestPackageDependency extends IUnknown {
   // vtable begins at 3, is 3 entries long.
   IAppxManifestPackageDependency(super.ptr);
 
-  int GetName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
+  factory IAppxManifestPackageDependency.from(IUnknown interface) =>
+      IAppxManifestPackageDependency(
+          interface.toInterface(IID_IAppxManifestPackageDependency));
+
+  int getName(Pointer<Pointer<Utf16>> name) => ptr.ref.vtable
           .elementAt(3)
           .cast<
               Pointer<
@@ -43,7 +46,7 @@ class IAppxManifestPackageDependency extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Pointer<Utf16>> name)>()(
       ptr.ref.lpVtbl, name);
 
-  int GetPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
+  int getPublisher(Pointer<Pointer<Utf16>> publisher) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
@@ -55,7 +58,7 @@ class IAppxManifestPackageDependency extends IUnknown {
               int Function(Pointer, Pointer<Pointer<Utf16>> publisher)>()(
       ptr.ref.lpVtbl, publisher);
 
-  int GetMinVersion(Pointer<Uint64> minVersion) => ptr.ref.vtable
+  int getMinVersion(Pointer<Uint64> minVersion) => ptr.ref.vtable
           .elementAt(5)
           .cast<
               Pointer<

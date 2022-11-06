@@ -80,13 +80,13 @@ String getDesktopPath3() {
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
   try {
     final knownFolderManager = KnownFolderManager.createInstance();
-    var hr = knownFolderManager.GetFolder(appsFolder, ppkf.cast());
+    var hr = knownFolderManager.getFolder(appsFolder, ppkf.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
     final knownFolder = IKnownFolder(ppkf);
-    hr = knownFolder.GetPath(0, ppszPath);
+    hr = knownFolder.getPath(0, ppszPath);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }

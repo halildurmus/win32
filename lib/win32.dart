@@ -77,24 +77,25 @@ export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/guid.dart';
+export 'src/inline.dart';
 export 'src/macros.dart';
-export 'src/structs.dart';
 export 'src/structs.g.dart'
     hide
-        addrinfo,
-        fd_set,
+        ADDRINFO,
+        FD_SET,
         IN_ADDR,
         SOCKADDR,
-        timeval,
-        hostent,
-        protoent,
-        servent;
+        TIMEVAL,
+        HOSTENT,
+        PROTOENT,
+        SERVENT;
+export 'src/types.dart';
 export 'src/utils.dart';
+export 'src/variant.dart';
+export 'src/winmd_constants.dart';
 
 // Useful extension methods
-export 'src/extensions/comobject_pointer.dart';
 export 'src/extensions/dialogs.dart';
-export 'src/extensions/hstring_array.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
 export 'src/extensions/set_ansi.dart';
@@ -103,49 +104,50 @@ export 'src/extensions/set_string_array.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
-export 'src/advapi32.dart';
-export 'src/bluetoothapis.dart';
-export 'src/bthprops.dart';
-export 'src/comctl32.dart';
-export 'src/comdlg32.dart';
-export 'src/dbghelp.dart';
-export 'src/dwmapi.dart';
-export 'src/dxva2.dart';
-export 'src/gdi32.dart';
-export 'src/inline.dart';
-export 'src/kernel32.dart';
-export 'src/kernelbase.dart';
-export 'src/magnification.dart';
-export 'src/ole32.dart';
-export 'src/oleaut32.dart';
-export 'src/powrprof.dart';
-export 'src/rometadata.dart';
-export 'src/scarddlg.dart';
-export 'src/setupapi.dart';
-export 'src/shcore.dart';
-export 'src/shell32.dart';
-export 'src/spoolss.dart';
-export 'src/types.dart';
-export 'src/user32.dart';
-export 'src/uxtheme.dart';
-export 'src/version.dart';
-export 'src/winmm.dart';
-export 'src/winscard.dart';
-export 'src/winspool.dart';
-export 'src/wlanapi.dart';
-export 'src/xinput1_4.dart';
+export 'src/win32/advapi32.g.dart';
+export 'src/win32/bluetoothapis.g.dart';
+export 'src/win32/bthprops.g.dart';
+export 'src/win32/comctl32.g.dart';
+export 'src/win32/comdlg32.g.dart';
+export 'src/win32/dbghelp.g.dart';
+export 'src/win32/dwmapi.g.dart';
+export 'src/win32/dxva2.g.dart';
+export 'src/win32/gdi32.g.dart';
+export 'src/win32/iphlpapi.g.dart';
+export 'src/win32/kernel32.g.dart';
+export 'src/win32/magnification.g.dart';
+export 'src/win32/ole32.g.dart';
+export 'src/win32/oleaut32.g.dart';
+export 'src/win32/powrprof.g.dart';
+export 'src/win32/rometadata.g.dart';
+export 'src/win32/scarddlg.g.dart';
+export 'src/win32/setupapi.g.dart';
+export 'src/win32/shell32.g.dart';
+export 'src/win32/user32.g.dart';
+export 'src/win32/uxtheme.g.dart';
+export 'src/win32/version.g.dart';
+export 'src/win32/winmm.g.dart';
+export 'src/win32/winscard.g.dart';
+export 'src/win32/winspool.g.dart';
+export 'src/win32/wlanapi.g.dart';
+export 'src/win32/xinput1_4.g.dart';
 
-export 'src/api_ms_win_core_winrt_l1_1_0.dart';
-export 'src/api_ms_win_core_winrt_string_l1_1_0.dart';
+// API sets are used to export recent C-style APIs
+export 'src/win32/api_ms_win_core_apiquery_l2_1_0.g.dart';
+export 'src/win32/api_ms_win_core_comm_l1_1_1.g.dart';
+export 'src/win32/api_ms_win_core_comm_l1_1_2.g.dart';
+export 'src/win32/api_ms_win_core_handle_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_core_sysinfo_l1_2_3.g.dart';
+export 'src/win32/api_ms_win_core_winrt_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+export 'src/win32/api_ms_win_shcore_scaling_l1_1_1.g.dart';
+export 'src/win32/api_ms_win_wsl_api_l1_1_0.g.dart';
+
+// Windows Metadata type resolution APIs
 export 'src/api_ms_win_ro_typeresolution_l1_1_0.dart';
-export 'src/api_ms_win_wsl_api_l1_1_0.dart';
 
-// COM and Windows Runtime foundational exports
+// COM foundational exports
 export 'src/combase.dart';
-export 'src/winrt/structs.g.dart';
-export 'src/winrt_callbacks.dart';
-export 'src/winrt_constants.dart';
-export 'src/winrt_helpers.dart';
 
 // COM interfaces
 export 'src/com/iapplicationactivationmanager.dart';
@@ -255,33 +257,3 @@ export 'src/com/iwbemlocator.dart';
 export 'src/com/iwbemobjectaccess.dart';
 export 'src/com/iwbemrefresher.dart';
 export 'src/com/iwbemservices.dart';
-
-// Windows Runtime interfaces
-export 'src/winrt/applicationdata.dart';
-export 'src/winrt/calendar.dart';
-export 'src/winrt/gamepad.dart';
-export 'src/winrt/iapplicationdata.dart';
-export 'src/winrt/iasyncaction.dart';
-export 'src/winrt/iasyncinfo.dart';
-export 'src/winrt/iasyncoperation.dart';
-export 'src/winrt/icalendar.dart';
-export 'src/winrt/ifileopenpicker.dart';
-export 'src/winrt/igamecontroller.dart';
-export 'src/winrt/igamecontrollerbatteryinfo.dart';
-export 'src/winrt/igamepad.dart';
-export 'src/winrt/ihostname.dart';
-export 'src/winrt/iiterable.dart';
-export 'src/winrt/iiterator.dart';
-export 'src/winrt/inetworkinformationstatics.dart';
-export 'src/winrt/iphonenumberformatter.dart';
-export 'src/winrt/ipropertyvalue.dart';
-export 'src/winrt/istorageitem.dart';
-export 'src/winrt/itoastnotificationfactory.dart';
-export 'src/winrt/itoastnotificationmanagerstatics.dart';
-export 'src/winrt/iuserdatapathsstatics.dart';
-export 'src/winrt/ivector.dart';
-export 'src/winrt/ivectorview.dart';
-export 'src/winrt/ixmlnodelist.dart';
-export 'src/winrt/phonenumberformatter.dart';
-export 'src/winrt/toastnotification.dart';
-export 'src/winrt/userdatapaths.dart';

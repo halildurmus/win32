@@ -16,11 +16,10 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
@@ -32,7 +31,10 @@ class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, is 7 entries long.
   IRunningObjectTable(super.ptr);
 
-  int Register(int grfFlags, Pointer<COMObject> punkObject,
+  factory IRunningObjectTable.from(IUnknown interface) =>
+      IRunningObjectTable(interface.toInterface(IID_IRunningObjectTable));
+
+  int register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>
       ptr.ref.vtable
               .elementAt(3)
@@ -55,7 +57,7 @@ class IRunningObjectTable extends IUnknown {
                       Pointer<Uint32> pdwRegister)>()(
           ptr.ref.lpVtbl, grfFlags, punkObject, pmkObjectName, pdwRegister);
 
-  int Revoke(int dwRegister) => ptr.ref.vtable
+  int revoke(int dwRegister) => ptr.ref.vtable
       .elementAt(4)
       .cast<
           Pointer<NativeFunction<Int32 Function(Pointer, Uint32 dwRegister)>>>()
@@ -63,7 +65,7 @@ class IRunningObjectTable extends IUnknown {
       .asFunction<
           int Function(Pointer, int dwRegister)>()(ptr.ref.lpVtbl, dwRegister);
 
-  int IsRunning(Pointer<COMObject> pmkObjectName) =>
+  int isRunning(Pointer<COMObject> pmkObjectName) =>
       ptr.ref.vtable
               .elementAt(5)
               .cast<
@@ -77,7 +79,7 @@ class IRunningObjectTable extends IUnknown {
           ptr.ref.lpVtbl, pmkObjectName);
 
   int
-      GetObject(Pointer<COMObject> pmkObjectName,
+      getObject(Pointer<COMObject> pmkObjectName,
               Pointer<Pointer<COMObject>> ppunkObject) =>
           ptr.ref.vtable
                   .elementAt(6)
@@ -94,7 +96,7 @@ class IRunningObjectTable extends IUnknown {
                           Pointer<Pointer<COMObject>> ppunkObject)>()(
               ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
-  int NoteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
+  int noteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
       ptr.ref.vtable
               .elementAt(7)
               .cast<
@@ -108,7 +110,7 @@ class IRunningObjectTable extends IUnknown {
                       Pointer, int dwRegister, Pointer<FILETIME> pfiletime)>()(
           ptr.ref.lpVtbl, dwRegister, pfiletime);
 
-  int GetTimeOfLastChange(
+  int getTimeOfLastChange(
           Pointer<COMObject> pmkObjectName, Pointer<FILETIME> pfiletime) =>
       ptr.ref.vtable
           .elementAt(8)
@@ -125,7 +127,7 @@ class IRunningObjectTable extends IUnknown {
                   Pointer<FILETIME>
                       pfiletime)>()(ptr.ref.lpVtbl, pmkObjectName, pfiletime);
 
-  int EnumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) => ptr.ref.vtable
+  int enumRunning(Pointer<Pointer<COMObject>> ppenumMoniker) => ptr.ref.vtable
           .elementAt(9)
           .cast<
               Pointer<

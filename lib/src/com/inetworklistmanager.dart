@@ -16,12 +16,12 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
-import '../ole32.dart';
-import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
-
+import '../variant.dart';
+import '../win32/ole32.g.dart';
 import 'idispatch.dart';
+import 'iunknown.dart';
 
 /// @nodoc
 const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
@@ -32,7 +32,10 @@ class INetworkListManager extends IDispatch {
   // vtable begins at 7, is 9 entries long.
   INetworkListManager(super.ptr);
 
-  int GetNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
+  factory INetworkListManager.from(IUnknown interface) =>
+      INetworkListManager(interface.toInterface(IID_INetworkListManager));
+
+  int getNetworks(int Flags, Pointer<Pointer<COMObject>> ppEnumNetwork) =>
       ptr.ref.vtable
               .elementAt(7)
               .cast<
@@ -46,7 +49,7 @@ class INetworkListManager extends IDispatch {
                       Pointer<Pointer<COMObject>> ppEnumNetwork)>()(
           ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
-  int GetNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
+  int getNetwork(GUID gdNetworkId, Pointer<Pointer<COMObject>> ppNetwork) =>
       ptr.ref.vtable
               .elementAt(8)
               .cast<
@@ -60,7 +63,7 @@ class INetworkListManager extends IDispatch {
                       Pointer<Pointer<COMObject>> ppNetwork)>()(
           ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
 
-  int GetNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
+  int getNetworkConnections(Pointer<Pointer<COMObject>> ppEnum) =>
       ptr.ref.vtable
               .elementAt(9)
               .cast<
@@ -74,7 +77,7 @@ class INetworkListManager extends IDispatch {
           ptr.ref.lpVtbl, ppEnum);
 
   int
-      GetNetworkConnection(GUID gdNetworkConnectionId,
+      getNetworkConnection(GUID gdNetworkConnectionId,
               Pointer<Pointer<COMObject>> ppNetworkConnection) =>
           ptr.ref.vtable
                   .elementAt(10)
@@ -92,7 +95,7 @@ class INetworkListManager extends IDispatch {
                           Pointer<Pointer<COMObject>> ppNetworkConnection)>()(
               ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
 
-  int get IsConnectedToInternet {
+  int get isConnectedToInternet {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -116,7 +119,7 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int get IsConnected {
+  int get isConnected {
     final retValuePtr = calloc<Int16>();
 
     try {
@@ -140,7 +143,7 @@ class INetworkListManager extends IDispatch {
     }
   }
 
-  int GetConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
+  int getConnectivity(Pointer<Int32> pConnectivity) => ptr.ref.vtable
           .elementAt(13)
           .cast<
               Pointer<
@@ -150,7 +153,7 @@ class INetworkListManager extends IDispatch {
           .asFunction<int Function(Pointer, Pointer<Int32> pConnectivity)>()(
       ptr.ref.lpVtbl, pConnectivity);
 
-  int SetSimulatedProfileInfo(
+  int setSimulatedProfileInfo(
           Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
       ptr
               .ref.vtable
@@ -168,7 +171,7 @@ class INetworkListManager extends IDispatch {
                       Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo)>()(
           ptr.ref.lpVtbl, pSimulatedInfo);
 
-  int ClearSimulatedProfileInfo() => ptr.ref.vtable
+  int clearSimulatedProfileInfo() => ptr.ref.vtable
       .elementAt(15)
       .cast<Pointer<NativeFunction<Int32 Function(Pointer)>>>()
       .value

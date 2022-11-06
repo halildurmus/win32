@@ -33,7 +33,7 @@ void initializeCOM() {
 int connectWMI(WbemLocator pLoc, Pointer<Pointer<COMObject>> ppNamespace) {
   // Connect to the root\cimv2 namespace with the current user and obtain
   // pointer pSvc to make IWbemServices calls.
-  var hr = pLoc.ConnectServer(
+  var hr = pLoc.connectServer(
       TEXT('ROOT\\CIMV2'), // WMI namespace
       nullptr, // User name
       nullptr, // User password
@@ -72,8 +72,7 @@ void main() {
     connectWMI(pLoc, ppNamespace);
 
     final refresher = WbemRefresher.createInstance();
-    final pConfig = IWbemConfigureRefresher(
-        refresher.toInterface(IID_IWbemConfigureRefresher));
+    final pConfig = IWbemConfigureRefresher.from(refresher);
     final ppRefreshable = arena<Pointer<COMObject>>();
 
     final pszQuery =
@@ -81,24 +80,24 @@ void main() {
             .toNativeUtf16(allocator: arena);
 
     // Add the instance to be refreshed.
-    var hr = pConfig.AddObjectByPath(
+    var hr = pConfig.addObjectByPath(
         ppNamespace.value, pszQuery, 0, nullptr, ppRefreshable, nullptr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final pObj = IWbemClassObject(ppRefreshable.cast());
-    final pAccess = IWbemObjectAccess(pObj.toInterface(IID_IWbemObjectAccess));
+    final pAccess = IWbemObjectAccess.from(pObj);
 
     final pszVirtualBytes = 'WorkingSet'.toNativeUtf16(allocator: arena);
     final cimType = arena<Int32>();
     final plHandle = arena<Int32>();
 
-    hr = pAccess.GetPropertyHandle(pszVirtualBytes, cimType, plHandle);
+    hr = pAccess.getPropertyHandle(pszVirtualBytes, cimType, plHandle);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final dwWorkingSetBytes = arena<DWORD>();
     for (var x = 0; x < 10; x++) {
-      refresher.Refresh(WBEM_REFRESHER_FLAGS.WBEM_FLAG_REFRESH_AUTO_RECONNECT);
-      hr = pAccess.ReadDWORD(plHandle.value, dwWorkingSetBytes);
+      refresher.refresh(WBEM_REFRESHER_FLAGS.WBEM_FLAG_REFRESH_AUTO_RECONNECT);
+      hr = pAccess.readDWORD(plHandle.value, dwWorkingSetBytes);
       if (FAILED(hr)) throw WindowsException(hr);
       print('Winlogon process is using ${dwWorkingSetBytes.value / 1000}'
           ' kilobytes of working set.');
@@ -107,14 +106,14 @@ void main() {
     }
 
     // Tidy up
-    pObj.Release();
-    pAccess.Release();
+    pObj.release();
+    pAccess.release();
 
-    refresher.Release();
-    pConfig.Release();
+    refresher.release();
+    pConfig.release();
     free(refresher.ptr);
 
-    pLoc.Release();
+    pLoc.release();
     free(pLoc.ptr);
 
     CoUninitialize();

@@ -22,8 +22,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellservice = IShellService(ptr);
-  test('Can instantiate IShellService.SetOwner', () {
-    expect(shellservice.SetOwner, isA<Function>());
+  test('Can instantiate IShellService.setOwner', () {
+    expect(shellservice.setOwner, isA<Function>());
   });
   free(ptr);
 }

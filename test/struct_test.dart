@@ -33,8 +33,45 @@ void main() {
       expect(sizeOf<VARIANT>(), equals(16));
     }
   });
+  test('Struct CREATEFILE2_EXTENDED_PARAMETERS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<CREATEFILE2_EXTENDED_PARAMETERS>(), equals(32));
+    } else {
+      expect(sizeOf<CREATEFILE2_EXTENDED_PARAMETERS>(), equals(24));
+    }
+  });
+  test('Struct POINTER_PEN_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<POINTER_PEN_INFO>(), equals(120));
+    } else {
+      expect(sizeOf<POINTER_PEN_INFO>(), equals(112));
+    }
+  });
+  test('Struct POINTER_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<POINTER_INFO>(), equals(96));
+    } else {
+      expect(sizeOf<POINTER_INFO>(), equals(88));
+    }
+  });
+  test('Struct POINTER_TOUCH_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<POINTER_TOUCH_INFO>(), equals(144));
+    } else {
+      expect(sizeOf<POINTER_TOUCH_INFO>(), equals(136));
+    }
+  });
+  test('Struct INPUT_TRANSFORM is the right size', () {
+    expect(sizeOf<INPUT_TRANSFORM>(), equals(64));
+  });
+  test('Struct TOUCHPREDICTIONPARAMETERS is the right size', () {
+    expect(sizeOf<TOUCHPREDICTIONPARAMETERS>(), equals(16));
+  });
   test('Struct ACCEL is the right size', () {
     expect(sizeOf<ACCEL>(), equals(6));
+  });
+  test('Struct FILE_SEGMENT_ELEMENT is the right size', () {
+    expect(sizeOf<FILE_SEGMENT_ELEMENT>(), equals(8));
   });
   test('Struct ACL is the right size', () {
     expect(sizeOf<ACL>(), equals(8));
@@ -53,11 +90,21 @@ void main() {
       expect(sizeOf<ADDJOB_INFO_1>(), equals(8));
     }
   });
-  test('Struct addrinfo is the right size', () {
+  test('Struct ADDRINFO is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<addrinfo>(), equals(48));
+      expect(sizeOf<ADDRINFO>(), equals(48));
     } else {
-      expect(sizeOf<addrinfo>(), equals(32));
+      expect(sizeOf<ADDRINFO>(), equals(32));
+    }
+  });
+  test('Struct ALTTABINFO is the right size', () {
+    expect(sizeOf<ALTTABINFO>(), equals(40));
+  });
+  test('Struct CRYPTPROTECT_PROMPTSTRUCT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<CRYPTPROTECT_PROMPTSTRUCT>(), equals(24));
+    } else {
+      expect(sizeOf<CRYPTPROTECT_PROMPTSTRUCT>(), equals(16));
     }
   });
   test('Struct APPX_PACKAGE_SETTINGS is the right size', () {
@@ -257,6 +304,13 @@ void main() {
       expect(sizeOf<CREDENTIAL_ATTRIBUTE>(), equals(16));
     }
   });
+  test('Struct CRYPT_INTEGER_BLOB is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<CRYPT_INTEGER_BLOB>(), equals(16));
+    } else {
+      expect(sizeOf<CRYPT_INTEGER_BLOB>(), equals(8));
+    }
+  });
   test('Struct CURSORINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<CURSORINFO>(), equals(24));
@@ -306,6 +360,9 @@ void main() {
     } else {
       expect(sizeOf<DIBSECTION>(), equals(84));
     }
+  });
+  test('Struct DISK_EXTENT is the right size', () {
+    expect(sizeOf<DISK_EXTENT>(), equals(24));
   });
   test('Struct DISK_GEOMETRY is the right size', () {
     expect(sizeOf<DISK_GEOMETRY>(), equals(24));
@@ -401,11 +458,11 @@ void main() {
       expect(sizeOf<EXCEPINFO>(), equals(32));
     }
   });
-  test('Struct fd_set is the right size', () {
+  test('Struct FD_SET is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<fd_set>(), equals(520));
+      expect(sizeOf<FD_SET>(), equals(520));
     } else {
-      expect(sizeOf<fd_set>(), equals(260));
+      expect(sizeOf<FD_SET>(), equals(260));
     }
   });
   test('Struct FILETIME is the right size', () {
@@ -452,11 +509,11 @@ void main() {
   test('Struct HARDWAREINPUT is the right size', () {
     expect(sizeOf<HARDWAREINPUT>(), equals(8));
   });
-  test('Struct hostent is the right size', () {
+  test('Struct HOSTENT is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<hostent>(), equals(32));
+      expect(sizeOf<HOSTENT>(), equals(32));
     } else {
-      expect(sizeOf<hostent>(), equals(16));
+      expect(sizeOf<HOSTENT>(), equals(16));
     }
   });
   test('Struct ICONINFO is the right size', () {
@@ -491,6 +548,110 @@ void main() {
       expect(sizeOf<INPUT>(), equals(40));
     } else {
       expect(sizeOf<INPUT>(), equals(28));
+    }
+  });
+  test('Struct INPUT_RECORD is the right size', () {
+    expect(sizeOf<INPUT_RECORD>(), equals(20));
+  });
+  test('Struct KEY_EVENT_RECORD is the right size', () {
+    expect(sizeOf<KEY_EVENT_RECORD>(), equals(16));
+  });
+  test('Struct MOUSE_EVENT_RECORD is the right size', () {
+    expect(sizeOf<MOUSE_EVENT_RECORD>(), equals(16));
+  });
+  test('Struct WINDOW_BUFFER_SIZE_RECORD is the right size', () {
+    expect(sizeOf<WINDOW_BUFFER_SIZE_RECORD>(), equals(4));
+  });
+  test('Struct MENU_EVENT_RECORD is the right size', () {
+    expect(sizeOf<MENU_EVENT_RECORD>(), equals(4));
+  });
+  test('Struct FOCUS_EVENT_RECORD is the right size', () {
+    expect(sizeOf<FOCUS_EVENT_RECORD>(), equals(4));
+  });
+  test('Struct IP_ADAPTER_ADDRESSES_LH is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_ADDRESSES_LH>(), equals(448));
+    } else {
+      expect(sizeOf<IP_ADAPTER_ADDRESSES_LH>(), equals(376));
+    }
+  });
+  test('Struct IP_ADAPTER_ANYCAST_ADDRESS_XP is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_ANYCAST_ADDRESS_XP>(), equals(32));
+    } else {
+      expect(sizeOf<IP_ADAPTER_ANYCAST_ADDRESS_XP>(), equals(24));
+    }
+  });
+  test('Struct IP_ADAPTER_DNS_SERVER_ADDRESS_XP is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_DNS_SERVER_ADDRESS_XP>(), equals(32));
+    } else {
+      expect(sizeOf<IP_ADAPTER_DNS_SERVER_ADDRESS_XP>(), equals(24));
+    }
+  });
+  test('Struct IP_ADAPTER_DNS_SUFFIX is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_DNS_SUFFIX>(), equals(520));
+    } else {
+      expect(sizeOf<IP_ADAPTER_DNS_SUFFIX>(), equals(516));
+    }
+  });
+  test('Struct IP_ADAPTER_GATEWAY_ADDRESS_LH is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_GATEWAY_ADDRESS_LH>(), equals(32));
+    } else {
+      expect(sizeOf<IP_ADAPTER_GATEWAY_ADDRESS_LH>(), equals(24));
+    }
+  });
+  test('Struct IP_ADAPTER_INDEX_MAP is the right size', () {
+    expect(sizeOf<IP_ADAPTER_INDEX_MAP>(), equals(260));
+  });
+  test('Struct IP_ADAPTER_MULTICAST_ADDRESS_XP is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_MULTICAST_ADDRESS_XP>(), equals(32));
+    } else {
+      expect(sizeOf<IP_ADAPTER_MULTICAST_ADDRESS_XP>(), equals(24));
+    }
+  });
+  test('Struct IP_ADAPTER_PREFIX_XP is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_PREFIX_XP>(), equals(40));
+    } else {
+      expect(sizeOf<IP_ADAPTER_PREFIX_XP>(), equals(24));
+    }
+  });
+  test('Struct IP_ADAPTER_UNICAST_ADDRESS_LH is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_UNICAST_ADDRESS_LH>(), equals(64));
+    } else {
+      expect(sizeOf<IP_ADAPTER_UNICAST_ADDRESS_LH>(), equals(48));
+    }
+  });
+  test('Struct IP_ADAPTER_WINS_SERVER_ADDRESS_LH is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADAPTER_WINS_SERVER_ADDRESS_LH>(), equals(32));
+    } else {
+      expect(sizeOf<IP_ADAPTER_WINS_SERVER_ADDRESS_LH>(), equals(24));
+    }
+  });
+  test('Struct IP_ADDR_STRING is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_ADDR_STRING>(), equals(48));
+    } else {
+      expect(sizeOf<IP_ADDR_STRING>(), equals(40));
+    }
+  });
+  test('Struct IP_ADDRESS_STRING is the right size', () {
+    expect(sizeOf<IP_ADDRESS_STRING>(), equals(16));
+  });
+  test('Struct IP_INTERFACE_INFO is the right size', () {
+    expect(sizeOf<IP_INTERFACE_INFO>(), equals(264));
+  });
+  test('Struct IP_PER_ADAPTER_INFO_W2KSP1 is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IP_PER_ADAPTER_INFO_W2KSP1>(), equals(64));
+    } else {
+      expect(sizeOf<IP_PER_ADAPTER_INFO_W2KSP1>(), equals(52));
     }
   });
   test('Struct ITEMIDLIST is the right size', () {
@@ -720,6 +881,9 @@ void main() {
   test('Struct NDIS_OBJECT_HEADER is the right size', () {
     expect(sizeOf<NDIS_OBJECT_HEADER>(), equals(4));
   });
+  test('Struct NET_LUID_LH is the right size', () {
+    expect(sizeOf<NET_LUID_LH>(), equals(8));
+  });
   test('Struct NEWTEXTMETRIC is the right size', () {
     expect(sizeOf<NEWTEXTMETRIC>(), equals(76));
   });
@@ -937,11 +1101,11 @@ void main() {
       expect(sizeOf<PROPSPEC>(), equals(8));
     }
   });
-  test('Struct protoent is the right size', () {
+  test('Struct PROTOENT is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<protoent>(), equals(24));
+      expect(sizeOf<PROTOENT>(), equals(24));
     } else {
-      expect(sizeOf<protoent>(), equals(12));
+      expect(sizeOf<PROTOENT>(), equals(12));
     }
   });
   test('Struct RAWHID is the right size', () {
@@ -1030,11 +1194,11 @@ void main() {
       expect(sizeOf<SECURITY_DESCRIPTOR>(), equals(20));
     }
   });
-  test('Struct servent is the right size', () {
+  test('Struct SERVENT is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<servent>(), equals(32));
+      expect(sizeOf<SERVENT>(), equals(32));
     } else {
-      expect(sizeOf<servent>(), equals(16));
+      expect(sizeOf<SERVENT>(), equals(16));
     }
   });
   test('Struct SHELL_ITEM_RESOURCE is the right size', () {
@@ -1065,6 +1229,13 @@ void main() {
   });
   test('Struct SOCKADDR is the right size', () {
     expect(sizeOf<SOCKADDR>(), equals(16));
+  });
+  test('Struct SOCKET_ADDRESS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SOCKET_ADDRESS>(), equals(16));
+    } else {
+      expect(sizeOf<SOCKET_ADDRESS>(), equals(8));
+    }
   });
   test('Struct SOLE_AUTHENTICATION_SERVICE is the right size', () {
     if (is64bitOS) {
@@ -1138,6 +1309,9 @@ void main() {
       expect(sizeOf<STATSTG>(), equals(72));
     }
   });
+  test('Struct STORAGE_DEVICE_NUMBER is the right size', () {
+    expect(sizeOf<STORAGE_DEVICE_NUMBER>(), equals(12));
+  });
   test('Struct STRRET is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<STRRET>(), equals(272));
@@ -1184,8 +1358,8 @@ void main() {
   test('Struct TEXTMETRIC is the right size', () {
     expect(sizeOf<TEXTMETRIC>(), equals(60));
   });
-  test('Struct timeval is the right size', () {
-    expect(sizeOf<timeval>(), equals(8));
+  test('Struct TIMEVAL is the right size', () {
+    expect(sizeOf<TIMEVAL>(), equals(8));
   });
   test('Struct TITLEBARINFO is the right size', () {
     expect(sizeOf<TITLEBARINFO>(), equals(44));
@@ -1247,6 +1421,9 @@ void main() {
     } else {
       expect(sizeOf<VARDESC>(), equals(36));
     }
+  });
+  test('Struct VOLUME_DISK_EXTENTS is the right size', () {
+    expect(sizeOf<VOLUME_DISK_EXTENTS>(), equals(32));
   });
   test('Struct VS_FIXEDFILEINFO is the right size', () {
     expect(sizeOf<VS_FIXEDFILEINFO>(), equals(52));
