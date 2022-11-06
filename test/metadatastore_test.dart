@@ -154,12 +154,32 @@ void main() {
         ),
       ),
     );
+    expect(
+      () => MetadataStore.winmdFileContainingType('Windows.Foundation'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals("'Windows.Foundation' is a namespace, not a type."),
+        ),
+      ),
+    );
   });
 
   test('Appropriate response to search for an invalid type', () {
-    ArgumentError.notNull();
     expect(
       () => MetadataStore.getScopeForType('Windows.Monetization.'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals(
+              "'Windows.Monetization.' is not a valid Windows Runtime type."),
+        ),
+      ),
+    );
+    expect(
+      () => MetadataStore.winmdFileContainingType('Windows.Monetization.'),
       throwsA(
         isA<WindowsException>().having(
           (e) => e.message,
