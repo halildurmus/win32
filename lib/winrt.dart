@@ -47,7 +47,7 @@
 ///
 /// Windows Runtime APIs use `HSTRING` as their native type. An `HSTRING` is an
 /// immutable string object, which is created with the [WindowsCreateString] API
-/// and deleted with the [WindowsDeleteString] API. The `HSTRIN`G itself is an
+/// and deleted with the [WindowsDeleteString] API. The `HSTRING` itself is an
 /// integer value, just like other `HANDLE` objects in the Win32 programming
 /// interface.
 ///
