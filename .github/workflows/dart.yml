@@ -52,6 +52,9 @@ jobs:
       - name: Analyze project source
         run: dart analyze --fatal-warnings
 
+      - name: Check documentation can be generated without errors
+        run: dart doc --dry-run --validate-links
+
       - name: Run tests on generation tool
         working-directory: tool/generator
         run: dart test
