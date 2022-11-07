@@ -298,7 +298,9 @@ void main() {
 
     test('Calendar.numberOfHoursInThisPeriod', () {
       calendar.changeClock('24HourClock');
-      expect(calendar.numberOfHoursInThisPeriod, equals(24));
+      // Two days of the year don't have 24 hours in time zones that observe
+      // daylight saving time.
+      expect(calendar.numberOfHoursInThisPeriod, isIn([23, 24, 25]));
     });
 
     test('Calendar.numberOfMinutesInThisHour getter', () {
