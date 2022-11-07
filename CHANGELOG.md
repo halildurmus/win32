@@ -1,3 +1,7 @@
+## 2.4.5
+
+- Update error messages
+
 ## 2.4.4
 
 - Update to Windows.Win32.winmd v38.0.1.26489
