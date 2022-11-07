@@ -1,3 +1,5 @@
+import 'package:winmd/winmd.dart';
+
 import '../parameter.dart';
 import '../type.dart';
 
@@ -8,7 +10,9 @@ import '../type.dart';
 /// their Dart equivalents (e.g. a WinRT `TimeSpan` can be represented by a Dart
 /// [Duration]).
 class WinRTParameterProjection extends ParameterProjection {
-  const WinRTParameterProjection(super.name, super.type);
+  const WinRTParameterProjection(this.method, super.name, super.type);
+
+  final Method method;
 
   // Matcher properties
 
@@ -26,6 +30,17 @@ class WinRTParameterProjection extends ParameterProjection {
 
   bool get isTimeSpan =>
       type.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
+
+  bool get isUri => type.typeIdentifier.name == 'Windows.Foundation.Uri';
+
+  /// Whether the method belongs to `IUriRuntimeClass` or `IUriRuntimeClassFactory`.
+  ///
+  /// Used to determine whether the parameter should be exposed as WinRT `Uri`
+  /// or dart:core's `Uri`.
+  bool get methodBelongsToUriRuntimeClass => [
+        'Windows.Foundation.IUriRuntimeClass',
+        'Windows.Foundation.IUriRuntimeClassFactory'
+      ].contains(method.parent.name);
 
   /// Code to be inserted prior to the function call to set up the variable
   /// conversion.
@@ -62,6 +77,10 @@ class WinRTParameterProjection extends ParameterProjection {
     if (isString) return 'final ${name}Hstring = convertToHString($name);';
     if (isTimeSpan) return 'final ${name}Duration = $name.inMicroseconds * 10;';
 
+    if (isUri && !methodBelongsToUriRuntimeClass) {
+      return 'final ${name}Uri = winrt_uri.Uri.createUri($name.toString());';
+    }
+
     return '';
   }
 
@@ -70,6 +89,9 @@ class WinRTParameterProjection extends ParameterProjection {
   String get postamble {
     if (isReference) return 'free(${name}ReferencePtr);';
     if (isString) return 'WindowsDeleteString(${name}Hstring);';
+    if (isUri && !methodBelongsToUriRuntimeClass) {
+      return 'free(${name}Uri.ptr);';
+    }
 
     return '';
   }
@@ -81,6 +103,12 @@ class WinRTParameterProjection extends ParameterProjection {
     if (isReference) return '${name}ReferencePtr.ref';
 
     if (isCOMObject) {
+      if (isUri) {
+        return methodBelongsToUriRuntimeClass
+            ? '$identifier.ptr.cast<Pointer<COMObject>>().value'
+            : '${name}Uri.ptr.cast<Pointer<COMObject>>().value';
+      }
+
       if (type.isReferenceType || type.isSimpleArrayType) {
         return type.methodParamType == 'Pointer<COMObject>'
             ? identifier

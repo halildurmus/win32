@@ -10,6 +10,7 @@ import 'declarations/enum.dart';
 import 'declarations/map.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
+import 'declarations/uri.dart';
 import 'declarations/vector.dart';
 import 'declarations/void.dart';
 import 'winrt_parameter.dart';
@@ -18,7 +19,7 @@ class WinRTMethodProjection extends MethodProjection {
   WinRTMethodProjection(super.method, super.vtableOffset) {
     parameters = method.parameters
         .map((param) => WinRTParameterProjection(
-            param.name, TypeProjection(param.typeIdentifier)))
+            method, param.name, TypeProjection(param.typeIdentifier)))
         .toList();
   }
 
@@ -96,6 +97,9 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IReference`1') ?? false);
 
+  bool get isUriReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.Uri';
+
   bool get isVectorReturn =>
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVector`1') ?? false);
@@ -103,6 +107,15 @@ class WinRTMethodProjection extends MethodProjection {
   bool get isVectorViewReturn =>
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ?? false);
+
+  /// Whether the method belongs to `IUriRuntimeClass` or `IUriRuntimeClassFactory`.
+  ///
+  /// Used to determine whether the method should be exposed as WinRT `Uri` or
+  /// dart:core's `Uri`.
+  bool get methodBelongsToUriRuntimeClass => [
+        'Windows.Foundation.IUriRuntimeClass',
+        'Windows.Foundation.IUriRuntimeClassFactory'
+      ].contains(method.parent.name);
 
   String get parametersPreamble => parameters
       .map((param) => (param as WinRTParameterProjection).preamble)
@@ -155,6 +168,10 @@ class WinRTMethodProjection extends MethodProjection {
 
       if (isReferenceReturn) {
         return declarationFor(WinRTMethodReturningReferenceProjection.new);
+      }
+
+      if (isUriReturn && !methodBelongsToUriRuntimeClass) {
+        return declarationFor(WinRTMethodReturningUriProjection.new);
       }
 
       if (isVectorReturn) {

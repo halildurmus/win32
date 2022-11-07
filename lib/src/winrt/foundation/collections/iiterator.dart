@@ -15,6 +15,7 @@ import '../../../utils.dart';
 import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_helpers.dart';
 import '../../internal/vector_helper.dart';
+import '../uri.dart' as winrt_uri;
 
 /// Supports simple iteration over a collection.
 ///
@@ -28,7 +29,7 @@ class IIterator<T> extends IInspectable {
 
   /// Creates an instance of [IIterator] using the given [ptr].
   ///
-  /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
+  /// [T] must be of type `int`, `String`, `Uri`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
   /// [intType] must be specified if [T] is `int`. Supported types are: [Int16],
@@ -58,6 +59,7 @@ class IIterator<T> extends IInspectable {
         _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
+        !isSameType<T, Uri>() &&
         !isSubtypeOfInspectable<T>() &&
         !isSubtypeOfWinRTEnum<T>()) {
       throw ArgumentError.value(T, 'T', 'Unsupported type');
@@ -85,6 +87,7 @@ class IIterator<T> extends IInspectable {
   T get current {
     if (isSameType<T, int>()) return _current_int() as T;
     if (isSameType<T, String>()) return _current_String() as T;
+    if (isSameType<T, Uri>()) return _current_Uri() as T;
     if (isSubtypeOfWinRTEnum<T>()) return _enumCreator!(_current_int());
     return _creator!(_current_COMObject());
   }
@@ -303,6 +306,29 @@ class IIterator<T> extends IInspectable {
       return retValue;
     } finally {
       WindowsDeleteString(retValuePtr.value);
+      free(retValuePtr);
+    }
+  }
+
+  Uri _current_Uri() {
+    final retValuePtr = calloc<COMObject>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+              .elementAt(6)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+              .value
+              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+          ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+      return Uri.parse(winrtUri.toString());
+    } finally {
       free(retValuePtr);
     }
   }

@@ -29,7 +29,7 @@ class IIterable<T> extends IInspectable {
 
   /// Creates an instance of [IIterable] using the given [ptr].
   ///
-  /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
+  /// [T] must be of type `int`, `String`, `Uri`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
   /// [intType] must be specified if [T] is `int`. Supported types are: [Int16],
@@ -59,6 +59,7 @@ class IIterable<T> extends IInspectable {
         _intType = intType {
     if (!isSameType<T, int>() &&
         !isSameType<T, String>() &&
+        !isSameType<T, Uri>() &&
         !isSubtypeOfInspectable<T>() &&
         !isSubtypeOfWinRTEnum<T>()) {
       throw ArgumentError.value(T, 'T', 'Unsupported type');

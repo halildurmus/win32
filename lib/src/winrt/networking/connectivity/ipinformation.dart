@@ -24,6 +24,7 @@ import '../../internal/hstring_array.dart';
 import 'iipinformation.dart';
 import 'networkadapter.dart';
 import '../../foundation/ireference.dart';
+import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}

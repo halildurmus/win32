@@ -63,6 +63,7 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Foundation.Collections.PropertySet',
   'Windows.Foundation.Collections.StringMap',
   'Windows.Foundation.Collections.ValueSet',
+  'Windows.Foundation.WwwFormUrlDecoder',
   'Windows.Media.MediaProperties.MediaPropertySet',
 
   //   Requires WinRT delegate support

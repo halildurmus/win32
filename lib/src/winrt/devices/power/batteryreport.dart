@@ -24,6 +24,7 @@ import '../../internal/hstring_array.dart';
 import 'ibatteryreport.dart';
 import '../../foundation/ireference.dart';
 import '../../system/power/enums.g.dart';
+import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// {@category Class}
