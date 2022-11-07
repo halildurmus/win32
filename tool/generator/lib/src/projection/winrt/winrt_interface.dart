@@ -90,27 +90,38 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     }
   }
 
+  Set<String> get coreImports => {...interfaceImport, ...importsForClass()}
+    ..removeWhere((import) => import == 'iinspectable.dart' || import.isEmpty);
+
   @override
   String get importHeader {
-    final imports = {...interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == 'iinspectable.dart' || item.isEmpty);
-
+    final imports = {...coreImports};
     // The return types of methods in the IPropertyValueStatics are specified
     // as 'object' in WinMD. However, these methods actually return the
     // IPropertyValue interface (except for the CreateEmpty() and
     // CreateInspectable() methods, which return Pointer<COMObject>). Therefore,
     // the IProperyValue import is manually added here.
-    if (shortName == 'IPropertyValueStatics') {
+    if (['IPropertyValueStatics', 'PropertyValue'].contains(shortName)) {
       imports.add('ipropertyvalue.dart');
     }
 
-    final containsIReferenceImport =
-        imports.where((i) => i.endsWith('ireference.dart')).isNotEmpty;
-    if (containsIReferenceImport) {
+    final hasIReferenceImport =
+        imports.any((import) => import.endsWith('ireference.dart'));
+    if (hasIReferenceImport) {
       imports.add(relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
     }
 
-    return imports.map((import) => "import '$import';").join('\n');
+    final useImportAliasForWinRTUri =
+        !['IUriRuntimeClass', 'IUriRuntimeClassFactory'].contains(shortName);
+
+    return imports.map((import) {
+      if (useImportAliasForWinRTUri && import.endsWith('/uri.dart')) {
+        // Use import alias to avoid conflict with the dart:core's Uri.
+        return "import '$import' as winrt_uri;";
+      }
+
+      return "import '$import';";
+    }).join('\n');
   }
 
   List<MethodProjection>? _methodProjections;

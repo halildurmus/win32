@@ -6,6 +6,7 @@ import 'declarations/enum.dart';
 import 'declarations/map.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
+import 'declarations/uri.dart';
 import 'declarations/vector.dart';
 import 'winrt_property.dart';
 
@@ -59,6 +60,10 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
 
       if (isReferenceReturn) {
         return declarationFor(WinRTGetPropertyReturningReferenceProjection.new);
+      }
+
+      if (isUriReturn) {
+        return declarationFor(WinRTGetPropertyReturningUriProjection.new);
       }
 
       if (isVectorReturn) {

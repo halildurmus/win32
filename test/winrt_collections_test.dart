@@ -4,7 +4,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
-import 'package:win32/winrt.dart';
+import 'package:win32/src/winrt/foundation/uri.dart' as winrt_uri;
+import 'package:win32/winrt.dart' hide Uri;
 
 // Exhaustively test the WinRT Collections to make sure constructors,
 // properties and methods are working correctly.
@@ -1999,12 +2000,283 @@ void main() {
       });
     });
 
-    group('IVectorView<String>', () {
-      late ICalendar calendar;
-      late IVectorView<String> vectorView;
+    group('IVector<Uri>', () {
+      late IVector<Uri> vector;
       late Arena allocator;
 
-      IVectorView<String> Languages(
+      IVector<Uri> getServerUris(Pointer<COMObject> ptr, Allocator allocator) {
+        final retValuePtr = allocator<COMObject>();
+
+        final hr = ptr.ref.vtable
+                .elementAt(6)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, retValuePtr);
+
+        if (FAILED(hr)) throw WindowsException(hr);
+
+        return IVector.fromRawPointer(retValuePtr);
+      }
+
+      setUp(() {
+        winrtInitialize();
+        // ignore: constant_identifier_names
+        const IID_IVpnPlugInProfile = '{0EDF0DA4-4F00-4589-8D7B-4BF988F6542C}';
+        final object = CreateObject(
+            'Windows.Networking.Vpn.VpnPlugInProfile', IID_IVpnPlugInProfile);
+        allocator = Arena();
+        vector = getServerUris(object, allocator);
+      });
+
+      test('getAt fails if the vector is empty', () {
+        expect(() => vector.getAt(0), throwsException);
+      });
+
+      test('getAt throws exception if the index is out of bounds', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(() => vector.getAt(2), throwsException);
+      });
+
+      test('getAt returns elements', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.getAt(0), equals(Uri.parse('https://dart.dev/overview')));
+        expect(vector.getAt(1), equals(Uri.parse('https://dart.dev/docs')));
+      });
+
+      test('getView', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        final list = vector.getView();
+        expect(list.length, equals(2));
+        expect(() => list..clear(), throwsUnsupportedError);
+      });
+
+      test('setAt throws exception if the vector is empty', () {
+        expect(() => vector.setAt(0, Uri.parse('https://dart.dev/overview')),
+            throwsException);
+      });
+
+      test('setAt throws exception if the index is out of bounds', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(
+            () => vector.setAt(3, Uri.parse('https://flutter.dev/development')),
+            throwsException);
+      });
+
+      test('setAt', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.size, equals(2));
+        vector.setAt(0, Uri.parse('https://flutter.dev/development'));
+        expect(vector.size, equals(2));
+        vector.setAt(1, Uri.parse('https://flutter.dev/multi-platform'));
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0),
+            equals(Uri.parse('https://flutter.dev/development')));
+        expect(vector.getAt(1),
+            equals(Uri.parse('https://flutter.dev/multi-platform')));
+      });
+
+      test('insertAt throws exception if the index is out of bounds', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(
+            () => vector.insertAt(
+                3, Uri.parse('https://flutter.dev/development')),
+            throwsException);
+      });
+
+      test('insertAt', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.size, equals(2));
+        vector.insertAt(0, Uri.parse('https://flutter.dev/development'));
+        expect(vector.size, equals(3));
+        vector.insertAt(2, Uri.parse('https://flutter.dev/multi-platform'));
+        expect(vector.size, equals(4));
+        expect(vector.getAt(0),
+            equals(Uri.parse('https://flutter.dev/development')));
+        expect(vector.getAt(1), equals(Uri.parse('https://dart.dev/overview')));
+        expect(vector.getAt(2),
+            equals(Uri.parse('https://flutter.dev/multi-platform')));
+        expect(vector.getAt(3), equals(Uri.parse('https://dart.dev/docs')));
+      });
+
+      test('removeAt throws exception if the vector is empty', () {
+        expect(() => vector.removeAt(0), throwsException);
+      });
+
+      test('removeAt throws exception if the index is out of bounds', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(() => vector.removeAt(3), throwsException);
+      });
+
+      test('removeAt', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'))
+          ..append(Uri.parse('https://flutter.dev/development'))
+          ..append(Uri.parse('https://flutter.dev/multi-platform'));
+        expect(vector.size, equals(4));
+        vector.removeAt(2);
+        expect(vector.size, equals(3));
+        expect(vector.getAt(2),
+            equals(Uri.parse('https://flutter.dev/multi-platform')));
+        vector.removeAt(0);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals(Uri.parse('https://dart.dev/docs')));
+        vector.removeAt(1);
+        expect(vector.size, equals(1));
+        expect(vector.getAt(0), equals(Uri.parse('https://dart.dev/docs')));
+        vector.removeAt(0);
+        expect(vector.size, equals(0));
+      });
+
+      test('append', () {
+        expect(vector.size, equals(0));
+        vector.append(Uri.parse('https://dart.dev/overview'));
+        expect(vector.size, equals(1));
+        vector.append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.size, equals(2));
+      });
+
+      test('removeAtEnd throws exception if the vector is empty', () {
+        expect(() => vector.removeAtEnd(), throwsException);
+      });
+
+      test('removeAtEnd', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.size, equals(2));
+        vector.removeAtEnd();
+        expect(vector.size, equals(1));
+      });
+
+      test('clear', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'));
+        expect(vector.size, equals(2));
+        vector.clear();
+        expect(vector.size, equals(0));
+      });
+
+      test('getMany returns 0 if the vector is empty', () {
+        final pCOMObject = allocator<COMObject>();
+
+        expect(vector.getMany(0, 1, pCOMObject), equals(0));
+      });
+
+      test('getMany returns elements starting from index 0', () {
+        final pCOMObject = allocator<COMObject>(2);
+
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'))
+          ..append(Uri.parse('https://flutter.dev/development'));
+        expect(vector.getMany(0, 3, pCOMObject), equals(3));
+        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(0)).toString(),
+            equals('https://dart.dev/overview'));
+        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(1)).toString(),
+            equals('https://dart.dev/docs'));
+        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(2)).toString(),
+            equals('https://flutter.dev/development'));
+      });
+
+      test('getMany returns elements starting from index 1', () {
+        final pCOMObject = allocator<COMObject>(2);
+
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'))
+          ..append(Uri.parse('https://flutter.dev/development'));
+        expect(vector.getMany(1, 2, pCOMObject), equals(2));
+        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(0)).toString(),
+            equals('https://dart.dev/docs'));
+        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(1)).toString(),
+            equals('https://flutter.dev/development'));
+      });
+
+      test('replaceAll', () {
+        expect(vector.size, equals(0));
+        vector.replaceAll([
+          Uri.parse('https://dart.dev/overview'),
+          Uri.parse('https://dart.dev/docs')
+        ]);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0), equals(Uri.parse('https://dart.dev/overview')));
+        expect(vector.getAt(1), equals(Uri.parse('https://dart.dev/docs')));
+        vector.replaceAll([
+          Uri.parse('https://flutter.dev/development'),
+          Uri.parse('https://flutter.dev/multi-platform')
+        ]);
+        expect(vector.size, equals(2));
+        expect(vector.getAt(0),
+            equals(Uri.parse('https://flutter.dev/development')));
+        expect(vector.getAt(1),
+            equals(Uri.parse('https://flutter.dev/multi-platform')));
+      });
+
+      test('toList', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'))
+          ..append(Uri.parse('https://flutter.dev/development'));
+        final list = vector.toList();
+        expect(list.length, equals(3));
+        expect(
+            list.elementAt(0), equals(Uri.parse('https://dart.dev/overview')));
+        expect(list.elementAt(1), equals(Uri.parse('https://dart.dev/docs')));
+        expect(list.elementAt(2),
+            equals(Uri.parse('https://flutter.dev/development')));
+        expect(() => list..clear(), throwsUnsupportedError);
+      });
+
+      test('first', () {
+        vector
+          ..append(Uri.parse('https://dart.dev/overview'))
+          ..append(Uri.parse('https://dart.dev/docs'))
+          ..append(Uri.parse('https://flutter.dev/development'));
+        final iterator = vector.first();
+        expect(iterator.hasCurrent, isTrue);
+        expect(
+            iterator.current, equals(Uri.parse('https://dart.dev/overview')));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current, equals(Uri.parse('https://dart.dev/docs')));
+        expect(iterator.moveNext(), isTrue);
+        expect(iterator.current,
+            equals(Uri.parse('https://flutter.dev/development')));
+        expect(iterator.moveNext(), isFalse);
+      });
+
+      tearDown(() {
+        allocator.releaseAll(reuse: true);
+        winrtUninitialize();
+      });
+    });
+
+    group('IVectorView<String>', () {
+      late Arena allocator;
+      late IVectorView<String> vectorView;
+
+      IVectorView<String> getLanguages(
           Pointer<COMObject> ptr, Allocator allocator) {
         final retValuePtr = allocator<COMObject>();
 
@@ -2032,9 +2304,11 @@ void main() {
       setUp(() {
         winrtInitialize();
 
-        calendar = Calendar();
         allocator = Arena();
-        vectorView = Languages(calendar.ptr, allocator);
+        final object = ActivateClass('Windows.Globalization.Calendar',
+            allocator: allocator);
+        allocator = Arena();
+        vectorView = getLanguages(object, allocator);
       });
 
       test('getAt throws exception if the index is out of bounds', () {
@@ -2088,39 +2362,28 @@ void main() {
       });
 
       tearDown(() {
-        free(calendar.ptr);
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
     });
 
     group('IVectorView<IHostName>', () {
-      late INetworkInformationStatics networkInformation;
-      late IVectorView<IHostName> vectorView;
       late Arena allocator;
+      late IVectorView<IHostName> vectorView;
 
-      IVectorView<IHostName> GetHostNames(
+      IVectorView<IHostName> getHostNames(
           Pointer<COMObject> ptr, Allocator allocator) {
         final retValuePtr = allocator<COMObject>();
 
         final hr = ptr.ref.vtable
-            .elementAt(9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(
-              Pointer,
-              Pointer<COMObject>,
-            )>>>()
-            .value
-            .asFunction<
-                int Function(
-              Pointer,
-              Pointer<COMObject>,
-            )>()(
-          ptr.ref.lpVtbl,
-          retValuePtr,
-        );
+                .elementAt(9)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, retValuePtr);
 
         if (FAILED(hr)) throw WindowsException(hr);
 
@@ -2131,12 +2394,12 @@ void main() {
       setUp(() {
         winrtInitialize();
 
+        allocator = Arena();
         final object = CreateActivationFactory(
             'Windows.Networking.Connectivity.NetworkInformation',
-            IID_INetworkInformationStatics);
-        networkInformation = INetworkInformationStatics.fromRawPointer(object);
-        allocator = Arena();
-        vectorView = GetHostNames(object, allocator);
+            IID_INetworkInformationStatics,
+            allocator: allocator);
+        vectorView = getHostNames(object, allocator);
       });
 
       test('getAt throws exception if the index is out of bounds', () {
@@ -2156,7 +2419,7 @@ void main() {
         expect(pIndex.value, greaterThanOrEqualTo(0));
       });
 
-      test('GetMany returns elements starting from index 0', () {
+      test('getMany returns elements starting from index 0', () {
         final pCOMObject = allocator<COMObject>(vectorView.size);
         expect(vectorView.getMany(0, vectorView.size, pCOMObject),
             greaterThanOrEqualTo(1));
@@ -2168,20 +2431,19 @@ void main() {
         expect(() => list..clear(), throwsUnsupportedError);
       });
 
-      test('First', () {
+      test('first', () {
         final list = vectorView.toList();
         final iterator = vectorView.first();
 
         for (var i = 0; i < list.length; i++) {
           expect(iterator.hasCurrent, isTrue);
           expect(iterator.current.rawName, equals(list[i].rawName));
-          // MoveNext() should return true except for the last iteration
+          // moveNext() should return true except for the last iteration
           expect(iterator.moveNext(), i < list.length - 1);
         }
       });
 
       tearDown(() {
-        free(networkInformation.ptr);
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });

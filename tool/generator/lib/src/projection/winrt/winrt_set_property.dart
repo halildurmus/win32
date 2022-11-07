@@ -5,6 +5,7 @@ import 'declarations/duration.dart';
 import 'declarations/enum.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
+import 'declarations/uri.dart';
 import 'winrt_property.dart';
 
 class WinRTSetPropertyProjection extends WinRTPropertyProjection {
@@ -51,6 +52,9 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
   bool get isEnumProperty => parameters.first.type.isWinRTEnum;
 
+  bool get isUriProperty =>
+      parameters.first.type.typeIdentifier.name == 'Windows.Foundation.Uri';
+
   @override
   String get shortForm => '$exposedMethodName = value';
 
@@ -68,6 +72,10 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
       if (isReferenceProperty) {
         return declarationFor(WinRTSetPropertyReturningReferenceProjection.new);
+      }
+
+      if (isUriProperty) {
+        return declarationFor(WinRTSetPropertyReturningUriProjection.new);
       }
 
       if (isComObjectProperty) {

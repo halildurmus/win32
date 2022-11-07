@@ -568,12 +568,125 @@ void main() {
     expect(projection.classNameDeclaration, isEmpty);
   });
 
+  test('WinRT class that imports ipropertvalue.dart', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Foundation.PropertyValue');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'ipropertyvalue.dart'"));
+  });
+
+  test('WinRT interface that imports ipropertyvalue.dart', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IPropertyValueStatics');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'ipropertyvalue.dart'"));
+  });
+
+  test(
+      'WinRT class that imports ireference.dart and ipropertvalue_helpers.dart',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Devices.Power.BatteryReport');
+
+    final projection = WinRTClassProjection(winTypeDef!);
+    expect(projection.importHeader,
+        contains("import '../../foundation/ireference.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../internal/ipropertyvalue_helpers.dart'"));
+  });
+
+  test(
+      'WinRT interface that imports ireference.dart and ipropertvalue_helpers.dart',
+      () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Devices.Power.IBatteryReport');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.importHeader,
+        contains("import '../../foundation/ireference.dart'"));
+    expect(projection.importHeader,
+        contains("import '../../internal/ipropertyvalue_helpers.dart'"));
+  });
+
+  test('WinRT interface that imports uri.dart', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.System.ILauncherOptions');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.importHeader,
+        contains("import '../foundation/uri.dart' as winrt_uri;"));
+  });
+
+  test('WinRT get property successfully projects Uri', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.System.ILauncherOptions');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final fallbackUriProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'get_FallbackUri');
+    expect(
+        fallbackUriProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(fallbackUriProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(fallbackUriProjection.returnType.methodParamType, equals('Uri'));
+    expect(fallbackUriProjection.toString().trimLeft(),
+        startsWith('Uri get fallbackUri'));
+    expect(
+        fallbackUriProjection.toString().trimLeft(),
+        contains(
+            'final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);'));
+    expect(fallbackUriProjection.toString().trimLeft(),
+        contains('return Uri.parse(winrtUri.toString());'));
+  });
+
+  test('WinRT set property successfully projects Uri', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.System.ILauncherOptions');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final fallbackUriProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'put_FallbackUri');
+    expect(
+        fallbackUriProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(fallbackUriProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(fallbackUriProjection.toString().trimLeft(),
+        startsWith('set fallbackUri(Uri value)'));
+    expect(
+        fallbackUriProjection.toString().trimLeft(),
+        contains(
+            'final winrtUri = winrt_uri.Uri.createUri(value.toString());'));
+  });
+
+  test('WinRT method successfully projects Uri parameter', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.System.ILauncherStatics');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final launchUriAsyncProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'LaunchUriAsync');
+    final uriParameter =
+        launchUriAsyncProjection.parameters.first as WinRTParameterProjection;
+    expect(uriParameter.preamble,
+        equals('final uriUri = winrt_uri.Uri.createUri(uri.toString());'));
+    expect(uriParameter.postamble, equals('free(uriUri.ptr);'));
+    expect(uriParameter.localIdentifier,
+        equals('uriUri.ptr.cast<Pointer<COMObject>>().value'));
+    expect(uriParameter.type.methodParamType, equals('Uri'));
+  });
+
   test('WinRT interface includes imports for methods in implemented interfaces',
       () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Gaming.Input.IGamepad');
 
-    final projection = WinRTClassProjection(winTypeDef!);
+    final projection = WinRTInterfaceProjection(winTypeDef!);
     expect(projection.importHeader, contains("import 'headset.dart'"));
     expect(
         projection.importHeader, contains("import '../../system/user.dart'"));

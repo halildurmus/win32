@@ -15,6 +15,7 @@ import '../../../utils.dart';
 import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_helpers.dart';
 import '../../internal/vector_helper.dart';
+import '../uri.dart' as winrt_uri;
 import '../winrt_enum.dart';
 import 'iiterable.dart';
 import 'iiterator.dart';
@@ -31,7 +32,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
 
   /// Creates an instance of [IVectorView] using the given [ptr].
   ///
-  /// [T] must be of type `int`, `String`, `WinRT` (e.g. `IHostName`,
+  /// [T] must be of type `int`, `Uri`, `String`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
   ///
   /// [intType] must be specified if [T] is `int`. Supported types are: [Int16],
@@ -60,6 +61,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
         _enumCreator = enumCreator,
         _intType = intType {
     if (!isSameType<T, int>() &&
+        !isSameType<T, Uri>() &&
         !isSameType<T, String>() &&
         !isSubtypeOfInspectable<T>() &&
         !isSubtypeOfWinRTEnum<T>()) {
@@ -87,6 +89,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   /// Returns the item at the specified index in the vector view.
   T getAt(int index) {
     if (isSameType<T, int>()) return _getAt_int(index) as T;
+    if (isSameType<T, Uri>()) return _getAt_Uri(index) as T;
     if (isSameType<T, String>()) return _getAt_String(index) as T;
     if (isSubtypeOfWinRTEnum<T>()) return _enumCreator!(_getAt_int(index));
     return _creator!(_getAt_COMObject(index));
@@ -294,6 +297,31 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
     }
   }
 
+  Uri _getAt_Uri(int index) {
+    final retValuePtr = calloc<COMObject>();
+
+    try {
+      final hr =
+          ptr.ref.vtable
+                  .elementAt(6)
+                  .cast<
+                      Pointer<
+                          NativeFunction<
+                              HRESULT Function(
+                                  Pointer, Uint32, Pointer<COMObject>)>>>()
+                  .value
+                  .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
+              ptr.ref.lpVtbl, index, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+      return Uri.parse(winrtUri.toString());
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
   String _getAt_String(int index) {
     final retValuePtr = calloc<HSTRING>();
 
@@ -344,8 +372,11 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   }
 
   /// Retrieves the index of a specified item in the vector view.
+  ///
+  /// Does not work for `Uri` [value]s.
   bool indexOf(T value, Pointer<Uint32> index) {
     if (isSameType<T, int>()) return _indexOf_int(value as int, index);
+    if (isSameType<T, Uri>()) return _indexOf_Uri(value as Uri, index);
     if (isSameType<T, String>()) return _indexOf_String(value as String, index);
     if (isSubtypeOfWinRTEnum<T>()) {
       return _indexOf_enum(value as WinRTEnum, index);
@@ -571,6 +602,33 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
 
       return retValuePtr.value;
     } finally {
+      free(retValuePtr);
+    }
+  }
+
+  bool _indexOf_Uri(Uri value, Pointer<Uint32> index) {
+    final retValuePtr = calloc<Bool>();
+    final winrtUri = winrt_uri.Uri.createUri(value.toString());
+
+    try {
+      final hr = ptr.ref.vtable
+              .elementAt(8)
+              .cast<
+                  Pointer<
+                      NativeFunction<
+                          HRESULT Function(Pointer, COMObject, Pointer<Uint32>,
+                              Pointer<Bool>)>>>()
+              .value
+              .asFunction<
+                  int Function(
+                      Pointer, COMObject, Pointer<Uint32>, Pointer<Bool>)>()(
+          ptr.ref.lpVtbl, winrtUri.ptr.ref, index, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
+    } finally {
+      free(winrtUri.ptr);
       free(retValuePtr);
     }
   }
