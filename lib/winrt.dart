@@ -17,7 +17,7 @@
 /// under active development. Updates to the win32 package may introduce
 /// breaking changes.
 ///
-/// ### Initializing the Windows Runtime
+/// ## Initializing the Windows Runtime
 ///
 /// All threads that activate and interact with Windows Runtime objects must be
 /// initialized prior to calling into the Windows Runtime. This package provides
@@ -26,7 +26,7 @@
 /// thread. A successful call to `winrtInitialize` should be balanced with a
 /// corresponding call to `winrtUninitialize`.
 ///
-/// ### Instantiating Windows Runtime objects
+/// ## Instantiating Windows Runtime objects
 ///
 /// The [CreateObject] function provides a convenient way to create a new
 /// Windows Runtime object. This returns a generic `Pointer<COMObject>`, which
@@ -43,11 +43,11 @@
 /// free(calendar.ptr);
 /// ```
 ///
-/// ### Strings (Windows Runtime)
+/// ## Strings in the Windows Runtime
 ///
-/// Windows Runtime APIs use `HSTRING` as their native type. An HSTRING is an
+/// Windows Runtime APIs use `HSTRING` as their native type. An `HSTRING` is an
 /// immutable string object, which is created with the [WindowsCreateString] API
-/// and deleted with the [WindowsDeleteString] API. The HSTRING itself is an
+/// and deleted with the [WindowsDeleteString] API. The `HSTRIN`G itself is an
 /// integer value, just like other `HANDLE` objects in the Win32 programming
 /// interface.
 ///
@@ -58,7 +58,8 @@
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString`; you do
 /// not need to free the pointer itself, since Windows reference counts the
 /// backing store and frees the memory when the reference count reaches 0.
-/// library winrt;
+
+library winrt;
 
 // The WinRT API builds on the underlying Win32 API, and so it is also exported
 // here.
