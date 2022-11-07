@@ -83,21 +83,112 @@ void main() {
     expect(MetadataStore.cache.length, isZero);
   });
 
+  test('Appropriate response to search for empty type', () {
+    expect(
+      () => MetadataStore.getMetadataForType(''),
+      throwsA(
+        isA<WinmdException>().having(
+          (e) => e.message,
+          'message',
+          equals('Type cannot be empty.'),
+        ),
+      ),
+    );
+    expect(
+      () => MetadataStore.getScopeForType(''),
+      throwsA(
+        isA<WinmdException>().having(
+          (e) => e.message,
+          'message',
+          equals('Type cannot be empty.'),
+        ),
+      ),
+    );
+    expect(
+      () => MetadataStore.winmdFileContainingType(''),
+      throwsA(
+        isA<WinmdException>().having(
+          (e) => e.message,
+          'message',
+          equals('Type cannot be empty.'),
+        ),
+      ),
+    );
+  });
+
   test('Appropriate response to failure to find type', () {
     expect(
-        () => MetadataStore.winmdFileContainingType(
-            'Windows.Monetization.Dogecoin'),
-        throwsA(isA<WindowsException>()));
+      () => MetadataStore.winmdFileContainingType(
+          'Windows.Monetization.Dogecoin'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals("Could not find type 'Windows.Monetization.Dogecoin'."),
+        ),
+      ),
+    );
   });
 
   test('Appropriate response to search for non-existent type', () {
-    expect(() => MetadataStore.getScopeForType('Windows.Monetization.Dogecoin'),
-        throwsA(isA<WindowsException>()));
+    expect(
+      () => MetadataStore.getScopeForType('Windows.Monetization.Dogecoin'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals("Could not find type 'Windows.Monetization.Dogecoin'."),
+        ),
+      ),
+    );
   });
 
   test('Appropriate response to search for namespace that is not a type', () {
-    expect(() => MetadataStore.getScopeForType('Windows.Foundation'),
-        throwsA(isA<WindowsException>()));
+    expect(
+      () => MetadataStore.getScopeForType('Windows.Foundation'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals("'Windows.Foundation' is a namespace, not a type."),
+        ),
+      ),
+    );
+    expect(
+      () => MetadataStore.winmdFileContainingType('Windows.Foundation'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals("'Windows.Foundation' is a namespace, not a type."),
+        ),
+      ),
+    );
+  });
+
+  test('Appropriate response to search for an invalid type', () {
+    expect(
+      () => MetadataStore.getScopeForType('Windows.Monetization.'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals(
+              "'Windows.Monetization.' is not a valid Windows Runtime type."),
+        ),
+      ),
+    );
+    expect(
+      () => MetadataStore.winmdFileContainingType('Windows.Monetization.'),
+      throwsA(
+        isA<WindowsException>().having(
+          (e) => e.message,
+          'message',
+          equals(
+              "'Windows.Monetization.' is not a valid Windows Runtime type."),
+        ),
+      ),
+    );
   });
 
   test('Appropriate response to failure to find scope from non-winmd file', () {
