@@ -1,3 +1,8 @@
+## 3.1.1
+
+- Fix documentation bug (@timsneath)
+- Add URI support to the WinRT generator (@halildurmus)
+
 ## 3.1.0
 
 - Fixed memory leaks in COM and WinRT code when an exception is generated.
