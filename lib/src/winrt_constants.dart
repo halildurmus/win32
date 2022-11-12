@@ -95,6 +95,7 @@ const IID_IIterable_IKeyValuePair_UINT32_IBuffer =
     '{4FE7FE23-22B1-528C-881D-A4ECEAEF0F11}';
 
 // IIterable<T> IIDs
+const IID_IIterable = '{FAA585EA-6214-4217-AFDA-7F46DE5869B3}';
 const IID_IIterable_AccessListEntry = '{4995C2B0-736B-588D-AE42-6F69B025B388}';
 const IID_IIterable_ActivationSignalDetectionConfiguration =
     '{CB03AC8C-3A88-5C35-9872-00A466E49A12}';
@@ -892,14 +893,20 @@ const IID_IIterable_float = '{B01BEE51-063A-5FDA-BD72-D76637BB8CB8}';
 const IID_IIterable_int = '{81A643FB-F51C-5565-83C4-F96425777B66}';
 const IID_IIterable_short = '{72FF2923-4B4E-53BB-8FEB-41EC5F2BB734}';
 
+const IID_IKeyValuePair = '{02B51929-C1C4-4A7E-8940-0312B5C18500}';
+
 // IMap<K, V> IIDs
+const IID_IMap = '{3C2925FE-8519-45C1-AA79-197B6718C1C1}';
 const IID_IMap_GUID_Object = '{5EE3189C-7DBF-5998-AD07-5414FB82567C}';
 const IID_IMap_Object_Object = '{F5F69427-55ED-5512-8429-D4F6626DFCDD}';
 const IID_IMap_String_String = '{F6D1F700-49C2-52AE-8154-826F9908773C}';
 const IID_IMap_String_Object = '{1B0D3570-0877-5EC2-8A2C-3B9539506ACA}';
 const IID_IMap_String_IJsonValue = '{C9D9A725-786B-5113-B4B7-9B61764C220B}';
 
+const IID_IMapView = '{E480CE40-A338-4ADA-ADCF-272272E48CB9}';
+
 // IReference<T> IIDs
+const IID_IReference = '{61C17706-2D65-11E0-9AE8-D48564015472}';
 const IID_IReference_AdaptiveMediaSourceResourceType =
     '{74C8C3AA-DE03-5BF0-AAE8-AA8B692066B3}';
 const IID_IReference_BasicGeoposition =
@@ -963,8 +970,10 @@ const IID_IReference_WhiteBalanceGain =
     '{79C7838A-39E2-5287-AC3B-B118DB251002}';
 
 // IVector<T> IIDs
+const IID_IVector = '{913337E9-11A1-4345-A3A2-4E7F956E222D}';
 const IID_IVector_IJsonValue = '{D44662BC-DCE3-59A8-9272-4B210F33908B}';
 
 // IVectorView<T> IIDs
+const IID_IVectorView = '{BBE1FA4C-B0E3-4583-BAEF-1F1B2E483E56}';
 const IID_IVectorView_IWwwFormUrlDecoderEntry =
     '{B1F00D3B-1F06-5117-93EA-2A0D79116701}';

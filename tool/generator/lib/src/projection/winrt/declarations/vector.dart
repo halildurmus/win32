@@ -1,3 +1,6 @@
+import 'package:win32/winrt.dart';
+import 'package:winmd/winmd.dart';
+
 import '../../../../generator.dart';
 
 mixin _VectorProjection on WinRTMethodProjection {
@@ -17,6 +20,16 @@ mixin _VectorProjection on WinRTMethodProjection {
     final creator =
         parseArgumentForCreatorParameter(returnType.typeIdentifier.typeArg!);
 
+    // The IID for IIterable<T> must be passed in the 'iterableIid' parameter so
+    // that the 'IVector' and 'IVectorView' implementations can use the correct
+    // IID when instantiating the IIterable object
+    // To learn more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+    final iIterableIid = IID_IIterable.toLowerCase();
+    final iterableArgSignature =
+        parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
+    final iterableSignature = 'pinterface($iIterableIid;$iterableArgSignature)';
+    final iterableIid = iidFromSignature(iterableSignature);
+
     // If the type argument is an enum or int, it's native type (e.g. Int32,
     // Uint32) must be passed in the 'intType' parameter so that the 'IVector'
     // and 'IVectorView' implementations can use the appropriate native type
@@ -24,7 +37,7 @@ mixin _VectorProjection on WinRTMethodProjection {
         ? typeProjection.nativeType
         : null;
 
-    final args = <String>[];
+    final args = <String>["iterableIid: '$iterableIid'"];
     if (typeProjection.isWinRTEnum) {
       args.add('enumCreator: $creator');
     } else if (creator != null) {
@@ -34,7 +47,7 @@ mixin _VectorProjection on WinRTMethodProjection {
       args.add('intType: $intType');
     }
 
-    return args.isEmpty ? '' : ', ${args.join(', ')}';
+    return ', ${args.join(', ')}';
   }
 }
 
