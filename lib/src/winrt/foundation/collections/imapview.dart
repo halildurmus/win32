@@ -31,11 +31,15 @@ import 'ikeyvaluepair.dart';
 class IMapView<K, V> extends IInspectable
     implements IIterable<IKeyValuePair<K, V>> {
   // vtable begins at 6, is 4 entries long.
+  final String _iterableIid;
   late final IKeyValuePair<K, V> Function(Pointer<COMObject>) _iterableCreator;
   final V Function(Pointer<COMObject>)? _creator;
   final V Function(int)? _enumCreator;
 
-  /// Creates an instance of [IMapView] using the given [ptr].
+  /// Creates an instance of [IMapView] using the given [ptr] and [iterableIid].
+  ///
+  /// [iterableIid] must be the IID of the `IIterable<IKeyValuePair<K, V>>`
+  /// interface (e.g. [IID_IIterable_IKeyValuePair_String_Object]).
   ///
   /// [K] must be of type `GUID`, `int`, `Object`, `String`, or `WinRTEnum`
   /// (e.g. `PedometerStepKind`).
@@ -56,9 +60,11 @@ class IMapView<K, V> extends IInspectable
   /// ```
   IMapView.fromRawPointer(
     super.ptr, {
+    required String iterableIid,
     V Function(Pointer<COMObject>)? creator,
     V Function(int)? enumCreator,
-  })  : _creator = creator,
+  })  : _iterableIid = iterableIid,
+        _creator = creator,
         _enumCreator = enumCreator {
     if (!isSupportedKeyValuePair<K, V>()) {
       throw ArgumentError('Unsupported key-value pair: IMapView<$K, $V>');
@@ -461,7 +467,7 @@ class IMapView<K, V> extends IInspectable
       : MapHelper.toMap<K, V>(first(), length: size, creator: _iterableCreator);
 
   late final _iIterable = IIterable<IKeyValuePair<K, V>>.fromRawPointer(
-      toInterface(iterableIidFromIids(iids)),
+      toInterface(_iterableIid),
       creator: _iterableCreator);
 
   @override

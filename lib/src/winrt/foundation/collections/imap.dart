@@ -14,6 +14,7 @@ import '../../../macros.dart';
 import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import '../../../winrt_constants.dart';
 import '../../../winrt_helpers.dart';
 import '../../devices/sensors/enums.g.dart';
 import '../../devices/sensors/pedometerstepkind_helpers.dart';
@@ -36,6 +37,7 @@ import 'stringmap.dart';
 class IMap<K, V> extends IInspectable
     implements IIterable<IKeyValuePair<K, V>> {
   // vtable begins at 6, is 7 entries long.
+  final String _iterableIid;
   late final IKeyValuePair<K, V> Function(Pointer<COMObject>) _iterableCreator;
   final V Function(Pointer<COMObject>)? _creator;
   final V Function(int)? _enumCreator;
@@ -46,23 +48,29 @@ class IMap<K, V> extends IInspectable
   /// `Object?` or `String?`.
   factory IMap() {
     if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
-      return IMap.fromRawPointer(MediaPropertySet().ptr);
+      return IMap.fromRawPointer(MediaPropertySet().ptr,
+          iterableIid: IID_IIterable_IKeyValuePair_GUID_Object);
     }
 
     if (isSameType<K, String>()) {
       if (isSimilarType<V, String>()) {
-        return IMap.fromRawPointer(StringMap().ptr);
+        return IMap.fromRawPointer(StringMap().ptr,
+            iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
 
       if (isSimilarType<V, Object>()) {
-        return IMap.fromRawPointer(PropertySet().ptr);
+        return IMap.fromRawPointer(PropertySet().ptr,
+            iterableIid: IID_IIterable_IKeyValuePair_String_Object);
       }
     }
 
     throw ArgumentError('Unsupported key-value pair: IMap<$K, $V>');
   }
 
-  /// Creates an instance of [IMap] using the given [ptr].
+  /// Creates an instance of [IMap] using the given [ptr] and [iterableIid].
+  ///
+  /// [iterableIid] must be the IID of the `IIterable<IKeyValuePair<K, V>>`
+  /// interface (e.g. [IID_IIterable_IKeyValuePair_String_Object]).
   ///
   /// [K] must be of type `GUID`, `int`, `Object`, `String`, or `WinRTEnum`
   /// (e.g. `PedometerStepKind`).
@@ -83,9 +91,11 @@ class IMap<K, V> extends IInspectable
   /// ```
   IMap.fromRawPointer(
     super.ptr, {
+    required String iterableIid,
     V Function(Pointer<COMObject>)? creator,
     V Function(int)? enumCreator,
-  })  : _creator = creator,
+  })  : _iterableIid = iterableIid,
+        _creator = creator,
         _enumCreator = enumCreator {
     if (!isSupportedKeyValuePair<K, V>()) {
       throw ArgumentError('Unsupported key-value pair: IMap<$K, $V>');
@@ -113,20 +123,23 @@ class IMap<K, V> extends IInspectable
     if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
       final iMap = MediaPropertySet();
       other.cast<GUID, Object?>().forEach(iMap.insert);
-      return IMap.fromRawPointer(iMap.ptr);
+      return IMap.fromRawPointer(iMap.ptr,
+          iterableIid: IID_IIterable_IKeyValuePair_GUID_Object);
     }
 
     if (isSameType<K, String>()) {
       if (isSimilarType<V, String>()) {
         final iMap = StringMap();
         other.cast<String, String?>().forEach(iMap.insert);
-        return IMap.fromRawPointer(iMap.ptr);
+        return IMap.fromRawPointer(iMap.ptr,
+            iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
 
       if (isSimilarType<V, Object>()) {
         final iMap = PropertySet();
         other.cast<String, Object?>().forEach(iMap.insert);
-        return IMap.fromRawPointer(iMap.ptr);
+        return IMap.fromRawPointer(iMap.ptr,
+            iterableIid: IID_IIterable_IKeyValuePair_String_Object);
       }
     }
 
@@ -511,7 +524,9 @@ class IMap<K, V> extends IInspectable
       if (FAILED(hr)) throw WindowsException(hr);
 
       return IMapView<K, V>.fromRawPointer(retValuePtr,
-              creator: _creator, enumCreator: _enumCreator)
+              creator: _creator,
+              enumCreator: _enumCreator,
+              iterableIid: _iterableIid)
           .toMap();
     } finally {
       free(retValuePtr);
@@ -783,7 +798,7 @@ class IMap<K, V> extends IInspectable
       : MapHelper.toMap<K, V>(first(), length: size, creator: _iterableCreator);
 
   late final _iIterable = IIterable<IKeyValuePair<K, V>>.fromRawPointer(
-      toInterface(iterableIidFromIids(iids)),
+      toInterface(_iterableIid),
       creator: _iterableCreator);
 
   @override
