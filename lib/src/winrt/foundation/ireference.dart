@@ -22,9 +22,13 @@ import 'structs.g.dart';
 /// {@category winrt}
 class IReference<T> extends IInspectable {
   // vtable begins at 6, is 1 entries long.
+  final String _referenceIid;
   final T Function(int)? _enumCreator;
 
-  /// Creates an instance of [IReference] using the given [ptr].
+  /// Creates an instance of [IReference] using the given [ptr] and [referenceIid].
+  ///
+  /// [referenceIid] must be the IID of the `IReference<T>` interface (e.g.
+  /// [IID_IReference_Uint32]).
   ///
   /// [T] must be of type `DateTime`, `double`, `Duration`, `int`, `String`,
   /// `Struct` (e.g. `GUID`,`Point`, `Rect`, `Size`), or `WinRTEnum` (e.g.
@@ -35,8 +39,10 @@ class IReference<T> extends IInspectable {
   /// final reference = IReference<WebErrorStatus>.fromRawPointer(ptr,
   ///     enumCreator: WebErrorStatus.from);
   /// ```
-  IReference.fromRawPointer(super.ptr, {T Function(int)? enumCreator})
-      : _enumCreator = enumCreator {
+  IReference.fromRawPointer(super.ptr,
+      {required String referenceIid, T Function(int)? enumCreator})
+      : _referenceIid = referenceIid,
+        _enumCreator = enumCreator {
     if (isSubtypeOfWinRTEnum<T>() && enumCreator == null) {
       throw ArgumentError.notNull('enumCreator');
     }
@@ -46,8 +52,7 @@ class IReference<T> extends IInspectable {
   T? get value {
     if (ptr.ref.lpVtbl == nullptr) return null;
 
-    final iid = referenceIidFromIids(iids);
-    switch (iid) {
+    switch (_referenceIid) {
       // Handle Int32 types and Int32 enumerations
       case IID_IReference_AdaptiveMediaSourceResourceType:
       case IID_IReference_CaptureSceneMode:
@@ -114,7 +119,7 @@ class IReference<T> extends IInspectable {
       case IID_IReference_Vector3:
       case IID_IReference_WhiteBalanceGain:
       default:
-        throw UnsupportedError('Unsupported IID: $iid');
+        throw UnsupportedError('Unsupported IID: $_referenceIid');
     }
   }
 
