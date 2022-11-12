@@ -74,7 +74,9 @@ class IIPInformation extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr).value;
+      return IReference<int>.fromRawPointer(retValuePtr,
+              referenceIid: '{E5198CC8-2873-55F5-B0A1-84FF9E4AAD62}')
+          .value;
     } finally {
       free(retValuePtr);
     }

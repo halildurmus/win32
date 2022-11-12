@@ -60,6 +60,7 @@ class WwwFormUrlDecoder extends IInspectable
   // IVectorView<IWwwFormUrlDecoderEntry> methods
   late final _iVectorView = IVectorView.fromRawPointer(
       toInterface(IID_IVectorView_IWwwFormUrlDecoderEntry),
+      iterableIid: '{876BE83B-7218-5BFB-A169-83152EF7E146}',
       creator: IWwwFormUrlDecoderEntry.fromRawPointer);
 
   @override

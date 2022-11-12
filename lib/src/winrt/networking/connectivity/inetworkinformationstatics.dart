@@ -147,10 +147,10 @@ class INetworkInformationStatics extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     try {
-      return IVectorView<IHostName>.fromRawPointer(
-        retValuePtr,
-        creator: IHostName.fromRawPointer,
-      ).toList();
+      return IVectorView<IHostName>.fromRawPointer(retValuePtr,
+              iterableIid: '{9E5F3ED0-CF1C-5D38-832C-ACEA6164BF5C}',
+              creator: IHostName.fromRawPointer)
+          .toList();
     } finally {
       free(retValuePtr);
     }
