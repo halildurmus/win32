@@ -267,6 +267,28 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(languagesProjection.toString().trimLeft(),
         startsWith('List<String> get languages'));
+    expect(languagesProjection.toString(),
+        contains("iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}'"));
+  });
+
+  test('WinRT get property successfully projects IMap<String, String?>', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.INotificationData');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final valuesProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'get_Values');
+
+    expect(
+        valuesProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(valuesProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(valuesProjection.toString().trimLeft(),
+        startsWith('IMap<String, String?> get values'));
+    expect(valuesProjection.toString(),
+        contains("iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}'"));
   });
 
   test('WinRT get property successfully projects nullable types', () {
@@ -287,6 +309,8 @@ void main() {
         equals('COMObject'));
     expect(expirationTimeSystemProjection.toString().trimLeft(),
         startsWith('DateTime? get expirationTime'));
+    expect(expirationTimeSystemProjection.toString(),
+        contains("referenceIid: '{5541D8A7-497C-5AA4-86FC-7713ADBF2A2C}'"));
   });
 
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {
@@ -396,7 +420,7 @@ void main() {
     expect(
         flagsProjection.toString(),
         contains(
-            'final referencePtr = boxValue(value.value, convertToIReference: true, nativeType: Uint32);'));
+            'final referencePtr = boxValue(value?.value, convertToIReference: true, nativeType: Uint32);'));
   });
 
   test('WinRT method projects DateTime parameter correctly', () {
