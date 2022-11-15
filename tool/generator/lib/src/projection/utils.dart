@@ -347,7 +347,8 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
 
 /// Returns the primitive type signature for the given [baseType].
 ///
-/// To learn more about this, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+/// To learn more about this, see
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
 String primitiveTypeSignatureFromBaseType(BaseType baseType) {
   switch (baseType) {
     case BaseType.booleanType:
@@ -462,28 +463,22 @@ String parseGenericTypeIdentifierSignature(TypeIdentifier typeIdentifier) {
   return 'pinterface($parentTypeGuid;${parseTypeIdentifierSignature(typeIdentifier.typeArg!)})';
 }
 
+/// A byte representation of the pinterface instantiation.
+///
+/// This is hardcoded as the value {11f47ad5-7b73-42c0-abae-878b1e16adee} in
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system
 const wrtPinterfaceNamespace = [
-  0x11,
-  0xf4,
-  0x7a,
-  0xd5,
-  0x7b,
-  0x73,
-  0x42,
-  0xc0,
-  0xab,
-  0xae,
-  0x87,
-  0x8b,
-  0x1e,
-  0x16,
-  0xad,
-  0xee,
+  0x11, 0xf4, 0x7a, 0xd5,
+  0x7b, 0x73,
+  0x42, 0xc0,
+  0xab, 0xae,
+  0x87, 0x8b, 0x1e, 0x16, 0xad, 0xee, //
 ];
 
 /// Returns the IID for the given [signature].
 ///
-/// To learn more about this, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+/// The algorithm is defined here:
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
 String iidFromSignature(String signature) {
   final signatureInBytes = const Utf8Encoder().convert(signature);
   final data = [...wrtPinterfaceNamespace, ...signatureInBytes];
