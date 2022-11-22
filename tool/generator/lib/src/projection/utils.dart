@@ -477,29 +477,27 @@ const wrtPinterfaceNamespace = [
 
 /// Returns the IID for the given [signature].
 ///
-/// The algorithm is defined here:
+/// Takes a parameterized type instance, such as `IMap<String, String>`, which
+/// can be represented as:
+/// `pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};string;string)`
+///
+/// Converts it to a unique IID for the resultant type, using an algorithm
+/// defined here:
 /// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
 String iidFromSignature(String signature) {
   final signatureInBytes = const Utf8Encoder().convert(signature);
   final data = [...wrtPinterfaceNamespace, ...signatureInBytes];
   final sha1Bytes = sha1.convert(data).bytes;
 
-  final first = Int8List(4)
-    ..[0] = sha1Bytes[0]
-    ..[1] = sha1Bytes[1]
-    ..[2] = sha1Bytes[2]
-    ..[3] = sha1Bytes[3];
+  final first = Int8List.fromList(sha1Bytes.sublist(0, 4));
   final firstNumber = first.buffer.asByteData().getUint32(0);
 
-  final second = Int8List(2)
-    ..[0] = sha1Bytes[4]
-    ..[1] = sha1Bytes[5];
+  final second = Int8List.fromList(sha1Bytes.sublist(4, 6));
   final secondNumber = second.buffer.asByteData().getUint16(0);
 
-  final third = Int8List(2)
-    ..[0] = sha1Bytes[6]
-    ..[1] = sha1Bytes[7];
+  final third = Int8List.fromList(sha1Bytes.sublist(6, 8));
   var thirdNumber = third.buffer.asByteData().getUint16(0);
+
   thirdNumber = (thirdNumber & 0x0fff) | (5 << 12);
 
   final fourthNumber = (sha1Bytes[8] & 0x3f) | 0x80;
