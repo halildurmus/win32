@@ -487,38 +487,33 @@ const wrtPinterfaceNamespace = [
 String iidFromSignature(String signature) {
   final signatureInBytes = const Utf8Encoder().convert(signature);
   final data = [...wrtPinterfaceNamespace, ...signatureInBytes];
-  final sha1Bytes = sha1.convert(data).bytes;
+  final sha1Hash = sha1.convert(data);
+  final sha1Bytes = Uint8List.fromList(sha1Hash.bytes).buffer.asByteData();
 
-  final first = Int8List.fromList(sha1Bytes.sublist(0, 4));
-  final firstNumber = first.buffer.asByteData().getUint32(0);
-
-  final second = Int8List.fromList(sha1Bytes.sublist(4, 6));
-  final secondNumber = second.buffer.asByteData().getUint16(0);
-
-  final third = Int8List.fromList(sha1Bytes.sublist(6, 8));
-  var thirdNumber = third.buffer.asByteData().getUint16(0);
-
-  thirdNumber = (thirdNumber & 0x0fff) | (5 << 12);
-
-  final fourthNumber = (sha1Bytes[8] & 0x3f) | 0x80;
+  final firstPart = sha1Bytes.getUint32(0);
+  final secondPart = sha1Bytes.getUint16(4);
+  final thirdPart = (sha1Bytes.getUint16(6) & 0x0fff) | (5 << 12);
+  final fourthPart = (sha1Bytes.getUint8(8) & 0x3f) | 0x80;
 
   final guidChars = List<int>.filled(38, 0);
   var offset = 0;
   // {dddddddd-dddd-dddd-dddd-dddddddddddd}
   guidChars[offset++] = '{'.codeUnitAt(0);
-  offset =
-      _hexsToChars(guidChars, offset, firstNumber >> 24, firstNumber >> 16);
-  offset = _hexsToChars(guidChars, offset, firstNumber >> 8, firstNumber);
+  offset = _hexsToChars(guidChars, offset, firstPart >> 24, firstPart >> 16);
+  offset = _hexsToChars(guidChars, offset, firstPart >> 8, firstPart);
   guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, secondNumber >> 8, secondNumber);
+  offset = _hexsToChars(guidChars, offset, secondPart >> 8, secondPart);
   guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, thirdNumber >> 8, thirdNumber);
+  offset = _hexsToChars(guidChars, offset, thirdPart >> 8, thirdPart);
   guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, fourthNumber, sha1Bytes[9]);
+  offset = _hexsToChars(guidChars, offset, fourthPart, sha1Bytes.getUint8(9));
   guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, sha1Bytes[10], sha1Bytes[11]);
-  offset = _hexsToChars(guidChars, offset, sha1Bytes[12], sha1Bytes[13]);
-  offset = _hexsToChars(guidChars, offset, sha1Bytes[14], sha1Bytes[15]);
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(10), sha1Bytes.getUint8(11));
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(12), sha1Bytes.getUint8(13));
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(14), sha1Bytes.getUint8(15));
   guidChars[offset++] = '}'.codeUnitAt(0);
 
   return String.fromCharCodes(guidChars).toUpperCase();
