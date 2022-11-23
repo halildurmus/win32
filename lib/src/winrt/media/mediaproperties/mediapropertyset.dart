@@ -23,8 +23,9 @@ class MediaPropertySet extends IInspectable implements IMap<GUID, Object?> {
 
   static const _className = 'Windows.Media.MediaProperties.MediaPropertySet';
 
-  late final _iMap =
-      IMap<GUID, Object?>.fromRawPointer(toInterface(IID_IMap_GUID_Object));
+  late final _iMap = IMap<GUID, Object?>.fromRawPointer(
+      toInterface(IID_IMap_GUID_Object),
+      iterableIid: '{F3B20528-E3B3-5331-B2D0-0C2623AEE785}');
 
   @override
   void clear() => _iMap.clear();

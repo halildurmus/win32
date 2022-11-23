@@ -98,7 +98,8 @@ class IDevicePicker extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVector.fromRawPointer(retValuePtr);
+    return IVector.fromRawPointer(retValuePtr,
+        iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}');
   }
 
   int add_DeviceSelected(Pointer<NativeFunction<TypedEventHandler>> handler) {

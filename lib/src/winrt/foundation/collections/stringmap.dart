@@ -27,8 +27,9 @@ class StringMap extends IInspectable implements IMap<String, String?> {
 
   static const _className = 'Windows.Foundation.Collections.StringMap';
 
-  late final _iMap =
-      IMap<String, String?>.fromRawPointer(toInterface(IID_IMap_String_String));
+  late final _iMap = IMap<String, String?>.fromRawPointer(
+      toInterface(IID_IMap_String_String),
+      iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}');
 
   @override
   void clear() => _iMap.clear();

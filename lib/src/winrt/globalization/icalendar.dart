@@ -94,7 +94,9 @@ class ICalendar extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IVectorView<String>.fromRawPointer(retValuePtr).toList();
+      return IVectorView<String>.fromRawPointer(retValuePtr,
+              iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}')
+          .toList();
     } finally {
       free(retValuePtr);
     }

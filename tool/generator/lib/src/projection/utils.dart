@@ -1,5 +1,9 @@
 // Useful utilities
 
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
 import 'package:winmd/winmd.dart';
 
@@ -339,6 +343,205 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
   }
 
   return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';
+}
+
+/// Returns the primitive type signature for the given [baseType].
+///
+/// To learn more about this, see
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+String primitiveTypeSignatureFromBaseType(BaseType baseType) {
+  switch (baseType) {
+    case BaseType.booleanType:
+      return 'b1';
+    case BaseType.charType:
+      return 'c2';
+    case BaseType.doubleType:
+      return 'f8';
+    case BaseType.floatType:
+      return 'f4';
+    case BaseType.int8Type:
+      return 'i1';
+    case BaseType.int16Type:
+      return 'i2';
+    case BaseType.int32Type:
+      return 'i4';
+    case BaseType.int64Type:
+      return 'i8';
+    case BaseType.objectType:
+      return 'cinterface(IInspectable)';
+    case BaseType.stringType:
+      return 'string';
+    case BaseType.uint8Type:
+      return 'u1';
+    case BaseType.uint16Type:
+      return 'u2';
+    case BaseType.uint32Type:
+      return 'u4';
+    case BaseType.uint64Type:
+      return 'u8';
+    default:
+      throw UnsupportedError('Unsupported baseType: $baseType');
+  }
+}
+
+/// Returns the type signature for the given [td].
+String parseTypeDefSignature(TypeDef td) {
+  if (td.typeSpec != null) return parseTypeIdentifierSignature(td.typeSpec!);
+
+  if (td.isClass) {
+    final className = td.name;
+    final defaultInterfaceSignature =
+        parseTypeDefSignature(td.interfaces.first);
+    return 'rc($className;$defaultInterfaceSignature)';
+  }
+
+  return td.guid!.toLowerCase();
+}
+
+/// Returns the type signature for the given [ti].
+String parseTypeIdentifierSignature(TypeIdentifier ti) {
+  if (ti.baseType == BaseType.genericTypeModifier) {
+    return parseGenericTypeIdentifierSignature(ti);
+  }
+
+  if (ti.name == 'System.Guid') return 'g16';
+
+  final typeProjection = TypeProjection(ti);
+
+  if (typeProjection.isWinRTDelegate) {
+    return 'delegate(${ti.type!.guid!.toLowerCase()})';
+  }
+
+  if (typeProjection.isWinRTEnum) {
+    final enumName = ti.name;
+    final isFlagsEnum = ti.type!.existsAttribute('System.FlagsAttribute');
+    final enumSignature = isFlagsEnum ? 'u4' : 'i4';
+    return 'enum($enumName;$enumSignature)';
+  }
+
+  if (typeProjection.isWinRTStruct) {
+    final structName = ti.name;
+    final fields = ti.type!.fields
+        .map((field) => parseTypeIdentifierSignature(field.typeIdentifier));
+    return 'struct($structName;${fields.join(';')})';
+  }
+
+  if (typeProjection.isInterface) return ti.type!.guid!.toLowerCase();
+
+  if (typeProjection.isClass) {
+    final className = ti.name;
+    final defaultInterface = ti.type!.interfaces.first;
+    if (defaultInterface.typeSpec != null) {
+      final defaultInterfaceSignature =
+          parseTypeIdentifierSignature(defaultInterface.typeSpec!);
+      return 'rc($className;$defaultInterfaceSignature)';
+    }
+
+    final defaultInterfaceSignature = parseTypeDefSignature(defaultInterface);
+    return 'rc($className;$defaultInterfaceSignature)';
+  }
+
+  return primitiveTypeSignatureFromBaseType(ti.baseType);
+}
+
+/// Returns the type signature for the given generic [typeIdentifier].
+String parseGenericTypeIdentifierSignature(TypeIdentifier typeIdentifier) {
+  if (typeIdentifier.baseType != BaseType.genericTypeModifier) {
+    throw ArgumentError('Expected a generic type identifier.');
+  }
+
+  final parentTypeGuid = typeIdentifier.type!.guid!.toLowerCase();
+
+  if (typeIdentifier.type?.genericParams.length == 2) {
+    final firstArgSignature =
+        parseTypeIdentifierSignature(typeIdentifier.typeArg!);
+    final secondArgSignature =
+        parseTypeIdentifierSignature(typeIdentifier.typeArg!.typeArg!);
+    return 'pinterface($parentTypeGuid;$firstArgSignature;$secondArgSignature)';
+  }
+
+  return 'pinterface($parentTypeGuid;${parseTypeIdentifierSignature(typeIdentifier.typeArg!)})';
+}
+
+/// A byte representation of the pinterface instantiation.
+///
+/// This is hardcoded as the value {11f47ad5-7b73-42c0-abae-878b1e16adee} in
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system
+const wrtPinterfaceNamespace = [
+  0x11, 0xf4, 0x7a, 0xd5,
+  0x7b, 0x73,
+  0x42, 0xc0,
+  0xab, 0xae,
+  0x87, 0x8b, 0x1e, 0x16, 0xad, 0xee, //
+];
+
+/// Returns the IID for the given [signature].
+///
+/// Takes a parameterized type instance, such as `IMap<String, String>`, which
+/// can be represented as:
+/// `pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};string;string)`
+///
+/// Converts it to a unique IID for the resultant type, using an algorithm
+/// defined here:
+/// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+String iidFromSignature(String signature) {
+  final signatureInBytes = const Utf8Encoder().convert(signature);
+  final data = [...wrtPinterfaceNamespace, ...signatureInBytes];
+  final sha1Hash = sha1.convert(data);
+  final sha1Bytes = Uint8List.fromList(sha1Hash.bytes).buffer.asByteData();
+
+  final firstPart = sha1Bytes.getUint32(0);
+  final secondPart = sha1Bytes.getUint16(4);
+  final thirdPart = (sha1Bytes.getUint16(6) & 0x0fff) | (5 << 12);
+  final fourthPart = (sha1Bytes.getUint8(8) & 0x3f) | 0x80;
+
+  final guidChars = List<int>.filled(38, 0);
+  var offset = 0;
+  // {dddddddd-dddd-dddd-dddd-dddddddddddd}
+  guidChars[offset++] = '{'.codeUnitAt(0);
+  offset = _hexsToChars(guidChars, offset, firstPart >> 24, firstPart >> 16);
+  offset = _hexsToChars(guidChars, offset, firstPart >> 8, firstPart);
+  guidChars[offset++] = '-'.codeUnitAt(0);
+  offset = _hexsToChars(guidChars, offset, secondPart >> 8, secondPart);
+  guidChars[offset++] = '-'.codeUnitAt(0);
+  offset = _hexsToChars(guidChars, offset, thirdPart >> 8, thirdPart);
+  guidChars[offset++] = '-'.codeUnitAt(0);
+  offset = _hexsToChars(guidChars, offset, fourthPart, sha1Bytes.getUint8(9));
+  guidChars[offset++] = '-'.codeUnitAt(0);
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(10), sha1Bytes.getUint8(11));
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(12), sha1Bytes.getUint8(13));
+  offset = _hexsToChars(
+      guidChars, offset, sha1Bytes.getUint8(14), sha1Bytes.getUint8(15));
+  guidChars[offset++] = '}'.codeUnitAt(0);
+
+  return String.fromCharCodes(guidChars).toUpperCase();
+}
+
+int _hexToChar(int a) {
+  a = a & 0xf;
+  return (a > 9) ? a - 10 + 0x61 : a + 0x30;
+}
+
+int _hexsToChars(List<int> guidChars, int offset, int a, int b) {
+  guidChars[offset++] = _hexToChar(a >> 4);
+  guidChars[offset++] = _hexToChar(a);
+  guidChars[offset++] = _hexToChar(b >> 4);
+  guidChars[offset++] = _hexToChar(b);
+  return offset;
+}
+
+/// Returns the IID for the given [typeDef].
+String iidFromTypeDef(TypeDef typeDef) {
+  final signature = parseTypeDefSignature(typeDef);
+  return iidFromSignature(signature);
+}
+
+/// Returns the IID for the given [typeIdentifier].
+String iidFromTypeIdentifier(TypeIdentifier typeIdentifier) {
+  final signature = parseTypeIdentifierSignature(typeIdentifier);
+  return iidFromSignature(signature);
 }
 
 /// Take a name like TypedEventHandler`2 and return TypedEventHandler.

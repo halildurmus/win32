@@ -1177,7 +1177,8 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IMapView.fromRawPointer(retValuePtr);
+        return IMapView.fromRawPointer(retValuePtr,
+            iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
 
       setUp(() {
@@ -2019,7 +2020,8 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVector.fromRawPointer(retValuePtr);
+        return IVector.fromRawPointer(retValuePtr,
+            iterableIid: IID_IIterable_Uri);
       }
 
       setUp(() {
@@ -2298,7 +2300,8 @@ void main() {
 
         if (FAILED(hr)) throw WindowsException(hr);
 
-        return IVectorView.fromRawPointer(retValuePtr);
+        return IVectorView.fromRawPointer(retValuePtr,
+            iterableIid: IID_IIterable_String);
       }
 
       setUp(() {
@@ -2388,7 +2391,8 @@ void main() {
         if (FAILED(hr)) throw WindowsException(hr);
 
         return IVectorView.fromRawPointer(retValuePtr,
-            creator: IHostName.fromRawPointer);
+            creator: IHostName.fromRawPointer,
+            iterableIid: IID_IIterable_HostName);
       }
 
       setUp(() {

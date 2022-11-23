@@ -1,3 +1,4 @@
+import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
 import '../../../../generator.dart';
@@ -20,8 +21,28 @@ mixin _MapProjection on WinRTMethodProjection {
     final creator = parseArgumentForCreatorParameter(
         returnType.typeIdentifier.typeArg!.typeArg!);
 
-    if (typeProjection.isWinRTEnum) return ', enumCreator: $creator';
-    return creator == null ? '' : ', creator: $creator';
+    // The IID for IIterable<IKeyValuePair<K, V>> must be passed in the
+    // 'iterableIid' parameter so that the 'IMap' and 'IMapView' implementations
+    // can use the correct IID when instantiating the IIterable object
+    // To learn more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+    final iIterableIid = IID_IIterable.toLowerCase();
+    final iKvpIid = IID_IKeyValuePair.toLowerCase();
+    final kvpKeyArgSig =
+        parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
+    final kvpValueArgSig = parseTypeIdentifierSignature(
+        returnType.typeIdentifier.typeArg!.typeArg!);
+    final iterableSignature =
+        'pinterface($iIterableIid;pinterface($iKvpIid;$kvpKeyArgSig;$kvpValueArgSig))';
+    final iterableIid = iidFromSignature(iterableSignature);
+
+    final args = <String>["iterableIid: '$iterableIid'"];
+    if (typeProjection.isWinRTEnum) {
+      args.add('enumCreator: $creator');
+    } else if (creator != null) {
+      args.add('creator: $creator');
+    }
+
+    return ', ${args.join(', ')}';
   }
 }
 

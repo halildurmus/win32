@@ -55,7 +55,8 @@ class INotificationData extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return IMap.fromRawPointer(retValuePtr);
+    return IMap.fromRawPointer(retValuePtr,
+        iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}');
   }
 
   int get sequenceNumber {

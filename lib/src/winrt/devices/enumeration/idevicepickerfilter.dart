@@ -55,7 +55,9 @@ class IDevicePickerFilter extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     return IVector.fromRawPointer(retValuePtr,
-        enumCreator: DeviceClass.from, intType: Int32);
+        iterableIid: '{47D4BE05-58F1-522E-81C6-975EB4131BB9}',
+        enumCreator: DeviceClass.from,
+        intType: Int32);
   }
 
   IVector<String> get supportedDeviceSelectors {
@@ -73,6 +75,7 @@ class IDevicePickerFilter extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    return IVector.fromRawPointer(retValuePtr);
+    return IVector.fromRawPointer(retValuePtr,
+        iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}');
   }
 }

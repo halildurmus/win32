@@ -1,3 +1,4 @@
+import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
 import '../../../../generator.dart';
@@ -32,7 +33,7 @@ mixin _ReferenceProjection on WinRTMethodProjection {
     }
 
     return typeProjection.isWinRTEnum
-        ? 'boxValue(value.value, ${args.join(', ')});'
+        ? 'boxValue(value?.value, ${args.join(', ')});'
         : 'boxValue(value, ${args.join(', ')});';
   }
 
@@ -47,7 +48,23 @@ mixin _ReferenceProjection on WinRTMethodProjection {
         ? '${lastComponent(typeProjection.typeIdentifier.name)}.from'
         : null;
 
-    return enumCreator == null ? '' : ', enumCreator: $enumCreator';
+    // The IID for IReference<T> must be passed in the 'iterableIid' parameter
+    // so that the 'IReference' implementation can use the correct IID when
+    // retrieving the value it holds
+    // To learn know more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
+    final iReferenceIid = IID_IReference.toLowerCase();
+    final referenceArgSignature =
+        parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
+    final referenceSignature =
+        'pinterface($iReferenceIid;$referenceArgSignature)';
+    final referenceIid = iidFromSignature(referenceSignature);
+
+    final args = <String>["referenceIid: '$referenceIid'"];
+    if (enumCreator != null) {
+      args.add('enumCreator: $enumCreator');
+    }
+
+    return ', ${args.join(', ')}';
   }
 }
 

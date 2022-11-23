@@ -53,7 +53,9 @@ class IBatteryReport extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr).value;
+      return IReference<int>.fromRawPointer(retValuePtr,
+              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+          .value;
     } finally {
       free(retValuePtr);
     }
@@ -74,7 +76,9 @@ class IBatteryReport extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr).value;
+      return IReference<int>.fromRawPointer(retValuePtr,
+              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+          .value;
     } finally {
       free(retValuePtr);
     }
@@ -95,7 +99,9 @@ class IBatteryReport extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr).value;
+      return IReference<int>.fromRawPointer(retValuePtr,
+              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+          .value;
     } finally {
       free(retValuePtr);
     }
@@ -116,7 +122,9 @@ class IBatteryReport extends IInspectable {
           ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr).value;
+      return IReference<int>.fromRawPointer(retValuePtr,
+              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+          .value;
     } finally {
       free(retValuePtr);
     }

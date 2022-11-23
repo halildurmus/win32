@@ -26,11 +26,15 @@ import 'iiterator.dart';
 /// {@category winrt}
 class IVectorView<T> extends IInspectable implements IIterable<T> {
   // vtable begins at 6, is 4 entries long.
+  final String _iterableIid;
   final T Function(Pointer<COMObject>)? _creator;
   final T Function(int)? _enumCreator;
   final Type? _intType;
 
-  /// Creates an instance of [IVectorView] using the given [ptr].
+  /// Creates an instance of [IVectorView] using the given [ptr] and [iterableIid].
+  ///
+  /// [iterableIid] must be the IID of the `IIterable<T>` interface (e.g.
+  /// [IID_IIterable_String]).
   ///
   /// [T] must be of type `int`, `Uri`, `String`, `WinRT` (e.g. `IHostName`,
   /// `IStorageFile`) or `WinRTEnum` (e.g. `DeviceClass`).
@@ -54,10 +58,12 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   /// ```
   IVectorView.fromRawPointer(
     super.ptr, {
+    required String iterableIid,
     T Function(Pointer<COMObject>)? creator,
     T Function(int)? enumCreator,
     Type? intType,
-  })  : _creator = creator,
+  })  : _iterableIid = iterableIid,
+        _creator = creator,
         _enumCreator = enumCreator,
         _intType = intType {
     if (!isSameType<T, int>() &&
@@ -939,7 +945,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   }
 
   late final _iIterable = IIterable<T>.fromRawPointer(
-    toInterface(iterableIidFromIids(iids)),
+    toInterface(_iterableIid),
     creator: _creator,
     enumCreator: _enumCreator,
     intType: _intType,

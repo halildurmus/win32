@@ -24,7 +24,7 @@ class VectorHelper<T> {
   final T Function(Pointer<COMObject>)? creator;
   final T Function(int)? enumCreator;
   final Type? intType;
-  final void Function(int, int, Pointer<NativeType>) getManyCallback;
+  final int Function(int, int, Pointer<NativeType>) getManyCallback;
   final int length;
 
   List<T> toList() {

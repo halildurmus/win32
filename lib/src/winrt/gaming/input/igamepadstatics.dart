@@ -130,6 +130,7 @@ class IGamepadStatics extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IVectorView<Gamepad>.fromRawPointer(retValuePtr,
+              iterableIid: '{47132BA0-6B17-5CD2-A8BD-B5D3443CCB13}',
               creator: Gamepad.fromRawPointer)
           .toList();
     } finally {

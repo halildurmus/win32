@@ -22,8 +22,6 @@ import 'win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import 'win32/ole32.g.dart';
 import 'winrt/foundation/winrt_enum.dart';
-import 'winrt/internal/iterable_iids.dart';
-import 'winrt/internal/reference_iids.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -192,25 +190,6 @@ bool isSubtypeOfWinRTEnum<T>() => isSubtype<T, WinRTEnum>();
 /// isSubtypeOfInspectable<INetwork>(); // false
 /// ```
 bool isSubtypeOfInspectable<T>() => isSubtype<T, IInspectable>();
-
-/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
-/// `IIterable`.
-String iterableIidFromIids(List<String> iids) {
-  final iterableIid = iids.firstWhere((iid) => mapIterableIids.contains(iid),
-      orElse: () => 'null');
-  if (iterableIid != 'null') return iterableIid;
-
-  return iids.firstWhere((iid) => vectorIterableIids.contains(iid),
-      orElse: () =>
-          throw Exception('No IIterable IID found in the given iids: $iids'));
-}
-
-/// Takes a `iids` (a [List] of interface IIDs), and returns the one that's for
-/// `IReference`.
-String referenceIidFromIids(List<String> iids) => iids.firstWhere(
-    (iid) => referenceIids.contains(iid),
-    orElse: () =>
-        throw Exception('No IReference IID found in the given iids: $iids'));
 
 /// Represents the trust level of an activatable class.
 ///
