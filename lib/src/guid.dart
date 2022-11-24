@@ -69,9 +69,12 @@ class Guid {
   ///
   /// The string must be of the form `{dddddddd-dddd-dddd-dddd-dddddddddddd}`.
   /// where d is a hex digit.
-  factory Guid.fromString(String guid) {
+  factory Guid.parse(String guid) {
+    assert(RegExp(r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}')
+        .hasMatch(guid));
+
     if (guid.length != 38) {
-      throw FormatException('GUID is not in the correct format', guid);
+      throw FormatException('GUID is not the correct length', guid);
     }
 
     // Note that the order of bytes in the returned byte array is different from
@@ -93,6 +96,11 @@ class Guid {
     return Guid(Uint8List.fromList(guidAsBytes));
   }
 
+  /// Copy the GUID to unmanaged memory and return a pointer to the memory
+  /// location.
+  ///
+  /// It is the caller's responsibility to free the memory at the pointer
+  /// location, for example by calling [calloc.free].
   Pointer<GUID> toNativeGUID({Allocator allocator = malloc}) {
     final pGUID = allocator<Uint8>(16);
 
@@ -155,7 +163,7 @@ class GUID extends Struct {
 
   /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   void setGUID(String guidString) {
-    final byteBuffer = Guid.fromString(guidString).bytes.buffer;
+    final byteBuffer = Guid.parse(guidString).bytes.buffer;
     Data1 = byteBuffer.asUint32List(0).first;
     Data2 = byteBuffer.asUint16List(4).first;
     Data3 = byteBuffer.asUint16List(6).first;
@@ -186,5 +194,5 @@ extension PointerGUIDExtension on Pointer<GUID> {
       Guid.fromComponents(ref.Data1, ref.Data2, ref.Data3, ref.Data4);
 }
 
-Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = malloc}) =>
-    Guid.fromString(guid).toNativeGUID(allocator: allocator);
+Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = calloc}) =>
+    Guid.parse(guid).toNativeGUID(allocator: allocator);
