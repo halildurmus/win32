@@ -67,7 +67,7 @@ void main() {
             .parameters
             .first
             .typeIdentifier),
-        equals('GUID'));
+        equals('Guid'));
     expect(
         parseTypeIdentifierName(propertyValueStatics
             .findMethod('CreatePoint')!
@@ -438,13 +438,13 @@ void main() {
 
     final mediaPropertySet = MetadataStore.getMetadataForType(
         'Windows.Media.MediaProperties.MediaPropertySet')!;
-    // IMap<GUID, Object>
+    // IMap<Guid, Object>
     final map = mediaPropertySet.interfaces.elementAt(0).typeSpec!;
     expect(
         parseGenericTypeIdentifierSignature(map),
         equals(
             'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};g16;cinterface(IInspectable))'));
-    // IIterable<IKeyValuePair<GUID, Object>>
+    // IIterable<IKeyValuePair<Guid, Object>>
     final iterable = mediaPropertySet.interfaces.elementAt(1).typeSpec!;
     expect(
         parseGenericTypeIdentifierSignature(iterable),
@@ -480,14 +480,14 @@ void main() {
             .toString(),
         equals('{24a901ad-910f-5c0f-b23c-67007577a558}'));
 
-    // IMap<GUID, Object>
+    // IMap<Guid, Object>
     expect(
         iidFromSignature(
                 'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};g16;cinterface(IInspectable))')
             .toString(),
         equals('{5ee3189c-7dbf-5998-ad07-5414fb82567c}'));
 
-    // IIterable<IKeyValuePair<GUID, Object>>
+    // IIterable<IKeyValuePair<Guid, Object>>
     expect(
         iidFromSignature(
                 'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500};g16;cinterface(IInspectable)))')
@@ -555,7 +555,7 @@ void main() {
 
     final mediaPropertySet = MetadataStore.getMetadataForType(
         'Windows.Media.MediaProperties.MediaPropertySet')!;
-    // IMap<GUID, Object>
+    // IMap<Guid, Object>
     expect(iidFromTypeDef(mediaPropertySet.interfaces[0]).toString(),
         equals('{5ee3189c-7dbf-5998-ad07-5414fb82567c}'));
 

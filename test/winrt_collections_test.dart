@@ -12,8 +12,8 @@ import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    group('IMap<GUID, Object?> (MediaPropertySet)', () {
-      late IMap<GUID, Object?> map;
+    group('IMap<Guid, Object?> (MediaPropertySet)', () {
+      late IMap<Guid, Object?> map;
       late Arena allocator;
 
       setUp(() {
@@ -32,85 +32,41 @@ void main() {
           ..ref.Width = 300;
 
         map = IMap()
-          ..insert(
-              GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref,
-              null)
-          ..insert(GUIDFromString(IID_ICalendar, allocator: allocator).ref,
-              Calendar(allocator: allocator))
-          ..insert(
-              GUIDFromString(IID_IStorageItem, allocator: allocator).ref, true)
-          ..insert(
-              GUIDFromString(IID_IPhoneNumberFormatter, allocator: allocator)
-                  .ref,
+          ..insert(Guid.parse(IID_IFileOpenPicker), null)
+          ..insert(Guid.parse(IID_ICalendar), Calendar(allocator: allocator))
+          ..insert(Guid.parse(IID_IStorageItem), true)
+          ..insert(Guid.parse(IID_IPhoneNumberFormatter),
               DateTime(2022, 7, 11, 17, 30))
-          ..insert(
-              GUIDFromString(IID_ISpellChecker, allocator: allocator).ref, 0.5)
-          ..insert(GUIDFromString(IID_IShellLink, allocator: allocator).ref,
-              const Duration(seconds: 30))
-          ..insert(GUIDFromString(IID_IShellService, allocator: allocator).ref,
-              GUIDFromString(IID_ISpVoice, allocator: allocator).ref)
-          ..insert(
-              GUIDFromString(IID_IShellFolder, allocator: allocator).ref, 259)
-          ..insert(GUIDFromString(IID_IShellItem, allocator: allocator).ref,
-              pPoint.ref)
-          ..insert(GUIDFromString(IID_IShellItem2, allocator: allocator).ref,
-              pRect.ref)
-          ..insert(
-              GUIDFromString(IID_IShellItemArray, allocator: allocator).ref,
-              pSize.ref)
-          ..insert(
-              GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref,
-              'strVal')
-          ..insert(GUIDFromString(IID_IUnknown, allocator: allocator).ref,
-              [true, false])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader, allocator: allocator).ref,
+          ..insert(Guid.parse(IID_ISpellChecker), 0.5)
+          ..insert(Guid.parse(IID_IShellLink), const Duration(seconds: 30))
+          ..insert(Guid.parse(IID_IShellService), Guid.parse(IID_ISpVoice))
+          ..insert(Guid.parse(IID_IShellFolder), 259)
+          ..insert(Guid.parse(IID_IShellItem), pPoint.ref)
+          ..insert(Guid.parse(IID_IShellItem2), pRect.ref)
+          ..insert(Guid.parse(IID_IShellItemArray), pSize.ref)
+          ..insert(Guid.parse(IID_IShellItemFilter), 'strVal')
+          ..insert(Guid.parse(IID_IUnknown), [true, false])
+          ..insert(Guid.parse(IID_IAppxManifestReader),
               [DateTime(2020, 7, 11, 17, 30), DateTime(2022, 7, 11, 17, 30)])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader2, allocator: allocator)
-                  .ref,
-              [2.5, 0.99])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader3, allocator: allocator)
-                  .ref,
+          ..insert(Guid.parse(IID_IAppxManifestReader2), [2.5, 0.99])
+          ..insert(Guid.parse(IID_IAppxManifestReader3),
               const [Duration(hours: 1), Duration(minutes: 60)])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader4, allocator: allocator)
-                  .ref,
-              [GUIDFromString(IID_IShellItem, allocator: allocator).ref])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader5, allocator: allocator)
-                  .ref,
-              [
-                Calendar(allocator: allocator),
-              ])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader6, allocator: allocator)
-                  .ref,
-              [2022, -2022])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestReader7, allocator: allocator)
-                  .ref,
-              [pPoint.ref])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestProperties, allocator: allocator)
-                  .ref,
-              [pRect.ref])
-          ..insert(
-              GUIDFromString(IID_IAppxManifestPackageId, allocator: allocator)
-                  .ref,
-              [pSize.ref])
-          ..insert(GUIDFromString(IID_IAppxFile, allocator: allocator).ref,
-              ['str1', 'str2']);
+          ..insert(Guid.parse(IID_IAppxManifestReader4),
+              [Guid.parse(IID_IShellItem)])
+          ..insert(Guid.parse(IID_IAppxManifestReader5), [
+            Calendar(allocator: allocator),
+          ])
+          ..insert(Guid.parse(IID_IAppxManifestReader6), [2022, -2022])
+          ..insert(Guid.parse(IID_IAppxManifestReader7), [pPoint.ref])
+          ..insert(Guid.parse(IID_IAppxManifestProperties), [pRect.ref])
+          ..insert(Guid.parse(IID_IAppxManifestPackageId), [pSize.ref])
+          ..insert(Guid.parse(IID_IAppxFile), ['str1', 'str2']);
       });
 
       test('fromMap', () {
-        final calendarGuid =
-            GUIDFromString(IID_ICalendar, allocator: allocator).ref;
-        final pickerGuid =
-            GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref;
-        final storageItemGuid =
-            GUIDFromString(IID_IStorageItem, allocator: allocator).ref;
+        final calendarGuid = Guid.parse(IID_ICalendar);
+        final pickerGuid = Guid.parse(IID_IFileOpenPicker);
+        final storageItemGuid = Guid.parse(IID_IStorageItem);
         map = IMap.fromMap({
           calendarGuid: Calendar(allocator: allocator),
           pickerGuid: 259,
@@ -129,75 +85,49 @@ void main() {
 
       test('lookup fails if the map is empty', () {
         map.clear();
-        expect(
-            () => map.lookup(
-                GUIDFromString(IID_ICalendar, allocator: allocator).ref),
-            throwsException);
+        expect(() => map.lookup(Guid.parse(IID_ICalendar)), throwsException);
       });
 
       test('lookup throws exception if the item does not exists', () {
-        expect(
-            () => map.lookup(
-                GUIDFromString(IID_IInspectable, allocator: allocator).ref),
-            throwsException);
+        expect(() => map.lookup(Guid.parse(IID_IInspectable)), throwsException);
       });
 
       test('lookup returns items', () {
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IFileOpenPicker, allocator: allocator).ref),
-            isNull);
+        expect(map.lookup(Guid.parse(IID_IFileOpenPicker)), isNull);
 
-        final calendarVal =
-            map.lookup(GUIDFromString(IID_ICalendar, allocator: allocator).ref);
+        final calendarVal = map.lookup(Guid.parse(IID_ICalendar));
         expect(calendarVal, isA<IInspectable>());
         final calendar =
             Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
         expect(calendar.runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IStorageItem, allocator: allocator).ref),
-            isTrue);
+        expect(map.lookup(Guid.parse(IID_IStorageItem)), isTrue);
 
-        final dateTimeVal = map.lookup(
-            GUIDFromString(IID_IPhoneNumberFormatter, allocator: allocator)
-                .ref);
+        final dateTimeVal = map.lookup(Guid.parse(IID_IPhoneNumberFormatter));
         expect(dateTimeVal, isA<DateTime>());
         final dateTime = dateTimeVal as DateTime;
         expect(dateTime.millisecondsSinceEpoch,
             equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_ISpellChecker, allocator: allocator).ref),
-            equals(0.5));
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IShellLink, allocator: allocator).ref),
+        expect(map.lookup(Guid.parse(IID_ISpellChecker)), equals(0.5));
+        expect(map.lookup(Guid.parse(IID_IShellLink)),
             equals(const Duration(seconds: 30)));
 
-        final guidVal = map.lookup(
-            GUIDFromString(IID_IShellService, allocator: allocator).ref);
-        expect(guidVal, isA<GUID>());
-        final guid = guidVal as GUID;
+        final guidVal = map.lookup(Guid.parse(IID_IShellService));
+        expect(guidVal, isA<Guid>());
+        final guid = guidVal as Guid;
         expect(guid.toString(), equals(IID_ISpVoice));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IShellFolder, allocator: allocator).ref),
-            equals(259));
+        expect(map.lookup(Guid.parse(IID_IShellFolder)), equals(259));
 
-        final pointVal = map
-            .lookup(GUIDFromString(IID_IShellItem, allocator: allocator).ref);
+        final pointVal = map.lookup(Guid.parse(IID_IShellItem));
         expect(pointVal, isA<Point>());
         final point = pointVal as Point;
         expect(point.X, equals(3));
         expect(point.Y, equals(-3));
 
-        final rectVal = map
-            .lookup(GUIDFromString(IID_IShellItem2, allocator: allocator).ref);
+        final rectVal = map.lookup(Guid.parse(IID_IShellItem2));
         expect(rectVal, isA<Rect>());
         final rect = rectVal as Rect;
         expect(rect.Height, equals(100));
@@ -205,22 +135,17 @@ void main() {
         expect(rect.X, equals(2));
         expect(rect.Y, equals(-2));
 
-        final sizeVal = map.lookup(
-            GUIDFromString(IID_IShellItemArray, allocator: allocator).ref);
+        final sizeVal = map.lookup(Guid.parse(IID_IShellItemArray));
         expect(sizeVal, isA<Size>());
         final size = sizeVal as Size;
         expect(size.Height, equals(1500));
         expect(size.Width, equals(300));
 
-        expect(map.lookup(GUIDFromString(IID_IShellItemFilter).ref),
-            equals('strVal'));
+        expect(map.lookup(Guid.parse(IID_IShellItemFilter)), equals('strVal'));
 
-        expect(
-            map.lookup(GUIDFromString(IID_IUnknown, allocator: allocator).ref),
-            equals([true, false]));
+        expect(map.lookup(Guid.parse(IID_IUnknown)), equals([true, false]));
 
-        final dateTimeListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestReader, allocator: allocator).ref);
+        final dateTimeListVal = map.lookup(Guid.parse(IID_IAppxManifestReader));
         expect(dateTimeListVal, isA<List<DateTime>>());
         final dateTimeList = dateTimeListVal as List<DateTime>;
         expect(dateTimeList.first.millisecondsSinceEpoch,
@@ -228,48 +153,35 @@ void main() {
         expect(dateTimeList.last.millisecondsSinceEpoch,
             equals(DateTime(2022, 7, 11, 17, 30).millisecondsSinceEpoch));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IAppxManifestReader2, allocator: allocator)
-                    .ref),
+        expect(map.lookup(Guid.parse(IID_IAppxManifestReader2)),
             equals([2.5, 0.99]));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IAppxManifestReader3, allocator: allocator)
-                    .ref),
+        expect(map.lookup(Guid.parse(IID_IAppxManifestReader3)),
             equals(const [Duration(hours: 1), Duration(minutes: 60)]));
 
-        final guidListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestReader4, allocator: allocator).ref);
-        expect(guidListVal, isA<List<GUID>>());
-        final guidList = guidListVal as List<GUID>;
+        final guidListVal = map.lookup(Guid.parse(IID_IAppxManifestReader4));
+        expect(guidListVal, isA<List<Guid>>());
+        final guidList = guidListVal as List<Guid>;
         expect(guidList.first.toString(), equals(IID_IShellItem));
 
-        final calendarListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestReader5, allocator: allocator).ref);
+        final calendarListVal =
+            map.lookup(Guid.parse(IID_IAppxManifestReader5));
         expect(calendarListVal, isA<List<IInspectable>>());
         final calendarList = calendarListVal as List<IInspectable>;
         final calendar_ = Calendar.fromRawPointer(calendarList.first.ptr);
         expect(calendar_.runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
-        expect(
-            map.lookup(
-                GUIDFromString(IID_IAppxManifestReader6, allocator: allocator)
-                    .ref),
+        expect(map.lookup(Guid.parse(IID_IAppxManifestReader6)),
             equals([2022, -2022]));
 
-        final pointListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestReader7, allocator: allocator).ref);
+        final pointListVal = map.lookup(Guid.parse(IID_IAppxManifestReader7));
         expect(pointListVal, isA<List<Point>>());
         final pointList = pointListVal as List<Point>;
         expect(pointList.first.X, equals(3));
         expect(pointList.first.Y, equals(-3));
 
-        final rectListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestProperties, allocator: allocator)
-                .ref);
+        final rectListVal = map.lookup(Guid.parse(IID_IAppxManifestProperties));
         expect(rectListVal, isA<List<Rect>>());
         final rectList = rectListVal as List<Rect>;
         expect(rectList.first.Height, equals(100));
@@ -277,38 +189,23 @@ void main() {
         expect(rectList.first.X, equals(2));
         expect(rectList.first.Y, equals(-2));
 
-        final sizeListVal = map.lookup(
-            GUIDFromString(IID_IAppxManifestPackageId, allocator: allocator)
-                .ref);
+        final sizeListVal = map.lookup(Guid.parse(IID_IAppxManifestPackageId));
         expect(sizeListVal, isA<List<Size>>());
         final sizeList = sizeListVal as List<Size>;
         expect(sizeList.first.Height, equals(1500));
         expect(sizeList.first.Width, equals(300));
 
-        expect(
-            map.lookup(GUIDFromString(IID_IAppxFile, allocator: allocator).ref),
-            equals(['str1', 'str2']));
+        expect(map.lookup(Guid.parse(IID_IAppxFile)), equals(['str1', 'str2']));
       });
 
       test('hasKey finds items', () {
-        expect(
-            map.hasKey(GUIDFromString(IID_ICalendar, allocator: allocator).ref),
-            isTrue);
-        expect(
-            map.hasKey(
-                GUIDFromString(IID_IShellLink, allocator: allocator).ref),
-            isTrue);
-        expect(
-            map.hasKey(
-                GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref),
-            isTrue);
+        expect(map.hasKey(Guid.parse(IID_ICalendar)), isTrue);
+        expect(map.hasKey(Guid.parse(IID_IShellLink)), isTrue);
+        expect(map.hasKey(Guid.parse(IID_IShellItemFilter)), isTrue);
       });
 
       test('hasKey returns false if the item does not exists', () {
-        expect(
-            map.hasKey(
-                GUIDFromString(IID_IInspectable, allocator: allocator).ref),
-            isFalse);
+        expect(map.hasKey(Guid.parse(IID_IInspectable)), isFalse);
       });
 
       test('getView', () {
@@ -318,8 +215,7 @@ void main() {
       });
 
       test('insert replaces an existing item', () {
-        final guid =
-            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
+        final guid = Guid.parse(IID_IShellItemFilter);
         expect(map.size, equals(23));
         expect(map.insert(guid, 'strValNew'), isTrue);
         expect(map.size, equals(23));
@@ -327,8 +223,7 @@ void main() {
       });
 
       test('insert inserts a new item', () {
-        final guid =
-            GUIDFromString(IID_IDevicePicker, allocator: allocator).ref;
+        final guid = Guid.parse(IID_IDevicePicker);
         expect(map.size, equals(23));
         expect(map.insert(guid, 'idevicepicker'), isFalse);
         expect(map.size, equals(24));
@@ -337,20 +232,18 @@ void main() {
 
       test('remove throws exception if the map is empty', () {
         map.clear();
-        final guid = GUIDFromString(IID_ICalendar, allocator: allocator).ref;
+        final guid = Guid.parse(IID_ICalendar);
         expect(() => map.remove(guid), throwsException);
       });
 
       test('remove throws exception if the item does not exists', () {
-        final guid = GUIDFromString(IID_IInspectable, allocator: allocator).ref;
+        final guid = Guid.parse(IID_IInspectable);
         expect(() => map.remove(guid), throwsException);
       });
 
       test('remove', () {
-        final guid1 =
-            GUIDFromString(IID_IShellFolder, allocator: allocator).ref;
-        final guid2 =
-            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
+        final guid1 = Guid.parse(IID_IShellFolder);
+        final guid2 = Guid.parse(IID_IShellItemFilter);
         expect(map.size, equals(23));
 
         map.remove(guid1);
@@ -369,12 +262,9 @@ void main() {
       });
 
       test('toMap', () {
-        final guid1 =
-            GUIDFromString(IID_IShellFolder, allocator: allocator).ref;
-        final guid2 =
-            GUIDFromString(IID_IShellItemFilter, allocator: allocator).ref;
-        final guid3 =
-            GUIDFromString(IID_IAppxManifestReader2, allocator: allocator).ref;
+        final guid1 = Guid.parse(IID_IShellFolder);
+        final guid2 = Guid.parse(IID_IShellItemFilter);
+        final guid3 = Guid.parse(IID_IAppxManifestReader2);
         final dartMap = map.toMap();
         expect(dartMap.length, equals(23));
         expect(dartMap[guid1], equals(259));
@@ -384,18 +274,18 @@ void main() {
       });
 
       test('first', () {
-        final calendarGuid =
-            GUIDFromString(IID_ICalendar, allocator: allocator).ref;
-        final storageItemGuid =
-            GUIDFromString(IID_IStorageItem, allocator: allocator).ref;
+        final calendarGuid = Guid.parse(IID_ICalendar);
+        final storageItemGuid = Guid.parse(IID_IStorageItem);
         map = IMap.fromMap({calendarGuid: 'icalendar', storageItemGuid: 259});
 
         final iterator = map.first();
         expect(iterator.hasCurrent, isTrue);
-        expect(iterator.current.key, equals(calendarGuid));
+        expect(
+            iterator.current.key.toString(), equals(calendarGuid.toString()));
         expect(iterator.current.value, equals('icalendar'));
         expect(iterator.moveNext(), isTrue);
-        expect(iterator.current.key, equals(storageItemGuid));
+        expect(iterator.current.key.toString(),
+            equals(storageItemGuid.toString()));
         expect(iterator.current.value, equals(259));
         expect(iterator.moveNext(), isFalse);
       });
@@ -413,7 +303,7 @@ void main() {
       setUp(() {
         winrtInitialize();
         allocator = Arena();
-        final guid = GUIDFromString(IID_ISpVoice, allocator: allocator).ref;
+        final guid = Guid.parse(IID_ISpVoice);
         final pPoint = allocator<Point>()
           ..ref.X = 3
           ..ref.Y = -3;
@@ -501,8 +391,8 @@ void main() {
         expect(map.lookup('key6'), equals(const Duration(seconds: 30)));
 
         final guidVal = map.lookup('key7');
-        expect(guidVal, isA<GUID>());
-        final guid = guidVal as GUID;
+        expect(guidVal, isA<Guid>());
+        final guid = guidVal as Guid;
         expect(guid.toString(), equals(IID_ISpVoice));
 
         expect(map.lookup('key8'), equals(259));
@@ -545,8 +435,8 @@ void main() {
             equals(const [Duration(hours: 1), Duration(minutes: 60)]));
 
         final guidListVal = map.lookup('key17');
-        expect(guidListVal, isA<List<GUID>>());
-        final guidList = guidListVal as List<GUID>;
+        expect(guidListVal, isA<List<Guid>>());
+        final guidList = guidListVal as List<Guid>;
         expect(guidList.first.toString(), equals(IID_ISpVoice));
 
         final calendarListVal = map.lookup('key18');
@@ -673,7 +563,7 @@ void main() {
       setUp(() {
         winrtInitialize();
         allocator = Arena();
-        final guid = GUIDFromString(IID_ISpVoice, allocator: allocator).ref;
+        final guid = Guid.parse(IID_ISpVoice);
         final valueSet = ValueSet(allocator: allocator)
           ..insert('key1', null)
           ..insert('key2', 'strVal');
@@ -749,8 +639,8 @@ void main() {
         expect(map.lookup('key6'), equals(const Duration(seconds: 30)));
 
         final guidVal = map.lookup('key7');
-        expect(guidVal, isA<GUID>());
-        final guid = guidVal as GUID;
+        expect(guidVal, isA<Guid>());
+        final guid = guidVal as Guid;
         expect(guid.toString(), equals(IID_ISpVoice));
 
         expect(map.lookup('key8'), equals(259));
@@ -793,8 +683,8 @@ void main() {
             equals(const [Duration(hours: 1), Duration(minutes: 60)]));
 
         final guidListVal = map.lookup('key17');
-        expect(guidListVal, isA<List<GUID>>());
-        final guidList = guidListVal as List<GUID>;
+        expect(guidListVal, isA<List<Guid>>());
+        final guidList = guidListVal as List<Guid>;
         expect(guidList.first.toString(), equals(IID_ISpVoice));
 
         expect(map.lookup('key18'), equals([2022, -2022]));

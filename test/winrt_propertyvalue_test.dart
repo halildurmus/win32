@@ -66,8 +66,7 @@ void main() {
     });
 
     test('Guid', () {
-      final guid = calloc<GUID>()..ref.setGUID(IID_ICalendar);
-      final pv = PropertyValue.createGuid(guid.ref);
+      final pv = PropertyValue.createGuid(Guid.parse(IID_ICalendar));
       expect(pv.type, equals(PropertyType.guid));
       expect(pv.getGuid().toString(), equals(IID_ICalendar));
     });
@@ -85,11 +84,9 @@ void main() {
 
       pv.getGuidArray(arraySize, newArray);
       expect(arraySize.value, equals(3));
-      expect(newArray.value[0].toString(), equalsIgnoringCase(IID_ICalendar));
-      expect(newArray.value[1].toString(),
-          equalsIgnoringCase(IID_IFileOpenPicker));
-      expect(
-          newArray.value[2].toString(), equalsIgnoringCase(IID_IStorageItem));
+      expect(newArray.value[0].toString(), equals(IID_ICalendar));
+      expect(newArray.value[1].toString(), equals(IID_IFileOpenPicker));
+      expect(newArray.value[2].toString(), equals(IID_IStorageItem));
     });
 
     test('Inspectable', () {

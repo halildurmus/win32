@@ -5,7 +5,7 @@ import 'package:win32/winrt.dart';
 
 void main() {
   test('isSameType', () {
-    expect(isSameType<GUID, GUID>(), isTrue);
+    expect(isSameType<Guid, Guid>(), isTrue);
     expect(isSameType<int, int>(), isTrue);
     expect(isSameType<int, int?>(), isFalse);
     expect(isSameType<Object, Object>(), isTrue);
@@ -14,7 +14,7 @@ void main() {
   });
 
   test('isSimilarType', () {
-    expect(isSimilarType<GUID, GUID>(), isTrue);
+    expect(isSimilarType<Guid, Guid>(), isTrue);
     expect(isSimilarType<int?, int>(), isTrue);
     expect(isSimilarType<int?, int?>(), isTrue);
     expect(isSimilarType<Object, Object>(), isTrue);
