@@ -7,6 +7,7 @@ import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
+import 'declarations/guid.dart';
 import 'declarations/map.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
@@ -68,6 +69,8 @@ class WinRTMethodProjection extends MethodProjection {
   bool get isEnumReturn => returnType.isWinRTEnum;
 
   bool get isCOMObjectReturn => returnType.dartType == 'Pointer<COMObject>';
+
+  bool get isGuidReturn => returnType.typeIdentifier.name == 'System.Guid';
 
   bool get isVoidReturn => returnType.dartType == 'void';
 
@@ -156,6 +159,10 @@ class WinRTMethodProjection extends MethodProjection {
     try {
       if (isEnumReturn) {
         return declarationFor(WinRTMethodReturningEnumProjection.new);
+      }
+
+      if (isGuidReturn) {
+        return declarationFor(WinRTMethodReturningGuidProjection.new);
       }
 
       if (isMapReturn) {

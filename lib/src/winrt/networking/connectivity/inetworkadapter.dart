@@ -130,7 +130,7 @@ class INetworkAdapter extends IInspectable {
     return NetworkItem.fromRawPointer(retValuePtr);
   }
 
-  GUID get networkAdapterId {
+  Guid get networkAdapterId {
     final retValuePtr = calloc<GUID>();
 
     try {
@@ -146,9 +146,10 @@ class INetworkAdapter extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.ref;
-      return retValue;
-    } finally {}
+      return retValuePtr.toDartGuid();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   Pointer<COMObject> getConnectedProfileAsync() {

@@ -43,14 +43,14 @@ class MapHelper {
 /// Determines whether [K] and [V] key-value pair is supported.
 ///
 /// Supported key-value pairs are: `IKeyValuePair<int, IInspectable?>`,
-/// `IKeyValuePair<GUID, IInspectable?>`, `IKeyValuePair<GUID, Object?>`,
+/// `IKeyValuePair<Guid, IInspectable?>`, `IKeyValuePair<Guid, Object?>`,
 /// `IKeyValuePair<PedometerStepKind, PedometerReading?>`,
 /// `IKeyValuePair<Object, Object?>`,
 /// `IKeyValuePair<String, Object?>`, `IKeyValuePair<String, String?>`,
 /// `IKeyValuePair<String, IInspectable?>`, `IKeyValuePair<String, WinRTEnum?>`.
 ///
 /// ```dart
-/// isSupportedKeyValuePair<GUID, SpatialSurfaceInfo?>(); // true
+/// isSupportedKeyValuePair<Guid, SpatialSurfaceInfo?>(); // true
 /// isSupportedKeyValuePair<String, Object?>(); // true
 /// ```
 bool isSupportedKeyValuePair<K, V>() {
@@ -59,8 +59,8 @@ bool isSupportedKeyValuePair<K, V>() {
     return true;
   }
 
-  // e.g. IKeyValuePair<GUID, SpatialSurfaceInfo>, IKeyValuePair<GUID, Object?>
-  if (isSameType<K, GUID>() &&
+  // e.g. IKeyValuePair<Guid, SpatialSurfaceInfo>, IKeyValuePair<Guid, Object?>
+  if (isSameType<K, Guid>() &&
       (isSubtypeOfInspectable<V>() || isSimilarType<V, Object>())) {
     return true;
   }

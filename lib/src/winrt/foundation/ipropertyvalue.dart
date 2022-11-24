@@ -360,7 +360,7 @@ class IPropertyValue extends IInspectable {
     }
   }
 
-  GUID getGuid() {
+  Guid getGuid() {
     final retValuePtr = calloc<GUID>();
 
     try {
@@ -376,9 +376,10 @@ class IPropertyValue extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.ref;
-      return retValue;
-    } finally {}
+      return retValuePtr.toDartGuid();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   DateTime getDateTime() {

@@ -52,11 +52,10 @@ mixin _ReferenceProjection on WinRTMethodProjection {
     // so that the 'IReference' implementation can use the correct IID when
     // retrieving the value it holds
     // To learn know more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
-    final iReferenceIid = IID_IReference.toLowerCase();
     final referenceArgSignature =
         parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
     final referenceSignature =
-        'pinterface($iReferenceIid;$referenceArgSignature)';
+        'pinterface($IID_IReference;$referenceArgSignature)';
     final referenceIid = iidFromSignature(referenceSignature);
 
     final args = <String>["referenceIid: '$referenceIid'"];

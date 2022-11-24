@@ -24,10 +24,10 @@ mixin _VectorProjection on WinRTMethodProjection {
     // that the 'IVector' and 'IVectorView' implementations can use the correct
     // IID when instantiating the IIterable object
     // To learn more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
-    final iIterableIid = IID_IIterable.toLowerCase();
     final iterableArgSignature =
         parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
-    final iterableSignature = 'pinterface($iIterableIid;$iterableArgSignature)';
+    final iterableSignature =
+        'pinterface($IID_IIterable;$iterableArgSignature)';
     final iterableIid = iidFromSignature(iterableSignature);
 
     // If the type argument is an enum or int, it's native type (e.g. Int32,

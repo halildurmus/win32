@@ -41,7 +41,7 @@ class IMapView<K, V> extends IInspectable
   /// [iterableIid] must be the IID of the `IIterable<IKeyValuePair<K, V>>`
   /// interface (e.g. [IID_IIterable_IKeyValuePair_String_Object]).
   ///
-  /// [K] must be of type `GUID`, `int`, `Object`, `String`, or `WinRTEnum`
+  /// [K] must be of type `Guid`, `int`, `Object`, `String`, or `WinRTEnum`
   /// (e.g. `PedometerStepKind`).
   ///
   /// [V] must be of type `Object`, `String`, or `WinRT` (e.g. `IJsonValue`,
@@ -86,12 +86,12 @@ class IMapView<K, V> extends IInspectable
 
   /// Returns the item at the specified key in the map.
   V lookup(K key) {
-    if (isSameType<K, GUID>()) {
+    if (isSameType<K, Guid>()) {
       if (isSubtypeOfInspectable<V>()) {
-        return _lookup_GUID_COMObject(key as GUID);
+        return _lookup_Guid_COMObject(key as Guid);
       }
 
-      return _lookup_GUID_Object(key as GUID) as V;
+      return _lookup_Guid_Object(key as Guid) as V;
     }
 
     if (isSameType<K, int>()) {
@@ -121,8 +121,9 @@ class IMapView<K, V> extends IInspectable
     return _lookup_Object_Object(key as IInspectable) as V;
   }
 
-  V _lookup_GUID_COMObject(GUID key) {
+  V _lookup_Guid_COMObject(Guid key) {
     final retValuePtr = calloc<COMObject>();
+    final nativeGuidPtr = key.toNativeGUID();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -132,18 +133,22 @@ class IMapView<K, V> extends IInspectable
                         HRESULT Function(Pointer, GUID, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, key, retValuePtr);
+        ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
     if (FAILED(hr)) {
+      free(nativeGuidPtr);
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    free(nativeGuidPtr);
 
     return _creator!(retValuePtr);
   }
 
-  Object? _lookup_GUID_Object(GUID key) {
+  Object? _lookup_Guid_Object(Guid key) {
     final retValuePtr = calloc<COMObject>();
+    final nativeGuidPtr = key.toNativeGUID();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -153,12 +158,15 @@ class IMapView<K, V> extends IInspectable
                         HRESULT Function(Pointer, GUID, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, key, retValuePtr);
+        ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
     if (FAILED(hr)) {
+      free(nativeGuidPtr);
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    free(nativeGuidPtr);
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -343,7 +351,7 @@ class IMapView<K, V> extends IInspectable
 
   /// Determines whether the map contains the specified key.
   bool hasKey(K value) {
-    if (isSameType<K, GUID>()) return _hasKey_GUID(value as GUID);
+    if (isSameType<K, Guid>()) return _hasKey_Guid(value as Guid);
     if (isSameType<K, int>()) return _hasKey_Uint32(value as int);
     if (isSameType<K, PedometerStepKind>()) {
       return hasKeyByPedometerStepKind(value as PedometerStepKind);
@@ -353,8 +361,9 @@ class IMapView<K, V> extends IInspectable
     return _hasKey_Object(value as IInspectable);
   }
 
-  bool _hasKey_GUID(GUID value) {
+  bool _hasKey_Guid(Guid value) {
     final retValuePtr = calloc<Bool>();
+    final nativeGuidPtr = value.toNativeGUID();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -365,12 +374,13 @@ class IMapView<K, V> extends IInspectable
                           HRESULT Function(Pointer, GUID, Pointer<Bool>)>>>()
               .value
               .asFunction<int Function(Pointer, GUID, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, value, retValuePtr);
+          ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      free(nativeGuidPtr);
       free(retValuePtr);
     }
   }

@@ -44,10 +44,10 @@ class IMap<K, V> extends IInspectable
 
   /// Creates an empty [IMap].
   ///
-  /// [K] must be of type `GUID` or `String` and [V] must be of type
+  /// [K] must be of type `Guid` or `String` and [V] must be of type
   /// `Object?` or `String?`.
   factory IMap() {
-    if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
+    if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
       return IMap.fromRawPointer(MediaPropertySet().ptr,
           iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
     }
@@ -72,7 +72,7 @@ class IMap<K, V> extends IInspectable
   /// [iterableIid] must be the IID of the `IIterable<IKeyValuePair<K, V>>`
   /// interface (e.g. [IID_IIterable_IKeyValuePair_String_Object]).
   ///
-  /// [K] must be of type `GUID`, `int`, `Object`, `String`, or `WinRTEnum`
+  /// [K] must be of type `Guid`, `int`, `Object`, `String`, or `WinRTEnum`
   /// (e.g. `PedometerStepKind`).
   ///
   /// [V] must be of type `Object`, `String`, or `WinRT` (e.g. `IJsonValue`,
@@ -117,12 +117,12 @@ class IMap<K, V> extends IInspectable
 
   /// Creates an [IMap] with the same keys and values as [other].
   ///
-  /// [other] must be of type `Map<GUID, Object?>`, `Map<String, Object?>`,
+  /// [other] must be of type `Map<Guid, Object?>`, `Map<String, Object?>`,
   /// or `Map<String, String?>`.
   factory IMap.fromMap(Map<K, V> other) {
-    if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
+    if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
       final iMap = MediaPropertySet();
-      other.cast<GUID, Object?>().forEach(iMap.insert);
+      other.cast<Guid, Object?>().forEach(iMap.insert);
       return IMap.fromRawPointer(iMap.ptr,
           iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
     }
@@ -148,12 +148,12 @@ class IMap<K, V> extends IInspectable
 
   /// Returns the item at the specified key in the map.
   V lookup(K key) {
-    if (isSameType<K, GUID>()) {
+    if (isSameType<K, Guid>()) {
       if (isSubtypeOfInspectable<V>()) {
-        return _lookup_GUID_COMObject(key as GUID);
+        return _lookup_Guid_COMObject(key as Guid);
       }
 
-      return _lookup_GUID_Object(key as GUID) as V;
+      return _lookup_Guid_Object(key as Guid) as V;
     }
 
     if (isSameType<K, int>()) {
@@ -183,8 +183,9 @@ class IMap<K, V> extends IInspectable
     return _lookup_Object_Object(key as IInspectable) as V;
   }
 
-  V _lookup_GUID_COMObject(GUID key) {
+  V _lookup_Guid_COMObject(Guid key) {
     final retValuePtr = calloc<COMObject>();
+    final nativeGuidPtr = key.toNativeGUID();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -194,18 +195,22 @@ class IMap<K, V> extends IInspectable
                         HRESULT Function(Pointer, GUID, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, key, retValuePtr);
+        ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
     if (FAILED(hr)) {
+      free(nativeGuidPtr);
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    free(nativeGuidPtr);
 
     return _creator!(retValuePtr);
   }
 
-  Object? _lookup_GUID_Object(GUID key) {
+  Object? _lookup_Guid_Object(Guid key) {
     final retValuePtr = calloc<COMObject>();
+    final nativeGuidPtr = key.toNativeGUID();
 
     final hr = ptr.ref.lpVtbl.value
             .elementAt(6)
@@ -215,12 +220,15 @@ class IMap<K, V> extends IInspectable
                         HRESULT Function(Pointer, GUID, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, GUID, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, key, retValuePtr);
+        ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
     if (FAILED(hr)) {
+      free(nativeGuidPtr);
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    free(nativeGuidPtr);
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -405,7 +413,7 @@ class IMap<K, V> extends IInspectable
 
   /// Determines whether the map contains the specified key.
   bool hasKey(K value) {
-    if (isSameType<K, GUID>()) return _hasKey_GUID(value as GUID);
+    if (isSameType<K, Guid>()) return _hasKey_Guid(value as Guid);
     if (isSameType<K, int>()) return _hasKey_Uint32(value as int);
     if (isSameType<K, PedometerStepKind>()) {
       return hasKeyByPedometerStepKind(value as PedometerStepKind);
@@ -415,8 +423,9 @@ class IMap<K, V> extends IInspectable
     return _hasKey_Object(value as IInspectable);
   }
 
-  bool _hasKey_GUID(GUID value) {
+  bool _hasKey_Guid(Guid value) {
     final retValuePtr = calloc<Bool>();
+    final nativeGuidPtr = value.toNativeGUID();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -427,12 +436,13 @@ class IMap<K, V> extends IInspectable
                           HRESULT Function(Pointer, GUID, Pointer<Bool>)>>>()
               .value
               .asFunction<int Function(Pointer, GUID, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, value, retValuePtr);
+          ptr.ref.lpVtbl, nativeGuidPtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      free(nativeGuidPtr);
       free(retValuePtr);
     }
   }
@@ -535,12 +545,12 @@ class IMap<K, V> extends IInspectable
 
   /// Inserts or replaces an item in the map.
   bool insert(K key, V value) {
-    if (isSameType<K, GUID>()) {
+    if (isSameType<K, Guid>()) {
       if (isSubtypeOfInspectable<V>()) {
-        return _insert_GUID_Object(key as GUID, (value as IInspectable).ptr);
+        return _insert_Guid_Object(key as Guid, (value as IInspectable).ptr);
       }
 
-      return _insert_GUID_Object(key as GUID, boxValue(value));
+      return _insert_Guid_Object(key as Guid, boxValue(value));
     }
 
     if (isSameType<K, int>()) {
@@ -572,8 +582,9 @@ class IMap<K, V> extends IInspectable
     return _insert_Object_Object(key as IInspectable, boxValue(value));
   }
 
-  bool _insert_GUID_Object(GUID key, Pointer<COMObject> value) {
+  bool _insert_Guid_Object(Guid key, Pointer<COMObject> value) {
     final retValuePtr = calloc<Bool>();
+    final nativeGuidPtr = key.toNativeGUID();
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -586,12 +597,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, GUID, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, key, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, nativeGuidPtr.ref, value.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      free(nativeGuidPtr);
       free(retValuePtr);
     }
   }
@@ -724,7 +736,7 @@ class IMap<K, V> extends IInspectable
 
   /// Removes an item from the map.
   void remove(K key) {
-    if (isSameType<K, GUID>()) return _remove_GUID(key as GUID);
+    if (isSameType<K, Guid>()) return _remove_Guid(key as Guid);
     if (isSameType<K, int>()) return _remove_Uint32(key as int);
     if (isSameType<K, PedometerStepKind>()) {
       return removeByPedometerStepKind(key as PedometerStepKind);
@@ -734,12 +746,16 @@ class IMap<K, V> extends IInspectable
     return _remove_Object(key as IInspectable);
   }
 
-  void _remove_GUID(GUID key) {
+  void _remove_Guid(Guid key) {
+    final nativeGuidPtr = key.toNativeGUID();
     final hr = ptr.ref.lpVtbl.value
-        .elementAt(11)
-        .cast<Pointer<NativeFunction<HRESULT Function(Pointer, GUID)>>>()
-        .value
-        .asFunction<int Function(Pointer, GUID)>()(ptr.ref.lpVtbl, key);
+            .elementAt(11)
+            .cast<Pointer<NativeFunction<HRESULT Function(Pointer, GUID)>>>()
+            .value
+            .asFunction<int Function(Pointer, GUID)>()(
+        ptr.ref.lpVtbl, nativeGuidPtr.ref);
+
+    free(nativeGuidPtr);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

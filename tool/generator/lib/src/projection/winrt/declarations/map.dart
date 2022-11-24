@@ -25,14 +25,12 @@ mixin _MapProjection on WinRTMethodProjection {
     // 'iterableIid' parameter so that the 'IMap' and 'IMapView' implementations
     // can use the correct IID when instantiating the IIterable object
     // To learn more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
-    final iIterableIid = IID_IIterable.toLowerCase();
-    final iKvpIid = IID_IKeyValuePair.toLowerCase();
     final kvpKeyArgSig =
         parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
     final kvpValueArgSig = parseTypeIdentifierSignature(
         returnType.typeIdentifier.typeArg!.typeArg!);
     final iterableSignature =
-        'pinterface($iIterableIid;pinterface($iKvpIid;$kvpKeyArgSig;$kvpValueArgSig))';
+        'pinterface($IID_IIterable;pinterface($IID_IKeyValuePair;$kvpKeyArgSig;$kvpValueArgSig))';
     final iterableIid = iidFromSignature(iterableSignature);
 
     final args = <String>["iterableIid: '$iterableIid'"];

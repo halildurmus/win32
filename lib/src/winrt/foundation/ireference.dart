@@ -31,7 +31,7 @@ class IReference<T> extends IInspectable {
   /// [IID_IReference_Uint32]).
   ///
   /// [T] must be of type `DateTime`, `double`, `Duration`, `int`, `String`,
-  /// `Struct` (e.g. `GUID`,`Point`, `Rect`, `Size`), or `WinRTEnum` (e.g.
+  /// `Struct` (e.g. `Guid`,`Point`, `Rect`, `Size`), or `WinRTEnum` (e.g.
   /// `WebErrorStatus`).
   ///
   /// [enumCreator] must be specified if [T] is a `WinRTEnum` type.
@@ -400,21 +400,26 @@ class IReference<T> extends IInspectable {
     }
   }
 
-  GUID getGuid() {
+  Guid getGuid() {
     final retValuePtr = calloc<GUID>();
 
-    final hr = ptr.ref.vtable
-        .elementAt(6)
-        .cast<
-            Pointer<NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.vtable
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    return retValuePtr.ref;
+      return retValuePtr.toDartGuid();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   DateTime getDateTime() {

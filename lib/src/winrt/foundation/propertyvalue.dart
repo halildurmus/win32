@@ -203,7 +203,7 @@ class PropertyValue extends IInspectable {
     }
   }
 
-  static IPropertyValue createGuid(GUID value) {
+  static IPropertyValue createGuid(Guid value) {
     final activationFactory =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
 
