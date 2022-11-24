@@ -51,9 +51,14 @@ void main() {
   test('Dart Guid handles largest value correctly', () {
     final guid = Guid.parse('{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}');
     final pGUID = guid.toNativeGUID();
-    final bytes = pGUID.cast<Uint8>().toList(length: 16);
     expect(
-        bytes,
+        guid.bytes,
+        equals([
+          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
+          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+        ]));
+    expect(
+        pGUID.cast<Uint8>().toList(length: 16),
         equals([
           0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, //
           0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
@@ -123,8 +128,7 @@ void main() {
     expect(pIID.ref.toString(), equals(dartGuid.toString()));
 
     // Check binary representation matches
-    expect(
-        dartGuid.bytes.toList(), equals(pIID.cast<Uint8>().toList(length: 16)));
+    expect(dartGuid.bytes, equals(pIID.cast<Uint8>().toList(length: 16)));
 
     free(pIID);
   });
@@ -146,5 +150,16 @@ void main() {
 
     free(pIID);
     free(pGUID);
+  });
+
+  test('Guid equality', () {
+    final guid1 = Guid.parse('{aaa4737b-ce75-4703-ab1b-222e278524c5}');
+    final guid2 = Guid.parse('{aaa4737b-ce75-4703-ab1b-222e278524c5}');
+    final randomGuid = Guid.generate();
+    final nilGuid = Guid.zero();
+
+    expect(guid1, equals(guid2));
+    expect(guid1, isNot(equals(randomGuid)));
+    expect(guid1, isNot(equals(nilGuid)));
   });
 }

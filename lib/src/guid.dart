@@ -24,11 +24,11 @@ import 'win32/ole32.g.dart';
 
 /// Represents an immutable GUID (globally unique identifier).
 ///
-/// To pass a GUID to a Windows API, use the [toNative] method to create a copy
-/// in unmanaged memory.
+/// To pass a GUID to a Windows API, use the [toNativeGUID] method to create a
+/// copy in unmanaged memory.
 class Guid {
   // A GUID is a 128-bit unique value.
-  final Uint8List bytes;
+  final UnmodifiableUint8ListView bytes;
 
   const Guid(this.bytes) : assert(bytes.length == 16);
 
@@ -48,11 +48,11 @@ class Guid {
     guid.buffer.asUint16List(6)[0] = data3;
     guid.buffer.asUint64List(8)[0] = data4;
 
-    return Guid(guid);
+    return Guid(UnmodifiableUint8ListView(guid));
   }
 
   /// Creates a 'nil' GUID (i.e. {00000000-0000-0000-0000-000000000000})
-  factory Guid.zero() => Guid(Uint8List(16));
+  factory Guid.zero() => Guid(UnmodifiableUint8ListView(Uint8List(16)));
 
   /// Creates a new GUID.
   factory Guid.generate() {
@@ -70,6 +70,9 @@ class Guid {
   /// The string must be of the form `{dddddddd-dddd-dddd-dddd-dddddddddddd}`.
   /// where d is a hex digit.
   factory Guid.parse(String guid) {
+    // This is a debug assert, becuase it's probably computationally expensive,
+    // and int.parse will throw a FormatException anyway if it can't parse the
+    // values.
     assert(RegExp(r'\{[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}}')
         .hasMatch(guid));
 
@@ -93,7 +96,7 @@ class Guid {
         .map((idx) => int.parse(guid.substring(idx, idx + 2), radix: 16))
         .toList(growable: false);
 
-    return Guid(Uint8List.fromList(guidAsBytes));
+    return Guid(UnmodifiableUint8ListView(Uint8List.fromList(guidAsBytes)));
   }
 
   /// Copy the GUID to unmanaged memory and return a pointer to the memory
@@ -133,6 +136,20 @@ class Guid {
 
     return '{$part1-$part2-$part3-$part4-$part5}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! Guid) return false;
+
+    for (var i = 0; i < 16; i++) {
+      if (this.bytes[i] != other.bytes[i]) return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode => bytes.hashCode;
 }
 
 // typedef struct _GUID {
@@ -170,8 +187,7 @@ class GUID extends Struct {
     Data4 = byteBuffer.asUint64List(8).first;
   }
 
-  // TODO: Remove this override. We shouldn't be using native Structs as
-  // indices.
+  // TODO: Remove this override; use [Guid] instead for keys.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
