@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IMMDeviceEnumerator = '{A95664D2-9614-4F35-A746-DE8DB63617E6}';
+const IID_IMMDeviceEnumerator = '{a95664d2-9614-4f35-a746-de8db63617e6}';
 
 /// {@category Interface}
 /// {@category com}
@@ -105,7 +105,7 @@ class IMMDeviceEnumerator extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_MMDeviceEnumerator = '{BCDE0395-E52F-467C-8E3D-C4579291692E}';
+const CLSID_MMDeviceEnumerator = '{bcde0395-e52f-467c-8e3d-c4579291692e}';
 
 /// {@category com}
 class MMDeviceEnumerator extends IMMDeviceEnumerator {

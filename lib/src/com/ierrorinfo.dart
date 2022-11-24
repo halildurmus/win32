@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IErrorInfo = '{1CF2B120-547D-101B-8E65-08002B2BD119}';
+const IID_IErrorInfo = '{1cf2b120-547d-101b-8e65-08002b2bd119}';
 
 /// {@category Interface}
 /// {@category com}

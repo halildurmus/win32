@@ -25,7 +25,7 @@ import 'phonenumberinfo.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPhoneNumberInfoFactory = '{8202B964-ADAA-4CFF-8FCF-17E7516A28FF}';
+const IID_IPhoneNumberInfoFactory = '{8202b964-adaa-4cff-8fcf-17e7516a28ff}';
 
 /// {@category Interface}
 /// {@category winrt}

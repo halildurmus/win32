@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IShellService = '{5836FB00-8187-11CF-A12B-00AA004AE837}';
+const IID_IShellService = '{5836fb00-8187-11cf-a12b-00aa004ae837}';
 
 /// {@category Interface}
 /// {@category com}

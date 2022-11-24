@@ -27,7 +27,7 @@ import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IIPInformation = '{D85145E0-138F-47D7-9B3A-36BB488CEF33}';
+const IID_IIPInformation = '{d85145e0-138f-47d7-9b3a-36bb488cef33}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -75,7 +75,7 @@ class IIPInformation extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{E5198CC8-2873-55F5-B0A1-84FF9E4AAD62}')
+              referenceIid: '{e5198cc8-2873-55f5-b0a1-84ff9e4aad62}')
           .value;
     } finally {
       free(retValuePtr);

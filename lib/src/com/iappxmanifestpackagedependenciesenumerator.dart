@@ -24,7 +24,7 @@ import 'iunknown.dart';
 
 /// @nodoc
 const IID_IAppxManifestPackageDependenciesEnumerator =
-    '{B43BBCF9-65A6-42DD-BAC0-8C6741E7F5A4}';
+    '{b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4}';
 
 /// {@category Interface}
 /// {@category com}

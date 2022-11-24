@@ -25,7 +25,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPedometerReading = '{2245DCF4-A8E1-432F-896A-BE0DD9B02D24}';
+const IID_IPedometerReading = '{2245dcf4-a8e1-432f-896a-be0dd9b02d24}';
 
 /// {@category Interface}
 /// {@category winrt}

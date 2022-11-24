@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IWwwFormUrlDecoderEntry = '{125E7431-F678-4E8E-B670-20A9B06C512D}';
+const IID_IWwwFormUrlDecoderEntry = '{125e7431-f678-4e8e-b670-20a9b06c512d}';
 
 /// {@category Interface}
 /// {@category winrt}

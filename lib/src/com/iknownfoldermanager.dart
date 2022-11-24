@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IKnownFolderManager = '{8BE2D872-86AA-4D47-B776-32CCA40C7018}';
+const IID_IKnownFolderManager = '{8be2d872-86aa-4d47-b776-32cca40c7018}';
 
 /// {@category Interface}
 /// {@category com}
@@ -192,7 +192,7 @@ class IKnownFolderManager extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
+const CLSID_KnownFolderManager = '{4df0c730-df9d-4ae3-9153-aa6b82e9795a}';
 
 /// {@category com}
 class KnownFolderManager extends IKnownFolderManager {

@@ -24,7 +24,7 @@ import 'ispellchecker.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpellChecker2 = '{E7ED1C71-87F7-4378-A840-C9200DACEE47}';
+const IID_ISpellChecker2 = '{e7ed1c71-87f7-4378-a840-c9200dacee47}';
 
 /// {@category Interface}
 /// {@category com}

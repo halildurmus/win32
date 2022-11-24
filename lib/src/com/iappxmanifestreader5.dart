@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAppxManifestReader5 = '{8D7AE132-A690-4C00-B75A-6AAE1FEAAC80}';
+const IID_IAppxManifestReader5 = '{8d7ae132-a690-4c00-b75a-6aae1feaac80}';
 
 /// {@category Interface}
 /// {@category com}

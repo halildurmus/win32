@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';
+const IID_IFileIsInUse = '{64a1cbf0-3a1a-4461-9158-376969693950}';
 
 /// {@category Interface}
 /// {@category com}

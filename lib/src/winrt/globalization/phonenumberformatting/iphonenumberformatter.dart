@@ -26,7 +26,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPhoneNumberFormatter = '{1556B49E-BAD4-4B4A-900D-4407ADB7C981}';
+const IID_IPhoneNumberFormatter = '{1556b49e-bad4-4b4a-900d-4407adb7c981}';
 
 /// {@category Interface}
 /// {@category winrt}

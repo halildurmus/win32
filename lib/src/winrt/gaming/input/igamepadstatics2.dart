@@ -28,7 +28,7 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGamepadStatics2 = '{42676DC5-0856-47C4-9213-B395504C3A3C}';
+const IID_IGamepadStatics2 = '{42676dc5-0856-47c4-9213-b395504c3a3c}';
 
 /// {@category Interface}
 /// {@category winrt}

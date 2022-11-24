@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAudioRenderClient = '{F294ACFC-3146-4483-A7BF-ADDCA7C260E2}';
+const IID_IAudioRenderClient = '{f294acfc-3146-4483-a7bf-addca7c260e2}';
 
 /// {@category Interface}
 /// {@category com}

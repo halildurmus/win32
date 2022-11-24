@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUriEscapeStatics = '{C1D432BA-C824-4452-A7FD-512BC3BBE9A1}';
+const IID_IUriEscapeStatics = '{c1d432ba-c824-4452-a7fd-512bc3bbe9a1}';
 
 /// {@category Interface}
 /// {@category winrt}

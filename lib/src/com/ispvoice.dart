@@ -24,7 +24,7 @@ import 'ispeventsource.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpVoice = '{6C44DF74-72B9-4992-A1EC-EF996E0422D4}';
+const IID_ISpVoice = '{6c44df74-72b9-4992-a1ec-ef996e0422d4}';
 
 /// {@category Interface}
 /// {@category com}
@@ -335,7 +335,7 @@ class ISpVoice extends ISpEventSource {
 }
 
 /// @nodoc
-const CLSID_SpVoice = '{96749377-3391-11D2-9EE3-00C04F797396}';
+const CLSID_SpVoice = '{96749377-3391-11d2-9ee3-00c04f797396}';
 
 /// {@category com}
 class SpVoice extends ISpVoice {

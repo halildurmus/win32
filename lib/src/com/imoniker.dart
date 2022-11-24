@@ -24,7 +24,7 @@ import 'ipersiststream.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IMoniker = '{0000000F-0000-0000-C000-000000000046}';
+const IID_IMoniker = '{0000000f-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category com}

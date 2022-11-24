@@ -31,7 +31,7 @@ import '../../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IJsonObjectWithDefaultValues =
-    '{D960D2A2-B7F0-4F00-8E44-D82CF415EA13}';
+    '{d960d2a2-b7f0-4f00-8e44-d82cf415ea13}';
 
 /// {@category Interface}
 /// {@category winrt}

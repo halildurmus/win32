@@ -24,7 +24,7 @@ import 'ishellitem.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IShellItem2 = '{7E9FB0D3-919F-4307-AB2E-9B1860310C93}';
+const IID_IShellItem2 = '{7e9fb0d3-919f-4307-ab2e-9b1860310c93}';
 
 /// {@category Interface}
 /// {@category com}

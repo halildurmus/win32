@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_ITimeZoneOnCalendar = '{BB3C25E5-46CF-4317-A3F5-02621AD54478}';
+const IID_ITimeZoneOnCalendar = '{bb3c25e5-46cf-4317-a3f5-02621ad54478}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISensorCollection = '{23571E11-E545-4DD8-A337-B89BF44B10DF}';
+const IID_ISensorCollection = '{23571e11-e545-4dd8-a337-b89bf44b10df}';
 
 /// {@category Interface}
 /// {@category com}
@@ -95,7 +95,7 @@ class ISensorCollection extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_SensorCollection = '{79C43ADB-A429-469F-AA39-2F2B74B75937}';
+const CLSID_SensorCollection = '{79c43adb-a429-469f-aa39-2f2b74b75937}';
 
 /// {@category com}
 class SensorCollection extends ISensorCollection {

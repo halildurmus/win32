@@ -24,7 +24,7 @@ import 'ipersist.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IPersistStream = '{00000109-0000-0000-C000-000000000046}';
+const IID_IPersistStream = '{00000109-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category com}

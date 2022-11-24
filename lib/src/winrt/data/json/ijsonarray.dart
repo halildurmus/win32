@@ -28,7 +28,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IJsonArray = '{08C1DDB6-0CBD-4A9A-B5D3-2F852DC37E81}';
+const IID_IJsonArray = '{08c1ddb6-0cbd-4a9a-b5d3-2f852dc37e81}';
 
 /// {@category Interface}
 /// {@category winrt}

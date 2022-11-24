@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IProvideClassInfo = '{B196B283-BAB4-101A-B69C-00AA00341D07}';
+const IID_IProvideClassInfo = '{b196b283-bab4-101a-b69c-00aa00341d07}';
 
 /// {@category Interface}
 /// {@category com}

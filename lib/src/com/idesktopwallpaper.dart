@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
+const IID_IDesktopWallpaper = '{b92b56a9-8b55-4e14-9a89-0199bbb6f93b}';
 
 /// {@category Interface}
 /// {@category com}
@@ -214,7 +214,7 @@ class IDesktopWallpaper extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_DesktopWallpaper = '{C2CF3110-460E-4FC1-B9D0-8A1C0C9CC4BD}';
+const CLSID_DesktopWallpaper = '{c2cf3110-460e-4fc1-b9d0-8a1c0c9cc4bd}';
 
 /// {@category com}
 class DesktopWallpaper extends IDesktopWallpaper {

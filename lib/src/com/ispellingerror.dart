@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
+const IID_ISpellingError = '{b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3}';
 
 /// {@category Interface}
 /// {@category com}

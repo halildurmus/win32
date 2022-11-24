@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
+const IID_ISequentialStream = '{0c733a30-2a1c-11ce-ade5-00aa0044773d}';
 
 /// {@category Interface}
 /// {@category com}

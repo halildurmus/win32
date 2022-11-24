@@ -24,7 +24,7 @@ import 'idispatch.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpeechObjectTokens = '{9285B776-2E7B-4BC0-B53E-580EB6FA967F}';
+const IID_ISpeechObjectTokens = '{9285b776-2e7b-4bc0-b53e-580eb6fa967f}';
 
 /// {@category Interface}
 /// {@category com}

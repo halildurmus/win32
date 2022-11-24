@@ -24,7 +24,7 @@ import 'iappxmanifestreader.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAppxManifestReader2 = '{D06F67BC-B31D-4EBA-A8AF-638E73E77B4D}';
+const IID_IAppxManifestReader2 = '{d06f67bc-b31d-4eba-a8af-638e73e77b4d}';
 
 /// {@category Interface}
 /// {@category com}

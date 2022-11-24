@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IWbemRefresher = '{49353C99-516B-11D1-AEA6-00C04FB68820}';
+const IID_IWbemRefresher = '{49353c99-516b-11d1-aea6-00c04fb68820}';
 
 /// {@category Interface}
 /// {@category com}
@@ -42,7 +42,7 @@ class IWbemRefresher extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_WbemRefresher = '{C71566F2-561E-11D1-AD87-00C04FD8FDFF}';
+const CLSID_WbemRefresher = '{c71566f2-561e-11d1-ad87-00c04fd8fdff}';
 
 /// {@category com}
 class WbemRefresher extends IWbemRefresher {

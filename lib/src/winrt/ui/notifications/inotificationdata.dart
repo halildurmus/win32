@@ -25,7 +25,7 @@ import '../../foundation/collections/imap.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_INotificationData = '{9FFD2312-9D6A-4AAF-B6AC-FF17F0C1F280}';
+const IID_INotificationData = '{9ffd2312-9d6a-4aaf-b6ac-ff17f0c1f280}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -56,7 +56,7 @@ class INotificationData extends IInspectable {
     }
 
     return IMap.fromRawPointer(retValuePtr,
-        iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}');
+        iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}');
   }
 
   int get sequenceNumber {

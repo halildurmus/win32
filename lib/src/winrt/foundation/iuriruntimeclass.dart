@@ -26,7 +26,7 @@ import 'uri.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUriRuntimeClass = '{9E365E57-48B2-4160-956F-C7385120BBFC}';
+const IID_IUriRuntimeClass = '{9e365e57-48b2-4160-956f-c7385120bbfc}';
 
 /// {@category Interface}
 /// {@category winrt}

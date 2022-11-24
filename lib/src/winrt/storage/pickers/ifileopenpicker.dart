@@ -29,7 +29,7 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
+const IID_IFileOpenPicker = '{2ca8278a-12c5-4c5f-8977-94547793c241}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -204,7 +204,7 @@ class IFileOpenPicker extends IInspectable {
     }
 
     return IVector.fromRawPointer(retValuePtr,
-        iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}');
+        iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');
   }
 
   Pointer<COMObject> pickSingleFileAsync() {

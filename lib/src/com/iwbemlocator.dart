@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IWbemLocator = '{DC12A687-737F-11CF-884D-00AA004B2E24}';
+const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';
 
 /// {@category Interface}
 /// {@category com}
@@ -82,7 +82,7 @@ class IWbemLocator extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_WbemLocator = '{4590F811-1D3A-11D0-891F-00AA004B2E24}';
+const CLSID_WbemLocator = '{4590f811-1d3a-11d0-891f-00aa004b2e24}';
 
 /// {@category com}
 class WbemLocator extends IWbemLocator {

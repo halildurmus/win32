@@ -24,7 +24,7 @@ import 'isequentialstream.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';
+const IID_IStream = '{0000000c-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category com}

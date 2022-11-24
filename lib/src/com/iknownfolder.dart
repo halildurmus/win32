@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IKnownFolder = '{3AA7AF7E-9B36-420C-A8E3-F77D4674A488}';
+const IID_IKnownFolder = '{3aa7af7e-9b36-420c-a8e3-f77d4674a488}';
 
 /// {@category Interface}
 /// {@category com}

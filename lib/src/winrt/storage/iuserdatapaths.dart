@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUserDataPaths = '{F9C53912-ABC4-46FF-8A2B-DC9D7FA6E52F}';
+const IID_IUserDataPaths = '{f9c53912-abc4-46ff-8a2b-dc9d7fa6e52f}';
 
 /// {@category Interface}
 /// {@category winrt}

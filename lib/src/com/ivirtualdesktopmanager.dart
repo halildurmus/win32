@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IVirtualDesktopManager = '{A5CD92FF-29BE-454C-8D04-D82879FB3F1B}';
+const IID_IVirtualDesktopManager = '{a5cd92ff-29be-454c-8d04-d82879fb3f1b}';
 
 /// {@category Interface}
 /// {@category com}
@@ -79,7 +79,7 @@ class IVirtualDesktopManager extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_VirtualDesktopManager = '{AA509086-5CA9-4C25-8F95-589D3C07B48A}';
+const CLSID_VirtualDesktopManager = '{aa509086-5ca9-4c25-8f95-589d3c07b48a}';
 
 /// {@category com}
 class VirtualDesktopManager extends IVirtualDesktopManager {

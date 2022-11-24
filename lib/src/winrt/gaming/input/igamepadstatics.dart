@@ -26,7 +26,7 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGamepadStatics = '{8BBCE529-D49C-39E9-9560-E47DDE96B7C8}';
+const IID_IGamepadStatics = '{8bbce529-d49c-39e9-9560-e47dde96b7c8}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -130,7 +130,7 @@ class IGamepadStatics extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IVectorView<Gamepad>.fromRawPointer(retValuePtr,
-              iterableIid: '{47132BA0-6B17-5CD2-A8BD-B5D3443CCB13}',
+              iterableIid: '{47132ba0-6b17-5cd2-a8bd-b5d3443ccb13}',
               creator: Gamepad.fromRawPointer)
           .toList();
     } finally {

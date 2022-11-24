@@ -26,7 +26,7 @@ import '../../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IPrinting3DMultiplePropertyMaterial =
-    '{25A6254B-C6E9-484D-A214-A25E5776BA62}';
+    '{25a6254b-c6e9-484d-a214-a25e5776ba62}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -57,6 +57,6 @@ class IPrinting3DMultiplePropertyMaterial extends IInspectable {
     }
 
     return IVector.fromRawPointer(retValuePtr,
-        iterableIid: '{421D4B91-B13B-5F37-AE54-B5249BD80539}', intType: Uint32);
+        iterableIid: '{421d4b91-b13b-5f37-ae54-b5249bd80539}', intType: Uint32);
   }
 }

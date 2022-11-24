@@ -24,7 +24,7 @@ import 'ipersist.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IPersistMemory = '{BD1AE5E0-A6AE-11CE-BD37-504200C10000}';
+const IID_IPersistMemory = '{bd1ae5e0-a6ae-11ce-bd37-504200c10000}';
 
 /// {@category Interface}
 /// {@category com}
