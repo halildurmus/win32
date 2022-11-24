@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAudioClock = '{CD63314F-3FBA-4A1B-812C-EF96358728E7}';
+const IID_IAudioClock = '{cd63314f-3fba-4a1b-812c-ef96358728e7}';
 
 /// {@category Interface}
 /// {@category com}

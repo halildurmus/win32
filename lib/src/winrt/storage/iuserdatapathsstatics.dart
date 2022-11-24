@@ -26,7 +26,7 @@ import 'userdatapaths.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUserDataPathsStatics = '{01B29DEF-E062-48A1-8B0C-F2C7A9CA56C0}';
+const IID_IUserDataPathsStatics = '{01b29def-e062-48a1-8b0c-f2c7a9ca56c0}';
 
 /// {@category Interface}
 /// {@category winrt}

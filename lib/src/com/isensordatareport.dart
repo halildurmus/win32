@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISensorDataReport = '{0AB9DF9B-C4B5-4796-8898-0470706A2E1D}';
+const IID_ISensorDataReport = '{0ab9df9b-c4b5-4796-8898-0470706a2e1d}';
 
 /// {@category Interface}
 /// {@category com}
@@ -75,7 +75,7 @@ class ISensorDataReport extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_SensorDataReport = '{4EA9D6EF-694B-4218-8816-CCDA8DA74BBA}';
+const CLSID_SensorDataReport = '{4ea9d6ef-694b-4218-8816-ccda8da74bba}';
 
 /// {@category com}
 class SensorDataReport extends ISensorDataReport {

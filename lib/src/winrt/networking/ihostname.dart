@@ -27,7 +27,7 @@ import 'hostname.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IHostName = '{BF8ECAAD-ED96-49A7-9084-D416CAE88DCB}';
+const IID_IHostName = '{bf8ecaad-ed96-49a7-9084-d416cae88dcb}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -24,7 +24,7 @@ import 'ifiledialog.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IFileDialog2 = '{61744FC7-85B5-4791-A9B0-272276309B13}';
+const IID_IFileDialog2 = '{61744fc7-85b5-4791-a9b0-272276309b13}';
 
 /// {@category Interface}
 /// {@category com}

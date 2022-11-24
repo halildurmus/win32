@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IWbemServices = '{9556DC99-828C-11CF-A37E-00AA003240C7}';
+const IID_IWbemServices = '{9556dc99-828c-11cf-a37e-00aa003240c7}';
 
 /// {@category Interface}
 /// {@category com}

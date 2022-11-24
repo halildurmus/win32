@@ -24,7 +24,7 @@ import 'ifiledialog.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IFileOpenDialog = '{D57C7288-D4AD-4768-BE02-9D969532D960}';
+const IID_IFileOpenDialog = '{d57c7288-d4ad-4768-be02-9d969532d960}';
 
 /// {@category Interface}
 /// {@category com}
@@ -61,7 +61,7 @@ class IFileOpenDialog extends IFileDialog {
 }
 
 /// @nodoc
-const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4DDE-A5A1-60F82A20AEF7}';
+const CLSID_FileOpenDialog = '{dc1c5a9c-e88a-4dde-a5a1-60f82a20aef7}';
 
 /// {@category com}
 class FileOpenDialog extends IFileOpenDialog {

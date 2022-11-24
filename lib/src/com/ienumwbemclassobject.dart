@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IEnumWbemClassObject = '{027947E1-D731-11CE-A357-000000000001}';
+const IID_IEnumWbemClassObject = '{027947e1-d731-11ce-a357-000000000001}';
 
 /// {@category Interface}
 /// {@category com}

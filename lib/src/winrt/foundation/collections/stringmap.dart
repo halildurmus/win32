@@ -29,7 +29,7 @@ class StringMap extends IInspectable implements IMap<String, String?> {
 
   late final _iMap = IMap<String, String?>.fromRawPointer(
       toInterface(IID_IMap_String_String),
-      iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}');
+      iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}');
 
   @override
   void clear() => _iMap.clear();

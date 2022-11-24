@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAudioStreamVolume = '{93014887-242D-4068-8A15-CF5E93B90FE3}';
+const IID_IAudioStreamVolume = '{93014887-242d-4068-8a15-cf5e93b90fe3}';
 
 /// {@category Interface}
 /// {@category com}

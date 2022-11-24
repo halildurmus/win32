@@ -27,7 +27,7 @@ import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGameController = '{1BAF6522-5F64-42C5-8267-B9FE2215BFBD}';
+const IID_IGameController = '{1baf6522-5f64-42c5-8267-b9fe2215bfbd}';
 
 /// {@category Interface}
 /// {@category winrt}

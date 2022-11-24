@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IAppxFactory = '{BEB94909-E451-438B-B5A7-D79E767B75D8}';
+const IID_IAppxFactory = '{beb94909-e451-438b-b5a7-d79e767b75d8}';
 
 /// {@category Interface}
 /// {@category com}
@@ -127,7 +127,7 @@ class IAppxFactory extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_AppxFactory = '{5842A140-FF9F-4166-8F5C-62F5B7B0C781}';
+const CLSID_AppxFactory = '{5842a140-ff9f-4166-8f5c-62f5b7b0c781}';
 
 /// {@category com}
 class AppxFactory extends IAppxFactory {

@@ -29,7 +29,7 @@ import '../../../winrt/networking/ihostname.dart';
 import '../../../winrt/foundation/collections/ivectorview.dart';
 
 /// @nodoc
-const IID_INetworkInformationStatics = '{5074F851-950D-4165-9C15-365619481EEA}';
+const IID_INetworkInformationStatics = '{5074f851-950d-4165-9c15-365619481eea}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -148,7 +148,7 @@ class INetworkInformationStatics extends IInspectable {
 
     try {
       return IVectorView<IHostName>.fromRawPointer(retValuePtr,
-              iterableIid: '{9E5F3ED0-CF1C-5D38-832C-ACEA6164BF5C}',
+              iterableIid: '{9e5f3ed0-cf1c-5d38-832c-acea6164bf5c}',
               creator: IHostName.fromRawPointer)
           .toList();
     } finally {

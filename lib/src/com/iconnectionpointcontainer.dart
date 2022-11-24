@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IConnectionPointContainer = '{B196B284-BAB4-101A-B69C-00AA00341D07}';
+const IID_IConnectionPointContainer = '{b196b284-bab4-101a-b69c-00aa00341d07}';
 
 /// {@category Interface}
 /// {@category com}

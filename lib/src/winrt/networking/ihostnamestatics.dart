@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IHostNameStatics = '{F68CD4BF-A388-4E8B-91EA-54DD6DD901C0}';
+const IID_IHostNameStatics = '{f68cd4bf-a388-4e8b-91ea-54dd6dd901c0}';
 
 /// {@category Interface}
 /// {@category winrt}

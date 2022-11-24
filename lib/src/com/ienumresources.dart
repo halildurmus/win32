@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IEnumResources = '{2DD81FE3-A83C-4DA9-A330-47249D345BA1}';
+const IID_IEnumResources = '{2dd81fe3-a83c-4da9-a330-47249d345ba1}';
 
 /// {@category Interface}
 /// {@category com}

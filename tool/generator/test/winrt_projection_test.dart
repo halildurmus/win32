@@ -88,7 +88,7 @@ void main() {
     final projection = WinRTInterfaceProjection(winTypeDef!);
     expect(projection.guidConstants, contains('IID_IFileOpenPicker'));
     expect(projection.guidConstants,
-        contains('{2CA8278A-12C5-4C5F-8977-94547793C241}'));
+        contains('{2ca8278a-12c5-4c5f-8977-94547793c241}'));
   });
 
   test('WinRT interface has right number of methods', () {
@@ -268,7 +268,7 @@ void main() {
     expect(languagesProjection.toString().trimLeft(),
         startsWith('List<String> get languages'));
     expect(languagesProjection.toString(),
-        contains("iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}'"));
+        contains("iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}'"));
   });
 
   test('WinRT get property successfully projects IMap<String, String?>', () {
@@ -288,7 +288,7 @@ void main() {
     expect(valuesProjection.toString().trimLeft(),
         startsWith('IMap<String, String?> get values'));
     expect(valuesProjection.toString(),
-        contains("iterableIid: '{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}'"));
+        contains("iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}'"));
   });
 
   test('WinRT get property successfully projects nullable types', () {
@@ -310,7 +310,7 @@ void main() {
     expect(expirationTimeSystemProjection.toString().trimLeft(),
         startsWith('DateTime? get expirationTime'));
     expect(expirationTimeSystemProjection.toString(),
-        contains("referenceIid: '{5541D8A7-497C-5AA4-86FC-7713ADBF2A2C}'"));
+        contains("referenceIid: '{5541d8a7-497c-5aa4-86fc-7713adbf2a2c}'"));
   });
 
   test('WinRT Clone method successfully projects Pointer<COMObject>', () {

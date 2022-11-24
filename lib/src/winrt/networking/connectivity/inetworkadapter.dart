@@ -28,7 +28,7 @@ import 'connectionprofile.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_INetworkAdapter = '{3B542E03-5388-496C-A8A3-AFFD39AEC2E6}';
+const IID_INetworkAdapter = '{3b542e03-5388-496c-a8a3-affd39aec2e6}';
 
 /// {@category Interface}
 /// {@category winrt}

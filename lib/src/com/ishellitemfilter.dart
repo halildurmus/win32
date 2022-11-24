@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IShellItemFilter = '{2659B475-EEB8-48B7-8F07-B378810F48CF}';
+const IID_IShellItemFilter = '{2659b475-eeb8-48b7-8f07-b378810f48cf}';
 
 /// {@category Interface}
 /// {@category com}

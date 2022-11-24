@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IMMDevice = '{D666063F-1587-4E43-81F1-B948E807363F}';
+const IID_IMMDevice = '{d666063f-1587-4e43-81f1-b948e807363f}';
 
 /// {@category Interface}
 /// {@category com}

@@ -25,7 +25,7 @@ import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IFileOpenPicker3 = '{D9A5C5B3-C5DC-5B98-BD80-A8D0CA0584D8}';
+const IID_IFileOpenPicker3 = '{d9a5c5b3-c5dc-5b98-bd80-a8d0ca0584d8}';
 
 /// {@category Interface}
 /// {@category winrt}

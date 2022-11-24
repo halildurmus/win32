@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
+const IID_IWbemClassObject = '{dc12a681-737f-11cf-884d-00aa004b2e24}';
 
 /// {@category Interface}
 /// {@category com}
@@ -399,7 +399,7 @@ class IWbemClassObject extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
+const CLSID_WbemClassObject = '{9a653086-174f-11d2-b5f9-00104b703efd}';
 
 /// {@category com}
 class WbemClassObject extends IWbemClassObject {

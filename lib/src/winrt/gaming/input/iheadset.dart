@@ -24,7 +24,7 @@ import '../../internal/hstring_array.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IHeadset = '{3FD156EF-6925-3FA8-9181-029C5223AE3B}';
+const IID_IHeadset = '{3fd156ef-6925-3fa8-9181-029c5223ae3b}';
 
 /// {@category Interface}
 /// {@category winrt}

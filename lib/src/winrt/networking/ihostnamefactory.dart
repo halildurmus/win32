@@ -25,7 +25,7 @@ import 'hostname.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IHostNameFactory = '{458C23ED-712F-4576-ADF1-C20B2C643558}';
+const IID_IHostNameFactory = '{458c23ed-712f-4576-adf1-c20b2c643558}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -24,7 +24,7 @@ import 'ispnotifysource.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpEventSource = '{BE7A9CCE-5F9E-11D2-960F-00C04F8EE628}';
+const IID_ISpEventSource = '{be7a9cce-5f9e-11d2-960f-00c04f8ee628}';
 
 /// {@category Interface}
 /// {@category com}

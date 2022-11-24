@@ -26,7 +26,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPhoneNumberInfoStatics = '{5B3F4F6A-86A9-40E9-8649-6D61161928D4}';
+const IID_IPhoneNumberInfoStatics = '{5b3f4f6a-86a9-40e9-8649-6d61161928d4}';
 
 /// {@category Interface}
 /// {@category winrt}

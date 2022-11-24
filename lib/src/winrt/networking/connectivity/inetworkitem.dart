@@ -26,7 +26,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_INetworkItem = '{01BC4D39-F5E0-4567-A28C-42080C831B2B}';
+const IID_INetworkItem = '{01bc4d39-f5e0-4567-a28c-42080c831b2b}';
 
 /// {@category Interface}
 /// {@category winrt}

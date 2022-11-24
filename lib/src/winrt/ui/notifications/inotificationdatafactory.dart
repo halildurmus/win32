@@ -27,7 +27,7 @@ import 'notificationdata.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_INotificationDataFactory = '{23C1E33A-1C10-46FB-8040-DEC384621CF8}';
+const IID_INotificationDataFactory = '{23c1e33a-1c10-46fb-8040-dec384621cf8}';
 
 /// {@category Interface}
 /// {@category winrt}

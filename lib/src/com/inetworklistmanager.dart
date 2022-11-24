@@ -24,7 +24,7 @@ import 'idispatch.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
+const IID_INetworkListManager = '{dcb00000-570f-4a9b-8d69-199fdba5723b}';
 
 /// {@category Interface}
 /// {@category com}
@@ -179,7 +179,7 @@ class INetworkListManager extends IDispatch {
 }
 
 /// @nodoc
-const CLSID_NetworkListManager = '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
+const CLSID_NetworkListManager = '{dcb00c01-570f-4a9b-8d69-199fdba5723b}';
 
 /// {@category com}
 class NetworkListManager extends INetworkListManager {

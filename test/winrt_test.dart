@@ -54,10 +54,10 @@ void main() {
       winrtInitialize();
 
       const iids = [
-        '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}', // ICalendar
-        '{00000038-0000-0000-C000-000000000046}', // IWeakReferenceSource
-        '{BB3C25E5-46CF-4317-A3F5-02621AD54478}', // ITimeZoneOnCalendar
-        '{0CA51CC6-17CF-4642-B08E-473DCC3CA3EF}'
+        '{ca30221d-86d9-40fb-a26b-d44eb7cf08ea}', // ICalendar
+        '{00000038-0000-0000-c000-000000000046}', // IWeakReferenceSource
+        '{bb3c25e5-46cf-4317-a3f5-02621ad54478}', // ITimeZoneOnCalendar
+        '{0ca51cc6-17cf-4642-b08e-473dcc3ca3ef}'
       ];
 
       final calendar = Calendar();

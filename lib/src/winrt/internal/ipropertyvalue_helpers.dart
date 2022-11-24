@@ -440,7 +440,7 @@ String _referenceIidFromValue(Object value, Type? nativeType) {
   }
 
   if (value is Duration) return IID_IReference_TimeSpan;
-  if (value is GUID) return IID_IReference_GUID;
+  if (value is GUID) return IID_IReference_Guid;
 
   if (value is int) {
     if (nativeType == Int16) return IID_IReference_Int16;

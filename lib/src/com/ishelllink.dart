@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IShellLink = '{000214F9-0000-0000-C000-000000000046}';
+const IID_IShellLink = '{000214f9-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category com}
@@ -234,7 +234,7 @@ class IShellLink extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_ShellLink = '{00021401-0000-0000-C000-000000000046}';
+const CLSID_ShellLink = '{00021401-0000-0000-c000-000000000046}';
 
 /// {@category com}
 class ShellLink extends IShellLink {

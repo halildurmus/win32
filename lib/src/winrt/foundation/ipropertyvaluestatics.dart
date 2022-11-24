@@ -27,7 +27,7 @@ import 'ipropertyvalue.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IPropertyValueStatics = '{629BDBC8-D932-4FF4-96B9-8D96C5C1E858}';
+const IID_IPropertyValueStatics = '{629bdbc8-d932-4ff4-96b9-8d96c5c1e858}';
 
 /// {@category Interface}
 /// {@category winrt}

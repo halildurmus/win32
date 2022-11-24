@@ -27,7 +27,7 @@ import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IBatteryReport = '{C9858C3A-4E13-420A-A8D0-24F18F395401}';
+const IID_IBatteryReport = '{c9858c3a-4e13-420a-a8d0-24f18f395401}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -54,7 +54,7 @@ class IBatteryReport extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
           .value;
     } finally {
       free(retValuePtr);
@@ -77,7 +77,7 @@ class IBatteryReport extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
           .value;
     } finally {
       free(retValuePtr);
@@ -100,7 +100,7 @@ class IBatteryReport extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
           .value;
     } finally {
       free(retValuePtr);
@@ -123,7 +123,7 @@ class IBatteryReport extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548CEFBD-BC8A-5FA0-8DF2-957440FC8BF4}')
+              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
           .value;
     } finally {
       free(retValuePtr);

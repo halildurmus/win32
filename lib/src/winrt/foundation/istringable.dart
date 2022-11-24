@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
+const IID_IStringable = '{96369f54-8eb6-48f0-abce-c1b211e627c3}';
 
 /// {@category Interface}
 /// {@category winrt}

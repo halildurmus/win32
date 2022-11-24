@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpNotifySource = '{5EFF4AEF-8487-11D2-961C-00C04F8EE628}';
+const IID_ISpNotifySource = '{5eff4aef-8487-11d2-961c-00c04f8ee628}';
 
 /// {@category Interface}
 /// {@category com}

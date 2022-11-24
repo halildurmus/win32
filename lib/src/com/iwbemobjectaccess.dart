@@ -24,7 +24,7 @@ import 'iwbemclassobject.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IWbemObjectAccess = '{49353C9A-516B-11D1-AEA6-00C04FB68820}';
+const IID_IWbemObjectAccess = '{49353c9a-516b-11d1-aea6-00c04fb68820}';
 
 /// {@category Interface}
 /// {@category com}

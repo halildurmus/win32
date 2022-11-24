@@ -24,7 +24,7 @@ import 'imodalwindow.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IFileDialog = '{42F85136-DB7E-439C-85F1-E4075D135FC8}';
+const IID_IFileDialog = '{42f85136-db7e-439c-85f1-e4075d135fc8}';
 
 /// {@category Interface}
 /// {@category com}

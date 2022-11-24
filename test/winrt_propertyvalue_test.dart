@@ -85,9 +85,11 @@ void main() {
 
       pv.getGuidArray(arraySize, newArray);
       expect(arraySize.value, equals(3));
-      expect(newArray.value[0].toString(), equals(IID_ICalendar));
-      expect(newArray.value[1].toString(), equals(IID_IFileOpenPicker));
-      expect(newArray.value[2].toString(), equals(IID_IStorageItem));
+      expect(newArray.value[0].toString(), equalsIgnoringCase(IID_ICalendar));
+      expect(newArray.value[1].toString(),
+          equalsIgnoringCase(IID_IFileOpenPicker));
+      expect(
+          newArray.value[2].toString(), equalsIgnoringCase(IID_IStorageItem));
     });
 
     test('Inspectable', () {

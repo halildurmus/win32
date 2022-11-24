@@ -24,7 +24,7 @@ import '../internal/hstring_array.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IClosable = '{30D5A829-7FA4-4026-83BB-D75BAE4EA99E}';
+const IID_IClosable = '{30d5a829-7fa4-4026-83bb-d75bae4ea99e}';
 
 /// {@category Interface}
 /// {@category winrt}

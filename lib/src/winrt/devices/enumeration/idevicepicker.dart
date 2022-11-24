@@ -36,7 +36,7 @@ import '../../../winrt/devices/enumeration/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IDevicePicker = '{84997AA2-034A-4440-8813-7D0BD479BF5A}';
+const IID_IDevicePicker = '{84997aa2-034a-4440-8813-7d0bd479bf5a}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -99,7 +99,7 @@ class IDevicePicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     return IVector.fromRawPointer(retValuePtr,
-        iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}');
+        iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');
   }
 
   int add_DeviceSelected(Pointer<NativeFunction<TypedEventHandler>> handler) {

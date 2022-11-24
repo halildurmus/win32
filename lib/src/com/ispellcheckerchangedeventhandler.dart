@@ -24,7 +24,7 @@ import 'iunknown.dart';
 
 /// @nodoc
 const IID_ISpellCheckerChangedEventHandler =
-    '{0B83A5B0-792F-4EAB-9799-ACF52C5ED08A}';
+    '{0b83a5b0-792f-4eab-9799-acf52c5ed08a}';
 
 /// {@category Interface}
 /// {@category com}

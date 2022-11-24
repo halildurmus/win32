@@ -26,7 +26,7 @@ import 'calendar.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_ICalendarFactory2 = '{B44B378C-CA7E-4590-9E72-EA2BEC1A5115}';
+const IID_ICalendarFactory2 = '{b44b378c-ca7e-4590-9e72-ea2bec1a5115}';
 
 /// {@category Interface}
 /// {@category winrt}

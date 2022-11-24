@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IShellItem = '{43826D1E-E718-42EE-BC55-A1E261C37BFE}';
+const IID_IShellItem = '{43826d1e-e718-42ee-bc55-a1e261c37bfe}';
 
 /// {@category Interface}
 /// {@category com}
@@ -111,7 +111,7 @@ class IShellItem extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
+const CLSID_ShellItem = '{9ac9fbe1-e0a2-4ad6-b4ee-e212013ea917}';
 
 /// {@category com}
 class ShellItem extends IShellItem {

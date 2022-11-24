@@ -96,7 +96,7 @@ class JsonArray extends IInspectable
 
   late final _iVector = IVector<IJsonValue>.fromRawPointer(
       toInterface(IID_IVector_IJsonValue),
-      iterableIid: '{CB0492B6-4113-55CF-B2C5-99EB428BA493}',
+      iterableIid: '{cb0492b6-4113-55cf-b2c5-99eb428ba493}',
       creator: IJsonValue.fromRawPointer);
 
   @override

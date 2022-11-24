@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_IEnumString = '{00000101-0000-0000-C000-000000000046}';
+const IID_IEnumString = '{00000101-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category com}

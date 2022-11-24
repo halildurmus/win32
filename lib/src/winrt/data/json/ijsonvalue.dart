@@ -27,7 +27,7 @@ import 'jsonobject.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IJsonValue = '{A3219ECB-F0B3-4DCD-BEEE-19D48CD3ED1E}';
+const IID_IJsonValue = '{a3219ecb-f0b3-4dcd-beee-19d48cd3ed1e}';
 
 /// {@category Interface}
 /// {@category winrt}

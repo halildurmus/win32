@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpellChecker = '{B6FD0B71-E2BC-4653-8D05-F197E412770B}';
+const IID_ISpellChecker = '{b6fd0b71-e2bc-4653-8d05-f197e412770b}';
 
 /// {@category Interface}
 /// {@category com}

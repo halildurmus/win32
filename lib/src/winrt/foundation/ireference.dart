@@ -82,7 +82,7 @@ class IReference<T> extends IInspectable {
         return getDouble() as T;
       case IID_IReference_Float:
         return getSingle() as T;
-      case IID_IReference_GUID:
+      case IID_IReference_Guid:
         return getGuid() as T;
       case IID_IReference_Int16:
         return getInt16() as T;

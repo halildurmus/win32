@@ -27,7 +27,7 @@ import 'enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
+const IID_ICalendar = '{ca30221d-86d9-40fb-a26b-d44eb7cf08ea}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -95,7 +95,7 @@ class ICalendar extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IVectorView<String>.fromRawPointer(retValuePtr,
-              iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}')
+              iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}')
           .toList();
     } finally {
       free(retValuePtr);

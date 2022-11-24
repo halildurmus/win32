@@ -26,7 +26,7 @@ import 'fileopenpicker.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IFileOpenPickerStatics2 = '{E8917415-EDDD-5C98-B6F3-366FDFCAD392}';
+const IID_IFileOpenPickerStatics2 = '{e8917415-eddd-5c98-b6f3-366fdfcad392}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -28,7 +28,7 @@ import 'fileproperties/basicproperties.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IStorageItem = '{4207A996-CA2F-42F7-BDE8-8B10457A7F30}';
+const IID_IStorageItem = '{4207a996-ca2f-42f7-bde8-8b10457a7f30}';
 
 /// {@category Interface}
 /// {@category winrt}

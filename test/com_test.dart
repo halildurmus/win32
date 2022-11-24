@@ -20,30 +20,39 @@ void main() {
   });
 
   test('GUID creation failure', () {
-    // Note the rogue 'X' here
-    expect(
-        () => calloc<GUID>()
-          ..ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
-        throwsFormatException);
+    final guid = calloc<GUID>();
+    try {
+      // Note the rogue 'X' here
+      expect(() => guid.ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+          throwsA(anyOf(isA<FormatException>(), isA<AssertionError>())));
+    } finally {
+      free(guid);
+    }
   });
 
   test('CLSIDFromString', () {
     final guid = calloc<GUID>();
-    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid);
+    final pCLSID = TEXT(CLSID_FileSaveDialog);
+
+    final hr = CLSIDFromString(pCLSID, guid);
     expect(hr, equals(S_OK));
 
     expect(guid.ref.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
 
+    free(pCLSID);
     free(guid);
   });
 
   test('IIDFromString', () {
     final guid = calloc<GUID>();
-    final hr = IIDFromString(TEXT(IID_IShellItem2), guid);
+    final pIID = TEXT(IID_IShellItem2);
+
+    final hr = IIDFromString(pIID, guid);
     expect(hr, equals(S_OK));
 
     expect(guid.ref.toString(), equalsIgnoringCase(IID_IShellItem2));
 
+    free(pIID);
     free(guid);
   });
 
@@ -62,8 +71,8 @@ void main() {
     expect(hr, equals(S_OK));
 
     final ptr = calloc<Pointer>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
+    final clsid = GUIDFromString(CLSID_FileSaveDialog);
+    final iid = GUIDFromString(IID_IFileSaveDialog);
 
     hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
     expect(hr, equals(S_OK));
@@ -83,9 +92,9 @@ void main() {
 
     final ptrFactory = calloc<COMObject>();
     final ptrSaveDialog = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
-    final iidClassFactory = calloc<GUID>()..ref.setGUID(IID_IClassFactory);
-    final iidFileSaveDialog = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
+    final clsid = GUIDFromString(CLSID_FileSaveDialog);
+    final iidClassFactory = GUIDFromString(IID_IClassFactory);
+    final iidFileSaveDialog = GUIDFromString(IID_IFileSaveDialog);
 
     hr = CoGetClassObject(
         clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());

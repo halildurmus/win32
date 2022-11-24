@@ -27,7 +27,7 @@ import 'toastnotification.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotificationFactory = '{04124B20-82C6-4229-B109-FD9ED4662B53}';
+const IID_IToastNotificationFactory = '{04124b20-82c6-4229-b109-fd9ed4662b53}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -25,7 +25,7 @@ import 'enums.g.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
+const IID_IAsyncInfo = '{00000036-0000-0000-c000-000000000046}';
 
 /// {@category Interface}
 /// {@category winrt}

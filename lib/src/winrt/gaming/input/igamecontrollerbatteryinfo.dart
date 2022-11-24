@@ -25,7 +25,7 @@ import '../../devices/power/batteryreport.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGameControllerBatteryInfo = '{DCECC681-3963-4DA6-955D-553F3B6F6161}';
+const IID_IGameControllerBatteryInfo = '{dcecc681-3963-4da6-955d-553f3b6f6161}';
 
 /// {@category Interface}
 /// {@category winrt}

@@ -31,7 +31,7 @@ import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotification = '{997E2675-059E-4E60-8B06-1760917C8B80}';
+const IID_IToastNotification = '{997e2675-059e-4e60-8b06-1760917c8b80}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -96,7 +96,7 @@ class IToastNotification extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
       return IReference<DateTime>.fromRawPointer(retValuePtr,
-              referenceIid: '{5541D8A7-497C-5AA4-86FC-7713ADBF2A2C}')
+              referenceIid: '{5541d8a7-497c-5aa4-86fc-7713adbf2a2c}')
           .value;
     } finally {
       free(retValuePtr);

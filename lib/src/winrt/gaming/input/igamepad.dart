@@ -29,7 +29,7 @@ import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IGamepad = '{BC7BB43C-0A69-3903-9E9D-A50F86A45DE5}';
+const IID_IGamepad = '{bc7bb43c-0a69-3903-9e9d-a50f86a45de5}';
 
 /// {@category Interface}
 /// {@category winrt}

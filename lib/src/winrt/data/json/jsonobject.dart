@@ -139,7 +139,7 @@ class JsonObject extends IInspectable
 
   late final _iMap = IMap<String, IJsonValue?>.fromRawPointer(
       toInterface(IID_IMap_String_IJsonValue),
-      iterableIid: '{DFABB6E1-0411-5A8F-AA87-354E7110F099}',
+      iterableIid: '{dfabb6e1-0411-5a8f-aa87-354e7110f099}',
       creator: IJsonValue.fromRawPointer);
 
   @override

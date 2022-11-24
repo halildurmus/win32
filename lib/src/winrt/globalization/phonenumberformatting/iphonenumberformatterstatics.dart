@@ -26,7 +26,7 @@ import '../../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IPhoneNumberFormatterStatics =
-    '{5CA6F931-84D9-414B-AB4E-A0552C878602}';
+    '{5ca6f931-84d9-414b-ab4e-a0552c878602}';
 
 /// {@category Interface}
 /// {@category winrt}

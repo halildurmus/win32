@@ -23,7 +23,7 @@ import '../win32/ole32.g.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_ISpellCheckerFactory = '{8E018A9D-2415-4677-BF08-794EA61F94BB}';
+const IID_ISpellCheckerFactory = '{8e018a9d-2415-4677-bf08-794ea61f94bb}';
 
 /// {@category Interface}
 /// {@category com}
@@ -89,7 +89,7 @@ class ISpellCheckerFactory extends IUnknown {
 }
 
 /// @nodoc
-const CLSID_SpellCheckerFactory = '{7AB36653-1796-484B-BDFA-E74F1DB7C1DC}';
+const CLSID_SpellCheckerFactory = '{7ab36653-1796-484b-bdfa-e74f1db7c1dc}';
 
 /// {@category com}
 class SpellCheckerFactory extends ISpellCheckerFactory {

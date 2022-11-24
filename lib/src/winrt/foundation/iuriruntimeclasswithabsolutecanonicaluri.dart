@@ -25,7 +25,7 @@ import '../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IUriRuntimeClassWithAbsoluteCanonicalUri =
-    '{758D9661-221C-480F-A339-50656673F46F}';
+    '{758d9661-221c-480f-a339-50656673f46f}';
 
 /// {@category Interface}
 /// {@category winrt}
