@@ -1,3 +1,9 @@
+## 3.1.2
+
+- Support generating IIDs for parameterized types (#596)
+- Clean up GUID implementations (#599)
+- Wrap WinRT representations of GUID as Dart Guid (#602)
+
 ## 3.1.1
 
 - Fix documentation bug (@timsneath)
