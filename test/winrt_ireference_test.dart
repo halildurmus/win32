@@ -64,8 +64,8 @@ void main() {
     test('IReference<GUID>', () {
       final pv = PropertyValue.createGuid(GUIDFromString(IID_ICalendar).ref);
       final ireference = IReference<GUID>.fromRawPointer(
-          pv.toInterface(IID_IReference_GUID),
-          referenceIid: IID_IReference_GUID);
+          pv.toInterface(IID_IReference_Guid),
+          referenceIid: IID_IReference_Guid);
       expect(ireference.value, isNotNull);
       expect(ireference.value!.toString(), equals(IID_ICalendar));
     });

@@ -49,7 +49,7 @@ class IMap<K, V> extends IInspectable
   factory IMap() {
     if (isSameType<K, GUID>() && isSimilarType<V, Object>()) {
       return IMap.fromRawPointer(MediaPropertySet().ptr,
-          iterableIid: IID_IIterable_IKeyValuePair_GUID_Object);
+          iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
     }
 
     if (isSameType<K, String>()) {
@@ -124,7 +124,7 @@ class IMap<K, V> extends IInspectable
       final iMap = MediaPropertySet();
       other.cast<GUID, Object?>().forEach(iMap.insert);
       return IMap.fromRawPointer(iMap.ptr,
-          iterableIid: IID_IIterable_IKeyValuePair_GUID_Object);
+          iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
     }
 
     if (isSameType<K, String>()) {

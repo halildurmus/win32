@@ -25,7 +25,7 @@ import '../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IWwwFormUrlDecoderRuntimeClass =
-    '{D45A0451-F225-4542-9296-0E1DF5D254DF}';
+    '{d45a0451-f225-4542-9296-0e1df5d254df}';
 
 /// {@category Interface}
 /// {@category winrt}

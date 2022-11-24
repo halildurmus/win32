@@ -27,7 +27,7 @@ import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotification4 = '{15154935-28EA-4727-88E9-C58680E2D118}';
+const IID_IToastNotification4 = '{15154935-28ea-4727-88e9-c58680e2d118}';
 
 /// {@category Interface}
 /// {@category winrt}

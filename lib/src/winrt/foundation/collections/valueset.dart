@@ -35,7 +35,7 @@ class ValueSet extends IInspectable implements IMap<String, Object?> {
 
   late final _iMap = IMap<String, Object?>.fromRawPointer(
       toInterface(IID_IMap_String_Object),
-      iterableIid: '{FE2F3D47-5D47-5499-8374-430C7CDA0204}');
+      iterableIid: '{fe2f3d47-5d47-5499-8374-430c7cda0204}');
 
   @override
   void clear() => _iMap.clear();

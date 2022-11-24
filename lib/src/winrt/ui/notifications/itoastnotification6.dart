@@ -25,7 +25,7 @@ import '../../internal/hstring_array.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IToastNotification6 = '{43EBFE53-89AE-5C1E-A279-3AECFE9B6F54}';
+const IID_IToastNotification6 = '{43ebfe53-89ae-5c1e-a279-3aecfe9b6f54}';
 
 /// {@category Interface}
 /// {@category winrt}

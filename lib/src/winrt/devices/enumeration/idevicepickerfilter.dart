@@ -27,7 +27,7 @@ import '../../../winrt/devices/enumeration/enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IDevicePickerFilter = '{91DB92A2-57CB-48F1-9B59-A59B7A1F02A2}';
+const IID_IDevicePickerFilter = '{91db92a2-57cb-48f1-9b59-a59b7a1f02a2}';
 
 /// {@category Interface}
 /// {@category winrt}
@@ -55,7 +55,7 @@ class IDevicePickerFilter extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     return IVector.fromRawPointer(retValuePtr,
-        iterableIid: '{47D4BE05-58F1-522E-81C6-975EB4131BB9}',
+        iterableIid: '{47d4be05-58f1-522e-81c6-975eb4131bb9}',
         enumCreator: DeviceClass.from,
         intType: Int32);
   }
@@ -76,6 +76,6 @@ class IDevicePickerFilter extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     return IVector.fromRawPointer(retValuePtr,
-        iterableIid: '{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}');
+        iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');
   }
 }

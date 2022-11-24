@@ -29,7 +29,7 @@ import '../../../com/iinspectable.dart';
 
 /// @nodoc
 const IID_IToastNotificationManagerStatics =
-    '{50AC103F-D235-4598-BBEF-98FE4D1A3AD4}';
+    '{50ac103f-d235-4598-bbef-98fe4d1a3ad4}';
 
 /// {@category Interface}
 /// {@category winrt}
