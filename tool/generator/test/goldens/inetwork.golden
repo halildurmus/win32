@@ -24,7 +24,7 @@ import 'idispatch.dart';
 import 'iunknown.dart';
 
 /// @nodoc
-const IID_INetwork = '{DCB00002-570F-4A9B-8D69-199FDBA5723B}';
+const IID_INetwork = '{dcb00002-570f-4a9b-8d69-199fdba5723b}';
 
 /// {@category Interface}
 /// {@category com}

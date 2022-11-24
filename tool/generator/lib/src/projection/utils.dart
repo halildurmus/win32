@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
+import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
@@ -484,7 +485,7 @@ const wrtPinterfaceNamespace = [
 /// Converts it to a unique IID for the resultant type, using an algorithm
 /// defined here:
 /// https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
-String iidFromSignature(String signature) {
+Guid iidFromSignature(String signature) {
   final signatureInBytes = const Utf8Encoder().convert(signature);
   final data = [...wrtPinterfaceNamespace, ...signatureInBytes];
   final sha1Hash = sha1.convert(data);
@@ -492,54 +493,20 @@ String iidFromSignature(String signature) {
 
   final firstPart = sha1Bytes.getUint32(0);
   final secondPart = sha1Bytes.getUint16(4);
-  final thirdPart = (sha1Bytes.getUint16(6) & 0x0fff) | (5 << 12);
-  final fourthPart = (sha1Bytes.getUint8(8) & 0x3f) | 0x80;
+  final thirdPart = (sha1Bytes.getUint16(6) & 0x0FFF) | 0x5000;
+  final fourthPart = (sha1Bytes.getUint64(8, Endian.little) & ~0xC0) | 0x80;
 
-  final guidChars = List<int>.filled(38, 0);
-  var offset = 0;
-  // {dddddddd-dddd-dddd-dddd-dddddddddddd}
-  guidChars[offset++] = '{'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, firstPart >> 24, firstPart >> 16);
-  offset = _hexsToChars(guidChars, offset, firstPart >> 8, firstPart);
-  guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, secondPart >> 8, secondPart);
-  guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, thirdPart >> 8, thirdPart);
-  guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(guidChars, offset, fourthPart, sha1Bytes.getUint8(9));
-  guidChars[offset++] = '-'.codeUnitAt(0);
-  offset = _hexsToChars(
-      guidChars, offset, sha1Bytes.getUint8(10), sha1Bytes.getUint8(11));
-  offset = _hexsToChars(
-      guidChars, offset, sha1Bytes.getUint8(12), sha1Bytes.getUint8(13));
-  offset = _hexsToChars(
-      guidChars, offset, sha1Bytes.getUint8(14), sha1Bytes.getUint8(15));
-  guidChars[offset++] = '}'.codeUnitAt(0);
-
-  return String.fromCharCodes(guidChars).toUpperCase();
-}
-
-int _hexToChar(int a) {
-  a = a & 0xf;
-  return (a > 9) ? a - 10 + 0x61 : a + 0x30;
-}
-
-int _hexsToChars(List<int> guidChars, int offset, int a, int b) {
-  guidChars[offset++] = _hexToChar(a >> 4);
-  guidChars[offset++] = _hexToChar(a);
-  guidChars[offset++] = _hexToChar(b >> 4);
-  guidChars[offset++] = _hexToChar(b);
-  return offset;
+  return Guid.fromComponents(firstPart, secondPart, thirdPart, fourthPart);
 }
 
 /// Returns the IID for the given [typeDef].
-String iidFromTypeDef(TypeDef typeDef) {
+Guid iidFromTypeDef(TypeDef typeDef) {
   final signature = parseTypeDefSignature(typeDef);
   return iidFromSignature(signature);
 }
 
 /// Returns the IID for the given [typeIdentifier].
-String iidFromTypeIdentifier(TypeIdentifier typeIdentifier) {
+Guid iidFromTypeIdentifier(TypeIdentifier typeIdentifier) {
   final signature = parseTypeIdentifierSignature(typeIdentifier);
   return iidFromSignature(signature);
 }

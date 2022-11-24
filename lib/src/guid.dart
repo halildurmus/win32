@@ -16,8 +16,116 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
+
+import 'win32/ole32.g.dart';
+
+/// Represents an immutable GUID (globally unique identifier).
+///
+/// To pass a GUID to a Windows API, use the [toNative] method to create a copy
+/// in unmanaged memory.
+class Guid {
+  // A GUID is a 128-bit unique value.
+  final Uint8List bytes;
+
+  const Guid(this.bytes) : assert(bytes.length == 16);
+
+  /// Creates a Guid from four integer components.
+  ///
+  /// The first component should be a 32-bit value, the second and third
+  /// components should be 16-bit values, and the fourth component should be a
+  /// 64-bit value.
+  factory Guid.fromComponents(int data1, int data2, int data3, int data4) {
+    assert(data1 <= 0xFFFFFFFF);
+    assert(data2 <= 0xFFFF);
+    assert(data3 <= 0xFFFF);
+
+    final guid = Uint8List(16);
+    guid.buffer.asUint32List(0)[0] = data1;
+    guid.buffer.asUint16List(4)[0] = data2;
+    guid.buffer.asUint16List(6)[0] = data3;
+    guid.buffer.asUint64List(8)[0] = data4;
+
+    return Guid(guid);
+  }
+
+  /// Creates a 'nil' GUID (i.e. {00000000-0000-0000-0000-000000000000})
+  factory Guid.zero() => Guid(Uint8List(16));
+
+  /// Creates a new GUID.
+  factory Guid.generate() {
+    final pGuid = calloc<GUID>();
+    try {
+      CoCreateGuid(pGuid);
+      return pGuid.toDartGuid();
+    } finally {
+      calloc.free(pGuid);
+    }
+  }
+
+  /// Creates a new GUID from a string.
+  ///
+  /// The string must be of the form `{dddddddd-dddd-dddd-dddd-dddddddddddd}`.
+  /// where d is a hex digit.
+  factory Guid.fromString(String guid) {
+    if (guid.length != 38) {
+      throw FormatException('GUID is not in the correct format', guid);
+    }
+
+    // Note that the order of bytes in the returned byte array is different from
+    // the string representation of a GUID value. The order of the beginning
+    // four-byte group and the next two two-byte groups are reversed; the order
+    // of the final two-byte group and the closing six-byte group are the same.
+    //
+    // The following zero-indexed list provides the offset for each 8-bit hex
+    // value in the string representation.
+    const offsets = [
+      7, 5, 3, 1, 12, 10, 17, 15, //
+      20, 22, 25, 27, 29, 31, 33, 35
+    ];
+
+    final guidAsBytes = offsets
+        .map((idx) => int.parse(guid.substring(idx, idx + 2), radix: 16))
+        .toList(growable: false);
+
+    return Guid(Uint8List.fromList(guidAsBytes));
+  }
+
+  Pointer<GUID> toNativeGUID({Allocator allocator = malloc}) {
+    final pGUID = allocator<Uint8>(16);
+
+    for (var i = 0; i < 16; i++) {
+      pGUID[i] = bytes[i];
+    }
+    return pGUID.cast<GUID>();
+  }
+
+  @override
+  String toString() {
+    // Note that the order of bytes in the returned string is different from the
+    // internal byte representation of a GUID value. The order of the beginning
+    // four-byte group and the next two two-byte groups are reversed; the order
+    // of the final two-byte group and the closing six-byte group are the same.
+    //
+    // The following zero-indexed list provides the offset for each 8-bit hex
+    // value within the 16-byte array.
+    const offsets = [3, 2, 1, 0, 5, 4, 7, 6, 8, 9, 10, 11, 12, 13, 14, 15];
+
+    final guidAsHexValues =
+        offsets.map((idx) => bytes[idx].toRadixString(16).padLeft(2, '0'));
+
+    final formattedString = guidAsHexValues.join('');
+    final part1 = formattedString.substring(0, 8);
+    final part2 = formattedString.substring(8, 12);
+    final part3 = formattedString.substring(12, 16);
+    final part4 = formattedString.substring(16, 20);
+    final part5 = formattedString.substring(20);
+
+    return '{$part1-$part2-$part3-$part4-$part5}';
+  }
+}
 
 // typedef struct _GUID {
 //     unsigned long  Data1;
@@ -26,7 +134,7 @@ import 'package:ffi/ffi.dart';
 //     unsigned char  Data4[ 8 ];
 // } GUID;
 
-/// Represents a globally unique identifier (GUID).
+/// Represents a native globally unique identifier (GUID).
 ///
 /// {@category Struct}
 @Packed(4)
@@ -40,67 +148,26 @@ class GUID extends Struct {
   @Uint64()
   external int Data4;
 
-  /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
+  /// Print GUID in common {fdd39ad0-238f-46af-adb4-6c85480369c7} format
   @override
-  String toString() {
-    final comp1 = (Data4 & 0xFF).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF00) >> 8).toRadixString(16).padLeft(2, '0');
-
-    // This is hacky as all get-out :)
-    final comp2 = ((Data4 & 0xFF0000) >> 16).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF000000) >> 24).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF00000000) >> 32).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF0000000000) >> 40).toRadixString(16).padLeft(2, '0') +
-        ((Data4 & 0xFF000000000000) >> 48).toRadixString(16).padLeft(2, '0') +
-        (BigInt.from(Data4 & 0xFF00000000000000).toUnsigned(64) >> 56)
-            .toRadixString(16)
-            .padLeft(2, '0');
-
-    return '{${Data1.toRadixString(16).padLeft(8, '0').toUpperCase()}-'
-        '${Data2.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-        '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-        '${comp1.toUpperCase()}-'
-        '${comp2.toUpperCase()}}';
-  }
+  String toString() =>
+      Guid.fromComponents(Data1, Data2, Data3, Data4).toString();
 
   /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   void setGUID(String guidString) {
-    assert(guidString.length == 38);
-    Data1 = int.parse(guidString.substring(1, 9), radix: 16);
-    Data2 = int.parse(guidString.substring(10, 14), radix: 16);
-    Data3 = int.parse(guidString.substring(15, 19), radix: 16);
-
-    // Final component is pushed on the stack in reverse order per x64
-    // calling convention.
-    final rawString = guidString.substring(35, 37) +
-        guidString.substring(33, 35) +
-        guidString.substring(31, 33) +
-        guidString.substring(29, 31) +
-        guidString.substring(27, 29) +
-        guidString.substring(25, 27) +
-        guidString.substring(22, 24) +
-        guidString.substring(20, 22);
-
-    // We need to split this to avoid overflowing a signed int.parse()
-    Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
-        int.parse(rawString.substring(4, 16), radix: 16);
+    final byteBuffer = Guid.fromString(guidString).bytes.buffer;
+    Data1 = byteBuffer.asUint32List(0).first;
+    Data2 = byteBuffer.asUint16List(4).first;
+    Data3 = byteBuffer.asUint16List(6).first;
+    Data4 = byteBuffer.asUint64List(8).first;
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is GUID &&
-        other.Data1 == Data1 &&
-        other.Data2 == Data2 &&
-        other.Data3 == Data3 &&
-        other.Data4 == Data4;
-  }
-
-  @override
-  int get hashCode =>
-      Data1.hashCode ^ Data2.hashCode ^ Data3.hashCode ^ Data4.hashCode;
 }
 
-Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = calloc}) =>
-    allocator<GUID>()..ref.setGUID(guid);
+extension PointerGUIDExtension on Pointer<GUID> {
+  /// Converts this native GUID to a Dart [Guid].
+  Guid toDartGuid() =>
+      Guid.fromComponents(ref.Data1, ref.Data2, ref.Data3, ref.Data4);
+}
+
+Pointer<GUID> GUIDFromString(String guid, {Allocator allocator = malloc}) =>
+    Guid.fromString(guid).toNativeGUID(allocator: allocator);

@@ -476,88 +476,97 @@ void main() {
     // IAsyncOperation<IReference<Duration>>
     expect(
         iidFromSignature(
-            'pinterface({9fc2b0bb-e446-44e2-aa61-9cab8f636af2};pinterface({61c17706-2d65-11e0-9ae8-d48564015472};struct(Windows.Foundation.TimeSpan;i8)))'),
-        equals('{24A901AD-910F-5C0F-B23C-67007577A558}'));
+                'pinterface({9fc2b0bb-e446-44e2-aa61-9cab8f636af2};pinterface({61c17706-2d65-11e0-9ae8-d48564015472};struct(Windows.Foundation.TimeSpan;i8)))')
+            .toString(),
+        equals('{24a901ad-910f-5c0f-b23c-67007577a558}'));
 
     // IMap<GUID, Object>
     expect(
         iidFromSignature(
-            'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};g16;cinterface(IInspectable))'),
-        equals('{5EE3189C-7DBF-5998-AD07-5414FB82567C}'));
+                'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};g16;cinterface(IInspectable))')
+            .toString(),
+        equals('{5ee3189c-7dbf-5998-ad07-5414fb82567c}'));
 
     // IIterable<IKeyValuePair<GUID, Object>>
     expect(
         iidFromSignature(
-            'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500};g16;cinterface(IInspectable)))'),
-        equals('{F3B20528-E3B3-5331-B2D0-0C2623AEE785}'));
+                'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500};g16;cinterface(IInspectable)))')
+            .toString(),
+        equals('{f3b20528-e3b3-5331-b2d0-0c2623aee785}'));
 
     // IIterable<IKeyValuePair<String, IJsonValue>>
     expect(
         iidFromSignature(
-            'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500};string;{a3219ecb-f0b3-4dcd-beee-19d48cd3ed1e}))'),
-        equals('{DFABB6E1-0411-5A8F-AA87-354E7110F099}'));
+                'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};pinterface({02b51929-c1c4-4a7e-8940-0312b5c18500};string;{a3219ecb-f0b3-4dcd-beee-19d48cd3ed1e}))')
+            .toString(),
+        equals('{dfabb6e1-0411-5a8f-aa87-354e7110f099}'));
 
     // IIterable<String>
     expect(
         iidFromSignature(
-            'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};string)'),
-        equals('{E2FCC7C1-3BFC-5A0B-B2B0-72E769D1CB7E}'));
+                'pinterface({faa585ea-6214-4217-afda-7f46de5869b3};string)')
+            .toString(),
+        equals('{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}'));
 
     // IMap<String, String>
     expect(
         iidFromSignature(
-            'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};string;string)'),
-        equals('{F6D1F700-49C2-52AE-8154-826F9908773C}'));
+                'pinterface({3c2925fe-8519-45c1-aa79-197b6718c1c1};string;string)')
+            .toString(),
+        equals('{f6d1f700-49c2-52ae-8154-826f9908773c}'));
 
     // IMapView<PedometerStepKind, PedometerReading>
     expect(
         iidFromSignature(
-            'pinterface({e480ce40-a338-4ada-adcf-272272e48cb9};enum(Windows.Devices.Sensors.PedometerStepKind;i4);rc(Windows.Devices.Sensors.PedometerReading;{2245dcf4-a8e1-432f-896a-be0dd9b02d24}))'),
-        equals('{64F0C54C-4865-56BD-AC98-64A98451E362}'));
+                'pinterface({e480ce40-a338-4ada-adcf-272272e48cb9};enum(Windows.Devices.Sensors.PedometerStepKind;i4);rc(Windows.Devices.Sensors.PedometerReading;{2245dcf4-a8e1-432f-896a-be0dd9b02d24}))')
+            .toString(),
+        equals('{64f0c54c-4865-56bd-ac98-64a98451e362}'));
 
     // IVector<IJsonValue>
     expect(
         iidFromSignature(
-            'pinterface({913337e9-11a1-4345-a3a2-4e7f956e222d};{a3219ecb-f0b3-4dcd-beee-19d48cd3ed1e})'),
-        equals('{D44662BC-DCE3-59A8-9272-4B210F33908B}'));
+                'pinterface({913337e9-11a1-4345-a3a2-4e7f956e222d};{a3219ecb-f0b3-4dcd-beee-19d48cd3ed1e})')
+            .toString(),
+        equals('{d44662bc-dce3-59a8-9272-4b210f33908b}'));
 
     // IVector<String>
     expect(
         iidFromSignature(
-            'pinterface({913337e9-11a1-4345-a3a2-4e7f956e222d};string)'),
-        equals('{98B9ACC1-4B56-532E-AC73-03D5291CCA90}'));
+                'pinterface({913337e9-11a1-4345-a3a2-4e7f956e222d};string)')
+            .toString(),
+        equals('{98b9acc1-4b56-532e-ac73-03d5291cca90}'));
   });
 
   test('iidFromTypeDef', () {
     final stringMap = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.StringMap')!;
     // IMap<String, String>
-    expect(iidFromTypeDef(stringMap.interfaces[0]),
-        equals('{F6D1F700-49C2-52AE-8154-826F9908773C}'));
+    expect(iidFromTypeDef(stringMap.interfaces[0]).toString(),
+        equals('{f6d1f700-49c2-52ae-8154-826f9908773c}'));
     // IIterable<IKeyValuePair<String, String>>
-    expect(iidFromTypeDef(stringMap.interfaces[1]),
-        equals('{E9BDAAF0-CBF6-5C72-BE90-29CBF3A1319B}'));
+    expect(iidFromTypeDef(stringMap.interfaces[1]).toString(),
+        equals('{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}'));
 
     final iPropertySet = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.IPropertySet')!;
     // IObservableMap<String, Object>
-    expect(iidFromTypeDef(iPropertySet.interfaces[0]),
-        equals('{236AAC9D-FB12-5C4D-A41C-9E445FB4D7EC}'));
+    expect(iidFromTypeDef(iPropertySet.interfaces[0]).toString(),
+        equals('{236aac9d-fb12-5c4d-a41c-9e445fb4d7ec}'));
 
     final mediaPropertySet = MetadataStore.getMetadataForType(
         'Windows.Media.MediaProperties.MediaPropertySet')!;
     // IMap<GUID, Object>
-    expect(iidFromTypeDef(mediaPropertySet.interfaces[0]),
-        equals('{5EE3189C-7DBF-5998-AD07-5414FB82567C}'));
+    expect(iidFromTypeDef(mediaPropertySet.interfaces[0]).toString(),
+        equals('{5ee3189c-7dbf-5998-ad07-5414fb82567c}'));
 
     final jsonObject =
         MetadataStore.getMetadataForType('Windows.Data.Json.JsonObject')!;
     // IMap<String, IJsonValue>
-    expect(iidFromTypeDef(jsonObject.interfaces[2]),
-        equals('{C9D9A725-786B-5113-B4B7-9B61764C220B}'));
+    expect(iidFromTypeDef(jsonObject.interfaces[2]).toString(),
+        equals('{c9d9a725-786b-5113-b4b7-9b61764c220b}'));
     // IIterable<IKeyValuePair<String, IJsonValue>>
-    expect(iidFromTypeDef(jsonObject.interfaces[3]),
-        equals('{DFABB6E1-0411-5A8F-AA87-354E7110F099}'));
+    expect(iidFromTypeDef(jsonObject.interfaces[3]).toString(),
+        equals('{dfabb6e1-0411-5a8f-aa87-354e7110f099}'));
   });
 
   test('iidFromTypeIdentifier', () {
@@ -566,40 +575,44 @@ void main() {
     // IAsyncOperation<IVectorView<StorageFile>>
     expect(
         iidFromTypeIdentifier(iFileOpenPicker
-            .findMethod('PickMultipleFilesAsync')!
-            .returnType
-            .typeIdentifier),
-        equals('{03362E33-E413-5F29-97D0-48A4780935F9}'));
+                .findMethod('PickMultipleFilesAsync')!
+                .returnType
+                .typeIdentifier)
+            .toString(),
+        equals('{03362e33-e413-5f29-97d0-48a4780935f9}'));
 
     final iStorageFileQueryResult2 = MetadataStore.getMetadataForType(
         'Windows.Storage.Search.IStorageFileQueryResult2')!;
     // IMap<String, IVectorView<TextSegment>>
     expect(
         iidFromTypeIdentifier(iStorageFileQueryResult2
-            .findMethod('GetMatchingPropertiesWithRanges')!
-            .returnType
-            .typeIdentifier),
-        equals('{A31B6540-B2B1-536D-818F-8ADE7051C3B3}'));
+                .findMethod('GetMatchingPropertiesWithRanges')!
+                .returnType
+                .typeIdentifier)
+            .toString(),
+        equals('{a31b6540-b2b1-536d-818f-8ade7051c3b3}'));
 
     final iPedometer2 = MetadataStore.getMetadataForType(
         'Windows.Devices.Sensors.IPedometer2')!;
     // IMapView<PedometerStepKind, PedometerReading>
     expect(
         iidFromTypeIdentifier(iPedometer2
-            .findMethod('GetCurrentReadings')!
-            .returnType
-            .typeIdentifier),
-        equals('{64F0C54C-4865-56BD-AC98-64A98451E362}'));
+                .findMethod('GetCurrentReadings')!
+                .returnType
+                .typeIdentifier)
+            .toString(),
+        equals('{64f0c54c-4865-56bd-ac98-64a98451e362}'));
 
     final iTimePickerFlyout = MetadataStore.getMetadataForType(
         'Windows.UI.Xaml.Controls.ITimePickerFlyout')!;
     // IAsyncOperation<IReference<TimeSpan>>
     expect(
         iidFromTypeIdentifier(iTimePickerFlyout
-            .findMethod('ShowAtAsync')!
-            .returnType
-            .typeIdentifier),
-        equals('{24A901AD-910F-5C0F-B23C-67007577A558}'));
+                .findMethod('ShowAtAsync')!
+                .returnType
+                .typeIdentifier)
+            .toString(),
+        equals('{24a901ad-910f-5c0f-b23c-67007577a558}'));
   });
 
   test('stripGenerics', () {
