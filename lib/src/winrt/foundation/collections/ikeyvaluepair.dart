@@ -36,7 +36,7 @@ class IKeyValuePair<K, V> extends IInspectable {
 
   /// Creates an instance of [IKeyValuePair] using the given [ptr].
   ///
-  /// [K] must be of type `GUID`, `int`, `Object`, `String`, or `WinRTEnum`
+  /// [K] must be of type `Guid`, `int`, `Object`, `String`, or `WinRTEnum`
   /// (e.g. `PedometerStepKind`).
   ///
   /// [V] must be of type `Object`, `String`, or `WinRT` (e.g. `IJsonValue`,
@@ -76,7 +76,7 @@ class IKeyValuePair<K, V> extends IInspectable {
 
   /// Gets the key of the key-value pair.
   K get key {
-    if (isSameType<K, GUID>()) return _key_GUID as K;
+    if (isSameType<K, Guid>()) return _key_Guid as K;
     if (isSameType<K, int>()) return _key_Uint32 as K;
     if (isSameType<K, PedometerStepKind>()) return keyAsPedometerStepKind as K;
     if (isSameType<K, String>()) return _key_String as K;
@@ -84,24 +84,26 @@ class IKeyValuePair<K, V> extends IInspectable {
     return _key_Object;
   }
 
-  GUID get _key_GUID {
+  Guid get _key_Guid {
     final retValuePtr = calloc<GUID>();
 
-    final hr = ptr.ref.lpVtbl.value
-        .elementAt(6)
-        .cast<
-            Pointer<NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
-        .value
-        .asFunction<
-            int Function(
-                Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<GUID>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<GUID>)>()(ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) {
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.toDartGuid();
+    } finally {
       free(retValuePtr);
-      throw WindowsException(hr);
     }
-
-    return retValuePtr.ref;
   }
 
   int get _key_Uint32 {

@@ -61,9 +61,9 @@ void main() {
       expect(ireference.value, equals(duration));
     });
 
-    test('IReference<GUID>', () {
-      final pv = PropertyValue.createGuid(GUIDFromString(IID_ICalendar).ref);
-      final ireference = IReference<GUID>.fromRawPointer(
+    test('IReference<Guid>', () {
+      final pv = PropertyValue.createGuid(Guid.parse(IID_ICalendar));
+      final ireference = IReference<Guid>.fromRawPointer(
           pv.toInterface(IID_IReference_Guid),
           referenceIid: IID_IReference_Guid);
       expect(ireference.value, isNotNull);

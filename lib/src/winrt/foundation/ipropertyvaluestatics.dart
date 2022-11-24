@@ -351,9 +351,9 @@ class IPropertyValueStatics extends IInspectable {
     return retValuePtr;
   }
 
-  IPropertyValue createGuid(GUID value) {
+  IPropertyValue createGuid(Guid value) {
     final retValuePtr = calloc<COMObject>();
-
+    final valueNativeGuidPtr = value.toNativeGUID();
     final hr = ptr.ref.vtable
             .elementAt(20)
             .cast<
@@ -364,13 +364,13 @@ class IPropertyValueStatics extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, GUID value, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, value, retValuePtr);
+        ptr.ref.lpVtbl, valueNativeGuidPtr.ref, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
     }
-
+    free(valueNativeGuidPtr);
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
 

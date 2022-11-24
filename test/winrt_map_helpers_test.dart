@@ -12,10 +12,10 @@ void main() {
     expect(isSupportedKeyValuePair<int, String?>(), isFalse);
     expect(isSupportedKeyValuePair<int, WinRTEnum?>(), isFalse);
 
-    expect(isSupportedKeyValuePair<GUID, IInspectable?>(), isTrue);
-    expect(isSupportedKeyValuePair<GUID, Object?>(), isTrue);
-    expect(isSupportedKeyValuePair<GUID, String?>(), isFalse);
-    expect(isSupportedKeyValuePair<GUID, WinRTEnum?>(), isFalse);
+    expect(isSupportedKeyValuePair<Guid, IInspectable?>(), isTrue);
+    expect(isSupportedKeyValuePair<Guid, Object?>(), isTrue);
+    expect(isSupportedKeyValuePair<Guid, String?>(), isFalse);
+    expect(isSupportedKeyValuePair<Guid, WinRTEnum?>(), isFalse);
 
     expect(isSupportedKeyValuePair<PedometerStepKind, PedometerReading?>(),
         isTrue);

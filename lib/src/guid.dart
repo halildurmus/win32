@@ -148,8 +148,10 @@ class Guid {
     return true;
   }
 
+  // toString()'s hashCode is used instead of bytes' because the bytes' hashCode
+  // does not work while using Guid as a key in maps.
   @override
-  int get hashCode => bytes.hashCode;
+  int get hashCode => toString().hashCode;
 }
 
 // typedef struct _GUID {
@@ -186,22 +188,6 @@ class GUID extends Struct {
     Data3 = byteBuffer.asUint16List(6).first;
     Data4 = byteBuffer.asUint64List(8).first;
   }
-
-  // TODO: Remove this override; use [Guid] instead for keys.
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is GUID &&
-        other.Data1 == Data1 &&
-        other.Data2 == Data2 &&
-        other.Data3 == Data3 &&
-        other.Data4 == Data4;
-  }
-
-  @override
-  int get hashCode =>
-      Data1.hashCode ^ Data2.hashCode ^ Data3.hashCode ^ Data4.hashCode;
 }
 
 extension PointerGUIDExtension on Pointer<GUID> {

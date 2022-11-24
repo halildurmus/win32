@@ -305,7 +305,7 @@ String parseTypeIdentifierName(TypeIdentifier ti) {
   switch (ti.baseType) {
     case BaseType.classTypeModifier:
     case BaseType.valueTypeModifier:
-      if (ti.name == 'System.Guid') return 'GUID';
+      if (ti.name == 'System.Guid') return 'Guid';
       if (ti.name == 'Windows.Foundation.TimeSpan') return 'Duration';
       return lastComponent(ti.name);
     case BaseType.genericTypeModifier:
@@ -396,7 +396,7 @@ String parseTypeDefSignature(TypeDef td) {
     return 'rc($className;$defaultInterfaceSignature)';
   }
 
-  return td.guid!.toLowerCase();
+  return td.guid!;
 }
 
 /// Returns the type signature for the given [ti].
@@ -410,7 +410,7 @@ String parseTypeIdentifierSignature(TypeIdentifier ti) {
   final typeProjection = TypeProjection(ti);
 
   if (typeProjection.isWinRTDelegate) {
-    return 'delegate(${ti.type!.guid!.toLowerCase()})';
+    return 'delegate(${ti.type!.guid!})';
   }
 
   if (typeProjection.isWinRTEnum) {
@@ -427,7 +427,7 @@ String parseTypeIdentifierSignature(TypeIdentifier ti) {
     return 'struct($structName;${fields.join(';')})';
   }
 
-  if (typeProjection.isInterface) return ti.type!.guid!.toLowerCase();
+  if (typeProjection.isInterface) return ti.type!.guid!;
 
   if (typeProjection.isClass) {
     final className = ti.name;
@@ -451,7 +451,7 @@ String parseGenericTypeIdentifierSignature(TypeIdentifier typeIdentifier) {
     throw ArgumentError('Expected a generic type identifier.');
   }
 
-  final parentTypeGuid = typeIdentifier.type!.guid!.toLowerCase();
+  final parentTypeGuid = typeIdentifier.type!.guid!;
 
   if (typeIdentifier.type?.genericParams.length == 2) {
     final firstArgSignature =

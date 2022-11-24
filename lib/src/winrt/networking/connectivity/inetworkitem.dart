@@ -37,7 +37,7 @@ class INetworkItem extends IInspectable {
   factory INetworkItem.from(IInspectable interface) =>
       INetworkItem.fromRawPointer(interface.toInterface(IID_INetworkItem));
 
-  GUID get networkId {
+  Guid get networkId {
     final retValuePtr = calloc<GUID>();
 
     try {
@@ -53,9 +53,10 @@ class INetworkItem extends IInspectable {
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.ref;
-      return retValue;
-    } finally {}
+      return retValuePtr.toDartGuid();
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   NetworkTypes getNetworkTypes() {

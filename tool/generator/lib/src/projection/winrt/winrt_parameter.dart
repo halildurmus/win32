@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 import '../parameter.dart';
+import '../safenames.dart';
 import '../type.dart';
 
 /// A WinRT parameter.
@@ -14,6 +15,13 @@ class WinRTParameterProjection extends ParameterProjection {
 
   final Method method;
 
+  @override
+  String get paramProjection {
+    final originalParamType = safeTypenameForString(type.methodParamType);
+    final paramType = originalParamType == 'GUID' ? 'Guid' : originalParamType;
+    return '$paramType ${safeIdentifierForString(name)}';
+  }
+
   // Matcher properties
 
   bool get isCOMObject => type.dartType == 'Pointer<COMObject>';
@@ -22,6 +30,8 @@ class WinRTParameterProjection extends ParameterProjection {
       type.typeIdentifier.name == 'Windows.Foundation.DateTime';
 
   bool get isEnum => type.isWinRTEnum;
+
+  bool get isGuid => type.typeIdentifier.name == 'System.Guid';
 
   bool get isReference =>
       type.typeIdentifier.type?.name.endsWith('IReference`1') ?? false;
@@ -52,6 +62,8 @@ class WinRTParameterProjection extends ParameterProjection {
       return 'final ${name}DateTime = '
           '$name.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;';
     }
+
+    if (isGuid) return 'final ${name}NativeGuidPtr = $name.toNativeGUID();';
 
     // Nullable parameters must be passed to WinRT APIs as 'IReference' interfaces
     // by calling the 'boxValue' function with the 'convertToIReference' flag
@@ -87,6 +99,7 @@ class WinRTParameterProjection extends ParameterProjection {
   /// Code to be inserted prior to the function call to tear down allocated
   /// memory.
   String get postamble {
+    if (isGuid) return 'free(${name}NativeGuidPtr);';
     if (isReference) return 'free(${name}ReferencePtr);';
     if (isString) return 'WindowsDeleteString(${name}Hstring);';
     if (isUri && !methodBelongsToUriRuntimeClass) {
@@ -100,6 +113,7 @@ class WinRTParameterProjection extends ParameterProjection {
   /// call (e.g. `today` -> `todayDateTime`)
   String get localIdentifier {
     if (isEnum) return '$identifier.value';
+    if (isGuid) return '${name}NativeGuidPtr.ref';
     if (isReference) return '${name}ReferencePtr.ref';
 
     if (isCOMObject) {

@@ -3,6 +3,7 @@ import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
+import 'declarations/guid.dart';
 import 'declarations/map.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
@@ -48,6 +49,10 @@ class WinRTGetPropertyProjection extends WinRTPropertyProjection {
     try {
       if (isEnumReturn) {
         return declarationFor(WinRTGetPropertyReturningEnumProjection.new);
+      }
+
+      if (isGuidReturn) {
+        return declarationFor(WinRTGetPropertyReturningGuidProjection.new);
       }
 
       if (isMapReturn) {

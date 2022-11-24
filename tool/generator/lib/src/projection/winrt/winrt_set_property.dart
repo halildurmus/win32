@@ -3,6 +3,7 @@ import 'declarations/datetime.dart';
 import 'declarations/default.dart';
 import 'declarations/duration.dart';
 import 'declarations/enum.dart';
+import 'declarations/guid.dart';
 import 'declarations/reference.dart';
 import 'declarations/string.dart';
 import 'declarations/uri.dart';
@@ -34,6 +35,9 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
   bool get isComObjectProperty =>
       parameters.first.type.dartType == 'Pointer<COMObject>';
+
+  bool get isGuidProperty =>
+      parameters.first.type.typeIdentifier.name == 'System.Guid';
 
   bool get isStringProperty => parameters.first.type.isString;
 
@@ -68,6 +72,10 @@ class WinRTSetPropertyProjection extends WinRTPropertyProjection {
 
       if (isEnumProperty) {
         return declarationFor(WinRTSetPropertyReturningEnumProjection.new);
+      }
+
+      if (isGuidProperty) {
+        return declarationFor(WinRTSetPropertyReturningGuidProjection.new);
       }
 
       if (isReferenceProperty) {

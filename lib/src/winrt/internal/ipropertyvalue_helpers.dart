@@ -174,14 +174,17 @@ List<double> _doubleListFromArray(
   }
 }
 
-List<GUID> _guidListFromArray(
+List<Guid> _guidListFromArray(
     void Function(Pointer<Uint32>, Pointer<Pointer<GUID>>) getArrayCallback) {
   final pValueSize = calloc<Uint32>();
   final pValue = calloc<Pointer<GUID>>();
 
   try {
     getArrayCallback(pValueSize, pValue);
-    return [for (var i = 0; i < pValueSize.value; i++) pValue.value[i]];
+    return [
+      for (var i = 0; i < pValueSize.value; i++)
+        Guid.parse(pValue.value[i].toString())
+    ];
   } finally {
     free(pValueSize);
   }
@@ -397,7 +400,7 @@ Pointer<COMObject> _boxValue(Object value, {Type? nativeType}) {
   }
 
   if (value is Duration) return PropertyValue.createTimeSpan(value).ptr;
-  if (value is GUID) return PropertyValue.createGuid(value).ptr;
+  if (value is Guid) return PropertyValue.createGuid(value).ptr;
 
   if (value is int) {
     if (nativeType == Int16) return PropertyValue.createInt16(value).ptr;
@@ -419,7 +422,7 @@ Pointer<COMObject> _boxValue(Object value, {Type? nativeType}) {
   if (value is List<DateTime>) return _boxDateTimeList(value);
   if (value is List<double>) return _boxDoubleList(value);
   if (value is List<Duration>) return _boxDurationList(value);
-  if (value is List<GUID>) return _boxGuidList(value);
+  if (value is List<Guid>) return _boxGuidList(value);
   if (value is List<IInspectable>) return _boxInspectableList(value);
   if (value is List<int>) return _boxIntList(value);
   if (value is List<Point>) return _boxPointList(value);
@@ -440,7 +443,7 @@ String _referenceIidFromValue(Object value, Type? nativeType) {
   }
 
   if (value is Duration) return IID_IReference_TimeSpan;
-  if (value is GUID) return IID_IReference_Guid;
+  if (value is Guid) return IID_IReference_Guid;
 
   if (value is int) {
     if (nativeType == Int16) return IID_IReference_Int16;
@@ -543,7 +546,7 @@ Pointer<COMObject> _boxDurationList(List<Duration> list) {
   }
 }
 
-Pointer<COMObject> _boxGuidList(List<GUID> list) {
+Pointer<COMObject> _boxGuidList(List<Guid> list) {
   final pArray = calloc<GUID>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray.elementAt(i).ref.setGUID(list.elementAt(i).toString());

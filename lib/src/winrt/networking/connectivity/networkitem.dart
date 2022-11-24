@@ -35,7 +35,7 @@ class NetworkItem extends IInspectable implements INetworkItem {
   late final _iNetworkItem = INetworkItem.from(this);
 
   @override
-  GUID get networkId => _iNetworkItem.networkId;
+  Guid get networkId => _iNetworkItem.networkId;
 
   @override
   NetworkTypes getNetworkTypes() => _iNetworkItem.getNetworkTypes();
