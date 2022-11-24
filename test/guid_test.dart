@@ -9,12 +9,12 @@ import 'package:win32/win32.dart';
 void main() {
   test('Invalid hex string', () {
     expect(() => GUIDFromString('{123G4567-G89B-12D3-A456-426655440000}'),
-        throwsFormatException);
+        throwsA(isA<AssertionError>()));
   });
 
   test('Invalid length string', () {
     expect(() => GUIDFromString('{123E4567-G89B-12D3-426655440000}'),
-        throwsFormatException);
+        throwsA(isA<AssertionError>()));
   });
 
   test('Create GUID from string', () {
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('Guid is ordered correctly', () {
-    final guid = Guid.fromString('{00112233-4455-6677-8899-AABBCCDDEEFF}');
+    final guid = Guid.parse('{00112233-4455-6677-8899-AABBCCDDEEFF}');
     final pGUID = guid.toNativeGUID();
     final bytes = pGUID.cast<Uint8>().toList(length: 16);
     expect(
@@ -49,7 +49,7 @@ void main() {
   });
 
   test('Dart Guid handles largest value correctly', () {
-    final guid = Guid.fromString('{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}');
+    final guid = Guid.parse('{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}');
     final pGUID = guid.toNativeGUID();
     final bytes = pGUID.cast<Uint8>().toList(length: 16);
     expect(
@@ -85,7 +85,7 @@ void main() {
   test('Roundtrip String conversion correctly', () {
     const guidString = '{537320b6-2f84-4347-89ff-22bc4f803d29}';
 
-    final dartGuid = Guid.fromString(guidString);
+    final dartGuid = Guid.parse(guidString);
     expect(dartGuid.toString(), equals(guidString));
 
     final nativeGUID = dartGuid.toNativeGUID();
@@ -110,5 +110,41 @@ void main() {
     final nil = Guid.zero();
 
     expect(nil.toString(), equals('{00000000-0000-0000-0000-000000000000}'));
+  });
+
+  test('Check representation of Dart Guid versus Win32 API', () {
+    // IID_IReference_Int16
+    final guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
+
+    final pIID = convertToIID(guid);
+    final dartGuid = Guid.parse(guid);
+
+    // Check string representation matches
+    expect(pIID.ref.toString(), equals(dartGuid.toString()));
+
+    // Check binary representation matches
+    expect(
+        dartGuid.bytes.toList(), equals(pIID.cast<Uint8>().toList(length: 16)));
+
+    free(pIID);
+  });
+
+  test('Check representation of native GUID versus Win32 API', () {
+    // IID_IReference_Int16
+    final guid = '{6EC9E41B-6709-5647-9918-A1270110FC4E}';
+
+    final pIID = convertToIID(guid); // wraps IIDFromString()
+    final pGUID = GUIDFromString(guid);
+
+    // Check string representation matches
+    expect(guid.toLowerCase(),
+        allOf(equals(pGUID.ref.toString()), equals(pIID.ref.toString())));
+
+    // Check binary representation matches
+    expect(pIID.cast<Uint8>().toList(length: 16),
+        equals(pGUID.cast<Uint8>().toList(length: 16)));
+
+    free(pIID);
+    free(pGUID);
   });
 }
