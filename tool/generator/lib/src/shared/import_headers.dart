@@ -1,7 +1,10 @@
 import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
-import 'version.dart';
+
+String versionSpecificImports(String pathToSrc, String importHeader,
+        List<TypeDef> parentInterfaces) =>
+    v2ParentImport(parentInterfaces);
 
 String v2ParentImport(List<TypeDef> parentInterfaces) {
   final imports = <String>{
@@ -28,18 +31,3 @@ String v2ParentImport(List<TypeDef> parentInterfaces) {
   }
   return imports.map((import) => "import '$import';").join('\n');
 }
-
-String versionSpecificImports(String pathToSrc, String importHeader,
-        List<TypeDef> parentInterfaces) =>
-    win32Version == 2
-        ? v2ParentImport(parentInterfaces)
-        : '''
-    import '${pathToSrc}combase.dart';
-    import '${pathToSrc}constants.dart';
-    import '${pathToSrc}exceptions.dart';
-    import '${pathToSrc}guid.dart';
-    import '${pathToSrc}macros.dart';
-    import '${pathToSrc}utils.dart';
-    import '${pathToSrc}win32/ole32.g.dart';
-
-    $importHeader''';

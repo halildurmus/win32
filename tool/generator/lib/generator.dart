@@ -36,5 +36,4 @@ export 'src/projection/winrt/winrt_set_property.dart';
 export 'src/shared/exclusions.dart';
 export 'src/shared/false_properties.dart';
 export 'src/shared/import_headers.dart';
-export 'src/shared/version.dart';
 export 'src/shared/win32_typemap.dart';
