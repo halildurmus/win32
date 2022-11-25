@@ -64,6 +64,7 @@ const footer = '''
 
 void generateStructSizeAnalyzer() {
   final buffer = StringBuffer()..write(header);
+  final structsToGenerate = loadStructsFromJson('win32_structs.json');
 
   for (final struct in structsToGenerate.keys) {
     final cStructName = lastComponent(struct);
