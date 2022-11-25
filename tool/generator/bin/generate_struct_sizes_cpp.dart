@@ -66,7 +66,10 @@ void generateStructSizeAnalyzer() {
   final buffer = StringBuffer()..write(header);
   final structsToGenerate = loadStructsFromJson('win32_structs.json');
 
-  for (final struct in structsToGenerate.keys) {
+  final structNames = structsToGenerate.keys.map(lastComponent);
+  final sortedStructNames = structNames.toList()..sort();
+
+  for (final struct in sortedStructNames) {
     final cStructName = lastComponent(struct);
     final dartStructName = stripAnsiUnicodeSuffix(cStructName);
 
