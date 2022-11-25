@@ -2,11 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
 
-String versionSpecificImports(String pathToSrc, String importHeader,
-        List<TypeDef> parentInterfaces) =>
-    v2ParentImport(parentInterfaces);
-
-String v2ParentImport(List<TypeDef> parentInterfaces) {
+String versionSpecificImports(List<TypeDef> parentInterfaces) {
   final imports = <String>{
     '../callbacks.dart',
     '../combase.dart',
