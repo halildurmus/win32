@@ -3052,6 +3052,28 @@ final _GetModuleHandleEx = _kernel32.lookupFunction<
     int Function(int dwFlags, Pointer<Utf16> lpModuleName,
         Pointer<IntPtr> phModule)>('GetModuleHandleExW');
 
+/// Retrieves information about the specified module in the MODULEINFO
+/// structure.
+///
+/// ```c
+/// BOOL K32GetModuleInformation(
+///   [in]  HANDLE       hProcess,
+///   [in]  HMODULE      hModule,
+///   [out] LPMODULEINFO lpmodinfo,
+///   [in]  DWORD        cb
+/// );
+/// ```
+/// {@category kernel32}
+int GetModuleInformation(
+        int hProcess, int hModule, Pointer<MODULEINFO> lpmodinfo, int cb) =>
+    _K32GetModuleInformation(hProcess, hModule, lpmodinfo, cb);
+
+final _K32GetModuleInformation = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hProcess, IntPtr hModule,
+        Pointer<MODULEINFO> lpmodinfo, Uint32 cb),
+    int Function(int hProcess, int hModule, Pointer<MODULEINFO> lpmodinfo,
+        int cb)>('K32GetModuleInformation');
+
 /// Retrieves the client computer name for the specified named pipe.
 ///
 /// ```c
@@ -3369,6 +3391,26 @@ int GetProcessId(int Process) => _GetProcessId(Process);
 
 final _GetProcessId = _kernel32.lookupFunction<Uint32 Function(IntPtr Process),
     int Function(int Process)>('GetProcessId');
+
+/// Retrieves the name of the executable file for the specified process.
+///
+/// ```c
+/// DWORD K32GetProcessImageFileNameW(
+///   [in]  HANDLE hProcess,
+///   [out] LPWSTR lpImageFileName,
+///   [in]  DWORD  nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessImageFileName(
+        int hProcess, Pointer<Utf16> lpImageFileName, int nSize) =>
+    _K32GetProcessImageFileName(hProcess, lpImageFileName, nSize);
+
+final _K32GetProcessImageFileName = _kernel32.lookupFunction<
+    Uint32 Function(
+        IntPtr hProcess, Pointer<Utf16> lpImageFileName, Uint32 nSize),
+    int Function(int hProcess, Pointer<Utf16> lpImageFileName,
+        int nSize)>('K32GetProcessImageFileNameW');
 
 /// Retrieves the shutdown parameters for the currently calling process.
 ///

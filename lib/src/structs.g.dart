@@ -4770,6 +4770,18 @@ class MODLOAD_DATA extends Struct {
   external int flags;
 }
 
+/// Contains the module load address, size, and entry point.
+///
+/// {@category Struct}
+class MODULEINFO extends Struct {
+  external Pointer lpBaseOfDll;
+
+  @Uint32()
+  external int SizeOfImage;
+
+  external Pointer EntryPoint;
+}
+
 /// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}

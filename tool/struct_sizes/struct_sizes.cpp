@@ -212,6 +212,7 @@ void main()
     printf("  'MODEMDEVCAPS': %zu,\n", sizeof(MODEMDEVCAPS));
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
+    printf("  'MODULEINFO': %zu,\n", sizeof(MODULEINFO));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'MOUSEHOOKSTRUCT': %zu,\n", sizeof(MOUSEHOOKSTRUCT));
     printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MOUSEHOOKSTRUCTEX));

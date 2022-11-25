@@ -2074,6 +2074,10 @@
         "prototype": "BOOL GetModuleHandleExW(\n  [in]           DWORD   dwFlags,\n  [in, optional] LPCWSTR lpModuleName,\n  [out]          HMODULE *phModule\n);",
         "comment": "Retrieves a module handle for the specified module and increments the module's reference count unless GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT is specified. The module must have been loaded by the calling process."
     },
+    "GetModuleInformation": {
+        "prototype": "BOOL K32GetModuleInformation(\n  [in]  HANDLE       hProcess,\n  [in]  HMODULE      hModule,\n  [out] LPMODULEINFO lpmodinfo,\n  [in]  DWORD        cb\n);",
+        "comment": "Retrieves information about the specified module in the MODULEINFO structure."
+    },
     "GetMonitorBrightness": {
         "prototype": "_BOOL GetMonitorBrightness(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumBrightness,\n  LPDWORD pdwCurrentBrightness,\n  LPDWORD pdwMaximumBrightness\n);",
         "comment": "Retrieves a monitor's minimum, maximum, and current brightness settings."
@@ -2339,6 +2343,10 @@
     "GetProcessId": {
         "prototype": "DWORD GetProcessId(\n  HANDLE Process\n);",
         "comment": "Retrieves the process identifier of the specified process."
+    },
+    "GetProcessImageFileName": {
+        "prototype": "DWORD K32GetProcessImageFileNameW(\n  [in]  HANDLE hProcess,\n  [out] LPWSTR lpImageFileName,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the name of the executable file for the specified process."
     },
     "GetProcessShutdownParameters": {
         "prototype": "BOOL GetProcessShutdownParameters(\n  LPDWORD lpdwLevel,\n  LPDWORD lpdwFlags\n);",

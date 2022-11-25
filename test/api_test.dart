@@ -3054,6 +3054,15 @@ void main() {
               Pointer<IntPtr> phModule)>('GetModuleHandleExW');
       expect(GetModuleHandleEx, isA<Function>());
     });
+    test('Can instantiate K32GetModuleInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetModuleInformation = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, IntPtr hModule,
+              Pointer<MODULEINFO> lpmodinfo, Uint32 cb),
+          int Function(int hProcess, int hModule, Pointer<MODULEINFO> lpmodinfo,
+              int cb)>('K32GetModuleInformation');
+      expect(K32GetModuleInformation, isA<Function>());
+    });
     test('Can instantiate GetNamedPipeClientComputerName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetNamedPipeClientComputerName = kernel32.lookupFunction<
@@ -3202,6 +3211,15 @@ void main() {
           Uint32 Function(IntPtr Process),
           int Function(int Process)>('GetProcessId');
       expect(GetProcessId, isA<Function>());
+    });
+    test('Can instantiate K32GetProcessImageFileName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetProcessImageFileName = kernel32.lookupFunction<
+          Uint32 Function(
+              IntPtr hProcess, Pointer<Utf16> lpImageFileName, Uint32 nSize),
+          int Function(int hProcess, Pointer<Utf16> lpImageFileName,
+              int nSize)>('K32GetProcessImageFileNameW');
+      expect(K32GetProcessImageFileName, isA<Function>());
     });
     test('Can instantiate GetProcessShutdownParameters', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

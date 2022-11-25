@@ -230,6 +230,7 @@
     "Windows.Win32.System.Power.POWERBROADCAST_SETTING": "Sent with a power setting event and contains data about the specific change.",
     "Windows.Win32.System.Power.SYSTEM_BATTERY_STATE": "Contains information about the current state of the system battery.",
     "Windows.Win32.System.Power.SYSTEM_POWER_STATUS": "Contains information about the power status of the system.",
+    "Windows.Win32.System.ProcessStatus.MODULEINFO": "Contains the module load address, size, and entry point.",
     "Windows.Win32.System.Registry.VALENTW": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure.",
     "Windows.Win32.System.StationsAndDesktops.BSMINFO": "Contains information about a window that denied a request from BroadcastSystemMessageEx.",
     "Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions.",
