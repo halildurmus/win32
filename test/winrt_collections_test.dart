@@ -948,7 +948,7 @@ void main() {
       test('fromMap', () {
         map = IMap.fromMap({'key1': 'value1', 'key2': null, 'key3': 'value3'});
         expect(map.lookup('key1'), equals('value1'));
-        expect(map.lookup('key2'), isNull);
+        expect(map.lookup('key2'), isEmpty);
         expect(map.lookup('key3'), equals('value3'));
       });
 
@@ -963,7 +963,7 @@ void main() {
 
       test('lookup returns items', () {
         expect(map.lookup('key1'), equals('value1'));
-        expect(map.lookup('key2'), isNull);
+        expect(map.lookup('key2'), isEmpty);
         expect(map.lookup('key3'), equals('value3'));
       });
 
@@ -1027,7 +1027,7 @@ void main() {
         final dartMap = map.toMap();
         expect(dartMap.length, equals(3));
         expect(dartMap['key1'], equals('value1'));
-        expect(dartMap['key2'], isNull);
+        expect(dartMap['key2'], isEmpty);
         expect(dartMap['key3'], equals('value3'));
         expect(() => dartMap..clear(), throwsUnsupportedError);
       });
@@ -1039,7 +1039,7 @@ void main() {
         expect(iterator.current.value, equals('value3'));
         expect(iterator.moveNext(), isTrue);
         expect(iterator.current.key, equals('key2'));
-        expect(iterator.current.value, isNull);
+        expect(iterator.current.value, isEmpty);
         expect(iterator.moveNext(), isTrue);
         expect(iterator.current.key, equals('key1'));
         expect(iterator.current.value, equals('value1'));
@@ -1075,7 +1075,7 @@ void main() {
         winrtInitialize();
         final map = IMap<String, String?>()
           ..insert('key1', 'value1')
-          ..insert('key2', null)
+          ..insert('key2', '')
           ..insert('key3', 'value3');
         mapView = getView(map.ptr);
       });
@@ -1092,7 +1092,7 @@ void main() {
 
       test('lookup returns items', () {
         expect(mapView.lookup('key1'), equals('value1'));
-        expect(mapView.lookup('key2'), isNull);
+        expect(mapView.lookup('key2'), isEmpty);
         expect(mapView.lookup('key3'), equals('value3'));
       });
 
@@ -1110,7 +1110,7 @@ void main() {
         final dartMap = mapView.toMap();
         expect(dartMap.length, equals(3));
         expect(dartMap['key1'], equals('value1'));
-        expect(dartMap['key2'], isNull);
+        expect(dartMap['key2'], isEmpty);
         expect(dartMap['key3'], equals('value3'));
         expect(() => dartMap..clear(), throwsUnsupportedError);
       });
@@ -1122,7 +1122,7 @@ void main() {
         expect(iterator.current.value, equals('value3'));
         expect(iterator.moveNext(), isTrue);
         expect(iterator.current.key, equals('key2'));
-        expect(iterator.current.value, isNull);
+        expect(iterator.current.value, isEmpty);
         expect(iterator.moveNext(), isTrue);
         expect(iterator.current.key, equals('key1'));
         expect(iterator.current.value, equals('value1'));
