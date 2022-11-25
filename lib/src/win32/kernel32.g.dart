@@ -2539,6 +2539,44 @@ final _GetDefaultCommConfig = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpszName, Pointer<COMMCONFIG> lpCC,
         Pointer<Uint32> lpdwSize)>('GetDefaultCommConfigW');
 
+/// Retrieves the base name of the specified device driver.
+///
+/// ```c
+/// DWORD K32GetDeviceDriverBaseNameW(
+///   [in]  LPVOID ImageBase,
+///   [out] LPWSTR lpBaseName,
+///   [in]  DWORD  nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetDeviceDriverBaseName(
+        Pointer ImageBase, Pointer<Utf16> lpBaseName, int nSize) =>
+    _K32GetDeviceDriverBaseName(ImageBase, lpBaseName, nSize);
+
+final _K32GetDeviceDriverBaseName = _kernel32.lookupFunction<
+    Uint32 Function(Pointer ImageBase, Pointer<Utf16> lpBaseName, Uint32 nSize),
+    int Function(Pointer ImageBase, Pointer<Utf16> lpBaseName,
+        int nSize)>('K32GetDeviceDriverBaseNameW');
+
+/// Retrieves the path available for the specified device driver.
+///
+/// ```c
+/// DWORD K32GetDeviceDriverFileNameW(
+///   [in]  LPVOID ImageBase,
+///   [out] LPWSTR lpFilename,
+///   [in]  DWORD  nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetDeviceDriverFileName(
+        Pointer ImageBase, Pointer<Utf16> lpFilename, int nSize) =>
+    _K32GetDeviceDriverFileName(ImageBase, lpFilename, nSize);
+
+final _K32GetDeviceDriverFileName = _kernel32.lookupFunction<
+    Uint32 Function(Pointer ImageBase, Pointer<Utf16> lpFilename, Uint32 nSize),
+    int Function(Pointer ImageBase, Pointer<Utf16> lpFilename,
+        int nSize)>('K32GetDeviceDriverFileNameW');
+
 /// Retrieves information about the specified disk, including the amount of
 /// free space on the disk.
 ///
@@ -2975,6 +3013,29 @@ final _GetMachineTypeAttributes = _kernel32.lookupFunction<
     Int32 Function(Uint16 Machine, Pointer<Uint32> MachineTypeAttributes),
     int Function(int Machine,
         Pointer<Uint32> MachineTypeAttributes)>('GetMachineTypeAttributes');
+
+/// Checks whether the specified address is within a memory-mapped file in
+/// the address space of the specified process. If so, the function returns
+/// the name of the memory-mapped file.
+///
+/// ```c
+/// DWORD K32GetMappedFileNameW(
+///   [in]  HANDLE hProcess,
+///   [in]  LPVOID lpv,
+///   [out] LPWSTR lpFilename,
+///   [in]  DWORD  nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetMappedFileName(
+        int hProcess, Pointer lpv, Pointer<Utf16> lpFilename, int nSize) =>
+    _K32GetMappedFileName(hProcess, lpv, lpFilename, nSize);
+
+final _K32GetMappedFileName = _kernel32.lookupFunction<
+    Uint32 Function(
+        IntPtr hProcess, Pointer lpv, Pointer<Utf16> lpFilename, Uint32 nSize),
+    int Function(int hProcess, Pointer lpv, Pointer<Utf16> lpFilename,
+        int nSize)>('K32GetMappedFileNameW');
 
 /// Returns the maximum number of logical processors that a processor group
 /// or the system can have.

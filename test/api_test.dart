@@ -2819,6 +2819,24 @@ void main() {
               Pointer<Uint32> lpdwSize)>('GetDefaultCommConfigW');
       expect(GetDefaultCommConfig, isA<Function>());
     });
+    test('Can instantiate K32GetDeviceDriverBaseName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetDeviceDriverBaseName = kernel32.lookupFunction<
+          Uint32 Function(
+              Pointer ImageBase, Pointer<Utf16> lpBaseName, Uint32 nSize),
+          int Function(Pointer ImageBase, Pointer<Utf16> lpBaseName,
+              int nSize)>('K32GetDeviceDriverBaseNameW');
+      expect(K32GetDeviceDriverBaseName, isA<Function>());
+    });
+    test('Can instantiate K32GetDeviceDriverFileName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetDeviceDriverFileName = kernel32.lookupFunction<
+          Uint32 Function(
+              Pointer ImageBase, Pointer<Utf16> lpFilename, Uint32 nSize),
+          int Function(Pointer ImageBase, Pointer<Utf16> lpFilename,
+              int nSize)>('K32GetDeviceDriverFileNameW');
+      expect(K32GetDeviceDriverFileName, isA<Function>());
+    });
     test('Can instantiate GetDiskFreeSpace', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetDiskFreeSpace = kernel32.lookupFunction<
@@ -3024,6 +3042,15 @@ void main() {
         expect(GetMachineTypeAttributes, isA<Function>());
       });
     }
+    test('Can instantiate K32GetMappedFileName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetMappedFileName = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hProcess, Pointer lpv,
+              Pointer<Utf16> lpFilename, Uint32 nSize),
+          int Function(int hProcess, Pointer lpv, Pointer<Utf16> lpFilename,
+              int nSize)>('K32GetMappedFileNameW');
+      expect(K32GetMappedFileName, isA<Function>());
+    });
     test('Can instantiate GetMaximumProcessorCount', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetMaximumProcessorCount = kernel32.lookupFunction<

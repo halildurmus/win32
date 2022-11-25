@@ -1733,6 +1733,14 @@
         "prototype": "int GetDeviceCaps(\n  HDC hdc,\n  int index\n);",
         "comment": "The GetDeviceCaps function retrieves device-specific information for the specified device."
     },
+    "GetDeviceDriverBaseName": {
+        "prototype": "DWORD K32GetDeviceDriverBaseNameW(\n  [in]  LPVOID ImageBase,\n  [out] LPWSTR lpBaseName,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the base name of the specified device driver."
+    },
+    "GetDeviceDriverFileName": {
+        "prototype": "DWORD K32GetDeviceDriverFileNameW(\n  [in]  LPVOID ImageBase,\n  [out] LPWSTR lpFilename,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the path available for the specified device driver."
+    },
     "GetDialogBaseUnits": {
         "prototype": "long GetDialogBaseUnits();",
         "comment": "Retrieves the system's dialog base units, which are the average width and height of characters in the system font. For dialog boxes that use the system font, you can use these values to convert between dialog template units, as specified in dialog box templates, and pixels. For dialog boxes that do not use the system font, the conversion from dialog template units to pixels depends on the font used by the dialog box."
@@ -2013,6 +2021,10 @@
         "prototype": "HRESULT GetMachineTypeAttributes(\n  USHORT Machine,\n  MACHINE_ATTRIBUTES *MachineTypeAttributes\n);",
         "comment": "Queries if the specified architecture is supported on the current system, either natively or by any form of compatibility or emulation layer.",
         "minimumWindowsVersion": "WIN11_21H2"
+    },
+    "GetMappedFileName": {
+        "prototype": "DWORD K32GetMappedFileNameW(\n  [in]  HANDLE hProcess,\n  [in]  LPVOID lpv,\n  [out] LPWSTR lpFilename,\n  [in]  DWORD  nSize\n);",
+        "comment": "Checks whether the specified address is within a memory-mapped file in the address space of the specified process. If so, the function returns the name of the memory-mapped file."
     },
     "GetMaximumProcessorCount": {
         "prototype": "DWORD GetMaximumProcessorCount(\n  WORD GroupNumber\n);",
