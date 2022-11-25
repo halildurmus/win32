@@ -44,6 +44,10 @@ typedef DrawTextCallback = Int32 Function(HDC hdc, LPWSTR pszText,
 typedef DrawStateProc = Int32 Function(
     IntPtr hdc, IntPtr lData, IntPtr wData, Int32 cx, Int32 cy);
 
+/// Application-defined callback function used with the EnumPageFiles function.
+typedef EnumPageFilesProc = BOOL Function(
+    Pointer<Void> pContext, Pointer pPageFileInfo, LPWSTR lpFilename);
+
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
 typedef EnumWindowsProc = BOOL Function(HWND hwnd, LPARAM lParam);

@@ -1012,6 +1012,10 @@
         "prototype": "BOOL DrawAnimatedRects(\n  HWND       hwnd,\n  int        idAni,\n  const RECT *lprcFrom,\n  const RECT *lprcTo);",
         "comment": "Animates the caption of a window to indicate the opening of an icon or the minimizing or maximizing of a window."
     },
+       "EmptyWorkingSet": {
+        "prototype": "BOOL EmptyWorkingSet(\n  [in] HANDLE hProcess\n);",
+        "comment": "Removes as many pages as possible from the working set of the specified process."
+    },
     "DrawCaption": {
         "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
         "comment": "The DrawCaption function draws a window caption."
@@ -1209,6 +1213,9 @@
     "EnumDesktopWindows": {
         "prototype": "BOOL EnumDesktopWindows(\n  HDESK       hDesktop,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
         "comment": "Enumerates all top-level windows associated with the specified desktop. It passes the handle to each window, in turn, to an application-defined callback function."
+    },    "EnumDeviceDrivers": {
+        "prototype": "BOOL EnumDeviceDrivers(\n  [out] LPVOID  *lpImageBase,\n  [in]  DWORD   cb,\n  [out] LPDWORD lpcbNeeded\n);",
+        "comment": "Retrieves the load address for each device driver in the system."
     },
     "EnumDisplayMonitors": {
         "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
@@ -1225,6 +1232,9 @@
     "EnumJobs": {
         "prototype": "BOOL EnumJobsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   FirstJob,\n  _In_  DWORD   NoJobs,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
         "comment": "The EnumJobs function retrieves information about a specified set of print jobs for a specified printer."
+    },    "EnumPageFiles": {
+        "prototype": "BOOL EnumPageFilesW(\n  [out] PENUM_PAGE_FILE_CALLBACKW pCallBackRoutine,\n  [in]  LPVOID                    pContext\n);",
+        "comment": "Calls the callback routine for each installed pagefile in the system."
     },
     "EnumPrinterData": {
         "prototype": "DWORD EnumPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   dwIndex,\n  _Out_ LPTSTR  pValueName,\n  _In_  DWORD   cbValueName,\n  _Out_ LPDWORD pcbValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbData,\n  _Out_ LPDWORD pcbData\n);",
@@ -2210,6 +2220,9 @@
     "GetPerAdapterInfo": {
         "prototype": "DWORD GetPerAdapterInfo(\n  ULONG                IfIndex,\n  PIP_PER_ADAPTER_INFO pPerAdapterInfo,\n  PULONG               pOutBufLen\n);",
         "comment": "The GetPerAdapterInfo function retrieves information about the adapter corresponding to the specified interface."
+    }, "GetPerformanceInfo": {
+        "prototype": "BOOL GetPerformanceInfo(\n  [out] PPERFORMANCE_INFORMATION pPerformanceInformation,\n  [in]  DWORD                    cb\n);",
+        "comment": "Retrieves the performance values contained in the PERFORMANCE_INFORMATION structure."
     },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",

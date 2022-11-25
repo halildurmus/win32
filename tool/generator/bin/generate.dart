@@ -409,6 +409,11 @@ void main() {
   print('Generating struct tests...');
   generateStructSizeTests();
 
+  print('Validating callbacks...');
+  final callbacks = loadMap('win32_callbacks.json');
+  saveMap(callbacks, 'win32_callbacks.json');
+  // Win32 callbacks are manually created
+
   print('Generating FFI function bindings...');
   generateFunctions(functionsToGenerate);
 
