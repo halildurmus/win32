@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../shared/win32_typemap.dart';
+import '../inputs/load_json.dart';
 import 'utils.dart';
 
 class TypeTuple {
@@ -58,6 +58,8 @@ const Map<String, TypeTuple> specialTypes = {
   'Windows.Foundation.EventRegistrationToken':
       TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
 };
+
+final callbackTypeMapping = loadMap('win32_callbacks.json');
 
 class TypeProjection {
   final TypeIdentifier typeIdentifier;

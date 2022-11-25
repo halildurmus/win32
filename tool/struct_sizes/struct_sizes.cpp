@@ -34,6 +34,7 @@
 #include <magnification.h>
 #include <mmreg.h>
 #include <netlistmgr.h>
+#include <psapi.h>
 #include <physicalmonitorenumerationapi.h>
 #include <sapi53.h>
 #include <SetupAPI.h>
@@ -138,6 +139,7 @@ void main()
     printf("  'EAP_TYPE': %zu,\n", sizeof(EAP_TYPE));
     printf("  'ELEMDESC': %zu,\n", sizeof(ELEMDESC));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
+    printf("  'ENUM_PAGE_FILE_INFORMATION': %zu,\n", sizeof(ENUM_PAGE_FILE_INFORMATION));
     printf("  'EVENTMSG': %zu,\n", sizeof(EVENTMSG));
     printf("  'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("  'FD_SET': %zu,\n", sizeof(FD_SET));
@@ -212,6 +214,7 @@ void main()
     printf("  'MODEMDEVCAPS': %zu,\n", sizeof(MODEMDEVCAPS));
     printf("  'MODEMSETTINGS': %zu,\n", sizeof(MODEMSETTINGS));
     printf("  'MODLOAD_DATA': %zu,\n", sizeof(MODLOAD_DATA));
+    printf("  'MODULEINFO': %zu,\n", sizeof(MODULEINFO));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'MOUSEHOOKSTRUCT': %zu,\n", sizeof(MOUSEHOOKSTRUCT));
     printf("  'MOUSEHOOKSTRUCTEX': %zu,\n", sizeof(MOUSEHOOKSTRUCTEX));
@@ -239,6 +242,7 @@ void main()
     printf("  'PALETTEENTRY': %zu,\n", sizeof(PALETTEENTRY));
     printf("  'PARAMDESC': %zu,\n", sizeof(PARAMDESC));
     printf("  'PARAMDESCEX': %zu,\n", sizeof(PARAMDESCEX));
+    printf("  'PERFORMANCE_INFORMATION': %zu,\n", sizeof(PERFORMANCE_INFORMATION));
     printf("  'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
     printf("  'POINT': %zu,\n", sizeof(POINT));
     printf("  'POINTER_INFO': %zu,\n", sizeof(POINTER_INFO));

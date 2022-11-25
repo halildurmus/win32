@@ -1134,6 +1134,10 @@
         "prototype": "BOOL EmptyClipboard();",
         "comment": "Empties the clipboard and frees handles to data in the clipboard. The function then assigns ownership of the clipboard to the window that currently has the clipboard open."
     },
+    "EmptyWorkingSet": {
+        "prototype": "BOOL K32EmptyWorkingSet(\n  [in] HANDLE hProcess\n);",
+        "comment": "Removes as many pages as possible from the working set of the specified process."
+    },
     "EnableMenuItem": {
         "prototype": "BOOL EnableMenuItem(\n  HMENU hMenu,\n  UINT  uIDEnableItem,\n  UINT  uEnable\n);",
         "comment": "Enables, disables, or grays the specified menu item."
@@ -1210,6 +1214,10 @@
         "prototype": "BOOL EnumDesktopWindows(\n  HDESK       hDesktop,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
         "comment": "Enumerates all top-level windows associated with the specified desktop. It passes the handle to each window, in turn, to an application-defined callback function."
     },
+    "EnumDeviceDrivers": {
+        "prototype": "BOOL K32EnumDeviceDrivers(\n  [out] LPVOID  *lpImageBase,\n  [in]  DWORD   cb,\n  [out] LPDWORD lpcbNeeded\n);",
+        "comment": "Retrieves the load address for each device driver in the system."
+    },
     "EnumDisplayMonitors": {
         "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
         "comment": "The EnumDisplayMonitors function enumerates display monitors (including invisible pseudo-monitors associated with the mirroring drivers) that intersect a region formed by the intersection of a specified clipping rectangle and the visible region of a device context. EnumDisplayMonitors calls an application-defined MonitorEnumProc callback function once for each monitor that is enumerated. Note that GetSystemMetrics (SM_CMONITORS) counts only the display monitors."
@@ -1225,6 +1233,10 @@
     "EnumJobs": {
         "prototype": "BOOL EnumJobsW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   FirstJob,\n  _In_  DWORD   NoJobs,\n  _In_  DWORD   Level,\n  _Out_ LPBYTE  pJob,\n  _In_  DWORD   cbBuf,\n  _Out_ LPDWORD pcbNeeded,\n  _Out_ LPDWORD pcReturned\n);",
         "comment": "The EnumJobs function retrieves information about a specified set of print jobs for a specified printer."
+    },
+    "EnumPageFiles": {
+        "prototype": "BOOL K32EnumPageFilesW(\n  [out] PENUM_PAGE_FILE_CALLBACKW pCallBackRoutine,\n  [in]  LPVOID                    pContext\n);",
+        "comment": "Calls the callback routine for each installed pagefile in the system."
     },
     "EnumPrinterData": {
         "prototype": "DWORD EnumPrinterDataW(\n  _In_  HANDLE  hPrinter,\n  _In_  DWORD   dwIndex,\n  _Out_ LPTSTR  pValueName,\n  _In_  DWORD   cbValueName,\n  _Out_ LPDWORD pcbValueName,\n  _Out_ LPDWORD pType,\n  _Out_ LPBYTE  pData,\n  _In_  DWORD   cbData,\n  _Out_ LPDWORD pcbData\n);",
@@ -1721,6 +1733,14 @@
         "prototype": "int GetDeviceCaps(\n  HDC hdc,\n  int index\n);",
         "comment": "The GetDeviceCaps function retrieves device-specific information for the specified device."
     },
+    "GetDeviceDriverBaseName": {
+        "prototype": "DWORD K32GetDeviceDriverBaseNameW(\n  [in]  LPVOID ImageBase,\n  [out] LPWSTR lpBaseName,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the base name of the specified device driver."
+    },
+    "GetDeviceDriverFileName": {
+        "prototype": "DWORD K32GetDeviceDriverFileNameW(\n  [in]  LPVOID ImageBase,\n  [out] LPWSTR lpFilename,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the path available for the specified device driver."
+    },
     "GetDialogBaseUnits": {
         "prototype": "long GetDialogBaseUnits();",
         "comment": "Retrieves the system's dialog base units, which are the average width and height of characters in the system font. For dialog boxes that use the system font, you can use these values to convert between dialog template units, as specified in dialog box templates, and pixels. For dialog boxes that do not use the system font, the conversion from dialog template units to pixels depends on the font used by the dialog box."
@@ -2002,6 +2022,10 @@
         "comment": "Queries if the specified architecture is supported on the current system, either natively or by any form of compatibility or emulation layer.",
         "minimumWindowsVersion": "WIN11_21H2"
     },
+    "GetMappedFileName": {
+        "prototype": "DWORD K32GetMappedFileNameW(\n  [in]  HANDLE hProcess,\n  [in]  LPVOID lpv,\n  [out] LPWSTR lpFilename,\n  [in]  DWORD  nSize\n);",
+        "comment": "Checks whether the specified address is within a memory-mapped file in the address space of the specified process. If so, the function returns the name of the memory-mapped file."
+    },
     "GetMaximumProcessorCount": {
         "prototype": "DWORD GetMaximumProcessorCount(\n  WORD GroupNumber\n);",
         "comment": "Returns the maximum number of logical processors that a processor group or the system can have."
@@ -2073,6 +2097,10 @@
     "GetModuleHandleEx": {
         "prototype": "BOOL GetModuleHandleExW(\n  [in]           DWORD   dwFlags,\n  [in, optional] LPCWSTR lpModuleName,\n  [out]          HMODULE *phModule\n);",
         "comment": "Retrieves a module handle for the specified module and increments the module's reference count unless GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT is specified. The module must have been loaded by the calling process."
+    },
+    "GetModuleInformation": {
+        "prototype": "BOOL K32GetModuleInformation(\n  [in]  HANDLE       hProcess,\n  [in]  HMODULE      hModule,\n  [out] LPMODULEINFO lpmodinfo,\n  [in]  DWORD        cb\n);",
+        "comment": "Retrieves information about the specified module in the MODULEINFO structure."
     },
     "GetMonitorBrightness": {
         "prototype": "_BOOL GetMonitorBrightness(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumBrightness,\n  LPDWORD pdwCurrentBrightness,\n  LPDWORD pdwMaximumBrightness\n);",
@@ -2207,6 +2235,10 @@
         "prototype": "DWORD GetPerAdapterInfo(\n  ULONG                IfIndex,\n  PIP_PER_ADAPTER_INFO pPerAdapterInfo,\n  PULONG               pOutBufLen\n);",
         "comment": "The GetPerAdapterInfo function retrieves information about the adapter corresponding to the specified interface."
     },
+    "GetPerformanceInfo": {
+        "prototype": "BOOL K32GetPerformanceInfo(\n  [out] PPERFORMANCE_INFORMATION pPerformanceInformation,\n  [in]  DWORD                    cb\n);",
+        "comment": "Retrieves the performance values contained in the PERFORMANCE_INFORMATION structure."
+    },
     "GetPhysicalCursorPos": {
         "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
         "comment": "Retrieves the position of the cursor in physical coordinates."
@@ -2339,6 +2371,10 @@
     "GetProcessId": {
         "prototype": "DWORD GetProcessId(\n  HANDLE Process\n);",
         "comment": "Retrieves the process identifier of the specified process."
+    },
+    "GetProcessImageFileName": {
+        "prototype": "DWORD K32GetProcessImageFileNameW(\n  [in]  HANDLE hProcess,\n  [out] LPWSTR lpImageFileName,\n  [in]  DWORD  nSize\n);",
+        "comment": "Retrieves the name of the executable file for the specified process."
     },
     "GetProcessShutdownParameters": {
         "prototype": "BOOL GetProcessShutdownParameters(\n  LPDWORD lpdwLevel,\n  LPDWORD lpdwFlags\n);",

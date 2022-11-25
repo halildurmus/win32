@@ -101,31 +101,7 @@ const excludedTypes = <String>[
   ...excludedComInterfaces
 ];
 
-// Working around https://github.com/dart-lang/sdk/issues/46644
 const ignorePackingDirectives = <String>[
-  'Windows.Win32.Media.Audio.AUXCAPS2W',
-  'Windows.Win32.Media.Audio.MIDIINCAPS2W',
-  'Windows.Win32.Media.Audio.MIDIOUTCAPS2W',
-  'Windows.Win32.Media.Audio.MIXERCAPS2W',
-  'Windows.Win32.Media.Audio.WAVEFORMATEXTENSIBLE',
-  'Windows.Win32.Media.Audio.WAVEINCAPS2W',
-  'Windows.Win32.Media.Audio.WAVEOUTCAPS2W',
-  'Windows.Win32.Media.Multimedia.EXBMINFOHEADER',
-  'Windows.Win32.Media.Multimedia.JOYCAPS2W',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_CAPTURE_PARMSW',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_COPY_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_CUT_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_DELETE_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_PASTE_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_RECORD_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_RECT_PARMS',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_RESTORE_PARMSW',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_SAVE_PARMSW',
-  'Windows.Win32.Media.Multimedia.MCI_DGV_UPDATE_PARMS',
-  'Windows.Win32.System.Ioctl.DEVICEDUMP_SECTION_HEADER',
-  'Windows.Win32.System.Ioctl.DEVICEDUMP_STORAGEDEVICE_DATA',
-  'Windows.Win32.System.Ioctl.SENDCMDINPARAMS',
-
   // From metadata.
 
   // TODO: Use most restrictive packing parent for child. For example,
