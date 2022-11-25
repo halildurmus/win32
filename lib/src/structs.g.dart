@@ -2412,6 +2412,26 @@ class ENUMLOGFONTEX extends Struct {
   }
 }
 
+/// Contains information about a pagefile.
+///
+/// {@category Struct}
+class ENUM_PAGE_FILE_INFORMATION extends Struct {
+  @Uint32()
+  external int cb;
+
+  @Uint32()
+  external int Reserved;
+
+  @IntPtr()
+  external int TotalSize;
+
+  @IntPtr()
+  external int TotalInUse;
+
+  @IntPtr()
+  external int PeakUsage;
+}
+
 /// Contains information about a hardware message sent to the system message
 /// queue. This structure is used to store message information for the
 /// JournalPlaybackProc callback function.
@@ -5711,6 +5731,53 @@ class PARAMDESCEX extends Struct {
   external int cBytes;
 
   external VARIANT varDefaultValue;
+}
+
+/// Contains performance information.
+///
+/// {@category Struct}
+class PERFORMANCE_INFORMATION extends Struct {
+  @Uint32()
+  external int cb;
+
+  @IntPtr()
+  external int CommitTotal;
+
+  @IntPtr()
+  external int CommitLimit;
+
+  @IntPtr()
+  external int CommitPeak;
+
+  @IntPtr()
+  external int PhysicalTotal;
+
+  @IntPtr()
+  external int PhysicalAvailable;
+
+  @IntPtr()
+  external int SystemCache;
+
+  @IntPtr()
+  external int KernelTotal;
+
+  @IntPtr()
+  external int KernelPaged;
+
+  @IntPtr()
+  external int KernelNonpaged;
+
+  @IntPtr()
+  external int PageSize;
+
+  @Uint32()
+  external int HandleCount;
+
+  @Uint32()
+  external int ProcessCount;
+
+  @Uint32()
+  external int ThreadCount;
 }
 
 /// Contains a handle and text description corresponding to a physical

@@ -1227,6 +1227,21 @@ final _DuplicateHandle = _kernel32.lookupFunction<
         int bInheritHandle,
         int dwOptions)>('DuplicateHandle');
 
+/// Removes as many pages as possible from the working set of the specified
+/// process.
+///
+/// ```c
+/// BOOL K32EmptyWorkingSet(
+///   [in] HANDLE hProcess
+/// );
+/// ```
+/// {@category kernel32}
+int EmptyWorkingSet(int hProcess) => _K32EmptyWorkingSet(hProcess);
+
+final _K32EmptyWorkingSet = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hProcess),
+    int Function(int hProcess)>('K32EmptyWorkingSet');
+
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
 /// ```c
@@ -1242,6 +1257,45 @@ int EndUpdateResource(int hUpdate, int fDiscard) =>
 final _EndUpdateResource = _kernel32.lookupFunction<
     Int32 Function(IntPtr hUpdate, Int32 fDiscard),
     int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
+
+/// Retrieves the load address for each device driver in the system.
+///
+/// ```c
+/// BOOL K32EnumDeviceDrivers(
+///   [out] LPVOID  *lpImageBase,
+///   [in]  DWORD   cb,
+///   [out] LPDWORD lpcbNeeded
+/// );
+/// ```
+/// {@category kernel32}
+int EnumDeviceDrivers(
+        Pointer<Pointer> lpImageBase, int cb, Pointer<Uint32> lpcbNeeded) =>
+    _K32EnumDeviceDrivers(lpImageBase, cb, lpcbNeeded);
+
+final _K32EnumDeviceDrivers = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<Pointer> lpImageBase, Uint32 cb, Pointer<Uint32> lpcbNeeded),
+    int Function(Pointer<Pointer> lpImageBase, int cb,
+        Pointer<Uint32> lpcbNeeded)>('K32EnumDeviceDrivers');
+
+/// Calls the callback routine for each installed pagefile in the system.
+///
+/// ```c
+/// BOOL K32EnumPageFilesW(
+///   [out] PENUM_PAGE_FILE_CALLBACKW pCallBackRoutine,
+///   [in]  LPVOID                    pContext
+/// );
+/// ```
+/// {@category kernel32}
+int EnumPageFiles(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+        Pointer pContext) =>
+    _K32EnumPageFiles(pCallBackRoutine, pContext);
+
+final _K32EnumPageFiles = _kernel32.lookupFunction<
+    Int32 Function(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+        Pointer pContext),
+    int Function(Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+        Pointer pContext)>('K32EnumPageFilesW');
 
 /// Retrieves the process identifier for each process object in the system.
 ///
@@ -3313,6 +3367,26 @@ final _GetOverlappedResultEx = _kernel32.lookupFunction<
         Pointer<Uint32> lpNumberOfBytesTransferred,
         int dwMilliseconds,
         int bAlertable)>('GetOverlappedResultEx');
+
+/// Retrieves the performance values contained in the
+/// PERFORMANCE_INFORMATION structure.
+///
+/// ```c
+/// BOOL K32GetPerformanceInfo(
+///   [out] PPERFORMANCE_INFORMATION pPerformanceInformation,
+///   [in]  DWORD                    cb
+/// );
+/// ```
+/// {@category kernel32}
+int GetPerformanceInfo(
+        Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation, int cb) =>
+    _K32GetPerformanceInfo(pPerformanceInformation, cb);
+
+final _K32GetPerformanceInfo = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation, Uint32 cb),
+    int Function(Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
+        int cb)>('K32GetPerformanceInfo');
 
 /// Retrieves the amount of RAM that is physically installed on the
 /// computer.

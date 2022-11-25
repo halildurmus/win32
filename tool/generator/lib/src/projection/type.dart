@@ -59,7 +59,7 @@ const Map<String, TypeTuple> specialTypes = {
       TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
 };
 
-final callbackTypeMapping = loadMap('data/win32_callbacks.json');
+final callbackTypeMapping = loadMap('win32_callbacks.json');
 
 class TypeProjection {
   final TypeIdentifier typeIdentifier;

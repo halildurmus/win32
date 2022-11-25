@@ -2199,12 +2199,39 @@ void main() {
               int dwOptions)>('DuplicateHandle');
       expect(DuplicateHandle, isA<Function>());
     });
+    test('Can instantiate K32EmptyWorkingSet', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32EmptyWorkingSet = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess),
+          int Function(int hProcess)>('K32EmptyWorkingSet');
+      expect(K32EmptyWorkingSet, isA<Function>());
+    });
     test('Can instantiate EndUpdateResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EndUpdateResource = kernel32.lookupFunction<
           Int32 Function(IntPtr hUpdate, Int32 fDiscard),
           int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
       expect(EndUpdateResource, isA<Function>());
+    });
+    test('Can instantiate K32EnumDeviceDrivers', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32EnumDeviceDrivers = kernel32.lookupFunction<
+          Int32 Function(Pointer<Pointer> lpImageBase, Uint32 cb,
+              Pointer<Uint32> lpcbNeeded),
+          int Function(Pointer<Pointer> lpImageBase, int cb,
+              Pointer<Uint32> lpcbNeeded)>('K32EnumDeviceDrivers');
+      expect(K32EnumDeviceDrivers, isA<Function>());
+    });
+    test('Can instantiate K32EnumPageFiles', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32EnumPageFiles = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+              Pointer pContext),
+          int Function(
+              Pointer<NativeFunction<EnumPageFilesProc>> pCallBackRoutine,
+              Pointer pContext)>('K32EnumPageFilesW');
+      expect(K32EnumPageFiles, isA<Function>());
     });
     test('Can instantiate K32EnumProcesses', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3175,6 +3202,16 @@ void main() {
         expect(GetOverlappedResultEx, isA<Function>());
       });
     }
+    test('Can instantiate K32GetPerformanceInfo', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final K32GetPerformanceInfo = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
+              Uint32 cb),
+          int Function(Pointer<PERFORMANCE_INFORMATION> pPerformanceInformation,
+              int cb)>('K32GetPerformanceInfo');
+      expect(K32GetPerformanceInfo, isA<Function>());
+    });
     test('Can instantiate GetPhysicallyInstalledSystemMemory', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetPhysicallyInstalledSystemMemory = kernel32.lookupFunction<
