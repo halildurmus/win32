@@ -63,7 +63,7 @@ typedef LRESULT = LONG_PTR;
 typedef NTSTATUS = Int32;
 typedef PSTR = Pointer<Utf8>;
 
-// Pointer is preferred over Pointer<Void>, becaues the latter points to a Void
+// Pointer is preferred over Pointer<Void>, because the latter points to a Void
 // data type. A C void* is usually an undefined type, rather than a strong void,
 // so the general Pointer is more useful.
 typedef PVOID = Pointer;
