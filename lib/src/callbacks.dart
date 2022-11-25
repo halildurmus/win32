@@ -45,7 +45,7 @@ typedef DrawStateProc = Int32 Function(
     IntPtr hdc, IntPtr lData, IntPtr wData, Int32 cx, Int32 cy);
 
 /// Application-defined callback function used with the EnumPageFiles function.
-typedef EnumPageFilesProc = BOOL Function(Pointer pContext,
+typedef EnumPageFilesProc = BOOL Function(PVOID pContext,
     Pointer<ENUM_PAGE_FILE_INFORMATION> pPageFileInfo, LPWSTR lpFilename);
 
 /// Application-defined callback function used with the EnumChildWindows
