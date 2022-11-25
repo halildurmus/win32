@@ -2,19 +2,19 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
-Map<String, String> loadStructsFromJson(String filename) {
+Map<String, String> loadMap(String filename) {
   final load = File('lib/src/data/$filename').readAsStringSync();
   final decoded = json.decode(load) as Map<String, dynamic>;
-  final structs =
+  final items =
       SplayTreeMap<String, String>((str1, str2) => str1.compareTo(str2));
   for (final item in decoded.keys) {
-    structs[item] = decoded[item] as String;
+    items[item] = decoded[item] as String;
   }
-  return structs;
+  return items;
 }
 
-void saveStructsToJson(Map<String, String> structs, String filename) {
+void saveMap(Map<String, String> map, String filename) {
   final encoder = const JsonEncoder.withIndent('    ');
-  final file = encoder.convert(structs);
+  final file = encoder.convert(map);
   File('lib/src/data/$filename').writeAsStringSync(file);
 }

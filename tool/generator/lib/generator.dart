@@ -2,11 +2,10 @@
 /// Windows metadata.
 library generator;
 
-export 'src/inputs/enums.dart';
 export 'src/inputs/functions.dart';
 export 'src/inputs/interfaces.dart';
+export 'src/inputs/load_json.dart';
 export 'src/inputs/struct_sizes.dart';
-export 'src/inputs/structs.dart';
 
 export 'src/projection/callback.dart';
 export 'src/projection/com_class.dart';

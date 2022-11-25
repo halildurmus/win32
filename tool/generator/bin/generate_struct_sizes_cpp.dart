@@ -64,7 +64,7 @@ const footer = '''
 
 void generateStructSizeAnalyzer() {
   final buffer = StringBuffer()..write(header);
-  final structsToGenerate = loadStructsFromJson('win32_structs.json');
+  final structsToGenerate = loadMap('win32_structs.json');
 
   final structNames = structsToGenerate.keys.map(lastComponent);
   final sortedStructNames = structNames.toList()..sort();
