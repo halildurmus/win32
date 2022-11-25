@@ -2,7 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import '../projection/utils.dart';
 
-String versionSpecificImports(List<TypeDef> parentInterfaces) {
+String importHeaders(List<TypeDef> parentInterfaces) {
   final imports = <String>{
     '../callbacks.dart',
     '../combase.dart',
