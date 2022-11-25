@@ -1,9 +1,10 @@
 # Win32 API Generation
 
 The traditional (C-style) APIs exposed by this library are generated from
-metadata. This folder contains code that loads this metadata (primarily in the
-form of a JSON file) and generates a series of files representing FFI mappings
-and tests as output.
+metadata. Windows has structured metadata for APIs, which is loaded from
+package:winmd. The JSON files in this folder describe which items we're
+generating, and supplements this metadata with documentation. The generate
+package consumes this metadata and transforms it into Dart files.
 
 ## JSON Format
 

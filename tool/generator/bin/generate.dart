@@ -329,8 +329,7 @@ void generateWinRTApis() {
   }
 }
 
-void generateWinRTEnumerations() {
-  final enums = windowsRuntimeEnumsToGenerate;
+void generateWinRTEnumerations(Map<String, String> enums) {
   final namespaceGroups = groupTypesByParentNamespace(enums.keys);
 
   for (final namespaceGroup in namespaceGroups) {
@@ -367,8 +366,7 @@ void generateWinRTEnumerations() {
   }
 }
 
-void generateWinRTStructs() {
-  final structs = windowsRuntimeStructsToGenerate;
+void generateWinRTStructs(Map<String, String> structs) {
   final namespaceGroups = groupTypesByParentNamespace(structs.keys);
 
   for (final namespaceGroup in namespaceGroups) {
@@ -401,6 +399,8 @@ void main() {
   saveFunctionsToJson(functionsToGenerate);
 
   print('Generating struct_sizes.cpp...');
+  final structsToGenerate = loadMap('win32_structs.json');
+  saveMap(structsToGenerate, 'win32_structs.json');
   generateStructSizeAnalyzer();
 
   print('Generating structs...');
@@ -419,8 +419,12 @@ void main() {
   generateWinRTApis();
 
   print('Generating Windows Runtime enumerations...');
-  generateWinRTEnumerations();
+  final winrtEnumsToGenerate = loadMap('winrt_enums.json');
+  saveMap(winrtEnumsToGenerate, 'winrt_enums.json');
+  generateWinRTEnumerations(winrtEnumsToGenerate);
 
   print('Generating Windows Runtime structs...');
-  generateWinRTStructs();
+  final winrtStructsToGenerate = loadMap('winrt_structs.json');
+  saveMap(winrtStructsToGenerate, 'winrt_structs.json');
+  generateWinRTStructs(winrtStructsToGenerate);
 }

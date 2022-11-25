@@ -2,11 +2,10 @@
 /// Windows metadata.
 library generator;
 
-export 'src/inputs/enums.dart';
 export 'src/inputs/functions.dart';
 export 'src/inputs/interfaces.dart';
+export 'src/inputs/load_json.dart';
 export 'src/inputs/struct_sizes.dart';
-export 'src/inputs/structs.dart';
 
 export 'src/projection/callback.dart';
 export 'src/projection/com_class.dart';
@@ -36,5 +35,4 @@ export 'src/projection/winrt/winrt_set_property.dart';
 export 'src/shared/exclusions.dart';
 export 'src/shared/false_properties.dart';
 export 'src/shared/import_headers.dart';
-export 'src/shared/version.dart';
 export 'src/shared/win32_typemap.dart';

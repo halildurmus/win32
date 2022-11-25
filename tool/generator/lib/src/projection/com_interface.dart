@@ -200,7 +200,7 @@ class ComInterfaceProjection {
 
     return '''
       $header
-      ${versionSpecificImports(pathToSrc, importHeader, typeDef.interfaces)}
+      ${importHeaders(typeDef.interfaces)}
       $extraHeaders
       $rootHeader
       $guidConstants
