@@ -1,6 +1,9 @@
 import 'package:winmd/winmd.dart';
 
-import '../../../../generator.dart';
+import '../../type.dart';
+import '../../utils.dart';
+import '../winrt_get_property.dart';
+import '../winrt_method.dart';
 
 mixin _MapProjection on WinRTMethodProjection {
   /// The type arguments of `IMap` and `IMapView`, as represented in the
