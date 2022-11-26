@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IModalWindow = '{b4db1657-70d7-485e-8e3e-6fcb5a5c1802}';
 
+/// Exposes a method that represents a modal window.
+///
 /// {@category Interface}
 /// {@category com}
 class IModalWindow extends IUnknown {

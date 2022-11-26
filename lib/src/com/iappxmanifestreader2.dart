@@ -26,6 +26,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IAppxManifestReader2 = '{d06f67bc-b31d-4eba-a8af-638e73e77b4d}';
 
+/// Represents an object model of the package manifest that provides methods
+/// to access manifest elements and attributes.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestReader2 extends IAppxManifestReader {

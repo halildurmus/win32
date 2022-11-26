@@ -26,6 +26,11 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IFileDialog2 = '{61744fc7-85b5-4791-a9b0-272276309b13}';
 
+/// Extends the IFileDialog interface by providing methods that allow the
+/// caller to name a specific, restricted location that can be browsed in
+/// the common file dialog as well as to specify alternate text to display
+/// as a label on the Cancel button.
+///
 /// {@category Interface}
 /// {@category com}
 class IFileDialog2 extends IFileDialog {

@@ -26,6 +26,8 @@ import 'iunknown.dart';
 const IID_IAppxManifestApplicationsEnumerator =
     '{9eb8a55a-f04b-4d0d-808d-686185d4847a}';
 
+/// Enumerates the applications defined in the package manifest.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestApplicationsEnumerator extends IUnknown {

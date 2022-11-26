@@ -26,6 +26,12 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IStream = '{0000000c-0000-0000-c000-000000000046}';
 
+/// The IStream interface lets you read and write data to stream objects.
+/// Stream objects contain the data in a structured storage object, where
+/// storages provide the structure. Simple data can be written directly to a
+/// stream but, most frequently, streams are elements nested within a
+/// storage object. They are similar to standard files.
+///
 /// {@category Interface}
 /// {@category com}
 class IStream extends ISequentialStream {

@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IMMDevice = '{d666063f-1587-4e43-81f1-b948e807363f}';
 
+/// The IMMDevice interface encapsulates the generic features of a
+/// multimedia device resource.
+///
 /// {@category Interface}
 /// {@category com}
 class IMMDevice extends IUnknown {

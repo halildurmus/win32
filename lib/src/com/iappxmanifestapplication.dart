@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IAppxManifestApplication = '{5da89bf4-3773-46be-b650-7e744863b7e8}';
 
+/// Provides access to attribute values of the application.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestApplication extends IUnknown {

@@ -26,6 +26,8 @@ import 'iunknown.dart';
 const IID_IAppxManifestPackageDependency =
     '{e4946b59-733e-43f0-a724-3bde4c1285a0}';
 
+/// Describes the dependency of one package on another package.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageDependency extends IUnknown {

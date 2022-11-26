@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IBindCtx = '{0000000e-0000-0000-c000-000000000046}';
 
+/// Provides access to a bind context, which is an object that stores
+/// information about a particular moniker binding operation.
+///
 /// {@category Interface}
 /// {@category com}
 class IBindCtx extends IUnknown {

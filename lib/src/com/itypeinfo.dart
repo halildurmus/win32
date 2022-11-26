@@ -25,6 +25,11 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ITypeInfo = '{00020401-0000-0000-c000-000000000046}';
 
+/// This section describes ITypeInfo, an interface typically used for
+/// reading information about objects. For example, an object browser tool
+/// can use ITypeInfo to extract information about the characteristics and
+/// capabilities of objects from type libraries.
+///
 /// {@category Interface}
 /// {@category com}
 class ITypeInfo extends IUnknown {

@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IConnectionPoint = '{b196b286-bab4-101a-b69c-00aa00341d07}';
 
+/// Supports connection points for connectable objects.
+///
 /// {@category Interface}
 /// {@category com}
 class IConnectionPoint extends IUnknown {

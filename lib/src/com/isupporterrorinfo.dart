@@ -25,6 +25,10 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISupportErrorInfo = '{df0b3d60-548f-101b-8e65-08002b2bd119}';
 
+/// Ensures that error information can be propagated up the call chain
+/// correctly. Automation objects that use the error handling interfaces
+/// must implement ISupportErrorInfo.
+///
 /// {@category Interface}
 /// {@category com}
 class ISupportErrorInfo extends IUnknown {

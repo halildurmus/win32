@@ -26,6 +26,10 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellItem2 = '{7e9fb0d3-919f-4307-ab2e-9b1860310c93}';
 
+/// Extends [IShellItem] with methods that retrieve various property values
+/// of the item. [IShellItem] and [IShellItem2] are the preferred
+/// representations of items in any new code.
+///
 /// {@category Interface}
 /// {@category com}
 class IShellItem2 extends IShellItem {
