@@ -84,9 +84,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       $importHeader
       $rootHeader
 
-      /// {@category Class}
-      /// {@category $category}
-      ${wrapCommentText(comment)}
+      $classPreamble
       $classDeclaration
         $defaultConstructor
         $shortName.fromRawPointer(super.ptr);

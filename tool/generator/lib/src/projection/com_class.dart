@@ -36,7 +36,7 @@ class ComClassProjection extends ComInterfaceProjection {
   }
 
   @override
-  String get classType => 'Class';
+  String get classType => '';
 
   @override
   String get guidConstants => '''

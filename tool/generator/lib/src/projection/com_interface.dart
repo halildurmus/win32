@@ -196,12 +196,13 @@ class ComInterfaceProjection {
 
   String get classPreamble {
     final wrappedComment = wrapCommentText(comment);
-    final categoryComment =
-        '/// {@category $classType}\n/// {@category $category}';
+    final categoryComment = classType.isNotEmpty
+        ? '/// {@category $classType}\n/// {@category $category}'
+        : '/// {@category $category}';
 
-    return wrappedComment.isEmpty
-        ? categoryComment
-        : '$wrappedComment\n///\n$categoryComment';
+    return wrappedComment.isNotEmpty
+        ? '$wrappedComment\n///\n$categoryComment'
+        : categoryComment;
   }
 
   @override
