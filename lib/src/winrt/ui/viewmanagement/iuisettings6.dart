@@ -22,12 +22,10 @@ import '../../../winrt_helpers.dart';
 import '../../internal/hstring_array.dart';
 
 import 'uisettings.dart';
-// import 'uisettingsanimationsenabledchangedeventargs.dart';
-// import 'uisettingsmessagedurationchangedeventargs.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUISettings6 = '{AEF19BD7-FE31-5A04-ADA4-469AAEC6DFA9}';
+const IID_IUISettings6 = '{aef19bd7-fe31-5a04-ada4-469aaec6dfa9}';
 
 /// {@category Interface}
 /// {@category winrt}

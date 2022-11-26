@@ -27,7 +27,7 @@ import 'uisettings.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUISettings3 = '{03021BE4-5254-4781-8194-5168F7D06D7B}';
+const IID_IUISettings3 = '{03021be4-5254-4781-8194-5168f7d06d7b}';
 
 /// {@category Interface}
 /// {@category winrt}

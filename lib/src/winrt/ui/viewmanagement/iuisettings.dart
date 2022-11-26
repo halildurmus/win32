@@ -27,7 +27,7 @@ import '../structs.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUISettings = '{85361600-1C63-4627-BCB1-3A89E0BC9C55}';
+const IID_IUISettings = '{85361600-1c63-4627-bcb1-3a89e0bc9c55}';
 
 /// {@category Interface}
 /// {@category winrt}

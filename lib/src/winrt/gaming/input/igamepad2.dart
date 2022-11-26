@@ -26,7 +26,6 @@ import 'igamecontroller.dart';
 import 'enums.g.dart';
 import 'structs.g.dart';
 import 'headset.dart';
-import '../../system/userchangedeventargs.dart';
 import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 

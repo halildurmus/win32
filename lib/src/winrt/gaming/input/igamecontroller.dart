@@ -22,7 +22,6 @@ import '../../../winrt_helpers.dart';
 import '../../internal/hstring_array.dart';
 
 import 'headset.dart';
-import '../../system/userchangedeventargs.dart';
 import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
