@@ -74,7 +74,8 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.UI.Notifications.ToastNotification',
 };
 
-/// WinRT interfaces to exclude when generating interfaces' inherited interfaces.
+/// WinRT interfaces to exclude when generating interfaces' inherited
+/// interfaces.
 const excludedWindowsRuntimeInterfacesInInherits = <String>{
   // INumberFormatter2's methods conflict with INumberFormatter's methods
   'Windows.Globalization.NumberFormatting.INumberFormatter2',

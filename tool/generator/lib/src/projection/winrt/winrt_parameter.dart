@@ -43,7 +43,8 @@ class WinRTParameterProjection extends ParameterProjection {
 
   bool get isUri => type.typeIdentifier.name == 'Windows.Foundation.Uri';
 
-  /// Whether the method belongs to `IUriRuntimeClass` or `IUriRuntimeClassFactory`.
+  /// Whether the method belongs to `IUriRuntimeClass` or
+  /// `IUriRuntimeClassFactory`.
   ///
   /// Used to determine whether the parameter should be exposed as WinRT `Uri`
   /// or dart:core's `Uri`.
@@ -65,17 +66,17 @@ class WinRTParameterProjection extends ParameterProjection {
 
     if (isGuid) return 'final ${name}NativeGuidPtr = $name.toNativeGUID();';
 
-    // Nullable parameters must be passed to WinRT APIs as 'IReference' interfaces
-    // by calling the 'boxValue' function with the 'convertToIReference' flag
-    // set to true
+    // Nullable parameters must be passed to WinRT APIs as 'IReference'
+    // interfaces by calling the 'boxValue' function with the
+    // 'convertToIReference' flag set to true
     if (isReference) {
       final typeProjection = TypeProjection(type.typeIdentifier.typeArg!);
       final args = <String>['convertToIReference: true'];
 
       // If the nullable parameter is an enum, a double or an int, it's native
-      // type (e.g. Double, Float, Int32, Uint32) must be passed in the `nativeType`
-      // parameter so that the 'boxValue' function can use the appropriate
-      // native type for the parameter
+      // type (e.g. Double, Float, Int32, Uint32) must be passed in the
+      // `nativeType` parameter so that the 'boxValue' function can use the
+      // appropriate native type for the parameter
       if (typeProjection.isWinRTEnum ||
           ['double', 'int'].contains(typeProjection.methodParamType)) {
         args.add('nativeType: ${typeProjection.nativeType}');

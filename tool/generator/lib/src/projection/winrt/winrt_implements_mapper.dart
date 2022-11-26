@@ -62,9 +62,11 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   String? get iterableIidArgument {
     if (!isGenericInterface) return null;
     if (['IMap', 'IMapView'].contains(shortInterfaceName)) {
-      return "iterableIid: '${iterableIidFromMapTypeIdentifier(interface.typeSpec!)}'";
+      return "iterableIid: "
+          "'${iterableIidFromMapTypeIdentifier(interface.typeSpec!)}'";
     } else if (['IVector', 'IVectorView'].contains(shortInterfaceName)) {
-      return "iterableIid: '${iterableIidFromVectorTypeIdentifier(interface.typeSpec!)}'";
+      return "iterableIid: "
+          "'${iterableIidFromVectorTypeIdentifier(interface.typeSpec!)}'";
     }
     return null;
   }
@@ -72,7 +74,8 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   String get interfaceInstantiation {
     if (!isGenericInterface) return '$shortInterfaceName.from(this);';
     final iid = "'${iidFromTypeDef(interface)}'";
-    return '$interfaceNameWithTypeArgs.fromRawPointer(toInterface($iid)$constructorArgs);';
+    return '$interfaceNameWithTypeArgs'
+        '.fromRawPointer(toInterface($iid)$constructorArgs);';
   }
 
   @override
@@ -124,11 +127,11 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
 
     for (final methodProjection in methodProjections) {
       if (['IMap', 'IMapView'].contains(shortInterfaceName)) {
-        // Use custom mapper for 'Insert' to make its 'value' parameter nullable.
+        // Use custom mapper for Insert to make its value parameter nullable
         if (methodProjection.name == 'Insert') {
-          // To insert null values in JsonObject, 'JsonValue.createNullValue()'
-          // needs to be used. 'jsonObjectInsertMapper()' passes
-          // 'JsonValue.createNullValue()' if the 'value' argument is null.
+          // To insert null values in JsonObject, JsonValue.createNullValue()
+          // needs to be used. jsonObjectInsertMapper() passes
+          // JsonValue.createNullValue() if the value argument is null.
           if (shortName == 'JsonObject') {
             methods.add(jsonObjectInsertMapper());
             continue;
@@ -138,7 +141,7 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
           continue;
         }
 
-        // Use custom mapper for 'Lookup' to make its return type nullable.
+        // Use custom mapper for Lookup to make its return type nullable.
         if (methodProjection.name == 'Lookup') {
           methods.add(mapLookupMapper(methodProjection.shortForm));
           continue;
@@ -146,14 +149,14 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
       }
 
       if (['IVector', 'IVectorView'].contains(shortInterfaceName)) {
-        // Use custom mapper for 'GetMany' to change the type of the 'value'
+        // Use custom mapper for GetMany to change the type of the value
         // parameter to Pointer<NativeType>.
         if (methodProjection.name == 'GetMany') {
           methods.add(vectorGetManyMapper(methodProjection.shortForm));
           continue;
         }
 
-        // Use custom mapper for 'ReplaceAll' to change the type of the 'value'
+        // Use custom mapper for ReplaceAll to change the type of the value
         // parameter to List<...>.
         if (methodProjection.name == 'ReplaceAll') {
           methods.add(vectorReplaceAllMapper());
@@ -185,7 +188,6 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   }
 
   // Custom implements mapper declarations
-
   String jsonObjectInsertMapper() {
     final keyType = typeArgs.split(', ')[0];
     final valueType = typeArgs.split(', ')[1];
@@ -214,9 +216,10 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
 ''';
   }
 
-  // Pointer<NativeType> is used as the 'value' parameter's type as the getMany
-  // function in IVector and IVectorView implementations also use it this way
-  // in order to handle various types such as Pointer<Int32> and Pointer<COMObject>.
+  // Pointer<NativeType> is used as the value parameter's type as the getMany
+  // function in IVector and IVectorView implementations also use it this way in
+  // order to handle various types such as Pointer<Int32> and
+  // Pointer<COMObject>.
   String vectorGetManyMapper(String methodShortForm) => '''
   @override
   int getMany(int startIndex, int valueSize, Pointer<NativeType> value) =>
