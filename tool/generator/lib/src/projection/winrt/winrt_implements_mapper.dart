@@ -5,7 +5,7 @@ import '../../../generator.dart';
 class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   WinRTImplementsMapperProjection(super.typeDef, this.interface);
 
-  /// The interface that implements mappers are generated.
+  /// The interface that implements mappers are generated from.
   final TypeDef interface;
 
   /// Whether the [interface] is a generic interface.
