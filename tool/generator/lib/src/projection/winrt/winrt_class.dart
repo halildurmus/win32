@@ -1,8 +1,8 @@
-import 'package:winmd/winmd.dart';
-
 import '../../shared/exclusions.dart';
 import '../utils.dart';
+import 'winrt_factory_interface_mapper.dart';
 import 'winrt_interface.dart';
+import 'winrt_static_interface_mapper.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef);
@@ -43,34 +43,16 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       .toList()
     ..sort();
 
-  String get factoryMappers {
-    final buffer = StringBuffer();
+  List<WinRTFactoryInterfaceMapperProjection>? _factoryMappers;
 
-    for (final factoryInterface in factoryInterfaces) {
-      final interfaceName = lastComponent(factoryInterface);
-      buffer.writeln('  // $interfaceName methods');
-      final factoryTypeDef = MetadataStore.getMetadataForType(factoryInterface);
-      if (factoryTypeDef == null) {
-        throw Exception('Factory typedef $factoryInterface missing.');
-      }
+  List<WinRTFactoryInterfaceMapperProjection> get factoryMappers =>
+      _factoryMappers ??= _cacheFactoryMappers();
 
-      final interfaceProjection = WinRTInterfaceProjection(factoryTypeDef);
-      for (final method in interfaceProjection.methodProjections) {
-        buffer.writeln('''
-          static $shortName ${method.camelCasedName}(${method.methodParams}) {
-            final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
-
-            try {
-              return $interfaceName.fromRawPointer(activationFactory).${method.shortForm};
-            } finally {
-              free(activationFactory);
-            }
-          }
-        ''');
-      }
-    }
-    return buffer.toString();
-  }
+  List<WinRTFactoryInterfaceMapperProjection> _cacheFactoryMappers() =>
+      factoryInterfaces
+          .map((interface) =>
+              WinRTFactoryInterfaceMapperProjection(typeDef, interface))
+          .toList();
 
   List<String> get staticInterfaces => typeDef.customAttributes
       .where((element) => element.name.endsWith('StaticAttribute'))
@@ -80,40 +62,16 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
     ..removeWhere(excludedWindowsRuntimeStaticInterfaces.contains)
     ..sort();
 
-  String get staticMappers {
-    final buffer = StringBuffer();
+  List<WinRTStaticInterfaceMapperProjection>? _staticMappers;
 
-    for (final staticInterface in staticInterfaces) {
-      final interfaceName = lastComponent(staticInterface);
-      buffer.writeln('  // $interfaceName methods');
-      final staticTypeDef = MetadataStore.getMetadataForType(staticInterface);
-      if (staticTypeDef == null) {
-        throw Exception('Static typedef $staticInterface missing.');
-      }
+  List<WinRTStaticInterfaceMapperProjection> get staticMappers =>
+      _staticMappers ??= _cacheStaticMappers();
 
-      final interfaceProjection = WinRTInterfaceProjection(staticTypeDef);
-      for (final methodProjection in interfaceProjection.methodProjections) {
-        final declaration = methodProjection.shortDeclaration;
-        final statement =
-            '$interfaceName.fromRawPointer(activationFactory).${methodProjection.shortForm};';
-        final returnStatement = methodProjection.method.isSetProperty
-            ? statement
-            : 'return $statement';
-        buffer.writeln('''
-          static $declaration {
-            final activationFactory = CreateActivationFactory(_className, IID_$interfaceName);
-
-            try {
-              $returnStatement
-            } finally {
-              free(activationFactory);
-            }
-          }
-        ''');
-      }
-    }
-    return buffer.toString();
-  }
+  List<WinRTStaticInterfaceMapperProjection> _cacheStaticMappers() =>
+      staticInterfaces
+          .map((interface) =>
+              WinRTStaticInterfaceMapperProjection(typeDef, interface))
+          .toList();
 
   @override
   String toString() {
@@ -131,10 +89,10 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
         $classNameDeclaration
 
-        $factoryMappers
-        $staticMappers
-        $implementsMappers
+        ${factoryMappers.join('\n')}
+        ${staticMappers.join('\n')}
+        ${implementsMappers.join('\n')}
       }
-    ''';
+''';
   }
 }
