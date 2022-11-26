@@ -5,7 +5,7 @@ import 'winrt_interface.dart';
 import 'winrt_static_interface_mapper.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
-  WinRTClassProjection(super.typeDef);
+  WinRTClassProjection(super.typeDef, [super.docComment]);
 
   @override
   Set<String> get coreImports => {

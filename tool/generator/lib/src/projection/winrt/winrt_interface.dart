@@ -10,7 +10,7 @@ import 'winrt_method.dart';
 import 'winrt_set_property.dart';
 
 class WinRTInterfaceProjection extends ComInterfaceProjection {
-  WinRTInterfaceProjection(super.typeDef);
+  WinRTInterfaceProjection(super.typeDef, [super.docComment]);
 
   @override
   String get inheritsFrom => implementsInterfaces

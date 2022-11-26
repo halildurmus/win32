@@ -266,25 +266,25 @@ void generateComApis() {
 }
 
 void generateWinRTApis(Map<String, String> winrtTypesToGenerate) {
-  final mainWindowsRuntimeTypesToGenerate = winrtTypesToGenerate
+  final typesWithoutExclusions = winrtTypesToGenerate
     ..removeWhere((key, value) => excludedWindowsRuntimeTypes.contains(key));
-  final typesToGenerate = <String>{};
+  final typesAndDependencies = <String>{};
 
-  for (final type in mainWindowsRuntimeTypesToGenerate.keys) {
+  for (final type in typesWithoutExclusions.keys) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
-        ? WinRTInterfaceProjection(typeDef)
-        : WinRTClassProjection(typeDef);
+        ? WinRTInterfaceProjection(typeDef, typesWithoutExclusions[type])
+        : WinRTClassProjection(typeDef, typesWithoutExclusions[type]);
 
     // The main type e.g. 'Windows.Globalization.Calendar'
-    typesToGenerate.add(type);
+    typesAndDependencies.add(type);
 
     // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
     final implementsInterfaces = [
       ...projection.typeDef.interfaces.map((interface) => interface.name)
     ];
-    typesToGenerate.addAll(implementsInterfaces);
+    typesAndDependencies.addAll(implementsInterfaces);
 
     // The type's factory and static interfaces e.g.
     // 'Windows.Globalization.ICalendarFactory'
@@ -293,17 +293,17 @@ void generateWinRTApis(Map<String, String> winrtTypesToGenerate) {
         ...projection.factoryInterfaces,
         ...projection.staticInterfaces
       ];
-      typesToGenerate.addAll(factoryAndStaticInterfaces);
+      typesAndDependencies.addAll(factoryAndStaticInterfaces);
     }
   }
 
-  typesToGenerate
+  typesAndDependencies
     // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
     ..removeWhere((type) => type.isEmpty)
     // Remove excluded WinRT types
     ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
 
-  for (final type in typesToGenerate) {
+  for (final type in typesAndDependencies) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
