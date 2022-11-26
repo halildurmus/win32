@@ -68,6 +68,7 @@ const excludedWindowsRuntimeTypes = <String>{
 
   //   Requires WinRT event support
   'Windows.Networking.Connectivity.INetworkInformationStatics',
+  'Windows.UI.ViewManagement.UISettings',
 
   //   Requires XmlDocument support
   'Windows.UI.Notifications.IToastNotificationManagerStatics',

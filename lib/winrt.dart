@@ -134,6 +134,8 @@ export 'src/winrt/storage/pickers/ifileopenpicker.dart';
 export 'src/winrt/ui/notifications/itoastnotificationfactory.dart';
 export 'src/winrt/ui/notifications/itoastnotificationmanagerstatics.dart';
 export 'src/winrt/ui/notifications/toastnotification.dart';
+export 'src/winrt/ui/viewmanagement/iuisettings.dart';
+export 'src/winrt/ui/viewmanagement/uisettings.dart';
 
 // Windows Runtime enumerations
 export 'src/winrt/data/json/enums.g.dart';
@@ -150,8 +152,10 @@ export 'src/winrt/storage/pickers/enums.g.dart';
 export 'src/winrt/system/power/enums.g.dart';
 export 'src/winrt/ui/notifications/enums.g.dart';
 export 'src/winrt/ui/popups/enums.g.dart';
+export 'src/winrt/ui/viewmanagement/enums.g.dart';
 
 // Windows Runtime structs
 export 'src/winrt/foundation/structs.g.dart';
 export 'src/winrt/foundation/numerics/structs.g.dart';
 export 'src/winrt/gaming/input/structs.g.dart';
+export 'src/winrt/ui/structs.g.dart';
