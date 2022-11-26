@@ -26,6 +26,10 @@ import '../../foundation/collections/ivector.dart';
 import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents the filter used to determine which devices to show in the
+/// device picker. The filter parameters are OR-ed together to build the
+/// resulting filter.
+///
 /// {@category Class}
 /// {@category winrt}
 class DevicePickerFilter extends IInspectable implements IDevicePickerFilter {

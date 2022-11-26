@@ -36,6 +36,8 @@ import '../../devices/power/batteryreport.dart';
 import '../../foundation/collections/ivectorview.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a gamepad.
+///
 /// {@category Class}
 /// {@category winrt}
 class Gamepad extends IInspectable

@@ -24,6 +24,8 @@ import '../internal/hstring_array.dart';
 import 'iwwwformurldecoderentry.dart';
 import '../../com/iinspectable.dart';
 
+/// Represents a name-value pair in a URL query string.
+///
 /// {@category Class}
 /// {@category winrt}
 class WwwFormUrlDecoderEntry extends IInspectable

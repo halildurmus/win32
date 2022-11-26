@@ -27,6 +27,9 @@ import 'structs.g.dart';
 import 'ipropertyvalue.dart';
 import '../../com/iinspectable.dart';
 
+/// Represents a value in a property store (such as a [PropertySet]
+/// instance).
+///
 /// {@category Class}
 /// {@category winrt}
 class PropertyValue extends IInspectable {

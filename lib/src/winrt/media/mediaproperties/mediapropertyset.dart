@@ -29,6 +29,8 @@ import '../../foundation/collections/imapview.dart';
 import '../../foundation/collections/iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a set of media properties.
+///
 /// {@category Class}
 /// {@category winrt}
 class MediaPropertySet extends IInspectable

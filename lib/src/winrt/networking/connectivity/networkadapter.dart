@@ -28,6 +28,8 @@ import '../../foundation/iasyncoperation.dart';
 import 'connectionprofile.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a network adapter.
+///
 /// {@category Class}
 /// {@category winrt}
 class NetworkAdapter extends IInspectable implements INetworkAdapter {

@@ -27,6 +27,8 @@ import 'phonenumberinfo.dart';
 import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
+/// Formats phone numbers.
+///
 /// {@category Class}
 /// {@category winrt}
 class PhoneNumberFormatter extends IInspectable

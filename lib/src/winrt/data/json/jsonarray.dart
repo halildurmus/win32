@@ -33,6 +33,8 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../foundation/collections/iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a JSON array.
+///
 /// {@category Class}
 /// {@category winrt}
 class JsonArray extends IInspectable

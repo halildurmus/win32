@@ -26,6 +26,8 @@ import 'igamecontrollerbatteryinfo.dart';
 import '../../devices/power/batteryreport.dart';
 import '../../../com/iinspectable.dart';
 
+/// Contains information about an audio headset attached to a gamepad.
+///
 /// {@category Class}
 /// {@category winrt}
 class Headset extends IInspectable

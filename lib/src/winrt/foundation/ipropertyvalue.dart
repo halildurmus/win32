@@ -29,6 +29,8 @@ import '../../com/iinspectable.dart';
 /// @nodoc
 const IID_IPropertyValue = '{4bd682dd-7554-40e9-9a9b-82654ede7e62}';
 
+/// Represents a value in a property store.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IPropertyValue extends IInspectable {
