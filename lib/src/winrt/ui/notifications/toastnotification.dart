@@ -30,8 +30,6 @@ import 'itoastnotification6.dart';
 import 'itoastnotificationfactory.dart';
 import '../../data/xml/dom/xmldocument.dart';
 import '../../foundation/ireference.dart';
-import 'toastdismissedeventargs.dart';
-import 'toastfailedeventargs.dart';
 import 'enums.g.dart';
 import 'notificationdata.dart';
 import '../../../com/iinspectable.dart';

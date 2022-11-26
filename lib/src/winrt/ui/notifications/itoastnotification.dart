@@ -25,8 +25,6 @@ import '../../internal/hstring_array.dart';
 import '../../data/xml/dom/xmldocument.dart';
 import '../../foundation/ireference.dart';
 import 'toastnotification.dart';
-import 'toastdismissedeventargs.dart';
-import 'toastfailedeventargs.dart';
 import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 

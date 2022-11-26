@@ -16,8 +16,11 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
         ...staticInterfaces.map(
             (interface) => '${lastComponent(interface).toLowerCase()}.dart'),
         ...importsForClass()
-      }..removeWhere(
-          (import) => import == 'iinspectable.dart' || import.isEmpty);
+      }
+        // TODO: Remove this once WinRT events are supported.
+        ..removeWhere((import) => import.endsWith('eventargs.dart'))
+        ..removeWhere(
+            (import) => import == 'iinspectable.dart' || import.isEmpty);
 
   bool get hasDefaultConstructor => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))

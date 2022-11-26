@@ -714,8 +714,9 @@ void main() {
     expect(projection.importHeader, contains("import 'headset.dart'"));
     expect(
         projection.importHeader, contains("import '../../system/user.dart'"));
-    expect(projection.importHeader,
-        contains("import '../../system/userchangedeventargs.dart'"));
+    // TODO: Uncomment this once WinRT events are supported.
+    // expect(projection.importHeader,
+    //     contains("import '../../system/userchangedeventargs.dart'"));
   });
 
   if (windowsBuildNumber >= 18362) {

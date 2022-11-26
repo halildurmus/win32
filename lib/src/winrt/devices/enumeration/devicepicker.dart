@@ -26,8 +26,6 @@ import '../../../winrt/devices/enumeration/idevicepicker.dart';
 import '../../../winrt/devices/enumeration/devicepickerfilter.dart';
 // import '../../../winrt/devices/enumeration/devicepickerappearance.dart';
 import '../../../winrt/foundation/collections/ivector.dart';
-// import '../../../winrt/devices/enumeration/deviceselectedeventargs.dart';
-// import '../../../winrt/devices/enumeration/devicedisconnectbuttonclickedeventargs.dart';
 import '../../../winrt/foundation/structs.g.dart';
 import '../../../winrt/ui/popups/enums.g.dart';
 import '../../../winrt/foundation/iasyncoperation.dart';

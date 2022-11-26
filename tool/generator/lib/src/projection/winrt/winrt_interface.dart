@@ -114,6 +114,8 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   Set<String> get coreImports => {...interfaceImport, ...importsForClass()}
+    // TODO: Remove this once WinRT events are supported.
+    ..removeWhere((import) => import.endsWith('eventargs.dart'))
     ..removeWhere((import) => import == 'iinspectable.dart' || import.isEmpty);
 
   @override

@@ -30,11 +30,10 @@ import 'iuisettings6.dart';
 import 'enums.g.dart';
 import '../../foundation/structs.g.dart';
 import '../structs.g.dart';
-// import 'uisettingsautohidescrollbarschangedeventargs.dart';
-// import 'uisettingsanimationsenabledchangedeventargs.dart';
-// import 'uisettingsmessagedurationchangedeventargs.dart';
 import '../../../com/iinspectable.dart';
 
+/// Contains a set of common app user interface settings and operations.
+///
 /// {@category Class}
 /// {@category winrt}
 class UISettings extends IInspectable

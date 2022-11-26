@@ -22,11 +22,10 @@ import '../../../winrt_helpers.dart';
 import '../../internal/hstring_array.dart';
 
 import 'uisettings.dart';
-// import 'uisettingsautohidescrollbarschangedeventargs.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
-const IID_IUISettings5 = '{5349D588-0CB5-5F05-BD34-706B3231F0BD}';
+const IID_IUISettings5 = '{5349d588-0cb5-5f05-bd34-706b3231f0bd}';
 
 /// {@category Interface}
 /// {@category winrt}

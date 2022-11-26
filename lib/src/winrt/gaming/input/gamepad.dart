@@ -29,7 +29,6 @@ import 'igamepadstatics.dart';
 import 'igamepadstatics2.dart';
 import 'structs.g.dart';
 import 'headset.dart';
-import '../../system/userchangedeventargs.dart';
 import '../../system/user.dart';
 import 'enums.g.dart';
 import '../../devices/power/batteryreport.dart';
