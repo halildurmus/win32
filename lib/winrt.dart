@@ -99,6 +99,7 @@ export 'src/winrt/foundation/collections/iiterator.dart';
 export 'src/winrt/foundation/collections/ikeyvaluepair.dart';
 export 'src/winrt/foundation/collections/imap.dart';
 export 'src/winrt/foundation/collections/imapview.dart';
+export 'src/winrt/foundation/collections/ipropertyset.dart';
 export 'src/winrt/foundation/collections/ivector.dart';
 export 'src/winrt/foundation/collections/ivectorview.dart';
 export 'src/winrt/foundation/collections/propertyset.dart';

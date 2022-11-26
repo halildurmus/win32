@@ -39,7 +39,7 @@ const excludedComInterfaces = <String>{
 };
 
 const excludedWindowsRuntimeTypes = <String>{
-  ...excludedWindowsRuntimeInterfaces,
+  ...excludedWindowsRuntimeInterfacesInInherits,
   ...excludedWindowsRuntimeStaticInterfaces,
 
   // These types are generated manually by design
@@ -48,6 +48,7 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Foundation.Collections.IKeyValuePair`2',
   'Windows.Foundation.Collections.IMap`2',
   'Windows.Foundation.Collections.IMapView`2',
+  'Windows.Foundation.Collections.IObservableMap`2',
   'Windows.Foundation.Collections.IVector`1',
   'Windows.Foundation.Collections.IVectorView`1',
 
@@ -55,16 +56,10 @@ const excludedWindowsRuntimeTypes = <String>{
   // generate them automatically after making appropriate changes to the
   // generation script:
 
-  //   Depends on https://github.com/timsneath/win32/issues/480
-  'Windows.Data.Json.JsonArray',
-  'Windows.Data.Json.JsonObject',
+  // TODO(halildurmus): Remove this from excludes once we have a use for it.
+  //   DevicePicker has too many dependencies. Do not generate it for the time
+  //   being as it is only used for testing purposes anyway.
   'Windows.Devices.Enumeration.DevicePicker',
-  'Windows.Devices.Enumeration.DevicePickerFilter',
-  'Windows.Foundation.Collections.PropertySet',
-  'Windows.Foundation.Collections.StringMap',
-  'Windows.Foundation.Collections.ValueSet',
-  'Windows.Foundation.WwwFormUrlDecoder',
-  'Windows.Media.MediaProperties.MediaPropertySet',
 
   //   Requires WinRT delegate support
   'Windows.Foundation.IAsyncAction',
@@ -79,8 +74,9 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.UI.Notifications.ToastNotification',
 };
 
-/// WinRT interfaces to exclude when generating the implements mappers.
-const excludedWindowsRuntimeInterfaces = <String>{
+/// WinRT interfaces to exclude when generating interfaces' inherited
+/// interfaces.
+const excludedWindowsRuntimeInterfacesInInherits = <String>{
   // INumberFormatter2's methods conflict with INumberFormatter's methods
   'Windows.Globalization.NumberFormatting.INumberFormatter2',
   // Contains deprecated APIs
@@ -94,6 +90,14 @@ const excludedWindowsRuntimeInterfaces = <String>{
 const excludedWindowsRuntimeStaticInterfaces = <String>{
   // Contains deprecated APIs
   'Windows.Storage.Pickers.IFileOpenPickerStatics',
+};
+
+/// WinRT interfaces to exclude when generating interfaces' implements mappers.
+const excludedWindowsRuntimeInterfacesInImplementsMappers = <String>{
+  // The WinRT interfaces that inherit IIterable also inherit from IMap,
+  // IMapView, IVector, or IVectorView. As we generate implements mappers for
+  // IIterable on these interfaces, we need to exclude this one.
+  'Windows.Foundation.Collections.IIterable`1',
 };
 
 const excludedTypes = <String>[

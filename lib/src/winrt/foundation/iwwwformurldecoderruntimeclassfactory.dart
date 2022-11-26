@@ -10,18 +10,18 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../combase.dart';
 import '../../exceptions.dart';
 import '../../macros.dart';
 import '../../utils.dart';
 import '../../types.dart';
+import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
-import '../../winrt/foundation/wwwformurldecoder.dart';
+import 'wwwformurldecoder.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
@@ -52,8 +52,10 @@ class IWwwFormUrlDecoderRuntimeClassFactory extends IInspectable {
             .asFunction<int Function(Pointer, int query, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, queryHstring, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
-
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
     WindowsDeleteString(queryHstring);
     return WwwFormUrlDecoder.fromRawPointer(retValuePtr);
   }

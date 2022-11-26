@@ -97,6 +97,7 @@ class FileOpenPicker extends IInspectable
   @override
   Pointer<COMObject> pickMultipleFilesAsync() =>
       _iFileOpenPicker.pickMultipleFilesAsync();
+
   // IFileOpenPicker3 methods
   late final _iFileOpenPicker3 = IFileOpenPicker3.from(this);
 

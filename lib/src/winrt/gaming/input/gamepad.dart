@@ -132,6 +132,7 @@ class Gamepad extends IInspectable
 
   @override
   GamepadReading getCurrentReading() => _iGamepad.getCurrentReading();
+
   // IGameController methods
   late final _iGameController = IGameController.from(this);
 
@@ -168,12 +169,14 @@ class Gamepad extends IInspectable
 
   @override
   User get user => _iGameController.user;
+
   // IGamepad2 methods
   late final _iGamepad2 = IGamepad2.from(this);
 
   @override
   GameControllerButtonLabel getButtonLabel(GamepadButtons button) =>
       _iGamepad2.getButtonLabel(button);
+
   // IGameControllerBatteryInfo methods
   late final _iGameControllerBatteryInfo =
       IGameControllerBatteryInfo.from(this);

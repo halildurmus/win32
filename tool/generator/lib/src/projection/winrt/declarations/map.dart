@@ -1,4 +1,3 @@
-import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
 import '../../../../generator.dart';
@@ -24,14 +23,8 @@ mixin _MapProjection on WinRTMethodProjection {
     // The IID for IIterable<IKeyValuePair<K, V>> must be passed in the
     // 'iterableIid' parameter so that the 'IMap' and 'IMapView' implementations
     // can use the correct IID when instantiating the IIterable object
-    // To learn more about how the IID is calculated, please see https://learn.microsoft.com/en-us/uwp/winrt-cref/winrt-type-system#guid-generation-for-parameterized-types
-    final kvpKeyArgSig =
-        parseTypeIdentifierSignature(returnType.typeIdentifier.typeArg!);
-    final kvpValueArgSig = parseTypeIdentifierSignature(
-        returnType.typeIdentifier.typeArg!.typeArg!);
-    final iterableSignature =
-        'pinterface($IID_IIterable;pinterface($IID_IKeyValuePair;$kvpKeyArgSig;$kvpValueArgSig))';
-    final iterableIid = iidFromSignature(iterableSignature);
+    final iterableIid =
+        iterableIidFromMapTypeIdentifier(returnType.typeIdentifier);
 
     final args = <String>["iterableIid: '$iterableIid'"];
     if (typeProjection.isWinRTEnum) {

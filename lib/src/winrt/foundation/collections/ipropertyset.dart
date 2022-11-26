@@ -1,4 +1,4 @@
-// valueset.dart
+// ipropertyset.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -21,28 +21,28 @@ import '../../../winrt_helpers.dart';
 
 import '../../internal/hstring_array.dart';
 
-import 'ipropertyset.dart';
 import 'iobservablemap.dart';
 import 'imap.dart';
 import 'iiterable.dart';
 import 'ikeyvaluepair.dart';
-import 'imapview.dart';
 import 'iiterator.dart';
 import '../../../com/iinspectable.dart';
 
-/// {@category Class}
+/// @nodoc
+const IID_IPropertySet = '{8a43ed9f-f4e6-4421-acf9-1dab2986820c}';
+
+/// {@category Interface}
 /// {@category winrt}
-class ValueSet extends IInspectable
+class IPropertySet extends IInspectable
     implements
-        IPropertySet,
         IObservableMap<String, Object?>,
         IMap<String, Object?>,
         IIterable<IKeyValuePair<String, Object?>> {
-  ValueSet({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
-  ValueSet.fromRawPointer(super.ptr);
+  // vtable begins at 6, is 0 entries long.
+  IPropertySet.fromRawPointer(super.ptr);
 
-  static const _className = 'Windows.Foundation.Collections.ValueSet';
+  factory IPropertySet.from(IInspectable interface) =>
+      IPropertySet.fromRawPointer(interface.toInterface(IID_IPropertySet));
 
   // IObservableMap<String, Object?> methods
   late final _iObservableMap = IObservableMap<String, Object?>.fromRawPointer(

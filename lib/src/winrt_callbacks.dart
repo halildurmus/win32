@@ -16,5 +16,7 @@ typedef AsyncActionCompletedHandler = Void Function(
     Pointer<COMObject> asyncInfo, Int32 asyncStatus);
 typedef EventHandler = Void Function(
     Pointer<COMObject> sender, Pointer<COMObject> args);
+typedef MapChangedEventHandler = Void Function(
+    Pointer<COMObject> sender, Pointer<COMObject> args);
 typedef TypedEventHandler = Void Function(
     Pointer<COMObject> sender, Pointer<COMObject> args);

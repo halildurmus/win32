@@ -133,6 +133,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
 
   @override
   JsonObject getObject() => _iJsonValue.getObject();
+
   // IStringable methods
   late final _iStringable = IStringable.from(this);
 

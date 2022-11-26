@@ -76,6 +76,7 @@ class IGamepad2 extends IInspectable implements IGamepad, IGameController {
 
   @override
   GamepadReading getCurrentReading() => _iGamepad.getCurrentReading();
+
   // IGameController methods
   late final _iGameController = IGameController.from(this);
 

@@ -111,7 +111,8 @@ class WinRTMethodProjection extends MethodProjection {
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IVectorView`1') ?? false);
 
-  /// Whether the method belongs to `IUriRuntimeClass` or `IUriRuntimeClassFactory`.
+  /// Whether the method belongs to `IUriRuntimeClass` or
+  /// `IUriRuntimeClassFactory`.
   ///
   /// Used to determine whether the method should be exposed as WinRT `Uri` or
   /// dart:core's `Uri`.

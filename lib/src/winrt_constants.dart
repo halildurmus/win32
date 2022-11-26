@@ -893,6 +893,7 @@ const IID_IIterable_float = '{b01bee51-063a-5fda-bd72-d76637bb8cb8}';
 const IID_IIterable_int = '{81a643fb-f51c-5565-83c4-f96425777b66}';
 const IID_IIterable_short = '{72ff2923-4b4e-53bb-8feb-41ec5f2bb734}';
 
+// IKeyValuePair<K, V> IIDs
 const IID_IKeyValuePair = '{02b51929-c1c4-4a7e-8940-0312b5c18500}';
 
 // IMap<K, V> IIDs
@@ -903,7 +904,27 @@ const IID_IMap_String_String = '{f6d1f700-49c2-52ae-8154-826f9908773c}';
 const IID_IMap_String_Object = '{1b0d3570-0877-5ec2-8a2c-3b9539506aca}';
 const IID_IMap_String_IJsonValue = '{c9d9a725-786b-5113-b4b7-9b61764c220b}';
 
+// IMapView<K, V> IIDs
 const IID_IMapView = '{e480ce40-a338-4ada-adcf-272272e48cb9}';
+
+// IObservableMap<K, V> IIDs
+const IID_IObservableMap_String_String =
+    '{1e036276-2f60-55f6-b7f3-f86079e6900b}';
+const IID_IObservableMap_String_Object =
+    '{236aac9d-fb12-5c4d-a41c-9e445fb4d7ec}';
+
+// IObservableVector<T> IIDs
+const IID_IObservableVector_SearchSuggestion =
+    '{e885956c-72c1-514f-ad9a-2943b880ae13}';
+const IID_IObservableVector_TimedMetadataTrack =
+    '{98ebeba8-6659-5af2-be4f-32fdeede3b77}';
+const IID_IObservableVector_TimedTextSource =
+    '{95e6c852-6e9c-50a9-8935-054320242945}';
+const IID_IObservableVector_MediaPlaybackItem =
+    '{fabf4843-39eb-5c3d-a12b-fca189b46e8e}';
+const IID_IObservableVector_StorageFolder =
+    '{358f44df-2a45-5cb8-9385-1ff66808cde0}';
+const IID_IObservableVector_Object = '{7b81c56a-0985-518d-baa9-0da9ae009f65}';
 
 // IReference<T> IIDs
 const IID_IReference = '{61c17706-2d65-11e0-9ae8-d48564015472}';

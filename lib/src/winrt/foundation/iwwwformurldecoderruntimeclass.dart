@@ -10,17 +10,21 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../combase.dart';
 import '../../exceptions.dart';
 import '../../macros.dart';
 import '../../utils.dart';
 import '../../types.dart';
+import '../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 
-import '../../winrt/internal/hstring_array.dart';
+import '../internal/hstring_array.dart';
 
+import 'collections/iiterable.dart';
+import 'iwwwformurldecoderentry.dart';
+import 'collections/ivectorview.dart';
+import 'collections/iiterator.dart';
 import '../../com/iinspectable.dart';
 
 /// @nodoc
@@ -29,7 +33,10 @@ const IID_IWwwFormUrlDecoderRuntimeClass =
 
 /// {@category Interface}
 /// {@category winrt}
-class IWwwFormUrlDecoderRuntimeClass extends IInspectable {
+class IWwwFormUrlDecoderRuntimeClass extends IInspectable
+    implements
+        IIterable<IWwwFormUrlDecoderEntry>,
+        IVectorView<IWwwFormUrlDecoderEntry> {
   // vtable begins at 6, is 1 entries long.
   IWwwFormUrlDecoderRuntimeClass.fromRawPointer(super.ptr);
 
@@ -63,4 +70,30 @@ class IWwwFormUrlDecoderRuntimeClass extends IInspectable {
       free(retValuePtr);
     }
   }
+
+  // IVectorView<IWwwFormUrlDecoderEntry> methods
+  late final _iVectorView = IVectorView<IWwwFormUrlDecoderEntry>.fromRawPointer(
+      toInterface('{b1f00d3b-1f06-5117-93ea-2a0d79116701}'),
+      creator: IWwwFormUrlDecoderEntry.fromRawPointer,
+      iterableIid: '{876be83b-7218-5bfb-a169-83152ef7e146}');
+
+  @override
+  IWwwFormUrlDecoderEntry getAt(int index) => _iVectorView.getAt(index);
+
+  @override
+  int get size => _iVectorView.size;
+
+  @override
+  bool indexOf(IWwwFormUrlDecoderEntry value, Pointer<Uint32> index) =>
+      _iVectorView.indexOf(value, index);
+
+  @override
+  int getMany(int startIndex, int valueSize, Pointer<NativeType> value) =>
+      _iVectorView.getMany(startIndex, valueSize, value);
+
+  @override
+  IIterator<IWwwFormUrlDecoderEntry> first() => _iVectorView.first();
+
+  @override
+  List<IWwwFormUrlDecoderEntry> toList() => _iVectorView.toList();
 }

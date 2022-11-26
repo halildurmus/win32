@@ -5,7 +5,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
-import 'package:win32/win32.dart';
+import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
 import '../shared/exclusions.dart';
@@ -509,6 +509,37 @@ Guid iidFromTypeDef(TypeDef typeDef) {
 Guid iidFromTypeIdentifier(TypeIdentifier typeIdentifier) {
   final signature = parseTypeIdentifierSignature(typeIdentifier);
   return iidFromSignature(signature);
+}
+
+/// Returns the `IIterable<IKeyValuePair<K, V>>` IID for the given `IMap` or
+/// `IMapView` [typeIdentifier].
+Guid iterableIidFromMapTypeIdentifier(TypeIdentifier typeIdentifier) {
+  if (!['IMap', 'IMapView']
+      .contains(outerType(parseTypeIdentifierName(typeIdentifier)))) {
+    throw ArgumentError("Expected an 'IMap' or 'IMapView' type identifier.");
+  }
+
+  final kvpKeyArgSig = parseTypeIdentifierSignature(typeIdentifier.typeArg!);
+  final kvpValueArgSig =
+      parseTypeIdentifierSignature(typeIdentifier.typeArg!.typeArg!);
+  final iterableSignature =
+      'pinterface($IID_IIterable;pinterface($IID_IKeyValuePair;$kvpKeyArgSig;$kvpValueArgSig))';
+  return iidFromSignature(iterableSignature);
+}
+
+/// Returns the `IIterable<T>` IID for the given `IVector` or `IVectorView`
+/// [typeIdentifier].
+Guid iterableIidFromVectorTypeIdentifier(TypeIdentifier typeIdentifier) {
+  if (!['IVector', 'IVectorView']
+      .contains(outerType(parseTypeIdentifierName(typeIdentifier)))) {
+    throw ArgumentError(
+        "Expected an 'IVector' or 'IVectorView' type identifier.");
+  }
+
+  final iterableArgSignature =
+      parseTypeIdentifierSignature(typeIdentifier.typeArg!);
+  final iterableSignature = 'pinterface($IID_IIterable;$iterableArgSignature)';
+  return iidFromSignature(iterableSignature);
 }
 
 /// Take a name like TypedEventHandler`2 and return TypedEventHandler.

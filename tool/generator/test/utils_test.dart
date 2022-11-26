@@ -615,6 +615,54 @@ void main() {
         equals('{24a901ad-910f-5c0f-b23c-67007577a558}'));
   });
 
+  test('iterableIidFromMapTypeIdentifier', () {
+    final iStorageFileQueryResult2 = MetadataStore.getMetadataForType(
+        'Windows.Storage.Search.IStorageFileQueryResult2')!;
+    expect(
+        iterableIidFromMapTypeIdentifier(iStorageFileQueryResult2
+                .findMethod('GetMatchingPropertiesWithRanges')!
+                .returnType // IMap<String, IVectorView<TextSegment>>
+                .typeIdentifier)
+            .toString(),
+        // IIterable<IKeyValuePair<String, IVectorView<TextSegment>>>
+        equals('{f819a276-b3f5-54d4-b8fd-c9adb7f700e3}'));
+
+    final iPedometer2 = MetadataStore.getMetadataForType(
+        'Windows.Devices.Sensors.IPedometer2')!;
+    expect(
+        iterableIidFromMapTypeIdentifier(iPedometer2
+                .findMethod('GetCurrentReadings')!
+                .returnType // IMapView<PedometerStepKind, PedometerReading>
+                .typeIdentifier)
+            .toString(),
+        // IIterable<IKeyValuePair<PedometerStepKind, PedometerReading>>
+        equals('{098f29cb-bc91-5639-a541-d5a4811ec35b}'));
+  });
+
+  test('iterableIidFromVectorTypeIdentifier', () {
+    final iFileOpenPicker = MetadataStore.getMetadataForType(
+        'Windows.Storage.Pickers.IFileOpenPicker')!;
+    expect(
+        iterableIidFromVectorTypeIdentifier(iFileOpenPicker
+                .findMethod('get_FileTypeFilter')!
+                .returnType // IVector<String>
+                .typeIdentifier)
+            .toString(),
+        // IIterable<String>
+        equals('{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}'));
+
+    final iNetworkInformationStatics = MetadataStore.getMetadataForType(
+        'Windows.Networking.Connectivity.INetworkInformationStatics')!;
+    expect(
+        iterableIidFromVectorTypeIdentifier(iNetworkInformationStatics
+                .findMethod('GetHostNames')!
+                .returnType // IVectorView<HostName>
+                .typeIdentifier)
+            .toString(),
+        // IIterable<HostName>
+        equals('{9e5f3ed0-cf1c-5d38-832c-acea6164bf5c}'));
+  });
+
   test('stripGenerics', () {
     expect(stripGenerics('TypedEventHandler`2'), equals('TypedEventHandler'));
     expect(stripGenerics('LicenseChangedEventHandler'),
