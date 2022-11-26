@@ -74,6 +74,9 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
           .toList();
 
   @override
+  String get classType => 'Class';
+
+  @override
   String toString() {
     return '''
       $header

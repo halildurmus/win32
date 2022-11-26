@@ -188,9 +188,21 @@ class ComInterfaceProjection {
 
   String get category => 'com';
 
+  String get classType => 'Interface';
+
   String get rootHeader => '';
 
   String get extraHeaders => '';
+
+  String get classPreamble {
+    final wrappedComment = wrapCommentText(comment);
+    final categoryComment =
+        '/// {@category $classType}\n/// {@category $category}';
+
+    return wrappedComment.isEmpty
+        ? categoryComment
+        : '$wrappedComment\n///\n$categoryComment';
+  }
 
   @override
   String toString() {
@@ -206,8 +218,7 @@ class ComInterfaceProjection {
       $rootHeader
       $guidConstants
 
-      /// {@category Interface}
-      /// {@category $category}
+      $classPreamble
       class $shortName $extendsClause {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor

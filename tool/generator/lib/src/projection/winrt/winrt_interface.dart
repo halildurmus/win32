@@ -185,6 +185,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
+  String get classType => 'Interface';
+
+  @override
   String get category => 'winrt';
 
   // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
@@ -264,9 +267,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       $rootHeader
       $guidConstants
 
-      /// {@category Interface}
-      /// {@category $category}
-      ${wrapCommentText(comment)}
+      $classPreamble
       $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $shortName.fromRawPointer(super.ptr);

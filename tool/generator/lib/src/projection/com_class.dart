@@ -6,7 +6,7 @@ import 'utils.dart';
 class ComClassProjection extends ComInterfaceProjection {
   final ComInterfaceProjection interface;
 
-  ComClassProjection(super.typeDef, this.interface);
+  ComClassProjection(super.typeDef, this.interface, [super.comment]);
 
   factory ComClassProjection.fromInterface(TypeDef interface) {
     final className = generateClassName(interface);
@@ -36,6 +36,9 @@ class ComClassProjection extends ComInterfaceProjection {
   }
 
   @override
+  String get classType => 'Class';
+
+  @override
   String get guidConstants => '''
   /// @nodoc
   const CLSID_$shortName = '${typeDef.guid}';
@@ -46,7 +49,7 @@ class ComClassProjection extends ComInterfaceProjection {
     ${interface.toString()}
     $guidConstants
 
-    /// {@category com}
+    $classPreamble
     class $shortName extends ${interface.shortName} {
       $shortName(super.ptr);
 
