@@ -265,12 +265,12 @@ void generateComApis() {
   }
 }
 
-void generateWinRTApis() {
-  final mainWindowsRuntimeTypesToGenerate = windowsRuntimeTypesToGenerate
-    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
+void generateWinRTApis(Map<String, String> winrtTypesToGenerate) {
+  final mainWindowsRuntimeTypesToGenerate = winrtTypesToGenerate
+    ..removeWhere((key, value) => excludedWindowsRuntimeTypes.contains(key));
   final typesToGenerate = <String>{};
 
-  for (final type in mainWindowsRuntimeTypesToGenerate) {
+  for (final type in mainWindowsRuntimeTypesToGenerate.keys) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
@@ -286,7 +286,8 @@ void generateWinRTApis() {
     ];
     typesToGenerate.addAll(implementsInterfaces);
 
-    // The type's factory and static interfaces e.g. 'Windows.Globalization.ICalendarFactory'
+    // The type's factory and static interfaces e.g.
+    // 'Windows.Globalization.ICalendarFactory'
     if (projection is WinRTClassProjection) {
       final factoryAndStaticInterfaces = [
         ...projection.factoryInterfaces,
@@ -421,7 +422,9 @@ void main() {
   generateComApis();
 
   print('Generating Windows Runtime interfaces...');
-  generateWinRTApis();
+  final winrtTypesToGenerate = loadMap('winrt_types.json');
+  saveMap(winrtTypesToGenerate, 'winrt_types.json');
+  generateWinRTApis(winrtTypesToGenerate);
 
   print('Generating Windows Runtime enumerations...');
   final winrtEnumsToGenerate = loadMap('winrt_enums.json');
