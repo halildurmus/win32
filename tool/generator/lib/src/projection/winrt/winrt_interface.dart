@@ -10,7 +10,7 @@ import 'winrt_method.dart';
 import 'winrt_set_property.dart';
 
 class WinRTInterfaceProjection extends ComInterfaceProjection {
-  WinRTInterfaceProjection(super.typeDef, [super.docComment]);
+  WinRTInterfaceProjection(super.typeDef, [super.comment]);
 
   @override
   String get inheritsFrom => implementsInterfaces
@@ -266,6 +266,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
       /// {@category Interface}
       /// {@category $category}
+      ${wrapCommentText(comment)}
       $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $shortName.fromRawPointer(super.ptr);

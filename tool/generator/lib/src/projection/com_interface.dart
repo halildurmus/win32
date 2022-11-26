@@ -10,7 +10,7 @@ import 'utils.dart';
 
 class ComInterfaceProjection {
   final TypeDef typeDef;
-  final String? docComment;
+  final String comment;
 
   // Lazily cached values, with matching property
   int? _vtableStart;
@@ -20,7 +20,7 @@ class ComInterfaceProjection {
   List<MethodProjection> get methodProjections =>
       _methodProjections ??= _cacheMethodProjections();
 
-  ComInterfaceProjection(this.typeDef, [this.docComment]);
+  ComInterfaceProjection(this.typeDef, [this.comment = '']);
 
   int cacheVtableStart(TypeDef? type) {
     if (type == null) {

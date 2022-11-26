@@ -5,7 +5,7 @@ import 'winrt_interface.dart';
 import 'winrt_static_interface_mapper.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
-  WinRTClassProjection(super.typeDef, [super.docComment]);
+  WinRTClassProjection(super.typeDef, [super.comment]);
 
   @override
   Set<String> get coreImports => {
@@ -83,6 +83,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
 
       /// {@category Class}
       /// {@category $category}
+      ${wrapCommentText(comment)}
       $classDeclaration
         $defaultConstructor
         $shortName.fromRawPointer(super.ptr);

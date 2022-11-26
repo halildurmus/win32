@@ -265,50 +265,44 @@ void generateComApis() {
   }
 }
 
-void generateWinRTApis(Map<String, String> winrtTypesToGenerate) {
-  final typesWithoutExclusions = winrtTypesToGenerate
-    ..removeWhere((key, value) => excludedWindowsRuntimeTypes.contains(key));
+void generateWinRTApis(Map<String, String> typesToGenerate) {
+  // Catalog all the types we need to generate: the types themselves and their
+  // dependencies
   final typesAndDependencies = <String>{};
-
-  for (final type in typesWithoutExclusions.keys) {
-    final typeDef = MetadataStore.getMetadataForType(type);
-    if (typeDef == null) throw Exception("Can't find $type");
-    final projection = typeDef.isInterface
-        ? WinRTInterfaceProjection(typeDef, typesWithoutExclusions[type])
-        : WinRTClassProjection(typeDef, typesWithoutExclusions[type]);
-
-    // The main type e.g. 'Windows.Globalization.Calendar'
-    typesAndDependencies.add(type);
-
-    // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
-    final implementsInterfaces = [
-      ...projection.typeDef.interfaces.map((interface) => interface.name)
-    ];
-    typesAndDependencies.addAll(implementsInterfaces);
-
-    // The type's factory and static interfaces e.g.
-    // 'Windows.Globalization.ICalendarFactory'
-    if (projection is WinRTClassProjection) {
-      final factoryAndStaticInterfaces = [
-        ...projection.factoryInterfaces,
-        ...projection.staticInterfaces
-      ];
-      typesAndDependencies.addAll(factoryAndStaticInterfaces);
-    }
-  }
-
-  typesAndDependencies
-    // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
-    ..removeWhere((type) => type.isEmpty)
-    // Remove excluded WinRT types
-    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
-
-  for (final type in typesAndDependencies) {
+  for (final type in typesToGenerate.keys) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
         ? WinRTInterfaceProjection(typeDef)
         : WinRTClassProjection(typeDef);
+
+    typesAndDependencies.addAll({
+      // The type itself, e.g. 'Windows.Globalization.Calendar'
+      type,
+
+      // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
+      ...projection.typeDef.interfaces.map((interface) => interface.name),
+
+      // The type's factory and static interfaces e.g.
+      // 'Windows.Globalization.ICalendarFactory'
+      if (projection is WinRTClassProjection) ...projection.factoryInterfaces,
+      if (projection is WinRTClassProjection) ...projection.staticInterfaces
+    });
+  }
+
+  typesAndDependencies
+    // Remove generic interfaces (https://github.com/timsneath/win32/issues/480)
+    ..removeWhere((type) => type.isEmpty)
+    // Remove excluded WinRT types
+    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
+
+  // Generate the type projection for each type
+  for (final type in typesAndDependencies) {
+    final typeDef = MetadataStore.getMetadataForType(type);
+    if (typeDef == null) throw Exception("Can't find $type");
+    final projection = typeDef.isInterface
+        ? WinRTInterfaceProjection(typeDef, typesToGenerate[typeDef.name] ?? '')
+        : WinRTClassProjection(typeDef, typesToGenerate[typeDef.name] ?? '');
 
     final dartClass = projection.toString();
     final classOutputPath =
