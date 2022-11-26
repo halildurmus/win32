@@ -1,4 +1,4 @@
-import '../../shared/exclusions.dart';
+import '../../model/exclusions.dart';
 import '../utils.dart';
 import 'winrt_factory_interface_mapper.dart';
 import 'winrt_interface.dart';

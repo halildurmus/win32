@@ -1,7 +1,7 @@
 import 'package:winmd/winmd.dart';
 
-import '../shared/exclusions.dart';
-import '../shared/import_headers.dart';
+import '../model/exclusions.dart';
+import '../model/import_headers.dart';
 import 'com_method.dart';
 import 'com_property.dart';
 import 'method.dart';

@@ -8,8 +8,8 @@ import 'package:path/path.dart' as path;
 import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
-import '../shared/exclusions.dart';
-import '../shared/false_properties.dart';
+import '../model/exclusions.dart';
+import '../model/false_properties.dart';
 import 'safenames.dart';
 import 'type.dart';
 

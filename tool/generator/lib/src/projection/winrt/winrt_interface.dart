@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../../shared/exclusions.dart';
+import '../../model/exclusions.dart';
 import '../com_interface.dart';
 import '../method.dart';
 import '../utils.dart';
