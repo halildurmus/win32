@@ -315,8 +315,6 @@ class IMapView<K, V> extends IInspectable
 
       if (FAILED(hr)) throw WindowsException(hr);
 
-      if (retValuePtr.value == 0) return null;
-
       final retValue = retValuePtr.toDartString();
       return retValue;
     } finally {
