@@ -10,20 +10,19 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
-
 import '../../../combase.dart';
 import '../../../exceptions.dart';
 import '../../../macros.dart';
 import '../../../utils.dart';
 import '../../../types.dart';
+import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 
-import '../../../winrt/internal/hstring_array.dart';
+import '../../internal/hstring_array.dart';
 
-import '../../../winrt/foundation/collections/ivector.dart';
-import '../../../winrt/devices/enumeration/enums.g.dart';
+import '../../foundation/collections/ivector.dart';
+import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
 /// @nodoc
@@ -52,7 +51,10 @@ class IDevicePickerFilter extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IVector.fromRawPointer(retValuePtr,
         iterableIid: '{47d4be05-58f1-522e-81c6-975eb4131bb9}',
@@ -73,7 +75,10 @@ class IDevicePickerFilter extends IInspectable {
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
         ptr.ref.lpVtbl, retValuePtr);
 
-    if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) {
+      free(retValuePtr);
+      throw WindowsException(hr);
+    }
 
     return IVector.fromRawPointer(retValuePtr,
         iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');

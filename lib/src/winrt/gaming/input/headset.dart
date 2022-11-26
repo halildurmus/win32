@@ -40,6 +40,7 @@ class Headset extends IInspectable
 
   @override
   String get renderDeviceId => _iHeadset.renderDeviceId;
+
   // IGameControllerBatteryInfo methods
   late final _iGameControllerBatteryInfo =
       IGameControllerBatteryInfo.from(this);

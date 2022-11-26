@@ -245,6 +245,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
 
   @override
   bool getNamedBoolean(String name) => _iJsonObject.getNamedBoolean(name);
+
   // IJsonValue methods
   late final _iJsonValue = IJsonValue.from(this);
 

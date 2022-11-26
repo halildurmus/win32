@@ -144,6 +144,7 @@ class Uri extends IInspectable
   @override
   Uri combineUri(String relativeUri) =>
       _iUriRuntimeClass.combineUri(relativeUri);
+
   // IUriRuntimeClassWithAbsoluteCanonicalUri methods
   late final _iUriRuntimeClassWithAbsoluteCanonicalUri =
       IUriRuntimeClassWithAbsoluteCanonicalUri.from(this);
@@ -154,6 +155,7 @@ class Uri extends IInspectable
 
   @override
   String get displayIri => _iUriRuntimeClassWithAbsoluteCanonicalUri.displayIri;
+
   // IStringable methods
   late final _iStringable = IStringable.from(this);
 

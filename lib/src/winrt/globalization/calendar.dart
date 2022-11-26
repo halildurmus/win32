@@ -391,6 +391,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
 
   @override
   bool get isDaylightSavingTime => _iCalendar.isDaylightSavingTime;
+
   // ITimeZoneOnCalendar methods
   late final _iTimeZoneOnCalendar = ITimeZoneOnCalendar.from(this);
 

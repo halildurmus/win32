@@ -109,6 +109,7 @@ class PhoneNumberInfo extends IInspectable
   @override
   PhoneNumberMatchResult checkNumberMatch(PhoneNumberInfo otherNumber) =>
       _iPhoneNumberInfo.checkNumberMatch(otherNumber);
+
   // IStringable methods
   late final _iStringable = IStringable.from(this);
 

@@ -1,26 +1,40 @@
 // jsonobject.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../../com/iinspectable.dart';
+import '../../../combase.dart';
+import '../../../exceptions.dart';
+import '../../../macros.dart';
 import '../../../utils.dart';
-import '../../../winrt/data/json/ijsonobject.dart';
-import '../../../winrt/data/json/ijsonobjectwithdefaultvalues.dart';
-import '../../../winrt/data/json/ijsonvalue.dart';
-import '../../../winrt/data/json/jsonarray.dart';
-import '../../../winrt/data/json/jsonvalue.dart';
-import '../../../winrt/foundation/collections/iiterator.dart';
-import '../../../winrt/foundation/collections/ikeyvaluepair.dart';
-import '../../../winrt/foundation/collections/imap.dart';
-import '../../../winrt/foundation/istringable.dart';
-import '../../../winrt_constants.dart';
+import '../../../types.dart';
+import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
-import 'enums.g.dart';
+
+import '../../internal/hstring_array.dart';
+
+import 'ijsonobject.dart';
+import 'ijsonvalue.dart';
+import '../../foundation/collections/imap.dart';
+import '../../foundation/collections/iiterable.dart';
+import '../../foundation/collections/ikeyvaluepair.dart';
+import 'ijsonobjectwithdefaultvalues.dart';
+import '../../foundation/istringable.dart';
 import 'ijsonobjectstatics.dart';
+import 'jsonvalue.dart';
+import 'jsonarray.dart';
+import 'enums.g.dart';
+import '../../foundation/collections/imapview.dart';
+import '../../foundation/collections/iiterator.dart';
+import '../../../com/iinspectable.dart';
 
 /// {@category Class}
 /// {@category winrt}
@@ -29,6 +43,7 @@ class JsonObject extends IInspectable
         IJsonObject,
         IJsonValue,
         IMap<String, IJsonValue?>,
+        IIterable<IKeyValuePair<String, IJsonValue?>>,
         IJsonObjectWithDefaultValues,
         IStringable {
   JsonObject({Allocator allocator = calloc})
@@ -85,6 +100,7 @@ class JsonObject extends IInspectable
 
   @override
   bool getNamedBoolean(String name) => _iJsonObject.getNamedBoolean(name);
+
   // IJsonValue methods
   late final _iJsonValue = IJsonValue.from(this);
 
@@ -108,6 +124,41 @@ class JsonObject extends IInspectable
 
   @override
   JsonObject getObject() => _iJsonValue.getObject();
+
+  // IMap<String, IJsonValue?> methods
+  late final _iMap = IMap<String, IJsonValue?>.fromRawPointer(
+      toInterface('{c9d9a725-786b-5113-b4b7-9b61764c220b}'),
+      creator: IJsonValue.fromRawPointer,
+      iterableIid: '{dfabb6e1-0411-5a8f-aa87-354e7110f099}');
+
+  @override
+  IJsonValue? lookup(String key) => _iMap.lookup(key);
+
+  @override
+  int get size => _iMap.size;
+
+  @override
+  bool hasKey(String key) => _iMap.hasKey(key);
+
+  @override
+  Map<String, IJsonValue?> getView() => _iMap.getView();
+
+  @override
+  bool insert(String key, IJsonValue? value) =>
+      _iMap.insert(key, value ?? JsonValue.createNullValue());
+
+  @override
+  void remove(String key) => _iMap.remove(key);
+
+  @override
+  void clear() => _iMap.clear();
+
+  @override
+  IIterator<IKeyValuePair<String, IJsonValue?>> first() => _iMap.first();
+
+  @override
+  Map<String, IJsonValue?> toMap() => _iMap.toMap();
+
   // IJsonObjectWithDefaultValues methods
   late final _iJsonObjectWithDefaultValues =
       IJsonObjectWithDefaultValues.from(this);
@@ -136,39 +187,6 @@ class JsonObject extends IInspectable
   bool getNamedBooleanOrDefault(String name, bool defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedBooleanOrDefault(
           name, defaultValue);
-
-  late final _iMap = IMap<String, IJsonValue?>.fromRawPointer(
-      toInterface(IID_IMap_String_IJsonValue),
-      iterableIid: '{dfabb6e1-0411-5a8f-aa87-354e7110f099}',
-      creator: IJsonValue.fromRawPointer);
-
-  @override
-  void clear() => _iMap.clear();
-
-  @override
-  IIterator<IKeyValuePair<String, IJsonValue?>> first() => _iMap.first();
-
-  @override
-  Map<String, IJsonValue?> getView() => _iMap.getView();
-
-  @override
-  bool hasKey(String value) => _iMap.hasKey(value);
-
-  @override
-  bool insert(String key, IJsonValue? value) =>
-      _iMap.insert(key, value ?? JsonValue.createNullValue());
-
-  @override
-  IJsonValue? lookup(String key) => _iMap.lookup(key);
-
-  @override
-  void remove(String key) => _iMap.remove(key);
-
-  @override
-  int get size => _iMap.size;
-
-  @override
-  Map<String, IJsonValue?> toMap() => _iMap.toMap();
 
   // IStringable methods
   late final _iStringable = IStringable.from(this);

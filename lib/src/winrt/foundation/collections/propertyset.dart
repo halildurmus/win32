@@ -1,60 +1,88 @@
 // propertyset.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../../com/iinspectable.dart';
-import '../../../winrt_constants.dart';
+import '../../../combase.dart';
+import '../../../exceptions.dart';
+import '../../../macros.dart';
+import '../../../utils.dart';
+import '../../../types.dart';
+import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
-import 'iiterator.dart';
-import 'ikeyvaluepair.dart';
+
+import '../../internal/hstring_array.dart';
+
+import 'ipropertyset.dart';
+import 'iobservablemap.dart';
 import 'imap.dart';
+import 'iiterable.dart';
+import 'ikeyvaluepair.dart';
+import 'imapview.dart';
+import 'iiterator.dart';
+import '../../../com/iinspectable.dart';
 
-/// @nodoc
-const IID_PropertySet = '{D0204E8D-5F1D-4F95-A6E2-BE7B29830342}';
-
-/// Represents a property set, which is a set of `PropertyValue` objects with
-/// string keys.
-///
 /// {@category Class}
 /// {@category winrt}
-class PropertySet extends IInspectable implements IMap<String, Object?> {
+class PropertySet extends IInspectable
+    implements
+        IPropertySet,
+        IObservableMap<String, Object?>,
+        IMap<String, Object?>,
+        IIterable<IKeyValuePair<String, Object?>> {
   PropertySet({Allocator allocator = calloc})
       : super(ActivateClass(_className, allocator: allocator));
   PropertySet.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.PropertySet';
 
+  // IObservableMap<String, Object?> methods
+  late final _iObservableMap = IObservableMap<String, Object?>.fromRawPointer(
+      toInterface('{236aac9d-fb12-5c4d-a41c-9e445fb4d7ec}'));
+
+  @override
+  int add_MapChanged(Pointer<NativeFunction<MapChangedEventHandler>> vhnd) =>
+      _iObservableMap.add_MapChanged(vhnd);
+
+  @override
+  void remove_MapChanged(int token) => _iObservableMap.remove_MapChanged(token);
+
+  // IMap<String, Object?> methods
   late final _iMap = IMap<String, Object?>.fromRawPointer(
-      toInterface(IID_IMap_String_Object),
+      toInterface('{1b0d3570-0877-5ec2-8a2c-3b9539506aca}'),
       iterableIid: '{fe2f3d47-5d47-5499-8374-430c7cda0204}');
+
+  @override
+  Object? lookup(String key) => _iMap.lookup(key);
+
+  @override
+  int get size => _iMap.size;
+
+  @override
+  bool hasKey(String key) => _iMap.hasKey(key);
+
+  @override
+  Map<String, Object?> getView() => _iMap.getView();
+
+  @override
+  bool insert(String key, Object? value) => _iMap.insert(key, value);
+
+  @override
+  void remove(String key) => _iMap.remove(key);
 
   @override
   void clear() => _iMap.clear();
 
   @override
   IIterator<IKeyValuePair<String, Object?>> first() => _iMap.first();
-
-  @override
-  Map<String, Object?> getView() => _iMap.getView();
-
-  @override
-  bool hasKey(String value) => _iMap.hasKey(value);
-
-  @override
-  bool insert(String key, Object? value) => _iMap.insert(key, value);
-
-  @override
-  Object? lookup(String key) => _iMap.lookup(key);
-
-  @override
-  void remove(String key) => _iMap.remove(key);
-
-  @override
-  int get size => _iMap.size;
 
   @override
   Map<String, Object?> toMap() => _iMap.toMap();

@@ -1,28 +1,47 @@
 // jsonarray.dart
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import, directives_ordering
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../../../com/iinspectable.dart';
+import '../../../combase.dart';
+import '../../../exceptions.dart';
+import '../../../macros.dart';
 import '../../../utils.dart';
-import '../../../winrt/data/json/ijsonarray.dart';
-import '../../../winrt/data/json/ijsonvalue.dart';
-import '../../../winrt/data/json/jsonobject.dart';
-import '../../../winrt/foundation/collections/iiterator.dart';
-import '../../../winrt/foundation/istringable.dart';
-import '../../../winrt_constants.dart';
+import '../../../types.dart';
+import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
+
+import '../../internal/hstring_array.dart';
+
+import 'ijsonarray.dart';
+import 'ijsonvalue.dart';
 import '../../foundation/collections/ivector.dart';
-import 'enums.g.dart';
+import '../../foundation/collections/iiterable.dart';
+import '../../foundation/istringable.dart';
 import 'ijsonarraystatics.dart';
+import 'jsonobject.dart';
+import 'enums.g.dart';
+import '../../foundation/collections/ivectorview.dart';
+import '../../foundation/collections/iiterator.dart';
+import '../../../com/iinspectable.dart';
 
 /// {@category Class}
 /// {@category winrt}
 class JsonArray extends IInspectable
-    implements IJsonArray, IJsonValue, IVector<IJsonValue>, IStringable {
+    implements
+        IJsonArray,
+        IJsonValue,
+        IVector<IJsonValue>,
+        IIterable<IJsonValue>,
+        IStringable {
   JsonArray({Allocator allocator = calloc})
       : super(ActivateClass(_className, allocator: allocator));
   JsonArray.fromRawPointer(super.ptr);
@@ -70,6 +89,7 @@ class JsonArray extends IInspectable
 
   @override
   bool getBooleanAt(int index) => _iJsonArray.getBooleanAt(index);
+
   // IJsonValue methods
   late final _iJsonValue = IJsonValue.from(this);
 
@@ -94,26 +114,17 @@ class JsonArray extends IInspectable
   @override
   JsonObject getObject() => _iJsonValue.getObject();
 
+  // IVector<IJsonValue> methods
   late final _iVector = IVector<IJsonValue>.fromRawPointer(
-      toInterface(IID_IVector_IJsonValue),
-      iterableIid: '{cb0492b6-4113-55cf-b2c5-99eb428ba493}',
-      creator: IJsonValue.fromRawPointer);
-
-  @override
-  void append(IJsonValue value) => _iVector.append(value);
-
-  @override
-  void clear() => _iVector.clear();
-
-  @override
-  IIterator<IJsonValue> first() => _iVector.first();
+      toInterface('{d44662bc-dce3-59a8-9272-4b210f33908b}'),
+      creator: IJsonValue.fromRawPointer,
+      iterableIid: '{cb0492b6-4113-55cf-b2c5-99eb428ba493}');
 
   @override
   IJsonValue getAt(int index) => _iVector.getAt(index);
 
   @override
-  int getMany(int startIndex, int capacity, Pointer<NativeType> value) =>
-      _iVector.getMany(startIndex, capacity, value);
+  int get size => _iVector.size;
 
   @override
   List<IJsonValue> getView() => _iVector.getView();
@@ -123,22 +134,32 @@ class JsonArray extends IInspectable
       _iVector.indexOf(value, index);
 
   @override
+  void setAt(int index, IJsonValue value) => _iVector.setAt(index, value);
+
+  @override
   void insertAt(int index, IJsonValue value) => _iVector.insertAt(index, value);
 
   @override
   void removeAt(int index) => _iVector.removeAt(index);
 
   @override
+  void append(IJsonValue value) => _iVector.append(value);
+
+  @override
   void removeAtEnd() => _iVector.removeAtEnd();
+
+  @override
+  void clear() => _iVector.clear();
+
+  @override
+  int getMany(int startIndex, int valueSize, Pointer<NativeType> value) =>
+      _iVector.getMany(startIndex, valueSize, value);
 
   @override
   void replaceAll(List<IJsonValue> value) => _iVector.replaceAll(value);
 
   @override
-  void setAt(int index, IJsonValue value) => _iVector.setAt(index, value);
-
-  @override
-  int get size => _iVector.size;
+  IIterator<IJsonValue> first() => _iVector.first();
 
   @override
   List<IJsonValue> toList() => _iVector.toList();
