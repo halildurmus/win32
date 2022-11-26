@@ -25,5 +25,8 @@
     "Windows.UI.Notifications.NotificationMirroring": "Specifies whether notification mirroring is allowed. Mirroring enables a notification to be displayed on multiple devices.",
     "Windows.UI.Notifications.ToastNotificationPriority": "Specifies the priority of a ToastNotification.",
     "Windows.UI.Notifications.ToastTemplateType": "Specifies the template to use in a toast notification.",
-    "Windows.UI.Popups.Placement": "Specifies where the context menu should be positioned relative to the selection rectangle."
+    "Windows.UI.Popups.Placement": "Specifies where the context menu should be positioned relative to the selection rectangle.",
+    "Windows.UI.ViewManagement.HandPreference": "Defines the set of directional preferences for the user interface presented by the app view.",
+    "Windows.UI.ViewManagement.UIColorType": "Defines constants that specify known system color values.",
+    "Windows.UI.ViewManagement.UIElementType": "Defines the set of user interface element types."
 }
