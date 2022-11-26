@@ -232,13 +232,14 @@ String generateFunctionTests(String library, Iterable<Method> methods,
   return buffer.toString();
 }
 
-void generateComApis() {
+void generateComApis(Map<String, String> comTypesToGenerate) {
   final scope = MetadataStore.getWin32Scope();
 
-  for (final interface in comInterfacesToGenerate) {
+  for (final interface in comTypesToGenerate.keys) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
-    final interfaceProjection = ComInterfaceProjection(typeDef);
+    final interfaceProjection =
+        ComInterfaceProjection(typeDef, comTypesToGenerate[interface] ?? '');
 
     // In v2, we put classes and interfaces in the same file.
     final className = ComClassProjection.generateClassName(typeDef);
@@ -413,7 +414,9 @@ void main() {
   generateFunctions(functionsToGenerate);
 
   print('Generating COM interfaces and tests...');
-  generateComApis();
+  final comTypesToGenerate = loadMap('com_types.json');
+  saveMap(comTypesToGenerate, 'com_types.json');
+  generateComApis(comTypesToGenerate);
 
   print('Generating Windows Runtime interfaces...');
   final winrtTypesToGenerate = loadMap('winrt_types.json');

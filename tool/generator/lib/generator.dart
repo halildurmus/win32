@@ -3,7 +3,6 @@
 library generator;
 
 export 'src/inputs/functions.dart';
-export 'src/inputs/interfaces.dart';
 export 'src/inputs/load_json.dart';
 export 'src/inputs/struct_sizes.dart';
 
