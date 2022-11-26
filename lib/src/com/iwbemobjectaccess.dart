@@ -26,6 +26,12 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IWbemObjectAccess = '{49353c9a-516b-11d1-aea6-00c04fb68820}';
 
+/// The IWbemObjectAccess interface provides access to the methods and
+/// properties of an object. An IWbemObjectAccess object is a container for
+/// an instance updated by a refresher. With the IWbemObjectAccess
+/// interface, you can get and set properties by using property handles
+/// instead of object property names.
+///
 /// {@category Interface}
 /// {@category com}
 class IWbemObjectAccess extends IWbemClassObject {

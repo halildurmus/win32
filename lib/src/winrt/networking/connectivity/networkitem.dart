@@ -26,6 +26,8 @@ import '../../../guid.dart';
 import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a connected network.
+///
 /// {@category Class}
 /// {@category winrt}
 class NetworkItem extends IInspectable implements INetworkItem {

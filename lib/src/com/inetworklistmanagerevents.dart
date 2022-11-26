@@ -25,6 +25,11 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_INetworkListManagerEvents = '{dcb00001-570f-4a9b-8d69-199fdba5723b}';
 
+/// INetworkListManagerEvents is a message sink interface that a client
+/// implements to get overall machine state related events. Applications
+/// that are interested on higher-level events, for example internet
+/// connectivity, implement this interface.
+///
 /// {@category Interface}
 /// {@category com}
 class INetworkListManagerEvents extends IUnknown {

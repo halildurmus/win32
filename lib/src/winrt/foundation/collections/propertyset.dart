@@ -30,6 +30,9 @@ import 'imapview.dart';
 import 'iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a property set, which is a set of [PropertyValue] objects
+/// with string keys.
+///
 /// {@category Class}
 /// {@category winrt}
 class PropertySet extends IInspectable

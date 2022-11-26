@@ -26,6 +26,11 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IPersistFile = '{0000010b-0000-0000-c000-000000000046}';
 
+/// Enables an object to be loaded from or saved to a disk file, rather than
+/// a storage object or stream. Because the information needed to open a
+/// file varies greatly from one application to another, the implementation
+/// of `IPersistFile::Load`on the object must also open its disk file.
+///
 /// {@category Interface}
 /// {@category com}
 class IPersistFile extends IPersist {

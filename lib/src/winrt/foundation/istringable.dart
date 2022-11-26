@@ -26,6 +26,8 @@ import '../../com/iinspectable.dart';
 /// @nodoc
 const IID_IStringable = '{96369f54-8eb6-48f0-abce-c1b211e627c3}';
 
+/// Provides a way to represent the current object as a string.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IStringable extends IInspectable {

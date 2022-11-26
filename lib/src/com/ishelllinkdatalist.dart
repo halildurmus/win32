@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellLinkDataList = '{45e2b4ae-b1c3-11d0-b92f-00a0c90312e1}';
 
+/// Exposes methods that allow an application to attach extra data blocks to
+/// a Shell link. These methods add, copy, or remove data blocks.
+///
 /// {@category Interface}
 /// {@category com}
 class IShellLinkDataList extends IUnknown {

@@ -30,6 +30,9 @@ import '../foundation/collections/ivectorview.dart';
 import 'enums.g.dart';
 import '../../com/iinspectable.dart';
 
+/// Manipulates the representation of a `DateTime` within a given calendar
+/// and clock.
+///
 /// {@category Class}
 /// {@category winrt}
 class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {

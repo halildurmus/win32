@@ -27,6 +27,9 @@ import '../../foundation/ireference.dart';
 import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents the association between an IP address and an adapter on the
+/// network.
+///
 /// {@category Class}
 /// {@category winrt}
 class IPInformation extends IInspectable implements IIPInformation {

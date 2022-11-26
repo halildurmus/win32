@@ -30,6 +30,12 @@ import 'imapview.dart';
 import 'iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// Implements a map with keys of type String and values of type Object.
+/// Object must be a WinRT [PropertyValue] or [ValueSet]. As a
+/// [PropertyValue], it can be any type except [PropertyType]
+/// `InspectableArray`. This limitation exists to ensure that the value can
+/// be serialized; passed by value across a process boundary.
+///
 /// {@category Class}
 /// {@category winrt}
 class ValueSet extends IInspectable

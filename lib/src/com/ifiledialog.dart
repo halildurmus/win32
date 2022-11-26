@@ -26,6 +26,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IFileDialog = '{42f85136-db7e-439c-85f1-e4075d135fc8}';
 
+/// Exposes methods that initialize, show, and get results from the common
+/// file dialog.
+///
 /// {@category Interface}
 /// {@category com}
 class IFileDialog extends IModalWindow {

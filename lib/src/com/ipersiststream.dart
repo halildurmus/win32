@@ -26,6 +26,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IPersistStream = '{00000109-0000-0000-c000-000000000046}';
 
+/// Enables the saving and loading of objects that use a simple serial
+/// stream for their storage needs.
+///
 /// {@category Interface}
 /// {@category com}
 class IPersistStream extends IPersist {

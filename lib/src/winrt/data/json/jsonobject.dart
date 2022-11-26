@@ -36,6 +36,9 @@ import '../../foundation/collections/imapview.dart';
 import '../../foundation/collections/iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a JSON object containing a collection of name and [JsonValue]
+/// pairs.
+///
 /// {@category Class}
 /// {@category winrt}
 class JsonObject extends IInspectable

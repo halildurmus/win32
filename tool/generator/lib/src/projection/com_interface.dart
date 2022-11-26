@@ -1,7 +1,7 @@
 import 'package:winmd/winmd.dart';
 
-import '../shared/exclusions.dart';
-import '../shared/import_headers.dart';
+import '../model/exclusions.dart';
+import '../model/import_headers.dart';
 import 'com_method.dart';
 import 'com_property.dart';
 import 'method.dart';
@@ -10,6 +10,7 @@ import 'utils.dart';
 
 class ComInterfaceProjection {
   final TypeDef typeDef;
+  final String comment;
 
   // Lazily cached values, with matching property
   int? _vtableStart;
@@ -19,7 +20,7 @@ class ComInterfaceProjection {
   List<MethodProjection> get methodProjections =>
       _methodProjections ??= _cacheMethodProjections();
 
-  ComInterfaceProjection(this.typeDef);
+  ComInterfaceProjection(this.typeDef, [this.comment = '']);
 
   int cacheVtableStart(TypeDef? type) {
     if (type == null) {
@@ -187,9 +188,22 @@ class ComInterfaceProjection {
 
   String get category => 'com';
 
+  String get classType => 'Interface';
+
   String get rootHeader => '';
 
   String get extraHeaders => '';
+
+  String get classPreamble {
+    final wrappedComment = wrapCommentText(comment);
+    final categoryComment = classType.isNotEmpty
+        ? '/// {@category $classType}\n/// {@category $category}'
+        : '/// {@category $category}';
+
+    return wrappedComment.isNotEmpty
+        ? '$wrappedComment\n///\n$categoryComment'
+        : categoryComment;
+  }
 
   @override
   String toString() {
@@ -205,8 +219,7 @@ class ComInterfaceProjection {
       $rootHeader
       $guidConstants
 
-      /// {@category Interface}
-      /// {@category $category}
+      $classPreamble
       class $shortName $extendsClause {
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $constructor

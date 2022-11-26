@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../inputs/load_json.dart';
+import '../model/load_json.dart';
 import 'utils.dart';
 
 class TypeTuple {

@@ -29,6 +29,11 @@ import 'iuriescapestatics.dart';
 import 'wwwformurldecoder.dart';
 import '../../com/iinspectable.dart';
 
+/// Defines an object that represents a Uniform Resource Identifier (URI)
+/// value and parses it into components. The Uri object is used by many
+/// other Windows Runtime APIs that are not necessarily confined to web
+/// browser scenarios.
+///
 /// {@category Class}
 /// {@category winrt}
 class Uri extends IInspectable

@@ -27,6 +27,12 @@ import '../../com/iinspectable.dart';
 /// @nodoc
 const IID_IAsyncInfo = '{00000036-0000-0000-c000-000000000046}';
 
+/// Supports asynchronous actions and operations. `IAsyncInfo` is a base
+/// interface for `IAsyncAction`, `IAsyncActionWithProgress<TProgress>`,
+/// `IAsyncOperation<TResult>` and
+/// `IAsyncOperationWithProgress<TResult,TProgress>`, each of which support
+/// combinations of return type and progress for an asynchronous method.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IAsyncInfo extends IInspectable {

@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IEnumMoniker = '{00000102-0000-0000-c000-000000000046}';
 
+/// Enumerates the components of a moniker or the monikers in a table of
+/// monikers.
+///
 /// {@category Interface}
 /// {@category com}
 class IEnumMoniker extends IUnknown {

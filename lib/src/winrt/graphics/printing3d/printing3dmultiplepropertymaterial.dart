@@ -25,6 +25,9 @@ import 'iprinting3dmultiplepropertymaterial.dart';
 import '../../foundation/collections/ivector.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a combination of properties and/or materials from the
+/// material groups specified in `MaterialGroupIndices`.
+///
 /// {@category Class}
 /// {@category winrt}
 class Printing3DMultiplePropertyMaterial extends IInspectable

@@ -1,11 +1,11 @@
-import '../../shared/exclusions.dart';
+import '../../model/exclusions.dart';
 import '../utils.dart';
 import 'winrt_factory_interface_mapper.dart';
 import 'winrt_interface.dart';
 import 'winrt_static_interface_mapper.dart';
 
 class WinRTClassProjection extends WinRTInterfaceProjection {
-  WinRTClassProjection(super.typeDef);
+  WinRTClassProjection(super.typeDef, [super.comment]);
 
   @override
   Set<String> get coreImports => {
@@ -74,6 +74,9 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
           .toList();
 
   @override
+  String get classType => 'Class';
+
+  @override
   String toString() {
     return '''
       $header
@@ -81,8 +84,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       $importHeader
       $rootHeader
 
-      /// {@category Class}
-      /// {@category $category}
+      $classPreamble
       $classDeclaration
         $defaultConstructor
         $shortName.fromRawPointer(super.ptr);

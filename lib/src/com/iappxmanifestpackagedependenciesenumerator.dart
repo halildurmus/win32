@@ -26,6 +26,8 @@ import 'iunknown.dart';
 const IID_IAppxManifestPackageDependenciesEnumerator =
     '{b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4}';
 
+/// Enumerates the package dependencies defined in the package manifest.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxManifestPackageDependenciesEnumerator extends IUnknown {

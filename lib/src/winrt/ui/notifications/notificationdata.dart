@@ -28,6 +28,8 @@ import '../../foundation/collections/ikeyvaluepair.dart';
 import '../../foundation/collections/imap.dart';
 import '../../../com/iinspectable.dart';
 
+/// Stores data for display in a toast notification.
+///
 /// {@category Class}
 /// {@category winrt}
 class NotificationData extends IInspectable implements INotificationData {

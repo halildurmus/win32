@@ -30,6 +30,8 @@ import 'jsonarray.dart';
 import 'jsonobject.dart';
 import '../../../com/iinspectable.dart';
 
+/// Implements the [IJsonValue] interface which represents a JSON value.
+///
 /// {@category Class}
 /// {@category winrt}
 class JsonValue extends IInspectable implements IJsonValue, IStringable {

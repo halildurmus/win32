@@ -1,6 +1,6 @@
 import 'package:winmd/winmd.dart';
 
-import '../../shared/exclusions.dart';
+import '../../model/exclusions.dart';
 import '../com_interface.dart';
 import '../method.dart';
 import '../utils.dart';
@@ -10,7 +10,7 @@ import 'winrt_method.dart';
 import 'winrt_set_property.dart';
 
 class WinRTInterfaceProjection extends ComInterfaceProjection {
-  WinRTInterfaceProjection(super.typeDef);
+  WinRTInterfaceProjection(super.typeDef, [super.comment]);
 
   @override
   String get inheritsFrom => implementsInterfaces
@@ -185,6 +185,9 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
+  String get classType => 'Interface';
+
+  @override
   String get category => 'winrt';
 
   // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
@@ -264,8 +267,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       $rootHeader
       $guidConstants
 
-      /// {@category Interface}
-      /// {@category $category}
+      $classPreamble
       $classDeclaration
         // vtable begins at $vtableStart, is ${methodProjections.length} entries long.
         $shortName.fromRawPointer(super.ptr);

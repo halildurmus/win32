@@ -26,6 +26,10 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_INetwork = '{dcb00002-570f-4a9b-8d69-199fdba5723b}';
 
+/// The INetwork interface represents a network on the local machine. It can
+/// also represent a collection of network connections with a similar
+/// network signature.
+///
 /// {@category Interface}
 /// {@category com}
 class INetwork extends IDispatch {

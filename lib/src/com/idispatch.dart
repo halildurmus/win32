@@ -25,6 +25,9 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IDispatch = '{00020400-0000-0000-c000-000000000046}';
 
+/// Exposes objects, methods and properties to programming tools and other
+/// applications that support Automation.
+///
 /// {@category Interface}
 /// {@category com}
 class IDispatch extends IUnknown {

@@ -28,6 +28,8 @@ import 'iphonenumberinfostatics.dart';
 import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
+/// Information about a phone number.
+///
 /// {@category Class}
 /// {@category winrt}
 class PhoneNumberInfo extends IInspectable

@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IAppxFile = '{91df827b-94fd-468f-827b-57f41b2f6f2e}';
 
+/// Retrieves information about a payload or footprint file in a package.
+///
 /// {@category Interface}
 /// {@category com}
 class IAppxFile extends IUnknown {

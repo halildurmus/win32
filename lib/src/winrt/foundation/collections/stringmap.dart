@@ -29,6 +29,8 @@ import 'imapview.dart';
 import 'iiterator.dart';
 import '../../../com/iinspectable.dart';
 
+/// An associative collection, also known as a map or a dictionary.
+///
 /// {@category Class}
 /// {@category winrt}
 class StringMap extends IInspectable

@@ -25,6 +25,13 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_ISimpleAudioVolume = '{87ce5498-68d6-44e5-9215-6da47ef883d8}';
 
+/// The ISimpleAudioVolume interface enables a client to control the master
+/// volume level of an audio session. The IAudioClient::Initialize method
+/// initializes a stream object and assigns the stream to an audio session.
+/// The client obtains a reference to the [ISimpleAudioVolume] interface on
+/// a stream object by calling the `IAudioClient::GetService` method with
+/// parameter `riid` set to REFIID [IID_ISimpleAudioVolume].
+///
 /// {@category Interface}
 /// {@category com}
 class ISimpleAudioVolume extends IUnknown {

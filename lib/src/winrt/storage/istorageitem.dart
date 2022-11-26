@@ -30,6 +30,9 @@ import '../../com/iinspectable.dart';
 /// @nodoc
 const IID_IStorageItem = '{4207a996-ca2f-42f7-bde8-8b10457a7f30}';
 
+/// Manipulates storage items (files and folders) and their contents, and
+/// provides information about them.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IStorageItem extends IInspectable {

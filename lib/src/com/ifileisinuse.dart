@@ -25,6 +25,12 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IFileIsInUse = '{64a1cbf0-3a1a-4461-9158-376969693950}';
 
+/// Exposes methods that can be called to get information on or close a file
+/// that is in use by another application. When an application attempts to
+/// access a file and finds that file already in use, it can use the methods
+/// of this interface to gather information to present to the user in a
+/// dialog box.
+///
 /// {@category Interface}
 /// {@category com}
 class IFileIsInUse extends IUnknown {

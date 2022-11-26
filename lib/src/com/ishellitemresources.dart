@@ -25,6 +25,8 @@ import 'iunknown.dart';
 /// @nodoc
 const IID_IShellItemResources = '{ff5693be-2ce0-4d48-b5c5-40817d1acdb9}';
 
+/// Exposes methods to manipulate and query Shell item resources.
+///
 /// {@category Interface}
 /// {@category com}
 class IShellItemResources extends IUnknown {

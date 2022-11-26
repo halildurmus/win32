@@ -33,6 +33,11 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../system/user.dart';
 import '../../../com/iinspectable.dart';
 
+/// Represents a UI element that lets the user choose and open files. In a
+/// desktop app, before using an instance of this class in a way that
+/// displays UI, you'll need to associate the object with its owner's window
+/// handle.
+///
 /// {@category Class}
 /// {@category winrt}
 class FileOpenPicker extends IInspectable

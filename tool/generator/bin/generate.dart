@@ -232,13 +232,14 @@ String generateFunctionTests(String library, Iterable<Method> methods,
   return buffer.toString();
 }
 
-void generateComApis() {
+void generateComApis(Map<String, String> comTypesToGenerate) {
   final scope = MetadataStore.getWin32Scope();
 
-  for (final interface in comInterfacesToGenerate) {
+  for (final interface in comTypesToGenerate.keys) {
     final typeDef = scope.findTypeDef(interface);
     if (typeDef == null) throw Exception("Can't find $interface");
-    final interfaceProjection = ComInterfaceProjection(typeDef);
+    final interfaceProjection =
+        ComInterfaceProjection(typeDef, comTypesToGenerate[interface] ?? '');
 
     // In v2, we put classes and interfaces in the same file.
     final className = ComClassProjection.generateClassName(typeDef);
@@ -265,49 +266,44 @@ void generateComApis() {
   }
 }
 
-void generateWinRTApis() {
-  final mainWindowsRuntimeTypesToGenerate = windowsRuntimeTypesToGenerate
-    ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
-  final typesToGenerate = <String>{};
-
-  for (final type in mainWindowsRuntimeTypesToGenerate) {
+void generateWinRTApis(Map<String, String> typesToGenerate) {
+  // Catalog all the types we need to generate: the types themselves and their
+  // dependencies
+  final typesAndDependencies = <String>{};
+  for (final type in typesToGenerate.keys) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
         ? WinRTInterfaceProjection(typeDef)
         : WinRTClassProjection(typeDef);
 
-    // The main type e.g. 'Windows.Globalization.Calendar'
-    typesToGenerate.add(type);
+    typesAndDependencies.addAll({
+      // The type itself, e.g. 'Windows.Globalization.Calendar'
+      type,
 
-    // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
-    final implementsInterfaces = [
-      ...projection.typeDef.interfaces.map((interface) => interface.name)
-    ];
-    typesToGenerate.addAll(implementsInterfaces);
+      // Interfaces that the type implements e.g.'Windows.Globalization.ICalendar'
+      ...projection.typeDef.interfaces.map((interface) => interface.name),
 
-    // The type's factory and static interfaces e.g. 'Windows.Globalization.ICalendarFactory'
-    if (projection is WinRTClassProjection) {
-      final factoryAndStaticInterfaces = [
-        ...projection.factoryInterfaces,
-        ...projection.staticInterfaces
-      ];
-      typesToGenerate.addAll(factoryAndStaticInterfaces);
-    }
+      // The type's factory and static interfaces e.g.
+      // 'Windows.Globalization.ICalendarFactory'
+      if (projection is WinRTClassProjection) ...projection.factoryInterfaces,
+      if (projection is WinRTClassProjection) ...projection.staticInterfaces
+    });
   }
 
-  typesToGenerate
-    // Remove generic interfaces. See https://github.com/timsneath/win32/issues/480
+  typesAndDependencies
+    // Remove generic interfaces (https://github.com/timsneath/win32/issues/480)
     ..removeWhere((type) => type.isEmpty)
     // Remove excluded WinRT types
     ..removeWhere((type) => excludedWindowsRuntimeTypes.contains(type));
 
-  for (final type in typesToGenerate) {
+  // Generate the type projection for each type
+  for (final type in typesAndDependencies) {
     final typeDef = MetadataStore.getMetadataForType(type);
     if (typeDef == null) throw Exception("Can't find $type");
     final projection = typeDef.isInterface
-        ? WinRTInterfaceProjection(typeDef)
-        : WinRTClassProjection(typeDef);
+        ? WinRTInterfaceProjection(typeDef, typesToGenerate[typeDef.name] ?? '')
+        : WinRTClassProjection(typeDef, typesToGenerate[typeDef.name] ?? '');
 
     final dartClass = projection.toString();
     final classOutputPath =
@@ -418,10 +414,14 @@ void main() {
   generateFunctions(functionsToGenerate);
 
   print('Generating COM interfaces and tests...');
-  generateComApis();
+  final comTypesToGenerate = loadMap('com_types.json');
+  saveMap(comTypesToGenerate, 'com_types.json');
+  generateComApis(comTypesToGenerate);
 
   print('Generating Windows Runtime interfaces...');
-  generateWinRTApis();
+  final winrtTypesToGenerate = loadMap('winrt_types.json');
+  saveMap(winrtTypesToGenerate, 'winrt_types.json');
+  generateWinRTApis(winrtTypesToGenerate);
 
   print('Generating Windows Runtime enumerations...');
   final winrtEnumsToGenerate = loadMap('winrt_enums.json');

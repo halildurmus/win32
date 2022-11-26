@@ -25,6 +25,9 @@ import 'ipedometerreading.dart';
 import 'enums.g.dart';
 import '../../../com/iinspectable.dart';
 
+/// Provides an interface for a pedometer to measure the number of steps
+/// taken.
+///
 /// {@category Class}
 /// {@category winrt}
 class PedometerReading extends IInspectable implements IPedometerReading {

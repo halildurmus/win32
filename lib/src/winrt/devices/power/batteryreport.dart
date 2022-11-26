@@ -27,6 +27,9 @@ import '../../system/power/enums.g.dart';
 import '../../internal/ipropertyvalue_helpers.dart';
 import '../../../com/iinspectable.dart';
 
+/// Provides properties that indicate the charge, capacity, and status of
+/// the battery.
+///
 /// {@category Class}
 /// {@category winrt}
 class BatteryReport extends IInspectable implements IBatteryReport {
