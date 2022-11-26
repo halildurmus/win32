@@ -1,6 +1,9 @@
 import 'package:winmd/winmd.dart';
 
-import '../../../../generator.dart';
+import '../../type.dart';
+import '../../utils.dart';
+import '../winrt_get_property.dart';
+import '../winrt_method.dart';
 
 mixin _VectorProjection on WinRTMethodProjection {
   /// The type argument of `IVector` and `IVectorView`, as represented in the

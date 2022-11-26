@@ -1,7 +1,11 @@
 import 'package:win32/winrt.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../../../generator.dart';
+import '../../type.dart';
+import '../../utils.dart';
+import '../winrt_get_property.dart';
+import '../winrt_method.dart';
+import '../winrt_set_property.dart';
 
 mixin _ReferenceProjection on WinRTMethodProjection {
   /// The type argument of `IReference`, as represented in the [returnType]'s

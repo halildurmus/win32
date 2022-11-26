@@ -1,6 +1,10 @@
 import 'package:winmd/winmd.dart';
 
-import '../../../generator.dart';
+import '../method.dart';
+import '../type.dart';
+import '../utils.dart';
+import 'winrt_class.dart';
+import 'winrt_interface.dart';
 
 class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   WinRTImplementsMapperProjection(super.typeDef, this.interface);

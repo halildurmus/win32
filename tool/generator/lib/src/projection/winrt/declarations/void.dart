@@ -1,4 +1,4 @@
-import '../../../../generator.dart';
+import '../winrt_method.dart';
 
 class WinRTMethodReturningVoidProjection extends WinRTMethodProjection {
   WinRTMethodReturningVoidProjection(super.method, super.vtableOffset);

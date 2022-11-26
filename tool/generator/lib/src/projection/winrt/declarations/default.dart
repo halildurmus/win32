@@ -1,4 +1,6 @@
-import '../../../../generator.dart';
+import '../winrt_get_property.dart';
+import '../winrt_method.dart';
+import '../winrt_set_property.dart';
 
 mixin DefaultMethodProjection on WinRTMethodProjection {
   String get valRef => returnType.dartType == 'double' ||

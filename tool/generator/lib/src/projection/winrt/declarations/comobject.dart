@@ -1,4 +1,7 @@
-import '../../../../generator.dart';
+import '../../utils.dart';
+import '../winrt_get_property.dart';
+import '../winrt_method.dart';
+import '../winrt_set_property.dart';
 
 mixin _ComObjectProjection on WinRTMethodProjection {
   String get retType {
