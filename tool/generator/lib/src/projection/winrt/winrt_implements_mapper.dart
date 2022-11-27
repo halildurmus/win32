@@ -16,7 +16,7 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
   bool get isGenericInterface =>
       interface.typeSpec?.baseType == BaseType.genericTypeModifier;
 
-  /// The [interface] name with type arguments (e.g. `IMap<String, String?>`,
+  /// The [interface] name with type arguments (e.g. `IMap<String, String>`,
   /// `ICalendar`).
   String get interfaceNameWithTypeArgs => isGenericInterface
       ? parseGenericTypeIdentifierName(interface.typeSpec!)

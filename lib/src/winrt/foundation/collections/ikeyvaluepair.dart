@@ -52,7 +52,7 @@ class IKeyValuePair<K, V> extends IInspectable {
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
   /// final keyValuePair =
-  ///     IKeyValuePair<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  ///     IKeyValuePair<String, ChatMessageStatus>.fromRawPointer(ptr,
   ///         enumCreator: ChatMessageStatus.from);
   /// ```
   IKeyValuePair.fromRawPointer(
@@ -175,7 +175,7 @@ class IKeyValuePair<K, V> extends IInspectable {
 
   /// Gets the value of the key-value pair.
   V get value {
-    if (isSimilarType<V, String>()) return _value_String as V;
+    if (isSameType<V, String>()) return _value_String as V;
     if (isSubtypeOfInspectable<V>()) return _value_COMObject;
     if (isSubtypeOfWinRTEnum<V>()) return _value_enum;
 
@@ -246,7 +246,7 @@ class IKeyValuePair<K, V> extends IInspectable {
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
 
-  String? get _value_String {
+  String get _value_String {
     final retValuePtr = calloc<HSTRING>();
 
     try {

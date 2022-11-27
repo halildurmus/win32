@@ -46,8 +46,8 @@ class MapHelper {
 /// `IKeyValuePair<Guid, IInspectable?>`, `IKeyValuePair<Guid, Object?>`,
 /// `IKeyValuePair<PedometerStepKind, PedometerReading?>`,
 /// `IKeyValuePair<Object, Object?>`,
-/// `IKeyValuePair<String, Object?>`, `IKeyValuePair<String, String?>`,
-/// `IKeyValuePair<String, IInspectable?>`, `IKeyValuePair<String, WinRTEnum?>`.
+/// `IKeyValuePair<String, Object?>`, `IKeyValuePair<String, String>`,
+/// `IKeyValuePair<String, IInspectable?>`, `IKeyValuePair<String, WinRTEnum>`.
 ///
 /// ```dart
 /// isSupportedKeyValuePair<Guid, SpatialSurfaceInfo?>(); // true
@@ -76,11 +76,11 @@ bool isSupportedKeyValuePair<K, V>() {
     return true;
   }
 
-  // e.g. IKeyValuePair<String, Object?>, IKeyValuePair<String, String?>,
-  // IKeyValuePair<String, IJsonValue?>, IKeyValuePair<String, ChatMessageStatus?>
+  // e.g. IKeyValuePair<String, Object?>, IKeyValuePair<String, String>,
+  // IKeyValuePair<String, IJsonValue?>, IKeyValuePair<String, ChatMessageStatus>
   if (isSameType<K, String>() &&
       (isSimilarType<V, Object?>() ||
-          isSimilarType<V, String?>() ||
+          isSameType<V, String>() ||
           isSubtypeOfInspectable<V>() ||
           isSubtypeOfWinRTEnum<V>())) {
     return true;

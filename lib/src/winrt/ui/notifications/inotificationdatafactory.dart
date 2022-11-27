@@ -40,7 +40,7 @@ class INotificationDataFactory extends IInspectable {
           interface.toInterface(IID_INotificationDataFactory));
 
   NotificationData createNotificationDataWithValuesAndSequenceNumber(
-      IIterable<IKeyValuePair<String, String?>> initialValues,
+      IIterable<IKeyValuePair<String, String>> initialValues,
       int sequenceNumber) {
     final retValuePtr = calloc<COMObject>();
 
@@ -73,7 +73,7 @@ class INotificationDataFactory extends IInspectable {
   }
 
   NotificationData createNotificationDataWithValues(
-      IIterable<IKeyValuePair<String, String?>> initialValues) {
+      IIterable<IKeyValuePair<String, String>> initialValues) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =

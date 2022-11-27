@@ -37,7 +37,7 @@ class INotificationData extends IInspectable {
       INotificationData.fromRawPointer(
           interface.toInterface(IID_INotificationData));
 
-  IMap<String, String?> get values {
+  IMap<String, String> get values {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

@@ -271,7 +271,7 @@ void main() {
         contains("iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}'"));
   });
 
-  test('WinRT get property successfully projects IMap<String, String?>', () {
+  test('WinRT get property successfully projects IMap<String, String>', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.INotificationData');
 
@@ -286,7 +286,7 @@ void main() {
     expect(valuesProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(valuesProjection.toString().trimLeft(),
-        startsWith('IMap<String, String?> get values'));
+        startsWith('IMap<String, String> get values'));
     expect(valuesProjection.toString(),
         contains("iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}'"));
   });
@@ -446,9 +446,9 @@ void main() {
         .firstWhere((m) => m.name == 'First') as WinRTMethodProjection;
 
     expect(firstProjection.returnType.methodParamType,
-        equals('IIterator<IKeyValuePair<String, String?>>'));
+        equals('IIterator<IKeyValuePair<String, String>>'));
     expect(firstProjection.toString().trimLeft(),
-        startsWith('IIterator<IKeyValuePair<String, String?>> first()'));
+        startsWith('IIterator<IKeyValuePair<String, String>> first()'));
   });
 
   test('WinRT method projects parameter with nested type correctly', () {
@@ -467,7 +467,7 @@ void main() {
     expect(initialValuesParameter.localIdentifier,
         equals('initialValues.ptr.cast<Pointer<COMObject>>().value'));
     expect(initialValuesParameter.type.methodParamType,
-        equals('IIterable<IKeyValuePair<String, String?>>'));
+        equals('IIterable<IKeyValuePair<String, String>>'));
   });
 
   test('WinRT interface successfully projects something', () {

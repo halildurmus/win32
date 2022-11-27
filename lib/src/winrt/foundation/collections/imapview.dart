@@ -55,7 +55,7 @@ class IMapView<K, V> extends IInspectable
   ///
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
-  /// final mapView = IMapView<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  /// final mapView = IMapView<String, ChatMessageStatus>.fromRawPointer(ptr,
   ///     enumCreator: ChatMessageStatus.from);
   /// ```
   IMapView.fromRawPointer(
@@ -103,7 +103,7 @@ class IMapView<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
+      if (isSameType<V, String>()) {
         return _lookup_String_String(key as String) as V;
       }
 
@@ -296,7 +296,7 @@ class IMapView<K, V> extends IInspectable
     }
   }
 
-  String? _lookup_String_String(String key) {
+  String _lookup_String_String(String key) {
     final retValuePtr = calloc<HSTRING>();
     final hKey = convertToHString(key);
 

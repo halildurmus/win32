@@ -934,19 +934,19 @@ void main() {
       tearDown(winrtUninitialize);
     });
 
-    group('IMap<String, String?> (StringMap)', () {
-      late IMap<String, String?> map;
+    group('IMap<String, String> (StringMap)', () {
+      late IMap<String, String> map;
 
       setUp(() {
         winrtInitialize();
         map = IMap()
           ..insert('key1', 'value1')
-          ..insert('key2', null)
+          ..insert('key2', '')
           ..insert('key3', 'value3');
       });
 
       test('fromMap', () {
-        map = IMap.fromMap({'key1': 'value1', 'key2': null, 'key3': 'value3'});
+        map = IMap.fromMap({'key1': 'value1', 'key2': '', 'key3': 'value3'});
         expect(map.lookup('key1'), equals('value1'));
         expect(map.lookup('key2'), isEmpty);
         expect(map.lookup('key3'), equals('value3'));
@@ -1049,10 +1049,10 @@ void main() {
       tearDown(winrtUninitialize);
     });
 
-    group('IMapView<String, String?> (StringMap)', () {
-      late IMapView<String, String?> mapView;
+    group('IMapView<String, String> (StringMap)', () {
+      late IMapView<String, String> mapView;
 
-      IMapView<String, String?> getView(Pointer<COMObject> ptr) {
+      IMapView<String, String> getView(Pointer<COMObject> ptr) {
         final retValuePtr = calloc<COMObject>();
 
         final hr = ptr.ref.lpVtbl.value
@@ -1073,7 +1073,7 @@ void main() {
 
       setUp(() {
         winrtInitialize();
-        final map = IMap<String, String?>()
+        final map = IMap<String, String>()
           ..insert('key1', 'value1')
           ..insert('key2', '')
           ..insert('key3', 'value3');
@@ -1081,7 +1081,7 @@ void main() {
       });
 
       test('lookup fails if the map is empty', () {
-        final map = IMap<String, String?>();
+        final map = IMap<String, String>();
         mapView = getView(map.ptr);
         expect(() => mapView.lookup('key1'), throwsException);
       });

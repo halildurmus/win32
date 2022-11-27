@@ -41,7 +41,7 @@ class NotificationData extends IInspectable implements INotificationData {
 
   // INotificationDataFactory methods
   static NotificationData createNotificationDataWithValuesAndSequenceNumber(
-      IIterable<IKeyValuePair<String, String?>> initialValues,
+      IIterable<IKeyValuePair<String, String>> initialValues,
       int sequenceNumber) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
@@ -56,7 +56,7 @@ class NotificationData extends IInspectable implements INotificationData {
   }
 
   static NotificationData createNotificationDataWithValues(
-      IIterable<IKeyValuePair<String, String?>> initialValues) {
+      IIterable<IKeyValuePair<String, String>> initialValues) {
     final activationFactory =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
 
@@ -72,7 +72,7 @@ class NotificationData extends IInspectable implements INotificationData {
   late final _iNotificationData = INotificationData.from(this);
 
   @override
-  IMap<String, String?> get values => _iNotificationData.values;
+  IMap<String, String> get values => _iNotificationData.values;
 
   @override
   int get sequenceNumber => _iNotificationData.sequenceNumber;
