@@ -114,6 +114,109 @@ const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_LOCAL_SERVER |
     CLSCTX_REMOTE_SERVER;
 
+/// Initializes the thread for multithreaded object concurrency
+const COINITBASE_MULTITHREADED = 0x0;
+const COINIT_MULTITHREADED = COINITBASE_MULTITHREADED;
+
+// Initializes the thread for apartment-threaded object concurrency
+const COINIT_APARTMENTTHREADED = 0x2;
+
+/// Disables DDE for OLE1 support.
+const COINIT_DISABLE_OLE1DDE = 0x4;
+
+/// Increase memory usage in an attempt to increase performance.
+const COINIT_SPEED_OVER_MEMORY = 0x8;
+
+// -----------------------------------------------------------------------------
+// Kernel memory management
+// -----------------------------------------------------------------------------
+
+/// Disables all access to the committed region of pages. An attempt to read
+/// from, write to, or execute the committed region results in an access
+/// violation.
+const PAGE_NOACCESS = 0x01;
+
+/// Enables read-only access to the committed region of pages. An attempt to
+/// write to the committed region results in an access violation. If Data
+/// Execution Prevention is enabled, an attempt to execute code in the committed
+/// region results in an access violation.
+const PAGE_READONLY = 0x02;
+
+/// Enables read-only or read/write access to the committed region of pages. If
+/// Data Execution Prevention is enabled, attempting to execute code in the
+/// committed region results in an access violation.
+const PAGE_READWRITE = 0x04;
+
+/// Enables read-only or copy-on-write access to a mapped view of a file mapping
+/// object. An attempt to write to a committed copy-on-write page results in a
+/// private copy of the page being made for the process. The private page is
+/// marked as PAGE_READWRITE, and the change is written to the new page. If Data
+/// Execution Prevention is enabled, attempting to execute code in the committed
+/// region results in an access violation.
+const PAGE_WRITECOPY = 0x08;
+
+/// Enables execute access to the committed region of pages. An attempt to write
+/// to the committed region results in an access violation.
+const PAGE_EXECUTE = 0x10;
+
+/// Enables execute or read-only access to the committed region of pages. An
+/// attempt to write to the committed region results in an access violation.
+const PAGE_EXECUTE_READ = 0x20;
+
+/// Enables execute, read-only, or read/write access to the committed region of
+/// pages.
+const PAGE_EXECUTE_READWRITE = 0x40;
+
+/// Enables execute, read-only, or copy-on-write access to a mapped view of a
+/// file mapping object. An attempt to write to a committed copy-on-write page
+/// results in a private copy of the page being made for the process. The
+/// private page is marked as PAGE_EXECUTE_READWRITE, and the change is written
+/// to the new page.
+const PAGE_EXECUTE_WRITECOPY = 0x80;
+
+/// Pages in the region become guard pages. Any attempt to access a guard page
+/// causes the system to raise a STATUS_GUARD_PAGE_VIOLATION exception and turn
+/// off the guard page status. Guard pages thus act as a one-time access alarm.
+const PAGE_GUARD = 0x100;
+
+/// Sets all pages to be non-cachable. Applications should not use this
+/// attribute except when explicitly required for a device. Using the
+/// interlocked functions with memory that is mapped with SEC_NOCACHE can result
+/// in an EXCEPTION_ILLEGAL_INSTRUCTION exception.
+const PAGE_NOCACHE = 0x200;
+
+/// Sets all pages to be write-combined.
+const PAGE_WRITECOMBINE = 0x400;
+
+/// The page contains a thread control structure (TCS).
+const PAGE_ENCLAVE_THREAD_CONTROL = 0x80000000;
+
+/// Pages in the region will not have their CFG information updated while the
+/// protection changes for VirtualProtect. For example, if the pages in the
+/// region was allocated using PAGE_TARGETS_INVALID, then the invalid
+/// information will be maintained while the page protection changes. This flag
+/// is only valid when the protection changes to an executable type like
+/// PAGE_EXECUTE, PAGE_EXECUTE_READ, PAGE_EXECUTE_READWRITE and
+/// PAGE_EXECUTE_WRITECOPY. The default behavior for VirtualProtect protection
+/// change to executable is to mark all locations as valid call targets for CFG.
+const PAGE_TARGETS_NO_UPDATE = 0x40000000;
+
+/// Sets all locations in the pages as invalid targets for CFG. Used along with
+/// any execute page protection like PAGE_EXECUTE, PAGE_EXECUTE_READ,
+/// PAGE_EXECUTE_READWRITE and PAGE_EXECUTE_WRITECOPY. Any indirect call to
+/// locations in those pages will fail CFG checks and the process will be
+/// terminated. The default behavior for executable pages allocated is to be
+/// marked valid call targets for CFG.
+const PAGE_TARGETS_INVALID = 0x40000000;
+
+/// The page contents that you supply are excluded from measurement with the
+/// EEXTEND instruction of the Intel SGX programming model.
+const PAGE_ENCLAVE_UNVALIDATED = 0x20000000;
+
+/// Indicates that the page will be protected to prevent further use in an
+/// enclave.
+const PAGE_ENCLAVE_DECOMMIT = 0x10000000;
+
 // -----------------------------------------------------------------------------
 // IDispatch constants
 // -----------------------------------------------------------------------------
