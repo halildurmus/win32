@@ -45,7 +45,7 @@ class IMap<K, V> extends IInspectable
   /// Creates an empty [IMap].
   ///
   /// [K] must be of type `Guid` or `String` and [V] must be of type
-  /// `Object?` or `String?`.
+  /// `Object?` or `String`.
   factory IMap() {
     if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
       return IMap.fromRawPointer(MediaPropertySet().ptr,
@@ -53,7 +53,7 @@ class IMap<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
+      if (isSameType<V, String>()) {
         return IMap.fromRawPointer(StringMap().ptr,
             iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
@@ -165,7 +165,7 @@ class IMap<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
+      if (isSameType<V, String>()) {
         return _lookup_String_String(key as String) as V;
       }
 
@@ -358,7 +358,7 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  String? _lookup_String_String(String key) {
+  String _lookup_String_String(String key) {
     final retValuePtr = calloc<HSTRING>();
     final hKey = convertToHString(key);
 
@@ -561,8 +561,8 @@ class IMap<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
-        return _insert_String_String(key as String, value as String?);
+      if (isSameType<V, String>()) {
+        return _insert_String_String(key as String, value as String);
       }
 
       if (isSubtypeOfInspectable<V>()) {
@@ -705,10 +705,10 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_String_String(String key, String? value) {
+  bool _insert_String_String(String key, String value) {
     final retValuePtr = calloc<Bool>();
     final hKey = convertToHString(key);
-    final hValue = value != null ? convertToHString(value) : 0;
+    final hValue = convertToHString(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value

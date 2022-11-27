@@ -103,7 +103,7 @@ class IMapView<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
+      if (isSameType<V, String>()) {
         return _lookup_String_String(key as String) as V;
       }
 
@@ -296,7 +296,7 @@ class IMapView<K, V> extends IInspectable
     }
   }
 
-  String? _lookup_String_String(String key) {
+  String _lookup_String_String(String key) {
     final retValuePtr = calloc<HSTRING>();
     final hKey = convertToHString(key);
 
