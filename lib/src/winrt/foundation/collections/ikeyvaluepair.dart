@@ -52,7 +52,7 @@ class IKeyValuePair<K, V> extends IInspectable {
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
   /// final keyValuePair =
-  ///     IKeyValuePair<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  ///     IKeyValuePair<String, ChatMessageStatus>.fromRawPointer(ptr,
   ///         enumCreator: ChatMessageStatus.from);
   /// ```
   IKeyValuePair.fromRawPointer(

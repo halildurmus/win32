@@ -121,19 +121,19 @@ void main() {
     final stringMap = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.StringMap')!;
     expect(parseGenericTypeIdentifierName(stringMap.interfaces[0].typeSpec!),
-        equals('IMap<String, String?>'));
+        equals('IMap<String, String>'));
     expect(parseGenericTypeIdentifierName(stringMap.interfaces[1].typeSpec!),
-        equals('IIterable<IKeyValuePair<String, String?>>'));
+        equals('IIterable<IKeyValuePair<String, String>>'));
     expect(parseGenericTypeIdentifierName(stringMap.interfaces[2].typeSpec!),
-        equals('IObservableMap<String, String?>'));
+        equals('IObservableMap<String, String>'));
     expect(
         parseGenericTypeIdentifierName(
             stringMap.findMethod('First')!.returnType.typeIdentifier),
-        equals('IIterator<IKeyValuePair<String, String?>>'));
+        equals('IIterator<IKeyValuePair<String, String>>'));
     expect(
         parseGenericTypeIdentifierName(
             stringMap.findMethod('GetView')!.returnType.typeIdentifier),
-        equals('IMapView<String, String?>'));
+        equals('IMapView<String, String>'));
 
     final fileOpenPicker = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;

@@ -216,7 +216,7 @@ String stripLeadingUnderscores(String name) {
 }
 
 /// Take a name like `IAsyncOperation<StorageFile>` and return `StorageFile` or
-/// `String, String?` for a name like `IMap<String, String?>`.
+/// `String, String` for a name like `IMap<String, String>`.
 String typeArguments(String name) {
   if (!name.contains('<')) return name;
   return name.substring(name.indexOf('<') + 1, name.length - 1);
@@ -331,7 +331,7 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
   final parentTypeName = stripGenerics(lastComponent(typeIdentifier.name));
 
   if (typeIdentifier.type?.genericParams.length == 2) {
-    final secondArgMustBeNullable = [
+    final secondArgIsPotentiallyNullable = [
       'Windows.Foundation.Collections.IKeyValuePair`2',
       'Windows.Foundation.Collections.IMap`2',
       'Windows.Foundation.Collections.IMapView`2',
@@ -339,7 +339,15 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
     ].contains(typeIdentifier.type?.name);
     final firstArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
     final secondArg = parseTypeIdentifierName(typeIdentifier.typeArg!.typeArg!);
-    final questionMark = secondArgMustBeNullable ? '?' : '';
+
+    var questionMark = '';
+    if (secondArgIsPotentiallyNullable) {
+      final secondArgIsEnum =
+          TypeProjection(typeIdentifier.typeArg!.typeArg!).isWinRTEnum;
+      final secondArgIsNullable = !secondArgIsEnum && secondArg != 'String';
+      questionMark = secondArgIsNullable ? '?' : '';
+    }
+
     return '$parentTypeName<$firstArg, $secondArg$questionMark>';
   }
 

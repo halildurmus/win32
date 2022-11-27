@@ -35,22 +35,22 @@ import '../../../com/iinspectable.dart';
 /// {@category winrt}
 class StringMap extends IInspectable
     implements
-        IMap<String, String?>,
-        IIterable<IKeyValuePair<String, String?>>,
-        IObservableMap<String, String?> {
+        IMap<String, String>,
+        IIterable<IKeyValuePair<String, String>>,
+        IObservableMap<String, String> {
   StringMap({Allocator allocator = calloc})
       : super(ActivateClass(_className, allocator: allocator));
   StringMap.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.StringMap';
 
-  // IMap<String, String?> methods
-  late final _iMap = IMap<String, String?>.fromRawPointer(
+  // IMap<String, String> methods
+  late final _iMap = IMap<String, String>.fromRawPointer(
       toInterface('{f6d1f700-49c2-52ae-8154-826f9908773c}'),
       iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}');
 
   @override
-  String? lookup(String key) => _iMap.lookup(key);
+  String lookup(String key) => _iMap.lookup(key);
 
   @override
   int get size => _iMap.size;
@@ -59,10 +59,10 @@ class StringMap extends IInspectable
   bool hasKey(String key) => _iMap.hasKey(key);
 
   @override
-  Map<String, String?> getView() => _iMap.getView();
+  Map<String, String> getView() => _iMap.getView();
 
   @override
-  bool insert(String key, String? value) => _iMap.insert(key, value);
+  bool insert(String key, String value) => _iMap.insert(key, value);
 
   @override
   void remove(String key) => _iMap.remove(key);
@@ -71,13 +71,13 @@ class StringMap extends IInspectable
   void clear() => _iMap.clear();
 
   @override
-  IIterator<IKeyValuePair<String, String?>> first() => _iMap.first();
+  IIterator<IKeyValuePair<String, String>> first() => _iMap.first();
 
   @override
-  Map<String, String?> toMap() => _iMap.toMap();
+  Map<String, String> toMap() => _iMap.toMap();
 
-  // IObservableMap<String, String?> methods
-  late final _iObservableMap = IObservableMap<String, String?>.fromRawPointer(
+  // IObservableMap<String, String> methods
+  late final _iObservableMap = IObservableMap<String, String>.fromRawPointer(
       toInterface('{1e036276-2f60-55f6-b7f3-f86079e6900b}'));
 
   @override

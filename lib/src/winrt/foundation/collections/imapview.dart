@@ -55,7 +55,7 @@ class IMapView<K, V> extends IInspectable
   ///
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
-  /// final mapView = IMapView<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  /// final mapView = IMapView<String, ChatMessageStatus>.fromRawPointer(ptr,
   ///     enumCreator: ChatMessageStatus.from);
   /// ```
   IMapView.fromRawPointer(

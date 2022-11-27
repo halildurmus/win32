@@ -86,7 +86,7 @@ class IMap<K, V> extends IInspectable
   ///
   /// [enumCreator] must be specified if [V] is a `WinRTEnum` type.
   /// ```dart
-  /// final map = IMap<String, ChatMessageStatus?>.fromRawPointer(ptr,
+  /// final map = IMap<String, ChatMessageStatus>.fromRawPointer(ptr,
   ///     enumCreator: ChatMessageStatus.from);
   /// ```
   IMap.fromRawPointer(
@@ -118,7 +118,7 @@ class IMap<K, V> extends IInspectable
   /// Creates an [IMap] with the same keys and values as [other].
   ///
   /// [other] must be of type `Map<Guid, Object?>`, `Map<String, Object?>`,
-  /// or `Map<String, String?>`.
+  /// or `Map<String, String>`.
   factory IMap.fromMap(Map<K, V> other) {
     if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
       final iMap = MediaPropertySet();
@@ -128,9 +128,9 @@ class IMap<K, V> extends IInspectable
     }
 
     if (isSameType<K, String>()) {
-      if (isSimilarType<V, String>()) {
+      if (isSameType<V, String>()) {
         final iMap = StringMap();
-        other.cast<String, String?>().forEach(iMap.insert);
+        other.cast<String, String>().forEach(iMap.insert);
         return IMap.fromRawPointer(iMap.ptr,
             iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
@@ -571,7 +571,7 @@ class IMap<K, V> extends IInspectable
       }
 
       if (isSubtypeOfWinRTEnum<V>()) {
-        return _insert_String_enum(key as String, value as WinRTEnum?);
+        return _insert_String_enum(key as String, value as WinRTEnum);
       }
 
       return _insert_String_Object(key as String, boxValue(value));
@@ -654,7 +654,7 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_String_enum(String key, WinRTEnum? value) {
+  bool _insert_String_enum(String key, WinRTEnum value) {
     final retValuePtr = calloc<Bool>();
     final hKey = convertToHString(key);
 
@@ -668,7 +668,7 @@ class IMap<K, V> extends IInspectable
                               Pointer, HSTRING, Int32, Pointer<Bool>)>>>()
               .value
               .asFunction<int Function(Pointer, int, int, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, hKey, value?.value ?? 0, retValuePtr);
+          ptr.ref.lpVtbl, hKey, value.value, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
