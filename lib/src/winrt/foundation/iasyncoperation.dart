@@ -1,6 +1,6 @@
 // iasyncoperation.dart
 
-// ignore_for_file: unused_import, directives_ordering, camel_case_types
+// ignore_for_file: unused_import, camel_case_types
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -12,13 +12,11 @@ import '../../combase.dart';
 import '../../constants.dart';
 import '../../exceptions.dart';
 import '../../macros.dart';
-import '../../win32/ole32.g.dart';
-import '../../variant.dart';
 import '../../structs.g.dart';
 import '../../utils.dart';
-
+import '../../variant.dart';
+import '../../win32/ole32.g.dart';
 import '../../winrt_constants.dart';
-
 import 'iasyncinfo.dart';
 
 /// @nodoc
