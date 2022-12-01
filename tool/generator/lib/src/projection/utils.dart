@@ -557,6 +557,54 @@ String stripGenerics(String name) {
   return name.substring(0, backtickIndex);
 }
 
+/// Sorts [importLines] according to Effective Dart: Style guidelines.
+/// See https://dart.dev/guides/language/effective-dart/style#ordering
+List<String> sortImports(List<String> importLines) {
+  if (importLines.isEmpty) return importLines;
+
+  final dartImports = <String>[];
+  final packageImports = <String>[];
+  final projectImports = <String>[];
+  final projectRelativeImports = <String>[];
+
+  for (final importLine in importLines) {
+    assert(importLine.startsWith('import ') && importLine.endsWith(';'));
+
+    if (importLine.contains('dart:')) {
+      dartImports.add(importLine);
+    } else if (importLine.contains('package:win32/')) {
+      projectImports.add(importLine);
+    } else if (importLine.contains('package:')) {
+      packageImports.add(importLine);
+    } else {
+      projectRelativeImports.add(importLine);
+    }
+  }
+
+  final sortedImportLines = <String>[];
+
+  if (dartImports.isNotEmpty) {
+    sortedImportLines.addAll(dartImports..sort());
+  }
+
+  if (packageImports.isNotEmpty) {
+    if (dartImports.isNotEmpty) sortedImportLines.add('');
+    sortedImportLines.addAll(packageImports..sort());
+  }
+
+  if (projectImports.isNotEmpty || projectRelativeImports.isNotEmpty) {
+    if (dartImports.isNotEmpty || packageImports.isNotEmpty) {
+      sortedImportLines.add('');
+    }
+
+    sortedImportLines
+      ..addAll(projectImports..sort())
+      ..addAll(projectRelativeImports..sort());
+  }
+
+  return sortedImportLines;
+}
+
 List<NamespaceGroup> groupTypesByParentNamespace(Iterable<String> types) {
   types.toList().sort((a, b) => a.compareTo(b));
   final namespaceGroups = <NamespaceGroup>[];
