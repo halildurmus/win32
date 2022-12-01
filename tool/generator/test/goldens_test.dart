@@ -28,7 +28,10 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final typeDef = scope.findTypeDef(typeToGenerate)!;
 
-    final dartClass = ComInterfaceProjection(typeDef).toString();
+    final comTypesToGenerate = loadMap('com_types.json');
+    final dartClass = ComInterfaceProjection(
+            typeDef, comTypesToGenerate[typeToGenerate] ?? '')
+        .toString();
     final formattedDartClass = DartFormatter().format(dartClass);
 
     File('test/goldens/inetwork.comparison')
