@@ -2,7 +2,7 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-// ignore_for_file: unused_import, directives_ordering
+// ignore_for_file: unused_import
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -20,8 +20,8 @@ import '../structs.g.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
-import 'iwbemclassobject.dart';
 import 'iunknown.dart';
+import 'iwbemclassobject.dart';
 
 /// @nodoc
 const IID_IWbemObjectAccess = '{49353c9a-516b-11d1-aea6-00c04fb68820}';
