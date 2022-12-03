@@ -5,7 +5,6 @@ library generator;
 export 'src/model/exclusions.dart';
 export 'src/model/false_properties.dart';
 export 'src/model/functions.dart';
-export 'src/model/import_headers.dart';
 export 'src/model/load_json.dart';
 export 'src/model/struct_sizes.dart';
 

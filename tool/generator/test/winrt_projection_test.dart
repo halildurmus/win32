@@ -131,7 +131,7 @@ void main() {
         'Windows.Storage.Pickers.IFileOpenPicker');
 
     final projection = WinRTInterfaceProjection(winTypeDef!);
-    expect(projection.interfaceImport, equals(['iinspectable.dart']));
+    expect(projection.interfaceImports, equals(['iinspectable.dart']));
   });
 
   test('WinRT interface import header is meaningful', () {
@@ -555,7 +555,7 @@ void main() {
 
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.inheritsFrom, contains('IStringable'));
-    expect(projection.interfaceImport,
+    expect(projection.interfaceImports,
         contains('../../foundation/istringable.dart'));
   });
 
@@ -565,7 +565,7 @@ void main() {
 
     final projection = WinRTClassProjection(winTypeDef!);
     expect(projection.inheritsFrom, isNot(contains('IStringable')));
-    expect(projection.interfaceImport,
+    expect(projection.interfaceImports,
         isNot(contains('../foundation/istringable.dart')));
   });
 

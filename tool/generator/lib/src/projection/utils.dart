@@ -1,5 +1,6 @@
 // Useful utilities
 
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -555,6 +556,54 @@ String stripGenerics(String name) {
   final backtickIndex = name.indexOf('`');
   if (backtickIndex == -1) return name;
   return name.substring(0, backtickIndex);
+}
+
+/// Sorts [importLines] according to Effective Dart: Style guidelines.
+/// See https://dart.dev/guides/language/effective-dart/style#ordering
+List<String> sortImports(List<String> importLines) {
+  if (importLines.isEmpty) return importLines;
+
+  final dartImports = SplayTreeSet<String>();
+  final packageImports = SplayTreeSet<String>();
+  final projectImports = SplayTreeSet<String>();
+  final projectRelativeImports = SplayTreeSet<String>();
+
+  for (final importLine in importLines) {
+    assert(importLine.startsWith('import ') && importLine.endsWith(';'));
+
+    if (importLine.contains('dart:')) {
+      dartImports.add(importLine);
+    } else if (importLine.contains('package:win32/')) {
+      projectImports.add(importLine);
+    } else if (importLine.contains('package:')) {
+      packageImports.add(importLine);
+    } else {
+      projectRelativeImports.add(importLine);
+    }
+  }
+
+  final sortedImportLines = <String>[];
+
+  if (dartImports.isNotEmpty) {
+    sortedImportLines.addAll(dartImports);
+  }
+
+  if (packageImports.isNotEmpty) {
+    if (dartImports.isNotEmpty) sortedImportLines.add('');
+    sortedImportLines.addAll(packageImports);
+  }
+
+  if (projectImports.isNotEmpty || projectRelativeImports.isNotEmpty) {
+    if (dartImports.isNotEmpty || packageImports.isNotEmpty) {
+      sortedImportLines.add('');
+    }
+
+    sortedImportLines
+      ..addAll(projectImports)
+      ..addAll(projectRelativeImports);
+  }
+
+  return sortedImportLines;
 }
 
 List<NamespaceGroup> groupTypesByParentNamespace(Iterable<String> types) {

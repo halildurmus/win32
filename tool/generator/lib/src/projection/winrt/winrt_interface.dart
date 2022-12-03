@@ -89,12 +89,12 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   }
 
   @override
-  List<String> get interfaceImport {
+  Set<String> get interfaceImports {
     if (typeDef.interfaces.isEmpty) {
       // Inherits from IInspectable, which is a traditional COM type.
-      return ['iinspectable.dart'];
+      return {'iinspectable.dart'};
     } else {
-      final importList = <String>[];
+      final importList = <String>{};
 
       for (final interface in typeDef.interfaces) {
         importList.add(getImportForTypeDef(interface));
@@ -113,14 +113,31 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     }
   }
 
-  Set<String> get coreImports => {...interfaceImport, ...importsForClass()}
-    // TODO: Remove this once WinRT events are supported.
-    ..removeWhere((import) => import.endsWith('eventargs.dart'))
-    ..removeWhere((import) => import == 'iinspectable.dart' || import.isEmpty);
+  @override
+  List<String> get extraImports => [
+        relativePathTo('com/iinspectable.dart'),
+        relativePathTo('combase.dart'),
+        relativePathTo('exceptions.dart'),
+        relativePathTo('macros.dart'),
+        relativePathTo('utils.dart'),
+        relativePathTo('types.dart'),
+        relativePathTo('win32/api_ms_win_core_winrt_string_l1_1_0.g.dart'),
+        relativePathTo('winrt_callbacks.dart'),
+        relativePathTo('winrt_helpers.dart'),
+        relativePathTo('winrt/internal/hstring_array.dart'),
+      ];
 
   @override
   String get importHeader {
-    final imports = {...coreImports};
+    final imports = {
+      ...coreImports,
+      ...interfaceImports,
+      ...importsForClass,
+      ...extraImports
+    }
+      ..removeWhere((import) => import == 'iinspectable.dart' || import.isEmpty)
+      // TODO: Remove this check once WinRT events are supported.
+      ..removeWhere((import) => import.endsWith('eventargs.dart'));
 
     // IPropertySet and IWwwFormUrlDecoderRuntimeClass interfaces are unusual in
     // that they don't define any members for IIterable despite inheriting from
@@ -150,14 +167,16 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final useImportAliasForWinRTUri =
         !['IUriRuntimeClass', 'IUriRuntimeClassFactory'].contains(shortName);
 
-    return imports.map((import) {
-      if (useImportAliasForWinRTUri && import.endsWith('/uri.dart')) {
-        // Use import alias to avoid conflict with the dart:core's Uri.
-        return "import '$import' as winrt_uri;";
-      }
+    return sortImports(
+      imports.map((import) {
+        if (useImportAliasForWinRTUri && import.endsWith('/uri.dart')) {
+          // Use import alias to avoid conflict with the dart:core's Uri.
+          return "import '$import' as winrt_uri;";
+        }
 
-      return "import '$import';";
-    }).join('\n');
+        return "import '$import';";
+      }).toList(),
+    ).join('\n');
   }
 
   List<MethodProjection>? _methodProjections;
@@ -204,24 +223,6 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   int cacheVtableStart(TypeDef? type) => 6;
 
   @override
-  String get rootHeader =>
-      "import '${relativePathTo('com/iinspectable.dart')}';";
-
-  @override
-  String get extraHeaders => """
-    import '${relativePathTo('combase.dart')}';
-    import '${relativePathTo('exceptions.dart')}';
-    import '${relativePathTo('macros.dart')}';
-    import '${relativePathTo('utils.dart')}';
-    import '${relativePathTo('types.dart')}';
-    import '${relativePathTo('win32/api_ms_win_core_winrt_string_l1_1_0.g.dart')}';
-    import '${relativePathTo('winrt_callbacks.dart')}';
-    import '${relativePathTo('winrt_helpers.dart')}';
-
-    import '${relativePathTo('winrt/internal/hstring_array.dart')}';
-""";
-
-  @override
   String get shortName => stripGenerics(lastComponent(typeDef.name));
 
   String get classDeclaration => 'class $shortName extends IInspectable'
@@ -264,9 +265,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
   String toString() {
     return '''
       $header
-      $extraHeaders
       $importHeader
-      $rootHeader
       $guidConstants
 
       $classPreamble

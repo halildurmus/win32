@@ -663,6 +663,52 @@ void main() {
         equals('{9e5f3ed0-cf1c-5d38-832c-acea6164bf5c}'));
   });
 
+  test('sortImports', () {
+    expect(
+        sortImports([
+          "import 'dart:ffi';",
+          "import 'package:ffi/ffi.dart';",
+          "import 'dart:async';",
+          "import 'enums.g.dart';",
+          "import '../../../combase.dart';",
+          "import '../../../exceptions.dart';",
+          "import '../../foundation/collections/ivectorview.dart';",
+          "import '../../../types.dart';",
+          "import '../../../com/iinspectable.dart';",
+          "import '../../../utils.dart';",
+          "import '../../foundation/iasyncoperation.dart';",
+          "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
+          "import '../../../winrt_callbacks.dart';",
+          "import '../storagefile.dart';",
+          "import '../../../winrt_helpers.dart';",
+          "import '../../foundation/collections/ivector.dart';",
+          "import '../../internal/hstring_array.dart';",
+          "import '../../../macros.dart';",
+        ]),
+        orderedEquals([
+          "import 'dart:async';",
+          "import 'dart:ffi';",
+          "",
+          "import 'package:ffi/ffi.dart';",
+          "",
+          "import '../../../com/iinspectable.dart';",
+          "import '../../../combase.dart';",
+          "import '../../../exceptions.dart';",
+          "import '../../../macros.dart';",
+          "import '../../../types.dart';",
+          "import '../../../utils.dart';",
+          "import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';",
+          "import '../../../winrt_callbacks.dart';",
+          "import '../../../winrt_helpers.dart';",
+          "import '../../foundation/collections/ivector.dart';",
+          "import '../../foundation/collections/ivectorview.dart';",
+          "import '../../foundation/iasyncoperation.dart';",
+          "import '../../internal/hstring_array.dart';",
+          "import '../storagefile.dart';",
+          "import 'enums.g.dart';",
+        ]));
+  });
+
   test('stripGenerics', () {
     expect(stripGenerics('TypedEventHandler`2'), equals('TypedEventHandler'));
     expect(stripGenerics('LicenseChangedEventHandler'),

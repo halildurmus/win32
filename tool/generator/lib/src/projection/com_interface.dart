@@ -1,7 +1,6 @@
 import 'package:winmd/winmd.dart';
 
 import '../model/exclusions.dart';
-import '../model/import_headers.dart';
 import 'com_method.dart';
 import 'com_property.dart';
 import 'method.dart';
@@ -23,9 +22,7 @@ class ComInterfaceProjection {
   ComInterfaceProjection(this.typeDef, [this.comment = '']);
 
   int cacheVtableStart(TypeDef? type) {
-    if (type == null) {
-      return 0;
-    }
+    if (type == null) return 0;
 
     if (type.isInterface && type.interfaces.isNotEmpty) {
       var sum = 0;
@@ -66,12 +63,9 @@ class ComInterfaceProjection {
   String get shortName => stripAnsiUnicodeSuffix(
       stripLeadingUnderscores(safeIdentifierForTypeDef(typeDef)));
 
-  String get inheritsFrom {
-    if (typeDef.interfaces.isNotEmpty) {
-      return safeIdentifierForTypeDef(typeDef.interfaces.first);
-    }
-    return '';
-  }
+  String get inheritsFrom => typeDef.interfaces.isNotEmpty
+      ? safeIdentifierForTypeDef(typeDef.interfaces.first)
+      : '';
 
   String getImportForTypeDef(TypeDef typeDef) {
     if (typeDef.isDelegate) {
@@ -95,7 +89,7 @@ class ComInterfaceProjection {
   }
 
   // TODO: Find duplicates. This is the "correct" one.
-  Set<String> importsForClass() {
+  Set<String> get importsForClass {
     final importList = <String>{};
     final methods = {
       ...typeDef.methods,
@@ -120,40 +114,56 @@ class ComInterfaceProjection {
         }
       }
     }
+
     return importList;
   }
 
   late final pathToSrc = '../' * (typeDef.name.split('.').length - 3);
-
-  // COM interfaces can only inherit from one parent
-  List<String> get interfaceImport =>
-      inheritsFrom != '' ? [getImportForTypeDef(typeDef.interfaces.first)] : [];
-
-  String get importHeader {
-    final imports = {...interfaceImport, ...importsForClass()}
-      ..removeWhere((item) => item == '')
-      // TODO: Use exclusions.dart for these next two lines
-      ..removeWhere((item) => item.endsWith('ICondition.dart'))
-      ..removeWhere((item) => item.endsWith('IStemmer.dart'));
-    return imports
-        .map((import) => "import '$pathToSrc$import';")
-        .join('\n')
-        .toLowerCase();
-  }
 
   String get header => '''
     // ${shortName.toLowerCase()}.dart
 
     // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
-    // ignore_for_file: unused_import, directives_ordering
+    // ignore_for_file: unused_import
     // ignore_for_file: constant_identifier_names, non_constant_identifier_names
     // ignore_for_file: no_leading_underscores_for_local_identifiers
-
-    import 'dart:ffi';
-
-    import 'package:ffi/ffi.dart';
   ''';
+
+  List<String> get coreImports => ['dart:ffi', 'package:ffi/ffi.dart'];
+
+  // COM interfaces can only inherit from one parent
+  Set<String> get interfaceImports {
+    if (typeDef.interfaces.isNotEmpty) {
+      final interfaceName =
+          lastComponent(typeDef.interfaces.first.name).toLowerCase();
+      if (interfaceName.isNotEmpty) {
+        return {'$interfaceName.dart', 'iunknown.dart'};
+      }
+    }
+
+    return {};
+  }
+
+  List<String> get extraImports => [
+        '../callbacks.dart',
+        '../combase.dart',
+        '../constants.dart',
+        '../exceptions.dart',
+        '../guid.dart',
+        '../macros.dart',
+        '../structs.g.dart',
+        '../utils.dart',
+        '../variant.dart',
+        '../win32/ole32.g.dart',
+      ];
+
+  String get importHeader {
+    final imports = {...coreImports, ...interfaceImports, ...extraImports};
+    return sortImports(
+      imports.map((import) => "import '$import';").toList(),
+    ).join('\n');
+  }
 
   String get guidConstants => '''
     /// @nodoc
@@ -190,10 +200,6 @@ class ComInterfaceProjection {
 
   String get classType => 'Interface';
 
-  String get rootHeader => '';
-
-  String get extraHeaders => '';
-
   String get classPreamble {
     final wrappedComment = wrapCommentText(comment);
     final categoryComment = classType.isNotEmpty
@@ -214,9 +220,7 @@ class ComInterfaceProjection {
 
     return '''
       $header
-      ${importHeaders(typeDef.interfaces)}
-      $extraHeaders
-      $rootHeader
+      $importHeader
       $guidConstants
 
       $classPreamble
@@ -230,6 +234,6 @@ class ComInterfaceProjection {
 
         $queryInterfaceHelper
       }
-    ''';
+  ''';
   }
 }

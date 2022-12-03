@@ -8,19 +8,14 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   WinRTClassProjection(super.typeDef, [super.comment]);
 
   @override
-  Set<String> get coreImports => {
+  Set<String> get interfaceImports => {
+        ...super.interfaceImports,
         // TODO: should unify format -- FQDN
-        ...interfaceImport,
         ...factoryInterfaces.map(
             (interface) => '${lastComponent(interface).toLowerCase()}.dart'),
         ...staticInterfaces.map(
             (interface) => '${lastComponent(interface).toLowerCase()}.dart'),
-        ...importsForClass()
-      }
-        // TODO: Remove this once WinRT events are supported.
-        ..removeWhere((import) => import.endsWith('eventargs.dart'))
-        ..removeWhere(
-            (import) => import == 'iinspectable.dart' || import.isEmpty);
+      };
 
   bool get hasDefaultConstructor => typeDef.customAttributes
       .where((element) => element.name.endsWith('ActivatableAttribute'))
@@ -83,9 +78,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
   String toString() {
     return '''
       $header
-      $extraHeaders
       $importHeader
-      $rootHeader
 
       $classPreamble
       $classDeclaration
