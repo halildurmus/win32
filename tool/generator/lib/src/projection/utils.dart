@@ -1,5 +1,6 @@
 // Useful utilities
 
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -562,10 +563,10 @@ String stripGenerics(String name) {
 List<String> sortImports(List<String> importLines) {
   if (importLines.isEmpty) return importLines;
 
-  final dartImports = <String>[];
-  final packageImports = <String>[];
-  final projectImports = <String>[];
-  final projectRelativeImports = <String>[];
+  final dartImports = SplayTreeSet<String>();
+  final packageImports = SplayTreeSet<String>();
+  final projectImports = SplayTreeSet<String>();
+  final projectRelativeImports = SplayTreeSet<String>();
 
   for (final importLine in importLines) {
     assert(importLine.startsWith('import ') && importLine.endsWith(';'));
@@ -584,12 +585,12 @@ List<String> sortImports(List<String> importLines) {
   final sortedImportLines = <String>[];
 
   if (dartImports.isNotEmpty) {
-    sortedImportLines.addAll(dartImports..sort());
+    sortedImportLines.addAll(dartImports);
   }
 
   if (packageImports.isNotEmpty) {
     if (dartImports.isNotEmpty) sortedImportLines.add('');
-    sortedImportLines.addAll(packageImports..sort());
+    sortedImportLines.addAll(packageImports);
   }
 
   if (projectImports.isNotEmpty || projectRelativeImports.isNotEmpty) {
@@ -598,8 +599,8 @@ List<String> sortImports(List<String> importLines) {
     }
 
     sortedImportLines
-      ..addAll(projectImports..sort())
-      ..addAll(projectRelativeImports..sort());
+      ..addAll(projectImports)
+      ..addAll(projectRelativeImports);
   }
 
   return sortedImportLines;
