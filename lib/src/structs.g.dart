@@ -4226,6 +4226,35 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwTrack;
 }
 
+/// Contains information about a range of pages in the virtual address space
+/// of a process. The VirtualQuery and VirtualQueryEx functions use this
+/// structure.
+///
+/// {@category Struct}
+class MEMORY_BASIC_INFORMATION extends Struct {
+  external Pointer BaseAddress;
+
+  external Pointer AllocationBase;
+
+  @Uint32()
+  external int AllocationProtect;
+
+  @Uint16()
+  external int PartitionId;
+
+  @IntPtr()
+  external int RegionSize;
+
+  @Uint32()
+  external int State;
+
+  @Uint32()
+  external int Protect;
+
+  @Uint32()
+  external int Type;
+}
+
 /// Contains information about a menu.
 ///
 /// {@category Struct}
