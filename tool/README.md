@@ -12,10 +12,12 @@ The metadata is extracted and parsed using the separate winmd package:
 
 Not every API is projected.
 
-- For Win32 APIs, the JSON file in the `generator\lib\src\inputs` directory is
-  used to determine which APIs to project.
-- For COM and WinRT APIs, the Dart files in the `generator\lib\src\inputs`
-  directory explicitly name the types that should be projected.
+- For Win32 APIs, the JSON files prefixed with `win32_` in the `generator\data`
+  directory are used to determine which APIs to project.
+- For COM APIs, the `com_types.json` file in the `generator\data` directory
+  explicitly names the types that should be projected.
+- For WinRT APIs, the JSON files prefixed with `winrt_` in the `generator\data`
+  directory are used to determine which APIs to project.
 
 During the build process, you should call `generate.cmd` from the project root
 to instantiate these types and generate the classes from them, for example:
