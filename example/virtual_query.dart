@@ -1,35 +1,37 @@
 import 'dart:ffi';
+import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // Virtual Query Example
 void main() {
-  // Allocate for a buffer with Memory Basic Information
-  Pointer<MEMORY_BASIC_INFORMATION> buffer = calloc<MEMORY_BASIC_INFORMATION>();
-  // Allocate for a return value
-  Pointer<Uint32> returnValuePointer = calloc<Uint32>();
+  // Allocate a buffer to hold information about allocated memory
+  final pMBI = calloc<MEMORY_BASIC_INFORMATION>();
+
   // Allocate some memory and return a pointer to the base address.
-  Pointer<NativeType> someMemoryPointer =
-      VirtualAlloc(nullptr, 8, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+  final baseAddress = VirtualAlloc(
+      nullptr, // Windows determines starting address
+      8, // bytes allocated
+      MEM_COMMIT,
+      PAGE_EXECUTE_READWRITE);
 
-  // Query someMemory
-  returnValuePointer.value = VirtualQuery(
-      someMemoryPointer, buffer, sizeOf<MEMORY_BASIC_INFORMATION>());
+  // Query information about the allocated memory
+  final retValue =
+      VirtualQuery(baseAddress, pMBI, sizeOf<MEMORY_BASIC_INFORMATION>());
 
-  if (returnValuePointer.value != sizeOf<MEMORY_BASIC_INFORMATION>()) {
+  if (retValue == 0) {
     print('VirtualQuery function failed.');
-    print('GetLastError code: ${GetLastError()}');
-    return;
+    exit(GetLastError());
   }
 
-  print('Region Size: ${buffer.ref.RegionSize}');
-  print('Base Address: ${buffer.ref.BaseAddress}');
-  print('Allocation Base: ${buffer.ref.AllocationBase}');
-  print('Partition ID: ${buffer.ref.PartitionId}');
+  print('Region Size: ${pMBI.ref.RegionSize}');
+  print('Base Address: ${pMBI.ref.BaseAddress}');
+  print('Allocation Base: ${pMBI.ref.AllocationBase}');
+  print('Partition ID: ${pMBI.ref.PartitionId}');
 
   // Print what kind of section this buffer is in.
-  switch(buffer.ref.Type)
-  {
+  switch (pMBI.ref.Type) {
     case MEM_IMAGE:
       print("Type: MEM_IMAGE");
       break;
@@ -45,7 +47,7 @@ void main() {
   }
 
   // Print what can be done with the buffer's memory region
-  switch (buffer.ref.AllocationProtect) {
+  switch (pMBI.ref.AllocationProtect) {
     case PAGE_EXECUTE_READWRITE:
       print('AllocationProtect flags: EXECUTE + READ + WRITE');
       break;
@@ -64,7 +66,7 @@ void main() {
   }
 
   // Print the state of the buffer's region
-  switch (buffer.ref.State) {
+  switch (pMBI.ref.State) {
     case MEM_COMMIT:
       print('State of Buffer Region: Committed');
       break;
@@ -80,8 +82,8 @@ void main() {
   }
 
   // Freeing temporary memory.
-  free(buffer);
-  free(returnValuePointer);
+  free(pMBI);
+
   // This frees up the entire region reserved from previously allocating it.
-  VirtualFree(someMemoryPointer, 0, MEM_RELEASE);
+  VirtualFree(baseAddress, 0, MEM_RELEASE);
 }
