@@ -111,7 +111,7 @@ void main() {
     free(iidClassFactory);
     free(clsid);
     free(ptrSaveDialog);
-    free(ptrFactory);
+    classFactory.release();
 
     CoUninitialize();
   });
@@ -128,6 +128,7 @@ void main() {
 
   group('COM object tests', () {
     late FileOpenDialog dialog;
+
     setUp(() {
       final hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -135,32 +136,27 @@ void main() {
 
       dialog = FileOpenDialog.createInstance();
     });
+
     test('Dialog object exists', () {
       expect(dialog.ptr.address, isNonZero);
     });
+
     test('Can cast to IUnknown', () {
-      final riid = convertToIID(IID_IUnknown);
-
-      final classPtr = calloc<Pointer>();
-      final hr = dialog.queryInterface(riid.cast(), classPtr);
-      expect(hr, equals(S_OK));
-
-      final unk = IUnknown(classPtr.cast());
+      final unk = IUnknown.from(dialog);
       expect(unk.ptr.address, isNonZero);
 
-      free(classPtr);
-      free(riid);
+      unk.release();
     });
+
     test('Cast to random interface fails', () {
-      final riid = convertToIID(IID_IDesktopWallpaper);
-
-      final classPtr = calloc<Pointer>();
-      final hr = dialog.queryInterface(riid.cast(), classPtr);
-      expect(hr, equals(E_NOINTERFACE));
-
-      free(classPtr);
-      free(riid);
+      expect(
+          () => dialog.toInterface(IID_IDesktopWallpaper),
+          throwsA(isA<WindowsException>()
+              .having((e) => e.hr, 'hr', equals(E_NOINTERFACE))
+              .having((e) => e.toString(), 'message',
+                  contains('No such interface supported'))));
     });
+
     test('AddRef / Release', () {
       var refs = dialog.addRef();
       expect(refs, equals(2));
@@ -174,14 +170,16 @@ void main() {
       refs = dialog.release();
       expect(refs, equals(1));
     });
+
     tearDown(() {
-      free(dialog.ptr);
+      dialog.release();
       CoUninitialize();
     });
   });
 
   group('COM object casting using methods', () {
     late FileOpenDialog dialog;
+
     setUp(() {
       final hr = CoInitializeEx(
           nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -189,6 +187,7 @@ void main() {
 
       dialog = FileOpenDialog.createInstance();
     });
+
     test('Can cast to various supported interfaces', () {
       expect(() => IUnknown.from(dialog), returnsNormally);
       expect(() => IModalWindow.from(dialog), returnsNormally);
@@ -209,7 +208,7 @@ void main() {
     });
 
     tearDown(() {
-      free(dialog.ptr);
+      dialog.release();
       CoUninitialize();
     });
   });
