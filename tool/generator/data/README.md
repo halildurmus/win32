@@ -8,7 +8,7 @@ package consumes this metadata and transforms it into Dart files.
 
 ## JSON Format
 
-The format for the JSON file (`functions.json`) is as follows:
+The format for the JSON file (`win32_functions.json`) is as follows:
 
 ```jsonc
 {
@@ -18,7 +18,7 @@ The format for the JSON file (`functions.json`) is as follows:
         // Note that this should include a 'W' postfix if the declared function
         // has both Unicode and ANSI variants. See:
         // https://docs.microsoft.com/en-us/windows/win32/intl/unicode-in-the-windows-api
-        // 
+        //
         // The version presented in the docs is inconsistent -- some docs
         // include it, others don't -- so pay attention here. If you get a
         // failure in lookupFunction when running tests, this is a common
@@ -26,17 +26,17 @@ The format for the JSON file (`functions.json`) is as follows:
         "prototype": "BOOL DeleteFileW(\n  LPCWSTR lpFileName\n);",
 
         // (Optional) The category for documentation, if not the same as the
-        // DLL library. 
+        // DLL library.
         "category": "winrt",
 
         // The doc comment for the API (typically, first sentence of the docs)
         "comment": "Deletes an existing file.",
 
-        // (Optional) Minimum version of Windows required to use this function. 
+        // (Optional) Minimum version of Windows required to use this function.
         // If omitted, this function will be available to all supported OSes.
         "minimumWindowsVersion": "WIN10_RS3",
 
-        // (Optional) Whether a test should be generated for this function. 
+        // (Optional) Whether a test should be generated for this function.
         // Unless there's a *really* good mitigation for this, this should be
         // true.
         "test": false
