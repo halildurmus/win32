@@ -39,41 +39,41 @@ class PhoneNumberInfo extends IInspectable
 
   // IPhoneNumberInfoFactory methods
   static PhoneNumberInfo create(String number) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoFactory);
+    final object = IPhoneNumberInfoFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberInfoFactory.fromRawPointer(activationFactory)
-          .create(number);
+      return object.create(number);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // IPhoneNumberInfoStatics methods
   static PhoneNumberParseResult tryParse(
       String input, PhoneNumberInfo phoneNumber) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
+    final object = IPhoneNumberInfoStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberInfoStatics.fromRawPointer(activationFactory)
-          .tryParse(input, phoneNumber);
+      return object.tryParse(input, phoneNumber);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static PhoneNumberParseResult tryParseWithRegion(
       String input, String regionCode, PhoneNumberInfo phoneNumber) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberInfoStatics);
+    final object = IPhoneNumberInfoStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberInfoStatics.fromRawPointer(activationFactory)
-          .tryParseWithRegion(input, regionCode, phoneNumber);
+      return object.tryParseWithRegion(input, regionCode, phoneNumber);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

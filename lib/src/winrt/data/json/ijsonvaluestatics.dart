@@ -38,6 +38,7 @@ class IJsonValueStatics extends IInspectable {
   JsonValue parse(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -53,7 +54,9 @@ class IJsonValueStatics extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(inputHstring);
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
@@ -135,6 +138,7 @@ class IJsonValueStatics extends IInspectable {
   JsonValue createStringValue(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
+
     final hr = ptr.ref.vtable
             .elementAt(10)
             .cast<
@@ -150,7 +154,9 @@ class IJsonValueStatics extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(inputHstring);
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 }

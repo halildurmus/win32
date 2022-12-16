@@ -42,8 +42,7 @@ class UISettings extends IInspectable
         IUISettings4,
         IUISettings5,
         IUISettings6 {
-  UISettings({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  UISettings() : super(ActivateClass(_className));
   UISettings.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.UI.ViewManagement.UISettings';

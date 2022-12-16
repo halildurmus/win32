@@ -33,8 +33,7 @@ import '../../internal/hstring_array.dart';
 /// {@category winrt}
 class MediaPropertySet extends IInspectable
     implements IMap<Guid, Object?>, IIterable<IKeyValuePair<Guid, Object?>> {
-  MediaPropertySet({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  MediaPropertySet() : super(ActivateClass(_className));
   MediaPropertySet.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Media.MediaProperties.MediaPropertySet';

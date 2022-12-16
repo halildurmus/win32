@@ -40,22 +40,21 @@ import 'ifileopenpickerstatics2.dart';
 /// {@category winrt}
 class FileOpenPicker extends IInspectable
     implements IFileOpenPicker, IFileOpenPicker3 {
-  FileOpenPicker({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  FileOpenPicker() : super(ActivateClass(_className));
   FileOpenPicker.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Storage.Pickers.FileOpenPicker';
 
   // IFileOpenPickerStatics2 methods
   static FileOpenPicker createForUser(User user) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IFileOpenPickerStatics2);
+    final object = IFileOpenPickerStatics2.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IFileOpenPickerStatics2.fromRawPointer(activationFactory)
-          .createForUser(user);
+      return object.createForUser(user);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

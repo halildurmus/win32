@@ -30,8 +30,7 @@ import 'iprinting3dmultiplepropertymaterial.dart';
 /// {@category winrt}
 class Printing3DMultiplePropertyMaterial extends IInspectable
     implements IPrinting3DMultiplePropertyMaterial {
-  Printing3DMultiplePropertyMaterial({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  Printing3DMultiplePropertyMaterial() : super(ActivateClass(_className));
   Printing3DMultiplePropertyMaterial.fromRawPointer(super.ptr);
 
   static const _className =

@@ -541,10 +541,10 @@ class IMap<K, V> extends IInspectable
   bool insert(K key, V value) {
     if (isSameType<K, Guid>()) {
       if (isSubtypeOfInspectable<V>()) {
-        return _insert_Guid_Object(key as Guid, (value as IInspectable).ptr);
+        return _insert_Guid_Object(key as Guid, value);
       }
 
-      return _insert_Guid_Object(key as Guid, boxValue(value));
+      return _insert_Guid_Object(key as Guid, value);
     }
 
     if (isSameType<K, int>()) {
@@ -562,23 +562,24 @@ class IMap<K, V> extends IInspectable
       }
 
       if (isSubtypeOfInspectable<V>()) {
-        return _insert_String_Object(
-            key as String, (value as IInspectable).ptr);
+        return _insert_String_Object(key as String, value);
       }
 
       if (isSubtypeOfWinRTEnum<V>()) {
         return _insert_String_enum(key as String, value as WinRTEnum);
       }
 
-      return _insert_String_Object(key as String, boxValue(value));
+      return _insert_String_Object(key as String, value);
     }
 
-    return _insert_Object_Object(key as IInspectable, boxValue(value));
+    return _insert_Object_Object(key as IInspectable, value);
   }
 
-  bool _insert_Guid_Object(Guid key, Pointer<COMObject> value) {
+  bool _insert_Guid_Object(Guid key, V value) {
     final retValuePtr = calloc<Bool>();
     final nativeGuidPtr = key.toNativeGUID();
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -591,12 +592,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, GUID, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, nativeGuidPtr.ref, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, nativeGuidPtr.ref, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) free(propertyValuePtr);
       free(nativeGuidPtr);
       free(retValuePtr);
     }
@@ -626,8 +628,10 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_Object_Object(IInspectable key, Pointer<COMObject> value) {
+  bool _insert_Object_Object(IInspectable key, V value) {
     final retValuePtr = calloc<Bool>();
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -640,12 +644,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, COMObject, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, key.ptr.ref, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, key.ptr.ref, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) propertyValuePtr;
       free(retValuePtr);
     }
   }
@@ -675,9 +680,11 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_String_Object(String key, Pointer<COMObject> value) {
+  bool _insert_String_Object(String key, V value) {
     final retValuePtr = calloc<Bool>();
     final hKey = convertToHString(key);
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -690,12 +697,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, int, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, hKey, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, hKey, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) free(propertyValuePtr);
       WindowsDeleteString(hKey);
       free(retValuePtr);
     }

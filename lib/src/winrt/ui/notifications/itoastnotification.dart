@@ -58,7 +58,9 @@ class IToastNotification extends IInspectable {
   }
 
   set expirationTime(DateTime? value) {
-    final referencePtr = boxValue(value, convertToIReference: true);
+    final referencePtr = value == null
+        ? calloc<COMObject>()
+        : boxValue(value, convertToIReference: true);
 
     final hr = ptr.ref.vtable
         .elementAt(7)
@@ -70,30 +72,35 @@ class IToastNotification extends IInspectable {
 
     if (FAILED(hr)) throw WindowsException(hr);
 
-    free(referencePtr);
+    if (value == null) free(referencePtr);
   }
 
   DateTime? get expirationTime {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(8)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<DateTime>.fromRawPointer(retValuePtr,
-              referenceIid: '{5541d8a7-497c-5aa4-86fc-7713adbf2a2c}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<DateTime>.fromRawPointer(retValuePtr,
+        referenceIid: '{5541d8a7-497c-5aa4-86fc-7713adbf2a2c}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 
   int add_Dismissed(Pointer<NativeFunction<TypedEventHandler>> handler) {
