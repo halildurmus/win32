@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IShellItemImageFactory.getImage', () {
     expect(shellitemimagefactory.getImage, isA<Function>());
   });
-  free(ptr);
 }

@@ -49,5 +49,4 @@ void main() {
   test('Can instantiate IStream.clone', () {
     expect(stream.clone, isA<Function>());
   });
-  free(ptr);
 }

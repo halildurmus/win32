@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IPersistFile.getCurFile', () {
     expect(persistfile.getCurFile, isA<Function>());
   });
-  free(ptr);
 }

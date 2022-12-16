@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IEnumSpellingError.next', () {
     expect(enumspellingerror.next, isA<Function>());
   });
-  free(ptr);
 }

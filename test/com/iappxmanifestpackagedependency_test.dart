@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate IAppxManifestPackageDependency.getMinVersion', () {
     expect(appxmanifestpackagedependency.getMinVersion, isA<Function>());
   });
-  free(ptr);
 }

@@ -61,5 +61,4 @@ void main() {
   test('Can instantiate IShellItem2.getBool', () {
     expect(shellitem2.getBool, isA<Function>());
   });
-  free(ptr);
 }

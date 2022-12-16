@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate IAppxFilesEnumerator.moveNext', () {
     expect(appxfilesenumerator.moveNext, isA<Function>());
   });
-  free(ptr);
 }

@@ -70,5 +70,4 @@ void main() {
   test('Can instantiate IDesktopWallpaper.enable', () {
     expect(desktopwallpaper.enable, isA<Function>());
   });
-  free(ptr);
 }

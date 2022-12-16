@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate ISpellCheckerFactory.createSpellChecker', () {
     expect(spellcheckerfactory.createSpellChecker, isA<Function>());
   });
-  free(ptr);
 }

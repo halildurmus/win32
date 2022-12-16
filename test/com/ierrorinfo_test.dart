@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IErrorInfo.getHelpContext', () {
     expect(errorinfo.getHelpContext, isA<Function>());
   });
-  free(ptr);
 }

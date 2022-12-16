@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IAudioSessionManager.getSimpleAudioVolume', () {
     expect(audiosessionmanager.getSimpleAudioVolume, isA<Function>());
   });
-  free(ptr);
 }

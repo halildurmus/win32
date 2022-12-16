@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate INetworkListManagerEvents.connectivityChanged', () {
     expect(networklistmanagerevents.connectivityChanged, isA<Function>());
   });
-  free(ptr);
 }
