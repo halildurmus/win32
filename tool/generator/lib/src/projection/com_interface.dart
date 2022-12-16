@@ -175,27 +175,6 @@ class ComInterfaceProjection {
       $shortName(interface.toInterface(IID_$shortName));
   ''';
 
-  String get queryInterfaceHelper => shortName != 'IUnknown'
-      ? ''
-      : '''
-    /// Cast an existing COM object to a specified interface.
-    ///
-    /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
-    /// a COM QueryInterface to return a reference to that interface. This method
-    /// reduces the boilerplate associated with calling QueryInterface manually.
-    Pointer<COMObject> toInterface(String iid) {
-      final pIID = convertToIID(iid);
-      final pObject = calloc<COMObject>();
-      try {
-        final hr = queryInterface(pIID, pObject.cast());
-        if (FAILED(hr)) throw WindowsException(hr);
-        return pObject;
-      } finally {
-        free(pIID);
-      }
-    }
-  ''';
-
   String get category => 'com';
 
   String get classType => 'Interface';
@@ -231,8 +210,6 @@ class ComInterfaceProjection {
         $fromCOMObjectHelper
 
         ${methodProjections.map((p) => p.toString()).join('\n')}
-
-        $queryInterfaceHelper
       }
   ''';
   }
