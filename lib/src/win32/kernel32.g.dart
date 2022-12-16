@@ -6695,6 +6695,31 @@ final _VirtualQuery = _kernel32.lookupFunction<
     int Function(Pointer lpAddress, Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
         int dwLength)>('VirtualQuery');
 
+/// Retrieves information about a range of pages within the virtual address
+/// space of a specified process.
+///
+/// ```c
+/// SIZE_T VirtualQueryEx(
+///   HANDLE hProcess,
+///   LPCVOID lpAddress,
+///   PMEMORY_BASIC_INFORMATION lpBuffer,
+///   SIZE_T dwLength
+/// );
+/// ```
+/// {@category kernel32}
+int VirtualQueryEx(int hProcess, Pointer lpAddress,
+        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer, int dwLength) =>
+    _VirtualQueryEx(hProcess, lpAddress, lpBuffer, dwLength);
+
+final _VirtualQueryEx = _kernel32.lookupFunction<
+    IntPtr Function(IntPtr hProcess, Pointer lpAddress,
+        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer, IntPtr dwLength),
+    int Function(
+        int hProcess,
+        Pointer lpAddress,
+        Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
+        int dwLength)>('VirtualQueryEx');
+
 /// Unlocks a specified range of pages in the virtual address space of a
 /// process, enabling the system to swap the pages out to the paging file if
 /// necessary.

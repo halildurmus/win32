@@ -5353,6 +5353,10 @@
         "prototype": "SIZE_T VirtualQuery(\n  LPCVOID lpAddress,\n  PMEMORY_BASIC_INFORMATION lpBuffer,\n  SIZE_T dwLength\n);",
         "comment": "Retrieves information about a range of pages in the virtual address space of the calling process."
     },
+    "VirtualQueryEx": {
+        "prototype": "SIZE_T VirtualQueryEx(\n  HANDLE hProcess,\n  LPCVOID lpAddress,\n  PMEMORY_BASIC_INFORMATION lpBuffer,\n  SIZE_T dwLength\n);",
+        "comment": "Retrieves information about a range of pages within the virtual address space of a specified process."
+    },
     "VirtualUnlock": {
         "prototype": "BOOL VirtualUnlock(\n  LPVOID lpAddress,\n  SIZE_T dwSize\n);",
         "comment": "Unlocks a specified range of pages in the virtual address space of a process, enabling the system to swap the pages out to the paging file if necessary."

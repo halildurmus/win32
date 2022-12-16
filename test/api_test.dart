@@ -4781,6 +4781,18 @@ void main() {
               int dwLength)>('VirtualQuery');
       expect(VirtualQuery, isA<Function>());
     });
+    test('Can instantiate VirtualQueryEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VirtualQueryEx = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hProcess, Pointer lpAddress,
+              Pointer<MEMORY_BASIC_INFORMATION> lpBuffer, IntPtr dwLength),
+          int Function(
+              int hProcess,
+              Pointer lpAddress,
+              Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
+              int dwLength)>('VirtualQueryEx');
+      expect(VirtualQueryEx, isA<Function>());
+    });
     test('Can instantiate VirtualUnlock', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VirtualUnlock = kernel32.lookupFunction<
