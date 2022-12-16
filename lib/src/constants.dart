@@ -5894,6 +5894,18 @@ const MEM_RELEASE = 0x00008000;
 /// be allocated.
 const MEM_FREE = 0x00010000;
 
+/// Indicates that the memory pages within the region are mapped into the view
+/// of an image section.
+const MEM_IMAGE = 0x01000000;
+
+/// Indicates that the memory pages within the region are mapped into the view
+/// of a section.
+const MEM_MAPPED = 0x00040000;
+
+/// Indicates that the memory pages within the region are private (that is, not
+/// shared by other processes).
+const MEM_PRIVATE = 0x00020000;
+
 // -----------------------------------------------------------------------------
 // Error model constants
 // -----------------------------------------------------------------------------

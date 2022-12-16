@@ -196,6 +196,7 @@ void main()
     printf("  'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("  'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));
     printf("  'MCI_STATUS_PARMS': %zu,\n", sizeof(MCI_STATUS_PARMS));
+    printf("  'MEMORY_BASIC_INFORMATION': %zu,\n", sizeof(MEMORY_BASIC_INFORMATION));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFOW));
     printf("  'MENUITEMTEMPLATE': %zu,\n", sizeof(MENUITEMTEMPLATE));
