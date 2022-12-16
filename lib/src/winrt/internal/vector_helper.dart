@@ -72,8 +72,13 @@ class VectorHelper<T> {
 
   List<T> _toList_COMObject() {
     final pArray = calloc<COMObject>(length);
-    getManyCallback(0, length, pArray);
-    return pArray.toList(creator!, length: length);
+
+    try {
+      getManyCallback(0, length, pArray);
+      return pArray.toList(creator!, length: length);
+    } finally {
+      free(pArray);
+    }
   }
 
   List<T> _toList_enum() {
