@@ -20,7 +20,6 @@ import 'types.dart';
 import 'utils.dart';
 import 'win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
-import 'win32/ole32.g.dart';
 import 'winrt/foundation/winrt_enum.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
@@ -48,64 +47,35 @@ extension WinRTStringConversion on Pointer<HSTRING> {
 ///
 /// {@category winrt}
 Pointer<COMObject> CreateObject(String className, String iid) {
-  final hstrClass = calloc<HSTRING>();
-  final lpClassName = className.toNativeUtf16();
-  final inspectablePtr = calloc<COMObject>();
-  final riid = calloc<GUID>();
-  final classPtr = calloc<Pointer>();
-  final iidPtr = iid.toNativeUtf16();
-  final classNamePtr = className.toNativeUtf16();
-
-  try {
-    // Create a HSTRING representing the object
-    var hr = WindowsCreateString(classNamePtr, className.length, hstrClass);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-    // Activates the specified Windows Runtime class. This returns the WinRT
-    // IInspectable interface, which is a subclass of IUnknown.
-    hr = RoActivateInstance(hstrClass.value, inspectablePtr.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    // Create an IID for the interface required
-    hr = IIDFromString(iidPtr, riid);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    // Now use IInspectable to navigate to the relevant interface
-    final inspectable = IInspectable(inspectablePtr);
-    hr = inspectable.queryInterface(riid, classPtr);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    // Return a pointer to the relevant class
-    return classPtr.cast();
-  } finally {
-    free(classNamePtr);
-    free(iidPtr);
-    free(riid);
-    free(inspectablePtr);
-    free(lpClassName);
-    free(hstrClass);
-  }
+  // Activates the specified Windows Runtime class
+  final inspectablePtr = ActivateClass(className);
+  // Now use IInspectable to navigate to the relevant interface
+  final inspectable = IInspectable(inspectablePtr);
+  final objectPtr = inspectable.toInterface(iid);
+  inspectable.release();
+  // Return a pointer to the relevant class
+  return objectPtr;
 }
 
+/// Activates the specified Windows Runtime class in the [className].
+///
+/// This returns the WinRT `IInspectable` interface, which is a subclass of
+/// `IUnknown`.
+///
+/// It is the caller's responsibility to deallocate the returned pointer when
+/// they are finished with it. A FFI `Arena` may be passed as a custom allocator
+/// for ease of memory management.
+///
+/// {@category winrt}
 Pointer<COMObject> ActivateClass(String className,
     {Allocator allocator = calloc}) {
-  final inspectablePtr = allocator<COMObject>();
-
+  // Create a HSTRING representing the object
   final hClassName = convertToHString(className);
+
   try {
-    // Create a HSTRING representing the object
-    // Activates the specified Windows Runtime class. This returns the WinRT
-    // IInspectable interface, which is a subclass of IUnknown.
+    final inspectablePtr = allocator<COMObject>();
     final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
     if (FAILED(hr)) throw WindowsException(hr);
-
     // Return a pointer to the relevant class
     return inspectablePtr;
   } finally {
@@ -130,21 +100,20 @@ Pointer<COMObject> ActivateClass(String className,
 /// {@category winrt}
 Pointer<COMObject> CreateActivationFactory(String className, String iid,
     {Allocator allocator = calloc}) {
+  // Create a HSTRING representing the object
   final hClassName = convertToHString(className);
-  final pIID = calloc<GUID>()..ref.setGUID(iid);
-  final pActivationFactory = allocator<COMObject>();
+  final nativeGuidPtr = GUIDFromString(iid);
+  final activationFactoryPtr = allocator<COMObject>();
 
   try {
-    final hr =
-        RoGetActivationFactory(hClassName, pIID, pActivationFactory.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    return pActivationFactory;
+    final hr = RoGetActivationFactory(
+        hClassName, nativeGuidPtr, activationFactoryPtr.cast());
+    if (FAILED(hr)) throw WindowsException(hr);
+    // Return a pointer to the relevant class
+    return activationFactoryPtr;
   } finally {
+    free(nativeGuidPtr);
     WindowsDeleteString(hClassName);
-    free(pIID);
   }
 }
 
