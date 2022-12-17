@@ -7,7 +7,7 @@
 - Add doc comments for COM and WinRT classes (#611, @timsneath)
 - Clean up generation of WinRT imports (#616, @halildurmus)
 - Add VirtualQuery and VirtualQueryEx (#619, @Smotto)
-- Add SetDisplaConfig (#621, @timsneath)
+- Add SetDisplayConfig (#621, @timsneath)
 
 ## 3.1.2
 
