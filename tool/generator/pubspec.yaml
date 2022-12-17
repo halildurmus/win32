@@ -2,6 +2,8 @@ name: generator
 publish_to: none
 
 environment:
+  # Change upper constraint to <4.0.0 when this PR is deployed to pub.dev:
+  #   https://github.com/dart-lang/pub-dev/pull/6269
   sdk: '>=2.17.0 <3.0.0'
 
 # Declare that this package only works on Windows.

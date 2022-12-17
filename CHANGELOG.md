@@ -1,3 +1,14 @@
+## 3.1.3
+
+- Restructure generator util to use JSON for all data files (#605, @timsneath)
+- Add more K32* APIs (#607, @timsneath)
+- Remove unnecessary nullability from HSTRINGs (#608, #615, @halildurmus)
+- Add UISettings (#610, @halildurmus)
+- Add doc comments for COM and WinRT classes (#611, @timsneath)
+- Clean up generation of WinRT imports (#616, @halildurmus)
+- Add VirtualQuery and VirtualQueryEx (#619, @Smotto)
+- Add SetDisplayConfig (#621, @timsneath)
+
 ## 3.1.2
 
 - Support generating IIDs for parameterized types (#596)
