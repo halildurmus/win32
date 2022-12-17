@@ -235,6 +235,7 @@
     "Windows.Win32.System.Ioctl.DISK_GEOMETRY_EX": "Describes the extended geometry of disk devices and media.",
     "Windows.Win32.System.Ioctl.STORAGE_DEVICE_NUMBER": "Contains information about a device. This structure is used by the IOCTL_STORAGE_GET_DEVICE_NUMBER control code.",
     "Windows.Win32.System.Ioctl.VOLUME_DISK_EXTENTS": "Represents a physical location on a disk. It is the output buffer for the IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS control code.",
+    "Windows.Win32.System.Memory.MEMORY_BASIC_INFORMATION": "Contains information about a range of pages in the virtual address space of a process. The VirtualQuery and VirtualQueryEx functions use this structure.",
     "Windows.Win32.System.Memory.PROCESS_HEAP_ENTRY": "Contains information about a heap element. The HeapWalk function uses a PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.",
     "Windows.Win32.System.Ole.ARRAYDESC": "Describes an array, its element type, and its dimension.",
     "Windows.Win32.System.Ole.PARAMDESC": "Contains information needed for transferring a structure element, parameter, or function return value between processes.",
