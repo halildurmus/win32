@@ -121,6 +121,17 @@ void main()
     printf("  'DISK_EXTENT': %zu,\n", sizeof(DISK_EXTENT));
     printf("  'DISK_GEOMETRY': %zu,\n", sizeof(DISK_GEOMETRY));
     printf("  'DISK_GEOMETRY_EX': %zu,\n", sizeof(DISK_GEOMETRY_EX));
+    printf("  'DISPLAYCONFIG_2DREGION': %zu,\n", sizeof(DISPLAYCONFIG_2DREGION));
+    printf("  'DISPLAYCONFIG_DESKTOP_IMAGE_INFO': %zu,\n", sizeof(DISPLAYCONFIG_DESKTOP_IMAGE_INFO));
+    printf("  'DISPLAYCONFIG_DEVICE_INFO_HEADER': %zu,\n", sizeof(DISPLAYCONFIG_DEVICE_INFO_HEADER));
+    printf("  'DISPLAYCONFIG_MODE_INFO': %zu,\n", sizeof(DISPLAYCONFIG_MODE_INFO));
+    printf("  'DISPLAYCONFIG_PATH_INFO': %zu,\n", sizeof(DISPLAYCONFIG_PATH_INFO));
+    printf("  'DISPLAYCONFIG_PATH_SOURCE_INFO': %zu,\n", sizeof(DISPLAYCONFIG_PATH_SOURCE_INFO));
+    printf("  'DISPLAYCONFIG_PATH_TARGET_INFO': %zu,\n", sizeof(DISPLAYCONFIG_PATH_TARGET_INFO));
+    printf("  'DISPLAYCONFIG_RATIONAL': %zu,\n", sizeof(DISPLAYCONFIG_RATIONAL));
+    printf("  'DISPLAYCONFIG_SOURCE_MODE': %zu,\n", sizeof(DISPLAYCONFIG_SOURCE_MODE));
+    printf("  'DISPLAYCONFIG_TARGET_MODE': %zu,\n", sizeof(DISPLAYCONFIG_TARGET_MODE));
+    printf("  'DISPLAYCONFIG_VIDEO_SIGNAL_INFO': %zu,\n", sizeof(DISPLAYCONFIG_VIDEO_SIGNAL_INFO));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
     printf("  'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
     printf("  'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));
@@ -279,6 +290,7 @@ void main()
     printf("  'RAWKEYBOARD': %zu,\n", sizeof(RAWKEYBOARD));
     printf("  'RAWMOUSE': %zu,\n", sizeof(RAWMOUSE));
     printf("  'RECT': %zu,\n", sizeof(RECT));
+    printf("  'RECTL': %zu,\n", sizeof(RECTL));
     printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
     printf("  'SAFEARRAYBOUND': %zu,\n", sizeof(SAFEARRAYBOUND));

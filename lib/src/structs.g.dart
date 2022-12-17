@@ -2022,6 +2022,315 @@ class DISK_GEOMETRY_EX extends Struct {
   external Array<Uint8> Data;
 }
 
+/// The DISPLAYCONFIG_2DREGION structure represents a point or an offset in
+/// a two-dimensional space.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_2DREGION extends Struct {
+  @Uint32()
+  external int cx;
+
+  @Uint32()
+  external int cy;
+}
+
+/// The DISPLAYCONFIG_DESKTOP_IMAGE_INFO structure contains information
+/// about the image displayed on the desktop.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
+  external POINTL PathSourceSize;
+
+  external RECTL DesktopImageRegion;
+
+  external RECTL DesktopImageClip;
+}
+
+/// The DISPLAYCONFIG_DEVICE_INFO_HEADER structure contains display
+/// information about the device.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
+  @Int32()
+  external int type;
+
+  @Uint32()
+  external int size;
+
+  external LUID adapterId;
+
+  @Uint32()
+  external int id;
+}
+
+/// The DISPLAYCONFIG_MODE_INFO structure contains either source mode or
+/// target mode information.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_MODE_INFO extends Struct {
+  @Int32()
+  external int infoType;
+
+  @Uint32()
+  external int id;
+
+  external LUID adapterId;
+
+  external _DISPLAYCONFIG_MODE_INFO__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_MODE_INFO__Anonymous_e__Union extends Union {
+  external DISPLAYCONFIG_TARGET_MODE targetMode;
+
+  external DISPLAYCONFIG_SOURCE_MODE sourceMode;
+
+  external DISPLAYCONFIG_DESKTOP_IMAGE_INFO desktopImageInfo;
+}
+
+extension DISPLAYCONFIG_MODE_INFO_Extension on DISPLAYCONFIG_MODE_INFO {
+  DISPLAYCONFIG_TARGET_MODE get targetMode => this.Anonymous.targetMode;
+  set targetMode(DISPLAYCONFIG_TARGET_MODE value) =>
+      this.Anonymous.targetMode = value;
+
+  DISPLAYCONFIG_SOURCE_MODE get sourceMode => this.Anonymous.sourceMode;
+  set sourceMode(DISPLAYCONFIG_SOURCE_MODE value) =>
+      this.Anonymous.sourceMode = value;
+
+  DISPLAYCONFIG_DESKTOP_IMAGE_INFO get desktopImageInfo =>
+      this.Anonymous.desktopImageInfo;
+  set desktopImageInfo(DISPLAYCONFIG_DESKTOP_IMAGE_INFO value) =>
+      this.Anonymous.desktopImageInfo = value;
+}
+
+/// The DISPLAYCONFIG_PATH_INFO structure is used to describe a single path
+/// from a target to a source.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_PATH_INFO extends Struct {
+  external DISPLAYCONFIG_PATH_SOURCE_INFO sourceInfo;
+
+  external DISPLAYCONFIG_PATH_TARGET_INFO targetInfo;
+
+  @Uint32()
+  external int flags;
+}
+
+/// The DISPLAYCONFIG_PATH_SOURCE_INFO structure contains source information
+/// for a single path.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_PATH_SOURCE_INFO extends Struct {
+  external LUID adapterId;
+
+  @Uint32()
+  external int id;
+
+  external _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union Anonymous;
+
+  @Uint32()
+  external int statusFlags;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int modeInfoIdx;
+
+  external _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int bitfield;
+}
+
+extension DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union_Extension
+    on DISPLAYCONFIG_PATH_SOURCE_INFO {
+  int get bitfield => this.Anonymous.Anonymous.bitfield;
+  set bitfield(int value) => this.Anonymous.Anonymous.bitfield = value;
+}
+
+extension DISPLAYCONFIG_PATH_SOURCE_INFO_Extension
+    on DISPLAYCONFIG_PATH_SOURCE_INFO {
+  int get modeInfoIdx => this.Anonymous.modeInfoIdx;
+  set modeInfoIdx(int value) => this.Anonymous.modeInfoIdx = value;
+
+  _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _DISPLAYCONFIG_PATH_SOURCE_INFO__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The DISPLAYCONFIG_PATH_TARGET_INFO structure contains target information
+/// for a single path.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
+  external LUID adapterId;
+
+  @Uint32()
+  external int id;
+
+  external _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union Anonymous;
+
+  @Int32()
+  external int outputTechnology;
+
+  @Int32()
+  external int rotation;
+
+  @Int32()
+  external int scaling;
+
+  external DISPLAYCONFIG_RATIONAL refreshRate;
+
+  @Int32()
+  external int scanLineOrdering;
+
+  @Int32()
+  external int targetAvailable;
+
+  @Uint32()
+  external int statusFlags;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union extends Union {
+  @Uint32()
+  external int modeInfoIdx;
+
+  external _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+      Anonymous;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+    extends Struct {
+  @Uint32()
+  external int bitfield;
+}
+
+extension DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union_Extension
+    on DISPLAYCONFIG_PATH_TARGET_INFO {
+  int get bitfield => this.Anonymous.Anonymous.bitfield;
+  set bitfield(int value) => this.Anonymous.Anonymous.bitfield = value;
+}
+
+extension DISPLAYCONFIG_PATH_TARGET_INFO_Extension
+    on DISPLAYCONFIG_PATH_TARGET_INFO {
+  int get modeInfoIdx => this.Anonymous.modeInfoIdx;
+  set modeInfoIdx(int value) => this.Anonymous.modeInfoIdx = value;
+
+  _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+      get Anonymous => this.Anonymous.Anonymous;
+  set Anonymous(
+          _DISPLAYCONFIG_PATH_TARGET_INFO__Anonymous_e__Union__Anonymous_e__Struct
+              value) =>
+      this.Anonymous.Anonymous = value;
+}
+
+/// The DISPLAYCONFIG_RATIONAL structure describes a fractional value that
+/// represents vertical and horizontal frequencies of a video mode (that is,
+/// vertical sync and horizontal sync).
+///
+/// {@category Struct}
+class DISPLAYCONFIG_RATIONAL extends Struct {
+  @Uint32()
+  external int Numerator;
+
+  @Uint32()
+  external int Denominator;
+}
+
+/// The DISPLAYCONFIG_SOURCE_MODE structure represents a point or an offset
+/// in a two-dimensional space.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_SOURCE_MODE extends Struct {
+  @Uint32()
+  external int width;
+
+  @Uint32()
+  external int height;
+
+  @Int32()
+  external int pixelFormat;
+
+  external POINTL position;
+}
+
+/// The DISPLAYCONFIG_TARGET_MODE structure describes a display path target
+/// mode.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_TARGET_MODE extends Struct {
+  external DISPLAYCONFIG_VIDEO_SIGNAL_INFO targetVideoSignalInfo;
+}
+
+/// The DISPLAYCONFIG_VIDEO_SIGNAL_INFO structure contains information about
+/// the video signal for a display.
+///
+/// {@category Struct}
+class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
+  @Uint64()
+  external int pixelRate;
+
+  external DISPLAYCONFIG_RATIONAL hSyncFreq;
+
+  external DISPLAYCONFIG_RATIONAL vSyncFreq;
+
+  external DISPLAYCONFIG_2DREGION activeSize;
+
+  external DISPLAYCONFIG_2DREGION totalSize;
+
+  external _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union Anonymous;
+
+  @Int32()
+  external int scanLineOrdering;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union extends Union {
+  external _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+      AdditionalSignalInfo;
+
+  @Uint32()
+  external int videoStandard;
+}
+
+/// {@category Struct}
+class _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+    extends Struct {
+  @Uint32()
+  external int bitfield;
+}
+
+extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union_Extension
+    on DISPLAYCONFIG_VIDEO_SIGNAL_INFO {
+  int get bitfield => this.Anonymous.AdditionalSignalInfo.bitfield;
+  set bitfield(int value) =>
+      this.Anonymous.AdditionalSignalInfo.bitfield = value;
+}
+
+extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Extension
+    on DISPLAYCONFIG_VIDEO_SIGNAL_INFO {
+  _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+      get AdditionalSignalInfo => this.Anonymous.AdditionalSignalInfo;
+  set AdditionalSignalInfo(
+          _DISPLAYCONFIG_VIDEO_SIGNAL_INFO__Anonymous_e__Union__AdditionalSignalInfo_e__Struct
+              value) =>
+      this.Anonymous.AdditionalSignalInfo = value;
+
+  int get videoStandard => this.Anonymous.videoStandard;
+  set videoStandard(int value) => this.Anonymous.videoStandard = value;
+}
+
 /// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}
@@ -6605,6 +6914,24 @@ extension RAWMOUSE_Extension on RAWMOUSE {
 ///
 /// {@category Struct}
 class RECT extends Struct {
+  @Int32()
+  external int left;
+
+  @Int32()
+  external int top;
+
+  @Int32()
+  external int right;
+
+  @Int32()
+  external int bottom;
+}
+
+/// The RECTL structure defines a rectangle by the coordinates of its
+/// upper-left and lower-right corners.
+///
+/// {@category Struct}
+class RECTL extends Struct {
   @Int32()
   external int left;
 

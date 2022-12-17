@@ -328,7 +328,8 @@ class VARIANT extends Struct {
   // ULONGLONG -> unsigned long long -> Uint64
   BigInt get ullVal {
     final src = __VARIANT_NAME_1.__VARIANT_NAME_2.__VARIANT_NAME_3.ullVal;
-    final hi = (((src & 0xFFFFFFFF00000000) >> 32).toUnsigned(32))
+    final hi = ((src & 0xFFFFFFFF00000000) >> 32)
+        .toUnsigned(32)
         .toRadixString(16)
         .padLeft(8, '0');
     final lo = (src & 0x00000000FFFFFFFF).toRadixString(16).padLeft(8, '0');
