@@ -7897,6 +7897,23 @@ void main() {
         expect(SetDisplayAutoRotationPreferences, isA<Function>());
       });
     }
+    test('Can instantiate SetDisplayConfig', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetDisplayConfig = user32.lookupFunction<
+          Int32 Function(
+              Uint32 numPathArrayElements,
+              Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+              Uint32 numModeInfoArrayElements,
+              Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+              Uint32 flags),
+          int Function(
+              int numPathArrayElements,
+              Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+              int numModeInfoArrayElements,
+              Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+              int flags)>('SetDisplayConfig');
+      expect(SetDisplayConfig, isA<Function>());
+    });
     test('Can instantiate SetDlgItemInt', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetDlgItemInt = user32.lookupFunction<

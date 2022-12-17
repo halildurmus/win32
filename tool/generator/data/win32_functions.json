@@ -4485,6 +4485,10 @@
         "comment": "Sets the screen auto-rotation preferences for the current process.",
         "minimumWindowsVersion": "WIN8"
     },
+    "SetDisplayConfig": {
+        "prototype": "LONG SetDisplayConfig(\n  [in]           UINT32                  numPathArrayElements,\n  [in, optional] DISPLAYCONFIG_PATH_INFO *pathArray,\n  [in]           UINT32                  numModeInfoArrayElements,\n  [in, optional] DISPLAYCONFIG_MODE_INFO *modeInfoArray,\n  [in]           UINT32                  flags\n);",
+        "comment": "The SetDisplayConfig function modifies the display topology, source, and target modes by exclusively enabling the specified paths in the current session."
+    },
     "SetDlgItemInt": {
         "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
         "comment": "Sets the text of a control in a dialog box to the string representation of a specified integer value."

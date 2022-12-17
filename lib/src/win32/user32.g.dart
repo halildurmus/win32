@@ -6523,6 +6523,43 @@ final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
     Int32 Function(Int32 orientation),
     int Function(int orientation)>('SetDisplayAutoRotationPreferences');
 
+/// The SetDisplayConfig function modifies the display topology, source, and
+/// target modes by exclusively enabling the specified paths in the current
+/// session.
+///
+/// ```c
+/// LONG SetDisplayConfig(
+///   [in]           UINT32                  numPathArrayElements,
+///   [in, optional] DISPLAYCONFIG_PATH_INFO *pathArray,
+///   [in]           UINT32                  numModeInfoArrayElements,
+///   [in, optional] DISPLAYCONFIG_MODE_INFO *modeInfoArray,
+///   [in]           UINT32                  flags
+/// );
+/// ```
+/// {@category user32}
+int SetDisplayConfig(
+        int numPathArrayElements,
+        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+        int numModeInfoArrayElements,
+        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+        int flags) =>
+    _SetDisplayConfig(numPathArrayElements, pathArray, numModeInfoArrayElements,
+        modeInfoArray, flags);
+
+final _SetDisplayConfig = _user32.lookupFunction<
+    Int32 Function(
+        Uint32 numPathArrayElements,
+        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+        Uint32 numModeInfoArrayElements,
+        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+        Uint32 flags),
+    int Function(
+        int numPathArrayElements,
+        Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
+        int numModeInfoArrayElements,
+        Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
+        int flags)>('SetDisplayConfig');
+
 /// Sets the text of a control in a dialog box to the string representation
 /// of a specified integer value.
 ///
