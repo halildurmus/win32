@@ -8889,6 +8889,21 @@ const BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE = 0x00000020;
 const BLUETOOTH_GATT_FLAG_RETURN_ALL = 0x00000040;
 
 // -----------------------------------------------------------------------------
+// WM_GETICON constants
+// -----------------------------------------------------------------------------
+
+/// Retrieve the small icon for the window.
+const ICON_SMALL = 0;
+
+/// Retrieve the large icon for the window.
+const ICON_BIG = 1;
+
+/// Retrieves the small icon provided by the application. If the application
+/// does not provide one, the system uses the system-generated icon for that
+/// window.
+const ICON_SMALL2 = 2;
+
+// -----------------------------------------------------------------------------
 // GetClassLong constants
 // -----------------------------------------------------------------------------
 
