@@ -85,7 +85,7 @@ void main() {
 
     expect(iaowp.findAttribute('Windows.Foundation.Metadata.GuidAttribute'),
         isNotNull);
-    expect(iaowp.guid, equals('{B5D036D7-E297-498F-BA60-0289E76E23DD}'));
+    expect(iaowp.guid, equals('{b5d036d7-e297-498f-ba60-0289e76e23dd}'));
 
     final contractAttr = iaowp
         .findAttribute('Windows.Foundation.Metadata.ContractVersionAttribute');

@@ -1,3 +1,7 @@
+## 2.4.6
+
+- Update to Windows.Win32.winmd v41.0.5.54252
+
 ## 2.4.5
 
 - Update error messages

@@ -47,7 +47,7 @@ void main() {
       final scope = MetadataStore.getWin32Scope();
       final iNetwork = scope
           .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
-      expect(iNetwork.guid, equals('{DCB00002-570F-4A9B-8D69-199FDBA5723B}'));
+      expect(iNetwork.guid, equals('{dcb00002-570f-4a9b-8d69-199fdba5723b}'));
     });
 
     test('COM methods are named correctly', () {

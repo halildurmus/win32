@@ -151,7 +151,7 @@ void main() {
 
     final guid = winTypeDef.guid;
     expect(guid, isNotNull);
-    expect(guid, equals('{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}'));
+    expect(guid, equals('{ca30221d-86d9-40fb-a26b-d44eb7cf08ea}'));
   });
 
   test('Interface is correctly identified', () {
