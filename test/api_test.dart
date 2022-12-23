@@ -2292,6 +2292,17 @@ void main() {
               int lParam)>('EnumResourceTypesW');
       expect(EnumResourceTypes, isA<Function>());
     });
+    test('Can instantiate EnumSystemFirmwareTables', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final EnumSystemFirmwareTables = kernel32.lookupFunction<
+          Uint32 Function(Uint32 FirmwareTableProviderSignature,
+              Pointer<Uint32> pFirmwareTableEnumBuffer, Uint32 BufferSize),
+          int Function(
+              int FirmwareTableProviderSignature,
+              Pointer<Uint32> pFirmwareTableEnumBuffer,
+              int BufferSize)>('EnumSystemFirmwareTables');
+      expect(EnumSystemFirmwareTables, isA<Function>());
+    });
     test('Can instantiate EscapeCommFunction', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EscapeCommFunction = kernel32.lookupFunction<
@@ -3021,6 +3032,17 @@ void main() {
               Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
       expect(GetLogicalDriveStrings, isA<Function>());
     });
+    test('Can instantiate GetLogicalProcessorInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetLogicalProcessorInformation = kernel32.lookupFunction<
+          Int32 Function(Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
+              Pointer<Uint32> ReturnedLength),
+          int Function(
+              Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
+              Pointer<Uint32>
+                  ReturnedLength)>('GetLogicalProcessorInformation');
+      expect(GetLogicalProcessorInformation, isA<Function>());
+    });
     test('Can instantiate GetLongPathName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetLongPathName = kernel32.lookupFunction<
@@ -3454,6 +3476,20 @@ void main() {
           void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
       expect(GetSystemTime, isA<Function>());
     });
+    test('Can instantiate GetSystemTimeAdjustment', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemTimeAdjustment = kernel32.lookupFunction<
+              Int32 Function(
+                  Pointer<Uint32> lpTimeAdjustment,
+                  Pointer<Uint32> lpTimeIncrement,
+                  Pointer<Int32> lpTimeAdjustmentDisabled),
+              int Function(
+                  Pointer<Uint32> lpTimeAdjustment,
+                  Pointer<Uint32> lpTimeIncrement,
+                  Pointer<Int32> lpTimeAdjustmentDisabled)>(
+          'GetSystemTimeAdjustment');
+      expect(GetSystemTimeAdjustment, isA<Function>());
+    });
     test('Can instantiate GetSystemTimes', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetSystemTimes = kernel32.lookupFunction<
@@ -3531,6 +3567,12 @@ void main() {
           kernel32.lookupFunction<Uint16 Function(), int Function()>(
               'GetThreadUILanguage');
       expect(GetThreadUILanguage, isA<Function>());
+    });
+    test('Can instantiate GetTickCount', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetTickCount = kernel32
+          .lookupFunction<Uint32 Function(), int Function()>('GetTickCount');
+      expect(GetTickCount, isA<Function>());
     });
     test('Can instantiate GetUserDefaultLangID', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3664,6 +3706,14 @@ void main() {
       final GlobalLock = kernel32.lookupFunction<Pointer Function(IntPtr hMem),
           Pointer Function(int hMem)>('GlobalLock');
       expect(GlobalLock, isA<Function>());
+    });
+    test('Can instantiate GlobalMemoryStatusEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalMemoryStatusEx = kernel32.lookupFunction<
+          Int32 Function(Pointer<MEMORYSTATUSEX> lpBuffer),
+          int Function(
+              Pointer<MEMORYSTATUSEX> lpBuffer)>('GlobalMemoryStatusEx');
+      expect(GlobalMemoryStatusEx, isA<Function>());
     });
     test('Can instantiate GlobalSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -4021,6 +4071,15 @@ void main() {
           int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
               int ucchMax)>('QueryDosDeviceW');
       expect(QueryDosDevice, isA<Function>());
+    });
+    test('Can instantiate QueryFullProcessImageName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final QueryFullProcessImageName = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Uint32 dwFlags,
+              Pointer<Utf16> lpExeName, Pointer<Uint32> lpdwSize),
+          int Function(int hProcess, int dwFlags, Pointer<Utf16> lpExeName,
+              Pointer<Uint32> lpdwSize)>('QueryFullProcessImageNameW');
+      expect(QueryFullProcessImageName, isA<Function>());
     });
     test('Can instantiate QueryPerformanceCounter', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
