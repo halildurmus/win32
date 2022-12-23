@@ -8889,6 +8889,45 @@ const BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE = 0x00000020;
 const BLUETOOTH_GATT_FLAG_RETURN_ALL = 0x00000040;
 
 // -----------------------------------------------------------------------------
+// GetClassLong constants
+// -----------------------------------------------------------------------------
+
+/// Replaces the address of the menu name string. The string identifies the menu
+/// resource associated with the class.
+const GCL_MENUNAME = -8;
+
+/// Replaces a handle to the background brush associated with the class.
+const GCL_HBRBACKGROUND = -10;
+
+/// Replaces a handle to the cursor associated with the class.
+const GCL_HCURSOR = -12;
+
+/// Replaces a handle to the icon associated with the class.
+const GCL_HICON = -14;
+
+/// Replaces a handle to the module that registered the class.
+const GCL_HMODULE = -16;
+
+/// Sets the size, in bytes, of the extra window memory associated with each
+/// window in the class. Setting this value does not change the number of extra
+/// bytes already allocated.
+const GCL_CBWNDEXTRA = -18;
+
+/// Sets the size, in bytes, of the extra memory associated with the class.
+/// Setting this value does not change the number of extra bytes already
+/// allocated.
+const GCL_CBCLSEXTRA = -20;
+
+/// Replaces the address of the window procedure associated with the class.
+const GCL_WNDPROC = -24;
+
+/// Replaces the window-class style bits.
+const GCL_STYLE = -26;
+
+/// Retrieves an ATOM value that uniquely identifies the window class.
+const GCW_ATOM = -32;
+
+// -----------------------------------------------------------------------------
 // SetupDiGetClassDevs constants
 // -----------------------------------------------------------------------------
 
