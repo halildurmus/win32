@@ -1818,7 +1818,7 @@ void main() {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final ContinueDebugEvent = kernel32.lookupFunction<
           Int32 Function(
-              Uint32 dwProcessId, Uint32 dwThreadId, Uint32 dwContinueStatus),
+              Uint32 dwProcessId, Uint32 dwThreadId, Int32 dwContinueStatus),
           int Function(int dwProcessId, int dwThreadId,
               int dwContinueStatus)>('ContinueDebugEvent');
       expect(ContinueDebugEvent, isA<Function>());
