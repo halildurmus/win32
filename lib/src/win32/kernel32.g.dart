@@ -1423,6 +1423,29 @@ final _EnumResourceTypes = _kernel32.lookupFunction<
         Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc,
         int lParam)>('EnumResourceTypesW');
 
+/// Enumerates all system firmware tables of the specified type.
+///
+/// ```c
+/// UINT EnumSystemFirmwareTables(
+///   DWORD FirmwareTableProviderSignature,
+///   PVOID pFirmwareTableEnumBuffer,
+///   DWORD BufferSize
+/// );
+/// ```
+/// {@category kernel32}
+int EnumSystemFirmwareTables(int FirmwareTableProviderSignature,
+        Pointer<Uint32> pFirmwareTableEnumBuffer, int BufferSize) =>
+    _EnumSystemFirmwareTables(
+        FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize);
+
+final _EnumSystemFirmwareTables = _kernel32.lookupFunction<
+    Uint32 Function(Uint32 FirmwareTableProviderSignature,
+        Pointer<Uint32> pFirmwareTableEnumBuffer, Uint32 BufferSize),
+    int Function(
+        int FirmwareTableProviderSignature,
+        Pointer<Uint32> pFirmwareTableEnumBuffer,
+        int BufferSize)>('EnumSystemFirmwareTables');
+
 /// Directs the specified communications device to perform an extended
 /// function.
 ///
@@ -2974,6 +2997,26 @@ final _GetLogicalDriveStrings = _kernel32.lookupFunction<
     int Function(
         int nBufferLength, Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
 
+/// Retrieves information about logical processors and related hardware.
+///
+/// ```c
+/// BOOL GetLogicalProcessorInformation(
+///   PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer,
+///   PDWORD ReturnedLength
+/// );
+/// ```
+/// {@category kernel32}
+int GetLogicalProcessorInformation(
+        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
+        Pointer<Uint32> ReturnedLength) =>
+    _GetLogicalProcessorInformation(Buffer, ReturnedLength);
+
+final _GetLogicalProcessorInformation = _kernel32.lookupFunction<
+    Int32 Function(Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
+        Pointer<Uint32> ReturnedLength),
+    int Function(Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION> Buffer,
+        Pointer<Uint32> ReturnedLength)>('GetLogicalProcessorInformation');
+
 /// Converts the specified path to its long form.
 ///
 /// ```c
@@ -3904,6 +3947,35 @@ final _GetSystemTime = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEMTIME> lpSystemTime),
     void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
 
+/// Determines whether the system is applying periodic time adjustments to
+/// its time-of-day clock, and obtains the value and period of any such
+/// adjustments.
+///
+/// ```c
+/// BOOL GetSystemTimeAdjustment(
+///   PDWORD lpTimeAdjustment,
+///   PDWORD lpTimeIncrement,
+///   PBOOL  lpTimeAdjustmentDisabled
+/// );
+/// ```
+/// {@category kernel32}
+int GetSystemTimeAdjustment(
+        Pointer<Uint32> lpTimeAdjustment,
+        Pointer<Uint32> lpTimeIncrement,
+        Pointer<Int32> lpTimeAdjustmentDisabled) =>
+    _GetSystemTimeAdjustment(
+        lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled);
+
+final _GetSystemTimeAdjustment = _kernel32.lookupFunction<
+    Int32 Function(
+        Pointer<Uint32> lpTimeAdjustment,
+        Pointer<Uint32> lpTimeIncrement,
+        Pointer<Int32> lpTimeAdjustmentDisabled),
+    int Function(
+        Pointer<Uint32> lpTimeAdjustment,
+        Pointer<Uint32> lpTimeIncrement,
+        Pointer<Int32> lpTimeAdjustmentDisabled)>('GetSystemTimeAdjustment');
+
 /// Retrieves system timing information. On a multiprocessor system, the
 /// values returned are the sum of the designated times across all
 /// processors.
@@ -4053,6 +4125,18 @@ int GetThreadUILanguage() => _GetThreadUILanguage();
 
 final _GetThreadUILanguage = _kernel32
     .lookupFunction<Uint16 Function(), int Function()>('GetThreadUILanguage');
+
+/// Retrieves the number of milliseconds that have elapsed since the system
+/// was started, up to 49.7 days.
+///
+/// ```c
+/// DWORD GetTickCount();
+/// ```
+/// {@category kernel32}
+int GetTickCount() => _GetTickCount();
+
+final _GetTickCount =
+    _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetTickCount');
 
 /// Returns the language identifier of the Region Format setting for the
 /// current user.
@@ -4336,6 +4420,22 @@ Pointer GlobalLock(int hMem) => _GlobalLock(hMem);
 
 final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
     Pointer Function(int hMem)>('GlobalLock');
+
+/// Retrieves information about the system's current usage of both physical
+/// and virtual memory.
+///
+/// ```c
+/// BOOL GlobalMemoryStatusEx(
+///   LPMEMORYSTATUSEX lpBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) =>
+    _GlobalMemoryStatusEx(lpBuffer);
+
+final _GlobalMemoryStatusEx = _kernel32.lookupFunction<
+    Int32 Function(Pointer<MEMORYSTATUSEX> lpBuffer),
+    int Function(Pointer<MEMORYSTATUSEX> lpBuffer)>('GlobalMemoryStatusEx');
 
 /// Retrieves the current size of the specified global memory object, in
 /// bytes.
@@ -5090,6 +5190,28 @@ final _QueryDosDevice = _kernel32.lookupFunction<
         Uint32 ucchMax),
     int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
         int ucchMax)>('QueryDosDeviceW');
+
+/// Retrieves the full name of the executable image for the specified
+/// process.
+///
+/// ```c
+/// BOOL QueryFullProcessImageNameW(
+///   HANDLE hProcess,
+///   DWORD  dwFlags,
+///   LPWSTR lpExeName,
+///   PDWORD lpdwSize
+/// );
+/// ```
+/// {@category kernel32}
+int QueryFullProcessImageName(int hProcess, int dwFlags,
+        Pointer<Utf16> lpExeName, Pointer<Uint32> lpdwSize) =>
+    _QueryFullProcessImageName(hProcess, dwFlags, lpExeName, lpdwSize);
+
+final _QueryFullProcessImageName = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hProcess, Uint32 dwFlags, Pointer<Utf16> lpExeName,
+        Pointer<Uint32> lpdwSize),
+    int Function(int hProcess, int dwFlags, Pointer<Utf16> lpExeName,
+        Pointer<Uint32> lpdwSize)>('QueryFullProcessImageNameW');
 
 /// Retrieves the current value of the performance counter, which is a high
 /// resolution (<1us) time stamp that can be used for time-interval

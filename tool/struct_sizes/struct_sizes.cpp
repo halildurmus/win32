@@ -85,6 +85,7 @@ void main()
     printf("  'BTH_LE_GATT_SERVICE': %zu,\n", sizeof(BTH_LE_GATT_SERVICE));
     printf("  'BTH_LE_UUID': %zu,\n", sizeof(BTH_LE_UUID));
     printf("  'BY_HANDLE_FILE_INFORMATION': %zu,\n", sizeof(BY_HANDLE_FILE_INFORMATION));
+    printf("  'CACHE_DESCRIPTOR': %zu,\n", sizeof(CACHE_DESCRIPTOR));
     printf("  'CBTACTIVATESTRUCT': %zu,\n", sizeof(CBTACTIVATESTRUCT));
     printf("  'CBT_CREATEWND': %zu,\n", sizeof(CBT_CREATEWNDW));
     printf("  'CHANGEFILTERSTRUCT': %zu,\n", sizeof(CHANGEFILTERSTRUCT));
@@ -207,6 +208,7 @@ void main()
     printf("  'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("  'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));
     printf("  'MCI_STATUS_PARMS': %zu,\n", sizeof(MCI_STATUS_PARMS));
+    printf("  'MEMORYSTATUSEX': %zu,\n", sizeof(MEMORYSTATUSEX));
     printf("  'MEMORY_BASIC_INFORMATION': %zu,\n", sizeof(MEMORY_BASIC_INFORMATION));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFOW));
@@ -329,6 +331,7 @@ void main()
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
     printf("  'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
+    printf("  'SYSTEM_LOGICAL_PROCESSOR_INFORMATION': %zu,\n", sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION));
     printf("  'SYSTEM_POWER_STATUS': %zu,\n", sizeof(SYSTEM_POWER_STATUS));
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));

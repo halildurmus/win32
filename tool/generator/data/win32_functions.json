@@ -1274,6 +1274,10 @@
         "prototype": "BOOL EnumResourceTypesW(\n  HMODULE          hModule,\n  ENUMRESTYPEPROCW lpEnumFunc,\n  LONG_PTR         lParam\n);",
         "comment": "Enumerates resource types within a binary module. Starting with Windows Vista, this is typically a language-neutral Portable Executable (LN file), and the enumeration also includes resources from one of the corresponding language-specific resource files (.mui files)—if one exists—that contain localizable language resources. It is also possible to use hModule to specify a .mui file, in which case only that file is searched for resource types."
     },
+    "EnumSystemFirmwareTables": {
+        "prototype": "UINT EnumSystemFirmwareTables(\n  DWORD FirmwareTableProviderSignature,\n  PVOID pFirmwareTableEnumBuffer,\n  DWORD BufferSize\n);",
+        "comment": "Enumerates all system firmware tables of the specified type."
+    },
     "EnumThreadWindows": {
         "prototype": "BOOL EnumThreadWindows(\n  DWORD       dwThreadId,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
         "comment": "Enumerates all nonchild windows associated with a thread by passing the handle to each window, in turn, to an application-defined callback function. EnumThreadWindows continues until the last window is enumerated or the callback function returns FALSE."
@@ -2013,6 +2017,10 @@
         "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
     },
+    "GetLogicalProcessorInformation": {
+        "prototype": "BOOL GetLogicalProcessorInformation(\n  PSYSTEM_LOGICAL_PROCESSOR_INFORMATION Buffer,\n  PDWORD ReturnedLength\n);",
+        "comment": "Retrieves information about logical processors and related hardware."
+    },
     "GetLongPathName": {
         "prototype": "DWORD GetLongPathNameW(\n  [in]  LPCWSTR lpszShortPath,\n  [out] LPWSTR  lpszLongPath,\n  [in]  DWORD   cchBuffer\n);",
         "comment": "Converts the specified path to its long form."
@@ -2564,6 +2572,10 @@
         "prototype": "void GetSystemTime(\n  LPSYSTEMTIME lpSystemTime\n);",
         "comment": "Retrieves the current local date and time."
     },
+    "GetSystemTimeAdjustment": {
+        "prototype": "BOOL GetSystemTimeAdjustment(\n  PDWORD lpTimeAdjustment,\n  PDWORD lpTimeIncrement,\n  PBOOL  lpTimeAdjustmentDisabled\n);",
+        "comment": "Determines whether the system is applying periodic time adjustments to its time-of-day clock, and obtains the value and period of any such adjustments."
+    },
     "GetSystemTimes": {
         "prototype": "BOOL GetSystemTimes(\n  PFILETIME lpIdleTime,\n  PFILETIME lpKernelTime,\n  PFILETIME lpUserTime\n);",
         "comment": "Retrieves system timing information. On a multiprocessor system, the values returned are the sum of the designated times across all processors."
@@ -2646,6 +2658,10 @@
     "GetThreadUILanguage": {
         "prototype": "LANGID GetThreadUILanguage();",
         "comment": "Returns the language identifier of the first user interface language for the current thread."
+    },
+    "GetTickCount": {
+        "prototype": "DWORD GetTickCount();",
+        "comment": "Retrieves the number of milliseconds that have elapsed since the system was started, up to 49.7 days."
     },
     "GetTitleBarInfo": {
         "prototype": "BOOL GetTitleBarInfo(\n  HWND          hwnd,\n  PTITLEBARINFO pti\n);",
@@ -2809,6 +2825,10 @@
     "GlobalLock": {
         "prototype": "LPVOID GlobalLock(\n  HGLOBAL hMem\n);",
         "comment": "Locks a global memory object and returns a pointer to the first byte of the object's memory block."
+    },
+    "GlobalMemoryStatusEx": {
+        "prototype": "BOOL GlobalMemoryStatusEx(\n  LPMEMORYSTATUSEX lpBuffer\n);",
+        "comment": "Retrieves information about the system's current usage of both physical and virtual memory."
     },
     "GlobalSize": {
         "prototype": "SIZE_T GlobalSize(\n  HGLOBAL hMem\n);",
@@ -3716,6 +3736,10 @@
     "QueryDosDevice": {
         "prototype": "DWORD QueryDosDeviceW(\n  LPCWSTR lpDeviceName,\n  LPWSTR  lpTargetPath,\n  DWORD   ucchMax\n);",
         "comment": "Retrieves information about MS-DOS device names. The function can obtain the current mapping for a particular MS-DOS device name. The function can also obtain a list of all existing MS-DOS device names."
+    },
+    "QueryFullProcessImageName": {
+        "prototype": "BOOL QueryFullProcessImageNameW(\n  HANDLE hProcess,\n  DWORD  dwFlags,\n  LPWSTR lpExeName,\n  PDWORD lpdwSize\n);",
+        "comment": "Retrieves the full name of the executable image for the specified process."
     },
     "QueryPerformanceCounter": {
         "prototype": "BOOL QueryPerformanceCounter(\n  LARGE_INTEGER *lpPerformanceCount\n);",

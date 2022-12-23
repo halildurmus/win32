@@ -887,6 +887,26 @@ class BY_HANDLE_FILE_INFORMATION extends Struct {
   external int nFileIndexLow;
 }
 
+/// Describes the cache attributes.
+///
+/// {@category Struct}
+class CACHE_DESCRIPTOR extends Struct {
+  @Uint8()
+  external int Level;
+
+  @Uint8()
+  external int Associativity;
+
+  @Uint16()
+  external int LineSize;
+
+  @Uint32()
+  external int Size;
+
+  @Int32()
+  external int Type;
+}
+
 /// Contains information passed to a WH_CBT hook procedure, CBTProc, before
 /// a window is activated.
 ///
@@ -4535,6 +4555,40 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwTrack;
 }
 
+/// Contains information about the current state of both physical and
+/// virtual memory, including extended memory. The GlobalMemoryStatusEx
+/// function stores information in this structure.
+///
+/// {@category Struct}
+class MEMORYSTATUSEX extends Struct {
+  @Uint32()
+  external int dwLength;
+
+  @Uint32()
+  external int dwMemoryLoad;
+
+  @Uint64()
+  external int ullTotalPhys;
+
+  @Uint64()
+  external int ullAvailPhys;
+
+  @Uint64()
+  external int ullTotalPageFile;
+
+  @Uint64()
+  external int ullAvailPageFile;
+
+  @Uint64()
+  external int ullTotalVirtual;
+
+  @Uint64()
+  external int ullAvailVirtual;
+
+  @Uint64()
+  external int ullAvailExtendedVirtual;
+}
+
 /// Contains information about a range of pages in the virtual address space
 /// of a process. The VirtualQuery and VirtualQueryEx functions use this
 /// structure.
@@ -7888,6 +7942,83 @@ extension SYSTEM_INFO_Extension on SYSTEM_INFO {
       this.Anonymous.Anonymous;
   set Anonymous(_SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct value) =>
       this.Anonymous.Anonymous = value;
+}
+
+/// Describes the relationship between the specified processor set. This
+/// structure is used with the GetLogicalProcessorInformation function.
+///
+/// {@category Struct}
+class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
+  @IntPtr()
+  external int ProcessorMask;
+
+  @Int32()
+  external int Relationship;
+
+  external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union Anonymous;
+}
+
+/// {@category Struct}
+class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union extends Union {
+  external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+      ProcessorCore;
+
+  external _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+      NumaNode;
+
+  external CACHE_DESCRIPTOR Cache;
+
+  @Array(2)
+  external Array<Uint64> Reserved;
+}
+
+/// {@category Struct}
+class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+    extends Struct {
+  @Uint8()
+  external int Flags;
+}
+
+extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union_Extension
+    on SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+  int get Flags => this.Anonymous.ProcessorCore.Flags;
+  set Flags(int value) => this.Anonymous.ProcessorCore.Flags = value;
+}
+
+/// {@category Struct}
+class _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+    extends Struct {
+  @Uint32()
+  external int NodeNumber;
+}
+
+extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union_Extension_1
+    on SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+  int get NodeNumber => this.Anonymous.NumaNode.NodeNumber;
+  set NodeNumber(int value) => this.Anonymous.NumaNode.NodeNumber = value;
+}
+
+extension SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Extension
+    on SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+  _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+      get ProcessorCore => this.Anonymous.ProcessorCore;
+  set ProcessorCore(
+          _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct
+              value) =>
+      this.Anonymous.ProcessorCore = value;
+
+  _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+      get NumaNode => this.Anonymous.NumaNode;
+  set NumaNode(
+          _SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct
+              value) =>
+      this.Anonymous.NumaNode = value;
+
+  CACHE_DESCRIPTOR get Cache => this.Anonymous.Cache;
+  set Cache(CACHE_DESCRIPTOR value) => this.Anonymous.Cache = value;
+
+  Array<Uint64> get Reserved => this.Anonymous.Reserved;
+  set Reserved(Array<Uint64> value) => this.Anonymous.Reserved = value;
 }
 
 /// Contains information about the power status of the system.
