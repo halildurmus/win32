@@ -43,5 +43,4 @@ void main() {
   test('Can instantiate ISpNotifySource.getNotifyEventHandle', () {
     expect(spnotifysource.getNotifyEventHandle, isA<Function>());
   });
-  free(ptr);
 }

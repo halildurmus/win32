@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate IInspectable.getTrustLevel', () {
     expect(inspectable.getTrustLevel, isA<Function>());
   });
-  free(ptr);
 }

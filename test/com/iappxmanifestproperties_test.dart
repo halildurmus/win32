@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IAppxManifestProperties.getStringValue', () {
     expect(appxmanifestproperties.getStringValue, isA<Function>());
   });
-  free(ptr);
 }

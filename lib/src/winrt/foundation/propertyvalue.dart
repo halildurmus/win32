@@ -37,479 +37,479 @@ class PropertyValue extends IInspectable {
 
   // IPropertyValueStatics methods
   static Pointer<COMObject> createEmpty() {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createEmpty();
+      return object.createEmpty();
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt8(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt8(value);
+      return object.createUInt8(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt16(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt16(value);
+      return object.createInt16(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt16(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt16(value);
+      return object.createUInt16(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt32(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt32(value);
+      return object.createInt32(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt32(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt32(value);
+      return object.createUInt32(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt64(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt64(value);
+      return object.createInt64(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt64(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt64(value);
+      return object.createUInt64(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createSingle(double value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createSingle(value);
+      return object.createSingle(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createDouble(double value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createDouble(value);
+      return object.createDouble(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createChar16(int value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createChar16(value);
+      return object.createChar16(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createBoolean(bool value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createBoolean(value);
+      return object.createBoolean(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createString(String value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createString(value);
+      return object.createString(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static Pointer<COMObject> createInspectable(Pointer<COMObject> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInspectable(value);
+      return object.createInspectable(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createGuid(Guid value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createGuid(value);
+      return object.createGuid(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createDateTime(DateTime value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createDateTime(value);
+      return object.createDateTime(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createTimeSpan(Duration value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createTimeSpan(value);
+      return object.createTimeSpan(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createPoint(Point value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createPoint(value);
+      return object.createPoint(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createSize(Size value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createSize(value);
+      return object.createSize(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createRect(Rect value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createRect(value);
+      return object.createRect(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt8Array(int valueSize, Pointer<Uint8> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt8Array(valueSize, value);
+      return object.createUInt8Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt16Array(int valueSize, Pointer<Int16> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt16Array(valueSize, value);
+      return object.createInt16Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt16Array(
       int valueSize, Pointer<Uint16> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt16Array(valueSize, value);
+      return object.createUInt16Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt32Array(int valueSize, Pointer<Int32> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt32Array(valueSize, value);
+      return object.createInt32Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt32Array(
       int valueSize, Pointer<Uint32> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt32Array(valueSize, value);
+      return object.createUInt32Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInt64Array(int valueSize, Pointer<Int64> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInt64Array(valueSize, value);
+      return object.createInt64Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createUInt64Array(
       int valueSize, Pointer<Uint64> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createUInt64Array(valueSize, value);
+      return object.createUInt64Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createSingleArray(int valueSize, Pointer<Float> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createSingleArray(valueSize, value);
+      return object.createSingleArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createDoubleArray(
       int valueSize, Pointer<Double> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createDoubleArray(valueSize, value);
+      return object.createDoubleArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createChar16Array(
       int valueSize, Pointer<Uint16> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createChar16Array(valueSize, value);
+      return object.createChar16Array(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createBooleanArray(int valueSize, Pointer<Bool> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createBooleanArray(valueSize, value);
+      return object.createBooleanArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createStringArray(
       int valueSize, Pointer<IntPtr> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createStringArray(valueSize, value);
+      return object.createStringArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createInspectableArray(
       int valueSize, Pointer<COMObject> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createInspectableArray(valueSize, value);
+      return object.createInspectableArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createGuidArray(int valueSize, Pointer<GUID> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createGuidArray(valueSize, value);
+      return object.createGuidArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createDateTimeArray(
       int valueSize, Pointer<Uint64> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createDateTimeArray(valueSize, value);
+      return object.createDateTimeArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createTimeSpanArray(
       int valueSize, Pointer<Uint64> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createTimeSpanArray(valueSize, value);
+      return object.createTimeSpanArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createPointArray(int valueSize, Pointer<Point> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createPointArray(valueSize, value);
+      return object.createPointArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createSizeArray(int valueSize, Pointer<Size> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createSizeArray(valueSize, value);
+      return object.createSizeArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static IPropertyValue createRectArray(int valueSize, Pointer<Rect> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPropertyValueStatics);
+    final object = IPropertyValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPropertyValueStatics.fromRawPointer(activationFactory)
-          .createRectArray(valueSize, value);
+      return object.createRectArray(valueSize, value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 }

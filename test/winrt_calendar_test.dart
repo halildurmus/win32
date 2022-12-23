@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 @TestOn('windows')
 
 import 'package:test/test.dart';
@@ -10,11 +8,10 @@ import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    late ICalendar calendar;
+    late Calendar calendar;
 
     setUp(() {
       winrtInitialize();
-
       calendar = Calendar();
     });
 
@@ -30,6 +27,8 @@ void main() {
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
       expect(calendar2.year, equals(calendar.year));
+
+      calendar2.release();
     });
 
     test('Calendar.setToMin', () {
@@ -37,6 +36,8 @@ void main() {
 
       calendar.setToMin();
       expect(calendar.compare(today), isNegative);
+
+      today.release();
     });
 
     test('Calendar.setToMax', () {
@@ -44,11 +45,14 @@ void main() {
 
       calendar.setToMax();
       expect(calendar.compare(today), isPositive);
+
+      today.release();
     });
 
     test('Calendar.languages', () {
-      expect(calendar.languages.length, isPositive);
-      expect(calendar.languages.first, contains('-')); // e.g. en-US
+      final languages = calendar.languages;
+      expect(languages.length, isPositive);
+      expect(languages.first, contains('-')); // e.g. en-US
     });
 
     test('Calendar.numeralSystem getter', () {
@@ -166,7 +170,12 @@ void main() {
       expect(calendar.era, equals(4));
     });
 
-    test('Calendar.eraAsFullString', () {
+    test('Calendar.eraAsFullString (GregorianCalendar)', () {
+      calendar.changeCalendarSystem('GregorianCalendar');
+      expect(calendar.eraAsFullString(), equals('A.D.'));
+    });
+
+    test('Calendar.eraAsFullString (JapaneseCalendar)', () {
       calendar
         ..changeCalendarSystem('JapaneseCalendar')
         ..era = 1 // 明治 (Meiji)
@@ -228,10 +237,6 @@ void main() {
 
     test('Calendar.firstMinuteInThisHour getter', () {
       expect(calendar.firstMinuteInThisHour, equals(0));
-    });
-
-    test('Calendar.firstMonthInThisYear getter', () {
-      expect(calendar.firstMonthInThisYear, equals(1));
     });
 
     test('Calendar.firstMonthInThisYear getter', () {
@@ -329,15 +334,6 @@ void main() {
       expect(resolvedLanguage.length, equals(5));
     });
 
-    test('Calendar.numeralSystem getter', () {
-      final arabicNumerals = '٠١٢٣٤٥٦٧٨٩'.split('');
-      calendar.numeralSystem = 'arab';
-      final date = calendar.monthAsPaddedNumericString(2);
-
-      expect(arabicNumerals, contains(date[0]));
-      expect(arabicNumerals, contains(date[1]));
-    });
-
     test('Calendar.period getter', () {
       calendar.changeClock('12HourClock');
       expect(calendar.period, isIn([1, 2]));
@@ -382,6 +378,8 @@ void main() {
         ..addDays(-1);
       final compare = calendar.compare(original);
       expect(compare, isZero);
+
+      original.release();
     });
 
     test('Compare positive', () {
@@ -391,6 +389,8 @@ void main() {
         ..addDays(-1);
       final compare = calendar.compare(original);
       expect(compare, isPositive);
+
+      original.release();
     });
 
     test('Compare negative', () {
@@ -400,11 +400,8 @@ void main() {
         ..addDays(-3);
       final compare = calendar.compare(original);
       expect(compare, isNegative);
-    });
 
-    test('Calendar.eraAsFullString', () {
-      calendar.changeCalendarSystem('GregorianCalendar');
-      expect(calendar.eraAsFullString(), equals('A.D.'));
+      original.release();
     });
 
     test('Calendar.monthAsFullString', () {
@@ -470,7 +467,7 @@ void main() {
     // });
 
     tearDown(() {
-      free(calendar.ptr);
+      calendar.release();
       winrtUninitialize();
     });
   }

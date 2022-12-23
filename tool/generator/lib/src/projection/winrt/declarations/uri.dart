@@ -11,15 +11,15 @@ class WinRTMethodReturningUriProjection extends WinRTMethodProjection {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
 
-        try {
-          ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
 
-          final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
-          return Uri.parse(winrtUri.toString());
-        } finally {
-          $parametersPostamble
-          free(retValuePtr);
-        }
+        final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+        final uriAsString = winrtUri.toString();
+        winrtUri.release();
+
+        $parametersPostamble
+
+        return Uri.parse(uriAsString);
       }
 ''';
 }
@@ -33,14 +33,13 @@ class WinRTGetPropertyReturningUriProjection
       Uri get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        try {
-          ${ffiCall()}
+        ${ffiCall(freeRetValOnFailure: true)}
 
-          final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
-          return Uri.parse(winrtUri.toString());
-        } finally {
-          free(retValuePtr);
-        }
+        final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+        final uriAsString = winrtUri.toString();
+        winrtUri.release();
+
+        return Uri.parse(uriAsString);
       }
 ''';
 }
@@ -57,7 +56,7 @@ class WinRTSetPropertyReturningUriProjection
         try {
           ${ffiCall(params: 'winrtUri.ptr.cast<Pointer<COMObject>>().value')}
         } finally {
-          free(winrtUri.ptr);
+          winrtUri.release();
         }
       }
 ''';

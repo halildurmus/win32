@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IConnectionPoint.enumConnections', () {
     expect(connectionpoint.enumConnections, isA<Function>());
   });
-  free(ptr);
 }

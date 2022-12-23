@@ -58,5 +58,4 @@ void main() {
   test('Can instantiate IAudioClient.getService', () {
     expect(audioclient.getService, isA<Function>());
   });
-  free(ptr);
 }

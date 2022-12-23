@@ -168,6 +168,8 @@ class IMapView<K, V> extends IInspectable
 
     free(nativeGuidPtr);
 
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
 
@@ -212,6 +214,8 @@ class IMapView<K, V> extends IInspectable
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -289,6 +293,8 @@ class IMapView<K, V> extends IInspectable
         free(retValuePtr);
         throw WindowsException(hr);
       }
+
+      if (retValuePtr.ref.lpVtbl == nullptr) return null;
 
       return IPropertyValue.fromRawPointer(retValuePtr).value;
     } finally {

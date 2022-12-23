@@ -67,5 +67,4 @@ void main() {
   test('Can instantiate IMoniker.isSystemMoniker', () {
     expect(moniker.isSystemMoniker, isA<Function>());
   });
-  free(ptr);
 }

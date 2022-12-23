@@ -333,26 +333,25 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   Uri _getAt_Uri(int index) {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr =
-          ptr.ref.vtable
-                  .elementAt(6)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              HRESULT Function(
-                                  Pointer, Uint32, Pointer<COMObject>)>>>()
-                  .value
-                  .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
-              ptr.ref.lpVtbl, index, retValuePtr);
+    final hr =
+        ptr.ref.vtable
+                .elementAt(6)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(
+                                Pointer, Uint32, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, index, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
-      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
-      return Uri.parse(winrtUri.toString());
-    } finally {
-      free(retValuePtr);
-    }
+    final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+    final uriAsString = winrtUri.toString();
+    winrtUri.release();
+
+    return Uri.parse(uriAsString);
   }
 
   /// Gets the number of items in the vector.
@@ -382,29 +381,32 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   List<T> getView() {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(8)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return IVectorView.fromRawPointer(
-        retValuePtr,
-        creator: _creator,
-        enumCreator: _enumCreator,
-        iterableIid: _iterableIid,
-        intType: _intType,
-      ).toList();
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    final vectorView = IVectorView.fromRawPointer(
+      retValuePtr,
+      creator: _creator,
+      enumCreator: _enumCreator,
+      iterableIid: _iterableIid,
+      intType: _intType,
+    );
+    final list = vectorView.toList();
+    vectorView.release();
+
+    return list;
   }
 
   /// Retrieves the index of a specified item in the vector.
@@ -690,7 +692,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
       return retValuePtr.value;
     } finally {
-      free(winrtUri.ptr);
+      winrtUri.release();
       free(retValuePtr);
     }
   }
@@ -872,7 +874,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
-      free(winrtUri.ptr);
+      winrtUri.release();
     }
   }
 
@@ -1060,7 +1062,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
-      free(winrtUri.ptr);
+      winrtUri.release();
     }
   }
 
@@ -1224,7 +1226,7 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
-      free(winrtUri.ptr);
+      winrtUri.release();
     }
   }
 
@@ -1783,12 +1785,12 @@ class IVector<T> extends IInspectable implements IIterable<T> {
   }
 
   void _replaceAll_Uri(List<Uri> value) {
-    final handles = <Pointer<COMObject>>[];
+    final winrtUris = <winrt_uri.Uri>[];
     final pArray = calloc<COMObject>(value.length);
     for (var i = 0; i < value.length; i++) {
       final winrtUri = winrt_uri.Uri.createUri(value[i].toString());
       pArray[i] = winrtUri.ptr.ref;
-      handles.add(winrtUri.ptr);
+      winrtUris.add(winrtUri);
     }
 
     try {
@@ -1806,8 +1808,10 @@ class IVector<T> extends IInspectable implements IIterable<T> {
 
       if (FAILED(hr)) throw WindowsException(hr);
     } finally {
+      for (final winrtUri in winrtUris) {
+        winrtUri.release();
+      }
       free(pArray);
-      handles.forEach(free);
     }
   }
 

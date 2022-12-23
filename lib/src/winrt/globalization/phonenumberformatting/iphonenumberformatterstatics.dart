@@ -53,6 +53,7 @@ class IPhoneNumberFormatterStatics extends IInspectable {
         ptr.ref.lpVtbl, regionCodeHstring, phoneNumber.ptr);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
     WindowsDeleteString(regionCodeHstring);
   }
 

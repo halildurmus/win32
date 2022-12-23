@@ -422,6 +422,7 @@ class IUriRuntimeClass extends IInspectable {
   Uri combineUri(String relativeUri) {
     final retValuePtr = calloc<COMObject>();
     final relativeUriHstring = convertToHString(relativeUri);
+
     final hr = ptr.ref.vtable
             .elementAt(22)
             .cast<
@@ -438,7 +439,9 @@ class IUriRuntimeClass extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(relativeUriHstring);
+
     return Uri.fromRawPointer(retValuePtr);
   }
 }

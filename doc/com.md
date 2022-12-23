@@ -41,9 +41,7 @@ final fileDialog2 = IFileDialog2(
 ```
 
 `createFromID` returns a `Pointer<COMObject>` containing the requested object,
-which can then be cast into the appropriate interface as shown above. It is the
-caller's responsibility to free the returned pointer when all interfaces that
-derive from it are released.
+which can then be cast into the appropriate interface as shown above.
 
 ### Asking a COM object for an interface
 
@@ -61,13 +59,17 @@ COM interfaces supply a method that wraps `queryInterface`. If you
 have an existing COM object, you can call it as follows:
 
 ```dart
+  final modalWindow = IModalWindow(fileDialog2.toInterface(IID_IModalWindow));
+```
+
+or, you can use the `from` constructor that wraps the `toInterface` for you:
+
+```dart
   final modalWindow = IModalWindow.from(fileDialog2);
 ```
 
 Where `createFromID` creates a new COM object, `toInterface` casts an existing
-COM object to a new interface. As with `createFromID`, it is the caller's
-responsibility to free the returned pointer when all interfaces that derive from
-it are released.
+COM object to a new interface.
 
 Attempting to cast a COM object to an interface it does not support will fail,
 of course. A `WindowsException` will be thrown with an hr of `E_NOINTERFACE`.
@@ -102,7 +104,6 @@ When you have finished using a COM interface, you should release it with the `re
 
 ```dart
 fileOpenDialog.release(); // Release the interface
-free(fileOpenDialog.ptr); // Release the pointer to the interface
 ```
 
 Often this will be called as part of a `try` / `finally` block, to guarantee

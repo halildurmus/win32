@@ -313,24 +313,26 @@ class IIterator<T> extends IInspectable {
   Uri _current_Uri() {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.lpVtbl.value
-              .elementAt(6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.lpVtbl.value
+            .elementAt(6)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
-      return Uri.parse(winrtUri.toString());
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+    final uriAsString = winrtUri.toString();
+    winrtUri.release();
+
+    return Uri.parse(uriAsString);
   }
 
   /// Gets a value that indicates whether the iterator refers to a current item

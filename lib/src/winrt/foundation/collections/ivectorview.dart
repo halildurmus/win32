@@ -306,26 +306,25 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
   Uri _getAt_Uri(int index) {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr =
-          ptr.ref.vtable
-                  .elementAt(6)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              HRESULT Function(
-                                  Pointer, Uint32, Pointer<COMObject>)>>>()
-                  .value
-                  .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
-              ptr.ref.lpVtbl, index, retValuePtr);
+    final hr =
+        ptr.ref.vtable
+                .elementAt(6)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(
+                                Pointer, Uint32, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, int, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, index, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
-      final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
-      return Uri.parse(winrtUri.toString());
-    } finally {
-      free(retValuePtr);
-    }
+    final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
+    final uriAsString = winrtUri.toString();
+    winrtUri.release();
+
+    return Uri.parse(uriAsString);
   }
 
   String _getAt_String(int index) {
@@ -634,7 +633,7 @@ class IVectorView<T> extends IInspectable implements IIterable<T> {
 
       return retValuePtr.value;
     } finally {
-      free(winrtUri.ptr);
+      winrtUri.release();
       free(retValuePtr);
     }
   }

@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate IUnknown.release', () {
     expect(unknown.release, isA<Function>());
   });
-  free(ptr);
 }

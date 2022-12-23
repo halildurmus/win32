@@ -31,8 +31,7 @@ import 'phonenumberinfo.dart';
 /// {@category winrt}
 class PhoneNumberFormatter extends IInspectable
     implements IPhoneNumberFormatter {
-  PhoneNumberFormatter({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  PhoneNumberFormatter() : super(ActivateClass(_className));
   PhoneNumberFormatter.fromRawPointer(super.ptr);
 
   static const _className =
@@ -40,51 +39,56 @@ class PhoneNumberFormatter extends IInspectable
 
   // IPhoneNumberFormatterStatics methods
   static void tryCreate(String regionCode, PhoneNumberFormatter phoneNumber) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
+    final object =
+        IPhoneNumberFormatterStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .tryCreate(regionCode, phoneNumber);
+      return object.tryCreate(regionCode, phoneNumber);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static int getCountryCodeForRegion(String regionCode) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
+    final object =
+        IPhoneNumberFormatterStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .getCountryCodeForRegion(regionCode);
+      return object.getCountryCodeForRegion(regionCode);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static String getNationalDirectDialingPrefixForRegion(
       String regionCode, bool stripNonDigit) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
+    final object =
+        IPhoneNumberFormatterStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .getNationalDirectDialingPrefixForRegion(regionCode, stripNonDigit);
+      return object.getNationalDirectDialingPrefixForRegion(
+          regionCode, stripNonDigit);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static String wrapWithLeftToRightMarkers(String number) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IPhoneNumberFormatterStatics);
+    final object =
+        IPhoneNumberFormatterStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IPhoneNumberFormatterStatics.fromRawPointer(activationFactory)
-          .wrapWithLeftToRightMarkers(number);
+      return object.wrapWithLeftToRightMarkers(number);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

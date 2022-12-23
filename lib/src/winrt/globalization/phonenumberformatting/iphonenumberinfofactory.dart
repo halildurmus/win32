@@ -38,6 +38,7 @@ class IPhoneNumberInfoFactory extends IInspectable {
   PhoneNumberInfo create(String number) {
     final retValuePtr = calloc<COMObject>();
     final numberHstring = convertToHString(number);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -54,7 +55,9 @@ class IPhoneNumberInfoFactory extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(numberHstring);
+
     return PhoneNumberInfo.fromRawPointer(retValuePtr);
   }
 }

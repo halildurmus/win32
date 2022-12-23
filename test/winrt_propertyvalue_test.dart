@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
+import 'package:win32/src/winrt/internal/comobject_pointer.dart';
 import 'package:win32/winrt.dart';
 
 // Test the WinRT PropertyValue object to make sure overrides, properties and
@@ -17,6 +18,8 @@ void main() {
       final pv = PropertyValue.createUInt8(30);
       expect(pv.type, equals(PropertyType.uInt8));
       expect(pv.getUInt8(), equals(30));
+
+      pv.release();
     });
 
     test('UInt8Array', () {
@@ -37,12 +40,16 @@ void main() {
       expect(newArray.value[2], equals(30));
       expect(newArray.value[3], equals(40));
       expect(newArray.value[4], equals(50));
+
+      pv.release();
     });
 
     test('UInt16', () {
       final pv = PropertyValue.createUInt16(65534);
       expect(pv.type, equals(PropertyType.uInt16));
       expect(pv.getUInt16(), equals(65534));
+
+      pv.release();
     });
 
     test('UInt16Array', () {
@@ -63,12 +70,16 @@ void main() {
       expect(newArray.value[2], equals(300));
       expect(newArray.value[3], equals(400));
       expect(newArray.value[4], equals(500));
+
+      pv.release();
     });
 
     test('Guid', () {
       final pv = PropertyValue.createGuid(Guid.parse(IID_ICalendar));
       expect(pv.type, equals(PropertyType.guid));
       expect(pv.getGuid().toString(), equals(IID_ICalendar));
+
+      pv.release();
     });
 
     test('GuidArray', () {
@@ -87,6 +98,8 @@ void main() {
       expect(newArray.value[0].toString(), equals(IID_ICalendar));
       expect(newArray.value[1].toString(), equals(IID_IFileOpenPicker));
       expect(newArray.value[2].toString(), equals(IID_IStorageItem));
+
+      pv.release();
     });
 
     test('Inspectable', () {
@@ -94,12 +107,16 @@ void main() {
       final pv = PropertyValue.createInspectable(calendar.ptr);
       expect(IInspectable(pv).runtimeClassName,
           equals('Windows.Globalization.Calendar'));
+
+      calendar.release();
     });
 
     test('InspectableArray', () {
+      final calendar = Calendar();
+      final formatter = PhoneNumberFormatter();
       final array = calloc<COMObject>(2);
-      array[0] = Calendar().ptr.ref;
-      array[1] = PhoneNumberFormatter().ptr.ref;
+      array[0] = calendar.ptr.ref;
+      array[1] = formatter.ptr.ref;
       final pv = PropertyValue.createInspectableArray(2, array);
       expect(pv.type, equals(PropertyType.inspectableArray));
 
@@ -108,12 +125,21 @@ void main() {
 
       pv.getInspectableArray(arraySize, newArray);
       expect(arraySize.value, equals(2));
-      expect(IInspectable(newArray.value.elementAt(0)).runtimeClassName,
+      final list = newArray.value.toList(IInspectable.new, length: 2);
+      final firstElement = list.first;
+      final lastElement = list.last;
+      expect(firstElement.runtimeClassName,
           equals('Windows.Globalization.Calendar'));
       expect(
-          IInspectable(newArray.value.elementAt(1)).runtimeClassName,
+          lastElement.runtimeClassName,
           equals(
               'Windows.Globalization.PhoneNumberFormatting.PhoneNumberFormatter'));
+
+      lastElement.release();
+      firstElement.release();
+      free(newArray);
+      pv.release();
+      free(array);
     });
 
     tearDown(winrtUninitialize);

@@ -52,5 +52,4 @@ void main() {
   test('Can instantiate ISpeechObjectToken.matchesAttributes', () {
     expect(speechobjecttoken.matchesAttributes, isA<Function>());
   });
-  free(ptr);
 }

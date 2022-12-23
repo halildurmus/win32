@@ -34,5 +34,4 @@ void main() {
   test('Can instantiate IEnumIDList.clone', () {
     expect(enumidlist.clone, isA<Function>());
   });
-  free(ptr);
 }

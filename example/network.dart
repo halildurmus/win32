@@ -12,22 +12,16 @@ import 'package:win32/win32.dart';
 void main() {
   // Initialize COM
   var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+  if (FAILED(hr)) throw WindowsException(hr);
 
   final netManager = NetworkListManager.createInstance();
   final nlmConnectivity = calloc<Int32>();
-  final enumPtr = calloc<COMObject>();
-  final netPtr = calloc<COMObject>();
   final descPtr = calloc<Pointer<Utf16>>();
   final elements = calloc<Uint32>();
 
   try {
     hr = netManager.getConnectivity(nlmConnectivity);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final connectivity = nlmConnectivity.value;
     var isInternetConnected = false;
@@ -49,14 +43,14 @@ void main() {
       print('Not connected to the Internet.');
     }
 
+    final enumPtr = calloc<COMObject>();
     hr = netManager.getNetworks(
         NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
 
     print('\nNetworks (connected and disconnected) on this machine:');
     final enumerator = IEnumNetworkConnections(enumPtr);
+    var netPtr = calloc<COMObject>();
     hr = enumerator.next(1, netPtr.cast(), elements);
     while (elements.value == 1) {
       final network = INetwork(netPtr);
@@ -68,15 +62,15 @@ void main() {
             '$networkName: ${isNetworkConnected ? 'connected' : 'disconnected'}');
       }
 
+      network.release();
+      netPtr = calloc<COMObject>();
       hr = enumerator.next(1, netPtr.cast(), elements);
     }
   } finally {
     free(elements);
-    free(netPtr);
-    free(enumPtr);
     free(descPtr);
     free(nlmConnectivity);
-    free(netManager.ptr);
+    netManager.release();
 
     CoUninitialize();
   }

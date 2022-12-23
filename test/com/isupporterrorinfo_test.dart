@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate ISupportErrorInfo.interfaceSupportsErrorInfo', () {
     expect(supporterrorinfo.interfaceSupportsErrorInfo, isA<Function>());
   });
-  free(ptr);
 }

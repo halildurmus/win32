@@ -39,74 +39,75 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
 
   // IJsonValueStatics methods
   static JsonValue parse(String input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
+    final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics.fromRawPointer(activationFactory).parse(input);
+      return object.parse(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static bool tryParse(String input, JsonValue result) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
+    final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics.fromRawPointer(activationFactory)
-          .tryParse(input, result);
+      return object.tryParse(input, result);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static JsonValue createBooleanValue(bool input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
+    final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics.fromRawPointer(activationFactory)
-          .createBooleanValue(input);
+      return object.createBooleanValue(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static JsonValue createNumberValue(double input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
+    final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics.fromRawPointer(activationFactory)
-          .createNumberValue(input);
+      return object.createNumberValue(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static JsonValue createStringValue(String input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
+    final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics.fromRawPointer(activationFactory)
-          .createStringValue(input);
+      return object.createStringValue(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // IJsonValueStatics2 methods
   static JsonValue createNullValue() {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics2);
+    final object = IJsonValueStatics2.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonValueStatics2.fromRawPointer(activationFactory)
-          .createNullValue();
+      return object.createNullValue();
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

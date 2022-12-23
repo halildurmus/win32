@@ -79,5 +79,4 @@ void main() {
   test('Can instantiate ITypeInfo.releaseVarDesc', () {
     expect(typeinfo.releaseVarDesc, isA<Function>());
   });
-  free(ptr);
 }

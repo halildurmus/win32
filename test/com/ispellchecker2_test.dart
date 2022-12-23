@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate ISpellChecker2.remove', () {
     expect(spellchecker2.remove, isA<Function>());
   });
-  free(ptr);
 }

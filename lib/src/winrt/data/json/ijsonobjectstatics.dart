@@ -38,6 +38,7 @@ class IJsonObjectStatics extends IInspectable {
   JsonObject parse(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -53,7 +54,9 @@ class IJsonObjectStatics extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(inputHstring);
+
     return JsonObject.fromRawPointer(retValuePtr);
   }
 

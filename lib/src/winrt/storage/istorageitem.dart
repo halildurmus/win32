@@ -43,6 +43,7 @@ class IStorageItem extends IInspectable {
   Pointer<COMObject> renameAsyncOverloadDefaultOptions(String desiredName) {
     final retValuePtr = calloc<COMObject>();
     final desiredNameHstring = convertToHString(desiredName);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -59,7 +60,9 @@ class IStorageItem extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(desiredNameHstring);
+
     return retValuePtr;
   }
 
@@ -86,6 +89,7 @@ class IStorageItem extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(desiredNameHstring);
 
     return retValuePtr;

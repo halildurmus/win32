@@ -39,8 +39,7 @@ class PropertySet extends IInspectable
         IObservableMap<String, Object?>,
         IMap<String, Object?>,
         IIterable<IKeyValuePair<String, Object?>> {
-  PropertySet({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  PropertySet() : super(ActivateClass(_className));
   PropertySet.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.PropertySet';

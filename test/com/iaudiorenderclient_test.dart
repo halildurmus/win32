@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IAudioRenderClient.releaseBuffer', () {
     expect(audiorenderclient.releaseBuffer, isA<Function>());
   });
-  free(ptr);
 }

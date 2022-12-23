@@ -30,5 +30,4 @@ void main() {
   test('Can instantiate IAppxManifestReader3.getTargetDeviceFamilies', () {
     expect(appxmanifestreader3.getTargetDeviceFamilies, isA<Function>());
   });
-  free(ptr);
 }

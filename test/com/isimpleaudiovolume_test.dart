@@ -34,5 +34,4 @@ void main() {
   test('Can instantiate ISimpleAudioVolume.getMute', () {
     expect(simpleaudiovolume.getMute, isA<Function>());
   });
-  free(ptr);
 }

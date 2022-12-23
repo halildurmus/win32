@@ -64,7 +64,6 @@ void main() {
 
   final $instanceName = $interfaceName(ptr);
   ${projection.methodProjections.map((p) => testMethod(interfaceName, instanceName, p)).join()}
-  free(ptr);
 }
   """;
   }

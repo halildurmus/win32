@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate IApplicationActivationManager.activateForProtocol', () {
     expect(applicationactivationmanager.activateForProtocol, isA<Function>());
   });
-  free(ptr);
 }

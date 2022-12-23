@@ -16,8 +16,7 @@ void main() {
     final nlm = NetworkListManager.createInstance();
     expect(nlm.ptr.address, isNonZero);
 
-    free(nlm.ptr);
-
+    nlm.release();
     CoUninitialize();
   });
 
@@ -31,14 +30,14 @@ void main() {
     test('Network is connected', () {
       final nlm = NetworkListManager.createInstance();
       expect(nlm.isConnected, equals(VARIANT_TRUE));
-      free(nlm.ptr);
+      nlm.release();
     });
 
     test('Network is connected to the internet', () {
       for (var i = 0; i < testRuns; i++) {
         final nlm = NetworkListManager.createInstance();
         expect(nlm.isConnectedToInternet, equals(VARIANT_TRUE));
-        free(nlm.ptr);
+        nlm.release();
       }
     });
 
@@ -61,9 +60,9 @@ void main() {
       expect(network.isConnected,
           anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
 
-      free(netPtr);
-      free(enumPtr);
-      free(nlm.ptr);
+      network.release();
+      enumerator.release();
+      nlm.release();
     });
 
     test('First network connection has a description', () {
@@ -87,9 +86,9 @@ void main() {
       // more than one character long, and test for that.
       expect(descPtr.value.length, greaterThan(1));
 
-      free(netPtr);
-      free(enumPtr);
-      free(nlm.ptr);
+      network.release();
+      enumerator.release();
+      nlm.release();
     });
 
     tearDown(CoUninitialize);
