@@ -102,17 +102,17 @@ Pointer<COMObject> CreateActivationFactory(String className, String iid,
     {Allocator allocator = calloc}) {
   // Create a HSTRING representing the object
   final hClassName = convertToHString(className);
-  final nativeGuidPtr = GUIDFromString(iid);
+  final pIID = GUIDFromString(iid);
   final activationFactoryPtr = allocator<COMObject>();
 
   try {
-    final hr = RoGetActivationFactory(
-        hClassName, nativeGuidPtr, activationFactoryPtr.cast());
+    final hr =
+        RoGetActivationFactory(hClassName, pIID, activationFactoryPtr.cast());
     if (FAILED(hr)) throw WindowsException(hr);
     // Return a pointer to the relevant class
     return activationFactoryPtr;
   } finally {
-    free(nativeGuidPtr);
+    free(pIID);
     WindowsDeleteString(hClassName);
   }
 }

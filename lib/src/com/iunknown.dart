@@ -12,11 +12,6 @@ import '../guid.dart';
 import '../macros.dart';
 import '../utils.dart';
 
-typedef WinCoTaskMemFreeNative = Void Function(Pointer pv);
-final ole32Lib = DynamicLibrary.open('ole32.dll');
-final winCoTaskMemFree =
-    ole32Lib.lookup<NativeFunction<WinCoTaskMemFreeNative>>('CoTaskMemFree');
-
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-c000-000000000046}';
 
@@ -34,10 +29,14 @@ class IUnknown implements Finalizable {
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr) {
-    _finalizer.attach(this, ptr.cast(), detach: this, externalSize: 8);
+    _finalizer.attach(this, ptr.cast(),
+        detach: this, externalSize: sizeOf<IntPtr>());
   }
 
-  static final _finalizer = NativeFinalizer(winCoTaskMemFree.cast());
+  static final _ole32Lib = DynamicLibrary.open('ole32.dll');
+  static final _winCoTaskMemFree = _ole32Lib
+      .lookup<NativeFunction<Void Function(Pointer pv)>>('CoTaskMemFree');
+  static final _finalizer = NativeFinalizer(_winCoTaskMemFree.cast());
 
   factory IUnknown.from(IUnknown interface) =>
       IUnknown(interface.toInterface(IID_IUnknown));
@@ -83,14 +82,14 @@ class IUnknown implements Finalizable {
   /// a COM QueryInterface to return a reference to that interface. This method
   /// reduces the boilerplate associated with calling `queryInterface` manually.
   Pointer<COMObject> toInterface(String iid) {
-    final nativeGuidPtr = convertToIID(iid);
+    final pIID = convertToIID(iid);
     final objectPtr = calloc<COMObject>();
     try {
-      final hr = queryInterface(nativeGuidPtr, objectPtr.cast());
+      final hr = queryInterface(pIID, objectPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);
       return objectPtr;
     } finally {
-      free(nativeGuidPtr);
+      free(pIID);
     }
   }
 }
