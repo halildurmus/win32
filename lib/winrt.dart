@@ -51,6 +51,7 @@ export 'win32.dart';
 
 // WinRT foundational exports
 export 'src/winrt_callbacks.dart';
+export 'src/winrt_com_interop_helpers.dart';
 export 'src/winrt_constants.dart';
 export 'src/winrt_helpers.dart';
 export 'src/winrt/foundation/winrt_enum.dart';
