@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IAppxManifestReader2.getQualifiedResources', () {
     expect(appxmanifestreader2.getQualifiedResources, isA<Function>());
   });
-  free(ptr);
 }

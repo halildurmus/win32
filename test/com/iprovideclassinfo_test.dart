@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IProvideClassInfo.getClassInfo', () {
     expect(provideclassinfo.getClassInfo, isA<Function>());
   });
-  free(ptr);
 }

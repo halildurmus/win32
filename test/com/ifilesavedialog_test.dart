@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IFileSaveDialog.applyProperties', () {
     expect(filesavedialog.applyProperties, isA<Function>());
   });
-  free(ptr);
 }

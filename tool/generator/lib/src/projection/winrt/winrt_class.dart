@@ -23,9 +23,7 @@ class WinRTClassProjection extends WinRTInterfaceProjection {
       .isNotEmpty;
 
   String get defaultConstructor => hasDefaultConstructor
-      ? '''
-      $shortName({Allocator allocator = calloc})
-          : super(ActivateClass(_className, allocator: allocator));'''
+      ? '$shortName() : super(ActivateClass(_className));'
       : '';
 
   String get classNameDeclaration => (hasDefaultConstructor ||

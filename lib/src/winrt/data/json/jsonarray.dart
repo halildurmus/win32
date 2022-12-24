@@ -42,33 +42,33 @@ class JsonArray extends IInspectable
         IVector<IJsonValue>,
         IIterable<IJsonValue>,
         IStringable {
-  JsonArray({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  JsonArray() : super(ActivateClass(_className));
   JsonArray.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Data.Json.JsonArray';
 
   // IJsonArrayStatics methods
   static JsonArray parse(String input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonArrayStatics);
+    final object = IJsonArrayStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonArrayStatics.fromRawPointer(activationFactory).parse(input);
+      return object.parse(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static bool tryParse(String input, JsonArray result) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonArrayStatics);
+    final object = IJsonArrayStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonArrayStatics.fromRawPointer(activationFactory)
-          .tryParse(input, result);
+      return object.tryParse(input, result);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

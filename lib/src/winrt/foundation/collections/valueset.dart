@@ -42,8 +42,7 @@ class ValueSet extends IInspectable
         IObservableMap<String, Object?>,
         IMap<String, Object?>,
         IIterable<IKeyValuePair<String, Object?>> {
-  ValueSet({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  ValueSet() : super(ActivateClass(_className));
   ValueSet.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.ValueSet';

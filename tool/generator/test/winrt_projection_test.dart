@@ -396,10 +396,10 @@ void main() {
     expect(expirationTimeProjection.returnType.dartType, equals('void'));
     expect(expirationTimeProjection.toString().trimLeft(),
         startsWith('set expirationTime(DateTime? value)'));
-    expect(
-        expirationTimeProjection.toString(),
-        contains(
-            'final referencePtr = boxValue(value, convertToIReference: true);'));
+    expect(expirationTimeProjection.toString(),
+        contains('''final referencePtr = value == null
+            ? calloc<COMObject>()
+            : boxValue(value, convertToIReference: true);'''));
   });
 
   test('WinRT set property successfully projects nullable enum parameter', () {
@@ -417,10 +417,10 @@ void main() {
     expect(flagsProjection.returnType.dartType, equals('void'));
     expect(flagsProjection.toString().trimLeft(),
         startsWith('set flags(BluetoothLEAdvertisementFlags? value)'));
-    expect(
-        flagsProjection.toString(),
-        contains(
-            'final referencePtr = boxValue(value?.value, convertToIReference: true, nativeType: Uint32);'));
+    expect(flagsProjection.toString(),
+        contains('''final referencePtr = value == null
+            ? calloc<COMObject>()
+            : boxValue(value?.value, convertToIReference: true, nativeType: Uint32);'''));
   });
 
   test('WinRT method projects DateTime parameter correctly', () {
@@ -489,7 +489,7 @@ void main() {
     expect(
         projection.defaultConstructor,
         equalsIgnoringWhitespace(
-            'FileOpenPicker({Allocator allocator = calloc}) : super(ActivateClass(_className, allocator: allocator));'));
+            'FileOpenPicker() : super(ActivateClass(_className));'));
   });
 
   test('WinRT class does not project a default constructor', () {
@@ -664,7 +664,9 @@ void main() {
         contains(
             'final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);'));
     expect(fallbackUriProjection.toString().trimLeft(),
-        contains('return Uri.parse(winrtUri.toString());'));
+        contains('final uriAsString = winrtUri.toString();'));
+    expect(fallbackUriProjection.toString().trimLeft(),
+        contains('return Uri.parse(uriAsString);'));
   });
 
   test('WinRT set property successfully projects Uri', () {
@@ -699,7 +701,7 @@ void main() {
         launchUriAsyncProjection.parameters.first as WinRTParameterProjection;
     expect(uriParameter.preamble,
         equals('final uriUri = winrt_uri.Uri.createUri(uri.toString());'));
-    expect(uriParameter.postamble, equals('free(uriUri.ptr);'));
+    expect(uriParameter.postamble, equals('uriUri.release();'));
     expect(uriParameter.localIdentifier,
         equals('uriUri.ptr.cast<Pointer<COMObject>>().value'));
     expect(uriParameter.type.methodParamType, equals('Uri'));

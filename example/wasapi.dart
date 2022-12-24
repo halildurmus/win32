@@ -91,7 +91,6 @@ void main() {
       0, // role: system notification sound
       ppDevice));
   pDeviceEnumerator.release();
-  free(pDeviceEnumerator.ptr);
 
   // Activate an IAudioClient interface for the output device.
   final pDevice = IMMDevice(ppDevice.cast());
@@ -164,13 +163,10 @@ void main() {
   free(pData);
 
   pDevice.release();
-  free(ppDevice);
 
   pAudioClient.release();
-  free(ppAudioClient);
 
   pAudioRenderClient.release();
-  free(ppAudioRenderClient);
 
   free(ppFormat);
 

@@ -52,5 +52,4 @@ void main() {
   test('Can instantiate IWbemObjectAccess.unlock', () {
     expect(wbemobjectaccess.unlock, isA<Function>());
   });
-  free(ptr);
 }

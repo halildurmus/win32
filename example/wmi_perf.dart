@@ -67,13 +67,13 @@ void main() {
 
   using((Arena arena) {
     final pLoc = WbemLocator.createInstance();
-    final ppNamespace = arena<Pointer<COMObject>>();
+    final ppNamespace = calloc<Pointer<COMObject>>();
 
     connectWMI(pLoc, ppNamespace);
 
     final refresher = WbemRefresher.createInstance();
     final pConfig = IWbemConfigureRefresher.from(refresher);
-    final ppRefreshable = arena<Pointer<COMObject>>();
+    final ppRefreshable = calloc<Pointer<COMObject>>();
 
     final pszQuery =
         'Win32_PerfRawData_PerfProc_Process.Name="$processToMonitor"'
@@ -111,10 +111,8 @@ void main() {
 
     refresher.release();
     pConfig.release();
-    free(refresher.ptr);
 
     pLoc.release();
-    free(pLoc.ptr);
 
     CoUninitialize();
   });

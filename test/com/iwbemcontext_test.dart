@@ -49,5 +49,4 @@ void main() {
   test('Can instantiate IWbemContext.deleteAll', () {
     expect(wbemcontext.deleteAll, isA<Function>());
   });
-  free(ptr);
 }

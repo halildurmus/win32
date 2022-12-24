@@ -41,6 +41,7 @@ class IJsonObject extends IInspectable implements IJsonValue {
   JsonValue getNamedValue(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -56,7 +57,9 @@ class IJsonObject extends IInspectable implements IJsonValue {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
@@ -78,12 +81,14 @@ class IJsonObject extends IInspectable implements IJsonValue {
         value.ptr.cast<Pointer<COMObject>>().value);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
     WindowsDeleteString(nameHstring);
   }
 
   JsonObject getNamedObject(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
+
     final hr = ptr.ref.vtable
             .elementAt(8)
             .cast<
@@ -99,13 +104,16 @@ class IJsonObject extends IInspectable implements IJsonValue {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
+
     return JsonObject.fromRawPointer(retValuePtr);
   }
 
   JsonArray getNamedArray(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
+
     final hr = ptr.ref.vtable
             .elementAt(9)
             .cast<
@@ -121,7 +129,9 @@ class IJsonObject extends IInspectable implements IJsonValue {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
+
     return JsonArray.fromRawPointer(retValuePtr);
   }
 

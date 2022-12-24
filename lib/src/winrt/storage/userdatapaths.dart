@@ -36,26 +36,26 @@ class UserDataPaths extends IInspectable implements IUserDataPaths {
 
   // IUserDataPathsStatics methods
   static UserDataPaths getForUser(User user) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
+    final object = IUserDataPathsStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUserDataPathsStatics.fromRawPointer(activationFactory)
-          .getForUser(user);
+      return object.getForUser(user);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static UserDataPaths getDefault() {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUserDataPathsStatics);
+    final object = IUserDataPathsStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUserDataPathsStatics.fromRawPointer(activationFactory)
-          .getDefault();
+      return object.getDefault();
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IWbemConfigureRefresher.addEnum', () {
     expect(wbemconfigurerefresher.addEnum, isA<Function>());
   });
-  free(ptr);
 }

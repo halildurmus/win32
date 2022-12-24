@@ -60,6 +60,7 @@ class ITimeZoneOnCalendar extends IInspectable {
 
   void changeTimeZone(String timeZoneId) {
     final timeZoneIdHstring = convertToHString(timeZoneId);
+
     final hr = ptr.ref.vtable
         .elementAt(7)
         .cast<
@@ -71,6 +72,7 @@ class ITimeZoneOnCalendar extends IInspectable {
                 Pointer, int timeZoneId)>()(ptr.ref.lpVtbl, timeZoneIdHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
     WindowsDeleteString(timeZoneIdHstring);
   }
 

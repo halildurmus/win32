@@ -45,51 +45,51 @@ class Uri extends IInspectable
 
   // IUriRuntimeClassFactory methods
   static Uri createUri(String uri) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUriRuntimeClassFactory);
+    final object = IUriRuntimeClassFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUriRuntimeClassFactory.fromRawPointer(activationFactory)
-          .createUri(uri);
+      return object.createUri(uri);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static Uri createWithRelativeUri(String baseUri, String relativeUri) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUriRuntimeClassFactory);
+    final object = IUriRuntimeClassFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUriRuntimeClassFactory.fromRawPointer(activationFactory)
-          .createWithRelativeUri(baseUri, relativeUri);
+      return object.createWithRelativeUri(baseUri, relativeUri);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // IUriEscapeStatics methods
   static String unescapeComponent(String toUnescape) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUriEscapeStatics);
+    final object = IUriEscapeStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUriEscapeStatics.fromRawPointer(activationFactory)
-          .unescapeComponent(toUnescape);
+      return object.unescapeComponent(toUnescape);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static String escapeComponent(String toEscape) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IUriEscapeStatics);
+    final object = IUriEscapeStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IUriEscapeStatics.fromRawPointer(activationFactory)
-          .escapeComponent(toEscape);
+      return object.escapeComponent(toEscape);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

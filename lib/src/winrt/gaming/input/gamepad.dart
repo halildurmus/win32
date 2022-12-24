@@ -49,74 +49,75 @@ class Gamepad extends IInspectable
 
   // IGamepadStatics methods
   static int add_GamepadAdded(Pointer<NativeFunction<EventHandler>> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics);
+    final object = IGamepadStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory)
-          .add_GamepadAdded(value);
+      return object.add_GamepadAdded(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static void remove_GamepadAdded(int token) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics);
+    final object = IGamepadStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory)
-          .remove_GamepadAdded(token);
+      return object.remove_GamepadAdded(token);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static int add_GamepadRemoved(Pointer<NativeFunction<EventHandler>> value) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics);
+    final object = IGamepadStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory)
-          .add_GamepadRemoved(value);
+      return object.add_GamepadRemoved(value);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static void remove_GamepadRemoved(int token) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics);
+    final object = IGamepadStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory)
-          .remove_GamepadRemoved(token);
+      return object.remove_GamepadRemoved(token);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static List<Gamepad> get gamepads {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics);
+    final object = IGamepadStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics.fromRawPointer(activationFactory).gamepads;
+      return object.gamepads;
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // IGamepadStatics2 methods
   static Gamepad fromGameController(IGameController gameController) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics2);
+    final object = IGamepadStatics2.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IGamepadStatics2.fromRawPointer(activationFactory)
-          .fromGameController(gameController);
+      return object.fromGameController(gameController);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

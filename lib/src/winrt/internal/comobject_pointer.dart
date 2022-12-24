@@ -6,6 +6,8 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import '../../combase.dart';
 
 extension COMObjectPointer on Pointer<COMObject> {
@@ -21,19 +23,20 @@ extension COMObjectPointer on Pointer<COMObject> {
   ///
   /// ```dart
   /// final pComObject = ...
-  /// final list = pComObject.toList<IHostName>(IHostName.fromRawPointer,
-  ///     length: 4);
+  /// final list = pComObject.toList(StorageFile.fromRawPointer, length: 4);
   /// ```
   ///
   /// {@category winrt}
   List<T> toList<T>(T Function(Pointer<COMObject>) creator, {int length = 1}) {
     final list = <T>[];
+
     for (var i = 0; i < length; i++) {
-      final element = this.elementAt(i);
-      if (element.ref.lpVtbl == nullptr) {
-        break;
-      }
-      list.add(creator(element));
+      final objectPtr = this.elementAt(i);
+      if (objectPtr.ref.lpVtbl == nullptr) break;
+      // Move each element to a newly allocated pointer so that it can be
+      // freed properly.
+      final newObjectPtr = calloc<COMObject>()..ref = objectPtr.ref;
+      list.add(creator(newObjectPtr));
     }
 
     return list;

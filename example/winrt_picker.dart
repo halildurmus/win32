@@ -69,6 +69,7 @@ void main() async {
   print('Vector has ${filters.size} elements.');
 
   free(pIndex);
-  free(filters.ptr);
+  filters.release();
+  picker.release();
   winrtUninitialize();
 }

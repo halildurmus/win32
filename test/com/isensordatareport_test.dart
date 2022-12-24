@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate ISensorDataReport.getSensorValues', () {
     expect(sensordatareport.getSensorValues, isA<Function>());
   });
-  free(ptr);
 }

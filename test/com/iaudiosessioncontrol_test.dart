@@ -54,5 +54,4 @@ void main() {
     expect(audiosessioncontrol.unregisterAudioSessionNotification,
         isA<Function>());
   });
-  free(ptr);
 }

@@ -39,93 +39,113 @@ class IBatteryReport extends IInspectable {
   int? get chargeRateInMilliwatts {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(6)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(6)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<int>.fromRawPointer(retValuePtr,
+        referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 
   int? get designCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(7)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<int>.fromRawPointer(retValuePtr,
+        referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 
   int? get fullChargeCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(8)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(8)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<int>.fromRawPointer(retValuePtr,
+        referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 
   int? get remainingCapacityInMilliwattHours {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(9)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<int>.fromRawPointer(retValuePtr,
+        referenceIid: '{548cefbd-bc8a-5fa0-8df2-957440fc8bf4}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 
   BatteryStatus get status {

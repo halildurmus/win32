@@ -32,10 +32,14 @@ class MapHelper {
       final map = Map.fromEntries(
           keyValuePairs.map((kvp) => MapEntry(kvp.key, kvp.value)));
 
+      for (final kvp in keyValuePairs) {
+        kvp.release();
+      }
+
       return Map.unmodifiable(map);
     } finally {
+      iterator.release();
       free(pKeyValuePairArray);
-      free(iterator.ptr);
     }
   }
 }

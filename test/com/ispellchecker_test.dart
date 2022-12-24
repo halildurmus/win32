@@ -52,5 +52,4 @@ void main() {
   test('Can instantiate ISpellChecker.comprehensiveCheck', () {
     expect(spellchecker.comprehensiveCheck, isA<Function>());
   });
-  free(ptr);
 }

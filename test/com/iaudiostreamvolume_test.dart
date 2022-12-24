@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IAudioStreamVolume.getAllVolumes', () {
     expect(audiostreamvolume.getAllVolumes, isA<Function>());
   });
-  free(ptr);
 }

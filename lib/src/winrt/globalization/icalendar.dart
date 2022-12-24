@@ -80,24 +80,27 @@ class ICalendar extends IInspectable {
   List<String> get languages {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(9)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IVectorView<String>.fromRawPointer(retValuePtr,
-              iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}')
-          .toList();
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    final vectorView = IVectorView<String>.fromRawPointer(retValuePtr,
+        iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');
+    final list = vectorView.toList();
+    vectorView.release();
+
+    return list;
   }
 
   String get numeralSystem {
@@ -166,6 +169,7 @@ class ICalendar extends IInspectable {
 
   void changeCalendarSystem(String value) {
     final valueHstring = convertToHString(value);
+
     final hr = ptr.ref.vtable
         .elementAt(13)
         .cast<
@@ -175,6 +179,7 @@ class ICalendar extends IInspectable {
             int Function(Pointer, int value)>()(ptr.ref.lpVtbl, valueHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
     WindowsDeleteString(valueHstring);
   }
 
@@ -204,6 +209,7 @@ class ICalendar extends IInspectable {
 
   void changeClock(String value) {
     final valueHstring = convertToHString(value);
+
     final hr = ptr.ref.vtable
         .elementAt(15)
         .cast<
@@ -213,6 +219,7 @@ class ICalendar extends IInspectable {
             int Function(Pointer, int value)>()(ptr.ref.lpVtbl, valueHstring);
 
     if (FAILED(hr)) throw WindowsException(hr);
+
     WindowsDeleteString(valueHstring);
   }
 
@@ -242,6 +249,7 @@ class ICalendar extends IInspectable {
   void setDateTime(DateTime value) {
     final valueDateTime =
         value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
+
     final hr = ptr.ref.vtable
         .elementAt(17)
         .cast<

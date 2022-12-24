@@ -38,6 +38,7 @@ class IUriRuntimeClassFactory extends IInspectable {
   Uri createUri(String uri) {
     final retValuePtr = calloc<COMObject>();
     final uriHstring = convertToHString(uri);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -53,7 +54,9 @@ class IUriRuntimeClassFactory extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(uriHstring);
+
     return Uri.fromRawPointer(retValuePtr);
   }
 
@@ -61,6 +64,7 @@ class IUriRuntimeClassFactory extends IInspectable {
     final retValuePtr = calloc<COMObject>();
     final baseUriHstring = convertToHString(baseUri);
     final relativeUriHstring = convertToHString(relativeUri);
+
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -78,8 +82,10 @@ class IUriRuntimeClassFactory extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(baseUriHstring);
     WindowsDeleteString(relativeUriHstring);
+
     return Uri.fromRawPointer(retValuePtr);
   }
 }

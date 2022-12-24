@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IConnectionPointContainer.findConnectionPoint', () {
     expect(connectionpointcontainer.findConnectionPoint, isA<Function>());
   });
-  free(ptr);
 }

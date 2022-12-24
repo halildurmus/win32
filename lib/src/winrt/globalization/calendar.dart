@@ -34,8 +34,7 @@ import 'itimezoneoncalendar.dart';
 /// {@category Class}
 /// {@category winrt}
 class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
-  Calendar({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  Calendar() : super(ActivateClass(_className));
   Calendar.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Globalization.Calendar';
@@ -43,41 +42,42 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   // ICalendarFactory methods
   static Calendar createCalendarDefaultCalendarAndClock(
       IIterable<String> languages) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_ICalendarFactory);
+    final object = ICalendarFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return ICalendarFactory.fromRawPointer(activationFactory)
-          .createCalendarDefaultCalendarAndClock(languages);
+      return object.createCalendarDefaultCalendarAndClock(languages);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static Calendar createCalendar(
       IIterable<String> languages, String calendar, String clock) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_ICalendarFactory);
+    final object = ICalendarFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return ICalendarFactory.fromRawPointer(activationFactory)
-          .createCalendar(languages, calendar, clock);
+      return object.createCalendar(languages, calendar, clock);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // ICalendarFactory2 methods
   static Calendar createCalendarWithTimeZone(IIterable<String> languages,
       String calendar, String clock, String timeZoneId) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_ICalendarFactory2);
+    final object = ICalendarFactory2.fromRawPointer(activationFactoryPtr);
 
     try {
-      return ICalendarFactory2.fromRawPointer(activationFactory)
-          .createCalendarWithTimeZone(languages, calendar, clock, timeZoneId);
+      return object.createCalendarWithTimeZone(
+          languages, calendar, clock, timeZoneId);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

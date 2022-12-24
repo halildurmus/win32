@@ -17,26 +17,20 @@ void createShortcut(String path, String pathLink, String? description) {
   final lpPath = path.toNativeUtf16();
   final lpPathLink = pathLink.toNativeUtf16();
   final lpDescription = description?.toNativeUtf16() ?? nullptr;
-  final ptrIID_IPersistFile = convertToCLSID(IID_IPersistFile);
-  final ppf = calloc<COMObject>();
 
   try {
     shellLink.setPath(lpPath);
     if (description != null) shellLink.setDescription(lpDescription);
 
-    final hr = shellLink.queryInterface(ptrIID_IPersistFile, ppf.cast());
-    if (SUCCEEDED(hr)) {
-      IPersistFile(ppf)
-        ..save(lpPathLink, TRUE)
-        ..release();
-    }
+    final persistFile = IPersistFile.from(shellLink);
     shellLink.release();
+    persistFile
+      ..save(lpPathLink, TRUE)
+      ..release();
   } finally {
     free(lpPath);
     free(lpPathLink);
     if (lpDescription != nullptr) free(lpDescription);
-    free(ptrIID_IPersistFile);
-    free(ppf);
   }
 }
 

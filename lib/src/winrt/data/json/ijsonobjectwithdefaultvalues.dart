@@ -66,6 +66,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
 
     return JsonValue.fromRawPointer(retValuePtr);
@@ -95,6 +96,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
 
     return JsonObject.fromRawPointer(retValuePtr);
@@ -155,6 +157,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(nameHstring);
 
     return JsonArray.fromRawPointer(retValuePtr);

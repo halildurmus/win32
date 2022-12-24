@@ -31,5 +31,4 @@ void main() {
   test('Can instantiate ISpEventSource.getInfo', () {
     expect(speventsource.getInfo, isA<Function>());
   });
-  free(ptr);
 }

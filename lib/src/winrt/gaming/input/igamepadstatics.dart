@@ -115,24 +115,27 @@ class IGamepadStatics extends IInspectable {
   List<Gamepad> get gamepads {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(10)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(10)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IVectorView<Gamepad>.fromRawPointer(retValuePtr,
-              iterableIid: '{47132ba0-6b17-5cd2-a8bd-b5d3443ccb13}',
-              creator: Gamepad.fromRawPointer)
-          .toList();
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    final vectorView = IVectorView<Gamepad>.fromRawPointer(retValuePtr,
+        iterableIid: '{47132ba0-6b17-5cd2-a8bd-b5d3443ccb13}',
+        creator: Gamepad.fromRawPointer);
+    final list = vectorView.toList();
+    vectorView.release();
+
+    return list;
   }
 }

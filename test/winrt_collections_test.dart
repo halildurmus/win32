@@ -1,10 +1,11 @@
-// ignore_for_file: non_constant_identifier_names
+@TestOn('windows')
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/src/winrt/foundation/uri.dart' as winrt_uri;
+import 'package:win32/src/winrt/internal/comobject_pointer.dart';
 import 'package:win32/winrt.dart';
 
 // Exhaustively test the WinRT Collections to make sure constructors,
@@ -33,7 +34,7 @@ void main() {
 
         map = IMap()
           ..insert(Guid.parse(IID_IFileOpenPicker), null)
-          ..insert(Guid.parse(IID_ICalendar), Calendar(allocator: allocator))
+          ..insert(Guid.parse(IID_ICalendar), Calendar())
           ..insert(Guid.parse(IID_IStorageItem), true)
           ..insert(Guid.parse(IID_IPhoneNumberFormatter),
               DateTime(2022, 7, 11, 17, 30))
@@ -53,9 +54,7 @@ void main() {
               const [Duration(hours: 1), Duration(minutes: 60)])
           ..insert(Guid.parse(IID_IAppxManifestReader4),
               [Guid.parse(IID_IShellItem)])
-          ..insert(Guid.parse(IID_IAppxManifestReader5), [
-            Calendar(allocator: allocator),
-          ])
+          ..insert(Guid.parse(IID_IAppxManifestReader5), [Calendar()])
           ..insert(Guid.parse(IID_IAppxManifestReader6), [2022, -2022])
           ..insert(Guid.parse(IID_IAppxManifestReader7), [pPoint.ref])
           ..insert(Guid.parse(IID_IAppxManifestProperties), [pRect.ref])
@@ -68,16 +67,14 @@ void main() {
         final pickerGuid = Guid.parse(IID_IFileOpenPicker);
         final storageItemGuid = Guid.parse(IID_IStorageItem);
         map = IMap.fromMap({
-          calendarGuid: Calendar(allocator: allocator),
+          calendarGuid: Calendar(),
           pickerGuid: 259,
           storageItemGuid: 'strVal',
         });
 
         final calendarVal = map.lookup(calendarGuid);
         expect(calendarVal, isA<IInspectable>());
-        final calendar =
-            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
-        expect(calendar.runtimeClassName,
+        expect((calendarVal as IInspectable).runtimeClassName,
             equals('Windows.Globalization.Calendar'));
         expect(map.lookup(pickerGuid), equals(259));
         expect(map.lookup(storageItemGuid), equals('strVal'));
@@ -97,9 +94,7 @@ void main() {
 
         final calendarVal = map.lookup(Guid.parse(IID_ICalendar));
         expect(calendarVal, isA<IInspectable>());
-        final calendar =
-            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
-        expect(calendar.runtimeClassName,
+        expect((calendarVal as IInspectable).runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
         expect(map.lookup(Guid.parse(IID_IStorageItem)), isTrue);
@@ -168,8 +163,7 @@ void main() {
             map.lookup(Guid.parse(IID_IAppxManifestReader5));
         expect(calendarListVal, isA<List<IInspectable>>());
         final calendarList = calendarListVal as List<IInspectable>;
-        final calendar_ = Calendar.fromRawPointer(calendarList.first.ptr);
-        expect(calendar_.runtimeClassName,
+        expect(calendarList.first.runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
         expect(map.lookup(Guid.parse(IID_IAppxManifestReader6)),
@@ -291,6 +285,7 @@ void main() {
       });
 
       tearDown(() {
+        map.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
@@ -318,7 +313,7 @@ void main() {
 
         map = IMap()
           ..insert('key1', null)
-          ..insert('key2', Calendar(allocator: allocator))
+          ..insert('key2', Calendar())
           ..insert('key3', true)
           ..insert('key4', DateTime(2022, 7, 11, 17, 30))
           ..insert('key5', 0.5)
@@ -335,7 +330,7 @@ void main() {
           ..insert('key15', [2.5, 0.99])
           ..insert('key16', const [Duration(hours: 1), Duration(minutes: 60)])
           ..insert('key17', [guid])
-          ..insert('key18', [Calendar(allocator: allocator)])
+          ..insert('key18', [Calendar()])
           ..insert('key19', [2022, -2022])
           ..insert('key20', [pPoint.ref])
           ..insert('key21', [pRect.ref])
@@ -345,16 +340,14 @@ void main() {
 
       test('fromMap', () {
         map = IMap.fromMap({
-          'key1': Calendar(allocator: allocator),
+          'key1': Calendar(),
           'key2': 259,
           'key3': 'strVal',
         });
 
         final calendarVal = map.lookup('key1');
         expect(calendarVal, isA<IInspectable>());
-        final calendar =
-            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
-        expect(calendar.runtimeClassName,
+        expect((calendarVal as IInspectable).runtimeClassName,
             equals('Windows.Globalization.Calendar'));
         expect(map.lookup('key2'), equals(259));
         expect(map.lookup('key3'), equals('strVal'));
@@ -374,9 +367,7 @@ void main() {
 
         final calendarVal = map.lookup('key2');
         expect(calendarVal, isA<IInspectable>());
-        final calendar =
-            Calendar.fromRawPointer((calendarVal as IInspectable).ptr);
-        expect(calendar.runtimeClassName,
+        expect((calendarVal as IInspectable).runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
         expect(map.lookup('key3'), isTrue);
@@ -442,8 +433,7 @@ void main() {
         final calendarListVal = map.lookup('key18');
         expect(calendarListVal, isA<List<IInspectable>>());
         final calendarList = calendarListVal as List<IInspectable>;
-        final calendar_ = Calendar.fromRawPointer(calendarList.first.ptr);
-        expect(calendar_.runtimeClassName,
+        expect(calendarList.first.runtimeClassName,
             equals('Windows.Globalization.Calendar'));
 
         expect(map.lookup('key19'), equals([2022, -2022]));
@@ -551,6 +541,7 @@ void main() {
       });
 
       tearDown(() {
+        map.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
@@ -564,7 +555,7 @@ void main() {
         winrtInitialize();
         allocator = Arena();
         final guid = Guid.parse(IID_ISpVoice);
-        final valueSet = ValueSet(allocator: allocator)
+        final valueSet = ValueSet()
           ..insert('key1', null)
           ..insert('key2', 'strVal');
         final pPoint = allocator<Point>()
@@ -579,7 +570,7 @@ void main() {
           ..ref.Height = 1500
           ..ref.Width = 300;
 
-        map = ValueSet(allocator: allocator)
+        map = ValueSet()
           ..insert('key1', null)
           ..insert('key2', valueSet)
           ..insert('key3', true)
@@ -619,8 +610,8 @@ void main() {
 
         final valueSetVal = map.lookup('key2');
         expect(valueSetVal, isA<IInspectable>());
-        final valueSet =
-            ValueSet.fromRawPointer((valueSetVal as IInspectable).ptr);
+        final valueSet = ValueSet.fromRawPointer(
+            (valueSetVal as IInspectable).toInterface(IID_IMap_String_Object));
         expect(valueSet.runtimeClassName,
             equals('Windows.Foundation.Collections.ValueSet'));
         expect(valueSet.size, equals(2));
@@ -779,7 +770,7 @@ void main() {
       });
 
       test('first', () {
-        map = ValueSet(allocator: allocator)
+        map = ValueSet()
           ..insert('key1', 'icalendar')
           ..insert('key2', 259);
 
@@ -794,6 +785,7 @@ void main() {
       });
 
       tearDown(() {
+        map.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
@@ -1140,9 +1132,8 @@ void main() {
 
       setUp(() {
         winrtInitialize();
-
         allocator = Arena();
-        picker = DevicePicker(allocator: allocator);
+        picker = DevicePicker();
         pickerFilter = picker.filter;
         vector = pickerFilter.supportedDeviceClasses;
       });
@@ -1384,7 +1375,9 @@ void main() {
       });
 
       tearDown(() {
-        free(pickerFilter.ptr);
+        vector.release();
+        pickerFilter.release();
+        picker.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
@@ -1397,9 +1390,8 @@ void main() {
 
       setUp(() {
         winrtInitialize();
-
         allocator = Arena();
-        material = Printing3DMultiplePropertyMaterial(allocator: allocator);
+        material = Printing3DMultiplePropertyMaterial();
         vector = material.materialIndices;
       });
 
@@ -1636,23 +1628,22 @@ void main() {
       });
 
       tearDown(() {
+        vector.release();
+        material.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
     });
 
     group('IVector<String>', () {
-      late IFileOpenPicker picker;
+      late FileOpenPicker picker;
       late IVector<String> vector;
       late Arena allocator;
 
       setUp(() {
         winrtInitialize();
-
-        final object = CreateObject(
-            'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
-        picker = IFileOpenPicker.fromRawPointer(object);
         allocator = Arena();
+        picker = FileOpenPicker();
         vector = picker.fileTypeFilter;
       });
 
@@ -1885,7 +1876,8 @@ void main() {
       });
 
       tearDown(() {
-        free(picker.ptr);
+        picker.release();
+        vector.release();
         allocator.releaseAll(reuse: true);
         winrtUninitialize();
       });
@@ -1895,8 +1887,8 @@ void main() {
       late IVector<Uri> vector;
       late Arena allocator;
 
-      IVector<Uri> getServerUris(Pointer<COMObject> ptr, Allocator allocator) {
-        final retValuePtr = allocator<COMObject>();
+      IVector<Uri> getServerUris(Pointer<COMObject> ptr) {
+        final retValuePtr = calloc<COMObject>();
 
         final hr = ptr.ref.vtable
                 .elementAt(6)
@@ -1921,7 +1913,7 @@ void main() {
         final object = CreateObject(
             'Windows.Networking.Vpn.VpnPlugInProfile', IID_IVpnPlugInProfile);
         allocator = Arena();
-        vector = getServerUris(object, allocator);
+        vector = getServerUris(object);
       });
 
       test('getAt fails if the vector is empty', () {
@@ -2072,24 +2064,22 @@ void main() {
 
       test('getMany returns 0 if the vector is empty', () {
         final pCOMObject = allocator<COMObject>();
-
         expect(vector.getMany(0, 1, pCOMObject), equals(0));
       });
 
       test('getMany returns elements starting from index 0', () {
-        final pCOMObject = allocator<COMObject>(2);
+        final pCOMObject = allocator<COMObject>(3);
 
         vector
           ..append(Uri.parse('https://dart.dev/overview'))
           ..append(Uri.parse('https://dart.dev/docs'))
           ..append(Uri.parse('https://flutter.dev/development'));
         expect(vector.getMany(0, 3, pCOMObject), equals(3));
-        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(0)).toString(),
-            equals('https://dart.dev/overview'));
-        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(1)).toString(),
-            equals('https://dart.dev/docs'));
-        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(2)).toString(),
-            equals('https://flutter.dev/development'));
+
+        final list = pCOMObject.toList(winrt_uri.Uri.fromRawPointer, length: 3);
+        expect(list.first.toString(), equals('https://dart.dev/overview'));
+        expect(list.elementAt(1).toString(), equals('https://dart.dev/docs'));
+        expect(list.last.toString(), equals('https://flutter.dev/development'));
       });
 
       test('getMany returns elements starting from index 1', () {
@@ -2100,9 +2090,14 @@ void main() {
           ..append(Uri.parse('https://dart.dev/docs'))
           ..append(Uri.parse('https://flutter.dev/development'));
         expect(vector.getMany(1, 2, pCOMObject), equals(2));
-        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(0)).toString(),
+
+        final firstElement = calloc<COMObject>()
+          ..ref = pCOMObject.elementAt(0).ref;
+        final secondElement = calloc<COMObject>()
+          ..ref = pCOMObject.elementAt(1).ref;
+        expect(winrt_uri.Uri.fromRawPointer(firstElement).toString(),
             equals('https://dart.dev/docs'));
-        expect(winrt_uri.Uri.fromRawPointer(pCOMObject.elementAt(1)).toString(),
+        expect(winrt_uri.Uri.fromRawPointer(secondElement).toString(),
             equals('https://flutter.dev/development'));
       });
 
@@ -2168,25 +2163,18 @@ void main() {
       late Arena allocator;
       late IVectorView<String> vectorView;
 
-      IVectorView<String> getLanguages(
-          Pointer<COMObject> ptr, Allocator allocator) {
-        final retValuePtr = allocator<COMObject>();
+      IVectorView<String> getLanguages(Pointer<COMObject> ptr) {
+        final retValuePtr = calloc<COMObject>();
 
         final hr = ptr.ref.vtable
-            .elementAt(9)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(
-              Pointer,
-              Pointer<COMObject>,
-            )>>>()
-            .value
-            .asFunction<
-                int Function(
-              Pointer,
-              Pointer<COMObject>,
-            )>()(ptr.ref.lpVtbl, retValuePtr);
+                .elementAt(9)
+                .cast<
+                    Pointer<
+                        NativeFunction<
+                            HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+                .value
+                .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+            ptr.ref.lpVtbl, retValuePtr);
 
         if (FAILED(hr)) throw WindowsException(hr);
 
@@ -2196,12 +2184,9 @@ void main() {
 
       setUp(() {
         winrtInitialize();
-
         allocator = Arena();
-        final object = ActivateClass('Windows.Globalization.Calendar',
-            allocator: allocator);
-        allocator = Arena();
-        vectorView = getLanguages(object, allocator);
+        final calendar = Calendar();
+        vectorView = getLanguages(calendar.ptr);
       });
 
       test('getAt throws exception if the index is out of bounds', () {
@@ -2260,13 +2245,12 @@ void main() {
       });
     });
 
-    group('IVectorView<IHostName>', () {
+    group('IVectorView<HostName>', () {
       late Arena allocator;
-      late IVectorView<IHostName> vectorView;
+      late IVectorView<HostName> vectorView;
 
-      IVectorView<IHostName> getHostNames(
-          Pointer<COMObject> ptr, Allocator allocator) {
-        final retValuePtr = allocator<COMObject>();
+      IVectorView<HostName> getHostNames(Pointer<COMObject> ptr) {
+        final retValuePtr = calloc<COMObject>();
 
         final hr = ptr.ref.vtable
                 .elementAt(9)
@@ -2281,19 +2265,18 @@ void main() {
         if (FAILED(hr)) throw WindowsException(hr);
 
         return IVectorView.fromRawPointer(retValuePtr,
-            creator: IHostName.fromRawPointer,
+            creator: HostName.fromRawPointer,
             iterableIid: IID_IIterable_HostName);
       }
 
       setUp(() {
         winrtInitialize();
-
         allocator = Arena();
         final object = CreateActivationFactory(
-            'Windows.Networking.Connectivity.NetworkInformation',
-            IID_INetworkInformationStatics,
-            allocator: allocator);
-        vectorView = getHostNames(object, allocator);
+          'Windows.Networking.Connectivity.NetworkInformation',
+          IID_INetworkInformationStatics,
+        );
+        vectorView = getHostNames(object);
       });
 
       test('getAt throws exception if the index is out of bounds', () {

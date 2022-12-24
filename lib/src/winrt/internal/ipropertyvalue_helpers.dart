@@ -16,6 +16,7 @@ import '../../winrt_constants.dart';
 import '../../winrt_helpers.dart';
 import '../foundation/enums.g.dart';
 import '../foundation/ipropertyvalue.dart';
+import '../foundation/ireference.dart';
 import '../foundation/propertyvalue.dart';
 import '../foundation/structs.g.dart';
 import 'comobject_pointer.dart';
@@ -28,8 +29,8 @@ extension IPropertyValueHelper on IPropertyValue {
     if (ptr.ref.lpVtbl == nullptr) return null;
 
     // If the object does not implement the IPropertyValue interface, return it
-    // as an `IInspectable` object.
-    if (!iids.contains(IID_IPropertyValue)) return IInspectable(ptr);
+    // as an IInspectable object.
+    if (!iids.contains(IID_IPropertyValue)) return IInspectable.from(this);
 
     switch (this.type) {
       case PropertyType.boolean:
@@ -200,6 +201,7 @@ List<IInspectable> _inspectableListFromArray(
     getArrayCallback(pValueSize, pValue);
     return pValue.value.toList(IInspectable.new, length: pValueSize.value);
   } finally {
+    free(pValue);
     free(pValueSize);
   }
 }
@@ -385,38 +387,38 @@ List<int> _uint8ListFromArray(
   }
 }
 
-Pointer<COMObject> _boxValue(Object value, {Type? nativeType}) {
+IInspectable _boxValue(Object value, {Type? nativeType}) {
   // There is no need to box IInspectable objects since .createInspectable()
   // returns the object provided without modification.
   // See https://docs.microsoft.com/en-us/uwp/api/windows.foundation.PropertyValue.createinspectable
-  if (value is IInspectable) return value.ptr;
+  if (value is IInspectable) return value;
 
-  if (value is bool) return PropertyValue.createBoolean(value).ptr;
-  if (value is DateTime) return PropertyValue.createDateTime(value).ptr;
+  if (value is bool) return PropertyValue.createBoolean(value);
+  if (value is DateTime) return PropertyValue.createDateTime(value);
 
   if (value is double) {
-    if (nativeType == Float) return PropertyValue.createSingle(value).ptr;
-    return PropertyValue.createDouble(value).ptr;
+    if (nativeType == Float) return PropertyValue.createSingle(value);
+    return PropertyValue.createDouble(value);
   }
 
-  if (value is Duration) return PropertyValue.createTimeSpan(value).ptr;
-  if (value is Guid) return PropertyValue.createGuid(value).ptr;
+  if (value is Duration) return PropertyValue.createTimeSpan(value);
+  if (value is Guid) return PropertyValue.createGuid(value);
 
   if (value is int) {
-    if (nativeType == Int16) return PropertyValue.createInt16(value).ptr;
-    if (nativeType == Int32) return PropertyValue.createInt32(value).ptr;
-    if (nativeType == Uint8) return PropertyValue.createUInt8(value).ptr;
-    if (nativeType == Uint16) return PropertyValue.createUInt16(value).ptr;
-    if (nativeType == Uint32) return PropertyValue.createUInt32(value).ptr;
-    if (nativeType == Uint64) return PropertyValue.createUInt64(value).ptr;
+    if (nativeType == Int16) return PropertyValue.createInt16(value);
+    if (nativeType == Int32) return PropertyValue.createInt32(value);
+    if (nativeType == Uint8) return PropertyValue.createUInt8(value);
+    if (nativeType == Uint16) return PropertyValue.createUInt16(value);
+    if (nativeType == Uint32) return PropertyValue.createUInt32(value);
+    if (nativeType == Uint64) return PropertyValue.createUInt64(value);
 
-    return PropertyValue.createInt64(value).ptr;
+    return PropertyValue.createInt64(value);
   }
 
-  if (value is Point) return PropertyValue.createPoint(value).ptr;
-  if (value is Rect) return PropertyValue.createRect(value).ptr;
-  if (value is Size) return PropertyValue.createSize(value).ptr;
-  if (value is String) return PropertyValue.createString(value).ptr;
+  if (value is Point) return PropertyValue.createPoint(value);
+  if (value is Rect) return PropertyValue.createRect(value);
+  if (value is Size) return PropertyValue.createSize(value);
+  if (value is String) return PropertyValue.createString(value);
 
   if (value is List<bool>) return _boxBoolList(value);
   if (value is List<DateTime>) return _boxDateTimeList(value);
@@ -476,33 +478,36 @@ String _referenceIidFromValue(Object value, Type? nativeType) {
 /// passed to APIs that take `IReference` interface as a parameter (e.g.
 /// `ToastNotification.expirationTime` setter).
 Pointer<COMObject> boxValue(
-  Object? value, {
+  Object value, {
   bool convertToIReference = false,
   Type? nativeType,
 }) {
-  if (value == null) return PropertyValue.createEmpty();
-
-  final propertyValuePtr = _boxValue(value, nativeType: nativeType);
-  if (!convertToIReference) return propertyValuePtr;
+  final propertyValue = _boxValue(value, nativeType: nativeType);
+  if (!convertToIReference) return propertyValue.ptr;
 
   final iid = _referenceIidFromValue(value, nativeType);
-  return IInspectable(propertyValuePtr).toInterface(iid);
+  final reference = IReference<dynamic>.fromRawPointer(
+      propertyValue.toInterface(iid),
+      referenceIid: iid);
+  propertyValue.release();
+
+  return reference.ptr;
 }
 
-Pointer<COMObject> _boxBoolList(List<bool> list) {
+IPropertyValue _boxBoolList(List<bool> list) {
   final pArray = calloc<Bool>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createBooleanArray(list.length, pArray).ptr;
+    return PropertyValue.createBooleanArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxDateTimeList(List<DateTime> list) {
+IPropertyValue _boxDateTimeList(List<DateTime> list) {
   final pArray = calloc<Uint64>(list.length);
   for (var i = 0; i < list.length; i++) {
     final dateTimeValue = list
@@ -514,104 +519,104 @@ Pointer<COMObject> _boxDateTimeList(List<DateTime> list) {
   }
 
   try {
-    return PropertyValue.createDateTimeArray(list.length, pArray).ptr;
+    return PropertyValue.createDateTimeArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxDoubleList(List<double> list) {
+IPropertyValue _boxDoubleList(List<double> list) {
   final pArray = calloc<Double>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createDoubleArray(list.length, pArray).ptr;
+    return PropertyValue.createDoubleArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxDurationList(List<Duration> list) {
+IPropertyValue _boxDurationList(List<Duration> list) {
   final pArray = calloc<Uint64>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i).inMicroseconds * 10;
   }
 
   try {
-    return PropertyValue.createTimeSpanArray(list.length, pArray).ptr;
+    return PropertyValue.createTimeSpanArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxGuidList(List<Guid> list) {
+IPropertyValue _boxGuidList(List<Guid> list) {
   final pArray = calloc<GUID>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray.elementAt(i).ref.setGUID(list.elementAt(i).toString());
   }
 
   try {
-    return PropertyValue.createGuidArray(list.length, pArray).ptr;
+    return PropertyValue.createGuidArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxPointList(List<Point> list) {
+IPropertyValue _boxPointList(List<Point> list) {
   final pArray = calloc<Point>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createPointArray(list.length, pArray).ptr;
+    return PropertyValue.createPointArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxRectList(List<Rect> list) {
+IPropertyValue _boxRectList(List<Rect> list) {
   final pArray = calloc<Rect>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createRectArray(list.length, pArray).ptr;
+    return PropertyValue.createRectArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxSizeList(List<Size> list) {
+IPropertyValue _boxSizeList(List<Size> list) {
   final pArray = calloc<Size>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createSizeArray(list.length, pArray).ptr;
+    return PropertyValue.createSizeArray(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxIntList(List<int> list) {
+IPropertyValue _boxIntList(List<int> list) {
   final pArray = calloc<Int64>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i);
   }
 
   try {
-    return PropertyValue.createInt64Array(list.length, pArray).ptr;
+    return PropertyValue.createInt64Array(list.length, pArray);
   } finally {
     free(pArray);
   }
 }
 
-Pointer<COMObject> _boxStringList(List<String> list) {
+IPropertyValue _boxStringList(List<String> list) {
   final handles = <int>[];
   final pArray = calloc<HSTRING>(list.length);
   for (var i = 0; i < list.length; i++) {
@@ -620,21 +625,21 @@ Pointer<COMObject> _boxStringList(List<String> list) {
   }
 
   try {
-    return PropertyValue.createStringArray(list.length, pArray).ptr;
+    return PropertyValue.createStringArray(list.length, pArray);
   } finally {
     free(pArray);
     handles.forEach(WindowsDeleteString);
   }
 }
 
-Pointer<COMObject> _boxInspectableList(List<IInspectable> list) {
+IPropertyValue _boxInspectableList(List<IInspectable> list) {
   final pArray = calloc<COMObject>(list.length);
   for (var i = 0; i < list.length; i++) {
     pArray[i] = list.elementAt(i).ptr.ref;
   }
 
   try {
-    return PropertyValue.createInspectableArray(list.length, pArray).ptr;
+    return PropertyValue.createInspectableArray(list.length, pArray);
   } finally {
     free(pArray);
   }

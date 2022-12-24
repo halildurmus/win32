@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IShellItem.compare', () {
     expect(shellitem.compare, isA<Function>());
   });
-  free(ptr);
 }

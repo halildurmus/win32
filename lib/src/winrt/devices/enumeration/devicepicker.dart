@@ -31,8 +31,7 @@ import '../../../winrt_helpers.dart';
 /// {@category Class}
 /// {@category winrt}
 class DevicePicker extends IInspectable implements IDevicePicker {
-  DevicePicker({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  DevicePicker() : super(ActivateClass(_className));
   DevicePicker.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Devices.Enumeration.DevicePicker';

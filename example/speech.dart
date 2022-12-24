@@ -14,9 +14,13 @@ const textToSpeak =
 
 void main() {
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+
   final speechEngine = SpVoice.createInstance();
   final pText = textToSpeak.toNativeUtf16();
   speechEngine.speak(pText, SPEAKFLAGS.SPF_IS_NOT_XML, nullptr);
+
   free(pText);
+  speechEngine.release();
+
   CoUninitialize();
 }

@@ -49,5 +49,4 @@ void main() {
   test('Can instantiate IAppxManifestReader.getStream', () {
     expect(appxmanifestreader.getStream, isA<Function>());
   });
-  free(ptr);
 }

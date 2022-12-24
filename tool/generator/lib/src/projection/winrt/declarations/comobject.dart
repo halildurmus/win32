@@ -38,8 +38,11 @@ class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection
       $retType $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
+
         ${ffiCall(freeRetValOnFailure: true)}
+
         $parametersPostamble
+
         $returnStatement
       }
 ''';

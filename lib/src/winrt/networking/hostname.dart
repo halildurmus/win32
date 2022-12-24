@@ -38,27 +38,27 @@ class HostName extends IInspectable implements IHostName, IStringable {
 
   // IHostNameFactory methods
   static HostName createHostName(String hostName) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IHostNameFactory);
+    final object = IHostNameFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IHostNameFactory.fromRawPointer(activationFactory)
-          .createHostName(hostName);
+      return object.createHostName(hostName);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   // IHostNameStatics methods
   static int compare(String value1, String value2) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IHostNameStatics);
+    final object = IHostNameStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IHostNameStatics.fromRawPointer(activationFactory)
-          .compare(value1, value2);
+      return object.compare(value1, value2);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

@@ -43,15 +43,15 @@ class WwwFormUrlDecoder extends IInspectable
 
   // IWwwFormUrlDecoderRuntimeClassFactory methods
   static WwwFormUrlDecoder createWwwFormUrlDecoder(String query) {
-    final activationFactory = CreateActivationFactory(
+    final activationFactoryPtr = CreateActivationFactory(
         _className, IID_IWwwFormUrlDecoderRuntimeClassFactory);
+    final object = IWwwFormUrlDecoderRuntimeClassFactory.fromRawPointer(
+        activationFactoryPtr);
 
     try {
-      return IWwwFormUrlDecoderRuntimeClassFactory.fromRawPointer(
-              activationFactory)
-          .createWwwFormUrlDecoder(query);
+      return object.createWwwFormUrlDecoder(query);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
