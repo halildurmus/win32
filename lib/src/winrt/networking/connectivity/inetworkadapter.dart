@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -21,6 +22,7 @@ import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/iasyncoperation.dart';
+import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import 'connectionprofile.dart';
 import 'networkitem.dart';
@@ -150,8 +152,9 @@ class INetworkAdapter extends IInspectable {
     }
   }
 
-  Pointer<COMObject> getConnectedProfileAsync() {
+  Future<ConnectionProfile?> getConnectedProfileAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<ConnectionProfile?>();
 
     final hr = ptr.ref.vtable
             .elementAt(11)
@@ -168,6 +171,12 @@ class INetworkAdapter extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation = IAsyncOperation<ConnectionProfile?>.fromRawPointer(
+        retValuePtr,
+        creator: ConnectionProfile.fromRawPointer);
+    unawaited(completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults));
+
+    return completer.future;
   }
 }
