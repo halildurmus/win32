@@ -28,6 +28,7 @@
     "Windows.Networking.Connectivity.NetworkAdapter": "Represents a network adapter.",
     "Windows.Networking.Connectivity.NetworkItem": "Represents a connected network.",
     "Windows.Networking.HostName": "Provides data for a hostname or an IP address.",
+    "Windows.Storage.FileProperties.BasicProperties": "Provides access to the basic properties, like the size of the item or the date the item was last modified, of the item (like a file or folder).",
     "Windows.Storage.IStorageItem": "Manipulates storage items (files and folders) and their contents, and provides information about them.",
     "Windows.Storage.Pickers.FileOpenPicker": "Represents a UI element that lets the user choose and open files. In a desktop app, before using an instance of this class in a way that displays UI, you'll need to associate the object with its owner's window handle.",
     "Windows.Storage.UserDataPaths": "Returns full paths for common user data folders. User data folders are based on the KNOWNFOLDERID naming pattern.",
