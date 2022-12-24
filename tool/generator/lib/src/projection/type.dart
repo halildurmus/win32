@@ -59,6 +59,47 @@ const Map<String, TypeTuple> specialTypes = {
       TypeTuple('IntPtr', 'int', attribute: '@IntPtr()'),
 };
 
+/// Value types that represent a Win32 handle
+const handleTypes = <String>{
+  'HANDLE',
+  'HACCEL',
+  'HBITMAP',
+  'HBRUSH',
+  'HCURSOR',
+  'HDC',
+  'HDESK',
+  'HDEVINFO',
+  'HDWP',
+  'HFONT',
+  'HGDIOBJ',
+  'HGESTUREINFO',
+  'HHOOK',
+  'HICON',
+  'HIMAGELIST',
+  'HINSTANCE',
+  'HKEY',
+  'HKL',
+  'HMENU',
+  'HMIDI',
+  'HMIDIIN',
+  'HMIDIOUT',
+  'HMODULE',
+  'HMONITOR',
+  'HPALETTE',
+  'HPCON',
+  'HPEN',
+  'HPOWERNOTIFY',
+  'HRGN',
+  'HRSRC',
+  'HSTRING',
+  'HSTRING_BUFFER',
+  'HTHEME',
+  'HTOUCHINPUT',
+  'HWINSTA',
+  'HWAVEOUT',
+  'HWND'
+};
+
 final callbackTypeMapping = loadMap('win32_callbacks.json');
 
 class TypeProjection {
@@ -174,11 +215,17 @@ class TypeProjection {
           'Wrapped type TypeIdentifier missing for $typeIdentifier.');
     }
 
-    // A type like HWND
+    // A defined value type like HWND
     if (wrappedType
         .existsAttribute('Windows.Win32.Interop.NativeTypedefAttribute')) {
-      final typeIdentifier = wrappedType.fields.first.typeIdentifier;
-      return TypeProjection(typeIdentifier).projection;
+      final rawType = lastComponent(wrappedType.name);
+      if (handleTypes.contains(rawType)) {
+        // Handles are typedefs, so we can use them directly.
+        return TypeTuple(rawType, 'int', attribute: '@$rawType()');
+      } else {
+        final typeIdentifier = wrappedType.fields.first.typeIdentifier;
+        return TypeProjection(typeIdentifier).projection;
+      }
     }
 
     if (wrappedType.isNested) {

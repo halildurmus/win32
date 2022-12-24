@@ -153,6 +153,7 @@ class ComInterfaceProjection {
         '../guid.dart',
         '../macros.dart',
         '../structs.g.dart',
+        '../types.dart',
         '../utils.dart',
         '../variant.dart',
         '../win32/ole32.g.dart',
