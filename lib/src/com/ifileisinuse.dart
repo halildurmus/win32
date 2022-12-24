@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -70,15 +71,14 @@ class IFileIsInUse extends IUnknown {
           .asFunction<int Function(Pointer, Pointer<Uint32> pdwCapFlags)>()(
       ptr.ref.lpVtbl, pdwCapFlags);
 
-  int getSwitchToHWND(Pointer<IntPtr> phwnd) => ptr.ref.vtable
+  int getSwitchToHWND(Pointer<HWND> phwnd) => ptr.ref.vtable
       .elementAt(6)
       .cast<
           Pointer<
-              NativeFunction<Int32 Function(Pointer, Pointer<IntPtr> phwnd)>>>()
+              NativeFunction<Int32 Function(Pointer, Pointer<HWND> phwnd)>>>()
       .value
       .asFunction<
-          int Function(
-              Pointer, Pointer<IntPtr> phwnd)>()(ptr.ref.lpVtbl, phwnd);
+          int Function(Pointer, Pointer<HWND> phwnd)>()(ptr.ref.lpVtbl, phwnd);
 
   int closeFile() => ptr.ref.vtable
       .elementAt(7)

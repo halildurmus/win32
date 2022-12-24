@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _winscard = DynamicLibrary.open('winscard.dll');
@@ -33,7 +34,7 @@ final _winscard = DynamicLibrary.open('winscard.dll');
 int SCardAccessStartedEvent() => _SCardAccessStartedEvent();
 
 final _SCardAccessStartedEvent =
-    _winscard.lookupFunction<IntPtr Function(), int Function()>(
+    _winscard.lookupFunction<HANDLE Function(), int Function()>(
         'SCardAccessStartedEvent');
 
 /// The SCardAddReaderToGroup function adds a reader to a reader group.

@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _api_ms_win_shcore_scaling_l1_1_1 =
@@ -38,7 +39,7 @@ int GetDpiForMonitor(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
     _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
 
 final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1.lookupFunction<
-    Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
+    Int32 Function(HMONITOR hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY),
     int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
         Pointer<Uint32> dpiY)>('GetDpiForMonitor');
@@ -57,7 +58,7 @@ int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) =>
 
 final _GetProcessDpiAwareness =
     _api_ms_win_shcore_scaling_l1_1_1.lookupFunction<
-        Int32 Function(IntPtr hprocess, Pointer<Int32> value),
+        Int32 Function(HANDLE hprocess, Pointer<Int32> value),
         int Function(
             int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
 
@@ -75,7 +76,7 @@ int GetScaleFactorForMonitor(int hMon, Pointer<Int32> pScale) =>
 
 final _GetScaleFactorForMonitor =
     _api_ms_win_shcore_scaling_l1_1_1.lookupFunction<
-        Int32 Function(IntPtr hMon, Pointer<Int32> pScale),
+        Int32 Function(HMONITOR hMon, Pointer<Int32> pScale),
         int Function(
             int hMon, Pointer<Int32> pScale)>('GetScaleFactorForMonitor');
 

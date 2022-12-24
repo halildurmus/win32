@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
@@ -65,7 +66,7 @@ final _ChooseFont = _comdlg32.lookupFunction<
 int FindText(Pointer<FINDREPLACE> param0) => _FindText(param0);
 
 final _FindText = _comdlg32.lookupFunction<
-    IntPtr Function(Pointer<FINDREPLACE> param0),
+    HWND Function(Pointer<FINDREPLACE> param0),
     int Function(Pointer<FINDREPLACE> param0)>('FindTextW');
 
 /// Creates an Open dialog box that lets the user specify the drive,
@@ -111,5 +112,5 @@ final _GetSaveFileName = _comdlg32.lookupFunction<
 int ReplaceText(Pointer<FINDREPLACE> param0) => _ReplaceText(param0);
 
 final _ReplaceText = _comdlg32.lookupFunction<
-    IntPtr Function(Pointer<FINDREPLACE> param0),
+    HWND Function(Pointer<FINDREPLACE> param0),
     int Function(Pointer<FINDREPLACE> param0)>('ReplaceTextW');

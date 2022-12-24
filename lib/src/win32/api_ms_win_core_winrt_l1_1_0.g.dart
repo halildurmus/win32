@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _api_ms_win_core_winrt_l1_1_0 =
@@ -37,7 +38,7 @@ int RoActivateInstance(
 
 final _RoActivateInstance = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
     Int32 Function(
-        IntPtr activatableClassId, Pointer<Pointer<COMObject>> instance),
+        HSTRING activatableClassId, Pointer<Pointer<COMObject>> instance),
     int Function(int activatableClassId,
         Pointer<Pointer<COMObject>> instance)>('RoActivateInstance');
 
@@ -56,8 +57,8 @@ int RoGetActivationFactory(
     _RoGetActivationFactory(activatableClassId, iid, factory);
 
 final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-    Int32 Function(
-        IntPtr activatableClassId, Pointer<GUID> iid, Pointer<Pointer> factory),
+    Int32 Function(HSTRING activatableClassId, Pointer<GUID> iid,
+        Pointer<Pointer> factory),
     int Function(int activatableClassId, Pointer<GUID> iid,
         Pointer<Pointer> factory)>('RoGetActivationFactory');
 

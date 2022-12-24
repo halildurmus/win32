@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _shell32 = DynamicLibrary.open('shell32.dll');
@@ -56,8 +57,8 @@ int ExtractAssociatedIcon(
     _ExtractAssociatedIcon(hInst, pszIconPath, piIcon);
 
 final _ExtractAssociatedIcon = _shell32.lookupFunction<
-    IntPtr Function(
-        IntPtr hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
+    HICON Function(
+        HINSTANCE hInst, Pointer<Utf16> pszIconPath, Pointer<Uint16> piIcon),
     int Function(int hInst, Pointer<Utf16> pszIconPath,
         Pointer<Uint16> piIcon)>('ExtractAssociatedIconW');
 
@@ -77,7 +78,7 @@ int FindExecutable(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
     _FindExecutable(lpFile, lpDirectory, lpResult);
 
 final _FindExecutable = _shell32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
+    HINSTANCE Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
         Pointer<Utf16> lpResult),
     int Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
         Pointer<Utf16> lpResult)>('FindExecutableW');
@@ -139,8 +140,8 @@ int ShellAbout(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
     _ShellAbout(hWnd, szApp, szOtherStuff, hIcon);
 
 final _ShellAbout = _shell32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
-        Pointer<Utf16> szOtherStuff, IntPtr hIcon),
+    Int32 Function(HWND hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
+        HICON hIcon),
     int Function(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
         int hIcon)>('ShellAboutW');
 
@@ -168,8 +169,8 @@ int ShellExecute(
         hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd);
 
 final _ShellExecute = _shell32.lookupFunction<
-    IntPtr Function(
-        IntPtr hwnd,
+    HINSTANCE Function(
+        HWND hwnd,
         Pointer<Utf16> lpOperation,
         Pointer<Utf16> lpFile,
         Pointer<Utf16> lpParameters,
@@ -212,7 +213,7 @@ int SHEmptyRecycleBin(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags) =>
     _SHEmptyRecycleBin(hwnd, pszRootPath, dwFlags);
 
 final _SHEmptyRecycleBin = _shell32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
+    Int32 Function(HWND hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
     int Function(int hwnd, Pointer<Utf16> pszRootPath,
         int dwFlags)>('SHEmptyRecycleBinW');
 
@@ -297,7 +298,7 @@ int SHGetFolderPath(
     _SHGetFolderPath(hwnd, csidl, hToken, dwFlags, pszPath);
 
 final _SHGetFolderPath = _shell32.lookupFunction<
-    Int32 Function(IntPtr hwnd, Int32 csidl, IntPtr hToken, Uint32 dwFlags,
+    Int32 Function(HWND hwnd, Int32 csidl, HANDLE hToken, Uint32 dwFlags,
         Pointer<Utf16> pszPath),
     int Function(int hwnd, int csidl, int hToken, int dwFlags,
         Pointer<Utf16> pszPath)>('SHGetFolderPathW');
@@ -319,7 +320,7 @@ int SHGetKnownFolderPath(Pointer<GUID> rfid, int dwFlags, int hToken,
     _SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath);
 
 final _SHGetKnownFolderPath = _shell32.lookupFunction<
-    Int32 Function(Pointer<GUID> rfid, Int32 dwFlags, IntPtr hToken,
+    Int32 Function(Pointer<GUID> rfid, Int32 dwFlags, HANDLE hToken,
         Pointer<Pointer<Utf16>> ppszPath),
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');

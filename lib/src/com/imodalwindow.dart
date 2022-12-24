@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -38,8 +39,7 @@ class IModalWindow extends IUnknown {
 
   int show(int hwndOwner) => ptr.ref.vtable
       .elementAt(3)
-      .cast<
-          Pointer<NativeFunction<Int32 Function(Pointer, IntPtr hwndOwner)>>>()
+      .cast<Pointer<NativeFunction<Int32 Function(Pointer, HWND hwndOwner)>>>()
       .value
       .asFunction<
           int Function(Pointer, int hwndOwner)>()(ptr.ref.lpVtbl, hwndOwner);

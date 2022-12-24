@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -171,7 +172,7 @@ class IKnownFolderManager extends IUnknown {
                           Int32 Function(
                               Pointer,
                               Pointer<GUID> rfid,
-                              IntPtr hwnd,
+                              HWND hwnd,
                               Uint32 flags,
                               Pointer<Utf16> pszTargetPath,
                               Uint32 cFolders,

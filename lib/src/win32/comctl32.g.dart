@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
@@ -37,7 +38,7 @@ int DefSubclassProc(int hWnd, int uMsg, int wParam, int lParam) =>
     _DefSubclassProc(hWnd, uMsg, wParam, lParam);
 
 final _DefSubclassProc = _comctl32.lookupFunction<
-    IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
+    IntPtr Function(HWND hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
     int Function(
         int hWnd, int uMsg, int wParam, int lParam)>('DefSubclassProc');
 
@@ -59,7 +60,7 @@ void DrawStatusText(
 
 final _DrawStatusText = _comctl32.lookupFunction<
     Void Function(
-        IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText, Uint32 uFlags),
+        HDC hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText, Uint32 uFlags),
     void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
         int uFlags)>('DrawStatusTextW');
 
@@ -95,8 +96,8 @@ int RemoveWindowSubclass(int hWnd,
     _RemoveWindowSubclass(hWnd, pfnSubclass, uIdSubclass);
 
 final _RemoveWindowSubclass = _comctl32.lookupFunction<
-    Int32 Function(IntPtr hWnd,
-        Pointer<NativeFunction<SubclassProc>> pfnSubclass, IntPtr uIdSubclass),
+    Int32 Function(HWND hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        IntPtr uIdSubclass),
     int Function(int hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
         int uIdSubclass)>('RemoveWindowSubclass');
 
@@ -119,11 +120,8 @@ int SetWindowSubclass(
     _SetWindowSubclass(hWnd, pfnSubclass, uIdSubclass, dwRefData);
 
 final _SetWindowSubclass = _comctl32.lookupFunction<
-    Int32 Function(
-        IntPtr hWnd,
-        Pointer<NativeFunction<SubclassProc>> pfnSubclass,
-        IntPtr uIdSubclass,
-        IntPtr dwRefData),
+    Int32 Function(HWND hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
+        IntPtr uIdSubclass, IntPtr dwRefData),
     int Function(int hWnd, Pointer<NativeFunction<SubclassProc>> pfnSubclass,
         int uIdSubclass, int dwRefData)>('SetWindowSubclass');
 
@@ -160,8 +158,8 @@ int TaskDialog(
 
 final _TaskDialog = _comctl32.lookupFunction<
     Int32 Function(
-        IntPtr hwndOwner,
-        IntPtr hInstance,
+        HWND hwndOwner,
+        HINSTANCE hInstance,
         Pointer<Utf16> pszWindowTitle,
         Pointer<Utf16> pszMainInstruction,
         Pointer<Utf16> pszContent,

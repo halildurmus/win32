@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -51,7 +52,7 @@ class IShellFolder extends IUnknown {
                       NativeFunction<
                           Int32 Function(
                               Pointer,
-                              IntPtr hwnd,
+                              HWND hwnd,
                               Pointer<COMObject> pbc,
                               Pointer<Utf16> pszDisplayName,
                               Pointer<Uint32> pchEaten,
@@ -76,7 +77,7 @@ class IShellFolder extends IUnknown {
               .cast<
                   Pointer<
                       NativeFunction<
-                          Int32 Function(Pointer, IntPtr hwnd, Uint32 grfFlags,
+                          Int32 Function(Pointer, HWND hwnd, Uint32 grfFlags,
                               Pointer<Pointer<COMObject>> ppenumIDList)>>>()
               .value
               .asFunction<
@@ -155,7 +156,7 @@ class IShellFolder extends IUnknown {
               .cast<
                   Pointer<
                       NativeFunction<
-                          Int32 Function(Pointer, IntPtr hwndOwner,
+                          Int32 Function(Pointer, HWND hwndOwner,
                               Pointer<GUID> riid, Pointer<Pointer> ppv)>>>()
               .value
               .asFunction<
@@ -198,7 +199,7 @@ class IShellFolder extends IUnknown {
                       NativeFunction<
                           Int32 Function(
                               Pointer,
-                              IntPtr hwndOwner,
+                              HWND hwndOwner,
                               Uint32 cidl,
                               Pointer<Pointer<ITEMIDLIST>> apidl,
                               Pointer<GUID> riid,
@@ -240,7 +241,7 @@ class IShellFolder extends IUnknown {
                       NativeFunction<
                           Int32 Function(
                               Pointer,
-                              IntPtr hwnd,
+                              HWND hwnd,
                               Pointer<ITEMIDLIST> pidl,
                               Pointer<Utf16> pszName,
                               Uint32 uFlags,

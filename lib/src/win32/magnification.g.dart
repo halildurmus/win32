@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _magnification = DynamicLibrary.open('magnification.dll');
@@ -34,7 +35,7 @@ int MagGetColorEffect(int hwnd, Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagGetColorEffect(hwnd, pEffect);
 
 final _MagGetColorEffect = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<MAGCOLOREFFECT> pEffect),
+    Int32 Function(HWND hwnd, Pointer<MAGCOLOREFFECT> pEffect),
     int Function(
         int hwnd, Pointer<MAGCOLOREFFECT> pEffect)>('MagGetColorEffect');
 
@@ -89,7 +90,7 @@ Pointer<NativeFunction<MagImageScalingCallback>> MagGetImageScalingCallback(
     _MagGetImageScalingCallback(hwnd);
 
 final _MagGetImageScalingCallback = _magnification.lookupFunction<
-    Pointer<NativeFunction<MagImageScalingCallback>> Function(IntPtr hwnd),
+    Pointer<NativeFunction<MagImageScalingCallback>> Function(HWND hwnd),
     Pointer<NativeFunction<MagImageScalingCallback>> Function(
         int hwnd)>('MagGetImageScalingCallback');
 
@@ -127,14 +128,14 @@ final _MagGetInputTransform = _magnification.lookupFunction<
 /// ```
 /// {@category magnification}
 int MagGetWindowFilterList(int hwnd, Pointer<Uint32> pdwFilterMode, int count,
-        Pointer<IntPtr> pHWND) =>
+        Pointer<HWND> pHWND) =>
     _MagGetWindowFilterList(hwnd, pdwFilterMode, count, pHWND);
 
 final _MagGetWindowFilterList = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<Uint32> pdwFilterMode, Int32 count,
-        Pointer<IntPtr> pHWND),
+    Int32 Function(HWND hwnd, Pointer<Uint32> pdwFilterMode, Int32 count,
+        Pointer<HWND> pHWND),
     int Function(int hwnd, Pointer<Uint32> pdwFilterMode, int count,
-        Pointer<IntPtr> pHWND)>('MagGetWindowFilterList');
+        Pointer<HWND> pHWND)>('MagGetWindowFilterList');
 
 /// Gets the rectangle of the area that is being magnified.
 ///
@@ -149,7 +150,7 @@ int MagGetWindowSource(int hwnd, Pointer<RECT> pRect) =>
     _MagGetWindowSource(hwnd, pRect);
 
 final _MagGetWindowSource = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<RECT> pRect),
+    Int32 Function(HWND hwnd, Pointer<RECT> pRect),
     int Function(int hwnd, Pointer<RECT> pRect)>('MagGetWindowSource');
 
 /// Retrieves the transformation matrix associated with a magnifier control.
@@ -165,7 +166,7 @@ int MagGetWindowTransform(int hwnd, Pointer<MAGTRANSFORM> pTransform) =>
     _MagGetWindowTransform(hwnd, pTransform);
 
 final _MagGetWindowTransform = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<MAGTRANSFORM> pTransform),
+    Int32 Function(HWND hwnd, Pointer<MAGTRANSFORM> pTransform),
     int Function(
         int hwnd, Pointer<MAGTRANSFORM> pTransform)>('MagGetWindowTransform');
 
@@ -193,7 +194,7 @@ int MagSetColorEffect(int hwnd, Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagSetColorEffect(hwnd, pEffect);
 
 final _MagSetColorEffect = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<MAGCOLOREFFECT> pEffect),
+    Int32 Function(HWND hwnd, Pointer<MAGCOLOREFFECT> pEffect),
     int Function(
         int hwnd, Pointer<MAGCOLOREFFECT> pEffect)>('MagSetColorEffect');
 
@@ -247,7 +248,7 @@ int MagSetImageScalingCallback(
 
 final _MagSetImageScalingCallback = _magnification.lookupFunction<
     Int32 Function(
-        IntPtr hwnd, Pointer<NativeFunction<MagImageScalingCallback>> callback),
+        HWND hwnd, Pointer<NativeFunction<MagImageScalingCallback>> callback),
     int Function(
         int hwnd,
         Pointer<NativeFunction<MagImageScalingCallback>>
@@ -287,14 +288,14 @@ final _MagSetInputTransform = _magnification.lookupFunction<
 /// ```
 /// {@category magnification}
 int MagSetWindowFilterList(
-        int hwnd, int dwFilterMode, int count, Pointer<IntPtr> pHWND) =>
+        int hwnd, int dwFilterMode, int count, Pointer<HWND> pHWND) =>
     _MagSetWindowFilterList(hwnd, dwFilterMode, count, pHWND);
 
 final _MagSetWindowFilterList = _magnification.lookupFunction<
     Int32 Function(
-        IntPtr hwnd, Uint32 dwFilterMode, Int32 count, Pointer<IntPtr> pHWND),
+        HWND hwnd, Uint32 dwFilterMode, Int32 count, Pointer<HWND> pHWND),
     int Function(int hwnd, int dwFilterMode, int count,
-        Pointer<IntPtr> pHWND)>('MagSetWindowFilterList');
+        Pointer<HWND> pHWND)>('MagSetWindowFilterList');
 
 /// Sets the source rectangle for the magnification window.
 ///
@@ -308,7 +309,7 @@ final _MagSetWindowFilterList = _magnification.lookupFunction<
 int MagSetWindowSource(int hwnd, RECT rect) => _MagSetWindowSource(hwnd, rect);
 
 final _MagSetWindowSource = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, RECT rect),
+    Int32 Function(HWND hwnd, RECT rect),
     int Function(int hwnd, RECT rect)>('MagSetWindowSource');
 
 /// Sets the transformation matrix for a magnifier control.
@@ -324,7 +325,7 @@ int MagSetWindowTransform(int hwnd, Pointer<MAGTRANSFORM> pTransform) =>
     _MagSetWindowTransform(hwnd, pTransform);
 
 final _MagSetWindowTransform = _magnification.lookupFunction<
-    Int32 Function(IntPtr hwnd, Pointer<MAGTRANSFORM> pTransform),
+    Int32 Function(HWND hwnd, Pointer<MAGTRANSFORM> pTransform),
     int Function(
         int hwnd, Pointer<MAGTRANSFORM> pTransform)>('MagSetWindowTransform');
 

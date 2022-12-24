@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _ole32 = DynamicLibrary.open('ole32.dll');
@@ -352,18 +353,18 @@ final _CoUninitialize =
 /// ```
 /// {@category ole32}
 int CoWaitForMultipleHandles(int dwFlags, int dwTimeout, int cHandles,
-        Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex) =>
+        Pointer<HANDLE> pHandles, Pointer<Uint32> lpdwindex) =>
     _CoWaitForMultipleHandles(
         dwFlags, dwTimeout, cHandles, pHandles, lpdwindex);
 
 final _CoWaitForMultipleHandles = _ole32.lookupFunction<
     Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
-        Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
+        Pointer<HANDLE> pHandles, Pointer<Uint32> lpdwindex),
     int Function(
         int dwFlags,
         int dwTimeout,
         int cHandles,
-        Pointer<IntPtr> pHandles,
+        Pointer<HANDLE> pHandles,
         Pointer<Uint32> lpdwindex)>('CoWaitForMultipleHandles');
 
 /// A replacement for CoWaitForMultipleHandles. This replacement API hides
@@ -380,18 +381,18 @@ final _CoWaitForMultipleHandles = _ole32.lookupFunction<
 /// ```
 /// {@category ole32}
 int CoWaitForMultipleObjects(int dwFlags, int dwTimeout, int cHandles,
-        Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex) =>
+        Pointer<HANDLE> pHandles, Pointer<Uint32> lpdwindex) =>
     _CoWaitForMultipleObjects(
         dwFlags, dwTimeout, cHandles, pHandles, lpdwindex);
 
 final _CoWaitForMultipleObjects = _ole32.lookupFunction<
     Int32 Function(Uint32 dwFlags, Uint32 dwTimeout, Uint32 cHandles,
-        Pointer<IntPtr> pHandles, Pointer<Uint32> lpdwindex),
+        Pointer<HANDLE> pHandles, Pointer<Uint32> lpdwindex),
     int Function(
         int dwFlags,
         int dwTimeout,
         int cHandles,
-        Pointer<IntPtr> pHandles,
+        Pointer<HANDLE> pHandles,
         Pointer<Uint32> lpdwindex)>('CoWaitForMultipleObjects');
 
 /// The CreateStreamOnHGlobal function creates a stream object that uses an

@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _dwmapi = DynamicLibrary.open('dwmapi.dll');
@@ -34,7 +35,7 @@ int DwmEnableBlurBehindWindow(int hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind) =>
     _DwmEnableBlurBehindWindow(hWnd, pBlurBehind);
 
 final _DwmEnableBlurBehindWindow = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind),
+    Int32 Function(HWND hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind),
     int Function(int hWnd,
         Pointer<DWM_BLURBEHIND> pBlurBehind)>('DwmEnableBlurBehindWindow');
 
@@ -67,7 +68,7 @@ int DwmExtendFrameIntoClientArea(int hWnd, Pointer<MARGINS> pMarInset) =>
     _DwmExtendFrameIntoClientArea(hWnd, pMarInset);
 
 final _DwmExtendFrameIntoClientArea = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<MARGINS> pMarInset),
+    Int32 Function(HWND hWnd, Pointer<MARGINS> pMarInset),
     int Function(
         int hWnd, Pointer<MARGINS> pMarInset)>('DwmExtendFrameIntoClientArea');
 
@@ -144,8 +145,8 @@ int DwmGetWindowAttribute(
     _DwmGetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
 final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
-        Uint32 cbAttribute),
+    Int32 Function(
+        HWND hwnd, Int32 dwAttribute, Pointer pvAttribute, Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
         int cbAttribute)>('DwmGetWindowAttribute');
 
@@ -162,7 +163,7 @@ final _DwmGetWindowAttribute = _dwmapi.lookupFunction<
 int DwmInvalidateIconicBitmaps(int hwnd) => _DwmInvalidateIconicBitmaps(hwnd);
 
 final _DwmInvalidateIconicBitmaps =
-    _dwmapi.lookupFunction<Int32 Function(IntPtr hwnd), int Function(int hwnd)>(
+    _dwmapi.lookupFunction<Int32 Function(HWND hwnd), int Function(int hwnd)>(
         'DwmInvalidateIconicBitmaps');
 
 /// Notifies Desktop Window Manager (DWM) that a touch contact has been
@@ -205,8 +206,8 @@ int DwmSetWindowAttribute(
     _DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute);
 
 final _DwmSetWindowAttribute = _dwmapi.lookupFunction<
-    Int32 Function(IntPtr hwnd, Int32 dwAttribute, Pointer pvAttribute,
-        Uint32 cbAttribute),
+    Int32 Function(
+        HWND hwnd, Int32 dwAttribute, Pointer pvAttribute, Uint32 cbAttribute),
     int Function(int hwnd, int dwAttribute, Pointer pvAttribute,
         int cbAttribute)>('DwmSetWindowAttribute');
 

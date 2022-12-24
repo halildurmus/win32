@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -217,7 +218,7 @@ class IShellLink extends IUnknown {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, IntPtr hwnd, Uint32 fFlags)>>>()
+                      Int32 Function(Pointer, HWND hwnd, Uint32 fFlags)>>>()
           .value
           .asFunction<int Function(Pointer, int hwnd, int fFlags)>()(
       ptr.ref.lpVtbl, hwnd, fFlags);

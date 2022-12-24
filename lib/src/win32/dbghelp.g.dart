@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _dbghelp = DynamicLibrary.open('dbghelp.dll');
@@ -30,7 +31,7 @@ final _dbghelp = DynamicLibrary.open('dbghelp.dll');
 /// {@category dbghelp}
 int SymCleanup(int hProcess) => _SymCleanup(hProcess);
 
-final _SymCleanup = _dbghelp.lookupFunction<Int32 Function(IntPtr hProcess),
+final _SymCleanup = _dbghelp.lookupFunction<Int32 Function(HANDLE hProcess),
     int Function(int hProcess)>('SymCleanup');
 
 /// Enumerates all symbols in a process.
@@ -56,7 +57,7 @@ int SymEnumSymbols(
 
 final _SymEnumSymbols = _dbghelp.lookupFunction<
     Int32 Function(
-        IntPtr hProcess,
+        HANDLE hProcess,
         Uint64 BaseOfDll,
         Pointer<Utf16> Mask,
         Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
@@ -84,7 +85,7 @@ int SymFromAddr(int hProcess, int Address, Pointer<Uint64> Displacement,
     _SymFromAddr(hProcess, Address, Displacement, Symbol);
 
 final _SymFromAddr = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 Address,
+    Int32 Function(HANDLE hProcess, Uint64 Address,
         Pointer<Uint64> Displacement, Pointer<SYMBOL_INFO> Symbol),
     int Function(int hProcess, int Address, Pointer<Uint64> Displacement,
         Pointer<SYMBOL_INFO> Symbol)>('SymFromAddrW');
@@ -105,7 +106,7 @@ int SymFromToken(
     _SymFromToken(hProcess, Base, Token, Symbol);
 
 final _SymFromToken = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 Base, Uint32 Token,
+    Int32 Function(HANDLE hProcess, Uint64 Base, Uint32 Token,
         Pointer<SYMBOL_INFO> Symbol),
     int Function(int hProcess, int Base, int Token,
         Pointer<SYMBOL_INFO> Symbol)>('SymFromTokenW');
@@ -140,7 +141,7 @@ int SymInitialize(
 
 final _SymInitialize = _dbghelp.lookupFunction<
     Int32 Function(
-        IntPtr hProcess, Pointer<Utf16> UserSearchPath, Int32 fInvadeProcess),
+        HANDLE hProcess, Pointer<Utf16> UserSearchPath, Int32 fInvadeProcess),
     int Function(int hProcess, Pointer<Utf16> UserSearchPath,
         int fInvadeProcess)>('SymInitializeW');
 
@@ -172,8 +173,8 @@ int SymLoadModuleEx(
 
 final _SymLoadModuleEx = _dbghelp.lookupFunction<
     Uint64 Function(
-        IntPtr hProcess,
-        IntPtr hFile,
+        HANDLE hProcess,
+        HANDLE hFile,
         Pointer<Utf16> ImageName,
         Pointer<Utf16> ModuleName,
         Uint64 BaseOfDll,
@@ -230,8 +231,9 @@ final _SymSetOptions = _dbghelp.lookupFunction<
 /// {@category dbghelp}
 int SymSetParentWindow(int hwnd) => _SymSetParentWindow(hwnd);
 
-final _SymSetParentWindow = _dbghelp.lookupFunction<Int32 Function(IntPtr hwnd),
-    int Function(int hwnd)>('SymSetParentWindow');
+final _SymSetParentWindow =
+    _dbghelp.lookupFunction<Int32 Function(HWND hwnd), int Function(int hwnd)>(
+        'SymSetParentWindow');
 
 /// Sets the local scope to the symbol that matches the specified address.
 ///
@@ -246,7 +248,7 @@ int SymSetScopeFromAddr(int hProcess, int Address) =>
     _SymSetScopeFromAddr(hProcess, Address);
 
 final _SymSetScopeFromAddr = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 Address),
+    Int32 Function(HANDLE hProcess, Uint64 Address),
     int Function(int hProcess, int Address)>('SymSetScopeFromAddr');
 
 /// Sets the local scope to the symbol that matches the specified index.
@@ -263,7 +265,7 @@ int SymSetScopeFromIndex(int hProcess, int BaseOfDll, int Index) =>
     _SymSetScopeFromIndex(hProcess, BaseOfDll, Index);
 
 final _SymSetScopeFromIndex = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 BaseOfDll, Uint32 Index),
+    Int32 Function(HANDLE hProcess, Uint64 BaseOfDll, Uint32 Index),
     int Function(
         int hProcess, int BaseOfDll, int Index)>('SymSetScopeFromIndex');
 
@@ -283,7 +285,7 @@ int SymSetScopeFromInlineContext(
     _SymSetScopeFromInlineContext(hProcess, Address, InlineContext);
 
 final _SymSetScopeFromInlineContext = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 Address, Uint32 InlineContext),
+    Int32 Function(HANDLE hProcess, Uint64 Address, Uint32 InlineContext),
     int Function(int hProcess, int Address,
         int InlineContext)>('SymSetScopeFromInlineContext');
 
@@ -300,7 +302,7 @@ int SymSetSearchPath(int hProcess, Pointer<Utf16> SearchPathA) =>
     _SymSetSearchPath(hProcess, SearchPathA);
 
 final _SymSetSearchPath = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Pointer<Utf16> SearchPathA),
+    Int32 Function(HANDLE hProcess, Pointer<Utf16> SearchPathA),
     int Function(
         int hProcess, Pointer<Utf16> SearchPathA)>('SymSetSearchPathW');
 
@@ -317,7 +319,7 @@ int SymUnloadModule(int hProcess, int BaseOfDll) =>
     _SymUnloadModule(hProcess, BaseOfDll);
 
 final _SymUnloadModule = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint32 BaseOfDll),
+    Int32 Function(HANDLE hProcess, Uint32 BaseOfDll),
     int Function(int hProcess, int BaseOfDll)>('SymUnloadModule');
 
 /// Unloads the symbol table.
@@ -333,7 +335,7 @@ int SymUnloadModule64(int hProcess, int BaseOfDll) =>
     _SymUnloadModule64(hProcess, BaseOfDll);
 
 final _SymUnloadModule64 = _dbghelp.lookupFunction<
-    Int32 Function(IntPtr hProcess, Uint64 BaseOfDll),
+    Int32 Function(HANDLE hProcess, Uint64 BaseOfDll),
     int Function(int hProcess, int BaseOfDll)>('SymUnloadModule64');
 
 /// Undecorates the specified decorated C++ symbol name.

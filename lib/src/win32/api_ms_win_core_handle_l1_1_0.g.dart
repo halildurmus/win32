@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _api_ms_win_core_handle_l1_1_0 =
@@ -36,6 +37,6 @@ int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) =>
     _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
 
 final _CompareObjectHandles = _api_ms_win_core_handle_l1_1_0.lookupFunction<
-    Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+    Int32 Function(HANDLE hFirstObjectHandle, HANDLE hSecondObjectHandle),
     int Function(int hFirstObjectHandle,
         int hSecondObjectHandle)>('CompareObjectHandles');

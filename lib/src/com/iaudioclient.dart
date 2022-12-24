@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -188,7 +189,7 @@ class IAudioClient extends IUnknown {
       .elementAt(13)
       .cast<
           Pointer<
-              NativeFunction<Int32 Function(Pointer, IntPtr eventHandle)>>>()
+              NativeFunction<Int32 Function(Pointer, HANDLE eventHandle)>>>()
       .value
       .asFunction<
           int Function(

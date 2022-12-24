@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -41,7 +42,7 @@ class IVirtualDesktopManager extends IUnknown {
               .cast<
                   Pointer<
                       NativeFunction<
-                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                          Int32 Function(Pointer, HWND topLevelWindow,
                               Pointer<Int32> onCurrentDesktop)>>>()
               .value
               .asFunction<
@@ -55,7 +56,7 @@ class IVirtualDesktopManager extends IUnknown {
               .cast<
                   Pointer<
                       NativeFunction<
-                          Int32 Function(Pointer, IntPtr topLevelWindow,
+                          Int32 Function(Pointer, HWND topLevelWindow,
                               Pointer<GUID> desktopId)>>>()
               .value
               .asFunction<
@@ -69,7 +70,7 @@ class IVirtualDesktopManager extends IUnknown {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, IntPtr topLevelWindow,
+                      Int32 Function(Pointer, HWND topLevelWindow,
                           Pointer<GUID> desktopId)>>>()
           .value
           .asFunction<

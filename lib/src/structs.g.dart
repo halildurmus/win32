@@ -18,6 +18,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'guid.dart';
+import 'types.dart';
 import 'variant.dart';
 
 /// Defines an accelerator key used in an accelerator table.
@@ -81,7 +82,7 @@ class ACTCTX extends Struct {
 
   external Pointer<Utf16> lpApplicationName;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hModule;
 }
 
@@ -448,7 +449,7 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   @Uint8()
   external int cTimeoutMultiplier;
 
-  @IntPtr()
+  @HANDLE()
   external int hRadio;
 }
 
@@ -558,10 +559,10 @@ class BSMINFO extends Struct {
   @Uint32()
   external int cbSize;
 
-  @IntPtr()
+  @HDESK()
   external int hdesk;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 
   external LUID luid;
@@ -915,7 +916,7 @@ class CBTACTIVATESTRUCT extends Struct {
   @Int32()
   external int fMouse;
 
-  @IntPtr()
+  @HWND()
   external int hWndActive;
 }
 
@@ -926,7 +927,7 @@ class CBTACTIVATESTRUCT extends Struct {
 class CBT_CREATEWND extends Struct {
   external Pointer<CREATESTRUCT> lpcs;
 
-  @IntPtr()
+  @HWND()
   external int hwndInsertAfter;
 }
 
@@ -980,10 +981,10 @@ class CHOOSECOLOR extends Struct {
   @Uint32()
   external int lStructSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
-  @IntPtr()
+  @HWND()
   external int hInstance;
 
   @Uint32()
@@ -1011,10 +1012,10 @@ class CHOOSEFONT extends Struct {
   @Uint32()
   external int lStructSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
-  @IntPtr()
+  @HDC()
   external int hDC;
 
   external Pointer<LOGFONT> lpLogFont;
@@ -1035,7 +1036,7 @@ class CHOOSEFONT extends Struct {
 
   external Pointer<Utf16> lpTemplateName;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
   external Pointer<Utf16> lpszStyle;
@@ -1350,7 +1351,7 @@ class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
 
   external Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes;
 
-  @IntPtr()
+  @HANDLE()
   external int hTemplateFile;
 }
 
@@ -1362,13 +1363,13 @@ class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
 class CREATESTRUCT extends Struct {
   external Pointer lpCreateParams;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
-  @IntPtr()
+  @HMENU()
   external int hMenu;
 
-  @IntPtr()
+  @HWND()
   external int hwndParent;
 
   @Int32()
@@ -1457,7 +1458,7 @@ class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
   @Uint32()
   external int dwPromptFlags;
 
-  @IntPtr()
+  @HWND()
   external int hwndApp;
 
   external Pointer<Utf16> szPrompt;
@@ -1484,7 +1485,7 @@ class CURSORINFO extends Struct {
   @Uint32()
   external int flags;
 
-  @IntPtr()
+  @HCURSOR()
   external int hCursor;
 
   external POINT ptScreenPos;
@@ -1507,7 +1508,7 @@ class CWPRETSTRUCT extends Struct {
   @Uint32()
   external int message;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 }
 
@@ -1525,7 +1526,7 @@ class CWPSTRUCT extends Struct {
   @Uint32()
   external int message;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 }
 
@@ -1988,7 +1989,7 @@ class DIBSECTION extends Struct {
   @Array(3)
   external Array<Uint32> dsBitfields;
 
-  @IntPtr()
+  @HANDLE()
   external int dshSection;
 
   @Uint32()
@@ -2618,7 +2619,7 @@ class DWM_BLURBEHIND extends Struct {
   @Int32()
   external int fEnable;
 
-  @IntPtr()
+  @HRGN()
   external int hRgnBlur;
 
   @Int32()
@@ -2779,7 +2780,7 @@ class EVENTMSG extends Struct {
   @Uint32()
   external int time;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 }
 
@@ -2856,10 +2857,10 @@ class FINDREPLACE extends Struct {
   @Uint32()
   external int lStructSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
   @Uint32()
@@ -2958,7 +2959,7 @@ class GESTUREINFO extends Struct {
   @Uint32()
   external int dwID;
 
-  @IntPtr()
+  @HWND()
   external int hwndTarget;
 
   external POINTS ptsLocation;
@@ -2987,7 +2988,7 @@ class GESTURENOTIFYSTRUCT extends Struct {
   @Uint32()
   external int dwFlags;
 
-  @IntPtr()
+  @HWND()
   external int hwndTarget;
 
   external POINTS ptsLocation;
@@ -3006,22 +3007,22 @@ class GUITHREADINFO extends Struct {
   @Uint32()
   external int flags;
 
-  @IntPtr()
+  @HWND()
   external int hwndActive;
 
-  @IntPtr()
+  @HWND()
   external int hwndFocus;
 
-  @IntPtr()
+  @HWND()
   external int hwndCapture;
 
-  @IntPtr()
+  @HWND()
   external int hwndMenuOwner;
 
-  @IntPtr()
+  @HWND()
   external int hwndMoveSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndCaret;
 
   external RECT rcCaret;
@@ -3078,10 +3079,10 @@ class ICONINFO extends Struct {
   @Uint32()
   external int yHotspot;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmMask;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmColor;
 }
 
@@ -3102,10 +3103,10 @@ class ICONINFOEX extends Struct {
   @Uint32()
   external int yHotspot;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmMask;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmColor;
 
   @Uint16()
@@ -4634,7 +4635,7 @@ class MENUINFO extends Struct {
   @Uint32()
   external int cyMax;
 
-  @IntPtr()
+  @HBRUSH()
   external int hbrBack;
 
   @Uint32()
@@ -4663,13 +4664,13 @@ class MENUITEMINFO extends Struct {
   @Uint32()
   external int wID;
 
-  @IntPtr()
+  @HMENU()
   external int hSubMenu;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmpChecked;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmpUnchecked;
 
   @IntPtr()
@@ -4680,7 +4681,7 @@ class MENUITEMINFO extends Struct {
   @Uint32()
   external int cch;
 
-  @IntPtr()
+  @HBITMAP()
   external int hbmpItem;
 }
 
@@ -5216,7 +5217,7 @@ class MONITORINFO extends Struct {
 class MOUSEHOOKSTRUCT extends Struct {
   external POINT pt;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 
   @Uint32()
@@ -5299,7 +5300,7 @@ class MOUSE_EVENT_RECORD extends Struct {
 ///
 /// {@category Struct}
 class MSG extends Struct {
-  @IntPtr()
+  @HWND()
   external int hwnd;
 
   @Uint32()
@@ -5558,7 +5559,7 @@ class NOTIFYICONDATA extends Struct {
   @Uint32()
   external int cbSize;
 
-  @IntPtr()
+  @HWND()
   external int hWnd;
 
   @Uint32()
@@ -5570,7 +5571,7 @@ class NOTIFYICONDATA extends Struct {
   @Uint32()
   external int uCallbackMessage;
 
-  @IntPtr()
+  @HICON()
   external int hIcon;
 
   @Array(128)
@@ -5643,7 +5644,7 @@ class NOTIFYICONDATA extends Struct {
 
   external GUID guidItem;
 
-  @IntPtr()
+  @HICON()
   external int hBalloonIcon;
 }
 
@@ -5675,7 +5676,7 @@ class OPENCARDNAME extends Struct {
   @Uint32()
   external int dwStructSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
   @IntPtr()
@@ -5744,7 +5745,7 @@ class OPENCARDNAME_EX extends Struct {
   @IntPtr()
   external int hSCardContext;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
   @Uint32()
@@ -5754,7 +5755,7 @@ class OPENCARDNAME_EX extends Struct {
 
   external Pointer<Utf16> lpstrSearchDesc;
 
-  @IntPtr()
+  @HICON()
   external int hIcon;
 
   external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
@@ -5836,10 +5837,10 @@ class OPENFILENAME extends Struct {
   @Uint32()
   external int lStructSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndOwner;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
   external Pointer<Utf16> lpstrFilter;
@@ -6006,7 +6007,7 @@ class OVERLAPPED extends Struct {
 
   external _OVERLAPPED__Anonymous_e__Union Anonymous;
 
-  @IntPtr()
+  @HANDLE()
   external int hEvent;
 }
 
@@ -6067,7 +6068,7 @@ class OVERLAPPED_ENTRY extends Struct {
 ///
 /// {@category Struct}
 class PAINTSTRUCT extends Struct {
-  @IntPtr()
+  @HDC()
   external int hdc;
 
   @Int32()
@@ -6178,7 +6179,7 @@ class PERFORMANCE_INFORMATION extends Struct {
 /// {@category Struct}
 @Packed(1)
 class PHYSICAL_MONITOR extends Struct {
-  @IntPtr()
+  @HANDLE()
   external int hPhysicalMonitor;
 
   @Array(128)
@@ -6231,10 +6232,10 @@ class POINTER_INFO extends Struct {
   @Uint32()
   external int pointerFlags;
 
-  @IntPtr()
+  @HANDLE()
   external int sourceDevice;
 
-  @IntPtr()
+  @HWND()
   external int hwndTarget;
 
   external POINT ptPixelLocation;
@@ -6659,7 +6660,7 @@ class _PROCESS_HEAP_ENTRY__Anonymous_e__Union extends Union {
 
 /// {@category Struct}
 class _PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct extends Struct {
-  @IntPtr()
+  @HANDLE()
   external int hMem;
 
   @Array(3)
@@ -6724,10 +6725,10 @@ extension PROCESS_HEAP_ENTRY_Extension on PROCESS_HEAP_ENTRY {
 ///
 /// {@category Struct}
 class PROCESS_INFORMATION extends Struct {
-  @IntPtr()
+  @HANDLE()
   external int hProcess;
 
-  @IntPtr()
+  @HANDLE()
   external int hThread;
 
   @Uint32()
@@ -6850,7 +6851,7 @@ class RAWINPUTDEVICE extends Struct {
   @Uint32()
   external int dwFlags;
 
-  @IntPtr()
+  @HWND()
   external int hwndTarget;
 }
 
@@ -6858,7 +6859,7 @@ class RAWINPUTDEVICE extends Struct {
 ///
 /// {@category Struct}
 class RAWINPUTDEVICELIST extends Struct {
-  @IntPtr()
+  @HANDLE()
   external int hDevice;
 
   @Uint32()
@@ -6875,7 +6876,7 @@ class RAWINPUTHEADER extends Struct {
   @Uint32()
   external int dwSize;
 
-  @IntPtr()
+  @HANDLE()
   external int hDevice;
 
   @IntPtr()
@@ -7222,7 +7223,7 @@ class SHELLEXECUTEINFO extends Struct {
   @Uint32()
   external int fMask;
 
-  @IntPtr()
+  @HWND()
   external int hwnd;
 
   external Pointer<Utf16> lpVerb;
@@ -7236,14 +7237,14 @@ class SHELLEXECUTEINFO extends Struct {
   @Int32()
   external int nShow;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstApp;
 
   external Pointer lpIDList;
 
   external Pointer<Utf16> lpClass;
 
-  @IntPtr()
+  @HKEY()
   external int hkeyClass;
 
   @Uint32()
@@ -7251,16 +7252,16 @@ class SHELLEXECUTEINFO extends Struct {
 
   external _SHELLEXECUTEINFOW__Anonymous_e__Union Anonymous;
 
-  @IntPtr()
+  @HANDLE()
   external int hProcess;
 }
 
 /// {@category Struct}
 class _SHELLEXECUTEINFOW__Anonymous_e__Union extends Union {
-  @IntPtr()
+  @HANDLE()
   external int hIcon;
 
-  @IntPtr()
+  @HANDLE()
   external int hMonitor;
 }
 
@@ -7595,13 +7596,13 @@ class STARTUPINFO extends Struct {
 
   external Pointer<Uint8> lpReserved2;
 
-  @IntPtr()
+  @HANDLE()
   external int hStdInput;
 
-  @IntPtr()
+  @HANDLE()
   external int hStdOutput;
 
-  @IntPtr()
+  @HANDLE()
   external int hStdError;
 }
 
@@ -8053,10 +8054,10 @@ class TASKDIALOGCONFIG extends Struct {
   @Uint32()
   external int cbSize;
 
-  @IntPtr()
+  @HWND()
   external int hwndParent;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
   @Int32()
@@ -8113,7 +8114,7 @@ class TASKDIALOGCONFIG extends Struct {
 /// {@category Struct}
 @Packed(1)
 class _TASKDIALOGCONFIG__Anonymous1_e__Union extends Union {
-  @IntPtr()
+  @HICON()
   external int hMainIcon;
 
   external Pointer<Utf16> pszMainIcon;
@@ -8130,7 +8131,7 @@ extension TASKDIALOGCONFIG_Extension on TASKDIALOGCONFIG {
 /// {@category Struct}
 @Packed(1)
 class _TASKDIALOGCONFIG__Anonymous2_e__Union extends Union {
-  @IntPtr()
+  @HICON()
   external int hFooterIcon;
 
   external Pointer<Utf16> pszFooterIcon;
@@ -8287,7 +8288,7 @@ class TOUCHINPUT extends Struct {
   @Int32()
   external int y;
 
-  @IntPtr()
+  @HANDLE()
   external int hSource;
 
   @Uint32()
@@ -8450,14 +8451,14 @@ class UPDATELAYEREDWINDOWINFO extends Struct {
   @Uint32()
   external int cbSize;
 
-  @IntPtr()
+  @HDC()
   external int hdcDst;
 
   external Pointer<POINT> pptDst;
 
   external Pointer<SIZE> psize;
 
-  @IntPtr()
+  @HDC()
   external int hdcSrc;
 
   external Pointer<POINT> pptSrc;
@@ -8854,10 +8855,10 @@ class WINDOWPLACEMENT extends Struct {
 ///
 /// {@category Struct}
 class WINDOWPOS extends Struct {
-  @IntPtr()
+  @HWND()
   external int hwnd;
 
-  @IntPtr()
+  @HWND()
   external int hwndInsertAfter;
 
   @Int32()
@@ -9736,23 +9737,23 @@ class WNDCLASSEX extends Struct {
   @Int32()
   external int cbWndExtra;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
-  @IntPtr()
+  @HICON()
   external int hIcon;
 
-  @IntPtr()
+  @HCURSOR()
   external int hCursor;
 
-  @IntPtr()
+  @HBRUSH()
   external int hbrBackground;
 
   external Pointer<Utf16> lpszMenuName;
 
   external Pointer<Utf16> lpszClassName;
 
-  @IntPtr()
+  @HICON()
   external int hIconSm;
 }
 
@@ -9772,16 +9773,16 @@ class WNDCLASS extends Struct {
   @Int32()
   external int cbWndExtra;
 
-  @IntPtr()
+  @HINSTANCE()
   external int hInstance;
 
-  @IntPtr()
+  @HICON()
   external int hIcon;
 
-  @IntPtr()
+  @HCURSOR()
   external int hCursor;
 
-  @IntPtr()
+  @HBRUSH()
   external int hbrBackground;
 
   external Pointer<Utf16> lpszMenuName;

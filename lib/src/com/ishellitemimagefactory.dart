@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -38,15 +39,15 @@ class IShellItemImageFactory extends IUnknown {
   factory IShellItemImageFactory.from(IUnknown interface) =>
       IShellItemImageFactory(interface.toInterface(IID_IShellItemImageFactory));
 
-  int getImage(SIZE size, int flags, Pointer<IntPtr> phbm) => ptr.ref.vtable
+  int getImage(SIZE size, int flags, Pointer<HBITMAP> phbm) => ptr.ref.vtable
       .elementAt(3)
       .cast<
           Pointer<
               NativeFunction<
                   Int32 Function(Pointer, SIZE size, Int32 flags,
-                      Pointer<IntPtr> phbm)>>>()
+                      Pointer<HBITMAP> phbm)>>>()
       .value
       .asFunction<
           int Function(Pointer, SIZE size, int flags,
-              Pointer<IntPtr> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
+              Pointer<HBITMAP> phbm)>()(ptr.ref.lpVtbl, size, flags, phbm);
 }

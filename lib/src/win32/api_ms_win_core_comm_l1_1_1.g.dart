@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _api_ms_win_core_comm_l1_1_1 =
@@ -37,7 +38,7 @@ int OpenCommPort(
     _OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes);
 
 final _OpenCommPort = _api_ms_win_core_comm_l1_1_1.lookupFunction<
-    IntPtr Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
+    HANDLE Function(Uint32 uPortNumber, Uint32 dwDesiredAccess,
         Uint32 dwFlagsAndAttributes),
     int Function(int uPortNumber, int dwDesiredAccess,
         int dwFlagsAndAttributes)>('OpenCommPort');

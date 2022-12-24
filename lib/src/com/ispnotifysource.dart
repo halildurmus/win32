@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -56,7 +57,7 @@ class ISpNotifySource extends IUnknown {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, IntPtr hWnd, Uint32 Msg,
+                      Int32 Function(Pointer, HWND hWnd, Uint32 Msg,
                           IntPtr wParam, IntPtr lParam)>>>()
           .value
           .asFunction<
@@ -119,7 +120,7 @@ class ISpNotifySource extends IUnknown {
 
   int getNotifyEventHandle() => ptr.ref.vtable
       .elementAt(9)
-      .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
+      .cast<Pointer<NativeFunction<HANDLE Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 }

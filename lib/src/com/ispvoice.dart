@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -281,7 +282,7 @@ class ISpVoice extends ISpEventSource {
 
   int speakCompleteEvent() => ptr.ref.vtable
       .elementAt(35)
-      .cast<Pointer<NativeFunction<IntPtr Function(Pointer)>>>()
+      .cast<Pointer<NativeFunction<HANDLE Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
@@ -317,7 +318,7 @@ class ISpVoice extends ISpEventSource {
                       NativeFunction<
                           Int32 Function(
                               Pointer,
-                              IntPtr hwndParent,
+                              HWND hwndParent,
                               Pointer<Utf16> pszTitle,
                               Pointer<Utf16> pszTypeOfUI,
                               Pointer pvExtraData,

@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _setupapi = DynamicLibrary.open('setupapi.dll');
@@ -34,7 +35,7 @@ int SetupDiDestroyDeviceInfoList(int DeviceInfoSet) =>
     _SetupDiDestroyDeviceInfoList(DeviceInfoSet);
 
 final _SetupDiDestroyDeviceInfoList = _setupapi.lookupFunction<
-    Int32 Function(IntPtr DeviceInfoSet),
+    Int32 Function(HDEVINFO DeviceInfoSet),
     int Function(int DeviceInfoSet)>('SetupDiDestroyDeviceInfoList');
 
 /// The SetupDiEnumDeviceInfo function returns a SP_DEVINFO_DATA structure
@@ -53,7 +54,7 @@ int SetupDiEnumDeviceInfo(int DeviceInfoSet, int MemberIndex,
     _SetupDiEnumDeviceInfo(DeviceInfoSet, MemberIndex, DeviceInfoData);
 
 final _SetupDiEnumDeviceInfo = _setupapi.lookupFunction<
-    Int32 Function(IntPtr DeviceInfoSet, Uint32 MemberIndex,
+    Int32 Function(HDEVINFO DeviceInfoSet, Uint32 MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData),
     int Function(int DeviceInfoSet, int MemberIndex,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData)>('SetupDiEnumDeviceInfo');
@@ -82,7 +83,7 @@ int SetupDiEnumDeviceInterfaces(
 
 final _SetupDiEnumDeviceInterfaces = _setupapi.lookupFunction<
         Int32 Function(
-            IntPtr DeviceInfoSet,
+            HDEVINFO DeviceInfoSet,
             Pointer<SP_DEVINFO_DATA> DeviceInfoData,
             Pointer<GUID> InterfaceClassGuid,
             Uint32 MemberIndex,
@@ -113,8 +114,8 @@ int SetupDiGetClassDevs(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
     _SetupDiGetClassDevs(ClassGuid, Enumerator, hwndParent, Flags);
 
 final _SetupDiGetClassDevs = _setupapi.lookupFunction<
-    IntPtr Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
-        IntPtr hwndParent, Uint32 Flags),
+    HDEVINFO Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
+        HWND hwndParent, Uint32 Flags),
     int Function(Pointer<GUID> ClassGuid, Pointer<Utf16> Enumerator,
         int hwndParent, int Flags)>('SetupDiGetClassDevsW');
 
@@ -142,7 +143,7 @@ int SetupDiGetDeviceInstanceId(
 
 final _SetupDiGetDeviceInstanceId = _setupapi.lookupFunction<
     Int32 Function(
-        IntPtr DeviceInfoSet,
+        HDEVINFO DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         Pointer<Utf16> DeviceInstanceId,
         Uint32 DeviceInstanceIdSize,
@@ -185,7 +186,7 @@ int SetupDiGetDeviceInterfaceDetail(
 
 final _SetupDiGetDeviceInterfaceDetail = _setupapi.lookupFunction<
         Int32 Function(
-            IntPtr DeviceInfoSet,
+            HDEVINFO DeviceInfoSet,
             Pointer<SP_DEVICE_INTERFACE_DATA> DeviceInterfaceData,
             Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA_> DeviceInterfaceDetailData,
             Uint32 DeviceInterfaceDetailDataSize,
@@ -228,7 +229,7 @@ int SetupDiGetDeviceRegistryProperty(
 
 final _SetupDiGetDeviceRegistryProperty = _setupapi.lookupFunction<
     Int32 Function(
-        IntPtr DeviceInfoSet,
+        HDEVINFO DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         Uint32 Property,
         Pointer<Uint32> PropertyRegDataType,
@@ -269,8 +270,8 @@ int SetupDiOpenDevRegKey(
         DeviceInfoSet, DeviceInfoData, Scope, HwProfile, KeyType, samDesired);
 
 final _SetupDiOpenDevRegKey = _setupapi.lookupFunction<
-    IntPtr Function(
-        IntPtr DeviceInfoSet,
+    HKEY Function(
+        HDEVINFO DeviceInfoSet,
         Pointer<SP_DEVINFO_DATA> DeviceInfoData,
         Uint32 Scope,
         Uint32 HwProfile,

@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -49,14 +50,14 @@ class IInspectable extends IUnknown {
           int Function(Pointer, Pointer<Uint32> iidCount,
               Pointer<Pointer<GUID>> iids)>()(ptr.ref.lpVtbl, iidCount, iids);
 
-  int getRuntimeClassName(Pointer<IntPtr> className) => ptr.ref.vtable
+  int getRuntimeClassName(Pointer<HSTRING> className) => ptr.ref.vtable
           .elementAt(4)
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, Pointer<IntPtr> className)>>>()
+                      Int32 Function(Pointer, Pointer<HSTRING> className)>>>()
           .value
-          .asFunction<int Function(Pointer, Pointer<IntPtr> className)>()(
+          .asFunction<int Function(Pointer, Pointer<HSTRING> className)>()(
       ptr.ref.lpVtbl, className);
 
   int getTrustLevel(Pointer<Int32> trustLevel) => ptr.ref.vtable

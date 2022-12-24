@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _gdi32 = DynamicLibrary.open('gdi32.dll');
@@ -33,7 +34,7 @@ final _gdi32 = DynamicLibrary.open('gdi32.dll');
 int AbortPath(int hdc) => _AbortPath(hdc);
 
 final _AbortPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'AbortPath');
 
 /// The AddFontResource function adds the font resource from the specified
@@ -94,7 +95,7 @@ int AngleArc(
     _AngleArc(hdc, x, y, r, StartAngle, SweepAngle);
 
 final _AngleArc = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Uint32 r, Float StartAngle,
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Uint32 r, Float StartAngle,
         Float SweepAngle),
     int Function(int hdc, int x, int y, int r, double StartAngle,
         double SweepAngle)>('AngleArc');
@@ -116,7 +117,7 @@ int AnimatePalette(
     _AnimatePalette(hPal, iStartIndex, cEntries, ppe);
 
 final _AnimatePalette = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hPal, Uint32 iStartIndex, Uint32 cEntries,
+    Int32 Function(HPALETTE hPal, Uint32 iStartIndex, Uint32 cEntries,
         Pointer<PALETTEENTRY> ppe),
     int Function(int hPal, int iStartIndex, int cEntries,
         Pointer<PALETTEENTRY> ppe)>('AnimatePalette');
@@ -142,7 +143,7 @@ int Arc(int hdc, int x1, int y1, int x2, int y2, int x3, int y3, int x4,
     _Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4);
 
 final _Arc = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2, Int32 x3,
+    Int32 Function(HDC hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2, Int32 x3,
         Int32 y3, Int32 x4, Int32 y4),
     int Function(int hdc, int x1, int y1, int x2, int y2, int x3, int y3,
         int x4, int y4)>('Arc');
@@ -168,7 +169,7 @@ int ArcTo(int hdc, int left, int top, int right, int bottom, int xr1, int yr1,
     _ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2);
 
 final _ArcTo = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
+    Int32 Function(HDC hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
         Int32 xr1, Int32 yr1, Int32 xr2, Int32 yr2),
     int Function(int hdc, int left, int top, int right, int bottom, int xr1,
         int yr1, int xr2, int yr2)>('ArcTo');
@@ -185,7 +186,7 @@ final _ArcTo = _gdi32.lookupFunction<
 int BeginPath(int hdc) => _BeginPath(hdc);
 
 final _BeginPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'BeginPath');
 
 /// The BitBlt function performs a bit-block transfer of the color data
@@ -211,8 +212,8 @@ int BitBlt(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1, int y1,
     _BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
 
 final _BitBlt = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Int32 cx, Int32 cy,
-        IntPtr hdcSrc, Int32 x1, Int32 y1, Uint32 rop),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Int32 cx, Int32 cy, HDC hdcSrc,
+        Int32 x1, Int32 y1, Uint32 rop),
     int Function(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1,
         int y1, int rop)>('BitBlt');
 
@@ -227,9 +228,8 @@ final _BitBlt = _gdi32.lookupFunction<
 /// {@category gdi32}
 int CancelDC(int hdc) => _CancelDC(hdc);
 
-final _CancelDC =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
-        'CancelDC');
+final _CancelDC = _gdi32
+    .lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>('CancelDC');
 
 /// The Chord function draws a chord (a region bounded by the intersection
 /// of an ellipse and a line segment, called a secant). The chord is
@@ -254,7 +254,7 @@ int Chord(int hdc, int x1, int y1, int x2, int y2, int x3, int y3, int x4,
     _Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4);
 
 final _Chord = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2, Int32 x3,
+    Int32 Function(HDC hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2, Int32 x3,
         Int32 y3, Int32 x4, Int32 y4),
     int Function(int hdc, int x1, int y1, int x2, int y2, int x3, int y3,
         int x4, int y4)>('Chord');
@@ -269,7 +269,7 @@ final _Chord = _gdi32.lookupFunction<
 int CloseFigure(int hdc) => _CloseFigure(hdc);
 
 final _CloseFigure =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'CloseFigure');
 
 /// The CreateCompatibleBitmap function creates a bitmap compatible with the
@@ -287,7 +287,7 @@ int CreateCompatibleBitmap(int hdc, int cx, int cy) =>
     _CreateCompatibleBitmap(hdc, cx, cy);
 
 final _CreateCompatibleBitmap = _gdi32.lookupFunction<
-    IntPtr Function(IntPtr hdc, Int32 cx, Int32 cy),
+    HBITMAP Function(HDC hdc, Int32 cx, Int32 cy),
     int Function(int hdc, int cx, int cy)>('CreateCompatibleBitmap');
 
 /// The CreateCompatibleDC function creates a memory device context (DC)
@@ -302,7 +302,7 @@ final _CreateCompatibleBitmap = _gdi32.lookupFunction<
 int CreateCompatibleDC(int hdc) => _CreateCompatibleDC(hdc);
 
 final _CreateCompatibleDC =
-    _gdi32.lookupFunction<IntPtr Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<IntPtr Function(HDC hdc), int Function(int hdc)>(
         'CreateCompatibleDC');
 
 /// The CreateDC function creates a device context (DC) for a device using
@@ -346,7 +346,7 @@ int CreateDIBitmap(int hdc, Pointer<BITMAPINFOHEADER> pbmih, int flInit,
     _CreateDIBitmap(hdc, pbmih, flInit, pjBits, pbmi, iUsage);
 
 final _CreateDIBitmap = _gdi32.lookupFunction<
-    IntPtr Function(IntPtr hdc, Pointer<BITMAPINFOHEADER> pbmih, Uint32 flInit,
+    HBITMAP Function(HDC hdc, Pointer<BITMAPINFOHEADER> pbmih, Uint32 flInit,
         Pointer pjBits, Pointer<BITMAPINFO> pbmi, Uint32 iUsage),
     int Function(
         int hdc,
@@ -370,7 +370,7 @@ int CreateDIBPatternBrushPt(Pointer lpPackedDIB, int iUsage) =>
     _CreateDIBPatternBrushPt(lpPackedDIB, iUsage);
 
 final _CreateDIBPatternBrushPt = _gdi32.lookupFunction<
-    IntPtr Function(Pointer lpPackedDIB, Uint32 iUsage),
+    HBRUSH Function(Pointer lpPackedDIB, Uint32 iUsage),
     int Function(Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
 
 /// The CreateDIBSection function creates a DIB that applications can write
@@ -394,8 +394,8 @@ int CreateDIBSection(int hdc, Pointer<BITMAPINFO> pbmi, int usage,
     _CreateDIBSection(hdc, pbmi, usage, ppvBits, hSection, offset);
 
 final _CreateDIBSection = _gdi32.lookupFunction<
-    IntPtr Function(IntPtr hdc, Pointer<BITMAPINFO> pbmi, Uint32 usage,
-        Pointer<Pointer> ppvBits, IntPtr hSection, Uint32 offset),
+    HBITMAP Function(HDC hdc, Pointer<BITMAPINFO> pbmi, Uint32 usage,
+        Pointer<Pointer> ppvBits, HANDLE hSection, Uint32 offset),
     int Function(
         int hdc,
         Pointer<BITMAPINFO> pbmi,
@@ -419,7 +419,7 @@ int CreateEllipticRgn(int x1, int y1, int x2, int y2) =>
     _CreateEllipticRgn(x1, y1, x2, y2);
 
 final _CreateEllipticRgn = _gdi32.lookupFunction<
-    IntPtr Function(Int32 x1, Int32 y1, Int32 x2, Int32 y2),
+    HRGN Function(Int32 x1, Int32 y1, Int32 x2, Int32 y2),
     int Function(int x1, int y1, int x2, int y2)>('CreateEllipticRgn');
 
 /// The CreateFontIndirect function creates a logical font that has the
@@ -435,7 +435,7 @@ final _CreateEllipticRgn = _gdi32.lookupFunction<
 int CreateFontIndirect(Pointer<LOGFONT> lplf) => _CreateFontIndirect(lplf);
 
 final _CreateFontIndirect = _gdi32.lookupFunction<
-    IntPtr Function(Pointer<LOGFONT> lplf),
+    HFONT Function(Pointer<LOGFONT> lplf),
     int Function(Pointer<LOGFONT> lplf)>('CreateFontIndirectW');
 
 /// The CreateHalftonePalette function creates a halftone palette for the
@@ -450,7 +450,7 @@ final _CreateFontIndirect = _gdi32.lookupFunction<
 int CreateHalftonePalette(int hdc) => _CreateHalftonePalette(hdc);
 
 final _CreateHalftonePalette =
-    _gdi32.lookupFunction<IntPtr Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<HPALETTE Function(HDC hdc), int Function(int hdc)>(
         'CreateHalftonePalette');
 
 /// The CreateHatchBrush function creates a logical brush that has the
@@ -466,7 +466,7 @@ final _CreateHalftonePalette =
 int CreateHatchBrush(int iHatch, int color) => _CreateHatchBrush(iHatch, color);
 
 final _CreateHatchBrush = _gdi32.lookupFunction<
-    IntPtr Function(Uint32 iHatch, Uint32 color),
+    HBRUSH Function(Uint32 iHatch, Uint32 color),
     int Function(int iHatch, int color)>('CreateHatchBrush');
 
 /// The CreatePen function creates a logical pen that has the specified
@@ -485,7 +485,7 @@ int CreatePen(int iStyle, int cWidth, int color) =>
     _CreatePen(iStyle, cWidth, color);
 
 final _CreatePen = _gdi32.lookupFunction<
-    IntPtr Function(Uint32 iStyle, Int32 cWidth, Uint32 color),
+    HPEN Function(Uint32 iStyle, Int32 cWidth, Uint32 color),
     int Function(int iStyle, int cWidth, int color)>('CreatePen');
 
 /// The CreateSolidBrush function creates a logical brush that has the
@@ -499,7 +499,7 @@ final _CreatePen = _gdi32.lookupFunction<
 /// {@category gdi32}
 int CreateSolidBrush(int color) => _CreateSolidBrush(color);
 
-final _CreateSolidBrush = _gdi32.lookupFunction<IntPtr Function(Uint32 color),
+final _CreateSolidBrush = _gdi32.lookupFunction<HBRUSH Function(Uint32 color),
     int Function(int color)>('CreateSolidBrush');
 
 /// The DeleteDC function deletes the specified device context (DC).
@@ -530,7 +530,7 @@ final _DeleteDC =
 int DeleteObject(int ho) => _DeleteObject(ho);
 
 final _DeleteObject =
-    _gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int ho)>(
+    _gdi32.lookupFunction<Int32 Function(HGDIOBJ ho), int Function(int ho)>(
         'DeleteObject');
 
 /// The DrawEscape function provides drawing capabilities of the specified
@@ -550,7 +550,7 @@ int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Utf8> lpIn) =>
     _DrawEscape(hdc, iEscape, cjIn, lpIn);
 
 final _DrawEscape = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Utf8> lpIn),
+    Int32 Function(HDC hdc, Int32 iEscape, Int32 cjIn, Pointer<Utf8> lpIn),
     int Function(
         int hdc, int iEscape, int cjIn, Pointer<Utf8> lpIn)>('DrawEscape');
 
@@ -572,8 +572,7 @@ int Ellipse(int hdc, int left, int top, int right, int bottom) =>
     _Ellipse(hdc, left, top, right, bottom);
 
 final _Ellipse = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
+    Int32 Function(HDC hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
     int Function(int hdc, int left, int top, int right, int bottom)>('Ellipse');
 
 /// The EndPath function closes a path bracket and selects the path defined
@@ -587,9 +586,8 @@ final _Ellipse = _gdi32.lookupFunction<
 /// {@category gdi32}
 int EndPath(int hdc) => _EndPath(hdc);
 
-final _EndPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
-        'EndPath');
+final _EndPath = _gdi32
+    .lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>('EndPath');
 
 /// The EnumFontFamiliesEx function enumerates all uniquely-named fonts in
 /// the system that match the font characteristics specified by the LOGFONT
@@ -616,7 +614,7 @@ int EnumFontFamiliesEx(
 
 final _EnumFontFamiliesEx = _gdi32.lookupFunction<
     Int32 Function(
-        IntPtr hdc,
+        HDC hdc,
         Pointer<LOGFONT> lpLogfont,
         Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
         IntPtr lParam,
@@ -646,7 +644,7 @@ int ExtCreatePen(int iPenStyle, int cWidth, Pointer<LOGBRUSH> plbrush,
     _ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle);
 
 final _ExtCreatePen = _gdi32.lookupFunction<
-    IntPtr Function(Uint32 iPenStyle, Uint32 cWidth, Pointer<LOGBRUSH> plbrush,
+    HPEN Function(Uint32 iPenStyle, Uint32 cWidth, Pointer<LOGBRUSH> plbrush,
         Uint32 cStyle, Pointer<Uint32> pstyle),
     int Function(int iPenStyle, int cWidth, Pointer<LOGBRUSH> plbrush,
         int cStyle, Pointer<Uint32> pstyle)>('ExtCreatePen');
@@ -674,7 +672,7 @@ int ExtTextOut(int hdc, int x, int y, int options, Pointer<RECT> lprect,
 
 final _ExtTextOut = _gdi32.lookupFunction<
     Int32 Function(
-        IntPtr hdc,
+        HDC hdc,
         Int32 x,
         Int32 y,
         Uint32 options,
@@ -697,9 +695,8 @@ final _ExtTextOut = _gdi32.lookupFunction<
 /// {@category gdi32}
 int FillPath(int hdc) => _FillPath(hdc);
 
-final _FillPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
-        'FillPath');
+final _FillPath = _gdi32
+    .lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>('FillPath');
 
 /// The FlattenPath function transforms any curves in the path that is
 /// selected into the current device context (DC), turning each curve into a
@@ -714,7 +711,7 @@ final _FillPath =
 int FlattenPath(int hdc) => _FlattenPath(hdc);
 
 final _FlattenPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'FlattenPath');
 
 /// The GetDeviceCaps function retrieves device-specific information for the
@@ -730,7 +727,7 @@ final _FlattenPath =
 int GetDeviceCaps(int hdc, int index) => _GetDeviceCaps(hdc, index);
 
 final _GetDeviceCaps = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Uint32 index),
+    Int32 Function(HDC hdc, Uint32 index),
     int Function(int hdc, int index)>('GetDeviceCaps');
 
 /// The GetDIBits function retrieves the bits of the specified compatible
@@ -754,7 +751,7 @@ int GetDIBits(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
     _GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
 
 final _GetDIBits = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, IntPtr hbm, Uint32 start, Uint32 cLines,
+    Int32 Function(HDC hdc, HBITMAP hbm, Uint32 start, Uint32 cLines,
         Pointer lpvBits, Pointer<BITMAPINFO> lpbmi, Uint32 usage),
     int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
         Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
@@ -773,7 +770,7 @@ final _GetDIBits = _gdi32.lookupFunction<
 int GetNearestColor(int hdc, int color) => _GetNearestColor(hdc, color);
 
 final _GetNearestColor = _gdi32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Uint32 color),
+    Uint32 Function(HDC hdc, Uint32 color),
     int Function(int hdc, int color)>('GetNearestColor');
 
 /// The GetObject function retrieves information for the specified graphics
@@ -790,7 +787,7 @@ final _GetNearestColor = _gdi32.lookupFunction<
 int GetObject(int h, int c, Pointer pv) => _GetObject(h, c, pv);
 
 final _GetObject = _gdi32.lookupFunction<
-    Int32 Function(IntPtr h, Int32 c, Pointer pv),
+    Int32 Function(HGDIOBJ h, Int32 c, Pointer pv),
     int Function(int h, int c, Pointer pv)>('GetObjectW');
 
 /// The GetPath function retrieves the coordinates defining the endpoints of
@@ -810,8 +807,7 @@ int GetPath(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) =>
     _GetPath(hdc, apt, aj, cpt);
 
 final _GetPath = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
     int Function(
         int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('GetPath');
 
@@ -828,7 +824,7 @@ final _GetPath = _gdi32.lookupFunction<
 int GetPixel(int hdc, int x, int y) => _GetPixel(hdc, x, y);
 
 final _GetPixel = _gdi32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Int32 x, Int32 y),
+    Uint32 Function(HDC hdc, Int32 x, Int32 y),
     int Function(int hdc, int x, int y)>('GetPixel');
 
 /// The GetStockObject function retrieves a handle to one of the stock pens,
@@ -843,7 +839,7 @@ final _GetPixel = _gdi32.lookupFunction<
 int GetStockObject(int i) => _GetStockObject(i);
 
 final _GetStockObject =
-    _gdi32.lookupFunction<IntPtr Function(Uint32 i), int Function(int i)>(
+    _gdi32.lookupFunction<HGDIOBJ Function(Uint32 i), int Function(int i)>(
         'GetStockObject');
 
 /// The GetTextMetrics function fills the specified buffer with the metrics
@@ -860,7 +856,7 @@ int GetTextMetrics(int hdc, Pointer<TEXTMETRIC> lptm) =>
     _GetTextMetrics(hdc, lptm);
 
 final _GetTextMetrics = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<TEXTMETRIC> lptm),
+    Int32 Function(HDC hdc, Pointer<TEXTMETRIC> lptm),
     int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetricsW');
 
 /// This function retrieves the x-extent and y-extent of the window for the
@@ -877,7 +873,7 @@ int GetWindowExtEx(int hdc, Pointer<SIZE> lpsize) =>
     _GetWindowExtEx(hdc, lpsize);
 
 final _GetWindowExtEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<SIZE> lpsize),
+    Int32 Function(HDC hdc, Pointer<SIZE> lpsize),
     int Function(int hdc, Pointer<SIZE> lpsize)>('GetWindowExtEx');
 
 /// The GetWindowOrgEx function retrieves the x-coordinates and
@@ -894,7 +890,7 @@ int GetWindowOrgEx(int hdc, Pointer<POINT> lppoint) =>
     _GetWindowOrgEx(hdc, lppoint);
 
 final _GetWindowOrgEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> lppoint),
+    Int32 Function(HDC hdc, Pointer<POINT> lppoint),
     int Function(int hdc, Pointer<POINT> lppoint)>('GetWindowOrgEx');
 
 /// The LineTo function draws a line from the current position up to, but
@@ -910,8 +906,7 @@ final _GetWindowOrgEx = _gdi32.lookupFunction<
 /// {@category gdi32}
 int LineTo(int hdc, int x, int y) => _LineTo(hdc, x, y);
 
-final _LineTo = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y),
+final _LineTo = _gdi32.lookupFunction<Int32 Function(HDC hdc, Int32 x, Int32 y),
     int Function(int hdc, int x, int y)>('LineTo');
 
 /// The MoveToEx function updates the current position to the specified
@@ -930,7 +925,7 @@ int MoveToEx(int hdc, int x, int y, Pointer<POINT> lppt) =>
     _MoveToEx(hdc, x, y, lppt);
 
 final _MoveToEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
     int Function(int hdc, int x, int y, Pointer<POINT> lppt)>('MoveToEx');
 
 /// The Pie function draws a pie-shaped wedge bounded by the intersection of
@@ -956,7 +951,7 @@ int Pie(int hdc, int left, int top, int right, int bottom, int xr1, int yr1,
     _Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2);
 
 final _Pie = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
+    Int32 Function(HDC hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
         Int32 xr1, Int32 yr1, Int32 xr2, Int32 yr2),
     int Function(int hdc, int left, int top, int right, int bottom, int xr1,
         int yr1, int xr2, int yr2)>('Pie');
@@ -975,7 +970,7 @@ int PolyBezier(int hdc, Pointer<POINT> apt, int cpt) =>
     _PolyBezier(hdc, apt, cpt);
 
 final _PolyBezier = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Uint32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolyBezier');
 
 /// The PolyBezierTo function draws one or more Bézier curves.
@@ -992,7 +987,7 @@ int PolyBezierTo(int hdc, Pointer<POINT> apt, int cpt) =>
     _PolyBezierTo(hdc, apt, cpt);
 
 final _PolyBezierTo = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Uint32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolyBezierTo');
 
 /// The PolyDraw function draws a set of line segments and Bézier curves.
@@ -1010,8 +1005,7 @@ int PolyDraw(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) =>
     _PolyDraw(hdc, apt, aj, cpt);
 
 final _PolyDraw = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
     int Function(
         int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('PolyDraw');
 
@@ -1030,7 +1024,7 @@ final _PolyDraw = _gdi32.lookupFunction<
 int Polygon(int hdc, Pointer<POINT> apt, int cpt) => _Polygon(hdc, apt, cpt);
 
 final _Polygon = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Int32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Int32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('Polygon');
 
 /// The Polyline function draws a series of line segments by connecting the
@@ -1047,7 +1041,7 @@ final _Polygon = _gdi32.lookupFunction<
 int Polyline(int hdc, Pointer<POINT> apt, int cpt) => _Polyline(hdc, apt, cpt);
 
 final _Polyline = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Int32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Int32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('Polyline');
 
 /// The PolylineTo function draws one or more straight lines.
@@ -1064,7 +1058,7 @@ int PolylineTo(int hdc, Pointer<POINT> apt, int cpt) =>
     _PolylineTo(hdc, apt, cpt);
 
 final _PolylineTo = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Uint32 cpt),
     int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolylineTo');
 
 /// The PolyPolygon function draws a series of closed polygons. Each polygon
@@ -1085,8 +1079,7 @@ int PolyPolygon(int hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) =>
     _PolyPolygon(hdc, apt, asz, csz);
 
 final _PolyPolygon = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Pointer<POINT> apt, Pointer<Int32> asz, Int32 csz),
+    Int32 Function(HDC hdc, Pointer<POINT> apt, Pointer<Int32> asz, Int32 csz),
     int Function(int hdc, Pointer<POINT> apt, Pointer<Int32> asz,
         int csz)>('PolyPolygon');
 
@@ -1107,7 +1100,7 @@ int PolyPolyline(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz, int csz) =>
 
 final _PolyPolyline = _gdi32.lookupFunction<
     Int32 Function(
-        IntPtr hdc, Pointer<POINT> apt, Pointer<Uint32> asz, Uint32 csz),
+        HDC hdc, Pointer<POINT> apt, Pointer<Uint32> asz, Uint32 csz),
     int Function(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz,
         int csz)>('PolyPolyline');
 
@@ -1125,7 +1118,7 @@ final _PolyPolyline = _gdi32.lookupFunction<
 int PtInRegion(int hrgn, int x, int y) => _PtInRegion(hrgn, x, y);
 
 final _PtInRegion = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hrgn, Int32 x, Int32 y),
+    Int32 Function(HRGN hrgn, Int32 x, Int32 y),
     int Function(int hrgn, int x, int y)>('PtInRegion');
 
 /// The Rectangle function draws a rectangle. The rectangle is outlined by
@@ -1145,8 +1138,7 @@ int Rectangle(int hdc, int left, int top, int right, int bottom) =>
     _Rectangle(hdc, left, top, right, bottom);
 
 final _Rectangle = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
+    Int32 Function(HDC hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
     int Function(
         int hdc, int left, int top, int right, int bottom)>('Rectangle');
 
@@ -1163,7 +1155,7 @@ final _Rectangle = _gdi32.lookupFunction<
 int RectInRegion(int hrgn, Pointer<RECT> lprect) => _RectInRegion(hrgn, lprect);
 
 final _RectInRegion = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hrgn, Pointer<RECT> lprect),
+    Int32 Function(HRGN hrgn, Pointer<RECT> lprect),
     int Function(int hrgn, Pointer<RECT> lprect)>('RectInRegion');
 
 /// The RoundRect function draws a rectangle with rounded corners. The
@@ -1187,7 +1179,7 @@ int RoundRect(int hdc, int left, int top, int right, int bottom, int width,
     _RoundRect(hdc, left, top, right, bottom, width, height);
 
 final _RoundRect = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
+    Int32 Function(HDC hdc, Int32 left, Int32 top, Int32 right, Int32 bottom,
         Int32 width, Int32 height),
     int Function(int hdc, int left, int top, int right, int bottom, int width,
         int height)>('RoundRect');
@@ -1205,9 +1197,8 @@ final _RoundRect = _gdi32.lookupFunction<
 /// {@category gdi32}
 int SaveDC(int hdc) => _SaveDC(hdc);
 
-final _SaveDC =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
-        'SaveDC');
+final _SaveDC = _gdi32
+    .lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>('SaveDC');
 
 /// The SelectClipPath function selects the current path as a clipping
 /// region for a device context, combining the new region with any existing
@@ -1223,7 +1214,7 @@ final _SaveDC =
 int SelectClipPath(int hdc, int mode) => _SelectClipPath(hdc, mode);
 
 final _SelectClipPath = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 mode),
+    Int32 Function(HDC hdc, Int32 mode),
     int Function(int hdc, int mode)>('SelectClipPath');
 
 /// The SelectObject function selects an object into the specified device
@@ -1240,7 +1231,7 @@ final _SelectClipPath = _gdi32.lookupFunction<
 int SelectObject(int hdc, int h) => _SelectObject(hdc, h);
 
 final _SelectObject = _gdi32.lookupFunction<
-    IntPtr Function(IntPtr hdc, IntPtr h),
+    HGDIOBJ Function(HDC hdc, HGDIOBJ h),
     int Function(int hdc, int h)>('SelectObject');
 
 /// The SetBkColor function sets the current background color to the
@@ -1257,7 +1248,7 @@ final _SelectObject = _gdi32.lookupFunction<
 int SetBkColor(int hdc, int color) => _SetBkColor(hdc, color);
 
 final _SetBkColor = _gdi32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Uint32 color),
+    Uint32 Function(HDC hdc, Uint32 color),
     int Function(int hdc, int color)>('SetBkColor');
 
 /// The SetBkMode function sets the background mix mode of the specified
@@ -1273,8 +1264,7 @@ final _SetBkColor = _gdi32.lookupFunction<
 /// {@category gdi32}
 int SetBkMode(int hdc, int mode) => _SetBkMode(hdc, mode);
 
-final _SetBkMode = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Uint32 mode),
+final _SetBkMode = _gdi32.lookupFunction<Int32 Function(HDC hdc, Uint32 mode),
     int Function(int hdc, int mode)>('SetBkMode');
 
 /// The SetMapMode function sets the mapping mode of the specified device
@@ -1291,8 +1281,7 @@ final _SetBkMode = _gdi32.lookupFunction<
 /// {@category gdi32}
 int SetMapMode(int hdc, int iMode) => _SetMapMode(hdc, iMode);
 
-final _SetMapMode = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Uint32 iMode),
+final _SetMapMode = _gdi32.lookupFunction<Int32 Function(HDC hdc, Uint32 iMode),
     int Function(int hdc, int iMode)>('SetMapMode');
 
 /// The SetPixel function sets the pixel at the specified coordinates to the
@@ -1310,7 +1299,7 @@ final _SetMapMode = _gdi32.lookupFunction<
 int SetPixel(int hdc, int x, int y, int color) => _SetPixel(hdc, x, y, color);
 
 final _SetPixel = _gdi32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Int32 x, Int32 y, Uint32 color),
+    Uint32 Function(HDC hdc, Int32 x, Int32 y, Uint32 color),
     int Function(int hdc, int x, int y, int color)>('SetPixel');
 
 /// The SetStretchBltMode function sets the bitmap stretching mode in the
@@ -1326,7 +1315,7 @@ final _SetPixel = _gdi32.lookupFunction<
 int SetStretchBltMode(int hdc, int mode) => _SetStretchBltMode(hdc, mode);
 
 final _SetStretchBltMode = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Uint32 mode),
+    Int32 Function(HDC hdc, Uint32 mode),
     int Function(int hdc, int mode)>('SetStretchBltMode');
 
 /// The SetTextColor function sets the text color for the specified device
@@ -1342,7 +1331,7 @@ final _SetStretchBltMode = _gdi32.lookupFunction<
 int SetTextColor(int hdc, int color) => _SetTextColor(hdc, color);
 
 final _SetTextColor = _gdi32.lookupFunction<
-    Uint32 Function(IntPtr hdc, Uint32 color),
+    Uint32 Function(HDC hdc, Uint32 color),
     int Function(int hdc, int color)>('SetTextColor');
 
 /// The SetViewportExtEx function sets the horizontal and vertical extents
@@ -1361,7 +1350,7 @@ int SetViewportExtEx(int hdc, int x, int y, Pointer<SIZE> lpsz) =>
     _SetViewportExtEx(hdc, x, y, lpsz);
 
 final _SetViewportExtEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz),
     int Function(
         int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetViewportExtEx');
 
@@ -1381,7 +1370,7 @@ int SetViewportOrgEx(int hdc, int x, int y, Pointer<POINT> lppt) =>
     _SetViewportOrgEx(hdc, x, y, lppt);
 
 final _SetViewportOrgEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
     int Function(
         int hdc, int x, int y, Pointer<POINT> lppt)>('SetViewportOrgEx');
 
@@ -1401,7 +1390,7 @@ int SetWindowExtEx(int hdc, int x, int y, Pointer<SIZE> lpsz) =>
     _SetWindowExtEx(hdc, x, y, lpsz);
 
 final _SetWindowExtEx = _gdi32.lookupFunction<
-    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz),
     int Function(int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetWindowExtEx');
 
 /// The StretchBlt function copies a bitmap from a source rectangle into a
@@ -1433,12 +1422,12 @@ int StretchBlt(int hdcDest, int xDest, int yDest, int wDest, int hDest,
 
 final _StretchBlt = _gdi32.lookupFunction<
     Int32 Function(
-        IntPtr hdcDest,
+        HDC hdcDest,
         Int32 xDest,
         Int32 yDest,
         Int32 wDest,
         Int32 hDest,
-        IntPtr hdcSrc,
+        HDC hdcSrc,
         Int32 xSrc,
         Int32 ySrc,
         Int32 wSrc,
@@ -1502,7 +1491,7 @@ int StretchDIBits(
 
 final _StretchDIBits = _gdi32.lookupFunction<
     Int32 Function(
-        IntPtr hdc,
+        HDC hdc,
         Int32 xDest,
         Int32 yDest,
         Int32 DestWidth,
@@ -1543,7 +1532,7 @@ final _StretchDIBits = _gdi32.lookupFunction<
 int StrokeAndFillPath(int hdc) => _StrokeAndFillPath(hdc);
 
 final _StrokeAndFillPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'StrokeAndFillPath');
 
 /// The StrokePath function renders the specified path by using the current
@@ -1558,7 +1547,7 @@ final _StrokeAndFillPath =
 int StrokePath(int hdc) => _StrokePath(hdc);
 
 final _StrokePath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'StrokePath');
 
 /// The TextOut function writes a character string at the specified
@@ -1579,8 +1568,7 @@ int TextOut(int hdc, int x, int y, Pointer<Utf16> lpString, int c) =>
     _TextOut(hdc, x, y, lpString, c);
 
 final _TextOut = _gdi32.lookupFunction<
-    Int32 Function(
-        IntPtr hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c),
+    Int32 Function(HDC hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c),
     int Function(
         int hdc, int x, int y, Pointer<Utf16> lpString, int c)>('TextOutW');
 
@@ -1597,5 +1585,5 @@ final _TextOut = _gdi32.lookupFunction<
 int WidenPath(int hdc) => _WidenPath(hdc);
 
 final _WidenPath =
-    _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+    _gdi32.lookupFunction<Int32 Function(HDC hdc), int Function(int hdc)>(
         'WidenPath');

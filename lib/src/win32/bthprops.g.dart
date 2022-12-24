@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
@@ -47,8 +48,8 @@ int BluetoothAuthenticateDeviceEx(
 
 final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
     Uint32 Function(
-        IntPtr hwndParentIn,
-        IntPtr hRadioIn,
+        HWND hwndParentIn,
+        HANDLE hRadioIn,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
         Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
         Int32 authenticationRequirement),
@@ -74,6 +75,6 @@ int BluetoothDisplayDeviceProperties(
     _BluetoothDisplayDeviceProperties(hwndParent, pbtdi);
 
 final _BluetoothDisplayDeviceProperties = _bthprops.lookupFunction<
-        Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+        Int32 Function(HWND hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
         int Function(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
     'BluetoothDisplayDeviceProperties');

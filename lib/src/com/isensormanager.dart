@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../guid.dart';
 import '../macros.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../utils.dart';
 import '../variant.dart';
 import '../win32/ole32.g.dart';
@@ -97,7 +98,7 @@ class ISensorManager extends IUnknown {
           .cast<
               Pointer<
                   NativeFunction<
-                      Int32 Function(Pointer, IntPtr hParent,
+                      Int32 Function(Pointer, HWND hParent,
                           Pointer<COMObject> pSensors, Int32 fModal)>>>()
           .value
           .asFunction<

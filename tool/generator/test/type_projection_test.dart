@@ -30,7 +30,7 @@ void main() {
     final param = api!.parameters.first.typeIdentifier; // HWND
 
     final typeProjection = TypeProjection(param);
-    expect(typeProjection.nativeType, equals('IntPtr'));
+    expect(typeProjection.nativeType, equals('HWND'));
     expect(typeProjection.dartType, equals('int'));
   });
 
@@ -91,8 +91,8 @@ void main() {
     final param = api!.parameters.last.typeIdentifier;
     final typeProjection = TypeProjection(param);
 
-    expect(typeProjection.nativeType, equals('Pointer<IntPtr>'));
-    expect(typeProjection.dartType, equals('Pointer<IntPtr>'));
+    expect(typeProjection.nativeType, equals('Pointer<HWND>'));
+    expect(typeProjection.dartType, equals('Pointer<HWND>'));
   });
 
   test('Unicode string w/ double pointer', () {
@@ -340,7 +340,7 @@ void main() {
     expect(returnType.name, equals('Windows.Win32.Foundation.HANDLE'));
 
     final projection = TypeProjection(returnType);
-    expect(projection.nativeType, equals('IntPtr'));
+    expect(projection.nativeType, equals('HANDLE'));
     expect(projection.dartType, equals('int'));
   });
 

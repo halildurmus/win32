@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _api_ms_win_wsl_api_l1_1_0 =
@@ -130,7 +131,7 @@ int WslLaunch(
         int stdIn,
         int stdOut,
         int stdErr,
-        Pointer<IntPtr> process) =>
+        Pointer<HANDLE> process) =>
     _WslLaunch(distributionName, command, useCurrentWorkingDirectory, stdIn,
         stdOut, stdErr, process);
 
@@ -139,10 +140,10 @@ final _WslLaunch = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
         Int32 useCurrentWorkingDirectory,
-        IntPtr stdIn,
-        IntPtr stdOut,
-        IntPtr stdErr,
-        Pointer<IntPtr> process),
+        HANDLE stdIn,
+        HANDLE stdOut,
+        HANDLE stdErr,
+        Pointer<HANDLE> process),
     int Function(
         Pointer<Utf16> distributionName,
         Pointer<Utf16> command,
@@ -150,7 +151,7 @@ final _WslLaunch = _api_ms_win_wsl_api_l1_1_0.lookupFunction<
         int stdIn,
         int stdOut,
         int stdErr,
-        Pointer<IntPtr> process)>('WslLaunch');
+        Pointer<HANDLE> process)>('WslLaunch');
 
 /// Launches an interactive Windows Subsystem for Linux (WSL) process in the
 /// context of a particular distribution.This differs from WslLaunch in that

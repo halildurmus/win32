@@ -17,6 +17,7 @@ import '../callbacks.dart';
 import '../combase.dart';
 import '../guid.dart';
 import '../structs.g.dart';
+import '../types.dart';
 import '../variant.dart';
 
 final _winspool = DynamicLibrary.open('winspool.drv');
@@ -32,7 +33,7 @@ final _winspool = DynamicLibrary.open('winspool.drv');
 /// {@category winspool}
 int AbortPrinter(int hPrinter) => _AbortPrinter(hPrinter);
 
-final _AbortPrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+final _AbortPrinter = _winspool.lookupFunction<Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('AbortPrinter');
 
 /// The AddForm function adds a form to the list of available forms that can
@@ -50,7 +51,7 @@ int AddForm(int hPrinter, int Level, Pointer<Uint8> pForm) =>
     _AddForm(hPrinter, Level, pForm);
 
 final _AddForm = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm),
+    Int32 Function(HANDLE hPrinter, Uint32 Level, Pointer<Uint8> pForm),
     int Function(int hPrinter, int Level, Pointer<Uint8> pForm)>('AddFormW');
 
 /// The AddJob function adds a print job to the list of print jobs that can
@@ -72,7 +73,7 @@ int AddJob(int hPrinter, int Level, Pointer<Uint8> pData, int cbBuf,
     _AddJob(hPrinter, Level, pData, cbBuf, pcbNeeded);
 
 final _AddJob = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pData,
+    Int32 Function(HANDLE hPrinter, Uint32 Level, Pointer<Uint8> pData,
         Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
     int Function(int hPrinter, int Level, Pointer<Uint8> pData, int cbBuf,
         Pointer<Uint32> pcbNeeded)>('AddJobW');
@@ -92,7 +93,7 @@ int AddPrinter(Pointer<Utf16> pName, int Level, Pointer<Uint8> pPrinter) =>
     _AddPrinter(pName, Level, pPrinter);
 
 final _AddPrinter = _winspool.lookupFunction<
-    IntPtr Function(
+    HANDLE Function(
         Pointer<Utf16> pName, Uint32 Level, Pointer<Uint8> pPrinter),
     int Function(Pointer<Utf16> pName, int Level,
         Pointer<Uint8> pPrinter)>('AddPrinterW');
@@ -129,7 +130,7 @@ int AddPrinterConnection2(int hWnd, Pointer<Utf16> pszName, int dwLevel,
     _AddPrinterConnection2(hWnd, pszName, dwLevel, pConnectionInfo);
 
 final _AddPrinterConnection2 = _winspool.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<Utf16> pszName, Uint32 dwLevel,
+    Int32 Function(HWND hWnd, Pointer<Utf16> pszName, Uint32 dwLevel,
         Pointer pConnectionInfo),
     int Function(int hWnd, Pointer<Utf16> pszName, int dwLevel,
         Pointer pConnectionInfo)>('AddPrinterConnection2W');
@@ -158,7 +159,7 @@ int AdvancedDocumentProperties(
         hWnd, hPrinter, pDeviceName, pDevModeOutput, pDevModeInput);
 
 final _AdvancedDocumentProperties = _winspool.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hPrinter, Pointer<Utf16> pDeviceName,
+    Int32 Function(HWND hWnd, HANDLE hPrinter, Pointer<Utf16> pDeviceName,
         Pointer<DEVMODE> pDevModeOutput, Pointer<DEVMODE> pDevModeInput),
     int Function(
         int hWnd,
@@ -177,7 +178,7 @@ final _AdvancedDocumentProperties = _winspool.lookupFunction<
 /// {@category winspool}
 int ClosePrinter(int hPrinter) => _ClosePrinter(hPrinter);
 
-final _ClosePrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+final _ClosePrinter = _winspool.lookupFunction<Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('ClosePrinter');
 
 /// The CloseSpoolFileHandle function closes a handle to a spool file
@@ -194,7 +195,7 @@ int CloseSpoolFileHandle(int hPrinter, int hSpoolFile) =>
     _CloseSpoolFileHandle(hPrinter, hSpoolFile);
 
 final _CloseSpoolFileHandle = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, IntPtr hSpoolFile),
+    Int32 Function(HANDLE hPrinter, HANDLE hSpoolFile),
     int Function(int hPrinter, int hSpoolFile)>('CloseSpoolFileHandle');
 
 /// The CommitSpoolData function notifies the print spooler that a specified
@@ -213,7 +214,7 @@ int CommitSpoolData(int hPrinter, int hSpoolFile, int cbCommit) =>
     _CommitSpoolData(hPrinter, hSpoolFile, cbCommit);
 
 final _CommitSpoolData = _winspool.lookupFunction<
-    IntPtr Function(IntPtr hPrinter, IntPtr hSpoolFile, Uint32 cbCommit),
+    HANDLE Function(HANDLE hPrinter, HANDLE hSpoolFile, Uint32 cbCommit),
     int Function(
         int hPrinter, int hSpoolFile, int cbCommit)>('CommitSpoolData');
 
@@ -232,7 +233,7 @@ int ConfigurePort(Pointer<Utf16> pName, int hWnd, Pointer<Utf16> pPortName) =>
     _ConfigurePort(pName, hWnd, pPortName);
 
 final _ConfigurePort = _winspool.lookupFunction<
-    Int32 Function(Pointer<Utf16> pName, IntPtr hWnd, Pointer<Utf16> pPortName),
+    Int32 Function(Pointer<Utf16> pName, HWND hWnd, Pointer<Utf16> pPortName),
     int Function(Pointer<Utf16> pName, int hWnd,
         Pointer<Utf16> pPortName)>('ConfigurePortW');
 
@@ -253,7 +254,7 @@ int ConnectToPrinterDlg(int hwnd, int Flags) =>
     _ConnectToPrinterDlg(hwnd, Flags);
 
 final _ConnectToPrinterDlg = _winspool.lookupFunction<
-    IntPtr Function(IntPtr hwnd, Uint32 Flags),
+    HANDLE Function(HWND hwnd, Uint32 Flags),
     int Function(int hwnd, int Flags)>('ConnectToPrinterDlg');
 
 /// The DeleteForm function removes a form name from the list of supported
@@ -270,7 +271,7 @@ int DeleteForm(int hPrinter, Pointer<Utf16> pFormName) =>
     _DeleteForm(hPrinter, pFormName);
 
 final _DeleteForm = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName),
+    Int32 Function(HANDLE hPrinter, Pointer<Utf16> pFormName),
     int Function(int hPrinter, Pointer<Utf16> pFormName)>('DeleteFormW');
 
 /// The DeletePrinter function deletes the specified printer object.
@@ -283,7 +284,7 @@ final _DeleteForm = _winspool.lookupFunction<
 /// {@category winspool}
 int DeletePrinter(int hPrinter) => _DeletePrinter(hPrinter);
 
-final _DeletePrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+final _DeletePrinter = _winspool.lookupFunction<Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('DeletePrinter');
 
 /// The DeletePrinterConnection function deletes a connection to a printer
@@ -319,7 +320,7 @@ int DeletePrinterData(int hPrinter, Pointer<Utf16> pValueName) =>
     _DeletePrinterData(hPrinter, pValueName);
 
 final _DeletePrinterData = _winspool.lookupFunction<
-    Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pValueName),
+    Uint32 Function(HANDLE hPrinter, Pointer<Utf16> pValueName),
     int Function(
         int hPrinter, Pointer<Utf16> pValueName)>('DeletePrinterDataW');
 
@@ -343,7 +344,7 @@ int DeletePrinterDataEx(
 
 final _DeletePrinterDataEx = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter, Pointer<Utf16> pKeyName, Pointer<Utf16> pValueName),
+        HANDLE hPrinter, Pointer<Utf16> pKeyName, Pointer<Utf16> pValueName),
     int Function(int hPrinter, Pointer<Utf16> pKeyName,
         Pointer<Utf16> pValueName)>('DeletePrinterDataExW');
 
@@ -361,7 +362,7 @@ int DeletePrinterKey(int hPrinter, Pointer<Utf16> pKeyName) =>
     _DeletePrinterKey(hPrinter, pKeyName);
 
 final _DeletePrinterKey = _winspool.lookupFunction<
-    Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pKeyName),
+    Uint32 Function(HANDLE hPrinter, Pointer<Utf16> pKeyName),
     int Function(int hPrinter, Pointer<Utf16> pKeyName)>('DeletePrinterKeyW');
 
 /// The DocumentProperties function retrieves or modifies printer
@@ -391,8 +392,8 @@ int DocumentProperties(
 
 final _DocumentProperties = _winspool.lookupFunction<
     Int32 Function(
-        IntPtr hWnd,
-        IntPtr hPrinter,
+        HWND hWnd,
+        HANDLE hPrinter,
         Pointer<Utf16> pDeviceName,
         Pointer<DEVMODE> pDevModeOutput,
         Pointer<DEVMODE> pDevModeInput,
@@ -415,7 +416,7 @@ final _DocumentProperties = _winspool.lookupFunction<
 /// {@category winspool}
 int EndDocPrinter(int hPrinter) => _EndDocPrinter(hPrinter);
 
-final _EndDocPrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
+final _EndDocPrinter = _winspool.lookupFunction<Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('EndDocPrinter');
 
 /// The EndPagePrinter function notifies the print spooler that the
@@ -430,7 +431,7 @@ final _EndDocPrinter = _winspool.lookupFunction<Int32 Function(IntPtr hPrinter),
 int EndPagePrinter(int hPrinter) => _EndPagePrinter(hPrinter);
 
 final _EndPagePrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+    Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('EndPagePrinter');
 
 /// The EnumForms function enumerates the forms supported by the specified
@@ -452,7 +453,7 @@ int EnumForms(int hPrinter, int Level, Pointer<Uint8> pForm, int cbBuf,
     _EnumForms(hPrinter, Level, pForm, cbBuf, pcbNeeded, pcReturned);
 
 final _EnumForms = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pForm,
+    Int32 Function(HANDLE hPrinter, Uint32 Level, Pointer<Uint8> pForm,
         Uint32 cbBuf, Pointer<Uint32> pcbNeeded, Pointer<Uint32> pcReturned),
     int Function(int hPrinter, int Level, Pointer<Uint8> pForm, int cbBuf,
         Pointer<Uint32> pcbNeeded, Pointer<Uint32> pcReturned)>('EnumFormsW');
@@ -487,7 +488,7 @@ int EnumJobs(
 
 final _EnumJobs = _winspool.lookupFunction<
     Int32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Uint32 FirstJob,
         Uint32 NoJobs,
         Uint32 Level,
@@ -537,7 +538,7 @@ int EnumPrinterData(
 
 final _EnumPrinterData = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Uint32 dwIndex,
         Pointer<Utf16> pValueName,
         Uint32 cbValueName,
@@ -583,7 +584,7 @@ int EnumPrinterDataEx(
 
 final _EnumPrinterDataEx = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Pointer<Utf16> pKeyName,
         Pointer<Uint8> pEnumValues,
         Uint32 cbEnumValues,
@@ -615,7 +616,7 @@ int EnumPrinterKey(int hPrinter, Pointer<Utf16> pKeyName,
     _EnumPrinterKey(hPrinter, pKeyName, pSubkey, cbSubkey, pcbSubkey);
 
 final _EnumPrinterKey = _winspool.lookupFunction<
-    Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pKeyName,
+    Uint32 Function(HANDLE hPrinter, Pointer<Utf16> pKeyName,
         Pointer<Utf16> pSubkey, Uint32 cbSubkey, Pointer<Uint32> pcbSubkey),
     int Function(int hPrinter, Pointer<Utf16> pKeyName, Pointer<Utf16> pSubkey,
         int cbSubkey, Pointer<Uint32> pcbSubkey)>('EnumPrinterKeyW');
@@ -680,7 +681,7 @@ int FindClosePrinterChangeNotification(int hChange) =>
     _FindClosePrinterChangeNotification(hChange);
 
 final _FindClosePrinterChangeNotification = _winspool.lookupFunction<
-    Int32 Function(IntPtr hChange),
+    Int32 Function(HANDLE hChange),
     int Function(int hChange)>('FindClosePrinterChangeNotification');
 
 /// The FindFirstPrinterChangeNotification function creates a change
@@ -703,7 +704,7 @@ int FindFirstPrinterChangeNotification(int hPrinter, int fdwFilter,
         hPrinter, fdwFilter, fdwOptions, pPrinterNotifyOptions);
 
 final _FindFirstPrinterChangeNotification = _winspool.lookupFunction<
-    IntPtr Function(IntPtr hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
+    HANDLE Function(HANDLE hPrinter, Uint32 fdwFilter, Uint32 fdwOptions,
         Pointer pPrinterNotifyOptions),
     int Function(int hPrinter, int fdwFilter, int fdwOptions,
         Pointer pPrinterNotifyOptions)>('FindFirstPrinterChangeNotification');
@@ -728,7 +729,7 @@ int FindNextPrinterChangeNotification(int hChange, Pointer<Uint32> pdwChange,
         hChange, pdwChange, pvReserved, ppPrinterNotifyInfo);
 
 final _FindNextPrinterChangeNotification = _winspool.lookupFunction<
-        Int32 Function(IntPtr hChange, Pointer<Uint32> pdwChange,
+        Int32 Function(HANDLE hChange, Pointer<Uint32> pdwChange,
             Pointer pvReserved, Pointer<Pointer> ppPrinterNotifyInfo),
         int Function(int hChange, Pointer<Uint32> pdwChange, Pointer pvReserved,
             Pointer<Pointer> ppPrinterNotifyInfo)>(
@@ -752,7 +753,7 @@ int FlushPrinter(int hPrinter, Pointer pBuf, int cbBuf,
     _FlushPrinter(hPrinter, pBuf, cbBuf, pcWritten, cSleep);
 
 final _FlushPrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+    Int32 Function(HANDLE hPrinter, Pointer pBuf, Uint32 cbBuf,
         Pointer<Uint32> pcWritten, Uint32 cSleep),
     int Function(int hPrinter, Pointer pBuf, int cbBuf,
         Pointer<Uint32> pcWritten, int cSleep)>('FlushPrinter');
@@ -810,7 +811,7 @@ int GetForm(int hPrinter, Pointer<Utf16> pFormName, int Level,
     _GetForm(hPrinter, pFormName, Level, pForm, cbBuf, pcbNeeded);
 
 final _GetForm = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName, Uint32 Level,
+    Int32 Function(HANDLE hPrinter, Pointer<Utf16> pFormName, Uint32 Level,
         Pointer<Uint8> pForm, Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
     int Function(
         int hPrinter,
@@ -838,7 +839,7 @@ int GetJob(int hPrinter, int JobId, int Level, Pointer<Uint8> pJob, int cbBuf,
     _GetJob(hPrinter, JobId, Level, pJob, cbBuf, pcbNeeded);
 
 final _GetJob = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 JobId, Uint32 Level,
+    Int32 Function(HANDLE hPrinter, Uint32 JobId, Uint32 Level,
         Pointer<Uint8> pJob, Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
     int Function(int hPrinter, int JobId, int Level, Pointer<Uint8> pJob,
         int cbBuf, Pointer<Uint32> pcbNeeded)>('GetJobW');
@@ -860,7 +861,7 @@ int GetPrinter(int hPrinter, int Level, Pointer<Uint8> pPrinter, int cbBuf,
     _GetPrinter(hPrinter, Level, pPrinter, cbBuf, pcbNeeded);
 
 final _GetPrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pPrinter,
+    Int32 Function(HANDLE hPrinter, Uint32 Level, Pointer<Uint8> pPrinter,
         Uint32 cbBuf, Pointer<Uint32> pcbNeeded),
     int Function(int hPrinter, int Level, Pointer<Uint8> pPrinter, int cbBuf,
         Pointer<Uint32> pcbNeeded)>('GetPrinterW');
@@ -890,7 +891,7 @@ int GetPrinterData(
 
 final _GetPrinterData = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Pointer<Utf16> pValueName,
         Pointer<Uint32> pType,
         Pointer<Uint8> pData,
@@ -935,7 +936,7 @@ int GetPrinterDataEx(
 
 final _GetPrinterDataEx = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Pointer<Utf16> pKeyName,
         Pointer<Utf16> pValueName,
         Pointer<Uint32> pType,
@@ -978,7 +979,7 @@ final _GetPrintExecutionData = _winspool.lookupFunction<
 int GetSpoolFileHandle(int hPrinter) => _GetSpoolFileHandle(hPrinter);
 
 final _GetSpoolFileHandle = _winspool.lookupFunction<
-    IntPtr Function(IntPtr hPrinter),
+    HANDLE Function(HANDLE hPrinter),
     int Function(int hPrinter)>('GetSpoolFileHandle');
 
 /// The IsValidDevmode function verifies that the contents of a DEVMODE
@@ -1010,14 +1011,14 @@ final _IsValidDevmode = _winspool.lookupFunction<
 /// );
 /// ```
 /// {@category winspool}
-int OpenPrinter(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+int OpenPrinter(Pointer<Utf16> pPrinterName, Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault) =>
     _OpenPrinter(pPrinterName, phPrinter, pDefault);
 
 final _OpenPrinter = _winspool.lookupFunction<
-    Int32 Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+    Int32 Function(Pointer<Utf16> pPrinterName, Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault),
-    int Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+    int Function(Pointer<Utf16> pPrinterName, Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault)>('OpenPrinterW');
 
 /// Retrieves a handle to the specified printer, print server, or other
@@ -1035,17 +1036,17 @@ final _OpenPrinter = _winspool.lookupFunction<
 /// {@category winspool}
 int OpenPrinter2(
         Pointer<Utf16> pPrinterName,
-        Pointer<IntPtr> phPrinter,
+        Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault,
         Pointer<PRINTER_OPTIONS> pOptions) =>
     _OpenPrinter2(pPrinterName, phPrinter, pDefault, pOptions);
 
 final _OpenPrinter2 = _winspool.lookupFunction<
-    Int32 Function(Pointer<Utf16> pPrinterName, Pointer<IntPtr> phPrinter,
+    Int32 Function(Pointer<Utf16> pPrinterName, Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault, Pointer<PRINTER_OPTIONS> pOptions),
     int Function(
         Pointer<Utf16> pPrinterName,
-        Pointer<IntPtr> phPrinter,
+        Pointer<HANDLE> phPrinter,
         Pointer<PRINTER_DEFAULTS> pDefault,
         Pointer<PRINTER_OPTIONS> pOptions)>('OpenPrinter2W');
 
@@ -1063,7 +1064,7 @@ int PrinterProperties(int hWnd, int hPrinter) =>
     _PrinterProperties(hWnd, hPrinter);
 
 final _PrinterProperties = _winspool.lookupFunction<
-    Int32 Function(IntPtr hWnd, IntPtr hPrinter),
+    Int32 Function(HWND hWnd, HANDLE hPrinter),
     int Function(int hWnd, int hPrinter)>('PrinterProperties');
 
 /// The ReadPrinter function retrieves data from the specified printer.
@@ -1082,7 +1083,7 @@ int ReadPrinter(
     _ReadPrinter(hPrinter, pBuf, cbBuf, pNoBytesRead);
 
 final _ReadPrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf,
+    Int32 Function(HANDLE hPrinter, Pointer pBuf, Uint32 cbBuf,
         Pointer<Uint32> pNoBytesRead),
     int Function(int hPrinter, Pointer pBuf, int cbBuf,
         Pointer<Uint32> pNoBytesRead)>('ReadPrinter');
@@ -1106,7 +1107,7 @@ int ReportJobProcessingProgress(
         printerHandle, jobId, jobOperation, jobProgress);
 
 final _ReportJobProcessingProgress = _winspool.lookupFunction<
-    Int32 Function(IntPtr printerHandle, Uint32 jobId, Int32 jobOperation,
+    Int32 Function(HANDLE printerHandle, Uint32 jobId, Int32 jobOperation,
         Int32 jobProgress),
     int Function(int printerHandle, int jobId, int jobOperation,
         int jobProgress)>('ReportJobProcessingProgress');
@@ -1127,7 +1128,7 @@ int ResetPrinter(int hPrinter, Pointer<PRINTER_DEFAULTS> pDefault) =>
     _ResetPrinter(hPrinter, pDefault);
 
 final _ResetPrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer<PRINTER_DEFAULTS> pDefault),
+    Int32 Function(HANDLE hPrinter, Pointer<PRINTER_DEFAULTS> pDefault),
     int Function(
         int hPrinter, Pointer<PRINTER_DEFAULTS> pDefault)>('ResetPrinterW');
 
@@ -1144,7 +1145,7 @@ final _ResetPrinter = _winspool.lookupFunction<
 int ScheduleJob(int hPrinter, int JobId) => _ScheduleJob(hPrinter, JobId);
 
 final _ScheduleJob = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 JobId),
+    Int32 Function(HANDLE hPrinter, Uint32 JobId),
     int Function(int hPrinter, int JobId)>('ScheduleJob');
 
 /// The SetDefaultPrinter function sets the printer name of the default
@@ -1180,7 +1181,7 @@ int SetForm(int hPrinter, Pointer<Utf16> pFormName, int Level,
     _SetForm(hPrinter, pFormName, Level, pForm);
 
 final _SetForm = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Pointer<Utf16> pFormName, Uint32 Level,
+    Int32 Function(HANDLE hPrinter, Pointer<Utf16> pFormName, Uint32 Level,
         Pointer<Uint8> pForm),
     int Function(int hPrinter, Pointer<Utf16> pFormName, int Level,
         Pointer<Uint8> pForm)>('SetFormW');
@@ -1204,7 +1205,7 @@ int SetJob(
     _SetJob(hPrinter, JobId, Level, pJob, Command);
 
 final _SetJob = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter, Uint32 JobId, Uint32 Level,
+    Int32 Function(HANDLE hPrinter, Uint32 JobId, Uint32 Level,
         Pointer<Uint8> pJob, Uint32 Command),
     int Function(int hPrinter, int JobId, int Level, Pointer<Uint8> pJob,
         int Command)>('SetJobW');
@@ -1248,7 +1249,7 @@ int SetPrinter(int hPrinter, int Level, Pointer<Uint8> pPrinter, int Command) =>
 
 final _SetPrinter = _winspool.lookupFunction<
     Int32 Function(
-        IntPtr hPrinter, Uint32 Level, Pointer<Uint8> pPrinter, Uint32 Command),
+        HANDLE hPrinter, Uint32 Level, Pointer<Uint8> pPrinter, Uint32 Command),
     int Function(int hPrinter, int Level, Pointer<Uint8> pPrinter,
         int Command)>('SetPrinterW');
 
@@ -1270,7 +1271,7 @@ int SetPrinterData(int hPrinter, Pointer<Utf16> pValueName, int Type,
     _SetPrinterData(hPrinter, pValueName, Type, pData, cbData);
 
 final _SetPrinterData = _winspool.lookupFunction<
-    Uint32 Function(IntPtr hPrinter, Pointer<Utf16> pValueName, Uint32 Type,
+    Uint32 Function(HANDLE hPrinter, Pointer<Utf16> pValueName, Uint32 Type,
         Pointer<Uint8> pData, Uint32 cbData),
     int Function(int hPrinter, Pointer<Utf16> pValueName, int Type,
         Pointer<Uint8> pData, int cbData)>('SetPrinterDataW');
@@ -1301,7 +1302,7 @@ int SetPrinterDataEx(
 
 final _SetPrinterDataEx = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter,
+        HANDLE hPrinter,
         Pointer<Utf16> pKeyName,
         Pointer<Utf16> pValueName,
         Uint32 Type,
@@ -1331,7 +1332,7 @@ int StartDocPrinter(int hPrinter, int Level, Pointer<DOC_INFO_1> pDocInfo) =>
 
 final _StartDocPrinter = _winspool.lookupFunction<
     Uint32 Function(
-        IntPtr hPrinter, Uint32 Level, Pointer<DOC_INFO_1> pDocInfo),
+        HANDLE hPrinter, Uint32 Level, Pointer<DOC_INFO_1> pDocInfo),
     int Function(int hPrinter, int Level,
         Pointer<DOC_INFO_1> pDocInfo)>('StartDocPrinterW');
 
@@ -1347,7 +1348,7 @@ final _StartDocPrinter = _winspool.lookupFunction<
 int StartPagePrinter(int hPrinter) => _StartPagePrinter(hPrinter);
 
 final _StartPagePrinter = _winspool.lookupFunction<
-    Int32 Function(IntPtr hPrinter),
+    Int32 Function(HANDLE hPrinter),
     int Function(int hPrinter)>('StartPagePrinter');
 
 /// The WritePrinter function notifies the print spooler that data should be
@@ -1368,6 +1369,6 @@ int WritePrinter(
 
 final _WritePrinter = _winspool.lookupFunction<
     Int32 Function(
-        IntPtr hPrinter, Pointer pBuf, Uint32 cbBuf, Pointer<Uint32> pcWritten),
+        HANDLE hPrinter, Pointer pBuf, Uint32 cbBuf, Pointer<Uint32> pcWritten),
     int Function(int hPrinter, Pointer pBuf, int cbBuf,
         Pointer<Uint32> pcWritten)>('WritePrinter');
