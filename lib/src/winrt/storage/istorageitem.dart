@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -21,6 +22,7 @@ import '../../winrt_callbacks.dart';
 import '../../winrt_helpers.dart';
 import '../foundation/iasyncaction.dart';
 import '../foundation/iasyncoperation.dart';
+import '../internal/async_helpers.dart';
 import '../internal/hstring_array.dart';
 import 'enums.g.dart';
 import 'fileproperties/basicproperties.dart';
@@ -40,8 +42,9 @@ class IStorageItem extends IInspectable {
   factory IStorageItem.from(IInspectable interface) =>
       IStorageItem.fromRawPointer(interface.toInterface(IID_IStorageItem));
 
-  Pointer<COMObject> renameAsyncOverloadDefaultOptions(String desiredName) {
+  Future<void> renameAsyncOverloadDefaultOptions(String desiredName) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<void>();
     final desiredNameHstring = convertToHString(desiredName);
 
     final hr = ptr.ref.vtable
@@ -63,12 +66,15 @@ class IStorageItem extends IInspectable {
 
     WindowsDeleteString(desiredNameHstring);
 
-    return retValuePtr;
+    final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
+    unawaited(completeAsyncAction(asyncAction, completer));
+
+    return completer.future;
   }
 
-  Pointer<COMObject> renameAsync(
-      String desiredName, NameCollisionOption option) {
+  Future<void> renameAsync(String desiredName, NameCollisionOption option) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<void>();
     final desiredNameHstring = convertToHString(desiredName);
 
     final hr =
@@ -92,11 +98,15 @@ class IStorageItem extends IInspectable {
 
     WindowsDeleteString(desiredNameHstring);
 
-    return retValuePtr;
+    final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
+    unawaited(completeAsyncAction(asyncAction, completer));
+
+    return completer.future;
   }
 
-  Pointer<COMObject> deleteAsyncOverloadDefaultOptions() {
+  Future<void> deleteAsyncOverloadDefaultOptions() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<void>();
 
     final hr = ptr.ref.vtable
             .elementAt(8)
@@ -113,11 +123,15 @@ class IStorageItem extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
+    unawaited(completeAsyncAction(asyncAction, completer));
+
+    return completer.future;
   }
 
-  Pointer<COMObject> deleteAsync(StorageDeleteOption option) {
+  Future<void> deleteAsync(StorageDeleteOption option) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<void>();
 
     final hr = ptr.ref.vtable
             .elementAt(9)
@@ -136,11 +150,15 @@ class IStorageItem extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
+    unawaited(completeAsyncAction(asyncAction, completer));
+
+    return completer.future;
   }
 
-  Pointer<COMObject> getBasicPropertiesAsync() {
+  Future<BasicProperties?> getBasicPropertiesAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<BasicProperties?>();
 
     final hr = ptr.ref.vtable
             .elementAt(10)
@@ -157,7 +175,13 @@ class IStorageItem extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation = IAsyncOperation<BasicProperties?>.fromRawPointer(
+        retValuePtr,
+        creator: BasicProperties.fromRawPointer);
+    unawaited(completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults));
+
+    return completer.future;
   }
 
   String get name {
