@@ -374,6 +374,21 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
     return '$parentTypeName<$firstArg, $secondArg$questionMark>';
   }
 
+  final isAsyncOperation = parentTypeName == 'IAsyncOperation';
+  if (isAsyncOperation) {
+    final typeArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
+    final typeProjection = TypeProjection(typeIdentifier.typeArg!);
+    final typeArgIsNullable =
+        // Collection interfaces cannot return null.
+        !typeArg.startsWith(RegExp(r'(IMap|IVector)')) &&
+            // Primitives cannot return null.
+            !['bool', 'double', 'int', 'String'].contains(typeArg) &&
+            // Value types (enums and structs) cannot return null.
+            !typeProjection.isWrappedValueType;
+    final questionMark = typeArgIsNullable ? '?' : '';
+    return 'IAsyncOperation<$typeArg$questionMark>';
+  }
+
   return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';
 }
 
