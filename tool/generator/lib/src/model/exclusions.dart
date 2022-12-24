@@ -43,6 +43,7 @@ const excludedWindowsRuntimeTypes = <String>{
   ...excludedWindowsRuntimeStaticInterfaces,
 
   // These types are generated manually by design
+  'Windows.Foundation.IAsyncOperation`1',
   'Windows.Foundation.Collections.IIterable`1',
   'Windows.Foundation.Collections.IIterator`1',
   'Windows.Foundation.Collections.IKeyValuePair`2',
@@ -62,8 +63,6 @@ const excludedWindowsRuntimeTypes = <String>{
   'Windows.Devices.Enumeration.DevicePicker',
 
   //   Requires WinRT delegate support
-  'Windows.Foundation.IAsyncAction',
-  'Windows.Foundation.IAsyncOperation`1',
   'Windows.Storage.ApplicationData',
 
   //   Requires WinRT event support
