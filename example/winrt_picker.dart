@@ -18,7 +18,7 @@ void main() async {
   // Use GetShellWindow() for Flutter apps
   final hwnd = GetConsoleWindow();
   // You can omit the 'hwnd' parameter on Flutter apps as GetShellWindow() is
-  // used by default.
+  // used by default if omitted.
   InitializeWithWindow.initialize(picker, hwnd);
 
   final pickedFile = await picker.pickSingleFileAsync();

@@ -10,19 +10,17 @@ import '../foundation/iasyncaction.dart';
 import '../foundation/iasyncinfo.dart';
 import '../foundation/iasyncoperation.dart';
 
-/// Completes [asyncAction] by polling its `status` property every `10`
-/// milliseconds until it completes.
+/// Completes the given [completer] by polling [asyncAction]'s `status` property
+/// every `10` milliseconds until the [asyncAction] completes.
 Future<void> completeAsyncAction(
   IAsyncAction asyncAction,
   Completer<void> completer,
 ) =>
     _completeAsyncFunction(asyncAction, completer, completer.complete);
 
-/// Completes [asyncOperation] by polling its `status` property every `10`
-/// milliseconds until the [asyncOperation] is completed.
-///
-/// [completer] is completed with the [value] function if the [asyncOperation]
-/// is completed successfully.
+/// Completes the given [completer] with the given [value] by polling
+/// [asyncOperation]'s `status` property every `10` milliseconds until the
+/// [asyncOperation] completes.
 Future<void> completeAsyncOperation<T, C>(
   IAsyncOperation<T> asyncOperation,
   Completer<C> completer,
