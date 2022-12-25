@@ -60,7 +60,7 @@ class IStorageFileStatics extends IInspectable {
 
     WindowsDeleteString(pathHstring);
 
-    final asyncOperation = IAsyncOperation<StorageFile>.fromRawPointer(
+    final asyncOperation = IAsyncOperation<StorageFile?>.fromRawPointer(
         retValuePtr,
         creator: StorageFile.fromRawPointer);
     unawaited(completeAsyncOperation(
