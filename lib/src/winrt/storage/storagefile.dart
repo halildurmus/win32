@@ -1,3 +1,9 @@
+// storagefile.dart
+
+// ignore_for_file: unused_import
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,8 +22,7 @@ import 'istorageitem.dart';
 /// {@category Class}
 /// {@category winrt}
 class StorageFile extends IInspectable implements IStorageFile, IStorageItem {
-  StorageFile({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  StorageFile() : super(ActivateClass(_className));
   StorageFile.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Storage.StorageFile';
