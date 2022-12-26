@@ -16,7 +16,7 @@ class WinRTMethodReturningAsyncActionProjection extends WinRTMethodProjection {
         $parametersPostamble
 
         final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-        unawaited(completeAsyncAction(asyncAction, completer));
+        completeAsyncAction(asyncAction, completer);
 
         return completer.future;
       }
@@ -85,8 +85,7 @@ class WinRTMethodReturningAsyncOperationProjection extends WinRTMethodProjection
 
         final asyncOperation = IAsyncOperation<$asyncOperationTypeArg>
             .fromRawPointer(retValuePtr$asyncOperationConstructorArgs);
-        unawaited(completeAsyncOperation(
-            asyncOperation, completer, $onCompleteCallback));
+        completeAsyncOperation(asyncOperation, completer, $onCompleteCallback);
 
         return completer.future;
       }

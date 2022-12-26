@@ -11,7 +11,7 @@ import '../foundation/iasyncinfo.dart';
 import '../foundation/iasyncoperation.dart';
 
 /// Completes the given [completer] when [asyncAction] completes.
-Future<void> completeAsyncAction(
+void completeAsyncAction(
   IAsyncAction asyncAction,
   Completer<void> completer,
 ) =>
@@ -21,7 +21,7 @@ Future<void> completeAsyncAction(
 ///
 /// If [asyncOperation] completes successfully, [completer] will be completed
 /// with the [value].
-Future<void> completeAsyncOperation<T, C>(
+void completeAsyncOperation<T, C>(
   IAsyncOperation<T> asyncOperation,
   Completer<C> completer,
   C Function() value,

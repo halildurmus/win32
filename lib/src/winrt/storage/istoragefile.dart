@@ -113,7 +113,7 @@ class IStorageFile extends IInspectable implements IStorageItem {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -144,7 +144,7 @@ class IStorageFile extends IInspectable implements IStorageItem {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+   completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }

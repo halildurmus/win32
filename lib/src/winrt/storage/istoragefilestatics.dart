@@ -63,8 +63,8 @@ class IStorageFileStatics extends IInspectable {
     final asyncOperation = IAsyncOperation<StorageFile?>.fromRawPointer(
         retValuePtr,
         creator: StorageFile.fromRawPointer);
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }
@@ -99,8 +99,8 @@ class IStorageFileStatics extends IInspectable {
     final asyncOperation = IAsyncOperation<StorageFile?>.fromRawPointer(
         retValuePtr,
         creator: StorageFile.fromRawPointer);
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }

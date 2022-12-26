@@ -174,8 +174,8 @@ class INetworkAdapter extends IInspectable {
     final asyncOperation = IAsyncOperation<ConnectionProfile?>.fromRawPointer(
         retValuePtr,
         creator: ConnectionProfile.fromRawPointer);
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }

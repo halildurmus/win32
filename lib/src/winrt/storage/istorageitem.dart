@@ -67,7 +67,7 @@ class IStorageItem extends IInspectable {
     WindowsDeleteString(desiredNameHstring);
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -99,7 +99,7 @@ class IStorageItem extends IInspectable {
     WindowsDeleteString(desiredNameHstring);
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -124,7 +124,7 @@ class IStorageItem extends IInspectable {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -151,7 +151,7 @@ class IStorageItem extends IInspectable {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -178,8 +178,8 @@ class IStorageItem extends IInspectable {
     final asyncOperation = IAsyncOperation<BasicProperties?>.fromRawPointer(
         retValuePtr,
         creator: BasicProperties.fromRawPointer);
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }

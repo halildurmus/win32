@@ -71,8 +71,8 @@ class IStorageItemExtraProperties extends IInspectable {
         IAsyncOperation<IMap<String, Object?>>.fromRawPointer(retValuePtr,
             creator: (Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr,
                 iterableIid: '{fe2f3d47-5d47-5499-8374-430c7cda0204}'));
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }
@@ -103,7 +103,7 @@ class IStorageItemExtraProperties extends IInspectable {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }
@@ -128,7 +128,7 @@ class IStorageItemExtraProperties extends IInspectable {
     }
 
     final asyncAction = IAsyncAction.fromRawPointer(retValuePtr);
-    unawaited(completeAsyncAction(asyncAction, completer));
+    completeAsyncAction(asyncAction, completer);
 
     return completer.future;
   }

@@ -229,8 +229,8 @@ class IFileOpenPicker extends IInspectable {
     final asyncOperation = IAsyncOperation<StorageFile?>.fromRawPointer(
         retValuePtr,
         creator: StorageFile.fromRawPointer);
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
 
     return completer.future;
   }
@@ -260,8 +260,8 @@ class IFileOpenPicker extends IInspectable {
             creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr,
                 creator: StorageFile.fromRawPointer,
                 iterableIid: '{9ac00304-83ea-5688-87b6-ae38aab65d0b}'));
-    unawaited(completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults().toList));
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults().toList);
 
     return completer.future;
   }
