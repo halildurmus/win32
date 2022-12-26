@@ -261,7 +261,7 @@ class IFileOpenPicker extends IInspectable {
                 creator: StorageFile.fromRawPointer,
                 iterableIid: '{9ac00304-83ea-5688-87b6-ae38aab65d0b}'));
     completeAsyncOperation(
-        asyncOperation, completer, asyncOperation.getResults().toList);
+        asyncOperation, completer, () => asyncOperation.getResults().toList());
 
     return completer.future;
   }

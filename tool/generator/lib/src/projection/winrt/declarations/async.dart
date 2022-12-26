@@ -54,11 +54,11 @@ mixin _AsyncOperationProjection on WinRTMethodProjection {
   }
 
   /// The function to call after the async operation is completed successfully.
-  String get onCompleteCallback {
+  String get onCompletedCallback {
     if (asyncOperationTypeArg.startsWith('IMapView')) {
-      return 'asyncOperation.getResults().toMap';
+      return '() => asyncOperation.getResults().toMap()';
     } else if (asyncOperationTypeArg.startsWith('IVectorView')) {
-      return 'asyncOperation.getResults().toList';
+      return '() => asyncOperation.getResults().toList()';
     } else if (asyncOperationTypeArg.startsWith('IReference')) {
       return '() => asyncOperation.getResults()?.value';
     }
@@ -85,7 +85,7 @@ class WinRTMethodReturningAsyncOperationProjection extends WinRTMethodProjection
 
         final asyncOperation = IAsyncOperation<$asyncOperationTypeArg>
             .fromRawPointer(retValuePtr$asyncOperationConstructorArgs);
-        completeAsyncOperation(asyncOperation, completer, $onCompleteCallback);
+        completeAsyncOperation(asyncOperation, completer, $onCompletedCallback);
 
         return completer.future;
       }
