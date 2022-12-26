@@ -10,27 +10,31 @@ import '../foundation/iasyncaction.dart';
 import '../foundation/iasyncinfo.dart';
 import '../foundation/iasyncoperation.dart';
 
-/// Completes the given [completer] by polling [asyncAction]'s `status` property
-/// every `10` milliseconds until the [asyncAction] completes.
+/// Completes the given [completer] when [asyncAction] completes.
 Future<void> completeAsyncAction(
   IAsyncAction asyncAction,
   Completer<void> completer,
 ) =>
-    _completeAsyncFunction(asyncAction, completer, completer.complete);
+    _completeAsyncDelegate(asyncAction, completer, completer.complete);
 
-/// Completes the given [completer] with the given [value] by polling
-/// [asyncOperation]'s `status` property every `10` milliseconds until the
-/// [asyncOperation] completes.
+/// Completes the given [completer] when [asyncOperation] completes.
+///
+/// If [asyncOperation] completes successfully, [completer] will be completed
+/// with the [value].
 Future<void> completeAsyncOperation<T, C>(
   IAsyncOperation<T> asyncOperation,
   Completer<C> completer,
   C Function() value,
 ) =>
-    _completeAsyncFunction(
+    _completeAsyncDelegate(
         asyncOperation, completer, () => completer.complete(value()));
 
-Future<void> _completeAsyncFunction<T extends IAsyncInfo, C>(
-    T asyncDelegate, Completer<C> completer, void Function() onComplete) async {
+/// Completes the given [completer] by polling [asyncDelegate]'s `status`
+/// property every `10` milliseconds until the [asyncDelegate] completes.
+///
+/// [onCompleted] is called when the [asyncDelegate] completes successfully.
+Future<void> _completeAsyncDelegate<T extends IAsyncInfo, C>(T asyncDelegate,
+    Completer<C> completer, void Function() onCompleted) async {
   try {
     while (asyncDelegate.status == AsyncStatus.started) {
       // Yield execution to Dart for 10 milliseconds to avoid blocking the app.
@@ -42,7 +46,7 @@ Future<void> _completeAsyncFunction<T extends IAsyncInfo, C>(
       case AsyncStatus.started:
         break;
       case AsyncStatus.completed:
-        onComplete();
+        onCompleted();
         break;
       case AsyncStatus.canceled:
         completer.completeError('The async operation canceled!');
