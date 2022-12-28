@@ -25,14 +25,16 @@ class WinRTMethodReturningAsyncActionProjection extends WinRTMethodProjection {
 
 mixin _AsyncOperationProjection on WinRTMethodProjection {
   /// The type argument of `IAsyncOperation`, as represented in the
-  /// [returnType]'s [TypeIdentifier] (e.g. `bool`, `String`, `StorageFile`).
+  /// [returnType]'s [TypeIdentifier] (e.g. `bool`, `String`, `StorageFile?`).
   String get asyncOperationTypeArg =>
       typeArguments(returnType.typeIdentifier.name);
 
   String get futureTypeArg {
     if (asyncOperationTypeArg.startsWith('IMapView')) {
+      // e.g. return Map<String, String> instead of IMapView<String, String>
       return asyncOperationTypeArg.replaceFirst('IMapView', 'Map');
     } else if (asyncOperationTypeArg.startsWith('IVectorView')) {
+      // e.g. return List<String> instead of IVectorView<String>
       return asyncOperationTypeArg.replaceFirst('IVectorView', 'List');
     } else if (asyncOperationTypeArg.startsWith('IReference')) {
       // e.g. return Duration? instead of IReference<Duration>?
@@ -53,7 +55,8 @@ mixin _AsyncOperationProjection on WinRTMethodProjection {
     return creator == null ? '' : ', creator: $creator';
   }
 
-  /// The function to call after the async operation is completed successfully.
+  /// The function to call when completing the completer after the asynchronous
+  /// operation has successfully completed.
   String get onCompletedCallback {
     if (asyncOperationTypeArg.startsWith('IMapView')) {
       return '() => asyncOperation.getResults().toMap()';
