@@ -12,11 +12,10 @@ void main() async {
   final picker = FileOpenPicker()
     ..suggestedStartLocation = PickerLocationId.desktop
     ..viewMode = PickerViewMode.thumbnail;
-  final filters = picker.fileTypeFilter
-    ..replaceAll(['*']); // Allow all file types
+  final filters = picker.fileTypeFilter..append('*'); // Allow all file types
 
-  // Use GetShellWindow() for Flutter apps
-  final hwnd = GetConsoleWindow();
+  final hwnd = GetConsoleWindow(); // Use GetShellWindow() for Flutter apps
+  // Initialize the FileOpenPicker with the window handle (HWND).
   // You can omit the 'hwnd' parameter on Flutter apps as GetShellWindow() is
   // used by default if omitted.
   InitializeWithWindow.initialize(picker, hwnd);
