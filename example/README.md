@@ -36,6 +36,7 @@ require Flutter.
 | `play_sound.dart`     | Plays a WAV file through the Windows `PlaySound` API      |
 | `printer_list.dart`   | Enumerate available printers on the Windows system        |
 | `printer_raw.dart`    | Sends RAW data directly to a Windows Printer              |
+| `recycle_bin.dart`    | Queries the recycle bin and adds an item to it            |
 | `registry.dart`       | Demonstrates querying the registry for values             |
 | `screenshot.dart`     | Takes a screenshot of the current desktop                 |
 | `scroll.dart`         | Example of horizontal and vertical scrolling text window  |
