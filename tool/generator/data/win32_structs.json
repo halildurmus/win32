@@ -308,6 +308,8 @@
     "Windows.Win32.UI.Shell.PropertiesSystem.PROPERTYKEY": "Specifies the FMTID/PID identifier that programmatically identifies a property.",
     "Windows.Win32.UI.Shell.SHELLEXECUTEINFOW": "Contains information used by ShellExecuteEx.",
     "Windows.Win32.UI.Shell.SHELL_ITEM_RESOURCE": "Defines Shell item resource.",
+    "Windows.Win32.UI.Shell.SHFILEINFOW": "Contains information about a file object.",
+    "Windows.Win32.UI.Shell.SHFILEOPSTRUCTW": "Contains information that the SHFileOperation function uses to perform file operations.",
     "Windows.Win32.UI.Shell.SHQUERYRBINFO": "Contains the size and item count information retrieved by the SHQueryRecycleBin function.",
     "Windows.Win32.UI.WindowsAndMessaging.ACCEL": "Defines an accelerator key used in an accelerator table.",
     "Windows.Win32.UI.WindowsAndMessaging.ALTTABINFO": "Contains status information for the application-switching (ALT+TAB) window.",

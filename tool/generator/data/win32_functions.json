@@ -4921,6 +4921,14 @@
         "prototype": "SHSTDAPI SHEmptyRecycleBinW(\n  HWND    hwnd,\n  LPCWSTR pszRootPath,\n  DWORD   dwFlags\n);",
         "comment": "Empties the Recycle Bin on the specified drive."
     },
+    "SHFileOperation": {
+        "prototype": "int SHFileOperationW(\n  LPSHFILEOPSTRUCTW lpFileOp\n);",
+        "comment": "Copies, moves, renames, or deletes a file system object."
+    },
+    "SHFreeNameMappings": {
+        "prototype": "void SHFreeNameMappings(\n  HANDLE hNameMappings\n);",
+        "comment": "Frees a file name mapping object that was retrieved by the SHFileOperation function."
+    },
     "SHGetDesktopFolder": {
         "prototype": "SHSTDAPI SHGetDesktopFolder(\n  IShellFolder **ppshf\n);",
         "comment": "Retrieves the IShellFolder interface for the desktop folder, which is the root of the Shell's namespace."
@@ -4932,6 +4940,10 @@
     "SHGetDriveMedia": {
         "prototype": "HRESULT SHGetDriveMedia(\n  PCWSTR pszDrive,\n  DWORD  *pdwMediaContent\n);",
         "comment": "Returns the type of media that is in the given drive."
+    },
+    "SHGetFileInfo": {
+        "prototype": "DWORD_PTR SHGetFileInfoW(\n  LPCWSTR     pszPath,\n  DWORD       dwFileAttributes,\n  SHFILEINFOW *psfi,\n  UINT        cbFileInfo,\n  UINT        uFlags\n);",
+        "comment": "Retrieves information about an object in the file system, such as a file, folder, directory, or drive root."
     },
     "SHGetFolderPath": {
         "prototype": "SHFOLDERAPI SHGetFolderPathW(\n  HWND   hwnd,\n  int    csidl,\n  HANDLE hToken,\n  DWORD  dwFlags,\n  LPWSTR pszPath\n);",

@@ -17,7 +17,9 @@ call dart test
 echo Running generated file tests...
 cd ..\..
 rem Now should be in win32
-call dart test
+
+rem Single threaded increases chances of detecting a segfault test failure
+call dart test --concurrency=1 --test-randomize-ordering-seed=random
 
 goto end
 

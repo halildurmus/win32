@@ -9842,6 +9842,20 @@ void main() {
               int dwFlags)>('SHEmptyRecycleBinW');
       expect(SHEmptyRecycleBin, isA<Function>());
     });
+    test('Can instantiate SHFileOperation', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHFileOperation = shell32.lookupFunction<
+          Int32 Function(Pointer<SHFILEOPSTRUCT> lpFileOp),
+          int Function(Pointer<SHFILEOPSTRUCT> lpFileOp)>('SHFileOperationW');
+      expect(SHFileOperation, isA<Function>());
+    });
+    test('Can instantiate SHFreeNameMappings', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHFreeNameMappings = shell32.lookupFunction<
+          Void Function(IntPtr hNameMappings),
+          void Function(int hNameMappings)>('SHFreeNameMappings');
+      expect(SHFreeNameMappings, isA<Function>());
+    });
     test('Can instantiate SHGetDesktopFolder', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final SHGetDesktopFolder = shell32.lookupFunction<
@@ -9874,6 +9888,19 @@ void main() {
           int Function(Pointer<Utf16> pszDrive,
               Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
       expect(SHGetDriveMedia, isA<Function>());
+    });
+    test('Can instantiate SHGetFileInfo', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetFileInfo = shell32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> pszPath, Uint32 dwFileAttributes,
+              Pointer<SHFILEINFO> psfi, Uint32 cbFileInfo, Int32 uFlags),
+          int Function(
+              Pointer<Utf16> pszPath,
+              int dwFileAttributes,
+              Pointer<SHFILEINFO> psfi,
+              int cbFileInfo,
+              int uFlags)>('SHGetFileInfoW');
+      expect(SHGetFileInfo, isA<Function>());
     });
     test('Can instantiate SHGetFolderPath', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
