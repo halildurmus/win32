@@ -161,7 +161,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
     final hasAsyncDelegateImport = imports.any((import) =>
         import.endsWith('iasyncaction.dart') ||
         import.endsWith('iasyncoperation.dart'));
-    if (hasAsyncDelegateImport) {
+    if (typeDef.isInterface && hasAsyncDelegateImport) {
       imports.addAll([
         'dart:async',
         relativePathTo('winrt/internal/async_helpers.dart'),
@@ -170,7 +170,7 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
 
     final hasIReferenceImport =
         imports.any((import) => import.endsWith('ireference.dart'));
-    if (hasIReferenceImport) {
+    if (typeDef.isInterface && hasIReferenceImport) {
       imports.add(relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
     }
 

@@ -609,19 +609,6 @@ void main() {
   });
 
   test(
-      'WinRT class that imports ireference.dart and ipropertvalue_helpers.dart',
-      () {
-    final winTypeDef =
-        MetadataStore.getMetadataForType('Windows.Devices.Power.BatteryReport');
-
-    final projection = WinRTClassProjection(winTypeDef!);
-    expect(projection.importHeader,
-        contains("import '../../foundation/ireference.dart'"));
-    expect(projection.importHeader,
-        contains("import '../../internal/ipropertyvalue_helpers.dart'"));
-  });
-
-  test(
       'WinRT interface that imports ireference.dart and ipropertvalue_helpers.dart',
       () {
     final winTypeDef = MetadataStore.getMetadataForType(
