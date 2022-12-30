@@ -1,3 +1,7 @@
+## 4.0.1
+
+- Adjust SDK versioning due to pub analyzer bug.
+
 ## 4.0.0
 
 - [BREAKING CHANGE] COM objects now inherit from `NativeFinalizer`. Instead of
