@@ -31,6 +31,7 @@ class InitializeWithWindow {
   /// final picker = FileOpenPicker()
   ///   ..suggestedStartLocation = PickerLocationId.desktop
   ///   ..viewMode = PickerViewMode.thumbnail;
+  /// final filters = picker.fileTypeFilter..append('*'); // Allow all types
   /// InitializeWithWindow.initialize(picker);
   /// final pickedFile = await picker.pickSingleFileAsync();
   /// ```
