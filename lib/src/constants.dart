@@ -7638,6 +7638,83 @@ const SHUTDOWN_RESTARTAPPS = 0x0000080;
 const SHUTDOWN_HYBRID = 0x0000200;
 
 // -----------------------------------------------------------------------------
+// Shell File operation constants
+// -----------------------------------------------------------------------------
+
+/// Move the files specified in pFrom to the location specified in pTo.
+const FO_MOVE = 0x0001;
+
+/// Copy the files specified in the pFrom member to the location specified in
+/// the pTo member.
+const FO_COPY = 0x0002;
+
+/// Delete the files specified in pFrom.
+const FO_DELETE = 0x0003;
+
+/// Rename the file specified in pFrom. You cannot use this flag to rename
+/// multiple files with a single function call. Use FO_MOVE instead.
+const FO_RENAME = 0x0004;
+
+/// The pTo member specifies multiple destination files (one for each source
+/// file in pFrom) rather than one directory where all source files are to be
+/// deposited.
+const FOF_MULTIDESTFILES = 0x0001;
+
+/// Do not display a progress dialog box.
+const FOF_SILENT = 0x0004;
+
+/// Give the file being operated on a new name in a move, copy, or rename
+/// operation if a file with the target name already exists at the destination.
+const FOF_RENAMEONCOLLISION = 0x0008;
+
+/// Respond with Yes to All for any dialog box that is displayed.
+const FOF_NOCONFIRMATION = 0x0010;
+
+/// If FOF_RENAMEONCOLLISION is specified and any files were renamed, assign a
+/// name mapping object that contains their old and new names to the
+/// hNameMappings member. This object must be freed using SHFreeNameMappings
+/// when it is no longer needed.
+const FOF_WANTMAPPINGHANDLE = 0x0020;
+
+/// Preserve undo information, if possible.
+const FOF_ALLOWUNDO = 0x0040;
+
+/// Perform the operation only on files (not on folders) if a wildcard file name
+/// (.) is specified.
+const FOF_FILESONLY = 0x0080;
+
+/// Display a progress dialog box but do not show individual file names as they
+/// are operated on.
+const FOF_SIMPLEPROGRESS = 0x0100;
+
+/// Do not ask the user to confirm the creation of a new directory if the
+/// operation requires one to be created.
+const FOF_NOCONFIRMMKDIR = 0x0200;
+
+/// Do not display a dialog to the user if an error occurs.
+const FOF_NOERRORUI = 0x0400;
+
+/// Do not copy the security attributes of the file. The destination file
+/// receives the security attributes of its new folder.
+const FOF_NOCOPYSECURITYATTRIBS = 0x0800;
+
+/// Only perform the operation in the local directory. Do not operate
+/// recursively into subdirectories, which is the default behavior.
+const FOF_NORECURSION = 0x1000;
+
+/// Do not move connected files as a group. Only move the specified files.
+const FOF_NO_CONNECTED_ELEMENTS = 0x2000;
+
+/// Send a warning if a file is being permanently destroyed during a delete
+/// operation rather than recycled. This flag partially overrides
+/// FOF_NOCONFIRMATION.
+const FOF_WANTNUKEWARNING = 0x4000;
+
+/// Perform the operation silently, presenting no UI to the user.
+const FOF_NO_UI =
+    FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR;
+
+// -----------------------------------------------------------------------------
 // Shell_NotifyIcon uFlags constants
 // -----------------------------------------------------------------------------
 
