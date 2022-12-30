@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IModalWindow.show', () {
     expect(modalwindow.show, isA<Function>());
   });
-  free(ptr);
 }

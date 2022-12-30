@@ -306,6 +306,7 @@ class IPropertyValueStatics extends IInspectable {
   IPropertyValue createString(String value) {
     final retValuePtr = calloc<COMObject>();
     final valueHstring = convertToHString(value);
+
     final hr = ptr.ref.vtable
             .elementAt(18)
             .cast<
@@ -321,7 +322,9 @@ class IPropertyValueStatics extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(valueHstring);
+
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
 
@@ -352,6 +355,7 @@ class IPropertyValueStatics extends IInspectable {
   IPropertyValue createGuid(Guid value) {
     final retValuePtr = calloc<COMObject>();
     final valueNativeGuidPtr = value.toNativeGUID();
+
     final hr = ptr.ref.vtable
             .elementAt(20)
             .cast<
@@ -368,7 +372,9 @@ class IPropertyValueStatics extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     free(valueNativeGuidPtr);
+
     return IPropertyValue.fromRawPointer(retValuePtr);
   }
 
@@ -376,6 +382,7 @@ class IPropertyValueStatics extends IInspectable {
     final retValuePtr = calloc<COMObject>();
     final valueDateTime =
         value.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
+
     final hr = ptr.ref.vtable
             .elementAt(21)
             .cast<
@@ -398,6 +405,7 @@ class IPropertyValueStatics extends IInspectable {
   IPropertyValue createTimeSpan(Duration value) {
     final retValuePtr = calloc<COMObject>();
     final valueDuration = value.inMicroseconds * 10;
+
     final hr = ptr.ref.vtable
             .elementAt(22)
             .cast<

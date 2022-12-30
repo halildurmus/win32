@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IAppxManifestApplication.getAppUserModelId', () {
     expect(appxmanifestapplication.getAppUserModelId, isA<Function>());
   });
-  free(ptr);
 }

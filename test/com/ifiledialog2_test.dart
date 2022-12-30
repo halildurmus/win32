@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IFileDialog2.setNavigationRoot', () {
     expect(filedialog2.setNavigationRoot, isA<Function>());
   });
-  free(ptr);
 }

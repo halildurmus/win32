@@ -38,6 +38,7 @@ class IHostNameFactory extends IInspectable {
   HostName createHostName(String hostName) {
     final retValuePtr = calloc<COMObject>();
     final hostNameHstring = convertToHString(hostName);
+
     final hr = ptr.ref.vtable
             .elementAt(6)
             .cast<
@@ -54,7 +55,9 @@ class IHostNameFactory extends IInspectable {
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
     WindowsDeleteString(hostNameHstring);
+
     return HostName.fromRawPointer(retValuePtr);
   }
 }

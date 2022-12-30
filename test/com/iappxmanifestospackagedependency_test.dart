@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IAppxManifestOSPackageDependency.getVersion', () {
     expect(appxmanifestospackagedependency.getVersion, isA<Function>());
   });
-  free(ptr);
 }

@@ -20,6 +20,9 @@ void main() {
           referenceIid: IID_IReference_Boolean);
       expect(ireference.value, isNotNull);
       expect(ireference.value, isTrue);
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<DateTime>', () {
@@ -31,6 +34,9 @@ void main() {
       expect(ireference.value, isNotNull);
       expect(ireference.value!.millisecondsSinceEpoch,
           dateTime.millisecondsSinceEpoch);
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<double> (Double)', () {
@@ -40,6 +46,9 @@ void main() {
           referenceIid: IID_IReference_Double);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(3.0));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<double> (Float)', () {
@@ -49,6 +58,9 @@ void main() {
           referenceIid: IID_IReference_Float);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(3.0));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<Duration>', () {
@@ -59,6 +71,9 @@ void main() {
           referenceIid: IID_IReference_TimeSpan);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(duration));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<Guid>', () {
@@ -68,6 +83,9 @@ void main() {
           referenceIid: IID_IReference_Guid);
       expect(ireference.value, isNotNull);
       expect(ireference.value!.toString(), equals(IID_ICalendar));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Int16)', () {
@@ -77,6 +95,9 @@ void main() {
           referenceIid: IID_IReference_Int16);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(16));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Int32)', () {
@@ -86,6 +107,9 @@ void main() {
           referenceIid: IID_IReference_Int32);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(32));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Int64)', () {
@@ -95,6 +119,9 @@ void main() {
           referenceIid: IID_IReference_Int64);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(64));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Uint8)', () {
@@ -104,6 +131,9 @@ void main() {
           referenceIid: IID_IReference_Uint8);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(8));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Uint32)', () {
@@ -113,6 +143,9 @@ void main() {
           referenceIid: IID_IReference_Uint32);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(32));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<int> (Uint64)', () {
@@ -122,28 +155,35 @@ void main() {
           referenceIid: IID_IReference_Uint64);
       expect(ireference.value, isNotNull);
       expect(ireference.value, equals(64));
+
+      ireference.release();
+      pv.release();
     });
 
     test('IReference<Point>', () {
-      final point = calloc<Point>()
+      final pointPtr = calloc<Point>()
         ..ref.X = 50
         ..ref.Y = 100;
-      final pv = PropertyValue.createPoint(point.ref);
+      final pv = PropertyValue.createPoint(pointPtr.ref);
       final ireference = IReference<Point>.fromRawPointer(
           pv.toInterface(IID_IReference_Point),
           referenceIid: IID_IReference_Point);
       expect(ireference.value, isNotNull);
       expect(ireference.value!.X, equals(50));
       expect(ireference.value!.Y, equals(100));
+
+      ireference.release();
+      pv.release();
+      free(pointPtr);
     });
 
     test('IReference<Rect>', () {
-      final rect = calloc<Rect>()
+      final rectPtr = calloc<Rect>()
         ..ref.Height = 200
         ..ref.Width = 100
         ..ref.X = 50
         ..ref.Y = 100;
-      final pv = PropertyValue.createRect(rect.ref);
+      final pv = PropertyValue.createRect(rectPtr.ref);
       final ireference = IReference<Rect>.fromRawPointer(
           pv.toInterface(IID_IReference_Rect),
           referenceIid: IID_IReference_Rect);
@@ -152,19 +192,27 @@ void main() {
       expect(ireference.value!.Width, equals(100));
       expect(ireference.value!.X, equals(50));
       expect(ireference.value!.Y, equals(100));
+
+      ireference.release();
+      pv.release();
+      free(rectPtr);
     });
 
     test('IReference<Size>', () {
-      final size = calloc<Size>()
+      final sizePtr = calloc<Size>()
         ..ref.Height = 200
         ..ref.Width = 100;
-      final pv = PropertyValue.createSize(size.ref);
+      final pv = PropertyValue.createSize(sizePtr.ref);
       final ireference = IReference<Size>.fromRawPointer(
           pv.toInterface(IID_IReference_Size),
           referenceIid: IID_IReference_Size);
       expect(ireference.value, isNotNull);
       expect(ireference.value!.Height, equals(200));
       expect(ireference.value!.Width, equals(100));
+
+      ireference.release();
+      pv.release();
+      free(sizePtr);
     });
 
     tearDown(winrtUninitialize);

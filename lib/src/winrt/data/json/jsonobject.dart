@@ -47,33 +47,33 @@ class JsonObject extends IInspectable
         IIterable<IKeyValuePair<String, IJsonValue?>>,
         IJsonObjectWithDefaultValues,
         IStringable {
-  JsonObject({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  JsonObject() : super(ActivateClass(_className));
   JsonObject.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Data.Json.JsonObject';
 
   // IJsonObjectStatics methods
   static JsonObject parse(String input) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonObjectStatics);
+    final object = IJsonObjectStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonObjectStatics.fromRawPointer(activationFactory).parse(input);
+      return object.parse(input);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static bool tryParse(String input, JsonObject result) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonObjectStatics);
+    final object = IJsonObjectStatics.fromRawPointer(activationFactoryPtr);
 
     try {
-      return IJsonObjectStatics.fromRawPointer(activationFactory)
-          .tryParse(input, result);
+      return object.tryParse(input, result);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

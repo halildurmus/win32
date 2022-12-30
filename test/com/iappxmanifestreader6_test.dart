@@ -27,5 +27,4 @@ void main() {
     expect(
         appxmanifestreader6.getIsNonQualifiedResourcePackage, isA<Function>());
   });
-  free(ptr);
 }

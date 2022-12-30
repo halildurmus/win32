@@ -79,16 +79,20 @@ class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
   String toString() => '''
       $referenceTypeArg? $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
+        $parametersPreamble
 
-        try {
-          $parametersPreamble
-          ${ffiCall()}
-          return IReference<$referenceTypeArg>.fromRawPointer
-            (retValuePtr$referenceConstructorArgs).value;
-        } finally {
-          $parametersPostamble
-          free(retValuePtr);
-        }
+        ${ffiCall(freeRetValOnFailure: true)}
+
+        if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+        final reference = IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs);
+        final value = reference.value;
+        reference.release();
+
+        $parametersPostamble
+
+        return value;
       }
   ''';
 }
@@ -103,13 +107,16 @@ class WinRTGetPropertyReturningReferenceProjection
       $referenceTypeArg? get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        try {
-          ${ffiCall()}
-          return IReference<$referenceTypeArg>.fromRawPointer
-            (retValuePtr$referenceConstructorArgs).value;
-        } finally {
-          free(retValuePtr);
-        }
+        ${ffiCall(freeRetValOnFailure: true)}
+
+        if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+        final reference = IReference<$referenceTypeArg>.fromRawPointer
+            (retValuePtr$referenceConstructorArgs);
+        final value = reference.value;
+        reference.release();
+
+        return value;
       }
   ''';
 }
@@ -122,11 +129,13 @@ class WinRTSetPropertyReturningReferenceProjection
   @override
   String toString() => '''
       set $exposedMethodName($referenceTypeArgFromParameter? value) {
-        final referencePtr = $boxValueMethodCall
+        final referencePtr = value == null
+            ? calloc<COMObject>()
+            : $boxValueMethodCall
 
         ${ffiCall(params: 'referencePtr.ref')}
 
-        free(referencePtr);
+        if (value == null) free(referencePtr);
       }
   ''';
 }

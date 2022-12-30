@@ -34,5 +34,4 @@ void main() {
   test('Can instantiate IEnumString.clone', () {
     expect(enumstring.clone, isA<Function>());
   });
-  free(ptr);
 }

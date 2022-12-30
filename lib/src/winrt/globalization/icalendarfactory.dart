@@ -66,6 +66,7 @@ class ICalendarFactory extends IInspectable {
 
     final calendarHstring = convertToHString(calendar);
     final clockHstring = convertToHString(clock);
+
     final hr =
         ptr.ref.vtable
                 .elementAt(7)
@@ -95,6 +96,7 @@ class ICalendarFactory extends IInspectable {
 
     WindowsDeleteString(calendarHstring);
     WindowsDeleteString(clockHstring);
+
     return Calendar.fromRawPointer(retValuePtr);
   }
 }

@@ -48,18 +48,30 @@ class IMap<K, V> extends IInspectable
   /// `Object?` or `String`.
   factory IMap() {
     if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
-      return IMap.fromRawPointer(MediaPropertySet().ptr,
+      final mediaPropertySet = MediaPropertySet();
+      final mapPtr = mediaPropertySet.toInterface(IID_IMap_Guid_Object);
+      mediaPropertySet.release();
+
+      return IMap.fromRawPointer(mapPtr,
           iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
     }
 
     if (isSameType<K, String>()) {
       if (isSameType<V, String>()) {
-        return IMap.fromRawPointer(StringMap().ptr,
+        final stringMap = StringMap();
+        final mapPtr = stringMap.toInterface(IID_IMap_String_String);
+        stringMap.release();
+
+        return IMap.fromRawPointer(mapPtr,
             iterableIid: IID_IIterable_IKeyValuePair_String_String);
       }
 
       if (isSimilarType<V, Object>()) {
-        return IMap.fromRawPointer(PropertySet().ptr,
+        final propertySet = PropertySet();
+        final mapPtr = propertySet.toInterface(IID_IMap_String_Object);
+        propertySet.release();
+
+        return IMap.fromRawPointer(mapPtr,
             iterableIid: IID_IIterable_IKeyValuePair_String_Object);
       }
     }
@@ -120,30 +132,9 @@ class IMap<K, V> extends IInspectable
   /// [other] must be of type `Map<Guid, Object?>`, `Map<String, Object?>`,
   /// or `Map<String, String>`.
   factory IMap.fromMap(Map<K, V> other) {
-    if (isSameType<K, Guid>() && isSimilarType<V, Object>()) {
-      final iMap = MediaPropertySet();
-      other.cast<Guid, Object?>().forEach(iMap.insert);
-      return IMap.fromRawPointer(iMap.ptr,
-          iterableIid: IID_IIterable_IKeyValuePair_Guid_Object);
-    }
-
-    if (isSameType<K, String>()) {
-      if (isSameType<V, String>()) {
-        final iMap = StringMap();
-        other.cast<String, String>().forEach(iMap.insert);
-        return IMap.fromRawPointer(iMap.ptr,
-            iterableIid: IID_IIterable_IKeyValuePair_String_String);
-      }
-
-      if (isSimilarType<V, Object>()) {
-        final iMap = PropertySet();
-        other.cast<String, Object?>().forEach(iMap.insert);
-        return IMap.fromRawPointer(iMap.ptr,
-            iterableIid: IID_IIterable_IKeyValuePair_String_Object);
-      }
-    }
-
-    throw ArgumentError.value(other, 'other', 'Unsupported map');
+    final map = IMap<K, V>();
+    other.forEach(map.insert);
+    return map;
   }
 
   /// Returns the item at the specified key in the map.
@@ -230,6 +221,8 @@ class IMap<K, V> extends IInspectable
 
     free(nativeGuidPtr);
 
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
 
@@ -274,6 +267,8 @@ class IMap<K, V> extends IInspectable
       free(retValuePtr);
       throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }
@@ -351,6 +346,8 @@ class IMap<K, V> extends IInspectable
         free(retValuePtr);
         throw WindowsException(hr);
       }
+
+      if (retValuePtr.ref.lpVtbl == nullptr) return null;
 
       return IPropertyValue.fromRawPointer(retValuePtr).value;
     } finally {
@@ -518,37 +515,36 @@ class IMap<K, V> extends IInspectable
   Map<K, V> getView() {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.lpVtbl.value
-              .elementAt(9)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.lpVtbl.value
+            .elementAt(9)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
-      return IMapView<K, V>.fromRawPointer(retValuePtr,
-              creator: _creator,
-              enumCreator: _enumCreator,
-              iterableIid: _iterableIid)
-          .toMap();
-    } finally {
-      free(retValuePtr);
-    }
+    final mapView = IMapView<K, V>.fromRawPointer(retValuePtr,
+        creator: _creator,
+        enumCreator: _enumCreator,
+        iterableIid: _iterableIid);
+    final map = mapView.toMap();
+    mapView.release();
+
+    return map;
   }
 
   /// Inserts or replaces an item in the map.
   bool insert(K key, V value) {
     if (isSameType<K, Guid>()) {
       if (isSubtypeOfInspectable<V>()) {
-        return _insert_Guid_Object(key as Guid, (value as IInspectable).ptr);
+        return _insert_Guid_Object(key as Guid, value);
       }
 
-      return _insert_Guid_Object(key as Guid, boxValue(value));
+      return _insert_Guid_Object(key as Guid, value);
     }
 
     if (isSameType<K, int>()) {
@@ -566,23 +562,24 @@ class IMap<K, V> extends IInspectable
       }
 
       if (isSubtypeOfInspectable<V>()) {
-        return _insert_String_Object(
-            key as String, (value as IInspectable).ptr);
+        return _insert_String_Object(key as String, value);
       }
 
       if (isSubtypeOfWinRTEnum<V>()) {
         return _insert_String_enum(key as String, value as WinRTEnum);
       }
 
-      return _insert_String_Object(key as String, boxValue(value));
+      return _insert_String_Object(key as String, value);
     }
 
-    return _insert_Object_Object(key as IInspectable, boxValue(value));
+    return _insert_Object_Object(key as IInspectable, value);
   }
 
-  bool _insert_Guid_Object(Guid key, Pointer<COMObject> value) {
+  bool _insert_Guid_Object(Guid key, V value) {
     final retValuePtr = calloc<Bool>();
     final nativeGuidPtr = key.toNativeGUID();
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -595,12 +592,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, GUID, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, nativeGuidPtr.ref, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, nativeGuidPtr.ref, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) free(propertyValuePtr);
       free(nativeGuidPtr);
       free(retValuePtr);
     }
@@ -630,8 +628,10 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_Object_Object(IInspectable key, Pointer<COMObject> value) {
+  bool _insert_Object_Object(IInspectable key, V value) {
     final retValuePtr = calloc<Bool>();
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -644,12 +644,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, COMObject, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, key.ptr.ref, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, key.ptr.ref, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) propertyValuePtr;
       free(retValuePtr);
     }
   }
@@ -679,9 +680,11 @@ class IMap<K, V> extends IInspectable
     }
   }
 
-  bool _insert_String_Object(String key, Pointer<COMObject> value) {
+  bool _insert_String_Object(String key, V value) {
     final retValuePtr = calloc<Bool>();
     final hKey = convertToHString(key);
+    final propertyValuePtr =
+        value == null ? calloc<COMObject>() : boxValue(value);
 
     try {
       final hr = ptr.ref.lpVtbl.value
@@ -694,12 +697,13 @@ class IMap<K, V> extends IInspectable
               .value
               .asFunction<
                   int Function(Pointer, int, COMObject, Pointer<Bool>)>()(
-          ptr.ref.lpVtbl, hKey, value.ref, retValuePtr);
+          ptr.ref.lpVtbl, hKey, propertyValuePtr.ref, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.value;
     } finally {
+      if (value == null) free(propertyValuePtr);
       WindowsDeleteString(hKey);
       free(retValuePtr);
     }

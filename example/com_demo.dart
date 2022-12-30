@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 
 /// Return the current reference count.
 int refCount(IUnknown unk) {
-  // Call AddRef() and Release(), which are inherited from IUnknown. Both return
+  // Call addRef() and release(), which are inherited from IUnknown. Both return
   // the refcount after the operation, so by adding a reference and immediately
   // removing it, we can get the original refcount.
 
@@ -52,7 +52,6 @@ void main() {
   print('refCount is now ${refCount(modalWindow)}\n');
 
   fileDialog2.release();
-  free(fileDialog2.ptr);
   print('Release fileDialog2.\n'
       'refCount is now ${refCount(modalWindow)}\n');
 
@@ -64,7 +63,6 @@ void main() {
   print('refCount is now ${refCount(fileOpenDialog)}\n');
 
   modalWindow.release();
-  free(modalWindow.ptr);
   print('Release modalWindow.\n'
       'refCount is now ${refCount(fileOpenDialog)}\n');
 
@@ -79,10 +77,9 @@ void main() {
   }
 
   fileOpenDialog.release();
-  free(fileOpenDialog.ptr);
   print('Released fileOpenDialog.');
 
-  free(fileDialog.ptr);
+  fileDialog.release();
   print('Released fileDialog.');
 
   // Uninitialize COM now that we're done with it.

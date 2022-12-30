@@ -60,23 +60,28 @@ class IIPInformation extends IInspectable {
   int? get prefixLength {
     final retValuePtr = calloc<COMObject>();
 
-    try {
-      final hr = ptr.ref.vtable
-              .elementAt(7)
-              .cast<
-                  Pointer<
-                      NativeFunction<
-                          HRESULT Function(Pointer, Pointer<COMObject>)>>>()
-              .value
-              .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-          ptr.ref.lpVtbl, retValuePtr);
+    final hr = ptr.ref.vtable
+            .elementAt(7)
+            .cast<
+                Pointer<
+                    NativeFunction<
+                        HRESULT Function(Pointer, Pointer<COMObject>)>>>()
+            .value
+            .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl, retValuePtr);
 
-      if (FAILED(hr)) throw WindowsException(hr);
-      return IReference<int>.fromRawPointer(retValuePtr,
-              referenceIid: '{e5198cc8-2873-55f5-b0a1-84ff9e4aad62}')
-          .value;
-    } finally {
+    if (FAILED(hr)) {
       free(retValuePtr);
+      throw WindowsException(hr);
     }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+
+    final reference = IReference<int>.fromRawPointer(retValuePtr,
+        referenceIid: '{e5198cc8-2873-55f5-b0a1-84ff9e4aad62}');
+    final value = reference.value;
+    reference.release();
+
+    return value;
   }
 }

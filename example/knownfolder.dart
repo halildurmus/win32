@@ -5,6 +5,7 @@
 // Demonstrates usage of various shell APIs to retrieve known folder locations
 
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
@@ -81,23 +82,21 @@ String getDesktopPath3() {
   try {
     final knownFolderManager = KnownFolderManager.createInstance();
     var hr = knownFolderManager.getFolder(appsFolder, ppkf.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final knownFolder = IKnownFolder(ppkf);
     hr = knownFolder.getPath(0, ppszPath);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    knownFolder.release();
+    knownFolderManager.release();
 
     final path = ppszPath.value.toDartString();
-    CoUninitialize();
     return path;
   } finally {
     free(appsFolder);
-    free(ppkf);
     free(ppszPath);
+    CoUninitialize();
   }
 }
 

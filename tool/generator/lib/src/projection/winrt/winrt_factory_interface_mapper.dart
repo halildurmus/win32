@@ -30,14 +30,15 @@ class WinRTFactoryInterfaceMapperProjection extends WinRTClassProjection {
     for (final method in interfaceProjection.methodProjections) {
       methods.add('''
           static $shortName ${method.camelCasedName}(${method.methodParams}) {
-            final activationFactory =
-                CreateActivationFactory(_className, IID_$shortFactoryInterfaceName);
+            final activationFactoryPtr = CreateActivationFactory(
+                _className, IID_$shortFactoryInterfaceName);
+            final object =
+                $shortFactoryInterfaceName.fromRawPointer(activationFactoryPtr);
 
             try {
-              return $shortFactoryInterfaceName.fromRawPointer
-                  (activationFactory).${method.shortForm};
+              return object.${method.shortForm};
             } finally {
-              free(activationFactory);
+              object.release();
             }
           }''');
     }

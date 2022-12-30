@@ -31,8 +31,7 @@ import 'inotificationdatafactory.dart';
 /// {@category Class}
 /// {@category winrt}
 class NotificationData extends IInspectable implements INotificationData {
-  NotificationData({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  NotificationData() : super(ActivateClass(_className));
   NotificationData.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.UI.Notifications.NotificationData';
@@ -41,28 +40,30 @@ class NotificationData extends IInspectable implements INotificationData {
   static NotificationData createNotificationDataWithValuesAndSequenceNumber(
       IIterable<IKeyValuePair<String, String>> initialValues,
       int sequenceNumber) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
+    final object =
+        INotificationDataFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return INotificationDataFactory.fromRawPointer(activationFactory)
-          .createNotificationDataWithValuesAndSequenceNumber(
-              initialValues, sequenceNumber);
+      return object.createNotificationDataWithValuesAndSequenceNumber(
+          initialValues, sequenceNumber);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
   static NotificationData createNotificationDataWithValues(
       IIterable<IKeyValuePair<String, String>> initialValues) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_INotificationDataFactory);
+    final object =
+        INotificationDataFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      return INotificationDataFactory.fromRawPointer(activationFactory)
-          .createNotificationDataWithValues(initialValues);
+      return object.createNotificationDataWithValues(initialValues);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 

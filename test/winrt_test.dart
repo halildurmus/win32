@@ -1,6 +1,5 @@
 @TestOn('windows')
 
-import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/winrt.dart';
 
@@ -44,9 +43,9 @@ void main() {
       winrtInitialize();
 
       final calendar = Calendar();
-
       expect(calendar.year, greaterThanOrEqualTo(2020));
-      free(calendar.ptr);
+
+      calendar.release();
       winrtUninitialize();
     });
 
@@ -61,10 +60,9 @@ void main() {
       ];
 
       final calendar = Calendar();
-
       expect(calendar.iids, equals(iids));
 
-      free(calendar.ptr);
+      calendar.release();
       winrtUninitialize();
     });
 
@@ -73,21 +71,20 @@ void main() {
 
       const calendarClassName = 'Windows.Globalization.Calendar';
 
-      using((Arena arena) {
-        final calendar = Calendar(allocator: arena);
-        expect(calendar.runtimeClassName, equals(calendarClassName));
-      });
+      final calendar = Calendar();
+      expect(calendar.runtimeClassName, equals(calendarClassName));
 
+      calendar.release();
       winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of base trust class', () {
       winrtInitialize();
 
-      using((Arena arena) {
-        final calendar = Calendar(allocator: arena);
-        expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
-      });
+      final calendar = Calendar();
+      expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
+
+      calendar.release();
       winrtUninitialize();
     });
 
@@ -98,10 +95,9 @@ void main() {
 
       final object = CreateObject(className, IID_IInspectable);
       final inspectableObject = IInspectable(object);
-
       expect(inspectableObject.trustLevel, equals(TrustLevel.partialTrust));
 
-      free(object);
+      inspectableObject.release();
       winrtUninitialize();
     });
   }

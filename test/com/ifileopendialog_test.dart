@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate IFileOpenDialog.getSelectedItems', () {
     expect(fileopendialog.getSelectedItems, isA<Function>());
   });
-  free(ptr);
 }

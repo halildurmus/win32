@@ -7298,6 +7298,84 @@ class SHELL_ITEM_RESOURCE extends Struct {
   }
 }
 
+/// Contains information about a file object.
+///
+/// {@category Struct}
+class SHFILEINFO extends Struct {
+  @IntPtr()
+  external int hIcon;
+
+  @Int32()
+  external int iIcon;
+
+  @Uint32()
+  external int dwAttributes;
+
+  @Array(260)
+  external Array<Uint16> _szDisplayName;
+
+  String get szDisplayName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      if (_szDisplayName[i] == 0x00) break;
+      charCodes.add(_szDisplayName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szDisplayName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szDisplayName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(80)
+  external Array<Uint16> _szTypeName;
+
+  String get szTypeName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 80; i++) {
+      if (_szTypeName[i] == 0x00) break;
+      charCodes.add(_szTypeName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szTypeName(String value) {
+    final stringToStore = value.padRight(80, '\x00');
+    for (var i = 0; i < 80; i++) {
+      _szTypeName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Contains information that the SHFileOperation function uses to perform
+/// file operations.
+///
+/// {@category Struct}
+class SHFILEOPSTRUCT extends Struct {
+  @IntPtr()
+  external int hwnd;
+
+  @Uint32()
+  external int wFunc;
+
+  external Pointer<Utf16> pFrom;
+
+  external Pointer<Utf16> pTo;
+
+  @Uint16()
+  external int fFlags;
+
+  @Int32()
+  external int fAnyOperationsAborted;
+
+  external Pointer hNameMappings;
+
+  external Pointer<Utf16> lpszProgressTitle;
+}
+
 /// Defines an item identifier.
 ///
 /// {@category Struct}

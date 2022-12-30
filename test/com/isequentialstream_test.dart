@@ -28,5 +28,4 @@ void main() {
   test('Can instantiate ISequentialStream.write', () {
     expect(sequentialstream.write, isA<Function>());
   });
-  free(ptr);
 }

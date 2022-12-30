@@ -36,8 +36,8 @@ void main() {
     final dateTime = calendar.getDateTime();
     print(dateTime);
 
-    free(calendar.ptr);
-    free(clonedCalendar.ptr);
+    clonedCalendar.release();
+    calendar.release();
   } finally {
     winrtUninitialize();
   }

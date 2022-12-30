@@ -37,28 +37,12 @@
 /// final calendar = ICalendar.fromRawPointer(comObject);
 /// ```
 ///
-/// The object should be disposed of when it is no longer in use, for example:
+/// When you have finished using a Windows Runtime interface, you should release
+/// it with the `release` method:
 ///
 /// ```dart
-/// free(calendar.ptr);
+/// calendar.release(); // Release the interface
 /// ```
-///
-/// ## Strings in the Windows Runtime
-///
-/// Windows Runtime APIs use `HSTRING` as their native type. An `HSTRING` is an
-/// immutable string object, which is created with the [WindowsCreateString] API
-/// and deleted with the [WindowsDeleteString] API. The `HSTRING` itself is an
-/// integer value, just like other `HANDLE` objects in the Win32 programming
-/// interface.
-///
-/// Helper functions exist to easily convert between the Dart `String` type and
-/// Windows Runtime strings: specifically, [convertToHString] and
-/// [convertFromHString].
-///
-/// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString`; you do
-/// not need to free the pointer itself, since Windows reference counts the
-/// backing store and frees the memory when the reference count reaches 0.
-
 library winrt;
 
 // The WinRT API builds on the underlying Win32 API, and so it is also exported

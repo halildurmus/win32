@@ -25,5 +25,4 @@ void main() {
   test('Can instantiate IWbemRefresher.refresh', () {
     expect(wbemrefresher.refresh, isA<Function>());
   });
-  free(ptr);
 }

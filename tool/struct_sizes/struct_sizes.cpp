@@ -306,6 +306,8 @@ void main()
     printf("  'SERVENT': %zu,\n", sizeof(SERVENT));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFOW));
     printf("  'SHELL_ITEM_RESOURCE': %zu,\n", sizeof(SHELL_ITEM_RESOURCE));
+    printf("  'SHFILEINFO': %zu,\n", sizeof(SHFILEINFOW));
+    printf("  'SHFILEOPSTRUCT': %zu,\n", sizeof(SHFILEOPSTRUCTW));
     printf("  'SHITEMID': %zu,\n", sizeof(SHITEMID));
     printf("  'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));
     printf("  'SIZE': %zu,\n", sizeof(SIZE));

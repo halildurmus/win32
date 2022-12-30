@@ -37,5 +37,4 @@ void main() {
   test('Can instantiate IFileIsInUse.closeFile', () {
     expect(fileisinuse.closeFile, isA<Function>());
   });
-  free(ptr);
 }

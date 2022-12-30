@@ -43,5 +43,4 @@ void main() {
   test('Can instantiate IRunningObjectTable.enumRunning', () {
     expect(runningobjecttable.enumRunning, isA<Function>());
   });
-  free(ptr);
 }

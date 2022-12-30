@@ -20,6 +20,7 @@ import '../../../winrt_helpers.dart';
 import '../../data/xml/dom/xmldocument.dart';
 import '../../foundation/ireference.dart';
 import '../../internal/hstring_array.dart';
+import '../../internal/ipropertyvalue_helpers.dart';
 import 'enums.g.dart';
 import 'itoastnotification.dart';
 import 'itoastnotification2.dart';
@@ -29,6 +30,9 @@ import 'itoastnotification6.dart';
 import 'itoastnotificationfactory.dart';
 import 'notificationdata.dart';
 
+/// Defines the content, associated metadata and events, and expiration time
+/// of a toast notification.
+///
 /// {@category Class}
 /// {@category winrt}
 class ToastNotification extends IInspectable
@@ -44,15 +48,16 @@ class ToastNotification extends IInspectable
 
   // IToastNotificationFactory methods
   static ToastNotification createToastNotification(Pointer<COMObject> content) {
-    final activationFactory =
+    final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IToastNotificationFactory);
+    final object =
+        IToastNotificationFactory.fromRawPointer(activationFactoryPtr);
 
     try {
-      final result = IToastNotificationFactory.fromRawPointer(activationFactory)
-          .createToastNotification(content);
+      final result = object.createToastNotification(content);
       return ToastNotification.fromRawPointer(result);
     } finally {
-      free(activationFactory);
+      object.release();
     }
   }
 
@@ -91,6 +96,7 @@ class ToastNotification extends IInspectable
 
   @override
   void remove_Failed(int token) => _iToastNotification.remove_Failed(token);
+
   // IToastNotification2 methods
   late final _iToastNotification2 = IToastNotification2.from(this);
 
@@ -111,6 +117,7 @@ class ToastNotification extends IInspectable
 
   @override
   bool get suppressPopup => _iToastNotification2.suppressPopup;
+
   // IToastNotification3 methods
   late final _iToastNotification3 = IToastNotification3.from(this);
 
@@ -127,6 +134,7 @@ class ToastNotification extends IInspectable
 
   @override
   set remoteId(String value) => _iToastNotification3.remoteId = value;
+
   // IToastNotification4 methods
   late final _iToastNotification4 = IToastNotification4.from(this);
 
@@ -142,6 +150,7 @@ class ToastNotification extends IInspectable
   @override
   set priority(ToastNotificationPriority value) =>
       _iToastNotification4.priority = value;
+
   // IToastNotification6 methods
   late final _iToastNotification6 = IToastNotification6.from(this);
 

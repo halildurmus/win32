@@ -58,8 +58,11 @@ class WinRTMethodReturningVectorProjection extends WinRTMethodProjection
       IVector<$vectorTypeArg> $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
+
         ${ffiCall(freeRetValOnFailure: true)}
+
         $parametersPostamble
+
         return IVector.fromRawPointer(retValuePtr$vectorConstructorArgs);
       }
   ''';
@@ -91,14 +94,16 @@ class WinRTMethodReturningVectorViewProjection extends WinRTMethodProjection
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
 
-        try {
-          ${ffiCall()}
-          return IVectorView<$vectorTypeArg>.fromRawPointer
-            (retValuePtr$vectorConstructorArgs).toList();
-        } finally {
-          $parametersPostamble
-          free(retValuePtr);
-        }
+        ${ffiCall(freeRetValOnFailure: true)}
+
+        final vectorView = IVectorView<$vectorTypeArg>.fromRawPointer
+            (retValuePtr$vectorConstructorArgs);
+        final list = vectorView.toList();
+        vectorView.release();
+
+        $parametersPostamble
+
+        return list;
       }
   ''';
 }
@@ -113,13 +118,14 @@ class WinRTGetPropertyReturningVectorViewProjection
       List<$vectorTypeArg> get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
-        try {
-          ${ffiCall()}
-          return IVectorView<$vectorTypeArg>.fromRawPointer
-            (retValuePtr$vectorConstructorArgs).toList();
-        } finally {
-          free(retValuePtr);
-        }
+        ${ffiCall(freeRetValOnFailure: true)}
+
+        final vectorView = IVectorView<$vectorTypeArg>.fromRawPointer
+            (retValuePtr$vectorConstructorArgs);
+        final list = vectorView.toList();
+        vectorView.release();
+
+        return list;
       }
   ''';
 }

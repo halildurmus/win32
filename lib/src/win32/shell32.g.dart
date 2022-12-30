@@ -216,6 +216,37 @@ final _SHEmptyRecycleBin = _shell32.lookupFunction<
     int Function(int hwnd, Pointer<Utf16> pszRootPath,
         int dwFlags)>('SHEmptyRecycleBinW');
 
+/// Copies, moves, renames, or deletes a file system object.
+///
+/// ```c
+/// int SHFileOperationW(
+///   LPSHFILEOPSTRUCTW lpFileOp
+/// );
+/// ```
+/// {@category shell32}
+int SHFileOperation(Pointer<SHFILEOPSTRUCT> lpFileOp) =>
+    _SHFileOperation(lpFileOp);
+
+final _SHFileOperation = _shell32.lookupFunction<
+    Int32 Function(Pointer<SHFILEOPSTRUCT> lpFileOp),
+    int Function(Pointer<SHFILEOPSTRUCT> lpFileOp)>('SHFileOperationW');
+
+/// Frees a file name mapping object that was retrieved by the
+/// SHFileOperation function.
+///
+/// ```c
+/// void SHFreeNameMappings(
+///   HANDLE hNameMappings
+/// );
+/// ```
+/// {@category shell32}
+void SHFreeNameMappings(int hNameMappings) =>
+    _SHFreeNameMappings(hNameMappings);
+
+final _SHFreeNameMappings = _shell32.lookupFunction<
+    Void Function(IntPtr hNameMappings),
+    void Function(int hNameMappings)>('SHFreeNameMappings');
+
 /// Retrieves the IShellFolder interface for the desktop folder, which is
 /// the root of the Shell's namespace.
 ///
@@ -279,6 +310,33 @@ final _SHGetDriveMedia = _shell32.lookupFunction<
     Int32 Function(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
     int Function(Pointer<Utf16> pszDrive,
         Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
+
+/// Retrieves information about an object in the file system, such as a
+/// file, folder, directory, or drive root.
+///
+/// ```c
+/// DWORD_PTR SHGetFileInfoW(
+///   LPCWSTR     pszPath,
+///   DWORD       dwFileAttributes,
+///   SHFILEINFOW *psfi,
+///   UINT        cbFileInfo,
+///   UINT        uFlags
+/// );
+/// ```
+/// {@category shell32}
+int SHGetFileInfo(Pointer<Utf16> pszPath, int dwFileAttributes,
+        Pointer<SHFILEINFO> psfi, int cbFileInfo, int uFlags) =>
+    _SHGetFileInfo(pszPath, dwFileAttributes, psfi, cbFileInfo, uFlags);
+
+final _SHGetFileInfo = _shell32.lookupFunction<
+    IntPtr Function(Pointer<Utf16> pszPath, Uint32 dwFileAttributes,
+        Pointer<SHFILEINFO> psfi, Uint32 cbFileInfo, Int32 uFlags),
+    int Function(
+        Pointer<Utf16> pszPath,
+        int dwFileAttributes,
+        Pointer<SHFILEINFO> psfi,
+        int cbFileInfo,
+        int uFlags)>('SHGetFileInfoW');
 
 /// Gets the path of a folder identified by a CSIDL value.
 ///

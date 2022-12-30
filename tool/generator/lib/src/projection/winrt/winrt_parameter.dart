@@ -82,9 +82,11 @@ class WinRTParameterProjection extends ParameterProjection {
         args.add('nativeType: ${typeProjection.nativeType}');
       }
 
-      return typeProjection.isWinRTEnum
-          ? 'final ${name}ReferencePtr = boxValue(value.value, ${args.join(', ')});'
-          : 'final ${name}ReferencePtr = boxValue(value, ${args.join(', ')});';
+      final valueArg = typeProjection.isWinRTEnum ? 'value.value' : 'value';
+      return '''
+        final ${name}ReferencePtr = value == null
+            ? calloc<COMObject>()
+            : boxValue($valueArg, ${args.join(', ')});''';
     }
 
     if (isString) return 'final ${name}Hstring = convertToHString($name);';
@@ -101,10 +103,10 @@ class WinRTParameterProjection extends ParameterProjection {
   /// memory.
   String get postamble {
     if (isGuid) return 'free(${name}NativeGuidPtr);';
-    if (isReference) return 'free(${name}ReferencePtr);';
+    if (isReference) return 'if (value == null) free(${name}ReferencePtr);';
     if (isString) return 'WindowsDeleteString(${name}Hstring);';
     if (isUri && !methodBelongsToUriRuntimeClass) {
-      return 'free(${name}Uri.ptr);';
+      return '${name}Uri.release();';
     }
 
     return '';

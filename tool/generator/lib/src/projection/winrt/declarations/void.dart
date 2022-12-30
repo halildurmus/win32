@@ -7,7 +7,9 @@ class WinRTMethodReturningVoidProjection extends WinRTMethodProjection {
   String toString() => '''
       void $camelCasedName($methodParams) {
         $parametersPreamble
+
         ${ffiCall()}
+
         $parametersPostamble
       }
   ''';

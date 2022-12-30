@@ -52,5 +52,4 @@ void main() {
   test('Can instantiate IShellFolder.setNameOf', () {
     expect(shellfolder.setNameOf, isA<Function>());
   });
-  free(ptr);
 }

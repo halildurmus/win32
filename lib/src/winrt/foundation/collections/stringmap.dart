@@ -36,8 +36,7 @@ class StringMap extends IInspectable
         IMap<String, String>,
         IIterable<IKeyValuePair<String, String>>,
         IObservableMap<String, String> {
-  StringMap({Allocator allocator = calloc})
-      : super(ActivateClass(_className, allocator: allocator));
+  StringMap() : super(ActivateClass(_className));
   StringMap.fromRawPointer(super.ptr);
 
   static const _className = 'Windows.Foundation.Collections.StringMap';
