@@ -630,6 +630,16 @@ void main() {
         contains("import '../foundation/uri.dart' as winrt_uri;"));
   });
 
+  test('WinRT interface that imports dart:async and async_helpers.dart', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Storage.Pickers.IFileOpenPicker');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    expect(projection.importHeader, contains("import 'dart:async';"));
+    expect(projection.importHeader,
+        contains("import '../../internal/async_helpers.dart';"));
+  });
+
   test('WinRT get property successfully projects Uri', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.System.ILauncherOptions');
