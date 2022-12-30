@@ -1,3 +1,15 @@
+## 4.0.0
+
+- [BREAKING CHANGE] COM objects now inherit from `NativeFinalizer`. Instead of
+  directly releasing the memory allocated for them, you can now call
+  `.release()` to decrement the reference count, and the memory will be
+  automatically disposed when the refcount falls to zero (#623, @halildurmus)
+- Update examples for new COM release mechanism (#623, @halildurmus)
+- Add APIs for processor / firmware information (#627, @timsneath)
+- Add APIs for shell file operations (#630, @timsneath)
+- Update to latest Win32 metadata (#626, @timsneath)
+- Update upper Dart SDK constraint to explicitly support Dart 3
+
 ## 3.1.3
 
 - Restructure generator util to use JSON for all data files (#605, @timsneath)
