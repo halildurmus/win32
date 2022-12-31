@@ -22,6 +22,9 @@ import '../../internal/hstring_array.dart';
 import 'imap.dart';
 import 'stringmap.dart';
 
+/// Notifies listeners of dynamic changes to a map, such as when items are added
+/// or removed.
+///
 /// {@category Interface}
 /// {@category winrt}
 class IObservableMap<K, V> extends IInspectable {

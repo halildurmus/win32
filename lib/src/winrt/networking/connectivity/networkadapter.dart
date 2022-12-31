@@ -52,6 +52,6 @@ class NetworkAdapter extends IInspectable implements INetworkAdapter {
   Guid get networkAdapterId => _iNetworkAdapter.networkAdapterId;
 
   @override
-  Pointer<COMObject> getConnectedProfileAsync() =>
+  Future<ConnectionProfile?> getConnectedProfileAsync() =>
       _iNetworkAdapter.getConnectedProfileAsync();
 }

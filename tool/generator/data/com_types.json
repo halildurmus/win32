@@ -90,6 +90,7 @@
     "Windows.Win32.UI.Shell.IFileIsInUse": "Exposes methods that can be called to get information on or close a file that is in use by another application. When an application attempts to access a file and finds that file already in use, it can use the methods of this interface to gather information to present to the user in a dialog box.",
     "Windows.Win32.UI.Shell.IFileOpenDialog": "Extends the IFileDialog interface by adding methods specific to the open dialog.",
     "Windows.Win32.UI.Shell.IFileSaveDialog": "Extends the IFileDialog interface by adding methods specific to the save dialog, which include those that provide support for the collection of metadata to be persisted with the file.",
+    "Windows.Win32.UI.Shell.IInitializeWithWindow": "Exposes a method through which a client can provide an owner window to a Windows Runtime (WinRT) object used in a desktop application.",
     "Windows.Win32.UI.Shell.IKnownFolder": "Exposes methods that allow an application to retrieve information about a known folder's category, type, GUID, pointer to an item identifier list (PIDL) value, redirection capabilities, and definition. It provides a method for the retrieval of a known folder's [IShellItem] object. It also provides methods to get or set the path of the known folder.",
     "Windows.Win32.UI.Shell.IKnownFolderManager": "Exposes methods that create, enumerate or manage existing known folders.",
     "Windows.Win32.UI.Shell.IModalWindow": "Exposes a method that represents a modal window.",

@@ -18,7 +18,7 @@ void main() {
 
   test('typeArguments', () {
     expect(
-        typeArguments('IAsyncOperation<StorageFile>'), equals('StorageFile'));
+        typeArguments('IAsyncOperation<StorageFile?>'), equals('StorageFile?'));
     expect(typeArguments('IMap<String, Object?>'), equals('String, Object?'));
     expect(typeArguments('IMapView<String, IVectorView<TextSegment>?>'),
         equals('String, IVectorView<TextSegment>?'));
@@ -26,7 +26,7 @@ void main() {
 
   test('outerType', () {
     expect(
-        outerType('IAsyncOperation<StorageFile>'), equals('IAsyncOperation'));
+        outerType('IAsyncOperation<StorageFile?>'), equals('IAsyncOperation'));
     expect(outerType('IMap<String, Object?>'), equals('IMap'));
     expect(outerType('IMapView<String, IVectorView<TextSegment>?>'),
         equals('IMapView'));
@@ -148,7 +148,7 @@ void main() {
             .findMethod('PickSingleFileAsync')!
             .returnType
             .typeIdentifier),
-        equals('IAsyncOperation<StorageFile>'));
+        equals('IAsyncOperation<StorageFile?>'));
     expect(
         parseGenericTypeIdentifierName(fileOpenPicker
             .findMethod('PickMultipleFilesAsync')!
@@ -214,7 +214,7 @@ void main() {
     expect(
         parseArgumentForCreatorParameter(jsonObject.interfaces[2].typeSpec!),
         equals(
-            '(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: IJsonValue.fromRawPointer)'));
+            "(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: IJsonValue.fromRawPointer, iterableIid: '{dfabb6e1-0411-5a8f-aa87-354e7110f099}')"));
     expect(
         parseArgumentForCreatorParameter(jsonObject.interfaces[3].typeSpec!),
         equals(
@@ -254,7 +254,8 @@ void main() {
     expect(
         parseArgumentForCreatorParameterFromGenericTypeIdentifier(
             stringMap.interfaces[0].typeSpec!),
-        equals('IMap.fromRawPointer'));
+        equals(
+            "(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}')"));
     expect(
         parseArgumentForCreatorParameterFromGenericTypeIdentifier(
             stringMap.interfaces[1].typeSpec!),
@@ -272,7 +273,8 @@ void main() {
     expect(
         parseArgumentForCreatorParameterFromGenericTypeIdentifier(
             stringMap.findMethod('GetView')!.returnType.typeIdentifier),
-        equals('IMapView.fromRawPointer'));
+        equals(
+            "(Pointer<COMObject> ptr) => IMapView.fromRawPointer(ptr, iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}')"));
 
     final fileOpenPicker = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
@@ -281,7 +283,8 @@ void main() {
             .findMethod('get_FileTypeFilter')!
             .returnType
             .typeIdentifier),
-        equals('IVector.fromRawPointer'));
+        equals(
+            "(Pointer<COMObject> ptr) => IVector.fromRawPointer(ptr, iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}')"));
     expect(
         parseArgumentForCreatorParameterFromGenericTypeIdentifier(fileOpenPicker
             .findMethod('PickSingleFileAsync')!
@@ -295,7 +298,7 @@ void main() {
             .returnType
             .typeIdentifier),
         equals(
-            '(Pointer<COMObject> ptr) => IAsyncOperation.fromRawPointer(ptr, creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr, creator: StorageFile.fromRawPointer))'));
+            "(Pointer<COMObject> ptr) => IAsyncOperation.fromRawPointer(ptr, creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr, creator: StorageFile.fromRawPointer, iterableIid: '{9ac00304-83ea-5688-87b6-ae38aab65d0b}'))"));
 
     final storageFileQueryResult2 = MetadataStore.getMetadataForType(
         'Windows.Storage.Search.IStorageFileQueryResult2')!;
@@ -306,7 +309,7 @@ void main() {
                 .returnType
                 .typeIdentifier),
         equals(
-            '(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: IVectorView.fromRawPointer)'));
+            "(Pointer<COMObject> ptr) => IMap.fromRawPointer(ptr, creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr, iterableIid: '{5498f4f3-cee4-5b72-9729-815c4ad7b9dc}'), iterableIid: '{f819a276-b3f5-54d4-b8fd-c9adb7f700e3}')"));
 
     final pedometer2 = MetadataStore.getMetadataForType(
         'Windows.Devices.Sensors.IPedometer2')!;
@@ -316,7 +319,7 @@ void main() {
             .returnType
             .typeIdentifier),
         equals(
-            '(Pointer<COMObject> ptr) => IMapView.fromRawPointer(ptr, creator: PedometerReading.fromRawPointer)'));
+            "(Pointer<COMObject> ptr) => IMapView.fromRawPointer(ptr, creator: PedometerReading.fromRawPointer, iterableIid: '{098f29cb-bc91-5639-a541-d5a4811ec35b}')"));
   });
 
   test('primitiveTypeSignatureFromBaseType', () {

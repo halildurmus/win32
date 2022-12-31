@@ -39,6 +39,6 @@ void main() {
   test('isSubtypeOfWinRTEnum', () {
     expect(isSubtypeOfWinRTEnum<AsyncStatus>(), isTrue);
     expect(isSubtypeOfWinRTEnum<FileAttributes>(), isTrue);
-    expect(isSubtypeOfWinRTEnum<IAsyncInfo>(), isFalse);
+    expect(isSubtypeOfWinRTEnum<ICalendar>(), isFalse);
   });
 }
