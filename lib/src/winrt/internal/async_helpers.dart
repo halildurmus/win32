@@ -30,15 +30,16 @@ void completeAsyncOperation<T, C>(
         asyncOperation, completer, () => completer.complete(value()));
 
 /// Completes the given [completer] by polling [asyncDelegate]'s `status`
-/// property every `10` milliseconds until the [asyncDelegate] completes.
+/// property every `1/60` seconds until the [asyncDelegate] completes.
 ///
 /// [onCompleted] is called when the [asyncDelegate] completes successfully.
 Future<void> _completeAsyncDelegate<T extends IAsyncInfo, C>(T asyncDelegate,
     Completer<C> completer, void Function() onCompleted) async {
   try {
     while (asyncDelegate.status == AsyncStatus.started) {
-      // Yield execution to Dart for 10 milliseconds to avoid blocking the app.
-      await Future<void>.delayed(const Duration(milliseconds: 10));
+      // Yield execution to Dart for 1/60 seconds to avoid blocking the app.
+      await Future<void>.delayed(
+          const Duration(microseconds: 1 * 1000 * 1000 ~/ 60));
     }
 
     switch (asyncDelegate.status) {
