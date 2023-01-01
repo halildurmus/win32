@@ -96,8 +96,8 @@ enum PositionAccuracy implements WinRTEnum {
 enum PositionSource implements WinRTEnum {
   cellular(0),
   satellite(1),
-  wiFi(2),
-  iPAddress(3),
+  wifi(2),
+  ipAddress(3),
   unknown(4),
   default_(5),
   obfuscated(6);

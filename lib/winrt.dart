@@ -69,7 +69,6 @@ export 'src/winrt/devices/enumeration/devicepicker.dart';
 export 'src/winrt/devices/enumeration/devicepickerfilter.dart';
 export 'src/winrt/devices/enumeration/idevicepicker.dart';
 export 'src/winrt/devices/enumeration/idevicepickerfilter.dart';
-
 export 'src/winrt/devices/geolocation/enums.g.dart';
 export 'src/winrt/devices/geolocation/geocoordinate.dart';
 export 'src/winrt/devices/geolocation/geolocator.dart';
@@ -87,7 +86,6 @@ export 'src/winrt/devices/geolocation/igeoposition2.dart';
 export 'src/winrt/devices/geolocation/igeoshape.dart';
 export 'src/winrt/devices/geolocation/structs.g.dart';
 export 'src/winrt/devices/geolocation/venuedata.dart';
-
 export 'src/winrt/devices/power/batteryreport.dart';
 export 'src/winrt/devices/power/ibatteryreport.dart';
 export 'src/winrt/devices/sensors/ipedometerreading.dart';
