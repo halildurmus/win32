@@ -56,7 +56,7 @@ mixin _AsyncOperationProjection on WinRTMethodProjection {
     final creator =
         parseArgumentForCreatorParameter(returnType.typeIdentifier.typeArg!);
 
-    // If the type argument is an enum or int, it's native type (e.g. Int32,
+    // If the type argument is an enum or int, its native type (e.g. Int32,
     // Uint32) must be passed in the 'intType' parameter so that the
     // 'IAsyncOperation' implementations can use the appropriate native type
     final intType = typeProjection.isWinRTEnum || asyncOperationTypeArg == 'int'

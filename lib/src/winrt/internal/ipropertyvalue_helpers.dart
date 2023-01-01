@@ -91,21 +91,21 @@ extension IPropertyValueHelper on IPropertyValue {
         return getTimeSpan();
       case PropertyType.timeSpanArray:
         return _durationListFromArray(getTimeSpanArray);
-      case PropertyType.uInt16:
+      case PropertyType.uint16:
         return getUInt16();
-      case PropertyType.uInt16Array:
+      case PropertyType.uint16Array:
         return _uint16ListFromArray(getUInt16Array);
-      case PropertyType.uInt32:
+      case PropertyType.uint32:
         return getUInt32();
-      case PropertyType.uInt32Array:
+      case PropertyType.uint32Array:
         return _uint32ListFromArray(getUInt32Array);
-      case PropertyType.uInt64:
+      case PropertyType.uint64:
         return getUInt64();
-      case PropertyType.uInt64Array:
+      case PropertyType.uint64Array:
         return _uint64ListFromArray(getUInt64Array);
-      case PropertyType.uInt8:
+      case PropertyType.uint8:
         return getUInt8();
-      case PropertyType.uInt8Array:
+      case PropertyType.uint8Array:
         return _uint8ListFromArray(getUInt8Array);
       default:
         throw UnsupportedError('Unsupported type: ${this.type}');

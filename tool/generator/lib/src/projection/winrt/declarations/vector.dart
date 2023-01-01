@@ -28,7 +28,7 @@ mixin _VectorProjection on WinRTMethodProjection {
     final iterableIid =
         iterableIidFromVectorTypeIdentifier(returnType.typeIdentifier);
 
-    // If the type argument is an enum or int, it's native type (e.g. Int32,
+    // If the type argument is an enum or int, its native type (e.g. Int32,
     // Uint32) must be passed in the 'intType' parameter so that the 'IVector'
     // and 'IVectorView' implementations can use the appropriate native type
     final intType = typeProjection.isWinRTEnum || vectorTypeArg == 'int'

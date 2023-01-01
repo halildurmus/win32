@@ -73,7 +73,7 @@ class WinRTParameterProjection extends ParameterProjection {
       final typeProjection = TypeProjection(type.typeIdentifier.typeArg!);
       final args = <String>['convertToIReference: true'];
 
-      // If the nullable parameter is an enum, a double or an int, it's native
+      // If the nullable parameter is an enum, a double or an int, its native
       // type (e.g. Double, Float, Int32, Uint32) must be passed in the
       // `nativeType` parameter so that the 'boxValue' function can use the
       // appropriate native type for the parameter

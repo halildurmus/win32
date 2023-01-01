@@ -29,20 +29,27 @@ class EnumProjection {
   List<Field> get _fields => typeDef.fields.skip(1).toList()
     ..sort((a, b) => a.value.compareTo(b.value));
 
-  String get identifiers {
-    final buffer = StringBuffer();
+  static const _acronyms = <String>{
+    'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi' //
+  };
 
-    for (final field in _fields) {
-      final fieldName = safeIdentifierForString(field.name.length == 1
-          ? field.name.toLowerCase()
-          : field.name.toCamelCase());
-      buffer
-        ..write('$fieldName(${field.value})')
-        ..write(field != _fields.last ? ',\n' : ';');
+  String safeEnumIdentifier(String fieldName) {
+    if (fieldName.length == 1) return fieldName.toLowerCase();
+
+    for (final acronym in _acronyms) {
+      if (fieldName.startsWith(acronym)) {
+        // UInt32 -> uint32, IPAddress -> ipAddress, DPadUp -> dpadUp etc.
+        return safeIdentifierForString(
+            acronym.toLowerCase() + fieldName.substring(acronym.length));
+      }
     }
 
-    return buffer.toString();
+    return safeIdentifierForString(fieldName.toCamelCase());
   }
+
+  List<String> get identifiers => _fields
+      .map((field) => '${safeEnumIdentifier(field.name)}(${field.value})')
+      .toList();
 
   String get _enumValueVariable => '''
     @override
@@ -62,7 +69,7 @@ class EnumProjection {
   String toString() => '''
     $classPreamble
     $classDeclaration
-      $identifiers
+      ${identifiers.join(',\n')};
 
       $_enumValueVariable
 
@@ -91,25 +98,16 @@ class FlagsEnumProjection extends EnumProjection {
   ''';
 
   @override
-  String get identifiers {
-    final buffer = StringBuffer();
-
-    for (final field in _fields) {
-      final fieldName = safeIdentifierForString(field.name.length == 1
-          ? field.name.toLowerCase()
-          : field.name.toCamelCase());
-      buffer.writeln(
-          "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');");
-    }
-
-    return buffer.toString();
+  List<String> get identifiers {
+    return _fields.map((field) {
+      final identifier = safeEnumIdentifier(field.name);
+      return "static const $identifier = $_projectedName(${field.value}, name: '$identifier');";
+    }).toList();
   }
 
   String get _values {
-    final fields = _fields
-        .map((f) => safeIdentifierForString(
-            f.name.length == 1 ? f.name.toLowerCase() : f.name.toCamelCase()))
-        .join(',');
+    final fields =
+        _fields.map((field) => safeEnumIdentifier(field.name)).join(',');
     return 'static const List<$enumName> values = [$fields];';
   }
 
@@ -148,7 +146,7 @@ class FlagsEnumProjection extends EnumProjection {
 
       $_factoryConstructor
 
-      $identifiers
+      ${identifiers.join()}
 
       $_values
 
