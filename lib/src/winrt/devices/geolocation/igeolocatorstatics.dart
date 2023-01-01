@@ -25,7 +25,6 @@ import '../../foundation/iasyncoperation.dart';
 import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import 'enums.g.dart';
-import 'geolocator.dart';
 import 'geoposition.dart';
 
 /// @nodoc
@@ -63,7 +62,6 @@ class IGeolocatorStatics extends IInspectable {
     final asyncOperation =
         IAsyncOperation<GeolocationAccessStatus>.fromRawPointer(retValuePtr,
             enumCreator: GeolocationAccessStatus.from, intType: Int32);
-
     completeAsyncOperation(
         asyncOperation, completer, asyncOperation.getResults);
 
