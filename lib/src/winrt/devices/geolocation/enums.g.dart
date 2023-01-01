@@ -10,6 +10,48 @@
 
 import '../../foundation/winrt_enum.dart';
 
+/// Indicates the altitude reference system to be used in defining a
+/// geographic shape.
+///
+/// {@category Enum}
+enum AltitudeReferenceSystem implements WinRTEnum {
+  unspecified(0),
+  terrain(1),
+  ellipsoid(2),
+  geoid(3),
+  surface(4);
+
+  @override
+  final int value;
+
+  const AltitudeReferenceSystem(this.value);
+
+  factory AltitudeReferenceSystem.from(int value) =>
+      AltitudeReferenceSystem.values.firstWhere((e) => e.value == value,
+          orElse: () => throw ArgumentError.value(
+              value, 'value', 'No enum value with that value'));
+}
+
+/// Indicates the shape of a geographic region.
+///
+/// {@category Enum}
+enum GeoshapeType implements WinRTEnum {
+  geopoint(0),
+  geocircle(1),
+  geopath(2),
+  geoboundingBox(3);
+
+  @override
+  final int value;
+
+  const GeoshapeType(this.value);
+
+  factory GeoshapeType.from(int value) =>
+      GeoshapeType.values.firstWhere((e) => e.value == value,
+          orElse: () => throw ArgumentError.value(
+              value, 'value', 'No enum value with that value'));
+}
+
 /// Indicates the requested accuracy level for the location data that the
 /// application uses.
 ///
@@ -25,6 +67,29 @@ enum PositionAccuracy implements WinRTEnum {
 
   factory PositionAccuracy.from(int value) =>
       PositionAccuracy.values.firstWhere((e) => e.value == value,
+          orElse: () => throw ArgumentError.value(
+              value, 'value', 'No enum value with that value'));
+}
+
+/// Indicates the source used to obtain a Geocoordinate.
+///
+/// {@category Enum}
+enum PositionSource implements WinRTEnum {
+  cellular(0),
+  satellite(1),
+  wiFi(2),
+  iPAddress(3),
+  unknown(4),
+  default_(5),
+  obfuscated(6);
+
+  @override
+  final int value;
+
+  const PositionSource(this.value);
+
+  factory PositionSource.from(int value) =>
+      PositionSource.values.firstWhere((e) => e.value == value,
           orElse: () => throw ArgumentError.value(
               value, 'value', 'No enum value with that value'));
 }
