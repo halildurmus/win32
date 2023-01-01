@@ -1,6 +1,6 @@
 {
-    "Windows.Foundation.Numerics.Matrix3x2": "Describes a 3*2 floating point matrix.",
     "Windows.Devices.Geolocation.BasicGeoposition": "The basic information to describe a geographic position.",
+    "Windows.Foundation.Numerics.Matrix3x2": "Describes a 3*2 floating point matrix.",
     "Windows.Foundation.Numerics.Matrix4x4": "Describes a 4*4 floating point matrix.",
     "Windows.Foundation.Numerics.Plane": "Describes a plane (a flat, two-dimensional surface).",
     "Windows.Foundation.Numerics.Quaternion": "Describes a quaternion, which is an abstract representation of an orientation in space that is based on complex numbers.",
