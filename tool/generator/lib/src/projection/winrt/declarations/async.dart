@@ -1,3 +1,4 @@
+import '../../type.dart';
 import '../../utils.dart';
 import '../winrt_method.dart';
 
@@ -46,13 +47,33 @@ mixin _AsyncOperationProjection on WinRTMethodProjection {
 
   /// The constructor arguments passed to the constructor of `IAsyncOperation`.
   String get asyncOperationConstructorArgs {
+    final typeProjection = TypeProjection(returnType.typeIdentifier.typeArg!);
+
     // If the type argument is an enum or a WinRT Object (e.g. StorageFile), the
     // constructor of that class must be passed in the 'enumCreator' parameter
     // for enums, 'creator' parameter for WinRT Objects so that the
     // IAsyncOperation implementation can instantiate the object.
     final creator =
         parseArgumentForCreatorParameter(returnType.typeIdentifier.typeArg!);
-    return creator == null ? '' : ', creator: $creator';
+
+    // If the type argument is an enum or int, it's native type (e.g. Int32,
+    // Uint32) must be passed in the 'intType' parameter so that the
+    // 'IAsyncOperation' implementations can use the appropriate native type
+    final intType = typeProjection.isWinRTEnum || asyncOperationTypeArg == 'int'
+        ? typeProjection.nativeType
+        : null;
+
+    final args = <String>[];
+    if (typeProjection.isWinRTEnum) {
+      args.add('enumCreator: $creator');
+    } else if (creator != null) {
+      args.add('creator: $creator');
+    }
+    if (intType != null) {
+      args.add('intType: $intType');
+    }
+
+    return args.isEmpty ? '' : ', ${args.join(', ')}';
   }
 
   /// The function to call when completing the completer after the asynchronous
