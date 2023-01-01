@@ -37,8 +37,8 @@ class EnumProjection {
     if (fieldName.length == 1) return fieldName.toLowerCase();
 
     for (final acronym in _acronyms) {
-      // UInt32 -> uint32, IPAddress -> ipAddress, DPadUp -> dpadUp etc.
       if (fieldName.startsWith(acronym)) {
+        // UInt32 -> uint32, IPAddress -> ipAddress, DPadUp -> dpadUp etc.
         return safeIdentifierForString(
             acronym.toLowerCase() + fieldName.substring(acronym.length));
       }
@@ -47,10 +47,9 @@ class EnumProjection {
     return safeIdentifierForString(fieldName.toCamelCase());
   }
 
-  List<String> get identifiers => _fields.map((field) {
-        final fieldName = safeEnumIdentifier(field.name);
-        return '$fieldName(${field.value})';
-      }).toList();
+  List<String> get identifiers => _fields
+      .map((field) => '${safeEnumIdentifier(field.name)}(${field.value})')
+      .toList();
 
   String get _enumValueVariable => '''
     @override
@@ -101,8 +100,8 @@ class FlagsEnumProjection extends EnumProjection {
   @override
   List<String> get identifiers {
     return _fields.map((field) {
-      final fieldName = safeEnumIdentifier(field.name);
-      return "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');";
+      final identifier = safeEnumIdentifier(field.name);
+      return "static const $identifier = $_projectedName(${field.value}, name: '$identifier');";
     }).toList();
   }
 
