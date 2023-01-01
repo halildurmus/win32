@@ -47,18 +47,10 @@ class EnumProjection {
     return safeIdentifierForString(fieldName.toCamelCase());
   }
 
-  String get identifiers {
-    final buffer = StringBuffer();
-
-    for (final field in _fields) {
-      final fieldName = safeEnumIdentifier(field.name);
-      buffer
-        ..write('$fieldName(${field.value})')
-        ..write(field != _fields.last ? ',\n' : ';');
-    }
-
-    return buffer.toString();
-  }
+  List<String> get identifiers => _fields.map((field) {
+        final fieldName = safeEnumIdentifier(field.name);
+        return '$fieldName(${field.value})';
+      }).toList();
 
   String get _enumValueVariable => '''
     @override
@@ -78,7 +70,7 @@ class EnumProjection {
   String toString() => '''
     $classPreamble
     $classDeclaration
-      $identifiers
+      ${identifiers.join(',\n')};
 
       $_enumValueVariable
 
@@ -107,16 +99,11 @@ class FlagsEnumProjection extends EnumProjection {
   ''';
 
   @override
-  String get identifiers {
-    final buffer = StringBuffer();
-
-    for (final field in _fields) {
+  List<String> get identifiers {
+    return _fields.map((field) {
       final fieldName = safeEnumIdentifier(field.name);
-      buffer.writeln(
-          "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');");
-    }
-
-    return buffer.toString();
+      return "static const $fieldName = $_projectedName(${field.value}, name: '$fieldName');";
+    }).toList();
   }
 
   String get _values {
@@ -160,7 +147,7 @@ class FlagsEnumProjection extends EnumProjection {
 
       $_factoryConstructor
 
-      $identifiers
+      ${identifiers.join()}
 
       $_values
 
