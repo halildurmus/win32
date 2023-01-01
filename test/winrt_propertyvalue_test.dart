@@ -16,7 +16,7 @@ void main() {
 
     test('UInt8', () {
       final pv = PropertyValue.createUInt8(30);
-      expect(pv.type, equals(PropertyType.uInt8));
+      expect(pv.type, equals(PropertyType.uint8));
       expect(pv.getUInt8(), equals(30));
 
       pv.release();
@@ -28,7 +28,7 @@ void main() {
         array[idx] = (10 * idx) + 10;
       }
       final pv = PropertyValue.createUInt8Array(5, array);
-      expect(pv.type, equals(PropertyType.uInt8Array));
+      expect(pv.type, equals(PropertyType.uint8Array));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint8>>();
@@ -46,7 +46,7 @@ void main() {
 
     test('UInt16', () {
       final pv = PropertyValue.createUInt16(65534);
-      expect(pv.type, equals(PropertyType.uInt16));
+      expect(pv.type, equals(PropertyType.uint16));
       expect(pv.getUInt16(), equals(65534));
 
       pv.release();
@@ -58,7 +58,7 @@ void main() {
         array[idx] = (100 * idx) + 100;
       }
       final pv = PropertyValue.createUInt16Array(5, array);
-      expect(pv.type, equals(PropertyType.uInt16Array));
+      expect(pv.type, equals(PropertyType.uint16Array));
 
       final arraySize = calloc<Uint32>();
       final newArray = calloc<Pointer<Uint16>>();
