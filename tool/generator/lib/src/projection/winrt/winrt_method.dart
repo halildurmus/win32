@@ -2,6 +2,7 @@ import 'package:winmd/winmd.dart';
 
 import '../method.dart';
 import '../type.dart';
+import 'declarations/async.dart';
 import 'declarations/comobject.dart';
 import 'declarations/datetime.dart';
 import 'declarations/default.dart';
@@ -88,6 +89,14 @@ class WinRTMethodProjection extends MethodProjection {
   bool get isTimeSpanReturn =>
       returnType.typeIdentifier.name == 'Windows.Foundation.TimeSpan';
 
+  bool get isAsyncActionReturn =>
+      returnType.typeIdentifier.name == 'Windows.Foundation.IAsyncAction';
+
+  bool get isAsyncOperationReturn =>
+      returnType.isGenericType &&
+      (returnType.typeIdentifier.type?.name.endsWith('IAsyncOperation`1') ??
+          false);
+
   bool get isMapReturn =>
       returnType.isGenericType &&
       (returnType.typeIdentifier.type?.name.endsWith('IMap`2') ?? false);
@@ -158,6 +167,14 @@ class WinRTMethodProjection extends MethodProjection {
   @override
   String toString() {
     try {
+      if (isAsyncActionReturn) {
+        return declarationFor(WinRTMethodReturningAsyncActionProjection.new);
+      }
+
+      if (isAsyncOperationReturn) {
+        return declarationFor(WinRTMethodReturningAsyncOperationProjection.new);
+      }
+
       if (isEnumReturn) {
         return declarationFor(WinRTMethodReturningEnumProjection.new);
       }

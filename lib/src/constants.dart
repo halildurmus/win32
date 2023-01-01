@@ -2501,6 +2501,52 @@ const WH_KEYBOARD_LL = 13;
 /// Installs a hook procedure that monitors low-level mouse input events.
 const WH_MOUSE_LL = 14;
 
+/// Test the extended-key flag.
+const LLKHF_EXTENDED = KF_EXTENDED >> 8;
+
+/// Test the event-injected (from any process) flag.
+const LLKHF_INJECTED = 0x00000010;
+
+/// Test the context code.
+const LLKHF_ALTDOWN = KF_ALTDOWN >> 8;
+
+/// Test the transition-state flag.
+const LLKHF_UP = KF_UP >> 8;
+
+/// Test the event-injected (from a process running at lower integrity level)
+/// flag.
+const LLKHF_LOWER_IL_INJECTED = 0x00000002;
+
+/// Test the event-injected (from any process) flag.
+const LLMHF_INJECTED = 0x00000001;
+
+/// Test the event-injected (from a process running at lower integrity level)
+/// flag.
+const LLMHF_LOWER_IL_INJECTED = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// Keystroke message flags
+// -----------------------------------------------------------------------------
+
+/// Manipulates the extended key flag.
+const KF_EXTENDED = 0x0100;
+
+/// Manipulates the dialog mode flag, which indicates whether a dialog box is
+/// active.
+const KF_DLGMODE = 0x0800;
+
+/// Manipulates the menu mode flag, which indicates whether a menu is active.
+const KF_MENUMODE = 0x1000;
+
+/// Manipulates the context code flag.
+const KF_ALTDOWN = 0x2000;
+
+/// Manipulates the previous key state flag.
+const KF_REPEAT = 0x4000;
+
+/// Manipulates the transition state flag.
+const KF_UP = 0x8000;
+
 // -----------------------------------------------------------------------------
 // System colors
 // -----------------------------------------------------------------------------

@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -22,6 +23,7 @@ import '../../../winrt_helpers.dart';
 import '../../foundation/collections/ivector.dart';
 import '../../foundation/collections/ivectorview.dart';
 import '../../foundation/iasyncoperation.dart';
+import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import '../storagefile.dart';
 import 'enums.g.dart';
@@ -205,8 +207,9 @@ class IFileOpenPicker extends IInspectable {
         iterableIid: '{e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e}');
   }
 
-  Pointer<COMObject> pickSingleFileAsync() {
+  Future<StorageFile?> pickSingleFileAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<StorageFile?>();
 
     final hr = ptr.ref.vtable
             .elementAt(15)
@@ -223,11 +226,18 @@ class IFileOpenPicker extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation = IAsyncOperation<StorageFile?>.fromRawPointer(
+        retValuePtr,
+        creator: StorageFile.fromRawPointer);
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
+
+    return completer.future;
   }
 
-  Pointer<COMObject> pickMultipleFilesAsync() {
+  Future<List<StorageFile>> pickMultipleFilesAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<List<StorageFile>>();
 
     final hr = ptr.ref.vtable
             .elementAt(16)
@@ -244,6 +254,15 @@ class IFileOpenPicker extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation =
+        IAsyncOperation<IVectorView<StorageFile>>.fromRawPointer(
+            retValuePtr,
+            creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr,
+                creator: StorageFile.fromRawPointer,
+                iterableIid: '{9ac00304-83ea-5688-87b6-ae38aab65d0b}'));
+    completeAsyncOperation(
+        asyncOperation, completer, () => asyncOperation.getResults().toList());
+
+    return completer.future;
   }
 }

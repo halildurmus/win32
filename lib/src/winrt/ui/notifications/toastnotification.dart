@@ -20,7 +20,6 @@ import '../../../winrt_helpers.dart';
 import '../../data/xml/dom/xmldocument.dart';
 import '../../foundation/ireference.dart';
 import '../../internal/hstring_array.dart';
-import '../../internal/ipropertyvalue_helpers.dart';
 import 'enums.g.dart';
 import 'itoastnotification.dart';
 import 'itoastnotification2.dart';

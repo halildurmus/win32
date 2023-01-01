@@ -93,11 +93,11 @@ class FileOpenPicker extends IInspectable
   IVector<String> get fileTypeFilter => _iFileOpenPicker.fileTypeFilter;
 
   @override
-  Pointer<COMObject> pickSingleFileAsync() =>
+  Future<StorageFile?> pickSingleFileAsync() =>
       _iFileOpenPicker.pickSingleFileAsync();
 
   @override
-  Pointer<COMObject> pickMultipleFilesAsync() =>
+  Future<List<StorageFile>> pickMultipleFilesAsync() =>
       _iFileOpenPicker.pickMultipleFilesAsync();
 
   // IFileOpenPicker3 methods

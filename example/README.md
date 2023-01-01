@@ -36,6 +36,7 @@ require Flutter.
 | `play_sound.dart`     | Plays a WAV file through the Windows `PlaySound` API      |
 | `printer_list.dart`   | Enumerate available printers on the Windows system        |
 | `printer_raw.dart`    | Sends RAW data directly to a Windows Printer              |
+| `recycle_bin.dart`    | Queries the recycle bin and adds an item to it            |
 | `registry.dart`       | Demonstrates querying the registry for values             |
 | `screenshot.dart`     | Takes a screenshot of the current desktop                 |
 | `scroll.dart`         | Example of horizontal and vertical scrolling text window  |
@@ -53,6 +54,7 @@ require Flutter.
 | `wasapi.dart`         | Demonstrates sound generation with WASAPI library         |
 | `window.dart`         | Enumerates open windows and basic window manipulation     |
 | `winmd.dart`          | Interrogate Windows Runtime types                         |
+| `winrt_picker.dart`   | Demonstrates picking a file through a WinRT API           |
 | `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
 | `wmi_wql.dart`        | Uses WMI to retrieve information using WQL                |
 | `wsl.dart`            | Retrieve information from a WSL instance through APIs     |

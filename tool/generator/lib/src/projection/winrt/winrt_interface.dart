@@ -158,9 +158,19 @@ class WinRTInterfaceProjection extends ComInterfaceProjection {
       imports.add('ipropertyvalue.dart');
     }
 
+    final hasAsyncDelegateImport = imports.any((import) =>
+        import.endsWith('iasyncaction.dart') ||
+        import.endsWith('iasyncoperation.dart'));
+    if (typeDef.isInterface && hasAsyncDelegateImport) {
+      imports.addAll([
+        'dart:async',
+        relativePathTo('winrt/internal/async_helpers.dart'),
+      ]);
+    }
+
     final hasIReferenceImport =
         imports.any((import) => import.endsWith('ireference.dart'));
-    if (hasIReferenceImport) {
+    if (typeDef.isInterface && hasIReferenceImport) {
       imports.add(relativePathTo('winrt/internal/ipropertyvalue_helpers.dart'));
     }
 

@@ -220,7 +220,7 @@ String stripLeadingUnderscores(String name) {
 /// `String, String` for a name like `IMap<String, String>`.
 String typeArguments(String name) {
   if (!name.contains('<')) return name;
-  return name.substring(name.indexOf('<') + 1, name.length - 1);
+  return name.substring(name.indexOf('<') + 1, name.lastIndexOf('>'));
 }
 
 /// Take a name like `IAsyncOperation<StorageFile>` and return `IAsyncOperation`.
@@ -269,12 +269,34 @@ String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
       : ti.typeArg;
 
   final creator = parseArgumentForCreatorParameter(typeArg!);
-  if (creator == null) return '$typeIdentifierName.fromRawPointer';
 
-  final isTypeArgEnum = typeArg.type?.isEnum ?? false;
-  final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
+  final args = <String>['ptr'];
+  if (creator != null) {
+    final isTypeArgEnum = typeArg.type?.isEnum ?? false;
+    final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
+    args.add('$creatorParamName: $creator');
+  }
 
-  return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(ptr, $creatorParamName: $creator)';
+  if (['IVector', 'IVectorView'].contains(typeIdentifierName)) {
+    args.add("iterableIid: '${iterableIidFromVectorTypeIdentifier(ti)}'");
+  } else if (['IMap', 'IMapView'].contains(typeIdentifierName)) {
+    args.add("iterableIid: '${iterableIidFromMapTypeIdentifier(ti)}'");
+  } else if (typeIdentifierName == 'IReference') {
+    final referenceArgSignature = parseTypeIdentifierSignature(ti.typeArg!);
+    final referenceSignature =
+        'pinterface($IID_IReference;$referenceArgSignature)';
+    args.add("referenceIid: '${iidFromSignature(referenceSignature)}'");
+  } else {
+    if (creator == null) return '$typeIdentifierName.fromRawPointer';
+  }
+
+  // e.g. IIterable<int>, IVector<int>, IVectorView<int>
+  if (typeArguments(parseGenericTypeIdentifierName(ti)) == 'int') {
+    final typeProjection = TypeProjection(ti.typeArg!);
+    args.add('intType: ${typeProjection.nativeType}');
+  }
+
+  return '(Pointer<COMObject> ptr) => $typeIdentifierName.fromRawPointer(${args.join(', ')})';
 }
 
 /// Returns the appropriate Dart primitive type name for the given [baseType].
@@ -350,6 +372,21 @@ String parseGenericTypeIdentifierName(TypeIdentifier typeIdentifier) {
     }
 
     return '$parentTypeName<$firstArg, $secondArg$questionMark>';
+  }
+
+  final isAsyncOperation = parentTypeName == 'IAsyncOperation';
+  if (isAsyncOperation) {
+    final typeArg = parseTypeIdentifierName(typeIdentifier.typeArg!);
+    final typeProjection = TypeProjection(typeIdentifier.typeArg!);
+    final typeArgIsNullable =
+        // Collection interfaces cannot return null.
+        !typeArg.startsWith(RegExp(r'(IMap|IVector)')) &&
+            // Primitives cannot return null.
+            !['bool', 'double', 'int', 'String'].contains(typeArg) &&
+            // Value types (enums and structs) cannot return null.
+            !typeProjection.isWrappedValueType;
+    final questionMark = typeArgIsNullable ? '?' : '';
+    return 'IAsyncOperation<$typeArg$questionMark>';
   }
 
   return '$parentTypeName<${parseTypeIdentifierName(typeIdentifier.typeArg!)}>';

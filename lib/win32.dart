@@ -199,6 +199,7 @@ export 'src/com/ifiledialogcustomize.dart';
 export 'src/com/ifileisinuse.dart';
 export 'src/com/ifileopendialog.dart';
 export 'src/com/ifilesavedialog.dart';
+export 'src/com/iinitializewithwindow.dart';
 export 'src/com/iinspectable.dart';
 export 'src/com/iknownfolder.dart';
 export 'src/com/iknownfoldermanager.dart';
