@@ -30,7 +30,7 @@ class EnumProjection {
     ..sort((a, b) => a.value.compareTo(b.value));
 
   static const _acronyms = <String>{
-    'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', //
+    'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi' //
   };
 
   String safeEnumIdentifier(String fieldName) {
