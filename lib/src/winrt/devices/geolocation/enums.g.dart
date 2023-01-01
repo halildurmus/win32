@@ -32,6 +32,25 @@ enum AltitudeReferenceSystem implements WinRTEnum {
               value, 'value', 'No enum value with that value'));
 }
 
+/// Indicates if your app has permission to access location data.
+///
+/// {@category Enum}
+enum GeolocationAccessStatus implements WinRTEnum {
+  unspecified(0),
+  allowed(1),
+  denied(2);
+
+  @override
+  final int value;
+
+  const GeolocationAccessStatus(this.value);
+
+  factory GeolocationAccessStatus.from(int value) =>
+      GeolocationAccessStatus.values.firstWhere((e) => e.value == value,
+          orElse: () => throw ArgumentError.value(
+              value, 'value', 'No enum value with that value'));
+}
+
 /// Indicates the shape of a geographic region.
 ///
 /// {@category Enum}

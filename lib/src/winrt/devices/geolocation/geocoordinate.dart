@@ -21,7 +21,6 @@ import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/ireference.dart';
 import '../../internal/hstring_array.dart';
-import '../../internal/ipropertyvalue_helpers.dart';
 import 'enums.g.dart';
 import 'geocoordinatesatellitedata.dart';
 import 'geopoint.dart';

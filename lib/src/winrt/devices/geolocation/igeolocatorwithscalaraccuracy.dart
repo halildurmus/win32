@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -21,6 +22,7 @@ import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/iasyncoperation.dart';
 import '../../foundation/ireference.dart';
+import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import '../../internal/ipropertyvalue_helpers.dart';
 import 'enums.g.dart';
@@ -115,11 +117,11 @@ class IGeolocatorWithScalarAccuracy extends IInspectable
   PositionStatus get locationStatus => _iGeolocator.locationStatus;
 
   @override
-  Pointer<COMObject> getGeopositionAsync() =>
+  Future<Geoposition?> getGeopositionAsync() =>
       _iGeolocator.getGeopositionAsync();
 
   @override
-  Pointer<COMObject> getGeopositionAsyncWithAgeAndTimeout(
+  Future<Geoposition?> getGeopositionAsyncWithAgeAndTimeout(
           Duration maximumAge, Duration timeout) =>
       _iGeolocator.getGeopositionAsyncWithAgeAndTimeout(maximumAge, timeout);
 

@@ -4,6 +4,7 @@
     "Windows.Devices.Enumeration.DeviceClass": "Indicates the type of devices that the user wants to enumerate.",
     "Windows.Devices.Enumeration.DevicePickerDisplayStatusOptions": "Indicates what you'd like the device picker to show about a given device. Used with the SetDisplayStatus method on the DevicePicker object.",
     "Windows.Devices.Geolocation.AltitudeReferenceSystem": "Indicates the altitude reference system to be used in defining a geographic shape.",
+    "Windows.Devices.Geolocation.GeolocationAccessStatus": "Indicates if your app has permission to access location data.",
     "Windows.Devices.Geolocation.GeoshapeType": "Indicates the shape of a geographic region.",
     "Windows.Devices.Geolocation.PositionAccuracy": "Indicates the requested accuracy level for the location data that the application uses.",
     "Windows.Devices.Geolocation.PositionSource": "Indicates the source used to obtain a Geocoordinate.",

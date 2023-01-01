@@ -21,7 +21,6 @@ import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/ireference.dart';
 import '../../internal/hstring_array.dart';
-import '../../internal/ipropertyvalue_helpers.dart';
 import 'igeocoordinatesatellitedata.dart';
 import 'igeocoordinatesatellitedata2.dart';
 

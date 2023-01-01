@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -20,6 +21,7 @@ import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/iasyncoperation.dart';
+import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import 'enums.g.dart';
 import 'geolocator.dart';
@@ -157,8 +159,9 @@ class IGeolocator extends IInspectable {
     }
   }
 
-  Pointer<COMObject> getGeopositionAsync() {
+  Future<Geoposition?> getGeopositionAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<Geoposition?>();
 
     final hr = ptr.ref.vtable
             .elementAt(13)
@@ -175,12 +178,19 @@ class IGeolocator extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation = IAsyncOperation<Geoposition?>.fromRawPointer(
+        retValuePtr,
+        creator: Geoposition.fromRawPointer);
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
+
+    return completer.future;
   }
 
-  Pointer<COMObject> getGeopositionAsyncWithAgeAndTimeout(
+  Future<Geoposition?> getGeopositionAsyncWithAgeAndTimeout(
       Duration maximumAge, Duration timeout) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<Geoposition?>();
     final maximumAgeDuration = maximumAge.inMicroseconds * 10;
     final timeoutDuration = timeout.inMicroseconds * 10;
 
@@ -203,7 +213,13 @@ class IGeolocator extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation = IAsyncOperation<Geoposition?>.fromRawPointer(
+        retValuePtr,
+        creator: Geoposition.fromRawPointer);
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
+
+    return completer.future;
   }
 
   int add_PositionChanged(Pointer<NativeFunction<TypedEventHandler>> handler) {

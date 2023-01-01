@@ -23,7 +23,6 @@ import '../../foundation/collections/ivectorview.dart';
 import '../../foundation/iasyncoperation.dart';
 import '../../foundation/ireference.dart';
 import '../../internal/hstring_array.dart';
-import '../../internal/ipropertyvalue_helpers.dart';
 import 'enums.g.dart';
 import 'geoposition.dart';
 import 'igeolocator.dart';
@@ -45,7 +44,7 @@ class Geolocator extends IInspectable
   static const _className = 'Windows.Devices.Geolocation.Geolocator';
 
   // IGeolocatorStatics methods
-  static Pointer<COMObject> requestAccessAsync() {
+  static Future<GeolocationAccessStatus> requestAccessAsync() {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGeolocatorStatics);
     final object = IGeolocatorStatics.fromRawPointer(activationFactoryPtr);
@@ -57,7 +56,8 @@ class Geolocator extends IInspectable
     }
   }
 
-  static Pointer<COMObject> getGeopositionHistoryAsync(DateTime startTime) {
+  static Future<List<Geoposition>> getGeopositionHistoryAsync(
+      DateTime startTime) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGeolocatorStatics);
     final object = IGeolocatorStatics.fromRawPointer(activationFactoryPtr);
@@ -69,7 +69,7 @@ class Geolocator extends IInspectable
     }
   }
 
-  static Pointer<COMObject> getGeopositionHistoryWithDurationAsync(
+  static Future<List<Geoposition>> getGeopositionHistoryWithDurationAsync(
       DateTime startTime, Duration duration) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGeolocatorStatics);
@@ -145,11 +145,11 @@ class Geolocator extends IInspectable
   PositionStatus get locationStatus => _iGeolocator.locationStatus;
 
   @override
-  Pointer<COMObject> getGeopositionAsync() =>
+  Future<Geoposition?> getGeopositionAsync() =>
       _iGeolocator.getGeopositionAsync();
 
   @override
-  Pointer<COMObject> getGeopositionAsyncWithAgeAndTimeout(
+  Future<Geoposition?> getGeopositionAsyncWithAgeAndTimeout(
           Duration maximumAge, Duration timeout) =>
       _iGeolocator.getGeopositionAsyncWithAgeAndTimeout(maximumAge, timeout);
 

@@ -6,6 +6,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -21,8 +22,10 @@ import '../../../winrt_callbacks.dart';
 import '../../../winrt_helpers.dart';
 import '../../foundation/collections/ivectorview.dart';
 import '../../foundation/iasyncoperation.dart';
+import '../../internal/async_helpers.dart';
 import '../../internal/hstring_array.dart';
 import 'enums.g.dart';
+import 'geolocator.dart';
 import 'geoposition.dart';
 
 /// @nodoc
@@ -38,8 +41,9 @@ class IGeolocatorStatics extends IInspectable {
       IGeolocatorStatics.fromRawPointer(
           interface.toInterface(IID_IGeolocatorStatics));
 
-  Pointer<COMObject> requestAccessAsync() {
+  Future<GeolocationAccessStatus> requestAccessAsync() {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<GeolocationAccessStatus>();
 
     final hr = ptr.ref.vtable
             .elementAt(6)
@@ -56,11 +60,19 @@ class IGeolocatorStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation =
+        IAsyncOperation<GeolocationAccessStatus>.fromRawPointer(retValuePtr,
+            enumCreator: GeolocationAccessStatus.from, intType: Int32);
+
+    completeAsyncOperation(
+        asyncOperation, completer, asyncOperation.getResults);
+
+    return completer.future;
   }
 
-  Pointer<COMObject> getGeopositionHistoryAsync(DateTime startTime) {
+  Future<List<Geoposition>> getGeopositionHistoryAsync(DateTime startTime) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<List<Geoposition>>();
     final startTimeDateTime =
         startTime.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
 
@@ -81,12 +93,22 @@ class IGeolocatorStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation =
+        IAsyncOperation<IVectorView<Geoposition>>.fromRawPointer(
+            retValuePtr,
+            creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr,
+                creator: Geoposition.fromRawPointer,
+                iterableIid: '{135ed72d-75b1-5881-be41-6ffeaa202044}'));
+    completeAsyncOperation(
+        asyncOperation, completer, () => asyncOperation.getResults().toList());
+
+    return completer.future;
   }
 
-  Pointer<COMObject> getGeopositionHistoryWithDurationAsync(
+  Future<List<Geoposition>> getGeopositionHistoryWithDurationAsync(
       DateTime startTime, Duration duration) {
     final retValuePtr = calloc<COMObject>();
+    final completer = Completer<List<Geoposition>>();
     final startTimeDateTime =
         startTime.difference(DateTime.utc(1601, 01, 01)).inMicroseconds * 10;
     final durationDuration = duration.inMicroseconds * 10;
@@ -110,6 +132,15 @@ class IGeolocatorStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
-    return retValuePtr;
+    final asyncOperation =
+        IAsyncOperation<IVectorView<Geoposition>>.fromRawPointer(
+            retValuePtr,
+            creator: (Pointer<COMObject> ptr) => IVectorView.fromRawPointer(ptr,
+                creator: Geoposition.fromRawPointer,
+                iterableIid: '{135ed72d-75b1-5881-be41-6ffeaa202044}'));
+    completeAsyncOperation(
+        asyncOperation, completer, () => asyncOperation.getResults().toList());
+
+    return completer.future;
   }
 }
