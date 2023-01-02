@@ -319,7 +319,7 @@ void main() {
             .returnType
             .typeIdentifier),
         equals(
-            "(Pointer<COMObject> ptr) => IMapView.fromRawPointer(ptr, creator: PedometerReading.fromRawPointer, iterableIid: '{098f29cb-bc91-5639-a541-d5a4811ec35b}')"));
+            "(Pointer<COMObject> ptr) => IMapView.fromRawPointer(ptr, enumKeyCreator: PedometerStepKind.from, creator: PedometerReading.fromRawPointer, iterableIid: '{098f29cb-bc91-5639-a541-d5a4811ec35b}')"));
   });
 
   test('primitiveTypeSignatureFromBaseType', () {
