@@ -15,8 +15,6 @@ import '../../../types.dart';
 import '../../../utils.dart';
 import '../../../win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import '../../../winrt_helpers.dart';
-import '../../devices/sensors/enums.g.dart';
-import '../../devices/sensors/pedometerstepkind_helpers.dart';
 import '../../internal/ipropertyvalue_helpers.dart';
 import '../../internal/map_helpers.dart';
 import '../ipropertyvalue.dart';
@@ -32,6 +30,7 @@ import '../ipropertyvalue.dart';
 class IKeyValuePair<K, V> extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   final V Function(Pointer<COMObject>)? _creator;
+  final K Function(int)? _enumKeyCreator;
   final V Function(int)? _enumCreator;
 
   /// Creates an instance of [IKeyValuePair] using the given [ptr].
@@ -58,8 +57,10 @@ class IKeyValuePair<K, V> extends IInspectable {
   IKeyValuePair.fromRawPointer(
     super.ptr, {
     V Function(Pointer<COMObject>)? creator,
+    K Function(int)? enumKeyCreator,
     V Function(int)? enumCreator,
   })  : _creator = creator,
+        _enumKeyCreator = enumKeyCreator,
         _enumCreator = enumCreator {
     if (!isSupportedKeyValuePair<K, V>()) {
       throw ArgumentError('Unsupported key-value pair: IKeyValuePair<$K, $V>');
@@ -67,6 +68,10 @@ class IKeyValuePair<K, V> extends IInspectable {
 
     if (isSubtypeOfInspectable<V>() && creator == null) {
       throw ArgumentError.notNull('creator');
+    }
+
+    if (isSubtypeOfWinRTEnum<K>() && enumKeyCreator == null) {
+      throw ArgumentError.notNull('enumKeyCreator');
     }
 
     if (isSubtypeOfWinRTEnum<V>() && enumCreator == null) {
@@ -78,8 +83,8 @@ class IKeyValuePair<K, V> extends IInspectable {
   K get key {
     if (isSameType<K, Guid>()) return _key_Guid as K;
     if (isSameType<K, int>()) return _key_Uint32 as K;
-    if (isSameType<K, PedometerStepKind>()) return keyAsPedometerStepKind as K;
     if (isSameType<K, String>()) return _key_String as K;
+    if (isSubtypeOfWinRTEnum<K>()) return _enumKeyCreator!(_key_enum);
 
     return _key_Object;
   }
@@ -101,6 +106,28 @@ class IKeyValuePair<K, V> extends IInspectable {
       if (FAILED(hr)) throw WindowsException(hr);
 
       return retValuePtr.toDartGuid();
+    } finally {
+      free(retValuePtr);
+    }
+  }
+
+  int get _key_enum {
+    final retValuePtr = calloc<Int32>();
+
+    try {
+      final hr = ptr.ref.lpVtbl.value
+          .elementAt(6)
+          .cast<
+              Pointer<
+                  NativeFunction<HRESULT Function(Pointer, Pointer<Int32>)>>>()
+          .value
+          .asFunction<
+              int Function(
+                  Pointer, Pointer<Int32>)>()(ptr.ref.lpVtbl, retValuePtr);
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return retValuePtr.value;
     } finally {
       free(retValuePtr);
     }

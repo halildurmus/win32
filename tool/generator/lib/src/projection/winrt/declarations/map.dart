@@ -13,8 +13,16 @@ mixin _MapProjection on WinRTMethodProjection {
   /// The constructor arguments passed to the constructors of `IMap` and
   /// `IMapView`.
   String get mapConstructorArgs {
-    final typeProjection =
+    final keyArgTypeProjection =
+        TypeProjection(returnType.typeIdentifier.typeArg!);
+    final valueArgTypeProjection =
         TypeProjection(returnType.typeIdentifier.typeArg!.typeArg!);
+
+    // If the type argument is an enum, the constructor of that class must be
+    // passed in the 'enumKeyCreator' parameter for enum, so that the 'IMap' and
+    // 'IMapView' implementations can instantiate the enum.
+    final enumKeyCreator =
+        parseArgumentForCreatorParameter(returnType.typeIdentifier.typeArg!);
 
     // If the type argument is an enum, a WinRT Object (e.g. IJsonValue), the
     // constructor of that class must be passed in the 'enumCreator' parameter
@@ -30,7 +38,10 @@ mixin _MapProjection on WinRTMethodProjection {
         iterableIidFromMapTypeIdentifier(returnType.typeIdentifier);
 
     final args = <String>["iterableIid: '$iterableIid'"];
-    if (typeProjection.isWinRTEnum) {
+    if (keyArgTypeProjection.isWinRTEnum) {
+      args.add('enumKeyCreator: $enumKeyCreator');
+    }
+    if (valueArgTypeProjection.isWinRTEnum) {
       args.add('enumCreator: $creator');
     } else if (creator != null) {
       args.add('creator: $creator');

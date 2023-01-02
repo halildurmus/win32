@@ -271,6 +271,13 @@ String parseArgumentForCreatorParameterFromGenericTypeIdentifier(
   final creator = parseArgumentForCreatorParameter(typeArg!);
 
   final args = <String>['ptr'];
+  // Handle enum key type argument in IKeyValuePair, IMap, IMapView interfaces
+  if (['IKeyValuePair', 'IMap', 'IMapView'].contains(typeIdentifierName) &&
+      (ti.typeArg!.type?.isEnum ?? false)) {
+    final enumKeyCreator = parseArgumentForCreatorParameter(ti.typeArg!);
+    args.add('enumKeyCreator: $enumKeyCreator');
+  }
+
   if (creator != null) {
     final isTypeArgEnum = typeArg.type?.isEnum ?? false;
     final creatorParamName = isTypeArgEnum ? 'enumCreator' : 'creator';
