@@ -307,6 +307,11 @@
         "category": "bluetooth",
         "minimumWindowsVersion": "WIN8"
     },
+    "BluetoothGetDeviceInfo": {
+        "prototype": "DWORD BluetoothGetDeviceInfo(\n  HANDLE                hRadio,\n  BLUETOOTH_DEVICE_INFO *pbtdi\n);",
+        "comment": "TThe BluetoothGetDeviceInfo function retrieves information about a remote Bluetooth device. The Bluetooth device must have been previously identified through a successful device inquiry function call.",
+        "category": "bluetooth"
+    },
     "BluetoothGetRadioInfo": {
         "prototype": "DWORD BluetoothGetRadioInfo(\n  HANDLE                hRadio,\n  PBLUETOOTH_RADIO_INFO pRadioInfo\n);",
         "comment": "The BluetoothGetRadioInfo function obtains information about a Bluetooth radio.",
@@ -335,6 +340,46 @@
     "BluetoothRemoveDevice": {
         "prototype": "DWORD BluetoothRemoveDevice(\n  const BLUETOOTH_ADDRESS *pAddress\n);",
         "comment": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device.",
+        "category": "bluetooth"
+    },
+    "BluetoothSdpEnumAttributes": {
+        "prototype": "BOOL BluetoothSdpEnumAttributes(\n  LPBYTE                                 pSDPStream,\n  ULONG                                  cbStreamSize,\n  PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK pfnCallback,\n  LPVOID                                 pvParam\n);",
+        "comment": "The BluetoothSdpEnumAttributes function enumerates through the SDP record stream, and calls the callback function for each attribute in the record.",
+        "category": "bluetooth"
+    },
+    "BluetoothSdpGetAttributeValue": {
+        "prototype": "DWORD BluetoothSdpGetAttributeValue(\n  [in]  LPBYTE            pRecordStream,\n  [in]  ULONG             cbRecordLength,\n  [in]  USHORT            usAttributeId,\n  [out] PSDP_ELEMENT_DATA pAttributeData\n);",
+        "comment": "The BluetoothSdpGetAttributeValue function retrieves the attribute value for an attribute identifier.",
+        "category": "bluetooth"
+    },
+    "BluetoothSdpGetContainerElementData": {
+        "prototype": "DWORD BluetoothSdpGetContainerElementData(\n  [in]      LPBYTE                       pContainerStream,\n  [in]      ULONG                        cbContainerLength,\n  [in, out] HBLUETOOTH_CONTAINER_ELEMENT *pElement,\n  [out]     PSDP_ELEMENT_DATA            pData\n);",
+        "comment": "The BluetoothSdpGetContainerElementData function iterates a container stream and returns each element contained within the container element.",
+        "category": "bluetooth"
+    },
+    "BluetoothSdpGetElementData": {
+        "prototype": "DWORD BluetoothSdpGetElementData(\n  [in]  LPBYTE            pSdpStream,\n  [in]  ULONG             cbSdpStreamLength,\n  [out] PSDP_ELEMENT_DATA pData\n);",
+        "comment": "The BluetoothSdpGetElementData function retrieves and parses a single element from an SDP stream.",
+        "category": "bluetooth"
+    },
+    "BluetoothSdpGetString": {
+        "prototype": "DWORD BluetoothSdpGetString(\n  [in]      LPBYTE                      pRecordStream,\n  [in]      ULONG                       cbRecordLength,\n  [in]      const PSDP_STRING_TYPE_DATA pStringData,\n  [in]      USHORT                      usStringOffset,\n  [out]     PWSTR                       pszString,\n  [in, out] PULONG                      pcchStringLength\n);",
+        "comment": "The BluetoothSdpGetString function converts a raw string embedded in the SDP record into a Unicode string.",
+        "category": "bluetooth"
+    },
+    "BluetoothSelectDevices": {
+        "prototype": "BOOL BluetoothSelectDevices(\n  BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp\n);",
+        "comment": "The BluetoothSelectDevices function enables Bluetooth device selection.",
+        "category": "bluetooth"
+    },
+    "BluetoothSelectDevicesFree": {
+        "prototype": "BOOL BluetoothSelectDevicesFree(\n  BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp\n);",
+        "comment": "The BluetoothSelectDevicesFree function frees resources associated with a previous call to BluetoothSelectDevices.",
+        "category": "bluetooth"
+    },
+    "BluetoothSendAuthenticationResponseEx": {
+        "prototype": "DWORD BluetoothSendAuthenticationResponseEx(\n  [in, optional] HANDLE                           hRadioIn,\n  [in]           PBLUETOOTH_AUTHENTICATE_RESPONSE pauthResponse\n);",
+        "comment": "The BluetoothSendAuthenticationResponseEx function is called when an authentication request to send the passkey or a Numeric Comparison response is made.",
         "category": "bluetooth"
     },
     "BluetoothSetServiceState": {

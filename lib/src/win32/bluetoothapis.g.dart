@@ -629,6 +629,25 @@ final _BluetoothGATTUnregisterEvent = _bluetoothapis.lookupFunction<
     Int32 Function(IntPtr EventHandle, Uint32 Flags),
     int Function(int EventHandle, int Flags)>('BluetoothGATTUnregisterEvent');
 
+/// TThe BluetoothGetDeviceInfo function retrieves information about a
+/// remote Bluetooth device. The Bluetooth device must have been previously
+/// identified through a successful device inquiry function call.
+///
+/// ```c
+/// DWORD BluetoothGetDeviceInfo(
+///   HANDLE                hRadio,
+///   BLUETOOTH_DEVICE_INFO *pbtdi
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothGetDeviceInfo(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) =>
+    _BluetoothGetDeviceInfo(hRadio, pbtdi);
+
+final _BluetoothGetDeviceInfo = _bluetoothapis.lookupFunction<
+    Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+    int Function(int hRadio,
+        Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothGetDeviceInfo');
+
 /// The BluetoothGetRadioInfo function obtains information about a Bluetooth
 /// radio.
 ///
@@ -744,6 +763,178 @@ int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress) =>
 final _BluetoothRemoveDevice = _bluetoothapis.lookupFunction<
     Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
     int Function(Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
+
+/// The BluetoothSdpEnumAttributes function enumerates through the SDP
+/// record stream, and calls the callback function for each attribute in the
+/// record.
+///
+/// ```c
+/// BOOL BluetoothSdpEnumAttributes(
+///   LPBYTE                                 pSDPStream,
+///   ULONG                                  cbStreamSize,
+///   PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK pfnCallback,
+///   LPVOID                                 pvParam
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSdpEnumAttributes(
+        Pointer<Uint8> pSDPStream,
+        int cbStreamSize,
+        Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>> pfnCallback,
+        Pointer pvParam) =>
+    _BluetoothSdpEnumAttributes(pSDPStream, cbStreamSize, pfnCallback, pvParam);
+
+final _BluetoothSdpEnumAttributes = _bluetoothapis.lookupFunction<
+    Int32 Function(
+        Pointer<Uint8> pSDPStream,
+        Uint32 cbStreamSize,
+        Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>> pfnCallback,
+        Pointer pvParam),
+    int Function(
+        Pointer<Uint8> pSDPStream,
+        int cbStreamSize,
+        Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>> pfnCallback,
+        Pointer pvParam)>('BluetoothSdpEnumAttributes');
+
+/// The BluetoothSdpGetAttributeValue function retrieves the attribute value
+/// for an attribute identifier.
+///
+/// ```c
+/// DWORD BluetoothSdpGetAttributeValue(
+///   [in]  LPBYTE            pRecordStream,
+///   [in]  ULONG             cbRecordLength,
+///   [in]  USHORT            usAttributeId,
+///   [out] PSDP_ELEMENT_DATA pAttributeData
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSdpGetAttributeValue(
+        Pointer<Uint8> pRecordStream,
+        int cbRecordLength,
+        int usAttributeId,
+        Pointer<SDP_ELEMENT_DATA> pAttributeData) =>
+    _BluetoothSdpGetAttributeValue(
+        pRecordStream, cbRecordLength, usAttributeId, pAttributeData);
+
+final _BluetoothSdpGetAttributeValue = _bluetoothapis.lookupFunction<
+        Uint32 Function(Pointer<Uint8> pRecordStream, Uint32 cbRecordLength,
+            Uint16 usAttributeId, Pointer<SDP_ELEMENT_DATA> pAttributeData),
+        int Function(Pointer<Uint8> pRecordStream, int cbRecordLength,
+            int usAttributeId, Pointer<SDP_ELEMENT_DATA> pAttributeData)>(
+    'BluetoothSdpGetAttributeValue');
+
+/// The BluetoothSdpGetContainerElementData function iterates a container
+/// stream and returns each element contained within the container element.
+///
+/// ```c
+/// DWORD BluetoothSdpGetContainerElementData(
+///   [in]      LPBYTE                       pContainerStream,
+///   [in]      ULONG                        cbContainerLength,
+///   [in, out] HBLUETOOTH_CONTAINER_ELEMENT *pElement,
+///   [out]     PSDP_ELEMENT_DATA            pData
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSdpGetContainerElementData(
+        Pointer<Uint8> pContainerStream,
+        int cbContainerLength,
+        Pointer<IntPtr> pElement,
+        Pointer<SDP_ELEMENT_DATA> pData) =>
+    _BluetoothSdpGetContainerElementData(
+        pContainerStream, cbContainerLength, pElement, pData);
+
+final _BluetoothSdpGetContainerElementData = _bluetoothapis.lookupFunction<
+    Uint32 Function(Pointer<Uint8> pContainerStream, Uint32 cbContainerLength,
+        Pointer<IntPtr> pElement, Pointer<SDP_ELEMENT_DATA> pData),
+    int Function(
+        Pointer<Uint8> pContainerStream,
+        int cbContainerLength,
+        Pointer<IntPtr> pElement,
+        Pointer<SDP_ELEMENT_DATA>
+            pData)>('BluetoothSdpGetContainerElementData');
+
+/// The BluetoothSdpGetElementData function retrieves and parses a single
+/// element from an SDP stream.
+///
+/// ```c
+/// DWORD BluetoothSdpGetElementData(
+///   [in]  LPBYTE            pSdpStream,
+///   [in]  ULONG             cbSdpStreamLength,
+///   [out] PSDP_ELEMENT_DATA pData
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSdpGetElementData(Pointer<Uint8> pSdpStream, int cbSdpStreamLength,
+        Pointer<SDP_ELEMENT_DATA> pData) =>
+    _BluetoothSdpGetElementData(pSdpStream, cbSdpStreamLength, pData);
+
+final _BluetoothSdpGetElementData = _bluetoothapis.lookupFunction<
+    Uint32 Function(Pointer<Uint8> pSdpStream, Uint32 cbSdpStreamLength,
+        Pointer<SDP_ELEMENT_DATA> pData),
+    int Function(Pointer<Uint8> pSdpStream, int cbSdpStreamLength,
+        Pointer<SDP_ELEMENT_DATA> pData)>('BluetoothSdpGetElementData');
+
+/// The BluetoothSdpGetString function converts a raw string embedded in the
+/// SDP record into a Unicode string.
+///
+/// ```c
+/// DWORD BluetoothSdpGetString(
+///   [in]      LPBYTE                      pRecordStream,
+///   [in]      ULONG                       cbRecordLength,
+///   [in]      const PSDP_STRING_TYPE_DATA pStringData,
+///   [in]      USHORT                      usStringOffset,
+///   [out]     PWSTR                       pszString,
+///   [in, out] PULONG                      pcchStringLength
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSdpGetString(
+        Pointer<Uint8> pRecordStream,
+        int cbRecordLength,
+        Pointer<SDP_STRING_TYPE_DATA> pStringData,
+        int usStringOffset,
+        Pointer<Utf16> pszString,
+        Pointer<Uint32> pcchStringLength) =>
+    _BluetoothSdpGetString(pRecordStream, cbRecordLength, pStringData,
+        usStringOffset, pszString, pcchStringLength);
+
+final _BluetoothSdpGetString = _bluetoothapis.lookupFunction<
+    Uint32 Function(
+        Pointer<Uint8> pRecordStream,
+        Uint32 cbRecordLength,
+        Pointer<SDP_STRING_TYPE_DATA> pStringData,
+        Uint16 usStringOffset,
+        Pointer<Utf16> pszString,
+        Pointer<Uint32> pcchStringLength),
+    int Function(
+        Pointer<Uint8> pRecordStream,
+        int cbRecordLength,
+        Pointer<SDP_STRING_TYPE_DATA> pStringData,
+        int usStringOffset,
+        Pointer<Utf16> pszString,
+        Pointer<Uint32> pcchStringLength)>('BluetoothSdpGetString');
+
+/// The BluetoothSendAuthenticationResponseEx function is called when an
+/// authentication request to send the passkey or a Numeric Comparison
+/// response is made.
+///
+/// ```c
+/// DWORD BluetoothSendAuthenticationResponseEx(
+///   [in, optional] HANDLE                           hRadioIn,
+///   [in]           PBLUETOOTH_AUTHENTICATE_RESPONSE pauthResponse
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSendAuthenticationResponseEx(
+        int hRadioIn, Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse) =>
+    _BluetoothSendAuthenticationResponseEx(hRadioIn, pauthResponse);
+
+final _BluetoothSendAuthenticationResponseEx = _bluetoothapis.lookupFunction<
+        Uint32 Function(IntPtr hRadioIn,
+            Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse),
+        int Function(int hRadioIn,
+            Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse)>(
+    'BluetoothSendAuthenticationResponseEx');
 
 /// The BluetoothSetServiceState function enables or disables services for a
 /// Bluetooth device.

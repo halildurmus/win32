@@ -144,6 +144,18 @@ typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
 typedef PfnbluetoothGattEventCallback = Void Function(
     Int32 EventType, Pointer EventOutParameter, Pointer Context);
 
+/// Application-defined callback function that is called once for each attribute
+/// found in the pSDPStream parameter passed to the BluetoothSdpEnumAttributes
+/// function call.
+typedef PfnBluetoothEnumAttributesCallback = BOOL Function(
+    ULONG uAttribId, LPBYTE pValueStream, ULONG cbStreamSize, LPVOID pvParam);
+
+/// Application-defined callback function used in association with selecting
+/// Bluetooth devices. The PFN_DEVICE_CALLBACK function can be set to NULL if no
+/// specialized filtering is required.
+typedef PfnDeviceCallback = BOOL Function(
+    LPVOID pvParam, Pointer<BLUETOOTH_DEVICE_INFO> pDevice);
+
 /// Application-defined callback function used with the SendMessageCallback
 /// function. The system passes the message to the callback function after
 /// passing the message to the destination window procedure. The SENDASYNCPROC
