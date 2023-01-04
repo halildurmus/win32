@@ -18,7 +18,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final pPoint = allocator<Point>()
           ..ref.X = 3
@@ -296,7 +295,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final guid = Guid.parse(IID_ISpVoice);
         final pPoint = allocator<Point>()
@@ -552,7 +550,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final guid = Guid.parse(IID_ISpVoice);
         final valueSet = ValueSet()
@@ -795,7 +792,6 @@ void main() {
       late IMap<String, IJsonValue?> map;
 
       setUp(() {
-        winrtInitialize();
         final jsonStr =
             '{"key1": "strVal", "key2": 97, "key3": false, "key4": [1, 2, 3], "key5": null}';
         map = JsonObject()
@@ -930,7 +926,6 @@ void main() {
       late IMap<String, String> map;
 
       setUp(() {
-        winrtInitialize();
         map = IMap()
           ..insert('key1', 'value1')
           ..insert('key2', '')
@@ -1064,7 +1059,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         final map = IMap<String, String>()
           ..insert('key1', 'value1')
           ..insert('key2', '')
@@ -1131,7 +1125,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         picker = DevicePicker();
         pickerFilter = picker.filter;
@@ -1389,7 +1382,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         material = Printing3DMultiplePropertyMaterial();
         vector = material.materialIndices;
@@ -1641,7 +1633,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         picker = FileOpenPicker();
         vector = picker.fileTypeFilter;
@@ -1907,7 +1898,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         // ignore: constant_identifier_names
         const IID_IVpnPlugInProfile = '{0EDF0DA4-4F00-4589-8D7B-4BF988F6542C}';
         final object = CreateObject(
@@ -2183,7 +2173,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final calendar = Calendar();
         vectorView = getLanguages(calendar.ptr);
@@ -2270,7 +2259,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final object = CreateActivationFactory(
           'Windows.Networking.Connectivity.NetworkInformation',

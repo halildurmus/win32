@@ -15,7 +15,6 @@ String calendarData(Calendar calendar) =>
     'Time Zone: ${calendar.timeZoneAsFullString()}\n';
 
 void main() {
-  winrtInitialize();
   try {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     final calendar = Calendar();

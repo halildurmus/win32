@@ -11,7 +11,6 @@ void main() {
     late Calendar calendar;
 
     setUp(() {
-      winrtInitialize();
       calendar = Calendar();
     });
 

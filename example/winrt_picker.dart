@@ -7,8 +7,6 @@
 import 'package:win32/winrt.dart';
 
 void main() async {
-  winrtInitialize();
-
   final picker = FileOpenPicker()
     ..suggestedStartLocation = PickerLocationId.desktop
     ..viewMode = PickerViewMode.thumbnail;

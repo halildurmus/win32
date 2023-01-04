@@ -40,8 +40,6 @@ bool isAppContainer() {
 }
 
 void main() {
-  winrtInitialize();
-
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
   final userData = UserDataPaths.getDefault();

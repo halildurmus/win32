@@ -11,8 +11,6 @@ import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    setUp(winrtInitialize);
-
     test('IReference<bool>', () {
       final pv = PropertyValue.createBoolean(true);
       final ireference = IReference<bool>.fromRawPointer(

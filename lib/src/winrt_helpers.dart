@@ -13,6 +13,7 @@ import 'package:ffi/ffi.dart';
 import 'com/iinspectable.dart';
 import 'combase.dart';
 import 'constants.dart';
+import 'constants_nodoc.dart';
 import 'exceptions.dart';
 import 'guid.dart';
 import 'macros.dart';
@@ -20,6 +21,7 @@ import 'types.dart';
 import 'utils.dart';
 import 'win32/api_ms_win_core_winrt_l1_1_0.g.dart';
 import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
+import 'win32/ole32.g.dart';
 import 'winrt/foundation/winrt_enum.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
@@ -71,13 +73,24 @@ Pointer<COMObject> ActivateClass(String className,
     {Allocator allocator = calloc}) {
   // Create a HSTRING representing the object
   final hClassName = convertToHString(className);
+  final inspectablePtr = allocator<COMObject>();
 
   try {
-    final inspectablePtr = allocator<COMObject>();
     final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
     if (FAILED(hr)) throw WindowsException(hr);
     // Return a pointer to the relevant class
     return inspectablePtr;
+  } on WindowsException catch (e) {
+    // If RoActivateInstance fails because combase hasn't been loaded yet then
+    // load combase so that it "just works" for apartment-agnostic code.
+    if (e.hr == CO_E_NOTINITIALIZED) {
+      _initializeMTA();
+      final hr = RoActivateInstance(hClassName, inspectablePtr.cast());
+      if (FAILED(hr)) throw WindowsException(hr);
+      // Return a pointer to the relevant class
+      return inspectablePtr;
+    }
+    rethrow;
   } finally {
     WindowsDeleteString(hClassName);
   }
@@ -111,10 +124,30 @@ Pointer<COMObject> CreateActivationFactory(String className, String iid,
     if (FAILED(hr)) throw WindowsException(hr);
     // Return a pointer to the relevant class
     return activationFactoryPtr;
+  } on WindowsException catch (e) {
+    // If RoGetActivationFactory fails because combase hasn't been loaded yet
+    // then load combase so that it "just works" for apartment-agnostic code.
+    if (e.hr == CO_E_NOTINITIALIZED) {
+      _initializeMTA();
+      final hr =
+          RoGetActivationFactory(hClassName, pIID, activationFactoryPtr.cast());
+      if (FAILED(hr)) throw WindowsException(hr);
+      // Return a pointer to the relevant class
+      return activationFactoryPtr;
+    }
+    rethrow;
   } finally {
     free(pIID);
     WindowsDeleteString(hClassName);
   }
+}
+
+/// Initializes the Multi-Threaded Apartment (MTA) for the current thread.
+void _initializeMTA() {
+  final pCookie = calloc<IntPtr>();
+  final res = CoIncrementMTAUsage(pCookie);
+  if (FAILED(res)) throw WindowsException(res);
+  free(pCookie);
 }
 
 /// Determines whether [S] is the same type as [T].
