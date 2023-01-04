@@ -40,7 +40,5 @@ void main() {
 
       winrtUri.release();
     });
-
-    tearDown(winrtUninitialize);
   }
 }

@@ -30,11 +30,6 @@ import 'winrt/foundation/winrt_enum.dart';
 /// {@category winrt}
 void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
-/// Closes the Windows Runtime on the current thread.
-///
-/// {@category winrt}
-void winrtUninitialize() => RoUninitialize();
-
 extension WinRTStringConversion on Pointer<HSTRING> {
   /// Gets the Dart string at the handle pointed to by this object.
   String toDartString() => convertFromHString(value);

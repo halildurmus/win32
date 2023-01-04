@@ -72,7 +72,6 @@ void main() {
 
     tearDown(() {
       formatter.release();
-      winrtUninitialize();
     });
   }
 }

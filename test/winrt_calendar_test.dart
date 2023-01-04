@@ -467,7 +467,6 @@ void main() {
 
     tearDown(() {
       calendar.release();
-      winrtUninitialize();
     });
   }
 }

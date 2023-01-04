@@ -44,7 +44,6 @@ void main() {
       expect(calendar.year, greaterThanOrEqualTo(2020));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getIids test', () {
@@ -59,7 +58,6 @@ void main() {
       expect(calendar.iids, equals(iids));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getRuntimeClassName test', () {
@@ -69,7 +67,6 @@ void main() {
       expect(calendar.runtimeClassName, equals(calendarClassName));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of base trust class', () {
@@ -77,7 +74,6 @@ void main() {
       expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of partial trust class', () {
@@ -88,7 +84,6 @@ void main() {
       expect(inspectableObject.trustLevel, equals(TrustLevel.partialTrust));
 
       inspectableObject.release();
-      winrtUninitialize();
     });
   }
 }

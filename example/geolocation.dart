@@ -31,6 +31,4 @@ void main() async {
       print('No location received.');
     }
   }
-
-  winrtUninitialize();
 }

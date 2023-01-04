@@ -32,6 +32,4 @@ void main() async {
 
   filters.release();
   picker.release();
-
-  winrtUninitialize();
 }

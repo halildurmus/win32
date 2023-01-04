@@ -286,7 +286,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -541,7 +540,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -784,7 +782,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -918,8 +915,6 @@ void main() {
         expect(iterator.current.value?.getString(), equals('strVal'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IMap<String, String> (StringMap)', () {
@@ -1032,8 +1027,6 @@ void main() {
         expect(iterator.current.value, equals('value1'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IMapView<String, String> (StringMap)', () {
@@ -1114,8 +1107,6 @@ void main() {
         expect(iterator.current.value, equals('value1'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IVector<DeviceClass>', () {
@@ -1372,7 +1363,6 @@ void main() {
         pickerFilter.release();
         picker.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -1623,7 +1613,6 @@ void main() {
         vector.release();
         material.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -1870,7 +1859,6 @@ void main() {
         picker.release();
         vector.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -2145,7 +2133,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -2230,7 +2217,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -2310,7 +2296,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
   }

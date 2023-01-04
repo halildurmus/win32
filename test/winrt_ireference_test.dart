@@ -212,7 +212,5 @@ void main() {
       pv.release();
       free(sizePtr);
     });
-
-    tearDown(winrtUninitialize);
   }
 }
