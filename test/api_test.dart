@@ -9669,6 +9669,13 @@ void main() {
               'CoGetCurrentProcess');
       expect(CoGetCurrentProcess, isA<Function>());
     });
+    test('Can instantiate CoIncrementMTAUsage', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoIncrementMTAUsage = ole32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> pCookie),
+          int Function(Pointer<IntPtr> pCookie)>('CoIncrementMTAUsage');
+      expect(CoIncrementMTAUsage, isA<Function>());
+    });
     test('Can instantiate CoInitializeEx', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoInitializeEx = ole32.lookupFunction<

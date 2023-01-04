@@ -163,6 +163,21 @@ int CoGetCurrentProcess() => _CoGetCurrentProcess();
 final _CoGetCurrentProcess = _ole32
     .lookupFunction<Uint32 Function(), int Function()>('CoGetCurrentProcess');
 
+/// Keeps MTA support active when no MTA threads are running.
+///
+/// ```c
+/// HRESULT CoIncrementMTAUsage(
+///   [out] CO_MTA_USAGE_COOKIE *pCookie
+/// );
+/// ```
+/// {@category ole32}
+int CoIncrementMTAUsage(Pointer<IntPtr> pCookie) =>
+    _CoIncrementMTAUsage(pCookie);
+
+final _CoIncrementMTAUsage = _ole32.lookupFunction<
+    Int32 Function(Pointer<IntPtr> pCookie),
+    int Function(Pointer<IntPtr> pCookie)>('CoIncrementMTAUsage');
+
 /// Initializes the COM library for use by the calling thread, sets the
 /// thread's concurrency model, and creates a new apartment for the thread
 /// if one is required.

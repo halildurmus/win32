@@ -609,6 +609,10 @@
         "prototype": "DWORD CoGetCurrentProcess();",
         "comment": "Returns a value that is unique to the current thread. CoGetCurrentProcess can be used to avoid thread ID reuse problems."
     },
+    "CoIncrementMTAUsage": {
+        "prototype": "HRESULT CoIncrementMTAUsage(\n  [out] CO_MTA_USAGE_COOKIE *pCookie\n);",
+        "comment": "Keeps MTA support active when no MTA threads are running."
+    },
     "CoInitializeEx": {
         "prototype": "HRESULT CoInitializeEx(\n  LPVOID pvReserved,\n  DWORD  dwCoInit\n);",
         "comment": "Initializes the COM library for use by the calling thread, sets the thread's concurrency model, and creates a new apartment for the thread if one is required."
