@@ -56,6 +56,7 @@ typedef LONG32 = Int32;
 typedef LONG64 = Int64;
 typedef LONGLONG = Int64;
 typedef LONG_PTR = IntPtr;
+typedef LPBYTE = Pointer<BYTE>;
 typedef LPARAM = LONG_PTR;
 typedef LPSTR = Pointer<Utf8>;
 typedef LPWSTR = Pointer<Utf16>;
@@ -66,6 +67,7 @@ typedef PSTR = Pointer<Utf8>;
 // Pointer is preferred over Pointer<Void>, because the latter points to a Void
 // data type. A C void* is usually an undefined type, rather than a strong void,
 // so the general Pointer is more useful.
+typedef LPVOID = Pointer;
 typedef PVOID = Pointer;
 
 typedef PWSTR = Pointer<Utf16>;

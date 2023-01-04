@@ -336,6 +336,51 @@ extension BLUETOOTH_ADDRESS_Extension on BLUETOOTH_ADDRESS {
   set rgBytes(Array<Uint8> value) => this.Anonymous.rgBytes = value;
 }
 
+/// The BLUETOOTH_AUTHENTICATE_RESPONSE structure contains information
+/// passed in response to a BTH_REMOTE_AUTHENTICATE_REQUEST event.
+///
+/// {@category Struct}
+class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
+  external BLUETOOTH_ADDRESS bthAddressRemote;
+
+  @Int32()
+  external int authMethod;
+
+  external _BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union Anonymous;
+
+  @Uint8()
+  external int negativeResponse;
+}
+
+/// {@category Struct}
+class _BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union extends Union {
+  external BLUETOOTH_PIN_INFO pinInfo;
+
+  external BLUETOOTH_OOB_DATA_INFO oobInfo;
+
+  external BLUETOOTH_NUMERIC_COMPARISON_INFO numericCompInfo;
+
+  external BLUETOOTH_PASSKEY_INFO passkeyInfo;
+}
+
+extension BLUETOOTH_AUTHENTICATE_RESPONSE_Extension
+    on BLUETOOTH_AUTHENTICATE_RESPONSE {
+  BLUETOOTH_PIN_INFO get pinInfo => this.Anonymous.pinInfo;
+  set pinInfo(BLUETOOTH_PIN_INFO value) => this.Anonymous.pinInfo = value;
+
+  BLUETOOTH_OOB_DATA_INFO get oobInfo => this.Anonymous.oobInfo;
+  set oobInfo(BLUETOOTH_OOB_DATA_INFO value) => this.Anonymous.oobInfo = value;
+
+  BLUETOOTH_NUMERIC_COMPARISON_INFO get numericCompInfo =>
+      this.Anonymous.numericCompInfo;
+  set numericCompInfo(BLUETOOTH_NUMERIC_COMPARISON_INFO value) =>
+      this.Anonymous.numericCompInfo = value;
+
+  BLUETOOTH_PASSKEY_INFO get passkeyInfo => this.Anonymous.passkeyInfo;
+  set passkeyInfo(BLUETOOTH_PASSKEY_INFO value) =>
+      this.Anonymous.passkeyInfo = value;
+}
+
 /// The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific
 /// configuration information about the Bluetooth device responding to an
 /// authentication request.
@@ -374,6 +419,17 @@ extension BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Extension
 
   int get Passkey => this.Anonymous.Passkey;
   set Passkey(int value) => this.Anonymous.Passkey = value;
+}
+
+/// The BLUETOOTH_COD_PAIRS structure provides for specification and
+/// retrieval of Bluetooth Class Of Device (COD) information.
+///
+/// {@category Struct}
+class BLUETOOTH_COD_PAIRS extends Struct {
+  @Uint32()
+  external int ulCODMask;
+
+  external Pointer<Utf16> pcszDescription;
 }
 
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a
@@ -487,6 +543,15 @@ class BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION extends Struct {
   external Array<BTH_LE_GATT_CHARACTERISTIC> Characteristics;
 }
 
+/// The BLUETOOTH_NUMERIC_COMPARISON_INFO structure contains the numeric
+/// value used for authentication via numeric comparison.
+///
+/// {@category Struct}
+class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
+  @Uint32()
+  external int NumericValue;
+}
+
 /// The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate
 /// prior to establishing an Out-of-Band device pairing.
 ///
@@ -497,6 +562,16 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
 
   @Array(16)
   external Array<Uint8> R;
+}
+
+/// The BLUETOOTH_PASSKEY_INFO structure contains a passkey value used for
+/// authentication. A passkey is similar to a password, except that a
+/// passkey value is used for authentication only once.
+///
+/// {@category Struct}
+class BLUETOOTH_PASSKEY_INFO extends Struct {
+  @Uint32()
+  external int passkey;
 }
 
 /// The BLUETOOTH_PIN_INFO structure contains information used for
@@ -550,6 +625,53 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   external int manufacturer;
 }
 
+/// The BLUETOOTH_SELECT_DEVICE_PARAMS structure facilitates and manages the
+/// visibility, authentication, and selection of Bluetooth devices and
+/// services.
+///
+/// {@category Struct}
+class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
+  @Uint32()
+  external int dwSize;
+
+  @Uint32()
+  external int cNumOfClasses;
+
+  external Pointer<BLUETOOTH_COD_PAIRS> prgClassOfDevices;
+
+  external Pointer<Utf16> pszInfo;
+
+  @IntPtr()
+  external int hwndParent;
+
+  @Int32()
+  external int fForceAuthentication;
+
+  @Int32()
+  external int fShowAuthenticated;
+
+  @Int32()
+  external int fShowRemembered;
+
+  @Int32()
+  external int fShowUnknown;
+
+  @Int32()
+  external int fAddNewDeviceWizard;
+
+  @Int32()
+  external int fSkipServicesPage;
+
+  external Pointer<NativeFunction<PfnDeviceCallback>> pfnDeviceCallback;
+
+  external Pointer pvParam;
+
+  @Uint32()
+  external int cNumDevices;
+
+  external Pointer<BLUETOOTH_DEVICE_INFO> pDevices;
+}
+
 /// Contains information about a window that denied a request from
 /// BroadcastSystemMessageEx.
 ///
@@ -565,6 +687,57 @@ class BSMINFO extends Struct {
   external int hwnd;
 
   external LUID luid;
+}
+
+/// The BTH_DEVICE_INFO structure stores information about a Bluetooth
+/// device.
+///
+/// {@category Struct}
+class BTH_DEVICE_INFO extends Struct {
+  @Uint32()
+  external int flags;
+
+  @Uint64()
+  external int address;
+
+  @Uint32()
+  external int classOfDevice;
+
+  @Array(248)
+  external Array<Uint8> name;
+}
+
+/// The BTH_HCI_EVENT_INFO structure is used in connection with obtaining
+/// WM_DEVICECHANGE messages for Bluetooth.
+///
+/// {@category Struct}
+class BTH_HCI_EVENT_INFO extends Struct {
+  @Uint64()
+  external int bthAddress;
+
+  @Uint8()
+  external int connectionType;
+
+  @Uint8()
+  external int connected;
+}
+
+/// The BTH_L2CAP_EVENT_INFO structure contains data about events associated
+/// with an L2CAP channel.
+///
+/// {@category Struct}
+class BTH_L2CAP_EVENT_INFO extends Struct {
+  @Uint64()
+  external int bthAddress;
+
+  @Uint16()
+  external int psm;
+
+  @Uint8()
+  external int connected;
+
+  @Uint8()
+  external int initiated;
 }
 
 /// The BTH_LE_GATT_CHARACTERISTIC structure describes a Bluetooth Low
@@ -852,6 +1025,73 @@ extension BTH_LE_UUID_Extension on BTH_LE_UUID {
 
   GUID get LongUuid => this.Value.LongUuid;
   set LongUuid(GUID value) => this.Value.LongUuid = value;
+}
+
+/// The BTH_QUERY_DEVICE structure is used when querying for the presence of
+/// a Bluetooth device.
+///
+/// {@category Struct}
+@Packed(1)
+class BTH_QUERY_DEVICE extends Struct {
+  @Uint32()
+  external int LAP;
+
+  @Uint8()
+  external int length;
+}
+
+/// The BTH_QUERY_SERVICE structure is used to query a Bluetooth service.
+///
+/// {@category Struct}
+class BTH_QUERY_SERVICE extends Struct {
+  @Uint32()
+  external int type;
+
+  @Uint32()
+  external int serviceHandle;
+
+  @Array(12)
+  external Array<SdpQueryUuid> uuids;
+
+  @Uint32()
+  external int numRange;
+
+  @Array(1)
+  external Array<SdpAttributeRange> pRange;
+}
+
+/// The BTH_RADIO_IN_RANGE structure stores data about Bluetooth devices
+/// within communication range.
+///
+/// {@category Struct}
+class BTH_RADIO_IN_RANGE extends Struct {
+  external BTH_DEVICE_INFO deviceInfo;
+
+  @Uint32()
+  external int previousDeviceFlags;
+}
+
+/// The BTH_SET_SERVICE structure provides service information for the
+/// specified Bluetooth service.
+///
+/// {@category Struct}
+@Packed(1)
+class BTH_SET_SERVICE extends Struct {
+  external Pointer<Uint32> pSdpVersion;
+
+  external Pointer<IntPtr> pRecordHandle;
+
+  @Uint32()
+  external int fCodService;
+
+  @Array(5)
+  external Array<Uint32> Reserved;
+
+  @Uint32()
+  external int ulRecordLength;
+
+  @Array(1)
+  external Array<Uint8> pRecord;
 }
 
 /// Contains information that the GetFileInformationByHandle function
@@ -7156,6 +7396,234 @@ class SCROLLINFO extends Struct {
   external int nTrackPos;
 }
 
+/// The SDP_ELEMENT_DATA structure stores SDP element data.
+///
+/// {@category Struct}
+class SDP_ELEMENT_DATA extends Struct {
+  @Int32()
+  external int type;
+
+  @Int32()
+  external int specificType;
+
+  external _SDP_ELEMENT_DATA__data_e__Union data;
+}
+
+/// {@category Struct}
+class _SDP_ELEMENT_DATA__data_e__Union extends Union {
+  external SDP_LARGE_INTEGER_16 int128;
+
+  @Int64()
+  external int int64;
+
+  @Int32()
+  external int int32;
+
+  @Int16()
+  external int int16;
+
+  @Uint8()
+  external int int8;
+
+  external SDP_ULARGE_INTEGER_16 uint128;
+
+  @Uint64()
+  external int uint64;
+
+  @Uint32()
+  external int uint32;
+
+  @Uint16()
+  external int uint16;
+
+  @Uint8()
+  external int uint8;
+
+  @Uint8()
+  external int booleanVal;
+
+  external GUID uuid128;
+
+  @Uint32()
+  external int uuid32;
+
+  @Uint16()
+  external int uuid16;
+
+  external _SDP_ELEMENT_DATA__data_e__Union__string_e__Struct string;
+
+  external _SDP_ELEMENT_DATA__data_e__Union__url_e__Struct url;
+
+  external _SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct sequence;
+
+  external _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct alternative;
+}
+
+/// {@category Struct}
+class _SDP_ELEMENT_DATA__data_e__Union__string_e__Struct extends Struct {
+  external Pointer<Uint8> value;
+
+  @Uint32()
+  external int length;
+}
+
+extension SDP_ELEMENT_DATA__data_e__Union_Extension on SDP_ELEMENT_DATA {
+  Pointer<Uint8> get value => this.data.string.value;
+  set value(Pointer<Uint8> value) => this.data.string.value = value;
+
+  int get length => this.data.string.length;
+  set length(int value) => this.data.string.length = value;
+}
+
+/// {@category Struct}
+class _SDP_ELEMENT_DATA__data_e__Union__url_e__Struct extends Struct {
+  external Pointer<Uint8> value;
+
+  @Uint32()
+  external int length;
+}
+
+extension SDP_ELEMENT_DATA__data_e__Union_Extension_1 on SDP_ELEMENT_DATA {
+  Pointer<Uint8> get value => this.data.url.value;
+  set value(Pointer<Uint8> value) => this.data.url.value = value;
+
+  int get length => this.data.url.length;
+  set length(int value) => this.data.url.length = value;
+}
+
+/// {@category Struct}
+class _SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct extends Struct {
+  external Pointer<Uint8> value;
+
+  @Uint32()
+  external int length;
+}
+
+extension SDP_ELEMENT_DATA__data_e__Union_Extension_2 on SDP_ELEMENT_DATA {
+  Pointer<Uint8> get value => this.data.sequence.value;
+  set value(Pointer<Uint8> value) => this.data.sequence.value = value;
+
+  int get length => this.data.sequence.length;
+  set length(int value) => this.data.sequence.length = value;
+}
+
+/// {@category Struct}
+class _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct extends Struct {
+  external Pointer<Uint8> value;
+
+  @Uint32()
+  external int length;
+}
+
+extension SDP_ELEMENT_DATA__data_e__Union_Extension_3 on SDP_ELEMENT_DATA {
+  Pointer<Uint8> get value => this.data.alternative.value;
+  set value(Pointer<Uint8> value) => this.data.alternative.value = value;
+
+  int get length => this.data.alternative.length;
+  set length(int value) => this.data.alternative.length = value;
+}
+
+extension SDP_ELEMENT_DATA_Extension on SDP_ELEMENT_DATA {
+  SDP_LARGE_INTEGER_16 get int128 => this.data.int128;
+  set int128(SDP_LARGE_INTEGER_16 value) => this.data.int128 = value;
+
+  int get int64 => this.data.int64;
+  set int64(int value) => this.data.int64 = value;
+
+  int get int32 => this.data.int32;
+  set int32(int value) => this.data.int32 = value;
+
+  int get int16 => this.data.int16;
+  set int16(int value) => this.data.int16 = value;
+
+  int get int8 => this.data.int8;
+  set int8(int value) => this.data.int8 = value;
+
+  SDP_ULARGE_INTEGER_16 get uint128 => this.data.uint128;
+  set uint128(SDP_ULARGE_INTEGER_16 value) => this.data.uint128 = value;
+
+  int get uint64 => this.data.uint64;
+  set uint64(int value) => this.data.uint64 = value;
+
+  int get uint32 => this.data.uint32;
+  set uint32(int value) => this.data.uint32 = value;
+
+  int get uint16 => this.data.uint16;
+  set uint16(int value) => this.data.uint16 = value;
+
+  int get uint8 => this.data.uint8;
+  set uint8(int value) => this.data.uint8 = value;
+
+  int get booleanVal => this.data.booleanVal;
+  set booleanVal(int value) => this.data.booleanVal = value;
+
+  GUID get uuid128 => this.data.uuid128;
+  set uuid128(GUID value) => this.data.uuid128 = value;
+
+  int get uuid32 => this.data.uuid32;
+  set uuid32(int value) => this.data.uuid32 = value;
+
+  int get uuid16 => this.data.uuid16;
+  set uuid16(int value) => this.data.uuid16 = value;
+
+  _SDP_ELEMENT_DATA__data_e__Union__string_e__Struct get string =>
+      this.data.string;
+  set string(_SDP_ELEMENT_DATA__data_e__Union__string_e__Struct value) =>
+      this.data.string = value;
+
+  _SDP_ELEMENT_DATA__data_e__Union__url_e__Struct get url => this.data.url;
+  set url(_SDP_ELEMENT_DATA__data_e__Union__url_e__Struct value) =>
+      this.data.url = value;
+
+  _SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct get sequence =>
+      this.data.sequence;
+  set sequence(_SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct value) =>
+      this.data.sequence = value;
+
+  _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct get alternative =>
+      this.data.alternative;
+  set alternative(
+          _SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct value) =>
+      this.data.alternative = value;
+}
+
+/// The union member for a 128-bit integer.
+///
+/// {@category Struct}
+class SDP_LARGE_INTEGER_16 extends Struct {
+  @Uint64()
+  external int LowPart;
+
+  @Int64()
+  external int HighPart;
+}
+
+/// The SDP_STRING_TYPE_DATA structure stores information about SDP string
+/// types.
+///
+/// {@category Struct}
+class SDP_STRING_TYPE_DATA extends Struct {
+  @Uint16()
+  external int encoding;
+
+  @Uint16()
+  external int mibeNum;
+
+  @Uint16()
+  external int attributeId;
+}
+
+/// The union member for a 128-bit unsigned integer.
+///
+/// {@category Struct}
+class SDP_ULARGE_INTEGER_16 extends Struct {
+  @Uint64()
+  external int LowPart;
+
+  @Uint64()
+  external int HighPart;
+}
+
 /// The SECURITY_ATTRIBUTES structure contains the security descriptor for
 /// an object and specifies whether the handle retrieved by specifying this
 /// structure is inheritable. This structure provides security settings for
@@ -7441,6 +7909,23 @@ class SOCKADDR extends Struct {
 
   @Array(14)
   external Array<Uint8> sa_data;
+}
+
+/// The SOCKADDR_BTH structure is used in conjunction with Bluetooth socket
+/// operations, defined by address family AF_BTH.
+///
+/// {@category Struct}
+class SOCKADDR_BTH extends Struct {
+  @Uint16()
+  external int addressFamily;
+
+  @Uint64()
+  external int btAddr;
+
+  external GUID serviceClassId;
+
+  @Uint32()
+  external int port;
 }
 
 /// The SOCKET_ADDRESS structure stores protocol-specific address
@@ -8120,6 +8605,42 @@ class SYSTEM_POWER_STATUS extends Struct {
 
   @Uint32()
   external int BatteryFullLifeTime;
+}
+
+/// The SdpAttributeRange structure is used in a Bluetooth query to
+/// constrain the set of attributes to return in the query.
+///
+/// {@category Struct}
+class SdpAttributeRange extends Struct {
+  @Uint16()
+  external int minAttribute;
+
+  @Uint16()
+  external int maxAttribute;
+}
+
+/// The SdpQueryUuid structure facilitates searching for UUIDs.
+///
+/// {@category Struct}
+class SdpQueryUuid extends Struct {
+  external SdpQueryUuidUnion u;
+
+  @Uint16()
+  external int uuidType;
+}
+
+/// The SdpQueryUuidUnion union contains the UUID on which to perform an SDP
+/// query. Used in conjunction with the SdpQueryUuid structure.
+///
+/// {@category Struct}
+class SdpQueryUuidUnion extends Union {
+  external GUID uuid128;
+
+  @Uint32()
+  external int uuid32;
+
+  @Uint16()
+  external int uuid16;
 }
 
 /// The TASKDIALOGCONFIG structure contains information used to display a

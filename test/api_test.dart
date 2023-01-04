@@ -8726,6 +8726,22 @@ void main() {
           'BluetoothDisplayDeviceProperties');
       expect(BluetoothDisplayDeviceProperties, isA<Function>());
     });
+    test('Can instantiate BluetoothSelectDevices', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothSelectDevices = bthprops.lookupFunction<
+              Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
+              int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)>(
+          'BluetoothSelectDevices');
+      expect(BluetoothSelectDevices, isA<Function>());
+    });
+    test('Can instantiate BluetoothSelectDevicesFree', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothSelectDevicesFree = bthprops.lookupFunction<
+              Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
+              int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)>(
+          'BluetoothSelectDevicesFree');
+      expect(BluetoothSelectDevicesFree, isA<Function>());
+    });
   });
 
   group('Test bluetoothapis functions', () {
@@ -9038,6 +9054,14 @@ void main() {
         expect(BluetoothGATTUnregisterEvent, isA<Function>());
       });
     }
+    test('Can instantiate BluetoothGetDeviceInfo', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothGetDeviceInfo = bluetoothapis.lookupFunction<
+          Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+          int Function(int hRadio,
+              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothGetDeviceInfo');
+      expect(BluetoothGetDeviceInfo, isA<Function>());
+    });
     test('Can instantiate BluetoothGetRadioInfo', () {
       final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
       final BluetoothGetRadioInfo = bluetoothapis.lookupFunction<
@@ -9094,6 +9118,91 @@ void main() {
           int Function(
               Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
       expect(BluetoothRemoveDevice, isA<Function>());
+    });
+    test('Can instantiate BluetoothSdpEnumAttributes', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSdpEnumAttributes = bluetoothapis.lookupFunction<
+          Int32 Function(
+              Pointer<Uint8> pSDPStream,
+              Uint32 cbStreamSize,
+              Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>>
+                  pfnCallback,
+              Pointer pvParam),
+          int Function(
+              Pointer<Uint8> pSDPStream,
+              int cbStreamSize,
+              Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>>
+                  pfnCallback,
+              Pointer pvParam)>('BluetoothSdpEnumAttributes');
+      expect(BluetoothSdpEnumAttributes, isA<Function>());
+    });
+    test('Can instantiate BluetoothSdpGetAttributeValue', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSdpGetAttributeValue = bluetoothapis.lookupFunction<
+          Uint32 Function(Pointer<Uint8> pRecordStream, Uint32 cbRecordLength,
+              Uint16 usAttributeId, Pointer<SDP_ELEMENT_DATA> pAttributeData),
+          int Function(
+              Pointer<Uint8> pRecordStream,
+              int cbRecordLength,
+              int usAttributeId,
+              Pointer<SDP_ELEMENT_DATA>
+                  pAttributeData)>('BluetoothSdpGetAttributeValue');
+      expect(BluetoothSdpGetAttributeValue, isA<Function>());
+    });
+    test('Can instantiate BluetoothSdpGetContainerElementData', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSdpGetContainerElementData = bluetoothapis.lookupFunction<
+              Uint32 Function(
+                  Pointer<Uint8> pContainerStream,
+                  Uint32 cbContainerLength,
+                  Pointer<IntPtr> pElement,
+                  Pointer<SDP_ELEMENT_DATA> pData),
+              int Function(
+                  Pointer<Uint8> pContainerStream,
+                  int cbContainerLength,
+                  Pointer<IntPtr> pElement,
+                  Pointer<SDP_ELEMENT_DATA> pData)>(
+          'BluetoothSdpGetContainerElementData');
+      expect(BluetoothSdpGetContainerElementData, isA<Function>());
+    });
+    test('Can instantiate BluetoothSdpGetElementData', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSdpGetElementData = bluetoothapis.lookupFunction<
+          Uint32 Function(Pointer<Uint8> pSdpStream, Uint32 cbSdpStreamLength,
+              Pointer<SDP_ELEMENT_DATA> pData),
+          int Function(Pointer<Uint8> pSdpStream, int cbSdpStreamLength,
+              Pointer<SDP_ELEMENT_DATA> pData)>('BluetoothSdpGetElementData');
+      expect(BluetoothSdpGetElementData, isA<Function>());
+    });
+    test('Can instantiate BluetoothSdpGetString', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSdpGetString = bluetoothapis.lookupFunction<
+          Uint32 Function(
+              Pointer<Uint8> pRecordStream,
+              Uint32 cbRecordLength,
+              Pointer<SDP_STRING_TYPE_DATA> pStringData,
+              Uint16 usStringOffset,
+              Pointer<Utf16> pszString,
+              Pointer<Uint32> pcchStringLength),
+          int Function(
+              Pointer<Uint8> pRecordStream,
+              int cbRecordLength,
+              Pointer<SDP_STRING_TYPE_DATA> pStringData,
+              int usStringOffset,
+              Pointer<Utf16> pszString,
+              Pointer<Uint32> pcchStringLength)>('BluetoothSdpGetString');
+      expect(BluetoothSdpGetString, isA<Function>());
+    });
+    test('Can instantiate BluetoothSendAuthenticationResponseEx', () {
+      final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');
+      final BluetoothSendAuthenticationResponseEx =
+          bluetoothapis.lookupFunction<
+                  Uint32 Function(IntPtr hRadioIn,
+                      Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse),
+                  int Function(int hRadioIn,
+                      Pointer<BLUETOOTH_AUTHENTICATE_RESPONSE> pauthResponse)>(
+              'BluetoothSendAuthenticationResponseEx');
+      expect(BluetoothSendAuthenticationResponseEx, isA<Function>());
     });
     test('Can instantiate BluetoothSetServiceState', () {
       final bluetoothapis = DynamicLibrary.open('bluetoothapis.dll');

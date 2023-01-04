@@ -77,3 +77,37 @@ final _BluetoothDisplayDeviceProperties = _bthprops.lookupFunction<
         Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
         int Function(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
     'BluetoothDisplayDeviceProperties');
+
+/// The BluetoothSelectDevices function enables Bluetooth device selection.
+///
+/// ```c
+/// BOOL BluetoothSelectDevices(
+///   BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSelectDevices(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp) =>
+    _BluetoothSelectDevices(pbtsdp);
+
+final _BluetoothSelectDevices = _bthprops.lookupFunction<
+        Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
+        int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)>(
+    'BluetoothSelectDevices');
+
+/// The BluetoothSelectDevicesFree function frees resources associated with
+/// a previous call to BluetoothSelectDevices.
+///
+/// ```c
+/// BOOL BluetoothSelectDevicesFree(
+///   BLUETOOTH_SELECT_DEVICE_PARAMS *pbtsdp
+/// );
+/// ```
+/// {@category bluetooth}
+int BluetoothSelectDevicesFree(
+        Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp) =>
+    _BluetoothSelectDevicesFree(pbtsdp);
+
+final _BluetoothSelectDevicesFree = _bthprops.lookupFunction<
+        Int32 Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp),
+        int Function(Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp)>(
+    'BluetoothSelectDevicesFree');

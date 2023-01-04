@@ -24,6 +24,8 @@
     "PENUM_PAGE_FILE_CALLBACKW": "Pointer<NativeFunction<EnumPageFilesProc>>",
     "PFNBLUETOOTH_GATT_EVENT_CALLBACK": "Pointer<NativeFunction<PfnbluetoothGattEventCallback>>",
     "PFN_AUTHENTICATION_CALLBACK_EX": "Pointer<NativeFunction<PfnAuthenticationCallbackEx>>",
+    "PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK": "Pointer<NativeFunction<PfnBluetoothEnumAttributesCallback>>",
+    "PFN_DEVICE_CALLBACK": "Pointer<NativeFunction<PfnDeviceCallback>>",
     "PFTASKDIALOGCALLBACK": "Pointer<NativeFunction<TaskDialogCallbackProc>>",
     "PHANDLER_ROUTINE": "Pointer<NativeFunction<HandlerRoutine>>",
     "PPERFORMANCEINFORMATION": "Pointer<NativeFunction<>>",
