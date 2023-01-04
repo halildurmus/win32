@@ -127,6 +127,21 @@ final _CoCreateInstance = _ole32.lookupFunction<
         Pointer<GUID> riid,
         Pointer<Pointer> ppv)>('CoCreateInstance');
 
+/// Releases the increment made by a previous call to the
+/// CoIncrementMTAUsage function.
+///
+/// ```c
+/// HRESULT CoDecrementMTAUsage(
+///   [in] CO_MTA_USAGE_COOKIE Cookie
+/// );
+/// ```
+/// {@category ole32}
+int CoDecrementMTAUsage(int Cookie) => _CoDecrementMTAUsage(Cookie);
+
+final _CoDecrementMTAUsage = _ole32.lookupFunction<
+    Int32 Function(IntPtr Cookie),
+    int Function(int Cookie)>('CoDecrementMTAUsage');
+
 /// Provides a pointer to an interface on a class object associated with a
 /// specified CLSID. CoGetClassObject locates, and if necessary, dynamically
 /// loads the executable code required to do this.

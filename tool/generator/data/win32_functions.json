@@ -601,6 +601,10 @@
         "prototype": "HRESULT CoCreateInstance(\n  REFCLSID  rclsid,\n  LPUNKNOWN pUnkOuter,\n  DWORD     dwClsContext,\n  REFIID    riid,\n  LPVOID    *ppv\n);",
         "comment": "Creates a single uninitialized object of the class associated with a specified CLSID. Call CoCreateInstance when you want to create only one object on the local system. To create a single object on a remote system, call the CoCreateInstanceEx function. To create multiple objects based on a single CLSID, call the CoGetClassObject function."
     },
+    "CoDecrementMTAUsage": {
+        "prototype": "HRESULT CoDecrementMTAUsage(\n  [in] CO_MTA_USAGE_COOKIE Cookie\n);",
+        "comment": "Releases the increment made by a previous call to the CoIncrementMTAUsage function."
+    },
     "CoGetClassObject": {
         "prototype": "HRESULT CoGetClassObject(\n  REFCLSID rclsid,\n  DWORD    dwClsContext,\n  LPVOID   pvReserved,\n  REFIID   riid,\n  LPVOID   *ppv\n);",
         "comment": "Provides a pointer to an interface on a class object associated with a specified CLSID. CoGetClassObject locates, and if necessary, dynamically loads the executable code required to do this."

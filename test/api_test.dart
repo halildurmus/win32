@@ -9649,6 +9649,13 @@ void main() {
               Pointer<Pointer> ppv)>('CoCreateInstance');
       expect(CoCreateInstance, isA<Function>());
     });
+    test('Can instantiate CoDecrementMTAUsage', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoDecrementMTAUsage = ole32.lookupFunction<
+          Int32 Function(IntPtr Cookie),
+          int Function(int Cookie)>('CoDecrementMTAUsage');
+      expect(CoDecrementMTAUsage, isA<Function>());
+    });
     test('Can instantiate CoGetClassObject', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoGetClassObject = ole32.lookupFunction<
