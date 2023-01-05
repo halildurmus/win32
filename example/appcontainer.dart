@@ -40,13 +40,9 @@ bool isAppContainer() {
 }
 
 void main() {
-  winrtInitialize();
-
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
   final userData = UserDataPaths.getDefault();
   final roamingAppData = userData.roamingAppData;
   print('RoamingAppData: $roamingAppData');
-
-  winrtUninitialize();
 }

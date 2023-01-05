@@ -9649,6 +9649,21 @@ void main() {
               Pointer<Pointer> ppv)>('CoCreateInstance');
       expect(CoCreateInstance, isA<Function>());
     });
+    test('Can instantiate CoDecrementMTAUsage', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoDecrementMTAUsage = ole32.lookupFunction<
+          Int32 Function(IntPtr Cookie),
+          int Function(int Cookie)>('CoDecrementMTAUsage');
+      expect(CoDecrementMTAUsage, isA<Function>());
+    });
+    test('Can instantiate CoGetApartmentType', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoGetApartmentType = ole32.lookupFunction<
+          Int32 Function(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier),
+          int Function(Pointer<Int32> pAptType,
+              Pointer<Int32> pAptQualifier)>('CoGetApartmentType');
+      expect(CoGetApartmentType, isA<Function>());
+    });
     test('Can instantiate CoGetClassObject', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoGetClassObject = ole32.lookupFunction<
@@ -9668,6 +9683,13 @@ void main() {
           ole32.lookupFunction<Uint32 Function(), int Function()>(
               'CoGetCurrentProcess');
       expect(CoGetCurrentProcess, isA<Function>());
+    });
+    test('Can instantiate CoIncrementMTAUsage', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoIncrementMTAUsage = ole32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> pCookie),
+          int Function(Pointer<IntPtr> pCookie)>('CoIncrementMTAUsage');
+      expect(CoIncrementMTAUsage, isA<Function>());
     });
     test('Can instantiate CoInitializeEx', () {
       final ole32 = DynamicLibrary.open('ole32.dll');

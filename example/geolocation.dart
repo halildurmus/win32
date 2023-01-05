@@ -7,8 +7,6 @@
 import 'package:win32/winrt.dart';
 
 void main() async {
-  winrtInitialize();
-
   final status = await Geolocator.requestAccessAsync();
   if (status == GeolocationAccessStatus.denied) {
     print('Error: Location access denied.\n\n'
@@ -33,6 +31,4 @@ void main() async {
       print('No location received.');
     }
   }
-
-  winrtUninitialize();
 }

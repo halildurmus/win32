@@ -9,8 +9,6 @@ import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    setUp(winrtInitialize);
-
     test('createUri', () {
       final uri = Uri.parse(
           'https://www.example.com:443/path/to/file.html?q1=v1&q2=v2#fragment');
@@ -42,7 +40,5 @@ void main() {
 
       winrtUri.release();
     });
-
-    tearDown(winrtUninitialize);
   }
 }

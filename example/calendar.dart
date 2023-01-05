@@ -15,30 +15,25 @@ String calendarData(Calendar calendar) =>
     'Time Zone: ${calendar.timeZoneAsFullString()}\n';
 
 void main() {
-  winrtInitialize();
-  try {
-    print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
-    final calendar = Calendar();
-    print(calendarData(calendar));
+  print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
+  final calendar = Calendar();
+  print(calendarData(calendar));
 
-    final clonedCalendar = calendar.clone();
-    final comparisonResult = clonedCalendar.compare(calendar);
-    print('Comparison result of calendar and its clone: $comparisonResult');
+  final clonedCalendar = calendar.clone();
+  final comparisonResult = clonedCalendar.compare(calendar);
+  print('Comparison result of calendar and its clone: $comparisonResult');
 
-    print('Languages: ${calendar.languages}\n');
+  print('Languages: ${calendar.languages}\n');
 
-    calendar.changeCalendarSystem('JapaneseCalendar');
-    print(calendarData(calendar));
+  calendar.changeCalendarSystem('JapaneseCalendar');
+  print(calendarData(calendar));
 
-    calendar.changeCalendarSystem('HebrewCalendar');
-    print(calendarData(calendar));
+  calendar.changeCalendarSystem('HebrewCalendar');
+  print(calendarData(calendar));
 
-    final dateTime = calendar.getDateTime();
-    print(dateTime);
+  final dateTime = calendar.getDateTime();
+  print(dateTime);
 
-    clonedCalendar.release();
-    calendar.release();
-  } finally {
-    winrtUninitialize();
-  }
+  clonedCalendar.release();
+  calendar.release();
 }

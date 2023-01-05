@@ -40,18 +40,13 @@ void main() {
     });
 
     test('WinRT basic test', () {
-      winrtInitialize();
-
       final calendar = Calendar();
       expect(calendar.year, greaterThanOrEqualTo(2020));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getIids test', () {
-      winrtInitialize();
-
       const iids = [
         '{ca30221d-86d9-40fb-a26b-d44eb7cf08ea}', // ICalendar
         '{00000038-0000-0000-c000-000000000046}', // IWeakReferenceSource
@@ -63,34 +58,25 @@ void main() {
       expect(calendar.iids, equals(iids));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getRuntimeClassName test', () {
-      winrtInitialize();
-
       const calendarClassName = 'Windows.Globalization.Calendar';
 
       final calendar = Calendar();
       expect(calendar.runtimeClassName, equals(calendarClassName));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of base trust class', () {
-      winrtInitialize();
-
       final calendar = Calendar();
       expect(calendar.trustLevel, equals(TrustLevel.baseTrust));
 
       calendar.release();
-      winrtUninitialize();
     });
 
     test('WinRT getTrustLevel test of partial trust class', () {
-      winrtInitialize();
-
       const className = 'Windows.Storage.Pickers.FileOpenPicker';
 
       final object = CreateObject(className, IID_IInspectable);
@@ -98,7 +84,6 @@ void main() {
       expect(inspectableObject.trustLevel, equals(TrustLevel.partialTrust));
 
       inspectableObject.release();
-      winrtUninitialize();
     });
   }
 }

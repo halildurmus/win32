@@ -127,6 +127,38 @@ final _CoCreateInstance = _ole32.lookupFunction<
         Pointer<GUID> riid,
         Pointer<Pointer> ppv)>('CoCreateInstance');
 
+/// Releases the increment made by a previous call to the
+/// CoIncrementMTAUsage function.
+///
+/// ```c
+/// HRESULT CoDecrementMTAUsage(
+///   [in] CO_MTA_USAGE_COOKIE Cookie
+/// );
+/// ```
+/// {@category ole32}
+int CoDecrementMTAUsage(int Cookie) => _CoDecrementMTAUsage(Cookie);
+
+final _CoDecrementMTAUsage = _ole32.lookupFunction<
+    Int32 Function(IntPtr Cookie),
+    int Function(int Cookie)>('CoDecrementMTAUsage');
+
+/// Returns the current apartment type and type qualifier.
+///
+/// ```c
+/// HRESULT CoGetApartmentType(
+///   [out] APTTYPE          *pAptType,
+///   [out] APTTYPEQUALIFIER *pAptQualifier
+/// );
+/// ```
+/// {@category ole32}
+int CoGetApartmentType(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier) =>
+    _CoGetApartmentType(pAptType, pAptQualifier);
+
+final _CoGetApartmentType = _ole32.lookupFunction<
+    Int32 Function(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier),
+    int Function(Pointer<Int32> pAptType,
+        Pointer<Int32> pAptQualifier)>('CoGetApartmentType');
+
 /// Provides a pointer to an interface on a class object associated with a
 /// specified CLSID. CoGetClassObject locates, and if necessary, dynamically
 /// loads the executable code required to do this.
@@ -162,6 +194,21 @@ int CoGetCurrentProcess() => _CoGetCurrentProcess();
 
 final _CoGetCurrentProcess = _ole32
     .lookupFunction<Uint32 Function(), int Function()>('CoGetCurrentProcess');
+
+/// Keeps MTA support active when no MTA threads are running.
+///
+/// ```c
+/// HRESULT CoIncrementMTAUsage(
+///   [out] CO_MTA_USAGE_COOKIE *pCookie
+/// );
+/// ```
+/// {@category ole32}
+int CoIncrementMTAUsage(Pointer<IntPtr> pCookie) =>
+    _CoIncrementMTAUsage(pCookie);
+
+final _CoIncrementMTAUsage = _ole32.lookupFunction<
+    Int32 Function(Pointer<IntPtr> pCookie),
+    int Function(Pointer<IntPtr> pCookie)>('CoIncrementMTAUsage');
 
 /// Initializes the COM library for use by the calling thread, sets the
 /// thread's concurrency model, and creates a new apartment for the thread
