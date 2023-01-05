@@ -19,12 +19,11 @@
 ///
 /// ## Initializing the Windows Runtime
 ///
-/// All threads that activate and interact with Windows Runtime objects must be
-/// initialized prior to calling into the Windows Runtime. This package provides
-/// the [winrtInitialize] helper function to do this. Call the matching
-/// [winrtUninitialize] function to close the Windows Runtime on the current
-/// thread. A successful call to `winrtInitialize` should be balanced with a
-/// corresponding call to `winrtUninitialize`.
+/// This package supports automatic initialization of the Windows Runtime on the
+/// current thread with a Multi-Threaded Apartment (MTA). However, if you wish
+/// to initialize the Windows Runtime manually or just call some APIs that only
+/// work in a Single-Threaded Apartment (STA), you can use the [winrtInitialize]
+/// helper function.
 ///
 /// ## Instantiating Windows Runtime objects
 ///

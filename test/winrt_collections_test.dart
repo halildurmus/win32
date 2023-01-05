@@ -18,7 +18,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final pPoint = allocator<Point>()
           ..ref.X = 3
@@ -287,7 +286,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -296,7 +294,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final guid = Guid.parse(IID_ISpVoice);
         final pPoint = allocator<Point>()
@@ -543,7 +540,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -552,7 +548,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final guid = Guid.parse(IID_ISpVoice);
         final valueSet = ValueSet()
@@ -787,7 +782,6 @@ void main() {
       tearDown(() {
         map.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -795,7 +789,6 @@ void main() {
       late IMap<String, IJsonValue?> map;
 
       setUp(() {
-        winrtInitialize();
         final jsonStr =
             '{"key1": "strVal", "key2": 97, "key3": false, "key4": [1, 2, 3], "key5": null}';
         map = JsonObject()
@@ -922,15 +915,12 @@ void main() {
         expect(iterator.current.value?.getString(), equals('strVal'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IMap<String, String> (StringMap)', () {
       late IMap<String, String> map;
 
       setUp(() {
-        winrtInitialize();
         map = IMap()
           ..insert('key1', 'value1')
           ..insert('key2', '')
@@ -1037,8 +1027,6 @@ void main() {
         expect(iterator.current.value, equals('value1'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IMapView<String, String> (StringMap)', () {
@@ -1064,7 +1052,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         final map = IMap<String, String>()
           ..insert('key1', 'value1')
           ..insert('key2', '')
@@ -1120,8 +1107,6 @@ void main() {
         expect(iterator.current.value, equals('value1'));
         expect(iterator.moveNext(), isFalse);
       });
-
-      tearDown(winrtUninitialize);
     });
 
     group('IVector<DeviceClass>', () {
@@ -1131,7 +1116,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         picker = DevicePicker();
         pickerFilter = picker.filter;
@@ -1379,7 +1363,6 @@ void main() {
         pickerFilter.release();
         picker.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -1389,7 +1372,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         material = Printing3DMultiplePropertyMaterial();
         vector = material.materialIndices;
@@ -1631,7 +1613,6 @@ void main() {
         vector.release();
         material.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -1641,7 +1622,6 @@ void main() {
       late Arena allocator;
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         picker = FileOpenPicker();
         vector = picker.fileTypeFilter;
@@ -1879,7 +1859,6 @@ void main() {
         picker.release();
         vector.release();
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -1907,7 +1886,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         // ignore: constant_identifier_names
         const IID_IVpnPlugInProfile = '{0EDF0DA4-4F00-4589-8D7B-4BF988F6542C}';
         final object = CreateObject(
@@ -2155,7 +2133,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -2183,7 +2160,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final calendar = Calendar();
         vectorView = getLanguages(calendar.ptr);
@@ -2241,7 +2217,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
 
@@ -2270,7 +2245,6 @@ void main() {
       }
 
       setUp(() {
-        winrtInitialize();
         allocator = Arena();
         final object = CreateActivationFactory(
           'Windows.Networking.Connectivity.NetworkInformation',
@@ -2322,7 +2296,6 @@ void main() {
 
       tearDown(() {
         allocator.releaseAll(reuse: true);
-        winrtUninitialize();
       });
     });
   }

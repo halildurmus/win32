@@ -8,6 +8,8 @@ require Flutter.
 | `bluetooth.dart`      | Demonstrate enumerating Bluetooth devices                 |
 | `bluetoothle.dart`    | Enumerate Bluetooth LE (Low Energy) devices               |
 | `calendar.dart`       | Gets information about the calendar from a WinRT API      |
+| `com_context.dart`    | Shows interaction of Dart isolates and COM apartments     |
+| `com_demo.dart`       | Demonstrates COM object reference counting                |
 | `commdlg.dart`        | Demonstrates using the color chooser common dialog box    |
 | `credentials.dart`    | Adds a credential to the store and retrieves it           |
 | `customtitlebar.dart` | Demonstrates creation of owner-draw title bar region      |

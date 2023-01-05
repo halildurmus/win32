@@ -12,8 +12,6 @@ import 'package:win32/winrt.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
-    setUp(winrtInitialize);
-
     test('UInt8', () {
       final pv = PropertyValue.createUInt8(30);
       expect(pv.type, equals(PropertyType.uint8));
@@ -141,7 +139,5 @@ void main() {
       pv.release();
       free(array);
     });
-
-    tearDown(winrtUninitialize);
   }
 }

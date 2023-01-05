@@ -14,7 +14,6 @@ void main() {
     late PhoneNumberFormatter formatter;
 
     setUp(() {
-      winrtInitialize();
       formatter = PhoneNumberFormatter();
     });
 
@@ -73,7 +72,6 @@ void main() {
 
     tearDown(() {
       formatter.release();
-      winrtUninitialize();
     });
   }
 }
