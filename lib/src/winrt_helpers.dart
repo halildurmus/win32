@@ -38,6 +38,8 @@ void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 /// Closes the Windows Runtime on the current thread.
 ///
 /// {@category winrt}
+@Deprecated('Using this function may cause segfaults or runtime exceptions and '
+    'will be removed in a future release.')
 void winrtUninitialize() => RoUninitialize();
 
 extension WinRTStringConversion on Pointer<HSTRING> {
