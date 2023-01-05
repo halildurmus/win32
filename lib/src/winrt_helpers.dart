@@ -137,12 +137,16 @@ Pointer<COMObject> CreateActivationFactory(String className, String iid,
   }
 }
 
-/// Initializes the Multi-Threaded Apartment (MTA) for the current thread.
+/// Ensures the current thread is enabled for COM, using the multithreaded
+/// apartment model (MTA).
 void _initializeMTA() {
   final pCookie = calloc<IntPtr>();
-  final res = CoIncrementMTAUsage(pCookie);
-  if (FAILED(res)) throw WindowsException(res);
-  free(pCookie);
+  try {
+    final res = CoIncrementMTAUsage(pCookie);
+    if (FAILED(res)) throw WindowsException(res);
+  } finally {
+    free(pCookie);
+  }
 }
 
 /// Determines whether [S] is the same type as [T].
