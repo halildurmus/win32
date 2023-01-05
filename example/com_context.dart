@@ -140,7 +140,7 @@ Future<void> createIsolates() async {
 /// ...
 /// ```
 void main() async {
-  // The main thread is initiatlized for the COM apartment threading model.
+  // The main thread is initialized for the COM apartment threading model.
   CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   // Should be mainSingleThreaded

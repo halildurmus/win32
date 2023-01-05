@@ -12,7 +12,6 @@ import 'package:ffi/ffi.dart';
 
 import 'com/iinspectable.dart';
 import 'combase.dart';
-import 'constants.dart';
 import 'constants_nodoc.dart';
 import 'exceptions.dart';
 import 'guid.dart';
@@ -24,11 +23,19 @@ import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 import 'win32/ole32.g.dart';
 import 'winrt/foundation/winrt_enum.dart';
 
-/// Initializes the Windows Runtime on the current thread with a single-threaded
-/// concurrency model.
-///
-/// {@category winrt}
-void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
+@Deprecated('winrtInitialize is no longer required. The Windows Runtime is '
+    'automatically initialized by the Dart projection if it is not already '
+    'initialized on a given thread when a WinRT class is activated. If you '
+    'explicitly want to initialize the current thread with a specific '
+    'threading model, use RoInitialize directly instead. This function will be '
+    'removed in the next major release.')
+void winrtInitialize() {}
+
+@Deprecated('winrtUninitialize is not required in most scenarios, since '
+    'Windows will clean up the process on exit. If you explicitly want to '
+    'uninitialize the Windows Runtime, use RoUninitialize directly instead. '
+    'This function will be removed in the next major release.')
+void winrtUninitialize() {}
 
 extension WinRTStringConversion on Pointer<HSTRING> {
   /// Gets the Dart string at the handle pointed to by this object.
