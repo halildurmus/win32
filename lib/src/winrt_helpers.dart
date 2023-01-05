@@ -24,10 +24,11 @@ import 'win32/ole32.g.dart';
 import 'winrt/foundation/winrt_enum.dart';
 
 @Deprecated('winrtInitialize is no longer required. The Windows Runtime is '
-    'automatically initialized by the Dart projection if it is not already initialized '
-    'on a given thread when a WinRT class is activated. If you explicitly want to '
-    'initialize the current thread with a specific threading model, use RoInitialize '
-    'directly instead. This function will be removed in the next major release.')
+    'automatically initialized by the Dart projection if it is not already '
+    'initialized on a given thread when a WinRT class is activated. If you '
+    'explicitly want to initialize the current thread with a specific '
+    'threading model, use RoInitialize directly instead. This function will be '
+    'removed in the next major release.')
 void winrtInitialize() {}
 
 @Deprecated('winrtUninitialize is not required in most scenarios, since '
