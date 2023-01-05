@@ -27,6 +27,11 @@ import 'winrt/foundation/winrt_enum.dart';
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
 ///
+/// This is usually not needed, as this package ensures that threads are
+/// implicitly assigned to the multi-threaded apartment (MTA). However, if you
+/// need your thread to be initialized with a single-threaded apartment (STA),
+/// you can call this function.
+///
 /// {@category winrt}
 void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
