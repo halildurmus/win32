@@ -9656,6 +9656,14 @@ void main() {
           int Function(int Cookie)>('CoDecrementMTAUsage');
       expect(CoDecrementMTAUsage, isA<Function>());
     });
+    test('Can instantiate CoGetApartmentType', () {
+      final ole32 = DynamicLibrary.open('ole32.dll');
+      final CoGetApartmentType = ole32.lookupFunction<
+          Int32 Function(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier),
+          int Function(Pointer<Int32> pAptType,
+              Pointer<Int32> pAptQualifier)>('CoGetApartmentType');
+      expect(CoGetApartmentType, isA<Function>());
+    });
     test('Can instantiate CoGetClassObject', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoGetClassObject = ole32.lookupFunction<

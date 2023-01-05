@@ -142,6 +142,23 @@ final _CoDecrementMTAUsage = _ole32.lookupFunction<
     Int32 Function(IntPtr Cookie),
     int Function(int Cookie)>('CoDecrementMTAUsage');
 
+/// Returns the current apartment type and type qualifier.
+///
+/// ```c
+/// HRESULT CoGetApartmentType(
+///   [out] APTTYPE          *pAptType,
+///   [out] APTTYPEQUALIFIER *pAptQualifier
+/// );
+/// ```
+/// {@category ole32}
+int CoGetApartmentType(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier) =>
+    _CoGetApartmentType(pAptType, pAptQualifier);
+
+final _CoGetApartmentType = _ole32.lookupFunction<
+    Int32 Function(Pointer<Int32> pAptType, Pointer<Int32> pAptQualifier),
+    int Function(Pointer<Int32> pAptType,
+        Pointer<Int32> pAptQualifier)>('CoGetApartmentType');
+
 /// Provides a pointer to an interface on a class object associated with a
 /// specified CLSID. CoGetClassObject locates, and if necessary, dynamically
 /// loads the executable code required to do this.
