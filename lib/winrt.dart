@@ -19,11 +19,11 @@
 ///
 /// ## Initializing the Windows Runtime
 ///
-/// This package supports automatic initialization of the Windows Runtime on the
-/// current thread with a Multi-Threaded Apartment (MTA). However, if you wish
-/// to initialize the Windows Runtime manually or just call some APIs that only
-/// work in a Single-Threaded Apartment (STA), you can use the [winrtInitialize]
-/// helper function.
+/// This package ensures that threads are implicitly assigned to the
+/// multi-threaded apartment (MTA) so most of the time you don't need to do
+/// anything. However, if you need to use APIs that only work in a
+/// single-threaded apartment (STA), you need to call [winrtInitialize] helper
+/// function to initialize the Windows Runtime with a single-threaded apartment.
 ///
 /// ## Instantiating Windows Runtime objects
 ///
