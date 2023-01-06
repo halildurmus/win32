@@ -36,7 +36,7 @@ class IUserDataPathsStatics extends IInspectable {
       IUserDataPathsStatics.fromRawPointer(
           interface.toInterface(IID_IUserDataPathsStatics));
 
-  UserDataPaths? getForUser(User user) {
+  UserDataPaths? getForUser(User? user) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -50,7 +50,9 @@ class IUserDataPathsStatics extends IInspectable {
             .asFunction<
                 int Function(
                     Pointer, Pointer<COMObject> user, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, user.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+        ptr.ref.lpVtbl,
+        user == null ? nullptr : user.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

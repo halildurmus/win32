@@ -109,7 +109,7 @@ class Gamepad extends IInspectable
   }
 
   // IGamepadStatics2 methods
-  static Gamepad? fromGameController(IGameController gameController) {
+  static Gamepad? fromGameController(IGameController? gameController) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics2);
     final object = IGamepadStatics2.fromRawPointer(activationFactoryPtr);

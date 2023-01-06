@@ -107,7 +107,7 @@ class PhoneNumberInfo extends IInspectable
       _iPhoneNumberInfo.getGeographicRegionCode();
 
   @override
-  PhoneNumberMatchResult checkNumberMatch(PhoneNumberInfo otherNumber) =>
+  PhoneNumberMatchResult checkNumberMatch(PhoneNumberInfo? otherNumber) =>
       _iPhoneNumberInfo.checkNumberMatch(otherNumber);
 
   // IStringable methods

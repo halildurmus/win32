@@ -68,7 +68,7 @@ class IJsonObject extends IInspectable implements IJsonValue {
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
-  void setNamedValue(String name, IJsonValue value) {
+  void setNamedValue(String name, IJsonValue? value) {
     final nameHstring = convertToHString(name);
 
     final hr = ptr.ref.vtable
@@ -83,7 +83,7 @@ class IJsonObject extends IInspectable implements IJsonValue {
                 int Function(Pointer, int name, Pointer<COMObject> value)>()(
         ptr.ref.lpVtbl,
         nameHstring,
-        value.ptr.cast<Pointer<COMObject>>().value);
+        value == null ? nullptr : value.ptr.cast<Pointer<COMObject>>().value);
 
     if (FAILED(hr)) throw WindowsException(hr);
 

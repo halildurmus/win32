@@ -81,7 +81,7 @@ class HostName extends IInspectable implements IHostName, IStringable {
   HostNameType get type => _iHostName.type;
 
   @override
-  bool isEqual(HostName hostName) => _iHostName.isEqual(hostName);
+  bool isEqual(HostName? hostName) => _iHostName.isEqual(hostName);
 
   // IStringable methods
   late final _iStringable = IStringable.from(this);

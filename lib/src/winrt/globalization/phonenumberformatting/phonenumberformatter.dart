@@ -96,12 +96,12 @@ class PhoneNumberFormatter extends IInspectable
   late final _iPhoneNumberFormatter = IPhoneNumberFormatter.from(this);
 
   @override
-  String format(PhoneNumberInfo number) =>
+  String format(PhoneNumberInfo? number) =>
       _iPhoneNumberFormatter.format(number);
 
   @override
   String formatWithOutputFormat(
-          PhoneNumberInfo number, PhoneNumberFormat numberFormat) =>
+          PhoneNumberInfo? number, PhoneNumberFormat numberFormat) =>
       _iPhoneNumberFormatter.formatWithOutputFormat(number, numberFormat);
 
   @override

@@ -36,7 +36,7 @@ class IPhoneNumberFormatter extends IInspectable {
       IPhoneNumberFormatter.fromRawPointer(
           interface.toInterface(IID_IPhoneNumberFormatter));
 
-  String format(PhoneNumberInfo number) {
+  String format(PhoneNumberInfo? number) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -52,7 +52,9 @@ class IPhoneNumberFormatter extends IInspectable {
                   int Function(
                       Pointer, Pointer<COMObject> number, Pointer<IntPtr>)>()(
           ptr.ref.lpVtbl,
-          number.ptr.cast<Pointer<COMObject>>().value,
+          number == null
+              ? nullptr
+              : number.ptr.cast<Pointer<COMObject>>().value,
           retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
@@ -66,7 +68,7 @@ class IPhoneNumberFormatter extends IInspectable {
   }
 
   String formatWithOutputFormat(
-      PhoneNumberInfo number, PhoneNumberFormat numberFormat) {
+      PhoneNumberInfo? number, PhoneNumberFormat numberFormat) {
     final retValuePtr = calloc<HSTRING>();
 
     try {
@@ -82,7 +84,9 @@ class IPhoneNumberFormatter extends IInspectable {
                   int Function(Pointer, Pointer<COMObject> number,
                       int numberFormat, Pointer<IntPtr>)>()(
           ptr.ref.lpVtbl,
-          number.ptr.cast<Pointer<COMObject>>().value,
+          number == null
+              ? nullptr
+              : number.ptr.cast<Pointer<COMObject>>().value,
           numberFormat.value,
           retValuePtr);
 

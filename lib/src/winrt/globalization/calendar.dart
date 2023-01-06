@@ -361,13 +361,13 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
       _iCalendar.nanosecondAsPaddedString(minDigits);
 
   @override
-  int compare(Calendar other) => _iCalendar.compare(other);
+  int compare(Calendar? other) => _iCalendar.compare(other);
 
   @override
   int compareDateTime(DateTime other) => _iCalendar.compareDateTime(other);
 
   @override
-  void copyTo(Calendar other) => _iCalendar.copyTo(other);
+  void copyTo(Calendar? other) => _iCalendar.copyTo(other);
 
   @override
   int get firstMinuteInThisHour => _iCalendar.firstMinuteInThisHour;
