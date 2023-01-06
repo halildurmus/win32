@@ -4,7 +4,7 @@ import '../winrt_method.dart';
 import '../winrt_set_property.dart';
 
 mixin _ComObjectProjection on WinRTMethodProjection {
-  String get retType {
+  String get methodReturnType {
     // The return types of methods in the IPropertyValueStatics are specified
     // as 'object' in WinMD. However, these methods actually return the
     // IPropertyValue interface (except for the CreateEmpty() and
@@ -18,15 +18,56 @@ mixin _ComObjectProjection on WinRTMethodProjection {
     }
 
     final typeIdentifierName = lastComponent(returnType.typeIdentifier.name);
-    // TODO: Remove this once asynchronous methods are supported
+    // TODO: Remove this once methods that return IAsyncActionWithProgress and
+    // IAsyncOperationWithProgress delegates are supported.
     if (typeIdentifierName.startsWith('IAsync')) return 'Pointer<COMObject>';
 
-    return typeIdentifierName;
+    // Factory interface methods (constructors) cannot return null.
+    final factoryInterfacePattern = RegExp(r'^(I[A-Z]\w+)Factory\d{0,1}$');
+    if (factoryInterfacePattern.hasMatch(lastComponent(method.parent.name))) {
+      return typeIdentifierName;
+    }
+
+    // IIterable.First() cannot return null.
+    if (method.name == 'First' &&
+        (method.parent.interfaces.any((element) =>
+            element.typeSpec?.name.endsWith('IIterable`1') ?? false))) {
+      return typeIdentifierName;
+    }
+
+    // IVector(View).GetAt() cannot return null.
+    if (method.name == 'GetAt' &&
+        (method.parent.interfaces.any((element) =>
+            (element.typeSpec?.name.endsWith('IVector`1') ?? false) ||
+            (element.typeSpec?.name.endsWith('IVectorView`1') ?? false)))) {
+      return typeIdentifierName;
+    }
+
+    return '$typeIdentifierName?';
   }
 
-  String get returnStatement => retType == 'Pointer<COMObject>'
-      ? 'return retValuePtr;'
-      : 'return $retType.fromRawPointer(retValuePtr);';
+  String get nullCheck {
+    if (!methodReturnType.endsWith('?')) return '';
+    return '''
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+''';
+  }
+
+  String get returnStatement {
+    if (methodReturnType == 'Pointer<COMObject>') return 'return retValuePtr;';
+
+    if (methodReturnType.endsWith('?')) {
+      final returnTypeWithoutSuffix =
+          // Remove the '?' suffix.
+          methodReturnType.substring(0, methodReturnType.length - 1);
+      return 'return $returnTypeWithoutSuffix.fromRawPointer(retValuePtr);';
+    }
+
+    return 'return $methodReturnType.fromRawPointer(retValuePtr);';
+  }
 }
 
 class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection
@@ -35,13 +76,15 @@ class WinRTMethodReturningComObjectProjection extends WinRTMethodProjection
 
   @override
   String toString() => '''
-      $retType $camelCasedName($methodParams) {
+      $methodReturnType $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
 
         ${ffiCall(freeRetValOnFailure: true)}
 
         $parametersPostamble
+
+        $nullCheck
 
         $returnStatement
       }
@@ -55,10 +98,12 @@ class WinRTGetPropertyReturningComObjectProjection
 
   @override
   String toString() => '''
-      $retType get $exposedMethodName {
+      $methodReturnType get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall(freeRetValOnFailure: true)}
+
+        $nullCheck
 
         $returnStatement
       }
@@ -72,8 +117,8 @@ class WinRTSetPropertyReturningComObjectProjection
 
   @override
   String toString() => '''
-      set $exposedMethodName(${parameters.first.type.methodParamType} value) {
-        ${ffiCall(params: 'value.ptr.cast<Pointer<COMObject>>().value')}
+      set $exposedMethodName(${parameters.first.type.methodParamType}? value) {
+        ${ffiCall(params: 'value == null ? nullptr : value.ptr.cast<Pointer<COMObject>>().value')}
       }
   ''';
 }
