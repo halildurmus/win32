@@ -38,11 +38,12 @@ class TypeDef extends TokenObject
   final TypeIdentifier? typeSpec;
 
   final int _attributes;
-  final _events = <Event>[];
-  final _fields = <Field>[];
-  final _interfaces = <TypeDef>[];
-  final _methods = <Method>[];
-  final _properties = <Property>[];
+
+  late final List<Event> events = _getEvents();
+  late final List<Field> fields = _getFields();
+  late final List<TypeDef> interfaces = _getInterfaces();
+  late final List<Method> methods = _getMethods();
+  late final List<Property> properties = _getProperties();
 
   /// Create a typedef.
   ///
@@ -402,8 +403,8 @@ class TypeDef extends TokenObject
   /// can contain a keyboard, mouse or other hardware input type.
   bool get isUnion =>
       isStruct &&
-      classLayout.fieldOffsets != null &&
-      classLayout.fieldOffsets!.every((fo) => fo.offset == 0);
+      classLayout.fieldOffsets.length > 1 &&
+      classLayout.fieldOffsets.every((fo) => fo.offset == 0);
 
   /// Retrieve class layout information.
   ///
@@ -429,132 +430,128 @@ class TypeDef extends TokenObject
     });
   }
 
-  /// Enumerate all interfaces that this type implements.
-  List<TypeDef> get interfaces {
+  /// Enumerate all events contained within this type.
+  List<Event> _getEvents() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    if (_interfaces.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rImpls = arena<mdInterfaceImpl>();
-        final pcImpls = arena<ULONG>();
+    final events = <Event>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgEvents = arena<mdEvent>();
+      final pcEvents = arena<ULONG>();
 
-        // The enumeration returns a collection of mdInterfaceImpl tokens for
-        // each interface implemented by the specified TypeDef.
-        var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
-        while (hr == S_OK) {
-          final interfaceToken = rImpls.value;
+      var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+      while (hr == S_OK) {
+        final eventToken = rgEvents.value;
 
-          _interfaces.add(processInterfaceToken(interfaceToken));
-          hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+        events.add(Event.fromToken(scope, eventToken));
+        hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
 
-    return _interfaces;
+    return events;
   }
 
   /// Enumerate all fields contained within this type.
-  List<Field> get fields {
+  List<Field> _getFields() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    if (_fields.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgFields = arena<mdFieldDef>();
-        final pcTokens = arena<ULONG>();
+    final fields = <Field>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgFields = arena<mdFieldDef>();
+      final pcTokens = arena<ULONG>();
 
-        var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
-        while (hr == S_OK) {
-          final fieldToken = rgFields.value;
+      var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+      while (hr == S_OK) {
+        final fieldToken = rgFields.value;
 
-          _fields.add(Field.fromToken(scope, fieldToken));
-          hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+        fields.add(Field.fromToken(scope, fieldToken));
+        hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
 
-    return _fields;
+    return fields;
+  }
+
+  /// Enumerate all interfaces that this type implements.
+  List<TypeDef> _getInterfaces() {
+    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
+    assert(TokenType.fromToken(token) == TokenType.typeDef);
+
+    final interfaces = <TypeDef>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rImpls = arena<mdInterfaceImpl>();
+      final pcImpls = arena<ULONG>();
+
+      // The enumeration returns a collection of mdInterfaceImpl tokens for
+      // each interface implemented by the specified TypeDef.
+      var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+      while (hr == S_OK) {
+        final interfaceToken = rImpls.value;
+
+        interfaces.add(processInterfaceToken(interfaceToken));
+        hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
+
+    return interfaces;
   }
 
   /// Enumerate all methods contained within this type.
-  List<Method> get methods {
+  List<Method> _getMethods() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    if (_methods.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgMethods = arena<mdMethodDef>();
-        final pcTokens = arena<ULONG>();
+    final methods = <Method>[];
 
-        var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
-        while (hr == S_OK) {
-          final methodToken = rgMethods.value;
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgMethods = arena<mdMethodDef>();
+      final pcTokens = arena<ULONG>();
 
-          _methods.add(Method.fromToken(scope, methodToken));
-          hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+      var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+      while (hr == S_OK) {
+        final methodToken = rgMethods.value;
 
-    return _methods;
+        methods.add(Method.fromToken(scope, methodToken));
+        hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
+
+    return methods;
   }
 
   /// Enumerate all properties contained within this type.
-  List<Property> get properties {
+  List<Property> _getProperties() {
     if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
     assert(TokenType.fromToken(token) == TokenType.typeDef);
 
-    if (_properties.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgProperties = arena<mdProperty>();
-        final pcProperties = arena<ULONG>();
+    final properties = <Property>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgProperties = arena<mdProperty>();
+      final pcProperties = arena<ULONG>();
 
-        var hr =
-            reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
-        while (hr == S_OK) {
-          final propertyToken = rgProperties.value;
+      var hr =
+          reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
+      while (hr == S_OK) {
+        final propertyToken = rgProperties.value;
 
-          _properties.add(Property.fromToken(scope, propertyToken));
-          hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+        properties.add(Property.fromToken(scope, propertyToken));
+        hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
 
-    return _properties;
-  }
-
-  /// Enumerate all events contained within this type.
-  List<Event> get events {
-    if (TokenType.fromToken(token) == TokenType.typeSpec) return [];
-    assert(TokenType.fromToken(token) == TokenType.typeDef);
-
-    if (_events.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgEvents = arena<mdEvent>();
-        final pcEvents = arena<ULONG>();
-
-        var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
-        while (hr == S_OK) {
-          final eventToken = rgEvents.value;
-
-          _events.add(Event.fromToken(scope, eventToken));
-          hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
-
-    return _events;
+    return properties;
   }
 
   /// Get a field matching the name, if one exists.

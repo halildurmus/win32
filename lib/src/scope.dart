@@ -28,11 +28,12 @@ class Scope {
   final IMetaDataImport2 reader;
   final IMetaDataAssemblyImport assemblyImport;
 
-  final _enums = <TypeDef>[];
-  final _modules = <ModuleRef>[];
-  final _assemblies = <AssemblyRef>[];
-  final _delegates = <TypeDef>[];
-  final _userStrings = <String>[];
+  late final enums = _getEnums();
+  late final moduleRefs = _getModuleRefs();
+  late final assemblyRefs = _getAssemblyRefs();
+  late final delegates = _getDelegates();
+  late final userStrings = _getUserStrings();
+
   final _typedefsByName = <String, List<TypeDef>>{};
   final _typedefs = <int, TypeDef>{};
 
@@ -126,90 +127,78 @@ class Scope {
       });
 
   /// Get an enumerated list of modules in this scope.
-  List<ModuleRef> get moduleRefs {
-    if (_modules.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgModuleRefs = arena<mdModuleRef>();
-        final pcModuleRefs = arena<ULONG>();
+  Iterable<ModuleRef> _getModuleRefs() {
+    final modules = <ModuleRef>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgModuleRefs = arena<mdModuleRef>();
+      final pcModuleRefs = arena<ULONG>();
 
-        var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
-        while (hr == S_OK) {
-          final moduleToken = rgModuleRefs.value;
-          _modules.add(ModuleRef.fromToken(this, moduleToken));
-          hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
-        }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+      var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      while (hr == S_OK) {
+        final moduleToken = rgModuleRefs.value;
+        modules.add(ModuleRef.fromToken(this, moduleToken));
+        hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
 
-    return _modules;
+    return modules;
   }
 
-  List<AssemblyRef> get assemblyRefs {
-    if (_assemblies.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rAssemblyRefs = arena<mdModuleRef>();
-        final pcTokens = arena<ULONG>();
+  Iterable<AssemblyRef> _getAssemblyRefs() {
+    final assemblies = <AssemblyRef>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rAssemblyRefs = arena<mdModuleRef>();
+      final pcTokens = arena<ULONG>();
 
-        var hr =
+      var hr =
+          assemblyImport.EnumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
+      while (hr == S_OK) {
+        final assemblyToken = rAssemblyRefs.value;
+        assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
+        hr =
             assemblyImport.EnumAssemblyRefs(phEnum, rAssemblyRefs, 1, pcTokens);
-        while (hr == S_OK) {
-          final assemblyToken = rAssemblyRefs.value;
-          _assemblies.add(AssemblyRef.fromToken(this, assemblyToken));
-          hr = assemblyImport.EnumAssemblyRefs(
-              phEnum, rAssemblyRefs, 1, pcTokens);
-        }
-        assemblyImport.CloseEnum(phEnum.value);
-      });
-    }
+      }
+      assemblyImport.CloseEnum(phEnum.value);
+    });
 
-    return _assemblies;
+    return assemblies;
   }
 
   /// Get an enumerated list of all hard-coded strings in this scope.
-  List<String> get userStrings {
-    if (_userStrings.isEmpty) {
-      using((Arena arena) {
-        final phEnum = arena<HCORENUM>();
-        final rgStrings = arena<mdString>();
-        final pcStrings = arena<ULONG>();
-        final szString = arena<WCHAR>(stringBufferSize).cast<Utf16>();
-        final pchString = arena<ULONG>();
+  Iterable<String> _getUserStrings() {
+    final userStrings = <String>[];
+    using((Arena arena) {
+      final phEnum = arena<HCORENUM>();
+      final rgStrings = arena<mdString>();
+      final pcStrings = arena<ULONG>();
+      final szString = arena<WCHAR>(stringBufferSize).cast<Utf16>();
+      final pchString = arena<ULONG>();
 
-        var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
-        while (hr == S_OK) {
-          final stringToken = rgStrings.value;
-          hr = reader.GetUserString(
-              stringToken, szString, stringBufferSize, pchString);
-          if (hr == S_OK) {
-            _userStrings.add(szString.toDartString());
-          }
-          hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      while (hr == S_OK) {
+        final stringToken = rgStrings.value;
+        hr = reader.GetUserString(
+            stringToken, szString, stringBufferSize, pchString);
+        if (hr == S_OK) {
+          userStrings.add(szString.toDartString());
         }
-        reader.CloseEnum(phEnum.value);
-      });
-    }
+        hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      }
+      reader.CloseEnum(phEnum.value);
+    });
 
-    return _userStrings;
+    return userStrings;
   }
 
   /// Get an enumerated list of all enumerations in this scope.
-  List<TypeDef> get enums {
-    if (_enums.isEmpty) {
-      _enums.addAll(typeDefs.where((typeDef) => typeDef.isEnum));
-    }
-    return _enums;
-  }
+  Iterable<TypeDef> _getEnums() => typeDefs.where((typeDef) => typeDef.isEnum);
 
   /// Get an enumerated list of all delegates in this scope.
-  List<TypeDef> get delegates {
-    if (_delegates.isEmpty) {
-      _delegates.addAll(typeDefs.where((typeDef) => typeDef.isDelegate));
-    }
-    return _delegates;
-  }
+  Iterable<TypeDef> _getDelegates() =>
+      typeDefs.where((typeDef) => typeDef.isDelegate);
 
   PEKind get executableKind => PEKind(reader);
 

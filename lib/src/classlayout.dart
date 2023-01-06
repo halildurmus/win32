@@ -22,7 +22,7 @@ class FieldOffset extends TokenObject {
 /// Layout information for the class referenced by a specified token.
 class ClassLayout extends TokenObject {
   /// The array of field offsets, for manually-aligned structs.
-  List<FieldOffset>? fieldOffsets;
+  final List<FieldOffset> fieldOffsets = [];
 
   /// The size in bytes of the class represented.
   int? minimumSize;
@@ -53,13 +53,12 @@ class ClassLayout extends TokenObject {
       if (SUCCEEDED(hr)) {
         packingAlignment = pdwPackSize.value;
         minimumSize = pulClassSize.value;
-        fieldOffsets = <FieldOffset>[];
 
         final offsetCount = pcFieldOffset.value;
         for (var i = 0; i < offsetCount; i++) {
           final offset = rgFieldOffset.elementAt(i).ref;
           fieldOffsets
-              ?.add(FieldOffset(scope, offset.ridOfField, offset.ulOffset));
+              .add(FieldOffset(scope, offset.ridOfField, offset.ulOffset));
         }
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         // No class layout record, so leave the fields null
