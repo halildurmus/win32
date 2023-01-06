@@ -1,23 +1,23 @@
 import 'package:win32/win32.dart';
 
-import 'drawengine.dart';
+import 'canvas.dart';
 import 'level.dart';
 
 //
 // Game flow
-// Only Game and DrawEngine are exposed to main().
+// Only Game and Canvas are exposed to main().
 //
 class Game {
-  late DrawEngine de;
+  late Canvas canvas;
   late Level level;
 
   bool isPaused;
 
-  Game(this.de) : isPaused = false {
-    level = Level(de);
+  Game(this.canvas) : isPaused = false {
+    level = Level(canvas);
   }
 
-  bool get isGameOver => level.isGameOver();
+  bool get isGameOver => level.isGameOver;
 
   /// Handles player's key press
   bool keyPress(int vk) {
@@ -49,7 +49,7 @@ class Game {
         break;
       case VK_RETURN:
         // You can only restart on game over
-        if (level.isGameOver()) {
+        if (isGameOver) {
           restart();
         }
         break;
@@ -81,7 +81,7 @@ class Game {
 
   /// Called on WM_PAINT
   void repaint() {
-    de.drawInterface();
+    canvas.drawInterface();
 
     level
       ..drawScore()
@@ -118,21 +118,21 @@ class Game {
 
   /// Restarts the game
   void restart() {
-    level = Level(de);
+    level = Level(canvas);
     isPaused = false;
     repaint();
   }
 
   /// Shows GAME OVER message
   void drawGameOver() {
-    de
+    canvas
       ..drawText('GAME OVER', 3, 10)
       ..drawText('Press ENTER to restart', 2, 9);
   }
 
   /// Shows PAUSE message
   void drawPause() {
-    de
+    canvas
       ..drawText('PAUSE', 4, 10)
       ..drawText('Press PAUSE again to continue', 1, 9);
   }

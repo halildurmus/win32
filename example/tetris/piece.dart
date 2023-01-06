@@ -8,6 +8,7 @@ class Point {
   String toString() => '($x, $y)';
 
   Point([this.x = 0, this.y = 0]);
+
   factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 

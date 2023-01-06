@@ -32,7 +32,7 @@ void main() {
 
   test('CLSIDFromString', () {
     final guid = calloc<GUID>();
-    final pCLSID = TEXT(CLSID_FileSaveDialog);
+    final pCLSID = CLSID_FileSaveDialog.toNativeUtf16();
 
     final hr = CLSIDFromString(pCLSID, guid);
     expect(hr, equals(S_OK));
@@ -45,7 +45,7 @@ void main() {
 
   test('IIDFromString', () {
     final guid = calloc<GUID>();
-    final pIID = TEXT(IID_IShellItem2);
+    final pIID = IID_IShellItem2.toNativeUtf16();
 
     final hr = IIDFromString(pIID, guid);
     expect(hr, equals(S_OK));

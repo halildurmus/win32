@@ -2,13 +2,13 @@ import 'dart:math' show max;
 
 import 'package:win32/win32.dart';
 
-import 'drawengine.dart';
+import 'canvas.dart';
 import 'piece.dart';
 import 'pieceset.dart';
 
 class Level {
-  late List<List<int>> board; // The canvas / drawing board
-  late DrawEngine de; // Does graphic rendering
+  List<List<int>> board = []; // The canvas / drawing board
+  Canvas engine; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece? current; // Current dropping piece
   Piece? next; // Next piece
@@ -24,7 +24,7 @@ class Level {
 
   // de: used to draw the level
   // width & height: level size in cells
-  Level(this.de, [this.width = 10, this.height = 20])
+  Level(this.engine, [this.width = 10, this.height = 20])
       : lastTime = 0,
         speed = 500,
         score = -1 {
@@ -37,7 +37,7 @@ class Level {
   void drawBoard() {
     for (var i = 0; i < width; i++) {
       for (var j = 0; j < height; j++) {
-        de.drawBlock(i, j, board[i][j]);
+        engine.drawBlock(i, j, board[i][j]);
       }
     }
   }
@@ -244,7 +244,7 @@ class Level {
     return rows;
   }
 
-  bool isGameOver() {
+  bool get isGameOver {
     // Exclude the current piece
     if (current != null) {
       clear(current!);
@@ -265,14 +265,14 @@ class Level {
 
   // Draw different kinds of info
   void drawSpeed() {
-    de.drawSpeed((500 - speed) ~/ 2, width + 1, 12);
+    engine.drawSpeed((500 - speed) ~/ 2, width + 1, 12);
   }
 
   void drawScore() {
-    de.drawScore(score, width + 1, 13);
+    engine.drawScore(score, width + 1, 13);
   }
 
   void drawNextPiece() {
-    de.drawNextPiece(next!, width + 1, 14);
+    engine.drawNextPiece(next!, width + 1, 14);
   }
 }
