@@ -257,13 +257,6 @@ class MetadataStore {
   /// particularly if the calling app outlives the cache lifetime.
   static void close() {
     if (!isInitialized) return;
-
-    for (final scope in cache.values) {
-      free(scope.reader.ptr);
-      free(scope.assemblyImport.ptr);
-    }
-    free(dispenser.ptr);
-
     cache.clear();
     isInitialized = false;
   }
