@@ -8,6 +8,7 @@ import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
+
   test('Class valuetype is correctly identified', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
@@ -314,7 +315,8 @@ void main() {
         contains("iterableIid: '{e9bdaaf0-cbf6-5c72-be90-29cbf3a1319b}'"));
   });
 
-  test('WinRT get property successfully projects nullable types', () {
+  test('WinRT get property successfully projects IReference<DateTime> type',
+      () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.IToastNotification');
 
@@ -336,7 +338,9 @@ void main() {
         contains("referenceIid: '{5541d8a7-497c-5aa4-86fc-7713adbf2a2c}'"));
   });
 
-  test('WinRT Clone method successfully projects Pointer<COMObject>', () {
+  test(
+      'WinRT Clone method successfully projects Pointer<COMObject> as nullable',
+      () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar');
 
@@ -352,7 +356,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(cloneProjection.returnType.dartType, equals('Pointer<COMObject>'));
     expect(
-        cloneProjection.toString().trimLeft(), startsWith('Calendar clone()'));
+        cloneProjection.toString().trimLeft(), startsWith('Calendar? clone()'));
   });
 
   test('WinRT TryCreate method successfully projects Pointer<COMObject>', () {
@@ -403,7 +407,8 @@ void main() {
         startsWith('set era(int value)'));
   });
 
-  test('WinRT set property successfully projects nullable DateTime parameter',
+  test(
+      'WinRT set property successfully projects IReference<DateTime> parameter',
       () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.UI.Notifications.IToastNotification');
@@ -425,7 +430,34 @@ void main() {
             : boxValue(value, convertToIReference: true);'''));
   });
 
-  test('WinRT set property successfully projects nullable enum parameter', () {
+  test('WinRT set property projects WinRT object parameter as nullable', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.Notifications.IToastNotification4');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final dataProjection =
+        projection.methodProjections.firstWhere((m) => m.name == 'put_Data');
+    final dataPropertyProjection =
+        WinRTSetPropertyProjection(dataProjection.method, 0);
+
+    expect(
+        dataProjection.nativePrototype,
+        equalsIgnoringWhitespace(
+            'HRESULT Function(Pointer, Pointer<COMObject>)'));
+    expect(dataProjection.dartPrototype,
+        equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
+    expect(dataProjection.returnType.dartType, equals('void'));
+    expect(dataProjection.toString().trimLeft(),
+        startsWith('set data(NotificationData? value)'));
+    expect(
+        dataPropertyProjection.toString(),
+        contains(
+            'value == null ? nullptr : value.ptr.cast<Pointer<COMObject>>().value'));
+  });
+
+  test(
+      'WinRT set property successfully projects IReference<BluetoothLEAdvertisementFlags> parameter',
+      () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisement');
 
@@ -678,7 +710,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(fallbackUriProjection.returnType.methodParamType, equals('Uri'));
     expect(fallbackUriProjection.toString().trimLeft(),
-        startsWith('Uri get fallbackUri'));
+        startsWith('Uri? get fallbackUri'));
     expect(
         fallbackUriProjection.toString().trimLeft(),
         contains(
@@ -689,7 +721,9 @@ void main() {
         contains('return Uri.parse(uriAsString);'));
   });
 
-  test('WinRT set property successfully projects Uri', () {
+  test(
+      'WinRT set property successfully projects Windows.Foundation.Uri as Uri?',
+      () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.System.ILauncherOptions');
 
@@ -703,11 +737,11 @@ void main() {
     expect(fallbackUriProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(fallbackUriProjection.toString().trimLeft(),
-        startsWith('set fallbackUri(Uri value)'));
+        startsWith('set fallbackUri(Uri? value)'));
     expect(
         fallbackUriProjection.toString().trimLeft(),
         contains(
-            'final winrtUri = winrt_uri.Uri.createUri(value.toString());'));
+            'final winrtUri = value == null ? null : winrt_uri.Uri.createUri(value.toString());'));
   });
 
   test('WinRT method successfully projects Uri parameter', () {

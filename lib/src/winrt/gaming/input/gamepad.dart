@@ -109,7 +109,7 @@ class Gamepad extends IInspectable
   }
 
   // IGamepadStatics2 methods
-  static Gamepad fromGameController(IGameController gameController) {
+  static Gamepad? fromGameController(IGameController gameController) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IGamepadStatics2);
     final object = IGamepadStatics2.fromRawPointer(activationFactoryPtr);
@@ -162,13 +162,13 @@ class Gamepad extends IInspectable
       _iGameController.remove_UserChanged(token);
 
   @override
-  Headset get headset => _iGameController.headset;
+  Headset? get headset => _iGameController.headset;
 
   @override
   bool get isWireless => _iGameController.isWireless;
 
   @override
-  User get user => _iGameController.user;
+  User? get user => _iGameController.user;
 
   // IGamepad2 methods
   late final _iGamepad2 = IGamepad2.from(this);
@@ -182,6 +182,6 @@ class Gamepad extends IInspectable
       IGameControllerBatteryInfo.from(this);
 
   @override
-  BatteryReport tryGetBatteryReport() =>
+  BatteryReport? tryGetBatteryReport() =>
       _iGameControllerBatteryInfo.tryGetBatteryReport();
 }

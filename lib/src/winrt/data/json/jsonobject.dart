@@ -53,7 +53,7 @@ class JsonObject extends IInspectable
   static const _className = 'Windows.Data.Json.JsonObject';
 
   // IJsonObjectStatics methods
-  static JsonObject parse(String input) {
+  static JsonObject? parse(String input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonObjectStatics);
     final object = IJsonObjectStatics.fromRawPointer(activationFactoryPtr);
@@ -81,17 +81,17 @@ class JsonObject extends IInspectable
   late final _iJsonObject = IJsonObject.from(this);
 
   @override
-  JsonValue getNamedValue(String name) => _iJsonObject.getNamedValue(name);
+  JsonValue? getNamedValue(String name) => _iJsonObject.getNamedValue(name);
 
   @override
   void setNamedValue(String name, IJsonValue value) =>
       _iJsonObject.setNamedValue(name, value);
 
   @override
-  JsonObject getNamedObject(String name) => _iJsonObject.getNamedObject(name);
+  JsonObject? getNamedObject(String name) => _iJsonObject.getNamedObject(name);
 
   @override
-  JsonArray getNamedArray(String name) => _iJsonObject.getNamedArray(name);
+  JsonArray? getNamedArray(String name) => _iJsonObject.getNamedArray(name);
 
   @override
   String getNamedString(String name) => _iJsonObject.getNamedString(name);
@@ -121,10 +121,10 @@ class JsonObject extends IInspectable
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 
   // IMap<String, IJsonValue?> methods
   late final _iMap = IMap<String, IJsonValue?>.fromRawPointer(
@@ -165,11 +165,11 @@ class JsonObject extends IInspectable
       IJsonObjectWithDefaultValues.from(this);
 
   @override
-  JsonValue getNamedValueOrDefault(String name, JsonValue defaultValue) =>
+  JsonValue? getNamedValueOrDefault(String name, JsonValue defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedValueOrDefault(name, defaultValue);
 
   @override
-  JsonObject getNamedObjectOrDefault(String name, JsonObject defaultValue) =>
+  JsonObject? getNamedObjectOrDefault(String name, JsonObject defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedObjectOrDefault(name, defaultValue);
 
   @override
@@ -177,7 +177,7 @@ class JsonObject extends IInspectable
       _iJsonObjectWithDefaultValues.getNamedStringOrDefault(name, defaultValue);
 
   @override
-  JsonArray getNamedArrayOrDefault(String name, JsonArray defaultValue) =>
+  JsonArray? getNamedArrayOrDefault(String name, JsonArray defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedArrayOrDefault(name, defaultValue);
 
   @override

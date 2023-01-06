@@ -34,7 +34,7 @@ class IToastNotification4 extends IInspectable {
       IToastNotification4.fromRawPointer(
           interface.toInterface(IID_IToastNotification4));
 
-  NotificationData get data {
+  NotificationData? get data {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -52,10 +52,15 @@ class IToastNotification4 extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return NotificationData.fromRawPointer(retValuePtr);
   }
 
-  set data(NotificationData value) {
+  set data(NotificationData? value) {
     final hr = ptr.ref.vtable
             .elementAt(7)
             .cast<
@@ -64,7 +69,8 @@ class IToastNotification4 extends IInspectable {
                         HRESULT Function(Pointer, Pointer<COMObject>)>>>()
             .value
             .asFunction<int Function(Pointer, Pointer<COMObject>)>()(
-        ptr.ref.lpVtbl, value.ptr.cast<Pointer<COMObject>>().value);
+        ptr.ref.lpVtbl,
+        value == null ? nullptr : value.ptr.cast<Pointer<COMObject>>().value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

@@ -21,11 +21,12 @@ void main() async {
     final location = await locator.getGeopositionAsync();
 
     if (location != null) {
-      print('Current location: (${location.coordinate.latitude}, '
-          '${location.coordinate.longitude})');
-      print('Location accuracy: ±${location.coordinate.accuracy} meters');
-      print('Current heading: ${location.coordinate.heading ?? 'N/A'}');
-      final positionSource = location.coordinate.positionSource;
+      final coordinate = location.coordinate!;
+      print('Current location: (${coordinate.latitude}, '
+          '${coordinate.longitude})');
+      print('Location accuracy: ±${coordinate.accuracy} meters');
+      print('Current heading: ${coordinate.heading ?? 'N/A'}');
+      final positionSource = coordinate.positionSource;
       print('Position source: ${positionSource.name}');
     } else {
       print('No location received.');

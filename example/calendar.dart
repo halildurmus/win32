@@ -19,7 +19,7 @@ void main() {
   final calendar = Calendar();
   print(calendarData(calendar));
 
-  final clonedCalendar = calendar.clone();
+  final clonedCalendar = calendar.clone()!;
   final comparisonResult = clonedCalendar.compare(calendar);
   print('Comparison result of calendar and its clone: $comparisonResult');
 

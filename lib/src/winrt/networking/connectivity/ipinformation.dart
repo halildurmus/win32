@@ -36,7 +36,7 @@ class IPInformation extends IInspectable implements IIPInformation {
   late final _iIPInformation = IIPInformation.from(this);
 
   @override
-  NetworkAdapter get networkAdapter => _iIPInformation.networkAdapter;
+  NetworkAdapter? get networkAdapter => _iIPInformation.networkAdapter;
 
   @override
   int? get prefixLength => _iIPInformation.prefixLength;

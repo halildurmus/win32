@@ -36,7 +36,7 @@ class IUserDataPathsStatics extends IInspectable {
       IUserDataPathsStatics.fromRawPointer(
           interface.toInterface(IID_IUserDataPathsStatics));
 
-  UserDataPaths getForUser(User user) {
+  UserDataPaths? getForUser(User user) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -57,10 +57,15 @@ class IUserDataPathsStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return UserDataPaths.fromRawPointer(retValuePtr);
   }
 
-  UserDataPaths getDefault() {
+  UserDataPaths? getDefault() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -76,6 +81,11 @@ class IUserDataPathsStatics extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return UserDataPaths.fromRawPointer(retValuePtr);

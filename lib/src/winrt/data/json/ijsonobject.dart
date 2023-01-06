@@ -38,7 +38,7 @@ class IJsonObject extends IInspectable implements IJsonValue {
   factory IJsonObject.from(IInspectable interface) =>
       IJsonObject.fromRawPointer(interface.toInterface(IID_IJsonObject));
 
-  JsonValue getNamedValue(String name) {
+  JsonValue? getNamedValue(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -59,6 +59,11 @@ class IJsonObject extends IInspectable implements IJsonValue {
     }
 
     WindowsDeleteString(nameHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -85,7 +90,7 @@ class IJsonObject extends IInspectable implements IJsonValue {
     WindowsDeleteString(nameHstring);
   }
 
-  JsonObject getNamedObject(String name) {
+  JsonObject? getNamedObject(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -107,10 +112,15 @@ class IJsonObject extends IInspectable implements IJsonValue {
 
     WindowsDeleteString(nameHstring);
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonObject.fromRawPointer(retValuePtr);
   }
 
-  JsonArray getNamedArray(String name) {
+  JsonArray? getNamedArray(String name) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -131,6 +141,11 @@ class IJsonObject extends IInspectable implements IJsonValue {
     }
 
     WindowsDeleteString(nameHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonArray.fromRawPointer(retValuePtr);
   }
@@ -234,8 +249,8 @@ class IJsonObject extends IInspectable implements IJsonValue {
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 }
