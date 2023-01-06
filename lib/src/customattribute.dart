@@ -35,7 +35,7 @@ class CustomAttribute extends TokenObject {
   final Uint8List signatureBlob;
   final MemberRef memberRef;
   final TypeDef constructor;
-  List<CustomAttributeParameter>? _parameters;
+  late final List<CustomAttributeParameter> parameters = _getParameters();
 
   CustomAttribute(super.scope, super.token, this.modifiedObjectToken,
       this.memberRef, this.constructor, this.attributeType, this.signatureBlob);
@@ -77,20 +77,19 @@ class CustomAttribute extends TokenObject {
   @override
   String toString() => name;
 
-  /// List all parameters for the custom attribute.
-  List<CustomAttributeParameter> get parameters {
-    if (_parameters == null) {
-      _parameters = <CustomAttributeParameter>[];
+  /// Parameters for the custom attribute.
+  List<CustomAttributeParameter> _getParameters() {
+    final parameters = <CustomAttributeParameter>[];
 
-      final paramTypes = _parameterTypes();
-      final paramValues = _parameterValues(paramTypes);
+    final paramTypes = _parameterTypes();
+    final paramValues = _parameterValues(paramTypes);
 
-      for (var idx = 0; idx < paramTypes.length; idx++) {
-        _parameters!
-            .add(CustomAttributeParameter(paramTypes[idx], paramValues[idx]));
-      }
+    for (var idx = 0; idx < paramTypes.length; idx++) {
+      parameters
+          .add(CustomAttributeParameter(paramTypes[idx], paramValues[idx]));
     }
-    return _parameters!;
+
+    return parameters;
   }
 
   /// Decode parameter types, per §II.23.2.1 of ECMA-335 (MethodDefSig)
