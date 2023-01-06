@@ -175,6 +175,29 @@ void main() {
         startsWith('DateTime getDateTime'));
   });
 
+  test('WinRT exposed get property name is properly converted to camelCase',
+      () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Networking.IHostName');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final ipInformationProjection = projection.methodProjections
+            .firstWhere((m) => m.name == 'get_IPInformation')
+        as WinRTGetPropertyProjection;
+    expect(ipInformationProjection.exposedMethodName, equals('ipInformation'));
+  });
+
+  test('WinRT exposed method name is properly converted to camelCase', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.UI.ViewManagement.IUISettings');
+
+    final projection = WinRTInterfaceProjection(winTypeDef!);
+    final ipInformationProjection = projection.methodProjections
+        .firstWhere((m) => m.name == 'UIElementColor');
+
+    expect(ipInformationProjection.camelCasedName, equals('uiElementColor'));
+  });
+
   test('WinRT get property successfully projects something', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker');

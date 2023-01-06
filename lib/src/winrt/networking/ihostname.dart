@@ -36,7 +36,7 @@ class IHostName extends IInspectable {
   factory IHostName.from(IInspectable interface) =>
       IHostName.fromRawPointer(interface.toInterface(IID_IHostName));
 
-  IPInformation get iPInformation {
+  IPInformation get ipInformation {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable

@@ -29,14 +29,10 @@ class EnumProjection {
   List<Field> get _fields => typeDef.fields.skip(1).toList()
     ..sort((a, b) => a.value.compareTo(b.value));
 
-  static const _acronyms = <String>{
-    'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi' //
-  };
-
   String safeEnumIdentifier(String fieldName) {
     if (fieldName.length == 1) return fieldName.toLowerCase();
 
-    for (final acronym in _acronyms) {
+    for (final acronym in acronyms) {
       if (fieldName.startsWith(acronym)) {
         // UInt32 -> uint32, IPAddress -> ipAddress, DPadUp -> dpadUp etc.
         return safeIdentifierForString(

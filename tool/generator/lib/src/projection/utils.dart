@@ -14,6 +14,14 @@ import '../model/false_properties.dart';
 import 'safenames.dart';
 import 'type.dart';
 
+const acronyms = <String>{
+  // These are acronyms that appear in the WinRT enum identifiers, function
+  // names. We use this Set while projecting WinRT enums and functions to
+  // match the Dart style guide.
+  // See https://dart.dev/guides/language/effective-dart/style#do-capitalize-acronyms-and-abbreviations-longer-than-two-letters-like-words
+  'AC', 'DB', 'DPad', 'HD', 'HR', 'IO', 'IP', 'NT', 'TV', 'UI', 'WiFi' //
+};
+
 const falseAnsiEndings = <String>[
   // These are structs that appear in the Win32 metadata that end in 'A' but
   // are not ANSI. In the absence of a better way to determine ANSI attributes
