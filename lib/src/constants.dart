@@ -5,6 +5,3 @@ final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
 /// COM error returned when a token cannot be found.
 final CLDB_E_INDEX_NOTFOUND = 0x80131124.toSigned(32);
-
-/// Bad input parameters.
-final META_E_BAD_INPUT_PARAMETER = 0x80131193.toSigned(32);
