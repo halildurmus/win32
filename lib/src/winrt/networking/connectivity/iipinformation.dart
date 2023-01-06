@@ -80,7 +80,10 @@ class IIPInformation extends IInspectable {
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     final reference = IReference<int>.fromRawPointer(retValuePtr,
         referenceIid: '{e5198cc8-2873-55f5-b0a1-84ff9e4aad62}');

@@ -63,7 +63,10 @@ class IGeolocatorWithScalarAccuracy extends IInspectable
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     final reference = IReference<int>.fromRawPointer(retValuePtr,
         referenceIid: '{513ef3af-e784-5325-a91e-97c2b8111cf3}');

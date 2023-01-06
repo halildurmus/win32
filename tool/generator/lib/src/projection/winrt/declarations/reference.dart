@@ -83,7 +83,10 @@ class WinRTMethodReturningReferenceProjection extends WinRTMethodProjection
 
         ${ffiCall(freeRetValOnFailure: true)}
 
-        if (retValuePtr.ref.lpVtbl == nullptr) return null;
+        if (retValuePtr.ref.lpVtbl == nullptr) {
+          free(retValuePtr);
+          return null;
+        }
 
         final reference = IReference<$referenceTypeArg>.fromRawPointer
             (retValuePtr$referenceConstructorArgs);
@@ -109,7 +112,10 @@ class WinRTGetPropertyReturningReferenceProjection
 
         ${ffiCall(freeRetValOnFailure: true)}
 
-        if (retValuePtr.ref.lpVtbl == nullptr) return null;
+        if (retValuePtr.ref.lpVtbl == nullptr) {
+          free(retValuePtr);
+          return null;
+        }
 
         final reference = IReference<$referenceTypeArg>.fromRawPointer
             (retValuePtr$referenceConstructorArgs);

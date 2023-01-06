@@ -96,7 +96,10 @@ class IGeolocatorStatics2 extends IInspectable {
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     final reference = IReference<BasicGeoposition>.fromRawPointer(retValuePtr,
         referenceIid: '{e4d5dda6-f57c-57cc-b67f-2939a901dabe}');

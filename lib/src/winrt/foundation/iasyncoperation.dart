@@ -172,7 +172,10 @@ class IAsyncOperation<TResult> extends IInspectable implements IAsyncInfo {
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return retValuePtr;
   }
@@ -342,7 +345,10 @@ class IAsyncOperation<TResult> extends IInspectable implements IAsyncInfo {
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
     final uriAsString = winrtUri.toString();
