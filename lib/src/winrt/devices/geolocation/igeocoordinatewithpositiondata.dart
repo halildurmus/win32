@@ -63,7 +63,7 @@ class IGeocoordinateWithPositionData extends IInspectable
     }
   }
 
-  GeocoordinateSatelliteData get satelliteData {
+  GeocoordinateSatelliteData? get satelliteData {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -79,6 +79,11 @@ class IGeocoordinateWithPositionData extends IInspectable
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return GeocoordinateSatelliteData.fromRawPointer(retValuePtr);

@@ -38,7 +38,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
   static const _className = 'Windows.Data.Json.JsonValue';
 
   // IJsonValueStatics methods
-  static JsonValue parse(String input) {
+  static JsonValue? parse(String input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
     final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
@@ -62,7 +62,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
     }
   }
 
-  static JsonValue createBooleanValue(bool input) {
+  static JsonValue? createBooleanValue(bool input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
     final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
@@ -74,7 +74,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
     }
   }
 
-  static JsonValue createNumberValue(double input) {
+  static JsonValue? createNumberValue(double input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
     final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
@@ -86,7 +86,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
     }
   }
 
-  static JsonValue createStringValue(String input) {
+  static JsonValue? createStringValue(String input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics);
     final object = IJsonValueStatics.fromRawPointer(activationFactoryPtr);
@@ -99,7 +99,7 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
   }
 
   // IJsonValueStatics2 methods
-  static JsonValue createNullValue() {
+  static JsonValue? createNullValue() {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonValueStatics2);
     final object = IJsonValueStatics2.fromRawPointer(activationFactoryPtr);
@@ -130,10 +130,10 @@ class JsonValue extends IInspectable implements IJsonValue, IStringable {
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 
   // IStringable methods
   late final _iStringable = IStringable.from(this);

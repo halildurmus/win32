@@ -37,7 +37,7 @@ class IGeoposition2 extends IInspectable implements IGeoposition {
   factory IGeoposition2.from(IInspectable interface) =>
       IGeoposition2.fromRawPointer(interface.toInterface(IID_IGeoposition2));
 
-  VenueData get venueData {
+  VenueData? get venueData {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -55,6 +55,11 @@ class IGeoposition2 extends IInspectable implements IGeoposition {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return VenueData.fromRawPointer(retValuePtr);
   }
 
@@ -62,8 +67,8 @@ class IGeoposition2 extends IInspectable implements IGeoposition {
   late final _iGeoposition = IGeoposition.from(this);
 
   @override
-  Geocoordinate get coordinate => _iGeoposition.coordinate;
+  Geocoordinate? get coordinate => _iGeoposition.coordinate;
 
   @override
-  CivicAddress get civicAddress => _iGeoposition.civicAddress;
+  CivicAddress? get civicAddress => _iGeoposition.civicAddress;
 }

@@ -29,7 +29,7 @@ void main() {
       expect(winrtUri.extension, equals('.html'));
       expect(winrtUri.query, equals('?q1=v1&q2=v2'));
       final queryParsed = winrtUri.queryParsed;
-      expect(queryParsed.size, equals(2));
+      expect(queryParsed!.size, equals(2));
       final queryParameters = queryParsed.toList();
       expect(queryParameters.length, equals(2));
       expect(queryParameters.first.name, equals('q1'));

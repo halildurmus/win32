@@ -35,7 +35,7 @@ class IFileOpenPicker3 extends IInspectable {
       IFileOpenPicker3.fromRawPointer(
           interface.toInterface(IID_IFileOpenPicker3));
 
-  User get user {
+  User? get user {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -51,6 +51,11 @@ class IFileOpenPicker3 extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return User.fromRawPointer(retValuePtr);

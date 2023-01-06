@@ -109,7 +109,7 @@ class INetworkAdapter extends IInspectable {
     }
   }
 
-  NetworkItem get networkItem {
+  NetworkItem? get networkItem {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -125,6 +125,11 @@ class INetworkAdapter extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return NetworkItem.fromRawPointer(retValuePtr);

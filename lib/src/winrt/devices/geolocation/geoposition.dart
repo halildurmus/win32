@@ -38,14 +38,14 @@ class Geoposition extends IInspectable implements IGeoposition, IGeoposition2 {
   late final _iGeoposition = IGeoposition.from(this);
 
   @override
-  Geocoordinate get coordinate => _iGeoposition.coordinate;
+  Geocoordinate? get coordinate => _iGeoposition.coordinate;
 
   @override
-  CivicAddress get civicAddress => _iGeoposition.civicAddress;
+  CivicAddress? get civicAddress => _iGeoposition.civicAddress;
 
   // IGeoposition2 methods
   late final _iGeoposition2 = IGeoposition2.from(this);
 
   @override
-  VenueData get venueData => _iGeoposition2.venueData;
+  VenueData? get venueData => _iGeoposition2.venueData;
 }

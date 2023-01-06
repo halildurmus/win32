@@ -35,7 +35,7 @@ class IJsonValueStatics extends IInspectable {
       IJsonValueStatics.fromRawPointer(
           interface.toInterface(IID_IJsonValueStatics));
 
-  JsonValue parse(String input) {
+  JsonValue? parse(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
 
@@ -56,6 +56,11 @@ class IJsonValueStatics extends IInspectable {
     }
 
     WindowsDeleteString(inputHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonValue.fromRawPointer(retValuePtr);
   }
@@ -89,7 +94,7 @@ class IJsonValueStatics extends IInspectable {
     }
   }
 
-  JsonValue createBooleanValue(bool input) {
+  JsonValue? createBooleanValue(bool input) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -109,10 +114,15 @@ class IJsonValueStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
-  JsonValue createNumberValue(double input) {
+  JsonValue? createNumberValue(double input) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -132,10 +142,15 @@ class IJsonValueStatics extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
-  JsonValue createStringValue(String input) {
+  JsonValue? createStringValue(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
 
@@ -156,6 +171,11 @@ class IJsonValueStatics extends IInspectable {
     }
 
     WindowsDeleteString(inputHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonValue.fromRawPointer(retValuePtr);
   }

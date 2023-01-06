@@ -79,14 +79,14 @@ class Geocoordinate extends IInspectable
       _iGeocoordinateWithPositionData.positionSource;
 
   @override
-  GeocoordinateSatelliteData get satelliteData =>
+  GeocoordinateSatelliteData? get satelliteData =>
       _iGeocoordinateWithPositionData.satelliteData;
 
   // IGeocoordinateWithPoint methods
   late final _iGeocoordinateWithPoint = IGeocoordinateWithPoint.from(this);
 
   @override
-  Geopoint get point => _iGeocoordinateWithPoint.point;
+  Geopoint? get point => _iGeocoordinateWithPoint.point;
 
   // IGeocoordinateWithPositionSourceTimestamp methods
   late final _iGeocoordinateWithPositionSourceTimestamp =

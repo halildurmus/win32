@@ -270,7 +270,10 @@ class IKeyValuePair<K, V> extends IInspectable {
       throw WindowsException(hr);
     }
 
-    if (retValuePtr.ref.lpVtbl == nullptr) return null;
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return IPropertyValue.fromRawPointer(retValuePtr).value;
   }

@@ -35,7 +35,7 @@ class IGeocoordinateWithPoint extends IInspectable {
       IGeocoordinateWithPoint.fromRawPointer(
           interface.toInterface(IID_IGeocoordinateWithPoint));
 
-  Geopoint get point {
+  Geopoint? get point {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -51,6 +51,11 @@ class IGeocoordinateWithPoint extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return Geopoint.fromRawPointer(retValuePtr);

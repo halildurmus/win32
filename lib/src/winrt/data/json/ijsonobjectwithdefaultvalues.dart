@@ -42,7 +42,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
       IJsonObjectWithDefaultValues.fromRawPointer(
           interface.toInterface(IID_IJsonObjectWithDefaultValues));
 
-  JsonValue getNamedValueOrDefault(String name, JsonValue defaultValue) {
+  JsonValue? getNamedValueOrDefault(String name, JsonValue defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -69,10 +69,15 @@ class IJsonObjectWithDefaultValues extends IInspectable
 
     WindowsDeleteString(nameHstring);
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
-  JsonObject getNamedObjectOrDefault(String name, JsonObject defaultValue) {
+  JsonObject? getNamedObjectOrDefault(String name, JsonObject defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -98,6 +103,11 @@ class IJsonObjectWithDefaultValues extends IInspectable
     }
 
     WindowsDeleteString(nameHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonObject.fromRawPointer(retValuePtr);
   }
@@ -133,7 +143,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
     }
   }
 
-  JsonArray getNamedArrayOrDefault(String name, JsonArray defaultValue) {
+  JsonArray? getNamedArrayOrDefault(String name, JsonArray defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -159,6 +169,11 @@ class IJsonObjectWithDefaultValues extends IInspectable
     }
 
     WindowsDeleteString(nameHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonArray.fromRawPointer(retValuePtr);
   }
@@ -226,17 +241,17 @@ class IJsonObjectWithDefaultValues extends IInspectable
   late final _iJsonObject = IJsonObject.from(this);
 
   @override
-  JsonValue getNamedValue(String name) => _iJsonObject.getNamedValue(name);
+  JsonValue? getNamedValue(String name) => _iJsonObject.getNamedValue(name);
 
   @override
   void setNamedValue(String name, IJsonValue value) =>
       _iJsonObject.setNamedValue(name, value);
 
   @override
-  JsonObject getNamedObject(String name) => _iJsonObject.getNamedObject(name);
+  JsonObject? getNamedObject(String name) => _iJsonObject.getNamedObject(name);
 
   @override
-  JsonArray getNamedArray(String name) => _iJsonObject.getNamedArray(name);
+  JsonArray? getNamedArray(String name) => _iJsonObject.getNamedArray(name);
 
   @override
   String getNamedString(String name) => _iJsonObject.getNamedString(name);
@@ -266,8 +281,8 @@ class IJsonObjectWithDefaultValues extends IInspectable
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 }

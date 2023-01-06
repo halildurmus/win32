@@ -7,11 +7,16 @@ class WinRTMethodReturningUriProjection extends WinRTMethodProjection {
 
   @override
   String toString() => '''
-      Uri $camelCasedName($methodParams) {
+      Uri? $camelCasedName($methodParams) {
         final retValuePtr = calloc<COMObject>();
         $parametersPreamble
 
         ${ffiCall(freeRetValOnFailure: true)}
+
+        if (retValuePtr.ref.lpVtbl == nullptr) {
+          free(retValuePtr);
+          return null;
+        }
 
         final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
         final uriAsString = winrtUri.toString();
@@ -30,10 +35,15 @@ class WinRTGetPropertyReturningUriProjection
 
   @override
   String toString() => '''
-      Uri get $exposedMethodName {
+      Uri? get $exposedMethodName {
         final retValuePtr = calloc<COMObject>();
 
         ${ffiCall(freeRetValOnFailure: true)}
+
+        if (retValuePtr.ref.lpVtbl == nullptr) {
+          free(retValuePtr);
+          return null;
+        }
 
         final winrtUri = winrt_uri.Uri.fromRawPointer(retValuePtr);
         final uriAsString = winrtUri.toString();
@@ -50,13 +60,13 @@ class WinRTSetPropertyReturningUriProjection
 
   @override
   String toString() => '''
-      set $exposedMethodName(Uri value) {
-        final winrtUri = winrt_uri.Uri.createUri(value.toString());
+      set $exposedMethodName(Uri? value) {
+        final winrtUri = value == null ? null : winrt_uri.Uri.createUri(value.toString());
 
         try {
-          ${ffiCall(params: 'winrtUri.ptr.cast<Pointer<COMObject>>().value')}
+          ${ffiCall(params: 'value == null ? nullptr : winrtUri.ptr.cast<Pointer<COMObject>>().value')}
         } finally {
-          winrtUri.release();
+          winrtUri?.release();
         }
       }
 ''';

@@ -37,7 +37,7 @@ class IJsonArray extends IInspectable implements IJsonValue {
   factory IJsonArray.from(IInspectable interface) =>
       IJsonArray.fromRawPointer(interface.toInterface(IID_IJsonArray));
 
-  JsonObject getObjectAt(int index) {
+  JsonObject? getObjectAt(int index) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -56,10 +56,15 @@ class IJsonArray extends IInspectable implements IJsonValue {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonObject.fromRawPointer(retValuePtr);
   }
 
-  JsonArray getArrayAt(int index) {
+  JsonArray? getArrayAt(int index) {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -76,6 +81,11 @@ class IJsonArray extends IInspectable implements IJsonValue {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return JsonArray.fromRawPointer(retValuePtr);
@@ -173,8 +183,8 @@ class IJsonArray extends IInspectable implements IJsonValue {
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 }

@@ -157,7 +157,7 @@ class IGameController extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  Headset get headset {
+  Headset? get headset {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -173,6 +173,11 @@ class IGameController extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return Headset.fromRawPointer(retValuePtr);
@@ -201,7 +206,7 @@ class IGameController extends IInspectable {
     }
   }
 
-  User get user {
+  User? get user {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -217,6 +222,11 @@ class IGameController extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return User.fromRawPointer(retValuePtr);

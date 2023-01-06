@@ -43,6 +43,6 @@ void main() {
   print('${!isAppContainer() ? '!' : ''}isAppContainer');
 
   final userData = UserDataPaths.getDefault();
-  final roamingAppData = userData.roamingAppData;
+  final roamingAppData = userData?.roamingAppData;
   print('RoamingAppData: $roamingAppData');
 }

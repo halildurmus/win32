@@ -36,7 +36,7 @@ class ICalendar extends IInspectable {
   factory ICalendar.from(IInspectable interface) =>
       ICalendar.fromRawPointer(interface.toInterface(IID_ICalendar));
 
-  Calendar clone() {
+  Calendar? clone() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -52,6 +52,11 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return Calendar.fromRawPointer(retValuePtr);

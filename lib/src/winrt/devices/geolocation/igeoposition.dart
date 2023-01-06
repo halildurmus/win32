@@ -35,7 +35,7 @@ class IGeoposition extends IInspectable {
   factory IGeoposition.from(IInspectable interface) =>
       IGeoposition.fromRawPointer(interface.toInterface(IID_IGeoposition));
 
-  Geocoordinate get coordinate {
+  Geocoordinate? get coordinate {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -53,10 +53,15 @@ class IGeoposition extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return Geocoordinate.fromRawPointer(retValuePtr);
   }
 
-  CivicAddress get civicAddress {
+  CivicAddress? get civicAddress {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -72,6 +77,11 @@ class IGeoposition extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return CivicAddress.fromRawPointer(retValuePtr);

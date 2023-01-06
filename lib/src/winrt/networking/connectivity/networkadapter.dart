@@ -46,7 +46,7 @@ class NetworkAdapter extends IInspectable implements INetworkAdapter {
   int get ianaInterfaceType => _iNetworkAdapter.ianaInterfaceType;
 
   @override
-  NetworkItem get networkItem => _iNetworkAdapter.networkItem;
+  NetworkItem? get networkItem => _iNetworkAdapter.networkItem;
 
   @override
   Guid get networkAdapterId => _iNetworkAdapter.networkAdapterId;

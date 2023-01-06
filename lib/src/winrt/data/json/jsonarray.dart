@@ -48,7 +48,7 @@ class JsonArray extends IInspectable
   static const _className = 'Windows.Data.Json.JsonArray';
 
   // IJsonArrayStatics methods
-  static JsonArray parse(String input) {
+  static JsonArray? parse(String input) {
     final activationFactoryPtr =
         CreateActivationFactory(_className, IID_IJsonArrayStatics);
     final object = IJsonArrayStatics.fromRawPointer(activationFactoryPtr);
@@ -76,10 +76,10 @@ class JsonArray extends IInspectable
   late final _iJsonArray = IJsonArray.from(this);
 
   @override
-  JsonObject getObjectAt(int index) => _iJsonArray.getObjectAt(index);
+  JsonObject? getObjectAt(int index) => _iJsonArray.getObjectAt(index);
 
   @override
-  JsonArray getArrayAt(int index) => _iJsonArray.getArrayAt(index);
+  JsonArray? getArrayAt(int index) => _iJsonArray.getArrayAt(index);
 
   @override
   String getStringAt(int index) => _iJsonArray.getStringAt(index);
@@ -109,10 +109,10 @@ class JsonArray extends IInspectable
   bool getBoolean() => _iJsonValue.getBoolean();
 
   @override
-  JsonArray getArray() => _iJsonValue.getArray();
+  JsonArray? getArray() => _iJsonValue.getArray();
 
   @override
-  JsonObject getObject() => _iJsonValue.getObject();
+  JsonObject? getObject() => _iJsonValue.getObject();
 
   // IVector<IJsonValue> methods
   late final _iVector = IVector<IJsonValue>.fromRawPointer(
