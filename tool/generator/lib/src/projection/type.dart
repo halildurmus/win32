@@ -366,7 +366,7 @@ class TypeProjection {
         'Pointer<COMObject>',
         methodParamType:
             isWinRT && typeIdentifier.baseType != BaseType.objectType
-                ? lastComponent(typeIdentifier.name)
+                ? '${lastComponent(typeIdentifier.name)}?'
                 : null,
       );
     }

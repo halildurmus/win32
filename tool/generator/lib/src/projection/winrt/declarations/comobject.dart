@@ -58,15 +58,7 @@ mixin _ComObjectProjection on WinRTMethodProjection {
 
   String get returnStatement {
     if (methodReturnType == 'Pointer<COMObject>') return 'return retValuePtr;';
-
-    if (methodReturnType.endsWith('?')) {
-      final returnTypeWithoutSuffix =
-          // Remove the '?' suffix.
-          methodReturnType.substring(0, methodReturnType.length - 1);
-      return 'return $returnTypeWithoutSuffix.fromRawPointer(retValuePtr);';
-    }
-
-    return 'return $methodReturnType.fromRawPointer(retValuePtr);';
+    return 'return ${stripQuestionMarkSuffix(methodReturnType)}.fromRawPointer(retValuePtr);';
   }
 }
 
@@ -117,7 +109,7 @@ class WinRTSetPropertyReturningComObjectProjection
 
   @override
   String toString() => '''
-      set $exposedMethodName(${parameters.first.type.methodParamType}? value) {
+      set $exposedMethodName(${parameters.first.type.methodParamType} value) {
         ${ffiCall(params: 'value == null ? nullptr : value.ptr.cast<Pointer<COMObject>>().value')}
       }
   ''';
