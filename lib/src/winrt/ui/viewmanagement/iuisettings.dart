@@ -303,7 +303,7 @@ class IUISettings extends IInspectable {
     }
   }
 
-  Color uIElementColor(UIElementType desiredElement) {
+  Color uiElementColor(UIElementType desiredElement) {
     final retValuePtr = calloc<Color>();
 
     try {

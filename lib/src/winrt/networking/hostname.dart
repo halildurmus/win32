@@ -66,7 +66,7 @@ class HostName extends IInspectable implements IHostName, IStringable {
   late final _iHostName = IHostName.from(this);
 
   @override
-  IPInformation get iPInformation => _iHostName.iPInformation;
+  IPInformation get ipInformation => _iHostName.ipInformation;
 
   @override
   String get rawName => _iHostName.rawName;
