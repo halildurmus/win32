@@ -87,8 +87,8 @@ class UISettings extends IInspectable
   int get mouseHoverTime => _iUISettings.mouseHoverTime;
 
   @override
-  Color uIElementColor(UIElementType desiredElement) =>
-      _iUISettings.uIElementColor(desiredElement);
+  Color uiElementColor(UIElementType desiredElement) =>
+      _iUISettings.uiElementColor(desiredElement);
 
   // IUISettings2 methods
   late final _iUISettings2 = IUISettings2.from(this);
