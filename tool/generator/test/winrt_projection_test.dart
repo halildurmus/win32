@@ -8,6 +8,7 @@ import 'helpers.dart';
 
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
+
   test('Class valuetype is correctly identified', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.IFileOpenPicker')!;
@@ -352,7 +353,7 @@ void main() {
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
     expect(cloneProjection.returnType.dartType, equals('Pointer<COMObject>'));
     expect(
-        cloneProjection.toString().trimLeft(), startsWith('Calendar clone()'));
+        cloneProjection.toString().trimLeft(), startsWith('Calendar? clone()'));
   });
 
   test('WinRT TryCreate method successfully projects Pointer<COMObject>', () {

@@ -21,7 +21,7 @@ void main() {
     });
 
     test('Calendar.clone', () {
-      final calendar2 = calendar.clone();
+      final calendar2 = calendar.clone()!;
 
       expect(
           calendar2.runtimeClassName, equals('Windows.Globalization.Calendar'));
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('Calendar.setToMin', () {
-      final today = calendar.clone();
+      final today = calendar.clone()!;
 
       calendar.setToMin();
       expect(calendar.compare(today), isNegative);
@@ -40,7 +40,7 @@ void main() {
     });
 
     test('Calendar.setToMax', () {
-      final today = calendar.clone();
+      final today = calendar.clone()!;
 
       calendar.setToMax();
       expect(calendar.compare(today), isPositive);
@@ -371,7 +371,7 @@ void main() {
     });
 
     test('Compare equality', () {
-      final original = calendar.clone();
+      final original = calendar.clone()!;
       calendar
         ..addDays(1)
         ..addDays(-1);
@@ -382,7 +382,7 @@ void main() {
     });
 
     test('Compare positive', () {
-      final original = calendar.clone();
+      final original = calendar.clone()!;
       calendar
         ..addDays(2)
         ..addDays(-1);
@@ -393,7 +393,7 @@ void main() {
     });
 
     test('Compare negative', () {
-      final original = calendar.clone();
+      final original = calendar.clone()!;
       calendar
         ..addDays(2)
         ..addDays(-3);
