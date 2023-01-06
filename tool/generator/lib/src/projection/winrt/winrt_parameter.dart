@@ -3,6 +3,7 @@ import 'package:winmd/winmd.dart';
 import '../parameter.dart';
 import '../safenames.dart';
 import '../type.dart';
+import '../utils.dart';
 
 /// A WinRT parameter.
 ///
@@ -15,12 +16,37 @@ class WinRTParameterProjection extends ParameterProjection {
 
   final Method method;
 
-  @override
-  String get paramProjection {
+  String get paramType {
     final originalParamType = safeTypenameForString(type.methodParamType);
-    final paramType = originalParamType == 'GUID' ? 'Guid' : originalParamType;
-    return '$paramType ${safeIdentifierForString(name)}';
+    if (originalParamType == 'GUID') return 'Guid';
+    if (!originalParamType.endsWith('?')) return originalParamType;
+
+    // Parameters of factory interface methods (constructors) can't be nullable.
+    final factoryInterfacePattern = RegExp(r'^(I[A-Z]\w+)Factory\d{0,1}$');
+    if (factoryInterfacePattern.hasMatch(lastComponent(method.parent.name))) {
+      return stripQuestionMarkSuffix(originalParamType);
+    }
+
+    // IIterable.First() cannot return null.
+    if (method.name == 'First' &&
+        (method.parent.interfaces.any((element) =>
+            element.typeSpec?.name.endsWith('IIterable`1') ?? false))) {
+      return stripQuestionMarkSuffix(originalParamType);
+    }
+
+    // IVector(View).GetAt() cannot return null.
+    if (method.name == 'GetAt' &&
+        (method.parent.interfaces.any((element) =>
+            (element.typeSpec?.name.endsWith('IVector`1') ?? false) ||
+            (element.typeSpec?.name.endsWith('IVectorView`1') ?? false)))) {
+      return stripQuestionMarkSuffix(originalParamType);
+    }
+
+    return originalParamType;
   }
+
+  @override
+  String get paramProjection => '$paramType ${safeIdentifierForString(name)}';
 
   // Matcher properties
 
@@ -121,19 +147,27 @@ class WinRTParameterProjection extends ParameterProjection {
 
     if (isCOMObject) {
       if (isUri) {
-        return methodBelongsToUriRuntimeClass
-            ? '$identifier.ptr.cast<Pointer<COMObject>>().value'
+        if (methodBelongsToUriRuntimeClass) {
+          return '$identifier == null ? nullptr : $identifier.ptr.cast<Pointer<COMObject>>().value';
+        }
+
+        return paramType.endsWith('?')
+            ? '$name == null ? nullptr : ${name}Uri.ptr.cast<Pointer<COMObject>>().value'
             : '${name}Uri.ptr.cast<Pointer<COMObject>>().value';
       }
 
       if (type.isReferenceType || type.isSimpleArrayType) {
-        return type.methodParamType == 'Pointer<COMObject>'
+        return paramType == 'Pointer<COMObject>'
             ? identifier
             : '$identifier.ptr';
       }
 
-      return type.methodParamType == 'Pointer<COMObject>'
-          ? '$identifier.cast<Pointer<COMObject>>().value'
+      if (paramType == 'Pointer<COMObject>') {
+        return '$identifier.cast<Pointer<COMObject>>().value';
+      }
+
+      return paramType.endsWith('?')
+          ? '$identifier == null ? nullptr : $identifier.ptr.cast<Pointer<COMObject>>().value'
           : '$identifier.ptr.cast<Pointer<COMObject>>().value';
     }
 

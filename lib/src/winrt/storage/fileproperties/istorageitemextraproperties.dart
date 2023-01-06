@@ -43,7 +43,7 @@ class IStorageItemExtraProperties extends IInspectable {
           interface.toInterface(IID_IStorageItemExtraProperties));
 
   Future<IMap<String, Object?>> retrievePropertiesAsync(
-      IIterable<String> propertiesToRetrieve) {
+      IIterable<String>? propertiesToRetrieve) {
     final retValuePtr = calloc<COMObject>();
     final completer = Completer<IMap<String, Object?>>();
 
@@ -59,8 +59,12 @@ class IStorageItemExtraProperties extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, Pointer<COMObject> propertiesToRetrieve,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl,
-        propertiesToRetrieve.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl,
+        propertiesToRetrieve == null
+            ? nullptr
+            : propertiesToRetrieve.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -78,7 +82,7 @@ class IStorageItemExtraProperties extends IInspectable {
   }
 
   Future<void> savePropertiesAsync(
-      IIterable<IKeyValuePair<String, Object?>> propertiesToSave) {
+      IIterable<IKeyValuePair<String, Object?>>? propertiesToSave) {
     final retValuePtr = calloc<COMObject>();
     final completer = Completer<void>();
 
@@ -94,8 +98,12 @@ class IStorageItemExtraProperties extends IInspectable {
             .value
             .asFunction<
                 int Function(Pointer, Pointer<COMObject> propertiesToSave,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl,
-        propertiesToSave.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl,
+        propertiesToSave == null
+            ? nullptr
+            : propertiesToSave.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);

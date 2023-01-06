@@ -42,7 +42,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
       IJsonObjectWithDefaultValues.fromRawPointer(
           interface.toInterface(IID_IJsonObjectWithDefaultValues));
 
-  JsonValue? getNamedValueOrDefault(String name, JsonValue defaultValue) {
+  JsonValue? getNamedValueOrDefault(String name, JsonValue? defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -59,8 +59,13 @@ class IJsonObjectWithDefaultValues extends IInspectable
             .value
             .asFunction<
                 int Function(Pointer, int name, Pointer<COMObject> defaultValue,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
-        defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl,
+        nameHstring,
+        defaultValue == null
+            ? nullptr
+            : defaultValue.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -77,7 +82,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
     return JsonValue.fromRawPointer(retValuePtr);
   }
 
-  JsonObject? getNamedObjectOrDefault(String name, JsonObject defaultValue) {
+  JsonObject? getNamedObjectOrDefault(String name, JsonObject? defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -94,8 +99,13 @@ class IJsonObjectWithDefaultValues extends IInspectable
             .value
             .asFunction<
                 int Function(Pointer, int name, Pointer<COMObject> defaultValue,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
-        defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl,
+        nameHstring,
+        defaultValue == null
+            ? nullptr
+            : defaultValue.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -143,7 +153,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
     }
   }
 
-  JsonArray? getNamedArrayOrDefault(String name, JsonArray defaultValue) {
+  JsonArray? getNamedArrayOrDefault(String name, JsonArray? defaultValue) {
     final retValuePtr = calloc<COMObject>();
     final nameHstring = convertToHString(name);
 
@@ -160,8 +170,13 @@ class IJsonObjectWithDefaultValues extends IInspectable
             .value
             .asFunction<
                 int Function(Pointer, int name, Pointer<COMObject> defaultValue,
-                    Pointer<COMObject>)>()(ptr.ref.lpVtbl, nameHstring,
-        defaultValue.ptr.cast<Pointer<COMObject>>().value, retValuePtr);
+                    Pointer<COMObject>)>()(
+        ptr.ref.lpVtbl,
+        nameHstring,
+        defaultValue == null
+            ? nullptr
+            : defaultValue.ptr.cast<Pointer<COMObject>>().value,
+        retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -244,7 +259,7 @@ class IJsonObjectWithDefaultValues extends IInspectable
   JsonValue? getNamedValue(String name) => _iJsonObject.getNamedValue(name);
 
   @override
-  void setNamedValue(String name, IJsonValue value) =>
+  void setNamedValue(String name, IJsonValue? value) =>
       _iJsonObject.setNamedValue(name, value);
 
   @override

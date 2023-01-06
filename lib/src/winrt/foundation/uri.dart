@@ -142,7 +142,7 @@ class Uri extends IInspectable
   bool get suspicious => _iUriRuntimeClass.suspicious;
 
   @override
-  bool equals(Uri pUri) => _iUriRuntimeClass.equals(pUri);
+  bool equals(Uri? pUri) => _iUriRuntimeClass.equals(pUri);
 
   @override
   Uri? combineUri(String relativeUri) =>

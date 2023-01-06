@@ -156,7 +156,7 @@ class IHostName extends IInspectable {
     }
   }
 
-  bool isEqual(HostName hostName) {
+  bool isEqual(HostName? hostName) {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -172,7 +172,9 @@ class IHostName extends IInspectable {
                   int Function(
                       Pointer, Pointer<COMObject> hostName, Pointer<Bool>)>()(
           ptr.ref.lpVtbl,
-          hostName.ptr.cast<Pointer<COMObject>>().value,
+          hostName == null
+              ? nullptr
+              : hostName.ptr.cast<Pointer<COMObject>>().value,
           retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);

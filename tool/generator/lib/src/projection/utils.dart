@@ -75,6 +75,13 @@ String stripAnsiUnicodeSuffix(String typeName) {
   return typeName;
 }
 
+/// Strip the `?` suffix from the name.
+///
+/// For example, `IJsonValue?` should become `JsonValue`.
+String stripQuestionMarkSuffix(String typeName) => typeName.endsWith('?')
+    ? typeName.substring(0, typeName.length - 1)
+    : typeName;
+
 /// Return the final component of a fully qualified name (e.g.
 /// `Windows.Win32.UI.Controls.TASKDIALOGCONFIG` becomes `TASKDIALOGCONFIG`).
 String lastComponent(String fullyQualifiedType) =>
@@ -98,8 +105,10 @@ TypeProjection dereference(TypeProjection pointer) {
   }
 }
 
+/// Take a name like `Pointer<Pointer<Int32>>` and return the wrapped type (e.g.
+/// `Pointer<Int32>`).
 String stripPointer(String typeName) =>
-    typeName.substring(8, typeName.length - 1); // Pointer<X> => X
+    typeName.substring(8, typeName.length - 1);
 
 /// Take an input string and turn it into a multi-line doc comment.
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
