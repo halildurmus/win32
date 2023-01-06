@@ -1,6 +1,19 @@
+## 4.1.0
+
+- Add low-level keyboard hook constants (#642, @timsneath)
+- Add WinRT geolocation classes and example (#633, #635, #637,
+  @timsneath/@halildurmus)
+- Generalize map collection interfaces to support enum arguments (#638,
+  @halildurmus)
+- Add extra Bluetooth APIs (#640, @timsneath)
+- `winrtInitialize` and `winrtUninitialize` are no longer required. Windows
+  Runtime classes automatically activate the runtime as required for a given
+  thread. Added example of interaction between Dart isolates and COM apartments
+  (#642, @halildurmus/@timsneath)
+
 ## 4.0.1
 
-- Adjust SDK versioning due to pub analyzer bug.
+- Revert upper Dart SDK constraint update due to pub analyzer bug.
 
 ## 4.0.0
 
@@ -9,9 +22,9 @@
   `.release()` to decrement the reference count, and the memory will be
   automatically disposed when the refcount falls to zero (#623, @halildurmus)
 - Update examples for new COM release mechanism (#623, @halildurmus)
+- Update to latest Win32 metadata (#626, @timsneath)
 - Add APIs for processor / firmware information (#627, @timsneath)
 - Add APIs for shell file operations (#630, @timsneath)
-- Update to latest Win32 metadata (#626, @timsneath)
 - Update upper Dart SDK constraint to explicitly support Dart 3
 
 ## 3.1.3
