@@ -16,6 +16,11 @@ void main() {
     expect(stripAnsiUnicodeSuffix('ENUMLOGFONTEXW'), equals('ENUMLOGFONTEX'));
   });
 
+  test('stripQuestionMarkSuffix', () {
+    expect(stripQuestionMarkSuffix('IJsonValue?'), equals('IJsonValue'));
+    expect(stripQuestionMarkSuffix('IJsonValue'), equals('IJsonValue'));
+  });
+
   test('typeArguments', () {
     expect(
         typeArguments('IAsyncOperation<StorageFile?>'), equals('StorageFile?'));
