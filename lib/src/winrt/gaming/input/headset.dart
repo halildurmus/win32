@@ -46,6 +46,6 @@ class Headset extends IInspectable
       IGameControllerBatteryInfo.from(this);
 
   @override
-  BatteryReport tryGetBatteryReport() =>
+  BatteryReport? tryGetBatteryReport() =>
       _iGameControllerBatteryInfo.tryGetBatteryReport();
 }

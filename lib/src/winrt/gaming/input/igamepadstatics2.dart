@@ -38,7 +38,7 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
       IGamepadStatics2.fromRawPointer(
           interface.toInterface(IID_IGamepadStatics2));
 
-  Gamepad fromGameController(IGameController gameController) {
+  Gamepad? fromGameController(IGameController gameController) {
     final retValuePtr = calloc<COMObject>();
 
     final hr =
@@ -60,6 +60,11 @@ class IGamepadStatics2 extends IInspectable implements IGamepadStatics {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return Gamepad.fromRawPointer(retValuePtr);

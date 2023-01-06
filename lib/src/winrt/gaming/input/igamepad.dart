@@ -124,11 +124,11 @@ class IGamepad extends IInspectable implements IGameController {
       _iGameController.remove_UserChanged(token);
 
   @override
-  Headset get headset => _iGameController.headset;
+  Headset? get headset => _iGameController.headset;
 
   @override
   bool get isWireless => _iGameController.isWireless;
 
   @override
-  User get user => _iGameController.user;
+  User? get user => _iGameController.user;
 }

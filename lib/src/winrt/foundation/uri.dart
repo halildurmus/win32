@@ -124,7 +124,7 @@ class Uri extends IInspectable
   String get query => _iUriRuntimeClass.query;
 
   @override
-  WwwFormUrlDecoder get queryParsed => _iUriRuntimeClass.queryParsed;
+  WwwFormUrlDecoder? get queryParsed => _iUriRuntimeClass.queryParsed;
 
   @override
   String get rawUri => _iUriRuntimeClass.rawUri;
@@ -145,7 +145,7 @@ class Uri extends IInspectable
   bool equals(Uri pUri) => _iUriRuntimeClass.equals(pUri);
 
   @override
-  Uri combineUri(String relativeUri) =>
+  Uri? combineUri(String relativeUri) =>
       _iUriRuntimeClass.combineUri(relativeUri);
 
   // IUriRuntimeClassWithAbsoluteCanonicalUri methods

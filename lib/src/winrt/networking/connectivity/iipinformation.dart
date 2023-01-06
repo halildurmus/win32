@@ -36,7 +36,7 @@ class IIPInformation extends IInspectable {
   factory IIPInformation.from(IInspectable interface) =>
       IIPInformation.fromRawPointer(interface.toInterface(IID_IIPInformation));
 
-  NetworkAdapter get networkAdapter {
+  NetworkAdapter? get networkAdapter {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -52,6 +52,11 @@ class IIPInformation extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return NetworkAdapter.fromRawPointer(retValuePtr);

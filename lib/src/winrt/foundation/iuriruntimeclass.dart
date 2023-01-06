@@ -252,7 +252,7 @@ class IUriRuntimeClass extends IInspectable {
     }
   }
 
-  WwwFormUrlDecoder get queryParsed {
+  WwwFormUrlDecoder? get queryParsed {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -268,6 +268,11 @@ class IUriRuntimeClass extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return WwwFormUrlDecoder.fromRawPointer(retValuePtr);
@@ -419,7 +424,7 @@ class IUriRuntimeClass extends IInspectable {
     }
   }
 
-  Uri combineUri(String relativeUri) {
+  Uri? combineUri(String relativeUri) {
     final retValuePtr = calloc<COMObject>();
     final relativeUriHstring = convertToHString(relativeUri);
 
@@ -441,6 +446,11 @@ class IUriRuntimeClass extends IInspectable {
     }
 
     WindowsDeleteString(relativeUriHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return Uri.fromRawPointer(retValuePtr);
   }

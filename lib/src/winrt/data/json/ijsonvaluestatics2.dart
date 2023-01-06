@@ -35,7 +35,7 @@ class IJsonValueStatics2 extends IInspectable {
       IJsonValueStatics2.fromRawPointer(
           interface.toInterface(IID_IJsonValueStatics2));
 
-  JsonValue createNullValue() {
+  JsonValue? createNullValue() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -51,6 +51,11 @@ class IJsonValueStatics2 extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return JsonValue.fromRawPointer(retValuePtr);

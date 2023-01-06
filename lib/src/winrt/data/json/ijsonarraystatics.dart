@@ -35,7 +35,7 @@ class IJsonArrayStatics extends IInspectable {
       IJsonArrayStatics.fromRawPointer(
           interface.toInterface(IID_IJsonArrayStatics));
 
-  JsonArray parse(String input) {
+  JsonArray? parse(String input) {
     final retValuePtr = calloc<COMObject>();
     final inputHstring = convertToHString(input);
 
@@ -56,6 +56,11 @@ class IJsonArrayStatics extends IInspectable {
     }
 
     WindowsDeleteString(inputHstring);
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
 
     return JsonArray.fromRawPointer(retValuePtr);
   }

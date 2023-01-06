@@ -152,7 +152,7 @@ class IJsonValue extends IInspectable {
     }
   }
 
-  JsonArray getArray() {
+  JsonArray? getArray() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -170,10 +170,15 @@ class IJsonValue extends IInspectable {
       throw WindowsException(hr);
     }
 
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
+    }
+
     return JsonArray.fromRawPointer(retValuePtr);
   }
 
-  JsonObject getObject() {
+  JsonObject? getObject() {
     final retValuePtr = calloc<COMObject>();
 
     final hr = ptr.ref.vtable
@@ -189,6 +194,11 @@ class IJsonValue extends IInspectable {
     if (FAILED(hr)) {
       free(retValuePtr);
       throw WindowsException(hr);
+    }
+
+    if (retValuePtr.ref.lpVtbl == nullptr) {
+      free(retValuePtr);
+      return null;
     }
 
     return JsonObject.fromRawPointer(retValuePtr);

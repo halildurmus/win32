@@ -85,7 +85,7 @@ class Calendar extends IInspectable implements ICalendar, ITimeZoneOnCalendar {
   late final _iCalendar = ICalendar.from(this);
 
   @override
-  Calendar clone() => _iCalendar.clone();
+  Calendar? clone() => _iCalendar.clone();
 
   @override
   void setToMin() => _iCalendar.setToMin();
