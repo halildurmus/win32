@@ -9,7 +9,8 @@ demonstrate various aspects of invoking Windows APIs, including:
 - Integrating Windows code with Flutter
 
 Other examples of packages that use Win32 can be found on pub.dev, at the
-following location: <https://pub.dev/packages?q=dependency%3Awin32>
+following location:
+[https://pub.dev/packages?q=dependency%3Awin32](https://pub.dev/packages?q=dependency%3Awin32).
 
 ## Windows system APIs (kernel32)
 
