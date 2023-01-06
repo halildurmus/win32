@@ -1,8 +1,10 @@
 ## 4.1.0
 
-- Add low-level keyboard hook constants (#642, @timsneath)
-- Add WinRT geolocation classes and example (#633, #635, #637,
+- Add low-level keyboard hook constants (#632, @timsneath)
+- Add WinRT geolocation classes and example (#633, #635,
   @timsneath/@halildurmus)
+- Convert acryonyms in enums, methods and properties to match Dart style guide
+  (#637, #649, @halildurmus)
 - Generalize map collection interfaces to support enum arguments (#638,
   @halildurmus)
 - Add extra Bluetooth APIs (#640, @timsneath)
