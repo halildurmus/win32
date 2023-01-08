@@ -20,7 +20,7 @@ a common item dialog suitable for incorporation into an existing Flutter app.
 ## Usage
 
 This package lets you write apps that use the Windows API directly from Dart, by
-wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
+wrapping common Win32, and COM APIs using Dart FFI.
 
 You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
@@ -90,7 +90,7 @@ objects](https://pub.dev/documentation/win32/latest/topics/com-topic.html).
 ## Examples
 
 There are many examples included with this package that demonstrate calling
-various Win32, COM and WinRT APIs. These can be found in the `example\` folder;
+various Win32, and COM APIs. These can be found in the `example\` folder;
 a short description of each example can be found [here](
 https://pub.dev/packages/win32/example).
 
