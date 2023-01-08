@@ -10,7 +10,6 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `console.dart`     | Shows usage of console APIs                               |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
-| `calendar.dart`    | Gets information about the calendar from a WinRT API      |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
