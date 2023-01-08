@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:generator/generator.dart';
+import 'package:win32gen/win32gen.dart';
 
 const header = '''
 /**
@@ -14,7 +14,8 @@ const header = '''
 
 // This code is not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures. The results are pasted into
-// tool\\generator\\lib\\src\\inputs\\struct_sizes.dart as input to the test harness.
+// tool\\win32gen\\lib\\src\\inputs\\struct_sizes.dart as input to the test
+// harness.
 
 // Compile with something like the following (replace xxxxx with Windows SDK
 // build installed):

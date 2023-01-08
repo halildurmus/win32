@@ -12,9 +12,9 @@ The metadata is extracted and parsed using the separate winmd package:
 
 Not every API is projected.
 
-- For Win32 APIs, the JSON files prefixed with `win32_` in the `generator\data`
+- For Win32 APIs, the JSON files prefixed with `win32_` in the `win32gen\data`
   directory are used to determine which APIs to project.
-- For COM APIs, the `com_types.json` file in the `generator\data` directory
+- For COM APIs, the `com_types.json` file in the `win32gen\data` directory
   explicitly names the types that should be projected.
 
 During the build process, you should call `generate.cmd` from the project root

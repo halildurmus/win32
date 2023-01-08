@@ -1,6 +1,6 @@
 /// Generates Win32, and COM APIs for the win32 package based on Windows
 /// metadata.
-library generator;
+library win32gen;
 
 export 'src/model/exclusions.dart';
 export 'src/model/false_properties.dart';

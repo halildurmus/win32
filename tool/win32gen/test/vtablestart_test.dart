@@ -4,8 +4,8 @@
 
 @TestOn('windows')
 
-import 'package:generator/generator.dart';
 import 'package:test/test.dart';
+import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {

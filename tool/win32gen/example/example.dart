@@ -1,4 +1,4 @@
-import 'package:generator/generator.dart';
+import 'package:win32gen/win32gen.dart';
 import 'package:winmd/winmd.dart';
 
 final scope = MetadataStore.getWin32Scope();
