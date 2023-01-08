@@ -75,26 +75,4 @@ void main() {
       }
     }
   });
-
-  test('vTableStart for Windows Runtime types', () {
-    const testedTypes = <String, int>{
-      'Windows.Globalization.ICalendar': 6,
-      'Windows.Foundation.IAsyncInfo': 6,
-      'Windows.Foundation.IAsyncAction': 6,
-      'Windows.Foundation.Collections.IPropertySet': 6
-    };
-
-    for (final type in testedTypes.keys) {
-      final scope = MetadataStore.getScopeForType(type);
-      final typeDef = scope.findTypeDef(type);
-      expect(typeDef, isNotNull);
-      if (typeDef != null) {
-        final projectedClass = WinRTInterfaceProjection(typeDef);
-        final calculatedVTableStart = projectedClass.vtableStart;
-
-        expect(calculatedVTableStart, equals(testedTypes[type]),
-            reason: typeDef.name);
-      }
-    }
-  });
 }

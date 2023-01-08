@@ -1,4 +1,7 @@
 name: generator
+description: >
+  TODO:
+version: 0.0.1
 publish_to: none
 
 environment:
@@ -11,12 +14,6 @@ platforms:
   windows:
 
 dependencies:
-  # Handle command-line arguments for development tooling.
-  args: ^2.3.1
-
-  # For generating Guid for parameterized types
-  crypto: ^3.0.2
-
   # For formatting Dart code (APIs for performing dart format).
   dart_style: ^2.2.4
 
@@ -25,9 +22,6 @@ dependencies:
 
   # Help ensure that the code is well-written.
   lints: ^2.0.1
-
-  # For calculating the relative file paths
-  path: ^1.8.3
 
   # Running the test suite.
   test: ^1.22.1
@@ -39,9 +33,7 @@ dependencies:
   winmd: 2.4.7
 
   # Win32 itself
-  win32:
-    path: ../..
+  win32: ^4.1.0
 
 dependency_overrides:
-  win32:
-    path: ../../
+  win32: ^4.1.0

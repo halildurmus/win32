@@ -2,7 +2,7 @@ This folder contains utilities to help with developing the win32 package.
 
 # Code-generation tools
 
-As of win32 2.0.1 and above, the Win32, COM and WinRT APIs available in this
+As of win32 2.0.1 and above, the Win32, and COM APIs available in this
 package are generated from metadata supplied by Microsoft. The metadata is in
 the form of an ECMA-335 specification file, generated from this repo:
   <https://github.com/microsoft/win32metadata>
@@ -16,8 +16,6 @@ Not every API is projected.
   directory are used to determine which APIs to project.
 - For COM APIs, the `com_types.json` file in the `generator\data` directory
   explicitly names the types that should be projected.
-- For WinRT APIs, the JSON files prefixed with `winrt_` in the `generator\data`
-  directory are used to determine which APIs to project.
 
 During the build process, you should call `generate.cmd` from the project root
 to instantiate these types and generate the classes from them, for example:

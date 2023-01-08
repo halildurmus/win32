@@ -9,9 +9,8 @@ import 'utils.dart';
 ///
 /// This is the base class for a range of COM-based objects, including
 /// [ComMethodProjection], [ComGetPropertyProjection],
-/// [ComSetPropertyProjection], [WinRTMethodProjection],
-/// [WinRTGetPropertyProjection], and [WinRTSetPropertyProjection]. All of these
-/// map down to an entry in a COM vtable representing a method.
+/// [ComSetPropertyProjection]. All of these map down to an entry in a COM
+/// vtable representing a method.
 ///
 /// Methods have names, a list of parameters, and may return a type.
 abstract class MethodProjection {
