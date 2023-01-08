@@ -1,4 +1,4 @@
-/// Generates Win32, and COM APIs for the win32 package based on Windows
+/// Generates Win32 and COM APIs for the win32 package based on Windows
 /// metadata.
 library win32gen;
 

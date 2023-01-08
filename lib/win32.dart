@@ -12,7 +12,7 @@
 /// that would be unlikely to be useful to a Dart or Flutter developer, this
 /// library is not intended to be exhaustive. Instead, we focus on the core
 /// Win32 APIs that are typically used for Windows development, along with
-/// Win32, and COM APIs that are likely to be wrapped by a Flutter plugin
+/// Win32 and COM APIs that are likely to be wrapped by a Flutter plugin
 /// author.
 ///
 /// Win32 is at its heart a C-based API, and accordingly adopts the style and
