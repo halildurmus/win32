@@ -46,7 +46,12 @@ class IUnknown implements Finalizable {
   ///
   /// If the COM object implements the interface, then it returns a pointer to
   /// that interface after calling `addRef` on it.
-  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
+  @Deprecated('Use toInterface instead. This function will be removed in the '
+      'next major release.')
+  int queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
+      _queryInterface(riid, ppvObject);
+
+  int _queryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) => ptr
       .ref.vtable
       .elementAt(0)
       .cast<
@@ -79,13 +84,12 @@ class IUnknown implements Finalizable {
   /// Cast an existing COM object to a specified interface.
   ///
   /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
-  /// a COM QueryInterface to return a reference to that interface. This method
-  /// reduces the boilerplate associated with calling `queryInterface` manually.
+  /// a COM QueryInterface to return a reference to that interface.
   Pointer<COMObject> toInterface(String iid) {
     final pIID = convertToIID(iid);
     final objectPtr = calloc<COMObject>();
     try {
-      final hr = queryInterface(pIID, objectPtr.cast());
+      final hr = _queryInterface(pIID, objectPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);
       return objectPtr;
     } finally {

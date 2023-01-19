@@ -22,9 +22,6 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final unknown = IUnknown(ptr);
-  test('Can instantiate IUnknown.queryInterface', () {
-    expect(unknown.queryInterface, isA<Function>());
-  });
   test('Can instantiate IUnknown.addRef', () {
     expect(unknown.addRef, isA<Function>());
   });
