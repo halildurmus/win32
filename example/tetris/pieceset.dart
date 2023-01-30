@@ -53,14 +53,16 @@ class PieceSet {
     rotateAll();
   }
 
-  Piece? getPiece(int id, int rotation) {
-    if (id >= numPieces || id < 0 || rotation >= numRotations || rotation < 0) {
-      return null;
+  Piece getPiece(int id, int rotation) {
+    if (id >= numPieces || id < 0) throw ArgumentError(id);
+    if (rotation >= numRotations || rotation < 0) {
+      throw ArgumentError.value(rotation);
     }
-    return pieces[id][rotation];
+
+    return pieces[id][rotation]!;
   }
 
-  Piece? get randomPiece =>
+  Piece get randomPiece =>
       getPiece(rng.nextInt(numPieces), rng.nextInt(numRotations));
 
   void rotateAll() {
