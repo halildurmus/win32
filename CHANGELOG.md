@@ -1,3 +1,12 @@
+## 4.1.1
+
+- Convert acronyms in method/property names to lowercase (#649, @halildurmus)
+- Mark methods/properties that return WinRT objects as nullable (#650, @halildurmus)
+- Mark WinRT object parameters as nullable (#652, @halildurmus)
+- Tidy up various samples (#653, @timsneath)
+- Add missing display enumeration funcs (#662, @timsneath)
+- Add job object APIs (#663, @timsneath)
+
 ## 4.1.0
 
 - Add low-level keyboard hook constants (#632, @timsneath)
