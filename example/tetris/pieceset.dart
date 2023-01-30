@@ -15,8 +15,8 @@ class PieceSet {
 
   final rng = Random();
 
-  List<List<Piece>> pieces = List.generate(
-      numPieces, (i) => List<Piece>.filled(numRotations, Piece(-1, 0, 0, [])));
+  List<List<Piece?>> pieces =
+      List.generate(numPieces, (i) => List<Piece?>.filled(numRotations, null));
 
   PieceSet() {
     List<Point> tetrimino;
@@ -53,27 +53,27 @@ class PieceSet {
     rotateAll();
   }
 
-  Piece getPiece(int id, int rotation) {
-    if (id >= numPieces || id < 0) throw ArgumentError(id);
-    if (rotation >= numRotations || rotation < 0) {
-      throw ArgumentError.value(rotation);
+  Piece? getPiece(int id, int rotation) {
+    if (id >= numPieces || id < 0 || rotation >= numRotations || rotation < 0) {
+      return null;
     }
-
     return pieces[id][rotation];
   }
 
-  Piece get randomPiece =>
+  Piece? get randomPiece =>
       getPiece(rng.nextInt(numPieces), rng.nextInt(numRotations));
 
   void rotateAll() {
     for (var i = 0; i < numPieces; i++) {
       // clone the original piece
-      var clone = pieces[i][0].body.map((e) => e).toList();
+      var clone = pieces[i][0]!.body!.map((e) => e).toList();
 
       for (var j = 1; j < numRotations; j++) {
         clone = rotate(clone);
-        pieces[i].removeAt(j);
-        pieces[i][j] = Piece(i, j, pieces[i][0].color, clone);
+        if (pieces[i][j] != null) {
+          pieces[i].removeAt(j);
+        }
+        pieces[i][j] = Piece(i, j, pieces[i][0]!.color, clone);
       }
     }
   }

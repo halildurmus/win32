@@ -7,20 +7,20 @@ import 'piece.dart';
 
 class Canvas {
   /// Handle to DC
-  final int hdc;
+  int hdc;
 
   /// Handle to window
-  final int hwnd;
+  int hwnd;
 
   /// Rectangle for drawing. This will last for the lifetime of the app and
   /// memory will be released at app termination.
   final rect = calloc<RECT>();
 
   /// Level width
-  final int width;
+  int width;
 
   /// Level height
-  final int height;
+  int height;
 
   /// Initiate the drawing canvas
   Canvas(this.hdc, this.hwnd,

@@ -9,7 +9,7 @@ import 'level.dart';
 //
 class Game {
   late Canvas canvas;
-  late final Level level;
+  late Level level;
 
   bool isPaused;
 
