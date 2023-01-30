@@ -153,6 +153,12 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
       }
 
       if (['IVector', 'IVectorView'].contains(shortInterfaceName)) {
+        // Use custom mapper for Append to make its parameter non-nullable.
+        if (methodProjection.name == 'Append') {
+          methods.add(vectorAppendMapper());
+          continue;
+        }
+
         // Use custom mapper for GetMany to change the type of the value
         // parameter to Pointer<NativeType>.
         if (methodProjection.name == 'GetMany') {
@@ -160,10 +166,31 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
           continue;
         }
 
+        // Use custom mapper for IndexOf to make its 'value' parameter
+        // non-nullable.
+        if (methodProjection.name == 'IndexOf') {
+          methods.add(vectorIndexOfMapper());
+          continue;
+        }
+
+        // Use custom mapper for InsertAt to make its 'value' parameter
+        // non-nullable.
+        if (methodProjection.name == 'InsertAt') {
+          methods.add(vectorInsertAtMapper());
+          continue;
+        }
+
         // Use custom mapper for ReplaceAll to change the type of the value
         // parameter to List<...>.
         if (methodProjection.name == 'ReplaceAll') {
           methods.add(vectorReplaceAllMapper());
+          continue;
+        }
+
+        // Use custom mapper for SetAt to make its 'value' parameter
+        // non-nullable.
+        if (methodProjection.name == 'SetAt') {
+          methods.add(vectorSetAtMapper());
           continue;
         }
       }
@@ -220,6 +247,12 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
 ''';
   }
 
+  String vectorAppendMapper() => '''
+  @override
+  void append(${stripQuestionMarkSuffix(typeArgs)} value) =>
+      $fieldIdentifier.append(value);
+''';
+
   // Pointer<NativeType> is used as the value parameter's type as the getMany
   // function in IVector and IVectorView implementations also use it this way in
   // order to handle various types such as Pointer<Int32> and
@@ -230,9 +263,27 @@ class WinRTImplementsMapperProjection extends WinRTInterfaceProjection {
       $fieldIdentifier.$methodShortForm;
 ''';
 
+  String vectorIndexOfMapper() => '''
+  @override
+  bool indexOf(${stripQuestionMarkSuffix(typeArgs)} value, Pointer<Uint32> index) =>
+      $fieldIdentifier.indexOf(value, index);
+''';
+
+  String vectorInsertAtMapper() => '''
+  @override
+  void insertAt(int index, ${stripQuestionMarkSuffix(typeArgs)} value) =>
+      $fieldIdentifier.insertAt(index, value);
+''';
+
   String vectorReplaceAllMapper() => '''
   @override
   void replaceAll(List<$typeArgs> value) => $fieldIdentifier.replaceAll(value);
+''';
+
+  String vectorSetAtMapper() => '''
+  @override
+  void setAt(int index, ${stripQuestionMarkSuffix(typeArgs)} value) =>
+      $fieldIdentifier.setAt(index, value);
 ''';
 
   /// The mappers for `IIterable`s `first()` and helper function `toMap()`.

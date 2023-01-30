@@ -396,7 +396,7 @@ class IUriRuntimeClass extends IInspectable {
     }
   }
 
-  bool equals(Uri pUri) {
+  bool equals(Uri? pUri) {
     final retValuePtr = calloc<Bool>();
 
     try {
@@ -412,7 +412,7 @@ class IUriRuntimeClass extends IInspectable {
                   int Function(
                       Pointer, Pointer<COMObject> pUri, Pointer<Bool>)>()(
           ptr.ref.lpVtbl,
-          pUri.ptr.cast<Pointer<COMObject>>().value,
+          pUri == null ? nullptr : pUri.ptr.cast<Pointer<COMObject>>().value,
           retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);

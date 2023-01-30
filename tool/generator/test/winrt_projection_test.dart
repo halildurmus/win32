@@ -28,7 +28,7 @@ void main() {
     final typeProjection = TypeProjection(method.returnType.typeIdentifier);
     expect(typeProjection.dartType, equals('Pointer<COMObject>'));
     expect(typeProjection.nativeType, equals('Pointer<COMObject>'));
-    expect(typeProjection.methodParamType, equals('IMediaPlaybackSource'));
+    expect(typeProjection.methodParamType, equals('IMediaPlaybackSource?'));
   });
 
   test('Property setter projects appropriate results for delegate.', () {
@@ -501,7 +501,7 @@ void main() {
         .firstWhere((m) => m.name == 'First') as WinRTMethodProjection;
 
     expect(firstProjection.returnType.methodParamType,
-        equals('IIterator<IKeyValuePair<String, String>>'));
+        equals('IIterator<IKeyValuePair<String, String>>?'));
     expect(firstProjection.toString().trimLeft(),
         startsWith('IIterator<IKeyValuePair<String, String>> first()'));
   });
@@ -522,7 +522,7 @@ void main() {
     expect(initialValuesParameter.localIdentifier,
         equals('initialValues.ptr.cast<Pointer<COMObject>>().value'));
     expect(initialValuesParameter.type.methodParamType,
-        equals('IIterable<IKeyValuePair<String, String>>'));
+        equals('IIterable<IKeyValuePair<String, String>>?'));
   });
 
   test('WinRT interface successfully projects something', () {
@@ -708,7 +708,7 @@ void main() {
             'HRESULT Function(Pointer, Pointer<COMObject>)'));
     expect(fallbackUriProjection.dartPrototype,
         equalsIgnoringWhitespace('int Function(Pointer, Pointer<COMObject>)'));
-    expect(fallbackUriProjection.returnType.methodParamType, equals('Uri'));
+    expect(fallbackUriProjection.returnType.methodParamType, equals('Uri?'));
     expect(fallbackUriProjection.toString().trimLeft(),
         startsWith('Uri? get fallbackUri'));
     expect(
@@ -756,9 +756,11 @@ void main() {
     expect(uriParameter.preamble,
         equals('final uriUri = winrt_uri.Uri.createUri(uri.toString());'));
     expect(uriParameter.postamble, equals('uriUri.release();'));
-    expect(uriParameter.localIdentifier,
-        equals('uriUri.ptr.cast<Pointer<COMObject>>().value'));
-    expect(uriParameter.type.methodParamType, equals('Uri'));
+    expect(
+        uriParameter.localIdentifier,
+        equals(
+            'uri == null ? nullptr : uriUri.ptr.cast<Pointer<COMObject>>().value'));
+    expect(uriParameter.type.methodParamType, equals('Uri?'));
   });
 
   test('WinRT interface includes imports for methods in implemented interfaces',

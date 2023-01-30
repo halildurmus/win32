@@ -56,13 +56,13 @@ class BasicProperties extends IInspectable
 
   @override
   Future<IMap<String, Object?>> retrievePropertiesAsync(
-          IIterable<String> propertiesToRetrieve) =>
+          IIterable<String>? propertiesToRetrieve) =>
       _iStorageItemExtraProperties
           .retrievePropertiesAsync(propertiesToRetrieve);
 
   @override
   Future<void> savePropertiesAsync(
-          IIterable<IKeyValuePair<String, Object?>> propertiesToSave) =>
+          IIterable<IKeyValuePair<String, Object?>>? propertiesToSave) =>
       _iStorageItemExtraProperties.savePropertiesAsync(propertiesToSave);
 
   @override

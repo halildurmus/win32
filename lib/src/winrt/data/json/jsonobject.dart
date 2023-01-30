@@ -84,7 +84,7 @@ class JsonObject extends IInspectable
   JsonValue? getNamedValue(String name) => _iJsonObject.getNamedValue(name);
 
   @override
-  void setNamedValue(String name, IJsonValue value) =>
+  void setNamedValue(String name, IJsonValue? value) =>
       _iJsonObject.setNamedValue(name, value);
 
   @override
@@ -165,11 +165,11 @@ class JsonObject extends IInspectable
       IJsonObjectWithDefaultValues.from(this);
 
   @override
-  JsonValue? getNamedValueOrDefault(String name, JsonValue defaultValue) =>
+  JsonValue? getNamedValueOrDefault(String name, JsonValue? defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedValueOrDefault(name, defaultValue);
 
   @override
-  JsonObject? getNamedObjectOrDefault(String name, JsonObject defaultValue) =>
+  JsonObject? getNamedObjectOrDefault(String name, JsonObject? defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedObjectOrDefault(name, defaultValue);
 
   @override
@@ -177,7 +177,7 @@ class JsonObject extends IInspectable
       _iJsonObjectWithDefaultValues.getNamedStringOrDefault(name, defaultValue);
 
   @override
-  JsonArray? getNamedArrayOrDefault(String name, JsonArray defaultValue) =>
+  JsonArray? getNamedArrayOrDefault(String name, JsonArray? defaultValue) =>
       _iJsonObjectWithDefaultValues.getNamedArrayOrDefault(name, defaultValue);
 
   @override
