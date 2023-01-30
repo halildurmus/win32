@@ -5834,6 +5834,18 @@ void main() {
               int lParam)>('EnumDesktopWindows');
       expect(EnumDesktopWindows, isA<Function>());
     });
+    test('Can instantiate EnumDisplayDevices', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplayDevices = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpDevice, Uint32 iDevNum,
+              Pointer<DISPLAY_DEVICE> lpDisplayDevice, Uint32 dwFlags),
+          int Function(
+              Pointer<Utf16> lpDevice,
+              int iDevNum,
+              Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+              int dwFlags)>('EnumDisplayDevicesW');
+      expect(EnumDisplayDevices, isA<Function>());
+    });
     test('Can instantiate EnumDisplayMonitors', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumDisplayMonitors = user32.lookupFunction<
@@ -5845,6 +5857,27 @@ void main() {
               Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
               int dwData)>('EnumDisplayMonitors');
       expect(EnumDisplayMonitors, isA<Function>());
+    });
+    test('Can instantiate EnumDisplaySettings', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplaySettings = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+              Pointer<DEVMODE> lpDevMode),
+          int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+              Pointer<DEVMODE> lpDevMode)>('EnumDisplaySettingsW');
+      expect(EnumDisplaySettings, isA<Function>());
+    });
+    test('Can instantiate EnumDisplaySettingsEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplaySettingsEx = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+              Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+          int Function(
+              Pointer<Utf16> lpszDeviceName,
+              int iModeNum,
+              Pointer<DEVMODE> lpDevMode,
+              int dwFlags)>('EnumDisplaySettingsExW');
+      expect(EnumDisplaySettingsEx, isA<Function>());
     });
     test('Can instantiate EnumThreadWindows', () {
       final user32 = DynamicLibrary.open('user32.dll');

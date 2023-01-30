@@ -971,6 +971,20 @@ const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
     (~SYNCHRONIZE);
 
 // -----------------------------------------------------------------------------
+// Display device constants that are used but not documented
+// -----------------------------------------------------------------------------
+
+const DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = 0x00000001;
+const DISPLAY_DEVICE_ATTACHED = 0x00000002;
+const DISPLAY_DEVICE_MULTI_DRIVER = 0x00000002;
+const DISPLAY_DEVICE_ACC_DRIVER = 0x00000040;
+const DISPLAY_DEVICE_UNSAFE_MODES_ON = 0x00080000;
+const DISPLAY_DEVICE_TS_COMPATIBLE = 0x00200000;
+const DISPLAY_DEVICE_RDPUDD = 0x01000000;
+const DISPLAY_DEVICE_REMOTE = 0x04000000;
+const DISPLAY_DEVICE_DISCONNECT = 0x02000000;
+
+// -----------------------------------------------------------------------------
 // Gamepad constants
 // -----------------------------------------------------------------------------
 

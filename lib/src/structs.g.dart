@@ -2591,6 +2591,95 @@ extension DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Extension
   set videoStandard(int value) => this.Anonymous.videoStandard = value;
 }
 
+/// The DISPLAY_DEVICE structure receives information about the display
+/// device specified by the iDevNum parameter of the EnumDisplayDevices
+/// function.
+///
+/// {@category Struct}
+class DISPLAY_DEVICE extends Struct {
+  @Uint32()
+  external int cb;
+
+  @Array(32)
+  external Array<Uint16> _DeviceName;
+
+  String get DeviceName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      if (_DeviceName[i] == 0x00) break;
+      charCodes.add(_DeviceName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set DeviceName(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _DeviceName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(128)
+  external Array<Uint16> _DeviceString;
+
+  String get DeviceString {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      if (_DeviceString[i] == 0x00) break;
+      charCodes.add(_DeviceString[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set DeviceString(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _DeviceString[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int StateFlags;
+
+  @Array(128)
+  external Array<Uint16> _DeviceID;
+
+  String get DeviceID {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      if (_DeviceID[i] == 0x00) break;
+      charCodes.add(_DeviceID[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set DeviceID(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _DeviceID[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(128)
+  external Array<Uint16> _DeviceKey;
+
+  String get DeviceKey {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      if (_DeviceKey[i] == 0x00) break;
+      charCodes.add(_DeviceKey[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set DeviceKey(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _DeviceKey[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}
