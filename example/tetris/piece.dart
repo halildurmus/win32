@@ -25,21 +25,21 @@ class Point {
 //
 class Piece {
   // POINT array of which the piece is composed
-  List<Point>? body;
+  late final List<Point> body;
 
   // Number of points in body
-  int pointCount;
+  final int pointCount;
 
   // Make rotation faster
-  int width;
-  int height;
+  late final int width;
+  late final int height;
 
   // Piece type ID and rotation
-  int id;
-  int rotation;
+  final int id;
+  final int rotation;
 
   // Piece color in RGB
-  int color;
+  final int color;
 
   /// Constructs a piece
   ///
@@ -64,11 +64,11 @@ class Piece {
 
     body = List<Point>.generate(pointCount, (i) => Point());
     for (var i = 0; i < pointCount; i++) {
-      body![i].x = points[i].x - bottomLeft.x;
-      body![i].y = points[i].y - bottomLeft.y;
+      body[i].x = points[i].x - bottomLeft.x;
+      body[i].y = points[i].y - bottomLeft.y;
 
-      width = max(body![i].x + 1, width);
-      height = max(body![i].y + 1, height);
+      width = max(body[i].x + 1, width);
+      height = max(body[i].y + 1, height);
     }
   }
 
@@ -149,7 +149,7 @@ class Piece {
   /// Determines if the piece has a point (x, y)
   bool isPointExists(int x, int y) {
     for (var i = 0; i < 4; i++) {
-      if (body![i].x == x && body![i].y == y) {
+      if (body[i].x == x && body[i].y == y) {
         return true;
       }
     }
