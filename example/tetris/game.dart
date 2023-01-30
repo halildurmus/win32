@@ -8,8 +8,8 @@ import 'level.dart';
 // Only Game and Canvas are exposed to main().
 //
 class Game {
-  late Canvas canvas;
-  late Level level;
+  final Canvas canvas;
+  late final Level level;
 
   bool isPaused;
 
