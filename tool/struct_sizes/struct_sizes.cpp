@@ -201,6 +201,7 @@ void main()
     printf("  'IP_INTERFACE_INFO': %zu,\n", sizeof(IP_INTERFACE_INFO));
     printf("  'IP_PER_ADAPTER_INFO_W2KSP1': %zu,\n", sizeof(IP_PER_ADAPTER_INFO_W2KSP1));
     printf("  'ITEMIDLIST': %zu,\n", sizeof(ITEMIDLIST));
+    printf("  'JOBOBJECT_IO_RATE_CONTROL_INFORMATION': %zu,\n", sizeof(JOBOBJECT_IO_RATE_CONTROL_INFORMATION));
     printf("  'JOB_INFO_1': %zu,\n", sizeof(JOB_INFO_1W));
     printf("  'KBDLLHOOKSTRUCT': %zu,\n", sizeof(KBDLLHOOKSTRUCT));
     printf("  'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
