@@ -1674,6 +1674,13 @@ void main() {
           .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
       expect(AreFileApisANSI, isA<Function>());
     });
+    test('Can instantiate AssignProcessToJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final AssignProcessToJobObject = kernel32.lookupFunction<
+          Int32 Function(IntPtr hJob, IntPtr hProcess),
+          int Function(int hJob, int hProcess)>('AssignProcessToJobObject');
+      expect(AssignProcessToJobObject, isA<Function>());
+    });
     test('Can instantiate AttachConsole', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final AttachConsole = kernel32.lookupFunction<
@@ -1933,6 +1940,15 @@ void main() {
               int CompletionKey,
               int NumberOfConcurrentThreads)>('CreateIoCompletionPort');
       expect(CreateIoCompletionPort, isA<Function>());
+    });
+    test('Can instantiate CreateJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateJobObject = kernel32.lookupFunction<
+          IntPtr Function(Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
+              Pointer<Utf16> lpName),
+          int Function(Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
+              Pointer<Utf16> lpName)>('CreateJobObjectW');
+      expect(CreateJobObject, isA<Function>());
     });
     test('Can instantiate CreateNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -2609,6 +2625,13 @@ void main() {
           void Function(
               int hLibModule, int dwExitCode)>('FreeLibraryAndExitThread');
       expect(FreeLibraryAndExitThread, isA<Function>());
+    });
+    test('Can instantiate FreeMemoryJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FreeMemoryJobObject = kernel32.lookupFunction<
+          Void Function(Pointer Buffer),
+          void Function(Pointer Buffer)>('FreeMemoryJobObject');
+      expect(FreeMemoryJobObject, isA<Function>());
     });
     test('Can instantiate GetActiveProcessorCount', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3863,6 +3886,15 @@ void main() {
         expect(IsNativeVhdBoot, isA<Function>());
       });
     }
+    test('Can instantiate IsProcessInJob', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final IsProcessInJob = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr ProcessHandle, IntPtr JobHandle, Pointer<Int32> Result),
+          int Function(int ProcessHandle, int JobHandle,
+              Pointer<Int32> Result)>('IsProcessInJob');
+      expect(IsProcessInJob, isA<Function>());
+    });
     test('Can instantiate IsSystemResumeAutomatic', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final IsSystemResumeAutomatic =
@@ -3978,6 +4010,15 @@ void main() {
               Pointer<Utf16> lpName)>('OpenEventW');
       expect(OpenEvent, isA<Function>());
     });
+    test('Can instantiate OpenJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final OpenJobObject = kernel32.lookupFunction<
+          IntPtr Function(Uint32 dwDesiredAccess, Int32 bInheritHandle,
+              Pointer<Utf16> lpName),
+          int Function(int dwDesiredAccess, int bInheritHandle,
+              Pointer<Utf16> lpName)>('OpenJobObjectW');
+      expect(OpenJobObject, isA<Function>());
+    });
     test('Can instantiate OpenProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenProcess = kernel32.lookupFunction<
@@ -4080,6 +4121,41 @@ void main() {
           int Function(int hProcess, int dwFlags, Pointer<Utf16> lpExeName,
               Pointer<Uint32> lpdwSize)>('QueryFullProcessImageNameW');
       expect(QueryFullProcessImageName, isA<Function>());
+    });
+    test('Can instantiate QueryInformationJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final QueryInformationJobObject = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hJob,
+              Int32 JobObjectInformationClass,
+              Pointer lpJobObjectInformation,
+              Uint32 cbJobObjectInformationLength,
+              Pointer<Uint32> lpReturnLength),
+          int Function(
+              int hJob,
+              int JobObjectInformationClass,
+              Pointer lpJobObjectInformation,
+              int cbJobObjectInformationLength,
+              Pointer<Uint32> lpReturnLength)>('QueryInformationJobObject');
+      expect(QueryInformationJobObject, isA<Function>());
+    });
+    test('Can instantiate QueryIoRateControlInformationJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final QueryIoRateControlInformationJobObject = kernel32.lookupFunction<
+              Uint32 Function(
+                  IntPtr hJob,
+                  Pointer<Utf16> VolumeName,
+                  Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>
+                      InfoBlocks,
+                  Pointer<Uint32> InfoBlockCount),
+              int Function(
+                  int hJob,
+                  Pointer<Utf16> VolumeName,
+                  Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>
+                      InfoBlocks,
+                  Pointer<Uint32> InfoBlockCount)>(
+          'QueryIoRateControlInformationJobObject');
+      expect(QueryIoRateControlInformationJobObject, isA<Function>());
     });
     test('Can instantiate QueryPerformanceCounter', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -4522,6 +4598,32 @@ void main() {
               int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
       expect(SetHandleInformation, isA<Function>());
     });
+    test('Can instantiate SetInformationJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetInformationJobObject = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hJob,
+              Int32 JobObjectInformationClass,
+              Pointer lpJobObjectInformation,
+              Uint32 cbJobObjectInformationLength),
+          int Function(
+              int hJob,
+              int JobObjectInformationClass,
+              Pointer lpJobObjectInformation,
+              int cbJobObjectInformationLength)>('SetInformationJobObject');
+      expect(SetInformationJobObject, isA<Function>());
+    });
+    test('Can instantiate SetIoRateControlInformationJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetIoRateControlInformationJobObject = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hJob,
+              Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo),
+          int Function(
+              int hJob,
+              Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>
+                  IoRateControlInfo)>('SetIoRateControlInformationJobObject');
+      expect(SetIoRateControlInformationJobObject, isA<Function>());
+    });
     test('Can instantiate SetNamedPipeHandleState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetNamedPipeHandleState = kernel32.lookupFunction<
@@ -4644,6 +4746,13 @@ void main() {
           int Function(Pointer<SYSTEMTIME> lpSystemTime,
               Pointer<FILETIME> lpFileTime)>('SystemTimeToFileTime');
       expect(SystemTimeToFileTime, isA<Function>());
+    });
+    test('Can instantiate TerminateJobObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final TerminateJobObject = kernel32.lookupFunction<
+          Int32 Function(IntPtr hJob, Uint32 uExitCode),
+          int Function(int hJob, int uExitCode)>('TerminateJobObject');
+      expect(TerminateJobObject, isA<Function>());
     });
     test('Can instantiate TerminateProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -5834,6 +5943,18 @@ void main() {
               int lParam)>('EnumDesktopWindows');
       expect(EnumDesktopWindows, isA<Function>());
     });
+    test('Can instantiate EnumDisplayDevices', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplayDevices = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpDevice, Uint32 iDevNum,
+              Pointer<DISPLAY_DEVICE> lpDisplayDevice, Uint32 dwFlags),
+          int Function(
+              Pointer<Utf16> lpDevice,
+              int iDevNum,
+              Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+              int dwFlags)>('EnumDisplayDevicesW');
+      expect(EnumDisplayDevices, isA<Function>());
+    });
     test('Can instantiate EnumDisplayMonitors', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumDisplayMonitors = user32.lookupFunction<
@@ -5845,6 +5966,27 @@ void main() {
               Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
               int dwData)>('EnumDisplayMonitors');
       expect(EnumDisplayMonitors, isA<Function>());
+    });
+    test('Can instantiate EnumDisplaySettings', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplaySettings = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+              Pointer<DEVMODE> lpDevMode),
+          int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+              Pointer<DEVMODE> lpDevMode)>('EnumDisplaySettingsW');
+      expect(EnumDisplaySettings, isA<Function>());
+    });
+    test('Can instantiate EnumDisplaySettingsEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EnumDisplaySettingsEx = user32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+              Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+          int Function(
+              Pointer<Utf16> lpszDeviceName,
+              int iModeNum,
+              Pointer<DEVMODE> lpDevMode,
+              int dwFlags)>('EnumDisplaySettingsExW');
+      expect(EnumDisplaySettingsEx, isA<Function>());
     });
     test('Can instantiate EnumThreadWindows', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -8549,6 +8691,14 @@ void main() {
       final UpdateWindow = user32.lookupFunction<Int32 Function(IntPtr hWnd),
           int Function(int hWnd)>('UpdateWindow');
       expect(UpdateWindow, isA<Function>());
+    });
+    test('Can instantiate UserHandleGrantAccess', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UserHandleGrantAccess = user32.lookupFunction<
+          Int32 Function(IntPtr hUserHandle, IntPtr hJob, Int32 bGrant),
+          int Function(
+              int hUserHandle, int hJob, int bGrant)>('UserHandleGrantAccess');
+      expect(UserHandleGrantAccess, isA<Function>());
     });
     test('Can instantiate ValidateRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
