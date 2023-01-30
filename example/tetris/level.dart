@@ -11,7 +11,7 @@ class Level {
   Canvas engine; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece? current; // Current dropping piece
-  Piece? next; // Next piece
+  late Piece next; // Next piece
 
   int width; // Level width (in cells)
   int height; // Level height
@@ -273,6 +273,6 @@ class Level {
   }
 
   void drawNextPiece() {
-    engine.drawNextPiece(next!, width + 1, 14);
+    engine.drawNextPiece(next, width + 1, 14);
   }
 }
