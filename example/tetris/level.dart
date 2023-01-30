@@ -78,7 +78,7 @@ class Level {
     final color = piece.color;
 
     for (var i = 0; i < 4; i++) {
-      if (y! + apt![i].y > height - 1) continue;
+      if (y! + apt[i].y > height - 1) continue;
       board[x + apt[i].x][y + apt[i].y] = color;
     }
     return true;
@@ -135,7 +135,7 @@ class Level {
     final apt = piece.body;
     int x, y;
     for (var i = 0; i < 4; i++) {
-      x = posX + apt![i].x;
+      x = posX + apt[i].x;
       y = posY! + apt[i].y;
 
       if (x > width - 1 || y > height - 1) {
@@ -200,7 +200,7 @@ class Level {
     final apt = piece.body;
     int tmpX, tmpY;
     for (var i = 0; i < 4; i++) {
-      tmpX = apt![i].x + x;
+      tmpX = apt[i].x + x;
       tmpY = apt[i].y + y!;
       if (tmpX > width - 1 || tmpY > height - 1) {
         continue;
