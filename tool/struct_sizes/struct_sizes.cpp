@@ -43,6 +43,7 @@
 #include <Shlwapi.h>
 #include <wincred.h>
 #include <wlanapi.h>
+#include <ws2bth.h>
 #include <Xinput.h>
 
 void main()
@@ -145,6 +146,7 @@ void main()
     printf("  'DISPLAYCONFIG_SOURCE_MODE': %zu,\n", sizeof(DISPLAYCONFIG_SOURCE_MODE));
     printf("  'DISPLAYCONFIG_TARGET_MODE': %zu,\n", sizeof(DISPLAYCONFIG_TARGET_MODE));
     printf("  'DISPLAYCONFIG_VIDEO_SIGNAL_INFO': %zu,\n", sizeof(DISPLAYCONFIG_VIDEO_SIGNAL_INFO));
+    printf("  'DISPLAY_DEVICE': %zu,\n", sizeof(DISPLAY_DEVICEW));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
     printf("  'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
     printf("  'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));

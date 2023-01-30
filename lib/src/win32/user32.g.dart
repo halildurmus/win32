@@ -1866,6 +1866,31 @@ final _EnumDesktopWindows = _user32.lookupFunction<
     int Function(int hDesktop, Pointer<NativeFunction<EnumWindowsProc>> lpfn,
         int lParam)>('EnumDesktopWindows');
 
+/// The EnumDisplayDevices function lets you obtain information about the
+/// display devices in the current session.
+///
+/// ```c
+/// BOOL EnumDisplayDevicesW(
+///   [in]  LPCWSTR          lpDevice,
+///   [in]  DWORD            iDevNum,
+///   [out] PDISPLAY_DEVICEW lpDisplayDevice,
+///   [in]  DWORD            dwFlags
+/// );
+/// ```
+/// {@category user32}
+int EnumDisplayDevices(Pointer<Utf16> lpDevice, int iDevNum,
+        Pointer<DISPLAY_DEVICE> lpDisplayDevice, int dwFlags) =>
+    _EnumDisplayDevices(lpDevice, iDevNum, lpDisplayDevice, dwFlags);
+
+final _EnumDisplayDevices = _user32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpDevice, Uint32 iDevNum,
+        Pointer<DISPLAY_DEVICE> lpDisplayDevice, Uint32 dwFlags),
+    int Function(
+        Pointer<Utf16> lpDevice,
+        int iDevNum,
+        Pointer<DISPLAY_DEVICE> lpDisplayDevice,
+        int dwFlags)>('EnumDisplayDevicesW');
+
 /// The EnumDisplayMonitors function enumerates display monitors (including
 /// invisible pseudo-monitors associated with the mirroring drivers) that
 /// intersect a region formed by the intersection of a specified clipping
@@ -1895,6 +1920,53 @@ final _EnumDisplayMonitors = _user32.lookupFunction<
         Pointer<RECT> lprcClip,
         Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
         int dwData)>('EnumDisplayMonitors');
+
+/// The EnumDisplaySettings function retrieves information about one of the
+/// graphics modes for a display device. To retrieve information for all the
+/// graphics modes of a display device, make a series of calls to this
+/// function.
+///
+/// ```c
+/// BOOL EnumDisplaySettingsW(
+///   [in]  LPCWSTR  lpszDeviceName,
+///   [in]  DWORD    iModeNum,
+///   [out] DEVMODEW *lpDevMode
+/// );
+/// ```
+/// {@category user32}
+int EnumDisplaySettings(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode) =>
+    _EnumDisplaySettings(lpszDeviceName, iModeNum, lpDevMode);
+
+final _EnumDisplaySettings = _user32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+        Pointer<DEVMODE> lpDevMode),
+    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode)>('EnumDisplaySettingsW');
+
+/// The EnumDisplaySettingsEx function retrieves information about one of
+/// the graphics modes for a display device. To retrieve information for all
+/// the graphics modes for a display device, make a series of calls to this
+/// function.
+///
+/// ```c
+/// BOOL EnumDisplaySettingsExW(
+///   [in]  LPCWSTR  lpszDeviceName,
+///   [in]  DWORD    iModeNum,
+///   [out] DEVMODEW *lpDevMode,
+///   [in]  DWORD    dwFlags
+/// );
+/// ```
+/// {@category user32}
+int EnumDisplaySettingsEx(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode, int dwFlags) =>
+    _EnumDisplaySettingsEx(lpszDeviceName, iModeNum, lpDevMode, dwFlags);
+
+final _EnumDisplaySettingsEx = _user32.lookupFunction<
+    Int32 Function(Pointer<Utf16> lpszDeviceName, Uint32 iModeNum,
+        Pointer<DEVMODE> lpDevMode, Uint32 dwFlags),
+    int Function(Pointer<Utf16> lpszDeviceName, int iModeNum,
+        Pointer<DEVMODE> lpDevMode, int dwFlags)>('EnumDisplaySettingsExW');
 
 /// Enumerates all nonchild windows associated with a thread by passing the
 /// handle to each window, in turn, to an application-defined callback

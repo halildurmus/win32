@@ -1283,9 +1283,21 @@
         "prototype": "BOOL K32EnumDeviceDrivers(\n  [out] LPVOID  *lpImageBase,\n  [in]  DWORD   cb,\n  [out] LPDWORD lpcbNeeded\n);",
         "comment": "Retrieves the load address for each device driver in the system."
     },
+    "EnumDisplayDevices": {
+        "prototype": "BOOL EnumDisplayDevicesW(\n  [in]  LPCWSTR          lpDevice,\n  [in]  DWORD            iDevNum,\n  [out] PDISPLAY_DEVICEW lpDisplayDevice,\n  [in]  DWORD            dwFlags\n);",
+        "comment": "The EnumDisplayDevices function lets you obtain information about the display devices in the current session."
+    },
     "EnumDisplayMonitors": {
         "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
         "comment": "The EnumDisplayMonitors function enumerates display monitors (including invisible pseudo-monitors associated with the mirroring drivers) that intersect a region formed by the intersection of a specified clipping rectangle and the visible region of a device context. EnumDisplayMonitors calls an application-defined MonitorEnumProc callback function once for each monitor that is enumerated. Note that GetSystemMetrics (SM_CMONITORS) counts only the display monitors."
+    },
+    "EnumDisplaySettings": {
+        "prototype": "BOOL EnumDisplaySettingsW(\n  [in]  LPCWSTR  lpszDeviceName,\n  [in]  DWORD    iModeNum,\n  [out] DEVMODEW *lpDevMode\n);",
+        "comment": "The EnumDisplaySettings function retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes of a display device, make a series of calls to this function."
+    },
+    "EnumDisplaySettingsEx": {
+        "prototype": "BOOL EnumDisplaySettingsExW(\n  [in]  LPCWSTR  lpszDeviceName,\n  [in]  DWORD    iModeNum,\n  [out] DEVMODEW *lpDevMode,\n  [in]  DWORD    dwFlags\n);",
+        "comment": "The EnumDisplaySettingsEx function retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device, make a series of calls to this function."
     },
     "EnumFontFamiliesEx": {
         "prototype": "int EnumFontFamiliesExW(\n  HDC           hdc,\n  LPLOGFONTW    lpLogfont,\n  FONTENUMPROCW lpProc,\n  LPARAM        lParam,\n  DWORD         dwFlags\n);",

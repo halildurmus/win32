@@ -78,6 +78,7 @@
     "Windows.Win32.Graphics.Gdi.DESIGNVECTOR": "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font.",
     "Windows.Win32.Graphics.Gdi.DEVMODEW": "The DEVMODE data structure contains information about the initialization and environment of a printer or a display device.",
     "Windows.Win32.Graphics.Gdi.DIBSECTION": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function.",
+    "Windows.Win32.Graphics.Gdi.DISPLAY_DEVICEW": "The DISPLAY_DEVICE structure receives information about the display device specified by the iDevNum parameter of the EnumDisplayDevices function.",
     "Windows.Win32.Graphics.Gdi.DRAWTEXTPARAMS": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function.",
     "Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW": "The ENUMLOGFONTEX structure contains information about an enumerated font.",
     "Windows.Win32.Graphics.Gdi.LOGBRUSH": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.",
