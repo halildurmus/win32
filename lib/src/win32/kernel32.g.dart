@@ -94,6 +94,22 @@ int AreFileApisANSI() => _AreFileApisANSI();
 final _AreFileApisANSI = _kernel32
     .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
 
+/// Assigns a process to an existing job object.
+///
+/// ```c
+/// BOOL AssignProcessToJobObject(
+///   [in] HANDLE hJob,
+///   [in] HANDLE hProcess
+/// );
+/// ```
+/// {@category kernel32}
+int AssignProcessToJobObject(int hJob, int hProcess) =>
+    _AssignProcessToJobObject(hJob, hProcess);
+
+final _AssignProcessToJobObject = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hJob, IntPtr hProcess),
+    int Function(int hJob, int hProcess)>('AssignProcessToJobObject');
+
 /// Attaches the calling process to the console of the specified process.
 ///
 /// ```c
@@ -650,6 +666,25 @@ final _CreateIoCompletionPort = _kernel32.lookupFunction<
         IntPtr CompletionKey, Uint32 NumberOfConcurrentThreads),
     int Function(int FileHandle, int ExistingCompletionPort, int CompletionKey,
         int NumberOfConcurrentThreads)>('CreateIoCompletionPort');
+
+/// Creates or opens a job object.
+///
+/// ```c
+/// HANDLE CreateJobObjectW(
+///   [in, optional] LPSECURITY_ATTRIBUTES lpJobAttributes,
+///   [in, optional] LPCWSTR               lpName
+/// );
+/// ```
+/// {@category kernel32}
+int CreateJobObject(
+        Pointer<SECURITY_ATTRIBUTES> lpJobAttributes, Pointer<Utf16> lpName) =>
+    _CreateJobObject(lpJobAttributes, lpName);
+
+final _CreateJobObject = _kernel32.lookupFunction<
+    IntPtr Function(
+        Pointer<SECURITY_ATTRIBUTES> lpJobAttributes, Pointer<Utf16> lpName),
+    int Function(Pointer<SECURITY_ATTRIBUTES> lpJobAttributes,
+        Pointer<Utf16> lpName)>('CreateJobObjectW');
 
 /// Creates an instance of a named pipe and returns a handle for subsequent
 /// pipe operations. A named pipe server process uses this function either
@@ -2110,6 +2145,20 @@ void FreeLibraryAndExitThread(int hLibModule, int dwExitCode) =>
 final _FreeLibraryAndExitThread = _kernel32.lookupFunction<
     Void Function(IntPtr hLibModule, Uint32 dwExitCode),
     void Function(int hLibModule, int dwExitCode)>('FreeLibraryAndExitThread');
+
+/// Frees memory that a function related to job objects allocated.
+///
+/// ```c
+/// void FreeMemoryJobObject(
+///   [in] _Frees_ptr_ VOID *Buffer
+/// );
+/// ```
+/// {@category kernel32}
+void FreeMemoryJobObject(Pointer Buffer) => _FreeMemoryJobObject(Buffer);
+
+final _FreeMemoryJobObject = _kernel32.lookupFunction<
+    Void Function(Pointer Buffer),
+    void Function(Pointer Buffer)>('FreeMemoryJobObject');
 
 /// Returns the number of active processors in a processor group or in the
 /// system.
@@ -4770,6 +4819,25 @@ final _IsNativeVhdBoot = _kernel32.lookupFunction<
     Int32 Function(Pointer<Int32> NativeVhdBoot),
     int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
 
+/// Determines whether the process is running in the specified job.
+///
+/// ```c
+/// BOOL IsProcessInJob(
+///   [in]           HANDLE ProcessHandle,
+///   [in, optional] HANDLE JobHandle,
+///   [out]          PBOOL  Result
+/// );
+/// ```
+/// {@category kernel32}
+int IsProcessInJob(int ProcessHandle, int JobHandle, Pointer<Int32> Result) =>
+    _IsProcessInJob(ProcessHandle, JobHandle, Result);
+
+final _IsProcessInJob = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr ProcessHandle, IntPtr JobHandle, Pointer<Int32> Result),
+    int Function(int ProcessHandle, int JobHandle,
+        Pointer<Int32> Result)>('IsProcessInJob');
+
 /// Determines the current state of the computer.
 ///
 /// ```c
@@ -5001,6 +5069,26 @@ final _OpenEvent = _kernel32.lookupFunction<
     int Function(int dwDesiredAccess, int bInheritHandle,
         Pointer<Utf16> lpName)>('OpenEventW');
 
+/// Opens an existing job object.
+///
+/// ```c
+/// HANDLE OpenJobObjectW(
+///   [in] DWORD   dwDesiredAccess,
+///   [in] BOOL    bInheritHandle,
+///   [in] LPCWSTR lpName
+/// );
+/// ```
+/// {@category kernel32}
+int OpenJobObject(
+        int dwDesiredAccess, int bInheritHandle, Pointer<Utf16> lpName) =>
+    _OpenJobObject(dwDesiredAccess, bInheritHandle, lpName);
+
+final _OpenJobObject = _kernel32.lookupFunction<
+    IntPtr Function(
+        Uint32 dwDesiredAccess, Int32 bInheritHandle, Pointer<Utf16> lpName),
+    int Function(int dwDesiredAccess, int bInheritHandle,
+        Pointer<Utf16> lpName)>('OpenJobObjectW');
+
 /// Opens an existing local process object.
 ///
 /// ```c
@@ -5212,6 +5300,73 @@ final _QueryFullProcessImageName = _kernel32.lookupFunction<
         Pointer<Uint32> lpdwSize),
     int Function(int hProcess, int dwFlags, Pointer<Utf16> lpExeName,
         Pointer<Uint32> lpdwSize)>('QueryFullProcessImageNameW');
+
+/// Retrieves limit and job state information from the job object.
+///
+/// ```c
+/// BOOL QueryInformationJobObject(
+///   [in, optional]  HANDLE             hJob,
+///   [in]            JOBOBJECTINFOCLASS JobObjectInformationClass,
+///   [out]           LPVOID             lpJobObjectInformation,
+///   [in]            DWORD              cbJobObjectInformationLength,
+///   [out, optional] LPDWORD            lpReturnLength
+/// );
+/// ```
+/// {@category kernel32}
+int QueryInformationJobObject(
+        int hJob,
+        int JobObjectInformationClass,
+        Pointer lpJobObjectInformation,
+        int cbJobObjectInformationLength,
+        Pointer<Uint32> lpReturnLength) =>
+    _QueryInformationJobObject(hJob, JobObjectInformationClass,
+        lpJobObjectInformation, cbJobObjectInformationLength, lpReturnLength);
+
+final _QueryInformationJobObject = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hJob,
+        Int32 JobObjectInformationClass,
+        Pointer lpJobObjectInformation,
+        Uint32 cbJobObjectInformationLength,
+        Pointer<Uint32> lpReturnLength),
+    int Function(
+        int hJob,
+        int JobObjectInformationClass,
+        Pointer lpJobObjectInformation,
+        int cbJobObjectInformationLength,
+        Pointer<Uint32> lpReturnLength)>('QueryInformationJobObject');
+
+/// Gets information about the control of the I/O rate for a job object.
+///
+/// ```c
+/// DWORD QueryIoRateControlInformationJobObject(
+///   [in, optional] HANDLE                                hJob,
+///   [in, optional] PCWSTR                                VolumeName,
+///   [out]          JOBOBJECT_IO_RATE_CONTROL_INFORMATION **InfoBlocks,
+///   [out]          ULONG                                 *InfoBlockCount
+/// );
+/// ```
+/// {@category kernel32}
+int QueryIoRateControlInformationJobObject(
+        int hJob,
+        Pointer<Utf16> VolumeName,
+        Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
+        Pointer<Uint32> InfoBlockCount) =>
+    _QueryIoRateControlInformationJobObject(
+        hJob, VolumeName, InfoBlocks, InfoBlockCount);
+
+final _QueryIoRateControlInformationJobObject = _kernel32.lookupFunction<
+        Uint32 Function(
+            IntPtr hJob,
+            Pointer<Utf16> VolumeName,
+            Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
+            Pointer<Uint32> InfoBlockCount),
+        int Function(
+            int hJob,
+            Pointer<Utf16> VolumeName,
+            Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> InfoBlocks,
+            Pointer<Uint32> InfoBlockCount)>(
+    'QueryIoRateControlInformationJobObject');
 
 /// Retrieves the current value of the performance counter, which is a high
 /// resolution (<1us) time stamp that can be used for time-interval
@@ -6131,6 +6286,51 @@ final _SetHandleInformation = _kernel32.lookupFunction<
     Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
     int Function(int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
 
+/// Sets limits for a job object.
+///
+/// ```c
+/// BOOL SetInformationJobObject(
+///   [in] HANDLE             hJob,
+///   [in] JOBOBJECTINFOCLASS JobObjectInformationClass,
+///   [in] LPVOID             lpJobObjectInformation,
+///   [in] DWORD              cbJobObjectInformationLength
+/// );
+/// ```
+/// {@category kernel32}
+int SetInformationJobObject(int hJob, int JobObjectInformationClass,
+        Pointer lpJobObjectInformation, int cbJobObjectInformationLength) =>
+    _SetInformationJobObject(hJob, JobObjectInformationClass,
+        lpJobObjectInformation, cbJobObjectInformationLength);
+
+final _SetInformationJobObject = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hJob, Int32 JobObjectInformationClass,
+        Pointer lpJobObjectInformation, Uint32 cbJobObjectInformationLength),
+    int Function(
+        int hJob,
+        int JobObjectInformationClass,
+        Pointer lpJobObjectInformation,
+        int cbJobObjectInformationLength)>('SetInformationJobObject');
+
+/// Sets I/O limits on a job object.
+///
+/// ```c
+/// DWORD SetIoRateControlInformationJobObject(
+///   [in] HANDLE                                hJob,
+///   [in] JOBOBJECT_IO_RATE_CONTROL_INFORMATION *IoRateControlInfo
+/// );
+/// ```
+/// {@category kernel32}
+int SetIoRateControlInformationJobObject(int hJob,
+        Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo) =>
+    _SetIoRateControlInformationJobObject(hJob, IoRateControlInfo);
+
+final _SetIoRateControlInformationJobObject = _kernel32.lookupFunction<
+        Uint32 Function(IntPtr hJob,
+            Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo),
+        int Function(int hJob,
+            Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> IoRateControlInfo)>(
+    'SetIoRateControlInformationJobObject');
+
 /// Sets the read mode and the blocking mode of the specified named pipe. If
 /// the specified handle is to the client end of a named pipe and if the
 /// named pipe server process is on a remote computer, the function can also
@@ -6406,6 +6606,24 @@ final _SystemTimeToFileTime = _kernel32.lookupFunction<
         Pointer<SYSTEMTIME> lpSystemTime, Pointer<FILETIME> lpFileTime),
     int Function(Pointer<SYSTEMTIME> lpSystemTime,
         Pointer<FILETIME> lpFileTime)>('SystemTimeToFileTime');
+
+/// Terminates all processes currently associated with the job. If the job
+/// is nested, this function terminates all processes currently associated
+/// with the job and all of its child jobs in the hierarchy.
+///
+/// ```c
+/// BOOL TerminateJobObject(
+///   [in] HANDLE hJob,
+///   [in] UINT   uExitCode
+/// );
+/// ```
+/// {@category kernel32}
+int TerminateJobObject(int hJob, int uExitCode) =>
+    _TerminateJobObject(hJob, uExitCode);
+
+final _TerminateJobObject = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hJob, Uint32 uExitCode),
+    int Function(int hJob, int uExitCode)>('TerminateJobObject');
 
 /// Terminates the specified process and all of its threads.
 ///

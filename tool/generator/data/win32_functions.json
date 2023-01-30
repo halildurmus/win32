@@ -133,6 +133,10 @@
         "prototype": "UINT ArrangeIconicWindows(\n  HWND hWnd\n);",
         "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
+    "AssignProcessToJobObject": {
+        "prototype": "BOOL AssignProcessToJobObject(\n  [in] HANDLE hJob,\n  [in] HANDLE hProcess\n);",
+        "comment": "Assigns a process to an existing job object."
+    },
     "AttachConsole": {
         "prototype": "BOOL AttachConsole(\n  _In_ DWORD dwProcessId\n);",
         "comment": "Attaches the calling process to the console of the specified process."
@@ -810,6 +814,10 @@
     "CreateIoCompletionPort": {
         "prototype": "HANDLE CreateIoCompletionPort(\n  HANDLE    FileHandle,\n  HANDLE    ExistingCompletionPort,\n  ULONG_PTR CompletionKey,\n  DWORD     NumberOfConcurrentThreads\n);",
         "comment": "Creates an input/output (I/O) completion port and associates it with a specified file handle, or creates an I/O completion port that is not yet associated with a file handle, allowing association at a later time."
+    },
+    "CreateJobObject": {
+        "prototype": "HANDLE CreateJobObjectW(\n  [in, optional] LPSECURITY_ATTRIBUTES lpJobAttributes,\n  [in, optional] LPCWSTR               lpName\n);",
+        "comment": "Creates or opens a job object."
     },
     "CreateMDIWindow": {
         "prototype": "HWND CreateMDIWindowW(\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HINSTANCE hInstance,\n  LPARAM    lParam\n);",
@@ -1536,6 +1544,10 @@
     "FreeLibraryAndExitThread": {
         "prototype": "void FreeLibraryAndExitThread(\n  [in] HMODULE hLibModule,\n  [in] DWORD   dwExitCode\n);",
         "comment": "Decrements the reference count of a loaded dynamic-link library (DLL) by one, then calls ExitThread to terminate the calling thread. The function does not return."
+    },
+    "FreeMemoryJobObject": {
+        "prototype": "void FreeMemoryJobObject(\n  [in] _Frees_ptr_ VOID *Buffer\n);",
+        "comment": "Frees memory that a function related to job objects allocated."
     },
     "FreePrinterNotifyInfo": {
         "prototype": "BOOL FreePrinterNotifyInfo(\n  _In_ PPRINTER_NOTIFY_INFO pPrinterNotifyInfo\n);",
@@ -3114,6 +3126,10 @@
         "prototype": "BOOL IsProcessDPIAware();",
         "comment": "Determines whether the current process is dots per inch (dpi) aware such that it adjusts the sizes of UI elements to compensate for the dpi setting."
     },
+    "IsProcessInJob": {
+        "prototype": "BOOL IsProcessInJob(\n  [in]           HANDLE ProcessHandle,\n  [in, optional] HANDLE JobHandle,\n  [out]          PBOOL  Result\n);",
+        "comment": "Determines whether the process is running in the specified job."
+    },
     "IsRectEmpty": {
         "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
         "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
@@ -3638,6 +3654,10 @@
         "prototype": "HDESK OpenInputDesktop(\n  DWORD       dwFlags,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
         "comment": "Opens the desktop that receives user input."
     },
+    "OpenJobObject": {
+        "prototype": "HANDLE OpenJobObjectW(\n  [in] DWORD   dwDesiredAccess,\n  [in] BOOL    bInheritHandle,\n  [in] LPCWSTR lpName\n);",
+        "comment": "Opens an existing job object."
+    },
     "OpenPrinter": {
         "prototype": "BOOL OpenPrinterW(\n  _In_  LPTSTR             pPrinterName,\n  _Out_ LPHANDLE           phPrinter,\n  _In_  LPPRINTER_DEFAULTS pDefault\n);",
         "comment": "The OpenPrinter function retrieves a handle to the specified printer or print server or other types of handles in the print subsystem."
@@ -3797,6 +3817,14 @@
     "QueryFullProcessImageName": {
         "prototype": "BOOL QueryFullProcessImageNameW(\n  HANDLE hProcess,\n  DWORD  dwFlags,\n  LPWSTR lpExeName,\n  PDWORD lpdwSize\n);",
         "comment": "Retrieves the full name of the executable image for the specified process."
+    },
+    "QueryInformationJobObject": {
+        "prototype": "BOOL QueryInformationJobObject(\n  [in, optional]  HANDLE             hJob,\n  [in]            JOBOBJECTINFOCLASS JobObjectInformationClass,\n  [out]           LPVOID             lpJobObjectInformation,\n  [in]            DWORD              cbJobObjectInformationLength,\n  [out, optional] LPDWORD            lpReturnLength\n);",
+        "comment": "Retrieves limit and job state information from the job object."
+    },
+    "QueryIoRateControlInformationJobObject": {
+        "prototype": "DWORD QueryIoRateControlInformationJobObject(\n  [in, optional] HANDLE                                hJob,\n  [in, optional] PCWSTR                                VolumeName,\n  [out]          JOBOBJECT_IO_RATE_CONTROL_INFORMATION **InfoBlocks,\n  [out]          ULONG                                 *InfoBlockCount\n);",
+        "comment": "Gets information about the control of the I/O rate for a job object."
     },
     "QueryPerformanceCounter": {
         "prototype": "BOOL QueryPerformanceCounter(\n  LARGE_INTEGER *lpPerformanceCount\n);",
@@ -4663,6 +4691,14 @@
         "prototype": "BOOL SetHandleInformation(\n  HANDLE hObject,\n  DWORD  dwMask,\n  DWORD  dwFlags\n);",
         "comment": "Sets certain properties of an object handle."
     },
+    "SetInformationJobObject": {
+        "prototype": "BOOL SetInformationJobObject(\n  [in] HANDLE             hJob,\n  [in] JOBOBJECTINFOCLASS JobObjectInformationClass,\n  [in] LPVOID             lpJobObjectInformation,\n  [in] DWORD              cbJobObjectInformationLength\n);",
+        "comment": "Sets limits for a job object."
+    },
+    "SetIoRateControlInformationJobObject": {
+        "prototype": "DWORD SetIoRateControlInformationJobObject(\n  [in] HANDLE                                hJob,\n  [in] JOBOBJECT_IO_RATE_CONTROL_INFORMATION *IoRateControlInfo\n);",
+        "comment": "Sets I/O limits on a job object."
+    },
     "SetJob": {
         "prototype": "BOOL SetJobW(\n  _In_ HANDLE hPrinter,\n  _In_ DWORD  JobId,\n  _In_ DWORD  Level,\n  _In_ LPBYTE pJob,\n  _In_ DWORD  Command\n);",
         "comment": "The SetJob function pauses, resumes, cancels, or restarts a print job on a specified printer. You can also use the SetJob function to set print job parameters, such as the print job priority and the document name."
@@ -5250,6 +5286,10 @@
         "comment": "The TaskDialogIndirect function creates, displays, and operates a task dialog. The task dialog contains application-defined icons, messages, title, verification check box, command links, push buttons, and radio buttons. This function can register a callback function to receive notification messages.",
         "test": false
     },
+    "TerminateJobObject": {
+        "prototype": "BOOL TerminateJobObject(\n  [in] HANDLE hJob,\n  [in] UINT   uExitCode\n);",
+        "comment": "Terminates all processes currently associated with the job. If the job is nested, this function terminates all processes currently associated with the job and all of its child jobs in the hierarchy."
+    },
     "TerminateProcess": {
         "prototype": "BOOL TerminateProcess(\n  HANDLE hProcess,\n  UINT   uExitCode);",
         "comment": "Terminates the specified process and all of its threads."
@@ -5361,6 +5401,10 @@
     "UpdateWindow": {
         "prototype": "BOOL UpdateWindow(\n  HWND hWnd\n);",
         "comment": "The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty. The function sends a WM_PAINT message directly to the window procedure of the specified window, bypassing the application queue. If the update region is empty, no message is sent."
+    },
+    "UserHandleGrantAccess": {
+        "prototype": "BOOL UserHandleGrantAccess(\n  [in] HANDLE hUserHandle,\n  [in] HANDLE hJob,\n  [in] BOOL   bGrant\n);",
+        "comment": "Grants or denies access to a handle to a User object to a job that has a user-interface restriction. When access is granted, all processes associated with the job can subsequently recognize and use the handle. When access is denied, the processes can no longer use the handle."
     },
     "ValidateRect": {
         "prototype": "BOOL ValidateRect(\n  HWND       hWnd,\n  const RECT *lpRect\n);",

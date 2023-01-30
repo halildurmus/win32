@@ -7800,6 +7800,27 @@ final _UpdateWindow =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'UpdateWindow');
 
+/// Grants or denies access to a handle to a User object to a job that has a
+/// user-interface restriction. When access is granted, all processes
+/// associated with the job can subsequently recognize and use the handle.
+/// When access is denied, the processes can no longer use the handle.
+///
+/// ```c
+/// BOOL UserHandleGrantAccess(
+///   [in] HANDLE hUserHandle,
+///   [in] HANDLE hJob,
+///   [in] BOOL   bGrant
+/// );
+/// ```
+/// {@category user32}
+int UserHandleGrantAccess(int hUserHandle, int hJob, int bGrant) =>
+    _UserHandleGrantAccess(hUserHandle, hJob, bGrant);
+
+final _UserHandleGrantAccess = _user32.lookupFunction<
+    Int32 Function(IntPtr hUserHandle, IntPtr hJob, Int32 bGrant),
+    int Function(
+        int hUserHandle, int hJob, int bGrant)>('UserHandleGrantAccess');
+
 /// The ValidateRect function validates the client area within a rectangle
 /// by removing the rectangle from the update region of the specified
 /// window.

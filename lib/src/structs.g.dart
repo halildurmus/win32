@@ -4379,6 +4379,28 @@ class ITEMIDLIST extends Struct {
   external SHITEMID mkid;
 }
 
+/// Contains information used to control the I/O rate for a job.
+///
+/// {@category Struct}
+class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
+  @Int64()
+  external int MaxIops;
+
+  @Int64()
+  external int MaxBandwidth;
+
+  @Int64()
+  external int ReservationIops;
+
+  external Pointer<Utf16> VolumeName;
+
+  @Uint32()
+  external int BaseIoSize;
+
+  @Int32()
+  external int ControlFlags;
+}
+
 /// The JOB_INFO_1 structure specifies print-job information such as the
 /// job-identifier value, the name of the printer for which the job is
 /// spooled, the name of the machine that created the print job, the name of
