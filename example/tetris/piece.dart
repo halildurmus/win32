@@ -8,6 +8,7 @@ class Point {
   String toString() => '($x, $y)';
 
   Point([this.x = 0, this.y = 0]);
+
   factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 
@@ -24,21 +25,21 @@ class Point {
 //
 class Piece {
   // POINT array of which the piece is composed
-  List<Point>? body;
+  late final List<Point> body;
 
   // Number of points in body
-  int pointCount;
+  final int pointCount;
 
   // Make rotation faster
-  int width;
-  int height;
+  int width = 0;
+  int height = 0;
 
   // Piece type ID and rotation
-  int id;
-  int rotation;
+  final int id;
+  final int rotation;
 
   // Piece color in RGB
-  int color;
+  final int color;
 
   /// Constructs a piece
   ///
@@ -50,9 +51,7 @@ class Piece {
   ///         bottom-left corner (0,0)
   /// pointCount: number of points in apt
   Piece(this.id, this.rotation, this.color, List<Point> points,
-      [this.pointCount = 4])
-      : width = 0,
-        height = 0 {
+      [this.pointCount = 4]) {
     final bottomLeft = Point.clone(points[0]);
 
     for (var i = 1; i < pointCount; i++) {
@@ -63,11 +62,11 @@ class Piece {
 
     body = List<Point>.generate(pointCount, (i) => Point());
     for (var i = 0; i < pointCount; i++) {
-      body![i].x = points[i].x - bottomLeft.x;
-      body![i].y = points[i].y - bottomLeft.y;
+      body[i].x = points[i].x - bottomLeft.x;
+      body[i].y = points[i].y - bottomLeft.y;
 
-      width = max(body![i].x + 1, width);
-      height = max(body![i].y + 1, height);
+      width = max(body[i].x + 1, width);
+      height = max(body[i].y + 1, height);
     }
   }
 
@@ -148,7 +147,7 @@ class Piece {
   /// Determines if the piece has a point (x, y)
   bool isPointExists(int x, int y) {
     for (var i = 0; i < 4; i++) {
-      if (body![i].x == x && body![i].y == y) {
+      if (body[i].x == x && body[i].y == y) {
         return true;
       }
     }
