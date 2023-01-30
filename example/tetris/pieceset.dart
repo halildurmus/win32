@@ -68,7 +68,7 @@ class PieceSet {
   void rotateAll() {
     for (var i = 0; i < numPieces; i++) {
       // clone the original piece
-      var clone = pieces[i][0].body!.map((e) => e).toList();
+      var clone = pieces[i][0].body.map((e) => e).toList();
 
       for (var j = 1; j < numRotations; j++) {
         clone = rotate(clone);
