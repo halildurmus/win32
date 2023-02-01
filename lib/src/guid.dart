@@ -103,7 +103,7 @@ class Guid {
   /// location.
   ///
   /// It is the caller's responsibility to free the memory at the pointer
-  /// location, for example by calling [calloc.free].
+  /// location, for example by calling [calloc]'s `free` method.
   Pointer<GUID> toNativeGUID({Allocator allocator = malloc}) {
     final pGUID = allocator<Uint8>(16);
 
