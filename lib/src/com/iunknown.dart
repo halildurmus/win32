@@ -80,7 +80,9 @@ class IUnknown implements Finalizable {
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
+}
 
+extension IUnknownHelpers on IUnknown {
   /// Cast an existing COM object to a specified interface.
   ///
   /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
