@@ -83,6 +83,12 @@ class IUnknown implements Finalizable {
 }
 
 extension IUnknownHelpers on IUnknown {
+  /// Detaches the object from the `NativeFinalizer`.
+  ///
+  /// Call this method only if you want to manually manage the lifetime of the
+  /// object.
+  void detach() => IUnknown._finalizer.detach(this);
+
   /// Cast an existing COM object to a specified interface.
   ///
   /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
