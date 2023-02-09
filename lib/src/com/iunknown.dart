@@ -29,8 +29,10 @@ class IUnknown implements Finalizable {
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr) {
-    _finalizer.attach(this, ptr.cast(),
-        detach: this, externalSize: sizeOf<IntPtr>());
+    if (ptr.ref.lpVtbl != nullptr) {
+      _finalizer.attach(this, ptr.cast(),
+          detach: this, externalSize: sizeOf<IntPtr>());
+    }
   }
 
   static final _ole32Lib = DynamicLibrary.open('ole32.dll');
