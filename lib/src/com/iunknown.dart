@@ -80,9 +80,7 @@ class IUnknown implements Finalizable {
       .cast<Pointer<NativeFunction<Uint32 Function(Pointer)>>>()
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
-}
 
-extension IUnknownHelpers on IUnknown {
   /// Detaches the object from the `NativeFinalizer`.
   ///
   /// Call this method only if you want to manually manage the lifetime of the
