@@ -113,7 +113,7 @@ class TypeTuple {
         dataLength = 2; // modifier + seq
         return TypeTuple(
             TypeIdentifier(baseType,
-                name: TypeIdentifier(baseType).toString(), // TODO: Clean up
+                name: TypeIdentifier(baseType).toString(),
                 genericParameterSequence: uncompressed.data),
             dataLength);
 

@@ -191,7 +191,7 @@ class CustomAttribute extends TokenObject {
           offset += 8;
           break;
         default:
-          // TODO: Need more exhaustive checking here for more esoteric
+          // In the future, we might add more exhaustive checking for esoteric
           // parameter types that are specified in ECMA-335 but don't seem to
           // occur in the Win32 or WinRT metadata (e.g. named arguments).
           throw WinmdException('Unexpected parameter type in signature blob.');
