@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -8,14 +9,14 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     // Should at least have a reference to a .NET assembly and the Win32 interop
     // assembly.
-    expect(scope.assemblyRefs.length, greaterThan(2));
+    check(scope.assemblyRefs.length).isGreaterThan(2);
   });
 
   test('Assembly name matches toString()', () {
     final scope = MetadataStore.getWin32Scope();
 
     final assemblyRef = scope.assemblyRefs.first;
-    expect(assemblyRef.name, equals(assemblyRef.toString()));
+    check(assemblyRef.name).equals(assemblyRef.toString());
   });
 
   test('Assembly version matches toString() 1', () {
@@ -26,8 +27,8 @@ void main() {
 
     // Current version at the time of writing this test is 23.0.0.18996. Version
     // numbers should only increase from here!
-    expect(int.parse(interopAssembly.version.split('.').first),
-        greaterThanOrEqualTo(23));
+    check(int.parse(interopAssembly.version.split('.').first))
+        .isGreaterOrEqual(23);
   });
 
   test('Assembly version matches toString() 2', () {
@@ -38,6 +39,6 @@ void main() {
         scope.assemblyRefs.firstWhere((a) => a.name == 'Windows.Foundation');
 
     // Windows Runtime versions seem to be permanently 255.255.255.255.
-    expect(assembly.version, equals('255.255.255.255'));
+    check(assembly.version).equals('255.255.255.255');
   });
 }
