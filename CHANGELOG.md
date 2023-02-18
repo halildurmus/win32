@@ -1,10 +1,15 @@
+## 2.4.8
+
+- Adopt `package:checks` for tests instead of `package:tests`.
+- Update to Windows.Win32.winmd v42.0.18.50823.
+
 ## 2.4.7
 
 - Update win32 dependency.
 
 ## 2.4.6
 
-- Update to Windows.Win32.winmd v41.0.5.54252
+- Update to Windows.Win32.winmd v41.0.5.54252.
 
 ## 2.4.5
 
@@ -12,11 +17,11 @@
 
 ## 2.4.4
 
-- Update to Windows.Win32.winmd v38.0.1.26489
+- Update to Windows.Win32.winmd v38.0.1.26489.
 
 ## 2.4.3
 
-- Update to Windows.Win32.winmd v37.0.33.41815
+- Update to Windows.Win32.winmd v37.0.33.41815.
 
 ## 2.4.2
 
