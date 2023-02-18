@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -10,7 +11,7 @@ void main() {
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.module.name, equalsIgnoringCase('gdi32.dll'));
-    expect(api.module.toString(), equalsIgnoringCase('gdi32.dll'));
+    check(api.module.name).equalsIgnoringCase('gdi32.dll');
+    check(api.module.toString()).equalsIgnoringCase('gdi32.dll');
   });
 }

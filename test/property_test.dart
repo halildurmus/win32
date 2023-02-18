@@ -1,26 +1,27 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
   test('Base property test', () {
     final typeDef = MetadataStore.getMetadataForType(
         'Windows.Devices.LowLevelDevicesController')!;
-    expect(typeDef.properties.length, equals(1));
+    check(typeDef.properties.length).equals(1);
 
     final property = typeDef.properties.first;
-    expect(property.toString(), equals('DefaultProvider'));
+    check(property.toString()).equals('DefaultProvider');
 
-    expect(property.hasGetter, isTrue);
-    expect(property.hasSetter, isTrue);
+    check(property.hasGetter).isTrue();
+    check(property.hasSetter).isTrue();
 
-    expect(property.getterMethod?.name, equals('get_DefaultProvider'));
-    expect(property.setterMethod?.name, equals('put_DefaultProvider'));
+    check(property.getterMethod?.name).equals('get_DefaultProvider');
+    check(property.setterMethod?.name).equals('put_DefaultProvider');
 
-    expect(property.parent, equals(typeDef));
-    expect(property.hasDefault, isFalse);
-    expect(property.isSpecialName, isFalse);
-    expect(property.isRTSpecialName, isFalse);
+    check(property.parent).equals(typeDef);
+    check(property.hasDefault).isFalse();
+    check(property.isSpecialName).isFalse();
+    check(property.isRTSpecialName).isFalse();
   });
 }

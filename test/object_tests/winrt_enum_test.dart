@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a WinRT enum representation.
@@ -24,43 +25,43 @@ void main() {
     final pvm = MetadataStore.getMetadataForType(
         'Windows.Storage.Pickers.PickerViewMode')!;
 
-    expect(pvm.typeVisibility, equals(TypeVisibility.public));
-    expect(pvm.typeLayout, equals(TypeLayout.auto));
-    expect(pvm.stringFormat, equals(StringFormat.ansi));
-    expect(pvm.isSealed, isTrue);
-    // expect(pvm.isImported, isTrue);
-    expect(pvm.isWindowsRuntime, isTrue);
-    expect(pvm.name, equals('Windows.Storage.Pickers.PickerViewMode'));
-    expect(pvm.parent?.name, equals('System.Enum'));
-    expect(pvm.isEnum, isTrue);
+    check(pvm.typeVisibility).equals(TypeVisibility.public);
+    check(pvm.typeLayout).equals(TypeLayout.auto);
+    check(pvm.stringFormat).equals(StringFormat.ansi);
+    check(pvm.isSealed).isTrue();
+    // check(pvm.isImported).isTrue();
+    check(pvm.isWindowsRuntime).isTrue();
+    check(pvm.name).equals('Windows.Storage.Pickers.PickerViewMode');
+    check(pvm.parent?.name).equals('System.Enum');
+    check(pvm.isEnum).isTrue();
 
-    expect(pvm.fields.length, equals(3));
-    expect(pvm.fields[0].fieldAccess, equals(FieldAccess.private));
-    expect(pvm.fields[0].isSpecialName, isTrue);
-    expect(pvm.fields[0].isRTSpecialName, isTrue);
-    expect(pvm.fields[0].typeIdentifier.baseType, equals(BaseType.int32Type));
-    expect(pvm.fields[0].name, equals('value__'));
+    check(pvm.fields.length).equals(3);
+    check(pvm.fields[0].fieldAccess).equals(FieldAccess.private);
+    check(pvm.fields[0].isSpecialName).isTrue();
+    check(pvm.fields[0].isRTSpecialName).isTrue();
+    check(pvm.fields[0].typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(pvm.fields[0].name).equals('value__');
 
-    expect(pvm.fields[1].fieldAccess, equals(FieldAccess.public));
-    expect(pvm.fields[1].isStatic, isTrue);
-    expect(pvm.fields[1].isLiteral, isTrue);
-    expect(pvm.fields[1].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(pvm.fields[1].typeIdentifier.name,
-        equals('Windows.Storage.Pickers.PickerViewMode'));
-    expect(pvm.fields[1].name, equals('List'));
-    expect(pvm.fields[1].fieldType, equals(BaseType.int32Type));
-    expect(pvm.fields[1].value, equals(0));
+    check(pvm.fields[1].fieldAccess).equals(FieldAccess.public);
+    check(pvm.fields[1].isStatic).isTrue();
+    check(pvm.fields[1].isLiteral).isTrue();
+    check(pvm.fields[1].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(pvm.fields[1].typeIdentifier.name)
+        .equals('Windows.Storage.Pickers.PickerViewMode');
+    check(pvm.fields[1].name).equals('List');
+    check(pvm.fields[1].fieldType).equals(BaseType.int32Type);
+    check(pvm.fields[1].value).equals(0);
 
-    expect(pvm.fields[2].fieldAccess, equals(FieldAccess.public));
-    expect(pvm.fields[2].isStatic, isTrue);
-    expect(pvm.fields[2].isLiteral, isTrue);
-    expect(pvm.fields[2].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(pvm.fields[2].typeIdentifier.name,
-        equals('Windows.Storage.Pickers.PickerViewMode'));
-    expect(pvm.fields[2].name, equals('Thumbnail'));
-    expect(pvm.fields[2].fieldType, equals(BaseType.int32Type));
-    expect(pvm.fields[2].value, equals(1));
+    check(pvm.fields[2].fieldAccess).equals(FieldAccess.public);
+    check(pvm.fields[2].isStatic).isTrue();
+    check(pvm.fields[2].isLiteral).isTrue();
+    check(pvm.fields[2].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(pvm.fields[2].typeIdentifier.name)
+        .equals('Windows.Storage.Pickers.PickerViewMode');
+    check(pvm.fields[2].name).equals('Thumbnail');
+    check(pvm.fields[2].fieldType).equals(BaseType.int32Type);
+    check(pvm.fields[2].value).equals(1);
   });
 }

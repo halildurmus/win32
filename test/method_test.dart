@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -9,18 +10,16 @@ void main() {
         'Windows.Foundation.Diagnostics.AsyncCausalityTracer');
     final method = typeDef!.findMethod('TraceSynchronousWorkCompletion')!;
 
-    expect(
-        method.toString(),
-        equals('[voidType] TraceSynchronousWorkCompletion'
-            '(CausalityTraceLevel traceLevel, '
-            'CausalitySource source, '
-            'CausalitySynchronousWork work)'));
-    expect(method.isHideBySig, isTrue);
-    expect(method.isStatic, isTrue);
-    expect(method.vTableLayout, equals(VtableLayout.reuseSlot));
-    expect(method.isAbstract, isFalse);
-    expect(method.isVirtual, isFalse);
-    expect(method.parent, equals(typeDef));
+    check(method.toString()).equals('[voidType] TraceSynchronousWorkCompletion'
+        '(CausalityTraceLevel traceLevel, '
+        'CausalitySource source, '
+        'CausalitySynchronousWork work)');
+    check(method.isHideBySig).isTrue();
+    check(method.isStatic).isTrue();
+    check(method.vTableLayout).equals(VtableLayout.reuseSlot);
+    check(method.isAbstract).isFalse();
+    check(method.isVirtual).isFalse();
+    check(method.parent).equals(typeDef);
   });
 
   test('Method properties 2', () {
@@ -28,11 +27,11 @@ void main() {
         'Windows.Foundation.Diagnostics.IAsyncCausalityTracerStatics');
     final method = typeDef!.findMethod('TraceSynchronousWorkCompletion')!;
 
-    expect(method.isHideBySig, isTrue);
-    expect(method.vTableLayout, equals(VtableLayout.newSlot));
-    expect(method.isAbstract, isTrue);
-    expect(method.isVirtual, isTrue);
-    expect(method.parent, equals(typeDef));
+    check(method.isHideBySig).isTrue();
+    check(method.vTableLayout).equals(VtableLayout.newSlot);
+    check(method.isAbstract).isTrue();
+    check(method.isVirtual).isTrue();
+    check(method.parent).equals(typeDef);
   });
 
   test('Method properties 3', () {
@@ -42,29 +41,28 @@ void main() {
     final typeDef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
     final method = typeDef!.findMethod(methodName)!;
 
-    expect(method.isHideBySig, isTrue);
-    expect(method.vTableLayout, equals(VtableLayout.reuseSlot));
-    expect(method.isStatic, isTrue);
-    expect(method.isAbstract, isFalse);
-    expect(method.isPinvokeImpl, isTrue);
-    expect(method.pinvokeMap.isNoMangle, isTrue);
-    expect(method.pinvokeMap.importName, equals(methodName));
-    expect(method.parent, equals(typeDef));
+    check(method.isHideBySig).isTrue();
+    check(method.vTableLayout).equals(VtableLayout.reuseSlot);
+    check(method.isStatic).isTrue();
+    check(method.isAbstract).isFalse();
+    check(method.isPinvokeImpl).isTrue();
+    check(method.pinvokeMap.isNoMangle).isTrue();
+    check(method.pinvokeMap.importName).equals(methodName);
+    check(method.parent).equals(typeDef);
 
     final importDllToken = method.pinvokeMap.importDllToken;
     final moduleRef = ModuleRef.fromToken(scope, importDllToken);
-    expect(moduleRef.name, equals('OLE32.dll'));
+    check(moduleRef.name).equals('OLE32.dll');
 
-    expect(
-        method.pinvokeMap.callingConvention, equals(CallingConvention.winApi));
+    check(method.pinvokeMap.callingConvention).equals(CallingConvention.winApi);
 
-    expect(method.implFeatures.isAggressiveInlining, isFalse);
-    expect(method.implFeatures.isForwardRef, isFalse);
-    expect(method.implFeatures.isManaged, isTrue);
-    expect(method.implFeatures.isNoInlining, isFalse);
-    expect(method.implFeatures.isNoOptimization, isFalse);
-    expect(method.implFeatures.isPreserveSig, isFalse);
-    expect(method.implFeatures.isSynchronized, isFalse);
+    check(method.implFeatures.isAggressiveInlining).isFalse();
+    check(method.implFeatures.isForwardRef).isFalse();
+    check(method.implFeatures.isManaged).isTrue();
+    check(method.implFeatures.isNoInlining).isFalse();
+    check(method.implFeatures.isNoOptimization).isFalse();
+    check(method.implFeatures.isPreserveSig).isFalse();
+    check(method.implFeatures.isSynchronized).isFalse();
   });
 
   test('Method properties 4', () {
@@ -74,13 +72,13 @@ void main() {
     final typeDef = scope.findTypeDef('Windows.Win32.System.Ole.Apis');
     final method = typeDef!.findMethod(methodName)!;
 
-    expect(method.isPinvokeImpl, isTrue);
-    expect(method.pinvokeMap.isNoMangle, isTrue);
-    expect(method.pinvokeMap.importName, equals(methodName));
-    expect(method.pinvokeMap.stringMarshalConvention,
-        equals(StringMarshalConvention.notSpecified));
-    expect(method.pinvokeMap.bestFitConvention, equals(BestFit.useAssem));
-    expect(method.pinvokeMap.throwOnUnmappableCharConvention,
-        equals(ThrowOnUnmappableChar.useAssem));
+    check(method.isPinvokeImpl).isTrue();
+    check(method.pinvokeMap.isNoMangle).isTrue();
+    check(method.pinvokeMap.importName).equals(methodName);
+    check(method.pinvokeMap.stringMarshalConvention)
+        .equals(StringMarshalConvention.notSpecified);
+    check(method.pinvokeMap.bestFitConvention).equals(BestFit.useAssem);
+    check(method.pinvokeMap.throwOnUnmappableCharConvention)
+        .equals(ThrowOnUnmappableChar.useAssem);
   });
 }

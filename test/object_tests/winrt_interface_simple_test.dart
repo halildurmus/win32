@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a WinRT interface representation without generics
@@ -60,54 +61,53 @@ void main() {
   test('Windows.Foundation.IAsyncInfo', () {
     final iai =
         MetadataStore.getMetadataForType('Windows.Foundation.IAsyncInfo')!;
-    expect(iai.isInterface, isTrue);
-    expect(iai.typeVisibility, equals(TypeVisibility.public));
-    expect(iai.typeLayout, equals(TypeLayout.auto));
-    expect(iai.stringFormat, equals(StringFormat.ansi));
-    expect(iai.isAbstract, isTrue);
-    // expect(iai.isImported, isTrue);
-    expect(iai.isWindowsRuntime, isTrue);
-    expect(iai.name, equals('Windows.Foundation.IAsyncInfo'));
+    check(iai.isInterface).isTrue();
+    check(iai.typeVisibility).equals(TypeVisibility.public);
+    check(iai.typeLayout).equals(TypeLayout.auto);
+    check(iai.stringFormat).equals(StringFormat.ansi);
+    check(iai.isAbstract).isTrue();
+    // check(iai.isImported).isTrue();
+    check(iai.isWindowsRuntime).isTrue();
+    check(iai.name).equals('Windows.Foundation.IAsyncInfo');
 
-    expect(iai.customAttributes.length, equals(2));
-    expect(
-        iai
-            .findAttribute('Windows.Foundation.Metadata.GuidAttribute')
-            ?.signatureBlob,
-        equals([
-          0x01, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, //
-          0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, //
-          0x00, 0x46, 0x00, 0x00
-        ]));
-    expect(
-        iai
+    check(iai.customAttributes.length).equals(2);
+    check(iai
+            .findAttribute('Windows.Foundation.Metadata.GuidAttribute')!
+            .signatureBlob
+            .toList())
+        .deepEquals([
+      0x01, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, //
+      0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, //
+      0x00, 0x46, 0x00, 0x00
+    ]);
+    check(iai
             .findAttribute(
-                'Windows.Foundation.Metadata.ContractVersionAttribute')
-            ?.signatureBlob,
-        containsAllInOrder(
-            <int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]));
+                'Windows.Foundation.Metadata.ContractVersionAttribute')!
+            .signatureBlob
+            .toList())
+        .containsInOrder(<int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]);
 
-    expect(iai.methods.length, equals(5));
-    expect(iai.methods[0].memberAccess, equals(MemberAccess.public));
-    expect(iai.methods[0].isHideBySig, isTrue);
-    expect(iai.methods[0].isSpecialName, isTrue);
-    expect(iai.methods[0].vTableLayout, equals(VtableLayout.newSlot));
-    expect(iai.methods[0].isAbstract, isTrue);
-    expect(iai.methods[0].isVirtual, isTrue);
-    expect(iai.methods[0].returnType.typeIdentifier.baseType,
-        equals(BaseType.uint32Type));
-    expect(iai.methods[0].name, equals('get_Id'));
-    expect(iai.methods[0].implFeatures.codeType, equals(CodeType.runtime));
-    expect(iai.methods[0].implFeatures.isManaged, isTrue);
+    check(iai.methods.length).equals(5);
+    check(iai.methods[0].memberAccess).equals(MemberAccess.public);
+    check(iai.methods[0].isHideBySig).isTrue();
+    check(iai.methods[0].isSpecialName).isTrue();
+    check(iai.methods[0].vTableLayout).equals(VtableLayout.newSlot);
+    check(iai.methods[0].isAbstract).isTrue();
+    check(iai.methods[0].isVirtual).isTrue();
+    check(iai.methods[0].returnType.typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
+    check(iai.methods[0].name).equals('get_Id');
+    check(iai.methods[0].implFeatures.codeType).equals(CodeType.runtime);
+    check(iai.methods[0].implFeatures.isManaged).isTrue();
 
-    expect(iai.properties.length, equals(3));
-    expect(iai.properties[0].typeIdentifier.name,
-        equals('Windows.Foundation.HResult'));
-    expect(iai.properties[0].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(iai.properties[0].name, equals('ErrorCode'));
-    expect(iai.properties[0].hasGetter, isTrue);
-    expect(iai.properties[0].getterMethod?.name, equals('get_ErrorCode'));
-    expect(iai.properties[0].hasSetter, isFalse);
+    check(iai.properties.length).equals(3);
+    check(iai.properties[0].typeIdentifier.name)
+        .equals('Windows.Foundation.HResult');
+    check(iai.properties[0].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(iai.properties[0].name).equals('ErrorCode');
+    check(iai.properties[0].hasGetter).isTrue();
+    check(iai.properties[0].getterMethod?.name).equals('get_ErrorCode');
+    check(iai.properties[0].hasSetter).isFalse();
   });
 }

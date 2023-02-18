@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a delegate object
@@ -37,89 +38,88 @@ void main() {
     final wndProc =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.WNDPROC')!;
 
-    expect(wndProc.isDelegate, isTrue);
-    expect(wndProc.representsAsClass, isTrue);
-    expect(wndProc.typeVisibility, equals(TypeVisibility.public));
-    expect(wndProc.typeLayout, equals(TypeLayout.auto));
-    expect(wndProc.stringFormat, equals(StringFormat.auto));
-    expect(wndProc.isSealed, isTrue);
-    expect(wndProc.isBeforeFieldInit, isTrue);
-    expect(
-        wndProc.name, equals('Windows.Win32.UI.WindowsAndMessaging.WNDPROC'));
-    expect(wndProc.parent?.name, equals('System.MulticastDelegate'));
+    check(wndProc.isDelegate).isTrue();
+    check(wndProc.representsAsClass).isTrue();
+    check(wndProc.typeVisibility).equals(TypeVisibility.public);
+    check(wndProc.typeLayout).equals(TypeLayout.auto);
+    check(wndProc.stringFormat).equals(StringFormat.auto);
+    check(wndProc.isSealed).isTrue();
+    check(wndProc.isBeforeFieldInit).isTrue();
+    check(wndProc.name).equals('Windows.Win32.UI.WindowsAndMessaging.WNDPROC');
+    check(wndProc.parent?.name).equals('System.MulticastDelegate');
 
-    expect(wndProc.customAttributes.length, equals(1));
+    check(wndProc.customAttributes.length).equals(1);
     // expect(
     //     wndProc.customAttributes.first.name,
     //     equals(
     //         'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute'));
-    // expect(wndProc.customAttributes[0].hasAttribute(CorAttributeAttr.aaInstance), isTrue);
-    expect(
-        wndProc
+    // check(wndProc.customAttributes[0].hasAttribute(CorAttributeAttr.aaInstance)).isTrue();
+    check(wndProc
             .findAttribute(
-                'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute')
-            ?.signatureBlob,
-        equals([
-          0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, //
-        ]));
+                'System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute')!
+            .signatureBlob
+            .toList())
+        .deepEquals([
+      0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, //
+    ]);
 
-    expect(wndProc.methods.length, equals(2));
-    expect(wndProc.methods[0].memberAccess, equals(MemberAccess.public));
-    expect(wndProc.methods[0].isHideBySig, isTrue);
-    expect(wndProc.methods[0].isSpecialName, isTrue);
-    expect(wndProc.methods[0].isRTSpecialName, isTrue);
+    check(wndProc.methods.length).equals(2);
+    check(wndProc.methods[0].memberAccess).equals(MemberAccess.public);
+    check(wndProc.methods[0].isHideBySig).isTrue();
+    check(wndProc.methods[0].isSpecialName).isTrue();
+    check(wndProc.methods[0].isRTSpecialName).isTrue();
 
-    expect(wndProc.methods[0].returnType.typeIdentifier.baseType,
-        equals(BaseType.voidType));
-    expect(wndProc.methods[0].name, equals('.ctor'));
-    expect(wndProc.methods[0].parameters.length, equals(2));
+    check(wndProc.methods[0].returnType.typeIdentifier.baseType)
+        .equals(BaseType.voidType);
+    check(wndProc.methods[0].name).equals('.ctor');
+    check(wndProc.methods[0].parameters.length).equals(2);
 
-    expect(wndProc.methods[0].parameters[0].name, equals('object'));
-    expect(wndProc.methods[0].parameters[0].typeIdentifier.baseType,
-        equals(BaseType.objectType));
+    check(wndProc.methods[0].parameters[0].name).equals('object');
+    check(wndProc.methods[0].parameters[0].typeIdentifier.baseType)
+        .equals(BaseType.objectType);
 
-    expect(wndProc.methods[0].parameters[1].name, equals('method'));
-    expect(wndProc.methods[0].parameters[1].typeIdentifier.baseType,
-        equals(BaseType.intPtrType));
-    expect(wndProc.methods[0].implFeatures.codeType, equals(CodeType.runtime));
-    expect(wndProc.methods[0].implFeatures.isManaged, isTrue);
+    check(wndProc.methods[0].parameters[1].name).equals('method');
+    check(wndProc.methods[0].parameters[1].typeIdentifier.baseType)
+        .equals(BaseType.intPtrType);
+    check(wndProc.methods[0].implFeatures.codeType).equals(CodeType.runtime);
+    check(wndProc.methods[0].implFeatures.isManaged).isTrue();
 
-    expect(wndProc.methods[1].memberAccess, equals(MemberAccess.public));
-    expect(wndProc.methods[1].isHideBySig, isTrue);
-    expect(wndProc.methods[1].vTableLayout, equals(VtableLayout.newSlot));
-    expect(wndProc.methods[1].isVirtual, isTrue);
+    check(wndProc.methods[1].memberAccess).equals(MemberAccess.public);
+    check(wndProc.methods[1].isHideBySig).isTrue();
+    check(wndProc.methods[1].vTableLayout).equals(VtableLayout.newSlot);
+    check(wndProc.methods[1].isVirtual).isTrue();
 
-    expect(wndProc.methods[1].returnType.typeIdentifier.name,
-        equals('Windows.Win32.Foundation.LRESULT'));
-    expect(wndProc.methods[1].name, equals('Invoke'));
-    expect(wndProc.methods[1].parameters.length, equals(4));
+    check(wndProc.methods[1].returnType.typeIdentifier.name)
+        .equals('Windows.Win32.Foundation.LRESULT');
+    check(wndProc.methods[1].name).equals('Invoke');
+    check(wndProc.methods[1].parameters.length).equals(4);
 
-    expect(wndProc.methods[1].parameters[0].isInParam, isTrue);
-    expect(wndProc.methods[1].parameters[0].name, equals('param0'));
-    expect(wndProc.methods[1].parameters[0].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(wndProc.methods[1].parameters[0].typeIdentifier.name,
-        equals('Windows.Win32.Foundation.HWND'));
+    check(wndProc.methods[1].parameters[0].isInParam).isTrue();
+    check(wndProc.methods[1].parameters[0].name).equals('param0');
+    check(wndProc.methods[1].parameters[0].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(wndProc.methods[1].parameters[0].typeIdentifier.name)
+        .equals('Windows.Win32.Foundation.HWND');
 
-    expect(wndProc.methods[1].parameters[1].isInParam, isTrue);
-    expect(wndProc.methods[1].parameters[1].name, equals('param1'));
-    expect(wndProc.methods[1].parameters[1].typeIdentifier.baseType,
-        equals(BaseType.uint32Type));
+    check(wndProc.methods[1].parameters[1].isInParam).isTrue();
+    check(wndProc.methods[1].parameters[1].name).equals('param1');
+    check(wndProc.methods[1].parameters[1].typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
 
-    expect(wndProc.methods[1].parameters[2].isInParam, isTrue);
-    expect(wndProc.methods[1].parameters[2].name, equals('param2'));
-    expect(wndProc.methods[1].parameters[2].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(wndProc.methods[1].parameters[2].typeIdentifier.name,
-        equals('Windows.Win32.Foundation.WPARAM'));
+    check(wndProc.methods[1].parameters[2].isInParam).isTrue();
+    check(wndProc.methods[1].parameters[2].name).equals('param2');
+    check(wndProc.methods[1].parameters[2].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(wndProc.methods[1].parameters[2].typeIdentifier.name)
+        .equals('Windows.Win32.Foundation.WPARAM');
 
-    expect(wndProc.methods[1].parameters[3].isInParam, isTrue);
-    expect(wndProc.methods[1].parameters[3].name, equals('param3'));
-    expect(wndProc.methods[1].parameters[3].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
-        equals('Windows.Win32.Foundation.LPARAM'));
-    expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.runtime));
-    expect(wndProc.methods[1].implFeatures.isManaged, isTrue);
+    check(wndProc.methods[1].parameters[3].isInParam).isTrue();
+    check(wndProc.methods[1].parameters[3].name).equals('param3');
+    check(wndProc.methods[1].parameters[3].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(wndProc.methods[1].parameters[3].typeIdentifier.name)
+        .equals('Windows.Win32.Foundation.LPARAM');
+    check(wndProc.methods[1].implFeatures.codeType).equals(CodeType.runtime);
+    check(wndProc.methods[1].implFeatures.isManaged).isTrue();
   });
 }

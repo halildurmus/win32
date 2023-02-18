@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a Win32 enum representation.
@@ -19,43 +20,42 @@ void main() {
     final hand =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS')!;
 
-    expect(hand.typeVisibility, equals(TypeVisibility.public));
-    expect(hand.typeLayout, equals(TypeLayout.auto));
-    expect(hand.stringFormat, equals(StringFormat.ansi));
-    expect(hand.isSealed, isTrue);
-    expect(
-        hand.name, equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS'));
-    expect(hand.parent?.name, equals('System.Enum'));
-    expect(hand.isEnum, isTrue);
+    check(hand.typeVisibility).equals(TypeVisibility.public);
+    check(hand.typeLayout).equals(TypeLayout.auto);
+    check(hand.stringFormat).equals(StringFormat.ansi);
+    check(hand.isSealed).isTrue();
+    check(hand.name).equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(hand.parent?.name).equals('System.Enum');
+    check(hand.isEnum).isTrue();
 
-    expect(hand.fields.length, equals(3));
+    check(hand.fields.length).equals(3);
 
-    expect(hand.fields[0].fieldAccess, equals(FieldAccess.public));
-    expect(hand.fields[0].isSpecialName, isTrue);
-    expect(hand.fields[0].isRTSpecialName, isTrue);
-    expect(hand.fields[0].typeIdentifier.baseType, equals(BaseType.int32Type));
-    expect(hand.fields[0].name, equals('value__'));
+    check(hand.fields[0].fieldAccess).equals(FieldAccess.public);
+    check(hand.fields[0].isSpecialName).isTrue();
+    check(hand.fields[0].isRTSpecialName).isTrue();
+    check(hand.fields[0].typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(hand.fields[0].name).equals('value__');
 
-    expect(hand.fields[1].fieldAccess, equals(FieldAccess.public));
-    expect(hand.fields[1].isStatic, isTrue);
-    expect(hand.fields[1].isLiteral, isTrue);
-    expect(hand.fields[1].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(hand.fields[1].typeIdentifier.name,
-        equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS'));
-    expect(hand.fields[1].name, equals('HANDEDNESS_LEFT'));
-    expect(hand.fields[1].fieldType, equals(BaseType.int32Type));
-    expect(hand.fields[1].value, equals(0));
+    check(hand.fields[1].fieldAccess).equals(FieldAccess.public);
+    check(hand.fields[1].isStatic).isTrue();
+    check(hand.fields[1].isLiteral).isTrue();
+    check(hand.fields[1].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(hand.fields[1].typeIdentifier.name)
+        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(hand.fields[1].name).equals('HANDEDNESS_LEFT');
+    check(hand.fields[1].fieldType).equals(BaseType.int32Type);
+    check(hand.fields[1].value).equals(0);
 
-    expect(hand.fields[2].fieldAccess, equals(FieldAccess.public));
-    expect(hand.fields[2].isStatic, isTrue);
-    expect(hand.fields[2].isLiteral, isTrue);
-    expect(hand.fields[2].typeIdentifier.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(hand.fields[2].typeIdentifier.name,
-        equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS'));
-    expect(hand.fields[2].name, equals('HANDEDNESS_RIGHT'));
-    expect(hand.fields[2].fieldType, equals(BaseType.int32Type));
-    expect(hand.fields[2].value, equals(1));
+    check(hand.fields[2].fieldAccess).equals(FieldAccess.public);
+    check(hand.fields[2].isStatic).isTrue();
+    check(hand.fields[2].isLiteral).isTrue();
+    check(hand.fields[2].typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(hand.fields[2].typeIdentifier.name)
+        .equals('Windows.Win32.UI.WindowsAndMessaging.HANDEDNESS');
+    check(hand.fields[2].name).equals('HANDEDNESS_RIGHT');
+    check(hand.fields[2].fieldType).equals(BaseType.int32Type);
+    check(hand.fields[2].value).equals(1);
   });
 }

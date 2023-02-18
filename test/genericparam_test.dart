@@ -1,6 +1,7 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 
 import 'package:winmd/winmd.dart';
 
@@ -9,22 +10,22 @@ void main() {
     const interfaceName = 'Windows.Foundation.IAsyncOperationWithProgress`2';
 
     final typeDef = MetadataStore.getMetadataForType(interfaceName)!;
-    expect(typeDef.genericParams.length, equals(2));
+    check(typeDef.genericParams.length).equals(2);
 
     final tr = typeDef.genericParams.first;
-    expect(tr.constraints.length, isZero);
-    expect(tr.customAttributes.length, isZero);
-    expect(tr.isGlobal, isFalse);
-    expect(tr.specialConstraints.noConstraints, isTrue);
-    expect(tr.specialConstraints.notNullable, isFalse);
-    expect(tr.specialConstraints.referenceType, isFalse);
-    expect(tr.specialConstraints.defaultConstructor, isFalse);
-    expect(tr.variance, equals(Variance.nonvariant));
-    expect(tr.name, equals('TResult'));
-    expect(tr.toString(), tr.name);
+    check(tr.constraints.length).equals(0);
+    check(tr.customAttributes.length).equals(0);
+    check(tr.isGlobal).isFalse();
+    check(tr.specialConstraints.noConstraints).isTrue();
+    check(tr.specialConstraints.notNullable).isFalse();
+    check(tr.specialConstraints.referenceType).isFalse();
+    check(tr.specialConstraints.defaultConstructor).isFalse();
+    check(tr.variance).equals(Variance.nonvariant);
+    check(tr.name).equals('TResult');
+    check(tr.toString()).equals(tr.name);
 
-    expect(tr.parent, isA<TypeDef>());
+    check(tr.parent).isA<TypeDef>();
     final parentObject = tr.parent as TypeDef;
-    expect(parentObject.name, equals(interfaceName));
+    check(parentObject.name).equals(interfaceName);
   });
 }

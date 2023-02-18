@@ -10,7 +10,7 @@ void main() {
     final iNetwork = scope.typeDefs
         .firstWhere((typedef) => typedef.name.endsWith('INetwork'));
 
-    check(iNetwork.isResolvedToken).isTrue;
+    check(iNetwork.isResolvedToken).isTrue();
   });
 
   test('Can find a COM interface in winmd by name', () {
@@ -18,7 +18,7 @@ void main() {
     final iNetwork = scope
         .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
 
-    check(iNetwork.isResolvedToken).isTrue;
+    check(iNetwork.isResolvedToken).isTrue();
   });
 
   group('INetwork tests', () {
@@ -26,8 +26,8 @@ void main() {
       final scope = MetadataStore.getWin32Scope();
       final iNetwork = scope
           .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
-      check(iNetwork.isInterface).isTrue;
-      check(iNetwork.isResolvedToken).isTrue;
+      check(iNetwork.isInterface).isTrue();
+      check(iNetwork.isResolvedToken).isTrue();
     });
 
     test('INetwork inherits from IDispatch', () {
@@ -87,7 +87,7 @@ void main() {
 
       check(param.name).equals('pszNetworkName');
       check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
-      check(param.typeIdentifier.typeArg).isNotNull;
+      check(param.typeIdentifier.typeArg).isNotNull();
       check(param.typeIdentifier.typeArg!.name).endsWith('BSTR');
       check(param.typeIdentifier.typeArg!.baseType)
           .equals(BaseType.valueTypeModifier);
@@ -103,7 +103,7 @@ void main() {
       check(param.name).equals('szNetworkNewName');
       check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
       check(param.typeIdentifier.name).endsWith('BSTR');
-      check(param.typeIdentifier.typeArg).isNull;
+      check(param.typeIdentifier.typeArg).isNull();
     });
 
     test('COM method parameters are represented accurately', () {
@@ -137,7 +137,7 @@ void main() {
 
       check(param.name).equals('pgdGuidNetworkId');
       check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
-      check(param.typeIdentifier.typeArg).isNotNull;
+      check(param.typeIdentifier.typeArg).isNotNull();
       check(param.typeIdentifier.typeArg!.name).endsWith('Guid');
     });
 
@@ -158,7 +158,7 @@ void main() {
 
       check(param.name).equals('pbIsConnected');
       check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
-      check(param.typeIdentifier.typeArg).isNotNull;
+      check(param.typeIdentifier.typeArg).isNotNull();
       check(param.typeIdentifier.typeArg?.baseType)
           .equals(BaseType.valueTypeModifier);
       check(param.typeIdentifier.typeArg?.type?.name)
@@ -171,8 +171,8 @@ void main() {
     final iksTopologyInfo =
         scope.findTypeDef('Windows.Win32.Media.DirectShow.IKsTopologyInfo')!;
     final getNodeName = iksTopologyInfo.findMethod('get_NodeName')!;
-    check(getNodeName.isProperty).isFalse;
-    check(getNodeName.isGetProperty).isFalse;
+    check(getNodeName.isProperty).isFalse();
+    check(getNodeName.isGetProperty).isFalse();
   });
 
   test('Multiple layers of interface inheritance are correct', () {
@@ -206,9 +206,9 @@ void main() {
         .equals('Windows.Win32.UI.Shell.ACTIVATEOPTIONS');
     check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
     check(param.typeIdentifier.type?.parent?.name).equals('System.Enum');
-    check(param.typeIdentifier.typeArg).isNull;
+    check(param.typeIdentifier.typeArg).isNull();
     check(scope.enums.firstWhere((p) => p.name == param.typeIdentifier.name))
-        .isNotNull;
+        .isNotNull();
   });
 
   test('Optional COM parameters', () {
@@ -217,11 +217,11 @@ void main() {
         scope.findTypeDef('Windows.Win32.Graphics.Direct3D12.ID3D12Device8')!;
     final method = interface.methods.first;
     final param = method.parameters.last;
-    check(param.isOptional).isTrue;
-    check(param.isOutParam).isTrue;
-    check(param.isInParam).isFalse;
-    check(param.hasDefault).isFalse;
-    check(param.hasFieldMarshal).isFalse;
+    check(param.isOptional).isTrue();
+    check(param.isOutParam).isTrue();
+    check(param.isInParam).isFalse();
+    check(param.hasDefault).isFalse();
+    check(param.hasFieldMarshal).isFalse();
 
     check(param.parent).equals(method);
     check(param.toString()).equals('pResourceAllocationInfo1');

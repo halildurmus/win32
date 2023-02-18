@@ -1,51 +1,55 @@
 @TestOn('windows')
 
-import 'package:test/test.dart';
+import 'dart:typed_data';
+
+import 'package:checks/checks.dart';
+import 'package:test/scaffolding.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
   test('Scope modules contain expected DLLs', () {
     final scope = MetadataStore.getWin32Scope();
-    expect(
-        scope.moduleRefs.map((module) => module.name),
-        containsAll(
-            <String>['KERNEL32.dll', 'USER32.dll', 'GDI32.dll', 'd3d12.dll']));
+    check(scope.moduleRefs.map((module) => module.name))
+      ..contains('KERNEL32.dll')
+      ..contains('USER32.dll')
+      ..contains('GDI32.dll')
+      ..contains('d3d12.dll');
   });
 
   test('Scope modules contain expected user strings', () {
     final scope = MetadataStore.getWin32Scope();
-    expect(scope.userStrings.length, equals(0));
+    check(scope.userStrings.length).equals(0);
   });
 
   test('Can successfully load a typedef from the Win32 metadata', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis');
-    expect(typedef, isNotNull);
-    expect(typedef!.methods.length, isNonZero);
+    check(typedef).isNotNull();
+    check(typedef!.methods).isNotEmpty();
   });
 
   test('Typedef is named correctly', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef('Windows.Win32.UI.Shell.Apis')!;
-    expect(typedef.name, equals('Windows.Win32.UI.Shell.Apis'));
-    expect(typedef.toString(), equals('Windows.Win32.UI.Shell.Apis'));
+    check(typedef.name).equals('Windows.Win32.UI.Shell.Apis');
+    check(typedef.toString()).equals('Windows.Win32.UI.Shell.Apis');
   });
 
   test('Typedef equality is successful', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef1 = scope.findTypeDef('Windows.Win32.UI.Shell.Apis')!;
-    final typedef2 = scope.findTypeDef('Windows.Win32.UI.Shell.Apis');
+    final typedef2 = scope.findTypeDef('Windows.Win32.UI.Shell.Apis')!;
     final typedef3 = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
 
-    expect(typedef1, equals(typedef2));
-    expect(typedef1, isNot(equals(typedef3)));
+    check(typedef1).equals(typedef2);
+    check(typedef1).not(it()..equals(typedef3));
   });
 
   test('Searching for a non-existent typedef returns null', () {
     final scope = MetadataStore.getWin32Scope();
     const fakeTypeDef = 'Windows.Flutter.Apis'; // for now :)
     final typedef = scope.findTypeDef(fakeTypeDef);
-    expect(typedef, isNull);
+    check(typedef).isNull();
   });
 
   test('Can find a known API within the given scope', () {
@@ -53,8 +57,8 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFontResourceW');
-    expect(api, isNotNull);
-    expect(api!.parameters.length, isNonZero);
+    check(api).isNotNull();
+    check(api!.parameters).isNotEmpty();
   });
 
   test('Searching for a non-existent API call returns null', () {
@@ -62,7 +66,7 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFlutterWidget');
-    expect(api, isNull);
+    check(api).isNull();
   });
 
   test('isResolvedToken gives correct result for a real token', () {
@@ -71,7 +75,7 @@ void main() {
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.isResolvedToken, isTrue);
+    check(api.isResolvedToken).isTrue();
   });
 
   test('isResolvedToken gives correct result for a pseudo-token', () {
@@ -80,7 +84,7 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.isResolvedToken, isFalse);
+    check(returnType.isResolvedToken).isFalse();
   });
 
   test('No attributes for a pseudo-token', () {
@@ -89,7 +93,7 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.customAttributes.length, isZero);
+    check(returnType.customAttributes).isEmpty();
   });
 
   test('Functions can correctly return an int type', () {
@@ -98,8 +102,8 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.int32Type));
-    expect(returnType.typeIdentifier.typeArg, isNull);
+    check(returnType.typeIdentifier.baseType).equals(BaseType.int32Type);
+    check(returnType.typeIdentifier.typeArg).isNull();
   });
 
   test('LPWSTR parameters are handled correctly', () {
@@ -107,22 +111,23 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.parameters.length, equals(1));
+    check(api.parameters.length).equals(1);
     final param = api.parameters.first;
 
-    expect(param.name, equals('param0'));
-    expect(param.sequence, equals(1));
-    expect(param.typeIdentifier.name, endsWith('PWSTR'));
+    check(param.name).equals('param0');
+    check(param.sequence).equals(1);
+    check(param.typeIdentifier.name).endsWith('PWSTR');
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(param.typeIdentifier.typeArg, isNull);
+    check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('Signature blob is correct', () {
     final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
-    expect(api.signatureBlob.sublist(0, 4), equals([0x00, 0x01, 0x08, 0x11]));
+    check(api.signatureBlob.sublist(0, 4))
+        .deepEquals(Uint8List.fromList([0x00, 0x01, 0x08, 0x11]));
   });
 
   test('Unicode string params are correctly marked', () {
@@ -130,11 +135,11 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.parameters.length, equals(1));
+    check(api.parameters.length).equals(1);
     final param = api.parameters.first;
 
-    expect(param.name, equals('param0'));
-    expect(param.typeIdentifier.name, endsWith('PWSTR'));
+    check(param.name).equals('param0');
+    check(param.typeIdentifier.name).endsWith('PWSTR');
   });
 
   test('ANSI string params are correctly marked', () {
@@ -142,11 +147,11 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceA')!;
 
-    expect(api.parameters.length, equals(1));
+    check(api.parameters.length).equals(1);
     final param = api.parameters.first;
 
-    expect(param.name, equals('param0'));
-    expect(param.typeIdentifier.name, endsWith('PSTR'));
+    check(param.name).equals('param0');
+    check(param.typeIdentifier.name).endsWith('PSTR');
   });
 
   test('Returned structs like LPRECT have correct param width', () {
@@ -154,18 +159,18 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('UnionRect')!;
 
-    expect(api.parameters.length, equals(3));
+    check(api.parameters.length).equals(3);
 
-    expect(api.parameters[0].name, equals('lprcDst'));
-    expect(api.parameters[1].name, equals('lprcSrc1'));
-    expect(api.parameters[2].name, equals('lprcSrc2'));
+    check(api.parameters[0].name).equals('lprcDst');
+    check(api.parameters[1].name).equals('lprcSrc1');
+    check(api.parameters[2].name).equals('lprcSrc2');
 
-    expect(api.parameters[0].typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
-    expect(api.parameters[1].typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
-    expect(api.parameters[2].typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
+    check(api.parameters[0].typeIdentifier.baseType)
+        .equals(BaseType.pointerTypeModifier);
+    check(api.parameters[1].typeIdentifier.baseType)
+        .equals(BaseType.pointerTypeModifier);
+    check(api.parameters[2].typeIdentifier.baseType)
+        .equals(BaseType.pointerTypeModifier);
   });
 
   test('Structs like RECT have the correct type args', () {
@@ -173,12 +178,12 @@ void main() {
     final typedef = scope.findTypeDef('Windows.Win32.Graphics.Gdi.Apis')!;
     final api = typedef.findMethod('UnionRect')!;
 
-    expect(api.parameters.first.name, equals('lprcDst'));
-    expect(api.parameters.first.typeIdentifier.baseType,
-        equals(BaseType.pointerTypeModifier));
+    check(api.parameters.first.name).equals('lprcDst');
+    check(api.parameters.first.typeIdentifier.baseType)
+        .equals(BaseType.pointerTypeModifier);
 
-    expect(api.parameters.first.typeIdentifier.typeArg, isNotNull);
-    expect(api.parameters.first.typeIdentifier.typeArg?.name, endsWith('RECT'));
+    check(api.parameters.first.typeIdentifier.typeArg).isNotNull();
+    check(api.parameters.first.typeIdentifier.typeArg!.name).endsWith('RECT');
   });
 
   test('DWORD typedefs like COLORREF have the correct param type', () {
@@ -187,13 +192,13 @@ void main() {
     final api = typedef.findMethod('SetBkColor')!;
     final colorParam = api.parameters.last;
 
-    expect(colorParam.name, equals('color'));
-    expect(
-        colorParam.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(colorParam.typeIdentifier.type?.name,
-        equals('Windows.Win32.Foundation.COLORREF'));
-    expect(colorParam.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
-        equals(BaseType.uint32Type));
+    check(colorParam.name).equals('color');
+    check(colorParam.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(colorParam.typeIdentifier.type?.name)
+        .equals('Windows.Win32.Foundation.COLORREF');
+    check(colorParam.typeIdentifier.type?.fields[0].typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
   });
 
   test('DWORD typedefs like COLORREF have the correct return type', () {
@@ -202,12 +207,12 @@ void main() {
     final api = typedef.findMethod('SetBkColor')!;
     final returnType = api.returnType;
 
-    expect(
-        returnType.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(returnType.typeIdentifier.type?.name,
-        equals('Windows.Win32.Foundation.COLORREF'));
-    expect(returnType.typeIdentifier.type?.fields[0].typeIdentifier.baseType,
-        equals(BaseType.uint32Type));
+    check(returnType.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(returnType.typeIdentifier.type?.name)
+        .equals('Windows.Win32.Foundation.COLORREF');
+    check(returnType.typeIdentifier.type?.fields[0].typeIdentifier.baseType)
+        .equals(BaseType.uint32Type);
   });
 
   test('HANDLE-style parameters have the correct type', () {
@@ -217,10 +222,10 @@ void main() {
     final api = typedef.findMethod('UnregisterHotKey')!;
     final param = api.parameters.first;
 
-    expect(param.name, endsWith('hWnd'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(param.typeIdentifier.name, endsWith('HWND'));
-    expect(param.typeIdentifier.typeArg, isNull);
+    check(param.name).endsWith('hWnd');
+    check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(param.typeIdentifier.name).endsWith('HWND');
+    check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('LPHANDLE-style parameters have the correct type', () {
@@ -230,15 +235,15 @@ void main() {
     final api = typedef.findMethod('CascadeWindows')!;
     final param = api.parameters.last;
 
-    expect(param.name, endsWith('lpKids'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
-    expect(param.typeIdentifier.name, isEmpty);
-    expect(param.typeIdentifier.typeArg, isNotNull);
+    check(param.name).endsWith('lpKids');
+    check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
+    check(param.typeIdentifier.name).isEmpty();
+    check(param.typeIdentifier.typeArg).isNotNull();
 
     final arg = param.typeIdentifier.typeArg!;
-    expect(arg.baseType, equals(BaseType.valueTypeModifier));
-    expect(arg.name, endsWith('HWND'));
-    expect(arg.typeArg, isNull);
+    check(arg.baseType).equals(BaseType.valueTypeModifier);
+    check(arg.name).endsWith('HWND');
+    check(arg.typeArg).isNull();
   });
 
   test('Character parameters have the correct type', () {
@@ -247,8 +252,8 @@ void main() {
     final api = typedef.findMethod('FillConsoleOutputCharacterW')!;
     final param = api.parameters[1];
 
-    expect(param.name, equals('cCharacter'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.charType));
+    check(param.name).equals('cCharacter');
+    check(param.typeIdentifier.baseType).equals(BaseType.charType);
   });
 
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
@@ -257,8 +262,8 @@ void main() {
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
     final param = api.parameters.first;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
+    check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(param.typeIdentifier.name).endsWith('HPOWERNOTIFY');
   });
 
   test('GetActiveObject REFCLSID has the correct parameter type', () {
@@ -267,11 +272,11 @@ void main() {
     final api = typedef.findMethod('GetActiveObject')!;
     final param = api.parameters.first;
 
-    expect(param.name, equals('rclsid'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
-    expect(param.typeIdentifier.typeArg?.name, endsWith('System.Guid'));
-    expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.valueTypeModifier));
+    check(param.name).equals('rclsid');
+    check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
+    check(param.typeIdentifier.typeArg!.name).endsWith('System.Guid');
+    check(param.typeIdentifier.typeArg?.baseType)
+        .equals(BaseType.valueTypeModifier);
   });
 
   test('APIs with empty parameters have an accurate return type', () {
@@ -281,7 +286,7 @@ void main() {
     final api = typedef.findMethod('CountClipboardFormats')!;
     final returnType = api.returnType;
 
-    expect(returnType.typeIdentifier.baseType, equals(BaseType.int32Type));
+    check(returnType.typeIdentifier.baseType).equals(BaseType.int32Type);
   });
 
   test('Double pointer is interpreted correctly', () {
@@ -291,12 +296,11 @@ void main() {
     final api = typedef.findMethod('CredReadW')!;
     final param = api.parameters.last;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.pointerTypeModifier));
-    expect(param.typeIdentifier.typeArg, isNotNull);
-    expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.pointerTypeModifier));
-    expect(
-        param.typeIdentifier.typeArg?.typeArg?.name, endsWith('CREDENTIALW'));
+    check(param.typeIdentifier.baseType).equals(BaseType.pointerTypeModifier);
+    check(param.typeIdentifier.typeArg).isNotNull();
+    check(param.typeIdentifier.typeArg?.baseType)
+        .equals(BaseType.pointerTypeModifier);
+    check(param.typeIdentifier.typeArg!.typeArg!.name).endsWith('CREDENTIALW');
   });
 
   test('HRESULT return values are generated correctly', () {
@@ -306,9 +310,9 @@ void main() {
     final api = typedef.findMethod('GetIntegratedDisplaySize')!;
     final returnType = api.returnType;
 
-    expect(
-        returnType.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(returnType.typeIdentifier.name, endsWith('HRESULT'));
+    check(returnType.typeIdentifier.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(returnType.typeIdentifier.name).endsWith('HRESULT');
   });
 
   test('IUnknown parameters are generated correctly', () {
@@ -317,8 +321,8 @@ void main() {
     final api = typedef.findMethod('CoSetProxyBlanket')!;
     final param = api.parameters.first;
 
-    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
-    expect(param.typeIdentifier.name, endsWith('IUnknown'));
+    check(param.typeIdentifier.baseType).equals(BaseType.classTypeModifier);
+    check(param.typeIdentifier.name).endsWith('IUnknown');
   });
 
   test('Callback functions are generated correctly', () {
@@ -327,10 +331,10 @@ void main() {
     final api = typedef.findMethod('EnumFontFamiliesExW')!;
     final param = api.parameters[2]; // FONTENUMPROCW
 
-    expect(param.name, equals('lpProc'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
-    expect(param.typeIdentifier.name, endsWith('FONTENUMPROCW'));
-    expect(param.typeIdentifier.typeArg, isNull);
+    check(param.name).equals('lpProc');
+    check(param.typeIdentifier.baseType).equals(BaseType.classTypeModifier);
+    check(param.typeIdentifier.name).endsWith('FONTENUMPROCW');
+    check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('Callback functions are generated correctly 2', () {
@@ -340,11 +344,11 @@ void main() {
     final api = typedef.findMethod('SymEnumSymbolsW')!;
     final param = api.parameters[3]; // PSYM_ENUMERATESYMBOLS_CALLBACKW
 
-    expect(param.name, equals('EnumSymbolsCallback'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.classTypeModifier));
-    expect(
-        param.typeIdentifier.name, endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW'));
-    expect(param.typeIdentifier.typeArg, isNull);
+    check(param.name).equals('EnumSymbolsCallback');
+    check(param.typeIdentifier.baseType).equals(BaseType.classTypeModifier);
+    check(param.typeIdentifier.name)
+        .endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW');
+    check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('Constants are accessible from metadata', () {
@@ -352,7 +356,7 @@ void main() {
     final typedef =
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
     final constants = typedef.fields;
-    expect(constants.length, greaterThan(100));
+    check(constants.length).isGreaterThan(100);
   });
 
   test('A given literal constant can be read', () {
@@ -361,7 +365,7 @@ void main() {
         scope.findTypeDef('Windows.Win32.UI.WindowsAndMessaging.Apis')!;
     final wmPaint =
         typedef.fields.firstWhere((c) => c.name.endsWith('WM_PAINT'));
-    expect(wmPaint.value, equals(15)); // winuser.h: #define WM_PAINT 0x000F
+    check(wmPaint.value).equals(15); // winuser.h: #define WM_PAINT 0x000F
   });
 
   test('Naked structs are generated correctly', () {
@@ -370,17 +374,17 @@ void main() {
     final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
     final param = api.parameters.first;
 
-    expect(param.name, equals('lpAttributeList'));
-    expect(param.typeIdentifier.baseType, equals(BaseType.valueTypeModifier));
-    expect(param.typeIdentifier.name, endsWith('LPPROC_THREAD_ATTRIBUTE_LIST'));
-    expect(param.typeIdentifier.typeArg, isNull);
+    check(param.name).equals('lpAttributeList');
+    check(param.typeIdentifier.baseType).equals(BaseType.valueTypeModifier);
+    check(param.typeIdentifier.name).endsWith('LPPROC_THREAD_ATTRIBUTE_LIST');
+    check(param.typeIdentifier.typeArg).isNull();
   });
 
   test('Enumerations present in Win32 metadata', () {
     final scope = MetadataStore.getWin32Scope();
     final enums = scope.enums;
 
-    expect(enums.length, greaterThan(100));
+    check(enums.length).isGreaterThan(100);
   });
 
   test('Enumerations contain correct entries', () {
@@ -388,7 +392,7 @@ void main() {
     final ropCode =
         scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
 
-    expect(ropCode.fields.length, equals(18));
+    check(ropCode.fields.length).equals(18);
   });
 
   test('A specific enumeration contains expected constants', () {
@@ -396,7 +400,7 @@ void main() {
     final ropCode =
         scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
 
-    expect(ropCode.findField('SRCCOPY')?.value, equals(0x00CC0020));
+    check(ropCode.findField('SRCCOPY')?.value).equals(0x00CC0020);
   });
 
   test('Enumerations are typed appropriately in functions', () {
@@ -405,8 +409,8 @@ void main() {
     final api = typedef.findMethod('CreateDIBitmap')!;
     final param = api.parameters.last;
 
-    expect(param.name, equals('iUsage'));
-    expect(param.typeIdentifier.type?.parent?.name, equals('System.Enum'));
+    check(param.name).equals('iUsage');
+    check(param.typeIdentifier.type?.parent?.name).equals('System.Enum');
   });
 
   test('Pointers to enumerations are typed appropriately in functions', () {
@@ -415,11 +419,11 @@ void main() {
     final api = typedef.findMethod('GetNamedPipeInfo')!;
     final param = api.parameters[1];
 
-    expect(param.name, equals('lpFlags'));
-    expect(param.typeIdentifier.typeArg?.baseType,
-        equals(BaseType.valueTypeModifier));
-    expect(param.typeIdentifier.typeArg?.type?.parent?.name,
-        equals('System.Enum'));
+    check(param.name).equals('lpFlags');
+    check(param.typeIdentifier.typeArg?.baseType)
+        .equals(BaseType.valueTypeModifier);
+    check(param.typeIdentifier.typeArg?.type?.parent?.name)
+        .equals('System.Enum');
   });
 
   test('Get properties are appropriately marked', () {
@@ -427,21 +431,22 @@ void main() {
     final typedef = scope
         .findTypeDef('Windows.Win32.Networking.NetworkListManager.INetwork')!;
     final api = typedef.findMethod('get_IsConnectedToInternet');
-    expect(api?.isGetProperty, isTrue);
+    check(api).isNotNull();
+    check(api!.isGetProperty).isTrue();
   });
 
   test('Delegates are appropriately marked', () {
     final scope = MetadataStore.getWin32Scope();
     final delegate =
         scope.findTypeDef('Windows.Win32.Graphics.Gdi.MFENUMPROC')!;
-    expect(delegate.isDelegate, isTrue);
+    check(delegate.isDelegate).isTrue();
   });
 
   test('Non-delegates are appropriately marked', () {
     final scope = MetadataStore.getWin32Scope();
     final notADelegate =
         scope.findTypeDef('Windows.Win32.System.SystemServices.Apis')!;
-    expect(notADelegate.isDelegate, isFalse);
+    check(notADelegate.isDelegate).isFalse();
   });
 
   test('Delegates are appropriately exposed', () {
@@ -452,55 +457,55 @@ void main() {
     final api = delegate.findMethod('Invoke')!;
     final param = api.parameters.first;
 
-    expect(param.name, equals('hdc'));
+    check(param.name).equals('hdc');
   });
 
   test('Scope contains an expected quantity of delegates', () {
     final scope = MetadataStore.getWin32Scope();
-    expect(scope.delegates.length, greaterThan(1000));
+    check(scope.delegates.length).isGreaterThan(1000);
   });
 
   test('Packing instructions are available', () {
     final scope = MetadataStore.getWin32Scope();
     final packedStruct =
         scope.findTypeDef('Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER')!;
-    expect(packedStruct.classLayout.packingAlignment, equals(2));
-    expect(packedStruct.classLayout.minimumSize, isZero);
+    check(packedStruct.classLayout.packingAlignment).equals(2);
+    check(packedStruct.classLayout.minimumSize).equals(0);
   });
   test('Packing instructions are available 2', () {
     final scope = MetadataStore.getWin32Scope();
     final packedStruct =
         scope.findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_QUERY_SERVICE')!;
-    expect(packedStruct.classLayout.packingAlignment, equals(1));
-    expect(packedStruct.classLayout.minimumSize, isZero);
+    check(packedStruct.classLayout.packingAlignment).equals(1);
+    check(packedStruct.classLayout.minimumSize).equals(0);
   });
 
   test('Packing instructions are unavailable for an unpacked class', () {
     final scope = MetadataStore.getWin32Scope();
     final packedStruct = scope
         .findTypeDef('Windows.Win32.Devices.Bluetooth.BTH_RADIO_IN_RANGE')!;
-    expect(packedStruct.classLayout.packingAlignment, isNull);
-    expect(packedStruct.classLayout.minimumSize, isNull);
+    check(packedStruct.classLayout.packingAlignment).isNull();
+    check(packedStruct.classLayout.minimumSize).isNull();
   });
 
   test('No crash when calling GetClassLayout on an enum', () {
     final scope = MetadataStore.getWin32Scope();
     final packedStruct =
         scope.findTypeDef('Windows.Win32.UI.Shell.KNOWN_FOLDER_FLAG')!;
-    expect(packedStruct.classLayout.packingAlignment, isNull);
-    expect(packedStruct.classLayout.minimumSize, isNull);
+    check(packedStruct.classLayout.packingAlignment).isNull();
+    check(packedStruct.classLayout.minimumSize).isNull();
   });
 
   test('Attributes for an interface', () {
     final scope = MetadataStore.getWin32Scope();
     final interface =
         scope.findTypeDef('Windows.Win32.System.WinRT.IActivationFactory')!;
-    expect(interface.customAttributes.length, equals(2));
-    expect(interface.customAttributes.map((attr) => attr.name),
-        contains('Windows.Win32.Interop.SupportedOSPlatformAttribute'));
+    check(interface.customAttributes.length).equals(2);
+    check(interface.customAttributes.map((attr) => attr.name))
+        .contains('Windows.Win32.Interop.SupportedOSPlatformAttribute');
 
     final supportedOS = interface.attributeAsString(
         'Windows.Win32.Interop.SupportedOSPlatformAttribute');
-    expect(supportedOS, equals('windows8.0'));
+    check(supportedOS).equals('windows8.0');
   });
 }
