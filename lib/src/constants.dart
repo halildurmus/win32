@@ -7437,7 +7437,35 @@ class DIALOG_DPI_CHANGE_BEHAVIORS {
 }
 
 // -----------------------------------------------------------------------------
-/// Bluetooth constants & enumerations
+// Display device constants
+// -----------------------------------------------------------------------------
+
+/// DISPLAY_DEVICE_ACTIVE specifies whether a monitor is presented as being "on"
+/// by the respective GDI view.
+const DISPLAY_DEVICE_ACTIVE = 0x00000001;
+
+/// The primary desktop is on the device. For a system with a single display
+/// card, this is always set. For a system with multiple display cards, only one
+/// device can have this set.
+const DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
+
+/// Represents a pseudo device used to mirror application drawing for remoting
+/// or other purposes. An invisible pseudo monitor is associated with this
+/// device. For example, NetMeeting uses it. Note that GetSystemMetrics
+/// (SM_MONITORS) only accounts for visible display monitors.
+const DISPLAY_DEVICE_MIRRORING_DRIVER = 0x00000008;
+
+/// The device is VGA compatible.
+const DISPLAY_DEVICE_VGA_COMPATIBLE = 0x00000010;
+
+/// The device is removable; it cannot be the primary display.
+const DISPLAY_DEVICE_REMOVABLE = 0x00000020;
+
+/// The device has more display modes than its output devices support.
+const DISPLAY_DEVICE_MODESPRUNED = 0x08000000;
+
+// -----------------------------------------------------------------------------
+// Bluetooth constants & enumerations
 // -----------------------------------------------------------------------------
 
 /// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported

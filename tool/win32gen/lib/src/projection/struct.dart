@@ -88,6 +88,9 @@ class StructProjection {
       _packingAlignment ??= calculatePackingAlignment(typeDef);
 
   int calculatePackingAlignment(TypeDef typeDef) {
+    // Tokens like System.Guid have no packing alignment.
+    if (typeDef.token == 0) return 0;
+
     var alignment =
         typeDef.classLayout.packingAlignment ?? 0xFF; // marker value
 

@@ -5,24 +5,25 @@ import 'package:win32/win32.dart';
 
 import 'piece.dart';
 
-class DrawEngine {
-  /// handle to DC
-  int hdc;
+class Canvas {
+  /// Handle to DC
+  final int hdc;
 
-  /// handle to window
-  int hwnd;
+  /// Handle to window
+  final int hwnd;
 
-  /// rectangle for drawing
+  /// Rectangle for drawing. This will last for the lifetime of the app and
+  /// memory will be released at app termination.
   final rect = calloc<RECT>();
 
-  /// level width
-  int width;
+  /// Level width
+  final int width;
 
-  /// level height
-  int height;
+  /// Level height
+  final int height;
 
-  /// Initiate the DrawEngine
-  DrawEngine(this.hdc, this.hwnd,
+  /// Initiate the drawing canvas
+  Canvas(this.hdc, this.hwnd,
       [int pxPerBlock = 25, this.width = 10, this.height = 20]) {
     GetClientRect(hwnd, rect);
 
@@ -42,10 +43,11 @@ class DrawEngine {
 
   void drawBlock(int x, int y, int color) {
     final hBrush = CreateSolidBrush(color);
-    rect.ref.left = x;
-    rect.ref.right = x + 1;
-    rect.ref.top = y;
-    rect.ref.bottom = y + 1;
+    rect.ref
+      ..left = x
+      ..right = x + 1
+      ..top = y
+      ..bottom = y + 1;
 
     FillRect(hdc, rect, hBrush);
 
@@ -58,47 +60,37 @@ class DrawEngine {
 
   void drawInterface() {
     final hBrush = CreateSolidBrush(RGB(70, 70, 70));
-    rect.ref.top = height;
-    rect.ref.left = width;
-    rect.ref.bottom = 0;
-    rect.ref.right = width + 8;
+    rect.ref
+      ..top = height
+      ..left = width
+      ..bottom = 0
+      ..right = width + 8;
     FillRect(hdc, rect, hBrush);
     DeleteObject(hBrush);
   }
 
   void drawText(String text, int x, int y) {
-    final textPtr = TEXT(text);
-    TextOut(hdc, x, y, textPtr, text.length);
-    free(textPtr);
+    final lpString = text.toNativeUtf16();
+    TextOut(hdc, x, y, lpString, text.length);
+    free(lpString);
   }
 
-  void drawScore(int score, int x, int y) {
-    final scoreText = 'Score: $score';
-    final scoreTextPtr = TEXT(scoreText);
-
+  void drawTextOpaque(String text, int x, int y) {
     SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, scoreTextPtr, scoreText.length);
+    drawText(text, x, y);
     SetBkMode(hdc, TRANSPARENT);
-
-    free(scoreTextPtr);
   }
 
-  void drawSpeed(int speed, int x, int y) {
-    final speedText = 'Speed: $speed';
-    final speedTextPtr = TEXT(speedText);
+  void drawScore(int score, int x, int y) =>
+      drawTextOpaque('Score: $score', x, y);
 
-    SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, speedTextPtr, speedText.length);
-    SetBkMode(hdc, TRANSPARENT);
-
-    free(speedTextPtr);
-  }
+  void drawSpeed(int speed, int x, int y) =>
+      drawTextOpaque('Speed: $speed', x, y);
 
   void drawNextPiece(Piece piece, int x, int y) {
     const nextText = 'Next:';
-    final nextTextPtr = TEXT(nextText);
 
-    TextOut(hdc, x, y + 5, nextTextPtr, nextText.length);
+    drawText(nextText, x, y + 5);
     final color = piece.color;
 
     // Draw the piece in a 4x4 square area
@@ -111,7 +103,5 @@ class DrawEngine {
         }
       }
     }
-
-    free(nextTextPtr);
   }
 }

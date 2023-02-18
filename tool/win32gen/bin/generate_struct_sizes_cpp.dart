@@ -48,6 +48,7 @@ const header = '''
 #include <Shlwapi.h>
 #include <wincred.h>
 #include <wlanapi.h>
+#include <ws2bth.h>
 #include <Xinput.h>
 
 void main()

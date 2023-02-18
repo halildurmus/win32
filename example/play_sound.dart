@@ -6,6 +6,8 @@
 
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
+
 import 'package:win32/win32.dart';
 
 void main() {
@@ -17,7 +19,7 @@ void main() {
     print('WAV file missing.');
     exit(1);
   } else {
-    final pszLogonSound = TEXT(logonSound);
+    final pszLogonSound = logonSound.toNativeUtf16();
     final result = PlaySound(pszLogonSound, NULL, SND_FILENAME | SND_SYNC);
 
     if (result != TRUE) {

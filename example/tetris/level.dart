@@ -2,16 +2,16 @@ import 'dart:math' show max;
 
 import 'package:win32/win32.dart';
 
-import 'drawengine.dart';
+import 'canvas.dart';
 import 'piece.dart';
 import 'pieceset.dart';
 
 class Level {
-  late List<List<int>> board; // The canvas / drawing board
-  late DrawEngine de; // Does graphic rendering
+  List<List<int>> board = []; // The canvas / drawing board
+  Canvas engine; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece? current; // Current dropping piece
-  Piece? next; // Next piece
+  late Piece next; // Next piece
 
   int width; // Level width (in cells)
   int height; // Level height
@@ -24,7 +24,7 @@ class Level {
 
   // de: used to draw the level
   // width & height: level size in cells
-  Level(this.de, [this.width = 10, this.height = 20])
+  Level(this.engine, [this.width = 10, this.height = 20])
       : lastTime = 0,
         speed = 500,
         score = -1 {
@@ -37,7 +37,7 @@ class Level {
   void drawBoard() {
     for (var i = 0; i < width; i++) {
       for (var j = 0; j < height; j++) {
-        de.drawBlock(i, j, board[i][j]);
+        engine.drawBlock(i, j, board[i][j]);
       }
     }
   }
@@ -78,7 +78,7 @@ class Level {
     final color = piece.color;
 
     for (var i = 0; i < 4; i++) {
-      if (y! + apt![i].y > height - 1) continue;
+      if (y! + apt[i].y > height - 1) continue;
       board[x + apt[i].x][y + apt[i].y] = color;
     }
     return true;
@@ -135,7 +135,7 @@ class Level {
     final apt = piece.body;
     int x, y;
     for (var i = 0; i < 4; i++) {
-      x = posX + apt![i].x;
+      x = posX + apt[i].x;
       y = posY! + apt[i].y;
 
       if (x > width - 1 || y > height - 1) {
@@ -200,7 +200,7 @@ class Level {
     final apt = piece.body;
     int tmpX, tmpY;
     for (var i = 0; i < 4; i++) {
-      tmpX = apt![i].x + x;
+      tmpX = apt[i].x + x;
       tmpY = apt[i].y + y!;
       if (tmpX > width - 1 || tmpY > height - 1) {
         continue;
@@ -244,7 +244,7 @@ class Level {
     return rows;
   }
 
-  bool isGameOver() {
+  bool get isGameOver {
     // Exclude the current piece
     if (current != null) {
       clear(current!);
@@ -265,14 +265,14 @@ class Level {
 
   // Draw different kinds of info
   void drawSpeed() {
-    de.drawSpeed((500 - speed) ~/ 2, width + 1, 12);
+    engine.drawSpeed((500 - speed) ~/ 2, width + 1, 12);
   }
 
   void drawScore() {
-    de.drawScore(score, width + 1, 13);
+    engine.drawScore(score, width + 1, 13);
   }
 
   void drawNextPiece() {
-    de.drawNextPiece(next!, width + 1, 14);
+    engine.drawNextPiece(next, width + 1, 14);
   }
 }

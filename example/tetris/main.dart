@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'drawengine.dart';
+import 'canvas.dart';
 import 'game.dart';
 
 const PX_PER_BLOCK = 25; // Cell size in pixels
@@ -16,11 +16,12 @@ const GAME_SPEED = 33; // Update the game every GAME_SPEED ms (= 1000/fps)
 const TIMER_ID = 1;
 
 final hInstance = GetModuleHandle(nullptr);
+
 late Game game;
-late DrawEngine de;
+late Canvas canvas;
 
 void main() {
-  final szAppName = TEXT('Tetris');
+  final szAppName = 'Tetris'.toNativeUtf16();
 
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC
@@ -64,6 +65,8 @@ void main() {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  free(szAppName);
 }
 
 int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
@@ -76,8 +79,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_CREATE:
       hdc = GetDC(hwnd);
 
-      de = DrawEngine(hdc, hwnd, PX_PER_BLOCK);
-      game = Game(de);
+      canvas = Canvas(hdc, hwnd, PX_PER_BLOCK);
+      game = Game(canvas);
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
 
       ReleaseDC(hwnd, hdc);
