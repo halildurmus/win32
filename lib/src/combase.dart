@@ -26,6 +26,9 @@ typedef LPVTBL = Pointer<Pointer<IntPtr>>;
 class COMObject extends Struct {
   external LPVTBL lpVtbl;
 
+  /// Whether the [lpVtbl] is a null pointer.
+  bool get isNull => lpVtbl.address == 0;
+
   Pointer<IntPtr> get vtable => lpVtbl.value;
 
   /// Create an instance of a COM object using its class identifier, cast to the

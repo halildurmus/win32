@@ -29,7 +29,7 @@ class IUnknown implements Finalizable {
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr) {
-    if (ptr.ref.lpVtbl.address != 0) {
+    if (!ptr.ref.isNull) {
       _finalizer.attach(this, ptr.cast(),
           detach: this, externalSize: sizeOf<IntPtr>());
     }
