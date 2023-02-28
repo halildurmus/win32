@@ -58,6 +58,9 @@ class Scope {
   @override
   String toString() => name;
 
+  /// Get an enumerated list of typedefs for this scope.
+  Iterable<TypeDef> get typeDefs => _typedefs.values;
+
   /// Return the first typedef object matching the given name.
   ///
   /// Returns null if no typedefs match the name.
@@ -90,9 +93,6 @@ class Scope {
   /// Returns null if no typedefs match the token. Note that this does not
   /// resolve `TypeRef`s or `TypeSpec`s.
   TypeDef? findTypeDefByToken(int token) => _typedefs[token];
-
-  /// Get an enumerated list of typedefs for this scope.
-  Iterable<TypeDef> get typeDefs => _typedefs.values;
 
   void _populateTypeDefs() {
     using((Arena arena) {
@@ -146,6 +146,7 @@ class Scope {
     return modules;
   }
 
+  /// Get an enumerated list of assembly references in this scope.
   Iterable<AssemblyRef> _getAssemblyRefs() {
     final assemblies = <AssemblyRef>[];
     using((Arena arena) {
