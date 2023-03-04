@@ -87,7 +87,7 @@ class IUnknown implements Finalizable {
   ///
   /// Call this method only if you want to manually manage the lifetime of the
   /// object.
-  void detach() => IUnknown._finalizer.detach(this);
+  void detach() => _finalizer.detach(this);
 
   /// Cast an existing COM object to a specified interface.
   ///
@@ -96,6 +96,7 @@ class IUnknown implements Finalizable {
   Pointer<COMObject> toInterface(String iid) {
     final pIID = convertToIID(iid);
     final objectPtr = calloc<COMObject>();
+
     try {
       final hr = _queryInterface(pIID, objectPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);

@@ -73,9 +73,7 @@ Pointer<GUID> convertToIID(String strIID, {Allocator allocator = calloc}) {
 
   try {
     final hr = IIDFromString(lpszIID, iid);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
     return iid;
   } finally {
     free(lpszIID);
