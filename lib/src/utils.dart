@@ -134,6 +134,7 @@ int convertToHString(String string) {
     }
   } finally {
     free(stringPtr);
+    free(hString);
   }
 }
 
