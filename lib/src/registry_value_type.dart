@@ -10,65 +10,45 @@ import 'package:win32/win32.dart';
 enum RegistryValueType {
   /// Binary data in any form. This value is equivalent to the Windows API
   /// registry data type `REG_BINARY`.
-  binary,
+  binary(REG_BINARY),
 
   /// A 32-bit binary number. This value is equivalent to the Windows API
   /// registry data type `REG_DWORD`.
-  int32,
+  int32(REG_DWORD),
 
   /// A null-terminated string that contains unexpanded references to
   /// environment variables, such as %PATH%, that are expanded when the value is
   /// retrieved. This value is equivalent to the Windows API registry data type
   /// `REG_EXPAND_SZ`.
-  unexpandedString,
+  unexpandedString(REG_EXPAND_SZ),
 
   /// A null-terminated string that contains the target path of a symbolic link.
   /// This value is equivalent to the Windows API registry data type `REG_LINK`.
-  link,
+  link(REG_LINK),
 
   /// An array of null-terminated strings, terminated by two null characters.
   /// This value is equivalent to the Windows API registry data type
   /// `REG_MULTI_SZ`.
-  stringArray,
+  stringArray(REG_MULTI_SZ),
 
   /// No data type.
-  none,
+  none(REG_NONE),
 
   /// A 64-bit binary number. This value is equivalent to the Windows API
   /// registry data type `REG_QWORD`.
-  int64,
+  int64(REG_QWORD),
 
   /// A null-terminated string. This value is equivalent to the Windows API
   /// registry data type `REG_SZ`.
-  string,
+  string(REG_SZ),
 
-  /// An unsupported registry data type.
-  unknown;
+  /// An unknown type.
+  unknown(-1);
 
   /// Return the Win32 value that represents the stored type.
-  int get win32Value {
-    switch (this) {
-      case RegistryValueType.binary:
-        return REG_BINARY;
-      case RegistryValueType.int32:
-        return REG_DWORD;
-      case RegistryValueType.unexpandedString:
-        return REG_EXPAND_SZ;
-      case RegistryValueType.link:
-        return REG_LINK;
-      case RegistryValueType.stringArray:
-        return REG_MULTI_SZ;
-      case RegistryValueType.none:
-        return REG_NONE;
-      case RegistryValueType.int64:
-        return REG_QWORD;
-      case RegistryValueType.string:
-        return REG_SZ;
-      default:
-        throw ArgumentError.value(
-            RegistryValueType.unknown, 'Unknown values cannot be stored.');
-    }
-  }
+  final int win32Value;
+
+  const RegistryValueType(this.win32Value);
 
   /// Return a string representing the Win32 type stored.
   String get win32Type {
@@ -83,12 +63,12 @@ enum RegistryValueType {
         return 'REG_LINK';
       case RegistryValueType.stringArray:
         return 'REG_MULTI_SZ';
-      case RegistryValueType.none:
-        return 'REG_NONE';
       case RegistryValueType.int64:
         return 'REG_QWORD';
       case RegistryValueType.string:
         return 'REG_SZ';
+      case RegistryValueType.none:
+        return 'REG_NONE';
       default:
         return '';
     }
