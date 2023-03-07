@@ -5,15 +5,15 @@ repository: https://github.com/timsneath/win32_registry
 issue_tracker: https://github.com/timsneath/win32_registry/issues
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 platforms:
   windows:
 
 dependencies: 
-  ffi: '>=1.1.2 <3.0.0'
-  win32: '>=2.5.2 <4.0.0'
+  ffi: ^2.0.0
+  win32: ^4.0.0
 
 dev_dependencies:
-  lints: ^2.0.0
-  test: ^1.21.4
+  lints: ^2.0.1
+  test: ^1.23.1

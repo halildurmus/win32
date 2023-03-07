@@ -2,6 +2,7 @@
 
 - Add `recursive` named option to method `deleteKey()` of `RegistryKey` (thanks @Zekfad)
 - Use enhanced enums from Dart 2.17.
+- Update dependency constraints.
 
 ## 1.0.2
 
