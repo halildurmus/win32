@@ -1,3 +1,7 @@
+## 2.4.9
+
+- Update to Windows.Win32.winmd v47.0.14.4635.
+
 ## 2.4.8
 
 - Adopt `package:checks` for tests instead of `package:tests`.
