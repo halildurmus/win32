@@ -73,6 +73,14 @@ class TypeTuple {
           final arg =
               TypeTuple.fromSignature(signatureBlob.sublist(dataLength), scope);
           typeIdentifiers.add(arg.typeIdentifier);
+
+          // Keep unwrapping until there are no types left.
+          var typeIdentifier = arg.typeIdentifier.typeArg;
+          while (typeIdentifier != null) {
+            typeIdentifiers.add(typeIdentifier);
+            typeIdentifier = typeIdentifier.typeArg;
+          }
+
           dataLength += arg.offsetLength;
         }
 

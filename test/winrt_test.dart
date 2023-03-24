@@ -724,6 +724,28 @@ void main() {
     check(aaph.genericParams.length).equals(1);
   });
 
+  test('Generic parameter type like Foo<Bar<T>, Baz> can be parsed', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Devices.Sms.GetSmsMessagesOperation')!;
+    final putProgress = winTypeDef.findMethod('put_Progress')!;
+    check(putProgress.hasGenericParameters).isFalse();
+
+    final handler = putProgress.parameters.first;
+    check(handler.name).equals('handler');
+    check(handler.typeIdentifier.type).isNotNull();
+    check(handler.typeIdentifier.type!.name)
+        .endsWith('AsyncOperationProgressHandler`2');
+    check(handler.typeIdentifier.typeArg!.type).isNotNull();
+    check(handler.typeIdentifier.typeArg!.type!.name).endsWith('IVectorView`1');
+    check(handler.typeIdentifier.typeArg!.typeArg!.name)
+        .endsWith('ISmsMessage');
+    check(handler.typeIdentifier.typeArg!.typeArg!.typeArg!.baseType)
+        .equals(BaseType.int32Type);
+
+    final aoph = handler.typeIdentifier.type!;
+    check(aoph.genericParams.length).equals(2);
+  });
+
   test('Calendar factory interfaces are present', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
