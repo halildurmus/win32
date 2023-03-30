@@ -26,9 +26,9 @@ class CustomWindowButtonsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MoveWindow(
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Spacer(), WindowButtons()],
+        children: const [Spacer(), WindowButtons()],
       ),
     );
   }
