@@ -1,3 +1,8 @@
+## 1.0.3
+
+- Update dependencies
+- Add Dependabot
+
 ## 1.0.2
 
 - Add more documentation

@@ -14,10 +14,10 @@ class GamepadPage extends StatefulWidget {
   }
 
   @override
-  _GamepadPageState createState() => _GamepadPageState();
+  GamepadPageState createState() => GamepadPageState();
 }
 
-class _GamepadPageState extends State<GamepadPage>
+class GamepadPageState extends State<GamepadPage>
     with TickerProviderStateMixin {
   // This will fire with every frame painted.
   late final AnimationController _controller =

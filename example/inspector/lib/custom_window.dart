@@ -26,9 +26,9 @@ class CustomWindowButtonsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MoveWindow(
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [Spacer(), WindowButtons()],
+        children: [Spacer(), WindowButtons()],
       ),
     );
   }
@@ -46,10 +46,8 @@ class WindowButtons extends StatelessWidget {
       iconNormal: theme.inactiveColor,
       iconMouseDown: theme.inactiveColor,
       iconMouseOver: theme.inactiveColor,
-      mouseOver: ButtonThemeData.buttonColor(
-          theme.brightness, {ButtonStates.hovering}),
-      mouseDown: ButtonThemeData.buttonColor(
-          theme.brightness, {ButtonStates.pressing}),
+      mouseOver: ButtonThemeData.buttonColor(context, {ButtonStates.hovering}),
+      mouseDown: ButtonThemeData.buttonColor(context, {ButtonStates.pressing}),
     );
     final closeButtonColors = WindowButtonColors(
       mouseOver: Colors.red,

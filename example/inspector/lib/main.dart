@@ -27,7 +27,7 @@ class GamepadApp extends StatelessWidget {
       themeMode: WindowsSystemConfiguration.isDarkMode
           ? ThemeMode.dark
           : ThemeMode.light,
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      darkTheme: FluentThemeData(brightness: Brightness.dark),
       initialRoute: '/',
       routes: {'/': (_) => const InspectorPage()},
     );
@@ -38,10 +38,10 @@ class InspectorPage extends StatefulWidget {
   const InspectorPage({Key? key}) : super(key: key);
 
   @override
-  _InspectorPageState createState() => _InspectorPageState();
+  InspectorPageState createState() => InspectorPageState();
 }
 
-class _InspectorPageState extends State<InspectorPage> {
+class InspectorPageState extends State<InspectorPage> {
   int index = 0;
 
   @override
@@ -59,22 +59,21 @@ class _InspectorPageState extends State<InspectorPage> {
             items: [
               PaneItem(
                   icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 1')),
+                  title: const Text('Controller 1'),
+                  body: GamepadPage(controller: 0)),
               PaneItem(
                   icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 2')),
+                  title: const Text('Controller 2'),
+                  body: GamepadPage(controller: 1)),
+              PaneItem(
+                icon: const Icon(FluentIcons.game),
+                title: const Text('Controller 3'),
+                body: GamepadPage(controller: 2),
+              ),
               PaneItem(
                   icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 3')),
-              PaneItem(
-                  icon: const Icon(FluentIcons.game),
-                  title: const Text('Controller 4')),
-            ]),
-        content: NavigationBody(index: index, children: [
-          GamepadPage(controller: 0),
-          GamepadPage(controller: 1),
-          GamepadPage(controller: 2),
-          GamepadPage(controller: 3),
-        ]));
+                  title: const Text('Controller 4'),
+                  body: GamepadPage(controller: 3)),
+            ]));
   }
 }
