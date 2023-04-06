@@ -13,8 +13,15 @@ linter:
   rules:
     # Some additional lints we want to enforce
     always_declare_return_types: true
+    avoid_type_to_string: true
     cascade_invocations: true
+    comment_references: true
+    discarded_futures: true
     directives_ordering: true
+    invalid_case_patterns: true
+    leading_newlines_in_multiline_strings: true
+    literal_only_boolean_expressions: true
+    no_default_cases: true
     omit_local_variable_types: true
     prefer_const_constructors: true
     prefer_const_literals_to_create_immutables: true
@@ -23,9 +30,11 @@ linter:
     prefer_relative_imports: true
     sort_child_properties_last: true
     sort_unnamed_constructors_first: true
+    test_types_in_equals: true
     unawaited_futures: true
     unnecessary_lambdas: true
     unnecessary_parenthesis: true
+    unnecessary_statements: true
     use_super_parameters: true
 
     # This is a good lint, but
