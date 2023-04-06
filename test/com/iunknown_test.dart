@@ -22,6 +22,10 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final unknown = IUnknown(ptr);
+  test('Can instantiate IUnknown.queryInterface', () {
+    // ignore: deprecated_member_use_from_same_package
+    expect(unknown.queryInterface, isA<Function>());
+  });
   test('Can instantiate IUnknown.addRef', () {
     expect(unknown.addRef, isA<Function>());
   });
