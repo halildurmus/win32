@@ -66,7 +66,7 @@
 /// ```
 ///
 /// Automation interfaces and some COM methods take a different string type
-/// (`BSTR`). The Win32 package supplies a [BSTR] class which wraps the memory
+/// (`BSTR`). The Win32 package supplies a `BSTR` class which wraps the memory
 /// allocation functions needed to work with this string data type.
 library win32;
 

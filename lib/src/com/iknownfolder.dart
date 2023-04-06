@@ -28,7 +28,7 @@ const IID_IKnownFolder = '{3aa7af7e-9b36-420c-a8e3-f77d4674a488}';
 /// Exposes methods that allow an application to retrieve information about
 /// a known folder's category, type, GUID, pointer to an item identifier
 /// list (PIDL) value, redirection capabilities, and definition. It provides
-/// a method for the retrieval of a known folder's [IShellItem] object. It
+/// a method for the retrieval of a known folder's `IShellItem` object. It
 /// also provides methods to get or set the path of the known folder.
 ///
 /// {@category Interface}

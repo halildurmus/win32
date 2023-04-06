@@ -16,6 +16,7 @@ import 'com/iunknown.dart';
 import 'combase.dart';
 import 'constants.dart';
 import 'structs.g.dart';
+import 'win32/oleaut32.g.dart';
 
 // struct tagVARIANT
 //    {
