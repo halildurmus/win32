@@ -18,7 +18,7 @@ linter:
     comment_references: true
     discarded_futures: true
     directives_ordering: true
-    invalid_case_patterns: true
+    # invalid_case_patterns: true // Turn on when Dart 3 is stable
     leading_newlines_in_multiline_strings: true
     literal_only_boolean_expressions: true
     no_default_cases: true
