@@ -26,7 +26,7 @@ dependencies:
   # relationship between these two packages is tightly coupled, since this
   # package includes a specific version of the Win32 metadata, so we pin the
   # dependency by version to avoid surprising conflicts.
-  winmd: 2.4.8
+  winmd: ^2.4.9
 
   # Win32 itself
   win32: ^4.1.1
