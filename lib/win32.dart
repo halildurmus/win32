@@ -94,6 +94,9 @@ export 'src/utils.dart';
 export 'src/variant.dart';
 export 'src/winmd_constants.dart';
 
+// Windows Runtime helpers
+export 'src/winrt_helpers.dart';
+
 // Useful extension methods
 export 'src/extensions/dialogs.dart';
 export 'src/extensions/int_to_hexstring.dart';
