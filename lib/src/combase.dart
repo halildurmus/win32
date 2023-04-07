@@ -16,7 +16,7 @@ import 'utils.dart';
 import 'win32/ole32.g.dart';
 
 /// Alias for a Pointer to COM vtable.
-typedef LPVTBL = Pointer<Pointer<IntPtr>>;
+typedef VTablePointer = Pointer<Pointer<IntPtr>>;
 
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.
@@ -24,7 +24,7 @@ typedef LPVTBL = Pointer<Pointer<IntPtr>>;
 /// {@category Interface}
 /// {@category com}
 class COMObject extends Struct {
-  external LPVTBL lpVtbl;
+  external VTablePointer lpVtbl;
 
   /// Whether the [lpVtbl] is a null pointer.
   bool get isNull => lpVtbl.address == 0;
