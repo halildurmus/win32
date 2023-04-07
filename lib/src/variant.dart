@@ -33,12 +33,12 @@ import 'win32/oleaut32.g.dart';
 //            ...
 //    } ;
 
-class _VARIANT_Anonymous_3 extends Struct {
+sealed class _VARIANT_Anonymous_3 extends Struct {
   external Pointer pvRecord;
   external Pointer<COMObject> pRecInfo;
 }
 
-class _VARIANT_Anonymous_2 extends Union {
+sealed class _VARIANT_Anonymous_2 extends Union {
   @Int64()
   external int llVal;
   @Int32()
@@ -106,7 +106,7 @@ class _VARIANT_Anonymous_2 extends Union {
   external _VARIANT_Anonymous_3 __VARIANT_NAME_4;
 }
 
-class _VARIANT_Anonymous_1 extends Struct {
+sealed class _VARIANT_Anonymous_1 extends Struct {
   @Uint16()
   external int vt;
   @Uint16()
@@ -118,7 +118,7 @@ class _VARIANT_Anonymous_1 extends Struct {
   external _VARIANT_Anonymous_2 __VARIANT_NAME_3;
 }
 
-class _VARIANT_Anonymous_0 extends Union {
+sealed class _VARIANT_Anonymous_0 extends Union {
   external _VARIANT_Anonymous_1 __VARIANT_NAME_2;
   external DECIMAL decVal;
 }
@@ -130,7 +130,7 @@ class _VARIANT_Anonymous_0 extends Union {
 /// VARIANTs must be initialized with [VariantInit] before their use.
 ///
 /// {@category Struct}
-class VARIANT extends Struct {
+base class VARIANT extends Struct {
   external _VARIANT_Anonymous_0 __VARIANT_NAME_1;
 
   int get vt => __VARIANT_NAME_1.__VARIANT_NAME_2.vt;
@@ -404,7 +404,7 @@ class VARIANT extends Struct {
 /// property in a property set.
 ///
 /// {@category Struct}
-class PROPVARIANT extends Struct {
+base class PROPVARIANT extends Struct {
   @Uint16()
   external int vt;
   @Uint16()
