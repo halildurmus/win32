@@ -15,13 +15,19 @@ import 'macros.dart';
 import 'utils.dart';
 import 'win32/ole32.g.dart';
 
+/// Type alias that represents a Pointer to the COM v-table.
+typedef VTablePointer = Pointer<Pointer<IntPtr>>;
+
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.
 ///
 /// {@category Interface}
 /// {@category com}
 class COMObject extends Struct {
-  external Pointer<Pointer<IntPtr>> lpVtbl;
+  external VTablePointer lpVtbl;
+
+  /// Whether the [lpVtbl] is a null pointer.
+  bool get isNull => lpVtbl.address == 0;
 
   Pointer<IntPtr> get vtable => lpVtbl.value;
 
@@ -67,9 +73,7 @@ Pointer<GUID> convertToIID(String strIID, {Allocator allocator = calloc}) {
 
   try {
     final hr = IIDFromString(lpszIID, iid);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
     return iid;
   } finally {
     free(lpszIID);

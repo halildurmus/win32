@@ -20,6 +20,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+import 'utils.dart';
 import 'win32/ole32.g.dart';
 
 /// Represents an immutable GUID (globally unique identifier).
@@ -61,7 +62,7 @@ class Guid {
       CoCreateGuid(pGuid);
       return pGuid.toDartGuid();
     } finally {
-      calloc.free(pGuid);
+      free(pGuid);
     }
   }
 
@@ -110,6 +111,7 @@ class Guid {
     for (var i = 0; i < 16; i++) {
       pGUID[i] = bytes[i];
     }
+
     return pGUID.cast<GUID>();
   }
 
@@ -145,6 +147,7 @@ class Guid {
     for (var i = 0; i < 16; i++) {
       if (this.bytes[i] != other.bytes[i]) return false;
     }
+
     return true;
   }
 

@@ -5,7 +5,6 @@ demonstrate various aspects of invoking Windows APIs, including:
 - Building classic (Win32) desktop UI
 - Using callback functions with Win32 APIs
 - Invoking COM classes (both `IUnknown` and `IDispatch` interface types)
-- Accessing the Windows Runtime APIs
 - Integrating Windows code with Flutter
 
 Other examples of packages that use Win32 can be found on pub.dev, at the
@@ -78,18 +77,15 @@ following location:
 | `tetris\main.dart`    | Port of an open-source Tetris game to Dart                |
 | `window.dart`         | Enumerates open windows and basic window manipulation     |
 
-## COM and Windows Runtime APIs
+## COM APIs
 
 | Example               | Description                                               |
 | --------------------- | --------------------------------------------------------- |
-| `calendar.dart`       | Gets information about the calendar from a WinRT API      |
 | `com_context.dart`    | Shows interaction of Dart isolates and COM apartments     |
 | `com_demo.dart`       | Demonstrates COM object reference counting                |
-| `geolocation.dart`    | Retrieve geolocation coordinates via WinRT APIs           |
 | `guid.dart`           | Creates a globally unique identifier (GUID)               |
 | `idispatch.dart`      | Demonstrates calling a method using `IDispatch`           |
 | `winmd.dart`          | Interrogate Windows Runtime types                         |
-| `winrt_picker.dart`   | Demonstrates picking a file through a WinRT API           |
 | `wmi_perf.dart`       | Uses WMI to retrieve performance counters                 |
 | `wmi_wql.dart`        | Uses WMI to retrieve information using WQL                |
 

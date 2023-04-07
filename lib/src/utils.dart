@@ -124,16 +124,15 @@ String convertFromHString(int hstring) =>
 int convertToHString(String string) {
   final hString = calloc<HSTRING>();
   final stringPtr = string.toNativeUtf16();
+
   // Create a HSTRING representing the object
   try {
     final hr = WindowsCreateString(stringPtr, string.length, hString);
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    } else {
-      return hString.value;
-    }
+    if (FAILED(hr)) throw WindowsException(hr);
+    return hString.value;
   } finally {
     free(stringPtr);
+    free(hString);
   }
 }
 

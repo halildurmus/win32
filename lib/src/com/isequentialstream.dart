@@ -26,7 +26,7 @@ import 'iunknown.dart';
 const IID_ISequentialStream = '{0c733a30-2a1c-11ce-ade5-00aa0044773d}';
 
 /// The ISequentialStream interface supports simplified sequential access to
-/// stream objects. The [IStream] interface inherits its Read and Write
+/// stream objects. The `IStream` interface inherits its Read and Write
 /// methods from ISequentialStream.
 ///
 /// {@category Interface}

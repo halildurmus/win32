@@ -28,9 +28,9 @@ const IID_ISpellChecker2 = '{e7ed1c71-87f7-4378-a840-c9200dacee47}';
 
 /// Represents a particular spell checker for a particular language, with
 /// the added ability to remove words from the added words dictionary, or
-/// from the ignore list. The ISpellChecker2 can also be used to check text,
-/// get suggestions, update user dictionaries, and maintain options, as can
-/// [ISpellChecker] from which it is derived.
+/// from the ignore list. The `ISpellChecker2` can also be used to check
+/// text, get suggestions, update user dictionaries, and maintain options,
+/// as can ISpellChecker from which it is derived.
 ///
 /// {@category Interface}
 /// {@category com}

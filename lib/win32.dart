@@ -12,8 +12,8 @@
 /// that would be unlikely to be useful to a Dart or Flutter developer, this
 /// library is not intended to be exhaustive. Instead, we focus on the core
 /// Win32 APIs that are typically used for Windows development, along with
-/// Win32, COM and Windows Runtime APIs that are likely to be wrapped by a
-/// Flutter plugin author.
+/// Win32 and COM APIs that are likely to be wrapped by a Flutter plugin
+/// author.
 ///
 /// Win32 is at its heart a C-based API, and accordingly adopts the style and
 /// idioms of that language, including heavy usage of pointers, structs
@@ -66,7 +66,7 @@
 /// ```
 ///
 /// Automation interfaces and some COM methods take a different string type
-/// (`BSTR`). The Win32 package supplies a [BSTR] class which wraps the memory
+/// (`BSTR`). The Win32 package supplies a `BSTR` class which wraps the memory
 /// allocation functions needed to work with this string data type.
 library win32;
 
@@ -93,6 +93,9 @@ export 'src/types.dart';
 export 'src/utils.dart';
 export 'src/variant.dart';
 export 'src/winmd_constants.dart';
+
+// Windows Runtime helpers
+export 'src/winrt_helpers.dart';
 
 // Useful extension methods
 export 'src/extensions/dialogs.dart';

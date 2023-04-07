@@ -29,8 +29,10 @@ class IUnknown implements Finalizable {
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr) {
-    _finalizer.attach(this, ptr.cast(),
-        detach: this, externalSize: sizeOf<IntPtr>());
+    if (!ptr.ref.isNull) {
+      _finalizer.attach(this, ptr.cast(),
+          detach: this, externalSize: sizeOf<IntPtr>());
+    }
   }
 
   static final _ole32Lib = DynamicLibrary.open('ole32.dll');
@@ -76,14 +78,20 @@ class IUnknown implements Finalizable {
       .value
       .asFunction<int Function(Pointer)>()(ptr.ref.lpVtbl);
 
+  /// Detaches the object from the `NativeFinalizer`.
+  ///
+  /// Call this method only if you want to manually manage the lifetime of the
+  /// object.
+  void detach() => _finalizer.detach(this);
+
   /// Cast an existing COM object to a specified interface.
   ///
   /// Takes a string (typically a constant such as `IID_IModalWindow`) and does
-  /// a COM QueryInterface to return a reference to that interface. This method
-  /// reduces the boilerplate associated with calling `queryInterface` manually.
+  /// a COM QueryInterface to return a reference to that interface.
   Pointer<COMObject> toInterface(String iid) {
     final pIID = convertToIID(iid);
     final objectPtr = calloc<COMObject>();
+
     try {
       final hr = queryInterface(pIID, objectPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);

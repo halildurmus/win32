@@ -120,9 +120,11 @@ class ServerCommand extends Command<void> {
   }
 }
 
-void main(List<String> args) {
-  CommandRunner<void>('pipe', 'A demonstration of Win32 named pipes.')
-    ..addCommand(ClientCommand())
-    ..addCommand(ServerCommand())
-    ..run(args);
+void main(List<String> args) async {
+  final command =
+      CommandRunner<void>('pipe', 'A demonstration of Win32 named pipes.')
+        ..addCommand(ClientCommand())
+        ..addCommand(ServerCommand());
+
+  await command.run(args);
 }
