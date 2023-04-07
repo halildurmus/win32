@@ -15,7 +15,7 @@ import 'macros.dart';
 import 'utils.dart';
 import 'win32/ole32.g.dart';
 
-/// Alias for a Pointer to COM vtable.
+/// Type alias that represents a Pointer to the COM v-table.
 typedef VTablePointer = Pointer<Pointer<IntPtr>>;
 
 /// A representation of a generic COM object. All Dart COM objects inherit from

@@ -30,6 +30,3 @@ dependencies:
 
   # Win32 itself
   win32: ^4.1.1
-
-dependency_overrides:
-  win32: ^4.1.0
