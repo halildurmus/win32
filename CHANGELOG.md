@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Upgrade to Dart 3
+
 ## 1.0.3
 
 - Update dependencies
