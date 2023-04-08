@@ -4,8 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 class CustomWindowTitleSection extends StatelessWidget {
   final String appTitle;
 
-  const CustomWindowTitleSection({Key? key, required this.appTitle})
-      : super(key: key);
+  const CustomWindowTitleSection({super.key, required this.appTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +19,22 @@ class CustomWindowTitleSection extends StatelessWidget {
 
 class CustomWindowButtonsSection extends StatelessWidget {
   const CustomWindowButtonsSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MoveWindow(
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [Spacer(), WindowButtons()],
+        children: [Spacer(), WindowButtons()],
       ),
     );
   }
 }
 
 class WindowButtons extends StatelessWidget {
-  const WindowButtons({Key? key}) : super(key: key);
+  const WindowButtons({super.key});
 
   @override
   Widget build(BuildContext context) {

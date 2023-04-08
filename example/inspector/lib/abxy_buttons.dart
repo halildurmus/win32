@@ -2,10 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:win32_gamepad/win32_gamepad.dart';
 
 class ABXYButtons extends StatelessWidget {
-  const ABXYButtons({
-    Key? key,
-    required this.gamepad,
-  }) : super(key: key);
+  const ABXYButtons({super.key, required this.gamepad});
 
   final Gamepad gamepad;
 

@@ -18,7 +18,7 @@ void main() {
 }
 
 class GamepadApp extends StatelessWidget {
-  const GamepadApp({Key? key}) : super(key: key);
+  const GamepadApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class GamepadApp extends StatelessWidget {
 }
 
 class InspectorPage extends StatefulWidget {
-  const InspectorPage({Key? key}) : super(key: key);
+  const InspectorPage({super.key});
 
   @override
   InspectorPageState createState() => InspectorPageState();

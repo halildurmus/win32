@@ -5,8 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 class ThumbstickView extends StatelessWidget {
   final int x;
   final int y;
-  const ThumbstickView({Key? key, required this.x, required this.y})
-      : super(key: key);
+  const ThumbstickView({super.key, required this.x, required this.y});
 
   @override
   Widget build(BuildContext context) {

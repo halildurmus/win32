@@ -1,5 +1,7 @@
 import 'package:win32/win32.dart';
 
+import 'gamepad_capabilities.dart';
+
 /// The compass point represented by the directional pad.
 enum Direction {
   /// Left.

@@ -9,7 +9,7 @@ class GamepadPage extends StatefulWidget {
   final int controller;
   late final Gamepad gamepad;
 
-  GamepadPage({Key? key, required this.controller}) : super(key: key) {
+  GamepadPage({super.key, required this.controller}) {
     gamepad = Gamepad(controller);
   }
 
@@ -48,8 +48,7 @@ class GamepadStatusView extends StatelessWidget {
   final int controller;
 
   const GamepadStatusView(
-      {Key? key, required this.gamepad, required this.controller})
-      : super(key: key);
+      {super.key, required this.gamepad, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -157,10 +156,10 @@ class GamepadStatusView extends StatelessWidget {
 
 class GamepadConnectedView extends StatelessWidget {
   const GamepadConnectedView({
-    Key? key,
+    super.key,
     required this.gamepad,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final Gamepad gamepad;
   final int controller;
