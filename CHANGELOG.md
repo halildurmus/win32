@@ -1,3 +1,7 @@
+## 4.1.2
+
+- Fix missing export of crypt32 APIs
+
 ## 4.1.1
 
 - Convert acronyms in method/property names to lowercase (#649, @halildurmus)
@@ -37,6 +41,10 @@
 - Add APIs for processor / firmware information (#627, @timsneath)
 - Add APIs for shell file operations (#630, @timsneath)
 - Update upper Dart SDK constraint to explicitly support Dart 3
+
+## 3.1.4
+
+- Fix missing export of crypt32 APIs
 
 ## 3.1.3
 
