@@ -21,14 +21,14 @@ import 'package:win32/win32.dart';
 void main() {
   final ptr = calloc<COMObject>();
 
-  final unknown = IUnknown(ptr);
-  test('Can instantiate IUnknown.queryInterface', () {
-    expect(unknown.queryInterface, isA<Function>());
+  final inspectable = IInspectable(ptr);
+  test('Can instantiate IInspectable.getIids', () {
+    expect(inspectable.getIids, isA<Function>());
   });
-  test('Can instantiate IUnknown.addRef', () {
-    expect(unknown.addRef, isA<Function>());
+  test('Can instantiate IInspectable.getRuntimeClassName', () {
+    expect(inspectable.getRuntimeClassName, isA<Function>());
   });
-  test('Can instantiate IUnknown.release', () {
-    expect(unknown.release, isA<Function>());
+  test('Can instantiate IInspectable.getTrustLevel', () {
+    expect(inspectable.getTrustLevel, isA<Function>());
   });
 }

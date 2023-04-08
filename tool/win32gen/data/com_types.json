@@ -70,6 +70,7 @@
     "Windows.Win32.System.Com.IUri": "Exposes methods and properties used to parse and build Uniform Resource Identifiers (URIs).",
     "Windows.Win32.System.Ole.IEnumVARIANT": "Provides a method for enumerating a collection of variants, including heterogeneous collections of objects and intrinsic types. Callers of this interface do not need to know the specific type (or types) of the elements in the collection.",
     "Windows.Win32.System.Ole.IProvideClassInfo": "Provides access to the type information for an object's coclass entry in its type library.",
+    "Windows.Win32.System.WinRT.IInspectable": "Provides functionality required for all Windows Runtime classes.",
     "Windows.Win32.System.Wmi.IEnumWbemClassObject": "The IEnumWbemClassObject interface is used to enumerate Common Information Model (CIM) objects and is similar to a standard COM enumerator.",
     "Windows.Win32.System.Wmi.IWbemClassObject": "The IWbemClassObject interface contains and manipulates both class definitions and class object instances.",
     "Windows.Win32.System.Wmi.IWbemConfigureRefresher": "The IWbemConfigureRefresher interface is used by client code to add enumerators, objects, and nested refreshers into a refresher.",
