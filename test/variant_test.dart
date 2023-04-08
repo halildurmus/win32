@@ -169,8 +169,9 @@ void main() {
 
   test('BSTR allocation', () {
     const testString = 'This is a sample text string.';
-    final testStringPtr = TEXT(testString);
+    final testStringPtr = testString.toNativeUtf16();
     final bstr = SysAllocString(testStringPtr);
+
     expect(SysStringLen(bstr), equals(testString.length));
     expect(SysStringByteLen(bstr), equals(testString.length * 2));
 

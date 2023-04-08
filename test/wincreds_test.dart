@@ -12,16 +12,16 @@ void writeCredential(
     {required String credentialName,
     required String userName,
     required String password}) {
-  final userNamePtr = TEXT(userName);
-  final credNamePtr = TEXT(credentialName);
+  final pUserName = userName.toNativeUtf16();
+  final pCredName = credentialName.toNativeUtf16();
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
   final credential = calloc<CREDENTIAL>()
     ..ref.Type = CRED_TYPE_GENERIC
-    ..ref.TargetName = credNamePtr
+    ..ref.TargetName = pCredName
     ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..ref.UserName = userNamePtr
+    ..ref.UserName = pUserName
     ..ref.CredentialBlob = blob
     ..ref.CredentialBlobSize = examplePassword.length;
 
@@ -32,17 +32,17 @@ void writeCredential(
   } finally {
     free(blob);
     free(credential);
-    free(userNamePtr);
-    free(credNamePtr);
+    free(pUserName);
+    free(pCredName);
   }
 }
 
 String readCredential(String credentialName) {
   final credPointer = calloc<Pointer<CREDENTIAL>>();
-  final credNamePtr = TEXT(credentialName);
+  final pCredName = credentialName.toNativeUtf16();
 
   try {
-    if (CredRead(credNamePtr, CRED_TYPE_GENERIC, 0, credPointer) != TRUE) {
+    if (CredRead(pCredName, CRED_TYPE_GENERIC, 0, credPointer) != TRUE) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
 
@@ -54,19 +54,19 @@ String readCredential(String credentialName) {
   } finally {
     if (credPointer.value.address != 0) CredFree(credPointer.value);
     free(credPointer);
-    free(credNamePtr);
+    free(pCredName);
   }
 }
 
 void deleteCredential(String credentialName) {
-  final credNamePtr = TEXT(credentialName);
+  final pCredName = credentialName.toNativeUtf16();
 
   try {
-    if (CredDelete(credNamePtr, CRED_TYPE_GENERIC, 0) != TRUE) {
+    if (CredDelete(pCredName, CRED_TYPE_GENERIC, 0) != TRUE) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(credNamePtr);
+    free(pCredName);
   }
 }
 

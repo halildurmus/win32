@@ -6,6 +6,7 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 /// Return the current reference count.
@@ -21,7 +22,7 @@ int refCount(IUnknown unk) {
 }
 
 void main() {
-  final pTitle = TEXT('Dart Open File Dialog');
+  final pTitle = 'Dart Open File Dialog'.toNativeUtf16();
 
   // Initialize COM
   var hr = CoInitializeEx(
