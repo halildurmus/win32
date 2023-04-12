@@ -930,45 +930,6 @@ const RRF_SUBKEY_WOW6432KEY = 0x00020000;
 const RRF_WOW64_MASK = 0x00030000;
 const RRF_NOEXPAND = 0x10000000;
 const RRF_ZEROONFAILURE = 0x20000000;
-const REG_NONE = 0;
-const REG_SZ = 1;
-const REG_EXPAND_SZ = 2;
-const REG_BINARY = 3;
-const REG_DWORD = 4;
-const REG_DWORD_LITTLE_ENDIAN = 4;
-const REG_DWORD_BIG_ENDIAN = 5;
-const REG_LINK = 6;
-const REG_MULTI_SZ = 7;
-const REG_RESOURCE_LIST = 8;
-const REG_FULL_RESOURCE_DESCRIPTOR = 9;
-const REG_RESOURCE_REQUIREMENTS_LIST = 10;
-const REG_QWORD = 11;
-const REG_QWORD_LITTLE_ENDIAN = 11;
-const KEY_QUERY_VALUE = 0x0001;
-const KEY_SET_VALUE = 0x0002;
-const KEY_CREATE_SUB_KEY = 0x0004;
-const KEY_ENUMERATE_SUB_KEYS = 0x0008;
-const KEY_NOTIFY = 0x0010;
-const KEY_CREATE_LINK = 0x0020;
-const KEY_WOW64_32KEY = 0x0200;
-const KEY_WOW64_64KEY = 0x0100;
-const KEY_WOW64_RES = 0x0300;
-const KEY_READ = (STANDARD_RIGHTS_READ |
-        KEY_QUERY_VALUE |
-        KEY_ENUMERATE_SUB_KEYS |
-        KEY_NOTIFY) &
-    (~SYNCHRONIZE);
-const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
-    (~SYNCHRONIZE);
-const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
-const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
-        KEY_QUERY_VALUE |
-        KEY_SET_VALUE |
-        KEY_CREATE_SUB_KEY |
-        KEY_ENUMERATE_SUB_KEYS |
-        KEY_NOTIFY |
-        KEY_CREATE_LINK) &
-    (~SYNCHRONIZE);
 
 // -----------------------------------------------------------------------------
 // Display device constants that are used but not documented
