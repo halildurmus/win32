@@ -9134,6 +9134,130 @@ const DIREG_DRV = 0x00000002;
 const DIREG_BOTH = 0x00000004;
 
 // -----------------------------------------------------------------------------
+// Registry Key constants
+// -----------------------------------------------------------------------------
+
+/// No defined value type.
+const REG_NONE = 0;
+
+/// A null-terminated string. It's either a Unicode or an ANSI string, depending
+/// on whether you use the Unicode or ANSI functions.
+const REG_SZ = 1;
+
+/// A null-terminated string that contains unexpanded references to environment
+/// variables, for example, %PATH%. It's either a Unicode or an ANSI string,
+/// depending on whether you use the Unicode or ANSI functions
+const REG_EXPAND_SZ = 2;
+
+/// Binary data in any form.
+const REG_BINARY = 3;
+
+/// A 32-bit number.
+const REG_DWORD = 4;
+
+/// A 32-bit number in little-endian format. Windows is designed to run on
+/// little-endian computer architectures. Therefore, this value is defined as
+/// REG_DWORD in the Windows header files.
+const REG_DWORD_LITTLE_ENDIAN = 4;
+
+/// A 32-bit number in big-endian format. Some UNIX systems support big-endian
+/// architectures.
+const REG_DWORD_BIG_ENDIAN = 5;
+
+/// A null-terminated Unicode string that contains the target path of a symbolic
+/// link that was created by calling the RegCreateKeyEx function with
+/// REG_OPTION_CREATE_LINK.
+const REG_LINK = 6;
+
+/// A sequence of null-terminated strings, terminated by an empty string (\0).
+/// The following is an example: String1\0String2\0String3\0LastString\0\0. The
+/// first \0 terminates the first string, the second-from-last \0 terminates the
+/// last string, and the final \0 terminates the sequence. Note that the final
+/// terminator must be factored into the length of the string.
+const REG_MULTI_SZ = 7;
+
+/// A 64-bit number.
+const REG_QWORD = 11;
+
+/// A 64-bit number in little-endian format. Windows is designed to run on
+/// little-endian computer architectures. Therefore, this value is defined as
+/// REG_QWORD in the Windows header files.
+const REG_QWORD_LITTLE_ENDIAN = 11;
+
+/// Required to query the values of a registry key.
+const KEY_QUERY_VALUE = 0x0001;
+
+/// Required to create, delete, or set a registry value.
+const KEY_SET_VALUE = 0x0002;
+
+/// Required to create a subkey of a registry key.
+const KEY_CREATE_SUB_KEY = 0x0004;
+
+/// Required to enumerate the subkeys of a registry key.
+const KEY_ENUMERATE_SUB_KEYS = 0x0008;
+
+/// Required to request change notifications for a registry key or for subkeys
+/// of a registry key.
+const KEY_NOTIFY = 0x0010;
+
+/// Reserved for system use.
+const KEY_CREATE_LINK = 0x0020;
+
+/// Indicates that an application on 64-bit Windows should operate on the 32-bit
+/// registry view. This flag is ignored by 32-bit Windows.
+const KEY_WOW64_32KEY = 0x0200;
+
+/// Indicates that an application on 64-bit Windows should operate on the 64-bit
+/// registry view. This flag is ignored by 32-bit Windows.
+const KEY_WOW64_64KEY = 0x0100;
+
+/// Combines the STANDARD_RIGHTS_READ, KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS,
+/// and KEY_NOTIFY values.
+const KEY_READ = (STANDARD_RIGHTS_READ |
+        KEY_QUERY_VALUE |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY) &
+    (~SYNCHRONIZE);
+
+/// Combines the STANDARD_RIGHTS_WRITE, KEY_SET_VALUE, and KEY_CREATE_SUB_KEY
+/// access rights.
+const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
+    (~SYNCHRONIZE);
+
+/// Equivalent to KEY_READ.
+const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
+
+/// Combines the STANDARD_RIGHTS_REQUIRED, KEY_QUERY_VALUE, KEY_SET_VALUE,
+/// KEY_CREATE_SUB_KEY, KEY_ENUMERATE_SUB_KEYS, KEY_NOTIFY, and KEY_CREATE_LINK
+/// access rights.
+const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
+        KEY_QUERY_VALUE |
+        KEY_SET_VALUE |
+        KEY_CREATE_SUB_KEY |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY |
+        KEY_CREATE_LINK) &
+    (~SYNCHRONIZE);
+
+/// Notify the caller if a subkey is added or deleted.
+const REG_NOTIFY_CHANGE_NAME = 0x00000001;
+
+/// Notify the caller of changes to the attributes of the key, such as the
+/// security descriptor information.
+const REG_NOTIFY_CHANGE_ATTRIBUTES = 0x00000002;
+
+/// Notify the caller of changes to a value of the key. This can include adding
+/// or deleting a value, or changing an existing value.
+const REG_NOTIFY_CHANGE_LAST_SET = 0x00000004;
+
+/// Notify the caller of changes to the security descriptor of the key.
+const REG_NOTIFY_CHANGE_SECURITY = 0x00000008;
+
+/// Indicates that the lifetime of the registration must not be tied to the
+/// lifetime of the thread issuing the RegNotifyChangeKeyValue call.
+const REG_NOTIFY_THREAD_AGNOSTIC = 0x10000000;
+
+// -----------------------------------------------------------------------------
 // SetDisplayConfig constants
 // -----------------------------------------------------------------------------
 
