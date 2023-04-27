@@ -7,13 +7,6 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-// Dart 2.17 adds ABI-specfic integers and will enable us to replace this with
-// size_t, which is defined to UintPtr. For now, we need to keep this as a
-// signed integer.
-
-// ignore: camel_case_types
-typedef size_type = IntPtr;
-
 /* ******************************* CONSTANTS ******************************* */
 
 /// Possible values for the type specified in [FlutterDesktopTextureInfo].
@@ -26,8 +19,8 @@ abstract class FlutterDesktopTextureType {
 /* ******************************* CALLBACKS ******************************* */
 
 /// The callback expected as a response of a binary message.
-typedef FlutterDesktopBinaryReply = Pointer<
-    NativeFunction<Void Function(Pointer<Uint8>, size_type, Pointer)>>;
+typedef FlutterDesktopBinaryReply
+    = Pointer<NativeFunction<Void Function(Pointer<Uint8>, Size, Pointer)>>;
 
 /// Function pointer type for message handler callback registration.
 ///
@@ -50,8 +43,7 @@ typedef FlutterDesktopMessageCallback = Pointer<
 /// corresponding texture.
 typedef FlutterDesktopPixelBufferTextureCallback = Pointer<
     NativeFunction<
-        Pointer<FlutterDesktopPixelBuffer> Function(
-            size_type, size_type, Pointer)>>;
+        Pointer<FlutterDesktopPixelBuffer> Function(Size, Size, Pointer)>>;
 
 /// Registers a callback to be called when the plugin registrar is destroyed.
 typedef FlutterDesktopOnPluginRegistrarDestroyed = Pointer<
@@ -83,7 +75,7 @@ final class FlutterDesktopTextureRegistrar extends Opaque {}
 /// A message received from Flutter.
 final class FlutterDesktopMessage extends Struct {
   /// Size of this struct as created by Flutter.
-  @size_type()
+  @Size()
   external int struct_size;
 
   /// The name of the channel used for this message.
@@ -93,7 +85,7 @@ final class FlutterDesktopMessage extends Struct {
   external Pointer<Uint8> message;
 
   /// The length of `message`.
-  @size_type()
+  @Size()
   external int message_size;
 
   /// The response handle. If non-null, the receiver of this message must call
@@ -107,11 +99,11 @@ final class FlutterDesktopPixelBuffer extends Struct {
   external Pointer<Uint8> buffer;
 
   /// Width of the pixel buffer.
-  @size_type()
+  @Size()
   external int width;
 
   /// Height of the pixel buffer.
-  @size_type()
+  @Size()
   external int height;
 
   /// An optional callback that gets invoked when the `buffer` can be released.
@@ -195,7 +187,7 @@ class FlutterEngineLibrary {
   late final _FlutterDesktopMessengerSendPtr = _lookup<
       NativeFunction<
           Int32 Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
-              Pointer<Uint8>, size_type)>>('FlutterDesktopMessengerSend');
+              Pointer<Uint8>, Size)>>('FlutterDesktopMessengerSend');
   late final _FlutterDesktopMessengerSend =
       _FlutterDesktopMessengerSendPtr.asFunction<
           int Function(Pointer<FlutterDesktopMessenger>, Pointer<Int8>,
@@ -225,7 +217,7 @@ class FlutterEngineLibrary {
               Pointer<FlutterDesktopMessenger>,
               Pointer<Int8>,
               Pointer<Uint8>,
-              size_type,
+              Size,
               FlutterDesktopBinaryReply,
               Pointer)>>('FlutterDesktopMessengerSendWithReply');
   late final _FlutterDesktopMessengerSendWithReply =
@@ -255,7 +247,7 @@ class FlutterEngineLibrary {
               Pointer<FlutterDesktopMessenger>,
               Pointer<FlutterDesktopMessageResponseHandle>,
               Pointer<Uint8>,
-              size_type)>>('FlutterDesktopMessengerSendResponse');
+              Size)>>('FlutterDesktopMessengerSendResponse');
   late final _FlutterDesktopMessengerSendResponse =
       _FlutterDesktopMessengerSendResponsePtr.asFunction<
           void Function(
