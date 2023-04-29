@@ -14,24 +14,30 @@ class SaveFilePicker extends FileDialog {
 
     final fileDialog = FileSaveDialog.createInstance();
 
+    // Set dialog options
     final pfos = calloc<Uint32>();
-    var hr = fileDialog.getOptions(pfos);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    var options = pfos.value;
-    if (hidePinnedPlaces) options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
-    if (fileMustExist) options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
-    if (isDirectoryFixed) options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
-    if (forceFileSystemItems) {
-      options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+    try {
+      var hr = fileDialog.getOptions(pfos);
+      if (FAILED(hr)) throw WindowsException(hr);
+      var options = pfos.value;
+      if (fileMustExist) options |= FILEOPENDIALOGOPTIONS.FOS_FILEMUSTEXIST;
+      if (isDirectoryFixed) options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
+      if (hidePinnedPlaces) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
+      }
+      if (forceFileSystemItems) {
+        options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+      }
+      hr = fileDialog.setOptions(options);
+      if (FAILED(hr)) throw WindowsException(hr);
+    } finally {
+      free(pfos);
     }
-    hr = fileDialog.setOptions(options);
-    if (FAILED(hr)) throw WindowsException(hr);
 
     if (defaultExtension != null && defaultExtension!.isNotEmpty) {
       final pDefaultExtension = defaultExtension!.toNativeUtf16();
       try {
-        hr = fileDialog.setDefaultExtension(pDefaultExtension);
+        final hr = fileDialog.setDefaultExtension(pDefaultExtension);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pDefaultExtension);
@@ -41,7 +47,7 @@ class SaveFilePicker extends FileDialog {
     if (fileName.isNotEmpty) {
       final pFilename = fileName.toNativeUtf16();
       try {
-        hr = fileDialog.setFileName(pFilename);
+        final hr = fileDialog.setFileName(pFilename);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pFilename);
@@ -51,7 +57,7 @@ class SaveFilePicker extends FileDialog {
     if (fileNameLabel.isNotEmpty) {
       final pFileNameLabel = fileNameLabel.toNativeUtf16();
       try {
-        hr = fileDialog.setFileNameLabel(pFileNameLabel);
+        final hr = fileDialog.setFileNameLabel(pFileNameLabel);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pFileNameLabel);
@@ -61,7 +67,7 @@ class SaveFilePicker extends FileDialog {
     if (title.isNotEmpty) {
       final pTitle = title.toNativeUtf16();
       try {
-        hr = fileDialog.setTitle(TEXT(title));
+        final hr = fileDialog.setTitle(pTitle);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(pTitle);
@@ -79,14 +85,14 @@ class SaveFilePicker extends FileDialog {
             ..pszSpec = TEXT(filterSpecification[key]!);
           index++;
         }
-        hr = fileDialog.setFileTypes(filterSpecification.length, rgSpec);
+        final hr = fileDialog.setFileTypes(filterSpecification.length, rgSpec);
         if (FAILED(hr)) throw WindowsException(hr);
       } finally {
         free(rgSpec);
       }
     }
 
-    hr = fileDialog.show(hWndOwner);
+    var hr = fileDialog.show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -95,7 +101,7 @@ class SaveFilePicker extends FileDialog {
       }
     } else {
       final ppsi = calloc<Pointer<COMObject>>();
-      hr = fileDialog.getResult(ppsi);
+      var hr = fileDialog.getResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
