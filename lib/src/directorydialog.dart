@@ -21,7 +21,7 @@ class DirectoryPicker extends FileDialog {
     final dialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = dialog.GetOptions(pfos);
+    hr = dialog.getOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -44,11 +44,11 @@ class DirectoryPicker extends FileDialog {
       options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
     }
 
-    hr = dialog.SetOptions(options);
+    hr = dialog.setOptions(options);
     if (FAILED(hr)) throw WindowsException(hr);
 
     if (title.isNotEmpty) {
-      hr = dialog.SetTitle(TEXT(title));
+      hr = dialog.setTitle(TEXT(title));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
@@ -56,14 +56,14 @@ class DirectoryPicker extends FileDialog {
       final shellItem =
           Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
       if (place.place == Place.bottom) {
-        hr = dialog.AddPlace(shellItem.cast(), FDAP.FDAP_BOTTOM);
+        hr = dialog.addPlace(shellItem.cast(), FDAP.FDAP_BOTTOM);
       } else {
-        hr = dialog.AddPlace(shellItem.cast(), FDAP.FDAP_TOP);
+        hr = dialog.addPlace(shellItem.cast(), FDAP.FDAP_TOP);
       }
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = dialog.Show(hWndOwner);
+    hr = dialog.show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -72,12 +72,12 @@ class DirectoryPicker extends FileDialog {
       }
     } else {
       final ppsi = calloc<Pointer<COMObject>>();
-      hr = dialog.GetResult(ppsi);
+      hr = dialog.getResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
       final pathPtrPtr = calloc<IntPtr>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
+      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);
 
       final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
@@ -87,11 +87,11 @@ class DirectoryPicker extends FileDialog {
       // truncated.
       path = pathPtr.toDartString();
 
-      hr = item.Release();
+      hr = item.release();
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = dialog.Release();
+    hr = dialog.release();
     if (FAILED(hr)) throw WindowsException(hr);
 
     CoUninitialize();

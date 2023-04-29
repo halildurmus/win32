@@ -19,7 +19,7 @@ class SaveFilePicker extends FileDialog {
     final fileDialog = FileSaveDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = fileDialog.GetOptions(pfos);
+    hr = fileDialog.getOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -36,26 +36,26 @@ class SaveFilePicker extends FileDialog {
     if (isDirectoryFixed) {
       options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
     }
-    hr = fileDialog.SetOptions(options);
+    hr = fileDialog.setOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     if (defaultExtension != null && defaultExtension!.isNotEmpty) {
-      hr = fileDialog.SetDefaultExtension(TEXT(defaultExtension!));
+      hr = fileDialog.setDefaultExtension(TEXT(defaultExtension!));
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
     if (fileName.isNotEmpty) {
-      hr = fileDialog.SetFileName(TEXT(fileName));
+      hr = fileDialog.setFileName(TEXT(fileName));
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
     if (fileNameLabel.isNotEmpty) {
-      hr = fileDialog.SetFileNameLabel(TEXT(fileNameLabel));
+      hr = fileDialog.setFileNameLabel(TEXT(fileNameLabel));
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
     if (title.isNotEmpty) {
-      hr = fileDialog.SetTitle(TEXT(title));
+      hr = fileDialog.setTitle(TEXT(title));
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
@@ -69,11 +69,11 @@ class SaveFilePicker extends FileDialog {
           ..pszSpec = TEXT(filterSpecification[key]!);
         index++;
       }
-      hr = fileDialog.SetFileTypes(filterSpecification.length, rgSpec);
+      hr = fileDialog.setFileTypes(filterSpecification.length, rgSpec);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Show(hWndOwner);
+    hr = fileDialog.show(hWndOwner);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -82,21 +82,21 @@ class SaveFilePicker extends FileDialog {
       }
     } else {
       final ppsi = calloc<Pointer<COMObject>>();
-      hr = fileDialog.GetResult(ppsi);
+      hr = fileDialog.getResult(ppsi);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
       final pathPtrPtr = calloc<Pointer<Utf16>>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
+      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       filePath = pathPtrPtr.value.toDartString();
 
-      hr = item.Release();
+      hr = item.release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Release();
+    hr = fileDialog.release();
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     CoUninitialize();

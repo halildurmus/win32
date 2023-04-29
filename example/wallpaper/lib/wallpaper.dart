@@ -12,7 +12,7 @@ class Wallpaper {
     final wallpaper = DesktopWallpaper.createInstance();
 
     final pathPtr = TEXT(wallpaperFile.path);
-    wallpaper.SetWallpaper(nullptr, pathPtr);
+    wallpaper.setWallpaper(nullptr, pathPtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     free(pathPtr);

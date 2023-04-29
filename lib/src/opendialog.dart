@@ -28,7 +28,7 @@ class OpenFilePicker extends FileDialog {
     final fileDialog = FileOpenDialog.createInstance();
 
     final pfos = calloc<Uint32>();
-    hr = fileDialog.GetOptions(pfos);
+    hr = fileDialog.getOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
     var options = pfos.value;
@@ -47,26 +47,26 @@ class OpenFilePicker extends FileDialog {
     if (isDirectoryFixed) {
       options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
     }
-    hr = fileDialog.SetOptions(options);
+    hr = fileDialog.setOptions(options);
     if (FAILED(hr)) throw WindowsException(hr);
 
     if (defaultExtension != null && defaultExtension!.isNotEmpty) {
-      hr = fileDialog.SetDefaultExtension(TEXT(defaultExtension!));
+      hr = fileDialog.setDefaultExtension(TEXT(defaultExtension!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
     if (fileName.isNotEmpty) {
-      hr = fileDialog.SetFileName(TEXT(fileName));
+      hr = fileDialog.setFileName(TEXT(fileName));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
     if (fileNameLabel.isNotEmpty) {
-      hr = fileDialog.SetFileNameLabel(TEXT(fileNameLabel));
+      hr = fileDialog.setFileNameLabel(TEXT(fileNameLabel));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
     if (title.isNotEmpty) {
-      hr = fileDialog.SetTitle(TEXT(title));
+      hr = fileDialog.setTitle(TEXT(title));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
@@ -80,7 +80,7 @@ class OpenFilePicker extends FileDialog {
           ..pszSpec = TEXT(filterSpecification[key]!);
         index++;
       }
-      hr = fileDialog.SetFileTypes(filterSpecification.length, rgSpec);
+      hr = fileDialog.setFileTypes(filterSpecification.length, rgSpec);
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
@@ -88,7 +88,7 @@ class OpenFilePicker extends FileDialog {
       if (defaultFilterIndex! > 0 &&
           defaultFilterIndex! < filterSpecification.length) {
         // SetFileTypeIndex is one-based, not zero-based
-        hr = fileDialog.SetFileTypeIndex(defaultFilterIndex! + 1);
+        hr = fileDialog.setFileTypeIndex(defaultFilterIndex! + 1);
         if (FAILED(hr)) throw WindowsException(hr);
       }
     }
@@ -97,14 +97,14 @@ class OpenFilePicker extends FileDialog {
       final shellItem =
           Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
       if (place.place == Place.bottom) {
-        hr = fileDialog.AddPlace(shellItem.cast(), FDAP.FDAP_BOTTOM);
+        hr = fileDialog.addPlace(shellItem.cast(), FDAP.FDAP_BOTTOM);
       } else {
-        hr = fileDialog.AddPlace(shellItem.cast(), FDAP.FDAP_TOP);
+        hr = fileDialog.addPlace(shellItem.cast(), FDAP.FDAP_TOP);
       }
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Show(hWndOwner);
+    hr = fileDialog.show(hWndOwner);
     if (FAILED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -113,21 +113,21 @@ class OpenFilePicker extends FileDialog {
       }
     } else {
       final ppsi = calloc<Pointer<COMObject>>();
-      hr = fileDialog.GetResult(ppsi);
+      hr = fileDialog.getResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
       final pathPtrPtr = calloc<Pointer<Utf16>>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr);
+      hr = item.getDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr);
       if (FAILED(hr)) throw WindowsException(hr);
 
       filePath = pathPtrPtr.value.toDartString();
 
-      hr = item.Release();
+      hr = item.release();
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    hr = fileDialog.Release();
+    hr = fileDialog.release();
     if (FAILED(hr)) throw WindowsException(hr);
 
     CoUninitialize();
